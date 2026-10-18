@@ -1,0 +1,62 @@
+{
+  "physical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "aliases": {
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  },
+  "writes": [
+    {
+      "physical_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "path": "scripts/source_narrative_context.py",
+      "before_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+      "after_sha": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259",
+      "verified_equal_to_main": true
+    },
+    {
+      "physical_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "path": "scripts/research/input_evidence.py",
+      "before_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+      "after_sha": "c0a321f9ca905023846dafa4fe7c35b74e7d3cedc5e77bbd6882168579f338ed",
+      "verified_equal_to_main": true
+    },
+    {
+      "physical_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "path": "scripts/narrative_citation_context.py",
+      "before_sha": null,
+      "after_sha": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+      "verified_equal_to_main": true
+    },
+    {
+      "physical_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "path": "scripts/source_narrative_context.py",
+      "before_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+      "after_sha": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259",
+      "verified_equal_to_main": true
+    },
+    {
+      "physical_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "path": "scripts/research/input_evidence.py",
+      "before_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+      "after_sha": "c0a321f9ca905023846dafa4fe7c35b74e7d3cedc5e77bbd6882168579f338ed",
+      "verified_equal_to_main": true
+    },
+    {
+      "physical_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "path": "scripts/narrative_citation_context.py",
+      "before_sha": null,
+      "after_sha": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+      "verified_equal_to_main": true
+    }
+  ],
+  "files_written": 6,
+  "wip_after": {
+    "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+    "assurance/runs/weekly_alert.jsonl": "0304c1de7d4ce35af30a349d322873b2dd625c26e50c309952dc00c1d835c70f",
+    "assurance/runs/weekly_manifest.json": "c103bff9b985fb91f8df94b03ebad2d27d99e5a9b15d661b6b9c7b780b94bf3e"
+  },
+  "no_full_installer": true
+}

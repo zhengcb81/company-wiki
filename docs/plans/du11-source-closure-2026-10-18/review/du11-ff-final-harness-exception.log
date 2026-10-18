@@ -1,0 +1,70 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________ test_current_real_hk_reader_to_ff_reuse_and_legacy_receipt __________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du11-ff-final-root-5fa8d6bx/tmp/pytest/test_current_real_hk_reader_to0')
+
+    def test_current_real_hk_reader_to_ff_reuse_and_legacy_receipt(tmp_path):
+        wiki = OwnedWiki(Path(os.environ['DU11_CWP_TAR']), label='du11-final-hk').build(with_security_master=False)
+        final_record = {}
+        try:
+            facts = dict(MOTLEY_SIDECAR, market='HK', security_id='9896', ticker='09896')
+            raw = wiki.seed_transcript('hk_2026_q3_call.txt', KNOWN_TRANSCRIPT_BODY, facts)
+            wiki.run_scan()
+            wiki.checkpoint()
+            handle = filing()
+            handle['company_identity'].update(canonical_name=ENTITY, market='HK', security_id='09896', ticker='09896', exchange='HKEX')
+            held = EarningsTranscriptsTransport(wiki_root=wiki.root, transcript_tool=wiki.et_tool(),
+                fmp_api_key_file=wiki.key_file(), deadline=time.monotonic()+120)
+            resolved = resolve_companion_transcript(request=companion_request(), filing_handle=handle, transport=held)
+            assert resolved['status'] == 'reused', (resolved.get('status'), resolved.get('reason'))
+            assert resolved['provider'] == 'motley_fool'
+            assert resolved['provider_calls'] == 0
+            assert resolved['as_of_cutoff_verified'] is True
+            assert held.company_wiki_calls == 2
+            assert not wiki.call_log().exists()
+            ref = resolved['source_ref']
+            assert ref['content_sha256'] == hashlib.sha256(KNOWN_TRANSCRIPT_BODY).hexdigest()
+            code, body, legacy = wiki.read_version(ref)
+            assert code == 0
+            assert body == KNOWN_TRANSCRIPT_BODY
+            assert 'canonical_identity' not in legacy
+            assert legacy['manifest']['security_id'] == '9896'
+            current = held._verified_open(ref)
+            assert current['canonical_identity'] == {'schema_version':'source-canonical-identity/1', 'market':'HK', 'security_id':'09896'}
+            assert current['manifest']['security_id'] == '9896'
+            before_stat = raw.stat()
+            raw.write_bytes(b'changed bytes after indexed source')
+            try:
+                with pytest.raises(ValueError, match='verified open failed'):
+>                   held._verified_open(ref)
+
+tests\test_final_independent.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\transcript_tool_transport.py:411: in _verified_open
+    stdout, stderr, code = _run_bounded_json(
+scripts\ff_process_transport.py:312: in run_bounded_json
+    result = run_bounded(
+scripts\ff_process_transport.py:298: in run_bounded
+    return _result(proc, state)
+           ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+proc = <GuardedPopen: returncode: 2 args: ['C:\\Miniconda\\python.exe', '-B', '-S',...>
+state = <ff_process_transport._IOState object at 0x000002398B0336F0>
+
+    def _result(proc, state: _IOState) -> dict[str, object]:
+        stdout, stderr = b"".join(state.chunks["stdout"]), b"".join(state.chunks["stderr"])
+        if proc.returncode != 0 or state.write_error:
+>           raise ChildFailed(
+                "child closed stdin early" if state.write_error else f"child exited {proc.returncode}",
+                returncode=proc.returncode,
+                stdout=stdout,
+                stderr=stderr,
+            )
+E           ff_process_transport.ChildFailed: child exited 2
+
+scripts\ff_process_transport.py:257: ChildFailed
+=========================== short test summary info ===========================
+FAILED tests/test_final_independent.py::test_current_real_hk_reader_to_ff_reuse_and_legacy_receipt
+1 failed in 14.06s

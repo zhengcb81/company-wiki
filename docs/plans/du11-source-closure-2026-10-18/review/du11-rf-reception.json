@@ -1,0 +1,63 @@
+{
+  "schema_version": "du11-rf-root-reception/1",
+  "verdict": "PASS_ENGINEERING_WITH_OPEN_BOUNDARIES",
+  "author_head": "d578da58b01b6cb9d3145ca88c0c292911398607",
+  "implementation_commit": "f1f7d0683726098c9f5b5614ca26f4beb64898aa",
+  "base_commit": "568fb9256885eb31a0f76d9ead59fd0f98575073",
+  "source_sha256": {
+    "scripts/narrative_citation_context.py": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+    "scripts/source_narrative_context.py": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259",
+    "scripts/research/input_evidence.py": "c0a321f9ca905023846dafa4fe7c35b74e7d3cedc5e77bbd6882168579f338ed",
+    "tests/test_du11_narrative_citation_wire.py": "f63ccfa381dfeb80d13c837f05a897305ee0749923e69ca77dc11122dbfdc620",
+    "tests/test_du11_narrative_citation_context.py": "bac9badb89d7852f5684981189bc0db1f41c4806597f1ce8a222b32f708013ed",
+    "tests/test_du11_narrative_citation_consumption.py": "cbd44c769240e341cb309856dc4f481aa28947fd073ea05de349cc6a00cbb7f7",
+    "tests/test_du11_narrative_citation_projection.py": "55c071be5f6023faf6d369707267241ee88434b28635b3e97f25afe412607756",
+    "tests/test_du11_narrative_citation_e2e.py": "cac76fe54690e34a7dfa49de2ac1bd493fbbd50030a3a952e80c4adc1361f24d",
+    "tests/fixtures/du11_narrative_citation/synthetic_reading2.json": "368c9776402bb39497db1b95863c528ba0190b043f19905f62039f40de95c7de"
+  },
+  "source_unchanged_after_review": true,
+  "author_worktree_clean": true,
+  "new_confirmed_production_defects": [],
+  "independent_tests": {
+    "first_collection": "NOT_TESTED_missing_copied_helper",
+    "second_run": {
+      "passed": 12,
+      "failed_harness_missing_fixture": 6,
+      "pytest_seconds": 5.37,
+      "process_returncode": 1
+    },
+    "completion_only_missing_cases": {
+      "passed": 6,
+      "failed": 0,
+      "pytest_seconds": 1.72,
+      "process_returncode": 0
+    },
+    "distinct_passed_cases": 18,
+    "not_a_single_all_green_run": true,
+    "cross_page_multi_support_context_original_units": "PASS",
+    "real_rf_reader_consume_calculation": "PASS_synthetic_CWP_boundary"
+  },
+  "cleanup": {
+    "e2e_inner_restored": true,
+    "e2e_inner_root_removed": true,
+    "first_outer_removed": true,
+    "second_outer": "NOT_CLEAN",
+    "second_outer_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8",
+    "second_outer_reason": "PermissionError then platform policy rejected native cleanup; no alternative attempted",
+    "projection_completion_outer_removed": true
+  },
+  "open": [
+    "Projected /3 parameter formal source availability fact absent: source_availability_unknown, not permission",
+    "Latest actual CWP-produced cross-page real-company acceptance remains ROOT",
+    "Entry2 coverage is first-read scope, not aggregate",
+    "ROOT merge/push/CI/install synchronization pending",
+    "Reviewer outer temp NOT_CLEAN"
+  ],
+  "network_calls": 0,
+  "paid_calls": 0,
+  "models": 0,
+  "author_tree_execution": false,
+  "author_source_edits": 0,
+  "commits": 0,
+  "pushes": 0
+}

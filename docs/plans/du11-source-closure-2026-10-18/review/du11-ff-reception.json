@@ -1,0 +1,208 @@
+{
+  "schema_version": "du11-ff-root-reception/1",
+  "verdict": "CHANGES_REQUIRED",
+  "author_worktree": "C:/Users/郑曾波/Projects/filing-fetch-du11-local-transcript-reuse",
+  "author_head": "8a83e27863269b14c897dc2c7ba953f3b9102ef1",
+  "base_commit": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
+  "author_prior_review_source_commit": "5dee9a20c1c5952688673caf784fdce4e9391a50",
+  "prior_review_final_source_covered": true,
+  "prior_review_binding_explanation": "5dee9a2 to 8a83e27 changes only plan/receipts, not scripts/tests; final source and author clean status independently checked.",
+  "source_sha256": {
+    "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    "scripts/transcript_tool_transport.py": "20f8903df96af64de94d3ce6959ecdb0a36555589f6c410a8e83e9f9a6276999",
+    "scripts/transcript_reuse_selection.py": "8591e9968d5d23c4e056a32062ea4b4fdbac63c3421523d921f3176d93823231",
+    "tests/test_du11_transcript_reuse_selection.py": "15bbc2621fd3accdb0943f3cdc3980cb7b1ec59ede3ce923d1d0a42e23d2cdd0",
+    "tests/test_du11_transcript_reuse_contract.py": "df85a5a871ecd88bc5a111d618110ecdb4768b8ef92859605f13fef9ae000555",
+    "tests/test_du11_transcript_reuse_e2e.py": "eecd5edb16abf4be818fcec84f7a65675076d0cf7afcfb5cf34d54e6ffd97b09",
+    "tests/test_du11_transcript_reuse_support.py": "1adedc50acb402a098754ab1f853e89b430299093421ca93a008e29180dbdd2a",
+    "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": "ecf2bcdabc015fcb3d4066a312e76a2f161ba5ee969441725229df5b6b741c1f",
+    "tests/fixtures/et_s0b/fmp_v2.fetched.json": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3"
+  },
+  "scope": [
+    "Three transcript scripts, four DU11 test modules, one new synthetic fixture, own plan/receipts; no FF request/envelope/config/original41 changes",
+    "Author tree only read; own isolated git archive snapshot used for execution; no original documents or secrets copied"
+  ],
+  "independent_validation": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-ff-root-reception-ct948n0x\\tmp\\pytest",
+      "tests/test_du11_transcript_reuse_selection.py",
+      "tests/test_du11_transcript_reuse_contract.py",
+      "tests/test_du11_transcript_reuse_support.py",
+      "tests/test_du11_transcript_reuse_e2e.py::test_real_ff_cli_reuses_the_registered_transcript_end_to_end",
+      "tests/test_du11_transcript_reuse_e2e.py::test_real_cwp_unknown_publication_observation_costs_zero_provider_and_zero_read",
+      "tests/test_du11_transcript_reuse_e2e.py::test_real_cwp_missing_then_one_download_then_replay_is_pure_reuse",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-independent.xml"
+    ],
+    "passed": 102,
+    "failed": 0,
+    "skipped": 0,
+    "wall_seconds": 52.72,
+    "cwp_fixture_commit": "34a7dd71aaa49d18c13fcdd300ce79581114ca5b",
+    "actual_public_chains": [
+      "Real FF CLI to real CWP registered TXT reuse",
+      "Real CWP unknown-publication exclusion: zero provider calls and zero read",
+      "Missing transcript: one synthetic ET download through real CWP import/read, then replay reuses without provider"
+    ],
+    "synthetic_boundaries": [
+      "ET/provider process is offline fixture, not actual ET service or network",
+      "Four independent controls replace only CWP child query/reader results with valid matching SourceRefs and bytes; actual FF companion/transport executed"
+    ],
+    "controls": {
+      "reader_after_asof": {
+        "status": "reused",
+        "reason": null,
+        "as_of_cutoff_verified": true,
+        "publication_date": "2027-01-01",
+        "provider_calls": 0,
+        "child_calls": [
+          "query",
+          "reader"
+        ]
+      },
+      "reader_invalid_publication": {
+        "status": "reused",
+        "reason": null,
+        "as_of_cutoff_verified": true,
+        "publication_date": "not-a-date",
+        "provider_calls": 0,
+        "child_calls": [
+          "query",
+          "reader"
+        ]
+      },
+      "reader_newly_unknown_publication": {
+        "status": "reused",
+        "reason": null,
+        "as_of_cutoff_verified": true,
+        "publication_date": "2026-07-22",
+        "provider_calls": 0,
+        "child_calls": [
+          "query",
+          "reader"
+        ]
+      },
+      "reader_us_distinct_zero_prefixed_security": {
+        "status": "reused",
+        "reason": null,
+        "as_of_cutoff_verified": true,
+        "publication_date": "2026-07-22",
+        "provider_calls": 0,
+        "child_calls": [
+          "query",
+          "reader"
+        ]
+      },
+      "owned_temp_removed": true
+    },
+    "network_attempts": 0,
+    "artifact_archive_sha256": "16d41eb969968d658153d103a7f517f77760406132dacbdd7af084610b98e851"
+  },
+  "findings": [
+    {
+      "id": "FF-DU11-P1-PUBLICATION",
+      "priority": 1,
+      "file": "scripts/transcript_tool_transport.py",
+      "lines": [
+        457,
+        534,
+        540
+      ],
+      "functions": [
+        "_manifest_published_date",
+        "_verified_lookup"
+      ],
+      "root_cause": "Query qualification is treated as timeless while current verified-reader publication can replace it unchecked; a now-null value is silently replaced with stale query date. Raw-byte SHA verification does not bind mutable metadata/as-of qualification.",
+      "minimal_reproduction": "Query qualified 2026-07-22 at as-of 2026-09-30; verified reader of same valid bytes reports 2027-01-01, not-a-date, or None. All three actual FF flows returned reused and as_of_cutoff_verified=true; None reused the stale date.",
+      "expected": "Current unknown/invalid/post-as-of or changed qualification must return honest gap/lookup-changed, zero provider calls, and must never claim historical eligibility or replace unknown by stale date.",
+      "implementation_boundary": "Reuse source-owner qualification/verified metadata contract; no new permission chain or extra provider retry. A strict changed-metadata refusal using existing transport date primitive is safe pending a current owner-qualified read receipt.",
+      "validation": [
+        "Known eligible stable date stays reusable",
+        "Future/invalid/unknown final date never yields as_of_cutoff_verified=true",
+        "All changed/invalid paths zero ET calls and preserve raw/SHA"
+      ]
+    },
+    {
+      "id": "FF-DU11-P2-IDENTITY",
+      "priority": 2,
+      "file": "scripts/transcript_tool_transport.py",
+      "lines": [
+        474,
+        486,
+        503
+      ],
+      "functions": [
+        "_manifest_conflicts"
+      ],
+      "root_cause": "A new FF identity normalizer strips leading zeroes for all markets, repeating identity interpretation already owned by CWP market-qualified security_code normalization.",
+      "minimal_reproduction": "US request MSFT; query selects MSFT; verified current manifest says market US and security_id 0MSFT with valid matching bytes. Actual FF returns reused/as_of_cutoff_verified=true because both normalize to msft.",
+      "expected": "Distinct US ticker strings remain distinct; legitimate numeric HK/CN padding is handled by the market-qualified source owner. Missing/unknown source market must not borrow request market as identity proof.",
+      "implementation_boundary": "Consume existing source-owner canonical identity projection alongside immutable observed manifest; do not add a second per-market regex implementation or new lookup/permission chain. Legacy receipt may safely use exact identity or return honest unresolved gap.",
+      "validation": [
+        "US MSFT versus 0MSFT rejected; dotted/dashed securities preserved",
+        "HK/CN numeric formatting equivalent only when source market is actually established",
+        "Unknown market cannot gain identity by request; correct same-source reuse still zero-download"
+      ]
+    }
+  ],
+  "cleanup": {
+    "owned_outer_removed": true,
+    "sentinel_unchanged": true,
+    "author_status_unchanged": true,
+    "author_source_unchanged": {
+      "scripts/transcript_companion.py": true,
+      "scripts/transcript_tool_transport.py": true,
+      "scripts/transcript_reuse_selection.py": true,
+      "tests/test_du11_transcript_reuse_selection.py": true,
+      "tests/test_du11_transcript_reuse_contract.py": true,
+      "tests/test_du11_transcript_reuse_e2e.py": true,
+      "tests/test_du11_transcript_reuse_support.py": true,
+      "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": true,
+      "tests/fixtures/et_s0b/fmp_v2.fetched.json": true
+    },
+    "production_config_or_original_written": false,
+    "archive_line_endings_receipt_caveat": {
+      "issue": "Snapshot post-check compared committed git archive LF bytes to author working CRLF SHA for two test/fixture files, so those false flags are not evidence of a production source mutation.",
+      "line_endings_evidence": {
+        "tests/test_du11_transcript_reuse_e2e.py": {
+          "working_sha256": "eecd5edb16abf4be818fcec84f7a65675076d0cf7afcfb5cf34d54e6ffd97b09",
+          "committed_sha256": "2b749da3602756a053a116e31cf5fb8f9ec02fdc2b30e2df17057c5fb507f06a",
+          "normalized_lf_equal": true,
+          "working_bytes": 21223,
+          "committed_bytes": 20686
+        },
+        "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": {
+          "working_sha256": "ecf2bcdabc015fcb3d4066a312e76a2f161ba5ee969441725229df5b6b741c1f",
+          "committed_sha256": "62e87b4e358048a10e876184142a6e36fd1d087220ce1cc546b05b476492db2f",
+          "normalized_lf_equal": true,
+          "working_bytes": 1701,
+          "committed_bytes": 1673
+        }
+      },
+      "post_snapshot_raw_digests": "Not stored and snapshot has been deleted; no invented post-digest claim. All three product script checks were true; author source bytes/status independently unchanged; initial snapshot is exactly bound by archived commit/tar digest."
+    }
+  },
+  "open": [
+    "Two confirmed findings must be fixed and independently re-reviewed before ROOT merge acceptance",
+    "Current ROOT CWP latest runtime integration was not executed: independent chains intentionally use author frozen dependency 34a7dd71",
+    "No actual provider/network/paid API or model calls; no claim actual ET service compatibility was newly validated",
+    "Companion has no requested-language field and query language is None; original-language reuse/no translation is covered, language preference filtering is not",
+    "Author full suite has 9 failures: reviewer reproduced 8 on base; ninth is cross-repo CWP concurrent-state guard, not independently certified preexisting or green",
+    "Not a proof of globally concurrent exactly-once download or recovery after every external process crash"
+  ],
+  "evidence": [
+    "du11-ff-independent.json",
+    "du11-ff-independent.log",
+    "du11-ff-independent.xml",
+    "du11-ff-controls.py",
+    "du11-ff-controls.log"
+  ]
+}

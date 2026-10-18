@@ -1643,6 +1643,7 @@ def _parse_pdf_document(
         if state.geometry_session is not None else tuple(
             sorted(set(range(1, state.page_count + 1)) - state.table_scan_pages)),
         errors=tuple(state.errors),
+        mime_type="application/pdf",
         layout_coverage=layout_coverage,
         layout_diagnostics=layout_diagnostics,
     )

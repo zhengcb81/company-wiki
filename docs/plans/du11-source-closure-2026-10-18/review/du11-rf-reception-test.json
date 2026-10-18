@@ -1,0 +1,54 @@
+{
+  "head": "d578da58b01b6cb9d3145ca88c0c292911398607",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\evidence\\rf-reception.xml",
+    "tests/test_du11_narrative_citation_e2e.py::test_frozen_public_wire_survives_the_real_reader_consumer_and_calculator",
+    "tests/test_du11_narrative_citation_context.py::test_unreadable_unread_list_degrades_the_counts_to_null",
+    "tests/test_du11_narrative_citation_projection.py",
+    "tests/test_du11_narrative_citation_consumption.py::test_entry_two_binding_keeps_the_same_closure",
+    "tests/test_du11_narrative_citation_consumption.py::test_entry_two_projected_wire_resolves_parent_and_names_the_publication_gap",
+    "tests/test_du11_narrative_citation_consumption.py::test_context_only_table_header_cannot_become_support",
+    "tests/test_root_rf_cross_page.py"
+  ],
+  "returncode": 1,
+  "seconds": 22.668,
+  "copied_source_and_synthetic_fixture_files": 86,
+  "source_sha_before": {
+    "scripts/narrative_citation_context.py": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+    "scripts/source_narrative_context.py": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259",
+    "scripts/research/input_evidence.py": "c0a321f9ca905023846dafa4fe7c35b74e7d3cedc5e77bbd6882168579f338ed",
+    "tests/test_du11_narrative_citation_wire.py": "f63ccfa381dfeb80d13c837f05a897305ee0749923e69ca77dc11122dbfdc620",
+    "tests/test_du11_narrative_citation_context.py": "bac9badb89d7852f5684981189bc0db1f41c4806597f1ce8a222b32f708013ed",
+    "tests/test_du11_narrative_citation_consumption.py": "cbd44c769240e341cb309856dc4f481aa28947fd073ea05de349cc6a00cbb7f7",
+    "tests/test_du11_narrative_citation_projection.py": "55c071be5f6023faf6d369707267241ee88434b28635b3e97f25afe412607756",
+    "tests/test_du11_narrative_citation_e2e.py": "cac76fe54690e34a7dfa49de2ac1bd493fbbd50030a3a952e80c4adc1361f24d",
+    "tests/fixtures/du11_narrative_citation/synthetic_reading2.json": "368c9776402bb39497db1b95863c528ba0190b043f19905f62039f40de95c7de"
+  },
+  "source_sha_after": {
+    "scripts/narrative_citation_context.py": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+    "scripts/source_narrative_context.py": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259",
+    "scripts/research/input_evidence.py": "c0a321f9ca905023846dafa4fe7c35b74e7d3cedc5e77bbd6882168579f338ed",
+    "tests/test_du11_narrative_citation_wire.py": "f63ccfa381dfeb80d13c837f05a897305ee0749923e69ca77dc11122dbfdc620",
+    "tests/test_du11_narrative_citation_context.py": "bac9badb89d7852f5684981189bc0db1f41c4806597f1ce8a222b32f708013ed",
+    "tests/test_du11_narrative_citation_consumption.py": "cbd44c769240e341cb309856dc4f481aa28947fd073ea05de349cc6a00cbb7f7",
+    "tests/test_du11_narrative_citation_projection.py": "55c071be5f6023faf6d369707267241ee88434b28635b3e97f25afe412607756",
+    "tests/test_du11_narrative_citation_e2e.py": "cac76fe54690e34a7dfa49de2ac1bd493fbbd50030a3a952e80c4adc1361f24d",
+    "tests/fixtures/du11_narrative_citation/synthetic_reading2.json": "368c9776402bb39497db1b95863c528ba0190b043f19905f62039f40de95c7de"
+  },
+  "cleanup": {
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8",
+    "restored_absent": false,
+    "error_type": "PermissionError"
+  }
+}

@@ -71,8 +71,16 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.source_catalog.narrative_operating_relations",
         "company_wiki.source_catalog.narrative_reading",
         "company_wiki.source_catalog.narrative_finalize",
+        # Source boundaries and facts reuse this single grammar/matching owner.
+        # Hash its actual dependency closure, not just the source adapter that
+        # imports it: a rule-only change must invalidate an old decision too.
+        "company_wiki.document_understanding.operating_states.relations",
+        "company_wiki.document_understanding.operating_states.patterns",
+        "company_wiki.document_understanding.operating_states.text_view",
+        "company_wiki.document_normalization.text_matching",
+        "company_wiki.source_catalog.n6_candidate_operating_facts",
     )
-    versions = {"inventory": "1.7.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    versions = {"inventory": "1.8.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),

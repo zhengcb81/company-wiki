@@ -1,0 +1,42 @@
+{
+  "returncode": 1,
+  "wall_seconds": 26.17979489994468,
+  "source_sha_before": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "255368e962cc82b45a96504a341fdf13bdd36467a853f89292716f94b70181df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "46c031ae78331975a8e69cb75140ba5d899a5dadbac28f530572b77a79fee01a",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "21120df389b44e328b286bb9dbd0d2375973f668b8f96b0e628b5558ac3a3a22"
+  },
+  "source_sha_after": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "255368e962cc82b45a96504a341fdf13bdd36467a853f89292716f94b70181df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "46c031ae78331975a8e69cb75140ba5d899a5dadbac28f530572b77a79fee01a",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "21120df389b44e328b286bb9dbd0d2375973f668b8f96b0e628b5558ac3a3a22"
+  },
+  "frozen_equal": true,
+  "owned_temp_removed": true,
+  "original_or_api_reads": 0,
+  "test_script_sha256": null,
+  "note": "24 author cases plus 14 independent cases; exact collected count in XML/log; script was temporary and removed",
+  "junit_cases": 38,
+  "junit_failed_cases": [
+    "test_explicit_independent_next_page_keeps_its_own_support[\\u672c\\u96c6\\u5718\\u53e6\\u4e00\\u9805\\u76ee\\u5df2\\u958b\\u59cb\\u91cf\\u7522\\u3002]",
+    "test_explicit_independent_next_page_keeps_its_own_support[Our new platform has begun production.]"
+  ],
+  "junit_sha256": "f0f6e60fae809ecb1d6c8e8c4290940ede99389257305d982b89a49e19054a47",
+  "input_controls": [
+    {
+      "text": "\u672c\u96c6\u5718\u53e6\u4e00\u9805\u76ee\u5df2\u958b\u59cb\u91cf\u7522\u3002",
+      "utf8_sha256": "08fd2e1588e1babc6900d6fa6c28851efc4287e31e1b99b5ca137fd85711bd96"
+    },
+    {
+      "text": "Our new platform has begun production.",
+      "utf8_sha256": "20ff68f3f96d2abc42e55b5f0f085be2ab343e9e7467ee92cc7acdca99907097"
+    },
+    {
+      "text": "The company has begun production of another product.",
+      "utf8_sha256": "15964218018ade3186dffc65dd9b679f0959a601af246eb2dfe8fe7af3728fd4"
+    }
+  ],
+  "console_note": "Tests and XML completed; final print of captured stdout raised GBK UnicodeEncodeError after receipts and cleanup. Subprocess output was captured as UTF8 while its terminal encoding was GBK, so some printed CJK text has replacement characters; exact escaped pytest case IDs and XML identify the inputs. No test rerun performed.",
+  "relocated_pytest_temp_cleanup_verified": "physical-focused.log CW-BASETEMP-CLEANUP removed=true",
+  "temporary_test_script_sha256": "not captured before cleanup; receipt deliberately does not invent a hash"
+}

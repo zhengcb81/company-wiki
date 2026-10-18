@@ -59,6 +59,7 @@ _EXACT_SOURCE_FACT_FIELDS = (
     "fiscal_year", "fiscal_period", "period_end", "published_date", "form_type",
     "title", "language",
 )
+_SCOPE_UNOBSERVED = object()
 
 
 class SourceReadError(RuntimeError):
@@ -158,14 +159,16 @@ class SourceVersionReader:
     ) -> tuple[SourceResolver, str]:
         """Report the current fingerprint; stored fingerprints are lineage."""
         resolver, policy, read_policy_sha256 = self._read_context()
+        self._validate_read_policy_pin(expected_read_policy_sha256)
         if expected_read_policy_sha256 is not None:
-            if not isinstance(expected_read_policy_sha256, str) or not _SHA256.fullmatch(
-                expected_read_policy_sha256
-            ):
-                raise SourceReadError("blocked", "invalid_read_policy_pin")
             if expected_read_policy_sha256 != read_policy_sha256 and ref is not None:
                 read_policy_sha256 = self._exact_read_policy(ref, resolver, policy)
         return resolver, read_policy_sha256
+
+    @staticmethod
+    def _validate_read_policy_pin(value: str | None) -> None:
+        if value is not None and (not isinstance(value, str) or not _SHA256.fullmatch(value)):
+            raise SourceReadError("blocked", "invalid_read_policy_pin")
 
     def _resolver_for_request(self) -> SourceResolver:
         return self._resolver_and_read_policy()[0]
@@ -454,13 +457,21 @@ class SourceVersionReader:
 
     def open_described_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
+        expected_read_policy_sha256: str | None = None,
     ) -> tuple[VerifiedContent, dict[str, str | int | None]]:
         """Observe facts once and verify the actual buffer under one read context."""
-        resolver, policy, _ = self._read_context()
+        self._validate_read_policy_pin(expected_read_policy_sha256)
+        resolver, policy, global_pin = self._read_context()
         manifest = self._describe_version(ref, resolver)
-        pin = self._exact_read_policy(ref, resolver, policy, metadata=manifest)
+        pin = (global_pin if expected_read_policy_sha256 == global_pin else
+               self._exact_read_policy(ref, resolver, policy, metadata=manifest))
+        qualification = None
+        if purpose == "filing_reuse":
+            from .assertion_service import source_scope_qualification
+            qualification = source_scope_qualification(self.catalog, ref, metadata=manifest)
         opened = self._verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
-                                        retain_bytes=True, current_read_policy_sha256=pin)
+                                        retain_bytes=True, current_read_policy_sha256=pin,
+                                        scope_qualification=qualification)
         assert isinstance(opened, VerifiedContent)
         return opened, manifest
 
@@ -637,7 +648,7 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
-        budget: _ReadBudget | None = None, scope_qualification=None,
+        budget: _ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
     ) -> VerifiedContent | VerifiedVersionReceipt:
         """Verify through the current policy and same-SHA location fallback.
 
@@ -667,12 +678,14 @@ class SourceVersionReader:
             raise SourceReadError("not_indexed", "document_not_indexed")
 
         if purpose == "filing_reuse":
-            if scope_qualification is None:
+            if scope_qualification is _SCOPE_UNOBSERVED:
                 from .assertion_service import source_scope_qualification
                 scope_qualification = source_scope_qualification(
                     self.catalog, ref, metadata=self.describe_version(ref))
-            elif scope_qualification.ref != ref:
+            elif scope_qualification is not None and scope_qualification.ref != ref:
                 raise SourceReadError("unavailable", "source_scope_ref_changed")
+        elif scope_qualification is _SCOPE_UNOBSERVED:
+            scope_qualification = None
         config = self.catalog.config
         roots = {root.root_id: root for root in config.roots}
         locations = []

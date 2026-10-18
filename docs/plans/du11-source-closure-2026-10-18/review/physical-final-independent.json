@@ -1,0 +1,120 @@
+{
+  "schema_version": "du11-physical-final-independent/1",
+  "status": "PASS_PHYSICAL_BUDGET_CACHE_COMPONENT",
+  "closed": [
+    "Traditional issuer independent-start veto",
+    "English issuer-owned product independent-start veto",
+    "true possessive continuation retained"
+  ],
+  "independent_tests": {
+    "passed": 11,
+    "failed": 0,
+    "warnings": 1,
+    "pytest_seconds": 16.45,
+    "returncode": 0,
+    "source_unchanged": true,
+    "own_temp_removed": true
+  },
+  "large_suites_repeated": false,
+  "originals_api_models": 0,
+  "source_edits": 0,
+  "boundary": "Engineering physical/budget/cache component PASS at exact five runtime and two test hashes only; no full B2/content/PWF acceptance",
+  "historical_source_sha": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "c956ca65f8519536d4aeadba9c603be6d8fcc840aa9cbf82ddb0f88ea1877180",
+    "src/company_wiki/source_catalog/narrative_reading.py": "86a303b1324d4a1c36f51e5db568fc81ce3e975e974536cc85a9074b4e3f45d4",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "54c1f7cf90da16dddfc50a693c42f42264be1266a799c747a53fbe32f4e473b3",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "5ae82a8012b5effc512ab24c6fe55ca7bd366cd4baca1bc0a227ab796470b94e"
+  },
+  "source_sha": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f2fcc83d73693d4770748519bf88ff84925ee618e5ab705cfb4d4a19455fa5a3",
+    "src/company_wiki/source_catalog/narrative_reading.py": "58e2ec620dd5bb17bb2457dbee43f1c48797c835b79d7dff8b40a080b1a03dd7",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "b7ccd12b049c4913c7eb076d651f166d23721750629763cd001be15e6703cf16",
+    "src/company_wiki/document_understanding/decision_inventory.py": "aa3a7d0169475a80ad76bda1edde497935e2faa65cc944b2c84e45d19a4bb693",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "626230254c96de4255aa6970258388fb329076c333a1c7499a4d60083ae09042",
+    "tests/unit/du11_source_closure/test_source_dependency_scope.py": "332137c8d7cab5e2388463d38525cd0a3fa3e283525631e2bf4bcd93e75c8faa",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "dfeca495777e21ef533d668bb066c39c4c988e9465bb47708116694384314f88"
+  },
+  "final_independent_tests": {
+    "passed": 27,
+    "failed": 0,
+    "warnings": 1,
+    "pytest_seconds": 8.51,
+    "returncode": 0,
+    "source_unchanged": true,
+    "own_temp_removed": true,
+    "relocated_temp_removed": true,
+    "receipt": "physical-final-independent-freeze.json"
+  },
+  "closed_findings": [
+    {
+      "id": "R1",
+      "root_cause": "actual grammar/matching dependencies omitted from inventory source hashes",
+      "status": "CLOSED"
+    },
+    {
+      "id": "R2",
+      "root_cause": "all auxiliary boundaries repeatedly rescan full subject prefixes under linear precharge",
+      "status": "CLOSED",
+      "measured": [
+        {
+          "input_chars": 232,
+          "calls": 32,
+          "scanned_prefix_chars": 3632
+        },
+        {
+          "input_chars": 456,
+          "calls": 64,
+          "scanned_prefix_chars": 14432
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "status": "CLOSED_FOR_COMPONENT",
+      "root_cause": "actual PDF IR lacked MIME and global fine coverage incorrectly disabled page flow",
+      "repair": "actual PDF MIME plus source-owned per-pair coarse/opaque/deferred coverage"
+    }
+  ],
+  "open_findings": [],
+  "remaining_product_scope": [
+    "CN p17 source readiness/unfinished phrase and product antecedent still selected",
+    "General semantic B2 and formal real-provider C remain OPEN",
+    "Reader identity ports reviewed separately"
+  ],
+  "root_final_real_source_receipt": {
+    "path": "../physical-source-final-replay/receipt.json",
+    "api_calls": 0,
+    "raw_copies": 0,
+    "originals_unchanged": true,
+    "gold_unchanged": true,
+    "owned_temp_removed": true,
+    "five_runtime_sha_match_final_freeze": true,
+    "content_acceptance": "OPEN: antecedent closure and formal provider C remain pending",
+    "independently_rerun": false,
+    "selected_and_canonical_required_counts": {
+      "CN": [
+        10,
+        10,
+        10
+      ],
+      "HK": [
+        7,
+        7,
+        7
+      ],
+      "US": [
+        8,
+        8,
+        8
+      ]
+    },
+    "work_used": {
+      "CN": 6106955,
+      "HK": 12820408,
+      "US": 7975948
+    },
+    "work_limit": 16000000,
+    "CN_t32_t34_still_selected": true
+  },
+  "historical_replay_boundary": "physical-source-replay is old inactive-MIME/coverage history, not rebound; correct final receipts physical-source-final-replay"
+}

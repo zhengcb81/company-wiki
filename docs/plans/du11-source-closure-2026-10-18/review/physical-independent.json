@@ -1,0 +1,36 @@
+{
+  "schema_version": "du11-physical-independent-review/1",
+  "status": "NEEDS_REPAIR",
+  "source_sha": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "255368e962cc82b45a96504a341fdf13bdd36467a853f89292716f94b70181df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "46c031ae78331975a8e69cb75140ba5d899a5dadbac28f530572b77a79fee01a",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "21120df389b44e328b286bb9dbd0d2375973f668b8f96b0e628b5558ac3a3a22"
+  },
+  "source_sha_before_after_equal": true,
+  "tests": {
+    "total": 38,
+    "passed": 36,
+    "failed": 2,
+    "author_cases_passed": 24,
+    "independent_cases_passed": 12,
+    "wall_seconds": 26.17979489994468
+  },
+  "findings": [
+    {
+      "id": "P2-independent-start",
+      "owner": "narrative_reading._INDEPENDENT_SUBJECT -> SourcePageFlow.independent_start",
+      "reason": "Traditional issuer and explicit English issuer-owned product assertion joined to unrelated pending prior page",
+      "affected_controls": [
+        "\u672c\u96c6\u5718\u53e6\u4e00\u9805\u76ee\u5df2\u958b\u59cb\u91cf\u7522\u3002",
+        "Our new platform has begun production."
+      ],
+      "status": "OPEN"
+    }
+  ],
+  "raw_source_or_api_access": false,
+  "own_temp_removed": true,
+  "relocated_temp_cleanup_verified": true,
+  "full_763_repeated": false,
+  "real_cn_or_content_c_pass": false,
+  "report_sha256": "9802c3461163ffcca9eb90ffeccd0a5afcb9ebed8cfe3785c3cec5b669d3ddc1"
+}

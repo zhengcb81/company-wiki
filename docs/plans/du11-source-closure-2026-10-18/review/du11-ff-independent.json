@@ -1,0 +1,156 @@
+{
+  "author_head": "8a83e27863269b14c897dc2c7ba953f3b9102ef1",
+  "archive_sha256": "16d41eb969968d658153d103a7f517f77760406132dacbdd7af084610b98e851",
+  "archive_bytes": 358400,
+  "copied_paths": [
+    "scripts",
+    "pyproject.toml",
+    "tests/test_du11_transcript_reuse_selection.py",
+    "tests/test_du11_transcript_reuse_contract.py",
+    "tests/test_du11_transcript_reuse_e2e.py",
+    "tests/test_du11_transcript_reuse_support.py",
+    "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json",
+    "tests/fixtures/et_s0b/fmp_v2.fetched.json"
+  ],
+  "source_sha256": {
+    "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    "scripts/transcript_tool_transport.py": "20f8903df96af64de94d3ce6959ecdb0a36555589f6c410a8e83e9f9a6276999",
+    "scripts/transcript_reuse_selection.py": "8591e9968d5d23c4e056a32062ea4b4fdbac63c3421523d921f3176d93823231",
+    "tests/test_du11_transcript_reuse_selection.py": "15bbc2621fd3accdb0943f3cdc3980cb7b1ec59ede3ce923d1d0a42e23d2cdd0",
+    "tests/test_du11_transcript_reuse_contract.py": "df85a5a871ecd88bc5a111d618110ecdb4768b8ef92859605f13fef9ae000555",
+    "tests/test_du11_transcript_reuse_e2e.py": "eecd5edb16abf4be818fcec84f7a65675076d0cf7afcfb5cf34d54e6ffd97b09",
+    "tests/test_du11_transcript_reuse_support.py": "1adedc50acb402a098754ab1f853e89b430299093421ca93a008e29180dbdd2a",
+    "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": "ecf2bcdabc015fcb3d4066a312e76a2f161ba5ee969441725229df5b6b741c1f",
+    "tests/fixtures/et_s0b/fmp_v2.fetched.json": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3"
+  },
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-ff-root-reception-ct948n0x\\tmp\\pytest",
+    "tests/test_du11_transcript_reuse_selection.py",
+    "tests/test_du11_transcript_reuse_contract.py",
+    "tests/test_du11_transcript_reuse_support.py",
+    "tests/test_du11_transcript_reuse_e2e.py::test_real_ff_cli_reuses_the_registered_transcript_end_to_end",
+    "tests/test_du11_transcript_reuse_e2e.py::test_real_cwp_unknown_publication_observation_costs_zero_provider_and_zero_read",
+    "tests/test_du11_transcript_reuse_e2e.py::test_real_cwp_missing_then_one_download_then_replay_is_pure_reuse",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-independent.xml"
+  ],
+  "returncode": 0,
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "102",
+    "time": "51.405",
+    "timestamp": "2026-10-18T04:00:33.502426+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "wall_seconds": 52.72,
+  "controls": {
+    "reader_after_asof": {
+      "status": "reused",
+      "reason": null,
+      "as_of_cutoff_verified": true,
+      "publication_date": "2027-01-01",
+      "provider_calls": 0,
+      "child_calls": [
+        "query",
+        "reader"
+      ]
+    },
+    "reader_invalid_publication": {
+      "status": "reused",
+      "reason": null,
+      "as_of_cutoff_verified": true,
+      "publication_date": "not-a-date",
+      "provider_calls": 0,
+      "child_calls": [
+        "query",
+        "reader"
+      ]
+    },
+    "reader_newly_unknown_publication": {
+      "status": "reused",
+      "reason": null,
+      "as_of_cutoff_verified": true,
+      "publication_date": "2026-07-22",
+      "provider_calls": 0,
+      "child_calls": [
+        "query",
+        "reader"
+      ]
+    },
+    "reader_us_distinct_zero_prefixed_security": {
+      "status": "reused",
+      "reason": null,
+      "as_of_cutoff_verified": true,
+      "publication_date": "2026-07-22",
+      "provider_calls": 0,
+      "child_calls": [
+        "query",
+        "reader"
+      ]
+    },
+    "owned_temp_removed": true
+  },
+  "control_returncode": 0,
+  "cleanup_before_outer_removal": {
+    "sentinel_unchanged": true,
+    "network_attempts": 0,
+    "snapshot_source_unchanged": {
+      "scripts/transcript_companion.py": true,
+      "scripts/transcript_tool_transport.py": true,
+      "scripts/transcript_reuse_selection.py": true,
+      "tests/test_du11_transcript_reuse_selection.py": true,
+      "tests/test_du11_transcript_reuse_contract.py": true,
+      "tests/test_du11_transcript_reuse_e2e.py": false,
+      "tests/test_du11_transcript_reuse_support.py": true,
+      "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": false,
+      "tests/fixtures/et_s0b/fmp_v2.fetched.json": true
+    },
+    "remaining_owned_test_temp_entries": 1
+  },
+  "owned_outer_removed": true,
+  "author_status_unchanged": true,
+  "author_source_unchanged": {
+    "scripts/transcript_companion.py": true,
+    "scripts/transcript_tool_transport.py": true,
+    "scripts/transcript_reuse_selection.py": true,
+    "tests/test_du11_transcript_reuse_selection.py": true,
+    "tests/test_du11_transcript_reuse_contract.py": true,
+    "tests/test_du11_transcript_reuse_e2e.py": true,
+    "tests/test_du11_transcript_reuse_support.py": true,
+    "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": true,
+    "tests/fixtures/et_s0b/fmp_v2.fetched.json": true
+  },
+  "upstream_cwp_commit": "34a7dd71aaa49d18c13fcdd300ce79581114ca5b",
+  "environment": "Minimal OS/runtime variables; credentials not inherited; synthetic credential only inside offline ET fixture; audit guard propagates to child processes and denies network; no dotenv/plugin autoload",
+  "receipt_correction": {
+    "issue": "Snapshot post-check compared committed git archive LF bytes to author working CRLF SHA for two test/fixture files, so those false flags are not evidence of a production source mutation.",
+    "line_endings_evidence": {
+      "tests/test_du11_transcript_reuse_e2e.py": {
+        "working_sha256": "eecd5edb16abf4be818fcec84f7a65675076d0cf7afcfb5cf34d54e6ffd97b09",
+        "committed_sha256": "2b749da3602756a053a116e31cf5fb8f9ec02fdc2b30e2df17057c5fb507f06a",
+        "normalized_lf_equal": true,
+        "working_bytes": 21223,
+        "committed_bytes": 20686
+      },
+      "tests/fixtures/du11_transcript_reuse/fmp_known_publication.fetched.json": {
+        "working_sha256": "ecf2bcdabc015fcb3d4066a312e76a2f161ba5ee969441725229df5b6b741c1f",
+        "committed_sha256": "62e87b4e358048a10e876184142a6e36fd1d087220ce1cc546b05b476492db2f",
+        "normalized_lf_equal": true,
+        "working_bytes": 1701,
+        "committed_bytes": 1673
+      }
+    },
+    "post_snapshot_raw_digests": "Not stored and snapshot has been deleted; no invented post-digest claim. All three product script checks were true; author source bytes/status independently unchanged; initial snapshot is exactly bound by archived commit/tar digest."
+  }
+}

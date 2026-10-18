@@ -116,6 +116,35 @@ _NEGATIVE_QUAL = re.compile(
     re.IGNORECASE,
 )
 _OBJ_TRIM = re.compile(r"^(?:关于|關於|就|对于|對於|about|on|for|regarding|re)\s*")
+_STATEMENT_LEAD = re.compile(r"^\s*(?:(?:报告期内|本期|目前|同时|此外)[，,\s]*)?")
+_NONPREDICATE_BOUNDARIES = frozenset({"and", "but", "or", "yet", "so", "then", "also",
+                                        "still", "just", "not", "never"})
+
+
+def independent_statement_start(text: str) -> bool:
+    """Conservative source boundary using the existing script and NP grammar.
+
+    A possessive NP alone (``our customers`` after ``deliver to``) supplies no
+    independent assertion. A product NP followed by an observed auxiliary or
+    predicate is a fresh clause. This decides a boundary, never event truth.
+    """
+    prepared = _STATEMENT_LEAD.sub("", prepare_matching_text(text).text, count=1)
+    issuer = p.ISSUER_WORD.match(prepared)
+    if issuer is None:
+        return False
+    if issuer.group().casefold() != "our":
+        return True
+    for boundary in p.EN_AUX_BOUNDARY.finditer(prepared, issuer.end()):
+        if boundary.group().casefold() in _NONPREDICATE_BOUNDARIES:
+            continue
+        subject = prepared[issuer.end():boundary.start()].strip()
+        if re.search(r"[,;.!?]", subject):
+            return False
+        # A later predicate belongs to the predicate/object region, not to a
+        # successively longer subject. Decide once at the first real boundary.
+        return bool(p.PRODUCT_SUFFIX.search(subject)
+                    or (subject.endswith("s") and p.PRODUCT_SUFFIX.search(subject[:-1])))
+    return False
 
 
 @dataclass

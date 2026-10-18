@@ -1,0 +1,58 @@
+{
+  "schema_version": "du11-e2e-restore-receipt/1",
+  "test": "tests/test_du11_narrative_citation_e2e.py::test_frozen_public_wire_survives_the_real_reader_consumer_and_calculator (teardown)",
+  "owned_root": "pytest tmp_path/du11-owned",
+  "initial_files": [
+    "out/existing.json",
+    "sentinel.bin"
+  ],
+  "initial_bytes_mtime": {
+    "out/existing.json": [
+      "17ee34cedc084ea02cf451fb5096be38d5d0d188472bc05979fdddcbb120a50d",
+      1792292417940797700
+    ],
+    "sentinel.bin": [
+      "68a20e0c79eb758d1e370fa8753fdfe10ff6cd123ab4f7e10633f3d3fbc47776",
+      1792292417939795400
+    ]
+  },
+  "sentinel_sha256": "68a20e0c79eb758d1e370fa8753fdfe10ff6cd123ab4f7e10633f3d3fbc47776",
+  "created": [
+    "baseline.json",
+    "catalog.json",
+    "cwp-stub/company_wiki/__init__.py",
+    "cwp-stub/company_wiki/source_catalog/__init__.py",
+    "cwp-stub/company_wiki/source_catalog/narrative_transport_cli.py",
+    "linked.json",
+    "out/baseline-forecast.json",
+    "out/linked-forecast.json",
+    "replay/bundle.json",
+    "replay/calls.log",
+    "replay/mode.txt",
+    "replay/receipt.jsonl"
+  ],
+  "removed": [
+    "cwp-stub/company_wiki/source_catalog/__init__.py",
+    "cwp-stub/company_wiki/source_catalog/narrative_transport_cli.py",
+    "cwp-stub/company_wiki/__init__.py",
+    "out/baseline-forecast.json",
+    "out/linked-forecast.json",
+    "replay/bundle.json",
+    "replay/calls.log",
+    "replay/mode.txt",
+    "replay/receipt.jsonl",
+    "baseline.json",
+    "catalog.json",
+    "linked.json",
+    "cwp-stub/company_wiki/source_catalog/",
+    "cwp-stub/company_wiki/",
+    "cwp-stub/",
+    "replay/"
+  ],
+  "restored": true,
+  "residual_directories": [
+    "out",
+    "sentinel.bin"
+  ],
+  "root_removed": true
+}
