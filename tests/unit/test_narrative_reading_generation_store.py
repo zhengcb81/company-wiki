@@ -245,7 +245,8 @@ def test_schema_v5_migration_is_additive_preserves_data_and_rolls_back_failure(t
     assert database.read_bytes() == before
     monkeypatch.setattr(migrations, "_execute_statement", original)
     report = migrations.migrate_database(database, backup_hook=lambda path, old, new: shutil.copy2(path, tmp_path / "backup.db"))
-    assert report.to_version == 6 and report.applied_versions == (6,)
+    assert report.from_version == 5 and report.to_version == migrations.SCHEMA_VERSION
+    assert report.applied_versions == tuple(range(6, migrations.SCHEMA_VERSION + 1))
     with sqlite3.connect(database) as connection:
         columns = {row[1]: row for row in connection.execute("PRAGMA table_info(narrative_run_jobs)")}
         assert columns["final_generation_json"][3] == 0
