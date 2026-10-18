@@ -1,0 +1,14 @@
+﻿=== ruff (tools/identity_audit + tests/unit/test_identity_audit) ===
+All checks passed!
+ruff exit: 0
+
+=== mypy (six lane production modules) ===
+Success: no issues found in 6 source files
+mypy exit: 0
+
+=== manual CLI demo (synthetic tmp fixture, --out --pretty, byte-level read-only proof) ===
+exit=0 status=ok
+counts={"checked": 6, "failed": 0, "not_applicable": 1, "not_evaluated": 0, "passed": 5}
+inputs=['C:\\Users\\֣����\\AppData\\Local\\Temp\\p3-identity-audit-demo-nsrxg0bf\\config\\source_catalog.yaml', 'C:\\Users\\֣����\\AppData\\Local\\Temp\\p3-identity-audit-demo-nsrxg0bf\\request.json']
+out=C:\Users\֣����\Projects\company-wiki-p3-identity-audit\docs\plans\parallel-packages-2026-10-18\P3-IDENTITY-AUDIT\receipt.json
+demo exit: 0
