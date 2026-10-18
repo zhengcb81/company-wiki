@@ -1,0 +1,13 @@
+{
+  "returncode": 0,
+  "source_before": {
+    "tools/pre_push_gate.py": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+    "tests/unit/test_pre_push_full_unit_workers.py": "e42810640d838a5be5c9921c687602cd48887e5e6ce2e976e33abef1e02d741e"
+  },
+  "source_after": {
+    "tools/pre_push_gate.py": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+    "tests/unit/test_pre_push_full_unit_workers.py": "e42810640d838a5be5c9921c687602cd48887e5e6ce2e976e33abef1e02d741e"
+  },
+  "equal": true,
+  "owned_temp_removed": true
+}

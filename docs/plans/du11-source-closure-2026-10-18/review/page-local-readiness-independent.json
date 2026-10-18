@@ -1,0 +1,24 @@
+{
+  "schema_version": "du11-page-local-readiness-review/1",
+  "verdict": "PASS_PAGE_LOCAL_READINESS_ENGINEERING",
+  "source_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc",
+    "tests/unit/du11_reference_readiness/test_native_page_local_positions.py": "5275ae7110b109cddcb27bde8e644c39b6fb2710358b2c0b37a4251165f3b409"
+  },
+  "source_unchanged_after_execution": true,
+  "unresolved_runtime_findings": [],
+  "tests": {
+    "first_run": {"passed": 9, "failed": 1, "pytest_seconds": 16.29, "failure_owner": "reviewer control incorrectly required global parent exhaustion"},
+    "single_control_completion": {"passed": 1, "failed": 0, "pytest_seconds": 7.94, "runtime_changed": false, "corrected_expectation": "scoped refusal preserves parent remaining balance"},
+    "distinct_successful_behaviors": 10,
+    "not_a_single_all_green_run": true,
+    "full_77_repeated": false
+  },
+  "verified": ["global ordinal vs page-local paragraph responsibility", "unknown counter supplies no positive furniture proof", "fresh independent statements after a counter not wrongly deferred", "four scalar furniture original refs only", "shared parent budget and local refusal semantics", "original text and locators not rewritten"],
+  "cleanup": {"both_outer_temps_absent": true, "relocated_basetemp_absent": true},
+  "root_real_diagnostic": {"path": "../page-scope-after-counter-fix/page-scope.json", "companion": "../page-scope-after-counter-fix/cn-h1.json", "source_sha_matches": true, "api_calls": 0, "raw_copies": 0, "original_and_gold_unchanged": true, "required_anchors_selected_and_canonical": [10,10], "t32_selected_matches": 0, "t34_selected_matches": 1, "independently_rerun": false, "not_timing_acceptance": true},
+  "source_edits": 0,
+  "raw_pdf_reads": 0,
+  "paid_calls": 0,
+  "open_product_scope": ["t34 product antecedent", "general semantic closure", "formal real-provider C", "whole PWF completion"]
+}

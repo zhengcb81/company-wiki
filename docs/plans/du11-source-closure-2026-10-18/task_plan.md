@@ -6,7 +6,9 @@ PLAN_ID=du11-source-closure-2026-10-18; PWF_PLAN_ROOT=docs/plans。唯一实现o
 
 **当前工程位置（2026-10-18）：** B1已正常发布9c681ed2，精确CI39092308121 success；RF外包已独立18项验收、main与远端f8002f5f、精确CI39092538354 success、安装6文件定点同步，旧3个assurance WIP不变。FF初审102项主链绿但4反例暴露发布日期及代码解释漏洞，隔离修后28边界＋真实HK TXT1链独审通过；待ROOT先发布CWP producer的canonical_identity可选投影，再正常发布FF，不让新flag先上线断链。
 
-ROOT本节点是物理跨页/真实parser MIME/共享语法/因果cache以及FF reader端口完整组件，**不代表唯一/集体先行词或正式C已完成**。真实CN p17旧t32“求的同时…”和t34“该系列产品…”在当前真实回放仍被选中；不得把关键gold10/10当语义闭合通过。物理页scope/project或首body证据不足仍须source readiness修，设计参见review/antecedent-owner-design.md。继续不读作者密钥、不写原件/gold/生产配置。
+ROOT本节点是物理跨页/真实parser MIME/共享语法/因果cache以及FF reader端口完整组件，**不代表唯一/集体先行词或正式C已完成**。32ab6e06已合母仓5ad4295f/6ee5ebf1但尚未发布：正常push的全量单测在600s到约96%超时，保留原失败日志，不称已推送。现有xdist依赖用于完整unit目录的两个隔离worker，窄测/contract保持原运行方式、集合和600s期限不变；完整运行与远端CI仍待正常push验证。
+
+新真实诊断查明paragraph_index每页重置，而ordinal为source全局位置；未知下一页底部计数块也不能抢先清掉上一页半句。修在同一native owner，未知前缀只defer而不伪造家具/正向拼接。77项相关行为通过、独立10个不同控制跨两轮通过；本次实源诊断旧t32“求的同时…”selected_matches=0，t34“该系列产品…”仍1，原件/gold不变、0API。该诊断明确不是冻结内容验收/性能收据；不得把10/10 gold命中当语义闭合通过。剩余有界先行词设计参见review/antecedent-owner-design.md。继续不读作者密钥、不写原件/gold/生产配置。
 
 母计划 document-understanding-2026-10-13 为总控。前置代码9eff4ee7随e33d40ed已正常发布：6741PASS/24SKIP/580.05s和142独立合同PASS/37.31s；精确CI39090720114 success。母仓后续文档0099dd5d已正常推送，未触发新的行为CI。剩余真实CN断句/指代见 ../du11-source-quality-2026-10-18/closure-investigation/findings.md；具体20源码接口调查见 ../du11-source-tail-geometry-2026-10-18/review/remaining-closure-design.md/json。
 
@@ -60,4 +62,4 @@ FF当前manifest的future/invalid/None不再继承旧query资格，使用已有d
 
 ## Next Step
 
-收齐物理/cache最后delta独审后，将同一完整工程节点正常提交/并线/推送CWP，核精确CI，再发布已审FF修复与定点安装，RF无需重做；继续真正source readiness/有界先行词并用原CN定位＋新组合验收，不提高4blocks/8units/2048chars或编公司特例。源就绪后再正式三供应商摘要/收费响应恢复/activation及同跨run缓存/实际FF-RF消费C；后续holdout/RF循环仍OPEN。
+收齐页内编号与worker执行两个delta独审后，正常提交/并线/推送CWP，确认完整unit真实结果、remote与精确CI，再发布已审FF修复与定点安装，RF无需重做。worker超时反控明确600是测试期限；execnet关停另有约15s既有关停grace，实际2-worker/SQLite反控返回124后worker均退出、两层自有Temp删除，不承诺总墙钟严格600或虚称已经提速。继续真正有界先行词并用原CN定位＋新组合验收，不提高4blocks/8units/2048chars或编公司特例。源就绪后再正式三供应商摘要/收费响应恢复/activation及同跨run缓存/实际FF-RF消费C；后续holdout/RF循环仍OPEN。

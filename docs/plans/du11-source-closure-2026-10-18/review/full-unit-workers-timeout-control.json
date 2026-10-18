@@ -1,0 +1,28 @@
+{
+  "gate_sha": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+  "production_timeout_default": 600,
+  "diagnostic_timeout": 5,
+  "narrow_and_nonzero_controls": [
+    "tests/unit/test_small.py",
+    "tests/contract/test_small.py",
+    "tests/unitary"
+  ],
+  "returncode": 124,
+  "elapsed_seconds": 20.063594800012652,
+  "controller_output": "\n=== diagnostic blocked workers ===\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0 -- C:\\Miniconda\\python.exe\nrootdir: C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-worker-timeout-0qei7eqs\\project\nconfigfile: pytest.ini\ncreated: 2/2 workers\n2 workers [2 items]\n\nscheduling tests via LoadFileScheduling\n\ntests/unit/test_1.py::test_blocking \ntests/unit/test_2.py::test_blocking \nFAILED: diagnostic blocked workers (timeout after 5s)\n",
+  "pids": [
+    {
+      "pid": 16508,
+      "worker": "gw0"
+    },
+    {
+      "pid": 14496,
+      "worker": "gw1"
+    }
+  ],
+  "workers_live_on_return": [],
+  "gate_temps_removed": [
+    true
+  ],
+  "owned_temp_removed": true
+}

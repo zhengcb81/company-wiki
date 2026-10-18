@@ -1,0 +1,62 @@
+{
+  "schema_version": "du11-full-unit-workers-independent/1",
+  "verdict": "PASS_BOUNDED_ENGINEERING_REVIEW",
+  "source_sha256": {
+    "tools/pre_push_gate.py": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+    "tests/unit/test_pre_push_full_unit_workers.py": "e42810640d838a5be5c9921c687602cd48887e5e6ce2e976e33abef1e02d741e",
+    "requirements-test.txt": "e0ee1460a2a70993d7427d2acdb9255043bb6ac23eb2aa55e80d09c8ddb0e1bc"
+  },
+  "dependencies_sha256": {
+    "C:/Miniconda/Lib/site-packages/execnet/gateway_base.py": "bc91d2c7f6dc7172d4c6c02f9cee49fed743a47f2ad14e8e3cd5d9d7cd0378dc",
+    "C:/Miniconda/Lib/site-packages/xdist/workermanage.py": "efbca7d514fb94bd16ef566862a435dc7a541cb1ffd1d3826fc0cf2026fca3de",
+    "C:/Miniconda/Lib/site-packages/xdist/remote.py": "86d2f8132b3ef7e190f622c2b3cfd83cde464a4dd07ccd75486b27b161336b3d"
+  },
+  "independent_new_tests": {
+    "passed": 4,
+    "pytest_seconds": 4.69,
+    "actual_two_worker_nested_processes": true,
+    "failure_and_skip_propagation": true,
+    "temp_restored": true
+  },
+  "additional_argument_controls": [
+    "tests/unit/test_small.py",
+    "tests/contract/test_small.py",
+    "tests/unitary"
+  ],
+  "live_timeout_control": {
+    "gate_sha": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+    "production_timeout_default": 600,
+    "diagnostic_timeout": 5,
+    "narrow_and_nonzero_controls": [
+      "tests/unit/test_small.py",
+      "tests/contract/test_small.py",
+      "tests/unitary"
+    ],
+    "returncode": 124,
+    "elapsed_seconds": 20.063594800012652,
+    "pids": [
+      {
+        "pid": 16508,
+        "worker": "gw0"
+      },
+      {
+        "pid": 14496,
+        "worker": "gw1"
+      }
+    ],
+    "workers_live_on_return": [],
+    "gate_temps_removed": [
+      true
+    ],
+    "owned_temp_removed": true
+  },
+  "remaining_limits": [
+    "Full-suite performance not yet measured; normal full prepush remains required",
+    "600s execution timeout plus observed approximately15s execnet shutdown grace; not strict600 totalwall",
+    "No arbitrary native GIL-block/grandchild termination guarantee from this finite control"
+  ],
+  "production_edits": 0,
+  "api_original_key_reads": 0,
+  "full_suite_repeated": false,
+  "report_sha256": "b3fadde2ade96b23873be5df1fa462a2ae3d23cbf624611c1c583ff5005c7c7d"
+}
