@@ -10,7 +10,7 @@
 - 用户确认：C 内容按 **CN 8/10** 收尾，不再为最后 1–2 条事实继续烧真实调用。
 - 已交付：B2 最终复审 PASS；**exact CI 仅覆盖 `2a80acf6`**（`b2-final3-20261018/ci-39139605025.json`，B2 唯一精确 CI）；三源回放绑定当前代码；C 工程侧 receipt/恢复/缓存/FF-RF 证据在**工作区** `.planning/shared-reading-production/du11/`（未入 git，fresh clone 不可复核）。
 - **交付状态须知（2026-10-18）**：本地 `master` 领先 `origin/master`（`ccc5bc7e`）**7 个提交、未推送、无 exact CI**；`origin/master` 仍是无条件补写版（"默认关闭"只在本地未推提交，本地开关另推在分支 `du11-repair-flag`）。P1–P4 四张施工卡已在本地 `codex/p1..p4-*` 分支实现完毕，状态为 **IMPLEMENTED_PENDING_ROOT_RECEPTION**，不是 READY_TO_DISPATCH。
-- 已知缺口（如实交接）：CN required 8/10（critical 5/7）、US 2–4/8、HK 未跑（DeepSeek 密钥 401）。覆盖修复（两次调用）为实验性、默认关闭。
+- 已知缺口（如实交接）：CN required 8/10（critical 5/7）、US 2–4/8；**HK 已于 2026-10-18 用 Windows 用户环境变量的有效 DeepSeek 密钥跑通**（1 次 POST、16,813 tokens / $0.00742、activation recovery PASS、receipt PASS）；独立内容复审 **5/7 required、critical 4/6 → CONTENT_FAIL**（无 VIOLATED；门店合计 7,504/内地 4,386/海外 3,118 被写成标题与约数，未落精确值）。覆盖修复（两次调用）为实验性、默认关闭。
 - **模型评估计划（后续独立课题）**：① 先换有效 DeepSeek 密钥，用同一协议跑一次 CN；② 用同一份请求对照一个更强模型，区分“任务形状”与“模型能力”；③ 多模型只用于审计（查漏/查引用），不交叉生成摘要；④ 固定验收矩阵：严格 JSON 成功率、claims 数、required 覆盖、单位/期间错误。
 
 ---
