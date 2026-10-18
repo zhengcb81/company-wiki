@@ -13,6 +13,7 @@ time assertion and tests enforce the subset relation.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 import re
 
 from . import patterns as p
@@ -344,7 +345,9 @@ def _members(text: str, match: re.Match[str] | None, bounds: tuple[int, int], *,
     return tuple(spans) if 2 <= len(spans) <= 8 else ()
 
 
-def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
+@lru_cache(maxsize=512)
+def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
+    """One scan per distinct source text; predecessors repeat across targets."""
     """Return explicitly named product declarations in source order.
 
     A CJK appositive without a Latin name or an explicit series marker is a
@@ -355,7 +358,11 @@ def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
     seen: set[tuple[int, int, str]] = set()
     for match in _HEAD_ONLY.finditer(text):
         head = match.group()
-        name, start = _name_before(text[:match.start()])
+        # Bounded look-behind: a whole-document prefix costs O(document) per
+        # head and turns a long filing into minutes of repeated regex work.
+        window_start = max(0, match.start() - 64)
+        name, offset = _name_before(text[window_start:match.start()])
+        start = window_start + offset
         if not name:
             continue
         series_in_name = _FAMILY_SUFFIX.search(name)
@@ -390,3 +397,8 @@ def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
                                            head_class(head), bool(collective), collective,
                                            attribution))
     return tuple(declared)
+
+
+def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
+    """Public, identity-cached view of the declarations in one source text."""
+    return _declarations_for(text)
