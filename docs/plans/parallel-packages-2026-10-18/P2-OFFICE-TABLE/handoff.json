@@ -1,0 +1,172 @@
+{
+  "schema_version": "parallel-packages-handoff/1",
+  "lane": "P2-OFFICE-TABLE",
+  "status": "FROZEN_AWAITING_ROOT_REVIEW",
+  "baseline_commit": "4045787f6bf77722d8125911f3475ecff9bca9b0",
+  "branch": "codex/p2-office-table-20261018",
+  "commits": [
+    "f8c91996cb12286d527c95be240b0ada3423f560",
+    "b61ed0c55dffd31b925875f25de64f90087c0fa3"
+  ],
+  "changed_paths": [
+    "src/company_wiki/document_normalization/office_table_structure.py",
+    "tests/unit/test_p2_office_table/__init__.py",
+    "tests/unit/test_p2_office_table/ooxml_support.py",
+    "tests/unit/test_p2_office_table/fixture_files.py",
+    "tests/unit/test_p2_office_table/test_boundaries.py",
+    "tests/unit/test_p2_office_table/test_docx_footnotes.py",
+    "tests/unit/test_p2_office_table/test_docx_structure.py",
+    "tests/unit/test_p2_office_table/test_fixtures_manifest.py",
+    "tests/unit/test_p2_office_table/test_locator_compatibility.py",
+    "tests/unit/test_p2_office_table/test_pptx_structure.py",
+    "tests/unit/test_p2_office_table/test_replay_and_determinism.py",
+    "tests/unit/test_p2_office_table/test_review_regressions.py",
+    "tests/unit/test_p2_office_table/fixtures/docx_footnotes.docx",
+    "tests/unit/test_p2_office_table/fixtures/docx_footnotes_missing_part.docx",
+    "tests/unit/test_p2_office_table/fixtures/docx_grid_span.docx",
+    "tests/unit/test_p2_office_table/fixtures/docx_header_and_continuation.docx",
+    "tests/unit/test_p2_office_table/fixtures/docx_span_out_of_grid.docx",
+    "tests/unit/test_p2_office_table/fixtures/docx_vertical_merge.docx",
+    "tests/unit/test_p2_office_table/fixtures/pptx_merged.pptx",
+    "tests/unit/test_p2_office_table/fixtures/pptx_plain.pptx",
+    "tests/unit/test_p2_office_table/fixtures/sha256.json",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/red-20261018-baseline.log",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pathcheck.log",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/static-20261018-ruff-mypy.log",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.md"
+  ],
+  "file_bindings": [
+    {"path": "src/company_wiki/document_normalization/office_table_structure.py", "sha256": "223a886999bdb429b17f7af03f9b0d4145b7f69bb8c2c230bd8b8d150aa20942", "bytes": 47600},
+    {"path": "tests/unit/test_p2_office_table/__init__.py", "sha256": "909e20feb894f7be854d40bb9851f674368cb7379844939653deb69b15092dbc", "bytes": 273},
+    {"path": "tests/unit/test_p2_office_table/ooxml_support.py", "sha256": "d7a3ce36a873907779b32d4fdaa3f28270091ba320b0da842f29b9b0e127e80d", "bytes": 12533},
+    {"path": "tests/unit/test_p2_office_table/fixture_files.py", "sha256": "9a3d855ac65153bfc7aa70d55beb86e3a926e7ffb697fd1b1f117e82061e0698", "bytes": 4857},
+    {"path": "tests/unit/test_p2_office_table/test_boundaries.py", "sha256": "f07d5bcc366aa6864758095f09defcb8927672f39873f51adefa689789bdae6e", "bytes": 2956},
+    {"path": "tests/unit/test_p2_office_table/test_docx_footnotes.py", "sha256": "f04f9eb2fa0ee5db3e5fcb37587383851dacc15be17d0d0d93c986f131cb18fe", "bytes": 3075},
+    {"path": "tests/unit/test_p2_office_table/test_docx_structure.py", "sha256": "8ee5d879a51245cd8254024911e361c6dc9fd4c2e3c70ea01a276a5965e00195", "bytes": 12720},
+    {"path": "tests/unit/test_p2_office_table/test_fixtures_manifest.py", "sha256": "73438413f1c20682edbaa7910cf46c19c5e75b7c005f757dfb7fb32c4df74eaa", "bytes": 1859},
+    {"path": "tests/unit/test_p2_office_table/test_locator_compatibility.py", "sha256": "0065bcc523e773329cf848310c12caa7fb326cc30fd26e4d91169a6da77624d4", "bytes": 4804},
+    {"path": "tests/unit/test_p2_office_table/test_pptx_structure.py", "sha256": "8074e47f9de66dca60931911801906f1f890058a355f60c8ab93961abed36daf", "bytes": 4567},
+    {"path": "tests/unit/test_p2_office_table/test_replay_and_determinism.py", "sha256": "27e5434835c5c3d283e7fe184b0b78e9cf193209d0a958cbfcbcc2377a5397ec", "bytes": 5683},
+    {"path": "tests/unit/test_p2_office_table/test_review_regressions.py", "sha256": "af65300f42357bd27eb176ea5801714a429b4a56c56f683412567cc9e4ec1a77", "bytes": 14408},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_footnotes.docx", "sha256": "9079cf86d0cae0bea1448de030f6a352a836eea4ec2f207b65c3d9c72c8f0726", "bytes": 1996},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_footnotes_missing_part.docx", "sha256": "4a46c42850faab9096365d8f42ba4bb936cc0034f83b224a05a6cff05acd56b4", "bytes": 1622},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_grid_span.docx", "sha256": "67f5c16479d5bc50ae32fce2473f7399664e6232af0a76afb68f0f730e34a25b", "bytes": 1706},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_header_and_continuation.docx", "sha256": "be8a7d83582769d55879365febcf55cbe758529292103a7b03edbf94aaf2c79b", "bytes": 2434},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_span_out_of_grid.docx", "sha256": "5e70248967089101cf357bb735ccc9a8c2794969a94d2d2a97367df6886e5af3", "bytes": 1787},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_vertical_merge.docx", "sha256": "6ae75249c84593ad91ac9a4a03d78680212141750c36ea0c478114973b9f9504", "bytes": 1679},
+    {"path": "tests/unit/test_p2_office_table/fixtures/pptx_merged.pptx", "sha256": "02bd09f28943ab4dddbf3df370b37604b3c36dc1be71de9a8012d7cf13ca4f41", "bytes": 3347},
+    {"path": "tests/unit/test_p2_office_table/fixtures/pptx_plain.pptx", "sha256": "f34bb7e48b1891b3f198311a74bab0e5db83b8ef92553ba61a327d752ebe88e6", "bytes": 3135},
+    {"path": "tests/unit/test_p2_office_table/fixtures/sha256.json", "sha256": "eb2a6547e845892d223da3770f15245f1ac027dd307285f2220146160c3a3b50", "bytes": 1559},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/red-20261018-baseline.log", "sha256": "fbbdbd7a064b9b8cebea4c88c1a209bd70899d7743f3a2df0e22ba35cf95d6d1", "bytes": 18419},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pathcheck.log", "sha256": "aaec65bfd3b9c6519c52171c0b5256cc35c6775fafd796d72dec020a9135ed00", "bytes": 93},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log", "sha256": "188dee6d93cd3eb465518edc8be1ba7f9d1b0cac5853b0b9b7f7211ede126cf4", "bytes": 1830},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/static-20261018-ruff-mypy.log", "sha256": "f3e005c8ee9d4e0efe527342b9baf80fc1c579b6f86d56ef1d138a6f53b634f1", "bytes": 126},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md", "sha256": "7e44e7389c4d3dd192bcc4321ebb90097c47f9587b5b542f433dc4f5b823ca36", "bytes": 17334},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.md", "sha256": "1baf9e44e7494655df147063443f2ffd6a61662907168ce05eff6c9666ee486a", "bytes": 6223}
+  ],
+  "interface_versions": {
+    "office_table": "cwp-office-table/1"
+  },
+  "locator_compatibility": {
+    "docx": "cwp-docx-body/1|t=<i>|r=<row>|c=<col>|p=<para>",
+    "pptx": "cwp-pptx-shape/2|s=<slide>|p=<shape path>|c=<row>,<col>"
+  },
+  "tests": [
+    {
+      "command": "python -B -c \"import company_wiki; print(list(company_wiki.__path__))\"",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pathcheck.log",
+      "receipt_sha256": "aaec65bfd3b9c6519c52171c0b5256cc35c6775fafd796d72dec020a9135ed00"
+    },
+    {
+      "command": "python -m pytest tests/unit/test_p2_office_table -q -p no:cacheprovider",
+      "exit_code": 0,
+      "passed": 67,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log",
+      "receipt_sha256": "188dee6d93cd3eb465518edc8be1ba7f9d1b0cac5853b0b9b7f7211ede126cf4"
+    },
+    {
+      "command": "python -m ruff check src/company_wiki/document_normalization/office_table_structure.py tests/unit/test_p2_office_table",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/static-20261018-ruff-mypy.log",
+      "receipt_sha256": "f3e005c8ee9d4e0efe527342b9baf80fc1c579b6f86d56ef1d138a6f53b634f1"
+    },
+    {
+      "command": "python -m mypy src/company_wiki/document_normalization/office_table_structure.py",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/static-20261018-ruff-mypy.log",
+      "receipt_sha256": "f3e005c8ee9d4e0efe527342b9baf80fc1c579b6f86d56ef1d138a6f53b634f1"
+    }
+  ],
+  "red_receipt": {
+    "path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/red-20261018-baseline.log",
+    "sha256": "fbbdbd7a064b9b8cebea4c88c1a209bd70899d7743f3a2df0e22ba35cf95d6d1",
+    "first_failure": "27 failed, 19 passed against the pre-implementation baseline that only reproduced today's docx_parser.table() row x cell behaviour: a gridSpan=2 cell was reported as two cells, vMerge/column_span assertions such as `assert [3, 1, 1] == [1, 1, 1]` and several `DID NOT RAISE ValueError` replay cases failed as ASSERTION errors, not ImportError."
+  },
+  "fixtures": [
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_footnotes.docx", "sha256": "9079cf86d0cae0bea1448de030f6a352a836eea4ec2f207b65c3d9c72c8f0726", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_footnotes_missing_part.docx", "sha256": "4a46c42850faab9096365d8f42ba4bb936cc0034f83b224a05a6cff05acd56b4", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_grid_span.docx", "sha256": "67f5c16479d5bc50ae32fce2473f7399664e6232af0a76afb68f0f730e34a25b", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_header_and_continuation.docx", "sha256": "be8a7d83582769d55879365febcf55cbe758529292103a7b03edbf94aaf2c79b", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_span_out_of_grid.docx", "sha256": "5e70248967089101cf357bb735ccc9a8c2794969a94d2d2a97367df6886e5af3", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/docx_vertical_merge.docx", "sha256": "6ae75249c84593ad91ac9a4a03d78680212141750c36ea0c478114973b9f9504", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/pptx_merged.pptx", "sha256": "02bd09f28943ab4dddbf3df370b37604b3c36dc1be71de9a8012d7cf13ca4f41", "kind": "synthetic"},
+    {"path": "tests/unit/test_p2_office_table/fixtures/pptx_plain.pptx", "sha256": "f34bb7e48b1891b3f198311a74bab0e5db83b8ef92553ba61a327d752ebe88e6", "kind": "synthetic"}
+  ],
+  "not_run": [
+    "real DOCX/PPTX originals: no production filing was read; every fixture is a synthetic minimal OOXML package",
+    "real DOCX continuation tables: w:lastRenderedPageBreak appears only after a paged preview in Word, so real continuation behaviour is unverified",
+    "production wiring into normalize_document / summary selection / export",
+    "du4-table-observation/1 projection (card explicitly leaves it to ROOT)",
+    "python-pptx-absent PPTX path exercised only by simulated ImportError, not by an environment lacking the package"
+  ],
+  "known_limits": [
+    "PPTX 无表头属性",
+    "DOCX 分页仅在 lastRenderedPageBreak 存在时可见",
+    "work_used.chars counts cell text only, not footnote text (footnotes are bounded separately by max_footnote_chars)",
+    "when a:tblGrid / w:tblGrid is absent, grid.columns is null and span overflow cannot be judged, so no diagnostic is emitted",
+    "a non-positive w:gridSpan lands in p2_span_out_of_grid with column_span=null; the card does not define this case and the choice is recorded in the module docstring",
+    "continuation_of treats headers as identical when the header-row cell text sequence matches; column widths and merge structure are not compared",
+    "DOCX covered cells report empty text while PPTX vMerge continuation cells keep their own text, because pptx_parser emits a unit for that cell; this asymmetry is deliberate and pinned by a test"
+  ],
+  "root_integration_steps": [
+    "决定是否把 cwp-office-table/1 投影到 du4-table-observation/1",
+    "在真实 DOCX/PPTX 回放时核对单元 locator 与既有解析器一致",
+    "若需进入摘要选择，由 ROOT 在 source owner 内接线，不在本卡"
+  ],
+  "scope_proof": {
+    "production_writes": 0,
+    "config_writes": 0,
+    "db_writes": 0,
+    "original_reads": 0,
+    "original_writes": 0,
+    "network_calls": 0,
+    "model_calls": 0,
+    "key_reads": 0,
+    "forbidden_paths_touched": []
+  },
+  "independent_review": {
+    "reviewer": "not-self",
+    "verdict": "PASS",
+    "report": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md",
+    "bound_files_sha256": [
+      "223a886999bdb429b17f7af03f9b0d4145b7f69bb8c2c230bd8b8d150aa20942",
+      "27e5434835c5c3d283e7fe184b0b78e9cf193209d0a958cbfcbcc2377a5397ec",
+      "af65300f42357bd27eb176ea5801714a429b4a56c56f683412567cc9e4ec1a77",
+      "7e44e7389c4d3dd192bcc4321ebb90097c47f9587b5b542f433dc4f5b823ca36"
+    ]
+  }
+}
