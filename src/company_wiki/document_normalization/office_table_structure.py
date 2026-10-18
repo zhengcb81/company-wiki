@@ -737,7 +737,7 @@ def _docx_table_work(node: Any) -> tuple[int, int]:
     return cells, chars
 
 
-def _docx_table_order(body: Any) -> list[Any]:
+def _docx_table_order(body: Any) -> list[Any | None]:
     """Tables in the order ``docx_parser`` numbers them (``t=<i>``).
 
     ``body.iter(W + "tbl")`` yields every table in document order, but the
@@ -745,14 +745,25 @@ def _docx_table_order(body: Any) -> list[Any]:
     and recurses only into a ``w:tbl`` that is a *direct* child of a cell
     (a ``w:sdt``-wrapped nested table inside a cell is reported as an
     unsupported element and never entered), while ``body()`` descends the
-    ``w:sdt`` / ``w:customXml`` / ``w:ins`` / ``w:moveTo`` wrappers but never
-    numbers anything inside ``w:del`` / ``w:moveFrom`` — deleted content is
-    counted in metadata only.  A real research note whose cells carry
-    ``w:sdt``-wrapped nested tables shifted every later ``t=`` index under
-    ``body.iter``, so this walk replicates the parser exactly.
+    ``w:sdt`` / ``w:customXml`` / ``w:ins`` / ``w:moveTo`` wrappers.  A real
+    research note whose cells carry ``w:sdt``-wrapped nested tables shifted
+    every later ``t=`` index under ``body.iter``, so this walk replicates the
+    parser exactly.
+
+    ``w:del`` / ``w:moveFrom`` regions never *emit* a table (``body`` walks
+    them with ``visible=False``), but ``docx_parser`` still advances the very
+    counter ``table()`` reads for ``t=``: inside an invisible walk a ``w:tbl``
+    child adds its whole raw subtree (``child.iter(W + "tbl")``) and only the
+    ``sdt`` / ``customXml`` / ``ins`` / ``moveTo`` / nested ``del`` /
+    ``moveFrom`` wrappers are descended — a table inside a ``w:p`` is never
+    reached, exactly as ``body()`` never descends a paragraph.  Every such
+    deleted-region table therefore consumes a ``t=`` index without yielding a
+    structure: it is emitted here as ``None``, so a visible table's *position*
+    in the returned list is exactly the parser's ``t=`` index, and the caller
+    skips the placeholders without spending budget on them.
     """
 
-    order: list[Any] = []
+    order: list[Any | None] = []
 
     def walk_table(table_node: Any) -> None:
         order.append(table_node)
@@ -762,15 +773,17 @@ def _docx_table_order(body: Any) -> list[Any]:
                     if child.tag == W + "tbl":
                         walk_table(child)
 
-    def walk_body(node: Any) -> None:
+    def walk_body(node: Any, visible: bool = True) -> None:
         for child in node:
             if child.tag == W + "tbl":
-                walk_table(child)
+                if visible:
+                    walk_table(child)
+                else:
+                    # body(visible=False) counts the whole raw subtree of a
+                    # direct w:tbl child and never emits anything from it.
+                    order.extend(None for _ in child.iter(W + "tbl"))
             elif child.tag in {W + "del", W + "moveFrom"}:
-                # Deleted content is walked with visible=False: its tables are
-                # counted in metadata but never numbered, so they must not
-                # consume a ``t=`` index here either.
-                continue
+                walk_body(child, visible=False)
             elif child.tag in {
                 W + "sdt",
                 W + "customXml",
@@ -778,16 +791,17 @@ def _docx_table_order(body: Any) -> list[Any]:
                 W + "moveTo",
             }:
                 # ``docx_parser.body()`` descends into ``w:sdtContent`` for a
-                # ``w:sdt`` and into the wrapper itself otherwise; following
-                # the same shape keeps the numbering aligned.
+                # ``w:sdt`` and into the wrapper itself otherwise, keeping the
+                # current visibility; following the same shape keeps the
+                # numbering aligned.
                 content = (
                     child.find(W + "sdtContent")
                     if child.tag == W + "sdt"
                     else None
                 )
-                walk_body(content if content is not None else child)
+                walk_body(content if content is not None else child, visible)
 
-    walk_body(body)
+    walk_body(body, visible=True)
     return order
 
 
@@ -807,7 +821,12 @@ def _parse_docx(
     footnote_budget = [0]
     seen_in_tables = 0
 
-    for node in table_nodes:
+    for position, node in enumerate(table_nodes):
+        if node is None:
+            # A deleted-region table consumed the parser's t= index without
+            # being processed: no structure, no budget, no cells — but every
+            # later table keeps the index the parser gives it.
+            continue
         if seen_in_tables >= work.limits.max_tables:
             diagnostics.append(
                 _diagnostic(P2_TABLE_LIMIT, None, f"max_tables={work.limits.max_tables}")
@@ -834,7 +853,7 @@ def _parse_docx(
             break
         structure, over_grid = _docx_table_structure(
             node=node,
-            table_index=work.tables,
+            table_index=position,
             work=work,
             footnote_texts=footnote_texts,
             footnotes_present=footnotes_present,

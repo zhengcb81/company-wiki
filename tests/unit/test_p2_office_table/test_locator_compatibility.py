@@ -206,3 +206,101 @@ def test_docx_table_numbering_follows_the_parser_with_nested_tables():
     assert not any("不可见" in str(entry.get("text")) for entry in [
         c for t in tables for c in t["cells"]  # type: ignore[index]
     ])
+
+
+def test_docx_deleted_region_tables_consume_the_parser_index():
+    """A table inside ``w:del`` consumes a ``t=`` index without a structure.
+
+    ``docx_parser.body()`` walks ``w:del`` / ``w:moveFrom`` with
+    ``visible=False``: no unit is emitted, but ``body(visible=False)`` still
+    does ``self.tables += sum(1 for _ in child.iter(W + "tbl"))`` on a
+    ``w:tbl`` child — the very counter ``table()`` reads for ``t=``.  A
+    deleted-region table therefore shifts every later ``t=`` (a nested table
+    in its cells shifts it further, wrappers inside the region are descended,
+    and a table inside a ``w:p`` inside the region is never reached because
+    ``body()`` never descends a paragraph).  The structure must reproduce that
+    shift: the deleted table is never emitted, but the tables after it keep
+    the indices the parser gives them.
+    """
+    deleted_outer = table(row(cell(paragraph("被删的表"))))
+    deleted_with_nested = table(
+        row(
+            "<w:tc><w:tcPr/><w:p/>"
+            + table(row(cell(paragraph("删除区嵌套表"))))
+            + "</w:tc>"
+        )
+    )
+
+    def payload(del_region: str) -> bytes:
+        return docx(
+            table(row(cell(paragraph("首表"))))
+            + del_region
+            + table(row(cell(paragraph("末表"))))
+        )
+
+    # One deleted table: the parser numbers the last visible table t=2.
+    one_deleted = payload(f"<w:del>{deleted_outer}</w:del>")
+    existing = set(_parsed_docx_locators(one_deleted))
+    assert "cwp-docx-body/1|t=0|r=0|c=0|p=0" in existing
+    assert "cwp-docx-body/1|t=2|r=0|c=0|p=0" in existing
+    assert not any(locator.startswith("cwp-docx-body/1|t=1|") for locator in existing)
+
+    tables = _structure(one_deleted)["tables"]
+    assert isinstance(tables, list)
+    emitted = {
+        entry["locator"]
+        for table_structure in tables
+        for entry in table_structure["cells"]  # type: ignore[index]
+        if entry["locator"] is not None
+    }
+    assert emitted <= existing, (
+        "deleted-region numbering drifted from the parser: "
+        f"{sorted(emitted - existing)}"
+    )
+    # The deleted table itself never produced a structure.
+    assert len(tables) == 2
+    assert [t["native_index"] for t in tables] == [0, 2]  # type: ignore[index]
+
+    # A deleted table with a nested cell table consumes TWO indices (t=3 next).
+    two_deleted = payload(f"<w:del>{deleted_with_nested}</w:del>")
+    existing_two = set(_parsed_docx_locators(two_deleted))
+    assert "cwp-docx-body/1|t=3|r=0|c=0|p=0" in existing_two
+    tables_two = _structure(two_deleted)["tables"]
+    assert isinstance(tables_two, list)
+    emitted_two = {
+        entry["locator"]
+        for table_structure in tables_two
+        for entry in table_structure["cells"]  # type: ignore[index]
+        if entry["locator"] is not None
+    }
+    assert emitted_two <= existing_two, (
+        "deleted-region nested numbering drifted from the parser: "
+        f"{sorted(emitted_two - existing_two)}"
+    )
+    assert [t["native_index"] for t in tables_two] == [0, 3]  # type: ignore[index]
+
+    # w:moveFrom behaves exactly like w:del.
+    moved_away = payload(f"<w:moveFrom>{deleted_outer}</w:moveFrom>")
+    existing_moved = set(_parsed_docx_locators(moved_away))
+    assert "cwp-docx-body/1|t=2|r=0|c=0|p=0" in existing_moved
+    tables_moved = _structure(moved_away)["tables"]
+    assert isinstance(tables_moved, list)
+    emitted_moved = {
+        entry["locator"]
+        for table_structure in tables_moved
+        for entry in table_structure["cells"]  # type: ignore[index]
+        if entry["locator"] is not None
+    }
+    assert emitted_moved <= existing_moved
+    assert [t["native_index"] for t in tables_moved] == [0, 2]  # type: ignore[index]
+
+    # A table inside a w:p inside w:del is never reached by the parser's walk
+    # (body() never descends a paragraph), so it consumes NO index.
+    hidden_in_paragraph = payload(
+        f"<w:del><w:p>{deleted_outer}</w:p></w:del>"
+    )
+    existing_hidden = set(_parsed_docx_locators(hidden_in_paragraph))
+    assert "cwp-docx-body/1|t=1|r=0|c=0|p=0" in existing_hidden
+    tables_hidden = _structure(hidden_in_paragraph)["tables"]
+    assert isinstance(tables_hidden, list)
+    assert [t["native_index"] for t in tables_hidden] == [0, 1]  # type: ignore[index]
