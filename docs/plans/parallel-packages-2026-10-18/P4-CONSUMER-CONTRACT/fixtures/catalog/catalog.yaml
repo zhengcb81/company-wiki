@@ -1,0 +1,18 @@
+{
+  "catalog_dir": "${PROJECT_ROOT}/catalog/state",
+  "reusable_root_kinds": [
+    "directory"
+  ],
+  "roots": [
+    {
+      "adapter_id": "sidecar_filing_v1",
+      "kind": "directory",
+      "path": "${PROJECT_ROOT}/catalog/sources",
+      "priority": 10,
+      "read_only": true,
+      "reusable_for_filing": true,
+      "root_id": "p4_fixture"
+    }
+  ],
+  "schema_version": "1.0"
+}

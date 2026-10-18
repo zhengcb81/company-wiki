@@ -1,0 +1,435 @@
+{
+  "schema_version": "parallel-packages-handoff/1",
+  "lane": "P4-CONSUMER-CONTRACT",
+  "status": "FROZEN_AWAITING_ROOT_REVIEW",
+  "baseline_commit": "4045787f6bf77722d8125911f3475ecff9bca9b0",
+  "branch": "codex/p4-consumer-contract-20261018",
+  "commits": [
+    "cdf5be5ac1239e7a7419cf5b5bc1432a9b95ef0b",
+    "025c0b713ea935844595bdb2c09a6c1c36bf1b8c",
+    "5f840650f2cdc4be8d51bfa72fd523c1df0bbb36",
+    "5a6514982423ea10eec3d2e8ce40331b2295112e"
+  ],
+  "changed_paths": [
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/findings.md",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/build_fixtures.py",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/catalog.yaml",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt.source.json",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf.source.json",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/expected.json",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-20261018.log",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-allskip-20261018.log",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/handoff.md",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/progress.md",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/receipt.json",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/red-20261018.log",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/review/independent.md",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-mypy-20261018.log",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-ruff-20261018.log",
+    "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/task_plan.md",
+    "tests/integration/test_p4_contract/__init__.py",
+    "tests/integration/test_p4_contract/conftest.py",
+    "tests/integration/test_p4_contract/support/__init__.py",
+    "tests/integration/test_p4_contract/support/checks.py",
+    "tests/integration/test_p4_contract/support/constants.py",
+    "tests/integration/test_p4_contract/support/consumer.py",
+    "tests/integration/test_p4_contract/support/cwp.py",
+    "tests/integration/test_p4_contract/support/environment.py",
+    "tests/integration/test_p4_contract/support/jsonio.py",
+    "tests/integration/test_p4_contract/support/netguard.py",
+    "tests/integration/test_p4_contract/support/observations.py",
+    "tests/integration/test_p4_contract/support/readonly.py",
+    "tests/integration/test_p4_contract/support/receipt.py",
+    "tests/integration/test_p4_contract/support/report.py",
+    "tests/integration/test_p4_contract/support/sessionreport.py",
+    "tests/integration/test_p4_contract/test_p4_consumer_readonly.py",
+    "tests/integration/test_p4_contract/test_p4_env_guard.py",
+    "tests/integration/test_p4_contract/test_p4_identity_period.py",
+    "tests/integration/test_p4_contract/test_p4_network_model.py",
+    "tests/integration/test_p4_contract/test_p4_observation_shape.py",
+    "tests/integration/test_p4_contract/test_p4_receipt_schema.py",
+    "tests/integration/test_p4_contract/test_p4_ref_roundtrip.py",
+    "tests/integration/test_p4_contract/test_p4_unit_grounding.py",
+    "tests/integration/test_p4_contract/test_p4_unknown_availability.py"
+  ],
+  "file_bindings": [
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/findings.md",
+      "sha256": "f274756118c6fdebd87965343f6e186c4fb920ea40c1c6c1bd1a4e5bb7acb186",
+      "bytes": 10000
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/build_fixtures.py",
+      "sha256": "a8af68f3fa40d795160e4fdd7f714dc0c4aa4b1b09fbb61f900c23f645577ca0",
+      "bytes": 7090
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/catalog.yaml",
+      "sha256": "97f695c3a5d599945dd42f9936cb7eb685fd0a1f7d0a5b778ef2e9147486b973",
+      "bytes": 387
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt",
+      "sha256": "184a7f6604c734973ccc8692ad50b5fa7633ff66b88345c312d9c54c0fdef101",
+      "bytes": 94
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt.source.json",
+      "sha256": "07ff4969ff7c1777190e9350a948dc0a329b4968f0891b64d3616b6694fc40c0",
+      "bytes": 706
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf",
+      "sha256": "0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+      "bytes": 61
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf.source.json",
+      "sha256": "197194294dc227afbcdd2e9aafe592c1df115bb43e5964c3c6a638967d1705e0",
+      "bytes": 710
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/expected.json",
+      "sha256": "61c34c6bde64058db9df3c22944253ea1b2cc0b4895b364cadc921aff816d79f",
+      "bytes": 2258
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-20261018.log",
+      "sha256": "c7e9c5f001071ebe88cc10de603a7193cb2457c51d078ebc56a927e00759497c",
+      "bytes": 3684
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-allskip-20261018.log",
+      "sha256": "763356b0d4fe22f1f640f9476c7fa53aa289fdea1a5240e6883a96835bdf8232",
+      "bytes": 11518
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/handoff.md",
+      "sha256": "1a00473b4d67514618412e1371e5a8f3e65abc4a01f83bd7a5cb68b3f5e04b14",
+      "bytes": 4926
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/progress.md",
+      "sha256": "5a25d86b3a936b3da211f184cd047fb0286a5857379726dd9612e97084a460aa",
+      "bytes": 5516
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/receipt.json",
+      "sha256": "bd07a021b7a3ac524e89cec4f63791e7126f60d79c7f33e6897d86b1a11330a3",
+      "bytes": 13852
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/red-20261018.log",
+      "sha256": "485de78bab8fa6ecc304dd3c2ed8b8da68ed17365fd6acb6243b949429afd789",
+      "bytes": 19342
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/review/independent.md",
+      "sha256": "e7b1e3d3b1e668923f0f80c61028b21ac7be096c4b14b471e126c81482b33791",
+      "bytes": 24891
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-mypy-20261018.log",
+      "sha256": "c29063cf0862d0194a9a684226adf9f83be7997ba3d005ce5b8b510949e8aff2",
+      "bytes": 92
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-ruff-20261018.log",
+      "sha256": "af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+      "bytes": 42
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/task_plan.md",
+      "sha256": "a01ecef08fed622255e2bfd806cdc8e86906c7d396649b3fceb6af02cea02a49",
+      "bytes": 7127
+    },
+    {
+      "path": "tests/integration/test_p4_contract/__init__.py",
+      "sha256": "c43a62f1a518dac7ad1d61c87353670b13f7ef4bd8226febb6a2ab983c61d0da",
+      "bytes": 264
+    },
+    {
+      "path": "tests/integration/test_p4_contract/conftest.py",
+      "sha256": "8622b3862d72498d7c67b47fa7a04b12c2167e0f1716fdfbf3b03344eef8915b",
+      "bytes": 9840
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/__init__.py",
+      "sha256": "c36dd5591685385a8c5f989cc1adcfa171a7c048a6f584d8ba639527a3eca37e",
+      "bytes": 162
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/checks.py",
+      "sha256": "267044e1762785b8a0a0da93b0865fcda220103afa3b0e143d37f466513c3796",
+      "bytes": 13729
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/constants.py",
+      "sha256": "8163ce720f27dbef41fadfbfb4d3a9e740abc81aae76ce39d08dc358b1f1fc08",
+      "bytes": 4260
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/consumer.py",
+      "sha256": "93c8fd9a0b7bb5ac7ccb2d15e300748b74179f2a356106b54a681c9bc6877c5c",
+      "bytes": 10612
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/cwp.py",
+      "sha256": "9c2b4e703359a336e0ce85539b9941b077539aad2de27c0c2e2e2fec11a860f2",
+      "bytes": 10074
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/environment.py",
+      "sha256": "dc8356220aeff4b5c8b590d89491f6c2fb34d03434d13be4fe65277241450393",
+      "bytes": 2919
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/jsonio.py",
+      "sha256": "d43efd465d00604e34e9d4e157cd7c15845d397c35f28ef4712ea24373fff8c4",
+      "bytes": 2940
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/netguard.py",
+      "sha256": "8d0d6b78e58e14873674d1e4af586531028f7c66b27fd609ff168ddc6ce4d871",
+      "bytes": 2707
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/observations.py",
+      "sha256": "3edbd8d67f96d7676f1842f0e481e8364fcff2e20402c3fa66fd0f769c9032c2",
+      "bytes": 4962
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/readonly.py",
+      "sha256": "b7d78ec4a1dcc278577769a254ec7f23a65cc44b65ccceb79d9c3034c60ee4c5",
+      "bytes": 4282
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/receipt.py",
+      "sha256": "ef1fe3b0049a0b2ab59d2e16235ce244465cd1ad8dd19d6bc7537ff3c291cd83",
+      "bytes": 4828
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/report.py",
+      "sha256": "036c95ffe518ab95fc355fff9390f7b81f921713674630c6bad1c53374264d77",
+      "bytes": 3275
+    },
+    {
+      "path": "tests/integration/test_p4_contract/support/sessionreport.py",
+      "sha256": "022d00b5867b9f83c6da173c73c7e4be9fb93b57392d7f3df003c23d1fae112e",
+      "bytes": 8362
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_consumer_readonly.py",
+      "sha256": "c29011763343353d7a1c27b0553a26c438f5d6808d27b8f7388130a852363f88",
+      "bytes": 6319
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_env_guard.py",
+      "sha256": "ead9ee8cf5cfe0a08e8a734966885bd55342893c0b262bfa115487591035391b",
+      "bytes": 2513
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_identity_period.py",
+      "sha256": "edf2972e814c99caa1d3fc09cb420c22759e594775d28e63404067658b35cbf0",
+      "bytes": 4792
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_network_model.py",
+      "sha256": "3123600d585431753921d5b1635c952f6fad7dfaf4e299f5fa45c37d0c91fb10",
+      "bytes": 5307
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_observation_shape.py",
+      "sha256": "06f286b2e4c087bf7dd0e15512dfe5cfdf3b1151903a1b69964e83cd76016853",
+      "bytes": 4487
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_receipt_schema.py",
+      "sha256": "e70c036a22ee996bdad70d5483f1819b99c8a7007f0639e07fe5244a7ee45d74",
+      "bytes": 6763
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_ref_roundtrip.py",
+      "sha256": "e2ba9daed454be7beb9e6611c31f4647bcf7e4072cd940af71865c22d810cecb",
+      "bytes": 4111
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_unit_grounding.py",
+      "sha256": "5e32d0d2a5f168ee00193826d91edaf59ee9331a089f32163f6ad24c6e4b6211",
+      "bytes": 4811
+    },
+    {
+      "path": "tests/integration/test_p4_contract/test_p4_unknown_availability.py",
+      "sha256": "04b4a433d6610078f75191e7400e198eb22b463fa3d5bad4d9f6c0ad11d122cb",
+      "bytes": 3412
+    }
+  ],
+  "interface_versions": {
+    "observation": "p4-consumer-observation/1",
+    "receipt": "p4-contract-receipt/1",
+    "commands": "p4-consumer-commands/1",
+    "source_ref": "2.0",
+    "source_read_receipt": "2.1",
+    "availability_receipt": "2.2",
+    "source_export_v2": "2.0.0",
+    "evidence_span": "1.0.0"
+  },
+  "tests": [
+    {
+      "command": "python -m pytest tests/integration/test_p4_contract -q -p no:cacheprovider",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 34,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-allskip-20261018.log",
+      "receipt_sha256": "763356b0d4fe22f1f640f9476c7fa53aa289fdea1a5240e6883a96835bdf8232"
+    },
+    {
+      "command": "CWP_P4_CATALOG_CONFIG=<card>/fixtures/catalog/catalog.yaml; python -m pytest tests/integration/test_p4_contract -q -p no:cacheprovider",
+      "exit_code": 0,
+      "passed": 34,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-20261018.log",
+      "receipt_sha256": "c7e9c5f001071ebe88cc10de603a7193cb2457c51d078ebc56a927e00759497c"
+    },
+    {
+      "command": "python -m ruff check tests/integration/test_p4_contract",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-ruff-20261018.log",
+      "receipt_sha256": "af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af"
+    },
+    {
+      "command": "python -m mypy tests/integration/test_p4_contract",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-mypy-20261018.log",
+      "receipt_sha256": "c29063cf0862d0194a9a684226adf9f83be7997ba3d005ce5b8b510949e8aff2"
+    }
+  ],
+  "red_receipt": {
+    "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/red-20261018.log",
+    "sha256": "485de78bab8fa6ecc304dd3c2ed8b8da68ed17365fd6acb6243b949429afd789",
+    "first_failure": "test_p4_receipt_counts_match_pytest_summary: AssertionError: no pytest outcome was recorded - pytest_runtest_logreport must feed sessionreport.record_outcome (assert 0 > 0); plus 12 setup errors catalog_unavailable = missing fixture-state wiring. 1 failed, 19 passed, 1 skipped, 12 errors."
+  },
+  "fixtures": [
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/catalog.yaml",
+      "sha256": "97f695c3a5d599945dd42f9936cb7eb685fd0a1f7d0a5b778ef2e9147486b973",
+      "kind": "synthetic"
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt",
+      "sha256": "184a7f6604c734973ccc8692ad50b5fa7633ff66b88345c312d9c54c0fdef101",
+      "kind": "synthetic"
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt.source.json",
+      "sha256": "07ff4969ff7c1777190e9350a948dc0a329b4968f0891b64d3616b6694fc40c0",
+      "kind": "synthetic"
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf",
+      "sha256": "0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+      "kind": "synthetic"
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf.source.json",
+      "sha256": "197194294dc227afbcdd2e9aafe592c1df115bb43e5964c3c6a638967d1705e0",
+      "kind": "synthetic"
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/expected.json",
+      "sha256": "61c34c6bde64058db9df3c22944253ea1b2cc0b4895b364cadc921aff816d79f",
+      "kind": "synthetic"
+    },
+    {
+      "path": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/build_fixtures.py",
+      "sha256": "a8af68f3fa40d795160e4fdd7f714dc0c4aa4b1b09fbb61f900c23f645577ca0",
+      "kind": "synthetic"
+    }
+  ],
+  "not_run": [
+    "真实 FF/RF 消费端仓库读取：CWP_P4_FF_ROOT/CWP_P4_RF_ROOT 与 CWP_P4_CONSUMER_COMMANDS 未由 ROOT 提供，消费端用例如实 not_evaluated",
+    "真实生产 catalog：本卡全部输入为 fixtures/ 合成 catalog（card §7 完成定义 6）",
+    "mypy 生产模块：本卡未新增 src/ 生产模块，mypy 目标为测试包本身（已跑，24 files 无问题）"
+  ],
+  "known_limits": [
+    "消费端映射取决于 ROOT 提供的命令清单",
+    "未跑生产 catalog",
+    "RED 仅以 red-20261018.log 留档，无 RED 态提交，无法 checkout 复现（独立审查记为 known_limit，task_plan/findings 两处过期陈述已更正）",
+    "counts.not_evaluated 计契约用例（4 个）而非 pytest 测试数，收据 limitations 第 4 条已显式声明",
+    "夹具级硬失败在 pytest 终端表现为 errors（exit≠0 且收据 status=fail/counts.failed 保持诚实）"
+  ],
+  "root_integration_steps": [
+    "提供 consumer-commands.json 与只读 catalog 后复跑一次",
+    "把 receipt.cases 的 fail/not_evaluated 纳入发布前对照",
+    "P4 不进入 pre-push；由 ROOT 在大节点显式运行"
+  ],
+  "scope_proof": {
+    "production_writes": 0,
+    "config_writes": 0,
+    "db_writes": 0,
+    "original_reads": 0,
+    "original_writes": 0,
+    "network_calls": 0,
+    "model_calls": 0,
+    "key_reads": 0,
+    "forbidden_paths_touched": []
+  },
+  "independent_review": {
+    "reviewer": "independent-reviewer (non-author, non-ROOT)",
+    "verdict": "PASS",
+    "report": "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/review/independent.md",
+    "bound_files_sha256": [
+      "tests/integration/test_p4_contract/__init__.py|c43a62f1a518dac7ad1d61c87353670b13f7ef4bd8226febb6a2ab983c61d0da",
+      "tests/integration/test_p4_contract/support/__init__.py|c36dd5591685385a8c5f989cc1adcfa171a7c048a6f584d8ba639527a3eca37e",
+      "tests/integration/test_p4_contract/support/checks.py|267044e1762785b8a0a0da93b0865fcda220103afa3b0e143d37f466513c3796",
+      "tests/integration/test_p4_contract/support/constants.py|8163ce720f27dbef41fadfbfb4d3a9e740abc81aae76ce39d08dc358b1f1fc08",
+      "tests/integration/test_p4_contract/support/consumer.py|93c8fd9a0b7bb5ac7ccb2d15e300748b74179f2a356106b54a681c9bc6877c5c",
+      "tests/integration/test_p4_contract/support/cwp.py|9c2b4e703359a336e0ce85539b9941b077539aad2de27c0c2e2e2fec11a860f2",
+      "tests/integration/test_p4_contract/support/jsonio.py|d43efd465d00604e34e9d4e157cd7c15845d397c35f28ef4712ea24373fff8c4",
+      "tests/integration/test_p4_contract/support/netguard.py|8d0d6b78e58e14873674d1e4af586531028f7c66b27fd609ff168ddc6ce4d871",
+      "tests/integration/test_p4_contract/support/observations.py|3edbd8d67f96d7676f1842f0e481e8364fcff2e20402c3fa66fd0f769c9032c2",
+      "tests/integration/test_p4_contract/support/readonly.py|b7d78ec4a1dcc278577769a254ec7f23a65cc44b65ccceb79d9c3034c60ee4c5",
+      "tests/integration/test_p4_contract/support/receipt.py|ef1fe3b0049a0b2ab59d2e16235ce244465cd1ad8dd19d6bc7537ff3c291cd83",
+      "tests/integration/test_p4_contract/support/report.py|036c95ffe518ab95fc355fff9390f7b81f921713674630c6bad1c53374264d77",
+      "tests/integration/test_p4_contract/test_p4_consumer_readonly.py|c29011763343353d7a1c27b0553a26c438f5d6808d27b8f7388130a852363f88",
+      "tests/integration/test_p4_contract/test_p4_env_guard.py|ead9ee8cf5cfe0a08e8a734966885bd55342893c0b262bfa115487591035391b",
+      "tests/integration/test_p4_contract/test_p4_identity_period.py|edf2972e814c99caa1d3fc09cb420c22759e594775d28e63404067658b35cbf0",
+      "tests/integration/test_p4_contract/test_p4_network_model.py|3123600d585431753921d5b1635c952f6fad7dfaf4e299f5fa45c37d0c91fb10",
+      "tests/integration/test_p4_contract/test_p4_observation_shape.py|06f286b2e4c087bf7dd0e15512dfe5cfdf3b1151903a1b69964e83cd76016853",
+      "tests/integration/test_p4_contract/test_p4_receipt_schema.py|e70c036a22ee996bdad70d5483f1819b99c8a7007f0639e07fe5244a7ee45d74",
+      "tests/integration/test_p4_contract/test_p4_ref_roundtrip.py|e2ba9daed454be7beb9e6611c31f4647bcf7e4072cd940af71865c22d810cecb",
+      "tests/integration/test_p4_contract/test_p4_unit_grounding.py|5e32d0d2a5f168ee00193826d91edaf59ee9331a089f32163f6ad24c6e4b6211",
+      "tests/integration/test_p4_contract/test_p4_unknown_availability.py|04b4a433d6610078f75191e7400e198eb22b463fa3d5bad4d9f6c0ad11d122cb",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/card.md|44e0dae5e67687239173fd72485c12e914840cecdd833632751b4f88dd13202c",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/progress.md|2d7d129b4d9cf917fd717834847ef737d8addbfd03ae697f3b21f4aba99972af",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/red-20261018.log|485de78bab8fa6ecc304dd3c2ed8b8da68ed17365fd6acb6243b949429afd789",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-20261018.log|c7e9c5f001071ebe88cc10de603a7193cb2457c51d078ebc56a927e00759497c",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/green-allskip-20261018.log|763356b0d4fe22f1f640f9476c7fa53aa289fdea1a5240e6883a96835bdf8232",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-ruff-20261018.log|af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/static-mypy-20261018.log|c29063cf0862d0194a9a684226adf9f83be7997ba3d005ce5b8b510949e8aff2",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/build_fixtures.py|a8af68f3fa40d795160e4fdd7f714dc0c4aa4b1b09fbb61f900c23f645577ca0",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/expected.json|61c34c6bde64058db9df3c22944253ea1b2cc0b4895b364cadc921aff816d79f",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/catalog.yaml|97f695c3a5d599945dd42f9936cb7eb685fd0a1f7d0a5b778ef2e9147486b973",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt|184a7f6604c734973ccc8692ad50b5fa7633ff66b88345c312d9c54c0fdef101",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/annual-2025.txt.source.json|07ff4969ff7c1777190e9350a948dc0a329b4968f0891b64d3616b6694fc40c0",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf|0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+      "docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/fixtures/catalog/sources/disclosure.pdf.source.json|197194294dc227afbcdd2e9aafe592c1df115bb43e5964c3c6a638967d1705e0",
+      "docs/plans/parallel-packages-2026-10-18/INTERFACES.md|b274baaa02fe9d54d68c275d3e53a66d2e89497c6cc5f076b3c84cccafa69c83",
+      "docs/plans/parallel-packages-2026-10-18/README.md|7e51add5966e35984587e4bd937a89c18b29365367b9195f976f7cd063bddf07",
+      "tests/conftest.py|c8746a2694c3491688478d06e998935e403e0cef0c9f52afa886de4eafaad353",
+      "tests/integration/test_p4_contract/conftest.py|8622b3862d72498d7c67b47fa7a04b12c2167e0f1716fdfbf3b03344eef8915b",
+      "tests/integration/test_p4_contract/support/environment.py|dc8356220aeff4b5c8b590d89491f6c2fb34d03434d13be4fe65277241450393",
+      "tests/integration/test_p4_contract/support/sessionreport.py|022d00b5867b9f83c6da173c73c7e4be9fb93b57392d7f3df003c23d1fae112e"
+    ]
+  }
+}
