@@ -1,6 +1,11 @@
 # 并行施工包 2026-10-18（P1–P4）
 
-状态：**IMPLEMENTED_PENDING_ROOT_RECEPTION**（2026-10-18 更新；起草时为 READY_TO_DISPATCH）。本目录只放施工卡与交接约定，不含实现。四张卡已在本地分支 `codex/p1-ocr-text-20261018`、`codex/p2-office-table-20261018`、`codex/p3-identity-audit-20261018`、`codex/p4-consumer-contract-20261018` 实现完毕，写集互斥已核实（见下方写集表），均**未推送**，等待 ROOT 接收；接手者不要再重复派工。
+状态：**P1/P4 RECEIVED；P2/P3 IMPLEMENTED_PENDING_ROOT_RECEPTION**（2026-10-18 更新；起草时为 READY_TO_DISPATCH）。本目录只放施工卡与交接约定，不含实现。四张卡已在本地分支 `codex/p1-ocr-text-20261018`、`codex/p2-office-table-20261018`、`codex/p3-identity-audit-20261018`、`codex/p4-consumer-contract-20261018` 实现完毕，写集互斥已核实（见下方写集表），均**未推送**。
+
+**ROOT 接收（2026-10-18）**：P1 与 P4 已合入本地 `master`（合并提交 `09a8dded`、`626eb32f`）。
+- P1：`tests/unit/test_p1_ocr_text` **40 passed**；`ruff`/`mypy` 干净；独立复审 round 2 PASS。已知限制：未接生产、未跑真实扫描件。
+- P4：`tests/integration/test_p4_contract` 在 `CWP_P4_CATALOG_CONFIG=<本卡 fixtures>/catalog/catalog.yaml` 下 **34 passed**；无 env 时 34 skipped（按卡设计，非静默通过）；独立复审 PASS。P4 为 opt-in，不进 pre-push。
+- P2/P3 仍为 IMPLEMENTED_PENDING_ROOT_RECEPTION。
 起草人：外部 agent；接收与验收：ROOT。主线 PWF 为 `docs/plans/document-understanding-2026-10-13`（母）与 `docs/plans/du11-source-closure-2026-10-18`（当前 B2 来源闭合），本目录的四张卡**不是**主线的一部分，也不改变主线状态。
 
 ## 1. 四张卡一览
