@@ -3,7 +3,7 @@
 - 复审 P1-PERF-LONG-NAME：64 字回看会截断合法的长拉丁产品名 → 已修（边界感知放宽 64→256→1024→4096，仍被截断则 defer）。
 - 复审 P1-DEFER-4096：截断被当成“没有声明”返回 `missing` → 已修：新增 `scan_product_declarations` 返回 `clipped` 标志，closure 返回 `partial` + `antecedent_window_clipped`，不再从“未检查完”推断缺失。
 - 最终绑定：HEAD `2a80acf6`；三源回放 `b2-final3-20261018`（CN 10/10）与 `b2-real-sources-final2-20261018`（HK 7/7、US 8/8），work 6,133,095 / 13,157,181 / 7,989,484，原件未变，0 API。
-- `tests/unit/du11_source_closure` **109 passed**；ruff 通过。
+- `tests/unit/du11_source_closure` **110 passed**（复审后又补了目标 clipped 测试）；ruff 通过。
 
 ---
 ## C 第九轮：4.0.8 覆盖指令回归，已回退（2026-10-18）

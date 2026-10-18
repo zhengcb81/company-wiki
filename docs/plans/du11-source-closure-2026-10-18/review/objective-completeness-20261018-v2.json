@@ -1,0 +1,142 @@
+{
+  "schema": "du11-objective-completeness-v2/1",
+  "reviewed_at": "2026-10-18T20:10:00+08:00",
+  "head": "26a287258cc82e3e4f77f15c2c576e9c2f9f3ebf",
+  "code_commit": "2a80acf6",
+  "verdict": "READY_TO_HANDOFF_EXCEPT_C_CONTENT",
+  "p1_open": [],
+  "items": [
+    {
+      "id": "B2_FINAL_REVIEW",
+      "status": "CLOSED_WITH_P2_DOC_STALE",
+      "evidence": "review/b2-antecedent-final-review-20261018-v3.md conclusion PASS; P1 long-name and defer-4096 closed.",
+      "stale": "Report still says 109 tests and 2a80 CI pending; actual 110 and CI success."
+    },
+    {
+      "id": "REPLAY_BINDING",
+      "status": "DONE",
+      "evidence": "b2-final3 CN 10/10 work 6,133,095; b2-real-sources-final2 HK 7/7 work 13,157,181; US 8/8 work 7,989,484; 17 bindings match current code; 0 API; original/gold unchanged."
+    },
+    {
+      "id": "CI",
+      "status": "DONE",
+      "evidence": "b2-final3/ci-39139605025.json: id 39139605025, head_sha 2a80acf6, completed/success, run 368."
+    },
+    {
+      "id": "PACKAGE_P2_WRITE_SET",
+      "status": "DONE",
+      "evidence": "README.md:27-28 no longer writes docx_parser/pptx_parser; P2 card:22/40/183 says no write/forbidden/0 diff; consistent."
+    },
+    {
+      "id": "USAGE_LEDGER",
+      "status": "DONE",
+      "evidence": "usage.jsonl 65 rows, 44 unique attempts, 900,711 tokens/$0.238405; task_plan:124, progress:124, findings:124, handoff:18/61 all match."
+    },
+    {
+      "id": "HK_BILLING",
+      "status": "DONE",
+      "evidence": "task_plan/progress/findings:124 state no settled invoice but 69,046/$0.031208 unknown hold; handoff:15 only says 401 not run but no zero-charge claim."
+    },
+    {
+      "id": "DECISION_DOC",
+      "status": "CLOSED_WITH_P2_DOC_STALE",
+      "evidence": "c-coverage-decision:35/38 says B failed and reverted; :52 recommends A or C; :60 still lists A/B/C/D and heading says three paths."
+    }
+  ],
+  "residual_p2": [
+    {
+      "id": "P2-FINAL-REVIEW-STALE",
+      "title": "B2 final review v3 still says 109 tests and CI pending",
+      "evidence": "review/b2-antecedent-final-review-20261018-v3.md:3,9,14,29,35 vs actual 110 and ci-39139605025 success."
+    },
+    {
+      "id": "P2-FINDINGS-COUNT",
+      "title": "findings.md says 109 while task_plan/progress/handoff say 110",
+      "evidence": "findings.md:6 vs task_plan.md:4, progress.md:4, harness-handoff.md:14."
+    },
+    {
+      "id": "P2-DECISION-B",
+      "title": "c-coverage-decision bottom still offers B",
+      "evidence": "c-coverage-decision:60 says choose A/B/C/D; :25 heading three paths but includes four sections; B is marked failed at :35 and removed by :52."
+    },
+    {
+      "id": "P2-HANDOFF-HK-HOLD",
+      "title": "handoff does not state HK unknown hold",
+      "evidence": "harness-handoff.md:15 says HK 401 not run; task_plan:124 has 69,046/$0.031208 unknown hold. Optional alignment."
+    }
+  ],
+  "tests": {
+    "command": "python -m pytest tests/unit/du11_source_closure -q -p no:cacheprovider",
+    "collected": 110,
+    "passed": 110,
+    "seconds": 6.11,
+    "ruff": "All checks passed"
+  },
+  "final_evidence": {
+    "cn": {
+      "path": "b2-final3-20261018/cn-h1.json",
+      "selected_required": "10/10",
+      "work_used": 6133095,
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "hk": {
+      "path": "b2-real-sources-final2-20261018/hk-annual.json",
+      "selected_required": "7/7",
+      "work_used": 13157181,
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "us": {
+      "path": "b2-real-sources-final2-20261018/us-10k.json",
+      "selected_required": "8/8",
+      "work_used": 7989484,
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "replay": {
+      "path": "b2-real-sources-final2-20261018/replay.json",
+      "api_calls": 0,
+      "raw_copies": 0,
+      "source_unchanged": true,
+      "bindings_match_current": true,
+      "product_reference_sha256": "026573637751",
+      "relations_sha256": "bed487816480",
+      "narrative_antecedent_sha256": "41d42ef7d438"
+    },
+    "ci": {
+      "path": "b2-final3-20261018/ci-39139605025.json",
+      "head_sha": "2a80acf6",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 368
+    }
+  },
+  "handoff_conditions": [
+    "Update final review v3 to 110 tests and CI 39139605025 success.",
+    "Update findings.md 109 to 110.",
+    "Remove B from c-coverage-decision choices and fix three-path heading.",
+    "Optional: mention HK unknown hold in handoff."
+  ],
+  "known_c_content_gap": {
+    "cn_best": "8/10 required, 5/7 critical",
+    "us_best": "4/8 required, 4/8 critical",
+    "hk": "401 blocked",
+    "decision": "A (secondary call) or C (switch model); B failed; D not recommended"
+  },
+  "redlines": {
+    "source_test_config_writes_by_review": 0,
+    "git_writes": 0,
+    "provider_calls": 0,
+    "test_deletions_or_assertion_weakening": "none found",
+    "hook_bypass": "none found"
+  },
+  "notes": [
+    "Ready except C content; residual issues are documentation consistency P2, not functional evidence gaps.",
+    "The B2 final review v3 PASS conclusion remains valid; its test count/CI paragraph is stale.",
+    "Report pair: review/objective-completeness-20261018-v2.md and .json."
+  ]
+}
