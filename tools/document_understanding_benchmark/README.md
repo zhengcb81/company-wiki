@@ -447,6 +447,14 @@ Live execution requires an explicit external preparation, the existing cumulativ
 ledger and a new output directory. It retains the prepared provider settings; no
 model selection or credential is stored in this tool. Example argv:
 
+Run live commands from the existing configured project directory. An isolated
+code worktree does not contain its ignored managed `.env`; silently running from
+that worktree can inherit a different credential. The normal `Config.load`
+precedence remains authoritative. The executable script can use an absolute
+path to a reviewed worktree; do not copy credentials into it or write them into
+preparations, logs or reports. With `registered_readonly`, identity snapshots and
+originals both resolve through the explicit source catalog configuration.
+
 ```powershell
 python -B tools/document_understanding_benchmark/phase_c_runner.py --mode live --sample cn-h1 --metadata <prepared-revision.json> --usage-ledger <existing-usage.jsonl> --output <new-receipt-dir> --consumer-projects <Projects-dir> --reading-model-projection reading-model-input/5
 ```
@@ -461,6 +469,10 @@ same reservation. Recovery requires exact source, task, model and frozen input
 identity, verifies saved bytes, and preserves the original charge and attempt.
 The existing manifest, actual decoder identity and artifact generation hashes
 remain the sole cache owner. No new store or approval chain is introduced.
+Unknown transport attempts retain their full token and fee holds in the same
+cumulative ledger. Subsequent explicit bounded operations must fit the remaining
+shared budget; an unknown-count diagnostic is not a second global stop. Nothing
+refunds an unknown hold or resets the ledger.
 
 Focused regression (all fixtures isolated and cleaned; zero provider calls):
 

@@ -81,6 +81,20 @@ def mother_totals(metadata_path: str | Path, usage_path: str | Path) -> dict:
     }
 
 
+def mother_budget_fits(totals: dict, *, tokens_bound: int, micro_usd_bound: int) -> bool:
+    """Unknown attempts already retain their full holds in charged totals.
+
+    Keep those holds and the shared ceilings; unknown count is a diagnostic,
+    not an additional global permission gate for unrelated bounded operations.
+    """
+    values = [totals[name] for name in (
+        "charged_tokens", "charged_micro_usd", "token_limit", "micro_usd_limit")]
+    if any(type(value) is not int or value < 0 for value in (*values, tokens_bound, micro_usd_bound)):
+        raise ValueError("mother budget requires nonnegative integer accounting")
+    return (totals["charged_tokens"] + tokens_bound <= totals["token_limit"]
+            and totals["charged_micro_usd"] + micro_usd_bound <= totals["micro_usd_limit"])
+
+
 def verify_preparation(meta: dict, *, mode: str) -> dict:
     before = {}
     for name, expected in meta["protected_fingerprints"].items():

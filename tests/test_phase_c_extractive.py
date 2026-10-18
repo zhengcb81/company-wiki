@@ -19,6 +19,34 @@ _CREATE_CONNECTION = socket.create_connection
 VERSION = "reading-model-input/5"
 
 
+def test_mother_budget_keeps_unknown_holds_without_a_second_global_stop(tmp_path):
+    metadata, ledger = tmp_path / "budget.json", tmp_path / "usage.jsonl"
+    metadata.write_text(json.dumps({"mother_budget": {
+        "prior_charged_tokens": 100, "prior_charged_micro_usd": 200,
+        "retained_fx_hold_micro_usd": 50, "token_limit": 1000, "micro_usd_limit": 2000,
+        "old_unknown_hold_count_already_in_baseline": 7}}), encoding="utf-8")
+    row = {"kind": "native_model_charge", "mode": "live", "database": "prior/AUTO.sqlite",
+           "attempt_id": "failed-transport", "usage_status": "unknown",
+           "charged_tokens": 300, "charged_micro_usd": 400}
+    ledger.write_text(json.dumps(row) + '\n', encoding="utf-8")
+    before = ledger.read_bytes()
+    totals = runner.mother_totals(metadata, ledger)
+    assert totals["new_unknown_count"] == 1 and totals["prior_unknown7_retained"] == 7
+    assert totals["charged_tokens"] == 400 and totals["charged_micro_usd"] == 650
+    assert runner.mother_budget_fits(totals, tokens_bound=600, micro_usd_bound=1350)
+    assert not runner.mother_budget_fits(totals, tokens_bound=601, micro_usd_bound=1350)
+    assert not runner.mother_budget_fits(totals, tokens_bound=600, micro_usd_bound=1351)
+    assert ledger.read_bytes() == before, "admission must never refund or rewrite an unknown hold"
+
+
+@pytest.mark.parametrize("value", [-1, True, 1.5])
+def test_mother_budget_rejects_invalid_accounting(value):
+    totals = {"charged_tokens": value, "charged_micro_usd": 1, "token_limit": 10,
+              "micro_usd_limit": 10, "new_unknown_count": 1}
+    with pytest.raises(ValueError):
+        runner.mother_budget_fits(totals, tokens_bound=1, micro_usd_bound=1)
+
+
 @pytest.mark.parametrize("version", ["reading-model-input/4", VERSION])
 def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_material(version):
     from copy import deepcopy
