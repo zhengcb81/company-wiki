@@ -7,7 +7,15 @@
 
 ## 交接结论
 
-先行的 RF、FF 两张 DU11 施工卡已验收并合入各自主线，CWP、RF、FF 本轮发布 CI 均为绿色。**整个计划没有完成。** 当前唯一主线是 CWP 的 B2 来源闭合：用有限、可追溯的原文上下文解决跨页后“该系列产品”等指代；完成后再验收真实摘要、缓存恢复和 FF/RF 实际消费。
+先行的 RF、FF 两张 DU11 施工卡已验收并合入各自主线，CWP、RF、FF 本轮发布 CI 均为绿色。**整个计划没有完成。**
+
+## 2026-10-18 最新状态
+
+- **B2 已完成并发布**：`d55d3369`（三审修复）、`6a2ee853`（性能修复），CI 绿；`tests/unit/du11_source_closure` 105 PASS；真实 CN/HK/US 回放 10/10、7/7、8/8，t32/t34 `selected_matches=0`。
+- **C 工程侧已通过**：CN（MiMo）与 US（MiniMax）各 1 次真实 POST，`activation_recovery=PASS`（同 attempt、无新增扣费），`cross_run_zero_POST=true`，FF 复用与 RF 读取通过；HK 因 `DEEPSEEK_API_KEY` 401 未跑。
+- **C 内容侧未通过**：CN required 8/10（critical 5/7），US 2–4/8。复审报告：`review/c-content-review-20261018-cn-v3.md`。
+- **待拍板**：覆盖缺口的三条路径见 `review/c-coverage-decision-20261018.md`（section 任务合并 / 覆盖修复二次尝试 / 换模型）；选定后重跑 CN/US 并做最终内容复审。
+- 累计付费：41 个 attempt、857,961 tokens / $0.2311（不含 metadata 记录的历史基线，上限 2M / $20）。
 
 不要把已接收的 RF/FF 施工卡重新打开，也不要把工程测试通过、原文选择金标命中或已有摘要缓存命中当作正式内容验收通过。
 
