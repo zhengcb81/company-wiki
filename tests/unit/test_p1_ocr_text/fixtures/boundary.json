@@ -1,0 +1,7 @@
+{
+  "width": 600,
+  "height": 800,
+  "lines": [
+    {"text": "Boundary box line", "box": [0, 0, 600, 800], "confidence": 0.95}
+  ]
+}

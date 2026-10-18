@@ -1,0 +1,10 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "Xray row three", "box": [50, 180, 750, 200], "confidence": 0.95},
+    {"text": "Zeta row one", "box": [50, 100, 750, 120], "confidence": 0.95},
+    {"text": "Whiskey row four", "box": [50, 220, 750, 240], "confidence": 0.95},
+    {"text": "Yankee row two", "box": [50, 140, 750, 160], "confidence": 0.95}
+  ]
+}

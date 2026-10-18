@@ -1,0 +1,9 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "AAAA", "box": [50, 100, 750, 110], "confidence": 0.95},
+    {"text": "CCCC", "box": [50, 130, 750, 140], "confidence": 0.95},
+    {"text": "BBBB", "box": [50, 160, 750, 170], "confidence": 0.42}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "Body second line", "box": [50, 140, 700, 160], "confidence": 0.95},
+    {"text": "Indented first line", "box": [90, 100, 700, 120], "confidence": 0.95},
+    {"text": "Body third line", "box": [50, 180, 700, 200], "confidence": 0.95}
+  ]
+}

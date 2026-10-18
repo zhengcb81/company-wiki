@@ -1,0 +1,11 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "Beta right two", "box": [500, 140, 750, 160], "confidence": 0.95},
+    {"text": "Alpha left one", "box": [50, 100, 300, 120], "confidence": 0.95},
+    {"text": "Beta right one", "box": [500, 100, 750, 120], "confidence": 0.95},
+    {"text": "Alpha left three", "box": [50, 180, 300, 200], "confidence": 0.95},
+    {"text": "Alpha left two", "box": [50, 140, 300, 160], "confidence": 0.95}
+  ]
+}

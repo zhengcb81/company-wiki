@@ -1,0 +1,10 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "LINEZERO", "box": [50, 100, 750, 110], "confidence": 0.95},
+    {"text": "LINEONE", "box": [50, 130, 750, 140], "confidence": 0.95},
+    {"text": "LINETWO", "box": [50, 160, 750, 170], "confidence": 0.95},
+    {"text": "LINETHREE", "box": [50, 190, 750, 200], "confidence": 0.95}
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "schema_version": "parallel-packages-handoff/1",
+  "lane": "P1-OCR-TEXT",
+  "status": "FROZEN_AWAITING_ROOT_REVIEW",
+  "baseline_commit": "4045787f6bf77722d8125911f3475ecff9bca9b0",
+  "branch": "codex/p1-ocr-text-20261018",
+  "commits": [
+    "7be453e12a266e0a0f4a524f73d39fe5a73b0c64",
+    "8ce778232da0cebb7f0b93ac38dec56841c86a4c",
+    "3bee74206da8f889b98f466fd62e58bf8c63fa7f"
+  ],
+  "changed_paths": [
+    "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/green-2026-10-18.log",
+    "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/handoff.md",
+    "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/red-2026-10-18.log",
+    "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/review/independent.md",
+    "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/static-2026-10-18.log",
+    "src/company_wiki/document_normalization/ocr_page_text.py",
+    "src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py",
+    "tests/unit/test_p1_ocr_text/conftest.py",
+    "tests/unit/test_p1_ocr_text/fixtures/boundary.json",
+    "tests/unit/test_p1_ocr_text/fixtures/crossing.json",
+    "tests/unit/test_p1_ocr_text/fixtures/empty_page.json",
+    "tests/unit/test_p1_ocr_text/fixtures/header_footer.json",
+    "tests/unit/test_p1_ocr_text/fixtures/indented_paragraph.json",
+    "tests/unit/test_p1_ocr_text/fixtures/low_confidence.json",
+    "tests/unit/test_p1_ocr_text/fixtures/over_limit.json",
+    "tests/unit/test_p1_ocr_text/fixtures/over_limit_mixed.json",
+    "tests/unit/test_p1_ocr_text/fixtures/shuffled.json",
+    "tests/unit/test_p1_ocr_text/fixtures/three_column.json",
+    "tests/unit/test_p1_ocr_text/fixtures/three_segment.json",
+    "tests/unit/test_p1_ocr_text/fixtures/two_column.json",
+    "tests/unit/test_p1_ocr_text/fixtures/two_column_with_header.json",
+    "tests/unit/test_p1_ocr_text/synth.py",
+    "tests/unit/test_p1_ocr_text/test_ocr_page_text.py",
+    "tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py"
+  ],
+  "file_bindings": [
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/green-2026-10-18.log", "sha256": "3af1caf4e5c25ba2cac0b7e942898b904e4ae7f9f49f3def0190e8ff8f0097fb", "bytes": 1349},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/handoff.md", "sha256": "8f49390b65ee0c7bb7ea880a258385b2c6543d1502dfe2238ae4f5e4f9146a66", "bytes": 5848},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/red-2026-10-18.log", "sha256": "1970ae277e7d4959246ce41b77586e8eb6012b1f5f64e74c5e1cfe24571a353f", "bytes": 16276},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/review/independent.md", "sha256": "387e47a9e35452ea8da47083ea44557cc9f2efb6bbc85e6d7eec1b3ba6af32f0", "bytes": 6438},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/static-2026-10-18.log", "sha256": "9631836a5712e965725f04d854bf866fdb7b6fc048b0781363c0eacf3005c7f3", "bytes": 238},
+    {"path": "src/company_wiki/document_normalization/ocr_page_text.py", "sha256": "29d0690a9459b5165534519343c95d45fe4f1e2ce724f6dfa6960128c85ab389", "bytes": 19095},
+    {"path": "src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py", "sha256": "02712372c3da28450d12c11bb4e351fcca5ed29630ad98f9266a1c900f5bedab", "bytes": 16115},
+    {"path": "tests/unit/test_p1_ocr_text/conftest.py", "sha256": "de212b50e603a9a1c93e2017fdec8fbcb5124c1129eb36db20f3c3f9aa547732", "bytes": 544},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/boundary.json", "sha256": "458efcd640128afd89030b009ff602708b6a0c3caa9cdf1998ab46a6d585f4ec", "bytes": 133},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/crossing.json", "sha256": "1d13f0b4a673b8b3923e188a4c89e11c34724b22077dac34ae227154a72b780f", "bytes": 276},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/empty_page.json", "sha256": "41b52bd7b6382f0cf1881b1f313261e79e764921017466b75efa750f7f79a8ec", "bytes": 51},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/header_footer.json", "sha256": "ebcc99fd3c7f5bc73c6a9d510998cb93d2e262921bc9867123f2c1aa850cb163", "bytes": 460},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/indented_paragraph.json", "sha256": "2a78bb2d9e7afffab32878f8fbb1e2f7dcd1748051f09bf7d4c52de2b9cf3e75", "bytes": 302},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/low_confidence.json", "sha256": "ec9fbb7ff986780b3c4043ad1fc8c7ad985140b9039b7a88dc970b48787cc1f2", "bytes": 301},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/over_limit.json", "sha256": "09e1500c075ae95cc8a8ac5d71e3b60ff597cf9df36f78e166ba8d1e7ee2b822", "bytes": 349},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/over_limit_mixed.json", "sha256": "a08f6c8c8c0aa078f2588f8b9a8a94d364b4272d01ce5293f1bcc535114eacc8", "bytes": 264},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/shuffled.json", "sha256": "60eb06affb42936b5010c05d76e40fa3a8a4347ded744b074084b15d783f79c9", "bytes": 374},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/three_column.json", "sha256": "ee73b20ec21bb058c08097a0f163d2bfb13e130588fc98a148856e6b1ad5e81c", "bytes": 278},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/three_segment.json", "sha256": "79012e0ad02bf7093fa64c35902f6e3dea79e6f843cbd25b71198ed6d5bf460e", "bytes": 275},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/two_column.json", "sha256": "774191e5bd6d9e1291442c7e8f60128644f7eb972554e38c29beff36af32fbba", "bytes": 458},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/two_column_with_header.json", "sha256": "4ea93d956850ec1639c05dacd2198dfd1d1b63cf22494df4baa4cde3114060ab", "bytes": 582},
+    {"path": "tests/unit/test_p1_ocr_text/synth.py", "sha256": "7dc426d2cd66d3e27f4bba901438ad2cc18054c2c497952bea54597049f273d5", "bytes": 2715},
+    {"path": "tests/unit/test_p1_ocr_text/test_ocr_page_text.py", "sha256": "c7f2ac12d5a26735be454a27551a077c2b2dcc37b6d794012c0472648f87eab5", "bytes": 19042},
+    {"path": "tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py", "sha256": "a818792d616eabf0dfd71894eebc62825b78ad217847e0d0e796a5a4eb1c0ef9", "bytes": 13376}
+  ],
+  "interface_versions": {
+    "p1_page_text": "cwp-ocr-page-text/1",
+    "adapter": "pdf-ocr-page-adapter/1"
+  },
+  "tests": [
+    {
+      "command": "$env:PYTHONPATH = (Join-Path (Get-Location) 'src'); python -m pytest tests/unit/test_p1_ocr_text -q -p no:cacheprovider",
+      "exit_code": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/green-2026-10-18.log",
+      "receipt_sha256": "3af1caf4e5c25ba2cac0b7e942898b904e4ae7f9f49f3def0190e8ff8f0097fb"
+    },
+    {
+      "command": "python -m ruff check src/company_wiki/document_normalization/ocr_page_text.py src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py tests/unit/test_p1_ocr_text",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/static-2026-10-18.log",
+      "receipt_sha256": "9631836a5712e965725f04d854bf866fdb7b6fc048b0781363c0eacf3005c7f3"
+    },
+    {
+      "command": "python -m mypy src/company_wiki/document_normalization/ocr_page_text.py src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/static-2026-10-18.log",
+      "receipt_sha256": "9631836a5712e965725f04d854bf866fdb7b6fc048b0781363c0eacf3005c7f3"
+    }
+  ],
+  "red_receipt": {
+    "path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/red-2026-10-18.log",
+    "sha256": "1970ae277e7d4959246ce41b77586e8eb6012b1f5f64e74c5e1cfe24571a353f",
+    "first_failure": "test_ocr_page_text.py:57 AssertionError: two-column page must split into 2 columns -- assert 0 == 2 (placeholder produced no columns). 40 failed, all assertion-level, run against the pre-implementation stub from commit 7be453e1 so line numbers match the committed tests exactly."
+  },
+  "fixtures": [
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/boundary.json", "sha256": "458efcd640128afd89030b009ff602708b6a0c3caa9cdf1998ab46a6d585f4ec", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/crossing.json", "sha256": "1d13f0b4a673b8b3923e188a4c89e11c34724b22077dac34ae227154a72b780f", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/empty_page.json", "sha256": "41b52bd7b6382f0cf1881b1f313261e79e764921017466b75efa750f7f79a8ec", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/header_footer.json", "sha256": "ebcc99fd3c7f5bc73c6a9d510998cb93d2e262921bc9867123f2c1aa850cb163", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/indented_paragraph.json", "sha256": "2a78bb2d9e7afffab32878f8fbb1e2f7dcd1748051f09bf7d4c52de2b9cf3e75", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/low_confidence.json", "sha256": "ec9fbb7ff986780b3c4043ad1fc8c7ad985140b9039b7a88dc970b48787cc1f2", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/over_limit.json", "sha256": "09e1500c075ae95cc8a8ac5d71e3b60ff597cf9df36f78e166ba8d1e7ee2b822", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/over_limit_mixed.json", "sha256": "a08f6c8c8c0aa078f2588f8b9a8a94d364b4272d01ce5293f1bcc535114eacc8", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/shuffled.json", "sha256": "60eb06affb42936b5010c05d76e40fa3a8a4347ded744b074084b15d783f79c9", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/three_column.json", "sha256": "ee73b20ec21bb058c08097a0f163d2bfb13e130588fc98a148856e6b1ad5e81c", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/three_segment.json", "sha256": "79012e0ad02bf7093fa64c35902f6e3dea79e6f843cbd25b71198ed6d5bf460e", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/two_column.json", "sha256": "774191e5bd6d9e1291442c7e8f60128644f7eb972554e38c29beff36af32fbba", "kind": "synthetic"},
+    {"path": "tests/unit/test_p1_ocr_text/fixtures/two_column_with_header.json", "sha256": "4ea93d956850ec1639c05dacd2198dfd1d1b63cf22494df4baa4cde3114060ab", "kind": "synthetic"}
+  ],
+  "not_run": [
+    "真实扫描件 PDF 回放（归 ROOT 生产 E2E）",
+    "真实 OCR 引擎产出的 ImageOCRResult 质量评估",
+    "order_page_lines 接入真实 PDF 入口",
+    "adapt_ocr_pages 接在 pdf_page_aware 之前",
+    "原件 SHA 前后核对"
+  ],
+  "known_limits": [
+    "未实现页眉页脚检测",
+    "未处理竖排/旋转",
+    "未跑真实扫描件",
+    "页眉页脚仍进入正文并落在其几何列首尾；已由 two_column_with_header.json 反例证明不吞并分栏、不改变其余行顺序（审查 #2b 更正原稿未经验证的声明）",
+    "reason 字段与 p1_page_empty 超出 §5.1 字段表/§3 码表，但为卡 §5.1 第 75 行明文要求",
+    "column_overflow 无专属 §3 码，暂归入 p1_page_limit（明细注明列数超限），待 ROOT 决定是否增补",
+    "箱体越页防线在 ImageOCRResult 校验下仅 font_size 推导非有限比率一路可达，越页一路为防御性保留"
+  ],
+  "root_integration_steps": [
+    "在真实 PDF 入口把 ImageOCRResult 交给 order_page_lines",
+    "把 adapt_ocr_pages 接在 pdf_page_aware 之前，保持既有 locator 与 parser 版本",
+    "真实扫描件回放时核对原件 SHA 前后不变"
+  ],
+  "scope_proof": {
+    "production_writes": 0,
+    "config_writes": 0,
+    "db_writes": 0,
+    "original_reads": 0,
+    "original_writes": 0,
+    "network_calls": 0,
+    "model_calls": 0,
+    "key_reads": 0,
+    "forbidden_paths_touched": []
+  },
+  "independent_review": {
+    "reviewer": "4267adef (non-author, non-ROOT)",
+    "verdict": "PASS",
+    "report": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/review/independent.md",
+    "bound_files_sha256": [
+      "29d0690a9459b5165534519343c95d45fe4f1e2ce724f6dfa6960128c85ab389",
+      "02712372c3da28450d12c11bb4e351fcca5ed29630ad98f9266a1c900f5bedab"
+    ]
+  }
+}
