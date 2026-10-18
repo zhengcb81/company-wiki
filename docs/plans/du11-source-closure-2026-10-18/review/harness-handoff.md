@@ -21,6 +21,18 @@
 
 不要把已接收的 RF/FF 施工卡重新打开，也不要把工程测试通过、原文选择金标命中或已有摘要缓存命中当作正式内容验收通过。
 
+## 三仓验收（2026-10-18 复核）
+
+| 仓库 | 记录版本 | 当前 HEAD | 复核结果 |
+|---|---|---|---|
+| company-wiki | DU11 主线（本文件） | `8b148d49`（origin） | B2 终审 PASS；C 工程 PASS；C 内容 CN 8/10、US 2–4/8、HK 5/7（用户接受 8/10 收尾） |
+| revenue-forecast | runtime `f8002f5`；兼容表 `9669c4d7` | `9669c4d7`（clean，与 origin 同步） | 记录 CI `39095818018` success；本次 C 运行内 RF 读取（`rf-source`/`rf-narrative`）有收据 |
+| filing-fetch | `e8740748` | `e874074`（clean，与 origin 同步） | 记录 CI `39095654355` success（873 passed / 7 skipped）；本次 C 运行内 FF 复用（`ff-reuse`，`status=source_candidate`）有收据 |
+
+- **跨仓链路已验证的部分**：FF 复用已存在原件、RF 通过已发布只读接口读取摘要与证据（每次 C 运行都带 `ff-reuse`/`rf-*` 收据），CWP 侧身份/期间/SHA 校验通过。
+- **未在当前环境复跑**：RF/FF 的完整测试套件需要各自 CI 环境（RF 依赖 pymupdf/cryptography 等）；本机直接借 CWP venv 跑 FF 会出现环境性失败，不能当回归结论。要“三仓全部跑通”的本地证据，需按各自 `.github/workflows/quality.yml` 装依赖后复跑。
+- **仍开着的验收项**：C 内容质量（用户接受 8/10 收尾）；冻结 holdout 与 RF 审查循环按 handoff 第 72 行在 C 完成后执行。
+
 ## 当前基线
 
 | 项目 | 当前已发布版本 | 验证结果 |
