@@ -17,7 +17,7 @@
 - **覆盖修复（A）状态：实验性、默认关闭**。实现走现有 retry（两次 attempt、两次计费），`CW_SUMMARY_COVERAGE_REPAIR=1` 才启用；已实测两次 POST 并合并成功、run 进入 `activation_pending`。未解决：`activation-resume` 与重试 attempt 的 `reopen_paid_output` 冲突；MiMo 首响应 JSON 约每 3 次失败 1 次。默认关闭**只在本地未推提交**；`origin/master` 仍是无条件版本（见下方交付状态）。
 - **已拍板**（2026-10-18）：按 CN 8/10 收尾，不再为最后 1–2 条事实继续真实调用；覆盖修复的残余问题作为后续独立课题。
 - **交付状态（2026-10-18 更新）**：`origin/master` 已推进到 `3119e303`，**补写默认关闭的开关、两个修复、P1–P4 四包与收尾文档均已推送**（pre-push 门禁 GREEN）。收尾文档同时保留在 `origin/du11-close-docs`。此前挡住 master 的两个既有测试已按用户决定（2026-10-18：修或删）**删除**：`tests/contract/test_fresh_cache_behavior_receipts.py`（parser pin 期望新 generation、实际按源字节复用，前提已与现行缓存语义不符）与 `tests/integration/test_shared_reading_production_e2e.py::test_official_projection_...`（`LOCATOR_REPLAY_FAILED`；同文件其余 4 个用例保留）。两者都未被 CI workflow 或队列表引用，属本地契约测试。
-- 累计付费：**55 个 attempt、1,074,406 tokens / $0.2709**（ledger 去重口径，核对于 2026-10-18；含 HK 的 69,046 tokens / $0.031208 unknown hold；上限 2M / $20）。
+- 累计付费：**56 个 attempt、1,091,219 tokens / $0.278311**（`usage.jsonl` 按 database+attempt_id 去重，核对于 2026-10-18；含 HK 16,813 tokens / $0.00742，以及此前 69,046 tokens / $0.031208 的 unknown hold；上限 2M / $20）。
 
 不要把已接收的 RF/FF 施工卡重新打开，也不要把工程测试通过、原文选择金标命中或已有摘要缓存命中当作正式内容验收通过。
 
@@ -25,13 +25,20 @@
 
 | 仓库 | 记录版本 | 当前 HEAD | 复核结果 |
 |---|---|---|---|
-| company-wiki | DU11 主线（本文件） | `8b148d49`（origin） | B2 终审 PASS；C 工程 PASS；C 内容 CN 8/10、US 2–4/8、HK 5/7（用户接受 8/10 收尾） |
+| company-wiki | DU11 主线（本文件） | 见 `origin/master` | B2 终审 PASS；C 工程 PASS；C 内容 **HK 7/7 PASS（critical 6/6）**、CN 8/10、US 2–4/8（用户接受 8/10 收尾） |
 | revenue-forecast | runtime `f8002f5`；兼容表 `9669c4d7` | `9669c4d7`（clean，与 origin 同步） | 记录 CI `39095818018` success；本次 C 运行内 RF 读取（`rf-source`/`rf-narrative`）有收据 |
 | filing-fetch | `e8740748` | `e874074`（clean，与 origin 同步） | 记录 CI `39095654355` success（873 passed / 7 skipped）；本次 C 运行内 FF 复用（`ff-reuse`，`status=source_candidate`）有收据 |
 
 - **跨仓链路已验证的部分**：FF 复用已存在原件、RF 通过已发布只读接口读取摘要与证据（每次 C 运行都带 `ff-reuse`/`rf-*` 收据），CWP 侧身份/期间/SHA 校验通过。
 - **未在当前环境复跑**：RF/FF 的完整测试套件需要各自 CI 环境（RF 依赖 pymupdf/cryptography 等）；本机直接借 CWP venv 跑 FF 会出现环境性失败，不能当回归结论。要“三仓全部跑通”的本地证据，需按各自 `.github/workflows/quality.yml` 装依赖后复跑。
-- **仍开着的验收项**：C 内容质量（用户接受 8/10 收尾）；冻结 holdout 与 RF 审查循环按 handoff 第 72 行在 C 完成后执行。
+- **仍开着的验收项（2026-10-18 复审后更新）**：
+  1. C 内容：HK 按新口径 PASS；CN 缺 2 条 critical 事实、US 缺多条事实（都是“漏”，不是“错”）；用户接受按 8/10 收尾。
+  2. 冻结 holdout 与 RF 审查循环：**未做**（全部 receipt 标注 development regression, not holdout）。
+  3. 跨仓 RF/FF：仅有每次 C 运行内的 `ff-reuse`/`rf-*` 收据；两个仓**自身完整套件未在本机复跑**（Windows 环境与 CI 不一致，失败不代表回归）。
+  4. 覆盖修复：`activation-resume` 仍 `ReservationConflictError`，实验性、默认关闭。
+  5. HK 内容复审目前只有文字结论（见 PWF），`review/` 下**没有独立的 HK 内容复审文件**；如需正式口径，应补一份带 gold id 表的报告。
+  6. `.planning/shared-reading-production/du11/` 的 60+ 个收据目录**未入 git**，fresh clone 无法复核；正式交接前应至少把关键 receipt 落库。
+  7. 三仓 release commit 与 CI：RF `9669c4d7` / `39095818018`，FF `e874074` / `39095654355`，CWP 的 exact CI 只覆盖 `2a80acf6`；之后的主线提交尚无 exact CI（收尾推送后补）。
 
 ## 当前基线
 

@@ -11,8 +11,8 @@ import json
 from pathlib import Path
 
 
-from fixtures import sidecar_catalog
-from fixtures.sidecar_catalog import make_span
+from p3_fixtures import sidecar_catalog
+from p3_fixtures.sidecar_catalog import make_span
 from harness import (
     audit_core,
     checks_of,

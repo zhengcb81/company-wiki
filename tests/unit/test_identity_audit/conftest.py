@@ -10,8 +10,8 @@ from pathlib import Path
 
 import pytest
 
-from fixtures import sidecar_catalog
-from fixtures.sidecar_catalog import Fixture
+from p3_fixtures import sidecar_catalog
+from p3_fixtures.sidecar_catalog import Fixture
 
 
 @pytest.fixture

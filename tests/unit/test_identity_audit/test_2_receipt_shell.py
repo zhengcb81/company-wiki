@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 
-from fixtures import sidecar_catalog
+from p3_fixtures import sidecar_catalog
 from harness import audit_core, run_module, write_json
 
 AUDIT_MODULE = "tools.identity_audit"

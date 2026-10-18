@@ -9,16 +9,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import fixtures
-import fixtures.sidecar_catalog as sidecar_catalog
+import p3_fixtures
+import p3_fixtures.sidecar_catalog as sidecar_catalog
 
 LANE_DIR = Path(__file__).resolve().parent
 
 
 def test_lane_fixtures_resolve_to_this_lane():
-    locations = [Path(item).resolve() for item in fixtures.__path__]
-    assert LANE_DIR / "fixtures" in locations, locations
-    assert Path(sidecar_catalog.__file__).resolve().parent == LANE_DIR / "fixtures"
+    locations = [Path(item).resolve() for item in p3_fixtures.__path__]
+    assert LANE_DIR / "p3_fixtures" in locations, locations
+    assert Path(sidecar_catalog.__file__).resolve().parent == LANE_DIR / "p3_fixtures"
 
 
 def test_fixture_builds_a_readable_indexed_source(plain):
