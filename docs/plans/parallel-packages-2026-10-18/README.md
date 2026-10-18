@@ -6,7 +6,7 @@
 - P1：`tests/unit/test_p1_ocr_text` **40 passed**；`ruff`/`mypy` 干净；独立复审 round 2 PASS。已知限制：未接生产、未跑真实扫描件。**接收时偏差**：助手模块 `synth.py` 与 `tests/fixtures/document_normalization_layout_snapshots/synth.py` 在全量单测收集时重名，已重命名为 `p1_synth.py`（否则全量套件报 `AttributeError: module 'synth' has no attribute 'load_fixture'`）。
 - P4：`tests/integration/test_p4_contract` 在 `CWP_P4_CATALOG_CONFIG=<本卡 fixtures>/catalog/catalog.yaml` 下 **34 passed**；无 env 时 34 skipped（按卡设计，非静默通过）；独立复审 PASS。P4 为 opt-in，不进 pre-push。
 - P2：`tests/unit/test_p2_office_table` **70 passed**；独立复审 PASS（真实验证编号、删区计数、QA 标记定位符三项修复后）。
-- P3：`tests/unit/test_identity_audit` **50 passed**；`ruff`/`mypy` 干净；独立复审 REJECT→**APPROVE**（span 全部走冻结的 `EvidenceSpan.from_dict`，越界 offset 记 `p3_span_ungrounded`）。只读 CLI，不写生产。
+- P3：`tests/unit/test_identity_audit` **50 passed**；`ruff`/`mypy` 干净；独立复审 REJECT→**APPROVE**（span 全部走冻结的 `EvidenceSpan.from_dict`，越界 offset 记 `p3_span_ungrounded`）。只读 CLI，不写生产。**接收时偏差**：Linux 上 WAL 模式 fixture 的只读打开会生成 `catalog.sqlite3-shm`，令“除 out 文件外不写任何东西”的断言失败；fixture 已改为建好后切 `journal_mode=DELETE` 并清理 sidecar（Windows/Linux 均 50 passed）。
 起草人：外部 agent；接收与验收：ROOT。主线 PWF 为 `docs/plans/document-understanding-2026-10-13`（母）与 `docs/plans/du11-source-closure-2026-10-18`（当前 B2 来源闭合），本目录的四张卡**不是**主线的一部分，也不改变主线状态。
 
 ## 1. 四张卡一览

@@ -24,8 +24,8 @@
 - 交接完整性复审：2026-10-18 两轮（CONDITIONAL_READY → NOT_READY），NOT_READY 的根因（`fixtures` 包冲突导致 CI 命令 15 errors）已修复；其余文档失真已按复核修正。
 
 ## 5. push 结果与 exact CI
-- `origin/master` 已包含 71f4a8c6 及之前全部提交；测试清理、fixtures 修复与本文档更新的提交正在推送。
-- 唯一 exact CI：`2a80acf6`（`b2-final3-20261018/ci-39139605025.json`，success）；收尾提交的 exact CI 待推送后补。
+- `origin/master` = **`ef3f3d1c`**，全部收尾提交（测试清理、fixtures/P3 修复、四包、文档、香港复审、C 收据摘要）均已推送。
+- **exact CI：run 374（id 39164683463）success**；此前 B2 的 exact CI 为 `2a80acf6`（`b2-final3-20261018/ci-39139605025.json`）。
 
 ## 6. 真实 provider 与缓存/恢复
 - 真实模型：CN = MiMo（`mimo-v2.6-flash`）、US = MiniMax（`MiniMax-M3`）、HK = DeepSeek（`deepseek-flash`，用 Windows 用户级有效密钥）。

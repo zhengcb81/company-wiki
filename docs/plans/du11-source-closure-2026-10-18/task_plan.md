@@ -1,9 +1,10 @@
-## 远端 CI 仍红：P3 两条 identity-audit 用例在 Linux 失败（2026-10-18）
+## P3 两条 Linux 失败已修，远端 CI 绿（2026-10-18）
 
-- `origin/master` 已同步到 `e7711ca4`；本地 `python -m pytest tests/unit`（3.13）**7030 passed**，但 GitHub CI（3.12/ubuntu）在 `41ae5f1a` 的 Unit tests 步骤失败。
-- 失败用例（check-run 注解）：`tests/unit/test_identity_audit/test_1_checks.py::test_out_file_changes_nothing_but_the_out_file` 与 `::test_the_audit_never_writes_anything_but_the_out_file`，均为 AssertionError。
-- 这是 P3 合入后暴露的**平台差异**（Windows 本地绿、Linux CI 红）；CI 日志需登录查看，尚未定位是退出码还是目录树差异。
-- 下一步：取 CI 日志定位，修 P3 CLI/测试后再取 exact CI；修好前不宣称 CI 绿。
+- 复现：WSL Ubuntu（Python 3.12.3，与 CI 同版本）跑两条用例 → 稳定失败，断言差异是 `catalog/catalog.sqlite3-shm`。
+- 根因：fixture 目录库是 WAL 模式；Linux 上审计子进程的只读打开会创建 `-shm`，被“除 out 文件外不得写任何东西”的断言抓到（Windows 上该文件由写连接常驻，故不可见）。
+- 修复：`tests/unit/test_identity_audit/p3_fixtures/sidecar_catalog.py` 在建好 fixture 后关闭写连接、切 `journal_mode=DELETE` 并清理 `-wal/-shm`。
+- 验证：WSL 3.12 两条用例 **2 passed**、P3 全 lane **50 passed**；Windows 本地 P3 lane **50 passed**。
+- **exact CI**：`ef3f3d1c`，run 374（id 39164683463），**success**。
 
 ---
 

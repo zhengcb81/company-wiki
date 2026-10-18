@@ -16,7 +16,7 @@
 - **C 内容侧（2026-10-18 口径更新）**：用户明确“数字可以近似、但不能错”。按此重评：**HK（DeepSeek）= PASS**（7/7，critical 6/6；只有 7,500+/近4,400/超過3,100 这类正确近似，无 must_not_assert）；CN 8/10、US 2/8 的缺口是**整条事实缺失**（不是数字写错）；三份摘要均未发现单位/换算错误、无投资结论。标题式空 claim（如 HK t7-1）仍是质量问题。不是内容验收通过，而是经用户确认的收尾口径；模型评估计划见 PWF 顶部。复审报告：`review/c-content-review-20261018-cn-v3.md`、`...-cn-v4.md`。
 - **覆盖修复（A）状态：实验性、默认关闭**。实现走现有 retry（两次 attempt、两次计费），`CW_SUMMARY_COVERAGE_REPAIR=1` 才启用；已实测两次 POST 并合并成功、run 进入 `activation_pending`。未解决：`activation-resume` 与重试 attempt 的 `reopen_paid_output` 冲突；MiMo 首响应 JSON 约每 3 次失败 1 次。默认关闭**只在本地未推提交**；`origin/master` 仍是无条件版本（见下方交付状态）。
 - **已拍板**（2026-10-18）：按 CN 8/10 收尾，不再为最后 1–2 条事实继续真实调用；覆盖修复的残余问题作为后续独立课题。
-- **交付状态（2026-10-18 更新）**：`origin/master` 已推进到 `3119e303`，**补写默认关闭的开关、两个修复、P1–P4 四包与收尾文档均已推送**（pre-push 门禁 GREEN）。收尾文档同时保留在 `origin/du11-close-docs`。此前挡住 master 的两个既有测试已按用户决定（2026-10-18：修或删）**删除**：`tests/contract/test_fresh_cache_behavior_receipts.py`（parser pin 期望新 generation、实际按源字节复用，前提已与现行缓存语义不符）与 `tests/integration/test_shared_reading_production_e2e.py::test_official_projection_...`（`LOCATOR_REPLAY_FAILED`；同文件其余 4 个用例保留）。两者都未被 CI workflow 或队列表引用，属本地契约测试。
+- **交付状态（2026-10-18 收尾）**：`origin/master` = **`ef3f3d1c`**；补写默认关闭开关、两个修复、P1–P4 四包、测试清理与 fixtures 修复、收尾文档、香港复审与 C 收据摘要均已推送；**exact CI：run 374（id 39164683463）success**。收尾文档同时保留在 `origin/du11-close-docs`。
 - 累计付费：**56 个 attempt、1,091,219 tokens / $0.278311**（`usage.jsonl` 按 database+attempt_id 去重，核对于 2026-10-18；含 HK 16,813 tokens / $0.00742，以及此前 69,046 tokens / $0.031208 的 unknown hold；上限 2M / $20）。
 
 不要把已接收的 RF/FF 施工卡重新打开，也不要把工程测试通过、原文选择金标命中或已有摘要缓存命中当作正式内容验收通过。
