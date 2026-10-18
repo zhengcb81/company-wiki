@@ -1,0 +1,22 @@
+{
+  "schema_version": "du11-push-result/1",
+  "head": "2340b78c0309ec247b5d6a3942f785348a2c37dc",
+  "remote_head_verified": true,
+  "pre_push": {
+    "passed": 6571,
+    "skipped": 24,
+    "failed": 0,
+    "seconds": 542.66,
+    "bypassed": false
+  },
+  "ci": {
+    "run_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39082085864",
+    "status": "success",
+    "observed_at": "2026-10-18T00:22:54.582244+00:00",
+    "total_duration_seconds": 172,
+    "job_duration_seconds": 167,
+    "job_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39082085864/job/117540942046"
+  },
+  "source_extractive_runtime": "isolated implementation in progress; behavior RED13/compatPASS1; not accepted",
+  "external_cards": "two user-dispatched author worktrees untouched"
+}

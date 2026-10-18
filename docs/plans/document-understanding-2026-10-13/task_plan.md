@@ -1,3 +1,13 @@
+## DU11 上批工程已正常发布，新摘要模式隔离实施 — 2026-10-18
+
+主线2340b78c已正常push，远端master实核一致；完整prepush6571PASS/24SKIP/0FAIL，542.66秒，未跳hook。精确CI #351/runs39082085864已由可见页面核对Success，2340b78c一致，总2分52秒/唯一job2分47秒。新隔离工区du11-extractive-runtime已写行为测试并实跑13RED/1兼容PASS（原先不支持v5/缺模块），再开始实现。两外包RF/FF作者树不写。
+
+新执行审计端口采用仅内部job wrapper，public summary/bundle不变；同AUTO终态压缩须保留32KiB内逐task报告，否则正常收尾会丢审计。源卡预算是canonical64KiB内保守56KiB draft，剩余8KiB envelope余量，最终仍实际64KiB校验；完整support原文不截断，context引用保留，mixed状态只uncertain。缺model排序是unprocessed诊断，不删safe卡；原v4/已付费失败仍原语义。
+
+**Next Step：** 集中实现/测试源卡＋ID排序、同AUTO完整paid response恢复与审计留存，独审全修后才恢复三供应商真实C；旧C仍FAIL/真实C及新holdout OPEN。累计628394tokens/$0.393953proxy，unknown历史7不删。
+
+---
+
 ## DU11 下一实施位置：源摘录摘要与付费恢复 — 2026-10-18
 
 离线真实响应已确认根因：64任务由模型自行挤20，22条不仅超限，还出现合法引用串产品、漏关键业务；不是8192输出不足。已完成独立设计审查，实施细则见[源摘录/恢复施工](review/source_extractive_summary_implementation.md)，输入/预算/版本/兼容/测试/独审边界已细化。优先实施源原文业务卡、模型仅排序/处置、同AUTO完整paid-response耐久化；不简单抬20、不改旧失败、不新增人审或第二store、不改两外包消费者源码。
