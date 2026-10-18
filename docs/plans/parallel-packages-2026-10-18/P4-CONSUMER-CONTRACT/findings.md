@@ -81,12 +81,32 @@
   4. counts 记录接线缺失（`record_outcome` 无人调用 → `pytest_summary()` 全 0）。
 - 比较器类用例（byte_size 差 1、同长度篡改、security_id 宽度、published_date 填充、
   换算 quote、availability observed 伪造）在 RED 时即通过——它们锁定的是已实现的
-  判定器行为；reviewer 与 ROOT 以提交 1 复现 + 提交 2 全绿核对。
+  判定器行为。
+- **更正（审查者复核后）**：本卡为**单提交交付**（`cdf5be5a`），**没有 RED 态提交**，
+  因此无法 checkout 复现 RED；RED 只以 `red-20261018.log` 留档（断言消息 + 12 个
+  缺失实现错误 + 行号/用例数与最终树不一致可佐其实现前身份）。原「以提交 1 复现」
+  是过期陈述，已作废。
 
-## 其他设计事实
+## 收据外壳：两处规范差异的裁定（重要）
+- **counts 键名**：INTERFACES §7 的通用外壳示例写 `not_applicable`，但本卡 card.md §5.4（line 84，
+  冻结接口）写 **`skipped`**，且 §7 完成定义 2 要求"字段与 `p4-contract-receipt/1` 完全一致"。
+  → 按**卡优先**：`counts = {checked, passed, failed, skipped, not_evaluated}`，
+  与 pytest 汇总逐键对齐（passed/failed/skipped 直接来自 `pytest_summary()`）。
+  `not_applicable`/`not_evaluated` 只出现在**单个 check/case** 上（INTERFACES §2），
+  且必须带 `reason`——已由 `report.Ledger.enforce` 强制。
+- **counts 语义**：`not_evaluated` 计的是**契约用例**（不是 pytest 测试数）——某个用例本身 pass
+  （成功建立了"消费端清单缺失"这一事实），但其契约结果是 `not_evaluated`。因此
+  `checked=34 passed=34 not_evaluated=4` 是一致的：34 个 pytest 测试全过，其中 4 个契约 case
+  记为 not_evaluated（3 个消费端 case + 1 个 ledger 探针 case）。收据 `limitations` 已显式写明。
+- **`company_wiki` 导入路径**：`python -B -c "import company_wiki"` 指向本 worktree
+  `...\company-wiki-p4-consumer-contract\src\company_wiki`（INTERFACES §10 第 2 行验收通过）。
+
+
 - 收据在 `pytest_sessionfinish` 写出 → 本轮测试只能验证**上一轮**的 `receipt.json`
   （存在性 + schema 字段集 + 16 MiB 上限）；`counts` 与真实运行的一致性由
   `pytest_runtest_logreport` 接线 + `merged_cases` 单测 + ROOT 验收复跑核对。
+  注意：最后一次 pytest 运行**决定** `receipt.json` 内容 → 交付前最后一次必须是
+  **带 env 的 GREEN 运行**（否则全 skip 运行会覆盖成 `checked=0`）。
 - `counts.not_evaluated` 计的是**契约用例**（非 pytest 测试数），收据 `limitations` 显式说明。
 - 消费端命令清单缺失时：用例本身 pass（如实建立了 not_evaluated），ledger case 记
   `not_evaluated`，顶层 status 保持 `partial`，绝不写成 `pass`。
