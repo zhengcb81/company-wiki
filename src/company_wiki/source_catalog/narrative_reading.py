@@ -23,6 +23,7 @@ from company_wiki.document_understanding.selection_bridge import build_context_g
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
 
+from .narrative_antecedent import build_antecedent_windows, within_reference_envelope
 from .narrative_budget import READING_BUDGET_POLICY
 from .narrative_business_policy import detect_reading_business_fact, reading_financial_only
 from .narrative_source_purpose import NON_OPERATING_PURPOSES
@@ -37,6 +38,11 @@ _BUSINESS_ROLES = frozenset({"business", "management_discussion", "operating_met
                              "fundraising", "industry", "outlook"})
 _CONTEXT_ROLES = frozenset({"operator", "analyst", "investor_question", "qa_text_shadow"})
 _NEVER_HEADING = re.compile(r"(?!x)x")
+# Kinds whose anchors are prose statements that may carry a product deictic.
+# Tables and attributed Q&A retain their separate structural owners.
+_REFERENCE_KINDS = frozenset({"background", "paragraph_event", "risk", "project",
+                              "native_continuity"})
+_REFERENCE_DEFERRAL_REASONS = frozenset({"REFERENCE_UNRESOLVED", "REFERENCE_ENVELOPE"})
 
 
 def _financial_only(text: str, fact: Any = None) -> bool:
@@ -453,9 +459,124 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         mutable_pipeline["_material_units"] = material_units
         mutable_pipeline["_carrier_origins"] = origins
     texts = {uid: unit.raw_text for uid, unit in units.items()}
-    graph = build_context_graph({**pipeline["packages"], "packages": budget_packages}, texts)
-    contexts: dict[str, set[str]] = {}
+    original_units = {unit.unit_id: unit for unit in parsed.units}
+    inverse_origins: dict[str, list[str]] = {}
+    for original, carrier in origins.items():
+        inverse_origins.setdefault(carrier, []).append(original)
+
+    def original_members(uid: str) -> tuple[str, ...]:
+        # A final carrier stands for every original it replaced; never just [0].
+        return tuple(inverse_origins.get(uid, (uid,)))
+
+    prose_ids = {uid for package in packages
+                 if package["kind"] in _REFERENCE_KINDS
+                 for uid in package.get("member_unit_ids", ())}
+    project_for: dict[str, tuple[str, ...]] = {}
+    for package in packages:
+        if package["kind"] != "project":
+            continue
+        owner = str(package["package_id"])
+        for uid in package.get("member_unit_ids", ()):
+            project_for[uid] = (*project_for.get(uid, ()), owner)
+    diagnostics = pipeline.get("structure", {}).get("diagnostics", ())
+    furniture = frozenset(uid for entry in diagnostics
+                          if entry.get("code") == "REPEATED_RUNNING_HEADER"
+                          for uid in entry.get("unit_ids", ()))
+    carries: set[tuple[str, str]] = set()
+    for window in continuity.get("windows", ()):
+        members = window.get("member_unit_ids", ())
+        for left, right in zip(members, members[1:]):
+            if (original_units[left].coordinates.page_number
+                    != original_units[right].coordinates.page_number):
+                carries.add((left, right))
+    try:
+        windows = build_antecedent_windows(parsed, pipeline, prose_unit_ids=prose_ids,
+            blocked=frozenset(blocked), excluded=frozenset(excluded),
+            furniture=furniture, page_carries=frozenset(carries), project_for=project_for,
+            require_adjacency_proof=parsed.mime_type == "application/pdf",
+            work_budget=work_budget)
+    except WorkBudgetExceeded:
+        windows = {}
+    antecedents: dict[str, tuple[tuple[str, ...], bool]] = {}
+    for package in budget_packages:
+        for uid in package.get("member_unit_ids", ()):
+            members = original_members(uid)
+            window = windows.get(members[0])
+            if window is None:
+                # No proven window is unknown scope, never a proven absence.
+                antecedents[uid] = ((), False)
+                continue
+            antecedents[uid] = (tuple(entry for entry in window["predecessor_unit_ids"]
+                                      if entry not in set(members)), window["complete"])
     analysis_groups: dict[str, tuple[str, ...]] = {}
+    for package in budget_packages:
+        if package["kind"] == "native_continuity" and len(package["member_unit_ids"]) > 1:
+            analysis_groups["analysis:" + package["package_id"]] = tuple(package["member_unit_ids"])
+        for index, view in enumerate(package.get("native_analysis_views", ())):
+            if len(view) > 1:
+                analysis_groups["analysis:" + package["package_id"] + ":" + str(index)] = tuple(view)
+    session = SourceOperatingSession(units, work_budget=work_budget, contexts={},
+        groups=analysis_groups, antecedents=antecedents, originals=original_units)
+    # Readiness precedes both the graph and any fact/cache work: a product
+    # deictic whose declaration is missing, ambiguous, truncated or outside
+    # the combined original envelope defers only its own card.
+    deferred_packages: set[int] = set()
+    extra_context: dict[int, set[str]] = {}
+    original_extra: dict[int, set[str]] = {}
+    for index, package in enumerate(budget_packages):
+        if package["kind"] not in _REFERENCE_KINDS:
+            continue
+        anchors = (list(package.get("anchor_unit_ids", ()))
+                   or list(package.get("member_unit_ids", ()))[:1])
+        needed_originals: set[str] = set()
+        failure = None
+        for uid in anchors:
+            try:
+                closure = session.reference(uid)
+            except (ValueError, WorkBudgetExceeded):
+                failure = "partial"
+                break
+            status = closure["status"]
+            if status in {"ambiguous", "missing", "partial"}:
+                failure = status
+                break
+            if status in {"unique", "collective"}:
+                needed_originals.update(closure["required_original_unit_ids"])
+        if failure is not None:
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                "reason": "REFERENCE_UNRESOLVED", "status": failure,
+                "known_unit_ids": sorted(set(package.get("member_unit_ids", ())))})
+            continue
+        if not needed_originals:
+            continue
+        # The envelope is counted in original coordinates; carriers expand to
+        # every member they replaced. A carrier id is never looked up as an
+        # original unit.
+        target_originals = [member for uid in package.get("member_unit_ids", ())
+                            for member in original_members(uid)]
+        context_originals = [member for uid in package.get("required_context_unit_ids", ())
+                             for member in original_members(uid)]
+        if not within_reference_envelope(target_originals, context_originals,
+                                         sorted(needed_originals), original_units,
+                                         expand=original_members):
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                "reason": "REFERENCE_ENVELOPE", "known_unit_ids": sorted(needed_originals)})
+            continue
+        original_extra[index] = needed_originals
+        extra_context[index] = {origins.get(entry, entry) for entry in needed_originals}
+    if extra_context:
+        budget_packages = [{**package, "required_context_unit_ids": sorted(
+            set(package.get("required_context_unit_ids", ())) | extra_context.get(index, set()))}
+            for index, package in enumerate(budget_packages)]
+    if original_extra:
+        # _context and source cards read the original packages; the declaration
+        # must be their required context, not only a budget-side carrier.
+        packages = [{**package, "required_context_unit_ids": sorted(
+            set(package.get("required_context_unit_ids", ())) | original_extra.get(index, set()))}
+            for index, package in enumerate(packages)]
+    contexts: dict[str, set[str]] = {}
     for package in budget_packages:
         context_ids = set(package.get("required_context_unit_ids", ()))
         anchors = package.get("anchor_unit_ids", ())
@@ -471,9 +592,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 owner = "analysis:" + package["package_id"] + ":" + str(index)
                 analysis_groups[owner] = tuple(view)
                 contexts[owner] = context_ids - set(view)
-    session = SourceOperatingSession(units,
-        work_budget=work_budget,
-        contexts={uid: tuple(sorted(ids)) for uid, ids in contexts.items()}, groups=analysis_groups)
+    session.contexts = {uid: tuple(sorted(ids)) for uid, ids in contexts.items()}
+    graph = build_context_graph({**pipeline["packages"], "packages": budget_packages}, texts)
     if _session_state is not None:
         _session_state["session"] = session
     if not continuity["complete"]:
@@ -487,6 +607,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     # Spend scarce source-state work on known reading priorities first. This
     # changes analysis order, not material order, ownership or selected costs.
     for index, package in sorted(enumerate(budget_packages), key=package_priority):
+        if index in deferred_packages:
+            continue
         members = list(dict.fromkeys(package["member_unit_ids"]))
         required = set(graph["groups"][index]["required_unit_ids"]) | set(members)
         # Incomplete closure is not a smaller complete fact. Missing original
@@ -810,7 +932,11 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         dropped += financial
     # Semantic 'unassigned' is not an unread page. It must not defeat a fully
     # read and positively classified finance-only document's zero-model result.
-    processing_complete = graph_complete and session.complete and not budget.exhausted and not withheld and not any(
+    # A bounded reference deferral removes one card, not the rest of the
+    # document: it is reported separately and does not downgrade coverage.
+    blocking_withheld = [entry for entry in withheld
+                         if entry.get("reason") not in _REFERENCE_DEFERRAL_REASONS]
+    processing_complete = graph_complete and session.complete and not budget.exhausted and not blocking_withheld and not any(
         "BUDGET" in str(entry.get("code", "")) or "LIMIT_REACHED" in str(entry.get("code", ""))
         for entry in pipeline.get("diagnostics", ()))
     empty_may_skip = (not candidates and parsed.coverage_complete and processing_complete
@@ -844,7 +970,16 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             replace(span, quality_flags=tuple(dict.fromkeys((*span.quality_flags, "table_structure_ambiguous"))))
             if span.span_id in uncertain else span for span in result.evidence_spans))
     context = _context(pipeline, result, eligible)
-    context["deferred"].extend({"package_id": item["package_id"], "reason": item["reason"]} for item in withheld)
+    # Reference deferrals are the newest and the ones a reader must be able to
+    # audit; put them at the front of the bounded list so a document dominated
+    # by budget deferrals cannot hide them.
+    reference_entries = [{"package_id": item["package_id"], "reason": item["reason"]}
+                         for item in withheld
+                         if item.get("reason") in _REFERENCE_DEFERRAL_REASONS]
+    other_entries = [{"package_id": item["package_id"], "reason": item["reason"]}
+                     for item in withheld
+                     if item.get("reason") not in _REFERENCE_DEFERRAL_REASONS]
+    context["deferred"] = reference_entries + context["deferred"] + other_entries
     context["deferred_count"] = len(context["deferred"])
     context["deferred_limited"] = context["deferred_count"] > 128
     context["deferred"] = context["deferred"][:128]

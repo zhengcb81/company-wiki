@@ -18,20 +18,25 @@ from .narrative_business_policy import assess_reading_business_fact, project_rea
 
 
 class _ObservedUnits(Mapping):
-    def __init__(self, units, analysis):
+    """Final material, analysis owners and a read-only original fallback."""
+
+    def __init__(self, units, analysis, originals=None):
         self.units = units
         self.analysis = analysis
+        self.originals = originals or {}
 
     def __len__(self):
-        return len(self.units) + len(self.analysis)
+        return len(self.units) + len(self.analysis) + len(self.originals)
 
     def __iter__(self):
-        return chain(self.units, self.analysis)
+        return chain(self.units, self.analysis, self.originals)
 
     def __getitem__(self, uid):
         if uid in self.analysis:
             return self.analysis[uid]
-        unit = self.units[uid]
+        unit = self.units.get(uid) if self.originals else self.units[uid]
+        if unit is None:
+            unit = self.originals[uid]
         return {"text": unit.raw_text, "parent_id": unit.source_id,
                 "role": unit.source_role, "kind": unit.unit_kind, "locator": unit.coordinates}
 
@@ -39,18 +44,24 @@ class _ObservedUnits(Mapping):
 class SourceOperatingSession:
     def __init__(self, units: Mapping[str, Any], *, work_budget: WorkBudget,
                  contexts: Mapping[str, tuple[str, ...]] | None = None,
-                 groups: Mapping[str, tuple[str, ...]] | None = None):
+                 groups: Mapping[str, tuple[str, ...]] | None = None,
+                 antecedents: Mapping[str, tuple[tuple[str, ...], bool]] | None = None,
+                 originals: Mapping[str, Any] | None = None):
         self.units = units
         self.work_budget = work_budget
         self.contexts = contexts or {}
         self.groups = groups or {}
         self.owners = {uid: gid for gid, members in self.groups.items() for uid in members}
+        self.antecedents = antecedents or {}
+        self.originals = originals or {}
         self.analysis: dict[str, Any] = {}
         self.maps: dict[str, list[tuple[int, int, str, int]]] = {}
-        self.engine = OperatingRelationSession(_ObservedUnits(units, self.analysis), work_budget=work_budget)
+        self.engine = OperatingRelationSession(
+            _ObservedUnits(units, self.analysis, self.originals), work_budget=work_budget)
         self.results: dict[str, dict[str, Any]] = {}
         self.facts: dict[str, OperatingFact] = {}
         self.financial: dict[str, bool | None] = {}
+        self.references: dict[str, dict[str, Any]] = {}
         self.complete = True
 
     def owner_for(self, uid: str) -> str:
@@ -132,6 +143,79 @@ class SourceOperatingSession:
             if result["status"] != "complete":
                 self.complete = False
         return self.results[owner]
+
+    def reference(self, uid: str) -> dict[str, Any]:
+        """Bounded product-reference readiness for one original or analysis owner.
+
+        Legacy relations/facts are untouched. Declaration refs stay in the
+        original namespace: they are validated against their own source text,
+        never re-mapped through the target's offsets.
+        """
+        # Cache by the requested target, not only by its analysis owner: two
+        # anchors of one joined window can carry different predecessor scopes.
+        cached = self.references.get(uid)
+        if cached is not None:
+            return cached
+        key = self.owner_for(uid)
+        if key in self.groups and key not in self.analysis:
+            try:
+                self._prepare_group(key)
+            except (WorkBudgetExceeded, ValueError):
+                result = {"schema_version": "du11-reference-closure/1", "unit_id": key,
+                          "status": "partial", "reference_refs": [], "declaration_refs": [],
+                          "member_refs": [], "required_original_unit_ids": (),
+                          "attribution": "unknown",
+                          "diagnostics": [{"code": "unprepared_analysis_owner", "unit_id": uid}],
+                          "work_used": 0}
+                self.references[uid] = result
+                return result
+        # An absent window is unknown scope, never a proven absence.
+        predecessors, complete = self.antecedents.get(uid, ((), False))
+        try:
+            result = self.engine.reference_closure(key, tuple(predecessors),
+                                                   window_complete=complete)
+        except ValueError:
+            result = {"schema_version": "du11-reference-closure/1", "unit_id": key,
+                      "status": "partial", "reference_refs": [], "declaration_refs": [],
+                      "member_refs": [], "required_original_unit_ids": (),
+                      "attribution": "unknown",
+                      "diagnostics": [{"code": "invalid_antecedent_scope", "unit_id": uid}],
+                      "work_used": 0}
+        if result["status"] in {"unique", "collective"}:
+            declarations = self._validate_original_refs(result["declaration_refs"])
+            members = self._validate_original_refs(result["member_refs"])
+            if declarations is None or members is None:
+                result = {**result, "status": "partial", "declaration_refs": [],
+                          "member_refs": [], "required_original_unit_ids": (),
+                          "diagnostics": [*result["diagnostics"],
+                                          {"code": "invalid_original_reference", "unit_id": uid}]}
+            else:
+                result = {**result, "declaration_refs": declarations, "member_refs": members}
+        self.references[uid] = result
+        return result
+
+    def _validate_original_refs(self, refs) -> list[dict[str, Any]] | None:
+        projected: list[dict[str, Any]] = []
+        for ref in refs:
+            uid = ref.get("unit_id")
+            start, end = ref.get("char_start"), ref.get("char_end")
+            if (not isinstance(uid, str) or not isinstance(start, int) or isinstance(start, bool)
+                    or not isinstance(end, int) or isinstance(end, bool)):
+                return None
+            unit = self.units.get(uid)
+            if unit is None:
+                unit = self.originals.get(uid)
+            if unit is None:
+                return None
+            text = getattr(unit, "raw_text", None)
+            if text is None:
+                text = unit.get("text", "") if isinstance(unit, Mapping) else ""
+            if not 0 <= start < end <= len(text):
+                return None
+            entry = {"unit_id": uid, "char_start": start, "char_end": end}
+            if not projected or projected[-1] != entry:
+                projected.append(entry)
+        return projected
 
     def fact(self, uid: str) -> OperatingFact:
         owner = self.owner_for(uid)

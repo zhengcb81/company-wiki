@@ -32,12 +32,18 @@ from company_wiki.document_understanding.layout_hints.contract import (
 )
 
 from . import patterns as p
+from .product_reference import find_product_declarations, find_product_deictic
 from .text_view import (MatchingText, MatchingView, build_matching_view,
                         build_prepared_matching_view, prepare_matching_text,
                         split_clauses, strip_connector)
 
 OBSERVATION_SCHEMA = "du4-operating-observation/1"
 RELATIONS_SCHEMA = "du4-operating-relations/1"
+REFERENCE_SCHEMA = "du11-reference-closure/1"
+_QUESTION_ROLES = frozenset({"investor_question", "analyst_question", "question",
+                             "operator_question", "qa_question"})
+_NON_DONATING_KINDS = frozenset({"heading", "table_row", "table_header", "table_caption",
+                                 "question", "footer", "header"})
 _REQUIRED_UNIT_FIELDS = ("text", "parent_id", "role", "kind", "locator")
 
 _ABSENCE_CONSTRUCTIONS = frozenset(
@@ -748,6 +754,7 @@ class OperatingRelationSession:
         self._texts: dict[str, MatchingText] = {}
         self._views: dict[str, tuple[MatchingView, dict[str, str]]] = {}
         self._results: dict[tuple[str, tuple[str, ...]], dict[str, Any]] = {}
+        self._references: dict[tuple[str, tuple[str, ...], bool], dict[str, Any]] = {}
 
     def unit(self, uid: str):
         if uid not in self._units:
@@ -775,6 +782,118 @@ class OperatingRelationSession:
                 "units": self.units, "context_unit_ids": context_unit_ids,
             }, work_budget=self.work_budget, prepared=self)
         return self._results[key]
+
+    def reference_closure(self, unit_id: str, predecessor_unit_ids: tuple[str, ...] = (), *,
+                          window_complete: bool = True) -> dict[str, Any]:
+        """Bounded product-reference closure over permitted source predecessors.
+
+        Legacy detect() is unchanged. This additive operation also runs for
+        descriptive material without an operating predicate: a product deictic
+        needs one actual named declaration inside the permitted, source-ordered,
+        same-parent predecessors. Two competing families stay ambiguous; a
+        truncated or exhausted search is partial, never an inferred absence.
+        """
+        key = (unit_id, tuple(predecessor_unit_ids), bool(window_complete))
+        if key not in self._references:
+            self._references[key] = self._reference_closure(unit_id, key[1], key[2])
+        return self._references[key]
+
+    def _reference_closure(self, target: str, predecessors: tuple[str, ...],
+                           window_complete: bool) -> dict[str, Any]:
+        used_before = self.work_budget.used
+        diagnostics: list[dict[str, Any]] = []
+
+        def result(status: str, *, references=(), declarations=(), members=(),
+                   required=(), attribution="issuer") -> dict[str, Any]:
+            return {"schema_version": REFERENCE_SCHEMA, "unit_id": target,
+                    "status": status, "reference_refs": list(references),
+                    "declaration_refs": list(declarations), "member_refs": list(members),
+                    "required_original_unit_ids": tuple(required),
+                    "attribution": attribution, "diagnostics": diagnostics,
+                    "work_used": self.work_budget.used - used_before}
+
+        target_unit = self.unit(target)
+        target_parent = target_unit["parent_id"]
+        if not isinstance(predecessors, tuple):
+            raise ValueError("predecessor_unit_ids must be a tuple of unit ids")
+        if len(set(predecessors)) != len(predecessors):
+            raise ValueError("duplicate predecessor_unit_ids")
+        for predecessor in predecessors:
+            if not isinstance(predecessor, str):
+                raise ValueError("predecessor_unit_ids must be strings")
+            if predecessor not in self._units and predecessor not in self.units:
+                raise ValueError(f"unknown predecessor unit: {predecessor}")
+            if self.unit(predecessor)["parent_id"] != target_parent:
+                raise ValueError("predecessor parent mismatch")
+        raw_target = target_unit["text"]
+        deictics = find_product_deictic(raw_target)
+        family_deictics = [item for item in deictics if item.family]
+        # Only a family reference (该系列/上述/这些/these products) carries the
+        # cross-window identity claim. A singular demonstrative keeps the
+        # legacy admission path: it is not this operation's dependency.
+        if not family_deictics:
+            return result("not_applicable")
+        # Refs stay in original characters: detection never runs on a
+        # normalised view whose offsets differ from the source bytes.
+        references = [{"unit_id": target, "char_start": item.span[0],
+                       "char_end": item.span[1]} for item in deictics]
+        # A declaration strictly before the reference inside the same material
+        # already closes it. A forward declaration does not, and two internal
+        # families are ambiguous instead of silently preferred.
+        internal = [declaration for declaration in find_product_declarations(raw_target)
+                    if declaration.span[0] < family_deictics[0].span[0]
+                    and declaration.attribution == "issuer"]
+        if internal:
+            internal_families = {declaration.family for declaration in internal}
+            if len(internal_families) > 1:
+                diagnostics.append({"code": "antecedent_ambiguous", "unit_id": target,
+                                    "family_count": len(internal_families)})
+                return result("ambiguous", references=references)
+            return result("not_applicable")
+        if not window_complete:
+            diagnostics.append({"code": "antecedent_window_incomplete", "unit_id": target})
+            return result("partial")
+        families: dict[str, list[tuple[str, Any]]] = {}
+        try:
+            self.work_budget.charge(len(predecessors) + 1)
+            for predecessor in predecessors:
+                unit = self.unit(predecessor)
+                if unit["role"] in _QUESTION_ROLES or unit["kind"] in _NON_DONATING_KINDS:
+                    continue
+                text = unit["text"]
+                self.work_budget.charge(len(text))
+                if text.rstrip().endswith(("？", "?")) and "请问" in text:
+                    continue
+                for declaration in find_product_declarations(text):
+                    if declaration.attribution != "issuer":
+                        continue
+                    families.setdefault(declaration.family, []).append((predecessor, declaration))
+        except WorkBudgetExceeded:
+            diagnostics.append({"code": "work_budget_exhausted", "unit_id": target})
+            return result("partial", references=references)
+        if not families:
+            diagnostics.append({"code": "antecedent_missing", "unit_id": target})
+            return result("missing", references=references)
+        if len(families) > 1:
+            diagnostics.append({"code": "antecedent_ambiguous", "unit_id": target,
+                                "family_count": len(families)})
+            return result("ambiguous", references=references)
+        _family, entries = next(iter(families.items()))
+        nearest = entries[-1]
+        declarations = [{"unit_id": unit_id, "char_start": declaration.span[0],
+                         "char_end": declaration.span[1]}
+                        for unit_id, declaration in entries]
+        member_refs = [{"unit_id": nearest[0], "char_start": start, "char_end": end}
+                       for start, end in nearest[1].members]
+        required = tuple(dict.fromkeys(unit_id for unit_id, _ in entries))
+        attribution = "issuer"
+        if any(self.unit(unit_id)["role"] not in {"company_filing", "issuer", "management",
+                                                  "management_discussion"}
+               for unit_id, _ in entries):
+            attribution = "unknown"
+        return result("collective" if any(item[1].collective for item in entries) else "unique",
+                      references=references, declarations=declarations,
+                      members=member_refs, required=required, attribution=attribution)
 
 
 def detect_operating_relations(

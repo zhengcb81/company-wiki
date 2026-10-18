@@ -1,0 +1,555 @@
+{
+  "schema": "du11-b2-independent-review/1",
+  "reviewer": "independent-reviewer-non-author",
+  "reviewed_at": "2026-10-18T10:05:00+08:00",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki",
+  "head": "710f0de1",
+  "snapshot_note": "Worktree was edited by another process during the review (09:44-09:55). Final reviewed bytes are the family-scope snapshot with the SHAs below; the earlier 77-PASS snapshot without family gating is superseded. All findings were re-run on the final SHAs.",
+  "changed_files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "status": "new",
+      "sha256": "75ba4128e7c73c294f8181ad407192835b7caac9b01693d5feedcbf3961c4f69",
+      "mtime": "2026-10-18 09:51:29"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "status": "modified",
+      "sha256": "919fdc52f05b8a25aefffdcb96d45120e8a71c975f29d33aade76c51c313c55e",
+      "mtime": "2026-10-18 09:51:29"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_antecedent.py",
+      "status": "new",
+      "sha256": "da6723ce8f6bad008294312c77110a2d8333204a6effa179173d629ebfc15aa0",
+      "mtime": "2026-10-18 09:29:18"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "status": "modified",
+      "sha256": "4ff59eda06cd65a4c564b2312759f6c28dc4fd66a4c27405f79830e203fd63d1",
+      "mtime": "2026-10-18 09:30:39"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "status": "modified",
+      "sha256": "e5ff0ced9b8007174fc9a5a8557b1b5aaee2df977b989530e0c1edd004968280",
+      "mtime": "2026-10-18 09:30:04"
+    },
+    {
+      "path": "tests/unit/du11_source_closure/test_reference_closure.py",
+      "status": "new",
+      "sha256": "aa5085ed3e067fd8ad0b9225bbcea69ba41bb007f00329f777687d99dad8763b",
+      "mtime": "2026-10-18 09:55:26"
+    },
+    {
+      "path": "tests/unit/du11_source_closure/test_antecedent_wiring.py",
+      "status": "new",
+      "sha256": "2fd9981a5c38955e0bb0b1a1d394ac1202a71b3e3b48eb41bf6650ea49e43d36",
+      "mtime": "2026-10-18 09:44:48"
+    }
+  ],
+  "verdict": "REJECT",
+  "verdict_reason": "Five P1 contract violations: declaration context is not delivered to the dependent card/task; carrier/original envelope namespace consumes the only real CN unique closure; declaration refs use matching-text offsets; proven cross-page flow is not wired and unproved order is reported complete; the in-material declaration shortcut ignores order/count. Safe defers and green tests do not close the positive path.",
+  "scores": {
+    "engineering_completeness": 6,
+    "contract_consistency": 4,
+    "scale": 10
+  },
+  "checks": [
+    {
+      "id": 1,
+      "question": "only existing responsibility layers, no second detector/Store/budget/product lexicon",
+      "verdict": "PARTIAL",
+      "evidence": "No new Store/budget/detector; same WorkBudget. But product_reference.py:17-32 adds a second product-head lexicon overlapping patterns.py:404-410, and narrative_antecedent.py:65-117 re-derives window boundaries instead of reusing _prose_reading_packages continuity proof.",
+      "findings": [
+        "P2-7",
+        "P1-4"
+      ]
+    },
+    {
+      "id": 2,
+      "question": "state semantics; ambiguous never nearest-wins",
+      "verdict": "PARTIAL/FAIL",
+      "evidence": "Six states exist; family competition returns ambiguous without nearest-wins (relations.py:862-865). But in-material shortcut is order/count-blind (relations.py:838-841); collective is derived from the first 包括/含 anywhere (product_reference.py:54-64,151-157); source_boundary/unproved_order keep complete=True (narrative_antecedent.py:96-111); attribution defaults to issuer.",
+      "findings": [
+        "P1-5",
+        "P2-2",
+        "P2-5",
+        "P2-6"
+      ]
+    },
+    {
+      "id": 3,
+      "question": "8 units / 4 (source,page,pdf_block) / 2048 chars, same parent budget; only affected card deferred",
+      "verdict": "FAIL",
+      "evidence": "Constants correct (narrative_antecedent.py:14-17). Block key wrongly includes paragraph_index (133-137); carrier union undercounts (narrative_reading.py:522-527); carrier/original namespace mismatch false-fails envelope (512-513,526-527; narrative_antecedent.py:130-131); withheld flips whole-document status (narrative_reading.py:893-910); REFERENCE_* reasons truncated at 128 (927-930).",
+      "findings": [
+        "P1-2",
+        "P2-1",
+        "P2-3",
+        "P2-8"
+      ]
+    },
+    {
+      "id": 4,
+      "question": "original/analysis namespace; declaration refs stay original, not mis-mapped by _original_refs",
+      "verdict": "PARTIAL",
+      "evidence": "reference() bypasses _original_refs (narrative_operating_relations.py:147-192) and validates bounds (194-211). But declaration/member offsets are matching-text offsets (relations.py:851,868-872; text_view.py:55-70), only bounds are validated; analysis reference_refs are analysis coordinates (relations.py:836-837).",
+      "findings": [
+        "P1-2",
+        "P1-3",
+        "P3-2"
+      ]
+    },
+    {
+      "id": 5,
+      "question": "cache key target + ordered predecessors + window_complete",
+      "verdict": "PARTIAL",
+      "evidence": "Engine key is correct (relations.py:796-798) and a test covers completeness/order (test_reference_closure.py:153-158). Session cache is keyed by owner only (narrative_operating_relations.py:154-157); declarations are re-scanned per target/predecessor (relations.py:851-855); receipts do not bind the three grammar modules (probe.py:48-63).",
+      "findings": [
+        "P2-8",
+        "P3-8",
+        "P3-10"
+      ]
+    },
+    {
+      "id": 6,
+      "question": "do not bypass unread/opaque pages, headers/footers, table/QA boundaries",
+      "verdict": "PARTIAL/FAIL",
+      "evidence": "Table/QA and blocked/excluded stop the run (narrative_antecedent.py:82,100-106). But page+1 always stops (54-62) and unproved_order still complete=True (96-111); proven furniture is not skipped; unknown coordinates count as adjacent (45-62).",
+      "findings": [
+        "P1-4",
+        "P2-2",
+        "P2-4"
+      ]
+    },
+    {
+      "id": 7,
+      "question": "in-material declaration not missing; only declarations before the deictic",
+      "verdict": "PARTIAL/FAIL",
+      "evidence": "Any declaration in target returns not_applicable (relations.py:838-841): declaration after the deictic is accepted, two internal families are accepted. The intended must-not-be-missing behavior holds, but the order/count requirement does not.",
+      "findings": [
+        "P1-5"
+      ]
+    },
+    {
+      "id": 8,
+      "question": "no broad regression, especially plain paragraphs without deictics",
+      "verdict": "PARTIAL",
+      "evidence": "Plain paragraphs are unchanged (relations.py:834-835; probe [PLAIN,PLAIN] selected/coverage True). But one unresolved family deictic flips the whole document to partial/coverage False (probe [PLAIN,PLAIN,TARGET,PLAIN,PLAIN]; narrative_reading.py:893-910).",
+      "findings": [
+        "P2-1"
+      ]
+    },
+    {
+      "id": 9,
+      "question": "tests truly cover RED->GREEN, no implementation-detail false green",
+      "verdict": "FAIL",
+      "evidence": "79 focused tests pass. Missing forward declaration, internal ambiguity, matching-to-original offsets, carrier namespace, cross-page carry, _context/summary task context, attribution, document status. Two tests named 'defers only that card'/'attaches ... as context' assert only candidate/metadata and are false green for the contract.",
+      "findings": [
+        "P2-10",
+        "P3-9"
+      ]
+    },
+    {
+      "id": 10,
+      "question": "performance/budget: real CN 2518 reference calls, HK 13.17M/16M, repeated scans or avoidable O(N*K)",
+      "verdict": "PASS_WITH_CAVEAT",
+      "evidence": "Final-byte replay: CN 2518 calls (2515 NA, 1 missing, 1 unique, 1 partial), ref work 11,808, total 6,141,589/16M; HK 3578 calls all NA, ref work 18,658, total 13,171,440/16M (82.3%); US 1118 calls, ref work 7,073, total 7,993,452/16M. Declaration scans 26/2/12; CN 3198 windows/9376 predecessors. No blow-up; HK headroom 2.83M and group preparation before deictic check is minor waste.",
+      "findings": [
+        "P3-10"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "P1-1",
+      "severity": "P1",
+      "title": "Declaration context is not delivered to the dependent card/task",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:533-536",
+        "src/company_wiki/source_catalog/narrative_reading.py:644",
+        "src/company_wiki/source_catalog/narrative_reading.py:725",
+        "src/company_wiki/source_catalog/narrative_reading.py:926",
+        "src/company_wiki/document_understanding/summary_tasks.py:136-149"
+      ],
+      "trigger": "text_case([DECLARATION, TARGET]) + select_reading_evidence; any resolved predecessor-declaration card",
+      "evidence": "Both groups have evidence_ids=1 and citation_views=(1,0); the target summary task has context=[]. The declaration is a separate task, not context of the target.",
+      "impact": "Model receives a bare deictic task; contract 4.5/6.6 target=support, declaration=context is not satisfied.",
+      "fix": "Attach original declaration IDs to the original package required_context_unit_ids before _context; map carriers back to originals; make _context/citation views include them; add an end-to-end summary-task assertion."
+    },
+    {
+      "id": "P1-2",
+      "severity": "P1",
+      "title": "Envelope mixes carrier/original namespaces; real CN unique closure is falsely deferred",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:512-513",
+        "src/company_wiki/source_catalog/narrative_reading.py:522-527",
+        "src/company_wiki/source_catalog/narrative_antecedent.py:130-131"
+      ],
+      "trigger": "A declaration whose original is folded into a native range carrier; target resolves unique and needed is mapped through origins to a carrier id.",
+      "evidence": "Real CN: unique required b5bf5b0c..., ENV ok=False, decl=[b8117bd8...], not_in_units=[b8117bd8...]; withheld reason REFERENCE_ENVELOPE. Plan task_plan.md:15 also reports CN REFERENCE_ENVELOPE 1.",
+      "impact": "The only real CN unique closure is discarded as if it exceeded the envelope; B2 positive path fails for carrier declarations.",
+      "fix": "Keep both namespaces explicit; count all originals of each carrier in the envelope (units/chars/blocks) or evaluate in carrier coordinates; never look up carrier ids in original_units; add a carrier regression fixture."
+    },
+    {
+      "id": "P1-3",
+      "severity": "P1",
+      "title": "Declaration/member refs use matching-text offsets, not original offsets",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:851",
+        "src/company_wiki/document_understanding/operating_states/relations.py:868-872",
+        "src/company_wiki/document_understanding/operating_states/text_view.py:55-70",
+        "src/company_wiki/source_catalog/narrative_operating_relations.py:210"
+      ],
+      "trigger": "Predecessor text contains CJK wrapping whitespace before the declaration, e.g. 公司持续投入研发\\n公司推出Preforma Uniflash系列...",
+      "evidence": "Ref char_start=12 while the declaration starts at 13; raw_text[12:40] is left-shifted by one character. _validate_original_refs only checks bounds.",
+      "impact": "declaration_refs/member_refs are not exact source segments; contract 4/6.4 exact offsets violated; future consumers get wrong chars.",
+      "fix": "Match on raw text or map via MatchingView.to_original; validate parent/source/text identity; add CJK-wrap and Traditional replay tests."
+    },
+    {
+      "id": "P1-4",
+      "severity": "P1",
+      "title": "Proven cross-page source flow is not wired; unproved order is reported complete",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:468-470",
+        "src/company_wiki/source_catalog/narrative_antecedent.py:54-62",
+        "src/company_wiki/source_catalog/narrative_antecedent.py:96-111"
+      ],
+      "trigger": "Declaration on p7, target on p8 in the same section/role, with an existing _prose_reading_packages/build_native_continuity proven flow.",
+      "evidence": "Window for p8: predecessors=(), complete=True, stop_reason=unproved_order; closure returns missing although the p7 declaration exists. page_carries/project_for are never passed from _candidates.",
+      "impact": "The primary cross-page B2 scenario cannot close; missing is inferred from an unexamined tail, violating 2/3.",
+      "fix": "Derive page_carries from the existing continuity proof (or reuse window membership); pass it from _candidates; map unproved_order to complete=False/partial; add proven/unproven two-page tests."
+    },
+    {
+      "id": "P1-5",
+      "severity": "P1",
+      "title": "In-material declaration shortcut ignores order and count",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:838-841"
+      ],
+      "trigger": "A family deictic followed by a declaration in the same target, or two competing families in the target.",
+      "evidence": "Forward declaration -> not_applicable (expected missing); two internal families -> not_applicable (expected ambiguous).",
+      "impact": "Admits an unresolved deictic card, the exact failure B2 exists to prevent; forward declaration and ambiguity semantics violated (3/6.2).",
+      "fix": "Compute deictic spans first; accept only declarations ending before the deictic; declarations only after -> missing; >1 earlier family -> ambiguous; add forward/ambiguous/heading-only tests."
+    },
+    {
+      "id": "P2-1",
+      "severity": "P2",
+      "title": "One reference deferral flips whole-document status/coverage",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:893-910",
+        "src/company_wiki/source_catalog/narrative_reading.py:927-930"
+      ],
+      "trigger": "text_case([PLAIN, PLAIN, TARGET, PLAIN, PLAIN]) + select_reading_evidence",
+      "evidence": "status=partial, coverage_complete=False, spans=4; plain-only case stays selected/coverage True.",
+      "impact": "Any document with an unresolved family deictic is marked incomplete; contract 3 says only the affected package; downstream export/quality may be blocked.",
+      "fix": "Use a separate reference_deferred/diagnostics channel that does not participate in processing_complete; defer only the target card; add document-status tests."
+    },
+    {
+      "id": "P2-2",
+      "severity": "P2",
+      "title": "Unread/blocked boundaries and window/work failures are reported as proven absence",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py:96-111",
+        "src/company_wiki/source_catalog/narrative_reading.py:468-472",
+        "src/company_wiki/source_catalog/narrative_operating_relations.py:170"
+      ],
+      "trigger": "blocked/excluded/unread predecessor, or WorkBudgetExceeded while building windows; or an anchor with no antecedents entry.",
+      "evidence": "complete stays True for source_boundary; windows={} and default ((), True) produce missing; stop_reason never unread/work/unknown_scope.",
+      "impact": "Definitive missing inferred from an unexamined tail; contract 2/3 violated.",
+      "fix": "Classify boundaries; use complete=False->partial for unread/unknown/work; propagate window failure as partial; session default complete=False."
+    },
+    {
+      "id": "P2-3",
+      "severity": "P2",
+      "title": "Envelope block key overcounts and carrier union undercounts",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py:133-137",
+        "src/company_wiki/source_catalog/narrative_reading.py:522-527"
+      ],
+      "trigger": "Same page+pdf_block on 4 different paragraphs; or a carrier covering multiple originals.",
+      "evidence": "within_reference_envelope(...) returns False for same page+block 4 paragraphs; only inverse_origins[carrier][0] is counted.",
+      "impact": "False deferrals or undercount against (parent,page,pdf_block)/8-unit/2048-char contract.",
+      "fix": "Key (parent_id, page, pdf_block); count all carrier originals; add both boundary tests."
+    },
+    {
+      "id": "P2-4",
+      "severity": "P2",
+      "title": "Unknown coordinates are treated as adjacent",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py:45-51",
+        "src/company_wiki/source_catalog/narrative_antecedent.py:54-62"
+      ],
+      "trigger": "Units without page/paragraph coordinates.",
+      "evidence": "_adjacent(no-coord, no-coord) returns True.",
+      "impact": "Unproved physical order can be borrowed as predecessor; contract 2 says stop at unproved ordering.",
+      "fix": "Return False/partial when coordinates are unknown; add a no-coordinate test."
+    },
+    {
+      "id": "P2-5",
+      "severity": "P2",
+      "title": "Collective members can come from an unrelated 包括/含 clause",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:54-64",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:151-157"
+      ],
+      "trigger": "公司客户包括华为、小米。公司推出X系列产品，已实现量产。",
+      "evidence": "X系列 is collective=True with members 华为/小米; the bare 含 alternative can match inside words.",
+      "impact": "Wrong collective status/member_refs; customers/non-products become product members.",
+      "fix": "Bind the collective marker to the declaration clause; require product-like members; compute per declaration; add a customer/region negative test."
+    },
+    {
+      "id": "P2-6",
+      "severity": "P2",
+      "title": "Attribution is always issuer; third-party/question attribution is not preserved",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:806-813",
+        "src/company_wiki/document_understanding/operating_states/relations.py:846-853",
+        "src/company_wiki/document_understanding/operating_states/relations.py:417-433"
+      ],
+      "trigger": "A declaration attributed to a competitor/customer/related party, or a question-answer context.",
+      "evidence": "result() defaults attribution='issuer'; only role and 请问 are filtered; existing THIRD_PARTY/ISSUER_WORD/_classify_np are unused.",
+      "impact": "Rival/related-party declarations can donate an issuer antecedent; contract 3 attribution not met.",
+      "fix": "Reuse the existing NP/attribution classifier on the declaration clause; return issuer/quoted_related_party/other/unknown; missing/partial -> unknown; add three tests."
+    },
+    {
+      "id": "P2-7",
+      "severity": "P2",
+      "title": "Second product head lexicon diverges from PRODUCT_SUFFIX",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:17-32",
+        "src/company_wiki/document_understanding/operating_states/patterns.py:404-410"
+      ],
+      "trigger": "Any declaration whose head is only in one of the two lists (材料/添加剂/试剂/药品/equipment/line/... vs 系列/平台/方案/技术).",
+      "evidence": "Two overlapping but different head sets; plan task_plan.md:5 claims no second product dictionary.",
+      "impact": "Contract 1 'no product dictionary' risk; coverage drift and maintenance divergence.",
+      "fix": "Reuse/derive from PRODUCT_SUFFIX and keep family markers separate."
+    },
+    {
+      "id": "P2-8",
+      "severity": "P2",
+      "title": "REFERENCE_* reasons are truncated at 128; receipts do not bind the three grammar modules",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:927-930",
+        "docs/plans/du11-source-priority-2026-10-18/real-source-probe/probe.py:48-63",
+        "docs/plans/du11-source-closure-2026-10-18/task_plan.md:15-17"
+      ],
+      "trigger": "Real CN family-scope replay receipt.",
+      "evidence": "deferral_reasons shows only SELECTION_BUDGET:128 while instrumentation finds 2 unresolved + 1 envelope; source_bindings omit product_reference.py/relations.py/narrative_antecedent.py; plan says 78 PASS while the directory has 79.",
+      "impact": "The plan's t34/CN withheld claims cannot be verified from the receipt; the receipt cannot bind the reviewed grammar bytes.",
+      "fix": "Record deferred_count and full reason/status histogram before truncation; add the three modules to bindings; update the plan to the final SHA/test count."
+    },
+    {
+      "id": "P2-9",
+      "severity": "P2",
+      "title": "Readiness can raise WorkBudget/ValueError instead of deferring",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:828",
+        "src/company_wiki/source_catalog/narrative_operating_relations.py:158-160",
+        "src/company_wiki/source_catalog/narrative_reading.py:498-532"
+      ],
+      "trigger": "Budget near 16M, or a cross-parent analysis group (ValueError).",
+      "evidence": "The initial charge is outside the try; reference() catches only ValueError; _candidates has no try around the readiness loop.",
+      "impact": "Hard failure of select_reading_evidence at/near budget exhaustion instead of partial/defer; HK is at 82.3% of the cap.",
+      "fix": "Charge inside the try; catch WorkBudgetExceeded/ValueError and return partial; wrap per-package readiness in _candidates with defer."
+    },
+    {
+      "id": "P2-10",
+      "severity": "P2",
+      "title": "Tests miss the P1 behaviors and two green tests overstate their names",
+      "files": [
+        "tests/unit/du11_source_closure/test_antecedent_wiring.py:119-129",
+        "tests/unit/du11_source_closure/test_antecedent_wiring.py:138-143",
+        "tests/unit/du11_source_closure/test_reference_closure.py:94-98"
+      ],
+      "trigger": "Current focused suite.",
+      "evidence": "No forward/internal ambiguity/offset/carrier/cross-page/task/status tests; 'defers only that card' and 'attaches ... as context' assert only candidate/metadata; all five P1 behaviors pass the current green suite.",
+      "impact": "Green CI cannot establish contract compliance.",
+      "fix": "Add RED tests per P1 reproduction (see report section 3), then fix; preserve RED->GREEN evidence."
+    },
+    {
+      "id": "P2-11",
+      "severity": "P3",
+      "title": "Project/body descriptor boundaries are not wired as specified",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:469",
+        "src/company_wiki/source_catalog/narrative_antecedent.py:92-103"
+      ],
+      "trigger": "Same section with different projects/body regions.",
+      "evidence": "project_for is never passed; fallback uses tuple(sorted(str(section_key))) (a character multiset), not the project key; body_region_key/boundary_kind/predecessor_unit_id are absent.",
+      "impact": "Project/body boundaries depend indirectly on hints.section_key; contract 2 descriptor not implemented.",
+      "fix": "Pass the actual project tuple from prose ownership; add a project-boundary test; or document the section_key substitute with proof."
+    },
+    {
+      "id": "P3-1",
+      "severity": "P3",
+      "title": "member_refs choose the nearest same-family declaration",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:867",
+        "src/company_wiki/document_understanding/operating_states/relations.py:871-872"
+      ],
+      "trigger": "Multiple declarations of the same family.",
+      "evidence": "member_refs = entries[-1].members; required includes all entries.",
+      "impact": "Member attribution may not match the earliest/complete declaration.",
+      "fix": "Define explicit member attribution (e.g., all entries or the earliest complete collective)."
+    },
+    {
+      "id": "P3-2",
+      "severity": "P3",
+      "title": "Analysis-owner reference_refs are in analysis coordinates",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:836-837",
+        "src/company_wiki/source_catalog/narrative_operating_relations.py:147-192"
+      ],
+      "trigger": "reference() on an analysis group owner.",
+      "evidence": "reference_refs use analysis text offsets and are not projected; consumers only use required_original_unit_ids today.",
+      "impact": "Schema says OriginalRef but contains analysis refs.",
+      "fix": "Project or explicitly mark as analysis refs; do not publish as OriginalRef."
+    },
+    {
+      "id": "P3-3",
+      "severity": "P3",
+      "title": "CJK declarations without 系列 are not recognized",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:154"
+      ],
+      "trigger": "公司推出新一代刻蚀设备，已实现量产。",
+      "evidence": "find_product_declarations() returns ().",
+      "impact": "Chinese unique product coverage is incomplete; family deictic with a non-series CJK declaration remains unresolved.",
+      "fix": "Clarify the contract; if needed, accept CJK appositives with a bounded pattern and tests."
+    },
+    {
+      "id": "P3-4",
+      "severity": "P3",
+      "title": "window_complete defaults to True in the engine API",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:787"
+      ],
+      "trigger": "Caller omits window_complete.",
+      "evidence": "Default is True; completeness must be proven, not assumed.",
+      "impact": "A caller can assert complete closure by omission.",
+      "fix": "Make window_complete required or default False."
+    },
+    {
+      "id": "P3-5",
+      "severity": "P3",
+      "title": "analysis_groups built twice",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:484-490",
+        "src/company_wiki/source_catalog/narrative_reading.py:543-552"
+      ],
+      "trigger": "Any native analysis view.",
+      "evidence": "Duplicate construction in _candidates.",
+      "impact": "Maintenance/drift risk.",
+      "fix": "Build once and reuse."
+    },
+    {
+      "id": "P3-6",
+      "severity": "P3",
+      "title": "stop_reason misses contract enum values",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py:96-111"
+      ],
+      "trigger": "Unread/work/unknown scope.",
+      "evidence": "Only beginning/source_boundary/cap/unproved_order are emitted.",
+      "impact": "Diagnostics cannot distinguish unread vs boundary.",
+      "fix": "Emit unread/work/unknown_scope."
+    },
+    {
+      "id": "P3-7",
+      "severity": "P3",
+      "title": "_validate_original_refs checks only bounds",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py:199-211"
+      ],
+      "trigger": "A ref with valid bounds but wrong parent/text.",
+      "evidence": "No parent/source/text identity check.",
+      "impact": "Defense-in-depth gap.",
+      "fix": "Validate parent and exact source text."
+    },
+    {
+      "id": "P3-8",
+      "severity": "P3",
+      "title": "Session references cache collapses different anchors",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py:154-157"
+      ],
+      "trigger": "Two anchors of the same analysis owner with different antecedents.",
+      "evidence": "references keyed by owner only.",
+      "impact": "Wrong scope may be reused.",
+      "fix": "Key by (owner, ordered predecessors, complete) or document the group-level equivalence."
+    },
+    {
+      "id": "P3-9",
+      "severity": "P3",
+      "title": "Envelope test title overstates 2048/4-block coverage",
+      "files": [
+        "tests/unit/du11_source_closure/test_antecedent_wiring.py:95-102"
+      ],
+      "trigger": "Current test.",
+      "evidence": "Uses 3x1025 chars; no exact 2048/2049, no 9/5 first excess, no paragraph-key case.",
+      "impact": "False confidence.",
+      "fix": "Add exact inclusive/excess tests."
+    },
+    {
+      "id": "P3-10",
+      "severity": "P3",
+      "title": "Declaration scans are not cached per unit",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:851-855"
+      ],
+      "trigger": "Many targets sharing predecessors.",
+      "evidence": "find_product_declarations called per target/predecessor; measured 26/2/12 scans on CN/HK/US.",
+      "impact": "Minor avoidable work; not a budget risk today.",
+      "fix": "Cache declarations by unit identity."
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "git status --porcelain",
+      "result": "3 modified source files + 4 new files (2 src, 2 tests); unrelated pre-existing untracked files untouched."
+    },
+    {
+      "cmd": "git diff --stat -- src/company_wiki",
+      "result": "3 files changed, 271 insertions(+), 11 deletions(-)."
+    },
+    {
+      "cmd": "Get-FileHash <7 files> -Algorithm SHA256",
+      "result": "SHAs recorded in changed_files."
+    },
+    {
+      "cmd": ".venv\\Scripts\\python.exe -m pytest tests/unit/du11_source_closure -q",
+      "result": "79 passed in 3.67s on the final snapshot; 77 passed on the 09:30 snapshot before the author added family gating/tests. Full unit not run."
+    },
+    {
+      "cmd": "synthetic probes via Python stdin (no file writes)",
+      "result": "Forward declaration not_applicable; two internal families not_applicable; CJK-wrap ref start 12 vs expected 13; cross-page window empty/complete/unproved_order -> missing; no-coordinate adjacent=True; same page+block different paragraphs envelope False; unrelated 包括 collective members 华为/小米; CJK declaration empty; singular family=False vs plural family=True."
+    },
+    {
+      "cmd": "end-to-end synthetic (text_case -> select_reading_evidence -> build_summary_task_plan)",
+      "result": "Resolved case: selected, 2 groups with evidence_ids=1, citation_views=(1,0), target task context=[]; unresolved among plains: partial/coverage False/4 spans; plain-only: selected/coverage True."
+    },
+    {
+      "cmd": "read-only real-source replay (probe.py, socket blocked, REAL_LLM=0, output to system temp)",
+      "result": "CN 6141589/16M, 2518 reference calls (2515 NA, 1 missing, 1 unique, 1 partial), unique envelope false with declaration b8117... not in original_units; HK 13171440/16M, 3578 NA; US 7993452/16M, 1118 NA; original/gold unchanged, 0 API."
+    }
+  ],
+  "unverified": [
+    "Full unit/contract/CI/publish: not run (another process is running them; user forbade full unit).",
+    "Formal content C / provider calls: not run by design; no semantic content acceptance.",
+    "Whether the real CN unique case would still exceed 4 blocks/2048 chars after fixing the carrier namespace; cannot tell until fixed.",
+    "Whether the existing continuity proof can supply page_carries covering the real t34 cross-page case; not changed/verified. CN t34 is cap-partial, not cross-page.",
+    "Whether the three new grammar modules enter a runtime selection cache; no module-hash cache key found, selector version remains 0.9.0.",
+    "Whether the family-only scope is the contract owner's intended reading of 'Chinese unique product' (plan says yes; contract 6.2 ambiguous).",
+    "Whether the author preserved RED->GREEN ordering; only the final green suite is visible (no git operations performed).",
+    "Whether the family-scope receipts were produced by exactly these three grammar module SHAs; bindings omit them, although work totals match independent replay.",
+    "How much of the HK 13.17M/16M is attributable to B2; no pre-B2 same-source baseline was measured."
+  ],
+  "notes": [
+    "Worktree changed during review; final SHAs are pinned in changed_files. The earlier 77-PASS snapshot lacked the family filter; findings tied to singular gating were withdrawn.",
+    "No repository file other than this report pair was written. Real-source probe outputs went to a system temp directory; no source/gold/config or git state was modified.",
+    "Report pair: review/b2-antecedent-independent-review.md and .json."
+  ]
+}

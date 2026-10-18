@@ -1,3 +1,19 @@
+## DU11 B2 独立审查 REJECT，P1/P2 已全修 — 2026-10-18
+
+非作者独立审查判定 REJECT（5 个 P1、11 个 P2）。已逐条修复：声明上下文端到端进入 target 组的 citation context；envelope 按原始 unit 计数、carrier 展开全部 originals；声明 ref 改用原文 offset；跨页 `page_carries` 从 continuity 证明接线；内部声明只认 deictic 之前（forward=missing、内部竞争=ambiguous）；单卡 reference deferral 不再降级整篇 coverage；收据前置暴露 `REFERENCE_*`；产品 head 词表收敛为 `PRODUCT_SUFFIX` 子集。
+
+`tests/unit/du11_source_closure` 89 PASS；真实 CN/HK/US 仍 10/10、7/7、8/8（0 API、原件/gold 不变），CN 收据首次出现 `REFERENCE_UNRESOLVED=3`、`REFERENCE_ENVELOPE=1`；t32/t34 仍 `selected_matches=0`。复审通过后正常发布，再进入正式 C。详见 `du11-source-closure-2026-10-18/task_plan.md`。
+
+---
+## DU11 B2 有界先行词已实现并完成三源回放 — 2026-10-18
+
+B2 工程节点（当前唯一主线）已实现：product_reference 纯语法、`OperatingRelationSession.reference_closure`、`narrative_antecedent` 有界窗口与联合 envelope、`SourceOperatingSession.reference()`，以及 `_candidates` 中 readiness 先于 graph/fact 的接线。
+
+真实 CN/HK/US 回放（0 API、原件/gold 前后不变、同 16M 账户）：10/10、7/7、8/8，selected 96；t32/t34 精确 SHA 不再 selected，p17「该系列设备已付运」按 `REFERENCE_UNRESOLVED/missing` 显式 defer（CN withheld 137，其中 reference 相关 3）。范围收敛为族/系列指代，单数「该设备/该产品」保留 legacy admission。`tests/unit/du11_source_closure` 78 PASS；全量 unit 除 4 项宿主环境失败（Git-bash msys、真实 config 公司数、sqlite tmp）外无新增失败。
+
+独立审查与正常发布进行中；正式 C（三供应商原语言摘要、付费恢复、同/跨 run 缓存、FF/RF 真实消费）仍 OPEN。细节见 `du11-source-closure-2026-10-18/task_plan.md`。
+
+---
 ## DU11 两卡已并线发布，三仓 CI 全绿 — 2026-10-18
 
 **当前唯一执行入口：** [DU11 当前主线接手指南](../du11-source-closure-2026-10-18/review/harness-handoff.md)；当前发布/接收事实见[本轮收尾与保留项](../du11-source-closure-2026-10-18/review/du11-reception-closeout.md)，下一实现边界按[有界先行词最终接口/TDD](../du11-source-closure-2026-10-18/review/antecedent-source-interface-final.md)。不要重做已接收两卡，不把下方历史“待发布”当当前任务。

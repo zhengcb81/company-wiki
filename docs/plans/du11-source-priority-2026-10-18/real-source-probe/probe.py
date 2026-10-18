@@ -60,6 +60,9 @@ MODULES = [
     'company_wiki.document_understanding.narrative_continuity',
     'company_wiki.document_understanding.decision_inventory',
     'company_wiki.automation.narrative_model_extractive',
+    'company_wiki.document_understanding.operating_states.product_reference',
+    'company_wiki.document_understanding.operating_states.relations',
+    'company_wiki.source_catalog.narrative_antecedent',
 ]
 
 
