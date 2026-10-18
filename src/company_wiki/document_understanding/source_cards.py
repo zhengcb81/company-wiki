@@ -33,4 +33,8 @@ def source_cards(plan: SummaryTaskPlan, spans: Mapping[str, EvidenceSpan]) -> It
                for sid in task.member_ids):
             yield SourceCard(task, (), False, 'source_not_parsed')
             continue
+        closure_ids = task.member_ids if task.kind == 'operating_table' else task.support_ids
+        if any('table_structure_ambiguous' in spans[sid].quality_flags for sid in closure_ids):
+            yield SourceCard(task, (), False, 'source_table_unresolved')
+            continue
         yield SourceCard(task, tuple(spans[sid] for sid in task.support_ids), True, 'source_card')

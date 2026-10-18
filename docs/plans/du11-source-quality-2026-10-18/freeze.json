@@ -1,0 +1,76 @@
+{
+  "status": "ENGINEERING_REVIEWED_CONTENT_OPEN",
+  "scope": "ROOT F1/F2 and source priority projection; allocator independently owned",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+      "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "867f592e9c3e5f54a8c3740aee21e7af839471ff57a895097036a2047f037cd2"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_business_admission.py",
+      "sha256": "01fa8aa0d847745fcf4a76ead744426003f6333eb1fdb973f335f761860fc158"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_material_readiness.py",
+      "sha256": "ac2b0f0cc9057cd713603d4cce1a641259915e9e93bbc8ce0f488996f160b1dd"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summary_execution.py",
+      "sha256": "e594acd7f118b03d221ea65c19838a2aaee2c7a7fd2700151a108fac17aca2e5"
+    },
+    {
+      "path": "tests/unit/du11_summary_execution/test_contract.py",
+      "sha256": "f77befd95b319e45a0467be38af8a80b2490cf7057326f2b01eecd9b57189265"
+    }
+  ],
+  "real_C": "OPEN; no new supplier calls",
+  "tests": {
+    "first_red": "9 failed / 6 passed",
+    "mixed_audit_budget_red": "3 failed / 18 passed",
+    "material_red": "4 failed / 1 passed",
+    "broad": "935 passed / 1 failed / 62.02s; financial allocation false positive reproduced, fixed with direct stock-predicate and purpose distinction",
+    "actual_negative_red": "4 failed / 21 passed; GAAP/controls/goodwill/financial allocation",
+    "second_broad": "281 passed / 1 failed / 7.75s; positive allocated-RPO conversion blocked. Fixed by existing clause-bound contract_revenue_conversion observation, not noun override. Full related replay running.",
+    "full_related": "940 PASS / 60.14s before independent review delta",
+    "independent_delta": "4RED audits/English-number period +1RED execution typed path +1RED tablecontext/1 positive; final 179PASS6.10s includes actual wrapper/parse/terminal and counterfeit known-reason rejection.",
+    "singleton_responsibility_delta": "89PASS5.26s after actual HK regression diagnosis; no singleton fabricated closedwindow, semantic not evaluated",
+    "actual_hk_after_fix": "actual production handler/sourceDTO/gold/cap: selected7/7 canonical7/7, 96spans48claims, 27.147s, 12098578/16M singleaccount, 0API/0rawcopies, original unchanged; real final C remains OPEN"
+  },
+  "remaining": [
+    "unique product antecedent resolution and true cross-page sentence closure remain unproven",
+    "numeric label-only table/body closure requires real-source replay",
+    "real three supplier C and downstream/cache recovery still OPEN"
+  ]
+}

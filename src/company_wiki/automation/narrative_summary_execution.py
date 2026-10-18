@@ -43,10 +43,10 @@ _TASK_KEYS = {
     "priority",
 }
 _REASONS = {
-    "admitted": "source_card",
-    "duplicate": "duplicate_scope",
-    "unsupported": "source_not_parsed",
-    "deferred": "draft_byte_budget",
+    "admitted": ("source_card",),
+    "duplicate": ("duplicate_scope",),
+    "unsupported": ("source_not_parsed", "source_table_unresolved"),
+    "deferred": ("draft_byte_budget",),
 }
 _MODELS = {"consider", "redundant", "unclear", "unprocessed", "invalid"}
 
@@ -98,7 +98,7 @@ def _report(value: object) -> dict[str, Any]:
             "execution source disposition is invalid",
         )
         _require(
-            row["reason"] == _REASONS[disposition], "execution source reason is invalid"
+            row["reason"] in _REASONS[disposition], "execution source reason is invalid"
         )
         claim_id = row["claim_id"]
         if disposition == "admitted":
@@ -228,6 +228,9 @@ def _bind_summary(
             == (not cards[task.key].available),
             "execution availability differs from source-owned whole-card availability",
         )
+        if row["source_disposition"] == "unsupported":
+            _require(row["reason"] == cards[task.key].reason,
+                     "execution unsupported reason differs from its source observation")
         if row["source_disposition"] == "admitted":
             claim = claims[row["claim_id"]]
             claim_type = summary_claim_type_for_roles(task.support_roles)

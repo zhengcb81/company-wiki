@@ -12,6 +12,7 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 
 from .n6_candidate_operating_facts import OperatingFact, detect_operating_fact
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
+from .narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
 
 _OBJECT = re.compile(
     r"\b(?:products?|services?|platforms?|solutions?|(?:multi[- ]?)?models?|agents?|"
@@ -214,7 +215,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/8"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/9"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -297,7 +298,9 @@ _CONTRACT_CONVERSION = re.compile(
     r"\b(?:recogniz\w*|recognis\w*|invoic\w*|ship\w*|deliver\w*|convert\w*)\b|"
     r"确认|確認|开票|開票|交付|转化|轉化", re.I)
 _FORWARD_PERIOD = re.compile(
-    r"\b(?:future periods?|thereafter|over the next|within the next|next\s+\d+\s+(?:months?|quarters?|years?))\b|"
+    r"\b(?:future periods?|thereafter|over the next|within the next|next\s+"
+    r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|eighteen|twenty(?:[- ]four)?|thirty(?:[- ]six)?)"
+    r"\s+(?:months?|quarters?|years?))\b|"
     r"未来|未來|之后期间|之後期間|以后期间|以後期間", re.I)
 
 # Only the opt-in reader interprets these retail/network relations. A count is
@@ -632,7 +635,23 @@ def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
 
 def detect_reading_business_fact(text: str) -> OperatingFact:
     """Compatibility text recognizer; production supplies source relationships."""
-    return _detect_reading_business_fact(text, detect_business_fact)
+    return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact), source_purpose(text))
+
+
+def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
+    """Keep source purpose separate from syntactic actor/action recognition."""
+    if purpose == "accounting_policy" and "contract_revenue_conversion" in fact.reasons:
+        # Existing clause-bound contract/recognition/future-period observation
+        # distinguishes a conversion disclosure from a bare allocated total.
+        purpose = "operating_contract_stock"
+    if purpose in NON_OPERATING_PURPOSES:
+        return OperatingFact(False, (), (), 0, False, purpose)
+    if purpose == "operating_contract_stock":
+        return OperatingFact(True, tuple(dict.fromkeys((*fact.topics, "operating_metrics"))),
+            tuple(dict.fromkeys((*fact.reasons, "operating_contract_stock"))),
+            max(4, fact.score), True, purpose)
+    return OperatingFact(fact.eligible, fact.topics, fact.reasons, fact.score,
+                         fact.financial_exempt, purpose)
 
 
 _READING_ACCOUNTING = re.compile(r"营业收入|营业成本|净利润|资产负债|每股收益|现金流量|货币资金|应收账款|"
@@ -659,7 +678,7 @@ def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=
         if value not in legacy_facts:
             legacy_facts[value] = detect_business_fact(value)
         return legacy_facts[value]
-    description = _detect_reading_business_fact(text, recognize)
+    description = _purpose_fact(_detect_reading_business_fact(text, recognize), source_purpose(text))
     fact = project_reading_business_fact(text, source_relations, description=description, ref_text=ref_text)
     return fact, reading_financial_only(text, fact, recognize=recognize)
 
@@ -675,6 +694,8 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     Legacy 0.8 recognition remains unchanged.
     """
     fact = (description if description is not None else detect_reading_business_fact(text)) if include_description else OperatingFact()
+    if fact.purpose in NON_OPERATING_PURPOSES:
+        return fact
     dynamic_reasons = {"operating_activity", "specific_business_event",
                        "applied_operating_milestone", "customer_adoption_milestone"}
     independent = tuple(reason for reason in fact.reasons if reason not in dynamic_reasons)
@@ -715,7 +736,7 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
             topics.append("capacity_projects")
     return OperatingFact(bool(reasons), tuple(dict.fromkeys(topics)), tuple(dict.fromkeys(reasons)),
                          max(fact.score if independent else 0, 3 if reasons else 0),
-                         fact.financial_exempt or bool(source_relations.get("relations")))
+                         fact.financial_exempt or (include_description and bool(reasons)), fact.purpose)
 
 
 __all__ = ["business_objects", "business_qualification", "detect_business_fact",

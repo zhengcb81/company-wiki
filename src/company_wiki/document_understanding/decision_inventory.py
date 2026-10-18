@@ -65,11 +65,21 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
     from .native_table_bridge import NATIVE_TABLE_BRIDGE_VERSION
     from company_wiki.document_normalization import text_matching
 
-    versions = {"inventory": "1.5.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    business_modules = (
+        "company_wiki.source_catalog.narrative_business_policy",
+        "company_wiki.source_catalog.narrative_source_purpose",
+        "company_wiki.source_catalog.narrative_operating_relations",
+        "company_wiki.source_catalog.narrative_reading",
+        "company_wiki.source_catalog.narrative_finalize",
+    )
+    versions = {"inventory": "1.6.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
             "business_policy": READING_BUSINESS_POLICY_VERSION,
+            "business_algorithms": _digest({name: sha256(
+                Path(import_module(name).__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+                for name in business_modules}),
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
             "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,

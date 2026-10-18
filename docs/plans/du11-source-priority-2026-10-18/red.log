@@ -1,0 +1,151 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 20 items
+
+tests\unit\du11_source_priority\test_source_priority.py FFFFFFFFFFFFFF.. [ 80%]
+FF.F                                                                     [100%]
+
+================================== FAILURES ===================================
+_ test_late_important_source_card_survives_same_bounded_byte_capacity[texts0] _
+tests\unit\du11_source_priority\test_source_priority.py:51: in test_late_important_source_card_survives_same_bounded_byte_capacity
+    assert ids == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+_ test_late_important_source_card_survives_same_bounded_byte_capacity[texts1] _
+tests\unit\du11_source_priority\test_source_priority.py:51: in test_late_important_source_card_survives_same_bounded_byte_capacity
+    assert ids == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__ test_priority_then_value_band_then_score_are_source_tuple_order[fields0] ___
+tests\unit\du11_source_priority\test_source_priority.py:65: in test_priority_then_value_band_then_score_are_source_tuple_order
+    assert allocated(value)[1] == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__ test_priority_then_value_band_then_score_are_source_tuple_order[fields1] ___
+tests\unit\du11_source_priority\test_source_priority.py:65: in test_priority_then_value_band_then_score_are_source_tuple_order
+    assert allocated(value)[1] == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__ test_priority_then_value_band_then_score_are_source_tuple_order[fields2] ___
+tests\unit\du11_source_priority\test_source_priority.py:65: in test_priority_then_value_band_then_score_are_source_tuple_order
+    assert allocated(value)[1] == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+___ test_source_text_company_words_and_task_position_do_not_create_priority ___
+tests\unit\du11_source_priority\test_source_priority.py:72: in test_source_text_company_words_and_task_position_do_not_create_priority
+    assert allocated(first)[0].draft['claims'][0]['text'] == texts[1]
+E   AssertionError: assert 'Routine comp...te statement.' == 'An independe...ortant event.'
+E     
+E     - An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independently important event.An independen...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad0] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad1] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad2] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad3] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad4] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad5] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad6] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+__________ test_unknown_or_invalid_policy_keeps_original_slot[bad7] ___________
+tests\unit\du11_source_priority\test_source_priority.py:88: in test_unknown_or_invalid_policy_keeps_original_slot
+    assert ids == ['t2-source', 't3-source']
+E   AssertionError: assert ['t1-source', 't2-source'] == ['t2-source', 't3-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+______ test_context_cannot_lend_high_priority_but_best_real_support_can _______
+tests\unit\du11_source_priority\test_source_priority.py:126: in test_context_cannot_lend_high_priority_but_best_real_support_can
+    assert chosen == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+______ test_best_complete_support_tuple_controls_indivisible_whole_group ______
+tests\unit\du11_source_priority\test_source_priority.py:141: in test_best_complete_support_tuple_controls_indivisible_whole_group
+    assert chosen == ['t2-source']
+E   AssertionError: assert ['t1-source'] == ['t2-source']
+E     
+E     At index 0 diff: 't1-source' != 't2-source'
+E     Use -v to get more diff
+____ test_allocator_identity_and_actual_module_path_are_bound_to_worktree _____
+tests\unit\du11_source_priority\test_source_priority.py:165: in test_allocator_identity_and_actual_module_path_are_bound_to_worktree
+    assert owner.SOURCE_CARD_ALLOCATION_VERSION == 'source-card-allocation/1'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_model_extractive' has no attribute 'SOURCE_CARD_ALLOCATION_VERSION'
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_late_important_source_card_survives_same_bounded_byte_capacity[texts0]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_late_important_source_card_survives_same_bounded_byte_capacity[texts1]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_priority_then_value_band_then_score_are_source_tuple_order[fields0]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_priority_then_value_band_then_score_are_source_tuple_order[fields1]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_priority_then_value_band_then_score_are_source_tuple_order[fields2]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_source_text_company_words_and_task_position_do_not_create_priority
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad0]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad1]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad2]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad3]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad4]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad5]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad6]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_unknown_or_invalid_policy_keeps_original_slot[bad7]
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_context_cannot_lend_high_priority_but_best_real_support_can
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_best_complete_support_tuple_controls_indivisible_whole_group
+FAILED tests/unit/du11_source_priority/test_source_priority.py::test_allocator_identity_and_actual_module_path_are_bound_to_worktree
+======================== 17 failed, 3 passed in 5.06s =========================

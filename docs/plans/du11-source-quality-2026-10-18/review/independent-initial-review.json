@@ -1,0 +1,162 @@
+{
+  "schema_version": "du11-source-quality-independent-review/1",
+  "status": "CHANGES_REQUIRED",
+  "reviewer": "/root/du10_ff_reception_review",
+  "scope": "F1/F2 source quality and priority field production projection, excluding independently-owned allocator/rank decoder",
+  "declared_freeze": {
+    "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW",
+    "scope": "ROOT F1/F2 and source priority projection; allocator independently owned",
+    "files": [
+      {
+        "path": "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+        "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+        "sha256": "526f0b0d85754ed99837eebc09a3780b2a3fed3ee9fc2fa61f60ce5a66f5c36f"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "sha256": "76eca6c618912ce6f79a8cb6638fe51295703dcc568bf618a1686a6d8a93e3fd"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_reading.py",
+        "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+        "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/source_cards.py",
+        "sha256": "5b1756de933b1c1faa899cc67c388c3e31a08cc52514e5fd57014d6dcedc272a"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+        "sha256": "ef96cf6ee682c6f8d1f985147e3709e42c16815783c6dee4516113406657d607"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/decision_inventory.py",
+        "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+      },
+      {
+        "path": "tests/unit/du11_source_quality/test_business_admission.py",
+        "sha256": "64e6c0b640bfb04332402f87069a9cf0dc52b6ba640346f84136293197981a7e"
+      },
+      {
+        "path": "tests/unit/du11_source_quality/test_material_readiness.py",
+        "sha256": "448f74eaa30107b78a7ebdf1fb68cc4ced67f1824ec26678d53cea975b39adf4"
+      }
+    ],
+    "real_C": "OPEN; no new supplier calls",
+    "tests": {
+      "first_red": "9 failed / 6 passed",
+      "mixed_audit_budget_red": "3 failed / 18 passed",
+      "material_red": "4 failed / 1 passed",
+      "broad": "935 passed / 1 failed / 62.02s; financial allocation false positive reproduced, fixed with direct stock-predicate and purpose distinction",
+      "actual_negative_red": "4 failed / 21 passed; GAAP/controls/goodwill/financial allocation",
+      "second_broad": "281 passed / 1 failed / 7.75s; positive allocated-RPO conversion blocked. Fixed by existing clause-bound contract_revenue_conversion observation, not noun override. Full related replay running."
+    },
+    "remaining": [
+      "unique product antecedent resolution and true cross-page sentence closure remain unproven",
+      "numeric label-only table/body closure requires real-source replay",
+      "real three supplier C and downstream/cache recovery still OPEN"
+    ]
+  },
+  "actual_sha_at_report": {
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f",
+    "src/company_wiki/source_catalog/narrative_reading.py": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8",
+    "src/company_wiki/document_understanding/source_cards.py": "5b1756de933b1c1faa899cc67c388c3e31a08cc52514e5fd57014d6dcedc272a",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "ef96cf6ee682c6f8d1f985147e3709e42c16815783c6dee4516113406657d607",
+    "src/company_wiki/document_understanding/decision_inventory.py": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4",
+    "tests/unit/du11_source_quality/test_business_admission.py": "01fa8aa0d847745fcf4a76ead744426003f6333eb1fdb973f335f761860fc158",
+    "tests/unit/du11_source_quality/test_material_readiness.py": "e317466141b17dd110477515bfa424eebd2b76534fc9d0237f2e042e967ffc01"
+  },
+  "findings": [
+    {
+      "id": "audit-object-event-override",
+      "priority": "P2",
+      "owner": "source_catalog/narrative_source_purpose.py::_clause_purpose",
+      "problem": "Generic object+operating event wins before audit scope except a narrow We... prefix. Auditor procedures mentioning delivered software/products are admitted as operating events.",
+      "actual_controls": [
+        {
+          "text": "Our audit procedures included testing revenue from software delivered to customers.",
+          "admitted": true,
+          "purpose": "operating"
+        },
+        {
+          "text": "The independent auditor tested software delivered to customers as part of audit procedures.",
+          "admitted": true,
+          "purpose": "operating"
+        },
+        {
+          "text": "审计程序包括检查已交付客户的产品及其收入确认凭证。",
+          "admitted": true,
+          "purpose": "operating"
+        }
+      ],
+      "positive_keep": "We launched software for customers to automate audit procedures.",
+      "expected": "Audit-procedure actor/predicate scope should remain non-operating; genuine business product enabling audit automation remains operating. Do not blacklist audit noun in any business sentence."
+    },
+    {
+      "id": "allocated-conversion-spelled-period",
+      "priority": "P2",
+      "owner": "narrative_business_policy.py::_FORWARD_PERIOD and existing contract conversion reason",
+      "problem": "New accounting-purpose gate rejects explicit future RPO conversion in common spelled-out time expressions.",
+      "actual_control": "Revenue allocated to remaining performance obligations was $90 million, and we expect to recognize 40% as revenue in the next twelve months.",
+      "observed": {
+        "admitted": false,
+        "purpose": "accounting_policy"
+      },
+      "comparisons": {
+        "next 12 months": true,
+        "future periods": true,
+        "over the next twelve months": true
+      },
+      "expected": "Shared future-period recognition should preserve this explicit original conversion; bare allocated amount/no conversion schedule remains negative."
+    },
+    {
+      "id": "table-reason-execution-port",
+      "priority": "P1",
+      "owner": "automation/narrative_summary_execution.py::_REASONS / selected reason binding",
+      "problem": "Producer creates unsupported/source_table_unresolved but execution report parser only accepts unsupported/source_not_parsed. Valid new plan cannot pass formal wrapper/receipt decode.",
+      "reproduction": "selected(2), first span quality_flags=[table_structure_ambiguous] -> compile_extractive_plan -> _report(plan.execution)",
+      "actual_error": "NarrativeContractError: execution source reason is invalid",
+      "expected": "Bounded supported reason enum must accept exact source-owner reason, with selected-bound per-card consistency; unknown reason stays rejected. Test actual wrap/parse/recovery diagnostics, not only compile."
+    },
+    {
+      "id": "ambiguous-table-required-context",
+      "priority": "P2",
+      "owner": "document_understanding/source_cards.py::source_cards",
+      "problem": "Quality ambiguity checked only support_ids. Operating-table task with clean value support and ambiguous required header/year context is admitted, despite unresolved required observation.",
+      "reproduction": "Valid reading_context/2 operating_table group, support=[first span], context=[second span], second quality_flags=[table_structure_ambiguous] -> compile_extractive_plan",
+      "observed": {
+        "source_disposition": "admitted",
+        "reason": "source_card"
+      },
+      "expected": "Required table observation ambiguity must prevent complete numeric card (at least table-group full member scope); genuinely independent prose should survive unrelated context. Do not add table parser in source_cards."
+    }
+  ],
+  "checks_without_confirmed_issue": [
+    "OperatingFact new purpose field defaults unknown; legacy detector call paths unchanged.",
+    "SourceOperatingSession caches fact/financial per source owner and reserves compatibility assessment before it; exhausted purpose marked unassessed and _admitted refuses without unbudgeted fallback.",
+    "Priority is projected only current READING_BUDGET_POLICY, not explicit legacy/replay budget policies. No model/gold-based priorities added.",
+    "Business algorithm hashes and continuity version/inventory increment enter current source decision identity; source_cards/execution helper dependencies enter v5 model boundary identity.",
+    "Citation support default now uses source-owned anchors, context remains referenced; QA branch still restricts factual support to answers.",
+    "Single native open-end and mid-block-start tests are present; missing antecedent/true cross-page closure explicitly remains unproven."
+  ],
+  "execution": "Only compact pure real assessment/compile/formal-report-decoder controls, no fresh pytest suite, models, APIs, real originals or config writes. Author broad940PASS60.14s receipt inspected, not rerun and not proof of above untested integration cases.",
+  "remaining_scope": [
+    "Unique antecedents and true cross-page closure still not proven.",
+    "Real numeric/table native replay and three-provider C quality/downstream/cache recovery remain OPEN.",
+    "No new human approval or quality permit proposed."
+  ]
+}

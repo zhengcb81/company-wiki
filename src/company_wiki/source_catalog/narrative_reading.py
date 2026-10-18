@@ -22,6 +22,7 @@ from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 
 from .narrative_budget import READING_BUDGET_POLICY
 from .narrative_business_policy import detect_reading_business_fact, reading_financial_only
+from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_finalize import finalize_selection
@@ -47,6 +48,8 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
               is_heading: bool = False, table_qualified: bool = False,
               financial_only: bool | None = None) -> tuple[bool, Any]:
     fact = fact or detect_reading_business_fact(unit.raw_text)
+    if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == "unassessed":
+        return False, fact
     if kind == "operating_table" and not table_qualified:
         return False, fact
     if unit.source_role in _CONTEXT_ROLES or (kind != "operating_table" and
@@ -569,7 +572,8 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
             native_views = [view for view in native_views if view]
             if not native_views and answer_ids:
                 native_views = [[uid for uid in entry["member_unit_ids"] if uid in answer_ids]]
-        for native_support in native_views if native_views is not None else [list(required)]:
+        for native_support in native_views if native_views is not None else [
+                list(entry.get("anchor_unit_ids", entry["member_unit_ids"]))]:
             if not native_support or not set(native_support) <= required:
                 raise ValueError("native citation support must belong to its complete source package")
             support_set = {pipeline["selected_span_ids"][uid] for uid in native_support}

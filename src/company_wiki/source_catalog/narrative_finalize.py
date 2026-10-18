@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+from dataclasses import replace
 import json
 import re
 from typing import Any, Literal
@@ -101,16 +102,24 @@ def _group_signatures(
 
 
 def _evidence_spans(
-    candidates: Sequence[EvidenceCandidate], group_ids: Mapping[str, str]
+    candidates: Sequence[EvidenceCandidate], group_ids: Mapping[str, str],
+    reading_metadata: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> tuple[EvidenceSpan, ...]:
-    return tuple(
-        candidate.unit.to_evidence_span(
+    spans = []
+    for candidate in candidates:
+        unit = candidate.unit
+        reading = (reading_metadata or {}).get(unit.unit_id)
+        if reading is not None:
+            unit = replace(unit, metadata={**unit.metadata,
+                "reading_priority": reading["priority"],
+                "reading_value_band": reading.get("value_band", "description"),
+                "reading_score": candidate.score})
+        spans.append(unit.to_evidence_span(
             topics=candidate.topics,
             selection_reasons=candidate.reasons,
-            selection_group_id=group_ids.get(candidate.unit.unit_id),
-        )
-        for candidate in candidates
-    )
+            selection_group_id=group_ids.get(unit.unit_id),
+        ))
+    return tuple(spans)
 
 
 def _status(
@@ -189,7 +198,8 @@ def finalize_selection(
         selected.sort(key=lambda item: native_order[item.unit.unit_id])
     else:
         selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
-    spans = _evidence_spans(selected, effective_groups)
+    spans = _evidence_spans(selected, effective_groups,
+        reading_metadata if budget_policy == READING_BUDGET_POLICY else None)
     return NarrativeEvidencePackage(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,

@@ -1,0 +1,98 @@
+{
+  "schema_version": "du11-old-hk-oracle-control/1",
+  "gold_sha256": "10f9e3b98d1fc99d49c1edf2abba025f8ea3ea060916aac8430a6732fb78c5b7",
+  "bundle_sha256": "1c6947582889f2d1a6e96882667ead6691c34fd4080589c33e5fc36a10bd74c3",
+  "same_functions": "real-source-probe/probe.py::score_claims + existing closed_group_support.score_facts/score_claim_facts",
+  "selected": [
+    {
+      "id": "f-store-total-2024",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-store-mainland-overseas",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-store-operating-model",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-top-toy-total",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-top-toy-mainland",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-top-toy-overseas-commenced",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-store-network-approximate",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "canonical": [
+    {
+      "id": "f-store-total-2024",
+      "supported": true,
+      "claim_ids": [
+        "t17-source"
+      ]
+    },
+    {
+      "id": "f-store-mainland-overseas",
+      "supported": true,
+      "claim_ids": [
+        "t9-source"
+      ]
+    },
+    {
+      "id": "f-store-operating-model",
+      "supported": true,
+      "claim_ids": [
+        "t9-source"
+      ]
+    },
+    {
+      "id": "f-top-toy-total",
+      "supported": true,
+      "claim_ids": [
+        "t12-source"
+      ]
+    },
+    {
+      "id": "f-top-toy-mainland",
+      "supported": true,
+      "claim_ids": [
+        "t12-source"
+      ]
+    },
+    {
+      "id": "f-top-toy-overseas-commenced",
+      "supported": true,
+      "claim_ids": [
+        "t12-source"
+      ]
+    },
+    {
+      "id": "f-store-network-approximate",
+      "supported": true,
+      "claim_ids": [
+        "t17-source"
+      ]
+    }
+  ],
+  "selected_supported": 7,
+  "canonical_supported": 7,
+  "source_parses": 0,
+  "api_calls": 0
+}

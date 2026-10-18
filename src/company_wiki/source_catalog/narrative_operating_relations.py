@@ -4,6 +4,7 @@ No parsing, IO, registry or extra work balance. The source owner fixes native
 carriers and structural context first; consumers share the resulting facts.
 """
 from collections.abc import Mapping
+from dataclasses import replace
 from bisect import bisect_right
 from itertools import chain
 import re
@@ -145,7 +146,7 @@ class SourceOperatingSession:
         try:
             if result["status"] == "partial" and self.work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
-            self.work_budget.charge(4 * len(text))
+            self.work_budget.charge(6 * len(text))
             fact, financial = assess_reading_business_fact(text, result, ref_text=ref_text)
         except WorkBudgetExceeded:
             self.complete = False
@@ -153,6 +154,7 @@ class SourceOperatingSession:
             # restarting the text recognizer or scanning an unexamined tail.
             fact = project_reading_business_fact(text, result,
                 include_description=False, ref_text=ref_text) if result["relations"] else OperatingFact()
+            fact = replace(fact, purpose="unassessed")
             financial = False if fact.financial_exempt else None
         self.facts[owner] = fact
         self.financial[owner] = financial
