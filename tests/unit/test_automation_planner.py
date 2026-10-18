@@ -135,6 +135,7 @@ def test_registry_unknown_job_type_raises():
                 "retryable_errors": (
                     "MODEL_TIMEOUT",
                     "MODEL_RATE_LIMIT",
+                    "SUMMARY_COVERAGE_PARTIAL",
                     "IO_TRANSIENT",
                     "LEASE_LOST",
                 ),
