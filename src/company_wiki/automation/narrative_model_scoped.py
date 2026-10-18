@@ -30,7 +30,7 @@ SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
 # and the 22-clause draft that covered them was rejected). Forty keeps the
 # summary bounded while leaving room for every selected business update.
 MAX_SUMMARY_CLAIMS = 40
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.6'
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.8'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -49,7 +49,8 @@ SCOPED_INSTRUCTION = (
     'Each clause is at most 280 characters. Emit exactly output_plan.target_claim_count '
     'clauses (never more than output_plan.max_claims in total), at most '
     'output_plan.max_claims_per_task per task; stop once the target is reached. Cover the '
-    'most important distinct business updates and plans across the supplied tasks; omit a '
+    'most important distinct business updates and plans across the supplied tasks, including '
+    'stated coverage or market-share figures and multi-year targets when a task states them; omit a '
     'task with no direct support rather than invent support. Do not output reasoning, '
     'Markdown, research conclusions, valuation, ratings or paths. Valid local citations do '
     'not prove that rewritten prose is true.'

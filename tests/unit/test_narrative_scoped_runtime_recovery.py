@@ -69,7 +69,7 @@ def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_rec
             # Run's compatibility container retains the request's original
             # default; each actual source execution freezes its own protocol.
             assert run.prompt_version==request.execution_versions['prompt']
-            assert all(m['execution_versions']['prompt']=='reading-source-scoped/4.0.6'
+            assert all(m['execution_versions']['prompt']=='reading-source-scoped/4.0.8'
                        for m in frozen.values())
             auto=_database_dump(root/'automation.db')
             catalog=_database_dump(state.catalog.config.database_path)
