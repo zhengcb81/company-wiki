@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 import hashlib
+import json
 from importlib.metadata import PackageNotFoundError, version
 import logging
 from pathlib import Path
@@ -226,6 +227,66 @@ def _success(
     )
 
 
+
+
+def _uncovered_task_keys(request: Any, summary: NarrativeSummaryResult) -> list[str]:
+    """Visible scoped tasks with no claim in this summary, in request order."""
+    from .narrative_model_scoped import SCOPED_PROMPT_VERSION
+   
+    if getattr(request, "prompt_version", None) != SCOPED_PROMPT_VERSION:
+        return []
+    try:
+        data = json.loads(request.data_json)
+        tasks = data["material"]["tasks"]
+    except (KeyError, TypeError, ValueError):
+        return []
+    keys = [row["key"] for row in tasks if isinstance(row, dict) and isinstance(row.get("key"), str)]
+    draft = summary.draft
+    if draft is None:
+        return keys
+    covered = {str(claim.claim_id).split("-", 1)[0] for claim in draft.claims}
+    return [key for key in keys if key not in covered]
+
+
+def _partial_summary_result(
+    summary: NarrativeSummaryResult, metrics: HandlerMetrics, keys: list[str],
+    execution: Mapping[str, Any],
+) -> HandlerResult:
+    """Keep the first-pass summary and ask the worker for its repair attempt."""
+    return HandlerResult(
+        outcome=HandlerOutcome.RETRYABLE,
+        result={"coverage_partial": True, "summary": summary.to_dict(),
+                "uncovered_task_keys": keys, "execution": dict(execution)},
+        artifacts=(),
+        effects=(),
+        metrics=metrics,
+        error=HandlerError("SUMMARY_COVERAGE_PARTIAL",
+                           "partial summary waits for its repair attempt"),
+    )
+
+
+def _merge_repair_summary(
+    prior: NarrativeSummaryResult, repair: NarrativeSummaryResult,
+) -> NarrativeSummaryResult:
+    """Merge a repair draft into the first-pass summary with unique claim ids."""
+    wire = prior.to_dict()
+    draft = wire["draft"]
+    claims = list(draft.get("claims", []))
+    seen = {str(claim.get("claim_id")) for claim in claims}
+    repair_wire = repair.to_dict()
+    for index, claim in enumerate(repair_wire["draft"]["claims"], 1):
+        key = str(claim["claim_id"]).split("-", 1)[0]
+        claim_id = f"{key}-r{index}"
+        while claim_id in seen:
+            claim_id += "x"
+        claim["claim_id"] = claim_id
+        seen.add(claim_id)
+        claims.append(claim)
+    draft["claims"] = claims
+    draft["status"] = "needs_review"
+    wire["model"] = repair_wire.get("model")
+    return NarrativeSummaryResult.from_dict(wire)
+
 def _dependency_result(context: JobExecutionContext) -> NarrativeSelectResult:
     dependency = context.dependency_results.get("source.narrative_select")
     if (
@@ -366,17 +427,49 @@ class NarrativeSummarizeHandler:
             except ModelResponseError as exc:
                 raise _SummaryFailure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                                       str(exc)) from exc
+        prior_summary: NarrativeSummaryResult | None = None
+        uncovered: list[str] = []
+        prior_result = context.prior_partial_result
+        if (prior_result is not None and isinstance(prior_result.result, Mapping)
+                and prior_result.result.get("coverage_partial") is True
+                and isinstance(prior_result.result.get("summary"), Mapping)):
+            try:
+                prior_summary = NarrativeSummaryResult.from_dict(prior_result.result["summary"])
+            except NarrativeContractError:
+                prior_summary = None
+            if prior_summary is not None:
+                uncovered = [key for key in prior_result.result.get("uncovered_task_keys", ())
+                             if isinstance(key, str)]
+        if prior_summary is not None and not uncovered:
+            return _success(prior_summary)
         try:
-            request = build_model_request(selected,
-                reading_projection_version=reading_projection_version)
+            if prior_summary is not None:
+                from .narrative_model_scoped import MAX_SUMMARY_CLAIMS
+                prior_draft = prior_summary.draft
+                if prior_draft is None:
+                    return _success(prior_summary)
+                remaining = MAX_SUMMARY_CLAIMS - len(prior_draft.claims)
+                if remaining <= 0:
+                    return _success(prior_summary)
+                request = build_model_request(selected,
+                    reading_projection_version=reading_projection_version,
+                    only_tasks=frozenset(uncovered),
+                    target_claims=min(len(uncovered), remaining))
+            else:
+                request = build_model_request(selected,
+                    reading_projection_version=reading_projection_version)
         except NarrativeContractError as exc:
-            # A bounded source plan that cannot be represented is rejected
-            # before model admission, with a stable source-layer diagnosis.
             raise _SummaryFailure('SUMMARY_PLAN_INVALID', HandlerOutcome.TERMINAL_FAILURE,
                                   'source summary plan exceeds or violates its bounded contract') from exc
         context.checkpoint()
         if self._model_caller is not None:
-            response, metrics = self._model_caller.generate(context, request)
+            try:
+                response, metrics = self._model_caller.generate(context, request)
+            except NarrativeBudgetCallError as exc:
+                if prior_summary is None:
+                    raise
+                # A repair call is best effort: never lose the first summary.
+                return _success(prior_summary, exc.metrics)
         else:
             assert self._model is not None
             response = self._model.generate(request)
@@ -388,8 +481,12 @@ class NarrativeSummarizeHandler:
                 reading_projection_version=reading_projection_version,
                 execution_report=execution)
         except _SummaryFailure as exc:
+            if prior_summary is not None:
+                return _success(prior_summary, metrics)
             return _post_model_failure(response, metrics, exc.code, exc.outcome, exc.detail)
         except ModelResponseError as exc:
+            if prior_summary is not None:
+                return _success(prior_summary, metrics)
             return _post_model_failure(
                 response, metrics,
                 "MODEL_RESPONSE_INVALID",
@@ -398,11 +495,24 @@ class NarrativeSummarizeHandler:
                 f"(rule={_model_response_rule(exc)})",
             )
         except UnicodeError:
+            if prior_summary is not None:
+                return _success(prior_summary, metrics)
             return _post_model_failure(
                 response, metrics,
                 "MODEL_RESPONSE_INVALID", HandlerOutcome.TERMINAL_FAILURE,
                 "model response cannot form a UTF-8 summary (rule=FINAL_UTF8)",
             )
+        if prior_summary is not None:
+            try:
+                merged = _merge_repair_summary(prior_summary, completed)
+                merged.validate_against(selected)
+                merged = _observe_output_language(merged, selected)
+            except (_SummaryFailure, NarrativeContractError):
+                return _success(prior_summary, metrics)
+            return _success(merged, metrics)
+        uncovered_keys = _uncovered_task_keys(request, completed)
+        if uncovered_keys and context.attempt.attempt_no < context.job.max_attempts:
+            return _partial_summary_result(completed, metrics, uncovered_keys, execution)
         return _success(completed, metrics, execution=execution or None)
 
     @staticmethod

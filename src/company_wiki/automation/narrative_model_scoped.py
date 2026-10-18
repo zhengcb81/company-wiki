@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from collections import Counter
 from collections.abc import Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import hashlib
 import json
 import logging
@@ -102,13 +102,16 @@ def scoped_boundary_identity(boundary) -> dict[str, Any]:
         'decoder_sha256': canonical_json_hash(dependencies), 'implementation_dependencies': dependencies}
 
 
-def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None) -> dict[str, Any]:
+def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
+                        *, target_override: int | None = None) -> dict[str, Any]:
     from .narrative_model import ModelResponseError
     if max_output_tokens is not None and (type(max_output_tokens) is not int or max_output_tokens <= 0):
         raise ModelResponseError('model output budget must be a positive integer')
     # Ask for fewer than the hard cap so a model that overshoots by a clause or
     # two still lands inside the contract instead of dead-lettering the item.
     target = min(MAX_SUMMARY_CLAIMS - 4, max(1, task_count))
+    if target_override is not None:
+        target = max(1, min(target, int(target_override)))
     if max_output_tokens is not None:
         target = min(target, max(1, (max_output_tokens - 256) // 320))
     return {'max_claims': MAX_SUMMARY_CLAIMS, 'target_claim_count': target, 'target_text_chars': 240,
@@ -141,7 +144,8 @@ class ScopedModelRequest(_LegacyModelRequest):
             canonical_json_hash({'selected_input_sha256': self.input_sha256, 'output_plan': plan}))
 
 
-def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
+def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
+                         target_claims: int | None = None) -> ScopedModelRequest:
     from . import narrative_model as legacy
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
@@ -149,6 +153,11 @@ def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
     # compatibility; the effective summary budget is output_plan.max_claims
     # (MAX_SUMMARY_CLAIMS) and the decoder enforces the same number.
     view = compile_scoped_model_view(selected, max_claims=20)
+    if only_tasks is not None:
+        visible = [task for task in view.plan.tasks if task.key in only_tasks]
+        if not visible:
+            raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
+        view = replace(view, visible_keys=frozenset(task.key for task in visible))
     if not view.plan.tasks or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
     aliases = ['r' + str(i) for i in range(1, len(selected.reading_context['groups']) + 1)]
@@ -160,7 +169,9 @@ def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
             'language': selected.source_metadata.language, 'title': selected.source_metadata.title,
             'document_kind': selected.source_metadata.document_kind},
         'material': view.to_model_dict(), 'reading_strategy': strategy,
-        'output_plan': (plan := _scoped_output_plan(len(view.plan.tasks))),
+        'output_plan': (plan := _scoped_output_plan(
+            len(view.visible_keys) if view.visible_keys is not None else len(view.plan.tasks),
+            target_override=target_claims)),
         'response_schema': scoped_response_schema(plan['max_claims_per_task'])}
     data_json = canonical_json(envelope)
     return ScopedModelRequest(SCOPED_PROMPT_VERSION, SCOPED_INSTRUCTION, data_json,

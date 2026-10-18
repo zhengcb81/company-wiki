@@ -100,6 +100,7 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
         retryable_errors=(
             "MODEL_TIMEOUT",
             "MODEL_RATE_LIMIT",
+            "SUMMARY_COVERAGE_PARTIAL",
             "IO_TRANSIENT",
             "LEASE_LOST",
         ),
