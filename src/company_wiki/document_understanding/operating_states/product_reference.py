@@ -226,17 +226,6 @@ def _latin_precedes(text: str, position: int) -> bool:
             or (token[:1].isdigit() and any(character.isalpha() for character in token)))
 
 
-def _latin_precedes(text: str, position: int) -> bool:
-    """True when a capitalised Latin token ends right before this position."""
-    prefix = text[max(0, position - 64):position].rstrip()
-    match = re.search(r"[A-Za-z0-9][A-Za-z0-9&./+-]*$", prefix)
-    if match is None:
-        return False
-    token = match.group()
-    return (any(character.isupper() for character in token)
-            or (token[:1].isdigit() and any(character.isalpha() for character in token)))
-
-
 def _name_before(prefix: str) -> tuple[str, int]:
     """The proper name immediately before a head, without swallowing prose."""
     stripped = prefix.rstrip()
@@ -367,10 +356,18 @@ def _members(text: str, match: re.Match[str] | None, bounds: tuple[int, int], *,
     return tuple(spans) if 2 <= len(spans) <= 8 else ()
 
 
+@dataclass(frozen=True)
+class DeclarationScan:
+    declarations: tuple[ProductDeclaration, ...]
+    clipped: bool = False
+
+
 @lru_cache(maxsize=512)
-def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
-    """One scan per distinct source text; predecessors repeat across targets."""
-    """Return explicitly named product declarations in source order.
+def scan_product_declarations(text: str) -> DeclarationScan:
+    """One scan per distinct source text; predecessors repeat across targets.
+
+    ``clipped`` records that a name still extended past the widest window, so
+    the caller can treat the observation as partial instead of absent.
 
     A CJK appositive without a Latin name or an explicit series marker is a
     description, not a named declaration; it cannot donate an antecedent.
@@ -378,6 +375,7 @@ def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
     """
     declared: list[ProductDeclaration] = []
     seen: set[tuple[int, int, str]] = set()
+    clipped = False
     for match in _HEAD_ONLY.finditer(text):
         head = match.group()
         # Bounded look-behind: a whole-document prefix costs O(document) per
@@ -385,6 +383,7 @@ def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
         # Widen the window when the name touches its edge, and defer instead of
         # accepting a truncated name when even the widest window clips it.
         name, start = "", 0
+        truncated = False
         for width in (64, 256, 1024, 4096):
             window_start = max(0, match.start() - width)
             candidate, offset = _name_before(text[window_start:match.start()])
@@ -393,9 +392,13 @@ def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
             absolute = window_start + offset
             if window_start > 0 and absolute > 0 and _latin_precedes(text, absolute):
                 # The visible prefix is a suffix of a longer Latin name; widen.
+                truncated = width == 4096
                 continue
             name, start = candidate, absolute
+            truncated = False
             break
+        if truncated:
+            clipped = True
         if not name:
             continue
         series_in_name = _FAMILY_SUFFIX.search(name)
@@ -429,9 +432,9 @@ def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
         declared.append(ProductDeclaration((start, end), family,
                                            head_class(head), bool(collective), collective,
                                            attribution))
-    return tuple(declared)
+    return DeclarationScan(tuple(declared), clipped)
 
 
 def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
     """Public, identity-cached view of the declarations in one source text."""
-    return _declarations_for(text)
+    return scan_product_declarations(text).declarations

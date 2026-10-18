@@ -32,8 +32,8 @@ from company_wiki.document_understanding.layout_hints.contract import (
 )
 
 from . import patterns as p
-from .product_reference import (find_product_declarations, find_product_deictic,
-                                head_class, is_generic_reference)
+from .product_reference import (find_product_deictic, head_class,
+                                is_generic_reference, scan_product_declarations)
 from .text_view import (MatchingText, MatchingView, build_matching_view,
                         build_prepared_matching_view, prepare_matching_text,
                         split_clauses, strip_connector)
@@ -850,7 +850,11 @@ class OperatingRelationSession:
         # A declaration strictly before the reference inside the same material
         # already closes it. A forward declaration does not, and two internal
         # families are ambiguous instead of silently preferred.
-        internal = [declaration for declaration in find_product_declarations(raw_target)
+        internal_scan = scan_product_declarations(raw_target)
+        if internal_scan.clipped:
+            diagnostics.append({"code": "antecedent_window_clipped", "unit_id": target})
+            return result("partial")
+        internal = [declaration for declaration in internal_scan.declarations
                     if declaration.span[0] < family_deictics[0].span[0]
                     and declaration.attribution == "issuer" and compatible(declaration)]
         if internal:
@@ -864,6 +868,7 @@ class OperatingRelationSession:
             diagnostics.append({"code": "antecedent_window_incomplete", "unit_id": target})
             return result("partial")
         families: dict[str, list[tuple[str, Any]]] = {}
+        clipped_any = False
         try:
             self.work_budget.charge(len(predecessors) + 1)
             for predecessor in predecessors:
@@ -874,12 +879,18 @@ class OperatingRelationSession:
                 self.work_budget.charge(len(text))
                 if text.rstrip().endswith(("？", "?")) and "请问" in text:
                     continue
-                for declaration in find_product_declarations(text):
+                scan = scan_product_declarations(text)
+                if scan.clipped:
+                    clipped_any = True
+                for declaration in scan.declarations:
                     if declaration.attribution != "issuer" or not compatible(declaration):
                         continue
                     families.setdefault(declaration.family, []).append((predecessor, declaration))
         except WorkBudgetExceeded:
             diagnostics.append({"code": "work_budget_exhausted", "unit_id": target})
+            return result("partial", references=references)
+        if clipped_any:
+            diagnostics.append({"code": "antecedent_window_clipped", "unit_id": target})
             return result("partial", references=references)
         if not families:
             diagnostics.append({"code": "antecedent_missing", "unit_id": target})

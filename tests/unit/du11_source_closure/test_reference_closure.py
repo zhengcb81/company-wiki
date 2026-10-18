@@ -9,7 +9,7 @@ from company_wiki.document_understanding.layout_hints.contract import (
     DEFAULT_LIMITS, WorkBudget,
 )
 from company_wiki.document_understanding.operating_states.product_reference import (
-    find_product_declarations, find_product_deictic,
+    find_product_declarations, find_product_deictic, scan_product_declarations,
 )
 from company_wiki.document_understanding.operating_states.relations import (
     OperatingRelationSession,
@@ -89,6 +89,19 @@ def test_long_latin_name_after_prose_is_extended_not_truncated():
     assert found[0].family.startswith("extremelylongproductnamealpha")
     assert text[found[0].span[0]:found[0].span[1]].startswith("ExtremelyLongProductNameAlpha")
 
+
+def test_over_wide_window_marks_the_scan_clipped():
+    text = "Alpha" + "B" * 4200 + " 系列产品已交付客户。"
+    scan = scan_product_declarations(text)
+    assert scan.clipped is True
+
+
+def test_clipped_predecessor_is_partial_not_missing():
+    text = "Alpha" + "B" * 4200 + " 系列产品已交付客户。"
+    engine = session({"d": unit(text), "t": unit(CN_TARGET)})
+    result = engine.reference_closure("t", ("d",), window_complete=True)
+    assert result["status"] == "partial"
+    assert any(row["code"] == "antecedent_window_clipped" for row in result["diagnostics"])
 
 def test_generic_appositive_is_not_a_named_declaration():
     assert not find_product_declarations("公司推出金属硅化物集成系统，已进入客户验证。")
