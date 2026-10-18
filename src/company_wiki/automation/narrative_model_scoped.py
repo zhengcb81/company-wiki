@@ -25,7 +25,7 @@ from .narrative_contracts import NarrativeSelectResult
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.3'
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.5'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -41,9 +41,10 @@ SCOPED_INSTRUCTION = (
     'do not output them. Respect output_plan.max_claims_per_task per task and '
     'output_plan.max_claims in total; the response schema arrays are bounded but the '
     'program enforces the smaller per-task cap, so exceeding it rejects the whole response. '
-    'Each clause is at most 280 characters. Choose the most important distinct business '
-    'updates across the supplied tasks, at most one clause per task, and aim for '
-    'output_plan.target_claim_count; never exceed output_plan.max_claims in total. Omit a '
+    'Each clause is at most 280 characters. Emit exactly output_plan.target_claim_count '
+    'clauses (never more than output_plan.max_claims in total), at most '
+    'output_plan.max_claims_per_task per task; stop once the target is reached. Cover the '
+    'most important distinct business updates and plans across the supplied tasks; omit a '
     'task with no direct support rather than invent support. Do not output reasoning, '
     'Markdown, research conclusions, valuation, ratings or paths. Valid local citations do '
     'not prove that rewritten prose is true.'
@@ -102,13 +103,13 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None) -
         raise ModelResponseError('model output budget must be a positive integer')
     # Ask for fewer than the hard cap so a model that overshoots by a clause or
     # two still lands inside the contract instead of dead-lettering the item.
-    target = min(18, max(1, task_count))
+    target = min(15, max(1, task_count))
     if max_output_tokens is not None:
         target = min(target, max(1, (max_output_tokens - 256) // 320))
     return {'max_claims': 20, 'target_claim_count': target, 'target_text_chars': 240,
         # The response schema can only bound each task array; this is the hard
         # per-task share of the global cap the decoder actually enforces.
-        'max_claims_per_task': max(1, 20 // max(1, task_count)),
+        'max_claims_per_task': 2,
         'configured_output_tokens': max_output_tokens, 'coverage': 'selected_source_tasks_only',
         'planning': 'compact_target_not_token_estimate'}
 
@@ -361,37 +362,12 @@ class ScopedModelView:
                                   task.support_ids, task.context_ids)
 
 
-def _model_visible_tasks(plan, known, max_claims: int):
-    """Highest-value tasks that fit the claim budget, in source order.
-
-    One citation view per task produces more tasks than the claim budget on a
-    long filing (64 views for 18 clauses). The model cannot answer them all and
-    real providers then overrun, invent part keys or emit malformed JSON. The
-    view therefore carries at most max_claims tasks, chosen by the existing
-    reading priority; unselected views stay in the public selection and are
-    simply not summarized.
-    """
-    if len(plan.tasks) <= max_claims:
-        return plan.tasks
-    # No per-span value score survives selection, so spread the budget evenly
-    # across the filing's task order: taking the first N compresses the summary
-    # into the opening sections and drops later business updates (for example
-    # the MOCVD product milestones) that the selection did include.
-    total = len(plan.tasks)
-    chosen = {round(index * (total - 1) / (max_claims - 1)) for index in range(max_claims)}
-    return tuple(task for index, task in enumerate(plan.tasks) if index in chosen)
-
-
 def compile_scoped_model_view(selected: NarrativeSelectResult, *, max_claims: int) -> ScopedModelView:
     """Compile a transient view of this pinned selection, with no extra IO."""
     plan = build_summary_task_plan(selected.evidence_spans,
                                    reading_context=selected.reading_context, max_claims=max_claims)
-    known = {span.span_id: span for span in selected.evidence_spans}
-    visible = _model_visible_tasks(plan, known, max_claims)
     return ScopedModelView(plan,
         MappingProxyType({span.span_id: span for span in selected.evidence_spans}),
         MappingProxyType({sid: "s" + str(i) for i, sid in enumerate(plan.evidence_order, 1)}),
         MappingProxyType({task.key: MappingProxyType({"p" + str(i): sid
-            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}),
-        visible_keys=(None if len(visible) == len(plan.tasks)
-                      else frozenset(task.key for task in visible)))
+            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}))

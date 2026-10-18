@@ -4,21 +4,22 @@ from company_wiki.automation.narrative_model_scoped import (
 )
 
 
-def test_scoped_plan_states_the_per_task_share_of_the_global_claim_cap():
-    plan = _scoped_output_plan(12)
+def test_scoped_plan_states_the_target_and_per_task_cap():
+    plan = _scoped_output_plan(64)
     assert plan["max_claims"] == 20
-    assert plan["max_claims_per_task"] == 1
+    assert plan["target_claim_count"] == 15
+    assert plan["max_claims_per_task"] == 2
+    assert "target_claim_count" in SCOPED_INSTRUCTION
     assert "max_claims_per_task" in SCOPED_INSTRUCTION
-    assert "output_plan.max_claims" in SCOPED_INSTRUCTION
 
 
-def test_fewer_tasks_allow_a_larger_per_task_share():
-    assert _scoped_output_plan(2)["max_claims_per_task"] == 10
-    assert _scoped_output_plan(1)["max_claims_per_task"] == 20
+def test_small_task_sets_target_one_clause_per_task():
+    assert _scoped_output_plan(3)["target_claim_count"] == 3
+    assert _scoped_output_plan(1)["target_claim_count"] == 1
 
 
-def test_schema_bounds_each_task_array_by_the_per_task_share():
-    schema = scoped_response_schema(1)
-    assert schema["properties"]["drafts_by_task"]["additionalProperties"]["maxItems"] == 1
+def test_schema_bounds_each_task_array_by_the_per_task_cap():
+    schema = scoped_response_schema(2)
+    assert schema["properties"]["drafts_by_task"]["additionalProperties"]["maxItems"] == 2
     full = scoped_response_schema(20)
     assert full["properties"]["drafts_by_task"]["additionalProperties"]["maxItems"] == 20

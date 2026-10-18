@@ -1,0 +1,636 @@
+{
+  "schema": "du11-content-review-v2/1",
+  "reviewed_at": "2026-10-18T13:20:00+08:00",
+  "scope": "second-round formal C content review; no source/test/config changes; no provider calls",
+  "head_note": "Head a0e97809 + uncommitted view convergence changes per request; content review only.",
+  "run_dirs": {
+    "cn": ".planning/shared-reading-production/du11/live-cn-h1-b2v3p-20261018",
+    "us": ".planning/shared-reading-production/du11/live-us-10k-b2v3b-20261018"
+  },
+  "samples": {
+    "cn": {
+      "model": "mimo-v2.6-flash",
+      "prompt_version": "reading-source-scoped/4.0.3",
+      "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "claims": 13,
+      "evidence_spans": 96,
+      "receipt_status": "PASS",
+      "quality_status": "needs_review",
+      "selection_status": "partial",
+      "tokens": 9843,
+      "micro_usd": 1798,
+      "conclusion": "CONTENT_FAIL",
+      "required_hits": "2/10",
+      "critical_hits": "2/7",
+      "reason": "Only f-sic-8inch-stage and f-inp-development-started hit. f-gan remains open; five-year/current30/cmp/microled and three normal required facts dropped by 20-task position sampling. New claims are supported and numbers are correct."
+    },
+    "us": {
+      "model": "MiniMax-M3",
+      "prompt_version": "reading-source-scoped/4.0.3",
+      "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "claims": 9,
+      "evidence_spans": 96,
+      "receipt_status": "PASS",
+      "quality_status": "needs_review",
+      "selection_status": "partial",
+      "tokens": 10829,
+      "micro_usd": 5353,
+      "conclusion": "CONTENT_FAIL",
+      "required_hits": "4/8",
+      "critical_hits": "4/8",
+      "reason": "Azure inside/three segments/segment change closed; Azure consumption, RPO scope, RPO recognition, and newly dropped M365 Consumer/Commercial remain open. t28/t59 duplicate; t16/t22 modality issues."
+    }
+  },
+  "previous_p1_closure": {
+    "cn": [
+      {
+        "id": "CN-P1-1",
+        "title": "f-gan-power-stage",
+        "status": "open",
+        "evidence": "No PRISMO PD5/GaN power claim in 13 claims; t54-1 PRISMO UniMax is Mini-LED MOCVD, not PD5/GaN. Selected page18/paragraph14 and page27/paragraph11 still contain PRISMO PD5."
+      },
+      {
+        "id": "CN-P1-2",
+        "title": "f-inp-development-started",
+        "status": "closed",
+        "evidence": "t37-1 exact source page18/paragraph29: 报告期内启动 InP 专用 MOCVD、实验室进展、下半年计划."
+      },
+      {
+        "id": "CN-P1-3",
+        "title": "t2-1 该新产品 unresolved",
+        "status": "closed_by_omission",
+        "evidence": "No such claim in this round; no bare 该新产品 emitted."
+      },
+      {
+        "id": "CN-P1-4",
+        "title": "t3-1 truncated /（原文截断）",
+        "status": "closed_by_omission",
+        "evidence": "No such claim in this round."
+      },
+      {
+        "id": "CN-P1-5",
+        "title": "t4-1 mid-sentence fragment",
+        "status": "closed_by_omission",
+        "evidence": "No such fragment claim in this round."
+      }
+    ],
+    "us": [
+      {
+        "id": "US-P1-1",
+        "title": "f-azure-is-consumption-based",
+        "status": "open",
+        "evidence": "No consumption-based Azure claim; selected paragraph233."
+      },
+      {
+        "id": "US-P1-2",
+        "title": "f-azure-inside-intelligent-cloud",
+        "status": "closed",
+        "evidence": "t28-1/t59-1 exact Intelligent Cloud segment quote; t7-1 server/Azure. t28/t59 duplicate (P2)."
+      },
+      {
+        "id": "US-P1-3",
+        "title": "f-three-segments",
+        "status": "closed",
+        "evidence": "t35-1 lists Productivity and Business Processes, Intelligent Cloud, More Personal Computing."
+      },
+      {
+        "id": "US-P1-4",
+        "title": "f-segment-change-in-august-2024",
+        "status": "closed",
+        "evidence": "t16-1 exact August 2024 segment change/M365 Commercial move; modality planned is wrong (P2)."
+      },
+      {
+        "id": "US-P1-5",
+        "title": "f-rpo-scope-and-amount",
+        "status": "open",
+        "evidence": "No RPO 375B/368B/June 30 2025 claim; selected paragraph3845."
+      },
+      {
+        "id": "US-P1-6",
+        "title": "f-rpo-recognition-is-forward",
+        "status": "open",
+        "evidence": "No ~40%/next 12 months claim; selected paragraph3845."
+      },
+      {
+        "id": "US-P1-7",
+        "title": "f-m365-consumer-vs-commercial-metric (new regression)",
+        "status": "open",
+        "evidence": "Prior round had Commercial 14/15 and Consumer 11/11; this round has no M365 Consumer/Commercial claim; selected paragraph699/701."
+      }
+    ]
+  },
+  "required_coverage": {
+    "cn": [
+      {
+        "id": "f-five-year-target-is-plan",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t13-1 hit; no future five-year/60/70 claim now"
+      },
+      {
+        "id": "f-current-coverage-30",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t13-1 hit; no 50+/30% claim now"
+      },
+      {
+        "id": "f-cmp-acquisition-completed",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t12-1 hit; no 众硅/CMP acquisition claim now"
+      },
+      {
+        "id": "f-microled-sample-verification",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t30-1 hit; no Preciomo Udx/2023/repeat order claim now"
+      },
+      {
+        "id": "f-gan-power-stage",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "still no PRISMO PD5/GaN power claim"
+      },
+      {
+        "id": "f-sic-8inch-stage",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t34-1"
+      },
+      {
+        "id": "f-inp-development-started",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t37-1"
+      },
+      {
+        "id": "f-advanced-packaging-primo-matrix",
+        "importance": "normal",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t38-1 hit; no Primo Matrix now"
+      },
+      {
+        "id": "f-tsv-300e-serving",
+        "importance": "normal",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t38-1 hit; no TSV 300E now"
+      },
+      {
+        "id": "f-third-gen-tsv-rd",
+        "importance": "normal",
+        "status": "missing",
+        "claim": null,
+        "note": "prior t38-1 hit; no third-gen TSV now"
+      }
+    ],
+    "us": [
+      {
+        "id": "f-azure-is-consumption-based",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph233; no claim"
+      },
+      {
+        "id": "f-azure-inside-intelligent-cloud",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t28-1/t59-1",
+        "note": "exact Intelligent Cloud segment; duplicate"
+      },
+      {
+        "id": "f-three-segments",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t35-1"
+      },
+      {
+        "id": "f-segment-change-in-august-2024",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t16-1",
+        "note": "modality planned inaccurate"
+      },
+      {
+        "id": "f-m365-consumer-vs-commercial-metric",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "previous round hit; now dropped (regression); selected paragraph699/701"
+      },
+      {
+        "id": "f-azure-growth-inside-combined-line",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t7-1"
+      },
+      {
+        "id": "f-rpo-scope-and-amount",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph3845; no 375B/368B/June 30 2025"
+      },
+      {
+        "id": "f-rpo-recognition-is-forward",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph3845; no ~40%/next 12 months"
+      }
+    ]
+  },
+  "claim_support": {
+    "cn": [
+      {
+        "id": "t1-1",
+        "locator": "page30/table0/row1-2 + header/unit",
+        "verdict": "supported_table_ambiguous",
+        "severity": "P2",
+        "note": "1.35/0.59/1.16 and 1.71/0.01/1.00 match rows 1/2; all spans table_structure_ambiguous"
+      },
+      {
+        "id": "t8-1",
+        "locator": "page10/paragraph14/chars341-436",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t14-1",
+        "locator": "page15/paragraph7/chars137-294",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t18-1",
+        "locator": "page15/paragraph35/chars919-970",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t21-1",
+        "locator": "page16/paragraph5/chars176-347",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t24-1",
+        "locator": "page16/paragraph15/chars487-551",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t34-1",
+        "locator": "page18/paragraph21/chars574-687",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t37-1",
+        "locator": "page18/paragraph29/chars819-932",
+        "verdict": "supported_modality_mixed",
+        "severity": "P2",
+        "note": "actual claim includes 下半年将 plan"
+      },
+      {
+        "id": "t44-1",
+        "locator": "page19/paragraph38/chars991-1032",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t47-1",
+        "locator": "page20/paragraph2/chars38-107",
+        "verdict": "supported_modality_mixed",
+        "severity": "P2",
+        "note": "actual claim includes expected 2027 completion"
+      },
+      {
+        "id": "t51-1",
+        "locator": "page25/paragraph21/chars453-625",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t54-1",
+        "locator": "page27/paragraph2/chars38-202",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t64-1",
+        "locator": "page33/paragraph16/chars433-523",
+        "verdict": "supported",
+        "severity": null
+      }
+    ],
+    "us": [
+      {
+        "id": "t7-1",
+        "locator": "paragraph707",
+        "verdict": "supported"
+      },
+      {
+        "id": "t13-1",
+        "locator": "paragraph945",
+        "verdict": "supported"
+      },
+      {
+        "id": "t16-1",
+        "locator": "paragraph193",
+        "verdict": "supported_modality_wrong",
+        "severity": "P2",
+        "note": "announced/August 2024 is actual; marked planned"
+      },
+      {
+        "id": "t22-1",
+        "locator": "paragraph165",
+        "verdict": "paraphrased_strategy_bullet",
+        "severity": "P2",
+        "note": "source starts 'Build the intelligent cloud...'; claim adds We, marks planned"
+      },
+      {
+        "id": "t25-1",
+        "locator": "paragraph197",
+        "verdict": "supported"
+      },
+      {
+        "id": "t28-1",
+        "locator": "paragraph224",
+        "verdict": "supported"
+      },
+      {
+        "id": "t35-1",
+        "locator": "paragraph731",
+        "verdict": "supported"
+      },
+      {
+        "id": "t38-1",
+        "locator": "paragraph1063",
+        "verdict": "supported",
+        "note": "non-required tax fact"
+      },
+      {
+        "id": "t59-1",
+        "locator": "paragraph4433",
+        "verdict": "duplicate",
+        "severity": "P2",
+        "note": "identical to t28-1"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "CN-P1-1",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing required five-year plan",
+      "claim": null,
+      "source_locator": "page13/paragraph18/chars495-605",
+      "source_quote": "未来五年…覆盖60%以上的集成电路高端设备市场和70%以上的先进封装设备市场",
+      "impact": "f-five-year-target-is-plan critical required missing; prior round hit.",
+      "fix": "Restore t13-1-equivalent claim; keep plan/未来五年 modality."
+    },
+    {
+      "id": "CN-P1-2",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing current 30% coverage",
+      "claim": null,
+      "source_locator": "page13/paragraph18/chars495-605",
+      "source_quote": "目前公司的五十多种设备产品已经覆盖了超30%前道集成电路设备产品",
+      "impact": "f-current-coverage-30 critical required missing; prior round hit.",
+      "fix": "Restore current coverage claim, keep 五十多种/超30%."
+    },
+    {
+      "id": "CN-P1-3",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing CMP acquisition",
+      "claim": null,
+      "source_locator": "page13/paragraph4/chars88-219",
+      "source_quote": "报告期内完成对众硅公司控股权的收购，完成对化学机械抛光（CMP）设备的覆盖",
+      "impact": "f-cmp-acquisition-completed critical required missing; prior round hit.",
+      "fix": "Restore acquisition/CMP claim; do not merge with project table."
+    },
+    {
+      "id": "CN-P1-4",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing Micro-LED sample verification",
+      "claim": null,
+      "source_locator": "page18/paragraph6/chars152-250",
+      "source_quote": "公司于2023 年底付运Micro-LED 应用的设备样机Preciomo Udx…获得客户的重复订单",
+      "impact": "f-microled-sample-verification critical required missing; prior round hit; t54 PRISMO UniMax is different.",
+      "fix": "Restore Preciomo Udx/2023 sample verification/repeat order claim."
+    },
+    {
+      "id": "CN-P1-5",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing GAN power stage",
+      "claim": null,
+      "source_locator": "page18/paragraph14/chars409-530 / page27/paragraph11",
+      "source_quote": "于2022 年推出了用于氮化镓功率器件生产应用的MOCVD 设备PRISMO PD5…已交付客户进行生产验证，并取得重复订单",
+      "impact": "f-gan-power-stage critical required still missing; old P1 open.",
+      "fix": "Add PRISMO PD5 2022 launch/validation/repeat-order claim; keep actual modality."
+    },
+    {
+      "id": "CN-P1-6",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "20-task position sampling dropped required facts",
+      "claim": null,
+      "source_locator": "all selected evidence for missing facts",
+      "source_quote": "Evidence selected but claims absent for five-year/current30/cmp/microled/gan/primo/tsv/thirdgen.",
+      "impact": "Required coverage fell 8/10 to 2/10; 11/13 new claims are non-required.",
+      "fix": "Make visible task sampling required-fact-aware (mandatory required tasks first, then uniform fill); do not use pure position sampling for content C."
+    },
+    {
+      "id": "CN-P2-1",
+      "severity": "P2",
+      "sample": "CN",
+      "title": "Table claim on ambiguous table",
+      "claim": "t1-1",
+      "source_locator": "page30/table0/row1-2",
+      "source_quote": "11 | …ICP刻蚀机 | 1.35 | 0.59 | 1.16 …; 12 | …PVD… | 1.71 | 0.01 | 1.00",
+      "impact": "Numbers align but all spans table_structure_ambiguous; column mapping relies on header.",
+      "fix": "Keep needs_review; verify table structure before treating as proven."
+    },
+    {
+      "id": "CN-P2-2",
+      "severity": "P2",
+      "sample": "CN",
+      "title": "t37-1 actual modality mixes H2 plan",
+      "claim": "t37-1",
+      "source_locator": "page18/paragraph29",
+      "source_quote": "于报告期内启动…下半年将…尽早付运样机",
+      "impact": "Actual claim includes future plan; modality wrong.",
+      "fix": "Split actual/plan or mark planned."
+    },
+    {
+      "id": "CN-P2-3",
+      "severity": "P2",
+      "sample": "CN",
+      "title": "t47-1 actual modality includes 2027 plan",
+      "claim": "t47-1",
+      "source_locator": "page20/paragraph2",
+      "source_quote": "主体结构已于2026 年8 月封顶，预计2027 年建成投产",
+      "impact": "Actual claim includes future plan.",
+      "fix": "Mark planned or split."
+    },
+    {
+      "id": "CN-P2-4",
+      "severity": "P2",
+      "sample": "CN",
+      "title": "Missing normal required facts",
+      "claim": null,
+      "source_locator": "page18/paragraph35",
+      "source_quote": "Primo TSV 300E…Primo Matrix…第三代TSV…",
+      "impact": "f-primo-matrix/f-tsv-300e/f-third-gen-tsv required normal missing; required coverage 2/10.",
+      "fix": "Restore these claims or mark as deferred; prioritize required normal tasks."
+    },
+    {
+      "id": "US-P1-1",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing Azure consumption-based fact",
+      "claim": null,
+      "source_locator": "paragraph233",
+      "source_quote": "Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+      "impact": "f-azure-is-consumption-based critical missing.",
+      "fix": "Add consumption-based claim."
+    },
+    {
+      "id": "US-P1-2",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing M365 consumer/commercial metrics (new regression)",
+      "claim": null,
+      "source_locator": "paragraph699/701",
+      "source_quote": "Microsoft 365 Commercial…14%/15%; Microsoft 365 Consumer…11%/11%",
+      "impact": "f-m365-consumer-vs-commercial-metric critical missing; previous round hit.",
+      "fix": "Restore both M365 metric claims with separate consumer/commercial."
+    },
+    {
+      "id": "US-P1-3",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing RPO scope/amount",
+      "claim": null,
+      "source_locator": "paragraph3845",
+      "source_quote": "$375 billion as of June 30, 2025, of which $368 billion is commercial portion",
+      "impact": "f-rpo-scope-and-amount critical missing.",
+      "fix": "Add RPO scope/amount; do not substitute unearned 67,265/7,265."
+    },
+    {
+      "id": "US-P1-4",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing forward RPO recognition",
+      "claim": null,
+      "source_locator": "paragraph3845",
+      "source_quote": "approximately 40% … over the next 12 months",
+      "impact": "f-rpo-recognition-is-forward critical missing; plan modality lost.",
+      "fix": "Add forward RPO recognition plan."
+    },
+    {
+      "id": "US-P2-1",
+      "severity": "P2",
+      "sample": "US",
+      "title": "Duplicate Intelligent Cloud claims",
+      "claim": "t28-1/t59-1",
+      "source_locator": "paragraph224/4433",
+      "source_quote": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services…",
+      "impact": "Two identical claims consume slots; no added coverage.",
+      "fix": "Deduplicate; choose one."
+    },
+    {
+      "id": "US-P2-2",
+      "severity": "P2",
+      "sample": "US",
+      "title": "t16-1 modality planned but actual announcement",
+      "claim": "t16-1",
+      "source_locator": "paragraph193",
+      "source_quote": "In August 2024, we announced changes…",
+      "impact": "actual event labeled planned.",
+      "fix": "Mark actual; keep beginning FY2025 forward-looking clause separately if desired."
+    },
+    {
+      "id": "US-P2-3",
+      "severity": "P2",
+      "sample": "US",
+      "title": "t22-1 strategy bullet paraphrased as company statement",
+      "claim": "t22-1",
+      "source_locator": "paragraph165",
+      "source_quote": "Build the intelligent cloud and intelligent edge platform…",
+      "impact": "claim adds We and marks planned; source is imperative strategy bullet.",
+      "fix": "Keep as strategy/planned or quote exactly; do not present as current company statement."
+    },
+    {
+      "id": "CN-P3-1",
+      "severity": "P3",
+      "sample": "CN",
+      "title": "t1 evidence includes unused rows 3-6",
+      "claim": "t1-1",
+      "source_locator": "page30/table0/row1-6",
+      "source_quote": "rows 3-6 also cited but not used",
+      "impact": "evidence redundancy, not factual error.",
+      "fix": "Narrow evidence to rows used or state aggregate."
+    },
+    {
+      "id": "US-P3-1",
+      "severity": "P3",
+      "sample": "US",
+      "title": "t38-1 non-required tax fact",
+      "claim": "t38-1",
+      "source_locator": "paragraph1063",
+      "source_quote": "effective tax rate lower than U.S. federal statutory rate…",
+      "impact": "supported but not required; consumes slot.",
+      "fix": "Prefer required facts if claim budget constrained."
+    }
+  ],
+  "numbers_units": {
+    "cn": "No mismatch found: 1.35/0.59/1.16, 1.71/0.01/1.00 亿元; 1659亿美元/23.2%; 20.41/5.50亿元/36.86%/30.51%; 50亩/2026-08/2027; 4腔/785mm/164×4英寸/72×6英寸; 8寸; 60:1.",
+    "us": "No mismatch found: 23%/34%, $1.6B/13%/20%. No currency/unit conversion."
+  },
+  "language": {
+    "cn": "zh; product English names; translate=false",
+    "us": "en; translate=false",
+    "verdict": "pass"
+  },
+  "investment_conclusions": {
+    "cn": "none",
+    "us": "none",
+    "verdict": "pass"
+  },
+  "commands": [
+    "Read receipt/overall/rf-narrative from .planning live-cn-h1-b2v3p-20261018 and live-us-10k-b2v3b-20261018.",
+    "Opened all CN 13 and US 9 claims, cited evidence/context spans, and key source quotes.",
+    "Read gold cn-h1/us-10k and metadata required/critical fact ids.",
+    "Searched selected spans for missing required-fact quotes (CN five-year/30/CMP/MicroLED/GAN/primo/TSV; US consumption/M365/RPO).",
+    "No provider calls, no source/test/config changes, no git writes."
+  ],
+  "unverified": [
+    "Full original PDF/HTML was not reparsed; judgment uses selected evidence spans and gold, not page images/full text.",
+    "No model rerun; cannot test whether additional claims would be generated with a different task set.",
+    "20-task position sampling implementation/prompt was not audited; evidence shows required evidence selected but not claimed.",
+    "Prompt 4.0.3 / 18-claims target not audited; CN 13/US 9 below target.",
+    "Source/gold SHAs not independently rehashed; used receipt/metadata values.",
+    "Engineering recovery/cache/FF-RF consumption not reviewed.",
+    "Requested docs/plans/live-* paths absent; used .planning receipts; alternate copy not reviewed."
+  ],
+  "notes": [
+    "Previous P1 closure: CN InP and t2/t3/t4 closed; CN GAN still open; US Azure inside/three segments/segment change closed; US Azure consumption/RPO two open; M365 is a new regression.",
+    "CN required coverage collapsed from 8/10 to 2/10 because the 20 visible tasks are position-sampled, not required-fact-prioritized.",
+    "All new claims are supported and numbers are correct; content failure is coverage/modality/duplication, not fabricated facts.",
+    "Report pair: review/c-content-review-20261018-v2.md and .json."
+  ]
+}
