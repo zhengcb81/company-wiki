@@ -34,6 +34,7 @@ The small hook path is intentionally narrower than this full local gate.
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import os
 import subprocess
 import sys
@@ -152,6 +153,26 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
         )
 
 
+def _run_parallel_pytest_gates(gates: list[tuple[list[str], str]]) -> int:
+    """Full units and nonunit smoke are separate isolated CI responsibilities.
+
+    Starting both together avoids consuming one 600s subprocess allowance on
+    their sum. Neither allowance increases; every child must finish green and
+    owns a distinct short TEMP with cache/bytecode writes disabled. Wait for all
+    children on failure too, so their diagnostic and cleanup are not abandoned.
+    """
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        pending = [(label, executor.submit(_run_pytest_gate, cmd, label)) for cmd, label in gates]
+        results = []
+        for label, future in pending:
+            try:
+                results.append(future.result())
+            except Exception as exc:
+                _print_output(f"FAILED: {label} ({type(exc).__name__})")
+                results.append(1)
+    return next((result for result in results if result), 0)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-contract", action="store_true",
@@ -209,6 +230,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Push unit scope: {reason} ({len(selected)} paths)")
         cases = [*selected, *(case for case in FAST_CONTRACT_CASES
                  if not any(case.split('::')[0] == path or case.startswith(path + '/') for path in selected))]
+        if selected == ["tests/unit"]:
+            command = [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180"]
+            code = _run_parallel_pytest_gates([
+                ([*command, "tests/unit"], "full affected unit suite"),
+                ([*command, *cases[1:]], "independent CI contract smoke"),
+            ])
+            print("\npre-push gate GREEN — safe to push (then self-monitor CI)." if code == 0
+                  else "\nPUSH CHECKS RED — fix the failing phase; do not bypass.")
+            return code
         gates = [([sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *cases],
                   "affected units and CI contract smoke", None)]
     elif args.fast_contracts_only:

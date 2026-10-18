@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "reviewer": "/root/du10_et_reception_review",
+  "verdict": "PASS_ENGINEERING_REAL_FULL_PUSH_PERFORMANCE_PENDING",
+  "source_sha256": {
+    "tools/pre_push_gate.py": "4a6d7dcadada49dee234ee9e3f8216bc3a701e3243ddcf4bf633b6c7b4004274",
+    "tests/unit/test_pre_push_parallel_phases.py": "4fe4d7cc1da89ef104fcd28ec0288e279a49a2b9dcc95c3815f4cedea4e3f1e7"
+  },
+  "must_fix_findings": [],
+  "reviewer_runtime_actions": {"tests": 0, "workers": 0, "network": 0, "models": 0, "source_writes": 0},
+  "reused_test_evidence": {"red_failed": 5, "red_seconds": 1.60, "green_passed": 15, "green_seconds": 1.95},
+  "verified": ["same case union without unit smoke duplicates", "full fallback only", "independent subprocess temp/environment", "either failure remains red", "both futures collected and cleaned", "600s timeout unchanged", "current nonunit smoke has no confirmed conflicting production write"],
+  "limits": ["99 percent last node is not its measured duration", "parallel speedup awaits actual normal push", "no whole-suite or descendant-cleanup proof", "future new smoke shared writes require normal test-owner isolation"]
+}

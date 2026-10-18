@@ -755,3 +755,13 @@ ROOT F1先15个行为测试9FAIL6PASS，修后15PASS；补跨句借词/审计RPO
 F3代码310252bd、交接8b40b479已正常merge进入母仓；不同agent实跑37PASS/13.20s，当前仅本地，尚未push，真实HK C消费0新增POST回放仍OPEN。F4独立22PASS/3.79s且runtime冻结SHA一致，allocator工程PASS；ROOT生产字段投影另验，不能宣称真实三家摘要绿。
 
 ROOT新F2强反控4FAIL/1PASS已复现：单块open-end漏标、native块中部缺前驱仍当句首、表格ambiguous仍生成card、heading混入support。修后58PASS/4.63s；保留原证据查询，summary将真实table结构未闭合记unsupported，不推数字归属。更广936项先935PASS1FAIL/62.02s，捕获裸allocated RPO被误升；修后又发现真实含未来转换期的RPO被误杀，补用既有clause-bound转换观察区分，正重放最终集中套件。ROOT F1/F2冻结独审及真实0收费源选择回放进行中；未新增真实供应商POST。
+
+### 真实零费用回放阻止错误并线
+
+ROOT F1/F2独审四delta已37PASS2.49s/13最终SHA一致（初审保留），但这仅工程修复。真实同原件/同16M/96span/48000字符/56KiB上限：CN关键源与canonical10/10，模板/期权/租赁旧噪声消失，三断句/指代仍OPEN；US关键源与canonical8/8，RPO及转化不再被容量挤掉，0API/0原件副本/原件hash不变。HK初轮输入装配不等价已保留，实际mixed/titleNone重放仍0/7；同oracle+同goldSHA对旧正式a8bundle却7/7，确认真实召回回归，不能归咎金标或放宽验收。新质量实现仍隔离，不进主线；先对新增native singleton/open-start defer做有界内存因果ablation，不引入生产fallback/开关或加预算。母仓已审F3/旧工程正常push914e0283另进行中，源码稳定，不宣称推送成功。
+
+### 推送阶段并行与HK召回修正
+
+正常push914e0283再次600秒超时，实际全部unit及几乎全部smoke已完成，最后停B10；不能把停点等同B10耗时600秒。根因是Windows全量bootstrap与CI独立合同责任串在同pytest中累加deadline。本次只fullfallback拆为两个独立pytest并行：全部unit、排除已覆盖unit的原FAST_CONTRACT非unit集合；集合无删无重、各600上限不变、不同shortTemp、禁cache与bytecode，任一红保持失败并等待两边清理。不改普通affected/CI smoke入口、不修改CI、不抬deadline。真实5RED→15PASS1.95s，含两真实Python进程Temp/哨兵恢复、Barrier同时启动、任一失败/包装异常/完整case集合；不同agent实际实现独审PASS，见review/du11_push_phase_isolation.md/json。正常hook实测收益仍待，不承诺CPU竞争下一定<600。
+
+HK根因受控：保持新finish仅放开left_closed仍0/7，实际OPEN_START触发0；原finish7/7。新singleton无句末即defer额外挡1951单位，windows349未变。physical连续性没有edge不能判整个原block语义不完整（可含段落/多句/列表引介），恢复其候选地位并报告standalone/semantic_not_evaluated，不伪造closedwindow；既有多块open尾与限额defer不变。原错层测试/RED历史保留且按责任修正，新89PASS5.26s；实际生产HK同DTO/cap恢复selected7/7、canonical7/7、27.147s、12,098,578/16M单账户、0API/0rawcopy/原件不变。三处CN真实闭合缺口已用p16/17/31、102原单位定位，不称F2/C完成；独审正在最终有限delta复核。
