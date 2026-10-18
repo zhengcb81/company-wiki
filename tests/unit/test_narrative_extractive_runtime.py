@@ -125,13 +125,13 @@ def test_capacity_defers_complete_cards_instead_of_cutting_them():
     assert all(row['text'] in {span.raw_text for span in source.evidence_spans} for row in plan.draft['claims'])
 
 
-def test_v4_still_rejects_twenty_two_clauses_instead_of_reinterpreting_paid_failure():
+def test_v4_rejects_a_draft_above_the_scoped_claim_budget():
     source = selected(1)
     request = build_model_request(source, reading_projection_version='reading-model-input/4')
     response = NarrativeModelResponse('offline', 'configured', request.prompt_version,
         canonical_json({'drafts_by_task': {'t1': [
-            {'text': '旧协议条款', 'basis_parts': ['p1'], 'modality': 'uncertain'}] * 22}}).encode())
-    with pytest.raises(ValueError, match='twenty'):
+            {'text': '旧协议条款', 'basis_parts': ['p1'], 'modality': 'uncertain'}] * 41}}).encode())
+    with pytest.raises(ValueError, match='forty'):
         decode_model_draft(response, selected=source, reading_projection_version='reading-model-input/4')
 
 
