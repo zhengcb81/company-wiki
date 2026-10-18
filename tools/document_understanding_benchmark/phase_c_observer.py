@@ -270,16 +270,11 @@ def install() -> None:
         if caller._store.reservations_for_run(caller._run_id):
             refuse("PHASE_C_PRIOR_ATTEMPT_PRESENT")
         if config["mode"] == "live":
-            from tools.document_understanding_benchmark.phase_c_runner import mother_totals
+            from tools.document_understanding_benchmark.phase_c_runner import mother_totals, mother_budget_fits
 
             totals = mother_totals(config["metadata"], config["usage_ledger"])
-            if totals["new_unknown_count"]:
-                refuse("PHASE_C_UNRECONCILED_UNKNOWN")
-            if (
-                totals["charged_tokens"] + run.max_tokens > totals["token_limit"]
-                or totals["charged_micro_usd"] + run.max_micro_usd
-                > totals["micro_usd_limit"]
-            ):
+            if not mother_budget_fits(totals, tokens_bound=run.max_tokens,
+                                      micro_usd_bound=run.max_micro_usd):
                 refuse("PHASE_C_MOTHER_BUDGET_EXCEEDED")
         _pending = {
             "run_id": caller._run_id,
