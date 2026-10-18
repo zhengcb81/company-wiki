@@ -1,0 +1,1247 @@
+{
+  "schema_version": "du11-live-independent-review/1",
+  "sample": "cn-h1",
+  "head": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "verdict": "ENGINEERING_AND_EXTRACTIVE_FIDELITY_PASS_CONTENT_QUALITY_CHANGES_REQUIRED",
+  "evidence_hashes": {
+    "overall.json": "8bd04118a0f4ebd255cfdc5fe06effc370230bf0527fa3d684667840fd355ef6",
+    "receipt.json": "be2f68e41cccbdd1b73fadc837f54c05b9a217ab3b51a437fafd759921dd17d5",
+    "events.jsonl": "3e83312dcfaefa790e4753b8057c1a80d887a37dfce56101af08860ef1de7a4f",
+    "phaseC-090-d4c5fd707b44.bundle.json.gz": "9a4f5ab8d598a0a06a81d5e0274811f25cd16c1d3627279b5ff42281e3d1493a",
+    "materials\\phaseC-090-d4c5fd707b44.input.json.gz": "1f5290efcedb963f253cf67125a9f56094a82d781d815357f2a556c28bdd723e",
+    "materials\\phaseC-090-d4c5fd707b44.fd59e5954595418c80c37e694e9f0cde.response.json.gz": "847154a1434f0c71001ebac1524a14a992f793b9dd06640f0a384e13387b6cca"
+  },
+  "supplier": {
+    "model_settings": {
+      "model_id": "mimo-v2.6-flash",
+      "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_completion_tokens",
+      "thinking": "disabled"
+    },
+    "wire_model": "mimo-v2.6-flash",
+    "wire_output_tokens": 8192,
+    "actual_endpoints": [
+      "https://token-plan-cn.xiaomimimo.com/v1/chat/completions"
+    ],
+    "mode": "live"
+  },
+  "task_checks": [
+    {
+      "task": "t1",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t2",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t3",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t4",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t5",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t6",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t7",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t8",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t9",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t10",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t11",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t12",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t13",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t14",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t15",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t16",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t17",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t18",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t19",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t20",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t21",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t22",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t23",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t24",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t25",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t26",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t27",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t28",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t29",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t30",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t31",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t32",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t33",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t34",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t35",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t36",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t37",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t38",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t39",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t40",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t41",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t42",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t43",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t44",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t45",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t46",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t47",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t48",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t49",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t50",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t51",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t52",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t53",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t54",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t55",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t56",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t57",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t58",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t59",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t60",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t61",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t62",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t63",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t64",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    }
+  ],
+  "task_counts": {
+    "native": 64,
+    "execution": 64,
+    "claims": 64,
+    "evidence": 96,
+    "grouped_evidence": 96,
+    "all_checks": true
+  },
+  "gold_canonical": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t17-source",
+          "locators": [
+            "loc:v1/page:12/paragraph:27",
+            "loc:v1/page:13/paragraph:18/chars:495-605"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-current-coverage-30",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t17-source",
+          "locators": [
+            "loc:v1/page:12/paragraph:27",
+            "loc:v1/page:13/paragraph:18/chars:495-605"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t16-source",
+          "locators": [
+            "loc:v1/page:12/paragraph:27",
+            "loc:v1/page:13/paragraph:4/chars:88-219"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t37-source",
+          "locators": [
+            "loc:v1/page:17/paragraph:26",
+            "loc:v1/page:18/paragraph:6/chars:152-250"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-gan-power-stage",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t39-source",
+          "locators": [
+            "loc:v1/page:17/paragraph:26",
+            "loc:v1/page:18/paragraph:14/chars:409-530"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t41-source",
+          "locators": [
+            "loc:v1/page:17/paragraph:26",
+            "loc:v1/page:18/paragraph:21/chars:574-687"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-inp-development-started",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t44-source",
+          "locators": [
+            "loc:v1/page:17/paragraph:26",
+            "loc:v1/page:18/paragraph:29/chars:819-932"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t45-source",
+          "locators": [
+            "loc:v1/page:18/paragraph:34",
+            "loc:v1/page:18/paragraph:35/chars:945-1115"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t45-source",
+          "locators": [
+            "loc:v1/page:18/paragraph:34",
+            "loc:v1/page:18/paragraph:35/chars:945-1115"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "supported": true,
+      "canonical_matches": [
+        {
+          "claim": "t45-source",
+          "locators": [
+            "loc:v1/page:18/paragraph:34",
+            "loc:v1/page:18/paragraph:35/chars:945-1115"
+          ]
+        }
+      ],
+      "forbidden_found": [],
+      "target_kind": "required_business"
+    },
+    {
+      "id": "f-catalog-is-toc-not-content",
+      "supported": false,
+      "canonical_matches": [],
+      "forbidden_found": [],
+      "target_kind": "disposition_context"
+    },
+    {
+      "id": "f-page-count-210",
+      "supported": false,
+      "canonical_matches": [],
+      "forbidden_found": [],
+      "target_kind": "disposition_context"
+    }
+  ],
+  "ranking": {
+    "decision_count": 65,
+    "task_count": 64,
+    "unknown_ids": [
+      "t47_1"
+    ],
+    "missing_ids": [],
+    "duplicates": {},
+    "invalid_rows": [
+      {
+        "task": "t9",
+        "priority": "low",
+        "disposition": "low"
+      }
+    ],
+    "native_diagnostic": "RANK_INVALID",
+    "model_coverage_complete": false
+  },
+  "artifact": {
+    "bytes": 448871,
+    "sha256": "eef6b8e287b22351cf78c542dfbc3ca48206d4841f7d8e151b3d76ef11c6aa13",
+    "native_output_match": true,
+    "response_hash_match": true,
+    "execution_hash_match": true,
+    "draft_bytes": 44027
+  },
+  "lifecycle": {
+    "POST": 1,
+    "native_count": 1,
+    "tokens": 14720,
+    "micro_usd": 2619,
+    "activation": {
+      "status": "PASS",
+      "held_status": "activation_pending",
+      "same_run_id": "phaseC-090-d4c5fd707b44",
+      "native_attempts_before": 1,
+      "native_attempts_after": 1,
+      "charged_tokens_before": 14720,
+      "charged_tokens_after": 14720,
+      "charged_micro_usd_before": 2619,
+      "charged_micro_usd_after": 2619,
+      "POSTs_before": 1,
+      "POSTs_after": 1,
+      "paid_generation_unchanged": true,
+      "response_identity_unchanged": true
+    },
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "cache_native_usage": [],
+    "protected": true,
+    "all_prepared_protected": true,
+    "sentinel": true,
+    "cleanup": true
+  },
+  "consumers": [
+    {
+      "name": "filing-fetch",
+      "exit": 0,
+      "exact_context": false
+    },
+    {
+      "name": "RF-source+narrative",
+      "exit": 0,
+      "exact_context": false
+    },
+    {
+      "name": "RF-narrative",
+      "exit": 0,
+      "exact_context": true
+    }
+  ],
+  "mother": {
+    "charged_tokens": 711341,
+    "charged_micro_usd": 409309,
+    "new_unknown_count": 1,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "limits": {
+    "selection": {
+      "candidate_count": 1616,
+      "coverage_complete": false,
+      "dropped_financial_count": 204,
+      "lines_total": 0,
+      "omitted_candidate_count": 1520,
+      "pages_read": 210,
+      "pages_total": 210,
+      "selected_count": 96,
+      "source_units": 4709,
+      "status": "partial",
+      "tables_scanned": 3,
+      "tables_total": 123
+    },
+    "quality": "needs_review",
+    "scope": "development single-selector regression; not holdout or whole-document completeness",
+    "real_paid_decode_fault_recovery": "NOT_EXERCISED; loopback evidence separate",
+    "no_independent_API_PDF_tests": true
+  },
+  "required_business_gold": {
+    "supported": 10,
+    "required": 10,
+    "document_meta_not_required_in_business_cards": [
+      "f-catalog-is-toc-not-content",
+      "f-page-count-210"
+    ]
+  },
+  "findings": [
+    {
+      "id": "CN-CONTENT-01",
+      "priority": "P1",
+      "status": "OPEN",
+      "title": "Source-business admission accepts accounting policy and blank disclosure templates",
+      "evidence": [
+        {
+          "claim_id": "t4-source",
+          "locators": [
+            "loc:v1/page:12/paragraph:21",
+            "loc:v1/page:12/paragraph:26"
+          ],
+          "group_kind": "paragraph_event",
+          "section_role": "management_discussion",
+          "quote_prefix": "5、营销及销售模式\n新增重要非主营业务情况\n□适用√不适用",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_description_unknown"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t6-source",
+          "locators": [
+            "loc:v1/page:21/paragraph:44",
+            "loc:v1/page:22/paragraph:9"
+          ],
+          "group_kind": "background",
+          "section_role": "management_discussion",
+          "quote_prefix": "9、信息披露及防范内幕交易方面\n报告期内公司经营情况的重大变化，以及报告期内发生的对公司经营情况有重大影响和预计未\n来会有重大影响的事项\n□适用√不适用",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_current_state",
+              "operating_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t9-source",
+          "locators": [
+            "loc:v1/page:125/paragraph:3",
+            "loc:v1/page:125/paragraph:23"
+          ],
+          "group_kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "39、其他重要的会计政策和会计估计\n对于本公司授予的第二类限制性股票的股权激励计划，本公司聘请第三方估值机构协助采用\n期权定价模型评价确定限制性股票于授予日的公允价值，包括选择恰当的估值关键参数(包括无\n风险利",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "business_risk_or_constraint"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t64-source",
+          "locators": [
+            "loc:v1/page:124/paragraph:6",
+            "loc:v1/page:124/paragraph:21/chars:965-1168"
+          ],
+          "group_kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "38、租赁\n当租赁变更未作为一项单独租赁进行会计处理时，除财政部规定的可以采用简化方法的合同变更\n外，本集团在租赁变更生效日重新确定租赁期，并采用修订后的折现率对变更后的租赁付款额进\n行折现，重新计量租赁负债。",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_restriction"
+            ]
+          ]
+        }
+      ],
+      "confirmed_noise_tasks": 4,
+      "cause": "native source relationships are projected as eligible operating facts; any relationship sets financial_exempt. reading_financial_only covers a narrow accounting vocabulary and skips financial exemption; _admitted also permits broad business-section prose. Unknown section role plus generic restriction/risk/operating signals lets pure accounting policy pass as business. v5 correctly retains admitted cards but exposes upstream precision failure rather than repairing it.",
+      "remedy": "At the one source business admission owner combine actual section role and local object/activity semantics, explicitly classify routine accounting-policy/template/no-event content, retain real business progress in financial notes (t8 acquisition synergy is a positive control). Do not globally delete financial sections or delegate safe-card deletion to model. Add CN/EN/TC and unseen issuer controls with existing shared engine, no new gate/store."
+    },
+    {
+      "id": "CN-CONTENT-02",
+      "priority": "P1",
+      "status": "OPEN",
+      "title": "Whole selected quote is not necessarily a complete original assertion or bound product subject",
+      "evidence": [
+        {
+          "claim_id": "t3-source",
+          "locators": [
+            "loc:v1/page:31/paragraph:21"
+          ],
+          "group_kind": "risk",
+          "section_role": "management_discussion",
+          "quote_prefix": "如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影",
+          "anchor_reasons": [
+            [
+              "reading_plan",
+              "operating_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t13-source",
+          "locators": [
+            "loc:v1/page:10/paragraph:20",
+            "loc:v1/page:11/paragraph:2/chars:38-199"
+          ],
+          "group_kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "（二）公司主营业务情况\nALD，PVD，PECVD 和EPl 设备，并取得了可喜的进步。中微公司开发的用于LED 和功率器件\n外延片生产的MOCVD 设备早已在客户生产线上投入量产，并在全球氮化镓基LED MO",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_description_unknown"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t30-source",
+          "locators": [
+            "loc:v1/page:16/paragraph:28",
+            "loc:v1/page:16/paragraph:33/chars:1087-1248"
+          ],
+          "group_kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "（3）薄膜沉积设备研发\n该系列设备均已通过关键存储客户端现场验证，满足先进存储应用中所有金属互连应\n用（包含高深宽比金属互连应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产\n订单。同时，公司钨系列产",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_state_unknown"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t32-source",
+          "locators": [
+            "loc:v1/page:16/paragraph:28",
+            "loc:v1/page:17/paragraph:2/chars:38-108"
+          ],
+          "group_kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "（3）薄膜沉积设备研发\n求的同时，设备的薄膜均一性，污染物控制和生产效率均达到世界先进水平。该系列设备已付运\n到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_state_unknown"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t34-source",
+          "locators": [
+            "loc:v1/page:16/paragraph:28",
+            "loc:v1/page:17/paragraph:12/chars:375-432"
+          ],
+          "group_kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "（3）薄膜沉积设备研发\n该系列产品已交付多个先进\n逻辑、先进存储客户，现场验证顺利推进，能够满足客户各项性能需求的同时，实现高生产效\n率。",
+          "anchor_reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_state_unknown"
+            ]
+          ]
+        }
+      ],
+      "cause": "t3 terminates mid-word at 不利影 without warning; t32 begins 求的同时 and t13 begins ALD list continuation after page boundary; generic reused heading is treated as sufficient context for 该系列 in t30/t34. Parser block sentence fragments and fallback single-member packages can bypass semantic continuity/antecedent closure. Current source_cards faithfully joins support, but cannot restore omitted source antecedents.",
+      "remedy": "One shared native/source closure contract must distinguish source byte replay, terminal sentence completeness and local subject/context closure. Preserve measured adjacent original fragments and real antecedent IDs where available within current budgets; otherwise defer/report incomplete rather than canonicalize a partial statement. Test cross-page CN/EN/TC, mid-word/page headers, pronouns with multiple competing products and no-budget defer; do not let model invent missing subject or relax SHA."
+    },
+    {
+      "id": "CN-MODEL-03",
+      "priority": "P2",
+      "status": "OPEN",
+      "title": "MiMo advisory ranking did not satisfy its own finite protocol",
+      "evidence": {
+        "decision_count": 65,
+        "task_count": 64,
+        "unknown_ids": [
+          "t47_1"
+        ],
+        "missing_ids": [],
+        "duplicates": {},
+        "invalid_rows": [
+          {
+            "task": "t9",
+            "priority": "low",
+            "disposition": "low"
+          }
+        ],
+        "native_diagnostic": "RANK_INVALID",
+        "model_coverage_complete": false
+      },
+      "cause": "Actual 65 rows for 64 tasks includes unknown t47_1 and t9 disposition low. Decoder honestly reports RANK_INVALID for all64; safe source cards are retained, with no ranking-success claim.",
+      "remedy": "Use captured paid response as no-network protocol regression and improve provider-facing finite schema/prompt/task-address fidelity centrally. Retain existing exact source-safe fallback, unknown-row diagnosis, once-only ledger and original response. Any future row-local salvage must stay diagnostic and cannot manufacture model completion. No blind paid retry."
+    }
+  ],
+  "additional_observations": [
+    {
+      "issue": "Original report contains separate product-stage formulations",
+      "evidence": "t39 PRISMO PD5 currently production verification/repeat orders; t63 says verified passed/repeat orders in technical section. Both are exact original source extracts with different locators and uncertain modality.",
+      "interpretation": "No model factual hallucination demonstrated. Consumers must not silently merge source formulations into a stronger single completed-stage assertion."
+    },
+    {
+      "issue": "Operating table partial row/ambiguity",
+      "evidence": "t1 retains complete selected support with heading/units, but one fragment starts 产；完成逻…; some table rows carry table_structure_ambiguous.",
+      "interpretation": "Exact closure against selected support passed, but this is not a verified row-complete typed product/cost assertion; retain uncertainty and include source-bound row closure with CONTENT-02."
+    }
+  ],
+  "review_scope": "Read-only completed native receipts, captured actual request/response/bundle, gold and relevant owner source; no model/API/worker/test/PDF parse/secret access or source edits. One analysis script first failed before file read due encoding label utf8-sig, corrected to utf-8-sig; no production effect."
+}

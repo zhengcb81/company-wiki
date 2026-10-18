@@ -1,7 +1,7 @@
 {
   "schema_version": "du11-extractive-engineering-progress/1",
   "observed_at": "2026-10-18T00:59:31.371108+00:00",
-  "status": "IN_PROGRESS_NOT_LIVE_ACCEPTED",
+  "status": "IN_PROGRESS_REAL_CONTENT_QUALITY_CHANGES_REQUIRED",
   "implementation_worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
   "published_baseline": "2340b78c0309ec247b5d6a3942f785348a2c37dc",
   "latest_main_docs": "345b58f0d4a069ce58a35ecd64d69527b2b4eff0",
@@ -71,16 +71,17 @@
     "seconds": 483.47
   },
   "open": [
-    "finish frozen new-production/public-consumer integration and final independent delta",
-    "commit reviewed runtime, integrate main, push and verify exact CI",
-    "real configured MiMo/DeepSeek/MiniMax C, real paid-response and activation/cache recovery, FF/RF readonly consumers",
-    "new holdout and larger RF audit loop remain mother-plan tasks"
+    "systemic business/actor admission and semantic/table closure tests+fix; exactquote alone is notquality",
+    "FF HK identity alias owner fix outside dispatched authorfiles",
+    "real independent content review/replay on fixedsource; no blindmodelretry",
+    "normal push/CI verification and later newholdout/fullRFloop"
   ],
   "real_mother_budget": {
-    "tokens": 628394,
-    "micro_usd_proxy": 393953,
+    "tokens": 742228,
+    "micro_usd_proxy": 421556,
     "historical_unknown_retained": 7,
-    "new_real_posts_this_phase": 0
+    "new_real_posts_this_phase": 4,
+    "new_unknown_retained": 1
   },
   "external_author_worktrees": "RF and FF DU11 user-dispatched worktrees untouched",
   "test_cleanup": {
@@ -149,7 +150,8 @@
     "du11_extractive_production_review.json",
     "du11_scope_cache_review.json",
     "du11_phase_c_data_owner_review.json",
-    "du11_phase_c_observer_review.json"
+    "du11_phase_c_observer_review.json",
+    "du11_budget_hold_review.json"
   ],
   "explicit_identity_tool": {
     "status": "16PASS4.25; final independent exact2-file review PASS",
@@ -169,5 +171,31 @@
     "budget_unchanged": true,
     "next": "existing observer adapted to current compiler; actual full C loopback activation/reuse test now covered"
   },
-  "observer_tool_delta": "Independent exact3-file review PASS,37PASS34.37s including actual default C loopback activation/paid/crossrun reuse; awaiting next real C"
+  "observer_tool_delta": "Independent exact3-file review PASS,37PASS34.37s including actual default C loopback activation/paid/crossrun reuse; awaiting next real C",
+  "real_c_configured_failures": [
+    {
+      "receipt": ".planning/shared-reading-production/du11/live-v5-cn-c6871227-20261018/overall.json",
+      "posts": 1,
+      "reason": "HTTP401; worktree inherited MiMo credential differs from mother managed dotenv; configured-loader probe confirms replacement without exposing key",
+      "unknown_hold_tokens": 68227,
+      "unknown_hold_micro_usd": 12737,
+      "protected_unchanged": true,
+      "temporary_lake_removed": true
+    },
+    {
+      "receipt": ".planning/shared-reading-production/du11/live-v5-cn-6630c239-configured-20261018/overall.json",
+      "posts": 0,
+      "reason": "old PHASE_C_UNRECONCILED_UNKNOWN test gate duplicates full hold already in mother budget; correct 10/10 source support",
+      "protected_unchanged": true,
+      "temporary_lake_removed": true
+    }
+  ],
+  "next_real_execution": "committed mother checkout using existing Config.load managed dotenv precedence, same ledger and unchanged configured providers/options; no secret copy, no new credential channel",
+  "remaining_gate_cleanup": {
+    "removed": "PHASE_C_UNRECONCILED_UNKNOWN unconditional global stop",
+    "retained": "full unknown holds plus all historical ledger and both cumulative caps, per-run duplicate attempt prevention",
+    "tests": "43PASS1deselected31.64; four priorRED",
+    "independent_review": "PASS exact3-file; current tool commit pending"
+  },
+  "real_baseline": "du11_real_v5_c_baseline.json"
 }

@@ -1,0 +1,1188 @@
+{
+  "schema_version": "du11-live-independent-review/1",
+  "sample": "us-10k",
+  "head": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "verdict": "ENGINEERING_AND_ADMITTED_QUOTE_FIDELITY_PASS_REQUIRED_CANONICAL_COVERAGE_FAIL",
+  "native_overall": "PASS",
+  "evidence_hashes": {
+    "overall.json": "fe8d4e7048101f096bceace3453895610266173eb9696e5c4acb5db359ee5d88",
+    "receipt.json": "d6aca63125502afd1113ba540930f74a7749e53d37eb7d1dd681776a2cb35e2e",
+    "events.jsonl": "65eec0a34c34a834ac114336efe11a6f301808bb41950daabfffc25694426357",
+    "phaseC-090-0bb931764c71.bundle.json.gz": "42f81fddf3a5694c4eb2da8314cb0b616e5264cf0ef7abd5db0a6d7820d4ed0f",
+    "materials\\phaseC-090-0bb931764c71.input.json.gz": "0d8b922e158aceb3011b6b37c5b775ae8b9755ad267142a9e6764676cd5d5bc7",
+    "materials\\phaseC-090-0bb931764c71.7f70ba8c30c34591aecfeac59337cd40.response.json.gz": "703b4dbf133b9b764d0d0eba1300d758b70e59c14f12ee29c575a3e193c0e75f"
+  },
+  "supplier": {
+    "configured": {
+      "model_id": "MiniMax-M3",
+      "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_completion_tokens",
+      "reasoning_split": true,
+      "thinking": "disabled"
+    },
+    "wire_model": "MiniMax-M3",
+    "endpoints": [
+      "https://api.minimaxi.com/v1/chat/completions"
+    ],
+    "mode": "live"
+  },
+  "task_checks": [
+    {
+      "task": "t1",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t2",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t3",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t4",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t5",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t6",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t7",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t8",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t9",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t10",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t11",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t12",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t13",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t14",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t15",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t16",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t17",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t18",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t19",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t20",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t21",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t22",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t23",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t24",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t25",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t26",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t27",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t28",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t29",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t30",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t31",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t32",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t33",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t34",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t35",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t36",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t37",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t38",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t39",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t40",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t41",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t42",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t43",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t44",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t45",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t46",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t47",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t48",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t49",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t50",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t51",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t52",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t53",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t54",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "modality": true
+    },
+    {
+      "task": "t55",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "no_canonical_claim": true,
+      "reason_observed": true
+    },
+    {
+      "task": "t56",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "no_canonical_claim": true,
+      "reason_observed": true
+    },
+    {
+      "task": "t57",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "no_canonical_claim": true,
+      "reason_observed": true
+    },
+    {
+      "task": "t58",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "no_canonical_claim": true,
+      "reason_observed": true
+    },
+    {
+      "task": "t59",
+      "binding_sha": true,
+      "partition": true,
+      "same_source": true,
+      "parsed": true,
+      "no_canonical_claim": true,
+      "reason_observed": true
+    }
+  ],
+  "task_counts": {
+    "native": 59,
+    "execution": 59,
+    "claims": 54,
+    "evidence": 96,
+    "all_checks": true,
+    "source_dispositions": {
+      "admitted": 54,
+      "deferred": 5
+    }
+  },
+  "gold_canonical": [
+    {
+      "id": "f-azure-is-consumption-based",
+      "kind": "required_business",
+      "canonical_anchor_supported": true,
+      "matches": [
+        {
+          "claim_id": "t31-source",
+          "locators": [
+            "loc:v1/paragraph:231",
+            "loc:v1/paragraph:233"
+          ]
+        }
+      ],
+      "all_summary_literals_present": true,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-azure-inside-intelligent-cloud",
+      "kind": "required_business",
+      "canonical_anchor_supported": true,
+      "matches": [
+        {
+          "claim_id": "t30-source",
+          "locators": [
+            "loc:v1/paragraph:212",
+            "loc:v1/paragraph:224"
+          ]
+        }
+      ],
+      "all_summary_literals_present": true,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-three-segments",
+      "kind": "required_business",
+      "canonical_anchor_supported": true,
+      "matches": [
+        {
+          "claim_id": "t16-source",
+          "locators": [
+            "loc:v1/paragraph:190",
+            "loc:v1/paragraph:192"
+          ]
+        }
+      ],
+      "all_summary_literals_present": true,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-segment-change-in-august-2024",
+      "kind": "required_business",
+      "canonical_anchor_supported": true,
+      "matches": [
+        {
+          "claim_id": "t17-source",
+          "locators": [
+            "loc:v1/paragraph:190",
+            "loc:v1/paragraph:193"
+          ]
+        },
+        {
+          "claim_id": "t20-source",
+          "locators": [
+            "loc:v1/paragraph:720",
+            "loc:v1/paragraph:732"
+          ]
+        }
+      ],
+      "all_summary_literals_present": true,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-m365-consumer-vs-commercial-metric",
+      "kind": "required_business",
+      "canonical_anchor_supported": true,
+      "matches": [
+        {
+          "claim_id": "t6-source",
+          "locators": [
+            "loc:v1/paragraph:690",
+            "loc:v1/paragraph:699"
+          ]
+        },
+        {
+          "claim_id": "t7-source",
+          "locators": [
+            "loc:v1/paragraph:690",
+            "loc:v1/paragraph:701"
+          ]
+        }
+      ],
+      "all_summary_literals_present": true,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-azure-growth-inside-combined-line",
+      "kind": "required_business",
+      "canonical_anchor_supported": true,
+      "matches": [
+        {
+          "claim_id": "t8-source",
+          "locators": [
+            "loc:v1/paragraph:690",
+            "loc:v1/paragraph:707"
+          ]
+        }
+      ],
+      "all_summary_literals_present": true,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-rpo-scope-and-amount",
+      "kind": "required_business",
+      "canonical_anchor_supported": false,
+      "matches": [],
+      "all_summary_literals_present": false,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-rpo-recognition-is-forward",
+      "kind": "required_business",
+      "canonical_anchor_supported": false,
+      "matches": [],
+      "all_summary_literals_present": false,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-total-revenue-consolidated",
+      "kind": "correctness_if_emitted",
+      "canonical_anchor_supported": false,
+      "matches": [],
+      "all_summary_literals_present": false,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-fiscal-year-not-calendar",
+      "kind": "disposition_context",
+      "canonical_anchor_supported": false,
+      "matches": [],
+      "all_summary_literals_present": false,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-uneared-revenue-rollforward",
+      "kind": "correctness_if_emitted",
+      "canonical_anchor_supported": false,
+      "matches": [],
+      "all_summary_literals_present": false,
+      "forbidden_found": []
+    },
+    {
+      "id": "f-html-tag-boundary-corruption",
+      "kind": "disposition_context",
+      "canonical_anchor_supported": false,
+      "matches": [],
+      "all_summary_literals_present": false,
+      "forbidden_found": []
+    }
+  ],
+  "required_business": {
+    "supported": 6,
+    "required": 8,
+    "missing": [
+      "f-rpo-scope-and-amount",
+      "f-rpo-recognition-is-forward"
+    ]
+  },
+  "ranking": {
+    "rows": 54,
+    "admitted_tasks": 54,
+    "unknown": [],
+    "admitted_missing": [],
+    "duplicates": {},
+    "invalid_rows": [],
+    "native": {
+      "schema_version": "source-extractive-execution/1",
+      "plan_sha256": "8b845f686d35d9189cfa33737bc3f050078eeae3adc72d527d8f1576abb6c0e7",
+      "report_sha256": "e8d0bda852fabb23bb9d083c428c5587637a1b0d202f691617d06375cd3b1e32",
+      "task_count": 59,
+      "source_dispositions": {
+        "admitted": 54,
+        "deferred": 5
+      },
+      "model_dispositions": {
+        "consider": 54,
+        "unprocessed": 5
+      },
+      "source_coverage_complete": false,
+      "model_coverage_complete": false,
+      "model_diagnostic": "RANK_INCOMPLETE",
+      "admitted_claim_ids": [
+        "t1-source",
+        "t2-source",
+        "t3-source",
+        "t4-source",
+        "t5-source",
+        "t6-source",
+        "t7-source",
+        "t8-source",
+        "t9-source",
+        "t10-source",
+        "t11-source",
+        "t12-source",
+        "t13-source",
+        "t14-source",
+        "t15-source",
+        "t16-source",
+        "t17-source",
+        "t18-source",
+        "t19-source",
+        "t20-source",
+        "t21-source",
+        "t22-source",
+        "t23-source",
+        "t24-source",
+        "t25-source",
+        "t26-source",
+        "t27-source",
+        "t28-source",
+        "t29-source",
+        "t30-source",
+        "t31-source",
+        "t32-source",
+        "t33-source",
+        "t34-source",
+        "t35-source",
+        "t36-source",
+        "t37-source",
+        "t38-source",
+        "t39-source",
+        "t40-source",
+        "t41-source",
+        "t42-source",
+        "t43-source",
+        "t44-source",
+        "t45-source",
+        "t46-source",
+        "t47-source",
+        "t48-source",
+        "t49-source",
+        "t50-source",
+        "t51-source",
+        "t52-source",
+        "t53-source",
+        "t54-source"
+      ],
+      "report_origin": "native_batch_receipt.model_diagnostics.execution",
+      "semantic_truth": "not_evaluated",
+      "human_permission": "not_required"
+    }
+  },
+  "deferred_tasks": [
+    {
+      "claim_id": null,
+      "model_disposition": "unprocessed",
+      "priority": null,
+      "reason": "draft_byte_budget",
+      "source_disposition": "deferred",
+      "task": "t55",
+      "task_binding_sha256": "bcdf991383b505911688c5e21e4c56922c91bac6ba47a564ae0e09159f76a8e6"
+    },
+    {
+      "claim_id": null,
+      "model_disposition": "unprocessed",
+      "priority": null,
+      "reason": "draft_byte_budget",
+      "source_disposition": "deferred",
+      "task": "t56",
+      "task_binding_sha256": "e10a46cacbdbf2dcde810b60d36e10d1a89cd8ef4b52be098cd34dba8617a8e3"
+    },
+    {
+      "claim_id": null,
+      "model_disposition": "unprocessed",
+      "priority": null,
+      "reason": "draft_byte_budget",
+      "source_disposition": "deferred",
+      "task": "t57",
+      "task_binding_sha256": "54376811674d2cfb60ef3008f2a6c4343fe7b5eda155b913e75e33be6b954d44"
+    },
+    {
+      "claim_id": null,
+      "model_disposition": "unprocessed",
+      "priority": null,
+      "reason": "draft_byte_budget",
+      "source_disposition": "deferred",
+      "task": "t58",
+      "task_binding_sha256": "a8cf2a3601582ed6b411cf84d56aceca8a756654d64373a7df855b5e53eafbf8"
+    },
+    {
+      "claim_id": null,
+      "model_disposition": "unprocessed",
+      "priority": null,
+      "reason": "draft_byte_budget",
+      "source_disposition": "deferred",
+      "task": "t59",
+      "task_binding_sha256": "b389a68dc4dd65f2b645223df4271c2ca9c2b59290e0e46bde765c646f62cc53"
+    }
+  ],
+  "identity": {
+    "artifact_sha256": "425b0d123fb4a9eefce3bc9e3544d5199cf9685b420f38512ab97e12810aa6a2",
+    "artifact_bytes": 324777,
+    "output_sha_match": true,
+    "response_sha_match": true,
+    "execution_sha_match": true,
+    "draft_bytes": 56764
+  },
+  "lifecycle": {
+    "POST": 1,
+    "native_count": 1,
+    "tokens": 16683,
+    "micro_usd": 6640,
+    "activation": {
+      "status": "PASS",
+      "held_status": "activation_pending",
+      "same_run_id": "phaseC-090-0bb931764c71",
+      "native_attempts_before": 1,
+      "native_attempts_after": 1,
+      "charged_tokens_before": 16683,
+      "charged_tokens_after": 16683,
+      "charged_micro_usd_before": 6640,
+      "charged_micro_usd_after": 6640,
+      "POSTs_before": 1,
+      "POSTs_after": 1,
+      "paid_generation_unchanged": true,
+      "response_identity_unchanged": true
+    },
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "cache_native_usage": [],
+    "protected": true,
+    "all_prepared_protected": true,
+    "sentinel": true,
+    "cleanup": true
+  },
+  "consumers": [
+    {
+      "consumer": "filing-fetch",
+      "exit": 0,
+      "exact_context": false
+    },
+    {
+      "consumer": "RF-source+narrative",
+      "exit": 0,
+      "exact_context": false
+    },
+    {
+      "consumer": "RF-narrative",
+      "exit": 0,
+      "exact_context": true
+    }
+  ],
+  "mother": {
+    "charged_tokens": 742228,
+    "charged_micro_usd": 421556,
+    "new_unknown_count": 1,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "selection": {
+    "candidate_count": 457,
+    "coverage_complete": true,
+    "dropped_financial_count": 140,
+    "lines_total": 5215,
+    "omitted_candidate_count": 361,
+    "pages_read": 0,
+    "pages_total": 0,
+    "selected_count": 96,
+    "source_units": 5215,
+    "status": "partial",
+    "tables_scanned": 0,
+    "tables_total": 0
+  },
+  "quality_status": "needs_review",
+  "findings": [
+    {
+      "id": "US-CONTENT-01",
+      "priority": "P1",
+      "status": "OPEN",
+      "title": "Common admission includes routine accounting methods, controls and report-navigation text",
+      "evidence": [
+        {
+          "task": "t3",
+          "claim_id": "t3-source",
+          "locators": [
+            "loc:v1/paragraph:1167"
+          ],
+          "kind": "risk",
+          "section_role": "management_discussion",
+          "quote_prefix": "Our consolidated financial statements and accompanying notes are prepared in accordance with GAAP. Preparing consolidated financial statements requires management to",
+          "reasons": [
+            [
+              "reading_plan",
+              "operating_state_unknown"
+            ]
+          ]
+        },
+        {
+          "task": "t22",
+          "claim_id": "t22-source",
+          "locators": [
+            "loc:v1/paragraph:1195",
+            "loc:v1/paragraph:1198"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "quote_prefix": "Item 7\nThe Company designs and maintains accounting and internal control systems to provide reasonable assurance at reasonable cost that assets are safeguarded again",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_milestone"
+            ]
+          ]
+        },
+        {
+          "task": "t26",
+          "claim_id": "t26-source",
+          "locators": [
+            "loc:v1/paragraph:190",
+            "loc:v1/paragraph:194"
+          ],
+          "kind": "background",
+          "section_role": "business",
+          "quote_prefix": "Item 1\nAdditional information on our operating segments and geographic and product information is contained in Note 18 – Segment Information and Geographic Data of t",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "business_reporting_scope"
+            ]
+          ]
+        },
+        {
+          "task": "t39",
+          "claim_id": "t39-source",
+          "locators": [
+            "loc:v1/paragraph:1172",
+            "loc:v1/paragraph:1181"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "quote_prefix": "Item 7\nWe allocate goodwill to reporting units based on the reporting unit expected to benefit from the business combination. We evaluate our reporting units on an a",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_plan"
+            ]
+          ]
+        }
+      ],
+      "cause": "GAAP estimates, internal controls, goodwill allocation/impairment routines and Note18 pointer have accounting/operating/reporting words and reach business admission under actualbusiness/MD&A roles. t22 is marked operating_milestone/business_progress; t39 is operating_plan/new_business. This is source-semantic false positive, not a model prose hallucination.",
+      "remedy": "Use same shared section/actor/object/activity admission correction as CN/HK, with negative routines/pointers and positive financial-note business mechanism/segment/acquisition/driver controls. Keep genuine tax litigation t43, product cybersecurity risk and source business explanations; do not exclude all Item7/Item8 or all figures."
+    },
+    {
+      "id": "US-CONTENT-02",
+      "priority": "P1",
+      "status": "OPEN",
+      "title": "Finite first-fit source-card budget drops required RPO business scope while noise already consumed capacity",
+      "evidence": [
+        {
+          "task": "t59",
+          "claim_id": null,
+          "locators": [
+            "loc:v1/paragraph:3830",
+            "loc:v1/paragraph:3845"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "Item 8\nRevenue allocated to remaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future ",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "contract_revenue_conversion"
+            ]
+          ]
+        }
+      ],
+      "deferred_reason": "draft_byte_budget",
+      "missing_gold": [
+        "f-rpo-scope-and-amount",
+        "f-rpo-recognition-is-forward"
+      ],
+      "cause": "compile_extractive_plan admits safe source tasks in native order until fixed56KiB draft limit. Five tail tasks defer whole, including t59 complete RPO375/368b/asof2025-06-30 and40%next12months. Model ranks only after source admission and cannot restore this capacity loss. Noisy accounting/context cards survive earlier.",
+      "remedy": "Fix common source precision first; within existing summary64KiB and finalbundle caps, use actual source-owned business priority/coverage for deterministic bounded planning before model ranking, or defer with honest relevant-coverage status. Add an adversarial low-value accounting prefix plus late critical operating/RPO scope test using unseen issuers and actual serializedbytes. No gold/task/company-ID preference, no larger limit or sentence truncation."
+    }
+  ],
+  "boundaries": [
+    "No model/API/tests/workers/PDF parse/key access/source edits.",
+    "English original retained without translation/number conversion. Every emitted exact quote preserved native billion/million/%/year/scope; required missing RPO values are absent, not hallucinated.",
+    "Source-selected8/8 is not canonical6/8. selected coverage_complete true does not change selection partial or source-summary task coverage false.",
+    "Valid54/54 admitted model decisions are distinct from global model_coverage_complete false for5deferred/unprocessed tasks.",
+    "Actual paid decode-fault recovery not exercised; actual activation/cache are verified separately."
+  ]
+}

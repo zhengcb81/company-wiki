@@ -1,0 +1,153 @@
+{
+  "schema_version": "du11-hk-identity-root-cause/1",
+  "status": "DIAGNOSIS_COMPLETE_IMPLEMENTATION_NOT_STARTED",
+  "scope": "Read-only inspection; no tests, originals, credentials, network or model calls",
+  "evidence": {
+    "real_run": "live-v5-hk-a8eef273-20261018",
+    "consumer_error": "company-wiki source query security_id mismatch",
+    "observed_source_identity": {
+      "market": "HK",
+      "security_id": "9896",
+      "fiscal_year": 2024,
+      "published_date": "2025-04-24"
+    },
+    "verified_identity_snapshot": {
+      "market": "HK",
+      "security_id": "09896",
+      "ticker": "09896",
+      "source_name": "hkex",
+      "source_record_id": "5284"
+    },
+    "ff_head": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
+    "downloads": 0,
+    "calls": 2,
+    "raw_copies": 0
+  },
+  "root_cause": [
+    "Identity discovery normalizes HK query aliases and returns the verified snapshot security_id 09896.",
+    "CWP query_local shares SourceResolver._identity_matches, which strips leading zeroes without market qualification, and correctly accepts the observed HK 9896 for this request.",
+    "CWP describe_candidate emits the observed manifest security_id 9896 unchanged.",
+    "FF validate_source_candidate rechecks market/security_id by raw string equality against the identified company identity 09896, rejecting a source already matched by its identity owner.",
+    "This is a cross-layer identity representation contract inconsistency, not an absent original, failed byte verification, wrong period, publication/as-of issue, or model failure."
+  ],
+  "locations": [
+    {
+      "repo": "filing-fetch",
+      "path": "scripts/fetch_filing.py",
+      "symbols": [
+        "_resolved_company_identity",
+        "resolve_filing",
+        "_query_source_ref_v2"
+      ]
+    },
+    {
+      "repo": "filing-fetch",
+      "path": "scripts/ff_source_candidate.py",
+      "symbols": [
+        "validate_source_candidate"
+      ]
+    },
+    {
+      "repo": "filing-fetch",
+      "path": "scripts/filing_contracts.py",
+      "symbols": [
+        "validate_handle_metadata"
+      ]
+    },
+    {
+      "repo": "company-wiki",
+      "path": "src/company_wiki/source_catalog/security_identity.py",
+      "symbols": [
+        "_ticker_key",
+        "SecurityIdentityResolver._exact"
+      ]
+    },
+    {
+      "repo": "company-wiki",
+      "path": "src/company_wiki/source_catalog/resolver.py",
+      "symbols": [
+        "SourceResolver._identity_matches"
+      ]
+    },
+    {
+      "repo": "company-wiki",
+      "path": "src/company_wiki/source_catalog/source_reader.py",
+      "symbols": [
+        "_query_local",
+        "describe_version",
+        "describe_candidate"
+      ]
+    },
+    {
+      "repo": "company-wiki",
+      "path": "src/company_wiki/source_catalog/source_query_cli.py",
+      "symbols": [
+        "main"
+      ]
+    }
+  ],
+  "recommended_boundary": {
+    "owner": "CWP source identity domain owns strict market/security representation and equivalence; FF consumes its canonical public candidate identity and keeps structural/ref/period checks.",
+    "public_projection": "Make SourceCandidate market/security_id a canonical matching projection using the same pure market-aware identity helper used by resolver matching. Keep describe_version/raw source facts unchanged and diagnostic. Do not mutate an observed manifest to agree with a request.",
+    "alternative_if_contract_requires_literal_candidate": "Add one explicit canonical identity projection to the CWP public candidate contract and consume that in FF; do not independently strip zeroes in FF. This is larger wire-contract work and requires compatibility fixtures.",
+    "strictness": "HK numeric exchange codes up to five digits may pad to five. CN exchange codes need their existing market-specific width rules. US or unrecognized identity namespaces must not silently lose meaningful leading zeroes/class punctuation. Discovery aliases remain broader than strict source-security equivalence.",
+    "unknowns": "Do not infer market, issuer or missing security from folder names. Conflicted known identities remain conflicts; missing auxiliary metadata follows existing anchored-issuer behavior, without a new permission gate.",
+    "no_extra_validation_roundtrip": true,
+    "no_second_registry_or_cache": true
+  },
+  "tdd_plan": [
+    {
+      "stage": "A_RED",
+      "scope": "Pure CWP shared identity helper + resolver/public candidate contract",
+      "cases": [
+        "HK 5/00005 and 9896/09896 both directions match and expose one canonical candidate identity",
+        "Observed describe_version security_id remains unchanged",
+        "Distinct HK numbers and wrong markets reject",
+        "CN leading-zero six-digit exchange-code behavior remains deliberate",
+        "US class-symbol punctuation and unknown namespaces are not collapsed by a universal lstrip-zero rule",
+        "Conflicted security/market is still rejected; missing fields follow existing issuer anchoring"
+      ]
+    },
+    {
+      "stage": "B_IMPLEMENT",
+      "scope": "One CWP pure identity representation/equivalence owner; wire projection and matching consume it",
+      "constraints": [
+        "No company-specific branch",
+        "No extra registry, approval, provider or network call",
+        "Do not use broad discovery alias punctuation removal as strict identity equality",
+        "No raw bytes/source facts rewriting",
+        "Audit query_local and resolver parity rather than patching only the failing FF caller"
+      ]
+    },
+    {
+      "stage": "C_REGRESSION",
+      "scope": "Offline FF -> actual CWP identify/query -> candidate -> public read using isolated synthetic original and snapshots",
+      "cases": [
+        "Source stored as HK unpadded, identity snapshot padded, exact-year reuse_only returns reused with zero downloader/provider/model calls",
+        "Reverse source representation also succeeds",
+        "Candidate ref/document/source/byte-size/SHA bindings unchanged",
+        "Wrong security, wrong market, fiscal-year/period mismatch, future-as-of and unknown publication remain rejected or explicit gap as their existing contracts require",
+        "Original tamper still fails public open; normalization never grants byte validity",
+        "Legacy consumer and ensure/requery candidate projections retain compatibility"
+      ],
+      "cleanup": "Own TempDirectory with initial sentinel/listing and hashes; no real original copying. Confirm exact final listing and unchanged sentinel/source bytes."
+    }
+  ],
+  "coordination": {
+    "external_ff_du11_do_not_touch": [
+      "scripts/transcript_companion.py",
+      "scripts/transcript_tool_transport.py",
+      "scripts/ff_v2_envelope.py",
+      "scripts/transcript_reuse_selection.py",
+      "tests/test_du11_transcript_reuse*",
+      "author PWF"
+    ],
+    "ff_candidate_outside_author_scope": "scripts/ff_source_candidate.py",
+    "preferred_ff_work": "Regression coverage only if canonical CWP projection is sufficient; any required FF candidate adjustment belongs to ROOT after source freeze.",
+    "implementation_timing": "ROOT after complete three-company real baseline; this investigation makes no live PASS claim."
+  },
+  "limitations": [
+    "No fresh reproduction/test execution in this read-only task; causal chain is directly evidenced by real failure receipt, public identity snapshot, real registered source manifest, and inspected control flow.",
+    "Exact compatibility impact of canonical SourceCandidate identity must be established by the proposed contract tests before implementation."
+  ]
+}

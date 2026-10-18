@@ -1,0 +1,1364 @@
+{
+  "schema_version": "du11-live-independent-review/1",
+  "sample": "hk-annual",
+  "head": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "verdict": "EXTRACTIVE_BYTE_FIDELITY_AND_MODEL_PROTOCOL_PASS_CONTENT_QUALITY_AND_FF_CONSUMER_OPEN",
+  "native_overall": "FAIL",
+  "evidence_hashes": {
+    "overall.json": "3e0b48a221ea2acd1bb1b7edd76d3157fc7037257eae3cebd52fb00166f2627e",
+    "receipt.json": "6c997e847444fd4994f69d6cd2c8038ba49050854876b19cc428b224232da7ba",
+    "events.jsonl": "7b757a76de2931fe29012b68c32a20be68578128cbde8af038a7c157e7d58c95",
+    "phaseC-090-dc7d075d2182.bundle.json.gz": "1c6947582889f2d1a6e96882667ead6691c34fd4080589c33e5fc36a10bd74c3",
+    "materials\\phaseC-090-dc7d075d2182.input.json.gz": "e240681015d7f7e75f574107e45b60f164325349746ff7834cb80cfdfd2269a9",
+    "materials\\phaseC-090-dc7d075d2182.cbe463d3c602473e99cd0bd8bfc57f96.response.json.gz": "a10803168cd31ef1ddf603280795edde658dae7456e993c36cfed4a4ea885ed3"
+  },
+  "supplier": {
+    "configured": {
+      "model_id": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_tokens",
+      "thinking": "disabled"
+    },
+    "captured_wire_model": "deepseek-flash",
+    "actual_endpoints": [
+      "https://api.deepseek.com/chat/completions"
+    ],
+    "mode": "live"
+  },
+  "task_checks": [
+    {
+      "task": "t1",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t2",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t3",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t4",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t5",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t6",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t7",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t8",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t9",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t10",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t11",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t12",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t13",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t14",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t15",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t16",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t17",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t18",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t19",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t20",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t21",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t22",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t23",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t24",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t25",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t26",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t27",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t28",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t29",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t30",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t31",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t32",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t33",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t34",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t35",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t36",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t37",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t38",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t39",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t40",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t41",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t42",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t43",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t44",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t45",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t46",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t47",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t48",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t49",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t50",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t51",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t52",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t53",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t54",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    },
+    {
+      "task": "t55",
+      "binding_sha": true,
+      "partition": true,
+      "support": true,
+      "context": true,
+      "whole_quote": true,
+      "same_source": true,
+      "parsed": true,
+      "modality": true
+    }
+  ],
+  "task_counts": {
+    "native": 55,
+    "execution": 55,
+    "claims": 55,
+    "evidence": 96,
+    "all_checks": true
+  },
+  "gold_canonical": [
+    {
+      "id": "f-store-total-2024",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t17-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:3"
+          ],
+          "required_literals_present": false
+        }
+      ],
+      "literal_preservation": false,
+      "forbidden_assertions": []
+    },
+    {
+      "id": "f-store-mainland-overseas",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t9-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:8"
+          ],
+          "required_literals_present": true
+        }
+      ],
+      "literal_preservation": true,
+      "forbidden_assertions": []
+    },
+    {
+      "id": "f-store-operating-model",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t1-source",
+          "locators": [
+            "loc:v1/page:12/table:0/row:0",
+            "loc:v1/page:12/table:0/row:1",
+            "loc:v1/page:12/table:0/row:2",
+            "loc:v1/page:12/table:0/row:3",
+            "loc:v1/page:12/table:0/row:4"
+          ],
+          "required_literals_present": true
+        },
+        {
+          "claim_id": "t9-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:8"
+          ],
+          "required_literals_present": true
+        }
+      ],
+      "literal_preservation": true,
+      "forbidden_assertions": []
+    },
+    {
+      "id": "f-top-toy-total",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t12-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:10"
+          ],
+          "required_literals_present": true
+        }
+      ],
+      "literal_preservation": true,
+      "forbidden_assertions": []
+    },
+    {
+      "id": "f-top-toy-mainland",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t12-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:10"
+          ],
+          "required_literals_present": true
+        }
+      ],
+      "literal_preservation": true,
+      "forbidden_assertions": []
+    },
+    {
+      "id": "f-top-toy-overseas-commenced",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t12-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:10"
+          ],
+          "required_literals_present": true
+        }
+      ],
+      "literal_preservation": true,
+      "forbidden_assertions": []
+    },
+    {
+      "id": "f-store-network-approximate",
+      "anchor_alternative_supported": true,
+      "claim_support": [
+        {
+          "claim_id": "t17-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:3"
+          ],
+          "required_literals_present": true
+        }
+      ],
+      "literal_preservation": true,
+      "forbidden_assertions": []
+    }
+  ],
+  "gold_interpretation": "7/7 have a declared source-anchor alternative in one actual claim; only6/7 retain gold literal requirements: exact7,504 absent, approximate over7,500 retained. Do not infer exact7504 or change gold. Thousands separators ignored only when comparing literal numeric formatting.",
+  "ranking": {
+    "row_count": 55,
+    "known_tasks": 55,
+    "unknown": [],
+    "missing": [],
+    "duplicates": {},
+    "invalid_rows": [],
+    "native": {
+      "schema_version": "source-extractive-execution/1",
+      "plan_sha256": "d29060981c1286625d86487b18d40b60b6f81f32992c455972ed032d0a4ef3ec",
+      "report_sha256": "c1cf1dba4f38950476d485ae95d5dd0211935f54feea291c8d57fc875fa026bb",
+      "task_count": 55,
+      "source_dispositions": {
+        "admitted": 55
+      },
+      "model_dispositions": {
+        "consider": 40,
+        "redundant": 13,
+        "unclear": 2
+      },
+      "source_coverage_complete": true,
+      "model_coverage_complete": true,
+      "model_diagnostic": null,
+      "admitted_claim_ids": [
+        "t1-source",
+        "t2-source",
+        "t3-source",
+        "t4-source",
+        "t5-source",
+        "t6-source",
+        "t7-source",
+        "t8-source",
+        "t9-source",
+        "t10-source",
+        "t11-source",
+        "t12-source",
+        "t13-source",
+        "t14-source",
+        "t15-source",
+        "t16-source",
+        "t17-source",
+        "t18-source",
+        "t19-source",
+        "t20-source",
+        "t21-source",
+        "t22-source",
+        "t23-source",
+        "t24-source",
+        "t25-source",
+        "t26-source",
+        "t27-source",
+        "t28-source",
+        "t29-source",
+        "t30-source",
+        "t31-source",
+        "t32-source",
+        "t33-source",
+        "t34-source",
+        "t35-source",
+        "t36-source",
+        "t37-source",
+        "t38-source",
+        "t39-source",
+        "t40-source",
+        "t41-source",
+        "t42-source",
+        "t43-source",
+        "t44-source",
+        "t45-source",
+        "t46-source",
+        "t47-source",
+        "t48-source",
+        "t49-source",
+        "t50-source",
+        "t51-source",
+        "t52-source",
+        "t53-source",
+        "t54-source",
+        "t55-source"
+      ],
+      "report_origin": "native_batch_receipt.model_diagnostics.execution",
+      "semantic_truth": "not_evaluated",
+      "human_permission": "not_required"
+    }
+  },
+  "identity": {
+    "artifact_sha256": "8cb328fb25dae4dcaf2716ded522aeaf53e267ad8e0d36c916de18db01039691",
+    "artifact_bytes": 351414,
+    "output_sha_match": true,
+    "response_sha_match": true,
+    "execution_sha_match": true,
+    "draft_bytes": 47219
+  },
+  "lifecycle": {
+    "POST": 1,
+    "native_count": 1,
+    "tokens": 14204,
+    "micro_usd": 5607,
+    "activation": {
+      "status": "PASS",
+      "held_status": "activation_pending",
+      "same_run_id": "phaseC-090-dc7d075d2182",
+      "native_attempts_before": 1,
+      "native_attempts_after": 1,
+      "charged_tokens_before": 14204,
+      "charged_tokens_after": 14204,
+      "charged_micro_usd_before": 5607,
+      "charged_micro_usd_after": 5607,
+      "POSTs_before": 1,
+      "POSTs_after": 1,
+      "paid_generation_unchanged": true,
+      "response_identity_unchanged": true
+    },
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "cache_native_usage": [],
+    "protected": true,
+    "all_prepared_protected": true,
+    "sentinel": true,
+    "cleanup": true
+  },
+  "consumer": {
+    "overall": "FAIL_FF_UPSTREAM_SECURITY_ID_MISMATCH",
+    "source": {
+      "schema_version": "2.0",
+      "status": "upstream_error",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-18"
+      },
+      "filing": {
+        "status": "upstream_error",
+        "reason": "company-wiki source query security_id mismatch",
+        "retryable": true
+      },
+      "transcript": {
+        "status": "not_requested",
+        "retryable": false
+      },
+      "calls": 2,
+      "downloads": 0
+    },
+    "RF": "NOT_REACHED in this runner after FF assert; separate owner investigates alias"
+  },
+  "mother": {
+    "charged_tokens": 725545,
+    "charged_micro_usd": 414916,
+    "new_unknown_count": 1,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "selection": {
+    "candidate_count": 2094,
+    "coverage_complete": false,
+    "dropped_financial_count": 83,
+    "lines_total": 0,
+    "omitted_candidate_count": 1998,
+    "pages_read": 246,
+    "pages_total": 246,
+    "selected_count": 96,
+    "source_units": 5954,
+    "status": "partial",
+    "tables_scanned": 8,
+    "tables_total": 152
+  },
+  "quality_status": "needs_review",
+  "findings": [
+    {
+      "id": "HK-CONTENT-01",
+      "priority": "P1",
+      "status": "OPEN",
+      "title": "Common admission accepts treasury rules, audit procedures and boilerplate as business content",
+      "evidence": [
+        {
+          "claim_id": "t7-source",
+          "locators": [
+            "loc:v1/page:32/paragraph:15"
+          ],
+          "kind": "risk",
+          "section_role": "unknown",
+          "quote_prefix": "• \nthe purchase of wealth management products is limited to \nlow-risk products such as term deposits, principal-guaranteed \nand interest-pay",
+          "reasons": [
+            [
+              "reading_plan",
+              "business_risk_or_constraint"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t8-source",
+          "locators": [
+            "loc:v1/page:97/paragraph:6"
+          ],
+          "kind": "risk",
+          "section_role": "unknown",
+          "quote_prefix": "Conclude on the appropriateness of the directors’ use of the going \nconcern basis of accounting and, based on the audit evidence \nobtained, ",
+          "reasons": [
+            [
+              "reading_plan",
+              "operating_state_unknown",
+              "operating_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t36-source",
+          "locators": [
+            "loc:v1/page:31/paragraph:2",
+            "loc:v1/page:31/paragraph:29"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "有關我們財務表現的其他資料\nWe believe we can make better use of our cash by making \nappropriate investments in short-term investment products, which \ngen",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "business_risk_or_constraint"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t37-source",
+          "locators": [
+            "loc:v1/page:31/paragraph:2",
+            "loc:v1/page:32/paragraph:14"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "有關我們財務表現的其他資料\nIn order to make full use of idle funds, improve the utilization rate of \nsurplus funds, and increase our income, under the pr",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_state_unknown",
+              "operating_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t38-source",
+          "locators": [
+            "loc:v1/page:31/paragraph:2",
+            "loc:v1/page:32/paragraph:16"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "有關我們財務表現的其他資料\n• \nthe expected return of the purchased wealth management \nproducts should be not lower than bank’s deposit interest rate \nfor",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_mechanism",
+              "operating_description_unknown"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t52-source",
+          "locators": [
+            "loc:v1/page:37/paragraph:6",
+            "loc:v1/page:37/paragraph:7/chars:328-417"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "主要風險及不確定因素\n我們的業務涉及招股章程「風險因素」一節及報告期\n向美國證監會提交的表格20-F所載的若干風險。以\n下概述本集團面臨的若干主要風險及不確定因素，\n其中部分風險及不確定因素無法控制。",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t55-source",
+          "locators": [
+            "loc:v1/page:94/paragraph:2",
+            "loc:v1/page:94/paragraph:12/chars:1943-2348"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "quote_prefix": "KEY AUDIT MATTER\n• \nWe evaluated the design and tested the operating \neffectiveness of certain internal controls related to the \nGroup’s imp",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "operating_milestone"
+            ]
+          ]
+        }
+      ],
+      "cause": "Financial product purchase/approval and auditor evaluation verbs contain product/operating/tested terms. Generic source relations and narrow financial predicate admit them; source section_role unknown. Auditor we is not the issuer activity, yet t55 receives operating_milestone/business_progress and company_statement. This independently reproduces CN precision problem in English and traditional-Chinese/bilingual material.",
+      "remedy": "Shared source admission must use local section/actor/object/activity meaning and exclude routine treasury/audit/template material; retain true operating mechanics inside financial notes (t15 franchise arrangement) and business-driver explanations(t48/49/50). Do not erase financial sections or trust model consider/redundant labels to delete program cards."
+    },
+    {
+      "id": "HK-CONTENT-02",
+      "priority": "P1",
+      "status": "OPEN",
+      "title": "Table/header and source context closure are insufficient despite exact quote replay",
+      "evidence": [
+        {
+          "claim_id": "t1-source",
+          "locators": [
+            "loc:v1/page:12/table:0/row:0",
+            "loc:v1/page:12/table:0/row:1",
+            "loc:v1/page:12/table:0/row:2",
+            "loc:v1/page:12/table:0/row:3",
+            "loc:v1/page:12/table:0/row:4"
+          ],
+          "kind": "operating_table",
+          "section_role": "unknown",
+          "quote_prefix": "As of December 31,\n截至12月31日\n2023 | 2024\n2023年 | 2024年\nNumber of MINISO stores 名創優品門店數量\nMainland China 中國內地 3,926\nDirectly operated stores 直營",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "store_operating_model"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t2-source",
+          "locators": [
+            "loc:v1/page:12/table:1/row:0",
+            "loc:v1/page:12/table:1/row:1",
+            "loc:v1/page:12/table:1/row:2",
+            "loc:v1/page:12/table:1/row:3",
+            "loc:v1/page:12/table:1/row:4"
+          ],
+          "kind": "operating_table",
+          "section_role": "unknown",
+          "quote_prefix": "As of December 31,\n截至12月31日\n2023 | 2024\n2023年 | 2024年\nNumber of TOP TOY stores TOP TOY門店數量\nDirectly operated stores 直營店 14\nStores operated u",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "store_operating_model"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t3-source",
+          "locators": [
+            "loc:v1/page:14/table:0/row:0",
+            "loc:v1/page:14/table:0/row:1",
+            "loc:v1/page:14/table:0/row:2",
+            "loc:v1/page:14/table:0/row:3",
+            "loc:v1/page:14/table:0/row:4"
+          ],
+          "kind": "operating_table",
+          "section_role": "unknown",
+          "quote_prefix": "As of December 31,\n截至12月31日\n2023 | 2024\n2023年 | 2024年\nNumber of MINISO stores in mainland China 中國內地的名創優品門店數量\nFirst-tier cities 一線城市 522\nSec",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t4-source",
+          "locators": [
+            "loc:v1/page:17/table:0/row:0",
+            "loc:v1/page:17/table:0/row:1",
+            "loc:v1/page:17/table:0/row:2",
+            "loc:v1/page:17/table:0/row:3",
+            "loc:v1/page:17/table:0/row:4"
+          ],
+          "kind": "operating_table",
+          "section_role": "unknown",
+          "quote_prefix": "As of December 31,\n截至12月31日\n2023 | 2024\n2023年 | 2024年\nNumber of MINISO stores in overseas markets 海外市場的名創優品門店數量\nAsia excluding China 亞洲（中國除外",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t9-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:12/paragraph:8"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "unknown",
+          "quote_prefix": "報告期業務回顧\nNumber of MINISO stores 名創優品門店數量\nMainland China 中國內地\n3,926\n4,386\n Directly operated stores 直營店\n26\n25\n Stores operated under MINISO R",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "store_operating_model"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t19-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:13/paragraph:11",
+            "loc:v1/page:13/paragraph:12",
+            "loc:v1/page:13/paragraph:14",
+            "loc:v1/page:13/paragraph:15",
+            "loc:v1/page:13/paragraph:17",
+            "loc:v1/page:13/paragraph:18",
+            "loc:v1/page:13/paragraph:35"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "報告期業務回顧\nFor the six\nmonths ended\nFor the twelve\nmonths ended\nFor the fiscal\nyear ended\nStores operated under MINISO Retail Partner model 名創合",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "store_operating_model"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t20-source",
+          "locators": [
+            "loc:v1/page:11/paragraph:8",
+            "loc:v1/page:13/paragraph:11",
+            "loc:v1/page:13/paragraph:12",
+            "loc:v1/page:13/paragraph:14",
+            "loc:v1/page:13/paragraph:15",
+            "loc:v1/page:13/paragraph:17",
+            "loc:v1/page:13/paragraph:18",
+            "loc:v1/page:13/paragraph:41"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "報告期業務回顧\nFor the six\nmonths ended\nFor the twelve\nmonths ended\nFor the fiscal\nyear ended\nStores operated under distributor model 代理門店",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "store_operating_model"
+            ]
+          ]
+        },
+        {
+          "claim_id": "t42-source",
+          "locators": [
+            "loc:v1/page:239/paragraph:1",
+            "loc:v1/page:241/paragraph:4"
+          ],
+          "kind": "background",
+          "section_role": "unknown",
+          "quote_prefix": "Five Year Financial Summary\n五年財務摘要\n“core SKU”\nSKU that generates over RMB100,000 in sales for over a consecutive \n12-month period\n「核心SKU」\n指\n",
+          "reasons": [
+            [
+              "reading_context"
+            ],
+            [
+              "reading_plan",
+              "current_industry_context"
+            ]
+          ]
+        }
+      ],
+      "cause": "t1..t4 preserve year2023/2024 headers but row body contains only2023 values, some table_structure_ambiguous. t9 plain-text fallback carries both years values but not year header in that claim. t19/t20 retain period headers and row labels without actual dated values. t42 glossary coreSKU retains stale Five Year Financial Summary heading from p239 over actual p241 definition. Existing group membership is not original semantic row/section closure.",
+      "remedy": "One source closure owner must preserve actual header-column-period-unit relations and true local section context, qualify competing table/native representations, and defer incomplete/ambiguous scopes instead of calling headers business cards. Preserve exactraw refs, no numeric inference or table-completion guessing."
+    },
+    {
+      "id": "HK-COVERAGE-03",
+      "priority": "P2",
+      "status": "OPEN",
+      "title": "Exact store total7,504 absent although declared approximate gold alternative present",
+      "evidence": {
+        "id": "f-store-total-2024",
+        "anchor_alternative_supported": true,
+        "claim_support": [
+          {
+            "claim_id": "t17-source",
+            "locators": [
+              "loc:v1/page:11/paragraph:8",
+              "loc:v1/page:12/paragraph:3"
+            ],
+            "required_literals_present": false
+          }
+        ],
+        "literal_preservation": false,
+        "forbidden_assertions": []
+      },
+      "remedy": "Keep approximate over7,500 honest; cannot synthesize exact7504. Source completeness regression should explicitly require exact desired row/period if that precision is needed, with actual original closure. Do not silently count anchor7/7 as literal7/7."
+    }
+  ],
+  "boundaries": [
+    "Real paid summary decode-fault recovery not exercised; activation is actual real-provider C.",
+    "Development single-selector regression, not holdout or all-document completeness.",
+    "No independent tests/API/workers/PDF parse/key access/source edits.",
+    "Quoted source financial/metric explanations can be valuable; findings distinguish them from routine accounting/audit noise."
+  ]
+}

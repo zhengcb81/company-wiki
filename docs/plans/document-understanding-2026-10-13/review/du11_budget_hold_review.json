@@ -1,0 +1,55 @@
+{
+  "schema_version": "du11-budget-hold-independent-review/1",
+  "verdict": "PASS",
+  "base_commit": "c6871227c896e36df060354de7a70aba27c60c43",
+  "source_sha256": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "72748fb7343650eb32d0efd11c67eb38451bcc4771c29ae882827bedd8ec08dc",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "773ed81a1d88b0fe52f8d9703b1f0b26ab459514405fed11e00db5f7fc5d04cc",
+    "tests/test_phase_c_extractive.py": "0054a32838fa38d845596e325f24c5fc90f96965cb6b456d65a5dc7c398593a2"
+  },
+  "findings": [],
+  "scope": "Exact3file tool delta; readonly independent review, no extra tests or paid/network/credential/source actions",
+  "checked": [
+    "mother_totals aggregation untouched; baseline,retainedFXhold and latest per-nativeattempt chargedtokens/chargedmicroUSD remain included; unknowncounts remain reported",
+    "mother_budget_fits has no mutation or IO and refuses negative/non-exact-int values (including bool) for4aggregate accounting inputs and2proposed bounds",
+    "both inclusive ceilings must fit; boundary=limit accepted, oneextra token ormicroUSD refused",
+    "observer retains actual mother ledger read and per-run prior-attempt prevention, removes only unconditionalnew_unknown_count globalstop; no callback can move into pendingHTTP beforebudgetcheck",
+    "new real synthetic ledger test verifies full unknownhold+historicalcount7 and byte-identical ledgerafterdecision; no refund or rewrite",
+    "production store/caller pricing/config/lease/usage/globalcaps and all src are outside this unchanged delta"
+  ],
+  "test_evidence": {
+    "red": {
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-budget-hold-red.log",
+      "result": "4FAIL3.80s before newpurepredicate existed"
+    },
+    "green": {
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-budget-hold-green.log",
+      "result": "43PASS1deselected31.64s;22extractivetool +21readonlysource cases"
+    },
+    "deselected": "single-selector native C case already passed in prior37-case34.37s samecode; changed live-only helper branch did not justify another worker run",
+    "reviewer_test_runs": 0,
+    "diff_check": "PASS (reviewer read-only git diff --check)",
+    "ruff": "ROOT reports3filePASS; no rerun needed"
+  },
+  "actual_mother_snapshot_from_root": {
+    "charged_tokens": 696621,
+    "charged_micro_usd": 406690,
+    "new_unknown_count": 1,
+    "historical_unknown_count": 7,
+    "retained_new_hold_tokens": 68227,
+    "retained_new_hold_micro_usd": 12737,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000
+  },
+  "not_claimed": [
+    "unknownhold reconciled/refunded",
+    "providerinvoice actualusageknown for401attempt",
+    "newliveCsuccess",
+    "credential/config contents independently inspected"
+  ],
+  "limits": [
+    "Accounting predicate validates aggregated totals and bounds; native ledger component integrity remains its existing owner responsibility",
+    "Readonly/source/config budgets and originalpreservation were not relaxed",
+    "Next realCN/HK/US and livequality remain ROOT pending"
+  ]
+}

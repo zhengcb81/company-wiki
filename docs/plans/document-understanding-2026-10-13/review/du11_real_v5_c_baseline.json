@@ -1,0 +1,215 @@
+{
+  "schema_version": "du11-real-v5-c-baseline/1",
+  "observed_at": "2026-10-18T01:13:37.295332+00:00",
+  "head": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "status": "ENGINEERING_IMPROVED_CONTENT_QUALITY_NOT_ACCEPTED",
+  "samples": [
+    {
+      "sample": "cn-h1",
+      "engineering_runner_status": "PASS",
+      "receipt": ".planning\\shared-reading-production\\du11\\live-v5-cn-a8eef273-20261018\\overall.json",
+      "actual_posts": 1,
+      "native_usage": [
+        {
+          "usage_status": "known",
+          "charged_tokens": 14720,
+          "charged_micro_usd": 2619,
+          "output_bytes": 448871
+        }
+      ],
+      "execution": {
+        "task_count": 64,
+        "source_dispositions": {
+          "admitted": 64
+        },
+        "model_dispositions": {
+          "invalid": 64
+        },
+        "source_coverage_complete": true,
+        "model_coverage_complete": false,
+        "model_diagnostic": "RANK_INVALID"
+      },
+      "same_run_zero_POST": true,
+      "cross_run_zero_POST": true,
+      "activation_recovery": {
+        "status": "PASS",
+        "held_status": "activation_pending",
+        "same_run_id": "phaseC-090-d4c5fd707b44",
+        "native_attempts_before": 1,
+        "native_attempts_after": 1,
+        "charged_tokens_before": 14720,
+        "charged_tokens_after": 14720,
+        "charged_micro_usd_before": 2619,
+        "charged_micro_usd_after": 2619,
+        "POSTs_before": 1,
+        "POSTs_after": 1,
+        "paid_generation_unchanged": true,
+        "response_identity_unchanged": true
+      },
+      "consumer_exits": [
+        {
+          "consumer": "filing-fetch",
+          "exit": 0
+        },
+        {
+          "consumer": "RF-source+narrative",
+          "exit": 0
+        },
+        {
+          "consumer": "RF-narrative",
+          "exit": 0
+        }
+      ],
+      "protected_unchanged": true,
+      "temporary_lake_removed": true,
+      "raw_copies": 0,
+      "content_acceptance": "CHANGES_REQUIRED",
+      "error": null,
+      "error_line": null,
+      "actual_canonical_required_coverage": "10/10; business precision and source closure still fail"
+    },
+    {
+      "sample": "hk-annual",
+      "engineering_runner_status": "FAIL",
+      "receipt": ".planning\\shared-reading-production\\du11\\live-v5-hk-a8eef273-20261018\\overall.json",
+      "actual_posts": 1,
+      "native_usage": [
+        {
+          "usage_status": "known",
+          "charged_tokens": 14204,
+          "charged_micro_usd": 5607,
+          "output_bytes": 351414
+        }
+      ],
+      "execution": {
+        "task_count": 55,
+        "source_dispositions": {
+          "admitted": 55
+        },
+        "model_dispositions": {
+          "consider": 40,
+          "redundant": 13,
+          "unclear": 2
+        },
+        "source_coverage_complete": true,
+        "model_coverage_complete": true,
+        "model_diagnostic": null
+      },
+      "same_run_zero_POST": true,
+      "cross_run_zero_POST": true,
+      "activation_recovery": {
+        "status": "PASS",
+        "held_status": "activation_pending",
+        "same_run_id": "phaseC-090-dc7d075d2182",
+        "native_attempts_before": 1,
+        "native_attempts_after": 1,
+        "charged_tokens_before": 14204,
+        "charged_tokens_after": 14204,
+        "charged_micro_usd_before": 5607,
+        "charged_micro_usd_after": 5607,
+        "POSTs_before": 1,
+        "POSTs_after": 1,
+        "paid_generation_unchanged": true,
+        "response_identity_unchanged": true
+      },
+      "consumer_exits": [],
+      "protected_unchanged": true,
+      "temporary_lake_removed": true,
+      "raw_copies": 0,
+      "content_acceptance": "CHANGES_REQUIRED",
+      "error": "AssertionError: ",
+      "error_line": 468,
+      "actual_canonical_required_coverage": "7/7 allowed alternatives; exact7504 unavailable (literal6/7), no approximation promoted"
+    },
+    {
+      "sample": "us-10k",
+      "engineering_runner_status": "PASS",
+      "receipt": ".planning\\shared-reading-production\\du11\\live-v5-us-a8eef273-20261018\\overall.json",
+      "actual_posts": 1,
+      "native_usage": [
+        {
+          "usage_status": "known",
+          "charged_tokens": 16683,
+          "charged_micro_usd": 6640,
+          "output_bytes": 324777
+        }
+      ],
+      "execution": {
+        "task_count": 59,
+        "source_dispositions": {
+          "admitted": 54,
+          "deferred": 5
+        },
+        "model_dispositions": {
+          "consider": 54,
+          "unprocessed": 5
+        },
+        "source_coverage_complete": false,
+        "model_coverage_complete": false,
+        "model_diagnostic": "RANK_INCOMPLETE"
+      },
+      "same_run_zero_POST": true,
+      "cross_run_zero_POST": true,
+      "activation_recovery": {
+        "status": "PASS",
+        "held_status": "activation_pending",
+        "same_run_id": "phaseC-090-0bb931764c71",
+        "native_attempts_before": 1,
+        "native_attempts_after": 1,
+        "charged_tokens_before": 16683,
+        "charged_tokens_after": 16683,
+        "charged_micro_usd_before": 6640,
+        "charged_micro_usd_after": 6640,
+        "POSTs_before": 1,
+        "POSTs_after": 1,
+        "paid_generation_unchanged": true,
+        "response_identity_unchanged": true
+      },
+      "consumer_exits": [
+        {
+          "consumer": "filing-fetch",
+          "exit": 0
+        },
+        {
+          "consumer": "RF-source+narrative",
+          "exit": 0
+        },
+        {
+          "consumer": "RF-narrative",
+          "exit": 0
+        }
+      ],
+      "protected_unchanged": true,
+      "temporary_lake_removed": true,
+      "raw_copies": 0,
+      "content_acceptance": "CHANGES_REQUIRED",
+      "error": null,
+      "error_line": null,
+      "actual_canonical_required_coverage": "6/8; deferred RPO conversion facts"
+    }
+  ],
+  "mother_budget": {
+    "charged_tokens": 742228,
+    "charged_micro_usd": 421556,
+    "new_unknown_count": 1,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "known_usage_this_three_sample_batch": {
+    "tokens": 45607,
+    "micro_usd_proxy": 14866
+  },
+  "new_401_unknown_hold_retained": {
+    "tokens": 68227,
+    "micro_usd": 12737
+  },
+  "followup": "du11_real_c_quality_followup.md",
+  "not_claimed": [
+    "supplier paid-decode fault recovery (only real local HTTP engineering proved)",
+    "new holdout",
+    "full RF forecast/audit loop",
+    "whole project complete"
+  ],
+  "independent_content_review_status": "ALL_THREE_CHANGES_REQUIRED"
+}
