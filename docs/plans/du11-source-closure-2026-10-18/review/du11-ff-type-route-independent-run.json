@@ -1,0 +1,65 @@
+{
+  "head": "61011be60eb6adf18d1b272885475b053ac78267",
+  "sha256_before": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "ast_identical_after_erasing_only_new_annotation": true,
+  "mypy": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "mypy",
+      "scripts/filing_contracts.py",
+      "scripts/fetch_filing.py"
+    ],
+    "returncode": 0,
+    "output": "Success: no issues found in 2 source files"
+  },
+  "pytest": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-ff-type-route-review-awy8ehue\\tmp\\pytest",
+      "tests/test_type_route_independent.py",
+      "--junitxml",
+      "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-type-route-independent.xml"
+    ],
+    "returncode": 0,
+    "suite": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "10",
+      "time": "0.169",
+      "timestamp": "2026-10-18T04:55:55.286749+01:00",
+      "hostname": "DESKTOP-156V213"
+    }
+  },
+  "snapshot_sha256": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "sentinel_unchanged": true,
+  "network_attempts": 0,
+  "archive_sha256": "dae5110cff7ea5bdc1fb7a2a390c393552bee3376e627f17a8f86429158f1d0d",
+  "owned_temp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-ff-type-route-review-awy8ehue",
+  "owned_temp_removed": true,
+  "sha256_after": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "source_unchanged": true,
+  "wall_seconds": 4.58
+}

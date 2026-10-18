@@ -1,0 +1,74 @@
+{
+  "schema_version": "du11-ff-root-release/1",
+  "status": "PUBLISHED_INSTALLED_EXACT_CI_SUCCESS",
+  "main_commit": "e8740748f91999cb24169b42f8e789726ed50482",
+  "remote_main": "e8740748f91999cb24169b42f8e789726ed50482",
+  "source_sha256": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+    "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7"
+  },
+  "normal_push": "873PASS7SKIP78subtests91.13s;all static/mypy/doctor/claims GREEN",
+  "normal_push_log": "du11-ff-normal-push-after-fixture.log",
+  "first_failures_retained": [
+    "du11-ff-normal-push.log",
+    "du11-ff-normal-push-after-type.log"
+  ],
+  "repairs": [
+    "Precise sole qualification schema class-info type declaration",
+    "Existing public mypy hook responds to transitive scripts runtime edits;4.018s actual command",
+    "Existing unknown-publication fixture proves requested provider instead of inheriting stale query provider;all refusal/zero-provider assertions retained"
+  ],
+  "independent_reviews": [
+    "du11-ff-final-integration.json",
+    "du11-ff-publication-maintenance-independent.json",
+    "du11-ff-type-route-independent.json"
+  ],
+  "installation_receipt": "du11-ff-installed-runtime.json",
+  "installation": "PASS6physical writes/3logical roots;dependency order;byte readback;fresh imports/public help PASS",
+  "exact_ci_receipt": "du11-ff-exact-ci.json",
+  "exact_ci_run": 39095654355,
+  "remaining_untracked": [
+    ".planning/du11-empty-placeholder-original.py (original empty0bytes preserved)",
+    "config/FMP_API_KEY.txt (unread/unstaged)"
+  ],
+  "author_tree_untouched": true,
+  "paid_network_provider_calls": 0,
+  "originals_config_secrets_untouched": true,
+  "rf_final_filing_pin": "ROOT/ET responsible after published e874 remote;no RF edits by this agent",
+  "normal_push_attempts": [
+    {
+      "log": "du11-ff-normal-push.log",
+      "result": "RED at public mypy;sole schema field inferred object vs class-info;no remote write"
+    },
+    {
+      "log": "du11-ff-normal-push-after-type.log",
+      "result": "RED at old unknown-publication fixture;872PASS7SKIP78subtests1FAIL97.84s;no remote write"
+    },
+    {
+      "log": "du11-ff-normal-push-after-fixture.log",
+      "result": "GREEN all static+873PASS7SKIP78subtests91.13s;actual remote e874"
+    }
+  ],
+  "red_history_note": "Three actual normal-push attempts:two RED,one GREEN (not three failed pushes). Earlier behavioral/JSON TDD RED evidence is retained separately in FF dedicated PWF.",
+  "placeholder_preservation": {
+    "first_combined_delete_action": "Platform rejected before execution;no deletion or channel workaround",
+    "normal_git_merge": "Safely refused exact untracked selection path",
+    "authorized_preserving_alternative": "Fresh regular/nonreparse/0byte/emptySHA verification;native Move-Item to same-repo .planning/du11-empty-placeholder-original.py;destination absent;separate normal ff",
+    "preserved_bytes": 0,
+    "preserved_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "evidence_sha256": {
+    "du11-ff-normal-push.log": "eb3f536513595ea13861f052969d98fbee5d1028c3fe219dccc1832466a4fe3d",
+    "du11-ff-normal-push-after-type.log": "047d6cec5a492c555eb009be9e4b67d59b7c574cfa767fead15a4e9927d1671a",
+    "du11-ff-normal-push-after-fixture.log": "b7e8bfa4eeb9040de9f22b7c0c295829cdeb2ae5d92d219b76884c4b8da95220",
+    "du11-ff-installed-runtime.json": "e2965aecf2590b4be59338848001eeda7d193e142462ad417fac3b8b7a7c88e7",
+    "du11-ff-type-route-independent.json": "c18ffe14e2e155c0d0be288ee025e09f8d1abb731e392352c36b57fe9925f2d5"
+  },
+  "exact_ci_status": "completed",
+  "exact_ci_conclusion": "success",
+  "exact_ci_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39095654355",
+  "exact_ci_checked_utc": "2026-10-18T04:03:21.867892+00:00",
+  "exact_ci_receipt_sha256": "cce96448b872bb3f259523fcc59d411bbc229b6cf3dfa5fb3d613663d0e2845d"
+}

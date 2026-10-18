@@ -1,0 +1,45 @@
+{
+  "schema_version": "du11-ff-root-release/1",
+  "status": "PUBLISHED_INSTALLED_EXACT_CI_SUCCESS",
+  "main_commit": "e8740748f91999cb24169b42f8e789726ed50482",
+  "remote_main": "e8740748f91999cb24169b42f8e789726ed50482",
+  "source_sha256": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+    "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7"
+  },
+  "normal_push": "873PASS7SKIP78subtests91.13s;all static/mypy/doctor/claims GREEN",
+  "normal_push_log": "du11-ff-normal-push-after-fixture.log",
+  "first_failures_retained": [
+    "du11-ff-normal-push.log",
+    "du11-ff-normal-push-after-type.log"
+  ],
+  "repairs": [
+    "Precise sole qualification schema class-info type declaration",
+    "Existing public mypy hook responds to transitive scripts runtime edits;4.018s actual command",
+    "Existing unknown-publication fixture proves requested provider instead of inheriting stale query provider;all refusal/zero-provider assertions retained"
+  ],
+  "independent_reviews": [
+    "du11-ff-final-integration.json",
+    "du11-ff-publication-maintenance-independent.json",
+    "du11-ff-type-route-independent.json"
+  ],
+  "installation_receipt": "du11-ff-installed-runtime.json",
+  "installation": "PASS6physical writes/3logical roots;dependency order;byte readback;fresh imports/public help PASS",
+  "exact_ci_receipt": "du11-ff-exact-ci.json",
+  "exact_ci_run": 39095654355,
+  "remaining_untracked": [
+    ".planning/du11-empty-placeholder-original.py (original empty0bytes preserved)",
+    "config/FMP_API_KEY.txt (unread/unstaged)"
+  ],
+  "author_tree_untouched": true,
+  "paid_network_provider_calls": 0,
+  "originals_config_secrets_untouched": true,
+  "rf_final_filing_pin": "ROOT/ET responsible after published e874 remote;no RF edits by this agent",
+  "exact_ci_status": "completed",
+  "exact_ci_conclusion": "success",
+  "exact_ci_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39095654355",
+  "exact_ci_checked_utc": "2026-10-18T04:03:21.867892+00:00",
+  "exact_ci_receipt_sha256": "cce96448b872bb3f259523fcc59d411bbc229b6cf3dfa5fb3d613663d0e2845d"
+}

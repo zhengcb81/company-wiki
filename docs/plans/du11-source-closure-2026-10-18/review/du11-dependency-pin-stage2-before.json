@@ -1,0 +1,17 @@
+{
+  "head": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+  "origin_main": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+  "observed_utc": "2026-10-18T04:01:59.845089+00:00",
+  "wip": {
+    "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+    "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+    "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+  },
+  "manifest_sha256": "72c8c47d1f0034598b9dd48a207bc2b54905d6e06f0c12a266dbfb0485a73e2e",
+  "triplet": {
+    "filing": "5001dcbef1845a08e90cda6f2a86365610a662af",
+    "revenue": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+    "wiki": "0ccdc6896ee58063ff827e9ceab16043c7550e0c"
+  },
+  "output": "not read or modified"
+}

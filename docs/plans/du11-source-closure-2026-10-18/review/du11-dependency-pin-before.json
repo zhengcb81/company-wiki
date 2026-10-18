@@ -1,0 +1,12 @@
+{
+  "head": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+  "wip": {
+    "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+    "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+    "assurance/runs/weekly_manifest.json": "c41959e3cd5925c87c00164c089671e62ba193cf21c5f5de4b152515ba45a239"
+  },
+  "manifest_sha256": "ace0daa87d17ee90df73b2e0cda31bb9642ffc5f9b77105dcb35d55c3152d6ba",
+  "observed_utc": "2026-10-18T03:47:09.266717+00:00",
+  "output": "not opened or modified",
+  "status": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/\n"
+}
