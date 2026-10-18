@@ -1,0 +1,85 @@
+{
+  "schema_version": "du11-identity-projection-handoff/1",
+  "status": "INDEPENDENT_REVIEW_PASS_READY_NORMAL_COMMIT",
+  "base": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "branch": "codex/du11-identity-projection",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-identity-projection\\company-wiki",
+  "source_freeze": {
+    "src/company_wiki/source_catalog/security_code.py": {
+      "sha256": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+      "normalized_lf_sha256": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+      "bytes": 1446
+    },
+    "src/company_wiki/source_catalog/resolver.py": {
+      "sha256": "967634e546d5a5a69f43b43f070180a7a12d437e964da1e9c1780eb36b5ee168",
+      "normalized_lf_sha256": "ad82bedae618d791cd81e86e07e0680a001cdc25a3a870e829c7f146144d1e35",
+      "bytes": 102854
+    },
+    "src/company_wiki/source_catalog/source_reader.py": {
+      "sha256": "14400ddf8c07560080878541f9f95b41bed8a21875cf8c85d2c47bf6b07644e8",
+      "normalized_lf_sha256": "0b30b7e398dc41d52761ed69e1db50c59669d03714036c49e215a31383b0e37d",
+      "bytes": 35165
+    },
+    "tests/unit/du11_identity_projection/test_identity_projection.py": {
+      "sha256": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+      "normalized_lf_sha256": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+      "bytes": 6825
+    },
+    "tests/integration/test_du11_identity_projection.py": {
+      "sha256": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418",
+      "normalized_lf_sha256": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418",
+      "bytes": 5239
+    }
+  },
+  "tests": [
+    {
+      "receipt": "red.log/xml",
+      "result": "7 FAIL19PASS4.95s",
+      "meaning": "actual behavior before runtime implementation; no import-missing RED"
+    },
+    {
+      "receipt": "green.log/xml",
+      "result": "42PASS6.76s",
+      "scope": "26own+10existingidentityresolver+6existingsteadyreader"
+    },
+    {
+      "receipt": "integration.log/xml",
+      "result": "31PASS13.43s",
+      "scope": "29own+2realunchangedFFCLI"
+    },
+    {
+      "receipt": "final-unit.log/xml",
+      "result": "35PASS4.63s",
+      "scope": "final35own including6newmulti-market publicprojection controls"
+    }
+  ],
+  "FF_readonly_head": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
+  "lint": "Ruff all5PASS;gitdiffcheckPASS",
+  "cleanup": {
+    "owned_lake_and_catalog_removed_in_fixture_finally": true,
+    "sentinel_bytes_checked_and_new_sentinel_removed": true,
+    "tamper_synthetic_original_restored_before_cleanup": true,
+    "network_attempt_file_absent": true,
+    "original_real_PDF_reads": 0,
+    "real_provider_calls": 0,
+    "model_calls": 0,
+    "production_config_or_DB_writes": 0,
+    "author_external_tree_writes": 0
+  },
+  "boundaries": [
+    "Independent reviewer PASS; no mandatory fixes. Review is engineering scope, not whole real C.",
+    "No actual HK live rerun, model or historical paid generation mutation; ROOT owns consumers final revalidation.",
+    "Security-master discovery aliases stay existing implementation; this owner governs strict source equality/projection only.",
+    "Unknown namespaces and malformed codes preserved literally without invented aliases; missing auxiliary fields retain existing anchored-source semantics.",
+    "source_reader existing mixed endings preserved; only new lines LF. Resolver workingCRLF vs indexLF noted by normalized hash."
+  ],
+  "commit": null,
+  "independent_review": {
+    "reviewer": "/root/du10_ff_reception_review",
+    "status": "PASS",
+    "receipt": "review/independent-review.md/json",
+    "tests": "37PASS13.20s",
+    "source_unchanged": true,
+    "cleanup": true
+  }
+}

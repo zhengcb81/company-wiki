@@ -37,6 +37,7 @@ from .resolver import (
 )
 from .service import SourceCatalog
 from .store import metadata_state
+from .security_code import canonical_security_code
 from .source_location import (
     SourceLocationError,
     relative_segments as _relative_segments,
@@ -467,7 +468,9 @@ class SourceVersionReader:
         """DB-only, pathless prequalification for a filing consumer.
 
         Capture fields are observations from an indexed location, not source
-        version identity.  The final open must still verify the current bytes.
+        version identity. Security code is the source identity's canonical
+        market representation; describe_version retains the observed value.
+        The final open must still verify the current bytes.
         """
         manifest = self.describe_version(ref)
         try:
@@ -563,7 +566,7 @@ class SourceVersionReader:
             "canonical_entity_id": manifest["canonical_entity_id"],
             "display_name": manifest["display_name"],
             "market": manifest["market"],
-            "security_id": manifest["security_id"],
+            "security_id": canonical_security_code(manifest["security_id"], manifest["market"]),
             "language": manifest["language"],
             "capture_ready": bool(
                 capture_complete and https_url and manifest["published_date"]

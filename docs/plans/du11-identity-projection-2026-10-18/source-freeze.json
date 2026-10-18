@@ -1,0 +1,27 @@
+{
+  "src/company_wiki/source_catalog/security_code.py": {
+    "sha256": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+    "normalized_lf_sha256": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+    "bytes": 1446
+  },
+  "src/company_wiki/source_catalog/resolver.py": {
+    "sha256": "967634e546d5a5a69f43b43f070180a7a12d437e964da1e9c1780eb36b5ee168",
+    "normalized_lf_sha256": "ad82bedae618d791cd81e86e07e0680a001cdc25a3a870e829c7f146144d1e35",
+    "bytes": 102854
+  },
+  "src/company_wiki/source_catalog/source_reader.py": {
+    "sha256": "14400ddf8c07560080878541f9f95b41bed8a21875cf8c85d2c47bf6b07644e8",
+    "normalized_lf_sha256": "0b30b7e398dc41d52761ed69e1db50c59669d03714036c49e215a31383b0e37d",
+    "bytes": 35165
+  },
+  "tests/unit/du11_identity_projection/test_identity_projection.py": {
+    "sha256": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+    "normalized_lf_sha256": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+    "bytes": 6825
+  },
+  "tests/integration/test_du11_identity_projection.py": {
+    "sha256": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418",
+    "normalized_lf_sha256": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418",
+    "bytes": 5239
+  }
+}

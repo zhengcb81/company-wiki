@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="26" time="4.941" timestamp="2026-10-18T02:18:12.704698+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-9896-09896-match]" time="0.406" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-09896-9896-match]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-700-00700-match]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-9896-09897-conflict]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-009896-09896-conflict]" time="0.004"><failure message="AssertionError: assert 'match' == 'conflict'&#10;  &#10;  - conflict&#10;  + match">tests\unit\du11_identity_projection\test_identity_projection.py:35: in test_strict_match_is_market_qualified
+    assert SourceResolver._identity_matches(request(market, left),
+E   AssertionError: assert 'match' == 'conflict'
+E     
+E     - conflict
+E     + match</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[CN-1-000001-match]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[CN-000001-1-match]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[CN-0000001-000001-conflict]" time="0.003"><failure message="AssertionError: assert 'match' == 'conflict'&#10;  &#10;  - conflict&#10;  + match">tests\unit\du11_identity_projection\test_identity_projection.py:35: in test_strict_match_is_market_qualified
+    assert SourceResolver._identity_matches(request(market, left),
+E   AssertionError: assert 'match' == 'conflict'
+E     
+E     - conflict
+E     + match</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[CN-600001-600002-conflict]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[US-brk.b-BRK.B-match]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[US-BRK.B-BRK-B-conflict]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[US-BRK.B-BRKB-conflict]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[US-0ABC-ABC-conflict]" time="0.004"><failure message="AssertionError: assert 'match' == 'conflict'&#10;  &#10;  - conflict&#10;  + match">tests\unit\du11_identity_projection\test_identity_projection.py:35: in test_strict_match_is_market_qualified
+    assert SourceResolver._identity_matches(request(market, left),
+E   AssertionError: assert 'match' == 'conflict'
+E     
+E     - conflict
+E     + match</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[None-001-1-conflict]" time="0.003"><failure message="AssertionError: assert 'match' == 'conflict'&#10;  &#10;  - conflict&#10;  + match">tests\unit\du11_identity_projection\test_identity_projection.py:35: in test_strict_match_is_market_qualified
+    assert SourceResolver._identity_matches(request(market, left),
+E   AssertionError: assert 'match' == 'conflict'
+E     
+E     - conflict
+E     + match</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[None-Foo-foo-conflict]" time="0.004"><failure message="AssertionError: assert 'match' == 'conflict'&#10;  &#10;  - conflict&#10;  + match">tests\unit\du11_identity_projection\test_identity_projection.py:35: in test_strict_match_is_market_qualified
+    assert SourceResolver._identity_matches(request(market, left),
+E   AssertionError: assert 'match' == 'conflict'
+E     
+E     - conflict
+E     + match</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[None-SAME-ID-SAME-ID-match]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-98 96-9896-conflict]" time="0.002" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_strict_match_is_market_qualified[HK-\uff19\uff18\uff19\uff16-09896-conflict]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_known_market_is_not_borrowed_from_request_or_over_conflict[metadata0]" time="0.002" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_known_market_is_not_borrowed_from_request_or_over_conflict[metadata1]" time="0.003"><failure message="AssertionError: assert 'match' == 'conflict'&#10;  &#10;  - conflict&#10;  + match">tests\unit\du11_identity_projection\test_identity_projection.py:45: in test_known_market_is_not_borrowed_from_request_or_over_conflict
+    assert SourceResolver._identity_matches(request(), metadata) == "conflict"
+E   AssertionError: assert 'match' == 'conflict'
+E     
+E     - conflict
+E     + match</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_known_market_is_not_borrowed_from_request_or_over_conflict[metadata2]" time="0.003" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_candidate_projects_canonical_identity_without_mutating_observed_facts" time="0.506"><failure message="AssertionError: assert '9896' == '09896'&#10;  &#10;  - 09896&#10;  ? -&#10;  + 9896">tests\unit\du11_identity_projection\test_identity_projection.py:87: in test_candidate_projects_canonical_identity_without_mutating_observed_facts
+    assert candidate["security_id"] == "09896"
+E   AssertionError: assert '9896' == '09896'
+E     
+E     - 09896
+E     ? -
+E     + 9896</failure></testcase><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_projection_keeps_existing_company_period_and_asof_filters[changes0]" time="0.181" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_projection_keeps_existing_company_period_and_asof_filters[changes1]" time="0.124" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_projection_keeps_existing_company_period_and_asof_filters[changes2]" time="0.160" /><testcase classname="tests.unit.du11_identity_projection.test_identity_projection" name="test_projection_keeps_existing_company_period_and_asof_filters[changes3]" time="0.150" /></testsuite></testsuites>

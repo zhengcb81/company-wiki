@@ -21,6 +21,7 @@ from .qualification import SourceQualification, qualify_source
 from .runtime_policy import resolver_visibility_projection
 from .service import SourceCatalog
 from .store import metadata_state
+from .security_code import security_codes_equivalent
 
 
 # B07 - the read contract's version policy, stated where the contract lives.
@@ -1587,22 +1588,14 @@ class SourceResolver:
         if req_market and cand_market and req_market != cand_market:
             return "conflict"
 
-        def _ticker_norm(value: str) -> str:
-            # Exchange-style tickers compare modulo leading zeros and case:
-            # HKEX "03896" == "3896", "02020" == "2020" (ADR-008 Strategy B;
-            # same normalization as the portfolio promoter).
-            return value.strip().lstrip("0").casefold()
-
         if (
             req_security_id
             and cand_security_id
-            and _ticker_norm(req_security_id) != _ticker_norm(cand_security_id)
+            and not security_codes_equivalent(req_security_id, cand_security_id,
+                left_market=req_market, right_market=cand_market)
         ):
-            # FC-702: no soft-match — a security_id that differs after
-            # normalization is a hard identity conflict, even when the
-            # candidate stores a company name (中国平安 style) instead of a
-            # ticker.  Issuer anchoring happens at the entity layer
-            # (_entity_matches / security_master), never here.
+            # Discovery names/aliases belong to the security master. Only the
+            # shared, market-qualified source-code representation applies here.
             return "conflict"
         return "match"
 
