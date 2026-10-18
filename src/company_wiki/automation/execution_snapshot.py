@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 import json
 import sqlite3
 from dataclasses import dataclass
@@ -225,7 +226,7 @@ def _prior_partial_result(
             result = HandlerResult.from_dict(decoded)
         except (json.JSONDecodeError, TypeError, ValueError):
             continue
-        if isinstance(result.result, dict) and result.result.get("coverage_partial") is True:
+        if isinstance(result.result, Mapping) and result.result.get("coverage_partial") is True:
             return result
     return None
 

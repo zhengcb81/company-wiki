@@ -67,3 +67,33 @@ def test_partial_summary_retries_and_the_repair_call_only_sends_uncovered_tasks(
     assert [claim["claim_id"] for claim in claims] == ["t1-1", "t2-r1"]
     assert completed.result["draft"]["status"] == "needs_review"
 
+
+
+class _BadCaller:
+    def generate(self, context, request):
+        return (legacy.NarrativeModelResponse(
+            "offline", "configured", request.prompt_version, b"{not json"),
+            HandlerMetrics(tokens=1, cost_usd=0.0, duration_ms=1))
+
+
+def test_an_invalid_repair_response_falls_back_to_the_first_summary():
+    monkeypatch_env = {"CW_SUMMARY_COVERAGE_REPAIR": "1"}
+    import os
+    previous = os.environ.get("CW_SUMMARY_COVERAGE_REPAIR")
+    os.environ.update(monkeypatch_env)
+    try:
+        selected = with_reading()
+        partial = _handler(_Caller([{"t1": [_clause()]}]))(_context(selected))
+        context = replace(
+            _context(selected),
+            attempt=replace(_context(selected).attempt, attempt_no=2),
+            prior_partial_result=partial,
+        )
+        completed = _handler(_BadCaller())(context)
+    finally:
+        if previous is None:
+            os.environ.pop("CW_SUMMARY_COVERAGE_REPAIR", None)
+        else:
+            os.environ["CW_SUMMARY_COVERAGE_REPAIR"] = previous
+    assert completed.outcome is HandlerOutcome.SUCCEEDED
+    assert [claim["claim_id"] for claim in completed.result["draft"]["claims"]] == ["t1-1"]
