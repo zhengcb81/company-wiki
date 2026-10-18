@@ -25,7 +25,12 @@ from .narrative_contracts import NarrativeSelectResult
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.5'
+# A long filing's selection turns into dozens of local task groups; a twenty
+# clause ceiling made a real provider drop required facts (CN covered 8 of 10,
+# and the 22-clause draft that covered them was rejected). Forty keeps the
+# summary bounded while leaving room for every selected business update.
+MAX_SUMMARY_CLAIMS = 40
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.6'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -103,10 +108,10 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None) -
         raise ModelResponseError('model output budget must be a positive integer')
     # Ask for fewer than the hard cap so a model that overshoots by a clause or
     # two still lands inside the contract instead of dead-lettering the item.
-    target = min(15, max(1, task_count))
+    target = min(MAX_SUMMARY_CLAIMS - 4, max(1, task_count))
     if max_output_tokens is not None:
         target = min(target, max(1, (max_output_tokens - 256) // 320))
-    return {'max_claims': 20, 'target_claim_count': target, 'target_text_chars': 240,
+    return {'max_claims': MAX_SUMMARY_CLAIMS, 'target_claim_count': target, 'target_text_chars': 240,
         # The response schema can only bound each task array; this is the hard
         # per-task share of the global cap the decoder actually enforces.
         'max_claims_per_task': 2,
@@ -140,7 +145,7 @@ def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
     from . import narrative_model as legacy
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
-    view = compile_scoped_model_view(selected, max_claims=20)
+    view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
     if not view.plan.tasks or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
     aliases = ['r' + str(i) for i in range(1, len(selected.reading_context['groups']) + 1)]
@@ -210,9 +215,9 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     if any(not isinstance(rows, list) for rows in tasks.values()):
         raise NarrativeContractError('scoped task clauses must be arrays')
     count = sum(len(rows) for rows in tasks.values())
-    if count > 20:
-        raise NarrativeContractError('summary claims exceed twenty')
-    view = compile_scoped_model_view(selected, max_claims=20)
+    if count > MAX_SUMMARY_CLAIMS:
+        raise NarrativeContractError('summary claims exceed forty')
+    view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
     if set(tasks) - {task.key for task in view.plan.tasks}:
         raise legacy.ModelCitationError('scoped draft references an unknown source task')
     known = {span.span_id: span for span in selected.evidence_spans}

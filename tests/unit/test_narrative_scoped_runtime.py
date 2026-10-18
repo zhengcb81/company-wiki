@@ -77,10 +77,10 @@ def test_v4_reconstructs_program_identity_and_task_order_not_response_key_order(
         assert row['evidence_ids']==list(task.support_ids)
 
 
-def test_twenty_global_cap_is_checked_before_invalid_clause_recovery():
-    with pytest.raises(NarrativeContractError,match='twenty'):
-        decode({'t1':[clause(parts=['missing']) for _ in range(11)],
-                't2':[clause() for _ in range(10)]})
+def test_global_cap_is_checked_before_invalid_clause_recovery():
+    with pytest.raises(NarrativeContractError,match='forty'):
+        decode({'t1':[clause(parts=['missing']) for _ in range(21)],
+                't2':[clause() for _ in range(20)]})
 
 
 def test_bad_clause_is_discarded_whole_without_citation_repair_or_extra_call():

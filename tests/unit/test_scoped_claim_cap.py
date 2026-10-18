@@ -1,13 +1,13 @@
 """The scoped request states and enforces the per-task share of the claim cap."""
 from company_wiki.automation.narrative_model_scoped import (
-    SCOPED_INSTRUCTION, _scoped_output_plan, scoped_response_schema,
+    MAX_SUMMARY_CLAIMS, SCOPED_INSTRUCTION, _scoped_output_plan, scoped_response_schema,
 )
 
 
 def test_scoped_plan_states_the_target_and_per_task_cap():
     plan = _scoped_output_plan(64)
-    assert plan["max_claims"] == 20
-    assert plan["target_claim_count"] == 15
+    assert plan["max_claims"] == MAX_SUMMARY_CLAIMS == 40
+    assert plan["target_claim_count"] == 36
     assert plan["max_claims_per_task"] == 2
     assert "target_claim_count" in SCOPED_INSTRUCTION
     assert "max_claims_per_task" in SCOPED_INSTRUCTION

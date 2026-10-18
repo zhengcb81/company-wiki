@@ -119,6 +119,7 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         "summary draft must contain at least one claim": "CLAIMS_EMPTY",
         "summary claims must be an array": "CLAIMS_SHAPE",
         "summary claims exceed twenty": "CLAIMS_LIMIT",
+        "summary claims exceed forty": "CLAIMS_LIMIT",
         "summary claim text exceeds 280 characters": "CLAIM_TEXT",
         "summary claim evidence IDs exceed the pinned unique set": "EVIDENCE_REFERENCE",
         "summary claim refers to unknown evidence IDs": "EVIDENCE_REFERENCE",
