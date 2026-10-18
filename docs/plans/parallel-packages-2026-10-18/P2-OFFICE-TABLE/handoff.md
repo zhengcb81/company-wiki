@@ -2,14 +2,14 @@
 
 PLAN_ID=parallel-packages-2026-10-18/P2-OFFICE-TABLE　分支 `codex/p2-office-table-20261018`
 基线 `4045787f6bf77722d8125911f3475ecff9bca9b0`
-提交：`f8c91996`（实现）+ `9d0b4bb9`（独立审查修复）
+提交：`f8c91996`（实现）+ `b61ed0c5`（独立审查修复）+ `ac1aa4cb`（真实验证发现的编号缺陷）
 
 ## 1. 交付物
 
 - **新增** `src/company_wiki/document_normalization/office_table_structure.py`：纯模块，
   `parse_office_tables(original, *, source_sha256, limits) -> dict` 产出 `cwp-office-table/1`；
   `replay_office_tables(original, structure) -> dict` 重算并逐项比对，任一处不等抛 `ValueError`。
-- **新增** `tests/unit/test_p2_office_table/**`：67 个用例 + 8 个合成 OOXML 夹具（含 `sha256.json` 清单）。
+- **新增** `tests/unit/test_p2_office_table/**`：68 个用例 + 8 个合成 OOXML 夹具（含 `sha256.json` 清单）。
 - **零改动** `narrative_formats.py`（本卡不需要登记常量，`git status` 为空）；
   `docx_parser.py` 与 `pptx_parser.py` 在 `git diff --stat` 中出现 **0** 次。
 
@@ -45,7 +45,7 @@ PLAN_ID=parallel-packages-2026-10-18/P2-OFFICE-TABLE　分支 `codex/p2-office-t
 ## 3. 验收
 
 四条命令全部 exit 0（日志在本目录）：`green-20261018-pathcheck.log`（`company_wiki.__path__`
-指向本 worktree）、`green-20261018-pytest.log`（**67 passed**，0 skipped）、
+指向本 worktree）、`green-20261018-pytest.log`（**68 passed**，0 skipped）、
 `static-20261018-ruff-mypy.log`（ruff / mypy 均通过）。
 RED 收据 `red-20261018-baseline.log`：实现前以"今日 row×cell 行为"为基线跑同一套用例，
 **27 failed / 19 passed**，失败均为断言消息（如 `assert [3, 1, 1] == [1, 1, 1]`、
@@ -56,23 +56,39 @@ RED 收据 `red-20261018-baseline.log`：实现前以"今日 row×cell 行为"�
 D4 嵌套表分页线索串表、D5 `gridSpan="0"` 静默变 1 并污染合并链、D6 回放只比 4 个字段、
 D7 PPTX 覆盖格文本被清空）已全部修复并加 19 条回归用例锁死；用例数 46 → 67。
 
+**真实验证（ROOT 交付后追加）**：对 `companies/` 下 **96 个唯一真实 DOCX 研报/公告**（按内容
+SHA 去重，190 个唯一包全量解析 0 错误、回放 190/190 通过）逐字节比对 locator：
+修复前 **24.8%（637/2540 前身）** 的结构 locator 不在 `parse_docx` 输出中——根因是
+`body.iter()` 与解析器的编号规则在含 `w:sdt` 包裹嵌套表的真实研报上分岔（该文件 34 vs 25 张表）。
+`ac1aa4cb` 以解析器的精确遍历（`sdtContent` 下降、`del/moveFrom` 跳过、单元格只认直接
+`w:tbl` 子元素）替换后，**2540/2540 结构 locator 与 `parse_docx` 逐字符一致，0 漂移**，
+并新增 `t=3` 漂移回归用例（对旧代码红、对新代码绿）。
+剩余 276 个解析器独有 locator 全部来自"单元格多段落"：解析器每段产一个 unit，
+结构按卡 §5.3 只存首段，属设计预期。
+
 ## 4. 未做与已知限制
 
 - **未把结构接进生产选择/摘要**：`cwp-office-table/1` 尚未被 `normalize_document`、
   `narrative_formats`、摘要选择或导出消费；接线是 ROOT 的工作。
-- **未验证真实 DOCX 续表**：全部结论来自合成包。真实 Word 文件只有在分页预览后才会写
-  `w:lastRenderedPageBreak`，因此真实财报的 `continuation.status` 很可能普遍是 `unknown`；
-  本卡没有用任何生产原件验证过，也未声称验证过。
+- **真实 DOCX 续表仍未验证**：真实验证只证明 locator 一致性；`w:lastRenderedPageBreak`
+  只在 Word 分页预览后写入，被测 190 个包中 `continuation.status` 为 `unknown` 159 张、
+  `ok` 1 张、`not_applicable` 2 张——**无一例真实 `repeated_header` 续表**，该路径仍只有合成证据。
+- **真实验证的边界**：只比对了 locator 逐字符一致，未断言合并/表头语义与人工判读一致
+  （真实包中 37 个含合并格，`vertical_continue` 165 / `vertical_start` 41，未逐一人工核对）。
+  真实 PPTX 样本仅 1 个，PPTX 侧仍是合成夹具证据为主。
 - **未做 `du4-table-observation/1` 投影**，未改 `document_understanding/table_measurements/**`。
 - `work_used.chars` 只计单元格文本，不含脚注文本（脚注另受 `max_footnote_chars` 约束）。
 - `a:tblGrid` 缺失时 `grid.columns=null`，此时无法判定合并是否越界，只能不报（不猜）。
 - 非正 `w:gridSpan` 落到 `p2_span_out_of_grid`（卡无规定，属审查裁定）。
 - `continuation_of` 判"表头相同"只比单元格文本序列，未比列宽/合并结构。
 - 不做数值解析、单位换算、币种推断、财务表分类；不读 PDF、不做 OCR。
-- 未读任何生产原件、未联网、未调模型、未读密钥、未写 config/DB/`output/`。
+- 真实验证只**读**了 `companies/` 下的原件字节（哈希去重后解析），未写任何原件；
+  未联网、未调模型、未读密钥、未写 config/DB/`output/`。
 
 ## 5. ROOT 待办（3 项）
 
 1. 决定是否把 `cwp-office-table/1` 投影到 `du4-table-observation/1`（本卡只产出前者）。
-2. 在真实 DOCX/PPTX 上核对逐格 locator 与既有 unit 是否仍然一致（本卡只用合成夹具验证过）。
+2. ~~在真实 DOCX/PPTX 上核对逐格 locator 与既有 unit 是否仍然一致~~（已完成：2540/2540
+   一致，见 §3 真实验证）；ROOT 如复跑，可用任意 `companies/**/*.docx` 对照
+   `parse_docx` 输出与结构 `locator` 集合。
 3. 若结构需要进入摘要选择，由 ROOT 在 source owner 内接线，不在本卡。
