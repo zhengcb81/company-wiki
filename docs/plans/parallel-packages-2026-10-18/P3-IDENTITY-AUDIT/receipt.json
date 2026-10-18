@@ -1,0 +1,107 @@
+{
+  "counts": {
+    "checked": 6,
+    "failed": 0,
+    "not_applicable": 1,
+    "not_evaluated": 0,
+    "passed": 5
+  },
+  "generated_at": "2026-10-18T12:23:57Z",
+  "inputs": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\p3-identity-audit-demo-3nqwsx_5\\config\\source_catalog.yaml": {
+      "bytes": 208,
+      "sha256": "cf148b84eb058b54426219ec8d8ba17b2e68239d9fbb003d312a4ce51107f0dc"
+    },
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\p3-identity-audit-demo-3nqwsx_5\\request.json": {
+      "bytes": 544,
+      "sha256": "ef6ed48ec2e226c34274763bfc0d68b001c6b8f11fd94786d5bcbe0b0cd67aae"
+    }
+  },
+  "limitations": [
+    "synthetic fixture catalog only; the production catalog was never opened",
+    "PDF/DOCX span offsets are not verified; only exact UTF-8 text/plain spans are",
+    "unit tokens are compared as notation only: no conversion, no currency fill-in, no magnitude inference",
+    "card section 5.4(5) names source_url/captured_at, which the current availability evidence does not carry; the observed keys are passed through verbatim",
+    "publication dates are reported as observed manifest values and are never replaced by a retrieval time"
+  ],
+  "schema_version": "identity-audit-receipt/1",
+  "sources": [
+    {
+      "checks": {
+        "availability": {
+          "detail": {
+            "evidence": {
+              "available_by": "2026-08-02",
+              "basis": "prior_verified_capture",
+              "evidence_ref": "source-provenance:urn:company-wiki:document:sha256:62a4d15fbc61604e025049f16281f0581cc58b234ae520667bc731cfe92d20f9:d6c514ed2a9fb5b2c03e1bf4c43b0c8ab0982353dd3c8cff9090f57d38547b9a",
+              "locator": "/receipt/content_sha256 + /receipt/retrieved_at + /receipt/http_status",
+              "schema_version": "source-availability-evidence/1",
+              "source_sha256": "62a4d15fbc61604e025049f16281f0581cc58b234ae520667bc731cfe92d20f9"
+            }
+          },
+          "status": "pass"
+        },
+        "bytes": {
+          "detail": {
+            "bytes": 51,
+            "sha256": "62a4d15fbc61604e025049f16281f0581cc58b234ae520667bc731cfe92d20f9"
+          },
+          "status": "pass"
+        },
+        "identity": {
+          "detail": {
+            "canonical_security_id": "688012"
+          },
+          "expected": {
+            "market": "CN",
+            "security_id": "688012"
+          },
+          "observed": {
+            "canonical_entity_id": "Acme",
+            "document_kind": "annual_report",
+            "form_type": "annual",
+            "language": "zh",
+            "market": "CN",
+            "security_id": "688012",
+            "title": "Acme annual report"
+          },
+          "status": "pass"
+        },
+        "period": {
+          "detail": {},
+          "expected": {
+            "fiscal_year": 2026
+          },
+          "observed": {
+            "date_provenance": "capture_evidence_present",
+            "fiscal_period": "H1",
+            "fiscal_year": 2026,
+            "period_end": "2026-06-30",
+            "published_date": null,
+            "unknown_source": "nullable_manifest"
+          },
+          "status": "pass"
+        },
+        "ref": {
+          "detail": {
+            "byte_size": 51,
+            "content_sha256": "62a4d15fbc61604e025049f16281f0581cc58b234ae520667bc731cfe92d20f9",
+            "mime_type": "text/plain"
+          },
+          "status": "pass"
+        },
+        "spans": [],
+        "unit": {
+          "detail": {},
+          "reason": "no_groundable_span",
+          "status": "not_applicable",
+          "tokens": []
+        }
+      },
+      "document_id": "urn:company-wiki:document:sha256:62a4d15fbc61604e025049f16281f0581cc58b234ae520667bc731cfe92d20f9",
+      "source_id": "urn:company-wiki:source:sha256:62a4d15fbc61604e025049f16281f0581cc58b234ae520667bc731cfe92d20f9",
+      "status": "pass"
+    }
+  ],
+  "status": "ok"
+}
