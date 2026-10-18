@@ -1,0 +1,277 @@
+{
+  "schema_version": "parallel-packages-handoff/1",
+  "lane": "P3-IDENTITY-AUDIT",
+  "status": "FROZEN_AWAITING_ROOT_REVIEW",
+  "baseline_commit": "4045787f6bf77722d8125911f3475ecff9bca9b0",
+  "branch": "codex/p3-identity-audit-20261018",
+  "commits": [
+    "99a67f06d082964cc8ad974e31611d582f095213",
+    "20a43fab696a3dccb9e0886633f3daadae012b92"
+  ],
+  "changed_paths": [
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/demo-cli-run.py",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/findings.md",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/green-1.log",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/green-2.log",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/progress.md",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/receipt.json",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/red-1-pre-implementation.log",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/review/independent.md",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-1.log",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-2.log",
+    "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/task_plan.md",
+    "tests/unit/test_identity_audit/conftest.py",
+    "tests/unit/test_identity_audit/fixtures/__init__.py",
+    "tests/unit/test_identity_audit/fixtures/sidecar_catalog.py",
+    "tests/unit/test_identity_audit/harness.py",
+    "tests/unit/test_identity_audit/test_0_fixture_contract.py",
+    "tests/unit/test_identity_audit/test_1_checks.py",
+    "tests/unit/test_identity_audit/test_2_receipt_shell.py",
+    "tools/identity_audit/README.md",
+    "tools/identity_audit/__init__.py",
+    "tools/identity_audit/__main__.py",
+    "tools/identity_audit/cli.py",
+    "tools/identity_audit/core.py",
+    "tools/identity_audit/export.py",
+    "tools/identity_audit/receipt.py"
+  ],
+  "file_bindings": [
+    {
+      "bytes": 4314,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/demo-cli-run.py",
+      "sha256": "59091dbbf650ed3713d3defba66d8ab9bd3600f03f181105ff6c4bc4fed5c471"
+    },
+    {
+      "bytes": 9815,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/findings.md",
+      "sha256": "7502094429288f6ee4abd33493389c9a0525f888f83f6acb5ea621c60bf94d0c"
+    },
+    {
+      "bytes": 2688,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/green-1.log",
+      "sha256": "15e1741d306f8e7e8d3218b94aa286e3fb8d35c42608dd6b8ecf618e34d71439"
+    },
+    {
+      "bytes": 2688,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/green-2.log",
+      "sha256": "1e0f0db1f91a8669120eebdca7a508a02c0c920f3133dcdd8cdf81f1ec8b06b5"
+    },
+    {
+      "bytes": 4998,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/progress.md",
+      "sha256": "a7b1bb733031b68358fdb067e5e9b14a6706e72f2e0478ea94b5a77b98216e0e"
+    },
+    {
+      "bytes": 4142,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/receipt.json",
+      "sha256": "030feae5fb91f0ef7eb356ba8f81e18b56583d74d2bffded539f59400b7b9883"
+    },
+    {
+      "bytes": 104942,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/red-1-pre-implementation.log",
+      "sha256": "d650fd45134f5bb48cf2db4994fe8b9f918fb75f4ce1cdf09dd78eda311087ce"
+    },
+    {
+      "bytes": 13348,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/review/independent.md",
+      "sha256": "ba482235142e2e01422d1c867d062b1f01ea068f85a1ab075165d7121bab20bc"
+    },
+    {
+      "bytes": 2302,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-1.log",
+      "sha256": "eb737dea188855b91bf8a1f6a894af594f6ca1e7bef6cf851cc244bb867746ac"
+    },
+    {
+      "bytes": 788,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-2.log",
+      "sha256": "530b55884b2002dea31e29b389d4872250f76f14ad8ec0e7474d546f0380e368"
+    },
+    {
+      "bytes": 2400,
+      "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/task_plan.md",
+      "sha256": "6bc876213df7f91eb437f049e8907740605a7c8f18f61b929c30b5fec1998a44"
+    },
+    {
+      "bytes": 1352,
+      "path": "tests/unit/test_identity_audit/conftest.py",
+      "sha256": "ff207f723349bcd54b24d2d0c27a9671869710f5aae925225b3cf3193d1c3e5f"
+    },
+    {
+      "bytes": 376,
+      "path": "tests/unit/test_identity_audit/fixtures/__init__.py",
+      "sha256": "c35ac6dd12a5c0318bb92ee0395b456d63ebc83d6d338cf581cb451918391826"
+    },
+    {
+      "bytes": 10163,
+      "path": "tests/unit/test_identity_audit/fixtures/sidecar_catalog.py",
+      "sha256": "5872c25b7183e7ed1d8524be3469d4f71f93747aeeb6b5d601fb8a6e0bfbe1c2"
+    },
+    {
+      "bytes": 4674,
+      "path": "tests/unit/test_identity_audit/harness.py",
+      "sha256": "c3f3530f5fea214b3f6e98d02fa8356db1165d8488c5e7066781fe5b4b5d279f"
+    },
+    {
+      "bytes": 1255,
+      "path": "tests/unit/test_identity_audit/test_0_fixture_contract.py",
+      "sha256": "d1f4440e21b56c9988687a782e0df2ab926317104d0e5004da05d48222ffa7a4"
+    },
+    {
+      "bytes": 26678,
+      "path": "tests/unit/test_identity_audit/test_1_checks.py",
+      "sha256": "6247b4b377e75b7c0592f5f82d7c427dd1deca8926a13a76d7bb4b6238cfd68e"
+    },
+    {
+      "bytes": 6364,
+      "path": "tests/unit/test_identity_audit/test_2_receipt_shell.py",
+      "sha256": "935bc1576266eb4f990ea384b3595c991a02b876007f97121d810a0e1f37e007"
+    },
+    {
+      "bytes": 5163,
+      "path": "tools/identity_audit/README.md",
+      "sha256": "e6698916e3216022093a87149e5ba91d6689f299cd087dd42bc98183296e7013"
+    },
+    {
+      "bytes": 594,
+      "path": "tools/identity_audit/__init__.py",
+      "sha256": "2bfc1f93d14954178e82b389a842be4b19e2c6b28bb4be4f12aec1c52baa53fe"
+    },
+    {
+      "bytes": 186,
+      "path": "tools/identity_audit/__main__.py",
+      "sha256": "aec3f5930fb39112c07393fc2dea63034292138026b43e387a7851f9525254c2"
+    },
+    {
+      "bytes": 7939,
+      "path": "tools/identity_audit/cli.py",
+      "sha256": "29ce12eb07f5ce96df0772ab8e34dc41ee330513ee71df555f5aaf39d44b24ed"
+    },
+    {
+      "bytes": 25459,
+      "path": "tools/identity_audit/core.py",
+      "sha256": "ca3a7ee3b1092b336fae145df0b3f5f6116fc32d7cbb3d80b7fb6a7a04f5a2ba"
+    },
+    {
+      "bytes": 4245,
+      "path": "tools/identity_audit/export.py",
+      "sha256": "667dd9f6999a88a6bb1a64311e68397ecfa8ec1cc807576c86a2f80641dd84cc"
+    },
+    {
+      "bytes": 4443,
+      "path": "tools/identity_audit/receipt.py",
+      "sha256": "71e206493c44baa9b9b1ef64a528e3e46bbe01fda13d10ed9c2dc946fe8ef230"
+    }
+  ],
+  "interface_versions": {
+    "request": "identity-audit-request/1",
+    "receipt": "identity-audit-receipt/1"
+  },
+  "entrypoint": "python -m tools.identity_audit",
+  "tests": [
+    {
+      "command": "$env:PYTHONPATH = (Join-Path (Get-Location) 'src'); python -B -m pytest tests/unit/test_identity_audit -q -p no:cacheprovider",
+      "exit_code": 0,
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/green-2.log",
+      "receipt_sha256": "1e0f0db1f91a8669120eebdca7a508a02c0c920f3133dcdd8cdf81f1ec8b06b5"
+    },
+    {
+      "command": "python -m ruff check tools/identity_audit tests/unit/test_identity_audit",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-2.log",
+      "receipt_sha256": "530b55884b2002dea31e29b389d4872250f76f14ad8ec0e7474d546f0380e368"
+    },
+    {
+      "command": "python -m mypy tools/identity_audit/core.py tools/identity_audit/cli.py tools/identity_audit/receipt.py tools/identity_audit/export.py tools/identity_audit/__main__.py tools/identity_audit/__init__.py",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-2.log",
+      "receipt_sha256": "530b55884b2002dea31e29b389d4872250f76f14ad8ec0e7474d546f0380e368"
+    },
+    {
+      "command": "python docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/demo-cli-run.py",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/static-2.log",
+      "receipt_sha256": "530b55884b2002dea31e29b389d4872250f76f14ad8ec0e7474d546f0380e368"
+    }
+  ],
+  "red_receipt": {
+    "path": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/red-1-pre-implementation.log",
+    "sha256": "d650fd45134f5bb48cf2db4994fe8b9f918fb75f4ce1cdf09dd78eda311087ce",
+    "first_failure": "AssertionError: tools.identity_audit.core is not implemented yet (ModuleNotFoundError: No module named 'tools.identity_audit')"
+  },
+  "fixtures": [
+    {
+      "path": "tests/unit/test_identity_audit/fixtures/sidecar_catalog.py",
+      "sha256": "5872c25b7183e7ed1d8524be3469d4f71f93747aeeb6b5d601fb8a6e0bfbe1c2",
+      "kind": "synthetic",
+      "limits": [
+        "纯合成 sidecar 夹具：每次运行在 tmp_path 重建 lake/sidecar/config/catalog.sqlite3，从不打开生产配置或生产库",
+        "夹具构造模式抄自 tests/unit/du11_identity_projection（复制而非 import，卡间零耦合）",
+        "可用性证据仅经夹具内嵌的 candidate/receipt 双字典建立 prior_verified_capture，无任何网络参与"
+      ]
+    }
+  ],
+  "not_run": [
+    "全仓 pytest（INTERFACES §10 要求显式路径，禁止裸跑全仓）",
+    "生产 config/source_catalog.yaml 与生产 catalog.sqlite3 的实审（lane 设计上只用 tmp 合成夹具）",
+    "PDF/DOCX 文档的 span 区间校验（超出本卡冻结范围）",
+    "真实供应商/下载/LLM 调用（lane 设计上 0 调用）",
+    "--out 符号链接目标的运行时验证（本机特权限制 WinError 1314，仅代码审查验证；见 known_limits NEW-M1）"
+  ],
+  "known_limits": [
+    "PDF/DOCX span 区间不校验：仅精确 UTF-8 text/plain span 做字元级校验（卡 §5.4(6)/§9）",
+    "单位只做记号一致性校验：闭集正则命中比对，不换算、不补币种、不推断量级（卡 §5.4(7)/§9）",
+    "卡 §5.4(5) 列出的 source_url/captured_at 与现行 source-availability-evidence/1 实际键不一致；按实键原样透传，已在 receipt LIMITATIONS 与 review 披露",
+    "source_availability_unknown 计入 counts.checked 但无裁决桶（冻结计数词表无 unknown 桶），已在 receipt LIMITATIONS 披露",
+    "复审 NEW-M1（MINOR，未修）：--out 仅检查最终目标本身，父级目录为 junction/reparse point 时仍会写穿；符号链接分支因本机特权限制仅代码审查验证。是否补祖先 reparse 扫描由 ROOT 决定",
+    "复审 NEW-M2（MINOR，未修）：lane README 未同步 F5（计数披露）/F7（--out 拒绝 .. 与 symlink）修复描述；receipt 与审查报告均已披露。修复将移动最终 SHA、破坏审查报告绑定，故留待 ROOT 裁决",
+    "复审 NEW-N3（NOTE）：period detail 的 date_provenance 存在无害双写（observed 副本 + detail 各一份），语义一致",
+    "本工具未接入生产 worker 与 CI 门禁；接入需 ROOT 明确决定（卡 §9）"
+  ],
+  "root_integration_steps": [
+    "在 ROOT 工作树按基线 4045787f 合入分支 codex/p3-identity-audit-20261018（或 cherry-pick 99a67f06 与 20a43fab 两个提交）",
+    "复核 handoff.json 的 file_bindings：逐文件 sha256 与字节数须与检出内容一致（changed_paths 不含 handoff.md/handoff.json 自身——自指哈希无法在文件内固定）",
+    "复跑验收：$env:PYTHONPATH = (Join-Path (Get-Location) 'src'); python -B -m pytest tests/unit/test_identity_audit -q -p no:cacheprovider → 应为 50 passed / 0 skipped",
+    "复跑 python -m ruff check tools/identity_audit tests/unit/test_identity_audit 与 python -m mypy <上述 6 个模块> → 均应为 0",
+    "不得把本工具接进生产 worker 或 CI 门禁，除非 ROOT 明确决定（卡 §9）",
+    "如需处理 NEW-M1（junction 父目录写穿），由 ROOT 决定是否补 --out 祖先 reparse 扫描；任何改动须回 lane 重跑全部验收与审查",
+    "合入不引入 src/** 变更；不写生产配置/DB/output/原件（scope_proof 全零）"
+  ],
+  "scope_proof": {
+    "production_writes": 0,
+    "config_writes": 0,
+    "db_writes": 0,
+    "original_reads": 0,
+    "original_writes": 0,
+    "network_calls": 0,
+    "model_calls": 0,
+    "key_reads": 0,
+    "forbidden_paths_touched": []
+  },
+  "independent_review": {
+    "reviewer": "not-self",
+    "verdict": "APPROVE",
+    "report": "docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/review/independent.md",
+    "bound_files_sha256": [
+      "ca3a7ee3b1092b336fae145df0b3f5f6116fc32d7cbb3d80b7fb6a7a04f5a2ba",
+      "29ce12eb07f5ce96df0772ab8e34dc41ee330513ee71df555f5aaf39d44b24ed",
+      "71e206493c44baa9b9b1ef64a528e3e46bbe01fda13d10ed9c2dc946fe8ef230",
+      "667dd9f6999a88a6bb1a64311e68397ecfa8ec1cc807576c86a2f80641dd84cc",
+      "aec3f5930fb39112c07393fc2dea63034292138026b43e387a7851f9525254c2",
+      "2bfc1f93d14954178e82b389a842be4b19e2c6b28bb4be4f12aec1c52baa53fe",
+      "6247b4b377e75b7c0592f5f82d7c427dd1deca8926a13a76d7bb4b6238cfd68e",
+      "ba482235142e2e01422d1c867d062b1f01ea068f85a1ab075165d7121bab20bc"
+    ]
+  }
+}

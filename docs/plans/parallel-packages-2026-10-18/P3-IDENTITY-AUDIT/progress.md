@@ -7,8 +7,8 @@
 | 2 实现 tools/identity_audit | DONE | `core.py` `cli.py` `receipt.py` `export.py` `__init__.py` `__main__.py` `README.md`（均在本卡写集内） |
 | 3 GREEN（pytest/ruff/mypy/CLI） | DONE | `green-1.log`（46 passed / 0 skipped，exit 0）；`static-1.log`（ruff 0 违例；mypy 6 文件 0 问题；手动 CLI demo exit 0） |
 | 4 只读与字段证明 | DONE | 测试内字节级快照（sha256+size+mtime_ns）证明除 `--out` 外零改动；demo 脚本 `demo-cli-run.py` 同证；`receipt.json` 字段与 `identity-audit-receipt/1` 完全一致（shell 7 键由 test_2 固定断言） |
-| 5 独立审查 + 修复 + 复审 | IN_PROGRESS | 首轮审查 `review/independent.md`：REJECT（1 BLOCKER + 2 MAJOR + 4 MINOR + 4 NOTE，绑定实现提交 `99a67f06`）；修复已提交，复审（绑定最终 SHA）进行中 |
-| 6 交接 ROOT | PENDING | `handoff.md` / `handoff.json`（实现提交之后的独立提交） |
+| 5 独立审查 + 修复 + 复审 | DONE | 首轮 `review/independent.md`：REJECT（1 BLOCKER + 2 MAJOR + 4 MINOR + 4 NOTE，绑定 `99a67f06`）；修复提交 `20a43fab`；复审（同一独立 agent）：**APPROVE**，F1–F7 全部验证修复，无新增 BLOCKER/MAJOR，3 个非阻塞 MINOR/NOTE 转入 handoff known_limits |
+| 6 交接 ROOT | DONE | `handoff.md` / `handoff.json`（本文件定稿后单独提交；实现提交 99a67f06、修复提交 20a43fab、交接提交为第三个提交） |
 
 ## 日志
 
@@ -19,6 +19,7 @@
 - 独立审查 #1（非作者 agent，绑定 `99a67f06`）→ **REJECT**，详见 `review/independent.md`。
 - GREEN #2（修复后）：同 pytest 命令 → **50 passed，0 skipped**（新增 4 个回归用例），exit 0 → `green-2.log`。
 - 静态 #2 + 手动 CLI #2：ruff / mypy 0 问题；demo exit 0 → `static-2.log`。
+- 独立审查 #2（同一独立 agent，绑定最终 SHA `20a43fab`）→ **APPROVE**；F1–F7 逐项复验修复，全套验收重跑（50 passed ×2 稳定、ruff/mypy 0、diff 25 文件全在写集内、`99a67f06..20a43fab` 测试差异 +81/−0 无删除弱化），详见 `review/independent.md`。
 
 ## 独立审查第一轮发现与修复对照（作者提交，全部为 lane 写集内改动）
 
@@ -37,5 +38,4 @@
 
 ## 待办
 
-- [ ] 阶段 5 续：请同一审查 agent 对最终 SHA 复审（验证 F1–F7 修复与新回归用例），更新 `review/independent.md` 为 APPROVE 并绑定最终 SHA。
-- [ ] 阶段 6：实现修复提交之后，单独提交 `handoff.md` / `handoff.json`（README §8 两段式提交）。
+- 无。阶段 0–6 全部完成，等待 ROOT 按 README §6 验收清单接收。

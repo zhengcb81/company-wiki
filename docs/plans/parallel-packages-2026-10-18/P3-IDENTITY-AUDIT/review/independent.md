@@ -1,104 +1,71 @@
-# P3-IDENTITY-AUDIT — Independent Review Report
+# P3-IDENTITY-AUDIT — Independent Review Report (Round 2, FINAL)
+
+**VERDICT: APPROVE**
 
 - reviewer: **independent-agent (non-author, non-ROOT)**
-- date: 2026-10-18
+- round 1: 2026-10-18 (REJECT, bound to `99a67f06`; findings F1–F7 + notes F8–F11)
+- round 2 (this report): 2026-10-18 (re-review of the fixes)
 - implementation commit (bound): `99a67f06` (`99a67f06d082964cc8ad974e31611d582f095213`)
-- `git rev-parse HEAD` at review time: `99a67f06d082964cc8ad974e31611d582f095213` — **unchanged**, i.e. HEAD == implementation commit; report bound to `99a67f06`.
+- fixes commit (bound): `20a43fab` (`20a43fab696a3dccb9e0886633f3daadae012b92`)
+- `git rev-parse HEAD` at review start **and** end: `20a43fab696a3dccb9e0886633f3daadae012b92` — **unchanged during the review**; HEAD == fixes commit.
 - baseline: `4045787f`, branch: `codex/p3-identity-audit-20261018`
-- working tree before report write: **clean** (`git status --porcelain` empty). After this report is written the tree contains exactly one untracked file — this report (`docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/review/independent.md`); no tracked file and no path outside the card write set is touched. All probe fixtures were built under `%TEMP%\p3-independent-review\` and the probe script under `%TEMP%\p3_review_probe.py`; nothing under `output/`, no production `config/source_catalog.yaml`, no production `catalog.sqlite3` was opened or written.
+- working tree: **clean** (`git status --porcelain` empty) before this report write; after this write the tree contains exactly one modified tracked file — this report. HEAD did not move.
+- All probe fixtures were built under `%TEMP%\p3-review-r2*\` (`probe.py`, `probe2.py` in `%TEMP%\p3-review-r2\`); no production `config/source_catalog.yaml`, no production `catalog.sqlite3`, no `output/` was opened or written.
 
-## VERDICT: REJECT
+All round-1 BLOCKER/MAJOR findings (F1–F3) are genuinely fixed and independently reproduced against the final tree; all MINOR fixes (F4–F7) are verified. Notes F8–F11 remain disclosed/acknowledged (F11 resolved by a clean `static-2.log`). One new MINOR hardening nuance (NEW-M1) and two cosmetic notes (NEW-M2, NEW-N3) are listed below; none blocks. The full acceptance battery passes (50/50 tests twice, ruff 0, mypy 0, scope clean, read-only proven byte-level, receipt shape exactly frozen).
 
-1 BLOCKER + 2 MAJOR. All three are in the span-validation/grounding path and empirically reproduced by the reviewer against a fresh synthetic fixture. Minor/NOTE findings are listed below and do not block by themselves.
+## 1. Per-finding verification (round-1 findings vs final tree)
 
-## 1. Verification matrix (all commands run by the reviewer in the worktree)
+| # | Severity (R1) | Status | How the reviewer verified (own commands/probes at `20a43fab`) |
+|---|---|---|---|
+| F1 | BLOCKER | **FIXED** | `core.py:235-247::_validate_span` now calls the frozen `EvidenceSpan.from_dict`; `EvidenceSpanError` subclasses `ValueError` (`src/company_wiki/source_contract/evidence_span.py:32`) and is mapped to `blocked`/`invalid_argument`. Live CLI probes on a fresh `%TEMP%` fixture: (a) span with **all-null coordinates** → exit **3**, `status=blocked`, `reason=invalid_argument`, **exactly one** canonical LF line on stdout, non-empty, **no traceback**; (b) span with a **corrupted span_id** (valid URN shape, wrong binding) → same refusal. `from_dict` also rejects missing/unknown span fields, wrong `schema_version`, bad `parse_status`/`quality_flags`, unpaired/negative offsets and `output_sha256` mismatches (`evidence_span.py:212-242, 305-366, 408-428`). |
+| F2 | MAJOR | **FIXED** | The illegal shape is refused at validation with `sources == []` — no span verdict exists, so `pass` is impossible (probe F1a). `text[None:None]` is unreachable: `_span_groundable` (`core.py:430-436`) requires all five structural coordinates null, and `from_dict` guarantees paired non-null int offsets (`char_end > char_start >= 0`) for every accepted span. Probe: wire-valid span with `page_number=1` (null char offsets) → `not_applicable(reason=not_groundable_shape)`, never pass. |
+| F3 | MAJOR | **FIXED** | `core.py:456-460` explicit bounds check before slicing. Live probe: span `char_end=10^9` → exit **2**, span `fail` + `p3_span_ungrounded` + `detail.bounds_violation.text_length=31` (not a slice-clamped pass). Regression test `test_a_span_beyond_eof_is_ungrounded_not_clamped` asserts all three. |
+| F4 | MINOR | **FIXED** | `core.py:285-303::_bytes_check` recomputes sha256 **and** length on the pass path and compares against the request; mismatch → `p3_bytes_mismatch` with `requested_sha256`/`requested_bytes` in detail. Verified by code read; clean-run probe shows pass detail `sha256=62a4d15f…, bytes=51` equal to the requested digest/size; the one-byte-flip probe exercises the fail path (exit 2, `checks.error_code == p3_bytes_mismatch`). |
+| F5 | MINOR | **FIXED** | `receipt.py:71` LIMITATIONS now discloses that a `source_availability_unknown` entry is counted under `checked` only. Probe arithmetic: `checked=6`, verdict buckets sum `5`, gap `== 1 ==` the number of `source_availability_unknown` entries; disclosure line present in every receipt (clean and fail runs). |
+| F6 | MINOR | **FIXED** | `core.py:380-418`: **every** period `detail` now carries `date_provenance` — pass (`{date_provenance}`), non-ISO fail, expect-conflict fail (`core.py:404`), and not_applicable. Probes: clean run `detail={date_provenance:"unverified"}`; non-ISO fixture (`period_end="2026/06/30"`) fail detail carries it; direct `_period_check(all-null, {}, None)` not_applicable detail carries it. The `observed.date_provenance` copy is retained (compatibility) and the strengthened assertion `checks["period"]["detail"]["date_provenance"]` is in the suite. |
+| F7 | MINOR | **FIXED** (as scoped in R1) | `cli.py:169-171, 211-213::_refused_out_path` rejects a `..` component or an existing symlink target before any byte moves. Live probe: `--out <root>/sub/../escape.json` → exit **3**, `blocked`/`invalid_argument`, neither path written. Symlink-target branch verified by code inspection only — creating a file symlink is privileged in this environment (probe hit `WinError 1314`), see “NOT evaluated”. Residual nuance about junctioned **parent** directories is NEW-M1 below. |
+| F8 | NOTE | **ACKNOWLEDGED** | Check entries remain a documented superset of the card §5.3 sample (`detail` everywhere, `tokens`, `observed`/`expected`, checks-level `error_code`); the receipt **shell** is exactly the frozen 7 keys (probe, §3 item 5). Extension openly documented in `test_2_receipt_shell.py:28-40`; status vocabulary untouched. |
+| F9 | NOTE | **ACKNOWLEDGED** | Extra reason `no_groundable_span` (`core.py:501-505`) alongside the card-named reasons; reasons are not a frozen vocabulary (INTERFACES §2/§3 freeze statuses/error codes only) and every `not_applicable`/`not_evaluated` carries one (probes). |
+| F10 | NOTE | **ACKNOWLEDGED** | `p3_availability_fabricated` defined (`receipt.py:56`) and exported (`:129`) with no call site — consistent with card §5.4(4) (a non-null date without evidence is honest-unverified; fabrication surfaces as expect-conflict) and INTERFACES §3 “只增不改”. Reviewer grep: exactly those 2 references. |
+| F11 | NOTE | **RESOLVED** | `static-2.log` is a clean re-capture (ruff “All checks passed!”, mypy “no issues found in 6 source files”, manual CLI demo `exit=0 status=ok` with byte-level read-only proof); no traceback. `static-1.log` retained as historical evidence only. |
 
-| # | Check | Command (abbreviated) | Exit | Result |
-|---|---|---|---|---|
-| 1a | Full lane suite | `$env:PYTHONPATH=<worktree>/src; python -B -m pytest tests/unit/test_identity_audit -q -p no:cacheprovider` | 0 | **46 passed, 0 skipped, 0 failed** (matches author's `green-1.log`) |
-| 1b | No scope-narrowing | grep of lane tests for `skip`/`-k`/`--ignore`/`xfail` | — | none found; only `except` is `harness.py:39` (RED-phase `ImportError`→named `AssertionError` wrapper, disclosed, re-raises — not swallowing) |
-| 1c | RED genuineness | read `red-1-pre-implementation.log` | — | genuine pre-implementation log: 44 failed / 2 passed; **34 explicit `AssertionError: … is not implemented yet`** wrapping `ModuleNotFoundError: No module named 'tools.identity_audit'`; the 2 passes are the fixture-contract tests that need no lane module. Assertion messages, not bare ImportErrors. |
-| 2a | ruff | `python -m ruff check tools/identity_audit tests/unit/test_identity_audit` | 0 | All checks passed |
-| 2b | mypy | `python -m mypy tools/identity_audit/{core,cli,receipt,export,__main__,__init__}.py` | 0 | no issues in 6 source files |
-| 3a | Scope diff | `git diff --stat 4045787f..HEAD` / `--name-only` | 0 | 22 files, all inside `tools/identity_audit/**`, `tests/unit/test_identity_audit/**`, `docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/**`. **Zero paths outside the write set**; no `src/**`, no `pyproject.toml`, no `.githooks/**`, no other card's dir, no ROOT-exclusive path. |
-| 3b | Tree state | `git status --porcelain` | 0 | empty (clean) |
-| 4 | One-byte flip read-only probe (reviewer's own fixture under `%TEMP%`, mirroring `fixtures/sidecar_catalog.py` and importing it via `sys.path`) | flip byte 0 of the raw original (same length), run CLI, restore | see left | (a) `bytes` = **fail** + `p3_bytes_mismatch` (detail.refusal `content_sha256_mismatch`); (b) top `status="fail"`, **exit 2**; (c) after restore, raw bytes identical and `catalog/` subtree sha256+size+**mtime_ns** identical; whole tree unchanged except the reviewer's own restore of the raw file; (d) unmodified re-run: **exit 0**. Clean run with no `--out` leaves the whole fixture tree byte-identical (sha+size+mtime_ns). |
-| 5a | No `--out` → no out file | clean run, full-tree snapshot diff | 0 | no file created anywhere in the fixture tree |
-| 5b | `--out` = directory | `--out <fixture-root dir>` | 3 | `blocked` / `invalid_argument` |
-| 5c | missing `--request` | `--config <cfg>` only | 3 | `blocked` / `invalid_argument`; `b"usage"` absent from stdout |
-| 5d | stdout canonical single line | byte-level stdout capture via file redirect | 0 | exactly one line, **LF only (no CRLF)**, equals `json.dumps(parsed, ensure_ascii=True, sort_keys=True, separators=(",",":")) + "\n"` |
-| 5e | `--pretty` equivalence | `--pretty --out pretty.json` | 0 | file content JSON-equal to stdout |
-| 5f | duplicate JSON keys | raw request with two `source_refs` keys | 3 | `blocked` / `invalid_json` |
-| 6 | Receipt shape adversarial | reviewer probe on receipts produced above | — | shell keys exactly `{schema_version,status,generated_at,inputs,counts,limitations,sources}`; `counts` keys exactly the frozen 5; bucket-wise reconciliation with per-source check entries holds (see F5 for the additive gap); per-check statuses only from `{pass,fail,not_applicable,not_evaluated}` (+`source_availability_unknown` on `availability` only); every `not_applicable`/`not_evaluated` carries a `reason`; blocked receipts add only the card-mandated `reason` field |
-| 7 | unknown→pass hunt (code read + probes) | `core.py` review + adversarial probes | — | availability-missing → `source_availability_unknown` (never pass) ✓; `expect` explicit-null vs non-null → `p3_identity_conflict` ✓; ref-fail poisoning: downstream checks become `not_evaluated`, never pass ✓; `not_applicable` cannot mask an expectation conflict (expect loop runs before the `not_applicable` branch in both identity and period) ✓; **but span grounding has two real unknown→pass paths — F2/F3 below** |
-| 8 | Honest limitations | receipt `LIMITATIONS`, README, findings.md | — | §5.4(5) key-name discrepancy (`schema_version`/`source_url`/`captured_at` vs real `source-availability-evidence/1` keys `available_by`/`basis`/`evidence_ref`/`locator`/`source_sha256`) is **disclosed, not hidden**: it is in every receipt's `limitations` (receipt.py:69), README "Known limitations", and findings.md §2. |
+## 2. Acceptance battery (all commands run by the reviewer in the worktree)
 
-## 2. Findings
+| # | Command | Exit | Result |
+|---|---|---|---|
+| 0 | `python -B -c "import company_wiki; print(list(company_wiki.__path__))"` (PYTHONPATH=`src`) | 0 | resolves to **this worktree**'s `src\company_wiki` |
+| 1a | `$env:PYTHONPATH=(Join-Path (Get-Location) 'src'); python -B -m pytest tests/unit/test_identity_audit -q -p no:cacheprovider` | 0 | **50 passed, 0 skipped, 0 failed** (21.12s) |
+| 1b | same command, second run (stability) | 0 | **50 passed** again (25.43s) — stable |
+| 1c | New-case quality read | — | The 4 round-2 cases are meaningful, not placeholder: core-level blocked-with-no-sources; CLI exit-3 single-line-JSON; bounds-violation triple assertion; `--out` traversal with “nothing written” assertions. `git diff 99a67f06..20a43fab -- tests/…` = **81 insertions, 0 deletions** (additions/strengthening only, no case removed or weakened) |
+| 2a | `python -m ruff check tools/identity_audit tests/unit/test_identity_audit` | 0 | All checks passed! |
+| 2b | `python -m mypy tools/identity_audit/{core,cli,receipt,export,__main__,__init__}.py` | 0 | Success: no issues found in 6 source files |
+| 3a | `git diff --stat 4045787f..HEAD` | 0 | 25 files, 3452 insertions; **every path inside** `tools/identity_audit/**`, `tests/unit/test_identity_audit/**`, `docs/plans/parallel-packages-2026-10-18/P3-IDENTITY-AUDIT/**`; `src/**` appears **0** times; **0 paths outside the write set** |
+| 3b | `git status --porcelain` | 0 | empty (clean) before this report write; HEAD `20a43fab` unchanged start→end |
+| 4a | Fresh `%TEMP%` fixture, unmodified CLI run + whole-tree snapshot (sha256+size+mtime_ns) | 0 | `status=ok`, one canonical line; **whole fixture tree byte-identical** (incl. mtime_ns) |
+| 4b | One-byte flip of the raw original (same length) → CLI → restore | 2 | `bytes.status=fail`, `p3_bytes_mismatch` (both entry- and checks-level), top `fail`; after restore raw file **byte-identical**; **catalog/ subtree (4 files) identical** incl. mtime_ns; only the reviewer's own restore touched `lake/Acme/annual.txt` (mtime only) |
+| 5 | Receipt-shape re-check (clean + blocked receipts) | — | shell keys exactly `{schema_version,status,generated_at,inputs,counts,limitations,sources}` (+`reason` on blocked, card-mandated); counts keys exactly the frozen five; statuses only from the vocabulary (`source_availability_unknown` on `availability` only); every `not_applicable`/`not_evaluated` carries `reason`; stdout = single line, **LF-only, no CR, ASCII, canonical** (`ensure_ascii, sort_keys, compact separators`) |
+| 6a | `git diff 99a67f06..20a43fab -- tests/unit/test_identity_audit/` | 0 | only `test_1_checks.py` +81/−0: 4 new regression cases + 1 strengthened `detail.date_provenance` assertion; **no removed assertions, no deleted/skipped cases**; grep for `skip`/`xfail`/`--ignore`/`-k` in the lane suite: none |
+| 7 | Reviewer probes (`%TEMP%\p3-review-r2\probe.py`, `probe2.py`) | 0 | F1a/F1b blocked exit 3; F2 no unknown→pass; F3 bounds violation; F5 counts arithmetic; F6 all detail paths; F7a traversal refused; byte-flip as in 4b — see §1 |
 
-### F1 — BLOCKER: contract-illegal spans are not rejected; one shape crashes the CLI (no receipt, exit 1)
-- Evidence: `tools/identity_audit/core.py:250-266` (`_validate_span` hand-rolls validation and allows `char_start=null, char_end=null` with all coordinates null), `core.py:509` (`absolute_start = offset + token["char_start"]` → `TypeError` when offset is `None`). Card §5.2 mandates: “`evidence_spans` 用 `EvidenceSpan.from_dict` 解析；非法即 `invalid_request`”. `EvidenceCoordinates` (`src/company_wiki/source_contract/evidence_span.py:232-236`) rejects all-null coordinates ("coordinates must contain at least one location") — so this request must be `blocked`/`invalid_request` exit 3.
-- Reproduced (reviewer probe, `%TEMP%` fixture): request span with all-null coordinates and `raw_text` containing a unit token → CLI exits **1**, stdout **empty**, traceback `TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'` at `core.py:509`. Violates card §5.1 (“成功/失败都向 stdout 打一行 JSON”; exit codes only 0/2/3).
-- Suggested fix: parse each request span with `EvidenceSpan.from_dict` and map `EvidenceSpanError`/`ValueError` to a `blocked` receipt (`invalid_request`/`invalid_argument`, exit 3), exactly as the card specifies; keep `_validate_span` only as an early cheap filter, not a replacement.
+## 3. NEW findings from this round
 
-### F2 — MAJOR: unknown→pass — a span with null offsets is recorded as `pass`
-- Evidence: `tools/identity_audit/core.py:430-458`. `_span_groundable` never checks `char_start`/`char_end`; with both `null`, `text[None:None]` is the whole text, so `raw_text == text[None:None]` yields `pass` with `detail={"char_start": null, "char_end": null}`.
-- Reproduced: same illegal all-null-coordinate span on a unit-token-free body → **exit 0, top `ok`, span entry `pass`** with null offsets. This is precisely the card §10 “未知→通过” focus: an ungroundable/unknown interval is certified as verified.
-- Suggested fix: after F1's `from_dict` validation this input becomes blocked; additionally, as defense-in-depth, treat `char_start is None or char_end is None` inside the grounding branch as `not_applicable`/`not_evaluated` with a reason, never `pass`.
+- **NEW-M1 — MINOR (non-blocking): reparse-point *parent* directories are traversed by `--out`.** Evidence: reviewer probe — an unprivileged directory **junction** parent (`%TEMP%\p3-review-r2-*\junction-out` → `real-out`) accepted `--out junction-out\receipt.json` with exit **0** and wrote through the junction. `cli.py:171` checks `".." in parts or out_path.is_symlink()`, which covers the final target only; `Path.is_symlink()` is False for junctions (mount-point reparse points). Card §8 lists “拒绝重解析点”. Impact is limited: the write still lands exactly at the caller-supplied path, `..` escape and symlink targets are refused, and refusing *all* parent reparse points would break common TEMP/OneDrive-style layouts. Suggested fix: either document the rule (“only the final `--out` target is checked for reparse status; parent junctions are treated as ordinary directories”) in the README/handoff, or extend `_refused_out_path` with an ancestor `is_junction()` scan (`pathlib`, Python ≥3.12). Decision belongs to author/ROOT; does not block APPROVE.
+- **NEW-M2 — MINOR (cosmetic, docs):** `tools/identity_audit/README.md` was not synced with round-2 behavior: the `--out` bullet (README.md:21-22) mentions only directory refusal although `..` traversal and symlink targets are now refused, and “Known limitations” (README.md:96-103) does not carry the F5 counts disclosure that every receipt now prints. The receipt itself discloses both correctly, so this is documentation drift only.
+- **NEW-N3 — note (cosmetic):** `_period_check` computes and assigns `observed["date_provenance"]` twice in a row (`core.py:381-383` then `:385-388`) — harmless redundancy introduced by the F6 fix.
 
-### F3 — MAJOR: silently clamped span offsets — `char_end` beyond EOF passes
-- Evidence: `tools/identity_audit/core.py:456-458` (`raw_text != text[char_start:char_end]` relies on Python slice clamping; no bound check `char_end <= len(text)`).
-- Reproduced: span claiming `char_start=0, char_end=1000000000` with `raw_text` = full text → **exit 0, span `pass`, `detail.char_end=1000000000`**. The claimed interval does not exist in the document; the receipt certifies it as grounded and echoes the absurd offset. Card §10 names “span offsets silently clamped” as a review focus.
-- Suggested fix: require `0 <= char_start < char_end <= len(decoded_text)` before comparison; otherwise `fail` + `p3_span_ungrounded` (or `not_applicable` with an explicit reason) — never a clamped `pass`.
+## 4. What this review did NOT evaluate
 
-### F4 — MINOR: `bytes` pass branch never compares against the request
-- Evidence: `tools/identity_audit/core.py:304-309` — on the pass path only the recomputed sha256/len are reported; the comparison demanded literally by card §5.4(2) (“重算 sha256，与 `content_sha256` 相等且 `len(bytes)==byte_size`”) is delegated to the read side's internal verification (`src/company_wiki/source_catalog/source_reader.py:749-753`, `_read_verified_bytes(expected_sha256=ref.content_sha256, expected_byte_size=ref.byte_size)`), which the reviewer verified is called with the **requested** ref (`tools/identity_audit/export.py:109`). Transitively safe today, but not self-contained: any future change to the reader's verification semantics would silently turn this check into "echo whatever the reader returns".
-- Suggested fix: in `_bytes_check`, explicitly compare `sha256_hex(read.data) == requested.content_sha256 and len(read.data) == requested.byte_size` before `pass`.
+- The production catalog (`config/source_catalog.yaml`, production `catalog.sqlite3`) and `output/` — never opened, per boundary; all probes ran on synthetic fixtures under `%TEMP%`.
+- Live refusal of a **symlink** `--out` target: file-symlink creation is privileged here (`WinError 1314`); that branch was verified by code inspection (`cli.py:171`) only, not by a live probe.
+- PDF/DOCX span grounding (out of card scope; only exact UTF-8 `text/plain` spans exercised).
+- The other three lanes (P1/P2/P4), cross-lane integration, or any card other than P3.
+- Behavior under SQLite-level I/O failures beyond the `catalog_unavailable` → `unavailable` mapping covered by code and tests.
+- `pyproject.toml` packaging (frozen by the card); entry-point registration.
+- Exact-ceiling boundary behavior (500 refs / 5000 spans / 16 MiB at the precise limit) beyond the >limit blocked tests; no performance measurement.
+- Whether the RED log was produced before the implementation commit at the VCS level (content-judged only, as in round 1).
+- The policy question behind NEW-M1 (whether ROOT wants a strict “no reparse points anywhere in the `--out` chain” rule) — flagged for author/ROOT decision.
 
-### F5 — MINOR: `counts` are not additively closed when availability is `source_availability_unknown`
-- Evidence: `tools/identity_audit/core.py:703-722` — every entry is counted into `checked`, but a `source_availability_unknown` entry falls through all four status buckets. Reviewer's clean-run receipt: `checked=6, passed=4, failed=0, not_applicable=1, not_evaluated=0` → buckets sum to 5, not 6. The card froze the 5-key counts shape with no bucket for this status, so bucket-wise reconciliation holds (verified) but consumers reading `checked − (passed+failed+na+ne)` will see a phantom "1 unchecked".
-- Suggested fix: pick and document one convention (e.g. count `source_availability_unknown` under `not_evaluated`, or state in the README/receipt limitations that `checked` intentionally exceeds the bucket sum by the number of availability-unknown entries); flag for ROOT if a counts-key change is preferred.
+## 5. Binding statement
 
-### F6 — MINOR: `date_provenance` placement deviates from the frozen shape
-- Evidence: `tools/identity_audit/core.py:387-389` emits `period.observed.date_provenance`; card §5.4(4) says `detail.date_provenance="unverified"`. Semantics are disclosed either way, but the card's per-check shape is frozen.
-- Suggested fix: move `date_provenance` into the check's `detail` (or get ROOT sign-off on the observed placement).
-
-### F7 — MINOR: card §8 `--out` hardening only partially implemented
-- Evidence: `tools/identity_audit/cli.py:107-129,141` — a directory target is refused (✓), but `..` traversal components and reparse points are not rejected, both of which card §8 explicitly lists (“拒绝目录、拒绝 `..` 逃逸、拒绝重解析点”).
-- Suggested fix: resolve the path and reject if any component is `..`, the final target exists and is a reparse point, or the resolved parent escapes the caller-intended directory per a documented rule.
-
-### F8 — NOTE: check-entry shape is a documented superset of the card §5.3 sample
-- Evidence: `tools/identity_audit/core.py:160-177` — every check uniformly carries `detail` (and `unit` carries `tokens` even when `not_applicable`); the card's §5.3 sample shows no `detail` on identity/period/unit. The receipt **shell** itself is exactly the frozen 7 keys (probe A4). The extension is openly documented in `test_2_receipt_shell.py:28-40` and `progress.md` (RED→GREEN fix #1); status vocabulary untouched.
-- Suggested fix: none required for correctness; ROOT may want a one-line note in handoff.json that check entries are a shape superset of the card sample.
-
-### F9 — NOTE: additional `unit.not_applicable` reason string
-- Evidence: `tools/identity_audit/core.py:495-501` — `reason="no_groundable_span"` in addition to the card-named `no_unit_token_in_span`. Reasons are not a frozen vocabulary (INTERFACES §2/§3 freeze statuses and error codes only); both uses carry the mandatory `reason`.
-- Suggested fix: none; optionally align naming at ROOT review.
-
-### F10 — NOTE: `p3_availability_fabricated` is defined but unreachable
-- Evidence: `tools/identity_audit/receipt.py:56` defines it; no call site. This is consistent with card §5.4(4), which explicitly rules that a non-null `published_date` without availability evidence is honest-unverified (`pass` with provenance) and fabrication surfaces only as an `expect` conflict (`p3_period_conflict`). INTERFACES §3 allows unused codes (“只增不改”).
-- Suggested fix: none; keep for future contract use or drop with ROOT's consent.
-
-### F11 — NOTE: `static-1.log` retains an earlier failed demo traceback
-- Evidence: `docs/plans/.../static-1.log` contains a UTF-16-mangled `ModuleNotFoundError: No module named 'fixtures'` traceback from a first demo attempt, preceding the successful run (`demo exit: 0`). Evidence hygiene only; the final demo result is valid.
-- Suggested fix: none; optionally re-capture a clean log before handoff.
-
-### Positive verifications worth recording
-- Read-only is **proven, not claimed**: reviewer's own one-byte flip → `bytes.fail`/`p3_bytes_mismatch`, exit 2, catalog `catalog/` subtree byte- and mtime-identical after restore; clean runs leave the tree byte-identical (sha+size+mtime_ns), matching the design note in findings.md §4 (`mode=ro` + `PRAGMA query_only=ON`, `src/company_wiki/source_catalog/reader.py:175-198`).
-- Exit-code ↔ `status` consistency verified across all probes: `ok`→0, `fail`→2, `blocked`→3; `unavailable`→3 covered by `test_2_receipt_shell.py::test_an_unreadable_catalog_is_unavailable_not_a_pass`.
-- Identity width rule works as specified: observed CN `9896` → canonical `009896` ≠ observed → `p3_identity_conflict`; markets never borrowed (`security_codes_equivalent`, `security_code.py:28-35`).
-- Unknowns stay `null`/`not_applicable` with reasons everywhere except F2/F3; no `""`/`0`/`[]` fabrications found.
-- Ref-fail does not poison downstream into passes: all downstream checks become `not_evaluated("ref_check_failed")` and the source/top go `fail` (probe B).
-
-## 3. What this review did NOT evaluate
-
-- The production catalog (`config/source_catalog.yaml`, production `catalog.sqlite3`) — never opened, per boundary; all probes ran on synthetic fixtures under `%TEMP%`.
-- PDF/DOCX span grounding (out of card scope; only exact UTF-8 `text/plain` spans were exercised).
-- The other three lanes (P1/P2/P4), their dirs, or any cross-lane integration; no card other than P3 was imported or run.
-- Behavior under SQLite-level I/O failures (locked DB, disk errors) beyond the `catalog_unavailable` mapping that the code and tests cover.
-- `pyproject.toml` packaging (intentionally untouched by the card; `python -m tools.identity_audit` relies on namespace-package semantics from the repo root, which the reviewer did exercise — it works from the worktree root).
-- Long-run resource ceilings at their exact limits (500 refs / 5000 spans / 16 MiB) beyond the >limit blocked test already in the suite; no timing/performance measurements.
-- Whether the RED log was produced before the implementation commit at the VCS level (evidence is committed together with implementation; genuineness was judged from content: 34 explicit pre-implementation assertion failures naming the missing module).
-
-## 4. Binding statement
-
-This report is bound to commit `99a67f06d082964cc8ad974e31611d582f095213` (HEAD at review time, identical to the implementation commit). The reviewer wrote exactly one file in the worktree — this report — and modified nothing else; all temporary artifacts live under `%TEMP%`. F1 must be fixed (and F2/F3 addressed) by the author, after which a re-review against the final SHA is required per card §10.
+This report is bound to commit `20a43fab696a3dccb9e0886633f3daadae012b92` (HEAD at review start and end, identical to the fixes commit; implementation `99a67f06`; baseline `4045787f`). HEAD did not move and the working tree was clean throughout the review; the reviewer wrote exactly one file in the worktree — this report — and modified nothing else. All temporary artifacts live under `%TEMP%\p3-review-r2*`. Verdict: **APPROVE** — no open BLOCKER or MAJOR; NEW-M1/NEW-M2/N3 are minor and non-blocking.
