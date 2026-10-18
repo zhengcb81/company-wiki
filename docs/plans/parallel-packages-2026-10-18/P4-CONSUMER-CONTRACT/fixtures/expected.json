@@ -1,0 +1,69 @@
+{
+  "catalog_config": {
+    "path": "catalog/catalog.yaml",
+    "sha256": "97f695c3a5d599945dd42f9936cb7eb685fd0a1f7d0a5b778ef2e9147486b973"
+  },
+  "generated_by": "fixtures/build_fixtures.py",
+  "schema_version": "p4-fixture-expectations/1",
+  "sources": [
+    {
+      "byte_size": 94,
+      "content_sha256": "184a7f6604c734973ccc8692ad50b5fa7633ff66b88345c312d9c54c0fdef101",
+      "document_id": "urn:company-wiki:document:sha256:184a7f6604c734973ccc8692ad50b5fa7633ff66b88345c312d9c54c0fdef101",
+      "facts": {
+        "canonical_entity_id": "ent-p4-synthetic",
+        "document_kind": "annual_report",
+        "fiscal_period": null,
+        "fiscal_year": 2025,
+        "form_type": "annual",
+        "language": null,
+        "market": "CN",
+        "period_end": "2025-12-31",
+        "published_date": null,
+        "security_id": "600519"
+      },
+      "mime_type": "text/plain",
+      "relative_path": "annual-2025.txt",
+      "source_id": "urn:company-wiki:source:sha256:184a7f6604c734973ccc8692ad50b5fa7633ff66b88345c312d9c54c0fdef101",
+      "spans": [
+        {
+          "char_end": 49,
+          "char_start": 37,
+          "raw_text": "120,000,000元",
+          "unit_tokens": [
+            "元"
+          ]
+        },
+        {
+          "char_end": 57,
+          "char_start": 50,
+          "raw_text": "同比增长12%",
+          "unit_tokens": [
+            "%"
+          ]
+        }
+      ]
+    },
+    {
+      "byte_size": 61,
+      "content_sha256": "0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+      "document_id": "urn:company-wiki:document:sha256:0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+      "facts": {
+        "canonical_entity_id": "ent-p4-synthetic",
+        "document_kind": "annual_report",
+        "fiscal_period": "FY",
+        "fiscal_year": 2025,
+        "form_type": "annual",
+        "language": null,
+        "market": "CN",
+        "period_end": "2025-12-31",
+        "published_date": null,
+        "security_id": "000001"
+      },
+      "mime_type": "application/pdf",
+      "relative_path": "disclosure.pdf",
+      "source_id": "urn:company-wiki:source:sha256:0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+      "spans": []
+    }
+  ]
+}

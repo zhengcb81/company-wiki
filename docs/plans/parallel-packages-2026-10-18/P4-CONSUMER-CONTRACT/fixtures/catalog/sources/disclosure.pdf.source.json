@@ -1,0 +1,21 @@
+{
+  "canonical_entity_id": "ent-p4-synthetic",
+  "collector_name": "p4_fixture",
+  "collector_version": "1.0",
+  "content_sha256": "0613c1f0bed7aea4674ff6e45db0d5814afc7ba375d1a5b363a9a0cbb17ded93",
+  "display_name": "P4 Synthetic Co",
+  "document_kind": "annual_report",
+  "fiscal_period": "FY",
+  "fiscal_year": 2025,
+  "form_type": "annual",
+  "market": "CN",
+  "period_end": "2025-12-31",
+  "provider": "synthetic",
+  "provider_document_id": "p4-disclosure-pdf",
+  "published_date": null,
+  "retrieved_at": "2026-03-01T00:00:00Z",
+  "schema_version": "1.0",
+  "security_id": "000001",
+  "source_title": "P4 synthetic disclosure without spans",
+  "source_url": "https://example.invalid/p4/disclosure.pdf"
+}
