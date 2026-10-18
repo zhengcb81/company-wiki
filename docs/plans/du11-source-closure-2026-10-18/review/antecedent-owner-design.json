@@ -1,0 +1,70 @@
+{
+  "schema_version": "du11-antecedent-owner-design/1",
+  "status": "READ_ONLY_DESIGN_COMPLETE_IMPLEMENTATION_OPEN",
+  "observed_head": "f5a26b48c8facfe8e9ad8ecdda2099e340c41a18",
+  "source_bindings_at_report_assembly": {
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f",
+      "bytes": 7949
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "858283b62a6f743877f27a82de234d4ee9ecc155d6c594e553e11b63a9fd1831",
+      "bytes": 38596
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "038eaa2fe63353f54acc51686ecaae81bb89e2451e21f726865d65243397c53a",
+      "bytes": 20992
+    },
+    "src/company_wiki/document_understanding/operating_states/text_view.py": {
+      "sha256": "25628bfc7af43ce486ef6d2cc01065c3f1b09ded24e1a3b5d39fe8119818118c",
+      "bytes": 4964
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "c86e22c953b18cb7d626ba19472a6e2b5c02b2287379610886ffe5cc5f240c7f",
+      "bytes": 51926
+    },
+    "src/company_wiki/document_understanding/selection_bridge.py": {
+      "sha256": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8",
+      "bytes": 8609
+    },
+    "src/company_wiki/document_understanding/summary_tasks.py": {
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+      "bytes": 7561
+    },
+    "tests/unit/du4_operating_states/test_b_synthetic_specs.py": {
+      "sha256": "ffdd9eced8c1b01c28b888727ccdc19c7084a10f1a32e0a664a110bfe1495d0e",
+      "bytes": 19553
+    },
+    "tests/unit/du4_operating_states/test_root_boundaries.py": {
+      "sha256": "34563f26c38b29769211fbad79488ca1b8b11ae8f132d4b431ef0d169df6275e",
+      "bytes": 5314
+    },
+    "tests/unit/du4_operating_states/test_c_contract.py": {
+      "sha256": "2483191efa6f5230a9f8f3d3e9b85e3322803f926a60540dd4fdacf72a24d0e3",
+      "bytes": 10889
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_material_mapping.py": {
+      "sha256": "4aaa82e6976a714ccf6eeef799360dceaa3572673255398fbb171a8e31bfcb6d",
+      "bytes": 5006
+    },
+    "docs/plans/du11-source-quality-2026-10-18/closure-investigation/findings.md": {
+      "sha256": "a4d4bc77f95fe5e5a0fbb7950c1be885dd7a8adbb80f20f93f1cc41d921e3349",
+      "bytes": 7810
+    }
+  },
+  "primary_owner": "OperatingRelationSession new bounded reference_closure/readiness reusing identity caches",
+  "integration_owner": "SourceOperatingSession + narrative_reading before dependency graph/admission, final material namespace known",
+  "confirmed_root_causes": [
+    "context currently merges name_classes only; no cross-unit product referent resolution",
+    "event predicate-gate early-return does not cover admitted dependent business descriptions",
+    "_original_refs ignores ref.unit_id and projects all numeric offsets through target owner",
+    "same parent does not establish section/project/referent scope",
+    "necessary context must be charged as original material, not tiny NP refs/carriers"
+  ],
+  "no_runtime_changes": true,
+  "tests_executed": false,
+  "source_scripts_executed": false,
+  "api_calls": 0,
+  "original_reads": 0,
+  "report_sha256": "ea08b882fa132fb6eb655514be4b5265ed24ea20a7d091e3d13bb6096adbd78d"
+}

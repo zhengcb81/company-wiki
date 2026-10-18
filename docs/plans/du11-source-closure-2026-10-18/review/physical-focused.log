@@ -1,0 +1,44 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-physical-review-e35cd7rh\\pytest", "requested_basetemp_len": 68, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261018-030014-6a6a3db4", "effective_basetemp_len": 75}
+........................FF............                                   [100%]
+================================== FAILURES ===================================
+_ test_explicit_independent_next_page_keeps_its_own_support[\u672c\u96c6\u5718\u53e6\u4e00\u9805\u76ee\u5df2\u958b\u59cb\u91cf\u7522\u3002] _
+
+text = '�����F��һ�Ŀ���_ʼ���a��'
+
+    @pytest.mark.parametrize('text', ['�����F��һ�Ŀ���_ʼ���a��','Our new platform has begun production.','The company has begun production of another product.'])
+    def test_explicit_independent_next_page_keeps_its_own_support(text):
+        p,q=page_case(['��˾�ĵ�һ���豸���ڿ�չ������',text])
+        packages,_,audit,blocked=r._prose_reading_packages(p,q)
+        ids=[u.unit_id for u in p.units]
+>       assert not any(set(ids)<=set(x['member_unit_ids']) for x in packages)
+E       assert not True
+E        +  where True = any(<generator object test_explicit_independent_next_page_keeps_its_own_support.<locals>.<genexpr> at 0x000001ED2DD348B0>)
+
+..\..\..\..\AppData\Local\Temp\du11-physical-review-e35cd7rh\test_independent_physical.py:12: AssertionError
+_ test_explicit_independent_next_page_keeps_its_own_support[Our new platform has begun production.] _
+
+text = 'Our new platform has begun production.'
+
+    @pytest.mark.parametrize('text', ['�����F��һ�Ŀ���_ʼ���a��','Our new platform has begun production.','The company has begun production of another product.'])
+    def test_explicit_independent_next_page_keeps_its_own_support(text):
+        p,q=page_case(['��˾�ĵ�һ���豸���ڿ�չ������',text])
+        packages,_,audit,blocked=r._prose_reading_packages(p,q)
+        ids=[u.unit_id for u in p.units]
+>       assert not any(set(ids)<=set(x['member_unit_ids']) for x in packages)
+E       assert not True
+E        +  where True = any(<generator object test_explicit_independent_next_page_keeps_its_own_support.<locals>.<genexpr> at 0x000001ED2DD37B50>)
+
+..\..\..\..\AppData\Local\Temp\du11-physical-review-e35cd7rh\test_independent_physical.py:12: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED ::test_explicit_independent_next_page_keeps_its_own_support[\u672c\u96c6\u5718\u53e6\u4e00\u9805\u76ee\u5df2\u958b\u59cb\u91cf\u7522\u3002]
+FAILED ::test_explicit_independent_next_page_keeps_its_own_support[Our new platform has begun production.]
+2 failed, 36 passed, 1 warning in 24.06s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261018-030014-6a6a3db4", "existed": true, "removed": true}
+

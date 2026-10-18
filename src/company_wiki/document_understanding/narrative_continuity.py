@@ -9,10 +9,10 @@ unions from growing into a chapter.
 from __future__ import annotations
 
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from hashlib import sha256
-from itertools import chain
+from itertools import chain, groupby
 from math import isfinite
 from typing import Any
 
@@ -20,7 +20,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/3"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/4"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -62,6 +62,19 @@ def _terminal(text: str) -> bool:
 
 
 @dataclass(frozen=True)
+class SourcePageFlow:
+    """Source-owned complete observation, with positively identified furniture.
+
+    Direct native callers have no such observation and remain same-page.
+    The boundary veto is supplied by the source's existing statement policy.
+    """
+    running_furniture_unit_ids: frozenset[str]
+    independent_start: Callable[[str], Any]
+    coarse_complete: bool = True
+    unproven_pages: frozenset[int] = frozenset()
+
+
+@dataclass(frozen=True)
 class _Native:
     unit: Mapping[str, Any]
     provenance: Mapping[str, Any]
@@ -79,7 +92,8 @@ class _Native:
 
 
 class _Analysis:
-    def __init__(self, limits: Mapping[str, Any] | None, work_budget: WorkBudget | None = None):
+    def __init__(self, limits: Mapping[str, Any] | None, work_budget: WorkBudget | None = None,
+                 source_page_flow: SourcePageFlow | None = None):
         self.limits = dict(_LIMITS)
         if limits is not None:
             if not isinstance(limits, Mapping):
@@ -99,6 +113,7 @@ class _Analysis:
         self.deferred_ranges: list[dict[str, Any]] = []
         self.windows: list[dict[str, Any]] = []
         self.standalone_units = 0
+        self.source_page_flow = source_page_flow
 
     def charge(self, amount: int = 1) -> bool:
         if self.stopped:
@@ -290,9 +305,59 @@ class _Analysis:
             previous = anchor
         return None
 
+    def pending_page_transition(self, left: _Native, right: _Native) -> bool:
+        flow = self.source_page_flow
+        if (flow is None or right.page != left.page + 1
+                or left.source != right.source or left.scope != right.scope
+                or left.frame != right.frame or left.font != right.font
+                or left.unit.get("role") != right.unit.get("role")
+                or _terminal(left.unit["text"])
+                or left.bbox[3] < 0.8 * left.frame[3]
+                or right.bbox[1] > 0.2 * right.frame[3]):
+            return False
+        if not self.charge(8 * len(right.unit["text"])):
+            return False
+        return not flow.independent_start(right.unit["text"])
+
+    def page_edge(self, left: _Native, right: _Native,
+                  furniture: Sequence[Mapping[str, Any]]) -> dict[str, Any] | None:
+        if (right.ordinal != left.ordinal + 1 + len(furniture)
+                or right.paragraph != left.paragraph + 1 + len(furniture)
+                or not self.pending_page_transition(left, right)):
+            return None
+        flow = self.source_page_flow
+        if flow is not None and (not flow.coarse_complete
+                or left.page in flow.unproven_pages or right.page in flow.unproven_pages):
+            self.diagnostics["CONTINUITY_PAGE_COVERAGE_UNPROVEN"] += 1
+            self.defer([left, right])
+            return None
+        column = left.column
+        valid_column = ((type(column) is int and column >= 0)
+                        or (isinstance(column, str) and 0 < len(column.strip()) <= 128))
+        if not valid_column or type(column) is not type(right.column) or column != right.column:
+            self.diagnostics["CONTINUITY_PAGE_COLUMN_UNPROVEN"] += 1
+            self.defer([left, right])
+            return None
+        a, b, size = left.bbox, right.bbox, left.font[0]
+        overlap = min(a[2], b[2]) - max(a[0], b[0])
+        if (abs(a[0] - b[0]) > 2.1 * size or overlap <= 0
+                or overlap < 0.8 * min(a[2] - a[0], b[2] - b[0])):
+            self.diagnostics["CONTINUITY_PAGE_LANE_UNPROVEN"] += 1
+            self.defer([left, right])
+            return None
+        return {"basis": "observed_adjacent_page_flow", "left": left.unit["unit_id"],
+                "right": right.unit["unit_id"], "left_page": left.page, "right_page": right.page,
+                "column": column, "coordinate_frame": left.frame[0],
+                "furniture_unit_ids": [unit["unit_id"] for unit in furniture]}
+
     def edge(self, left: _Native, right: _Native, *,
-             column_witnesses: Sequence[_Native] = ()) -> dict[str, Any] | None:
+             column_witnesses: Sequence[_Native] = (),
+             furniture: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any] | None:
         if not self.charge():
+            return None
+        if left.page != right.page:
+            return self.page_edge(left, right, furniture)
+        if furniture:
             return None
         if (
             left.source != right.source
@@ -380,7 +445,8 @@ class _Analysis:
                 "window_id": "native-continuity:"
                 + sha256("\0".join(ids).encode()).hexdigest(),
                 "source_id": run[0].source,
-                "page": run[0].page,
+                "page": run[0].page if all(item.page == run[0].page for item in run) else None,
+                "pages": list(dict.fromkeys(item.page for item in run)),
                 "member_unit_ids": ids,
                 "required_unit_ids": ids,
                 "proof": proof,
@@ -392,14 +458,10 @@ class _Analysis:
         if not run:
             return
         self.deferred.extend(item.unit["unit_id"] for item in run)
-        self.deferred_ranges.append(
-            {
-                "source_id": run[0].source,
-                "page": run[0].page,
-                "first_ordinal": run[0].ordinal,
-                "last_ordinal": run[-1].ordinal,
-            }
-        )
+        for (source, page), sequence in groupby(run, key=lambda item: (item.source, item.page)):
+            members = list(sequence)
+            self.deferred_ranges.append({"source_id": source, "page": page,
+                "first_ordinal": members[0].ordinal, "last_ordinal": members[-1].ordinal})
 
     def finish(self, run: list[_Native], proof: list[dict[str, Any]]) -> None:
         """Cut only at an observed complete statement, never a resource prefix.
@@ -427,7 +489,7 @@ class _Analysis:
                     # It remains unassessed, never a fabricated closed window.
                     self.standalone_units += 1
                 return
-            blocks: set[int] = set()
+            blocks: set[tuple[str, int, int]] = set()
             chars = 0
             end = start
             limited = False
@@ -436,7 +498,7 @@ class _Analysis:
                     self.defer(run[start:])
                     return
                 item = run[index]
-                blocks.add(item.block)
+                blocks.add((item.source, item.page, item.block))
                 chars += len(item.unit["text"])
                 if (
                     index - start + 1 > self.limits["max_window_units"]
@@ -473,9 +535,10 @@ def build_native_continuity(
     unit_profiles: Mapping[str, Mapping[str, Any]] | None = None,
     limits: Mapping[str, Any] | None = None,
     work_budget: WorkBudget | None = None,
+    source_page_flow: SourcePageFlow | None = None,
 ) -> dict[str, Any]:
     """Return only bounded original-ID context whose native continuity is proven."""
-    state = _Analysis(limits, work_budget)
+    state = _Analysis(limits, work_budget, source_page_flow)
     profiles = unit_profiles or {}
     headings: set[str] = set()
     unit_section = {}
@@ -494,6 +557,8 @@ def build_native_continuity(
     seen = 0
     unexamined = None
     previous_observed = None
+    furniture: list[Mapping[str, Any]] = []
+    unresolved_page_tail: list[_Native] = []
     for unit in units:
         if state.stopped:
             break
@@ -504,6 +569,16 @@ def build_native_continuity(
         seen += 1
         uid = str(unit.get("unit_id") or "")
         meta = provenance.get(uid, {})
+        if (run and source_page_flow is not None and uid in source_page_flow.running_furniture_unit_ids
+                and unit.get("hints", {}).get("source_id") == run[-1].source
+                and unit.get("page") in (run[-1].page, run[-1].page + 1)
+                and unit.get("ordinal") == run[-1].ordinal + 1 + len(furniture)
+                and meta.get("paragraph_index") == run[-1].paragraph + 1 + len(furniture)):
+            if not state.charge():
+                unexamined = seen - 1
+                break
+            furniture.append(unit)
+            continue
         left_closed = type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0
         if not left_closed and previous_observed is not None:
             previous_meta = provenance.get(previous_observed.get("unit_id"), {})
@@ -523,6 +598,17 @@ def build_native_continuity(
             headings,
             left_closed,
         )
+        if current is not None and unresolved_page_tail:
+            if state.pending_page_transition(unresolved_page_tail[-1], current):
+                # Unproved headers/footers cannot be silently filtered into a
+                # positive edge, nor can their gap certify the right fragment.
+                state.diagnostics["CONTINUITY_PAGE_BOUNDARY_UNPROVEN"] += 1
+                state.defer([*unresolved_page_tail, current])
+            unresolved_page_tail = []
+        elif (current is None and run and source_page_flow is not None
+                and not _terminal(run[-1].unit["text"])
+                and run[-1].bbox[3] >= 0.8 * run[-1].frame[3]):
+            unresolved_page_tail = list(run)
         previous_observed = unit
         if state.stopped:
             unexamined = seen - 1
@@ -541,7 +627,9 @@ def build_native_continuity(
                 if witness is None or state.stopped:
                     break
                 column_witnesses.append(witness)
-        edge = state.edge(run[-1], current, column_witnesses=column_witnesses) if run and current is not None else None
+        edge = state.edge(run[-1], current, column_witnesses=column_witnesses,
+                          furniture=furniture) if run and current is not None else None
+        furniture = []
         if state.stopped:
             # Exhausting lookahead/edge work cannot turn the left half of an
             # unproven pair back into an independently admissible singleton.
@@ -568,6 +656,9 @@ def build_native_continuity(
         "observed_unit_count": seen,
         "standalone_unit_count": state.standalone_units,
         "semantic_status": "not_evaluated",
+        "source_page_flow": {"enabled": source_page_flow is not None,
+            "coarse_complete": source_page_flow.coarse_complete if source_page_flow else None,
+            "unproven_page_count": len(source_page_flow.unproven_pages) if source_page_flow else 0},
         "complete": not state.diagnostics and not state.stopped,
         "deferred_unit_count": len(state.deferred),
         "deferred_unit_ids": state.deferred[:128],

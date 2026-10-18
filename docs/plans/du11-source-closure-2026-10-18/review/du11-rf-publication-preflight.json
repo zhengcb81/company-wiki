@@ -1,0 +1,111 @@
+{
+  "phase": "PREFLIGHT",
+  "base": "568fb9256885eb31a0f76d9ead59fd0f98575073",
+  "head": "568fb9256885eb31a0f76d9ead59fd0f98575073",
+  "wip_before": {
+    "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+    "assurance/runs/weekly_alert.jsonl": "0304c1de7d4ce35af30a349d322873b2dd625c26e50c309952dc00c1d835c70f",
+    "assurance/runs/weekly_manifest.json": "c103bff9b985fb91f8df94b03ebad2d27d99e5a9b15d661b6b9c7b780b94bf3e"
+  },
+  "installed_before": [
+    {
+      "alias": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "physical_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "files": [
+        {
+          "path": "scripts/source_narrative_context.py",
+          "exists": true,
+          "installed_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "base_blob_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "main_worktree_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        },
+        {
+          "path": "scripts/research/input_evidence.py",
+          "exists": true,
+          "installed_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "base_blob_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "main_worktree_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        },
+        {
+          "path": "scripts/narrative_citation_context.py",
+          "exists": false,
+          "installed_sha": null,
+          "base_blob_sha": null,
+          "main_worktree_sha": null,
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        }
+      ]
+    },
+    {
+      "alias": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "physical_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "files": [
+        {
+          "path": "scripts/source_narrative_context.py",
+          "exists": true,
+          "installed_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "base_blob_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "main_worktree_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        },
+        {
+          "path": "scripts/research/input_evidence.py",
+          "exists": true,
+          "installed_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "base_blob_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "main_worktree_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        },
+        {
+          "path": "scripts/narrative_citation_context.py",
+          "exists": false,
+          "installed_sha": null,
+          "base_blob_sha": null,
+          "main_worktree_sha": null,
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        }
+      ]
+    },
+    {
+      "alias": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "physical_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "files": [
+        {
+          "path": "scripts/source_narrative_context.py",
+          "exists": true,
+          "installed_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "base_blob_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "main_worktree_sha": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759",
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        },
+        {
+          "path": "scripts/research/input_evidence.py",
+          "exists": true,
+          "installed_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "base_blob_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "main_worktree_sha": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        },
+        {
+          "path": "scripts/narrative_citation_context.py",
+          "exists": false,
+          "installed_sha": null,
+          "base_blob_sha": null,
+          "main_worktree_sha": null,
+          "equals_base_blob": true,
+          "equals_main_base_worktree": true
+        }
+      ]
+    }
+  ]
+}

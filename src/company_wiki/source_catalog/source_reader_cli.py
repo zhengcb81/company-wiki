@@ -13,11 +13,12 @@ import json
 import sqlite3
 import sys
 from pathlib import Path
-from typing import Sequence
+from typing import Sequence, cast
 
 from .config import CatalogConfigError, load_catalog_config
 from .reader import CatalogReaderUnavailable
 from .service import SourceCatalog
+from .security_code import canonical_security_code
 from .source_availability import (
     AVAILABILITY_RECEIPT_SCHEMA_VERSION,
     verified_availability_evidence,
@@ -50,6 +51,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--expected-read-policy-sha256")
     parser.add_argument("--include-availability-evidence", action="store_true",
                         help="Return receipt 2.2 with existing historical capture evidence, or null.")
+    parser.add_argument("--include-canonical-identity", action="store_true",
+                        help="Project market code formatting without changing observed manifest facts.")
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
@@ -59,12 +62,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         ref = reader.query_ref(
             args.document_id, args.source_id, args.content_sha256
         )
-        opened = reader.open_version(
+        opened, manifest = reader.open_described_version(
             ref, purpose=args.purpose,
             expected_read_policy_sha256=args.expected_read_policy_sha256,
         )
-        manifest = reader.describe_version(ref)
         extension = {}
+        if args.include_canonical_identity:
+            market = cast(str | None, manifest.get("market"))
+            security_id = cast(str | None, manifest.get("security_id"))
+            extension["canonical_identity"] = {"schema_version": "source-canonical-identity/1",
+                "market": market, "security_id": canonical_security_code(security_id, market)}
         if args.include_availability_evidence:
             extension["availability_evidence"] = verified_availability_evidence(catalog, ref)
         sys.stdout.buffer.write(opened.data)

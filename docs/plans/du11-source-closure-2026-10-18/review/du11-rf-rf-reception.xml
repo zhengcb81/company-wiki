@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="18" time="5.368" timestamp="2026-10-18T04:00:16.022656+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.test_du11_narrative_citation_e2e" name="test_frozen_public_wire_survives_the_real_reader_consumer_and_calculator" time="2.365" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[wrong-type-opaque_pages]" time="0.006" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[wrong-type-deferred_pages]" time="0.006" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[wrong-type-deferred_unit_ids]" time="0.005" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[wrong-type-unassigned_unit_ids]" time="0.005" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[missing-opaque_pages]" time="0.006" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[missing-deferred_pages]" time="0.006" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[missing-deferred_unit_ids]" time="0.006" /><testcase classname="tests.test_du11_narrative_citation_context" name="test_unreadable_unread_list_degrades_the_counts_to_null[missing-unassigned_unit_ids]" time="0.006" /><testcase classname="tests.test_du11_narrative_citation_projection" name="test_projected_span_binds_its_own_parent_locator_and_pointer" time="0.002"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'">tests\test_du11_narrative_citation_projection.py:88: in test_projected_span_binds_its_own_parent_locator_and_pointer
+    context = load()
+              ^^^^^^
+tests\test_du11_narrative_citation_projection.py:56: in load
+    request, body, receipt = view_wire(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_du11_narrative_citation_projection.py:33: in view_wire
+    request, body, receipt = projected_context(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_shared_reading_narrative_contract.py:112: in projected_context
+    request, body, receipt = projected_wire()
+                             ^^^^^^^^^^^^^^^^
+tests\test_w04_public_consumer.py:26: in projected_wire
+    request, raw, _ = _valid()
+                      ^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:32: in _valid
+    return _json("read_request.json"), (GOLDEN / "bundle.json").read_bytes(), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:23: in _json
+    return json.loads((GOLDEN / name).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'</failure></testcase><testcase classname="tests.test_du11_narrative_citation_projection" name="test_projected_foreign_parent_is_refused_even_with_a_legal_wire" time="0.002"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'">tests\test_du11_narrative_citation_projection.py:109: in test_projected_foreign_parent_is_refused_even_with_a_legal_wire
+    context = load()
+              ^^^^^^
+tests\test_du11_narrative_citation_projection.py:56: in load
+    request, body, receipt = view_wire(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_du11_narrative_citation_projection.py:33: in view_wire
+    request, body, receipt = projected_context(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_shared_reading_narrative_contract.py:112: in projected_context
+    request, body, receipt = projected_wire()
+                             ^^^^^^^^^^^^^^^^
+tests\test_w04_public_consumer.py:26: in projected_wire
+    request, raw, _ = _valid()
+                      ^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:32: in _valid
+    return _json("read_request.json"), (GOLDEN / "bundle.json").read_bytes(), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:23: in _json
+    return json.loads((GOLDEN / name).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'</failure></testcase><testcase classname="tests.test_du11_narrative_citation_projection" name="test_two_projected_parents_are_never_stitched_into_one_claim" time="0.003"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'">tests\test_du11_narrative_citation_projection.py:118: in test_two_projected_parents_are_never_stitched_into_one_claim
+    context = load(two_parents=True)
+              ^^^^^^^^^^^^^^^^^^^^^^
+tests\test_du11_narrative_citation_projection.py:56: in load
+    request, body, receipt = view_wire(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_du11_narrative_citation_projection.py:33: in view_wire
+    request, body, receipt = projected_context(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_shared_reading_narrative_contract.py:112: in projected_context
+    request, body, receipt = projected_wire()
+                             ^^^^^^^^^^^^^^^^
+tests\test_w04_public_consumer.py:26: in projected_wire
+    request, raw, _ = _valid()
+                      ^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:32: in _valid
+    return _json("read_request.json"), (GOLDEN / "bundle.json").read_bytes(), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:23: in _json
+    return json.loads((GOLDEN / name).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'</failure></testcase><testcase classname="tests.test_du11_narrative_citation_projection" name="test_projection_without_reading_views_keeps_group_closure_only" time="0.004"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'">tests\test_du11_narrative_citation_projection.py:135: in test_projection_without_reading_views_keeps_group_closure_only
+    request, body, receipt = projected_context()
+                             ^^^^^^^^^^^^^^^^^^^
+tests\test_shared_reading_narrative_contract.py:112: in projected_context
+    request, body, receipt = projected_wire()
+                             ^^^^^^^^^^^^^^^^
+tests\test_w04_public_consumer.py:26: in projected_wire
+    request, raw, _ = _valid()
+                      ^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:32: in _valid
+    return _json("read_request.json"), (GOLDEN / "bundle.json").read_bytes(), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:23: in _json
+    return json.loads((GOLDEN / name).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'</failure></testcase><testcase classname="tests.test_du11_narrative_citation_projection" name="test_entry_two_cannot_borrow_a_foreign_projected_parent" time="0.003"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'">tests\test_du11_narrative_citation_projection.py:156: in test_entry_two_cannot_borrow_a_foreign_projected_parent
+    context = load(two_parents=True)
+              ^^^^^^^^^^^^^^^^^^^^^^
+tests\test_du11_narrative_citation_projection.py:56: in load
+    request, body, receipt = view_wire(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_du11_narrative_citation_projection.py:33: in view_wire
+    request, body, receipt = projected_context(two_parents=two_parents)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_shared_reading_narrative_contract.py:112: in projected_context
+    request, body, receipt = projected_wire()
+                             ^^^^^^^^^^^^^^^^
+tests\test_w04_public_consumer.py:26: in projected_wire
+    request, raw, _ = _valid()
+                      ^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:32: in _valid
+    return _json("read_request.json"), (GOLDEN / "bundle.json").read_bytes(), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:23: in _json
+    return json.loads((GOLDEN / name).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'</failure></testcase><testcase classname="tests.test_du11_narrative_citation_consumption" name="test_entry_two_binding_keeps_the_same_closure" time="0.010" /><testcase classname="tests.test_du11_narrative_citation_consumption" name="test_entry_two_projected_wire_resolves_parent_and_names_the_publication_gap" time="0.002"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'">tests\test_du11_narrative_citation_consumption.py:471: in test_entry_two_projected_wire_resolves_parent_and_names_the_publication_gap
+    request, body, receipt = projected_context()
+                             ^^^^^^^^^^^^^^^^^^^
+tests\test_shared_reading_narrative_contract.py:112: in projected_context
+    request, body, receipt = projected_wire()
+                             ^^^^^^^^^^^^^^^^
+tests\test_w04_public_consumer.py:26: in projected_wire
+    request, raw, _ = _valid()
+                      ^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:32: in _valid
+    return _json("read_request.json"), (GOLDEN / "bundle.json").read_bytes(), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_narrative_reader.py:23: in _json
+    return json.loads((GOLDEN / name).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-3a_yd5_8\\rf\\tests\\fixtures\\cwp_narrative_transport_v1\\read_request.json'</failure></testcase><testcase classname="tests.test_du11_narrative_citation_consumption" name="test_context_only_table_header_cannot_become_support" time="0.017" /><testcase classname="tests.test_root_rf_cross_page" name="test_cross_page_original_support_context_and_uncertainty_remain_source_owned" time="0.018" /></testsuite></testsuites>

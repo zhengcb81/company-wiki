@@ -1,0 +1,45 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b2-freeze-ea4dh0de\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\physical-final-independent-freeze.xml",
+    "tests/unit/du11_source_closure/test_source_dependency_scope.py",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py::test_new_independent_statement_on_next_page_is_not_forced_under_previous_subject",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py::test_possessive_continuation_without_its_own_predicate_is_not_a_new_subject",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py::test_fine_geometry_unread_pages_apply_to_the_actual_pair_not_the_entire_source",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b2-freeze-ea4dh0de\\test_physical_final_controls.py"
+  ],
+  "returncode": 0,
+  "seconds": 9.218,
+  "source_sha_before": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f2fcc83d73693d4770748519bf88ff84925ee618e5ab705cfb4d4a19455fa5a3",
+    "src/company_wiki/source_catalog/narrative_reading.py": "58e2ec620dd5bb17bb2457dbee43f1c48797c835b79d7dff8b40a080b1a03dd7",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "b7ccd12b049c4913c7eb076d651f166d23721750629763cd001be15e6703cf16",
+    "src/company_wiki/document_understanding/decision_inventory.py": "aa3a7d0169475a80ad76bda1edde497935e2faa65cc944b2c84e45d19a4bb693",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "626230254c96de4255aa6970258388fb329076c333a1c7499a4d60083ae09042",
+    "tests/unit/du11_source_closure/test_source_dependency_scope.py": "332137c8d7cab5e2388463d38525cd0a3fa3e283525631e2bf4bcd93e75c8faa",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "dfeca495777e21ef533d668bb066c39c4c988e9465bb47708116694384314f88"
+  },
+  "source_sha_after": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f2fcc83d73693d4770748519bf88ff84925ee618e5ab705cfb4d4a19455fa5a3",
+    "src/company_wiki/source_catalog/narrative_reading.py": "58e2ec620dd5bb17bb2457dbee43f1c48797c835b79d7dff8b40a080b1a03dd7",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "b7ccd12b049c4913c7eb076d651f166d23721750629763cd001be15e6703cf16",
+    "src/company_wiki/document_understanding/decision_inventory.py": "aa3a7d0169475a80ad76bda1edde497935e2faa65cc944b2c84e45d19a4bb693",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "626230254c96de4255aa6970258388fb329076c333a1c7499a4d60083ae09042",
+    "tests/unit/du11_source_closure/test_source_dependency_scope.py": "332137c8d7cab5e2388463d38525cd0a3fa3e283525631e2bf4bcd93e75c8faa",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "dfeca495777e21ef533d668bb066c39c4c988e9465bb47708116694384314f88"
+  },
+  "cleanup": {
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b2-freeze-ea4dh0de",
+    "restored_absent": true
+  }
+}

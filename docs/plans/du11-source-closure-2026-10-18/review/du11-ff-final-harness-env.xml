@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="29" time="7.838" timestamp="2026-10-18T04:11:18.463478+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_reader_date_cannot_inherit_query_qualification[2027-01-01-publication_after_as_of]" time="0.014" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_reader_date_cannot_inherit_query_qualification[not-a-date-publication_date_invalid]" time="0.007" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_reader_date_cannot_inherit_query_qualification[None-publication_date_unknown]" time="0.008" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_us_zero_prefixed_security_is_a_different_security" time="0.014" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_valid_date_is_requalified_including_cutoff_boundary[2026-09-30]" time="0.010" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_valid_date_is_requalified_including_cutoff_boundary[2024-02-29]" time="0.009" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_invalid_date_family_is_not_qualified[2026-02-30]" time="0.007" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_invalid_date_family_is_not_qualified[20260901_0]" time="0.007" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_invalid_date_family_is_not_qualified[2026-09-01T00:00:00]" time="0.006" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_invalid_date_family_is_not_qualified[]" time="0.005" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_invalid_date_family_is_not_qualified[20260901_1]" time="0.006" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_current_invalid_date_family_is_not_qualified[True]" time="0.006" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_missing_current_date_field_does_not_reinstate_old_date" time="0.011" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_explicit_provider_constraint_requires_current_provider_proof" time="0.006" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_security_prefixes_are_not_a_generic_equivalence_rule[MSFT-0MSFT]" time="0.001" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_security_prefixes_are_not_a_generic_equivalence_rule[000001-1]" time="0.002" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_security_prefixes_are_not_a_generic_equivalence_rule[000001-0000001]" time="0.001" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_canonical_projection_is_owned_by_reader_not_renormalized_in_ff[HK-09896-9896]" time="0.007" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_canonical_projection_is_owned_by_reader_not_renormalized_in_ff[CN-000001-1]" time="0.007" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_direct_noncanonical_verified_fixture_is_not_silently_padded" time="0.001" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_bad_current_identity_projection_cannot_fall_back_to_manifest[None]" time="0.000" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_bad_current_identity_projection_cannot_fall_back_to_manifest[projection1]" time="0.000" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_bad_current_identity_projection_cannot_fall_back_to_manifest[projection2]" time="0.000" /><testcase classname="tests.test_du11_verified_reader_revalidation" name="test_bad_current_identity_projection_cannot_fall_back_to_manifest[projection3]" time="0.000" /><testcase classname="tests.test_final_independent" name="test_original_independent_false_reuse_is_closed[delta0-publication_after_as_of]" time="0.006" /><testcase classname="tests.test_final_independent" name="test_original_independent_false_reuse_is_closed[delta1-publication_date_invalid]" time="0.007" /><testcase classname="tests.test_final_independent" name="test_original_independent_false_reuse_is_closed[delta2-publication_date_unknown]" time="0.006" /><testcase classname="tests.test_final_independent" name="test_original_independent_false_reuse_is_closed[delta3-transcript_lookup_identity_mismatch]" time="0.005" /><testcase classname="tests.test_final_independent" name="test_current_real_hk_reader_to_ff_reuse_and_legacy_receipt" time="7.058"><failure message="AssertionError: real scan failed rc=1: Traceback (most recent call last):&#13;&#10;  File &quot;&lt;frozen runpy&gt;&quot;, line 198, in _run_module_as_main&#13;&#10;  File &quot;&lt;frozen runpy&gt;&quot;, line 88, in _run_code&#13;&#10;  File &quot;C:\Users\郑曾波\AppData\Local\Temp\du11-ff-final-root-1bd0jju4\tmp\du11-final-hk-owned-wrfyvlkc\src\company_wiki\source_catalog\cli.py&quot;, line 1405, in &lt;module&gt;&#13;&#10;    raise SystemExit(main())&#13;&#10;                     ~~~~^^&#13;&#10;  File &quot;C:\Users\郑曾波\AppData\Local\Temp\du11-ff-final-root-1bd0jju4\tmp\du11-final-hk-owned-wrfyvlkc\src\company_wiki\source_catalog\cli.py&quot;, line 821, in main&#13;&#10;    config = load_catalog_config(config_path, project_root=project_root)&#13;&#10;  File &quot;C:\Users\郑曾波\AppData\Local\Temp\du11-ff-final-root-1bd0jju4\tmp\du11-final-hk-owned-wrfyvlkc\src\company_wiki\source_catalog\config.py&quot;, line 164, in load_catalog_config&#13;&#10;    path=_expand_p">tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du11-ff-final-root-1bd0jju4/tmp/pytest/test_current_real_hk_reader_to0')
+
+    def test_current_real_hk_reader_to_ff_reuse_and_legacy_receipt(tmp_path):
+        wiki = OwnedWiki(Path(os.environ['DU11_CWP_TAR']), label='du11-final-hk').build(with_security_master=False)
+        final_record = {}
+        try:
+            facts = dict(MOTLEY_SIDECAR, market='HK', security_id='9896', ticker='09896')
+            raw = wiki.seed_transcript('hk_2026_q3_call.txt', KNOWN_TRANSCRIPT_BODY, facts)
+&gt;           wiki.run_scan()
+
+tests\test_final_independent.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_du11_transcript_reuse_support.OwnedWiki object at 0x000001CBAE842CF0&gt;
+
+    def run_scan(self) -&gt; dict:
+        process = subprocess.run(
+            [
+                sys.executable, "-m", "company_wiki.source_catalog.cli",
+                "--config", str(self.root / "config" / "source_catalog.yaml"),
+                "scan", "--root-id", "company_raw",
+            ],
+            cwd=self.root,
+            env=self._env(),
+            capture_output=True,
+            timeout=300,
+        )
+        if process.returncode != 0:
+&gt;           raise AssertionError(
+                "real scan failed rc="
+                f"{process.returncode}: {process.stderr.decode('utf-8', 'replace')[:800]}"
+            )
+E           AssertionError: real scan failed rc=1: Traceback (most recent call last):
+E             File "&lt;frozen runpy&gt;", line 198, in _run_module_as_main
+E             File "&lt;frozen runpy&gt;", line 88, in _run_code
+E             File "C:\Users\郑曾波\AppData\Local\Temp\du11-ff-final-root-1bd0jju4\tmp\du11-final-hk-owned-wrfyvlkc\src\company_wiki\source_catalog\cli.py", line 1405, in &lt;module&gt;
+E               raise SystemExit(main())
+E                                ~~~~^^
+E             File "C:\Users\郑曾波\AppData\Local\Temp\du11-ff-final-root-1bd0jju4\tmp\du11-final-hk-owned-wrfyvlkc\src\company_wiki\source_catalog\cli.py", line 821, in main
+E               config = load_catalog_config(config_path, project_root=project_root)
+E             File "C:\Users\郑曾波\AppData\Local\Temp\du11-ff-final-root-1bd0jju4\tmp\du11-final-hk-owned-wrfyvlkc\src\company_wiki\source_catalog\config.py", line 164, in load_catalog_config
+E               path=_expand_p
+
+tests\test_du11_transcript_reuse_support.py:307: AssertionError</failure></testcase></testsuite></testsuites>

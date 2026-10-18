@@ -4,6 +4,10 @@ PLAN_ID=du11-source-closure-2026-10-18; PWF_PLAN_ROOT=docs/plans。唯一实现o
 
 ## 入口与完成定义
 
+**当前工程位置（2026-10-18）：** B1已正常发布9c681ed2，精确CI39092308121 success；RF外包已独立18项验收、main与远端f8002f5f、精确CI39092538354 success、安装6文件定点同步，旧3个assurance WIP不变。FF初审102项主链绿但4反例暴露发布日期及代码解释漏洞，隔离修后28边界＋真实HK TXT1链独审通过；待ROOT先发布CWP producer的canonical_identity可选投影，再正常发布FF，不让新flag先上线断链。
+
+ROOT本节点是物理跨页/真实parser MIME/共享语法/因果cache以及FF reader端口完整组件，**不代表唯一/集体先行词或正式C已完成**。真实CN p17旧t32“求的同时…”和t34“该系列产品…”在当前真实回放仍被选中；不得把关键gold10/10当语义闭合通过。物理页scope/project或首body证据不足仍须source readiness修，设计参见review/antecedent-owner-design.md。继续不读作者密钥、不写原件/gold/生产配置。
+
 母计划 document-understanding-2026-10-13 为总控。前置代码9eff4ee7随e33d40ed已正常发布：6741PASS/24SKIP/580.05s和142独立合同PASS/37.31s；精确CI39090720114 success。母仓后续文档0099dd5d已正常推送，未触发新的行为CI。剩余真实CN断句/指代见 ../du11-source-quality-2026-10-18/closure-investigation/findings.md；具体20源码接口调查见 ../du11-source-tail-geometry-2026-10-18/review/remaining-closure-design.md/json。
 
 完成要求：所有可证明的跨页原support和有限明确先行词context可复现；缺证/多义/超过原上限仅该卡defer，不创造事实；正式三供应商摘要、真实收费/activation恢复、同/跨run缓存和FF/RF消费均通过且有独立内容审查。金标命中/元数据/局部测试不替代完整内容质量。
@@ -18,13 +22,25 @@ PLAN_ID=du11-source-closure-2026-10-18; PWF_PLAN_ROOT=docs/plans。唯一实现o
 
 ## 阶段B — 现source owner生产接线
 
-### B1 完整组件：共享预算与线性metadata索引（实现/独审/真实零收费回放通过，待发布）
+### B1 完整组件：共享预算与线性metadata索引（已正常发布、精确CI绿）
 
-不与B2混签：只提交已完成的test_source_metadata_budget.py九项及两owner改动；跨页RED测试仍在ROOT隔离draft，不合入未实现测试。包external-context只索引一次、exclusions只union一次；每个实际member/context fanout、section heads×body和排序在扩展前扣现WorkBudget。几何局部200K只是同parent嵌套上限，不克隆余额；预算不足在source owner返回有限partial，不能释放半句。
+不与B2混签：B1只包含已完成的test_source_metadata_budget.py九项及两owner改动，当时跨页RED仍隔离。包external-context只索引一次、exclusions只union一次；每个实际member/context fanout、section heads×body和排序在扩展前扣现WorkBudget。几何局部200K只是同parent嵌套上限，不克隆余额；预算不足在source owner返回有限partial，不能释放半句。
 
 独审两个预遍历遗漏先写反例，RED7PASS/2FAIL，修后集中739PASS/50.52s。之前733PASS/4FAIL是新测试未定义fixture及deepcopy不兼容不可变MappingProxy，已改为正确source_case及递归全字段快照；保留失败日志，不修改生产IR迁就pickle。两预遍历修复为headings在prose成功后单独预扣；native sections先按len预扣再chain，预算0时真实ID访问0。
 
 ### B2 剩余物理与指代闭合（OPEN）
+
+物理组件现30行为反控/8依赖与性能控制/既有states及cache集中219PASS10.11s；最终不同agent27有限PASS8.51s（含5个逐owner CRLF等价反控）已签精确5源码/2测试SHA的PASS_PHYSICAL_BUDGET_CACHE_COMPONENT，自有Temp删除。不能忽略实源接线：真实PDF IR此前mime_type=None，已先RED后在唯一PDF parser声明实际格式；全source coverage_complete含细表deferred，不能因此全局关闭物理处理再让半句退回singleton。现按完整coarse正文和pair实际opaque/deferred状态判断，pair未知只defer该pending依赖；页9缺细表不能禁页7→8已观察的延续。复用同account，当前未知column不伪造证明。
+
+共享statement边界复用operating_states脚本/issuer/NP/aux grammar，修繁体新issuer及English新产品主语；首个真实predicate只扫描subject一次，不能遍历每个后续predicate形成N²或借object当subject。Inventory1.8补实际5个共享grammar/matching/兼容owner源字节hash，不仅依赖import方偶然变化。
+
+真实最新0收费三源仍10/10、7/7、8/8 source及canonical；实际parent work6106955/12820408/7975948未超16M，原件/gold不变、0copy/0POST、自有Temp删除。历史第一次physical回放的PDF MIME和全局coverage使新flow未生效，保留该收据，不把它代签当前实际路径，也不称全部语义质量绿。
+
+### FF/CWP 最终读取端口（工程独审已通过，待先producer后consumer发布）
+
+CWP source_reader_cli可选--include-canonical-identity，由现security_code唯一owner投影market/security_id（schema source-canonical-identity/1），manifest保持观察值。现CLI复用open_described_version一次metadata观察与字节验证，原global/source lineage指纹兼容，旧hash不作权限阻断；显式None的not-applicable scope与未观察由sentinel区分，避免重复读取。5新及既有reader/identity/CLI共59PASS37.37s；两reader最终SHA与FF跨仓独审相同。
+
+FF当前manifest的future/invalid/None不再继承旧query资格，使用已有date primitive；provider未知不能满足显式fmp；FF严格消费CWP canonical projection、legacy严格值比对，不再抄市场normalizer。原作者工区不改，根修在ROOT独立FF工区，独审29unique跨次通过非伪造单轮全绿。
 
 - native_continuity只负责可观察物理proof，原同页edge/native_range保持严格；跨页原多span的closure planner返回reference-only包与不足诊断，不生成新原文。
 - 入口在narrative_reading._prose_reading_packages -> _candidates carrier替换之前。旧body windows由新完整group消费/替换；同unit不得多个analysis owner静默最后覆盖。独立context可共享但不能暗变第二body owner。
@@ -44,4 +60,4 @@ PLAN_ID=du11-source-closure-2026-10-18; PWF_PLAN_ROOT=docs/plans。唯一实现o
 
 ## Next Step
 
-先收齐B1最终独审与真实CN/HK/US零收费回放，正常提交并线；继续B2物理跨页/家具/独立下一页/先行词RED和同owner实现。739集中PASS不代表B2完成，也不代表正式供应商内容C通过。母已有进展已正常发布，原件及gold始终只读；不触碰两DU11外包作者树。
+收齐物理/cache最后delta独审后，将同一完整工程节点正常提交/并线/推送CWP，核精确CI，再发布已审FF修复与定点安装，RF无需重做；继续真正source readiness/有界先行词并用原CN定位＋新组合验收，不提高4blocks/8units/2048chars或编公司特例。源就绪后再正式三供应商摘要/收费响应恢复/activation及同跨run缓存/实际FF-RF消费C；后续holdout/RF循环仍OPEN。

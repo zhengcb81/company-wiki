@@ -15,7 +15,10 @@ import re
 from typing import Any
 
 from company_wiki.document_understanding.pipeline import understand_units
-from company_wiki.document_understanding.narrative_continuity import build_native_continuity, native_section_key
+from company_wiki.document_understanding.narrative_continuity import (
+    SourcePageFlow, build_native_continuity, native_section_key,
+)
+from company_wiki.document_understanding.operating_states.relations import independent_statement_start
 from company_wiki.document_understanding.selection_bridge import build_context_graph
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
@@ -175,8 +178,18 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         **{key: unit.metadata.get(key) for key in (
             "pdf_block", "block_sha256", "block_char_start", "block_char_end")}}
         for unit in parsed.units if unit.unit_kind == "pdf_text_block"}
+    page_flow = None
+    if parsed.mime_type == "application/pdf":
+        diagnostics = pipeline.get("structure", {}).get("diagnostics", ())
+        work_budget.charge(sum(1 + len(entry.get("unit_ids", ())) for entry in diagnostics)
+                           + len(parsed.opaque_pages) + len(parsed.deferred_table_pages))
+        furniture = frozenset(uid for entry in diagnostics if entry.get("code") == "REPEATED_RUNNING_HEADER"
+                              for uid in entry.get("unit_ids", ()) if uid in units)
+        page_flow = SourcePageFlow(furniture, independent_statement_start,
+            coarse_complete=bool(parsed.page_count and parsed.pages_read == parsed.page_count and not parsed.errors),
+            unproven_pages=frozenset((*parsed.opaque_pages, *parsed.deferred_table_pages)))
     continuity = build_native_continuity(views, provenance=provenance,
-        sections=sections, unit_profiles=profiles, work_budget=work_budget)
+        sections=sections, unit_profiles=profiles, work_budget=work_budget, source_page_flow=page_flow)
     ranges: dict[tuple[str, int], list[tuple[int, int]]] = {}
     for entry in continuity["deferred_unit_ranges"]:
         ranges.setdefault((entry["source_id"], entry["page"]), []).append(
@@ -196,10 +209,6 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     grouped: set[str] = set()
     generated = []
     joint_facts = {}
-    independent_subject = re.compile(
-        r"^\s*(?:(?:报告期内|本期|目前|同时|此外)[，,\s]*)?"
-        r"(?:公司|本公司|本集团|本企業|本企业|集团|集團|我们|我們|"
-        r"(?:our|the|this)\s+company\b|we\b)", re.IGNORECASE)
     dependent_statement = re.compile(
         r"该|上述|这一|此项|这些|其|尚未|未能|未经|并未|不代表|不意味着|"
         r"然而|但是|但|仍需|须|需先|如果|除非|未来|下半年|预计|预期|计划|将|拟|可能|"
@@ -249,7 +258,8 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         for statement in statements:
             text = linguistic_text(statement)
             preceding = linguistic_text(current)
-            separate = (current and independent_subject.search(text)
+            work_budget.charge(8 * len(text))
+            separate = (current and independent_statement_start(text)
                         and not dependent_statement.search(text)
                         and not dependent_statement.search(preceding))
             if separate:
@@ -262,7 +272,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
 
     for window in continuity["windows"]:
         members = window["member_unit_ids"]
-        if not set(members) <= units.keys():
+        if not set(members) <= units.keys() or set(members) & blocked:
             continue
         # A structured project's row, qualification note and original context
         # remain one semantic package. Physical prose audit must not flatten

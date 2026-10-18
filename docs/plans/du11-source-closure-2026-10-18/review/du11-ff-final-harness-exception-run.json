@@ -1,0 +1,57 @@
+{
+  "ff_head": "8a83e27863269b14c897dc2c7ba953f3b9102ef1",
+  "cwp_head": "f5a26b48c8facfe8e9ad8ecdda2099e340c41a18",
+  "source_sha256": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-ff-reception\\filing-fetch\\scripts\\transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-ff-reception\\filing-fetch\\tests\\test_du11_verified_reader_revalidation.py": "9ab30a5ba0f02c0753fb785b45b571cac6c5009b757827eb2d5213e959ca8318",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py": "89cbc7ef9d6c99ab9bac743b17505b66328edc4cfb4f1125ae7bd5d6795eea63",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader_cli.py": "7510ae0244a61cee61a201a32dff1a21ee637518d8b2e916271414dd6e101876"
+  },
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-ff-final-root-5fa8d6bx\\tmp\\pytest",
+    "tests/test_final_independent.py::test_current_real_hk_reader_to_ff_reuse_and_legacy_receipt",
+    "--junitxml",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-final.xml"
+  ],
+  "returncode": 1,
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "1",
+    "skipped": "0",
+    "tests": "1",
+    "time": "13.950",
+    "timestamp": "2026-10-18T04:11:56.964230+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "network_attempts": 0,
+  "sentinel_unchanged": true,
+  "tested_archive_sha256": {
+    "ff": "b2eccd7aa75d0dadae2b2478c6c0e5216178d09c50a52bcbee467d86513d1e27",
+    "cwp_head_base": "4b46c1e7f4cd694781119693a55f92de780b67a16f56122c7d60f19440aaf561",
+    "cwp_with_reader_overlays": "105b5de5ac62f18a140b0ef0f975eba9f3bbc87e17cb5835e48792bc50c15929"
+  },
+  "snapshot_overlay_sha256": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-ff-reception\\filing-fetch\\scripts\\transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-ff-reception\\filing-fetch\\tests\\test_du11_verified_reader_revalidation.py": "9ab30a5ba0f02c0753fb785b45b571cac6c5009b757827eb2d5213e959ca8318",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py": "89cbc7ef9d6c99ab9bac743b17505b66328edc4cfb4f1125ae7bd5d6795eea63",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader_cli.py": "7510ae0244a61cee61a201a32dff1a21ee637518d8b2e916271414dd6e101876"
+  },
+  "owned_temp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-ff-final-root-5fa8d6bx",
+  "owned_temp_removed": true,
+  "input_sources_unchanged": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-ff-reception\\filing-fetch\\scripts\\transcript_tool_transport.py": true,
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-ff-reception\\filing-fetch\\tests\\test_du11_verified_reader_revalidation.py": true,
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py": true,
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader_cli.py": true
+  },
+  "wall_seconds": 21.76
+}

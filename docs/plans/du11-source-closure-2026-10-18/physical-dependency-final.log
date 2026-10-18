@@ -1,0 +1,27 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 219 items
+
+tests\unit\du11_source_closure\test_source_dependency_scope.py ........  [  3%]
+tests\unit\du11_source_closure\test_cross_page_reference_plan.py ....... [  6%]
+.......................                                                  [ 17%]
+tests\unit\du11_source_closure\test_source_metadata_budget.py .........  [ 21%]
+tests\unit\du11_tail_integration\test_tail_source_wiring.py ............ [ 26%]
+......................                                                   [ 36%]
+tests\unit\du4_operating_states\test_a_real_observation.py .......       [ 40%]
+tests\unit\du4_operating_states\test_b_synthetic_specs.py .............. [ 46%]
+..................................................                       [ 69%]
+tests\unit\du4_operating_states\test_c_contract.py ...................   [ 78%]
+tests\unit\du4_operating_states\test_root_boundaries.py ................ [ 85%]
+......                                                                   [ 88%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [ 88%]
+......................                                                   [ 98%]
+tests\unit\du11_production\test_cache_identity.py ...                    [100%]
+
+============================ 219 passed in 10.11s =============================

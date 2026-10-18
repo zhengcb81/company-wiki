@@ -1,0 +1,37 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b2-delta-wozuqry6\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\physical-final-independent-green.xml",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py::test_new_independent_statement_on_next_page_is_not_forced_under_previous_subject",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py::test_possessive_continuation_without_its_own_predicate_is_not_a_new_subject",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b2-delta-wozuqry6\\test_physical_delta_controls.py"
+  ],
+  "returncode": 0,
+  "seconds": 17.279,
+  "source_sha_before": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "c956ca65f8519536d4aeadba9c603be6d8fcc840aa9cbf82ddb0f88ea1877180",
+    "src/company_wiki/source_catalog/narrative_reading.py": "86a303b1324d4a1c36f51e5db568fc81ce3e975e974536cc85a9074b4e3f45d4",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "54c1f7cf90da16dddfc50a693c42f42264be1266a799c747a53fbe32f4e473b3",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "5ae82a8012b5effc512ab24c6fe55ca7bd366cd4baca1bc0a227ab796470b94e"
+  },
+  "source_sha_after": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "c956ca65f8519536d4aeadba9c603be6d8fcc840aa9cbf82ddb0f88ea1877180",
+    "src/company_wiki/source_catalog/narrative_reading.py": "86a303b1324d4a1c36f51e5db568fc81ce3e975e974536cc85a9074b4e3f45d4",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "54c1f7cf90da16dddfc50a693c42f42264be1266a799c747a53fbe32f4e473b3",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "5ae82a8012b5effc512ab24c6fe55ca7bd366cd4baca1bc0a227ab796470b94e"
+  },
+  "cleanup": {
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b2-delta-wozuqry6",
+    "restored_absent": true
+  }
+}
