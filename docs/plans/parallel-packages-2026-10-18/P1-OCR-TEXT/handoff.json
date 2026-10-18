@@ -37,9 +37,9 @@
   ],
   "file_bindings": [
     {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/green-2026-10-18.log", "sha256": "3af1caf4e5c25ba2cac0b7e942898b904e4ae7f9f49f3def0190e8ff8f0097fb", "bytes": 1349},
-    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/handoff.md", "sha256": "9ecbee4c503d95c8c7227bf14e5acbfb2d5607b9c70df85db097fc670d727703", "bytes": 5632},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/handoff.md", "sha256": "8f49390b65ee0c7bb7ea880a258385b2c6543d1502dfe2238ae4f5e4f9146a66", "bytes": 5848},
     {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/red-2026-10-18.log", "sha256": "1970ae277e7d4959246ce41b77586e8eb6012b1f5f64e74c5e1cfe24571a353f", "bytes": 16276},
-    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/review/independent.md", "sha256": "4267800a2c135c38df5c52262732062b61e33a7d1f8627b827f4acef56072205", "bytes": 15791},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/review/independent.md", "sha256": "387e47a9e35452ea8da47083ea44557cc9f2efb6bbc85e6d7eec1b3ba6af32f0", "bytes": 6438},
     {"path": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/static-2026-10-18.log", "sha256": "9631836a5712e965725f04d854bf866fdb7b6fc048b0781363c0eacf3005c7f3", "bytes": 238},
     {"path": "src/company_wiki/document_normalization/ocr_page_text.py", "sha256": "29d0690a9459b5165534519343c95d45fe4f1e2ce724f6dfa6960128c85ab389", "bytes": 19095},
     {"path": "src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py", "sha256": "02712372c3da28450d12c11bb4e351fcca5ed29630ad98f9266a1c900f5bedab", "bytes": 16115},
@@ -147,12 +147,12 @@
     "forbidden_paths_touched": []
   },
   "independent_review": {
-    "reviewer": "bc126045 (non-author, non-ROOT)",
-    "verdict": "FAIL",
+    "reviewer": "4267adef (non-author, non-ROOT)",
+    "verdict": "PASS",
     "report": "docs/plans/parallel-packages-2026-10-18/P1-OCR-TEXT/review/independent.md",
     "bound_files_sha256": [
-      "1d216d38d4707e9323235a62e4844dcffd49d38b8ab4a97bebe74b75035bf1a4",
-      "f6d08104292df062e048ee63b58f9501317d2232b975290ec470719068330c67"
+      "29d0690a9459b5165534519343c95d45fe4f1e2ce724f6dfa6960128c85ab389",
+      "02712372c3da28450d12c11bb4e351fcca5ed29630ad98f9266a1c900f5bedab"
     ]
   }
 }
