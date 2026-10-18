@@ -196,3 +196,178 @@ replay mismatch: tbl-0 r0c0 column_span expected 1 observed null
 本报告自身：`docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md`
 
 VERDICT: PASS
+
+## 9. 复审（post-review delta ac1aa4cb + c1f2e96c + 87fd5f82）
+
+**复审身份**：独立复审 agent（非作者、非 ROOT、非第 1 位审查者），受命对 `46e9052c..HEAD` 的
+src/tests 增量做最终 SHA 复审。上一位复审 agent 中途崩溃未留报告，`87fd5f82` 由作者代提交，
+按卡规则"旧审查结论不得签新代码"，该增量此前无任何存活报告背书。复审日期 2026-10-18。
+全部探针与中间产物写在 `%TEMP%\p2_recheck\`（仓库外）；**未 git commit**；未改动
+`handoff.md` / `handoff.json`（作者所有，见下方待修清单）；未触碰任何禁写路径。
+
+### 9.1 编号分支全量复核（任务项 1）——通过，0 分歧
+
+逐行比对 `docx_parser._DocxBody.table()`（docx_parser.py:356-402）与
+`_DocxBody.body()`（:404-457）对 `t=` 的每一次自增，同
+`office_table_structure._docx_table_order` 逐分支比对。
+差分探针 32 例（29 个编号例 + 3 个 QA 例，`%TEMP%\p2_recheck\probe_numbering.py`），
+每例同时断言三件事：(a) monkeypatch `_DocxBody.table` 记录的进入序列 ==
+`_docx_table_order` 中非 None 位置；(b) `native_index` 序列 == 进入序列（即
+`table_index=position`）；(c) 全部非 None 结构 locator ⊆ `parse_docx` 表格单元 locator。
+覆盖分支：可见包装（`w:sdt` 有/无 `sdtContent`、`w:customXml`、`w:ins`、`w:moveTo`）、
+删除区（`w:del`/`w:moveFrom`：平表、格内直嵌套表、格内 sdt 包嵌套表、del 内再包
+sdt/customXml/ins/moveTo、del 套 del、del 套 sdt 套 del、**del 内 `w:p` 套表不计**）、
+格内递归（三层直嵌套、可见格内 sdt 包裹嵌套表不计、可见格内 del 包表不计）、
+空表计号、body 级 `w:p` 套表不计、kitchen-sink 混合。**全部与解析器逐位一致**。
+`_parse_docx` 对 None 占位先 `continue` 再做限额判断，占位不消耗预算 ✓。
+
+### 9.2 两条回归用例确实咬合（任务项 2）——通过
+
+- 换入 `ac1aa4cb` 版模块（SHA-256 `E1F977D6…65EA30`，49893B）：
+  `test_docx_deleted_region_tables_consume_the_parser_index` **失败**，消息：
+  `AssertionError: deleted-region numbering drifted from the parser: ['cwp-docx-body/1|t=1|r=0|c=0|p=0']`
+  （1 failed, 1 passed；`ac1aa4cb` 自带的嵌套用例通过）——即提交版给出 t=1 而解析器给 t=2。
+- 换入 `46e9052c` 版模块（body.iter 时代，SHA-256 `223A8869…A20942`，47600B）：
+  两用例**全失败**（2 failed）——
+  `nested-table numbering drifted from the parser: ['cwp-docx-body/1|t=3|r=0|c=0|p=0']`
+  （正是声称的 t=3 漂移）与同一 `t=1` 删除区消息。
+- 恢复验证：换回 HEAD 内容后 `Get-FileHash`(工作区) = `0D8A18ED…A60972`，与换前**逐字节相同**；
+  `git hash-object` = `90121754a804cfad0eda5adf573b4cd084609086` = `git rev-parse HEAD:path`；
+  `git status` 干净；LF 内容 SHA-256 = `A9A0901A…F989C89`（= `sha256(git show HEAD:…)`）。
+  EOL 说明：本仓 `core.autocrlf=true`，模块工作区为 CRLF（52433B = blob LF 51091B + 1342 CR），
+  两种形式 clean 等价（`git diff --ignore-cr-at-eol` 为空），恢复后树与复审开始时完全一致。
+
+### 9.3 真实文件对齐（任务项 3）——0 漂移；并查出 1 个潜在缺陷（已修）
+
+语料 A（任务指定 `companies\**\*.docx|*.DOCX`）：181 文件 → **180 唯一**（1 重复：
+分众传媒 20180829.DOCX == 分众传媒：2018年8月29日…DOCX）；含表 **95**；结构 locator
+**2500，逐字符命中 2500，未命中 0**；解析/结构错误 0；解析器独有 **2565** 个 locator
+（**382** 个单元格：171 格多 1 段、211 格多 ≥2 段），**100% 为同 t/r/c 且 p>j**（违规 0；
+其中 4 条为更后段落本身再带 `|ch=` 切分，仍 p>j）；表 150；continuation
+149 unknown / 1 ok；`vertical_continue` 164 / `vertical_start` 40；含纵向合并文件 34
+（含横向/越界口径 35）；PPTX 0。
+
+语料 C（重构作者"190 个唯一包"）：主仓全部 docx+pptx **193 文件 → 190 唯一**
+= companies 180 + `docs/…/ci-docx-investigation` 证据 8（7 docx + 1 pptx）
++ `.venv`/`.venv-ci` 的 python-docx/pptx 模板 2。含表 100（99 docx + 1 pptx）；
+locator **2519/2519，未命中 0**；表 157；continuation **154/1/2**；vc 164 / vs 40；错误 0。
+
+- **声称 A 成立（实质）**：body.iter 旧编号在语料 C 上将产生 **644/2511（25.6%）**
+  不在解析器输出中的结构 locator（语料 A：579）；含 sdt 嵌套表的真实文件恰 1 个
+  （阿里巴巴 20190919 深度报告）：body.iter **34 张 vs 解析器 31 张**。
+- **声称 B 成立**：190 包中 **0** 个含 body 级 `w:del`/`w:moveFrom` 表 → `87fd5f82`
+  对本语料属前瞻性修复；合成 A/B 探针结论（t=[0,3]、旧版 t=1 错、新版 t=3 对）已由 9.2 实测复现。
+- **声称 C 成立**：见 9.2。
+- **缺陷 D-R1（复审查出，已修复）**：单元格首可见段落含**段中** QA 标记（如
+  `前文 问：后文`）时，`docx_parser.emit`（docx_parser.py:310-339）对该段做 `|ch=` 切分，
+  裸 `|p=…` locator 永远不会被解析器产出，而结构仍报裸 locator——探针失败消息：
+  `structure locators absent from parse_docx: ['cwp-docx-body/1|t=0|r=0|c=0|p=0']`
+  （qa_marker_after_space / qa_marker_after_punct 两例）。违反卡 §5.3（card.md:116、:158
+  "逐字符相同"）与模块 docstring（:10-12）自身的承诺。属 delta 前遗留（f8c91996），真实语料
+  未触发（首段带标记者 0，故 9.3 的 0 漂移不受影响），但输入合法、可复现。
+  修复：`office_table_structure.py:52-53`（引入解析器自己的 `_QA_MARKER` 与
+  `normalize_text`，单一事实来源）、`:333-359`（新增 `_docx_first_unit_suffix`，逐字镜像
+  `emit` 的 starts/裁剪/跳空逻辑）、`:361-384`（`_docx_cell_locator` 追加首片 `|ch=` 后缀）。
+  修复后 32/32 探针通过；**180 个语料文件的 `structure_sha256` 与 locator 逐个不变**
+  （0/180 变化），回放收据不受影响。按写集限制**未新增套件用例**（用例数保持 69），
+  复现配方：单格单段 `<w:t>前文 问：后文</w:t>`，期望 locator
+  `cwp-docx-body/1|t=0|r=0|c=0|p=0|ch=0:2` ∈ `parse_docx` 输出。
+
+### 9.4 handoff 声称核查（任务项 4，只读）——以下字符串需作者修正
+
+1. handoff.md:12「68 个用例」、:48「**68 passed**，0 skipped」、handoff.json
+   `tests[1].passed: 68` → 实测 **69 passed, 0 skipped**（复审未增删用例；收据
+   `green-20261018-pytest.log` 内容 "68 passed" 亦过时——其 SHA 与 handoff 绑定一致，但内容过时）。
+2. handoff.md:5「提交：f8c91996 + b61ed0c5 + ac1aa4cb」与 handoff.json `commits` → 缺
+   `c1f2e96c`、`87fd5f82`；`changed_paths` 缺 `handoff.json` 自身（c1f2e96c 改了它）。
+3. handoff.md:59-60「`companies/` 下 96 个唯一真实 DOCX…190 个唯一包」→ companies 下唯一
+   DOCX 180、含表 95；190 唯一包只有把 docs/ 证据 8 个与 .venv 模板 2 个算进来才成立
+   （"companies/ 下"表述不准确；`original_reads: 190` 数字本身可复现）。
+4. handoff.md:61「修复前 24.8%（637/2540 前身）」→ 实测 644/2511 = 25.6%（语料 C）。
+5. handoff.md:62「该文件 34 vs 25 张表」→ 实测 **34 vs 31**（body.iter 34 / 解析器与结构 31）。
+6. handoff.md:64「2540/2540…0 漂移」→ 实测 2500/2500（companies）或 2519/2519（190 语料）；
+   **0 漂移实质成立**，绝对数字 2540/96/159/165/41/37 在当前稳定语料（近 7 天零改动）上均不可复现。
+7. handoff.md:66「剩余 276 个解析器独有 locator…」与 handoff.json `known_limits` 末条 →
+   实测 2565 个（382 格；单元格口径 382、locator 口径 2565，均非 276）；"全部来自单元格多段落、
+   p>j" **实质成立**（违规 0）。另注：语料中删除区表 0 例，"after ac1aa4cb 即 0 漂移"属偶然成立，
+   一般情形自 `87fd5f82` 起才成立。
+8. handoff.md:74-75、handoff.json `not_run[0]`「unknown 159 / ok 1 / not_applicable 2」→
+   实测 154/1/2（190 语料）或 149/1/0（companies；companies 下无任何 PPTX）。
+9. handoff.md:76-77「37 个含合并格，vertical_continue 165 / vertical_start 41」→
+   实测 34 个文件（含横向/越界口径 35）/ 164 / 40。
+10. handoff.md:78、handoff.json `not_run[1]`「真实 PPTX 样本仅 1 个」→ 190 语料中唯一
+    PPTX 为 2（docs 证据 1 个含 2 表 + python-pptx 模板 1 个无表）；companies 下为 0。
+11. handoff.json `file_bindings`：`office_table_structure.py` `e1f977d6…`/49893B 过时
+    （`87fd5f82` 后即已过时：当时工作区 `0D8A18ED…`/LF `A9A0901A…`；本次复审修复后见 9.9）；
+    `test_locator_compatibility.py` `80035d2f…`/7324B 过时（现 `632B6B40…`，11660B，
+    blob `8375f4350c218101d2f895c2e4bd181003327159`）。其余 24 条绑定逐一核对**全部一致**。
+
+### 9.5 作者新增的 D-R1 回归用例（handback 后独立复验）
+
+本复审第一次交还工作树后，作者在其写集内新增**恰好一条**用例
+`test_docx_qa_marker_cell_locator_carries_the_parser_piece_suffix`
+（`tests/unit/test_p2_office_table/test_locator_compatibility.py:309-336`，+30 行），
+把 §9.3 的 D-R1 修复锁进套件（§9.3 按当时写集限制未加用例；加在作者写集内合规）。
+独立复验结论：
+
+- **用例内容诚实**：夹具 `前文 问：后文` 单格单段；断言 (a) 裸 `|p=0` **不在** `parse_docx`
+  输出集合中，(b) 结构 locator **在**该集合并以 `|ch=0:2` 结尾，(c) `text` 仍为整段
+  （只有 locator 跟随切分）。无 skip/xfail、无 try/except、无 null→1 放宽。
+- **确实咬合（实测）**：换入 `87fd5f82` 模块 blob（SHA-256 `A9A0901A…F989C89`，51091B）
+  后单跑该用例 **失败**，消息：
+  `AssertionError: cwp-docx-body/1|t=0|r=0|c=0|p=0`
+  （`assert 'cwp-docx-body/1|t=0|r=0|c=0|p=0' in {'cwp-docx-body/1|t=0|r=0|c=0|p=0|ch=0:2', 'cwp-docx-body/1|t=0|r=0|c=0|p=0|ch=3:7'}`，
+  失败于 :331 `assert locator in existing`）——正是 D-R1 症状（旧模块报裸 locator）。
+- **模块复原验证**：换回后与复审绑定链三方核对**全部逐字符一致**——
+  工作区 Get-FileHash `F5FE14A4563462DF803DC5474BA38ADACD905AF15091D47190EE943600136C94`、
+  LF 内容 `9C83A3F9B5D0966FD1346384BFD20A630D077627D7EB41EB00514891689E7683`、
+  `git hash-object` `e8356663efc3e3697f4cfcd0cb679bef8fecacd4`（见 §9.9）。
+- 用例数 69 → **70**；模块相对 §9.9 绑定**零改动**。
+
+### 9.6 验收门（任务项 5；按最终树复跑）——4/4 exit 0
+
+- `python -B -c "import company_wiki; print(list(company_wiki.__path__))"` →
+  本 worktree 的 `src\company_wiki` ✓
+- `python -m pytest tests/unit/test_p2_office_table -q -p no:cacheprovider` →
+  §9 签署时 69 passed；作者加用例后按最终树复跑 **70 passed, 0 skipped** ✓
+- `python -m ruff check src/company_wiki/document_normalization/office_table_structure.py tests/unit/test_p2_office_table` → All checks passed ✓
+- `python -m mypy src/company_wiki/document_normalization/office_table_structure.py` → Success ✓
+
+### 9.7 测试诚实性（任务项 6）——通过
+
+delta（46e9052c..HEAD，src+tests）仅 3 行删除（旧 `body.iter` 三行），0 个被删用例；
+新增行中 skip/xfail/pytest.skip = 0，新增 try/except = 0（不存在吞 `ValueError`），
+无 null→1 放宽断言；`assert … == [0, 2] / [0, 3]` 断言的是**非连续** native_index（真实行为）。
+
+### 9.8 写集（任务项 7）——通过
+
+`git diff --name-only 4045787f..HEAD` 共 28 个路径；禁写命中 **0**
+（docx_parser.py / pptx_parser.py / narrative_formats.py / units.py / errors.py /
+limits.py / document.py / replay.py / source_catalog/** / document_understanding/**
+/ parser_adapters/** / tools/** / tests/integration/** 均不在其中）。
+
+### 9.9 最终绑定 SHA-256（含作者新增用例后复验）
+
+- `src/company_wiki/document_normalization/office_table_structure.py`（D-R1 修复；
+  §9.5 复验后**零改动**）：工作区 Get-FileHash（CRLF 形态）=
+  `F5FE14A4563462DF803DC5474BA38ADACD905AF15091D47190EE943600136C94`；
+  LF 内容 SHA-256（= 提交后 `sha256(git show HEAD:…)`）=
+  `9C83A3F9B5D0966FD1346384BFD20A630D077627D7EB41EB00514891689E7683`；
+  `git hash-object` = `e8356663efc3e3697f4cfcd0cb679bef8fecacd4`。
+- `tests/unit/test_p2_office_table/test_locator_compatibility.py`（**复审未改动**；
+  含作者 §9.5 新增用例）：Get-FileHash =
+  `DF2568D38F7C8B83A3CC89A8EF690553B125FC7274169E3733125A9EE2CF641D`；
+  `git hash-object` = `6dc41a753f92b2b9c18cc150d71e858c8e56b220`。
+  （取代 §9 首签时的 `632B6B40…`/`8375f435…`——该值对应加用例前的文件。）
+- 本报告自身：`docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md`
+  （追加 §9 前 SHA-256 `7E44E7389C4D3DD192BCC4321EBB90097C47F9587B5B542F433DC4F5B823CA36`，
+  与 handoff.json 旧绑定一致）。**报告文件无法在自身内绑定自身哈希**：§9 追加后的报告
+  SHA-256 由作者在交接后自行计算并记入 handoff.json。
+
+`git status` 三处 M：`office_table_structure.py`（= D-R1 修复，未提交）、
+`test_locator_compatibility.py`（= 作者 §9.5 新增用例）、`review/independent.md`（= 本报告）；
+无其他改动；未 git commit。
+
+**交接状态**：复审者已停止写入，**把工作树交还作者**。9.4 的 handoff 修正属作者（handoff 为其所有）。
+
+RE-REVIEW VERDICT: PASS

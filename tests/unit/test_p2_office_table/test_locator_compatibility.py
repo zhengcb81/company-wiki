@@ -304,3 +304,33 @@ def test_docx_deleted_region_tables_consume_the_parser_index():
     tables_hidden = _structure(hidden_in_paragraph)["tables"]
     assert isinstance(tables_hidden, list)
     assert [t["native_index"] for t in tables_hidden] == [0, 1]  # type: ignore[index]
+
+
+def test_docx_qa_marker_cell_locator_carries_the_parser_piece_suffix():
+    """A cell whose first paragraph splits at a QA marker names the first piece.
+
+    ``docx_parser.emit`` splits ``"前文 问：后文"`` into two units and appends
+    ``|ch=`` to *both* locators, so the bare ``|p=0`` locator never exists for
+    that cell; emitting it would name a unit the parser never produces
+    (card §5.3 "逐字符相同").  The structure must point at the parser's first
+    emitted piece instead.  ``text`` keeps the whole paragraph — only the
+    locator follows the split.
+    """
+    payload = docx(table(row(cell(paragraph("前文 问：后文")))))
+
+    existing = set(_parsed_docx_locators(payload))
+    assert existing, "the fixture must produce table units"
+    assert "cwp-docx-body/1|t=0|r=0|c=0|p=0" not in existing, (
+        "the parser never emits the bare locator for a ch-split paragraph"
+    )
+
+    tables = _structure(payload)["tables"]
+    assert isinstance(tables, list)
+    entry = tables[0]["cells"][0]  # type: ignore[index]
+    locator = entry["locator"]
+    assert locator in existing, locator
+    assert "|ch=" in locator
+    # The locator names the FIRST emitted piece of the split paragraph.
+    assert locator.endswith("|ch=0:2"), locator
+    # text stays the whole first visible paragraph (NFC + strip only).
+    assert entry["text"] == "前文 问：后文"

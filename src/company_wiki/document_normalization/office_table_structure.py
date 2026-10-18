@@ -49,6 +49,8 @@ from typing import Any
 
 from lxml import etree  # type: ignore[import-untyped]
 
+from .docx_parser import _QA_MARKER
+from .text import normalize_text
 from .units import DOCX_LOCATOR_SCHEMA, FORMAT_DOCX, FORMAT_PPTX, PPTX_LOCATOR_SCHEMA
 
 P2_OFFICE_TABLE_SCHEMA = "cwp-office-table/1"
@@ -328,6 +330,34 @@ def _paragraph_has_page_break(paragraph_node: Any) -> bool:
     return False
 
 
+def _docx_first_unit_suffix(paragraph_node: Any) -> str:
+    """The ``|ch=<start>:<end>`` suffix ``docx_parser.emit`` puts on the first unit.
+
+    ``emit`` splits one paragraph's text at QA markers (``问：`` / ``Q:`` / ``答：`` …)
+    and appends ``|ch=`` to *every* piece when it splits, so a cell whose first
+    visible paragraph carries a mid-string marker never produces the bare
+    ``|p=<i>`` locator at all.  Emitting that bare locator would name a unit the
+    parser never emits (card §5.3 "逐字符相同"), so the structure records the
+    first emitted piece's suffix instead — computed exactly the way ``emit``
+    computes it, over the same ``normalize_text`` output.
+    """
+    text = normalize_text(_docx_visible_text(paragraph_node))
+    starts = sorted({0, *(match.start("label") for match in _QA_MARKER.finditer(text))})
+    for position, start in enumerate(starts):
+        end = starts[position + 1] if position + 1 < len(starts) else len(text)
+        while start < end and text[start].isspace():
+            start += 1
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        if start == end:
+            continue
+        if len(starts) == 1:
+            # No split: ``emit`` emits the bare locator for this paragraph.
+            return ""
+        return f"|ch={start}:{end}"
+    return ""
+
+
 def _docx_cell_locator(
     *,
     table_index: int,
@@ -340,7 +370,10 @@ def _docx_cell_locator(
     ``docx_parser`` numbers paragraphs over the cell's direct ``w:p`` children
     and skips blank ones, so the first *emitted* unit for a cell carries the
     index of the first paragraph with visible text.  A cell with no paragraph
-    (or no visible text) has no unit at all and therefore no locator.
+    (or no visible text) has no unit at all and therefore no locator.  When
+    that first paragraph is split at a QA marker, ``emit`` prefixes the piece
+    range (``|ch=``); the suffix is part of the emitted locator and part of
+    this cell's locator too.
     """
     index = _docx_first_visible_index(paragraphs)
     if index is None:
@@ -348,6 +381,7 @@ def _docx_cell_locator(
     return (
         f"{DOCX_LOCATOR_SCHEMA}|t={table_index}"
         f"|r={row_index}|c={column_index}|p={index}"
+        f"{_docx_first_unit_suffix(paragraphs[index])}"
     )
 
 
