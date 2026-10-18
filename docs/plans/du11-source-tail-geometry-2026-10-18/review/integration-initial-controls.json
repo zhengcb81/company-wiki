@@ -1,0 +1,68 @@
+{
+  "schema_version": "du11-tail-integration-initial-controls/1",
+  "reviewer": "/root/du10_ff_reception_review",
+  "scope": "Historical independently observed RED controls; do not overwrite with final GREEN.",
+  "controls": [
+    {
+      "id": "project-finite-citation-views",
+      "artifact": "project-multi-anchor-repro.py",
+      "input": "Four actual project anchors, two form one native closed window, two remain separate complete originals.",
+      "observed": {
+        "citation_view_count": 3,
+        "anchors": 4,
+        "physical_windows": 1,
+        "blocked_count": 0,
+        "accepted": false,
+        "error_type": "ValueError",
+        "error": "source summary requires the existing finite citation views"
+      },
+      "expected": "Preserve atomic project/member/context/all anchor support in existing finite view contract; no dropping to first2 or wire-cap increase."
+    },
+    {
+      "id": "tail-lookahead-budget",
+      "artifact": "tail-lookahead-budget-repro.py",
+      "input": "Unknown-column tail pair followed immediately by legitimate native body-band witness.",
+      "observed": [
+        {
+          "cap": 4,
+          "deferred_unit_ids": [
+            "source-a:1"
+          ],
+          "unexamined_from_index": 2,
+          "standalone_unit_count": 1,
+          "window_count": 0
+        },
+        {
+          "cap": 5,
+          "deferred_unit_ids": [
+            "source-a:1"
+          ],
+          "unexamined_from_index": 2,
+          "standalone_unit_count": 1,
+          "window_count": 0
+        },
+        {
+          "cap": 6,
+          "deferred_unit_ids": [
+            "source-a:1"
+          ],
+          "unexamined_from_index": 2,
+          "standalone_unit_count": 1,
+          "window_count": 0
+        }
+      ],
+      "expected": "Every pending pair member withheld when lookahead/edge work stops; no left singleton release."
+    },
+    {
+      "id": "project-null-structural-section",
+      "input": "Same project tail pair; actual distinct section_id per unit; hints.section_key explicitlyNone rather than absent.",
+      "observed": {
+        "actual_different_sections": true,
+        "null_hint_cross_section_windows": 1,
+        "blocked_count": 0
+      },
+      "expected": "Unknown/null/empty hints use authoritative observed structural fallback, preventing cross-section joining."
+    }
+  ],
+  "execution": "All controls were compact in-memory actual source owner/formal planner calls under explicitly minimal system environment; no pytest/full-source run, source mutation, original/client/network/config/credential reads. ROOT has adopted corresponding formal tests and is repairing shared owner."
+}

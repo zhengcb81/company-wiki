@@ -1,3 +1,13 @@
+## Checkpoint disposition — 2026-10-18
+
+Reviewed source-quality checkpointdd5e1f2f is committed and merged into local mothermasterb5d413d6. Follow-on measured tail/prose/project/purpose fixes passed final independent34 controls,138 final related tests and actual readonly three-source10/7/8 recall. See ../du11-source-tail-geometry-2026-10-18/integration-handoff.md and final8SHA review. Source semantic cross-page/antecedent/contentC remain OPEN.
+
+## Next Step
+
+Normal publish reviewed engineering; continue remaining closure design and configured formal supplier/cache/downstream C. This does not mark old failed supplier runs or all PWF complete.
+
+---
+
 # Root causes
 
 Syntactic relations and section routing do not prove business purpose. Actor, table and narrative closure are source observations; model ranking cannot repair them. Whole-card byte admission must follow existing source intent without raising cap. Global scope optimization prototype was withdrawn after independent import-side-effect counterexample; no gate weakened.

@@ -1,0 +1,130 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 780 items
+
+tests\unit\du11_tail_integration\test_tail_source_wiring.py ............ [  1%]
+..............                                                           [  3%]
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py .... [  3%]
+..................................................................       [ 12%]
+tests\unit\du11_source_quality\test_business_admission.py .............. [ 14%]
+...................                                                      [ 16%]
+tests\unit\du11_source_quality\test_material_readiness.py .......        [ 17%]
+tests\unit\document_understanding_selection\test_attributed_context_quote_oracle.py . [ 17%]
+..                                                                       [ 17%]
+tests\unit\document_understanding_selection\test_closed_group_support.py . [ 17%]
+.........                                                                [ 19%]
+tests\unit\document_understanding_selection\test_reading_balanced_coverage.py . [ 19%]
+..............                                                           [ 21%]
+tests\unit\document_understanding_selection\test_reading_budget_coverage.py . [ 21%]
+...............                                                          [ 23%]
+tests\unit\document_understanding_selection\test_reading_budget_plan.py . [ 23%]
+....................                                                     [ 25%]
+tests\unit\document_understanding_selection\test_reading_budget_scale.py . [ 25%]
+........                                                                 [ 26%]
+tests\unit\document_understanding_selection\test_reading_child_route_identity.py . [ 27%]
+......                                                                   [ 27%]
+tests\unit\document_understanding_selection\test_reading_cross_script_relations.py . [ 27%]
+...................                                                      [ 30%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [ 30%]
+......................                                                   [ 33%]
+tests\unit\document_understanding_selection\test_reading_display_adapter.py . [ 33%]
+....................................                                     [ 38%]
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py . [ 38%]
+..........................................................               [ 45%]
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py . [ 45%]
+..............................                                           [ 49%]
+tests\unit\document_understanding_selection\test_reading_multiline_tables.py . [ 49%]
+.................                                                        [ 51%]
+tests\unit\document_understanding_selection\test_reading_named_portfolio_drivers.py . [ 52%]
+..................................                                       [ 56%]
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py . [ 56%]
+.......................................                                  [ 61%]
+tests\unit\document_understanding_selection\test_reading_native_carriers.py . [ 61%]
+.........                                                                [ 62%]
+tests\unit\document_understanding_selection\test_reading_native_continuity.py . [ 62%]
+..........................................                               [ 68%]
+tests\unit\document_understanding_selection\test_reading_native_material_mapping.py . [ 68%]
+......                                                                   [ 69%]
+tests\unit\document_understanding_selection\test_reading_portfolio_disclosure.py . [ 69%]
+.........................                                                [ 72%]
+tests\unit\document_understanding_selection\test_reading_priority_coverage.py . [ 72%]
+.....................                                                    [ 75%]
+tests\unit\document_understanding_selection\test_reading_production_selection.py . [ 75%]
+....FFFF.......FF...                                                     [ 78%]
+tests\unit\document_understanding_selection\test_reading_root_policy_binding.py . [ 78%]
+......................                                                   [ 81%]
+tests\unit\document_understanding_selection\test_reading_semantic_value.py . [ 81%]
+..................                                                       [ 83%]
+tests\unit\document_understanding_selection\test_reading_source_boundaries.py . [ 83%]
+                                                                         [ 83%]
+tests\unit\document_understanding_selection\test_reading_structured_qa.py . [ 83%]
+...............                                                          [ 85%]
+tests\unit\document_understanding_selection\test_reading_table_admission.py . [ 85%]
+..........................                                               [ 89%]
+tests\unit\document_understanding_selection\test_reading_table_rows.py . [ 89%]
+.........................                                                [ 92%]
+tests\unit\document_understanding_selection\test_reading_value_coverage.py . [ 92%]
+................................................                         [ 98%]
+tests\unit\du11_production\test_native_prose_continuity.py ..........    [100%]
+
+================================== FAILURES ===================================
+____ test_two_projects_share_context_once_and_keep_two_independent_groups _____
+tests\unit\document_understanding_selection\test_reading_production_selection.py:239: in test_two_projects_share_context_once_and_keep_two_independent_groups
+    assert _texts(selected) == {unit.raw_text for unit in document.units}
+E   AssertionError: assert {'Alpha water...ivery dates.'} == {'Alpha water...ivery dates.'}
+E     
+E     Extra items in the right set:
+E     'Project | stage | qualification period'
+E     Use -v to get more diff
+_ test_shared_context_does_not_force_both_projects_into_a_giant_budget_group __
+tests\unit\document_understanding_selection\test_reading_production_selection.py:263: in test_shared_context_does_not_force_both_projects_into_a_giant_budget_group
+    assert _texts(selected) == {header.raw_text, footnote.raw_text, first.raw_text}
+E   AssertionError: assert {'Alpha water...ivery dates.'} == {'Alpha water...ivery dates.'}
+E     
+E     Extra items in the left set:
+E     'Beta recycling project is in customer qualification; the planned period is 12�C18 months.'
+E     Extra items in the right set:
+E     'Project | stage | qualification period'
+E     Use -v to get more diff
+_ test_shared_original_context_is_charged_once_under_production_character_limit _
+tests\unit\document_understanding_selection\test_reading_production_selection.py:283: in test_shared_original_context_is_charged_once_under_production_character_limit
+    assert len(selected.evidence_spans) == 4
+E   AssertionError: assert 3 == 4
+E    +  where 3 = len((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:59bad61f883f369a186153370a9bfe0d9...2809bbc206dee0571f34573770f81be4be23f545507cb2fc9d28b', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:59bad61f883f369a186153370a9bfe0d9...2809bbc206dee0571f34573770f81be4be23f545507cb2fc9d28b', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... but are not reuse evidence'}], 'decision_digest': 'a3ef58cd68fe7f73d310cd43f44f28d5365ef08a73271250df4d6752fffb78c7'}).evidence_spans
+_______ test_unaffordable_required_context_defers_the_complete_project ________
+tests\unit\document_understanding_selection\test_reading_production_selection.py:296: in test_unaffordable_required_context_defers_the_complete_project
+    assert not selected.evidence_spans, "an anchor without its mandatory header/qualification is a different claim"
+E   AssertionError: an anchor without its mandatory header/qualification is a different claim
+E   assert not (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:59bad61f883f369a186153370a9bfe0d9...7d6fac8f619ddb68eda288ac3e7f6af3cbd67b30bcbe01a8fd6c2', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()))
+E    +  where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:59bad61f883f369a186153370a9bfe0d9...7d6fac8f619ddb68eda288ac3e7f6af3cbd67b30bcbe01a8fd6c2', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... but are not reuse evidence'}], 'decision_digest': 'a3ef58cd68fe7f73d310cd43f44f28d5365ef08a73271250df4d6752fffb78c7'}).evidence_spans
+_ test_operating_qualification_footnote_is_context_not_a_sibling_project_anchor _
+tests\unit\document_understanding_selection\test_reading_production_selection.py:392: in test_operating_qualification_footnote_is_context_not_a_sibling_project_anchor
+    assert _texts(selected) == {header.raw_text, qualification.raw_text, first.raw_text}, (
+E   AssertionError: A required footnote with operating words must not become an anchor or connect sibling projects
+E   assert {'Alpha water...not started.'} == {'Alpha water...ation period'}
+E     
+E     Extra items in the left set:
+E     'Beta recycling project is in customer qualification; the planned period is 12�C18 months.'
+E     Extra items in the right set:
+E     'Project | stage | qualification period'
+E     Use -v to get more diff
+_ test_unusable_project_remains_in_deferred_accounting_alongside_a_complete_project[missing_context] _
+tests\unit\document_understanding_selection\test_reading_production_selection.py:417: in test_unusable_project_remains_in_deferred_accounting_alongside_a_complete_project
+    assert any(row.get("package_id") == "unusable-project"
+E   assert False
+E    +  where False = any(<generator object test_unusable_project_remains_in_deferred_accounting_alongside_a_complete_project.<locals>.<genexpr> at 0x000001B9AEDE6A80>)
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_production_selection.py::test_two_projects_share_context_once_and_keep_two_independent_groups
+FAILED tests/unit/document_understanding_selection/test_reading_production_selection.py::test_shared_context_does_not_force_both_projects_into_a_giant_budget_group
+FAILED tests/unit/document_understanding_selection/test_reading_production_selection.py::test_shared_original_context_is_charged_once_under_production_character_limit
+FAILED tests/unit/document_understanding_selection/test_reading_production_selection.py::test_unaffordable_required_context_defers_the_complete_project
+FAILED tests/unit/document_understanding_selection/test_reading_production_selection.py::test_operating_qualification_footnote_is_context_not_a_sibling_project_anchor
+FAILED tests/unit/document_understanding_selection/test_reading_production_selection.py::test_unusable_project_remains_in_deferred_accounting_alongside_a_complete_project[missing_context]
+======================= 6 failed, 774 passed in 48.78s ========================

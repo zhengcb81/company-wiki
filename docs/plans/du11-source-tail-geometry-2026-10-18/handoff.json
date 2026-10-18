@@ -1,0 +1,101 @@
+{
+  "schema_version": "du11-indented-tail-handoff/1",
+  "status": "FROZEN_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "file_bindings": [
+    {
+      "path": "src/company_wiki/document_understanding/indented_tail_geometry.py",
+      "sha256": "64d2962fad25c8dc82191a3ac560db3e079be4622d084d117c35a21643a47849",
+      "bytes": 4272
+    },
+    {
+      "path": "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py",
+      "sha256": "08869dcb6b98455e1dd7d44c2f047f39e733940797a076d165d449c3a3227395",
+      "bytes": 6251
+    }
+  ],
+  "version": "indented-terminal-tail/1",
+  "contract": {
+    "name": "indented_terminal_tail_proof",
+    "args": [
+      "left_bbox",
+      "right_bbox",
+      "font_size",
+      "left_text",
+      "right_text"
+    ],
+    "return": "dict proof or None; physical observation only",
+    "caller_prerequisites": [
+      "same source/page/scope/frame/font",
+      "consecutive ordinal/paragraph",
+      "column/table/heading/role barriers"
+    ],
+    "geometry": {
+      "body_width_em_min": 8,
+      "indent_em": [
+        1,
+        2.2
+      ],
+      "tail_width_em_max": 3,
+      "tail_to_body_width_max": 0.25,
+      "line_height_em": [
+        0.5,
+        1.5
+      ],
+      "vertical_gap_em": [
+        0,
+        1
+      ],
+      "tail_right_edge": "<=left body right edge"
+    },
+    "source_text": "CJK last/first; unclosed left, numeric/Latin-free CJK right plus actual terminator/closequotes; whole strings unchanged",
+    "bounded_characters": {
+      "left": 2048,
+      "right": 4
+    }
+  },
+  "test_evidence": {
+    "initial_red": "missing module collection error/1.57s, before implementation",
+    "first_green": "63PASS/1FAIL due incorrectly numeric U+20001 positive; retained as numeric negative and new nonnumeric U+20003 positive",
+    "behavior_red": "5FAIL/1.78s for tall/thin boxes and nonfinite derived ratio",
+    "final_green": "70PASS/1.10s",
+    "command": "python -B -m pytest tests/unit/du11_source_tail_geometry -q -p no:cacheprovider",
+    "source_after_test": "Only docstring explanation added after final run; behavior frozen; independent review pending"
+  },
+  "logs": [
+    {
+      "path": "red.log",
+      "sha256": "a0703044136398b7983a0ae9501ec84397598b50eded486b2181b3daf750a437",
+      "bytes": 2211
+    },
+    {
+      "path": "green.log",
+      "sha256": "c030f724f7efe732a7133edcb4d1469de13b0db68f4d45f354aa6b3f871ce1a6",
+      "bytes": 2237
+    },
+    {
+      "path": "red-height-finite.log",
+      "sha256": "47a2ed5f4424c5cbf87ce39ce04f099b01d4bfe15e5b8c670129ff3aeb10b810",
+      "bytes": 6069
+    },
+    {
+      "path": "green-final.log",
+      "sha256": "a5fc3542ee296356d160fa00b421f34a95c2715a769dfab2f436c4352684e22c",
+      "bytes": 1204
+    }
+  ],
+  "scope": {
+    "production_connected": false,
+    "source_originals_read": false,
+    "source_originals_written": false,
+    "api_calls": 0,
+    "pdf_parses": 0,
+    "config_writes": 0,
+    "other_production_files_modified": 0,
+    "git_stage": 0,
+    "commits": 0,
+    "independent_review": "ROOT must assign different agent; not self-approved",
+    "real_C": "NOT_EXECUTED_NOT_CLAIMED",
+    "cache_wiring": "ROOT must bind new helper source/version at integration"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": "du11-indented-tail-independent-review/1",
+  "verdict": "PASS_PURE_HELPER_INTEGRATION_OPEN",
+  "reviewer": "/root/du10_ff_reception_review",
+  "file_bindings": [
+    {
+      "path": "src/company_wiki/document_understanding/indented_tail_geometry.py",
+      "sha256": "64d2962fad25c8dc82191a3ac560db3e079be4622d084d117c35a21643a47849",
+      "bytes": 4272
+    },
+    {
+      "path": "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py",
+      "sha256": "08869dcb6b98455e1dd7d44c2f047f39e733940797a076d165d449c3a3227395",
+      "bytes": 6251
+    }
+  ],
+  "freeze_matches": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true
+  },
+  "confirmed_helper_must_fix": [],
+  "review_checks": [
+    {
+      "area": "Finite input and returned geometry",
+      "result": "PASS",
+      "detail": "Bool/non-numeric/nonfinite/negative or degenerate boxes and nonpositive fonts reject. Numeric conversion overflow rejects; every derived normalized ratio including heights must be finite before proof. Output contains only finite measured coordinates/scalars and bounded enum/count, not raw text or invented IDs."
+    },
+    {
+      "area": "Geometry responsibility",
+      "result": "PASS_WITH_CALLER_PRECONDITIONS",
+      "detail": "Width/indent/tail/bodyratio/gap/height/rightedge are jointly required. Negative overlap is reported honestly as new native_indented_terminal_tail basis, not an old overlap pass. No claim that shape proves source/page/column/speaker/semantic assertion."
+    },
+    {
+      "area": "Script and terminal boundary",
+      "result": "PASS",
+      "detail": "Left must end in actual CJK and not existing terminator, tail must contain1..3nonnumeric actual CJK plus accepted terminator/closing quote within4codepoints; Latin/digit/numeric CJK/footnote-like numeric/missing comma/ellipsis/internal-space/excess tail cases reject. Both source strings remain unchanged."
+    },
+    {
+      "area": "Bounds and calibration",
+      "result": "PASS_NARROW_SHAPE_ONLY",
+      "detail": "Hard maximum2048/4characters bounds text work. Thresholds are font-relative and translation/scale-invariant, not company/source/page/text special cases. Documented one real measured shape and synthetic boundary/negative controls support this narrow observer, not broad source/column error rate claims."
+    },
+    {
+      "area": "Tests",
+      "result": "PASS",
+      "detail": "Independently executed70 tests, including both actual negative-overlap sample and just-inside/outside geometry, invalid data, tall/thin bbox, overflow ratio, Unicode numeric ideograph, no mutation and actual-worktree import checks."
+    }
+  ],
+  "mandatory_integration_constraints": [
+    "Call only after original/page/scope/frame/font/consecutive ordinal+paragraph and table/heading/role barriers have passed; the helper has no inputs with which to validate these.",
+    "A missing/unknown column label equal to another missing label is not positive same-column evidence. In particular, the new negative-overlap branch must not silently discard the old overlap rule spatial protection. Establish actual native layout/flow compatibility under the source owner; otherwise remain unknown/defer.",
+    "Return only physical edge evidence; do not label semantic subject/antecedent/word closure as proven, or manufacture/repair original text.",
+    "Bind new helper version plus actual source dependency into current production causal/cache identity. Keep old paid/source receipts immutable.",
+    "Production connector needs same-source/page/frame/font/column and nonconsecutive/heading/table/role negative controls, plus actual original/ref/text/coordinate replay. Pure helper tests do not substitute these."
+  ],
+  "independent_execution": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-tail-review-hzq21pg1\\pytest",
+      "tests/unit/du11_source_tail_geometry",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-tail-geometry-2026-10-18\\review\\independent-focused.xml"
+    ],
+    "returncode": 0,
+    "suite": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "70",
+      "time": "0.272",
+      "timestamp": "2026-10-18T03:06:18.502686+01:00",
+      "hostname": "DESKTOP-156V213"
+    },
+    "wall_seconds": 0.87,
+    "pre_freeze_matches": {
+      "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+      "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true
+    },
+    "post_freeze_matches": {
+      "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+      "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true
+    },
+    "temporary_directory_removed": true,
+    "environment": "minimal system/runtime variables; plugins autoload and dotenv disabled; no environment objects output"
+  },
+  "real_quality_C": "NOT_EXECUTED_OPEN",
+  "limitations": [
+    "No production connector/source parser or final source-readiness claim reviewed here.",
+    "No independent real original/PDF inspection; calibration inspected through the bounded handed-off measurement and tests.",
+    "No full suite, actual source/C rerun, API/model/network, original/config mutation or environment/credential output."
+  ]
+}

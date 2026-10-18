@@ -15,7 +15,9 @@ from hashlib import sha256
 from math import isfinite
 from typing import Any
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/2"
+from .indented_tail_geometry import indented_terminal_tail_proof
+
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/3"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -40,6 +42,12 @@ def _number(value: Any) -> float | None:
 
 def _integer(value: Any) -> int | None:
     return value if type(value) is int else None
+
+
+def native_section_key(hints: Mapping[str, Any], fallback: Any) -> Any:
+    """Unknown optional hints never override an observed structural section."""
+    value = hints.get("section_key")
+    return fallback if value is None or (isinstance(value, str) and not value.strip()) else value
 
 
 def _terminal(text: str) -> bool:
@@ -206,7 +214,7 @@ class _Analysis:
         font = self.font(unit, frame)
         if font is None:
             return None
-        key = hints.get("section_key", section)
+        key = native_section_key(hints, section)
         scope = (key, profile.get("reading_profile_key"), profile.get("section_role"))
         return _Native(
             unit,
@@ -224,7 +232,59 @@ class _Analysis:
             left_closed,
         )
 
-    def edge(self, left: _Native, right: _Native) -> dict[str, Any] | None:
+    def tail_column_proof(self, left: _Native, right: _Native,
+                          witnesses: Sequence[_Native]) -> dict[str, Any] | None:
+        """Observed column or at most three contiguous original body witnesses.
+
+        A witness establishes a physical body band only. It supplies no words,
+        antecedent or semantic scope to the statement being grouped.
+        """
+        column = left.column
+        if ((type(column) is int and column >= 0)
+                or (isinstance(column, str) and 0 < len(column.strip()) <= 128)):
+            return {"basis": "observed_column", "column": column}
+        previous = right
+        chain = []
+        size = left.font[0]
+        for anchor in witnesses[:3]:
+            if not self.charge():
+                return None
+            if (anchor.source != left.source or anchor.page != left.page
+                    or anchor.frame != left.frame or anchor.scope != left.scope
+                    or anchor.font != left.font or anchor.column != column
+                    or anchor.unit.get("role") != left.unit.get("role")
+                    or anchor.ordinal != previous.ordinal + 1
+                    or anchor.paragraph != previous.paragraph + 1):
+                return None
+            if anchor.block == previous.block:
+                end = _integer(previous.provenance.get("block_char_end"))
+                start = _integer(anchor.provenance.get("block_char_start"))
+                if (anchor.bbox != previous.bbox or end is None or start is None
+                        or not 0 <= start - end <= 2
+                        or not anchor.provenance.get("block_sha256")
+                        or anchor.provenance.get("block_sha256") != previous.provenance.get("block_sha256")):
+                    return None
+            elif (anchor.block != previous.block + 1
+                    or not 0 <= anchor.bbox[1] - previous.bbox[3] <= 2 * size):
+                return None
+            box = anchor.bbox
+            if (not right.bbox[0] - 0.25 * size <= box[0] <= left.bbox[0] + 0.25 * size
+                    or abs(box[2] - left.bbox[2]) > size
+                    or box[2] - box[0] < left.bbox[2] - left.bbox[0] - size):
+                return None
+            chain.append({"unit_id": anchor.unit["unit_id"], "bbox": box})
+            if (abs(box[0] - right.bbox[0]) <= 0.25 * size
+                    and box[2] - box[0] >= left.bbox[2] - left.bbox[0] - 0.25 * size):
+                return {"basis": "contiguous_native_body_band",
+                        "anchor_unit_id": anchor.unit["unit_id"],
+                        "flow_witnesses": chain,
+                        "left_margin_error": abs(box[0] - right.bbox[0]),
+                        "right_margin_error": abs(box[2] - left.bbox[2])}
+            previous = anchor
+        return None
+
+    def edge(self, left: _Native, right: _Native, *,
+             column_witnesses: Sequence[_Native] = ()) -> dict[str, Any] | None:
         if not self.charge():
             return None
         if (
@@ -235,6 +295,7 @@ class _Analysis:
             or left.frame != right.frame
             or left.scope != right.scope
             or left.font != right.font
+            or left.unit.get("role") != right.unit.get("role")
         ):
             return None
         if left.column != right.column:
@@ -263,6 +324,21 @@ class _Analysis:
             return None
         a, b = left.bbox, right.bbox
         size = left.font[0]
+        # All source/page/scope/font/role/ordinal/column barriers above remain
+        # authoritative. This shape is a second measured line-flow proof,
+        # never a relaxation of the positive-overlap proof below.
+        tail = indented_terminal_tail_proof(a, b, size, left.unit["text"], right.unit["text"])
+        if tail is not None:
+            column_proof = self.tail_column_proof(left, right, column_witnesses)
+            if column_proof is None:
+                if self.stopped:
+                    return None  # The caller defers the whole pending run once.
+                self.diagnostics["CONTINUITY_TAIL_COLUMN_UNPROVEN"] += 1
+                self.defer([left, right])
+                return None
+            return {**tail, "left": left.unit["unit_id"], "right": right.unit["unit_id"],
+                    "font_weight": left.font[1], "coordinate_frame": left.frame[0],
+                    "column_proof": column_proof}
         overlap = min(a[2], b[2]) - max(a[0], b[0])
         gap = b[1] - a[3]
         if (
@@ -442,7 +518,28 @@ def build_native_continuity(
         if state.stopped:
             unexamined = seen - 1
             break
-        edge = state.edge(run[-1], current) if run and current is not None else None
+        column_witnesses = []
+        if (run and current is not None and run[-1].column is None and current.column is None
+                and indented_terminal_tail_proof(run[-1].bbox, current.bbox, run[-1].font[0],
+                                                run[-1].unit["text"], current.unit["text"]) is not None):
+            # Bounded read-only lookahead: do not cross an excluded unit or an
+            # input limit, and charge each validation to this same analysis.
+            for witness_index in range(seen, min(len(units), seen + 3, state.limits["max_units"])):
+                witness_wire = units[witness_index]
+                witness_uid = str(witness_wire.get("unit_id") or "")
+                witness = state.native(witness_wire, provenance.get(witness_uid, {}),
+                    profiles.get(witness_uid, {}), unit_section.get(witness_uid), headings, False)
+                if witness is None or state.stopped:
+                    break
+                column_witnesses.append(witness)
+        edge = state.edge(run[-1], current, column_witnesses=column_witnesses) if run and current is not None else None
+        if state.stopped:
+            # Exhausting lookahead/edge work cannot turn the left half of an
+            # unproven pair back into an independently admissible singleton.
+            state.defer([*run, *([current] if current is not None else [])])
+            unexamined = max(0, seen - 1 - len(run))
+            run, proof = [], []
+            break
         if edge:
             run.append(current)  # type: ignore[arg-type]
             proof.append(edge)

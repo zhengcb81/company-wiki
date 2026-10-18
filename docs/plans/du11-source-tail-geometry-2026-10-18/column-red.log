@@ -1,0 +1,67 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 24 items
+
+tests\unit\du11_tail_integration\test_tail_source_wiring.py ............ [ 50%]
+.FFFFFFFFFF.                                                             [100%]
+
+================================== FAILURES ===================================
+__________ test_absent_column_labels_cannot_certify_negative_overlap __________
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:77: in test_absent_column_labels_cannot_certify_negative_overlap
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[None] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:108: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert proof["column_proof"]["anchor_unit_id"] == anchor[0]["unit_id"]
+           ^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'column_proof'
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[heading] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[table] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[role] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[font] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[scope] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[gap] __
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[margin] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+_ test_unknown_columns_require_an_immediately_adjacent_actual_body_band[far_ordinal] _
+tests\unit\du11_tail_integration\test_tail_source_wiring.py:110: in test_unknown_columns_require_an_immediately_adjacent_actual_body_band
+    assert not result["windows"]
+E   AssertionError: assert not [{'window_id': 'native-continuity:37d1337c6504bd810657fc475b40477e59d746f41a719b1c182fc5f7ea34fb9b', 'source_id': 'source-a', 'page': 7, 'member_unit_ids': ['source-a:0', 'source-a:1'], ...}]
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_absent_column_labels_cannot_certify_negative_overlap
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[None]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[heading]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[table]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[role]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[font]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[scope]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[gap]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[margin]
+FAILED tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_unknown_columns_require_an_immediately_adjacent_actual_body_band[far_ordinal]
+======================== 10 failed, 14 passed in 4.59s ========================
