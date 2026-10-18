@@ -13,7 +13,7 @@
 
 - **B2 已完成、最终复审 PASS、已发布**：`d55d3369`（三审修复）、`6a2ee853`（性能修复）、`2a80acf6`（复审两个 P1：长名称截断、截断被误判为 missing）。最终复审 PASS（`review/b2-antecedent-final-review-20261018-v3.md`）；`tests/unit/du11_source_closure` **110 PASS**；三源回放绑定 `b2-final3-20261018`（CN 10/10）与 `b2-real-sources-final2-20261018`（HK 7/7、US 8/8），原件/gold 未变、0 API；CI `2a80acf6` success（收据 `ci-39139605025.json`）。
 - **C 工程侧已通过**：CN（MiMo）与 US（MiniMax）各 1 次真实 POST，`activation_recovery=PASS`（同 attempt、无新增扣费），`cross_run_zero_POST=true`，FF 复用与 RF 读取通过；HK 因 `DEEPSEEK_API_KEY` 401 未跑（无结算发票，但有一条 69,046 tokens / $0.031208 的 unknown hold）。
-- **C 内容侧未通过**：CN 最佳 required 8/10（critical 5/7），US 最佳 4/8；4.0.8 指令回归后已回退。复审报告：`review/c-content-review-20261018-cn-v3.md`、`...-cn-v4.md`。
+- **C 内容侧：按 8/10 收尾（用户决定，2026-10-18）**：CN 最佳 required 8/10（critical 5/7），US 最佳 4/8，HK 未跑（DeepSeek 401）。不是内容验收通过，而是经用户确认的收尾口径；模型评估计划见 PWF 顶部。复审报告：`review/c-content-review-20261018-cn-v3.md`、`...-cn-v4.md`。
 - **覆盖修复（A）状态：实验性、默认关闭**。实现走现有 retry（两次 attempt、两次计费），`CW_SUMMARY_COVERAGE_REPAIR=1` 才启用；已实测两次 POST 并合并成功、run 进入 `activation_pending`。未解决：`activation-resume` 与重试 attempt 的 `reopen_paid_output` 冲突；MiMo 首响应 JSON 约每 3 次失败 1 次。默认关闭时不改变任何现有流程。
 - **待拍板**：接受 CN 8/10 收尾（推荐），或继续解决上述两个残余问题后再做内容复审。
 - 累计付费：44 个 attempt、900,711 tokens / $0.238405（ledger 去重口径，核对于 2026-10-18；不含 metadata 记录的历史基线，上限 2M / $20）。
