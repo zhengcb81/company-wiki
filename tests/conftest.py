@@ -58,6 +58,26 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 sys.path.insert(0, str(Path(__file__).parent))
 
 
+@pytest.hookimpl(tryfirst=True)
+def pytest_collectstart(collector):
+    """Keep the tests root ahead of per-directory ``fixtures`` packages.
+
+    Several lane conftests insert their own directory at ``sys.path[0]`` so
+    that their data files resolve, and those directories contain a
+    ``fixtures/`` folder.  When the gate runs a mixed selection, that folder
+    then shadows ``tests/fixtures`` and the decision-dependency / profile
+    tests fail with ModuleNotFoundError.  Re-assert the tests root before each
+    module is imported; per-directory entries stay available behind it.
+    """
+    root = str(Path(__file__).parent)
+    if not sys.path or sys.path[0] != root:
+        try:
+            sys.path.remove(root)
+        except ValueError:
+            pass
+        sys.path.insert(0, root)
+
+
 @pytest.fixture(scope="session")
 def wiki_root(tmp_path_factory):
     """创建临时 wiki 根目录"""
