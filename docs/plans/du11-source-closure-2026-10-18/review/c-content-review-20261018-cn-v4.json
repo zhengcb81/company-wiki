@@ -1,0 +1,323 @@
+{
+  "schema": "du11-content-review-cn-v4/1",
+  "reviewed_at": "2026-10-18T15:10:00+08:00",
+  "scope": "fourth-round CN formal C content review; no source/test/config changes; no provider calls",
+  "run_dir": ".planning/shared-reading-production/du11/live-cn-h1-b2v4e-20261018",
+  "model": "mimo-v2.6-flash",
+  "prompt_version": "reading-source-scoped/4.0.8",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "claims": 14,
+  "evidence_spans": 96,
+  "receipt_status": "PASS",
+  "quality_status": "needs_review",
+  "selection_status": "partial",
+  "tokens": 15071,
+  "micro_usd": 2665,
+  "conclusion": "CONTENT_FAIL",
+  "required_hits": "6/10",
+  "critical_hits": "4/7",
+  "partial": [
+    "f-gan-power-stage"
+  ],
+  "reason": "f-five-year and f-current30 closed. f-inp and f-sic regressed to missing; f-gan is only partial via page27 technical PRISMO PD5 (no 2022 launch/customer validation from page18); Primo Matrix missing; t45-1 text is corrupted (公司在上\\nte海临港). Full critical 4/7 (5/7 if f-gan partial counted).",
+  "previous_p1_closure": [
+    {
+      "id": "CN-P1-1",
+      "title": "f-five-year-target-is-plan",
+      "status": "closed",
+      "evidence": "t13-2 planned: 未来五年 60%/70%; source page13/paragraph18."
+    },
+    {
+      "id": "CN-P1-2",
+      "title": "f-current-coverage-30",
+      "status": "closed",
+      "evidence": "t13-1 actual: 五十多种/超30%; source same paragraph."
+    },
+    {
+      "id": "CN-P1-3",
+      "title": "f-inp-development-started",
+      "status": "regressed_open",
+      "evidence": "No InP claim in 14 claims; selected page18/paragraph29 remains."
+    },
+    {
+      "id": "CN-P1-4",
+      "title": "f-sic-8inch-stage",
+      "status": "regressed_open",
+      "evidence": "No 8-inch SiC claim; selected page18/paragraph21 remains."
+    },
+    {
+      "id": "CN-P1-5",
+      "title": "f-gan-power-stage",
+      "status": "partial_open",
+      "evidence": "t55-1 only page27 technical PRISMO PD5 validation/repeat; no page18 2022 launch/customer validation."
+    }
+  ],
+  "required_coverage": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t13-2",
+      "note": "future 60/70 planned"
+    },
+    {
+      "id": "f-current-coverage-30",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t13-1",
+      "note": "50+/30% current"
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t12-1"
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t30-1"
+    },
+    {
+      "id": "f-gan-power-stage",
+      "importance": "critical",
+      "status": "partial",
+      "claim": "t55-1",
+      "note": "PRISMO PD5/validation/repeat but missing 2022 launch/customer delivery validation; t55 asserts validation passed, conflicting with gold must_not_assert PRISMO PD5 已完成生产验证"
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "importance": "critical",
+      "status": "missing",
+      "claim": null,
+      "note": "selected page18/paragraph21 has 8-inch SiC validation/repeat; no claim"
+    },
+    {
+      "id": "f-inp-development-started",
+      "importance": "critical",
+      "status": "missing",
+      "claim": null,
+      "note": "selected page18/paragraph29 has InP development/H2 plan; no claim"
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "importance": "normal",
+      "status": "missing",
+      "claim": null,
+      "note": "selected page18/paragraph35 has Primo Matrix; t38-1 only TSV300E"
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "importance": "normal",
+      "status": "hit",
+      "claim": "t38-1"
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "importance": "normal",
+      "status": "hit",
+      "claim": "t38-2"
+    }
+  ],
+  "claim_support": [
+    {
+      "id": "t8-1",
+      "locator": "page10/paragraph14/chars341-436",
+      "verdict": "supported"
+    },
+    {
+      "id": "t12-1",
+      "locator": "page13/paragraph4/chars88-219",
+      "verdict": "supported"
+    },
+    {
+      "id": "t13-1",
+      "locator": "page13/paragraph18/chars495-605",
+      "verdict": "supported"
+    },
+    {
+      "id": "t13-2",
+      "locator": "page13/paragraph18/chars495-605",
+      "verdict": "supported"
+    },
+    {
+      "id": "t14-1",
+      "locator": "page15/paragraph7/chars137-294",
+      "verdict": "supported"
+    },
+    {
+      "id": "t30-1",
+      "locator": "page18/paragraph6/chars152-250",
+      "verdict": "supported"
+    },
+    {
+      "id": "t38-1",
+      "locator": "page18/paragraph35/chars945-1115",
+      "verdict": "supported_partial_scope",
+      "severity": "P2",
+      "note": "only TSV300E; Primo Matrix missing"
+    },
+    {
+      "id": "t38-2",
+      "locator": "page18/paragraph35/chars945-1115",
+      "verdict": "supported"
+    },
+    {
+      "id": "t45-1",
+      "locator": "page19/paragraph39/chars1032-1160",
+      "verdict": "text_corruption",
+      "severity": "P1",
+      "note": "claim 公司在上\\nte海临港 vs source 公司在上\\n海临港; extra te; actual also includes 拟于2026H2 plan P2"
+    },
+    {
+      "id": "t46-1",
+      "locator": "page19/paragraph44/chars1160-1231",
+      "verdict": "supported_modality_mixed",
+      "severity": "P2",
+      "note": "planned claim includes 已于2026-07封顶 actual"
+    },
+    {
+      "id": "t51-1",
+      "locator": "page25/paragraph21/chars453-625",
+      "verdict": "supported"
+    },
+    {
+      "id": "t51-2",
+      "locator": "page25/paragraph21/chars453-625",
+      "verdict": "supported"
+    },
+    {
+      "id": "t55-1",
+      "locator": "page27/paragraph11/chars317-455",
+      "verdict": "supported_technical_only",
+      "severity": "P1",
+      "note": "supports PRISMO PD5 technical/validation/repeat but not f-gan 2022 launch/customer delivery; validation passed conflicts with gold must_not_assert"
+    },
+    {
+      "id": "t64-1",
+      "locator": "page33/paragraph16/chars433-523",
+      "verdict": "supported"
+    }
+  ],
+  "findings": [
+    {
+      "id": "CN-P1-1",
+      "severity": "P1",
+      "title": "Missing InP development fact (regression)",
+      "claim": null,
+      "source_locator": "page18/paragraph29/chars819-932",
+      "source_quote": "于报告期内启动磷化铟（InP）材料体系专用MOCVD 设备的开发，实验室已取得良好进展。下半年将…尽早付运样机至客户端开展生产验证。",
+      "impact": "f-inp-development-started critical missing; prior round t37 hit; selected evidence present.",
+      "fix": "Restore InP claim with report-period start/lab progress/H2 plan and planned modality."
+    },
+    {
+      "id": "CN-P1-2",
+      "severity": "P1",
+      "title": "Missing 8-inch SiC fact (regression)",
+      "claim": null,
+      "source_locator": "page18/paragraph21/chars574-687",
+      "source_quote": "目前，该新型8 寸碳化硅外延设备已进入国内头部企业进行生产验证，并取得了重复订单。",
+      "impact": "f-sic-8inch-stage critical missing; prior round t34 hit; selected evidence present.",
+      "fix": "Restore 8-inch SiC claim; keep validation/repeat orders."
+    },
+    {
+      "id": "CN-P1-3",
+      "severity": "P1",
+      "title": "GAN power stage only partial (no 2022 launch)",
+      "claim": "t55-1",
+      "source_locator": "page27/paragraph11; missing page18/paragraph14",
+      "source_quote": "page18: 于2022 年推出…PRISMO PD5…已交付客户进行生产验证，并取得重复订单；claim only page27 technical validation/repeat",
+      "impact": "f-gan-power-stage partial and partly wrong: 2022 launch/customer delivery validation absent; t55 says validation passed, conflicting with gold must_not_assert PRISMO PD5 已完成生产验证; critical full hit not achieved.",
+      "fix": "Add/supplement t32-equivalent claim from page18/paragraph14; keep actual modality."
+    },
+    {
+      "id": "CN-P1-4",
+      "severity": "P1",
+      "title": "t45-1 corrupted text",
+      "claim": "t45-1",
+      "source_locator": "page19/paragraph39/chars1032-1160",
+      "source_quote": "source: 公司在上\\n海临港…; claim: 公司在上\\nte海临港…",
+      "impact": "Visible malformed text (extra te) in a facility claim; content corruption.",
+      "fix": "Regenerate from source without inserting te; validate exact quote; add text integrity check."
+    },
+    {
+      "id": "CN-P2-1",
+      "severity": "P2",
+      "title": "Missing Primo Matrix required normal fact",
+      "claim": null,
+      "source_locator": "page18/paragraph35/chars945-1115",
+      "source_quote": "Primo Matrix 即将发往国内头部客户产线验证",
+      "impact": "f-advanced-packaging-primo-matrix required normal missing; t38-1 only TSV300E.",
+      "fix": "Add Primo Matrix claim or extend t38-1 without losing TSV300E."
+    },
+    {
+      "id": "CN-P2-2",
+      "severity": "P2",
+      "title": "t45-1 actual modality includes future construction",
+      "claim": "t45-1",
+      "source_locator": "page19/paragraph39",
+      "source_quote": "临港二期约20 万平方米…拟于2026 年下半年开工建设",
+      "impact": "Actual claim includes future plan (separate from text corruption).",
+      "fix": "Split actual in-use/completed from planned 2026H2 start."
+    },
+    {
+      "id": "CN-P2-3",
+      "severity": "P2",
+      "title": "t46-1 planned modality includes actual topping-out",
+      "claim": "t46-1",
+      "source_locator": "page19/paragraph44",
+      "source_quote": "主体结构已于2026 年7 月封顶，计划2027 年投产",
+      "impact": "Planned claim contains actual event; modality mixed.",
+      "fix": "Split actual topping-out / planned 2027 production."
+    },
+    {
+      "id": "CN-P2-4",
+      "severity": "P2",
+      "title": "Advanced packaging coverage split",
+      "claim": "t38-1/t38-2",
+      "source_locator": "page18/paragraph35",
+      "source_quote": "TSV300E…Primo Matrix…第三代TSV…",
+      "impact": "TSV300E + third-gen covered, Primo Matrix missing.",
+      "fix": "Add Matrix claim; keep three required facts together."
+    },
+    {
+      "id": "CN-P2-5",
+      "severity": "P2",
+      "title": "t55 technical claim treated as GAN coverage",
+      "claim": "t55-1",
+      "source_locator": "page27/paragraph11",
+      "source_quote": "PRISMO PD5…验证通过并获得重复订单",
+      "impact": "Technical/validation fact is not the 2022 launch fact; partial only.",
+      "fix": "Add page18 launch claim; do not count technical only as full GAN."
+    },
+    {
+      "id": "CN-P3-1",
+      "severity": "P3",
+      "title": "No investment/translation/number errors",
+      "claim": null,
+      "source_locator": "all numeric claims",
+      "source_quote": "1659亿美元/23.2%; 20.41/5.50亿元/36.86%/30.51%; 18/20/10万平方米; 130/50亩; 1400度/18片/4英寸; 4腔/6-8英寸",
+      "impact": "Verified; no error.",
+      "fix": "None."
+    }
+  ],
+  "numbers_units": "No mismatch found: 1659亿美元/23.2%; 20.41/5.50亿元/36.86%/30.51%; 18/20/10万平方米; 130/50亩; 1400度/18片2英寸/4英寸; 4腔/6-8英寸; 8寸; 60:1. t45 text corruption is not a number error.",
+  "language": "zh; product English names; translate=false; no translation/mixing except t45 corruption",
+  "investment_conclusions": "none; no rating/target price/valuation/buy-sell advice",
+  "unverified": [
+    "Full original PDF not reparsed; selected evidence spans + gold used.",
+    "No model rerun; cannot test whether InP/SiC/2022 GAN/Primo Matrix would appear with another prompt iteration.",
+    "Prompt 4.0.8 implementation and claim cap not audited; 14 claims produced.",
+    "Whether prompt's coverage/market-share instruction crowded out product/customer/capacity facts unverified; evidence selected but claims absent.",
+    "Source/gold SHAs not independently rehashed.",
+    "Engineering recovery/cache/FF-RF not reviewed.",
+    "US not rerun/reviewed this round."
+  ],
+  "notes": [
+    "f-five-year and f-current30 are now closed; InP/SiC regressed; GAN partial; t45 text corrupted.",
+    "Full required 6/10; critical 4/7 (5/7 if GAN partial counted).",
+    "All new claims except t45 are source-supported; no wrong numbers/units or investment conclusions.",
+    "Report pair: review/c-content-review-20261018-cn-v4.md and .json."
+  ]
+}
