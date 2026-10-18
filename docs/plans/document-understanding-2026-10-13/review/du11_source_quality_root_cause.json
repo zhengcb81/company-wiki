@@ -1,0 +1,325 @@
+{
+  "schema_version": "du11-source-quality-root-cause/1",
+  "status": "READ_ONLY_DESIGN_COMPLETE_CONTENT_C_OPEN",
+  "scope": {
+    "source_edits": false,
+    "tests_run": 0,
+    "pdf_parses": 0,
+    "api_calls": 0,
+    "network_calls": 0,
+    "keys_read": false,
+    "original_writes": 0,
+    "new_raw_copies": 0
+  },
+  "method": [
+    "CodeGraph structural navigation",
+    "literal source inspection",
+    "existing independent reports",
+    "existing CN gzip bundle/request JSON; no project code imported"
+  ],
+  "confirmed_roots": [
+    {
+      "id": "R1",
+      "severity": "P1",
+      "owner": "SourceOperatingSession + narrative_business_policy + narrative_reading._admitted",
+      "cause": "Generic grammatical eligibility/any relation confers financial exemption; source intent can substitute for operating-purpose evidence",
+      "repair": "One cached local-purpose/actor assessment, not chapter/company/keyword blacklist"
+    },
+    {
+      "id": "R2",
+      "severity": "P1",
+      "owner": "narrative_continuity + narrative_reading._prose_reading_packages",
+      "cause": "Risk/singleton fallback and right-terminator/native-range proof do not establish complete left/right assertion",
+      "repair": "Every prose kind consumes bounded source closure; actual original reference graph or explicit defer"
+    },
+    {
+      "id": "R3",
+      "severity": "P1",
+      "owner": "operating_states.relations + narrative_reading._context + summary_tasks/source_cards",
+      "cause": "Container company_filing and required-heading membership substitute for speaker/product referent/factual-support proof",
+      "repair": "Observed source actor/unique antecedent references; heading dependencies context; consumers project readiness only"
+    },
+    {
+      "id": "R4",
+      "severity": "P1",
+      "owner": "structure.table_purpose + existing native table/header bridge + reading context",
+      "cause": "Operating-purpose eligibility and membership mistaken for period/value/unit and section closure",
+      "repair": "Actual row/column/period/unit closure or explicit incomplete; preserve approximate/exact distinction"
+    },
+    {
+      "id": "R5",
+      "severity": "P1",
+      "owner": "narrative_model_extractive.compile_extractive_plan + source-owned policy metadata",
+      "cause": "Native-order first-fit whole cards consume draft before important tail RPO; model ranking occurs too late",
+      "repair": "Bounded deterministic source-priority whole-card allocation, stable identities, same cap, all dispositions"
+    }
+  ],
+  "actual_case_metrics": {
+    "CN": {
+      "tasks": 64,
+      "claims": 64,
+      "spans": 96,
+      "required_canonical": 10,
+      "required_total": 10,
+      "precision_and_closure": "CHANGES_REQUIRED",
+      "paid_posts": 1,
+      "tokens": 14720,
+      "microUSD_proxy": 2619
+    },
+    "HK": {
+      "tasks": 55,
+      "claims": 55,
+      "spans": 96,
+      "required_anchor_alternatives": 7,
+      "required_total": 7,
+      "literal_required": 6,
+      "consumer": "FF_SECURITY_ID_MISMATCH_RF_NOT_REACHED",
+      "precision_and_closure": "CHANGES_REQUIRED"
+    },
+    "US": {
+      "tasks": 59,
+      "claims": 54,
+      "spans": 96,
+      "required_source": 8,
+      "required_canonical": 6,
+      "required_total": 8,
+      "deferred_tasks": 5,
+      "reason": "draft_byte_budget",
+      "important_late_card": "t59 RPO scope/date and conversion"
+    }
+  },
+  "evidence_limits": [
+    "No new dynamic execution of t64 relation; exact low-level predicate must be captured by RED trace",
+    "HK/US content observations independently reported; original PDFs not re-opened in this investigation",
+    "Current three companies are development regressions, not blind holdouts",
+    "Actual activation recovery not equivalent to actual provider paid decode-fault injection",
+    "CN invalid advisory rank and HK consumer alias remain separate open concerns"
+  ],
+  "tdd_families": [
+    "CN/TC/EN pure accounting/audit/template negatives with business-inside-notes positives",
+    "risk singleton/left word cut/right punctuation/strict native continuity",
+    "unique product antecedent and actual speaker, competing/source/question barriers",
+    "dated table row/header/unit values and exact-vs-approx controls",
+    "order-adversarial low-value prefix plus complete late RPO under actual byte cap",
+    "budget defer and actual causal cache identity"
+  ],
+  "acceptance_nodes": [
+    "A portable RED and minimal source-owner contract",
+    "B concentrated owner/cross-layer tests and independent final-SHA review",
+    "C offline captured-support replay then configured real three suppliers and unseen-company holdout"
+  ],
+  "prohibited_repairs": [
+    "Company/task/page-specific rules",
+    "Blanket exclusion of financial chapters",
+    "Trimming or invented context/letters/values",
+    "LLM deletion or rewriting canonical facts",
+    "Increasing span/work/byte caps",
+    "Second parser/classifier/store or new manual approval chain",
+    "Mutating old paid run/generation to repaired quality"
+  ],
+  "inspected_file_bindings": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "20cb13f7e4259d53e6f418da457efc1b28ae8e78b4fcacd2bcc38f2948e12a0c",
+      "bytes": 43744
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "f68e2039cdb9325053fec465faca053fb51dfc5083ed9ca44ad93c3da10fe70c",
+      "bytes": 7860
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "a61e30673ae8411db7d9f508a4ccdffc66422598572092569bbe6de601a63cb6",
+      "bytes": 45847
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "sha256": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1",
+      "bytes": 111891
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_native_ranges.py",
+      "sha256": "b42aeb4b09896de059b0130957040e16baaf04415aa0d3e98093fb0662343dda",
+      "bytes": 11879
+    },
+    {
+      "path": "src/company_wiki/source_catalog/admission.py",
+      "sha256": "d177821c1216d92d9f4a9a277b5ed682e7b05c7f38a863e4d3631b2f8e74f22c",
+      "bytes": 10699
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "97903dd9e4c098615a63b4b793483514264204db795eaa981c64d831f6656059",
+      "bytes": 15819
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "858283b62a6f743877f27a82de234d4ee9ecc155d6c594e553e11b63a9fd1831",
+      "bytes": 38596
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/paragraphs.py",
+      "sha256": "93af3606fae496ea548f69d6c5ae9930d5f4489abad2cc273777b396ea0ccfa5",
+      "bytes": 6268
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/layout.py",
+      "sha256": "83e9bccec62042eab948703222275bca80b840a30f72e9308bb752d86c941c5f",
+      "bytes": 13126
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    {
+      "path": "src/company_wiki/document_understanding/native_table_bridge.py",
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+      "bytes": 11888
+    },
+    {
+      "path": "src/company_wiki/document_understanding/summary_tasks.py",
+      "sha256": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+      "bytes": 7408
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "sha256": "c3a69c88c018adaf55d0ab75d2f0896d2e444959501d99f45cbf9d692632aba5",
+      "bytes": 1492
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "54e2cf4bbaef6c46dc650d6c6a605627aab7d3b1ad3299c3dd12b5a7771821ed",
+      "bytes": 23497
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "sha256": "2f4e745da626f8391aa798a2f709935ccbe1b436c80b58d65baf55935097b7d1",
+      "bytes": 15282
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-independent-review/cn-h1.md",
+      "sha256": "4e5974a9fe4a303a8a2a75ce93e7070ef3fb8a71cb6d9783db842a8feac38f41",
+      "bytes": 6563
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-independent-review/cn-h1.json",
+      "sha256": "7c5ec5a5c06e53512b6fb29b7d2b4d8bc36a5836e17be7b625ffc98f83a9927c",
+      "bytes": 35879
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-independent-review/hk-annual.md",
+      "sha256": "3a8a1db24aae5095361127bd530fbe861e12dab79700eebb3e02db2442d7a0df",
+      "bytes": 5619
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-independent-review/hk-annual.json",
+      "sha256": "1a7a40dce9155605bb241145bd639943a2bdc68fb0029d9f9e5e11c1a7e90737",
+      "bytes": 39204
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-independent-review/us-10k.md",
+      "sha256": "bad0a1d1517ddb215d12ce9d0b9c47e48dcbbd4a636afc04c5b7edb8c1a05bb4",
+      "bytes": 5657
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-independent-review/us-10k.json",
+      "sha256": "eafe1d4d084b71162b6b501992cc10e7eea2f4cddde7c8fce9d4223dc8d9185b",
+      "bytes": 32167
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/du11_real_c_quality_followup.md",
+      "sha256": "244953561dcdcd84f3c589450463f773acb116b58b12f19f8648ea8f8cdd18d6",
+      "bytes": 9707
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-cn-a8eef273-20261018/phaseC-090-d4c5fd707b44.bundle.json.gz",
+      "sha256": "9a4f5ab8d598a0a06a81d5e0274811f25cd16c1d3627279b5ff42281e3d1493a",
+      "bytes": 110858
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-cn-a8eef273-20261018/materials/phaseC-090-d4c5fd707b44.input.json.gz",
+      "sha256": "1f5290efcedb963f253cf67125a9f56094a82d781d815357f2a556c28bdd723e",
+      "bytes": 17922
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/live-v5-cn-a8eef273-20261018/materials/phaseC-090-d4c5fd707b44.fd59e5954595418c80c37e694e9f0cde.response.json.gz",
+      "sha256": "847154a1434f0c71001ebac1524a14a992f793b9dd06640f0a384e13387b6cca",
+      "bytes": 383
+    }
+  ],
+  "report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\source-quality-root-cause.md",
+    "sha256": "613e1a3bd06b9a7cd61460a892c894be156fbed3c63ce68beb6157ca70c1cf12",
+    "bytes": 21159
+  },
+  "reviewed_source_base": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "head_at_receipt_write": "9daa0c3899e459eb719e3fa1ee6438b43fe6f172",
+  "source_base_comparison": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_native_ranges.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/admission.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/paragraphs.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/layout.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/native_table_bridge.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/summary_tasks.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "normalized_equal_to_reviewed_base": true
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "normalized_equal_to_reviewed_base": true
+    }
+  ]
+}

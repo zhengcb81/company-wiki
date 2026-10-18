@@ -703,3 +703,11 @@ ROOT临时工区已正常移除，但收据脚本默认GBK解码git worktree中�
 ### 最后ET接收的实际联调结果与遗留断言修复
 
 ET454PASS、10gold、ruff绿；FF117PASS（显式W07_ET_TOOL真实ET CLI，未skip）。CWP provider/import原11PASS/1FAIL仅文件名旧前缀：现canonical writer经d71c8e4f已统一内容SHA/Windows路径预算命名。旧contract不该把供应商或发布日期绑定物理命名；移除此一旧前缀断言，保留.json类型、完整原件SHA/字节、SourceRef、provenance publication=None/as-of未知、reader query/open、历史截止拒绝与重复复用。首次失败收据保留，不修改生产storage或ET已审源码。复测只重放受影响CWP联调，不再重跑不变ET454/FF117。
+
+## 2026-10-18 ROOT继续：两外包独占，质量整改与推送范围调查
+
+两张DU11卡已发出，RF citation-closure及FF local-transcript-reuse作者工区继续独占。F3在内部独立工区完成单一market-qualified代码规范化与canonical候选投影；不同agent独审37PASS13.20s，真实FF两方向零下载/原文SHA/同尺寸篡改拒绝通过，等待正常提交接收；真实HK旧C消费节点仍待0新增POST重放。
+
+ROOT F1先15个行为测试9FAIL6PASS，修后15PASS；补跨句借词/审计RPO/真正审计软件/预算耗尽反控再3FAIL18PASS，修后集中179PASS4.88s。源用途与语法关系分开、逐分句观察、实际业务财务附注保留、未观察用途不绕工作预算回退。尚未提交，不把它视为F2闭合或真实C通过。F4源卡按已有策略分配同56KiB已在内部并行完成56PASS，等待不同agent独审及ROOT字段生产投影测试。
+
+正常push9daa0c38被本地600秒上限拒绝：6696项进行至98%，没有已出现的断言失败；不是远端CI失败。首个过宽触发为nested fixture-only conftest，全量推断忽略pytest目录责任。先1FAIL12PASS复现，修后56PASS2.54s，独审额外发现并修顺序别名遮蔽/导入hook/装饰参数和函数默认值/注解模块执行；global hook/plugin/未知路径仍fallback。该修复仍待最终独审。当前完整提交范围仍因tools README未知资源等触发full，不声称已经缩成局部，不抬600秒、不跳hook、不盲重试。下一次正式发布在集成大节点集中执行。

@@ -59,3 +59,17 @@ C：先用已付费响应和源证据离线重放验证F1/F2（禁止把旧响�
 真实预算按原usage.jsonl累计：旧未知7保留，新401未知hold68227tokens/12737microUSD保留。未知次数不是额外全局停机门；原累计200万tokens/$20上限和已确认配置仍执行。严禁换账本、抹失败、改gold、提高容量、添加逐材料许可来换绿色。
 
 通过后正常提交/并线/推送并记录精确CI；随后执行母计划的新公司holdout和RF完整审查循环。该后续未完成前不能把整个项目目标标complete。
+
+## A节点冻结：先行行为RED与实现接口
+
+ROOT源质量分支codex/du11-source-quality位于C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki；F3身份分支独立于C:/Users/郑曾波/.codex/worktrees/du11-identity-projection/company-wiki，两者不改对方文件。F1/F2/容量由ROOT负责，F3由内部实现agent负责并由不同agent独审；外包RF/FF工区不写。
+
+已写第一组真实行为反例tests/unit/du11_source_quality/test_business_admission.py：中文/繁体/英文会计、租赁会计、审计、勾选、导航、理财8个否控；真实工厂租赁、CMP并购协同、AI/定价平台客户、RPO转化、否定客户认证、研发人员扩充7个正控。原实现实际9FAIL6PASS6.09s，其中RPO正例也错误拒绝；不是只测负例使代码全拒绝即可绿。
+
+最小实现约束：
+- 继续只用现SourceOperatingSession一次缓存assessment。OperatingFact可增加有默认值的source-purpose观察，或在同owner封装极小只读assessment；保留现fact/financial_only兼容调用，不能把所有非业务项伪装财务项或重跑第二recognizer。_admitted必须消费同一purpose，section标签不得将纯模板/会计重新晋升。
+- 独立出处/物理闭合仍由native/structure owner给出；source-card/task只消费有限就绪度及原因、actual support/context和既有来源策略priority，不再次按关键词解析或代替source层推理。保持既有public reading_context/1/2及SourceExport字段，必要附加观察使用已有EvidenceSpan有界structured metadata/quality vocabulary，不能向严格group/claim任意加字段。具体枚举需在实现前按现契约核对。
+- 容量分配复用现reading priority/value_band/score，不新建金标优先级。准入次序可不同于原文次序，但task/evidence/绑定身份及报告顺序保持确定；按现UTF8整卡计数，所有未入卡均可解释，不能提高64KiB/56KiB上限。
+- 改动purpose/closure/priority的source owner要进入当前因果依赖；历史raw/付费run/原响应不改签。所有新增观察都是资料诊断，不是新权限/许可/人工放行。
+
+单一根因和现有源码/测试责任图详见du11_source_quality_root_cause.md/json。A还需补齐closure/table/capacity反控后进入B集中实现，不能仅凭这15个目的分类用例关闭F1/F2。
