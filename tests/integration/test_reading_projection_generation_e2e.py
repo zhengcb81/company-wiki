@@ -225,19 +225,22 @@ if __name__ == "__main__":
             legacy_ref, legacy_bundle, _ = public_read(root, config, imported, kind)
             new_path = request_path(root, imported, loopback_model_server.endpoint, "new-input", selector_version="0.9.0")
             process, current = invoke(root, config, new_path, llm, "new-input")
-            _proof(root, loopback_model_server, current, historical_projection, "current-v3-miss")
+            _proof(root, loopback_model_server, current, historical_projection, "current-v5-miss")
             assert process.returncode == 0 and current["status"] == "completed", current
             assert len(loopback_model_server.requests) == 2
             manifest = _thaw_generations(json.loads(runs.get_run("new-input").binding_json))[key]
-            assert manifest["reading_model_projection"] == "reading-model-input/3"
-            assert manifest["reading_model_boundary"]["reading_projection_version"] == "reading-model-input/3"
+            assert manifest["reading_model_projection"] == "reading-model-input/5"
+            assert manifest["reading_model_boundary"]["reading_projection_version"] == "reading-model-input/5"
             data = json.loads(json.loads(loopback_model_server.requests[1][1])["messages"][1]["content"])
-            assert data["schema_version"] == "narrative-model-request/4"
-            assert data["reading_strategy"]["schema_version"] == "reading-model-input/3"
-            assert set(versioned_replies[1][1]) == {"claims"}
+            assert data["schema_version"] == "narrative-model-request/6"
+            assert data["reading_strategy"]["schema_version"] == "reading-model-input/5"
+            assert set(versioned_replies[1][1]) == {"decisions"}
             assert "evidence_groups" not in data
-            assert data["citation_unit_columns"] == ["id", "evidence_ids", "support_evidence_ids"]
-            assert data["evidence"] == old_data["evidence"]
+            material = data['material']
+            fragments = material['shared_fragments'] + [part for task in material['tasks']
+                for part in task['parts'] if 'text' in part]
+            fragments.sort(key=lambda row: int(row['source_key'][1:]))
+            assert [row['text'] for row in fragments] == [row[1] for row in old_data['evidence']]
             assert runs.reservations_for_run("new-input")[0].request_sha256 != after[0]["request_sha256"]
             assert current["documents"][0]["artifact_ref"] != restored["documents"][0]["artifact_ref"]
             new_usage = tuple(asdict(row) for row in runs.reservations_for_run("new-input"))

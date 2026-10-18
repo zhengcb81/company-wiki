@@ -208,11 +208,16 @@ def _failure(
 
 
 def _success(
-    result: NarrativeSummaryResult, metrics: HandlerMetrics | None = None
+    result: NarrativeSummaryResult, metrics: HandlerMetrics | None = None,
+    *, execution: Mapping[str, Any] | None = None,
 ) -> HandlerResult:
+    wire = result.to_dict()
+    if execution is not None:
+        from .narrative_summary_execution import wrap_summary
+        wire = wrap_summary(result, execution)
     return HandlerResult(
         outcome=HandlerOutcome.SUCCEEDED,
-        result=result.to_dict(),
+        result=wire,
         artifacts=(),
         effects=(),
         metrics=metrics or HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
@@ -360,8 +365,14 @@ class NarrativeSummarizeHandler:
             except ModelResponseError as exc:
                 raise _SummaryFailure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                                       str(exc)) from exc
-        request = build_model_request(selected,
-            reading_projection_version=reading_projection_version)
+        try:
+            request = build_model_request(selected,
+                reading_projection_version=reading_projection_version)
+        except NarrativeContractError as exc:
+            # A bounded source plan that cannot be represented is rejected
+            # before model admission, with a stable source-layer diagnosis.
+            raise _SummaryFailure('SUMMARY_PLAN_INVALID', HandlerOutcome.TERMINAL_FAILURE,
+                                  'source summary plan exceeds or violates its bounded contract') from exc
         context.checkpoint()
         if self._model_caller is not None:
             response, metrics = self._model_caller.generate(context, request)
@@ -370,9 +381,11 @@ class NarrativeSummarizeHandler:
             response = self._model.generate(request)
             metrics = HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0)
         context.checkpoint()
+        execution: dict[str, Any] = {}
         try:
             completed = self._completed_result(selected, review, response,
-                reading_projection_version=reading_projection_version)
+                reading_projection_version=reading_projection_version,
+                execution_report=execution)
         except _SummaryFailure as exc:
             return _post_model_failure(response, metrics, exc.code, exc.outcome, exc.detail)
         except ModelResponseError as exc:
@@ -389,7 +402,7 @@ class NarrativeSummarizeHandler:
                 "MODEL_RESPONSE_INVALID", HandlerOutcome.TERMINAL_FAILURE,
                 "model response cannot form a UTF-8 summary (rule=FINAL_UTF8)",
             )
-        return _success(completed, metrics)
+        return _success(completed, metrics, execution=execution or None)
 
     @staticmethod
     def _payload(context: JobExecutionContext) -> SourceRevisionEventPayload:
@@ -437,10 +450,20 @@ class NarrativeSummarizeHandler:
         review: PromptReviewValue,
         response: NarrativeModelResponse,
         *, reading_projection_version: str | None = None,
+        execution_report: dict[str, Any] | None = None,
     ) -> NarrativeSummaryResult:
         try:
-            draft = decode_model_draft(response, selected=selected,
-                reading_projection_version=reading_projection_version)
+            from .narrative_model_extractive import (
+                EXTRACTIVE_MODEL_PROJECTION_VERSION, decode_extractive_result,
+            )
+            if reading_projection_version == EXTRACTIVE_MODEL_PROJECTION_VERSION:
+                decoded = decode_extractive_result(response, selected=selected)
+                draft = decoded.draft
+                if execution_report is not None:
+                    execution_report.update(decoded.execution)
+            else:
+                draft = decode_model_draft(response, selected=selected,
+                    reading_projection_version=reading_projection_version)
         except ModelCitationError as exc:
             raise _SummaryFailure("SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
                                   "model draft cites evidence outside its selection "

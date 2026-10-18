@@ -417,7 +417,7 @@ through the existing public entry points.
 See `.planning/du-bench/handoff.md` and `handoff.json` for the A/B/C evidence,
 known gaps, and the acquisition requests for ROOT.
 
-## Formal Phase C production runner (explicit v4)
+## Formal Phase C production runner (v5, with frozen v4 replay)
 
 `phase_c_runner.py` is the single executable owner. `phase_c_launcher.py` invokes
 the actual configured batch CLI, `phase_c_bootstrap/sitecustomize.py` installs
@@ -430,14 +430,17 @@ Run the complete engineering loopback without any `.planning` history, provider
 credentials or sibling checkouts (choose a new output directory):
 
 ```powershell
-python -B tools/document_understanding_benchmark/phase_c_runner.py --mode loopback --output C:/Temp/cwp-phase-c-new-run --reading-model-projection reading-model-input/4
+python -B tools/document_understanding_benchmark/phase_c_runner.py --mode loopback --output C:/Temp/cwp-phase-c-new-run --reading-model-projection reading-model-input/5
 ```
 
 This drives the real configured CLI, spawned worker, public original replay,
 same-run recovery, cross-run zero-POST reuse, legacy default baseline, pre-POST
 missing/split gold controls and charged malformed-output handling. Its model
-response is a copied source fragment, so PASS does not certify semantic summary
-quality. `--consumer-projects C:/Users/<user>/Projects` additionally runs the
+response is a finite task-ID ranking. The canonical factual cards contain whole
+original source support; ranking cannot rewrite numbers, products or modality,
+and cannot silently delete admitted cards. Missing or invalid rankings remain
+explicit diagnostics. Loopback PASS does not certify real reading coverage or
+supplier response quality. `--consumer-projects C:/Users/<user>/Projects` additionally runs the
 existing FF/RF consumers; omission explicitly records consumers `NOT_RUN`.
 
 Live execution requires an explicit external preparation, the existing cumulative
@@ -445,11 +448,17 @@ ledger and a new output directory. It retains the prepared provider settings; no
 model selection or credential is stored in this tool. Example argv:
 
 ```powershell
-python -B tools/document_understanding_benchmark/phase_c_runner.py --mode live --sample cn-h1 --metadata <prepared-revision.json> --usage-ledger <existing-usage.jsonl> --output <new-receipt-dir> --consumer-projects <Projects-dir> --reading-model-projection reading-model-input/4
+python -B tools/document_understanding_benchmark/phase_c_runner.py --mode live --sample cn-h1 --metadata <prepared-revision.json> --usage-ledger <existing-usage.jsonl> --output <new-receipt-dir> --consumer-projects <Projects-dir> --reading-model-projection reading-model-input/5
 ```
 
-The public batch input accepts `reading_model_projection: reading-model-input/4`
-only with explicit `selector_version: 0.9.0`. Omission keeps current defaults.
+The public batch input accepts explicit `reading-model-input/4` and
+`reading-model-input/5` only with `selector_version: 0.9.0`. New 0.9 runs default
+to v5; legacy 0.8 and frozen historical run protocols remain unchanged. Passing
+v4 explicitly retains its historical prose contract and limits. The v5 execution
+report stays inside the existing AUTO job receipt; public summary fields do not
+change. Complete paid HTTP bodies are saved before decoding and pinned in that
+same reservation. Recovery requires exact source, task, model and frozen input
+identity, verifies saved bytes, and preserves the original charge and attempt.
 The existing manifest, actual decoder identity and artifact generation hashes
 remain the sole cache owner. No new store or approval chain is introduced.
 

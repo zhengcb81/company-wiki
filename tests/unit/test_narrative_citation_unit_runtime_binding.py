@@ -44,8 +44,8 @@ def _run(*, text=EN):
     return result, selected, sent[0], finals[0]
 
 
-def test_new_reading_generation_selects_single_citation_units_and_preserves_legacy_default():
-    reading = manifest(replace(_request(), selector_version="0.9.0"))
+def test_explicit_citation_unit_generation_and_legacy_default_remain_replayable():
+    reading = manifests(V3)
     legacy = manifest(replace(_request(), selector_version="0.8.0"))
     assert reading["reading_model_projection"] == V3
     assert reading["execution_versions"]["model_request_schema"] == "narrative-model-request/4"

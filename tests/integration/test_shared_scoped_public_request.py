@@ -43,7 +43,7 @@ def test_public_projection_roundtrips_and_owns_request_identity(schema):
     assert NarrativeBatchRequest.from_dict(request.to_dict()) == request
 
 
-@pytest.mark.parametrize("value", [None, "", " reading-model-input/4", "reading-model-input/5", 4])
+@pytest.mark.parametrize("value", [None, "", " reading-model-input/4", "reading-model-input/6", 4])
 def test_public_projection_rejects_invalid_or_unavailable_protocol(value):
     wire = json.loads(LEGACY.read_text())[2]["wire"]
     with pytest.raises(ValueError, match="reading_model_projection"):
@@ -141,12 +141,14 @@ def test_tracked_phase_c_full_loopback_needs_no_planning_history_and_removes_lak
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, target)
     benchmark = Path("tools/document_understanding_benchmark")
-    for name in ("phase_c_runner.py", "phase_c_observer.py", "phase_c_launcher.py",
-                 "phase_c_failure_review_material.py", "phase_c_bootstrap/sitecustomize.py",
-                 "closed_group_support.py"):
-        target = deployed / benchmark / name
+    # Deploy the actual bounded tool package, not a manually maintained module
+    # list that becomes incomplete whenever the runner extracts a helper.
+    for source in (repo / benchmark).rglob('*.py'):
+        if '__pycache__' in source.parts:
+            continue
+        target = deployed / source.relative_to(repo)
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(repo / benchmark / name, target)
+        shutil.copyfile(source, target)
     assert not (deployed / ".planning").exists()
     # Also deny any accidental coordinator attempt to read an external history.
     script = """
@@ -245,17 +247,17 @@ def test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exac
         assert reused["budget"]["tokens"] == 0 and len(server.requests) == 1
         assert not store.reservations_for_run("public-v4-cache")
 
-        # Omission intentionally retains the current v3 default, with a different
+        # Omission adopts the current source-extractive default, with a different
         # generation. An exact prior v4 reference still resolves after LATEST changes.
         wire.pop("reading_model_projection")
-        wire["run_id"] = "public-v3"
+        wire["run_id"] = "public-v5"
         path.write_bytes(fixtures.encoded(wire))
-        legacy_process, legacy = run("public-v3")
+        legacy_process, legacy = run("public-v5")
         assert legacy_process.returncode == 0 and legacy["status"] == "completed", legacy
         assert len(server.requests) == 2 and server.errors == []
-        assert server.requests[1]["schema_version"] == "narrative-model-request/4"
-        legacy_manifest = next(iter(store.final_generations("public-v3").values()))
-        assert legacy_manifest["reading_model_projection"] == "reading-model-input/3"
+        assert server.requests[1]["schema_version"] == "narrative-model-request/6"
+        legacy_manifest = next(iter(store.final_generations("public-v5").values()))
+        assert legacy_manifest["reading_model_projection"] == "reading-model-input/5"
         assert legacy_manifest != manifest
         pinned, _ = fixtures.invoke_read(state, reference)
         assert pinned == bundle

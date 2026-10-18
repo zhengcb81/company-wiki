@@ -15,7 +15,7 @@ import pytest
 
 from company_wiki.automation.models import canonical_json_hash, require_sha256
 from company_wiki.automation.narrative_contracts import NarrativeBundle
-from company_wiki.automation.narrative_model import resolve_model_boundary
+from company_wiki.automation.narrative_model_runtime import resolve_model_boundary
 from company_wiki.automation.narrative_selection_generation import reading_material_sha256
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from integration import test_narrative_generation_reuse as reuse
@@ -112,9 +112,9 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert metadata["generation_manifest"] == final, "publication retained an obsolete base generation"
     assert metadata["generation_sha256"] == canonical_json_hash(final)
     strategy = data["reading_strategy"]
-    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/3"
-    assert data["schema_version"] == "narrative-model-request/4"
-    assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/3").prompt_version
+    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/5"
+    assert data["schema_version"] == "narrative-model-request/6"
+    assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/5").prompt_version
     assert final["reading_model_boundary"]["prompt_version"] == final["execution_versions"]["prompt"]
     assert final["summary_validation"]["language_observer"]["py3langid"]["model"]["status"] == "available"
     assert context["schema_version"] == "du-production-reading/2"
@@ -134,16 +134,17 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert strategy["constraints"] == context["constraints"]
     assert all("selection_basis" not in row for row in strategy["business_facets"])
     assert all("family_policy" not in row for row in strategy["reading_policies"])
-    rows = data["evidence"]
-    aliases = [row[0] for row in rows]
+    material = data['material']
+    rows = material['shared_fragments'] + [part for task in material['tasks']
+                                         for part in task['parts'] if 'text' in part]
+    rows.sort(key=lambda row: int(row['source_key'][1:]))
+    aliases = [row['source_key'] for row in rows]
     assert len(aliases) == len(set(aliases)) == len(bundle["evidence_spans"])
-    assert [row[1] for row in rows] == [span["raw_text"] for span in bundle["evidence_spans"]]
+    assert [row['text'] for row in rows] == [span["raw_text"] for span in bundle["evidence_spans"]]
     assert "evidence_groups" not in data and "evidence_group_columns" not in data
-    assert data["citation_unit_columns"] == ["id", "evidence_ids", "support_evidence_ids"]
-    units = {row[0]: row[1] for row in data["citation_units"]}
-    assert all(row[2] and set(row[2]) <= set(row[1]) for row in data["citation_units"])
-    assert len(units) == len(data["citation_units"])
-    assert not set(units).intersection(aliases)
+    units = {task['key']: [part.get('shared_ref', part.get('source_key')) for part in task['parts']]
+             for task in material['tasks']}
+    assert len(units) == len(material['tasks'])
     assert all(members and len(members) == len(set(members)) and set(members) <= set(aliases)
                for members in units.values())
     assert set().union(*(set(members) for members in units.values())) == set(aliases)
@@ -151,7 +152,11 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     native_groups = {tuple(alias_by_span[sid] for sid in group["evidence_ids"])
                      for group in context["groups"]}
     assert native_groups <= {tuple(members) for members in units.values()}
-    assert {group["id"] for group in strategy["groups"]} <= set(units)
+    assert 'groups' not in strategy  # Native scopes are carried once by material.tasks.
+    by_span = {span['span_id']: span['raw_text'] for span in bundle['evidence_spans']}
+    for claim in bundle['summary']['draft']['claims']:
+        assert claim['text'] == '\n'.join(by_span[sid] for sid in claim['evidence_ids'])
+        assert claim['modality'] in {'question', 'uncertain'}
     assert "raw_text" not in json.dumps(data["reading_strategy"]), "strategy duplicated original quote bodies"
     assert "wrong_assertion" not in json.dumps(data["reading_strategy"])
     run = runs.get_run(run_id)
@@ -195,7 +200,16 @@ def test_configured_shared_reading_reaches_summary_public_transport_and_same_run
             assert process.returncode == 0 and next_result["status"] == "completed", next_result
             dependencies = final.get("reading_dependencies")
             assert dependencies and dependencies["status"] == "complete", dependencies
-            assert len(loopback_model_server.requests) == 1, "a new run did not reuse its exact causal material"
+            if len(loopback_model_server.requests) != 1:
+                from company_wiki.document_understanding.decision_inventory import current_decision_trace
+                from company_wiki.document_understanding.decision_dependencies import compare_decision_dependencies
+                next_final = runs.final_generations("reading-b")[imported["source_ref"]["document_id"]]
+                diagnostic = {
+                    "changed_generation_fields": [key for key in final if final[key] != next_final.get(key)],
+                    "dependency_comparison": compare_decision_dependencies(
+                        final["reading_dependencies"], current_decision_trace(final["reading_dependencies"])),
+                }
+                pytest.fail("a new run did not reuse its exact causal material: " + json.dumps(diagnostic))
             assert next_result["budget"]["tokens"] == 0
             assert not runs.reservations_for_run("reading-b")
         finally:
@@ -306,8 +320,8 @@ def test_official_projection_shared_reading_publishes_the_final_generation_targe
         assert {span.structured_value["source_role"] for span in bundle.evidence_spans} == {"management", "investor_question"}
         assert final["selection_generation"]["evidence_sha256"] == canonical_json_hash([span.to_dict() for span in bundle.evidence_spans])
         strategy = server.requests[0]["reading_strategy"]
-        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/3"
-        assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/3").prompt_version
+        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/5"
+        assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/5").prompt_version
         assert bundle.reading_context["reading_policy_version"] == final["selection_generation"]["reading_policy_version"]
         assert strategy["constraints"] == list(bundle.reading_context["constraints"])
         assert final["selection_generation"]["material_sha256"] == reading_material_sha256(bundle)
@@ -387,7 +401,18 @@ def test_real_legacy_v5_auto_run_resumes_through_additive_upgrade_without_new_po
             connection = sqlite3.connect(db)
             try:
                 assert connection.execute("SELECT 1 FROM narrative_run_jobs WHERE final_generation_json IS NOT NULL LIMIT 1").fetchone() is None
-                connection.execute("ALTER TABLE narrative_run_jobs DROP COLUMN final_generation_json")
+                # Construct a truthful historical v5 shape from its frozen DDL.
+                # New additive nullable columns must not remain under an old
+                # PRAGMA label, and no nonempty future field may be discarded.
+                expected = migrations._expected_structure(5)
+                for table, definition in expected.items():
+                    names = {column[1] for column in definition['columns']}
+                    actual = [row[1] for row in connection.execute(f'PRAGMA table_info("{table}")')]
+                    for name in actual:
+                        if name not in names:
+                            assert connection.execute(
+                                f'SELECT 1 FROM "{table}" WHERE "{name}" IS NOT NULL LIMIT 1').fetchone() is None
+                            connection.execute(f'ALTER TABLE "{table}" DROP COLUMN "{name}"')
                 connection.execute("PRAGMA user_version=5")
                 connection.commit()
             finally:

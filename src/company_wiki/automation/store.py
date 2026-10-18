@@ -755,13 +755,36 @@ def _compact_terminal_narrative(
     for row, result in parsed:
         if result is None:
             continue
+        from .narrative_model_extractive import EXTRACTIVE_PROMPT_VERSION
+        summary_not_needed = False
+        if row['job_id'] == summary and row['outcome'] == 'succeeded':
+            if is_terminal_receipt(result.result):
+                summary_not_needed = result.result.get('summary_not_needed') is True
+            elif result.result.get('status') == 'summary_not_needed':
+                from .narrative_contracts import NarrativeSummaryResult
+                summary_not_needed = NarrativeSummaryResult.from_dict(result.result).status == 'summary_not_needed'
+            if summary_not_needed and connection.execute(
+                    'SELECT 1 FROM narrative_model_reservations WHERE job_id=? LIMIT 1', (summary,)).fetchone():
+                raise IntegrityViolationError('skipped summary contradicts model execution')
+        requires_execution = (row['job_id'] == summary and row['outcome'] == 'succeeded'
+                              and expected_prompt == EXTRACTIVE_PROMPT_VERSION and not summary_not_needed)
         if is_terminal_receipt(result.result):
             receipt = result.to_dict()["result"]
+            if requires_execution and 'execution' not in receipt:
+                raise IntegrityViolationError('compacted v5 summary execution is missing')
             if (dict(receipt.get("final_artifact", {})), receipt.get("run_id"), receipt.get("event_id"),
                 receipt.get("input_hash"), receipt.get("job_id"), receipt.get("attempt_id")) != (
                 pin.to_dict(), run_id, event_id, event.input_hash, row["job_id"], row["attempt_id"]
             ):
                 raise IntegrityViolationError("compacted result is bound to a different final artifact or DAG")
+            if 'execution' in receipt:
+                from .narrative_summary_execution import extract_summary_execution
+                try:
+                    if row['job_id'] != summary:
+                        raise ValueError('execution belongs to summary attempts only')
+                    extract_summary_execution(receipt)
+                except (TypeError, ValueError) as exc:
+                    raise IntegrityViolationError('compacted summary execution is invalid') from exc
             continue
         if row["job_id"] == verify and row["outcome"] == "succeeded":
             if len(result.effects) != 1 or result.effects[0].effect_id != pin.effect_id:
@@ -778,6 +801,22 @@ def _compact_terminal_narrative(
                    "job_id": row["job_id"], "attempt_id": row["attempt_id"],
                    "original_result_sha256": hashlib.sha256(original).hexdigest(),
                    "original_result_bytes": len(original), "compacted_at": compacted_at}
+        if summary_not_needed and expected_prompt == EXTRACTIVE_PROMPT_VERSION:
+            # A source-only skip has no model tasks/report. Retain this bounded
+            # original outcome rather than inventing completed model work.
+            receipt['summary_not_needed'] = True
+        if row['job_id'] == summary:
+            from .narrative_summary_execution import extract_summary_execution
+            try:
+                execution = extract_summary_execution(result.result)
+            except (TypeError, ValueError) as exc:
+                raise IntegrityViolationError('summary execution is invalid') from exc
+            if requires_execution and execution is None:
+                raise IntegrityViolationError('v5 summary execution is missing')
+            if execution is not None:
+                # Keep only the bounded reference audit, never another summary
+                # body. The final canonical bundle remains its sole authority.
+                receipt['execution'] = execution
         # The outer envelope retains metrics, outcome, error and logical effect IDs.
         value = result.to_dict()
         value["result"] = receipt
@@ -1317,6 +1356,57 @@ class AutomationStore:
             return _attempt_from_row(_attempt_row(conn, attempt_id))
 
         return self._write_transaction(_op)
+
+    def retry_paid_narrative_summary(self, *, run_id: str, job_id: str,
+                                     request_sha256: str, now: str,
+                                     expected_generation: int) -> tuple[str, ...]:
+        """Requeue an exact paid operation without altering its attempts or fees.
+
+        The caller later rechecks actual object bytes and its current lease
+        before reopening the old output slot. This is not a generic job reset.
+        """
+        from .narrative_paid_response import PaidResponsePin
+        require_utc_timestamp(now)
+        require_sha256(request_sha256, field_name="request_sha256")
+        def write(connection):
+            _enabled_gate(connection, expected_generation)
+            job = _job_from_row(_job_row(connection, job_id))
+            member = connection.execute("SELECT input_hash,handler_version FROM narrative_run_jobs WHERE run_id=? AND job_id=?",
+                                        (run_id, job_id)).fetchone()
+            rows = connection.execute("SELECT * FROM narrative_model_reservations WHERE run_id=? AND job_id=? AND paid_response_json IS NOT NULL",
+                                      (run_id, job_id)).fetchall()
+            if (member is None or len(rows) != 1 or job.job_type != "source.narrative_summarize"
+                    or (member["input_hash"], member["handler_version"]) != (job.input_hash, job.handler_version)
+                    or job.status not in {JobStatus.DEAD_LETTER, JobStatus.RETRY_WAIT}
+                    or connection.execute("SELECT 1 FROM effects WHERE job_id=? LIMIT 1", (job_id,)).fetchone()
+                    or connection.execute("SELECT 1 FROM attempts WHERE job_id=? AND outcome='succeeded' LIMIT 1", (job_id,)).fetchone()):
+                raise IntegrityViolationError("paid recovery requires an exact unsuccessful narrative operation")
+            pin = PaidResponsePin.from_json(rows[0]["paid_response_json"])
+            if rows[0]["request_sha256"] != request_sha256 or pin.request_sha256 != request_sha256:
+                raise IntegrityViolationError("paid recovery request differs")
+            if rows[0]["output_bytes"] not in {None, 0} or rows[0]["output_sha256"] is not None:
+                raise IntegrityViolationError("paid recovery cannot replace positive output")
+            # Do not reopen a running attempt or manufacture another provider
+            # allowance. Failed historical attempts/results remain unchanged.
+            if connection.execute("SELECT 1 FROM attempts WHERE job_id=? AND finished_at IS NULL LIMIT 1", (job_id,)).fetchone():
+                raise IntegrityViolationError("paid recovery has an unfinished attempt")
+            connection.execute("UPDATE jobs SET status='ready',not_before=?,updated_at=?,last_error_code=NULL,last_error_detail=NULL WHERE job_id=?",
+                               (now, now, job_id))
+            changed = [job_id]
+            children = connection.execute("SELECT j.* FROM jobs j JOIN job_dependencies d ON j.job_id=d.job_id WHERE d.depends_on_job_id=?",
+                                          (job_id,)).fetchall()
+            for row in children:
+                if (row["job_type"] == "source.narrative_verify" and row["status"] == "dead_letter"
+                        and row["last_error_code"] == "DEPENDENCY_TERMINAL"
+                        and row["created_from_event_id"] == job.created_from_event_id
+                        and connection.execute("SELECT 1 FROM narrative_run_jobs WHERE run_id=? AND job_id=?",
+                                               (run_id, row["job_id"])).fetchone()
+                        and not connection.execute("SELECT 1 FROM attempts WHERE job_id=? LIMIT 1", (row["job_id"],)).fetchone()):
+                    connection.execute("UPDATE jobs SET status='planned',not_before=?,updated_at=?,last_error_code=NULL,last_error_detail=NULL WHERE job_id=?",
+                                       (now, now, row["job_id"]))
+                    changed.append(row["job_id"])
+            return tuple(changed)
+        return self._write_transaction(write)
 
     def finish_attempt(
         self,

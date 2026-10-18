@@ -174,6 +174,7 @@ class ReservationRecord:
     reserved_at: str
     usage_settled_at: str | None
     output_settled_at: str | None
+    paid_response_json: str | None = None
 
     def __post_init__(self) -> None:
         try:
@@ -529,7 +530,7 @@ class NarrativeRunStore:
         migration owner before any job or accounting mutation.
         """
         report = migrations.inspect_schema(db_path)
-        if report.user_version not in {5, migrations.SCHEMA_VERSION}:
+        if report.user_version not in {5, 6, migrations.SCHEMA_VERSION}:
             raise NarrativeRunError("run history requires an explicitly migrated AUTO database")
         connection = migrations._open_readonly_connection(db_path)
         try:
@@ -642,6 +643,85 @@ class NarrativeRunStore:
         return self._read(
             lambda connection: _reservation(connection, run_id, attempt_id)
         )
+
+    def model_attempts_for_job(self, *, run_id: str, job_id: str) -> tuple[ReservationRecord, ...]:
+        """Read one immutable operation's paid history, never a cross-run cache."""
+        def read(connection):
+            _required_run(connection, run_id)
+            member = connection.execute("SELECT input_hash,handler_version FROM narrative_run_jobs WHERE run_id=? AND job_id=?",
+                                        (run_id, job_id)).fetchone()
+            if member is None:
+                raise RunScopeError("job is outside this narrative run")
+            job = connection.execute("SELECT input_hash,handler_version FROM jobs WHERE job_id=?", (job_id,)).fetchone()
+            if job is None or tuple(member) != tuple(job):
+                raise RunConflictError("paid recovery frozen job identity differs")
+            return tuple(ReservationRecord(**dict(row)) for row in connection.execute(
+                "SELECT * FROM narrative_model_reservations WHERE run_id=? AND job_id=? ORDER BY reserved_at,attempt_id",
+                (run_id, job_id)).fetchall())
+        return self._read(read)
+
+    def attach_paid_response(self, *, run_id: str, attempt_id: str, lease_token: str,
+                             runtime_generation: int, request_sha256: str,
+                             paid_response_json: str, recorded_at: str) -> ReservationRecord:
+        """Attach original paid evidence, even when its worker can no longer publish.
+
+        Token/generation identify the original reservation. This method does not
+        finish a job or create an effect and never grants a current lease.
+        """
+        from .narrative_paid_response import PaidResponsePin
+        require_utc_timestamp(recorded_at)
+        pin = PaidResponsePin.from_json(paid_response_json)
+        def write(connection):
+            run = _required_run(connection, run_id)
+            record = _required_reservation(connection, run_id, attempt_id)
+            attempt = connection.execute("SELECT * FROM attempts WHERE attempt_id=?", (attempt_id,)).fetchone()
+            if (attempt is None or attempt["job_id"] != record.job_id
+                    or attempt["lease_token"] != lease_token or attempt["runtime_generation"] != runtime_generation):
+                raise RunScopeError("paid response original attempt identity differs")
+            prompt = model_prompt_version(run.binding_json, job_id=record.job_id, default_prompt=run.prompt_version)
+            if (pin.request_sha256 != request_sha256 or record.request_sha256 != request_sha256
+                    or pin.model_id != run.model_id or pin.prompt_version != prompt):
+                raise ReservationConflictError("paid response request identity differs")
+            if record.paid_response_json is not None:
+                if record.paid_response_json != paid_response_json:
+                    raise ReservationConflictError("paid response cannot replace original bytes")
+                return record
+            connection.execute("UPDATE narrative_model_reservations SET paid_response_json=? WHERE run_id=? AND attempt_id=?",
+                               (paid_response_json, run_id, attempt_id))
+            return _required_reservation(connection, run_id, attempt_id)
+        return self._write(write)
+
+    def reopen_paid_output(self, *, run_id: str, paid_attempt_id: str, current_attempt_id: str,
+                           lease_token: str, runtime_generation: int, request_sha256: str,
+                           verified_response_sha256: str, now: str) -> ReservationRecord:
+        """Re-reserve the same failed output slot after verified paid-byte recovery."""
+        from .narrative_paid_response import PaidResponsePin
+        require_utc_timestamp(now)
+        def write(connection):
+            run = _required_run(connection, run_id)
+            record = _required_reservation(connection, run_id, paid_attempt_id)
+            _, job = _require_active_attempt(connection, attempt_id=current_attempt_id,
+                lease_token=lease_token, runtime_generation=runtime_generation, now=now)
+            member = connection.execute("SELECT input_hash,handler_version FROM narrative_run_jobs WHERE run_id=? AND job_id=?",
+                                        (run_id, job.job_id)).fetchone()
+            if (member is None or record.job_id != job.job_id or job.job_type != "source.narrative_summarize"
+                    or (member["input_hash"], member["handler_version"]) != (job.input_hash, job.handler_version)):
+                raise RunScopeError("paid recovery job binding differs")
+            pin = PaidResponsePin.from_json(record.paid_response_json)
+            if (record.request_sha256 != request_sha256 or pin.request_sha256 != request_sha256
+                    or pin.body_sha256 != verified_response_sha256):
+                raise ReservationConflictError("paid recovery verified byte binding differs")
+            if (record.output_bytes != 0 or record.output_sha256 is not None
+                    or connection.execute("SELECT 1 FROM effects WHERE job_id=? LIMIT 1", (job.job_id,)).fetchone()
+                    or connection.execute("SELECT 1 FROM attempts WHERE job_id=? AND outcome='succeeded' LIMIT 1", (job.job_id,)).fetchone()):
+                raise ReservationConflictError("paid recovery cannot reopen an active or successful output")
+            budget = _budget(connection, run_id, output_reservation=(job.job_id, record.output_bytes_bound))
+            if run.blocked or budget.charged_output_bytes > run.max_output_bytes:
+                raise RunBudgetExceededError("paid recovery output exceeds run bound")
+            connection.execute("UPDATE narrative_model_reservations SET output_bytes=NULL,output_sha256=NULL,output_settled_at=NULL WHERE run_id=? AND attempt_id=?",
+                               (run_id, paid_attempt_id))
+            return _required_reservation(connection, run_id, paid_attempt_id)
+        return self._write(write)
 
     def reservations_for_run(self, run_id: str) -> tuple[ReservationRecord, ...]:
         def read(connection):

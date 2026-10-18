@@ -56,7 +56,7 @@ def test_actual_handler_preserves_paid_failure_and_no_retry_for_wrong_language()
     assert 'failed_final' in result.result
 
 
-def test_explicit_manifest_reaches_factory_software_validation_and_default_is_unchanged():
+def test_explicit_manifest_reaches_factory_validation_and_new_default_does_not_override_it():
     from company_wiki.automation import narrative_worker_factory as factory
     manifest=manifests(V4)
     assert manifest['reading_model_boundary']==runtime.reading_model_boundary_identity(V4)
@@ -64,7 +64,7 @@ def test_explicit_manifest_reaches_factory_software_validation_and_default_is_un
     assert manifests('reading-model-input/3')['execution_versions']['model_request_schema']=='narrative-model-request/4'
     from unit.test_narrative_generation import manifest as normal_manifest
     from unit.test_narrative_batch import _request
-    assert normal_manifest(replace(_request(),selector_version='0.9.0'))['reading_model_projection']=='reading-model-input/3'
+    assert normal_manifest(replace(_request(),selector_version='0.9.0'))['reading_model_projection']=='reading-model-input/5'
     assert 'reading_model_projection' not in normal_manifest(replace(_request(),selector_version='0.8.0'))
 
 

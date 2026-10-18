@@ -291,7 +291,7 @@ def source_descriptor(sample: dict) -> dict:
     return descriptor
 
 
-def seed_identity(root: Path, mode: str, descriptor: dict) -> dict:
+def seed_identity(root: Path, mode: str, descriptor: dict, *, source_catalog_config: Path | None = None) -> dict:
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.security_identity import (
         SecurityMasterStore,
@@ -322,8 +322,12 @@ def seed_identity(root: Path, mode: str, descriptor: dict) -> dict:
             sources=(record.source_url,),
         )
         return {"kind": "explicit_fake_security_fixture_not_official_company_proof"}
+    # Code checkout and data lake may live in different directories. Resolve
+    # existing snapshots through the selected source owner's config, exactly as
+    # registered-readonly originals do; never guess a sibling data location.
     production = load_catalog_config(
-        ROOT / "config/source_catalog.yaml", project_root=ROOT
+        Path(source_catalog_config) if source_catalog_config is not None
+        else ROOT / "config/source_catalog.yaml"
     )
     existing = SecurityMasterStore(production.catalog_dir / "security_master")
     load_identity_master(existing, market=market)
@@ -560,6 +564,74 @@ def selector_versions(value: str | None) -> tuple[str, ...]:
     raise ValueError("selector versions must be 0.9.0 or the historical 0.9.0,0.8.0 pair")
 
 
+
+def reading_projection_for(selector_version: str, requested: str | None) -> str | None:
+    """One runner boundary: v5 production path; explicit v4 and old selector remain."""
+    from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
+    from company_wiki.automation.narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
+
+    if requested not in {None, SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION}:
+        raise ValueError("unsupported phase C reading model projection")
+    return (requested or EXTRACTIVE_MODEL_PROJECTION_VERSION) if selector_version == "0.9.0" else None
+
+
+def successful_model_observation(receipt, native, events, materials: Path, run_id: str, *, reading_model_projection):
+    """Observe existing AUTO diagnostics and captured paid bytes; never save prose.
+
+    This is fixture/receipt assembly, not semantic truth or live-quality acceptance.
+    The original protocol report remains in the native receipt, not a second cache.
+    """
+    from collections import Counter
+    from company_wiki.automation.models import canonical_json_hash
+    from company_wiki.automation.narrative_model import MODEL_RESPONSE_MAX_BYTES
+    from company_wiki.automation.narrative_summary_execution import extract_summary_execution
+    from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
+
+    executions = [extract_summary_execution({"schema_version": "narrative-terminal-receipt/1.0", "execution": item["execution"]})
+                  for document in receipt.get("documents", [])
+                  for item in document.get("model_diagnostics", []) if "execution" in item]
+    if reading_model_projection == EXTRACTIVE_MODEL_PROJECTION_VERSION and not executions:
+        raise ValueError("PHASE_C_EXTRACTIVE_EXECUTION_NOT_OBSERVED")
+    execution = executions[-1] if executions else None
+    audit = None if execution is None else {
+        "schema_version": execution["schema_version"], "plan_sha256": execution["plan_sha256"],
+        "report_sha256": canonical_json_hash(execution), "task_count": len(execution["tasks"]),
+        "source_dispositions": dict(Counter(row["source_disposition"] for row in execution["tasks"])),
+        "model_dispositions": dict(Counter(row["model_disposition"] for row in execution["tasks"])),
+        "source_coverage_complete": execution["source_coverage_complete"],
+        "model_coverage_complete": execution["model_coverage_complete"],
+        "model_diagnostic": execution["model_diagnostic"],
+        "admitted_claim_ids": [row["claim_id"] for row in execution["tasks"] if row["source_disposition"] == "admitted"],
+        "report_origin": "native_batch_receipt.model_diagnostics.execution",
+        "semantic_truth": "not_evaluated", "human_permission": "not_required",
+    }
+    captures = []
+    for record in native:
+        expected = record.get("response_sha256")
+        if expected is None:
+            captures.append({"attempt_id": record["attempt_id"], "status": "NO_RETURNED_FINAL",
+                             "usage_status": record["usage_status"]})
+            continue
+        filename = run_id + "." + record["attempt_id"] + ".response.json.gz"
+        path = materials / filename
+        if path.parent.resolve() != materials.resolve():
+            raise ValueError("PHASE_C_CAPTURE_PATH_INVALID")
+        try:
+            with gzip.open(path, "rb") as stream:
+                raw = stream.read(MODEL_RESPONSE_MAX_BYTES + 1)
+        except (OSError, EOFError) as exc:
+            raise ValueError("PHASE_C_CAPTURE_UNAVAILABLE") from exc
+        sha = hashlib.sha256(raw).hexdigest()
+        observations = [row for row in events if row.get("event") == "model_final_observed"
+                        and row.get("run_id") == run_id and row.get("attempt_id") == record["attempt_id"]]
+        if (len(raw) > MODEL_RESPONSE_MAX_BYTES or sha != expected or not observations
+                or any(row.get("final_sha256") != sha or row.get("final_bytes") != len(raw)
+                       for row in observations)):
+            raise ValueError("PHASE_C_CAPTURE_IDENTITY_DIFFERS")
+        captures.append({"attempt_id": record["attempt_id"], "status": "CAPTURED_AND_NATIVE_HASH_MATCHED",
+                         "sha256": sha, "bytes": len(raw), "usage_status": record["usage_status"]})
+    return {"source_card_execution": audit, "paid_response_capture": captures}
+
 def run_pair(
     sample,
     provider,
@@ -589,6 +661,7 @@ def run_pair(
     from company_wiki.automation.narrative_contracts import NarrativeBundle
 
     versions = selector_versions(selected_versions)
+    projections = {version: reading_projection_for(version, reading_model_projection) for version in versions}
     if source_mode not in {"isolated-copy", "registered_readonly"}:
         raise ValueError("unsupported phase C source mode")
     if source_mode == "registered_readonly":
@@ -750,6 +823,7 @@ def run_pair(
         "sample": sample["sample_id"],
         "source_mode": source_mode,
         "selector_versions": list(versions),
+        "reading_model_projections": projections,
         "comparison_scope": "paired" if len(versions) == 2 else "single_selector_no_paired_improvement_claim",
 
         "scope": "development regression, not holdout",
@@ -787,7 +861,7 @@ def run_pair(
             "translation": False,
         }
     try:
-        identity_proof = (seed_identity(root, mode, descriptor)
+        identity_proof = (seed_identity(root, mode, descriptor, source_catalog_config=source_catalog_config)
                           if source_mode != "registered_readonly" or consumer_projects is not None
                           else {"kind": "not_requested_no_consumer_identity_clone"})
         outcome["identity_snapshot"] = identity_proof
@@ -884,8 +958,8 @@ def run_pair(
                     }
                 },
             }
-            if version == "0.9.0" and reading_model_projection is not None:
-                template["reading_model_projection"] = reading_model_projection
+            if projections[version] is not None:
+                template["reading_model_projection"] = projections[version]
             batch_request = prepare_official_narrative_request(
                 [imported], batch_template=template
             )
@@ -995,6 +1069,9 @@ def run_pair(
                 write_json(observer, observer_config)
             if code != 0:
                 raise ValueError("INITIAL_BATCH_FAILED_NO_BLIND_RESEND")
+            state.update(successful_model_observation(
+                receipt, native, read_rows(events), materials, current_run,
+                reading_model_projection=projections[version]))
             reference, bundle, read_request, replay = public_bundle(
                 root, output, env, config, imported, descriptor, current_run
             )
@@ -1197,6 +1274,11 @@ def run_pair(
 
 def loopback_draft(material, *, invalid_summary=False):
     """Synthetic source copy; protocol/failed-output transport, never quality proof."""
+    if material["schema_version"] == "narrative-model-request/6":
+        # Ranking-only v5 never copies body, numbers, prose or source aliases.
+        return {"decisions": [{"task": task["key"],
+            "priority": "invalid" if invalid_summary else "normal",
+            "disposition": "consider"} for task in material["material"]["tasks"]]}
     if material["schema_version"] == "narrative-model-request/5":
         view = material["material"]
         task = view["tasks"][0]
@@ -1308,7 +1390,7 @@ def loopback_preparation():
                                      "max_response_bytes": 262144}}}
 
 
-def main() -> int:
+def argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=("loopback", "live"), default="loopback")
     parser.add_argument("--sample", choices=("cn-h1", "hk-annual", "us-10k"))
@@ -1320,8 +1402,9 @@ def main() -> int:
                         help="New owned receipt directory; existing outputs are never replaced.")
     parser.add_argument("--consumer-projects", type=Path,
                         help="Explicit sibling FF/RF checkout root; omission records consumers NOT_RUN.")
-    parser.add_argument("--reading-model-projection", choices=("reading-model-input/4",),
-                        help="Explicit v4 for selector 0.9 only; omission retains current defaults.")
+    parser.add_argument("--reading-model-projection", choices=("reading-model-input/4", "reading-model-input/5"),
+                        default="reading-model-input/5",
+                        help="Selector 0.9 uses v5 source cards by default; explicit v4 preserves the old prose protocol.")
     parser.add_argument("--source-mode", choices=("isolated-copy", "registered_readonly"), default="isolated-copy",
                         help="Keep the historical local import, or register existing roots without copying raw bytes.")
     parser.add_argument("--source-catalog-config", type=Path,
@@ -1330,6 +1413,11 @@ def main() -> int:
                         help="Omission retains the historical pair; 0.9.0 is single-selector acceptance.")
     parser.add_argument("--activation-recovery", action="store_true",
                         help="Test paid outbox activation_pending then resume the same run with zero new POST.")
+    return parser
+
+
+def main() -> int:
+    parser = argument_parser()
     args = parser.parse_args()
     if args.source_mode == "registered_readonly" and args.source_catalog_config is None:
         parser.error("registered_readonly requires --source-catalog-config")
@@ -1467,7 +1555,7 @@ def main() -> int:
         malformed.mkdir()
         with Loopback(invalid_summary=True) as server:
             rejected = run_pair(sample, provider, metadata, mode="loopback", output=malformed,
-                                reading_model_projection=args.reading_model_projection,
+                                reading_model_projection="reading-model-input/4",
                                 consumer_projects=args.consumer_projects,
                                 fixture_endpoint=server.endpoint,
                                 preparation_path=preparation_path)
@@ -1521,6 +1609,8 @@ def main() -> int:
                       and rejected['temporary_lake_removed'] and rejected['protected_unchanged']
                       and rejected['sentinel_unchanged'])
             outcome['paid_transport_invalid_summary_negative'] = {
+                'reading_model_projection':'reading-model-input/4',
+                'scope':'legacy_prose_contract_negative_not_v5_rank_quality',
                 'status':'PASS' if passed else 'FAIL', 'local_POSTs':len(server.requests),
                 'production_rejected':rejected['status']=='FAIL',
                 'complete_final_captured_before_decode':len(finals)==1,

@@ -59,6 +59,31 @@ def test_missing_inventory_cannot_claim_complete():
     assert module.current_decision_trace(trace)["inventory_complete"] is False
 
 
+@pytest.mark.parametrize("order", [("z-parent", "a-child"), ("a-child", "z-parent")])
+def test_source_wide_facets_survive_scope_sorting_and_frozen_replay(order):
+    """Source-global facets cannot acquire a new scope when freeze sorts IDs."""
+    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.document_understanding.decision_dependencies import (
+        compare_decision_dependencies, freeze_decision_dependencies,
+    )
+
+    binding = next(row for row in registry._CATALOG["legacy_bindings"]
+                   if row["family"] == "annual" and row["regime"] == "cn_exchange")
+    scopes = [{"scope_id": sid, "family": "annual", "regime": "cn_exchange",
+               "form_type": "unknown", "purpose": "annual"} for sid in order]
+    used = {registry._CATALOG["facets"][0]["id"]}
+    trace = decision_inventory._inventory(
+        scopes, dict.fromkeys(order, binding["profile_id"]), used, carrier="text/plain")
+    frozen = freeze_decision_dependencies(trace)
+    assert frozen["status"] == "complete"
+    current = decision_inventory.current_decision_trace(frozen)
+    assert compare_decision_dependencies(frozen, current)["status"] == "same"
+    reversed_trace = decision_inventory._inventory(
+        list(reversed(scopes)), dict.fromkeys(order, binding["profile_id"]), used,
+        carrier="text/plain")
+    assert freeze_decision_dependencies(reversed_trace)["decision_digest"] == frozen["decision_digest"]
+
+
 def test_transient_script_matching_change_invalidates_actual_decision(monkeypatch):
     from company_wiki.document_normalization import normalize_document, text_matching
     from company_wiki.document_understanding import understand_units
