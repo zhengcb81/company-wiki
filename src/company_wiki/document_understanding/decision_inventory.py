@@ -72,7 +72,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.source_catalog.narrative_reading",
         "company_wiki.source_catalog.narrative_finalize",
     )
-    versions = {"inventory": "1.6.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    versions = {"inventory": "1.7.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
@@ -83,6 +83,10 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
             "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,
+            "continuity_algorithms": _digest({name: sha256(
+                Path(import_module(name).__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+                for name in ("company_wiki.document_understanding.narrative_continuity",
+                             "company_wiki.document_understanding.indented_tail_geometry")}),
             "table_purpose": table_purpose.FEATURE_VERSION,
             "script_matching": text_matching.SCRIPT_MATCHING_VERSION,
             "pipeline": PIPELINE_FEATURE_VERSION, "summary": SUMMARY_FEATURE_VERSION,

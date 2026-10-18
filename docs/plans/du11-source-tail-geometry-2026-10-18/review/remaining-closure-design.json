@@ -1,0 +1,159 @@
+{
+  "schema_version": "du11-remaining-closure-design/1",
+  "status": "READ_ONLY_DESIGN_COMPLETE_IMPLEMENTATION_NOT_TESTED",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "observer": "/root/du10_gold_reception_review",
+  "source_snapshot": "Observed working-tree bytes at report finalization; concurrent ROOT tail integration is outside this design, not frozen engineering acceptance",
+  "minimal_owner": "Source-owned closure package inside narrative_reading._prose_reading_packages before carrier replacement and context graph allocation",
+  "existing_ports": [
+    "multi-original body support via citation_support_views",
+    "SourceOperatingSession.groups and original relation ref mapping",
+    "original required_context_unit_ids through existing budget graph",
+    "reference-only summary task/card projection"
+  ],
+  "required_new_proof": [
+    "adjacent read pages + actual body endpoints",
+    "explicit running furniture and positive lane/flow proof",
+    "finite unique or explicit collective original antecedent refs"
+  ],
+  "traps": [
+    "overlapping analysis ownership",
+    "carrier/original ID namespaces",
+    "context refs mistakenly target-remapped",
+    "hash-sorted IDs are not nearest context",
+    "excluded furniture set also includes TOC",
+    "column=None/no_column_gap is not proved single lane",
+    "five original blocks cannot be called four",
+    "cross-page block counts must include source+page"
+  ],
+  "budgets": {
+    "work_parent": 16000000,
+    "selected_spans": 96,
+    "selected_characters": 48000,
+    "original_body_members": 8,
+    "original_blocks": 4,
+    "closure_characters": 2048,
+    "draft_bytes": 57344,
+    "final_bytes": 65536,
+    "execution_bytes": 32768
+  },
+  "verification": {
+    "tests_run": 0,
+    "source_scripts_run": 0,
+    "pdf_parses": 0,
+    "api_calls": 0,
+    "original_reads": 0,
+    "production_edits": 0,
+    "config_edits": 0,
+    "runtime_integration": "not implemented",
+    "content_C": "OPEN",
+    "permissions": "no new permit/review receipt/second store suggested"
+  },
+  "file_bindings": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "2110f028ac772f606eb09c6a64a9c7ee517f564d86d761b8a027fe5d80fb004f",
+      "bytes": 49348
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_native_ranges.py",
+      "sha256": "a867a7ed856bf4eb577c41869ba8fa869bd7ad57cd865bae3608c2ace3d39461",
+      "bytes": 12206
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f",
+      "bytes": 7949
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "858283b62a6f743877f27a82de234d4ee9ecc155d6c594e553e11b63a9fd1831",
+      "bytes": 38596
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "038eaa2fe63353f54acc51686ecaae81bb89e2451e21f726865d65243397c53a",
+      "bytes": 20992
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "aa0131f4f17643738df72ec8d70dafd2e74e41d731e275bf596dde3881a447fb",
+      "bytes": 23547
+    },
+    {
+      "path": "src/company_wiki/document_understanding/selection_bridge.py",
+      "sha256": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8",
+      "bytes": 8609
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/layout.py",
+      "sha256": "83e9bccec62042eab948703222275bca80b840a30f72e9308bb752d86c941c5f",
+      "bytes": 13126
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/sections.py",
+      "sha256": "9b6a634e779d551df872aa1cdbd0b21672d31326aac0645f905aaa63563d8401",
+      "bytes": 18566
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/__init__.py",
+      "sha256": "1f3624fe61572e99228425f3c60d9b7a0af7ef56d106c1ac9d74b6237e99d8a5",
+      "bytes": 21550
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/contract.py",
+      "sha256": "9a3be96269c2d84c6cb7b564e025cc00e0bbac31839a8f0ffcffb031244d3099",
+      "bytes": 12311
+    },
+    {
+      "path": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "sha256": "f5c6bd08c6231bdfda8d2bd0d64b5b5656c6cc7380bee66952d41488f48d9a4c",
+      "bytes": 4653
+    },
+    {
+      "path": "src/company_wiki/document_understanding/layout_bridge.py",
+      "sha256": "3e429777f3694c94d7ed7faaa12ffc545cc7a70339f360e0790bc903fa51089f",
+      "bytes": 12853
+    },
+    {
+      "path": "src/company_wiki/document_understanding/summary_tasks.py",
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+      "bytes": 7561
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442",
+      "bytes": 1740
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "sha256": "ee8b3e8fe3294149d17087fe3ede1b5fecc7c88dd414e9caa56d355d5b964f48",
+      "bytes": 17195
+    },
+    {
+      "path": "tools/document_understanding_benchmark/closed_group_support.py",
+      "sha256": "353484b4458e44f88bffee6a442e5c4de8adf084ffcbd7f55b13c7005cf9fea8",
+      "bytes": 17609
+    },
+    {
+      "path": "docs/plans/du11-source-quality-2026-10-18/closure-investigation/findings.md",
+      "sha256": "a4d4bc77f95fe5e5a0fbb7950c1be885dd7a8adbb80f20f93f1cc41d921e3349",
+      "bytes": 7810
+    },
+    {
+      "path": "docs/plans/du11-source-quality-2026-10-18/closure-investigation/findings.json",
+      "sha256": "20887f1500a1de9cb92334a301d1f3e191a1eace19d92a6533c16ab2e2e0e937",
+      "bytes": 6018
+    },
+    {
+      "path": "docs/plans/du11-source-quality-2026-10-18/closure-investigation/native-observation.json",
+      "sha256": "dd10ceeee32bdd8ec175d46d61054837e101e3edafbabf615b24bb766c5139f2",
+      "bytes": 28654
+    }
+  ],
+  "report": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-tail-geometry-2026-10-18\\review\\remaining-closure-design.md",
+    "sha256": "ef8146e909f55b286e2522901ee49dcf3df01fbdbe4cf6fb88b3039f367827ee",
+    "bytes": 22454
+  }
+}

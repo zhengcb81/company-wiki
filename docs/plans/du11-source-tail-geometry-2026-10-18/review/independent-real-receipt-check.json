@@ -1,0 +1,97 @@
+{
+  "source_bindings_match": {
+    "company_wiki.automation.narrative_select": true,
+    "company_wiki.source_catalog.narrative_evidence": true,
+    "company_wiki.source_catalog.narrative_reading": true,
+    "company_wiki.source_catalog.narrative_finalize": true,
+    "company_wiki.source_catalog.narrative_document": true,
+    "company_wiki.source_catalog.narrative_business_policy": true,
+    "company_wiki.source_catalog.narrative_source_purpose": true,
+    "company_wiki.source_catalog.narrative_operating_relations": true,
+    "company_wiki.document_understanding.source_cards": true,
+    "company_wiki.document_understanding.summary_tasks": true,
+    "company_wiki.document_understanding.native_table_bridge": true,
+    "company_wiki.document_understanding.narrative_continuity": true,
+    "company_wiki.document_understanding.decision_inventory": true,
+    "company_wiki.automation.narrative_model_extractive": true,
+    "company_wiki.document_understanding.indented_tail_geometry": true
+  },
+  "bounded_receipt": {
+    "api_calls": 0,
+    "raw_copies": 0,
+    "source_unchanged_during_probe": true,
+    "content_acceptance": "OPEN; physical-tail/source-selection slice only",
+    "owned_temp_removed": true
+  },
+  "metrics": {
+    "cn-h1": {
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "source_coverage_complete": false,
+      "selection_status": "partial",
+      "selected_count": 96,
+      "selected_chars": 7847,
+      "draft_bytes": 41432,
+      "tasks": 64,
+      "claims": 63,
+      "actual_work": {
+        "used": 5652792,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selected_gold": {
+        "supported": 10,
+        "total": 10
+      },
+      "canonical_gold": {
+        "supported": 10,
+        "total": 10
+      }
+    },
+    "hk-annual": {
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "source_coverage_complete": false,
+      "selection_status": "partial",
+      "selected_count": 96,
+      "selected_chars": 18888,
+      "draft_bytes": 39437,
+      "tasks": 57,
+      "claims": 51,
+      "actual_work": {
+        "used": 12101915,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selected_gold": {
+        "supported": 7,
+        "total": 7
+      },
+      "canonical_gold": {
+        "supported": 7,
+        "total": 7
+      }
+    },
+    "us-10k": {
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "source_coverage_complete": true,
+      "selection_status": "partial",
+      "selected_count": 96,
+      "selected_chars": 41431,
+      "draft_bytes": 56959,
+      "tasks": 59,
+      "claims": 52,
+      "actual_work": {
+        "used": 7913637,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selected_gold": {
+        "supported": 8,
+        "total": 8
+      },
+      "canonical_gold": {
+        "supported": 8,
+        "total": 8
+      }
+    }
+  }
+}

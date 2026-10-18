@@ -1,0 +1,27 @@
+{
+  "schema_version": "du11-tail-integration-independent-review/1",
+  "verdict": "PENDING_COLUMN_EVIDENCE_FIX",
+  "reviewer": "/root/du10_ff_reception_review",
+  "current_inspected_bindings": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "37fa7fe5eeb51665c718dc306c0ead56c2eb6d120fa0e0257193fc53c707274f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "648c41ca12e4c94005b91506a76b001c3dfa4d23d14bcb72b2070be41bdf858d",
+    "src/company_wiki/source_catalog/narrative_reading.py": "0361960f51b0717136e134d726465fcab057896f9eb42a9b81464abca589bd2d",
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": "0652a6b7c47ac87929e4e73f6be16309bc2d2ee5eb7f306e74736bab909b9aed"
+  },
+  "confirmed_pending_boundary": "New negative-overlap branch currently treats equal unknown column labels as if column compatibility were established. Pure geometry helper cannot supply this omitted evidence. ROOT already accepted and is implementing a bounded native body-band witness.",
+  "proposed_design_opinion": [
+    "Explicit nonempty matching column IDs can supply column compatibility, with existing source/page/frame/font/scope/role/ordinal barriers retained.",
+    "For absent column IDs, an independently observed native body band aligned to tail left margin and body right margin can provide physical flow evidence, provided it is actual adjacent preceding/following body material in the same guarded flow, not arbitrary same-page proximity.",
+    "At most constant neighboring native observations, or existing bounded scan lookup, must be used and work charged. Heading/table/QA/role/source/page/frame/font transitions terminate eligibility.",
+    "Anchor must not be one of the pair itself; retain actual anchor unitID/bbox and measured errors/flow in bounded proof; no semantic actor/subject/text borrowed.",
+    "Multicolumn/merged/ambiguous source geometry cannot become authoritative body-band proof through equal missing labels. If there is no trustworthy witness, report unknown/defer rather than fake a column.",
+    "Band height need not satisfy the terminal-tail line-height test, but the anchor must be ordinary native body geometry with valid layout/source provenance, not a heading/table/wide merged carrier."
+  ],
+  "already_reviewed_no_new_problem": [
+    "New continuity version3 and both helper/continuity source hashes enter causal inventory, not constant-only binding.",
+    "Source/page/scope/frame/font/role/consecutive guards precede new edge, and old positive-overlap path remains separate.",
+    "risk/project prose families now share physical continuity owner; attributedQA and tables retain owners."
+  ],
+  "not_executed": "No new integration test/PDF/API/environment reads; this is pending design and static review only. Pure helper70 independently passed separately.",
+  "next": "ROOT freezes column evidence implementation and tests, then independent bounded delta review; production semantic closure/C remains OPEN."
+}

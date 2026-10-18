@@ -40,6 +40,8 @@ _NAVIGATION = re.compile(
     r"^\s*(?:(?:see|refer to)\s+(?:note|item|section)\s*\d+|"
     r"(?:详见|参见|请参阅).{0,30}(?:附注|章节|第.{0,6}节))", re.I)
 _TEMPLATE = re.compile(r"^[\s□☑☐√✓✔×✗适用不\.、/():：（）\-]+$")
+_LABELLED_NO_EVENT = re.compile(
+    r"^[^。！？；;.!?]{0,160}?[□☐]\s*适用\s*[√✓✔☑]\s*不适用\s*$")
 # This stock is an operating contract measure, not a financial total inferred
 # from an arbitrary currency amount. Period/conversion interpretation stays in
 # the original source; this classifier never computes a dated metric.
@@ -74,6 +76,11 @@ _AUDIT_OWNER = re.compile(
 
 
 def _clause_purpose(value: str) -> str:
+    # The form's question/label may contain product or future-plan words.
+    # Its explicit negative response is still not an observed business event.
+    # Source clauses separated by real terminators are assessed independently.
+    if _LABELLED_NO_EVENT.fullmatch(value):
+        return "template_no_event"
     if _AUDIT_SPEECH.search(value) or _AUDIT_OWNER.search(value):
         return "audit_procedure"
     if _OPERATING_OBJECT.search(value) and _OPERATING_EVENT.search(value):

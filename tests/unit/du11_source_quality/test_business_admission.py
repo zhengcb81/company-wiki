@@ -28,6 +28,9 @@ def assessment(text, *, role="company_filing", section="business"):
     "We evaluated the design of internal controls over impairment assessment and tested management assumptions.",
     "We use a valuation model and a risk-free rate to determine the fair value of employee share options.",
     "□适用 √不适用",
+    "新增重要非主营业务情况\n□适用√不适用",
+    "报告期内经营情况变化及预计未来重大事项\n□适用 √不适用",
+    "新產品交付客戶情況\n☐適用☑不適用",
     "See Note 18 for information about contractual liabilities.",
     "The Board approved low-risk wealth management products to improve cash management.",
     "本集團採用期權定價模型，按照無風險利率估計股份支付的公允價值。",
@@ -56,6 +59,7 @@ def test_pure_non_operating_purpose_is_not_promoted_by_a_business_section(text):
     "We hired 120 engineers to expand our overseas pilot production line and shorten customer certification cycles.",
     "We use a valuation model for employee share options. We launched a platform for enterprise customers.",
     "We launched software for customers to automate audit procedures.",
+    "公司已交付新产品，并完成客户验证。其他事项 □适用√不适用",
     "公司采用期权定价模型计量股份支付。公司已收购设备企业，与现有产品形成客户协同。",
     "Revenue allocated to remaining performance obligations was $90 million, and we expect to recognize 40% as revenue in the next twelve months.",
 ])

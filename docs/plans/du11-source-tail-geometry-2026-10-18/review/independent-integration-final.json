@@ -1,0 +1,120 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-tail-final-review-4ylcu1wt\\pytest",
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-tail-geometry-2026-10-18\\review\\independent-integration-final.xml"
+  ],
+  "returncode": 0,
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "34",
+    "time": "1.994",
+    "timestamp": "2026-10-18T03:23:41.197582+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "wall_seconds": 2.67,
+  "pure_controls": {
+    "project": {
+      "anchors": 4,
+      "citation_view_count": 1,
+      "physical_windows": 1,
+      "blocked_count": 0,
+      "members_retained": true,
+      "required_context_retained": true,
+      "accepted": true,
+      "tasks": 1,
+      "all_anchor_support_retained": true
+    },
+    "budget": [
+      {
+        "cap": 4,
+        "complete": false,
+        "window_count": 0,
+        "both_pair_members_deferred": true,
+        "deferred_unit_ids": [
+          "source-a:0",
+          "source-a:1"
+        ],
+        "unexamined_from_index": 0,
+        "standalone_unit_count": 0
+      },
+      {
+        "cap": 5,
+        "complete": false,
+        "window_count": 0,
+        "both_pair_members_deferred": true,
+        "deferred_unit_ids": [
+          "source-a:0",
+          "source-a:1"
+        ],
+        "unexamined_from_index": 0,
+        "standalone_unit_count": 0
+      },
+      {
+        "cap": 6,
+        "complete": false,
+        "window_count": 0,
+        "both_pair_members_deferred": true,
+        "deferred_unit_ids": [
+          "source-a:0",
+          "source-a:1"
+        ],
+        "unexamined_from_index": 0,
+        "standalone_unit_count": 0
+      }
+    ],
+    "project_section_windows": {
+      "missing": 0,
+      "None": 0,
+      "": 0,
+      "   ": 0
+    },
+    "direct_native_null_hint_windows": 0
+  },
+  "freeze": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": "64d2962fad25c8dc82191a3ac560db3e079be4622d084d117c35a21643a47849",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "8c02cabe1b5b51174c08424bc9dfbc113a2066a681f46986125c4a40a566ff84",
+    "src/company_wiki/document_understanding/decision_inventory.py": "648c41ca12e4c94005b91506a76b001c3dfa4d23d14bcb72b2070be41bdf858d",
+    "src/company_wiki/source_catalog/narrative_reading.py": "4e7e1a7b1a75deea7a81ca294d1c3cc106f790106abb26060447358461523abe",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "62064817fa85223d593ce0392a5531276837be478da3d87c1fd0e9452d3d8d8a",
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": "261bcd976d64c7cbd5af27818fb0f7f3893b9d7fc545754b4eaea6aeec432f2f",
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": "7c057cafcbde6f231012db6d6a4f51e612833c5fa6c52471c8aeb88f6ab1ca7c",
+    "tests/unit/du11_source_quality/test_business_admission.py": "daf303059c5fb6df434d07fd78a378e2ba21562597aaee439bb5a46aaaf123ae"
+  },
+  "pre_freeze_matches": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": true,
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true,
+    "tests/unit/du11_source_quality/test_business_admission.py": true
+  },
+  "post_freeze_matches": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": true,
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true,
+    "tests/unit/du11_source_quality/test_business_admission.py": true
+  },
+  "temporary_directory_removed": true,
+  "environment": "Explicit minimal OS/runtime variables, no credentials; dotenv/plugin autoload disabled; controlled scalar output only"
+}

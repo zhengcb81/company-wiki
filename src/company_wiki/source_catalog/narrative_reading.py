@@ -15,7 +15,7 @@ import re
 from typing import Any
 
 from company_wiki.document_understanding.pipeline import understand_units
-from company_wiki.document_understanding.narrative_continuity import build_native_continuity
+from company_wiki.document_understanding.narrative_continuity import build_native_continuity, native_section_key
 from company_wiki.document_understanding.selection_bridge import build_context_graph
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
@@ -102,21 +102,27 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     units = {unit.unit_id: unit for unit in parsed.units}
     profiles = pipeline["reading_plan"]["unit_profiles"]
     packages = pipeline["packages"]["packages"]
-    prose_kinds = {"background", "paragraph_event"}
+    # Package semantics cannot exempt original prose from physical continuity.
+    # Tables and attributed Q&A retain their separate structural owners.
+    prose_kinds = {"background", "paragraph_event", "risk"}
+    audited_kinds = prose_kinds | {"project"}
     owners: dict[str, list[Mapping[str, Any]]] = {}
     other_members: set[str] = set()
     for package in packages:
         members = package.get("member_unit_ids", ())
-        if package["kind"] in prose_kinds and not package.get("truncated"):
+        if package["kind"] in audited_kinds and not package.get("truncated"):
             for uid in members:
                 owners.setdefault(uid, []).append(package)
         else:
             other_members.update(members)
     excluded = set(pipeline.get("non_selectable_unit_ids", ()))
     headings: dict[str, set[str]] = {}
+    section_for_unit = {}
     sections = pipeline.get("structure", {}).get("sections", ())
     for section in sections:
         actual_heads = set(section.get("heading_unit_ids", ()))
+        for uid in (*section.get("heading_unit_ids", ()), *section.get("body_unit_ids", ())):
+            section_for_unit[uid] = section.get("section_id")
         for uid in section.get("body_unit_ids", ()):
             headings.setdefault(uid, set()).update(actual_heads)
 
@@ -133,8 +139,21 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         return sorted(result - set(member_ids))
 
     observation = pipeline.get("observation", {}).get("units", ())
-    views = [unit if unit["unit_id"] in owners and unit["unit_id"] not in other_members | excluded
-             else {**unit, "kind": "continuity_boundary"} for unit in observation]
+    views = []
+    for unit in observation:
+        uid = unit["unit_id"]
+        if uid not in owners or uid in other_members | excluded:
+            views.append({**unit, "kind": "continuity_boundary"})
+            continue
+        projects = tuple(sorted(str(owner["package_id"]) for owner in owners[uid]
+                                if owner["kind"] == "project"))
+        if projects:
+            # A physical line cannot silently bridge two independently named
+            # projects just because they share a source section and font.
+            hints = unit.get("hints", {})
+            unit = {**unit, "hints": {**hints,
+                "section_key": (native_section_key(hints, section_for_unit.get(uid)), projects)}}
+        views.append(unit)
     provenance = {unit.unit_id: {"source_id": unit.source_id,
         "paragraph_index": unit.coordinates.paragraph_index,
         **{key: unit.metadata.get(key) for key in (
@@ -229,6 +248,11 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         members = window["member_unit_ids"]
         if not set(members) <= units.keys():
             continue
+        # A structured project's row, qualification note and original context
+        # remain one semantic package. Physical prose audit must not flatten
+        # that package into independently selectable rows or drop its notes.
+        if any(owner["kind"] == "project" for uid in members for owner in owners.get(uid, ())):
+            continue
         pieces = statement_members(members)
         for piece in pieces:
             # Structural closure establishes the material owner before meaning.
@@ -250,7 +274,33 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             grouped.update(piece)
     expanded = []
     seen: set[str] = set()
+    window_for_member = {uid: window for window in continuity["windows"]
+                         for uid in window["member_unit_ids"]}
     for package in packages:
+        if package["kind"] == "project":
+            members = set(package.get("member_unit_ids", ()))
+            anchors = package.get("anchor_unit_ids", ())
+            window_ids = set()
+            windows = []
+            for uid in package.get("anchor_unit_ids", ()):
+                window = window_for_member.get(uid)
+                if (window is not None and window["window_id"] not in window_ids
+                        and set(window["member_unit_ids"]) <= members):
+                    window_ids.add(window["window_id"])
+                    windows.append(window["member_unit_ids"])
+            support = set(anchors)
+            for anchor in anchors:
+                window = window_for_member.get(anchor)
+                if window is not None and window["window_id"] in window_ids:
+                    support.update(window["member_unit_ids"])
+            # The existing public task contract has finite citation views. A
+            # physical window expands original anchors inside the same project,
+            # not into one new task/view for every anchor.
+            ordered_support = list(dict.fromkeys(uid for uid in package.get("member_unit_ids", ())
+                                                if uid in support))
+            expanded.append({**package, **({"citation_support_views": [ordered_support],
+                "native_analysis_views": windows} if windows and support <= members else {})})
+            continue
         if package["kind"] not in prose_kinds or package.get("truncated"):
             expanded.append(package)
             continue
@@ -377,6 +427,11 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             members = tuple(package["member_unit_ids"])
             analysis_groups[owner] = members
             contexts[owner] = context_ids - set(members)
+        for index, view in enumerate(package.get("native_analysis_views", ())):
+            if len(view) > 1:
+                owner = "analysis:" + package["package_id"] + ":" + str(index)
+                analysis_groups[owner] = tuple(view)
+                contexts[owner] = context_ids - set(view)
     session = SourceOperatingSession(units,
         work_budget=work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"]),
         contexts={uid: tuple(sorted(ids)) for uid, ids in contexts.items()}, groups=analysis_groups)
@@ -397,7 +452,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         required = set(graph["groups"][index]["required_unit_ids"]) | set(members)
         # Incomplete closure is not a smaller complete fact. Missing original
         # references stay deferred; shadow duplicates alone may be withheld.
-        if package.get("truncated") or not required <= units.keys() or required & excluded:
+        if package.get("truncated") or not required <= units.keys() or required & (excluded | blocked):
             withheld.append({"package_id": str(package["package_id"]),
                              "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
                              "known_unit_ids": sorted(required & units.keys())})

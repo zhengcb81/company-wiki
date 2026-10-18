@@ -1,0 +1,295 @@
+{
+  "schema_version": "du11-tail-integration-independent-review/1",
+  "verdict": "PASS_ENGINEERING_CHECKPOINT_CONTENT_OPEN",
+  "reviewer": "/root/du10_ff_reception_review",
+  "source_test_sha256": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": "64d2962fad25c8dc82191a3ac560db3e079be4622d084d117c35a21643a47849",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "8c02cabe1b5b51174c08424bc9dfbc113a2066a681f46986125c4a40a566ff84",
+    "src/company_wiki/document_understanding/decision_inventory.py": "648c41ca12e4c94005b91506a76b001c3dfa4d23d14bcb72b2070be41bdf858d",
+    "src/company_wiki/source_catalog/narrative_reading.py": "4e7e1a7b1a75deea7a81ca294d1c3cc106f790106abb26060447358461523abe",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "62064817fa85223d593ce0392a5531276837be478da3d87c1fd0e9452d3d8d8a",
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": "261bcd976d64c7cbd5af27818fb0f7f3893b9d7fc545754b4eaea6aeec432f2f",
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": "7c057cafcbde6f231012db6d6a4f51e612833c5fa6c52471c8aeb88f6ab1ca7c",
+    "tests/unit/du11_source_quality/test_business_admission.py": "daf303059c5fb6df434d07fd78a378e2ba21562597aaee439bb5a46aaaf123ae"
+  },
+  "actual_frozen_bytes_match": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": true,
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true,
+    "tests/unit/du11_source_quality/test_business_admission.py": true
+  },
+  "scope": "Final five production files plus three owned test groups, bounded physical continuity/project/source-purpose integration; no crosspage/coreference or full material-quality C acceptance",
+  "closed_findings": [
+    {
+      "id": "negative-overlap-column-unknown",
+      "resolution": "CLOSED",
+      "evidence": "Two unknown columns no longer certify edge. Need actual nonempty matching column or at most3 contiguous measured body witnesses with native source/page/frame/scope/font/role/ordinal/paragraph/block/geometry compatibility. Missing/bad witness defers pair. WitnessIDs/bboxes/errors retained without words or synthetic column assignment."
+    },
+    {
+      "id": "project-finite-citation-views",
+      "resolution": "CLOSED",
+      "evidence": "Original4anchor/1window control now emits1project support view, formal task planner accepts1task with all4original support spans. Original member/requiredcontext retained. No dropping anchors, splitting project or raising public max2."
+    },
+    {
+      "id": "tail-lookahead-budget",
+      "resolution": "CLOSED",
+      "evidence": "At original caps4/5/6 both pair members defer, no left standalone escapes; stopped loop defers pending run+current, marks earliest unexamined then clears run before break."
+    },
+    {
+      "id": "project-unknown-structural-section",
+      "resolution": "CLOSED",
+      "evidence": "One native_section_key owner handles None/empty/whitespace fallback to actual structural section; directnative and project wrapper both consume it. Independent absent/null/empty/whitespace project controls and directnative null control cannot cross distinct actual sections."
+    }
+  ],
+  "static_checks": [
+    "Project original atomic membership/requiredcontext stays intact; only actual same-project closedwindow expands source support. Required blocked/excluded units withhold full package.",
+    "ProjectID tuple prevents cross-project physical windows. Window lookup is indexed once; support expansion uses index/sets and one source member-order projection rather than anchors x windows nested search.",
+    "Only background/paragraph_event/risk flattened into independent native prose; structured project remains project; tables and attributedQA keep own barriers/owners.",
+    "New label+negative applicability purpose owner runs once in existing source assessment; independently terminated genuine business clauses retain original handling. No provider/company/gold-specific branch.",
+    "Continuity version3 and inventory1.7 include actual continuity/helper code hashes; source reading/purpose algorithm hashes already join causal identity. No second cache/parser/store/permission chain.",
+    "Lookahead maximum3 observations, max_units and same analysis work account constrain validation; stopped work cannot release a partial candidate. Native table/heading/role/source/page/frame/font/scope/gap margins remain guards."
+  ],
+  "independent_execution": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-tail-final-review-4ylcu1wt\\pytest",
+      "tests/unit/du11_tail_integration/test_tail_source_wiring.py",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-tail-geometry-2026-10-18\\review\\independent-integration-final.xml"
+    ],
+    "returncode": 0,
+    "suite": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "34",
+      "time": "1.994",
+      "timestamp": "2026-10-18T03:23:41.197582+01:00",
+      "hostname": "DESKTOP-156V213"
+    },
+    "wall_seconds": 2.67,
+    "pure_controls": {
+      "project": {
+        "anchors": 4,
+        "citation_view_count": 1,
+        "physical_windows": 1,
+        "blocked_count": 0,
+        "members_retained": true,
+        "required_context_retained": true,
+        "accepted": true,
+        "tasks": 1,
+        "all_anchor_support_retained": true
+      },
+      "budget": [
+        {
+          "cap": 4,
+          "complete": false,
+          "window_count": 0,
+          "both_pair_members_deferred": true,
+          "deferred_unit_ids": [
+            "source-a:0",
+            "source-a:1"
+          ],
+          "unexamined_from_index": 0,
+          "standalone_unit_count": 0
+        },
+        {
+          "cap": 5,
+          "complete": false,
+          "window_count": 0,
+          "both_pair_members_deferred": true,
+          "deferred_unit_ids": [
+            "source-a:0",
+            "source-a:1"
+          ],
+          "unexamined_from_index": 0,
+          "standalone_unit_count": 0
+        },
+        {
+          "cap": 6,
+          "complete": false,
+          "window_count": 0,
+          "both_pair_members_deferred": true,
+          "deferred_unit_ids": [
+            "source-a:0",
+            "source-a:1"
+          ],
+          "unexamined_from_index": 0,
+          "standalone_unit_count": 0
+        }
+      ],
+      "project_section_windows": {
+        "missing": 0,
+        "None": 0,
+        "": 0,
+        "   ": 0
+      },
+      "direct_native_null_hint_windows": 0
+    },
+    "freeze": {
+      "src/company_wiki/document_understanding/indented_tail_geometry.py": "64d2962fad25c8dc82191a3ac560db3e079be4622d084d117c35a21643a47849",
+      "src/company_wiki/document_understanding/narrative_continuity.py": "8c02cabe1b5b51174c08424bc9dfbc113a2066a681f46986125c4a40a566ff84",
+      "src/company_wiki/document_understanding/decision_inventory.py": "648c41ca12e4c94005b91506a76b001c3dfa4d23d14bcb72b2070be41bdf858d",
+      "src/company_wiki/source_catalog/narrative_reading.py": "4e7e1a7b1a75deea7a81ca294d1c3cc106f790106abb26060447358461523abe",
+      "src/company_wiki/source_catalog/narrative_source_purpose.py": "62064817fa85223d593ce0392a5531276837be478da3d87c1fd0e9452d3d8d8a",
+      "tests/unit/du11_tail_integration/test_tail_source_wiring.py": "261bcd976d64c7cbd5af27818fb0f7f3893b9d7fc545754b4eaea6aeec432f2f",
+      "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": "7c057cafcbde6f231012db6d6a4f51e612833c5fa6c52471c8aeb88f6ab1ca7c",
+      "tests/unit/du11_source_quality/test_business_admission.py": "daf303059c5fb6df434d07fd78a378e2ba21562597aaee439bb5a46aaaf123ae"
+    },
+    "pre_freeze_matches": {
+      "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+      "src/company_wiki/document_understanding/narrative_continuity.py": true,
+      "src/company_wiki/document_understanding/decision_inventory.py": true,
+      "src/company_wiki/source_catalog/narrative_reading.py": true,
+      "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+      "tests/unit/du11_tail_integration/test_tail_source_wiring.py": true,
+      "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true,
+      "tests/unit/du11_source_quality/test_business_admission.py": true
+    },
+    "post_freeze_matches": {
+      "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+      "src/company_wiki/document_understanding/narrative_continuity.py": true,
+      "src/company_wiki/document_understanding/decision_inventory.py": true,
+      "src/company_wiki/source_catalog/narrative_reading.py": true,
+      "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+      "tests/unit/du11_tail_integration/test_tail_source_wiring.py": true,
+      "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true,
+      "tests/unit/du11_source_quality/test_business_admission.py": true
+    },
+    "temporary_directory_removed": true,
+    "environment": "Explicit minimal OS/runtime variables, no credentials; dotenv/plugin autoload disabled; controlled scalar output only"
+  },
+  "reused_execution_evidence": {
+    "historical_broad": "785PASS47.92s before final shared-scope correction, not relabelled as final code",
+    "final_related": "138PASS18.23s ROOT at final eight-file freeze, read not independently rerun",
+    "pure_helper": "Prior independent70PASS at unchanged helper64d2962f; test-only lambda-to-def style edit inspected, final related suite includes new test file SHA",
+    "final_real_sources": {
+      "source_bindings_match": {
+        "company_wiki.automation.narrative_select": true,
+        "company_wiki.source_catalog.narrative_evidence": true,
+        "company_wiki.source_catalog.narrative_reading": true,
+        "company_wiki.source_catalog.narrative_finalize": true,
+        "company_wiki.source_catalog.narrative_document": true,
+        "company_wiki.source_catalog.narrative_business_policy": true,
+        "company_wiki.source_catalog.narrative_source_purpose": true,
+        "company_wiki.source_catalog.narrative_operating_relations": true,
+        "company_wiki.document_understanding.source_cards": true,
+        "company_wiki.document_understanding.summary_tasks": true,
+        "company_wiki.document_understanding.native_table_bridge": true,
+        "company_wiki.document_understanding.narrative_continuity": true,
+        "company_wiki.document_understanding.decision_inventory": true,
+        "company_wiki.automation.narrative_model_extractive": true,
+        "company_wiki.document_understanding.indented_tail_geometry": true
+      },
+      "bounded_receipt": {
+        "api_calls": 0,
+        "raw_copies": 0,
+        "source_unchanged_during_probe": true,
+        "content_acceptance": "OPEN; physical-tail/source-selection slice only",
+        "owned_temp_removed": true
+      },
+      "metrics": {
+        "cn-h1": {
+          "status": "ENGINEERING_PASS_CONTENT_OPEN",
+          "source_coverage_complete": false,
+          "selection_status": "partial",
+          "selected_count": 96,
+          "selected_chars": 7847,
+          "draft_bytes": 41432,
+          "tasks": 64,
+          "claims": 63,
+          "actual_work": {
+            "used": 5652792,
+            "limit": 16000000,
+            "exhausted": false
+          },
+          "selected_gold": {
+            "supported": 10,
+            "total": 10
+          },
+          "canonical_gold": {
+            "supported": 10,
+            "total": 10
+          }
+        },
+        "hk-annual": {
+          "status": "ENGINEERING_PASS_CONTENT_OPEN",
+          "source_coverage_complete": false,
+          "selection_status": "partial",
+          "selected_count": 96,
+          "selected_chars": 18888,
+          "draft_bytes": 39437,
+          "tasks": 57,
+          "claims": 51,
+          "actual_work": {
+            "used": 12101915,
+            "limit": 16000000,
+            "exhausted": false
+          },
+          "selected_gold": {
+            "supported": 7,
+            "total": 7
+          },
+          "canonical_gold": {
+            "supported": 7,
+            "total": 7
+          }
+        },
+        "us-10k": {
+          "status": "ENGINEERING_PASS_CONTENT_OPEN",
+          "source_coverage_complete": true,
+          "selection_status": "partial",
+          "selected_count": 96,
+          "selected_chars": 41431,
+          "draft_bytes": 56959,
+          "tasks": 59,
+          "claims": 52,
+          "actual_work": {
+            "used": 7913637,
+            "limit": 16000000,
+            "exhausted": false
+          },
+          "selected_gold": {
+            "supported": 8,
+            "total": 8
+          },
+          "canonical_gold": {
+            "supported": 8,
+            "total": 8
+          }
+        }
+      }
+    },
+    "method": "Read bounded stored receipts and independently hashed every recorded source module against actual working files. Did not reread originals or independently rerun3PDFs."
+  },
+  "original_red_retained": [
+    "review/integration-initial-controls.json",
+    "review/project-multi-anchor-repro.py",
+    "review/tail-lookahead-budget-repro.py",
+    "review/integration-initial-review.md/json",
+    "Author RED and ablation logs retained in plan"
+  ],
+  "confirmed_remaining_must_fix_in_reviewed_delta": [],
+  "content_C": "OPEN_NOT_ACCEPTED",
+  "explicit_limitations": [
+    "Three real-source probes are offline source selection+typed compile, not supplier summary/activation/downstream fullC.",
+    "Source coverage remains partial and not proof of complete annual-report content.",
+    "Crosspage carry, external/collective/unique antecedent dependencies, general semantic closure and final company holdout remain mother-plan work.",
+    "No conclusion that punctuation, bounded window, native geometry, gold recall or unit green proves source semantics complete."
+  ],
+  "safety": "All independent controls used minimal system environment and controlled scalar output; temp removed. No environment dump, credentials, API/model/network, production originals/config/DB, external author source edits or commits/push performed."
+}

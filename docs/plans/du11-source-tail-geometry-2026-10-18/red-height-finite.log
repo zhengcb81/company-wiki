@@ -1,0 +1,46 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 70 items / 65 deselected / 5 selected
+
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py FFFF [ 80%]
+F                                                                        [100%]
+
+================================== FAILURES ===================================
+_ test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left0-right0] _
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py:131: in test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules
+    assert proof(left, right, 10) is None
+E   AssertionError: assert {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 620.0), 'right_bbox': (90.0, 630.0, 110.0, 640.0), ...} is None
+E    +  where {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 620.0), 'right_bbox': (90.0, 630.0, 110.0, 640.0), ...} = proof((110, 590, 530, 620), (90, 630, 110, 640), 10)
+_ test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left1-right1] _
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py:131: in test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules
+    assert proof(left, right, 10) is None
+E   AssertionError: assert {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 600.0), 'right_bbox': (90.0, 610.0, 110.0, 640.0), ...} is None
+E    +  where {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 600.0), 'right_bbox': (90.0, 610.0, 110.0, 640.0), ...} = proof((110, 590, 530, 600), (90, 610, 110, 640), 10)
+_ test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left2-right2] _
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py:131: in test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules
+    assert proof(left, right, 10) is None
+E   AssertionError: assert {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 591.0), 'right_bbox': (90.0, 601.0, 110.0, 611.0), ...} is None
+E    +  where {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 591.0), 'right_bbox': (90.0, 601.0, 110.0, 611.0), ...} = proof((110, 590, 530, 591), (90, 601, 110, 611), 10)
+_ test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left3-right3] _
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py:131: in test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules
+    assert proof(left, right, 10) is None
+E   AssertionError: assert {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 600.0), 'right_bbox': (90.0, 610.0, 110.0, 611.0), ...} is None
+E    +  where {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (110.0, 590.0, 530.0, 600.0), 'right_bbox': (90.0, 610.0, 110.0, 611.0), ...} = proof((110, 590, 530, 600), (90, 610, 110, 611), 10)
+_________ test_finite_inputs_cannot_publish_infinite_geometry_ratios __________
+tests\unit\du11_source_tail_geometry\test_indented_tail_geometry.py:135: in test_finite_inputs_cannot_publish_infinite_geometry_ratios
+    assert proof((1e-310, 0, 1e308, 1e-310),
+E   AssertionError: assert {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (1e-310, 0.0, 1e+308, 1e-310), 'right_bbox': (0.0, 2e-310, 1e-310, 3e-310), ...} is None
+E    +  where {'basis': 'native_indented_terminal_tail', 'geometry_feature_version': 'indented-terminal-tail/1', 'left_bbox': (1e-310, 0.0, 1e+308, 1e-310), 'right_bbox': (0.0, 2e-310, 1e-310, 3e-310), ...} = proof((1e-310, 0, 1e+308, 1e-310), (0, 2e-310, 1e-310, 3e-310), 1e-310)
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py::test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left0-right0]
+FAILED tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py::test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left1-right1]
+FAILED tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py::test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left2-right2]
+FAILED tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py::test_bounding_boxes_must_describe_glyph_lines_not_tall_paragraphs_or_rules[left3-right3]
+FAILED tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py::test_finite_inputs_cannot_publish_infinite_geometry_ratios
+====================== 5 failed, 65 deselected in 1.78s =======================

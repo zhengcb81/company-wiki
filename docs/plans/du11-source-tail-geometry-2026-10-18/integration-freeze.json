@@ -1,0 +1,12 @@
+{
+  "source_test_sha256": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": "64d2962fad25c8dc82191a3ac560db3e079be4622d084d117c35a21643a47849",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "8c02cabe1b5b51174c08424bc9dfbc113a2066a681f46986125c4a40a566ff84",
+    "src/company_wiki/document_understanding/decision_inventory.py": "648c41ca12e4c94005b91506a76b001c3dfa4d23d14bcb72b2070be41bdf858d",
+    "src/company_wiki/source_catalog/narrative_reading.py": "4e7e1a7b1a75deea7a81ca294d1c3cc106f790106abb26060447358461523abe",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "62064817fa85223d593ce0392a5531276837be478da3d87c1fd0e9452d3d8d8a",
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py": "261bcd976d64c7cbd5af27818fb0f7f3893b9d7fc545754b4eaea6aeec432f2f",
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": "7c057cafcbde6f231012db6d6a4f51e612833c5fa6c52471c8aeb88f6ab1ca7c",
+    "tests/unit/du11_source_quality/test_business_admission.py": "daf303059c5fb6df434d07fd78a378e2ba21562597aaee439bb5a46aaaf123ae"
+  }
+}

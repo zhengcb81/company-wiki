@@ -1,0 +1,40 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-tail-review-hzq21pg1\\pytest",
+    "tests/unit/du11_source_tail_geometry",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-tail-geometry-2026-10-18\\review\\independent-focused.xml"
+  ],
+  "returncode": 0,
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "70",
+    "time": "0.272",
+    "timestamp": "2026-10-18T03:06:18.502686+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "wall_seconds": 0.87,
+  "pre_freeze_matches": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true
+  },
+  "post_freeze_matches": {
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": true,
+    "tests/unit/du11_source_tail_geometry/test_indented_tail_geometry.py": true
+  },
+  "temporary_directory_removed": true,
+  "environment": "minimal system/runtime variables; plugins autoload and dotenv disabled; no environment objects output"
+}
