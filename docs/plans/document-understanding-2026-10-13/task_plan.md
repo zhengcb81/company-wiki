@@ -1,3 +1,15 @@
+## DU11 接收完成，页内编号修复已合线；正常发布验证中 — 2026-10-18
+
+RF外包已正常发布f8002f5f并核CI39092538354 success、6源码定点安装、3旧WIP不变。FF最终29个不同跨次控制通过，ROOT修复a9c2dcf7待CWP配套canonical reader接口先发布，不提前上线新flag。
+
+CWP 32ab6e06及最新2022432e已分别合本地主线5ad4295f、0352c2b7。前一次6ee5ebf1正常push在600秒时完整unit约96%超时，未发布，失败日志保留于`.planning/shared-reading-production/du11/push-source-flow-reader-port.log`。现完整unit使用已声明xdist两个独立worker按文件调度；不删测/增时/跳hook。84相关控制通过、独立4项及3边界控制通过；真实超时双worker/SQLite实验返回124且worker和自有Temp均退出/删除，明确600秒测试期限另有约15秒既有关停，不把微型实验当全量提速证明。
+
+实源页内paragraph_index与全局ordinal分责、未知底部counter不再提前释放pending半句；77相关控制及独立10个不同控制跨两次通过。实际CN诊断旧t32已不再selected，t34仍1，原件/gold不变、0API；不是冻结内容验收。详见[独审](../du11-source-closure-2026-10-18/review/page-local-readiness-independent.md)及[worker审查](../du11-source-closure-2026-10-18/review/full-unit-workers-independent.md)。
+
+**Next Step：** 正常完整push验证本组件、确认远端及精确CI→FF正常并线/推送/安装。随后按现有先行词owner设计继续t34，源就绪再正式三供应商摘要、收费/activation恢复、同跨run缓存及实际FF/RF消费C。整个PWF未完成，不新增小节点人工签收；下方保留历史。
+
+---
+
 ## 两张DU11外包已验收，物理/cache与FF配套读取接口已合本地主线 — 2026-10-18
 
 RF正常发布main=f8002f5f，精确CI39092538354 success，18有限独立行为通过、2物理安装根6源码定点同步，3旧assurance WIP SHA不变。FF初审102主链绿后4反例查出当前发布日期/跨市场去零缺陷，ROOT隔离根修a9c2dcf7再独审28边界＋1真实HK TXT链通过，0ET/network、原件和作者树不写；待CWP producer先正常发布，再并线推送FF。见[RF发布](../du11-source-closure-2026-10-18/review/du11-rf-publication.md)、[FF最终联调](../du11-source-closure-2026-10-18/review/du11-ff-final-integration.md)。
