@@ -1,3 +1,11 @@
+## CI 命令恢复绿：fixtures 包冲突已修（2026-10-18）
+
+- 根因：`tests/unit/test_identity_audit/fixtures`（常规包，原名 `fixtures`）与共享的 `tests/fixtures`（命名空间包）同名；谁先被导入谁占住 `sys.modules['fixtures']`，另一侧就 15 个 collection error。
+- 修复：P3 的包改名为 `p3_fixtures`（含契约测试断言），并加 lane conftest 固定 `tests/` 在 `sys.path[0]`。
+- 结果：`python -m pytest tests/unit`（Miniconda，CI 命令）**7030 passed, 24 skipped**，exit 0。
+
+---
+
 ## 内容验收口径更新：数字可以近似，但不能错（用户，2026-10-18）
 
 - 用户明确：精确数字丢失问题不大（例：写“超过 7,500”可以），但**不能写错**（例：写“少于 7,000”不允许）。
