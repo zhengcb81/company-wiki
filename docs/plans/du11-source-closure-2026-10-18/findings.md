@@ -1,3 +1,13 @@
+## B2 性能修复已发布；正式 C 受本机负载阻塞（2026-10-18；优先于上一节）
+
+- `6a2ee853` 已推送：声明回看改为 64 字有界窗口 + 按原文缓存，单次 26ms → 3.7ms（缓存命中约 0）；CI `39123679375` success。105 测试与三源召回不变。
+- 正式 C 共尝试 5 次：第 1 次跑完选择→真实 POST→activation 恢复→cache→cross-run→read→reference 全链，但 `TEMP` 未设置使临时湖建在仓库内，收尾断言失败、receipt 未写出（真实计费 15,141 tokens / $0.002722，重复 ledger 行按 attempt 去重）。第 2–5 次均在 preparation 阶段超过 15 分钟只有 `preparation.json`；py-spy 显示卡在 `tempfile.mkdtemp`，且本机另有两个 agent 各占约 1,500s CPU。第 5 次改用收窄 root + `C:\cwp-temp` 干净临时目录仍无进展。
+- 结论：**C 仍 OPEN**，当前具体阻塞是本机资源争用/临时目录，不是 B2 语义；已停止所有未完成的付费 run，未再产生费用。
+- 本地门禁仍被两个非 CI 范围的测试挡住（`test_fresh_cache_behavior_receipts`、`test_official_projection_...`），shim + runner 守卫保存在 parked patch，未推、未绕 hook。
+
+**Next Step：** 等机器空闲窗口重跑 cn-h1 live（干净临时目录、narrowed root）；同时定位两个合同测试；之后再推 shim/guard。
+
+---
 ## B2 三审：中文泛称与 head 匹配已修（2026-10-18；优先于上一节）
 
 三审仍判 **REJECT**（工程 7/10、合同 5/10）：v2 的 P1-B、P2-A、P2-D 关闭；P1-A 只修了拉丁泛称，另发现新 P1（head 不比较）。已修：
@@ -20,7 +30,9 @@
 
 **本地门禁阻塞（如实记录，未绕过）：** 修好 runner temp 前置校验后推送被 pre-push 拦下：`tests/contract/test_fresh_cache_behavior_receipts.py::test_existing_engine_cache_behavior_receipts` 期望 parser pin 变更产生 1 次新 POST，实测 0 次；`tests/integration/test_shared_reading_production_e2e.py::test_official_projection_...` 报 `LOCATOR_REPLAY_FAILED`。两项在 Python 3.12 与 3.13 下均可复现，且不在 CI 的 `tests/unit` 范围；改动仅涉及 runner 临时目录守卫与 PyMuPDF 别名，撤销后仍失败。已把这两处修复（`pdf_backend` 别名 shim + runner 早失败守卫）保存为 `parked-local-gate-fixes-20261018.patch`，不推送、不绕过 hook；待单独定位这两个测试的根因后再推。
 
-**Next Step：** 推送本轮 PWF → 定位上述两个合同/集成测试的根因（与 B2 无关的既有失败）→ 修 runner 守卫与 shim 一并推送 → 重跑 cn-h1 live 完成 C。
+**B2 性能根因（本轮实测）：** `find_product_declarations` 原先对每个 head 都回看整段前缀，单次 2,000 字约 26ms；真实 CN 的 2,500 个 target × 每 target 多个 predecessor，使 reference 阶段累积数分钟——这也是前两次 live C 长时间只有 preparation 的原因。已改为 64 字有界回看 + 按原文 identity 缓存声明（`lru_cache(512)`），单次未命中 3.7ms、命中约 0；105 测试与三源召回不变。该修复本地提交 `6a2ee853`（未推送，待与 shim/runner 守卫一起过门禁）。
+
+**Next Step：** 定位两个合同/集成测试的根因（不在 CI 的 unit 范围）→ 应用 parked 补丁并推送 → 用快速语法重跑 cn-h1 live 完成 C。
 
 ---
 ## B2 复审 v2：2 个新 P1 已修（2026-10-18；优先于上一节）
