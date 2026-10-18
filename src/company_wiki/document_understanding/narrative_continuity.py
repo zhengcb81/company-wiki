@@ -321,9 +321,15 @@ class _Analysis:
 
     def page_edge(self, left: _Native, right: _Native,
                   furniture: Sequence[Mapping[str, Any]]) -> dict[str, Any] | None:
+        if not self.pending_page_transition(left, right):
+            return None
+        # Ordinal is source-global; paragraph_index is a page-local locator.
+        # Comparing the latter across pages confuses identity with flow order.
         if (right.ordinal != left.ordinal + 1 + len(furniture)
-                or right.paragraph != left.paragraph + 1 + len(furniture)
-                or not self.pending_page_transition(left, right)):
+                or (furniture and furniture[-1]["page"] == right.page
+                    and right.paragraph != furniture[-1]["paragraph_index"] + 1)):
+            self.diagnostics["CONTINUITY_PAGE_ORDER_UNPROVEN"] += 1
+            self.defer([left, right])
             return None
         flow = self.source_page_flow
         if flow is not None and (not flow.coarse_complete
@@ -573,11 +579,15 @@ def build_native_continuity(
                 and unit.get("hints", {}).get("source_id") == run[-1].source
                 and unit.get("page") in (run[-1].page, run[-1].page + 1)
                 and unit.get("ordinal") == run[-1].ordinal + 1 + len(furniture)
-                and meta.get("paragraph_index") == run[-1].paragraph + 1 + len(furniture)):
+                and type(meta.get("paragraph_index")) is int and meta["paragraph_index"] >= 0
+                and (not furniture or unit.get("page") >= furniture[-1]["page"])
+                and (unit.get("page") != (furniture[-1]["page"] if furniture else run[-1].page)
+                     or meta["paragraph_index"] == (furniture[-1]["paragraph_index"] if furniture else run[-1].paragraph) + 1)):
             if not state.charge():
                 unexamined = seen - 1
                 break
-            furniture.append(unit)
+            furniture.append({"unit_id": uid, "page": unit["page"], "ordinal": unit["ordinal"],
+                              "paragraph_index": meta["paragraph_index"]})
             continue
         left_closed = type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0
         if not left_closed and previous_observed is not None:
@@ -604,7 +614,10 @@ def build_native_continuity(
                 # positive edge, nor can their gap certify the right fragment.
                 state.diagnostics["CONTINUITY_PAGE_BOUNDARY_UNPROVEN"] += 1
                 state.defer([*unresolved_page_tail, current])
-            unresolved_page_tail = []
+                unresolved_page_tail = []
+            elif not (current.page == unresolved_page_tail[-1].page + 1
+                      and current.bbox[1] > 0.2 * current.frame[3]):
+                unresolved_page_tail = []
         elif (current is None and run and source_page_flow is not None
                 and not _terminal(run[-1].unit["text"])
                 and run[-1].bbox[3] >= 0.8 * run[-1].frame[3]):
@@ -629,6 +642,15 @@ def build_native_continuity(
                 column_witnesses.append(witness)
         edge = state.edge(run[-1], current, column_witnesses=column_witnesses,
                           furniture=furniture) if run and current is not None else None
+        if (run and current is not None and edge is None and source_page_flow is not None
+                and current.page == run[-1].page + 1
+                and current.bbox[1] > 0.2 * current.frame[3]
+                and run[-1].bbox[3] >= 0.8 * run[-1].frame[3]
+                and not _terminal(run[-1].unit["text"]) and state.charge(len(run))):
+            # PDF block order may put a bottom page counter before that page's
+            # first body. It is not positive furniture proof, but cannot erase
+            # a pending dependency before the actual top-body is observed.
+            unresolved_page_tail = list(run)
         furniture = []
         if state.stopped:
             # Exhausting lookahead/edge work cannot turn the left half of an

@@ -1,0 +1,31 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-local-budget-ppinab0k\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\page-local-readiness-budget-control.xml",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-local-budget-ppinab0k\\test_page_local_controls.py::test_pending_counter_path_obeys_existing_shared_budget"
+  ],
+  "returncode": 0,
+  "seconds": 8.75,
+  "source_sha_before": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc",
+    "tests/unit/du11_reference_readiness/test_native_page_local_positions.py": "5275ae7110b109cddcb27bde8e644c39b6fb2710358b2c0b37a4251165f3b409"
+  },
+  "source_sha_after": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc",
+    "tests/unit/du11_reference_readiness/test_native_page_local_positions.py": "5275ae7110b109cddcb27bde8e644c39b6fb2710358b2c0b37a4251165f3b409"
+  },
+  "cleanup": {
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-local-budget-ppinab0k",
+    "restored_absent": true
+  }
+}

@@ -144,7 +144,11 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
     # Full bootstrap progress is captured (not streamed on successful pushes).
     # On timeout it identifies the last test; successful output lists slow cases.
     if "tests/unit" in cmd:
-        cmd = [*cmd, "-vv", "--durations=15"]
+        # xdist is already a declared test dependency. Each worker has its own
+        # interpreter and pytest temp tree; file scheduling keeps module-level
+        # fixtures together. Retain the full collection and the same timeout.
+        # Narrow changed-file and contract gates avoid this startup overhead.
+        cmd = [*cmd, "-n", "2", "--dist=loadfile", "-vv", "--durations=15"]
     with tempfile.TemporaryDirectory(prefix="cwpp-") as basetemp:
         return _run(
             [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],
