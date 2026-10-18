@@ -1,3 +1,12 @@
+## 远端 CI 仍红：P3 两条 identity-audit 用例在 Linux 失败（2026-10-18）
+
+- `origin/master` 已同步到 `e7711ca4`；本地 `python -m pytest tests/unit`（3.13）**7030 passed**，但 GitHub CI（3.12/ubuntu）在 `41ae5f1a` 的 Unit tests 步骤失败。
+- 失败用例（check-run 注解）：`tests/unit/test_identity_audit/test_1_checks.py::test_out_file_changes_nothing_but_the_out_file` 与 `::test_the_audit_never_writes_anything_but_the_out_file`，均为 AssertionError。
+- 这是 P3 合入后暴露的**平台差异**（Windows 本地绿、Linux CI 红）；CI 日志需登录查看，尚未定位是退出码还是目录树差异。
+- 下一步：取 CI 日志定位，修 P3 CLI/测试后再取 exact CI；修好前不宣称 CI 绿。
+
+---
+
 ## CI 命令恢复绿：fixtures 包冲突已修（2026-10-18）
 
 - 根因：`tests/unit/test_identity_audit/fixtures`（常规包，原名 `fixtures`）与共享的 `tests/fixtures`（命名空间包）同名；谁先被导入谁占住 `sys.modules['fixtures']`，另一侧就 15 个 collection error。
