@@ -147,3 +147,62 @@ def test_pptx_cell_locators_match_parse_pptx_byte_for_byte():
         if entry["locator"] is not None
     }
     assert emitted == existing
+
+
+def test_docx_table_numbering_follows_the_parser_with_nested_tables():
+    """Tables the parser never numbers must not consume a ``t=`` index.
+
+    ``docx_parser.table()`` recurses only into a ``w:tbl`` that is a *direct*
+    child of a cell; a nested table wrapped in ``w:sdt`` inside a cell is
+    reported as an unsupported element and never entered, yet ``body.iter``
+    yields it — so a real research note whose cells carry such tables shifted
+    every later ``t=`` index by three and broke locator parity on 24.8% of the
+    structure's cells.  This fixture reproduces that divergence: the direct
+    child must be numbered, the ``w:sdt``-wrapped one must not, and the table
+    after the outer one must keep the index the parser gives it.
+    """
+    nested_visible = table(row(cell(paragraph("可见嵌套"))))
+    nested_hidden = table(row(cell(paragraph("不可见嵌套"))))
+    sdt_wrapped = (
+        "<w:sdt><w:sdtPr/><w:sdtContent>" + nested_hidden + "</w:sdtContent></w:sdt>"
+    )
+    payload = docx(
+        table(
+            row(cell(paragraph("外层A")), cell(paragraph("外层B"))),
+            row(
+                "<w:tc><w:tcPr/>"
+                + paragraph("承上")
+                + nested_visible
+                + sdt_wrapped
+                + "</w:tc>"
+            ),
+        )
+        + table(row(cell(paragraph("后一个表"))))
+    )
+
+    existing = set(_parsed_docx_locators(payload))
+    assert existing, "the fixture must produce table units"
+    # The parser numbers the outer table, its direct nested child, then the
+    # later sibling — and never the sdt-wrapped one.
+    assert "cwp-docx-body/1|t=0|r=0|c=0|p=0" in existing
+    assert "cwp-docx-body/1|t=1|r=0|c=0|p=0" in existing
+    assert "cwp-docx-body/1|t=2|r=0|c=0|p=0" in existing
+
+    tables = _structure(payload)["tables"]
+    assert isinstance(tables, list)
+    emitted = {
+        entry["locator"]
+        for table_structure in tables
+        for entry in table_structure["cells"]  # type: ignore[index]
+        if entry["locator"] is not None
+    }
+    assert emitted <= existing, (
+        "nested-table numbering drifted from the parser: "
+        f"{sorted(emitted - existing)}"
+    )
+    # Three numbered tables, exactly as the parser sees them.
+    assert len(tables) == 3
+    # The sdt-wrapped cell content never produced a locator the parser lacks.
+    assert not any("不可见" in str(entry.get("text")) for entry in [
+        c for t in tables for c in t["cells"]  # type: ignore[index]
+    ])

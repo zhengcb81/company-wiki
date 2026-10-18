@@ -737,6 +737,60 @@ def _docx_table_work(node: Any) -> tuple[int, int]:
     return cells, chars
 
 
+def _docx_table_order(body: Any) -> list[Any]:
+    """Tables in the order ``docx_parser`` numbers them (``t=<i>``).
+
+    ``body.iter(W + "tbl")`` yields every table in document order, but the
+    parser numbers a different subset: ``table()`` numbers a table on entry
+    and recurses only into a ``w:tbl`` that is a *direct* child of a cell
+    (a ``w:sdt``-wrapped nested table inside a cell is reported as an
+    unsupported element and never entered), while ``body()`` descends the
+    ``w:sdt`` / ``w:customXml`` / ``w:ins`` / ``w:moveTo`` wrappers but never
+    numbers anything inside ``w:del`` / ``w:moveFrom`` — deleted content is
+    counted in metadata only.  A real research note whose cells carry
+    ``w:sdt``-wrapped nested tables shifted every later ``t=`` index under
+    ``body.iter``, so this walk replicates the parser exactly.
+    """
+
+    order: list[Any] = []
+
+    def walk_table(table_node: Any) -> None:
+        order.append(table_node)
+        for row_node in table_node.findall(W + "tr"):
+            for cell_node in row_node.findall(W + "tc"):
+                for child in cell_node:
+                    if child.tag == W + "tbl":
+                        walk_table(child)
+
+    def walk_body(node: Any) -> None:
+        for child in node:
+            if child.tag == W + "tbl":
+                walk_table(child)
+            elif child.tag in {W + "del", W + "moveFrom"}:
+                # Deleted content is walked with visible=False: its tables are
+                # counted in metadata but never numbered, so they must not
+                # consume a ``t=`` index here either.
+                continue
+            elif child.tag in {
+                W + "sdt",
+                W + "customXml",
+                W + "ins",
+                W + "moveTo",
+            }:
+                # ``docx_parser.body()`` descends into ``w:sdtContent`` for a
+                # ``w:sdt`` and into the wrapper itself otherwise; following
+                # the same shape keeps the numbering aligned.
+                content = (
+                    child.find(W + "sdtContent")
+                    if child.tag == W + "sdt"
+                    else None
+                )
+                walk_body(content if content is not None else child)
+
+    walk_body(body)
+    return order
+
+
 def _parse_docx(
     package: _Package, source_sha256: str, work: _Work
 ) -> dict[str, object]:
@@ -746,7 +800,7 @@ def _parse_docx(
         raise ValueError("DOCX document body is missing")
     footnote_texts, footnotes_present = _docx_footnote_texts(package)
 
-    table_nodes = list(body.iter(W + "tbl"))
+    table_nodes = _docx_table_order(body)
     tables: list[dict[str, object]] = []
     diagnostics: list[dict[str, object]] = []
     status = STATUS_OK
