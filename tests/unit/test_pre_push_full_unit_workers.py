@@ -66,3 +66,22 @@ def test_real_worker_processes_keep_inventory_failure_and_owned_cleanup(tmp_path
     assert not root.exists()
     assert list(tmp_path.iterdir()) == [sentinel]
     assert sentinel.read_text(encoding="utf-8") == "original"
+
+
+
+def test_a_wide_affected_set_uses_the_same_bounded_workers(monkeypatch):
+    observed = []
+    monkeypatch.setattr(gate, "_run", lambda cmd, *args, **kwargs: observed.append(cmd) or 0)
+    cases = [f"tests/unit/test_case_{index}.py" for index in range(201)]
+    assert gate._run_pytest_gate([sys.executable, "-m", "pytest", *cases], "affected") == 0
+    command = observed[0]
+    assert command[command.index("-n") + 1] == "2"
+    assert "--dist=loadfile" in command
+
+
+def test_a_narrow_affected_set_stays_serial(monkeypatch):
+    observed = []
+    monkeypatch.setattr(gate, "_run", lambda cmd, *args, **kwargs: observed.append(cmd) or 0)
+    cases = [f"tests/unit/test_case_{index}.py" for index in range(12)]
+    assert gate._run_pytest_gate([sys.executable, "-m", "pytest", *cases], "affected") == 0
+    assert "-n" not in observed[0]

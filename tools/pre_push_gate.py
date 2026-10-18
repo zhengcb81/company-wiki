@@ -137,16 +137,24 @@ def _run(
     return returncode
 
 
+def _explicit_test_paths(cmd: list[str]) -> int:
+    """Count explicit pytest targets; a wide affected set needs the same bound."""
+    return sum(1 for item in cmd if item.startswith("tests/"))
+
+
 def _run_pytest_gate(cmd: list[str], label: str) -> int:
     # Scratch belongs to this invocation, independent of checkout depth. Pytest's
     # existing Windows fallback handles path placement; its log is diagnostic.
     # TemporaryDirectory restores this owned root on success, failure or timeout.
     # Full bootstrap progress is captured (not streamed on successful pushes).
     # On timeout it identifies the last test; successful output lists slow cases.
-    if "tests/unit" in cmd:
+    if "tests/unit" in cmd or _explicit_test_paths(cmd) > 200:
         # xdist is already a declared test dependency. Each worker has its own
         # interpreter and pytest temp tree; file scheduling keeps module-level
         # fixtures together. Retain the full collection and the same timeout.
+        # A wide affected set (push hook with many changed shared modules) is
+        # the same allowance as the full unit suite, so it gets the same two
+        # workers instead of one serial process under the identical deadline.
         # Narrow changed-file and contract gates avoid this startup overhead.
         cmd = [*cmd, "-n", "2", "--dist=loadfile", "-vv", "--durations=15"]
     with tempfile.TemporaryDirectory(prefix="cwpp-") as basetemp:
