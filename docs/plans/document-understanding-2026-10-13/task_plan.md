@@ -1,3 +1,13 @@
+## 两张DU11外包已验收，物理/cache与FF配套读取接口已合本地主线 — 2026-10-18
+
+RF正常发布main=f8002f5f，精确CI39092538354 success，18有限独立行为通过、2物理安装根6源码定点同步，3旧assurance WIP SHA不变。FF初审102主链绿后4反例查出当前发布日期/跨市场去零缺陷，ROOT隔离根修a9c2dcf7再独审28边界＋1真实HK TXT链通过，0ET/network、原件和作者树不写；待CWP producer先正常发布，再并线推送FF。见[RF发布](../du11-source-closure-2026-10-18/review/du11-rf-publication.md)、[FF最终联调](../du11-source-closure-2026-10-18/review/du11-ff-final-integration.md)。
+
+CWP完整组件32ab6e06合5ad4295f：7源码与ROOT受审字节逐一相等；219物理/grammar/cache相关PASS10.11s、最终独立27PASS8.51s，reader端口59相关PASS37.37s及独立真实跨仓验证。PDF实际mime、pair级coarse/fine覆盖、繁体/English独立主语、线性扫描/真实grammar字节cache依赖已修；当前reader一次manifest观察并提供可选canonical_identity，FF不再复制市场normalizer。原shared预算/上限/原件/gold不变。B1已发布9c681ed2，精确CI39092308121 success（5221PASS/11SKIP正常push517.05s），本组件正常push/精确CI仍待，不能借B1代签。
+
+**Next Step：** 正常发布本组件→FF正常并线/推送/定点安装；按[唯一/集体先行词设计](../du11-source-closure-2026-10-18/review/antecedent-owner-design.md)继续source readiness。最新真实三源仍10/10、7/7、8/8及canonical一致，但CN p17 t32/t34仍被选中，整体语义/指代闭合与正式三供应商摘要/恢复/同跨run缓存/FF-RF C仍OPEN，不能以gold命中或synthetic代签。新holdout/RF循环后续继续；不新增小节点人工签收。下方历史保留。
+
+---
+
 ## B1 共享预算与线性索引已验收合入本地主线 — 2026-10-18
 
 完整组件f5a26b48已合b2503245；739相关PASS/50.52s，最终独立9PASS/3.27s及3个有限控制，精确源码SHA一致。逐member重建背景集合的平方级路径已消除，几何/索引扩展先消耗同parent账户；两处预算不足仍先遍历的漏洞已修。原件三源CN10/10、HK7/7、US8/8和canonical一致，同16M账户未超额，0收费/0原件复制、gold不改、自有Temp删除。详见[独立审查](../du11-source-closure-2026-10-18/review/budget-index-independent.md)和[真实源收据](../du11-source-closure-2026-10-18/budget-source-replay/receipt.json)。
