@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sqlite3
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
@@ -195,6 +196,18 @@ def build_fixture(
     except BaseException:
         catalog.close()
         raise
+    # Freeze the fixture database without SQLite side files: the audit must be
+    # able to prove it writes nothing, and a WAL-mode fixture makes the child's
+    # read-only open create ``-shm`` on Linux (it stays invisible on Windows).
+    catalog.close()
+    store = catalog._store  # noqa: SLF001 - fixture owns this temporary catalog
+    if store is not None and store._coalesced_connection is not None:  # noqa: SLF001
+        store._coalesced_connection.close()  # noqa: SLF001
+        store._coalesced_connection = None  # noqa: SLF001
+    with sqlite3.connect(config.database_path) as connection:
+        connection.execute("PRAGMA journal_mode=DELETE")
+    for suffix in ("-wal", "-shm"):
+        Path(str(config.database_path) + suffix).unlink(missing_ok=True)
     return Fixture(
         root=root,
         lake=lake,
