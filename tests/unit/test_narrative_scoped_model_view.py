@@ -30,10 +30,21 @@ def test_real_original_prose_is_defined_once_and_next_to_local_tasks():
     result = view(selected)
     data = result.to_model_dict()
     rows = definitions(data)
-    assert len(data["tasks"]) == 64 and len(rows) == len(selected.evidence_spans) == 96
-    assert len({row["source_key"] for row in rows}) == 96
+    # The plan keeps every selected task for coverage accounting, while the
+    # model payload carries at most the claim budget's worth of tasks so a real
+    # provider can answer them without overrunning or inventing part keys.
+    assert len(result.plan.tasks) == 64
+    assert len(data["tasks"]) == 20 == data["available_task_count"]
+    visible = result.visible_keys or frozenset(task.key for task in result.plan.tasks)
+    visible_tasks = [task for task in result.plan.tasks if task.key in visible]
+    assert len(visible_tasks) == 20
+    visible_ids = {sid for task in visible_tasks for sid in task.member_ids}
+    assert len(rows) == len(visible_ids)
+    assert {row["source_key"] for row in rows} == set(result._source_keys[sid] for sid in visible_ids)
     by_key = {row["source_key"]: row for row in rows}
-    assert [by_key["s" + str(i)]["text"] for i in range(1, 97)] == [row.raw_text for row in selected.evidence_spans]
+    ordered = [sid for sid in result.plan.evidence_order if sid in visible_ids]
+    spans = {span.span_id: span for span in selected.evidence_spans}
+    assert [by_key[result._source_keys[sid]]["text"] for sid in ordered] == [spans[sid].raw_text for sid in ordered]
     assert any("text" in part for task in data["tasks"] for part in task["parts"])
     assert data["scope"] == "selected_source_tasks_only"
     assert "u_" not in json.dumps(data)  # hashes stay in program binding, not prose citations

@@ -25,7 +25,7 @@ from .narrative_contracts import NarrativeSelectResult
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.2'
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.3'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -41,12 +41,12 @@ SCOPED_INSTRUCTION = (
     'do not output them. Respect output_plan.max_claims_per_task per task and '
     'output_plan.max_claims in total; the response schema arrays are bounded but the '
     'program enforces the smaller per-task cap, so exceeding it rejects the whole response. '
-    'Each clause is at most 280 characters. Work through the supplied tasks and emit one '
-    'clause for every task whose parts directly support it, until the clause budget is '
-    'reached; leaving a supported business update unsummarized is a failure. Omit only a '
-    'task with no direct support, never invent support. Do not output reasoning, Markdown, '
-    'research conclusions, valuation, ratings or paths. Valid local citations do not prove '
-    'that rewritten prose is true.'
+    'Each clause is at most 280 characters. Choose the most important distinct business '
+    'updates across the supplied tasks, at most one clause per task, and aim for '
+    'output_plan.target_claim_count; never exceed output_plan.max_claims in total. Omit a '
+    'task with no direct support rather than invent support. Do not output reasoning, '
+    'Markdown, research conclusions, valuation, ratings or paths. Valid local citations do '
+    'not prove that rewritten prose is true.'
 )
 
 
@@ -100,7 +100,9 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None) -
     from .narrative_model import ModelResponseError
     if max_output_tokens is not None and (type(max_output_tokens) is not int or max_output_tokens <= 0):
         raise ModelResponseError('model output budget must be a positive integer')
-    target = min(20, max(1, task_count))
+    # Ask for fewer than the hard cap so a model that overshoots by a clause or
+    # two still lands inside the contract instead of dead-lettering the item.
+    target = min(18, max(1, task_count))
     if max_output_tokens is not None:
         target = min(target, max(1, (max_output_tokens - 256) // 320))
     return {'max_claims': 20, 'target_claim_count': target, 'target_text_chars': 240,
@@ -275,6 +277,9 @@ class ScopedModelView:
     _spans: Mapping[str, EvidenceSpan]
     _source_keys: Mapping[str, str]
     _parts: Mapping[str, Mapping[str, str]]
+    # None means every plan task is visible (small selections); a frozenset
+    # bounds the model payload to the claim budget without shrinking the plan.
+    visible_keys: frozenset[str] | None = None
 
     def to_binding(self) -> dict[str, Any]:
         """Program-owned exact identity; local keys never replace source IDs."""
@@ -287,7 +292,9 @@ class ScopedModelView:
         return canonical_json_hash(self.to_binding())
 
     def to_model_dict(self) -> dict[str, Any]:
-        counts = Counter(sid for task in self.plan.tasks for sid in task.member_ids)
+        visible = [task for task in self.plan.tasks
+                   if self.visible_keys is None or task.key in self.visible_keys]
+        counts = Counter(sid for task in visible for sid in task.member_ids)
 
         def source_role(span):
             role = span.structured_value.get("source_role", "unknown")
@@ -296,14 +303,15 @@ class ScopedModelView:
         def frequent(values, fallback):
             return Counter(values).most_common(1)[0][0] if values else fallback
 
+        visible_ids = [sid for sid in self.plan.evidence_order if counts[sid] > 0]
         fragment_defaults = {
-            "source_role": frequent([source_role(self._spans[sid]) for sid in self.plan.evidence_order], "unknown"),
-            "quality_flags": list(frequent([self._spans[sid].quality_flags for sid in self.plan.evidence_order], ())),
+            "source_role": frequent([source_role(self._spans[sid]) for sid in visible_ids], "unknown"),
+            "quality_flags": list(frequent([self._spans[sid].quality_flags for sid in visible_ids], ())),
         }
         task_defaults = {
-            "kind": frequent([task.kind for task in self.plan.tasks], "standalone"),
-            "section_role": frequent([task.section_role for task in self.plan.tasks], "unknown"),
-            "topics": list(frequent([task.topics for task in self.plan.tasks], ())),
+            "kind": frequent([task.kind for task in visible], "standalone"),
+            "section_role": frequent([task.section_role for task in visible], "unknown"),
+            "topics": list(frequent([task.topics for task in visible], ())),
             "support_parts": "all_parts", "context_parts": [],
         }
 
@@ -317,7 +325,7 @@ class ScopedModelView:
 
         shared = [body(sid) for sid in self.plan.evidence_order if counts[sid] > 1]
         tasks = []
-        for task in self.plan.tasks:
+        for task in visible:
             parts = self._parts[task.key]
             support = [key for key, sid in parts.items() if sid in task.support_ids]
             tasks.append(without_defaults({
@@ -353,12 +361,37 @@ class ScopedModelView:
                                   task.support_ids, task.context_ids)
 
 
+def _model_visible_tasks(plan, known, max_claims: int):
+    """Highest-value tasks that fit the claim budget, in source order.
+
+    One citation view per task produces more tasks than the claim budget on a
+    long filing (64 views for 18 clauses). The model cannot answer them all and
+    real providers then overrun, invent part keys or emit malformed JSON. The
+    view therefore carries at most max_claims tasks, chosen by the existing
+    reading priority; unselected views stay in the public selection and are
+    simply not summarized.
+    """
+    if len(plan.tasks) <= max_claims:
+        return plan.tasks
+    # No per-span value score survives selection, so spread the budget evenly
+    # across the filing's task order: taking the first N compresses the summary
+    # into the opening sections and drops later business updates (for example
+    # the MOCVD product milestones) that the selection did include.
+    total = len(plan.tasks)
+    chosen = {round(index * (total - 1) / (max_claims - 1)) for index in range(max_claims)}
+    return tuple(task for index, task in enumerate(plan.tasks) if index in chosen)
+
+
 def compile_scoped_model_view(selected: NarrativeSelectResult, *, max_claims: int) -> ScopedModelView:
     """Compile a transient view of this pinned selection, with no extra IO."""
     plan = build_summary_task_plan(selected.evidence_spans,
                                    reading_context=selected.reading_context, max_claims=max_claims)
+    known = {span.span_id: span for span in selected.evidence_spans}
+    visible = _model_visible_tasks(plan, known, max_claims)
     return ScopedModelView(plan,
         MappingProxyType({span.span_id: span for span in selected.evidence_spans}),
         MappingProxyType({sid: "s" + str(i) for i, sid in enumerate(plan.evidence_order, 1)}),
         MappingProxyType({task.key: MappingProxyType({"p" + str(i): sid
-            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}))
+            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}),
+        visible_keys=(None if len(visible) == len(plan.tasks)
+                      else frozenset(task.key for task in visible)))

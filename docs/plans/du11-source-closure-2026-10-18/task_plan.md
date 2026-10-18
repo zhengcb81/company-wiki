@@ -1,3 +1,17 @@
+## C 第二轮：模型视图收敛到 20 个任务，CN/US 再次 PASS（2026-10-18）
+
+**根因：** 任务计划有 64 个 citation view，却只有 20 条 claim 预算。真实模型因此出现三种失败：只写 8 条（覆盖不足）、写满 64 条（`CLAIMS_LIMIT`）、把 task-local part key 串错（`EVIDENCE_REFERENCE`）。
+
+**修复：** 模型视图只暴露 **20 个任务**（按文档位置均匀抽样，避免摘要压缩在开头章节）；完整 plan 仍保留 64 个任务供覆盖统计；prompt `4.0.3` 要求约 18 条、每 task 至多 1 条。
+
+- **CN（MiMo）：PASS**，1 POST，9,843 tokens / $0.001798，13 条 claims；InP/磷化铟已覆盖，PRISMO PD5 阶段仍缺。
+- **US（MiniMax）：PASS**，1 POST，10,829 tokens / $0.005353。
+- 第二轮内容复审进行中（上一轮 11 条 P1 逐条复核）。
+- HK 仍被无效 DeepSeek key（401）阻塞。
+
+**Next Step：** 内容复审结论 → 关闭剩余 P1 → US/CN 定稿；HK 密钥轮换后补跑。
+
+---
 ## 正式 C 内容审查：CN/US 均 CONTENT_FAIL；两处根因已修（2026-10-18）
 
 独立内容审查（非作者，只读）：**CN CONTENT_FAIL**、**US CONTENT_FAIL**。
