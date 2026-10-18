@@ -24,7 +24,9 @@
 
 ## 三条路径
 
-### A. 覆盖修复：第二次有界尝试（推荐，但改动最大）
+### A. 覆盖修复：第二次有界尝试（已实现，实验性、默认关闭）
+
+**2026-10-18 实测结论：** 不新增 job/表/预扣，复用 retry（两次 attempt、两次计费）；`CW_SUMMARY_COVERAGE_REPAIR=1` 启用。CN 真实运行两次 POST 并合并成功、进入 `activation_pending`。未解决：`activation-resume` 与重试 attempt 的 `reopen_paid_output` 冲突；MiMo 首响应 JSON 约 1/3 失败。默认关闭。
 
 - 在 `NarrativeSummarizeHandler` 解码后计算未覆盖 task；若仍有预算且未覆盖 ≥1，构造只含未覆盖 task 的请求，target 为剩余额度，再调用一次 `model_caller`。
 - 两次调用各自 reservation/settlement；合并 claims（claim_id 加 `-b` 后缀）；第二次失败不推翻第一次结果，但标记 `needs_review` 并记录诊断。
