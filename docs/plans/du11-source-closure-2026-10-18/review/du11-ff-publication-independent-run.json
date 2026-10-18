@@ -1,0 +1,71 @@
+{
+  "head": "a9c2dcf7de2e70f50cb18caa8b4b038464391f9d",
+  "source_sha256_before": {
+    "tools/complexity_diagnostics.py": "a6a0ef5e211dac9abc3874c95bb07fac23b54d8307d19c9ce6cf07fdf598ba2e",
+    "tools/ci_tests.py": "8ae5f51e611e8017439cf9748edff4e6fb17c111a33764c011e98d4b02850d96",
+    "tests/test_complexity_diagnostics.py": "603ff0d0bf772fe8293c81a9bc8f4b96558f9a01c3062aaa9d569fb7e42d8019",
+    "tests/test_ci_tests.py": "7bb9cca8c23a2e1dd35d50f3f8e56386902f6ab6ddbd1f38c8097414216f684d",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "ci_table": {
+    "before": 35,
+    "after": 38,
+    "added": [
+      "tests/test_du11_transcript_reuse_contract.py",
+      "tests/test_du11_transcript_reuse_selection.py",
+      "tests/test_du11_verified_reader_revalidation.py"
+    ],
+    "removed": [],
+    "unique": true
+  },
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-ff-publication-review-j40501u3\\tmp\\pytest",
+    "tests/test_complexity_diagnostics.py::test_json_stdout_preserves_unicode_paths_under_non_utf8_child_stdio",
+    "tests/test_ci_tests.py::test_shared_ci_table_covers_pure_local_reuse_and_current_reader_regressions",
+    "tests/test_ci_tests.py::test_real_pytest_failure_reports_node_and_restores_owned_temp",
+    "tests/test_ci_tests.py::test_timeout_also_cleans_owned_scratch",
+    "tests/test_publication_independent.py",
+    "--junitxml",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-publication-independent.xml"
+  ],
+  "returncode": 0,
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "7",
+    "time": "1.848",
+    "timestamp": "2026-10-18T04:47:32.256872+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "snapshot_sha256": {
+    "tools/complexity_diagnostics.py": "a6a0ef5e211dac9abc3874c95bb07fac23b54d8307d19c9ce6cf07fdf598ba2e",
+    "tools/ci_tests.py": "8ae5f51e611e8017439cf9748edff4e6fb17c111a33764c011e98d4b02850d96",
+    "tests/test_complexity_diagnostics.py": "603ff0d0bf772fe8293c81a9bc8f4b96558f9a01c3062aaa9d569fb7e42d8019",
+    "tests/test_ci_tests.py": "7bb9cca8c23a2e1dd35d50f3f8e56386902f6ab6ddbd1f38c8097414216f684d",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "network_attempts": 0,
+  "sentinel_unchanged": true,
+  "archive_sha256": "0e5453c622a2a525acc65dbe2f7b632dd9c06d5b350e27320d792cc557c2f995",
+  "owned_temp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du11-ff-publication-review-j40501u3",
+  "owned_temp_removed": true,
+  "source_sha256_after": {
+    "tools/complexity_diagnostics.py": "a6a0ef5e211dac9abc3874c95bb07fac23b54d8307d19c9ce6cf07fdf598ba2e",
+    "tools/ci_tests.py": "8ae5f51e611e8017439cf9748edff4e6fb17c111a33764c011e98d4b02850d96",
+    "tests/test_complexity_diagnostics.py": "603ff0d0bf772fe8293c81a9bc8f4b96558f9a01c3062aaa9d569fb7e42d8019",
+    "tests/test_ci_tests.py": "7bb9cca8c23a2e1dd35d50f3f8e56386902f6ab6ddbd1f38c8097414216f684d",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "source_unchanged": true,
+  "wall_seconds": 3.28
+}

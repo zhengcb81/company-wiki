@@ -1,0 +1,191 @@
+{
+  "schema_version": "du11-ff-publication-preflight/1",
+  "status": "READ_ONLY_PREFLIGHT_COMPLETE_FOLLOWUP_REPAIR_AUTHORIZED_NOT_YET_EXECUTED",
+  "ff_head": "a9c2dcf7de2e70f50cb18caa8b4b038464391f9d",
+  "ci_selection_files": [
+    "tests/test_architecture_quality.py",
+    "tests/test_m3_acquisition_usage_ff.py",
+    "tests/test_m3_acquisition_usage_acceptance.py",
+    "tests/test_failure_usage_continuity.py",
+    "tests/test_s3_single_request_limits.py",
+    "tests/test_single_intent_acquisition.py",
+    "tests/test_s3_install_surface.py",
+    "tests/test_selective_installation.py",
+    "tests/test_install_runtime_diagnostics.py",
+    "e2e/test_source_ref_v2_cli.py",
+    "tests/test_ff_v2_contract.py",
+    "tests/test_provider_cause_contract.py",
+    "tests/test_acquisition_failure_consumer.py",
+    "tests/test_ff_golden.py",
+    "tests/test_source_ref_v2.py",
+    "tests/test_source_ref_v2_db_query.py",
+    "tests/test_local_source_prepare.py",
+    "tests/test_transcript_companion.py",
+    "tests/test_transcript_companion_transport.py",
+    "tests/test_transcript_launch_contract.py",
+    "tests/test_transcript_response_budget.py",
+    "tests/test_fetch_filing.py",
+    "tests/test_fc802_gap_orchestration.py",
+    "tests/test_fc1204_coverage_gap.py",
+    "tests/test_p5_process_lifecycle.py",
+    "tests/test_p5_legacy_request_limits.py",
+    "tests/test_complexity_diagnostics.py",
+    "tests/test_verify_plan_claims.py",
+    "tests/test_latest_mode.py",
+    "tests/test_dropbox_config_invariants.py",
+    "tests/test_bundle_compat.py",
+    "tests/e2e_support/test_spy_log.py",
+    "tests/test_ci_tests.py",
+    "tests/test_w07_matrix_efficiency.py",
+    "tests/test_root_w07_matrix_boundaries.py"
+  ],
+  "ci_selected_file_count": 35,
+  "current_du11_new_tests_in_table": [],
+  "baseline_nine": {
+    "author_full": "1320PASS9FAIL16SKIP",
+    "independent_correction": "8 failures reproduced at baseline; ninth vendored-copy assertion depends on concurrently changing sibling CWP; not 9/9 same immutable baseline",
+    "groups": [
+      {
+        "file": "tests/test_complexity_diagnostics.py",
+        "count": 4,
+        "selected": true,
+        "root_cause": "UTF8 consumer vs Windows GBK producer stdout with ensure_ascii=False Unicode JSON paths; diagnostic-only AST score, no radon/mccabe/threshold"
+      },
+      {
+        "file": "tests/test_fc803_minimal_download.py",
+        "count": 3,
+        "selected": false,
+        "root_cause": "Historical real CWP ensure child exit1; raw stderr not committed; exact deeper cause OPEN, no fresh execution"
+      },
+      {
+        "file": "tests/test_policy_containment_fc501.py",
+        "count": 1,
+        "selected": false,
+        "root_cause": "old assertion matches exact schema error wording; config owner now emits specific allowed/optional-field message; rejection remains"
+      },
+      {
+        "file": "tests/test_fc1307a_host_assumption_gate.py",
+        "count": 1,
+        "selected": false,
+        "root_cause": "live sibling vendored-copy drift; not a frozen baseline failure"
+      }
+    ]
+  },
+  "install_roots": [
+    {
+      "logical_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch",
+      "physical_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch",
+      "files": [
+        {
+          "path": "scripts/transcript_companion.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+          "old_sha256": "5cbba8dcdb15f9d61a232d6f15fc2b40ed2320f2b26226e85a5d2dbf4db3f7f7",
+          "desired_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be"
+        },
+        {
+          "path": "scripts/transcript_tool_transport.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+          "old_sha256": "6b2a74890d84050f562b7440eb8d80048ade1fc30b2426c6bac439b0418eb19a",
+          "desired_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+        },
+        {
+          "path": "scripts/transcript_reuse_selection.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+          "old_sha256": null,
+          "desired_sha256": "8591e9968d5d23c4e056a32062ea4b4fdbac63c3421523d921f3176d93823231"
+        }
+      ]
+    },
+    {
+      "logical_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.claude\\skills\\filing-fetch",
+      "physical_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch",
+      "files": [
+        {
+          "path": "scripts/transcript_companion.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+          "old_sha256": "5cbba8dcdb15f9d61a232d6f15fc2b40ed2320f2b26226e85a5d2dbf4db3f7f7",
+          "desired_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be"
+        },
+        {
+          "path": "scripts/transcript_tool_transport.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+          "old_sha256": "6b2a74890d84050f562b7440eb8d80048ade1fc30b2426c6bac439b0418eb19a",
+          "desired_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+        },
+        {
+          "path": "scripts/transcript_reuse_selection.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+          "old_sha256": null,
+          "desired_sha256": "8591e9968d5d23c4e056a32062ea4b4fdbac63c3421523d921f3176d93823231"
+        }
+      ]
+    },
+    {
+      "logical_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch",
+      "physical_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch",
+      "files": [
+        {
+          "path": "scripts/transcript_companion.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+          "old_sha256": "5cbba8dcdb15f9d61a232d6f15fc2b40ed2320f2b26226e85a5d2dbf4db3f7f7",
+          "desired_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be"
+        },
+        {
+          "path": "scripts/transcript_tool_transport.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+          "old_sha256": "6b2a74890d84050f562b7440eb8d80048ade1fc30b2426c6bac439b0418eb19a",
+          "desired_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+        },
+        {
+          "path": "scripts/transcript_reuse_selection.py",
+          "physical_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+          "old_sha256": null,
+          "desired_sha256": "8591e9968d5d23c4e056a32062ea4b4fdbac63c3421523d921f3176d93823231"
+        }
+      ]
+    }
+  ],
+  "physical_root_count": 2,
+  "physical_runtime_write_count": 6,
+  "runtime_files_to_add_per_root": [
+    "scripts/transcript_reuse_selection.py"
+  ],
+  "no_configuration_or_secret_read": true,
+  "no_tests_or_api_run": true,
+  "no_install_write": true,
+  "rf_dependency_observation": {
+    "read_only_git_commit": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+    "cached_origin_main": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+    "manifest_path": "compatibility/current.json",
+    "current_triplet": {
+      "filing": "5001dcbef1845a08e90cda6f2a86365610a662af",
+      "revenue": "e585f6d58193f377daefe23147934b26e6293ad0",
+      "wiki": "6cd9b6d7ca4faee3348fdd8afcf70bf7e3d6a5fb"
+    },
+    "remote_current_not_queried": true
+  },
+  "publication_barrier": "Wait ROOT confirmation remote producer contains canonical-identity flag; update CI dependency via its actual registry owner, not ad hoc multi-repo historical pin edits",
+  "source_sha256": {
+    ".githooks/pre-push": "d5623a4574f72e3de27c11fd23f17e89f3cc729af643e56b00a4912b5d2e2e41",
+    "tools/pre_push_gate.py": "ee2b2e163b725109d2ee406ea8cd287c223e7793f86ed90490715e5f0a9282c9",
+    "tools/ci_tests.py": "803b2f1679ec64409a678e5a2013a1f739294b2aef94acb885b3cdf2aadc066a",
+    ".github/workflows/quality.yml": "1858fa4767ae9363afa692b1750f154fe05a0b873db8933619b47e8544558b8b",
+    "tools/complexity_diagnostics.py": "aa8df19d9b22850358732600737d8a1add63888816a3cbb5e6fd4e26f85a5fed",
+    "tests/test_complexity_diagnostics.py": "e3e9702971325e2c4e51ff5a2233fbb19ba9a10525ef9739b383590fd26999fb",
+    "tools/sync_installs_b3.py": "d52fc95e930921033de09eef8cf481ed4984618275a71e77b6a8b259ea4b1bde"
+  },
+  "report_sha256": "d99adf7160cdf49cec835a837fc84acfd8e87016f496ccc15287882ae7db13df",
+  "followup": {
+    "status": "FOCUSED_GREEN_AWAITING_DISTINCT_REVIEW",
+    "ci_files_original_snapshot": 35,
+    "ci_files_proposed_now": 38,
+    "focused_tests": "135PASS5.29s",
+    "source_and_tests": {
+      "tools/complexity_diagnostics.py": "a6a0ef5e211dac9abc3874c95bb07fac23b54d8307d19c9ce6cf07fdf598ba2e",
+      "tools/ci_tests.py": "8ae5f51e611e8017439cf9748edff4e6fb17c111a33764c011e98d4b02850d96",
+      "tests/test_complexity_diagnostics.py": "603ff0d0bf772fe8293c81a9bc8f4b96558f9a01c3062aaa9d569fb7e42d8019",
+      "tests/test_ci_tests.py": "7bb9cca8c23a2e1dd35d50f3f8e56386902f6ab6ddbd1f38c8097414216f684d"
+    },
+    "transport_unchanged": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  }
+}

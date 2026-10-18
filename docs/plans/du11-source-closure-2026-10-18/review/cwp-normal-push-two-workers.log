@@ -1,0 +1,35 @@
+Push unit scope: shared or unknown tooling changed (1 paths)
+
+=== full affected unit suite ===
+
+=== independent CI contract smoke ===
+============================ 142 passed in 48.31s =============================
+================ 6801 passed, 24 skipped in 346.26s (0:05:46) =================
+============================ slowest 15 durations =============================
+15.05s call     tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee
+14.26s call     tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+14.14s call     tests/unit/test_w04_source_transport.py::test_compact_65_parent_wire_stays_small_without_truncating_body
+11.70s call     tests/unit/test_legacy_entrypoint_simplification.py::test_one_off_retirement_tools_left_no_import_chain
+11.17s call     tests/unit/test_narrative_extractive_production.py::test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse
+10.77s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+10.25s call     tests/unit/test_narrative_output_failure_finalization.py::test_explicit_failed_summary_public_cli_settles_output_and_resumes_with_zero_extra_post
+8.83s call     tests/unit/document_understanding_layout_hints/test_b_integrity_and_budget.py::test_work_units_grow_about_linearly
+8.71s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+7.22s call     tests/unit/document_understanding_selection/test_reading_production_selection.py::test_large_actual_candidate_pool_keeps_all_three_important_late_scopes
+7.14s call     tests/unit/test_narrative_extractive_production.py::test_real_default_policy_document_skips_model_and_does_not_require_fictional_execution
+4.75s call     tests/unit/test_n4_batch_scope.py::test_prepared_scope_is_applied_before_limit_and_reconcile_activates_only_batch
+4.52s call     tests/unit/test_shared_reading_cache_precheck.py::test_one_hundred_base_bindings_keep_shared_settings_without_original_or_decision_copies
+4.00s call     tests/unit/test_narrative_worker_factory.py::test_spawned_production_factory_reads_original_source_with_zero_network
+3.92s call     tests/unit/test_legacy_entrypoint_simplification.py::test_supported_source_pilot_help_runs_in_both_startup_modes[plain-narrative_evidence_pilot.py]
+================ 6801 passed, 24 skipped in 346.26s (0:05:46) =================
+
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+
+pre-push gate GREEN �� safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/company-wiki.git
+   9c681ed2..0ccdc689  master -> master

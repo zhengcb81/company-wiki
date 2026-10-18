@@ -1,0 +1,26 @@
+{
+  "returncode": 0,
+  "seconds": 9.855,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-pins-12i5hzi0\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-dependency-pin-stage2-tests.xml",
+    "tests/test_fc1101_ci_manifest.py",
+    "tests/test_compatibility_manifest.py",
+    "tests/test_ca301_clean_checkout.py::test_c1_manifest_triplet_is_rebuildable",
+    "tests/test_ca301_clean_checkout.py::test_c1_checkout_siblings_api_and_no_floating_main",
+    "tests/test_ca301_clean_checkout.py::test_c1_clean_checkout_layout_from_triplet"
+  ],
+  "scratch": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-du11-final-pins-12i5hzi0",
+  "scratch_restored": true,
+  "cleanup_error": null,
+  "environment": "OS path/temp allowlist without credential variables; no environment values dumped"
+}

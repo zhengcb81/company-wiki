@@ -1,0 +1,132 @@
+{
+  "schema_version": "du11-ff-type-route-independent/1",
+  "verdict": "PASS",
+  "head": "61011be60eb6adf18d1b272885475b053ac78267",
+  "reviewed_worktree": "C:/Users/郑曾波/.codex/worktrees/du11-ff-reception/filing-fetch",
+  "scope": [
+    "scripts/transcript_reuse_selection.py",
+    ".pre-commit-config.yaml"
+  ],
+  "frozen_sha256": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "snapshot_sha256": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "final_sha256": {
+    "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+    "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+  },
+  "freeze_acknowledged_by_implementer": true,
+  "ast_identical_after_removing_only_new_annotation": true,
+  "static_findings": [],
+  "static_conclusion": [
+    "Only accurate ClassInfo annotation added; all six schema values unchanged and acceptable isinstance class or tuple of classes",
+    "Existing mypy hook entry and pass_filenames=false unchanged; trigger widens from two entries to scripts/**/*.py path coverage, not full-project mypy or new gate",
+    "New helper/any transitive scripts Python edits trigger the same public two-entry check; docs/test/tool/config-only paths do not trigger this hook",
+    "Transport remains exact frozen 4bb18006; no provider/date/raw/permission/runtime contract changed"
+  ],
+  "independent_execution": {
+    "head": "61011be60eb6adf18d1b272885475b053ac78267",
+    "sha256_before": {
+      "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+      "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+    },
+    "ast_identical_after_erasing_only_new_annotation": true,
+    "mypy": {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "scripts/filing_contracts.py",
+        "scripts/fetch_filing.py"
+      ],
+      "returncode": 0,
+      "output": "Success: no issues found in 2 source files"
+    },
+    "pytest": {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-ff-type-route-review-awy8ehue\\tmp\\pytest",
+        "tests/test_type_route_independent.py",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-type-route-independent.xml"
+      ],
+      "returncode": 0,
+      "suite": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "10",
+        "time": "0.169",
+        "timestamp": "2026-10-18T04:55:55.286749+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "snapshot_sha256": {
+      "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+      "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+    },
+    "sentinel_unchanged": true,
+    "network_attempts": 0,
+    "archive_sha256": "dae5110cff7ea5bdc1fb7a2a390c393552bee3376e627f17a8f86429158f1d0d",
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-ff-type-route-review-awy8ehue",
+    "owned_temp_removed": true,
+    "sha256_after": {
+      "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+      "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+    },
+    "source_unchanged": true,
+    "wall_seconds": 4.58
+  },
+  "reused_evidence": {
+    "selection_tests": 47,
+    "selection_failures": 0,
+    "selection_errors": 0,
+    "gold_hook_receipt": "docs/plans/du11-root-reception-2026-10-18/review/qualification-hook-receipt.json",
+    "gold_sha": {
+      ".pre-commit-config.yaml": "85db7e3011cbd67f28c33b4208dcc52b186c75cd4f9e1aaee46265a10ff6fde7",
+      "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+    },
+    "not_repeated_47_135_102": true
+  },
+  "cleanup": {
+    "temp_removed": true,
+    "sentinel_unchanged": true,
+    "source_unchanged": true,
+    "network_attempts": 0,
+    "real_raw_key_config_access": false,
+    "commit_push": false
+  },
+  "limits": [
+    "Only the existing public mypy command and ten bounded controls independently executed; no full test suite or network supplier/paid model executed",
+    "Hook guarantees its configured trigger scope and public import closure, not automatic typing of every unrelated new script",
+    "ROOT owns final normal commit/push and larger-node publication; prior push failure remains preserved as RED evidence"
+  ],
+  "artifacts": [
+    "du11-ff-type-route-independent-run.json",
+    "du11-ff-type-route-mypy.log",
+    "du11-ff-type-route-independent.log",
+    "du11-ff-type-route-independent.xml",
+    "du11-ff-type-route-controls.py",
+    "du11-ff-type-route-run.py"
+  ]
+}

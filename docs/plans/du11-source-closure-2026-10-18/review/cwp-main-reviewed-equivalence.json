@@ -1,0 +1,61 @@
+{
+  "schema_version": "du11-reviewed-main-equivalence/1",
+  "rows": [
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "root_sha256": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc",
+      "published_main_sha256": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc",
+      "byte_equal": true,
+      "lf_equal": true,
+      "git_blob_equal": true,
+      "git_blob": "b16c587dfab0951107cd4a2ce7469e93254ea281"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/source_reader.py",
+      "root_sha256": "89cbc7ef9d6c99ab9bac743b17505b66328edc4cfb4f1125ae7bd5d6795eea63",
+      "published_main_sha256": "89cbc7ef9d6c99ab9bac743b17505b66328edc4cfb4f1125ae7bd5d6795eea63",
+      "byte_equal": true,
+      "lf_equal": true,
+      "git_blob_equal": true,
+      "git_blob": "1bd305199db3e6669027bac41dbc91907fa3ef5c"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/source_reader_cli.py",
+      "root_sha256": "7510ae0244a61cee61a201a32dff1a21ee637518d8b2e916271414dd6e101876",
+      "published_main_sha256": "7510ae0244a61cee61a201a32dff1a21ee637518d8b2e916271414dd6e101876",
+      "byte_equal": true,
+      "lf_equal": true,
+      "git_blob_equal": true,
+      "git_blob": "9dfd944a6361e67d7acc780923395a99663814d5"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "root_sha256": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+      "published_main_sha256": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9",
+      "byte_equal": true,
+      "lf_equal": true,
+      "git_blob_equal": true,
+      "git_blob": "3e71ce8f298cfabb062cfdb512b5c220bc143a54"
+    },
+    {
+      "path": "tests/unit/du11_reference_readiness/test_native_page_local_positions.py",
+      "root_sha256": "5275ae7110b109cddcb27bde8e644c39b6fb2710358b2c0b37a4251165f3b409",
+      "published_main_sha256": "2e020e4fccba607eb88b030775b0888e949dfe67a3cf4dffa432d01ffd8756b3",
+      "byte_equal": false,
+      "lf_equal": true,
+      "git_blob_equal": true,
+      "git_blob": "15b7024999877687068be48b48ffc6bc1c871d81"
+    },
+    {
+      "path": "tests/unit/test_pre_push_full_unit_workers.py",
+      "root_sha256": "e42810640d838a5be5c9921c687602cd48887e5e6ce2e976e33abef1e02d741e",
+      "published_main_sha256": "01016a7811ca52aea1a69ed794b1155faf21a4505a8980d28ec103a321bd94bc",
+      "byte_equal": false,
+      "lf_equal": true,
+      "git_blob_equal": true,
+      "git_blob": "f56139a0a586652a2ad2d9dde2b87dde9e9bad0d"
+    }
+  ],
+  "initial_diagnostic": "all6 physical bytes assertion failed only for2 text tests checked out CRLF; four production files exact. No runtime/test/original file rewritten to hide this.",
+  "acceptance": "four production byte exact; two test LF-normalized and identical committed blobs; normal mother full6801 and exact CI0cc success validate actual checkout"
+}

@@ -1,0 +1,21 @@
+
+=== ruff (CI WU-1.2 full scope) ===
+ok
+
+=== compileall ===
+ok
+
+=== import smoke (scripts.fetch_filing, scripts.filing_contracts) ===
+ok
+
+=== mypy public contracts (CI FC-1204-c set) ===
+scripts\transcript_reuse_selection.py:211: error: Argument 2 to "isinstance" has incompatible type "object"; expected "_ClassInfo"  [arg-type]
+Found 1 error in 1 file (checked 2 source files)
+
+FAILED: mypy public contracts (CI FC-1204-c set)
+
+GATE RED at: mypy public contracts (CI FC-1204-c set)
+Fix the root cause (see revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/ci_root_fix.md), do not bypass.
+
+PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.
+error: failed to push some refs to 'https://github.com/zhengcb81/filing-fetch.git'

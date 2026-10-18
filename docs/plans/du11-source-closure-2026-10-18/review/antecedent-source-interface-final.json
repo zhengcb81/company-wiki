@@ -1,0 +1,116 @@
+{
+  "schema_version": "du11-antecedent-source-interface-review/1",
+  "status": "READ_ONLY_INTERFACE_CONVERGED_IMPLEMENTATION_OPEN",
+  "observed_head": "2022432ea17f391ee8ba08bfd400ab81a97dee0d",
+  "reviewer": "/root/du10_et_reception_review",
+  "source_bindings": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "58e2ec620dd5bb17bb2457dbee43f1c48797c835b79d7dff8b40a080b1a03dd7"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "b7ccd12b049c4913c7eb076d651f166d23721750629763cd001be15e6703cf16"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/selection_bridge.py",
+      "sha256": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/antecedent-owner-design.md",
+      "sha256": "ea08b882fa132fb6eb655514be4b5265ed24ea20a7d091e3d13bb6096adbd78d"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/page-scope-after-counter-fix/cn-h1.json",
+      "sha256": "19652e9a003d308537a2e48ebc5a44685a19eea47530cd03e2778c3ce6a3eab0"
+    },
+    {
+      "path": "docs/plans/du11-source-quality-2026-10-18/closure-investigation/findings.md",
+      "sha256": "a4d4bc77f95fe5e5a0fbb7950c1be885dd7a8adbb80f20f93f1cc41d921e3349"
+    }
+  ],
+  "owner_split": {
+    "source": "narrative_reading bounds original predecessor IDs and source context graph",
+    "coordination": "one SourceOperatingSession, original fallback, same parent budget",
+    "grammar": "same OperatingRelationSession additive reference_closure with cached unit preparation",
+    "downstream": "existing original packages, citation views, source cards"
+  },
+  "internal_request_fields": [
+    "target_original_unit_ids",
+    "predecessor_original_unit_ids",
+    "complete",
+    "stop_reason"
+  ],
+  "internal_result_fields": [
+    "status",
+    "reference_refs",
+    "declaration_refs",
+    "member_refs",
+    "required_original_unit_ids",
+    "attribution",
+    "diagnostics"
+  ],
+  "limits": {
+    "original_unit_union": 8,
+    "original_block_union": 4,
+    "original_char_union": 2048,
+    "scope": "target plus necessary declaration plus existing required context, no carrier discount",
+    "work_account": "same caller WorkBudget"
+  },
+  "required_changes": [
+    "bounded predecessor port in already charged observation and membership traversal",
+    "one session before graph and all fact calls; update contexts before detection",
+    "lazy original fallback for replaced members, not second detector",
+    "project refs by their own namespace, never target numeric offsets",
+    "attach original declaration context and project carriers only at existing source material boundary",
+    "reuse existing cache dependency owner for every actual new grammar/source implementation"
+  ],
+  "tdd_groups": [
+    "source order/scope boundaries",
+    "unique/collective/ambiguous and non-event descriptions",
+    "inclusive/excess original caps and zero-budget preallocation",
+    "original/analysis/carrier ref namespaces",
+    "bounded preparation and scoped result cache",
+    "source assembly support/context cannot be separated by final caps",
+    "ROOT real replay without new paid calls"
+  ],
+  "actual_saved_case": {
+    "source": "page-scope-after-counter-fix/cn-h1.json",
+    "old_task": "t34",
+    "selected_matches": 1,
+    "claim_ids": [
+      "t29-source"
+    ],
+    "physical_page": 17,
+    "paragraph": 12,
+    "text_sha256": "8ff2eacd4cfb23f277697cea3e0f61701df95b2d7fd5527828b808b42092c107",
+    "known_required_gold": "10/10 source and canonical does not prove antecedent closure",
+    "prior_investigation": "paragraphs9-14 whole material spans five original blocks; no smaller sufficient declaration independently established",
+    "expected": "proved bounded original closure or defer, not cap increase or invented family"
+  },
+  "activity": {
+    "runtime_modified": false,
+    "tests_run": 0,
+    "pdf_reads": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "author_trees_modified": false,
+    "originals_modified": false,
+    "temporary_material_created": false,
+    "new_gate_or_store": false
+  },
+  "report": "antecedent-source-interface-final.md",
+  "open": [
+    "implementation and new behavior tests",
+    "actual t34 declaration fit/ambiguity decision",
+    "real source semantic and formal C acceptance"
+  ]
+}

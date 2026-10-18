@@ -1,4 +1,20 @@
+## 当前两卡接收与发布结果（2026-10-18；优先于历史）
+
+RF/FF两张DU11卡功能工程已接收、全部交付提交进入各自主线。CWP producer先发布0ccdc689（6801PASS24SKIP346.26s＋142合同PASS48.31s，精确CI39094787278 success）；RF runtime f8002f5f（18独立行为接收、416PASS＋36子测、CI39092538354 success、6源码定点安装）；FF最终e8740748（873PASS7SKIP78subtests91.13s、精确CI39095654355 success、6物理源码依赖序原子安装，双根imports/help通过）。RF唯一兼容版本表两阶段正常更新：e7364639的wiki pin/CI39094965965 success，再9669c4d7收敛filing=e874、wiki=0cc、revenue=f800，最终416PASS＋36子测73.74s、远端一致，精确CI39095818018已completed/success，三仓本次发布CI全部绿。
+
+正常FF发布共3次尝试=2RED+1GREEN：先修异构schema类型丢失及既有mypy hook漏掉transitive scripts依赖，再修旧“未知日期”夹具缺provider导致测试错位。保留原完整拒绝/0下载/日期资格断言，不删测试/提高阈值/跳hook。JSON stdout的GBK/UTF8根因和集中CI表漏DU11纯回归也已修并独审；最终类型delta独立公共mypy＋10有限控制通过。详细收据见review/du11-reception-closeout.md以及各publication报告。
+
+未动生产原件/gold/配置/密钥/Dayu/IQS或作者树，没有新收费模型调用。RF旧3个assurance WIP保留，stage1曾观察weekly_manifest自然变化，不归因/不恢复旧值；stage2前后相同。一个RF外层审查Temp仍NOT_CLEAN，历史PermissionError后平台拒删，保留且不换通道重试；内部端到端原样恢复。未知发布日期的/3投影仍如实source_availability_unknown，不伪造日期或另加许可。
+
+整体PWF仍OPEN：t32最新真实诊断不再selected；t34仍缺有界先行词。下一实现按review/antecedent-source-interface-final.md，在现source/operating唯一owner、同parent16M及8units/4原block/2048chars封闭依赖，再做正式三供应商摘要、收费/activation恢复、同跨run缓存及真实FF/RF消费C，之后holdout与RF循环。不要把工程/金标命中当内容C通过，不重做已接受DU11或新增小节点签收。
+
 # Findings
+
+发布前实际检查又封闭三类共因，而不是给失败加豁免：FF CLI的JSON输出曾按Windows宿主GBK编码、消费者按UTF-8解码，改唯一输出owner为ASCII JSON后中文/emoji路径语义不变，原错误退出保留；集中CI表35→38补已有DU11纯回归，未加入重型真实端到端。新qualifications schema值全为class-info但异构dict丢失静态类型，补准确类型注解，公共mypy通过。旧pre-commit只看2个直接入口，现同一既有hook覆盖scripts运行依赖，命令仍仅检查原2公共入口（4.018s），不增加全仓mypy或新门。
+
+完整FF回归还发现一个旧fixture同时省略provider与日期，使原“未知发布日期不重复下载”测试先撞上“显式fmp不可冒认未知provider”。只补当前reader manifest.provider=fmp/published_date=None，保留原0provider调用/SourceRef/asof=False全部断言；该例及现unknown-provider拒绝反控2PASS0.24s，生产校验不放宽。正常push历史的type RED、fixture RED均保留；最终873PASS7SKIP78subtests91.13s后才真正推送e8740748。按已发布producer pin先行、consumer后发，RF兼容版本表是唯一CI依赖owner，安装技能不另造compatibility副本。
+
+受审4个生产文件与母主线逐字节一致。2个新文本测试在Git checkout转CRLF、归一化LF及Git blob相同；最初误要求六文件物理字节全等的诊断断言已记录为检测假设错误，不重写测试/原件迁就。真实母仓完整6801及精确CI已验证其实际checkout，不对原件或来源SHA采用行尾归一化。
 
 实际parser的ordinal是source全局顺序，paragraph_index是页内定位；跨页把两者都要求+1会错误否定真实连续页。更深一层，parser顺序可先观察下一页底部普通counter再观察顶部正文；不能把这个未证实家具当正向proof，也不能让它提前释放上一页pending半句。现保留有界pending依赖，实际顶部前缀未证明则两原span诚实defer；独立新issuer仍独立放行，不以整页黑名单解决。实际旧t32已不再selected，产品t34仍需独立先行词owner。
 

@@ -1,0 +1,2 @@
+{"gate_sha": "a2df2fcb824a97642cf4003aae1d359aca14a330e121cad4242c5213d46aefb9", "production_timeout_default": 600, "diagnostic_timeout": 5, "normal_scope_and_nonzero": ["tests/unit/test_small.py", "tests/contract/test_small.py", "tests/unitary"], "returncode": 1, "elapsed_seconds": 2.414869499974884, "pids": [], "workers_live_on_return": [], "gate_temps_removed": [true]}
+

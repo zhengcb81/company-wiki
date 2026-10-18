@@ -1,0 +1,25 @@
+{
+  "schema_version": "du11-ff-main-release-state/1",
+  "local_main": "61011be60eb6adf18d1b272885475b053ac78267",
+  "branch": "main",
+  "fast_forward_from": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
+  "target": "61011be60eb6adf18d1b272885475b053ac78267",
+  "empty_placeholder": {
+    "destructive_combination_platform_rejected": true,
+    "git_no_delete_attempt": "refused untracked file normally; no bytes changed",
+    "safe_alternative": "native Move-Item after fresh regular/0byte/emptySHA proof; original retained in same repo",
+    "preserved_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\filing-fetch\\.planning\\du11-empty-placeholder-original.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "key_file": "not read, modified, staged or moved",
+  "normal_push": {
+    "published": false,
+    "returncode": 1,
+    "log": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\du11-ff-normal-push.log",
+    "failure": "mypy scripts/transcript_reuse_selection.py:211 isinstance expected inferred object not _ClassInfo",
+    "ruff_compile_import": "PASS",
+    "no_hook_bypass": true
+  },
+  "install_synced": false
+}

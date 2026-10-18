@@ -1,0 +1,90 @@
+{
+  "schema_version": "du11-ff-installed-runtime/1",
+  "published_commit": "e8740748f91999cb24169b42f8e789726ed50482",
+  "dependency_order": [
+    "scripts/transcript_reuse_selection.py",
+    "scripts/transcript_tool_transport.py",
+    "scripts/transcript_companion.py"
+  ],
+  "physical_roots": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch"
+  ],
+  "claude_alias": "C:\\Users\\\u90d1\u66fe\u6ce2\\.claude\\skills\\filing-fetch",
+  "writes": [
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+      "old_sha256": null,
+      "new_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      "atomic_replace": true,
+      "byte_readback": true
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+      "old_sha256": null,
+      "new_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      "atomic_replace": true,
+      "byte_readback": true
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+      "old_sha256": "6b2a74890d84050f562b7440eb8d80048ade1fc30b2426c6bac439b0418eb19a",
+      "new_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+      "atomic_replace": true,
+      "byte_readback": true
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+      "old_sha256": "6b2a74890d84050f562b7440eb8d80048ade1fc30b2426c6bac439b0418eb19a",
+      "new_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+      "atomic_replace": true,
+      "byte_readback": true
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+      "old_sha256": "5cbba8dcdb15f9d61a232d6f15fc2b40ed2320f2b26226e85a5d2dbf4db3f7f7",
+      "new_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+      "atomic_replace": true,
+      "byte_readback": true
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+      "old_sha256": "5cbba8dcdb15f9d61a232d6f15fc2b40ed2320f2b26226e85a5d2dbf4db3f7f7",
+      "new_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+      "atomic_replace": true,
+      "byte_readback": true
+    }
+  ],
+  "smoke": [
+    {
+      "root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch",
+      "imports": {
+        "transcript_reuse_selection": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+        "transcript_tool_transport": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+        "transcript_companion": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch\\scripts\\transcript_companion.py"
+      },
+      "import_returncode": 0,
+      "public_help_returncode": 0,
+      "help_sha256": "bfbd7e7d38612b52e92d6c68a63ba77543a698212a9ba675a02fc9f0b676e4ed",
+      "no_provider_calls": true
+    },
+    {
+      "root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch",
+      "imports": {
+        "transcript_reuse_selection": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_reuse_selection.py",
+        "transcript_tool_transport": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+        "transcript_companion": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch\\scripts\\transcript_companion.py"
+      },
+      "import_returncode": 0,
+      "public_help_returncode": 0,
+      "help_sha256": "bfbd7e7d38612b52e92d6c68a63ba77543a698212a9ba675a02fc9f0b676e4ed",
+      "no_provider_calls": true
+    }
+  ],
+  "no_config_output_key_reads_or_writes": true,
+  "status": "PASS",
+  "all_six_old_states_prechecked": true,
+  "all_three_logical_roots_match": true,
+  "physical_write_count": 6,
+  "temporary_files_remaining": false
+}

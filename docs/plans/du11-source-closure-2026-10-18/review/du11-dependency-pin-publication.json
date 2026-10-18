@@ -1,0 +1,216 @@
+{
+  "schema_version": "du11-dependency-pin-publication/2",
+  "status": "FINAL_TRIPLET_PUSHED_CI_SUCCESS",
+  "observed_utc": "2026-10-18T04:05:14.403375+00:00",
+  "repo": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "final_head": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+  "final_remote_main": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+  "final_triplet": {
+    "filing": "e8740748f91999cb24169b42f8e789726ed50482",
+    "revenue": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+    "wiki": "0ccdc6896ee58063ff827e9ceab16043c7550e0c"
+  },
+  "final_manifest_sha256": "23fa61469fe54ade8621da8a6489583f6e96ce44f20f1b079abafc16a11d73f5",
+  "historical_stage1": {
+    "schema_version": "du11-dependency-pin-publication/1",
+    "status": "PUSHED_CI_SUCCESS",
+    "observed_utc": "2026-10-18T03:50:49.457320+00:00",
+    "repo": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "head": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+    "remote_main": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+    "commit_files": [
+      "compatibility/current.json",
+      "docs/plans/du11-dependency-pin-2026-10-18/release.md"
+    ],
+    "manifest_current_triplet": {
+      "filing": "5001dcbef1845a08e90cda6f2a86365610a662af",
+      "revenue": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+      "wiki": "0ccdc6896ee58063ff827e9ceab16043c7550e0c"
+    },
+    "filing_followup": "WAIT_FOR_ROOT_PUBLISHED_FF_SHA_NO_PREMATURE_CHANGE",
+    "manifest_sha256": "72c8c47d1f0034598b9dd48a207bc2b54905d6e06f0c12a266dbfb0485a73e2e",
+    "focused_tests": {
+      "passed": 28,
+      "pytest_seconds": 9.09,
+      "receipt": "du11-dependency-pin-tests.json",
+      "returncode": 0,
+      "temporary_directory_restored": true
+    },
+    "normal_push": {
+      "returncode": 0,
+      "seconds": 83.56,
+      "ruff": "PASS",
+      "mypy_checked_sources": 11,
+      "pytest_passed": 416,
+      "subtests_passed": 36,
+      "pytest_seconds": 70.53,
+      "log": "du11-dependency-pin-push.log",
+      "hook_bypass": false,
+      "force": false
+    },
+    "ci": {
+      "head_sha": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+      "checked_utc": "2026-10-18T03:51:00.251201+00:00",
+      "authentication": "anonymous API, no token read",
+      "runs": [
+        {
+          "id": 39094965965,
+          "name": "quality",
+          "head_sha": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/39094965965",
+          "created_at": "2026-10-18T03:49:29Z",
+          "updated_at": "2026-10-18T03:50:11Z"
+        }
+      ]
+    },
+    "unrelated_wip": {
+      "before": {
+        "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+        "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+        "assurance/runs/weekly_manifest.json": "c41959e3cd5925c87c00164c089671e62ba193cf21c5f5de4b152515ba45a239"
+      },
+      "after": {
+        "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+        "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+        "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+      },
+      "changed_observations": [
+        "assurance/runs/weekly_manifest.json"
+      ],
+      "writer_attribution": "not established; this task does not write or restore these paths",
+      "staged_or_committed": false
+    },
+    "output": "not opened, staged or modified",
+    "installed_compatibility": {
+      "agents_exists": false,
+      "claude_exists": false,
+      "codex_exists": false,
+      "created_or_synced": false,
+      "reason": "repository-only control plane excluded from installable skill closure; claude aliases agents"
+    },
+    "runtime_modified": false,
+    "public_contracts_or_frozen_baseline_changed": false,
+    "boundaries": [
+      "This is dependency publication, not real content/semantic C acceptance.",
+      "WIP observations are not an assertion that unrelated background state stayed frozen.",
+      "FF final implementation pin remains pending actually published commit."
+    ],
+    "method_notes": [
+      "First report assembly used platform-default GBK for reading existing UTF-8 receipt and failed before writes; retried with explicit UTF-8. No behavior tests or publication repeated."
+    ],
+    "producer_ci_root_observation": {
+      "wiki_sha": "0ccdc6896ee58063ff827e9ceab16043c7550e0c",
+      "run_id": 39094787278,
+      "status": "completed",
+      "conclusion": "success",
+      "evidence": "ROOT separately observed anonymous exact-head API"
+    }
+  },
+  "final_stage2": {
+    "before": {
+      "head": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+      "origin_main": "e73646395c3b0aea0bca054ffdcc46b2f1e66c45",
+      "observed_utc": "2026-10-18T04:01:59.845089+00:00",
+      "wip": {
+        "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+        "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+        "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+      },
+      "manifest_sha256": "72c8c47d1f0034598b9dd48a207bc2b54905d6e06f0c12a266dbfb0485a73e2e",
+      "triplet": {
+        "filing": "5001dcbef1845a08e90cda6f2a86365610a662af",
+        "revenue": "f8002f5fc8f56533c814f1616b7ecb68016f35e4",
+        "wiki": "0ccdc6896ee58063ff827e9ceab16043c7550e0c"
+      },
+      "output": "not read or modified"
+    },
+    "commit_files": [
+      "compatibility/current.json",
+      "docs/plans/du11-dependency-pin-2026-10-18/release.md"
+    ],
+    "focused_tests": {
+      "passed": 28,
+      "seconds": 9.23,
+      "receipt": "du11-dependency-pin-stage2-tests.json",
+      "returncode": 0,
+      "temporary_directory_restored": true
+    },
+    "normal_push": {
+      "returncode": 0,
+      "seconds": 84.594,
+      "head": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+      "command": [
+        "git",
+        "push",
+        "origin",
+        "main"
+      ],
+      "hooks": "normal; no bypass/force",
+      "wip_after": {
+        "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+        "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+        "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+      },
+      "ruff": "PASS",
+      "mypy_checked_sources": 11,
+      "pytest_passed": 416,
+      "subtests_passed": 36,
+      "pytest_seconds": 73.74,
+      "log": "du11-dependency-pin-stage2-push.log",
+      "hook_bypass": false,
+      "force": false
+    },
+    "ci": {
+      "head_sha": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+      "checked_utc": "2026-10-18T04:05:26.932000+00:00",
+      "authentication": "anonymous API; no token read",
+      "runs": [
+        {
+          "id": 39095818018,
+          "name": "quality",
+          "head_sha": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/39095818018",
+          "created_at": "2026-10-18T04:04:19Z",
+          "updated_at": "2026-10-18T04:05:06Z"
+        }
+      ]
+    },
+    "wip_after": {
+      "assurance/runs/daily_alert.jsonl": "8d4a7e41b2d4067e0dd82f504c582f245fe01ea5ff548f13f9c1f0fb8706791c",
+      "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+    },
+    "wip_same_as_stage2_start": true
+  },
+  "published_producer_evidence": {
+    "wiki": {
+      "commit": "0ccdc6896ee58063ff827e9ceab16043c7550e0c",
+      "quality_run": 39094787278,
+      "conclusion": "success",
+      "observation": "ROOT exact anonymous API"
+    },
+    "filing": {
+      "commit": "e8740748f91999cb24169b42f8e789726ed50482",
+      "quality_run": 39095654355,
+      "conclusion": "success",
+      "observation": "ROOT exact anonymous API; Gold confirmed normal push and remote main"
+    }
+  },
+  "preserved_state": {
+    "assurance_wip": "excluded from both commits; stage1 weekly manifest observation changed without writer attribution or restore; stage2 exact hashes unchanged",
+    "output": "not read, staged or modified",
+    "installed_compatibility": "none created or synchronized; repository-only control plane excluded from installed runtime"
+  },
+  "runtime_modified": false,
+  "public_contract_or_registry_or_baseline_changed": false,
+  "next": "No further pin change; dependency publication complete",
+  "scope_limits": [
+    "Engineering dependency release does not sign semantic/source real-content C acceptance.",
+    "Stage1 WIP observation change is preserved, not claimed frozen or attributed.",
+    "All actual originals and production configuration outside change scope."
+  ]
+}
