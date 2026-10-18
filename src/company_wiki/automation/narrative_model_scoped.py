@@ -25,7 +25,7 @@ from .narrative_contracts import NarrativeSelectResult
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.1'
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.2'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -41,10 +41,12 @@ SCOPED_INSTRUCTION = (
     'do not output them. Respect output_plan.max_claims_per_task per task and '
     'output_plan.max_claims in total; the response schema arrays are bounded but the '
     'program enforces the smaller per-task cap, so exceeding it rejects the whole response. '
-    'Each clause is at most 280 characters. Retain distinct important business updates '
-    'within the configured output budget; omit a task rather than invent support. Do not '
-    'output reasoning, Markdown, research conclusions, valuation, ratings or paths. Valid '
-    'local citations do not prove that rewritten prose is true.'
+    'Each clause is at most 280 characters. Work through the supplied tasks and emit one '
+    'clause for every task whose parts directly support it, until the clause budget is '
+    'reached; leaving a supported business update unsummarized is a failure. Omit only a '
+    'task with no direct support, never invent support. Do not output reasoning, Markdown, '
+    'research conclusions, valuation, ratings or paths. Valid local citations do not prove '
+    'that rewritten prose is true.'
 )
 
 
@@ -156,6 +158,24 @@ def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
             'selection': selected.selection.to_dict()}))
 
 
+def _clause_object(raw: Any) -> dict[str, Any] | None:
+    """A clause object, tolerating one JSON-encoding layer from a transport.
+
+    Some OpenAI-compatible servers serialise each array item as a JSON string.
+    The bytes still carry the exact object; decode it and keep every contract
+    check. A string that is not such an object remains a contract error.
+    """
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        try:
+            decoded = json.loads(raw)
+        except (json.JSONDecodeError, RecursionError):
+            return None
+        return decoded if isinstance(decoded, dict) else None
+    return None
+
+
 def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[str, Any]:
     """Recover whole local clauses, never repair IDs or authorize their prose."""
     from company_wiki.source_catalog.narrative_evidence import (
@@ -197,6 +217,7 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     first_error = None
     for task in view.plan.tasks:
         for ordinal, raw in enumerate(tasks.get(task.key, []), 1):
+            raw = _clause_object(raw)
             # Preserve the source-language owner: an explicit translation
             # contradicts the entire response, even if another clause is valid.
             if isinstance(raw, dict):

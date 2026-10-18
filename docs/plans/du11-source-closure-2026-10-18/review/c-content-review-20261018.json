@@ -1,0 +1,553 @@
+{
+  "schema": "du11-content-review/1",
+  "reviewed_at": "2026-10-18T12:10:00+08:00",
+  "scope": "formal C content review only; not engineering/formal C recovery",
+  "requested_path_note": "The requested docs/plans/.../live-* paths do not exist in this worktree. Actual runs are under .planning/shared-reading-production/du11/live-cn-h1-b2v3i-20261018 and live-us-10k-b2v3-20261018; reviewed those receipt/overall/rf-narrative files.",
+  "samples": {
+    "cn": {
+      "run_dir": ".planning/shared-reading-production/du11/live-cn-h1-b2v3i-20261018",
+      "model": "mimo-v2.6-flash",
+      "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "claims": 20,
+      "evidence_spans": 96,
+      "receipt_status": "PASS",
+      "quality_status": "needs_review",
+      "selection_status": "partial",
+      "tokens": 15394,
+      "micro_usd": 2783,
+      "conclusion": "CONTENT_FAIL",
+      "reason": "8/10 required facts, 2 critical missing (f-gan-power-stage, f-inp-development-started); plus unresolved 该新产品, truncated t3-1, fragment t4-1."
+    },
+    "us": {
+      "run_dir": ".planning/shared-reading-production/du11/live-us-10k-b2v3-20261018",
+      "model": "MiniMax-M3",
+      "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "claims": 8,
+      "evidence_spans": 96,
+      "receipt_status": "PASS",
+      "quality_status": "needs_review",
+      "selection_status": "partial",
+      "tokens": 18093,
+      "micro_usd": 7782,
+      "conclusion": "CONTENT_FAIL",
+      "reason": "2/8 required facts (partial 1); missing Azure consumption-based, Intelligent Cloud, three segments, August 2024 segment change, RPO scope/amount, RPO 40%/next 12 months. All 8 claims themselves are supported quotes."
+    }
+  },
+  "required_coverage": {
+    "cn": [
+      {
+        "id": "f-five-year-target-is-plan",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t13-1",
+        "note": "未来五年 60%/70% 计划保留"
+      },
+      {
+        "id": "f-current-coverage-30",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t13-1",
+        "note": "五十多种/超30%当前覆盖保留"
+      },
+      {
+        "id": "f-cmp-acquisition-completed",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t12-1",
+        "note": "报告期完成众硅公司控股权收购/CMP"
+      },
+      {
+        "id": "f-microled-sample-verification",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t30-1",
+        "note": "Preciomo Udx/2023年底/重复订单"
+      },
+      {
+        "id": "f-gan-power-stage",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected page18/paragraph14 has PRISMO PD5 2022/交付验证/重复订单; summary absent"
+      },
+      {
+        "id": "f-sic-8inch-stage",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t34-1",
+        "note": "新型8寸碳化硅外延设备/生产验证/重复订单"
+      },
+      {
+        "id": "f-inp-development-started",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected page18/paragraph29 has InP MOCVD development/下半年计划; summary absent"
+      },
+      {
+        "id": "f-advanced-packaging-primo-matrix",
+        "importance": "normal",
+        "status": "hit",
+        "claim": "t38-1",
+        "note": "Primo Matrix 即将发往国内头部客户产线验证"
+      },
+      {
+        "id": "f-tsv-300e-serving",
+        "importance": "normal",
+        "status": "hit",
+        "claim": "t38-1",
+        "note": "Primo TSV 300E 持续服务/重复订单"
+      },
+      {
+        "id": "f-third-gen-tsv-rd",
+        "importance": "normal",
+        "status": "hit",
+        "claim": "t38-1",
+        "note": "第三代 TSV 刻蚀机研发/订单/即将验证"
+      }
+    ],
+    "us": [
+      {
+        "id": "f-azure-is-consumption-based",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph233 has consumption-based Azure; summary absent"
+      },
+      {
+        "id": "f-azure-inside-intelligent-cloud",
+        "importance": "critical",
+        "status": "partial",
+        "claim": "t8-1",
+        "note": "has Server products/cloud and Azure and other; no Intelligent Cloud attribution"
+      },
+      {
+        "id": "f-three-segments",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph192 has three segments; summary absent"
+      },
+      {
+        "id": "f-segment-change-in-august-2024",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph193/732; summary absent"
+      },
+      {
+        "id": "f-m365-consumer-vs-commercial-metric",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t6-1/t7-1",
+        "note": "Consumer 11/11 and Commercial 14/15 separated"
+      },
+      {
+        "id": "f-azure-growth-inside-combined-line",
+        "importance": "critical",
+        "status": "hit",
+        "claim": "t8-1",
+        "note": "Server 23%/Azure and other 34%; no Azure 23% conflation"
+      },
+      {
+        "id": "f-rpo-scope-and-amount",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph3845 has 375B/368B/June 30 2025; summary absent"
+      },
+      {
+        "id": "f-rpo-recognition-is-forward",
+        "importance": "critical",
+        "status": "missing",
+        "claim": null,
+        "note": "selected paragraph3845 has ~40%/next 12 months; summary absent"
+      }
+    ]
+  },
+  "claim_support": {
+    "cn": [
+      {
+        "id": "t1-1",
+        "locator": "loc:v1/page:30/table:0/row:1-6 + page28 header",
+        "verdict": "supported_but_table_ambiguous",
+        "severity": "P2",
+        "note": "43.46/6.11/29.91亿元 aligns with row6; table_structure_ambiguous on all six spans; column mapping relies on header"
+      },
+      {
+        "id": "t2-1",
+        "locator": "loc:v1/page:18/paragraph:9 (context page17/paragraph:26 heading)",
+        "verdict": "unresolved_deictic",
+        "severity": "P1",
+        "note": "literal quote; 该新产品 has no named product; context is only heading (heading cannot nominate)"
+      },
+      {
+        "id": "t3-1",
+        "locator": "loc:v1/page:11/paragraph:4",
+        "verdict": "truncated_fragment",
+        "severity": "P1",
+        "note": "source ends 'MOCVD 设'; claim appends '（原文截断）' and is incomplete"
+      },
+      {
+        "id": "t4-1",
+        "locator": "loc:v1/page:17/paragraph:4",
+        "verdict": "mid_sentence_fragment",
+        "severity": "P1",
+        "note": "starts '到多个…'; missing subject/preceding clause"
+      },
+      {
+        "id": "t5-1",
+        "locator": "loc:v1/page:177/paragraph:9",
+        "verdict": "supported_naming_inconsistent",
+        "severity": "P2",
+        "note": "中微众硅 vs t8-1 众硅公司"
+      },
+      {
+        "id": "t6-1",
+        "locator": "loc:v1/page:10/paragraph:14/chars:341-436",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t7-1",
+        "locator": "loc:v1/page:10/paragraph:21/chars:504-626",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t8-1",
+        "locator": "loc:v1/page:13/paragraph:4/chars:88-219",
+        "verdict": "supported_naming_inconsistent",
+        "severity": "P2"
+      },
+      {
+        "id": "t9-1",
+        "locator": "loc:v1/page:13/paragraph:18/chars:495-605",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t10-1",
+        "locator": "loc:v1/page:15/paragraph:7/chars:137-294",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t11-1",
+        "locator": "loc:v1/page:15/paragraph:23/chars:553-755",
+        "verdict": "supported_source_typo",
+        "severity": "P3",
+        "note": "source '高深刻比' copied"
+      },
+      {
+        "id": "t12-1",
+        "locator": "loc:v1/page:15/paragraph:35/chars:919-970",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t13-1",
+        "locator": "loc:v1/page:16/paragraph:2/chars:38-175",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t14-1",
+        "locator": "loc:v1/page:16/paragraph:5/chars:176-347",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t15-1",
+        "locator": "loc:v1/page:18/paragraph:6/chars:152-250",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t16-1",
+        "locator": "loc:v1/page:18/paragraph:21/chars:574-687",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t17-1",
+        "locator": "loc:v1/page:18/paragraph:35/chars:945-1115",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t18-1",
+        "locator": "loc:v1/page:19/paragraph:38/chars:991-1032",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t19-1",
+        "locator": "loc:v1/page:25/paragraph:21/chars:453-625",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t20-1",
+        "locator": "loc:v1/page:33/paragraph:16/chars:433-523",
+        "verdict": "supported",
+        "severity": null
+      }
+    ],
+    "us": [
+      {
+        "id": "t3-1",
+        "locator": "loc:v1/paragraph:235",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t4-1",
+        "locator": "loc:v1/paragraph:277",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t5-1",
+        "locator": "loc:v1/paragraph:699",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t6-1",
+        "locator": "loc:v1/paragraph:701",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t7-1",
+        "locator": "loc:v1/paragraph:707",
+        "verdict": "supported",
+        "severity": null,
+        "note": "23% Server / 34% Azure and other, correct"
+      },
+      {
+        "id": "t8-1",
+        "locator": "loc:v1/paragraph:729",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t13-1",
+        "locator": "loc:v1/paragraph:945",
+        "verdict": "supported",
+        "severity": null
+      },
+      {
+        "id": "t14-1",
+        "locator": "loc:v1/paragraph:1081",
+        "verdict": "supported_period_implicit",
+        "severity": "P3",
+        "note": "fiscal year 2025; no explicit June 30, 2025"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "CN-P1-1",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing required GAN power-stage fact",
+      "claim": null,
+      "source_locator": "loc:v1/page:18/paragraph:14/chars:409-530",
+      "source_quote": "于2022 年推出了用于氮化镓功率器件生产应用的MOCVD 设备PRISMO PD5，目前已交付客户进行生产验证，并取得了重复订单。",
+      "impact": "f-gan-power-stage critical required fact absent from summary although selected.",
+      "fix": "Add a claim preserving PRISMO PD5, 2022 launch, customer validation, repeat orders; do not convert to achieved volume."
+    },
+    {
+      "id": "CN-P1-2",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Missing required InP development fact",
+      "claim": null,
+      "source_locator": "loc:v1/page:18/paragraph:29/chars:819-932",
+      "source_quote": "于报告期内启动磷化铟（InP）材料体系专用MOCVD 设备的开发，实验室已取得良好进展。下半年将结合客户反馈意见，加快产品开发，尽早付运样机至客户端开展生产验证。",
+      "impact": "f-inp-development-started critical required fact absent; plan modality lost.",
+      "fix": "Add claim with 报告期内启动/实验室进展/下半年计划/尽早付运; keep plan modality."
+    },
+    {
+      "id": "CN-P1-3",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Unresolved 该新产品 in t2-1",
+      "claim": "t2-1",
+      "source_locator": "loc:v1/page:18/paragraph:9; context page17/paragraph:26",
+      "source_quote": "同时，公司正进一步推进该新产品在Micro-LED 市场的应用拓展与推广。",
+      "impact": "Summary claim not self-contained; B2 closure not reflected for this deictic; reader cannot know product.",
+      "fix": "Resolve to the named product using a preceding declaration/selected context; if not available, omit or mark deferred, do not emit bare 该新产品."
+    },
+    {
+      "id": "CN-P1-4",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Truncated t3-1 with editorial marker",
+      "claim": "t3-1",
+      "source_locator": "loc:v1/page:11/paragraph:4",
+      "source_quote": "外延片生产的MOCVD 设备早已在客户生产线上投入量产，并在全球氮化镓基LED MOCVD 设",
+      "impact": "Claim is incomplete and contains （原文截断）, not source; cannot be a final business claim.",
+      "fix": "Include the continuation from the next source fragment or omit; never insert editorial truncation marker."
+    },
+    {
+      "id": "CN-P1-5",
+      "severity": "P1",
+      "sample": "CN",
+      "title": "Mid-sentence fragment t4-1",
+      "claim": "t4-1",
+      "source_locator": "loc:v1/page:17/paragraph:4",
+      "source_quote": "到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+      "impact": "Claim starts mid-sentence without subject; not self-contained.",
+      "fix": "Restore the preceding subject/product clause from source context or omit; add boundary test."
+    },
+    {
+      "id": "CN-P2-1",
+      "severity": "P2",
+      "sample": "CN",
+      "title": "Table-aggregate claim on ambiguous table",
+      "claim": "t1-1",
+      "source_locator": "loc:v1/page:30/table:0/row:1-6 + page28 header",
+      "source_quote": "合计 | / | 43.46 | 6.11 | 29.91 | / ...",
+      "impact": "Numbers align with row6 but all six spans have table_structure_ambiguous; table structure not proven.",
+      "fix": "Keep needs_review; verify table header/column alignment; do not present as fully proven table fact until structure is trusted."
+    },
+    {
+      "id": "CN-P2-2",
+      "severity": "P2",
+      "sample": "CN",
+      "title": "Acquired entity naming inconsistency",
+      "claim": "t5-1/t8-1",
+      "source_locator": "page177/paragraph:9; page13/paragraph:4",
+      "source_quote": "中微众硅... / 众硅公司控股权...",
+      "impact": "Same acquisition target appears under two names; reader may treat them as different entities.",
+      "fix": "Use one canonical name or add equivalence note; both source quotes are individually valid."
+    },
+    {
+      "id": "CN-P3-1",
+      "severity": "P3",
+      "sample": "CN",
+      "title": "Source typo 高深刻比 copied",
+      "claim": "t11-1",
+      "source_locator": "page15/paragraph:23",
+      "source_quote": "持续推进用于高深刻比刻蚀的Primo UD-RIE 设备的迭代",
+      "impact": "Source typo preserved; not a model unit/number error, but may confuse 高深宽比.",
+      "fix": "Flag source typo in review; do not silently rewrite if exact quote policy applies."
+    },
+    {
+      "id": "US-P1-1",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing Azure consumption-based fact",
+      "claim": null,
+      "source_locator": "loc:v1/paragraph:233",
+      "source_quote": "Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+      "impact": "f-azure-is-consumption-based critical required fact absent.",
+      "fix": "Add claim preserving consumption-based services; do not confuse with per-user/per-seat M365."
+    },
+    {
+      "id": "US-P1-2",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing/partial Azure Intelligent Cloud attribution",
+      "claim": "t8-1",
+      "source_locator": "selected paragraph:233/192",
+      "source_quote": "Server products and cloud services, including Azure and other cloud services... / Our Intelligent Cloud segment consists of...",
+      "impact": "t8-1 has Server products/cloud and Azure and other, but no Intelligent Cloud segment attribution; required fact partial.",
+      "fix": "Add Intelligent Cloud segment context; preserve Azure is inside Intelligent Cloud."
+    },
+    {
+      "id": "US-P1-3",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing three-segment fact",
+      "claim": null,
+      "source_locator": "loc:v1/paragraph:192",
+      "source_quote": "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.",
+      "impact": "f-three-segments critical required fact absent.",
+      "fix": "Add three-segment claim with all names; do not conflate Microsoft Cloud with a segment."
+    },
+    {
+      "id": "US-P1-4",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing August 2024 segment change",
+      "claim": null,
+      "source_locator": "loc:v1/paragraph:193 / 732",
+      "source_quote": "In August 2024, we announced changes to the composition of our segments... bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment.",
+      "impact": "f-segment-change-in-august-2024 critical required fact absent; comparability risk.",
+      "fix": "Add claim preserving August 2024 and M365 Commercial move."
+    },
+    {
+      "id": "US-P1-5",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing RPO scope and amount",
+      "claim": null,
+      "source_locator": "loc:v1/paragraph:3845",
+      "source_quote": "was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue",
+      "impact": "f-rpo-scope-and-amount critical required fact absent.",
+      "fix": "Add 375B/368B/June 30 2025; do not substitute unearned revenue 67,265 or 7,265."
+    },
+    {
+      "id": "US-P1-6",
+      "severity": "P1",
+      "sample": "US",
+      "title": "Missing forward RPO recognition plan",
+      "claim": null,
+      "source_locator": "loc:v1/paragraph:3845",
+      "source_quote": "We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months",
+      "impact": "f-rpo-recognition-is-forward critical required fact absent; plan modality lost.",
+      "fix": "Add approximately 40%/next 12 months with forward-looking modality."
+    },
+    {
+      "id": "US-P3-1",
+      "severity": "P3",
+      "sample": "US",
+      "title": "t14-1 period end not explicit",
+      "claim": "t14-1",
+      "source_locator": "paragraph:1081",
+      "source_quote": "for fiscal year 2025",
+      "impact": "Fiscal year 2025 is correct but no June 30, 2025; period is implicit.",
+      "fix": "Prefer explicit June 30, 2025 when summarizing 10-K cash flow."
+    }
+  ],
+  "numbers_units": {
+    "cn": "No mismatch found: 43.46/6.11/29.91亿元 (table row6), 1659亿美元/23.2%, 50+/30%/60%/70%, 20.41亿元/5.50亿元/36.86%/30.51%, 2023, 8寸, 14万平方米/2023-07, 60:1 all match selected source.",
+    "us": "No mismatch found: 14/15%, 11/11%, 23/34%, $1.6B/13%/20%, $17.6B/$136.2B all match selected source; no conversions or unit changes."
+  },
+  "language": {
+    "cn": "zh; product English names only; summary.translate=false",
+    "us": "en; summary.translate=false",
+    "verdict": "pass"
+  },
+  "investment_conclusions": {
+    "cn": "none found",
+    "us": "none found",
+    "verdict": "pass"
+  },
+  "commands": [
+    "Read receipt.json/overall.json/rf-narrative.stdout.json from actual .planning run dirs.",
+    "Opened all CN 20 and US 8 claims plus their evidence/context span locators and raw_text.",
+    "Read tools/document_understanding_benchmark/gold/cn-h1.json and us-10k.json plus metadata required_business_fact_ids.",
+    "Searched selected evidence spans for missing required fact quotes (CN PRISMO PD5/InP; US Azure consumption/three segments/August 2024/RPO).",
+    "No provider calls, no source/test/config changes, no git operations."
+  ],
+  "unverified": [
+    "Full original PDF/HTML was not reparsed; judgment uses source-owned selected evidence spans and gold, not page images or full original text.",
+    "No model rerun; cannot test whether different prompts would add missing claims.",
+    "Requested docs/plans/live-* paths absent; actual .planning receipts used; if a different docs/plans copy exists, it was not reviewed.",
+    "Source/gold SHAs not independently rehashed beyond receipt/metadata values used for alignment.",
+    "Engineering recovery/cache/FF-RF consumption not reviewed.",
+    "Claim cap/prompt implementation not audited; US has 8 claims (<20) but reason for omission unverified.",
+    "CN 593/US 305 deferred selection details not audited; required evidence was selected, so main failure is summary omission."
+  ],
+  "notes": [
+    "Receipt PASS is engineering, not content: quality_status=needs_review and selection_status=partial for both.",
+    "All US claims are supported quotations; content failure is coverage, not citation falsity.",
+    "CN has both coverage gaps and claim-quality defects; conclusion CONTENT_FAIL.",
+    "Report pair: review/c-content-review-20261018.md and .json."
+  ]
+}
