@@ -59,13 +59,14 @@ def _scope(unit: Any, section: str | None, projects: tuple[str, ...]) -> tuple:
 
 
 def _adjacent(left: Any, right: Any, carries: frozenset[tuple[str, str]],
-              require_proof: bool) -> bool:
+              require_proof: bool, skipped: int = 0) -> bool:
+    """Compare a candidate with the kept neighbour, allowing proven furniture."""
     left_page, right_page = _page(left), _page(right)
     left_ordinal, right_ordinal = _ordinal(left), _ordinal(right)
     if left_page is None or right_page is None or left_ordinal is None or right_ordinal is None:
         return False if require_proof else True
     if left_page == right_page:
-        return right_ordinal == left_ordinal + 1
+        return right_ordinal == left_ordinal + 1 + skipped
     if right_page == left_page + 1:
         return (_field(left, "unit_id"), _field(right, "unit_id")) in carries
     return False
@@ -117,10 +118,17 @@ def build_antecedent_windows(parsed: Any, pipeline: Mapping[str, Any], *,
         target_scope = scope_of(uid)
         predecessors: list[str] = []
         complete, reason = True, "beginning"
+        # Compare each candidate with the last kept unit, not with a skipped
+        # furniture neighbour: a proven running header between two pages must
+        # not become the thing a page carry is checked against.
+        previous = units[uid]
+        skipped = 0
         cursor = index - 1
         while cursor >= 0:
             other = order[cursor]
+            current = units[other]
             if other in proven_furniture and other not in prose_unit_ids:
+                skipped += 1
                 cursor -= 1
                 continue
             if other in unread:
@@ -132,14 +140,16 @@ def build_antecedent_windows(parsed: Any, pipeline: Mapping[str, Any], *,
             if scope_of(other) != target_scope:
                 reason = "source_boundary"
                 break
-            if not _adjacent(units[other], units[order[cursor + 1]], page_carries,
-                             require_adjacency_proof):
+            if not _adjacent(current, previous, page_carries, require_adjacency_proof,
+                             skipped=skipped):
                 complete, reason = False, "unproved_order"
                 break
             if len(predecessors) >= max_units:
                 complete, reason = False, "cap"
                 break
             predecessors.append(other)
+            previous = current
+            skipped = 0
             cursor -= 1
         windows[uid] = {"schema_version": ANTECEDENT_SCHEMA, "target_unit_id": uid,
                         "predecessor_unit_ids": tuple(reversed(predecessors)),

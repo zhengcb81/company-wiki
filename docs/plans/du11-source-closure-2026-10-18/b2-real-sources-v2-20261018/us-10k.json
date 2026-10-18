@@ -1,0 +1,255 @@
+{
+  "sample": "us-10k",
+  "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "source_bytes": 8158067,
+  "gold_sha256": "61ffe4574220ac740ff8e74a34d4136b85acfaf9826ab40cca6fc6a4e59533c8",
+  "actual_source_metadata": {
+    "document_kind": "annual_report",
+    "language": "en",
+    "source_class": "filing",
+    "title": "Microsoft 10-K FY2025"
+  },
+  "status": "ENGINEERING_PASS_CONTENT_OPEN",
+  "scope": "offline_engineering_not_final_content_acceptance",
+  "parse_select_seconds": 16.715,
+  "pages": 0,
+  "pages_read": 0,
+  "parsed_units": 5215,
+  "source_errors": [],
+  "source_coverage_complete": true,
+  "selection_status": "partial",
+  "selected_count": 96,
+  "selected_chars": 41385,
+  "candidate_count": 422,
+  "omitted_count": 326,
+  "actual_work": {
+    "used": 7993449,
+    "limit": 16000000,
+    "exhausted": false
+  },
+  "draft_bytes": 57120,
+  "tasks": 59,
+  "claims": 52,
+  "dispositions": {
+    "unsupported": 2,
+    "admitted": 52,
+    "deferred": 5
+  },
+  "selected_gold": [
+    {
+      "id": "f-azure-is-consumption-based",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-azure-inside-intelligent-cloud",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-three-segments",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-segment-change-in-august-2024",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-m365-consumer-vs-commercial-metric",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-azure-growth-inside-combined-line",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-rpo-scope-and-amount",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-rpo-recognition-is-forward",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "canonical_gold": [
+    {
+      "id": "f-azure-is-consumption-based",
+      "supported": true,
+      "claim_ids": [
+        "t29-source"
+      ]
+    },
+    {
+      "id": "f-azure-inside-intelligent-cloud",
+      "supported": true,
+      "claim_ids": [
+        "t28-source"
+      ]
+    },
+    {
+      "id": "f-three-segments",
+      "supported": true,
+      "claim_ids": [
+        "t15-source"
+      ]
+    },
+    {
+      "id": "f-segment-change-in-august-2024",
+      "supported": true,
+      "claim_ids": [
+        "t16-source",
+        "t19-source"
+      ]
+    },
+    {
+      "id": "f-m365-consumer-vs-commercial-metric",
+      "supported": true,
+      "claim_ids": [
+        "t5-source",
+        "t6-source"
+      ]
+    },
+    {
+      "id": "f-azure-growth-inside-combined-line",
+      "supported": true,
+      "claim_ids": [
+        "t7-source"
+      ]
+    },
+    {
+      "id": "f-rpo-scope-and-amount",
+      "supported": true,
+      "claim_ids": [
+        "t57-source"
+      ]
+    },
+    {
+      "id": "f-rpo-recognition-is-forward",
+      "supported": true,
+      "claim_ids": [
+        "t57-source"
+      ]
+    }
+  ],
+  "selected_required": 8,
+  "canonical_required": 8,
+  "required_total": 8,
+  "ambiguous_raw_evidence_count": 8,
+  "ambiguous_summary_support_count": 0,
+  "ambiguous_samples": [
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:5de136101c0ff3bf77eecb3119f3a40ad4deb557ac51b5b06ff4633e5a015c61",
+      "locator": "loc:v1/table:11/row:7/column:2",
+      "text_sha256": "6e5a896d0df38404b64fc7f0ccd69052dcef817dd348412a59e5b158ce426e16",
+      "chars": 65,
+      "prefix": "The number of Microsoft 365 Consumer subscribers at end of period",
+      "suffix": " of Microsoft 365 Consumer subscribers at end of period",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 1,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 0
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:5e76ad985ae530fe2b7118d097c8455ea7f50383342701ba8e754776745c574a",
+      "locator": "loc:v1/table:11/row:3/column:0",
+      "text_sha256": "5c6e0fe8e1f977869f4aac72ed014cb51f2d75fb85ed9627232e8c6648a424ce",
+      "chars": 36,
+      "prefix": "Microsoft 365 Commercial seat growth",
+      "suffix": "Microsoft 365 Commercial seat growth",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 1,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 0
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:88a8f1acded39305817c57597d8dbafd4ee9d6e4e29bfc373f3276f574117ee4",
+      "locator": "loc:v1/table:10/row:5/column:0",
+      "text_sha256": "4530788373f7dc65baa0a3254c6096318f663bf485a488d1d348a5185b83ccaa",
+      "chars": 39,
+      "prefix": "Microsoft Cloud gross margin percentage",
+      "suffix": "Microsoft Cloud gross margin percentage",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 1,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 0
+    }
+  ],
+  "exact_source_material_verified": true,
+  "canonical_claim_text_unchanged": true,
+  "source_priority_complete_count": 96,
+  "incident_markers": [
+    {
+      "old_task": "t3",
+      "old_body_text_sha256": "8787df12883a61d9fab4e6404e4b802bf540868a6d9712a66a5bab586d08e8e0",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t22",
+      "old_body_text_sha256": "8905ad0e05fd70da4125b2ba4f6b3a0edfffd0b6c3bee19ea6825cab3452e17e",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t26",
+      "old_body_text_sha256": "8339c38282c50757ec1b7dc3bb8ae7c3b8a3fbf9c77033fb9762aa774543c23e",
+      "selected_matches": 1,
+      "new_claim_ids": [
+        "t24-source"
+      ],
+      "source_sample": {
+        "id": "urn:company-wiki:evidence-span:sha256:464354054b4f36547629d0c3467a60854c2aa1b259fa97631134716c1d180809",
+        "locator": "loc:v1/paragraph:194",
+        "text_sha256": "8339c38282c50757ec1b7dc3bb8ae7c3b8a3fbf9c77033fb9762aa774543c23e",
+        "chars": 227,
+        "prefix": "Additional information on our operating segments and geographic and product information is contained",
+        "suffix": "nancial Statements (Part II, Item 8 of this Form 10-K).",
+        "flags": [],
+        "reading_priority": 1,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3
+      },
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t39",
+      "old_body_text_sha256": "ee2aa968d7586fe7025b491391b96a9860a9424c7c0b79db3b5f9ec3020ba8ac",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    }
+  ],
+  "deferral_reasons": {
+    "REFERENCE_UNRESOLVED": 11,
+    "SELECTION_BUDGET": 117
+  },
+  "actual_work_accounts": [
+    {
+      "used": 7993449,
+      "limit": 16000000,
+      "exhausted": false
+    }
+  ],
+  "seconds": 17.684,
+  "original_unchanged": true,
+  "gold_unchanged": true,
+  "api_calls": 0,
+  "raw_copies": 0
+}

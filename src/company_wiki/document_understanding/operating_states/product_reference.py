@@ -71,7 +71,33 @@ _DEICTIC_EN = re.compile(
 _PLURAL = re.compile(r"^(?:這些|这些|該等|该等|these|those|such)", re.IGNORECASE)
 _FAMILY_MARK = re.compile(r"系列|產品線|产品线|上述|前述|該等|该等|這些|这些|所有|全部")
 
-_LATIN_NAME = r"[A-Za-z][A-Za-z0-9&./+-]*(?:\s+[A-Za-z][A-Za-z0-9&./+-]*){0,3}"
+# Deictic surfaces may name a head we cannot declare (系统/平台/方案/技术).
+# Recognise the actual head first, then gate only heads the declaration
+# vocabulary can resolve; otherwise a plural "这些平台" would be treated as a
+# product reference that no declaration can ever satisfy.
+_DEICTIC_HEADS = ("系列", "产品线", "產線", "產品", "产品", "設備", "设备", "系統",
+                  "系统", "平台", "方案", "技術", "技术", "器件", "模組", "模组",
+                  "模塊", "模块", "材料", "產品線")
+
+_GENERIC_CJK = frozenset({
+    "产品", "產品", "业务", "業務", "服务", "服務", "客户", "客戶", "市场", "市場",
+    "行业", "行業", "企业", "企業", "公司", "集团", "集團", "技术", "技術", "平台",
+    "系统", "系統", "方案", "产品线", "產品線", "系列", "这些", "這些", "该", "該",
+    "上述", "前述", "该等", "該等", "本集团", "本集團", "本公司", "我们", "我們",
+})
+_GENERIC_LATIN = frozenset({
+    "we", "our", "us", "the", "its", "their", "this", "these", "those", "such",
+    "company", "business", "products", "product", "services", "service", "market",
+    "customers", "customer", "sell", "sells", "offer", "offers", "provide",
+    "provides", "has", "have", "is", "are", "was", "were", "and", "or",
+})
+_ISSUER_PREFIX = re.compile(
+    r"^(?:本公司|本集團|本集团|我们|我們|公司|集團|集团|该|該|其|the|our|we|its|their)\s*",
+    re.IGNORECASE)
+
+# A product name starts with a capitalised proper token; generic sentence
+# openers ("The Company launched ...") therefore cannot swallow the name.
+_LATIN_NAME = r"[A-Z][A-Za-z0-9&./+-]*(?:\s+[A-Z][A-Za-z0-9&./+-]*){0,3}"
 _CJK_NAME = r"[\u3400-\u9fff]{2,10}"
 _DECLARATION = re.compile(rf"(?P<name>{_LATIN_NAME}|{_CJK_NAME})\s*(?P<head>{_HEAD_ALT})")
 _COLLECTIVE_MARK = re.compile(
@@ -120,6 +146,28 @@ def supports_head(head: str) -> bool:
         token.casefold() for token in _SUFFIX_HEADS}
 
 
+def _proper_name(name: str, head: str) -> bool:
+    """A declaration names one product; generic prose cannot donate one."""
+    stripped = _ISSUER_PREFIX.sub("", name.strip()).strip()
+    if not stripped:
+        return False
+    if stripped.casefold() in _GENERIC_CJK or stripped.casefold() in _GENERIC_LATIN:
+        return False
+    if re.fullmatch(r"[\u3400-\u9fff]+", stripped):
+        if re.fullmatch(r"[一二三四五六七八九十百千萬万0-9]+[類类種种款個个]?", stripped):
+            return False
+        return len(stripped) >= 2 and stripped not in _GENERIC_CJK
+    tokens = [token for token in stripped.split() if token]
+    if not tokens or tokens[0].casefold() in _GENERIC_LATIN:
+        return False
+    if any(token.casefold() in _GENERIC_LATIN for token in tokens):
+        return False
+    if not tokens[0][:1].isupper():
+        return False
+    return all(token[:1].isupper() or any(character.isdigit() for character in token)
+               for token in tokens[1:])
+
+
 def _family(name: str, head: str) -> str:
     name = _LEADING_ARTICLE.sub("", name.strip())
     normalized = re.sub(r"\s+", "", name).casefold()
@@ -139,7 +187,7 @@ def find_product_deictic(text: str) -> tuple[ProductDeictic, ...]:
             continue
         surface = match.group()
         head = next((token for token in
-                     sorted((*_FAMILY_MARKERS, *_SUFFIX_HEADS), key=len, reverse=True)
+                     sorted((*_FAMILY_MARKERS, *_DEICTIC_HEADS), key=len, reverse=True)
                      if token in surface), "产品")
         plural = bool(_PLURAL.match(surface))
         family = plural or bool(_FAMILY_MARK.search(surface)) or bool(
@@ -197,10 +245,12 @@ def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
     declared: list[ProductDeclaration] = []
     for match in _DECLARATION.finditer(text):
         name, head = match.group("name"), match.group("head")
-        if not re.search(r"[A-Za-z]", name) and head not in _FAMILY_MARKERS:
+        if not _proper_name(name, head):
             continue
         bounds = _sentence_bounds(text, match.start())
-        marker = _COLLECTIVE_MARK.search(text, bounds[0], bounds[1])
+        # The enumeration must follow the declaration it belongs to; a customer
+        # list in an earlier clause cannot donate collective members.
+        marker = _COLLECTIVE_MARK.search(text, match.end(), bounds[1])
         collective = _members(text, marker, bounds)
         prefix = text[bounds[0]:match.start()]
         attribution = "issuer"

@@ -1,3 +1,10 @@
+## DU11 B2 复审 v2 的两个新 P1 已修 — 2026-10-18
+
+复审仍 REJECT：v1 的 P1 全部关闭（P1-4 部分），新增两个 P1——泛称句被当成具名声明（`We sell products`、`公司产品系列丰富`）、proven furniture 跳过后邻接比较错邻居。均已修复：专名化声明语法、声明后置的 collective、实际 head 识别、客户/供应商归属过滤、furniture 真实邻居 carry。另修 6 个 P2 并补 9 个正反例。
+
+`tests/unit/du11_source_closure` 99 PASS、selection 738 PASS；真实 CN/HK/US 仍 10/10、7/7、8/8（0 API、原件/gold 不变），三源收据均可见 `REFERENCE_UNRESOLVED`（CN 5、HK 2、US 11）。详见 `du11-source-closure-2026-10-18/task_plan.md`。
+
+---
 ## DU11 B2 独立审查 REJECT，P1/P2 已全修 — 2026-10-18
 
 非作者独立审查判定 REJECT（5 个 P1、11 个 P2）。已逐条修复：声明上下文端到端进入 target 组的 citation context；envelope 按原始 unit 计数、carrier 展开全部 originals；声明 ref 改用原文 offset；跨页 `page_carries` 从 continuity 证明接线；内部声明只认 deictic 之前（forward=missing、内部竞争=ambiguous）；单卡 reference deferral 不再降级整篇 coverage；收据前置暴露 `REFERENCE_*`；产品 head 词表收敛为 `PRODUCT_SUFFIX` 子集。

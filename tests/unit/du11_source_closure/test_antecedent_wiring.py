@@ -219,3 +219,32 @@ def test_reference_deferral_does_not_downgrade_the_whole_document():
     assert len(package.evidence_spans) == 4
     reasons = [entry.get("reason") for entry in package.reading_context["deferred"]]
     assert "REFERENCE_UNRESOLVED" in reasons
+
+
+
+def test_proven_furniture_between_pages_keeps_the_real_carry():
+    parsed, pipeline, ids = text_case([DECLARATION, "公司半年报", TARGET],
+        kinds={1: "header"}, pages={1: 2, 2: 2})
+    windows = build_antecedent_windows(parsed, pipeline,
+        prose_unit_ids={ids[0], ids[2]}, furniture=frozenset({ids[1]}),
+        page_carries=frozenset({(ids[0], ids[2])}), require_adjacency_proof=True)
+    assert windows[ids[2]]["predecessor_unit_ids"] == (ids[0],)
+    assert windows[ids[2]]["complete"] is True
+
+
+def test_a_carry_between_the_wrong_neighbours_is_not_accepted():
+    parsed, pipeline, ids = text_case([DECLARATION, "公司半年报", TARGET],
+        kinds={1: "header"}, pages={1: 2, 2: 2})
+    windows = build_antecedent_windows(parsed, pipeline,
+        prose_unit_ids={ids[0], ids[2]}, furniture=frozenset({ids[1]}),
+        page_carries=frozenset({(ids[0], ids[1])}), require_adjacency_proof=True)
+    assert windows[ids[2]]["predecessor_unit_ids"] == ()
+    assert windows[ids[2]]["complete"] is False
+
+
+def test_separate_windows_across_pages_are_not_bridged():
+    parsed, pipeline, ids = text_case([DECLARATION, TARGET], pages={1: 2})
+    windows = build_antecedent_windows(parsed, pipeline, prose_unit_ids=set(ids),
+        require_adjacency_proof=True)
+    assert windows[ids[1]]["predecessor_unit_ids"] == ()
+    assert windows[ids[1]]["complete"] is False

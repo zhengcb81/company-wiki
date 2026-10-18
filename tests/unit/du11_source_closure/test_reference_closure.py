@@ -203,3 +203,42 @@ def test_a_customer_statement_cannot_donate_the_issuer_declaration():
     engine = session({"d": unit("客户推出Alpha系列设备，已开始量产。"), "t": unit(CN_TARGET)})
     result = engine.reference_closure("t", ("d",), window_complete=True)
     assert result["status"] == "missing"
+
+
+
+def test_generic_product_sentences_are_not_declarations():
+    for text in ("We sell products and services.",
+                 "Our products are sold globally.",
+                 "公司产品系列丰富。",
+                 "这些产品线覆盖多个市场。"):
+        assert find_product_declarations(text) == (), text
+
+
+def test_plural_reference_without_a_named_declaration_is_missing():
+    engine = session({"d": unit("We sell products and services."),
+                      "t": unit("These products have been delivered.")})
+    result = engine.reference_closure("t", ("d",), window_complete=True)
+    assert result["status"] == "missing"
+
+
+def test_a_head_outside_the_shared_vocabulary_keeps_legacy_admission():
+    engine = session({"t": unit("这些平台已经成熟。")})
+    assert engine.reference_closure("t", (), window_complete=True)["status"] == "not_applicable"
+
+
+def test_a_customer_list_in_the_same_sentence_is_not_the_product_members():
+    declarations = find_product_declarations(
+        "公司客户包括华为、小米，公司推出X系列产品，已实现量产。")
+    assert len(declarations) == 1
+    assert declarations[0].collective is False
+
+
+def test_an_issuer_voiced_customer_statement_can_still_declare():
+    declarations = find_product_declarations("公司表示客户高度认可X系列产品。")
+    assert len(declarations) == 1
+    assert declarations[0].attribution == "issuer"
+
+
+def test_a_customer_voiced_statement_is_not_a_declaration():
+    engine = session({"d": unit("客户高度认可X系列产品。"), "t": unit(CN_TARGET)})
+    assert engine.reference_closure("t", ("d",), window_complete=True)["status"] == "missing"
