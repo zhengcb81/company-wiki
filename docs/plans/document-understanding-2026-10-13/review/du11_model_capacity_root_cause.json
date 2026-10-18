@@ -1,0 +1,294 @@
+{
+  "status": "READ_ONLY_DIAGNOSIS_COMPLETE_NO_RUNTIME_CHANGE",
+  "incident_head": "ae9a2fbb",
+  "diagnostic_head": "6b4aef5631e15ecd4e93c0907b633fdacb14c860",
+  "relevant_module_diff_incident_to_diagnostic": "git diff ae9a2fbb..HEAD on four decoder/task files empty",
+  "response_sha256": "93eadb70a031420b382e6e4b845f6469c3cf5a608b3c182d0f2f035c02889277",
+  "input_sha256": "a832da49d29b97a478f4b1f0706da20bd7fdd2299e62f91d4e25cca323b03bf2",
+  "binding_sha256": "c0e298a66b497f553ed8fceadc6765a00a7e65a2bbbbe9d176f7b395c2846b08",
+  "formal_original_decode": {
+    "exception": "NarrativeContractError",
+    "message": "summary claims exceed twenty"
+  },
+  "metrics": {
+    "input_tasks": 64,
+    "selected_spans": 96,
+    "emitted_tasks": 19,
+    "not_emitted_tasks": 45,
+    "clauses": 22,
+    "max_claims": 20,
+    "configured_output_tokens": 8192,
+    "actual_output_tokens": 1264,
+    "input_tokens": 13555,
+    "charged_tokens": 14819,
+    "charged_micro_usd": 2681,
+    "http_posts": 1
+  },
+  "mother_budget_snapshot": {
+    "charged_tokens": 628394,
+    "charged_micro_usd": 393953,
+    "new_unknown_count": 0,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "findings": [
+    {
+      "id": "CAPACITY",
+      "severity": "P1",
+      "kind": "planning",
+      "evidence": "64 tasks /96 source spans fed to one completion; target20 clauses, max20, observed22 clauses across19 tasks. Schema maxItems20 is per task array, not global.",
+      "root": "Source-owned native grouping is mistaken for a model execution plan; no finite coverage/priority/slot allocation exists before spending."
+    },
+    {
+      "id": "OVERFLOW",
+      "severity": "P1",
+      "kind": "availability",
+      "evidence": "Original formal decoder raises summary claims exceed twenty before inspecting any clause.22 clauses consume only1264/8192 output tokens; no evidence of truncation.",
+      "root": "A presentation cardinality fault is a document-wide terminal failure, bypassing existing recoverable-clause logic."
+    },
+    {
+      "id": "CROSS-TASK-CITATION",
+      "severity": "P1",
+      "kind": "reference",
+      "task": "t30",
+      "ordinal": 2,
+      "evidence": "basis_parts=[p31p2] is not a local part; prose belongs to t31. Formal binding and isolated decoder reject.",
+      "root": "64 local tN/pN scopes in one prompt invite address carry-over; reference validation is necessary and worked, but whole-count failure hid its diagnostic."
+    },
+    {
+      "id": "PRODUCT-FACT-SWAP",
+      "severity": "P1",
+      "kind": "content",
+      "task": "t62",
+      "ordinal": 1,
+      "evidence": "t62p2 is PRISMO UniMax/Mini-LED/4 chambers/785mm/164x4 or72x6 inch; output is PRISMO HiT3/deepUV/1400deg/18x2 inch from t61p2. Formal local binding accepts this incorrect content.",
+      "root": "Local citation membership proves an address exists, not entailment, product, quantity or stage accuracy."
+    },
+    {
+      "id": "NEGATION-SCOPE",
+      "severity": "P1",
+      "kind": "content",
+      "task": "t6",
+      "ordinal": 1,
+      "evidence": "Cites only t6p2 major operating changes not applicable, but also asserts newly significant noncore business not applicable from omitted t4p2. Isolated decoder accepts.",
+      "root": "Negation paraphrase widens to another task without source support."
+    },
+    {
+      "id": "DUPLICATE",
+      "severity": "P2",
+      "kind": "capacity",
+      "task": "t37",
+      "evidence": "Two clauses restate Preciomo Udx validation/repeat order; second is stronger verification-passed wording and task-local source says performance/reliability meet production requirements. t7 has related stronger wording but is not cited.",
+      "root": "No semantic event dedup; duplicate costs slots while important tasks omitted."
+    },
+    {
+      "id": "AMBIGUOUS-TABLE-NUMERICS",
+      "severity": "P1",
+      "kind": "content",
+      "task": "t1",
+      "evidence": "Two clauses report1.35/0.59/1.16 and1.71/1.00亿元 from p4/p5 flagged table_structure_ambiguous, despite explicit source-owner constraint that such fragments do not establish numeric attribution. Formal projection marks needs_review but retains numeric prose.",
+      "root": "A broad diagnostic status does not stop unsupported column/value assertions from becoming consumer prose."
+    },
+    {
+      "id": "MIXED-MODALITY",
+      "severity": "P2",
+      "kind": "content",
+      "tasks": [
+        "t1-1",
+        "t8-1",
+        "t30-2",
+        "t45-1",
+        "t52-1",
+        "t53-1"
+      ],
+      "evidence": "Single clauses mix current state and target/future collaboration/shipping/construction/commissioning, then carry one modality. Text often preserves future words, but typed actual/planned no longer describes every embedded event.",
+      "root": "280-character clause is an output container, not one subject/event/modality atom."
+    },
+    {
+      "id": "MISSING-CRITICAL-COVERAGE",
+      "severity": "P1",
+      "kind": "quality",
+      "evidence": "t17 omitted: current50+ products/>30% product category coverage and five-year60%/70% target. t16 omitted: completed CMP controlling acquisition. t39 omitted: PD5 production validation+repeat orders. t44 omitted: InP development started+H2 intended shipment. All10 gold facts were selected pre-POST.",
+      "root": "Sparse task omission has no importance or required-business-coverage accounting; tasks2/3 generic risks and financial-table numerics consume output while these business changes vanish."
+    },
+    {
+      "id": "UNRESOLVED-SUBJECT",
+      "severity": "P2",
+      "kind": "input",
+      "evidence": "t5p2 only says this new product; t13/t23/t32 begin mid-sentence; t3 risk truncates at 影. A heading plus short fragment is not always sufficient source context.",
+      "root": "Native continuity grouping carries headings but does not universally close factual referents; do not ask model to fill missing subject from global memory."
+    },
+    {
+      "id": "SELECTION-TO-SUMMARY-ORACLE",
+      "severity": "P1",
+      "kind": "test",
+      "evidence": "events pre_reservation_material supported10/10 proves selected source support only. Final summary failed before published bundle; activation recovery/same-run/cache steps never executed.",
+      "root": "Input recall metric must not be mistaken for delivered summary quality or completed recovery E2E."
+    },
+    {
+      "id": "PAID-RESPONSE-RECOVERY",
+      "severity": "P1",
+      "kind": "recovery",
+      "evidence": "Known reservation records responseSHA/input13555/output1264/cost2681microUSD; diagnostic final is complete5004bytes in this case; production stores responseSHA and bounded failed_final, not a guaranteed complete response object. Runner temp lake removed after failure.",
+      "root": "Usage settlement and artifact activation are recoverable responsibilities already present; decoder-only replay of a paid-but-invalid response is not yet guaranteed by this evidence. No blind resend is justified."
+    }
+  ],
+  "gold_business_delivery_manual_audit": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "source_task": "t17",
+      "observed": "omitted"
+    },
+    {
+      "id": "f-current-coverage-30",
+      "source_task": "t17",
+      "observed": "omitted"
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "source_task": "t16",
+      "observed": "omitted_completed_event; t8 has conditional synergy instead"
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "source_task": "t37",
+      "observed": "present_with_duplicate"
+    },
+    {
+      "id": "f-gan-power-stage",
+      "source_task": "t39",
+      "observed": "omitted; t40 new unnamed GaN shipment is not PD5"
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "source_task": "t41",
+      "observed": "present"
+    },
+    {
+      "id": "f-inp-development-started",
+      "source_task": "t44",
+      "observed": "omitted"
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "source_task": "t45",
+      "observed": "present_text; actual typed modality mixes planned shipment"
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "source_task": "t45",
+      "observed": "present"
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "source_task": "t45",
+      "observed": "present_text; mixed actual+future validation"
+    }
+  ],
+  "gold_delivery_limit": "manual comparison of original failed model bytes, not official final artifact score; no final artifact exists",
+  "per_clause_diagnostic": "21 structurally accepted;1 badbasis rejected. Does not prove21 true or accept modified production response. Full rows in model-capacity-formal-decoder.json.",
+  "implementation_plan": [
+    {
+      "step": "A",
+      "owner": "existing summary_tasks + scoped compiler",
+      "change": "Separate immutable native source task plan from finite execution plan. Group by existing source/section/event closure, dedup exact support identity, preserve causal current-vs-target/project transitions. Allocate bounded slots per source-scope batch; record task dispositions emitted/deferred_budget/unsupported/redundant. Never supply benchmark gold or hardcode issuer facts to production.",
+      "TDD": [
+        "64task synthetic/real-receipt replay shows finite task batches with closed citations and stable keys, no64-to20 silent all-task pressure",
+        "Reorder irrelevant/accounting tasks and add duplicate fragments: critical business-scope coverage and execution identity remain stable",
+        "Dense/sparse documents and unknown priorities abstain honestly; no mandatory all-64-claims quality gate"
+      ]
+    },
+    {
+      "step": "B",
+      "owner": "existing scoped request+decoder+canonical contract boundary",
+      "change": "Use one coherent flat bounded clause container or explicitly allocated task slots so schema and decoder share total bounds. Keep existing configured token/cost limits. Parse bounded bytes and preserve all clause diagnostics before output selection; isolate bad local clauses and exact duplicates, not silent ID repair, first20 slicing or overflow whole-document deadletter. A final compact digest may stay20; detailed source-scope summaries need their own explicitly bounded existing artifact/result representation, with versioned contract and consumer updates if canonical20 is retained.",
+      "TDD": [
+        "Real unchanged22-clause response reproduces CLAIMS_LIMIT and separately exposes t30 bad reference; no blanket productionPASS",
+        "19tasksx2 cannot silently bypass total or hide other errors; transport/identity/translation still fail honestly",
+        "One bad task never drops valid peers; allbad remains unavailable; order-independent deterministic dedup/overflow disposition; no new artificial semantic acceptance"
+      ]
+    },
+    {
+      "step": "C",
+      "owner": "source claim compiler/quality projection",
+      "change": "Prefer source-anchored event atoms: same product/subject, quantities+units+period, stage/negation/modality and exact basis offsets travel together. Verify exact identifiers/numbers against the actual local factual support, not anywhere in64tasks. For uncertain paraphrase entailment retain original supported extract/unknown plus diagnostics, not invented automatic semanticPASS or human permit. Ambiguous table columns cannot generate attributed numeric claims unless independent owner evidence resolves them. Split mixed current/future events; preserve source evidence closure.",
+      "TDD": [
+        "t62 HiT3 prose against UniMax basis rejected or rendered source-only unavailable; moving to t61 is never automatic",
+        "t6 noncore negation unsupported locally cannot survive",
+        "t1 ambiguous column numerics remain unknown; independent prose-supported stage can survive",
+        "current30 vs future60/70, orders vs validation vs mass production, intention vs signedorder, mixed subjects/units/period and actual+planned multi-event clauses across unrelated company fixtures"
+      ]
+    },
+    {
+      "step": "D",
+      "owner": "existing model caller/AUTO attempt+outbox/artifact boundary",
+      "change": "Persist bounded complete paid response with request/body/selection/task-binding/model/decoder identities before final decode/activation using existing owned attempt artifact/outbox mechanisms. Ledger settlement remains once and preserves mother cumulative totals/unknownholds. Versioned decoder replay from verified retained bytes incurs0POST; changed task input cannot masquerade as the same response. If bytes were never durably observed or are clipped, report not_replayable/unknown instead of repairing or resending automatically.",
+      "TDD": [
+        "stop after provider return/before decode; resume0POST with sameSHA and ledgeronce",
+        "paid invalid response decoder-version replay0POST, output retains original attempt provenance",
+        "tampered/clipped/missing response reject0POST; source/input/taskbindings mismatch refuse reuse",
+        "same/crossrun artifact activation/cache recovery remains existing path, no secondstore/modelclient/ledger"
+      ]
+    },
+    {
+      "step": "E",
+      "owner": "ROOT concentrated quality E2E",
+      "change": "Only after offline real-response+synthetic controls green, run fresh configured-provider finite batches through real production flow. Evaluate selection recall and delivered summary separately; audit all10 business facts plus negative swapped-product/table/modality controls. Thresholds test quality, never production authorization or gold-fed selection. Then activation interruption, same/crossrun0POST and source tamper.",
+      "TDD": [
+        "CN original10 input supported vs final business facts measured explicitly",
+        "HK/US fresh provider cases with company-independent controls and configured models unchanged",
+        "budget exhaustion/deferred states truthful; cleanup/sentinel originalSHA and cumulative ledger verified"
+      ]
+    }
+  ],
+  "execution": [
+    "python -X utf8 -B .planning/shared-reading-production/du11/model-capacity-diagnostic.py with PYTHONPATH repo;repo/src",
+    "git diff ae9a2fbb..HEAD -- four relevant decoder/task files (empty)"
+  ],
+  "new_api_posts": 0,
+  "production_files_written": 0,
+  "raw_documents_copied": 0,
+  "unit_suites_run": 0,
+  "limits": [
+    "not a complete semantic entailment proof",
+    "not full production paid-response crash recovery proof",
+    "no response was corrected/promoted or fed to production",
+    "read-only diagnosis, ROOT owns TDD and PWF integration"
+  ],
+  "existing_task_signal_assessment": {
+    "available": true,
+    "requires_new_semantic_parse": false,
+    "native_inventory": {
+      "native_continuity": 55,
+      "paragraph_event": 3,
+      "background": 3,
+      "risk": 2,
+      "operating_table": 1
+    },
+    "reusable": [
+      "SourceSummaryTask.selection_reasons/topics/support_roles/kind/section_role",
+      "canonical support/context IDs and source quality_flags",
+      "existing reading_context groups/policies/business_facets and shared section anchors"
+    ],
+    "specific_signals": {
+      "t16": "corporate_development /new_business, unambiguous",
+      "t17": "business_coverage_relation exact source-owned topic and reason",
+      "t1": "operating_table with table_structure_ambiguous",
+      "t2_t3": "risk kind, but broad operating_plan/new_business tags are noisy",
+      "t39": "operating_mechanism, core_business/capacity_projects",
+      "t44": "only operating_description_unknown/core_business; cannot claim specific InP priority from existing tag alone"
+    },
+    "limits": [
+      "55 native_continuity tasks have section_role unknown; naive role-priority would demote most business paragraphs",
+      "t64 lease accounting is tagged core_business/capacity_projects/operating_restriction; reasons are selection heuristics, not factual truth",
+      "No existing importance/per-task output slot/requested coverage score: signals support coarse source-owned allocation, not complete high-quality priority by themselves"
+    ],
+    "minimal_allocation": "Program combines explicit event/category signals with existing native section/support closures, fair coverage across section scopes and penalties for ambiguous tables/background/generic risks under business_dynamic purpose. Unknown generic tasks receive explicit unresolved/deferred or a finite balanced section batch, not invented business relevance. All64 retained and publicly inspectable. No second semantic parse, no issuer constants, no benchmark gold."
+  },
+  "additional_traceability_note": {
+    "owner": "ScopedModelView.resolve_basis /decode_scoped_draft",
+    "evidence": "resolve_basis records selected basis_ids but returned canonical claim evidence_ids uses entire task.support_ids. t1 citation therefore expands a single p4/p5 basis into all9 task support fragments; this preserves source closure but drops exact selected witness in canonical claim.",
+    "proposal": "Preserve exact factual witness IDs/offsets separately from required native support/context closure in the versioned card contract; never treat broader closure as proof for all asserted quantities. Do not delete required qualifiers to make a narrower citation look valid."
+  }
+}

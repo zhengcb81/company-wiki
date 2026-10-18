@@ -1,3 +1,13 @@
+## DU11 下一实施位置：源摘录摘要与付费恢复 — 2026-10-18
+
+离线真实响应已确认根因：64任务由模型自行挤20，22条不仅超限，还出现合法引用串产品、漏关键业务；不是8192输出不足。已完成独立设计审查，实施细则见[源摘录/恢复施工](review/source_extractive_summary_implementation.md)，输入/预算/版本/兼容/测试/独审边界已细化。优先实施源原文业务卡、模型仅排序/处置、同AUTO完整paid-response耐久化；不简单抬20、不改旧失败、不新增人审或第二store、不改两外包消费者源码。
+
+正常push完整检查：6570PASS/24SKIP/1FAIL、538.30秒，非超时，未发布。唯一旧测试把fine max_pages=1误当“第二页不能有任何粗布局”，已保留原断言并增强真实WORDS仅1次、page2无words/cells+block，46集中PASS/4.30秒、独审PASS，生产源未改。下次正常push继续核真实CI，不跳hook。
+
+**Next Step：** 正常提交/推送本次测试责任修正与已审实施细则；在隔离ROOT工区先写源卡/有限计划及完整响应恢复的行为RED，再按施工白名单实现，集中离线绿和独审后才恢复真实付费C。累计628394tokens/$0.393953proxy，历史unknown7保留；C/新holdout/完整RF审查循环仍OPEN。
+
+---
+
 ## DU11 正式C第二次CN结果 — 2026-10-18（最新）
 
 最终受审HEAD ae9a2fbb 的真实只读CN选材10/10通过，96片段7739字、64个source tasks；MiMo一次POST返回22条（协议总限20），整份以CLAIMS_LIMIT拒绝。原响应还见未知本地引用，进入离线正式decoder/taskbinding共因诊断，不修引用、不直接抬20、不盲重发；HK/US暂缓付费，避免重复共因。详细记录review/du11_real_summary_second_cn.json。

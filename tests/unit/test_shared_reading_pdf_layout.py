@@ -231,16 +231,30 @@ def test_zero_geometry_budget_preserves_every_source_unit_and_marks_partial(limi
     assert new.layout_diagnostics
 
 
-def test_geometry_limits_are_global_across_pages_not_restarted_for_each_page():
+def test_geometry_limits_are_global_across_pages_not_restarted_for_each_page(monkeypatch):
+    fitz = pytest.importorskip("fitz")
+    word_reads = []
+    original_words = fitz.TextPage.extractWORDS
+
+    def tracked_words(textpage, *args, **kwargs):
+        word_reads.append(1)
+        return original_words(textpage, *args, **kwargs)
+
+    monkeypatch.setattr(fitz.TextPage, "extractWORDS", tracked_words)
     parsed = _parse(_bytes(pages=2), layout_limits={"max_pages": 1})
     assert not parsed.layout_coverage["complete"]
     assert parsed.layout_coverage["processed_page_count"] == 1
     assert any(unit.coordinates.page_number == 2 for unit in parsed.units)
-    assert all(
-        not unit.metadata.get("reading_layout")
-        for unit in parsed.units
-        if unit.coordinates.page_number == 2
-    )
+    assert len(word_reads) == 1
+    assert any(unit.metadata.get("reading_layout", {}).get("upstream_hints", {}).get("words")
+               for unit in parsed.units if unit.coordinates.page_number == 1)
+    for unit in parsed.units:
+        if unit.coordinates.page_number == 2:
+            hints = unit.metadata.get("reading_layout", {}).get("upstream_hints", {})
+            # Coarse bbox/font observations reuse the original DICT read and
+            # do not spend or renew the separately bounded fine geometry.
+            assert not hints.get("words") and not hints.get("cells")
+            assert hints.get("geometry_granularity") == "block"
 
 
 def test_unit_and_fine_limits_defer_geometry_without_truncating_source_text():

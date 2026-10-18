@@ -1,0 +1,33 @@
+{
+  "schema_version": "du11-fine-coarse-budget-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at_utc": "2026-10-18T00:00:12.875515+00:00",
+  "verdict": "PASS_TEST_RESPONSIBILITY_CORRECTION_NO_PRODUCTION_BEHAVIOR_CHANGE",
+  "files_sha256": {
+    "tests/unit/test_shared_reading_pdf_layout.py": "f2b488b383976e3e111e662f2849ede1bad8aecfd2ac0c0f90690b691030cd76"
+  },
+  "finding": "Old assertion equated absence of fine geometry processing with absence of any reading_layout. Approved coarse bbox/font observations reuse the original DICT read and are a different responsibility from separately capped WORDS/cells. Therefore the old blanket absence assertion conflicts with the accepted native prose contract.",
+  "reviewed_diff": "Exactly one test changes: monkeypatch real fitz.TextPage.extractWORDS, require document-wide one call, require actualpage1 words, requirepage2 no words/cells and granularityblock. Existing partial coverage, processed_page_count1, and preserved page2 source unit assertions remain.",
+  "test_quality": "This checks actual cost-producing native extraction rather than trusting counters alone. A page-budget reset would permit second WORDS read and fail. A later-page fake fine projection would fail words/cells and block checks. Native coarse layout is positively verified, not simply ignored.",
+  "evidence": {
+    "xml": ".planning/shared-reading-production/du11/fine-coarse-budget-regression.xml",
+    "xml_sha256": "242ce1d91c53922d860be019ec7fbd3235a5274f77adb1510ab84bea56dea48c",
+    "tests": 46,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": "4.307",
+    "changed_case_present": true,
+    "source": "ROOT regression execution reused; reviewer parsed existing XML and read diff only"
+  },
+  "independent_tests_started": 0,
+  "pdf_reads": 0,
+  "network_calls": 0,
+  "production_source_writes": 0,
+  "unresolved_findings": [],
+  "limits": [
+    "Focused test correction accepted; not a new full-suite or remote-CI PASS.",
+    "Global table extraction/fine-element/deadline properties remain in neighboring existing tests; this two-page plain-text fixture specifically proves WORDS page budget.",
+    "No budget/time cap increased and no production source adjusted."
+  ]
+}

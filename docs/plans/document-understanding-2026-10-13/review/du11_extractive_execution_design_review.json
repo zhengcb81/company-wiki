@@ -1,0 +1,191 @@
+{
+  "schema_version": "du11-extractive-execution-design-review/1",
+  "reviewed_at_utc": "2026-10-17T23:59:14.790886+00:00",
+  "reviewer": "/root/du10_et_reception_review",
+  "verdict": "APPROVE_DESIGN_WITH_REQUIRED_BOUNDARIES_NOT_IMPLEMENTATION_ACCEPTANCE",
+  "runtime_source_sha256": {
+    "src/company_wiki/automation/narrative_model_scoped.py": "f7b8093e8f07f5f414d5d418bd446c808bdfad4b88f283685521c596ceb70aa0",
+    "src/company_wiki/automation/narrative_model_runtime.py": "6d8eac035b7968bd3b0b9595971293f3f84dd79459407076c12c20df4aa5056a",
+    "src/company_wiki/document_understanding/summary_tasks.py": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+    "src/company_wiki/automation/narrative_contracts.py": "1593b455633d4d26604df27d6f0daf307446dbdca4fb6cbbfb3eb46a184b72fa",
+    "src/company_wiki/automation/narrative_model.py": "2306aa70f532e508f8a470fb03088bce52bf1e340f4a44dc623f3d7d95e4f702",
+    "src/company_wiki/automation/narrative_model_caller.py": "8c453ad2b479241c6dd646be4b0896762a624f9a151730122859c2db0ffd3d04",
+    "src/company_wiki/automation/narrative_summarize.py": "37c27b9b83a8fd7c02fab6f1b02f8fd36e8fce5047a8c69dd370dbbf678ff956",
+    "src/company_wiki/automation/narrative_http_model.py": "f6545e5999474b9e1f3b177c6afe93db1341778f5f83faa061366b24167a21ef",
+    "src/company_wiki/automation/narrative_generation.py": "f28924c42d982c67eaae86c521a7b891db4676b6aa240c8514c01ccbe12bfaa3",
+    "src/company_wiki/automation/narrative_run_store.py": "83ea08d532e1ea9121b435294a6fd150450909c18d7c4a7f1041ac0a81962ddb",
+    "src/company_wiki/automation/store.py": "4646402295499f74bbcd2084aefcd6cbb95d1c4213d499e7dea66fb0a600fcd4",
+    "src/company_wiki/automation/outbox.py": "f8ec1dce9f4ef6c4485b478c79aaefe5835e9bd52fd751f4f7f3251cf1e704b1",
+    "src/company_wiki/source_catalog/narrative_artifact_store.py": "0ef88398dc53877bde1ce251324232c890514a7e15d9e46d159a4ed64298c7cb",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1"
+  },
+  "diagnosis_sha256": "261b0ff5a255b7337a8f75df68970560d05c324c024711f8af6e7734868cfa7f",
+  "conclusion": "A separate finite extractive source-card protocol can eliminate model-authored canonical product/number/stage rewrites. Legal citation IDs alone cannot. Arbitrary exact substrings and sparse ID-only output alone are insufficient.",
+  "required_design_adjustments": [
+    {
+      "id": "CLOSURE",
+      "priority": "P1",
+      "decision": "Only program-owned complete source support/closure units may become candidates. Model returns candidate/task IDs and bounded dispositions, never text/offsets/modality/business numbers. Arbitrary source substrings are not safe witnesses: negation/subject/condition can be removed while remaining exact."
+    },
+    {
+      "id": "RECALL",
+      "priority": "P1",
+      "decision": "ID-only protocol must not retain arbitrary sparse19/64 omission. Program owns finite admitted coverage plan from existing strategy/section/quality signals; each admitted task gets explicit disposition. Unknown/missing is unprocessed, not coverage complete. Preserve safely closed business cards when they fit; model ordering/dedup cannot silently delete required business scopes. No gold- or issuer-specific production rules."
+    },
+    {
+      "id": "CAPS",
+      "priority": "P1",
+      "decision": "Plan actual serialized summary including full IDs/closure/identity against64KiB, selected against1MiB, bundle against1280KiB, model final against128KiB and configured8192tokens, HTTP envelope against configured max_response_bytes(default262144). Caller2MiB is final artifact reservation, not model response allowance. Do not lift limits; emit honest deferred at actual capacity."
+    },
+    {
+      "id": "TYPING",
+      "priority": "P1",
+      "decision": "Program owns role and modality from existing source facts. Mixed/ambiguous states remain uncertain/needs_review or deferred; never use model-selected actual for an entire mixed card. Question roles remain question; context-only parts cannot become factual evidence. Ambiguous table numbers have no resolved numeric attribution merely by being exact quotations."
+    },
+    {
+      "id": "DURABILITY",
+      "priority": "P1",
+      "decision": "Persist complete observed final response bytes before semantic decode, through existing immutable object storage plus a fenced immutable response pin associated with existing attempt/reservation. Current usage SHA and failed_final prefix are insufficient. Existing narrative artifact drafts only permit narrative_bundle and must not be misused as visible response artifacts; current outbox is written at finish_attempt, too late to protect the provider-return/decode window."
+    },
+    {
+      "id": "IDENTITY",
+      "priority": "P1",
+      "decision": "New projection/prompt/request/decoder/plan identity must be distinct from v4. Preserve historical v4 20/280 semantics and failed22 response. Replay only exact verified request/selection/task/source/model/protocol bytes withoutPOST; an old v4 response is not a valid new ID-only response. Decoder replay may create a derived artifact with original attempt provenance, never a second charge."
+    }
+  ],
+  "capacity_probe": {
+    "schema_version": "du11-extractive-design-capacity-probe/1",
+    "mode": "size-only unsafe candidates; NOT semantic closure proof or canonical production result",
+    "input_file_sha256": "1690e747505530901d5c062b241e0428446c71eb29ce8ed4090b457d65e7ed80",
+    "selected_source_spans": 96,
+    "source_tasks": 64,
+    "selected_raw_characters": 7739,
+    "all_task_full_support_card_characters": 8223,
+    "all_task_full_support_summary_utf8_bytes": 43913,
+    "summary_limit_bytes": 65536,
+    "fits_summary_cap": true,
+    "compact_task_selection_response_bytes": 395,
+    "max_candidate_card_chars": 892,
+    "cards_over_280_chars": 1,
+    "actual_runtime_tests": 0,
+    "pdf_reads": 0,
+    "network_calls": 0,
+    "limits": "Provisional full support per task for capacity only. No arbitrary sentence slicing, safety admission, final plan, model result or final bundle evaluated."
+  },
+  "canonical_and_consumers": {
+    "canonical": "SummaryClaim/draft enforce no fixed20/280; NarrativeSummaryResult enforces64KiB. Canonical claim fields can remain unchanged; full96 evidence spans retained. No second summary in metadata.",
+    "rf": "Read scripts/company_wiki_narrative_contracts.py:365-431: nonempty claims/text and existing enums/IDs/roles, no20/280 cap; BODY_LIMIT1310720. Source-extract text fits current wire without editing RF. Semantic safe-use of uncertain claims still needs fixed-fixture compatibility tests.",
+    "ff": "FF transport/source retrieval does not own or rewrite new source-card semantics. Keep existing source/narrative exports and receipt shape. No FF/RF active contractor file edits.",
+    "provenance": "Canonical text must be deterministically reconstructible from pinned task/support/raw fragment order. Exact chosen witness plus full closure remains in internal binding/retained response, not invented claim fields or an unbounded metadata store."
+  },
+  "minimum_implementation_owners": [
+    "Existing summary task/compiler: finite candidate and execution plan, byte accounting, dispositions.",
+    "New internal extractive model projection/decoder: select only supplied immutable candidate IDs.",
+    "Existing runtime dispatch/generation/handler: opt-in new identity, legacy unchanged, canonical projection.",
+    "Existing caller/run-store/object-store: bounded complete response pin and replay; existing verify/outbox remains only final publication path."
+  ],
+  "recovery_sequence": [
+    "Existing admission/reservation/checkpoint.",
+    "Observe complete bounded provider return; store exact immutable final bytes and a minimal receipt pin bound to run/job/attempt/source/selection/task/input/HTTP body/model/prompt/response SHA and byte size. Final bytes contain no key/headers.",
+    "Persist receipt plus known usage once in fenced existing AUTO accounting transaction before returning to summary decoder; unchanged finish_attempt and final outbox own terminal/activation lifecycle.",
+    "On crash after durable pin, load exact bytes with same request/protocol and usage, decode0POST. Missing/corrupt/clipped/identity-mismatched response remains not_replayable with old conservative charge; never automatic blind resend.",
+    "Crash before a durable observation can remain unknown. Do not claim recovery of bytes never persisted. Retention counts physical objects and deduplicates one content-addressed object per response; no repeated full prompts/source PDFs."
+  ],
+  "tdd_large_nodes": [
+    {
+      "node": "A offline contract and planning",
+      "checks": [
+        "Immutable old22-clause v4 still fails old limit; new protocol cannot accept old free text.",
+        "64 task reordered/noise/dedup/current-target scopes: finite exact coverage dispositions and bounded output; no silent first20 or fixed4paid batches.",
+        "ValidID wrong product/number/negation model text rejected by ID-only response contract; selecting safe ID reconstructs original corresponding source, never neighboring task.",
+        "Negation/qualifier prefix and cross-fragment conditions cannot be removed; incomplete referents/source cutoffs deferred.",
+        "Ambiguous table numeric-only source deferred/uncertain with no attributed numeric business assertion; mixed actual/planned never typed actual.",
+        "Whole part892chars accepted only in new mode and actual64KiB safe; legacy280 preserved; UTF8+longIDs+context+identity bytes boundary65535/65536/65537, single oversize scope deferred without clipping.",
+        "Original roles/question/thirdparty/mixed languages/sourceSHA and exact support/context closure unchanged; genuine no-supported-card is unavailable, not empty completed."
+      ]
+    },
+    {
+      "node": "B durable engineering integration",
+      "checks": [
+        "SourceSelect->new mode->canonical summary->verify->existing bundle/transport in owned temporary lake; RF frozen adapter fixture accepts>20/>280 within wire, rejects brokenroles/IDs; no consumer edits.",
+        "Crash after response-pin before decode; restart same request0POST, known usage once; invalidresponse retained and replayable as invalid.",
+        "Crash after decode/beforeactivation uses existing outbox; same/crossrun artifact cache0POST; wronginput/source/task/protocol/tamper/clipped/missing response0POST not_replayable.",
+        "Injected object-write/SQLite/lease failure retains conservative budget and original response if observed; unknown holds unchanged, no response artifact promoted as bundle.",
+        "Physical response retention measured, temp sentinels/root config/originals restored; no whole original copy and no secondstore."
+      ]
+    },
+    {
+      "node": "C concentrated live acceptance",
+      "checks": [
+        "Only after A/B green freeze exact accepted code; keep actual configured MiMo/DeepSeek/MiniMax and same mother2Mtokens/$20 cumulatives/unknownholds.",
+        "CN10/HK7/US8 input-selection versus delivered source-extract support measured separately; evaluate every delivered card product/numbers/units/currency/negation/stage/source roles, not only benchmark recall.",
+        "No inferred full-document completeness; explicit unsupported/deferred/unprocessed. Actual request/canonical bytes, POST count and cost/recovery evidence.",
+        "Activation interruption plus same/crossrun0POST and source-tamper control, no re-download; test-directory cleanup and raw/config/DB sentinel verification."
+      ]
+    }
+  ],
+  "execution_limits": {
+    "tests_started": 0,
+    "pdf_reads": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "production_source_writes": 0,
+    "source_copy_count": 0
+  },
+  "open_items": [
+    "ROOT still must choose/freeze concrete new ID-only wire and minimum response-pin schema migration.",
+    "Closure safety must be enforced with existing source-owned evidence/context rather than an unbounded new language parser.",
+    "Actual implementation, final paid content and recovery acceptance are not passed by this design review."
+  ],
+  "final_root_agreed_decisions": [
+    "Program retains all admitted, closed, quality-valid source cards fitting actual64KiB; LLM cannot rewrite or delete them. Model only supplies finite dispositions/importance ordering for every admitted task; missing remains unprocessed, not full coverage.",
+    "New internal reading-model-input/5 source-extractive identity; no new compact/digest UI or store; source/canonical fields unchanged, oldv4 failed22 unchanged.",
+    "Sourcecard material may be constructed before any model call. Existing canonical completed result still requires a real model observation; missing model/0POST is an internal planning result, not a fabricated completed summary. Actual malformed ranking may be diagnostic while program-owned safe extracts remain source-extractive, with true response identity and existing needs_review."
+  ],
+  "construction_file_map": [
+    {
+      "files": [
+        "src/company_wiki/document_understanding/summary_tasks.py",
+        "new src/company_wiki/document_understanding/source_cards.py"
+      ],
+      "owner": "Source plan/compiler",
+      "details": "Immutable finite candidates from existing task support/context, exact raw-text rendering, deterministic dedup and safe per-task dispositions/byte plan. No new parser/classifier/Store. One whole closed scope may exceed280 in new mode; unsafe/oversize scope deferred intact."
+    },
+    {
+      "files": [
+        "new src/company_wiki/automation/narrative_model_extractive.py",
+        "src/company_wiki/automation/narrative_model_runtime.py"
+      ],
+      "owner": "Protocol",
+      "details": "reading-model-input/5 identity, request/prompt/schema/decoder; flat bounded supplied-card IDs with finite disposition/rank. Reject text/offsets/foreign identities; absent tasks diagnostic. Program source text retained independently from rank errors. Existingv4 branch unchanged."
+    },
+    {
+      "files": [
+        "src/company_wiki/automation/narrative_summarize.py",
+        "src/company_wiki/automation/narrative_generation.py"
+      ],
+      "owner": "Production integration",
+      "details": "One existing handler/caller and boundary binding; real request/response identity, source-role/modality quality, exact canonical64KiB/bundle bounds. Pass through current configured options; no model-less completed result invented."
+    },
+    {
+      "files": [
+        "src/company_wiki/automation/narrative_model_caller.py",
+        "src/company_wiki/automation/narrative_run_store.py",
+        "existing AUTO migration owner",
+        "existing LocalNarrativeObjectStore owner"
+      ],
+      "owner": "Durability",
+      "details": "Minimal additive response pin in current attempt/reservation plus immutable exact bytes in current object facility; fenced usage/pin once, replay beforenewHTTP, no response-as-visible-bundle. Optional originalHTTPowner observation only if envelope-failure replay explicitly implemented; finalcontent retained fully notprefix."
+    },
+    {
+      "files": [
+        "new tests/unit/du11_production/test_source_cards.py",
+        "new tests/unit/test_narrative_extractive_protocol.py",
+        "existing caller/runstore recovery tests",
+        "existing phase C runner/observer and isolated fixtures"
+      ],
+      "owner": "TDD/E2E",
+      "details": "A/B concentrated offline+durability gates then real C; RF frozen-contract test may import/read same wire in independentfixture without editing contractor files; no whole originals copied."
+    }
+  ]
+}
