@@ -51,6 +51,7 @@ class JobExecutionContext:
     dependency_results: Mapping[str, HandlerResult]
     source_revision: SourceRevisionEventPayload | None
     _checkpoint: Callable[[], None]
+    prior_partial_result: HandlerResult | None = None
 
     @classmethod
     def from_snapshot(
@@ -72,6 +73,7 @@ class JobExecutionContext:
             MappingProxyType(dependencies),
             source_revision,
             checkpoint,
+            prior_partial_result=snapshot.prior_partial_result,
         )
 
     def checkpoint(self) -> None:

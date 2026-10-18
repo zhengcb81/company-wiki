@@ -72,6 +72,9 @@ class ExecutionSnapshot:
     attempt: Attempt
     event: Event
     dependencies: tuple[DependencyExecutionResult, ...]
+    # Latest earlier attempt of the same job whose result is a partial
+    # summary; a retry uses it to cover only the remaining tasks.
+    prior_partial_result: HandlerResult | None = None
 
     def __post_init__(self) -> None:
         if self.job.job_id != self.attempt.job_id:
@@ -206,6 +209,27 @@ def _dependency_result(
     )
 
 
+def _prior_partial_result(
+    connection: sqlite3.Connection, attempt: Attempt
+) -> HandlerResult | None:
+    rows = connection.execute(
+        f"SELECT {_ATTEMPT_COLS} FROM attempts WHERE job_id=? AND attempt_no<? "
+        "ORDER BY attempt_no DESC, attempt_id DESC",
+        (attempt.job_id, attempt.attempt_no),
+    ).fetchall()
+    for row in rows:
+        if row["result_json"] is None:
+            continue
+        try:
+            decoded = json.loads(row["result_json"])
+            result = HandlerResult.from_dict(decoded)
+        except (json.JSONDecodeError, TypeError, ValueError):
+            continue
+        if isinstance(result.result, dict) and result.result.get("coverage_partial") is True:
+            return result
+    return None
+
+
 def load_execution_snapshot(
     connection: sqlite3.Connection, claimed: ClaimedWork, *, now: str
 ) -> ExecutionSnapshot:
@@ -217,7 +241,8 @@ def load_execution_snapshot(
             _dependency_result(connection, parent)
             for parent in _dependency_jobs(connection, job.job_id)
         )
-        return ExecutionSnapshot(job, attempt, event, dependencies)
+        return ExecutionSnapshot(job, attempt, event, dependencies,
+                                _prior_partial_result(connection, attempt))
     except ExecutionSnapshotError:
         raise
     except (KeyError, TypeError, ValueError) as exc:

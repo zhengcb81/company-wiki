@@ -284,3 +284,29 @@ def test_generic_job_keeps_canonical_payload_without_source_parser() -> None:
     assert context.source_revision is None
     assert dict(context.payload) == payload
 
+
+
+def test_prior_partial_summary_is_visible_to_the_retry_context() -> None:
+    partial = models.HandlerResult(
+        outcome=models.HandlerOutcome.RETRYABLE,
+        result={"coverage_partial": True, "summary": {"status": "completed"}},
+        artifacts=(),
+        effects=(),
+        metrics=models.HandlerMetrics(tokens=1, cost_usd=0.0, duration_ms=1),
+        error=models.HandlerError("SUMMARY_COVERAGE_PARTIAL", "awaiting repair"),
+    )
+    job = _job("source.narrative_summarize")
+    snapshot = ExecutionSnapshot(
+        job=job,
+        attempt=_attempt(job.job_id),
+        event=_event(),
+        dependencies=(_dependency(),),
+        prior_partial_result=partial,
+    )
+    factory = ExecutionContextFactory(SnapshotStore(snapshot))
+    context = factory.create(
+        models.ClaimedWork(snapshot.job, snapshot.attempt),
+        now=T1,
+        checkpoint=lambda: None,
+    )
+    assert context.prior_partial_result is partial
