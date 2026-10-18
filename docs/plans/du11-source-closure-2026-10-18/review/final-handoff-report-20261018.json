@@ -1,0 +1,67 @@
+{
+  "schema_version": "du11-final-handoff-report/1",
+  "date": "2026-10-18",
+  "status": "CONDITIONAL_READY",
+  "b2": {
+    "verdict": "PASS",
+    "review": "review/b2-antecedent-final-review-20261018-v3.md",
+    "ci": "2a80acf6",
+    "du11_tests": 110
+  },
+  "c_content": {
+    "closure": "user-accepted 8/10",
+    "cn": 8,
+    "us": 4,
+    "hk": "not_run_api_key_401"
+  },
+  "c_engineering": {
+    "receipts": "PASS",
+    "activation_recovery": "PASS",
+    "cross_run_zero_post": true
+  },
+  "coverage_repair": {
+    "flag": "CW_SUMMARY_COVERAGE_REPAIR",
+    "default": "off (local commits only)",
+    "live_posts": 2,
+    "activation": "activation_pending",
+    "conflict": "activation-resume reopen_paid_output"
+  },
+  "delivery": {
+    "local_master": "b59e2141",
+    "origin_master": "ccc5bc7e",
+    "local_ahead": 7,
+    "branches": {
+      "du11-close-docs": "e6280e6e",
+      "du11-repair-flag": "09cb49ad"
+    },
+    "master_push_blocked_by": [
+      "tests/contract/test_fresh_cache_behavior_receipts.py",
+      "tests/integration/test_shared_reading_production_e2e.py"
+    ]
+  },
+  "packages": {
+    "status": "IMPLEMENTED_PENDING_ROOT_RECEPTION",
+    "branches": [
+      "codex/p1-ocr-text-20261018",
+      "codex/p2-office-table-20261018",
+      "codex/p3-identity-audit-20261018",
+      "codex/p4-consumer-contract-20261018"
+    ]
+  },
+  "usage": {
+    "attempts": 55,
+    "tokens": 1074406,
+    "micro_usd": 270900,
+    "unknown_hold": {
+      "tokens": 69046,
+      "micro_usd": 31208
+    }
+  },
+  "cleanup": {
+    "removed_temp_dirs": 12,
+    "kept": [
+      "RF assurance work files",
+      "output/"
+    ]
+  }
+}

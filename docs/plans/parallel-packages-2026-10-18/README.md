@@ -1,6 +1,6 @@
 # 并行施工包 2026-10-18（P1–P4）
 
-状态：READY_TO_DISPATCH，2026-10-18。本目录只放施工卡与交接约定，不含实现。
+状态：**IMPLEMENTED_PENDING_ROOT_RECEPTION**（2026-10-18 更新；起草时为 READY_TO_DISPATCH）。本目录只放施工卡与交接约定，不含实现。四张卡已在本地分支 `codex/p1-ocr-text-20261018`、`codex/p2-office-table-20261018`、`codex/p3-identity-audit-20261018`、`codex/p4-consumer-contract-20261018` 实现完毕，写集互斥已核实（见下方写集表），均**未推送**，等待 ROOT 接收；接手者不要再重复派工。
 起草人：外部 agent；接收与验收：ROOT。主线 PWF 为 `docs/plans/document-understanding-2026-10-13`（母）与 `docs/plans/du11-source-closure-2026-10-18`（当前 B2 来源闭合），本目录的四张卡**不是**主线的一部分，也不改变主线状态。
 
 ## 1. 四张卡一览

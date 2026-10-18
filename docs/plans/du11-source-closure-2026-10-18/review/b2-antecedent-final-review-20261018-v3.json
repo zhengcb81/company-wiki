@@ -1,0 +1,135 @@
+{
+  "schema": "b2-antecedent-final-review-v3/1",
+  "reviewed_at": "2026-10-18T19:10:00+08:00",
+  "head": "2c4dcfea19f0548bfcf4f6b1e772b046d5f7bf6e",
+  "code_commit": "2a80acf6",
+  "verdict": "PASS",
+  "scope": "code-level final B2 review; release CI pending",
+  "p1": [],
+  "p1_closed": [
+    {
+      "id": "P1-PERF-LONG-NAME",
+      "status": "closed",
+      "evidence": "4-token >64 names at text start and after Chinese prose produce full family/span; 109 tests include two regression tests."
+    },
+    {
+      "id": "P1-DEFER-4096",
+      "status": "closed",
+      "evidence": "scan_product_declarations returns DeclarationScan(declarations, clipped); target clipped and predecessor clipped return partial + antecedent_window_clipped; direct probes confirm."
+    },
+    {
+      "id": "P2-DUPLICATE-LATIN-PRECEDES",
+      "status": "closed",
+      "evidence": "only one _latin_precedes definition remains at product_reference.py:218."
+    }
+  ],
+  "tests": {
+    "command": "python -m pytest tests/unit/du11_source_closure -q -p no:cacheprovider",
+    "collected": 109,
+    "passed": 109,
+    "failures": 0,
+    "seconds": 5.32,
+    "deletion_or_weakening": "none found"
+  },
+  "final_evidence": {
+    "cn": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-final3-20261018/cn-h1.json",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "selected_required": "10/10",
+      "selected_count": 96,
+      "actual_work_used": 6133095,
+      "api_calls": 0,
+      "raw_copies": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true,
+      "all_selected_gold_supported": true
+    },
+    "hk": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-final2-20261018/hk-annual.json",
+      "selected_required": "7/7",
+      "actual_work_used": 13157181,
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "us": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-final2-20261018/us-10k.json",
+      "selected_required": "8/8",
+      "actual_work_used": 7989484,
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "replay": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-final2-20261018/replay.json",
+      "api_calls": 0,
+      "raw_copies": 0,
+      "source_unchanged": true,
+      "source_bindings": 17,
+      "all_bindings_match_current": true,
+      "product_reference_sha256": "026573637751",
+      "relations_sha256": "bed487816480",
+      "narrative_antecedent_sha256": "41d42ef7d438"
+    },
+    "ci": {
+      "c6e": "ci-39123679375.json: 6a2ee853 success",
+      "current": "2a80acf6 in progress; no exact success receipt yet",
+      "release_gate": "Need exact 2a80acf6 CI success before release."
+    }
+  },
+  "p2": [
+    {
+      "id": "P2-CI",
+      "severity": "P2",
+      "title": "Final CI pending",
+      "evidence": "2a80acf6 CI in progress; c6e11921 is not the final code."
+    },
+    {
+      "id": "P2-LOSSY-PUBLIC",
+      "severity": "P2",
+      "title": "find_product_declarations drops clipped status",
+      "evidence": "Public helper returns declarations only; production reference_closure uses scan_product_declarations, but external callers could infer absence."
+    },
+    {
+      "id": "P2-TARGET-CLIP-TEST",
+      "severity": "P2",
+      "title": "No target-clipped test",
+      "evidence": "Tests cover clipped predecessor, not clipped target with a deictic; direct probe works."
+    },
+    {
+      "id": "P2-OVER-DEFER",
+      "severity": "P2",
+      "title": "Any clipped predecessor makes closure partial",
+      "evidence": "Conservative safe behavior, but a clipped unrelated name can over-defer a compatible family; document/test the policy."
+    },
+    {
+      "id": "P2-LATIN-PROSE",
+      "severity": "P2",
+      "title": "Capitalized prose can join short names",
+      "evidence": "The Company Launched Alpha device -> launchedalpha|device; pre-existing, not new in 2a80."
+    }
+  ],
+  "redlines": {
+    "source_test_config_writes_by_review": 0,
+    "git_writes": 0,
+    "provider_calls": 0,
+    "test_deletion_or_assertion_weakening": "none found",
+    "production_config_db_original_gold_key_writes": "none found"
+  },
+  "release_conditions": [
+    "Exact 2a80acf6 CI success.",
+    "Optional: add target-clipped test and document find_product_declarations lossy semantics.",
+    "Optional: document over-defer policy for clipped unrelated declarations."
+  ],
+  "unverified": [
+    "2a80acf6 CI not completed; final release status cannot be green yet.",
+    "No provider calls; replay/CI data accepted from workspace receipts.",
+    "Target-clipped path verified by direct probe, not a committed test.",
+    "Over-defer behavior is conservative; no content quality evaluation."
+  ],
+  "notes": [
+    "PASS is code-level; release remains blocked on exact final CI.",
+    "v1-v3 P1s and the c6e long-name P1 are closed; P1-DEFER-4096 is closed.",
+    "Report pair: review/b2-antecedent-final-review-20261018-v3.md and .json."
+  ]
+}
