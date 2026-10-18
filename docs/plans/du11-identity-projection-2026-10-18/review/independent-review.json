@@ -1,0 +1,106 @@
+{
+  "schema_version": "du11-f3-independent-review/1",
+  "verdict": "PASS",
+  "reviewer": "/root/du10_ff_reception_review",
+  "reviewed_base_head": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+  "implementation_committed": false,
+  "binding": {
+    "src/company_wiki/source_catalog/security_code.py": {
+      "sha256": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+      "normalized_lf_sha256": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+      "bytes": 1446
+    },
+    "src/company_wiki/source_catalog/resolver.py": {
+      "sha256": "967634e546d5a5a69f43b43f070180a7a12d437e964da1e9c1780eb36b5ee168",
+      "normalized_lf_sha256": "ad82bedae618d791cd81e86e07e0680a001cdc25a3a870e829c7f146144d1e35",
+      "bytes": 102854
+    },
+    "src/company_wiki/source_catalog/source_reader.py": {
+      "sha256": "14400ddf8c07560080878541f9f95b41bed8a21875cf8c85d2c47bf6b07644e8",
+      "normalized_lf_sha256": "0b30b7e398dc41d52761ed69e1db50c59669d03714036c49e215a31383b0e37d",
+      "bytes": 35165
+    },
+    "tests/unit/du11_identity_projection/test_identity_projection.py": {
+      "sha256": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+      "normalized_lf_sha256": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+      "bytes": 6825
+    },
+    "tests/integration/test_du11_identity_projection.py": {
+      "sha256": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418",
+      "normalized_lf_sha256": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418",
+      "bytes": 5239
+    }
+  },
+  "actual_freeze_matches": {
+    "src/company_wiki/source_catalog/security_code.py": true,
+    "src/company_wiki/source_catalog/resolver.py": true,
+    "src/company_wiki/source_catalog/source_reader.py": true,
+    "tests/unit/du11_identity_projection/test_identity_projection.py": true,
+    "tests/integration/test_du11_identity_projection.py": true
+  },
+  "confirmed_findings": [],
+  "checks": [
+    {
+      "area": "Single strict identity owner",
+      "result": "PASS",
+      "evidence": "security_code.py alone defines strict market-qualified code representation/equivalence; resolver consumes equivalence and source_reader consumes canonical projection. Discovery issuer aliases remain existing separate responsibility."
+    },
+    {
+      "area": "Observed versus canonical",
+      "result": "PASS",
+      "evidence": "Only describe_candidate projects canonical security_id; describe_version and raw/sidecar/facts bytes remain observed. No request field is supplied to canonical_security_code, so unknown source market is not borrowed from the request."
+    },
+    {
+      "area": "Market/namespace boundaries",
+      "result": "PASS",
+      "evidence": "HK 1..5 ASCII digits pads5; CN 1..6 ASCII digits pads6; US supported ticker ASCII case only; overwidth/nonASCII/unknown/absent markets literal. Cross-market known identities reject and US dot/dash classes remain distinct."
+    },
+    {
+      "area": "Existing source guarantees",
+      "result": "PASS",
+      "evidence": "Code diff does not change SHA/byte-size/open, publication/as-of, fiscal period, conflict or issuer anchoring code. Behavioral negative tests cover wrong security/market/year/as-of, unknown/future publication and same-size tamper."
+    },
+    {
+      "area": "Actual unchanged FF chain",
+      "result": "PASS",
+      "evidence": "Independently reran both real FF CLI -> actual CWP identity/query chains using isolated official-format snapshot and synthetic original. Both code representations return source_candidate, calls2, downloads0; binary public open equals synthetic original SHA. Tamper emits no bytes/unavailable. Network attempt guard remains untouched."
+    },
+    {
+      "area": "Cleanup/freeze",
+      "result": "PASS",
+      "evidence": "Fixture catalog closes, owned tree removed, sentinel bytes checked, synthetic tamper restored. Pytest relocated basetemp cleanup logged removed=true; outer owned TemporaryDirectory removed. All five frozen source/test files match before and after review."
+    }
+  ],
+  "independent_execution": {
+    "tests": 37,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 13.198,
+    "wall_seconds": 16.21,
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-f3-independent-nfsghvz9\\pytest",
+      "tests/unit/du11_identity_projection/test_identity_projection.py",
+      "tests/integration/test_du11_identity_projection.py",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-identity-projection\\company-wiki\\docs\\plans\\du11-identity-projection-2026-10-18\\review\\independent-focused.xml"
+    ],
+    "log": "review/independent-focused.log",
+    "xml": "review/independent-focused.xml",
+    "outer_temp_removed": true
+  },
+  "limitations": [
+    "This accepts F3 implementation quality at the frozen bytes; it does not mark the complete real HK live-C consumer/revenue-forecast pipeline PASS. ROOT must revalidate the failed real consumer node without another model POST.",
+    "Only the focused37 suite was executed independently. Existing author42 regression receipts were inspected, not rerun as a full repository suite.",
+    "The integration uses the existing local FF checkout and is deliberately offline; no provider, API, paid model, original real PDF or production configuration/database was accessed or changed.",
+    "Author still owns normal commit; ROOT owns merge/push and the overall C node."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-f3-independent-nfsghvz9\\pytest",
+    "tests/unit/du11_identity_projection/test_identity_projection.py",
+    "tests/integration/test_du11_identity_projection.py",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-identity-projection\\company-wiki\\docs\\plans\\du11-identity-projection-2026-10-18\\review\\independent-focused.xml"
+  ],
+  "returncode": 0,
+  "seconds": 16.21,
+  "frozen_bytes_match": {
+    "src/company_wiki/source_catalog/security_code.py": true,
+    "src/company_wiki/source_catalog/resolver.py": true,
+    "src/company_wiki/source_catalog/source_reader.py": true,
+    "tests/unit/du11_identity_projection/test_identity_projection.py": true,
+    "tests/integration/test_du11_identity_projection.py": true
+  },
+  "temporary_directory": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-f3-independent-nfsghvz9",
+  "temporary_directory_removed": true,
+  "post_test_freeze_match": {
+    "src/company_wiki/source_catalog/security_code.py": true,
+    "src/company_wiki/source_catalog/resolver.py": true,
+    "src/company_wiki/source_catalog/source_reader.py": true,
+    "tests/unit/du11_identity_projection/test_identity_projection.py": true,
+    "tests/integration/test_du11_identity_projection.py": true
+  }
+}
