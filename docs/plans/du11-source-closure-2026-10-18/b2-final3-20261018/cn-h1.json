@@ -1,0 +1,301 @@
+{
+  "sample": "cn-h1",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "source_bytes": 3149962,
+  "gold_sha256": "10d1dc12e251e57354599c58abd55d5ee3d010259a8bf04415a73fb55cb2a335",
+  "actual_source_metadata": {
+    "declared_language": "zh-CN",
+    "document_kind": "semi_annual_report",
+    "language": "zh",
+    "source_class": "filing",
+    "title": "2026年半年度报告"
+  },
+  "status": "ENGINEERING_PASS_CONTENT_OPEN",
+  "scope": "offline_engineering_not_final_content_acceptance",
+  "parse_select_seconds": 11.366,
+  "pages": 210,
+  "pages_read": 210,
+  "parsed_units": 5275,
+  "source_errors": [],
+  "source_coverage_complete": false,
+  "selection_status": "partial",
+  "selected_count": 96,
+  "selected_chars": 7612,
+  "candidate_count": 1802,
+  "omitted_count": 1706,
+  "actual_work": {
+    "used": 6133095,
+    "limit": 16000000,
+    "exhausted": false
+  },
+  "draft_bytes": 40706,
+  "tasks": 64,
+  "claims": 63,
+  "dispositions": {
+    "unsupported": 1,
+    "admitted": 63
+  },
+  "selected_gold": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-current-coverage-30",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-gan-power-stage",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-inp-development-started",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "canonical_gold": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "supported": true,
+      "claim_ids": [
+        "t13-source"
+      ]
+    },
+    {
+      "id": "f-current-coverage-30",
+      "supported": true,
+      "claim_ids": [
+        "t13-source"
+      ]
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "supported": true,
+      "claim_ids": [
+        "t12-source"
+      ]
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "supported": true,
+      "claim_ids": [
+        "t30-source"
+      ]
+    },
+    {
+      "id": "f-gan-power-stage",
+      "supported": true,
+      "claim_ids": [
+        "t32-source"
+      ]
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "supported": true,
+      "claim_ids": [
+        "t34-source"
+      ]
+    },
+    {
+      "id": "f-inp-development-started",
+      "supported": true,
+      "claim_ids": [
+        "t37-source"
+      ]
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "supported": true,
+      "claim_ids": [
+        "t38-source"
+      ]
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "supported": true,
+      "claim_ids": [
+        "t38-source"
+      ]
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "supported": true,
+      "claim_ids": [
+        "t38-source"
+      ]
+    }
+  ],
+  "selected_required": 10,
+  "canonical_required": 10,
+  "required_total": 10,
+  "ambiguous_raw_evidence_count": 6,
+  "ambiguous_summary_support_count": 0,
+  "ambiguous_samples": [
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:152e9c14f1bc86ad99d852bc05eca0ae63a16c7a391dd26a70975d51d6ec5307",
+      "locator": "loc:v1/page:30/table:0/row:3",
+      "text_sha256": "ee330caaa5e64c163a48fdec01afe5d365b9a7674176c32b0c93b4c4bdf71900",
+      "chars": 133,
+      "prefix": "13 | 下一代能实现从\n底部往顶部生长\n的化学气相沉积\n金属钨设备 | 3.40 | 0.17 | 0.96 | 客户端验证\n阶段 | 应用到存储\n芯片先进节\n点，并逐步\n量产 | 国际\n先进\n水平",
+      "suffix": "进节\n点，并逐步\n量产 | 国际\n先进\n水平 | 先进\nDRAM 以\n及Logic\n节点超小\n通孔钨填\n充应用",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 1,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 3
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:1b3f0eb449a71c95fedd8a6983f6d5e5c2881bbb0552f2a6e66abf0f854ce20d",
+      "locator": "loc:v1/page:30/table:0/row:6",
+      "text_sha256": "5c5afeb3cb3c5eb9364d50637960606190fc8ffabe648c161e87eb5eaede620a",
+      "chars": 45,
+      "prefix": "合计 | / | 43.46 | 6.11 | 29.91 | / | / | / | /",
+      "suffix": "合计 | / | 43.46 | 6.11 | 29.91 | / | / | / | /",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 1,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 0
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:329f47aa2574cd7e0b9498e95dbc27062672801cf7f0721d996d46bfe372c7f2",
+      "locator": "loc:v1/page:30/table:0/row:1",
+      "text_sha256": "363c67ac1433df56795f062578bca8bb8d8a73b840bfe8ff927731eb1a4c1306",
+      "chars": 162,
+      "prefix": "11 | 用于新一代存储\n芯片制造用ICP\n刻蚀机 | 1.35 | 0.59 | 1.16 | 持续改进阶\n段，推进更\n多ICP 工艺\n制程的验证 | 成功研制适\n用于先进\nDRAM 和\n3DNAN",
+      "suffix": "\nICP 刻蚀工\n艺的刻蚀设\n备，并在客\n户端成功核\n准，实现销\n售 | 国际\n先进\n水平 | 先进存储\n芯片",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 1,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 3
+    }
+  ],
+  "exact_source_material_verified": true,
+  "canonical_claim_text_unchanged": true,
+  "source_priority_complete_count": 96,
+  "incident_markers": [
+    {
+      "old_task": "t3",
+      "old_body_text_sha256": "f27e52844207857a4a52880dd2d0c3ce33a658c63fe172d949016dfe523b95ab",
+      "selected_matches": 1,
+      "new_claim_ids": [
+        "t57-source"
+      ],
+      "source_sample": {
+        "id": "urn:company-wiki:evidence-span:sha256:4a5ca595a733757ef65e74cb4032b677608187b53522d9de4a24a94738448639",
+        "locator": "loc:v1/page:31/paragraph:21/chars:634-677",
+        "text_sha256": "d8ef3082a1f03f9719cee536ebd28e6e9d79f6dae8da5eb4b4f4228e5bfbb604",
+        "chars": 43,
+        "prefix": "如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影\n响。",
+        "suffix": "如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影\n响。",
+        "flags": [],
+        "reading_priority": 1,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3
+      },
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t4",
+      "old_body_text_sha256": "c6deb424a9b99d29197566594102e5fa31b5598e6f44c87e5bdd335b9cf14f9a",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t6",
+      "old_body_text_sha256": "81290728804bf97dfde0fa656f9cab7fe0596a4def99276d740f716bc484e9bc",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t9",
+      "old_body_text_sha256": "25e1bef9a53f8e90f82798b9d35db9b6be5fcf4cef70f90bd9deb0d94fed7cde",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t32",
+      "old_body_text_sha256": "dc381466ce4a3bc44ce58c5de02d3c6e908d6c411cb318890b85cb0e324e4573",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t34",
+      "old_body_text_sha256": "8ff2eacd4cfb23f277697cea3e0f61701df95b2d7fd5527828b808b42092c107",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t64",
+      "old_body_text_sha256": "ba5a95c93f6b15ef4bfd2017059b052906290e54756307493da8d51c6f719ceb",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    }
+  ],
+  "deferral_reasons": {
+    "REFERENCE_UNRESOLVED": 3,
+    "SELECTION_BUDGET": 125
+  },
+  "actual_work_accounts": [
+    {
+      "used": 6133095,
+      "limit": 16000000,
+      "exhausted": false
+    }
+  ],
+  "seconds": 11.995,
+  "original_unchanged": true,
+  "gold_unchanged": true,
+  "api_calls": 0,
+  "raw_copies": 0
+}

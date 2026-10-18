@@ -1,0 +1,126 @@
+{
+  "source_bindings": [
+    {
+      "module": "company_wiki.automation.narrative_select",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "sha256": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_evidence",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "sha256": "626230254c96de4255aa6970258388fb329076c333a1c7499a4d60083ae09042"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_reading",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+      "sha256": "ddc36db5cfcd028ed0f94b7fc900e09bd64ca256975dd75495badcb2180eaad3"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_finalize",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_document",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_document.py",
+      "sha256": "dc9d81a3fcdce82167c10d102c7e90bacb8eff4dc5f107c02e835c3b0bbfd98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_business_policy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_source_purpose",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+      "sha256": "0427084245319b490b9b53873f34b1a4d89989abed783a3588c65c443ec346a9"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_operating_relations",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+      "sha256": "3b43270c572fd19949c54f1bf28dbbbf9d6d28bf1ebe2c141c3a05a8347f8f85"
+    },
+    {
+      "module": "company_wiki.document_understanding.source_cards",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\source_cards.py",
+      "sha256": "ada8be16dc4963b595f3caad28caa6f592e3d4c112ec5495d316c68d2a3680f6"
+    },
+    {
+      "module": "company_wiki.document_understanding.summary_tasks",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\summary_tasks.py",
+      "sha256": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7"
+    },
+    {
+      "module": "company_wiki.document_understanding.native_table_bridge",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\native_table_bridge.py",
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1"
+    },
+    {
+      "module": "company_wiki.document_understanding.narrative_continuity",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+      "sha256": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc"
+    },
+    {
+      "module": "company_wiki.document_understanding.decision_inventory",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+      "sha256": "aa3a7d0169475a80ad76bda1edde497935e2faa65cc944b2c84e45d19a4bb693"
+    },
+    {
+      "module": "company_wiki.automation.narrative_model_extractive",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_model_extractive.py",
+      "sha256": "04ab4587e09aff19f68c1db54e7c522320848135a66e045eb8575f9d85e95f18"
+    },
+    {
+      "module": "company_wiki.document_understanding.operating_states.product_reference",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\operating_states\\product_reference.py",
+      "sha256": "026573637751e790ddaa89fcee9137d4adb04feb0db669317b37502810944ec8"
+    },
+    {
+      "module": "company_wiki.document_understanding.operating_states.relations",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\operating_states\\relations.py",
+      "sha256": "bed487816480d1570da6977b3076b24335508f9253ca020bc2d52045e2da0282"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_antecedent",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_antecedent.py",
+      "sha256": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237"
+    }
+  ],
+  "api_calls": 0,
+  "raw_copies": 0,
+  "source_unchanged": true,
+  "samples": [
+    {
+      "sample": "hk-annual",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "seconds": 25.181,
+      "selected_count": 96,
+      "claims": 52,
+      "selected_required": 7,
+      "canonical_required": 7,
+      "required_total": 7,
+      "deferral_reasons": {
+        "REFERENCE_UNRESOLVED": 2,
+        "SELECTION_BUDGET": 126
+      },
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    {
+      "sample": "us-10k",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "seconds": 15.01,
+      "selected_count": 96,
+      "claims": 52,
+      "selected_required": 8,
+      "canonical_required": 8,
+      "required_total": 8,
+      "deferral_reasons": {
+        "REFERENCE_UNRESOLVED": 6,
+        "SELECTION_BUDGET": 122
+      },
+      "original_unchanged": true,
+      "gold_unchanged": true
+    }
+  ]
+}

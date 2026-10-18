@@ -1,0 +1,150 @@
+{
+  "schema": "b2-antecedent-final-review-v2/1",
+  "reviewed_at": "2026-10-18T18:10:00+08:00",
+  "head": "c6e119215dde3a9519a359a9167b845754849d17",
+  "scope": "review of c6e11921 P1 fix; read-only; no source/test/config/git/provider changes",
+  "verdict": "REJECT",
+  "reason": "The original 64-char long-name P1 is closed for names >64 at start/after Chinese prose. A new P1 remains: when the declaration is still clipped at the 4096 cap, find_product_declarations silently omits it and reference_closure returns missing instead of partial. The 107 tests do not cover this defer path.",
+  "original_p1": [
+    {
+      "check": "4 Latin tokens >64 at text start",
+      "status": "closed",
+      "evidence": "test_long_latin_name_is_never_truncated_by_the_lookbehind; direct probe returns full four-token family"
+    },
+    {
+      "check": "4 Latin tokens >64 after Chinese prose",
+      "status": "closed",
+      "evidence": "test_long_latin_name_after_prose_is_extended_not_truncated; direct probe full family/span"
+    },
+    {
+      "check": "64->256->1024->4096 widening",
+      "status": "implemented",
+      "evidence": "product_reference.py:382-397"
+    },
+    {
+      "check": "defer when 4096 still clips",
+      "status": "open",
+      "evidence": "continue omits declaration; closure returns missing"
+    }
+  ],
+  "new_p1": [
+    {
+      "id": "P1-DEFER-4096",
+      "severity": "P1",
+      "title": "4096-cap clipped declaration is silently omitted and becomes missing",
+      "location": "src/company_wiki/document_understanding/operating_states/product_reference.py:382-397",
+      "repro": {
+        "declaration": "公司推出 NaN NaN NaN NaN 系列产品。",
+        "target": "该系列产品已交付客户。",
+        "find_result": "[]",
+        "closure_status": "missing",
+        "closure_diagnostics": [
+          "antecedent_missing"
+        ]
+      },
+      "impact": "A real declaration clipped at the max window is treated as absent; downstream returns missing rather than partial/defer. This violates the rule that truncated/unknown windows must not infer absence.",
+      "fix": "Return a clipped/deferred status from find_product_declarations or a separate status channel; map any required clipped declaration to partial with antecedent_window_clipped; add a >4096-name deictic test; rerun CN/HK/US and CI."
+    }
+  ],
+  "p2": [
+    {
+      "id": "P2-DUPLICATE-HELPER",
+      "severity": "P2",
+      "title": "_latin_precedes defined twice",
+      "evidence": "product_reference.py:218 and :229 are identical; second overrides first. Remove one."
+    },
+    {
+      "id": "P2-HKUS-STALE",
+      "severity": "P2",
+      "title": "HK/US final replays bound to old product_reference",
+      "evidence": "b2-real-sources-final source_bindings product_reference=8e742d71; current c6e file=fdbf58db; only CN final2 was rerun."
+    },
+    {
+      "id": "P2-CI-STALE",
+      "severity": "P2",
+      "title": "No CI receipt for c6e11921",
+      "evidence": "b2-final-20261018/ci-39123679375.json head=6a2ee853; no c6e CI."
+    },
+    {
+      "id": "P2-TEST-GAP",
+      "severity": "P2",
+      "title": "107 tests miss 4096/defer and cache equivalence",
+      "evidence": "New tests cover 64-window successful widening, not >4096 clipping or declaration-cache hit/miss equivalence."
+    },
+    {
+      "id": "P2-LATIN-PROSE",
+      "severity": "P2",
+      "title": "Capitalized prose can join short names",
+      "evidence": "The Company Launched Alpha device -> launchedalpha|device (pre-existing, not new in c6e)."
+    },
+    {
+      "id": "P3-KNOWN",
+      "severity": "P3",
+      "title": "Known v3 P3 limits",
+      "evidence": "same-page cross-column furniture, excluded complete=True, separate-window not bridged."
+    }
+  ],
+  "final_evidence": {
+    "cn": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-final2-20261018/cn-h1.json",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "selected_required": "10/10",
+      "selected_count": 96,
+      "claims": 63,
+      "actual_work_used": 6133095,
+      "actual_work_limit": 16000000,
+      "api_calls": 0,
+      "raw_copies": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true,
+      "all_selected_gold_supported": true
+    },
+    "page_scope": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-final2-20261018/page-scope.json",
+      "product_reference_sha256": "fdbf58db",
+      "current_file_sha256": "fdbf58db",
+      "source_bindings": 17
+    },
+    "hk_us": {
+      "status": "stale",
+      "note": "b2-real-sources-final HK/US bound product_reference 8e742d71; no c6e rerun."
+    },
+    "ci": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-final-20261018/ci-39123679375.json",
+      "head_sha": "6a2ee853fe2d1d8b2a160e891b6bbe209c237d6d",
+      "conclusion": "success",
+      "note": "not c6e11921"
+    }
+  },
+  "tests": {
+    "command": "python -m pytest tests/unit/du11_source_closure -q -p no:cacheprovider",
+    "collected": 107,
+    "passed": 107,
+    "failures": 0,
+    "seconds": 3.27,
+    "deletion_or_weakening": "none found; c6e diff adds 22 test lines and 39 source lines (3 deletions source)",
+    "coverage_gaps": [
+      ">4096 clipped declaration/defer",
+      "declaration cache hit/miss equivalence",
+      "duplicate helper static check"
+    ]
+  },
+  "redlines": {
+    "source_test_config_writes_by_review": 0,
+    "git_writes": 0,
+    "provider_calls": 0,
+    "test_deletions_or_assertion_weakening": "none found",
+    "hook_bypass": "none found"
+  },
+  "pass_conditions": [
+    "Propagate clipped/deferred status to reference_closure; return partial, not missing, when a required declaration is clipped at 4096.",
+    "Add >4096-name test and assert partial + antecedent_window_clipped.",
+    "Rerun CN/HK/US final replays on c6e (or a subsequent commit) and update source_bindings.",
+    "Add c6e exact CI receipt; remove duplicate _latin_precedes."
+  ],
+  "notes": [
+    "Original long-name P1 is closed for normal 4-token >64 names; the new rejection is specifically the max-window defer semantics.",
+    "CN final2 10/10 and 107 tests are real evidence but do not cover >4096 clipping.",
+    "Report pair: review/b2-antecedent-final-review-20261018-v2.md and .json."
+  ]
+}

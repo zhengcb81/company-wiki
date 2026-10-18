@@ -1,0 +1,200 @@
+{
+  "schema": "b2-antecedent-final-review/1",
+  "reviewed_at": "2026-10-18T17:20:00+08:00",
+  "scope": "final independent B2 code/replay/CI review; read-only; no source/test/config changes",
+  "head": "75760fa41659661f6d27f20f15328516f532f8e9",
+  "verdict": "REJECT",
+  "reason": "v1-v3 P1s are closed, but the 6a2ee853 performance fix introduces a new P1: the 64-character look-behind silently truncates a legal long product name, changing declaration.family and span. Final replay/CI pass, but 105 tests do not cover this boundary.",
+  "v1_v3_p1": [
+    {
+      "source": "v1",
+      "title": "declaration context end-to-end",
+      "status": "closed",
+      "evidence": "v2 FIXED; test_antecedent_wiring declaration/target context assertions"
+    },
+    {
+      "source": "v1",
+      "title": "envelope carrier namespace",
+      "status": "closed",
+      "evidence": "v2/v3 FIXED; within_reference_envelope tests; final CN no envelope deferral"
+    },
+    {
+      "source": "v1",
+      "title": "declaration offset",
+      "status": "closed",
+      "evidence": "test_declaration_ref_starts_at_original_offset (CJK newline exact ref start)"
+    },
+    {
+      "source": "v1",
+      "title": "cross-page/furniture",
+      "status": "closed",
+      "evidence": "v3 P1-B furniture verification; current header/footer positive/negative tests"
+    },
+    {
+      "source": "v1",
+      "title": "forward/competing declarations",
+      "status": "closed",
+      "evidence": "forward -> missing; two families -> ambiguous tests"
+    },
+    {
+      "source": "v2",
+      "title": "generic pseudo-declarations",
+      "status": "closed",
+      "evidence": "current Chinese/English generic tests"
+    },
+    {
+      "source": "v2",
+      "title": "furniture adjacency",
+      "status": "closed",
+      "evidence": "last_kept/skipped implementation; header cross-page positive/negative tests"
+    },
+    {
+      "source": "v3",
+      "title": "Chinese generic/non-proper declarations",
+      "status": "closed",
+      "evidence": "_proper_name rejects generic/descriptor phrases; direct probe of v3 seven phrases -> empty"
+    },
+    {
+      "source": "v3",
+      "title": "deictic head vs declaration head",
+      "status": "closed",
+      "evidence": "compatible() uses head_class; Omega device -> this series product missing; Alpha series -> These devices missing; generic products -> unique"
+    }
+  ],
+  "new_p1": [
+    {
+      "id": "P1-PERF-LONG-NAME",
+      "severity": "P1",
+      "title": "64-character look-behind truncates legal long product names",
+      "location": "src/company_wiki/document_understanding/operating_states/product_reference.py:361-365",
+      "introduced_by": "6a2ee853",
+      "repro": {
+        "input": "Company launched the ExtremelyLongProductNameAlpha ExtremelyLongProductNameBeta ExtremelyLongProductNameGamma ExtremelyLongProductNameDelta device.",
+        "full_prefix_name": "ExtremelyLongProductNameAlpha ExtremelyLongProductNameBeta ExtremelyLongProductNameGamma ExtremelyLongProductNameDelta",
+        "truncated_64_window_name": "ExtremelyLongProductNameGamma ExtremelyLongProductNameDelta",
+        "full_family": "extremelylongproductnamealphaextremelylongproductnamebetaextremelylongproductnamegammaextremelylongproductnamedelta|device",
+        "current_family": "extremelylongproductnamegammaextremelylongproductnamedelta|device"
+      },
+      "impact": "The Latin name regex allows up to 4 tokens and the contract has no 64-char cap; the truncation is accepted as a proper name and silently changes family/span, so a deictic can close to the wrong declaration. It is not a safe defer.",
+      "fix": "Expand look-behind to cover the maximum legal name (e.g. 256 chars), or detect a clipped name start and retry/defer; add a 4-token >64-char test plus a Chinese boundary test; rerun 105 tests and three-source replay."
+    }
+  ],
+  "p2": [
+    {
+      "id": "P2-TEST-BOUNDARY",
+      "severity": "P2",
+      "title": "105 tests miss 64-char boundary and cache equivalence",
+      "evidence": "No test for long name >64 or declaration-cache hit/miss equivalence; current tests cover semantics but not this window boundary."
+    },
+    {
+      "id": "P2-CLIPPED-MARK",
+      "severity": "P2",
+      "title": "No clipped-name guard",
+      "evidence": "window_start can fall inside the proper name; no check that the candidate starts at a token boundary or that the window did not clip."
+    },
+    {
+      "id": "P3-KNOWN-LIMITS",
+      "severity": "P3",
+      "title": "Known v3 P3 limits remain",
+      "evidence": "same-page cross-column furniture, excluded complete=True, separate-window not bridged; not new P1."
+    }
+  ],
+  "final_evidence": {
+    "cn": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-final-20261018/cn-h1.json",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "selected_required": "10/10",
+      "selected_count": 96,
+      "api_calls": 0,
+      "raw_copies": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true,
+      "all_selected_gold_supported": true,
+      "t32_selected_matches": 0,
+      "t34_selected_matches": 0
+    },
+    "hk": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-final-20261018/hk-annual.json",
+      "selected_required": "7/7",
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "us": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-final-20261018/us-10k.json",
+      "selected_required": "8/8",
+      "api_calls": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true
+    },
+    "replay": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-final-20261018/replay.json",
+      "api_calls": 0,
+      "raw_copies": 0,
+      "source_unchanged": true,
+      "source_bindings": 17,
+      "all_bindings_match_current": true,
+      "product_reference_sha256": "8e742d717c6e",
+      "relations_sha256": "53f62e695a8a",
+      "narrative_antecedent_sha256": "41d42ef7d438"
+    },
+    "ci": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/b2-final-20261018/ci-39123679375.json",
+      "head_sha": "6a2ee853fe2d1d8b2a160e891b6bbe209c237d6d",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 358
+    }
+  },
+  "tests": {
+    "command": "python -m pytest tests/unit/du11_source_closure -q -p no:cacheprovider",
+    "collected": 105,
+    "passed": 105,
+    "failures": 0,
+    "seconds": 2.96,
+    "coverage": [
+      "v1 context/envelope/offset/furniture/forward",
+      "v2 generic/furniture",
+      "v3 Chinese generic/head matching",
+      "family/collective/attribution",
+      "cross-page window",
+      "budget/envelope"
+    ],
+    "missing": [
+      "64-char lookbehind/long names",
+      "declaration cache hit/miss equivalence",
+      "clipped-name guard"
+    ],
+    "deletion_or_weakening": "none found; 1a774af0..HEAD adds 48 test lines, 0 deletions"
+  },
+  "performance_semantics": {
+    "raw_offsets": "Exact for names within window; long-name truncation is the P1.",
+    "declaration_order": "finditer/order unchanged; cached tuple preserves order.",
+    "head_matching": "compatible/head_class unchanged; tests pass.",
+    "cache": "Keyed by full source text str; immutable; no cross-text collision found; no direct equivalence test (P2).",
+    "cache_size": "lru_cache(maxsize=512); eviction does not change return values."
+  },
+  "redlines": {
+    "source_test_config_writes": 0,
+    "git_writes": 0,
+    "provider_calls": 0,
+    "production_config_db_original_gold_key_writes": "none found",
+    "test_deletion_or_assertion_weakening": "none found",
+    "hook_bypass": "none found"
+  },
+  "unverified": [
+    "Long-name truncation is synthetic; no real CN/HK/US sample uses a >64-char product name.",
+    "No provider calls; final replay/CI data accepted from workspace receipts.",
+    "Cache equivalence was not directly tested.",
+    "Same-page cross-column furniture and excluded complete=True remain known P3 limits."
+  ],
+  "pass_conditions": [
+    "Fix the 64-char window/clipped-name path and add long-name boundary tests.",
+    "Re-run 105 tests and final CN/HK/US replay; update source_bindings/CI if code changes.",
+    "Re-review final code and confirm no family/span regression."
+  ],
+  "notes": [
+    "Final replay and CI are current-code bound and green; the rejection is specifically the uncovered performance semantic boundary, not the prior P1s.",
+    "Report pair: review/b2-antecedent-final-review-20261018.md and .json."
+  ]
+}
