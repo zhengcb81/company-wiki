@@ -1,3 +1,19 @@
+## DU11 两卡已并线发布，三仓 CI 全绿 — 2026-10-18
+
+**当前唯一执行入口：** [本轮收尾与保留项](../du11-source-closure-2026-10-18/review/du11-reception-closeout.md)，下一实现按[有界先行词最终接口/TDD](../du11-source-closure-2026-10-18/review/antecedent-source-interface-final.md)；不要重做已接收两卡，不把下方历史“待发布”当当前任务。
+
+RF/FF作者交付均已进入各自主线。CWP producer0ccdc689：6801PASS24SKIP346.26s＋142合同PASS48.31s，精确CI39094787278 success；RF runtimef8002f5f及最终依赖表9669c4d7正常发布，final416PASS＋36子测73.74s，精确CI39095818018 success；FF main e8740748：873PASS7SKIP78子测91.13s，精确CI39095654355 success。两技能各6物理源码定点同步，FF依赖序原子安装并双根imports/help通过。.claude junction不重复写，无整套安装覆盖。唯一compatibility manifest已收敛wiki0cc/revenuef800/filinge874，皆远端可fetch，不追docs HEAD/递归pin。
+
+本轮根修：最终reader manifest日期/provider优先旧query；CWP唯一canonical市场代码owner；单次metadata观察；真实PDF MIME/per-pair coverage；同parent预算线性索引；页内paragraph与全局ordinal分责/未知counter只defer；CLI ASCII JSON避免GBK/UTF8；qualifications准确class-info类型；既有公共mypy hook涵盖transitive scripts。完整unit以两个worker同600秒期限跑完，未删测/提阈值/绕hook。正常FF共3次尝试=2RED+1GREEN，旧fixture只补真实provider证明以隔离未知日期，原不重复下载/日期资格断言不减。失败收据保留，各独审绑定实际源SHA。
+
+原件/gold/生产配置/密钥、作者树、Dayu/IQS不改，无新收费模型调用。RF3个旧assurance WIP保留，stage1观察到weekly_manifest变化如实记、不猜writer/不恢复；stage2前后相同。**一个RF外层审查Temp仍NOT_CLEAN：** 旧PermissionError后平台拒删，保留且未绕通道重试，内部E2E已恢复；不是生产原件丢失。未知发布日期/3投影仍source_availability_unknown，不伪造日期/新增许可。
+
+**Next Step：** 整体PWF仍OPEN。t32最新实源诊断不再selected，t34仍缺先行词；先按最终接口TDD与现唯一source/operating owner实现有界前驱、original/analysis namespace和context闭包。正文+已有context+必要声明仍8原unit/4个(source,page,block)/2048chars、同parent16M，未知/多义/超限只defer该卡。完整节点后一次真实三源及独立内容检查，再正式配置三供应商摘要、费用/activation恢复、同跨run缓存与FF/RF真实C，之后holdout/RF循环。不新增小节点签收。
+
+下方均为历史轨迹。本次后续汇总提交仅PWF/证据，生产代码仍与已绿0cc相同。
+
+---
+
 ## DU11 接收完成，页内编号修复已合线；正常发布验证中 — 2026-10-18
 
 RF外包已正常发布f8002f5f并核CI39092538354 success、6源码定点安装、3旧WIP不变。FF最终29个不同跨次控制通过，ROOT修复a9c2dcf7待CWP配套canonical reader接口先发布，不提前上线新flag。
