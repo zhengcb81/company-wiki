@@ -22,7 +22,17 @@ Bounded work: ``OfficeTableLimits`` caps tables, cells, cell text and footnote
 text per call.  A table is always kept whole or dropped whole, so a limit can
 never produce a truncated table; a dropped or over-wide item sets the overall
 status to ``partial`` and records a ``p2_table_limit`` / ``p2_span_out_of_grid``
-diagnostic instead of silently shrinking the result.
+diagnostic instead of silently shrinking the result.  ``work_used`` counts the
+*emitted* cells (a ``gridSpan=2`` cell is one cell), so the budget and the
+structure it describes can never disagree.
+
+Unknown is never a number: an absent ``w:gridSpan`` is a confirmed ``1``, but a
+present non-positive ``w:gridSpan`` (no card rule covers it), a span past the
+declared grid, a conflicting PPTX merge flag, and a footnote whose text cannot
+be read all report ``null`` plus a diagnostic — never ``1`` or ``""``.  For the
+non-positive ``w:gridSpan`` this review chose ``p2_span_out_of_grid`` with
+``column_span=None`` (the width is out of the legal domain, not a merge-chain
+break) and it does not advance or close the open ``w:vMerge`` chain.
 """
 
 from __future__ import annotations
@@ -49,6 +59,10 @@ DOCX_MAIN_PART = "word/document.xml"
 PPTX_MAIN_PART = "ppt/presentation.xml"
 DOCX_FOOTNOTES_PART = "word/footnotes.xml"
 FOOTNOTE_REFERENCE = "footnoteReference"
+# `w:footnote/@w:type` values that carry layout glyphs, never footnote content.
+FOOTNOTE_LAYOUT_TYPES = frozenset(
+    {"separator", "continuationseparator", "continuationnotice"}
+)
 LAST_RENDERED_PAGE_BREAK = "lastRenderedPageBreak"
 
 # Fixed safety bound mirrored from document_normalization.limits: a package with
@@ -73,6 +87,30 @@ CONTINUATION_NOT_APPLICABLE = "not_applicable"
 HEADER_SOURCE_TBLHEADER = "tblHeader"
 HEADER_SOURCE_NONE = "none"
 
+# Replay compares these per table and per cell (card §5.5).  `cells` is handled
+# separately because it is a list, and `table_id` because it keys the message.
+TABLE_FIELDS = (
+    "package_part",
+    "native_index",
+    "grid",
+    "column_widths",
+    "header",
+    "footnotes",
+    "continuation",
+    "diagnostics",
+)
+CELL_FIELDS = (
+    "row",
+    "column",
+    "locator",
+    "merge",
+    "row_span",
+    "column_span",
+    "text",
+    "text_refs",
+    "footnote_refs",
+)
+
 P2_SPAN_OUT_OF_GRID = "p2_span_out_of_grid"
 P2_MERGE_UNRESOLVED = "p2_merge_unresolved"
 P2_FOOTNOTE_UNRESOLVED = "p2_footnote_unresolved"
@@ -81,6 +119,7 @@ P2_TABLE_LIMIT = "p2_table_limit"
 DEPENDENCY_UNAVAILABLE = "dependency_unavailable"
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+LAST_RENDERED_BREAK_TAG = W + LAST_RENDERED_PAGE_BREAK
 A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
 P = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
 
@@ -271,6 +310,24 @@ def _docx_cell_text(paragraphs: Sequence[Any]) -> str:
     return ""
 
 
+def _paragraph_has_page_break(paragraph_node: Any) -> bool:
+    """True when the paragraph itself carries ``w:lastRenderedPageBreak``.
+
+    Runs, hyperlinks, smart tags and other inline wrappers are descended into; a
+    nested ``w:tbl`` is not, because its page breaks are the nested table's
+    evidence, not this cell's.
+    """
+    stack = [paragraph_node]
+    while stack:
+        node = stack.pop()
+        for child in node:
+            if child.tag == LAST_RENDERED_BREAK_TAG:
+                return True
+            if child.tag != W + "tbl":
+                stack.append(child)
+    return False
+
+
 def _docx_cell_locator(
     *,
     table_index: int,
@@ -400,18 +457,30 @@ def _finish_structure(
 
 
 def _docx_footnote_texts(package: _Package) -> tuple[dict[str, str], bool]:
-    """``(id -> text, part_present)`` for ``word/footnotes.xml``."""
+    """``(id -> text, part_present)`` for ``word/footnotes.xml``.
+
+    Only notes that actually carry visible text are returned.  A ``w:footnote``
+    that exists but yields no text is therefore indistinguishable from an absent
+    id, which is exactly card §5.5's rule: the cell reference keeps
+    ``text=None`` and records ``p2_footnote_unresolved`` instead of claiming an
+    empty footnote (INTERFACES §1: ``""`` is never a stand-in for unknown).
+    The ``separator``/``continuationSeparator``/``continuationNotice`` notes hold
+    layout glyphs, never content, so they are skipped outright.
+    """
     if not package.has(DOCX_FOOTNOTES_PART):
         return {}, False
     root = package.xml(DOCX_FOOTNOTES_PART)
     texts: dict[str, str] = {}
     for note in root.findall(W + "footnote"):
         footnote_id = note.get(W + "id")
-        if footnote_id is None:
+        if footnote_id is None or footnote_id in texts:
             continue
-        texts[footnote_id] = _cell_text(
-            " ".join(_docx_visible_text(node) for node in note)
-        )
+        if (note.get(W + "type") or "").casefold() in FOOTNOTE_LAYOUT_TYPES:
+            continue
+        text = _cell_text(" ".join(_docx_visible_text(node) for node in note))
+        if not text:
+            continue
+        texts[footnote_id] = text
     return texts, True
 
 
@@ -445,29 +514,45 @@ def _docx_table_structure(
             grid_span = _docx_int_attribute(
                 cell_node.find(W + "tcPr/" + W + "gridSpan"), "val"
             )
-            span = 1 if grid_span is None else max(1, grid_span)
             vmerge = _docx_vmerge(cell_node)
             cell_id = f"r{row_index}c{column}"
-
-            if columns is not None and span > 1 and column + span > columns:
+            # `w:gridSpan` absent confirms one column (card §5.3 rule 1).  A
+            # present but non-positive value is not a confirmed width, so it is
+            # treated like an out-of-grid span: `column_span=None`, never a
+            # silent 1, and `occupied` records the one grid position the cell is
+            # still known to sit on so the merge chain stays consistent.
+            if grid_span is None:
+                # No `w:gridSpan`: one column, confirmed (card §5.3 rule 1).
+                span, column_span, occupied = 1, 1, 1
+            elif grid_span <= 0:
+                span, column_span, occupied = 1, None, 1
+                over_grid = True
                 table_diagnostics.append(
                     _diagnostic(
                         P2_SPAN_OUT_OF_GRID,
                         f"tbl-{table_index}",
-                        f"{cell_id} gridSpan={span} exceeds grid columns={columns}",
+                        f"{cell_id} gridSpan={grid_span} is not a positive "
+                        "column count",
                     )
                 )
-                column_span: int | None = None
+            elif columns is not None and column + grid_span > columns:
+                span, column_span, occupied = grid_span, None, 1
                 over_grid = True
-            elif span > 1:
-                column_span = span
+                table_diagnostics.append(
+                    _diagnostic(
+                        P2_SPAN_OUT_OF_GRID,
+                        f"tbl-{table_index}",
+                        f"{cell_id} gridSpan={grid_span} exceeds grid "
+                        f"columns={columns}",
+                    )
+                )
             else:
-                column_span = 1
+                span, column_span, occupied = grid_span, grid_span, grid_span
 
             row_span: int | None = 1
             if vmerge == "restart":
                 merge = MERGE_VERTICAL_START
-                for offset in range(span):
+                for offset in range(occupied):
                     open_vertical[column + offset] = cell_id
             elif vmerge == "continue":
                 merge = MERGE_VERTICAL_CONTINUE
@@ -479,11 +564,11 @@ def _docx_table_structure(
                             f"{cell_id} vertical continue without an upper start",
                         )
                     )
-                for offset in range(span):
+                for offset in range(occupied):
                     open_vertical.setdefault(column + offset, cell_id)
             else:
                 merge = MERGE_NONE
-                for offset in range(span):
+                for offset in range(occupied):
                     open_vertical.pop(column + offset, None)
 
             text = "" if merge == MERGE_VERTICAL_CONTINUE else _docx_cell_text(paragraphs)
@@ -537,7 +622,10 @@ def _docx_table_structure(
                 )
 
             for paragraph_node in paragraphs:
-                if paragraph_node.findall(".//" + W + LAST_RENDERED_PAGE_BREAK):
+                # Scan only this cell's own paragraphs: a `w:lastRenderedPageBreak`
+                # inside a nested `w:tbl` belongs to the nested table, and the
+                # hint must name a cell of *this* table (card §5.4).
+                if _paragraph_has_page_break(paragraph_node):
                     page_break_hints.append(cell_id)
                     break
 
@@ -631,13 +719,21 @@ def _docx_continuation_links(tables: list[dict[str, object]]) -> None:
 
 
 def _docx_table_work(node: Any) -> tuple[int, int]:
-    """``(cells, cell text chars)`` a DOCX table would consume, for the budget."""
+    """``(emitted cells, cell text chars)`` a DOCX table would consume.
+
+    The unit is the emitted cell, not the raw ``w:tc`` position: a ``gridSpan=2``
+    cell is one cell in ``cells``, so it must cost one, otherwise ``work_used``
+    and ``max_cells`` would disagree with the structure they describe
+    (card §5.1 "实际处理量").  A vertical continuation is still an emitted cell
+    and still costs one, even though it carries no text.
+    """
     cells = 0
     chars = 0
     for row_node in node.findall(W + "tr"):
         for cell_node in row_node.findall(W + "tc"):
             cells += 1
-            chars += len(_docx_cell_text(_docx_cell_paragraphs(cell_node)))
+            if _docx_vmerge(cell_node) != "continue":
+                chars += len(_docx_cell_text(_docx_cell_paragraphs(cell_node)))
     return cells, chars
 
 
@@ -723,6 +819,35 @@ def _pptx_cell_text(cell: Any) -> str:
     return _cell_text(cell.text or "")
 
 
+def _pptx_hmerge_overflows(
+    cells: Sequence[Mapping[str, object]],
+    columns: int | None,
+    row_index: int,
+    column: int,
+) -> bool:
+    """True when an ``hMerge="1"`` cell cannot be placed inside the grid.
+
+    PresentationML keeps one ``a:tc`` per grid position, so a merged run is an
+    origin cell that declares ``@gridSpan`` followed by ``@hMerge="1"`` cells.
+    The run overflows when there is no origin at or before this column *in this
+    row* whose declared span (or span-less single column) still reaches it, or
+    when the position itself is already outside ``a:tblGrid``.  Either way the
+    covered origin is unknown, so the span must be ``null`` rather than ``1``.
+    """
+    if columns is not None and column >= columns:
+        return True
+    origin_column: int | None = None
+    for entry in cells:
+        if entry.get("row") != row_index:
+            continue
+        if entry.get("merge") == MERGE_HORIZONTAL:
+            continue
+        origin_column = entry["column"]  # type: ignore[assignment]
+    if origin_column is None:
+        return True
+    return column <= origin_column and column != origin_column
+
+
 def _pptx_table_structure(
     *,
     table: Any,
@@ -762,7 +887,12 @@ def _pptx_table_structure(
                 )
                 if flag
             )
-            text = _pptx_cell_text(cell) if v_merge != "1" else ""
+            # Unlike DOCX (where a `w:vMerge` continue cell carries no content of
+            # its own), PresentationML still stores text in a `@vMerge="1"` cell
+            # and `pptx_parser` emits a unit for it.  Keeping the text is what
+            # preserves locator/text parity; the covered position is expressed by
+            # `merge` alone.
+            text = _pptx_cell_text(cell)
 
             if signals > 1:
                 merge = MERGE_NONE
@@ -794,8 +924,26 @@ def _pptx_table_structure(
                     merge = MERGE_NONE
             elif h_merge == "1":
                 merge = MERGE_HORIZONTAL
-                column_span = 1
                 row_span = 1
+                # A horizontal continuation must sit under an origin in the same
+                # row.  When it has none (or the row already ran past the grid),
+                # the covered origin is unknown: report it exactly like an
+                # over-wide `@gridSpan` instead of claiming a confirmed 1
+                # (card §5.3 rule 4 covers both carriers).
+                if _pptx_hmerge_overflows(
+                    cells, columns, row_index, column
+                ):
+                    column_span = None
+                    table_diagnostics.append(
+                        _diagnostic(
+                            P2_SPAN_OUT_OF_GRID,
+                            table_id,
+                            f"r{row_index}c{column} hMerge has no origin left "
+                            f"within grid columns={columns}",
+                        )
+                    )
+                else:
+                    column_span = 1
             elif v_merge == "1":
                 merge = MERGE_VERTICAL_CONTINUE
                 column_span = 1
@@ -1043,15 +1191,27 @@ def replay_office_tables(
         if claimed.get("table_id") != table_id:
             raise ValueError(
                 f"replay mismatch: {table_id} table_id "
-                f"expected {claimed.get('table_id')!r} observed {table_id!r}"
+                f"expected {canonical_json(claimed.get('table_id'))} "
+                f"observed {canonical_json(table_id)}"
             )
+        # Every table-level field is compared, not only the cells, so a changed
+        # header/grid/footnotes cannot be silently recomputed away (card §5.5).
+        for field in TABLE_FIELDS:
+            expected = claimed.get(field)
+            seen = observed[field]
+            if expected != seen:
+                raise ValueError(
+                    f"replay mismatch: {table_id} {field} "
+                    f"expected {canonical_json(expected)} "
+                    f"observed {canonical_json(seen)}"
+                )
         claimed_cells = claimed.get("cells")
         observed_cells = observed["cells"]
         if not isinstance(claimed_cells, list) or len(claimed_cells) != len(
             observed_cells
         ):
             raise ValueError(
-                f"replay mismatch: {table_id} cell count "
+                f"replay mismatch: {table_id} cells "
                 f"expected {len(claimed_cells) if isinstance(claimed_cells, list) else 'invalid'} "
                 f"observed {len(observed_cells)}"  # type: ignore[arg-type]
             )
@@ -1061,7 +1221,13 @@ def replay_office_tables(
             if not isinstance(claimed_cell, Mapping):
                 raise ValueError(f"replay mismatch: {table_id} cell is invalid")
             cell_id = observed_cell["cell_id"]  # type: ignore[index]
-            for field in ("locator", "merge", "row_span", "column_span"):
+            if claimed_cell.get("cell_id") != cell_id:
+                raise ValueError(
+                    f"replay mismatch: {table_id} {cell_id} cell_id "
+                    f"expected {canonical_json(claimed_cell.get('cell_id'))} "
+                    f"observed {canonical_json(cell_id)}"
+                )
+            for field in CELL_FIELDS:
                 expected = claimed_cell.get(field)
                 seen = observed_cell[field]  # type: ignore[index]
                 if expected != seen:
@@ -1071,7 +1237,17 @@ def replay_office_tables(
                         f"observed {canonical_json(seen)}"
                     )
 
+    # Backstop, deliberately last: the field comparisons above name the culprit,
+    # so this only fires when the supplied tables differ in some field this
+    # version does not know about (a future key, a dropped key).  It never
+    # replaces the precise message.
     claimed_hash = structure.get("structure_sha256")
+    if claimed_hash != _sha256(canonical_json(claimed_tables).encode("utf-8")):
+        raise ValueError(
+            "replay mismatch: structure_sha256 does not match the supplied tables "
+            f"expected {canonical_json(claimed_hash)} "
+            f"observed {canonical_json(_sha256(canonical_json(claimed_tables).encode('utf-8')))}"
+        )
     observed_hash = recomputed["structure_sha256"]
     if claimed_hash != observed_hash:
         raise ValueError(

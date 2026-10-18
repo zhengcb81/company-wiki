@@ -74,6 +74,39 @@ def test_replay_detects_a_changed_locator():
         replay_office_tables(payload, tampered)
 
 
+def test_replay_detects_a_changed_text_even_outside_the_compared_field_set():
+    """Every field edit is refused, not only locator/merge/row_span/column_span."""
+    payload = _payload()
+    structure = _parse(payload)
+
+    changed_text = copy.deepcopy(structure)
+    tables = changed_text["tables"]
+    assert isinstance(tables, list)
+    tables[0]["cells"][0]["text"] = "伪造文本"  # type: ignore[index]
+    with pytest.raises(ValueError, match="replay mismatch"):
+        replay_office_tables(payload, changed_text)
+
+    changed_grid = copy.deepcopy(structure)
+    tables = changed_grid["tables"]
+    assert isinstance(tables, list)
+    tables[0]["grid"] = {"rows": 99, "columns": 1}
+    with pytest.raises(ValueError, match="replay mismatch"):
+        replay_office_tables(payload, changed_grid)
+
+
+def test_replay_charges_the_declared_hash_against_the_supplied_tables():
+    """A structure whose stored hash no longer covers its own tables is refused."""
+    payload = _payload()
+    structure = _parse(payload)
+    tampered = copy.deepcopy(structure)
+    tables = tampered["tables"]
+    assert isinstance(tables, list)
+    tables[0]["cells"][0]["column_span"] = 4  # type: ignore[index]
+    tampered["structure_sha256"] = structure["structure_sha256"]
+    with pytest.raises(ValueError, match="replay mismatch"):
+        replay_office_tables(payload, tampered)
+
+
 def test_replay_rejects_unknown_schema_version():
     payload = _payload()
     structure = _parse(payload)
