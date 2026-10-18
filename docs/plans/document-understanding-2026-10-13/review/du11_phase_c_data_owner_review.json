@@ -1,0 +1,49 @@
+{
+  "schema_version": "du11-explicit-identity-independent-review/1",
+  "verdict": "PASS",
+  "base_commit": "7a84f47b77c906260b905a1db553fb607cd12ced",
+  "workdir": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "source_sha256": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "95e23bf4233cc38caa6e2548053b26f637c06609f41d9f6683845e16eac0fb39",
+    "tests/test_phase_c_extractive.py": "b8acd5c4a2d0833a43eda77a29c6fb82125cf7aa9e77eada3408130fb807fc82"
+  },
+  "scope": "exact two-file ROOT delta, readonly; no source edits/tests/API/worker/othertrees",
+  "findings": [],
+  "checked": [
+    "run_pair forwards selected source_catalog_config into seed_identity, while no-consumer readonly still deliberately skips identity clone",
+    "seed_identity selected config resolved through existing load_catalog_config data-owner responsibility, no project_root=codeROOT override; relative catalog_dir follows config.parents[1] contract",
+    "selected identity missing raises existing SecurityMasterUnavailableError before copying; no catch/fallback/refresh/discovery from alternate checkout",
+    "omitted config retains historical codeROOT config default; explicit loopback remains syntheticfixture, never production identity proof",
+    "existing copy2 fingerprint+mtime/size/sha equality preserved before and after copy and destination snapshot reloaded",
+    "two tests exercise actual SecurityMasterStore snapshot copy, config byte invariance, codeROOT deliberately different, and explicit selected missing; no plaintext stubs for snapshot identity"
+  ],
+  "reused_tdd": {
+    "red_log": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-explicit-identity-red.log",
+    "red_result": "2 failures3.76s missing keyword before implementation (not a fabricated successful source read)",
+    "green_log": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-explicit-identity-green.log",
+    "green_result": "16PASS4.25s including2new real synthetic snapshot controls plus14prior tooling controls",
+    "reviewer_tests_run": 0
+  },
+  "observed_real_preflight": {
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\live-v5-cn-7a84f47b-20261018\\overall.json",
+    "status": "FAIL",
+    "cause": "SecurityMasterUnavailableError: no security-master snapshots found in C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.source_catalog\\security_master",
+    "model_posts": 0,
+    "cleanup": true,
+    "protected_unchanged": true,
+    "sentinel_unchanged": true,
+    "mother_budget_after": {
+      "charged_tokens": 628394,
+      "charged_micro_usd": 393953,
+      "new_unknown_count": 0,
+      "token_limit": 2000000,
+      "micro_usd_limit": 20000000,
+      "prior_unknown7_retained": 7
+    }
+  },
+  "limitations": [
+    "No new real C/live retry performed; production quality/activation/cache still pending ROOT execution",
+    "Relative config resolution follows existing config owner contract (config is under project config directory); no alternate path rule introduced",
+    "Synthetic snapshots verify exact transport/ownership, not official issuer factual accuracy"
+  ]
+}

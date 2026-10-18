@@ -1,6 +1,6 @@
 # 正式摘要与付费恢复的共因改造 — ROOT实施细则
 
-状态：DESIGN_REVIEWED / IMPLEMENTATION_PENDING。主计划仍为 document-understanding-2026-10-13；不是新审批链。优先于下一次真实供应商调用。两条RF/FF作者树继续独占，不改它们、Dayu、IQS或真实原件/config。ROOT独占CWP接线、最终独审、合主线与发布。
+状态：ENGINEERING_IMPLEMENTED_AND_REVIEWED / REAL_C_PENDING。主计划仍为 document-understanding-2026-10-13；不是新审批链。优先于下一次真实供应商调用。两条RF/FF作者树继续独占，不改它们、Dayu、IQS或真实原件/config。ROOT独占CWP接线、最终独审、合主线与发布。
 
 ## 已证实的问题与取舍
 

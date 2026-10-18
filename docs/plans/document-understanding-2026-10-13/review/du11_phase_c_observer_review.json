@@ -1,0 +1,58 @@
+{
+  "schema_version": "du11-observer-independent-review/1",
+  "verdict": "PASS",
+  "base_commit": "f60f109b9cc16e439dd20b5425f2fde7e45c98a0",
+  "workdir": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "source_sha256": {
+    "tools/document_understanding_benchmark/phase_c_observer.py": "97a2734561e218d5f2a35e55ee2db595de0015094652c1470315d7d49f050581",
+    "tests/test_phase_c_extractive.py": "5ca974a60f4803cd945ecb32a18ac01112c4ce3bc27782e1fb0b4e3423dfbd0c",
+    "tests/unit/test_narrative_reading_generation_store.py": "ad9b48fff4886c8ebb7dec6879a0c87f1ffd1bd68e02f44f6e1ea043d2f6b69e"
+  },
+  "findings": [],
+  "scope": "Readonly exact three-file delta; no reviewer test or API/worker launch; no source changes",
+  "checks": [
+    "request/5 and request/6 share the existing scoped compiler; v4 uses20 and v5 uses max(1,2*selectedspans), matching their actual request builders",
+    "material dictionary and canonical evidence_order equality checks remain before native-source score_facts oracle; no gold claim, support-set or negative-control weakening",
+    "new actual builder/observer tests cover4/5 and changed-task material rejection, with evidence count/characters tied to typed actual selection",
+    "schema5 fixture now migrates to current schema7 and requires exact contiguous applied range6..current; injected-v6 DDL failure, byte rollback, historicalevent payload and nullable column preservation remain unchanged",
+    "actual default runner v5 localHTTP activation/outbox/same-run/cross-run0POST test completed; production C still not marked passed by this tool regression"
+  ],
+  "reused_evidence": {
+    "red": {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-observer-migration-red.log",
+      "result": "1PASS2FAIL7.99s; v5 observer KeyError:evidence and historical target6 vsactual7"
+    },
+    "green": {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-observer-migration-final.log",
+      "result": "37PASS34.37s;18tool+18generationstore+1actualactivationrecovery"
+    },
+    "related_public_integration": {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\.planning\\du11-extractive-consumer-final.log",
+      "result": "29PASS483.30s; sharedproduction7+projection6+publicscoped16",
+      "claim": "related integration evidence reused; not executed by reviewer"
+    }
+  },
+  "real_failure_retained": {
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\live-v5-cn-f60f109b-20261018\\overall.json",
+    "status": "FAIL",
+    "posts": 0,
+    "temporary_lake_removed": true,
+    "protected_unchanged": true,
+    "sentinel_unchanged": true,
+    "prepared_protected_unchanged": true,
+    "mother_budget_after": {
+      "charged_tokens": 628394,
+      "charged_micro_usd": 393953,
+      "new_unknown_count": 0,
+      "token_limit": 2000000,
+      "micro_usd_limit": 20000000,
+      "prior_unknown7_retained": 7
+    }
+  },
+  "limits": [
+    "no new paid run by reviewer",
+    "gold empty in direct material-shape controls is not business recall evidence; native actualfixture gold and unchanged oracle preserve separate support testing",
+    "historical5 migration test proves6rollback/history preservation and currenttarget sequence, not each future schema feature",
+    "ROOT live CN/HK/US quality and actual original/cumulative-budget recovery acceptance remain pending"
+  ]
+}

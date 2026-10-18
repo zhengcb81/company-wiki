@@ -1,7 +1,7 @@
 {
   "schema_version": "du11-independent-review/1",
   "scope": "PDF cross-run causal cache scope canonicalization",
-  "verdict": "PASS_CODE_AND_OWNER_UNIT_GREEN_REAL_CACHE_REPLAY_PENDING",
+  "verdict": "PASS_ENGINEERING_REAL_SUPPLIER_C_OPEN",
   "worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
   "source_sha256": "54e2cf4bbaef6c46dc650d6c6a605627aab7d3b1ad3299c3dd12b5a7771821ed",
   "unit_sha256": "78874981e6ef18f4eb9853fd248ed9bc5eebd9764b7f9f1aa24e010009b876fb",
@@ -36,11 +36,14 @@
     {
       "path": ".planning/du11-extractive-final-engineering.log",
       "result": "actual sourcecards/handler/paid/native recovery/audit/C tool suite 114 passed in 31.56s; reused owner evidence, no independent rerun"
+    },
+    {
+      "path": ".planning/du11-extractive-consumer-final.log",
+      "result": "actual final public integration 29 passed in 483.30s, including unchanged strict PDF exact-material same-run and new-run 1POST total, zero new-run budget/reservations assertions; reviewed three file hashes unchanged"
     }
   ],
   "independent_execution": "Read-only source/diff/log review only; no tests, original PDF, API, model or author-worktree mutations.",
   "open_requirements": [
-    "Existing actual PDF production E2E must show reading-a first POST, same-run restart zero new POST, reading-b reuse zero new POST, zero new token budget/reservations; diagnostic assertion remains strict.",
     "Real paid three-provider content C and other PWF open work are not closed by this cache engineering review."
   ],
   "confirmed_unresolved_defects": []

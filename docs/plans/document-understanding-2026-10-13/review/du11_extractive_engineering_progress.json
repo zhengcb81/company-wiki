@@ -1,6 +1,6 @@
 {
   "schema_version": "du11-extractive-engineering-progress/1",
-  "observed_at": "2026-10-18T00:51:09.778574+00:00",
+  "observed_at": "2026-10-18T00:59:31.371108+00:00",
   "status": "IN_PROGRESS_NOT_LIVE_ACCEPTED",
   "implementation_worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
   "published_baseline": "2340b78c0309ec247b5d6a3942f785348a2c37dc",
@@ -42,6 +42,12 @@
       "scope": "final committed extractive core/handler/durability/native recovery/execution/tool",
       "passed": 114,
       "seconds": 31.56,
+      "actual_supplier": false
+    },
+    {
+      "scope": "observer actual new protocol plus historical migration plus native C activation/cache loop",
+      "passed": 37,
+      "seconds": 34.37,
       "actual_supplier": false
     }
   ],
@@ -108,14 +114,20 @@
       "failed": 2,
       "seconds": 17.01
     },
-    "current_fix": "canonical source scope order once, stable facet representative; inventory1.5, actual final unit/public tests running",
+    "current_fix": "canonical scope order and stable source-wide facet representative; final units/public integrations PASS",
     "final_scope_unit": {
       "passed": 161,
       "failed": 0,
       "seconds": 15.08,
       "supplier_calls": 0
     },
-    "independent_scope_delta": "PASS; final PDF and public integration still running"
+    "independent_scope_delta": "PASS; final PDF and public integration still running",
+    "final": {
+      "passed": 29,
+      "failed": 0,
+      "seconds": 483.3,
+      "includes": "actual configured HTML/PDF/TXT, paid outbox activation, same-run and new-run reuse, historical explicit protocols"
+    }
   },
   "lint": {
     "owned_files": 41,
@@ -135,11 +147,27 @@
   },
   "independent_review_records": [
     "du11_extractive_production_review.json",
-    "du11_scope_cache_review.json"
+    "du11_scope_cache_review.json",
+    "du11_phase_c_data_owner_review.json",
+    "du11_phase_c_observer_review.json"
   ],
   "explicit_identity_tool": {
-    "status": "16PASS4.25; final independent delta review pending",
+    "status": "16PASS4.25; final independent exact2-file review PASS",
     "production_gate_change": false,
     "new_supplier_posts": 0
-  }
+  },
+  "engineering_status": "INDEPENDENTLY_REVIEWED_AND_MAIN_MERGED_REAL_C_OPEN",
+  "source_branch_commit": "f60f109b9cc16e439dd20b5425f2fde7e45c98a0",
+  "main_merge_commit": "57d63e90725aef269b7178fcfd70c96f09d0acde",
+  "real_c_v5_second_preflight": {
+    "receipt": ".planning/shared-reading-production/du11/live-v5-cn-f60f109b-20261018/overall.json",
+    "status": "FAIL_BEFORE_MODEL",
+    "reason": "test observer omitted narrative-model-request/6 branch",
+    "model_post_attempts": 0,
+    "protected_unchanged": true,
+    "temporary_lake_removed": true,
+    "budget_unchanged": true,
+    "next": "existing observer adapted to current compiler; actual full C loopback activation/reuse test now covered"
+  },
+  "observer_tool_delta": "Independent exact3-file review PASS,37PASS34.37s including actual default C loopback activation/paid/crossrun reuse; awaiting next real C"
 }
