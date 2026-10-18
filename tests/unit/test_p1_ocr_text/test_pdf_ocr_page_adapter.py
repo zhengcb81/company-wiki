@@ -13,7 +13,7 @@ import dataclasses
 
 import pytest
 
-import synth
+import p1_synth as synth
 from company_wiki.document_normalization.ocr_page_text import P1_PAGE_TEXT_SCHEMA
 from company_wiki.parser_adapters.pdf_ocr_page_adapter import adapt_ocr_pages
 from company_wiki.source_contract import ImmutableStatus, ParseStatus, QualityFlag

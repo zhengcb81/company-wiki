@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import socket
 
-import synth
+import p1_synth as synth
 from company_wiki.document_normalization.ocr_page_text import (
     P1_PAGE_TEXT_SCHEMA,
     PageOrderLimits,
