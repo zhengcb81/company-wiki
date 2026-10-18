@@ -1,3 +1,13 @@
+## B2 定稿：最终复审 PASS（2026-10-18）
+
+- 最终复审 `b2-antecedent-final-review-20261018-v3.md`：**PASS（代码层），无 P1**；两个复审 P1（长名称截断、截断误判为 missing）已修并各带回归测试。
+- `tests/unit/du11_source_closure` **110 passed**；ruff 通过。
+- 三源回放绑定当前代码：CN 10/10（`b2-final3-20261018`）、HK 7/7、US 8/8（`b2-real-sources-final2-20261018`）；work 6,133,095 / 13,157,181 / 7,989,484；原件/gold 未变、0 API。
+- CI `2a80acf6` success，收据 `b2-final3-20261018/ci-39139605025.json`。
+
+剩余唯一未完成项：**C 内容验收**（产品决策 A 二次调用 / C 换模型）。
+
+---
 ## C 第九轮：4.0.8 覆盖指令回归，已回退（2026-10-18）
 
 - 第四轮 CN 复审（4.0.8，14 条 claims）：required **6/10**、critical **4/7**。上一轮缺的 30%/60% 已关闭，但 InP、SiC 回归缺失，PD5 仅 partial 且与 gold 的 must_not 冲突，另有一条 claim 文本损坏（“上\nte海临港”）。

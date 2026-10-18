@@ -11,9 +11,9 @@
 
 ## 2026-10-18 最新状态
 
-- **B2 已完成并发布**：`d55d3369`（三审修复）、`6a2ee853`（性能修复），CI 绿；`tests/unit/du11_source_closure` 105 PASS；真实 CN/HK/US 回放 10/10、7/7、8/8，t32/t34 `selected_matches=0`。**注意：** 现有 v3 独立复审审的是 `1a774af0`，`d55d3369`/`6a2ee853` 之后的最终复审仍需补做（见 `review/objective-completeness-20261018.md`）。
+- **B2 已完成、最终复审 PASS、已发布**：`d55d3369`（三审修复）、`6a2ee853`（性能修复）、`2a80acf6`（复审两个 P1：长名称截断、截断被误判为 missing）。最终复审 PASS（`review/b2-antecedent-final-review-20261018-v3.md`）；`tests/unit/du11_source_closure` **110 PASS**；三源回放绑定 `b2-final3-20261018`（CN 10/10）与 `b2-real-sources-final2-20261018`（HK 7/7、US 8/8），原件/gold 未变、0 API；CI `2a80acf6` success（收据 `ci-39139605025.json`）。
 - **C 工程侧已通过**：CN（MiMo）与 US（MiniMax）各 1 次真实 POST，`activation_recovery=PASS`（同 attempt、无新增扣费），`cross_run_zero_POST=true`，FF 复用与 RF 读取通过；HK 因 `DEEPSEEK_API_KEY` 401 未跑。
-- **C 内容侧未通过**：CN required 8/10（critical 5/7），US 2–4/8。复审报告：`review/c-content-review-20261018-cn-v3.md`。
+- **C 内容侧未通过**：CN 最佳 required 8/10（critical 5/7），US 最佳 4/8；4.0.8 指令回归后已回退。复审报告：`review/c-content-review-20261018-cn-v3.md`、`...-cn-v4.md`。
 - **待拍板**：`review/c-coverage-decision-20261018.md` 里的 section 任务合并（B）已实测失败并回退，剩余为 **A 覆盖修复二次调用**（需改 paid-admission）或 **C 换模型**；选定后重跑 CN/US 并做最终内容复审。
 - 累计付费：44 个 attempt、900,711 tokens / $0.238405（ledger 去重口径，核对于 2026-10-18；不含 metadata 记录的历史基线，上限 2M / $20）。
 
