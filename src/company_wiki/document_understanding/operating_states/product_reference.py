@@ -215,6 +215,28 @@ def _proper_name(name: str, head: str) -> bool:
     return True
 
 
+def _latin_precedes(text: str, position: int) -> bool:
+    """True when a capitalised Latin token ends right before this position."""
+    prefix = text[max(0, position - 64):position].rstrip()
+    match = re.search(r"[A-Za-z0-9][A-Za-z0-9&./+-]*$", prefix)
+    if match is None:
+        return False
+    token = match.group()
+    return (any(character.isupper() for character in token)
+            or (token[:1].isdigit() and any(character.isalpha() for character in token)))
+
+
+def _latin_precedes(text: str, position: int) -> bool:
+    """True when a capitalised Latin token ends right before this position."""
+    prefix = text[max(0, position - 64):position].rstrip()
+    match = re.search(r"[A-Za-z0-9][A-Za-z0-9&./+-]*$", prefix)
+    if match is None:
+        return False
+    token = match.group()
+    return (any(character.isupper() for character in token)
+            or (token[:1].isdigit() and any(character.isalpha() for character in token)))
+
+
 def _name_before(prefix: str) -> tuple[str, int]:
     """The proper name immediately before a head, without swallowing prose."""
     stripped = prefix.rstrip()
@@ -360,9 +382,20 @@ def _declarations_for(text: str) -> tuple[ProductDeclaration, ...]:
         head = match.group()
         # Bounded look-behind: a whole-document prefix costs O(document) per
         # head and turns a long filing into minutes of repeated regex work.
-        window_start = max(0, match.start() - 64)
-        name, offset = _name_before(text[window_start:match.start()])
-        start = window_start + offset
+        # Widen the window when the name touches its edge, and defer instead of
+        # accepting a truncated name when even the widest window clips it.
+        name, start = "", 0
+        for width in (64, 256, 1024, 4096):
+            window_start = max(0, match.start() - width)
+            candidate, offset = _name_before(text[window_start:match.start()])
+            if not candidate:
+                break
+            absolute = window_start + offset
+            if window_start > 0 and absolute > 0 and _latin_precedes(text, absolute):
+                # The visible prefix is a suffix of a longer Latin name; widen.
+                continue
+            name, start = candidate, absolute
+            break
         if not name:
             continue
         series_in_name = _FAMILY_SUFFIX.search(name)

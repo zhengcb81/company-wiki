@@ -68,6 +68,28 @@ def test_named_declaration_is_one_family_with_its_collective_members():
     assert CN_DECLARATION[declaration.span[0]:declaration.span[1]].startswith("Preforma")
 
 
+def test_long_latin_name_is_never_truncated_by_the_lookbehind():
+    name = ("ExtremelyLongProductNameAlpha ExtremelyLongProductNameBeta "
+            "ExtremelyLongProductNameGamma ExtremelyLongProductNameDelta")
+    assert len(name) > 64
+    found = find_product_declarations(name + " 系列产品已交付客户。")
+    assert len(found) == 1
+    assert found[0].family == (
+        "extremelylongproductnamealphaextremelylongproductnamebeta"
+        "extremelylongproductnamegammaextremelylongproductnamedelta|series")
+    assert found[0].span[0] == 0
+
+
+def test_long_latin_name_after_prose_is_extended_not_truncated():
+    name = ("ExtremelyLongProductNameAlpha ExtremelyLongProductNameBeta "
+            "ExtremelyLongProductNameGamma ExtremelyLongProductNameDelta")
+    text = "报告期内，公司推出了 " + name + " 系列产品并交付客户。"
+    found = find_product_declarations(text)
+    assert len(found) == 1
+    assert found[0].family.startswith("extremelylongproductnamealpha")
+    assert text[found[0].span[0]:found[0].span[1]].startswith("ExtremelyLongProductNameAlpha")
+
+
 def test_generic_appositive_is_not_a_named_declaration():
     assert not find_product_declarations("公司推出金属硅化物集成系统，已进入客户验证。")
 
