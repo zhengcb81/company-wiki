@@ -1,0 +1,9 @@
+﻿=== ruff check (WU-1.2) ===
+All checks passed!
+
+=== mypy (contract modules) ===
+Success: no issues found in 2 source files
+
+=== import check ===
+['C:\\Users\\֣����\\Projects\\company-wiki-p1-ocr-text\\src\\company_wiki']
+
