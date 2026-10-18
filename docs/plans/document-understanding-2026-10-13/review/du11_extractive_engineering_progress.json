@@ -1,0 +1,145 @@
+{
+  "schema_version": "du11-extractive-engineering-progress/1",
+  "observed_at": "2026-10-18T00:51:09.778574+00:00",
+  "status": "IN_PROGRESS_NOT_LIVE_ACCEPTED",
+  "implementation_worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+  "published_baseline": "2340b78c0309ec247b5d6a3942f785348a2c37dc",
+  "latest_main_docs": "345b58f0d4a069ce58a35ecd64d69527b2b4eff0",
+  "independent_component_reviews": [
+    "source-extractive core three P2 closed",
+    "paid response eight files PASS; ROOT compaction separately changed",
+    "internal execution port PASS",
+    "phase_c_runner v5 tool PASS",
+    "native paid recovery test design PASS",
+    "final production engineering delta independently PASS; real supplier C OPEN"
+  ],
+  "offline_evidence": [
+    {
+      "scope": "integrated151 before latest skip/preflight handler delta",
+      "passed": 151,
+      "seconds": 52.25
+    },
+    {
+      "scope": "native failed batch -> no key zero new POST -> final positive output; previous source snapshot",
+      "passed": 1,
+      "seconds": 15.65,
+      "actual_supplier": false,
+      "actual_posts": 1,
+      "simulated_usage_tokens": 92,
+      "simulated_usage_micro_usd": 111
+    },
+    {
+      "scope": "latest actual typed model preflight + source core",
+      "passed": 18,
+      "seconds": 6.97
+    },
+    {
+      "scope": "latest actual v5 policy zero-model skip and same-run read",
+      "passed": 1,
+      "seconds": 13.36
+    },
+    {
+      "scope": "final committed extractive core/handler/durability/native recovery/execution/tool",
+      "passed": 114,
+      "seconds": 31.56,
+      "actual_supplier": false
+    }
+  ],
+  "root_causes_fixed": [
+    "source-owned complete quotes replace free-form canonical model prose",
+    "advisory ID-only rank cannot drop admitted cards",
+    "prepaid complete body before decode pinned in existing AUTO reservation",
+    "only exact frozen v5 unsuccessful paid operation can replay; original fee/attempt preserved",
+    "same parent storage baseline and raw-body reserve; writer observation explicitly lower bound",
+    "v5 model successes retain bounded execution audit through compaction",
+    "strict actual source-only skip remains zero model with no fictional execution",
+    "lazy duplicate/oversized source scope prevents large transient prose copies",
+    "source scope membership and source-wide facet representative independent of insertion/freeze order; final validation pending"
+  ],
+  "compatibility_diagnostic": {
+    "status": "COMPLETED_DIAGNOSTIC_NOT_CURRENT_ACCEPTANCE",
+    "log": ".planning/du11-extractive-consumer-compat.log",
+    "reason": "old v3 default/prose fixtures were loaded before alignment; no current-green inference; legacy explicit v3/v4 checks retained",
+    "passed": 63,
+    "failed": 14,
+    "seconds": 483.47
+  },
+  "open": [
+    "finish frozen new-production/public-consumer integration and final independent delta",
+    "commit reviewed runtime, integrate main, push and verify exact CI",
+    "real configured MiMo/DeepSeek/MiniMax C, real paid-response and activation/cache recovery, FF/RF readonly consumers",
+    "new holdout and larger RF audit loop remain mother-plan tasks"
+  ],
+  "real_mother_budget": {
+    "tokens": 628394,
+    "micro_usd_proxy": 393953,
+    "historical_unknown_retained": 7,
+    "new_real_posts_this_phase": 0
+  },
+  "external_author_worktrees": "RF and FF DU11 user-dispatched worktrees untouched",
+  "test_cleanup": {
+    "production_originals_changed": false,
+    "production_config_changed": false,
+    "manual_recursive_cleanup": "platform rejected; no alternate delete channel",
+    "known_independent_review_residual": "C:/Users/郑曾波/AppData/Local/Temp/du11-independent-paid-lij5od2g; NOT_CLEAN393369B/7files from independent fixture",
+    "root_pytest2031_residual": "cleanup command rejected before process start; later readonly existence check found run absent; do not claim manual deletion"
+  },
+  "current_public_integration": {
+    "first_current_run": {
+      "passed": 1,
+      "failed": 1,
+      "seconds": 43.39
+    },
+    "failure": "PDF new-run repeated model POST despite identical final generations",
+    "diagnostic": {
+      "passed": 0,
+      "failed": 1,
+      "seconds": 27.41,
+      "actual_changed_generation_fields": [],
+      "changed_components": "all source-wide facet scope associations"
+    },
+    "root_cause": "inventory anchored source-wide facets to insertion-first scope; freeze sorts scopes, rebuild moved facet membership. Other all-scope references also need canonical order.",
+    "pure_red": {
+      "failed": 2,
+      "seconds": 3.54
+    },
+    "partial_fix_test": {
+      "passed": 159,
+      "failed": 2,
+      "seconds": 17.01
+    },
+    "current_fix": "canonical source scope order once, stable facet representative; inventory1.5, actual final unit/public tests running",
+    "final_scope_unit": {
+      "passed": 161,
+      "failed": 0,
+      "seconds": 15.08,
+      "supplier_calls": 0
+    },
+    "independent_scope_delta": "PASS; final PDF and public integration still running"
+  },
+  "lint": {
+    "owned_files": 41,
+    "ruff": "PASS",
+    "diff_check": "PASS"
+  },
+  "implementation_commit": "7a84f47b",
+  "real_c_v5_first_preflight": {
+    "receipt": ".planning/shared-reading-production/du11/live-v5-cn-7a84f47b-20261018/overall.json",
+    "status": "FAIL_BEFORE_MODEL",
+    "reason": "test runner seeds identity from checkout-local catalog instead of explicitly selected source catalog config",
+    "model_post_attempts": 0,
+    "protected_unchanged": true,
+    "temporary_lake_removed": true,
+    "budget_unchanged": true,
+    "next": "test and fix explicit source catalog ownership in existing test tool; no production identity bypass"
+  },
+  "independent_review_records": [
+    "du11_extractive_production_review.json",
+    "du11_scope_cache_review.json"
+  ],
+  "explicit_identity_tool": {
+    "status": "16PASS4.25; final independent delta review pending",
+    "production_gate_change": false,
+    "new_supplier_posts": 0
+  }
+}

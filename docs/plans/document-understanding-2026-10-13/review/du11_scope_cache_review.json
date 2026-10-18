@@ -1,0 +1,47 @@
+{
+  "schema_version": "du11-independent-review/1",
+  "scope": "PDF cross-run causal cache scope canonicalization",
+  "verdict": "PASS_CODE_AND_OWNER_UNIT_GREEN_REAL_CACHE_REPLAY_PENDING",
+  "worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+  "source_sha256": "54e2cf4bbaef6c46dc650d6c6a605627aab7d3b1ad3299c3dd12b5a7771821ed",
+  "unit_sha256": "78874981e6ef18f4eb9853fd248ed9bc5eebd9764b7f9f1aa24e010009b876fb",
+  "integration_sha256": "91a946112988d768c661d001eb26e8ec8b36ab5755a1c1352d31db74cd3fc10d",
+  "root_cause": [
+    "Facets are source-wide but their required wire scope was assigned to input scopes[0]. Freeze sorts scope rows; frozen replay then assigned all facets to a different first scope.",
+    "After stable facet representative alone, carrier/source-matcher/frontend/capture scope_ids arrays still preserved insertion order; decision digest includes array order. One sort at inventory construction fixes all emitted scope references consistently."
+  ],
+  "reviewed_behavior": [
+    "Canonical min scope_id is only a source-wide facet wire representative, not a parent/child semantic preference. Actual per-scope bindings/family applicability remain per-scope.",
+    "Scope inputs are copied into sorted list; no caller list mutation. >64 scopes remain partial and cannot become reusable.",
+    "Inventory version 1.4.0 to 1.5.0 truthfully invalidates old decision semantics; existing stored payloads need no migration or source rewrite.",
+    "No SHA, current-decision match, source validation, or 1POST cache assertion is relaxed."
+  ],
+  "evidence": [
+    {
+      "path": ".planning/du11-pdf-cache-diagnostic.log",
+      "result": "actual new-run PDF duplicate POST; changed_generation_fields empty; all 14 facet components/candidate scope memberships changed, versions unchanged"
+    },
+    {
+      "path": ".planning/du11-scope-anchor-red.log",
+      "result": "two new parameterized cases fail as intended"
+    },
+    {
+      "path": ".planning/du11-scope-anchor-green.log",
+      "result": "despite filename, 159 passed and 2 failed: anchor-only fix incomplete; preserved honestly"
+    },
+    {
+      "path": ".planning/du11-scope-anchor-final.log",
+      "result": "actual final suite 161 passed in 15.08s; final three bound source hashes rechecked unchanged"
+    },
+    {
+      "path": ".planning/du11-extractive-final-engineering.log",
+      "result": "actual sourcecards/handler/paid/native recovery/audit/C tool suite 114 passed in 31.56s; reused owner evidence, no independent rerun"
+    }
+  ],
+  "independent_execution": "Read-only source/diff/log review only; no tests, original PDF, API, model or author-worktree mutations.",
+  "open_requirements": [
+    "Existing actual PDF production E2E must show reading-a first POST, same-run restart zero new POST, reading-b reuse zero new POST, zero new token budget/reservations; diagnostic assertion remains strict.",
+    "Real paid three-provider content C and other PWF open work are not closed by this cache engineering review."
+  ],
+  "confirmed_unresolved_defects": []
+}

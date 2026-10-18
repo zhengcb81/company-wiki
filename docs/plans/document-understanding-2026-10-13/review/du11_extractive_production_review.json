@@ -1,0 +1,149 @@
+{
+  "schema_version": "du11-extractive-production-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at_utc": "2026-10-18T00:32:01.843459+00:00",
+  "verdict": "PASS_FINAL_PRODUCTION_ENGINEERING_DELTA_REAL_C_OPEN",
+  "files_sha256_at_observation": {
+    "src/company_wiki/automation/narrative_generation.py": "3d6beb52fa0954b1d8908a28260907c02f6305d8d6990038f1215f0ea29d87f9",
+    "src/company_wiki/automation/narrative_batch_request.py": "9c5bbb4712a784c75c6cbdd7dc86b044eea729639f7fae006ff2dc1baa27d972",
+    "src/company_wiki/automation/narrative_worker_factory.py": "a3da54b98d3b1ee264652d357f8e02a0a81feac963a9c12b18a7362e08f08465",
+    "src/company_wiki/automation/narrative_batch.py": "57d82148df1b6db4acb655765a389121f558c7e36f6d2bf136d15e861e8abd4c",
+    "src/company_wiki/automation/store.py": "1e8213eb04a1f324e1145c64120bbca5d7ce76a369a62b4ec485be72a104cfa6",
+    "src/company_wiki/automation/narrative_summarize.py": "c65daa721f118be1d4d62c344d5a89406baa658b30c7927412b46aee7bf197fb",
+    "tests/unit/test_narrative_extractive_production.py": "5bbc752e6de63774943727954537cfe6b8cf656c75046dd7f5ea7168058b40ac"
+  },
+  "state": "TwoP2closed; frozenfinalproductiondeltaengineeringPASS only.",
+  "findings": [
+    {
+      "id": "COMPACTION_MISSING_V5_REPORT",
+      "priority": "P2",
+      "status": "CLOSED",
+      "evidence": "store compaction existing-terminal branch validatesexecution onlyifkeypresent; deletingexecutionfromv5successfulsummary receipt silentlycontinues toalreadycompacted. Initialcompaction extract_summary_execution onbarev5returnsNone anddoesnotrequireaudit.",
+      "required_fix": "Useexistingfrozen expected_prompt forsuccessfulsummaryattempts only: newv5 musthavevalidatedreport initiallyandonreentry. Oldv4/legacy andfailedhistoricalattemptswithoutreportremainvalid. No requirementallranksgreen, nohumanpermit.",
+      "test_hint": "Existing test_terminal_narrative_receipts terminal_fixture/snapshot/FinalArtifactPin or alreadycompleteddefaultworkerDB canadddeleteexecution→repeatcompactnegative withoutanotherworker."
+    },
+    {
+      "id": "COORDINATOR_RESPONSE_SCRATCH_OBSERVATION",
+      "priority": "P2",
+      "status": "CLOSED",
+      "evidence": "Worker guard copiescorrectparentpaths/baseline butpeakisprocesslocal. Pure0diskcontrol: child_BudgetedObjects.put128B recordschildpeak128, coordinatorparent.snapshot scratchpeak0. Failedpaidbodywithoutfinalbundle orresponsebiggerthanbundle isunderreported.",
+      "required_fix": "MergeverifiedexistingAUTOpaidpins/bodybyte-size intoownerreceipt observedmaximum/lowerbound, orreuseexistingworker meters; nosecondstore. Preserveoldbaseline andcaps. Explicitlyobservedmax/lowerbound, notexactconcurrentpeak.",
+      "test_hint": "Existing test_narrative_batch storagepeakfixture pluspureparent/childguard andverified128Bpin fakeobjects; reuseGOLDfailedbatchfixture, donotrestartworkermerelytomeasure."
+    }
+  ],
+  "positive_assessments": [
+    "New0.9requestomittedprojection resolvesv5; explicitv4remainsv4, legacy0.8defaultunchanged. Frozenhistorygenerationmanifests supplytheirrecordedprotocol onresume, notcurrentdefault.",
+    "batchrequestacceptsexplicit4/5with0.9only. Generationboundary/sourcefactory validatesactualcurrentimplementation; nofingerprintbypass.",
+    "Sourcecarddecoderexecution passedthroughROOTsummarizewrapper afterexistingcanonical/languagevalidation; finalpublicbundle stillbarecanonical, noexecutionunknownfields.",
+    "Workerpaidresponseobjects usecoordinatororiginalpathsandbaseline, notchildfreshzeroaccount; currentpreflightcountsboundedbody+receipt/report andmaxscratchbeforePOST.",
+    "Existingmutualexclusion/lease/budget/sourceintegrity remainresponsibilitychecks, nohumanapproval/identitydatabase/canary introduced.",
+    "GOLD8recoverymethodsareunchangedwithinreview; newterminalfailedbatchresume maybewrittenconcurrentlyandisexplicitlynotyetacceptedbythissnapshot."
+  ],
+  "independent_controls": {
+    "scratch_observation": "Parent/childsameemptybaseline, objectputpatchedinmemory0disk: childpeak128/coordinatorpeak0; demonstratesobservationloss, NO claimhardcapbypass.",
+    "suites_run": 0,
+    "pdf_reads": 0,
+    "network_calls": 0,
+    "source_edits": 0
+  },
+  "reused_root_evidence": "DefaultHTTPworker4PASS8.91sreported1POST/pin/executionterminalretention/samerun0POST/DBdumpunchanged. FirstpinNoneandreportNoneREDs ledfactory/compactionfix; sourcefingerprintcrosswriteinterleavingresolvedbyfreeze, notbypass. Notindependentlyrerun.",
+  "limits": [
+    "No finalpaidcontent/whole-documentrecall/recovery/defaultpublicationPASS.",
+    "TwoP2mustclosewithfrozenSHA/finitecontrolsbeforeproductiondeltaacceptance; repeatedoldfullmatrixnotneeded.",
+    "OwnpreviousreviewTempNOT_CLEAN remainsasdisclosedinpaidresponse-review; nonewTempcreatedhere."
+  ],
+  "initial_verdict": "PENDING_FIX_TWO_P2_ROOT_PRODUCTION_DELTA",
+  "final_reviewed_at_utc": "2026-10-18T00:45:37.083594+00:00",
+  "final_runtime_files_sha256": {
+    "src/company_wiki/document_understanding/source_cards.py": "42742d18b775742133a175de5edccee3fdfa1b219b94093620f1282170423455",
+    "src/company_wiki/document_understanding/summary_tasks.py": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "57c4c09c0abe304c5a7f270e8ac38bead228efd7afb7334ea4fc3f4bb7f440f7",
+    "src/company_wiki/automation/narrative_model_runtime.py": "2fcb1cf5282c08cffb8ae137225fbf457ee33da3749ffe38a908256198c74f5d",
+    "src/company_wiki/automation/narrative_summary_execution.py": "351b8108b3522ff5cc9c721aec4fdd0ad6e9ad35080fb27d50f1c4564e8b8bb7",
+    "src/company_wiki/automation/narrative_paid_response.py": "bd6e31fd999af211a1b3f133c18f3eca5db911364c3138bcec1ad8c4fda47fb7",
+    "src/company_wiki/automation/narrative_model_caller.py": "1075adef0fa798a0d819b11c96c7a489a6c8abfa596cd8c5450e58c62a0d31da",
+    "src/company_wiki/automation/narrative_http_model.py": "efe4b489af3ccff47773318d294bc274cd425e2774d8a06cc72607d31f9954d9",
+    "src/company_wiki/automation/narrative_run_store.py": "126ffc7c7d5928f57cf239281d5663b978f052a260a9c2d20a0f71c166425708",
+    "src/company_wiki/automation/migrations.py": "5f6c74024a9dd836e3c01b608468fb54e673afd1567641af9d16bc392fb34bb9",
+    "src/company_wiki/automation/store.py": "9a85e2eab81ec9b56c7e080251162c326860ed6b723502df50e675026755d776",
+    "src/company_wiki/automation/narrative_batch.py": "dfe6f8b34f73983976fac326917e16283fe1631bb311d3b7a280ecd6af74b986",
+    "src/company_wiki/automation/narrative_batch_request.py": "9c5bbb4712a784c75c6cbdd7dc86b044eea729639f7fae006ff2dc1baa27d972",
+    "src/company_wiki/automation/narrative_generation.py": "3d6beb52fa0954b1d8908a28260907c02f6305d8d6990038f1215f0ea29d87f9",
+    "src/company_wiki/automation/narrative_worker_factory.py": "a3da54b98d3b1ee264652d357f8e02a0a81feac963a9c12b18a7362e08f08465",
+    "src/company_wiki/automation/narrative_summarize.py": "7654d5b9d7f6935bd5cc3be9f62c90bc216dad3f7ccc990afcff8ea2cf25071f",
+    "src/company_wiki/automation/narrative_verify.py": "da491f44da72a74434aece9e0649627e4b53045a5b5c70d222a5c855c187e92c"
+  },
+  "final_tests_files_sha256": {
+    "tests/unit/test_narrative_extractive_production.py": "38d68de4dc281b3c58620af652df785c6facd4aadfbdbe90525c74612736e299",
+    "tests/unit/test_narrative_extractive_runtime.py": "5b51e7d8671ab6af7de79fdcf9aedfb8c864acdbca8fd36a4f9e308fc214ef4c",
+    "tests/unit/du11_paid_response/test_batch_recovery.py": "769ae160ec2b47807c5a89d6736accf0da7bb4f4cb1e0ace6c82b713838fa316",
+    "tests/unit/du11_paid_response/du11_fault_runtime.py": "0416741571dc9558f362502dd844c371234997b56a7c0f6ee2cb95c6d9cfb935",
+    "tests/integration/test_reading_projection_generation_e2e.py": "4486b475d7d93434215137f2cd8aa1d199b05e82c77e2a87beb345e88f93d5ba",
+    "tests/integration/test_shared_reading_production_e2e.py": "74665ede5b91a75660844f3444886003fb3ad529ce60424107130646aec7035a",
+    "tests/integration/test_shared_scoped_public_request.py": "8781a42f0be24dd8f8e99194c0d933c9d2679430afb2cefe3b6045f1e0887539",
+    "tests/support/narrative_model_request_fixture.py": "e2f4ebb5f5eb6c16b46adf02d7f8b8b782f5f5de7ecd2ff0aae6b45909bbf45f",
+    "tests/support/official_json_batch_fixture.py": "3bb6697ff7b049d8ca376954b6dcd1b7250c2d0792be1cb7e5867b0a4d2156f6",
+    "tests/unit/test_narrative_citation_unit_runtime_binding.py": "673de037522d886cc995762a5874378bc48e44cbb8c482ec993ef561c7be0409",
+    "tests/unit/test_narrative_reading_projection_generation.py": "05d423780ecc511dc333122169d6db44b5e5f591c904a220efd61feae580d61d",
+    "tests/unit/test_narrative_scoped_runtime_binding.py": "4538f8f1f90db5f42f6ccd6399e3618c5838b3fe1d39b0c1899f43a6453287fe",
+    "tests/unit/test_narrative_scoped_runtime_recovery.py": "c7761efbbec5b04d6b2d5f63bdf2e4b11d909c06a3b6c118281514eca7168fa2",
+    "tests/unit/test_narrative_source_owned_runtime_binding.py": "4aca731d2bbfd3107e1e15b1e2457421c8d8e044836d0def79f394db455c759a"
+  },
+  "freeze_receipt": "extractive-production-reviewed-freeze.json",
+  "closed_findings_evidence": {
+    "compaction": "Successfulv5requiresreportinitial/reentrybyfrozenexpected_prompt; finite32KiBtypedreportretained. Realdefaultworkernegative nowdeletesexecutionaftercompactandrequiresIntegrityViolationError. Failedhistoricalattempts/legacyunaffected.",
+    "scratch": "Coordinatorreads originalsameAUTOdurablepaidpinbodybyte_sizeintoobservedmaximum. Labelcommitted_writer_lower_bound explicitlynotexactconcurrentpeak; scratchpreflightconservativelyreservesfinalwriter+singlemodelHTTPbody. Originalparentpaths/baselinestillshared."
+  },
+  "new_valid_input_boundaries": {
+    "skip": "Actualsource-onlysummary_not_needed/modelNone strictlyparsed; terminalretainsboundedsummary_not_neededTrueinsteadfictionalaudit; anymodelreservationcontradictsskip. Realpolicyfirst+same-run0POSTPASS13.36s.",
+    "plan_error": "Unrepresentablefiniteexecutionplan classifiedSUMMARY_PLAN_INVALID beforecallingmodel/admission,0metrics; paidfailurepathsunchanged."
+  },
+  "independent_final_controls": {
+    "typed_prePOST_planerror": "SUMMARY_PLAN_INVALID/0tokens/0modelcalls",
+    "skip_actualhandler": "summary_not_needed/modelNone/0modelcalls",
+    "sameAUTO_paidwriter_observation": {
+      "persistent_added_bytes": 128,
+      "scratch_peak_bytes": 128,
+      "scratch_peak_observation": "committed_writer_lower_bound"
+    },
+    "pdf_reads": 0,
+    "network_calls": 0,
+    "unit_suites": 0,
+    "temp_dirs_created": 0
+  },
+  "reused_root_executions": [
+    {
+      "file": ".planning/du11-extractive-integrated-offline.log",
+      "observed": "151PASS52.25s",
+      "timing": "Beforefinalskipandtypedplanhandling. Includesrealdefaultworker, realfailedbatch0POSTrecovery, oldreceipts, explicitV3/V4recovery. Notclaimedonefinal171suite."
+    },
+    {
+      "file": ".planning/du11-extractive-policy-skip-green.log",
+      "observed": "1PASS13.36s",
+      "timing": "Afterreal0POSTpolicyrevealedandfixedreportrequirement."
+    },
+    {
+      "file": ".planning/du11-extractive-plan-boundary-green.log",
+      "observed": "18PASS6.97s",
+      "timing": "Finaltypedplanerror+corematrix."
+    },
+    {
+      "file": ".planning/du11-extractive-public-html-current.log",
+      "observed": "1PASS22.30s",
+      "timing": "CurrentfullHTMLpublicdefaultchain; logfinishedandread, notindependentlyrerun."
+    }
+  ],
+  "test_adjustment_review": [
+    "Newdefault5 wirecheckedasrequest6/decisions; raw fragments reconstructed fromnew sourceview andcomparedtooldunchangedoriginalevidence, notweakeningbytesproof.",
+    "OldV3/V4tests explicitlyfreezeoldprojectiontobehaviorunderreview; oldpaid/cache/0POSTassertionsremain. Invalidfutureprotocolnegativeupdated5→6because5nowsupported.",
+    "Twofixtures emitID-onlydecisionsfornewmode, preservingoldreplybranches. Actualproductionpublictest additionallychecksclaimtext==wholeboundsource andmodalityquestion/uncertain.",
+    "Faulttest0byteWALnormalization preservesmainDBandallnonemptyWALexactplusSQLdump, excludesSHMreadlocks only; source/originalfeesnochange."
+  ],
+  "not_accepted_as_current_evidence": "Parallel77-casehistoricaldiagnosticstartedoldfixtures thenchanged; known6+3olddefaultexpectationfailuresnotrelabeledcurrentPASS andnotincludedinfinalsuccesscounts.",
+  "unresolved_confirmed_runtime_defects": [],
+  "remaining_limits": [
+    "RealCN/HK/USconfiguredprovidercontent/activation/cacheCstillOPEN.",
+    "No claimallhistoricalsuites/fullCIgreen; focusedresponsibilitycoverage above isfiniteandexplicit.",
+    "KnownreviewTemp393369B/7filesNOT_CLEANremainasdisclosedinpaidresponseindependentreview. NoextraTempcreatedforfinalcontrols."
+  ]
+}

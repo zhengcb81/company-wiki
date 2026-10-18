@@ -1,3 +1,13 @@
+## DU11 摘录式摘要与付费恢复工程实施中 — 2026-10-18
+
+主线已发布2340b78c且精确CI Success（2m52s），进度文档345b58f0已推；新代码仍在ROOT隔离工区，尚未标正式C通过。源卡/有限ID排序、完整paid body、同AUTO失败恢复、终态有界执行报告已完成组件独审和实HTTP装配。集中151PASS52.25s；其后补policy零调用误伤及预模型容量typed错误，分别真实1PASS13.36s/核心18PASS6.97s，最终生产代码增量独审PASS，真实C仍OPEN。原C失败/未知费用历史均不改，未新增真实收费调用。
+
+最新范围、每份收据绑定版本、已发现并根修的问题、真实budget和测试残留见[工程进度](review/du11_extractive_engineering_progress.json)。旧默认V3兼容调查77项不作为当前源码验收；保留显式旧协议语义，调整新默认/假HTTP供应商的请求协议，随后重验必要公共链发现真实PDF跨run多一次POST；同一最终generation却因scope排序改变facet归属误失效。两纯RED复现，owner已做scope一次规范排序及稳定source-wide代表，inventory1.5；最终单元/公共链回跑中。工具平台拒绝了自有Temp递归清理，未绕通道/重复询权，剩余独审夹具明确NOT_CLEAN，不把它说成生产原件损坏或全部测试已清理。
+
+**Next Step：** 最终生产/公共读取增量验收与独审→提交新引擎→按现配置实跑三供应商C、paid/activation缓存恢复及FF/RF只读消费→并线推送核CI；新holdout及RF审查循环仍OPEN。两外包作者工区继续独占。
+
+---
+
 ## DU11 上批工程已正常发布，新摘要模式隔离实施 — 2026-10-18
 
 主线2340b78c已正常push，远端master实核一致；完整prepush6571PASS/24SKIP/0FAIL，542.66秒，未跳hook。精确CI #351/runs39082085864已由可见页面核对Success，2340b78c一致，总2分52秒/唯一job2分47秒。新隔离工区du11-extractive-runtime已写行为测试并实跑13RED/1兼容PASS（原先不支持v5/缺模块），再开始实现。两外包RF/FF作者树不写。
