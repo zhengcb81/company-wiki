@@ -1,3 +1,11 @@
+## 2026-10-18 ROOT 大节点更新
+
+已审工程dd5e1f2f合本地b5d413d6，旧测试fixture修复44941956正常提交。来源短尾工程最终独立34PASS/8SHA及最终138相关PASS，真实三源当前源码0收费回放10/7/8，独审反例全部修复；见 ../du11-source-tail-geometry-2026-10-18/integration-handoff.md。当前正常提交并线/重推待完成，不能说远端已新发布。两外包作者树独占。
+
+剩余跨页/指代共用owner细则已调查并纳入引用：../du11-source-tail-geometry-2026-10-18/review/remaining-closure-design.md。强调原多span、同AUTO/预算、target/context命名空间、实际家具/列证明及source-page-block计数；无新人工门禁。正式摘要质量C/新holdout/RF循环仍OPEN。累计费用/token不变，无新LLM调用。
+
+---
+
 ## 2026-10-18 DU11 ROOT 实测更新
 
 用户确认两张独立施工卡已发出；不触碰其作者树。正常push92976930没有超时：合同142PASS36.59s，unit6569PASS24SKIP4FAIL542.35s；发现三个旧测试未随并行phase/v7 nullable字段同步，当前仅测试修正102PASS，待独审及重推。不称远端已更新。

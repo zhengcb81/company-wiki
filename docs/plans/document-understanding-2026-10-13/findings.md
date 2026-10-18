@@ -1,3 +1,11 @@
+## 2026-10-18 ROOT 大节点更新
+
+已审工程dd5e1f2f合本地b5d413d6，旧测试fixture修复44941956正常提交。来源短尾工程最终独立34PASS/8SHA及最终138相关PASS，真实三源当前源码0收费回放10/7/8，独审反例全部修复；见 ../du11-source-tail-geometry-2026-10-18/integration-handoff.md。当前正常提交并线/重推待完成，不能说远端已新发布。两外包作者树独占。
+
+剩余跨页/指代共用owner细则已调查并纳入引用：../du11-source-tail-geometry-2026-10-18/review/remaining-closure-design.md。强调原多span、同AUTO/预算、target/context命名空间、实际家具/列证明及source-page-block计数；无新人工门禁。正式摘要质量C/新holdout/RF循环仍OPEN。累计费用/token不变，无新LLM调用。
+
+---
+
 ## 2026-10-18 新发现：物理连续性与purpose、旧测试的边界
 
 - 真实短尾pair有负横向重叠；两个column=None不是同列证据。纯geometry只返回形状，continuity owner须核实际紧邻正文带/已观测column。新lookahead最多3原单元，遇heading/table/角色/font/frame/scope断开，不借锚词义给当前断言，所有native检查计原analysis工作上限。无证明时保留原件并defer，不模型补字。

@@ -1,3 +1,13 @@
+## 当前主线：来源质量工程已审，发布后继续跨页/指代 — 2026-10-18
+
+已审源质量检查点dd5e1f2f合入本地主线b5d413d6；修复旧测试契约44941956已提交。短末行/风险prose/完整project/purpose补充已通过独立最终审查，正在正常提交并线。本轮明确保留原件和原source字节，不改gold、不提高限额、不增加许可；两个外包RF/FF作者树不触碰。
+
+尾部接线最终独立34PASS/2.67秒、8文件SHA一致；最后138相关PASS18.23秒。785大范围PASS47.92秒绑定的是section空提示最后修正之前，未冒认最新版全量。最终实际0收费三源CN10/10、HK7/7、US8/8及canonical一致，原件/gold不变、零复制、ownedTemp删除；真实供应商摘要及一般语义闭合仍OPEN。独审实测修了4anchor视图超限、lookahead耗尽漏左半句、空scope绕真实section；均保留RED和正式typed合同反控。见[短尾工程交接](../du11-source-tail-geometry-2026-10-18/integration-handoff.md)。
+
+**Next Step：** 正常合并/推送上述已审代码并核精确远端与CI；随后按[剩余闭合设计](../du11-source-tail-geometry-2026-10-18/review/remaining-closure-design.md)实施跨页多原span和有界唯一/集体先行词。不得造跨页native_page_view，不把TOC当页眉，不混target/context refs命名空间，不把5blocks藏成4。缺证或现有限额不容纳则defer该卡、保留原文，其它卡继续。源就绪后再做现配置三供应商正式摘要/paid及activation恢复/同跨run缓存/FF-RF只读C；新holdout和RF循环仍后续OPEN。
+
+---
+
 ## 当前实施节点 — 2026-10-18 DU11
 
 两张 DU11 RF/FF 外包卡已由用户派出；作者工区继续独占，ROOT不改其消费者源码。ROOT继续来源闭合、当前已审工程发布和正式摘要/缓存恢复C。
