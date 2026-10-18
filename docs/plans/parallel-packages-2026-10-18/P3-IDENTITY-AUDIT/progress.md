@@ -7,26 +7,35 @@
 | 2 实现 tools/identity_audit | DONE | `core.py` `cli.py` `receipt.py` `export.py` `__init__.py` `__main__.py` `README.md`（均在本卡写集内） |
 | 3 GREEN（pytest/ruff/mypy/CLI） | DONE | `green-1.log`（46 passed / 0 skipped，exit 0）；`static-1.log`（ruff 0 违例；mypy 6 文件 0 问题；手动 CLI demo exit 0） |
 | 4 只读与字段证明 | DONE | 测试内字节级快照（sha256+size+mtime_ns）证明除 `--out` 外零改动；demo 脚本 `demo-cli-run.py` 同证；`receipt.json` 字段与 `identity-audit-receipt/1` 完全一致（shell 7 键由 test_2 固定断言） |
-| 5 独立审查 + 修复 + 复审 | IN_PROGRESS | `review/independent.md` 待写 |
+| 5 独立审查 + 修复 + 复审 | IN_PROGRESS | 首轮审查 `review/independent.md`：REJECT（1 BLOCKER + 2 MAJOR + 4 MINOR + 4 NOTE，绑定实现提交 `99a67f06`）；修复已提交，复审（绑定最终 SHA）进行中 |
 | 6 交接 ROOT | PENDING | `handoff.md` / `handoff.json`（实现提交之后的独立提交） |
 
 ## 日志
 
 - RED：`python -B -m pytest tests/unit/test_identity_audit -q -p no:cacheprovider` → 44 failed / 2 passed，exit 1 → `red-1-pre-implementation.log`。
-- GREEN：同命令 → **46 passed，0 skipped**，exit 0 → `green-1.log`。
-- 静态：`python -m ruff check tools/identity_audit tests/unit/test_identity_audit` → All checks passed（此前 5 个 F401 已用 `--fix` 清除）；`python -m mypy`（6 个 lane 生产模块）→ 0 问题 → `static-1.log`。
-- 手动 CLI：`demo-cli-run.py` 构建 tmp 合成夹具 → `python -B -m tools.identity_audit --config … --request … --out receipt.json --pretty` → exit 0、status=ok、counts={checked:6, passed:5, not_applicable:1}、合成树逐字节零改动、`--out` 与 stdout 内容等价 → `receipt.json` + `static-1.log`。
+- GREEN #1：同命令 → **46 passed，0 skipped**，exit 0 → `green-1.log`。
+- 静态 #1：`python -m ruff check tools/identity_audit tests/unit/test_identity_audit` → All checks passed；`python -m mypy`（6 个 lane 生产模块）→ 0 问题 → `static-1.log`。
+- 手动 CLI #1：`demo-cli-run.py` → exit 0、status=ok、counts={checked:6, passed:5, not_applicable:1}、合成树逐字节零改动 → `receipt.json` + `static-1.log`。
+- 独立审查 #1（非作者 agent，绑定 `99a67f06`）→ **REJECT**，详见 `review/independent.md`。
+- GREEN #2（修复后）：同 pytest 命令 → **50 passed，0 skipped**（新增 4 个回归用例），exit 0 → `green-2.log`。
+- 静态 #2 + 手动 CLI #2：ruff / mypy 0 问题；demo exit 0 → `static-2.log`。
 
-## RED→GREEN 期间的作者修正（均在卡规则允许范围内，未删除用例、未加 skip、未弱化冻结断言）
+## 独立审查第一轮发现与修复对照（作者提交，全部为 lane 写集内改动）
 
-1. `test_2_receipt_shell.py`：`CHECK_FIELDS` 扩为卡 §5.3 实际定义的检查形状（增加 `observed`/`expected`/`tokens`）。原清单与同卡 test_1 对 `identity["observed"]` 等的断言互相矛盾；状态词表断言（该测试的冻结点）原样保留。
-2. `test_1_checks.py` 三处夹具/平台修正：
-   - 快照键统一 POSIX 化（Windows 反斜杠使 `startswith("out/")` 失效），bytes 翻转用例的目录前缀改为 `catalog/`（快照以夹具根为基准）。
-   - identity `not_applicable` 用例改为「默认建库 + `record_source_facts` 置空 market/security_id」——建库期置空会让扫描器派生出空 `source_id`，`query_ref` 直接拒绝（与 probe 13 的记录路径一致）。
-   - 非 ISO 日期用例改为侧写期注入 `period_end="2026/06/30"`——`record_source_facts` 自身强制严格 ISO，无法注入非法值。
-3. `cli.py`：stdout 改为字节级写出（Windows 文本模式会把 `\n` 翻译成 `\r\n`，违反单行规范 JSON 契约）。
+| 级别 | 发现 | 修复 |
+|---|---|---|
+| BLOCKER F1 | `_validate_span` 用自研校验取代卡 §5.2 指定的 `EvidenceSpan.from_dict`；全 null 坐标 span 令 `_unit_check` 抛 `TypeError` → CLI exit 1、stdout 空（违反 §5.1） | `core.py::_validate_span` 改为调用冻结的 `EvidenceSpan.from_dict`，任何拒绝 → `blocked`/`invalid_argument`（`invalid_request` 非 §3 发布码，故用已发布的 `invalid_argument`） |
+| MAJOR F2 | 同根因：全 null 坐标 span 的 `char_start/char_end=None` 令 `text[None:None]` 全文相等 → 未知→通过 | F1 修复后该 shape 在校验层即被拒绝；新增回归用例 2 个（core 层 + CLI 层 exit 3 单行 JSON） |
+| MAJOR F3 | `char_end=10^9` 越界 offset 被 Python 切片静默截断 → `pass` 且回显荒谬 offset | `_audit_one_span` 增加显式越界检查 → `p3_span_ungrounded` + `detail.bounds_violation`；新增回归用例 |
+| MINOR F4 | `_bytes_check` 通过分支不复核请求侧摘要 | 增加防御性复核：重算 sha256/长度与请求不符 → `p3_bytes_mismatch` |
+| MINOR F5 | `source_availability_unknown` 计入 checked 但无裁决桶，桶和≠checked 未披露 | `LIMITATIONS` 增加披露行（计数词表冻结，无桶是契约事实） |
+| MINOR F6 | 卡 §5.4(4) 要求 `detail.date_provenance`，实现在 `observed` 内 | period 检查的**每个** `detail` 均带 `date_provenance`（`observed` 副本保留，既有断言不变） |
+| MINOR F7 | `--out` 未拒绝 `..` 穿越与符号链接目标 | `cli.py::_refused_out_path`：`..` 分量或已存在 symlink → `blocked`/`invalid_argument`；新增回归用例 |
+| NOTE F8–F11 | F8/F9/F10 契约内可接受（字段超集、额外 reason、未达错误码），F11 `static-1.log` 含早期失败 demo 轨迹 | F11：重新生成 `static-2.log`（干净的 ruff+mypy+demo 输出）；F8–F10 在 handoff `known_limits`/`limitations` 内保留披露 |
+
+修复期间的自查：一次 edit 曾把 `inputs` 定义放在使用之后（ruff F821 + mypy used-before-def 同时捕获），当轮 pytest 亦失败；已修正并全量复跑（50 passed / ruff 0 / mypy 0）。
 
 ## 待办
 
-- [ ] 阶段 5：非作者 agent 独立审查（含一字节翻转只读触发 `bytes.fail` 复核）→ 修复 → 绑定最终 SHA 复审 → `review/independent.md`。
-- [ ] 阶段 6：实现提交之后，单独提交 `handoff.md` / `handoff.json`（README §8 两段式提交）。
+- [ ] 阶段 5 续：请同一审查 agent 对最终 SHA 复审（验证 F1–F7 修复与新回归用例），更新 `review/independent.md` 为 APPROVE 并绑定最终 SHA。
+- [ ] 阶段 6：实现修复提交之后，单独提交 `handoff.md` / `handoff.json`（README §8 两段式提交）。

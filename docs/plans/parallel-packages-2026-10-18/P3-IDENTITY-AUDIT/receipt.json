@@ -6,13 +6,13 @@
     "not_evaluated": 0,
     "passed": 5
   },
-  "generated_at": "2026-10-18T12:23:57Z",
+  "generated_at": "2026-10-18T14:00:58Z",
   "inputs": {
-    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\p3-identity-audit-demo-3nqwsx_5\\config\\source_catalog.yaml": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\p3-identity-audit-demo-nsrxg0bf\\config\\source_catalog.yaml": {
       "bytes": 208,
       "sha256": "cf148b84eb058b54426219ec8d8ba17b2e68239d9fbb003d312a4ce51107f0dc"
     },
-    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\p3-identity-audit-demo-3nqwsx_5\\request.json": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\p3-identity-audit-demo-nsrxg0bf\\request.json": {
       "bytes": 544,
       "sha256": "ef6ed48ec2e226c34274763bfc0d68b001c6b8f11fd94786d5bcbe0b0cd67aae"
     }
@@ -22,7 +22,8 @@
     "PDF/DOCX span offsets are not verified; only exact UTF-8 text/plain spans are",
     "unit tokens are compared as notation only: no conversion, no currency fill-in, no magnitude inference",
     "card section 5.4(5) names source_url/captured_at, which the current availability evidence does not carry; the observed keys are passed through verbatim",
-    "publication dates are reported as observed manifest values and are never replaced by a retrieval time"
+    "publication dates are reported as observed manifest values and are never replaced by a retrieval time",
+    "counts: a source_availability_unknown entry is counted under checked and in no verdict bucket, because the frozen counts vocabulary has no unknown bucket"
   ],
   "schema_version": "identity-audit-receipt/1",
   "sources": [
@@ -68,7 +69,9 @@
           "status": "pass"
         },
         "period": {
-          "detail": {},
+          "detail": {
+            "date_provenance": "capture_evidence_present"
+          },
           "expected": {
             "fiscal_year": 2026
           },

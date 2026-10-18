@@ -166,6 +166,11 @@ def _emit(
     return _exit_code(receipt)
 
 
+def _refused_out_path(out_path: Path) -> bool:
+    """Reject parent traversal and symlink targets before any bytes move."""
+    return ".." in out_path.parts or out_path.is_symlink()
+
+
 def _refused_exit(
     generated_at: str,
     reason: str,
@@ -202,6 +207,10 @@ def main(argv: list[str] | None = None) -> int:
     config_binding = _file_binding(config_path)
     if config_binding is not None:
         inputs[str(config_path)] = config_binding
+    out_path = Path(args.out) if args.out else None
+    if out_path is not None and _refused_out_path(out_path):
+        _log(f"--out path refused (parent traversal or symlink): {out_path}")
+        return _refused_exit(generated_at, INVALID_ARGUMENT, args, inputs)
     request_binding = _file_binding(request_path)
     if request_binding is None:
         _log(f"request file is not readable: {request_path}")
@@ -229,7 +238,7 @@ def main(argv: list[str] | None = None) -> int:
     receipt["inputs"] = merged_inputs
     return _emit(
         receipt,
-        Path(args.out) if args.out else None,
+        out_path,
         pretty=args.pretty,
         generated_at=generated_at,
         inputs=merged_inputs,

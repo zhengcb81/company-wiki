@@ -21,6 +21,7 @@ from company_wiki.source_catalog.security_code import (
 )
 from company_wiki.source_catalog.service import SourceCatalog
 from company_wiki.source_catalog.source_reader import SourceRef
+from company_wiki.source_contract.evidence_span import EvidenceSpan
 
 from .export import IDENTITY_FIELDS, PERIOD_FIELDS, read_source, string_or_none
 from .receipt import (
@@ -90,22 +91,6 @@ _REF_FIELDS = frozenset(
         "byte_size",
         "mime_type",
         "schema_version",
-    }
-)
-_SPAN_KEYS = frozenset(
-    {
-        "schema_version",
-        "span_id",
-        "source_id",
-        "locator",
-        "coordinates",
-        "raw_text",
-        "structured_value",
-        "parser_name",
-        "parser_version",
-        "output_sha256",
-        "parse_status",
-        "quality_flags",
     }
 )
 _COORDINATE_OFFSETS = (
@@ -248,20 +233,16 @@ def _valid_ref_text(value: Any) -> bool:
 
 
 def _validate_span(span: Any) -> str | None:
-    if not isinstance(span, dict) or set(span) != _SPAN_KEYS:
-        return INVALID_ARGUMENT
-    if not _valid_ref_text(span["source_id"]):
-        return INVALID_ARGUMENT
-    coordinates = span["coordinates"]
-    if not isinstance(coordinates, dict):
-        return INVALID_ARGUMENT
-    for name in _COORDINATE_OFFSETS + ("char_start", "char_end"):
-        value = coordinates.get(name)
-        if value is None:
-            continue
-        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
-            return INVALID_ARGUMENT
-    if span["raw_text"] is not None and not isinstance(span["raw_text"], str):
+    """Spans must parse under the frozen wire contract, not a looser copy.
+
+    ``EvidenceSpan.from_dict`` enforces the exact field set, coordinate
+    invariants (at least one location, paired positive char offsets) and the
+    span_id/output_sha256 bindings.  Anything it refuses is a blocked
+    request, never a per-check verdict and never a crash.
+    """
+    try:
+        EvidenceSpan.from_dict(span)
+    except (TypeError, ValueError, KeyError):
         return INVALID_ARGUMENT
     return None
 
@@ -303,10 +284,23 @@ def _ref_check(read: Any, requested: SourceRef) -> dict[str, Any]:
 
 def _bytes_check(read: Any, requested: SourceRef) -> dict[str, Any]:
     if read.data is not None:
-        return _entry(
-            CHECK_PASS,
-            detail={"sha256": sha256_hex(read.data), "bytes": len(read.data)},
-        )
+        digest = sha256_hex(read.data)
+        # Defensive re-check against the request itself: the reader already
+        # refuses mismatches, so reaching this branch with a digest that
+        # differs from the request would mean the read side broke its own
+        # contract -- report it, never wave it through.
+        if digest != requested.content_sha256 or len(read.data) != requested.byte_size:
+            return _entry(
+                CHECK_FAIL,
+                detail={
+                    "sha256": digest,
+                    "bytes": len(read.data),
+                    "requested_sha256": requested.content_sha256,
+                    "requested_bytes": requested.byte_size,
+                },
+                error_code=P3_BYTES_MISMATCH,
+            )
+        return _entry(CHECK_PASS, detail={"sha256": digest, "bytes": len(read.data)})
     refusal = read.refusal
     detail: dict[str, Any] = {"requested_sha256": requested.content_sha256}
     if refusal is not None:
@@ -388,13 +382,17 @@ def _period_check(
         "capture_evidence_present" if availability is not None else "unverified"
     )
     observed["unknown_source"] = "nullable_manifest"
+    provenance = (
+        "capture_evidence_present" if availability is not None else "unverified"
+    )
+    observed["date_provenance"] = provenance
     expected = {field: expect[field] for field in PERIOD_FIELDS if field in expect}
     for field in ("period_end", "published_date"):
         value = observed[field]
         if value is not None and not _is_iso_date(value):
             return _entry(
                 CHECK_FAIL,
-                detail={"non_iso_field": field, "observed": value},
+                detail={"non_iso_field": field, "observed": value, "date_provenance": provenance},
                 error_code=P3_PERIOD_CONFLICT,
                 observed=observed,
                 expected=expected,
@@ -403,7 +401,7 @@ def _period_check(
         if claimed != observed[field]:
             return _entry(
                 CHECK_FAIL,
-                detail={"conflict_field": field},
+                detail={"conflict_field": field, "date_provenance": provenance},
                 error_code=P3_PERIOD_CONFLICT,
                 observed=observed,
                 expected=expected,
@@ -411,11 +409,13 @@ def _period_check(
     if all(observed[field] is None for field in PERIOD_FIELDS) and not expected:
         return _entry(
             CHECK_NOT_APPLICABLE,
-            detail={},
+            detail={"date_provenance": provenance},
             reason="manifest_has_no_period_fields",
             observed=observed,
         )
-    return _entry(CHECK_PASS, detail={}, observed=observed, expected=expected)
+    return _entry(
+        CHECK_PASS, detail={"date_provenance": provenance}, observed=observed, expected=expected
+    )
 
 
 def _availability_check(availability: dict[str, Any] | None) -> dict[str, Any]:
@@ -453,6 +453,11 @@ def _audit_one_span(
     char_start = span["coordinates"]["char_start"]
     char_end = span["coordinates"]["char_end"]
     detail = {"char_start": char_start, "char_end": char_end}
+    if char_start > len(text) or char_end > len(text):
+        # Python slices clamp silently; an offset past the end of the
+        # document is an ungrounded claim, never a pass echoing the claim.
+        detail["bounds_violation"] = {"text_length": len(text)}
+        return _entry(CHECK_FAIL, detail=detail, error_code=P3_SPAN_UNGROUNDED)
     if raw_text != text[char_start:char_end]:
         return _entry(CHECK_FAIL, detail=detail, error_code=P3_SPAN_UNGROUNDED)
     return _entry(CHECK_PASS, detail=detail)

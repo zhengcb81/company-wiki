@@ -222,6 +222,7 @@ def test_unknown_publication_date_stays_unknown_and_is_marked_unverified(plain):
     assert checks["availability"]["detail"]["evidence"] is None
     assert checks["period"]["observed"]["published_date"] is None
     assert checks["period"]["observed"]["date_provenance"] == "unverified"
+    assert checks["period"]["detail"]["date_provenance"] == "unverified", checks["period"]
     assert checks["period"]["status"] in {"pass", "not_applicable"}, checks["period"]
     assert receipt["status"] in {"ok", "partial"}, receipt["status"]
 
@@ -326,6 +327,61 @@ def test_grounded_span_passes_and_reports_its_offsets(plain):
     assert span["status"] == "pass", span
     assert span["detail"]["char_start"] == 0
     assert span["detail"]["char_end"] == 12
+
+
+def test_a_wire_invalid_span_is_blocked_not_crashed(plain):
+    """A span violating the frozen wire contract is a blocked request."""
+    span = make_span(
+        plain.source_id, char_start=0, char_end=12, raw_text=plain.text()[0:12]
+    )
+    span["coordinates"] = dict.fromkeys(span["coordinates"], None)
+    receipt = audit(plain, spans=[span])
+    assert receipt["status"] == "blocked", receipt
+    assert receipt.get("reason") == "invalid_argument", receipt
+    assert receipt["sources"] == [], receipt["sources"]
+
+
+def test_a_wire_invalid_span_exits_three_with_one_json_line(plain):
+    """The CLI reports the same refusal as one JSON line, never a crash."""
+    span = make_span(
+        plain.source_id, char_start=0, char_end=12, raw_text=plain.text()[0:12]
+    )
+    span["coordinates"] = dict.fromkeys(span["coordinates"], None)
+    request_path = write_json(
+        plain.root / "request-bad-span.json",
+        sidecar_catalog.request_payload(refs=[plain.ref_payload()], spans=[span]),
+    )
+    code, stdout, stderr = run_module(
+        AUDIT_MODULE,
+        ["--config", str(plain.config_path), "--request", str(request_path)],
+        stdin_path=request_path,
+        out_dir=plain.root / "bad-span",
+    )
+    assert code == 3, (code, stdout[:400], stderr[:400])
+    assert stdout.count(b"\n") == 1, stdout[:200]
+    receipt = json.loads(stdout.decode("utf-8"))
+    assert receipt["status"] == "blocked", receipt
+    assert receipt.get("reason") == "invalid_argument", receipt
+
+
+def test_a_span_beyond_eof_is_ungrounded_not_clamped(plain):
+    """Slices clamp silently; an offset past the document is a conflict."""
+    text = plain.text()
+    receipt = audit(
+        plain,
+        spans=[
+            make_span(
+                plain.source_id,
+                char_start=0,
+                char_end=10**9,
+                raw_text=text,
+            )
+        ],
+    )
+    span = checks_of(receipt)["spans"][0]
+    assert span["status"] == "fail", span
+    assert span.get("error_code") == "p3_span_ungrounded", span
+    assert span["detail"]["bounds_violation"]["text_length"] == len(text), span
 
 
 # --------------------------------------------------------------------------
@@ -583,6 +639,31 @@ def test_out_is_refused_when_it_names_a_directory(plain):
     receipt = json.loads(stdout.decode("utf-8"))
     assert receipt["status"] == "blocked", receipt
     assert receipt.get("reason") == "invalid_argument", receipt
+
+
+def test_out_refuses_parent_traversal(plain):
+    """`--out sub/../escape.json` must be refused before any byte moves."""
+    request_path = _request(plain)
+    target = plain.root / "sub" / ".." / "escape.json"
+    code, stdout, stderr = run_module(
+        AUDIT_MODULE,
+        [
+            "--config",
+            str(plain.config_path),
+            "--request",
+            str(request_path),
+            "--out",
+            str(target),
+        ],
+        stdin_path=request_path,
+        out_dir=plain.root / "out-traversal-run",
+    )
+    assert code == 3, (code, stdout[:400], stderr[:400])
+    receipt = json.loads(stdout.decode("utf-8"))
+    assert receipt["status"] == "blocked", receipt
+    assert receipt.get("reason") == "invalid_argument", receipt
+    assert not (plain.root / "escape.json").exists(), "traversal target was written"
+    assert not target.exists(), "traversal target was written"
 
 
 def test_pretty_out_is_content_equivalent_to_the_single_line_receipt(plain):

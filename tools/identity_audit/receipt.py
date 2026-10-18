@@ -68,6 +68,7 @@ LIMITATIONS = [
     "unit tokens are compared as notation only: no conversion, no currency fill-in, no magnitude inference",
     "card section 5.4(5) names source_url/captured_at, which the current availability evidence does not carry; the observed keys are passed through verbatim",
     "publication dates are reported as observed manifest values and are never replaced by a retrieval time",
+    "counts: a source_availability_unknown entry is counted under checked and in no verdict bucket, because the frozen counts vocabulary has no unknown bucket",
 ]
 
 _RECEIPT_KEYS = (
