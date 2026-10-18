@@ -260,7 +260,7 @@ def order_page_lines(
 
     # --- rule 1: column clustering ----------------------------------------
     placeable = [r for r in records if DEFER_BBOX_INVALID not in r["_reason_set"]]
-    clusters = _cluster_columns(placeable, gap_threshold)
+    clusters = _cluster_columns(placeable, tolerance, gap_threshold)
     overflow_clusters = clusters[limits.max_columns :]
     kept_clusters = clusters[: limits.max_columns]
     for cluster in overflow_clusters:
@@ -312,10 +312,12 @@ def order_page_lines(
     for visual in reading_rows:
         row_accepted = False
         for record in visual:
-            if record["_reasons"]:
-                continue
+            # Rule 6: from the limit line onward *every* following line in
+            # reading order gets `limit` (its earlier reasons are kept).
             if limit_hit:
                 _add_defer(record, DEFER_LIMIT)
+                continue
+            if record["_reasons"]:
                 continue
             separator = 0 if (accepted_count == 0 or row_accepted) else 1
             projected = offset + separator + len(record["text"])
@@ -373,24 +375,65 @@ def _all_deferred(result: ImageOCRResult, reason: str) -> dict[str, Any]:
     )
 
 
-def _cluster_columns(records: list[dict[str, Any]], gap_threshold: float):
-    """Rule 1: greedy x-interval clustering over x0-sorted lines."""
+def _column_boundary_bands(
+    records: list[dict[str, Any]], tolerance: float, gap_threshold: float
+) -> list[tuple[float, float]]:
+    """Rule 1: column boundaries derived from within-visual-row horizontal gaps.
+
+    The gap is measured between adjacent lines *of the same visual row*, so a
+    full-width header/footer row (a single line in its own row) can never push
+    the running right edge out and swallow a body column.  That keeps card
+    section 6 case 3's floor -- "if page-margin detection is not implemented,
+    at least do not change the order of the other rows" -- true for multi-column
+    pages without implementing page-margin detection.  Overlapping gaps from
+    different rows are merged into one boundary band.
+    """
+    ordered = sorted(
+        records,
+        key=lambda r: (round(r["box"][1] / tolerance), r["box"][0], r["line_index"]),
+    )
+    rows: list[list[dict[str, Any]]] = []
+    for record in ordered:
+        if rows and abs(record["box"][1] - rows[-1][0]["box"][1]) < tolerance:
+            rows[-1].append(record)
+        else:
+            rows.append([record])
+
+    raw_gaps: list[tuple[float, float]] = []
+    for row in rows:
+        row_sorted = sorted(row, key=lambda r: (r["box"][0], r["line_index"]))
+        for index in range(len(row_sorted) - 1):
+            gap = row_sorted[index + 1]["box"][0] - row_sorted[index]["box"][2]
+            if gap >= gap_threshold:
+                raw_gaps.append((row_sorted[index]["box"][2], row_sorted[index + 1]["box"][0]))
+
+    bands: list[tuple[float, float]] = []
+    for left, right in sorted(raw_gaps):
+        if bands and left <= bands[-1][1]:
+            bands[-1] = (bands[-1][0], max(bands[-1][1], right))
+        else:
+            bands.append((left, right))
+    return bands
+
+
+def _cluster_columns(
+    records: list[dict[str, Any]], tolerance: float, gap_threshold: float
+) -> list[list[dict[str, Any]]]:
+    """Rule 1: split x0-sorted lines at the merged row-gap boundary bands."""
+    bands = _column_boundary_bands(records, tolerance, gap_threshold)
     ordered = sorted(
         records, key=lambda r: (r["box"][0], r["box"][2], r["line_index"])
     )
     clusters: list[list[dict[str, Any]]] = []
-    col_right = 0.0
+    current_col = -1
     for record in ordered:
-        x0 = record["box"][0]
-        if not clusters:
-            clusters.append([record])
-            col_right = record["box"][2]
-        elif x0 - col_right >= gap_threshold:
-            clusters.append([record])
-            col_right = record["box"][2]
-        else:
-            clusters[-1].append(record)
-            col_right = max(col_right, record["box"][2])
+        # bands are sorted by left edge and x0 is ascending, so this count is
+        # non-decreasing and gives a stable left-to-right column index.
+        column_index = sum(1 for band in bands if band[0] < record["box"][0])
+        if column_index != current_col:
+            clusters.append([])
+            current_col = column_index
+        clusters[-1].append(record)
     return clusters
 
 

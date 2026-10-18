@@ -319,7 +319,8 @@ def test_font_size_none_matches_explicit_median_ordering():
 
 
 # --------------------------------------------------------------------------
-# §6.13 column overflow -> partial + column_overflow on unassigned lines.
+# §5.1 rule 1: column overflow -> partial + column_overflow on unassigned lines
+# (card §6 has no dedicated bullet for this rule).
 # --------------------------------------------------------------------------
 
 
@@ -359,7 +360,7 @@ def test_input_result_is_not_mutated():
 
 
 # --------------------------------------------------------------------------
-# §6.15 dedicated determinism case -- canonical JSON bytes are identical.
+# §7.3 dedicated determinism case -- canonical JSON bytes are identical.
 # --------------------------------------------------------------------------
 
 
@@ -439,3 +440,65 @@ def test_every_input_line_is_present_in_the_output_lines():
     assert [line["line_index"] for line in out["lines"]] == list(
         range(len(result.lines))
     )
+
+
+# --------------------------------------------------------------------------
+# Review finding #2 (MAJOR): a full-width header/footer row must not collapse
+# a multi-column split (card §6 case 3 floor: without page-margin detection at
+# least do not change the order of the other rows).
+# --------------------------------------------------------------------------
+
+
+def test_full_width_header_and_footer_do_not_collapse_two_columns():
+    result = synth.load_fixture("two_column_with_header")
+
+    out = order_page_lines(result)
+
+    # The full-width rows must not swallow the body's column split.
+    assert len(out["columns"]) == 2, "full-width rows must not collapse columns"
+    columns = {c["column_id"]: c for c in out["columns"]}
+    assert set(columns["col-0"]["line_indexes"]) == {0, 1, 3, 5, 6}
+    assert set(columns["col-1"]["line_indexes"]) == {2, 4}
+
+    rows = out["text"].split("\n")
+    assert rows[0] == "PAGE HEADER"
+    body = [
+        "Left one",
+        "Left two",
+        "Left three",
+        "Right one",
+        "Right two",
+    ]
+    # The other rows keep their column-major order (never interleaved by the
+    # header/footer rows) and are never glued into a single row.
+    assert [row for row in rows if row in body] == body
+    # Header/footer land at the ends of their column, never mid-paragraph.
+    assert rows.index("PAGE HEADER") < rows.index("Left one")
+    assert rows.index("PAGE FOOTER") > rows.index("Left three")
+    assert "Left oneRight one" not in out["text"]
+    assert out["status"] == "ok"
+
+
+# --------------------------------------------------------------------------
+# Review finding #6 (MINOR): rule 6's "all lines from that one onward get
+# limit" must also cover lines already deferred for another reason.
+# --------------------------------------------------------------------------
+
+
+def test_limit_also_marks_lines_already_deferred_for_another_reason():
+    result = synth.load_fixture("over_limit_mixed")
+    limits = PageOrderLimits(max_lines=1)
+
+    out = order_page_lines(result, limits=limits)
+
+    assert len(out["lines"]) == 3
+    lines = _by_index(out)
+    assert lines[0]["accepted"] is True
+    assert lines[0]["defer_reasons"] == []
+    assert lines[1]["defer_reasons"] == ["limit"]
+    # line 2 was low_confidence AND sits after the limit cut point: both.
+    assert lines[2]["defer_reasons"] == ["low_confidence", "limit"]
+    assert lines[2]["accepted"] is False
+    assert out["text"] == "AAAA"
+    assert sorted(out["deferred_line_indexes"]) == [1, 2]
+    assert out["status"] == "partial"

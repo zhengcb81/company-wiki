@@ -219,6 +219,21 @@ def adapt_ocr_pages(
         raise OCRPageAdapterError("page_number must not repeat")
     locator_unstable = numbers != list(range(1, len(numbers) + 1))
 
+    # Section 5.2 read at document level: "all pages have accepted body ->
+    # parsed; some -> partial; none -> failed".  A page that yields no body
+    # makes the whole document partial, so every *surviving* page's results
+    # must carry PARTIAL rather than silently reading as clean PARSED.
+    document_partial = False
+    for value, kind in zip(page_values, kinds):
+        if kind == "ocr":
+            _, lines = _validate_ocr_block(value["ocr"])
+            has_body = any(line["accepted"] for line in lines)
+        else:
+            has_body = bool(_require_nfc_lf(value["text"], "page text").strip(" \t\n"))
+        if not has_body:
+            document_partial = True
+            break
+
     normalized_parts: list[str] = []
     cursor = 0
     results: list[ParserResult] = []
@@ -250,7 +265,14 @@ def adapt_ocr_pages(
                 page_start = 0
 
             if accepted:
-                status = ParseStatus.PARTIAL if defer_reasons else ParseStatus.PARSED
+                degrading = [
+                    flag for flag in page_flags if flag is not QualityFlag.OCR_USED
+                ]
+                status = (
+                    ParseStatus.PARTIAL
+                    if (degrading or document_partial)
+                    else ParseStatus.PARSED
+                )
                 for line in accepted:
                     local_start = int(line["char_start"])
                     local_end = int(line["char_end"])
@@ -322,7 +344,9 @@ def adapt_ocr_pages(
                     parser_name=PDF_OCR_PAGE_PARSER_NAME,
                     parser_version=PDF_OCR_PAGE_PARSER_VERSION,
                     parse_status=(
-                        ParseStatus.PARTIAL if flags else ParseStatus.PARSED
+                        ParseStatus.PARTIAL
+                        if (flags or document_partial)
+                        else ParseStatus.PARSED
                     ),
                     quality_flags=flags,
                 )

@@ -8,6 +8,7 @@ hand-built ``cwp-ocr-page-text/1`` dicts so the adapter cases do not depend on
 
 from __future__ import annotations
 
+import copy
 import dataclasses
 
 import pytest
@@ -334,3 +335,63 @@ def test_adapter_uses_no_network(tmp_path, monkeypatch):
     assert out.page_count == 1
     assert out.normalized_text == "One"
     assert len(out.parser_results) == 1
+
+
+# --------------------------------------------------------------------------
+# Review finding #5 (MINOR): card §5.2 read at document level -- when any page
+# yields no accepted body the surviving pages must read PARTIAL, not PARSED.
+# --------------------------------------------------------------------------
+
+
+def test_document_with_a_failed_page_marks_surviving_page_partial(tmp_path):
+    manifest = synth.build_manifest(tmp_path)
+    pages = [
+        _ocr_page(1, _ocr_doc("Keep", [_line(0, "Keep", 0, 4)])),
+        _ocr_page(
+            2,
+            _ocr_doc(
+                "",
+                [
+                    _line(
+                        0,
+                        "Gone",
+                        0,
+                        4,
+                        accepted=False,
+                        defer_reasons=["low_confidence"],
+                    )
+                ],
+                status="unavailable",
+            ),
+        ),
+    ]
+
+    out = adapt_ocr_pages(manifest, pages)
+
+    assert out.normalized_text == "Keep"
+    assert len(out.parser_results) == 2
+    surviving, failed = out.parser_results
+    # §5.2: "部分 → partial" applies to the document, so the page that still
+    # has body is PARTIAL (it no longer stands alone as a clean success).
+    assert surviving.parse_status == ParseStatus.PARTIAL
+    assert failed.parse_status == ParseStatus.FAILED
+    assert failed.raw_text is None
+    assert QualityFlag.LOW_OCR_CONFIDENCE in _flags(failed)
+
+
+# --------------------------------------------------------------------------
+# Review finding #10 (NIT): scope item 6 also covers manifest/pages immutability.
+# --------------------------------------------------------------------------
+
+
+def test_adapter_does_not_mutate_manifest_or_pages(tmp_path):
+    manifest = synth.build_manifest(tmp_path)
+    pages = [_ocr_page(1, _ocr_doc("One", [_line(0, "One", 0, 3)]))]
+    manifest_before = manifest.to_dict()
+    pages_before = copy.deepcopy(pages)
+
+    out = adapt_ocr_pages(manifest, pages)
+
+    assert out.normalized_text == "One"
+    assert manifest.to_dict() == manifest_before
+    assert pages == pages_before
