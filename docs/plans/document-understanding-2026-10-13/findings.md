@@ -1,3 +1,11 @@
+## B1 共享预算与线性索引已验收合入本地主线 — 2026-10-18
+
+完整组件f5a26b48已合b2503245；739相关PASS/50.52s，最终独立9PASS/3.27s及3个有限控制，精确源码SHA一致。逐member重建背景集合的平方级路径已消除，几何/索引扩展先消耗同parent账户；两处预算不足仍先遍历的漏洞已修。原件三源CN10/10、HK7/7、US8/8和canonical一致，同16M账户未超额，0收费/0原件复制、gold不改、自有Temp删除。详见[独立审查](../du11-source-closure-2026-10-18/review/budget-index-independent.md)和[真实源收据](../du11-source-closure-2026-10-18/budget-source-replay/receipt.json)。
+
+本节点正常推送/精确CI尚待，不将前置e33的CI代签B1；全量耗时仍未声称彻底解决。两张DU11外包已发出，作者树独占。**Next Step：** 正常发布B1，同时ROOT隔离继续跨页多原span/有界先行词闭合，再正式三供应商摘要/收费与activation恢复/同跨run缓存/FF-RF消费C；新holdout和RF循环仍OPEN。下方为历史证据。
+
+---
+
 ## 已正常发布并核远端CI — 2026-10-18
 
 已审来源工程与旧测试兼容修复正常推送至e33d40ed7688cfdcead1e02d55542f7026d0b8e5，远端master一致。prepush全量6741PASS/24SKIP580.05s、合同142PASS37.31s，无跳hook/提时限；GitHub CI352/runs39090720114精确HEAD已匿名REST确认completed/success。详见review/du11_source_checkpoint_published_20261018.json。旧4FAIL及timeout记录不删。
