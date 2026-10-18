@@ -1,0 +1,336 @@
+{
+  "schema_version": "du11-cn-closure-bounded-evidence/1",
+  "no_new_cn_parse": true,
+  "raw_copies": 0,
+  "current_probe": "cn-h1.json",
+  "evidence_limit": "CN parse process ended before request for native trace; frozen parser internals and original unselected neighbors were not serialized. Historical canonical raw/native bindings explicitly labelled; no fabricated current observation.",
+  "incidents": [
+    {
+      "incident": "t3",
+      "current": {
+        "old_task": "t3",
+        "old_body_text_sha256": "f27e52844207857a4a52880dd2d0c3ce33a658c63fe172d949016dfe523b95ab",
+        "selected_matches": 1,
+        "new_claim_ids": [
+          "t3-source"
+        ],
+        "source_sample": {
+          "id": "urn:company-wiki:evidence-span:sha256:28f321d9a1bade8dd23c1c3e5265d46a4d413b147cf6f2af34f4e2dfb75f014e",
+          "locator": "loc:v1/page:31/paragraph:21",
+          "text_sha256": "f27e52844207857a4a52880dd2d0c3ce33a658c63fe172d949016dfe523b95ab",
+          "chars": 40,
+          "prefix": "如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影",
+          "suffix": "如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影",
+          "flags": [],
+          "reading_priority": 1,
+          "reading_value_band": "meaningful_fact",
+          "reading_score": 3
+        },
+        "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+      },
+      "historical_scope": {
+        "bundle_sha256": "9a4f5ab8d598a0a06a81d5e0274811f25cd16c1d3627279b5ff42281e3d1493a",
+        "span_id": "urn:company-wiki:evidence-span:sha256:936ee0fa22fbbde8fa3fd9a7862bcccdf58148624cd2f30d265d4cbe17baaa3d",
+        "raw_text_sha256": "f27e52844207857a4a52880dd2d0c3ce33a658c63fe172d949016dfe523b95ab",
+        "coordinates": {
+          "char_end": null,
+          "char_start": null,
+          "column_index": null,
+          "page_number": 31,
+          "paragraph_index": 21,
+          "row_index": null,
+          "table_index": null
+        },
+        "quality_flags": [],
+        "unit_kind": "pdf_text_block",
+        "native_range_schema": null,
+        "native_page_view_sha256": null,
+        "source_members": [
+          {
+            "locator": "loc:v1/page:31/paragraph:21",
+            "text_prefix": "如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公",
+            "text_suffix": "获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影",
+            "pdf_block": 18,
+            "block_char_start": 0,
+            "block_char_end": 40,
+            "evidence_basis": "existing public selected regular span; internal font_runs absent"
+          }
+        ],
+        "neighbor_receipt_only": [
+          {
+            "locator": "loc:v1/page:31/paragraph:20",
+            "status": "NOT_AVAILABLE_IN_EXISTING_SELECTED_RECEIPT; original parsed memory released; not reconstructed"
+          },
+          {
+            "locator": "loc:v1/page:31/paragraph:22",
+            "status": "NOT_AVAILABLE_IN_EXISTING_SELECTED_RECEIPT; original parsed memory released; not reconstructed"
+          }
+        ],
+        "group": [
+          {
+            "kind": "risk",
+            "section_role": "management_discussion",
+            "group_id": "urn:company-wiki:reading-group:sha256:04ae10347ed52007f1c8de31208ededaf14568b1ab4faf8d869d9fef56e2aa7c"
+          }
+        ],
+        "public_font_state": {
+          "font_size": 10.449999809265137,
+          "font_weight": "regular",
+          "geometry_granularity": "block",
+          "page_width": 595.2999877929688,
+          "page_height": 841.9000244140625
+        },
+        "internal_font_runs": "NOT_RETAINED_IN_PUBLIC_BUNDLE; cannot claim current per-run measured fonts from this receipt"
+      },
+      "current_same_raw_text_sha256": true,
+      "current_canonical_id_changed": true,
+      "current_locator": "loc:v1/page:31/paragraph:21",
+      "current_quality_flags": []
+    },
+    {
+      "incident": "t32",
+      "current": {
+        "old_task": "t32",
+        "old_body_text_sha256": "dc381466ce4a3bc44ce58c5de02d3c6e908d6c411cb318890b85cb0e324e4573",
+        "selected_matches": 1,
+        "new_claim_ids": [
+          "t30-source"
+        ],
+        "source_sample": {
+          "id": "urn:company-wiki:evidence-span:sha256:d16899ff4c12bfc3427a5e9cc7809746e72b66b56bf0e1bbb1641f99c3bb5434",
+          "locator": "loc:v1/page:17/paragraph:2/chars:38-108",
+          "text_sha256": "dc381466ce4a3bc44ce58c5de02d3c6e908d6c411cb318890b85cb0e324e4573",
+          "chars": 70,
+          "prefix": "求的同时，设备的薄膜均一性，污染物控制和生产效率均达到世界先进水平。该系列设备已付运\n到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+          "suffix": "染物控制和生产效率均达到世界先进水平。该系列设备已付运\n到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+          "flags": [],
+          "reading_priority": 1,
+          "reading_value_band": "meaningful_fact",
+          "reading_score": 3
+        },
+        "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+      },
+      "historical_scope": {
+        "bundle_sha256": "9a4f5ab8d598a0a06a81d5e0274811f25cd16c1d3627279b5ff42281e3d1493a",
+        "span_id": "urn:company-wiki:evidence-span:sha256:a7bfc67fcd0b9090b3a193824ff726a28fdf7cea63b412af413b5d3fd8448cd6",
+        "raw_text_sha256": "dc381466ce4a3bc44ce58c5de02d3c6e908d6c411cb318890b85cb0e324e4573",
+        "coordinates": {
+          "char_end": 108,
+          "char_start": 38,
+          "column_index": null,
+          "page_number": 17,
+          "paragraph_index": 2,
+          "row_index": null,
+          "table_index": null
+        },
+        "quality_flags": [],
+        "unit_kind": "pdf_native_range",
+        "native_range_schema": "native-pdf-range/1",
+        "native_page_view_sha256": "6a2d7ce881f48ef06de0ad10fcf28db06bc9bf65e8d0680eebcc37e56235eca0",
+        "source_members": [
+          {
+            "block_char_end": 34,
+            "block_char_start": 0,
+            "block_sha256": "b9d79eee878dbee39d2439c133ce7e60ab6ab3941f5567ea3886a84a23e47d18",
+            "locator": "loc:v1/page:17/paragraph:2",
+            "pdf_block": 2,
+            "text_sha256": "ea0d45f6e102d685284980b39c940109c6896d9f277847d18b3c2a86c51b5612",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:2ac378360e521b34af633e4c383a9d6f165adfbedb8da99a170edcfc30fc87bd",
+            "view_char_end": 72,
+            "view_char_start": 38,
+            "text_prefix": "求的同时，设备的薄膜均一性，污染物控制和生产效率均达到世界先",
+            "text_suffix": "，设备的薄膜均一性，污染物控制和生产效率均达到世界先进水平。",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          },
+          {
+            "block_char_end": 42,
+            "block_char_start": 34,
+            "block_sha256": "b9d79eee878dbee39d2439c133ce7e60ab6ab3941f5567ea3886a84a23e47d18",
+            "locator": "loc:v1/page:17/paragraph:3",
+            "pdf_block": 2,
+            "text_sha256": "b5541d96de69a4e4461dfec2e9b166e0776822ff578659e1ddd9f38385caa329",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:68013aa19efaa16a8ed0dbc3fd73aff84cc23282eb1fcd960125c5727144fbdc",
+            "view_char_end": 80,
+            "view_char_start": 72,
+            "text_prefix": "该系列设备已付运",
+            "text_suffix": "该系列设备已付运",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          },
+          {
+            "block_char_end": 27,
+            "block_char_start": 0,
+            "block_sha256": "7e4e666ffbc7ea3d6ec06e073b8f17ca616818aef7bd14ed28b10fe0bf5d2a66",
+            "locator": "loc:v1/page:17/paragraph:4",
+            "pdf_block": 3,
+            "text_sha256": "5456e2bfff1f98ab0b70cffb3209ca4c4909459a05af137ca7951b20b25fe21b",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:629f86365de638e5fadd2edcd63fd997be9836397acbfaa877fa0b20d340f788",
+            "view_char_end": 108,
+            "view_char_start": 81,
+            "text_prefix": "到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+            "text_suffix": "到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          }
+        ],
+        "neighbor_receipt_only": [
+          {
+            "locator": "loc:v1/page:17/paragraph:1",
+            "status": "NOT_AVAILABLE_IN_EXISTING_SELECTED_RECEIPT; original parsed memory released; not reconstructed"
+          },
+          {
+            "block_char_end": 43,
+            "block_char_start": 27,
+            "block_sha256": "7e4e666ffbc7ea3d6ec06e073b8f17ca616818aef7bd14ed28b10fe0bf5d2a66",
+            "locator": "loc:v1/page:17/paragraph:5",
+            "pdf_block": 3,
+            "text_sha256": "c6db97f36c614b3c8f1d7d3182e5c9473e00fadc34806ed872a4c1f675bdd5f5",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:7ad9ad0e111d111c00745eaaaca7ac00111b8e92bee8264b580a6cbdd39ac972",
+            "view_char_end": 124,
+            "view_char_start": 108,
+            "text_prefix": "其中，ALD 氮化钛薄膜也可运用",
+            "text_suffix": "其中，ALD 氮化钛薄膜也可运用",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          }
+        ],
+        "group": [
+          {
+            "kind": "native_continuity",
+            "section_role": "unknown",
+            "group_id": "urn:company-wiki:reading-group:sha256:12ffeb78177425fb296cb87e476dacdc5bfae7ee5ed59b114d323029087ebafb"
+          }
+        ],
+        "public_font_state": {
+          "font_size": null,
+          "font_weight": null,
+          "geometry_granularity": null,
+          "page_width": null,
+          "page_height": null
+        },
+        "internal_font_runs": "NOT_RETAINED_IN_PUBLIC_BUNDLE; cannot claim current per-run measured fonts from this receipt"
+      },
+      "current_same_raw_text_sha256": true,
+      "current_canonical_id_changed": true,
+      "current_locator": "loc:v1/page:17/paragraph:2/chars:38-108",
+      "current_quality_flags": []
+    },
+    {
+      "incident": "t34",
+      "current": {
+        "old_task": "t34",
+        "old_body_text_sha256": "8ff2eacd4cfb23f277697cea3e0f61701df95b2d7fd5527828b808b42092c107",
+        "selected_matches": 1,
+        "new_claim_ids": [
+          "t32-source"
+        ],
+        "source_sample": {
+          "id": "urn:company-wiki:evidence-span:sha256:df68cd7b9b38ed5ab7847f2b9cbff76bf3b2b1986138754764a6f4e390e1853e",
+          "locator": "loc:v1/page:17/paragraph:12/chars:375-432",
+          "text_sha256": "8ff2eacd4cfb23f277697cea3e0f61701df95b2d7fd5527828b808b42092c107",
+          "chars": 57,
+          "prefix": "该系列产品已交付多个先进\n逻辑、先进存储客户，现场验证顺利推进，能够满足客户各项性能需求的同时，实现高生产效\n率。",
+          "suffix": "列产品已交付多个先进\n逻辑、先进存储客户，现场验证顺利推进，能够满足客户各项性能需求的同时，实现高生产效\n率。",
+          "flags": [],
+          "reading_priority": 1,
+          "reading_value_band": "meaningful_fact",
+          "reading_score": 3
+        },
+        "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+      },
+      "historical_scope": {
+        "bundle_sha256": "9a4f5ab8d598a0a06a81d5e0274811f25cd16c1d3627279b5ff42281e3d1493a",
+        "span_id": "urn:company-wiki:evidence-span:sha256:24bffdf6c291d379cd109243d17aedaad38bd73f8972aed23cf23b5b00bff31b",
+        "raw_text_sha256": "8ff2eacd4cfb23f277697cea3e0f61701df95b2d7fd5527828b808b42092c107",
+        "coordinates": {
+          "char_end": 432,
+          "char_start": 375,
+          "column_index": null,
+          "page_number": 17,
+          "paragraph_index": 12,
+          "row_index": null,
+          "table_index": null
+        },
+        "quality_flags": [],
+        "unit_kind": "pdf_native_range",
+        "native_range_schema": "native-pdf-range/1",
+        "native_page_view_sha256": "6a2d7ce881f48ef06de0ad10fcf28db06bc9bf65e8d0680eebcc37e56235eca0",
+        "source_members": [
+          {
+            "block_char_end": 47,
+            "block_char_start": 35,
+            "block_sha256": "112ff17afa6d4991f92aee62f9aac7550b5780f9af0cfb8732339aabdd34819f",
+            "locator": "loc:v1/page:17/paragraph:12",
+            "pdf_block": 9,
+            "text_sha256": "f36945f2c739398bbada242bee68bbeb7a6c81b48ff05a8c25379f3aca8334e5",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:4ac7a953f721811e444b0238849586f12d68fe8c6ea0ef98177d4de57f6131d9",
+            "view_char_end": 387,
+            "view_char_start": 375,
+            "text_prefix": "该系列产品已交付多个先进",
+            "text_suffix": "该系列产品已交付多个先进",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          },
+          {
+            "block_char_end": 41,
+            "block_char_start": 0,
+            "block_sha256": "0c7a4a90d56f382379562a0eb878944ca166c64a26b9dc43e4556ee70b041feb",
+            "locator": "loc:v1/page:17/paragraph:13",
+            "pdf_block": 10,
+            "text_sha256": "0c7a4a90d56f382379562a0eb878944ca166c64a26b9dc43e4556ee70b041feb",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:d0c07a9e6414602c8ec261661b52264ea58d88acb4ba232e9ab2a8ec36920cf3",
+            "view_char_end": 429,
+            "view_char_start": 388,
+            "text_prefix": "逻辑、先进存储客户，现场验证顺利推进，能够满足客户各项性能需",
+            "text_suffix": "场验证顺利推进，能够满足客户各项性能需求的同时，实现高生产效",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          },
+          {
+            "block_char_end": 2,
+            "block_char_start": 0,
+            "block_sha256": "c4fbccd6ee2df1c22bfe7cc6dccc8c81b8f07f68ee4b2d14b4281634b268b8b9",
+            "locator": "loc:v1/page:17/paragraph:14",
+            "pdf_block": 11,
+            "text_sha256": "ec94fa76c5da806069c6f60ca5510c540cd0d533dddb2913ddc6c49363c7286b",
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:6cb36c8cf8a8e7dc03cfbc5fd1a229c57eb9db327c4a79f446ede5ea3eed56a9",
+            "view_char_end": 432,
+            "view_char_start": 430,
+            "text_prefix": "率。",
+            "text_suffix": "率。",
+            "evidence_basis": "existing selected native_range member substring; not a fresh original parse"
+          }
+        ],
+        "neighbor_receipt_only": [
+          {
+            "locator": "loc:v1/page:17/paragraph:11",
+            "status": "NOT_AVAILABLE_IN_EXISTING_SELECTED_RECEIPT; original parsed memory released; not reconstructed"
+          },
+          {
+            "locator": "loc:v1/page:17/paragraph:15",
+            "status": "NOT_AVAILABLE_IN_EXISTING_SELECTED_RECEIPT; original parsed memory released; not reconstructed"
+          }
+        ],
+        "group": [
+          {
+            "kind": "native_continuity",
+            "section_role": "unknown",
+            "group_id": "urn:company-wiki:reading-group:sha256:d17a5e1c9848a0a22d88b46f81db4ae4225e49f1de8fe2f8f2ca8f0adce2859d"
+          }
+        ],
+        "public_font_state": {
+          "font_size": null,
+          "font_weight": null,
+          "geometry_granularity": null,
+          "page_width": null,
+          "page_height": null
+        },
+        "internal_font_runs": "NOT_RETAINED_IN_PUBLIC_BUNDLE; cannot claim current per-run measured fonts from this receipt"
+      },
+      "current_same_raw_text_sha256": true,
+      "current_canonical_id_changed": true,
+      "current_locator": "loc:v1/page:17/paragraph:12/chars:375-432",
+      "current_quality_flags": []
+    }
+  ],
+  "code_causes": {
+    "t3": "Current prose_kinds still only background/paragraph_event. Current raw text SHA and locator match historical risk-kind fragment; provenance metadata/ID changed with new source projection. Risk bypass is code-demonstrable, but current internal package membership was not retained.",
+    "t32": "Current raw text SHA/locator match historical native range. Historical first source member block_char_start=0 although page-view range starts38 and text begins 求. Current native.left_closed trusts block_char_start0; block boundary cannot prove cross-page lexical/subject closure. Current per-member proof not retained; do not conclude unmeasured fallback.",
+    "t34": "Current raw text SHA/locator match historical native range. Historical first member block_char_start35 could follow a prior terminated sentence in same block. A physically valid sentence can still have unresolved product antecedent; closure responsibility extends beyond physical join. Current preceding original unit absent from retained receipts."
+  }
+}

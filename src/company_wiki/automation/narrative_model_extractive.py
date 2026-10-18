@@ -33,6 +33,7 @@ EXTRACTIVE_PROMPT_VERSION = 'reading-source-extractive/5.0.0'
 EXTRACTIVE_REQUEST_SCHEMA = 'narrative-model-request/6'
 EXECUTION_SCHEMA = 'source-extractive-execution/1'
 EXECUTION_MAX_BYTES = 32 * 1024
+SOURCE_CARD_ALLOCATION_VERSION = 'source-card-allocation/1'
 # A separate conservative sub-budget, not an increase to the canonical64KiB.
 # Identity, prompt review and actual model metadata still face the final exact
 # canonical size check. No oversized card is shortened to enter this budget.
@@ -68,6 +69,38 @@ class ExtractivePlan:
     execution: dict[str, Any]
 
 
+def _source_allocation_order(cards):
+    """Reorder only source-policy slots; unknown metadata keeps native position.
+
+    Policy is an observation supplied by the shared reader, not a prose or
+    model classifier. Context cannot lend priority to factual support. Taking
+    the best *complete* support tuple keeps a multi-part task indivisible;
+    missing/invalid metadata never acquires a guessed default ranking.
+    The lightweight card descriptors contain existing spans, not joined text.
+    """
+    ranked = []
+    for index, card in enumerate(cards):
+        best = None
+        for span in card.support:
+            value = span.structured_value
+            priority = value.get('reading_priority')
+            band = value.get('reading_value_band')
+            score = value.get('reading_score')
+            if (type(priority) is not int or band not in ('meaningful_fact', 'description')
+                    or type(score) is not int or score < 0):
+                continue
+            key = (priority, 0 if band == 'meaningful_fact' else 1, -score)
+            if best is None or key < best:
+                best = key
+        if best is not None:
+            ranked.append((index, best, card))
+    result = list(cards)
+    ordered = sorted(ranked, key=lambda entry: (entry[1], entry[0]))
+    for (slot, _, _), (_, _, card) in zip(ranked, ordered):
+        result[slot] = card
+    return result
+
+
 def compile_extractive_plan(
     selected: NarrativeSelectResult, *, max_draft_bytes: int = EXTRACTIVE_DRAFT_MAX_BYTES,
 ) -> ExtractivePlan:
@@ -92,7 +125,10 @@ def compile_extractive_plan(
     # Encode each existing fragment once. JSON escaping, not character count,
     # determines whether a full quote can enter the canonical draft budget.
     text_bytes = {sid: len(canonical_json(span.raw_text).encode()) - 2 for sid, span in known.items()}
-    for card in source_cards(plan, known):
+    # Select whole cards in source-policy order before POST, then project the
+    # stable original task/claim order below. No quote is materialized merely
+    # for sorting, and the original native scope remains the dedup identity.
+    for card in _source_allocation_order(list(source_cards(plan, known))):
         task = card.task
         row = {'task': task.key, 'task_binding_sha256': canonical_json_hash(task.to_binding()),
                'source_disposition': 'unsupported', 'reason': card.reason, 'claim_id': None,
@@ -121,6 +157,11 @@ def compile_extractive_plan(
                 else:
                     row.update(source_disposition='deferred', reason='draft_byte_budget')
         rows.append(row)
+    positions = {task.key: index for index, task in enumerate(plan.tasks)}
+    rows.sort(key=lambda row: positions[row['task']])
+    claim_positions = {row['claim_id']: positions[row['task']] for row in rows
+                       if row['source_disposition'] == 'admitted'}
+    draft['claims'].sort(key=lambda claim: claim_positions[claim['claim_id']])
     execution = {'schema_version': EXECUTION_SCHEMA, 'plan_sha256': plan.binding_sha256,
                  'tasks': rows, 'source_coverage_complete': all(
                      row['source_disposition'] in {'admitted', 'duplicate'} for row in rows),
@@ -242,6 +283,7 @@ def extractive_boundary_identity(boundary) -> dict[str, Any]:
     dependencies = {name: hashlib.sha256(Path(module.__file__).read_bytes()
         .replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest() for name, module in modules.items()}
     return {'schema_version': 'reading-model-boundary/1',
+        'source_card_allocation_version': SOURCE_CARD_ALLOCATION_VERSION,
         'reading_projection_version': boundary.reading_projection_version,
         'prompt_version': boundary.prompt_version, 'request_schema': boundary.request_schema,
         'decoder_version': boundary.decoder_version,

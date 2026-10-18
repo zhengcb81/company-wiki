@@ -1,0 +1,431 @@
+{
+  "continuity": {
+    "feature_version": "native-narrative-continuity/2",
+    "work_units": 31153,
+    "observed_unit_count": 6580,
+    "complete": false,
+    "deferred_unit_count": 1662,
+    "deferred_limited": true,
+    "unexamined_from_index": null,
+    "diagnostics": [
+      {
+        "code": "CONTINUITY_OPEN_END",
+        "count": 449
+      },
+      {
+        "code": "CONTINUITY_WINDOW_LIMIT",
+        "count": 74
+      }
+    ],
+    "window_count": 349,
+    "blocked_count": 1662,
+    "deferred_range_examples": [
+      {
+        "source_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "page": 2,
+        "first_ordinal": 25,
+        "last_ordinal": 26
+      },
+      {
+        "source_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "page": 7,
+        "first_ordinal": 120,
+        "last_ordinal": 121
+      },
+      {
+        "source_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "page": 7,
+        "first_ordinal": 122,
+        "last_ordinal": 123
+      }
+    ]
+  },
+  "withheld_reasons": {
+    "INCOMPLETE_NATIVE_CONTINUITY": 1
+  },
+  "eligible_packages": 299,
+  "literal_anchors": [
+    {
+      "fact": "f-store-total-2024",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "88bad469d1e5a61fb5397e8672a65d7492cb2ba702ad669224e172c714d44cde",
+            "quote_prefix": "Total 合計",
+            "literal_in_selected_span": false,
+            "matches": []
+          },
+          {
+            "quote_sha256": "aae77f6fa67977f1c901bc24d9cad0dc8d5a53ad142ea02de4d82e131745c73a",
+            "quote_prefix": "7,504",
+            "literal_in_selected_span": false,
+            "matches": []
+          }
+        ],
+        [
+          {
+            "quote_sha256": "39e5691e0b433f4c69d29a1a488814d03707832b1f3ff6fa8dd6f8791069eca9",
+            "quote_prefix": "network of over 7,500 MINISO stores",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:8c85a393e98b13ce16060cce0ff75f1d731561c5c6b031ee9281f9d6322187a0",
+                "locator": "loc:v1/page:12/paragraph:3",
+                "flags": []
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "fact": "f-store-mainland-overseas",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "e9c981a8ddb6bf576fb640ee5f55a1e805035994be615727179bd7762ec51cd9",
+            "quote_prefix": "Mainland China 中國內地",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:04bbba181cc12206e1b8149b69a1b2cc07a01f0685e19b6a1d472b567b64e0ec",
+                "locator": "loc:v1/page:12/table:0/row:4",
+                "flags": [
+                  "table_structure_ambiguous"
+                ]
+              }
+            ]
+          },
+          {
+            "quote_sha256": "52a8b34035404a37db9b09b2c6fe636e0a8fd4727074e26e276095aa60f3aa4d",
+            "quote_prefix": "4,386",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "quote_sha256": "b55ddfe765dcb3f7099d77a6bc268e55cd76ff42f98b5e219349ea191400b89d",
+            "quote_prefix": "Overseas 海外",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:04bbba181cc12206e1b8149b69a1b2cc07a01f0685e19b6a1d472b567b64e0ec",
+                "locator": "loc:v1/page:12/table:0/row:4",
+                "flags": [
+                  "table_structure_ambiguous"
+                ]
+              }
+            ]
+          },
+          {
+            "quote_sha256": "4c24ba5ead1352b124496a107a5f042fab015cb690a3034acc724850622aa405",
+            "quote_prefix": "3,118",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "fact": "f-store-operating-model",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "b817d46fe163802720a603a30de3233f60d93ddf4f45f93dc428ca042ad22e35",
+            "quote_prefix": "Directly operated stores 直營店",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:418a07bb3d081e48401fa535f8967d7198ff5a6961631eaa15744bd9bf10b0ee",
+                "locator": "loc:v1/page:12/paragraph:15",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:04bbba181cc12206e1b8149b69a1b2cc07a01f0685e19b6a1d472b567b64e0ec",
+                "locator": "loc:v1/page:12/table:0/row:4",
+                "flags": [
+                  "table_structure_ambiguous"
+                ]
+              }
+            ]
+          },
+          {
+            "quote_sha256": "bc225b8910e69bdb37d9aae05c86655c3b0cb931d14c52fa1640922a1b1aa26f",
+            "quote_prefix": "Stores operated under MINISO Retail Partner model 名創合夥人門店",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:418a07bb3d081e48401fa535f8967d7198ff5a6961631eaa15744bd9bf10b0ee",
+                "locator": "loc:v1/page:12/paragraph:15",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:04bbba181cc12206e1b8149b69a1b2cc07a01f0685e19b6a1d472b567b64e0ec",
+                "locator": "loc:v1/page:12/table:0/row:4",
+                "flags": [
+                  "table_structure_ambiguous"
+                ]
+              }
+            ]
+          },
+          {
+            "quote_sha256": "1a25fb29c3264de29defa76d97496c81449ddef63b8d0522615ec19a5ea5543d",
+            "quote_prefix": "Stores operated under distributor model 代理門店",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:0d5c7d470f6a66727a54c85b4191a7fd147352ae925d4088cd43334c666ed439",
+                "locator": "loc:v1/page:12/paragraph:8",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:04bbba181cc12206e1b8149b69a1b2cc07a01f0685e19b6a1d472b567b64e0ec",
+                "locator": "loc:v1/page:12/table:0/row:4",
+                "flags": [
+                  "table_structure_ambiguous"
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "fact": "f-top-toy-total",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "1b5a30c3d162a7122d4f114035314198a6352ce581ffbfbcd98813eb3f4c727f",
+            "quote_prefix": "a total of 276 TOP TOY stores",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:e263c449248d45e72f1b3ed03809afde3c0bc59edd8ff637be5d6cf2c3fc1509",
+                "locator": "loc:v1/page:12/paragraph:10",
+                "flags": []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "quote_sha256": "76ea5d326a0501a5f9de80596304b2b183a297b367ce4aba38998c782998a3a7",
+            "quote_prefix": "Number of TOP TOY stores TOP TOY門店數量",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:418a07bb3d081e48401fa535f8967d7198ff5a6961631eaa15744bd9bf10b0ee",
+                "locator": "loc:v1/page:12/paragraph:15",
+                "flags": []
+              },
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:42ddda4f2d54ce9139a103b8f0ec0432a5743cd72ab6e2da5463fc5367b171f6",
+                "locator": "loc:v1/page:12/table:1/row:4",
+                "flags": [
+                  "table_structure_ambiguous"
+                ]
+              }
+            ]
+          },
+          {
+            "quote_sha256": "c76b405781134be1dab7fe45adfb8c32104805a01de7b863e1004b66d56edf9f",
+            "quote_prefix": "276",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:e263c449248d45e72f1b3ed03809afde3c0bc59edd8ff637be5d6cf2c3fc1509",
+                "locator": "loc:v1/page:12/paragraph:10",
+                "flags": []
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "fact": "f-top-toy-mainland",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "48cf367327c75ab8d6049cb9c62415f3a8e57ca428a95dc80b72ba27f8b2c2e2",
+            "quote_prefix": "272 of which located in mainland China",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:e263c449248d45e72f1b3ed03809afde3c0bc59edd8ff637be5d6cf2c3fc1509",
+                "locator": "loc:v1/page:12/paragraph:10",
+                "flags": []
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "fact": "f-top-toy-overseas-commenced",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "1789ee9db015fbe7ae855d2cf2a3aca7ca0aa23b235b161dc3fac917a8228895",
+            "quote_prefix": "TOP TOY has also begun to expand to overseas markets since 2024",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:e263c449248d45e72f1b3ed03809afde3c0bc59edd8ff637be5d6cf2c3fc1509",
+                "locator": "loc:v1/page:12/paragraph:10",
+                "flags": []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "quote_sha256": "878a14303b34be5f7b9fcfdd833db09b281f367f0ac8bd013c544286d9b4eee3",
+            "quote_prefix": "TOP TOY亦於2024年開始擴展海外市場",
+            "literal_in_selected_span": false,
+            "matches": []
+          }
+        ]
+      ]
+    },
+    {
+      "fact": "f-store-network-approximate",
+      "alternative_anchor_sets": [
+        [
+          {
+            "quote_sha256": "f87159cd36a458ff0c7d2402e0d340c118205e91049b886b5988885dd1bfd1a8",
+            "quote_prefix": "over 7,500 MINISO stores",
+            "literal_in_selected_span": true,
+            "matches": [
+              {
+                "span_id": "urn:company-wiki:evidence-span:sha256:8c85a393e98b13ce16060cce0ff75f1d731561c5c6b031ee9281f9d6322187a0",
+                "locator": "loc:v1/page:12/paragraph:3",
+                "flags": []
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  ],
+  "owned_temp_removed": true,
+  "restored_selected_required": 7,
+  "restored_canonical_required": 7,
+  "raw_copies": 0,
+  "api_calls": 0,
+  "parsed_memory_retained_through_diagnosis": true,
+  "source_files_changed": false,
+  "actual_source_bindings": [
+    {
+      "module": "company_wiki.automation.narrative_select",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "sha256": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_evidence",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "sha256": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_reading",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+      "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_finalize",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_document",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_document.py",
+      "sha256": "d2c8b1f9e0384d67ed61a636afdbfe084feeb27324b0a369e82e7b691ac72e54"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_business_policy",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_source_purpose",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+      "sha256": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_operating_relations",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "module": "company_wiki.document_understanding.source_cards",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442"
+    },
+    {
+      "module": "company_wiki.document_understanding.summary_tasks",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\summary_tasks.py",
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5"
+    },
+    {
+      "module": "company_wiki.document_understanding.native_table_bridge",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\native_table_bridge.py",
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1"
+    },
+    {
+      "module": "company_wiki.document_understanding.narrative_continuity",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+      "sha256": "064f50853bfd05c47e51cc5de9b3741850925c70e862efb122b00bdf1556636c"
+    },
+    {
+      "module": "company_wiki.document_understanding.decision_inventory",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+      "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+    },
+    {
+      "module": "company_wiki.automation.narrative_model_extractive",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\narrative_model_extractive.py",
+      "sha256": "ee8b3e8fe3294149d17087fe3ede1b5fecc7c88dd414e9caa56d355d5b964f48"
+    }
+  ],
+  "experiment": {
+    "baseline": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+    "only_runtime_override": "_Analysis.finish old AST function bound to current class; current left_closed field retained",
+    "method_ast_sha256": "ea88596b873d3a896aea39fd66b169aea92afe2d57889e8c0ac42ae6158a44a5",
+    "scope": "DIAGNOSTIC_ABLATION_NOT_PRODUCTION_PASS",
+    "production_limits_unchanged": true
+  },
+  "conclusion": "OLD_FINISH_RESTORES_ALL_REQUIRED_NEW_CLOSURE_REGRESSION"
+}

@@ -1,0 +1,782 @@
+{
+  "schema_version": "du11-three-incident-local-native-observation/1",
+  "source_sha_before": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "source_sha_after": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "unchanged": true,
+  "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\semi_annual\\2026-08-19_cninfo_1225482884_2026年半年度报告.pdf",
+  "physical_pages_read": [
+    16,
+    17,
+    31
+  ],
+  "physical_page_total": 210,
+  "scoped_parse_only": true,
+  "raw_copies": 0,
+  "API_calls": 0,
+  "whole_report_parse": false,
+  "local_units": 102,
+  "scope_warning": "Partial3physical-page pipeline is independent diagnostic; not claimed identical full-report routing. Native units/offsets/fonts read from same real PDF; historical actual full bundle package types separately labeled.",
+  "continuity_diagnostics": [
+    {
+      "code": "CONTINUITY_OPEN_END",
+      "count": 6
+    },
+    {
+      "code": "CONTINUITY_WINDOW_LIMIT",
+      "count": 1
+    }
+  ],
+  "incidents": [
+    {
+      "task": "t3",
+      "matched_source_locator": "loc:v1/page:31/paragraph:21",
+      "text_sha256": "f27e52844207857a4a52880dd2d0c3ce33a658c63fe172d949016dfe523b95ab",
+      "context_max300": "3、政府支持与税收优惠政策变动的风险\n如果公司未来不能持续获得政府支持或政府支持显著降低，将会对公司经营业绩产生不利影\n响。\n公司为高新技术企业，报告期内公司享受高新技术企业15%所得税的优惠税率，如果国家",
+      "context_chars": 103,
+      "historical_full_bundle_group": [
+        {
+          "kind": "risk",
+          "section_role": "management_discussion"
+        }
+      ],
+      "local_scoped_input_packages": [
+        {
+          "kind": "risk",
+          "package_id": "m34",
+          "members": 1,
+          "truncated": false
+        }
+      ],
+      "local_scoped_output_packages": [
+        {
+          "kind": "risk",
+          "members": 1,
+          "required": 1
+        }
+      ],
+      "incident_blocked": false,
+      "local_native_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ac4e21b15b27b565396e5b3c4f415a50205385cbaf2dbc4ed39078d62c536433",
+          "locator": "loc:v1/page:31/paragraph:20",
+          "text_sha256": "8a1f87e3ee409ba0ce5355892f5099dd263a798b5af56d7f5cba4d44e030d8ea",
+          "chars": 18,
+          "pdf_block": 17,
+          "block_char_start": 0,
+          "block_char_end": 18,
+          "bbox": [
+            110.87999725341797,
+            569.5842895507812,
+            295.2043151855469,
+            584.0261840820312
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 1,
+              "font_size": 10.449999809265137,
+              "font_weight": "bold",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            },
+            {
+              "char_start": 1,
+              "char_end": 18,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "heading",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "risk"
+          },
+          "blocked": false,
+          "window_ids": []
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:c1188d4440eed395de140ad447d458867f0c8a9efdf296d33b6e9f5bae050f60",
+          "locator": "loc:v1/page:31/paragraph:21",
+          "text_sha256": "f27e52844207857a4a52880dd2d0c3ce33a658c63fe172d949016dfe523b95ab",
+          "chars": 40,
+          "pdf_block": 18,
+          "block_char_start": 0,
+          "block_char_end": 40,
+          "bbox": [
+            110.87999725341797,
+            592.029296875,
+            530.76318359375,
+            602.4793090820312
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 40,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "risk"
+          },
+          "blocked": false,
+          "window_ids": []
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0b9332a8d8d22f3639e29c20751d5d8e24a377bc95d4921b79ae65fc9ce84129",
+          "locator": "loc:v1/page:31/paragraph:22",
+          "text_sha256": "0fbe2a38d0a8ce3062c6b23e6dc9583d848ddc77c3b51edb9ffa4e848c2af1fa",
+          "chars": 2,
+          "pdf_block": 19,
+          "block_char_start": 0,
+          "block_char_end": 2,
+          "bbox": [
+            89.87999725341797,
+            612.4293212890625,
+            110.76984405517578,
+            622.8793334960938
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 2,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "risk"
+          },
+          "blocked": false,
+          "window_ids": []
+        }
+      ]
+    },
+    {
+      "task": "t32",
+      "matched_source_locator": "loc:v1/page:17/paragraph:2",
+      "text_sha256": "ea0d45f6e102d685284980b39c940109c6896d9f277847d18b3c2a86c51b5612",
+      "context_max300": "同期，公司开发出应用于先进逻辑器件的金属栅系列产品Preforma Uniflash ® ALD 氮化钛，\nALD 钛铝，ALD 氮化钽产品，已完成多个先进逻辑客户设备验证，可满足先进逻辑客户性能需\n求的同时，设备的薄膜均一性，污染物控制和生产效率均达到世界先进水平。该系列设备已付运\n到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。其中，ALD 氮化钛薄膜也可运用",
+      "context_chars": 186,
+      "historical_full_bundle_group": [
+        {
+          "kind": "native_continuity",
+          "section_role": "unknown"
+        }
+      ],
+      "local_scoped_input_packages": [
+        {
+          "kind": "background",
+          "package_id": "m14",
+          "members": 1,
+          "truncated": false
+        }
+      ],
+      "local_scoped_output_packages": [
+        {
+          "kind": "native_continuity",
+          "members": 3,
+          "required": 1
+        }
+      ],
+      "incident_blocked": false,
+      "local_native_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:2ac378360e521b34af633e4c383a9d6f165adfbedb8da99a170edcfc30fc87bd",
+          "locator": "loc:v1/page:17/paragraph:2",
+          "text_sha256": "ea0d45f6e102d685284980b39c940109c6896d9f277847d18b3c2a86c51b5612",
+          "chars": 34,
+          "pdf_block": 2,
+          "block_char_start": 0,
+          "block_char_end": 34,
+          "bbox": [
+            89.87999725341797,
+            77.82935333251953,
+            530.7546997070312,
+            88.27935028076172
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 34,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:33377ee69cf3d903c62959691c7c2cb6de5c77a4d8d0fbac320bb90930e6c688"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:68013aa19efaa16a8ed0dbc3fd73aff84cc23282eb1fcd960125c5727144fbdc",
+          "locator": "loc:v1/page:17/paragraph:3",
+          "text_sha256": "b5541d96de69a4e4461dfec2e9b166e0776822ff578659e1ddd9f38385caa329",
+          "chars": 8,
+          "pdf_block": 2,
+          "block_char_start": 34,
+          "block_char_end": 42,
+          "bbox": [
+            89.87999725341797,
+            77.82935333251953,
+            530.7546997070312,
+            88.27935028076172
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 8,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:33377ee69cf3d903c62959691c7c2cb6de5c77a4d8d0fbac320bb90930e6c688"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:629f86365de638e5fadd2edcd63fd997be9836397acbfaa877fa0b20d340f788",
+          "locator": "loc:v1/page:17/paragraph:4",
+          "text_sha256": "5456e2bfff1f98ab0b70cffb3209ca4c4909459a05af137ca7951b20b25fe21b",
+          "chars": 27,
+          "pdf_block": 3,
+          "block_char_start": 0,
+          "block_char_end": 27,
+          "bbox": [
+            89.87999725341797,
+            96.69629669189453,
+            523.4492797851562,
+            110.40670013427734
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 27,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:33377ee69cf3d903c62959691c7c2cb6de5c77a4d8d0fbac320bb90930e6c688"
+          ]
+        }
+      ]
+    },
+    {
+      "task": "t34",
+      "matched_source_locator": "loc:v1/page:17/paragraph:12",
+      "text_sha256": "f36945f2c739398bbada242bee68bbeb7a6c81b48ff05a8c25379f3aca8334e5",
+      "context_max300": "针对先进逻辑、先进存储器件的高选择比、低电阻金属-半导体接触层需求，公司推出了金\n属硅化物集成系统Preforma Uniflash ®，包含原位高选择性前清洁产品SA & SU，等离子体增强\n化学气相沉积金属钛SPTi，和原子层沉积氮化钛ALD TiNM 产品。该系列产品已交付多个先进\n逻辑、先进存储客户，现场验证顺利推进，能够满足客户各项性能需求的同时，实现高生产效\n率。中微公司金属硅化物集成系统适配先进逻辑器件中的源漏接触层，背部供电接触层及三维存",
+      "context_chars": 229,
+      "historical_full_bundle_group": [
+        {
+          "kind": "native_continuity",
+          "section_role": "unknown"
+        }
+      ],
+      "local_scoped_input_packages": [
+        {
+          "kind": "background",
+          "package_id": "m17",
+          "members": 3,
+          "truncated": false
+        }
+      ],
+      "local_scoped_output_packages": [
+        {
+          "kind": "native_continuity",
+          "members": 3,
+          "required": 1
+        }
+      ],
+      "incident_blocked": false,
+      "local_native_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d24231c9cc87a22d97c0a45b76d8177c62b92eea22f84e4fc391585e66654eb2",
+          "locator": "loc:v1/page:17/paragraph:9",
+          "text_sha256": "f5b3f1d00bb99decbaa83cb863486d44f971fd7f7ce2961f6c5da0e4b0bcea0d",
+          "chars": 40,
+          "pdf_block": 7,
+          "block_char_start": 0,
+          "block_char_end": 40,
+          "bbox": [
+            110.87999725341797,
+            178.41729736328125,
+            523.6846923828125,
+            192.127685546875
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 40,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:e607976e762776726c77b055ec74d1fec8fef2cb8d22860a5bf2624b8490c995"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:428a691e21114c891658a21322f9bdab7ab2605d049246480db2c447e34918f9",
+          "locator": "loc:v1/page:17/paragraph:10",
+          "text_sha256": "9d604caf73f12c8ad7b73f30ce6c1fc8e169b3446730e5b931197a49f8cf03ea",
+          "chars": 55,
+          "pdf_block": 8,
+          "block_char_start": 0,
+          "block_char_end": 55,
+          "bbox": [
+            89.87999725341797,
+            198.8173065185547,
+            525.4877319335938,
+            212.52769470214844
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 25,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            },
+            {
+              "char_start": 26,
+              "char_end": 27,
+              "font_size": 6.849999904632568,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            },
+            {
+              "char_start": 27,
+              "char_end": 55,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:e607976e762776726c77b055ec74d1fec8fef2cb8d22860a5bf2624b8490c995"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6b2d3be87c0ae5cb181b436be12f3b46e2a5653b1f136bc9a1ddefc6bdfdb74c",
+          "locator": "loc:v1/page:17/paragraph:11",
+          "text_sha256": "82f302b60d9b3c0d21907fe9ac8c8b35282f9fa44f7de78bdb51d20fd1ea2c39",
+          "chars": 35,
+          "pdf_block": 9,
+          "block_char_start": 0,
+          "block_char_end": 35,
+          "bbox": [
+            89.87999725341797,
+            217.27035522460938,
+            521.8854370117188,
+            232.9276885986328
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 30,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            },
+            {
+              "char_start": 30,
+              "char_end": 31,
+              "font_size": 6.849999904632568,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            },
+            {
+              "char_start": 32,
+              "char_end": 35,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:e607976e762776726c77b055ec74d1fec8fef2cb8d22860a5bf2624b8490c995"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4ac7a953f721811e444b0238849586f12d68fe8c6ea0ef98177d4de57f6131d9",
+          "locator": "loc:v1/page:17/paragraph:12",
+          "text_sha256": "f36945f2c739398bbada242bee68bbeb7a6c81b48ff05a8c25379f3aca8334e5",
+          "chars": 12,
+          "pdf_block": 9,
+          "block_char_start": 35,
+          "block_char_end": 47,
+          "bbox": [
+            89.87999725341797,
+            217.27035522460938,
+            521.8854370117188,
+            232.9276885986328
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 12,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:52a3a0a0b61cded7d52dd81faa598f02f1967b26e8634a036543ba9a9a616256"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d0c07a9e6414602c8ec261661b52264ea58d88acb4ba232e9ab2a8ec36920cf3",
+          "locator": "loc:v1/page:17/paragraph:13",
+          "text_sha256": "0c7a4a90d56f382379562a0eb878944ca166c64a26b9dc43e4556ee70b041feb",
+          "chars": 41,
+          "pdf_block": 10,
+          "block_char_start": 0,
+          "block_char_end": 41,
+          "bbox": [
+            89.87999725341797,
+            241.27035522460938,
+            520.3148193359375,
+            251.72035217285156
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 41,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:52a3a0a0b61cded7d52dd81faa598f02f1967b26e8634a036543ba9a9a616256"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6cb36c8cf8a8e7dc03cfbc5fd1a229c57eb9db327c4a79f446ede5ea3eed56a9",
+          "locator": "loc:v1/page:17/paragraph:14",
+          "text_sha256": "ec94fa76c5da806069c6f60ca5510c540cd0d533dddb2913ddc6c49363c7286b",
+          "chars": 2,
+          "pdf_block": 11,
+          "block_char_start": 0,
+          "block_char_end": 2,
+          "bbox": [
+            89.87999725341797,
+            261.67034912109375,
+            530.7546997070312,
+            272.1203308105469
+          ],
+          "layout": {
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "coordinate_frame": "dict",
+            "rotation": 0
+          },
+          "font_hint": [
+            {
+              "char_start": 0,
+              "char_end": 2,
+              "font_size": 10.449999809265137,
+              "font_weight": "regular",
+              "char_alignment": "exact",
+              "coordinate_frame": "dict",
+              "source": "pdf_native_single_textpage"
+            }
+          ],
+          "observation_kind": "paragraph",
+          "source_role": "company_filing",
+          "reading_scope": {
+            "profile_id": "cn_interim",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "section_role": "unknown"
+          },
+          "blocked": false,
+          "window_ids": [
+            "native-continuity:52a3a0a0b61cded7d52dd81faa598f02f1967b26e8634a036543ba9a9a616256"
+          ]
+        }
+      ]
+    }
+  ],
+  "source_bindings": {
+    "src\\company_wiki\\source_catalog\\narrative_evidence.py": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1",
+    "src\\company_wiki\\source_catalog\\narrative_reading.py": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9",
+    "src\\company_wiki\\document_understanding\\narrative_continuity.py": "064f50853bfd05c47e51cc5de9b3741850925c70e862efb122b00bdf1556636c"
+  },
+  "source_boundary_facts": {
+    "risk31": {
+      "head_block": 17,
+      "first_block": 18,
+      "tail_block": 19,
+      "first_bbox": [
+        110.87999725341797,
+        592.029296875,
+        530.76318359375,
+        602.4793090820312
+      ],
+      "tail_bbox": [
+        89.87999725341797,
+        612.4293212890625,
+        110.76984405517578,
+        622.8793334960938
+      ],
+      "font_size": 10.449999809265137,
+      "font_weight": "regular",
+      "horizontal_overlap": -0.1101531982421875,
+      "x0_delta": -21.0,
+      "vertical_gap": 9.95001220703125,
+      "note": "True first-line indentation plus two-character final line; current overlap edge does not accept this measured shape."
+    },
+    "cross_page16_17": {
+      "previous_page_body_blocks": [
+        33,
+        34
+      ],
+      "previous_tail_bbox": [
+        89.87999725341797,
+        747.9373168945312,
+        526.677734375,
+        761.647705078125
+      ],
+      "next_head_bbox": [
+        89.87999725341797,
+        77.82935333251953,
+        530.7546997070312,
+        88.27935028076172
+      ],
+      "both_frames": {
+        "width": 595.2999877929688,
+        "height": 841.9000244140625,
+        "rotation": 0
+      },
+      "body_font_size": 10.449999809265137,
+      "body_weight": "regular",
+      "previous_series_block_has_measured_superscript": true,
+      "current_column_proof": "layout.column=None; compatible measured margin/font/frame does not by itself add current cross-page provenance edge",
+      "unclosed_previous_body": true,
+      "page_header_footer_native_blocks": [
+        0,
+        1
+      ]
+    },
+    "anaphor17": {
+      "prior_definition_locators": [
+        "loc:v1/page:17/paragraph:9",
+        "loc:v1/page:17/paragraph:10",
+        "loc:v1/page:17/paragraph:11"
+      ],
+      "dependent_locators": [
+        "loc:v1/page:17/paragraph:12",
+        "loc:v1/page:17/paragraph:13",
+        "loc:v1/page:17/paragraph:14"
+      ],
+      "same_native_block_at_split": 9,
+      "previous_char_end": 35,
+      "dependent_char_start": 35,
+      "previous_sentence_terminated": true,
+      "interpretation": "One immediately preceding complete collective product-system enumeration exists. This is original context, not proof that a single unnamed individual product owns every downstream status."
+    }
+  }
+}

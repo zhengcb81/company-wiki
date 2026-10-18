@@ -23,6 +23,8 @@ class OperatingFact:
     reasons: tuple[str, ...] = ()
     score: int = 0
     financial_exempt: bool = False
+    # Reading-only source observation. Legacy recognizers retain unknown.
+    purpose: str = "unknown"
 
 
 _NONE = OperatingFact()

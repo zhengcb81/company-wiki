@@ -16,6 +16,29 @@ def test_legacy_canonical_summary_is_unchanged(materials):
     assert extract_summary_execution(summary.to_dict()) is None
 
 
+def test_mixed_usable_and_unresolved_table_card_survives_full_wrapper_and_terminal_path(materials):
+    from dataclasses import replace
+    from company_wiki.automation.narrative_contracts import NarrativeSummaryResult
+    from company_wiki.automation.narrative_model_extractive import compile_extractive_plan
+    selected, summary, _ = materials
+    selected = replace(selected, evidence_spans=(selected.evidence_spans[0],
+        replace(selected.evidence_spans[1], quality_flags=("table_structure_ambiguous",))),
+        reading_context={"schema_version": "du-production-reading/1", "groups": []})
+    plan = compile_extractive_plan(selected)
+    wire = summary.to_dict()
+    wire['draft'] = plan.draft
+    summary = NarrativeSummaryResult.from_dict(wire)
+    value = wrap_summary(summary, plan.execution)
+    assert parse_summary_job_result(value, selected=selected) == summary
+    assert len(summary.draft.claims) == 1
+    assert extract_summary_execution({"schema_version": "narrative-terminal-receipt/1.0",
+        "execution": plan.execution, "original_result_sha256": "f" * 64}) == plan.execution
+    # Another *known* reason is not interchangeable with the observed cause.
+    value['execution']['tasks'][1]['reason'] = 'source_not_parsed'
+    with pytest.raises(NarrativeContractError):
+        parse_summary_job_result(value, selected=selected)
+
+
 def test_wrapper_bound_to_actual_selected_and_inner_public_wire_is_unchanged(materials):
     selected, summary, report = materials
     value = wrap_summary(summary, report)

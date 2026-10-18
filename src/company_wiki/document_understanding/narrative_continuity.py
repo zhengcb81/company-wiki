@@ -15,7 +15,7 @@ from hashlib import sha256
 from math import isfinite
 from typing import Any
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/1"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/2"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -64,6 +64,7 @@ class _Native:
     scope: tuple[Any, ...]
     column: Any
     font: tuple[float, str]
+    left_closed: bool
 
 
 class _Analysis:
@@ -84,6 +85,7 @@ class _Analysis:
         self.deferred: list[str] = []
         self.deferred_ranges: list[dict[str, Any]] = []
         self.windows: list[dict[str, Any]] = []
+        self.standalone_units = 0
 
     def charge(self, amount: int = 1) -> bool:
         if self.stopped:
@@ -137,6 +139,7 @@ class _Analysis:
         profile: Mapping[str, Any],
         section: Any,
         headings: set[str],
+        left_closed: bool,
     ) -> _Native | None:
         if not self.charge():
             return None
@@ -218,6 +221,7 @@ class _Analysis:
             scope,
             layout.get("column"),
             font,
+            left_closed,
         )
 
     def edge(self, left: _Native, right: _Native) -> dict[str, Any] | None:
@@ -323,11 +327,22 @@ class _Analysis:
         deferred in full; its unsupported tail must not become a new fact.
         """
         start = 0
+        if run and not run[0].left_closed:
+            self.diagnostics["CONTINUITY_OPEN_START"] += 1
+            self.defer(run)
+            return
         while start < len(run):
             if len(run) - start < 2:
                 if start > 0 and not _terminal(run[start].unit["text"]):
                     self.diagnostics["CONTINUITY_OPEN_END"] += 1
                     self.defer(run[start:])
+                elif start == 0:
+                    # No measured edge exists for a singleton. A physical
+                    # block can contain headings, list introductions or several
+                    # sentences, so missing terminal punctuation does not prove
+                    # that all its original business material is incomplete.
+                    # It remains unassessed, never a fabricated closed window.
+                    self.standalone_units += 1
                 return
             blocks: set[int] = set()
             chars = 0
@@ -393,6 +408,7 @@ def build_native_continuity(
     proof: list[dict[str, Any]] = []
     seen = 0
     unexamined = None
+    previous_observed = None
     for unit in units:
         if state.stopped:
             break
@@ -402,13 +418,27 @@ def build_native_continuity(
             break
         seen += 1
         uid = str(unit.get("unit_id") or "")
+        meta = provenance.get(uid, {})
+        left_closed = type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0
+        if not left_closed and previous_observed is not None:
+            previous_meta = provenance.get(previous_observed.get("unit_id"), {})
+            end, start = previous_meta.get("block_char_end"), meta.get("block_char_start")
+            left_closed = bool(
+                type(end) is int and type(start) is int and 0 <= start - end <= 2
+                and meta.get("block_sha256") and meta.get("block_sha256") == previous_meta.get("block_sha256")
+                and meta.get("source_id") == previous_meta.get("source_id")
+                and unit.get("page") == previous_observed.get("page")
+                and (_terminal(previous_observed.get("text", ""))
+                     or previous_observed.get("unit_id") in headings))
         current = state.native(
             unit,
             provenance.get(uid, {}),
             profiles.get(uid, {}),
             unit_section.get(uid),
             headings,
+            left_closed,
         )
+        previous_observed = unit
         if state.stopped:
             unexamined = seen - 1
             break
@@ -430,6 +460,8 @@ def build_native_continuity(
         "windows": state.windows,
         "work_units": state.work,
         "observed_unit_count": seen,
+        "standalone_unit_count": state.standalone_units,
+        "semantic_status": "not_evaluated",
         "complete": not state.diagnostics and not state.stopped,
         "deferred_unit_count": len(state.deferred),
         "deferred_unit_ids": state.deferred[:128],

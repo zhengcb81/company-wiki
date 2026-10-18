@@ -1,0 +1,288 @@
+{
+  "sample": "hk-annual",
+  "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+  "source_bytes": 2230253,
+  "gold_sha256": "10f9e3b98d1fc99d49c1edf2abba025f8ea3ea060916aac8430a6732fb78c5b7",
+  "actual_source_metadata": {
+    "document_kind": "annual_report",
+    "language": "mixed",
+    "source_class": "filing",
+    "title": null
+  },
+  "status": "ENGINEERING_PASS_REQUIRED_RECALL_FAIL_CONTENT_OPEN",
+  "scope": "offline_engineering_not_final_content_acceptance",
+  "parse_select_seconds": 25.13,
+  "pages": 246,
+  "pages_read": 246,
+  "parsed_units": 6580,
+  "source_errors": [],
+  "source_coverage_complete": false,
+  "selection_status": "partial",
+  "selected_count": 96,
+  "selected_chars": 18422,
+  "candidate_count": 3928,
+  "omitted_count": 3832,
+  "actual_work": {
+    "used": 12092764,
+    "limit": 16000000,
+    "exhausted": false
+  },
+  "draft_bytes": 38956,
+  "tasks": 56,
+  "claims": 50,
+  "dispositions": {
+    "unsupported": 6,
+    "admitted": 50
+  },
+  "selected_gold": [
+    {
+      "id": "f-store-total-2024",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-store-mainland-overseas",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-store-operating-model",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-top-toy-total",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-top-toy-mainland",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-top-toy-overseas-commenced",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-store-network-approximate",
+      "supported": false,
+      "all_anchors_individually_present": false
+    }
+  ],
+  "canonical_gold": [
+    {
+      "id": "f-store-total-2024",
+      "supported": false,
+      "claim_ids": []
+    },
+    {
+      "id": "f-store-mainland-overseas",
+      "supported": false,
+      "claim_ids": []
+    },
+    {
+      "id": "f-store-operating-model",
+      "supported": false,
+      "claim_ids": []
+    },
+    {
+      "id": "f-top-toy-total",
+      "supported": false,
+      "claim_ids": []
+    },
+    {
+      "id": "f-top-toy-mainland",
+      "supported": false,
+      "claim_ids": []
+    },
+    {
+      "id": "f-top-toy-overseas-commenced",
+      "supported": false,
+      "claim_ids": []
+    },
+    {
+      "id": "f-store-network-approximate",
+      "supported": false,
+      "claim_ids": []
+    }
+  ],
+  "selected_required": 0,
+  "canonical_required": 0,
+  "required_total": 7,
+  "ambiguous_raw_evidence_count": 6,
+  "ambiguous_summary_support_count": 0,
+  "ambiguous_samples": [
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:04bbba181cc12206e1b8149b69a1b2cc07a01f0685e19b6a1d472b567b64e0ec",
+      "locator": "loc:v1/page:12/table:0/row:4",
+      "text_sha256": "5f97bcd1e2edeba78448fe97e75657461b85276dd3767ff5d733b58c798254df",
+      "chars": 366,
+      "prefix": "Number of MINISO stores 名創優品門店數量\nMainland China 中國內地 3,926\nDirectly operated stores 直營店 26\nStores op",
+      "suffix": " 283\nStores operated under distributor model 代理門店 1,966",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 2,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 3
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:42ddda4f2d54ce9139a103b8f0ec0432a5743cd72ab6e2da5463fc5367b171f6",
+      "locator": "loc:v1/page:12/table:1/row:4",
+      "text_sha256": "04ab0c521891262834c8ed25a6e681ecb31d5be151276aaf85ec09b341cb8708",
+      "chars": 130,
+      "prefix": "Number of TOP TOY stores TOP TOY門店數量\nDirectly operated stores 直營店 14\nStores operated under MINISO Re",
+      "suffix": " operated under MINISO Retail Partner model 名創合夥人門店 134",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 2,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 3
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:43cc6c44c32102b4a91fa4d577102bcff84d67ee446472d8df420f696bf21c36",
+      "locator": "loc:v1/page:19/table:0/row:4",
+      "text_sha256": "9b6c959313ab4278f771b494dd8da956f17e9d47a26ded42469a9b24e949c743",
+      "chars": 553,
+      "prefix": "MINISO stores in overseas markets\n海外市場的名創優品門店\nTotal GMV (RMB in millions)\n總GMV（人民幣百萬元） 6,452 10,989\n",
+      "suffix": "down low-single digit up low-single digit\n下降低個位數 增加低個位數",
+      "flags": [
+        "table_structure_ambiguous"
+      ],
+      "reading_priority": 2,
+      "reading_value_band": "meaningful_fact",
+      "reading_score": 0
+    }
+  ],
+  "exact_source_material_verified": true,
+  "canonical_claim_text_unchanged": true,
+  "source_priority_complete_count": 96,
+  "incident_markers": [
+    {
+      "old_task": "t7",
+      "old_body_text_sha256": "c47553d4d00e4ae70875e530411a01bc1801a66ca3ae1d2ea0469a3029a7f51b",
+      "selected_matches": 1,
+      "new_claim_ids": [
+        "t7-source"
+      ],
+      "source_sample": {
+        "id": "urn:company-wiki:evidence-span:sha256:5583d237ccc4a988aef591f5d6da13d840e896a126f30dcbb8b0d41a2b212fcc",
+        "locator": "loc:v1/page:32/paragraph:15",
+        "text_sha256": "c47553d4d00e4ae70875e530411a01bc1801a66ca3ae1d2ea0469a3029a7f51b",
+        "chars": 348,
+        "prefix": "• \nthe purchase of wealth management products is limited to \nlow-risk products such as term deposits",
+        "suffix": "such as \nsecurities and futures is strictly prohibited.",
+        "flags": [],
+        "reading_priority": 2,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3
+      },
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t8",
+      "old_body_text_sha256": "db224ba77dbec9f56bdddf461d26f519869afd06206bf021278798f3f865017e",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t36",
+      "old_body_text_sha256": "47d0d9a77ff0a4152686883d388262c7e1ad0a3eaddf750816eff1862d85dbd8",
+      "selected_matches": 1,
+      "new_claim_ids": [
+        "t34-source"
+      ],
+      "source_sample": {
+        "id": "urn:company-wiki:evidence-span:sha256:36e11ab8c4c191c546de9ceae22eb2262900bd04c007fc562123b580f8803883",
+        "locator": "loc:v1/page:31/paragraph:29",
+        "text_sha256": "47d0d9a77ff0a4152686883d388262c7e1ad0a3eaddf750816eff1862d85dbd8",
+        "chars": 857,
+        "prefix": "We believe we can make better use of our cash by making \nappropriate investments in short-term inves",
+        "suffix": " and measures were formulated by our senior management.",
+        "flags": [],
+        "reading_priority": 2,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3
+      },
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t37",
+      "old_body_text_sha256": "d642a3062328e592ac4735ff2bd67dc49c05febe9829254917e44199a5712e43",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t38",
+      "old_body_text_sha256": "1c5650306f23ba9c1904287b1bbe14999d4cf9caa55cb060f78817c854d260dd",
+      "selected_matches": 1,
+      "new_claim_ids": [
+        "t35-source"
+      ],
+      "source_sample": {
+        "id": "urn:company-wiki:evidence-span:sha256:2805f937f7d3f505e9850a398c79df1884b0b589a8a183e981698756fc53580f",
+        "locator": "loc:v1/page:32/paragraph:16",
+        "text_sha256": "1c5650306f23ba9c1904287b1bbe14999d4cf9caa55cb060f78817c854d260dd",
+        "chars": 346,
+        "prefix": "• \nthe expected return of the purchased wealth management \nproducts should be not lower than bank’s ",
+        "suffix": "tion scale, \noverall strength and good credit standing.",
+        "flags": [],
+        "reading_priority": 2,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3
+      },
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t52",
+      "old_body_text_sha256": "3d2819f170e60e2bc54daf8a18b5adbc37598511b3a87e7a88917b4d324ea199",
+      "selected_matches": 1,
+      "new_claim_ids": [
+        "t48-source"
+      ],
+      "source_sample": {
+        "id": "urn:company-wiki:evidence-span:sha256:669051f9a9c65d95c89e4d101a764ec8467edddc88b76e05ed6f87466d36eb15",
+        "locator": "loc:v1/page:37/paragraph:7/chars:328-417",
+        "text_sha256": "3d2819f170e60e2bc54daf8a18b5adbc37598511b3a87e7a88917b4d324ea199",
+        "chars": 89,
+        "prefix": "我們的業務涉及招股章程「風險因素」一節及報告期\n向美國證監會提交的表格20-F所載的若干風險。以\n下概述本集團面臨的若干主要風險及不確定因素，\n其中部分風險及不確定因素無法控制。",
+        "suffix": "格20-F所載的若干風險。以\n下概述本集團面臨的若干主要風險及不確定因素，\n其中部分風險及不確定因素無法控制。",
+        "flags": [],
+        "reading_priority": 2,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3
+      },
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    },
+    {
+      "old_task": "t55",
+      "old_body_text_sha256": "0a31794b45ed01e8aa95cae0b6be3009973c6ea2aeff9712619012f420c12042",
+      "selected_matches": 0,
+      "new_claim_ids": [],
+      "source_sample": null,
+      "scope": "literal_incident_marker_presence_not_general_semantic_judgment"
+    }
+  ],
+  "deferral_reasons": {
+    "SELECTION_BUDGET": 128
+  },
+  "actual_work_accounts": [
+    {
+      "used": 12092764,
+      "limit": 16000000,
+      "exhausted": false
+    }
+  ],
+  "seconds": 26.285,
+  "original_unchanged": true,
+  "gold_unchanged": true,
+  "api_calls": 0,
+  "raw_copies": 0
+}

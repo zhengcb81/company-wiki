@@ -1,0 +1,93 @@
+{
+  "schema_version": "du11-real-source-offline-probe/1",
+  "source_bindings": [
+    {
+      "module": "company_wiki.automation.narrative_select",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "sha256": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_evidence",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "sha256": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_reading",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+      "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_finalize",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_document",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_document.py",
+      "sha256": "d2c8b1f9e0384d67ed61a636afdbfe084feeb27324b0a369e82e7b691ac72e54"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_business_policy",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_source_purpose",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+      "sha256": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_operating_relations",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "module": "company_wiki.document_understanding.source_cards",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442"
+    },
+    {
+      "module": "company_wiki.document_understanding.summary_tasks",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\summary_tasks.py",
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5"
+    },
+    {
+      "module": "company_wiki.document_understanding.native_table_bridge",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\native_table_bridge.py",
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1"
+    },
+    {
+      "module": "company_wiki.document_understanding.narrative_continuity",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+      "sha256": "064f50853bfd05c47e51cc5de9b3741850925c70e862efb122b00bdf1556636c"
+    },
+    {
+      "module": "company_wiki.document_understanding.decision_inventory",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+      "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+    },
+    {
+      "module": "company_wiki.automation.narrative_model_extractive",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\narrative_model_extractive.py",
+      "sha256": "ee8b3e8fe3294149d17087fe3ede1b5fecc7c88dd414e9caa56d355d5b964f48"
+    }
+  ],
+  "source_unchanged_during_probe": true,
+  "api_calls": 0,
+  "raw_copies": 0,
+  "owned_temp_removed": true,
+  "metadata_sha256": "d30bd1204e904c935a695d825888e819bc60d863fa3e48a68f70f4fda7a85ae5",
+  "samples": [
+    {
+      "sample": "hk-annual",
+      "status": "ENGINEERING_PASS_REQUIRED_RECALL_FAIL_CONTENT_OPEN"
+    }
+  ],
+  "limits": {
+    "work": 16000000,
+    "spans": 96,
+    "characters": 48000,
+    "draft_bytes": 57344
+  },
+  "content_acceptance": "OPEN; engineering/source-anchor observations are not final semantic or provider C acceptance"
+}

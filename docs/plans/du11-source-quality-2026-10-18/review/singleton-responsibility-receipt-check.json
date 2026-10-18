@@ -1,0 +1,184 @@
+{
+  "ablation_metrics": {
+    "baseline": {
+      "status": "ENGINEERING_PASS_REQUIRED_RECALL_FAIL_CONTENT_OPEN",
+      "selected_count": 96,
+      "claims": 50,
+      "tasks": 56,
+      "actual_work": {
+        "used": 12092764,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selection_status": "partial",
+      "source_coverage_complete": false,
+      "selected_gold_count": {
+        "supported": 0,
+        "total": 7
+      },
+      "canonical_gold_count": {
+        "supported": 0,
+        "total": 7
+      }
+    },
+    "ablation-old-finish": {
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "selected_count": 96,
+      "claims": 48,
+      "tasks": 54,
+      "actual_work": {
+        "used": 12098578,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selection_status": "partial",
+      "source_coverage_complete": false,
+      "selected_gold_count": {
+        "supported": 7,
+        "total": 7
+      },
+      "canonical_gold_count": {
+        "supported": 7,
+        "total": 7
+      }
+    },
+    "ablation-open-start-only": {
+      "status": "ENGINEERING_PASS_REQUIRED_RECALL_FAIL_CONTENT_OPEN",
+      "selected_count": 96,
+      "claims": 50,
+      "tasks": 56,
+      "actual_work": {
+        "used": 12092764,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selection_status": "partial",
+      "source_coverage_complete": false,
+      "selected_gold_count": {
+        "supported": 0,
+        "total": 7
+      },
+      "canonical_gold_count": {
+        "supported": 0,
+        "total": 7
+      }
+    },
+    "final-singleton-responsibility": {
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "selected_count": 96,
+      "claims": 48,
+      "tasks": 54,
+      "actual_work": {
+        "used": 12098578,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "selection_status": "partial",
+      "source_coverage_complete": false,
+      "selected_gold_count": {
+        "supported": 7,
+        "total": 7
+      },
+      "canonical_gold_count": {
+        "supported": 7,
+        "total": 7
+      }
+    }
+  },
+  "freeze_matches": {
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": true,
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+    "src/company_wiki/source_catalog/narrative_business_policy.py": true,
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_finalize.py": true,
+    "src/company_wiki/document_understanding/source_cards.py": true,
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true,
+    "tests/unit/du11_source_quality/test_business_admission.py": true,
+    "tests/unit/du11_source_quality/test_material_readiness.py": true,
+    "src/company_wiki/automation/narrative_summary_execution.py": true,
+    "tests/unit/du11_summary_execution/test_contract.py": true
+  },
+  "receipt_bindings_match": {
+    "company_wiki.automation.narrative_select": true,
+    "company_wiki.source_catalog.narrative_evidence": true,
+    "company_wiki.source_catalog.narrative_reading": true,
+    "company_wiki.source_catalog.narrative_finalize": true,
+    "company_wiki.source_catalog.narrative_document": true,
+    "company_wiki.source_catalog.narrative_business_policy": true,
+    "company_wiki.source_catalog.narrative_source_purpose": true,
+    "company_wiki.source_catalog.narrative_operating_relations": true,
+    "company_wiki.document_understanding.source_cards": true,
+    "company_wiki.document_understanding.summary_tasks": true,
+    "company_wiki.document_understanding.native_table_bridge": true,
+    "company_wiki.document_understanding.narrative_continuity": true,
+    "company_wiki.document_understanding.decision_inventory": true,
+    "company_wiki.automation.narrative_model_extractive": true
+  },
+  "actual_frozen_sources": [
+    {
+      "path": "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+      "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "867f592e9c3e5f54a8c3740aee21e7af839471ff57a895097036a2047f037cd2"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_business_admission.py",
+      "sha256": "01fa8aa0d847745fcf4a76ead744426003f6333eb1fdb973f335f761860fc158"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_material_readiness.py",
+      "sha256": "ac2b0f0cc9057cd713603d4cce1a641259915e9e93bbc8ce0f488996f160b1dd"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summary_execution.py",
+      "sha256": "e594acd7f118b03d221ea65c19838a2aaee2c7a7fd2700151a108fac17aca2e5"
+    },
+    {
+      "path": "tests/unit/du11_summary_execution/test_contract.py",
+      "sha256": "f77befd95b319e45a0467be38af8a80b2490cf7057326f2b01eecd9b57189265"
+    }
+  ],
+  "receipt_bounded_checks": {
+    "status": "ENGINEERING_PASS_CONTENT_OPEN",
+    "selected_required": 7,
+    "canonical_required": 7,
+    "required_total": 7,
+    "source_unchanged": true,
+    "owned_temp_removed": true,
+    "api_calls": 0,
+    "raw_copies": 0,
+    "scope": "actual production source selection engineering, not supplier/contentC"
+  }
+}

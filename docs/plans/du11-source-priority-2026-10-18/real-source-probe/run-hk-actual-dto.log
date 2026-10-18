@@ -1,0 +1,2 @@
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+{"sample": "hk-annual", "status": "ENGINEERING_PASS_REQUIRED_RECALL_FAIL_CONTENT_OPEN", "seconds": 24.603, "selected_count": 96, "claims": 50, "selected_required": 0, "canonical_required": 0, "required_total": 7, "actual_work_accounts": [{"used": 12092764, "limit": 16000000, "exhausted": false}], "original_unchanged": true, "error": null}

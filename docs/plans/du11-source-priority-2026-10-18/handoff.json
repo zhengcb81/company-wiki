@@ -1,0 +1,93 @@
+{
+  "schema_version": "du11-source-priority-handoff/1",
+  "status": "FROZEN_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "base_head_at_receipt": "7e0fa553225a7b2fb489021462ee1b3ef38cf65c",
+  "production_files_changed": [
+    "src/company_wiki/automation/narrative_model_extractive.py"
+  ],
+  "file_bindings": [
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "sha256": "ee8b3e8fe3294149d17087fe3ede1b5fecc7c88dd414e9caa56d355d5b964f48",
+      "bytes": 17195
+    },
+    {
+      "path": "tests/unit/du11_source_priority/test_source_priority.py",
+      "sha256": "5df6bed0afd8c5150f4353fc5d90b44e2eb6319d4e2e440f884d065838cffe9f",
+      "bytes": 9717
+    }
+  ],
+  "logs": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-priority-2026-10-18\\red.log",
+      "sha256": "d5055ef70c5da0c634f34a82bac7e7282f17d973d471bcd56ebfac726ada5a65",
+      "bytes": 11236
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-priority-2026-10-18\\red-default-boundary.log",
+      "sha256": "0f57edff8fce6b50502439d539ceae7e98d28186b581bdf3bc644df427b3fa40",
+      "bytes": 2043
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-priority-2026-10-18\\red-default-actual-cap.log",
+      "sha256": "fd5089dcf98ab2970ca5e25634ea3c08b443b193fa70209fe8f0c5258f86b8d6",
+      "bytes": 1862
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-priority-2026-10-18\\green-focused.log",
+      "sha256": "32b303cb4eea5b7dc92bf2a3b67c63e13ae92d0d54eebf1f52ac7cf9495636e2",
+      "bytes": 1366
+    }
+  ],
+  "red": {
+    "primary": {
+      "failed": 17,
+      "passed": 3,
+      "seconds": 5.06
+    },
+    "actual_default_cap": {
+      "failed": 1,
+      "seconds": 4.32
+    },
+    "shorter_capacity_fixture": "Initial tail fitted; strengthened complete tail before runtime implementation; original observation retained"
+  },
+  "green": {
+    "passed": 56,
+    "seconds": 5.84,
+    "new_tests": 22,
+    "existing_extractive": 18,
+    "existing_summary_tasks": 16,
+    "command": "python -B -m pytest tests/unit/du11_source_priority/test_source_priority.py tests/unit/test_narrative_extractive_runtime.py tests/unit/test_source_summary_tasks.py -q -p no:cacheprovider"
+  },
+  "allocator_semantics": {
+    "version": "source-card-allocation/1",
+    "rank": [
+      "reading_priority asc strict-int",
+      "reading_value_band meaningful_fact before description",
+      "reading_score desc strict-nonnegative-int",
+      "native ordinal stable tie"
+    ],
+    "scope": "support only; best complete tuple",
+    "unknown": "keeps native slot; sort known slots only",
+    "output": "restore native task/audit/claim order; evidence bindings unchanged",
+    "public_wire_changed": false,
+    "source_cards_changed": false,
+    "caps_increased": false,
+    "text_lazy": true,
+    "scope_dedup_unchanged": true,
+    "causal_identity": "explicit boundary allocator version + existing actual protocol source hash"
+  },
+  "scope_observations": {
+    "api_calls": 0,
+    "pdf_parses": 0,
+    "original_writes": 0,
+    "config_writes": 0,
+    "commits": 0,
+    "git_stage": 0,
+    "production_source_metadata_wiring": "ROOT responsibility, not claimed tested",
+    "real_c": "OPEN, not executed",
+    "independent_review": "ROOT to assign different agent"
+  },
+  "diff_check": "whitelisted git diff --check exit0; only normal LF/CRLF working-copy warning"
+}

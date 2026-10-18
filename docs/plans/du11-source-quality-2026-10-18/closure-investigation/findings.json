@@ -1,0 +1,72 @@
+{
+  "schema_version": "du11-closure-investigation/1",
+  "status": "ROOT_CAUSE_IDENTIFIED_NOT_IMPLEMENTED",
+  "evidence": "native-observation.json",
+  "source_sha_before": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "source_sha_after": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "source_unchanged": true,
+  "read_pages": [
+    16,
+    17,
+    31
+  ],
+  "api_calls": 0,
+  "new_pdf_copies": 0,
+  "whole_report_parse": false,
+  "source_edits": 0,
+  "scope": "Read-only diagnostic, not independent acceptance of new ROOT source implementation or realC",
+  "findings": [
+    {
+      "incident": "不利影",
+      "actual_full_baseline_kind": "risk",
+      "scoped_current_kind": "risk",
+      "root_cause": "Only background/paragraph_event participate in _prose_reading_packages native audit. risk becomes continuity_boundary, untouched in expanded original packages and never included in blocked. New finish singleton/open-start checks do not run on it.",
+      "secondary_geometry": "Existing edge also rejects true two-glyph wrapped final line due negative horizontal bbox overlap, despite body font/margins/line sequence. Including risk alone will defer or still miss it, not close it under current edge.",
+      "source_resolution": "Adjacent real block contains final two glyphs; can preserve whole original sentence only with bounded verified indentation/column-flow proof, otherwise explicit deferred. No model word completion."
+    },
+    {
+      "incident": "求的同时",
+      "actual_full_baseline_kind": "native_continuity",
+      "scoped_current_kind": "native_continuity",
+      "root_cause": "char_start==0 is treated as left_closed even for first body block of a page continuing an unfinished previous-page body. Current edge forbids all cross-page links and sees header/footer boundaries; page-local terminal window is emitted as closed.",
+      "source_resolution": "Previous page names metal-gate Preforma Uniflash ALD product series and ends 性能需; first body next page starts 求的同时. Measured frames/margins/fonts compatible but actual cross-page original-ID proof must be added or task deferred, never infer omitted product from generic heading."
+    },
+    {
+      "incident": "该系列产品",
+      "actual_full_baseline_kind": "native_continuity",
+      "scoped_current_kind": "native_continuity",
+      "root_cause": "Window limits cut after a true sentence terminator and previous same-block terminator makes left_closed true. End-of-sentence geometry is not anaphor closure. statement_members protects dependence only inside one already-split window; it cannot bind antecedent in another preceding window.",
+      "source_resolution": "Prior original paragraph explicitly enumerates Preforma Uniflash metal-silicide integrated system and SA/SU,SPTi,ALDTiNM products; attach bounded exact source context refs for that collective scope or defer. Do not attribute to one guessed member."
+    }
+  ],
+  "implementation_suggestion": {
+    "single_owner": "One source-prose closure owner audits paragraph material before or independent of risk/project/background package kind; QA/table remain their explicit owners. Semantic package kind must not bypass closure.",
+    "dimensions": [
+      "native byte/coordinate continuity",
+      "left/right physical sentence continuity including adjacent-page body carry",
+      "bounded actor/object/antecedent dependencies distinct from sentence terminator"
+    ],
+    "finite_existing_ports": "Use existing native windows + required_context_unit_ids/citation_views context + bounded reading deferred diagnostics. No new Store, reviewer permit, model decision, company/page/substring exception or capacity increase.",
+    "short_tail": "Add measured same-body-column/first-line-indentation shape to shared geometry/source flow owner, retaining source/frame/font/line/section barriers. Do not broadly drop overlap restrictions; when no proof exists defer.",
+    "cross_page": "If last observed body is unterminated and first next-page body continues, require actual consecutive original body units, same source/frame/font/column and same active section with only proven headers/footers intervening. Missing previous page or competing boundary cannot be assumed complete.",
+    "antecedent": "Bound external original context at actual window split; reuse source-owned actor/object relation refs and retain collective ambiguity. More than one possible referent or over-limit closure produces honest deferred/unknown, not a guessed product."
+  },
+  "TDD": [
+    {
+      "case": "Risk/project package wrapping a sentence onto short final line",
+      "expect": "All prose kinds share closure audit; exact two original parts emitted only with qualified native lineflow, else finite deferred. Negative adjacent column/table/heading/QA/source/font controls remain rejected."
+    },
+    {
+      "case": "Unterminated previous-page body plus new-page block at char0 after real header/footer",
+      "expect": "Not independent just because char0. Verified original cross-page refs produce full source context within limits; unread prior page, new section, different column/source, standalone heading or role transition defer."
+    },
+    {
+      "case": "Complete product enumeration then dependent 该系列/these products across forced4block or8unit limit",
+      "expect": "Whole support plus explicit original antecedent context references remain stable, or task deferred. Punctuation/window boundaries cannot mark unbound pronoun complete. Multiple competing product subjects remain unknown; no product inference."
+    },
+    {
+      "case": "Original numbers, negation/planned stage and limits",
+      "expect": "Evidence text/IDs/SHA exact; qualifiers and units carried; no summarizer text repair, budget enlargement, model or second semantic engine. Capture cache identity changes for actual closure algorithm."
+    }
+  ]
+}

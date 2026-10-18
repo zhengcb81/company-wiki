@@ -1,0 +1,18 @@
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+{"sample": "cn-h1", "status": "ENGINEERING_PASS_CONTENT_OPEN", "seconds": 11.876, "selected_count": 96, "claims": 64, "selected_required": 10, "canonical_required": 10, "required_total": 10, "actual_work_accounts": [{"used": 5626983, "limit": 16000000, "exhausted": false}], "original_unchanged": true, "error": null}
+Traceback (most recent call last):
+  File "C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki\docs\plans\du11-source-priority-2026-10-18\real-source-probe\probe.py", line 241, in <module>
+    records.append(run(sample))
+                   ~~~^^^^^^^^
+  File "C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki\docs\plans\du11-source-priority-2026-10-18\real-source-probe\probe.py", line 144, in run
+    payload = SourceRevisionEventPayload.from_dict({
+        'schema_version': 'source-revision-event/2.0',
+    ...<5 lines>...
+            'document_kind': meta.get('document_kind', 'unknown'), 'language': gold['language']},
+    })
+  File "C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki\src\company_wiki\automation\narrative_contracts.py", line 347, in from_dict
+    SourceMetadataValue.from_dict(item["source_metadata"]),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\֣����\.codex\worktrees\du11-extractive-runtime\company-wiki\src\company_wiki\automation\narrative_contracts.py", line 257, in from_dict
+    raise NarrativeContractError("source_metadata.language is invalid")
+company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.language is invalid

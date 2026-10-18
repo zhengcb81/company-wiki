@@ -1,0 +1,250 @@
+{
+  "schema_version": "du11-source-quality-independent-review/1",
+  "status": "PASS_ENGINEERING_DELTA",
+  "reviewer": "/root/du10_ff_reception_review",
+  "reviewed_head": "7e0fa553225a7b2fb489021462ee1b3ef38cf65c",
+  "scope": "F1/F2 source quality and production source priority projection; excludes independently-owned allocator/rank decoder and final real quality C",
+  "freeze": [
+    {
+      "path": "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+      "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "064f50853bfd05c47e51cc5de9b3741850925c70e862efb122b00bdf1556636c"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_business_admission.py",
+      "sha256": "01fa8aa0d847745fcf4a76ead744426003f6333eb1fdb973f335f761860fc158"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_material_readiness.py",
+      "sha256": "e317466141b17dd110477515bfa424eebd2b76534fc9d0237f2e042e967ffc01"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summary_execution.py",
+      "sha256": "e594acd7f118b03d221ea65c19838a2aaee2c7a7fd2700151a108fac17aca2e5"
+    },
+    {
+      "path": "tests/unit/du11_summary_execution/test_contract.py",
+      "sha256": "f77befd95b319e45a0467be38af8a80b2490cf7057326f2b01eecd9b57189265"
+    }
+  ],
+  "actual_freeze_matches": {
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": true,
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+    "src/company_wiki/source_catalog/narrative_business_policy.py": true,
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_finalize.py": true,
+    "src/company_wiki/document_understanding/source_cards.py": true,
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true,
+    "tests/unit/du11_source_quality/test_business_admission.py": true,
+    "tests/unit/du11_source_quality/test_material_readiness.py": true,
+    "src/company_wiki/automation/narrative_summary_execution.py": true,
+    "tests/unit/du11_summary_execution/test_contract.py": true
+  },
+  "initial_findings": [
+    {
+      "id": "audit-object-event-override",
+      "priority": "P2",
+      "owner": "source_catalog/narrative_source_purpose.py::_clause_purpose",
+      "problem": "Generic object+operating event wins before audit scope except a narrow We... prefix. Auditor procedures mentioning delivered software/products are admitted as operating events.",
+      "actual_controls": [
+        {
+          "text": "Our audit procedures included testing revenue from software delivered to customers.",
+          "admitted": true,
+          "purpose": "operating"
+        },
+        {
+          "text": "The independent auditor tested software delivered to customers as part of audit procedures.",
+          "admitted": true,
+          "purpose": "operating"
+        },
+        {
+          "text": "审计程序包括检查已交付客户的产品及其收入确认凭证。",
+          "admitted": true,
+          "purpose": "operating"
+        }
+      ],
+      "positive_keep": "We launched software for customers to automate audit procedures.",
+      "expected": "Audit-procedure actor/predicate scope should remain non-operating; genuine business product enabling audit automation remains operating. Do not blacklist audit noun in any business sentence.",
+      "resolution": "CLOSED_BY_FINAL_IMPLEMENTATION_AND_INDEPENDENT_CONTROLS"
+    },
+    {
+      "id": "allocated-conversion-spelled-period",
+      "priority": "P2",
+      "owner": "narrative_business_policy.py::_FORWARD_PERIOD and existing contract conversion reason",
+      "problem": "New accounting-purpose gate rejects explicit future RPO conversion in common spelled-out time expressions.",
+      "actual_control": "Revenue allocated to remaining performance obligations was $90 million, and we expect to recognize 40% as revenue in the next twelve months.",
+      "observed": {
+        "admitted": false,
+        "purpose": "accounting_policy"
+      },
+      "comparisons": {
+        "next 12 months": true,
+        "future periods": true,
+        "over the next twelve months": true
+      },
+      "expected": "Shared future-period recognition should preserve this explicit original conversion; bare allocated amount/no conversion schedule remains negative.",
+      "resolution": "CLOSED_BY_FINAL_IMPLEMENTATION_AND_INDEPENDENT_CONTROLS"
+    },
+    {
+      "id": "table-reason-execution-port",
+      "priority": "P1",
+      "owner": "automation/narrative_summary_execution.py::_REASONS / selected reason binding",
+      "problem": "Producer creates unsupported/source_table_unresolved but execution report parser only accepts unsupported/source_not_parsed. Valid new plan cannot pass formal wrapper/receipt decode.",
+      "reproduction": "selected(2), first span quality_flags=[table_structure_ambiguous] -> compile_extractive_plan -> _report(plan.execution)",
+      "actual_error": "NarrativeContractError: execution source reason is invalid",
+      "expected": "Bounded supported reason enum must accept exact source-owner reason, with selected-bound per-card consistency; unknown reason stays rejected. Test actual wrap/parse/recovery diagnostics, not only compile.",
+      "resolution": "CLOSED_BY_FINAL_IMPLEMENTATION_AND_INDEPENDENT_CONTROLS"
+    },
+    {
+      "id": "ambiguous-table-required-context",
+      "priority": "P2",
+      "owner": "document_understanding/source_cards.py::source_cards",
+      "problem": "Quality ambiguity checked only support_ids. Operating-table task with clean value support and ambiguous required header/year context is admitted, despite unresolved required observation.",
+      "reproduction": "Valid reading_context/2 operating_table group, support=[first span], context=[second span], second quality_flags=[table_structure_ambiguous] -> compile_extractive_plan",
+      "observed": {
+        "source_disposition": "admitted",
+        "reason": "source_card"
+      },
+      "expected": "Required table observation ambiguity must prevent complete numeric card (at least table-group full member scope); genuinely independent prose should survive unrelated context. Do not add table parser in source_cards.",
+      "resolution": "CLOSED_BY_FINAL_IMPLEMENTATION_AND_INDEPENDENT_CONTROLS"
+    }
+  ],
+  "delta_review": [
+    {
+      "id": "audit-object-event-override",
+      "result": "PASS",
+      "evidence": "Source-purpose now tests local audit actor/procedure prefix before general business object+event. Three original English/Chinese audit negatives reject; actual launched customer audit software and mixed independent business sentence remain admitted."
+    },
+    {
+      "id": "allocated-conversion-spelled-period",
+      "result": "PASS",
+      "evidence": "Existing shared forward-period owner accepts finite spelled-out time quantity while retaining clause-bound contract+recognition observation. Original next twelve months conversion retained; bare allocation/no conversion schedule rejected."
+    },
+    {
+      "id": "table-reason-execution-port",
+      "result": "PASS",
+      "evidence": "Formal port now has finite reason tuple and selected-bound unsupported reason equals actual source card cause. Real mixed compile -> wrap -> selected parse -> terminal extraction passes; substitution to another known but false source_not_parsed cause rejects."
+    },
+    {
+      "id": "ambiguous-table-required-context",
+      "result": "PASS",
+      "evidence": "SourceCards operating_table checks full task member scope incl required header/year context. Independently supported paragraph uses own support quality, not unrelated context ambiguity. Both table-negative/prose-positive controls pass."
+    }
+  ],
+  "independent_execution": {
+    "returncode": 0,
+    "wall_seconds": 2.49,
+    "suite": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "37",
+      "time": "0.762",
+      "timestamp": "2026-10-18T02:43:05.571296+01:00",
+      "hostname": "DESKTOP-156V213"
+    },
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-source-delta-0r3rmj2n\\pytest",
+      "tests/unit/du11_source_quality/test_business_admission.py",
+      "tests/unit/du11_source_quality/test_material_readiness.py",
+      "tests/unit/du11_summary_execution/test_contract.py::test_mixed_usable_and_unresolved_table_card_survives_full_wrapper_and_terminal_path",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-quality-2026-10-18\\review\\independent-delta.xml"
+    ],
+    "environment": "explicit minimal OS/runtime variables only; no inherited credentials; plugin autoload disabled; dotenv disabled",
+    "frozen_pre": {
+      "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": true,
+      "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+      "src/company_wiki/source_catalog/narrative_business_policy.py": true,
+      "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+      "src/company_wiki/source_catalog/narrative_reading.py": true,
+      "src/company_wiki/source_catalog/narrative_finalize.py": true,
+      "src/company_wiki/document_understanding/source_cards.py": true,
+      "src/company_wiki/document_understanding/narrative_continuity.py": true,
+      "src/company_wiki/document_understanding/decision_inventory.py": true,
+      "tests/unit/du11_source_quality/test_business_admission.py": true,
+      "tests/unit/du11_source_quality/test_material_readiness.py": true,
+      "src/company_wiki/automation/narrative_summary_execution.py": true,
+      "tests/unit/du11_summary_execution/test_contract.py": true
+    },
+    "frozen_post": {
+      "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": true,
+      "src/company_wiki/source_catalog/narrative_source_purpose.py": true,
+      "src/company_wiki/source_catalog/narrative_business_policy.py": true,
+      "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+      "src/company_wiki/source_catalog/narrative_reading.py": true,
+      "src/company_wiki/source_catalog/narrative_finalize.py": true,
+      "src/company_wiki/document_understanding/source_cards.py": true,
+      "src/company_wiki/document_understanding/narrative_continuity.py": true,
+      "src/company_wiki/document_understanding/decision_inventory.py": true,
+      "tests/unit/du11_source_quality/test_business_admission.py": true,
+      "tests/unit/du11_source_quality/test_material_readiness.py": true,
+      "src/company_wiki/automation/narrative_summary_execution.py": true,
+      "tests/unit/du11_summary_execution/test_contract.py": true
+    },
+    "temporary_directory_removed": true
+  },
+  "confirmed_remaining_must_fix_in_reviewed_delta": [],
+  "reused_author_evidence": {
+    "179focused": "179PASS6.10s author final, not independently rerun in full",
+    "940broad": "940PASS60.14s predates four repairs; kept as historical related evidence, not claimed post-delta broad verification"
+  },
+  "unchanged_boundaries": [
+    "Single cached SourceOperatingSession fact/financial owner; budget exhaustion refuses unassessed without fallback scan.",
+    "Priority metadata projected only current reading budget. Legacy0.8 detector and replay policies not upgraded.",
+    "Current business algorithms/continuity source identity and source_cards/execution port model fingerprint include new behavior.",
+    "Support/context/source raw text remains distinct; quality diagnostic is not new permission."
+  ],
+  "quality_C_status": "OPEN_NOT_ACCEPTED_BY_THIS_REVIEW",
+  "explicit_followup": [
+    "ROOT actual no-fee CN replay has10/10 required source+canonical and known accounting/template noise removed, but three original closure/referent incidents persist.",
+    "Unique antecedent and actual cross-page closure not established by singleton prefix/end guards.",
+    "Real table/numeric closure and final three-provider/downstream/cache quality acceptance remain required under mother plan.",
+    "This engineering PASS must not be labelled full final material-quality C or project completion."
+  ],
+  "safety": "Minimal environment child process only; no secret/environment object output. No implementation edits, external author tree writes, API/model/network, real originals or production configuration changes."
+}

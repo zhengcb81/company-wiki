@@ -1,0 +1,34 @@
+{
+  "schema_version": "du11-source-priority-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "verdict": "PASS_ALLOCATOR_ENGINEERING_PRODUCTION_PROJECTION_AND_REAL_C_PENDING",
+  "source_sha256": {
+    "src/company_wiki/automation/narrative_model_extractive.py": "ee8b3e8fe3294149d17087fe3ede1b5fecc7c88dd414e9caa56d355d5b964f48",
+    "tests/unit/du11_source_priority/test_source_priority.py": "5df6bed0afd8c5150f4353fc5d90b44e2eb6319d4e2e440f884d065838cffe9f"
+  },
+  "findings": [],
+  "review": [
+    "Priority is source-policy metadata only, never model opinion/company/gold/task-number/text matching. Strict int rejects bool; band enum and nonnegative score required as complete tuple. Actual factual support only; context does not lend priority.",
+    "Stable known-slot ordering uses priority,value-band,score,native ordinal. Missing/invalid metadata retains its native slot; this deliberate compatibility fallback can still consume capacity until ROOT supplies real source metadata.",
+    "Whole indivisible source card fits exact escaped UTF8 bytes under unchanged56KiB draft/64KiB final limits. Existing dedup support/context/source scope and lazy unavailable/oversized behavior preserved. No sentence shortening or second paid request.",
+    "All execution rows retain native task order and keys. Draft claims restore native order after capacity admission; JSON aggregate bytes unchanged by order. No public schema, source task membership, facts or references modified.",
+    "source-card-allocation/1 is included in actual input5 boundary identity; actual owner protocol SHA is also fingerprinted. Legacy input4 behavior remains its separate unchanged owner.",
+    "Runtime complexity is one support walk plus bounded-card stable sort; no prose serialization for priority. source descriptors reference existing spans rather than another summary store."
+  ],
+  "execution": {
+    "actual": "22PASS3.79s pytest /7.33s wall;returncode0",
+    "receipt": "review/focused.json/log/xml",
+    "exact_sha_before_after": true,
+    "cleanup_owned_temp_removed": true,
+    "tests_API_workers_PDF": "22small pure tests only;0API/0workers/0PDF/0originals/0config",
+    "reused_author_evidence": "17FAIL3PASS initial behavior RED; actual default56KiB RED1FAIL;56PASS5.84s concentrated green, not rerun whole oldmatrix"
+  },
+  "scope_boundaries": [
+    "ROOT production structured_value field projection is another file/owner and is not proved by this allocator-only PASS.",
+    "Source cards now reject table_structure_ambiguous through ROOT separate source_cards owner. This is not an allocator change;22own fixtures contain no such ambiguous-support flag and pass unchanged.",
+    "Does not fix source precision/actor/closure itself or certify source-owned priority metadata.",
+    "Does not repair MiMo malformed response or claim all model ranking quality green.",
+    "Actual CN/HK/US real C and full PWF remain OPEN until common source fix and final integrated receipts."
+  ],
+  "source_modifications_by_reviewer": 0
+}

@@ -1,0 +1,324 @@
+{
+  "schema_version": "du11-source-priority-real-probe-handoff/1",
+  "status": "HK_TRUE_REGRESSION_REQUIRES_ROOT_REPAIR_CONTENT_C_OPEN",
+  "scope": "Offline actual source engineering, not model/content acceptance",
+  "samples": [
+    {
+      "sample": "cn-h1",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "seconds": 11.876,
+      "actual_work_accounts": [
+        {
+          "used": 5626983,
+          "limit": 16000000,
+          "exhausted": false
+        }
+      ],
+      "selected_count": 96,
+      "tasks": 65,
+      "claims": 64,
+      "draft_bytes": 41149,
+      "selected_required": 10,
+      "canonical_required": 10,
+      "required_total": 10,
+      "ambiguous_raw_evidence_count": 6,
+      "ambiguous_summary_support_count": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true,
+      "api_calls": 0,
+      "raw_copies": 0
+    },
+    {
+      "sample": "hk-annual",
+      "status": "ENGINEERING_PASS_REQUIRED_RECALL_FAIL_CONTENT_OPEN",
+      "seconds": 24.603,
+      "actual_work_accounts": [
+        {
+          "used": 12092764,
+          "limit": 16000000,
+          "exhausted": false
+        }
+      ],
+      "selected_count": 96,
+      "tasks": 56,
+      "claims": 50,
+      "draft_bytes": 38956,
+      "selected_required": 0,
+      "canonical_required": 0,
+      "required_total": 7,
+      "ambiguous_raw_evidence_count": 6,
+      "ambiguous_summary_support_count": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true,
+      "api_calls": 0,
+      "raw_copies": 0
+    },
+    {
+      "sample": "us-10k",
+      "status": "ENGINEERING_PASS_CONTENT_OPEN",
+      "seconds": 17.049,
+      "actual_work_accounts": [
+        {
+          "used": 7913537,
+          "limit": 16000000,
+          "exhausted": false
+        }
+      ],
+      "selected_count": 96,
+      "tasks": 60,
+      "claims": 53,
+      "draft_bytes": 56949,
+      "selected_required": 8,
+      "canonical_required": 8,
+      "required_total": 8,
+      "ambiguous_raw_evidence_count": 8,
+      "ambiguous_summary_support_count": 0,
+      "original_unchanged": true,
+      "gold_unchanged": true,
+      "api_calls": 0,
+      "raw_copies": 0
+    }
+  ],
+  "hk_old_bundle_control": {
+    "same_oracle_selected": 7,
+    "same_oracle_canonical": 7,
+    "gold_sha256": "10f9e3b98d1fc99d49c1edf2abba025f8ea3ea060916aac8430a6732fb78c5b7"
+  },
+  "hk_old_finish_ablation": {
+    "conclusion": "OLD_FINISH_RESTORES_ALL_REQUIRED_NEW_CLOSURE_REGRESSION",
+    "restored_selected_required": 7,
+    "restored_canonical_required": 7,
+    "source_files_changed": false,
+    "owned_temp_removed": true,
+    "experiment": {
+      "baseline": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
+      "only_runtime_override": "_Analysis.finish old AST function bound to current class; current left_closed field retained",
+      "method_ast_sha256": "ea88596b873d3a896aea39fd66b169aea92afe2d57889e8c0ac42ae6158a44a5",
+      "scope": "DIAGNOSTIC_ABLATION_NOT_PRODUCTION_PASS",
+      "production_limits_unchanged": true
+    }
+  },
+  "source_bindings": [
+    {
+      "module": "company_wiki.automation.narrative_select",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "sha256": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_evidence",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "sha256": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_reading",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+      "sha256": "da54516cdb66056f4200caf20bc919b4f71a6fbc989cf84e7bdc366ba366bbe9"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_finalize",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_document",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_document.py",
+      "sha256": "d2c8b1f9e0384d67ed61a636afdbfe084feeb27324b0a369e82e7b691ac72e54"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_business_policy",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_source_purpose",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+      "sha256": "0354dc9ecb9e89305741083e9a914c183684f19d058958e9adef61095496fa7d"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_operating_relations",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+      "sha256": "faa6dcae51ab3818d92a5a951c79ac1a0e56af86cc949cbade0aaca89d5e2f9f"
+    },
+    {
+      "module": "company_wiki.document_understanding.source_cards",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\source_cards.py",
+      "sha256": "ae020c013e12443729a2e352b1a826d0e1e606791f2a49c7fe1c7bb5b7a96442"
+    },
+    {
+      "module": "company_wiki.document_understanding.summary_tasks",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\summary_tasks.py",
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5"
+    },
+    {
+      "module": "company_wiki.document_understanding.native_table_bridge",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\native_table_bridge.py",
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1"
+    },
+    {
+      "module": "company_wiki.document_understanding.narrative_continuity",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+      "sha256": "064f50853bfd05c47e51cc5de9b3741850925c70e862efb122b00bdf1556636c"
+    },
+    {
+      "module": "company_wiki.document_understanding.decision_inventory",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+      "sha256": "9bf6070012ded7e92e2af206ab64fc4981d8c11871984f260f798f6c6a2706a4"
+    },
+    {
+      "module": "company_wiki.automation.narrative_model_extractive",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\narrative_model_extractive.py",
+      "sha256": "ee8b3e8fe3294149d17087fe3ede1b5fecc7c88dd414e9caa56d355d5b964f48"
+    }
+  ],
+  "source_binding_limits": "CN initial process collected module paths/hashes in memory but aborted at HK DTO before final binding receipt; later HK/US and ablation persisted actual source-before/after equality. CN original stat/hash/gold checks persisted. No claim of a persisted missing initial hash snapshot.",
+  "temporary_probe_prefix_paths_remaining": 0,
+  "new_original_copies": 0,
+  "network_and_paid_calls": 0,
+  "saved_material": "counts/hashes/bounded selected incident snippets/native references only, no complete selected payload or PDF copy",
+  "production_files_changed_by_probe": 0,
+  "file_receipts": [
+    {
+      "path": "ablate_hk.py",
+      "bytes": 6521,
+      "sha256": "e4e43ab41bb0d8ade1c1e16872ef02020641c45f05f1ee787e03e6295c899e08"
+    },
+    {
+      "path": "ablate_hk_open_start.py",
+      "bytes": 5107,
+      "sha256": "c4e92722036571ccbb23aa6a6466d151dcfab0e4a408e06155d3f3a7c643e10e"
+    },
+    {
+      "path": "ablation-old-finish\\ablation.json",
+      "bytes": 18293,
+      "sha256": "c1e98958400036b20a09722854b21df1d9c65bb92fe00ed76ceabd2888e8b0f7"
+    },
+    {
+      "path": "ablation-old-finish\\hk-annual.json",
+      "bytes": 10742,
+      "sha256": "16605caaa7c213c03bdb8f7b2b48e24074571d881d5d967f576dea9b9b77d1e8"
+    },
+    {
+      "path": "ablation-old-finish.log",
+      "bytes": 1551,
+      "sha256": "5db5a08e3ee187b90003891e25a63a73258bc5a022d874b739a00ff0d94b87a2"
+    },
+    {
+      "path": "ablation-open-start-only\\ablation.json",
+      "bytes": 5607,
+      "sha256": "8c337b1b8f1a63ced2fc3a65fc2186e83b46d1a009897eea71389f1b8989d301"
+    },
+    {
+      "path": "ablation-open-start-only\\hk-annual.json",
+      "bytes": 10575,
+      "sha256": "1ce5c415c86adea43409a5429bebc870a1a6b8f9b76148897041506317a4f948"
+    },
+    {
+      "path": "ablation-open-start-only.log",
+      "bytes": 859,
+      "sha256": "8f89f86585aa786eaa26c3b2356aeadc781a2993896ac40aadad62b1e8a49514"
+    },
+    {
+      "path": "cn-closure-bounded-evidence.json",
+      "bytes": 17812,
+      "sha256": "194a9165eb36ec1352eb23a888aa11ba79d6eef5e43749f834a9101157fde086"
+    },
+    {
+      "path": "cn-h1.json",
+      "bytes": 11125,
+      "sha256": "544174c347281157e52119236287669f4dfae962bee53c43150459d383615cc1"
+    },
+    {
+      "path": "hk-annual-input-not-equivalent.json",
+      "bytes": 10453,
+      "sha256": "927741e2ed348e25e0b883b48ab6a05009960a05c5c070db7fb5c8eca67b3430"
+    },
+    {
+      "path": "hk-annual.json",
+      "bytes": 10576,
+      "sha256": "fe7e648a115dd170df0f9d281e0cf5b197547a0a7d600ab060f529c2d3a631a8"
+    },
+    {
+      "path": "hk-old-bundle-oracle-control.json",
+      "bytes": 2328,
+      "sha256": "148f14d61039805efe2d308700167a17d8ba8613e2bdc139920cd5d9027e38f3"
+    },
+    {
+      "path": "probe.py",
+      "bytes": 14616,
+      "sha256": "63d119838c6a390a63b627f34b76a85d88453264e39894c42c816790d4299835"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6270,
+      "sha256": "a7cd4837d0e64b4f099a4b3c5f21bdb12b11f43a24baf4f5230e903e01189012"
+    },
+    {
+      "path": "receipt-hkus-initial.json",
+      "bytes": 5355,
+      "sha256": "b3349b28b68c78e63118c232b6256a50ce1323c1027debc8867b20617ca93dfa"
+    },
+    {
+      "path": "receipt.json",
+      "bytes": 5264,
+      "sha256": "a3e6906ed41240ddf72eb1d7383e3f483b8144cf903aca306933792607863bfb"
+    },
+    {
+      "path": "run-hk-actual-dto.log",
+      "bytes": 430,
+      "sha256": "ebb6244d2e0ed5511cc994932a71fe19ad825a8c49131cf47d670c5abc6f77b1"
+    },
+    {
+      "path": "run-hkus.log",
+      "bytes": 747,
+      "sha256": "0233624e33376bc78876cbf71c07f300729913be4ddb758a28683c0a73d41452"
+    },
+    {
+      "path": "run.log",
+      "bytes": 1728,
+      "sha256": "cb15cb513969f5e50d5462fe978e2e7975188fe20617e1008ea59f1822ecc441"
+    },
+    {
+      "path": "source-before-hk-annual.json",
+      "bytes": 4465,
+      "sha256": "12b551043b64fd5dc41412aac670d7ec032f1236c2085016d71aeb7b27d68122"
+    },
+    {
+      "path": "source-before-hkus.json",
+      "bytes": 4465,
+      "sha256": "12b551043b64fd5dc41412aac670d7ec032f1236c2085016d71aeb7b27d68122"
+    },
+    {
+      "path": "us-10k.json",
+      "bytes": 7494,
+      "sha256": "74b02f5565b0d56f7fc54816187ead6d8f48407e856aafb64208b4907c66b9ff"
+    }
+  ],
+  "hk_open_start_only_control": {
+    "selected_required": 0,
+    "canonical_required": 0,
+    "bypassed_count": 0,
+    "continuity": {
+      "feature_version": "native-narrative-continuity/2",
+      "work_units": 31153,
+      "observed_unit_count": 6580,
+      "complete": false,
+      "deferred_unit_count": 3613,
+      "diagnostics": [
+        {
+          "code": "CONTINUITY_OPEN_END",
+          "count": 2400
+        },
+        {
+          "code": "CONTINUITY_WINDOW_LIMIT",
+          "count": 74
+        }
+      ],
+      "window_count": 349,
+      "blocked_count": 3613
+    },
+    "source_files_unchanged": true,
+    "owned_temp_removed": true,
+    "diagnostic_override": "Current finish; only replace(run[0], left_closed=True) in memory"
+  },
+  "isolated_regression": "New initial singleton OPEN_END behavior, not OPEN_START: bypassed_count0; old finish restores7/7 while current0/7, deferred difference1951 with same349windows."
+}
