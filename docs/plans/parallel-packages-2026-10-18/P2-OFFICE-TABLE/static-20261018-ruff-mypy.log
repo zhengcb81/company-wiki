@@ -1,0 +1,6 @@
+﻿=== ruff check ===
+All checks passed!
+ruff exit=0
+=== mypy ===
+Success: no issues found in 1 source file
+mypy exit=0

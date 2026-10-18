@@ -1,0 +1,53 @@
+{
+  "fixtures": [
+    {
+      "bytes": 1996,
+      "file": "docx_footnotes.docx",
+      "kind": "docx",
+      "sha256": "9079cf86d0cae0bea1448de030f6a352a836eea4ec2f207b65c3d9c72c8f0726"
+    },
+    {
+      "bytes": 1622,
+      "file": "docx_footnotes_missing_part.docx",
+      "kind": "docx",
+      "sha256": "4a46c42850faab9096365d8f42ba4bb936cc0034f83b224a05a6cff05acd56b4"
+    },
+    {
+      "bytes": 1706,
+      "file": "docx_grid_span.docx",
+      "kind": "docx",
+      "sha256": "67f5c16479d5bc50ae32fce2473f7399664e6232af0a76afb68f0f730e34a25b"
+    },
+    {
+      "bytes": 2434,
+      "file": "docx_header_and_continuation.docx",
+      "kind": "docx",
+      "sha256": "be8a7d83582769d55879365febcf55cbe758529292103a7b03edbf94aaf2c79b"
+    },
+    {
+      "bytes": 1787,
+      "file": "docx_span_out_of_grid.docx",
+      "kind": "docx",
+      "sha256": "5e70248967089101cf357bb735ccc9a8c2794969a94d2d2a97367df6886e5af3"
+    },
+    {
+      "bytes": 1679,
+      "file": "docx_vertical_merge.docx",
+      "kind": "docx",
+      "sha256": "6ae75249c84593ad91ac9a4a03d78680212141750c36ea0c478114973b9f9504"
+    },
+    {
+      "bytes": 3347,
+      "file": "pptx_merged.pptx",
+      "kind": "pptx",
+      "sha256": "02bd09f28943ab4dddbf3df370b37604b3c36dc1be71de9a8012d7cf13ca4f41"
+    },
+    {
+      "bytes": 3135,
+      "file": "pptx_plain.pptx",
+      "kind": "pptx",
+      "sha256": "f34bb7e48b1891b3f198311a74bab0e5db83b8ef92553ba61a327d752ebe88e6"
+    }
+  ],
+  "schema": "cwp-office-table-fixtures/1"
+}

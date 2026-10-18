@@ -1,0 +1,252 @@
+﻿# P2-OFFICE-TABLE RED log (baseline = today's row x cell behaviour)
+# worktree : C:/Users/郑曾波/Projects/company-wiki-p2-office-table
+# branch   : codex/p2-office-table-20261018
+# baseline : 4045787f6bf77722d8125911f3475ecff9bca9b0
+# command  : python -m pytest tests/unit/test_p2_office_table -q -p no:cacheprovider
+# note     : office_table_structure.py at this moment only reproduced the
+#            existing docx_parser.table() behaviour (one row x cell expansion,
+#            no w:gridSpan / w:vMerge / w:tblHeader / w:tblGrid / footnotes /
+#            a:tc merge attributes). Every failure below is an ASSERTION, not
+#            an ImportError. The real implementation replaces that baseline.
+
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\company-wiki-p2-office-table
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 46 items
+
+tests\unit\test_p2_office_table\test_boundaries.py ...F..                [ 13%]
+tests\unit\test_p2_office_table\test_docx_footnotes.py FFF               [ 19%]
+tests\unit\test_p2_office_table\test_docx_structure.py F..FFFF.FF.FFF.   [ 52%]
+tests\unit\test_p2_office_table\test_fixtures_manifest.py ..             [ 56%]
+tests\unit\test_p2_office_table\test_locator_compatibility.py .FFFF      [ 67%]
+tests\unit\test_p2_office_table\test_pptx_structure.py FFFFFF            [ 80%]
+tests\unit\test_p2_office_table\test_replay_and_determinism.py .FF.....F [100%]
+
+================================== FAILURES ===================================
+______________________ test_encrypted_member_is_refused _______________________
+tests\unit\test_p2_office_table\test_boundaries.py:54: in test_encrypted_member_is_refused
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+________________ test_docx_footnote_reference_binds_part_text _________________
+tests\unit\test_p2_office_table\test_docx_footnotes.py:54: in test_docx_footnote_reference_binds_part_text
+    assert entry["footnote_refs"] == [
+E   AssertionError: assert [] == [{'footnote_i...': '�������ɶ�Ȩ��'}]
+E     
+E     Right contains one more item: {'footnote_id': '3', 'text': '�������ɶ�Ȩ��'}
+E     Use -v to get more diff
+___________ test_docx_missing_footnotes_part_is_unresolved_and_null ___________
+tests\unit\test_p2_office_table\test_docx_footnotes.py:71: in test_docx_missing_footnotes_part_is_unresolved_and_null
+    assert entry["footnote_refs"] == [{"footnote_id": "3", "text": None}]
+E   AssertionError: assert [] == [{'footnote_i...'text': None}]
+E     
+E     Right contains one more item: {'footnote_id': '3', 'text': None}
+E     Use -v to get more diff
+__________ test_docx_footnote_id_absent_from_part_never_invents_text __________
+tests\unit\test_p2_office_table\test_docx_footnotes.py:91: in test_docx_footnote_id_absent_from_part_never_invents_text
+    assert entry["footnote_refs"] == [{"footnote_id": "3", "text": None}]
+E   AssertionError: assert [] == [{'footnote_i...'text': None}]
+E     
+E     Right contains one more item: {'footnote_id': '3', 'text': None}
+E     Use -v to get more diff
+___________ test_docx_horizontal_span_is_one_cell_with_column_span ____________
+tests\unit\test_p2_office_table\test_docx_structure.py:82: in test_docx_horizontal_span_is_one_cell_with_column_span
+    assert table_structure["grid"] == {"rows": 2, "columns": 2}
+E   AssertionError: assert {'rows': 2, 'columns': None} == {'rows': 2, 'columns': 2}
+E     
+E     Omitting 1 identical items, use -vv to show
+E     Differing items:
+E     {'columns': None} != {'columns': 2}
+E     Use -v to get more diff
+_________ test_docx_vertical_merge_three_rows_start_and_two_continues _________
+tests\unit\test_p2_office_table\test_docx_structure.py:122: in test_docx_vertical_merge_three_rows_start_and_two_continues
+    assert [entry["merge"] for entry in entries] == [
+E   AssertionError: assert ['none', 'none', 'none'] == ['vertical_st...cal_continue']
+E     
+E     At index 0 diff: 'none' != 'vertical_start'
+E     Use -v to get more diff
+_ test_docx_vertical_continue_without_start_is_unresolved_without_fabrication _
+tests\unit\test_p2_office_table\test_docx_structure.py:144: in test_docx_vertical_continue_without_start_is_unresolved_without_fabrication
+    assert entries[0]["merge"] == "vertical_continue"
+E   AssertionError: assert 'none' == 'vertical_continue'
+E     
+E     - vertical_continue
+E     + none
+_________ test_docx_grid_span_past_declared_grid_is_null_and_partial __________
+tests\unit\test_p2_office_table\test_docx_structure.py:164: in test_docx_grid_span_past_declared_grid_is_null_and_partial
+    assert wide["column_span"] is None
+E   assert 1 is None
+____________ test_docx_tbl_header_row_is_recorded_from_markup_only ____________
+tests\unit\test_p2_office_table\test_docx_structure.py:180: in test_docx_tbl_header_row_is_recorded_from_markup_only
+    assert table_structure["header"] == {"rows": [0], "source": "tblHeader"}
+E   AssertionError: assert {'rows': [], 'source': 'none'} == {'rows': [0],...: 'tblHeader'}
+E     
+E     Differing items:
+E     {'rows': []} != {'rows': [0]}
+E     {'source': 'none'} != {'source': 'tblHeader'}
+E     Use -v to get more diff
+________ test_docx_page_break_with_repeated_header_marks_continuation _________
+tests\unit\test_p2_office_table\test_docx_structure.py:237: in test_docx_page_break_with_repeated_header_marks_continuation
+    assert continuation["page_break_hints"] == ["r2c0"]
+E   AssertionError: assert [] == ['r2c0']
+E     
+E     Right contains one more item: 'r2c0'
+E     Use -v to get more diff
+_________ test_docx_page_break_without_repeated_header_stays_unknown __________
+tests\unit\test_p2_office_table\test_docx_structure.py:255: in test_docx_page_break_without_repeated_header_stays_unknown
+    assert continuation["page_break_hints"] == ["r1c0"]
+E   AssertionError: assert [] == ['r1c0']
+E     
+E     Right contains one more item: 'r1c0'
+E     Use -v to get more diff
+________ test_docx_limits_are_per_call_and_never_truncate_half_a_table ________
+tests\unit\test_p2_office_table\test_docx_structure.py:285: in test_docx_limits_are_per_call_and_never_truncate_half_a_table
+    assert len(_tables(structure)) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len([{'table_id': 'tbl-0', 'package_part': 'word/document.xml', 'native_index': 0, 'grid': {'rows': 1, 'columns': None}, ....table_id': 'tbl-1', 'package_part': 'word/document.xml', 'native_index': 1, 'grid': {'rows': 1, 'columns': None}, ...}])
+E    +    where [{'table_id': 'tbl-0', 'package_part': 'word/document.xml', 'native_index': 0, 'grid': {'rows': 1, 'columns': None}, ....table_id': 'tbl-1', 'package_part': 'word/document.xml', 'native_index': 1, 'grid': {'rows': 1, 'columns': None}, ...}] = _tables({'schema_version': 'cwp-office-table/1', 'format': 'docx', 'source_sha256': 'e6605bbc4279888a12193cef1e31f2fabfaee1e88450546996a98644695005bd', 'parser': {'name': 'cwp_office_table_structure', 'version': '1.0.0'}, ...})
+________________ test_docx_cell_limit_keeps_whole_tables_only _________________
+tests\unit\test_p2_office_table\test_docx_structure.py:298: in test_docx_cell_limit_keeps_whole_tables_only
+    assert len(kept) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len([{'table_id': 'tbl-0', 'package_part': 'word/document.xml', 'native_index': 0, 'grid': {'rows': 1, 'columns': None}, ....table_id': 'tbl-1', 'package_part': 'word/document.xml', 'native_index': 1, 'grid': {'rows': 1, 'columns': None}, ...}])
+_____________________ test_docx_text_limit_marks_partial ______________________
+tests\unit\test_p2_office_table\test_docx_structure.py:306: in test_docx_text_limit_marks_partial
+    assert structure["status"] == "partial"
+E   AssertionError: assert 'ok' == 'partial'
+E     
+E     - partial
+E     + ok
+______________ test_docx_cell_without_paragraph_has_null_locator ______________
+tests\unit\test_p2_office_table\test_locator_compatibility.py:89: in test_docx_cell_without_paragraph_has_null_locator
+    assert entries[1]["locator"] is None
+E   AssertionError: assert 'cwp-docx-body/1|t=0|r=0|c=1|p=0' is None
+____________ test_docx_locator_uses_first_visible_paragraph_index _____________
+tests\unit\test_p2_office_table\test_locator_compatibility.py:103: in test_docx_locator_uses_first_visible_paragraph_index
+    assert entry["locator"] == "cwp-docx-body/1|t=0|r=0|c=0|p=1"
+E   AssertionError: assert 'cwp-docx-bod...0|r=0|c=0|p=0' == 'cwp-docx-bod...0|r=0|c=0|p=1'
+E     
+E     - cwp-docx-body/1|t=0|r=0|c=0|p=1
+E     ?                               ^
+E     + cwp-docx-body/1|t=0|r=0|c=0|p=0
+E     ?                               ^
+_________ test_docx_page_break_only_cell_keeps_null_locator_and_hint __________
+tests\unit\test_p2_office_table\test_locator_compatibility.py:116: in test_docx_page_break_only_cell_keeps_null_locator_and_hint
+    assert entry["locator"] is None
+E   AssertionError: assert 'cwp-docx-body/1|t=0|r=1|c=0|p=0' is None
+___________ test_pptx_cell_locators_match_parse_pptx_byte_for_byte ____________
+tests\unit\test_p2_office_table\test_locator_compatibility.py:142: in test_pptx_cell_locators_match_parse_pptx_byte_for_byte
+    tables = _structure(payload)["tables"]
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_locator_compatibility.py:28: in _structure
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+________________ test_pptx_horizontal_merge_marks_continuation ________________
+tests\unit\test_p2_office_table\test_pptx_structure.py:55: in test_pptx_horizontal_merge_marks_continuation
+    structure = _parse(payload)
+                ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_pptx_structure.py:15: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+_________________ test_pptx_vertical_merge_marks_continuation _________________
+tests\unit\test_p2_office_table\test_pptx_structure.py:76: in test_pptx_vertical_merge_marks_continuation
+    structure = _parse(payload)
+                ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_pptx_structure.py:15: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+_____ test_pptx_conflicting_merge_signals_are_unresolved_with_null_spans ______
+tests\unit\test_p2_office_table\test_pptx_structure.py:94: in test_pptx_conflicting_merge_signals_are_unresolved_with_null_spans
+    structure = _parse(payload)
+                ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_pptx_structure.py:15: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+_________ test_pptx_continuation_is_not_applicable_and_header_is_none _________
+tests\unit\test_p2_office_table\test_pptx_structure.py:107: in test_pptx_continuation_is_not_applicable_and_header_is_none
+    structure = _parse(payload)
+                ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_pptx_structure.py:15: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+______________________ test_pptx_grid_widths_are_raw_emu ______________________
+tests\unit\test_p2_office_table\test_pptx_structure.py:122: in test_pptx_grid_widths_are_raw_emu
+    table_structure = _only_table(_parse(payload))
+                                  ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_pptx_structure.py:15: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+_________________ test_pptx_cell_locator_matches_parser_shape _________________
+tests\unit\test_p2_office_table\test_pptx_structure.py:129: in test_pptx_cell_locator_matches_parser_shape
+    table_structure = _only_table(_parse(payload))
+                                  ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_pptx_structure.py:15: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+__________________ test_replay_detects_a_changed_column_span __________________
+tests\unit\test_p2_office_table\test_replay_and_determinism.py:54: in test_replay_detects_a_changed_column_span
+    assert target is not None, "fixture must contain a spanning cell"
+E   AssertionError: fixture must contain a spanning cell
+E   assert None is not None
+____________________ test_replay_detects_a_changed_locator ____________________
+tests\unit\test_p2_office_table\test_replay_and_determinism.py:73: in test_replay_detects_a_changed_locator
+    with pytest.raises(ValueError, match="replay mismatch"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+________________________ test_pptx_replay_round_trips _________________________
+tests\unit\test_p2_office_table\test_replay_and_determinism.py:134: in test_pptx_replay_round_trips
+    structure = _parse(payload)
+                ^^^^^^^^^^^^^^^
+tests\unit\test_p2_office_table\test_replay_and_determinism.py:30: in _parse
+    return parse_office_tables(
+src\company_wiki\document_normalization\office_table_structure.py:66: in parse_office_tables
+    raise ValueError("unsupported_office_format")
+E   ValueError: unsupported_office_format
+=========================== short test summary info ===========================
+FAILED tests/unit/test_p2_office_table/test_boundaries.py::test_encrypted_member_is_refused
+FAILED tests/unit/test_p2_office_table/test_docx_footnotes.py::test_docx_footnote_reference_binds_part_text
+FAILED tests/unit/test_p2_office_table/test_docx_footnotes.py::test_docx_missing_footnotes_part_is_unresolved_and_null
+FAILED tests/unit/test_p2_office_table/test_docx_footnotes.py::test_docx_footnote_id_absent_from_part_never_invents_text
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_horizontal_span_is_one_cell_with_column_span
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_vertical_merge_three_rows_start_and_two_continues
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_vertical_continue_without_start_is_unresolved_without_fabrication
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_grid_span_past_declared_grid_is_null_and_partial
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_tbl_header_row_is_recorded_from_markup_only
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_page_break_with_repeated_header_marks_continuation
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_page_break_without_repeated_header_stays_unknown
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_limits_are_per_call_and_never_truncate_half_a_table
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_cell_limit_keeps_whole_tables_only
+FAILED tests/unit/test_p2_office_table/test_docx_structure.py::test_docx_text_limit_marks_partial
+FAILED tests/unit/test_p2_office_table/test_locator_compatibility.py::test_docx_cell_without_paragraph_has_null_locator
+FAILED tests/unit/test_p2_office_table/test_locator_compatibility.py::test_docx_locator_uses_first_visible_paragraph_index
+FAILED tests/unit/test_p2_office_table/test_locator_compatibility.py::test_docx_page_break_only_cell_keeps_null_locator_and_hint
+FAILED tests/unit/test_p2_office_table/test_locator_compatibility.py::test_pptx_cell_locators_match_parse_pptx_byte_for_byte
+FAILED tests/unit/test_p2_office_table/test_pptx_structure.py::test_pptx_horizontal_merge_marks_continuation
+FAILED tests/unit/test_p2_office_table/test_pptx_structure.py::test_pptx_vertical_merge_marks_continuation
+FAILED tests/unit/test_p2_office_table/test_pptx_structure.py::test_pptx_conflicting_merge_signals_are_unresolved_with_null_spans
+FAILED tests/unit/test_p2_office_table/test_pptx_structure.py::test_pptx_continuation_is_not_applicable_and_header_is_none
+FAILED tests/unit/test_p2_office_table/test_pptx_structure.py::test_pptx_grid_widths_are_raw_emu
+FAILED tests/unit/test_p2_office_table/test_pptx_structure.py::test_pptx_cell_locator_matches_parser_shape
+FAILED tests/unit/test_p2_office_table/test_replay_and_determinism.py::test_replay_detects_a_changed_column_span
+FAILED tests/unit/test_p2_office_table/test_replay_and_determinism.py::test_replay_detects_a_changed_locator
+FAILED tests/unit/test_p2_office_table/test_replay_and_determinism.py::test_pptx_replay_round_trips
+======================== 27 failed, 19 passed in 2.72s ========================
