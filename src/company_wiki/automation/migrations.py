@@ -32,7 +32,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 
 EXPECTED_TABLES_V1 = frozenset(
     {
@@ -283,6 +283,10 @@ _DDL_V6_STATEMENTS: tuple[str, ...] = (
     "ALTER TABLE narrative_run_jobs ADD COLUMN final_generation_json TEXT",
 )
 
+_DDL_V7_STATEMENTS: tuple[str, ...] = (
+    "ALTER TABLE narrative_model_reservations ADD COLUMN paid_response_json TEXT",
+)
+
 
 # --------------------------------------------------------------------------- #
 # Migration errors (stable code strings; original exceptions chained).
@@ -531,29 +535,32 @@ def _read_structure(
     return structure
 
 
-@functools.lru_cache(maxsize=6)
+@functools.lru_cache(maxsize=7)
 def _expected_structure(version: int) -> dict:
     connection = sqlite3.connect(":memory:")
     connection.row_factory = sqlite3.Row
     try:
         for statement in _DDL_V1_STATEMENTS:
             connection.execute(statement)
-        if version in (2, 3, 4, 5, 6):
+        if version in (2, 3, 4, 5, 6, 7):
             for statement in _DDL_V2_STATEMENTS:
                 connection.execute(statement)
             tables = EXPECTED_TABLES_V2
-            if version in (3, 4, 5, 6):
+            if version in (3, 4, 5, 6, 7):
                 for statement in _DDL_V3_STATEMENTS:
                     connection.execute(statement)
                 tables = EXPECTED_TABLES
-                if version in (4, 5, 6):
+                if version in (4, 5, 6, 7):
                     for statement in _DDL_V4_STATEMENTS:
                         connection.execute(statement)
-                if version in (5, 6):
+                if version in (5, 6, 7):
                     for statement in _DDL_V5_STATEMENTS:
                         connection.execute(statement)
-                if version == 6:
+                if version in (6, 7):
                     for statement in _DDL_V6_STATEMENTS:
+                        connection.execute(statement)
+                if version == 7:
+                    for statement in _DDL_V7_STATEMENTS:
                         connection.execute(statement)
         elif version == 1:
             tables = EXPECTED_TABLES_V1
@@ -637,7 +644,7 @@ def _tables_for_version(version: int) -> frozenset[str]:
         return EXPECTED_TABLES_V1
     if version == 2:
         return EXPECTED_TABLES_V2
-    if version in (3, 4, 5, 6):
+    if version in (3, 4, 5, 6, 7):
         return EXPECTED_TABLES
     raise ValueError(f"unsupported schema version: {version}")
 
@@ -684,7 +691,7 @@ def _classify_existing(db_path: Path) -> str:
         tables = _user_tables(connection)
         if version == SCHEMA_VERSION:
             return f"v{version}"
-        if version in (1, 2, 3, 4, 5):
+        if version in (1, 2, 3, 4, 5, 6):
             _require_expected_structure(connection, version=version)
             return f"v{version}"
         unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
@@ -778,6 +785,13 @@ def _apply_write_migration(
                 _execute_statement(connection, statement)
             connection.execute("PRAGMA user_version = 6")
             applied_versions.append(6)
+            version = 6
+        if version == 6:
+            _require_expected_structure(connection, version=6)
+            for statement in _DDL_V7_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 7")
+            applied_versions.append(7)
     except sqlite3.OperationalError as exc:
         raise MigrationExecutionError(
             f"DDL execution failed and was rolled back: {exc}"
@@ -852,7 +866,7 @@ def _inspect_schema(connection: sqlite3.Connection) -> SchemaStructure:
             f"user_version {version} is newer than supported {SCHEMA_VERSION}"
         )
     tables = _user_tables(connection)
-    if version in (1, 2, 3, 4, 5, 6):
+    if version in (1, 2, 3, 4, 5, 6, 7):
         _require_expected_structure(connection, version=version)
         fingerprint = _fingerprint(connection, version=version)
     else:

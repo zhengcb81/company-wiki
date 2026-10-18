@@ -45,7 +45,7 @@ def _native_material(database: Path, run_id: str) -> dict | None:
             (run_id,),
         ).fetchall()
 
-    selections, failures, summaries, verification_failures, successful_bundles = {}, {}, {}, {}, set()
+    selections, failures, summaries, executions, verification_failures, successful_bundles = {}, {}, {}, {}, {}, set()
     for row in rows:
         result = json.loads(row["result_json"]) if row["result_json"] else {}
         item_key = row["subject_id"]
@@ -68,7 +68,13 @@ def _native_material(database: Path, run_id: str) -> dict | None:
             failures.setdefault(item_key, []).append(row["attempt_id"])
         elif (kind == "source.narrative_summarize" and row["native_model"]
               and row["outcome"] == "succeeded"):
-            summaries[item_key] = result["result"]
+            from company_wiki.automation.narrative_summary_execution import (
+                extract_summary_execution, parse_summary_job_result,
+            )
+            summaries[item_key] = parse_summary_job_result(result["result"]).to_dict()
+            execution = extract_summary_execution(result["result"])
+            if execution is not None:
+                executions[item_key] = execution
         elif (kind == "source.narrative_verify" and row["native_model_item"]
               and row["outcome"] in {"terminal_failure", "retryable"}
               and row["error_code"] is not None):
@@ -90,7 +96,8 @@ def _native_material(database: Path, run_id: str) -> dict | None:
             "final_generation": generations.get(item_key),
             "failed_summary_attempt_ids": sorted(failures.get(item_key, [])),
             **({"summary_result": summaries[item_key],
-                "failed_verification_attempt_ids": sorted(verification_failures[item_key])}
+                "failed_verification_attempt_ids": sorted(verification_failures[item_key]),
+                **({"execution": executions[item_key]} if item_key in executions else {})}
                if item_key in verification_failures and item_key in summaries else {}),
         } for item_key in items],
     }

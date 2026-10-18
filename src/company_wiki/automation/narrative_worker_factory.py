@@ -56,7 +56,7 @@ def _options(spec: WorkerProcessSpec) -> tuple[dict[str, Any], dict[str, Any]]:
         options = json.loads(spec.runtime_options_json)
     except (ValueError, TypeError):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID") from None
-    if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes", "normalization_config", "normalization_parsers", "normalization_deadline"}):
+    if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes", "normalization_config", "normalization_parsers", "normalization_deadline", "response_storage"}):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
     final_bytes = options.get("max_final_bytes", 2 * 1024 * 1024)
     if type(final_bytes) is not int or not 0 < final_bytes <= 2 * 1024 * 1024:
@@ -350,8 +350,34 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
         except (TypeError, ValueError):
             raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from None
         _verify_effective_model(model, snapshot.frozen_models)
+        paid_responses = None
+        from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
+        if EXTRACTIVE_MODEL_PROJECTION_VERSION in reading_projections.values():
+            from .narrative_batch import BatchStorageBudget, _BudgetedObjects
+            from .narrative_paid_response import PaidResponseArtifacts
+            storage = options.get('response_storage')
+            if not isinstance(storage, dict) or set(storage) != {
+                    'paths', 'baseline', 'max_persistent_bytes', 'max_scratch_bytes'}:
+                raise ValueError('NARRATIVE_RESPONSE_STORAGE_UNAVAILABLE')
+            # This is the coordinator's same finite budget view and original
+            # baseline, never a child-local fresh budget or a raw-root scan.
+            guard = BatchStorageBudget(files=tuple(Path(path) for path in storage['paths']),
+                persistent_dirs=(), scratch_dirs=(), baseline=tuple(storage['baseline']),
+                max_persistent_bytes=storage['max_persistent_bytes'],
+                max_scratch_bytes=storage['max_scratch_bytes'])
+            def admit_response(max_body):
+                current = guard.check()
+                # Body's temporary writer plus bounded receipt/SQLite overhead.
+                if current.persistent_added_bytes + 2 * max_body + 65536 > guard.max_persistent_bytes:
+                    raise ValueError('PERSISTENT_BYTES_EXCEEDED')
+                if max_body > guard.max_scratch_bytes:
+                    raise ValueError('SCRATCH_BYTES_EXCEEDED')
+            objects = _BudgetedObjects(catalog.config.catalog_dir, guard, model.max_response_bytes)
+            paid_responses = PaidResponseArtifacts(objects, max_response_bytes=model.max_response_bytes,
+                                                   preflight=admit_response)
         caller = BudgetedNarrativeCaller(store=run_store, run_id=options["run_id"], model=model,
-                                        final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024))
+                                        final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024),
+                                        **({'paid_responses': paid_responses} if paid_responses is not None else {}))
     registry = create_default_registry()
     executor = HandlerExecutor()
     register_narrative_handlers(

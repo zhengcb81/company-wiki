@@ -65,7 +65,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
     from .native_table_bridge import NATIVE_TABLE_BRIDGE_VERSION
     from company_wiki.document_normalization import text_matching
 
-    versions = {"inventory": "1.4.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    versions = {"inventory": "1.5.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
@@ -126,6 +126,9 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
     if len(scopes) > 64:
         complete = False
         scopes = scopes[:64]
+    # Scope membership is a set. Canonicalize once, including the references in
+    # carrier/frontend/capture components, before building the causal inventory.
+    scopes = sorted(scopes, key=lambda scope: scope["scope_id"])
     for scope in scopes:
         sid = scope["scope_id"]
         binding = next((item for item in registry._CATALOG["legacy_bindings"]
@@ -162,7 +165,11 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
         components.append({"component_id": identifier, "version": fallback["version"],
             "content_digest": _digest(fallback), "matcher_digest": _digest(fallback), "scope_ids": [sid]})
     if scopes:
-        sid = scopes[0]["scope_id"]
+        # Facets belong to this whole source, not a particular parent or child
+        # profile. Use a stable representative ID solely for the wire reference:
+        # freeze canonicalizes scope order, so insertion-first changes on replay
+        # for multi-scope documents (notably the appended PDF geometry scope).
+        sid = min(scope["scope_id"] for scope in scopes)
         for facet in registry._CATALOG["facets"]:
             identifier = "facet|" + facet["id"]
             matcher = facet["positive_evidence"]

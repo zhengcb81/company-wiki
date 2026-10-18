@@ -321,7 +321,7 @@ class NarrativeHTTPModel:
             raise ModelRequestTooLargeError("MODEL_REQUEST_TOO_LARGE")
         return body
 
-    def generate(self, request: NarrativeModelRequest) -> NarrativeModelResponse:
+    def generate(self, request: NarrativeModelRequest, *, response_sink=None) -> NarrativeModelResponse:
         body = self.request_bytes(request)
         # No key is cached in this object, options, request body or model identity.
         raw_key = os.environ.get(self.api_key_env, "")
@@ -376,7 +376,15 @@ class NarrativeHTTPModel:
                 if total > self.max_response_bytes:
                     raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
                 chunks.append(chunk)
-            return self._response(request, b"".join(chunks), started, http_status=response.status)
+            if size is not None and total != int(size):
+                raise ModelResponseError("MODEL_HTTP_INCOMPLETE")
+            complete_body = b"".join(chunks)
+            if response_sink is not None:
+                # The sink owns durable bytes before any envelope interpretation.
+                # PaidResponseError is deliberately not a transport OSError.
+                response_sink(complete_body, http_status=response.status,
+                    duration_ms=max(0, int((time.monotonic() - started) * 1000)))
+            return self._response(request, complete_body, started, http_status=response.status)
         except (socket.timeout, TimeoutError):
             raise ModelTimeoutError("MODEL_TIMEOUT") from None
         except (OSError, http.client.HTTPException, ValueError, UnicodeError):
@@ -393,7 +401,11 @@ class NarrativeHTTPModel:
 
     def _response(
         self, request: NarrativeModelRequest, body: bytes, started: float, *, http_status: int = 200,
+        saved_duration_ms: int | None = None,
     ) -> NarrativeModelResponse:
+        def elapsed() -> int:
+            return (saved_duration_ms if saved_duration_ms is not None
+                    else max(0, int((time.monotonic() - started) * 1000)))
         input_tokens = output_tokens = provider_code = reasoning_tokens = None
         usage_diagnostic = None
         stage = "json"
@@ -443,10 +455,10 @@ class NarrativeHTTPModel:
             raise ModelEnvelopeError(stage, http_status=http_status, provider_code=provider_code,
                 input_tokens=input_tokens, output_tokens=output_tokens,
                 reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
-                duration_ms=max(0, int((time.monotonic() - started) * 1000))) from None
+                duration_ms=elapsed()) from None
         if len(encoded) > MODEL_RESPONSE_MAX_BYTES:
             raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
-        duration_ms = max(0, int((time.monotonic() - started) * 1000))
+        duration_ms = elapsed()
         if truncated:
             raise ModelOutputTruncatedError(
                 model_id=actual_model,
@@ -472,6 +484,15 @@ class NarrativeHTTPModel:
             duration_ms=duration_ms,
             reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
         )
+
+    def replay_response(self, request: NarrativeModelRequest, body: bytes, *,
+                        http_status: int, duration_ms: int) -> NarrativeModelResponse:
+        """Decode verified saved transport bytes without credentials or a POST."""
+        if (not isinstance(body, bytes) or len(body) > self.max_response_bytes
+                or type(duration_ms) is not int or duration_ms < 0
+                or type(http_status) is not int or not 200 <= http_status < 300):
+            raise ModelResponseError("MODEL_PAID_RESPONSE_INVALID")
+        return self._response(request, body, 0, http_status=http_status, saved_duration_ms=duration_ms)
 
 
 __all__ = [

@@ -184,9 +184,10 @@ class NarrativeBatchRequest:
         projection = None
         if "reading_model_projection" in value:
             from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
+            from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
 
             projection = _text(value["reading_model_projection"], "reading_model_projection")
-            if projection != SCOPED_MODEL_PROJECTION_VERSION:
+            if projection not in {SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION}:
                 raise ValueError("unsupported reading_model_projection")
             if selector != "0.9.0":
                 raise ValueError("explicit reading_model_projection requires selector_version 0.9.0")

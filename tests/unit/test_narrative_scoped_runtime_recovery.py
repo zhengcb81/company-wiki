@@ -86,7 +86,7 @@ def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_rec
 
 
 def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade(
-    tmp_path_factory, loopback_model_server,
+    tmp_path_factory, loopback_model_server, monkeypatch,
 ):
     with isolated_batch_directory(tmp_path_factory) as root:
         state = prepare_source_catalog(root, one_source=True, include_policy=False)
@@ -94,9 +94,14 @@ def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_u
             request, wire = _request(state, loopback_model_server.endpoint, '1')
             request = replace(request, selector_version='0.9.0')
             wire = request.to_dict()
-            first = batch.run_batch(request, project_root=root,
-                catalog_config_path=state.config_path, db_path=root/'automation.db',
-                work_dir=root/'work')
+            original = batch.generation_manifest
+            def explicit_v3(*args, **kwargs):
+                return original(*args, **{**kwargs, 'reading_model_projection': 'reading-model-input/3'})
+            with monkeypatch.context() as patch:
+                patch.setattr(batch, 'generation_manifest', explicit_v3)
+                first = batch.run_batch(request, project_root=root,
+                    catalog_config_path=state.config_path, db_path=root/'automation.db',
+                    work_dir=root/'work')
             assert first['status']=='completed', first
             assert len(loopback_model_server.requests)==1
             assert loopback_model_server.requests[0][0]['schema_version']=='narrative-model-request/4'

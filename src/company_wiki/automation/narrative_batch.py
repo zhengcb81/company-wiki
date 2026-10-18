@@ -1247,6 +1247,13 @@ def _preflight_storage(request, *, source_count=None):
         + 2 * BUNDLE_MAX_BYTES
         + 1024**2
     )
+    from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION, EXECUTION_MAX_BYTES
+    durable_response = (request.execution_versions.get('selector') == '0.9.0'
+                        and request.reading_model_projection in (None, EXTRACTIVE_MODEL_PROJECTION_VERSION))
+    if durable_response:
+        # Existing finite source reserve includes its raw paid body, bounded pin
+        # and retained execution report. No second output/fee ledger is opened.
+        per_source += request.model_options['max_response_bytes'] + 4096 + EXECUTION_MAX_BYTES
     reserve = (
         (len(request.work_items) if source_count is None else source_count) * per_source
         + len(profile_slots(request.profile)) * 262144
@@ -1254,7 +1261,10 @@ def _preflight_storage(request, *, source_count=None):
     )
     if reserve > request.max_persistent_bytes:
         raise ValueError("PERSISTENT_BYTES_EXCEEDED")
-    if request.max_final_bytes > request.max_scratch_bytes:
+    # One model writer and the coordinator's final object writer may overlap.
+    scratch_bound = request.max_final_bytes + (request.model_options['max_response_bytes']
+                                               if durable_response else 0)
+    if scratch_bound > request.max_scratch_bytes:
         raise ValueError("SCRATCH_BYTES_EXCEEDED")
 
 
@@ -1393,6 +1403,41 @@ def _run_owned(
         )
 
 
+def _paid_summary_recovery_candidates(binding, run, jobs, runs):
+    """Only an exact new-protocol paid failure can request a zero-POST replay.
+
+    Typed pin observation is not proof of stored response bytes. The worker's
+    existing caller checks those bytes and exact request binding before use;
+    any mismatch stays failed without acquiring another provider allowance.
+    """
+    from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION, EXTRACTIVE_PROMPT_VERSION
+    from .narrative_paid_response import PaidResponsePin, PaidResponseError
+    if run is None or run.blocked:
+        return ()
+    records = runs.reservations_for_run(run.run_id)
+    candidates = []
+    for job in jobs:
+        manifest = binding.generation_manifests.get(job.subject_id, {})
+        if (job.job_type != 'source.narrative_summarize'
+                or job.status not in {JobStatus.DEAD_LETTER, JobStatus.RETRY_WAIT}
+                or manifest.get('reading_model_projection') != EXTRACTIVE_MODEL_PROJECTION_VERSION):
+            continue
+        paid = [record for record in records if record.job_id == job.job_id and record.paid_response_json]
+        if len(paid) != 1:
+            continue
+        record = paid[0]
+        if record.output_bytes not in (None, 0) or record.output_sha256 is not None:
+            continue
+        try:
+            pin = PaidResponsePin.from_json(record.paid_response_json)
+        except PaidResponseError:
+            continue
+        if (pin.request_sha256 == record.request_sha256 and pin.model_id == run.model_id
+                and pin.prompt_version == EXTRACTIVE_PROMPT_VERSION):
+            candidates.append((job.job_id, record.request_sha256))
+    return tuple(candidates)
+
+
 def _run_prepared(
     request,
     catalog,
@@ -1495,9 +1540,10 @@ def _run_prepared(
             runs = NarrativeRunStore(db_path)
     assert store is not None and runs is not None
     gate = store.read_runtime_gate()
+    paid_recovery = _paid_summary_recovery_candidates(binding, previous, current_jobs, runs)
     if gate.desired_state is RuntimeState.ENABLED and previous is None:
         raise ValueError("AUTOMATION_RUNTIME_ALREADY_ENABLED")
-    if previous is not None and (
+    if previous is not None and not paid_recovery and (
         all(job.status in _TERMINAL for job in current_jobs)
         or (previous.blocked and _blocked_history_is_idle(store, current_jobs, gate))
     ):
@@ -1681,6 +1727,12 @@ def _run_prepared(
                             binding, versions
                         ),
                         "normalization_deadline": deadline,
+                        "response_storage": {
+                            "paths": [str(path) for path in guard.paths],
+                            "baseline": list(guard.baseline),
+                            "max_persistent_bytes": guard.max_persistent_bytes,
+                            "max_scratch_bytes": guard.max_scratch_bytes,
+                        },
                     }
                 ),
                 compute_job_types=(
@@ -1707,6 +1759,9 @@ def _run_prepared(
                     expected_generation=current.control_generation,
                     updated_at=_now(),
                 ).control_generation
+        for job_id, request_sha256 in paid_recovery:
+            store.retry_paid_narrative_summary(run_id=run.run_id, job_id=job_id,
+                request_sha256=request_sha256, now=_now(), expected_generation=generation)
         terminal = _TERMINAL
         current_jobs = store.list_jobs(job_ids=run.job_ids)
         if len(current_jobs) != len(run.job_ids):
@@ -1954,6 +2009,22 @@ def _blocked_history_is_idle(
 
 def _receipt(run_id, status, documents, runs, guard):
     budget = runs.budget_snapshot(run_id)
+    paid_writer_seen = False
+    reservations = getattr(runs, 'reservations_for_run', None)
+    if callable(reservations):
+        from .narrative_paid_response import PaidResponsePin, PaidResponseError
+        for record in reservations(run_id):
+            if record.paid_response_json is None:
+                continue
+            try:
+                pin = PaidResponsePin.from_json(record.paid_response_json)
+            except PaidResponseError:
+                continue
+            # The same AUTO pin records a completed durable object write. This
+            # merges a child observation, not a new meter/baseline or an exact
+            # simultaneous-writer peak measurement.
+            guard.peak = max(guard.peak, pin.byte_size)
+            paid_writer_seen = True
     storage = guard.snapshot()
     return {
         "schema_version": "narrative-batch-result/2"
@@ -1975,6 +2046,8 @@ def _receipt(run_id, status, documents, runs, guard):
         "storage": {
             "persistent_added_bytes": storage.persistent_added_bytes,
             "scratch_peak_bytes": storage.scratch_peak_bytes,
+            **({'scratch_peak_observation': 'committed_writer_lower_bound'}
+               if paid_writer_seen else {}),
         },
     }
 
@@ -1982,17 +2055,19 @@ def _receipt(run_id, status, documents, runs, guard):
 
 def _attempt_model_diagnostics(store, reservations, summary_job):
     """Read optional observed meters; old receipts keep their original shape."""
+    from .narrative_summary_execution import extract_summary_execution
     observations = []
     for attempt in store.list_attempts(summary_job.job_id):
         raw = attempt.result_json
-        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":', '"failed_final":')):
+        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":', '"failed_final":', '"execution"', '"narrative-summary-execution/1"')):
             continue
         try:
             parsed = HandlerResult.from_dict(json.loads(raw))
             metrics = parsed.metrics
             failed = parsed.result.get("failed_final")
             diagnostic = FailedFinalDiagnostic.from_dict(failed).to_dict() if failed is not None else None
-            if metrics.reasoning_tokens is None and metrics.usage_diagnostic is None and diagnostic is None:
+            execution = extract_summary_execution(parsed.result)
+            if metrics.reasoning_tokens is None and metrics.usage_diagnostic is None and diagnostic is None and execution is None:
                 continue
             reservation = reservations.get(attempt.attempt_id)
             observation: dict[str, Any] = {
@@ -2005,6 +2080,8 @@ def _attempt_model_diagnostics(store, reservations, summary_job):
             }
             if diagnostic is not None:
                 observation["failed_final"] = diagnostic
+            if execution is not None:
+                observation["execution"] = execution
             observations.append(observation)
         except (KeyError, TypeError, ValueError):
             # Optional diagnostics never change the original job/fee outcome.

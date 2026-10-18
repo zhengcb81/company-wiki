@@ -127,8 +127,8 @@ def _dependencies(
         )
     try:
         selected = NarrativeSelectResult.from_dict(selected_raw.result)
-        summary = NarrativeSummaryResult.from_dict(summary_raw.result)
-        summary.validate_against(selected)
+        from .narrative_summary_execution import parse_summary_job_result
+        summary = parse_summary_job_result(summary_raw.result, selected=selected)
     except NarrativeContractError as exc:
         raise _VerifyFailure(
             "DEPENDENCY_INVALID",

@@ -49,6 +49,9 @@ def sha(data):
 
 
 def model_draft(data):
+    if data['schema_version'] == 'narrative-model-request/6':
+        return {'decisions': [{'task': task['key'], 'priority': 'normal', 'disposition': 'consider'}
+                              for task in data['material']['tasks']]}
     unit_citations = data["schema_version"] == "narrative-model-request/4"
     source_owned = unit_citations or data["schema_version"] == "narrative-model-request/3"
     projected = "subject" in data
