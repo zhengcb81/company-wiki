@@ -58,8 +58,17 @@ def assert_catalog_config_allowed(path: Path, *, tmp_path: Path | None = None) -
     ``CWP_P4_CATALOG_CONFIG`` must be an absolute path below ``tmp_path`` or this
     card's ``fixtures/``; anything else - production config included - hard-fails
     rather than silently skipping.
+
+    The existence check runs *before* ``samefile``: ``Path.samefile`` raises a
+    bare ``FileNotFoundError`` when the given path does not exist, which would
+    escape this function as an unhandled OS error instead of the refusal this
+    guard promises (review finding P4-R1).
     """
     resolved = path.resolve()
+    if not resolved.is_file():
+        raise ProductionConfigRefused(
+            f"{C.ENV_CATALOG} does not exist: {resolved}"
+        )
     production = C.PRODUCTION_CATALOG_CONFIG.resolve()
     if resolved == production or (
         production.exists() and resolved.samefile(production)
@@ -73,9 +82,5 @@ def assert_catalog_config_allowed(path: Path, *, tmp_path: Path | None = None) -
         raise ProductionConfigRefused(
             f"{C.ENV_CATALOG} must be an absolute path under tmp_path or "
             f"{C.FIXTURES_DIR}; got {resolved}"
-        )
-    if not resolved.is_file():
-        raise ProductionConfigRefused(
-            f"{C.ENV_CATALOG} does not exist: {resolved}"
         )
     return resolved

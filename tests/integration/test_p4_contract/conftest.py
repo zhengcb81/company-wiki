@@ -62,9 +62,18 @@ def pytest_runtest_logreport(report) -> None:
     Without this hook ``sessionreport.record_outcome`` never runs and every
     ``counts`` counter in the receipt stays zero - the RED the card's section 6
     asks the counts test to catch.
+
+    A *teardown* error is counted by pytest as an ``error`` alongside the call
+    outcome (``1 passed, 1 error``), so it is recorded separately instead of
+    overwriting the call result - otherwise the receipt would silently drop it
+    and ``counts`` would stop matching the real summary (review finding P4-R3).
     """
     from .support import sessionreport
 
+    if report.when == "teardown":
+        if report.outcome == "failed":
+            sessionreport.record_teardown_error(report.nodeid)
+        return
     if report.when not in ("setup", "call"):
         return
     reason: str | None = None
