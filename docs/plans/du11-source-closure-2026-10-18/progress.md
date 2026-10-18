@@ -1,3 +1,11 @@
+## 覆盖修复（A）：两次调用已跑通，卡在 activation-resume 的预约冲突（2026-10-18）
+
+- 修了三个真问题：`HandlerResult.result` 是不可变 Mapping（`isinstance(dict)` 永假，导致补写退化成重发全量请求）；prior 摘要 wire 需转 plain 容器；phase C 的 `gold_observation` 只接受全量 material，补写子集被 AssertionError 挡下。
+- 实测（`CW_SUMMARY_COVERAGE_REPAIR=1`）：CN **两次 POST**（28,045 tokens / $0.005134），摘要成功、run 进入 `activation_pending`，说明补写链路本身工作。
+- 但 `activation-resume` 复跑时 `ReservationConflictError`：重试 attempt 的 reservation 与恢复路径重新计算的请求哈希冲突。
+- 补写默认关闭；C 内容仍 8/10。下一步：让 resume 复用/跳过已结算的补写 attempt，或允许同一 attempt 的相同请求哈希复用。
+
+---
 ## B2 定稿：最终复审 PASS（2026-10-18）
 
 - 最终复审 `b2-antecedent-final-review-20261018-v3.md`：**PASS（代码层），无 P1**；两个复审 P1（长名称截断、截断误判为 missing）已修并各带回归测试。
