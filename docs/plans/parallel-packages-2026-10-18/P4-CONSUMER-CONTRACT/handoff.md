@@ -6,7 +6,7 @@
   与本卡目录 `docs/plans/parallel-packages-2026-10-18/P4-CONSUMER-CONTRACT/**`（夹具、日志、收据、PWF、审查报告、交接件）。
 - 分支 `codex/p4-consumer-contract-20261018`，基线 `4045787f`；`git diff 4045787f..HEAD` 全部路径 ⊆ 上述写集，
   第 4 节 ROOT 独占路径与 `tests/integration` 其他目录 **0 改动**（`disclosure.pdf` 被 `.gitignore:5` 忽略，用 `git add -f` 入库，未改 ignore 规则）。
-- 提交链：`cdf5be5a` 实现（含夹具/日志/收据/PWF）→ `025c0b71` 审查修复（3 项，写集内）→ `5f840650` 审查报告 + 最终收据 → 本交接提交。
+- 提交链：`cdf5be5a` 实现（含夹具/日志/收据/PWF）→ `025c0b71` 审查修复（3 项，写集内）→ `5f840650` 审查报告 + 最终收据 → `5a651498` 交接件（handoff.md/json + PWF 更正）→ 本收尾提交（交接载体，按 INTERFACES §8 不自引用其 SHA）。
 - 冻结接口按 card §5：env 五个开关、`p4-consumer-commands/1`、`p4-consumer-observation/1`、`p4-contract-receipt/1`；
   `company_wiki` 导入路径指向本 worktree（INTERFACES §10 第 2 行验收通过）。
 

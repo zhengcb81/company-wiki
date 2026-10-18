@@ -45,8 +45,19 @@
 | `static-mypy-20261018.log` | no issues in 24 files，exit 0 |
 | `receipt.json` | `p4-contract-receipt/1`，`partial`，checked=34/passed=34/failed=0/skipped=0/not_evaluated=4 |
 
+## 2026-10-18（交付收尾）
+- 独立审查 **PASS**：`review/independent.md`；审查者 `independent-reviewer (non-author, non-ROOT)`，
+  六项强制检查逐项 PASS；修复 P4-R1/P4-R2/P4-R3（提交 `025c0b71`）后复跑 ruff/mypy/GREEN 均绿；
+  报告 + 最终收据提交于 `5f840650`（审查后未再运行 pytest，收据保持 34 passed）。
+- 作者确认审查窗口内 `findings.md`/`task_plan.md` 改动系本人所为，纳入 `5a651498`；
+  审查者标记的两处过期陈述（RED 提交）已更正。
+- 交接：`handoff.md`（19 行四段式）+ `handoff.json`（§8 全 17 字段、42 条 file_bindings、
+  4 条验收运行、red_receipt、7 合成夹具、scope_proof 全 0、independent_review PASS/41 绑定）。
+- 终验：43 个 diff 路径全在写集内、无禁触路径、`tests/integration` 除车道 0 改动、树净。
+
 ## Errors Encountered
 （同 task_plan.md 错误表；新增项在此追加）
+- handoff `first_failure` 初版 304 字超 §8 的 300 字上限 → 删去冗余前缀后 289 字（复验通过）。
 | Error | Attempt | Resolution |
 |-------|---------|------------|
 | export `invalid_request`（手搓 span）| 1 | `EvidenceSpan.create().to_dict()` 生成 12 字段 wire span |

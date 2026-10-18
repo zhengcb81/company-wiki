@@ -63,12 +63,16 @@
   留未 stage 待作者确认——**已确认并纳入本次交接提交**；两处过期陈述（RED 提交）已更正。
 
 ### Phase 7 — 交接与 ROOT 验收
-**Status:** in_progress
-- `handoff.md`（≤80 行四段式）+ `handoff.json`（INTERFACES §8 全字段、file_bindings 覆盖全部交付文件）。
-- 提交 = handoff（单独提交，不引用自身 SHA）。向 ROOT 报告：commit、diff --stat、测试/跳过计数、0 网络 0 模型证据。
+**Status:** complete
+- `handoff.md`（19 行四段式）+ `handoff.json`（INTERFACES §8 全 17 字段；42 条 `file_bindings`
+  逐条 sha256+bytes 经独立脚本复算通过；4 条验收运行、`red_receipt` 首条失败 ≤300 字、7 个合成夹具、
+  `scope_proof` 全 0、`independent_review` = PASS / 41 条审查绑定）。
+- 交接提交 `5a651498`；交接载体提交不自引用其 SHA（INTERFACES §8 反递归规则）。
+- 交付前终验：43 个 diff 路径全在写集内、无第 4 节禁触路径、`tests/integration` 除本车道 0 改动、
+  收据保持审查后 `34 passed`（审查后未再运行 pytest）、树净、pre-commit 钩子通过。
 
 ## Next Step
-写 handoff.md + handoff.json → 单独提交 → 向 ROOT 交付报告。
+已向 ROOT 交付（handoff.md/handoff.json）；等待 README §6 十项验收。
 
 ## Decisions Made
 | 决策 | 理由 |
