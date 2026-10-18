@@ -1,7 +1,7 @@
 ## P1/P4 施工包已由 ROOT 接收（2026-10-18）
 
 - P1-OCR-TEXT 与 P4-CONSUMER-CONTRACT 已合入本地 `master`（`09a8dded`、`626eb32f`）：P1 40 tests + ruff/mypy 干净；P4 在 fixtures catalog 下 34 passed（无 env 时 34 skipped，按设计）。P2/P3 仍待接收。
-- 合并仅为本地；`origin/master` 仍停在 `ccc5bc7e`，推送仍被两个既有失败测试挡住。
+- 合并后全量单测：**6910 passed, 24 skipped**（687s，Miniconda 解释器）；`origin/master` 仍停在 `ccc5bc7e`，推送仍被两个既有失败测试挡住。
 
 ---
 
