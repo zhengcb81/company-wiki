@@ -1,3 +1,11 @@
+## C 第八轮：section 任务合并实测失败并回退（2026-10-18）
+
+- 实现：把相邻同页同节的 citation view 合并为至多 5 个成员的任务（CN fixture 64→40），所有 96 个 span 仍恰好定义一次，support/context partition 校验通过；103 个 scoped 测试绿。
+- 实测：两次 CN live 均 `MODEL_RESPONSE_INVALID`（模型返回畸形 JSON，119 bytes 级），说明多成员任务的 parts/support_parts 结构反而让 MiMo 失稳。
+- 处置：`4a983c98` 推送后按规则 **revert**（`12914f62`），恢复 40 任务 + prompt 4.0.6 的已知稳定行为；不保留未验证的合并路径。
+- 结论：B 路径（任务合并）在当前模型上不可行；剩余只有 A（覆盖修复二次调用，需改 paid-admission）或 C（换模型）或 D（调整验收标准）。
+
+---
 ## C 第七轮：菜单排序/截断不能消除覆盖缺口（2026-10-18）
 
 - 业务优先排序 + 截断 36：28 条，覆盖 30%/60%、PD5、Micro-LED、Preciomo、众硅，仍缺 InP——材料序里 InP 任务排第 40 位，被截断。
