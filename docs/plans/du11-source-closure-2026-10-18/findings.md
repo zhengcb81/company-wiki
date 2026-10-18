@@ -5,6 +5,8 @@
 - 结论：**C 仍 OPEN**，当前具体阻塞是本机资源争用/临时目录，不是 B2 语义；已停止所有未完成的付费 run，未再产生费用。
 - 本地门禁仍被两个非 CI 范围的测试挡住（`test_fresh_cache_behavior_receipts`、`test_official_projection_...`），shim + runner 守卫保存在 parked patch，未推、未绕 hook。
 
+**第 1 次 C 的分链证据（`live-cn-h1-b2v3-20261018/`，仅缺顶层 receipt）：** 主 run `activation_pending`、attempt `76fe00f0…` 15,141 tokens / $0.002722；`activation-resume` 同 attempt 完成、无新增计费；`cross-run` 预算 0 tokens / $0（缓存命中、0 POST）；`restart` 同 15,141；`reference`/`read` 产出 narrative-ref 415,589 bytes（sha `faf25c48…`）且 source SHA `182e2062…` 一致；`ff-reuse` 为 `source_candidate` 并做字节校验；`rf-narrative` 含 96 spans。该证据证明付费恢复与跨 run 缓存链在真实 CN 上跑通，但代码早于 v2/v3 语法与性能修复，**不能替代新 receipt 与内容审查**。
+
 **Next Step：** 等机器空闲窗口重跑 cn-h1 live（干净临时目录、narrowed root）；同时定位两个合同测试；之后再推 shim/guard。
 
 ---
