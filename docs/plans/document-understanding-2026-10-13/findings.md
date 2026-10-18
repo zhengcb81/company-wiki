@@ -1,3 +1,11 @@
+## 2026-10-18 新发现：物理连续性与purpose、旧测试的边界
+
+- 真实短尾pair有负横向重叠；两个column=None不是同列证据。纯geometry只返回形状，continuity owner须核实际紧邻正文带/已观测column。新lookahead最多3原单元，遇heading/table/角色/font/frame/scope断开，不借锚词义给当前断言，所有native检查计原analysis工作上限。无证明时保留原件并defer，不模型补字。
+- 风险/项目也必须进统一prose审计。真实CN断尾修正仍10/10，但联动暴露模板label+勾选载体重新可入；须在purpose owner辨认格式化无事项载体，不能以gold绿代替质量通过。
+- 这次推送4FAIL来自测试契约滞后，不是证据允许缺字段或预算可清空。v7仅新增nullable paid_response_json，测试须继续逐值验证原19字段保真，并显式验证新列NULL；无列名INSERT/SELECT *整行旧tuple脆弱。并行push必须断言2阶段全集且任一红传播，不能删除断言放行。
+
+---
+
 ## DU11 三供应商真实基线完成，资料质量整改优先 — 2026-10-18
 
 共享引擎、付费响应耐久化、activation及同/跨run缓存工程已提交并合主线。三家各一次真实POST：CN/MiMo、HK/DeepSeek、US/MiniMax，当前配置、原母账、原件只读且零复制，三处Temp均删除。新增已知45607tokens/14866microUSD；累计742228tokens/$0.421556proxy，401新增未知hold及历史7均保留。仅工程进展，不叫整体质量验收通过。

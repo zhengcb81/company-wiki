@@ -1,3 +1,11 @@
+## 2026-10-18 DU11 ROOT 实测更新
+
+用户确认两张独立施工卡已发出；不触碰其作者树。正常push92976930没有超时：合同142PASS36.59s，unit6569PASS24SKIP4FAIL542.35s；发现三个旧测试未随并行phase/v7 nullable字段同步，当前仅测试修正102PASS，待独审及重推。不称远端已更新。
+
+来源质量工程dd5e1f2f已提交隔离分支，未称内容C完成。短尾新接线行为RED6FAIL/8PASS，列证明反控再RED10FAIL/14PASS，修后183PASS5.64s；纯helper独立70PASS。CN真实0收费parse/select/typedcompile10/10，raw/gold不改、零复制，owned Temp删除，物理断尾已进入一个真实native range。仍发现模板勾选载体回流；跨页/指代与整体内容C仍OPEN，保留失败收据。
+
+---
+
 ## DU11 三供应商真实基线完成，资料质量整改优先 — 2026-10-18
 
 共享引擎、付费响应耐久化、activation及同/跨run缓存工程已提交并合主线。三家各一次真实POST：CN/MiMo、HK/DeepSeek、US/MiniMax，当前配置、原母账、原件只读且零复制，三处Temp均删除。新增已知45607tokens/14866microUSD；累计742228tokens/$0.421556proxy，401新增未知hold及历史7均保留。仅工程进展，不叫整体质量验收通过。

@@ -1,5 +1,6 @@
 """Automatic run/generation association; no process or human authority receipt."""
 
+from contextlib import closing
 from dataclasses import fields, replace
 import hashlib
 from pathlib import Path
@@ -307,6 +308,9 @@ def test_v3_upgrade_preserves_all_facts_and_leaves_old_owner_unbound(tmp_path):
     database = tmp_path / "legacy.db"
     _v3_with_paid_facts(database)
     before = _facts(database)
+    with closing(sqlite3.connect(database)) as connection:
+        reservation_columns_before = [row[1] for row in connection.execute(
+            "PRAGMA table_info(narrative_model_reservations)")]
     original_bytes = database.read_bytes()
     calls = []
 
@@ -321,8 +325,14 @@ def test_v3_upgrade_preserves_all_facts_and_leaves_old_owner_unbound(tmp_path):
     assert (tmp_path / "before-v3.db").read_bytes() == original_bytes
     after = _facts(database)
     assert after.keys() == before.keys()
-    for table in before.keys() - {"narrative_runs", "narrative_run_jobs"}:
+    for table in before.keys() - {"narrative_runs", "narrative_run_jobs", "narrative_model_reservations"}:
         assert after[table] == before[table]
+    with closing(sqlite3.connect(database)) as connection:
+        reservation_schema = connection.execute("PRAGMA table_info(narrative_model_reservations)").fetchall()
+    assert [row[1] for row in reservation_schema] == [*reservation_columns_before, "paid_response_json"]
+    assert reservation_schema[-1][3:5] == (0, None)  # Nullable, with no fabricated historical response.
+    assert [row[:-1] for row in after["narrative_model_reservations"]] == before["narrative_model_reservations"]
+    assert all(row[-1] is None for row in after["narrative_model_reservations"])
     assert [row[:-1] for row in after["narrative_run_jobs"]] == before["narrative_run_jobs"]
     assert all(row[-1] is None for row in after["narrative_run_jobs"])
     assert [row[:-2] for row in after["narrative_runs"]] == before["narrative_runs"]

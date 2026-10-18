@@ -1,0 +1,133 @@
+{
+  "schema_version": "du11-schema-fixture-independent-review/1",
+  "reviewer": "/root/du10_gold_reception_review",
+  "status": "PASS_TEST_ONLY_ENGINEERING_DELTA",
+  "head_at_review": "9297693091c03333f088308889850e62f726c06a",
+  "file_bindings": [
+    {
+      "path": "tests/unit/test_ci_push_selection.py",
+      "sha256": "922c48a202d4ae22d42a0ca62c089c16642c4ab4ee583cb9dad219ef11a93925",
+      "bytes": 13949
+    },
+    {
+      "path": "tests/unit/test_narrative_run_ownership.py",
+      "sha256": "72b7f5c194896a3650650208ac183a4ea9d0c94ef090140ceda42c45bd075162",
+      "bytes": 20046
+    },
+    {
+      "path": "tests/unit/test_replay_config_isolation.py",
+      "sha256": "1c29c926199131e968c478fc8bc1038b6d4f84beedf6ae0bf9a52ce3974df47b",
+      "bytes": 20224
+    }
+  ],
+  "static_test_retention": [
+    {
+      "path": "tests/unit/test_ci_push_selection.py",
+      "before_test_functions": 27,
+      "after_test_functions": 27,
+      "removed": [],
+      "added": []
+    },
+    {
+      "path": "tests/unit/test_narrative_run_ownership.py",
+      "before_test_functions": 15,
+      "after_test_functions": 15,
+      "removed": [],
+      "added": []
+    },
+    {
+      "path": "tests/unit/test_replay_config_isolation.py",
+      "before_test_functions": 7,
+      "after_test_functions": 7,
+      "removed": [],
+      "added": []
+    }
+  ],
+  "confirmed_findings": [],
+  "verified_responsibilities": [
+    "both parallel phases independently return failure; full unit+complete nonunit smoke once",
+    "real v3->v7 migrate_database executed in passing focused test",
+    "all historical19reservation values unchanged; actual nullable responseNULL",
+    "explicit19column fixture insert and all original values checked",
+    "unknown charged bounds50tokens/40microUSD retained; no invented paid response",
+    "production source untouched by this3testdelta"
+  ],
+  "execution_evidence_reused": {
+    "author": "ET",
+    "tests": {
+      "tests": 102,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "pytest_seconds": 16.67,
+    "outer_seconds": 21.147,
+    "warnings": 1,
+    "warning": "record_property/xunit2 metadata compatibility only",
+    "reviewer_did_not_repeat_tests": true,
+    "et_source_shas_match_actual": true,
+    "cleanup": "ET receipt reports outer temp absent and relocated basetemp removed; cleanup log verified"
+  },
+  "scope_limits": [
+    "normal full push/remoteCI pending",
+    "not source-quality/business content/supplierC approval",
+    "no independently repeated execution claimed",
+    "test-only receipt expires when bound3testbytes change"
+  ],
+  "reviewer_mutations": {
+    "production": 0,
+    "tests": 0,
+    "config": 0,
+    "originals": 0,
+    "commits": 0,
+    "tests_run": 0,
+    "network": 0,
+    "secrets_read": 0
+  },
+  "evidence_bindings": [
+    {
+      "path": "src/company_wiki/automation/migrations.py",
+      "sha256": "5f6c74024a9dd836e3c01b608468fb54e673afd1567641af9d16bc392fb34bb9",
+      "bytes": 35393
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "sha256": "4a6d7dcadada49dee234ee9e3f8216bc3a701e3243ddcf4bf633b6c7b4004274",
+      "bytes": 13825
+    },
+    {
+      "path": "tests/unit/test_pre_push_parallel_phases.py",
+      "sha256": "4fe4d7cc1da89ef104fcd28ec0288e279a49a2b9dcc95c3815f4cedea4e3f1e7",
+      "bytes": 3636
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/push-92976930.log",
+      "sha256": "9412b07e69aa75a035ef184cf11f979bde4c9133807b47f0385d5ff0724199f1",
+      "bytes": 992756
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/schema-fixture-review.json",
+      "sha256": "78ef8220821eab4fae8cb6b70b6ec539c7291c51c69c7e25eba519353ac16cc4",
+      "bytes": 1631
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/schema-fixture-green.json",
+      "sha256": "049982803d32f3dcd4fb440cd16b6927ead172efec6feb52a84fd5d367df2b19",
+      "bytes": 865
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/schema-fixture-green.log",
+      "sha256": "808be4e75b07cb18b6852b61db847a71f1e735ba2fc73f3eb2871717f8caafd8",
+      "bytes": 2722
+    },
+    {
+      "path": ".planning/shared-reading-production/du11/schema-fixture-green.xml",
+      "sha256": "40e8da903253228b4fee7f0b734713e11b2acce530c4f24818aec6eb314e3b29",
+      "bytes": 23716
+    }
+  ],
+  "report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\document-understanding-2026-10-13\\review\\du11_schema_fixture_independent_review.md",
+    "sha256": "9060055335d0f81a133b0092f48f19e1fdfd35fbe3d813e3448e0c86bfa3701b"
+  }
+}

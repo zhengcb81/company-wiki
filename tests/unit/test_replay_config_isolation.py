@@ -113,9 +113,22 @@ def native_db(tmp_path):
             "finished_at,outcome,result_json,error_code,error_detail,runtime_generation) VALUES "
             "('attempt','j',1,'private-worker','private-lease','t2','t0','t1',NULL,NULL,?,NULL,?,1)",
             (json.dumps(result), "PRIVATE DETAIL"))
-        connection.execute("INSERT INTO narrative_model_reservations VALUES "
+        reservation_columns = (
+            "attempt_id,run_id,job_id,request_sha256,input_tokens_bound,max_output_tokens,"
+            "output_bytes_bound,reserved_micro_usd,usage_status,input_tokens,output_tokens,"
+            "estimated_micro_usd,response_sha256,error_code,output_bytes,output_sha256,"
+            "reserved_at,usage_settled_at,output_settled_at"
+        )
+        connection.execute(f"INSERT INTO narrative_model_reservations ({reservation_columns}) VALUES "
             "('attempt','fixture','j',?,20,30,100,40,'unknown',NULL,NULL,NULL,NULL,"
             "'MODEL_TIMEOUT',NULL,NULL,'t0',NULL,NULL)", ("c" * 64,))
+        assert connection.execute(
+            f"SELECT {reservation_columns} FROM narrative_model_reservations WHERE attempt_id='attempt'"
+        ).fetchone() == ("attempt", "fixture", "j", "c" * 64, 20, 30, 100, 40, "unknown",
+                        None, None, None, None, "MODEL_TIMEOUT", None, None, "t0", None, None)
+        assert connection.execute(
+            "SELECT paid_response_json FROM narrative_model_reservations WHERE attempt_id='attempt'"
+        ).fetchone() == (None,)
         binding = {"schema_version": "narrative-run-binding/3", "normalization_config": None,
                    "generation_manifests": {"s": {"source_inputs": {
                        "parser_component": {"name": "document_normalization", "version": "1.1.0"}}}}}
