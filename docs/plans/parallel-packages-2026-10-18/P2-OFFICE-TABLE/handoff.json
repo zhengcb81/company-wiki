@@ -7,7 +7,11 @@
   "commits": [
     "f8c91996cb12286d527c95be240b0ada3423f560",
     "b61ed0c55dffd31b925875f25de64f90087c0fa3",
-    "ac1aa4cbc56286350df4a3eb67d3643eda0b6ea9"
+    "46e9052c0eb16ee2fc3f14a6e8f4c63b58e7ac62",
+    "ac1aa4cbc56286350df4a3eb67d3643eda0b6ea9",
+    "c1f2e96c917a733a876eaa967e5a53f7c0ed1400",
+    "87fd5f824d2f843df9c63f5183ef798824866558",
+    "bde0a6852f19688f97e84bc6e4a9159c87d014f2"
   ],
   "changed_paths": [
     "src/company_wiki/document_normalization/office_table_structure.py",
@@ -36,10 +40,11 @@
     "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log",
     "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/static-20261018-ruff-mypy.log",
     "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md",
-    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.md"
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.md",
+    "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.json"
   ],
   "file_bindings": [
-    {"path": "src/company_wiki/document_normalization/office_table_structure.py", "sha256": "e1f977d61322023eb016f7f19d5c56bf30cc4ef2f4f7cdb1b7051a160365ea30", "bytes": 49893},
+    {"path": "src/company_wiki/document_normalization/office_table_structure.py", "sha256": "f5fe14a4563462df803dc5474ba38adacd905af15091d47190ee943600136c94", "bytes": 54136},
     {"path": "tests/unit/test_p2_office_table/__init__.py", "sha256": "909e20feb894f7be854d40bb9851f674368cb7379844939653deb69b15092dbc", "bytes": 273},
     {"path": "tests/unit/test_p2_office_table/ooxml_support.py", "sha256": "d7a3ce36a873907779b32d4fdaa3f28270091ba320b0da842f29b9b0e127e80d", "bytes": 12533},
     {"path": "tests/unit/test_p2_office_table/fixture_files.py", "sha256": "9a3d855ac65153bfc7aa70d55beb86e3a926e7ffb697fd1b1f117e82061e0698", "bytes": 4857},
@@ -47,7 +52,7 @@
     {"path": "tests/unit/test_p2_office_table/test_docx_footnotes.py", "sha256": "f04f9eb2fa0ee5db3e5fcb37587383851dacc15be17d0d0d93c986f131cb18fe", "bytes": 3075},
     {"path": "tests/unit/test_p2_office_table/test_docx_structure.py", "sha256": "8ee5d879a51245cd8254024911e361c6dc9fd4c2e3c70ea01a276a5965e00195", "bytes": 12720},
     {"path": "tests/unit/test_p2_office_table/test_fixtures_manifest.py", "sha256": "73438413f1c20682edbaa7910cf46c19c5e75b7c005f757dfb7fb32c4df74eaa", "bytes": 1859},
-    {"path": "tests/unit/test_p2_office_table/test_locator_compatibility.py", "sha256": "80035d2fc9dfc6c9a22077ef7ce388f72b03a9cd99a3cd8ee573b2a9246a35e2", "bytes": 7324},
+    {"path": "tests/unit/test_p2_office_table/test_locator_compatibility.py", "sha256": "df2568d38f7c8b83a3cc89a8ef690553b125fc7274169e3733125a9ee2cf641d", "bytes": 13056},
     {"path": "tests/unit/test_p2_office_table/test_pptx_structure.py", "sha256": "8074e47f9de66dca60931911801906f1f890058a355f60c8ab93961abed36daf", "bytes": 4567},
     {"path": "tests/unit/test_p2_office_table/test_replay_and_determinism.py", "sha256": "27e5434835c5c3d283e7fe184b0b78e9cf193209d0a958cbfcbcc2377a5397ec", "bytes": 5683},
     {"path": "tests/unit/test_p2_office_table/test_review_regressions.py", "sha256": "af65300f42357bd27eb176ea5801714a429b4a56c56f683412567cc9e4ec1a77", "bytes": 14408},
@@ -62,10 +67,10 @@
     {"path": "tests/unit/test_p2_office_table/fixtures/sha256.json", "sha256": "eb2a6547e845892d223da3770f15245f1ac027dd307285f2220146160c3a3b50", "bytes": 1559},
     {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/red-20261018-baseline.log", "sha256": "fbbdbd7a064b9b8cebea4c88c1a209bd70899d7743f3a2df0e22ba35cf95d6d1", "bytes": 18419},
     {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pathcheck.log", "sha256": "aaec65bfd3b9c6519c52171c0b5256cc35c6775fafd796d72dec020a9135ed00", "bytes": 93},
-    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log", "sha256": "dab624fa8ba4d514efe6da682b327d1e7095d86697539580e1bb0fc71f0f60b0", "bytes": 1830},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log", "sha256": "4c6d2114872f3c1201ca443eccdc86e06b724dc1332f18546dd080efc4032c09", "bytes": 1830},
     {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/static-20261018-ruff-mypy.log", "sha256": "f3e005c8ee9d4e0efe527342b9baf80fc1c579b6f86d56ef1d138a6f53b634f1", "bytes": 126},
-    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md", "sha256": "7e44e7389c4d3dd192bcc4321ebb90097c47f9587b5b542f433dc4f5b823ca36", "bytes": 17334},
-    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.md", "sha256": "04d42d1d6426795fd6d64b9b7e8b0dec33f38b8e882a4af62734730db70ca479", "bytes": 7754}
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md", "sha256": "bcbcd1c55e89e69a77a8d8881fd8dba9112fadc31d3c79638ef04772b1115b2c", "bytes": 31078},
+    {"path": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/handoff.md", "sha256": "22d9942a9716cb8a8f864018ae7da56ef3043db22a0af27d2a864098ee81d5dd", "bytes": 7358}
   ],
   "interface_versions": {
     "office_table": "cwp-office-table/1"
@@ -87,11 +92,11 @@
     {
       "command": "python -m pytest tests/unit/test_p2_office_table -q -p no:cacheprovider",
       "exit_code": 0,
-      "passed": 68,
+      "passed": 70,
       "failed": 0,
       "skipped": 0,
       "receipt": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/green-20261018-pytest.log",
-      "receipt_sha256": "dab624fa8ba4d514efe6da682b327d1e7095d86697539580e1bb0fc71f0f60b0"
+      "receipt_sha256": "4c6d2114872f3c1201ca443eccdc86e06b724dc1332f18546dd080efc4032c09"
     },
     {
       "command": "python -m ruff check src/company_wiki/document_normalization/office_table_structure.py tests/unit/test_p2_office_table",
@@ -128,9 +133,10 @@
     {"path": "tests/unit/test_p2_office_table/fixtures/pptx_plain.pptx", "sha256": "f34bb7e48b1891b3f198311a74bab0e5db83b8ef92553ba61a327d752ebe88e6", "kind": "synthetic"}
   ],
   "not_run": [
-    "real DOCX continuation tables: w:lastRenderedPageBreak appears only after a paged preview in Word; the 190 real packages parsed showed 159 unknown / 1 ok / 2 not_applicable and no genuine repeated_header continuation, so that path still has synthetic evidence only",
-    "real PPTX coverage: only 1 of the 190 real packages is PPTX, so PPTX merge semantics remain chiefly synthetic-fixture evidence",
-    "merge/header semantic verification against human reading: real packages were checked for locator parity, but the 165 vertical_continue / 41 vertical_start cells across 37 files were not hand-verified",
+    "real DOCX continuation tables: w:lastRenderedPageBreak appears only after a paged preview in Word; the 190 real packages parsed showed 154 unknown / 1 ok / 2 not_applicable and no genuine repeated_header continuation, so that path still has synthetic evidence only",
+    "real PPTX coverage: 2 unique PPTX in the 190-package corpus (1 with tables, 0 in companies/), so PPTX merge semantics remain chiefly synthetic-fixture evidence",
+    "merge/header semantic verification against human reading: real packages were checked for locator parity, but the 164 vertical_continue / 40 vertical_start cells across 34 files were not hand-verified",
+    "deleted-region (w:del/w:moveFrom) table numbering: 0 of the 190 real packages contain a deleted table, so the 87fd5f82 fix is prophylactic for this corpus and verified only by regression cases",
     "production wiring into normalize_document / summary selection / export",
     "du4-table-observation/1 projection (card explicitly leaves it to ROOT)",
     "python-pptx-absent PPTX path exercised only by simulated ImportError, not by an environment lacking the package"
@@ -143,7 +149,7 @@
     "a non-positive w:gridSpan lands in p2_span_out_of_grid with column_span=null; the card does not define this case and the choice is recorded in the module docstring",
     "continuation_of treats headers as identical when the header-row cell text sequence matches; column widths and merge structure are not compared",
     "DOCX covered cells report empty text while PPTX vMerge continuation cells keep their own text, because pptx_parser emits a unit for that cell; this asymmetry is deliberate and pinned by a test",
-    "the 276 parser-only locators in real files are multi-paragraph cells: the parser emits one unit per paragraph while the structure keeps only the first visible one (card 5.3); real-file parity is 2540/2540 on structure locators after ac1aa4cb"
+    "the 2565 parser-only locators in real files (382 cells: 171 cells with +1 paragraph, 211 with >=2) are multi-paragraph cells: the parser emits one unit per paragraph while the structure keeps only the first visible one (card 5.3); real-file parity is 2519/2519 on the 190-package corpus and 2500/2500 on companies-only after ac1aa4cb + bde0a685"
   ],
   "root_integration_steps": [
     "决定是否把 cwp-office-table/1 投影到 du4-table-observation/1",
@@ -165,12 +171,12 @@
     "reviewer": "not-self",
     "verdict": "PASS",
     "report": "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/review/independent.md",
+    "chain": "review #1 (independent agent, PASS, bound to b61ed0c5, found D1-D7) -> author real-file verification (user request) -> re-review (independent agent b2c257f0, RE-REVIEW VERDICT: PASS, section 9, bound to final SHA, found + fixed D8 deleted-region numbering and D9 QA-marker locator suffix, independently reproduced every real-file figure, 32-case differential probe on the numbering walk, bite-checks both regression tests against their pre-fix blobs) -> author added D-R1 regression test, same agent re-verified bite and restored hashes byte-exactly",
     "bound_files_sha256": [
-      "223a886999bdb429b17f7af03f9b0d4145b7f69bb8c2c230bd8b8d150aa20942",
-      "27e5434835c5c3d283e7fe184b0b78e9cf193209d0a958cbfcbcc2377a5397ec",
-      "af65300f42357bd27eb176ea5801714a429b4a56c56f683412567cc9e4ec1a77",
-      "7e44e7389c4d3dd192bcc4321ebb90097c47f9587b5b542f433dc4f5b823ca36"
+      "f5fe14a4563462df803dc5474ba38adacd905af15091d47190ee943600136c94",
+      "df2568d38f7c8b83a3cc89a8ef690553b125fc7274169e3733125a9ee2cf641d",
+      "bcbcd1c55e89e69a77a8d8881fd8dba9112fadc31d3c79638ef04772b1115b2c"
     ],
-    "post_review_changes": "ac1aa4cb fixed a table-numbering defect found by real-file verification (see handoff.md section 3); the review's PASS binds b61ed0c5 and its listed hashes, and the module hash moved to e1f977d61322023eb016f7f19d5c56bf30cc4ef2f4f7cdb1b7051a160365ea30"
+    "self_binding_note": "handoff.json cannot bind its own hash (self-referential); ROOT recomputes every other binding and treats this file's integrity as guaranteed by its own commit"
   }
 }
