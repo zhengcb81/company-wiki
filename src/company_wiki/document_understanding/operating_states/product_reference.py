@@ -31,6 +31,9 @@ _SUFFIX_HEADS = (
     "additive", "chemical", "solution", "tool", "tools", "line", "membrane",
     "resin", "filter", "filters", "material", "module", "sensor", "panel",
     "film", "coating", "service",
+    "products", "systems", "platforms", "devices", "solutions", "modules",
+    "services", "materials", "films", "coatings", "panels", "lines",
+    "additives", "chemicals", "resins", "sensors", "prototypes",
 )
 _HEAD_ALT = "|".join(re.escape(head) for head in
                      sorted((*_FAMILY_MARKERS, *_SUFFIX_HEADS), key=len, reverse=True))
@@ -52,10 +55,17 @@ _HEAD_CLASS_BY_TOKEN = {
     "line": "line", "产线": "line", "產線": "line",
     "prototype": "prototype", "service": "service",
     "试剂": "material", "药品": "material",
+    "products": "product", "systems": "system", "platforms": "platform",
+    "devices": "device", "solutions": "solution", "modules": "module",
+    "services": "service", "materials": "material", "films": "material",
+    "coatings": "material", "panels": "component", "lines": "line",
+    "additives": "material", "chemicals": "material", "resins": "material",
+    "sensors": "device", "prototypes": "prototype",
 }
 # Import-time contract: no head outside the shared vocabulary.
 for _token in _SUFFIX_HEADS:
-    assert p.PRODUCT_SUFFIX.fullmatch(_token), f"unknown product head: {_token}"
+    assert (p.PRODUCT_SUFFIX.fullmatch(_token)
+            or p.PRODUCT_SUFFIX.fullmatch(_token[:-1])), f"unknown product head: {_token}"
 
 _DEICTIC_CN = re.compile(
     r"(?:該|该|上述|這一|这一|此項|此项|這批|这批|該等|该等|這些|这些|前述)"
@@ -77,7 +87,10 @@ _FAMILY_MARK = re.compile(r"系列|產品線|产品线|上述|前述|該等|该�
 # product reference that no declaration can ever satisfy.
 _DEICTIC_HEADS = ("系列", "产品线", "產線", "產品", "产品", "設備", "设备", "系統",
                   "系统", "平台", "方案", "技術", "技术", "器件", "模組", "模组",
-                  "模塊", "模块", "材料", "產品線")
+                  "模塊", "模块", "材料", "產品線",
+                  "products", "product", "series", "systems", "system", "platforms",
+                  "platform", "devices", "device", "solutions", "solution", "tools",
+                  "tool", "modules", "module")
 
 _GENERIC_CJK = frozenset({
     "产品", "產品", "业务", "業務", "服务", "服務", "客户", "客戶", "市场", "市場",
@@ -97,9 +110,33 @@ _ISSUER_PREFIX = re.compile(
 
 # A product name starts with a capitalised proper token; generic sentence
 # openers ("The Company launched ...") therefore cannot swallow the name.
-_LATIN_NAME = r"[A-Z][A-Za-z0-9&./+-]*(?:\s+[A-Z][A-Za-z0-9&./+-]*){0,3}"
-_CJK_NAME = r"[\u3400-\u9fff]{2,10}"
-_DECLARATION = re.compile(rf"(?P<name>{_LATIN_NAME}|{_CJK_NAME})\s*(?P<head>{_HEAD_ALT})")
+_HEAD_ONLY = re.compile(_HEAD_ALT)
+_FAMILY_SUFFIX = re.compile(r"(系列|产品线|產線)$")
+_LATIN_TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9&./+-]*$")
+_CJK_TAIL = re.compile(r"[\u3400-\u9fff]{2,10}$")
+_CJK_PARTICLES = ("的", "和", "與", "与", "及", "或", "等", "各", "所有", "全部",
+                  "主要", "上述", "前述", "公司", "集團", "集团", "我们", "我們",
+                  "客户", "客戶", "开发", "開發", "推出", "生产", "生產", "销售",
+                  "銷售", "覆盖", "覆蓋", "包括", "可", "未", "已", "将", "將")
+# Leading words that introduce a name but are not part of it.
+_CJK_STRIP = ("本公司", "本集團", "本集团", "我们", "我們", "公司", "集團", "集团",
+              "推出", "開發", "开发", "開發出", "开发出", "研发出", "發布", "发布",
+              "生產", "生产", "銷售", "销售", "交付", "覆蓋", "覆盖", "採用", "采用",
+              "實現", "实现", "提供", "支持", "包括", "成為", "成为", "進入", "进入",
+              "完成", "同時", "同时", "目前", "本期", "报告期内", "報告期內")
+# Descriptive technical morphemes: a category description is not a proper name.
+_CJK_DESCRIPTOR = ("前道", "後道", "后道", "先進", "先进", "集成", "電路", "电路",
+                   "薄膜", "沉積", "沉积", "刻蝕", "刻蚀", "存儲", "存储", "邏輯",
+                   "逻辑", "工藝", "工艺", "製程", "制程", "技術", "技术", "應用",
+                   "应用", "設備", "设备", "產品", "产品", "材料", "器件", "模組",
+                   "模组", "系統", "系统", "平台", "方案", "系列")
+_GENERIC_REFERENCE = re.compile(
+    r"(?:products?|services?)\s+(?:or|and)\s+(?:products?|services?)"
+    r"|internal\s+controls?"
+    r"|accounting\s+systems?"
+    r"|产品(?:和|及|与|與)服务|產品(?:和|及|與)服務"
+    r"|各类产品|各類產品|各种产品|各種產品|所有产品|所有產品|主要产品|主要產品",
+    re.IGNORECASE)
 _COLLECTIVE_MARK = re.compile(
     r"(?:包括|包含|涵蓋|涵盖|分為|分为|分別為|分别为|含|"
     r"including|includes|comprising|comprises)\s*(?P<body>[^。；;.!?]+)",
@@ -109,6 +146,8 @@ _TRAILING_COUNT = re.compile(
     r"(?:等|共)?[一二三四五六七八九十百0-9]+(?:類|类|種|种|款|個|个)?"
     r"(?:產品|产品|設備|设备|系統|系统|平台)?$"
 )
+_ENCLOSED_MARK = re.compile(
+    r"(?:包括|包含|涵蓋|涵盖)(?P<body>[^。；;.!?]{1,80}?)(?:在内的|在內的)", re.IGNORECASE)
 _MEMBER_SPLIT = re.compile(r"[、,，;；]|以及|及|和|與|与|\band\b", re.IGNORECASE)
 _MEMBER_TOKEN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9&./+-]{0,23}$|^[\u3400-\u9fff]{2,12}$")
 _SENTENCE = re.compile(r"[。！？；;!?]|(?<=\.)\s+")
@@ -156,16 +195,84 @@ def _proper_name(name: str, head: str) -> bool:
     if re.fullmatch(r"[\u3400-\u9fff]+", stripped):
         if re.fullmatch(r"[一二三四五六七八九十百千萬万0-9]+[類类種种款個个]?", stripped):
             return False
-        return len(stripped) >= 2 and stripped not in _GENERIC_CJK
+        if len(stripped) < 2 or any(part in stripped for part in _CJK_PARTICLES):
+            return False
+        if any(part in stripped for part in _CJK_DESCRIPTOR):
+            return False
+        # A name cannot contain a product head ("前道集成电路设备" is a
+        # description of devices, not the name of a device).
+        return not any(token in stripped for token in _SUFFIX_HEADS)
     tokens = [token for token in stripped.split() if token]
     if not tokens or tokens[0].casefold() in _GENERIC_LATIN:
         return False
     if any(token.casefold() in _GENERIC_LATIN for token in tokens):
         return False
-    if not tokens[0][:1].isupper():
+    first = tokens[0]
+    if not (any(character.isupper() for character in first)
+            or (first[:1].isdigit() and any(character.isalpha() for character in first))):
         return False
-    return all(token[:1].isupper() or any(character.isdigit() for character in token)
-               for token in tokens[1:])
+    return True
+
+
+def _name_before(prefix: str) -> tuple[str, int]:
+    """The proper name immediately before a head, without swallowing prose."""
+    stripped = prefix.rstrip()
+    if not stripped:
+        return "", 0
+    latin_match = re.search(
+        r"[A-Za-z0-9][A-Za-z0-9&./+-]*(?:\s+[A-Za-z0-9][A-Za-z0-9&./+-]*){0,3}$", stripped)
+    cjk = _CJK_TAIL.search(stripped)
+    if cjk is not None and cjk.group() in _FAMILY_MARKERS:
+        # "X系列": the Latin token is glued to the CJK family marker.
+        before = stripped[:cjk.start()]
+        glued = re.search(
+            r"[A-Za-z0-9][A-Za-z0-9&./+-]*(?:\s+[A-Za-z0-9][A-Za-z0-9&./+-]*){0,3}$", before)
+        if glued is not None:
+            return glued.group() + cjk.group(), glued.start()
+    candidates: list[tuple[int, str]] = []
+    if latin_match is not None:
+        tokens = latin_match.group().split()
+        while tokens and (tokens[0].casefold() in _GENERIC_LATIN
+                          or not (any(character.isupper() for character in tokens[0])
+                                  or (tokens[0][:1].isdigit()
+                                      and any(character.isalpha() for character in tokens[0])))):
+            tokens.pop(0)
+        if tokens:
+            name = " ".join(tokens)
+            candidates.append((stripped.rfind(name), name))
+    if cjk is not None:
+        name, start = cjk.group(), cjk.start()
+        changed = True
+        while changed:
+            changed = False
+            for prefix in _CJK_STRIP:
+                if name.startswith(prefix) and len(name) - len(prefix) >= 2:
+                    name, start = name[len(prefix):], start + len(prefix)
+                    changed = True
+                    break
+        candidates.append((start, name))
+    if not candidates:
+        return "", 0
+    start, name = max(candidates, key=lambda item: item[0])
+    return name, start
+
+
+def _third_party_actor(prefix: str) -> bool:
+    third = p.THIRD_PARTY.search(prefix)
+    if third is None:
+        return False
+    issuer = p.ISSUER_WORD.search(prefix[:third.start()])
+    if issuer is None:
+        return True
+    between = prefix[issuer.end():third.start()].strip()
+    # Only a possessive modifier ("公司的客户") keeps the third party as actor.
+    return not between or between in {"的"}
+
+
+def is_generic_reference(text: str, span: tuple[int, int]) -> bool:
+    """Generic 'products or services' prose is not a product-family dependency."""
+    start, end = max(0, span[0] - 48), min(len(text), span[1] + 24)
+    return bool(_GENERIC_REFERENCE.search(text[start:end]))
 
 
 def _family(name: str, head: str) -> str:
@@ -209,12 +316,14 @@ def _sentence_bounds(text: str, position: int) -> tuple[int, int]:
     return start, len(text)
 
 
-def _members(text: str, match: re.Match[str] | None, bounds: tuple[int, int]
-             ) -> tuple[tuple[int, int], ...]:
+def _members(text: str, match: re.Match[str] | None, bounds: tuple[int, int], *,
+             enclosed: bool = False) -> tuple[tuple[int, int], ...]:
     if match is None or not (bounds[0] <= match.start() < bounds[1]):
         return ()
     body_start, body_end = match.span("body")
     body = text[body_start:min(body_end, bounds[1])]
+    if enclosed:
+        body = re.sub(r"(?:在内的|在內的|等|的)\s*$", "", body)
     trimmed = _TRAILING_COUNT.search(body)
     if trimmed is not None and trimmed.start() > 0:
         body = body[:trimmed.start()]
@@ -243,20 +352,41 @@ def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
     Collective members are only read from the declaration's own sentence.
     """
     declared: list[ProductDeclaration] = []
-    for match in _DECLARATION.finditer(text):
-        name, head = match.group("name"), match.group("head")
+    seen: set[tuple[int, int, str]] = set()
+    for match in _HEAD_ONLY.finditer(text):
+        head = match.group()
+        name, start = _name_before(text[:match.start()])
+        if not name:
+            continue
+        series_in_name = _FAMILY_SUFFIX.search(name)
+        if series_in_name and head not in _FAMILY_MARKERS:
+            # "小米系列产品": the series marker belongs to the head, not the name.
+            head = series_in_name.group()
+            name = name[:series_in_name.start()]
+            end = start + len(name) + len(head)
+        else:
+            end = match.end()
         if not _proper_name(name, head):
             continue
-        bounds = _sentence_bounds(text, match.start())
-        # The enumeration must follow the declaration it belongs to; a customer
-        # list in an earlier clause cannot donate collective members.
-        marker = _COLLECTIVE_MARK.search(text, match.end(), bounds[1])
+        bounds = _sentence_bounds(text, start)
+        marker = _COLLECTIVE_MARK.search(text, end, bounds[1])
         collective = _members(text, marker, bounds)
-        prefix = text[bounds[0]:match.start()]
+        if not collective:
+            # "包括 A、B 在内的 X 系列": the enumeration precedes its name.
+            enclosed = _ENCLOSED_MARK.search(text, bounds[0], start)
+            if enclosed is not None and enclosed.end() <= start:
+                collective = _members(text, enclosed, bounds)
+        prefix = text[bounds[0]:start]
         attribution = "issuer"
-        if p.THIRD_PARTY.search(prefix) and not p.ISSUER_WORD.search(prefix):
+        if _third_party_actor(prefix):
             # A customer/supplier sentence cannot donate the issuer's product.
             attribution = "quoted_related_party"
-        declared.append(ProductDeclaration(match.span(), _family(name, head), head_class(head),
-                                           bool(collective), collective, attribution))
+        family = _family(name, head)
+        key = (start, end, family)
+        if key in seen:
+            continue
+        seen.add(key)
+        declared.append(ProductDeclaration((start, end), family,
+                                           head_class(head), bool(collective), collective,
+                                           attribution))
     return tuple(declared)

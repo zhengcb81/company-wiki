@@ -242,3 +242,51 @@ def test_an_issuer_voiced_customer_statement_can_still_declare():
 def test_a_customer_voiced_statement_is_not_a_declaration():
     engine = session({"d": unit("客户高度认可X系列产品。"), "t": unit(CN_TARGET)})
     assert engine.reference_closure("t", ("d",), window_complete=True)["status"] == "missing"
+
+
+
+def test_chinese_generic_phrases_are_not_declarations():
+    for text in ("公司主要产品系列丰富。", "公司推出各类产品。", "覆盖所有系列。",
+                 "上述系列产品已量产。", "公司开发的多款薄膜沉积产品已交付。",
+                 "公司前道集成电路设备产品已交付。", "该方案可覆盖存储器件。"):
+        assert find_product_declarations(text) == (), text
+
+
+def test_mixed_case_and_numeric_product_names_are_declarations():
+    for text, family_prefix in (("公司发布iPhone 15系列。", "iphone15|series"),
+                                ("公司推出Model 3系列。", "model3|series"),
+                                ("公司推出3M系列。", "3m|series"),
+                                ("公司推出小米系列产品。", "小米|series"),
+                                ("公司推出Preforma uniflash系列。", "preformauniflash|series")):
+        found = find_product_declarations(text)
+        assert found and found[0].family == family_prefix, text
+
+
+def test_a_reference_head_must_match_the_declaration_head():
+    device = session({"d": unit("公司推出Omega设备。"), "t": unit(CN_TARGET)})
+    assert device.reference_closure("t", ("d",), window_complete=True)["status"] == "missing"
+    series = session({"d": unit("公司推出Alpha系列。"),
+                      "t": unit("These devices have been delivered.")})
+    assert series.reference_closure("t", ("d",), window_complete=True)["status"] == "missing"
+    generic = session({"d": unit("The Company launched the Alpha series."),
+                       "t": unit("These products have been delivered.")})
+    assert generic.reference_closure("t", ("d",), window_complete=True)["status"] == "unique"
+
+
+def test_an_enclosed_enumeration_before_the_name_is_collective():
+    found = find_product_declarations(
+        "公司推出包括SA/SU、SPTi在内的Preforma Uniflash系列产品。")
+    assert len(found) == 1 and found[0].collective is True
+    assert len(found[0].members) == 2
+
+
+def test_generic_english_reference_is_not_a_product_dependency():
+    engine = session({"t": unit("These products or services are sold globally.")})
+    assert engine.reference_closure("t", (), window_complete=True)["status"] == "not_applicable"
+
+
+def test_a_possessive_customer_actor_does_not_declare_for_the_issuer():
+    quoted = find_product_declarations("公司客户高度认可X系列产品。")
+    assert quoted and quoted[0].attribution == "quoted_related_party"
+    issuer = find_product_declarations("公司表示客户高度认可X系列产品。")
+    assert issuer and issuer[0].attribution == "issuer"

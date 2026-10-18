@@ -32,7 +32,8 @@ from company_wiki.document_understanding.layout_hints.contract import (
 )
 
 from . import patterns as p
-from .product_reference import find_product_declarations, find_product_deictic
+from .product_reference import (find_product_declarations, find_product_deictic,
+                                head_class, is_generic_reference)
 from .text_view import (MatchingText, MatchingView, build_matching_view,
                         build_prepared_matching_view, prepare_matching_text,
                         split_clauses, strip_connector)
@@ -827,7 +828,16 @@ class OperatingRelationSession:
                 raise ValueError("predecessor parent mismatch")
         raw_target = target_unit["text"]
         deictics = find_product_deictic(raw_target)
-        family_deictics = [item for item in deictics if item.family]
+        family_deictics = [item for item in deictics
+                           if item.family and not is_generic_reference(raw_target, item.span)]
+        if not family_deictics:
+            return result("not_applicable")
+        deictic_heads = {head_class(item.head) for item in family_deictics}
+
+        def compatible(declaration) -> bool:
+            # A series/device reference is closed only by its own head class;
+            # a generic "these products" may accept any product declaration.
+            return "product" in deictic_heads or declaration.head in deictic_heads
         # Only a family reference (该系列/上述/这些/these products) carries the
         # cross-window identity claim. A singular demonstrative keeps the
         # legacy admission path: it is not this operation's dependency.
@@ -842,7 +852,7 @@ class OperatingRelationSession:
         # families are ambiguous instead of silently preferred.
         internal = [declaration for declaration in find_product_declarations(raw_target)
                     if declaration.span[0] < family_deictics[0].span[0]
-                    and declaration.attribution == "issuer"]
+                    and declaration.attribution == "issuer" and compatible(declaration)]
         if internal:
             internal_families = {declaration.family for declaration in internal}
             if len(internal_families) > 1:
@@ -865,7 +875,7 @@ class OperatingRelationSession:
                 if text.rstrip().endswith(("？", "?")) and "请问" in text:
                     continue
                 for declaration in find_product_declarations(text):
-                    if declaration.attribution != "issuer":
+                    if declaration.attribution != "issuer" or not compatible(declaration):
                         continue
                     families.setdefault(declaration.family, []).append((predecessor, declaration))
         except WorkBudgetExceeded:

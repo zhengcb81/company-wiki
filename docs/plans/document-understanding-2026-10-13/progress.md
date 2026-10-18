@@ -1,3 +1,10 @@
+## DU11 B2 三审修复；正式 C 首次真实 POST 后收尾失败 — 2026-10-18
+
+三审 REJECT 的两个 P1（中文泛称声明、head 不比较）已修：head-first 专名提取、技术描述词黑名单、series/device head 强制匹配、前置“包括…在内的”集合、客户主语句归属、泛称英文短语不门禁。测试 105 PASS、selection 738 PASS；三源仍 10/10、7/7、8/8，US 未闭合从 11 降到 6。
+
+正式 C：cn-h1 live 首次跑完选择→真实 POST→恢复→cache→cross-run 全链，但本机 TEMP 未设置导致 runner 把临时湖建在仓库内，收尾断言失败、receipt 未写出；真实计费已入母账（15,141 tokens / $0.002722，重复行按 attempt 去重）。第二次显式 temp 重跑 20 分钟无产出已停止。**C 仍 OPEN**，下一步先修 runner 的 temp 前置校验再重跑。
+
+---
 ## DU11 B2 复审 v2 的两个新 P1 已修 — 2026-10-18
 
 复审仍 REJECT：v1 的 P1 全部关闭（P1-4 部分），新增两个 P1——泛称句被当成具名声明（`We sell products`、`公司产品系列丰富`）、proven furniture 跳过后邻接比较错邻居。均已修复：专名化声明语法、声明后置的 collective、实际 head 识别、客户/供应商归属过滤、furniture 真实邻居 carry。另修 6 个 P2 并补 9 个正反例。

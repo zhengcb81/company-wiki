@@ -1,0 +1,362 @@
+{
+  "schema": "du11-b2-independent-review-v3/1",
+  "reviewer": "independent-reviewer-non-author",
+  "reviewed_at": "2026-10-18T11:20:00+08:00",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki",
+  "code_commit": "1a774af0",
+  "head": "1a774af0",
+  "snapshot": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "sha256": "a13008183fba6039d06ca938577ed50aba0778e87554a5c0e6aeb465ff386be5"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "dce431d9074daa35d927094b1524df2d1641c76926e46e004d6b2131e242245c"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_antecedent.py",
+      "sha256": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "3b43270c572fd19949c54f1bf28dbbbf9d6d28bf1ebe2c141c3a05a8347f8f85"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "ddc36db5cfcd028ed0f94b7fc900e09bd64ca256975dd75495badcb2180eaad3"
+    },
+    {
+      "path": "tests/unit/du11_source_closure/test_reference_closure.py",
+      "sha256": "7df78be5682738c00d18bead888b0e587f420f62fe9b017e285023817941748f"
+    },
+    {
+      "path": "tests/unit/du11_source_closure/test_antecedent_wiring.py",
+      "sha256": "b0a676a2deb8cf098d841caa9232c3a8104551e78e581affc533ea51ad53a3ae"
+    }
+  ],
+  "verdict": "REJECT",
+  "verdict_reason": "P1-B furniture adjacency is fixed and the v2 P2-A/P2-D are closed. P1-A is only partially fixed: Latin generic prose is rejected, but Chinese generic/non-proper phrases still become declarations and close a series target (real CN 8d73 unique became ambiguous). A separate P1 remains: closure never compares deictic head/family to declaration head, so Omega设备 closes 该系列产品. P2 residuals: proper-name false negatives (iPhone 15/Model 3/3M/Acme Products/ACME Systems/Preforma uniflash/小米系列产品), pre-declaration collective missed, customer-actor attribution false issuer, generic English internal-control/accounting targets over-deferred, and tests missing all of these.",
+  "scores": {
+    "engineering_completeness": 7,
+    "contract_consistency": 5,
+    "scale": 10
+  },
+  "v2_fix_verification": [
+    {
+      "id": "P1-A",
+      "status": "PARTIAL",
+      "evidence": "Latin generic (We sell products/Our products/microproducts/internal control systems) now empty. Chinese generic still declarations: 公司主要产品系列, 各类产品, 所有系列, 上述系列产品, 司开发的多款薄膜沉积产品, 前道集成电路设备产品, 可覆盖存储器件; each closes 该系列产品 as unique. Real CN 8d73 (v2 unique) now ambiguous family_count=4."
+    },
+    {
+      "id": "P1-B",
+      "status": "FIXED",
+      "evidence": "Cross-page [p1,header,p2] + carry(p1,p2) accepts p1/complete=True; carry(p1,header) rejects/complete=False; separate-window not bridged; same-page gap mismatch rejected."
+    },
+    {
+      "id": "P2-A",
+      "status": "FIXED",
+      "evidence": "上述系统/这些平台/该等方案 head=系统/平台/方案, family=False, closure=not_applicable; no false missing."
+    },
+    {
+      "id": "P2-B",
+      "status": "PARTIAL",
+      "evidence": "Same/cross-sentence customer 包括 negative fixed; legitimate pre-marker 包括SA/SU、SPTi在内的Preforma Uniflash系列 gets collective=False; post-marker gets True."
+    },
+    {
+      "id": "P2-C",
+      "status": "PARTIAL",
+      "evidence": "Customer-voiced 客户高度认可X系列产品 → quoted/missing; 公司表示客户高度认可… → issuer. But 公司客户高度认可X系列产品 → issuer/unique (actor is customers, should be quoted_related_party)."
+    },
+    {
+      "id": "P2-D",
+      "status": "FIXED",
+      "evidence": "New replay.json binds product_reference a1300818, narrative_antecedent 41d42ef7, relations dce431d9, narrative_reading ddc36db5; HK 2/US 11/CN 5 REFERENCE_UNRESOLVED visible. Old b2-real-sources-reviewed remains stale (P3)."
+    },
+    {
+      "id": "P2-E",
+      "status": "PARTIAL",
+      "evidence": "99 du11 tests pass; new controls cover generic English, unsupported head, same-sentence collective, issuer/customer voiced, furniture, separate-window. Missing Chinese generic, no-head, proper-name false negatives, pre-marker collective, 公司客户 attribution, generic English target."
+    },
+    {
+      "id": "P2-F",
+      "status": "DOCUMENTED_LIMITATION",
+      "evidence": "SourcePageFlow only exposes summary, not edges; cross-page only verified continuity-window edges; separate-window negative test added. Conservative, not a fabricated proof (P3)."
+    }
+  ],
+  "checks": [
+    {
+      "id": 1,
+      "question": "only existing responsibility layers, no second detector/Store/budget/product lexicon",
+      "verdict": "PARTIAL",
+      "evidence": "No second Store/budget/detector; PRODUCT_SUFFIX subset. But CJK proper-name blacklist is a word-list heuristic that cannot stop generic phrases (P1-A), and ProductDeictic.head is never used to match declarations (P1-B)."
+    },
+    {
+      "id": 2,
+      "question": "state semantics; ambiguous never nearest-wins",
+      "verdict": "PARTIAL",
+      "evidence": "Six states; internal forward/ambiguous correct; family competition ambiguous. But generic CJK creates ambiguous/unique; any head closes any deictic (P1-A/P1-B)."
+    },
+    {
+      "id": 3,
+      "question": "8 units / 4 (source,page,pdf_block) / 2048 chars, same parent budget; only affected card",
+      "verdict": "PASS_CODE",
+      "evidence": "Block key, carrier expansion, envelope still correct; CN v3 has no envelope deferral because 8d73 became ambiguous first, not an envelope regression. Single-card deferral does not downgrade coverage. Exact 2048/2049 test still absent (P3)."
+    },
+    {
+      "id": 4,
+      "question": "original/analysis namespace; declaration refs stay original",
+      "verdict": "PASS_CORE",
+      "evidence": "Raw-text refs; starts/slices exact; session bounds validation. Analysis reference_refs remain analysis coordinates (P3)."
+    },
+    {
+      "id": 5,
+      "question": "cache key target + ordered predecessors + window_complete",
+      "verdict": "PASS_CORE",
+      "evidence": "Engine/session keys correct; receipt bindings now match final files. Declaration scans still per predecessor (minor P3)."
+    },
+    {
+      "id": 6,
+      "question": "unread/opaque pages, headers/footers, table/QA boundaries",
+      "verdict": "PARTIAL_PASS",
+      "evidence": "unread/blocked/cap/unproved correct; cross-page furniture fixed. Same-page cross-column furniture still accepted without column proof (P3); separate-window limitation (P3); excluded boundary complete=True (P3)."
+    },
+    {
+      "id": 7,
+      "question": "in-material declaration not missing; only before deictic",
+      "verdict": "PASS_STRUCTURE",
+      "evidence": "Forward -> missing; two internal families -> ambiguous; one before -> not_applicable. Generic CJK/wrong-head declarations can still close internally (P1-A/P1-B)."
+    },
+    {
+      "id": 8,
+      "question": "no broad regression, especially plain paragraphs",
+      "verdict": "PARTIAL",
+      "evidence": "Plain-only selected/coverage True; reference deferrals do not downgrade the document. Real CN 5 (2 partial + 3 ambiguous; 8d73 unique->ambiguous); HK 2/US 11 generic English over-deferrals; gold 10/10,7/7,8/8 but card losses remain."
+    },
+    {
+      "id": 9,
+      "question": "tests truly cover RED->GREEN, no false green",
+      "verdict": "PARTIAL",
+      "evidence": "99 du11; 634 selection; 104 w04 (selection+w04=738). V2 false-green cases now assert real behavior. Missing tests for P1-A/P1-B/P2-A..D; 99 green cannot prove contract."
+    },
+    {
+      "id": 10,
+      "question": "performance/budget: real CN 2518 reference calls, HK 13.17M/16M",
+      "verdict": "PASS",
+      "evidence": "CN 6,133,095/16M (2513 NA, 2 partial, 3 ambiguous; ref work 3314); HK 13,157,181/16M (3576 NA, 1 missing, 1 partial; ref work 4399); US 7,993,449/16M (1107 NA, 7 missing, 4 partial; ref work 7070). No O(N*K) blow-up; originals/gold unchanged; 0 API."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P1-A",
+      "severity": "P1",
+      "title": "Chinese generic/non-proper phrases still become declarations",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:82-99",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:100-102",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:149-166"
+      ],
+      "trigger": "公司主要产品系列 / 各类产品 / 所有系列 / 上述系列产品 / 司开发的多款薄膜沉积产品 / 前道集成电路设备产品 / 可覆盖存储器件.",
+      "evidence": "Each returns a declaration; each closes 该系列产品 as unique. Real CN 8d73 (v2 unique) is now ambiguous family_count=4 with generic families 司开发的多款薄膜沉积产品, 薄膜沉积产品, 可覆盖存储器件.",
+      "impact": "Generic prose can donate the antecedent and wrong context; real CN unique is lost to false ambiguity; violates explicit named declaration (3/6.2).",
+      "fix": "Restrict CJK non-family heads to v2 conservative rule, or require declaration context evidence and stricter name boundaries; reject 上述/这些/所有/各类/主要/多款/前道/可覆盖... prefixes; add the listed negatives."
+    },
+    {
+      "id": "P1-B",
+      "severity": "P1",
+      "title": "Closure never matches deictic head/family to declaration head",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:830-855",
+        "src/company_wiki/document_understanding/operating_states/relations.py:856-891",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:91-98"
+      ],
+      "trigger": "公司推出Omega设备 + 该系列产品; 各类产品 + 该系列; 公司推出Alpha系列 + 这些设备.",
+      "evidence": "All return unique with the wrong-head declaration as context; families keyed only by declaration.family, never compared to ProductDeictic.head.",
+      "impact": "A device/product declaration can close a series deictic or vice versa; wrong antecedent context. Contract requires family/head correspondence.",
+      "fix": "Match deictic head class/family marker to declaration head/family; no match -> missing or legacy not_applicable; apply to internal and external declarations; add cross-head tests."
+    },
+    {
+      "id": "P2-A",
+      "severity": "P2",
+      "title": "Proper-name filter misses or mis-slices legitimate names",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:100-102",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:35-36",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:149-166"
+      ],
+      "trigger": "iPhone 15 series; Model 3 系列; 3M系列; Preforma uniflash系列; Acme Products; ACME Systems; 小米系列产品.",
+      "evidence": "iPhone 15/Model 3/Preforma uniflash/Acme Products/ACME Systems -> no declaration/missing; 3M -> slice M系列; 小米系列产品 -> family 小米系列|product instead of 小米|series. Positive controls: 华为设备, XD-RIE设备, Galaxy S24系列, S24系列, Acme products work.",
+      "impact": "Over-deferral of legitimate declarations and wrong ref slices; CJK series family segmentation can cause false ambiguity.",
+      "fix": "Allow lowercase-start brands, digit-leading/digit-separated model tokens, case-insensitive English heads with original span; prefer family marker as CJK head; add the listed tests."
+    },
+    {
+      "id": "P2-B",
+      "severity": "P2",
+      "title": "Collective only after declaration; preposed 包括…在内 enumeration lost",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:253"
+      ],
+      "trigger": "公司推出包括SA/SU、SPTi在内的Preforma Uniflash系列产品.",
+      "evidence": "collective=False/members=(); postposed 包括... gives collective=True/members 3.",
+      "impact": "Legitimate collective members missing; member_refs incomplete; contract collective enumeration.",
+      "fix": "Allow a tightly bound preposed 包括/包含...在内 wrapper for the same declaration clause; keep rejecting unrelated customer lists; add pre/post tests."
+    },
+    {
+      "id": "P2-C",
+      "severity": "P2",
+      "title": "Attribution is prefix-keyword, not clause actor: customer actor can become issuer",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:255-259",
+        "src/company_wiki/document_understanding/operating_states/relations.py:867-868"
+      ],
+      "trigger": "公司客户高度认可X系列产品; 客户高度认可X系列产品.",
+      "evidence": "公司客户... -> issuer/unique (actor is customers); 客户高度认可... -> quoted/missing (dropped entirely). 公司表示客户... -> issuer (reasonable).",
+      "impact": "Third-party customer statement can be treated as issuer (attribution violation); or legitimate product name is over-deferred.",
+      "fix": "Use clause subject/actor (existing NP grammar); 公司客户 -> quoted_related_party; keep quoted statements as attributed context rather than dropping; add actor tests."
+    },
+    {
+      "id": "P2-D",
+      "severity": "P2",
+      "title": "Generic English internal-control/accounting targets are over-gated",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/product_reference.py:60-72",
+        "src/company_wiki/document_understanding/operating_states/relations.py:834"
+      ],
+      "trigger": "HK The Board ... internal control systems ... Such systems; US accounting/internal control systems; products or services; platforms.",
+      "evidence": "Real current HK 2 unresolved (1 missing + 1 partial), US 11 unresolved (7 missing + 4 partial), all generic finance/control prose; gold remains 7/7,8/8.",
+      "impact": "Ordinary non-product prose is deferred as missing/partial; over-deferral and misleading REFERENCE_UNRESOLVED. Contract 3 requires actual product-deictic subject/object check.",
+      "fix": "Check deictic is a product NP subject/object (existing NP grammar) or require a product/brand context; avoid family gating on internal control/accounting systems; add HK/US text-level negatives."
+    },
+    {
+      "id": "P2-E",
+      "severity": "P2",
+      "title": "Tests still miss the new P1/P2 counterexamples",
+      "files": [
+        "tests/unit/du11_source_closure/test_reference_closure.py",
+        "tests/unit/du11_source_closure/test_antecedent_wiring.py"
+      ],
+      "trigger": "Current 99-test suite.",
+      "evidence": "No tests for Chinese generic declarations, no-head match, proper-name false negatives, pre-marker collective, 公司客户 attribution, generic English target over-deferral. 99 green passes all of them.",
+      "impact": "Green suite cannot establish contract compliance; real CN ambiguous is untested.",
+      "fix": "Add RED tests for each listed counterexample; preserve RED->GREEN evidence."
+    },
+    {
+      "id": "P3-1",
+      "severity": "P3",
+      "title": "Old receipt remains stale; CN receipt has no bindings",
+      "files": [
+        "docs/plans/du11-source-closure-2026-10-18/b2-real-sources-reviewed-20261018/replay.json",
+        "docs/plans/du11-source-closure-2026-10-18/b2-v2-20261018/cn-h1.json"
+      ],
+      "trigger": "Cite old receipt or CN receipt.",
+      "evidence": "Old replay still binds product_reference 8df5/relations 41f8/reading 24b2 and only SELECTION_BUDGET; new b2-real-sources-v2 binds final and shows HK2/US11. CN b2-v2 has reasons 5/123 and work but no source_bindings.",
+      "impact": "Evidence confusion; CN cannot be SHA-bound from its receipt. New HK/US receipts are correct.",
+      "fix": "Mark old receipt stale; add CN source_bindings to b2-v2 or a combined replay."
+    },
+    {
+      "id": "P3-2",
+      "severity": "P3",
+      "title": "Same-page cross-column furniture is accepted without column proof",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py:61-71"
+      ],
+      "trigger": "p1 column0, header, p2 column1 on same page.",
+      "evidence": "Window accepts p1/complete=True; _adjacent only checks ordinal+skipped, no column/geometry.",
+      "impact": "Could bridge columns without proof; reading-order may be valid but unproven.",
+      "fix": "Reuse the existing column scope proof for same-page adjacency, or document the assumption."
+    },
+    {
+      "id": "P3-3",
+      "severity": "P3",
+      "title": "Separate-window cross-page remains unbridged",
+      "files": [
+        "src/company_wiki/source_catalog/narrative_reading.py:485-491"
+      ],
+      "trigger": "Declaration in window A, target in window B, page flow only summarized.",
+      "evidence": "No carries across separate windows; new negative test documents it. SourcePageFlow exposes no edges.",
+      "impact": "Cross-page B2 limited to verified continuity windows; conservative, not fabricated.",
+      "fix": "Document as a known limit; if SourcePageFlow later exposes edges, wire them; no contract fabrication now."
+    },
+    {
+      "id": "P3-4",
+      "severity": "P3",
+      "title": "Analysis reference_refs still analysis coordinates",
+      "files": [
+        "src/company_wiki/document_understanding/operating_states/relations.py:862-865"
+      ],
+      "trigger": "reference() on an analysis group owner.",
+      "evidence": "reference_refs use analysis offsets; only required_original_unit_ids consumed today.",
+      "impact": "Schema says OriginalRef but contains analysis refs.",
+      "fix": "Project or mark as analysis refs."
+    },
+    {
+      "id": "P3-5",
+      "severity": "P3",
+      "title": "Envelope test lacks exact 2048/2049 and 9/5 first excess",
+      "files": [
+        "tests/unit/du11_source_closure/test_antecedent_wiring.py:101-108"
+      ],
+      "trigger": "Current test title.",
+      "evidence": "Uses 3x1025 chars; no exact boundary first-excess.",
+      "impact": "False confidence on caps.",
+      "fix": "Add exact inclusive/excess tests."
+    },
+    {
+      "id": "P3-6",
+      "severity": "P3",
+      "title": "Plan/status wording for p17 is now partial, not missing",
+      "files": [
+        "docs/plans/du11-source-closure-2026-10-18/task_plan.md:10"
+      ],
+      "trigger": "Current CN p17.",
+      "evidence": "Current p17 is partial (antecedent_window_incomplete), not missing.",
+      "impact": "Documentation drift only.",
+      "fix": "Update plan wording."
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "git status --porcelain / git log --oneline -4 / git rev-parse HEAD",
+      "result": "B2 source/tests tracked clean; HEAD 1a774af0."
+    },
+    {
+      "cmd": ".venv\\Scripts\\python.exe -m pytest tests/unit/du11_source_closure -q",
+      "result": "99 passed in 2.12s."
+    },
+    {
+      "cmd": ".venv\\Scripts\\python.exe -m pytest tests/unit/document_understanding_selection -q",
+      "result": "634 passed in 24.18s."
+    },
+    {
+      "cmd": ".venv\\Scripts\\python.exe -m pytest tests/unit/test_w04_narrative_semantics.py -q",
+      "result": "104 passed in 1.97s; 738 total."
+    },
+    {
+      "cmd": "synthetic probes via Python stdin",
+      "result": "Latin generic fixed; Chinese generic still unique; no-head match unique; proper-name false negatives/partial; pre-marker collective false; 公司客户 issuer; furniture cross-page fixed; same-page cross-column accepted."
+    },
+    {
+      "cmd": "real-source replay (probe.py, socket blocked, REAL_LLM=0, temp)",
+      "result": "CN 6133095/16M (2513 NA,2 partial,3 ambiguous; reasons 5+123); HK 13157181/16M (3576 NA,1 missing,1 partial; reasons 2+126); US 7993449/16M (1107 NA,7 missing,4 partial; reasons 11+117); gold 10/10,7/7,8/8; originals/gold unchanged; 0 API."
+    },
+    {
+      "cmd": "receipt binding check",
+      "result": "New b2-real-sources-v2 bindings match final (product_reference a1300818, narrative_antecedent 41d42ef7, relations dce431d9, narrative_reading ddc36db5); old b2-real-sources-reviewed stale."
+    }
+  ],
+  "unverified": [
+    "Full unit/142 contract/CI/publish: not run; author reports c78852e4 CI 39116527863 success; 1a774af0 CI not rechecked.",
+    "Formal content C/provider/summary quality/FF-RF consumption: not reviewed by request.",
+    "Whether CN 8d73 would close after filtering Chinese generic declarations: v2 envelope already 6 blocks > 4, so likely a legitimate defer; current code loses it to ambiguity first.",
+    "No formal standard for Chinese proper vs generic names; the report treats 公司主要产品系列/各类产品 as non-named; contract owner may need to decide.",
+    "Whether ordinary English internal-control/accounting deictics should be not_applicable rather than missing; implementation has no subject/object check; contract owner input needed.",
+    "Runtime selection cache invalidation via grammar module bytes: selector version still 0.9.0; no module-hash key found.",
+    "Same-page cross-column furniture reading-order legality: no column proof; P3.",
+    "Receipt provenance: new HK/US bindings verified; CN receipt lacks bindings; old receipt stale."
+  ],
+  "notes": [
+    "v2 P1-B furniture and P2-A/P2-D are closed; this REJECT is about incomplete P1-A (CJK) and a new P1-B (no head match), plus P2 residuals.",
+    "No source/test/config/gold modification and no git write operations; only this report pair was written.",
+    "Report pair: review/b2-antecedent-independent-review-v3.md and .json."
+  ]
+}
