@@ -6,6 +6,7 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 import hashlib
 import json
+import os
 from importlib.metadata import PackageNotFoundError, version
 import logging
 from pathlib import Path
@@ -511,7 +512,9 @@ class NarrativeSummarizeHandler:
                 return _success(prior_summary, metrics)
             return _success(merged, metrics)
         uncovered_keys = _uncovered_task_keys(request, completed)
-        if uncovered_keys and context.attempt.attempt_no < context.job.max_attempts:
+        if (uncovered_keys
+                and context.attempt.attempt_no < context.job.max_attempts
+                and os.environ.get("CW_SUMMARY_COVERAGE_REPAIR") == "1"):
             return _partial_summary_result(completed, metrics, uncovered_keys, execution)
         return _success(completed, metrics, execution=execution or None)
 

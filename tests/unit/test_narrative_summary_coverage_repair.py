@@ -40,7 +40,8 @@ def _clause():
             "modality": "actual"}
 
 
-def test_partial_summary_retries_and_the_repair_call_only_sends_uncovered_tasks():
+def test_partial_summary_retries_and_the_repair_call_only_sends_uncovered_tasks(monkeypatch):
+    monkeypatch.setenv("CW_SUMMARY_COVERAGE_REPAIR", "1")
     selected = with_reading()
     first = _handler(_Caller([{"t1": [_clause()]}]))
     partial = first(_context(selected))

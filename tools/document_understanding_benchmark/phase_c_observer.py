@@ -205,7 +205,16 @@ def install() -> None:
             reading_projection_version=final.get("reading_model_projection")
             if final is not None else None,
         ).with_output_budget(caller._model.max_output_tokens)
-        assert http["messages"][1]["content"] == expected_request.data_json
+        if http["messages"][1]["content"] != expected_request.data_json:
+            # A coverage-repair retry sends only the still-uncovered tasks;
+            # its material must be a strict subset of the full request.
+            expected_view = json.loads(expected_request.data_json)["material"]
+            actual_view = envelope["material"]
+            expected_tasks = {row["key"] for row in expected_view["tasks"]}
+            actual_tasks = {row["key"] for row in actual_view["tasks"]}
+            assert context.attempt.attempt_no > 1
+            assert actual_tasks and actual_tasks < expected_tasks
+            assert actual_view["schema_version"] == expected_view["schema_version"]
         expected = config["model_options"]
         token_field = expected["output_token_field"]
         assert (
@@ -267,7 +276,12 @@ def install() -> None:
             refuse("PHASE_C_GOLD_SUPPORT_MISSING")
         if config.get("forbid_post"):
             refuse("PHASE_C_CACHE_WOULD_GENERATE")
-        if caller._store.reservations_for_run(caller._run_id):
+        reservations = caller._store.reservations_for_run(caller._run_id)
+        if reservations and not (
+            len(reservations) == 1
+            and reservations[0].job_id == context.job.job_id
+            and context.attempt.attempt_no > 1
+        ):
             refuse("PHASE_C_PRIOR_ATTEMPT_PRESENT")
         if config["mode"] == "live":
             from tools.document_understanding_benchmark.phase_c_runner import mother_totals, mother_budget_fits
