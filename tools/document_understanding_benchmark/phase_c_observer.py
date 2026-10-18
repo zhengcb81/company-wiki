@@ -42,7 +42,17 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         # material proof may the existing native-source oracle score selection.
         max_claims = max(1, len(selected.evidence_spans) * 2) if envelope["schema_version"] == "narrative-model-request/6" else 20
         view = compile_scoped_model_view(selected, max_claims=max_claims)
-        assert envelope["material"] == view.to_model_dict()
+        full_material = view.to_model_dict()
+        if envelope["material"] != full_material:
+            # A coverage-repair retry sends only the still-uncovered tasks; its
+            # material must equal the same compiler restricted to those keys.
+            from dataclasses import replace
+
+            sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
+            full_keys = {row["key"] for row in full_material["tasks"]}
+            assert sent_keys and sent_keys < full_keys
+            assert envelope["material"] == replace(
+                view, visible_keys=sent_keys).to_model_dict()
         assert view.plan.evidence_order == tuple(span.span_id for span in selected.evidence_spans)
         rows = [[span.span_id, span.raw_text] for span in selected.evidence_spans]
         actual_groups = _group_mapping(selected)
