@@ -1,0 +1,9 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "ColA one", "box": [20, 100, 180, 110], "confidence": 0.95},
+    {"text": "ColB one", "box": [300, 100, 460, 110], "confidence": 0.95},
+    {"text": "ColC one", "box": [560, 100, 720, 110], "confidence": 0.95}
+  ]
+}

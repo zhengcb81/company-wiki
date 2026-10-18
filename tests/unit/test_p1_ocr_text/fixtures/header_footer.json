@@ -1,0 +1,11 @@
+{
+  "width": 800,
+  "height": 1000,
+  "lines": [
+    {"text": "PAGE HEADER", "box": [50, 10, 750, 30], "confidence": 0.95},
+    {"text": "Body paragraph one", "box": [50, 400, 750, 420], "confidence": 0.95},
+    {"text": "Body paragraph two", "box": [50, 430, 750, 450], "confidence": 0.95},
+    {"text": "Body paragraph three", "box": [50, 460, 750, 480], "confidence": 0.95},
+    {"text": "PAGE FOOTER", "box": [50, 970, 750, 990], "confidence": 0.95}
+  ]
+}
