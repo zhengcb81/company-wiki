@@ -145,7 +145,10 @@ def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
     from . import narrative_model as legacy
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
-    view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
+    # The task-plan binding keeps its original twenty-claim marker for wire
+    # compatibility; the effective summary budget is output_plan.max_claims
+    # (MAX_SUMMARY_CLAIMS) and the decoder enforces the same number.
+    view = compile_scoped_model_view(selected, max_claims=20)
     if not view.plan.tasks or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
     aliases = ['r' + str(i) for i in range(1, len(selected.reading_context['groups']) + 1)]
