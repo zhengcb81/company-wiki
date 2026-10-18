@@ -18,7 +18,9 @@
 - 第二次显式设置 temp 重跑（`live-cn-h1-b2v3b-20261018`）超过 20 分钟无产出，已停止进程；仅 preparation/harness 两文件，未写 receipt。原因待查（非网络连接态）。
 - 结论：**C 仍 OPEN**；需先修 runner 的 temp 前置校验（应在付费前 fail fast），再以 loopback 验证链路耗时，然后重跑真实三源。
 
-**Next Step：** 提交/推送本轮 B2 修复 → 修 runner temp 前置校验并补测试 → loopback 计时 → 重跑 cn-h1 live。
+**本地门禁阻塞（如实记录，未绕过）：** 修好 runner temp 前置校验后推送被 pre-push 拦下：`tests/contract/test_fresh_cache_behavior_receipts.py::test_existing_engine_cache_behavior_receipts` 期望 parser pin 变更产生 1 次新 POST，实测 0 次；`tests/integration/test_shared_reading_production_e2e.py::test_official_projection_...` 报 `LOCATOR_REPLAY_FAILED`。两项在 Python 3.12 与 3.13 下均可复现，且不在 CI 的 `tests/unit` 范围；改动仅涉及 runner 临时目录守卫与 PyMuPDF 别名，撤销后仍失败。已把这两处修复（`pdf_backend` 别名 shim + runner 早失败守卫）保存为 `parked-local-gate-fixes-20261018.patch`，不推送、不绕过 hook；待单独定位这两个测试的根因后再推。
+
+**Next Step：** 推送本轮 PWF → 定位上述两个合同/集成测试的根因（与 B2 无关的既有失败）→ 修 runner 守卫与 shim 一并推送 → 重跑 cn-h1 live 完成 C。
 
 ---
 ## B2 复审 v2：2 个新 P1 已修（2026-10-18；优先于上一节）
