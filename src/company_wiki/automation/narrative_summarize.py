@@ -249,6 +249,15 @@ def _uncovered_task_keys(request: Any, summary: NarrativeSummaryResult) -> list[
     return [key for key in keys if key not in covered]
 
 
+def _plain(value: Any) -> Any:
+    """Deep-copy a frozen mapping payload into plain JSON containers."""
+    if isinstance(value, Mapping):
+        return {key: _plain(child) for key, child in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_plain(child) for child in value]
+    return value
+
+
 def _partial_summary_result(
     summary: NarrativeSummaryResult, metrics: HandlerMetrics, keys: list[str],
     execution: Mapping[str, Any],
@@ -435,8 +444,9 @@ class NarrativeSummarizeHandler:
                 and prior_result.result.get("coverage_partial") is True
                 and isinstance(prior_result.result.get("summary"), Mapping)):
             try:
-                prior_summary = NarrativeSummaryResult.from_dict(prior_result.result["summary"])
-            except NarrativeContractError:
+                prior_summary = NarrativeSummaryResult.from_dict(
+                    _plain(prior_result.result["summary"]))
+            except (NarrativeContractError, TypeError, ValueError):
                 prior_summary = None
             if prior_summary is not None:
                 uncovered = [key for key in prior_result.result.get("uncovered_task_keys", ())
