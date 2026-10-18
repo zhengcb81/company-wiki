@@ -1,0 +1,20 @@
+{
+  "schema_version": "du11-b1-independent-review/1",
+  "verdict": "PASS_B1_ENGINEERING",
+  "source_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "5e9b2dc07ad9d79bafc47efe8e95256b0dccc0caa59d6dc43f8f06a2802084f0",
+    "src/company_wiki/source_catalog/narrative_reading.py": "6a76203353b81c0e50881607851fdd1f91925942381bad873c64787a9940fdfe",
+    "tests/unit/du11_source_closure/test_source_metadata_budget.py": "912b2df330badcc86f7d94e612e07831207c4cb7c82f2340fd1f7a26fbe7f5be"
+  },
+  "findings": [
+    {"id": "F1", "priority": "P1", "status": "CLOSED", "root_cause": "Section references materialize before budget reservation", "prior_controls": [{"entry": "_candidates", "limit": 300, "used": 193, "heading_visits": 32, "body_visits": 0}, {"entry": "build_native_continuity", "limit": 0, "used": 0, "heading_visits": 32, "body_visits": 64}], "final_rejected_heading_and_body_visits": 0},
+    {"id": "F2", "priority": "P2", "status": "CLOSED", "root_cause": "New fixtures fail before resource behavior", "prior_cases": ["undefined page_case", "three deepcopy(mappingproxy) failures"], "prior_actual_concentrated_result": {"passed": 733, "failed": 4, "seconds": 50.08}, "repair": "supported fixture plus whole recursive IR snapshot"}
+  ],
+  "unresolved_findings": [],
+  "reviewer_actions": {"final_unit_passed": 9, "final_unit_failed": 0, "pytest_seconds": 3.27, "returncode": 0, "final_finite_pure_controls": 3, "large_test_runs": 0, "paid_calls": 0, "raw_pdf_reads": 0, "source_edits": 0},
+  "source_freeze_unchanged_after_execution": true,
+  "cleanup": {"outer_temp_absent": true, "plugin_relocated_temp_absent": true},
+  "final_receipt": "budget-index-independent-green.json",
+  "retained_findings": ["same parent/local scoped account", "one external context index per owner", "single exclusion union", "original context-set semantics retained", "actual source SHA dependencies cover both runtime modules"],
+  "boundary": "B1 engineering accepted at exact SHA only; B2 draft and real C excluded"
+}

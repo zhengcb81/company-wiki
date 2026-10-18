@@ -12,8 +12,11 @@ from collections import Counter
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from hashlib import sha256
+from itertools import chain
 from math import isfinite
 from typing import Any
+
+from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
@@ -76,7 +79,7 @@ class _Native:
 
 
 class _Analysis:
-    def __init__(self, limits: Mapping[str, Any] | None):
+    def __init__(self, limits: Mapping[str, Any] | None, work_budget: WorkBudget | None = None):
         self.limits = dict(_LIMITS)
         if limits is not None:
             if not isinstance(limits, Mapping):
@@ -88,6 +91,8 @@ class _Analysis:
                         raise ValueError(f"{key} must be a nonnegative integer")
                     self.limits[key] = min(value, ceiling)
         self.work = 0
+        self.account = (work_budget.scoped(self.limits["max_work_units"])
+                        if work_budget is not None else WorkBudget(self.limits["max_work_units"]))
         self.stopped = False
         self.diagnostics: Counter[str] = Counter()
         self.deferred: list[str] = []
@@ -98,11 +103,13 @@ class _Analysis:
     def charge(self, amount: int = 1) -> bool:
         if self.stopped:
             return False
-        if self.work + amount > self.limits["max_work_units"]:
+        try:
+            self.account.charge(amount)
+        except WorkBudgetExceeded:
             self.stopped = True
             self.diagnostics["CONTINUITY_WORK_LIMIT"] += 1
             return False
-        self.work += amount
+        self.work = self.account.used
         return True
 
     def font(self, unit: Mapping[str, Any], frame: str) -> tuple[float, str] | None:
@@ -465,20 +472,22 @@ def build_native_continuity(
     sections: Sequence[Mapping[str, Any]] = (),
     unit_profiles: Mapping[str, Mapping[str, Any]] | None = None,
     limits: Mapping[str, Any] | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> dict[str, Any]:
     """Return only bounded original-ID context whose native continuity is proven."""
-    state = _Analysis(limits)
+    state = _Analysis(limits, work_budget)
     profiles = unit_profiles or {}
     headings: set[str] = set()
     unit_section = {}
     for section in sections:
-        ids = tuple(section.get("heading_unit_ids", ())) + tuple(
-            section.get("body_unit_ids", ())
-        )
-        if not state.charge(1 + len(ids)):
+        heads = section.get("heading_unit_ids", ())
+        body = section.get("body_unit_ids", ())
+        # Reserve before visiting IDs; exhausted callers must not copy a
+        # document-sized section merely to discover that work cannot start.
+        if not state.charge(1 + 2 * len(heads) + len(body)):
             break
-        headings.update(section.get("heading_unit_ids", ()))
-        for uid in ids:
+        headings.update(heads)
+        for uid in chain(heads, body):
             unit_section[uid] = section.get("section_id")
     run: list[_Native] = []
     proof: list[dict[str, Any]] = []
