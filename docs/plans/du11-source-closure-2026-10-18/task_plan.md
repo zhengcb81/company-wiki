@@ -1,3 +1,10 @@
+## 两个长期失败测试已按用户决定删除（2026-10-18）
+
+- 删除 `tests/contract/test_fresh_cache_behavior_receipts.py`（parser pin 缓存前提与现行“按源字节复用”语义不符）与 `tests/integration/test_shared_reading_production_e2e.py` 中 `test_official_projection_...`（LOCATOR_REPLAY_FAILED；同文件其余 4 例保留）。
+- 两者均未被 CI workflow 或队列表引用；删除目的是解除 pre-push 阻塞，不改变产品行为。
+
+---
+
 ## P1–P4 施工包已由 ROOT 接收（2026-10-18）
 
 - 四包全部合入本地 `master`：P1 `09a8dded`（40 tests，ruff/mypy 干净）、P4 `626eb32f`（fixtures catalog 下 34 passed，无 env 时 34 skipped 按设计）、P2（70 passed，独立复审 PASS）、P3（50 passed，独立复审 REJECT→APPROVE）。P1 接收时把重名的 `synth.py` 改为 `p1_synth.py`。
