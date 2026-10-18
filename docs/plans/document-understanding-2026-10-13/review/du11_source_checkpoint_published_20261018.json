@@ -1,0 +1,33 @@
+{
+  "schema_version": "du11-reviewed-source-publish/1",
+  "head_sha": "e33d40ed7688cfdcead1e02d55542f7026d0b8e5",
+  "remote_master_verified": true,
+  "normal_push": {
+    "unit_passed": 6741,
+    "unit_skipped": 24,
+    "unit_seconds": 580.05,
+    "contract_passed": 142,
+    "contract_seconds": 37.31,
+    "hooks_bypassed": false,
+    "deadlines_increased": false
+  },
+  "ci": {
+    "run_id": 39090720114,
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39090720114",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "e33d40ed7688cfdcead1e02d55542f7026d0b8e5",
+    "updated_at": "2026-10-18T02:40:55Z",
+    "observed_via": "anonymous GitHub REST response; no credentials read; cached HTML earlier In progress not used as latest conclusion"
+  },
+  "scope": "reviewed source purpose/priority/HK identity/tail/project source scopes and schema-fixture corrections",
+  "not_complete": [
+    "crosspage source carry",
+    "bounded explicit antecedent references",
+    "final supplier summary quality C",
+    "holdout and RF audit loop"
+  ],
+  "new_paid_calls": 0,
+  "cumulative_budget_unchanged": true,
+  "performance_followup": "full unit580.05s is near unchanged600s; concurrent phases do not make unit phase itself fast. ROOT has reproduced unmetered source metadata N-squared context construction and shared-budget gaps in isolated following work."
+}

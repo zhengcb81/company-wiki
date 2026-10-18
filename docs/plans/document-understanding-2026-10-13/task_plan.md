@@ -1,3 +1,13 @@
+## 已正常发布并核远端CI — 2026-10-18
+
+已审来源工程与旧测试兼容修复正常推送至e33d40ed7688cfdcead1e02d55542f7026d0b8e5，远端master一致。prepush全量6741PASS/24SKIP580.05s、合同142PASS37.31s，无跳hook/提时限；GitHub CI352/runs39090720114精确HEAD已匿名REST确认completed/success。详见review/du11_source_checkpoint_published_20261018.json。旧4FAIL及timeout记录不删。
+
+全量unit580s仍接近600s，不能宣称耗时已彻底解决。ROOT隔离下一阶段已实测16/32成员的源容器context访问288/1088次（平方级），并复现总budget耗尽仍扫描几何；正在统一索引与现parent budget责任层修复。跨页/指代source实际API RED仍在隔离工区，未混入本次绿色主线。两个外包作者树不写，原件/config/gold/累计费用不改。
+
+**Next Step：** 完成同source owner的metadata线性索引/真实共享工作计费，再按剩余闭合设计完成跨页/有限先行词；源就绪后正式摘要与缓存恢复C、新holdout/RF循环。整体PWF未完成。
+
+---
+
 ## 当前主线：来源质量工程已审，发布后继续跨页/指代 — 2026-10-18
 
 已审源质量检查点dd5e1f2f合入本地主线b5d413d6；修复旧测试契约44941956已提交。短末行/风险prose/完整project/purpose补充已通过独立最终审查，正在正常提交并线。本轮明确保留原件和原source字节，不改gold、不提高限额、不增加许可；两个外包RF/FF作者树不触碰。
