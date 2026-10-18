@@ -14,11 +14,11 @@ Allowed: source_catalog/security_code.py (new), resolver.py, source_reader.py id
 1. A meaningful RED: HK both directions, CN width, distinct codes/markets, US class punctuation, unknown namespace and observed manifest preservation. Status COMPLETE: 7 meaningful FAIL / 19 PASS, red.log/xml.
 2. B implement one pure owner and two call sites; concentrated existing identity/query regressions. Status COMPLETE: 42 PASS/6.76s (green.log/xml), including 16 existing owner tests.
 3. C isolated actual FF→CWP identify/query/reuse/open, zero download/provider/model; negative company/market/period/date/hash controls; Temp/sentinel cleanup. Status COMPLETE: 31 PASS/13.43s (integration.log/xml), 29 own unit + 2 real external FF CLI integration cases.
-4. Independent different-agent review at frozen SHAs, fix all findings, normal owned-only commit, handoff. Status IN_PROGRESS: independent reviewer PASS,37PASS13.20s; no defects found. Normal owned-only commit next.
+4. Independent different-agent review at frozen SHAs, fix all findings, normal owned-only commit, handoff. Status COMPLETE: independent reviewer PASS,37PASS13.20s; normal implementation commit310252bd, no defects found.
 
 ## Next Step
 
-Commit exact owned paths and independent review normally; ROOT then receives commit for merge. Source remains frozen.
+ROOT receives implementation310252bd and this final handoff documentation commit for merge; real HK consumer-only replay remains ROOT responsibility.
 
 ## Acceptance
 

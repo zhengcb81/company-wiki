@@ -1,6 +1,6 @@
 {
   "schema_version": "du11-identity-projection-handoff/1",
-  "status": "INDEPENDENT_REVIEW_PASS_READY_NORMAL_COMMIT",
+  "status": "DELIVERED_INDEPENDENT_REVIEW_PASS",
   "base": "a8eef273a90ac1ddb0f79f8bdd36e7c47f8eb377",
   "branch": "codex/du11-identity-projection",
   "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-identity-projection\\company-wiki",
@@ -73,7 +73,7 @@
     "Unknown namespaces and malformed codes preserved literally without invented aliases; missing auxiliary fields retain existing anchored-source semantics.",
     "source_reader existing mixed endings preserved; only new lines LF. Resolver workingCRLF vs indexLF noted by normalized hash."
   ],
-  "commit": null,
+  "commit": "310252bd5eb09ff21943ce8053a9ebc6464ccbfc",
   "independent_review": {
     "reviewer": "/root/du10_ff_reception_review",
     "status": "PASS",
@@ -81,5 +81,13 @@
     "tests": "37PASS13.20s",
     "source_unchanged": true,
     "cleanup": true
-  }
+  },
+  "committed_blob_sha256": {
+    "src/company_wiki/source_catalog/security_code.py": "261e1383f3c0c908c96c02a477968b224818a0be9d789ce1b12f2b39d162d6ea",
+    "src/company_wiki/source_catalog/resolver.py": "ad82bedae618d791cd81e86e07e0680a001cdc25a3a870e829c7f146144d1e35",
+    "src/company_wiki/source_catalog/source_reader.py": "14400ddf8c07560080878541f9f95b41bed8a21875cf8c85d2c47bf6b07644e8",
+    "tests/unit/du11_identity_projection/test_identity_projection.py": "68c13b325433c784bb444eed6188ce8b082e8d77591e7c56ef58da6ae6c85d64",
+    "tests/integration/test_du11_identity_projection.py": "76f332e8329023fa952d000b78966a15bf2d83fc6636db9565c24aeadf647418"
+  },
+  "source_working_bytes_still_frozen": true
 }
