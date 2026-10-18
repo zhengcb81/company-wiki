@@ -19,6 +19,24 @@ _CREATE_CONNECTION = socket.create_connection
 VERSION = "reading-model-input/5"
 
 
+@pytest.mark.parametrize("version", ["reading-model-input/4", VERSION])
+def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_material(version):
+    from copy import deepcopy
+    from tools.document_understanding_benchmark.phase_c_observer import gold_observation
+
+    source = selected(3)
+    request = build_model_request(source, reading_projection_version=version)
+    envelope = json.loads(request.data_json)
+    gold = {"facts": []}
+    report = gold_observation(gold, source, envelope)
+    assert report["evidence_count"] == len(source.evidence_spans)
+    assert report["evidence_characters"] == sum(len(span.raw_text) for span in source.evidence_spans)
+    changed = deepcopy(envelope)
+    changed["material"]["tasks"] = []
+    with pytest.raises(AssertionError):
+        gold_observation(gold, source, changed)
+
+
 def test_identity_snapshot_uses_explicit_data_catalog_not_code_checkout(tmp_path, monkeypatch):
     """A worktree without production data reads the supplied catalog snapshot."""
     from company_wiki.source_catalog.security_identity import SecurityMasterStore

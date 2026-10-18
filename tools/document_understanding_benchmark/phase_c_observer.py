@@ -34,13 +34,14 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         sys.path.insert(0, project)
     from tools.document_understanding_benchmark.closed_group_support import score_facts
 
-    if envelope["schema_version"] == "narrative-model-request/5":
+    if envelope["schema_version"] in {"narrative-model-request/5", "narrative-model-request/6"}:
         from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
 
         # Observe exactly the current compiler's material, including shared
         # references and task-local support/context. Only after byte-equivalent
         # material proof may the existing native-source oracle score selection.
-        view = compile_scoped_model_view(selected, max_claims=20)
+        max_claims = max(1, len(selected.evidence_spans) * 2) if envelope["schema_version"] == "narrative-model-request/6" else 20
+        view = compile_scoped_model_view(selected, max_claims=max_claims)
         assert envelope["material"] == view.to_model_dict()
         assert view.plan.evidence_order == tuple(span.span_id for span in selected.evidence_spans)
         rows = [[span.span_id, span.raw_text] for span in selected.evidence_spans]
