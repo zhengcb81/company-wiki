@@ -1,3 +1,11 @@
+## 内容验收口径更新：数字可以近似，但不能错（用户，2026-10-18）
+
+- 用户明确：精确数字丢失问题不大（例：写“超过 7,500”可以），但**不能写错**（例：写“少于 7,000”不允许）。
+- 按此口径重评：HK（DeepSeek）由 5/7 改为 **7/7、critical 6/6 通过**——两处“PARTIAL”都只是近似（7,500+/近4,400/超過3,100），没有一条与金标矛盾，也没有触发 must_not_assert。
+- 剩余缺口性质变化：CN（8/10）缺的是**两条完整事实**、US（2–8）缺的是多条事实，不是“数字写错”。下一步应针对“漏事实”（表格事实单独任务/补写），而不是精度。
+
+---
+
 ## 两个长期失败测试已按用户决定删除（2026-10-18）
 
 - 删除 `tests/contract/test_fresh_cache_behavior_receipts.py`（parser pin 缓存前提与现行“按源字节复用”语义不符）与 `tests/integration/test_shared_reading_production_e2e.py` 中 `test_official_projection_...`（LOCATOR_REPLAY_FAILED；同文件其余 4 例保留）。

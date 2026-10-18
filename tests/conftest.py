@@ -58,24 +58,37 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 sys.path.insert(0, str(Path(__file__).parent))
 
 
-@pytest.hookimpl(tryfirst=True)
-def pytest_collectstart(collector):
+_TESTS_ROOT = str(Path(__file__).parent)
+
+
+def _ensure_tests_root_first():
     """Keep the tests root ahead of per-directory ``fixtures`` packages.
 
     Several lane conftests insert their own directory at ``sys.path[0]`` so
-    that their data files resolve, and those directories contain a
-    ``fixtures/`` folder.  When the gate runs a mixed selection, that folder
-    then shadows ``tests/fixtures`` and the decision-dependency / profile
-    tests fail with ModuleNotFoundError.  Re-assert the tests root before each
-    module is imported; per-directory entries stay available behind it.
+    that their data files resolve, and some of those directories contain a
+    ``fixtures/`` folder.  In a mixed selection that folder shadows
+    ``tests/fixtures`` and the decision-dependency / profile tests fail with
+    ModuleNotFoundError.  Re-assert the tests root before every collection so
+    ``fixtures`` always resolves to ``tests/fixtures``; the lane directories
+    stay available behind it.
     """
-    root = str(Path(__file__).parent)
-    if not sys.path or sys.path[0] != root:
+    if not sys.path or sys.path[0] != _TESTS_ROOT:
         try:
-            sys.path.remove(root)
+            sys.path.remove(_TESTS_ROOT)
         except ValueError:
             pass
-        sys.path.insert(0, root)
+        sys.path.insert(0, _TESTS_ROOT)
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_collect_file(file_path, parent):
+    _ensure_tests_root_first()
+    return None
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_collectstart(collector):
+    _ensure_tests_root_first()
 
 
 @pytest.fixture(scope="session")
