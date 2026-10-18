@@ -1,0 +1,222 @@
+{
+  "schema": "du11-objective-completeness/1",
+  "reviewed_at": "2026-10-18T16:10:00+08:00",
+  "scope": "DU11 objective completeness and evidence sufficiency; read-only; C content not re-argued",
+  "worktree": {
+    "head": "e84806b0",
+    "branch": "master",
+    "remote": "origin/master",
+    "status": "tracked clean; numerous untracked .planning/review/test artifacts; no tracked config/gold/source changes"
+  },
+  "verdict": "NOT_COMPLETE",
+  "handoff_ready_except_c": false,
+  "items": [
+    {
+      "id": "B2",
+      "status": "DONE_WITH_GAP",
+      "done": [
+        "tests/unit/du11_source_closure 105 tests collected; current run 105 passed in 4.26s",
+        "CN/HK/US replay receipts selected_required 10/10, 7/7, 8/8; 0 API; original/gold unchanged",
+        "d55d3369 and 6a2ee853 are ancestors of origin/master; current HEAD e84806b0",
+        "three independent review reports v1/v2/v3 exist"
+      ],
+      "gaps": [
+        "v3 review verdict REJECT at code 1a774af0; d55d3369/6a2ee853 post-date v3 but have no final independent review; handoff says B2 completed",
+        "b2-real-sources-v3 replay binds product_reference e946b493, current file 8e742d71 after 6a2ee853; full replay not bound to final performance commit; b2-v3fast page-scope is diagnostic only",
+        "CI 39123679375 exists only as text in PWF; no local CI JSON/log; commit ancestry verified but CI result not independently verified"
+      ]
+    },
+    {
+      "id": "C_ENGINEERING",
+      "status": "DONE",
+      "done": [
+        "CN live-cn-h1-b2v3w: receipt PASS, 1 POST, 15,970 tokens/$0.002968",
+        "US live-us-10k-b2v3b: receipt PASS, 1 POST, 10,829 tokens/$0.005353",
+        "both activation_recovery PASS same attempt, same_run_zero_POST/cross_run_zero_POST true, protected/sentinel unchanged",
+        "FF reuse: reused_existing, downloads=0; RF read: verified_read/read receipt",
+        "native usage entries match receipts; HK 401 evidenced"
+      ],
+      "gaps": [
+        "HK 401 task_plan says not billed, but native usage has 69,046 tokens/$0.031208 unknown budget hold",
+        "usage ledger/handoff figures inconsistent (see findings)"
+      ]
+    },
+    {
+      "id": "C_CONTENT",
+      "status": "MISSING",
+      "known": [
+        "CN best 8/10 required, 5/7 critical (live-cn-h1-b2v3w, 22 claims; review v3)",
+        "US best 4/8 required, 4/8 critical (live-us-10k-b2v3b, 9 claims; review v2)",
+        "HK blocked on 401",
+        "4.0.8 CN 6/10/4-7 regression recorded and reverted at 46ffee41; best remains 4.0.6 8/10"
+      ],
+      "note": "Recorded in task_plan/progress/findings/handoff/c-decision; no new content review re-argued."
+    },
+    {
+      "id": "PACKAGES",
+      "status": "DONE_WITH_GAP",
+      "done": [
+        "README, INTERFACES, P1/P2/P3/P4 cards present",
+        "card-level write sets disjoint at file level; P1/P2 independent; P3 depends published read/export; P4 depends published CLI + frozen consumer observations"
+      ],
+      "gaps": [
+        "README.md:27-28 says P2 writes docx_parser.py/pptx_parser.py; P2 card.md:22 says no changes, :40 forbids, :183 asserts git diff 0. Canonical P2 write set is ambiguous."
+      ]
+    },
+    {
+      "id": "PWF_HANDOFF",
+      "status": "DONE_WITH_GAP",
+      "done": [
+        "task_plan/progress/findings top sections all record 4.0.8 6/10 regression, 46ffee41 revert, best 8/10, B failure and A/C/D next step",
+        "handoff states plan not complete and records C content gap"
+      ],
+      "gaps": [
+        "handoff:14 says B2 completed/published despite v3 REJECT and no post-fix review/full replay",
+        "handoff:18 (41/857,961/$0.2311) and handoff:61 (742,228/$0.421556) conflict with each other and with ledger 44/900,711/$0.238405",
+        "task_plan:114 (20/479,369/$0.135217) is stale",
+        "c-coverage-decision:54 recommends B (task merge), but task_plan:15 says B failed/reverted; handoff:17 still lists it",
+        "c-coverage-decision:6 says only two P1; does not record 4.0.8 6/10/4 P1 regression",
+        "handoff:35 old worktree HEAD 10699188 vs current e84806b0; historical but current base should be explicit"
+      ]
+    },
+    {
+      "id": "REDLINES",
+      "status": "PASS",
+      "evidence": [
+        "tracked worktree clean; no config/source_catalog.yaml, gold, catalog.sqlite3, .env or key tracked changes",
+        "B2 replay original_unchanged/gold_unchanged true; C protected_unchanged/sentinel_unchanged true; FF raw_unchanged",
+        "no --no-verify/hook bypass evidence; local gate failures are parked, not bypassed",
+        "B2 d55d/6a2ee add tests/change product_reference only; no test deletion/assertion weakening in B2",
+        "C temporary lake removed; native DB under C:/Users/.../cwp-temp, not production catalog"
+      ],
+      "caveat": "Untracked .planning/review/b2-review* artifacts exist; not committed acceptance evidence; do not clean/reset without owner."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "GAP-B2-REVIEW",
+      "severity": "P1",
+      "issue": "Final B2 code not independently reviewed",
+      "evidence": "review/b2-antecedent-independent-review-v3.md:11 verdict REJECT, code_commit 1a774af0; d55d3369/6a2ee853 later; handoff:14 says completed",
+      "action": "Commission final independent review bound to d55d3369 or 6a2ee853 (or both), covering v3 P1 fixes and final tests/replay."
+    },
+    {
+      "id": "GAP-B2-REPLAY",
+      "severity": "P1",
+      "issue": "Full replay receipt not bound to final performance commit",
+      "evidence": "b2-real-sources-v3-20261018/replay.json source_bindings product_reference=e946b493; current product_reference.py=8e742d71; b2-v3fast/page-scope.json is diagnostic only",
+      "action": "Re-run CN/HK/US full replay on current 6a2ee code and update receipts, or provide a binding equivalence proof accepted by independent review."
+    },
+    {
+      "id": "GAP-B2-CI",
+      "severity": "P2",
+      "issue": "CI run only text",
+      "evidence": "handoff:14/findings:121 cite 39123679375 success; no local CI JSON/log",
+      "action": "Add exact CI run JSON/log or mark unverified."
+    },
+    {
+      "id": "GAP-PKG-P2",
+      "severity": "P1",
+      "issue": "P2 write-set contradiction",
+      "evidence": "README.md:27-28 vs P2-OFFICE-TABLE/card.md:22,40,183",
+      "action": "Choose one canonical write set; update README or card; re-check four-card disjointness."
+    },
+    {
+      "id": "GAP-USAGE",
+      "severity": "P1",
+      "issue": "Usage ledger totals inconsistent",
+      "evidence": "usage.jsonl 65 rows/44 unique attempts/21 duplicates; deduped 900,711 tokens/$0.238405; handoff:18 857,961/$0.2311; handoff:61 742,228/$0.421556; task_plan:114 479,369/$0.135217",
+      "action": "Recompute by attempt with as-of time; record known/unknown hold separately; replace all stale totals."
+    },
+    {
+      "id": "GAP-HK-BILLING",
+      "severity": "P2",
+      "issue": "HK 401 billing wording",
+      "evidence": "task_plan:114 says not billed; live-hk-annual-b2v3/native-failures: http_status=401, 69,046 tokens/$0.031208 unknown budget hold",
+      "action": "Say no settled invoice but unknown budget hold, not zero charge."
+    },
+    {
+      "id": "GAP-DECISION",
+      "severity": "P1",
+      "issue": "c-coverage-decision stale and contradicts latest task plan",
+      "evidence": "c-coverage-decision:54 recommends B; task_plan:15 says B failed/reverted; handoff:17 still lists B; c-decision:6 only two P1",
+      "action": "Update c-decision to record B failure, 4.0.8 regression/revert, and A/C/D only."
+    }
+  ],
+  "redlines": {
+    "verdict": "PASS",
+    "production_config_writes": 0,
+    "production_db_writes": 0,
+    "original_writes": 0,
+    "gold_writes": 0,
+    "key_reads": 0,
+    "prepush_bypass": 0,
+    "test_deletions_or_assertion_weakening": 0,
+    "caveat": "No evidence found; untracked artifacts not acceptance evidence."
+  },
+  "evidence": {
+    "tests_command": "python -m pytest tests/unit/du11_source_closure -q -p no:cacheprovider",
+    "tests_result": "105 passed in 4.26s",
+    "b2_replay": [
+      "b2-v3-20261018/cn-h1.json: 10/10, 0 API, original/gold unchanged",
+      "b2-real-sources-v3-20261018/hk-annual.json: 7/7",
+      "b2-real-sources-v3-20261018/us-10k.json: 8/8",
+      "b2-real-sources-v3-20261018/replay.json: api_calls=0, raw_copies=0, source_unchanged=true"
+    ],
+    "c_engineering": [
+      "live-cn-h1-b2v3w-20261018/receipt.json + overall.json",
+      "live-us-10k-b2v3b-20261018/receipt.json + overall.json",
+      "ff-reuse.stdout.json, rf-source.stdout.json in both",
+      "live-hk-annual-b2v3-20261018/phaseC-090-05a921ea8e9f.native-failures.json"
+    ],
+    "usage_ledger": {
+      "path": ".planning/shared-reading-production/live/usage.jsonl",
+      "lines": 65,
+      "unique_attempts": 44,
+      "duplicate_attempts": 21,
+      "unique_tokens": 900711,
+      "unique_micro_usd": 238405,
+      "known_attempts": 41,
+      "known_tokens": 692409,
+      "known_micro_usd": 181256,
+      "unknown_attempts": 3,
+      "unknown_tokens": 208302,
+      "unknown_micro_usd": 57149,
+      "errors": 4
+    },
+    "package_conflict": [
+      "docs/plans/parallel-packages-2026-10-18/README.md:27-28",
+      "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/card.md:22",
+      "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/card.md:40",
+      "docs/plans/parallel-packages-2026-10-18/P2-OFFICE-TABLE/card.md:183"
+    ],
+    "handoff_conflicts": [
+      "harness-handoff.md:14",
+      "harness-handoff.md:18",
+      "harness-handoff.md:61",
+      "task_plan.md:114",
+      "c-coverage-decision-20261018.md:6",
+      "c-coverage-decision-20261018.md:54"
+    ]
+  },
+  "handoff_conditions": [
+    "Final independent B2 review on d55d3369/6a2ee853 or explicit DONE_WITH_GAP status.",
+    "Full CN/HK/US replay bound to current product_reference or accepted equivalence proof.",
+    "Resolve README/P2 card write-set conflict.",
+    "Reconcile usage ledger and all handoff/task_plan totals with as-of/known/unknown.",
+    "Correct HK 401 billing wording and remove stale B option from c-decision/handoff.",
+    "Add local CI receipt for 39123679375 or mark unverified."
+  ],
+  "unverified": [
+    "GitHub CI 39123679375 not independently checked (no local receipt; no network).",
+    "B2 replay did not exercise product_reference performance-only change; equivalence not independently proven.",
+    "No model/provider rerun; C content known gap not re-reviewed.",
+    "Original/gold SHA rehashed only through receipts/source bindings, not full source bytes.",
+    "Historical test deletions in unrelated commits not audited; only B2 commits checked."
+  ],
+  "notes": [
+    "C content gap is acknowledged and sufficiently recorded; not re-argued.",
+    "B2 test 105 and C engineering receipts are strong; gaps are final review/replay binding and documentation/accounting consistency.",
+    "Report pair: review/objective-completeness-20261018.md and .json."
+  ]
+}

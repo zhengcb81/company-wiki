@@ -111,7 +111,7 @@
 
 **临时目录根因：** Python 子进程在本机 `%TEMP%` 和 `C:\` 根目录创建目录被 ACL 拒绝（WinError 5），`tempfile.mkdtemp` 因此反复重试——这就是此前多次 C 卡在 preparation 的原因。改到 `C:\Users\郑曾波\Projects\cwp-temp`（仓库外、可写）后全部通过；未改生产配置。
 
-**累计账：** ledger 20 个唯一 attempt，479,369 tokens / $0.135217（不含 metadata 记录的历史基线）；HK 的 401 未计费。
+**累计账：** ledger **44 个唯一 attempt，900,711 tokens / $0.238405**（去重口径，核对于 2026-10-18；不含 metadata 记录的历史基线）。HK 的 401 没有结算发票，但有一条 **69,046 tokens / $0.031208 的 unknown 预算占用（hold）**，按规则不能计为零。
 
 **Next Step：** CN/US 摘要交独立内容审查（关键事实、指代、主体、单位/期间、当前/未来）；HK 等密钥轮换后重跑；之后 holdout 与 RF 审查循环。
 

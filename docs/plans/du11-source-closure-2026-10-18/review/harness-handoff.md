@@ -11,11 +11,11 @@
 
 ## 2026-10-18 最新状态
 
-- **B2 已完成并发布**：`d55d3369`（三审修复）、`6a2ee853`（性能修复），CI 绿；`tests/unit/du11_source_closure` 105 PASS；真实 CN/HK/US 回放 10/10、7/7、8/8，t32/t34 `selected_matches=0`。
+- **B2 已完成并发布**：`d55d3369`（三审修复）、`6a2ee853`（性能修复），CI 绿；`tests/unit/du11_source_closure` 105 PASS；真实 CN/HK/US 回放 10/10、7/7、8/8，t32/t34 `selected_matches=0`。**注意：** 现有 v3 独立复审审的是 `1a774af0`，`d55d3369`/`6a2ee853` 之后的最终复审仍需补做（见 `review/objective-completeness-20261018.md`）。
 - **C 工程侧已通过**：CN（MiMo）与 US（MiniMax）各 1 次真实 POST，`activation_recovery=PASS`（同 attempt、无新增扣费），`cross_run_zero_POST=true`，FF 复用与 RF 读取通过；HK 因 `DEEPSEEK_API_KEY` 401 未跑。
 - **C 内容侧未通过**：CN required 8/10（critical 5/7），US 2–4/8。复审报告：`review/c-content-review-20261018-cn-v3.md`。
-- **待拍板**：覆盖缺口的三条路径见 `review/c-coverage-decision-20261018.md`（section 任务合并 / 覆盖修复二次尝试 / 换模型）；选定后重跑 CN/US 并做最终内容复审。
-- 累计付费：41 个 attempt、857,961 tokens / $0.2311（不含 metadata 记录的历史基线，上限 2M / $20）。
+- **待拍板**：`review/c-coverage-decision-20261018.md` 里的 section 任务合并（B）已实测失败并回退，剩余为 **A 覆盖修复二次调用**（需改 paid-admission）或 **C 换模型**；选定后重跑 CN/US 并做最终内容复审。
+- 累计付费：44 个 attempt、900,711 tokens / $0.238405（ledger 去重口径，核对于 2026-10-18；不含 metadata 记录的历史基线，上限 2M / $20）。
 
 不要把已接收的 RF/FF 施工卡重新打开，也不要把工程测试通过、原文选择金标命中或已有摘要缓存命中当作正式内容验收通过。
 
@@ -58,7 +58,7 @@
 
 B2 和真实三源工程回放完成后，才进入正式 C。此前 CN/MiMo、HK/DeepSeek、US/MiniMax 的真实请求只是基线；独审发现了业务噪声、主体归属、指代闭合、表格遗漏和预算挤占问题，明确不是内容验收通过。共享摘要/缓存和 paid-response 恢复代码已发布，但本轮正式内容与故障恢复验收仍未完成。
 
-进入正式 C 时，读取当前供应商配置和累计预算账本，通过项目既有客户端使用实际配置的 `mimo-v2.6-flash`、`deepseek-flash`、`MiniMax-M3`，保持原文语言，不翻译、不读取或输出密钥。上次记录的累计用量为 742,228 tokens / $0.421556 估算费用；历史未知费用继续作为 hold 保留。每次运行前重新读账本并核对累计上限 2,000,000 tokens / $20，不把未知数计为零。不要因为本段计划增加新授权文件或逐材料许可。
+进入正式 C 时，读取当前供应商配置和累计预算账本，通过项目既有客户端使用实际配置的 `mimo-v2.6-flash`、`deepseek-flash`、`MiniMax-M3`，保持原文语言，不翻译、不读取或输出密钥。metadata 记录的旧基线为 742,228 tokens / $0.421556 估算费用；当前 ledger 去重口径是 **44 个唯一 attempt、900,711 tokens / $0.238405**（核对于 2026-10-18），历史未知费用继续作为 hold 保留。每次运行前重新读账本并核对累计上限 2,000,000 tokens / $20，不把未知数计为零。不要因为本段计划增加新授权文件或逐材料许可。
 
 真实 C 必须同时证明：
 

@@ -32,12 +32,10 @@
 - 预期：CN 9–10/10；US 从 ~8 条升到 ~16 条。
 - 风险：中高；触碰付费准入与恢复，需独立审查。
 
-### B. 任务合并：section 级 summary task
+### B. 任务合并：section 级 summary task（已实测失败，2026-10-18）
 
-- 把相邻 citation view 按 origin group/章节合并成 15–20 个 section 任务，每个任务多条 span；一条 claim 可覆盖该节多个事实。
-- 改动集中在 `summary_tasks.build_summary_task_plan` 与 coverage/claim 语义，不动付费架构。
-- 预期：20 条 claim ≈ 每节一条，覆盖提升；但单条 claim 280 字上限意味着合并后可能丢细节。
-- 风险：中；需重写任务/覆盖测试。
+- 实现并单测通过（64→40 任务、96 span 恰好定义一次、103 测试绿），但两次真实 CN 都是 `MODEL_RESPONSE_INVALID`（模型返回畸形 JSON）：多成员任务的 parts/support_parts 结构让 MiMo 失稳。
+- 已 revert（`12914f62`），不再作为候选。
 
 ### C. 换模型
 
@@ -49,9 +47,13 @@
 
 - critical 全中 + normal ≥80%。CN 目前 critical 5/7，不达标，等于不改。
 
-## 建议
+## 建议（2026-10-18 更新）
 
-先做 **B（任务合并）**：它直接消除"64 个任务对 20–28 条 claim"的粒度错配，不动付费架构，风险可控；若合并后 CN 仍缺 critical，再做 **A** 的第二次尝试。
+B 已实测失败；prompt/上限/排序类实验也已证明只能"换一条漏项"（4.0.8 甚至把覆盖降到 6/10）。剩余只有 **A（覆盖修复二次调用）** 能真正补上缺口，但它要改 `NarrativeModelCaller` 的 "exactly one model attempt" 付费准入；若不动架构，只能选 **C（换模型）** 并把"三供应商"口径调整为"已配置供应商中至少两家可用"。
+
+## 2026-10-18 追加：模型文本缺陷
+
+CN 4.0.8 的 t45-1 在原文断行处插入了 `te`（`上\nte海临港`）。核对 `materials/*.response.json.gz` 确认是模型输出，不是切片/解码；任何换模型方案都应把"不插入原文没有的字符"列为验收项。
 
 ## 需要拍板
 

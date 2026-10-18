@@ -24,8 +24,8 @@
 | `src/company_wiki/document_normalization/ocr_composition.py`（仅可选、窄改） | 写 | — | — | — |
 | `src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py`（新） | 写 | — | — | — |
 | `src/company_wiki/document_normalization/office_table_structure.py`（新） | — | 写 | — | — |
-| `src/company_wiki/document_normalization/docx_parser.py`（仅增量） | — | 写 | — | — |
-| `src/company_wiki/document_normalization/pptx_parser.py`（仅增量） | — | 写 | — | — |
+| `src/company_wiki/document_normalization/docx_parser.py` | — | 不写 | — | — |
+| `src/company_wiki/document_normalization/pptx_parser.py` | — | 不写 | — | — |
 | `src/company_wiki/automation/narrative_formats.py`（可选、窄改） | — | 写 | — | — |
 | `tools/identity_audit/**`（新） | — | — | 写 | — |
 | `tests/unit/test_p1_ocr_text/**`（新） | 写 | — | — | — |

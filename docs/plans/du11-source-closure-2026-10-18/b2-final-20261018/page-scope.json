@@ -1,0 +1,2552 @@
+{
+  "source_bindings": [
+    {
+      "module": "company_wiki.automation.narrative_select",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "sha256": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_evidence",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "sha256": "626230254c96de4255aa6970258388fb329076c333a1c7499a4d60083ae09042"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_reading",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+      "sha256": "ddc36db5cfcd028ed0f94b7fc900e09bd64ca256975dd75495badcb2180eaad3"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_finalize",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_finalize.py",
+      "sha256": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_document",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_document.py",
+      "sha256": "dc9d81a3fcdce82167c10d102c7e90bacb8eff4dc5f107c02e835c3b0bbfd98e"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_business_policy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+      "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_source_purpose",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+      "sha256": "0427084245319b490b9b53873f34b1a4d89989abed783a3588c65c443ec346a9"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_operating_relations",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+      "sha256": "3b43270c572fd19949c54f1bf28dbbbf9d6d28bf1ebe2c141c3a05a8347f8f85"
+    },
+    {
+      "module": "company_wiki.document_understanding.source_cards",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\source_cards.py",
+      "sha256": "ada8be16dc4963b595f3caad28caa6f592e3d4c112ec5495d316c68d2a3680f6"
+    },
+    {
+      "module": "company_wiki.document_understanding.summary_tasks",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\summary_tasks.py",
+      "sha256": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7"
+    },
+    {
+      "module": "company_wiki.document_understanding.native_table_bridge",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\native_table_bridge.py",
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1"
+    },
+    {
+      "module": "company_wiki.document_understanding.narrative_continuity",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+      "sha256": "f63cdfea6330de09b32975cea17b6a9e437d772f36799ff3d2586076242b65fc"
+    },
+    {
+      "module": "company_wiki.document_understanding.decision_inventory",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+      "sha256": "aa3a7d0169475a80ad76bda1edde497935e2faa65cc944b2c84e45d19a4bb693"
+    },
+    {
+      "module": "company_wiki.automation.narrative_model_extractive",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_model_extractive.py",
+      "sha256": "04ab4587e09aff19f68c1db54e7c522320848135a66e045eb8575f9d85e95f18"
+    },
+    {
+      "module": "company_wiki.document_understanding.operating_states.product_reference",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\operating_states\\product_reference.py",
+      "sha256": "8e742d717c6e0bc23a297d154a664c8c285da57bfd94226a6336056ffb9990fc"
+    },
+    {
+      "module": "company_wiki.document_understanding.operating_states.relations",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\operating_states\\relations.py",
+      "sha256": "53f62e695a8ab314cbedcbd941a565cdb02fe61e5725bad469902961a146bed1"
+    },
+    {
+      "module": "company_wiki.source_catalog.narrative_antecedent",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_antecedent.py",
+      "sha256": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237"
+    }
+  ],
+  "observations": [
+    {
+      "scope": "diagnostic_only_wrappers_not_frozen_acceptance_or_timing",
+      "mime_type": "application/pdf",
+      "pages_read": 210,
+      "source_page_flow": {
+        "enabled": true,
+        "coarse_complete": true,
+        "unproven_page_count": 121
+      },
+      "opaque_pair_pages": [],
+      "deferred_pair_pages": [],
+      "furniture": [
+        {
+          "code": "REPEATED_RUNNING_HEADER",
+          "unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:01478c12601f009bb375044b3059fac9ed16ccc5cfa46243384362e27c2ab3f7",
+            "urn:company-wiki:narrative-unit:sha256:0219c5c10d181838d4bc26ba29a3029bbfc4900397ba27781aa2264a4d61e79c",
+            "urn:company-wiki:narrative-unit:sha256:0332071ea77b78db19f9feb89cb1031e01df4d32fb5aa0210d9b47b539796c67",
+            "urn:company-wiki:narrative-unit:sha256:0336b1113149b3d2d33a5fcfbfc91d33bd057958f2aa7a234c2003820ba472b9",
+            "urn:company-wiki:narrative-unit:sha256:03b9ac9e2acdbf6cc8ab82c21c74ed0fb973d948fd7ee0e514a432baece38494",
+            "urn:company-wiki:narrative-unit:sha256:03dc3299f2a8e04fb3740970edb8faee65b961a56146cd1b80e7f8a24d96ca60",
+            "urn:company-wiki:narrative-unit:sha256:040a3caa59a89d222e8f7c423b072a1db25ab2e062ca77050ac9f0ea4e82a0a3",
+            "urn:company-wiki:narrative-unit:sha256:0460e0ee2f155a17a066574bb502c8c9b8bc274ce1e5e83d414b3ed52f0dbe1d",
+            "urn:company-wiki:narrative-unit:sha256:0467a110f841c951cf4db09981fcbe89d4bf281098486fe1fadd9d04be52ea2d",
+            "urn:company-wiki:narrative-unit:sha256:04c5ebfa0fb6aa658a02a5d5fa414888e1c5772ae615f766bd944c8e54340f37",
+            "urn:company-wiki:narrative-unit:sha256:06ea05318756180650513ab80ce4a7fa62170d92f7d5ddf2e3243df5b869a274",
+            "urn:company-wiki:narrative-unit:sha256:0720ddd3f544dd21074c8b2748d9658ed6f4ce1d1621007f51d94cdeff940e1b",
+            "urn:company-wiki:narrative-unit:sha256:07a126bf1404774e90795cdaae4a1ebcdff82e79391626f1667311bf9630d48e",
+            "urn:company-wiki:narrative-unit:sha256:08523f2043202efbec43c388985c88132cefb517aa9b1e23482c90edc5c7a6fb",
+            "urn:company-wiki:narrative-unit:sha256:0bd17cce5c606cd78c2157aa08ce0efdf19635113bd6b623d6ad3ecb887f2375",
+            "urn:company-wiki:narrative-unit:sha256:0c211ed175b7ab1c732fcfb8324a8a4e56859a9495ce93c913c1fcf0c40b1b00",
+            "urn:company-wiki:narrative-unit:sha256:0c49512cb0f1f2bdf7dd1f1f12bdb308b03615a7f457bdc546bf914062913cf2",
+            "urn:company-wiki:narrative-unit:sha256:0cb7b329069eeaa0af0e37d112661b48862b960d84e63edf039f2795a42de107",
+            "urn:company-wiki:narrative-unit:sha256:0fe436cd028f8caa496b321f0fe15e1ed087e422fc5478b5058c86181f133214",
+            "urn:company-wiki:narrative-unit:sha256:10f9b1d012e1303708c5b4e98773c33d9b8a4bfed27dce039285adbd3403e3d8",
+            "urn:company-wiki:narrative-unit:sha256:1180bdf60dcf1887a75d6e7fbd4aadcfea7a6e753a91a53f3cd8b70245a8b6c9",
+            "urn:company-wiki:narrative-unit:sha256:129c92fe7a05e854a1b65010dd85b1465cc6208c28e352a8e0806628c578a169",
+            "urn:company-wiki:narrative-unit:sha256:13b315788ec7c5e62964b945e1bc2fb6f432bd9d8c81dfae79165ee987cacdda",
+            "urn:company-wiki:narrative-unit:sha256:147a249f6c31bacf3f44384ad10082e453e1531eeb6c2e93f316d62a11b455fa",
+            "urn:company-wiki:narrative-unit:sha256:153eb4bf8979262c76b28dcfebb3fd3374db861f09c10a6d3e8c3dc5a910bc08",
+            "urn:company-wiki:narrative-unit:sha256:16c15cafbf3e21b7f5486fba9628b0a98333466431c556ef99686c96ba4d18e8",
+            "urn:company-wiki:narrative-unit:sha256:1747adfebba37c1f311b8905465523896283162cc43d477f9228c1833bc0b123",
+            "urn:company-wiki:narrative-unit:sha256:187180d2051841f4efa287a2000d63a21f4a1eb7c3f1f756a6c6b0f2d395be46",
+            "urn:company-wiki:narrative-unit:sha256:196e402754e5dd941b540555b92326ca7535e572519915d8ea7a6e1cabf06327",
+            "urn:company-wiki:narrative-unit:sha256:1a47889355264b6e2468a9e9907c0fe1f6356d88c4b259d83989594e4a856ace",
+            "urn:company-wiki:narrative-unit:sha256:1bae676e228b74177670648021973cb3c80689e5860442a7b5517214ab208922",
+            "urn:company-wiki:narrative-unit:sha256:1c7065bcda3602e048fcf1a6fc0f7bc297380cc68b33c3ca39b4a5c9502b8388",
+            "urn:company-wiki:narrative-unit:sha256:1d84fbb1e0d9d192f8f3e90231f5995be5c6eaf78ac4f7a6160ff4bb2debc2e9",
+            "urn:company-wiki:narrative-unit:sha256:1db90e8ac9da30eecf95e777d2478628c91790b461c5e7ac9341a394e477b643",
+            "urn:company-wiki:narrative-unit:sha256:1e8a1ab794030dd5ae806e82ddb01115ea05bae62561aede3a2f55abd4a03f54",
+            "urn:company-wiki:narrative-unit:sha256:20430e00ffb6a49532d13d1c17e4ff39ffab72398f55afe5123e4113ad214dbb",
+            "urn:company-wiki:narrative-unit:sha256:205b1e607824f55dc62e35fd2e6f253ee3fee1dfee4c1c7e31812972c51456b4",
+            "urn:company-wiki:narrative-unit:sha256:23f791e56e2335f9b9f075002577f29f2eb20232e2e3c01a4bcc2528decc621e",
+            "urn:company-wiki:narrative-unit:sha256:2541e13735229323754ee4cb066edc2cb2b164583f72c83bd86c1272af09d64e",
+            "urn:company-wiki:narrative-unit:sha256:2542a4c3c9df85563e9820df6bbd881ac80193d54039f3dba43a862be4a9ed84",
+            "urn:company-wiki:narrative-unit:sha256:26a2353d633a2ba141b4a297b5753843b336d939bdfacc3f9a848439bd1c438d",
+            "urn:company-wiki:narrative-unit:sha256:270edf995d3d4610d77462c38380b44ed399ec1def9a79260d58b8f5954e5524",
+            "urn:company-wiki:narrative-unit:sha256:271fd4333715a3b36ff7eb191d521d14a5b4a4d01a4756e7267232bdf1be8a8d",
+            "urn:company-wiki:narrative-unit:sha256:27545baec94afd82af653f9e06d4a2f05d93213bcc05b79fcb7be5a972dff3bc",
+            "urn:company-wiki:narrative-unit:sha256:2832c38244ff4a3f7bfba4a82b48b266a7cbf2b16e1d65edadeb1d0f0bc0023b",
+            "urn:company-wiki:narrative-unit:sha256:28510a3c480a30cda8efcb6f0b90b51628670550ba71abb74fc532a4953b029e",
+            "urn:company-wiki:narrative-unit:sha256:28770610f3d47f5f429663f929dd40db472f5548bc3ea223f06b4d7d21bb3df9",
+            "urn:company-wiki:narrative-unit:sha256:288f32a9b4333020ad4fc7041087d428c7e0ea296525ede65cb09d17a43e66c3",
+            "urn:company-wiki:narrative-unit:sha256:293cb65dbc24d14015ab4b1b953d8aa06f45a971b80d9826f9cb103b7f49b554",
+            "urn:company-wiki:narrative-unit:sha256:29e9ecb90c2aa4187757ee033854ff16c777513af0f170736dc1082bf54f2adb",
+            "urn:company-wiki:narrative-unit:sha256:2a97ee70b724f86d0da6312fd42e1d6ecd7ccc7753e2b3ed9cfb75a7bf6d264f",
+            "urn:company-wiki:narrative-unit:sha256:2ba777895fed633f7d54f031dcfc6f975560c098943255d7e4f4711fd4dcd8eb",
+            "urn:company-wiki:narrative-unit:sha256:2c114d00c84bc6c6f9f3ad9ed9e9768663aff3f7f9b1722b42ab7a8d3260c04e",
+            "urn:company-wiki:narrative-unit:sha256:2c4a5c7310c67e6003b653432b32da4f16ce512fb8cca44be67552c39b423ae7",
+            "urn:company-wiki:narrative-unit:sha256:2c986ea517ef2fa7bde38bf6e170ae4f8b87a9c49bb5388266af3e10f7638a40",
+            "urn:company-wiki:narrative-unit:sha256:2cebfa89aedaf55f9ed1b5a38e4235a429645861a512afa251ecd6f70b38c7ce",
+            "urn:company-wiki:narrative-unit:sha256:2d813049c61ad593d23024df3503422dc0da0329227fef1fceb4e7363a8cd522",
+            "urn:company-wiki:narrative-unit:sha256:2de905fd080f74f5bccd97bc852689aedde8a2b297e45c23aa8770fddb99bc2e",
+            "urn:company-wiki:narrative-unit:sha256:2e35627d4f83e69cb5a2879f7a5f77a45726f8568dc92b865da966d06d599eb9",
+            "urn:company-wiki:narrative-unit:sha256:2e595ae28d6048737466382e3215202451f80ce790d6aa640a2e45fe8990e0c2",
+            "urn:company-wiki:narrative-unit:sha256:30b4ab8b51ae3642592cf6c63d0f63a561cd8bb2d8ff26321cfff85c62af984b",
+            "urn:company-wiki:narrative-unit:sha256:33374b162ab3f448d9af7b068f5414af8f2d094287ac918be0bc5b5b3ab171e7",
+            "urn:company-wiki:narrative-unit:sha256:341350139fbabc94e401b8eee56b650bd443ec88cfdfe4bb758a04a55445385b",
+            "urn:company-wiki:narrative-unit:sha256:3483c47e9a0c1b335a8f389b37b3ad5ea15beb39aa38024acff13ad65ebf6567",
+            "urn:company-wiki:narrative-unit:sha256:34feac7b8b1ff9897c40bccc95e321f875a126e08ea4710c7c56b1d466806445",
+            "urn:company-wiki:narrative-unit:sha256:3562148631fd50d72350aab2dd896a04f97c1d4a4551a50eba9751d48c069231",
+            "urn:company-wiki:narrative-unit:sha256:35cb259ddc6acb201bb19b0574559160aa862a98bbbb1bbd2ef8c8c21a412d14",
+            "urn:company-wiki:narrative-unit:sha256:36d34ddaf33241e4382dfedd2596e86953ff0310b7ef6aa7f52aaa01c9251f51",
+            "urn:company-wiki:narrative-unit:sha256:370e53c90bdf4ecd7934eae2b35ba3badae2824b66525fbab24820aa5876e72d",
+            "urn:company-wiki:narrative-unit:sha256:39ffebb82509bd8f0ebb01fdd71acf776f75135c57dfab43c4fcb58ca88b35f6",
+            "urn:company-wiki:narrative-unit:sha256:3c0346b84fe05148ff1edf94dfd835700123e689025a8c6d614cd6be721e14be",
+            "urn:company-wiki:narrative-unit:sha256:3cc765677f5148c139a63f1993c06ad2073ddb688880bbb2f876e8742c0ffdbc",
+            "urn:company-wiki:narrative-unit:sha256:3d7b4813e146dc46bffbe3c34733dcf99d78a31b69d09d9f5c001c8fa2c68260",
+            "urn:company-wiki:narrative-unit:sha256:3e818404a383e0944d9383974e88d5284d80d76b7c4c75731ba8b3174020ccc0",
+            "urn:company-wiki:narrative-unit:sha256:40fab35ee741e52a07d006e544950ac315eb58f86ac9b618fc8f1862c9b2b8c3",
+            "urn:company-wiki:narrative-unit:sha256:43a8ddaaf0d1163a17a7fa5d60f7d34e3f981a00f3d0b7fe9b14c2ab2d40d5b5",
+            "urn:company-wiki:narrative-unit:sha256:46784fea4a55e3eefd99f7f44458cbf5aed0cae901b0c10442475e72e0eab2b6",
+            "urn:company-wiki:narrative-unit:sha256:46b374c28cbb88482c74f70ef1401223dbac92aec26114a49bdfca9cf7af4da3",
+            "urn:company-wiki:narrative-unit:sha256:4705db779384f5e4df37abaaa67e8807000d5193839a54f3eb025a05603288a6",
+            "urn:company-wiki:narrative-unit:sha256:486600861c89e5d25202b5094293f1c85a394c3c0ad263b64b3f975244ee6b97",
+            "urn:company-wiki:narrative-unit:sha256:4a2fa23013940fce69ac23a52fee763602ee901ce5080f4c7442ce76fdcb6edb",
+            "urn:company-wiki:narrative-unit:sha256:4d7f149291b6846500285b6ee7643f9cf68b4cebe2f1dcca01d72bcc1cdee5fe",
+            "urn:company-wiki:narrative-unit:sha256:4db4f4d5f41a4cce09123055934be3b30cfe1f64aa1a746e10780a6df25057ce",
+            "urn:company-wiki:narrative-unit:sha256:5002d93cd98aaf05ddb27c99cd3682c7fd0260e76babdcdb90bb6ddf74200eb7",
+            "urn:company-wiki:narrative-unit:sha256:501e03e3d5b5d21b396b3157e88db41c782ccac338b3f974d9e6d5919dba49ba",
+            "urn:company-wiki:narrative-unit:sha256:50eac3dc8d81a5a34230fd5d450bf060a3d1704010b1c387578c275ec624b272",
+            "urn:company-wiki:narrative-unit:sha256:5302c3c847340d9be86db82489cfb370aa52410e5b9949bb534e3c8db64b3108",
+            "urn:company-wiki:narrative-unit:sha256:53bb2614ac3e08e7453df66defbda0dc0d10dc717b63292e67bf990f7f100284",
+            "urn:company-wiki:narrative-unit:sha256:53dbcae38e6259fde7683ccf6c162f42270d21026ccffdcbb97eb18219861ff0",
+            "urn:company-wiki:narrative-unit:sha256:543e375a8b87d2165d5595a846a6f3a54cee7b5ee5f49ca586a5d01c1ea5a14b",
+            "urn:company-wiki:narrative-unit:sha256:5814a9e3ceb042c7b8f96352082f3a88925a8992529772e4e1a1e61c768b3b24",
+            "urn:company-wiki:narrative-unit:sha256:596897f7ce0ea2c08df181ead6662df593b6c68a6f7557f4c5da1a720ed6dfa2",
+            "urn:company-wiki:narrative-unit:sha256:59f9bea5e6cc487a8d676aa8268ef003a5d290850c817d564328436a670d378c",
+            "urn:company-wiki:narrative-unit:sha256:5a70cfcdeb661ba4d92335545e94780f5bb2693dddfef62da0272fae6c9aa06b",
+            "urn:company-wiki:narrative-unit:sha256:5dbd6c152e14b420850720ce2d01653afa51cab50a18994b4dc7dcb091f4913f",
+            "urn:company-wiki:narrative-unit:sha256:5e9f5b02f5398c418882676909a0bbffc038d5d73773a55422bf11b39d8a7ce1",
+            "urn:company-wiki:narrative-unit:sha256:5f2ad808b3276b8bf52dc5252ad3f4a22dd86f47899d7edb18e3267012c2f440",
+            "urn:company-wiki:narrative-unit:sha256:6200fc425f7409e0511e8641d43c8092323aef73c9c2e6fae83affefc8410de8",
+            "urn:company-wiki:narrative-unit:sha256:63e76ebcc5840a92ae32c97f8b6ef722a0691530e74c11d98d3f9ee9a16b028d",
+            "urn:company-wiki:narrative-unit:sha256:656055ca3f8f0fcca3bbb4426f90bbd6c5054f3d84638d2c242125c5aefddf1e",
+            "urn:company-wiki:narrative-unit:sha256:69d8b221879c42d70b74c3d2bc59a8a4d50f8f749f06d6ad5897e79fd133b616",
+            "urn:company-wiki:narrative-unit:sha256:6af9826850ab326d0734b0a5f9b207a6458ece7631fb4f36d59e22cfc02a2d79",
+            "urn:company-wiki:narrative-unit:sha256:6b3bf221cae0d81cd6cd6221cf186bda5c9327eed37237d249d91436a7ff813a",
+            "urn:company-wiki:narrative-unit:sha256:6c35592d6ba89dd1875a5686fde15cd11a283da7977e4d42fe33e74a79c4b392",
+            "urn:company-wiki:narrative-unit:sha256:6d030f9588a63812fa03982d14114be55e9833759fb8fde75300b44a634f3a28",
+            "urn:company-wiki:narrative-unit:sha256:6db002c71a09404e0904b428c9ff1bac39699160ad36e5614540422907b91215",
+            "urn:company-wiki:narrative-unit:sha256:6f9ae3290b09f5ba91b126027c677fcb3c96b872e4c47bf0d081c9ca348932c6",
+            "urn:company-wiki:narrative-unit:sha256:702647825adbb1b8d3d4d5fec01c8847d0eb9963dcba8c6d93cc6a0af6db1441",
+            "urn:company-wiki:narrative-unit:sha256:7060f7d4e973575da9c549a9bd62bd0af1bcaf5d1f2718172e6c225dd280ce17",
+            "urn:company-wiki:narrative-unit:sha256:72917736a40d20fbcc2479f88483482724030c3c56a9de8324a8fe758ef1aa63",
+            "urn:company-wiki:narrative-unit:sha256:73562d9c9510a8087117cf0e42bf48a703a12fbab99e42462ad51cfc04fbf22e",
+            "urn:company-wiki:narrative-unit:sha256:73a913539b5685ed64edd30762c331dd6f4b21d3e7090abff362907ffcc0b012",
+            "urn:company-wiki:narrative-unit:sha256:7504b07b48f9231f03696f250aa7cb67687ce90452e80d2d4be7bf22c4014175",
+            "urn:company-wiki:narrative-unit:sha256:7619abfd82b081c0ecfd5d5f3a3f555c7df580e3e91939491f921c4cae17ff31",
+            "urn:company-wiki:narrative-unit:sha256:784a14473f6e7fd51904fc4840bdf7a5e74e8d8a7d6e3d8027b2dce51c0ecc8c",
+            "urn:company-wiki:narrative-unit:sha256:78cdfecf3b5f7a03c4f88af9dcba3e1d3d630194aa38a1d6b22ffbb88f2a50ca",
+            "urn:company-wiki:narrative-unit:sha256:79d275d679fcd76f9f2160d2f37474025e2ccda63d6810ab54293775b909be2b",
+            "urn:company-wiki:narrative-unit:sha256:7bd182e0a80e9b784976a3ac126659bd377454ea49036339dc9df19026f8bac9",
+            "urn:company-wiki:narrative-unit:sha256:7e0f0ce857af1372a9fff630edd2ec66f446a58f527b0a2f635a855c7589234f",
+            "urn:company-wiki:narrative-unit:sha256:7fac3a46ae9a31fe049cab24f49813c76d5b8c707b40127315e884d973d636fe",
+            "urn:company-wiki:narrative-unit:sha256:8024d75fa1c426403026b76ad250344c5602c885150faa3c30c2cbf871b02c7e",
+            "urn:company-wiki:narrative-unit:sha256:8069ecf4ec608fc8d8d62499625dfe90649e94353d7d86d2e07982895e45cde0",
+            "urn:company-wiki:narrative-unit:sha256:808cc31d242a58f57f5035aff687d8a96c7ef43441e832ee78cdddeca285cc63",
+            "urn:company-wiki:narrative-unit:sha256:8097f30fe3c35e5534992f7bdfb3884d8d18400af9134ec2047f9681af793579",
+            "urn:company-wiki:narrative-unit:sha256:80c0aab01a8a470516391e3ff56a8e5184f97c3c80b61ba0efce1e6d73a6dcc5",
+            "urn:company-wiki:narrative-unit:sha256:80cb24ee132d7e70cb2b4d7a8ffdbba30c7d3ab09521ffce09db1a643e8c7b2c",
+            "urn:company-wiki:narrative-unit:sha256:80dadafcdbaf518ff7bc5afe7b2934624427d077e65d5e1751abeb1b91655421",
+            "urn:company-wiki:narrative-unit:sha256:82ca8f21f608fb27bd93eb8ed982cf914cf9de1e6af45d3a1c72621d6a0763e8",
+            "urn:company-wiki:narrative-unit:sha256:83ae77d57877013b734d5611ad0bd1feb953f82b6c0c1dc7119a27449cb3b93f",
+            "urn:company-wiki:narrative-unit:sha256:8736bd4d0f3d644196c62333259a91f14e831f1939f7a045eee0d779681b9cb3",
+            "urn:company-wiki:narrative-unit:sha256:87b80ca5aff9a34822db911c9f4da65f4374c89e648fc762395a285271d270a5",
+            "urn:company-wiki:narrative-unit:sha256:880e5e465dbfeea5b9c8abf2edc3935e280a10957ab490abf8228e66ada4dc51",
+            "urn:company-wiki:narrative-unit:sha256:89f33d93fae09233a582f9cdce48d91ecd478efa5b125fa5e74095ab8e47a9cc",
+            "urn:company-wiki:narrative-unit:sha256:8a46d7dbd1de2f0528fa15407671847da48b09ba6865c5d1de6c52c1876de6fc",
+            "urn:company-wiki:narrative-unit:sha256:8b7ab093943bab49dcb688a7822f192bd5048895d280477d16d8bc41a6143edc",
+            "urn:company-wiki:narrative-unit:sha256:8b9467468aa891f13114b5fd76e118e00bc7aed8c7aadb54c68b97e3ffa8dd7e",
+            "urn:company-wiki:narrative-unit:sha256:8c435ade6f6f0eb613aa5feaf00f9cf2f585e4bbb1034ca9de9b2804e9abbca1",
+            "urn:company-wiki:narrative-unit:sha256:8cf16235d46379b456d6b9a3474a364461b3f7929e5e98c3a77202386ee2872a",
+            "urn:company-wiki:narrative-unit:sha256:8d11bda21624941f8a2cf4dad8bc803602b5096683bc13610d7a2fd71f8d7841",
+            "urn:company-wiki:narrative-unit:sha256:8d6075076f66a1546128d31cf39ed3775b068187faafd3645f96d06cbb98e7c5",
+            "urn:company-wiki:narrative-unit:sha256:8e42fafd11d1c64dd29da8875a4b866d3945b1264511dfe74048b1703b225a6e",
+            "urn:company-wiki:narrative-unit:sha256:8ec5b186a03e1f5e2b19f56cc02e1d577c5853ea728a0d47cd478aa566d97a76",
+            "urn:company-wiki:narrative-unit:sha256:8edea3f6866b5087105ddb56df47525ab7e53fcdb51d35fadd030629d9528545",
+            "urn:company-wiki:narrative-unit:sha256:8eedb132c3d664131cff00ca4f98b6dd5d4f6e45ecf6d635ad396fa50d9d4585",
+            "urn:company-wiki:narrative-unit:sha256:8fc075deb6003e20e9322a8fc84086a0a21c4ff9700fb51fce1a33963c7e47b0",
+            "urn:company-wiki:narrative-unit:sha256:92e1b369d688cb283762813c4035fba4d07adfeb1487c4b25abad233813a31bb",
+            "urn:company-wiki:narrative-unit:sha256:932141ac1404b7d5b6a180492ef00637c518df981dc0660c20286de2b5d74ba4",
+            "urn:company-wiki:narrative-unit:sha256:93f259d7862928760ed78036f7dec6ad4ce7473d05ac188ac0ea66a22474b934",
+            "urn:company-wiki:narrative-unit:sha256:9425c80f34d91e2fdd406c3a3bf5cede70eff251771d2b7ebbea8777a1eebfca",
+            "urn:company-wiki:narrative-unit:sha256:957d888993359eeee2168d1da89787f302600050b41094c19f64c02fb2bb35f6",
+            "urn:company-wiki:narrative-unit:sha256:96835f87d45be7069ed960e5c44b8b337de0931c6ec581f0ebe3268ad4fc95bd",
+            "urn:company-wiki:narrative-unit:sha256:985f9e153cd69f3b253302ab45bb7be08075a085a3f481d7709cfa40cfd22b5d",
+            "urn:company-wiki:narrative-unit:sha256:9a92658aa4dc91665424c2b255358ca22a0754bae63f9e08934dd952218a0ae7",
+            "urn:company-wiki:narrative-unit:sha256:9b20ac65329ebed0f41e56176cbad7d51d5f99d86c9d9b22def2c493329acd9b",
+            "urn:company-wiki:narrative-unit:sha256:9b5c9db56a79354ca7e423729760ee65eee240730e4a798f1638afde8101d169",
+            "urn:company-wiki:narrative-unit:sha256:9bf3992f26d2c4ca9c1aa72321db93c059501f7fa89721316cbc1e36e9f243be",
+            "urn:company-wiki:narrative-unit:sha256:9dab7db305b8911561facf8cce87c17b810a0f0562dfa0714a93a335ea865cb6",
+            "urn:company-wiki:narrative-unit:sha256:9e7a7f34730aa38f660a2c06d6198dfe31bd00fcd4273f1f62587b27860737e4",
+            "urn:company-wiki:narrative-unit:sha256:9e8b033a5343764dcc4901f70f78bdfa791b941852b1e460fe7c09022d3b4347",
+            "urn:company-wiki:narrative-unit:sha256:a06d6e10f5674ef2d2fef2abff2d2ae3639f0ea060021bde387f5e38c1957dfe",
+            "urn:company-wiki:narrative-unit:sha256:a2f1d53f0da2ea57fbac0c186c2de693a2b25427e9588130f66506a873ea58f8",
+            "urn:company-wiki:narrative-unit:sha256:a3263759f3f39564ea2371883b8380468264da084c37efe9f2369cba90dc75b1",
+            "urn:company-wiki:narrative-unit:sha256:a3c96185637118ba859cfb2ab06b43de4980ba84e9351e9d2699e84cfa4cb1ac",
+            "urn:company-wiki:narrative-unit:sha256:a4ae4a567f866e4617392ea8b870f6565b8839cf53f9bdeee2871b6f142a6106",
+            "urn:company-wiki:narrative-unit:sha256:a4c23ce33678d28e8729ad8087561aa94426a0aa4ccce8550ec4358ce73ff62c",
+            "urn:company-wiki:narrative-unit:sha256:a71a427bc29e1d3a38301d561df01c64ccb7b306eb85c0c83bac299569799ad9",
+            "urn:company-wiki:narrative-unit:sha256:a76aa5fab6c8b208a40d7da03236c283fd7ea2e7a2dabc3c44376b8cbb9120d9",
+            "urn:company-wiki:narrative-unit:sha256:a79dcb430fe540d79eb17339409c6778b9460119455bcfda99b3fc89e5af2a67",
+            "urn:company-wiki:narrative-unit:sha256:a8073debe49e79415c8a683d271110045c1dcfa0f5ec89da36dc67433b550e3f",
+            "urn:company-wiki:narrative-unit:sha256:a90d8f025c5052987691b44f23024c7dd815cc73071e46996cb9a8b4b1d51880",
+            "urn:company-wiki:narrative-unit:sha256:aaa5a0e73f2097d44c1c53f4c0b189ab43f5ac7caa794ed35f3c31644d5086af",
+            "urn:company-wiki:narrative-unit:sha256:ab44b114402f25cd05eb4a021d0d3abec4b87e25966cd1acc089eaa30cf5045d",
+            "urn:company-wiki:narrative-unit:sha256:ab4cefc2097675cce25e0458f2015211350e42cc0aa28e1fc1861b1af591684d",
+            "urn:company-wiki:narrative-unit:sha256:ac866fa3a5b0852eeb300e12c4dd581d99bd34c78cb81b77f7a68f2998909ebf",
+            "urn:company-wiki:narrative-unit:sha256:ad6176c3c18552ef63f068901c3b10d4fcaa365e0ba498547487c06fc010e93e",
+            "urn:company-wiki:narrative-unit:sha256:adf27bf8b58747d212d53ce86ab02409d840a2c7cfca474a734d112ccb366047",
+            "urn:company-wiki:narrative-unit:sha256:af1b8a691e389391679a80cc3d1b6611d9059e81e2bd967e835fbede56ed76f2",
+            "urn:company-wiki:narrative-unit:sha256:b413529a39368da28d10867efa7095251b2da452d117712511513829a36cbb99",
+            "urn:company-wiki:narrative-unit:sha256:b45037751141cc402d502280963eabb6d8c1dbfe456cc426c31af8322e1c71f8",
+            "urn:company-wiki:narrative-unit:sha256:b55bfc5a5ccbbb259e2589e4fe460600c14de7689640712ce529fc0c1ed84b25",
+            "urn:company-wiki:narrative-unit:sha256:b77b8e71b59961b5c021a4eca8b1faf5be3b74abcb6ba6e9fd2585dfe76ab522",
+            "urn:company-wiki:narrative-unit:sha256:ba17834800519421bdd6a2a59846b91ba2cf2233c839d976b38568bbd703850c",
+            "urn:company-wiki:narrative-unit:sha256:ba482d83707653011d58b2b8793d08c5082ccb6899d2f0d4a81822cca5e2b400",
+            "urn:company-wiki:narrative-unit:sha256:ba4c00eda3fc82761706142613245038a9e4fa80fea9a0bac9e7a3d2164aa0fc",
+            "urn:company-wiki:narrative-unit:sha256:bd68ef76147625639ee800c05f20451d68650e4901fff301c31644b483716beb",
+            "urn:company-wiki:narrative-unit:sha256:be4ee3732f8cc0253efa7661ced2317dfcc782c9c92ff93a561d2bf6c1e26e48",
+            "urn:company-wiki:narrative-unit:sha256:bf17628859167068369ea7e214faae2b689ca25f325f7310850dc51820dcd68f",
+            "urn:company-wiki:narrative-unit:sha256:c03dd646982a2018eb141c0b8bccccd3937b072f958ed2bbf4b7933a9efd3490",
+            "urn:company-wiki:narrative-unit:sha256:c0a51eabea94b55b45a9d90c4a632d1c45b8ecdb0f6cec12719eef1a78a7ee54",
+            "urn:company-wiki:narrative-unit:sha256:c26c16900da55cff77ff7bc148cff4f28670dd8bf7b8d20a1cd5b2fba57800a8",
+            "urn:company-wiki:narrative-unit:sha256:c2780991551d643cc17ffa44bdfd7e3612dde50e6dbbf2c7da00639e13f3ea3e",
+            "urn:company-wiki:narrative-unit:sha256:c3f2b2cbf4c50506e272270c7a8670caa4d638cd7f959f2d31f0d4db127222e2",
+            "urn:company-wiki:narrative-unit:sha256:c43c9dc7fc9936f64bbfa1c863ad4e11f0b900d64c2eec63638bbd1b8f689bf7",
+            "urn:company-wiki:narrative-unit:sha256:c657f2d5d9b25d9c7a58cff8611719f980a14c369d811bdb1e3a0a7722d176fa",
+            "urn:company-wiki:narrative-unit:sha256:c7dc7d2a770fa4b440192af0bfc328493ab185194ebd7f825b46c8004884bbec",
+            "urn:company-wiki:narrative-unit:sha256:c8280aa4b76af3bf015edf9c6fde30cff7eb71cf49e0e2d71cbe4a6148c1e8e8",
+            "urn:company-wiki:narrative-unit:sha256:c91f21b69b6fe70a1500025f96fa9179319e82d4c5586ce87d73331d496ce30c",
+            "urn:company-wiki:narrative-unit:sha256:c98efbe3abb9d8fcd90f30acc9f82e773d93ff028849ddd1c8b10e59601010f8",
+            "urn:company-wiki:narrative-unit:sha256:ca6e34ddc6e2df020ab23cdce9bc16f23febb6a8c0eb723cd1f1b4acc638f7b4",
+            "urn:company-wiki:narrative-unit:sha256:cad6d273df579801d23d07a1b71c0b619aa55bb49921535af5e098bd32d23b10",
+            "urn:company-wiki:narrative-unit:sha256:cd9983ab2821cf111cb2a88d05c6b3c36e019ba4f13436965bb0a7db86e5a6d1",
+            "urn:company-wiki:narrative-unit:sha256:cda41d7d535f59e7128e907318965a30aeb10cf720c21b49e83bdeb8c002fea0",
+            "urn:company-wiki:narrative-unit:sha256:d1bd8bc252dd9ad04701849e31cd96c5b760d49e55bcebcabdcb7d729a435998",
+            "urn:company-wiki:narrative-unit:sha256:d1bf52506dfd4333c653f5ba591297ee2b5b6a79ec7fd0ad7c57a1acc0195b6b",
+            "urn:company-wiki:narrative-unit:sha256:d1ce524ef57846157d2b2665e9357023c60a5be8b76df2f620de5b02816277e2",
+            "urn:company-wiki:narrative-unit:sha256:d3a358d6582472287e608f0bc41300230a920a49219b746761452eda453199d2",
+            "urn:company-wiki:narrative-unit:sha256:d5afcf3d1a07e412fd3de63619e599aa194e50662f93c209d34be06c84ed95a1",
+            "urn:company-wiki:narrative-unit:sha256:d7a046a963569822eda77234e3d826f40c9748fb7d1cd419a69db4912b21378c",
+            "urn:company-wiki:narrative-unit:sha256:da92bf6031bf45201d24ff3e975e3f0120372c60c4d07baf41481f6a00799b80",
+            "urn:company-wiki:narrative-unit:sha256:db014e356a41e580e93c2fb872c0f70d485944d3e8ca5479cd28735d9c3c956b",
+            "urn:company-wiki:narrative-unit:sha256:dbf30e9add0a2a4309b62e75d993ba14068b0fc11756d3192eadd08ea59ad99d",
+            "urn:company-wiki:narrative-unit:sha256:deb160578e795cf4d6af2e428282d9df13b50361d53a396b364d646d180944ff",
+            "urn:company-wiki:narrative-unit:sha256:df27c68403c53bf2669ef0ebccfb2d8d2884a781721cce04f2dfa8aef61396c3",
+            "urn:company-wiki:narrative-unit:sha256:dfa55fd86377e18b3ff295ccbfa10d98d1ff8de15de55f73f38f12afacdf4edf",
+            "urn:company-wiki:narrative-unit:sha256:e025dcafc22eed42fd306a870c3757d2eca12f3db766b9fe62f9e75ed439f45d",
+            "urn:company-wiki:narrative-unit:sha256:e05e1721e37f9ce47a98bd79464cd67ed2ba1ca3ecd27005e0bd081cd345eb79",
+            "urn:company-wiki:narrative-unit:sha256:e1085ebcf7e09eeeb1075d098aefb71580e2ca125f936204e2b30533e9f79d29",
+            "urn:company-wiki:narrative-unit:sha256:e3e98a10c5450467df473c82eae1295cad06b207d861635f65bc3da2060b54b2",
+            "urn:company-wiki:narrative-unit:sha256:e46ed5900ff6a5eca1e3036114b89112ecb4734ee4364e78c6725659746f6187",
+            "urn:company-wiki:narrative-unit:sha256:e660fe883f77ee42f8cd91b989be29c77faee55465e360b973e5b09693061775",
+            "urn:company-wiki:narrative-unit:sha256:e773ee0543342b4a3f1b98340d8f9f7320430b55c94a19f06940fbbbd5548ff1",
+            "urn:company-wiki:narrative-unit:sha256:e8a76d7949c14ae823d78759fd5ee9bedad8f38b9f7b8f4f9489f305fbfd854d",
+            "urn:company-wiki:narrative-unit:sha256:ea7b9e449cdbab066e73a681f2d330eb6358c82f9abb1ae43ab6e52af1dae790",
+            "urn:company-wiki:narrative-unit:sha256:eb168e1a3fc24994d90e6ae573d8cf1d7d5a900b563b57ee201986effcb68270",
+            "urn:company-wiki:narrative-unit:sha256:eb28a918064a813fdeafd1052e3ded91701e7ffdf98e2e672f9b3b4c9fa77ba1",
+            "urn:company-wiki:narrative-unit:sha256:eb5237cfb94bb32cdd624c1cf3bad4a9a5548f683fa915460a2d16a5e1fb0ac2",
+            "urn:company-wiki:narrative-unit:sha256:ec2e857eca3a97c2c2238896e3287c19a3320885983193199b279cc692a37d58",
+            "urn:company-wiki:narrative-unit:sha256:ece4b0627aafc345015cdfb914c0174e90cc563182e97b07751bd50f162e816a",
+            "urn:company-wiki:narrative-unit:sha256:ed9e1497976e7b325656e1da3973eb169e03334221d41432bd2ec965894ac6be",
+            "urn:company-wiki:narrative-unit:sha256:ee50be3c1398471a1e3c0f46419f713462457db92c92601752e95bcc7c2eb742",
+            "urn:company-wiki:narrative-unit:sha256:eef94a41a7d9aa168bbec988f63b22daa0e6592f3aea5f5bd7ffd5a7ece0d8d9",
+            "urn:company-wiki:narrative-unit:sha256:efc9ab9164bd9b641939ad4b76caf795eaf181e01de8a8911ac8fdb80b591d97",
+            "urn:company-wiki:narrative-unit:sha256:f1aa0680c1bb1191842dea9e119cd77080c5afbc588cb87030c633373ceb488a",
+            "urn:company-wiki:narrative-unit:sha256:f20a51313d495fbab1ca93f1d59231eaa20494e4c4e9f1bcc03efe61f6738bc8",
+            "urn:company-wiki:narrative-unit:sha256:f2c3e01a92af733be080f6bc2a0d9a767a54da41cded4bcae94ad8dbaf69f86b",
+            "urn:company-wiki:narrative-unit:sha256:f392524bd97af00fcaa89bd3e56816b49c7e2430bcdd7c3d0e5857f875218870",
+            "urn:company-wiki:narrative-unit:sha256:f61f8eeca780c38014ce3318d48702db39a12b2e70261c6a908b608099fab20d",
+            "urn:company-wiki:narrative-unit:sha256:f66343cfab01e240a9d9c65f333a29d3834620feb9b0d7e92e06944f4273e8de",
+            "urn:company-wiki:narrative-unit:sha256:f66b75fe10a262fc814a8f88d37c80c5c2fcde846e0befde22053a162ed41b94",
+            "urn:company-wiki:narrative-unit:sha256:f7411afa5ba82939d94434dae48be9ea2d25ec35302874452b90f6cbc88e37ac",
+            "urn:company-wiki:narrative-unit:sha256:f7ffe17b4d63523b81fd4e044fc1cc30cebd1f07a7ed0af31709def887bacf57",
+            "urn:company-wiki:narrative-unit:sha256:f884e57165f38b2bc4ab0aac14cd5b7ff3ee3d6409b932d3430fb141e125686d",
+            "urn:company-wiki:narrative-unit:sha256:fc5dd2e5fba0856c8b887cdb9277e73a023e30977fec31fe4d3cddf178b28143",
+            "urn:company-wiki:narrative-unit:sha256:fc8cbaf2da0435ef8fe1333a092059ddf55142ff62700787a9cd59a4572f4797",
+            "urn:company-wiki:narrative-unit:sha256:fe441ca5c52ecc6bd1435cf1d3afa834048525170361f51f20d7c05bab752ad9",
+            "urn:company-wiki:narrative-unit:sha256:fe6f05d6d40d726d4cbf7b896dbce9fd8a0b6edbf3ba8639c9759c82a6f4d682",
+            "urn:company-wiki:narrative-unit:sha256:ff0f1d45e9d023bc1b8c9d0984e6ed796f9118182100d9f07c91a8b3685bad9e",
+            "urn:company-wiki:narrative-unit:sha256:ffd38923cb6826a09803e161ede5ca0881568d2fd32c41d3743c1741b4f728c3"
+          ],
+          "detail": "text repeating at a page edge is page furniture, not body"
+        }
+      ],
+      "rows": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:232472b70b84ce47b89339d20f178aca74a5e608f32be8a432f672066d654f2d",
+          "ordinal": 388,
+          "page": 16,
+          "paragraph_index": 39,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "钨系列产品也通过了特殊器件客户金属钨应用现场验证。",
+          "suffix": "钨系列产品也通过了特殊器件客户金属钨应用现场验证。",
+          "block": 31,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              688.2703247070312,
+              530.7546997070312,
+              698.7203369140625
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 16,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 25,
+                "char_start_supplied": 0,
+                "char_end_supplied": 25,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m146",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:4025574a82260427de8489bfbf298c7759244737202a762a56cba8109a10e362"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ae714992fc5a2590dc70b8e7c5463a207cecd342d6821aacbefaddec632dd6b9",
+          "ordinal": 389,
+          "page": 16,
+          "paragraph_index": 40,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "基于公司钨系列产品独特的性能优势，",
+          "suffix": "基于公司钨系列产品独特的性能优势，",
+          "block": 31,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              688.2703247070312,
+              530.7546997070312,
+              698.7203369140625
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 16,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 17,
+                "char_start_supplied": 0,
+                "char_end_supplied": 17,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m135",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:ae714992fc5a2590dc70b8e7c5463a207cecd342d6821aacbefaddec632dd6b9"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:180c8caf8a37b6212dd1a159b7ba19b39dddf2f2a0117a1a622d7a771bb2c323",
+          "ordinal": 390,
+          "page": 16,
+          "paragraph_index": 41,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "已顺利完成先进逻辑、先进存储和特殊器件的现场验证，未来将进一步扩大市场占有率。",
+          "suffix": "、先进存储和特殊器件的现场验证，未来将进一步扩大市场占有率。",
+          "block": 32,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              708.6703491210938,
+              499.3193664550781,
+              719.120361328125
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 16,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 39,
+                "char_start_supplied": 0,
+                "char_end_supplied": 39,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m135",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:ae714992fc5a2590dc70b8e7c5463a207cecd342d6821aacbefaddec632dd6b9"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:30c251a5cfe7690eef24de3ae3513a355aed99be5263f4e60c265b107ec42fb5",
+          "ordinal": 391,
+          "page": 16,
+          "paragraph_index": 42,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "同期，公司开发出应用于先进逻辑器件的金属栅系列产品Preforma Unifla",
+          "suffix": "产品Preforma Uniflash ® ALD 氮化钛，",
+          "block": 33,
+          "layout": {
+            "bbox": [
+              110.87999725341797,
+              724.1773071289062,
+              530.2891235351562,
+              741.2476806640625
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": null,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 16,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 42,
+                "char_start_supplied": 0,
+                "char_end_supplied": 42,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              },
+              {
+                "char_start": 43,
+                "char_end": 44,
+                "char_start_supplied": 43,
+                "char_end_supplied": 44,
+                "font_size": 6.849999904632568,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              },
+              {
+                "char_start": 45,
+                "char_end": 53,
+                "char_start_supplied": 45,
+                "char_end_supplied": 53,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m135",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:ae714992fc5a2590dc70b8e7c5463a207cecd342d6821aacbefaddec632dd6b9"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": true
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6b03923b4c96435439c021a0790fc441505f1ee19cafd870b226dc4a27049493",
+          "ordinal": 392,
+          "page": 16,
+          "paragraph_index": 43,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "ALD 钛铝，ALD 氮化钽产品，已完成多个先进逻辑客户设备验证，可满足先进逻辑",
+          "suffix": "品，已完成多个先进逻辑客户设备验证，可满足先进逻辑客户性能需",
+          "block": 34,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              747.9373168945312,
+              526.677734375,
+              761.647705078125
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 16,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 45,
+                "char_start_supplied": 0,
+                "char_end_supplied": 45,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 16,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m135",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:ae714992fc5a2590dc70b8e7c5463a207cecd342d6821aacbefaddec632dd6b9"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": true
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:93f259d7862928760ed78036f7dec6ad4ce7473d05ac188ac0ea66a22474b934",
+          "ordinal": 393,
+          "page": 17,
+          "paragraph_index": 0,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "中微半导体设备（上海）股份有限公司2026 年半年度报告",
+          "suffix": "中微半导体设备（上海）股份有限公司2026 年半年度报告",
+          "block": 0,
+          "layout": {
+            "bbox": [
+              196.44000244140625,
+              43.91633224487305,
+              423.7200012207031,
+              52.91633224487305
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 9.0,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 28,
+                "char_start_supplied": 0,
+                "char_end_supplied": 28,
+                "font_size": 9.0,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "unknown",
+            "priority": 2,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": null
+          },
+          "owners": [],
+          "sections": [],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f09abf02f076c04b8fd2626a42c8eba9a374f9e7c45b1f008f84c91b043e31d6",
+          "ordinal": 394,
+          "page": 17,
+          "paragraph_index": 1,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "17 / 210",
+          "suffix": "17 / 210",
+          "block": 1,
+          "layout": {
+            "bbox": [
+              295.44000244140625,
+              769.615966796875,
+              325.7927551269531,
+              781.7769775390625
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 9.0,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 8,
+                "char_start_supplied": 0,
+                "char_end_supplied": 8,
+                "font_size": 9.0,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m147",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:f09abf02f076c04b8fd2626a42c8eba9a374f9e7c45b1f008f84c91b043e31d6"
+              ]
+            }
+          ],
+          "sections": [
+            "s48"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:2ac378360e521b34af633e4c383a9d6f165adfbedb8da99a170edcfc30fc87bd",
+          "ordinal": 395,
+          "page": 17,
+          "paragraph_index": 2,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "求的同时，设备的薄膜均一性，污染物控制和生产效率均达到世界先进水平。",
+          "suffix": "，设备的薄膜均一性，污染物控制和生产效率均达到世界先进水平。",
+          "block": 2,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              77.82935333251953,
+              530.7546997070312,
+              88.27935028076172
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 34,
+                "char_start_supplied": 0,
+                "char_end_supplied": 34,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m148",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:2ac378360e521b34af633e4c383a9d6f165adfbedb8da99a170edcfc30fc87bd"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": true
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:68013aa19efaa16a8ed0dbc3fd73aff84cc23282eb1fcd960125c5727144fbdc",
+          "ordinal": 396,
+          "page": 17,
+          "paragraph_index": 3,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "该系列设备已付运",
+          "suffix": "该系列设备已付运",
+          "block": 2,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              77.82935333251953,
+              530.7546997070312,
+              88.27935028076172
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 8,
+                "char_start_supplied": 0,
+                "char_end_supplied": 8,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m149",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:68013aa19efaa16a8ed0dbc3fd73aff84cc23282eb1fcd960125c5727144fbdc"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:629f86365de638e5fadd2edcd63fd997be9836397acbfaa877fa0b20d340f788",
+          "ordinal": 397,
+          "page": 17,
+          "paragraph_index": 4,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+          "suffix": "到多个先进逻辑客户端进行验证，已顺利通过客户现场验证。",
+          "block": 3,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              96.69629669189453,
+              523.4492797851562,
+              110.40670013427734
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 27,
+                "char_start_supplied": 0,
+                "char_end_supplied": 27,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m149",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:68013aa19efaa16a8ed0dbc3fd73aff84cc23282eb1fcd960125c5727144fbdc"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:7ad9ad0e111d111c00745eaaaca7ac00111b8e92bee8264b580a6cbdd39ac972",
+          "ordinal": 398,
+          "page": 17,
+          "paragraph_index": 5,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "其中，ALD 氮化钛薄膜也可运用",
+          "suffix": "其中，ALD 氮化钛薄膜也可运用",
+          "block": 3,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              96.69629669189453,
+              523.4492797851562,
+              110.40670013427734
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 16,
+                "char_start_supplied": 0,
+                "char_end_supplied": 16,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m150",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:7ad9ad0e111d111c00745eaaaca7ac00111b8e92bee8264b580a6cbdd39ac972"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9b9027a5071076bc34acaab087b721cc51e8c073ac483b955082c40092467097",
+          "ordinal": 399,
+          "page": 17,
+          "paragraph_index": 6,
+          "kind": "paragraph",
+          "role": "company_filing",
+          "prefix": "于先进存储器件中钨填充阻挡层和粘结层、先进存储及先进封装中的电容器极板等关键应用",
+          "suffix": "阻挡层和粘结层、先进存储及先进封装中的电容器极板等关键应用场",
+          "block": 4,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              118.62935638427734,
+              520.2037353515625,
+              129.079345703125
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 17,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "hints": {
+            "words": [],
+            "cells": [],
+            "font_runs": [
+              {
+                "char_start": 0,
+                "char_end": 41,
+                "char_start_supplied": 0,
+                "char_end_supplied": 41,
+                "font_size": 10.449999809265137,
+                "font_weight": "regular",
+                "font": null,
+                "char_alignment": "exact",
+                "page": 17,
+                "coordinate_frame": "dict",
+                "source": "pdf_native_single_textpage"
+              }
+            ],
+            "geometry_granularity": "block",
+            "reading_layout_feature_version": "pdf-native-prose-layout/1",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "profile": {
+            "profile_id": "cn_interim",
+            "profile_version": "cn_interim/v2+db8db42739351624",
+            "reading_profile_key": null,
+            "family": "interim",
+            "regime": "cn_exchange",
+            "form_type": "unknown",
+            "section_role": "management_discussion",
+            "priority": 1,
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 上半年（累计）经营变化及原因 项目/产品进度与阶段证据 下半年安排及其条件 与年报口径的差异（半年累计非单季） 未审计状态对数值引用的限定",
+            "policy_components": [
+              {
+                "kind": "family",
+                "id": "cn_interim_report",
+                "version": "1.0.2",
+                "content_digest": "cf0519af6e3d086643e80ce77b7e3728f86e276d45ae1ea1caa5c948dcade971"
+              }
+            ],
+            "reading_questions": [
+              "上半年（累计）经营变化及原因",
+              "项目/产品进度与阶段证据",
+              "下半年安排及其条件",
+              "与年报口径的差异（半年累计非单季）",
+              "未审计状态对数值引用的限定",
+              "上半年相比年初/上年同期发生了什么变化",
+              "变动原因中的经营驱动"
+            ],
+            "context_requirements": [
+              {
+                "when": "always_for_assertion",
+                "slots": [
+                  "subject",
+                  "period"
+                ],
+                "missing_behavior": "unknown",
+                "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
+              },
+              {
+                "when": "quantity_emitted",
+                "slots": [
+                  "quantity",
+                  "unit",
+                  "period",
+                  "denominator"
+                ],
+                "missing_behavior": "partial",
+                "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
+              },
+              {
+                "when": "project_emitted",
+                "slots": [
+                  "project",
+                  "stage",
+                  "condition"
+                ],
+                "missing_behavior": "partial",
+                "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
+              },
+              {
+                "when": "explicit_condition_present",
+                "slots": [
+                  "condition",
+                  "modality"
+                ],
+                "missing_behavior": "deferred",
+                "reason": "下半年计划、未审计声明等限定语随事实保留"
+              }
+            ],
+            "family_policy": {
+              "id": "cn_interim_report",
+              "design_status": "verified",
+              "spec_status": "implemented",
+              "evidence_status": "real",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "缺“无预期变化”型半年报样本",
+                "半年报摘要件版本对缺失"
+              ]
+            },
+            "negative_hints": [
+              "常规三表与纯财务附注；例外：其中含经营驱动解释或业务附注",
+              "董监高声明、分红预案等程序性内容；例外：其中含影响经营的重大事实"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "project",
+              "operating_table",
+              "risk",
+              "background"
+            ],
+            "matched_section_rule": {
+              "role": "management_discussion",
+              "aliases": [
+                "管理层讨论与分析",
+                "经营情况讨论与分析"
+              ],
+              "heading_path": [
+                [
+                  "管理层讨论与分析"
+                ]
+              ],
+              "priority": 1,
+              "questions": [
+                "上半年相比年初/上年同期发生了什么变化",
+                "变动原因中的经营驱动"
+              ],
+              "geometry_intent": {
+                "discover": "on_tabular_evidence",
+                "fine": "on_candidate",
+                "demand_class": "mixed"
+              },
+              "section_role": "management_discussion",
+              "family_id": "cn_interim_report",
+              "family_version": "1.0.2"
+            }
+          },
+          "owners": [
+            {
+              "package_id": "m150",
+              "kind": "background",
+              "anchor_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:7ad9ad0e111d111c00745eaaaca7ac00111b8e92bee8264b580a6cbdd39ac972"
+              ]
+            }
+          ],
+          "sections": [
+            "s47"
+          ],
+          "blocked": false
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "CONTINUITY_OPEN_END",
+          "count": 284
+        },
+        {
+          "code": "CONTINUITY_PAGE_BOUNDARY_UNPROVEN",
+          "count": 89
+        },
+        {
+          "code": "CONTINUITY_WINDOW_LIMIT",
+          "count": 20
+        }
+      ]
+    }
+  ],
+  "api_calls": 0,
+  "raw_copies": 0,
+  "original_unchanged": true
+}
