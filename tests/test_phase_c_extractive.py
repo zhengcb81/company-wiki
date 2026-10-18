@@ -19,6 +19,45 @@ _CREATE_CONNECTION = socket.create_connection
 VERSION = "reading-model-input/5"
 
 
+def test_identity_snapshot_uses_explicit_data_catalog_not_code_checkout(tmp_path, monkeypatch):
+    """A worktree without production data reads the supplied catalog snapshot."""
+    from company_wiki.source_catalog.security_identity import SecurityMasterStore
+
+    data_root = tmp_path / "data-project"
+    (data_root / "config").mkdir(parents=True)
+    runner.seed_identity(data_root, "loopback", {"market": "US"})
+    original = SecurityMasterStore(data_root / "catalog/security_master").path_for("US")
+    before = runner.fingerprint(original)
+    config = data_root / "config/sources.json"
+    config.write_text(json.dumps({"schema_version": "1.0", "catalog_dir": "catalog",
+                                 "roots": [{"root_id": "raw", "path": "companies",
+                                            "kind": "company_raw"}]}), encoding="utf-8")
+    config_before = config.read_bytes()
+    monkeypatch.setattr(runner, "ROOT", tmp_path / "code-only-checkout")
+    owned = tmp_path / "owned-test-lake"
+    result = runner.seed_identity(owned, "live", {"market": "US"}, source_catalog_config=config)
+    copied = SecurityMasterStore(owned / "catalog/security_master").path_for("US")
+    assert result["original"] == str(original)
+    assert result["fingerprint"] == runner.fingerprint(copied) == runner.fingerprint(original) == before
+    assert config.read_bytes() == config_before
+
+
+def test_missing_selected_identity_never_falls_back_to_another_checkout(tmp_path, monkeypatch):
+    from company_wiki.source_catalog.security_identity import SecurityMasterUnavailableError
+
+    decoy = tmp_path / "other-checkout"
+    (decoy / "config").mkdir(parents=True)
+    runner.seed_identity(decoy, "loopback", {"market": "US"})
+    config = tmp_path / "selected/config/sources.json"
+    config.parent.mkdir(parents=True)
+    config.write_text(json.dumps({"schema_version": "1.0", "catalog_dir": "catalog",
+                                 "roots": [{"root_id": "raw", "path": "companies",
+                                            "kind": "company_raw"}]}), encoding="utf-8")
+    monkeypatch.setattr(runner, "ROOT", decoy)
+    with pytest.raises(SecurityMasterUnavailableError):
+        runner.seed_identity(tmp_path / "owned", "live", {"market": "US"}, source_catalog_config=config)
+
+
 def test_default_projection_uses_v5_and_explicit_v4_and_legacy_stay_separate():
     assert runner.reading_projection_for("0.9.0", None) == VERSION
     assert (

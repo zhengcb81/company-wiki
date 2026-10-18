@@ -291,7 +291,7 @@ def source_descriptor(sample: dict) -> dict:
     return descriptor
 
 
-def seed_identity(root: Path, mode: str, descriptor: dict) -> dict:
+def seed_identity(root: Path, mode: str, descriptor: dict, *, source_catalog_config: Path | None = None) -> dict:
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.security_identity import (
         SecurityMasterStore,
@@ -322,8 +322,12 @@ def seed_identity(root: Path, mode: str, descriptor: dict) -> dict:
             sources=(record.source_url,),
         )
         return {"kind": "explicit_fake_security_fixture_not_official_company_proof"}
+    # Code checkout and data lake may live in different directories. Resolve
+    # existing snapshots through the selected source owner's config, exactly as
+    # registered-readonly originals do; never guess a sibling data location.
     production = load_catalog_config(
-        ROOT / "config/source_catalog.yaml", project_root=ROOT
+        Path(source_catalog_config) if source_catalog_config is not None
+        else ROOT / "config/source_catalog.yaml"
     )
     existing = SecurityMasterStore(production.catalog_dir / "security_master")
     load_identity_master(existing, market=market)
@@ -857,7 +861,7 @@ def run_pair(
             "translation": False,
         }
     try:
-        identity_proof = (seed_identity(root, mode, descriptor)
+        identity_proof = (seed_identity(root, mode, descriptor, source_catalog_config=source_catalog_config)
                           if source_mode != "registered_readonly" or consumer_projects is not None
                           else {"kind": "not_requested_no_consumer_identity_clone"})
         outcome["identity_snapshot"] = identity_proof
