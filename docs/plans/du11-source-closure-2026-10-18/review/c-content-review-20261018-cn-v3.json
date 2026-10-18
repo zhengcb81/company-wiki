@@ -1,0 +1,364 @@
+{
+  "schema": "du11-content-review-cn-v3/1",
+  "reviewed_at": "2026-10-18T14:10:00+08:00",
+  "scope": "third-round CN formal C content review; no source/test/config changes; no provider calls",
+  "run_dir": ".planning/shared-reading-production/du11/live-cn-h1-b2v3w-20261018",
+  "model": "mimo-v2.6-flash",
+  "prompt_version": "reading-source-scoped/4.0.6",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "claims": 22,
+  "evidence_spans": 96,
+  "receipt_status": "PASS",
+  "quality_status": "needs_review",
+  "selection_status": "partial",
+  "tokens": 15970,
+  "micro_usd": 2968,
+  "conclusion": "CONTENT_FAIL",
+  "required_hits": "8/10",
+  "critical_hits": "5/7",
+  "reason": "All previous P1s closed; only f-five-year-target-is-plan and f-current-coverage-30 remain missing, both critical and selected in evidence. New claims are supported and numbers correct; P2 modality/naming/duplication remain. Not CONTENT_PASS until the two strategic claims are added.",
+  "previous_p1_closure": [
+    {
+      "id": "CN-P1-1",
+      "title": "f-gan-power-stage",
+      "status": "closed",
+      "evidence": "t32-1 exact source page18/paragraph14: 2022 PRISMO PD5, customer production validation, repeat orders."
+    },
+    {
+      "id": "CN-P1-2",
+      "title": "f-inp-development-started",
+      "status": "closed",
+      "evidence": "t37-1 exact source page18/paragraph29: InP MOCVD development, lab progress, H2 plan; modality planned."
+    },
+    {
+      "id": "CN-P1-3",
+      "title": "t2-1 该新产品 unresolved",
+      "status": "closed_by_omission",
+      "evidence": "No such claim in 22 claims; no bare 该新产品."
+    },
+    {
+      "id": "CN-P1-4",
+      "title": "t3-1 truncated /（原文截断）",
+      "status": "closed_by_omission",
+      "evidence": "No t3-1/（原文截断） in this round."
+    },
+    {
+      "id": "CN-P1-5",
+      "title": "t4-1 mid-sentence fragment",
+      "status": "closed_by_omission",
+      "evidence": "No 到多个… fragment in this round."
+    }
+  ],
+  "required_coverage": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "importance": "critical",
+      "status": "missing",
+      "claim": null,
+      "note": "selected page13/paragraph18 has future five-year 60%/70%; no claim"
+    },
+    {
+      "id": "f-current-coverage-30",
+      "importance": "critical",
+      "status": "missing",
+      "claim": null,
+      "note": "selected same paragraph has 50+/over30% current coverage; no claim"
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t12-1",
+      "note": "t6-1 also CMP goodwill side"
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t30-1"
+    },
+    {
+      "id": "f-gan-power-stage",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t32-1"
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t34-1"
+    },
+    {
+      "id": "f-inp-development-started",
+      "importance": "critical",
+      "status": "hit",
+      "claim": "t37-1"
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "importance": "normal",
+      "status": "hit",
+      "claim": "t38-1"
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "importance": "normal",
+      "status": "hit",
+      "claim": "t38-1"
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "importance": "normal",
+      "status": "hit",
+      "claim": "t38-1"
+    }
+  ],
+  "claim_support": [
+    {
+      "id": "t6-1",
+      "locator": "page177/paragraph9",
+      "verdict": "supported_naming_redundant",
+      "severity": "P2",
+      "note": "中微众硅 goodwill/CMP; same target as t12-1 众硅公司"
+    },
+    {
+      "id": "t8-1",
+      "locator": "page10/paragraph14/chars341-436",
+      "verdict": "supported"
+    },
+    {
+      "id": "t12-1",
+      "locator": "page13/paragraph4/chars88-219",
+      "verdict": "supported_naming_redundant",
+      "severity": "P2"
+    },
+    {
+      "id": "t14-1",
+      "locator": "page15/paragraph7/chars137-294",
+      "verdict": "supported"
+    },
+    {
+      "id": "t17-1",
+      "locator": "page15/paragraph23/chars553-755",
+      "verdict": "supported_wording",
+      "severity": "P2",
+      "note": "source 单反台; claim 单反应台; source 高深刻比 typo P3"
+    },
+    {
+      "id": "t20-1",
+      "locator": "page16/paragraph2/chars38-175",
+      "verdict": "supported"
+    },
+    {
+      "id": "t21-1",
+      "locator": "page16/paragraph5/chars176-347",
+      "verdict": "supported"
+    },
+    {
+      "id": "t27-1",
+      "locator": "page17/paragraph5/chars108-242",
+      "verdict": "supported"
+    },
+    {
+      "id": "t30-1",
+      "locator": "page18/paragraph6/chars152-250",
+      "verdict": "supported"
+    },
+    {
+      "id": "t32-1",
+      "locator": "page18/paragraph14/chars409-530",
+      "verdict": "supported",
+      "note": "closes f-gan"
+    },
+    {
+      "id": "t34-1",
+      "locator": "page18/paragraph21/chars574-687",
+      "verdict": "supported"
+    },
+    {
+      "id": "t37-1",
+      "locator": "page18/paragraph29/chars819-932",
+      "verdict": "supported",
+      "note": "planned modality appropriate"
+    },
+    {
+      "id": "t38-1",
+      "locator": "page18/paragraph35/chars945-1115",
+      "verdict": "supported",
+      "note": "closes three normal required packaging facts"
+    },
+    {
+      "id": "t44-1",
+      "locator": "page19/paragraph38/chars991-1032",
+      "verdict": "supported"
+    },
+    {
+      "id": "t45-1",
+      "locator": "page19/paragraph39/chars1032-1160",
+      "verdict": "supported_modality_mixed",
+      "severity": "P2",
+      "note": "actual claim includes 拟于2026下半年开工"
+    },
+    {
+      "id": "t46-1",
+      "locator": "page19/paragraph44/chars1160-1231",
+      "verdict": "supported_modality_mixed",
+      "severity": "P2",
+      "note": "actual claim includes 计划2027投产"
+    },
+    {
+      "id": "t47-1",
+      "locator": "page20/paragraph2/chars38-107",
+      "verdict": "supported_modality_mixed",
+      "severity": "P2",
+      "note": "actual claim includes 预计2027建成投产"
+    },
+    {
+      "id": "t51-1",
+      "locator": "page25/paragraph21/chars453-625",
+      "verdict": "supported"
+    },
+    {
+      "id": "t53-1",
+      "locator": "page26/paragraph39/chars1062-1181",
+      "verdict": "supported"
+    },
+    {
+      "id": "t55-1",
+      "locator": "page27/paragraph11/chars317-455",
+      "verdict": "supported"
+    },
+    {
+      "id": "t62-1",
+      "locator": "page32/paragraph37/chars892-1026",
+      "verdict": "supported",
+      "note": "company investment/M&A plan, not investment advice"
+    },
+    {
+      "id": "t64-1",
+      "locator": "page33/paragraph16/chars433-523",
+      "verdict": "supported"
+    }
+  ],
+  "findings": [
+    {
+      "id": "CN-P1-1",
+      "severity": "P1",
+      "title": "Missing f-five-year-target-is-plan",
+      "claim": null,
+      "source_locator": "page13/paragraph18/chars495-605",
+      "source_quote": "目前公司的五十多种设备产品已经覆盖了超30%前道集成电路设备产品，未来五年，公司将通过自主开发与外延并购，覆盖60%以上的集成电路高端设备市场和70%以上的先进封装设备市场",
+      "impact": "critical required future plan absent; current/plan distinction missing.",
+      "fix": "Add a claim for 未来五年 60%/70% with plan modality; keep 30% current separate."
+    },
+    {
+      "id": "CN-P1-2",
+      "severity": "P1",
+      "title": "Missing f-current-coverage-30",
+      "claim": null,
+      "source_locator": "page13/paragraph18/chars495-605",
+      "source_quote": "目前公司的五十多种设备产品已经覆盖了超30%前道集成电路设备产品",
+      "impact": "critical required current coverage absent; cannot use future 60/70 as current.",
+      "fix": "Add current 五十多种/超30% claim, separate from future 60/70."
+    },
+    {
+      "id": "CN-P2-1",
+      "severity": "P2",
+      "title": "CMP claims duplicated with two entity names",
+      "claim": "t6-1/t12-1",
+      "source_locator": "page177/paragraph9; page13/paragraph4",
+      "source_quote": "中微众硅… / 众硅公司控股权…",
+      "impact": "Same acquisition target under two names and two CMP claims; reader may infer two entities/deals.",
+      "fix": "Use one canonical name or add equivalence; consider merging goodwill+transaction."
+    },
+    {
+      "id": "CN-P2-2",
+      "severity": "P2",
+      "title": "t45-1 actual modality includes future construction",
+      "claim": "t45-1",
+      "source_locator": "page19/paragraph39",
+      "source_quote": "临港二期约20万平方米…拟于2026年下半年开工建设；总部大楼…2026年8月1日举办落成典礼",
+      "impact": "Actual claim contains future plan.",
+      "fix": "Split actual (already in use/completed) and planned (二期开工)."
+    },
+    {
+      "id": "CN-P2-3",
+      "severity": "P2",
+      "title": "t46-1 actual modality includes 2027 production",
+      "claim": "t46-1",
+      "source_locator": "page19/paragraph44",
+      "source_quote": "主体结构已于2026年7月封顶，计划2027年投产",
+      "impact": "Actual claim contains future plan.",
+      "fix": "Mark 2027 plan or split."
+    },
+    {
+      "id": "CN-P2-4",
+      "severity": "P2",
+      "title": "t47-1 actual modality includes 2027 completion",
+      "claim": "t47-1",
+      "source_locator": "page20/paragraph2",
+      "source_quote": "主体结构已于2026年8月封顶，预计2027年建成投产",
+      "impact": "Actual claim contains future plan.",
+      "fix": "Mark 2027 plan or split."
+    },
+    {
+      "id": "CN-P2-5",
+      "severity": "P2",
+      "title": "t17-1 wording changes 单反台 to 单反应台",
+      "claim": "t17-1",
+      "source_locator": "page15/paragraph23",
+      "source_quote": "单反台Primo HD-RIE",
+      "impact": "Minor quote deviation; not quantity/entity error.",
+      "fix": "Keep source wording or quote exactly."
+    },
+    {
+      "id": "CN-P2-6",
+      "severity": "P2",
+      "title": "t6-1/t12-1 CMP content overlap",
+      "claim": "t6-1/t12-1",
+      "source_locator": "page177; page13",
+      "source_quote": "goodwill explanation vs acquisition transaction",
+      "impact": "Redundant claims consume slots; same theme.",
+      "fix": "Merge or cross-reference."
+    },
+    {
+      "id": "CN-P3-1",
+      "severity": "P3",
+      "title": "Source typo 高深刻比 copied",
+      "claim": "t17-1",
+      "source_locator": "page15/paragraph23",
+      "source_quote": "持续推进用于高深刻比刻蚀的Primo UD-RIE设备迭代",
+      "impact": "Source typo, not model unit/number error.",
+      "fix": "Flag source typo; preserve quote policy."
+    },
+    {
+      "id": "CN-P3-2",
+      "severity": "P3",
+      "title": "t53/t55 technical numbers verified",
+      "claim": "t53-1/t55-1",
+      "source_locator": "page26/paragraph39; page27/paragraph11",
+      "source_quote": "1400度/18片2英寸/4英寸; 4腔/6-8英寸",
+      "impact": "No error; note as verified.",
+      "fix": "None."
+    }
+  ],
+  "numbers_units": "No mismatch found: 1659亿美元/23.2%; 20.41/5.50亿元/36.86%/30.51%; 18万/20万/10万平方米, 2024-08/2026H2/2026-08-01; 130亩/50亩/2026-07/2027; 50亩/2026-08/2027; 1400度/18片2英寸/4英寸; 4腔/6-8英寸; 8寸; 60:1.",
+  "language": "zh; product English names; translate=false; no mixed translation",
+  "investment_conclusions": "none; t62 is company investment/M&A plan, not securities advice; t64 risk",
+  "unverified": [
+    "Full original PDF not reparsed; selected evidence spans + gold used.",
+    "No model rerun; cannot test whether the two missing strategic claims would be emitted with another prompt iteration.",
+    "Prompt 4.0.6 / target 36 implementation not audited; 22 claims produced.",
+    "Full task list restoration and claim cap 40 not audited; required evidence selected but claims absent.",
+    "Source/gold SHAs not independently rehashed.",
+    "Engineering recovery/cache/FF-RF not reviewed.",
+    "US not rerun/reviewed this round."
+  ],
+  "notes": [
+    "All previous P1s closed; only f-five-year and f-current30 remain, both critical.",
+    "New claims are supported and numbers correct; P2 are modality/naming/duplication.",
+    "Conclusion CONTENT_FAIL; adding the two strategic claims plus P2 fixes would make PASS_WITH_FIXES plausible.",
+    "Report pair: review/c-content-review-20261018-cn-v3.md and .json."
+  ]
+}
