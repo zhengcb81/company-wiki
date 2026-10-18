@@ -436,5 +436,9 @@ def scan_product_declarations(text: str) -> DeclarationScan:
 
 
 def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
-    """Public, identity-cached view of the declarations in one source text."""
+    """Declarations in one source text; drops the scan's ``clipped`` flag.
+
+    Callers that must distinguish "no declaration" from "a name was clipped
+    before it could be read" use :func:`scan_product_declarations` directly.
+    """
     return scan_product_declarations(text).declarations

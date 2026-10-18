@@ -103,6 +103,13 @@ def test_clipped_predecessor_is_partial_not_missing():
     assert result["status"] == "partial"
     assert any(row["code"] == "antecedent_window_clipped" for row in result["diagnostics"])
 
+def test_clipped_name_inside_the_target_is_partial():
+    text = "Alpha" + "B" * 4200 + " 系列产品已交付客户。" + CN_TARGET
+    engine = session({"t": unit(text)})
+    result = engine.reference_closure("t", (), window_complete=True)
+    assert result["status"] == "partial"
+    assert any(row["code"] == "antecedent_window_clipped" for row in result["diagnostics"])
+
 def test_generic_appositive_is_not_a_named_declaration():
     assert not find_product_declarations("公司推出金属硅化物集成系统，已进入客户验证。")
 
