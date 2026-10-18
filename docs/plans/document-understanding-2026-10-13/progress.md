@@ -1,6 +1,6 @@
 ## DU11 两卡已并线发布，三仓 CI 全绿 — 2026-10-18
 
-**当前唯一执行入口：** [本轮收尾与保留项](../du11-source-closure-2026-10-18/review/du11-reception-closeout.md)，下一实现按[有界先行词最终接口/TDD](../du11-source-closure-2026-10-18/review/antecedent-source-interface-final.md)；不要重做已接收两卡，不把下方历史“待发布”当当前任务。
+**当前唯一执行入口：** [DU11 当前主线接手指南](../du11-source-closure-2026-10-18/review/harness-handoff.md)；当前发布/接收事实见[本轮收尾与保留项](../du11-source-closure-2026-10-18/review/du11-reception-closeout.md)，下一实现边界按[有界先行词最终接口/TDD](../du11-source-closure-2026-10-18/review/antecedent-source-interface-final.md)。不要重做已接收两卡，不把下方历史“待发布”当当前任务。
 
 RF/FF作者交付均已进入各自主线。CWP producer0ccdc689：6801PASS24SKIP346.26s＋142合同PASS48.31s，精确CI39094787278 success；RF runtimef8002f5f及最终依赖表9669c4d7正常发布，final416PASS＋36子测73.74s，精确CI39095818018 success；FF main e8740748：873PASS7SKIP78子测91.13s，精确CI39095654355 success。两技能各6物理源码定点同步，FF依赖序原子安装并双根imports/help通过。.claude junction不重复写，无整套安装覆盖。唯一compatibility manifest已收敛wiki0cc/revenuef800/filinge874，皆远端可fetch，不追docs HEAD/递归pin。
 
