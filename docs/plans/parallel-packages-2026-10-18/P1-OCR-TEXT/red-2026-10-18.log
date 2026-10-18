@@ -6,64 +6,66 @@ rootdir: C:\Users\֣����\Projects\company-wiki-p1-ocr-text
 configfile: pytest.ini
 plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
-collected 36 items
+collected 40 items
 
-tests\unit\test_p1_ocr_text\test_ocr_page_text.py FFFFFFFFFFFFFFFFFFFFF  [ 58%]
-tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py FFFFFFFFFFFFFFF [100%]
+tests\unit\test_p1_ocr_text\test_ocr_page_text.py FFFFFFFFFFFFFFFFFFFFFF [ 55%]
+F                                                                        [ 57%]
+tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py FFFFFFFFFFFFFFF [ 95%]
+FF                                                                       [100%]
 
 ================================== FAILURES ===================================
 E   AssertionError: two-column page must split into 2 columns
     assert 0 == 2
      +  where 0 = len([])
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:63: AssertionError: two-column page must split into 2 columns
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:57: AssertionError: two-column page must split into 2 columns
 E   AssertionError: a 2em first-line indent is not a column break
     assert 0 == 1
      +  where 0 = len([])
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:89: AssertionError: a 2em first-line indent is not a column break
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:83: AssertionError: a 2em first-line indent is not a column break
 E   AssertionError: assert [] == ['Body paragr...agraph three']
       
       Right contains 3 more items, first extra item: 'Body paragraph one'
       Use -v to get more diff
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:110: AssertionError: assert [] == ['Body paragr...agraph three']
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:104: AssertionError: assert [] == ['Body paragr...agraph three']
 E   AssertionError: assert '' == 'Normal line ...rmal line two'
       
       - Normal line one
       - Normal line two
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:130: AssertionError: assert '' == 'Normal line ...rmal line two'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:124: AssertionError: assert '' == 'Normal line ...rmal line two'
 E   AssertionError: assert '' == 'Zeta row one...skey row four'
       
       - Zeta row one
       - Yankee row two
       - Xray row three
       - Whiskey row four
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:155: AssertionError: assert '' == 'Zeta row one...skey row four'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:149: AssertionError: assert '' == 'Zeta row one...skey row four'
 E   assert 0 == 1
      +  where 0 = len([])
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:173: assert 0 == 1
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:167: assert 0 == 1
 E   KeyError: 0
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:198: KeyError: 0
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:192: KeyError: 0
 E   AssertionError: assert 'ok' == 'unavailable'
       
       - unavailable
       + ok
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:219: AssertionError: assert 'ok' == 'unavailable'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:213: AssertionError: assert 'ok' == 'unavailable'
 E   AssertionError: assert 'ok' == 'partial'
       
       - partial
       + ok
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:238: AssertionError: assert 'ok' == 'partial'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:232: AssertionError: assert 'ok' == 'partial'
 E   AssertionError: assert 'ok' == 'partial'
       
       - partial
       + ok
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:256: AssertionError: assert 'ok' == 'partial'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:250: AssertionError: assert 'ok' == 'partial'
 E   IndexError: list index out of range
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:275: IndexError: list index out of range
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:269: IndexError: list index out of range
 E   IndexError: list index out of range
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:288: IndexError: list index out of range
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:282: IndexError: list index out of range
 E   AssertionError: assert 'p1_bbox_invalid' in set()
      +  where set() = _codes({'schema_version': 'cwp-ocr-page-text/1', 'page': {'width': 800, 'height': 1000}, 'status': 'ok', 'columns': [], ...})
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:302: AssertionError: assert 'p1_bbox_invalid' in set()
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:296: AssertionError: assert 'p1_bbox_invalid' in set()
 E   AssertionError: assert '' == 'Alpha left o...eta right two'
       
       - Alpha left one
@@ -71,12 +73,12 @@ E   AssertionError: assert '' == 'Alpha left o...eta right two'
       - Alpha left three
       - Beta right one
       - Beta right two
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:317: AssertionError: assert '' == 'Alpha left o...eta right two'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:311: AssertionError: assert '' == 'Alpha left o...eta right two'
 E   AssertionError: assert 'ok' == 'partial'
       
       - partial
       + ok
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:338: AssertionError: assert 'ok' == 'partial'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:333: AssertionError: assert 'ok' == 'partial'
 E   AssertionError: assert '' == 'Alpha left o...eta right two'
       
       - Alpha left one
@@ -84,14 +86,14 @@ E   AssertionError: assert '' == 'Alpha left o...eta right two'
       - Alpha left three
       - Beta right one
       - Beta right two
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:361: AssertionError: assert '' == 'Alpha left o...eta right two'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:355: AssertionError: assert '' == 'Alpha left o...eta right two'
 E   AssertionError: assert '' == 'Zeta row one...skey row four'
       
       - Zeta row one
       - Yankee row two
       - Xray row three
       - Whiskey row four
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:379: AssertionError: assert '' == 'Zeta row one...skey row four'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:373: AssertionError: assert '' == 'Zeta row one...skey row four'
 E   AssertionError: assert '' == 'Alpha left o...eta right two'
       
       - Alpha left one
@@ -99,63 +101,78 @@ E   AssertionError: assert '' == 'Alpha left o...eta right two'
       - Alpha left three
       - Beta right one
       - Beta right two
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:407: AssertionError: assert '' == 'Alpha left o...eta right two'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:401: AssertionError: assert '' == 'Alpha left o...eta right two'
 E   KeyError: 1
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:423: KeyError: 1
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:417: KeyError: 1
 E   AssertionError: assert {'lines': 0, 'chars': 0} == {'lines': 2, 'chars': 0}
       
       Omitting 1 identical items, use -vv to show
       Differing items:
       {'lines': 0} != {'lines': 2}
       Use -v to get more diff
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:438: AssertionError: assert {'lines': 0, 'chars': 0} == {'lines': 2, 'chars': 0}
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:432: AssertionError: assert {'lines': 0, 'chars': 0} == {'lines': 2, 'chars': 0}
 E   assert [] == [0, 1, 2, 3, 4]
       
       Right contains 5 more items, first extra item: 0
       Use -v to get more diff
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:446: assert [] == [0, 1, 2, 3, 4]
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:440: assert [] == [0, 1, 2, 3, 4]
+E   AssertionError: full-width rows must not collapse columns
+    assert 0 == 2
+     +  where 0 = len([])
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:458: AssertionError: full-width rows must not collapse columns
+E   assert 0 == 3
+     +  where 0 = len([])
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_ocr_page_text.py:494: assert 0 == 3
 E   AssertionError: assert '' == 'Hello'
       
       - Hello
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:88: AssertionError: assert '' == 'Hello'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:89: AssertionError: assert '' == 'Hello'
 E   AssertionError: assert '' == 'Keep me'
       
       - Keep me
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:111: AssertionError: assert '' == 'Keep me'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:112: AssertionError: assert '' == 'Keep me'
 E   IndexError: tuple index out of range
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:136: IndexError: tuple index out of range
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:137: IndexError: tuple index out of range
 E   IndexError: tuple index out of range
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:150: IndexError: tuple index out of range
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:151: IndexError: tuple index out of range
 E   AssertionError: assert 0 == 1
      +  where 0 = len(())
      +    where () = PageAwarePDFResult(normalized_text='', parser_results=(), page_count=1).parser_results
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:169: AssertionError: assert 0 == 1
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:170: AssertionError: assert 0 == 1
 E   AssertionError: assert 1 == 2
      +  where 1 = PageAwarePDFResult(normalized_text='', parser_results=(), page_count=1).page_count
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:190: AssertionError: assert 1 == 2
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:191: AssertionError: assert 1 == 2
 E   ValueError: not enough values to unpack (expected 2, got 0)
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:222: ValueError: not enough values to unpack (expected 2, got 0)
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:223: ValueError: not enough values to unpack (expected 2, got 0)
 E   Failed: DID NOT RAISE ValueError
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:245: Failed: DID NOT RAISE ValueError
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:246: Failed: DID NOT RAISE ValueError
 E   Failed: DID NOT RAISE ValueError
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:253: Failed: DID NOT RAISE ValueError
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:254: Failed: DID NOT RAISE ValueError
 E   Failed: DID NOT RAISE ValueError
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:266: Failed: DID NOT RAISE ValueError
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:267: Failed: DID NOT RAISE ValueError
 E   Failed: DID NOT RAISE ValueError
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:273: Failed: DID NOT RAISE ValueError
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:274: Failed: DID NOT RAISE ValueError
 E   Failed: DID NOT RAISE ValueError
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:282: Failed: DID NOT RAISE ValueError
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:283: Failed: DID NOT RAISE ValueError
 E   Failed: DID NOT RAISE ValueError
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:293: Failed: DID NOT RAISE ValueError
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:294: Failed: DID NOT RAISE ValueError
 E   AssertionError: both pages must produce a result
     assert 0 == 2
      +  where 0 = len(())
      +    where () = PageAwarePDFResult(normalized_text='', parser_results=(), page_count=1).parser_results
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:311: AssertionError: both pages must produce a result
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:312: AssertionError: both pages must produce a result
 E   AssertionError: assert '' == 'One'
       
       - One
-C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:335: AssertionError: assert '' == 'One'
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:336: AssertionError: assert '' == 'One'
+E   AssertionError: assert '' == 'Keep'
+      
+      - Keep
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:371: AssertionError: assert '' == 'Keep'
+E   AssertionError: assert '' == 'One'
+      
+      - One
+C:\Users\֣����\Projects\company-wiki-p1-ocr-text\tests\unit\test_p1_ocr_text\test_pdf_ocr_page_adapter.py:395: AssertionError: assert '' == 'One'
 =========================== short test summary info ===========================
 FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_two_column_page_is_column_major_not_return_order
 FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_indented_first_line_is_not_split_into_two_columns
@@ -178,6 +195,8 @@ FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_no_network_or_soc
 FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_defer_reasons_stay_within_the_frozen_vocabulary
 FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_work_used_reports_accepted_lines_and_body_chars
 FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_every_input_line_is_present_in_the_output_lines
+FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_full_width_header_and_footer_do_not_collapse_two_columns
+FAILED tests/unit/test_p1_ocr_text/test_ocr_page_text.py::test_limit_also_marks_lines_already_deferred_for_another_reason
 FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_all_ocr_pages_are_parsed_with_ocr_used
 FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_page_mixing_accepted_and_deferred_lines_is_partial
 FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_ambiguous_order_defer_maps_to_layout_ambiguous
@@ -193,4 +212,6 @@ FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_non_pdf_ma
 FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_unverified_manifest_raises_value_error
 FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_non_contiguous_page_order_sets_locator_unstable
 FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_adapter_uses_no_network
-============================= 36 failed in 2.86s ==============================
+FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_document_with_a_failed_page_marks_surviving_page_partial
+FAILED tests/unit/test_p1_ocr_text/test_pdf_ocr_page_adapter.py::test_adapter_does_not_mutate_manifest_or_pages
+============================= 40 failed in 2.68s ==============================
