@@ -1,0 +1,57 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b1-review-9uxvr614\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-index-independent-green.xml",
+    "tests/unit/du11_source_closure/test_source_metadata_budget.py"
+  ],
+  "returncode": 0,
+  "seconds": 12.778,
+  "source_sha_before": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "5e9b2dc07ad9d79bafc47efe8e95256b0dccc0caa59d6dc43f8f06a2802084f0",
+    "src/company_wiki/source_catalog/narrative_reading.py": "6a76203353b81c0e50881607851fdd1f91925942381bad873c64787a9940fdfe",
+    "tests/unit/du11_source_closure/test_source_metadata_budget.py": "912b2df330badcc86f7d94e612e07831207c4cb7c82f2340fd1f7a26fbe7f5be"
+  },
+  "source_sha_after": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "5e9b2dc07ad9d79bafc47efe8e95256b0dccc0caa59d6dc43f8f06a2802084f0",
+    "src/company_wiki/source_catalog/narrative_reading.py": "6a76203353b81c0e50881607851fdd1f91925942381bad873c64787a9940fdfe",
+    "tests/unit/du11_source_closure/test_source_metadata_budget.py": "912b2df330badcc86f7d94e612e07831207c4cb7c82f2340fd1f7a26fbe7f5be"
+  },
+  "finite_controls": [
+    {
+      "entry": "_candidates",
+      "limit": 300,
+      "used": 193,
+      "heading_visits": 0,
+      "body_visits": 0,
+      "complete": false
+    },
+    {
+      "entry": "build_native_continuity",
+      "limit": 0,
+      "used": 0,
+      "heading_visits": 0,
+      "body_visits": 0,
+      "complete": false
+    },
+    {
+      "entry": "_prose_reading_packages",
+      "external_context_preserved": true,
+      "body_packages": 2,
+      "external_ref_count_per_package": 2
+    }
+  ],
+  "cleanup": {
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-b1-review-9uxvr614",
+    "restored_absent": true
+  }
+}

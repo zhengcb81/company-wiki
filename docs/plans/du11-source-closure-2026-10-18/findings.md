@@ -1,0 +1,9 @@
+# Findings
+
+Final preallocation evidence: source candidates originally spent193 of300 then still iterated32 heading IDs before the prose reservation rejected; native continuity atparent0 copied32heads/64body IDs before charging. Length-based reservations before ID visitation remove both loopholes; source headings are now constructed only after prose succeeds and their own reservation succeeds. Nine metadata controls and prior730 related cases all pass739/50.52s. Recursive immutable-IR snapshot checks every dataclass field and mapping value without requiring pickle or altering production IR.
+
+读取现有20源码接口调查后明确：SourceOperatingSession groups/citation_views可以复用；native_range禁止跨页；context name_classes并不代表实际产品指代已解决。4个关键陷阱：analysis owner重叠、target/context refs误映、TOC混入家具、跨页block号码重启与必要context5blocks超过现4。详细约束与真实定位见task_plan引用，不复制原PDF。
+
+Current same-page finish correctly does not assert cross-page continuity, but source owner independently admits page fragments. Therefore a source-level atomic dependency is needed before selection; late summary rewording or a changed max_claims cannot fix a half-sentence selected under a one-span budget. Source block IDs reset on each page: the new cross-page envelope must use tuple identities. Current global WorkBudget must also include new continuity observations; keep local geometric ceiling as a nested ceiling, never a second free allowance.
+
+Measured quadratic source context: a background package withNmembers called context() for each body, rebuilding set(owner.members) each time. 16members288visits,32members1088visits. Source-specific nouns/models cannot fix this; precompute external-context dependencies once per owner and combined exclusions once per source, while actual membership/fan-out/sort costs consume the existing account. StageB initial implementation is isolated pending broader integration/independent final review, not called production-ready.

@@ -1,0 +1,85 @@
+{
+  "schema_version": "du11-source-closure-design-review/1",
+  "status": "DESIGN_REVIEW_COMPLETE_WITH_REQUIRED_CONTROLS",
+  "review_kind": "independent_read_only_design_observation_not_final_acceptance",
+  "observed_head": "e33d40ed7688cfdcead1e02d55542f7026d0b8e5",
+  "observed_branch": "codex/du11-source-closure",
+  "bindings_at_report_assembly": {
+    "docs/plans/du11-source-closure-2026-10-18/task_plan.md": {
+      "sha256": "70eebfceddc82083bbf5f2bd2f0aa977a6793743525785b3dc027e5393c898a5",
+      "bytes": 4977
+    },
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": {
+      "sha256": "0a07d699a6d5cb4fa0f54a41561502ede6714815215e6c0a05fdf50f87f5b8d7",
+      "bytes": 8276
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "a1889aa6efc2242ef696f769f6b51ae53132b7084c9a899f5ff5b0557b295744",
+      "bytes": 24226
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "b0999ac2802aa0f5eb7fc73958cb96aeefeb80c45fe7754965a5745bef080a34",
+      "bytes": 49990
+    },
+    "src/company_wiki/resource_budget.py": {
+      "sha256": "8139e095b251d37aa74764718d1fe7dbec1527036f8ea7e0f11717a9911c2ffd",
+      "bytes": 1911
+    },
+    "src/company_wiki/source_catalog/narrative_document.py": {
+      "sha256": "d2c8b1f9e0384d67ed61a636afdbfe084feeb27324b0a369e82e7b691ac72e54",
+      "bytes": 8447
+    },
+    "src/company_wiki/document_understanding/structure/__init__.py": {
+      "sha256": "1f3624fe61572e99228425f3c60d9b7a0af7ef56d106c1ac9d74b6237e99d8a5",
+      "bytes": 21550
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py": {
+      "sha256": "f5926d67532bac8d8f5ec007dd5b6ce73f873f457b34a9a8e286207166abe613",
+      "bytes": 28053
+    },
+    "docs/plans/du11-source-quality-2026-10-18/closure-investigation/findings.md": {
+      "sha256": "a4d4bc77f95fe5e5a0fbb7950c1be885dd7a8adbb80f20f93f1cc41d921e3349",
+      "bytes": 7810
+    }
+  },
+  "findings": [
+    {
+      "id": "B1",
+      "severity": "P2",
+      "status": "REQUIRED_FOR_CROSS_PAGE_EXTENSION",
+      "owner": "narrative_continuity._Analysis.defer/emit -> narrative_reading deferred ranges",
+      "reason": "single-page range cannot represent cross-page deferred dependency",
+      "minimal_repair": "page-local source ranges and actual original multi-page proof"
+    },
+    {
+      "id": "B2",
+      "severity": "P2",
+      "status": "CURRENT_ACCOUNTING_GAP",
+      "owner": "narrative_reading._candidates/_prose_reading_packages",
+      "reason": "fixed N/P reservation misses actual membership and repeated observation-loop union work",
+      "minimal_repair": "one union plus metered real memberships on existing parent"
+    },
+    {
+      "id": "B3",
+      "severity": "P2",
+      "status": "REQUIRED_BUDGET_CONTROL",
+      "owner": "narrative_continuity.build_native_continuity",
+      "reason": "section tuples allocated before charge; partial cross-page state must not leak suffix",
+      "minimal_repair": "charge before bounded expansion and preserve full deferred coverage"
+    }
+  ],
+  "tests_executed": false,
+  "source_scripts_executed": false,
+  "api_calls": 0,
+  "original_reads": 0,
+  "source_edits": 0,
+  "historical_test_evidence": "ROOT reports only; not independently rerun",
+  "final_acceptance": false,
+  "report_sha256": "2ecc15786c6c8dd61c17dcea141077a487c5f5390f2af985f92692de0bee431c",
+  "root_acknowledged_findings": [
+    "B1",
+    "B2",
+    "B3"
+  ],
+  "additional_same_root": "context(member_ids) rebuilds owner member/required sets per member; ROOT plans one external-context preparation per owner"
+}

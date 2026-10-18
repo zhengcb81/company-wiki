@@ -91,7 +91,8 @@ def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
         for uid, unit in units.items() if uid in package['member_unit_ids']})
 
 
-def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None):
+def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None, *,
+                           work_budget: WorkBudget | None = None):
     """Container membership is not a claim that all prose is one atomic fact.
 
     Audit every source-owned prose member. Only the shared native continuity
@@ -99,6 +100,10 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     The final material owner is established before source-state recognition;
     the optional text callback is retained only for private diagnostic replay.
     """
+    work_budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
+    observation = pipeline.get("observation", {}).get("units", ())
+    work_budget.charge(2 * len(parsed.units) + len(observation)
+                       + len(pipeline.get("non_selectable_unit_ids", ())) + 1)
     units = {unit.unit_id: unit for unit in parsed.units}
     profiles = pipeline["reading_plan"]["unit_profiles"]
     packages = pipeline["packages"]["packages"]
@@ -107,9 +112,18 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     prose_kinds = {"background", "paragraph_event", "risk"}
     audited_kinds = prose_kinds | {"project"}
     owners: dict[str, list[Mapping[str, Any]]] = {}
+    owner_external_context = {}
     other_members: set[str] = set()
     for package in packages:
         members = package.get("member_unit_ids", ())
+        required = package.get("required_context_unit_ids", ())
+        work_budget.charge(3 * len(members) + 2 * len(required)
+                           + len(package.get("anchor_unit_ids", ())) + 1)
+        external = set(required) - set(members)
+        # Each source member can consume this external dependency only once.
+        # Reserve actual edges before expanding, not only container count.
+        work_budget.charge(len(members) * len(external))
+        owner_external_context[id(package)] = external
         if package["kind"] in audited_kinds and not package.get("truncated"):
             for uid in members:
                 owners.setdefault(uid, []).append(package)
@@ -120,6 +134,8 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     section_for_unit = {}
     sections = pipeline.get("structure", {}).get("sections", ())
     for section in sections:
+        heads, body = section.get("heading_unit_ids", ()), section.get("body_unit_ids", ())
+        work_budget.charge(1 + 2 * len(heads) + 2 * len(body) + len(heads) * len(body))
         actual_heads = set(section.get("heading_unit_ids", ()))
         for uid in (*section.get("heading_unit_ids", ()), *section.get("body_unit_ids", ())):
             section_for_unit[uid] = section.get("section_id")
@@ -134,15 +150,15 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
                 # ParagraphDraft's first anchor is also marked required. This
                 # is container bookkeeping, not a dependency on every later
                 # fact. Preserve actual external headings/context only.
-                result.update(set(owner.get("required_context_unit_ids", ()))
-                              - set(owner.get("member_unit_ids", ())))
+                result.update(owner_external_context[id(owner)])
+        work_budget.charge(len(result) * max(1, len(result).bit_length()))
         return sorted(result - set(member_ids))
 
-    observation = pipeline.get("observation", {}).get("units", ())
+    exclusions = other_members | excluded
     views = []
     for unit in observation:
         uid = unit["unit_id"]
-        if uid not in owners or uid in other_members | excluded:
+        if uid not in owners or uid in exclusions:
             views.append({**unit, "kind": "continuity_boundary"})
             continue
         projects = tuple(sorted(str(owner["package_id"]) for owner in owners[uid]
@@ -160,7 +176,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             "pdf_block", "block_sha256", "block_char_start", "block_char_end")}}
         for unit in parsed.units if unit.unit_kind == "pdf_text_block"}
     continuity = build_native_continuity(views, provenance=provenance,
-        sections=sections, unit_profiles=profiles)
+        sections=sections, unit_profiles=profiles, work_budget=work_budget)
     ranges: dict[tuple[str, int], list[tuple[int, int]]] = {}
     for entry in continuity["deferred_unit_ranges"]:
         ranges.setdefault((entry["source_id"], entry["page"]), []).append(
@@ -325,6 +341,14 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     mutable_pipeline = cast(dict[str, Any], pipeline)
     mutable_pipeline.pop("_material_units", None)
     mutable_pipeline.pop("_carrier_origins", None)
+    work_budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
+    try:
+        # Reserve source closure indexes before constructing them. Geometry
+        # below tightens its own ceiling on this same account, never a clone.
+        work_budget.charge(2 * len(parsed.units) + len(pipeline.get("non_selectable_unit_ids", ())) + 1)
+    except WorkBudgetExceeded:
+        return [], {}, [], False, [{"package_id": "source-closure",
+            "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": [], "unexamined_from_index": 0}]
     units = {unit.unit_id: unit for unit in parsed.units}
     reading = pipeline["reading_plan"]["unit_profiles"]
     excluded = set(pipeline.get("non_selectable_unit_ids", ()))
@@ -332,10 +356,15 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     metadata: dict[str, dict[str, Any]] = {}
     eligible_packages = []
     withheld = []
-    headings = {uid for section in pipeline.get("structure", {}).get("sections", ())
-                for uid in section.get("heading_unit_ids", ())}
-
-    packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline)
+    try:
+        packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline,
+            work_budget=work_budget)
+        sections = pipeline.get("structure", {}).get("sections", ())
+        work_budget.charge(sum(1 + len(section.get("heading_unit_ids", ())) for section in sections))
+        headings = {uid for section in sections for uid in section.get("heading_unit_ids", ())}
+    except WorkBudgetExceeded:
+        return [], {}, [], False, [{"package_id": "source-closure",
+            "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": [], "unexamined_from_index": 0}]
     # Qualify actual table rows before the context graph establishes cost and
     # closure. Rejected account rows are neither facts nor borrowed context.
     scoped_packages = []
@@ -433,7 +462,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 analysis_groups[owner] = tuple(view)
                 contexts[owner] = context_ids - set(view)
     session = SourceOperatingSession(units,
-        work_budget=work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"]),
+        work_budget=work_budget,
         contexts={uid: tuple(sorted(ids)) for uid, ids in contexts.items()}, groups=analysis_groups)
     if _session_state is not None:
         _session_state["session"] = session
