@@ -90,6 +90,8 @@ def test_new_plan_uses_real_groups_and_keeps_current_and_next_separate_under_con
     data = json.loads(request.with_output_budget(8192).data_json)
     assert data["output_plan"]["target_claim_count"] == 20
     assert data["output_plan"]["max_claims"] == 20
+    # The response schema can bound one task array only; the enforced global
+    # cap is shared across tasks and must be stated in the request itself.
     assert "single modality" in request.instruction
     assert "next action" in request.instruction
     assert "that claim" in request.instruction

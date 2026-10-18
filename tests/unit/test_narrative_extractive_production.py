@@ -44,7 +44,7 @@ def test_explicit_v5_request_roundtrip_and_explicit_v4_retains_its_original_prot
     manifest = generation_manifest(request, _context(source).source_revision,
         execution_versions=request.execution_versions, reading_model_projection='reading-model-input/4')
     assert manifest['reading_model_projection'] == 'reading-model-input/4'
-    assert manifest['execution_versions']['prompt'] == 'reading-source-scoped/4.0.0'
+    assert manifest['execution_versions']['prompt'] == 'reading-source-scoped/4.0.1'
 
 
 def test_legacy_nonreading_default_does_not_silently_opt_in():

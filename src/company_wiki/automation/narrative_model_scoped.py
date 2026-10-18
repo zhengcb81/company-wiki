@@ -25,7 +25,7 @@ from .narrative_contracts import NarrativeSelectResult
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.0'
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.1'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -38,19 +38,26 @@ SCOPED_INSTRUCTION = (
     'A source question is not a management statement. Do not infer a contract from an intention. '
     'Preserve original names and product codes. Do not copy task defaults as business facts. '
     'Source identity, language, claim IDs, claim types and quality belong to the program; '
-    'do not output them. Emit at most twenty clauses TOTAL across all tasks, each at most '
-    '280 characters. Retain distinct important business updates within the configured output '
-    'budget; omit a task rather than invent support. Do not output reasoning, Markdown, '
-    'research conclusions, valuation, ratings or paths. Valid local citations do not prove '
-    'that rewritten prose is true.'
+    'do not output them. Respect output_plan.max_claims_per_task per task and '
+    'output_plan.max_claims in total; the response schema arrays are bounded but the '
+    'program enforces the smaller per-task cap, so exceeding it rejects the whole response. '
+    'Each clause is at most 280 characters. Retain distinct important business updates '
+    'within the configured output budget; omit a task rather than invent support. Do not '
+    'output reasoning, Markdown, research conclusions, valuation, ratings or paths. Valid '
+    'local citations do not prove that rewritten prose is true.'
 )
 
 
-def scoped_response_schema() -> dict[str, Any]:
-    """One finite clause schema, not one copy per task."""
+def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
+    """One finite clause schema, not one copy per task.
+
+    The array bound is the enforced share of the global cap, so a provider that
+    follows the schema cannot exceed the contract even when it ignores prose.
+    """
+    cap = max(1, min(20, int(per_task_cap)))
     return {'type': 'object', 'required': ['drafts_by_task'], 'additionalProperties': False,
         'properties': {'drafts_by_task': {'type': 'object', 'additionalProperties': {
-            'type': 'array', 'maxItems': 20, 'items': {
+            'type': 'array', 'maxItems': cap, 'items': {
                 'type': 'object', 'required': ['text', 'basis_parts', 'modality'],
                 'additionalProperties': False, 'properties': {
                     'text': {'type': 'string', 'minLength': 1, 'maxLength': 280},
@@ -95,6 +102,9 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None) -
     if max_output_tokens is not None:
         target = min(target, max(1, (max_output_tokens - 256) // 320))
     return {'max_claims': 20, 'target_claim_count': target, 'target_text_chars': 240,
+        # The response schema can only bound each task array; this is the hard
+        # per-task share of the global cap the decoder actually enforces.
+        'max_claims_per_task': max(1, 20 // max(1, task_count)),
         'configured_output_tokens': max_output_tokens, 'coverage': 'selected_source_tasks_only',
         'planning': 'compact_target_not_token_estimate'}
 
@@ -137,8 +147,8 @@ def build_scoped_request(selected: NarrativeSelectResult) -> ScopedModelRequest:
             'language': selected.source_metadata.language, 'title': selected.source_metadata.title,
             'document_kind': selected.source_metadata.document_kind},
         'material': view.to_model_dict(), 'reading_strategy': strategy,
-        'output_plan': _scoped_output_plan(len(view.plan.tasks)),
-        'response_schema': scoped_response_schema()}
+        'output_plan': (plan := _scoped_output_plan(len(view.plan.tasks))),
+        'response_schema': scoped_response_schema(plan['max_claims_per_task'])}
     data_json = canonical_json(envelope)
     return ScopedModelRequest(SCOPED_PROMPT_VERSION, SCOPED_INSTRUCTION, data_json,
         canonical_json_hash({'prompt_version': SCOPED_PROMPT_VERSION, 'instruction': SCOPED_INSTRUCTION,

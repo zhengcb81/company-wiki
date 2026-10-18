@@ -128,7 +128,7 @@ def test_explicit_scoped_worker_public_locator_and_actual_rf_consumer_recover_wi
                 run = runs.get_run(request.run_id)
                 manifests = batch._thaw_generations(json.loads(run.binding_json))
                 assert all(m['reading_model_projection']=='reading-model-input/4' for m in manifests.values())
-                assert all(m['execution_versions']['prompt']=='reading-source-scoped/4.0.0'
+                assert all(m['execution_versions']['prompt']=='reading-source-scoped/4.0.1'
                            for m in manifests.values())
 
                 isolated_registry = root/'rf-isolation/publications.jsonl'
@@ -163,7 +163,7 @@ def test_explicit_scoped_worker_public_locator_and_actual_rf_consumer_recover_wi
                 assert sha256(body).hexdigest()==reference['artifact_sha256']
                 assert receipt['narrative_ref']==reference and receipt['replay_status']=='verified'
                 assert bundle['source_ref']==source_ref
-                assert bundle['summary']['model']['prompt_version']=='reading-source-scoped/4.0.0'
+                assert bundle['summary']['model']['prompt_version']=='reading-source-scoped/4.0.1'
                 assert bundle['reading_context']['groups'] and bundle['evidence_spans']
                 spans = {span['span_id']: span for span in bundle['evidence_spans']}
                 for span in spans.values():
