@@ -3,6 +3,10 @@
 Each package is generated from the literals in :mod:`.ooxml_support`; the
 committed bytes and the ``sha256.json`` manifest exist so reviewers can diff and
 hash what the tests actually parse (card §6).
+
+Regenerate the committed fixtures with
+``python -m tests.unit.test_p2_office_table.fixture_files``; the tests only
+assert the committed bytes equal this generator and never rewrite them.
 """
 
 from __future__ import annotations
@@ -169,3 +173,7 @@ def sync_fixtures(directory: Path) -> None:
 
 
 __all__ = ["MANIFEST_NAME", "build_all", "manifest_payload", "sync_fixtures"]
+
+
+if __name__ == "__main__":  # pragma: no cover - manual regeneration entry
+    sync_fixtures(Path(__file__).resolve().parent / "fixtures")
