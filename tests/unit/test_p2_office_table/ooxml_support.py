@@ -57,6 +57,11 @@ def _zip(members: Iterable[tuple[str, bytes]]) -> bytes:
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_STORED) as archive:
         for name, payload in members:
             info = zipfile.ZipInfo(filename=name, date_time=(2026, 10, 18, 0, 0, 0))
+            # ``create_system`` defaults to 0 on Windows and 3 on Unix, which
+            # changes the central directory and makes the same fixture hash
+            # differently per platform; pin it so the committed bytes are
+            # reproducible everywhere.
+            info.create_system = 0
             info.compress_type = zipfile.ZIP_STORED
             info.external_attr = 0o600 << 16
             archive.writestr(info, payload)

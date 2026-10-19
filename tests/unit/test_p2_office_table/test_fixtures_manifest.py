@@ -13,17 +13,10 @@ import hashlib
 import json
 from pathlib import Path
 
-import pytest
-
 from . import fixture_files
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 MAX_BYTES = 128 * 1024
-
-
-@pytest.fixture(scope="module", autouse=True)
-def materialise_fixtures() -> None:
-    fixture_files.sync_fixtures(FIXTURE_DIR)
 
 
 def test_manifest_lists_every_fixture_with_its_sha256():
