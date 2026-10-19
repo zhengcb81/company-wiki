@@ -1,3 +1,12 @@
+## CI 红根因：PyMuPDF 2.0 破坏 PDF 文本/表格提取（2026-10-19）
+
+- 用 WSL + Python 3.12 + `pip install -r requirements*.txt`（与 CI 同依赖）稳定复现 3 个 PDF 失败，报错是**文本/表格提取结果变化**：`'Storesbyoperatingmodel'`（空格丢失）、列号 `{0,2}` vs `{0,1}`、缺 `-1,200` 单元格。
+- 依赖里 `PyMuPDF>=1.23.0` 未设上限，CI 装到 **2.0**；本地 1.28.2 与 WSL 1.27 均通过。把 2.0 降回 1.28.2 后，同环境 3 个 PDF 用例 + 入口用例 **79 passed**。
+- 根因修复：`requirements.txt` 固定 `PyMuPDF>=1.23.0,<2.0`（2.x 的文本提取语义变化需 parser/收据重新验证后再放开）。
+- 入口用例在干净环境通过；此前 WSL 用 user-site 安装时失败，判断为环境污染，待 CI 复验。
+
+---
+
 ## 模型配置单一化：config/models.yaml（2026-10-19）
 
 - 新增 `config/models.yaml`（schema `company-wiki-models/1`），每个 provider 的 `model` / `base_url` / `api_key_env` 只在这里定义；`config.yaml` 只选 provider（仍可逐项覆盖）。

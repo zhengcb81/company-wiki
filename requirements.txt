@@ -5,7 +5,10 @@ httpx>=0.27,<1
 openai>=1.0.0
 
 # Optional: PDF extraction
-PyMuPDF>=1.23.0
+# PyMuPDF 2.0 changes word spacing, column detection and table-cell text
+# extraction; the PDF table/layout pipeline is validated against 1.x. Keep the
+# tested major pinned until the parser and its receipts are revalidated on 2.x.
+PyMuPDF>=1.23.0,<2.0
 
 # Optional: direct download from cninfo
 playwright>=1.40.0
