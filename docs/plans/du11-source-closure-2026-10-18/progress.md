@@ -1,3 +1,14 @@
+## 质量审查与临时物清理（2026-10-19）
+
+- **静态检查**：CI 同范围 `ruff` 全通过；CI 列出的 45 个契约模块 `mypy` 无问题；`compileall` 通过；src/tests/tools 无 `breakpoint`/`pdb`/`TODO`/`FIXME` 遗留。
+- **P2 质量根因修复**：`ZipInfo.create_system` 在 Windows 默认 0、Unix 默认 3，导致同一夹具跨平台哈希不同；已固定为 0。`test_fixtures_manifest` 原来每次运行都重写已提交夹具（违反“测试目录原样恢复”），已去掉写入，改为只做字节相等断言。
+- **WSL 下 9 个 P2 失败**：定位为 WSL 系统 Python 缺 `python-pptx`（`dependency_unavailable`），不是代码缺陷；CI 安装依赖后全绿。
+- **清理**：删除 `.mypy_cache`/`.pytest_cache`/`.ruff_cache`/`__pycache__`、`.tmp`、`.tmp-e2e`、`.tmp_du5`、`tmp/`（约 78 MB）；`.planning/shared-reading-production/du11` 的 62 个 live 运行目录裁到 5 个（CN b2v3w/b2v4e/b2v5i、US b2v3、HK deepseek），账本 `usage.jsonl` 与 metadata 保留；`.gitignore` 补上三个缓存目录。
+- **注意**：本地跑测试需要 `C:\Users\郑曾波\Projects\cwp-temp` 作为 TEMP/TMP；删掉它会让 `test_w04_source_transport` 报 `unable to open database file`，已重建为空目录。
+- 全量单测：**7029 passed / 24 skipped**（唯一一次失败是该临时目录被删导致，重建后该用例 18 passed）。
+
+---
+
 ## P3 两条 Linux 失败已修，远端 CI 绿（2026-10-18）
 
 - 复现：WSL Ubuntu（Python 3.12.3，与 CI 同版本）跑两条用例 → 稳定失败，断言差异是 `catalog/catalog.sqlite3-shm`。
