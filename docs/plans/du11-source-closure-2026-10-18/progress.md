@@ -1,3 +1,16 @@
+## 远端 CI 红：4 个 PDF/入口测试（2026-10-19 排查）
+
+- `origin/master` 在 `f9d528eb`/`01baa010`/`0bbd2e4a` 三次 CI 均失败，注解固定为同一组：
+  `test_shared_reading_pdf_table_policy::test_actual_store_matrix_discovery_does_not_require_recent_event_word`、
+  `test_shared_reading_pdf_layout::test_find_tables_and_extract_are_reused_once_and_cells_have_real_separate_columns [unknown_error]`、
+  `test_legacy_entrypoint_simplification::test_permanently_retired_entry_exits_before_initialization[batch_ingest.py-plain]`、
+  `pdf_table_observations.test_7_real_pipeline_pdf::test_real_parse_produces_observations_that_bind_and_slice_back`。
+- 本地（Windows/3.13）四文件 **151 passed**；WSL（Linux/3.12）同组用例 78 passed（仅 1 条因 WSL 缺 `opencc` 失败）。`ef3f3d1c` 的 CI 在同一条代码血缘上成功。
+- 已试把 runner 固定到 `ubuntu-24.04`：同样 4 条失败，已 revert；`ubuntu-latest` 的迁移通告不是充分解释。
+- 结论：判断为**环境/PDF 栈**问题（pymupdf/字体/磁盘），非本次改动；需要认证日志看断言才能继续定位。CI 恢复前不宣称绿。
+
+---
+
 ## 质量审查与临时物清理（2026-10-19）
 
 - **静态检查**：CI 同范围 `ruff` 全通过；CI 列出的 45 个契约模块 `mypy` 无问题；`compileall` 通过；src/tests/tools 无 `breakpoint`/`pdb`/`TODO`/`FIXME` 遗留。
