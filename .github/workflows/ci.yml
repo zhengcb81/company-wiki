@@ -24,10 +24,7 @@ concurrency:
 jobs:
   test:
     name: Fast checks (Python 3.12)
-    # Pinned to a known-good image: the ubuntu-latest label migrates to
-    # Ubuntu 26 from 2026-10-19, and that image currently breaks the PDF
-    # layout/pipeline tests. Revisit once those tests pass on the new image.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
