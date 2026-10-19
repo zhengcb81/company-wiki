@@ -34,13 +34,13 @@ class _Response:
         self.content = content
         self.success = success
         self.error = error
-        self.model = "MiniMax-M3"
+        self.model = "MiniMax-M3.1-Flash"
         self.usage = {"total_tokens": 321}
 
 
 class _FakeLLM:
     provider = "minimax"
-    model = "MiniMax-M3"
+    model = "MiniMax-M3.1-Flash"
 
     def __init__(self, content: str):
         self.content = content
@@ -99,7 +99,7 @@ def test_llm_summary_is_source_bound_auditable_and_replaces_extractive_summary(
     content = Path(row["summary_path"]).read_text(encoding="utf-8")
     assert "summary_method: llm" in content
     assert "llm_provider: minimax" in content
-    assert "llm_model: MiniMax-M3" in content
+    assert "llm_model: MiniMax-M3.1-Flash" in content
     assert "公司收入增长20%" in content
     assert row["source_id"] in content
     assert source_root.joinpath("meeting.txt").read_bytes() == before
@@ -315,7 +315,7 @@ def test_configured_llm_uses_project_dotenv_over_stale_inherited_keys(
         """
 llm:
   provider: minimax
-  model: MiniMax-M3
+  model: MiniMax-M3.1-Flash
   base_url: https://api.minimaxi.com/v1
   fallback:
     provider: mimo

@@ -245,9 +245,13 @@ def test_user_selected_flash_profiles_are_consistent_across_active_defaults(tmp_
 def test_production_yaml_requests_user_selected_mimo_flash():
     from pathlib import Path
     import yaml
+    from company_wiki.model_config import load_model_profiles
     path = Path(__file__).resolve().parents[2] / "config.yaml"
     raw = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert raw["llm"]["fallback"]["model"] == "mimo-v2.6-flash"
+    # The provider is selected in config.yaml; its model comes from the single
+    # model table in config/models.yaml.
+    assert raw["llm"]["fallback"]["provider"] == "mimo"
+    assert load_model_profiles(path)["mimo"].model == "mimo-v2.6-flash"
 
 
 @pytest.mark.parametrize("environment_present", [True, False])

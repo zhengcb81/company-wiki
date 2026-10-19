@@ -24,7 +24,7 @@ class TestConfigLoading:
 
         assert config is not None
         assert config.llm.provider == "minimax"
-        assert config.llm.model == "MiniMax-M3"
+        assert config.llm.model == "MiniMax-M3.1-Flash"
         assert config.search.engine == "tavily"
         assert config.search.results_per_query == 8
 

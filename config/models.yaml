@@ -1,0 +1,26 @@
+# 单一模型配置源（single source of truth）。
+# 所有供应商的模型 id、endpoint 与凭证环境变量只在这里定义；
+# config.yaml 只选择 provider，可逐项覆盖（model/base_url）。
+schema_version: company-wiki-models/1
+
+providers:
+  minimax:
+    model: MiniMax-M3.1-Flash
+    base_url: https://api.minimaxi.com/v1
+    api_key_env: MINIMAX_API_KEY
+  mimo:
+    model: mimo-v2.6-flash
+    base_url: https://token-plan-cn.xiaomimimo.com/v1
+    api_key_env: MIMO_API_KEY
+  deepseek:
+    model: deepseek-flash
+    base_url: https://api.deepseek.com
+    api_key_env: DEEPSEEK_API_KEY
+  openai:
+    model: gpt-4
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+  claude:
+    model: claude-3-opus-20240229
+    base_url: https://api.anthropic.com
+    api_key_env: ANTHROPIC_API_KEY

@@ -76,7 +76,7 @@ schedule:
 
 llm:
   provider: "minimax"
-  model: "MiniMax-M3"
+  model: "MiniMax-M3.1-Flash"
   base_url: "https://api.minimaxi.com/v1"
   max_tokens: 8192
   temperature: 1.0
@@ -354,7 +354,7 @@ cat > .env.example << 'EOF'
 # Tavily 搜索 API
 TAVILY_API_KEY=your_tavily_api_key_here
 
-# MiniMax-M3 主 LLM API
+# MiniMax-M3.1-Flash 主 LLM API
 MINIMAX_API_KEY=your_minimax_api_key_here
 
 # MiMo 2.5 Pro 通用次 LLM

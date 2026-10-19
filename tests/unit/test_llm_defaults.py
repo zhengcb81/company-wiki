@@ -45,7 +45,7 @@ def test_primary_and_secondary_defaults_are_exact() -> None:
     llm = LLMConfig()
 
     assert llm.provider == "minimax"
-    assert llm.model == "MiniMax-M3"
+    assert llm.model == "MiniMax-M3.1-Flash"
     assert llm.base_url == "https://api.minimaxi.com/v1"
     assert llm.api_key_env == "MINIMAX_API_KEY"
     assert llm.temperature == 1.0
@@ -61,7 +61,7 @@ def test_primary_and_secondary_defaults_are_exact() -> None:
 def test_typed_package_config_uses_same_primary_default() -> None:
     llm = TypedLLMConfig()
     assert llm.provider == "minimax"
-    assert llm.model == "MiniMax-M3"
+    assert llm.model == "MiniMax-M3.1-Flash"
     assert llm.base_url == "https://api.minimaxi.com/v1"
     assert llm.temperature == 1.0
     assert llm.fallback.usage_scope == "general"

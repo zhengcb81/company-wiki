@@ -1,3 +1,13 @@
+## 模型配置单一化：config/models.yaml（2026-10-19）
+
+- 新增 `config/models.yaml`（schema `company-wiki-models/1`），每个 provider 的 `model` / `base_url` / `api_key_env` 只在这里定义；`config.yaml` 只选 provider（仍可逐项覆盖）。
+- MiniMax 模型统一改为 **`MiniMax-M3.1-Flash`**（active config / code / tests / docs）；历史日志、历史 plan、收据不改。
+- 移除三处硬编码表：`src/company_wiki/config.py` 的 dataclass 默认值、`scripts/config.py` 的 `provider_defaults`、`scripts/llm_client.py` 的 env/model/url 三张表；两个配置数据类用 `__post_init__` 从单一模型表解析。
+- 新增 `src/company_wiki/model_config.py`（加载/校验）与 `tests/unit/test_model_config.py`；`config.yaml` 的 model/base_url 覆盖已删除，单一源生效。
+- 验证：affected 45 + 52 + 27 全过；全量单测 7032 passed / 24 skipped（唯一失败是旧断言读 `config.yaml` 的 model，已改为读模型表并复跑通过）。
+
+---
+
 ## 远端 CI 红：4 个 PDF/入口测试（2026-10-19 排查）
 
 - `origin/master` 在 `f9d528eb`/`01baa010`/`0bbd2e4a` 三次 CI 均失败，注解固定为同一组：

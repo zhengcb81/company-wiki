@@ -44,7 +44,7 @@ parser_result_max_bytes: 268435456
 normalization_retry_limit: 3
 normalization_retry_backoff_seconds: 900
 
-# LLM 使用 config.yaml 的 MiniMax M3，并沿用 MiMo 2.5 Pro fallback。
+# LLM 使用 config.yaml 的 MiniMax-M3.1-Flash，并沿用 MiMo 2.5 Pro fallback。
 llm_max_input_chars: 120000
 # M3 会把推理 token 计入完成上限；1200 在真实长文上会截断 JSON。
 llm_max_output_tokens: 2400

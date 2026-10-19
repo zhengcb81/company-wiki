@@ -127,7 +127,7 @@ class TestLLMClientChat:
         primary = LLMClient(
             provider="minimax",
             api_key="primary-test-only",
-            model="MiniMax-M3",
+            model="MiniMax-M3.1-Flash",
             enable_fallback=False,
         )
         fallback = LLMClient(
@@ -154,7 +154,7 @@ class TestLLMClientChat:
         primary = LLMClient(
             provider="minimax",
             api_key="primary-test-only",
-            model="MiniMax-M3",
+            model="MiniMax-M3.1-Flash",
             enable_fallback=False,
         )
         fallback = LLMClient(

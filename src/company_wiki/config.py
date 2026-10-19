@@ -11,6 +11,7 @@ from typing import Optional
 import yaml
 
 from .domain import Company, Sector, Theme
+from .model_config import ModelConfigError, load_model_profiles
 
 
 # ── 合法调度间隔 ──────────────────────────────
@@ -27,23 +28,47 @@ class ConfigError(Exception):
 
 @dataclass
 class LLMFallbackConfig:
+    # Provider selection only; model/base_url come from config/models.yaml.
     provider: str = "mimo"
-    model: str = "mimo-v2.6-flash"
-    base_url: str = "https://token-plan-cn.xiaomimimo.com/v1"
+    model: str = ""
+    base_url: str = ""
     enabled: bool = True
     usage_scope: str = "general"
+
+    def __post_init__(self) -> None:
+        profile = load_model_profiles().get(self.provider)
+        if profile is None:
+            raise ModelConfigError(
+                f"provider {self.provider!r} is not defined in config/models.yaml"
+            )
+        if not self.model:
+            self.model = profile.model
+        if not self.base_url:
+            self.base_url = profile.base_url
 
 
 @dataclass
 class LLMConfig:
+    # Provider selection only; model/base_url come from config/models.yaml.
     provider: str = "minimax"
-    model: str = "MiniMax-M3"
-    base_url: str = "https://api.minimaxi.com/v1"
+    model: str = ""
+    base_url: str = ""
     max_tokens: int = 8192
     temperature: float = 1.0
     max_document_chars: int = 800000
     reasoning_split: bool = True
     fallback: LLMFallbackConfig = field(default_factory=LLMFallbackConfig)
+
+    def __post_init__(self) -> None:
+        profile = load_model_profiles().get(self.provider)
+        if profile is None:
+            raise ModelConfigError(
+                f"provider {self.provider!r} is not defined in config/models.yaml"
+            )
+        if not self.model:
+            self.model = profile.model
+        if not self.base_url:
+            self.base_url = profile.base_url
 
 
 @dataclass
@@ -113,22 +138,36 @@ def load_config(
     with open(config_path, "r", encoding="utf-8") as f:
         raw = yaml.safe_load(f) or {}
 
-    # 2. 解析 LLM 配置
+    # 2. 解析 LLM 配置（provider 选择 + models.yaml 单一模型源）
+    try:
+        profiles = load_model_profiles(config_path)
+    except ModelConfigError as exc:
+        raise ConfigError(str(exc)) from exc
     llm_raw = raw.get("llm", {})
     fallback_raw = llm_raw.get("fallback", {})
+    provider = llm_raw.get("provider", "minimax")
+    profile = profiles.get(provider)
+    if profile is None:
+        raise ConfigError(
+            f"llm.provider {provider!r} is not defined in config/models.yaml"
+        )
+    fallback_provider = fallback_raw.get("provider", "mimo")
+    fallback_profile = profiles.get(fallback_provider)
+    if fallback_profile is None:
+        raise ConfigError(
+            f"llm.fallback.provider {fallback_provider!r} is not defined in config/models.yaml"
+        )
     fallback = LLMFallbackConfig(
-        provider=fallback_raw.get("provider", "mimo"),
-        model=fallback_raw.get("model", "mimo-v2.6-flash"),
-        base_url=fallback_raw.get(
-            "base_url", "https://token-plan-cn.xiaomimimo.com/v1"
-        ),
+        provider=fallback_provider,
+        model=fallback_raw.get("model", fallback_profile.model),
+        base_url=fallback_raw.get("base_url", fallback_profile.base_url),
         enabled=bool(fallback_raw.get("enabled", True)),
         usage_scope=fallback_raw.get("usage_scope", "general"),
     )
     llm = LLMConfig(
-        provider=llm_raw.get("provider", "minimax"),
-        model=llm_raw.get("model", "MiniMax-M3"),
-        base_url=llm_raw.get("base_url", "https://api.minimaxi.com/v1"),
+        provider=provider,
+        model=llm_raw.get("model", profile.model),
+        base_url=llm_raw.get("base_url", profile.base_url),
         max_tokens=llm_raw.get("max_tokens", 8192),
         temperature=llm_raw.get("temperature", 1.0),
         max_document_chars=llm_raw.get("max_document_chars", 800000),

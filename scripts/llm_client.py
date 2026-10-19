@@ -224,38 +224,30 @@ class LLMClient:
             return "claude"
         return "minimax"
 
+    @staticmethod
+    def _provider_profile(provider: str) -> Dict[str, str]:
+        """Resolve a provider profile from the single model config."""
+        from config import _load_model_profiles
+
+        profiles = _load_model_profiles()
+        profile = profiles.get(provider) or profiles.get("minimax")
+        if profile is None:
+            raise ValueError(
+                f"provider {provider!r} is not defined in config/models.yaml"
+            )
+        return profile
+
     def _get_api_key(self, provider: str) -> str:
         """获取 API Key"""
-        env_vars = {
-            "minimax": "MINIMAX_API_KEY",
-            "mimo": "MIMO_API_KEY",
-            "deepseek": "DEEPSEEK_API_KEY",
-            "openai": "OPENAI_API_KEY",
-            "claude": "ANTHROPIC_API_KEY",
-        }
-        return os.getenv(env_vars.get(provider, ""), "")
+        return os.getenv(self._provider_profile(provider)["api_key_env"], "")
 
     def _get_default_model(self, provider: str) -> str:
         """获取默认模型"""
-        models = {
-            "minimax": "MiniMax-M3",
-            "mimo": "mimo-v2.6-flash",
-            "deepseek": "deepseek-flash",
-            "openai": "gpt-4",
-            "claude": "claude-3-opus-20240229",
-        }
-        return models.get(provider, "MiniMax-M3")
+        return self._provider_profile(provider)["model"]
 
     def _get_base_url(self, provider: str) -> str:
         """获取基础 URL"""
-        urls = {
-            "minimax": "https://api.minimaxi.com/v1",
-            "mimo": "https://token-plan-cn.xiaomimimo.com/v1",
-            "deepseek": "https://api.deepseek.com",
-            "openai": "https://api.openai.com/v1",
-            "claude": "https://api.anthropic.com",
-        }
-        return urls.get(provider, "https://api.minimaxi.com/v1")
+        return self._provider_profile(provider)["base_url"]
 
     def _init_sdk_client(self):
         """初始化 OpenAI SDK 客户端 (兼容 DeepSeek)"""

@@ -142,7 +142,7 @@ schedule:
 
 llm:
   provider: "minimax"
-  model: "MiniMax-M3"
+  model: "MiniMax-M3.1-Flash"
   base_url: "https://api.minimaxi.com/v1"
   max_tokens: 8192
   temperature: 1.0

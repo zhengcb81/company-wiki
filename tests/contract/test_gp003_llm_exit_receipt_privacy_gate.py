@@ -66,13 +66,13 @@ class _Response:
         self.content = content
         self.success = True
         self.error = ""
-        self.model = "MiniMax-M3"
+        self.model = "MiniMax-M3.1-Flash"
         self.usage = {"total_tokens": 321}
 
 
 class _FakeLLM:
     provider = "minimax"
-    model = "MiniMax-M3"
+    model = "MiniMax-M3.1-Flash"
 
     def __init__(self):
         self.prompts: list[str] = []

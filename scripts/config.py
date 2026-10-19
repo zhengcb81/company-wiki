@@ -76,17 +76,72 @@ def _ensure_dotenv():
         _dotenv_loaded = True
 
 
+MODEL_CONFIG_SCHEMA = "company-wiki-models/1"
+
+
+def _load_model_profiles(base_dir: Optional[Path] = None) -> Dict[str, Dict[str, str]]:
+    """Read the single provider table (``config/models.yaml``).
+
+    Model ids, endpoints and credential variable names live only in that file;
+    this loader never carries provider defaults of its own.
+    """
+    candidates = []
+    if base_dir is not None:
+        candidates.append(Path(base_dir) / "config" / "models.yaml")
+    candidates.append(Path(__file__).resolve().parents[1] / "config" / "models.yaml")
+    for path in candidates:
+        if not path.is_file():
+            continue
+        raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        if not isinstance(raw, dict) or raw.get("schema_version") != MODEL_CONFIG_SCHEMA:
+            raise ValueError(
+                f"model config must declare schema_version {MODEL_CONFIG_SCHEMA!r}: {path}"
+            )
+        providers = raw.get("providers")
+        if not isinstance(providers, dict) or not providers:
+            raise ValueError(f"model config defines no providers: {path}")
+        profiles: Dict[str, Dict[str, str]] = {}
+        for provider, row in providers.items():
+            if not isinstance(row, dict):
+                raise ValueError(f"provider {provider!r} must be a mapping: {path}")
+            values = {name: row.get(name) for name in ("api_key_env", "model", "base_url")}
+            if not all(isinstance(value, str) and value.strip() for value in values.values()):
+                raise ValueError(f"provider {provider!r} is incomplete: {path}")
+            profiles[str(provider)] = {
+                "api_key_env": values["api_key_env"].strip(),
+                "model": values["model"].strip(),
+                "base_url": values["base_url"].strip().rstrip("/"),
+            }
+        return profiles
+    raise ValueError("config/models.yaml not found; model configuration is required")
+
+
 @dataclass
 class LLMFallbackConfig:
     """Secondary provider profile with an explicit workload policy."""
 
     provider: str = "mimo"
     api_key: str = ""
-    api_key_env: str = "MIMO_API_KEY"
-    model: str = "mimo-v2.6-flash"
-    base_url: str = "https://token-plan-cn.xiaomimimo.com/v1"
+    api_key_env: str = ""
+    model: str = ""
+    base_url: str = ""
     enabled: bool = True
     usage_scope: str = "general"
+
+    def __post_init__(self) -> None:
+        profile = _load_model_profiles().get(self.provider)
+        if profile is None:
+            raise ValueError(
+                f"provider {self.provider!r} is not defined in config/models.yaml"
+            )
+        if not self.model:
+            self.model = profile["model"]
+        if not self.base_url:
+            self.base_url = profile["base_url"]
+        if not self.api_key_env:
+            self.api_key_env = profile["api_key_env"]
+        if not self.api_key:
+            self.api_key = os.getenv(self.api_key_env, "")
 
 
 @dataclass
@@ -94,15 +149,30 @@ class LLMConfig:
     """LLM 配置"""
     provider: str = "minimax"
     api_key: str = ""
-    api_key_env: str = "MINIMAX_API_KEY"
-    model: str = "MiniMax-M3"
-    base_url: str = "https://api.minimaxi.com/v1"
+    api_key_env: str = ""
+    model: str = ""
+    base_url: str = ""
     max_tokens: int = 8192
     max_document_chars: int = 800000  # ~1M tokens 的 80%，用于整篇文档分析
     temperature: float = 1.0
     reasoning_split: bool = True
     fallback: LLMFallbackConfig = field(default_factory=LLMFallbackConfig)
     generation_policy: Dict[str, Dict[str, Dict[str, str]]] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        profile = _load_model_profiles().get(self.provider)
+        if profile is None:
+            raise ValueError(
+                f"provider {self.provider!r} is not defined in config/models.yaml"
+            )
+        if not self.model:
+            self.model = profile["model"]
+        if not self.base_url:
+            self.base_url = profile["base_url"]
+        if not self.api_key_env:
+            self.api_key_env = profile["api_key_env"]
+        if not self.api_key:
+            self.api_key = os.getenv(self.api_key_env, "")
 
     def generation_options(self, purpose: str = "general") -> Dict[str, Any]:
         """Resolve explicit provider/purpose options without credentials or defaults."""
@@ -193,7 +263,7 @@ class Config:
         加载配置
         
         优先级: MiniMax/MiMo 项目受管 Key；DeepSeek 环境变量优先、.env 补缺。
-        模型参数来自 config.yaml，其次代码默认值。
+        模型参数来自 config/models.yaml（单一模型源），config.yaml 只选择 provider 并可逐项覆盖。
         
         Args:
             config_path: 配置文件路径，默认为 ~/company-wiki/config.yaml
@@ -288,15 +358,9 @@ class Config:
     def _build_config(raw: Dict[str, Any], base_dir: Path, *, llm_only: bool = False,
                       llm_provider: Optional[str] = None) -> 'Config':
         """构建配置对象"""
-        # LLM 配置
+        # LLM 配置（provider 选择 + config/models.yaml 单一模型源）
         llm_raw = raw.get("llm", {})
-        provider_defaults = {
-            "minimax": ("MINIMAX_API_KEY", "MiniMax-M3", "https://api.minimaxi.com/v1"),
-            "mimo": ("MIMO_API_KEY", "mimo-v2.6-flash", "https://token-plan-cn.xiaomimimo.com/v1"),
-            "deepseek": ("DEEPSEEK_API_KEY", "deepseek-flash", "https://api.deepseek.com"),
-            "openai": ("OPENAI_API_KEY", "gpt-4", "https://api.openai.com/v1"),
-            "claude": ("ANTHROPIC_API_KEY", "claude-3-opus-20240229", "https://api.anthropic.com"),
-        }
+        model_profiles = _load_model_profiles(base_dir)
         provider = llm_raw.get("provider", "minimax")
         if llm_only:
             # Select the actual profile before constructing its credentials or
@@ -319,16 +383,22 @@ class Config:
                             selected[name] = configured_fallback[name]
                 llm_raw = {**selected, "provider": selected_provider}
                 provider = selected_provider
-        api_key_env, default_model, default_base_url = provider_defaults.get(
-            provider, provider_defaults["minimax"]
-        )
+        selected_profile = model_profiles.get(provider) or model_profiles.get("minimax")
+        if selected_profile is None:
+            raise ValueError("config/models.yaml defines neither the selected provider nor minimax")
+        api_key_env = selected_profile["api_key_env"]
+        default_model = selected_profile["model"]
+        default_base_url = selected_profile["base_url"]
         fallback = LLMFallbackConfig()
         if not llm_only:
             fallback_raw = llm_raw.get("fallback", {})
             fallback_provider = fallback_raw.get("provider", "mimo")
-            fallback_env, fallback_model, fallback_base_url = provider_defaults.get(
-                fallback_provider, provider_defaults["mimo"]
-            )
+            fallback_profile = model_profiles.get(fallback_provider) or model_profiles.get("mimo")
+            if fallback_profile is None:
+                raise ValueError("config/models.yaml defines neither the fallback provider nor mimo")
+            fallback_env = fallback_profile["api_key_env"]
+            fallback_model = fallback_profile["model"]
+            fallback_base_url = fallback_profile["base_url"]
             fallback = LLMFallbackConfig(
                 provider=fallback_provider,
                 api_key=os.getenv(fallback_env, ""),
