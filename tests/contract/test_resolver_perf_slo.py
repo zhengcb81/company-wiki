@@ -31,7 +31,7 @@ def library(tmp_path_factory):
             ),
         )
     )
-    catalog.store  # initialize the catalog schema
+    _ = catalog.store  # initialize the catalog schema
     con = catalog.store._connect()
     try:
         con.execute("BEGIN")

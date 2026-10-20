@@ -211,7 +211,7 @@ def _captured_source_url(receipt: dict[str, Any]) -> str | None:
         if (parts.scheme not in {"https", "http"} or not parts.hostname
                 or parts.username or parts.password):
             return None
-        parts.port  # Validate a declared port without any network operation.
+        _ = parts.port  # Validate a declared port without any network operation.
     except ValueError:
         return None
     return url

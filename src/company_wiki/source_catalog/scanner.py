@@ -2167,7 +2167,7 @@ def scan_root_strategy(
             candidates = scan_root_via_adapter(root, company_names, progress=progress, **options,
                 **({"relative_paths": relative_paths} if relative_paths is not None else {}))
         except AdapterDispatchError as exc:
-            raise ScannerFacadeError(f"v2 scanner unavailable (fail closed): {exc}")
+            raise ScannerFacadeError(f"v2 scanner unavailable (fail closed): {exc}") from exc
         except Exception as exc:  # adapter runtime failure -> fail closed, no v1 fallback
             from .source_reader import SourceReadError
             if isinstance(exc, SourceReadError):
@@ -2175,7 +2175,7 @@ def scan_root_strategy(
             raise ScannerFacadeError(
                 f"v2 scanner failed (fail closed, no legacy fallback): "
                 f"{type(exc).__name__}: {exc}"
-            )
+            ) from exc
         return candidates, 0, 0
     return _scan_root_v1(
         root,

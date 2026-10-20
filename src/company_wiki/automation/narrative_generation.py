@@ -232,7 +232,7 @@ def _projection_effective_model(options: Mapping[str, Any]) -> dict[str, Any]:
             or any(char.isspace() for char in endpoint)
         ):
             raise ValueError("invalid endpoint")
-        parsed.port  # Validate malformed/out-of-range ports without opening a connection.
+        _ = parsed.port  # Validate malformed/out-of-range ports without opening a connection.
     except ValueError as exc:
         raise ValueError(
             "projection generation requires a credential-free HTTP endpoint"

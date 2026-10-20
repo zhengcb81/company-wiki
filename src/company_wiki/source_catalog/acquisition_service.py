@@ -188,7 +188,7 @@ class SourceAcquisitionService:
                     self.coordinator.cleanup_target(request, selected.candidate)
                 except Exception as cleanup_error:
                     exc.add_note(f"staging cleanup failed: {type(cleanup_error).__name__}")
-                    raise exc
+                    raise exc from cleanup_error
                 if budget is not None:
                     budget.ensure_open()
         raise AssertionError("bounded staging loop did not return or raise")

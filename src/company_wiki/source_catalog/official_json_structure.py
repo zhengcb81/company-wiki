@@ -148,7 +148,7 @@ class JsonStructureNode:
 
     @property
     def member_names(self) -> tuple[str, ...]:
-        return tuple((self._members or {}))
+        return tuple(self._members or {})
 
     def members(self) -> dict[str, "JsonStructureNode"]:
         return dict(self._members or {})

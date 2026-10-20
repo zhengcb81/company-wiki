@@ -34,7 +34,7 @@ def lake(root, *, portfolio=False):
             project_root=root, catalog_dir=root / "catalog", roots=tuple(roots)
         )
     )
-    cat.store  # initialize an empty owned catalog before read-only discovery
+    _ = cat.store  # initialize an empty owned catalog before read-only discovery
     SecurityMasterStore(cat.config.catalog_dir / "security_master").write_market(
         "US",
         (

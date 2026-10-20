@@ -189,7 +189,7 @@ def _cli(
                 "owned_pid": process.pid,
             },
         )
-        raise TimeoutError("PHASE_C_OWNED_CLI_TIMEOUT")
+        raise TimeoutError("PHASE_C_OWNED_CLI_TIMEOUT") from None
     (output / (label + ".stderr.log")).write_bytes(stderr)
     if not compact_stdout:
         (output / (label + ".stdout.json")).write_bytes(stdout)

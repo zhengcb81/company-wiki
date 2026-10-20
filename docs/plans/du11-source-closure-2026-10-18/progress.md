@@ -1,3 +1,31 @@
+## 全项目代码质量审计：基线、已修与路线图（2026-10-20）
+
+### 基线（未做过的部分）
+- **Lint 策略**：`ruff` 之前只用默认 `E4/E7/E9/F`；扩到 `B/SIM/UP/C4` 有 **1022** 条（主要是 `UP006/UP045/UP035` 类型现代化）。
+- **复杂度**：按默认阈值统计 **C901 292、PLR0912 173、PLR0915 111**（这些规则此前未启用）。
+- **类型检查**：CI 只查 45 个契约模块；全 `src` **mypy 335 errors / 85 files**。
+- **大模块**：`narrative_evidence` 109KB、`resolver` 100KB、`narrative_batch` 100KB、`scanner` 98KB。
+- **安全扫描盲区**：CI 的硬编码密钥 grep 只覆盖 `scripts/ tests/`，不含 `src/ tools/`。
+- **依赖**：运行时依赖无上限（PyMuPDF 2.0 正是因此破坏 CI）；`pyproject` extras 与 `requirements.txt` 双份维护。
+
+### 本轮已修
+- `PyMuPDF>=1.23.0,<2.0` 同步到 `pyproject` 的 `pdf/catalog/all` extras。
+- 密钥扫描范围扩到 `src/ tools/`。
+- 修复 **21 处 src** 与 **7 处 tests/scripts/tools** 的 B904/B018/B009/UP034/UP041；在 `pyproject` 启用这些规则，`ruff` 全仓干净。
+- 验证：受影响用例 **131 passed**；`compileall` 通过；全量单测 **7033 passed / 24 skipped**。
+
+### 后续路线（按性价比）
+1. **类型棘轮**：按模块组清零 mypy（automation → source_catalog → document_*），零后把全 `src` 加入 CI。
+2. **复杂度预算**：先重构 top 20 函数，再启用 `C901` 阈值（如 20），禁止新增超标。
+3. **大模块拆分**：`narrative_evidence/resolver/narrative_batch/scanner` 按稳定接口拆包。
+4. **Lint 扩面**：`UP006/UP045`（类型注解现代化）与 `SIM/ARG/B905` 分批 + 计数棘轮。
+5. **依赖治理**：为 CI 生成 constraints/lock，或给已验证大版本加上限。
+6. **配置去重**：让 `scripts/config.py` 复用 `company_wiki.model_config`，去掉第二份 yaml 解析。
+7. **覆盖率**：先测基线，再设 `src` 覆盖率下限。
+8. **异常卫生**：非边界的 `except Exception` 逐步收窄并加日志/测试。
+
+---
+
 ## CI 红根因：PyMuPDF 2.0 破坏 PDF 文本/表格提取（2026-10-19）
 
 - 用 WSL + Python 3.12 + `pip install -r requirements*.txt`（与 CI 同依赖）稳定复现 3 个 PDF 失败，报错是**文本/表格提取结果变化**：`'Storesbyoperatingmodel'`（空格丢失）、列号 `{0,2}` vs `{0,1}`、缺 `-1,200` 单元格。

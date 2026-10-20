@@ -107,11 +107,11 @@ jobs:
 
       - name: Scan for hardcoded secrets
         run: |
-          if grep -rn 'sk-[0-9a-f]\{32\}' scripts/ tests/ --include="*.py" | grep -v "test\|example\|placeholder\|your_"; then
+          if grep -rn 'sk-[0-9a-f]\{32\}' src/ scripts/ tests/ tools/ --include="*.py" | grep -v "test\|example\|placeholder\|your_"; then
             echo "WARNING: Potential hardcoded API key found"
             exit 1
           fi
-          if grep -rn 'tvly-dev-[a-zA-Z0-9]\{20,\}' scripts/ tests/ --include="*.py" | grep -v "test\|example\|placeholder\|your_"; then
+          if grep -rn 'tvly-dev-[a-zA-Z0-9]\{20,\}' src/ scripts/ tests/ tools/ --include="*.py" | grep -v "test\|example\|placeholder\|your_"; then
             echo "WARNING: Potential hardcoded Tavily key found"
             exit 1
           fi

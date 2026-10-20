@@ -8,7 +8,6 @@ import json
 import math
 import os
 import re
-import socket
 import time
 from typing import Any, Protocol
 from urllib.parse import urlsplit
@@ -385,7 +384,7 @@ class NarrativeHTTPModel:
                 response_sink(complete_body, http_status=response.status,
                     duration_ms=max(0, int((time.monotonic() - started) * 1000)))
             return self._response(request, complete_body, started, http_status=response.status)
-        except (socket.timeout, TimeoutError):
+        except TimeoutError:
             raise ModelTimeoutError("MODEL_TIMEOUT") from None
         except (OSError, http.client.HTTPException, ValueError, UnicodeError):
             raise ModelResponseError("MODEL_HTTP_TRANSPORT") from None

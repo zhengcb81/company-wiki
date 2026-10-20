@@ -327,7 +327,7 @@ def load_json(path: Path, default: Any) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise SystemExit(f"{path} is not readable JSON ({type(exc).__name__}: {exc}); "
-                         f"the gate cannot run - fix the file")
+                         f"the gate cannot run - fix the file") from exc
 
 
 def main(argv: list[str] | None = None) -> int:

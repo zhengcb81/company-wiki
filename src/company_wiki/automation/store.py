@@ -1135,7 +1135,7 @@ class AutomationStore:
                 raise IntegrityViolationError(
                     f"dependency ({job_id}, {depends_on_job_id}) exists with "
                     f"different required_status"
-                )
+                ) from None
 
         return self._write_transaction(_op)
 

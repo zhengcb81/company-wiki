@@ -102,7 +102,7 @@ def test_real_scanner_and_discovery_share_first_route_owner_for_sidecar_group(tm
     try:
         # Do not scan: initialize empty catalog to prove local preparation uses
         # the same route owner and the same caller-owned discovery budget.
-        cat.store
+        _ = cat.store
         assert _discover_source_groups(cat, _identity(), LocalReadBudget(LocalPrepareLimits()))
         reader = SourceVersionReader(cat)
         result = reader.query_local(SourceRequest(entity="示例 公司", market="CN",
@@ -128,7 +128,7 @@ def test_distinct_layout_discovery_shares_one_aggregate_group_budget(tmp_path):
     cat = SourceCatalog(CatalogConfig(tmp_path, tmp_path / "catalog", (root,)))
     budget = LocalReadBudget(LocalPrepareLimits(max_discovery_groups=1))
     try:
-        cat.store
+        _ = cat.store
         with pytest.raises(SourceReadError, match="local_source_group_limit"):
             _discover_source_groups(cat, _identity(), budget)
         assert budget.discovery_groups == 2  # second layout does not get a new allowance

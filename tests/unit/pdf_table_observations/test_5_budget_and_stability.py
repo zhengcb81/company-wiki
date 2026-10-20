@@ -110,7 +110,7 @@ def test_exhausted_budget_flows_to_the_binder_as_partial_not_an_exception():
     budget.charge(budget.max_work_units - budget.used)  # 用尽
     try:
         bound = bind_operating_table(result["tables"][0], work_budget=budget)
-    except WorkBudgetExceeded:  # pragma: no cover - contract violation
-        raise AssertionError("binder must report partial, not raise")
+    except WorkBudgetExceeded as exc:  # pragma: no cover - contract violation
+        raise AssertionError("binder must report partial, not raise") from exc
     assert bound["status"] == "partial"
     assert "work_budget_exhausted" in {d["code"] for d in bound["diagnostics"]}

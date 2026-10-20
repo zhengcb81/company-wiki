@@ -373,14 +373,14 @@ class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
                     if owner["state"] == "live":
                         raise CatalogOperationLockedError(
                             f"catalog operation already running: pid={owner['pid']}"
-                        )
+                        ) from None
                     if attempt < 2 and _remove_if_unchanged(
                         self.path, existing_text
                     ):
                         continue
                     raise CatalogOperationLockedError(
                         "unable to replace stale catalog lock"
-                    )
+                    ) from None
                 else:
                     with os.fdopen(
                         descriptor, "w", encoding="utf-8", newline="\n"
