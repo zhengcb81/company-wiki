@@ -2,7 +2,7 @@
 import hashlib
 from types import SimpleNamespace
 
-import fitz
+import pymupdf as fitz
 import pytest
 
 from company_wiki.automation import narrative_select as execution

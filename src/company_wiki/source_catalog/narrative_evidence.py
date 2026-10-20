@@ -1543,7 +1543,7 @@ def _emit_pdf_page(
 
 def _fitz_module() -> Any:
     try:
-        import fitz  # type: ignore[import-untyped]
+        import pymupdf as fitz  # type: ignore[import-untyped]
     except ImportError as exc:  # pragma: no cover - environment-specific
         raise RuntimeError(
             "PDF parsing requires the optional PyMuPDF dependency"

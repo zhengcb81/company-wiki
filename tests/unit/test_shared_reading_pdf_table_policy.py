@@ -1,6 +1,6 @@
 """A new reading policy discovers operating matrices; old parser replay is stable."""
 from hashlib import sha256
-import fitz
+import pymupdf as fitz
 from company_wiki.source_catalog.narrative_evidence import parse_pdf_bytes
 from company_wiki.source_catalog.narrative_replay import (
     prepare_pdf_replay_bytes, verify_replayed_pdf_spans,

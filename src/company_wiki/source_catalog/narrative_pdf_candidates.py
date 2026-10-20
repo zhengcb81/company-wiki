@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 import math
+from typing import Any, TypeGuard
 
 from company_wiki.document_understanding.structure.table_purpose import (
     operating_header, qualify_table,
@@ -71,11 +72,11 @@ class _CandidateWork:
         return self.purposes[key]
 
 
-def _sequence(value):
+def _sequence(value: Any) -> TypeGuard[Sequence[Any]]:
     return isinstance(value, Sequence) and not isinstance(value, (str, bytes))
 
 
-def _number(value):
+def _number(value: Any) -> TypeGuard[int | float]:
     if type(value) not in (int, float):
         return False
     try:
@@ -85,7 +86,7 @@ def _number(value):
 
 
 def _measure_rows(snapshot, budget, width, height):
-    spans = []
+    spans: list[tuple[float, float, float, float, str]] = []
     blocks = snapshot.get('blocks', ())
     if not _sequence(blocks):
         return [], True
@@ -130,7 +131,7 @@ def _measure_rows(snapshot, budget, width, height):
                 spans.append((float(box[0]), float(box[1]), float(box[2]), float(box[3]), text))
     budget.charge(1 + len(spans) * max(1, len(spans).bit_length()))
     spans.sort(key=lambda s: ((s[1] + s[3]) / 2, s[0]))
-    groups = []
+    groups: list[dict[str, Any]] = []
     for span in spans:
         budget.charge()
         center, height = (span[1] + span[3]) / 2, span[3] - span[1]
@@ -143,7 +144,7 @@ def _measure_rows(snapshot, budget, width, height):
         raw = group['spans']
         budget.charge(1 + len(raw) * max(1, len(raw).bit_length()))
         raw.sort(key=lambda s: s[0])
-        cells = []
+        cells: list[dict[str, Any]] = []
         for x0, y0, x1, y1, text in raw:
             budget.charge()
             if cells and x0 <= cells[-1]['x1'] + 3:
@@ -293,8 +294,8 @@ def observe_pdf_candidate(snapshot, *, work_budget: WorkBudget, qa: bool = False
     ROOT ensures a previous signature is from this source's immediately prior
     page. Missing/malformed or resource-limited observations never retain it.
     """
-    result = {'candidate': False, 'continuation': None, 'reason': 'no_measured_operating_grid',
-              'partial': False}
+    result: dict[str, Any] = {'candidate': False, 'continuation': None,
+                               'reason': 'no_measured_operating_grid', 'partial': False}
     budget = _CandidateWork(work_budget)
     try:
         budget.charge()
@@ -337,7 +338,8 @@ def observe_pdf_candidate(snapshot, *, work_budget: WorkBudget, qa: bool = False
                 active, last = None, None
                 continue
             close = last is not None and row['y0'] - last['y1'] <= max(24, 3 * typical)
-            if (active and close and _aligned(last['cells'], cells, budget, exact=True)
+            if (active and last is not None and close
+                    and _aligned(last['cells'], cells, budget, exact=True)
                     and _eligible_continuation(active, row, budget)):
                 active['rows'] += 1
                 if active['rows'] >= 2:

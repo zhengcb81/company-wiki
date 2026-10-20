@@ -57,7 +57,7 @@ def _attach_capture_http_observation(error: Exception, receipt: dict[str, Any]) 
     """
     observed = receipt.get("http_observation")
     if isinstance(observed, dict):
-        finite = {}
+        finite: dict[str, Any] = {}
         status = observed.get("status_code")
         if type(status) is int and 100 <= status <= 599:
             finite["status_code"] = status
@@ -153,7 +153,7 @@ def _validate_bytes(data, mime):
     if mime == "application/pdf":
         if not data.startswith(b"%PDF-"):
             raise OfficialSourceError("mime_mismatch")
-        import fitz
+        import pymupdf as fitz
 
         try:
             with fitz.open(stream=data, filetype="pdf") as doc:
@@ -367,9 +367,10 @@ def _persist_capture(catalog, original, request, *, complete=True):
     except Exception as primary:
         # If the receipt's own storage fails, retain the raw bytes and expose
         # the named incomplete recovery material; never pretend it is replayable.
-        primary.capture_id = capture_id
-        primary.capture_receipt = dict(request["capture_receipt"])
-        _attach_capture_http_observation(primary, primary.capture_receipt)
+        receipt = dict(request["capture_receipt"])
+        setattr(primary, "capture_id", capture_id)
+        setattr(primary, "capture_receipt", receipt)
+        _attach_capture_http_observation(primary, receipt)
         try:
             _journal(catalog, state, outcome="failed", reason="capture_persistence_failed",
                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()),
@@ -476,9 +477,10 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
         descriptor.unlink()
         return out
     except Exception as primary:
-        primary.capture_id = state["capture_id"]
-        primary.capture_receipt = dict(request["capture_receipt"])
-        _attach_capture_http_observation(primary, primary.capture_receipt)
+        receipt = dict(request["capture_receipt"])
+        setattr(primary, "capture_id", state["capture_id"])
+        setattr(primary, "capture_receipt", receipt)
+        _attach_capture_http_observation(primary, receipt)
         try:
             _journal(catalog, state, outcome="failed", reason="official_import_failed",
                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()))
@@ -824,7 +826,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     def operation_usage():
         return {"schema_version": "1.0", "response_bytes": budget.response_bytes_used - before,
                 "cost_usd": str(budget.cost_usd_used - cost_before)}
-    capture = {"capture_method": "bounded_http", "tool_name": "company-wiki-official-source",
+    http_capture: dict[str, Any] = {"capture_method": "bounded_http", "tool_name": "company-wiki-official-source",
                "tool_call_id": "http-" + uuid.uuid4().hex, "http_requests": 0,
                "started_at": datetime.now(timezone.utc).isoformat()}
     partial = bytearray()
@@ -832,11 +834,11 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         def __init__(self, inner):
             self.inner = inner
         async def handle_async_request(self, http_request):
-            capture["http_requests"] += 1
+            http_capture["http_requests"] += 1
             budget.observe_provider(started=True, complete=True)
             response = await self.inner.handle_async_request(http_request)
             # Capture actual finite metadata before outer codec/header refusal.
-            capture.update(http_status=response.status_code, effective_url=str(http_request.url),
+            http_capture.update(http_status=response.status_code, effective_url=str(http_request.url),
                            response_mime_type=response_observation(response)["mime_type"],
                            http_observation=response_observation(response))
             return response
@@ -847,7 +849,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(inner, budget),
                                      follow_redirects=True, max_redirects=5, trust_env=False) as client:
             async with client.stream("GET", source["source_url"]) as response:
-                capture.update(http_status=response.status_code, effective_url=str(response.url),
+                http_capture.update(http_status=response.status_code, effective_url=str(response.url),
                                response_mime_type=response.headers.get("content-type", "").split(";")[0].strip().lower())
                 async for chunk in response.aiter_bytes():
                     partial.extend(chunk)
@@ -863,44 +865,45 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         budget.ensure_new_request()
         original = asyncio.run(bounded())
     except Exception as primary:
-        started = capture["http_requests"] > 0
+        started = http_capture["http_requests"] > 0
         complete = not started
         budget.observe_provider(started=started, complete=complete)
         wire_used = budget.wire_response_bytes_used - wire_before
         setattr(primary, "http_wire_bytes", wire_used)
         setattr(primary, "http_wire_usage_complete", complete)
-        if "http_observation" in capture:
-            setattr(primary, "http_observation", capture["http_observation"])
-        primary.acquisition_usage = operation_usage()
-        primary.acquisition_usage_complete = complete
-        primary.provider_started = started
-        failed_receipt = {**capture, "captured_at": datetime.now(timezone.utc).isoformat(),
+        if "http_observation" in http_capture:
+            setattr(primary, "http_observation", http_capture["http_observation"])
+        usage = operation_usage()
+        setattr(primary, "acquisition_usage", usage)
+        setattr(primary, "acquisition_usage_complete", complete)
+        setattr(primary, "provider_started", started)
+        failed_receipt = {**http_capture, "captured_at": datetime.now(timezone.utc).isoformat(),
                           "response_bytes": len(partial), "content_sha256": hashlib.sha256(partial).hexdigest(),
-                          "usage_complete": complete, "acquisition_usage": primary.acquisition_usage,
+                          "usage_complete": complete, "acquisition_usage": usage,
                           "http_wire_bytes": wire_used, "http_wire_usage_complete": complete}
-        primary.capture_receipt = failed_receipt
+        setattr(primary, "capture_receipt", failed_receipt)
         _attach_capture_http_observation(primary, failed_receipt)
         failed_request = {"schema_version": IMPORT_REQUEST_SCHEMA, "request_id": request["request_id"],
                           "source": source, "mime_type": mime, "content_sha256": failed_receipt["content_sha256"],
                           "max_bytes": cap, "capture_receipt": failed_receipt}
         try:
             staged, _, state = _persist_capture(catalog, bytes(partial), failed_request, complete=False)
-            primary.capture_id = state["capture_id"]
+            setattr(primary, "capture_id", state["capture_id"])
             _journal(catalog, state, outcome="failed", reason=getattr(primary, "error_code", "http_failed"),
                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()),
-                     error=canonical_json({"acquisition_usage": primary.acquisition_usage,
+                     error=canonical_json({"acquisition_usage": usage,
                                            "provider_started": started, "usage_complete": complete}))
         except Exception as receipt_error:
             primary.add_note("capture recovery persistence failed: " + type(receipt_error).__name__)
         raise
     sha = hashlib.sha256(original).hexdigest()
-    capture.update(captured_at=datetime.now(timezone.utc).isoformat(), response_bytes=len(original),
+    http_capture.update(captured_at=datetime.now(timezone.utc).isoformat(), response_bytes=len(original),
                    content_sha256=sha, usage_complete=True,
                    http_wire_bytes=budget.wire_response_bytes_used - wire_before, http_wire_usage_complete=True,
                    acquisition_usage=operation_usage(), cumulative_acquisition_usage=usage_receipt(budget))
     local = {"schema_version": IMPORT_REQUEST_SCHEMA, "request_id": request["request_id"],
              "source": source, "mime_type": mime, "content_sha256": sha,
-             "max_bytes": cap, "capture_receipt": capture}
+             "max_bytes": cap, "capture_receipt": http_capture}
     if expected is not None:
         local["expected_content_sha256"] = expected
     state = None
@@ -913,15 +916,15 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         out = _import_retained(catalog, staged, descriptor, state)
     except Exception as primary:
         if state is not None:
-            primary.capture_id = state["capture_id"]
-        primary.capture_receipt = capture
-        _attach_capture_http_observation(primary, capture)
-        primary.acquisition_usage = capture["acquisition_usage"]
-        primary.acquisition_usage_complete = True
-        primary.provider_started = True
+            setattr(primary, "capture_id", state["capture_id"])
+        setattr(primary, "capture_receipt", http_capture)
+        _attach_capture_http_observation(primary, http_capture)
+        setattr(primary, "acquisition_usage", http_capture["acquisition_usage"])
+        setattr(primary, "acquisition_usage_complete", True)
+        setattr(primary, "provider_started", True)
         raise
     out["download_events"] = 1
-    out["acquisition_usage"] = capture["acquisition_usage"]
+    out["acquisition_usage"] = http_capture["acquisition_usage"]
     return out
 
 

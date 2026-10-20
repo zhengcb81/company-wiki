@@ -1,3 +1,12 @@
+## 类型棘轮第二批：source_catalog（三文件清零）+ stdout 污染修复（2026-10-20）
+
+- `source_catalog` 包 **182 → 121 errors**：`narrative_pdf_candidates`（24）用 `TypeGuard` 收窄快照形状并注解列表；`official_source_flow`（22）修掉动态异常属性与重复 `capture` 变量、收据字典类型；`normalizer`（17）修 POSIX-only `os` 调用、`BaseProcess` 类型、`payload`/`manifest` 守卫。
+- **真 bug**：PyMuPDF 1.28 的 `fitz` 兼容层把弃用警告 **打印到 stdout**，污染公开 CLI 的机器可读 JSON（本地干净的 HEAD 上也复现该集成测试失败）。全仓 24 个文件的 `import fitz` 改为 `import pymupdf as fitz`，警告消失，该集成测试恢复通过。
+- `pyproject` 的 mypy overrides 增加 `fitz/pymupdf/openpyxl/xlrd`（可选依赖无 stubs）。
+- 验证：相关 75 passed；`ruff` 全仓干净；全量单测 **7033 passed / 24 skipped**。剩余 source_catalog 121 条，下一批 `scanner/cli/assertion_service`。
+
+---
+
 ## 类型棘轮第一批：automation 包清零（2026-10-20）
 
 - `mypy src/company_wiki/automation`：**15 errors → 0**（57 文件）。修复全部是真问题：
@@ -7,7 +16,7 @@
   - `narrative_selection_generation` / `narrative_generation` 的 sha256 校验、`narrative_model_extractive` 的 `reading_context` 与 `seen` 类型、`narrative_transport` 的 receipt 字典、`cli` 的 events 元组、`supervisor` 的 Job|None、`worker_factory` 的 kwargs 展开。
 - CI 新增 `python -m mypy src/company_wiki/automation` 步骤，job 超时 5→10 分钟以容纳它。
 - 验证：相关单测 **193 passed**；`ruff` 全仓干净；全量单测 **7033 passed / 24 skipped**。
-- 下一批：`source_catalog` → `document_*`，逐个包清零后把整包加入 CI。
+- 剩余规模（本轮实测）：`source_catalog` **182 errors / 43 files**、`document_understanding + document_normalization` **63 / 14**，其余顶层/`source_contract` 约 **75**。下一批从 `source_catalog` 开始。
 
 ---
 

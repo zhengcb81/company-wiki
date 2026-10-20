@@ -221,7 +221,7 @@ def mock_env_vars(monkeypatch):
 @pytest.fixture
 def synthetic_announcement_pdf(tmp_path):
     """Create a small deterministic text PDF without production/raw dependencies."""
-    import fitz
+    import pymupdf as fitz
 
     pdf_path = tmp_path / "测试公司：2026年重大事项公告.pdf"
     document = fitz.open()

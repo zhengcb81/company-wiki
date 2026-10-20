@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union
 
 try:
-    import fitz  # PyMuPDF
+    import pymupdf as fitz  # PyMuPDF
 except ImportError:
     fitz = None
 

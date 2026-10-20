@@ -2,7 +2,7 @@
 from copy import deepcopy
 from hashlib import sha256
 
-import fitz
+import pymupdf as fitz
 import pytest
 
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult

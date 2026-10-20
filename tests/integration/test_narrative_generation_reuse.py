@@ -18,7 +18,7 @@ loopback_model_server = official.loopback_model_server
 @contextmanager
 def setup_source(endpoint, mime="text/html"):
     if mime == "application/pdf":
-        import fitz
+        import pymupdf as fitz
 
         doc = fitz.open()
         doc.new_page().insert_text(

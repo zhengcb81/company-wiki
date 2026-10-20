@@ -55,7 +55,7 @@ def extract_text_pages(path: Path) -> dict[int | None, str]:
     target = Path(path)
     suffix = target.suffix.casefold()
     if suffix == ".pdf":
-        import fitz  # local dependency of the reading host, not of the oracle
+        import pymupdf as fitz  # local dependency of the reading host, not of the oracle
 
         pages: dict[int | None, str] = {}
         with fitz.open(target) as document:

@@ -101,6 +101,6 @@ follow_imports = "skip"
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ["yaml"]
+module = ["yaml", "fitz", "pymupdf", "openpyxl", "xlrd"]
 ignore_missing_imports = true
 

@@ -42,7 +42,7 @@ except Exception:  # pragma: no cover - fallback if the sibling fixture is absen
 
 
 try:
-    import fitz  # PyMuPDF, read-only real extraction
+    import pymupdf as fitz  # PyMuPDF, read-only real extraction
 except Exception:  # pragma: no cover - hosts without PyMuPDF
     fitz = None
 

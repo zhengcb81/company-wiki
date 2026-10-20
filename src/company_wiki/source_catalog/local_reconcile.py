@@ -296,7 +296,7 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
         prior_patch.get(key) is None for key in required
     ):
         if ref.mime_type == "application/pdf" and identity.market == "CN":
-            import fitz
+            import pymupdf as fitz
 
             with fitz.open(stream=original.data, filetype="pdf") as pdf:
                 budget.check()

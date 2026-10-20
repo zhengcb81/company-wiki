@@ -241,7 +241,7 @@ def fixture_docs() -> dict[str, FixtureDoc]:
 
 def pdf_bytes(pages: tuple[str, ...]) -> bytes:
     """Render a real text-layer PDF through PyMuPDF; no format is simulated."""
-    import fitz
+    import pymupdf as fitz
 
     document = fitz.open()
     try:

@@ -98,7 +98,7 @@ def _text_for_mime(data: bytes, mime_type: str, *, normalization=None) -> str:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED") from exc
     if mime_type == "application/pdf":
         try:
-            import fitz  # type: ignore[import-untyped]
+            import pymupdf as fitz  # type: ignore[import-untyped]
         except ImportError:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_PDF_UNAVAILABLE") from None
         try:

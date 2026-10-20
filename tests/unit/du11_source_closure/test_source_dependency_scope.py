@@ -25,7 +25,7 @@ def test_actual_source_grammar_bytes_invalidate_decision_without_a_version_bump(
 
 
 def test_real_pdf_parser_identifies_its_format_for_source_flow():
-    import fitz
+    import pymupdf as fitz
     from company_wiki.source_catalog.narrative_evidence import parse_pdf_bytes
     from company_wiki.source_contract import source_id_for_sha256
 

@@ -267,7 +267,7 @@ def test_discovery_limits_do_not_turn_truncation_into_no_materials():
 def test_pdf_call_is_normalized_as_pdf_and_unknown_language_is_detected():
     from company_wiki.automation.narrative_batch import build_batch_events
     from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
-    import fitz
+    import pymupdf as fitz
 
     doc = fitz.open()
     doc.new_page().insert_text(
@@ -667,7 +667,7 @@ def _public_narrative(root, config, operation, request_value):
 def test_configured_official_three_formats_summary_public_read_and_repeat(
     loopback_model_server, monkeypatch
 ):
-    import fitz
+    import pymupdf as fitz
     from company_wiki.source_catalog.official_source_flow import (
         prepare_official_narrative_request,
     )
@@ -899,7 +899,7 @@ def test_configured_official_three_formats_summary_public_read_and_repeat(
 def test_image_only_pdf_is_parser_incomplete_not_successful_skip(
     loopback_model_server, monkeypatch
 ):
-    import fitz
+    import pymupdf as fitz
     from company_wiki.source_catalog.official_source_flow import (
         prepare_official_narrative_request,
     )
@@ -1291,7 +1291,7 @@ def test_compressed_capture_public_original_and_zero_get_reuse(monkeypatch, codi
     from company_wiki.source_catalog.download_budget import AcquisitionBudget
     _mock_local_pair(monkeypatch)
     if mime == "application/pdf":
-        import fitz
+        import pymupdf as fitz
         with fitz.open() as doc:
             doc.new_page().insert_text((72,72), "Acme business update: new product awaits customer qualification.")
             body = doc.tobytes()

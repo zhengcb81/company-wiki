@@ -2,7 +2,7 @@
 from hashlib import sha256
 from types import SimpleNamespace
 
-import fitz
+import pymupdf as fitz
 import pytest
 
 from company_wiki.resource_budget import new_document_work_budget

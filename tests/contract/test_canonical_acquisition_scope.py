@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-import fitz
+import pymupdf as fitz
 import pytest
 
 from company_wiki.source_catalog.acquisition import (

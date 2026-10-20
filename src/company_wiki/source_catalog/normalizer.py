@@ -10,6 +10,7 @@ import html
 import json
 import math
 import multiprocessing
+from multiprocessing.process import BaseProcess
 import os
 import sqlite3
 from pathlib import Path
@@ -328,7 +329,7 @@ def _exit_if_parser_parent_dies(parent_liveness: Any) -> None:
             # spawned by the parser are not left orphaned when the parent
             # monitor crashes.
             try:
-                os.killpg(os.getpgid(0), signal.SIGKILL)
+                os.killpg(os.getpgid(0), signal.SIGKILL)  # type: ignore[attr-defined]  # POSIX-only, guarded by os.name
             except (OSError, ProcessLookupError):
                 pass
         os._exit(70)
@@ -353,7 +354,7 @@ def _parser_process_entry(
     sys.stdout = sys.stderr
     if os.name != "nt":
         try:
-            os.setsid()
+            os.setsid()  # type: ignore[attr-defined]  # POSIX-only, guarded by os.name
         except OSError:
             pass
     start_event.wait()
@@ -392,7 +393,7 @@ def _parser_process_entry(
 class _WindowsParserJob:
     """Kill a parser and its descendants if the owning worker handle closes."""
 
-    def __init__(self, process: multiprocessing.Process):
+    def __init__(self, process: BaseProcess):
         self._handle: int | None = None
         if os.name != "nt":
             return
@@ -484,7 +485,7 @@ class _WindowsParserJob:
 
 
 def _terminate_parser_process(
-    process: multiprocessing.Process,
+    process: BaseProcess,
     job: _WindowsParserJob | None,
     *,
     grace_seconds: float = 2.0,
@@ -496,14 +497,14 @@ def _terminate_parser_process(
             _terminate_windows_process_tree(process.pid)
     elif process.pid is not None and process.is_alive():
         try:
-            os.killpg(process.pid, signal.SIGTERM)
+            os.killpg(process.pid, signal.SIGTERM)  # type: ignore[attr-defined]  # POSIX-only, guarded by os.name
         except (OSError, ProcessLookupError):
             process.terminate()
     process.join(timeout=grace_seconds)
     if process.is_alive():
         if os.name != "nt" and process.pid is not None:
             try:
-                os.killpg(process.pid, signal.SIGKILL)
+                os.killpg(process.pid, signal.SIGKILL)  # type: ignore[attr-defined]  # POSIX-only, guarded by os.name
             except (OSError, ProcessLookupError):
                 process.kill()
         else:
@@ -749,7 +750,7 @@ def _text_markdown(
         )
         for index, value in enumerate(values)
     )
-    parts = []
+    parts: list[str] = []
     for result in results:
         parts.extend(
             (
@@ -910,7 +911,7 @@ def _render_page_aware_markdown(result: PageAwarePDFResult) -> str:
 
 
 def _pdf_markdown(path: Path, manifest: SourceManifest) -> _Normalized:
-    import fitz
+    import pymupdf as fitz
 
     parser_version = str(getattr(fitz, "VersionBind", "1.0.0"))
     with fitz.open(str(path)) as document:
@@ -1074,7 +1075,9 @@ def _mht_markdown(path: Path, source_id: str) -> _Normalized:
     for part in message.walk():
         if part.get_content_type() == "text/html":
             charset = part.get_content_charset() or "utf-8"
-            payload = part.get_payload(decode=True) or b""
+            payload = part.get_payload(decode=True)
+            if not isinstance(payload, bytes):
+                payload = b""
             return _html_text_markdown(
                 _nfc_lf(payload.decode(charset, errors="replace")),
                 source_id,
@@ -1561,6 +1564,8 @@ def backfill_text_fingerprints(
                 )
 
         try:
+            if manifest is None:
+                raise SourceManifestMismatchError("manifest column is empty")
             if manifest.source_id != source_id or manifest.content_sha256 != source_sha256:
                 raise SourceManifestMismatchError("fingerprint source does not match its manifest")
             source_root = Path(locations[0]["root_path"])

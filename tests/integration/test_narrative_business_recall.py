@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import fitz
+import pymupdf as fitz
 import pytest
 
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult

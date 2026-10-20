@@ -151,7 +151,7 @@ class PdfLayoutCollector:
             self._diag("LAYOUT_CAPTURE_DEFERRED", page=page_number)
             return page.get_text("dict", sort=False)
         try:
-            import fitz  # type: ignore[import-untyped]
+            import pymupdf as fitz  # type: ignore[import-untyped]
 
             text_page = page.get_textpage(flags=fitz.TEXTFLAGS_DICT)
         except (AttributeError, RuntimeError, TypeError, ValueError):
@@ -178,7 +178,7 @@ class PdfLayoutCollector:
         if (self.limits["max_pages"] and self.limits["max_units"]
                 and self.limits["max_fine_elements"] and self._take()):
             try:
-                import fitz  # type: ignore[import-untyped]
+                import pymupdf as fitz  # type: ignore[import-untyped]
                 text_page = page.get_textpage(flags=fitz.TEXTFLAGS_DICT)
             except (AttributeError, RuntimeError, TypeError, ValueError):
                 self._diag("NATIVE_TEXT_PAGE_UNAVAILABLE", page=number)

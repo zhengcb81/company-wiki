@@ -2,7 +2,7 @@
 from dataclasses import replace
 from hashlib import sha256
 
-import fitz
+import pymupdf as fitz
 import pytest
 
 from company_wiki.document_normalization import normalize_document

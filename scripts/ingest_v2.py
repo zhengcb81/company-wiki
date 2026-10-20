@@ -92,7 +92,7 @@ def _pdf_metadata_date(file_path: str) -> Optional[str]:
     if not file_path.lower().endswith(".pdf"):
         return None
     try:
-        import fitz
+        import pymupdf as fitz
     except ImportError:
         return None
     try:

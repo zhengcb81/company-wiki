@@ -19,7 +19,7 @@ import json
 from pathlib import Path
 
 try:
-    import fitz  # PyMuPDF, read-only observation of font size/geometry
+    import pymupdf as fitz  # PyMuPDF, read-only observation of font size/geometry
 except Exception:  # pragma: no cover - exercised only on hosts without PyMuPDF
     fitz = None
 
