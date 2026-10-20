@@ -1,3 +1,13 @@
+## 暂停点（2026-10-20 23:55）
+
+- **当前绿点**：`e1f9dc54`，远端 CI success；工作树干净（仅其他计划的 `.planning` 未跟踪文件）。
+- **类型棘轮进度**：`automation` 0/57 且已加 CI 门禁；`source_catalog` **182 → 63**；`document_*` 63、其余顶层约 75 未动。
+- **本会话额外修复**：PyMuPDF `<2.0` 固定（CI 红根因）、`fitz` 警告污染 stdout（改为 `pymupdf as fitz`）、密钥扫描扩到 `src/tools`、启用 B904/B018/B009/UP034/UP041。
+- **恢复后的下一步**：① 清完 `source_catalog` 剩余 63（`narrative_reading`、`adapter_dispatch`、`resolver`、`extraction_quality` 等）并加包级 CI 门禁；② `document_*` 63；③ 顶层约 75；④ 复杂度预算、UP006/UP045、覆盖率基线、配置去重。
+- 暂停原因：用户要求先暂停。
+
+---
+
 ## 类型棘轮第三批：source_catalog 182 → 84（2026-10-20）
 
 - 清零：`scanner`（15）、`cli`（10）、`assertion_service`（10），以及一批注解/收窄（`narrative_ocr_groups`、`narrative_pdf_intent`、`narrative_reading`、`official_discovery`、`observability`、`reader`、`reconcile_retire_state`、`narrative_visual_units`）。
