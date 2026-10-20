@@ -218,10 +218,10 @@ class AutomationSupervisor:
             if all(job is not None and job.status in terminal for job in jobs):
                 return
             time.sleep(self._config.maintenance_interval_seconds)
-        states = {
-            job_id: (self._store.get_job(job_id).status.value if self._store.get_job(job_id) else None)
-            for job_id in job_ids
-        }
+        states: dict[str, str | None] = {}
+        for job_id in job_ids:
+            job = self._store.get_job(job_id)
+            states[job_id] = job.status.value if job is not None else None
         raise TimeoutError(f"jobs did not become terminal: {states}")
 
     def run_forever(self, stop_event: StopEvent | None = None) -> None:

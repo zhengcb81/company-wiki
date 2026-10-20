@@ -707,7 +707,10 @@ class NarrativeRunStore:
             if (member is None or record.job_id != job.job_id or job.job_type != "source.narrative_summarize"
                     or (member["input_hash"], member["handler_version"]) != (job.input_hash, job.handler_version)):
                 raise RunScopeError("paid recovery job binding differs")
-            pin = PaidResponsePin.from_json(record.paid_response_json)
+            paid_json = record.paid_response_json
+            if not isinstance(paid_json, str):
+                raise ReservationConflictError("paid response has no pinned bytes")
+            pin = PaidResponsePin.from_json(paid_json)
             if (record.request_sha256 != request_sha256 or pin.request_sha256 != request_sha256
                     or pin.body_sha256 != verified_response_sha256):
                 raise ReservationConflictError("paid recovery verified byte binding differs")

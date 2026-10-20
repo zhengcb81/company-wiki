@@ -225,9 +225,11 @@ class BudgetedNarrativeCaller:
                 response = self._model.replay_response(request, saved_body,
                     http_status=pin.http_status, duration_ms=pin.duration_ms)
             elif self._paid_responses is not None:
+                paid_responses = self._paid_responses
+
                 def capture(complete_body, *, http_status, duration_ms):
                     try:
-                        pin = self._paid_responses.put(complete_body,
+                        pin = paid_responses.put(complete_body,
                             request_sha256=request_sha256, model_id=self._model.model_id,
                             adapter_id=self._model.adapter_id, prompt_version=request.prompt_version,
                             http_status=http_status, duration_ms=duration_ms)
@@ -350,14 +352,20 @@ class BudgetedNarrativeCaller:
         if not charged:
             return None
         record = charged[0]
+        paid_responses = self._paid_responses
+        if paid_responses is None:
+            raise ValueError("paid responses are not configured")
+        paid_json = record.paid_response_json
+        if not isinstance(paid_json, str):
+            raise ValueError("paid response has no pinned bytes")
         try:
             if len(charged) != 1 or record.request_sha256 != request_sha256:
                 raise ValueError("paid operation identity differs")
-            pin = PaidResponsePin.from_json(record.paid_response_json)
+            pin = PaidResponsePin.from_json(paid_json)
             if (pin.request_sha256 != request_sha256 or pin.model_id != self._model.model_id
                     or pin.adapter_id != self._model.adapter_id or pin.prompt_version != request.prompt_version):
                 raise ValueError("paid response model binding differs")
-            saved_body = self._paid_responses.read(pin)
+            saved_body = paid_responses.read(pin)
             context.checkpoint()
             if record.output_bytes == 0:
                 current = context.attempt

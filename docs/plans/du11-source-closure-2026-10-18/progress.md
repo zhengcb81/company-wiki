@@ -1,3 +1,16 @@
+## 类型棘轮第一批：automation 包清零（2026-10-20）
+
+- `mypy src/company_wiki/automation`：**15 errors → 0**（57 文件）。修复全部是真问题：
+  - `narrative_model_runtime` 用 `scoped.ModelResponseError`，而该模块只在函数内导入它 → 该分支会抛 `AttributeError`（**潜在线上 bug**），改为 `legacy.ModelResponseError`。
+  - `narrative_model_caller` 的闭包/恢复路径对 `_paid_responses` 的 None 收窄失效；改为局部绑定 + 显式守卫。
+  - `narrative_run_store` / `narrative_model_caller` 对 `paid_response_json` 的 None 直接 `from_json`；补显式守卫。
+  - `narrative_selection_generation` / `narrative_generation` 的 sha256 校验、`narrative_model_extractive` 的 `reading_context` 与 `seen` 类型、`narrative_transport` 的 receipt 字典、`cli` 的 events 元组、`supervisor` 的 Job|None、`worker_factory` 的 kwargs 展开。
+- CI 新增 `python -m mypy src/company_wiki/automation` 步骤，job 超时 5→10 分钟以容纳它。
+- 验证：相关单测 **193 passed**；`ruff` 全仓干净；全量单测 **7033 passed / 24 skipped**。
+- 下一批：`source_catalog` → `document_*`，逐个包清零后把整包加入 CI。
+
+---
+
 ## 全项目代码质量审计：基线、已修与路线图（2026-10-20）
 
 ### 基线（未做过的部分）

@@ -375,9 +375,11 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             objects = _BudgetedObjects(catalog.config.catalog_dir, guard, model.max_response_bytes)
             paid_responses = PaidResponseArtifacts(objects, max_response_bytes=model.max_response_bytes,
                                                    preflight=admit_response)
-        caller = BudgetedNarrativeCaller(store=run_store, run_id=options["run_id"], model=model,
-                                        final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024),
-                                        **({'paid_responses': paid_responses} if paid_responses is not None else {}))
+        caller = BudgetedNarrativeCaller(
+            store=run_store, run_id=options["run_id"], model=model,
+            final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024),
+            paid_responses=paid_responses,
+        )
     registry = create_default_registry()
     executor = HandlerExecutor()
     register_narrative_handlers(

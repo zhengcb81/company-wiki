@@ -532,7 +532,10 @@ def current_reading_decision_matches(manifest: Mapping[str, Any]) -> bool:
     if not isinstance(dependencies, Mapping) or dependencies.get("status") != "complete":
         return False
     from .models import require_sha256
-    require_sha256(dependencies.get("decision_digest"), field_name="decision_digest")
+    digest = dependencies.get("decision_digest")
+    if not isinstance(digest, str):
+        raise ValueError("BATCH_REUSE_DECISION_DIGEST_INVALID")
+    require_sha256(digest, field_name="decision_digest")
     if dependencies.get("decision_digest") != manifest.get("selection_generation", {}).get("decision_digest"):
         raise ValueError("BATCH_REUSE_DECISION_DIGEST_INVALID")
     try:

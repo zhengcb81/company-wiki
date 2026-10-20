@@ -10,7 +10,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from .models import canonical_json
+from .models import Event, canonical_json
 
 
 SCHEMA_VERSION = 1
@@ -69,7 +69,7 @@ def _plan(db_path: Path, event_id: str | None) -> dict[str, Any]:
         event = store.get_event(event_id)
         if event is None:
             return {"error": f"event not found: {event_id}", "exit_code": 2}
-        events = (event,)
+        events: tuple[Event, ...] = (event,)
     else:
         events = source.get_all_events()
 

@@ -414,7 +414,7 @@ class NarrativeTransportReader:
             raise NarrativeTransportError("blocked", "projection_identity_mismatch")
         locator_count = replay_verified_projection(view, bundle)
         if compact:
-            receipt = {
+            receipt: dict[str, Any] = {
                 "schema_version": NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
                 "status": "ok",
                 "narrative_ref": reference.to_dict(),

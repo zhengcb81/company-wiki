@@ -6,6 +6,7 @@ remain explicit audit observations; safe cards do not depend on model coverage.
 """
 from __future__ import annotations
 
+from collections.abc import Mapping
 from copy import deepcopy
 from dataclasses import dataclass
 import hashlib
@@ -120,7 +121,8 @@ def compile_extractive_plan(
                             'claims': [], 'status': 'needs_review'}
     if len(canonical_json(draft).encode()) > max_draft_bytes:
         raise NarrativeContractError('source card identity exceeds draft byte budget')
-    rows, seen = [], {}
+    rows: list[dict[str, Any]] = []
+    seen: dict[Any, str] = {}
     used_bytes = len(canonical_json(draft).encode())
     # Encode each existing fragment once. JSON escaping, not character count,
     # determines whether a full quote can enter the canonical draft budget.
@@ -194,8 +196,11 @@ def build_extractive_request(selected: NarrativeSelectResult) -> ExtractiveModel
     if not plan.draft['claims'] or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
     view = compile_scoped_model_view(selected, max_claims=max(1, len(selected.evidence_spans) * 2))
-    aliases = ['r' + str(i) for i in range(1, len(selected.reading_context['groups']) + 1)]
-    strategy = legacy._reading_model_context(selected.reading_context, aliases,
+    reading_context = selected.reading_context
+    if not isinstance(reading_context, Mapping):
+        raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
+    aliases = ['r' + str(i) for i in range(1, len(reading_context['groups']) + 1)]
+    strategy = legacy._reading_model_context(reading_context, aliases,
                                              version=EXTRACTIVE_MODEL_PROJECTION_VERSION)
     strategy.pop('groups')
     envelope = {'schema_version': EXTRACTIVE_REQUEST_SCHEMA,

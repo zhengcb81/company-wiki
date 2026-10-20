@@ -35,7 +35,10 @@ def validate_selection_generation(manifest: Mapping[str, Any]) -> None:
     fields = {"schema_version", "select_result_sha256", "evidence_sha256",
               "material_sha256", "reading_policy_version"}
     for key in ("select_result_sha256", "evidence_sha256", "material_sha256"):
-        require_sha256(part.get(key), field_name=key)
+        value = part.get(key)
+        if not isinstance(value, str):
+            raise ValueError("BATCH_REUSE_SELECTION_GENERATION_INVALID")
+        require_sha256(value, field_name=key)
     policy = part.get("reading_policy_version")
     if not isinstance(policy, str) or not policy.startswith("du-sent-policy/1+"):
         raise ValueError("BATCH_REUSE_READING_POLICY_GENERATION_INVALID")
@@ -46,7 +49,10 @@ def validate_selection_generation(manifest: Mapping[str, Any]) -> None:
             raise ValueError("BATCH_REUSE_DECISION_GENERATION_INVALID")
         if dependencies.get("status") == "complete":
             fields.add("decision_digest")
-            require_sha256(dependencies.get("decision_digest"), field_name="decision_digest")
+            digest = dependencies.get("decision_digest")
+            if not isinstance(digest, str):
+                raise ValueError("BATCH_REUSE_DECISION_GENERATION_INVALID")
+            require_sha256(digest, field_name="decision_digest")
             if dependencies["decision_digest"] != part.get("decision_digest"):
                 raise ValueError("BATCH_REUSE_DECISION_DIGEST_INVALID")
         elif dependencies.get("status") != "partial":

@@ -33,13 +33,13 @@ def build_model_request(selected, *, reading_projection_version=None,
                         only_tasks=None, target_claims=None):
     if reading_projection_version == extractive.EXTRACTIVE_MODEL_PROJECTION_VERSION:
         if only_tasks is not None or target_claims is not None:
-            raise scoped.ModelResponseError('MODEL_REQUEST_INVALID')
+            raise legacy.ModelResponseError('MODEL_REQUEST_INVALID')
         return extractive.build_extractive_request(selected)
     if reading_projection_version == scoped.SCOPED_MODEL_PROJECTION_VERSION:
         return scoped.build_scoped_request(selected, only_tasks=only_tasks,
                                            target_claims=target_claims)
     if only_tasks is not None or target_claims is not None:
-        raise scoped.ModelResponseError('MODEL_REQUEST_INVALID')
+        raise legacy.ModelResponseError('MODEL_REQUEST_INVALID')
     return legacy.NarrativeModelRequest.from_selection(
         selected, reading_projection_version=reading_projection_version)
 
