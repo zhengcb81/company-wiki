@@ -70,7 +70,7 @@ def check_candidate_determinism(
 def check_no_duplicate_candidates(candidates: list[NormalizedCandidate]) -> list[str]:
     """SPI-03b: duplicate candidates must be rejected deterministically."""
     problems: list[str] = []
-    seen: set[str] = set()
+    seen: set[tuple[str, str]] = set()
     for candidate in candidates:
         key = (candidate.group_key, candidate.relative_path)
         if key in seen:

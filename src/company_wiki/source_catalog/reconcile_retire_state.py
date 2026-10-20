@@ -60,13 +60,14 @@ class ReconcileRetireStateService:
         return self._store
 
     def _audit_documents(self) -> list[dict[str, Any]]:
-        return self.store.fetchall(
+        rows = self.store.fetchall(
             """SELECT d.document_id, d.source_status, d.primary_source_id,
                       s.byte_size
                FROM document_retire_audit a
                JOIN documents d ON d.document_id = a.document_id
                JOIN sources s ON s.source_id = d.primary_source_id"""
         )
+        return [dict(row) for row in rows]
 
     def reconcile(self, *, apply: bool = False) -> RetireReconcileReport:
         if apply:

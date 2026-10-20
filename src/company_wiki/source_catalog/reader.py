@@ -301,7 +301,8 @@ class ReadOnlyCatalogReader:
             ),
             "evidence_spans": "SELECT COUNT(*) FROM evidence_spans",
         }
-        return {key: int(self.fetchone(sql)[0]) for key, sql in counts.items()}
+        return {key: int(row[0]) if (row := self.fetchone(sql)) is not None else 0
+                for key, sql in counts.items()}
 
     def scan_health(self) -> dict[str, Any]:
         rows = self.fetchall(

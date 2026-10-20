@@ -90,7 +90,14 @@ def chunk_spans(
     """Line ranges [start, end) between section headers; the implicit
     single chunk when there are no sections.  Bounds are clamped and
     empty trailing chunks dropped."""
-    bounds = [min(int(item["line_offset"]), line_count) for item in sections]
+    bounds: list[int] = []
+    for item in sections:
+        raw = item.get("line_offset")
+        try:
+            offset = int(raw) if isinstance(raw, (int, str)) and not isinstance(raw, bool) else 0
+        except ValueError:
+            offset = 0
+        bounds.append(min(offset, line_count))
     chunks: list[list[int]] = []
     start = 0
     for bound in bounds:

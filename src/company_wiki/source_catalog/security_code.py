@@ -17,7 +17,7 @@ def canonical_security_code(value: str | None, market: str | None) -> str | None
     """Return a market's code representation, preserving unsupported literals."""
     if not isinstance(value, str):
         return value
-    width = _NUMERIC_WIDTH.get(market)
+    width = _NUMERIC_WIDTH.get(market or "")
     if width is not None and re.fullmatch(r"[0-9]{1," + str(width) + "}", value):
         return value.zfill(width)
     if market == "US" and _US_CODE.fullmatch(value):

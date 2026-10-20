@@ -214,7 +214,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
                 blocked.add(wire["unit_id"])
     grouped: set[str] = set()
     generated = []
-    joint_facts = {}
+    joint_facts: dict[Any, Any] = {}
     dependent_statement = re.compile(
         r"该|上述|这一|此项|这些|其|尚未|未能|未经|并未|不代表|不意味着|"
         r"然而|但是|但|仍需|须|需先|如果|除非|未来|下半年|预计|预期|计划|将|拟|可能|"

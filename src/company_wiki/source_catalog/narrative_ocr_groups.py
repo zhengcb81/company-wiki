@@ -4,6 +4,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import hashlib
 import re
+from typing import Any
 from .n6_candidate_completion import (
     BUSINESS_CHARACTER_WINDOW,
     MAX_COMPLETION_UNITS,
@@ -41,14 +42,14 @@ def build_ocr_context_groups(
     units: Sequence[NarrativeUnit], rules: PdfGroupRules
 ) -> tuple[PdfContextGroup, ...]:
     """One image/shape is one coordinate domain; gaps and sentence barriers split."""
-    by_identity = {}
+    by_identity: dict[Any, list[NarrativeUnit]] = {}
     for unit in units:
         identity = ocr_identity(unit)
         if identity is not None and unit.source_role != "qa_text_shadow":
             by_identity.setdefault(identity, []).append(unit)
     groups = []
     for lines in by_identity.values():
-        clusters = []
+        clusters: list[list[NarrativeUnit]] = []
         for line in sorted(lines, key=lambda u: u.metadata["ocr_line_index"]):
             prior = clusters[-1][-1] if clusters else None
             continues = prior is not None and ocr_sentence_continues(

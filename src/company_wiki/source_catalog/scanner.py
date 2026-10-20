@@ -320,7 +320,7 @@ def _scan_root_v1(
             for path in primary_paths:
                 relative = _relative(path, root.path)
                 sidecar = sidecars.get(str(path))
-                metadata = read_metadata(sidecar) if sidecar else {}
+                metadata: dict[str, Any] = read_metadata(sidecar) if sidecar else {}
                 # Phase 16.1: a sidecar without any source URL is enriched
                 # from the matching dayu portfolio meta.json (by company name).
                 if not metadata.get("source_url") and not metadata.get("https_url"):
@@ -428,7 +428,7 @@ def _scan_root_v1(
                 # resolvable-MISSING when the sidecar evidence exists).
                 for path in supported:
                     relative = _relative(path, root.path)
-                    metadata: dict[str, Any] = {}
+                    metadata = {}
                     if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX):
                         sidecar = path.with_name(
                             path.name + _ACQUISITION_SIDECAR_SUFFIX
@@ -544,7 +544,7 @@ def _scan_root_v1(
             ticker = parts[0] if parts else None
             group_dir = root.path.joinpath(*parts) if len(paths) > 1 or Path(group_key).suffix == "" else paths[0].parent
             meta_path = group_dir / "meta.json"
-            metadata: dict[str, Any] = {}
+            metadata = {}
             if meta_path.is_file():
                 try:
                     loaded = metadata_reader(meta_path) if metadata_reader else json.loads(meta_path.read_text(encoding="utf-8"))
@@ -864,6 +864,11 @@ def _scan_catalog_impl(
     error_details: list[dict[str, Any]] = []
     if selected_roots is None:
         selected_roots = _select_roots(config, root_ids)
+    def _catalog_store() -> CatalogStore:
+        if store is None:
+            raise TypeError("store is required for a non-dry-run scan")
+        return store
+
     if not dry_run:
         if store is None:
             raise TypeError("store is required for a non-dry-run scan")
@@ -936,7 +941,7 @@ def _scan_catalog_impl(
         policy_excluded += policy_count
         if dry_run:
             continue
-        with store.transaction() as connection:
+        with _catalog_store().transaction() as connection:
             connection.execute(
                 """INSERT INTO roots(root_id,path,kind,priority,last_scan_run,last_scanned_at)
                 VALUES(?,?,?,?,?,?) ON CONFLICT(root_id) DO UPDATE SET
@@ -951,7 +956,7 @@ def _scan_catalog_impl(
         for candidate in candidates:
             groups[candidate.group_key].append(candidate)
         existing_locations = existing_group_locations(
-            store, root.root_id,
+            _catalog_store(), root.root_id,
             {item.relative_path for item in candidates} if relative_paths is not None else None,
         )
         group_items = sorted(
@@ -1089,7 +1094,7 @@ def _scan_catalog_impl(
                     else None
                 ),
             }
-            with store.transaction() as connection:
+            with _catalog_store().transaction() as connection:
                 for item in observed:
                     if item.source_id:
                         connection.execute(
@@ -1221,7 +1226,7 @@ def _scan_catalog_impl(
                         (obsolete_document_id,),
                     )
         if relative_paths is None:
-            with store.transaction() as connection:
+            with _catalog_store().transaction() as connection:
                 connection.execute(
                     "UPDATE locations SET location_status='missing' WHERE root_id=? AND last_seen_run<>? AND location_status<>'missing'",
                     (root.root_id, run_id),
@@ -1240,8 +1245,10 @@ def _scan_catalog_impl(
             error_details=tuple(error_details),
             strategy=tuple(strategies),
         )
-    active = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='active'")["count"]
-    missing = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='missing'")["count"]
+    active_row = _catalog_store().fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='active'")
+    missing_row = _catalog_store().fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='missing'")
+    active = int(active_row["count"]) if active_row is not None else 0
+    missing = int(missing_row["count"]) if missing_row is not None else 0
     report = ScanReport(
         run_id=run_id,
         files_seen=files_seen,
@@ -1257,7 +1264,7 @@ def _scan_catalog_impl(
         error_details=tuple(error_details),
         strategy=tuple(strategies),
     )
-    with store.transaction() as connection:
+    with _catalog_store().transaction() as connection:
         completed_at = _utc_now()
         connection.execute(
             "UPDATE scan_runs SET completed_at=?,status=?,report_json=? WHERE run_id=?",
@@ -1469,7 +1476,8 @@ def _merge_metadata_json(
     # list; a capture that disagrees adds a candidate — neither erases a
     # recorded conflict, so the outcome no longer depends on scan order.
     for name, record in provenance_fields.items():
-        old = fields.get(name) if isinstance(fields.get(name), dict) else {}
+        current = fields.get(name)
+        old: dict[str, Any] = current if isinstance(current, dict) else {}
         sources = [dict(item) for item in (old.get("sources") or [])]
         for source in record.get("sources") or []:
             if source not in sources:
@@ -2086,7 +2094,7 @@ def scan_catalog(
         # FC-305: production dry shadow with v2 requires the two-round
         # zero-diff gate.  The caller records one entry per shadow round;
         # the gate checks the last two consecutive rounds are zero-diff.
-        recorded = [[] for _ in range(zero_diff_rounds or 0)]
+        recorded: list[list[Any]] = [[] for _ in range(zero_diff_rounds or 0)]
         if not gate_production_dry_shadow(recorded, rounds_required=2):
             raise CutoverGateError(
                 "production dry shadow with v2 refused: two consecutive "

@@ -112,14 +112,14 @@ def _process_identity(pid: int) -> dict[str, object]:
         handle = kernel32.OpenProcess(process_query_limited_information, False, pid)
         if not handle:
             live = ctypes.get_last_error() == 5
-            creation_time = _windows_creation_time_via_cim(pid) if live else None
+            cim_creation = _windows_creation_time_via_cim(pid) if live else None
             return {
                 "live": live,
-                "creation_time": creation_time,
+                "creation_time": cim_creation,
                 "executable": None,
                 "verification": (
                     "verified_cim"
-                    if creation_time is not None
+                    if cim_creation is not None
                     else "unavailable"
                     if live
                     else "not_live"
@@ -199,7 +199,7 @@ def _process_identity(pid: int) -> dict[str, object]:
         stat_text = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8")
         fields = stat_text[stat_text.rfind(")") + 2 :].split()
         start_ticks = int(fields[19])
-        clock_ticks = int(os.sysconf("SC_CLK_TCK"))
+        clock_ticks = int(os.sysconf("SC_CLK_TCK"))  # type: ignore[attr-defined]  # POSIX-only path
         boot_line = next(
             line
             for line in Path("/proc/stat").read_text(encoding="utf-8").splitlines()
@@ -224,9 +224,19 @@ def _pid_is_live(pid: int) -> bool:
     return bool(_process_identity(pid)["live"])
 
 
-def _owner_status(path: Path, payload: dict[str, object]) -> dict[str, object]:
+def _as_float(value: object) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float, str)):
+        return None
     try:
-        pid = int(payload.get("pid", 0))
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _owner_status(path: Path, payload: dict[str, object]) -> dict[str, object]:
+    raw_pid = payload.get("pid", 0)
+    try:
+        pid = int(raw_pid) if isinstance(raw_pid, (int, str)) and not isinstance(raw_pid, bool) else 0
     except (TypeError, ValueError):
         pid = 0
     identity = _process_identity(pid)
@@ -234,25 +244,22 @@ def _owner_status(path: Path, payload: dict[str, object]) -> dict[str, object]:
         state = "stale"
         verification = "not_live"
     elif "process_creation_time" in payload:
-        try:
-            recorded_creation = float(payload["process_creation_time"])
-        except (TypeError, ValueError):
-            recorded_creation = None
-        observed_creation = identity.get("creation_time")
+        recorded_creation = _as_float(payload["process_creation_time"])
+        observed_creation = _as_float(identity.get("creation_time"))
         if recorded_creation is None:
             state = "live"
             verification = "invalid_recorded_identity"
         elif observed_creation is None:
             state = "live"
             verification = "unavailable"
-        elif abs(recorded_creation - float(observed_creation)) <= 0.001:
+        elif abs(recorded_creation - observed_creation) <= 0.001:
             state = "live"
             verification = "matched"
         else:
             state = "stale"
             verification = "mismatch"
     else:
-        observed_creation = identity.get("creation_time")
+        observed_creation = _as_float(identity.get("creation_time"))
         try:
             lock_created_at = path.stat().st_mtime
         except OSError:
@@ -260,7 +267,7 @@ def _owner_status(path: Path, payload: dict[str, object]) -> dict[str, object]:
         if observed_creation is None or lock_created_at is None:
             state = "live"
             verification = "legacy_unverified"
-        elif float(observed_creation) > float(lock_created_at) + 0.001:
+        elif observed_creation > float(lock_created_at) + 0.001:
             state = "stale"
             verification = "legacy_pid_reused"
         else:

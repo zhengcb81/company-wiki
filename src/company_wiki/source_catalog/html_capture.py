@@ -117,7 +117,8 @@ def validate_html_capture(
         return {"schema_version": HTML_CAPTURE_SCHEMA_VERSION,
                 "verdict": "missing_title",
                 "reason": "no title or h1 element with text"}
-    entities = [item for item in identity.get("entities") or [] if item]
+    raw_entities = identity.get("entities")
+    entities = [item for item in raw_entities if item] if isinstance(raw_entities, list) else []
     if not entities:
         return {"schema_version": HTML_CAPTURE_SCHEMA_VERSION,
                 "verdict": "no_entity",

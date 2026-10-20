@@ -952,6 +952,8 @@ def _parse_us(sec_payload: bytes, nasdaq_payload: bytes, other_payload: bytes) -
             continue
         exchange, directory_name = directory[key]
         cik_raw = row.get("cik_str")
+        if isinstance(cik_raw, bool) or not isinstance(cik_raw, (int, str)):
+            continue
         try:
             cik = f"{int(cik_raw):010d}"
         except (TypeError, ValueError):

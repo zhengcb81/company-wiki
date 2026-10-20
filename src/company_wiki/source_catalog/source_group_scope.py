@@ -7,8 +7,11 @@ from pathlib import Path
 from typing import Callable, Iterable, Protocol, TypeVar
 
 class GroupCandidate(Protocol):
-    relative_path: str
-    group_key: str
+    @property
+    def relative_path(self) -> str: ...
+
+    @property
+    def group_key(self) -> str: ...
 
 
 CandidateT = TypeVar("CandidateT", bound=GroupCandidate)

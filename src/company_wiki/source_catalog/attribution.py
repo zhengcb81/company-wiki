@@ -74,7 +74,7 @@ def attribute_document(
     Chunk offsets are CONTENT-line offsets (the ZR-506 convention: blank
     lines, page headers and locator comments excluded), so the same
     filtering is applied here before slicing."""
-    lines = _content_lines(text)
+    lines = _content_lines(text or "")
     attributed: list[dict[str, object]] = []
     for chunk_index, (start, end) in enumerate(chunks):
         segment = "\n".join(lines[start:end])

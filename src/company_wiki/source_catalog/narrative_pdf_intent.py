@@ -151,8 +151,8 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
     collector.capture_mode = 'reading-policy'
     collector.source_page_count = state.page_count
     budget = work_budget
-    session = None
-    cover = []
+    session: SourceGeometrySession | None = None
+    cover: list[tuple[int, list[Any]]] = []
     try:
         try:
             budget.charge()
@@ -163,7 +163,7 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
         def prepare():
             # Generate actual canonical cover units once using the existing
             # source emitter, then let physical-order emission reuse them.
-            probes = []
+            probes: list[Any] = []
             for number, blocks in cover:
                 start = len(state.units)
                 _emit_pdf_text_units(state, number, blocks)
@@ -175,6 +175,8 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
                 state=state, outline=outline, budget=budget, collector=collector)
 
         def emit(number, blocks):
+            if session is None:
+                raise RuntimeError("geometry session is not prepared")
             material = collector.pending_pages.get(number)
             discover, fine = session.request(number, material[2] if material else {})
             collector.capture_pending_page(number, requested=fine)

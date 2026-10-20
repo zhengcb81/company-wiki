@@ -78,7 +78,7 @@ def ocr_box(unit: NarrativeUnit) -> tuple[float, float, float, float] | None:
     x0, y0, x1, y1 = values
     if not (0 <= x0 < x1 <= width and 0 <= y0 < y1 <= height):
         return None
-    return values
+    return (x0, y0, x1, y1)
 
 
 def ocr_continues(left: NarrativeUnit, right: NarrativeUnit) -> bool:

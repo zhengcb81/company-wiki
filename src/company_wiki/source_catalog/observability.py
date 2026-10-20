@@ -869,6 +869,11 @@ def validate_stage_event(event: dict | StageEvent) -> list[str]:
     raises on invalid input.
     """
     problems: list[str] = []
+    schema_version: Any
+    stage: Any
+    reason: Any
+    detail: Any
+    emitted_at_utc: Any
     if isinstance(event, StageEvent):
         schema_version = event.schema_version
         stage = event.stage

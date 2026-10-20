@@ -415,7 +415,7 @@ def _prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assert
         created_by="automated-source-facts",
     )
     assertion.update(published_at=values["published_date"], language=values["language"])
-    projection = {}
+    projection: dict[str, Any] = {}
     if "document_kind" in facts:
         projection.update(document_kind=facts["document_kind"], source_type=SOURCE_FACT_KINDS[facts["document_kind"]])
     if "published_date" in facts:
@@ -525,8 +525,11 @@ def source_fact_projection(connection: Any, *, document_id: str,
         return {}
     evidence = _evidence_payload(row["evidence_json"], document_id)
     patch = evidence.get("source_fact_patch")
-    _validate_source_facts(patch, evidence.get("source_fact_evidence"))
-    projection = {}
+    fact_evidence = evidence.get("source_fact_evidence")
+    if not isinstance(patch, dict) or not isinstance(fact_evidence, dict):
+        return {}
+    _validate_source_facts(patch, fact_evidence)
+    projection: dict[str, Any] = {}
     if "document_kind" in patch:
         projection.update(document_kind=patch["document_kind"], source_type=SOURCE_FACT_KINDS[patch["document_kind"]])
     if "published_date" in patch:

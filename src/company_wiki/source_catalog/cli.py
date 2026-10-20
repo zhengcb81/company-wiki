@@ -1387,7 +1387,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         except Exception as exc:
             from .acquisition_failure import attach_acquisition_failure
             if diagnostic is not None:
-                exc.acquisition_failure = diagnostic
+                setattr(exc, "acquisition_failure", diagnostic)
             elif hasattr(args, "_acquisition_budget"):
                 attach_acquisition_failure(exc, budget=args._acquisition_budget, code="acquisition_validation_failed")
             from .error_taxonomy import structured_error

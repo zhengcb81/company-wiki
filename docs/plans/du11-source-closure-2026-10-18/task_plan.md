@@ -1,3 +1,12 @@
+## 类型棘轮第三批：source_catalog 182 → 84（2026-10-20）
+
+- 清零：`scanner`（15）、`cli`（10）、`assertion_service`（10），以及一批注解/收窄（`narrative_ocr_groups`、`narrative_pdf_intent`、`narrative_reading`、`official_discovery`、`observability`、`reader`、`reconcile_retire_state`、`narrative_visual_units`）。
+- 关键修复：`scanner` 的 `store` Optional 用局部 `_catalog_store()` 收窄；`GroupCandidate` Protocol 改为只读 property（frozen dataclass 才能满足）；`reconcile_retire_state` 的 `Row` 显式转 `dict`；CLI 动态异常属性改 `setattr`。
+- 后续同批继续清零：`lock`、`download_budget`、`security_code/identity`、`attribution`、`html_capture`、`section_chunk_fact`、`adapters/interface`、`narrative_operating_relations` 等。
+- 验证：相关 81 + 68 passed；`ruff` 全仓干净；全量单测 **7033 passed / 24 skipped**；`source_catalog` 剩余 **63 条 / 24 文件**（`narrative_reading`、`adapter_dispatch`、`resolver` 等）。
+
+---
+
 ## 类型棘轮第二批：source_catalog（三文件清零）+ stdout 污染修复（2026-10-20）
 
 - `source_catalog` 包 **182 → 121 errors**：`narrative_pdf_candidates`（24）用 `TypeGuard` 收窄快照形状并注解列表；`official_source_flow`（22）修掉动态异常属性与重复 `capture` 变量、收据字典类型；`normalizer`（17）修 POSIX-only `os` 调用、`BaseProcess` 类型、`payload`/`manifest` 守卫。

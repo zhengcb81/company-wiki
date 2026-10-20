@@ -5,6 +5,7 @@ from datetime import date
 import hashlib
 import json
 from urllib.parse import urljoin, urlsplit
+from typing import Any
 from bs4 import BeautifulSoup
 from .narrative_routing import classify_document_kind
 
@@ -29,8 +30,8 @@ def discover_official_documents(
         or not 0 < max_bytes <= 8388608
     ):
         raise ValueError("invalid_discovery_limits")
-    candidates = []
-    limitations = []
+    candidates: list[Any] = []
+    limitations: list[Any] = []
     events = []
     used = 0
     seen = set()

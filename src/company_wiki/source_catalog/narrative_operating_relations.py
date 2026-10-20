@@ -185,9 +185,11 @@ class SourceOperatingSession:
             declarations = self._validate_original_refs(result["declaration_refs"])
             members = self._validate_original_refs(result["member_refs"])
             if declarations is None or members is None:
+                diagnostics = result.get("diagnostics")
+                diagnostics = list(diagnostics) if isinstance(diagnostics, list) else []
                 result = {**result, "status": "partial", "declaration_refs": [],
                           "member_refs": [], "required_original_unit_ids": (),
-                          "diagnostics": [*result["diagnostics"],
+                          "diagnostics": [*diagnostics,
                                           {"code": "invalid_original_reference", "unit_id": uid}]}
             else:
                 result = {**result, "declaration_refs": declarations, "member_refs": members}

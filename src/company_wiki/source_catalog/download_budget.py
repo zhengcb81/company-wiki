@@ -161,8 +161,12 @@ class AcquisitionBudget:
         return min(self.remaining_response_bytes, self.remaining_wire_bytes)
 
     @property
+    def _cost_limit(self) -> Decimal:
+        return _decimal_amount(self.max_cost_usd, "max_cost_usd")
+
+    @property
     def remaining_cost_usd(self) -> Decimal:
-        return max(Decimal("0"), self.max_cost_usd - self.cost_usd_used)
+        return max(Decimal("0"), self._cost_limit - self.cost_usd_used)
 
     @property
     def remaining_seconds(self) -> float:
@@ -177,7 +181,7 @@ class AcquisitionBudget:
             raise AcquisitionBudgetExceeded("response byte budget exceeded")
         if self.wire_response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("wire response byte budget exceeded")
-        if self.cost_usd_used > self.max_cost_usd:
+        if self.cost_usd_used > self._cost_limit:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
 
     def ensure_new_request(self) -> None:
@@ -248,7 +252,7 @@ class AcquisitionBudget:
             raise AcquisitionBudgetExceeded("response byte budget exceeded")
         if self.wire_response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("wire response byte budget exceeded")
-        if self.cost_usd_used > self.max_cost_usd:
+        if self.cost_usd_used > self._cost_limit:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
 
     def record_http_exchange(self, http_observation: dict | None = None) -> None:
@@ -289,7 +293,7 @@ class AcquisitionBudget:
         if cost > 0:
             self.observe_provider(started=True, complete=True)
         self.cost_usd_used += cost
-        if self.cost_usd_used > self.max_cost_usd:
+        if self.cost_usd_used > self._cost_limit:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
 
     def consume_http_bytes(self, *, wire_bytes: int, response_bytes: int = 0) -> None:
