@@ -9,8 +9,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from heapq import heappop, heappush
+from typing import Any
 
-from .contract import Unit, WorkBudget
+from .contract import Unit, WorkBudget, require_bbox
 from .text_evidence import normalize_ws
 
 MIN_BAND_HEIGHT = 6.0
@@ -22,8 +23,8 @@ def box_of(unit: Unit) -> tuple[float, float, float, float] | None:
 
 
 def band_height(unit: Unit) -> float:
-    if unit.bbox is not None and unit.bbox[3] > unit.bbox[1]:
-        return unit.bbox[3] - unit.bbox[1]
+    if unit.bbox is not None and require_bbox(unit)[3] > require_bbox(unit)[1]:
+        return require_bbox(unit)[3] - require_bbox(unit)[1]
     if unit.font_size:
         return unit.font_size * 1.25
     return MIN_BAND_HEIGHT
@@ -55,7 +56,7 @@ class Band:
             self._native_initialised = True
         elif row_key != self._native_row:
             self._native_compatible = False
-        box = unit.bbox
+        box = require_bbox(unit)
         if box is None:
             return
         if self._bbox is None:
@@ -91,7 +92,7 @@ class Band:
     def text(self):
         return " ".join(
             unit_text(u)
-            for u in sorted(self.units, key=lambda u: (u.bbox[0], u.ordinal))
+            for u in sorted(self.units, key=lambda u: (require_bbox(u)[0], u.ordinal))
         )
 
 
@@ -116,7 +117,7 @@ class Cell:
             self._native_initialised = True
         elif cell_key != self._native_cell:
             self._native_compatible = False
-        box = unit.bbox
+        box = require_bbox(unit)
         if self._bbox is None:
             self._bbox = box
         else:
@@ -140,7 +141,7 @@ class Cell:
     def text(self):
         return " ".join(
             unit_text(u)
-            for u in sorted(self.members, key=lambda u: (u.bbox[0], u.ordinal))
+            for u in sorted(self.members, key=lambda u: (require_bbox(u)[0], u.ordinal))
         )
 
     @property
@@ -174,7 +175,7 @@ def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
     """Cluster geometry-bearing units into visual line bands."""
     usable = [u for u in units if u.bbox is not None and not u.deferred]
     ordered = sorted(
-        usable, key=lambda u: ((u.bbox[1] + u.bbox[3]) / 2.0, u.bbox[0], u.ordinal)
+        usable, key=lambda u: ((require_bbox(u)[1] + require_bbox(u)[3]) / 2.0, require_bbox(u)[0], u.ordinal)
     )
     bands: list[Band] = []
     native_bands: dict[tuple[str, int], Band] = {}
@@ -197,7 +198,7 @@ def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
             continue
         band = bands[-1]
         tolerance = BAND_TOLERANCE * max(
-            unit.bbox[3] - unit.bbox[1], band.mean_height, MIN_BAND_HEIGHT
+            require_bbox(unit)[3] - require_bbox(unit)[1], band.mean_height, MIN_BAND_HEIGHT
         )
         if abs(unit.y_center - band.y_center) <= tolerance:
             band.append(unit)
@@ -207,13 +208,13 @@ def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
     if native_bands:
         bands.sort(
             key=lambda band: (
-                band.bbox[1],
-                band.bbox[0],
+                require_bbox(band)[1],
+                require_bbox(band)[0],
                 min(unit.ordinal for unit in band.units),
             )
         )
     for band in bands:
-        band.units.sort(key=lambda u: (u.bbox[0], u.ordinal))
+        band.units.sort(key=lambda u: (require_bbox(u)[0], u.ordinal))
     return bands
 
 
@@ -238,8 +239,8 @@ def band_cells(band: Band, budget: WorkBudget) -> list[Cell]:
                 else:
                     cells.append(Cell(members=[unit]))
                 continue
-            prev_box = previous.bbox
-            gap = unit.bbox[0] - prev_box[2]
+            prev_box = require_bbox(previous)
+            gap = require_bbox(unit)[0] - prev_box[2]
             if gap <= _cell_gap_tolerance(previous.members[-1], unit):
                 previous.append(unit)
                 continue
@@ -255,10 +256,10 @@ def cluster_column_slots(
     Disjoint columns never enter an all-cluster closure scan. Dense ambiguous
     overlaps are still bounded by the caller's single work budget.
     """
-    ordered = sorted(data_cells, key=lambda cell: (cell.bbox[0], cell.bbox[2]))
-    clusters = {}
-    active = set()
-    ends = []
+    ordered = sorted(data_cells, key=lambda cell: (require_bbox(cell)[0], require_bbox(cell)[2]))
+    clusters: dict[Any, Any] = {}
+    active: set[Any] = set()
+    ends: list[Any] = []
     serial = 0
     for cell in ordered:
         budget.charge()
@@ -328,7 +329,7 @@ def _intervals_link(box_a: tuple, box_b: tuple) -> bool:
 
 
 def _slot_overlap(slot: ColumnSlot, box: tuple[float, float, float, float]) -> float:
-    return min(slot.bbox[2], box[2]) - max(slot.bbox[0], box[0])
+    return min(require_bbox(slot)[2], box[2]) - max(require_bbox(slot)[0], box[0])
 
 
 def assign_cell_columns(
@@ -359,13 +360,13 @@ def assign_cell_columns(
             budget.charge()
         distances.append(
             (
-                min(abs(slot.bbox[0] - box[0]), abs(slot.bbox[2] - box[2])),
+                min(abs(require_bbox(slot)[0] - box[0]), abs(require_bbox(slot)[2] - box[2])),
                 slot.index,
                 slot,
             )
         )
     nearest = min(distances, key=lambda item: item[:2])[2]
-    distance = min(abs(nearest.bbox[0] - box[0]), abs(nearest.bbox[2] - box[2]))
+    distance = min(abs(require_bbox(nearest)[0] - box[0]), abs(require_bbox(nearest)[2] - box[2]))
     if distance <= 8.0:
         return nearest.index, 1
     return None, None
@@ -376,6 +377,6 @@ def page_band_gap_median(bands: list[Band]) -> float:
         return 0.0
     gaps = []
     for previous, current in zip(bands, bands[1:]):
-        gaps.append(max(0.0, current.bbox[1] - previous.bbox[3]))
+        gaps.append(max(0.0, require_bbox(current)[1] - require_bbox(previous)[3]))
     gaps.sort()
     return gaps[len(gaps) // 2]

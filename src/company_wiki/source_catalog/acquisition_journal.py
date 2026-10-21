@@ -96,7 +96,7 @@ class AcquisitionJournal:
             raise ValueError("request_id must be non-empty text")
         if outcome not in ACQUISITION_OUTCOMES:
             raise ValueError(f"unsupported acquisition outcome: {outcome}")
-        values = {
+        values: dict[str, Any] = {
             "request_id": request_id,
             "outcome": outcome,
             "adapter_name": _optional(adapter_name),

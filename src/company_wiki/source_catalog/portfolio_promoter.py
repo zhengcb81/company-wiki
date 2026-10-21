@@ -171,8 +171,8 @@ def promote_from_portfolio(
         fiscal_year=int(meta["fiscal_year"]),
         fiscal_period=str(meta.get("fiscal_period") or "").strip() or None,
         language=str(meta.get("source_language") or "").strip() or None,
-        provider=str(meta.get("source_provider") or "").strip() or None,
-        provider_document_id=str(meta.get("source_id") or "").strip() or None,
+        provider=str(meta.get("source_provider") or "").strip(),
+        provider_document_id=str(meta.get("source_id") or "").strip(),
         as_of_date=as_of_date,
         allow_download=False,
     )
@@ -241,8 +241,8 @@ def _build_candidate(
 ) -> DownloadCandidate:
     return DownloadCandidate(
         candidate_id="portfolio:" + str(meta.get("document_id") or ""),
-        provider=str(meta.get("source_provider") or "").strip() or None,
-        provider_document_id=str(meta.get("source_id") or "").strip() or None,
+        provider=str(meta.get("source_provider") or "").strip(),
+        provider_document_id=str(meta.get("source_id") or "").strip(),
         market=identity.market,
         entity=identity.canonical_name,
         title=str(meta.get("source_title") or "").strip() or "untitled",

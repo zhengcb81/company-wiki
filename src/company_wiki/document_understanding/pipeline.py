@@ -208,8 +208,8 @@ def understand_units(
         from dataclasses import asdict
 
         original_units = {unit['unit_id']: unit for unit in observation['units']}
-        eligible_ids = set()
-        prepared_packages = []
+        eligible_ids: set[str] = set()
+        prepared_packages: list[dict[str, Any]] = []
         for package in packages['packages']:
             budget.charge()
             if package['kind'] == 'operating_table':

@@ -263,7 +263,7 @@ class LegacyResearchIngestService:
         run_store: RunStore,
         llm_client=None,
         graph_adapter=None,
-        validator: OutputValidator = None,
+        validator: OutputValidator | None = None,
     ):
         self._sources = source_registry
         self._runs = run_store
@@ -308,7 +308,7 @@ class LegacyResearchIngestService:
                 return None
 
             # 4. 生成 Claims
-            claims = []
+            claims: list[Claim] = []
             for claim_data in analysis.get("claims", []):
                 claim = Claim(
                     claim_id=f"{source.source_id[:8]}:{len(claims)}",

@@ -1429,6 +1429,9 @@ class SourceResolver:
             from .source_reader import SourceRef
 
             version = self.catalog.reader.exact_source_version(document["document_id"])
+            if version is None:
+                trace.append(f"{document['title']}: no_source_version")
+                continue
             source_ref = SourceRef(version["document_id"], version["source_id"],
                 version["content_sha256"], version["byte_size"], version["mime_type"])
             scope_qualification = source_scope_qualification(self.catalog, source_ref,
@@ -1634,7 +1637,7 @@ class SourceResolver:
         # their issuer (including an explicit unknown), those hints cannot become
         # aliases for a different issuer. Both query and resolve pass this same
         # current visible metadata projection, avoiding a second assertion read.
-        doc_values = set()
+        doc_values: set[str] = set()
         if not authoritative:
             doc_values.update(
                 _normalize_text(str(item.get(key) or ""))
@@ -2198,5 +2201,6 @@ def _v2_assertion_metadata(
 
             for key, value in patch.items():
                 if key in SOURCE_FACT_FIELDS:
-                    result[{"entity": "display_name", "title": "source_title"}.get(key, key)] = value
+                    mapped = {"entity": "display_name", "title": "source_title"}.get(key)
+                    result[mapped if mapped is not None else key] = value
     return result

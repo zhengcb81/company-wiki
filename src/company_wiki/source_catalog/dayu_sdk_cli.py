@@ -145,7 +145,7 @@ async def _sec_operation(action, payload, budget, scratch, provider_state, stagi
         body = await downloader.fetch_file_bytes(candidate.source_url)
         budget.ensure_open()
         verify_sec_primary(body, cik=raw["cik"], year=candidate.fiscal_year,
-                           period=candidate.fiscal_period, report_date=raw["report_date"])
+                           period=candidate.fiscal_period or "", report_date=raw["report_date"])
         return {"receipt": _stage(body, candidate, staging, identity, mime="text/html", suffix=".html", response=original)}
 
 

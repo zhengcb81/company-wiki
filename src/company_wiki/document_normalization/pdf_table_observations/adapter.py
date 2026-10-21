@@ -52,7 +52,7 @@ recoverable evidence gaps become per-item diagnostics.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from typing import Any
+from typing import Any, TypeGuard
 
 from company_wiki.document_understanding.layout_hints.contract import (
     WorkBudget,
@@ -84,7 +84,7 @@ DEGRADING_CODES = frozenset(
 )
 
 
-def _is_index(value: Any) -> bool:
+def _is_index(value: Any) -> TypeGuard[int]:
     return isinstance(value, int) and not isinstance(value, bool) and value >= 0
 
 
@@ -393,7 +393,7 @@ def _build_table(scope, facts, evidence, work_budget, diagnostics):
     count = len(scope.order)
     work_budget.charge(count * max(1, count.bit_length()))
     ordered_keys = sorted(scope.order)
-    rows = {}
+    rows: dict[int, list[Any]] = {}
     for key in ordered_keys:
         work_budget.charge(1)
         rows.setdefault(key[0], []).append(scope.slots[key])
@@ -415,7 +415,7 @@ def _build_table(scope, facts, evidence, work_budget, diagnostics):
         if row not in header_rows and len(slots) > 1:
             degraded = True
             diagnostics.append({"code": "ROW_LABEL_UNAVAILABLE", "row": row})
-    context_units = {}
+    context_units: dict[str, None] = {}
     for uid in evidence.context.get((scope.parent_id, scope.table_id, scope.page), ()):
         work_budget.charge(1)
         fact = facts[uid]
@@ -427,13 +427,13 @@ def _build_table(scope, facts, evidence, work_budget, diagnostics):
             diagnostics.append({"code": "CONTEXT_REF_UNAVAILABLE", "unit_id": uid})
         else:
             context_units[uid] = None
-    context_refs = []
+    context_refs: list[dict[str, Any]] = []
     for uid in context_units:
         work_budget.charge(1)
         context_refs.append({"unit_id": uid, "char_start": 0, "char_end": len(facts[uid]["text"])})
     cells_out = []
     provenance = []
-    needed_units = {}
+    needed_units: dict[str, Any] = {}
     for row, column in ordered_keys:
         work_budget.charge(1)
         slot = scope.slots[(row, column)]

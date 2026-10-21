@@ -221,7 +221,8 @@ def _element_children(node: Any) -> list[Any]:
 
 
 def _tag_name(node: Any) -> str:
-    return getattr(node, "tag", None)
+    tag = getattr(node, "tag", None)
+    return tag if isinstance(tag, str) else ""
 
 
 def _shape_path_string(path: SequenceLike) -> str:
@@ -625,7 +626,7 @@ def parse_pptx(
     preflight = _ZipPreflight(data, limits)
     if mime_main not in SUPPORTED_MIME_TYPES:
         content_types = preflight.read_part("[Content_Types].xml") or b""
-        if not any(marker in content_types for marker in _OOXML_CONTENT_TYPES):
+        if not any(marker.encode("utf-8") in content_types for marker in _OOXML_CONTENT_TYPES):
             raise UnsupportedFormatError(
                 f"mime_type {mime_type!r} is not a PPTX package type"
             )

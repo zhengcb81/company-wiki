@@ -79,8 +79,8 @@ def import_official_json_source(catalog, *, original: bytes, request: dict[str, 
         staged, descriptor, state = _persist_capture(
             catalog, original, validated.to_dict())
         error = OfficialSourceError(reason)
-        error.capture_id = state["capture_id"]
-        error.capture_receipt = dict(receipt)
+        setattr(error, "capture_id", state["capture_id"])
+        setattr(error, "capture_receipt", dict(receipt))
         try:
             _journal(catalog, state, outcome="failed", reason=reason,
                      error_type=error_type, canonical_path=str(staged.resolve()))

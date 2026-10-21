@@ -125,8 +125,8 @@ class QuestionRegistry:
         self,
         question_id: str,
         state: AnswerState,
-        supporting_claim_id: str = None,
-        refuting_claim_id: str = None,
+        supporting_claim_id: str | None = None,
+        refuting_claim_id: str | None = None,
     ):
         """更新问题回答状态"""
         now = datetime.now().isoformat()

@@ -8,7 +8,7 @@ import sqlite3
 import sys
 from dataclasses import fields
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any, NoReturn, Sequence
 
 from company_wiki.source_contract import EvidenceSpan, SourceExportBundleV2
 
@@ -29,7 +29,7 @@ _REF_FIELDS = frozenset(field.name for field in fields(SourceRef))
 
 
 class _JsonArgumentParser(argparse.ArgumentParser):
-    def error(self, message: str) -> None:
+    def error(self, message: str) -> NoReturn:
         raise ValueError(message)
 
 

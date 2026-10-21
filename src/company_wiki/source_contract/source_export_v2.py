@@ -139,13 +139,15 @@ class SourceExportBundleV2:
             # bytes.  Keep bytes only where original UTF-8 text spans require
             # independent grounding at this boundary.
             content = None
+            verified: Any
             if ref.source_id in span_source_ids:
                 content = source_reader.open_version(ref, purpose="source_export")
                 verified = content
             else:
-                verified = source_reader.verify_version(
+                verification = source_reader.verify_version(
                     ref, purpose="source_export"
                 )
+                verified = verification
             if (
                 verified.document_id != ref.document_id
                 or verified.source_id != ref.source_id
@@ -276,10 +278,10 @@ class SourceExportBundleV2:
             raise SourceExportError("unverified evidence span in v2 export")
         locators: dict[tuple[str, str], str] = {}
         for span in spans:
-            key = (span.source_id, span.locator)
-            if key in locators and locators[key] != span.span_id:
+            locator_key = (span.source_id, span.locator)
+            if locator_key in locators and locators[locator_key] != span.span_id:
                 raise SourceExportError("conflicting evidence locator")
-            locators[key] = span.span_id
+            locators[locator_key] = span.span_id
 
         counts = wire["counts"]
         if (

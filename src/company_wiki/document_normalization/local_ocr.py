@@ -488,7 +488,7 @@ class LocalOCRConfig:
                 raise ValueError("invalid model config")
             parsed[k] = OCRModelFile(**v)
         return cls(
-            **parsed,
+            det=parsed["det"], cls=parsed["cls"], rec=parsed["rec"],
             **{k: v for k, v in value.items() if k not in {"schema_version", "models"}},
         )
 
@@ -603,7 +603,10 @@ class LocalOCRAdapter:
 
             with Image.open(io.BytesIO(data)) as image:
                 pixels = image.convert("RGB")
-                result = self._engine(pixels)
+                engine = self._engine
+                if engine is None:
+                    raise LocalOCRError("OCR_ENGINE_UNAVAILABLE")
+                result = engine(pixels)
         except (OSError, ValueError):
             raise LocalOCRError("OCR_INFERENCE_FAILED") from None
         limits.check_deadline()  # Native ONNX is NOT cooperatively interruptible.

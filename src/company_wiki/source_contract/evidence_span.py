@@ -8,7 +8,7 @@ import json
 import math
 import re
 from types import MappingProxyType
-from typing import Any
+from typing import Any, cast
 import unicodedata
 
 from .source_manifest import SOURCE_ID_PREFIX
@@ -232,7 +232,8 @@ class EvidenceCoordinates:
             raise EvidenceSpanError("coordinates must contain at least one location")
         if (self.char_start is None) != (self.char_end is None):
             raise EvidenceSpanError("char_start and char_end must be supplied together")
-        if self.char_start is not None and self.char_end <= self.char_start:
+        if (self.char_start is not None and self.char_end is not None
+                and self.char_end <= self.char_start):
             raise EvidenceSpanError("char_end must be greater than char_start")
         if (self.row_index is not None or self.column_index is not None) and (
             self.table_index is None
@@ -401,7 +402,7 @@ class EvidenceSpan:
             parser_name=parser_name,
             parser_version=parser_version,
             output_sha256=output_sha256,
-            parse_status=parse_status,
+            parse_status=cast(ParseStatus, parse_status),
             quality_flags=_normalize_quality_flags(quality_flags),
         )
 

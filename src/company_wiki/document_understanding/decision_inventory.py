@@ -80,19 +80,25 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.document_normalization.text_matching",
         "company_wiki.source_catalog.n6_candidate_operating_facts",
     )
+    def _module_path(name: str) -> Path:
+        path = getattr(import_module(name), "__file__", None)
+        if not path:
+            raise RuntimeError(f"module {name} has no file")
+        return Path(path)
+
     versions = {"inventory": "1.8.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
             "business_policy": READING_BUSINESS_POLICY_VERSION,
             "business_algorithms": _digest({name: sha256(
-                Path(import_module(name).__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+                _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
                 for name in business_modules}),
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
             "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,
             "continuity_algorithms": _digest({name: sha256(
-                Path(import_module(name).__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+                _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
                 for name in ("company_wiki.document_understanding.narrative_continuity",
                              "company_wiki.document_understanding.indented_tail_geometry")}),
             "table_purpose": table_purpose.FEATURE_VERSION,
@@ -116,7 +122,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         )
         versions["pdf_reading_bridge"] = BRIDGE_VERSION
         versions["pdf_reading_algorithms"] = _digest({name: sha256(
-            Path(import_module(name).__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+            _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
             for name in modules})
         for key, module_name, attribute in (
             ("pdf_frontend", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_READING_LAYOUT_FEATURE_VERSION"),

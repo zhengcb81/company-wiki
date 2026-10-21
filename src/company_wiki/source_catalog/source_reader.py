@@ -392,14 +392,14 @@ class SourceVersionReader:
         if self.query_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
-            row = self.catalog.reader.exact_source_version(ref.document_id)
+            version_row = self.catalog.reader.exact_source_version(ref.document_id)
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
-        if row is None:
+        if version_row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
-        observation = observe_metadata(row["metadata_json"])
+        observation = observe_metadata(version_row["metadata_json"])
         shared = observation.metadata
-        row = observation.project_document(dict(row))
+        row: dict[str, Any] = observation.project_document(dict(version_row))
         visible = _source_metadata(
             {"source_id": ref.source_id, "metadata": shared},
             store=self.catalog.reader,
@@ -577,7 +577,10 @@ class SourceVersionReader:
             "canonical_entity_id": manifest["canonical_entity_id"],
             "display_name": manifest["display_name"],
             "market": manifest["market"],
-            "security_id": canonical_security_code(manifest["security_id"], manifest["market"]),
+            "security_id": canonical_security_code(
+                str(manifest["security_id"]) if manifest["security_id"] is not None else None,
+                str(manifest["market"]) if manifest["market"] is not None else None,
+            ),
             "language": manifest["language"],
             "capture_ready": bool(
                 capture_complete and https_url and manifest["published_date"]
@@ -708,25 +711,21 @@ class SourceVersionReader:
         # The existing catalog annotator owns role/status/rejections filtering
         # and the stable preference order.  Policy decides action eligibility.
         annotated = self.catalog._annotate_locations(ref.document_id, locations)
-        admitted = [
-            location
-            for location in annotated
-            if location["candidate_rank"] > 0
-            and (
-                not roots[location["root_id"]].allowed_document_kinds
-                or version_row["document_kind"]
-                in roots[location["root_id"]].allowed_document_kinds
-            )
-            and (
-                roots[location["root_id"]].max_file_size is None
-                or ref.byte_size <= roots[location["root_id"]].max_file_size
-            )
-            and (
-                not roots[location["root_id"]].allowed_statuses
-                or version_row["source_status"]
-                in roots[location["root_id"]].allowed_statuses
-            )
-        ]
+        admitted = []
+        for location in annotated:
+            root = roots[location["root_id"]]
+            if location["candidate_rank"] <= 0:
+                continue
+            kinds = root.allowed_document_kinds
+            if kinds and version_row["document_kind"] not in kinds:
+                continue
+            limit = root.max_file_size
+            if limit is not None and ref.byte_size > limit:
+                continue
+            statuses = root.allowed_statuses
+            if statuses and version_row["source_status"] not in statuses:
+                continue
+            admitted.append(location)
         if not admitted:
             raise SourceReadError("blocked", "root_admission_denied")
         candidates = admitted

@@ -54,7 +54,7 @@ class MigrationManifest:
     created_at: datetime
     entries: list[MigrationEntry] = field(default_factory=list)
     inverse_entries: list[MigrationEntry] = field(default_factory=list)
-    stats: dict[str, int] = field(default_factory=dict)
+    stats: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -419,7 +419,7 @@ def verify_manifest_consistency(manifest: MigrationManifest) -> tuple[bool, list
     errors = []
 
     # 检查数量守恒
-    action_counts = {}
+    action_counts: dict[MigrationAction, int] = {}
     for entry in manifest.entries:
         action_counts[entry.action] = action_counts.get(entry.action, 0) + 1
 

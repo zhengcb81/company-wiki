@@ -101,6 +101,6 @@ follow_imports = "skip"
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ["yaml", "fitz", "pymupdf", "openpyxl", "xlrd"]
+module = ["yaml", "fitz", "pymupdf", "openpyxl", "xlrd", "lxml", "dayu", "dayu.*", "dayu.fins.*", "rapidocr", "onnxruntime"]
 ignore_missing_imports = true
 

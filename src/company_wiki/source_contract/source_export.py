@@ -6,7 +6,7 @@ import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import re
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from .evidence_span import EVIDENCE_SPAN_SCHEMA_VERSION, EvidenceSpan
 from .source_manifest import SOURCE_MANIFEST_SCHEMA_VERSION, SourceManifest
@@ -86,7 +86,7 @@ def _merge_by_identity(
     identity_name: str,
     label: str,
 ) -> tuple[T, ...]:
-    merged: dict[str, T] = {}
+    merged: dict[str, Any] = {}
     canonical: dict[str, str] = {}
     for item in (*existing, *incoming):
         identity = getattr(item, identity_name)
@@ -97,7 +97,7 @@ def _merge_by_identity(
             )
         merged[identity] = item
         canonical[identity] = text
-    return tuple(merged[key] for key in sorted(merged))
+    return cast(tuple[T, ...], tuple(merged[key] for key in sorted(merged)))
 
 
 def _validate_relationships(

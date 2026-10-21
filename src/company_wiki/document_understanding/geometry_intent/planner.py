@@ -651,13 +651,15 @@ def _require_plan(plan: Any) -> Mapping[str, Any]:
         raise ValueError("plan_digest missing; state cannot bind to this plan")
     if not isinstance(plan.get("profile_id"), str) or not isinstance(plan.get("profile_version"), str):
         raise ValueError("plan profile identity must be strings")
-    if not is_int(plan.get("page_count")) or plan.get("page_count") < 0:
+    page_count_value = plan.get("page_count")
+    if not is_int(page_count_value) or page_count_value < 0:
         raise ValueError("plan.page_count must be a nonnegative int")
     limits = plan.get("limits")
     if not isinstance(limits, Mapping):
         raise ValueError("plan.limits must be a mapping")
     for bound in ("max_pages", "max_requests"):
-        if not is_int(limits.get(bound)) or limits.get(bound) < 0:
+        bound_value = limits.get(bound)
+        if not is_int(bound_value) or bound_value < 0:
             raise ValueError(f"plan.limits.{bound} must be a nonnegative int")
     allocations = plan.get("allocations")
     if not isinstance(allocations, Sequence) or isinstance(allocations, (str, bytes)):
@@ -746,7 +748,8 @@ def _require_state(state: Any, plan: Mapping[str, Any]) -> Mapping[str, Any]:
     for key, counter in state["windows"].items():
         if not isinstance(key, str) or not isinstance(counter, Mapping):
             raise ValueError("state.windows must map window_key -> counter")
-        if not is_int(counter.get("admitted")) or counter.get("admitted") < 0:
+        admitted_value = counter.get("admitted")
+        if not is_int(admitted_value) or admitted_value < 0:
             raise ValueError("state.windows counters must hold nonnegative ints")
     return state
 
@@ -837,7 +840,7 @@ def admit_geometry_request(
         charged_requests: int = 0,
         mutate: Any = None,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
-        next_state = deepcopy(state)
+        next_state: dict[str, Any] = deepcopy(dict(state))
         next_state["reason_counts"][decision] = next_state["reason_counts"].get(decision, 0) + 1
         if mutate is not None:
             mutate(next_state)

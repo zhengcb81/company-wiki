@@ -7,10 +7,10 @@ printed-page-offset logic exists in this package by design.
 from __future__ import annotations
 
 from bisect import bisect_left
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from hashlib import sha256
 import json
-from typing import Any
+from typing import Any, TypeGuard
 
 SCHEMA_POLICY = "du-geometry-policy/1"
 SCHEMA_PLAN = "du-geometry-plan/1"
@@ -52,7 +52,7 @@ MAX_DIAGNOSTIC_DETAIL = 160
 MAX_WINDOW_KEYS_PER_ADMISSION = 64
 
 
-def canonical_digest(payload: Mapping[str, Any]) -> str:
+def canonical_digest(payload: Any) -> str:
     raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return sha256(raw.encode("utf-8")).hexdigest()
 
@@ -81,7 +81,7 @@ class DiagnosticSink:
         return [dict(row) for row in self.rows]
 
 
-def is_int(value: Any) -> bool:
+def is_int(value: Any) -> TypeGuard[int]:
     """Real integers only; ``bool`` is not a page number."""
     return type(value) is int
 

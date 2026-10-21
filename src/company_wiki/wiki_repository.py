@@ -307,9 +307,9 @@ class Projector:
             生成的 Markdown 内容
         """
         # 按时间倒序排列
-        sorted_claims = sorted(
-            [c for c in claims if c.published_at],
-            key=lambda c: c.published_at,
+        dated_claims = sorted(
+            [(c.published_at, c) for c in claims if c.published_at is not None],
+            key=lambda item: item[0],
             reverse=True,
         )
 
@@ -336,8 +336,8 @@ class Projector:
 
         # 时间线
         lines.append("## 时间线\n")
-        for claim in sorted_claims:
-            date_str = claim.published_at.strftime("%Y-%m-%d")
+        for published_at, claim in dated_claims:
+            date_str = published_at.strftime("%Y-%m-%d")
             source_type = self._claim_type_to_label(claim.claim_type)
             lines.append(f"\n### {date_str} | {source_type} | {claim.text[:50]}\n")
             lines.append(f"- {claim.text}\n")

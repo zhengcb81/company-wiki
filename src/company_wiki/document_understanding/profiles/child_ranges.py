@@ -37,7 +37,7 @@ def reserve_native_scope(parsed: Observation, reserved_ids: tuple[str, ...]) -> 
     marker_ids = {unit.unit_id for unit in attachment_markers(parsed, probes_only=False)}
     reserved = set(reserved_ids)
     boundary = None
-    result = {}
+    result: dict[str, None] = {}
     for unit in parsed.units:
         if unit.unit_id in marker_ids:
             boundary = unit.unit_id

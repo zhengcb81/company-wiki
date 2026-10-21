@@ -556,7 +556,7 @@ class ExtractionQualityService:
                 else None
             )
             if narrative is not None:
-                artifact_status = "visible"
+                artifact_status: str | None = "visible"
                 spans = tuple(sorted(narrative.bundle.evidence_spans, key=lambda s: (s.locator, s.span_id)))
                 parser_names = tuple(sorted({span.parser_name for span in spans}))
                 parser_versions = tuple(sorted({span.parser_version for span in spans}))

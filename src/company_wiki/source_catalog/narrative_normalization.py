@@ -243,16 +243,18 @@ class NarrativeNormalization:
         from company_wiki.document_normalization.local_ocr import image_dimensions
 
         for asset in document.opaque_assets:
+            media_sha256 = asset.media_sha256
             if (
                 asset.asset_kind != "image"
                 or asset.original_bytes is None
-                or asset.media_sha256 in seen
+                or media_sha256 is None
+                or media_sha256 in seen
             ):
                 continue
             if len(seen) >= max_images:
                 break
-            seen.add(asset.media_sha256)
-            if hashlib.sha256(asset.original_bytes).hexdigest() != asset.media_sha256:
+            seen.add(media_sha256)
+            if hashlib.sha256(asset.original_bytes).hexdigest() != media_sha256:
                 raise dn.LocalOCRError("OCR_MEDIA_SHA_MISMATCH")
             width, height = image_dimensions(asset.original_bytes, limits)
             total_pixels += width * height

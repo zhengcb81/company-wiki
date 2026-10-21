@@ -357,7 +357,7 @@ def _discover_source_groups(catalog, identity, budget):
                 targets.append((root.root_id, relative))
                 if len(targets) > budget.max_candidates:
                     raise SourceReadError("unavailable", "local_candidate_limit")
-    scopes = {}
+    scopes: dict[str, set[str]] = {}
     for root_id, relative in targets:
         scopes.setdefault(root_id, set()).add(relative)
     for root_id, paths in scopes.items():
@@ -454,15 +454,15 @@ def _prepare_local_source(
         budget.check()
         row = catalog.reader.exact_source_version(candidate["document_id"])
         ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
-        scope = qualified_source_scope(catalog,ref,candidate,historical=historical)
-        relation = scope_relatedness(scope,request)
+        qualified = qualified_source_scope(catalog,ref,candidate,historical=historical)
+        relation = scope_relatedness(qualified,request)
         if relation is ScopeRelation.NOT_RELEVANT:
-            known_identity = known_identity or scope.identity()
+            known_identity = known_identity or qualified.identity()
             diagnostics.append({"document_id":ref.document_id,"reason":"trusted_scope_not_relevant"})
             continue
         eligible.append(candidate)
-        if relation is ScopeRelation.MATCH and scope.authority == "source-facts":
-            known_identity = known_identity or scope.identity()
+        if relation is ScopeRelation.MATCH and qualified.authority == "source-facts":
+            known_identity = known_identity or qualified.identity()
     candidates = eligible
     if not candidates:
         if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget):

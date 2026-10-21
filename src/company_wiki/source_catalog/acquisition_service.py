@@ -149,8 +149,10 @@ class SourceAcquisitionService:
                         result = self._finish(request, staged, budget=budget,
                             cleanup=lambda: self.coordinator.cleanup_target(request, staged.candidate))
                     except Exception as exc:
+                        candidate = acquisition.candidate if acquisition is not None else None
                         try:
-                            self.coordinator.cleanup_target(request, acquisition.candidate)
+                            if candidate is not None:
+                                self.coordinator.cleanup_target(request, candidate)
                         except Exception as cleanup_error:
                             add_note = getattr(exc, "add_note", None)
                             if callable(add_note):
@@ -291,7 +293,7 @@ class SourceAcquisitionService:
         except Exception as exc:
             # The code is assigned at the actual writer responsibility boundary,
             # not inferred from every subsequent completion/journal failure.
-            exc.error_code = "canonical_import_failed"
+            setattr(exc, "error_code", "canonical_import_failed")
             raise
         if budget is not None:
             budget.ensure_open()

@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from typing import Any
 
 from ..layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from ..observation_adapter import build_observation
@@ -73,7 +74,8 @@ def _native_rows(outline, page_count, budget, diagnostics):
     if len(outline) > MAX_OUTLINE:
         diagnostics.add("NAVIGATION_ENTRY_LIMIT", "native navigation exceeds 4096 entries")
         return [], False
-    rows, stack = [], []
+    rows: list[dict[str, Any]] = []
+    stack: list[int] = []
     previous_level, previous_page = 0, 0
     for index in range(len(outline)):
         budget.charge()
@@ -115,7 +117,8 @@ def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostic
     compiled_by_material = {canonical_digest(raw): compiled["rule_key"]
                             for raw, compiled in zip(rules, policy["rules"])}
     compiled_rules = {rule["rule_key"]: rule for rule in policy["rules"]}
-    stack, resolved = [], []
+    stack: list[dict[str, Any]] = []
+    resolved: list[dict[str, Any]] = []
     for row in rows:
         budget.charge(1 + MAX_DEPTH)
         while stack and stack[-1]["level"] >= row["level"]:
@@ -180,7 +183,7 @@ def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostic
     # Do not assign an artificial quota to every unrecognised subheading that
     # inherits the same rule. Keep maximal contiguous runs of one exact policy;
     # gaps, contrary/risk children and different rules always remain boundaries.
-    merged = []
+    merged: list[dict[str, Any]] = []
     for window in windows:
         budget.charge()
         segment_digest = canonical_digest(window)
@@ -256,7 +259,7 @@ def prepare_geometry_reading(units, *, context: PdfReadingContext, source_id: st
     route = {"profile_id": "unknown", "family": "unknown", "confidence": "unknown"}
     windows, native_rows, navigation_complete = [], [], False
     unresolved = []
-    blocked = []
+    blocked: list[dict[str, Any]] = []
     partial = False
     try:
         budget.charge()

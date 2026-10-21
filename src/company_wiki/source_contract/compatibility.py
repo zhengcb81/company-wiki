@@ -95,7 +95,8 @@ def _stable_semver_key(
     match = _STABLE_SEMVER_RE.fullmatch(value)
     if match is None:
         raise error_type(f"{label} must be a stable semantic version")
-    return tuple(int(part) for part in match.groups())
+    major, minor, patch = match.groups()
+    return int(major), int(minor), int(patch)
 
 
 def _require_sequence(value: Any, label: str) -> Sequence[Any]:
@@ -224,7 +225,8 @@ def validate_compatibility_policy(policy: Mapping[str, Any]) -> dict[str, Any]:
             "compatible_version_sets must not be empty"
         )
     normalized_version_sets: list[dict[str, str]] = []
-    covered_versions = {name: set() for name in SOURCE_CONTRACT_NAMES}
+    covered_versions: dict[str, set[tuple[int, int, int]]] = {
+        name: set() for name in SOURCE_CONTRACT_NAMES}
     seen_version_sets: set[tuple[str, ...]] = set()
     previous_version_set_key: tuple[tuple[int, int, int], ...] | None = None
     for index, raw_version_set in enumerate(compatible_version_sets):
@@ -341,12 +343,12 @@ def validate_compatibility_policy(policy: Mapping[str, Any]) -> dict[str, Any]:
                 "deprecation notices must be unique by contract and version"
             )
         seen_notices.add(notice_identity)
-        sort_key = (contract_name, version_key)
-        if previous_sort_key is not None and sort_key <= previous_sort_key:
+        notice_sort_key: tuple[str, tuple[int, int, int]] = (str(contract_name), version_key)
+        if previous_sort_key is not None and notice_sort_key <= previous_sort_key:
             raise SourceContractCompatibilityError(
                 "deprecation notices must be sorted by contract and version"
             )
-        previous_sort_key = sort_key
+        previous_sort_key = notice_sort_key
 
         if version not in version_keys[contract_name]:
             raise SourceContractCompatibilityError(

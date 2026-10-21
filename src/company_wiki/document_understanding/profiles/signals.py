@@ -892,9 +892,9 @@ def _detect_offering(
                             (CN_IPO_WORDS, "首次公开发行/招股措辞")):
         if add_named_signal(aliases, detail):
             break
-    for aliases, detail in ((HK_OFFERING_WORDS, "港股全球发售措辞"),
-                            (HK_PROSPECTUS_WORDS, "港股招股章程措辞")):
-        if add_named_signal(aliases, detail):
+    for hk_aliases, hk_detail in ((HK_OFFERING_WORDS, "港股全球发售措辞"),
+                                  (HK_PROSPECTUS_WORDS, "港股招股章程措辞")):
+        if add_named_signal(hk_aliases, hk_detail):
             break
 
     fundraising = (

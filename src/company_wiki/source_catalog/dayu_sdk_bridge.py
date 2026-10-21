@@ -152,7 +152,8 @@ def discover_hk(
     for candidate in client.list_report_candidates(query, profile):
         if candidate.filing_date > request.as_of_date:
             continue
-        raw = asdict(candidate) if is_dataclass(candidate) else vars(candidate).copy()
+        raw = (asdict(candidate) if is_dataclass(candidate) and not isinstance(candidate, type)
+               else vars(candidate).copy())
         value = {
             "candidate_id": "hkexnews:" + candidate.source_id,
             "provider": "hkexnews", "provider_document_id": candidate.source_id,

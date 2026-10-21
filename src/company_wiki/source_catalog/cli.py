@@ -649,6 +649,8 @@ def _acquisition_budget_from_args(
             "the three --max-download-* limits must be supplied together"
         )
     max_bytes, max_seconds, max_cost_usd = values
+    if max_bytes is None or max_seconds is None or max_cost_usd is None:
+        raise ValueError("the three --max-download-* limits must be supplied together")
     return AcquisitionBudget.from_limits(
         max_response_bytes=max_bytes,
         max_seconds=max_seconds,
@@ -1006,15 +1008,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             else:
                 return 2
         elif args.command == "identify":
-            store = security_master_store()
+            master_store = security_master_store()
             refresh = None
             if args.refresh:
                 markets = (args.market,) if args.market else SECURITY_MARKETS
-                refresh = OfficialSecurityMasterRefresher(store).refresh(
+                refresh = OfficialSecurityMasterRefresher(master_store).refresh(
                     markets=markets
                 )
             identity = SecurityIdentityResolver(
-                load_identity_master(store, market=args.market)
+                load_identity_master(master_store, market=args.market)
             ).identify(
                 args.query,
                 market=args.market,
@@ -1055,7 +1057,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "resolve":
             from .acquisition_journal import AcquisitionJournal
             from .resolver import build_resolution_envelope
-            request, identity = source_request()
+            request, resolved_identity = source_request()
+            if resolved_identity is None:
+                raise ValueError("resolve requires a resolvable identity")
+            identity = resolved_identity
             policy = None  # Legacy runtime snapshots require an explicit compatibility caller.
             resolution = SourceResolver(get_catalog(), runtime_policy=policy).resolve(
                 request
@@ -1098,7 +1103,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .acquisition_journal import AcquisitionJournal
             from .close_gap import CloseGapTransaction
 
-            request, identity = source_request()
+            request, _identity = source_request()
             budget = _acquisition_budget_from_args(args, required=True)
             args._acquisition_budget = budget
             binding = _acquisition_binding_from_args(args, request, budget, project_root)
@@ -1206,8 +1211,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "path": str(policy_path),
                 }
         elif args.command == "import-portfolio":
-            identity = identify_company() if args.company_query else None
-            resolved = identity.resolved if identity else None
+            optional_identity = identify_company() if args.company_query else None
+            resolved = optional_identity.resolved if optional_identity else None
             if resolved is not None:
                 promotion_identity = PromotionIdentity(
                     canonical_name=resolved.canonical_name,

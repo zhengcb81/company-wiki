@@ -728,7 +728,7 @@ def _observe_file(
             retrieved_at = str(
                 candidate.group_metadata.get("retrieved_at") or retrieved_at
             )
-        manifest_values = dict(
+        manifest_values: dict[str, Any] = dict(
             entity_ids=(entity_id,),
             source_type=source_type if candidate.role == "original_primary" else SourceType.OTHER,
             published_date=(
@@ -742,8 +742,16 @@ def _observe_file(
             mime_type=mime_type,
         )
         if budget is None:
-            manifest = SourceManifest.from_file(root=candidate.root.path,
-                                               file_path=candidate.path, **manifest_values)
+            manifest = SourceManifest.from_file(
+                root=candidate.root.path, file_path=candidate.path,
+                entity_ids=manifest_values["entity_ids"],
+                source_type=manifest_values["source_type"],
+                published_date=manifest_values["published_date"],
+                retrieved_at=manifest_values["retrieved_at"],
+                collector_name=manifest_values["collector_name"],
+                collector_version=manifest_values["collector_version"],
+                mime_type=manifest_values["mime_type"],
+            )
         else:
             # Budget-mode registration must hash actual bytes, not trust stat/cache.
             from company_wiki.source_contract.source_manifest import (
@@ -756,7 +764,13 @@ def _observe_file(
                                       original_path=candidate.relative_path,
                                       content_sha256=digest, byte_size=actual_size,
                                       immutable_status=ImmutableStatus.VERIFIED,
-                                      **manifest_values)
+                                      entity_ids=manifest_values["entity_ids"],
+                                      source_type=manifest_values["source_type"],
+                                      published_date=manifest_values["published_date"],
+                                      retrieved_at=manifest_values["retrieved_at"],
+                                      collector_name=manifest_values["collector_name"],
+                                      collector_version=manifest_values["collector_version"],
+                                      mime_type=manifest_values["mime_type"])
         expected_sha256 = candidate.group_metadata.get("content_sha256")
         if (
             candidate.role == "original_primary"

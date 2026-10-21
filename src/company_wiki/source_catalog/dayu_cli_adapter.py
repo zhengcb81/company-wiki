@@ -260,7 +260,7 @@ class DayuCliDownloadAdapter:
                 process.wait()
         cli_stderr = ""
         if process.returncode is not None and process.returncode != 0:
-            cli_stderr = ((process.stderr.read() or "").strip())[-3000:]
+            cli_stderr = ((process.stderr.read() if process.stderr is not None else "").strip())[-3000:]
         try:
             if not candidates:
                 candidates = self._read_candidates(request)
@@ -437,7 +437,10 @@ class DayuCliDownloadAdapter:
             return None
         filename = _required_text(file_entry.get("name"), "files[].name")
         source_path = (meta_path.parent / filename).resolve(strict=True)
-        source_path.relative_to(self._workspace)
+        workspace = self._workspace
+        if workspace is None:
+            raise DayuCliAdapterError("Dayu CLI workspace is not configured")
+        source_path.relative_to(workspace)
         if not source_path.is_file():
             raise DayuCliAdapterError("Dayu meta primary file is missing")
         byte_size = file_entry.get("size")
@@ -455,7 +458,7 @@ class DayuCliDownloadAdapter:
             exhibit_assets = self._us_exhibit_assets(value, filing_dir, filename, candidate_id)
             for exhibit in exhibit_assets:
                 try:
-                    exhibit.source_path.relative_to(self._workspace)
+                    exhibit.source_path.relative_to(workspace)
                 except ValueError as exc:
                     raise DayuCliAdapterError(
                         f"Dayu exhibit source escapes the workspace: {exhibit.source_path.name}"

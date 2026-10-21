@@ -228,10 +228,9 @@ class PdfLayoutCollector:
         crop = _box(getattr(page, "cropbox", None))
         position = getattr(page, "cropbox_position", None)
         try:
-            crop_position = [
-                float(position.x),
-                float(position.y),
-            ]
+            if position is None:
+                raise TypeError("cropbox position is unavailable")
+            crop_position = [float(position.x), float(position.y)]
         except (AttributeError, TypeError, ValueError):
             crop_position = None
         if (

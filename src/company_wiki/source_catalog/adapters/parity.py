@@ -40,7 +40,7 @@ def run_parity(
     v1_candidates: list,
     v2_candidates: list,
     *,
-    known_bad: dict[str, str] | None = None,
+    known_bad: dict[tuple[str, str], str] | None = None,
     entity_of=lambda candidate: getattr(candidate, "entity_name", None),
 ) -> ParityReport:
     """Compare v1/v2 candidate sets.  known_bad maps (path, field) -> reason;

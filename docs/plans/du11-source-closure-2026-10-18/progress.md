@@ -1,3 +1,19 @@
+## 大节点完成：全仓 mypy 0 + CI 全量门禁（2026-10-21）
+
+- `mypy src`：**335 errors / 85 files → 0 errors / 366 files**；`automation`、`source_catalog`、
+  `document_understanding`、`document_normalization`、顶层/`source_contract` 全部清零。
+- CI：`Strict type check on src`（`python -m mypy src`）替代原 automation-only 步骤；
+  job timeout 5→10 分钟。
+- 真 bug：`narrative_model_runtime` 的 `scoped.ModelResponseError` AttributeError、
+  `routing` 的 `rel.name/rel.score` 字段错误、PyMuPDF `fitz` stdout 污染、
+  `parity.run_parity` 的 known_bad 键类型、`reconcile_retire_state` 的 Row→dict。
+- 验证：全量单测 **7033 passed / 24 skipped**；相关 contract **113 passed**；
+  `ruff` 全仓干净；`compileall` 通过；远端 CI 绿。
+- 交接：新增 `HANDOFF-2026-10-21.md`（给后续 harness 的详细交接）。
+- 质量审计基线仍在：复杂度 292/173/111、lint 扩面约 1000、覆盖率未测、4 个大模块。
+
+---
+
 ## 暂停点（2026-10-20 23:55）
 
 - **当前绿点**：`e1f9dc54`，远端 CI success；工作树干净（仅其他计划的 `.planning` 未跟踪文件）。

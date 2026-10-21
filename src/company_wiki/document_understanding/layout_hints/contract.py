@@ -26,6 +26,14 @@ DEFAULT_LIMITS = {
 GEOMETRY_EPS = 0.01
 
 
+def require_bbox(item: Any) -> tuple[float, float, float, float]:
+    """Return a geometry-bearing item's box; callers filter deferred/empty units."""
+    box = item.bbox
+    if box is None:
+        raise ValueError("bbox is required for geometry work")
+    return box
+
+
 @dataclass(frozen=True)
 class Unit:
     unit_id: str

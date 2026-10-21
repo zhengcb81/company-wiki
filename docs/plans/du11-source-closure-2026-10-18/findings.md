@@ -1,3 +1,21 @@
+## 类型棘轮技术发现（2026-10-21）
+
+- **mypy 单文件 vs 全包结果不同**：配置 `follow_imports = "skip"`，单文件检查会漏掉
+  跨模块收窄；以 `mypy src` 为准。新增 override 后必须 `--no-incremental` 复验。
+- **frozen dataclass 不满足可变 Protocol 属性**：`GroupCandidate` 改为 `@property` 只读协议。
+- **TypeGuard 是收窄 Optional 的正确工具**：`_sequence`（PDF 快照）、`_is_index`（表格
+  slot）、`is_int`（几何 page）改造后，原本成片的 `union-attr/operator` 错误消失。
+- **动态异常属性是有意的跨层协议**：`capture_id`/`capture_receipt`/`acquisition_usage`/
+  `provider_started`/`error_code` 挂在原始异常上；读写用 `setattr/getattr`，不要强类型包装。
+- **PyMuPDF 1.28 的 `fitz` shim 把弃用警告打到 stdout**（不是 stderr），会污染公开 CLI 的
+  JSON；统一 `import pymupdf as fitz`。2.0 改变文本/表格提取语义，已固定 `<2.0`。
+- **argparse 子类 `error()` 必须返回 `NoReturn`**（基类如此）。
+- **SQLite `Row` 不是 dict**：需要 dict 语义要显式 `dict(row)`；`fetchone()` 必须 None 守卫。
+- **真实 bug 往往藏在 `attr-defined` 里**：本次抓到 `scoped.ModelResponseError` 与
+  `rel.name/rel.score` 两处运行期必崩的分支。
+
+---
+
 ## 内容验收口径更新：数字可以近似，但不能错（用户，2026-10-18）
 
 - 用户明确：精确数字丢失问题不大（例：写“超过 7,500”可以），但**不能写错**（例：写“少于 7,000”不允许）。

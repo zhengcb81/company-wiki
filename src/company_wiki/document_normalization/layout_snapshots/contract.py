@@ -71,6 +71,7 @@ def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] 
     )
     pages_raw = snapshot.get("pages")
     _require(isinstance(pages_raw, list), "pages must be a list")
+    assert isinstance(pages_raw, list)
 
     resolved = resolve_limits(limits)
     budget = (work_budget.scoped(resolved["max_work_units"]) if work_budget is not None
@@ -82,16 +83,12 @@ def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] 
         width = page_raw.get("width")
         height = page_raw.get("height")
 
-        dict_size = (
-            (_optional_size(page_raw.get("dict_width")), _optional_size(page_raw.get("dict_height")))
-            if "dict_width" in page_raw or "dict_height" in page_raw
-            else None
-        )
-        rect_size = (
-            (_optional_size(page_raw.get("rect_width")), _optional_size(page_raw.get("rect_height")))
-            if "rect_width" in page_raw or "rect_height" in page_raw
-            else None
-        )
+        dict_w = _optional_size(page_raw.get("dict_width"))
+        dict_h = _optional_size(page_raw.get("dict_height"))
+        dict_size = (dict_w, dict_h) if dict_w is not None and dict_h is not None else None
+        rect_w = _optional_size(page_raw.get("rect_width"))
+        rect_h = _optional_size(page_raw.get("rect_height"))
+        rect_size = (rect_w, rect_h) if rect_w is not None and rect_h is not None else None
         frame = normalize_frame(
             coordinate_frame=page_raw.get("coordinate_frame"),
             rotation=page_raw.get("rotation"),
@@ -112,9 +109,10 @@ def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] 
             )
             binding_unit_id = binding_raw.get("unit_id")
             _require(
-                isinstance(binding_unit_id, str) and binding_unit_id,
+                isinstance(binding_unit_id, str) and bool(binding_unit_id),
                 f"pages[{index}].bindings[{b_index}].unit_id must be a non-empty string",
             )
+            assert isinstance(binding_unit_id, str)
             bbox = legal_bbox(binding_raw.get("bbox"))
             bindings.append(
                 Binding(

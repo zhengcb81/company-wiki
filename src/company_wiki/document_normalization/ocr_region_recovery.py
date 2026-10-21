@@ -17,6 +17,7 @@ rather than stitched.
 
 from __future__ import annotations
 
+from typing import Any, Callable
 from dataclasses import dataclass, replace
 import io
 import math
@@ -276,7 +277,7 @@ def _column_dark_counts(
     pixels = image.load()
     mode = image.mode
     converter = None
-    palette_cache = {}
+    palette_cache: dict[Any, Any] = {}
     if mode not in {"RGB", "RGBA", "RGBX", "L", "LA", "1"}:
         from PIL import Image
 
@@ -646,6 +647,7 @@ def recover_regions(
                 status = "budget_exhausted"
                 break
             limits.check_deadline()
+            builder: Callable[..., Any]
             if transform_name == MARGIN_CROP_TRANSFORM:
                 builder = build_margin_crop
                 params = {"margin_ratio": MARGIN_RATIO}

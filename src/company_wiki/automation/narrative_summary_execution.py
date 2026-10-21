@@ -239,19 +239,15 @@ def _bind_summary(
                 and claim.context_evidence_ids == task.context_ids,
                 "source card evidence differs from its complete factual scope",
             )
-            expected_chars = (
-                sum(len(known[sid].raw_text) for sid in task.support_ids)
-                + len(task.support_ids)
-                - 1
-            )
+            support_texts = [known[sid].raw_text or "" for sid in task.support_ids]
+            expected_chars = sum(len(text) for text in support_texts) + len(support_texts) - 1
             _require(
                 len(claim.text) == expected_chars,
                 "source card bytes differ from their factual scope",
             )
             # Only materialize text already bounded by the canonical inner summary.
             _require(
-                claim.text
-                == "\n".join(known[sid].raw_text for sid in task.support_ids),
+                claim.text == "\n".join(support_texts),
                 "source card bytes differ from their factual scope",
             )
             _require(

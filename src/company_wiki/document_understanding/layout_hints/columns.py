@@ -10,8 +10,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from bisect import bisect_right
+from typing import Any
 
-from .contract import Page, Unit
+from .contract import Page, Unit, require_bbox
 
 
 @dataclass
@@ -28,8 +29,8 @@ def _in_edge_zone(unit: Unit) -> bool:
     if not unit.page_height:
         return False
     return (
-        unit.bbox[3] <= unit.page_height * 0.08
-        or unit.bbox[1] >= unit.page_height * 0.90
+        require_bbox(unit)[3] <= unit.page_height * 0.08
+        or require_bbox(unit)[1] >= unit.page_height * 0.90
     )
 
 
@@ -41,11 +42,11 @@ def compute_cuts(units: list[Unit], page_width: float, budget) -> list[float]:
     if len(units) < 4 or not page_width:
         return []
     gap_min = max(10.0, 0.02 * page_width)
-    ordered = sorted(units, key=lambda u: (u.bbox[0], u.bbox[2], u.ordinal))
-    islands = []
+    ordered = sorted(units, key=lambda u: (require_bbox(u)[0], require_bbox(u)[2], u.ordinal))
+    islands: list[list[Any]] = []
     for unit in ordered:
         budget.charge()
-        box = unit.bbox
+        box = require_bbox(unit)
         if islands and box[0] <= islands[-1][1] + gap_min:
             islands[-1][1] = max(islands[-1][1], box[2])
             islands[-1][2] += 1
@@ -88,8 +89,8 @@ def detect_document_lanes(
             continue
         for unit in candidates:
             budget.charge(1)
-            left = bisect_right(cuts, unit.bbox[0])
-            right = bisect_right(cuts, unit.bbox[2] - 1e-9)
+            left = bisect_right(cuts, require_bbox(unit)[0])
+            right = bisect_right(cuts, require_bbox(unit)[2] - 1e-9)
             if right > left:
                 layout.spanning.append(unit)
                 continue
@@ -98,7 +99,7 @@ def detect_document_lanes(
                 layout.lanes.append([])
             layout.lanes[bucket].append(unit)
         layout.lanes = [
-            sorted(members, key=lambda u: (u.bbox[1], u.bbox[0], u.ordinal))
+            sorted(members, key=lambda u: (require_bbox(u)[1], require_bbox(u)[0], u.ordinal))
             for members in layout.lanes
             if members
         ]
@@ -115,7 +116,7 @@ def _parallel_bands(layout: LaneLayout, budget) -> bool:
         return False
 
     def tops(units):
-        return [(u.bbox[1] + u.bbox[3]) / 2.0 for u in units]
+        return [(require_bbox(u)[1] + require_bbox(u)[3]) / 2.0 for u in units]
 
     left = tops(layout.lanes[0])
     right = tops(layout.lanes[1])

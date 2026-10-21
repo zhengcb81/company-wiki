@@ -525,11 +525,23 @@ class AnnouncementCollectionReceipt:
             "manifest": manifest.to_dict(),
         }
         return cls(
+            schema_version=ANNOUNCEMENT_COLLECTION_SCHEMA_VERSION,
             collection_id=(
                 ANNOUNCEMENT_COLLECTION_ID_PREFIX + _canonical_sha256(payload)
             ),
+            collector_name=ANNOUNCEMENT_COLLECTOR_NAME,
+            collector_version=ANNOUNCEMENT_COLLECTOR_VERSION,
+            source_url=source_url,
+            final_url=final_url,
+            title=title,
+            published_date=published_date,
+            retrieved_at=retrieved_at,
+            content_type=content_type,
+            etag=etag,
+            last_modified=last_modified,
+            manifest_path=manifest_path,
+            provenance_path=provenance_path,
             manifest=manifest,
-            **{key: value for key, value in payload.items() if key != "manifest"},
         )
 
     @classmethod

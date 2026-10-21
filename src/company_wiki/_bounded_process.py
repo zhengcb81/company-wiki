@@ -304,8 +304,8 @@ def run_bounded(
                 failure = TransportError("owned process cleanup failed")
             failure.add_note(f"owned process cleanup failed: {type(cleanup_error).__name__}")
     if failure is not None:
-        failure.stdout = b"".join(state.chunks["stdout"])
-        failure.stderr = b"".join(state.chunks["stderr"])
+        setattr(failure, "stdout", b"".join(state.chunks["stdout"]))
+        setattr(failure, "stderr", b"".join(state.chunks["stderr"]))
         raise failure
     return _result(proc, state)
 
@@ -356,8 +356,13 @@ def run_json_process(command, *, input, cwd, env, timeout_seconds):
     except ChildTimeout as error:
         timeout = subprocess.TimeoutExpired(command, timeout_seconds,
             output=getattr(error, "stdout", b""), stderr=getattr(error, "stderr", b""))
-        timeout.provider_started = error.provider_started
+        setattr(timeout, "provider_started", error.provider_started)
         raise timeout from error
-    return subprocess.CompletedProcess(command, code,
-        stdout=stdout.decode("utf-8", errors="strict"),
-        stderr=stderr.decode("utf-8", errors="strict"))
+    return subprocess.CompletedProcess(
+        command,
+        int(code) if isinstance(code, int) else 0,
+        stdout=(stdout.decode("utf-8", errors="strict") if isinstance(stdout, (bytes, bytearray))
+                else str(stdout)),
+        stderr=(stderr.decode("utf-8", errors="strict") if isinstance(stderr, (bytes, bytearray))
+                else str(stderr)),
+    )

@@ -285,7 +285,13 @@ def extractive_boundary_identity(boundary) -> dict[str, Any]:
                'runtime': narrative_model_runtime, 'source_view': narrative_model_scoped,
                'legacy_utilities': legacy, 'subject_contracts': narrative_subject,
                'execution_contract': narrative_summary_execution}
-    dependencies = {name: hashlib.sha256(Path(module.__file__).read_bytes()
+    def _module_path(module: Any) -> Path:
+        path = getattr(module, "__file__", None)
+        if not path:
+            raise RuntimeError("module has no file")
+        return Path(path)
+
+    dependencies = {name: hashlib.sha256(_module_path(module).read_bytes()
         .replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest() for name, module in modules.items()}
     return {'schema_version': 'reading-model-boundary/1',
         'source_card_allocation_version': SOURCE_CARD_ALLOCATION_VERSION,

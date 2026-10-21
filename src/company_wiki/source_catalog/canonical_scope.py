@@ -150,6 +150,8 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
     if prior and prior["document_id"] == ref.document_id and prior["evidence_basis"] == "source-facts":
         payload = _evidence_payload(prior["evidence_json"], prior["assertion_id"])
         facts, evidence = payload.get("source_fact_patch"), payload.get("source_fact_evidence")
+        if not isinstance(facts, dict) or not isinstance(evidence, dict):
+            raise ValueError("source facts must be a nonempty object of known fields")
         _validate_source_facts(facts, evidence)
         commit = payload.get("canonical_commit")
         if commit is not None:

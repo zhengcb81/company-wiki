@@ -11,6 +11,7 @@ CompanyRawAdapter and DayuAdapter their production callers.
 
 from __future__ import annotations
 
+
 from dataclasses import replace
 from typing import Any
 
@@ -86,7 +87,7 @@ def discover_issuer_paths(root: RootSpec, **ports) -> set[str]:
             return set()
         discover = getattr(factory(), "discover_issuer_paths", None)
         return discover(root.path, **ports) if callable(discover) else set()
-    selected = set()
+    selected: set[str] = set()
     for configured_root in configured:
         discover = getattr(adapter_for(configured_root), "discover_issuer_paths", None)
         if callable(discover):
@@ -160,7 +161,7 @@ def scan_root_via_adapter(
                      if isinstance(item, NormalizedCandidate)
                      and item.role in {"original_primary", "indexed_only"}}
         groups.append((configured_root, candidates, primaries))
-    attachment_owners = {}
+    attachment_owners: dict[str, RootSpec] = {}
     for configured_root, candidates, primaries in groups:
         for item in candidates:
             if not isinstance(item, NormalizedCandidate) or item.role in {"original_primary", "indexed_only"}:
@@ -171,8 +172,8 @@ def scan_root_via_adapter(
                 if previous is not None and previous != effective:
                     raise AdapterDispatchError("source attachment has conflicting route owners")
                 attachment_owners[item.relative_path] = effective
-    converted = []
-    seen = set()
+    converted: list[Any] = []
+    seen: set[str] = set()
     for configured_root, candidates, primaries in groups:
         for item in candidates:
             if not isinstance(item, NormalizedCandidate):
@@ -182,9 +183,10 @@ def scan_root_via_adapter(
                 continue
             # Group membership from the owning adapter outranks another
             # layout's attempt to treat that metadata file as a new original.
-            effective = attachment_owners.get(item.relative_path)
-            if effective is None:
-                effective = root.effective_root_for_path(primaries.get(item.group_key, item.group_key))
+            owner = attachment_owners.get(item.relative_path)
+            if owner is None:
+                owner = root.effective_root_for_path(primaries.get(item.group_key, item.group_key))
+            effective = owner
             if effective.adapter_id == configured_root.adapter_id:
                 if root.routes and item.relative_path in seen:
                     raise AdapterDispatchError("routed adapter emitted duplicate source path")

@@ -13,7 +13,7 @@ import json
 import sqlite3
 import sys
 from pathlib import Path
-from typing import Sequence, cast
+from typing import Any, NoReturn, Sequence, cast
 
 from .config import CatalogConfigError, load_catalog_config
 from .reader import CatalogReaderUnavailable
@@ -31,7 +31,7 @@ from .source_reader import (
 
 
 class _JsonArgumentParser(argparse.ArgumentParser):
-    def error(self, message: str) -> None:
+    def error(self, message: str) -> NoReturn:
         raise ValueError(message)
 
 
@@ -66,7 +66,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             ref, purpose=args.purpose,
             expected_read_policy_sha256=args.expected_read_policy_sha256,
         )
-        extension = {}
+        extension: dict[str, Any] = {}
         if args.include_canonical_identity:
             market = cast(str | None, manifest.get("market"))
             security_id = cast(str | None, manifest.get("security_id"))

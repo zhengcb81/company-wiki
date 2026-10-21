@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import re
 import shutil
-from typing import Any, Protocol, runtime_checkable
+from typing import Any, Protocol, cast, runtime_checkable
 
 from .authorization import DownloadAuthorization
 from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
@@ -445,7 +445,7 @@ class AcquisitionCoordinator:
         else:
             self._require_bounded_adapter(adapter)
             budget.ensure_open()
-            candidates = tuple(adapter.discover_bounded(request, budget))
+            candidates = tuple(cast(Any, adapter).discover_bounded(request, budget))
         self._validate_candidates(request, candidates)
         candidates = tuple(c for c in candidates
                            if (candidate_scope is None or candidate_scope(c))
@@ -526,7 +526,7 @@ class AcquisitionCoordinator:
             self._require_bounded_adapter(adapter)
             budget.ensure_open()
             bytes_before_fetch = budget.response_bytes_used
-            receipt = adapter.fetch_bounded(candidate, request_directory, budget)
+            receipt = cast(Any, adapter).fetch_bounded(candidate, request_directory, budget)
             budget.ensure_open()
             bytes_charged_during_fetch = (
                 budget.response_bytes_used - bytes_before_fetch
@@ -609,7 +609,7 @@ class AcquisitionCoordinator:
                     )
                 budget.ensure_open()
                 discovered = tuple(
-                    adapter.discover_bounded(discovery_request, budget)
+                    cast(Any, adapter).discover_bounded(discovery_request, budget)
                 )
                 budget.ensure_open()
         except AcquisitionBudgetExceeded:

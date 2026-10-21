@@ -34,7 +34,7 @@ def _query_matches(query: dict[str, list[str]], request: SourceRequest) -> bool:
         and all(len(values) == 1 and values[0] for values in query.values())
         and query.get("symbol") == [request.security_id]
         and query.get("year") == [str(request.fiscal_year)]
-        and query.get("quarter") == [request.fiscal_period.removeprefix("Q")]
+        and query.get("quarter") == [(request.fiscal_period or "").removeprefix("Q")]
     )
 
 

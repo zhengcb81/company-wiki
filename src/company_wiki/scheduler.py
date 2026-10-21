@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 
 
 class WriteMode(str, Enum):
@@ -385,7 +385,7 @@ class Scheduler:
         jobs = self._db.get_pending_jobs(limit=1)
         return jobs[0] if jobs else None
 
-    def run_job(self, job: Job, handler: callable):
+    def run_job(self, job: Job, handler: Callable[..., Any]):
         """
         运行任务。
 
@@ -432,7 +432,7 @@ class Scheduler:
         except Exception as e:
             self._db.update_job_status(job.job_id, JobStatus.FAILED, str(e))
 
-    def start(self, handler: callable):
+    def start(self, handler: Callable[..., Any]):
         """启动调度循环"""
         self._running = True
         while self._running:

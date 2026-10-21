@@ -591,7 +591,8 @@ def build_native_continuity(
             continue
         left_closed = type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0
         if not left_closed and previous_observed is not None:
-            previous_meta = provenance.get(previous_observed.get("unit_id"), {})
+            previous_unit_id = previous_observed.get("unit_id")
+            previous_meta = provenance.get(previous_unit_id, {}) if isinstance(previous_unit_id, str) else {}
             end, start = previous_meta.get("block_char_end"), meta.get("block_char_start")
             left_closed = bool(
                 type(end) is int and type(start) is int and 0 <= start - end <= 2

@@ -87,7 +87,7 @@ class SourceRegistry:
         publisher: str = "",
         published_at: Optional[datetime] = None,
         url: str = "",
-        entity_hints: list[str] = None,
+        entity_hints: list[str] | None = None,
     ) -> SourceRecord:
         """
         注册一个来源。如果已存在（相同 content_hash），返回现有记录。

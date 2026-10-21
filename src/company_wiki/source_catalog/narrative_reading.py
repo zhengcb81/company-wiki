@@ -461,8 +461,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     texts = {uid: unit.raw_text for uid, unit in units.items()}
     original_units = {unit.unit_id: unit for unit in parsed.units}
     inverse_origins: dict[str, list[str]] = {}
-    for original, carrier in origins.items():
-        inverse_origins.setdefault(carrier, []).append(original)
+    for origin_uid, carrier_uid in origins.items():
+        inverse_origins.setdefault(carrier_uid, []).append(origin_uid)
 
     def original_members(uid: str) -> tuple[str, ...]:
         # A final carrier stands for every original it replaced; never just [0].
@@ -500,14 +500,14 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     antecedents: dict[str, tuple[tuple[str, ...], bool]] = {}
     for package in budget_packages:
         for uid in package.get("member_unit_ids", ()):
-            members = original_members(uid)
-            window = windows.get(members[0])
+            member_ids = original_members(uid)
+            window = windows.get(member_ids[0])
             if window is None:
                 # No proven window is unknown scope, never a proven absence.
                 antecedents[uid] = ((), False)
                 continue
             antecedents[uid] = (tuple(entry for entry in window["predecessor_unit_ids"]
-                                      if entry not in set(members)), window["complete"])
+                                      if entry not in set(member_ids)), window["complete"])
     analysis_groups: dict[str, tuple[str, ...]] = {}
     for package in budget_packages:
         if package["kind"] == "native_continuity" and len(package["member_unit_ids"]) > 1:
@@ -584,9 +584,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             contexts.setdefault(uid, set()).update(context_ids - {uid})
         if package["kind"] == "native_continuity" and len(package["member_unit_ids"]) > 1:
             owner = "analysis:" + package["package_id"]
-            members = tuple(package["member_unit_ids"])
-            analysis_groups[owner] = members
-            contexts[owner] = context_ids - set(members)
+            owner_members = tuple(package["member_unit_ids"])
+            analysis_groups[owner] = owner_members
+            contexts[owner] = context_ids - set(owner_members)
         for index, view in enumerate(package.get("native_analysis_views", ())):
             if len(view) > 1:
                 owner = "analysis:" + package["package_id"] + ":" + str(index)

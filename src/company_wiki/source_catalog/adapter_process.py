@@ -423,7 +423,7 @@ class JsonCommandAdapter:
                 retryable_raw = error_obj.get("retryable")
                 if isinstance(retryable_raw, bool):
                     exc.retryable = retryable_raw
-                    exc.reported_retryable = retryable_raw
+                    setattr(exc, "reported_retryable", retryable_raw)
                 final_payload = json.loads(detail.splitlines()[-1])
                 exc.acquisition_cost_observed = (final_payload.get("acquisition_cost_observed")
                                                 if type(final_payload.get("acquisition_cost_observed")) is bool else None)

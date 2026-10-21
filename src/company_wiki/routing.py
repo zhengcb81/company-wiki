@@ -84,16 +84,16 @@ class ClaimRouter:
         # 2. 从图中获取相关实体
         related = self._graph.resolve_targets(source_entity, content, max_targets=max_targets)
         for rel in related:
-            if rel.name not in seen:
-                confidence = self._score_to_confidence(rel.score)
+            if rel.entity_name not in seen:
+                confidence = self._score_to_confidence(rel.relevance_score)
                 targets.append(RoutingTarget(
-                    entity_id=rel.name,
+                    entity_id=rel.entity_name,
                     entity_type=EntityType.SECTOR,  # 默认，实际应从图中获取
                     confidence=confidence,
                     reason=f"图关系: {rel.relation_type}",
                     requires_review=confidence in (RoutingConfidence.LOW, RoutingConfidence.AMBIGUOUS),
                 ))
-                seen.add(rel.name)
+                seen.add(rel.entity_name)
 
         # 3. 明确提到的实体
         if mentioned_entities:

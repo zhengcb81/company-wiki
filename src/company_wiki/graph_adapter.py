@@ -7,6 +7,7 @@ graph_adapter.py — Graph 适配器
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from .domain import EntityType
 
@@ -29,7 +30,7 @@ class GraphAdapter:
     旧代码通过此适配器访问关系匹配，不再直接操作 graph.yaml。
     """
 
-    def __init__(self, graph_path: Path, companies: dict = None):
+    def __init__(self, graph_path: Path, companies: dict[str, Any] | None = None):
         """
         Args:
             graph_path: graph.yaml 路径
@@ -37,8 +38,8 @@ class GraphAdapter:
         """
         self._graph_path = graph_path
         self._companies = companies or {}
-        self._edges = []
-        self._questions = {}
+        self._edges: list[Any] = []
+        self._questions: dict[str, Any] = {}
         self._load()
 
     def _load(self):

@@ -99,7 +99,7 @@ class RunStore:
         self,
         source_id: str,
         pipeline_version: str,
-        run_id: str = None,
+        run_id: str | None = None,
     ) -> str:
         """
         创建新的处理运行。
@@ -181,7 +181,7 @@ class RunStore:
         patch_id: str,
         target_entity: str,
         target_page: str,
-        idempotency_key: str = None,
+        idempotency_key: str | None = None,
     ) -> str:
         """
         创建 delivery outbox 条目。
@@ -276,7 +276,7 @@ class RunStore:
         )
         self._conn.commit()
 
-    def get_total_cost(self, run_id: str = None) -> float:
+    def get_total_cost(self, run_id: str | None = None) -> float:
         """获取总成本"""
         if run_id:
             row = self._conn.execute(

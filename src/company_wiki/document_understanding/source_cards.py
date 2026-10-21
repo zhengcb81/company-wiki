@@ -23,13 +23,13 @@ class SourceCard:
     @property
     def text(self) -> str | None:
         """Only admitted bounded cards need a materialized original quote."""
-        return '\n'.join(span.raw_text for span in self.support) if self.available else None
+        return '\n'.join(span.raw_text or '' for span in self.support) if self.available else None
 
 
 def source_cards(plan: SummaryTaskPlan, spans: Mapping[str, EvidenceSpan]) -> Iterator[SourceCard]:
     """Use every native support part, retaining context separately by reference."""
     for task in plan.tasks:
-        if any(spans[sid].parse_status != 'parsed' or not spans[sid].raw_text.strip()
+        if any(spans[sid].parse_status != 'parsed' or not (spans[sid].raw_text or '').strip()
                for sid in task.member_ids):
             yield SourceCard(task, (), False, 'source_not_parsed')
             continue
