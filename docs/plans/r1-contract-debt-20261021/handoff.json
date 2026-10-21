@@ -1,0 +1,104 @@
+{
+  "schema_version": "r1-contract-debt-handoff/1",
+  "status": "COMPLETE_ISOLATED_REPAIR_READY_FOR_ROOT_INTEGRATION",
+  "generated_at_utc": "2026-10-21T21:47:01.3945320Z",
+  "branch": "codex/r1-contract-debt",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "base_commit": "45195e96cb15a1652b13899a99cfb827932a62f1",
+  "implementation_commit": "f1dba9b735a914f6e4a2e78b798092487aa20531",
+  "reviewed_content_matches_commit_worktree": true,
+  "source_hashes": {
+    "src/company_wiki/automation/store.py": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624",
+    "src/company_wiki/automation/terminal_receipt_contracts.py": "4113dda30f530f6fdf217c0280a1cddc5efdd8f1507964359e5b1154b85671df",
+    "src/company_wiki/automation/narrative_run_store.py": "ebbb54bbd1acaab71d29016b650c470198a6f1b67da592be66c092cdf661c15f"
+  },
+  "changes": [
+    "Bounded WAL retry retained; precise wait-site exception backed by existing deadline/peer behavior and other-loop negatives.",
+    "FinalArtifactPin.effect_target owns pure raw/projected identity; no widened module whitelist or wire field.",
+    "Three store wildcard queries replaced by minimal stable projections; schema-extension tests preserve compaction/paid/verify behavior.",
+    "Four ReservationRecord reader queries share authoritative DTO field projection; original public future-column regression retained.",
+    "Historical v1 JSON byte-for-byte unchanged; separate reviewed current-v2 exact vector plus12-path semantic reconstruction, real two-parser replay and invented fact/unit/citation negatives."
+  ],
+  "final_validation": {
+    "evidence": "green-reviewed",
+    "tests": 195,
+    "passed": 195,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "started_at_utc": "2026-10-21T21:36:55.305839Z",
+    "finished_at_utc": "2026-10-21T21:38:52.413483Z",
+    "actual_imports": {
+      "store": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\automation\\store.py",
+      "cli": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_transport_cli.py"
+    },
+    "tested_content_files": 24,
+    "tested_files_unchanged": true,
+    "protected_file_count": 96,
+    "protected_files_unchanged": true,
+    "ruff": "Passed changed11 source/test/helper files",
+    "mypy": "Passed3 changed source files",
+    "normal_implementation_commit_hooks": "Ruff PASS; host assumption guard PASS; dependency/mypy-contract/config hooks skipped by configured file scope, not bypassed",
+    "tests_runtime": "mother .venv absolute Python",
+    "hook_runtime": "existing C:/Miniconda/python.exe, ordinary hook PYTHONPATH",
+    "no_suite_rerun_after_final_review": true
+  },
+  "red_evidence": [
+    {
+      "label": "red-original",
+      "failed": 4,
+      "skipped": 0,
+      "passed": 27
+    },
+    {
+      "label": "red-projections",
+      "failed": 3,
+      "skipped": 0,
+      "passed": 0
+    },
+    {
+      "label": "red-target",
+      "failed": 2,
+      "skipped": 0,
+      "passed": 0
+    },
+    {
+      "label": "red-run-readers",
+      "failed": 4,
+      "skipped": 0,
+      "passed": 0
+    }
+  ],
+  "intermediate_runs": [
+    "green151pass/1fail exposed public RunStore same cause",
+    "green-final152pass is SUPERSEDED narrowing experiment, not accepted final GREEN"
+  ],
+  "independent_review": {
+    "agent": "/root/r1_contract_fix_review",
+    "status": "PASS_CONTENT_BOUND",
+    "open_blocking_findings": 0,
+    "report": "independent-review.md",
+    "machine_report": "independent-review.json",
+    "report_sha256": "dbe1540f48af02d090b47b342d9afdc127b25cbf091c1ef8d3cd99ba59f8ef0b",
+    "bound_files": 24,
+    "implementation_mapping": "Reviewer froze content SHA before commit; this handoff maps that exact unchanged content to implementation_commit without editing reviewer report."
+  },
+  "isolation": {
+    "mother_source_config_originals_modified": false,
+    "exception": "Only ROOT-authorized synthetic .planning/r1ctfix temp/log/cache in mother workspace",
+    "network_download_paid_llm_calls": 0,
+    "installs_acl_global_config_changes": false,
+    "historical_worktree_planning": "Preserved all untracked history; preserved-history.json lists it; no .planning staged or committed",
+    "temp_cleanup": "Exclusive synthetic r1ctfix retained for audit; no other task paths removed",
+    "protected_snapshot": "94 tracked companies/sectors/themes files plus both production config copies SHA unchanged",
+    "legacy_golden_json": "All root v1 JSON unchanged and strict validated"
+  },
+  "not_done": [
+    "No master integration or push by this worker",
+    "No full7k/all-contract/RF-FF or paid E2E rerun",
+    "No claim that company R1/business evidence passed",
+    "No arbitrary future schema compatibility claim outside the fixed reservation DTO and targeted store projections"
+  ],
+  "integration_owner": "ROOT: verify commit/source hashes, cherry-pick this branch, normal push after frozen executor handling"
+}

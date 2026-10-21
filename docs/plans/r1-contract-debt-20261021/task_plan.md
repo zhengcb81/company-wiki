@@ -8,7 +8,7 @@ Repair the four validated R5 RED contracts on codex/r1-contract-debt based on451
 2. Add meaningful projection/behavior/golden evolution RED tests before implementation — complete.
 3. Repair narrow store projections, pure identity boundary and versioned current golden — complete.
 4. Run scoped GREEN checks and independent agent review; fix findings — complete (195 GREEN, PASS_CONTENT_BOUND, zero open blocking findings).
-5. Commit only owned changes; write exact handoff MD/JSON — in_progress.
+5. Commit only owned changes; write exact handoff MD/JSON — complete (implementation f1dba9b7; handoff records exact mapping).
 
 ## Next Step
 Run normal commit hooks for the reviewed source content, then write exact branch/commit handoff.
