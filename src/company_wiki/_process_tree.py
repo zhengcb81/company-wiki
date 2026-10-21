@@ -9,6 +9,7 @@ import signal
 import subprocess
 import sys
 from ctypes import wintypes
+from typing import Any, cast
 
 
 class _BasicLimits(ctypes.Structure):
@@ -51,7 +52,7 @@ class _ExtendedLimits(ctypes.Structure):
 
 
 def _kernel():
-    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel = cast(Any, ctypes).WinDLL("kernel32", use_last_error=True)
     declarations = {
         "CreateJobObjectW": ([ctypes.c_void_p, wintypes.LPCWSTR], wintypes.HANDLE),
         "SetInformationJobObject": (
@@ -73,7 +74,7 @@ def _kernel():
 def _win_error() -> OSError:
     # Typeshed exposes these only for Windows; this function is Windows-only at runtime.
     if sys.platform == "win32":
-        return ctypes.WinError(ctypes.get_last_error())
+        return ctypes.WinError(cast(Any, ctypes).get_last_error())
     return OSError("Windows Job API unavailable on this platform")
 
 

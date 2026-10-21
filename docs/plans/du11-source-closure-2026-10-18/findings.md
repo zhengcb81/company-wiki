@@ -1,3 +1,15 @@
+## 一个必须记住的重构教训：重命名会改变“泄漏变量”的语义（2026-10-21）
+
+- 在 narrative_reading 里把 `members = original_members(uid)` 重命名为 `member_ids` 后，
+  后面 `set(members)` 悄悄指回了外层循环遗留的 `members`（上一个 window 的成员），
+  导致 18 个单测失败。**重命名局部变量前先查同名变量在同一函数内的所有使用点**。
+- 同类危险：`sort_key` 在 compatibility.py 同一函数里已有一个不同类型定义，
+  第二次注解直接 no-redef；改为 `notice_sort_key` 才干净。
+- 结论：类型检查能发现形状问题，但**作用域/遮蔽**要靠测试兜底；大改后必须跑全量单测，
+  不能只跑“相关文件”。
+
+---
+
 ## 类型棘轮技术发现（2026-10-21）
 
 - **mypy 单文件 vs 全包结果不同**：配置 `follow_imports = "skip"`，单文件检查会漏掉

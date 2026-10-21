@@ -22,7 +22,7 @@ import tempfile
 import threading
 import time
 import unicodedata
-from typing import Any, Callable, Iterable
+from typing import Any, Callable, Iterable, cast
 
 
 from company_wiki._atomic_file import atomic_output
@@ -309,7 +309,7 @@ def _terminate_windows_process_tree(pid: int) -> None:
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
-            creationflags=subprocess.CREATE_NO_WINDOW,
+            creationflags=cast(Any, subprocess).CREATE_NO_WINDOW,
             timeout=10,
             check=False,
         )
@@ -433,7 +433,7 @@ class _WindowsParserJob:
                 ("PeakJobMemoryUsed", ctypes.c_size_t),
             ]
 
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32 = cast(Any, ctypes).WinDLL("kernel32", use_last_error=True)
         kernel32.CreateJobObjectW.argtypes = (wintypes.LPVOID, wintypes.LPCWSTR)
         kernel32.CreateJobObjectW.restype = wintypes.HANDLE
         kernel32.SetInformationJobObject.argtypes = (
@@ -453,7 +453,7 @@ class _WindowsParserJob:
 
         handle = kernel32.CreateJobObjectW(None, None)
         if not handle:
-            raise OSError(ctypes.get_last_error(), "CreateJobObjectW failed")
+            raise OSError(cast(Any, ctypes).get_last_error(), "CreateJobObjectW failed")
         self._kernel32 = kernel32
         self._handle = int(handle)
         try:
@@ -465,13 +465,13 @@ class _WindowsParserJob:
                 ctypes.byref(information),
                 ctypes.sizeof(information),
             ):
-                raise OSError(ctypes.get_last_error(), "SetInformationJobObject failed")
+                raise OSError(cast(Any, ctypes).get_last_error(), "SetInformationJobObject failed")
             process_handle = getattr(process, "_handle", None)
             if process_handle is None or not kernel32.AssignProcessToJobObject(
                 handle, wintypes.HANDLE(int(process_handle))
             ):
                 raise OSError(
-                    ctypes.get_last_error(), "AssignProcessToJobObject failed"
+                    cast(Any, ctypes).get_last_error(), "AssignProcessToJobObject failed"
                 )
         except BaseException:
             self.close()

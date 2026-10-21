@@ -19,7 +19,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from typing import Any
+from typing import Any, cast
 
 from company_wiki._bounded_process import _WINDOWS_BOOTSTRAP
 from company_wiki._process_tree import (
@@ -374,7 +374,7 @@ class IsolatedOCRAdapter:
                 shell=False,
                 bufsize=0,
                 start_new_session=not windows,
-                creationflags=subprocess.CREATE_NO_WINDOW if windows else 0,
+                creationflags=cast(Any, subprocess).CREATE_NO_WINDOW if windows else 0,
             )
             if windows:
                 self._job = assign_windows_job(self._process)

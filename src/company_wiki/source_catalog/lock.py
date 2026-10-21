@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 import subprocess
 import time
-from typing import Iterator
+from typing import Iterator, Any, cast
 import uuid
 
 from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex
@@ -87,7 +87,7 @@ def _process_identity(pid: int) -> dict[str, object]:
     if os.name == "nt":
         process_query_limited_information = 0x1000
         still_active = 259
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32 = cast(Any, ctypes).WinDLL("kernel32", use_last_error=True)
         kernel32.OpenProcess.argtypes = (ctypes.c_uint32, ctypes.c_int, ctypes.c_uint32)
         kernel32.OpenProcess.restype = ctypes.c_void_p
         kernel32.GetExitCodeProcess.argtypes = (ctypes.c_void_p, ctypes.POINTER(ctypes.c_uint32))
@@ -111,7 +111,7 @@ def _process_identity(pid: int) -> dict[str, object]:
         kernel32.CloseHandle.restype = ctypes.c_int
         handle = kernel32.OpenProcess(process_query_limited_information, False, pid)
         if not handle:
-            live = ctypes.get_last_error() == 5
+            live = cast(Any, ctypes).get_last_error() == 5
             cim_creation = _windows_creation_time_via_cim(pid) if live else None
             return {
                 "live": live,

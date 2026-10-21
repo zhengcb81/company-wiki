@@ -11,7 +11,7 @@ import re
 import subprocess
 import sys
 import time
-from typing import Any, Callable
+from typing import Any, Callable, cast
 from uuid import uuid4
 
 from .code_identity import source_bundle_fingerprint
@@ -424,7 +424,7 @@ def _same_identity(left: dict[str, Any] | None, right: dict[str, Any] | None) ->
 
 
 def _windows_process_identity(pid: int) -> dict[str, Any] | None:
-    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel32 = cast(Any, ctypes).WinDLL("kernel32", use_last_error=True)
     kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
     kernel32.OpenProcess.restype = wintypes.HANDLE
     kernel32.QueryFullProcessImageNameW.argtypes = [
@@ -512,7 +512,7 @@ def terminate_matching_process(expected: dict[str, Any]) -> bool:
         return False
     if os.name != "nt":
         return False
-    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel32 = cast(Any, ctypes).WinDLL("kernel32", use_last_error=True)
     kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
     kernel32.OpenProcess.restype = wintypes.HANDLE
     kernel32.TerminateProcess.argtypes = [wintypes.HANDLE, wintypes.UINT]

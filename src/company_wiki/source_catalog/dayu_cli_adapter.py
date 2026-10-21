@@ -14,7 +14,7 @@ import shutil
 import subprocess
 from tempfile import TemporaryDirectory
 import time
-from typing import Any, Sequence
+from typing import Any, Sequence, cast
 
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .resolver import SourceRequest
@@ -219,7 +219,7 @@ class DayuCliDownloadAdapter:
         ]
         environment = dict(os.environ)
         environment["PYTHONUTF8"] = "1"
-        creationflags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+        creationflags = cast(Any, subprocess).CREATE_NO_WINDOW if os.name == "nt" else 0
         # Use Popen + poll so we can read meta.json as soon as it is written,
         # without waiting for dayu's slow Docling/RapidOCR post-processing.
         try:

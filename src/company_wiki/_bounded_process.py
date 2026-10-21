@@ -8,7 +8,7 @@ import subprocess
 import sys
 import threading
 import time
-from typing import BinaryIO, cast
+from typing import BinaryIO, cast, Any
 
 from ._process_tree import (
     WindowsJob,
@@ -92,7 +92,7 @@ def _spawn(command, input_bytes, cwd, env):
         shell=False,
         bufsize=0,
         start_new_session=not windows,
-        creationflags=subprocess.CREATE_NO_WINDOW if windows else 0,
+        creationflags=cast(Any, subprocess).CREATE_NO_WINDOW if windows else 0,
     )
     try:
         job = _assign_windows_job(proc) if windows else None
