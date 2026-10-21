@@ -1,0 +1,61 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\r2", "requested_basetemp_len": 63, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-223055-0bd8b3ef", "effective_basetemp_len": 104}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 5 items
+
+tests\unit\test_narrative_summary_coverage_repair.py FFFFF               [100%]
+
+================================== FAILURES ===================================
+___________ test_retired_env_never_creates_paid_coverage_retry[raw] ___________
+tests\unit\test_narrative_summary_coverage_repair.py:62: in test_retired_env_never_creates_paid_coverage_retry
+    assert result.outcome is HandlerOutcome.SUCCEEDED, result
+E   AssertionError: HandlerResult(outcome=<HandlerOutcome.RETRYABLE: 'retryable'>, result=mappingproxy({'coverage_partial': True, 'summary...stic=None), error=HandlerError(code='SUMMARY_COVERAGE_PARTIAL', detail='partial summary waits for its repair attempt'))
+E   assert <HandlerOutcome.RETRYABLE: 'retryable'> is <HandlerOutcome.SUCCEEDED: 'succeeded'>
+E    +  where <HandlerOutcome.RETRYABLE: 'retryable'> = HandlerResult(outcome=<HandlerOutcome.RETRYABLE: 'retryable'>, result=mappingproxy({'coverage_partial': True, 'summary...stic=None), error=HandlerError(code='SUMMARY_COVERAGE_PARTIAL', detail='partial summary waits for its repair attempt')).outcome
+E    +  and   <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerOutcome.SUCCEEDED
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+______ test_retired_env_never_creates_paid_coverage_retry[official-json] ______
+tests\unit\test_narrative_summary_coverage_repair.py:62: in test_retired_env_never_creates_paid_coverage_retry
+    assert result.outcome is HandlerOutcome.SUCCEEDED, result
+E   AssertionError: HandlerResult(outcome=<HandlerOutcome.RETRYABLE: 'retryable'>, result=mappingproxy({'coverage_partial': True, 'summary...stic=None), error=HandlerError(code='SUMMARY_COVERAGE_PARTIAL', detail='partial summary waits for its repair attempt'))
+E   assert <HandlerOutcome.RETRYABLE: 'retryable'> is <HandlerOutcome.SUCCEEDED: 'succeeded'>
+E    +  where <HandlerOutcome.RETRYABLE: 'retryable'> = HandlerResult(outcome=<HandlerOutcome.RETRYABLE: 'retryable'>, result=mappingproxy({'coverage_partial': True, 'summary...stic=None), error=HandlerError(code='SUMMARY_COVERAGE_PARTIAL', detail='partial summary waits for its repair attempt')).outcome
+E    +  and   <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerOutcome.SUCCEEDED
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+_ test_legacy_partial_remains_available_without_new_call_or_false_completion[uncovered0] _
+tests\unit\test_narrative_summary_coverage_repair.py:90: in test_legacy_partial_remains_available_without_new_call_or_false_completion
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
+E   AssertionError: assert <HandlerOutcome.SUCCEEDED: 'succeeded'> is <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>
+E    +  where <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerResult(outcome=<HandlerOutcome.SUCCEEDED: 'succeeded'>, result=mappingproxy({'schema_version': 'narrative-summa...etrics=HandlerMetrics(tokens=1, cost_usd=0.0, duration_ms=1, reasoning_tokens=None, usage_diagnostic=None), error=None).outcome
+E    +  and   <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = HandlerOutcome.TERMINAL_FAILURE
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+_ test_legacy_partial_remains_available_without_new_call_or_false_completion[uncovered1] _
+tests\unit\test_narrative_summary_coverage_repair.py:90: in test_legacy_partial_remains_available_without_new_call_or_false_completion
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
+E   AssertionError: assert <HandlerOutcome.SUCCEEDED: 'succeeded'> is <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>
+E    +  where <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerResult(outcome=<HandlerOutcome.SUCCEEDED: 'succeeded'>, result=mappingproxy({'schema_version': 'narrative-summa...etrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0, reasoning_tokens=None, usage_diagnostic=None), error=None).outcome
+E    +  and   <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = HandlerOutcome.TERMINAL_FAILURE
+____ test_malformed_legacy_partial_never_falls_through_to_a_new_paid_call _____
+tests\unit\test_narrative_summary_coverage_repair.py:105: in test_malformed_legacy_partial_never_falls_through_to_a_new_paid_call
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
+E   AssertionError: assert <HandlerOutcome.SUCCEEDED: 'succeeded'> is <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>
+E    +  where <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerResult(outcome=<HandlerOutcome.SUCCEEDED: 'succeeded'>, result=mappingproxy({'schema_version': 'narrative-summa...etrics=HandlerMetrics(tokens=1, cost_usd=0.0, duration_ms=1, reasoning_tokens=None, usage_diagnostic=None), error=None).outcome
+E    +  and   <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = HandlerOutcome.TERMINAL_FAILURE
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w04-test\retire-red-corrected.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_summary_coverage_repair.py::test_retired_env_never_creates_paid_coverage_retry[raw]
+FAILED tests/unit/test_narrative_summary_coverage_repair.py::test_retired_env_never_creates_paid_coverage_retry[official-json]
+FAILED tests/unit/test_narrative_summary_coverage_repair.py::test_legacy_partial_remains_available_without_new_call_or_false_completion[uncovered0]
+FAILED tests/unit/test_narrative_summary_coverage_repair.py::test_legacy_partial_remains_available_without_new_call_or_false_completion[uncovered1]
+FAILED tests/unit/test_narrative_summary_coverage_repair.py::test_malformed_legacy_partial_never_falls_through_to_a_new_paid_call
+============================== 5 failed in 2.61s ==============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-223055-0bd8b3ef", "existed": true, "removed": true}

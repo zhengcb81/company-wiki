@@ -1,0 +1,85 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\red", "requested_basetemp_len": 64, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-222903-37008fce", "effective_basetemp_len": 104}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
+
+tests\unit\test_narrative_legacy_final_output.py F.FF                    [100%]
+
+================================== FAILURES ===================================
+_ test_legacy_two_attempts_resume_real_final_without_overwriting_partial_zero _
+tests\unit\test_narrative_legacy_final_output.py:194: in test_legacy_two_attempts_resume_real_final_without_overwriting_partial_zero
+    result = own.document()
+             ^^^^^^^^^^^^^^
+tests\unit\test_narrative_legacy_final_output.py:175: in document
+    return batch._final_documents(request, binding, self.auto, self.runs, self.artifacts, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:2268: in _final_documents
+    runs.settle_output(
+src\company_wiki\automation\narrative_run_store.py:1112: in settle_output
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:557: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:1112: in <lambda>
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:429: in _settle_output_in_transaction
+    raise ReservationConflictError("final output differs from its durable receipt")
+E   company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+___ test_legacy_fallback_cannot_reassign_first_immutable_zero_to_newer_call ___
+tests\unit\test_narrative_legacy_final_output.py:230: in test_legacy_fallback_cannot_reassign_first_immutable_zero_to_newer_call
+    result = own.document()
+             ^^^^^^^^^^^^^^
+tests\unit\test_narrative_legacy_final_output.py:175: in document
+    return batch._final_documents(request, binding, self.auto, self.runs, self.artifacts, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:2268: in _final_documents
+    runs.settle_output(
+src\company_wiki\automation\narrative_run_store.py:1112: in settle_output
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:557: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:1112: in <lambda>
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:429: in _settle_output_in_transaction
+    raise ReservationConflictError("final output differs from its durable receipt")
+E   company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+_______ test_same_final_pin_is_idempotent_and_different_pin_is_rejected _______
+tests\unit\test_narrative_legacy_final_output.py:245: in test_same_final_pin_is_idempotent_and_different_pin_is_rejected
+    result = own.document()
+             ^^^^^^^^^^^^^^
+tests\unit\test_narrative_legacy_final_output.py:175: in document
+    return batch._final_documents(request, binding, self.auto, self.runs, self.artifacts, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:2268: in _final_documents
+    runs.settle_output(
+src\company_wiki\automation\narrative_run_store.py:1112: in settle_output
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:557: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:1112: in <lambda>
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:429: in _settle_output_in_transaction
+    raise ReservationConflictError("final output differs from its durable receipt")
+E   company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:83 SUMMARY_LANGUAGE_UNCERTAIN
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w04-test\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_legacy_final_output.py::test_legacy_two_attempts_resume_real_final_without_overwriting_partial_zero
+FAILED tests/unit/test_narrative_legacy_final_output.py::test_legacy_fallback_cannot_reassign_first_immutable_zero_to_newer_call
+FAILED tests/unit/test_narrative_legacy_final_output.py::test_same_final_pin_is_idempotent_and_different_pin_is_rejected
+========================= 3 failed, 1 passed in 9.00s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-222903-37008fce", "existed": true, "removed": true}

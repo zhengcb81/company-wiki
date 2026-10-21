@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-21T22:43:39.4026472Z",
+  "preserved_parent_records": true,
+  "scope": "Only this agent newly created TEMP; all test and commit processes completed. No original production documents/config/other owner paths.",
+  "restore_to_initial": true,
+  "after_exists": false,
+  "schema_version": "w04-owned-test-cleanup/1",
+  "baseline_existed": false,
+  "before": {
+    "bytes": 327680.0,
+    "files": 2
+  },
+  "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp"
+}

@@ -1,0 +1,24 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\old-read-red", "requested_basetemp_len": 73, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-223953-d1dae6a8", "effective_basetemp_len": 104}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+tests\unit\test_narrative_summary_coverage_repair.py F                   [100%]
+
+================================== FAILURES ===================================
+_ test_retired_partial_is_available_without_a_current_model_or_generation_call _
+tests\unit\test_narrative_summary_coverage_repair.py:118: in test_retired_partial_is_available_without_a_current_model_or_generation_call
+    assert result.error.code == "LEGACY_PARTIAL_SUMMARY_AVAILABLE"
+E   AssertionError: assert 'MODEL_NOT_CONFIGURED' == 'LEGACY_PARTI...ARY_AVAILABLE'
+E     
+E     - LEGACY_PARTIAL_SUMMARY_AVAILABLE
+E     + MODEL_NOT_CONFIGURED
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w04-test\legacy-read-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_summary_coverage_repair.py::test_retired_partial_is_available_without_a_current_model_or_generation_call
+============================== 1 failed in 3.96s ==============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-223953-d1dae6a8", "existed": true, "removed": true}

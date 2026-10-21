@@ -1,0 +1,8 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).........................................Passed
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/r1-summary-runtime 588d4635] fix: retire paid coverage repair and bind final output to verified summary
+ 6 files changed, 602 insertions(+), 203 deletions(-)
+ create mode 100644 tests/unit/test_narrative_legacy_final_output.py

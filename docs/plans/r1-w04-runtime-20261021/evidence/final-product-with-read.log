@@ -1,0 +1,23 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\final", "requested_basetemp_len": 66, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-224024-7aeb716d", "effective_basetemp_len": 104}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 129 items
+
+tests\unit\test_narrative_model_caller.py ....................           [ 15%]
+tests\unit\du11_paid_response\test_paid_response.py .................... [ 31%]
+.......                                                                  [ 36%]
+tests\unit\test_narrative_extractive_production.py .......               [ 41%]
+tests\unit\test_narrative_run_store.py ......................            [ 58%]
+tests\unit\test_terminal_narrative_receipts.py .....................     [ 75%]
+tests\unit\test_narrative_batch.py .................                     [ 88%]
+tests\unit\test_narrative_legacy_final_output.py ........                [ 94%]
+tests\unit\test_narrative_summary_coverage_repair.py ......              [ 99%]
+tests\unit\test_execution_snapshot_prior_partial.py .                    [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w04-test\final-product-with-read.xml -
+======================= 129 passed in 61.42s (0:01:01) ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\cw-pytest-basetemp\\20261021-224024-7aeb716d", "existed": true, "removed": false}

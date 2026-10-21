@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="4" time="8.897" timestamp="2026-10-21T23:29:03.940417+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_narrative_legacy_final_output" name="test_legacy_two_attempts_resume_real_final_without_overwriting_partial_zero" time="1.586"><failure message="company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt">tests\unit\test_narrative_legacy_final_output.py:194: in test_legacy_two_attempts_resume_real_final_without_overwriting_partial_zero
+    result = own.document()
+             ^^^^^^^^^^^^^^
+tests\unit\test_narrative_legacy_final_output.py:175: in document
+    return batch._final_documents(request, binding, self.auto, self.runs, self.artifacts, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:2268: in _final_documents
+    runs.settle_output(
+src\company_wiki\automation\narrative_run_store.py:1112: in settle_output
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:557: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:1112: in &lt;lambda&gt;
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:429: in _settle_output_in_transaction
+    raise ReservationConflictError("final output differs from its durable receipt")
+E   company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt</failure></testcase><testcase classname="tests.unit.test_narrative_legacy_final_output" name="test_read_only_final_probe_never_settles_or_compacts_legacy_rows" time="1.215" /><testcase classname="tests.unit.test_narrative_legacy_final_output" name="test_legacy_fallback_cannot_reassign_first_immutable_zero_to_newer_call" time="1.184"><failure message="company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt">tests\unit\test_narrative_legacy_final_output.py:230: in test_legacy_fallback_cannot_reassign_first_immutable_zero_to_newer_call
+    result = own.document()
+             ^^^^^^^^^^^^^^
+tests\unit\test_narrative_legacy_final_output.py:175: in document
+    return batch._final_documents(request, binding, self.auto, self.runs, self.artifacts, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:2268: in _final_documents
+    runs.settle_output(
+src\company_wiki\automation\narrative_run_store.py:1112: in settle_output
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:557: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:1112: in &lt;lambda&gt;
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:429: in _settle_output_in_transaction
+    raise ReservationConflictError("final output differs from its durable receipt")
+E   company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt</failure></testcase><testcase classname="tests.unit.test_narrative_legacy_final_output" name="test_same_final_pin_is_idempotent_and_different_pin_is_rejected" time="1.142"><failure message="company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt">tests\unit\test_narrative_legacy_final_output.py:245: in test_same_final_pin_is_idempotent_and_different_pin_is_rejected
+    result = own.document()
+             ^^^^^^^^^^^^^^
+tests\unit\test_narrative_legacy_final_output.py:175: in document
+    return batch._final_documents(request, binding, self.auto, self.runs, self.artifacts, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:2268: in _final_documents
+    runs.settle_output(
+src\company_wiki\automation\narrative_run_store.py:1112: in settle_output
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:557: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:1112: in &lt;lambda&gt;
+    return self._write(lambda connection: _settle_output_in_transaction(
+src\company_wiki\automation\narrative_run_store.py:429: in _settle_output_in_transaction
+    raise ReservationConflictError("final output differs from its durable receipt")
+E   company_wiki.automation.narrative_run_store.ReservationConflictError: final output differs from its durable receipt</failure></testcase></testsuite></testsuites>

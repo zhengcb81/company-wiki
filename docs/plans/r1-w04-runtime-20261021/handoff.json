@@ -1,0 +1,347 @@
+{
+  "schema_version": "r1-work-package-handoff/1",
+  "package_id": "W04",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "attempt": "r1-systemic-fix",
+  "status": "IMPLEMENTED_LOCAL_GREEN_PENDING_ROOT_REVIEW",
+  "recorded_at": "2026-10-21T22:43:39.911654+00:00",
+  "source_repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "branch": "codex/r1-summary-runtime",
+  "base_head": "0622f242256b24cefd364ed0489ddb846ca8c017",
+  "product_head": "375c29f915fd9206be1ee01fef2bf2eea4d99a58",
+  "changed_files": [
+    {
+      "path": "src/company_wiki/automation/execution_snapshot.py",
+      "commit": "588d46352fdd17834d569b0099613c3d8006009e",
+      "bytes": 9190,
+      "sha256": "015cb1978ec1f391fd14e1e3eb894d228dcbf5c9cd6d865098e42842d6071128"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summarize.py",
+      "commit": "375c29f915fd9206be1ee01fef2bf2eea4d99a58",
+      "bytes": 23712,
+      "sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_run_store.py",
+      "commit": "588d46352fdd17834d569b0099613c3d8006009e",
+      "bytes": 59726,
+      "sha256": "e51c0f7c28db9710a2a25ca449ee0b20bbe3342e50e70785f011aee7b06a8811"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "commit": "588d46352fdd17834d569b0099613c3d8006009e",
+      "bytes": 100083,
+      "sha256": "f6ec52b18322223c23abb4b4bd2f2806cfc3ff9dc44cfd9af6b7be0df6c335e3"
+    },
+    {
+      "path": "tests/unit/test_narrative_summary_coverage_repair.py",
+      "commit": "375c29f915fd9206be1ee01fef2bf2eea4d99a58",
+      "bytes": 5544,
+      "sha256": "649d886e4a4d5a317569ec830c512c44b1b1a6861a3906295839c264be6fb7c9"
+    },
+    {
+      "path": "tests/unit/test_narrative_legacy_final_output.py",
+      "commit": "588d46352fdd17834d569b0099613c3d8006009e",
+      "bytes": 18099,
+      "sha256": "492f1594d34ff8756c6a1854a596a77db1167b6f3d6e76b45311f93ddaf603c0"
+    }
+  ],
+  "hash_semantics": "Actual checkout bytes. Git may normalize text LF/CRLF on later checkout; raw source hashes are never normalized.",
+  "public_interfaces": {
+    "new_paid_coverage_repair": "retired, including CW_SUMMARY_COVERAGE_REPAIR=1",
+    "legacy_partial": "prior_partial_result retained; LEGACY_PARTIAL_SUMMARY_AVAILABLE preserves payload with no POST/no false succeeded final; invalid legacy summary is named INVALID",
+    "legacy_model_requirement": "historical partial availability requires valid source dependency, not a configured new model/generation",
+    "final_settlement": "NarrativeRunStore.settle_published_summary_output uses successful verified summary and exact final/effect; unique causal reservation only",
+    "unresolved_fallback": "output_accounting_unresolved + LEGACY_FINAL_OUTPUT_OWNER_UNRESOLVED with exact artifact_ref retained, receipts/fees unchanged",
+    "ordinary_single_paid": "unchanged caller/reopen/lease and generation guards; local native recovery tested",
+    "unfinished_multiple_pins": "MODEL_PAID_RESPONSE_UNAVAILABLE, zero new POST; no multi-operation extension"
+  },
+  "red_tests": [
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_legacy_final_output.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\red",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\red.xml"
+      ],
+      "exit_code": 1,
+      "tests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 8.897,
+      "junit_timestamp_as_written": [
+        "2026-10-21T23:29:03.940417+01:00"
+      ],
+      "evidence_last_write_utc": "2026-10-21T22:29:12.942301+00:00",
+      "evidence": [
+        "evidence/red.log",
+        "evidence/red.xml"
+      ]
+    },
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_summary_coverage_repair.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\r2",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\retire-red-corrected.xml"
+      ],
+      "exit_code": 1,
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.555,
+      "junit_timestamp_as_written": [
+        "2026-10-21T23:30:55.491376+01:00"
+      ],
+      "evidence_last_write_utc": "2026-10-21T22:30:58.097558+00:00",
+      "evidence": [
+        "evidence/retire-red-corrected.log",
+        "evidence/retire-red-corrected.xml"
+      ]
+    },
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_summary_coverage_repair.py::test_retired_partial_is_available_without_a_current_model_or_generation_call",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\old-read-red",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\legacy-read-red.xml"
+      ],
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.888,
+      "junit_timestamp_as_written": [
+        "2026-10-21T23:39:54.021074+01:00"
+      ],
+      "evidence_last_write_utc": "2026-10-21T22:39:57.985952+00:00",
+      "evidence": [
+        "evidence/legacy-read-red.log",
+        "evidence/legacy-read-red.xml"
+      ]
+    }
+  ],
+  "non_product_errors": [
+    "Initial pytest had no usable TEMP before capture. Retried with explicitly owned writable TEMP.",
+    "retire-red initial official JSON fixture illegally crossed source parents; corrected fixture, preserved log, then five genuine RED outcomes.",
+    "One completed 128-test run reported cleanup removed=false; ROOT-safe native cleanup subsequently verified its owned path absent. Final owned TEMP cleanup recorded separately."
+  ],
+  "green_tests": [
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_model_caller.py",
+        "tests/unit/du11_paid_response/test_paid_response.py",
+        "tests/unit/test_narrative_extractive_production.py",
+        "tests/unit/test_narrative_run_store.py",
+        "tests/unit/test_terminal_narrative_receipts.py",
+        "tests/unit/test_narrative_batch.py",
+        "tests/unit/test_narrative_legacy_final_output.py",
+        "tests/unit/test_narrative_summary_coverage_repair.py",
+        "tests/unit/test_execution_snapshot_prior_partial.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp\\final",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\final-product-with-read.xml"
+      ],
+      "exit_code": 0,
+      "tests": 129,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 61.312,
+      "junit_timestamp_as_written": [
+        "2026-10-21T23:40:24.910209+01:00"
+      ],
+      "evidence_last_write_utc": "2026-10-21T22:41:26.329514+00:00",
+      "evidence": [
+        "evidence/final-product-with-read.log",
+        "evidence/final-product-with-read.xml"
+      ]
+    }
+  ],
+  "test_environment": {
+    "python": "mother .venv Python3.14.2",
+    "PYTHONPATH": [
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\src",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\tests"
+    ],
+    "TEMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-test\\tmp",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "actual_fixture_ports": [
+      "finite in-memory provider, no socket",
+      "real Catalog/SourceVersionReader",
+      "real AutomationStore, JobExecutionContext, BudgetedNarrativeCaller, NarrativeRunStore",
+      "real verify locator replay and NarrativeEffectDispatcher/outbox/activation",
+      "real exact artifact reads, terminal compaction, output accounting"
+    ]
+  },
+  "native_ledger_evidence": {
+    "legacy_two_completed": {
+      "fixture_calls": 2,
+      "charged_tokens": 184,
+      "first_output_bytes": 0,
+      "first_reservation_immutable": true,
+      "second_output": "exact final SHA/size",
+      "job_output_slot": 1
+    },
+    "ordinary_paid_retry": {
+      "fixture_calls": 1,
+      "reservations": 1,
+      "charged_tokens": 92,
+      "same_original_paid_reservation": true,
+      "exact_final_visible": true
+    },
+    "all_zero_legacy_fallback": "named unresolved, no output reassignment, final remains readable",
+    "assertions_location": "tests/unit/test_narrative_legacy_final_output.py",
+    "fixture_usage_is_not_provider_billing": true
+  },
+  "actual_live_calls": 0,
+  "network_downloads": 0,
+  "known_tokens_added": 0,
+  "known_micro_usd_added": 0,
+  "existing_unknown_holds_changed": false,
+  "raw_config": {
+    "production_raw_opened_or_written": false,
+    "production_config_modified": false,
+    "historical_database_modified": false,
+    "Dayu_modified": false,
+    "other_repositories_modified": false
+  },
+  "space": {
+    "raw_copies_added": 0,
+    "payload_response_copies_committed": 0,
+    "sample_during_tests": {
+      "files": 117,
+      "bytes": 5171825,
+      "semantics": "observed lower bound, not independent physical peak"
+    },
+    "cleanup": {
+      "path": "cleanup.json",
+      "bytes": 528,
+      "sha256": "8b083c4398c3c050b72bf1e59d0395c1baeb82cba761fce1d4c16077cc16fd2b",
+      "preserved": "pre-existing worktree .planning/du11-* untracked files"
+    },
+    "evidence_bytes": 75623
+  },
+  "install_files": [],
+  "install_changes": false,
+  "merge_or_push": false,
+  "independent_review": {
+    "status": "PENDING_ROOT",
+    "bound_product_head": "375c29f915fd9206be1ee01fef2bf2eea4d99a58"
+  },
+  "remaining_issue_ids": [
+    "RC11 final acceptance pending ROOT independent review and W07 live ordinary paid-resume"
+  ],
+  "remaining_external_limits": [
+    "Original historical phaseC-090-05b8bacea453 AUTO database does not exist at recorded path; original native exports retained, no original DB replay claimed.",
+    "Unfinished multi-pin and immutable-all-zero fallback are explicitly not auto-recovered; no new fee or rewritten receipt.",
+    "Real configured provider 0.9/v5 paid interruption, cache and RF consumption still W07 responsibility."
+  ],
+  "resume_command": "Run the green_tests argv in this worktree with the recorded PYTHONPATH/TEMP; recreate tmp if absent. ROOT integrates only after concentrated independent review.",
+  "recommended_next_action": "ROOT independent review at product_head, repair actionable findings, merge W04 before W03; W07 combines one bounded real 0.9 call with ordinary paid recovery/cache/consumption.",
+  "evidence": [
+    {
+      "path": "evidence/commit-product.log",
+      "bytes": 707,
+      "sha256": "0357289080231db6d2ad53f9a8cc6c16f47b24b1e97762330ca7d8f01b03f904"
+    },
+    {
+      "path": "evidence/commit-read-compat.log",
+      "bytes": 620,
+      "sha256": "1ddd298fe35d9112c21098e19ece06cfa669c6f46f77b3bffb558e1226cbdc4f"
+    },
+    {
+      "path": "evidence/final-product-with-read.log",
+      "bytes": 2231,
+      "sha256": "8555d12fa47e1e8c3a3c7a13e56ba2c22f1c19627742e3b0e5664439f9719cba"
+    },
+    {
+      "path": "evidence/final-product-with-read.xml",
+      "bytes": 20790,
+      "sha256": "b9475946d31594eeb383d568b6a4c699368430353ce4f80b4f6f53da9fae9fa3"
+    },
+    {
+      "path": "evidence/green-final-fenced.log",
+      "bytes": 1654,
+      "sha256": "98b52de25e1162e62fc1e512ac62be9612ae3d9e607e7f6b23564eff22fc80a3"
+    },
+    {
+      "path": "evidence/green-final-fenced.xml",
+      "bytes": 2639,
+      "sha256": "3b7df8701abec5d59e9fb472231f4d9a9ed1b9ca84ed73a0ab6964b686e1d55b"
+    },
+    {
+      "path": "evidence/legacy-read-red.log",
+      "bytes": 2252,
+      "sha256": "7cd1c7b40e6c9404c06bc3906989dcfb9b19c92f29d065eb0e05dd6be2f6a54c"
+    },
+    {
+      "path": "evidence/legacy-read-red.xml",
+      "bytes": 987,
+      "sha256": "1deda1633c24a692fd329134e1f707f30cbd7405e1cbd86777ebe4906503a0e8"
+    },
+    {
+      "path": "evidence/red.log",
+      "bytes": 7010,
+      "sha256": "ad3bb36be76aa21d570e75b57d90704f4cb851120fe3ef1c69febb6f5b0d8dc9"
+    },
+    {
+      "path": "evidence/red.xml",
+      "bytes": 5219,
+      "sha256": "2e6d5721d42d986dc7fbb3762012788560133cdb299243607b5d5f061a42210b"
+    },
+    {
+      "path": "evidence/retire-red-corrected.log",
+      "bytes": 7540,
+      "sha256": "7ef94eeff4eba2d77485eb8837e55e482287ba05d36c6debbc5c8fd28c446d6d"
+    },
+    {
+      "path": "evidence/retire-red-corrected.xml",
+      "bytes": 8676,
+      "sha256": "56dad8d0f7ac4311511d98faa00542d22e678ec4464fb23dfe25343c7d3bf369"
+    },
+    {
+      "path": "evidence/retire-red.log",
+      "bytes": 7329,
+      "sha256": "477781c90ff5af889faeb7b10123be9cabe16169e649799ef2903cb920ccfc11"
+    },
+    {
+      "path": "evidence/retire-red.xml",
+      "bytes": 7969,
+      "sha256": "1210f37470c74e4c2f6cf801e36def95a119c5bedb99fc3bcfe6812485720414"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="3.888" timestamp="2026-10-21T23:39:54.021074+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_narrative_summary_coverage_repair" name="test_retired_partial_is_available_without_a_current_model_or_generation_call" time="0.023"><failure message="AssertionError: assert 'MODEL_NOT_CONFIGURED' == 'LEGACY_PARTI...ARY_AVAILABLE'&#10;  &#10;  - LEGACY_PARTIAL_SUMMARY_AVAILABLE&#10;  + MODEL_NOT_CONFIGURED">tests\unit\test_narrative_summary_coverage_repair.py:118: in test_retired_partial_is_available_without_a_current_model_or_generation_call
+    assert result.error.code == "LEGACY_PARTIAL_SUMMARY_AVAILABLE"
+E   AssertionError: assert 'MODEL_NOT_CONFIGURED' == 'LEGACY_PARTI...ARY_AVAILABLE'
+E     
+E     - LEGACY_PARTIAL_SUMMARY_AVAILABLE
+E     + MODEL_NOT_CONFIGURED</failure></testcase></testsuite></testsuites>
