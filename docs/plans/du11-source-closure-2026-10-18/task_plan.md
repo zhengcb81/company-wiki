@@ -10,6 +10,7 @@
 - 验证：全量单测 **7033 passed / 24 skipped**；相关 contract **113 passed**；
   `ruff` 全仓干净；`compileall` 通过；远端 CI 绿。
 - 交接：新增 `HANDOFF-2026-10-21.md`（给后续 harness 的详细交接）。
+- 最终绿点：**76a9440b**（CI success；补充修复 Windows-only API 在 Linux 下的类型检查）。
 - 质量审计基线仍在：复杂度 292/173/111、lint 扩面约 1000、覆盖率未测、4 个大模块。
 
 ---
