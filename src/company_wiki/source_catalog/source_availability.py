@@ -22,6 +22,60 @@ _MAX_PROVENANCE_BYTES = 64 * 1024
 _MAX_LOCATIONS = 64
 
 
+def verified_open_observation(original) -> dict:
+    """Record this owner's already verified buffer, without another hash/read.
+
+    Only the explicit intake writer persists this observation. A query/preview
+    never creates it; it says nothing about publication or earlier possession.
+    """
+    from dataclasses import asdict
+    if len(original.data) != original.ref.byte_size:
+        raise ValueError("verified buffer size changed")
+    return {"schema_version": "source-verified-open/1", "source_ref": asdict(original.ref),
+            "verified_at": datetime.now(timezone.utc).isoformat()}
+
+
+def _open_evidence(observation, ref: SourceRef) -> dict[str, str] | None:
+    from dataclasses import asdict
+    if not isinstance(observation, dict) or observation.get("schema_version") != "source-verified-open/1":
+        return None
+    if observation.get("source_ref") != asdict(ref):
+        return None
+    try:
+        at = datetime.fromisoformat(observation["verified_at"].replace("Z", "+00:00"))
+        if at.tzinfo is None or at > datetime.now(timezone.utc):
+            return None
+    except (ValueError, TypeError, KeyError, AttributeError):
+        return None
+    return {"schema_version": AVAILABILITY_EVIDENCE_SCHEMA_VERSION,
+            "source_sha256": ref.content_sha256, "available_by": at.astimezone(timezone.utc).date().isoformat(),
+            "basis": "current_verified_open", "evidence_ref": f"source-verified-open:{ref.document_id}:{ref.content_sha256}",
+            "locator": "/source_fact_evidence/published_date/verified_open/verified_at"}
+
+
+def stored_availability_evidence(catalog, ref: SourceRef) -> dict[str, str] | None:
+    """Catalog-only observation made by the existing source-facts writer."""
+    from .assertion_service import get_verified_assertion
+    row = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+    if not row or row["document_id"] != ref.document_id or row["evidence_basis"] != "source-facts":
+        return None
+    try:
+        raw = row["evidence_json"] or "{}"
+        if len(raw.encode("utf-8")) > _MAX_PROVENANCE_BYTES:
+            return None
+        fields = json.loads(raw).get("source_fact_evidence", {})
+        observation = fields.get("published_date", {})
+        opened = _open_evidence(observation.get("verified_open"), ref)
+        # Captures are retained in their canonical form; all byte/HTTP
+        # bindings are checked again without reading the original.
+        captured = observation.get("availability_capture")
+        prior = _capture_evidence(json.dumps(captured).encode(), ref) if isinstance(captured, dict) else None
+        proofs = [p for p in (opened, prior) if p is not None]
+        return min(proofs, key=lambda p: p["available_by"]) if proofs else None
+    except (ValueError, TypeError, AttributeError, UnicodeError, RecursionError):
+        return None
+
+
 def _provenance_path(root: Path, relative: str) -> Path | None:
     normalized = relative.replace("\\", "/")
     parts = normalized.split("/")
@@ -75,8 +129,38 @@ def _capture_evidence(data: bytes, ref: SourceRef) -> dict[str, str] | None:
             "evidence_ref": f"source-provenance:{ref.document_id}:{hashlib.sha256(data).hexdigest()}",
             "locator": "/receipt/content_sha256 + /receipt/retrieved_at + /receipt/http_status",
         }
-    except (TypeError, ValueError, UnicodeError):
+    except (TypeError, ValueError, UnicodeError, RecursionError):
         return None
+
+
+def capture_observation(catalog, ref: SourceRef, *, budget) -> dict | None:
+    """Copy only an already validated canonical receipt into source facts."""
+    locations = catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
+    if len(locations) > _MAX_LOCATIONS:
+        return None
+    roots = {r.root_id: r.path for r in catalog.config.roots}
+    observations = []
+    for loc in locations:
+        budget.check()
+        root = roots.get(loc["root_id"])
+        path = _provenance_path(root, loc["relative_path"]) if root is not None else None
+        if path is None:
+            continue
+        if path.stat().st_size > _MAX_PROVENANCE_BYTES:
+            continue
+        if path.stat().st_size > budget.max_bytes - budget.bytes_read:
+            from .source_reader import SourceReadError
+            raise SourceReadError("unavailable", "budget_exceeded")
+        with path.open("rb") as stream:
+            data = stream.read(min(_MAX_PROVENANCE_BYTES + 1, budget.max_bytes - budget.bytes_read + 1))
+        stop = budget.charge(len(data))
+        if stop:
+            from .source_reader import SourceReadError
+            raise SourceReadError("unavailable", stop)
+        proof = _capture_evidence(data, ref) if len(data) <= _MAX_PROVENANCE_BYTES else None
+        if proof is not None:
+            observations.append((proof["available_by"], json.loads(data)))
+    return min(observations, key=lambda item: item[0])[1] if observations else None
 
 
 def verified_availability_evidence(catalog, ref: SourceRef) -> dict[str, str] | None:
@@ -85,11 +169,12 @@ def verified_availability_evidence(catalog, ref: SourceRef) -> dict[str, str] | 
     The public reader has already checked ref against the actual raw buffer.
     Proof lookup is optional and cannot turn an unknown date into publication.
     """
+    stored = stored_availability_evidence(catalog, ref) if hasattr(catalog.reader, "fetchone") else None
     locations = catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
     if len(locations) > _MAX_LOCATIONS:
-        return None
+        return stored
     roots = {root.root_id: root.path for root in catalog.config.roots}
-    proofs = []
+    proofs = [stored] if stored else []
     for location in locations:
         root = roots.get(location["root_id"])
         relative = location["relative_path"]

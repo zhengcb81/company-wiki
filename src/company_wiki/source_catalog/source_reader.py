@@ -17,7 +17,7 @@ from typing import Any
 
 from .document_kinds import PERIODIC_DOCUMENT_KINDS
 from .policy_2x import export_policy_2x
-from .qualification import qualify_source
+from .qualification import qualify_source, latest_source_index
 from .prompt_injection import (
     PromptInjectionReviewError,
     read_prompt_injection_review,
@@ -293,6 +293,7 @@ class SourceVersionReader:
             raise TypeError("request must be SourceRequest")
         resolver = self._resolver_for_request()
         found: list[tuple[str, str, SourceRef]] = []
+        found_scopes: list[dict] = []
         excluded: list[dict[str, object]] = []
 
         def make_query_result(status: str, matches: tuple[SourceRef, ...], reason: str) -> SourceQueryResult:
@@ -348,7 +349,10 @@ class SourceVersionReader:
                 ref = self.query_ref(document["document_id"], source_id, digest)
             except SourceReadError:
                 continue
-            qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date)
+            from .source_availability import stored_availability_evidence
+            availability = stored_availability_evidence(self.catalog, ref) if not document["published_date"] else None
+            qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date,
+                                           availability_evidence=availability, source_sha256=ref.content_sha256)
             if not qualification.historical_date_eligible and not (
                 include_unknown_publication and qualification.publication_status == "unknown"
             ):
@@ -356,20 +360,24 @@ class SourceVersionReader:
                 continue
             published = str(document["published_date"] or "")
             found.append((published, provider_document_id or "", ref))
+            from .canonical_scope import qualified_source_scope
+            scope = qualified_source_scope(self.catalog, ref, document)
+            found_scopes.append({**scope.facts, "scope_verified": scope.authority == "source-facts",
+                                 "published_date": published, "provider_document_id": provider_document_id,
+                                 "source_id": source_id})
         if not found:
             return make_query_result("not_found", (), "no_local_match")
         if request.mode == "latest_as_of":
-            selected = max(
-                found,
-                key=lambda item: (item[0], item[1], item[2].source_id),
-            )
-            return make_query_result("found", (selected[2],), "latest_as_of")
+            selected = latest_source_index(found_scopes)
+            if selected is None:
+                return make_query_result("ambiguous", tuple(item[2] for item in found), "latest_period_or_revision_unknown")
+            return make_query_result("found", (found[selected][2],), "latest_as_of")
         if len(found) > 1:
             return make_query_result(
                 "ambiguous", tuple(item[2] for item in found),
                 "multiple_local_matches",
             )
-        if not found[0][0]:
+        if not found[0][0] and include_unknown_publication:
             return make_query_result(
                 "unknown_publication", (found[0][2],), "publication_date_unknown"
             )

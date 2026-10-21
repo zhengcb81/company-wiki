@@ -30,8 +30,12 @@ class SourceScope:
     def identity(self):
         if not all(self.facts.get(key) for key in ("entity", "market", "security_id")):
             return None
+        primary = self.evidence.get("entity") or {}
+        cik = primary.get("primary_cik")
         return SimpleNamespace(canonical_name=self.facts["entity"], market=self.facts["market"],
-            security_id=self.facts["security_id"], ticker=self.facts["security_id"])
+            security_id=self.facts["security_id"], ticker=self.facts["security_id"],
+            identifiers={"cik": cik} if isinstance(cik, str) and cik.isdigit() else {},
+            source_record_id=primary.get("issuer_record_id"))
 
 
 def _same(left, right):
@@ -143,9 +147,6 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
     metadata = document.get("metadata") or {}
     capture = metadata.get("acquisition") if isinstance(metadata, dict) else {}
     market = capture.get("market") if isinstance(capture, dict) else None
-    if _sec_original(ref, market, document.get("document_kind")):
-        # SEC HTML's owner uses actual primary DEI, including its existing native proof cache.
-        return SourceScope({}, {}, "primary-original-required")
     prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
     if prior and prior["document_id"] == ref.document_id and prior["evidence_basis"] == "source-facts":
         payload = _evidence_payload(prior["evidence_json"], prior["assertion_id"])
@@ -153,6 +154,10 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
         if not isinstance(facts, dict) or not isinstance(evidence, dict):
             raise ValueError("source facts must be a nonempty object of known fields")
         _validate_source_facts(facts, evidence)
+        if _sec_original(ref, facts.get("market") or market, facts.get("document_kind")):
+            from .assertion_service import _proved_sec_issuer
+            if _proved_sec_issuer(ref, facts, facts, evidence) is None:
+                return SourceScope({}, {}, "primary-original-required")
         commit = payload.get("canonical_commit")
         if commit is not None:
             from .source_reader import SourceReadError
@@ -171,6 +176,8 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
             if not valid:
                 raise SourceReadError("blocked","canonical_capture_binding_conflict")
         return SourceScope(facts, evidence, "source-facts")
+    if _sec_original(ref, market, document.get("document_kind")):
+        return SourceScope({}, {}, "primary-original-required")
     if historical is not None:
         known = historical.scope(ref, document)
         if known is not None:

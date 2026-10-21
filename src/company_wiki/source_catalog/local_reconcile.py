@@ -1,7 +1,7 @@
 """Explicit local intake: prove existing facts, then use the unchanged public reader."""
 
 from __future__ import annotations
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import date
 from pathlib import Path
 import re
@@ -204,7 +204,70 @@ def _scope_matches(primary, request):
 
 
 
-def _proven_facts(catalog, original, identity, request, budget, *, claimed_match=False):
+def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
+    """Observe a bounded periodic cover, never turn its filename into facts."""
+    import pymupdf as fitz
+
+    try:
+        with fitz.open(stream=original.data, filetype="pdf") as pdf:
+            pages = []
+            for number in range(min(3, len(pdf))):
+                budget.check()
+                pages.append(pdf[number].get_text()[:20000])
+    except SourceReadError:
+        raise
+    except (RuntimeError, ValueError) as exc:
+        raise SourceReadError("blocked", "local_original_unreadable") from exc
+    for number, text in enumerate(pages, 1):
+        compact = re.sub(r"\s+", "", text)
+        name = re.sub(r"\s+", "", identity.canonical_name)
+        named = name in compact
+        codes = set(re.findall(r"(?:股票|证券)代码[:：]?([0-9]{6})(?!\d)", compact))
+        if codes and codes != {identity.security_id}:
+            raise SourceReadError("blocked", "primary_issuer_conflict")
+        coded = identity.security_id in codes
+        if not (named or coded):
+            continue
+        lines = [re.sub(r"\s+", "", line) for line in text.splitlines() if line.strip()][:40]
+        ir_title = next((line for line in lines[:12] if line.removeprefix(name) in {
+            "投资者关系活动记录表", "投资者关系活动记录", "投资者交流活动记录表"}), None)
+        if ir_title and allow_other_kinds:
+            facts = {"entity": identity.canonical_name, "market": identity.market,
+                     "security_id": identity.security_id, "document_kind": "investor_relations",
+                     "title": ir_title, "fiscal_year": None, "fiscal_period": None}
+            return facts, {key: {"value": value, "locator": f"pdf:page:{number}:document-title",
+                                "content_sha256": original.ref.content_sha256,
+                                "extraction_method": "cn-document-title/1"} for key, value in facts.items()}
+        if any(re.search(r"投资者关系活动记录|招股说明书|募集说明书|[问答][:：]", line) for line in lines[:12]):
+            raise SourceReadError("blocked", "local_document_kind_unresolved")
+        match = None
+        for start in range(min(12, len(lines))):
+            for width in range(1, 4):
+                title = "".join(lines[start:start + width])
+                if title.startswith(name):
+                    title = title[len(name):]
+                match = re.fullmatch(r"(20\d{2})年?(半年度|年度|第一季度|第二季度|第三季度|第四季度)报告(?:[（(](?:修订|更正|更新).*?[）)])?", title)
+                if match is not None:
+                    break
+            if match is not None:
+                break
+        if match is None:
+            continue
+        label = match[2]
+        period = {"年度": "FY", "半年度": "H1", "第一季度": "Q1", "第二季度": "Q2", "第三季度": "Q3", "第四季度": "Q4"}[label]
+        kind = "annual_report" if period == "FY" else ("semi_annual_report" if period == "H1" else "quarterly_report")
+        facts = {"entity": identity.canonical_name, "market": identity.market,
+                 "security_id": identity.security_id, "document_kind": kind,
+                 "fiscal_year": int(match[1]), "fiscal_period": period,
+                 "title": f"{identity.canonical_name} {match[0]}"}
+        evidence = {key: {"value": value, "locator": f"pdf:page:{number}:periodic-cover",
+                          "content_sha256": original.ref.content_sha256,
+                          "extraction_method": "cn-periodic-cover/1"} for key, value in facts.items()}
+        return facts, evidence
+    raise SourceReadError("blocked", "local_metadata_incomplete")
+
+
+def _proven_facts(catalog, original, identity, request, budget, *, claimed_match=False, match_scope=True):
     ref = original.ref
     prior_patch, prior_proof = _prior_source_facts(catalog, ref)
     if _sec_original(ref, identity.market, request.document_kind):
@@ -213,7 +276,7 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
             request=request, identity=identity)
         reused_scope = not qualification.needs_original
         primary = qualification.scope(original.data, budget=budget, extractor=extract_sec_scope)
-        if not _scope_matches(primary, request):
+        if match_scope and not _scope_matches(primary, request):
             if claimed_match:
                 raise SourceReadError("blocked", "primary_scope_conflict")
             return None, None
@@ -226,14 +289,14 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
         published = (
             cache["published_date"] if cache else prior_patch.get("published_date")
         )
-        if published is None:
-            raise SourceReadError("blocked", "publication_date_unknown")
         source_url = cache["source_url"] if cache else prior_patch.get("source_url")
         facts = {
             "entity": identity.canonical_name,
             "market": identity.market,
             "security_id": identity.security_id,
-            "document_kind": request.document_kind,
+            "document_kind": ("regulatory_filing" if not match_scope and request.document_kind == "annual_report"
+                              and primary["form_type"].removesuffix("/A") not in {"10-K", "20-F"}
+                              else request.document_kind),
             "fiscal_year": primary["fiscal_year"],
             "fiscal_period": primary["fiscal_period"],
             "period_end": primary["report_date"],
@@ -283,35 +346,34 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
                     "content_sha256": ref.content_sha256,
                 }
                 if cache
-                else prior_proof[key]
+                else prior_proof.get(key, {"locator": "source-metadata:unknown", "value": facts[key],
+                                           "content_sha256": ref.content_sha256})
             )
         return facts, evidence
     # Other already-verified source fact declarations can be rechecked against their actual bytes.
-    required = {"entity", "market", "security_id", "document_kind", "published_date"}
+    required = {"entity", "market", "security_id", "document_kind"}
     if request.fiscal_year is not None:
         required.add("fiscal_year")
     if request.fiscal_period is not None:
         required.add("fiscal_period")
-    if not required <= set(prior_patch) or any(
+    identity_conflict = any(prior_patch.get(key) not in (None, expected) for key, expected in (
+        ("market", identity.market), ("security_id", identity.security_id)))
+    if identity_conflict or not required <= set(prior_patch) or any(
         prior_patch.get(key) is None for key in required
     ):
         if ref.mime_type == "application/pdf" and identity.market == "CN":
-            import pymupdf as fitz
-
-            with fitz.open(stream=original.data, filetype="pdf") as pdf:
-                budget.check()
-                cover = pdf[0].get_text()[:20000] if len(pdf) else ""
-            # Cover can establish an issuer/year gap, never a publication day.
-            normalized = re.sub(r"\s+", "", cover)
-            if identity.canonical_name.replace(" ", "") in normalized:
-                raise SourceReadError("blocked", "publication_date_unknown")
+            facts, proof = _cn_cover_scope(original, identity, budget, allow_other_kinds=True)
+            facts["published_date"] = None if identity_conflict else prior_patch.get("published_date")
+            proof["published_date"] = (None if identity_conflict else prior_proof.get("published_date")) or {
+                "locator": "source-metadata:publication-unknown", "value": facts["published_date"]}
+            return facts, proof
         raise SourceReadError("blocked", "local_metadata_incomplete")
     if (prior_patch["market"], prior_patch["security_id"]) != (
         identity.market,
         identity.security_id,
     ):
         raise SourceReadError("blocked", "primary_identity_unresolved")
-    if any(
+    if match_scope and any(
         getattr(request, key) is not None
         and getattr(request, key) != prior_patch.get(key)
         for key in ("fiscal_year", "fiscal_period", "document_kind")
@@ -322,12 +384,32 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
     }, prior_proof
 
 
-def _discover_source_groups(catalog, identity, budget):
+def _facts_with_availability(catalog, original, identity, request, budget, **options):
+    from .source_availability import capture_observation, verified_open_observation
+    facts, evidence = _proven_facts(catalog, original, identity, request, budget, **options)
+    if facts is None:
+        return None, None
+    facts.setdefault("published_date", None)
+    if facts["published_date"] is None:
+        previous = evidence.get("published_date", {})
+        observation = {**previous, "value": None,
+                       "locator": "source-observation:publication-unknown"}
+        # Preserve the earliest owner-verified observation across retries.
+        observation.setdefault("verified_open", verified_open_observation(original))
+        captured = capture_observation(catalog, original.ref, budget=budget)
+        if captured is not None:
+            observation["availability_capture"] = captured
+        evidence["published_date"] = observation
+    return facts, evidence
+
+
+def _discover_source_groups(catalog, identity, budget, request):
     """Finite issuer-layout metadata enumeration, separate from raw verification."""
     from .adapter_dispatch import discover_issuer_paths
     from .policy import _effective_reusable
 
-    targets = []
+    changed = False
+    unresolved = []
     names = {identity.canonical_name, identity.ticker, identity.security_id}
 
     def local_path(path, root, *, directory):
@@ -352,18 +434,69 @@ def _discover_source_groups(catalog, identity, budget):
             metadata_reader=budget.metadata_reader(root.path),
             observe_group=budget.observe_group, observe_entry=budget.observe_entry,
         )
-        for relative in sorted(selected):
-            if catalog.reader.fetchone("SELECT 1 FROM locations WHERE root_id=? AND relative_path=?", (root.root_id, relative)) is None:
-                targets.append((root.root_id, relative))
-                if len(targets) > budget.max_candidates:
+        def priority(relative):
+            # Hints order work only. Qualification below observes actual bytes.
+            name = Path(relative).name.casefold()
+            year_hit = request.fiscal_year is not None and str(request.fiscal_year) in name
+            period_tokens = {"FY": ("annual", "年报", "年度"), "H1": ("h1", "半年", "中期"),
+                             "Q1": ("q1", "一季"), "Q2": ("q2", "二季"),
+                             "Q3": ("q3", "三季"), "Q4": ("q4", "四季")}
+            period_hit = any(token in name for token in period_tokens.get(request.fiscal_period, ()))
+            return (not year_hit, not period_hit, relative)
+
+        for relative in sorted(selected, key=priority):
+            location = catalog.reader.fetchone("SELECT document_id FROM locations WHERE root_id=? AND relative_path=? AND role='original_primary'", (root.root_id, relative))
+            if location is None:
+                # Each completed registration/proof survives a later bound.
+                if budget.candidates >= budget.max_candidates:
                     raise SourceReadError("unavailable", "local_candidate_limit")
-    scopes: dict[str, set[str]] = {}
-    for root_id, relative in targets:
-        scopes.setdefault(root_id, set()).add(relative)
-    for root_id, paths in scopes.items():
-        budget.check()
-        _register_local_sources(catalog, root_id=root_id, relative_paths=paths, budget=budget)
-    return bool(scopes)
+                _register_local_sources(catalog, root_id=root.root_id, relative_paths={relative}, budget=budget)
+                changed = True
+                location = catalog.reader.fetchone(
+                    "SELECT document_id FROM locations WHERE root_id=? AND relative_path=? AND role='original_primary'",
+                    (root.root_id, relative))
+            row = catalog.reader.exact_source_version(location["document_id"]) if location else None
+            if row is None:
+                raise SourceReadError("unavailable", "local_original_registration_failed")
+            ref = SourceRef(row["document_id"], row["source_id"], row["content_sha256"], row["byte_size"], row["mime_type"])
+            scope = qualified_source_scope(catalog, ref, {"document_kind": row["document_kind"]})
+            relation = scope_relatedness(scope, request)
+            if relation is ScopeRelation.NOT_RELEVANT:
+                continue
+            from .document_kinds import PERIODIC_DOCUMENT_KINDS
+            from .source_availability import stored_availability_evidence
+            period_known = scope.facts.get("document_kind") not in PERIODIC_DOCUMENT_KINDS or (
+                type(scope.facts.get("fiscal_year")) is int and bool(scope.facts.get("fiscal_period")))
+            date_observed = bool(scope.facts.get("published_date")) or stored_availability_evidence(catalog, ref) is not None
+            if relation is ScopeRelation.MATCH and scope.authority == "source-facts" and period_known and date_observed:
+                # Discovery consumes stored scope proof. The final selected
+                # version is opened once below; do not re-open every old PDF.
+                continue
+            if getattr(identity, "_discovery_only", False):
+                # Requested names may locate files; only their actual source
+                # owner can establish facts. No lookup is needed for an empty
+                # issuer directory, and an unknown original is not absence.
+                identity = scope.identity() or _identity(catalog, request, getattr(identity, "_identity_cache_dir", None))
+            broad = replace(request, fiscal_year=None, fiscal_period=None, form_type=None)
+            def prove(original):
+                return _facts_with_availability(catalog, original, identity, broad, budget, match_scope=False)
+            try:
+                restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
+                                       budget=budget, fact_replay=prove)
+                changed = True
+            except SourceReadError as exc:
+                if exc.reason in {"budget_exceeded", "cancelled", "local_prepare_deadline"}:
+                    raise
+                if exc.reason != "local_original_missing":
+                    unresolved.append((exc.status, exc.reason))
+            if request.mode != "latest_as_of" and SourceVersionReader(catalog).query_local(request).status == "found":
+                return True
+    if unresolved:
+        # Includes registered generic-kind originals. The next retry sees
+        # them again until a source owner can prove scope; no lost sentinel.
+        status, reason = unresolved[0]
+        raise SourceReadError(status, reason)
+    return changed
 
 
 def _prepare_local_source(
@@ -380,9 +513,32 @@ def _prepare_local_source(
     if not isinstance(request, SourceRequest):
         raise TypeError("request must be SourceRequest")
     budget = _budget or LocalReadBudget(limits or LocalPrepareLimits())
+    if not catalog.config.database_path.exists():
+        # Explicit prepare owns a finite writer operation; pure query/open
+        # keeps its read-only missing-catalog refusal.
+        _ = catalog.store
     reader = SourceVersionReader(catalog)
     query = reader.query_local(request)
     identity = None
+    if request.mode == "latest_as_of" and not _discovery_done:
+        if query.matches:
+            ref = query.matches[0]
+            identity = qualified_source_scope(catalog, ref, {"document_kind": request.document_kind}).identity()
+        if identity is None:
+            try:
+                identity = _identity(catalog, request, identity_cache_dir)
+            except (ValueError, SourceReadError):
+                from types import SimpleNamespace
+                identity = SimpleNamespace(canonical_name=request.entity, market=request.market,
+                    security_id=request.security_id, ticker=request.security_id, _discovery_only=True,
+                    _identity_cache_dir=identity_cache_dir)
+        _discover_source_groups(catalog, identity, budget, request)
+        return _prepare_local_source(catalog, request, identity_cache_dir=identity_cache_dir,
+            limits=limits, _discovery_done=True, _budget=budget)
+    if query.status == "found" and _discovery_done:
+        ref = query.matches[0]
+        reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+        return _result("ready", "local_source_reconciled", ref=ref)
     claimed_matches = {ref.document_id for ref in query.matches} if query.status == "found" else set()
     if query.status == "found" and not _discovery_done:
         ref = query.matches[0]
@@ -433,7 +589,7 @@ def _prepare_local_source(
                 identity = _identity(catalog, request, identity_cache_dir)
             except (ValueError, SourceReadError):
                 return _result("not_found", "no_registered_local_source")
-            if _discover_source_groups(catalog, identity, budget):
+            if _discover_source_groups(catalog, identity, budget, request):
                 return _prepare_local_source(
                     catalog,
                     request,
@@ -452,8 +608,15 @@ def _prepare_local_source(
     known_identity = None
     for candidate in candidates:
         budget.check()
+        from .resolver import _source_metadata
+        metadata = _source_metadata(candidate, store=catalog.reader, reader="steady")
         row = catalog.reader.exact_source_version(candidate["document_id"])
         ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
+        body_owner = (_sec_original(ref, request.market, request.document_kind)
+                      or request.market == "CN" and ref.mime_type == "application/pdf")
+        if resolver._identity_matches(request, metadata) == "conflict" and not body_owner:
+            diagnostics.append({"document_id": candidate["document_id"], "reason": "registered_identity_conflict"})
+            continue
         qualified = qualified_source_scope(catalog,ref,candidate,historical=historical)
         relation = scope_relatedness(qualified,request)
         if relation is ScopeRelation.NOT_RELEVANT:
@@ -465,7 +628,7 @@ def _prepare_local_source(
             known_identity = known_identity or qualified.identity()
     candidates = eligible
     if not candidates:
-        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget):
+        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget,request):
             return _prepare_local_source(catalog,request,identity_cache_dir=identity_cache_dir,
                 limits=limits,_discovery_done=True,_budget=budget)
         return _result("not_found","no_matching_local_period",diagnostics=diagnostics)
@@ -496,7 +659,7 @@ def _prepare_local_source(
             observed_facts = []
 
             def qualify(checked):
-                facts, evidence = _proven_facts(
+                facts, evidence = _facts_with_availability(
                     catalog, checked, identity, request, budget,
                     claimed_match=ref.document_id in claimed_matches,
                 )
@@ -522,13 +685,20 @@ def _prepare_local_source(
                     if key not in {"source_ref", "verified_locations"}
                 }
             )
-            if facts["published_date"] > request.as_of_date:
+            if facts["published_date"] is not None and facts["published_date"] > request.as_of_date:
                 diagnostics.append(
                     {
                         "document_id": ref.document_id,
                         "reason": "publication_after_as_of",
                     }
                 )
+            elif facts["published_date"] is None:
+                from .qualification import qualify_source
+                from .source_availability import stored_availability_evidence
+                date_quality = qualify_source(None, as_of_date=request.as_of_date,
+                    availability_evidence=stored_availability_evidence(catalog, ref), source_sha256=ref.content_sha256)
+                if not date_quality.historical_date_eligible:
+                    diagnostics.append({"document_id": ref.document_id, "reason": "publication_date_unknown"})
         except (
             SourceReadError,
             FiscalMetadataError,
@@ -536,6 +706,9 @@ def _prepare_local_source(
             OSError,
             CatalogOperationLockedError,
         ) as exc:
+            if isinstance(exc, SourceReadError) and exc.reason == "local_original_missing":
+                diagnostics.append({"document_id": ref.document_id, "reason": exc.reason})
+                continue
             if isinstance(exc, SourceReadError) and exc.reason in {
                 "budget_exceeded", "cancelled", "local_prepare_deadline",
                 "local_source_group_limit", "local_discovery_entry_limit",
@@ -593,7 +766,7 @@ def _prepare_local_source(
             operations=operations,
             diagnostics=diagnostics,
         )
-    if not _discovery_done and _discover_source_groups(catalog, identity, budget):
+    if not _discovery_done and _discover_source_groups(catalog, identity, budget, request):
         return _prepare_local_source(
             catalog,
             request,

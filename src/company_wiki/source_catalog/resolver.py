@@ -1454,8 +1454,12 @@ class SourceResolver:
                 "not_checked" if "budget_exceeded" in selection.reason or "cancelled" in selection.reason
                 else "unavailable"
             )
+            from .source_availability import stored_availability_evidence
             qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date,
-                                           local_bytes_status=availability)
+                                           local_bytes_status=availability,
+                                           availability_evidence=(stored_availability_evidence(self.catalog, source_ref)
+                                               if not document["published_date"] else None),
+                                           source_sha256=source_ref.content_sha256)
             if handle is None:
                 excluded.append(self._excluded_candidate(document, qualification))
                 trace.append(f"{document['title']}: {selection.reason}")
@@ -1904,26 +1908,27 @@ class SourceResolver:
         # fields above) and WHY it was chosen (the selection reason).
         return _Selection(handle=built, reason=selection_reason, tried=tried)
 
-    @staticmethod
     def _pick_latest(
-        handles: list[SourceHandle], as_of_date: str
+        self, handles: list[SourceHandle], as_of_date: str
     ) -> SourceHandle | None:
         """WU-4.1: latest_as_of selection — the most recent published handle
         not after ``as_of_date``; ties broken by provider_document_id for
         determinism (never file mtime or scan order)."""
-        eligible = [
-            h for h in handles if h.published_date and h.published_date <= as_of_date
-        ]
+        eligible = [h for h in handles if not h.published_date or h.published_date <= as_of_date]
         if not eligible:
             return None
-        return max(
-            eligible,
-            key=lambda h: (
-                h.published_date,
-                h.provider_document_id or "",
-                h.source_id,
-            ),
-        )
+        from .qualification import latest_source_index
+        from .canonical_scope import qualified_source_scope
+        from .source_reader import SourceRef
+        versions = []
+        for handle in eligible:
+            ref = SourceRef(handle.document_id, handle.source_id, handle.content_sha256, handle.byte_size, handle.mime_type)
+            scope = qualified_source_scope(self.catalog, ref, {"document_kind": handle.document_kind})
+            versions.append({**scope.facts, "scope_verified": scope.authority == "source-facts",
+                             "published_date": handle.published_date, "provider_document_id": handle.provider_document_id,
+                             "source_id": handle.source_id})
+        index = latest_source_index(versions)
+        return eligible[index] if index is not None else None
 
     @staticmethod
     def _result(

@@ -568,3 +568,115 @@ def test_bounded_dayu_source_group_discovery_registers_existing_raw_without_fetc
         p: p.read_bytes() for p in group.iterdir()
     }
     assert not list(lake.config.roots[0].path.rglob("*.html"))
+
+
+def _legacy_sec_group(cat, year, *, name=None):
+    """Unregistered legacy original; fiscal labels must come from actual DEI."""
+    _ = cat.store
+    path = cat.config.roots[0].path / "Acme" / (name or f"{year}-Q2.htm")
+    path.parent.mkdir(exist_ok=True)
+    data = DATA.replace(b">2026</", f">{year}</".encode())
+    path.write_bytes(data)
+    path.with_name(path.name + ".source.json").write_text(json.dumps({
+        "entity": "Acme", "market": "US", "security_id": "ACME",
+        "document_kind": "regulatory_filing", "provider": "sec",
+        "content_sha256": hashlib.sha256(data).hexdigest(),
+        "published_date": "2026-01-28", "fiscal_year": year,
+        "fiscal_period": "Q2", "form_type": "10-Q",
+        "source_url": "https://www.sec.gov/Archives/example.htm",
+    }), encoding="utf-8")
+    return path
+
+
+def test_request_priority_reuses_target_after_twenty_old_originals(lake):
+    for year in range(2001, 2021):
+        _legacy_sec_group(lake, year)
+    target = _legacy_sec_group(lake, 2026)
+    before = {p: p.read_bytes() for p in target.parent.iterdir()}
+    result = prepare(lake)
+    assert result["status"] == "ready", result
+    assert result["source_ref"]["content_sha256"] == hashlib.sha256(target.read_bytes()).hexdigest()
+    assert result["download_events"] == 0
+    assert before == {p: p.read_bytes() for p in target.parent.iterdir()}
+
+
+def test_bounded_discovery_keeps_progress_and_does_not_invent_absence(lake):
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+    from company_wiki.source_catalog.local_inventory import LocalPrepareLimits
+
+    for year in range(2001, 2021):
+        _legacy_sec_group(lake, year, name=f"original-{year}.htm")
+    request = business()
+    limits = LocalPrepareLimits(max_candidates=4)
+    first = prepare_local_source(lake, request, limits=limits)
+    first_count = lake.reader.fetchone("SELECT COUNT(*) FROM documents")[0]
+    assert first["status"] == "unavailable" and first["blocks_download"], first
+    assert first_count > 0, "a bounded request must retain its completed registrations"
+    second = prepare_local_source(lake, request, limits=limits)
+    second_count = lake.reader.fetchone("SELECT COUNT(*) FROM documents")[0]
+    assert second["status"] == "unavailable" and second["blocks_download"], second
+    assert second_count > first_count, "retry must advance past previously proved scopes"
+    assert second["download_events"] == 0
+    for _attempt in range(22):
+        result = prepare_local_source(lake, request, limits=limits)
+        if result["status"] == "not_found":
+            break
+        assert result["blocks_download"] and result["status"] == "unavailable", result
+    assert result["status"] == "not_found", "bounded retries must eventually finish a finite inventory"
+    assert lake.reader.fetchone("SELECT COUNT(*) FROM documents")[0] == 20
+
+
+def test_misleading_current_filename_is_not_fiscal_proof(lake):
+    _legacy_sec_group(lake, 2025, name="2026-Q2.htm")
+    target = _legacy_sec_group(lake, 2026, name="ordinary-original.htm")
+    result = prepare(lake)
+    assert result["status"] == "ready", result
+    assert result["source_ref"]["content_sha256"] == hashlib.sha256(target.read_bytes()).hexdigest()
+    assert SourceVersionReader(lake).describe_version(SourceRef(**result["source_ref"]))["fiscal_year"] == 2026
+
+
+def test_cold_explicit_prepare_bootstraps_without_turning_query_into_writer(lake):
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+    from company_wiki.source_catalog.source_reader import SourceReadError
+    with pytest.raises(SourceReadError, match="catalog_unavailable"):
+        SourceVersionReader(lake).query_local(business())
+    result = prepare_local_source(lake, business())
+    assert result["status"] == "not_found", result
+    assert lake.config.database_path.is_file()
+    assert lake.reader.fetchone("SELECT COUNT(*) FROM documents")[0] == 0
+
+
+def test_cn_current_verified_open_has_real_time_and_never_backdates(lake):
+    from datetime import datetime, timedelta, timezone
+    import pymupdf as fitz
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+    from company_wiki.source_catalog.source_availability import verified_availability_evidence
+
+    master = SecurityMasterStore(lake.config.catalog_dir / "security_master")
+    master.write_market("CN", (SecurityRecord("和光科技", "CN", "SSE", "600999", "600999", (),
+        True, "official", "https://example.org/securities", "600999", {}),),
+        retrieved_at="2026-10-09T00:00:00Z", sources=("official",))
+    folder = lake.config.roots[0].path / "和光科技"
+    folder.mkdir()
+    path = folder / "unlabeled.pdf"
+    with fitz.open() as doc:
+        page = doc.new_page()
+        page.insert_text((40, 50), "和光科技\n2026年半年度报告\n证券代码：600999", fontname="china-s", fontsize=12)
+        path.write_bytes(doc.tobytes())
+    raw = path.read_bytes()
+    today = datetime.now(timezone.utc).date()
+    request = SourceRequest(entity="和光科技", market="CN", security_id="600999",
+        document_kind="semi_annual_report", fiscal_year=2026, fiscal_period="H1", as_of_date=today.isoformat())
+    # Real intake must establish document kind from its body, not the generic
+    # scanner label. It also owns the current observed availability.
+    result = prepare_local_source(lake, request)
+    assert result["status"] == "ready", result
+    ref = SourceRef(**result["source_ref"])
+    reader = SourceVersionReader(lake)
+    assert reader.describe_version(ref)["published_date"] is None
+    proof = verified_availability_evidence(lake, ref)
+    assert proof["basis"] == "current_verified_open" and proof["available_by"] == today.isoformat()
+    assert reader.query_local(request).status == "found"
+    from dataclasses import replace
+    assert reader.query_local(replace(request, as_of_date=(today - timedelta(days=1)).isoformat())).status == "not_found"
+    assert path.read_bytes() == raw

@@ -1015,14 +1015,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 refresh = OfficialSecurityMasterRefresher(master_store).refresh(
                     markets=markets
                 )
-            identity = SecurityIdentityResolver(
+            identified_identity = SecurityIdentityResolver(
                 load_identity_master(master_store, market=args.market)
             ).identify(
                 args.query,
                 market=args.market,
                 exchange=args.exchange,
             )
-            result = identity.to_dict()
+            result = identified_identity.to_dict()
             if refresh is not None:
                 result["refresh"] = refresh
         elif args.command == "query":
@@ -1057,10 +1057,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "resolve":
             from .acquisition_journal import AcquisitionJournal
             from .resolver import build_resolution_envelope
-            request, resolved_identity = source_request()
-            if resolved_identity is None:
-                raise ValueError("resolve requires a resolvable identity")
-            identity = resolved_identity
+            request, identity = source_request()
             policy = None  # Legacy runtime snapshots require an explicit compatibility caller.
             resolution = SourceResolver(get_catalog(), runtime_policy=policy).resolve(
                 request
@@ -1103,7 +1100,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .acquisition_journal import AcquisitionJournal
             from .close_gap import CloseGapTransaction
 
-            request, _identity = source_request()
+            request, identity = source_request()
             budget = _acquisition_budget_from_args(args, required=True)
             args._acquisition_budget = budget
             binding = _acquisition_binding_from_args(args, request, budget, project_root)
@@ -1277,8 +1274,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _run_promotions, action="import-portfolio"
             )
             result = {"promotions": [promotion.to_dict() for promotion in promotions]}
-            if identity:
-                result["identity"] = identity.to_dict()
+            if optional_identity:
+                result["identity"] = optional_identity.to_dict()
         elif args.command == "worker-status":
             controller = worker_controller()
             result = controller.status()

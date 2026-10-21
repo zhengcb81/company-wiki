@@ -316,7 +316,7 @@ def verify_registered_original(
             retain_bytes=first is None,
         )
         if status:
-            failures.append(reason or status)
+            failures.append("local_original_missing" if reason == "read_failed" and detail == "FileNotFoundError" else (reason or status))
             if reason in {"cancelled", "budget_exceeded"}:
                 raise SourceReadError(status, reason, detail)
             continue
@@ -324,6 +324,8 @@ def verify_registered_original(
             first = data
         valid.append((loc["location_id"], resolved, root))
     if first is None:
+        if failures and set(failures) == {"local_original_missing"}:
+            raise SourceReadError("not_found", "local_original_missing")
         raise SourceReadError(
             "unavailable", "no_verified_location", ",".join(sorted(set(failures)))
         )

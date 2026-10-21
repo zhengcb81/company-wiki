@@ -478,9 +478,17 @@ def restore_document_facts(catalog, *, ref, facts=None, evidence=None, retiremen
             elif (replayed_facts,replayed_evidence) != (facts,evidence):
                 raise SourceReadError("unavailable", "local_fact_observation_changed")
         _validate_source_facts(facts, evidence)
-        required = {"entity", "market", "security_id", "document_kind", "published_date"}
+        required = {"entity", "market", "security_id", "document_kind"}
         if any(not facts.get(key) for key in required):
             raise SourceReadError("blocked", "local_metadata_incomplete")
+        if facts.get("published_date") is None:
+            from .source_availability import _open_evidence, _capture_evidence
+            date_proof = evidence.get("published_date", {})
+            captured = date_proof.get("availability_capture")
+            if (_open_evidence(date_proof.get("verified_open"), ref) is None
+                    and (not isinstance(captured, dict)
+                         or _capture_evidence(canonical_json(captured).encode(), ref) is None)):
+                raise SourceReadError("blocked", "publication_date_unknown")
         row = observed["version"]
         metadata = observe_metadata(row["metadata_json"]).metadata
         current = _source_metadata({"source_id":ref.source_id, "metadata":metadata},
