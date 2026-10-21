@@ -1,0 +1,1741 @@
+{
+  "schema_version": "r1-nvda-carried-reconciliation/1",
+  "created_at_utc": "2026-10-21T21:10:57.022808+00:00",
+  "as_of_date": "2026-10-21",
+  "scope": "read-only historical responsibility reconciliation; only this MD/JSON written; no company execution/download/model/test/product/campaign/installation operation",
+  "owner_plan": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18",
+  "authority_entry": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+  "conclusion": "旧24发现并非今日24个bug；工程修复已有源码、祖先提交及历史责任测试证据，NVDA完整M2新attempt/四审和当前版本业务复验仍未闭环。原外部限制/材料缺口/研究未知保留。",
+  "observed_repo_heads": {
+    "CWP": "45195e96cb15a1652b13899a99cfb827932a62f1",
+    "RF": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+    "FF": "e8740748f91999cb24169b42f8e789726ed50482",
+    "audit": "a2f216bd8cc8e3ed430c60ee27bdd309dabd8a17",
+    "ET": "2584b7eed062a9a30254bc06b4f19ab5471b414e"
+  },
+  "head_observation_limits": "本次只读本机HEAD及指定功能祖先，不联网查最新remote/CI，不运行产品测试、不重新核所有安装SHA。CWP可随协调员文档提交前进。",
+  "worktree_observation": "RF assurance三份已改和output、FF两项未跟踪（包括credential路径，未读内容）、ET既有未跟踪、CWP协调员文档及历史.planning保留；audit当次status为空。不改WIP。",
+  "historical_run": {
+    "run_id": "pool-20261009-001-us-nvda",
+    "run_path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda",
+    "initial_as_of": "2026-10-09",
+    "initial_manifest_sha256": "8a895b3b1744985f654048bdfc3b1b5b9de526c8c40b637ade4e809386002095",
+    "report_count": 4,
+    "review_finding_count": 24,
+    "coordination_finding_count": 1,
+    "root_cause_count": 14,
+    "work_package_count": 7,
+    "reports": [
+      {
+        "role": "storage",
+        "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json",
+        "sha256": "2db3fd56b5c01694e51b40820f2d7af91bb535cab8c5edff415a84e267ce2e78",
+        "matches_campaign_sha": true
+      },
+      {
+        "role": "fetch",
+        "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+        "sha256": "512c45009454f62edca82c65bef7ca12eeb020a7169deed6251d65e7f1fd9512",
+        "matches_campaign_sha": true
+      },
+      {
+        "role": "process",
+        "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+        "sha256": "b0b7093863af9e22060f83ad9570385e6eb7b1e7540e0fdd9791503631fd672f",
+        "matches_campaign_sha": true
+      },
+      {
+        "role": "analyst",
+        "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json",
+        "sha256": "3d9ba2c0a0b81f6d553d8ebd60721443bd35554df23a291cb9fe90b7524e2850",
+        "matches_campaign_sha": true
+      }
+    ],
+    "replays_observed": [
+      "w01-main",
+      "w07-main"
+    ],
+    "complete_m2_attempt_found_in_old_run": false,
+    "full_139_artifact_rehash_performed": false,
+    "historical_139_hash_claim_source": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/diagnosis/root_cause_report.md"
+  },
+  "immutable_campaign_preservation": {
+    "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/campaign.json",
+    "sha256": "927246c84bb320199b113077ed322aa1a02c5478499c453f977147f06081dfa4",
+    "sampling_seed": "193701808470207586993231217228381019290",
+    "sampling_algorithm": "random.Random integer seed; sorted candidates; choose available missing market uniformly then entity uniformly; without replacement; freeze selected sample before dispatch",
+    "selected": [
+      {
+        "round": 1,
+        "entity_key": "US:NVDA",
+        "run_id": "pool-20261009-001-us-nvda",
+        "company_name": "NVIDIA CORP",
+        "market": "US",
+        "selected_before_dispatch": true
+      }
+    ],
+    "clean_streak": [],
+    "candidate_pool_sha256": "f97069c0e661d6ecc2ed600b4e758f274235866bcdb55c985bddd329cef6d4ab",
+    "current_stage_is_historical_snapshot": "waiting_for_main_real_two_cohort_acceptance",
+    "changed": false,
+    "progress_migrated": false,
+    "new_draw": false
+  },
+  "future_fixed_goal": {
+    "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/followup_eight_company_audit.md",
+    "status": "registered_not_activated",
+    "order": [
+      "阿里巴巴",
+      "小米集团",
+      "药明生物",
+      "药明康德",
+      "药明合联",
+      "微软",
+      "Snowflake",
+      "MongoDB"
+    ],
+    "activation": "当前目标实际达成后按原文件激活；本轮重叠holdout不计八家完成、不提前create_goal。",
+    "changed": false
+  },
+  "work_packages": [
+    {
+      "id": "W01",
+      "current": "engineering_integration_evidenced",
+      "evidence_ids": [
+        "E01",
+        "E03"
+      ]
+    },
+    {
+      "id": "W02",
+      "current": "engineering_implementation_evidenced",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "W03",
+      "current": "engineering_implementation_and_later_shared_engine_evidenced_live_nvda_open",
+      "evidence_ids": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "W04",
+      "current": "engineering_implementation_evidenced_current_nvda_real_replay_open",
+      "evidence_ids": [
+        "E03",
+        "E08"
+      ]
+    },
+    {
+      "id": "W05",
+      "current": "engineering_implementation_evidenced_current_nvda_target_use_open",
+      "evidence_ids": [
+        "E05"
+      ]
+    },
+    {
+      "id": "W06",
+      "current": "method_and_dag_implementation_evidenced_actual_nvda_research_unverified",
+      "evidence_ids": [
+        "E06"
+      ]
+    },
+    {
+      "id": "W07",
+      "current": "engineering_observability_closure_evidenced",
+      "evidence_ids": [
+        "E07"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "package": "W01",
+      "finding": "有限来源入口及安全 cause 已有工程修复；当前 allowlist 明确含 configured 入口。",
+      "commits": [
+        {
+          "repo": "CWP",
+          "sha": "65562043",
+          "ancestor_of_observed_head": true
+        },
+        {
+          "repo": "CWP",
+          "sha": "4c75273a",
+          "ancestor_of_observed_head": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/scripts/writer_policy.py",
+          "line": 68,
+          "exists": true,
+          "sha256": "cf895b36d091bb446da00ddfdc9cea9a565fb3f28a1d762bcfd48a269b839e2c"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/tests/unit/test_legacy_entrypoint_simplification.py",
+          "line": 395,
+          "exists": true,
+          "sha256": "64e8f9f2fe8c84f6fb15bbae488a2de26f95c9b5b4ed93600157da8aa9d0707f"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/execution_replays/w01-main/integration_final.json",
+          "exists": true,
+          "sha256": "6e2ff614ea66972b1edb5b037f816be31bee1ede4376a74985e75b6d78b22a5c"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/remediation/progress.md",
+          "exists": true,
+          "sha256": "53f1f268cff0beda87086599a34ac598768a71786097ff6601dbf3fb509a97cd"
+        }
+      ],
+      "historical_verification": "W01记录 CWP156PASS/1真实数据SKIP；integration_final 实际 FF110、RF14与三仓公开CLI23checks通过，supplier0、owned TEMP恢复。各组独立记录，不相加冒充一次独审。",
+      "limit": "入口分类和 cause 绿不证明 NVDA 正式摘要、内容覆盖或经济模型通过。"
+    },
+    {
+      "id": "E02",
+      "package": "W03",
+      "finding": "官方原件统一 import、按真实载体解析、版本/定位及有界发现已有实现。",
+      "commits": [
+        {
+          "repo": "CWP",
+          "sha": "afc70de1",
+          "ancestor_of_observed_head": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/src/company_wiki/source_catalog/official_source_flow.py",
+          "line": 490,
+          "exists": true,
+          "sha256": "3c4640201f9a1f70b4ce41a51d752f3f8fb5d048eb28f1296658298d2cf714c9"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/tests/integration/test_official_source_flow.py",
+          "line": 86,
+          "exists": true,
+          "sha256": "5fd719b9730fc0ac118b82744b57c0e06f2e0cfe3f48312e1c3f1cd1f2930083"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/tests/integration/test_official_source_flow.py",
+          "line": 196,
+          "exists": true,
+          "sha256": "5fd719b9730fc0ac118b82744b57c0e06f2e0cfe3f48312e1c3f1cd1f2930083"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/tests/integration/test_official_source_flow.py",
+          "line": 267,
+          "exists": true,
+          "sha256": "5fd719b9730fc0ac118b82744b57c0e06f2e0cfe3f48312e1c3f1cd1f2930083"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/tests/integration/test_official_source_flow.py",
+          "line": 320,
+          "exists": true,
+          "sha256": "5fd719b9730fc0ac118b82744b57c0e06f2e0cfe3f48312e1c3f1cd1f2930083"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/implementation/pool-w03-official-flow/HANDOFF.md",
+          "exists": true,
+          "sha256": "af6c176c61d256323b3c1313189cd73eddf651d0d37fda2cbaaa67ebbf41a697"
+        }
+      ],
+      "historical_verification": "W03交接113责任测试、17存储回归、21有限处理/1明确live-input skip；三格式公开import→原件open→configured loopback→reference/read→repeat，3模拟请求不增加。",
+      "limit": "loopback、synthetic HTML及已删除临时catalog不是 NVDA 持久可用来源；动态索引/音频/实际最新IR材料没有因此自动补齐。"
+    },
+    {
+      "id": "E03",
+      "package": "W04",
+      "finding": "已分离完整 FF result 与 filing 选择；latest 消费 resolved year、同次 reader manifest；NarrativeRef 有实际 span→claim→parameter/DAG 绑定入口。",
+      "commits": [
+        {
+          "repo": "RF",
+          "sha": "33404bd6",
+          "ancestor_of_observed_head": true
+        },
+        {
+          "repo": "RF",
+          "sha": "36743282",
+          "ancestor_of_observed_head": true
+        },
+        {
+          "repo": "RF",
+          "sha": "e688b0a2",
+          "ancestor_of_observed_head": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/source_preparation.py",
+          "line": 185,
+          "exists": true,
+          "sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/source_preparation.py",
+          "line": 384,
+          "exists": true,
+          "sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/filing_fetch_client.py",
+          "line": 209,
+          "exists": true,
+          "sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/source_narrative_context.py",
+          "line": 103,
+          "exists": true,
+          "sha256": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_source_preparation_complete_result.py",
+          "line": 33,
+          "exists": true,
+          "sha256": "94e182e4593d538e83556dbb2a79697d3f6ba69f4ae3f214e81e7fff87016c6d"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_source_preparation_complete_result.py",
+          "line": 47,
+          "exists": true,
+          "sha256": "94e182e4593d538e83556dbb2a79697d3f6ba69f4ae3f214e81e7fff87016c6d"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_source_preparation_complete_result.py",
+          "line": 83,
+          "exists": true,
+          "sha256": "94e182e4593d538e83556dbb2a79697d3f6ba69f4ae3f214e81e7fff87016c6d"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/docs/implementation/pool-w04-w06-w04/HANDOFF.md",
+          "exists": true,
+          "sha256": "1626023054a556f30238760773e272801377ec1e9686ba93d866deeb65e4047c"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/rf_w04_w06_reacceptance.md",
+          "exists": true,
+          "sha256": "9c37045545bb333cb266be29501373bba662ca90d7c8b06e462d04b558690084"
+        }
+      ],
+      "historical_verification": "W04交接145责任GREEN，后续HTML146、非财报nullable75分别留收据；campaign记录RF工程并线e688b0a2及CI成功、44安装物理文件/2smoke。新同节点独审25项关闭F1–F4，绝非完整业务复验。",
+      "limit": "未在本次运行 RF 或确认今天安装字节；读摘要元数据仍不算模型已消费。"
+    },
+    {
+      "id": "E04",
+      "package": "W02",
+      "finding": "ET operation raw响应限额与正文限额分离，已读超限chunk先记实际使用量；FF当前传max_response_bytes。",
+      "commits": [
+        {
+          "repo": "ET",
+          "sha": "f4f2eca0e27ab877b9ab2012a28c70468eb3a364",
+          "observed_in_current_file_history": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/transcript_api.py",
+          "line": 573,
+          "exists": true,
+          "sha256": "771fc0d50e714a39b7e0d50e6d07012f2aa5ba96eeecacff4538ecc9f9d2f603"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/retrieval_budget.py",
+          "line": 75,
+          "exists": true,
+          "sha256": "41fbb08ea1e6d9b4f9eca9fa29fc380d4d1335f02f694942dd4b0c503b641001"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/filing-fetch/scripts/transcript_tool_transport.py",
+          "line": 719,
+          "exists": true,
+          "sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/tests/test_request_response_budget.py",
+          "line": 85,
+          "exists": true,
+          "sha256": "5a1d483eadb25d8a5298ad3239c5ea9f63b76b10e98f849a0d254ec476c29159"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/tests/test_request_response_budget.py",
+          "line": 96,
+          "exists": true,
+          "sha256": "5a1d483eadb25d8a5298ad3239c5ea9f63b76b10e98f849a0d254ec476c29159"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/tests/test_request_response_budget.py",
+          "line": 131,
+          "exists": true,
+          "sha256": "5a1d483eadb25d8a5298ad3239c5ea9f63b76b10e98f849a0d254ec476c29159"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/docs/implementation/pool-w02-response-budget/HANDOFF.md",
+          "exists": true,
+          "sha256": "c2a093ff0f2840efda8d0dc5b09ea29504925c251ff37c4cb74b17c5261bc8de"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/docs/implementation/pool-w02-response-budget/handoff.json",
+          "exists": true,
+          "sha256": "67372c3b91a5878a4d74e3fbc9394e4795c6c8e5017e335647660f33831d6172"
+        }
+      ],
+      "historical_verification": "131责任测试、supervisor/worker五种离线CLI、MAIN三仓公开18check通过；campaign W02状态为并线/推送/FF定点安装完成。",
+      "limit": "模拟HTTP不表示真实FMP entitlement恢复。硬杀仍按unknown；不得为此重复terminal请求或购买订阅。"
+    },
+    {
+      "id": "E05",
+      "package": "W05",
+      "finding": "季度区间/YoY目标比较、期间/单位/作用域与真实DAG绑定及沟通覆盖incomplete诊断已实现，后续DU6进一步修带符号目标与单位语义。",
+      "commits": [
+        {
+          "repo": "RF",
+          "sha": "5bcee2f5",
+          "ancestor_of_observed_head": true
+        },
+        {
+          "repo": "RF",
+          "sha": "36743282",
+          "ancestor_of_observed_head": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/research/target_measurement.py",
+          "line": 129,
+          "exists": true,
+          "sha256": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/research/target_measurement.py",
+          "line": 227,
+          "exists": true,
+          "sha256": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/research/native_dependencies.py",
+          "line": 51,
+          "exists": true,
+          "sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_target_measurement_comparison.py",
+          "exists": true,
+          "sha256": "abccc1dd2454974f73869dfec682318832b4695972436d2adf16cef36f2e6479"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_native_research_bindings.py",
+          "line": 20,
+          "exists": true,
+          "sha256": "45095b284d5a9a92742565321408846e264b024aef0735d86b63b2dadd9fdae8"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_management_target_semantics.py",
+          "exists": true,
+          "sha256": "2b0704ea3b1e91662821001d3f6dbf4af9f8fa6a1e1befad659d509615ae56b1"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/docs/implementation/pool-w04-w06-w05/HANDOFF.md",
+          "exists": true,
+          "sha256": "5e53e43ce84be31a6766dc9e78525b4c40b685c90b00187a79093c25c6eaa95b"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/rf_w04_w06_reacceptance.md",
+          "exists": true,
+          "sha256": "9c37045545bb333cb266be29501373bba662ca90d7c8b06e462d04b558690084"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/docs/plans/du6-targets-2026-10-16/handoff.md",
+          "exists": true,
+          "sha256": "cbde8931312cda7086baece0857ff22356e63a6b2afa53803ca170463efe1b27"
+        }
+      ],
+      "historical_verification": "W05初版66、类别边界follow-up13；绑定修复owner201+167subtests，同节点独审25关闭F1–F4。DU6记录193+119subtests及合成公开CLI，均只为各自工程范围。",
+      "limit": "target金额/同比在真实NVDA主报告中正确展示和解释仍待新attempt；源码能诊断incomplete不能证明最新沟通已取得。"
+    },
+    {
+      "id": "E06",
+      "package": "W06",
+      "finding": "可选operating-research/1内容清单、证据角色、范围转化及joint/delay recipe已实现；mechanism和magnitude分列。",
+      "commits": [
+        {
+          "repo": "RF",
+          "sha": "4015c50b",
+          "ancestor_of_observed_head": true
+        },
+        {
+          "repo": "RF",
+          "sha": "36743282",
+          "ancestor_of_observed_head": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/research/evidence_roles.py",
+          "line": 206,
+          "exists": true,
+          "sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/research/native_dependencies.py",
+          "line": 94,
+          "exists": true,
+          "sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/references/evidence-role-calibration.md",
+          "exists": true,
+          "sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_research_evidence_roles.py",
+          "exists": true,
+          "sha256": "24ec3b395a1ea64e0d0c382113f86cd9c9c54fda079664f8c9ca337d84923ba0"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_native_research_bindings.py",
+          "line": 58,
+          "exists": true,
+          "sha256": "45095b284d5a9a92742565321408846e264b024aef0735d86b63b2dadd9fdae8"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_native_research_bindings.py",
+          "line": 79,
+          "exists": true,
+          "sha256": "45095b284d5a9a92742565321408846e264b024aef0735d86b63b2dadd9fdae8"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/docs/implementation/pool-w04-w06-w06/HANDOFF.md",
+          "exists": true,
+          "sha256": "336ba0b85327878cae11a63f75c6458d76bc5e77d3c5e35e9060421629f08bd5"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/docs/implementation/pool-w04-w06-binding-repair/HANDOFF.md",
+          "exists": true,
+          "sha256": "ac69b5b8e6a3da07358c281fd9a6e62b9ba1672a0599bb3fd47d873951ed596d"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/rf_w04_w06_reacceptance.md",
+          "exists": true,
+          "sha256": "9c37045545bb333cb266be29501373bba662ca90d7c8b06e462d04b558690084"
+        }
+      ],
+      "historical_verification": "W06105+167subtests，实际本地组装→native validate/compute/Markdown/snapshot；绑定修复集中201+167subtests、独立25；均是合成输入，不能合并当真实经营审查。",
+      "limit": "未找到新NVDA内容inventory、已独立校准主要驱动或重算联合压力后的四审。方法已修与研究实例已修须分开。"
+    },
+    {
+      "id": "E07",
+      "package": "W07",
+      "finding": "legacy原生事件仅作观察，canonical事件保留权威映射；旧日志缺冗余头不再冒充身份错误。",
+      "commits": [
+        {
+          "repo": "audit",
+          "sha": "ba290f85",
+          "ancestor_of_observed_head": true
+        },
+        {
+          "repo": "audit",
+          "sha": "681f2d19",
+          "ancestor_of_observed_head": true
+        }
+      ],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/skills/revenue-forecast-audit/scripts/audit_run.py",
+          "line": 235,
+          "exists": true,
+          "sha256": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/tests/test_legacy_native_events.py",
+          "line": 88,
+          "exists": true,
+          "sha256": "33e0f2d4b8e1854590c49012f2d7a5f43e875eec202cbfb3b3f48c922397794c"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/tests/test_legacy_native_events.py",
+          "line": 148,
+          "exists": true,
+          "sha256": "33e0f2d4b8e1854590c49012f2d7a5f43e875eec202cbfb3b3f48c922397794c"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/tests/test_legacy_native_events.py",
+          "line": 173,
+          "exists": true,
+          "sha256": "33e0f2d4b8e1854590c49012f2d7a5f43e875eec202cbfb3b3f48c922397794c"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/execution_replays/w07-main/acceptance.json",
+          "exists": true,
+          "sha256": "4e0670c3548e5feeeb482eff733096f40d67edc88934f489b7dce42071030ab8"
+        }
+      ],
+      "historical_verification": "9测试通过，定点安装记录；旧run check仍exit2/needs_remediation、24finding、0unmapped、0event_errors，quality_status=not_evaluated。",
+      "limit": "工程观察问题有闭合证据；今天未再运行audit check，不提升旧预测质量结论。"
+    },
+    {
+      "id": "E08",
+      "package": "后续DU11/C",
+      "finding": "后续共享引擎、阅读策略/上下文引用和真实C开发回归已有交付，不能用旧W03待办重做整包。",
+      "commits": [],
+      "code": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/narrative_citation_context.py",
+          "exists": true,
+          "sha256": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5"
+        }
+      ],
+      "tests": [
+        {
+          "path": "C:/Users/郑曾波/Projects/revenue-forecast/tests/test_du11_narrative_citation_consumption.py",
+          "exists": true,
+          "sha256": "cbd44c769240e341cb309856dc4f481aa28947fd073ea05de349cc6a00cbb7f7"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+          "exists": true,
+          "sha256": "10e7b1888bc9dd95e1ebe041e99bb257b8764df83b9a15fd853f407f4473870d"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/receipts/c-live-receipts-20261018.md",
+          "exists": true,
+          "sha256": "c13778daf4e54514c2bfb59c88f49cac1cfa594050825083e19b43f43539829a"
+        },
+        {
+          "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/du11-reception-closeout.md",
+          "exists": true,
+          "sha256": "513c61954288ac11a9151cc77655fddc741e2d93c5801563947141376a1ab326"
+        }
+      ],
+      "historical_verification": "当前唯一入口记录RF9669c4d7、FFe8740748交付发布。C三家真实开发回归有恢复/跨run缓存/FF复用及RF读取证据；不是holdout，也未在最新类型修复代码重新做真实C。",
+      "limit": "CN获准8/10收尾；HK7/7；US所绑定独审2/8另1partial。不能转签NVDA、不能把后续不同实验汇总为一次业务PASS。"
+    }
+  ],
+  "root_causes": [
+    {
+      "root_cause_id": "RC-001",
+      "original_issue_ids": [
+        "STORAGE-001",
+        "PROCESS-001"
+      ],
+      "original_type": "code",
+      "original_mechanism": "sitecustomize先执行writer_policy；有限来源处理脚本narrative_batch_configured.py未被正确分类，在--help就exit78，因而此次canonical摘要没有启动。不是生产人工签收或模型限流。65562043已修入口分类但尚未合入本次执行的main/install；开门不等于摘要真正被RF使用。",
+      "original_implementation_status": "candidate_verified_not_integrated",
+      "original_work_package": "W01",
+      "current_evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "current_revalidation_groups": [
+        "G1"
+      ],
+      "carried_uncertainty": [
+        "真实供应商摘要质量及模型消费尚待M2"
+      ]
+    },
+    {
+      "root_cause_id": "RC-002",
+      "original_issue_ids": [
+        "FETCH-001",
+        "PROCESS-002"
+      ],
+      "original_type": "code",
+      "original_mechanism": "RF _validate_v2_candidate把request fiscal_year直接当resolved year，exact/latest没有分支。合法latest无year，FF已得FY26 source_ref，仍先拒绝。来源层已经确定候选期次，上层应消费真实候选及同次manifest，不再造身份门。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W04",
+      "current_evidence_ids": [
+        "E03"
+      ],
+      "current_revalidation_groups": [
+        "G2"
+      ],
+      "carried_uncertainty": [
+        "按候选和manifest进行一次验证及legacy行为兼容需TDD"
+      ]
+    },
+    {
+      "root_cause_id": "RC-003",
+      "original_issue_ids": [
+        "FETCH-002",
+        "PROCESS-002"
+      ],
+      "original_type": "observability",
+      "original_mechanism": "RF resolve_filing成功return filing而不是FFv2信封，丢transcript/calls/downloads/request_period；失败_ClientError/_emit_error只取旧字段。candidate97442029修safe六字段cause，但成功信封与actual accounting仍未保留。",
+      "original_implementation_status": "partially_candidate_verified",
+      "original_work_package": "W04",
+      "current_evidence_ids": [
+        "E01",
+        "E03"
+      ],
+      "current_revalidation_groups": [
+        "G2"
+      ],
+      "carried_uncertainty": [
+        "已验证cause候选发布后再测full成功信封；FF实际calls不是目标HTTP数"
+      ]
+    },
+    {
+      "root_cause_id": "RC-004",
+      "original_issue_ids": [
+        "STORAGE-002",
+        "FETCH-006",
+        "PROCESS-001",
+        "PROCESS-007"
+      ],
+      "original_type": "code",
+      "original_mechanism": "official_capture.py把可靠官方原件放audit execution/sources，手工建local_document capture，没有调用现有CWP register/source-facts。三财报已SourceRef正确，补充6种未统一登记；是组合路径漏接，不能据此宣称CWP缺第二套ingest。CanonicalSourceWriter/register_sources/record_source_facts可复用；正式调用方只收pathless Ref。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W03",
+      "current_evidence_ids": [
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "current_revalidation_groups": [
+        "G1"
+      ],
+      "carried_uncertainty": [
+        "存储层组合接口的最小适配需求需RED；非filing来源不可强套annual year"
+      ]
+    },
+    {
+      "root_cause_id": "RC-005",
+      "original_issue_ids": [
+        "FETCH-007"
+      ],
+      "original_type": "code",
+      "original_mechanism": "FF仅将max_bytes映射ET max_body_bytes（清洗正文cap）；ET正式tool给supervisor requests_left/response_bytes_left=None，worker用UsageCounter，FMP仅受16MiB固定rawcap。另record_response遇已读超限chunk先抛后扣，usage会漏记。两者都是同一请求预算→读取/计量责任断开。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W02",
+      "current_evidence_ids": [
+        "E04"
+      ],
+      "current_revalidation_groups": [
+        "G2"
+      ],
+      "carried_uncertainty": [
+        "HTTP chunk可能已读出界，报告实际消费且不得继续；硬杀没有最终回执仍unknown"
+      ]
+    },
+    {
+      "root_cause_id": "RC-006",
+      "original_issue_ids": [
+        "FETCH-003",
+        "PROCESS-007"
+      ],
+      "original_type": "provider",
+      "original_mechanism": "FMP现有账号真实1次terminal provider_entitlement_required，不自动重试；未捕获原始HTTPstatus/body，402只是代码映射。filingFY26 request的companion override已实际传FY2027Q2。官方同期间PDF可用，系统内部统一登记/处理仍需修，但买套餐不是工程验收条件。",
+      "original_implementation_status": "external_limit",
+      "original_work_package": "W03",
+      "current_evidence_ids": [
+        "E02",
+        "E04"
+      ],
+      "current_revalidation_groups": [
+        "G3"
+      ],
+      "carried_uncertainty": [
+        "账号总套餐费用/更多权益不知；FMP TXT能力保持external_limit，不因替代来源把provider绿化"
+      ]
+    },
+    {
+      "root_cause_id": "RC-007",
+      "original_issue_ids": [
+        "STORAGE-005",
+        "FETCH-004",
+        "FETCH-005",
+        "PROCESS-006",
+        "ANALYST-004"
+      ],
+      "original_type": "data",
+      "original_mechanism": "发现只读静态notice/index，未有bounded latest official/SEC事件筛选与实质正文；索引Loading不是无文档。RF覆盖builder又把区间起点Q2 filing填入material_announcements_since_last_filing checked，validator只核source存在/checked_date没核类别/区间。采集缺口与覆盖表达一起造成不完整及过度checked。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W03",
+      "current_evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "current_revalidation_groups": [
+        "G3"
+      ],
+      "carried_uncertainty": [
+        "Sep10正文/音频是否可得本轮没网络，不猜；未被选材料有价值才采集"
+      ]
+    },
+    {
+      "root_cause_id": "RC-008",
+      "original_issue_ids": [
+        "STORAGE-003",
+        "ANALYST-002"
+      ],
+      "original_type": "research",
+      "original_mechanism": "输入构造只选总增长/通用driver，没有把已读内容逐项落实为target/newcurve/constraint/明确gap。CPU TTM>5B、FY28 CPU more than double、neocloud租赁分成、minimum guarantee及融资支持lab约1/4业务在真实原文但未被覆盖。摘要启动失败可能放大遗漏，不能宣称自动摘要修好即消失。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W06",
+      "current_evidence_ids": [
+        "E06",
+        "E08"
+      ],
+      "current_revalidation_groups": [
+        "G3",
+        "G4"
+      ],
+      "carried_uncertainty": [
+        "CPU FY27分母/出租分成开始年份与金额未证，先保持条件化/gap"
+      ]
+    },
+    {
+      "root_cause_id": "RC-009",
+      "original_issue_ids": [
+        "PROCESS-003",
+        "ANALYST-001"
+      ],
+      "original_type": "research",
+      "original_mechanism": "build_input默认给未来参数mechanism_direction，Compute9条引用历史表头；Graphics9条用PC弱需求作正支持。confidence按claim出现及support_type取0.7，不理解支持角色；真实摘录/SHA不自动成为未来方向或幅度证据。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W06",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_revalidation_groups": [
+        "G4"
+      ],
+      "carried_uncertainty": [
+        "语义研究需独立实读，不靠正则/自动模型绝对裁决；不把新语义标签做访问许可"
+      ]
+    },
+    {
+      "root_cause_id": "RC-010",
+      "original_issue_ids": [
+        "PROCESS-004",
+        "ANALYST-001"
+      ],
+      "original_type": "research",
+      "original_mechanism": "direct_revenue透明fallback允许，但21原始假设生成18年度level，没有独立量价/客户/供给/时点或可比历史校准区间。独立case承认direction≠magnitude；未来值算术正确，主要经济幅度仍未完成。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W06",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_revalidation_groups": [
+        "G4"
+      ],
+      "carried_uncertainty": [
+        "未来实际、净ASP/年度物理容量/客户份额可能不可得；无法校准保留stress而非研究完成"
+      ]
+    },
+    {
+      "root_cause_id": "RC-011",
+      "original_issue_ids": [
+        "PROCESS-005",
+        "ANALYST-005"
+      ],
+      "original_type": "code",
+      "original_mechanism": "target input保存季度金额band/YoY比率，但add_management_target_analysis只读取annual_revenue并与monetary comparison_value比较。年度增长比率被标perimeter mismatch，quarter桥和70% sidecar没有正式scenario_comparison/render入口；business scope、measurement和representation混为一项。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W05",
+      "current_evidence_ids": [
+        "E05"
+      ],
+      "current_revalidation_groups": [
+        "G4"
+      ],
+      "carried_uncertainty": [
+        "新的季度/ratio comparison接口与schema兼容需设计一次TDD；不误用approximately为硬下限"
+      ]
+    },
+    {
+      "root_cause_id": "RC-012",
+      "original_issue_ids": [
+        "ANALYST-003",
+        "STORAGE-003",
+        "ANALYST-001"
+      ],
+      "original_type": "research",
+      "original_mechanism": "现有revenue_constraints可sum_cap/linked_ratio/adjustment，但输入[]，只做终值10%/20%单因素扰动；279B跨年可延期供给承诺、500B融资MOU和lab约1/4风险没进入可复算联合/离散时点链。问题在研究输入，尚无证据说明引擎需重写。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W06",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_revalidation_groups": [
+        "G4"
+      ],
+      "carried_uncertainty": [
+        "真正约束数值需要来源/透明假设，未知不伪精确；合规条件化模型可披露未校准"
+      ]
+    },
+    {
+      "root_cause_id": "RC-013",
+      "original_issue_ids": [
+        "STORAGE-004"
+      ],
+      "original_type": "observability",
+      "original_mechanism": "审计manual BS4/fitz全文抽取和local_document capture未接CWP versioned normalization/EvidenceSpan，parser版本、归一化规则与细定位未封存；宽泛章节可找文字但坐标不可稳定复算。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W03",
+      "current_evidence_ids": [
+        "E02",
+        "E08"
+      ],
+      "current_revalidation_groups": [
+        "G1"
+      ],
+      "carried_uncertainty": [
+        "现有正常化接口可用，应接而非新解析账；OCR全图继续旧Phase6 owner"
+      ]
+    },
+    {
+      "root_cause_id": "RC-014",
+      "original_issue_ids": [
+        "COORD-001"
+      ],
+      "original_type": "observability",
+      "original_mechanism": "artifact-contract没有给统一event CLI封装例子；两reviewer原生JSONL有真实role/UTC/attempt但缺schema_version/run_id重复header；inspect_run把缺header一概当identity mismatch并停止计数。显式错role/run仍应诊断，固定role目录的legacy元信息不应冒充跨run错误。",
+      "original_implementation_status": "planned",
+      "original_work_package": "W07",
+      "current_evidence_ids": [
+        "E07"
+      ],
+      "current_revalidation_groups": [
+        "G5"
+      ],
+      "carried_uncertainty": [
+        "兼容原生格式只用于可观察性，费用/质量从实际artifacts或canonical事件取"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issue_id": "ANALYST-001",
+      "role": "analyst",
+      "historical_severity": "P1",
+      "historical_category": "research",
+      "historical_summary": "FY2028–29的主要收入量级没有独立供需/价格/份额校准；把报表表头作为方向证据不能解释增长率。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json",
+      "primary_root_cause": "RC-010",
+      "root_cause_ids": [
+        "RC-009",
+        "RC-010",
+        "RC-012"
+      ],
+      "work_packages": [
+        "W06"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G4"
+      ],
+      "remaining": "经营桥/证据角色方法已有；新NVDA主要量级校准未证，不能CI代签。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "ANALYST-002",
+      "role": "analyst",
+      "historical_severity": "P1",
+      "historical_category": "research",
+      "historical_summary": "当前原文已披露的CPU收入增长目标及不同商业化收入机制没有进入目标/业务覆盖记录。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json",
+      "primary_root_cause": "RC-008",
+      "root_cause_ids": [
+        "RC-008"
+      ],
+      "work_packages": [
+        "W06"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E06",
+        "E08"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G3",
+        "G4"
+      ],
+      "remaining": "内容inventory方法已有；已读CPU/新机制的实际覆盖处置待G3/G4。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "ANALYST-003",
+      "role": "analyst",
+      "historical_severity": "P1",
+      "historical_category": "research",
+      "historical_summary": "情景和敏感性未落实共享供给与融资/交付离散压力，只扰动年度收入终值。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json",
+      "primary_root_cause": "RC-012",
+      "root_cause_ids": [
+        "RC-012"
+      ],
+      "work_packages": [
+        "W06"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G4"
+      ],
+      "remaining": "通用约束/delay recipe已有；新NVDA共享供给/融资/交付联合路径未证。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "ANALYST-004",
+      "role": "analyst",
+      "historical_severity": "P2",
+      "historical_category": "data",
+      "historical_summary": "最新策略沟通与截至信息日的重大事件覆盖尚未建立，无法证明管理目标及商业化进度完整。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json",
+      "primary_root_cause": "RC-007",
+      "root_cause_ids": [
+        "RC-007"
+      ],
+      "work_packages": [
+        "W03",
+        "W05"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G3"
+      ],
+      "remaining": "发现与覆盖诊断已有；当前as-of实质最新沟通仍未知。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "ANALYST-005",
+      "role": "analyst",
+      "historical_severity": "P2",
+      "historical_category": "observability",
+      "historical_summary": "管理FY2028增长基准的实质偏离仅保存在sidecar，正式阅读入口无法看到对应金额与机制差异。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json",
+      "primary_root_cause": "RC-011",
+      "root_cause_ids": [
+        "RC-011"
+      ],
+      "work_packages": [
+        "W05"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E05"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G4"
+      ],
+      "remaining": "正式typed比较/渲染已修；新NVDA主入口场景金额偏离及机制解释待G4。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-001",
+      "role": "fetch",
+      "historical_severity": "P1",
+      "historical_category": "code",
+      "historical_summary": "RF 拒绝合法 latest_as_of SourceRef v2 候选，最新年报默认链路无法完成。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-002",
+      "root_cause_ids": [
+        "RC-002"
+      ],
+      "work_packages": [
+        "W04"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E03"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G2"
+      ],
+      "remaining": "latest工程反例已修；当前版真实复用FY26及manifest期间待G2。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-002",
+      "role": "fetch",
+      "historical_severity": "P1",
+      "historical_category": "observability",
+      "historical_summary": "RF 将 FF v2 完整信封收缩成 filing，丢电话会独立结果、调用/下载数和结构化上游原因。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-003",
+      "root_cause_ids": [
+        "RC-003"
+      ],
+      "work_packages": [
+        "W04"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E01",
+        "E03"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G2"
+      ],
+      "remaining": "完整信封/cause已有；新attempt filing/companion/use量实际留存待G2。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-003",
+      "role": "fetch",
+      "historical_severity": "P2",
+      "historical_category": "provider",
+      "historical_summary": "NVDA FY2027Q2 电话会的真实 FMP 请求受到账号 entitlement 限制，ET TXT/JSON 入库复用链未完成。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-006",
+      "root_cause_ids": [
+        "RC-006"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "original_disposition": "external_limit",
+      "current_evidence_ids": [
+        "E02",
+        "E04"
+      ],
+      "current_status": "historical_external_limit_current_account_unknown",
+      "revalidation_groups": [
+        "G3"
+      ],
+      "remaining": "旧entitlement属external_limit；当前账号未重查，必要替代链待G3。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-004",
+      "role": "fetch",
+      "historical_severity": "P2",
+      "historical_category": "research",
+      "historical_summary": "招股/增发/可转债与财报外重大 SEC 文件尚未做相关性和可得性核查。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-007",
+      "root_cause_ids": [
+        "RC-007"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G3"
+      ],
+      "remaining": "有界发现已有；旧NVDA招股/增发/可转债/8-K实质分流未证。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-005",
+      "role": "fetch",
+      "historical_severity": "P2",
+      "historical_category": "research",
+      "historical_summary": "最新 IR/战略资料覆盖停留于 Aug26 电话会与活动预告，Sep10 活动正文及最新 dated deck 未读取。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-007",
+      "root_cause_ids": [
+        "RC-007"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G3"
+      ],
+      "remaining": "动态/通知诚实partial已有；Sep10正文/dated deck实际取得或gap待G3。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-006",
+      "role": "fetch",
+      "historical_severity": "P1",
+      "historical_category": "code",
+      "historical_summary": "用于预测的官方 IR/电话会等补充原件仍是审计目录路径，未进入 CWP canonical SourceRef 登记/复用。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-004",
+      "root_cause_ids": [
+        "RC-004"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G1"
+      ],
+      "remaining": "统一import已有；旧官方IR/call的可复用SourceRef新attempt待G1。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "FETCH-007",
+      "role": "fetch",
+      "historical_severity": "P1",
+      "historical_category": "code",
+      "historical_summary": "FF→ET FMP 请求字节限额未约束 provider 流读取；清洗正文限额被当作原始响应限额。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json",
+      "primary_root_cause": "RC-005",
+      "root_cause_ids": [
+        "RC-005"
+      ],
+      "work_packages": [
+        "W02"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E04"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G2"
+      ],
+      "remaining": "raw限额/超额计量工程有131+18证据；当前运行用量边界待G2，非今日已证bug。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-001",
+      "role": "process",
+      "historical_severity": "P1",
+      "historical_category": "code",
+      "historical_summary": "Configured narrative source-processing entry is blocked; audited canonical normalization/summary and useful-information extraction did not complete.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-001",
+      "root_cause_ids": [
+        "RC-001",
+        "RC-004"
+      ],
+      "work_packages": [
+        "W01",
+        "W03",
+        "W04"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G1"
+      ],
+      "remaining": "启动和consumer已修；完整来源摘要消费链待G1。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-002",
+      "role": "process",
+      "historical_severity": "P2",
+      "historical_category": "code",
+      "historical_summary": "RF latest_as_of annual source preparation fails on fiscal_year and reduces the upstream result to a short error.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-002",
+      "root_cause_ids": [
+        "RC-002",
+        "RC-003"
+      ],
+      "work_packages": [
+        "W04"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E01",
+        "E03"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G2"
+      ],
+      "remaining": "resolved期次/完整错误信封已修；当前真实接口组合待G2。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-003",
+      "role": "process",
+      "historical_severity": "P2",
+      "historical_category": "research",
+      "historical_summary": "Future-parameter evidence roles are semantically weaker than the verified-claim labels imply.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-009",
+      "root_cause_ids": [
+        "RC-009"
+      ],
+      "work_packages": [
+        "W06"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G4"
+      ],
+      "remaining": "声明角色及真实DAG绑定已有；新NVDA未来假设的语义支持待G4。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-004",
+      "role": "process",
+      "historical_severity": "P1",
+      "historical_category": "research",
+      "historical_summary": "Independent outside reference and quantitative scenario calibration remain incomplete for the forecast magnitude.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-010",
+      "root_cause_ids": [
+        "RC-010"
+      ],
+      "work_packages": [
+        "W06"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E06"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G4"
+      ],
+      "remaining": "范围→转换→参数工具已有；主要增量经济量级尚无新NVDA独审证据。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-005",
+      "role": "process",
+      "historical_severity": "P2",
+      "historical_category": "code",
+      "historical_summary": "Quarterly and percent-growth management targets are preserved but not represented as an actual machine-readable model use/comparison.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-011",
+      "root_cause_ids": [
+        "RC-011"
+      ],
+      "work_packages": [
+        "W05"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E05"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G4"
+      ],
+      "remaining": "季度/YoY typed比较和主报告工程已有；新NVDA实际benchmark路径待G4。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-006",
+      "role": "process",
+      "historical_severity": "P2",
+      "historical_category": "observability",
+      "historical_summary": "Latest management-target completeness is unresolved and post-filing announcement category is overclaimed checked.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-007",
+      "root_cause_ids": [
+        "RC-007"
+      ],
+      "work_packages": [
+        "W03",
+        "W05"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G3"
+      ],
+      "remaining": "类别/区间incomplete诊断已修；真实最新沟通范围仍待G3。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "PROCESS-007",
+      "role": "process",
+      "historical_severity": "P2",
+      "historical_category": "provider",
+      "historical_summary": "Actual configured ET companion returned terminal entitlement-required; unified transcript path is incomplete, while primary official fallback evidence exists.",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json",
+      "primary_root_cause": "RC-006",
+      "root_cause_ids": [
+        "RC-004",
+        "RC-006"
+      ],
+      "work_packages": [
+        "W03",
+        "W04"
+      ],
+      "original_disposition": "external_limit",
+      "current_evidence_ids": [
+        "E02",
+        "E03",
+        "E04",
+        "E08"
+      ],
+      "current_status": "historical_external_limit_current_account_unknown",
+      "revalidation_groups": [
+        "G1",
+        "G3"
+      ],
+      "remaining": "FMP旧外限与官方替代分列；新canonical替代及消费充分性待G1/G3。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "STORAGE-001",
+      "role": "storage",
+      "historical_severity": "P1",
+      "historical_category": "code",
+      "historical_summary": "已发布的来源叙述入口在 --help 阶段被旧 writer 分类阻断，真实精选、摘要及 RF 消费链未运行。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json",
+      "primary_root_cause": "RC-001",
+      "root_cause_ids": [
+        "RC-001"
+      ],
+      "work_packages": [
+        "W01",
+        "W03",
+        "W04"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G1"
+      ],
+      "remaining": "入口已修；NVDA正式摘要及真实RF消费待G1。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "STORAGE-002",
+      "role": "storage",
+      "historical_severity": "P1",
+      "historical_category": "code",
+      "historical_summary": "实际进入 RF 的官方电话会、发布稿和客户/竞争资料仍是审计目录文件，没有进入 CWP 的统一来源登记和 SourceRef。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json",
+      "primary_root_cause": "RC-004",
+      "root_cause_ids": [
+        "RC-004"
+      ],
+      "work_packages": [
+        "W03",
+        "W04"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G1"
+      ],
+      "remaining": "统一import接口已修；旧六类补充原件的canonical新attempt尚无证据。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "STORAGE-003",
+      "role": "storage",
+      "historical_severity": "P1",
+      "historical_category": "research",
+      "historical_summary": "已完整读到的电话会包含 CPU 成长目标、租赁分成新收入和融资限制，但 RF 事实/目标/假设未登记这些实质内容。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json",
+      "primary_root_cause": "RC-008",
+      "root_cause_ids": [
+        "RC-008",
+        "RC-012"
+      ],
+      "work_packages": [
+        "W06"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E06",
+        "E08"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G3",
+        "G4"
+      ],
+      "remaining": "方法/清单已有；CPU/出租分成/融资限制在新NVDA输入的实际处置未证。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "STORAGE-004",
+      "role": "storage",
+      "historical_severity": "P2",
+      "historical_category": "observability",
+      "historical_summary": "人工 HTML/PDF 抽取未封存 parser/normalization 版本，部分 RF locator 只给宽泛章节，缺乏稳定的解析坐标映射。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json",
+      "primary_root_cause": "RC-013",
+      "root_cause_ids": [
+        "RC-013"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E08"
+      ],
+      "current_status": "engineering_evidenced_current_real_replay_pending",
+      "revalidation_groups": [
+        "G1"
+      ],
+      "remaining": "parser/locator工程已接；新NVDA逐消费片段版本及精确定位待G1。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    },
+    {
+      "issue_id": "STORAGE-005",
+      "role": "storage",
+      "historical_severity": "P2",
+      "historical_category": "research",
+      "historical_summary": "最新策略会议实质内容及募资/8-K 材料发现没有完成，当前资料覆盖不能支撑“全部管理层目标已检查”。",
+      "original_report": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json",
+      "primary_root_cause": "RC-007",
+      "root_cause_ids": [
+        "RC-007"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "original_disposition": "fix",
+      "current_evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "current_status": "method_implemented_business_correction_unverified",
+      "revalidation_groups": [
+        "G3"
+      ],
+      "remaining": "发现及覆盖诊断已有；旧Sep10正文及材料相关性核查仍未复验。",
+      "today_defect_reproduced": false,
+      "business_pass_granted": false
+    }
+  ],
+  "coordinator_issue": {
+    "issue_id": "COORD-001",
+    "role": "coordinator",
+    "historical_category": "observability",
+    "historical_summary": "旧原生事件观察兼容性",
+    "primary_root_cause": "RC-014",
+    "root_cause_ids": [
+      "RC-014"
+    ],
+    "work_packages": [
+      "W07"
+    ],
+    "current_evidence_ids": [
+      "E07"
+    ],
+    "current_status": "engineering_closure_evidenced_no_new_business_claim",
+    "revalidation_groups": [
+      "G5"
+    ],
+    "remaining": "W07工程修复有闭合证据；仅随本轮封存观察，不把它再列今日缺陷。",
+    "today_defect_reproduced": false,
+    "business_pass_granted": false
+  },
+  "merged_revalidation_groups": [
+    {
+      "id": "G1",
+      "name": "来源登记、解析与正式摘要消费",
+      "roots": [
+        "RC-001",
+        "RC-004",
+        "RC-013"
+      ],
+      "evidence": [
+        "E01",
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "remaining": "在当前既定完整RF节点观察真实 source→canonical SourceRef→versioned parse/locator→selected/context→正式原语言summary→NarrativeRef→RF实际claim/parameter/DAG。旧NVDA仍需单独新attempt与相关四审；原官方补充只复用既有原件，不以旧audit路径继续冒充canonical。共用一次有界恢复/跨run零POST及原件/空间证据，不逐issue重复付费。"
+    },
+    {
+      "id": "G2",
+      "name": "采集期间、信封、失败与用量边界",
+      "roots": [
+        "RC-002",
+        "RC-003",
+        "RC-005"
+      ],
+      "evidence": [
+        "E01",
+        "E03",
+        "E04"
+      ],
+      "remaining": "沿同一原生source_preparation→FF→CWP/ET保留latest resolved期间、same-call reader事实、filing/companion独立结果、完整cause和native usage。当前真实运行自然触发时核实；已证工程反例不另开逐项全套。FMP终态不盲重发，未知usage保持unknown；1024/oversized等工程能力沿已有责任测试，不要求额外收费反例。"
+    },
+    {
+      "id": "G3",
+      "name": "材料发现、实质覆盖与外部限制",
+      "roots": [
+        "RC-006",
+        "RC-007",
+        "RC-008"
+      ],
+      "evidence": [
+        "E02",
+        "E05",
+        "E06",
+        "E08"
+      ],
+      "remaining": "以实际as-of有界查最新官方/SEC材料及正文，通知/Loading不算全文或不存在。NVDA旧Sep10正文、dated deck、8-K/募资相关性仍缺本轮实证；对已读CPU/租赁/保证/融资约束登记modeled/included/unmodeled/unknown及理由。FMP旧entitlement保持历史外部限制、当前账号状态unknown；官方替代内容链是否足够独立判定，不要求买订阅、不把替代通过改写provider PASS。"
+    },
+    {
+      "id": "G4",
+      "name": "模型语义、目标比较与经济校准",
+      "roots": [
+        "RC-008",
+        "RC-009",
+        "RC-010",
+        "RC-011",
+        "RC-012"
+      ],
+      "evidence": [
+        "E05",
+        "E06"
+      ],
+      "remaining": "新NVDA输入/主报告逐条落实已读target/newcurve/constraint；历史表头只能支持基线，反证不标正机制。主要增长额要有独立最小经营桥/来源范围→明确转换假设→真实三情景参数；季度/同比比较出现在正式报告。共享供给/融资/交付延期按同一链重算、防双计；未知基期/净ASP/容量如实gap或条件化stress。独立process/analyst实读与复算才可处理业务问题，pytest或金额恰好等于旧预测不能代签。"
+    },
+    {
+      "id": "G5",
+      "name": "封存、观察与历史状态",
+      "roots": [
+        "RC-014"
+      ],
+      "evidence": [
+        "E07"
+      ],
+      "remaining": "在既定封存/四审汇总节点使用当前canonical event例子，legacy只观察、不承载费用或quality权威；保留旧报告/日志字节。W07无需另开新修复包或小门禁；若当前真实run再报身份问题，才给新反例归因。"
+    }
+  ],
+  "no_new_individual_gates": true,
+  "current_cycle_handoff": "复用R1既定N2/N3及四路独审/共因专家；当前三家公司顺序不变。其结果可支持共用机制泛化，不能代替旧NVDA新attempt及相关完整四审。出现具体失败再按责任层共因修复，不重开已交付整包。",
+  "unclosed_or_unknown": [
+    "旧NVDA没有完整M2新attempt及新版四审，clean_streak仍空。",
+    "Sep10正文/dated deck/相关重大SEC/募资材料是否已足量获得未知。",
+    "CPU/新机制/融资约束的新NVDAinventory与实际参数处置未证。",
+    "主要未来增长量级独立经营校准、正式target比较和联合风险实用路径未证。",
+    "FMP当前账户权益未重查；旧terminal外限保留，套餐总费用未知。",
+    "当前安装精确内容与跨仓完整套件本次未重验；不能以提交祖先代签。",
+    "当前CWP R2实验性repair、R3可移植证据、R5旧contract债和US遗漏沿CURRENT_STATUS保留，不并入旧NVDA24项作为新发现。"
+  ],
+  "preservation_check": {
+    "protected_files_unchanged_during_output": true,
+    "protected_file_sha256": {
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/campaign.json": "927246c84bb320199b113077ed322aa1a02c5478499c453f977147f06081dfa4",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/followup_eight_company_audit.md": "a92ebb9f44da2a9907df111be3584f19fa7d6562168ae8b163d1e7596439c916",
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/diagnosis/root_causes.json": "24fc31c2dba8433bd26696fa2c5394e430f05c887c23d6963dc47be4bb137981",
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/remediation/root_cause_map_event.json": "97dead0b01062f13d7700b78a9faaeb67edfbd3c9734fea62e2c5bf0a53a2ec3",
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/storage.json": "2db3fd56b5c01694e51b40820f2d7af91bb535cab8c5edff415a84e267ce2e78",
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/fetch.json": "512c45009454f62edca82c65bef7ca12eeb020a7169deed6251d65e7f1fd9512",
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/process.json": "b0b7093863af9e22060f83ad9570385e6eb7b1e7540e0fdd9791503631fd672f",
+      "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pool-20261009-001-us-nvda/reports/analyst.json": "3d9ba2c0a0b81f6d553d8ebd60721443bd35554df23a291cb9fe90b7524e2850"
+    },
+    "production_config_modified": false,
+    "sealed_execution_modified": false,
+    "active_cn_execution_accessed": false,
+    "new_supplier_calls": 0,
+    "new_model_calls": 0,
+    "product_tests_run": 0,
+    "git_config_changed": false
+  },
+  "method": "沿用既定PWF当前入口与三主文件；未建立竞争计划。CWP结构使用CodeGraph发现入口及测试文件，再读已知文件；跨仓Git沙箱拒读后使用require_escalated只读，未绕过权限/更改Git配置。旧报告hash与campaign四pin逐一匹配。未知只给索引，不扩大为全仓审计。"
+}

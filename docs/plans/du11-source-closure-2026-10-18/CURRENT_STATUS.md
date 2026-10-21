@@ -6,9 +6,9 @@
 
 ## 当前执行状态与唯一下一步
 
-**实施已按用户2026-10-21明确指令恢复。R1进行中：N1冻结节点已独立审查通过（仅准备完成），现在启动第一家独立RF执行。三家公司为药明康德→药明合联→Snowflake；[本轮施工细则](r1-holdout-20261021/implementation.md)、[检查点](r1-holdout-20261021/checkpoints.json)、[进度](r1-holdout-20261021/stage-progress.json)。** 每家公司使用独立executor、四路独立reviewer和根因专家；按大节点修复、复验与提交推送，不增加小节点签收。
+**实施已按用户2026-10-21明确指令恢复。R1进行中：N1冻结通过；药明康德首轮真实执行已按partial封存，正在四路独立审查。三家公司为药明康德→药明合联→Snowflake；[本轮施工细则](r1-holdout-20261021/implementation.md)、[检查点](r1-holdout-20261021/checkpoints.json)、[进度](r1-holdout-20261021/stage-progress.json)。** 每家公司使用独立executor、四路独立reviewer和根因专家；按大节点修复、复验与提交推送，不增加小节点签收。
 
-当前唯一下一主线节点是：**启动药明康德独立executor，真实走RF→FF→CWP及正式摘要，封存后四路独立审查→专家共因修复。** 先复用现存证据、核对当前接口；样本必须区别于开发过程中反复调试的 CN/HK/US 三源。B2、类型清零和已接收施工卡均不重新派工；不为 CN 最后两条遗漏继续付费实验。
+当前唯一下一主线节点是：**完成药明康德sealed initial四路独立审查→专家共因诊断/TDD修复→原公司新attempt复验。** 先复用现存证据、核对当前接口；样本必须区别于开发过程中反复调试的 CN/HK/US 三源。B2、类型清零和已接收施工卡均不重新派工；不为 CN 最后两条遗漏继续付费实验。
 
 ## 已完成及验收边界
 
@@ -35,12 +35,16 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | N1冻结PASS_PREPARATION_ONLY；首家药明康德独立executor待启动 | [冻结终审](review/r1-holdout-freeze-review-20261021.md)已完成；运行完整流程和独立审查，发现共同根因再修复。已有三源只能叫 development regression |
+| R1 主线 | N1准备PASS；首家药明康德initial=partial已封存，639工件逐hash核对一致，四审进行中 | [冻结终审](review/r1-holdout-freeze-review-20261021.md)已完成；运行完整流程和独立审查，发现共同根因再修复。已有三源只能叫 development regression |
 | R2 实验性补写 | `CW_SUMMARY_COVERAGE_REPAIR` 默认关闭，关闭改动已发布；两次 attempt 路径仍有 `activation-resume` / `ReservationConflictError` | 作为独立课题修复或移除；普通单次恢复已通过与此不矛盾。不得默认开启或把它算已验收 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
-| R5 已知测试债 | 两项旧本地 contract 失败：`test_automation_store_boundary.py`、`test_narrative_transport_cli.py` | 后续在相应环境单独分诊契约与实现；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
+| R5 已知测试债 | 两项旧本地 contract 失败：`test_automation_store_boundary.py`、`test_narrative_transport_cli.py` | 已分诊：短TEMP/正确权限下31项27过4失败；隔离工区正用TDD修静态误报、显式SQL投影、金标版本语义，独立审查中；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
 | R6 跨仓及清理边界 | RF/FF自身完整套件未在本机当前组合复跑；旧RF临时目录清理曾被平台拒绝 | 跨仓后续按各自环境及实际变更做大节点验证；旧未清理状态未重新核验，不声称已全清、不换通道重试旧拒绝操作 |
+
+## 首家公司真实执行边界
+
+正式DS摘要、RF公开读取、五分部三情景原生预测和新run缓存复用已实际运行；MiMo首调HTTP401的未知预留完整保留，未盲重试。最新H1/IR/融资来源资格、Q1经营桥、独立量级校准和付费后激活前故障恢复尚未完成。0新增raw；另有2次SHA核验HTTP共1,905,400B，不能将0下载说成零网络。缓存复用同一169,547B摘要且新增reservation=0，不等于故障恢复或业务覆盖通过。原件/配置复核记录保留；[封存观察](r1-holdout-20261021/initial-execution-seal.json)绑定真实manifest。
 
 ## 代码、发布和 CI 基线
 
@@ -53,7 +57,7 @@
 
 当前模型表：MiMo `mimo-v2.6-flash`、DeepSeek `deepseek-flash`、MiniMax `MiniMax-M3.1-Flash`。10月18日 US 收据使用的是当时的 `MiniMax-M3`；这属于历史事实，不是当前运行配置。
 
-2026-10-21通过既有 `phase_c_runner.mother_totals` 重计：累计 **1,504,997 tokens / $0.615538**（估算及保守预留），剩余 **495,003 tokens / $19.384462**。先前1,091,219 tokens / $0.278311仅为追加账，须加历史基数413,778 tokens / $0.334463和FX预留$0.002764；不能把追加账当总账。旧7笔和新增3笔unknown均保留其预留，不当零、不重复加算。详见[预算观察](r1-holdout-20261021/budget-observation.json)。累计上限仍为2,000,000 tokens / $20，每次实际调用前重读母账及原生费用记录，本观察不另建收费账。
+2026-10-21通过既有 `phase_c_runner.mother_totals` 重计：累计 **1,544,023 tokens / $0.625258**（估算及保守预留），剩余 **455,977 tokens / $19.374742**。先前1,091,219 tokens / $0.278311仅为追加账，须加历史基数413,778 tokens / $0.334463和FX预留$0.002764；不能把追加账当总账。旧7笔和新增4笔unknown均保留其预留，不当零、不重复加算。冻结前基数见[预算观察](r1-holdout-20261021/budget-observation.json)，本轮实际与原生费用引用见[封存观察](r1-holdout-20261021/initial-execution-seal.json)。累计上限仍为2,000,000 tokens / $20，每次实际调用前重读母账及原生费用记录，本观察不另建收费账。
 
 ## 文档导航及状态规则
 

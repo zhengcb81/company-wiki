@@ -2,6 +2,10 @@
 
 **唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
 
+## 2026-10-21 R1首轮封存与四路审查
+
+真实执行将几种问题区分：初始catalog未初始化属准备问题；有效blocked ensure被FF报invalid_producer_schema疑似协议共因；未知旧文件publication阻塞新期间下载待专家判定；MiMo401属外部provider失败并保留unknown；非空workdir/缺closed field属执行错误。上述均先进入独立四审，不按ROOT猜测直接修。普通cache PASS不等于paid-response激活恢复或R2实验补写恢复。
+
 ## R1冻结调查（2026-10-21）
 
 RF审查技能要求真实executor与四个独立reviewer，失败也封存进入审查；已有公司池活动及NVDA义务必须保留。公司目录仅为发现候选，主体通过现有resolver一次解析；已有gold/参与规则调试的公司不计未见holdout。先冻结样本与通用检查点，原文侧oracle对executor保持独立；按现配置与原累计账运行。

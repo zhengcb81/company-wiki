@@ -1,0 +1,1091 @@
+{
+  "schema_version": "r1-contract-debt-triage/1",
+  "status": "TRIAGED_OPEN_REPAIR_NOT_APPLIED",
+  "generated_at_utc": "2026-10-21T21:09:43.543071Z",
+  "scope": {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "head": "45195e96cb15a1652b13899a99cfb827932a62f1",
+    "last_code_commit": "76a9440b9a580889460db0b7b545135060f1ce2d",
+    "src_tree": "433e0c872c3ac4e8ea378bff7032cf084b69081f",
+    "code_test_config_delta_since_last_code_commit": [],
+    "test_files": [
+      "tests/contract/test_automation_store_boundary.py",
+      "tests/contract/test_narrative_transport_cli.py"
+    ],
+    "production_implementation_test_config_install_edits": false,
+    "external_network_download_or_paid_llm_calls": 0,
+    "concurrent_executor_access_or_mutation": false,
+    "short_scratch_paths": [
+      ".planning/r1ct21",
+      ".planning/r1ct22"
+    ],
+    "short_tmp_authorization": "Parent explicitly approved the exclusive short tmp environment correction; this does not change implementation or introduce a user gate."
+  },
+  "valid_environment_result": {
+    "tests": 31,
+    "failed": 4,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 27
+  },
+  "runs": [
+    {
+      "label": "baseline",
+      "execution_surface": "default_sandbox",
+      "execution": {
+        "schema_version": "r1-contract-triage-execution/1",
+        "started_at_utc": "2026-10-21T20:59:42.520334Z",
+        "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+        "argv": [
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/contract/test_automation_store_boundary.py",
+          "tests/contract/test_narrative_transport_cli.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\baseline\\temp\\pytest",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\baseline\\junit.xml"
+        ],
+        "environment_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHON_DOTENV_DISABLED": "1",
+          "COMPANY_WIKI_NETWORK": "blocked",
+          "COMPANY_WIKI_REAL_LLM": "0",
+          "CW_WR3_GOVERNANCE_AUTOUSE": "0",
+          "TEMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\baseline\\temp",
+          "TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\baseline\\temp",
+          "TMPDIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\baseline\\temp"
+        },
+        "head_before": "45195e96cb15a1652b13899a99cfb827932a62f1",
+        "hashes_before": {
+          "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+          "tests\\contract\\test_automation_store_boundary.py": "ddc82c7a79fc703125cac33c64bb9d8244bdcba348ed5c366027402abc663867",
+          "tests\\contract\\test_narrative_transport_cli.py": "5fc3526c3e3d9203aa365bffb0dd80ac22a32539b5070ca038046419a6eff498",
+          "tests\\support\\narrative_transport_fixture.py": "57f3d18706e78079be256031351ab22b88674c048bf8049f5cdf9ea6855d234b",
+          "src\\company_wiki\\automation\\store.py": "9b62162409756238205aa225a4d22b853fc2c85278fcbd987b16746e8d9e79c2",
+          "tests\\fixtures\\narrative_transport_v1\\bundle.json": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d"
+        },
+        "python_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "runner_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "network_download_live_llm_authorized_or_invoked": false,
+        "exit_code": 1,
+        "timed_out": false,
+        "finished_at_utc": "2026-10-21T20:59:52.374971Z",
+        "elapsed_seconds": 9.799636600000667,
+        "head_after": "45195e96cb15a1652b13899a99cfb827932a62f1",
+        "hashes_after": {
+          "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+          "tests\\contract\\test_automation_store_boundary.py": "ddc82c7a79fc703125cac33c64bb9d8244bdcba348ed5c366027402abc663867",
+          "tests\\contract\\test_narrative_transport_cli.py": "5fc3526c3e3d9203aa365bffb0dd80ac22a32539b5070ca038046419a6eff498",
+          "tests\\support\\narrative_transport_fixture.py": "57f3d18706e78079be256031351ab22b88674c048bf8049f5cdf9ea6855d234b",
+          "src\\company_wiki\\automation\\store.py": "9b62162409756238205aa225a4d22b853fc2c85278fcbd987b16746e8d9e79c2",
+          "tests\\fixtures\\narrative_transport_v1\\bundle.json": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d"
+        },
+        "inspected_files_unchanged": true
+      },
+      "summary": {
+        "tests": 31,
+        "failed": 18,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 13
+      },
+      "by_module": {
+        "tests.contract.test_automation_store_boundary": {
+          "passed": 12,
+          "failed": 3,
+          "skipped": 0,
+          "error": 0
+        },
+        "tests.contract.test_narrative_transport_cli": {
+          "passed": 1,
+          "failed": 15,
+          "skipped": 0,
+          "error": 0
+        }
+      },
+      "cases": [
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_migrations_module_exists",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_store_module_exists",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_migrations_no_forbidden_tokens",
+          "status": "failed",
+          "failure_message": "AssertionError: forbidden in migrations.py: 'time.sleep'\nassert 'time.sleep' not in '\"\"\"Versione...abase\",\\n]\\n'\n  \n  'time.sleep' is contained here:\n              time.sleep(min(0.01, remaining))\n  ?           ++++++++++\n                if time.monotonic() >= deadline:\n                    raise\n            except BaseException:...\n  \n  ...Full output truncated (484 lines hidden), use '-vv' to show"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_store_no_forbidden_tokens",
+          "status": "failed",
+          "failure_message": "AssertionError: forbidden in store.py: 'SELECT *'\nassert 'SELECT *' not in '\"\"\"AUTO-2 A...Error\",\\n]\\n'\n  \n  'SELECT *' is contained here:\n    .execute(\"SELECT * FROM narrative_runs WHERE run_id=?\", (run_id,)).fetchone()\n  ?           ++++++++\n        if run is None or any((row[\"input_hash\"], row[\"handler_version\"]) !=\n                              (jobs_by_id[row[\"job_id\"]].input_hash,\n                               jobs_by_id[row[\"job_id\"]].handler_version)...\n  \n  ...Full output truncated (1381 lines hidden), use '-vv' to show"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_registry_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_policy_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_planner_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_retry_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_outbox_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_worker_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_event_sources_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_controller_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_store_imports_only_allowed_modules",
+          "status": "failed",
+          "failure_message": "AssertionError: unexpected import in store.py: 'company_wiki.narrative_subject'\nassert 'company_wiki.narrative_subject' in {'__future__', 'collections', 'collections.abc', 'company_wiki._id_scope', 'company_wiki.automation.migrations', 'company_wiki.automation.models', ...}"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b02_no_default_db_paths_in_source",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b02_no_default_db_paths_in_tests",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[txt]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_public_cli_reads_generate0\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[json]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_public_cli_reads_generate1\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.json.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[pdf]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-ff62439299f682743e7de9cb52f85141', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[skip]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-05b3383d5190bc6c7e400222935d40e2', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[duplicate-key]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp0\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[nan]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp1\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[invalid-utf8]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp2\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[missing-fields]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp3\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[unknown-path]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp4\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[oversize]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp5\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[deeply-nested]",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_cli_rejects_malformed_inp6\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_unknown_publication_json_refuses_historical_cli_read",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_unknown_publication_json_0\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.json.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_read_unknown_publication_preserves_history_and_evidence",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_current_read_unknown_publ0\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_read_still_checks_identity_and_original_bytes",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_current_read_still_checks0\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_missing_catalog_cli_does_not_create_or_migrate_storage",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_public_producer_regenerates_normalized_txt_golden",
+          "status": "failed",
+          "failure_message": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\baseline\\\\temp\\\\cw-pytest-basetemp\\\\20261021-205944-f402f072\\\\test_current_public_producer_r0\\\\nt\\\\companies\\\\Acme\\\\raw\\\\investor_relations\\\\transcripts\\\\source.txt.source.json'"
+        }
+      ],
+      "evidence_files": [
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/baseline/execution.json",
+          "sha256": "cd1fe13a3a9e9ecd1d783178ddd0be24709f342b9c23aa8367c94ccd10b87a7d",
+          "bytes": 3500
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/baseline/stdout.log",
+          "sha256": "836d0e17f124350ad3952124c366d3df1bb289c94fc4412d559db584f6ea9f20",
+          "bytes": 30833
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/baseline/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/baseline/junit.xml",
+          "sha256": "267ff3788586d139f4542fce89d09d339f63a0d7cc203f35cda67280e3787381",
+          "bytes": 36536
+        }
+      ]
+    },
+    {
+      "label": "short-temp",
+      "execution_surface": "default_sandbox",
+      "execution": {
+        "schema_version": "r1-contract-triage-execution/1",
+        "started_at_utc": "2026-10-21T21:01:25.531451Z",
+        "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+        "argv": [
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/contract/test_automation_store_boundary.py",
+          "tests/contract/test_narrative_transport_cli.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct21\\pytest",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\short-temp\\junit.xml"
+        ],
+        "environment_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHON_DOTENV_DISABLED": "1",
+          "COMPANY_WIKI_NETWORK": "blocked",
+          "COMPANY_WIKI_REAL_LLM": "0",
+          "CW_WR3_GOVERNANCE_AUTOUSE": "0",
+          "PYTHONUTF8": "1",
+          "PYTHONIOENCODING": "utf-8",
+          "TEMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct21",
+          "TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct21",
+          "TMPDIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct21"
+        },
+        "head_before": "45195e96cb15a1652b13899a99cfb827932a62f1",
+        "hashes_before": {
+          "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+          "tests\\contract\\test_automation_store_boundary.py": "ddc82c7a79fc703125cac33c64bb9d8244bdcba348ed5c366027402abc663867",
+          "tests\\contract\\test_narrative_transport_cli.py": "5fc3526c3e3d9203aa365bffb0dd80ac22a32539b5070ca038046419a6eff498",
+          "tests\\support\\narrative_transport_fixture.py": "57f3d18706e78079be256031351ab22b88674c048bf8049f5cdf9ea6855d234b",
+          "src\\company_wiki\\automation\\store.py": "9b62162409756238205aa225a4d22b853fc2c85278fcbd987b16746e8d9e79c2",
+          "tests\\fixtures\\narrative_transport_v1\\bundle.json": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d"
+        },
+        "python_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "runner_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "network_download_live_llm_authorized_or_invoked": false,
+        "exit_code": 1,
+        "timed_out": false,
+        "finished_at_utc": "2026-10-21T21:01:38.201191Z",
+        "elapsed_seconds": 12.62061569999969,
+        "head_after": "45195e96cb15a1652b13899a99cfb827932a62f1",
+        "hashes_after": {
+          "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+          "tests\\contract\\test_automation_store_boundary.py": "ddc82c7a79fc703125cac33c64bb9d8244bdcba348ed5c366027402abc663867",
+          "tests\\contract\\test_narrative_transport_cli.py": "5fc3526c3e3d9203aa365bffb0dd80ac22a32539b5070ca038046419a6eff498",
+          "tests\\support\\narrative_transport_fixture.py": "57f3d18706e78079be256031351ab22b88674c048bf8049f5cdf9ea6855d234b",
+          "src\\company_wiki\\automation\\store.py": "9b62162409756238205aa225a4d22b853fc2c85278fcbd987b16746e8d9e79c2",
+          "tests\\fixtures\\narrative_transport_v1\\bundle.json": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d"
+        },
+        "inspected_files_unchanged": true
+      },
+      "summary": {
+        "tests": 31,
+        "failed": 18,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 13
+      },
+      "by_module": {
+        "tests.contract.test_automation_store_boundary": {
+          "passed": 12,
+          "failed": 3,
+          "skipped": 0,
+          "error": 0
+        },
+        "tests.contract.test_narrative_transport_cli": {
+          "passed": 1,
+          "failed": 15,
+          "skipped": 0,
+          "error": 0
+        }
+      },
+      "cases": [
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_migrations_module_exists",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_store_module_exists",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_migrations_no_forbidden_tokens",
+          "status": "failed",
+          "failure_message": "AssertionError: forbidden in migrations.py: 'time.sleep'\nassert 'time.sleep' not in '\"\"\"Versione...abase\",\\n]\\n'\n  \n  'time.sleep' is contained here:\n              time.sleep(min(0.01, remaining))\n  ?           ++++++++++\n                if time.monotonic() >= deadline:\n                    raise\n            except BaseException:...\n  \n  ...Full output truncated (484 lines hidden), use '-vv' to show"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_store_no_forbidden_tokens",
+          "status": "failed",
+          "failure_message": "AssertionError: forbidden in store.py: 'SELECT *'\nassert 'SELECT *' not in '\"\"\"AUTO-2 A...Error\",\\n]\\n'\n  \n  'SELECT *' is contained here:\n    .execute(\"SELECT * FROM narrative_runs WHERE run_id=?\", (run_id,)).fetchone()\n  ?           ++++++++\n        if run is None or any((row[\"input_hash\"], row[\"handler_version\"]) !=\n                              (jobs_by_id[row[\"job_id\"]].input_hash,\n                               jobs_by_id[row[\"job_id\"]].handler_version)...\n  \n  ...Full output truncated (1381 lines hidden), use '-vv' to show"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_registry_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_policy_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_planner_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_retry_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_outbox_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_worker_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_event_sources_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_controller_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_store_imports_only_allowed_modules",
+          "status": "failed",
+          "failure_message": "AssertionError: unexpected import in store.py: 'company_wiki.narrative_subject'\nassert 'company_wiki.narrative_subject' in {'__future__', 'collections', 'collections.abc', 'company_wiki._id_scope', 'company_wiki.automation.migrations', 'company_wiki.automation.models', ...}"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b02_no_default_db_paths_in_source",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b02_no_default_db_paths_in_tests",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[txt]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-97ceaf83d460b17e66c04f9a2a948ae0', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[json]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-ec95f094dc76bbfab2c0e209fe13ccc2', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[pdf]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-c4e05c4b4f8817b7c67d58512f350d4e', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[skip]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-9570b3d68cd5fc85ef781e90b76da479', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[duplicate-key]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-a8214b04e23cf080e4bdeb90cc21ab38', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[nan]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-7ff84b27fc6c33f1dbd5b516b4e2a0ec', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[invalid-utf8]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-a3f2c68e4bcbb775c1a7e4cd9a389f56', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[missing-fields]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-1a87d78a3d68b5537d78b20d164ac902', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[unknown-path]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-d816aed4b45df52de0169a69ea79db77', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[oversize]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-27c575558309c602f21ef5b1b4a08af8', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[deeply-nested]",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-562861a8138db19a60bf671c3211c446', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_unknown_publication_json_refuses_historical_cli_read",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-1d78b72ead642a22488608bcf9dd8d2d', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_read_unknown_publication_preserves_history_and_evidence",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-5abb8b0195bbd326b06c39c3bb922728', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_read_still_checks_identity_and_original_bytes",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-2dcf2f87259cbcca175250f347566416', status='retry_scheduled', artifact_version_id=None)"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_missing_catalog_cli_does_not_create_or_migrate_storage",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_public_producer_regenerates_normalized_txt_golden",
+          "status": "failed",
+          "failure_message": "AssertionError: NarrativeProjectionReceipt(effect_id='eff-c1c8109013a92d4f2815653e1293fba6', status='retry_scheduled', artifact_version_id=None)"
+        }
+      ],
+      "evidence_files": [
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/short-temp/execution.json",
+          "sha256": "312de6488c2b43d047b328b367e0f99dd3a68e794813600b5e19ff69d87797af",
+          "bytes": 3304
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/short-temp/stdout.log",
+          "sha256": "4e2180caed5fabe0aa15d797e0b3bde0d949803727d6f1d1c7cf14dc695b721b",
+          "bytes": 17859
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/short-temp/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/short-temp/junit.xml",
+          "sha256": "7c73782329a422691bf7d5e01293e3fa14c49531e3c276efd04bbd3ab0c95719",
+          "bytes": 21466
+        }
+      ]
+    },
+    {
+      "label": "approved-short-temp",
+      "execution_surface": "approved",
+      "execution": {
+        "schema_version": "r1-contract-triage-execution/1",
+        "started_at_utc": "2026-10-21T21:04:55.488058Z",
+        "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+        "argv": [
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/contract/test_automation_store_boundary.py",
+          "tests/contract/test_narrative_transport_cli.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct22\\pytest",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\approved-short-temp\\junit.xml"
+        ],
+        "environment_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHON_DOTENV_DISABLED": "1",
+          "COMPANY_WIKI_NETWORK": "blocked",
+          "COMPANY_WIKI_REAL_LLM": "0",
+          "CW_WR3_GOVERNANCE_AUTOUSE": "0",
+          "PYTHONUTF8": "1",
+          "PYTHONIOENCODING": "utf-8",
+          "TEMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct22",
+          "TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct22",
+          "TMPDIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ct22"
+        },
+        "head_before": "45195e96cb15a1652b13899a99cfb827932a62f1",
+        "hashes_before": {
+          "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+          "tests\\contract\\test_automation_store_boundary.py": "ddc82c7a79fc703125cac33c64bb9d8244bdcba348ed5c366027402abc663867",
+          "tests\\contract\\test_narrative_transport_cli.py": "5fc3526c3e3d9203aa365bffb0dd80ac22a32539b5070ca038046419a6eff498",
+          "tests\\support\\narrative_transport_fixture.py": "57f3d18706e78079be256031351ab22b88674c048bf8049f5cdf9ea6855d234b",
+          "src\\company_wiki\\automation\\store.py": "9b62162409756238205aa225a4d22b853fc2c85278fcbd987b16746e8d9e79c2",
+          "tests\\fixtures\\narrative_transport_v1\\bundle.json": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d"
+        },
+        "python_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "runner_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "network_download_live_llm_authorized_or_invoked": false,
+        "exit_code": 1,
+        "timed_out": false,
+        "finished_at_utc": "2026-10-21T21:06:31.720078Z",
+        "elapsed_seconds": 96.15327310000066,
+        "head_after": "45195e96cb15a1652b13899a99cfb827932a62f1",
+        "hashes_after": {
+          "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+          "tests\\contract\\test_automation_store_boundary.py": "ddc82c7a79fc703125cac33c64bb9d8244bdcba348ed5c366027402abc663867",
+          "tests\\contract\\test_narrative_transport_cli.py": "5fc3526c3e3d9203aa365bffb0dd80ac22a32539b5070ca038046419a6eff498",
+          "tests\\support\\narrative_transport_fixture.py": "57f3d18706e78079be256031351ab22b88674c048bf8049f5cdf9ea6855d234b",
+          "src\\company_wiki\\automation\\store.py": "9b62162409756238205aa225a4d22b853fc2c85278fcbd987b16746e8d9e79c2",
+          "tests\\fixtures\\narrative_transport_v1\\bundle.json": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d"
+        },
+        "inspected_files_unchanged": true
+      },
+      "summary": {
+        "tests": 31,
+        "failed": 4,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 27
+      },
+      "by_module": {
+        "tests.contract.test_automation_store_boundary": {
+          "passed": 12,
+          "failed": 3,
+          "skipped": 0,
+          "error": 0
+        },
+        "tests.contract.test_narrative_transport_cli": {
+          "passed": 15,
+          "failed": 1,
+          "skipped": 0,
+          "error": 0
+        }
+      },
+      "cases": [
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_migrations_module_exists",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_store_module_exists",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_migrations_no_forbidden_tokens",
+          "status": "failed",
+          "failure_message": "AssertionError: forbidden in migrations.py: 'time.sleep'\nassert 'time.sleep' not in '\"\"\"Versione...abase\",\\n]\\n'\n  \n  'time.sleep' is contained here:\n              time.sleep(min(0.01, remaining))\n  ?           ++++++++++\n                if time.monotonic() >= deadline:\n                    raise\n            except BaseException:...\n  \n  ...Full output truncated (484 lines hidden), use '-vv' to show"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_store_no_forbidden_tokens",
+          "status": "failed",
+          "failure_message": "AssertionError: forbidden in store.py: 'SELECT *'\nassert 'SELECT *' not in '\"\"\"AUTO-2 A...Error\",\\n]\\n'\n  \n  'SELECT *' is contained here:\n    .execute(\"SELECT * FROM narrative_runs WHERE run_id=?\", (run_id,)).fetchone()\n  ?           ++++++++\n        if run is None or any((row[\"input_hash\"], row[\"handler_version\"]) !=\n                              (jobs_by_id[row[\"job_id\"]].input_hash,\n                               jobs_by_id[row[\"job_id\"]].handler_version)...\n  \n  ...Full output truncated (1381 lines hidden), use '-vv' to show"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_registry_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_policy_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_planner_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_retry_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_outbox_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_worker_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_event_sources_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_controller_no_forbidden_tokens",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b01_store_imports_only_allowed_modules",
+          "status": "failed",
+          "failure_message": "AssertionError: unexpected import in store.py: 'company_wiki.narrative_subject'\nassert 'company_wiki.narrative_subject' in {'__future__', 'collections', 'collections.abc', 'company_wiki._id_scope', 'company_wiki.automation.migrations', 'company_wiki.automation.models', ...}"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b02_no_default_db_paths_in_source",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_automation_store_boundary",
+          "name": "test_b02_no_default_db_paths_in_tests",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[txt]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[json]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[pdf]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_public_cli_reads_generated_persisted_bundle_without_rewriting[skip]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[duplicate-key]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[nan]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[invalid-utf8]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[missing-fields]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[unknown-path]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[oversize]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_cli_rejects_malformed_input_with_empty_stdout_and_bounded_refusal[deeply-nested]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_unknown_publication_json_refuses_historical_cli_read",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_read_unknown_publication_preserves_history_and_evidence",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_read_still_checks_identity_and_original_bytes",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_missing_catalog_cli_does_not_create_or_migrate_storage",
+          "status": "passed"
+        },
+        {
+          "class": "tests.contract.test_narrative_transport_cli",
+          "name": "test_current_public_producer_regenerates_normalized_txt_golden",
+          "status": "failed",
+          "failure_message": "assert b'{\"evidence_...or\":\"0.8.0\"}}' == b'{\"evidence_...or\":\"0.4.2\"}}'\n  \n  At index 219 diff: b'3' != b'c'\n  Use -v to get more diff"
+        }
+      ],
+      "evidence_files": [
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/approved-short-temp/execution.json",
+          "sha256": "f437fe23da3a46d4ee40e6e7ff617f1e0dbf55cadd2d701ff66bccb1581bacaf",
+          "bytes": 3313
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/approved-short-temp/stdout.log",
+          "sha256": "2cc507c7fdcf9d0858eff8085cef91660f6f7560bf0073c7f20f6cfeb3d9a76f",
+          "bytes": 4263
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/approved-short-temp/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": ".planning/shared-reading-production/r1-contract-triage-20261021/approved-short-temp/junit.xml",
+          "sha256": "17670bcc9d8a34ccd2cd416e6b6fc9080667493b08fbe360aa0ae1bd6a2ae212",
+          "bytes": 8673
+        }
+      ]
+    }
+  ],
+  "isolation_audit": [
+    "Boundary tests read checked-in source only.",
+    "Transport fixture constructs only synthetic raw/source sidecars/catalog/AUTO DB/config below tmp_path; it passes ReplayNarrativeModel and cleans its nt subtree with containment assertion.",
+    "Missing-catalog test writes and removes only a scratch root. Raw-tamper test changes/restores only synthetic fixture raw. Golden files are read-only.",
+    "Known API-key names are removed in test child; dotenv/network/real LLM disabled, ordinary pytest sockets blocked. CLI child receives scratch config and current src PYTHONPATH.",
+    "Process-governance fixture pinned off to avoid process inventory of the concurrent executor."
+  ],
+  "environment_diagnosis": {
+    "baseline": "Overlong owned TEMP was relocated to an even longer156-character fallback;13 fixture cases failed with FileNotFoundError and2 already hit projection retry. None establish15 CLI-body regressions.",
+    "short_sandbox": "58-character basetemp removes direct path errors.15 fixture cases still return retry_scheduled before CLI assertions.",
+    "projection_error": {
+      "type": "PermissionError",
+      "errno": 13,
+      "winerror": 5,
+      "permanent": false,
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_projection.py\", line 248, in dispatch_next\n    version = self._artifacts.prepare(draft, payload)\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_artifact_store.py\", line 261, in prepare\n    object_key = self._objects.put(payload)\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\probe_transport.py\", line 71, in observe_put\n    return put(self, data)\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_artifact_store.py\", line 180, in put\n    os.link(temporary_name, target)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\r1ct21\\\\probe\\\\nt\\\\catalog\\\\objects\\\\sha256\\\\50\\\\.narrative-wnev4try.partial' -> 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\r1ct21\\\\probe\\\\nt\\\\catalog\\\\objects\\\\sha256\\\\50\\\\507d5b65ff0d2a55ff43fe4e7a6bd9ce53a8db38e2e771f622e75d303639cf5c.json'\n"
+    },
+    "hardlink_probe": [
+      {
+        "started_at_utc": "2026-10-21T21:04:18.704799+00:00",
+        "label": "sandbox",
+        "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\hardlink\\sandbox\\source.bin",
+        "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\hardlink\\sandbox\\target.bin",
+        "source_length": 126,
+        "target_length": 126,
+        "python_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "status": "error",
+        "error_type": "PermissionError",
+        "errno": 13,
+        "winerror": 5,
+        "message": "[WinError 5] 拒绝访问。: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\hardlink\\\\sandbox\\\\source.bin' -> 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\shared-reading-production\\\\r1-contract-triage-20261021\\\\hardlink\\\\sandbox\\\\target.bin'",
+        "finished_at_utc": "2026-10-21T21:04:18.706336+00:00"
+      },
+      {
+        "started_at_utc": "2026-10-21T21:04:21.887001+00:00",
+        "label": "approved",
+        "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\hardlink\\approved\\source.bin",
+        "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-contract-triage-20261021\\hardlink\\approved\\target.bin",
+        "source_length": 127,
+        "target_length": 127,
+        "python_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "status": "ok",
+        "bytes_equal": true,
+        "same_file": true,
+        "finished_at_utc": "2026-10-21T21:04:21.903558+00:00"
+      }
+    ],
+    "conclusion": "Execution surface restricts os.link in the default sandbox; approved execution permits it and the15 setup failures disappear. No CAS publication implementation workaround is justified.",
+    "installed_import_mismatch": false,
+    "import_paths": {
+      "store": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\store.py",
+      "transport_cli": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_transport_cli.py"
+    },
+    "distribution_versions": {
+      "company-wiki": "0.1.0",
+      "pytest": "9.1.1",
+      "PyMuPDF": "1.28.2"
+    },
+    "baseline_runner_note": "pytest receipt/logs/JUnit were durable before the wrapper hit a GBK UnicodeEncodeError echoing logs. Wrapper exit1 and pytest exit1 are distinct. Later wrappers print escaped paths; child output is explicitly UTF-8."
+  },
+  "findings": [
+    {
+      "id": "C1",
+      "test": "test_b01_migrations_no_forbidden_tokens",
+      "status": "RED",
+      "classification": "outdated_unqualified_static_contract",
+      "source": [
+        "src/company_wiki/automation/migrations.py:415",
+        "src/company_wiki/automation/migrations.py:447"
+      ],
+      "evidence": "_open_connection uses a monotonic total 5s deadline, closes failed connections, and sleeps at most min(0.01, remaining). The token scan rejects time.sleep and would next reject while True even though the loop is deadline-bounded.",
+      "history": "93ac5a534 introduced the current bounded yielding retry. Existing named unit tests assert peer completion, deadline stop and immediate nonbusy failure; read only in this task.",
+      "recommendation": "Retain bounded retry. Narrow the static rule to prohibit unbounded/daemon loops and network/env dependencies; encode the justified _open_connection exception precisely and retain its existing behavior tests. Do not remove all static assertions."
+    },
+    {
+      "id": "C2",
+      "test": "test_b01_store_no_forbidden_tokens",
+      "status": "RED",
+      "classification": "implementation_violates_explicit_projection_contract",
+      "source": [
+        "src/company_wiki/automation/store.py:699",
+        "src/company_wiki/automation/store.py:1376",
+        "src/company_wiki/automation/store.py:1396"
+      ],
+      "evidence": "Two SELECT * statements read narrative_runs and narrative_model_reservations. SELECT j.* additionally reads jobs but evades the current literal token scan.",
+      "history": "Terminal-compaction wildcard dates to cf662cc2e; paid-response recovery wildcard is later feature expansion. Neither is introduced by the last type-only code commit.",
+      "impact": "A real mismatch with the declared store contract and avoidable schema coupling/broad reads. No data corruption or runtime failure was demonstrated by these tests.",
+      "recommendation": "Keep the no-wildcard contract. Project exact run fields and paid-recovery fields, and use explicit prefixed job columns. Cover alias-star in the static check rather than bypassing the token or deleting the assertion."
+    },
+    {
+      "id": "C3",
+      "test": "test_b01_store_imports_only_allowed_modules",
+      "status": "RED",
+      "classification": "outdated_pure_contract_import_allowlist",
+      "source": [
+        "src/company_wiki/automation/store.py:624",
+        "src/company_wiki/narrative_subject.py:1",
+        "src/company_wiki/narrative_subject.py:204"
+      ],
+      "evidence": "Terminal compaction imports publication_target from the shared detached identity contract. narrative_subject validates identities and has no mutable DB/network/worker state; it is already used through terminal contracts.",
+      "history": "795a076de extended official JSON/raw subject publication identity, after the original AUTO-2 module boundary assumption.",
+      "recommendation": "Allow this exact pure shared contract or locate its pure API in an agreed contract layer; align the store module docstring. Do not allow every company_wiki import or broadly ignore relative dependency risk."
+    },
+    {
+      "id": "C4",
+      "test": "test_current_public_producer_regenerates_normalized_txt_golden",
+      "status": "RED",
+      "classification": "historical_golden_compared_to_unpinned_current_generator",
+      "source": [
+        "tests/contract/test_narrative_transport_cli.py:233",
+        "tests/fixtures/narrative_transport_v1/README.md:17",
+        "src/company_wiki/source_catalog/transcript_versions.py:12",
+        "src/company_wiki/source_catalog/narrative_evidence.py:82"
+      ],
+      "evidence": "12 normalized JSON paths differ: parser0.1.1->0.3.1, selector0.4.2->0.8.0, prompt1.6.0->1.7.0; new core_business topic and selection-reason ordering also change span/output hash and linked evidence IDs. Raw bytes, text, locator, counts and claim text remain equal.",
+      "impact": "The old report's 0.8.0 vs0.4.2 is selector provenance, not parser version. The supported current selector set no longer includes0.4.2. This is current-generation snapshot maintenance debt, not proof that historical persisted bytes cannot be read.",
+      "recommendation": "Preserve the historical golden as a compatibility vector. Review new tagging/order and identity consequences explicitly, then create a versioned current-generation golden or an explicit version-aware current snapshot. The provenance-only refresh helper should continue refusing these semantic/identity changes. Do not strip all versions, accept arbitrary IDs, or blindly refresh."
+    }
+  ],
+  "shared_cause": {
+    "classification": "contract_maintenance_lag_with_separate_real_sql_contract_debt",
+    "statement": "No single runtime defect explains all four REDs. AUTO/narrative evolution outpaced the original static whitelist and current-vs-historical golden maintenance; related fast contracts did not imply these files passed. The wildcard SQL item remains real implementation debt, not an excuse to delete tests."
+  },
+  "golden_normalized_diff": [
+    {
+      "path": "/evidence_spans/0/output_sha256",
+      "golden": "ceba9c5ed4217ba66e7a96eec10f36125c514d30b10d344e3f898a5553f9e6d2",
+      "generated": "362da15b04b42c51d976188fd54daee6ee18ed387359339cbfa55c5fa81f8d17"
+    },
+    {
+      "path": "/evidence_spans/0/parser_version",
+      "golden": "0.1.1",
+      "generated": "0.3.1"
+    },
+    {
+      "path": "/evidence_spans/0/span_id",
+      "golden": "urn:company-wiki:evidence-span:sha256:4eead235a93d37bda40026d76ca920a34009aa74f1267c72870d440de4e7cbfc",
+      "generated": "urn:company-wiki:evidence-span:sha256:05f437895d1f1c67000f5efaa7bfb9ae61da175fd4fe9506cc4aea8fc6363152"
+    },
+    {
+      "path": "/evidence_spans/0/structured_value/selection_reasons/1",
+      "golden": "progress_or_change_language",
+      "generated": "specific_business_event"
+    },
+    {
+      "path": "/evidence_spans/0/structured_value/selection_reasons/2",
+      "golden": "specific_business_event",
+      "generated": "progress_or_change_language"
+    },
+    {
+      "path": "/evidence_spans/0/structured_value/topics",
+      "golden": [
+        "new_business",
+        "overseas",
+        "capacity_projects",
+        "products_rd"
+      ],
+      "generated": [
+        "new_business",
+        "overseas",
+        "capacity_projects",
+        "products_rd",
+        "core_business"
+      ]
+    },
+    {
+      "path": "/summary/draft/claims/0/evidence_ids/0",
+      "golden": "urn:company-wiki:evidence-span:sha256:4eead235a93d37bda40026d76ca920a34009aa74f1267c72870d440de4e7cbfc",
+      "generated": "urn:company-wiki:evidence-span:sha256:05f437895d1f1c67000f5efaa7bfb9ae61da175fd4fe9506cc4aea8fc6363152"
+    },
+    {
+      "path": "/summary/model/prompt_version",
+      "golden": "1.6.0",
+      "generated": "1.7.0"
+    },
+    {
+      "path": "/transcript_byte_bindings/0/evidence_id",
+      "golden": "urn:company-wiki:evidence-span:sha256:4eead235a93d37bda40026d76ca920a34009aa74f1267c72870d440de4e7cbfc",
+      "generated": "urn:company-wiki:evidence-span:sha256:05f437895d1f1c67000f5efaa7bfb9ae61da175fd4fe9506cc4aea8fc6363152"
+    },
+    {
+      "path": "/versions/parser",
+      "golden": "0.1.1",
+      "generated": "0.3.1"
+    },
+    {
+      "path": "/versions/prompt",
+      "golden": "1.6.0",
+      "generated": "1.7.0"
+    },
+    {
+      "path": "/versions/selector",
+      "golden": "0.4.2",
+      "generated": "0.8.0"
+    }
+  ],
+  "recommended_red_green_scope": [
+    {
+      "phase": "RED",
+      "scope": "Keep this approved31-test receipt as current RED evidence; exact four test IDs are in findings. Preserve old golden and static boundary intent.",
+      "executed": true
+    },
+    {
+      "phase": "GREEN_after_repair",
+      "scope": "Same two files31 tests in a supported short-temp execution surface. Current report does not claim a future GREEN.",
+      "executed": false
+    },
+    {
+      "phase": "targeted_followup_if_changed",
+      "scope": "Existing WAL bounded retry tests in tests/unit/test_automation_migrations.py; terminal receipts unit/integration tests for explicit compaction columns; paid-recovery tests for reservation/job columns; historical parser/replay/golden compatibility tests only if snapshot/version handling changes.",
+      "executed": false
+    },
+    {
+      "phase": "quality_node",
+      "scope": "Use the existing owner-selected large-node review after RF freeze; do not add material-by-material approvals, new canaries or a new permanent gate.",
+      "executed": false
+    }
+  ],
+  "not_run": [
+    "full7k unit suite",
+    "all contract suite",
+    "RF/FF suites or executor work",
+    "existing migration/terminal/paid-recovery follow-up suites",
+    "live source download/provider/LLM",
+    "golden refresh helper"
+  ],
+  "integrity": {
+    "production_config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "production_config_matches_all_run_receipts": true,
+    "src_scripts_config_tests_tracked_diff": [],
+    "logs_and_junit_preserved_locally": true,
+    "local_material_not_claimed_portable_or_committed": true,
+    "diagnostic_probe_command_exit": 0
+  }
+}

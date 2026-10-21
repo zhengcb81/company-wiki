@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-21",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "OPEN_R1_N1_PASSED_EXECUTOR_STARTING",
+  "overall_status": "OPEN_R1_CN_INITIAL_SEALED_FOUR_REVIEW_IN_PROGRESS",
   "current_authorized_scope": "freeze_new_company_holdout_then_execute_review_remediate_replay_full_RF_audit_loop",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -74,7 +74,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "N1_PASS_PREPARATION_ONLY_FIRST_EXECUTOR_STARTING",
+      "status": "CN_INITIAL_PARTIAL_SEALED_FOUR_REVIEWS_PENDING",
       "mainline": true
     },
     {
@@ -95,7 +95,7 @@
     {
       "id": "R5",
       "task": "triage two existing local contract failures",
-      "status": "OPEN"
+      "status": "ISOLATED_TDD_FIX_AND_INDEPENDENT_REVIEW_IN_PROGRESS"
     },
     {
       "id": "R6",
@@ -103,21 +103,22 @@
       "status": "RECORDED_NOT_REVERIFIED"
     }
   ],
-  "next_step_now": "dispatch independent executor for WuXi AppTec; seal actual complete/partial/failed package; four independent reviews, expert common-root remediation, same-company replay and next fresh holdout",
+  "next_step_now": "complete four independent reviews of sealed WuXi AppTec initial package, expert common-root diagnosis and TDD remediation, same-company new attempt then remaining fresh holdouts",
   "next_step_after_user_resumes": "already_resumed_2026_10_21",
   "budget_snapshot": {
     "observed_on": "2026-10-21",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
-    "tokens": 1504997,
-    "estimated_micro_usd": 615538,
-    "remaining_tokens": 495003,
-    "remaining_micro_usd": 19384462,
+    "tokens": 1544023,
+    "estimated_micro_usd": 625258,
+    "remaining_tokens": 455977,
+    "remaining_micro_usd": 19374742,
     "includes_prior_baseline_and_retained_fx": true,
-    "new_unknown_count": 3,
+    "new_unknown_count": 4,
     "prior_unknown_hold_count": 7,
     "cumulative_cap_tokens": 2000000,
     "cumulative_cap_usd": 20,
-    "cost_kind": "budget proxy and conservative unknown holds, not provider invoice"
+    "cost_kind": "budget proxy and conservative unknown holds, not provider invoice",
+    "latest_native_observation_ref": "r1-holdout-20261021/initial-execution-seal.json"
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -126,7 +127,7 @@
     "minimax": "MiniMax-M3.1-Flash"
   },
   "historical_us_c_model": "MiniMax-M3",
-  "new_paid_calls_in_this_update": 0,
+  "new_paid_calls_in_this_update": 2,
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json"
 }
