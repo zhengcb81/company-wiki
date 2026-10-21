@@ -1,0 +1,41 @@
+{
+  "schema_version": "r1-provider-preflight/1",
+  "observed_at": "2026-10-21T20:54:49.825011+00:00",
+  "providers": [
+    {
+      "provider": "mimo",
+      "model_id": "mimo-v2.6-flash",
+      "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+      "api_key_env": "MIMO_API_KEY",
+      "credential_present": true,
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_completion_tokens",
+      "loaded_by": "Config.load(config.yaml, llm_provider=provider, validation_scope=llm)"
+    },
+    {
+      "provider": "deepseek",
+      "model_id": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "credential_present": true,
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_tokens",
+      "loaded_by": "Config.load(config.yaml, llm_provider=provider, validation_scope=llm)"
+    },
+    {
+      "provider": "minimax",
+      "model_id": "MiniMax-M3.1-Flash",
+      "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+      "api_key_env": "MINIMAX_API_KEY",
+      "credential_present": true,
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_completion_tokens",
+      "loaded_by": "Config.load(config.yaml, llm_provider=provider, validation_scope=llm)"
+    }
+  ],
+  "api_calls": 0,
+  "secret_values_recorded": false
+}

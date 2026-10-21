@@ -1,6 +1,10 @@
 # 当前过程记录（2026-10-21）
 
-**唯一当前状态与接手入口：** [CURRENT_STATUS.md](CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## 2026-10-21 R1恢复：holdout冻结与RF循环准备
+
+用户明确恢复实施。已读取当前PWF、安装的RF审查/RF/FF技能与真实版本；并行只读盘点候选污染、本地原件及旧审查活动。发现既有audit公司池campaign保留NVDA首轮及未完成复验责任，须衔接；DU-BENCH另有已编写gold的holdout，不能自动当作全新盲测。当前未派executor、未新增下载或收费调用。
 
 ## 2026-10-21 文档状态统一
 
@@ -475,3 +479,7 @@ StageA expanded19cases:10FAIL/9PASS5.61s, including explicit running furniture a
 Metadata performance root cause reproduced on actual _prose:16/32members visited288/1088times (quadratic),2FAIL5.05s; no timing-only claim. One owner external-context index and one combined exclusion set now avoid rebuilding whole member/context sets for each paragraph. Reservations account actual membership/section/header-context edges and sort work on the same parent; _candidates returns finite partial if preprocessing cannot reserve. Concentrated88PASS5.59s covers2linear controls/2parent-budget+previous native/prose readiness controls. Source crosspage/antecedent RED remains intentionallyOPEN and unmerged. New design review approved overall owner direction but is not final implementation acceptance.
 
 </details>
+
+### 2026-10-21 R1 N1冻结节点完成
+
+已固定药明康德→药明合联→Snowflake、20项通用检查、真实代码/195份安装内容SHA、母预算和首家隔离scope。配置脚本真正执行通过原生schema校验，0下载/0模型；独立agent终审PASS_PREPARATION_ONLY（r1-holdout-freeze-review-20261021），不是来源或预测通过。母账真累计1,504,997tokens/$0.615538，剩495,003tokens。下一步立即派独立executor完整RF，封存后四路独审及根因专家；旧NVDA和未来八家任务保留。

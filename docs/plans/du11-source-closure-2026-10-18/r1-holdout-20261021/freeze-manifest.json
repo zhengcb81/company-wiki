@@ -1,0 +1,58 @@
+{
+  "schema_version": "r1-freeze-manifest/1",
+  "prepared_at": "2026-10-21T20:52:17.988841+00:00",
+  "identity_state": "pending_owner_resolution_in_first_native_preparation_not_duplicate_resolution",
+  "freeze_kind": "selected companies, time/versions/budget/isolation and public checkpoints; new SourceRef discovery appended naturally",
+  "first_run": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec",
+  "scope_sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+  "files": [
+    {
+      "path": "holdout-selection.md",
+      "sha256": "b986194d60210202fbbaecd12c7c222f5ec8bb60eec64171642fbfe8229a5349",
+      "bytes": 12477
+    },
+    {
+      "path": "holdout-selection.json",
+      "sha256": "ea6d509cb4b5520e5e187d0641e8b93233a0552bb07bc8b8700c645df49781f9",
+      "bytes": 13844
+    },
+    {
+      "path": "implementation.md",
+      "sha256": "3d8dd7463f4db808c106e1f9064a1a1e4b1def7da7db6aa50974ab236c2e5846",
+      "bytes": 24748
+    },
+    {
+      "path": "checkpoints.json",
+      "sha256": "0c4ce32a3f5c9cff67a989dd0e6ca6c9ce434a8547243288ad71f721ae10d20c",
+      "bytes": 14251
+    },
+    {
+      "path": "versions.json",
+      "sha256": "985d9c24aef09942147feed99eaf1a51c9de9db7ecc9ad0b096b6abe3604ba2b",
+      "bytes": 35831
+    },
+    {
+      "path": "budget-observation.json",
+      "sha256": "2b9ec6c28cdc0e5d43b60f6345e44c56623226e41f8f7fbd12e68f72a8c8b023",
+      "bytes": 1746
+    },
+    {
+      "path": "first-run-scope.json",
+      "sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+      "bytes": 9335
+    },
+    {
+      "path": "first-runtime-preparation.json",
+      "sha256": "c178cf3a1ae69ea6493882043b89c44860607bd7a75576dbbc68e1515a4a1f44",
+      "bytes": 5334
+    },
+    {
+      "path": "prepare_isolated_runtime.py",
+      "sha256": "0381b262b77a4b18c8b33728365f79c37b087e41972f911e9469c63c50e89460",
+      "bytes": 11877
+    }
+  ],
+  "runtime_preparation": "native config schema validation only, zero source registration/download/POST",
+  "executor_dispatched": false,
+  "source_oracle_to_executor": false
+}

@@ -6,9 +6,9 @@
 
 ## 当前执行状态与唯一下一步
 
-**代码实施暂停。** 用户本轮只要求整理文档、审查、提交推送，完成后继续暂停；不启动代码重构、测试实验、模型调用、下载或公司审查循环。
+**实施已按用户2026-10-21明确指令恢复。R1进行中：N1冻结节点已独立审查通过（仅准备完成），现在启动第一家独立RF执行。三家公司为药明康德→药明合联→Snowflake；[本轮施工细则](r1-holdout-20261021/implementation.md)、[检查点](r1-holdout-20261021/checkpoints.json)、[进度](r1-holdout-20261021/stage-progress.json)。** 每家公司使用独立executor、四路独立reviewer和根因专家；按大节点修复、复验与提交推送，不增加小节点签收。
 
-用户恢复实施后的下一主线节点是：**冻结独立新公司样本、来源与检查点，利用已有 C 基线准备并开展 holdout 和 revenue-forecast 审查循环。** 先复用现存证据、核对当前接口；样本必须区别于开发过程中反复调试的 CN/HK/US 三源。B2、类型清零和已接收施工卡均不重新派工；不为 CN 最后两条遗漏继续付费实验。
+当前唯一下一主线节点是：**启动药明康德独立executor，真实走RF→FF→CWP及正式摘要，封存后四路独立审查→专家共因修复。** 先复用现存证据、核对当前接口；样本必须区别于开发过程中反复调试的 CN/HK/US 三源。B2、类型清零和已接收施工卡均不重新派工；不为 CN 最后两条遗漏继续付费实验。
 
 ## 已完成及验收边界
 
@@ -35,7 +35,7 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | 独立公司 holdout 与 RF 审查循环未启动 | 冻结新样本/检查点；运行完整流程和独立审查，发现共同根因再修复。已有三源只能叫 development regression |
+| R1 主线 | N1冻结PASS_PREPARATION_ONLY；首家药明康德独立executor待启动 | [冻结终审](review/r1-holdout-freeze-review-20261021.md)已完成；运行完整流程和独立审查，发现共同根因再修复。已有三源只能叫 development regression |
 | R2 实验性补写 | `CW_SUMMARY_COVERAGE_REPAIR` 默认关闭，关闭改动已发布；两次 attempt 路径仍有 `activation-resume` / `ReservationConflictError` | 作为独立课题修复或移除；普通单次恢复已通过与此不矛盾。不得默认开启或把它算已验收 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
@@ -53,7 +53,7 @@
 
 当前模型表：MiMo `mimo-v2.6-flash`、DeepSeek `deepseek-flash`、MiniMax `MiniMax-M3.1-Flash`。10月18日 US 收据使用的是当时的 `MiniMax-M3`；这属于历史事实，不是当前运行配置。
 
-费用口径采用10月18日 ledger 按 database+attempt_id 去重的快照：56 attempts、1,091,219 tokens / $0.278311，**包含**69,046 tokens / $0.031208 unknown hold，不重复加总，也不当作供应商结算金额。上限仍为累计2,000,000 tokens / $20。以后调用前读实际配置和母账；本轮无新调用、无费用。本页不替代运行账本。
+2026-10-21通过既有 `phase_c_runner.mother_totals` 重计：累计 **1,504,997 tokens / $0.615538**（估算及保守预留），剩余 **495,003 tokens / $19.384462**。先前1,091,219 tokens / $0.278311仅为追加账，须加历史基数413,778 tokens / $0.334463和FX预留$0.002764；不能把追加账当总账。旧7笔和新增3笔unknown均保留其预留，不当零、不重复加算。详见[预算观察](r1-holdout-20261021/budget-observation.json)。累计上限仍为2,000,000 tokens / $20，每次实际调用前重读母账及原生费用记录，本观察不另建收费账。
 
 ## 文档导航及状态规则
 
@@ -61,4 +61,4 @@
 - [10月21日专项交接](HANDOFF-2026-10-21.md)保留类型质量节点细节和验证命令；旧 [harness-handoff](review/harness-handoff.md)只作重定向入口。
 - [10月18日最终交付MD/JSON](review/final-handoff-report-20261018.md)属于被取代快照；状态以本页/JSON为准，原运行与审查证据不重签、不改写。
 - 后续完成节点时先更新本页/JSON及当前 `Next Step`，再追加过程；旧正文置于历史区，不再把旧任务标作当前。独立质量审查放在大节点结束，发现问题修完后交接，不添加小节点许可。
-- 本轮文档一致性独立复核见[审查记录](review/status-consolidation-review-20261021.md)及[绑定SHA的JSON](review/status-consolidation-review-20261021.json)。提交/推送结果由本轮Git记录确认，不替换历史代码CI。
+- 先前文档整理检查点646b6937的一致性独立复核见[审查记录](review/status-consolidation-review-20261021.md)及[绑定SHA的JSON](review/status-consolidation-review-20261021.json)。提交/推送结果由本轮Git记录确认，不替换历史代码CI。

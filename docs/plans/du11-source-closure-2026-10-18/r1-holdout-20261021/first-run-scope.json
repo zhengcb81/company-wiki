@@ -1,0 +1,136 @@
+{
+  "schema_version": "rf-audit-run-scope/1",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "mode": "live",
+  "company_query": "药明康德",
+  "market_hint": "CN",
+  "security_code_hint": "603259",
+  "identity_resolution": "single CWP-owned resolution at first actual preparation; store actual qualified identity in execution/identity.json without modifying frozen scope",
+  "as_of_date": "2026-10-21",
+  "forecast_horizon_years": 3,
+  "forecast_periods": "calendar/fiscal periods confirmed from original, normally 2026-2028 for Dec year end",
+  "profile": "P1",
+  "resource_limits": {
+    "max_request_bytes": 1048576,
+    "max_response_bytes": 52428800,
+    "final_artifact_bytes": 52428800,
+    "timeout_seconds": 900,
+    "max_tokens": 100000,
+    "max_cost_usd": "1.00",
+    "max_persistent_bytes": 268435456,
+    "max_scratch_bytes": 536870912,
+    "max_log_bytes": 1048576
+  },
+  "company_total_limit_includes_replays": true,
+  "acquisition_limits": {
+    "max_bytes": 52428800,
+    "timeout_seconds": 180,
+    "max_cost_usd": "0.00"
+  },
+  "batch_model_max_seconds": 600,
+  "repo_roots": {
+    "company_wiki": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "revenue_forecast": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "filing_fetch": "C:/Users/郑曾波/Projects/filing-fetch",
+    "earnings_transcripts": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts",
+    "audit": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+    "stockinfo": "C:/Users/郑曾波/Projects/StockInfoDLSimple/v2-clean-rewrite"
+  },
+  "skill_paths": {
+    "revenue-forecast-audit": "C:/Users/郑曾波/.agents/skills/revenue-forecast-audit",
+    "revenue-forecast": "C:/Users/郑曾波/.agents/skills/revenue-forecast",
+    "filing-fetch": "C:/Users/郑曾波/.agents/skills/filing-fetch"
+  },
+  "python_executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+  "effective_versions_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\versions.json",
+  "config_refs": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\models.yaml",
+      "sha256": "387bdce7ff8b688422311a2f74c6c05b4ed25a3796aa7efb25490a0d1abe3d93"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml",
+      "sha256": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+      "sha256": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_acquisition.yaml",
+      "sha256": "18cf393cb52637e38d28cef28d80e8ef4d2678390c7ac25d156797c3cbd27413"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog_worker.yaml",
+      "sha256": "25a19354733d76434789d507683f7f4e2a5b2abc8fc18238b54c2a03639b5054"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json",
+      "sha256": "b32bc38b0bb125f2ed65703b1910df7cbd4ee0a0a9a75e628b61ea6237b1fda5"
+    }
+  ],
+  "env_refs": [
+    "MIMO_API_KEY",
+    "DEEPSEEK_API_KEY",
+    "MINIMAX_API_KEY"
+  ],
+  "model_configuration": {
+    "owner": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\models.yaml",
+    "loader": "Config.load(existing config.yaml, llm_provider=selected configured provider)",
+    "selected_provider": "mimo",
+    "no_endpoint_or_model_override": true,
+    "generation_configuration_unchanged": true,
+    "pricing": "existing mother preparation provider price_proxy; proxy not invoice"
+  },
+  "budget_source": {
+    "observation": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\budget-observation.json",
+    "metadata": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\metadata.json",
+    "usage": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\usage.jsonl",
+    "owner": "tools/document_understanding_benchmark/phase_c_runner.py:mother_totals",
+    "rule": "recount immediately before each paid batch and export native charges after it; unknown retained; per-company actual reservations across all attempts <=100000tokens/$1, parent cumulative<=2M/$20"
+  },
+  "isolated_roots": {
+    "wiki": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
+    "catalog": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog",
+    "download_companies": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\companies",
+    "automation_db": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\AUTO.sqlite",
+    "work": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\work",
+    "forecast": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast",
+    "registry": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\registry\\publications.jsonl",
+    "temp": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\tmp"
+  },
+  "catalog_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+  "filing_fetch_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json",
+  "source_preparation_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json",
+  "checkpoints_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\checkpoints.json",
+  "selection_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\holdout-selection.json",
+  "scope_policy": [
+    "No provider cost or downloads before freeze reviewed.",
+    "Existing originals readonly via CWP SourceRef; consumers do not enumerate raw dirs.",
+    "No Dayu code edits, no production wiki research output, no other-owner WIP changes.",
+    "All material document types discovered; failed/unavailable are honest outcomes, not N/A by absence.",
+    "Native summary original language, useful business selections; RF actually reads public bundle.",
+    "Capture exact native request and RF input bytes consumed; freeze execution even on failure for four independent reviews.",
+    "Do not read blind source oracle, reviewer drafts or expected numbers.",
+    "Paid POST uncertain means preserve hold and diagnose, no blind retry.",
+    "Only owned test-created files cleaned after all reviews; existing original never deleted."
+  ],
+  "attempt_id": "initial",
+  "state": "FROZEN_REQUEST_BOUNDARY_PREPARED_AWAITING_N1_REVIEW",
+  "runtime_preparation_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\preparation_receipt.json",
+  "company_budget_reconciliation": {
+    "native_operation_index": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\native_operation_index.json",
+    "index_content": "only planned database/run_id/attempt/call refs, never an independent charge ledger",
+    "before_each_paid_call": "export/reconcile every preregistered company database/run via existing append_native, then mother_totals, sum actual dedup native charges/unknown holds across this company, cap next request by both company remainder and mother remainder",
+    "crash_after_post_before_export": "inspect all preregistered native stores and reconcile first; uncertain call keeps full hold and is not blindly replayed"
+  },
+  "oracle_boundary": "source reviewer receives raw refs only first, writes dated hashed source inventory before unblinding selection/summary/forecast; no gold observer injected into executor"
+}

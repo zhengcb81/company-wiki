@@ -1,6 +1,10 @@
 # 当前过程记录（2026-10-21）
 
-**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## 2026-10-21 R1恢复：holdout冻结与RF循环准备
+
+用户明确恢复实施。已读取当前PWF、安装的RF审查/RF/FF技能与真实版本；并行只读盘点候选污染、本地原件及旧审查活动。发现既有audit公司池campaign保留NVDA首轮及未完成复验责任，须衔接；DU-BENCH另有已编写gold的holdout，不能自动当作全新盲测。当前未派executor、未新增下载或收费调用。
 
 ## 2026-10-21 文档状态统一
 
@@ -882,3 +886,7 @@ ROOT F1/F2独审四delta已37PASS2.49s/13最终SHA一致（初审保留），但
 HK根因受控：保持新finish仅放开left_closed仍0/7，实际OPEN_START触发0；原finish7/7。新singleton无句末即defer额外挡1951单位，windows349未变。physical连续性没有edge不能判整个原block语义不完整（可含段落/多句/列表引介），恢复其候选地位并报告standalone/semantic_not_evaluated，不伪造closedwindow；既有多块open尾与限额defer不变。原错层测试/RED历史保留且按责任修正，新89PASS5.26s；实际生产HK同DTO/cap恢复selected7/7、canonical7/7、27.147s、12,098,578/16M单账户、0API/0rawcopy/原件不变。三处CN真实闭合缺口已用p16/17/31、102原单位定位，不称F2/C完成；独审正在最终有限delta复核。
 
 </details>
+
+### 2026-10-21 R1 N1冻结节点完成
+
+已固定药明康德→药明合联→Snowflake、20项通用检查、真实代码/195份安装内容SHA、母预算和首家隔离scope。配置脚本真正执行通过原生schema校验，0下载/0模型；独立agent终审PASS_PREPARATION_ONLY（r1-holdout-freeze-review-20261021），不是来源或预测通过。母账真累计1,504,997tokens/$0.615538，剩495,003tokens。下一步立即派独立executor完整RF，封存后四路独审及根因专家；旧NVDA和未来八家任务保留。

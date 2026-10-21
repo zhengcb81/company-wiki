@@ -1,0 +1,98 @@
+{
+  "schema_version": "r1-isolated-runtime-preparation/1",
+  "entity_key": "CN:603259",
+  "company_query": "药明康德",
+  "market": "CN",
+  "as_of_date": "2026-10-21",
+  "wiki_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
+  "python": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+  "code_distribution": "existing editable CWP; subprocess -m; no code copy or symlink",
+  "catalog_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+  "database": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3",
+  "derived_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\derived",
+  "export_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\index",
+  "automation_db": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\AUTO.sqlite",
+  "work_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\work",
+  "staging_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\staging",
+  "provider_state_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\provider-state\\dayu",
+  "production_config_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog_worker.yaml": "25a19354733d76434789d507683f7f4e2a5b2abc8fc18238b54c2a03639b5054",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\config\\company_wiki.json": "9f692a4f04f24501519b53a017592781f14466c75bf93f9fb7cfed6751e1b24d"
+  },
+  "security_snapshot": {
+    "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\security_master\\cn.json",
+    "sha256": "d9a4860f3b6eb407d32ae813c0d61647bfcb77b2c0d8b159c3f5fc5854ef3301"
+  },
+  "native_source_preparation_reuse_argv": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+    "--request-file",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\requests\\reuse.json",
+    "--result-envelope",
+    "--filing-fetch-root",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+    "--company-wiki-config",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json",
+    "--company-wiki-catalog-config",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+    "--source-reader-receipt-version",
+    "2.2"
+  ],
+  "company_total_limits": {
+    "tokens": 100000,
+    "usd": "1.00",
+    "scope": "all company attempts, not each document"
+  },
+  "budget_owner": "existing mother_totals plus native AUTO reservations; no new budget DB",
+  "initial_owned_files_before_preparation": [],
+  "prepared_baseline_files": [
+    {
+      "path": ".source_catalog/security_master/cn.json",
+      "bytes": 2294033,
+      "sha256": "d9a4860f3b6eb407d32ae813c0d61647bfcb77b2c0d8b159c3f5fc5854ef3301"
+    },
+    {
+      "path": "company_wiki.json",
+      "bytes": 306,
+      "sha256": "b32bc38b0bb125f2ed65703b1910df7cbd4ee0a0a9a75e628b61ea6237b1fda5"
+    },
+    {
+      "path": "config/source_acquisition.yaml",
+      "bytes": 2342,
+      "sha256": "18cf393cb52637e38d28cef28d80e8ef4d2678390c7ac25d156797c3cbd27413"
+    },
+    {
+      "path": "config/source_catalog.yaml",
+      "bytes": 1481,
+      "sha256": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1"
+    },
+    {
+      "path": "config/source_catalog_worker.yaml",
+      "bytes": 2242,
+      "sha256": "25a19354733d76434789d507683f7f4e2a5b2abc8fc18238b54c2a03639b5054"
+    },
+    {
+      "path": "requests/reuse.json",
+      "bytes": 224,
+      "sha256": "b40c85edb5d075d911977c0db6abad144d1d86d16cb696a0ce4bbc513e80050b"
+    },
+    {
+      "path": "rf_filing_fetch.json",
+      "bytes": 101,
+      "sha256": "083dac651498c7a7b355cbb455bf59a14cb394b0de0269359da11e5005ecad8b"
+    }
+  ],
+  "performed": {
+    "config_schema_validation": true,
+    "source_registration": false,
+    "raw_copies": 0,
+    "downloads": 0,
+    "model_calls": 0,
+    "credential_reads": 0
+  }
+}

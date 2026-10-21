@@ -1,0 +1,231 @@
+{
+  "schema_version": "r1-independent-freeze-review/1",
+  "reviewed_at": "2026-10-21T20:55:05.682537+00:00",
+  "reviewer_agent": "/root/r1_freeze_review",
+  "role": "independent_preparation_reviewer",
+  "status": "PASS_PREPARATION_ONLY",
+  "quality_scope": "N1 selected-company/time/version/budget/isolation/checkpoint readiness, not live execution or forecast acceptance",
+  "reference_base": "this_file_directory",
+  "freeze_manifest": {
+    "path": "../r1-holdout-20261021/freeze-manifest.json",
+    "sha256": "19d663ee88c31a667c45a680fd2a20a65d2d12674ad367c504f96021bacd18b0"
+  },
+  "bound_files": [
+    {
+      "path": "../r1-holdout-20261021/holdout-selection.md",
+      "sha256": "b986194d60210202fbbaecd12c7c222f5ec8bb60eec64171642fbfe8229a5349",
+      "bytes": 12477
+    },
+    {
+      "path": "../r1-holdout-20261021/holdout-selection.json",
+      "sha256": "ea6d509cb4b5520e5e187d0641e8b93233a0552bb07bc8b8700c645df49781f9",
+      "bytes": 13844
+    },
+    {
+      "path": "../r1-holdout-20261021/implementation.md",
+      "sha256": "3d8dd7463f4db808c106e1f9064a1a1e4b1def7da7db6aa50974ab236c2e5846",
+      "bytes": 24748
+    },
+    {
+      "path": "../r1-holdout-20261021/checkpoints.json",
+      "sha256": "0c4ce32a3f5c9cff67a989dd0e6ca6c9ce434a8547243288ad71f721ae10d20c",
+      "bytes": 14251
+    },
+    {
+      "path": "../r1-holdout-20261021/versions.json",
+      "sha256": "985d9c24aef09942147feed99eaf1a51c9de9db7ecc9ad0b096b6abe3604ba2b",
+      "bytes": 35831
+    },
+    {
+      "path": "../r1-holdout-20261021/budget-observation.json",
+      "sha256": "2b9ec6c28cdc0e5d43b60f6345e44c56623226e41f8f7fbd12e68f72a8c8b023",
+      "bytes": 1746
+    },
+    {
+      "path": "../r1-holdout-20261021/first-run-scope.json",
+      "sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+      "bytes": 9335
+    },
+    {
+      "path": "../r1-holdout-20261021/first-runtime-preparation.json",
+      "sha256": "c178cf3a1ae69ea6493882043b89c44860607bd7a75576dbbc68e1515a4a1f44",
+      "bytes": 5334
+    },
+    {
+      "path": "../r1-holdout-20261021/prepare_isolated_runtime.py",
+      "sha256": "0381b262b77a4b18c8b33728365f79c37b087e41972f911e9469c63c50e89460",
+      "bytes": 11877
+    }
+  ],
+  "first_run": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec",
+  "live_scope_sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+  "checks": [
+    {
+      "id": "N1-SELECTION",
+      "status": "PASS",
+      "detail": "CN药明康德/HK药明合联/US Snowflake固定；检索范围及SNOW电话会头部/元数据暴露如实披露。未见完整RF/选定年报语义调优仅限已查记录，非绝对全新声明。已用调试公司不算未见样本。",
+      "evidence": [
+        "../r1-holdout-20261021/holdout-selection.md#1-为什么选这三家",
+        "../r1-holdout-20261021/implementation.md#1-唯一入口范围与历史责任"
+      ]
+    },
+    {
+      "id": "N1-CARRIED",
+      "status": "PASS",
+      "detail": "NVDA旧run、24问题/14根因/7工作包及unknown保留；三新公司不能替代原八家下一目标，固定顺序/激活条件保留。",
+      "evidence": [
+        "../r1-holdout-20261021/implementation.md#1-唯一入口范围与历史责任",
+        "../../cross-market-rf-e2e-2026-10-08/followup_eight_company_audit.md"
+      ]
+    },
+    {
+      "id": "N1-VERSIONS",
+      "status": "PASS",
+      "detail": "冻结9文件实际bytes/SHA全部匹配；versions列195份安装技能文件独立重读SHA全部匹配；首run真实scope与副本SHA相同，scope八项配置实际SHA匹配。未把源码CI视作本轮真实端到端验收。",
+      "evidence": [
+        "../r1-holdout-20261021/versions.json",
+        "../r1-holdout-20261021/freeze-manifest.json",
+        "../r1-holdout-20261021/first-run-scope.json"
+      ]
+    },
+    {
+      "id": "N1-BUDGET",
+      "status": "PASS",
+      "detail": "独立只读重计metadata历史基数+usage按database/attempt_id去重56笔+FX：1,504,997tokens/615,538microUSD；新unknown3笔/旧7笔保留，余495,003tokens/19,384,462microUSD。观察输入SHA匹配。公司100k/$1跨文档、run、batch、replay累计，预登记native操作索引、POST后导出前崩溃先重对账，不另建收费账。",
+      "evidence": [
+        "../r1-holdout-20261021/budget-observation.json",
+        "../r1-holdout-20261021/first-run-scope.json#/company_budget_reconciliation",
+        "../r1-holdout-20261021/implementation.md#4-n1-冻结输入和启动准备"
+      ]
+    },
+    {
+      "id": "N1-ISOLATION",
+      "status": "PASS",
+      "detail": "实际配置只有一个可写company_raw指向CN-603259/wiki/companies；生产company_raw经directory+company_raw_v1+readonly复用，Dayu/Dropbox/其余生产根readonly。catalog/derived/export/AUTO/work/staging/providerstate及RF output/registry均指本run隔离作用域；FF连接真正指该wiki。只复制小型配置/公用security快照，无代码/原件复制；初始owned文件清单为空，准备基线7文件均有SHA。",
+      "evidence": [
+        "../r1-holdout-20261021/prepare_isolated_runtime.py",
+        "../r1-holdout-20261021/first-runtime-preparation.json",
+        "../r1-holdout-20261021/first-run-scope.json#/isolated_roots"
+      ]
+    },
+    {
+      "id": "N1-MODELS",
+      "status": "PASS",
+      "detail": "首公司选已配置mimo；endpoint/model/generation仍由Config和config/models.yaml加载，request model:{}，不手填临时模型。密钥只引用变量名，pricing明确预算proxy非发票金额。",
+      "evidence": [
+        "../r1-holdout-20261021/first-run-scope.json#/model_configuration",
+        "../r1-holdout-20261021/implementation.md#4-n1-冻结输入和启动准备"
+      ]
+    },
+    {
+      "id": "N1-ORACLE",
+      "status": "PASS",
+      "detail": "公开20项通用检查先冻结；来源reviewer只收原件/locator先建带时间/SHA的盲inventory，再解盲selection/summary/forecast。具体gold不发executor、不注入gold observer；新取得来源自然append，不加逐文档许可；selected-only不宣称全文召回。",
+      "evidence": [
+        "../r1-holdout-20261021/checkpoints.json",
+        "../r1-holdout-20261021/implementation.md#来源侧预期与输出侧检查分离",
+        "../r1-holdout-20261021/first-run-scope.json#/oracle_boundary"
+      ]
+    },
+    {
+      "id": "N1-EXECUTION",
+      "status": "PASS",
+      "detail": "要求真实RF->FF->CWP source_preparation、完整companion envelope、类型覆盖/价值判断、精选正式摘要/RF真实消费、exact-input capture、原生compute/snapshot。失败照实封存交四审，不自动降为offline或用结构check代替质量。身份/来源期间待executor第一原生准备由责任层确认并append，不编造已验真状态。",
+      "evidence": [
+        "../r1-holdout-20261021/implementation.md#5-每家公司实际执行顺序",
+        "../r1-holdout-20261021/checkpoints.json",
+        "../r1-holdout-20261021/first-run-scope.json#/identity_resolution"
+      ]
+    },
+    {
+      "id": "N1-REVIEWS",
+      "status": "PASS",
+      "detail": "独立executor+storage/fetch/process/analyst四真agent互盲初稿，四报告后专家共因映射/责任层TDD修复；新attempt复跑原公司、有效版本变更重计泛化；只三个大节点，不增加人签/canary/private许可。",
+      "evidence": [
+        "../r1-holdout-20261021/implementation.md#3-角色独占目录和盲审",
+        "../r1-holdout-20261021/implementation.md#6-n2-四审和根因专家的具体验收",
+        "../r1-holdout-20261021/implementation.md#7-n3-从共因修复到真实闭环"
+      ]
+    },
+    {
+      "id": "N1-PRESERVATION",
+      "status": "PASS",
+      "detail": "原有资料只读、原语言不翻译；测试新增下载保留至审查复验后才清理，按初始owned清单恢复并留URL/SHA及删除事实；不删除生产原件/他人WIP、不改Dayu、不做全量恢复演练。普通恢复与R2实验两attempt问题分开。",
+      "evidence": [
+        "../r1-holdout-20261021/implementation.md#8-空间恢复提交和交接",
+        "../r1-holdout-20261021/first-runtime-preparation.json"
+      ]
+    },
+    {
+      "id": "N1-DISPATCH-PREFLIGHT",
+      "status": "PASS",
+      "detail": "已审首executor具体施工卡，无gold答案/结果自签，跨run预算、原生接口、实际3年情景及封存要求与scope一致。ROOT Config.load非秘密preflight给出三家配置模型及credential presence，没有API调用；只证明配置加载观察，不证明provider服务/配额/后续请求成功。",
+      "evidence": [
+        "../r1-holdout-20261021/executor-dispatch.md",
+        "../r1-holdout-20261021/provider-preflight.json"
+      ]
+    }
+  ],
+  "preliminary_findings_resolved": [
+    {
+      "id": "PREP-01",
+      "summary": "SNOW历史暴露表述过于绝对",
+      "resolution": "selection与implementation已明确电话会头部/元数据暴露及检索边界，不再宣称从未看过公司"
+    },
+    {
+      "id": "PREP-02",
+      "summary": "公司限额与AUTO单run额度需跨run/replay协调",
+      "resolution": "scope/implementation明确全部公司操作累计、native索引预登记和崩溃先重对账，不重置预算"
+    },
+    {
+      "id": "PREP-03",
+      "summary": "派工前身份已确认与selection pending口径冲突",
+      "resolution": "统一pending_owner_resolution，由首native preparation所属边界解析并追加实际收据，不为freeze重复解析"
+    },
+    {
+      "id": "PREP-04",
+      "summary": "盲来源及恢复观察边界需具体",
+      "resolution": "明确原文only盲inventory，禁止依赖gold的phase_c_observer进入executor，普通恢复通过不代签R2"
+    }
+  ],
+  "findings": [],
+  "major_findings_remaining": [],
+  "pending_runtime_proofs": [
+    "实际身份、SourceRef/SHA、期间/as-of、正文资格与新鲜度",
+    "真实RF/FF/ET调用和各文档结果",
+    "正式模型摘要、语义增添/遗漏、实际RF消费",
+    "native预算执行/真实费用对账与受控恢复/跨run缓存零POST",
+    "四份独立质量报告、共因修复/同公司复验/新公司泛化及清理"
+  ],
+  "reviewer_operations": {
+    "readonly_originals_and_configs": true,
+    "independent_budget_arithmetic": true,
+    "installed_skill_files_sha_checked": 195,
+    "frozen_files_sha_checked": 9,
+    "code_tests_run": false,
+    "native_preparation_run_by_reviewer": false,
+    "downloads": 0,
+    "model_calls": 0,
+    "credential_values_read": false,
+    "source_code_changes": false
+  },
+  "pre_execution_observation": {
+    "native_catalog_exists": false,
+    "native_auto_exists": false,
+    "download_raw_files": 0,
+    "execution_manifest_exists": false
+  },
+  "conclusion": "N1准备范围无剩余实质阻塞，协调员可按既有授权启动首家独立executor；这不是来源/预测质量PASS、人工许可或对所有后续输入的保证。保持pending运行证明，发现实际故障正常进入共因修复。",
+  "supplemental_bound_files": [
+    {
+      "path": "../r1-holdout-20261021/executor-dispatch.md",
+      "sha256": "342caa1423240c454c205a573f870bc8252706dfa10142291acdff4090fff555",
+      "bytes": 5882
+    },
+    {
+      "path": "../r1-holdout-20261021/provider-preflight.json",
+      "sha256": "4a022f36d1271a3ab0f616a86874c60b140e395908cd2d982cba3a8754fcdc83",
+      "bytes": 1480
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "holdout-budget-observation/1",
+  "observed_at": "2026-10-21T20:45:24.530759+00:00",
+  "accounting_owner": "tools/document_understanding_benchmark/phase_c_runner.py:mother_totals",
+  "metadata_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\metadata.json",
+  "usage_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\usage.jsonl",
+  "authorization_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\budget_authorization.md",
+  "inputs_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\metadata.json": "638776f2c61d970ee432af60abf29ce3d4c9ccd0bd14eceb00eb8d7b07eda5b9",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\usage.jsonl": "c35ed642a6090a014d1fc545cc9171aece54462284b3dd2b599c0a308233d0a7"
+  },
+  "totals": {
+    "charged_tokens": 1504997,
+    "charged_micro_usd": 615538,
+    "new_unknown_count": 3,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "remaining_tokens": 495003,
+  "remaining_micro_usd": 19384462,
+  "unknown_policy": "all prior7/new3 holds retained; unknown is not zero; unrelated bounded operations may continue within true cumulative cap",
+  "per_company_upper_reservation": {
+    "tokens": 100000,
+    "micro_usd": 1000000
+  },
+  "pay_before_each_call": "recount existing owner/native ledgers; reserve actual prompt+output bound before POST; append/export native charge to existing usage; never retry an uncertain prior POST",
+  "not_a_new_charge_ledger": true
+}

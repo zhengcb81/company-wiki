@@ -1,0 +1,25 @@
+{
+  "schema_version": "r1-holdout-stage-progress/1",
+  "mode": "stratified_holdout_not_random_redraw",
+  "ordered_samples": [
+    "CN:WUXI_APPTEC",
+    "HK:WUXI_XDC",
+    "US:SNOW"
+  ],
+  "current_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
+  "current_attempt": "initial",
+  "status": "N1_PASS_PREPARATION_ONLY_EXECUTOR_STARTING",
+  "source_writes_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
+  "old_campaign_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\company-pool-cycle-2026-10-09\\campaign.json",
+  "old_nvda_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pool-20261009-001-us-nvda",
+  "old_campaign_modified": false,
+  "next_eight_company_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\followup_eight_company_audit.md",
+  "budget_ref": "budget-observation.json",
+  "clean_streak": [],
+  "current_company_paid_operations": 0,
+  "created_at": "2026-10-21T20:50:18.262853+00:00",
+  "scope_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+  "scope_sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+  "preparation_ref": "first-runtime-preparation.json",
+  "freeze_review_ref": "../review/r1-holdout-freeze-review-20261021.json"
+}

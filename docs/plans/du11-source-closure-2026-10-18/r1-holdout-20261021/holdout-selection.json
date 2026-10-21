@@ -1,0 +1,231 @@
+{
+  "schema_version": "company-wiki-r1-holdout-selection/1",
+  "selection_state": "SELECTED_IDENTITY_AND_SOURCE_VALIDATION_PENDING",
+  "selection_date": "2026-10-21",
+  "plan_id": "du11-source-closure-2026-10-18",
+  "phase": "R1_NEW_COMPANY_GENERALIZATION",
+  "reference_base": "company-wiki_repository_root",
+  "canonical_status_ref": "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json",
+  "human_readable_ref": "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/holdout-selection.md",
+  "selection_frozen": true,
+  "execution_dispatched": false,
+  "identity_validated": false,
+  "source_bytes_revalidated": false,
+  "source_publication_and_period_validated": false,
+  "scope_as_of": {
+    "proposed_date": "2026-10-21",
+    "exact_timestamp": null,
+    "state": "ROOT_EXECUTION_SCOPE_PENDING",
+    "rule": "Use publication evidence and issuer report periods; filenames, mtimes, download dates and sidecar fiscal_year are not authoritative."
+  },
+  "executor_visibility": {
+    "contains_expected_gold_facts": false,
+    "contains_expected_revenue_or_coverage_answers": false,
+    "contains_specific_gold_file_paths": false,
+    "reviewer_content_checkpoints": "ROOT_FREEZES_SEPARATELY_NOT_EXECUTOR_INPUT"
+  },
+  "inventory_method": {
+    "actions": ["read_only_path_and_size_inventory", "read_existing_planning_metadata", "read_existing_source_metadata"],
+    "searched_roots": [
+      "docs/plans",
+      ".planning",
+      "tools/document_understanding_benchmark",
+      "../revenue-forecast-audit/docs/plans",
+      "../revenue-forecast-audit/runs"
+    ],
+    "planning_search_limit": ".planning Markdown/JSON at most 4 MiB per file; not every hidden cache or agent session was inspected.",
+    "negative_evidence_limit": "No located full RF run or document semantic tuning for the selected annuals; not a global claim of never-seen names or documents.",
+    "source_catalog_config_ref": "config/source_catalog.yaml",
+    "consumption_rule": "Paths below are storage inventory hints. Consumers must obtain SourceRef/SourceExport and validated reads through CWP; no consumer path branching."
+  },
+  "samples": [
+    {
+      "selection_id": "r1-cn-wuxi-apptec",
+      "company_name_requested": "药明康德",
+      "market_requested": "CN",
+      "canonical_entity": null,
+      "security_identity": null,
+      "source_refs": [],
+      "prior_exposure_state": "NO_LOCATED_FULL_RF_OR_SELECTED_DOCUMENT_SEMANTIC_TUNING",
+      "selection_purpose": ["existing_original_reuse", "annual_interim_quarterly_and_ipo_reading", "discover_newer_2026_disclosures"],
+      "local_original_candidates": [
+        {
+          "path_ref": "companies/药明康德/raw/financial_reports/药明康德：2025年年度报告.pdf",
+          "observed_bytes": 1608226,
+          "kind_hint": "annual",
+          "period_hint": "2025",
+          "sha256_verified_this_freeze": null
+        },
+        {
+          "path_ref": "companies/药明康德/raw/financial_reports/药明康德：2025年半年度报告.pdf",
+          "observed_bytes": 3102910,
+          "kind_hint": "interim",
+          "period_hint": "2025-H1",
+          "sha256_verified_this_freeze": null
+        },
+        {
+          "path_ref": "companies/药明康德/raw/financial_reports/药明康德：2026年第一季度报告.pdf",
+          "observed_bytes": 297174,
+          "kind_hint": "quarterly",
+          "period_hint": "2026-Q1",
+          "sha256_verified_this_freeze": null
+        },
+        {
+          "path_ref": "companies/药明康德/raw/prospectus/药明康德：首次公开发行股票招股说明书.pdf",
+          "observed_bytes": 15688293,
+          "kind_hint": "ipo_prospectus",
+          "period_hint": "historical_requires_body_validation",
+          "sha256_verified_this_freeze": null
+        }
+      ],
+      "discovery_required": [
+        "2026 interim: not located in this inventory; discover official availability",
+        "later quarterly disclosure available by as-of; do not infer Q3 publication from quarter end",
+        "material investor relations, earnings communications and financing explanations"
+      ],
+      "cross_company_guard": "Do not mix WuXi AppTec, WuXi Biologics and WuXi XDC originals."
+    },
+    {
+      "selection_id": "r1-hk-wuxi-xdc",
+      "company_name_requested": "药明合联",
+      "market_requested": "HK",
+      "canonical_entity": null,
+      "security_identity": null,
+      "source_refs": [],
+      "prior_exposure_state": "NO_LOCATED_FULL_RF_OR_DOCUMENT_SEMANTIC_TUNING",
+      "selection_purpose": ["genuinely_missing_local_official_documents", "official_hk_acquisition_and_cwp_ingestion", "annual_interim_and_ipo_reading"],
+      "local_original_candidates": [],
+      "local_observations": [
+        {"path_ref": "companies/药明合联", "exists": false},
+        {"path_ref": "../../Dropbox/Stock/医药与健康/制药/药明合联", "exists": true, "observed_child_count": 0}
+      ],
+      "discovery_required": [
+        "resolve issuer from official evidence and search all configured roots and aliases before acquisition",
+        "latest published annual report and 2026 interim report",
+        "official IPO prospectus and material business, earnings or IR communications",
+        "material financing and project-use documents if an actual event exists"
+      ],
+      "cross_company_guard": "A similarly named WuXi company is not the selected issuer."
+    },
+    {
+      "selection_id": "r1-us-snowflake",
+      "company_name_requested": "Snowflake",
+      "market_requested": "US",
+      "canonical_entity": null,
+      "security_identity": null,
+      "source_refs": [],
+      "prior_exposure_state": "LIMITED_PROVENANCE_AND_TEMP_RENDER_EXPOSURE_NO_LOCATED_FULL_RF_OR_SELECTED_10K_SEMANTIC_TUNING",
+      "selection_purpose": ["reuse_dayu_originals_via_existing_cwp_virtual_storage", "sec_html_annual_and_quarterly_reading", "et_original_language_txt_reuse_and_new_period_discovery"],
+      "company_directory_observed": {"path_ref": "companies/Snowflake", "exists": false},
+      "local_original_candidates": [
+        {
+          "path_ref": "../dayu-agent/workspace/portfolio/SNOW/filings/fil_0001640147-26-000008/snow-20260131.htm",
+          "metadata_ref": "../dayu-agent/workspace/portfolio/SNOW/filings/fil_0001640147-26-000008/meta.json",
+          "observed_bytes": 3145538,
+          "metadata_form_type": "10-K",
+          "metadata_accession": "0001640147-26-000008",
+          "metadata_report_date": "2026-01-31",
+          "metadata_filing_date": "2026-03-20",
+          "metadata_fiscal_year": 2026,
+          "sha256_verified_this_freeze": null,
+          "required_action": "VALIDATE_AND_REUSE_THROUGH_CWP_NOT_REDOWNLOAD"
+        },
+        {
+          "path_ref": "../dayu-agent/workspace/portfolio/SNOW/filings/fil_0001640147-26-000030/snow-20260430.htm",
+          "metadata_ref": "../dayu-agent/workspace/portfolio/SNOW/filings/fil_0001640147-26-000030/meta.json",
+          "observed_bytes": 2110500,
+          "metadata_form_type": "10-Q",
+          "metadata_accession": "0001640147-26-000030",
+          "metadata_report_date": "2026-04-30",
+          "metadata_filing_date": "2026-05-29",
+          "metadata_fiscal_year": 2026,
+          "fiscal_label_validation": "VERIFY_AGAINST_BODY_DO_NOT_COPY_SIDECAR_LABEL",
+          "sha256_verified_this_freeze": null,
+          "required_action": "VALIDATE_AND_REUSE_THROUGH_CWP_NOT_REDOWNLOAD"
+        }
+      ],
+      "et_original_language_candidates": {
+        "directory_ref": "../earnings-transcripts/earnings-transcripts/transcripts/SNOW",
+        "observed_earnings_call_txt_count": 8,
+        "cwp_configured_root": false,
+        "selected_examples": [
+          {"path_ref": "../earnings-transcripts/earnings-transcripts/transcripts/SNOW/SNOW_Q1_2027_earnings_call.txt", "observed_bytes": 54512},
+          {"path_ref": "../earnings-transcripts/earnings-transcripts/transcripts/SNOW/SNOW_Q4_2026_earnings_call.txt", "observed_bytes": 43959}
+        ],
+        "required_action": "FF_INVOKES_ET_REUSE_EXTRACTION_PORT_THEN_CWP_REGISTERS; no direct RF read, translation or bilingual-derived original substitution",
+        "source_provenance_rule": "Existing third-party TXT does not become official by relabeling. A newly acquired official version is a distinct source/version."
+      },
+      "prior_exposure_evidence_refs": [
+        "docs/plans/narrative-evidence-pilot-2026-09-26/provider_cost_and_capability_2026-09-27.md",
+        "docs/plans/narrative-evidence-pilot-2026-09-26/earnings_transcripts_vs_platforms_2026-09-27.md",
+        ".planning/shared-reading-production/du7-et-reception/review/test-hygiene-handoff.json"
+      ],
+      "prior_exposure_explanation": "Historical TXT header and official-source provenance comparison plus an owned temporary render test mention SNOW; no located selected annual/quarterly semantic gold or full RF audit run. Do not claim literal never-seen company.",
+      "discovery_required": [
+        "latest 10-Q published after the local 2026-04-30 report and on or before as-of",
+        "latest earnings release, call, presentation and material 8-K before as-of",
+        "verify fiscal year and quarter against document body and issuer calendar"
+      ],
+      "external_project_immutability": "Dayu code, source originals and metadata remain unchanged."
+    }
+  ],
+  "excluded_as_unseen_company": [
+    {"company": "中微公司、名创优品、微软等既有种子", "reason": "Prior real summaries, debugging and source replay; development regression, not unseen company."},
+    {"company": "阿里巴巴", "reason": "FY2023 annual and 2019 IPO source reading/semantic annotation and correction recorded; a newer annual does not erase company exposure."},
+    {"company": "小米集团", "reason": "HK annual CID corruption diagnosis used in development."},
+    {"company": "MongoDB", "reason": "Same FY2026 10-K already appears in historical annotation/HTML diagnosis."}
+  ],
+  "contamination_metadata_refs": [
+    "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+    "docs/plans/document-understanding-2026-10-13/parallel/du10-2026-10-17/goldset/findings.md",
+    "tools/document_understanding_benchmark/holdout.json"
+  ],
+  "document_coverage_disposition": {
+    "allowed_states": ["REUSED_VALIDATED", "ACQUIRED_VALIDATED", "NOT_APPLICABLE_WITH_EVIDENCE", "BLOCKED", "NOT_RUN"],
+    "na_rules": {
+      "annual": "Not N/A for these three operating listed issuers solely because no local original exists.",
+      "interim_quarterly": "HK absent quarterly disclosure may be N/A after issuer disclosure discovery; US 10-Q carries interim periods, so a separate duplicated half-year report is unnecessary.",
+      "call_ir_presentation": "N/A only for a genuinely unpublished document kind with recorded official/configured discovery scope; tool, entitlement, paywall and configuration failures are BLOCKED.",
+      "ipo": "Historical US prospectus may be non-incremental with explicit current-source replacement rationale; CN/HK selected existing or relevant IPO documents require substantive business coverage, not automatic skip for length.",
+      "equity_convertible_financing": "N/A only after event discovery finds no relevant published material event, or explicit business relevance assessment; material expansion/new-business financing explanations are included.",
+      "generic_formatted_documents": "A documented low-value classification may skip deep slicing while preserving source and reason; not a claim full reading passed."
+    },
+    "freshness_rule": "Discover 2026 latest interim/quarterly communications actually published by as-of; never fabricate an expected report or use an older period as latest.",
+    "financial_api_rule": "Structured financial tools may provide clean table data; they do not replace original business narratives, conditions and risks."
+  },
+  "preserved_obligations": {
+    "fixed_eight_company_followup": {
+      "coordination_ref": "docs/plans/cross-market-rf-e2e-2026-10-08/followup_eight_company_audit.md",
+      "order": ["阿里巴巴", "小米集团", "药明生物", "药明康德", "药明合联", "微软", "Snowflake", "MongoDB"],
+      "status": "REGISTERED_NOT_ACTIVATED_PER_EXISTING_COORDINATION_RECORD",
+      "all_eight_required": true,
+      "holdout_satisfies_fixed_followup_slots": false,
+      "three_clean_stop_rule_applies": false
+    },
+    "old_pool_nvda": {
+      "campaign_ref": "../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/campaign.json",
+      "run_ref": "../revenue-forecast-audit/runs/pool-20261009-001-us-nvda",
+      "status": "OLD_REVIEW_REMEDIATION_AND_FROZEN_REPLAY_OBLIGATION_PRESERVED",
+      "observed_clean_streak": [],
+      "reset_seed_or_replace_old_run": false,
+      "engineering_ci_substitutes_research_acceptance": false
+    }
+  },
+  "next_action_owner": "ROOT",
+  "next_action": "Validate entity and source versions/bytes/dates, fix exact as-of and effective versions/configuration, reconcile cumulative budget, freeze isolated roots and reviewer-only checkpoints, conduct one independent major-node freeze review, then dispatch actual RF executor and four reviewers.",
+  "first_run_integrity": "Preserve initial failures and selection; post-fix replay is regression, not retroactive clean first holdout.",
+  "this_documentation_work": {
+    "owned_files": [
+      "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/holdout-selection.md",
+      "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/holdout-selection.json"
+    ],
+    "downloads": 0,
+    "model_calls": 0,
+    "paid_cost_usd": 0,
+    "tests_run": 0,
+    "original_contents_modified": false,
+    "credentials_read": false,
+    "source_body_read_in_this_selection_task": false,
+    "shared_pwf_modified": false
+  }
+}

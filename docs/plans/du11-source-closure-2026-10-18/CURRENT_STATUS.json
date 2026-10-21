@@ -2,8 +2,8 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-21",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "OPEN_IMPLEMENTATION_PAUSED",
-  "current_authorized_scope": "documentation_reconciliation_review_commit_push_then_stop",
+  "overall_status": "OPEN_R1_N1_PASSED_EXECUTOR_STARTING",
+  "current_authorized_scope": "freeze_new_company_holdout_then_execute_review_remediate_replay_full_RF_audit_loop",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -23,7 +23,11 @@
       "status": "PASS_PUBLISHED",
       "review_test_count": 109,
       "later_engineering_test_count": 110,
-      "source_replay_hits": {"cn": "10/10", "hk": "7/7", "us": "8/8"},
+      "source_replay_hits": {
+        "cn": "10/10",
+        "hk": "7/7",
+        "us": "8/8"
+      },
       "is_holdout": false,
       "receipt_code": "2a80acf6"
     },
@@ -48,33 +52,81 @@
   },
   "content": {
     "policy": "correct_approximate_numbers_allowed_incorrect_numbers_forbidden",
-    "cn": {"coverage": "8/10", "critical": "5/7", "status": "USER_ACCEPTED_LIMITED_CLOSEOUT"},
-    "hk": {"coverage": "7/7", "critical": "6/6", "status": "PASS", "review": "review/c-content-review-hk-20261018.md"},
-    "us": {"review_coverage": "2/8", "additional_partial_facts": 1, "other_experiment_range": "2-4/8", "status": "FACT_OMISSION_REMAINS_OPEN"}
+    "cn": {
+      "coverage": "8/10",
+      "critical": "5/7",
+      "status": "USER_ACCEPTED_LIMITED_CLOSEOUT"
+    },
+    "hk": {
+      "coverage": "7/7",
+      "critical": "6/6",
+      "status": "PASS",
+      "review": "review/c-content-review-hk-20261018.md"
+    },
+    "us": {
+      "review_coverage": "2/8",
+      "additional_partial_facts": 1,
+      "other_experiment_range": "2-4/8",
+      "status": "FACT_OMISSION_REMAINS_OPEN"
+    }
   },
   "remaining": [
-    {"id": "R1", "task": "freeze independent-company holdout and run RF audit loop", "status": "NOT_STARTED", "mainline": true},
-    {"id": "R2", "task": "repair or remove experimental two-attempt coverage-repair recovery", "status": "DEFAULT_OFF_RESERVATION_CONFLICT_OPEN"},
-    {"id": "R3", "task": "index portable evidence needed for new-company replay", "status": "CORE_SUMMARIES_TRACKED_FULL_LIVE_TREE_LOCAL"},
-    {"id": "R4", "task": "complexity lint config duplication module boundaries coverage and exception debt", "status": "BACKLOG_NO_NEW_GATES_AUTHORED"},
-    {"id": "R5", "task": "triage two existing local contract failures", "status": "OPEN"},
-    {"id": "R6", "task": "cross-repository full-suite and cleanup limitations", "status": "RECORDED_NOT_REVERIFIED"}
+    {
+      "id": "R1",
+      "task": "freeze independent-company holdout and run RF audit loop",
+      "status": "N1_PASS_PREPARATION_ONLY_FIRST_EXECUTOR_STARTING",
+      "mainline": true
+    },
+    {
+      "id": "R2",
+      "task": "repair or remove experimental two-attempt coverage-repair recovery",
+      "status": "DEFAULT_OFF_RESERVATION_CONFLICT_OPEN"
+    },
+    {
+      "id": "R3",
+      "task": "index portable evidence needed for new-company replay",
+      "status": "CORE_SUMMARIES_TRACKED_FULL_LIVE_TREE_LOCAL"
+    },
+    {
+      "id": "R4",
+      "task": "complexity lint config duplication module boundaries coverage and exception debt",
+      "status": "BACKLOG_NO_NEW_GATES_AUTHORED"
+    },
+    {
+      "id": "R5",
+      "task": "triage two existing local contract failures",
+      "status": "OPEN"
+    },
+    {
+      "id": "R6",
+      "task": "cross-repository full-suite and cleanup limitations",
+      "status": "RECORDED_NOT_REVERIFIED"
+    }
   ],
-  "next_step_now": "review and publish documentation reconciliation then remain paused",
-  "next_step_after_user_resumes": "freeze new-company source fixtures and checkpoints, reuse current C evidence, then run holdout and RF audit loop",
+  "next_step_now": "dispatch independent executor for WuXi AppTec; seal actual complete/partial/failed package; four independent reviews, expert common-root remediation, same-company replay and next fresh holdout",
+  "next_step_after_user_resumes": "already_resumed_2026_10_21",
   "budget_snapshot": {
-    "date": "2026-10-18",
-    "dedup_key": "database+attempt_id",
-    "attempts": 56,
-    "tokens": 1091219,
-    "estimated_micro_usd": 278311,
-    "unknown_hold_included": {"tokens": 69046, "estimated_micro_usd": 31208},
-    "live_ledger_recounted_here": false,
+    "observed_on": "2026-10-21",
+    "observation_ref": "r1-holdout-20261021/budget-observation.json",
+    "tokens": 1504997,
+    "estimated_micro_usd": 615538,
+    "remaining_tokens": 495003,
+    "remaining_micro_usd": 19384462,
+    "includes_prior_baseline_and_retained_fx": true,
+    "new_unknown_count": 3,
+    "prior_unknown_hold_count": 7,
     "cumulative_cap_tokens": 2000000,
-    "cumulative_cap_usd": 20
+    "cumulative_cap_usd": 20,
+    "cost_kind": "budget proxy and conservative unknown holds, not provider invoice"
   },
   "provider_configuration_owner": "config/models.yaml",
-  "models_at_documentation_date": {"mimo": "mimo-v2.6-flash", "deepseek": "deepseek-flash", "minimax": "MiniMax-M3.1-Flash"},
+  "models_at_documentation_date": {
+    "mimo": "mimo-v2.6-flash",
+    "deepseek": "deepseek-flash",
+    "minimax": "MiniMax-M3.1-Flash"
+  },
   "historical_us_c_model": "MiniMax-M3",
-  "new_paid_calls_in_this_update": 0
+  "new_paid_calls_in_this_update": 0,
+  "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
+  "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json"
 }
