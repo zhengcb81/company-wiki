@@ -10,7 +10,7 @@ from dataclasses import dataclass, fields
 from pathlib import Path
 import json
 import sqlite3
-from typing import Callable, TypeVar
+from typing import Callable, TypeVar, TYPE_CHECKING
 
 from company_wiki._id_scope import normalize_id_scope
 
@@ -21,6 +21,10 @@ from .store import (
     ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
     _require_active_attempt, _set_runtime_gate_in_transaction,
 )
+
+
+if TYPE_CHECKING:
+    from .terminal_receipt_contracts import FinalArtifactPin
 
 
 _MAX_INT = (1 << 63) - 1
@@ -37,6 +41,10 @@ class RunConflictError(NarrativeRunError):
 
 class ReservationConflictError(NarrativeRunError):
     code = "reservation_conflict"
+
+
+class FinalOutputOwnerUnresolved(NarrativeRunError):
+    code = "LEGACY_FINAL_OUTPUT_OWNER_UNRESOLVED"
 
 
 class RunBudgetExceededError(NarrativeRunError):
@@ -1113,6 +1121,151 @@ class NarrativeRunStore:
             connection, run_id=run_id, attempt_id=attempt_id, output_bytes=output_bytes,
             output_sha256=output_sha256, settled_at=settled_at))
 
+    def settle_published_summary_output(
+        self, *, run_id: str, summary_job_id: str, verify_job_id: str,
+        final_artifact: FinalArtifactPin, settled_at: str,
+    ) -> ReservationRecord | None:
+        """Settle only the model operation actually used by the final DAG.
+
+        The application has opened the exact visible artifact. AUTO proves its
+        acknowledged effect and successful summary in this same transaction.
+        A retry's failed zero output is immutable; it is never another final
+        output owner merely because the provider call had no transport error.
+        """
+        from .terminal_receipt_contracts import FinalArtifactPin
+        if not isinstance(final_artifact, FinalArtifactPin):
+            raise TypeError("final_artifact must be FinalArtifactPin")
+        require_utc_timestamp(settled_at)
+
+        def write(connection):
+            run = _required_run(connection, run_id)
+            pin = final_artifact
+            jobs = {}
+            for job_id, kind in ((summary_job_id, "source.narrative_summarize"),
+                                 (verify_job_id, "source.narrative_verify")):
+                row = connection.execute(
+                    "SELECT j.job_id,j.job_type,j.status,j.created_from_event_id,j.input_hash,"
+                    "j.handler_version,r.input_hash AS frozen_input,r.handler_version AS frozen_handler "
+                    "FROM jobs j JOIN narrative_run_jobs r ON r.job_id=j.job_id "
+                    "WHERE r.run_id=? AND j.job_id=?", (run_id, job_id),
+                ).fetchone()
+                if (row is None or row["job_type"] != kind or row["status"] != "succeeded"
+                        or (row["input_hash"], row["handler_version"]) !=
+                        (row["frozen_input"], row["frozen_handler"])):
+                    raise RunScopeError("published output does not own its immutable run jobs")
+                jobs[kind] = row
+            if (jobs["source.narrative_summarize"]["created_from_event_id"] !=
+                    jobs["source.narrative_verify"]["created_from_event_id"] or not connection.execute(
+                        "SELECT 1 FROM job_dependencies WHERE job_id=? AND depends_on_job_id=? "
+                        "AND required_status='succeeded'", (verify_job_id, summary_job_id)).fetchone()):
+                raise RunScopeError("verification did not depend on this summary")
+            effect = connection.execute(
+                "SELECT job_id,effect_type,target,status,intended_after_hash,actual_after_hash,verified_at "
+                "FROM effects WHERE effect_id=?", (pin.effect_id,),
+            ).fetchone()
+            if (effect is None or tuple(effect)[:6] != (verify_job_id, "narrative_bundle.publish",
+                    pin.effect_target, "verified", pin.artifact_sha256, pin.artifact_sha256)
+                    or effect["verified_at"] is None or not connection.execute(
+                        "SELECT 1 FROM outbox WHERE effect_id=? AND status='delivered' "
+                        "AND lease_token IS NULL AND lease_until IS NULL", (pin.effect_id,)).fetchone()):
+                raise ReservationConflictError("published output does not match its acknowledged final effect")
+            results = {}
+            for job_id in (summary_job_id, verify_job_id):
+                row = connection.execute(
+                    "SELECT attempt_id,outcome,finished_at,result_json FROM attempts WHERE job_id=? "
+                    "ORDER BY attempt_no DESC,attempt_id DESC LIMIT 1", (job_id,),
+                ).fetchone()
+                if row is None or row["outcome"] != "succeeded" or row["finished_at"] is None:
+                    raise RunConflictError("published DAG has no final successful attempt")
+                try:
+                    result = HandlerResult.from_dict(json.loads(row["result_json"]))
+                except (TypeError, ValueError) as exc:
+                    raise RunConflictError("published DAG result is invalid") from exc
+                if result.outcome is not HandlerOutcome.SUCCEEDED or result.error is not None:
+                    raise RunConflictError("published DAG result is not successful")
+                results[job_id] = (row["attempt_id"], result)
+            summary_attempt_id, summary_result = results[summary_job_id]
+            _, verified = results[verify_job_id]
+            from .terminal_receipt_contracts import is_terminal_receipt
+            compacted = is_terminal_receipt(verified.result)
+            if compacted != is_terminal_receipt(summary_result.result):
+                raise RunConflictError("published DAG compaction is incomplete")
+            if compacted:
+                for job_id, (attempt_id, result) in results.items():
+                    if (dict(result.result.get("final_artifact", {})) != pin.to_dict()
+                            or result.result.get("run_id") != run_id
+                            or result.result.get("job_id") != job_id
+                            or result.result.get("attempt_id") != attempt_id):
+                        raise ReservationConflictError("compacted output is bound to a different final pin")
+            else:
+                body = canonical_json(verified.to_dict()["result"]).encode("utf-8")
+                import hashlib
+                if (len(body), hashlib.sha256(body).hexdigest()) != (pin.byte_size, pin.artifact_sha256):
+                    raise ReservationConflictError("verification result differs from exact final bytes")
+                if len(verified.effects) != 1 or verified.effects[0].effect_id != pin.effect_id:
+                    raise RunConflictError("successful verification did not emit the final effect")
+            records = tuple(ReservationRecord(**dict(row)) for row in connection.execute(
+                f"SELECT {_RESERVATION_COLUMNS} FROM narrative_model_reservations WHERE run_id=? AND job_id=?",
+                (run_id, summary_job_id)).fetchall())
+            if compacted:
+                if not records:
+                    return None  # Source-only skip / historical unmetered handler.
+                matching = [r for r in records if (r.output_bytes, r.output_sha256) ==
+                            (pin.byte_size, pin.artifact_sha256)]
+                if len(matching) != 1:
+                    raise FinalOutputOwnerUnresolved("compacted output has no unique durable final owner")
+                return matching[0]
+            from .narrative_summary_execution import parse_summary_job_result
+            try:
+                summary = parse_summary_job_result(summary_result.result)
+            except (TypeError, ValueError) as exc:
+                raise RunConflictError("successful summary result is invalid") from exc
+            summary_wire = summary.to_dict()
+            if verified.to_dict()["result"].get("summary") != {
+                    key: summary_wire[key] for key in ("status", "translate", "draft", "model")}:
+                raise RunConflictError("verification consumed a different successful summary")
+            if not records:
+                return None  # Existing unmetered runtime remains readable.
+            expected_prompt = model_prompt_version(run.binding_json, job_id=summary_job_id,
+                                                   default_prompt=run.prompt_version)
+            if (summary.model is None or summary.model.model_id != run.model_id
+                    or summary.model.prompt_version != expected_prompt):
+                raise RunConflictError("final model identity differs from its immutable run")
+            # A successful attempt with its own provider receipt owns that
+            # operation. This is not a choice of the latest reservation.
+            own = next((r for r in records if r.attempt_id == summary_attempt_id), None)
+            if (own is not None and own.error_code is None
+                    and own.response_sha256 == summary.model.response_sha256):
+                owner = own
+            else:
+                # Ordinary paid recovery admits exactly one prior paid pin.
+                # Multiple historical operations are deliberately not guessed
+                # from a coincidentally equal response SHA.
+                from .narrative_paid_response import PaidResponsePin, PaidResponseError
+                charged = [r for r in records if not (
+                    r.usage_status == "known" and r.input_tokens == r.output_tokens == 0
+                    and r.paid_response_json is None and r.response_sha256 is None)]
+                if len(charged) != 1 or charged[0].paid_response_json is None:
+                    raise FinalOutputOwnerUnresolved("successful summary has no provable paid output owner")
+                owner = charged[0]
+                try:
+                    paid_pin = PaidResponsePin.from_json(owner.paid_response_json)
+                except PaidResponseError as exc:
+                    raise FinalOutputOwnerUnresolved("paid replay pin is invalid") from exc
+                if (owner.error_code is not None or owner.response_sha256 != summary.model.response_sha256
+                        or paid_pin.request_sha256 != owner.request_sha256
+                        or paid_pin.model_id != run.model_id or paid_pin.prompt_version != expected_prompt):
+                    raise FinalOutputOwnerUnresolved("paid replay does not prove the final output owner")
+            if any(r.output_bytes and r.attempt_id != owner.attempt_id for r in records):
+                raise ReservationConflictError("another operation already owns this final output")
+            if owner.output_bytes == 0:
+                raise FinalOutputOwnerUnresolved("legacy final belongs to an immutable failed output slot")
+            return _settle_output_in_transaction(connection, run_id=run_id,
+                attempt_id=owner.attempt_id, output_bytes=pin.byte_size,
+                output_sha256=pin.artifact_sha256, settled_at=settled_at)
+
+        return self._write(write)
+
     def block_run(self, run_id: str, *, error_code: str, updated_at: str) -> RunRecord:
         _name(error_code, "error_code")
         require_utc_timestamp(updated_at)
@@ -1131,6 +1284,7 @@ __all__ = [
     "RunConflictError",
     "RunBudgetExceededError",
     "ReservationConflictError",
+    "FinalOutputOwnerUnresolved",
     "RunScopeError",
     "RunOwnershipError",
     "ModelUsage",

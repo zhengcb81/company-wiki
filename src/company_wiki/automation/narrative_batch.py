@@ -52,6 +52,7 @@ from .scheduler import AutomationScheduler
 from .store import AutomationStore, RuntimeGateClosedError
 from .supervisor import AutomationSupervisor, SupervisorConfig, profile_slots
 from .terminal_receipt_contracts import FinalArtifactPin
+from .narrative_run_store import FinalOutputOwnerUnresolved
 from .terminal_receipts import compact_terminal_narrative_jobs
 
 
@@ -2195,6 +2196,7 @@ def _final_documents(
             (verify.job_id,), effect_type=EFFECT_TYPE
         )
         artifact_ref = None
+        accounting_errors = []
         document_status = verify.status.value
         if verify.status is JobStatus.SUCCEEDED and effect_ids:
             try:
@@ -2260,18 +2262,6 @@ def _final_documents(
                         for job in jobs
                         if job.job_type == "source.narrative_summarize"
                     )
-                    for reservation in runs.reservations_for_run(request.run_id):
-                        if (
-                            reservation.job_id == summary.job_id
-                            and reservation.error_code is None
-                        ):
-                            runs.settle_output(
-                                run_id=request.run_id,
-                                attempt_id=reservation.attempt_id,
-                                output_bytes=version.byte_size,
-                                output_sha256=version.content_sha256,
-                                settled_at=_now(),
-                            )
                     final_pin = FinalArtifactPin(
                         version.effect_id,
                         version.artifact_version_id,
@@ -2288,6 +2278,11 @@ def _final_documents(
                             if projected
                             else {}
                         ),
+                    )
+                    runs.settle_published_summary_output(
+                        run_id=request.run_id, summary_job_id=summary.job_id,
+                        verify_job_id=verify.job_id, final_artifact=final_pin,
+                        settled_at=_now(),
                     )
                     compact_terminal_narrative_jobs(
                         store,
@@ -2307,11 +2302,16 @@ def _final_documents(
                     )
             except NarrativeArtifactNotVisibleError:
                 document_status = "activation_pending"
+            except FinalOutputOwnerUnresolved:
+                # The published artifact stays readable. Do not invent an
+                # output owner or overwrite a historical failed receipt.
+                document_status = "output_accounting_unresolved"
+                accounting_errors.append("LEGACY_FINAL_OUTPUT_OWNER_UNRESOLVED")
         document = {
             "document_id": key,
             "status": document_status,
             "artifact_ref": artifact_ref,
-            "errors": [job.last_error_code for job in jobs if job.last_error_code],
+            "errors": [job.last_error_code for job in jobs if job.last_error_code] + accounting_errors,
         }
         summary_job = next(
             job for job in jobs if job.job_type == "source.narrative_summarize"

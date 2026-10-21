@@ -74,7 +74,7 @@ class ExecutionSnapshot:
     event: Event
     dependencies: tuple[DependencyExecutionResult, ...]
     # Latest earlier attempt of the same job whose result is a partial
-    # summary; a retry uses it to cover only the remaining tasks.
+    # summary; retain it for read compatibility, never for new paid repair.
     prior_partial_result: HandlerResult | None = None
 
     def __post_init__(self) -> None:
