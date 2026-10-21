@@ -1,0 +1,146 @@
+{
+  "schema_version": "r1-four-review-observation/1",
+  "recorded_at": "2026-10-21T22:06:59.012381+00:00",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+  "review_count": 4,
+  "findings_count": 26,
+  "findings_severity": {
+    "P1": 15,
+    "P2": 11
+  },
+  "reports": {
+    "storage": {
+      "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\storage.json",
+      "json_sha256": "c4b404e227d6060b8e2fe7bb41cdf14a84a120e0bd170b4345f002e879262676",
+      "md_sha256": "e3f5bba5bf86b64a456f96c95e494dd10fe5d043ac548ecb55582dae96faa5ca",
+      "checks": 18,
+      "findings": 7
+    },
+    "fetch": {
+      "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\fetch.json",
+      "json_sha256": "951227029282e89483d34069fd518f52f32619dd3c1007e1566e0b00726c7056",
+      "md_sha256": "d8936700e5dd9708a8a1bf10ef83c6888f0c95d910e4aca94986a907dafa7493",
+      "checks": 17,
+      "findings": 8
+    },
+    "process": {
+      "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\process.json",
+      "json_sha256": "8ac2fc01d9d192e123ed7aacbca00880c0381e3a1b86dbf79cc984de2a434806",
+      "md_sha256": "d29a89324dcc28c832314a35a284549dbb717fb957e559b1425fee9d463b38b0",
+      "checks": 20,
+      "findings": 6
+    },
+    "analyst": {
+      "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\analyst.json",
+      "json_sha256": "4ade4f6dba9ddd27371b7992b31963d8a545765d2bbae9ea7771a34950a29caf",
+      "md_sha256": "7257b83c93a7b5d47d5a3e0023bd86cdb5c074e8e870ccea44b9e33d1554918b",
+      "checks": 18,
+      "findings": 5
+    }
+  },
+  "numeric_coverage_summary": {
+    "all_numeric_leaves": 3952,
+    "arithmetic_checked": 1276,
+    "copy_or_declaration": 2676,
+    "arithmetic_differences": 0,
+    "all_source_truth_pass": false
+  },
+  "structure_commands": [
+    {
+      "name": "audit-check",
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "check",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec"
+      ],
+      "exit_code": 2,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\audit-check.stdout.json",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\audit-check.stderr.txt"
+    },
+    {
+      "name": "coverage",
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\input.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\diagnostic",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
+        "--max-evidence-files",
+        "256",
+        "--max-evidence-total-bytes",
+        "33554432",
+        "--max-evidence-seconds",
+        "45"
+      ],
+      "exit_code": 1,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\coverage.stdout.json",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\coverage.stderr.txt"
+    },
+    {
+      "name": "coverage-bounded-correction",
+      "argv": [
+        "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\input.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\diagnostic-bounded",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
+        "--max-evidence-files",
+        "128",
+        "--max-evidence-file-bytes",
+        "4194304",
+        "--max-evidence-total-bytes",
+        "33554432",
+        "--max-evidence-seconds",
+        "30"
+      ],
+      "exit_code": 1,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\coverage-bounded.stdout.json",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\coverage-bounded.stderr.txt",
+      "reason": "ROOT initial requested max_files256 exceeded tool maximum128; corrected parameter, no product defect, original failed diagnostic retained"
+    },
+    {
+      "name": "coverage-default-limits",
+      "argv": [
+        "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\input.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\diagnostic-default-limits",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec"
+      ],
+      "exit_code": 0,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\coverage-default.stdout.json",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\initial-before-diagnosis\\coverage-default.stderr.txt",
+      "reason": "Use documented implementation defaults (128 files/1MiB each/8MiB total/30s); prior ROOT cap errors retained, not product failures."
+    }
+  ],
+  "quality_status": "NOT_ACCEPTED_REQUIRES_REMEDIATION",
+  "expert_state": "running_after_all_four_sealed_reports",
+  "bounded_evidence_note": "Recalculation JSON is 2670311B, so >1MiB machine reader may leave that reference unchecked; independent process reviewer actually read/recomputed full numeric set. Machine bounds are observations, not human permission or quality rejection."
+}

@@ -36,5 +36,25 @@
   ],
   "git_line_ending_note": "Author Windows CRLF bytes equal mainline checkout; Git LF blobs separately indexed, no semantic difference. Initial direct raw hash vs blob comparison refused before verified line-ending-only conversion.",
   "company_initial_execution_unchanged": true,
-  "publication": "pending normal push"
+  "publication": "PUSHED_ORIGIN_MASTER",
+  "publication_head": "feaef48accdee0e076d2ecd3108718b06203b3ca",
+  "published_observed_at": "2026-10-21T21:56:22.326669+00:00",
+  "pre_push": {
+    "units_passed": 7047,
+    "units_skipped": 24,
+    "units_seconds": 357.84,
+    "independent_smoke_passed": 142,
+    "independent_smoke_seconds": 50.54,
+    "status": "GREEN"
+  },
+  "ci": {
+    "run_id": 39682544340,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "feaef48accdee0e076d2ecd3108718b06203b3ca",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39682544340",
+    "method": "anonymous_public_actions_api",
+    "verified_on": "2026-10-21",
+    "verified_at": "2026-10-21T22:00:05.082860+00:00"
+  }
 }

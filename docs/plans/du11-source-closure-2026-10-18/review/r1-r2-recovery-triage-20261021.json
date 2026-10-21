@@ -1,0 +1,697 @@
+{
+  "schema_version": "r2-recovery-triage/1",
+  "date": "2026-10-21",
+  "status": "TRIAGED_REPRODUCED_NOT_FIXED",
+  "head": "feaef48accdee0e076d2ecd3108718b06203b3ca",
+  "product_commit": "a5214bda",
+  "source_fingerprints": [
+    {
+      "path": "src/company_wiki/automation/narrative_model_caller.py",
+      "bytes": 20879,
+      "sha256": "495055ae46fa22335240826808be87854bd4263f4c5ba0b8e6fa54802d20ae06"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_run_store.py",
+      "bytes": 50649,
+      "sha256": "ebbb54bbd1acaab71d29016b650c470198a6f1b67da592be66c092cdf661c15f"
+    },
+    {
+      "path": "src/company_wiki/automation/store.py",
+      "bytes": 90959,
+      "sha256": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "bytes": 102329,
+      "sha256": "dfe6f8b34f73983976fac326917e16283fe1631bb311d3b7a280ecd6af74b986"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summarize.py",
+      "bytes": 28287,
+      "sha256": "11db1f35266075deaece4e3f19c884ab294c7a82b8b88a50ff2104f6016c9150"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_worker_factory.py",
+      "bytes": 20158,
+      "sha256": "0150dc0683792cf3d82b4e1082a3b05cac085440604168595948b5a2c633ad05"
+    },
+    {
+      "path": "src/company_wiki/automation/execution_snapshot.py",
+      "bytes": 9438,
+      "sha256": "c42e57154f99129403f9e3dedba69668fed1b16050f02954bbfdd67458bf414f"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_paid_response.py",
+      "bytes": 5704,
+      "sha256": "8fc0bf0fe6885d04a40013738ddefbab267f4608476ebfa76db75c7d7d85205b"
+    }
+  ],
+  "scope": {
+    "product_modified": false,
+    "production_config_modified": false,
+    "raw_modified": false,
+    "historical_ledger_modified": false,
+    "r1_holdout_run_touched": false,
+    "network": false,
+    "provider_calls": 0,
+    "keys_read": false,
+    "commit_or_merge": false,
+    "current_config_git_status": "",
+    "concurrent_tracked_changes_not_owned_by_this_worker": [
+      "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json",
+      "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+      "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/r5-integration.json"
+    ]
+  },
+  "test_result": {
+    "tests": 5,
+    "failures": 4,
+    "errors": 0,
+    "control_passed": 1,
+    "expected_exit_code": 1,
+    "actual_exit_code": 1,
+    "meaning": "Four intentional RED contract probes; no fix or R2 acceptance implied.",
+    "command": ".venv/Scripts/python.exe -m pytest .planning/r1-r2-triage/test_r2_recovery_red.py -q --basetemp C:/Users/郑曾波/Projects/company-wiki/.planning/r1-r2-triage/t2 --junitxml .planning/r1-r2-triage/red-results.xml",
+    "limits": [
+      "finite in-memory model; no socket or provider SDK",
+      "real native AUTO context/caller/handler/accounting",
+      "activation visibility/read port synthetic; no production catalog write",
+      "v4 paid port probes explicitly inject optional persistence outside current worker composition",
+      "two-pin probes use native API seeded operation pins, not a claimed full v5 run"
+    ]
+  },
+  "findings": [
+    {
+      "id": "R2-ACTIVATION-OUTPUT",
+      "evidence": "reproduced_current_native_component_path",
+      "mechanism": "First partial attempt has immutable output_bytes=0. Final activation loops every same-job reservation with error_code=None and tries positive final output on first attempt.",
+      "stack": [
+        "narrative_batch.py:2268",
+        "narrative_run_store.py:1112",
+        "narrative_run_store.py:429"
+      ],
+      "error": "ReservationConflictError: final output differs from its durable receipt",
+      "observation": "activation-resume-observed"
+    },
+    {
+      "id": "R2-PAID-OPERATION-IDENTITY",
+      "evidence": "reproduced_optional_paid_port_contract_probe",
+      "mechanism": "_recover requires one charged record for whole job, rejects a distinct authorized repair operation or exact matching second pin; repair handler falls back with succeeded result.",
+      "anchors": [
+        "narrative_model_caller.py:345",
+        "narrative_model_caller.py:362",
+        "narrative_summarize.py:480"
+      ],
+      "observations": [
+        "paid-repair-observed",
+        "two-pin-replay-observed"
+      ]
+    },
+    {
+      "id": "R2-PAID-RETRY-IDENTITY",
+      "evidence": "native_api_reproduced_and_static_candidate_guard",
+      "mechanism": "AUTO retry rejects two pinned unsuccessful operations via len(rows)!=1; batch candidate guard has equivalent len(paid)!=1.",
+      "anchors": [
+        "store.py:1376",
+        "narrative_batch.py:1426"
+      ],
+      "observation": "two-pin-retry-observed"
+    }
+  ],
+  "observations": {
+    "paid-repair-observed": {
+      "calls": 1,
+      "second_outcome": "succeeded",
+      "claim_ids": [
+        "t1-1"
+      ],
+      "records": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/ad/adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a\",\"schema_version\":\"narrative-paid-response/1\"}"
+        }
+      ]
+    },
+    "activation-resume-observed": {
+      "held": [
+        {
+          "document_id": "doc-prompt-test",
+          "status": "activation_pending",
+          "artifact_ref": null,
+          "errors": []
+        }
+      ],
+      "calls": 2,
+      "before": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": null
+        },
+        {
+          "attempt_id": "summary-2",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1",
+          "input_tokens_bound": 3268,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1288,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "34b30cb3a2ed46f8771fe8bdecbffae26bb8bf56972972f21153b53ef89f56b3",
+          "error_code": null,
+          "output_bytes": null,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": null,
+          "paid_response_json": null
+        }
+      ],
+      "after": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": null
+        },
+        {
+          "attempt_id": "summary-2",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1",
+          "input_tokens_bound": 3268,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1288,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "34b30cb3a2ed46f8771fe8bdecbffae26bb8bf56972972f21153b53ef89f56b3",
+          "error_code": null,
+          "output_bytes": null,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": null,
+          "paid_response_json": null
+        }
+      ],
+      "error_type": "ReservationConflictError",
+      "error": "final output differs from its durable receipt"
+    },
+    "two-pin-replay-observed": {
+      "error": "MODEL_PAID_RESPONSE_UNAVAILABLE",
+      "calls": 2,
+      "before": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/ad/adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a\",\"schema_version\":\"narrative-paid-response/1\"}"
+        },
+        {
+          "attempt_id": "summary-2",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1",
+          "input_tokens_bound": 3268,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1288,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "34b30cb3a2ed46f8771fe8bdecbffae26bb8bf56972972f21153b53ef89f56b3",
+          "error_code": null,
+          "output_bytes": null,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": null,
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/23/236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1\",\"schema_version\":\"narrative-paid-response/1\"}"
+        }
+      ],
+      "after": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/ad/adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a\",\"schema_version\":\"narrative-paid-response/1\"}"
+        },
+        {
+          "attempt_id": "summary-2",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1",
+          "input_tokens_bound": 3268,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1288,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "34b30cb3a2ed46f8771fe8bdecbffae26bb8bf56972972f21153b53ef89f56b3",
+          "error_code": null,
+          "output_bytes": null,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": null,
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/23/236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1\",\"schema_version\":\"narrative-paid-response/1\"}"
+        }
+      ]
+    },
+    "two-pin-retry-observed": {
+      "error_type": "IntegrityViolationError",
+      "error": "paid recovery requires an exact unsuccessful narrative operation",
+      "calls": 2,
+      "job_status": "dead_letter",
+      "before": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/ad/adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a\",\"schema_version\":\"narrative-paid-response/1\"}"
+        },
+        {
+          "attempt_id": "summary-2",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1",
+          "input_tokens_bound": 3268,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1288,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "34b30cb3a2ed46f8771fe8bdecbffae26bb8bf56972972f21153b53ef89f56b3",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/23/236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1\",\"schema_version\":\"narrative-paid-response/1\"}"
+        }
+      ],
+      "after": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/ad/adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a\",\"schema_version\":\"narrative-paid-response/1\"}"
+        },
+        {
+          "attempt_id": "summary-2",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1",
+          "input_tokens_bound": 3268,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1288,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "34b30cb3a2ed46f8771fe8bdecbffae26bb8bf56972972f21153b53ef89f56b3",
+          "error_code": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": "2026-09-28T18:00:00Z",
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/23/236b18c568136940962485606fc7ef4ae6cf657c42414ec28dee34eb7f265a25.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"aa7eff4f7e82493583dfa514bea68efc043bfca70b0e950ca57eb43d850b8aa1\",\"schema_version\":\"narrative-paid-response/1\"}"
+        }
+      ]
+    },
+    "single-operation-control": {
+      "calls": 1,
+      "records": [
+        {
+          "attempt_id": "summary-1",
+          "run_id": "r2-owned",
+          "job_id": "summarize",
+          "request_sha256": "2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a",
+          "input_tokens_bound": 3519,
+          "max_output_tokens": 256,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 1363,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 45,
+          "response_sha256": "c02a11fe71880a59c80cb7a1c56c3fc0367ee7b0132009a473cb2797b34b2dee",
+          "error_code": null,
+          "output_bytes": null,
+          "output_sha256": null,
+          "reserved_at": "2026-09-28T18:00:00Z",
+          "usage_settled_at": "2026-09-28T18:00:00Z",
+          "output_settled_at": null,
+          "paid_response_json": "{\"adapter_id\":\"offline-triage\",\"body_sha256\":\"adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3\",\"byte_size\":192,\"duration_ms\":1,\"http_status\":200,\"model_id\":\"configured\",\"object_key\":\"objects/sha256/ad/adaeaf01c661d71a9dcc8a16aaa04c192cc7d336552854df5879a5cd9ac44ff3.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"2987fb06aaa6fd666e9bce4ddf14b21a466d6f9aba2975c6b9f2e20dd3f0160a\",\"schema_version\":\"narrative-paid-response/1\"}"
+        }
+      ]
+    }
+  },
+  "history": {
+    "run_id": "phaseC-090-05b8bacea453",
+    "fingerprint": {
+      "files": {
+        "phase_c_runner.py": {
+          "sha256": "72748fb7343650eb32d0efd11c67eb38451bcc4771c29ae882827bedd8ec08dc",
+          "bytes": 75770,
+          "mtime_ns": 1792321610357151500
+        },
+        "phase_c_observer.py": {
+          "sha256": "e1fcb184089e69c6c940e2dc556beccc9adfcee18993b700bbb6fbcf8ebd7373",
+          "bytes": 19291,
+          "mtime_ns": 1792342783645243300
+        },
+        "phase_c_launcher.py": {
+          "sha256": "3c860463ba04df71a474024b25383729aea39c8294b6d6ed82bdc63a8220f6d8",
+          "bytes": 322,
+          "mtime_ns": 1792192305514128200
+        },
+        "phase_c_failure_review_material.py": {
+          "sha256": "33eb8863c648af83bee70512f5ca04abc4983087e7a7fb42b82e22bc9e4f9863",
+          "bytes": 7380,
+          "mtime_ns": 1792285017890737800
+        },
+        "phase_c_bootstrap/sitecustomize.py": {
+          "sha256": "c907ca970dfaa9fe98bb09f96dcde41d38fe6d31fde03694a61c146d9e4db5b7",
+          "bytes": 239,
+          "mtime_ns": 1792192305514128200
+        }
+      },
+      "repository_head": "0552f1dc6e5504aaeeb77b424a2c2b9d8380fe17",
+      "tracked_source_dirty": true,
+      "purpose": "reproducibility observation only; not permission or source acceptance"
+    },
+    "usage_summary": [
+      {
+        "attempt_id": "0a0a3a1bc4164e71beff62fe5f38f912",
+        "job_id": "e78009df84d7f720",
+        "request_sha256": "086f9bfebd66fa0b539dab805da22900bc7fd792cb46589152925c43fdf577f9",
+        "charged_tokens": 15755,
+        "charged_micro_usd": 2896,
+        "output_bytes": 0,
+        "paid_response_json": null
+      },
+      {
+        "attempt_id": "4f05ba4e3b83496fb695e5c1dc8fa005",
+        "job_id": "e78009df84d7f720",
+        "request_sha256": "2a1a365e0d8478b088e01c00a27c433a9d4cdd91b33aaad20a6cff5e809748fd",
+        "charged_tokens": 12290,
+        "charged_micro_usd": 2238,
+        "output_bytes": null,
+        "paid_response_json": null
+      }
+    ],
+    "initial": {
+      "budget": {
+        "estimated_micro_usd": 5134,
+        "tokens": 28045,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": null,
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "errors": [],
+          "model_diagnostics": [
+            {
+              "attempt_id": "0a0a3a1bc4164e71beff62fe5f38f912",
+              "input_tokens": 14136,
+              "output_tokens": 1619,
+              "reasoning_tokens": 0,
+              "usage_diagnostic": null,
+              "usage_status": "known"
+            },
+            {
+              "attempt_id": "4f05ba4e3b83496fb695e5c1dc8fa005",
+              "input_tokens": 11155,
+              "output_tokens": 1135,
+              "reasoning_tokens": 0,
+              "usage_diagnostic": null,
+              "usage_status": "known"
+            }
+          ],
+          "status": "activation_pending"
+        }
+      ],
+      "run_id": "phaseC-090-05b8bacea453",
+      "schema_version": "narrative-batch-result/1",
+      "status": "partial",
+      "storage": {
+        "persistent_added_bytes": 1624675,
+        "scratch_peak_bytes": 435978
+      }
+    },
+    "resume": {
+      "budget": {
+        "estimated_micro_usd": 5134,
+        "tokens": 28045,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": null,
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "status": "failed"
+        }
+      ],
+      "error": "NARRATIVE_BATCH_ReservationConflictError",
+      "run_id": "phaseC-090-05b8bacea453",
+      "schema_version": "narrative-batch-result/1",
+      "status": "failed"
+    },
+    "original_database_exists": false,
+    "database_opened": false,
+    "stderr_bytes": 0,
+    "claim_limit": "Historical 0/None output state matches current reproduced mechanism, but no original stack or database replay proves its exact throw site.",
+    "files": [
+      {
+        "path": ".planning/shared-reading-production/du11/live-cn-h1-b2v5i-20261018/harness-fingerprint.json",
+        "bytes": 1158,
+        "sha256": "f4cc30da9882cf703385b29a2b9caeaa093d920e88107fe0c69dc688b3bee195"
+      },
+      {
+        "path": ".planning/shared-reading-production/du11/live-cn-h1-b2v5i-20261018/phaseC-090-05b8bacea453.native-usage.json",
+        "bytes": 2200,
+        "sha256": "2129ff16d57a674532012066cd63697d01573b256643b54375a0808d249a7c5a"
+      },
+      {
+        "path": ".planning/shared-reading-production/du11/live-cn-h1-b2v5i-20261018/phaseC-090-05b8bacea453.stdout.json",
+        "bytes": 813,
+        "sha256": "49dc0295aa77df6ee255bd0ccd803c9e1e72830feacac8a74e86b20159e14055"
+      },
+      {
+        "path": ".planning/shared-reading-production/du11/live-cn-h1-b2v5i-20261018/phaseC-090-05b8bacea453-activation-resume.stdout.json",
+        "bytes": 424,
+        "sha256": "1f9fc5a14e4e9673c7a69d11af739623ed4aa911ff4777e71325e7162c8034be"
+      },
+      {
+        "path": ".planning/shared-reading-production/du11/live-cn-h1-b2v5i-20261018/phaseC-090-05b8bacea453-activation-resume.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "recommendation": {
+    "owner": "shared native operation resolution and per-job final-output accounting",
+    "no_second_task_database": true,
+    "requirements": [
+      "Durable bounded repair authorization separates new operation from exact paid replay.",
+      "Replay resolves original operation attempt/pin and preserves all usage/unknown charges.",
+      "Final slot binds verified final summary result plus participating operations, not every error-free transport or latest reservation.",
+      "Handle successful repair, failed-repair fallback and replay without a new reservation before choosing implementation.",
+      "Retain first zero output receipt and existing pin/lease/generation/success guards.",
+      "Job final-slot settlement is atomic, identical-pin idempotent and different-pin conflicting; output once, money/tokens all operations."
+    ],
+    "next_owner": "ROOT/expert scheduling; independent major-node review before R2 acceptance"
+  },
+  "evidence": [
+    {
+      "path": ".planning/r1-r2-triage/test_r2_recovery_red.py",
+      "bytes": 13617,
+      "sha256": "84e259c71a3c22e6c607a55cb8612ecf32073216ba9eef505b802fdd58b5a3da"
+    },
+    {
+      "path": ".planning/r1-r2-triage/red-results.log",
+      "bytes": 7571,
+      "sha256": "bff65410e2920811e35232c86f5bbde36ae680db7465ad0da6d28d5543cfa535"
+    },
+    {
+      "path": ".planning/r1-r2-triage/red-results.xml",
+      "bytes": 6617,
+      "sha256": "36ac0a73638790fd5a7ff2900dda6a3c6486991dd06c3d9d29769fbd465bfaa0"
+    },
+    {
+      "path": ".planning/r1-r2-triage/paid-repair-observed.json",
+      "bytes": 1429,
+      "sha256": "722f55acb220ed971f49c1ad446cdc2711de7019ba1f18c967b255e9e662369d"
+    },
+    {
+      "path": ".planning/r1-r2-triage/activation-resume-observed.json",
+      "bytes": 3587,
+      "sha256": "1ec456de01315202aaf22499aa21b4e19790c509000891929cf99ebbe1471474"
+    },
+    {
+      "path": ".planning/r1-r2-triage/two-pin-replay-observed.json",
+      "bytes": 5354,
+      "sha256": "1fefd606579c7758d3b8c626b05e1602bacb15ef2e0cf5c73fc4b8080a8d1cd7"
+    },
+    {
+      "path": ".planning/r1-r2-triage/two-pin-retry-observed.json",
+      "bytes": 5493,
+      "sha256": "92126425c5cf6725e0355e4e16ab10668b277629e171b220c157e09a2df1aeeb"
+    },
+    {
+      "path": ".planning/r1-r2-triage/single-operation-control.json",
+      "bytes": 1344,
+      "sha256": "328630b5f942336cbfb14479dc22b56a289de10a759674813d486af9598a5314"
+    },
+    {
+      "path": ".planning/r1-r2-triage/initial-environment-failures.log",
+      "bytes": 5705,
+      "sha256": "ccd6cb749de4d1c92736b2a1a919e698797c29c0bea0e8d9b272fb1b36d7a749"
+    },
+    {
+      "path": ".planning/r1-r2-triage/escalated-temp-failures.log",
+      "bytes": 3675,
+      "sha256": "38e7657a8b4a4168c183e8cf5b1be9d83134894309b05bacc038bd8099c540a6"
+    }
+  ],
+  "unresolved": [
+    "No original historical DB or clean dirty-source replay.",
+    "No full current v5/extractive two-operation run tested.",
+    "No product repair implemented.",
+    "Native frozen budget exception causes incidental pytest/contextlib traceback wrapping; not expanded here."
+  ]
+}

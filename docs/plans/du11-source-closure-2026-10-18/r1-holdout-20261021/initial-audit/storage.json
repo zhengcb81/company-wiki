@@ -1,0 +1,956 @@
+{
+  "schema_version": "1.0",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "role": "storage",
+  "attempt_id": "initial",
+  "reviewed_at_utc": "2026-10-21T21:53:31.120050+00:00",
+  "executor_completion": "partial",
+  "execution_outcome": "partial",
+  "overall_review_outcome": "FAIL_WITH_BLOCKED_AND_NOT_RUN_PATHS",
+  "execution_binding": {
+    "manifest": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\manifest.json",
+      "locator": "entire sealed manifest",
+      "sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458"
+    },
+    "manifest_expected_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+    "manifest_artifacts_checked": 639,
+    "manifest_mismatches": [],
+    "final_artifacts": [
+      {
+        "artifact_id": "execution/forecast/timed-final-forecast.json",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+        "sha256": "21ac4e6c9a409b90a1b43fc03d13dd0b9341ba04e0bdedfd9486f72abcf31c96",
+        "byte_size": 648399,
+        "kind": "native_forecast",
+        "producer": "native tool or executor observation; tool_call_index/step_ledger identifies action",
+        "step_id": "see step_ledger"
+      },
+      {
+        "artifact_id": "execution/forecast/timed-final-forecast.md",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.md",
+        "sha256": "a4d72d4121a7211d6fe398b8955a4e6743bc249dfe935ffdd9e42021c8d10fab",
+        "byte_size": 85788,
+        "kind": "native_forecast",
+        "producer": "native tool or executor observation; tool_call_index/step_ledger identifies action",
+        "step_id": "see step_ledger"
+      },
+      {
+        "artifact_id": "execution/forecast/timed-final-snapshot.json",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-snapshot.json",
+        "sha256": "e76203552a4f1c5c5f45a223976170cccb40a39ce28c14c3ba224332babe487e",
+        "byte_size": 766737,
+        "kind": "native_forecast",
+        "producer": "native tool or executor observation; tool_call_index/step_ledger identifies action",
+        "step_id": "see step_ledger"
+      },
+      {
+        "artifact_id": "execution/forecast/timed-shared-shock-final-forecast.json",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-forecast.json",
+        "sha256": "1e520db1452768a9a107ab87f9c2256d74696788c08217ac83f2e2695f9d9ba0",
+        "byte_size": 667837,
+        "kind": "native_forecast",
+        "producer": "native tool or executor observation; tool_call_index/step_ledger identifies action",
+        "step_id": "see step_ledger"
+      }
+    ]
+  },
+  "independence": {
+    "source_blind_freeze_utc": "2026-10-21T21:41:19.954718+00:00",
+    "source_blind_target_set_sha256": "b1156f7d6ec06b1650aca01860f2a3d80e43e87b1f0678d24c7b0ad07442bd46",
+    "source_blind_file_sha256": "7f18352f8c43a99f502ecc976bcad67247a816453cf24fefd8aa333fe6702011",
+    "blind_to_output_at_freeze": true,
+    "frozen_before_output_generation": null,
+    "other_role_drafts_read": false,
+    "executor_or_root_role": false,
+    "reviewer_execution_repairs": false,
+    "paid_posts": 0,
+    "downloads": 0,
+    "original_writes": 0,
+    "execution_writes": 0
+  },
+  "check_counts": {
+    "PASS": 9,
+    "FAIL": 4,
+    "BLOCKED": 3,
+    "NOT_RUN": 1,
+    "N/A": 1
+  },
+  "checks": [
+    {
+      "check_id": "S01",
+      "status": "PASS",
+      "detail": "限已打开版本：四原件query_ref/open_version SHA及bytes均匹配，主体药明康德603259、FY2025/Q1-2026与原件一致；FY2025H1/2018IPO仅preview，publication/asof资格保持unknown且未进预测。模型主来源为2025年报，最新信息覆盖缺口另列S07。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-open-observation.json",
+          "locator": "observations",
+          "sha256": "1c07cbe480485f0a2c29661b9571c90c6c08ed7390a52872e51db46e37a0ef8a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source_ledger.json",
+          "locator": "sources",
+          "sha256": "63d550f5d196ad2b37b79ddcda057455a53a4cfee8465950737a7c1e20a1c74e"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S02",
+      "status": "PASS",
+      "detail": "原件与正式摘要通过pathless SourceRef/NarrativeRef读取，消费者请求只有ID/hash与配置，物理根映射留在catalog；未见消费者按CWP/Dayu/Dropbox分支拼raw路径。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-open-observation.json",
+          "locator": "observations/source_ref",
+          "sha256": "1c07cbe480485f0a2c29661b9571c90c6c08ed7390a52872e51db46e37a0ef8a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\current-read-and-disk-observation.json",
+          "locator": "command,expected_narrative_ref",
+          "sha256": "31c78a073c94cb0833f2aa4e08863cf48d1414e06aafc1603f9effd1939e3de9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\narrative-read-request-v2.json",
+          "locator": "narrative_ref",
+          "sha256": "9c65123b4f965b2b09d50b51602f5dc3c683f557b1505f4c2ccc9dfe2ad7288a"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S03",
+      "status": "PASS",
+      "detail": "本轮观察：四refs为四个内容SHA，CWP原件只复用，未生成新raw副本；唯一visible摘要对象按内容hash存储；cache返回同artifact和同generation。未对目录复制/损坏注入做扩展验证，不宣称全局去重正确。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\storage-probe.json",
+          "locator": "catalog/artifact_rows",
+          "sha256": "72ebc0c549fc8b783222f032ff10b5ebea23a278eecec01b4ab06335c7674139"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\generation-pin-verification.json",
+          "locator": "runs",
+          "sha256": "0d6c27b2110f9460d68761c312d3811a1540b5d6274a081096f2a54de2f8b4ce"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source_ledger.json",
+          "locator": "network_observation",
+          "sha256": "63d550f5d196ad2b37b79ddcda057455a53a4cfee8465950737a7c1e20a1c74e"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S04",
+      "status": "PASS",
+      "detail": "本轮0 acquisition downloads，隔离companies无新raw；8项scope配置SHA现值一致，生产配置未写穿证据与独立实测吻合。没有新增下载可审registration，原文未翻译且四原件仍可打开。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\storage-probe.json",
+          "locator": "config_hash_observations",
+          "sha256": "72ebc0c549fc8b783222f032ff10b5ebea23a278eecec01b4ab06335c7674139"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\isolated-file-inventory.json",
+          "locator": "all entries",
+          "sha256": "e57a8e1623da0efc5ad13496c913c6a6d9f81e49143031a8e2a70ecbf0899546"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\configuration-and-worktree-observation.json",
+          "locator": "config_fingerprints",
+          "sha256": "a9af91affc3cf89d075e16816108693ba57d8c40c98307b9ae4e671dba0f465d"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S05",
+      "status": "PASS",
+      "detail": "适用格式仅文本PDF：正式年报249页、5752 source units、96 native EvidenceSpans有非空原语言文本，原件/locator回放通过。审查另用PyMuPDF读四PDF，不将审查解析冒称执行结果。HTML/IR未形成native parse链归S07；TXT/JSON/PPTX/扫描PDF/OCR未涉及，不宣称全格式通过。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "selection,evidence_spans,versions",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-read-receipt.json",
+          "locator": "locator_count,replay_status",
+          "sha256": "0cd5fb3f0dcb6d5007395df8a81da16adca50a8c0a05feaef35575a7031508e3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-open-observation.json",
+          "locator": "observations/extraction",
+          "sha256": "1c07cbe480485f0a2c29661b9571c90c6c08ed7390a52872e51db46e37a0ef8a"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S06",
+      "status": "FAIL",
+      "detail": "真实执行是旧selector0.8；所读年报重要小分子管线、TIDES订单/客户、指引与风险遗漏，混入无业务价值财务碎片。体积尚小不能抵消业务内容损失。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "manual_same_target_observations ST-02..ST-11",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\initial-policy-and-runtime-observation.json",
+          "locator": "files,runs",
+          "sha256": "4e5354ef7fe0d752c8124e6c60505ce986da56e7918bbea456ec28e44b324433"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-001",
+        "STORAGE-002"
+      ]
+    },
+    {
+      "check_id": "S07",
+      "status": "BLOCKED",
+      "detail": "2018IPO业务实质页已读（executor p248-263、reviewer另读募投与风险），但最新IR/JPM/演示、2026融资/股权材料未完整qualified/consumed；电话会companion被挡，无实质Q&A。不是按缺文件判N/A。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "documents",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\research\\ipo-business-pages-248-263.json",
+          "locator": "selected_pages",
+          "sha256": "bd0668309bbec30c153c13ac5fc601af0c6a694c5fadb70360fe482e36d98465"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-source-targets.json",
+          "locator": "ST-19..ST-21",
+          "sha256": "7f18352f8c43a99f502ecc976bcad67247a816453cf24fefd8aa333fe6702011"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-005"
+      ]
+    },
+    {
+      "check_id": "S08",
+      "status": "FAIL",
+      "detail": "摘要中文原语言、source_id/locator/parser/model/prompt版本齐，9claims逐条回原件；c4实际FAIL，c1/c6 WARN，其余6PASS。9条全有自身support定位不等于每条语义正确。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "items c1..c9",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-output\\20261021T214519Z-a2568915\\packet.json",
+          "locator": "claims",
+          "sha256": "59870bbcb53fac1b9093538de4e34184062a45196500c2429ec3f815d4acf108"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "versions,summary",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-003",
+        "STORAGE-004"
+      ]
+    },
+    {
+      "check_id": "S09",
+      "status": "PASS",
+      "detail": "限实际窄链：p11/6 CRDMO span经公开bundle被consume_narrative_input附入RF claim narrative_crdmo_chem_2026，绑定chem_base_2026_conditional_rate=0.2并到化学base recognized_revenue公式。它只支持机制方向，数值仍是未校准analyst assumption；不能称9条DS summary都被使用。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\research\\narrative-consumption.json",
+          "locator": "dependencies/0",
+          "sha256": "e17df9c5a22d7d16b3f4c16300d074adea5a9ffd4ea3412eef50fc889f4e1fa7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "evidence_claims narrative_crdmo_chem_2026; parameters chem_base_2026_conditional_rate",
+          "sha256": "dde8dce38b0c0b203eb4a0a9facaaa981debeea61559a9cab3e7be8285526150"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-original-1-pages.json",
+          "locator": "PDF11",
+          "sha256": "c0df8fce98c2855d8d469366390244fbdab4e7e6347b07da7692de8758f58a27"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S10",
+      "status": "BLOCKED",
+      "detail": "实测唯一bundle169547bytes（原件1608226，10.54%），摘要JSON4698、selected原文UTF8 16906；隔离根31文件3615192bytes，无无限常驻全库转换。新run精确cache复用已证，三类失效和独立peak/delta未执行/观察，故完整S10不能PASS。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\storage-probe.json",
+          "locator": "derived_measured",
+          "sha256": "72ebc0c549fc8b783222f032ff10b5ebea23a278eecec01b4ab06335c7674139"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\current-read-and-disk-observation.json",
+          "locator": "isolated_disk_measurement",
+          "sha256": "31c78a073c94cb0833f2aa4e08863cf48d1414e06aafc1603f9effd1939e3de9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\generation-pin-verification.json",
+          "locator": "runs/1..2",
+          "sha256": "0d6c27b2110f9460d68761c312d3811a1540b5d6274a081096f2a54de2f8b4ce"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-006"
+      ]
+    },
+    {
+      "check_id": "S11",
+      "status": "NOT_RUN",
+      "detail": "单文档正常子进程/预算与outbox可观察，未知MiMo预留没有置零；受控paid-response-before-activation恢复未跑。并发竞争不在当前单文档路径观察范围，不能从一个delivered outbox推出故障恢复/并发PASS。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\initial-policy-and-runtime-observation.json",
+          "locator": "attempts,outbox_status_counts,reservations",
+          "sha256": "4e5354ef7fe0d752c8124e6c60505ce986da56e7918bbea456ec28e44b324433"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\usage.json",
+          "locator": "cache_check",
+          "sha256": "7020c0a8197110b2e9b353b5806ea8d3dca0eb29c580b8eaa29513407e053140"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-007"
+      ]
+    },
+    {
+      "check_id": "S12",
+      "status": "PASS",
+      "detail": "上游正式产物仅来源/解析/资料摘要与只读引用；预测、假设、公式在RF audit run外部目录。未见向StockWiki写入、投资评级或private/public/逐材料许可复活；preview publication unknown属于来源asof责任，不是人工签收门。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\manifest.json",
+          "locator": "final_forecast,retained_native_state",
+          "sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source_ledger.json",
+          "locator": "sources eligibility",
+          "sha256": "63d550f5d196ad2b37b79ddcda057455a53a4cfee8465950737a7c1e20a1c74e"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "source_metadata,quality_status",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S13",
+      "status": "FAIL",
+      "detail": "已读原件高价值正文确有可提取文字；小分子项目与风险等未保留。selection部分coverage标记有披露，但没有逐遗漏业务影响/未读context追踪；本次并非opaque造成的可接受未知。未读全原件余下页面仍UNKNOWN。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-source-targets.json",
+          "locator": "read_scope,targets ST-05,ST-07,ST-09,ST-10",
+          "sha256": "7f18352f8c43a99f502ecc976bcad67247a816453cf24fefd8aa333fe6702011"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "manual_same_target_observations",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-002"
+      ]
+    },
+    {
+      "check_id": "S14",
+      "status": "FAIL",
+      "detail": "c4跨测试/生物学分部拼接，两个support无分部heading；RF receipt citation_trace ungrouped、group_count0、reading present=false，与原件上下文不一致。真实年报期间未混成另一公司；错误是业务主体分母和阶段/context。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "items c1,c4,c6",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\research\\narrative-consumption.json",
+          "locator": "citation_trace",
+          "sha256": "e17df9c5a22d7d16b3f4c16300d074adea5a9ffd4ea3412eef50fc889f4e1fa7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-doc1-p14.png",
+          "locator": "full page",
+          "sha256": "55a2ee9385df65c7fe36416efd711c6b638f634b52479b9666e6c08a744afaea"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-001",
+        "STORAGE-003",
+        "STORAGE-004"
+      ]
+    },
+    {
+      "check_id": "S15",
+      "status": "BLOCKED",
+      "detail": "本轮电话会原语言TXT/JSON与Q&A没有形成；发现的是通知与blocked companion请求。无法核actor/stream/precollect/closing及question+answer保留，未执行不能判N/A或PASS。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "investor_call_transcript",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\discovery.json",
+          "locator": "records/4",
+          "sha256": "9767a5aec5756a9d569acb6afb41fee6e9807abf9f2f2e42a5d598e9b3780663"
+        }
+      ],
+      "finding_ids": [
+        "STORAGE-005"
+      ]
+    },
+    {
+      "check_id": "S16",
+      "status": "N/A",
+      "detail": "四个实际原件均PDF、正式subject为raw annual SourceRef，没有official JSON母页/projection路径。最新JSON/电话会未形成的任务缺口已在S07/S15列出；本轮不证明JSON投影机制正确。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-open-observation.json",
+          "locator": "observations/source_ref/mime_type",
+          "sha256": "1c07cbe480485f0a2c29661b9571c90c6c08ed7390a52872e51db46e37a0ef8a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "schema_version,source_ref",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S17",
+      "status": "PASS",
+      "detail": "限精确generation/parent实证：DS与cache reconstruction均为ea5fe54..、设置hash及generation匹配，cache pin指向原narrative-bed3..与f0f9..对象；当前公开精确读取重验父SourceRef/96locators且SHA一致。不是跨配置失效测试（归S10），也不把MiMo b1bd..冒充DS。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\generation-pin-verification.json",
+          "locator": "runs",
+          "sha256": "0d6c27b2110f9460d68761c312d3811a1540b5d6274a081096f2a54de2f8b4ce"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-read-receipt.json",
+          "locator": "narrative_ref,replay_status",
+          "sha256": "0cd5fb3f0dcb6d5007395df8a81da16adca50a8c0a05feaef35575a7031508e3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\storage-probe.json",
+          "locator": "catalog/artifact_rows",
+          "sha256": "72ebc0c549fc8b783222f032ff10b5ebea23a278eecec01b4ab06335c7674139"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "S18",
+      "status": "PASS",
+      "detail": "工程复用与业务recall分开：cache零新tokens/预留属工程观察；native coverage_complete=false、RF needs_review，独立来源目标揭示遗漏，均未将cache当业务召回或恢复证据。全1241页仅机械提取，实际来源阅读46完整页加部分摘录，余下UNKNOWN。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-source-targets.json",
+          "locator": "denominator,read_scope",
+          "sha256": "7f18352f8c43a99f502ecc976bcad67247a816453cf24fefd8aa333fe6702011"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "denominators,manual_same_target_observations",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\usage.json",
+          "locator": "cache_check",
+          "sha256": "7020c0a8197110b2e9b353b5806ea8d3dca0eb29c580b8eaa29513407e053140"
+        }
+      ],
+      "finding_ids": []
+    }
+  ],
+  "findings": [
+    {
+      "issue_id": "STORAGE-001",
+      "severity": "P1",
+      "category": "config",
+      "summary": "Initial明确执行selector 0.8.0，未执行共享阅读引擎0.9路径。",
+      "check_ids": [
+        "S06",
+        "S14"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\8a277d8c72da40279ffdf8ecb26b820c\\input-0001-ed7969417204.json",
+          "locator": "/selector_version",
+          "sha256": "ed7969417204beb08497b1568365a214c52b8fc6307a975d5631626269a74dc4"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\current-read-and-disk-observation.json",
+          "locator": "versions, reading_present",
+          "sha256": "31c78a073c94cb0833f2aa4e08863cf48d1414e06aafc1603f9effd1939e3de9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\initial-policy-and-runtime-observation.json",
+          "locator": "files/0/excerpts line2494-2497; runs",
+          "sha256": "4e5354ef7fe0d752c8124e6c60505ce986da56e7918bbea456ec28e44b324433"
+        }
+      ],
+      "expected": "本轮须识别真实引擎/策略/版本，若验收共享引擎，实际请求及产物应来自其路径。",
+      "actual": "封存DS请求显式selector_version=0.8.0；正式bundle/2.0为parser0.1.1、selector0.8.0、prompt1.7.0、deepseek-flash，无reading_context。Initial pin中0.9才分派select_reading_evidence，故此结果不能验收共享阅读引擎。0.8为当时默认，但这不使共享路径变成已执行。",
+      "root_cause_hypothesis": "执行准备/配置路由选择了legacy selector；实际运行版本证据确定，为什么holdout选择旧策略应由专家继续定位。",
+      "recommendation": "在新attempt显式接通当前批准的共享策略/模型投影，保留本轮历史；用同一冻结来源目标验证业务保留和主体限定，不能只改变版本断言。",
+      "responsibility_class": "execution_configuration"
+    },
+    {
+      "issue_id": "STORAGE-002",
+      "severity": "P1",
+      "category": "code",
+      "summary": "年报选择漏掉高价值业务事实，却保留失去表头的财务/行政片段。",
+      "check_ids": [
+        "S06",
+        "S13"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-source-targets.json",
+          "locator": "targets ST-02..ST-11",
+          "sha256": "7f18352f8c43a99f502ecc976bcad67247a816453cf24fefd8aa333fe6702011"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-original-1-pages.json",
+          "locator": "pages PDF13-16,31-32",
+          "sha256": "c0df8fce98c2855d8d469366390244fbdab4e7e6347b07da7692de8758f58a27"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "evidence_spans loc:v1/page:14/*,31/*,32/*,128/*,235/*",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "manual_same_target_observations ST-02..ST-11",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        }
+      ],
+      "expected": "S06/S13要求按业务价值保留正文与限制，财务表不能替代业务叙述；原件→选择需对照独立来源目标。",
+      "actual": "原件p14的小分子D&M 199.2亿元/3452分子/83商业化/91 III期、TIDES订单20.2%及客户/分子增长、513-530亿元指引均未进入96 spans；p31-32需求/监管/国际政策/汇率等主要风险也未保留。selected反而含p128整块税率、p87资产负债行及p235缺表头的终止经营数值。原件有可提取文字，非opaque；coverage_complete=false已诚实披露，但不能替代遗漏影响。",
+      "root_cause_hypothesis": "selector0.8的候选/财务拒绝/组保留规则及预算优先级可能使业务事实和完整风险丢失；本报告确定症状，不声称已定位具体函数根因。",
+      "recommendation": "用冻结ST-02至ST-11逐项回归：将业务/指引/风险条件与主体成组保留，减少无业务价值表片段；新共享路径仍须在真实同源样本复验。",
+      "responsibility_class": "product_or_policy_common_cause"
+    },
+    {
+      "issue_id": "STORAGE-003",
+      "severity": "P1",
+      "category": "data",
+      "summary": "正式摘要c4丢掉分部主体，把两个不同分母的“超30%”拼成一条无分部限定的结论。",
+      "check_ids": [
+        "S08",
+        "S14"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-original-1-pages.json",
+          "locator": "PDF p14 (2) and (3)",
+          "sha256": "c0df8fce98c2855d8d469366390244fbdab4e7e6347b07da7692de8758f58a27"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\blind-doc1-p14.png",
+          "locator": "visual full page",
+          "sha256": "55a2ee9385df65c7fe36416efd711c6b638f634b52479b9666e6c08a744afaea"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "summary/draft/claims/c4; evidence_spans 521560f.. and 304e77cc..",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "items claim_id=c4",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        }
+      ],
+      "expected": "每条claim须由自身support蕴含；同一主体的业务口径、阶段、期间及限定context应成组保留，不能跨组拼接。",
+      "actual": "c4两个support分别是原件p14测试业务和生物学业务的新分子占比；两个span均不包含(2)/(3)分部标题。c4未说明任何分部，合并了测试领先领域与生物学新客户增长，不能据此得出公司整体新分子收入占比超30%。c4 needs_review=false，实际语义FAIL。RF没有引用c4，故不编造其已经改变预测金额。",
+      "root_cause_hypothesis": "上游选择/摘要接口缺分部heading/context binding，加上模型合并语句；citation_trace ungrouped与缺reading_context是机制线索。",
+      "recommendation": "保留测试/生物学各自标题及context，要求claim显式业务分母、自己support/context；再进行原件逐claim独立审查。",
+      "responsibility_class": "product_semantic_context"
+    },
+    {
+      "issue_id": "STORAGE-004",
+      "severity": "P2",
+      "category": "data",
+      "summary": "摘要对已选择的计划/口径限定保留不足，不能把引用打开成功视为语义完整。",
+      "check_ids": [
+        "S08",
+        "S14"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\public-bundle.json",
+          "locator": "summary/draft/claims c1,c6; selected p14/34",
+          "sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+          "locator": "items c1,c6 and ST-07",
+          "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+        }
+      ],
+      "expected": "summary→own support必须区分现况/计划，并保留金额和比率的主体及期间。",
+      "actual": "c1标actual却把现况CRDMO与自身support中的“将/2026”建设计划混合；c6的47.64%缺2025公司总口径，不能与持续经营48.91%或分部毛利率混用。selected p14/34的展望条件没有在9条摘要中保留，ST-07只能判遗漏。c1/c6语义WARN，不虚构数值已错。",
+      "root_cause_hypothesis": "摘要生成压缩了阶段/口径，生产claim合同没有强制把相关context作为独立引用维度。",
+      "recommendation": "新摘要将实际与计划分开，明确2025集团总口径；对指引与前提成组保留。",
+      "responsibility_class": "product_semantic_context"
+    },
+    {
+      "issue_id": "STORAGE-005",
+      "severity": "P1",
+      "category": "code",
+      "summary": "截至2026-10-21的重要最新资料与Q&A未形成可消费的合格来源链。",
+      "check_ids": [
+        "S07",
+        "S15"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "documents semi_annual_report, quarterly_report, investor_*, strategy_communication, convertible_bond_prospectus",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source_ledger.json",
+          "locator": "sources/1 normalization_result, summary_result, forecast_use",
+          "sha256": "63d550f5d196ad2b37b79ddcda057455a53a4cfee8465950737a7c1e20a1c74e"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\discovery.json",
+          "locator": "records/1,3,4",
+          "sha256": "9767a5aec5756a9d569acb6afb41fee6e9807abf9f2f2e42a5d598e9b3780663"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\remaining_items.json",
+          "locator": "remaining/0..3",
+          "sha256": "f8b1fbf1d524c6dca59d0aabbcc26ca88077f5c7a2746bb53bd4ec0ea0a80fb3"
+        }
+      ],
+      "expected": "S07要求认真读取有实质价值IR/电话会/募投；不能按本地缺文件判N/A。S15需实际问答才能核actor/stream及Q&A完整性。",
+      "actual": "document_matrix承认2026H1被local_metadata_gap/publication_date_unknown和FF invalid_producer_schema阻塞；IR/presentation/JPM、2026融资线索已发现而未完整CWP合格。电话会仅通知/companion请求，未建立ET实质Q&A。2026Q1已合格且可打开，但未normalize/summary并未进入模型。2018IPO业务预览已读，不能替代当前融资/最新经营资料。",
+      "root_cause_hypothesis": "CWP元数据与FF producer边界错误和执行研究覆盖不足分别存在；没有证据支持把这些都归为外部来源不可获得。具体共同根因由fetch/编程专家定位。",
+      "recommendation": "修复既有来源资格/接口边界，在新attempt完成已发现最新资料与原语言Q&A读取；保留明确失败状态，不用通知替代电话会，不用2018IPO替代2026经营事实。",
+      "responsibility_class": "product_boundary_and_execution_gap"
+    },
+    {
+      "issue_id": "STORAGE-006",
+      "severity": "P2",
+      "category": "observability",
+      "summary": "同代缓存复用有实证，原文/配置/generator变化失效与scratch峰值没有本轮实测。",
+      "check_ids": [
+        "S10"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\current-read-and-disk-observation.json",
+          "locator": "isolated_disk_measurement",
+          "sha256": "31c78a073c94cb0833f2aa4e08863cf48d1414e06aafc1603f9effd1939e3de9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\storage-probe.json",
+          "locator": "derived_measured",
+          "sha256": "72ebc0c549fc8b783222f032ff10b5ebea23a278eecec01b4ab06335c7674139"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\8a277d8c72da40279ffdf8ecb26b820c\\stdout.txt",
+          "locator": "storage",
+          "sha256": "b0763bd52951687f32eb06ac0c55a328f5dfd1ab026d2c313bc1acdd9988b4ff"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\6ffdb542e7dd46668de0471ccd70244e\\stdout.txt",
+          "locator": "storage, documents generation_status",
+          "sha256": "47fbfd98dbcdae2ce667048d3ea52fcf38ac38ae2446e91f0d09533db3ee790a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\remaining_items.json",
+          "locator": "remaining/6",
+          "sha256": "f8b1fbf1d524c6dca59d0aabbcc26ca88077f5c7a2746bb53bd4ec0ea0a80fb3"
+        }
+      ],
+      "expected": "S10要求实际重复run与缓存失效覆盖原文/配置/generator版本，并将实际空间与声明分开；不能凭结构或声明判通过。",
+      "actual": "cache new-run确实复用同artifact、零新reservations；未见原文/配置/generator版本变更的失效执行。当前磁盘测得31文件3615192 bytes，唯一bundle169547 bytes；这只是终点快照，不是峰值或baseline delta。native声称DS persistent_added554987/scratch_peak169547，cache added138/scratch0；本审查不将声明当峰值实测。",
+      "root_cause_hypothesis": "本轮执行未安排有界失效/峰值观察，属于验收证据缺口，尚无缓存错误实证。",
+      "recommendation": "新owned fixture/run记录三类失效及当前parent拒绝，增加有界空间前后/峰值观察；不付费补做后回填initial PASS。",
+      "responsibility_class": "execution_validation_gap"
+    },
+    {
+      "issue_id": "STORAGE-007",
+      "severity": "P1",
+      "category": "observability",
+      "summary": "付费响应后激活前中断恢复与并发lease竞争未在initial执行。",
+      "check_ids": [
+        "S11"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\usage.json",
+          "locator": "cache_check/failure_after_paid_before_activation_test",
+          "sha256": "7020c0a8197110b2e9b353b5806ea8d3dca0eb29c580b8eaa29513407e053140"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\initial-policy-and-runtime-observation.json",
+          "locator": "attempts,outbox_status_counts,reservations",
+          "sha256": "4e5354ef7fe0d752c8124e6c60505ce986da56e7918bbea456ec28e44b324433"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\remaining_items.json",
+          "locator": "remaining/6",
+          "sha256": "f8b1fbf1d524c6dca59d0aabbcc26ca88077f5c7a2746bb53bd4ec0ea0a80fb3"
+        }
+      ],
+      "expected": "S11对涉及的lease/outbox/费用恢复给实际过程证据；cache命中不证明故障恢复。",
+      "actual": "仅一个文档的正常worker路径，AUTO中5次attempt、一个delivered outbox；MiMo失败unknown费用预留保留、DS成功、cache零新预留均可复核。usage明确failure_after_paid_before_activation_test=not_run。既无该故障注入/恢复，也无并发worker竞争证据。不能对这些路径签PASS。",
+      "root_cause_hypothesis": "验收场景未执行；本报告没有据此断言lease或恢复实现必然错误。",
+      "recommendation": "在新attempt执行已授权受控中断恢复大节点，保存付费响应、激活、lease/generation/outbox、去重费用的前后状态；并发若仍不涉及应明确N/A范围。",
+      "responsibility_class": "execution_validation_gap"
+    }
+  ],
+  "summary_review": {
+    "real_public_bundle_sha256": "f0f9a4c6279be9db8798fb8750e9ad101b2d5faf87bbe85e38112e19dbb0ae39",
+    "semantic_claim_results": {
+      "PASS": 6,
+      "WARN": 2,
+      "FAIL": 1
+    },
+    "frozen_targets_total": 21,
+    "annual_targets": 11,
+    "outside_annual_bundle_source_scope": 10,
+    "no_total_score": true,
+    "report": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-semantic-review.json",
+      "locator": "entire report",
+      "sha256": "343bf5dedd7e43fddbc4354606c250956c6de53ef3c6e38f7c2e5c9f5e7fb2ff"
+    },
+    "map": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-import\\20261021T214433Z-2b5c2abf\\map.json",
+      "locator": "entire map",
+      "sha256": "286183b848c39d9e965f5bf0ffa09e77e85c5548480188cacb37768a280f238c"
+    },
+    "comparison": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\storage\\summary-comparison\\20261021T214908Z-414f863d\\comparison.json",
+      "locator": "entire comparison",
+      "sha256": "72807bb33b005c63ed7c26c96042ee961281118ff6efe1520a9e0789bdfdf357"
+    },
+    "tool_scope_note": "Selected-only import cannot mechanize original-to-selection business recall; independent original-page judgments are in semantic review manual_same_target_observations. Tool target envelope adds required author metadata only; original frozen targets bytes/hash preserved."
+  },
+  "actual_original_read_scope": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "total_pages": 249,
+      "full_pages_semantically_read": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        29,
+        30,
+        31,
+        32,
+        119,
+        120
+      ],
+      "visual_pages": [
+        13,
+        14
+      ]
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6",
+      "total_pages": 21,
+      "full_pages_semantically_read": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "visual_pages": [
+        4
+      ]
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:71582e6607861d5e02baeb65a7c4a8b855d1a608cde3981214f86d7f4c4abcf1",
+      "total_pages": 201,
+      "full_pages_semantically_read": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "visual_pages": []
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:f73de6513ba9e47d4ab7dc7838642a93768c9d54437188003accc49d3d6fc2e4",
+      "total_pages": 770,
+      "full_pages_semantically_read": [
+        1,
+        2,
+        3,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        74,
+        248,
+        249,
+        250,
+        654,
+        655,
+        656,
+        657,
+        658,
+        659,
+        660
+      ],
+      "partial_excerpt_pages": [
+        40,
+        43,
+        61,
+        79,
+        251,
+        252,
+        264,
+        266,
+        286,
+        323,
+        348,
+        350
+      ],
+      "visual_pages": []
+    }
+  ],
+  "measured_storage": {
+    "originals_total_bytes": 20696603,
+    "isolated": {
+      "roots": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
+      "by_top_level": {
+        "AUTO.sqlite": {
+          "files": 1,
+          "bytes": 684032
+        },
+        "AUTO.sqlite-shm": {
+          "files": 1,
+          "bytes": 32768
+        },
+        "AUTO.sqlite-wal": {
+          "files": 1,
+          "bytes": 0
+        },
+        "AUTO.sqlite.batch-owner.lock": {
+          "files": 1,
+          "bytes": 1
+        },
+        "company_wiki.json": {
+          "files": 1,
+          "bytes": 306
+        },
+        "preparation_receipt.json": {
+          "files": 1,
+          "bytes": 5236
+        },
+        "rf_filing_fetch.json": {
+          "files": 1,
+          "bytes": 101
+        },
+        ".source_catalog": {
+          "files": 11,
+          "bytes": 2804856
+        },
+        "config": {
+          "files": 3,
+          "bytes": 6065
+        },
+        "requests": {
+          "files": 1,
+          "bytes": 224
+        },
+        "work": {
+          "files": 9,
+          "bytes": 81603
+        }
+      },
+      "files_total": 31,
+      "bytes_total": 3615192,
+      "not_baseline_delta": true
+    },
+    "derived": {
+      "raw_annual_bytes": 1608226,
+      "published_bundles": 1,
+      "published_bundle_bytes": 169547,
+      "bundle_raw_ratio": 0.10542485944139691,
+      "selected_raw_text_utf8_bytes": 16906,
+      "summary_json_utf8_bytes": 4698,
+      "native_storage_fields_are_declared_not_independently_peak_sampled": true
+    },
+    "declared_native_storage": {
+      "DS_persistent_added_bytes": 554987,
+      "DS_scratch_peak_bytes": 169547,
+      "cache_persistent_added_bytes": 138,
+      "cache_scratch_peak_bytes": 0
+    },
+    "scope_note": "Native added/peak are declared fields, not this independent endpoint measurement. Existing raw PDFs were not copied. Audit scratch not production derivative count."
+  },
+  "cost_observation": {
+    "known_tokens": 6855,
+    "MiMo_unknown_attempts": 1,
+    "proxy_or_hold_micro_usd": 9720,
+    "actual_invoice_usd": null,
+    "cache_new_reservations": 0,
+    "source": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\usage.json",
+      "locator": "entire usage",
+      "sha256": "7020c0a8197110b2e9b353b5806ea8d3dca0eb29c580b8eaa29513407e053140"
+    }
+  },
+  "forecast_impact": {
+    "quantified_original_exposure": "被selector遗漏的小分子D&M 2025收入199.2亿元，约为化学业务364.658469亿元的54.6%；TIDES 113.7亿元约31.2%。它们在同一化学分部内，不另加收入。",
+    "direction": "选择丢失下行风险和订单/管线限定，可使方向论据过于乐观；最新Q1与H1未整合还可能错失增速变化。实际未来金额偏差与净方向unknown。",
+    "direct_propagation": "RF只绑定CRDMO机制span，未引用错误c4；executor还直接读原件关键表/政策，不能把摘要漏项自动当成预测数字已错。20%是明确分析师条件假设。",
+    "future_revenue_error_amount": null
+  },
+  "remaining_unknowns": [
+    "未读原件完整范围不作全面召回结论。",
+    "最新H1/IR/融资/实质Q&A材料资格与内容缺口。",
+    "三类cache invalidation及受控付费后恢复未测试。",
+    "终点磁盘不证明峰值/净增量。",
+    "MiMo失败实际现金费用null，保留预算hold。",
+    "current public reader用于打开固定initial字节，不把正在接收的后修源码当initial执行结果。"
+  ],
+  "recommended_retests": [
+    "新attempt实际使用共享引擎批准策略/投影并保留真实engine/version/context evidence。",
+    "同一冻结年报目标，逐项原件→selected→summary→自身support回归，尤其ST-05/06/07/09/10和c4分部主体。",
+    "最新已发现材料与Q&A经现有CWP/FF公开边界完成；Q1实际进入经营证据链。",
+    "有界cache原文/配置/generator变化失效、当前parent拒绝及空间delta/peak。",
+    "已授权付费响应后激活前中断大节点；验证lease/outbox、raw response保持与预算不重复。"
+  ]
+}

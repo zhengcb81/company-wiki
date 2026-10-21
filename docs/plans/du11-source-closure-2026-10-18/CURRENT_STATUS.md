@@ -6,15 +6,15 @@
 
 ## 当前执行状态与唯一下一步
 
-**实施已按用户2026-10-21明确指令恢复。R1进行中：N1冻结通过；药明康德首轮真实执行已按partial封存，正在四路独立审查。三家公司为药明康德→药明合联→Snowflake；[本轮施工细则](r1-holdout-20261021/implementation.md)、[检查点](r1-holdout-20261021/checkpoints.json)、[进度](r1-holdout-20261021/stage-progress.json)。** 每家公司使用独立executor、四路独立reviewer和根因专家；按大节点修复、复验与提交推送，不增加小节点签收。
+**实施已按用户2026-10-21明确指令恢复。R1进行中：N1冻结通过；药明康德首轮真实执行已按partial封存，四路独立审查已封存：73检查，26问题（15P1/11P2），正在统一共因方案。三家公司为药明康德→药明合联→Snowflake；[本轮施工细则](r1-holdout-20261021/implementation.md)、[检查点](r1-holdout-20261021/checkpoints.json)、[进度](r1-holdout-20261021/stage-progress.json)。** 每家公司使用独立executor、四路独立reviewer和根因专家；按大节点修复、复验与提交推送，不增加小节点签收。
 
-当前唯一下一主线节点是：**完成药明康德sealed initial四路独立审查→专家共因诊断/TDD修复→原公司新attempt复验。** 先复用现存证据、核对当前接口；样本必须区别于开发过程中反复调试的 CN/HK/US 三源。B2、类型清零和已接收施工卡均不重新派工；不为 CN 最后两条遗漏继续付费实验。
+当前唯一下一主线节点是：**接收专家对26问题及R2/观测项的共因PWF→按责任层并行TDD修复→原公司新attempt复验。** 先复用现存证据、核对当前接口；样本必须区别于开发过程中反复调试的 CN/HK/US 三源。B2、类型清零和已接收施工卡均不重新派工；不为 CN 最后两条遗漏继续付费实验。
 
 ## 已完成及验收边界
 
 | 事项 | 已完成结果 | 证据及适用范围 |
 |---|---|---|
-| 共享引擎、阅读策略和 B2 来源闭合 | 已实现并发布；最终代码复审 PASS | [B2 终审](review/b2-antecedent-final-review-20261018-v3.md)。终审当次109项；补充回归后工程记录110项，不能写成一次110项独审 |
+| 共享引擎、阅读策略和 B2 来源闭合 | 组件已实现发布、B2复审PASS；新批次默认仍0.8，0.9正式生产切换未完成 | [B2 终审](review/b2-antecedent-final-review-20261018-v3.md)。终审当次109项；补充回归后工程记录110项，不能写成一次110项独审 |
 | B2 真实来源回放 | CN 10/10、HK 7/7、US 8/8；原件/gold 不变，0 API | [CN 回放](b2-final3-20261018/cn-h1.json)、[HK/US 回放](b2-real-sources-final2-20261018/replay.json)；历史代码 `2a80acf6`，不是新公司 holdout |
 | C 普通工程链路 | 三家真实运行有恢复、跨 run 缓存、FF 复用和 RF 读取通过记录 | [已提交的核心收据摘要](receipts/c-live-receipts-20261018.md)及 [JSON](receipts/c-live-receipts-20261018.json)。完整子收据在本机运行树；未对最新类型修复代码重新做真实 C |
 | RF/FF DU11 交付与 P1–P4 四包 | 已接收、合入主线并发布 | [历史发布收尾](review/du11-reception-closeout.md)、[10月18日交付快照](review/final-handoff-report-20261018.md)。不代表所有相关仓库的所有分支均已清空 |
@@ -35,21 +35,21 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | N1准备PASS；首家药明康德initial=partial已封存，639工件逐hash核对一致，四审进行中 | [冻结终审](review/r1-holdout-freeze-review-20261021.md)已完成；运行完整流程和独立审查，发现共同根因再修复。已有三源只能叫 development regression |
-| R2 实验性补写 | `CW_SUMMARY_COVERAGE_REPAIR` 默认关闭，关闭改动已发布；两次 attempt 路径仍有 `activation-resume` / `ReservationConflictError` | 作为独立课题修复或移除；普通单次恢复已通过与此不矛盾。不得默认开启或把它算已验收 |
+| R1 主线 | N1准备PASS；首家药明康德initial=partial已封存，639工件逐hash核对一致，四审均FAIL，26问题；专家方案进行中 | [冻结终审](review/r1-holdout-freeze-review-20261021.md)已完成；运行完整流程和独立审查，发现共同根因再修复。已有三源只能叫 development regression |
+| R2 实验性补写 | `CW_SUMMARY_COVERAGE_REPAIR` 默认关闭，关闭改动已发布；已零网络复现4个RED/1个控制PASS：历史partial输出0被final激活改写；新paid多operation限制另列，未修 | [根因分诊](review/r1-r2-recovery-triage-20261021.md)已封存；专家评估移除实验新增补写入口、保留既有结果/费用及普通恢复；普通单次恢复已通过与此不矛盾。不得默认开启或把它算已验收 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
-| R5 已知测试债 | 两份旧contract及相关实现已TDD修复、独审PASS并入master `a5214bda`（待正常push） | 最终受影响195项全绿，保留旧golden并新增current版；独审反例发现并修四条reservation读路径共因，准确字节已核对恢复入master。见[并线记录](r1-holdout-20261021/r5-integration.json)；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
+| R5 已知测试债 | 两份旧contract及相关实现已TDD修复、独审PASS并入master `a5214bda`（已随`feaef48a`正常push） | 最终受影响195项全绿，保留旧golden并新增current版；独审反例发现并修四条reservation读路径共因，准确字节已核对恢复入master。见[并线记录](r1-holdout-20261021/r5-integration.json)；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
 | R6 跨仓及清理边界 | RF/FF自身完整套件未在本机当前组合复跑；旧RF临时目录清理曾被平台拒绝 | 跨仓后续按各自环境及实际变更做大节点验证；旧未清理状态未重新核验，不声称已全清、不换通道重试旧拒绝操作 |
 
 ## 首家公司真实执行边界
 
-正式DS摘要、RF公开读取、五分部三情景原生预测和新run缓存复用已实际运行；MiMo首调HTTP401的未知预留完整保留，未盲重试。最新H1/IR/融资来源资格、Q1经营桥、独立量级校准和付费后激活前故障恢复尚未完成。0新增raw；另有2次SHA核验HTTP共1,905,400B，不能将0下载说成零网络。缓存复用同一169,547B摘要且新增reservation=0，不等于故障恢复或业务覆盖通过。原件/配置复核记录保留；[封存观察](r1-holdout-20261021/initial-execution-seal.json)绑定真实manifest。
+正式DS摘要、RF公开读取、五分部三情景原生预测和新run缓存复用已实际运行；MiMo首调HTTP401的未知预留完整保留，未盲重试。[四路独立报告](r1-holdout-20261021/initial-audit/four-review-summary.md)均FAIL：旧0.8路径而非新共享引擎、业务遗漏/一条分部口径错拼、FF合同遮蔽错误及companion、目标发现上限、最新H1/IR/融资/Q1消费及独立量级/确认桥缺口；付费后激活前故障恢复尚未完成。1276复算零算术差错不能抵消这些问题。0新增raw；另有2次SHA核验HTTP共1,905,400B，不能将0下载说成零网络。缓存复用同一169,547B摘要且新增reservation=0，不等于故障恢复或业务覆盖通过。原件/配置复核记录保留；[封存观察](r1-holdout-20261021/initial-execution-seal.json)绑定真实manifest。
 
 ## 代码、发布和 CI 基线
 
 - 文档整理前主线：`44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc`。2026-10-21已 fetch，`master` 与 `origin/master` 一致；tracked 文件干净，历史 `.planning` 未跟踪材料保留。
-- 最新代码提交：`a5214bda`（R5）；正常push/其CI待核。最近已核对的历史绿点为 `76a9440b9a580889460db0b7b545135060f1ce2d`；公开 Actions API 已核对 [CI 39662983951](https://github.com/zhengcb81/company-wiki/actions/runs/39662983951) 为 `completed/success`，相同完整 SHA。
+- 最新代码提交：`a5214bda`（R5）；正常push已绿7047单测/24跳过及142 smoke；[新CI39682544340](https://github.com/zhengcb81/company-wiki/actions/runs/39682544340)已按精确HEAD `feaef48a`核对SUCCESS。最近已核对的历史绿点为 `76a9440b9a580889460db0b7b545135060f1ce2d`；公开 Actions API 已核对 [CI 39662983951](https://github.com/zhengcb81/company-wiki/actions/runs/39662983951) 为 `completed/success`，相同完整 SHA。
 - RF DU11记录：`9669c4d7` / CI `39095818018`；FF DU11记录：`e8740748` / CI `39095654355`。本次未联网重查这两个仓库，不把历史pin写成它们实时HEAD。
 - 后续文档提交不改变上述代码基线；当前 workflow 忽略本轮文档路径，正常 pre-push 仍运行变更选择与既有 smoke。文档提交不要求再追一个不会产生的行为 CI，不递归更新跨仓兼容pin。
 

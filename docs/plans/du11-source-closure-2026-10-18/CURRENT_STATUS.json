@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-21",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "OPEN_R1_CN_INITIAL_SEALED_FOUR_REVIEW_IN_PROGRESS",
+  "overall_status": "OPEN_R1_FOUR_REVIEWS_SEALED_EXPERT_REMEDIATION_DESIGN",
   "current_authorized_scope": "freeze_new_company_holdout_then_execute_review_remediate_replay_full_RF_audit_loop",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -10,15 +10,14 @@
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
   "last_code_commit": "a5214bdabc56fed2dfc75fbb3b62ef05697e2717",
   "code_ci": {
-    "run_id": 39662983951,
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39662983951",
-    "head_sha": "76a9440b9a580889460db0b7b545135060f1ce2d",
+    "run_id": 39682544340,
     "status": "completed",
     "conclusion": "success",
-    "verified_on": "2026-10-21",
+    "head_sha": "feaef48accdee0e076d2ecd3108718b06203b3ca",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39682544340",
     "method": "anonymous_public_actions_api",
-    "baseline_only": true,
-    "pending_new_source_commit": "a5214bda"
+    "verified_on": "2026-10-21",
+    "verified_at": "2026-10-21T22:00:05.081924+00:00"
   },
   "completed": {
     "b2": {
@@ -76,13 +75,13 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "CN_INITIAL_PARTIAL_SEALED_FOUR_REVIEWS_PENDING",
+      "status": "CN_INITIAL_FOUR_REVIEWS_FAIL_26_FINDINGS_EXPERT_DESIGN",
       "mainline": true
     },
     {
       "id": "R2",
       "task": "repair or remove experimental two-attempt coverage-repair recovery",
-      "status": "DEFAULT_OFF_RESERVATION_CONFLICT_OPEN"
+      "status": "ROOT_CAUSE_REPRODUCED_4_RED_1_CONTROL_PASS_REPAIR_OR_REMOVAL_PENDING"
     },
     {
       "id": "R3",
@@ -97,7 +96,7 @@
     {
       "id": "R5",
       "task": "triage two existing local contract failures",
-      "status": "FIXED_195_PASS_INDEPENDENT_REVIEW_PASS_MERGED_PENDING_PUSH"
+      "status": "FIXED_REVIEWED_MERGED_PUSHED_CI_SUCCESS"
     },
     {
       "id": "R6",
@@ -105,7 +104,7 @@
       "status": "RECORDED_NOT_REVERIFIED"
     }
   ],
-  "next_step_now": "complete four independent reviews of sealed WuXi AppTec initial package, expert common-root diagnosis and TDD remediation, same-company new attempt then remaining fresh holdouts",
+  "next_step_now": "independent expert maps all 26 findings plus carried R2 and coordinator observations to root-cause work packages; ROOT executes TDD fixes at source/adapter/research responsibility boundaries, original-company new attempt then fresh holdouts",
   "next_step_after_user_resumes": "already_resumed_2026_10_21",
   "budget_snapshot": {
     "observed_on": "2026-10-21",
@@ -131,5 +130,17 @@
   "historical_us_c_model": "MiniMax-M3",
   "new_paid_calls_in_this_update": 2,
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
-  "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json"
+  "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
+  "last_verified_successful_code_ci": {
+    "run_id": 39662983951,
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39662983951",
+    "head_sha": "76a9440b9a580889460db0b7b545135060f1ce2d",
+    "status": "completed",
+    "conclusion": "success",
+    "verified_on": "2026-10-21",
+    "method": "anonymous_public_actions_api"
+  },
+  "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
+  "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
+  "r2_triage_ref": "review/r1-r2-recovery-triage-20261021.json"
 }

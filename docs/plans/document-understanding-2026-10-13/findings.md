@@ -2,6 +2,10 @@
 
 **唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
 
+## 2026-10-21 四路首审与共因设计节点
+
+最终采集原因必须按latest真实journal：2025H1已排除，随后无target的历史候选发现第17项触16上限，旧pub gap不是最终原因。FF白名单/非零退出分类和companion投影遮蔽上游事实。当前0.8摘要一条分部口径错拼，0.9共享context还未真实执行。已得Q1和新H1/管理指引未入模，算术正确不等于研究合格；不把“抬高预测贴指引”当修复。R2根因是首partial output0被激活改正值，新paid多operation限制另列；修复或移除实验入口要保留历史费用/输出和普通恢复。
+
 ## 2026-10-21 R1首轮封存与四路审查
 
 真实执行将几种问题区分：初始catalog未初始化属准备问题；有效blocked ensure被FF报invalid_producer_schema疑似协议共因；未知旧文件publication阻塞新期间下载待专家判定；MiMo401属外部provider失败并保留unknown；非空workdir/缺closed field属执行错误。上述均先进入独立四审，不按ROOT猜测直接修。普通cache PASS不等于paid-response激活恢复或R2实验补写恢复。

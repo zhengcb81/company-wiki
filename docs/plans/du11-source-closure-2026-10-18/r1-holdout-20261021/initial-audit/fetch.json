@@ -1,0 +1,1051 @@
+{
+  "schema_version": "1.0",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "role": "fetch",
+  "attempt_id": "initial",
+  "recorded_at": "2026-10-21T21:53:15.172446+00:00",
+  "executor_completion": "partial",
+  "execution_outcome": "partial",
+  "overall_status": "FAIL",
+  "independence": {
+    "independent_agent": true,
+    "other_reviewer_drafts_read": false,
+    "product_edits": false,
+    "provider_calls_during_review": 0,
+    "network_calls_during_review": 0,
+    "codegraph": "CWP/FF indices readable but stale symbol locations/missing recent symbols; ET uninitialized. No index mutation. Pinned git source read directly."
+  },
+  "review_binding": {
+    "manifest": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\manifest.json",
+      "locator": "/",
+      "sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458"
+    },
+    "expected_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+    "frozen_versions_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\versions.json",
+    "code_pins": {
+      "company-wiki": "646b6937d8d469894c39fb010ca5e5eb0565d95f",
+      "filing-fetch": "e8740748f91999cb24169b42f8e789726ed50482",
+      "revenue-forecast": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf"
+    },
+    "pin_evidence": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+      "locator": "/code_bindings",
+      "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+    },
+    "final_forecast": {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+      "locator": "/sources",
+      "sha256": "21ac4e6c9a409b90a1b43fc03d13dd0b9341ba04e0bdedfd9486f72abcf31c96"
+    },
+    "final_source_versions": [
+      {
+        "source_id": "urn:company-wiki:source:sha256:71582e6607861d5e02baeb65a7c4a8b855d1a608cde3981214f86d7f4c4abcf1",
+        "source_version": "71582e6607861d5e02baeb65a7c4a8b855d1a608cde3981214f86d7f4c4abcf1",
+        "raw_byte_size": 3102910,
+        "document_kind": "semi_annual_report",
+        "published_date": null,
+        "fiscal_year": 2025,
+        "fiscal_period": "H1",
+        "same_original_sha_as_initial_preview": true
+      },
+      {
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "source_version": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "raw_byte_size": 1608226,
+        "document_kind": "annual_report",
+        "published_date": "2026-03-24",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "same_original_sha_as_initial_preview": true
+      },
+      {
+        "source_id": "urn:company-wiki:source:sha256:379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6",
+        "source_version": "379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6",
+        "raw_byte_size": 297174,
+        "document_kind": "quarterly_report",
+        "published_date": "2026-04-28",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "same_original_sha_as_initial_preview": true
+      },
+      {
+        "source_id": "urn:company-wiki:source:sha256:f73de6513ba9e47d4ab7dc7838642a93768c9d54437188003accc49d3d6fc2e4",
+        "source_version": "f73de6513ba9e47d4ab7dc7838642a93768c9d54437188003accc49d3d6fc2e4",
+        "raw_byte_size": 15688293,
+        "document_kind": "prospectus",
+        "published_date": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "same_original_sha_as_initial_preview": true
+      }
+    ],
+    "formal_forecast_source_ids": [
+      "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    ]
+  },
+  "checks": [
+    {
+      "check_id": "F01",
+      "status": "PASS",
+      "detail": "实际 source_preparation.py → 指定 FF 仓入口已启动；CN 药明康德/603259 由 CWP identify 返回 verified/active，annual FY2025、Q1 FY2026、H1 FY2026 与 2026-10-21 均在冻结确切输入。15 个相关 CLI capture 的输入未被输出覆盖，stdout/stderr/exit 实读。成功不由外层 exit=0 推定。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\identity.json",
+          "locator": "/qualification/resolved",
+          "sha256": "c3f191a7ba0502225f053369382f552687d8ca50c4c7f275a33f946b2d8640c5"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/calls",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\events.jsonl",
+          "locator": "command_started capture_id=eae4dae990244435a6a554ea6f47b91f,1c09f767abbb4745bebf09fc1283fc25",
+          "sha256": "137adaa2bb4f18258a094ef426f1e18b211ab8ea3e5c84dee8764dbb9973704f"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F02",
+      "status": "FAIL",
+      "detail": "请求与 SourceRef 为 v2，reuse_only/fetch_if_missing 明确；没有旧双授权/receipt/canary 阻断。但本次 current CWP ensure 返回 local_preparation + blocked/unavailable，FF 同为 operation 1.0 的 closed contract 不接受，实报 invalid_producer_schema。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\1c09f767abbb4745bebf09fc1283fc25\\stderr.txt",
+          "locator": "/",
+          "sha256": "3a40dcf0be28a69b9b7f35a1b5668ac9fc0640598fba1452f271aff93efe2761"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\5173af840b924d96a40dbb93722660c4\\stdout.txt",
+          "locator": "/",
+          "sha256": "63b4adbd2b6b5a3e6e6565316f099cd2847d4e19ca8a78206598e58855eb40a9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\filing-fetch\\scripts\\fetch_filing.py",
+          "locator": "L687-L747",
+          "sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/ff_contract_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-001"
+      ]
+    },
+    {
+      "check_id": "F03",
+      "status": "PASS",
+      "detail": "年报与 Q1 最终真实 reuse→CWP verified_read，source SHA/size 与原引用相同，download_events=0。旧 H1/IPO 公开 preview/source_export 可开但 published_date/source_url 未证，不被冒称 capture-ready。另有官方同字节核验 GET，单列传输不计新增 raw，也不宣称从未联网。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\eae4dae990244435a6a554ea6f47b91f\\stdout.txt",
+          "locator": "/",
+          "sha256": "c51bf7ce131a88c4773de4be4f60c4fbceb2472dba153bb0e706cd13ca91fac5"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\c50cf161c2b2425eb915365f2516efa1\\stdout.txt",
+          "locator": "/",
+          "sha256": "c22f3ae0d184c683f4efb48739cf4e7e0e2d4d55125867a35e20f754876aa119"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source-final-verification.json",
+          "locator": "/verification",
+          "sha256": "455ee685196328f27feac4272c885c79f3a4a9803935c3e501d64bbe316e8cee"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/http_totals",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F04",
+      "status": "BLOCKED",
+      "detail": "H1 请求具备 50 MiB、180 秒、$0.00 且精确 2026/H1；两次 FF 尝试和一次 native ensure 均未启动 provider。早次 publication gap；最新旧期排除后在本地 discovery 的第17个未注册历史目标触及16候选限额。没有证据验证真正 provider 读取时的下载公司/版本/bytes/time/fee enforcement；不得把配置存在视为 runtime PASS。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\d20c7b3f9b36473ab51dc984e40d8bb8\\stderr.txt",
+          "locator": "/",
+          "sha256": "3a40dcf0be28a69b9b7f35a1b5668ac9fc0640598fba1452f271aff93efe2761"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/acquisition_journal/lines",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/discovery_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\company-wiki\\src\\company_wiki\\source_catalog\\local_reconcile.py",
+          "locator": "L325-L365",
+          "sha256": "4f1722d506f2f8e73b8c86016fa4da60d14c391f831e46317c342688b02dcae9"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-002"
+      ]
+    },
+    {
+      "check_id": "F05",
+      "status": "PASS",
+      "detail": "本 CN 任务配置适配器 stockinfo-cninfo 1.3.0 → StockInfoDLSimple/v2-clean-rewrite json_command_v1，未使用旧 StockInfoDownloader。HK/US 配为 CWP-owned dayu_sdk_bridge bounded 路由且未执行；此 PASS 只覆盖本次选择/配置边界，不证明未跑市场的网络下载。封存配置指纹未变，未见本执行编辑 Dayu 证据。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+          "locator": "/repo_roots/stockinfo",
+          "sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\configuration-and-worktree-observation.json",
+          "locator": "/config_fingerprints; /executor_product_source_edits",
+          "sha256": "a9af91affc3cf89d075e16816108693ba57d8c40c98307b9ae4e671dba0f465d"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/code_bindings",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F06",
+      "status": "BLOCKED",
+      "detail": "精确 FY2026 Q2 companion 请求存在，既未把 FY 年报推断成 Q4，也未转换 PDF 或翻译；但 filing 在 companion dispatch 前失败，没有 ET HTTP/provider 真实结果。ET 工具位置已配置；FMP 凭证、capability、entitlement、费用本次均未验证，不能归因为供应商不支持或订阅拒绝。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/calls/7/inputs/0/request/companion_transcript",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\filing-fetch\\scripts\\fetch_filing.py",
+          "locator": "L1352-L1398; L1496-L1522",
+          "sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/6",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-008"
+      ]
+    },
+    {
+      "check_id": "F07",
+      "status": "FAIL",
+      "detail": "成功年报/Q1 envelopes 保留各自 filing 与 transcript.not_requested；请求 companion 的 H1 错误却在 RF stderr 仅保留 filing failure，缺独立 companion outcome。FF error_envelope 无条件写 transcript.not_requested，即便请求确有 companion；离线纯函数 probe 证实该语义，不冒充一次 ET 运行。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\d20c7b3f9b36473ab51dc984e40d8bb8\\stderr.txt",
+          "locator": "/",
+          "sha256": "3a40dcf0be28a69b9b7f35a1b5668ac9fc0640598fba1452f271aff93efe2761"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/ff_error_envelope_companion_probe/transcript",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\filing-fetch\\scripts\\ff_v2_envelope.py",
+          "locator": "L120-L159",
+          "sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-008"
+      ]
+    },
+    {
+      "check_id": "F08",
+      "status": "FAIL",
+      "detail": "12 类矩阵全部有价值判断，没有因本地缺文件自动 N/A。可用 annual/Q1、历史 IPO preview 的 kind 没有互冒；但实际最新 IR/演示/战略材料、融资原件、最新交易与独立运营基准仍只 discovery/部分读取，不能据配置的财报 provider 宣称已采齐这些类型。最新材料会影响收入模型。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/0-11",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\discovery.json",
+          "locator": "/records",
+          "sha256": "9767a5aec5756a9d569acb6afb41fee6e9807abf9f2f2e42a5d598e9b3780663"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\research\\timed-web-discovery-actual.json",
+          "locator": "/request; /result",
+          "sha256": "797c8a87e451942db04ef19a9bcdae337d0252eefeaebad09a7359d31d8ad21a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\remaining_items.json",
+          "locator": "/remaining",
+          "sha256": "f8b1fbf1d524c6dca59d0aabbcc26ca88077f5c7a2746bb53bd4ec0ea0a80fb3"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-005",
+        "FETCH-007"
+      ]
+    },
+    {
+      "check_id": "F09",
+      "status": "BLOCKED",
+      "detail": "两个官方 HTTPS 核验 GET 观测 status200、entity正文SHA/size 与现存 PDF 精确相同；CWP 原件 verified read 和 PDF页提取排除了空体/HTML当财报的本次结果。GET 无 outer capture，receipt 未留 Content-Type、Content-Length/encoding/wire 字节；无法核完整 HTTP一致性，也未证明 helper 的 response读取受 max_bytes 限制。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\qualification\\annual-official-byte-comparison.json",
+          "locator": "/",
+          "sha256": "48396a40f0eb95cac5b50b2b176aea69ae6a5f0e2718e49ec5ee4d9f289bd9dc"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\qualification\\q1-official-byte-comparison.json",
+          "locator": "/",
+          "sha256": "35eeade885bbc045ab917e73ecf340a0dc7d6d909b612632d9cae7deb61054bb"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\tool_call_index.json",
+          "locator": "/uncaptured_operations/2-3",
+          "sha256": "3c921a4c4089ca72b046e7b5e5461a2a09a4591a7f006d13aebc6c63ecde48ca"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\research\\annual-key-page-read.json",
+          "locator": "/",
+          "sha256": "72365f85e1155dcc3c9b9a6bbdf34a676d96d37993900794fe4a12bd0f552626"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-006"
+      ]
+    },
+    {
+      "check_id": "F10",
+      "status": "PASS",
+      "detail": "CWP source-facts/verified reader 完成校验；RF 消费 pathless SourceRef，不自行搬入 provider 输出目录。正式原件只读根，隔离 catalog/下载根与派生目录受 scope 限定。acquisition observation cost=null/未知未猜零；无无界重试和新供应商订阅证据。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+          "locator": "/isolated_roots; /scope_policy",
+          "sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/calls",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source-final-verification.json",
+          "locator": "/original_mutation_performed; /new_raw_files",
+          "sha256": "455ee685196328f27feac4272c885c79f3a4a9803935c3e501d64bbe316e8cee"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F11",
+      "status": "FAIL",
+      "detail": "文件存在/metadata unknown/provider未开始本可区分，但 FF 将 CWP JSON catalog_unavailable（CLI exit2）标作 producer_transport_failure，并将 named local preparation 状态标成 invalid_producer_schema。最新 matrix 又沿用早次 publication gap，实际21:20 journal 已变 local_candidate_limit；RF收到的原因不足以定位最新阻塞。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\diagnostics\\first-query\\query.stdout.txt",
+          "locator": "/reason",
+          "sha256": "7497f080ca04a9ba128138a33075b14e016147efeee05594d6523c5762b5e14a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\diagnostics\\first-query\\query.call.json",
+          "locator": "/exit",
+          "sha256": "db61fdbb7278710a21e804c87fab68c33934ffd8d20978dd3b5f5780523b107d"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\f209dd4887f948b5ae415642a9956d08\\stderr.txt",
+          "locator": "/",
+          "sha256": "51a5bf087d02c7bfcab5fb34328038cdff27186146728108fd54ed53a545f804"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/acquisition_journal/lines",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/1/reason",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-001",
+        "FETCH-003",
+        "FETCH-004"
+      ]
+    },
+    {
+      "check_id": "F12",
+      "status": "PASS",
+      "detail": "审查阶段按范围保留隔离 catalog/summary 供四路复查；封存 final verification 4份原件同SHA且新增raw=0，production config unchanged。现阶段无新增raw需清理；派生物清理须待复审/重放结束按 owned scope，不能提前删除现存原件。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source-final-verification.json",
+          "locator": "/verification; /new_raw_files",
+          "sha256": "455ee685196328f27feac4272c885c79f3a4a9803935c3e501d64bbe316e8cee"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\manifest.json",
+          "locator": "/retained_native_state",
+          "sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\configuration-and-worktree-observation.json",
+          "locator": "/production_config_writes",
+          "sha256": "a9af91affc3cf89d075e16816108693ba57d8c40c98307b9ae4e671dba0f465d"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F13",
+      "status": "PASS",
+      "detail": "本次无 JSON 默认当 transcript 的登记/消费；注册对象4份PDF归并为4 source ids，源事实kind为annual/semiannual/quarterly/prospectus。scanner 的 transcript classification 取显式 sidecar/标题语义，未按.json后缀默认判电话会。ET原JSON路径未执行，不能推广成ET内容质量已通过。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source-final-verification.json",
+          "locator": "/verification/*/source_facts/document_kind",
+          "sha256": "455ee685196328f27feac4272c885c79f3a4a9803935c3e501d64bbe316e8cee"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\company-wiki\\src\\company_wiki\\source_catalog\\scanner.py",
+          "locator": "L125-L174",
+          "sha256": "8a6fa4f8f5e2ca56b64cc39a6d3372c633a51ebcc09619a65495eb3429a93c80"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\35e1764be41445a3a855fb47b1f2e59b\\input-0001-2a7b38a96a25.json",
+          "locator": "/relative_paths",
+          "sha256": "2a7b38a96a25fb082d2ab09f4ac21b7387af3bb33a23b1f82646ed0220469226"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F14",
+      "status": "PASS",
+      "detail": "SourceRef用raw content SHA/byte_size与document/source ID；PDF页提取和 narrative 作为派生内容另有引用。HTTP receipt bytes 是response entity长度，不冒称wire字节或新raw；pointer不是原件。最终RF sources仅qualified annual，IPO preview没有伪装成可用current参数。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source_ledger.json",
+          "locator": "/sources",
+          "sha256": "63d550f5d196ad2b37b79ddcda057455a53a4cfee8465950737a7c1e20a1c74e"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/sources",
+          "sha256": "21ac4e6c9a409b90a1b43fc03d13dd0b9341ba04e0bdedfd9486f72abcf31c96"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/http_totals",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F15",
+      "status": "FAIL",
+      "detail": "本次不能把未执行的ET写成missing config/unsupported/entitlement/HTTP失败；实际fetch错误是本地catalog/metadata/candidate limit与FF合同不兼容。named CWP unavailable/blocked未正确传给RF，影响四类差异化恢复。模型MiMo401是narrative另一路，非本次filing/ET HTTP失败。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\d20c7b3f9b36473ab51dc984e40d8bb8\\stderr.txt",
+          "locator": "/",
+          "sha256": "3a40dcf0be28a69b9b7f35a1b5668ac9fc0640598fba1452f271aff93efe2761"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/acquisition_journal/lines",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\diagnostics\\first-query\\query.stdout.txt",
+          "locator": "/",
+          "sha256": "7497f080ca04a9ba128138a33075b14e016147efeee05594d6523c5762b5e14a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\usage.json",
+          "locator": "/native_attempts",
+          "sha256": "7020c0a8197110b2e9b353b5806ea8d3dca0eb29c580b8eaa29513407e053140"
+        }
+      ],
+      "finding_ids": [
+        "FETCH-001",
+        "FETCH-004"
+      ]
+    },
+    {
+      "check_id": "F16",
+      "status": "PASS",
+      "detail": "按实际范围计量：archived ensure 明确 provider_started=false、usage_complete/wire_usage_complete/http_exchanges_complete=true，0 wire/entity/exchanges仅是该操作；cost=null。两次verification GET另有1,905,400 entity字节、wire=null，web传输unknown，未猜总量零。native模型预算39,026 charged tokens/9,720 microUSD proxy或hold、actual cash null，与filing provider量分开；没有费用每result重复。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/http_totals",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/qualification_http_observations",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\5173af840b924d96a40dbb93722660c4\\stdout.txt",
+          "locator": "/",
+          "sha256": "63b4adbd2b6b5a3e6e6565316f099cd2847d4e19ca8a78206598e58855eb40a9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\usage.json",
+          "locator": "/native_attempts; /company_charged_tokens; /actual_cash_invoice_cost_usd",
+          "sha256": "7020c0a8197110b2e9b353b5806ea8d3dca0eb29c580b8eaa29513407e053140"
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "check_id": "F17",
+      "status": "PASS",
+      "detail": "相关15次CLI各有独立capture、真实stdout/stderr/exit及确切输入。相同annual请求重复尝试是独立call，不复制一次capture当多个result；annual/Q1 source id/period正确各属其请求。未运行multi-document filing batch，故不把未覆盖batch分派路径称已验证。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/calls",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\tool_call_index.json",
+          "locator": "/calls",
+          "sha256": "3c921a4c4089ca72b046e7b5e5461a2a09a4591a7f006d13aebc6c63ecde48ca"
+        }
+      ],
+      "finding_ids": []
+    }
+  ],
+  "findings": [
+    {
+      "issue_id": "FETCH-001",
+      "severity": "P1",
+      "category": "code",
+      "summary": "CWP ensure 的 local_preparation/blocked/unavailable 未被当前 FF operation1.0契约接受，结构化原因降成 invalid_producer_schema。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\5173af840b924d96a40dbb93722660c4\\stdout.txt",
+          "locator": "/",
+          "sha256": "63b4adbd2b6b5a3e6e6565316f099cd2847d4e19ca8a78206598e58855eb40a9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\filing-fetch\\scripts\\fetch_filing.py",
+          "locator": "L687-L747",
+          "sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/ff_contract_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "expected": "命名的来源资格/本地限额结果经FF→RF保持同义，provider是否启动和usage不丢。",
+      "actual": "native capture返回blocked/publication_date_unknown；FF frozen H1调用两次都invalid_producer_schema。",
+      "root_cause_hypothesis": "已定位：FF _SOURCE_OPERATION_FIELDS缺local_preparation，STATUSES缺blocked；当前CWP operation projection会生成该字段及状态；纯validator probe实际拒绝。",
+      "recommendation": "由两端契约owner统一版本/字段与status映射，并保留safe local-preparation原因；不删字段伪造completed或放宽到任意JSON。",
+      "retest": "用本次真实blocked与最新unavailable envelope经FF→RF重放，断言同义原因、provider_started=false、cost=null，无下载。",
+      "responsibility_layer": "FF跨技能合同；CWP公开operation契约"
+    },
+    {
+      "issue_id": "FETCH-002",
+      "severity": "P1",
+      "category": "code",
+      "summary": "最新2026H1无法启动下载：identity-only discovery先枚举旧历史文档，第17个未登记目标触发local_candidate_limit。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/acquisition_journal/lines/1",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/discovery_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/old_h1_scope_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\company-wiki\\src\\company_wiki\\source_catalog\\local_reconcile.py",
+          "locator": "L325-L365; L453-L471",
+          "sha256": "4f1722d506f2f8e73b8c86016fa4da60d14c391f831e46317c342688b02dcae9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\company-wiki\\src\\company_wiki\\source_catalog\\local_inventory.py",
+          "locator": "L16-L22",
+          "sha256": "a2490531f55327e0da7e379dbf96e07246b927280c15659e87b648a953af972d"
+        }
+      ],
+      "expected": "已证不同期间的2025H1不应成为2026H1 publication gate；在任务限额内能有界查明目标期是否缺失并进入正确provider。",
+      "actual": "21:20:22 acquisition journal reason=local_candidate_limit；readonly probe 4groups/75entries、注册0、network0，17条目标均2018–2022历史财报；oldH1 scope relation=not_relevant。",
+      "root_cause_hypothesis": "已定位机制：_discover_source_groups只接identity、不接request，计所有issuer未注册文件；默认max_candidates16，目标注册前整体失败。早次pub未知是真实前一状态，不能用于解释最新失败。",
+      "recommendation": "保持有界策略，改为按来源层可验证的目标kind/period逐步发现/登记和可恢复cursor，避免无关历史候选耗尽本次请求；不得简单无限扩限或把未知身份当无原件。",
+      "retest": "隔离真实同公司库：>16历史文件+缺2026H1；验证旧期排除、候选限额保持、目标期进入CN provider或准确报能力限制，真实下载限额在读取期间生效。",
+      "responsibility_layer": "CWP本地来源发现/采集编排"
+    },
+    {
+      "issue_id": "FETCH-003",
+      "severity": "P2",
+      "category": "observability",
+      "summary": "封存最终document_matrix沿用早次publication gap，未反映最新local_candidate_limit。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/1",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/acquisition_journal/lines",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "expected": "每类doc最新状态绑定真实最后call/journal与attempt，早次失败保留历史。",
+      "actual": "documents/1 request_id指latest d20c7，却reason写publication_date_unknown；最新journal不同。",
+      "root_cause_hypothesis": "executor矩阵authoring沿用旧diagnostic；FF错误遮蔽增加误诊风险。",
+      "recommendation": "由实际latest call/result/status join生成并核对矩阵；分别保留early与latest，不回填封存历史。",
+      "retest": "对initial与scope-facts后两个attempt关联request_id/capture/journal，latest reason应准确且旧reason仍可查。",
+      "responsibility_layer": "执行记录/审计观测；FF原因透传为关联因素"
+    },
+    {
+      "issue_id": "FETCH-004",
+      "severity": "P2",
+      "category": "config",
+      "summary": "隔离cold catalog未就绪触发catalog_unavailable，FF却报告泛化producer_transport_failure。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\diagnostics\\first-query\\query.call.json",
+          "locator": "/",
+          "sha256": "db61fdbb7278710a21e804c87fab68c33934ffd8d20978dd3b5f5780523b107d"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\diagnostics\\first-query\\query.stdout.txt",
+          "locator": "/",
+          "sha256": "7497f080ca04a9ba128138a33075b14e016147efeee05594d6523c5762b5e14a"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\f209dd4887f948b5ae415642a9956d08\\stderr.txt",
+          "locator": "/",
+          "sha256": "51a5bf087d02c7bfcab5fb34328038cdff27186146728108fd54ed53a545f804"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\35e1764be41445a3a855fb47b1f2e59b\\stdout.txt",
+          "locator": "/",
+          "sha256": "a4007d1c944efa2bbf7fbde52e0e054c2c45dd7465d428303b49666423359f40"
+        }
+      ],
+      "expected": "有限bootstrap/注册在准备层完成，或把有效JSON unavailable及原因传给RF；不能把有效业务失败当transport或provider网络错。",
+      "actual": "first-query stdout=JSON unavailable/catalog_unavailable、exit2；initial RF stderr为query producer_transport_failure；手动bounded register后才进入metadata资格路径。",
+      "root_cause_hypothesis": "准备层初始catalog空/未就绪；FF对子进程nonzero只取退出分类而丢有效结构化业务body。未发现需要重新人工批准。",
+      "recommendation": "准备层明确empty catalog生命周期，FF保留有限validated nonzero envelope；不启动全库scan，不复制raw到消费者。",
+      "retest": "从同样空隔离catalog启动reuse_only：得到准备层具名初始化或准确catalog_unavailable，零provider/下载；再有界注册验证复用。",
+      "responsibility_layer": "隔离准备配置；FF transport错误分类"
+    },
+    {
+      "issue_id": "FETCH-005",
+      "severity": "P1",
+      "category": "research",
+      "summary": "最新H1、IR/演示/战略、融资与外部运营基准未完成来源资格/消费，完整RF来源覆盖不足。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\remaining_items.json",
+          "locator": "/remaining",
+          "sha256": "f8b1fbf1d524c6dca59d0aabbcc26ca88077f5c7a2746bb53bd4ec0ea0a80fb3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\discovery.json",
+          "locator": "/records/1; /records/3-4",
+          "sha256": "9767a5aec5756a9d569acb6afb41fee6e9807abf9f2f2e42a5d598e9b3780663"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/sources",
+          "sha256": "21ac4e6c9a409b90a1b43fc03d13dd0b9341ba04e0bdedfd9486f72abcf31c96"
+        }
+      ],
+      "expected": "所有有重大收入价值的文档类完成适当合法入口的发现/必要读取，能力缺口具体记录；正式final不能把partial矩阵作为全覆盖。",
+      "actual": "12类都有评估，但最新H1 blocked、IR仅web、presentation/strategy没读、融资只公告部分、独立numerical reference未完成；Q1已qualified却未进入模型。",
+      "root_cause_hypothesis": "H1为CWP/FF产品阻塞；其余为本次执行/研究未完成或入口能力尚未实证，不能全部归成外部provider缺能力。",
+      "recommendation": "专家分别排修产品依赖并完成已发现material文档的合法来源读取/资格；非财报不能冒用CN financial provider能力，未知供应能力如实交接。",
+      "retest": "复跑12类矩阵，逐类保存需要/已有复用/真实缺失尝试/有依据无重大价值，并核正式RF最终source版本及使用关系。",
+      "responsibility_layer": "执行/研究完成度；产品依赖另见001/002"
+    },
+    {
+      "issue_id": "FETCH-006",
+      "severity": "P2",
+      "category": "observability",
+      "summary": "官方同字节核验GET未在调用前capture，HTTP观察与读取字节上限证据不完整。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\tool_call_index.json",
+          "locator": "/uncaptured_operations/2-3",
+          "sha256": "3c921a4c4089ca72b046e7b5e5461a2a09a4591a7f006d13aebc6c63ecde48ca"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\qualification\\annual-official-byte-comparison.json",
+          "locator": "/",
+          "sha256": "48396a40f0eb95cac5b50b2b176aea69ae6a5f0e2718e49ec5ee4d9f289bd9dc"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\qualification\\q1-official-byte-comparison.json",
+          "locator": "/",
+          "sha256": "35eeade885bbc045ab917e73ecf340a0dc7d6d909b612632d9cae7deb61054bb"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/http_totals",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "expected": "必要qualification verification也应按任务现有byte/time预算有界、留真实HTTP状态/type/length与entity/wire区分；原件不额外持久复制。",
+      "actual": "2个requests.get timeout60各整读resp.content，存status/entity长度/SHA但未存headers/wire、无outer capture；正文合计1905400B，实际未超50MiB；webbytes unknown。",
+      "root_cause_hypothesis": "已读helper qualify-annual/q1分支采用未stream限制的requests.get；回填receipt并非原始HTTP header证据。核验本身对未知publication有价值，不判成无理由重复原件入库。",
+      "recommendation": "将必要官方byte qualification纳入来源owner现有有界读取/观测接口；保留unknown wire，不把0newraw写成0network。",
+      "retest": "限额内与超限/HTML/空体fixtures验证stream截断、status/type和wire/entity观察一致；真实复跑只做必要qualification，不为审计重复下载。",
+      "responsibility_layer": "执行helper/HTTP观测；来源qualification接口"
+    },
+    {
+      "issue_id": "FETCH-007",
+      "severity": "P2",
+      "category": "data",
+      "summary": "已有2025H1与2018IPO publication/URL未知，无法作为截止日内qualified来源使用。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\source-final-verification.json",
+          "locator": "/verification/0/source_facts; /verification/3/source_facts",
+          "sha256": "455ee685196328f27feac4272c885c79f3a4a9803935c3e501d64bbe316e8cee"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/7",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/old_h1_scope_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        }
+      ],
+      "expected": "未知published_date如实保留，由所属来源层用可信原始发布记录/精确byte关联补齐；不能凭文件名/mtime猜日或要求无理由人签。",
+      "actual": "两个原件可preview并保留SHA，source-facts正确记录null；IPO只能历史业务preview，旧H1不应阻新期（latest相关性已排除）。",
+      "root_cause_hypothesis": "来源历史元数据不足；并非文件缺失、provider账户拒绝或原件损坏。",
+      "recommendation": "在有重大价值时从已有官方来源记录校验publication/URL并绑定同SHA；不为填日期发起无必要重复下载，也不将缺失自动N/A。",
+      "retest": "原字节不变；补齐前仍preview-only，补齐后用途及as_of资格明确；不同期间查询不受未证publication历史文件阻塞。",
+      "responsibility_layer": "CWP来源事实/历史元数据"
+    },
+    {
+      "issue_id": "FETCH-008",
+      "severity": "P2",
+      "category": "code",
+      "summary": "被请求的companion在filing异常时无完整独立结果；error_envelope将其标作not_requested。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\d20c7b3f9b36473ab51dc984e40d8bb8\\input-0001-f4199aabf7c6.json",
+          "locator": "/companion_transcript",
+          "sha256": "f4199aabf7c6a191e1255649ba9ba46a716d4bfc42a2428324a26604225ade72"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\commands\\d20c7b3f9b36473ab51dc984e40d8bb8\\stderr.txt",
+          "locator": "/",
+          "sha256": "3a40dcf0be28a69b9b7f35a1b5668ac9fc0640598fba1452f271aff93efe2761"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\probe.json",
+          "locator": "/ff_error_envelope_companion_probe",
+          "sha256": "36038fb024fe164d9e498dd5cca07aeed8476529d7a8e3cbf160500026a3eb6c"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\filing-fetch\\scripts\\ff_v2_envelope.py",
+          "locator": "L146-L154",
+          "sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\fetch\\pinned-source\\filing-fetch\\scripts\\fetch_filing.py",
+          "locator": "L1496-L1522",
+          "sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        }
+      ],
+      "expected": "真实requested但未dispatch的companion应保留精确period/intent及not_run原因，与filing失败分开；ET外部能力与费用仅按真实工具结果。",
+      "actual": "FY2026Q2/50MiB/180s/$0在两次frozen request中明确；RF错误无transcript；纯函数error_envelope携request仍not_requested。没有真实ET/FMP entitlement或HTTP失败结果。",
+      "root_cause_hypothesis": "FF只有resolve_filing返回handle后才调companion；exception envelope硬编码not_requested；RF source_preparation失败投影未保留完整child结果。",
+      "recommendation": "对requested companion生成独立具名未执行结果并留envelope；需要时按任务既有授权走ET独立原工具，有界按精确FY/Q请求，不从FY臆造Q4。",
+      "retest": "真实filing failure+requested companion时结果不能not_requested；独立ET查询若执行必须保留原语言TXT/JSON、精确季度、真实provider_requests/bytes/cost或null；不可用保持具名。",
+      "responsibility_layer": "FF companion orchestration/envelope；RF失败结果保存"
+    }
+  ],
+  "document_matrix": [
+    {
+      "document_kind": "annual_report",
+      "needed_for": "history/base/segments/policy/management targets",
+      "availability": "REUSED_VALIDATED",
+      "request_id": "source-preparation-annual-after-qualified-facts",
+      "reuse_or_fetch": "reuse_only after bounded registration and truthful source-facts",
+      "provider": "existing official CNINFO bytes",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "reason": null,
+      "review_status": "PASS",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/0",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "semi_annual_report",
+      "needed_for": "latest 2026H1 activity/perimeter/updated guidance",
+      "availability": "BLOCKED",
+      "request_id": "source-preparation-2026H1-after-noncurrent-scope-facts",
+      "reuse_or_fetch": "fetch_if_missing with exact FY2026/H1 and scope limits",
+      "provider": null,
+      "source_id": null,
+      "reason": "native CWP blocked/local_metadata_gap/publication_date_unknown; FF invalid_producer_schema",
+      "review_status": "BLOCKED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/1",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ],
+      "review_correction": "早次publication_date_unknown；latest21:20:22 local_candidate_limit。未把2025H1错当2026H1，也没有provider HTTP启动。"
+    },
+    {
+      "document_kind": "quarterly_report",
+      "needed_for": "Q1 2026 baseline update and later-quarter disclosure discovery",
+      "availability": "REUSED_VALIDATED_NOT_MODELED",
+      "request_id": "source-preparation-q1-after-qualified-facts",
+      "reuse_or_fetch": "reuse_only after truthful source-facts",
+      "provider": null,
+      "source_id": "urn:company-wiki:source:sha256:379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6",
+      "reason": "Q1 exact source qualified; forecast authoring retained annual only. Issuer IR discovery listed Q1 and H1, no Q3 original qualified by cutoff; no inference from quarter end.",
+      "review_status": "PARTIAL",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/2",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "investor_relations",
+      "needed_for": "latest results and official guidance",
+      "availability": "DISCOVERED_NOT_CWP_QUALIFIED",
+      "request_id": "web-official-open",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "Official H1 press opened, including newer annual revenue guidance; not silently presented as native qualified evidence.",
+      "review_status": "NOT_COMPLETED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/3",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "investor_presentation",
+      "needed_for": "latest detailed business guidance and timing",
+      "availability": "DISCOVERED_NOT_READ",
+      "request_id": "web-official-open",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "Issuer H1/Q1/JPM presentation listings found; actual PDF presentation was not CWP qualified/read.",
+      "review_status": "NOT_COMPLETED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/4",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "strategy_communication",
+      "needed_for": "longer-horizon capacity and business changes",
+      "availability": "DISCOVERED_NOT_READ",
+      "request_id": "web-official-open",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "JPM 2026 presentation found in official index, not marked checked.",
+      "review_status": "NOT_COMPLETED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/5",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "investor_call_transcript",
+      "needed_for": "management Q&A and target clarification",
+      "availability": "BLOCKED_NOT_EXECUTED",
+      "request_id": "source-preparation-2026H1-after-noncurrent-scope-facts",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "Exact FY2026Q2 companion requested but filing stage blocked; no ET provider call established. Official annual-call notice read; it is not a call transcript or absence proof.",
+      "review_status": "BLOCKED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/6",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ],
+      "review_correction": "请求不是discovery_only：frozen companion intent=fetch_if_missing，FY2026Q2，限额均已给；实际未dispatch。"
+    },
+    {
+      "document_kind": "prospectus",
+      "needed_for": "historical service/charging/recognition structure and old business perimeter",
+      "availability": "PREVIEW_ONLY_PUBLICATION_UNKNOWN",
+      "request_id": "cwp-public-ipo-actual-business-pages",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "2018 issue context and substantive business chapter PDF248-263 read via preview; p248-251 inspected. Historical CRO/CMO/FTE/FFS definitions do not substitute for current 2025 recognition policies. No current revenue parameter sourced from this unqualified preview.",
+      "review_status": "PARTIAL",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/7",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "convertible_bond_prospectus",
+      "needed_for": "material new capacity financing and timing",
+      "availability": "OFFICIAL_ANNOUNCEMENT_DISCOVERED_READ_NOT_QUALIFIED",
+      "request_id": "web-financing-call-primary-open",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "Actual 2026 May convertible event exists; official financing-purpose p2 opened via web. No claim all event originals/terms or CWP acquisition complete.",
+      "review_status": "NOT_COMPLETED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/8",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ],
+      "review_correction": "所读1225308070为融资公告，不是convertible prospectus；仅完成事件发现/部分条款用途读取。"
+    },
+    {
+      "document_kind": "equity_offering_prospectus",
+      "needed_for": "material equity financing and business use",
+      "availability": "DISCOVERED_NOT_COMPLETE",
+      "request_id": "web-financing-call-discovery",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "2025 H-share placement and 2026 convertible-to-H-share event leads found; annual discusses historical perimeter. No automatic N/A by missing local file.",
+      "review_status": "NOT_COMPLETED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/9",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "regulatory_filing_transaction",
+      "needed_for": "disposals, continuing/discontinued operations and policy",
+      "availability": "PARTIAL",
+      "request_id": "source-preparation-annual-after-qualified-facts",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "reason": "Annual disposal/perimeter/policy pages read; latest H1/standalone transaction audit/pro-forma and post-filing regulatory originals remain unresolved.",
+      "review_status": "PARTIAL",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/10",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    },
+    {
+      "document_kind": "independent_operating_reference",
+      "needed_for": "outside benchmark, failed/delayed peers, customer-budget conversion",
+      "availability": "NOT_COMPLETED",
+      "request_id": "web-discovery-initial",
+      "reuse_or_fetch": "discovery_only",
+      "provider": null,
+      "source_id": null,
+      "reason": "Independent numerical operating ranges not verified. Conditional rates remain unverified with observed_range null; publisher-cited third party inside annual is not independent corroboration.",
+      "review_status": "NOT_COMPLETED",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\document_matrix.json",
+          "locator": "/documents/11",
+          "sha256": "74a7bad4523d6a4e0bdf8da30c4682975218070631f343a385893cde8550ed72"
+        }
+      ]
+    }
+  ],
+  "usage_observation": {
+    "verification_requests": 2,
+    "verification_entity_body_bytes": 1905400,
+    "verification_wire_body_bytes": null,
+    "web_tool_body_bytes": null,
+    "new_raw_files": 0,
+    "filing_provider_requests_observed": 0,
+    "transcript_provider_requests_observed": 0,
+    "reason": "Zero provider calls on archived ensure pre-HTTP observations; two requests.get verification receipts are separate network transfer. No total wire/web byte claim."
+  },
+  "limitations": [
+    "审查未启动StockInfo/ET/provider或新下载；其真实HTTP成功路径与entitlement仍未验。",
+    "probe读取review时保留native catalog/journal并归档；sealed capture与source-final-verification仍为initial执行权威。",
+    "early exact web结果只有真实ref/日期无完整body和transport时间；final timed web有真实请求与结果体。没有为复核再联网。",
+    "原始GET Content-Type/wire字节不能从PDF mime或receipt反推；没有确认实际超限。",
+    "overall FAIL不改变执行封存partial，结构完整性不等于来源覆盖/研究质量通过。"
+  ],
+  "status_counts": {
+    "PASS": 9,
+    "FAIL": 5,
+    "BLOCKED": 3
+  },
+  "finding_counts": {
+    "P1": 3,
+    "P2": 5
+  }
+}

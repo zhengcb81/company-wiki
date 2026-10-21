@@ -1,0 +1,1572 @@
+{
+  "schema_version": "1.0",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "role": "analyst",
+  "attempt_id": "initial",
+  "reviewed_at": "2026-10-21T22:03:14.554733+00:00",
+  "executor_completion": "partial",
+  "execution_outcome": "partial",
+  "overall_status": "FAIL",
+  "quality_conclusion": "透明条件模型与部分来源可复核；资深买方收入研究质量未通过。3个P1研究缺口及2个P2缺口。",
+  "independence_statement": "真实独立四号审查；初稿未读取其他reviewer报告；亲自通过SourceRef只读打开已有年报/Q1/历史H1，免费只读打开官方最新H1；未调用付费模型、未下载新原件、未修改封存执行或CWP。",
+  "review_scope": {
+    "company": "无锡药明康德新药开发股份有限公司",
+    "security": "CN 603259",
+    "as_of_date": "2026-10-21",
+    "unit": "CNY million",
+    "base_year": 2025,
+    "forecast_years": [
+      2026,
+      2027,
+      2028
+    ],
+    "manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+    "artifact_count": 639,
+    "initial_scope_commit": "646b6937 (scope lineage, not replaced by later R5)",
+    "initial_product_commit": "76a9440b (initial execution lineage)",
+    "later_change_note": "Coordinator reports later R5 a5214bda only automation SQL/store. It does not repair this initial RF information set or assumptions. Reviewer public read is current read-only API over exact same original SHA, not a re-execution of initial.",
+    "source_boundary": "CWP只来源/解析；本研究及审查在RF audit。"
+  },
+  "reviewed_materials": [
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+      "locator": "as_of, periods, profile, frozen scope"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\manifest.json",
+      "locator": "final* pointers and partial declaration"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+      "locator": "/parameters; /segments; /operating_research"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+      "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-support-diagnostics.json",
+      "locator": "/segments: 45 cells; /economic_truth_inferred"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.md",
+      "locator": "entire rendered formal report reviewed by section/underlying JSON"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-snapshot.json",
+      "locator": "metadata and frozen input/result references"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+      "locator": "/parameters shared_customer_funding_shock_pp_2026/2027; *_conditional_common_event_exposure_*; *_growth formulas"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-forecast.json",
+      "locator": "native segment paths and consolidated paths"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+      "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+      "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+      "locator": "[2]: first six pages identify reused 71582e... as 2025H1, not 2026H1; not used as current-period actual"
+    },
+    {
+      "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+      "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+    },
+    {
+      "artifact": "https://www.wuxiapptec.cn/news/wuxi-news/wuxi-apptec-crdmo-model-delivers-strong-results",
+      "locator": "2026-08-03 official release; web turn432view0 L19/26/57/60/66-68/85-94"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\annual-page-183.png",
+      "locator": "visually inspected timing table"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+      "locator": "/checkpoints; /findings; /actual_input_refs"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+      "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "A01",
+      "status": "FAIL",
+      "detail": "三年合并历史及五分部基期核对闭合；业务是研发/开发生产服务，非一次性售股收入。原始p183揭示Testing/Biology确认时间已可量化，mixed时间元数据不准确；未来市场生命周期/趋势充分性另见A05/A09。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-005"
+      ]
+    },
+    {
+      "check_id": "A02",
+      "status": "PASS",
+      "detail": "原文项目推进、下游商业化、产能交付及履约到已确认收入的机制成立，三棵树均连接native Base收入参数；不是纯标签。PASS仅限机制与公式路径，数值幅度不因此通过。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "issue_ids": []
+    },
+    {
+      "check_id": "A03",
+      "status": "PASS",
+      "detail": "TIDES在Chemistry母分部内included，没有再次加成公司收入；Testing/Biology/Other/Discontinued互斥；2025已重述对照与处置对价未混入营业收入。2026全部退出是明确假设，Q1及H1已发生部分均为零，不冒称全年已证实。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": []
+    },
+    {
+      "check_id": "A04",
+      "status": "PASS",
+      "detail": "reported_fact、derived_fact、analyst_assumption区分明确；45个未来条件率非来源原值，观察范围null，falsifier与机制反证存在。正确标签仅证明诚实披露，不证明幅度合理。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        }
+      ],
+      "issue_ids": []
+    },
+    {
+      "check_id": "A05",
+      "status": "FAIL",
+      "detail": "供给容量/员工/需求客户/价格/监管/FX没有互相约束；原文4,000kL、>100,000L和客户集中48.11%只支持风险与供给方向，不能约束三年收入。高收入幅度没有可用吞吐或客户预算桥。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-support-diagnostics.json",
+          "locator": "/segments: 45 cells; /economic_truth_inferred"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-002"
+      ]
+    },
+    {
+      "check_id": "A06",
+      "status": "FAIL",
+      "detail": "没有把backlog总额错误直接加成收入，但42207.0646百万元2026预期确认子集、新签/取消与年内时序未建桥；保持gap不能完成该项。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-003"
+      ]
+    },
+    {
+      "check_id": "A07",
+      "status": "FAIL",
+      "detail": "三年三情景同一direct_growth公式、不交叉，算术成立；每个分部每年各给条件率，缺共同需求/价格/容量的校准与相关性机制，不能把合法conditional路径等同研究情景已通过。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+          "locator": "/parameters shared_customer_funding_shock_pp_2026/2027; *_conditional_common_event_exposure_*; *_growth formulas"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-002"
+      ]
+    },
+    {
+      "check_id": "A08",
+      "status": "FAIL",
+      "detail": "已区分管理目标与独立预测、正证与价格/预算反证；但只有发行人年报，所谓independent_benchmark的判断依据仍是同一报告风险泛述，无独立经营范围。最新经营/目标未消费，所选反证无法解释量级。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "https://www.wuxiapptec.cn/news/wuxi-news/wuxi-apptec-crdmo-model-delivers-strong-results",
+          "locator": "2026-08-03 official release; web turn432view0 L19/26/57/60/66-68/85-94"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002"
+      ]
+    },
+    {
+      "check_id": "A09",
+      "status": "FAIL",
+      "detail": "独立复算段合计/CAGR/年度增量无实质算术差。经济检验失败：Chemistry贡献17445.26百万元、占净增量105.4%；Base隐含2026H2公司-10.3%、Testing-20.1%，转折未解释。无冻结历史回测，不能证明持续性或准确度。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002"
+      ]
+    },
+    {
+      "check_id": "A10",
+      "status": "N/A",
+      "detail": "正式forecast没有市场共识beat/超预期主张，无需捏共识基准；管理目标比较不是beat。官网标题中的他人超预期措辞不纳入本报告结论。诊断NOT_CHECKED与本项N/A并不冲突。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "issue_ids": []
+    },
+    {
+      "check_id": "A11",
+      "status": "FAIL",
+      "detail": "TIDES确有业务、收入、订单及容量事实，并已放在母分部防重算；但2026最新TIDES约45%目标和半年真实交付遗漏，后两年无客户/订单/爬坡收入节奏。大故事与小事实在文字分开但主要未来幅度仍未落地。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-003"
+      ]
+    },
+    {
+      "check_id": "A12",
+      "status": "FAIL",
+      "detail": "单变量敏感性和低置信度披露诚实：化学2026/2028±5pp终值影响2246.30/2450.50百万元；score=0低且不等于概率。但2027化学、汇率、客户集中/订单取消及联合交付尾部没有经济范围，现有Low不足以证明风险覆盖。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+          "locator": "/parameters shared_customer_funding_shock_pp_2026/2027; *_conditional_common_event_exposure_*; *_growth formulas"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-002",
+        "ANALYST-004"
+      ]
+    },
+    {
+      "check_id": "A13",
+      "status": "FAIL",
+      "detail": "15条calibration无观测区间、观察为空、45个cell均unsupported；独立cross-check揭示所需H2与TIDES/non-TIDES条件，未找到足以支持未来三年范围的独立量价/产能区间。未知保持null，不把当期历史或管理目标反推成范围。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-support-diagnostics.json",
+          "locator": "/segments: 45 cells; /economic_truth_inferred"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-002"
+      ]
+    },
+    {
+      "check_id": "A14",
+      "status": "PASS",
+      "detail": "本input没有以季节性/delta/flat冒称未来数值校准；直接增长明确为未校准假设。我用H1/H2减法仅检验隐含条件，没有按过去季节性生成未来收入。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": []
+    },
+    {
+      "check_id": "A15",
+      "status": "FAIL",
+      "detail": "旧指引的原币、亿元→百万元、总额/持续业务及日期区分正确；持续经营custom不强装含终止分母。但最新总额/持续/TIDES目标漏记，reported CNY/美元敞口与处置变化未形成独立桥。不能据旧指引判断as-of路径。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "https://www.wuxiapptec.cn/news/wuxi-news/wuxi-apptec-crdmo-model-delivers-strong-results",
+          "locator": "2026-08-03 official release; web turn432view0 L19/26/57/60/66-68/85-94"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002"
+      ]
+    },
+    {
+      "check_id": "A16",
+      "status": "FAIL",
+      "detail": "三年2026–2028条件数值均给出，未伪造未来actual或季度；但已可用Q1/H1没有进入正式时期桥，2025重述分部历史仅两年不能证明完整周期。缺期已披露为gap仍是本次最新公司预测的实质缺口。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-001"
+      ]
+    },
+    {
+      "check_id": "A17",
+      "status": "FAIL",
+      "detail": "已独立核另版shared shock，原生公式x0+x1*x2一次消费共同事件且全情景复算，不错误地称完全没做联合冲击；缺物理量、时间敞口、延期catch-up/取消及供需cap，A17尚不充分。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+          "locator": "/parameters shared_customer_funding_shock_pp_2026/2027; *_conditional_common_event_exposure_*; *_growth formulas"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "issue_ids": [
+        "ANALYST-004"
+      ]
+    },
+    {
+      "check_id": "A18",
+      "status": "PASS",
+      "detail": "FY2026–2028完整未来actual不存在：historical_accuracy_records空，observations=0且WAPE=null；快照为当前封存，不是历史精度证明。已发生H1不是全年actual，不当作0误差。",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-snapshot.json",
+          "locator": "/as_of_date; /input_document; /forecast_result"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "issue_ids": []
+    }
+  ],
+  "findings": [
+    {
+      "issue_id": "ANALYST-001",
+      "severity": "P1",
+      "category": "research",
+      "summary": "截至as-of已公开的2026Q1/H1经营资料和上调指引未进入正式信息集；全年路径没有解释隐含H2拐点",
+      "check_ids": [
+        "A08",
+        "A09",
+        "A11",
+        "A15",
+        "A16"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "https://www.wuxiapptec.cn/news/wuxi-news/wuxi-apptec-crdmo-model-delivers-strong-results",
+          "locator": "2026-08-03 official release; web turn432view0 L19/26/57/60/66-68/85-94"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\web-read-observations.json",
+          "locator": "/sources; original official dates and native web refs"
+        }
+      ],
+      "expected": "按RF最新沟通与目标覆盖要求，消费截至2026-10-21的可用原文、登记全部重大收入目标并用同口径H1+H2桥形成独立经营预测；偏离指引可接受，但须有独立反证、金额和时间桥。",
+      "actual": "正式input只有2025年报一个source；latest_results_release等5类not_available且coverage_complete=false。已合格2026Q1原件未入模；官方8月3日发布/H1报告已将全年收入从513–530亿元提高至585–605亿元、持续经营增速35–39%，并披露TIDES约45%全年增长。正式目标账仍只列旧年度总额/旧持续增速/RPO子集。",
+      "impact": {
+        "unit": "CNY million",
+        "base_2026_minus_new_guidance_lower": -7487.31846,
+        "high_2026_minus_new_guidance_lower": -4143.308068,
+        "base_implied_h22026_yoy": -0.1030820067,
+        "chemistry_base_implied_h22026_yoy": -0.0690032008,
+        "testing_base_implied_h22026_yoy": -0.2008668895,
+        "direction": "新信息指向更高当期交付；现有低路径可由独立下行机制支持，但本包没有该机制的量级桥。2027/2028也承接遗漏的2026起点。",
+        "not_a_target_fill": "上述差额是与管理层条件指引的比较，不是已证明的预测误差或应机械补足的收入。"
+      },
+      "root_cause_hypothesis": "来源资格处理/消费在年报回退后停止，研究作者在可运行条件模型上完成发布；根因需专家追溯，不能仅解释为不可得未来actual。",
+      "recommendation": "在新版本中合格读取2026H1、最新演示/电话会及重大公告；登记新目标和完整限定；锁定已发生H1，解释各分部H2量价/项目/确认桥，再独立比较最新指引，不按目标倒推Base。",
+      "retest": "新input应含真实最新原文及日期/期间、Q1/H1 period_flow；新目标账含总额/持续经营/TIDES；三情景H1+H2可重算且每个偏离均有独立机制，保留本initial。"
+    },
+    {
+      "issue_id": "ANALYST-002",
+      "severity": "P1",
+      "category": "research",
+      "summary": "45个增长率虽透明但无独立经营范围校准；最大增量驱动缺需求、供给、净价与FX相互约束",
+      "check_ids": [
+        "A05",
+        "A07",
+        "A08",
+        "A09",
+        "A12",
+        "A13"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-support-diagnostics.json",
+          "locator": "/segments: 45 cells; /economic_truth_inferred"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "expected": "以最小充分经营桥建立独立参考，支持需求/供应/价格/期间的范围；三情景幅度应由同一机制和相关约束产生，未知区间可保持null但不能当经济质量PASS。",
+      "actual": "15条calibration全部observed_range=null、source_claim_ids=[]、status=unverified，operating observations为空；5分部×3年×3情景均为直接增长，未来45个条件率的native公式仅x0。Chemistry 2026/27/28 Low为12/4/0%，Base20/12/10%，High28/20/16%；同源2025项目/收入事实提供机制，不能决定这些幅度。无客户预算/取消、新单、可计费吞吐/利用率/周期、净价格、美元结算/FX独立桥或约束。",
+      "impact": {
+        "unit": "CNY million",
+        "chemistry_base_terminal_increment": 17445.26115696,
+        "company_base_terminal_net_increment": 16550.65088633,
+        "chemistry_share_of_company_net_increment": 1.0540528754,
+        "chemistry_share_of_positive_driver_increment": 0.9374,
+        "terminal_high_low_spread": 25144.309324944,
+        "chemistry_2027_plusminus_5pp_terminal_effect": 2406.7458954,
+        "direction": "主要幅度未知且双向；Base化学增量大于公司净增量，无法以小分部免责声明降低主要风险。海外客户收入≠美元货币敞口，不能据地域表杜撰FX金额。"
+      },
+      "root_cause_hypothesis": "研究侧把聚合conditional fallback当最终数值尾部，尚未完成独立基准与范围；诊断已正确保持unverified，不能据此要求代码强拒合法假设。",
+      "recommendation": "优先拆Chemistry内小分子D&M/TIDES/余项互斥桥，用客户商业化、订单转换、产能节奏及净价约束；补可比外部/客户原文作为支持或反证。减少可调自由参数，将无法校准的尾部明确保留为条件暴露；不制造行业通用CAGR阈值。FX与范围变动单列。",
+      "retest": "新版本逐个重要segment/year/scenario给可复查参考与转化，独立范围不得由管理目标反推；复核支持与反证的方向及参数绑定；三年三情景仍同模型且不交叉。"
+    },
+    {
+      "issue_id": "ANALYST-003",
+      "severity": "P1",
+      "category": "research",
+      "summary": "RPO与TIDES收入确认时序缺少存量、新单、交付和取消桥，最大驱动只分配了母分部净增量",
+      "check_ids": [
+        "A06",
+        "A11"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+          "locator": "/consolidated_forecast; /growth_driver_analysis; /confidence"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        }
+      ],
+      "expected": "backlog/TIDES产能/项目数必须通过转换率、交付/履约时间与会计确认进入收入；至少用公开RPO预期确认和业务子项作独立金额核对，不把订单或容量直接当收入。",
+      "actual": "年报p184披露58004.7875百万元剩余履约义务，其中42207.0646百万元预计2026确认；模型保留gap但没有open+new–recognized–cancellation+FX=close桥。TIDES年报11370百万元已包含Chemistry，2024新增产能爬坡、2025-09固相釜>100000L支持供给机制；项目阶段和体积不能解释每年可计费产出。正式driver按Chemistry全额增量分配，未拆TIDES与小分子/余项确认。",
+      "impact": {
+        "unit": "CNY million",
+        "rpo_expected_2026_recognition": 42207.0646,
+        "base_2026_residual_above_rpo_expected_recognition": 8805.61694,
+        "base_rpo_cover_fraction": 0.8273837666601519,
+        "latest_tides_guidance_comparator_fy2026": 16486.5,
+        "latest_tides_guidance_comparator_increment_vs2025": 5116.5,
+        "base_non_tides_yoy_required_if_tides_comparator_holds": 0.08673424685,
+        "direction": "取消、延期、新签确认和产品mix均未知；RPO不是硬收入下限，45%TIDES管理目标也不是独立预测。上述桥揭示需解释的金额，未补写执行成功。"
+      },
+      "root_cause_hypothesis": "aggregate recognized-revenue fallback没有把可用公开stock/flow与母分部经营子项接入研究桥；不是要求复杂模型本身。",
+      "recommendation": "先做年度订单/履约义务及TIDES最小桥：已签2026交付子集、当年新单可确认部分、取消/范围/FX变化，TIDES和非TIDES互斥；无法观测转化率保持未知，并用多期实际交付检查。",
+      "retest": "新版本对stock与flow、年度与期末容量、外部与内部收入逐项对齐；核对交付时点/履约进度不重复乘；按公开子项重算Chemistry增量并核完整限定。"
+    },
+    {
+      "issue_id": "ANALYST-004",
+      "severity": "P2",
+      "category": "research",
+      "summary": "共享资金需求冲击已在同一DAG去重，但缺物理量×时间×敞口的联合交付/取消压力",
+      "check_ids": [
+        "A12",
+        "A17"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+          "locator": "/parameters shared_customer_funding_shock_pp_2026/2027; *_conditional_common_event_exposure_*; *_growth formulas"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-forecast.json",
+          "locator": "/consolidated_forecast; /segments"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+          "locator": "/checkpoints; /findings; /actual_input_refs"
+        }
+      ],
+      "expected": "A17要求关键经营量、冲击发生/延迟时间和实际敞口联合压力，含交叉弹性、恢复/取消及供应约束；不能仅把一个共同百分比映射各增长率后称已完成。",
+      "actual": "独立复算确认2026共用-5pp、2027-2pp冲击，化学系数1、测试/生物学0.5各只消费一次，2028保留原增长率；并非单纯遗漏联合冲击。但系数明确未实测，无受影响客户/订单/季度金额、延迟到下一期的catch-up与取消，亦无capacity/demand瓶颈。",
+      "impact": {
+        "unit": "CNY million",
+        "published_shared_shock_base_terminal": 58577.18493670501,
+        "difference_to_unstressed_base_terminal": -3429.631723805,
+        "stress_recompute_max_absolute_difference": 0.0,
+        "direction": "数字是条件演示；实际风险尾部可能大于或小于此值，不能解释为校准的下限/概率。"
+      },
+      "root_cause_hypothesis": "共享shock实现可复核，经营校准与时间暴露尚未完成，属于研究边界缺口。",
+      "recommendation": "以可证据化客户/项目的受影响收入、季度交付、监管/融资时间和恢复/取消假设建独立stress版本；共享瓶颈只计一次。保留原情景与本演示，不把不存在的Q4金额设为全年/4。",
+      "retest": "完整重算联合stress，复核跨年存量流量、一次敞口计量、取消与catch-up、供给cap及情景交叉；报告条件与未知，不仅核OBSERVED。"
+    },
+    {
+      "issue_id": "ANALYST-005",
+      "severity": "P2",
+      "category": "research",
+      "summary": "已存年报p183有确认时点/时段金额，模型将测试与生物学timing笼统标mixed且称比例未分拆",
+      "check_ids": [
+        "A01"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages[pdf_page_1based=183]"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\annual-page-183.png",
+          "locator": "visual check: revenue table, CNY yuan, timing rows and segment columns"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        }
+      ],
+      "expected": "利用完整相邻注释表区分年度已确认收入及确认时间，未知只保留真正未知项；不得将抽取窗口缺失称披露缺失。",
+      "actual": "p183清楚列Chemistry时段5181.01495430/时点31284.83192867百万元；Testing时段4041.70103067、时点0；Biology时段2677.17503051、时点0；Others时段225.62782287/时点10.47297181。正式段识别使用p119/120/184并给Testing/Biology timing=mixed；终止经营列是跨行合并，未推断其分拆。",
+      "impact": {
+        "unit": "CNY million",
+        "testing_biology_base_exposure": 6718.87606118,
+        "current_direct_growth_revenue_arithmetic_change": 0,
+        "direction": "当前年度聚合direct_growth数值不直接改变；确认元数据/未来时序压力的依据错误且漏用了可用证据。presentation为gross/net的mixed不由该时间表推翻。"
+      },
+      "root_cause_hypothesis": "选择p184政策而漏读相邻p183数值表，属于研究读取范围；尚未证明parser错误。",
+      "recommendation": "在新版本中补p183表及准确时间口径；保留年度聚合fallback边界，勿对已确认收入再乘progress；gross/net与时点/时段分别说明。",
+      "retest": "原件视觉表和字段一致；Testing/Biology timing反映全时段已披露事实，保留其他真实混合与终止业务未知，不要求重写封存产物。"
+    }
+  ],
+  "key_assumptions": [
+    {
+      "assumption_id": "chem",
+      "segment": "化学业务",
+      "base_cny_million": 36465.8469,
+      "conditional_growth_2026_2027_2028": {
+        "low": [
+          0.12,
+          0.04,
+          0.0
+        ],
+        "base": [
+          0.2,
+          0.12,
+          0.1
+        ],
+        "high": [
+          0.28,
+          0.2,
+          0.16
+        ]
+      },
+      "mechanism_support": "项目/交付及TIDES供给",
+      "magnitude_support": "unverified / 独立观测范围未知；不是事实或管理指引数值",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        }
+      ],
+      "sensitivity": "见native sensitivities及独立H2桥；Chemistry为最大增量，2027±5pp另复算终值±2406.75百万元。",
+      "falsifier": "同口径真实订单/确认、净价、客户取消与交付低于条件；处置范围变化则重建基数。"
+    },
+    {
+      "assumption_id": "testing",
+      "segment": "测试业务",
+      "base_cny_million": 4041.701,
+      "conditional_growth_2026_2027_2028": {
+        "low": [
+          -0.05,
+          0.0,
+          0.0
+        ],
+        "base": [
+          0.04,
+          0.05,
+          0.05
+        ],
+        "high": [
+          0.1,
+          0.1,
+          0.08
+        ]
+      },
+      "mechanism_support": "新分子服务/客户导流；竞争价格反证",
+      "magnitude_support": "unverified / 独立观测范围未知；不是事实或管理指引数值",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        }
+      ],
+      "sensitivity": "见native sensitivities及独立H2桥；Chemistry为最大增量，2027±5pp另复算终值±2406.75百万元。",
+      "falsifier": "同口径真实订单/确认、净价、客户取消与交付低于条件；处置范围变化则重建基数。"
+    },
+    {
+      "assumption_id": "biology",
+      "segment": "生物学业务",
+      "base_cny_million": 2677.175,
+      "conditional_growth_2026_2027_2028": {
+        "low": [
+          -0.03,
+          0.0,
+          0.0
+        ],
+        "base": [
+          0.06,
+          0.07,
+          0.07
+        ],
+        "high": [
+          0.12,
+          0.12,
+          0.1
+        ]
+      },
+      "mechanism_support": "新分子服务/客户导流；竞争价格反证",
+      "magnitude_support": "unverified / 独立观测范围未知；不是事实或管理指引数值",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        }
+      ],
+      "sensitivity": "见native sensitivities及独立H2桥；Chemistry为最大增量，2027±5pp另复算终值±2406.75百万元。",
+      "falsifier": "同口径真实订单/确认、净价、客户取消与交付低于条件；处置范围变化则重建基数。"
+    },
+    {
+      "assumption_id": "other",
+      "segment": "其他业务",
+      "base_cny_million": 236.1008,
+      "conditional_growth_2026_2027_2028": {
+        "low": [
+          -0.25,
+          -0.1,
+          -0.1
+        ],
+        "base": [
+          -0.1,
+          0.0,
+          0.0
+        ],
+        "high": [
+          0.0,
+          0.03,
+          0.03
+        ]
+      },
+      "mechanism_support": "非核心业务范围",
+      "magnitude_support": "unverified / 独立观测范围未知；不是事实或管理指引数值",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        }
+      ],
+      "sensitivity": "见native sensitivities及独立H2桥；Chemistry为最大增量，2027±5pp另复算终值±2406.75百万元。",
+      "falsifier": "同口径真实订单/确认、净价、客户取消与交付低于条件；处置范围变化则重建基数。"
+    },
+    {
+      "assumption_id": "discontinued",
+      "segment": "终止经营业务",
+      "base_cny_million": 2035.342,
+      "conditional_growth_2026_2027_2028": {
+        "low": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "base": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "high": [
+          -1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "mechanism_support": "2025部分处置完成；2026Q1/H1已发生为零；全年仍须边界核对",
+      "magnitude_support": "unverified / 独立观测范围未知；不是事实或管理指引数值",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+          "locator": "/parameters; /segments; /operating_research"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        }
+      ],
+      "sensitivity": "见native sensitivities及独立H2桥；Chemistry为最大增量，2027±5pp另复算终值±2406.75百万元。",
+      "falsifier": "同口径真实订单/确认、净价、客户取消与交付低于条件；处置范围变化则重建基数。"
+    },
+    {
+      "assumption_id": "tides_subscope",
+      "segment": "Chemistry内TIDES",
+      "mechanism_support": "2025收入11370百万元；新增产能爬坡，订单及服务分子增长；2026H1已交付收入可观察",
+      "magnitude_support": "45%FY2026为最新管理目标，不能当独立范围；2027/28无范围",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "sensitivity": "45%管理比较对应FY2026收入16486.5、增量5116.5百万元；非TIDES须另解释。"
+    },
+    {
+      "assumption_id": "rpo_conversion",
+      "segment": "持续经营",
+      "mechanism_support": "年末58004.7875百万元合同存量，披露42207.0646百万元预计2026确认子集",
+      "magnitude_support": "有来源的预期时点，不是无取消硬下限；新增订单及净变化未知",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "sensitivity": "Base总收入扣该子集尚需8805.61694百万元；取消/延迟对收入方向为负，实际金额未知。"
+    },
+    {
+      "assumption_id": "shared_event",
+      "segment": "Chemistry/Testing/Biology",
+      "conditional_values": {
+        "shock_2026_pp": -5,
+        "shock_2027_pp": -2,
+        "exposures": [
+          1,
+          0.5,
+          0.5
+        ]
+      },
+      "mechanism_support": "客户研发融资/预算风险原文可读；跨段共用事件只记一次",
+      "magnitude_support": "幅度/系数未实测，时间与取消未知",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+          "locator": "/parameters shared_customer_funding_shock_pp_2026/2027; *_conditional_common_event_exposure_*; *_growth formulas"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-cross-check.json",
+          "locator": "/scenario_checks; /segment_h2_checks; /chemistry_two_bucket_check"
+        }
+      ],
+      "sensitivity": "Base2028减少3429.6317百万元，只是条件压力。"
+    },
+    {
+      "assumption_id": "currency_and_perimeter",
+      "segment": "持续经营/处置",
+      "mechanism_support": "p32主要美元结算；p16境外客户地域收入较大；p26处置交割",
+      "magnitude_support": "无精确美元净暴露或as-of FX假设；地域不是币种；完整处置实体桥未做",
+      "reasonable_operating_range": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[0].selected_pages printed p7/13/14/16/17/26/29-32/119-120/183-184"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+          "locator": "[1].selected_pages printed p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+        },
+        {
+          "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+          "locator": "2026-08-04 official original; printed p7/11-12; web turn434view0, turn436view0/1, screenshot turn437view0/1"
+        }
+      ],
+      "sensitivity": "金额未知；禁止以境外收入占比直接冒充USD敞口。"
+    }
+  ],
+  "independent_cross_check": {
+    "schema_version": "analyst-cross-check/1",
+    "run_id": "r1-20261021-cn-wuxi-apptec",
+    "created_at": "2026-10-21T21:59:40.412624+00:00",
+    "unit": "CNY million",
+    "kind": "independent reviewer check; not an executor forecast or remediation",
+    "source_observations": {
+      "fy2025_total": 45456.16577418,
+      "fy2025_continuing": 43420.82373883,
+      "h12025_total": 20799.28188246,
+      "h12026_total": 28897.47871836,
+      "h22025_total": 24656.88389172,
+      "fy2025_yearend_rpo_stock": 58004.7875,
+      "fy2025_rpo_expected_fy2026_recognition": 42207.0646,
+      "latest_fy2026_management_total_range": [
+        58500,
+        60500
+      ],
+      "latest_management_tides_growth": 0.45,
+      "fy2025_tides_revenue": 11370,
+      "h12026_tides_revenue_rounded": 7260
+    },
+    "evidence": [
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+        "locator": "[0].selected_pages PDF p7/13/14/16/17/26/29-32/119-120/183-184"
+      },
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\independent-original-reads.json",
+        "locator": "[1].selected_pages PDF p2/4/5; SHA 379796e63b15a126aecb33509824a76197114ca3a43e0db368dd27e3508560a6"
+      },
+      {
+        "artifact": "https://static.cninfo.com.cn/finalpage/2026-08-04/1225455027.PDF",
+        "locator": "official 2026-08-04 PDF printed p7/11-12; web open turn434view0; turn436view0/1; screenshot turn437view0/1"
+      },
+      {
+        "artifact": "https://www.wuxiapptec.cn/news/wuxi-news/wuxi-apptec-crdmo-model-delivers-strong-results",
+        "locator": "published 2026-08-03; web open turn432view0 L19/26/57/60/66-68/85-94"
+      }
+    ],
+    "scenario_checks": {
+      "low": {
+        "annual_revenue": {
+          "2026": 47455.299828,
+          "2027": 49071.26220912001,
+          "2028": 49055.325405120006
+        },
+        "cagr_recomputed": 0.02572542401765454,
+        "h22026_implied": 18557.821109640005,
+        "h22026_yoy_vs_reported_h22025": -0.24735740367127723,
+        "difference_to_latest_guidance_lower": -11044.700171999997,
+        "difference_to_latest_guidance_upper": -13044.700171999997,
+        "fy2026_continuing_yoy_if_discontinued_zero": 0.0929156967043463,
+        "old_rpo_expected_2026_recognition_residual": 5248.235228000005,
+        "old_rpo_expected_recognition_cover_fraction": 0.8894067628479424,
+        "shared_shock_annual_revenue": {
+          "2026": 45464.035583000004,
+          "2027": 46164.01210866,
+          "2028": 46148.07530465999
+        },
+        "shared_shock_terminal_difference": -2907.2501004600126
+      },
+      "base": {
+        "annual_revenue": {
+          "2026": 51012.68154,
+          "2027": 56672.57833060001,
+          "2028": 62006.81666051001
+        },
+        "cagr_recomputed": 0.10904426033888326,
+        "h22026_implied": 22115.20282164,
+        "h22026_yoy_vs_reported_h22025": -0.10308200668185485,
+        "difference_to_latest_guidance_lower": -7487.318460000002,
+        "difference_to_latest_guidance_upper": -9487.318460000002,
+        "fy2026_continuing_yoy_if_discontinued_zero": 0.17484370740716337,
+        "old_rpo_expected_2026_recognition_residual": 8805.61694,
+        "old_rpo_expected_recognition_cover_fraction": 0.8273837666601519,
+        "shared_shock_annual_revenue": {
+          "2026": 49021.417295,
+          "2027": 53545.3353166,
+          "2028": 58577.18493670501
+        },
+        "shared_shock_terminal_difference": -3429.6317238050033
+      },
+      "high": {
+        "annual_revenue": {
+          "2026": 54356.691932,
+          "2027": 64503.4311924,
+          "2028": 74199.63473006399
+        },
+        "cagr_recomputed": 0.1774333218841775,
+        "h22026_implied": 25459.213213640003,
+        "h22026_yoy_vs_reported_h22025": 0.032539769641752425,
+        "difference_to_latest_guidance_lower": -4143.3080679999985,
+        "difference_to_latest_guidance_upper": -6143.3080679999985,
+        "fy2026_continuing_yoy_if_discontinued_zero": 0.25185768604823533,
+        "old_rpo_expected_2026_recognition_residual": 12149.627332000004,
+        "old_rpo_expected_recognition_cover_fraction": 0.7764833197134378,
+        "shared_shock_annual_revenue": {
+          "2026": 52365.427686999996,
+          "2027": 61159.54951516,
+          "2028": 70339.35614750058
+        },
+        "shared_shock_terminal_difference": -3860.2785825634055
+      }
+    },
+    "segment_h2_checks": [
+      {
+        "segment": "化学业务",
+        "fy2025": 36465.8469,
+        "h12025": 16301.3704,
+        "h12026": 24985.9532,
+        "h22025": 20164.476499999997,
+        "base_h22026_implied": 18773.063079999996,
+        "base_h22026_implied_yoy": -0.06900320075257105
+      },
+      {
+        "segment": "测试业务",
+        "fy2025": 4041.701,
+        "h12025": 1885.9014,
+        "h12026": 2480.5982,
+        "h22025": 2155.7996000000003,
+        "base_h22026_implied": 1722.7708400000006,
+        "base_h22026_implied_yoy": -0.20086688948267717
+      },
+      {
+        "segment": "生物学业务",
+        "fy2025": 2677.175,
+        "h12025": 1251.6049,
+        "h12026": 1391.8805,
+        "h22025": 1425.5701000000001,
+        "base_h22026_implied": 1445.9250000000004,
+        "base_h22026_implied_yoy": 0.0142784279776913
+      },
+      {
+        "segment": "其他业务",
+        "fy2025": 236.1008,
+        "h12025": 86.6295,
+        "h12026": 39.0468,
+        "h22025": 149.47129999999999,
+        "base_h22026_implied": 173.44392000000002,
+        "base_h22026_implied_yoy": 0.16038276244335892
+      }
+    ],
+    "arithmetic_checks": [
+      {
+        "check": "segment_sum",
+        "scenario": "low",
+        "year": 2026,
+        "difference": 0.0
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "low",
+        "year": 2027,
+        "difference": -7.275957614183426e-12
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "low",
+        "year": 2028,
+        "difference": 0.0
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "base",
+        "year": 2026,
+        "difference": 0.0
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "base",
+        "year": 2027,
+        "difference": -7.275957614183426e-12
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "base",
+        "year": 2028,
+        "difference": 0.0
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "high",
+        "year": 2026,
+        "difference": -7.275957614183426e-12
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "high",
+        "year": 2027,
+        "difference": 0.0
+      },
+      {
+        "check": "segment_sum",
+        "scenario": "high",
+        "year": 2028,
+        "difference": 0.0
+      }
+    ],
+    "not_a_forecast": "Latest guidance is a comparator, not a forced forecast; half-year subtraction tests implied conditions, not seasonality calibration.",
+    "chemistry_two_bucket_check": {
+      "formula": "Chemistry = TIDES + non-TIDES; TIDES uses management comparator, not independent base estimate",
+      "fy2025_tides": 11370,
+      "fy2025_non_tides": 25095.846899999997,
+      "management_comparator_fy2026_tides": 16486.5,
+      "management_comparator_h22026_tides": 9226.5,
+      "management_comparator_h2_vs_h1_tides": 0.27086776859504136,
+      "base_fy2026_non_tides_required": 27272.516280000003,
+      "base_fy2026_non_tides_required_yoy": 0.086734246852614,
+      "limitations": [
+        "TIDES already belongs to Chemistry; never add to company again.",
+        "45% guidance is conditional issuer guidance; it does not calibrate independent demand, net price, throughput or FY2027/2028.",
+        "Reactor liters are a point-in-time capacity stock, not billable yearly output; batch cycles, product mix, utilization, ramp timing and net price are unknown."
+      ]
+    },
+    "recognition_mix_fy2025": {
+      "chemistry_overtime": 5181.0149543,
+      "chemistry_point_in_time": 31284.83192867,
+      "chemistry_point_fraction": 0.857921441645728,
+      "testing_overtime": 4041.70103067,
+      "testing_point_in_time": 0,
+      "biology_overtime": 2677.17503051,
+      "biology_point_in_time": 0,
+      "others_overtime": 225.62782287,
+      "others_point_in_time": 10.47297181,
+      "note": "Discontinued column is merged across timing rows; do not infer its split. Read visually from p183."
+    },
+    "materiality": {
+      "chemistry_base_terminal_increment": 17445.261156960012,
+      "company_base_terminal_increment": 16550.65088633001,
+      "chemistry_fraction_of_company_net_increment": 1.0540528754291412,
+      "high_low_terminal_spread": 25144.309324943984,
+      "chemistry_2027_plusminus_5pp_terminal_effect": 2406.7458954000003,
+      "fx_note": "Foreign-customer geographic revenue is not identical to USD-settled revenue. p32 says primarily USD; no exact USD net exposure or FX sensitivity can be inferred from p16 geographic share."
+    },
+    "stress_recompute_max_absolute_difference": 0.0
+  },
+  "diagnostic_interpretation": {
+    "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\analyst\\risk-audit\\20261021T215643Z-c817e556\\report.json",
+    "checkpoints": [
+      {
+        "checkpoint_id": "A02",
+        "status": "OBSERVED",
+        "reasons": [
+          "driver_linked_to_revenue_path"
+        ],
+        "finding_ids": [
+          "A02-F001",
+          "A02-F002",
+          "A02-F003"
+        ]
+      },
+      {
+        "checkpoint_id": "A05",
+        "status": "NOT_CHECKED",
+        "reasons": [
+          "no_checkable_constraint_recorded"
+        ],
+        "finding_ids": [
+          "A05-F001"
+        ]
+      },
+      {
+        "checkpoint_id": "A06",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "conversion_relationship_missing"
+        ],
+        "finding_ids": [
+          "A06-F001",
+          "A06-F002",
+          "A06-F003",
+          "A06-F004",
+          "A06-F005",
+          "A06-F006",
+          "A06-F007",
+          "A06-F008",
+          "A06-F009",
+          "A06-F010",
+          "A06-F011",
+          "A06-F012",
+          "A06-F013",
+          "A06-F014",
+          "A06-F015",
+          "A06-F016",
+          "A06-F017",
+          "A06-F018",
+          "A06-F019",
+          "A06-F020",
+          "A06-F021",
+          "A06-F022",
+          "A06-F023",
+          "A06-F024",
+          "A06-F025",
+          "A06-F026",
+          "A06-F027",
+          "A06-F028",
+          "A06-F029",
+          "A06-F030",
+          "A06-F031",
+          "A06-F032",
+          "A06-F033",
+          "A06-F034",
+          "A06-F035",
+          "A06-F036",
+          "A06-F037",
+          "A06-F038",
+          "A06-F039",
+          "A06-F040",
+          "A06-F041",
+          "A06-F042",
+          "A06-F043",
+          "A06-F044",
+          "A06-F045"
+        ]
+      },
+      {
+        "checkpoint_id": "A08",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "independence_unknown_not_assumed",
+          "management_target_separated"
+        ],
+        "finding_ids": [
+          "A08-F001",
+          "A08-F002"
+        ]
+      },
+      {
+        "checkpoint_id": "A10",
+        "status": "NOT_CHECKED",
+        "reasons": [
+          "no_beat_claim_declared"
+        ],
+        "finding_ids": [
+          "A10-F001"
+        ]
+      },
+      {
+        "checkpoint_id": "A13",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "operating_range_unknown",
+          "support_period_gap"
+        ],
+        "finding_ids": [
+          "A13-F001",
+          "A13-F002",
+          "A13-F003",
+          "A13-F004",
+          "A13-F005",
+          "A13-F006",
+          "A13-F007",
+          "A13-F008",
+          "A13-F009",
+          "A13-F010",
+          "A13-F011",
+          "A13-F012",
+          "A13-F013",
+          "A13-F014",
+          "A13-F015",
+          "A13-F016",
+          "A13-F017",
+          "A13-F018",
+          "A13-F019",
+          "A13-F020",
+          "A13-F021",
+          "A13-F022",
+          "A13-F023",
+          "A13-F024",
+          "A13-F025",
+          "A13-F026",
+          "A13-F027",
+          "A13-F028",
+          "A13-F029",
+          "A13-F030",
+          "A13-F031",
+          "A13-F032",
+          "A13-F033",
+          "A13-F034",
+          "A13-F035",
+          "A13-F036",
+          "A13-F037",
+          "A13-F038",
+          "A13-F039",
+          "A13-F040",
+          "A13-F041",
+          "A13-F042",
+          "A13-F043",
+          "A13-F044",
+          "A13-F045",
+          "A13-F046",
+          "A13-F047",
+          "A13-F048",
+          "A13-F049",
+          "A13-F050",
+          "A13-F051",
+          "A13-F052",
+          "A13-F053",
+          "A13-F054",
+          "A13-F055",
+          "A13-F056",
+          "A13-F057",
+          "A13-F058",
+          "A13-F059",
+          "A13-F060"
+        ]
+      },
+      {
+        "checkpoint_id": "A17",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "single_parameter_shock_not_joint"
+        ],
+        "finding_ids": [
+          "A17-F001"
+        ]
+      },
+      {
+        "checkpoint_id": "A18",
+        "status": "NOT_CHECKED",
+        "reasons": [
+          "future_actual_absent_not_zero_error"
+        ],
+        "finding_ids": [
+          "A18-F001",
+          "A18-F002",
+          "A18-F003"
+        ]
+      }
+    ],
+    "source_truth_verified": false,
+    "economic_reasonableness": "not_evaluated",
+    "judgment": "工具只索引声明。A02 OBSERVED不接受幅度，A18 NOT_CHECKED符合不存在未来actual；A10无beat可N/A。工具初始A17只读主forecast单敏感性，不包含另版shared shock；审查已独立读取并复算另版，最终A17失败因经营时间敞口不足。A06/RPO与direct_growth均未把stock直接当收入，UNRESOLVED是范围缺口而非已证明造数。"
+  },
+  "inferences_and_unknowns": [
+    "新指引可偏乐观；与其偏离本身不是错误，须独立机制解释。",
+    "当前新信息缺失使2026及其后年度起点方向可能偏低；不存在已知未来全年actual，不能把guidance差额说成实际误差。",
+    "没有独立客户预算/同行失败样本/净价与可计费产能范围，未来收入幅度和联合尾部保持未知。",
+    "最新电话会完整Q&A、策略及重大公告窗口未穷尽；不把本审查的免费原文阅读算作executor合格消费。",
+    "年报p183可确认Testing/Biology已披露历史时段金额；gross/net比例和Discontinued时点分拆仍未知。"
+  ],
+  "beat_claim_review": {
+    "status": "N/A",
+    "reason": "No formal consensus beat claim; no consensus baseline fabricated."
+  },
+  "confidence_review": {
+    "native_score": 0.0,
+    "native_rating": "low",
+    "historical_wape": null,
+    "historical_observations": 0,
+    "assessment": "诚实反映流程/证据局限；不是未来达成概率或经济质量豁免。"
+  },
+  "artifact_integrity": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-input.json",
+      "sha256": "dde8dce38b0c0b203eb4a0a9facaaa981debeea61559a9cab3e7be8285526150",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.json",
+      "sha256": "21ac4e6c9a409b90a1b43fc03d13dd0b9341ba04e0bdedfd9486f72abcf31c96",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-forecast.md",
+      "sha256": "a4d72d4121a7211d6fe398b8955a4e6743bc249dfe935ffdd9e42021c8d10fab",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-snapshot.json",
+      "sha256": "e76203552a4f1c5c5f45a223976170cccb40a39ce28c14c3ba224332babe487e",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-final-support-diagnostics.json",
+      "sha256": "6ba6fdfe6fe7f22280d3aa76ad6dd7db9ff3a5bbf144b28e70488bac1d2959a2",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-input.json",
+      "sha256": "e20109b1a1d9d1fc2b924cc0abb3854f8e3f847687256df23542130c2066b241",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-forecast.json",
+      "sha256": "1e520db1452768a9a107ab87f9c2256d74696788c08217ac83f2e2695f9d9ba0",
+      "manifest_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\forecast\\timed-shared-shock-final-snapshot.json",
+      "sha256": "669d1bcfe54360370bd82d11eb3ceebd5627974e54eec501b1aa17da1ca6df35",
+      "manifest_match": true
+    }
+  ],
+  "resource_observation": {
+    "review_paid_llm_calls": 0,
+    "new_original_downloads_saved": 0,
+    "web_read_transport_bytes": null,
+    "web_read_transport_bytes_unknown_reason": "Web tool does not expose byte total.",
+    "cost_usd": null,
+    "cost_note": "No paid provider/model invoked by this reviewer; platform tool cost is not reported, not invented as zero."
+  },
+  "recommended_retest_order": [
+    "先完成latest official信息与重大目标范围，再重建实际H1+条件H2。",
+    "独立校准最大化学驱动：TIDES/non-TIDES互斥，订单/产能/净价/FX约束。",
+    "补RPO确认与联合延期/取消压力，校准未知如实保留。",
+    "新版本正式计算/报告/快照后独立复核A01–A18；本initial不覆盖。"
+  ]
+}
