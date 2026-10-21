@@ -1,41 +1,27 @@
-# DU11 最终交接报告（2026-10-18）
+# DU11 10月18日交付快照（已由当前状态页取代）
 
-状态：**CONDITIONAL_READY** —— B2、C 工程侧、四张施工包已交付并合入 master；C 内容按用户口径（数字可近似、不可写错）**HK PASS 7/7**、CN 8/10、US 2–4/8（用户接受 8/10 收尾）；master 的收尾提交正在推送，exact CI 尚未产生。
+本快照在2026-10-21按已提交证据纠正过期交付字段。**当前入口：[CURRENT_STATUS.md](../CURRENT_STATUS.md)。** 本文保留10月18日节点的最终结果，不声明当前HEAD仍是当时版本；原始运行/审查收据不改写。
 
-## 1. 起止分支/commit、变更文件
-- 起点：B2 修复链 `d55d3369` → `6a2ee853` → `2a80acf6`（origin 上已验证）。
-- 主线：`origin/master` 已包含补写默认关闭开关、Mapping/冻结容器修复、P1–P4 四包、PWF 与收尾文档；之后的测试清理与 fixtures 修复仍在本地待推。
-- 远端分支：`du11-close-docs`（收尾文档）、`du11-repair-flag`（09cb49ad，补写默认关闭）。
-- 关键变更文件：`src/company_wiki/document_understanding/operating_states/{product_reference,relations}.py`（B2）；`src/company_wiki/automation/{narrative_summarize,execution_snapshot,execution_context,registry}.py`（补写实验）；`tools/document_understanding_benchmark/phase_c_observer.py`；`tests/conftest.py` 与两个 lane conftest（fixtures 解析）；P3 `tests/unit/test_identity_audit/p3_fixtures/`（原 `fixtures/` 改名，避免与 `tests/fixtures` 冲突）。
+## 当日最终交付
 
-## 2. RED→修复→GREEN
-- B2：110 项 du11 单测 PASS（`tests/unit/du11_source_closure`）；三源回放 CN 10/10、HK 7/7、US 8/8，绑定 `b2-final3-20261018`、`b2-real-sources-final2-20261018`；原件/gold 未变、0 API。
-- C 工程：CN/US/HK 各 1 次真实 POST；`activation_recovery=PASS`（同 attempt、无新增扣费）；`cross_run_zero_POST=true`；FF 复用与 RF 读取通过。
-- 补写实验：离线单测覆盖 partial→repair→merge、失败回退；真实 CN 实测 2 次 POST 并进入 `activation_pending`；`activation-resume` 仍冲突。
-- 施工包：P1 40 / P2 70 / P3 50 / P4 34 全绿；P4 无 env 时 34 skipped（按设计）；全量单测在 fixtures 改名后待复跑。
+- B2来源闭合终审PASS，代码链`d55d3369`→`6a2ee853`→`2a80acf6`；终审当次109项，补充工程回归后110项。真实CN/HK/US选择10/10、7/7、8/8，原件/gold不变、0API。
+- RF/FF DU11和P1–P4已由ROOT接收、合入master并发布。此前“领先7提交/四包待接收/默认关闭仅本地”的中途状态已被后续提交取代。
+- 当日收尾发布`ef3f3d1c`，CI [39164683463](https://github.com/zhengcb81/company-wiki/actions/runs/39164683463)记录success。最新代码与CI见当前状态页，不以本快照代签新代码。
+- 普通C链路三家已有真实请求、激活恢复、同/跨run缓存和FF复用/RF读取通过记录。核心摘要[MD](../receipts/c-live-receipts-20261018.md)/[JSON](../receipts/c-live-receipts-20261018.json)已提交；完整运行树仍是本机材料，fresh clone无法仅凭摘要重放全过程。
 
-## 3. 额度与预算
-- 测量口径：`usage.jsonl` 按 database+attempt_id 去重。
-- 累计：**56 个 attempt、1,091,219 tokens / $0.278311**（含 HK 16,813 / $0.00742，以及 69,046 / $0.031208 的 unknown hold；上限 2M / $20）。
+## 内容及实验边界
 
-## 4. 独立审查
-- B2 最终复审 PASS：`b2-antecedent-final-review-20261018-v3.md`。
-- C 内容复审：`c-content-review-20261018-cn-v3.md`（8/10）、`-cn-v4.md`；HK 7/7 目前只有文字结论，**缺独立复审文件**。
-- 交接完整性复审：2026-10-18 两轮（CONDITIONAL_READY → NOT_READY），NOT_READY 的根因（`fixtures` 包冲突导致 CI 命令 15 errors）已修复；其余文档失真已按复核修正。
+- CN：8/10、critical5/7，用户接受受限收尾，不继续为最后两条事实重复付费试验。
+- HK：允许正确约数的口径下7/7、critical6/6 PASS；[逐gold独立审查](c-content-review-hk-20261018.md)已提交。401是更早一次失败，不代表最终HK未运行。
+- US：所绑定原审查2/8、另1条partial；后续2–4/8属于不同实验，事实遗漏仍保留，不称完整内容通过。
+- 实验性两次attempt补写默认关闭的改动已发布；`activation-resume`仍有`ReservationConflictError`。普通单次恢复PASS不代签这条实验分支。
 
-## 5. push 结果与 exact CI
-- `origin/master` = **`ef3f3d1c`**，全部收尾提交（测试清理、fixtures/P3 修复、四包、文档、香港复审、C 收据摘要）均已推送。
-- **exact CI：run 374（id 39164683463）success**；此前 B2 的 exact CI 为 `2a80acf6`（`b2-final3-20261018/ci-39139605025.json`）。
+## 预算与证据
 
-## 6. 真实 provider 与缓存/恢复
-- 真实模型：CN = MiMo（`mimo-v2.6-flash`）、US = MiniMax（`MiniMax-M3`）、HK = DeepSeek（`deepseek-flash`，用 Windows 用户级有效密钥）。
-- 同 run 恢复不重复扣费；跨 run 复用 0 POST；FF 复用与 RF 读取均有收据。
-- 收据目录（工作区、**未入 git**）：`.planning/shared-reading-production/du11/live-{cn,us,hk}-*`。
+10月18日按database+attempt_id去重快照为56attempt、1,091,219tokens / $0.278311估算，包含69,046tokens / $0.031208 unknown hold；上限累计2M/$20。本轮没有重计账或收费调用。
 
-## 7. 清理
-- 已删除仓库根 12 个本轮遗留临时目录（b2-review2/3-*、cwpaW03-*、cwplC-*、tmp5_*、pytest-of-*）。
-- 未清理：RF 旧 assurance 工作文件与 `output/`（按 handoff 要求保持原样）；`review/b2-antecedent-final-review-20261018-v3.json` 已纳入。
+当日B2、C审查及收据摘要已提交；完整live树未提交，清理后本机保留5个live目录（CN三轮、HK、US）。历史RF assurance/output保留；旧RF临时目录的拒删记录不等于已清理。
 
-## 8. 仍未完成与下一步
-- **未完成**：收尾提交的推送与 exact CI；冻结 holdout 与 RF 审查循环（全部 receipt 标注 development regression, not holdout）；RF/FF 自身套件未在本机复跑；覆盖修复的 `activation-resume` 冲突；HK 独立复审文件；`.planning` 收据树未入 git。
-- **下一步**：① 推送收尾提交并取 exact CI；② 补 HK 复审文件（带 gold id 表）；③ 启动 holdout + RF 循环；④ 按各自 CI 环境复跑 RF/FF；⑤ 决定覆盖修复的去留（修好或删除）。
+## 尚未完成
+
+新公司holdout/RF审查循环未启动；实验补写恢复、完整证据可移植性及工程债仍列在CURRENT_STATUS。当前代码实施暂停；不按旧快照重新派工、重复修B2或重复推送已发布提交。

@@ -1,3 +1,16 @@
+# 当前调查发现（2026-10-21）
+
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## 本轮状态核对结论
+
+B2已终审通过并发布；普通C恢复/cache/FF-RF已有通过记录；HK独立7/7报告和三家核心收据摘要已入Git。CN8/10是用户接受的受限收尾，US漏事实仍保留。完整live子收据仍为本地材料。全src类型清零已完成；旧“B2待实现”“领先7提交未推”“HK未跑”“报告未提交”等不再是当前结论。
+
+## 历史记录（保留原过程，不作为当前待办）
+
+<details>
+<summary>展开历史计划、验证和失败记录</summary>
+
 ## DU11 B2 三审修复；正式 C 首次真实 POST 后收尾失败 — 2026-10-18
 
 三审 REJECT 的两个 P1（中文泛称声明、head 不比较）已修：head-first 专名提取、技术描述词黑名单、series/device head 强制匹配、前置“包括…在内的”集合、客户主语句归属、泛称英文短语不门禁。测试 105 PASS、selection 738 PASS；三源仍 10/10、7/7、8/8，US 未闭合从 11 降到 6。
@@ -649,7 +662,7 @@ RF aed581ac 精确 CI38609253663 success（GitHub公开API实查）。Apple制�
 
 RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）；正常push416 PASS＋36子测试。reading_context 消费完整，定点同步两物理安装副本完成；旧 assurance/output WIP 保留。CWP 8f1c607b 与 d240871d 待本节点正常提交/推送，默认仍0.8。
 
-## Next Step
+### 历史 Next Step（已被当前入口取代）
 
 ROOT 先收尾当前引用归属/恢复节点的跨仓联调与发布；三个 DU4 作者按各自独立卡开工。接收后执行 [DU4 总计划](parallel/du4-2026-10-15/README.md) 的生产接线及真实 holdout，不改默认或跳过质量验收。
 
@@ -813,3 +826,5 @@ ET454PASS、10gold、ruff绿；FF117PASS（显式W07_ET_TOOL真实ET CLI，未sk
 ROOT F1先15个行为测试9FAIL6PASS，修后15PASS；补跨句借词/审计RPO/真正审计软件/预算耗尽反控再3FAIL18PASS，修后集中179PASS4.88s。源用途与语法关系分开、逐分句观察、实际业务财务附注保留、未观察用途不绕工作预算回退。尚未提交，不把它视为F2闭合或真实C通过。F4源卡按已有策略分配同56KiB已在内部并行完成56PASS，等待不同agent独审及ROOT字段生产投影测试。
 
 正常push9daa0c38被本地600秒上限拒绝：6696项进行至98%，没有已出现的断言失败；不是远端CI失败。首个过宽触发为nested fixture-only conftest，全量推断忽略pytest目录责任。先1FAIL12PASS复现，修后56PASS2.54s，独审额外发现并修顺序别名遮蔽/导入hook/装饰参数和函数默认值/注解模块执行；global hook/plugin/未知路径仍fallback。该修复仍待最终独审。当前完整提交范围仍因tools README未知资源等触发full，不声称已经缩成局部，不抬600秒、不跳hook、不盲重试。下一次正式发布在集成大节点集中执行。
+
+</details>

@@ -1,67 +1,82 @@
 {
-  "schema_version": "du11-final-handoff-report/1",
-  "date": "2026-10-18",
-  "status": "CONDITIONAL_READY",
+  "schema_version": "du11-final-handoff-report/2",
+  "snapshot_date": "2026-10-18",
+  "corrected_on": "2026-10-21",
+  "status": "HISTORICAL_CHECKPOINT_SUPERSEDED",
+  "reference_base": "this_file_directory",
+  "canonical_current_status": "../CURRENT_STATUS.json",
   "b2": {
-    "verdict": "PASS",
-    "review": "review/b2-antecedent-final-review-20261018-v3.md",
-    "ci": "2a80acf6",
-    "du11_tests": 110
+    "verdict": "PASS_PUBLISHED",
+    "review": "b2-antecedent-final-review-20261018-v3.md",
+    "code": "2a80acf6",
+    "review_test_count": 109,
+    "later_engineering_test_count": 110
   },
   "c_content": {
-    "closure": "user-accepted 8/10",
-    "cn": 8,
-    "us": 4,
-    "hk": "not_run_api_key_401"
+    "cn": {
+      "coverage": "8/10",
+      "critical": "5/7",
+      "closure": "USER_ACCEPTED_LIMITED_CLOSEOUT"
+    },
+    "hk": {
+      "coverage": "7/7",
+      "critical": "6/6",
+      "status": "PASS",
+      "review": "c-content-review-hk-20261018.md"
+    },
+    "us": {
+      "review_coverage": "2/8",
+      "additional_partial": 1,
+      "other_experiment_range": "2-4/8",
+      "status": "FACT_OMISSION_OPEN"
+    }
   },
   "c_engineering": {
-    "receipts": "PASS",
-    "activation_recovery": "PASS",
-    "cross_run_zero_post": true
+    "normal_path": "PASS_RECORDED",
+    "activation_recovery": "PASS_RECORDED",
+    "cross_run_zero_post": true,
+    "core_summary": "../receipts/c-live-receipts-20261018.json",
+    "full_live_tree_tracked": false,
+    "rerun_on_latest_typing_commit": false
   },
   "coverage_repair": {
     "flag": "CW_SUMMARY_COVERAGE_REPAIR",
-    "default": "off (local commits only)",
-    "live_posts": 2,
-    "activation": "activation_pending",
-    "conflict": "activation-resume reopen_paid_output"
+    "default": "off_published",
+    "live_posts_in_experiment": 2,
+    "conflict": "activation-resume reopen_paid_output ReservationConflictError"
   },
   "delivery": {
-    "local_master": "b59e2141",
-    "origin_master": "ccc5bc7e",
-    "local_ahead": 7,
-    "branches": {
-      "du11-close-docs": "e6280e6e",
-      "du11-repair-flag": "09cb49ad"
-    },
-    "master_push_blocked_by": [
-      "tests/contract/test_fresh_cache_behavior_receipts.py",
-      "tests/integration/test_shared_reading_production_e2e.py"
-    ]
+    "closeout_commit": "ef3f3d1c",
+    "closeout_ci_run": 39164683463,
+    "closeout_ci_conclusion": "success",
+    "is_current_head_claim": false
   },
   "packages": {
-    "status": "IMPLEMENTED_PENDING_ROOT_RECEPTION",
-    "branches": [
-      "codex/p1-ocr-text-20261018",
-      "codex/p2-office-table-20261018",
-      "codex/p3-identity-audit-20261018",
-      "codex/p4-consumer-contract-20261018"
+    "status": "ROOT_RECEIVED_MERGED_PUBLISHED",
+    "ids": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
     ]
   },
   "usage": {
-    "attempts": 55,
-    "tokens": 1074406,
-    "micro_usd": 270900,
-    "unknown_hold": {
+    "snapshot_date": "2026-10-18",
+    "dedup_key": "database+attempt_id",
+    "attempts": 56,
+    "tokens": 1091219,
+    "estimated_micro_usd": 278311,
+    "unknown_hold_included": {
       "tokens": 69046,
-      "micro_usd": 31208
-    }
+      "estimated_micro_usd": 31208
+    },
+    "recounted_on_correction": false
   },
-  "cleanup": {
-    "removed_temp_dirs": 12,
-    "kept": [
-      "RF assurance work files",
-      "output/"
-    ]
-  }
+  "remaining": [
+    "new-company holdout and RF audit loop",
+    "experimental coverage-repair recovery",
+    "portable full-run evidence",
+    "engineering debt listed in CURRENT_STATUS"
+  ],
+  "original_runtime_and_review_receipts_modified": false
 }

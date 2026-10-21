@@ -1,3 +1,16 @@
+# 当前过程记录（2026-10-21）
+
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## 2026-10-21 文档状态统一
+
+核对已发布代码与公开CI，纠正HK独审/核心收据/补写默认关闭/推送状态的过期描述；用唯一状态页统合产品进度、类型质量节点、剩余任务与暂停状态。当前代码CI为76a9440b / run39662983951 success；本轮只改文档，发布结果以本轮Git提交与push输出为准，不重签旧运行收据。
+
+## 历史记录（保留原过程，不作为当前待办）
+
+<details>
+<summary>展开历史计划、验证和失败记录</summary>
+
 ## DU11 B2 三审修复；正式 C 首次真实 POST 后收尾失败 — 2026-10-18
 
 三审 REJECT 的两个 P1（中文泛称声明、head 不比较）已修：head-first 专名提取、技术描述词黑名单、series/device head 强制匹配、前置“包括…在内的”集合、客户主语句归属、泛称英文短语不门禁。测试 105 PASS、selection 738 PASS；三源仍 10/10、7/7、8/8，US 未闭合从 11 降到 6。
@@ -645,7 +658,7 @@ ROOT因果＋生产选择42PASS；夹具真实HTML必须显式mime_type，不能
 
 RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）；正常push416 PASS＋36子测试。reading_context 消费完整，定点同步两物理安装副本完成；旧 assurance/output WIP 保留。CWP 8f1c607b 与 d240871d 待本节点正常提交/推送，默认仍0.8。
 
-## Next Step
+### 历史 Next Step（已被当前入口取代）
 
 ROOT 先收尾当前引用归属/恢复节点的跨仓联调与发布；三个 DU4 作者按各自独立卡开工。接收后执行 [DU4 总计划](parallel/du4-2026-10-15/README.md) 的生产接线及真实 holdout，不改默认或跳过质量验收。
 
@@ -867,3 +880,5 @@ ROOT F1/F2独审四delta已37PASS2.49s/13最终SHA一致（初审保留），但
 正常push914e0283再次600秒超时，实际全部unit及几乎全部smoke已完成，最后停B10；不能把停点等同B10耗时600秒。根因是Windows全量bootstrap与CI独立合同责任串在同pytest中累加deadline。本次只fullfallback拆为两个独立pytest并行：全部unit、排除已覆盖unit的原FAST_CONTRACT非unit集合；集合无删无重、各600上限不变、不同shortTemp、禁cache与bytecode，任一红保持失败并等待两边清理。不改普通affected/CI smoke入口、不修改CI、不抬deadline。真实5RED→15PASS1.95s，含两真实Python进程Temp/哨兵恢复、Barrier同时启动、任一失败/包装异常/完整case集合；不同agent实际实现独审PASS，见review/du11_push_phase_isolation.md/json。正常hook实测收益仍待，不承诺CPU竞争下一定<600。
 
 HK根因受控：保持新finish仅放开left_closed仍0/7，实际OPEN_START触发0；原finish7/7。新singleton无句末即defer额外挡1951单位，windows349未变。physical连续性没有edge不能判整个原block语义不完整（可含段落/多句/列表引介），恢复其候选地位并报告standalone/semantic_not_evaluated，不伪造closedwindow；既有多块open尾与限额defer不变。原错层测试/RED历史保留且按责任修正，新89PASS5.26s；实际生产HK同DTO/cap恢复selected7/7、canonical7/7、27.147s、12,098,578/16M单账户、0API/0rawcopy/原件不变。三处CN真实闭合缺口已用p16/17/31、102原单位定位，不称F2/C完成；独审正在最终有限delta复核。
+
+</details>

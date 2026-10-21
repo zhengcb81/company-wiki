@@ -1,3 +1,16 @@
+# 当前行动计划（2026-10-21）
+
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## Next Step
+
+本轮只完成文档状态统一、独立审查、正常提交推送，随后保持暂停。用户恢复实施后，下一主线是冻结独立新公司样本/来源/检查点，复用已有C基线，开展holdout与RF审查循环。B2、类型清零及已接收卡不重开；其余工程改进保留为候选，不自动追加门禁。
+
+## 历史记录（保留原过程，不作为当前待办）
+
+<details>
+<summary>展开历史计划、验证和失败记录</summary>
+
 ## 大节点完成：全仓 mypy 0 + CI 全量门禁（2026-10-21）
 
 - `mypy src`：**335 errors / 85 files → 0 errors / 366 files**；`automation`、`source_catalog`、
@@ -485,6 +498,8 @@ FF当前manifest的future/invalid/None不再继承旧query资格，使用已有d
 
 先建立一次metadata索引和有界邻窗，最多常数邻居/每scope有限已读上下文；每次新观察预扣原account，耗尽不能重启balance或释放半句。原paid run/未知费用不改，当前累计742228tokens/$0.421556proxy、历史unknown7+401新hold保留；限2Mtokens/$20，供应商按真实现配置，不读/打印密钥。
 
-## Next Step
+### 历史 Next Step（已被当前入口取代）
 
 RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，不重复接收/发布这两卡。下一工程节点：按最终接口先TDD写有界先行词（非event描述同样检查）与original/analysis namespace、原始联合限额及不重复扫描反例，再在现唯一owner接线。保留原文fallback只读视图，先readiness/context后单一graph与fact；未知/多义/超过原4blocks/8units/2048chars仅该卡defer，不编公司特例/raise上限/克隆16M余额。真实三源仅在完整节点完成后回放一次并独立内容检查，随后正式三供应商摘要及收费/activation/同跨run缓存/FF-RF C；holdout/RF循环仍OPEN。
+
+</details>

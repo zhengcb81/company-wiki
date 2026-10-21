@@ -1,3 +1,16 @@
+# 当前调查发现（2026-10-21）
+
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## 本轮状态核对结论
+
+B2已终审通过并发布；普通C恢复/cache/FF-RF已有通过记录；HK独立7/7报告和三家核心收据摘要已入Git。CN8/10是用户接受的受限收尾，US漏事实仍保留。完整live子收据仍为本地材料。全src类型清零已完成；旧“B2待实现”“领先7提交未推”“HK未跑”“报告未提交”等不再是当前结论。
+
+## 历史记录（保留原过程，不作为当前待办）
+
+<details>
+<summary>展开历史计划、验证和失败记录</summary>
+
 ## 一个必须记住的重构教训：重命名会改变“泄漏变量”的语义（2026-10-21）
 
 - 在 narrative_reading 里把 `members = original_members(uid)` 重命名为 `member_ids` 后，
@@ -327,3 +340,5 @@ Final preallocation evidence: source candidates originally spent193 of300 then s
 Current same-page finish correctly does not assert cross-page continuity, but source owner independently admits page fragments. Therefore a source-level atomic dependency is needed before selection; late summary rewording or a changed max_claims cannot fix a half-sentence selected under a one-span budget. Source block IDs reset on each page: the new cross-page envelope must use tuple identities. Current global WorkBudget must also include new continuity observations; keep local geometric ceiling as a nested ceiling, never a second free allowance.
 
 Measured quadratic source context: a background package withNmembers called context() for each body, rebuilding set(owner.members) each time. 16members288visits,32members1088visits. Source-specific nouns/models cannot fix this; precompute external-context dependencies once per owner and combined exclusions once per source, while actual membership/fan-out/sort costs consume the existing account. StageB initial implementation is isolated pending broader integration/independent final review, not called production-ready.
+
+</details>

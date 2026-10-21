@@ -1,3 +1,16 @@
+# 当前行动计划（2026-10-21）
+
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## Next Step
+
+本轮只完成文档状态统一、独立审查、正常提交推送，随后保持暂停。用户恢复实施后，下一主线是冻结独立新公司样本/来源/检查点，复用已有C基线，开展holdout与RF审查循环。B2、类型清零及已接收卡不重开；其余工程改进保留为候选，不自动追加门禁。
+
+## 历史记录（保留原过程，不作为当前待办）
+
+<details>
+<summary>展开历史计划、验证和失败记录</summary>
+
 ## DU11 B2 三审修复；正式 C 首次真实 POST 后收尾失败 — 2026-10-18
 
 三审 REJECT 的两个 P1（中文泛称声明、head 不比较）已修：head-first 专名提取、技术描述词黑名单、series/device head 强制匹配、前置“包括…在内的”集合、客户主语句归属、泛称英文短语不门禁。测试 105 PASS、selection 738 PASS；三源仍 10/10、7/7、8/8，US 未闭合从 11 降到 6。
@@ -754,7 +767,7 @@ Current Phase: A/B/C — DU3已实收；真实泛化与正式摘要共同根因�
 
 RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）；正常push416 PASS＋36子测试。reading_context 消费完整，定点同步两物理安装副本完成；旧 assurance/output WIP 保留。CWP 8f1c607b 与 d240871d 待本节点正常提交/推送，默认仍0.8。
 
-## Next Step
+### 历史 Next Step（已被当前入口取代）
 
 ROOT 先收尾当前引用归属/恢复节点的跨仓联调与发布；三个 DU4 作者按各自独立卡开工。接收后执行 [DU4 总计划](parallel/du4-2026-10-15/README.md) 的生产接线及真实 holdout，不改默认或跳过质量验收。
 
@@ -797,3 +810,5 @@ ROOT 先收尾当前引用归属/恢复节点的跨仓联调与发布；三个 D
 [节点收据](production-wiring-evidence/acceptance.json) / [紧凑原始证据](production-wiring-evidence/receipts.zip)。正式public request显式0.9、唯一原文/策略摘要、same-run/outbox/真实v5升级、原件篡改拒绝已验。集中1149 PASS/17 SKIP/3旧factory失败后，只复跑受影响51（50PASS/1新test参数失配）及最后18PASS；全部已知工程失败关闭，原FAIL保留。新7E2E：集中6PASS，1计数观察点过时，改为统一真实byte owner后1PASS；旧11E2E全PASS。没有反复重跑千项套件或降低断言。
 
 **A/B/C仍未全部完成：** 真实跨run缓存等待DU3依赖组件；同原件旧/新三市场native回放更快但不是摘要质量通过。实际微软8条required_business仅1/8在新选择中保留（旧4/8），三层共因已实证，不是拆句误报。新默认不能启用；下一批先通用RED再修，不在生产加公司词/样本特判。unknown语言准备仍有一次重复读，作为同责任层性能收尾，不新增审批。
+
+</details>

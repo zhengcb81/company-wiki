@@ -1,8 +1,10 @@
+> **历史检查点，已被后续进度取代。** 本文记录B2实施前的RF/FF接收与CWP producer发布；不是当前源码/待办清单。B2和C普通工程链已有后续通过记录。当前唯一入口：[CURRENT_STATUS.md](../CURRENT_STATUS.md)。
+
 # DU11 两份外包接收与三仓发布收尾
 
 接手后续主线请先读[当前主线接手指南](harness-handoff.md)；本文件只记录已完成的接收、发布和仍保留的收尾事项。
 
-## 当前结论
+## 该检查点的接收结论
 
 两份卡的功能工程交付已接收且作者提交已并入主线，CWP/FF配套发布和技能安装完成。RF最终依赖pin已推送；其精确CI39095818018也已completed/success。三仓本轮实际发布CI全部绿。
 
@@ -30,7 +32,7 @@ RF旧3个assurance WIP不包含本任务提交。第一pin阶段观察weekly_man
 
 **仍有一处清理例外：** `C:/Users/郑曾波/AppData/Local/Temp/rf-du11-final-3a_yd5_8` 为本次RF审查源码/合成夹具外层Temp，内部端到端恢复已通过；外层删除PermissionError后平台拒绝原生清理，ROOT只读确认仍存在，不换通道重试、不声称全清。历史原件/生产配置不在其中。详见du11-rf-reception.md/json。
 
-## 主线未完成项
+## 该检查点当时的后续项（已由后续B2/C推进）
 
 工程接收不等于正式内容C。t32诊断不再selected，t34先行词仍OPEN；按antecedent-source-interface-final.md实施唯一source/operating owner的有界前驱和namespace引用映射，联合正文/原context/声明保持8units、4个(source,page,block)、2048chars与同parent16M。必要声明超限则该卡defer，不编产品事实。随后真实三源、正式配置三供应商摘要、费用/activation恢复、同跨run缓存、真实FF/RF C、holdout和RF审查循环。
 

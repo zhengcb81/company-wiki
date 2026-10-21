@@ -1,0 +1,124 @@
+{
+  "schema_version": "company-wiki-status-consolidation-review/1",
+  "reviewed_on": "2026-10-21",
+  "reviewer": "/root/pwf_fact_reconciliation",
+  "implementation_author": "/root",
+  "parent_head": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
+  "verdict": "PASS_DOCUMENTATION_ONLY",
+  "open_findings": [],
+  "closed_findings": [
+    {
+      "id": "DOC-P2-JSON-REFERENCE-BASE",
+      "problem": "Historical handoff JSON mixed plan-relative and review-directory-relative references without a declared base.",
+      "repair_owner": "/root",
+      "repair": "reference_base=this_file_directory; B2/HK review paths use local names; core summary uses ../receipts/.",
+      "recheck": "All four declared file references resolve."
+    }
+  ],
+  "checks": {
+    "canonical_entry": "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+    "canonical_md_json_consistent": true,
+    "implementation_paused": true,
+    "next_after_resume": "freeze independent-company source fixtures/checkpoints, reuse current evidence, then holdout and RF audit loop",
+    "b2_review_109_vs_later_110_distinguished": true,
+    "prior_c_not_recertified_for_typing_head": true,
+    "cn_limited_closeout_not_applied_to_us": true,
+    "hk_report_and_core_summaries_tracked": true,
+    "normal_recovery_vs_experimental_conflict_distinguished": true,
+    "unknown_hold_included_not_added_twice": true,
+    "historical_statuses_demoted": true,
+    "legacy_entry_redirects": true,
+    "current_navigation_relative_links": 47,
+    "json_directory_relative_references": 4,
+    "final_relative_links_resolve": true,
+    "audited_sources_unchanged_before_after": true
+  },
+  "code_ci_basis": {
+    "head_sha": "76a9440b9a580889460db0b7b545135060f1ce2d",
+    "run_id": 39662983951,
+    "status": "completed",
+    "conclusion": "success",
+    "verification_owner": "/root",
+    "reviewer_network_recheck": false
+  },
+  "source_bindings": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+      "sha256": "120fed4ce6840b339cd3a9a98ef2429482d5af564421c73651cd0f5ef4f726bf"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json",
+      "sha256": "3d177e312785b7285a9aca55686fa4fab4df903295565118f79714f00525ed2a"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/README.md",
+      "sha256": "cd8e668fc19ef8fbd168d4f4b5fd5556788724f558148f76629116fafebd964f"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/task_plan.md",
+      "sha256": "061c3409b86aa070ca127d4d2a2b6e793552590d4fd1309e4857b4c92f389194"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/progress.md",
+      "sha256": "5b349b1899b382de76607a1ff9f9ad95a274cc7bb5832cf52e97a38d60d5e48b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/findings.md",
+      "sha256": "ac5c907420b7fd01bf14c8a65dacb4d8c5ca381db476debba6b17b63881d84f2"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/task_plan.md",
+      "sha256": "f2135a79c59bfe7a2c22121e551f8e3f77eb536c5b4722a3d936dbf101133078"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/progress.md",
+      "sha256": "d15078226aa07d3425b56fa88304bc37e9802ef634751371c82db2fdc7367e8c"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/findings.md",
+      "sha256": "1443f97f94b225907a297d922d818dc4c08dd5410bff78e316897e20523e7321"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/HANDOFF-2026-10-21.md",
+      "sha256": "54ed1a086b8a08d8f5642b0b8e9e7d40ff3a56f00bae8fdb85231b309c6a3275"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/harness-handoff.md",
+      "sha256": "a44e4621f7b82c85ee9539a4ce7bb20062b07aa17a427feba7058d5af88cc567"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/du11-reception-closeout.md",
+      "sha256": "513c61954288ac11a9151cc77655fddc741e2d93c5801563947141376a1ab326"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/final-handoff-report-20261018.md",
+      "sha256": "e0aa682dd1d268a8ca2b6e82da54de9fb7e2e08c4d83fb3827528a0caab2c953"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/final-handoff-report-20261018.json",
+      "sha256": "88f7414368785f2e0ca8068f0c439ba6582496f3f663032513e07fb5f8cbd5dc"
+    }
+  ],
+  "boundaries": {
+    "reviewed_current_navigation_before_collapsed_history": true,
+    "exhaustive_historical_link_audit": false,
+    "runtime_tests_run": 0,
+    "network_calls": 0,
+    "paid_model_calls": 0,
+    "originals_or_gold_modified": false,
+    "secrets_read": false,
+    "source_or_test_modified": false,
+    "other_repositories_modified": false,
+    "publication_not_yet_claimed": true,
+    "only_created": [
+      "docs/plans/du11-source-closure-2026-10-18/review/status-consolidation-review-20261021.md",
+      "docs/plans/du11-source-closure-2026-10-18/review/status-consolidation-review-20261021.json"
+    ]
+  },
+  "limitations": [
+    "This review certifies documentation consistency only, not new product acceptance, live-provider recovery, new-company holdout, full cross-repository suites, or fee-ledger reconciliation.",
+    "Public CI metadata was checked by ROOT; this reviewer compared the supplied exact SHA/run status and did not independently access the network.",
+    "The parent HEAD is the pre-documentation commit; the reviewed working-file versions are bound by the fourteen SHA-256 values, not falsely described as already committed.",
+    "Historical runtime/review receipts keep their original claims; only navigation and corrected historical summary wrappers were reviewed."
+  ]
+}

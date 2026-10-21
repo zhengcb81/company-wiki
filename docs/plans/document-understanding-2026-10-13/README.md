@@ -1,3 +1,18 @@
+# 共享文档阅读项目入口
+
+**唯一当前入口：** [当前状态与接手指南](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。当前代码实施暂停；已完成事项、剩余任务和唯一下一步均以该页为准。
+
+本目录保留整体设计与历史阶段。B2来源闭合、真实C普通恢复/cache/FF-RF链及类型质量节点已有交付；已接收的DU/DU2/P1–P4等卡不重新派发。后续主线为独立新公司holdout与RF审查循环，尚未启动。
+
+[总计划](task_plan.md) / [过程](progress.md) / [发现](findings.md) / [专项类型交接](../du11-source-closure-2026-10-18/HANDOFF-2026-10-21.md)。
+
+## 历史设计与派工入口
+
+下面保存发生时的设计与派工记录，其中“当前可分包”“生产尚未切换”等不是新的调度指令。
+
+<details>
+<summary>展开历史README</summary>
+
 # 共享文档阅读升级 — ROOT总入口
 
 **当前：共享模块与DU2三包已验收/并master/推远端；生产新选择、正式摘要与真实质量收尾已统一纳入本PWF。**
@@ -20,3 +35,5 @@
 ## 当前可分包工作
 
 [DU3：三张独立施工卡与工作目录](parallel/du3-2026-10-14/README.md)，QUALITY/DEPENDENCIES/GEOMETRY排他模块可同时启动；ROOT继续Phase A生产选择/最终材料，不改它们的在制目录。
+
+</details>

@@ -1,3 +1,16 @@
+# 当前过程记录（2026-10-21）
+
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](CURRENT_STATUS.md)。整体计划仍开放，代码实施暂停。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+
+## 2026-10-21 文档状态统一
+
+核对已发布代码与公开CI，纠正HK独审/核心收据/补写默认关闭/推送状态的过期描述；用唯一状态页统合产品进度、类型质量节点、剩余任务与暂停状态。当前代码CI为76a9440b / run39662983951 success；本轮只改文档，发布结果以本轮Git提交与push输出为准，不重签旧运行收据。
+
+## 历史记录（保留原过程，不作为当前待办）
+
+<details>
+<summary>展开历史计划、验证和失败记录</summary>
+
 ## 大节点完成：全仓 mypy 0 + CI 全量门禁（2026-10-21）
 
 - `mypy src`：**335 errors / 85 files → 0 errors / 366 files**；`automation`、`source_catalog`、
@@ -460,3 +473,5 @@ Existing production _prose_reading_packages/_candidates/finalize_selection, not 
 StageA expanded19cases:10FAIL/9PASS5.61s, including explicit running furniture and exhausted parent geometry scan. Root began systematic budget connection: _Analysis uses existing WorkBudget.scoped, source candidate metadata reserves before indexes, same parent flows into geometry and operating session. First zero-parent controlGREEN1PASS/102deselected4.83s: -k applied to all requested paths, so this is explicitly not103PASS. Correct explicit-node compatibility command is separately running. Full physical crosspage/antecedent implementation and independent review remainOPEN; mothere33 normalpush succeeded6741PASS24SKIP580.05s +142contracts37.31s and remote master exactlye33d40ed7688cfdcead1e02d55542f7026d0b8e5. RemoteCI352/runs39090720114 currentlyIn progress.
 
 Metadata performance root cause reproduced on actual _prose:16/32members visited288/1088times (quadratic),2FAIL5.05s; no timing-only claim. One owner external-context index and one combined exclusion set now avoid rebuilding whole member/context sets for each paragraph. Reservations account actual membership/section/header-context edges and sort work on the same parent; _candidates returns finite partial if preprocessing cannot reserve. Concentrated88PASS5.59s covers2linear controls/2parent-budget+previous native/prose readiness controls. Source crosspage/antecedent RED remains intentionallyOPEN and unmerged. New design review approved overall owner direction but is not final implementation acceptance.
+
+</details>
