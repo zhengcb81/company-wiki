@@ -382,6 +382,10 @@ class NarrativeSummarizeHandler:
                 "SUMMARY_INPUT_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                 "selected evidence or original language is unavailable",
             )
+        prior_result = context.prior_partial_result
+        if (prior_result is not None and isinstance(prior_result.result, Mapping)
+                and prior_result.result.get("coverage_partial") is True):
+            return _legacy_partial_result(prior_result, selected)
         if self._model is None and self._model_caller is None:
             raise _SummaryFailure(
                 "MODEL_NOT_CONFIGURED",
@@ -399,10 +403,8 @@ class NarrativeSummarizeHandler:
             except ModelResponseError as exc:
                 raise _SummaryFailure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                                       str(exc)) from exc
-        prior_result = context.prior_partial_result
-        if (prior_result is not None and isinstance(prior_result.result, Mapping)
-                and prior_result.result.get("coverage_partial") is True):
-            return _legacy_partial_result(prior_result, selected)
+
+
         try:
             request = build_model_request(selected,
                 reading_projection_version=reading_projection_version)

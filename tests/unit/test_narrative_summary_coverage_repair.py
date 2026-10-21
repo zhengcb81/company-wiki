@@ -104,3 +104,15 @@ def test_malformed_legacy_partial_never_falls_through_to_a_new_paid_call():
     assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert result.error.code == "LEGACY_PARTIAL_SUMMARY_INVALID"
     assert not caller.requests
+
+
+def test_retired_partial_is_available_without_a_current_model_or_generation_call():
+    selected = with_reading()
+    partial = _legacy_partial(selected)
+    def should_not_call(_):
+        pytest.fail("read-only historical partial must not validate a new paid model generation")
+    handler = NarrativeSummarizeHandler(model=None, model_caller=None,
+        validate_model_execution=should_not_call)
+    result = handler(replace(_context(selected), prior_partial_result=partial))
+    assert result.error.code == "LEGACY_PARTIAL_SUMMARY_AVAILABLE"
+    assert result.result == partial.result
