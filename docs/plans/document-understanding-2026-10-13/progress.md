@@ -2,6 +2,10 @@
 
 **唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
 
+## 2026-10-21 R5受影响契约共因修复并线
+
+隔离分支f1dba9b7及handoff已cherry-pick，master生产提交a5214bda。195项最终全绿，独审PASS；恢复public扩列反例而非降低断言。三源码在母工作树逐字节SHA等于被测/被审版本；Git LF与Windows CRLF分别记录。正常push/CI尚待本轮结果，不把旧76a CI转签新代码。药明康德initial封存不改，继续四审。
+
 ## 2026-10-21 R1首轮封存与四路审查
 
 首家公司封存：639工件/36,665,980B全部SHA一致，RF实际产物partial；四路审查开始。公司累计39,026tokens/$0.009720（含MiMo401 unknown全hold），母账1,544,023tokens/$0.625258。DS成功与缓存零新增收费有原生证据；最新来源/桥接/外部校准/受控恢复未完成，不能用工程通过代签。R5隔离TDD及独审并行，未写母仓代码。

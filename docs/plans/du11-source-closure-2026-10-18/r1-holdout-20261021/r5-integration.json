@@ -1,0 +1,40 @@
+{
+  "schema_version": "r5-root-integration/1",
+  "recorded_at": "2026-10-21T21:48:17.221843+00:00",
+  "implementation_commit": "f1dba9b735a914f6e4a2e78b798092487aa20531",
+  "author_handoff_commit": "0c621df5a4a32f740e8913ada3d14cc163b3574b",
+  "mainline_source_commit": "a5214bda",
+  "mainline_handoff_commit": "1c52aec6f5f5f6d00f727acc9de8386b47eb04a8",
+  "review": "review/r1-contract-debt-fix-review-20261021.json",
+  "review_status": "PASS_CONTENT_BOUND",
+  "affected_tests_passed": 195,
+  "affected_tests_failed": 0,
+  "test_rerun_by_ROOT": false,
+  "reason_no_duplicate_full_run": "exact tested/reviewed bytes restored into mainline; normal pre-push gate remains",
+  "source_checks": [
+    {
+      "path": "src/company_wiki/automation/store.py",
+      "working_tree_sha256": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624",
+      "reviewed_sha256": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624",
+      "matches": true,
+      "git_blob_sha256": "71382439bf9489274a083fc9b04baa6b64f687c64c1a0f1ef206015b3ef54927"
+    },
+    {
+      "path": "src/company_wiki/automation/terminal_receipt_contracts.py",
+      "working_tree_sha256": "4113dda30f530f6fdf217c0280a1cddc5efdd8f1507964359e5b1154b85671df",
+      "reviewed_sha256": "4113dda30f530f6fdf217c0280a1cddc5efdd8f1507964359e5b1154b85671df",
+      "matches": true,
+      "git_blob_sha256": "d9e5824a94a3981c288859bda97b70bc37b0eb1705f844ebbd8d96304027a001"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_run_store.py",
+      "working_tree_sha256": "ebbb54bbd1acaab71d29016b650c470198a6f1b67da592be66c092cdf661c15f",
+      "reviewed_sha256": "ebbb54bbd1acaab71d29016b650c470198a6f1b67da592be66c092cdf661c15f",
+      "matches": true,
+      "git_blob_sha256": "33e9b3a971e40eea534b11fa6904c6f985859629f896d63e8a0e886f6d3f93e2"
+    }
+  ],
+  "git_line_ending_note": "Author Windows CRLF bytes equal mainline checkout; Git LF blobs separately indexed, no semantic difference. Initial direct raw hash vs blob comparison refused before verified line-ending-only conversion.",
+  "company_initial_execution_unchanged": true,
+  "publication": "pending normal push"
+}

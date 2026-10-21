@@ -39,7 +39,7 @@
 | R2 实验性补写 | `CW_SUMMARY_COVERAGE_REPAIR` 默认关闭，关闭改动已发布；两次 attempt 路径仍有 `activation-resume` / `ReservationConflictError` | 作为独立课题修复或移除；普通单次恢复已通过与此不矛盾。不得默认开启或把它算已验收 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
-| R5 已知测试债 | 两项旧本地 contract 失败：`test_automation_store_boundary.py`、`test_narrative_transport_cli.py` | 已分诊：短TEMP/正确权限下31项27过4失败；隔离工区正用TDD修静态误报、显式SQL投影、金标版本语义，独立审查中；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
+| R5 已知测试债 | 两份旧contract及相关实现已TDD修复、独审PASS并入master `a5214bda`（待正常push） | 最终受影响195项全绿，保留旧golden并新增current版；独审反例发现并修四条reservation读路径共因，准确字节已核对恢复入master。见[并线记录](r1-holdout-20261021/r5-integration.json)；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
 | R6 跨仓及清理边界 | RF/FF自身完整套件未在本机当前组合复跑；旧RF临时目录清理曾被平台拒绝 | 跨仓后续按各自环境及实际变更做大节点验证；旧未清理状态未重新核验，不声称已全清、不换通道重试旧拒绝操作 |
 
 ## 首家公司真实执行边界
@@ -49,7 +49,7 @@
 ## 代码、发布和 CI 基线
 
 - 文档整理前主线：`44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc`。2026-10-21已 fetch，`master` 与 `origin/master` 一致；tracked 文件干净，历史 `.planning` 未跟踪材料保留。
-- 最后代码提交：`76a9440b9a580889460db0b7b545135060f1ce2d`。公开 Actions API 已核对 [CI 39662983951](https://github.com/zhengcb81/company-wiki/actions/runs/39662983951) 为 `completed/success`，相同完整 SHA。
+- 最新代码提交：`a5214bda`（R5）；正常push/其CI待核。最近已核对的历史绿点为 `76a9440b9a580889460db0b7b545135060f1ce2d`；公开 Actions API 已核对 [CI 39662983951](https://github.com/zhengcb81/company-wiki/actions/runs/39662983951) 为 `completed/success`，相同完整 SHA。
 - RF DU11记录：`9669c4d7` / CI `39095818018`；FF DU11记录：`e8740748` / CI `39095654355`。本次未联网重查这两个仓库，不把历史pin写成它们实时HEAD。
 - 后续文档提交不改变上述代码基线；当前 workflow 忽略本轮文档路径，正常 pre-push 仍运行变更选择与既有 smoke。文档提交不要求再追一个不会产生的行为 CI，不递归更新跨仓兼容pin。
 

@@ -8,7 +8,7 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "76a9440b9a580889460db0b7b545135060f1ce2d",
+  "last_code_commit": "a5214bdabc56fed2dfc75fbb3b62ef05697e2717",
   "code_ci": {
     "run_id": 39662983951,
     "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39662983951",
@@ -16,7 +16,9 @@
     "status": "completed",
     "conclusion": "success",
     "verified_on": "2026-10-21",
-    "method": "anonymous_public_actions_api"
+    "method": "anonymous_public_actions_api",
+    "baseline_only": true,
+    "pending_new_source_commit": "a5214bda"
   },
   "completed": {
     "b2": {
@@ -95,7 +97,7 @@
     {
       "id": "R5",
       "task": "triage two existing local contract failures",
-      "status": "ISOLATED_TDD_FIX_AND_INDEPENDENT_REVIEW_IN_PROGRESS"
+      "status": "FIXED_195_PASS_INDEPENDENT_REVIEW_PASS_MERGED_PENDING_PUSH"
     },
     {
       "id": "R6",
