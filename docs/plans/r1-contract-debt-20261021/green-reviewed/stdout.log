@@ -1,0 +1,30 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1ctfix\\g2", "requested_basetemp_len": 55, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 195 items
+
+tests\unit\test_narrative_golden_evolution.py ....                       [  2%]
+tests\unit\test_terminal_pin_target.py ..                                [  3%]
+tests\contract\test_automation_store_boundary.py .................       [ 11%]
+tests\contract\test_narrative_transport_cli.py ................          [ 20%]
+tests\unit\test_automation_projection_columns.py .......                 [ 23%]
+tests\unit\test_automation_migrations.py ..                              [ 24%]
+tests\unit\test_terminal_narrative_receipts.py .....................     [ 35%]
+tests\integration\test_terminal_narrative_receipts.py ...                [ 36%]
+tests\unit\du11_paid_response\test_paid_response.py .................... [ 47%]
+.......                                                                  [ 50%]
+tests\unit\test_narrative_transport_contracts.py ....................... [ 62%]
+......                                                                   [ 65%]
+tests\unit\test_narrative_current_read.py .............                  [ 72%]
+tests\unit\test_narrative_transport_cli_output.py .                      [ 72%]
+tests\unit\test_transcript_boundary_versions.py ..............           [ 80%]
+tests\unit\test_narrative_run_store.py ......................            [ 91%]
+tests\unit\test_narrative_run_ownership.py ...............               [ 98%]
+tests\integration\test_narrative_run_budget.py ..                        [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1ctfix\logs\green-reviewed\junit.xml -
+======================= 195 passed in 115.28s (0:01:55) =======================

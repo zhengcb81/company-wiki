@@ -1,0 +1,6 @@
+{
+  "started_at_utc": "2026-10-21T21:31:16.3499679Z",
+  "finished_at_utc": "2026-10-21T21:31:26.6811855Z",
+  "exit_code": 0,
+  "command": "mother .venv python -B -m mypy --no-incremental --cache-dir <ownedtmp>/mypy src/company_wiki/automation/store.py src/company_wiki/automation/terminal_receipt_contracts.py"
+}

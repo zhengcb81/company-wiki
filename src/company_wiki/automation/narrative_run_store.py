@@ -6,7 +6,7 @@ Admission and accounting use the existing database transaction/lease boundaries.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from pathlib import Path
 import json
 import sqlite3
@@ -243,6 +243,10 @@ class RunBudgetSnapshot:
     unsettled_reservations: int
 
 
+# ReservationRecord is the public accounting shape. Internal additive columns
+# must not widen reads or become unexpected constructor keyword arguments.
+_RESERVATION_COLUMNS = ", ".join(field.name for field in fields(ReservationRecord))
+
 def _run(connection: sqlite3.Connection, run_id: str) -> RunRecord | None:
     row = connection.execute(
         "SELECT * FROM narrative_runs WHERE run_id=?", (run_id,)
@@ -398,7 +402,7 @@ def _reservation(
     connection: sqlite3.Connection, run_id: str, attempt_id: str
 ) -> ReservationRecord | None:
     row = connection.execute(
-        "SELECT * FROM narrative_model_reservations WHERE run_id=? AND attempt_id=?",
+        f"SELECT {_RESERVATION_COLUMNS} FROM narrative_model_reservations WHERE run_id=? AND attempt_id=?",
         (run_id, attempt_id),
     ).fetchone()
     return ReservationRecord(**dict(row)) if row is not None else None
@@ -463,7 +467,7 @@ def _budget(
     output_reservation: tuple[str, int] | None = None,
 ) -> RunBudgetSnapshot:
     rows = connection.execute(
-        "SELECT * FROM narrative_model_reservations WHERE run_id=?",
+        f"SELECT {_RESERVATION_COLUMNS} FROM narrative_model_reservations WHERE run_id=?",
         (run_id,),
     ).fetchall()
     records = [ReservationRecord(**dict(row)) for row in rows]
@@ -656,7 +660,7 @@ class NarrativeRunStore:
             if job is None or tuple(member) != tuple(job):
                 raise RunConflictError("paid recovery frozen job identity differs")
             return tuple(ReservationRecord(**dict(row)) for row in connection.execute(
-                "SELECT * FROM narrative_model_reservations WHERE run_id=? AND job_id=? ORDER BY reserved_at,attempt_id",
+                f"SELECT {_RESERVATION_COLUMNS} FROM narrative_model_reservations WHERE run_id=? AND job_id=? ORDER BY reserved_at,attempt_id",
                 (run_id, job_id)).fetchall())
         return self._read(read)
 
@@ -730,7 +734,7 @@ class NarrativeRunStore:
         def read(connection):
             _required_run(connection, run_id)
             rows = connection.execute(
-                "SELECT * FROM narrative_model_reservations WHERE run_id=? ORDER BY attempt_id",
+                f"SELECT {_RESERVATION_COLUMNS} FROM narrative_model_reservations WHERE run_id=? ORDER BY attempt_id",
                 (run_id,),
             ).fetchall()
             return tuple(ReservationRecord(**dict(row)) for row in rows)

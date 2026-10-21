@@ -1,0 +1,98 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1ctfix\\r2", "requested_basetemp_len": 55, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
+
+tests\unit\test_automation_projection_columns.py FFFF                    [100%]
+
+================================== FAILURES ===================================
+___ test_reservation_readers_ignore_added_internal_column[get_reservation] ____
+tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:105: in read
+    return state.runs.get_reservation("run", "paid")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:643: in get_reservation
+    return self._read(
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:644: in <lambda>
+    lambda connection: _reservation(connection, run_id, attempt_id)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:404: in _reservation
+    return ReservationRecord(**dict(row)) if row is not None else None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'
+___ test_reservation_readers_ignore_added_internal_column[budget_snapshot] ____
+tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:108: in read
+    return getattr(state.runs, reader)("run")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:783: in budget_snapshot
+    return self._read(read)
+           ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:781: in read
+    return _budget(connection, run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:469: in _budget
+    records = [ReservationRecord(**dict(row)) for row in rows]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'
+_ test_reservation_readers_ignore_added_internal_column[model_attempts_for_job] _
+tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:107: in read
+    return state.runs.model_attempts_for_job(run_id="run", job_id="job")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:661: in model_attempts_for_job
+    return self._read(read)
+           ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:658: in read
+    return tuple(ReservationRecord(**dict(row)) for row in connection.execute(
+           ^^^^^
+src\company_wiki\automation\narrative_run_store.py:658: in <genexpr>
+    return tuple(ReservationRecord(**dict(row)) for row in connection.execute(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'
+_ test_reservation_readers_ignore_added_internal_column[reservations_for_run] _
+tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:108: in read
+    return getattr(state.runs, reader)("run")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:738: in reservations_for_run
+    return self._read(read)
+           ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:736: in read
+    return tuple(ReservationRecord(**dict(row)) for row in rows)
+           ^^^^^
+src\company_wiki\automation\narrative_run_store.py:736: in <genexpr>
+    return tuple(ReservationRecord(**dict(row)) for row in rows)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1ctfix\logs\red-run-readers\junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_automation_projection_columns.py::test_reservation_readers_ignore_added_internal_column[get_reservation]
+FAILED tests/unit/test_automation_projection_columns.py::test_reservation_readers_ignore_added_internal_column[budget_snapshot]
+FAILED tests/unit/test_automation_projection_columns.py::test_reservation_readers_ignore_added_internal_column[model_attempts_for_job]
+FAILED tests/unit/test_automation_projection_columns.py::test_reservation_readers_ignore_added_internal_column[reservations_for_run]
+============================== 4 failed in 4.52s ==============================

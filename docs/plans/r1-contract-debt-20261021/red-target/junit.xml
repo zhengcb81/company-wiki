@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.312" timestamp="2026-10-21T22:26:30.816846+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_terminal_pin_target" name="test_final_pin_owns_exact_raw_or_projected_effect_target[False]" time="0.002"><failure message="AttributeError: 'FinalArtifactPin' object has no attribute 'effect_target'">tests\unit\test_terminal_pin_target.py:30: in test_final_pin_owns_exact_raw_or_projected_effect_target
+    assert pin.effect_target == publication_target(subject, generation)
+           ^^^^^^^^^^^^^^^^^
+E   AttributeError: 'FinalArtifactPin' object has no attribute 'effect_target'</failure></testcase><testcase classname="tests.unit.test_terminal_pin_target" name="test_final_pin_owns_exact_raw_or_projected_effect_target[True]" time="0.001"><failure message="AttributeError: 'FinalArtifactPin' object has no attribute 'effect_target'">tests\unit\test_terminal_pin_target.py:30: in test_final_pin_owns_exact_raw_or_projected_effect_target
+    assert pin.effect_target == publication_target(subject, generation)
+           ^^^^^^^^^^^^^^^^^
+E   AttributeError: 'FinalArtifactPin' object has no attribute 'effect_target'</failure></testcase></testsuite></testsuites>

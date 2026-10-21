@@ -1,7 +1,8 @@
 """AUTO-2 AutomationStore: explicit-path, transactional, idempotent persistence.
 
-This module depends only on the Python standard library, ``models`` (AUTO-1
-contract) and ``migrations`` (schema v2). It does not import the legacy
+This module depends on the Python standard library and intra-AUTO persistence
+contracts. Neutral final-artifact pins own source identity and effect targets.
+It does not import the legacy
 scheduler, read configuration/environment variables, spawn threads, or open a
 default database path.
 """
@@ -621,7 +622,6 @@ def _compact_terminal_narrative(
     write: bool,
 ) -> TerminalCompactionResult | None:
     """Derive and validate all AUTO facts in the caller's transaction."""
-    from company_wiki.narrative_subject import publication_target
     from .narrative_contracts import SourceRevisionEventPayload
     from .terminal_receipt_contracts import PROJECTED_TERMINAL_RECEIPT_SCHEMA
     receipt_schema = PROJECTED_TERMINAL_RECEIPT_SCHEMA if pin.subject_binding is not None else TERMINAL_RECEIPT_SCHEMA
@@ -696,7 +696,7 @@ def _compact_terminal_narrative(
     if len(members) != 3 or len({row["run_id"] for row in members}) != 1:
         raise IntegrityViolationError("terminal narrative scope must belong to one immutable run")
     run_id = members[0]["run_id"]
-    run = connection.execute("SELECT * FROM narrative_runs WHERE run_id=?", (run_id,)).fetchone()
+    run = connection.execute("SELECT binding_json,prompt_version,model_id FROM narrative_runs WHERE run_id=?", (run_id,)).fetchone()
     if run is None or any((row["input_hash"], row["handler_version"]) !=
                           (jobs_by_id[row["job_id"]].input_hash,
                            jobs_by_id[row["job_id"]].handler_version)
@@ -736,9 +736,7 @@ def _compact_terminal_narrative(
     if len(effects) != 1:
         raise IntegrityViolationError("terminal narrative DAG does not have one final effect")
     effect = _effect_from_row(effects[0])
-    expected_target = (publication_target(pin.subject_binding, pin.generation_sha256)
-                       if pin.subject_binding is not None else
-                       f"urn:company-wiki:narrative-bundle:{pin.document_id}:{pin.source_sha256}")
+    expected_target = pin.effect_target
     if (effect.effect_id, effect.job_id, effect.effect_type, effect.target, effect.status,
         effect.intended_after_hash, effect.actual_after_hash) != (
         pin.effect_id, verify, "narrative_bundle.publish",
@@ -1373,7 +1371,7 @@ class AutomationStore:
             job = _job_from_row(_job_row(connection, job_id))
             member = connection.execute("SELECT input_hash,handler_version FROM narrative_run_jobs WHERE run_id=? AND job_id=?",
                                         (run_id, job_id)).fetchone()
-            rows = connection.execute("SELECT * FROM narrative_model_reservations WHERE run_id=? AND job_id=? AND paid_response_json IS NOT NULL",
+            rows = connection.execute("SELECT paid_response_json,request_sha256,output_bytes,output_sha256 FROM narrative_model_reservations WHERE run_id=? AND job_id=? AND paid_response_json IS NOT NULL",
                                       (run_id, job_id)).fetchall()
             if (member is None or len(rows) != 1 or job.job_type != "source.narrative_summarize"
                     or (member["input_hash"], member["handler_version"]) != (job.input_hash, job.handler_version)
@@ -1393,7 +1391,7 @@ class AutomationStore:
             connection.execute("UPDATE jobs SET status='ready',not_before=?,updated_at=?,last_error_code=NULL,last_error_detail=NULL WHERE job_id=?",
                                (now, now, job_id))
             changed = [job_id]
-            children = connection.execute("SELECT j.* FROM jobs j JOIN job_dependencies d ON j.job_id=d.job_id WHERE d.depends_on_job_id=?",
+            children = connection.execute("SELECT j.job_id,j.job_type,j.status,j.last_error_code,j.created_from_event_id FROM jobs j JOIN job_dependencies d ON j.job_id=d.job_id WHERE d.depends_on_job_id=?",
                                           (job_id,)).fetchall()
             for row in children:
                 if (row["job_type"] == "source.narrative_verify" and row["status"] == "dead_letter"

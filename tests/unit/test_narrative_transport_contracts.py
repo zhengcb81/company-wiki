@@ -108,8 +108,10 @@ def test_identity_null_is_explicitly_unconstrained() -> None:
     assert NarrativeReadRequest.from_dict(payload).to_dict() == payload
 
 
-def test_frozen_producer_golden_contract_and_hash_bindings() -> None:
+@pytest.mark.parametrize("snapshot", ["", "current-v2"])
+def test_frozen_producer_golden_contract_and_hash_bindings(snapshot) -> None:
     directory = Path(__file__).resolve().parents[1] / "fixtures" / "narrative_transport_v1"
+    directory = directory / snapshot
     metadata = json.loads((directory / "metadata.json").read_bytes())
     for name, digest in metadata["file_sha256"].items():
         assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest

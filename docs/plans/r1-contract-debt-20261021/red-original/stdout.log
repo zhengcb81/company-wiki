@@ -1,0 +1,60 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1ctfix\\r0", "requested_basetemp_len": 55, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 31 items
+
+tests\contract\test_automation_store_boundary.py ..FF........F..         [ 48%]
+tests\contract\test_narrative_transport_cli.py ...............F          [100%]
+
+================================== FAILURES ===================================
+___________________ test_b01_migrations_no_forbidden_tokens ___________________
+tests\contract\test_automation_store_boundary.py:73: in test_b01_migrations_no_forbidden_tokens
+    assert token not in source, f"forbidden in migrations.py: {token!r}"
+E   AssertionError: forbidden in migrations.py: 'time.sleep'
+E   assert 'time.sleep' not in '"""Versione...abase",\n]\n'
+E     
+E     'time.sleep' is contained here:
+E                 time.sleep(min(0.01, remaining))
+E     ?           ++++++++++
+E                   if time.monotonic() >= deadline:
+E                       raise
+E               except BaseException:...
+E     
+E     ...Full output truncated (484 lines hidden), use '-vv' to show
+_____________________ test_b01_store_no_forbidden_tokens ______________________
+tests\contract\test_automation_store_boundary.py:79: in test_b01_store_no_forbidden_tokens
+    assert token not in source, f"forbidden in store.py: {token!r}"
+E   AssertionError: forbidden in store.py: 'SELECT *'
+E   assert 'SELECT *' not in '"""AUTO-2 A...Error",\n]\n'
+E     
+E     'SELECT *' is contained here:
+E       .execute("SELECT * FROM narrative_runs WHERE run_id=?", (run_id,)).fetchone()
+E     ?           ++++++++
+E           if run is None or any((row["input_hash"], row["handler_version"]) !=
+E                                 (jobs_by_id[row["job_id"]].input_hash,
+E                                  jobs_by_id[row["job_id"]].handler_version)...
+E     
+E     ...Full output truncated (1381 lines hidden), use '-vv' to show
+_________________ test_b01_store_imports_only_allowed_modules _________________
+tests\contract\test_automation_store_boundary.py:143: in test_b01_store_imports_only_allowed_modules
+    assert module in _ALLOWED_IMPORTS, f"unexpected import in store.py: {module!r}"
+E   AssertionError: unexpected import in store.py: 'company_wiki.narrative_subject'
+E   assert 'company_wiki.narrative_subject' in {'__future__', 'collections', 'collections.abc', 'company_wiki._id_scope', 'company_wiki.automation.migrations', 'company_wiki.automation.models', ...}
+_______ test_current_public_producer_regenerates_normalized_txt_golden ________
+tests\contract\test_narrative_transport_cli.py:233: in test_current_public_producer_regenerates_normalized_txt_golden
+    assert normalized_bytes == (directory / "bundle.json").read_bytes()
+E   assert b'{"evidence_...or":"0.8.0"}}' == b'{"evidence_...or":"0.4.2"}}'
+E     
+E     At index 219 diff: b'3' != b'c'
+E     Use -v to get more diff
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1ctfix\logs\red-original\junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/contract/test_automation_store_boundary.py::test_b01_migrations_no_forbidden_tokens
+FAILED tests/contract/test_automation_store_boundary.py::test_b01_store_no_forbidden_tokens
+FAILED tests/contract/test_automation_store_boundary.py::test_b01_store_imports_only_allowed_modules
+FAILED tests/contract/test_narrative_transport_cli.py::test_current_public_producer_regenerates_normalized_txt_golden
+======================== 4 failed, 27 passed in 54.87s ========================

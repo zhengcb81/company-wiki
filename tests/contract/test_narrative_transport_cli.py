@@ -217,7 +217,7 @@ def test_missing_catalog_cli_does_not_create_or_migrate_storage(tmp_path: Path) 
 
 
 def test_current_public_producer_regenerates_normalized_txt_golden(tmp_path: Path) -> None:
-    directory = REPO / "tests" / "fixtures" / "narrative_transport_v1"
+    directory = REPO / "tests" / "fixtures" / "narrative_transport_v1" / "current-v2"
     with published_fixture(tmp_path) as fixture:
         reference = _reference(fixture)
         result = _cli(fixture, "read", {
@@ -231,7 +231,7 @@ def test_current_public_producer_regenerates_normalized_txt_golden(tmp_path: Pat
         bundle["expected_read_policy_sha256"] = "f" * 64
         normalized_bytes = canonical_json(bundle).encode("utf-8")
         assert normalized_bytes == (directory / "bundle.json").read_bytes()
-        reference["artifact_version_id"] = "narrative-golden-txt-v1"
+        reference["artifact_version_id"] = "narrative-golden-txt-current-v2"
         reference["artifact_sha256"] = hashlib.sha256(normalized_bytes).hexdigest()
         reference["byte_size"] = len(normalized_bytes)
         assert reference == json.loads((directory / "reference.json").read_bytes())

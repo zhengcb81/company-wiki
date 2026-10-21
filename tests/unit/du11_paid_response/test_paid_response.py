@@ -94,7 +94,7 @@ def http(monkeypatch):
     return state
 
 
-def seed_owned(tmp_path, http):
+def seed_owned(tmp_path, http, *, dependent=False):
     auto = AutomationStore(tmp_path / "auto.db")
     event = Event(
         "event",
@@ -134,11 +134,22 @@ def seed_owned(tmp_path, http):
     generation = auto.set_runtime_gate(
         RuntimeState.ENABLED, updated_at=T0
     ).control_generation
+    job_ids = ("job",)
+    if dependent:
+        verify = replace(
+            job, job_id="verify", job_type="source.narrative_verify",
+            job_key=make_job_key("source.narrative_verify", "source_revision", "item", "b" * 64, "p", "1"),
+            status=JobStatus.DEAD_LETTER, last_error_code="DEPENDENCY_TERMINAL",
+            last_error_detail="summary failed",
+        )
+        auto.put_job(verify)
+        auto.add_job_dependency("verify", "job")
+        job_ids += ("verify",)
     runs = NarrativeRunStore(auto.db_path)
     runs.create_run(
         run_id="run",
         input_hash="c" * 64,
-        job_ids=("job",),
+        job_ids=job_ids,
         model_id="model",
         prompt_version="prompt/1",
         pricing_version="price/1",

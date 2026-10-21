@@ -1,0 +1,45 @@
+[
+  {
+    "name": "ruff",
+    "argv": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/company_wiki/automation/store.py",
+      "src/company_wiki/automation/terminal_receipt_contracts.py",
+      "src/company_wiki/automation/narrative_run_store.py",
+      "tests/contract/test_automation_store_boundary.py",
+      "tests/contract/test_narrative_transport_cli.py",
+      "tests/unit/du11_paid_response/test_paid_response.py",
+      "tests/unit/test_narrative_transport_contracts.py",
+      "tests/unit/test_automation_projection_columns.py",
+      "tests/unit/test_terminal_pin_target.py",
+      "tests/support/narrative_golden_evolution.py",
+      "tests/unit/test_narrative_golden_evolution.py"
+    ],
+    "started_at_utc": "2026-10-21T21:37:54.9183734Z",
+    "finished_at_utc": "2026-10-21T21:37:55.4306257Z",
+    "exit_code": 0
+  },
+  {
+    "name": "mypy",
+    "argv": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "mypy",
+      "--no-incremental",
+      "--cache-dir",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1ctfix\\mypy-final",
+      "src/company_wiki/automation/store.py",
+      "src/company_wiki/automation/terminal_receipt_contracts.py",
+      "src/company_wiki/automation/narrative_run_store.py"
+    ],
+    "started_at_utc": "2026-10-21T21:37:55.4342973Z",
+    "finished_at_utc": "2026-10-21T21:37:58.2201733Z",
+    "exit_code": 0
+  }
+]

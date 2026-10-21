@@ -1,0 +1,65 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1ctfix\\r1", "requested_basetemp_len": 55, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\unit\test_automation_projection_columns.py FFF                     [100%]
+
+================================== FAILURES ===================================
+__________ test_terminal_compaction_does_not_read_future_run_columns __________
+tests\unit\test_automation_projection_columns.py:51: in test_terminal_compaction_does_not_read_future_run_columns
+    result = state.auto.compact_terminal_narrative_jobs(
+src\company_wiki\automation\store.py:1700: in compact_terminal_narrative_jobs
+    result = self._write_transaction(lambda conn: _compact_terminal_narrative(
+src\company_wiki\automation\store.py:921: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1700: in <lambda>
+    result = self._write_transaction(lambda conn: _compact_terminal_narrative(
+src\company_wiki\automation\store.py:699: in _compact_terminal_narrative
+    run = connection.execute("SELECT * FROM narrative_runs WHERE run_id=?", (run_id,)).fetchone()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_automation_projection_columns.py:39: in execute
+    assert FUTURE_COLUMN not in names, f"schema extension leaked into read: {sql}"
+E   AssertionError: schema extension leaked into read: SELECT * FROM narrative_runs WHERE run_id=?
+E   assert 'r5_future_private_column' not in ('run_id', 'input_hash', 'scope_sha256', 'model_id', 'prompt_version', 'pricing_version', ...)
+_ test_paid_requeue_projects_stable_columns_and_preserves_paid_attempt[narrative_model_reservations] _
+tests\unit\test_automation_projection_columns.py:81: in test_paid_requeue_projects_stable_columns_and_preserves_paid_attempt
+    changed = state.auto.retry_paid_narrative_summary(
+src\company_wiki\automation\store.py:1409: in retry_paid_narrative_summary
+    return self._write_transaction(write)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:921: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1376: in write
+    rows = connection.execute("SELECT * FROM narrative_model_reservations WHERE run_id=? AND job_id=? AND paid_response_json IS NOT NULL",
+tests\unit\test_automation_projection_columns.py:39: in execute
+    assert FUTURE_COLUMN not in names, f"schema extension leaked into read: {sql}"
+E   AssertionError: schema extension leaked into read: SELECT * FROM narrative_model_reservations WHERE run_id=? AND job_id=? AND paid_response_json IS NOT NULL
+E   assert 'r5_future_private_column' not in ('attempt_id', 'run_id', 'job_id', 'request_sha256', 'input_tokens_bound', 'max_output_tokens', ...)
+_ test_paid_requeue_projects_stable_columns_and_preserves_paid_attempt[jobs] __
+tests\unit\test_automation_projection_columns.py:81: in test_paid_requeue_projects_stable_columns_and_preserves_paid_attempt
+    changed = state.auto.retry_paid_narrative_summary(
+src\company_wiki\automation\store.py:1409: in retry_paid_narrative_summary
+    return self._write_transaction(write)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:921: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1396: in write
+    children = connection.execute("SELECT j.* FROM jobs j JOIN job_dependencies d ON j.job_id=d.job_id WHERE d.depends_on_job_id=?",
+tests\unit\test_automation_projection_columns.py:39: in execute
+    assert FUTURE_COLUMN not in names, f"schema extension leaked into read: {sql}"
+E   AssertionError: schema extension leaked into read: SELECT j.* FROM jobs j JOIN job_dependencies d ON j.job_id=d.job_id WHERE d.depends_on_job_id=?
+E   assert 'r5_future_private_column' not in ('job_id', 'job_key', 'job_type', 'subject_type', 'subject_id', 'input_hash', ...)
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1ctfix\logs\red-projections\junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_automation_projection_columns.py::test_terminal_compaction_does_not_read_future_run_columns
+FAILED tests/unit/test_automation_projection_columns.py::test_paid_requeue_projects_stable_columns_and_preserves_paid_attempt[narrative_model_reservations]
+FAILED tests/unit/test_automation_projection_columns.py::test_paid_requeue_projects_stable_columns_and_preserves_paid_attempt[jobs]
+============================== 3 failed in 5.81s ==============================

@@ -1,0 +1,17 @@
+{
+  "generated_at_utc": "2026-10-21T21:29:07.781934+00:00",
+  "status": "reviewed_proposal",
+  "historical_bundle_sha256": "3c1b10399392d7a8f2641c69d51c01c0adc0c5bcbafb6bf345be5c1e73f7b66d",
+  "current_bundle_sha256": "9456d79d136b2ae88bdb06c078be2c7ad8d0e77de219022218eae34a16e10bf2",
+  "files": [
+    "bundle.json",
+    "invalid_request.json",
+    "metadata.json",
+    "read_receipt.json",
+    "read_request.json",
+    "reference.json"
+  ],
+  "external_model_or_network_calls": 0,
+  "repo_golden_writes": 0,
+  "semantic_gate": "all12 inspected changes only; exact full-object equality after explicit expected changes; both parser-era source replay"
+}

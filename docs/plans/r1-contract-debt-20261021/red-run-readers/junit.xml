@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="4.396" timestamp="2026-10-21T22:35:51.589766+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_automation_projection_columns" name="test_reservation_readers_ignore_added_internal_column[get_reservation]" time="0.333"><failure message="TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'">tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:105: in read
+    return state.runs.get_reservation("run", "paid")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:643: in get_reservation
+    return self._read(
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:644: in &lt;lambda&gt;
+    lambda connection: _reservation(connection, run_id, attempt_id)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:404: in _reservation
+    return ReservationRecord(**dict(row)) if row is not None else None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'</failure></testcase><testcase classname="tests.unit.test_automation_projection_columns" name="test_reservation_readers_ignore_added_internal_column[budget_snapshot]" time="0.336"><failure message="TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'">tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:108: in read
+    return getattr(state.runs, reader)("run")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:783: in budget_snapshot
+    return self._read(read)
+           ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:781: in read
+    return _budget(connection, run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:469: in _budget
+    records = [ReservationRecord(**dict(row)) for row in rows]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'</failure></testcase><testcase classname="tests.unit.test_automation_projection_columns" name="test_reservation_readers_ignore_added_internal_column[model_attempts_for_job]" time="0.314"><failure message="TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'">tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:107: in read
+    return state.runs.model_attempts_for_job(run_id="run", job_id="job")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:661: in model_attempts_for_job
+    return self._read(read)
+           ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:658: in read
+    return tuple(ReservationRecord(**dict(row)) for row in connection.execute(
+           ^^^^^
+src\company_wiki\automation\narrative_run_store.py:658: in &lt;genexpr&gt;
+    return tuple(ReservationRecord(**dict(row)) for row in connection.execute(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'</failure></testcase><testcase classname="tests.unit.test_automation_projection_columns" name="test_reservation_readers_ignore_added_internal_column[reservations_for_run]" time="0.320"><failure message="TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'">tests\unit\test_automation_projection_columns.py:116: in test_reservation_readers_ignore_added_internal_column
+    assert read() == before
+           ^^^^^^
+tests\unit\test_automation_projection_columns.py:108: in read
+    return getattr(state.runs, reader)("run")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:738: in reservations_for_run
+    return self._read(read)
+           ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:544: in _read
+    return operation(connection)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:736: in read
+    return tuple(ReservationRecord(**dict(row)) for row in rows)
+           ^^^^^
+src\company_wiki\automation\narrative_run_store.py:736: in &lt;genexpr&gt;
+    return tuple(ReservationRecord(**dict(row)) for row in rows)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: ReservationRecord.__init__() got an unexpected keyword argument 'r5_future_private_column'</failure></testcase></testsuite></testsuites>

@@ -6,7 +6,7 @@ from dataclasses import asdict, dataclass
 from typing import Any, Mapping
 
 from company_wiki._id_scope import normalize_id_scope
-from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.narrative_subject import NarrativeSubject, publication_target
 
 from .models import require_sha256
 
@@ -49,6 +49,13 @@ class FinalArtifactPin:
                 raise ValueError("final pin anchor differs from its actual parent")
         elif self.generation_sha256 is not None:
             raise ValueError("generation SHA requires a projected final subject")
+
+    @property
+    def effect_target(self) -> str:
+        """Canonical publication identity; storage need not interpret a subject."""
+        if self.subject_binding is not None:
+            return publication_target(self.subject_binding, self.generation_sha256)
+        return f"urn:company-wiki:narrative-bundle:{self.document_id}:{self.source_sha256}"
 
     def to_dict(self) -> dict[str, Any]:
         if self.subject_binding is not None:

@@ -8,6 +8,9 @@ B02: no default database paths — neither source nor tests hard-code ``.state``
 
 import ast
 from pathlib import Path
+import re
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -67,14 +70,33 @@ def test_store_module_exists():
     assert STORE_PATH.is_file(), "expected red: automation/store.py is not implemented"
 
 
+def _migration_violations(source):
+    # Only WAL setup may yield while SQLite's journal-mode lock is held.
+    # Actual termination/peer progress are covered by the two existing
+    # test_wal_connection_* behavior tests; all other boundary bans still apply.
+    retry = next(node for node in ast.parse(source).body
+                 if isinstance(node, ast.FunctionDef) and node.name == "_open_connection")
+    lines = source.splitlines(keepends=True)
+    outside_retry = "".join(lines[:retry.lineno - 1] + lines[retry.end_lineno:])
+    return [token for token in _FORBIDDEN_TOKENS
+            if token in (outside_retry if token in {"time.sleep", "while True"} else source)]
+
+
 def test_b01_migrations_no_forbidden_tokens():
     source = MIGRATIONS_PATH.read_text(encoding="utf-8")
-    for token in _FORBIDDEN_TOKENS:
-        assert token not in source, f"forbidden in migrations.py: {token!r}"
+    assert not _migration_violations(source)
+
+
+@pytest.mark.parametrize("waiting", ["time.sleep(1)", "while True: pass"])
+def test_migration_wait_exception_does_not_allow_other_daemon_loops(waiting):
+    source = "def _open_connection(path): pass\ndef unexpected_wait():\n    " + waiting
+    token = "time.sleep" if waiting.startswith("time.sleep") else "while True"
+    assert token in _migration_violations(source)
 
 
 def test_b01_store_no_forbidden_tokens():
     source = STORE_PATH.read_text(encoding="utf-8")
+    assert not re.search(r"\bSELECT\s+(?:\w+\.)?\*", source, re.IGNORECASE)
     for token in _FORBIDDEN_TOKENS:
         assert token not in source, f"forbidden in store.py: {token!r}"
 
