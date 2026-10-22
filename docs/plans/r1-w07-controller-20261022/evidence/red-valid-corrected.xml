@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="5" time="1.861" timestamp="2026-10-22T19:50:36.610687+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_controller_requires_real_configured_paid_replay_activation_and_cache" time="0.324"><failure message="AssertionError: {'status': 'not_implemented'}&#10;assert 'not_implemented' == 'passed'&#10;  &#10;  - passed&#10;  + not_implemented">tests\unit\test_holdout_acceptance_controller.py:57: in test_controller_requires_real_configured_paid_replay_activation_and_cache
+    assert result['status'] == 'passed', result
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'passed'
+E     
+E     - passed
+E     + not_implemented</failure></testcase><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_controller_resumes_from_observed_paid_pause_without_another_post" time="0.249"><failure message="AssertionError: {'status': 'not_implemented'}&#10;assert 'not_implemented' == 'paused_for_test'&#10;  &#10;  - paused_for_test&#10;  + not_implemented">tests\unit\test_holdout_acceptance_controller.py:72: in test_controller_resumes_from_observed_paid_pause_without_another_post
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented</failure></testcase><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_incomplete_paid_replay_never_reposts_or_refunds[missing_body]" time="0.096"><failure message="AssertionError: {'status': 'not_implemented'}&#10;assert 'not_implemented' == 'paused_for_test'&#10;  &#10;  - paused_for_test&#10;  + not_implemented">tests\unit\test_holdout_acceptance_controller.py:88: in test_incomplete_paid_replay_never_reposts_or_refunds
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented</failure></testcase><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_incomplete_paid_replay_never_reposts_or_refunds[tampered_body]" time="0.097"><failure message="AssertionError: {'status': 'not_implemented'}&#10;assert 'not_implemented' == 'paused_for_test'&#10;  &#10;  - paused_for_test&#10;  + not_implemented">tests\unit\test_holdout_acceptance_controller.py:88: in test_incomplete_paid_replay_never_reposts_or_refunds
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented</failure></testcase><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_incomplete_paid_replay_never_reposts_or_refunds[changed_request]" time="0.094"><failure message="AssertionError: {'status': 'not_implemented'}&#10;assert 'not_implemented' == 'paused_for_test'&#10;  &#10;  - paused_for_test&#10;  + not_implemented">tests\unit\test_holdout_acceptance_controller.py:88: in test_incomplete_paid_replay_never_reposts_or_refunds
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented</failure></testcase></testsuite></testsuites>

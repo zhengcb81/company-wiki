@@ -1,0 +1,58 @@
+{
+  "final-integration.xml": {
+    "tests": "10",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "101.088"
+  },
+  "final-unit.xml": {
+    "tests": "9",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "3.243"
+  },
+  "preflight-pure-green.xml": {
+    "tests": "6",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "22.288"
+  },
+  "preflight-red.xml": {
+    "tests": "4",
+    "failures": "3",
+    "errors": "0",
+    "skipped": "0",
+    "time": "2.725"
+  },
+  "preflight-resume.xml": {
+    "tests": "1",
+    "failures": "1",
+    "errors": "0",
+    "skipped": "0",
+    "time": "6.770"
+  },
+  "preflight-separated-green.xml": {
+    "tests": "6",
+    "failures": "1",
+    "errors": "0",
+    "skipped": "0",
+    "time": "20.543"
+  },
+  "red-valid-corrected.xml": {
+    "tests": "5",
+    "failures": "5",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.861"
+  },
+  "wire-binding-final.xml": {
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "17.014"
+  }
+}

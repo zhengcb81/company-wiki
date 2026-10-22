@@ -1,0 +1,32 @@
+{
+  "tools/document_understanding_benchmark/holdout_acceptance.py": {
+    "sha256": "365060882d0d07383ab31881b0fe003245963e3ff028e301fcd52a6a73f47aec",
+    "bytes": 20693,
+    "git_lf_blob_sha256": "8ef94b3e8c9b10841ece51705f90c6122b4e380b225f120a6066e0e11d2b4a19"
+  },
+  "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+    "sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+    "bytes": 6307,
+    "git_lf_blob_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d"
+  },
+  "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+    "sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+    "bytes": 362,
+    "git_lf_blob_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34"
+  },
+  "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+    "sha256": "106df715a8c1ce2244cd2734834b3ded4ac2c13393b459e058d4dc1167c5e19f",
+    "bytes": 9001,
+    "git_lf_blob_sha256": "a087e7d08e3ffd1ec932a741c5f727902be8ce80bdd5fec1f7aaea050c915a6a"
+  },
+  "tests/unit/test_holdout_acceptance_controller.py": {
+    "sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+    "bytes": 1974,
+    "git_lf_blob_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64"
+  },
+  "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+    "sha256": "74166ebee3cd72744c1efe5c20729a101d44d74fa96251c48607e904e91d5961",
+    "bytes": 10681,
+    "git_lf_blob_sha256": "0626fa77bafe8378edd49383022cc8a7321c70b1e293e1608fe86a78213b26b1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "product_commit": "8b00fd7f8d858ced08f9eb247a76428df977389f",
+  "initial_normal_commit_hook": "not executed because initial sparse checkout omitted configured .githooks path; no hook bypass argument was used",
+  "correction": "git sparse-checkout add .githooks docs/plans/r1-w07-controller-20261022; existing tracked hooks populated only",
+  "verification": "python -m pre_commit run --files tools/document_understanding_benchmark/holdout_acceptance.py tools/document_understanding_benchmark/holdout_acceptance_contracts.py tools/document_understanding_benchmark/holdout_acceptance_launcher.py tools/document_understanding_benchmark/holdout_acceptance_observer.py tests/unit/test_holdout_acceptance_controller.py tests/integration/test_holdout_acceptance_controller_e2e.py",
+  "result": {
+    "ruff": "passed",
+    "host_assumption_guard": "passed",
+    "mypy_runtime_source": "no changed src; skipped by existing trigger",
+    "dependency_declarations": "no relevant file; skipped",
+    "config_doctor": "no relevant file; skipped"
+  },
+  "separate_static": "four tool modules mypy PASS; all six owned code/test files Ruff PASS",
+  "global_git_hook_ci_config_changed": false
+}

@@ -1,0 +1,60 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 5 items
+
+tests\unit\test_holdout_acceptance_controller.py FFFFF                   [100%]
+
+================================== FAILURES ===================================
+__ test_controller_requires_real_configured_paid_replay_activation_and_cache __
+tests\unit\test_holdout_acceptance_controller.py:57: in test_controller_requires_real_configured_paid_replay_activation_and_cache
+    assert result['status'] == 'passed', result
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'passed'
+E     
+E     - passed
+E     + not_implemented
+____ test_controller_resumes_from_observed_paid_pause_without_another_post ____
+tests\unit\test_holdout_acceptance_controller.py:72: in test_controller_resumes_from_observed_paid_pause_without_another_post
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented
+_____ test_incomplete_paid_replay_never_reposts_or_refunds[missing_body] ______
+tests\unit\test_holdout_acceptance_controller.py:88: in test_incomplete_paid_replay_never_reposts_or_refunds
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented
+_____ test_incomplete_paid_replay_never_reposts_or_refunds[tampered_body] _____
+tests\unit\test_holdout_acceptance_controller.py:88: in test_incomplete_paid_replay_never_reposts_or_refunds
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented
+____ test_incomplete_paid_replay_never_reposts_or_refunds[changed_request] ____
+tests\unit\test_holdout_acceptance_controller.py:88: in test_incomplete_paid_replay_never_reposts_or_refunds
+    assert paused['status'] == 'paused_for_test', paused
+E   AssertionError: {'status': 'not_implemented'}
+E   assert 'not_implemented' == 'paused_for_test'
+E     
+E     - paused_for_test
+E     + not_implemented
+- generated xml file: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller\.planning\w07-controller\red-valid-corrected.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_controller_requires_real_configured_paid_replay_activation_and_cache
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_controller_resumes_from_observed_paid_pause_without_another_post
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_incomplete_paid_replay_never_reposts_or_refunds[missing_body]
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_incomplete_paid_replay_never_reposts_or_refunds[tampered_body]
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_incomplete_paid_replay_never_reposts_or_refunds[changed_request]
+============================== 5 failed in 1.91s ==============================

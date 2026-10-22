@@ -1,0 +1,15 @@
+{
+  "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-holdout-controller\\.planning\\w07-review-fix",
+  "files_before": 165,
+  "bytes_before": 9493762,
+  "owner": "W07 author review fix only",
+  "exists_after": false,
+  "pytest_fixture_parent": {
+    "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-holdout-controller\\pytest-of-\u90d1\u66fe\u6ce2",
+    "owner": "W07 author only; independent reviewer confirms separate temp root",
+    "files_before": 6,
+    "bytes_before": 126,
+    "sqlite_before": 0,
+    "exists_after": false
+  }
+}

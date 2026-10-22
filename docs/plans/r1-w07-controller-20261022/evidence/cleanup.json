@@ -1,0 +1,192 @@
+{
+  "workspace": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller",
+  "baseline": "tracked clean; only own test support artifacts were created",
+  "fixture_contract": "isolated_batch_directory preserves baseline keepfile and removes per-case run roots; fixture checks source bytes unchanged",
+  "initial_invalid_red_residue": "Five synthetic SQLite fixtures left by an early setup exception were removed only in owned pytest-of root",
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\pytest-of-郑曾波",
+      "owned": "W07 only",
+      "files_before": 31,
+      "bytes_before": 1107506,
+      "had_sqlite": true,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\.planning\\w07-controller",
+      "owned": "W07 only",
+      "files_before": 197,
+      "bytes_before": 9903852,
+      "had_sqlite": false,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\cw-pytest-basetemp",
+      "owned": "W07 only",
+      "files_before": 0,
+      "bytes_before": 0,
+      "had_sqlite": false,
+      "exists_after": false
+    }
+  ],
+  "real_originals_touched": false,
+  "full_restore_exercise": false,
+  "generated_python_and_test_caches": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\decision_dependencies\\__pycache__",
+      "files_before": 5,
+      "bytes_before": 84184,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\source_signals\\__pycache__",
+      "files_before": 2,
+      "bytes_before": 36967,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\structure\\__pycache__",
+      "files_before": 11,
+      "bytes_before": 196420,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\layout_hints\\__pycache__",
+      "files_before": 11,
+      "bytes_before": 164417,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\operating_states\\__pycache__",
+      "files_before": 5,
+      "bytes_before": 123655,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\source_catalog\\adapters\\__pycache__",
+      "files_before": 6,
+      "bytes_before": 48396,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\profiles\\__pycache__",
+      "files_before": 10,
+      "bytes_before": 246298,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\table_measurements\\__pycache__",
+      "files_before": 4,
+      "bytes_before": 55464,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_normalization\\pdf_table_observations\\__pycache__",
+      "files_before": 2,
+      "bytes_before": 25495,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\automation\\__pycache__",
+      "files_before": 48,
+      "bytes_before": 1168760,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_understanding\\__pycache__",
+      "files_before": 15,
+      "bytes_before": 272934,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\parser_adapters\\__pycache__",
+      "files_before": 3,
+      "bytes_before": 29572,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\source_catalog\\__pycache__",
+      "files_before": 83,
+      "bytes_before": 2074709,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\tests\\unit\\du11_paid_response\\__pycache__",
+      "files_before": 1,
+      "bytes_before": 89075,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\source_contract\\__pycache__",
+      "files_before": 8,
+      "bytes_before": 164753,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\document_normalization\\__pycache__",
+      "files_before": 14,
+      "bytes_before": 231382,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\tests\\integration\\__pycache__",
+      "files_before": 3,
+      "bytes_before": 329013,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\tests\\unit\\__pycache__",
+      "files_before": 7,
+      "bytes_before": 356432,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\src\\company_wiki\\__pycache__",
+      "files_before": 9,
+      "bytes_before": 73447,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\tests\\support\\__pycache__",
+      "files_before": 4,
+      "bytes_before": 28754,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\tools\\document_understanding_benchmark\\__pycache__",
+      "files_before": 11,
+      "bytes_before": 242666,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\scripts\\__pycache__",
+      "files_before": 4,
+      "bytes_before": 58485,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\tests\\__pycache__",
+      "files_before": 1,
+      "bytes_before": 11805,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\.ruff_cache",
+      "files_before": 5,
+      "bytes_before": 654,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\__pycache__",
+      "files_before": 1,
+      "bytes_before": 12680,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller\\.pytest_cache",
+      "files_before": 5,
+      "bytes_before": 5012,
+      "exists_after": false
+    }
+  ]
+}
