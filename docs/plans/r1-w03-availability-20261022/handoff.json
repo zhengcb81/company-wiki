@@ -1,0 +1,318 @@
+{
+  "old_worktree_untracked_material": "preexisting .planning files/directories retained without cleanup",
+  "red_tests": {
+    "reason": "All seven real owner-proof positive cases failed at source_publication_unknown before product implementation",
+    "duration_seconds": 29.78,
+    "failed": 7,
+    "deselected": 15,
+    "later_test_fixture_correction": "Invalid-publication negative fixture first changed projection columns but left canonical source_fact_patch null; fixed canonical evidence and asserted actual exported invalid manifest. The seven RED-selected positive cases and their inputs were unchanged.",
+    "environment_failure": "initial-environment.log records Python inability to write XML into .codex worktree; XML then written to owned TEMP and copied by native PowerShell",
+    "valid_receipt": {
+      "product_sha256": "7e0b49351c098fb42f75288cf485f7bb9b2cbea2b8384bcb499fe8b8752371d7",
+      "exit_code": 1,
+      "source_head": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+      "started_utc": "2026-10-22T18:33:41.5091509Z",
+      "temp": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a",
+      "test_sha256": "b6390b917c5fb1346627a812c8787d32a73f3e5587120af7154126da63135630",
+      "phase": "RED",
+      "live_api_calls": 0,
+      "finished_utc": "2026-10-22T18:34:12.800758Z",
+      "argv": [
+        "-m",
+        "pytest",
+        "tests/contract/test_narrative_availability.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-k",
+        "actual_cli_null or one_verified or metadata_changes",
+        "--basetemp",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/r2",
+        "--junitxml",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/red.xml"
+      ]
+    }
+  },
+  "fees_usd": 0,
+  "changed_files": [
+    {
+      "lf_sha256": "cecd9a1ec365b05edd9ec99db39d8a69503ca6a42d18902629ccbb0c7081e56c",
+      "sha256": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+      "path": "src/company_wiki/automation/narrative_transport.py",
+      "bytes": 21527,
+      "line_endings": "CRLF",
+      "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+      "git_blob_oid": "d940f06de80124f92294b6888072eac71867e8ac"
+    },
+    {
+      "lf_sha256": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22",
+      "sha256": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22",
+      "path": "tests/contract/test_narrative_availability.py",
+      "bytes": 16160,
+      "line_endings": "LF",
+      "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+      "git_blob_oid": "d806f131ff3f9fa2fdc214fbf5673c194e8e9ac0"
+    }
+  ],
+  "package_id": "W03-A-CWP",
+  "original_read_observation": {
+    "public_raw22_and_narrative_proofs_equal": true,
+    "owner_availability_lookup_calls_per_raw_operation": 1,
+    "pdf_verified_byte_reader_calls": 1,
+    "projected_raw_proof_lookup_calls": 0,
+    "source_fact_writer_calls_during_read": 0,
+    "new_observation_writer_calls": 0,
+    "json_verified_byte_reader_calls": 1
+  },
+  "branch": "codex/r1-narrative-availability",
+  "native_budget_store_modified": false,
+  "recommended_next_action": "ROOT reviews the two W03-A lanes and real public CLI combination, then releases RF consumer compatibility before CWP producer; this worker does not merge/push/install",
+  "interface_card_sha256": "1eaec6054d4301d05b771a2e27c25bad44a359d72c30fe29ee2344e089ae22c2",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+  "source_worktree_head_at_seal": "aff8be80c68b9f39c76dad2011354031132c9cef",
+  "cleanup": {
+    "method": "native PowerShell Remove-Item -LiteralPath exact owned root",
+    "utc": "2026-10-22T18:44:23.5419468Z",
+    "peak": "sampled only; continuous exact peak not measured",
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3a",
+    "production_configs_changed": 0,
+    "files_before_delete": 1176,
+    "evidence_retained": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\r1-w03-availability-20261022",
+    "baseline_existed": false,
+    "old_worktree_temp_removed": false,
+    "exact_absolute_target_checked": true,
+    "raw_production_files_deleted": 0,
+    "root_exists_after": false,
+    "bytes_before_delete": 29606869.0,
+    "restored_to_initial_absence": true
+  },
+  "schema_version": "r1-package-handoff/1",
+  "green_tests": {
+    "source_bytes_unchanged_across_run": true,
+    "receipt": {
+      "finished_utc": "2026-10-22T18:41:42.2000936Z",
+      "original_downloads": 0,
+      "fees_usd": 0,
+      "python": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+      "temp": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a",
+      "argv": [
+        "-m",
+        "pytest",
+        "tests/contract/test_narrative_availability.py",
+        "tests/contract/test_narrative_transport_cli.py",
+        "tests/contract/test_source_availability.py",
+        "tests/unit/test_source_qualification.py",
+        "tests/unit/test_narrative_transport_contracts.py",
+        "tests/integration/test_narrative_transport.py",
+        "tests/integration/test_official_json_transport_subject.py",
+        "tests/integration/test_narrative_format_transport.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/final",
+        "--junitxml",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/final.xml"
+      ],
+      "source_unchanged": true,
+      "collect_exit": 0,
+      "source_before": {
+        "product": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+        "test": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+      },
+      "files": [
+        "tests/contract/test_narrative_availability.py",
+        "tests/contract/test_narrative_transport_cli.py",
+        "tests/contract/test_source_availability.py",
+        "tests/unit/test_source_qualification.py",
+        "tests/unit/test_narrative_transport_contracts.py",
+        "tests/integration/test_narrative_transport.py",
+        "tests/integration/test_official_json_transport_subject.py",
+        "tests/integration/test_narrative_format_transport.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+      "api_calls": 0,
+      "exit_code": 0,
+      "source_after": {
+        "product": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+        "test": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+      },
+      "started_utc": "2026-10-22T18:38:52.1689936Z"
+    },
+    "duration_seconds": 168.51,
+    "collected": 167,
+    "skipped": 1,
+    "skip": {
+      "reason": "explicit read-only real original not provided",
+      "node": "tests/integration/test_narrative_format_transport.py::test_real_sec_html_uses_the_same_pipeline_and_preserves_original"
+    },
+    "failed": 0,
+    "static": {
+      "mypy": "PASS",
+      "mypy_source_files": 366,
+      "ruff": "PASS",
+      "mypy_command": "python -m mypy src --cache-dir <owned TEMP>/mypy",
+      "normal_commit_hooks": [
+        "ruff PASS",
+        "mypy runtime src PASS",
+        "host assumption guard PASS"
+      ],
+      "bypass_flags_used": false
+    },
+    "passed": 166,
+    "golden_rewritten": false,
+    "new_cases_passed": 22
+  },
+  "baseHEAD": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+  "actual_live_calls": 0,
+  "space_sample": "evidence/footprint-sample.json; sampled 30030280 bytes, not continuous exact peak",
+  "artifact_bytes": 84622.0,
+  "status": "ENGINEERING_GREEN_READY_FOR_ROOT_INDEPENDENT_REVIEW",
+  "public_interfaces": {
+    "schema": "narrative-read-receipt/1",
+    "optional_field": "availability_evidence",
+    "manifest_dates_unchanged": true,
+    "frozen_artifact_generation_request_cache_unchanged": true,
+    "no_proof": "key omitted, not invented",
+    "value": "existing source-availability-evidence/1 DTO with its exact six fields",
+    "source_owner_file": "source_catalog/source_availability.py (unchanged)",
+    "same_owner_as_raw22": true,
+    "known_publication_errors": [
+      "source_after_as_of",
+      "source_publication_invalid",
+      "source_publication_unknown"
+    ],
+    "projected_receipt3_extended": false,
+    "qualification_file": "source_catalog/qualification.py (unchanged)"
+  },
+  "remaining_issue_ids": [
+    "ROOT combined producer-consumer CLI and independent review",
+    "W03-B explicit0.9/v5 semantic extraction and frozen0.8 generation",
+    "W07 configured live summary, normal paid-resume/cache and RF used parameter/formula consumption",
+    "W06 real holdout attempt and four audits"
+  ],
+  "downloads": 0,
+  "artifacts": [
+    {
+      "path": "evidence/cleanup.json",
+      "bytes": 736,
+      "sha256": "c42e179db73339792c0d7bde1ead639264b532cf293d1832f7fa6115944b0766"
+    },
+    {
+      "path": "evidence/collect.log",
+      "bytes": 3017,
+      "sha256": "f655d7970facd372eb1452fdc550cf4ceff33de7b21e28013f20557c4268eab5"
+    },
+    {
+      "path": "evidence/final-collect.log",
+      "bytes": 16485,
+      "sha256": "5421f9b0a5b056037e40190a5ee8d5bfed02e1932a7b889ce5e8ab5c5349b289"
+    },
+    {
+      "path": "evidence/final-receipt.json",
+      "bytes": 2047,
+      "sha256": "dc454e28cab898a0119b3dfd325433b0c1140bf6fb4d4bb3ff30fd1c0b381c75"
+    },
+    {
+      "path": "evidence/final.log",
+      "bytes": 1858,
+      "sha256": "829b7f8ce5f65d763cdaf511462095c72a9c78a7567f4b829d324ff0b25f502e"
+    },
+    {
+      "path": "evidence/final.xml",
+      "bytes": 27096,
+      "sha256": "4a7618dd8551fd5b8c0d014c6ab07deb480e7ef4ad7e9ce8431c44529f33f93b"
+    },
+    {
+      "path": "evidence/footprint-sample.json",
+      "bytes": 272,
+      "sha256": "2bde8f01f9c9e9a8a257d3687b9ba39d069c32afbd31949d2eac71f581db3336"
+    },
+    {
+      "path": "evidence/green-receipt.json",
+      "bytes": 731,
+      "sha256": "1cdf4a05b7fe803b18154a8e1f0d17ebc3f0d1b55167658ec919ebb56de439b5"
+    },
+    {
+      "path": "evidence/green.log",
+      "bytes": 1911,
+      "sha256": "e514e0a46b8eabccf1058e1144e81a31a8571751bc112de2da322f6ba6b956d3"
+    },
+    {
+      "path": "evidence/green.xml",
+      "bytes": 4747,
+      "sha256": "1a049f554a6f95cd39585a681b1039fdeb970e7d5d3106c72ae69f052e967721"
+    },
+    {
+      "path": "evidence/initial-environment.log",
+      "bytes": 5314,
+      "sha256": "f452594399f5864c4e42c351c01d14a7c66e05ac7d9ce21d873683c1ae56077b"
+    },
+    {
+      "path": "evidence/invalid-fixture.log",
+      "bytes": 1075,
+      "sha256": "bf23b75ec28f5cb5ad23552de1d4e8813ede952ef91a7521069307c37dd323c1"
+    },
+    {
+      "path": "evidence/invalid-fixture.xml",
+      "bytes": 421,
+      "sha256": "6e8edaf971d0743942b846f75b2f1dc04c12c9339de01dd22addb9b7b45e914e"
+    },
+    {
+      "path": "evidence/mypy.log",
+      "bytes": 46,
+      "sha256": "435a96adb1511d2ad62c452be9d967a288353e7c12f32caef696f41408aed2ec"
+    },
+    {
+      "path": "evidence/product-commit.log",
+      "bytes": 686,
+      "sha256": "8aac01d4f6c80edc93bf2004cdbc018b5d7ab46432e0670fd3ce383cdd56c16e"
+    },
+    {
+      "path": "evidence/red-receipt.json",
+      "bytes": 869,
+      "sha256": "c0c23554e7f33fef32b3a07644fb64f9b9bb33f6a8386a73389434440d40e3f7"
+    },
+    {
+      "path": "evidence/red.log",
+      "bytes": 7899,
+      "sha256": "b0f527b2ed1041f0f20204cf43ea27e0e419711b18a1e8f24fe1d66df6cf93f0"
+    },
+    {
+      "path": "evidence/red.xml",
+      "bytes": 9392,
+      "sha256": "9053aa0430fb4198eb78b8bd2b742136afbfa05aab35c511ddb8ab90c9f78067"
+    },
+    {
+      "path": "evidence/ruff.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    }
+  ],
+  "remaining_external_limits": [
+    "Optional real SEC HTML sample not supplied; no download attempted"
+  ],
+  "install_files": [],
+  "source_repo": "company-wiki",
+  "raw_and_production_config_unchanged": true,
+  "resume": {
+    "command": "python -m pytest <receipt.files> -q -p no:cacheprovider --basetemp <TEMP>/pytest --junitxml <TEMP>/results.xml; native-copy evidence then restore owned TEMP",
+    "cwd": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+    "python": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "PYTHONPATH": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki/src",
+    "TEMP": "choose a new initially absent short owned test root",
+    "files": [
+      "tests/contract/test_narrative_availability.py",
+      "tests/contract/test_narrative_transport_cli.py",
+      "tests/contract/test_source_availability.py",
+      "tests/unit/test_source_qualification.py",
+      "tests/unit/test_narrative_transport_contracts.py",
+      "tests/integration/test_narrative_transport.py",
+      "tests/integration/test_official_json_transport_subject.py",
+      "tests/integration/test_narrative_format_transport.py"
+    ]
+  },
+  "attempt": "r1-systemic-fix-w03a"
+}

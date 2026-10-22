@@ -33,6 +33,7 @@ from company_wiki.source_catalog.narrative_normalization import (
     PPTX_MIME,
 )
 from company_wiki.source_catalog.qualification import qualify_source
+from company_wiki.source_catalog.source_availability import verified_availability_evidence
 
 from .models import canonical_json, require_canonical_json
 from .narrative_contracts import (
@@ -84,11 +85,18 @@ def _artifact_error(error: NarrativeArtifactError) -> NarrativeTransportError:
     return NarrativeTransportError("unavailable", "narrative_artifact_unavailable")
 
 
-def _require_historical_source(manifest: dict[str, Any], as_of_date: str) -> None:
-    """Historical availability follows publication, independent of download time."""
+def _require_historical_source(
+    manifest: dict[str, Any], as_of_date: str, *,
+    availability_evidence: dict[str, str] | None = None,
+) -> None:
+    """Publication controls known dates; same-version proof may qualify unknowns."""
     qualification = qualify_source(
-        manifest.get("published_date"), as_of_date=as_of_date
+        manifest.get("published_date"), as_of_date=as_of_date,
+        local_bytes_status="verified", availability_evidence=availability_evidence,
+        source_sha256=manifest.get("content_sha256"),
     )
+    if qualification.historical_date_eligible:
+        return
     reason = {
         "unknown": "source_publication_unknown",
         "invalid": "source_publication_invalid",
@@ -102,6 +110,7 @@ def _require_manifest(
     manifest: dict[str, Any],
     request: NarrativeReadRequest,
     bundle: NarrativeBundle,
+    *, availability_evidence: dict[str, str] | None = None,
 ) -> None:
     source = request.narrative_ref.source_ref
     if source is None:
@@ -116,7 +125,9 @@ def _require_manifest(
     ):
         raise NarrativeTransportError("blocked", "source_identity_mismatch")
     if request.as_of_date is not None:
-        _require_historical_source(manifest, request.as_of_date)
+        _require_historical_source(
+            manifest, request.as_of_date, availability_evidence=availability_evidence
+        )
 
 
 def _bound_bundle(
@@ -345,7 +356,10 @@ class NarrativeTransportReader:
         opened, manifest = self._reader.open_described_version(
             current, purpose="source_export"
         )
-        _require_manifest(manifest, request, bundle)
+        # This owner inspects bounded provenance for the already verified ref;
+        # it neither reopens raw bytes nor creates a new availability observation.
+        availability = verified_availability_evidence(self._reader.catalog, current)
+        _require_manifest(manifest, request, bundle, availability_evidence=availability)
         normalization = self._normalization or NarrativeNormalization.from_reader(
             self._reader,
             enabled=source.mime_type == PPTX_MIME and bundle.versions.parser == "2.0.0",
@@ -366,6 +380,8 @@ class NarrativeTransportReader:
             "quality_status": bundle.quality_status,
             "replay_status": "verified",
         }
+        if availability is not None:
+            receipt["availability_evidence"] = availability
         assert_no_physical_paths(receipt)
         if len(canonical_json(receipt).encode("utf-8")) > MAX_RECEIPT_BYTES:
             raise NarrativeTransportError("blocked", "narrative_receipt_too_large")

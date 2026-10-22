@@ -1,0 +1,50 @@
+{
+  "finished_utc": "2026-10-22T18:41:42.2000936Z",
+  "original_downloads": 0,
+  "fees_usd": 0,
+  "python": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+  "temp": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a",
+  "argv": [
+    "-m",
+    "pytest",
+    "tests/contract/test_narrative_availability.py",
+    "tests/contract/test_narrative_transport_cli.py",
+    "tests/contract/test_source_availability.py",
+    "tests/unit/test_source_qualification.py",
+    "tests/unit/test_narrative_transport_contracts.py",
+    "tests/integration/test_narrative_transport.py",
+    "tests/integration/test_official_json_transport_subject.py",
+    "tests/integration/test_narrative_format_transport.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/final",
+    "--junitxml",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/final.xml"
+  ],
+  "source_unchanged": true,
+  "collect_exit": 0,
+  "source_before": {
+    "product": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "test": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+  },
+  "files": [
+    "tests/contract/test_narrative_availability.py",
+    "tests/contract/test_narrative_transport_cli.py",
+    "tests/contract/test_source_availability.py",
+    "tests/unit/test_source_qualification.py",
+    "tests/unit/test_narrative_transport_contracts.py",
+    "tests/integration/test_narrative_transport.py",
+    "tests/integration/test_official_json_transport_subject.py",
+    "tests/integration/test_narrative_format_transport.py"
+  ],
+  "cwd": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+  "api_calls": 0,
+  "exit_code": 0,
+  "source_after": {
+    "product": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "test": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+  },
+  "started_utc": "2026-10-22T18:38:52.1689936Z"
+}

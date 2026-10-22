@@ -1,0 +1,86 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w3a\\r2", "requested_basetemp_len": 53, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items / 15 deselected / 7 selected
+
+tests\contract\test_narrative_availability.py FFFFFFF                    [100%]
+
+================================== FAILURES ===================================
+_ test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[prior_verified_capture-pdf] _
+tests\contract\test_narrative_availability.py:130: in test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle
+    assert result.returncode == 0, result.stderr.decode()
+E   AssertionError: {"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}
+E     
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'company_wiki.sourc...'', stderr=b'{"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}\n').returncode
+---------------------------- Captured stdout call -----------------------------
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+_ test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[prior_verified_capture-json] _
+tests\contract\test_narrative_availability.py:130: in test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle
+    assert result.returncode == 0, result.stderr.decode()
+E   AssertionError: {"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}
+E     
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'company_wiki.sourc...'', stderr=b'{"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}\n').returncode
+_ test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[current_verified_open-pdf] _
+tests\contract\test_narrative_availability.py:130: in test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle
+    assert result.returncode == 0, result.stderr.decode()
+E   AssertionError: {"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}
+E     
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'company_wiki.sourc...'', stderr=b'{"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}\n').returncode
+_ test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[current_verified_open-json] _
+tests\contract\test_narrative_availability.py:130: in test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle
+    assert result.returncode == 0, result.stderr.decode()
+E   AssertionError: {"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}
+E     
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'company_wiki.sourc...'', stderr=b'{"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}\n').returncode
+_ test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[pdf] __
+tests\contract\test_narrative_availability.py:244: in test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer
+    result = transport.read(NarrativeReadRequest.from_dict(
+src\company_wiki\automation\narrative_transport.py:301: in read
+    return self._read(request)
+           ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_transport.py:348: in _read
+    _require_manifest(manifest, request, bundle)
+src\company_wiki\automation\narrative_transport.py:119: in _require_manifest
+    _require_historical_source(manifest, request.as_of_date)
+src\company_wiki\automation\narrative_transport.py:98: in _require_historical_source
+    raise NarrativeTransportError("blocked", reason)
+E   company_wiki.automation.narrative_transport_contracts.NarrativeTransportError: blocked: source_publication_unknown
+_ test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[json] _
+tests\contract\test_narrative_availability.py:244: in test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer
+    result = transport.read(NarrativeReadRequest.from_dict(
+src\company_wiki\automation\narrative_transport.py:301: in read
+    return self._read(request)
+           ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_transport.py:348: in _read
+    _require_manifest(manifest, request, bundle)
+src\company_wiki\automation\narrative_transport.py:119: in _require_manifest
+    _require_historical_source(manifest, request.as_of_date)
+src\company_wiki\automation\narrative_transport.py:98: in _require_historical_source
+    raise NarrativeTransportError("blocked", reason)
+E   company_wiki.automation.narrative_transport_contracts.NarrativeTransportError: blocked: source_publication_unknown
+____ test_new_owner_metadata_changes_only_the_receipt_not_frozen_artifact _____
+tests\contract\test_narrative_availability.py:255: in test_new_owner_metadata_changes_only_the_receipt_not_frozen_artifact
+    assert before.returncode == 0, before.stderr.decode()
+E   AssertionError: {"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}
+E     
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'company_wiki.sourc...'', stderr=b'{"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}\n').returncode
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1w3a\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/contract/test_narrative_availability.py::test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[prior_verified_capture-pdf]
+FAILED tests/contract/test_narrative_availability.py::test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[prior_verified_capture-json]
+FAILED tests/contract/test_narrative_availability.py::test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[current_verified_open-pdf]
+FAILED tests/contract/test_narrative_availability.py::test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[current_verified_open-json]
+FAILED tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[pdf]
+FAILED tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[json]
+FAILED tests/contract/test_narrative_availability.py::test_new_owner_metadata_changes_only_the_receipt_not_frozen_artifact
+====================== 7 failed, 15 deselected in 29.78s ======================

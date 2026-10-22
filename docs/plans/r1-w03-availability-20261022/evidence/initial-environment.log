@@ -1,0 +1,72 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w3a\\red", "requested_basetemp_len": 54, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pytest\__main__.py", line 9, in <module>
+    raise SystemExit(_console_main())
+                     ~~~~~~~~~~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\config\__init__.py", line 253, in _console_main
+    code = _main(prog=_get_prog_name(sys.argv))
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\config\__init__.py", line 229, in _main
+    ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\main.py", line 377, in pytest_cmdline_main
+    return wrap_session(config, _main)
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\main.py", line 365, in wrap_session
+    config.hook.pytest_sessionfinish(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        session=session, exitstatus=session.exitstatus
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\logging.py", line 888, in pytest_sessionfinish
+    return (yield)
+            ^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\terminal.py", line 961, in pytest_sessionfinish
+    result = yield
+             ^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\warnings.py", line 119, in pytest_sessionfinish
+    return (yield)
+            ^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\郑曾波\Projects\company-wiki\.venv\Lib\site-packages\_pytest\junitxml.py", line 652, in pytest_sessionfinish
+    with open(self.logfile, "w", encoding="utf-8") as logfile:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\r1-w03-availability-20261022\\evidence\\red.xml'
+tests\contract\test_narrative_availability.py FFFF.......F......FFFF     [100%]

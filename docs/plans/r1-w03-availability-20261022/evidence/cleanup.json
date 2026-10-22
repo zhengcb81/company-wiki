@@ -1,0 +1,16 @@
+{
+  "method": "native PowerShell Remove-Item -LiteralPath exact owned root",
+  "utc": "2026-10-22T18:44:23.5419468Z",
+  "peak": "sampled only; continuous exact peak not measured",
+  "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3a",
+  "production_configs_changed": 0,
+  "files_before_delete": 1176,
+  "evidence_retained": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki\\docs\\plans\\r1-w03-availability-20261022",
+  "baseline_existed": false,
+  "old_worktree_temp_removed": false,
+  "exact_absolute_target_checked": true,
+  "raw_production_files_deleted": 0,
+  "root_exists_after": false,
+  "bytes_before_delete": 29606869.0,
+  "restored_to_initial_absence": true
+}

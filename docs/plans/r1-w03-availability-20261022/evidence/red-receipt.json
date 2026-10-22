@@ -1,0 +1,25 @@
+{
+  "product_sha256": "7e0b49351c098fb42f75288cf485f7bb9b2cbea2b8384bcb499fe8b8752371d7",
+  "exit_code": 1,
+  "source_head": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "started_utc": "2026-10-22T18:33:41.5091509Z",
+  "temp": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a",
+  "test_sha256": "b6390b917c5fb1346627a812c8787d32a73f3e5587120af7154126da63135630",
+  "phase": "RED",
+  "live_api_calls": 0,
+  "finished_utc": "2026-10-22T18:34:12.8007580Z",
+  "argv": [
+    "-m",
+    "pytest",
+    "tests/contract/test_narrative_availability.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-k",
+    "actual_cli_null or one_verified or metadata_changes",
+    "--basetemp",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/r2",
+    "--junitxml",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/red.xml"
+  ]
+}
