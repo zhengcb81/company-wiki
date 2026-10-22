@@ -1,3 +1,7 @@
+## 2026-10-22 本地push拦住两项旧OCR fixture缺口
+
+W03首次正常push本地7081P/2F/24S（278.58s），未向远端写入。两项旧OCR public-read替身缺少真实SourceVersionReader的catalog组成；补空owner（无availability观察），生产源码和全部原断言不变，完整该模块24P/5.05s。不是调松来源资格，也未删测试。随后正常重推，结果另观察。
+
 ## 2026-10-22 W03-A组合验收与并线
 
 W03-A已TDD完成：同SHA可用时间证明仅进入raw narrative读取metadata；不造publication，不改frozen bundle/generation/cache，projected/3不变。CWP非作者12P、RF最终非作者58P；ROOT合并主线到已安装RF真实公开CLI与新contract共31P/0skip，mypy src366文件0错。RF正常push526P/1既有skip/+36subtests，main/remote674d08d9；consumer先发布安装（1文件×2物理副本/3逻辑入口、566其它文件元信息不变），producer后正常merge。旧b76收据和三份RF WIP保留。独立套件有重叠，不相加冒充一次总数。

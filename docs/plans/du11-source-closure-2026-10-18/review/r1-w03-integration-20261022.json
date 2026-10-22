@@ -208,5 +208,18 @@
       "sha256": "3cf5b553770c77314a86da2f303faca67c9c83410532698f145d27fca3b875b5",
       "bytes": 6251
     }
-  ]
+  ],
+  "first_normal_push": {
+    "result": "BLOCKED_LOCALLY_NO_REMOTE_WRITE",
+    "unit_passed": 7081,
+    "unit_failed": 2,
+    "unit_skipped": 24,
+    "seconds": 278.58,
+    "cause": "OCR public-read test double lacked SourceVersionReader catalog composition; no production behavior change required",
+    "fix": "Model empty source owner with no availability proof; preserve every original OCR/generation/qualification assertion",
+    "focused_module_passed": 24,
+    "focused_seconds": 5.05,
+    "evidence": "r1-w03-integration-20261022/first-push-failure-excerpt.log",
+    "current_producer_source_unchanged": true
+  }
 }

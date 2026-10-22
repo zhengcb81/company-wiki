@@ -399,6 +399,13 @@ def test_partial_completed_derivation_public_replays_and_reuses(
         source_reader.opened,
         manifest,
     )
+    # This public-read double also owns an empty source catalog: there is no
+    # availability observation for this current-mode OCR fixture. Keep real
+    # qualification/replay and all generation assertions in place.
+    source_reader.catalog = SimpleNamespace(
+        reader=SimpleNamespace(exact_source_locations=lambda document_id, source_id: []),
+        config=SimpleNamespace(roots=()),
+    )
     version = SimpleNamespace(
         content_sha256=digest,
         byte_size=len(raw),

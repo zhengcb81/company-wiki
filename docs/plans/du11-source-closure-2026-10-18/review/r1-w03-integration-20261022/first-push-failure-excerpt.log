@@ -1,0 +1,61 @@
+================================== FAILURES ===================================
+_____ test_partial_completed_derivation_public_replays_and_reuses[False] ______
+[gw1] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\test_narrative_ocr_composition.py:460: in test_partial_completed_derivation_public_replays_and_reuses
+    assert read_reuse_pin(
+src\company_wiki\automation\narrative_generation.py:408: in read_reuse_pin
+    result = NarrativeTransportReader(artifacts, reader, normalization=normalization).read(
+src\company_wiki\automation\narrative_transport.py:312: in read
+    return self._read(request)
+           ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_transport.py:361: in _read
+    availability = verified_availability_evidence(self._reader.catalog, current)
+                                                  ^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'FakeReader' object has no attribute 'catalog'
+______ test_partial_completed_derivation_public_replays_and_reuses[True] ______
+[gw1] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\test_narrative_ocr_composition.py:450: in test_partial_completed_derivation_public_replays_and_reuses
+    read_reuse_pin(
+src\company_wiki\automation\narrative_generation.py:408: in read_reuse_pin
+    result = NarrativeTransportReader(artifacts, reader, normalization=normalization).read(
+src\company_wiki\automation\narrative_transport.py:312: in read
+    return self._read(request)
+           ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_transport.py:361: in _read
+    availability = verified_availability_evidence(self._reader.catalog, current)
+                                                  ^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'FakeReader' object has no attribute 'catalog'
+============================ slowest 15 durations =============================
+18.10s call     tests/unit/test_legacy_entrypoint_simplification.py::test_one_off_retirement_tools_left_no_import_chain
+10.56s call     tests/unit/test_w04_source_transport.py::test_compact_65_parent_wire_stays_small_without_truncating_body
+9.83s call     tests/unit/test_narrative_output_failure_finalization.py::test_explicit_failed_summary_public_cli_settles_output_and_resumes_with_zero_extra_post
+9.73s call     tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee
+9.23s call     tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+8.56s call     tests/unit/document_understanding_selection/test_reading_production_selection.py::test_large_actual_candidate_pool_keeps_all_three_important_late_scopes
+7.52s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+6.43s call     tests/unit/document_understanding_layout_hints/test_b_integrity_and_budget.py::test_work_units_grow_about_linearly
+6.01s call     tests/unit/test_narrative_extractive_production.py::test_real_default_policy_document_skips_model_and_does_not_require_fictional_execution
+5.90s call     tests/unit/test_narrative_extractive_production.py::test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse
+5.57s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+3.90s call     tests/unit/test_narrative_business_recall.py::test_default_old_selector_keeps_entire_ordered_fingerprint
+3.83s call     tests/unit/test_shared_reading_cache_precheck.py::test_one_hundred_base_bindings_keep_shared_settings_without_original_or_decision_copies
+3.79s call     tests/unit/test_narrative_worker_factory.py::test_spawned_production_factory_reads_original_source_with_zero_network
+3.51s call     tests/unit/test_acquisition_usage_recovery.py::test_hard_timeout_stops_owned_grandchild_and_late_writes
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_ocr_composition.py::test_partial_completed_derivation_public_replays_and_reuses[False] - AttributeError: 'FakeReader' object has no attribute 'catalog'
+FAILED tests/unit/test_narrative_ocr_composition.py::test_partial_completed_derivation_public_replays_and_reuses[True] - AttributeError: 'FakeReader' object has no attribute 'catalog'
+=========== 2 failed, 7081 passed, 24 skipped in 278.58s (0:04:38) ============
+
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+
+FAILED: full affected unit suite
+
+PUSH CHECKS RED — fix the failing phase; do not bypass.
+
+PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.
+error: failed to push some refs to 'https://github.com/zhengcb81/company-wiki.git'
