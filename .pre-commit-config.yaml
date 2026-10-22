@@ -25,13 +25,12 @@ repos:
         files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$|^tools/(check_dependencies|changed_unit_tests|pre_push_gate|summarize_junit_failures)\.py$
 
       - id: mypy-contract
-        name: mypy changed runtime modules (same configuration as CI)
-        entry: python -m mypy
+        name: mypy runtime source (same command as CI)
+        entry: python -m mypy src
         language: system
-        pass_filenames: true
-        # Check the staged bodies directly. With follow_imports=skip, an imported
-        # module is not checked merely because a fixed contract module imports it.
-        # Full src stays in CI; commits do not repeat its complete module list.
+        pass_filenames: false
+        # follow_imports=skip loses cross-module signatures for a subset input.
+        # One cached source check replaces the fixed list; no behavior tests.
         files: ^src/.*\.py$
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)

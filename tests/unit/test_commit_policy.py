@@ -33,7 +33,7 @@ def test_config_check_only_runs_for_config_and_loader_changes():
         assert not trigger.search(filename), filename
 
 
-def test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist():
+def test_type_check_covers_runtime_and_local_dependency_signatures():
     hook = next(hook for hook in _hooks() if hook["id"] == "mypy-contract")
     trigger = re.compile(hook["files"])
     for filename in ("src/company_wiki/automation/narrative_run_store.py",
@@ -41,8 +41,8 @@ def test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist():
                      "src/company_wiki/source_catalog/local_reconcile.py",
                      "src/company_wiki/new_runtime_module.py"):
         assert trigger.search(filename), filename
-    assert hook.get("pass_filenames", True), "mypy must check each changed body, not only skipped imports"
-    assert "src/" not in hook["entry"], "the commit hook must not repeat all-src CI"
+    assert hook["entry"].split() == ["python", "-m", "mypy", "src"]
+    assert not hook.get("pass_filenames", True), "subset inputs lose local dependency types with follow_imports=skip"
     assert not trigger.search("docs/plans/current/progress.md")
 
 
