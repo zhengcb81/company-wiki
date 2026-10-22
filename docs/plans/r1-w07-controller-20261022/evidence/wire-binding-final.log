@@ -1,0 +1,13 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+tests\integration\test_holdout_acceptance_controller_e2e.py .            [100%]
+
+- generated xml file: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller\.planning\w07-controller\wire-binding-final.xml -
+============================= 1 passed in 17.14s ==============================

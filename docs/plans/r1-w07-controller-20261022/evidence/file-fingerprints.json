@@ -1,0 +1,26 @@
+{
+  "tools/document_understanding_benchmark/holdout_acceptance.py": {
+    "sha256": "365060882d0d07383ab31881b0fe003245963e3ff028e301fcd52a6a73f47aec",
+    "bytes": 20693
+  },
+  "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+    "sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+    "bytes": 6307
+  },
+  "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+    "sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+    "bytes": 362
+  },
+  "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+    "sha256": "106df715a8c1ce2244cd2734834b3ded4ac2c13393b459e058d4dc1167c5e19f",
+    "bytes": 9001
+  },
+  "tests/unit/test_holdout_acceptance_controller.py": {
+    "sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+    "bytes": 1974
+  },
+  "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+    "sha256": "74166ebee3cd72744c1efe5c20729a101d44d74fa96251c48607e904e91d5961",
+    "bytes": 10681
+  }
+}

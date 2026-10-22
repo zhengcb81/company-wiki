@@ -1,0 +1,38 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
+
+tests\unit\test_holdout_acceptance_controller.py FF.                     [ 75%]
+tests\integration\test_holdout_acceptance_controller_e2e.py F            [100%]
+
+================================== FAILURES ===================================
+_____ test_preflight_counts_actual_utf8_body_and_configured_output[8192] ______
+tests\unit\test_holdout_acceptance_controller.py:24: in test_preflight_counts_actual_utf8_body_and_configured_output
+    assert observed['http_body_sha256'] == hashlib.sha256(body).hexdigest()
+E   AssertionError: assert '' == '8a860b896528...60cf0ccf512ed'
+E     
+E     - 8a860b8965287e8371d44fc194da77c7f4931ad712a8f29c2fc60cf0ccf512ed
+______ test_preflight_counts_actual_utf8_body_and_configured_output[31] _______
+tests\unit\test_holdout_acceptance_controller.py:24: in test_preflight_counts_actual_utf8_body_and_configured_output
+    assert observed['http_body_sha256'] == hashlib.sha256(body).hexdigest()
+E   AssertionError: assert '' == '23e0cb78847b...5baddd1d4346d'
+E     
+E     - 23e0cb78847b73dad7a747f2104d16c8ab0172124835469b43d5baddd1d4346d
+___ test_preflight_is_actual_configured_zero_post_and_same_run_can_continue ___
+tests\integration\test_holdout_acceptance_controller_e2e.py:142: in test_preflight_is_actual_configured_zero_post_and_same_run_can_continue
+    preview = run_controller(spec, stop_after='preflight')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\document_understanding_benchmark\holdout_acceptance.py:143: in run_controller
+    raise ControllerError('HOLDOUT_INVALID_STOP_STAGE')
+E   tools.document_understanding_benchmark.holdout_acceptance.ControllerError: HOLDOUT_INVALID_STOP_STAGE
+- generated xml file: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller\.planning\w07-controller\preflight-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_preflight_counts_actual_utf8_body_and_configured_output[8192]
+FAILED tests/unit/test_holdout_acceptance_controller.py::test_preflight_counts_actual_utf8_body_and_configured_output[31]
+FAILED tests/integration/test_holdout_acceptance_controller_e2e.py::test_preflight_is_actual_configured_zero_post_and_same_run_can_continue
+========================= 3 failed, 1 passed in 2.81s =========================

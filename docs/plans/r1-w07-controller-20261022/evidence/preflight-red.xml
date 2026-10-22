@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="4" time="2.725" timestamp="2026-10-22T20:15:49.296871+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_preflight_counts_actual_utf8_body_and_configured_output[8192]" time="0.018"><failure message="AssertionError: assert '' == '8a860b896528...60cf0ccf512ed'&#10;  &#10;  - 8a860b8965287e8371d44fc194da77c7f4931ad712a8f29c2fc60cf0ccf512ed">tests\unit\test_holdout_acceptance_controller.py:24: in test_preflight_counts_actual_utf8_body_and_configured_output
+    assert observed['http_body_sha256'] == hashlib.sha256(body).hexdigest()
+E   AssertionError: assert '' == '8a860b896528...60cf0ccf512ed'
+E     
+E     - 8a860b8965287e8371d44fc194da77c7f4931ad712a8f29c2fc60cf0ccf512ed</failure></testcase><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_preflight_counts_actual_utf8_body_and_configured_output[31]" time="0.008"><failure message="AssertionError: assert '' == '23e0cb78847b...5baddd1d4346d'&#10;  &#10;  - 23e0cb78847b73dad7a747f2104d16c8ab0172124835469b43d5baddd1d4346d">tests\unit\test_holdout_acceptance_controller.py:24: in test_preflight_counts_actual_utf8_body_and_configured_output
+    assert observed['http_body_sha256'] == hashlib.sha256(body).hexdigest()
+E   AssertionError: assert '' == '23e0cb78847b...5baddd1d4346d'
+E     
+E     - 23e0cb78847b73dad7a747f2104d16c8ab0172124835469b43d5baddd1d4346d</failure></testcase><testcase classname="tests.unit.test_holdout_acceptance_controller" name="test_invalid_spec_is_rejected_before_creating_any_store" time="0.016" /><testcase classname="tests.integration.test_holdout_acceptance_controller_e2e" name="test_preflight_is_actual_configured_zero_post_and_same_run_can_continue" time="0.362"><failure message="tools.document_understanding_benchmark.holdout_acceptance.ControllerError: HOLDOUT_INVALID_STOP_STAGE">tests\integration\test_holdout_acceptance_controller_e2e.py:142: in test_preflight_is_actual_configured_zero_post_and_same_run_can_continue
+    preview = run_controller(spec, stop_after='preflight')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\document_understanding_benchmark\holdout_acceptance.py:143: in run_controller
+    raise ControllerError('HOLDOUT_INVALID_STOP_STAGE')
+E   tools.document_understanding_benchmark.holdout_acceptance.ControllerError: HOLDOUT_INVALID_STOP_STAGE</failure></testcase></testsuite></testsuites>
