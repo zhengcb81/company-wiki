@@ -2,8 +2,8 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-22",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W06_FINAL3_FOUR_REVIEWS_FAIL_ROOT_CAUSE_PLAN_RUNNING_AUDIT_SKILL_UPGRADE_COMPLETE",
-  "current_authorized_scope": "resumed_2026_10_22_continue_PWF_W03_then_W07_W06_and_fresh_holdouts",
+  "overall_status": "ACTIVE_GOAL_UPDATED_R1_FINAL3_PLAN_ACCEPTED_W08_RED_DESIGN",
+  "current_authorized_scope": "User explicitly updated and started current mainline audit loop on 2026-10-22; goal active verified via get_goal.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -151,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Receive independent comprehensive final3 root-cause PWF for all 14 finding occurrences, reconcile counterevidence, implement shared corrections, retest original company, then HK/US holdouts. Skill steps7/8 effective in subsequent attempts; do not rewrite sealed history.",
+  "next_step_now": "Finish W08 minimal RED/fixture/version design, freeze implementation attempt and exact code/install/config; implement W08-W11 by ownership, integrate W12 original-company retest and independent reviews, then fresh HK/US and remaining company-list loop.",
   "next_step_after_user_resumes": "already_resumed_2026_10_22",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -202,7 +202,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
   "previous_pause_request": "Superseded by latest user continue request.",
-  "last_updated_at": "2026-10-22T21:56:19.364110+00:00",
+  "last_updated_at": "2026-10-22T22:09:01.132594+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -218,7 +218,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "FOUR_INDEPENDENT_REVIEWS_COMPLETE_FAIL_EXPERT_ROOT_CAUSE_PLAN_RUNNING",
+    "status": "FOUR_REVIEWS_FAIL_EXPERT_PLAN_ACCEPTED_W08_RED_DESIGN_STARTED",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -284,7 +284,9 @@
         "report_sha256": "4397d6a3f020bbc9d48a8ba232bcfe91b418ae74499be1777f2af0f80f4bb33a"
       }
     },
-    "review_index": "review/r1-phase-b-four-review-index-20261022.json"
+    "review_index": "review/r1-phase-b-four-review-index-20261022.json",
+    "root_cause_plan": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022",
+    "root_reception": "review/r1-final3-plan-root-reception-20261022.json"
   },
   "audit_skill_quality_upgrade": {
     "status": "COMPLETE_INDEPENDENTLY_REVIEWED_COMMITTED_INSTALLED_CLEANED",
@@ -305,5 +307,12 @@
     "publication_commit": "738d99a8cdcf7f33b96e89f4e304b3440e4c5e51",
     "closeout_ref": "review/audit-skill-quality-closeout-20261022.json",
     "publication_byte_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json"
+  },
+  "mainline_goal": {
+    "status": "active",
+    "objective_file": "MAINLINE_LOOP_GOAL.md",
+    "activation_receipt": "review/mainline-goal-activation-20261022.json",
+    "native_get_goal_verified": true,
+    "project_budget_preserved": true
   }
 }

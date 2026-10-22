@@ -1,3 +1,9 @@
+## 2026-10-22 当前主线目标与方案接收
+
+当前原生目标active且正文为MAINLINE_LOOP_GOAL.md。内置create_goal不能替换未完旧目标、update_goal不能resume；用户显式请求由官方app-server thread/goal/set完成并回读，不操作SQLite。stdio短客户端关闭；实际保留旧应用计数，外部预算不变。
+
+独立方案14完整问题键→10共因→W08–W12已实核；实施尚未通过。审查反证、合法条件预测、来源/研究/投影职责和实际外限分别保留。W08当前只读设计不是RED运行或工程PASS。
+
 ## 2026-10-22 实际付费恢复通过，活动索引必须与历史封存分开
 
 原生真实paid pin可跨进程/attempt/fence重放，激活和cache皆未重发HTTP；RF公开实读同artifact。内容仍partial，下一步必须有usedparameter/formula消费，不能把“context可读”代签。17329实际token显著低于81880预留上界，属于原生结算，不是下调预算估算。

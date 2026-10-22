@@ -1,0 +1,12 @@
+{
+  "goal": {
+    "threadId": "01a0dc54-7e6b-7c43-a7aa-bf9beb3fa2d3",
+    "objective": "按 company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08 的根因施工计划逐步完成所有改进：RF确定性、CWP有界Dayu桥/来源资格/格式解析、FF→ET路由、RF目标和证据输入；保持原件、独立测试隔离、配置及累计预算；提交推送并重跑原三家公司，随后更换A/H/US三家公司完成独立执行/审查与泛化验收，找出新的一组改进方案并入PWF计划，然后继续实施，如此循环直到完全符合company-wiki/filing-fetch/revenue-forecast设计要求。不得用特判或放宽断言掩盖错误；客观外部限制单列，计划未完成前持续推进。",
+    "status": "paused",
+    "tokenBudget": null,
+    "tokensUsed": 77576348,
+    "timeUsedSeconds": 238440,
+    "createdAt": 1791480540,
+    "updatedAt": 1792099716
+  }
+}

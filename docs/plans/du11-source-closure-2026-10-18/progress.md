@@ -564,3 +564,9 @@ Metadata performance root cause reproduced on actual _prose:16/32members visited
 W06四路复审全部FAIL，共14条发现出现项；索引保存各报告SHA/检查数。专家统一实读原件/代码和报告反证，再形成新的PWF；不能把14症状逐个补丁或把重叠范围重复计数。W03/W07已完成，HK/US新公司与内容质量仍OPEN。
 
 文档汇总首次读取独审JSON误取outcome键（实际为conclusion）而退出，未写任何文件；按实际schema修正后成功。
+
+## 2026-10-22 当前主线目标更新并启动
+
+用户明确要求把目标更新为当前主线循环并启动。create_goal因旧目标未完成而拒绝替换；未伪报完成。官方proxy只读连接18秒超时后已关闭，改用官方文档支持的短生命周期stdio app-server get/set/get；同一线程旧目标核对后更新objective/status=active，内置get_goal再次确认active。无新thread/turn、无数据库直写、无权限或配置修改。应用目标计数实际保留，项目外部调用2M/$20及unknown账不变；收据保存前后原值。所有本次自建客户端已关闭。
+
+专家五卡已交付，ROOT核验11份小工件SHA及14/14完整问题键覆盖，接收方案而非业务签收。W08独立只读RED/fixture/版本设计已启动，W09–W12仍planned；后续按新目标八步循环，不重做W03/W07。接收脚本初次假设四报告均有review_attempt而KeyError，未写任何文件；analyst缺字段，改用其已封存目录与四审索引显式上下文，原报告不改，不加额外身份门禁。
