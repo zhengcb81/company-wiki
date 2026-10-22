@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-local-observation-root-integration/1",
-  "observed_at": "2026-10-22T20:48:17.715879+00:00",
-  "status": "THREE_LAYERS_INTEGRATED_CWP_NORMAL_PUBLICATION_NEXT",
+  "observed_at": "2026-10-22T21:12:07.030576+00:00",
+  "status": "THREE_LAYERS_MERGED_PUSHED_INSTALLED_EXACT_CI_PASS",
   "producer": {
     "product": "27be00fb",
     "main_merge": "69a5490baab216fe6d234c53c5f8e7c51672da25",
@@ -17,7 +17,22 @@
     },
     "independent_final_passed": 49,
     "review": "r1-local-observation-cwp-independent-20261022.json",
-    "prior_96ca_review": "48PASS1RED; discovery history common root fixed; old evidence retained"
+    "prior_96ca_review": "48PASS1RED; discovery history common root fixed; old evidence retained",
+    "main_remote": "aa2dd822faed3b464a713cff737ba425dd6e2a91",
+    "normal_push": {
+      "unit_passed": 7097,
+      "unit_skipped": 24,
+      "unit_seconds": 267.37,
+      "contract_passed": 146,
+      "contract_seconds": 36.11
+    },
+    "ci": {
+      "id": 39854576322,
+      "head_sha": "aa2dd822faed3b464a713cff737ba425dd6e2a91",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39854576322"
+    }
   },
   "ff": {
     "product": "136ab5a627083f173c60fc88b7b3f74879a4bf99",
@@ -141,8 +156,7 @@
   "new_gate_or_permission": false,
   "caps_increased": false,
   "remaining": [
-    "normal CWP push and exact CI",
-    "W06 full forecast four quality reviews",
+    "W06 four independent company quality reviews and any root cause remediation",
     "HK/US holdouts"
   ],
   "artifacts": [
@@ -255,6 +269,16 @@
       "path": "rf-local-observation-push.log",
       "bytes": 789,
       "sha256": "5998bd2a9b1670412342e655a96ac008e452a8b6023e06852fd5a1b97933bb27"
+    },
+    {
+      "path": "local-observation-cwp-push.log",
+      "bytes": 3621,
+      "sha256": "9e0b109a7251d729e25ae21125080798af0e7f663b451c437f4b197500779909"
+    },
+    {
+      "path": "local-observation-cwp-ci-observation.json",
+      "bytes": 225,
+      "sha256": "ba4445e6062889132d928f35f3a9cfaedffa371fe8572be8b0a29db037ef3f2b"
     }
   ],
   "fast_existing_smoke_added_cases": 2,

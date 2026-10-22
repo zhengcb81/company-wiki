@@ -494,6 +494,14 @@ CWP已正常发布remote master=0ccdc6896ee58063ff827e9ceab16043c7550e0c：全�
 
 # Progress
 
+## 2026-10-22 三仓发布与新版预测封存
+
+CWP aa2dd822正常push完成：7097单测P/24既有skip267.37s、146契约P36.11s，精确CI39854576322 SUCCESS。与RF10bf6111/FF7f6a9268的精确CI及已安装字节共同收尾本地读取诊断包，未绕钩子/删断言/加人工许可。W06最终final3已封存，ROOT实核manifest501件89,049,507B全匹配；作者1594算术不是独审。storage/process已按当前同一manifest启动，fetch/analyst待空槽；原初FAIL及639件不变，暂无新版业务PASS。审查技能源码39文件已冻结，623工程测试OK/2skip，独立七场景试读进行中。
+
+## 2026-10-22 审查技能收尾升级（实施中）
+
+用户增加两项最终步骤：全面代码质量/模块化/泛化与买方收入研究方法改善，以及根据当轮新问题升级审查检测。ROOT先核对审查技能源码仓 `a2f216b` 与已安装入口，工作树原本干净；独立 owner 仅改该仓 `skills/` 与专属建设 PWF，不写正在封存的真实公司运行目录。两步接在原公司复验之后，复用现有根因映射与大节点审查，不引入新状态机、额外授权或每个小提交的重测试。待独立行为试读、安装差异核对及正常提交推送；此段不是已完成声明。
+
 ## 最新：正常push超时与两个独审delta（2026-10-18）
 
 母仓6ee5ebf1正常push未成功：完整unit约96%时达到600s，日志在母仓`.planning/shared-reading-production/du11/push-source-flow-reader-port.log`；远端仍9c681ed2。原日志保留，非断言失败证明，也不能因PowerShell尾部命令exit0误报发布。现用已声明xdist对完整unit目录启两个file-scheduled worker，不删测试/改期限，窄测和contract不增加启动开销。实现先3FAIL/1PASS，修后4新及80既有gate控制共84PASS6.44s。独立4新控制PASS4.69s，另3窄测/非零退出控制通过；真实2-worker/SQLite超时反控5s期限后20.064s返回124（既有execnet约15s关停），返回时worker均退出、gate/outer Temp均删除。完整7000组运行提速未签收，留待正常push；不增加第二进程管理框架。

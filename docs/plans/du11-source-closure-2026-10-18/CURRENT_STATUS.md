@@ -6,13 +6,15 @@
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；正在修正作者通信字段并封最终版本，尚无四路业务质量结论。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
+**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；已封存final3和完整15步/30次capture；ROOT实核501文件89,049,507B全匹配，来源与流程两位独审进行中，采集与模型两位待空槽调度，尚无四路业务质量结论。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
 
 当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
 
 唯一下一主线：**W06阶段B：将新摘要真实绑定实际使用的RF参数/公式，完成独立经营桥、15步预测与四路独审，再药明合联→Snowflake泛化。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，不把可读当内容完整或已入模型。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
 
-本地读取诊断共因跟进已三层独审并线：[ROOT组合收据](review/r1-local-observation-integration-20261022.md)。RF `10bf6111`、FF `7f6a9268`均已正常push、定点安装及精确CI SUCCESS；CWP最终 `27be00fb`独审49P并入主线 `69a5490b`，与两份已安装消费端真实联调通过，待正常push。另5项旧contract及发现过程丢历史的真缺陷均已根修，保留原断言；只复用现有owner资格、不提高读取配额、不加权限门禁。
+本地读取诊断共因跟进已三层独审并线：[ROOT组合收据](review/r1-local-observation-integration-20261022.md)。RF `10bf6111`、FF `7f6a9268`均已正常push、定点安装及精确CI SUCCESS；CWP最终 `27be00fb`独审49P并入主线 `69a5490b`，与两份已安装消费端真实联调通过，随 `aa2dd822`正常push（7097P/24S267.37s、146契约P36.11s），精确CI39854576322 SUCCESS。另5项旧contract及发现过程丢历史的真缺陷均已根修，保留原断言；只复用现有owner资格、不提高读取配额、不加权限门禁。
+
+并行技能升级：按用户要求在原六步后增加**全面代码质量/模块化/泛化及买方收入研究能力改善→由本公司新问题升级后续检测**。独立建设PWF位于`revenue-forecast-audit/docs/plans/audit-continuous-quality-20261022/`，源码已冻结，623工程测试OK（2skip）；正独立七场景行为试读，随后定点安装与正常提交，不改写本轮sealed材料。
 
 初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
 
@@ -56,7 +58,7 @@
 
 - CWP W01 `a7da184e`；W04 已从独审作者提交转为主线 `e1cc1621`/`5a267d37`，交接 `2f632193`。W01 155 项独审绑定旧物理字节；后续仅 LF 归一和 CLI 局部变量改名，独立[补审](review/r1-w01-source-review-postprocess-20261022.md)证明文本/行为等价，并复跑 7 项 CLI。全 `mypy src` 366 文件 0 错误。W04合线后Optional pin类型漏检已于 `ae7b15d6`/`20a7fb0c`修复；单一完整src检查热缓存9.1秒，CI删除重复步骤。独立[最终反控](review/r1-ci-owner-final-review-20261022.md)证明旧版真RED、修复真GREEN，不靠单文件Any或无效移动HEAD探测代签。
 - RF W02 产品 `768b6dd3`、W05 产品 `36433047` 已并入 main；`92b69682` 仅将两份必要回归纳入现有 smoke、让既有小型 mypy 在传递依赖修改时也触发。FF 最终主线和三仓推送/安装/新 CI 见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)，不从历史 pin 推断实时状态。
-- 最新已核CWP代码CI：[39842895271](https://github.com/zhengcb81/company-wiki/actions/runs/39842895271)，精确HEAD `1b39032c` SUCCESS。正常push最终7083单测/24跳过、145独立smoke；首次push本地两项旧OCR替身缺catalog组成，补正确owner后通过，未改生产资格或断言。W07 `9eba8c4e`尚未推送，不能借W03 CI代签。RF `674d08d9`的同次jobs API显示verify SUCCESS；workflow API仍返回in_progress，保留两个实际观察，不捏造workflow conclusion。
+- 最近已成功CWP代码CI：[39847355377](https://github.com/zhengcb81/company-wiki/actions/runs/39847355377)，精确HEAD `755e87cd` SUCCESS。最新已推送 `aa2dd822` 的精确CI[39854576322](https://github.com/zhengcb81/company-wiki/actions/runs/39854576322)已completed/SUCCESS；不借旧CI代签。RF `10bf6111`、FF `7f6a9268`精确CI均SUCCESS，见本地读取诊断组合收据。
 - 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。新原件、key、生产配置、Dayu、IQS 和旧 campaign 未修改。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
 
 ## 模型与预算

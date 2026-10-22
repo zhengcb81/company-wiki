@@ -1,0 +1,19 @@
+{
+  "schema_version": "w06-phase-b-root-seal-check/1",
+  "observed_at": "2026-10-22T21:07:00.320927+00:00",
+  "manifest": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\phase_b_manifest.json",
+  "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+  "files_checked": 501,
+  "bytes_checked": 89049507,
+  "mismatches": [],
+  "scope": "byte identity only, not source truth or forecast quality",
+  "independent_quality_reviews_dispatched": [
+    "storage",
+    "process"
+  ],
+  "pending_roles": [
+    "fetch",
+    "analyst"
+  ],
+  "business_pass": false
+}

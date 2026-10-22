@@ -369,6 +369,10 @@ RF/FF两张DU11卡功能工程已接收、全部交付提交进入各自主线�
 
 # Findings
 
+## 2026-10-22 收尾阶段缺口
+
+当前审查技能入口是准备→执行→四审→根因→修复→再验收，虽有共因修复约束，但尚未把无 finding 时的代码质量/泛化巡检和跨轮风险检查升级明确列为最后两项产出。用户要求将它们正式接入：代码层与研究方法层分开评估；新检测绑定真实风险、机制、正反例及适用范围，去重而非堆数量；已封存历史保持原版本，新检查用于后续 attempt/公司。仅技能文本与必要支持资源变更，不因此改公司预测或扩大 CWP 的研究职责。
+
 发布前实际检查又封闭三类共因，而不是给失败加豁免：FF CLI的JSON输出曾按Windows宿主GBK编码、消费者按UTF-8解码，改唯一输出owner为ASCII JSON后中文/emoji路径语义不变，原错误退出保留；集中CI表35→38补已有DU11纯回归，未加入重型真实端到端。新qualifications schema值全为class-info但异构dict丢失静态类型，补准确类型注解，公共mypy通过。旧pre-commit只看2个直接入口，现同一既有hook覆盖scripts运行依赖，命令仍仅检查原2公共入口（4.018s），不增加全仓mypy或新门。
 
 完整FF回归还发现一个旧fixture同时省略provider与日期，使原“未知发布日期不重复下载”测试先撞上“显式fmp不可冒认未知provider”。只补当前reader manifest.provider=fmp/published_date=None，保留原0provider调用/SourceRef/asof=False全部断言；该例及现unknown-provider拒绝反控2PASS0.24s，生产校验不放宽。正常push历史的type RED、fixture RED均保留；最终873PASS7SKIP78subtests91.13s后才真正推送e8740748。按已发布producer pin先行、consumer后发，RF兼容版本表是唯一CI依赖owner，安装技能不另造compatibility副本。
