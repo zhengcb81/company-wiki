@@ -1,7 +1,7 @@
 """Explicit local intake: prove existing facts, then use the unchanged public reader."""
 
 from __future__ import annotations
-from dataclasses import asdict, replace
+from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
 import re
@@ -36,6 +36,15 @@ from .lock import CatalogOperationLockedError
 from .canonical_scope import HistoricalCaptureScopes, ScopeRelation, qualified_source_scope, scope_relatedness
 
 SCHEMA = "local-source-prepare/1"
+
+
+@dataclass
+class _PreparationProgress:
+    """Per-call history across discovery recursion; never persisted as state."""
+    operations: list[dict[str, Any]] = field(default_factory=list)
+    diagnostics: list[dict[str, Any]] = field(default_factory=list)
+    # Only actual owner proof in this call may establish non-relevance.
+    not_relevant_documents: set[str] = field(default_factory=set)
 
 
 def _result(status, reason, *, ref=None, blocks=False, operations=(), diagnostics=()):
@@ -403,13 +412,14 @@ def _facts_with_availability(catalog, original, identity, request, budget, **opt
     return facts, evidence
 
 
-def _discover_source_groups(catalog, identity, budget, request):
+def _discover_source_groups(catalog, identity, budget, request, *, _progress=None):
     """Finite issuer-layout metadata enumeration, separate from raw verification."""
     from .adapter_dispatch import discover_issuer_paths
     from .policy import _effective_reusable
 
     changed = False
     unresolved = []
+    excluded = _progress.not_relevant_documents if _progress is not None else set()
     names = {identity.canonical_name, identity.ticker, identity.security_id}
 
     def local_path(path, root, *, directory):
@@ -455,6 +465,8 @@ def _discover_source_groups(catalog, identity, budget, request):
                 location = catalog.reader.fetchone(
                     "SELECT document_id FROM locations WHERE root_id=? AND relative_path=? AND role='original_primary'",
                     (root.root_id, relative))
+            if location is not None and location["document_id"] in excluded:
+                continue
             row = catalog.reader.exact_source_version(location["document_id"]) if location else None
             if row is None:
                 raise SourceReadError("unavailable", "local_original_registration_failed")
@@ -477,18 +489,22 @@ def _discover_source_groups(catalog, identity, budget, request):
                 # owner can establish facts. No lookup is needed for an empty
                 # issuer directory, and an unknown original is not absence.
                 identity = scope.identity() or _identity(catalog, request, getattr(identity, "_identity_cache_dir", None))
-            broad = replace(request, fiscal_year=None, fiscal_period=None, form_type=None)
             def prove(original):
-                return _facts_with_availability(catalog, original, identity, broad, budget, match_scope=False)
+                # Determine relevance from the actual request before dates or
+                # ancillary sidecars. Latest already carries its open scope.
+                return _facts_with_availability(catalog, original, identity, request, budget)
             try:
-                restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
-                                       budget=budget, fact_replay=prove)
+                operation = restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
+                                                   budget=budget, fact_replay=prove)
+                if operation["status"] == "not_relevant":
+                    excluded.add(ref.document_id)
                 changed = True
-            except SourceReadError as exc:
-                if exc.reason in {"budget_exceeded", "cancelled", "local_prepare_deadline"}:
+            except (SourceReadError, FiscalMetadataError, ValueError, OSError, CatalogOperationLockedError) as exc:
+                if isinstance(exc, SourceReadError) and exc.reason in {"budget_exceeded", "cancelled", "local_prepare_deadline"}:
                     raise
-                if exc.reason != "local_original_missing":
-                    unresolved.append((exc.status, exc.reason))
+                if not isinstance(exc, SourceReadError) or exc.reason != "local_original_missing":
+                    unresolved.append((getattr(exc, "status", "unavailable" if isinstance(exc, CatalogOperationLockedError) else "blocked"),
+                                       getattr(exc, "reason", getattr(exc, "error_code", "local_fact_validation_failed"))))
             if request.mode != "latest_as_of" and SourceVersionReader(catalog).query_local(request).status == "found":
                 return True
     if unresolved:
@@ -508,11 +524,13 @@ def _prepare_local_source(
     registrations: tuple[SourceRegistrationScope, ...] = (),
     _discovery_done=False,
     _budget=None,
+    _progress=None,
 ) -> dict[str, Any]:
     """Explicit bounded writer composition; source-query stays read only."""
     if not isinstance(request, SourceRequest):
         raise TypeError("request must be SourceRequest")
     budget = _budget or LocalReadBudget(limits or LocalPrepareLimits())
+    progress = _progress or _PreparationProgress()
     if not catalog.config.database_path.exists():
         # Explicit prepare owns a finite writer operation; pure query/open
         # keeps its read-only missing-catalog refusal.
@@ -532,12 +550,16 @@ def _prepare_local_source(
                 identity = SimpleNamespace(canonical_name=request.entity, market=request.market,
                     security_id=request.security_id, ticker=request.security_id, _discovery_only=True,
                     _identity_cache_dir=identity_cache_dir)
-        _discover_source_groups(catalog, identity, budget, request)
+        _discover_source_groups(catalog, identity, budget, request, _progress=progress)
         return _prepare_local_source(catalog, request, identity_cache_dir=identity_cache_dir,
-            limits=limits, _discovery_done=True, _budget=budget)
+            limits=limits, _discovery_done=True, _budget=budget, _progress=progress)
     if query.status == "found" and _discovery_done:
         ref = query.matches[0]
-        reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+        try:
+            reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+        except SourceReadError as exc:
+            return _result(exc.status, exc.reason, blocks=True,
+                operations=progress.operations, diagnostics=progress.diagnostics)
         return _result("ready", "local_source_reconciled", ref=ref)
     claimed_matches = {ref.document_id for ref in query.matches} if query.status == "found" else set()
     if query.status == "found" and not _discovery_done:
@@ -589,7 +611,7 @@ def _prepare_local_source(
                 identity = _identity(catalog, request, identity_cache_dir)
             except (ValueError, SourceReadError):
                 return _result("not_found", "no_registered_local_source")
-            if _discover_source_groups(catalog, identity, budget, request):
+            if _discover_source_groups(catalog, identity, budget, request, _progress=progress):
                 return _prepare_local_source(
                     catalog,
                     request,
@@ -597,16 +619,19 @@ def _prepare_local_source(
                     limits=limits,
                     _discovery_done=True,
                     _budget=budget,
+                    _progress=progress,
                 )
         return _result("not_found", "no_registered_local_source")
-    diagnostics = []
-    operations = []
+    diagnostics = progress.diagnostics
+    operations = progress.operations
     qualified_documents = set()
     targeted = False
     historical = HistoricalCaptureScopes(catalog,budget)
     eligible = []
     known_identity = None
     for candidate in candidates:
+        if candidate["document_id"] in progress.not_relevant_documents:
+            continue
         budget.check()
         from .resolver import _source_metadata
         metadata = _source_metadata(candidate, store=catalog.reader, reader="steady")
@@ -628,9 +653,9 @@ def _prepare_local_source(
             known_identity = known_identity or qualified.identity()
     candidates = eligible
     if not candidates:
-        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget,request):
+        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget,request,_progress=progress):
             return _prepare_local_source(catalog,request,identity_cache_dir=identity_cache_dir,
-                limits=limits,_discovery_done=True,_budget=budget)
+                limits=limits,_discovery_done=True,_budget=budget, _progress=progress)
         return _result("not_found","no_matching_local_period",diagnostics=diagnostics)
     try:
         identity = identity or known_identity or _identity(catalog, request, identity_cache_dir)
@@ -674,6 +699,7 @@ def _prepare_local_source(
                 fact_replay=qualify,
             )
             if operation["status"] == "not_relevant":
+                progress.not_relevant_documents.add(ref.document_id)
                 continue
             facts = observed_facts[0]
             targeted = True
@@ -766,7 +792,7 @@ def _prepare_local_source(
             operations=operations,
             diagnostics=diagnostics,
         )
-    if not _discovery_done and _discover_source_groups(catalog, identity, budget, request):
+    if not _discovery_done and _discover_source_groups(catalog, identity, budget, request, _progress=progress):
         return _prepare_local_source(
             catalog,
             request,
@@ -774,6 +800,7 @@ def _prepare_local_source(
             limits=limits,
             _discovery_done=True,
             _budget=budget,
+            _progress=progress,
         )
     return _result(
         "not_found",
@@ -792,15 +819,28 @@ def prepare_local_source(
     registrations: tuple[SourceRegistrationScope, ...] = (),
 ) -> dict[str, Any]:
     """Return named local outcomes; a failed proof never means permission to fetch."""
+    budget = LocalReadBudget(limits or LocalPrepareLimits())
+    progress = _PreparationProgress()
     try:
-        return _prepare_local_source(
+        result = _prepare_local_source(
             catalog,
             request,
             identity_cache_dir=identity_cache_dir,
             limits=limits,
             registrations=registrations,
+            _budget=budget,
+            _progress=progress,
         )
     except SourceReadError as exc:
-        return _result(exc.status, exc.reason, blocks=True)
+        result = _result(exc.status, exc.reason, blocks=True)
     except CatalogOperationLockedError:
-        return _result("unavailable", "local_reconcile_busy", blocks=True)
+        result = _result("unavailable", "local_reconcile_busy", blocks=True)
+    # The terminal refusal must not erase earlier completed operations or
+    # observations. Retain the existing eight-field wire shape and reasons.
+    for key in ("operations", "diagnostics"):
+        observed = list(getattr(progress, key))
+        observed.extend(item for item in result[key] if item not in observed)
+        result[key] = observed
+    if result["status"] != "ready":
+        result["operations"].append(budget.observation(reason=result["reason"]))
+    return result
