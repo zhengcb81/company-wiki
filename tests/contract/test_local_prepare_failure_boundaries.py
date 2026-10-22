@@ -79,3 +79,43 @@ def test_wrong_declared_old_year_does_not_exclude_actual_requested_original(tmp_
         assert result["download_events"] == 0 and path.read_bytes() == html()
     finally:
         close(cat)
+
+
+def test_real_discovery_completed_write_survives_later_unknown_failure(tmp_path, monkeypatch):
+    """A successful native write survives the next original's scope refusal."""
+    from dataclasses import replace
+    from datetime import datetime, timezone
+    cat = lake(tmp_path)
+    try:
+        folder = cat.config.roots[0].path / "Acme"
+        folder.mkdir()
+        originals = {"a-good.htm": html(),
+                     "z-unknown.htm": b"<html><body>Unresolved actual scope.</body></html>"}
+        for name, data in originals.items():
+            (folder / name).write_bytes(data)
+        observed = []
+        owner = local_reconcile.restore_document_facts
+
+        def capture(*args, **kwargs):
+            operation = owner(*args, **kwargs)
+            observed.append({key: value for key, value in operation.items()
+                             if key not in {"source_ref", "verified_locations"}})
+            return operation
+
+        monkeypatch.setattr(local_reconcile, "restore_document_facts", capture)
+        # Current verified-open eligibility is intentional; no historical
+        # availability is invented when this permanent test runs on a new day.
+        requested = replace(request(), mode="latest_as_of", fiscal_year=None,
+                            fiscal_period=None, form_type=None,
+                            as_of_date=datetime.now(timezone.utc).date().isoformat())
+        result = prepare_local_source(cat, requested)
+        assert result["status"] in {"blocked", "unavailable"} and result["blocks_download"], result
+        completed = [row for row in observed if row["status"] in {"recorded", "restored"}]
+        assert completed and cat.reader.fetchone("SELECT COUNT(*) FROM source_metadata_assertions")[0] >= 1
+        assert all(row in result["operations"] for row in completed), result
+        assert len([row for row in result["operations"] if row.get("operation") == "local_read_budget"]) == 1
+        assert result["download_events"] == 0 and result["source_ref"] is None
+        for name, data in originals.items():
+            assert (folder / name).read_bytes() == data
+    finally:
+        close(cat)

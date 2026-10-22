@@ -46,6 +46,11 @@ class _PreparationProgress:
     # Only actual owner proof in this call may establish non-relevance.
     not_relevant_documents: set[str] = field(default_factory=set)
 
+    def record_operation(self, operation: dict[str, Any]) -> None:
+        """Both intake paths retain the same pathless completed-owner facts."""
+        self.operations.append({key: value for key, value in operation.items()
+                                if key not in {"source_ref", "verified_locations"}})
+
 
 def _result(status, reason, *, ref=None, blocks=False, operations=(), diagnostics=()):
     return {
@@ -419,7 +424,8 @@ def _discover_source_groups(catalog, identity, budget, request, *, _progress=Non
 
     changed = False
     unresolved = []
-    excluded = _progress.not_relevant_documents if _progress is not None else set()
+    progress = _progress or _PreparationProgress()
+    excluded = progress.not_relevant_documents
     names = {identity.canonical_name, identity.ticker, identity.security_id}
 
     def local_path(path, root, *, directory):
@@ -498,6 +504,8 @@ def _discover_source_groups(catalog, identity, budget, request, *, _progress=Non
                                                    budget=budget, fact_replay=prove)
                 if operation["status"] == "not_relevant":
                     excluded.add(ref.document_id)
+                else:
+                    progress.record_operation(operation)
                 changed = True
             except (SourceReadError, FiscalMetadataError, ValueError, OSError, CatalogOperationLockedError) as exc:
                 if isinstance(exc, SourceReadError) and exc.reason in {"budget_exceeded", "cancelled", "local_prepare_deadline"}:
@@ -704,13 +712,7 @@ def _prepare_local_source(
             facts = observed_facts[0]
             targeted = True
             qualified_documents.add(ref.document_id)
-            operations.append(
-                {
-                    key: value
-                    for key, value in operation.items()
-                    if key not in {"source_ref", "verified_locations"}
-                }
-            )
+            progress.record_operation(operation)
             if facts["published_date"] is not None and facts["published_date"] > request.as_of_date:
                 diagnostics.append(
                     {
