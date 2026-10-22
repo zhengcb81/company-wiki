@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-22T22:09:01.132594+00:00",
-  "status": "ACTIVE_FINAL3_PLAN_ACCEPTED_W08_RED_DESIGN",
+  "updated_at": "2026-10-22T22:54:22.726021+00:00",
+  "status": "PAUSED_W08_CANDIDATE_W10_COMPONENT_COMPLETE_W09_PREPARATION",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
   "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
@@ -82,7 +82,7 @@
     "new_downloaded_original_files": 9,
     "new_downloaded_original_bytes": 10342094
   },
-  "next_action": "W08 minimal RED and ownership/version design, freeze new attempt, shared W08-W11 implementation then W12 actual retest/independent quality/evolution.",
+  "next_action": "Repair preserved W08 public-cache/own-parent and generic quantity false positives, independently review before integration; then W09/W10 real adoption, W11/W12 and new companies.",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
@@ -97,12 +97,13 @@
     "issues": 14,
     "roots": 10,
     "packages": {
-      "W08": "READ_ONLY_RED_DESIGN_RUNNING",
-      "W09": "PLANNED",
-      "W10": "PLANNED",
-      "W11": "PLANNED",
-      "W12": "PLANNED"
+      "W08": "PAUSED_INCOMPLETE_CANDIDATE_11502372_NOT_MERGED",
+      "W09": "SOURCE_PREPARATION_ONLY_NEW_FORECAST_OPEN",
+      "W10": "ENGINEERING_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
+      "W11": "NOT_STARTED",
+      "W12": "NOT_STARTED"
     },
-    "business_pass": false
+    "business_pass": false,
+    "current_checkpoint_ref": "../review/r1-w08-candidate-checkpoint-20261022.json"
   }
 }

@@ -2,8 +2,8 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-22",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_GOAL_UPDATED_R1_FINAL3_PLAN_ACCEPTED_W08_RED_DESIGN",
-  "current_authorized_scope": "User explicitly updated and started current mainline audit loop on 2026-10-22; goal active verified via get_goal.",
+  "overall_status": "PAUSED_BY_USER_W08_CANDIDATE_W10_ENGINEERING_COMPLETE_W09_PREPARATION_ONLY",
+  "current_authorized_scope": "User requested current work closeout then pause; no new implementation/company cycle until resume.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -122,7 +122,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "W03_W07_ENGINEERING_LIVE_COMPLETE_W06_FINAL3_FOUR_REVIEWS_FAIL_ROOT_CAUSE_PLAN_RUNNING_HOLDOUTS_OPEN",
+      "status": "PAUSED_W08_CANDIDATE_OPEN_W10_ENGINEERING_COMPLETE_W09_PREPARATION_W11_W12_OPEN",
       "mainline": true
     },
     {
@@ -151,8 +151,8 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Finish W08 minimal RED/fixture/version design, freeze implementation attempt and exact code/install/config; implement W08-W11 by ownership, integrate W12 original-company retest and independent reviews, then fresh HK/US and remaining company-list loop.",
-  "next_step_after_user_resumes": "already_resumed_2026_10_22",
+  "next_step_now": "Finish documentation commit/push, pause native goal; do not start new implementation.",
+  "next_step_after_user_resumes": "Repair preserved W08 public-cache/own-parent and generic quantity false positives, independently review before integration; then W09/W10 real adoption, W11/W12 and new companies.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
@@ -201,8 +201,8 @@
   "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
-  "previous_pause_request": "Superseded by latest user continue request.",
-  "last_updated_at": "2026-10-22T22:09:01.132594+00:00",
+  "previous_pause_request": "Latest user pause after current closeout is authoritative.",
+  "last_updated_at": "2026-10-22T22:56:43.593643+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -218,7 +218,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "FOUR_REVIEWS_FAIL_EXPERT_PLAN_ACCEPTED_W08_RED_DESIGN_STARTED",
+    "status": "FOUR_REVIEWS_FAIL_W08_CANDIDATE_W10_COMPONENT_PASS_W09_PREPARATION_PAUSED",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -306,13 +306,30 @@
     "code_remote": null,
     "publication_commit": "738d99a8cdcf7f33b96e89f4e304b3440e4c5e51",
     "closeout_ref": "review/audit-skill-quality-closeout-20261022.json",
-    "publication_byte_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json"
+    "publication_byte_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json",
+    "current_projection_followup": "review/r1-w10-engineering-closeout-20261022.json",
+    "prior_package_tree_is_historical": true
   },
   "mainline_goal": {
-    "status": "active",
+    "status": "pause_requested_after_publication",
     "objective_file": "MAINLINE_LOOP_GOAL.md",
     "activation_receipt": "review/mainline-goal-activation-20261022.json",
     "native_get_goal_verified": true,
-    "project_budget_preserved": true
+    "project_budget_preserved": true,
+    "pause_request": "手头事情做好可以暂停",
+    "native_pause_to_be_called_after_final_push": true
+  },
+  "r1_final3_current_checkpoint": {
+    "W08": "PAUSED_CANDIDATE_INCOMPLETE_NOT_MERGED_NOT_INSTALLED",
+    "W08_commit": "115023723bb590d9a3600ba253bf99813eb49586",
+    "W08_ref": "review/r1-w08-candidate-checkpoint-20261022.json",
+    "W09": "SOURCE_REOPENED_NEW_FORECAST_NOT_EXECUTED",
+    "W09_ref": "review/r1-w09-preparation-checkpoint-20261022.json",
+    "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
+    "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
+    "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
+    "W11": "NOT_STARTED",
+    "W12": "NOT_STARTED",
+    "business_pass": false
   }
 }

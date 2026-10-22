@@ -1,0 +1,42 @@
+{
+  "schema_version": "r1-pause-safety-check/1",
+  "at": "2026-10-22T22:52:21.592582+00:00",
+  "rf_existing_wip": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl",
+      "baseline_sha256": "dbac0a1ab07ae7b927fef5a0c40e43331707e2959a0e89235837a5a40787aabe",
+      "current_sha256": "dbac0a1ab07ae7b927fef5a0c40e43331707e2959a0e89235837a5a40787aabe",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl",
+      "baseline_sha256": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "current_sha256": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json",
+      "baseline_sha256": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324",
+      "current_sha256": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324",
+      "unchanged": true
+    }
+  ],
+  "source_configuration_and_catalog": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+      "sha256": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+      "current_sha256": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3",
+      "sha256": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c",
+      "current_sha256": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+    }
+  ],
+  "w09_seal_ref": "r1-w09-preparation-checkpoint-20261022.json",
+  "paid_calls_this_followup": 0,
+  "downloads_this_followup": 0,
+  "original_documents_modified": false,
+  "dayu_iqs_modified": false,
+  "scope": "Readonly SHA observations of owned protected paths, not a full disk or cross-repo cleanup claim"
+}

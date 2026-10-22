@@ -411,3 +411,14 @@ Measured quadratic source context: a background package withNmembers called cont
 
 ### R1共因施工接口已固定
 来源hint只排优先级；有限增量登记和源正文资格保留在catalog，重试必须前进而不是先集齐候选后全丢。发布时间与可用时间分离，source owner的真实current verified-open仅证明UTC当日及以后，不伪造publication/HTTP或历史日期；仍沿现source-facts/2.2 receipt，不新建权限或账库。W04移除新实验付费补写，不扩大多operation框架，旧final以真实verify消费结果确定owner；各项真实端到端仍待整合。
+## 2026-10-22 收尾中：W08 / W09 / W10 实施发现
+
+用户要求当前事项收尾后暂停，不启动下一家公司。W08 已进入隔离 TDD 实施，不再只是只读设计：业务候选与财务模板的优先级、原生章节父级缺失、章节解析未纳入既有缓存依赖，分别修共用责任层；完整内容仍未通过，不能用有限测试数量代签。
+
+W09 新 attempt `r1-remediation-02` 已冻结基线并通过真正 capture 经 SourceVersionReader 重开两份原件10页，30371B，0网络/模型/下载/原件复制，配置与目录库SHA不变；旧final3的501件89,049,507B再次逐项匹配。已保存精确恢复要点，未生成新预测输入、经营桥或正式新RF循环，见 `review/r1-w09-preparation-checkpoint-20261022.json`。
+
+W10 作者81项通过未挡住三类结构误判，独审已实证：文档request与actual call归属冲突、acquisition对象冒充prepared/read/use、明确SourceRef版本字段矛盾未诊断。ROOT先新增回归，24项中5次断言失败（3类）真实RED，再修现有join逻辑，24项GREEN。随后delta2独立41/41及完整工程验证通过，组件已提交安装，真实矩阵与业务PASS仍未完成；不新增身份数据库、重复读原件或人工许可。
+
+
+## 2026-10-22 当前收尾后暂停
+W08候选11502372保存独立支线，公开cache/父级与数字标识误判、真实内容partial及独审未完，未并线/安装/推送。850P在类型delta前；最终185P、mypy366/Ruff绿；自有残留Temp已清。W10两轮独审六项缺陷共因根修，delta2真实41/41，完整658项656P/2skip79.153s和17边界P2.92s；71c7762代码/ae13ef7收尾，本地无remote，两安装根39MATCH。W09只完成新attempt基线和原件10页真实capture，旧501封存不变，新研究输入/native RF/真实矩阵均未作。CURRENT_STATUS/JSON、行动计划、交接及implementation-progress已统一，用户要求暂停，下一步先W08失败回归；累计预算不变，0新增模型/下载。

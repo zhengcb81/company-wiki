@@ -1,0 +1,468 @@
+{
+  "schema_version": "w08-read-only-red-design/1",
+  "generated_at_utc": "2026-10-22 22:16:32 UTC",
+  "author_role": "independent W08 read-only test designer",
+  "status": "DESIGN_AND_PURE_FUNCTION_OBSERVATIONS_ONLY",
+  "explicit_non_acceptance": {
+    "pytest_red_executed": false,
+    "test_files_written": false,
+    "implementation_complete": false,
+    "content_accepted": false,
+    "real_original_replay": false,
+    "paid_calls": 0,
+    "provider_network_calls": 0
+  },
+  "authorization": {
+    "initial": "Read W08 and associated current PWF; design only; no source/index/author file changes or paid/network work.",
+    "later_root_authorization": "Write only the new review/w08-red-design-20261022.md and .json; ROOT owns integration/commit.",
+    "written_paths": [
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/w08-red-design-20261022.md",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/w08-red-design-20261022.json"
+    ]
+  },
+  "baseline": {
+    "repository": "C:/Users/郑曾波/Projects/company-wiki",
+    "head": "908ec2c408aad75d1c73a92709577a7d3e7a47d3",
+    "physical_sha256": [
+      {
+        "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "sha256": "aef0aef77f7aadd806f0550118380329518899ed7d6caf6c24a9c01eebff0818"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+        "sha256": "0427084245319b490b9b53873f34b1a4d89989abed783a3588c65c443ec346a9"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "sha256": "2cbba6a68350b8d25ce68a3a6c0dd25f14377cbe7dc0f850b1b8a0cb1e2c332c"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_reading.py",
+        "sha256": "828bc058b527e466c69ec5c9c0d49ff6595b789c40e68ae7680283de9031955b"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_budget.py",
+        "sha256": "44d2a739f4a1db6efcf0aa7fc33bb2227537b03f2659ec430c8220c838ca75b8"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/decision_inventory.py",
+        "sha256": "b242b1f9cc645d01740afc87d328c772ab47e1365e4fb45948baded41f0f672b"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/source_cards.py",
+        "sha256": "17a831002d74e69b906dea029b5f19f51ffd9d61cea98a63a8c8cc6ee5725eb5"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_model_extractive.py",
+        "sha256": "647ee03bba8414a0f7e4ff270068adf21eab8d775b4c99895bcf2c8379e2854b"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_generation.py",
+        "sha256": "043a4d11303d751fb019a1fdac8b83d8c0321597ea5bfc40cce69fa8ca2fc531"
+      },
+      {
+        "path": "config/source_catalog.yaml",
+        "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+      }
+    ],
+    "versions": {
+      "selector": "0.9.0",
+      "business_policy": "reading-business-policy/9",
+      "budget": "reading_plan/3",
+      "max_reading_chars": 48000,
+      "model_projection": "reading-model-input/5"
+    },
+    "hash_scope_note": "Hashes captured after pure probes and before writing the two reports. No prior whole-tree/raw/config snapshot was taken by this designer; do not infer one from this sample."
+  },
+  "read_inputs": [
+    "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+    "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/task_plan.md",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/findings.md",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/work_packages/W08.md",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/diagnosis/r1-final3-review-20261022/root_causes.json (F3-RC01/02 scoped extraction)",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-01/storage-source-inventory/B/claim-semantic-review.json (t3,t4,t5,t6,t16,t17,t56 scoped extraction)",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-01/storage-source-inventory/B/public-bundle.json (keys,t17-source,t3-source only)"
+  ],
+  "findings": [
+    "Keep source fact value recognition, prose numeric header/unit bypass, and own business ancestor context as three distinct assertions.",
+    "The synthetic one-span counterexample demonstrates wrong input value metadata reaching the bounded planner; it does not yet justify changing planner code or budgets.",
+    "Named segment detector tests protect business composition, not production ancestor context. Preserve existing financial-total negatives.",
+    "The existing table fixture starts as operating_table and therefore alone cannot expose prose bypass. Exercise its declared context through a background seam and later verify the real native route.",
+    "Current code reproduces from the diagnosis source hashes despite a newer repository HEAD. Do not re-sign the frozen generation; its 8-in/8-out selection difference remains unresolved history."
+  ],
+  "minimal_red_plan": [
+    {
+      "id": "T08-A",
+      "name": "operating_quantity_relations_are_source_facts_before_bounded_ranking",
+      "suggested_files": [
+        "tests/unit/document_understanding_selection/test_reading_semantic_value.py"
+      ],
+      "fixture": "test_reading_native_carriers.source_fixture / selected",
+      "cases": [
+        "revenue_project_stage",
+        "capacity_stock",
+        "customers_molecules"
+      ],
+      "assertions": [
+        "One real source-owned quantitative business relation is not merely a section description; preserve its source IDs, native ranges, numeric units and qualifiers.",
+        "With equal priorities and a one-span cap, a routine derecognition policy cannot outrank a real operating relation; reverse source order as a counterexample.",
+        "Assert semantic eligibility/value_band and selected source scope, not an exact score, exact number of selected spans, fixed recall rate or a newly chosen reason string."
+      ],
+      "observed_current_failure": "Three operating examples are eligible=false, purpose=unknown, score=0, description. The accounting template is eligible=true, unknown, score=3, operating_restriction, meaningful_fact; the one-span pair selects the template.",
+      "pytest_status": "NOT_WRITTEN_NOT_RUN"
+    },
+    {
+      "id": "T08-B",
+      "name": "accounting_purpose_negative_and_mixed_note_positive",
+      "suggested_files": [
+        "tests/unit/document_understanding_selection/test_reading_semantic_value.py",
+        "tests/unit/document_understanding_selection/test_reading_table_admission.py"
+      ],
+      "fixture": "source_fixture for prose; test_reading_table_admission.fixture for typed rows",
+      "assertions": [
+        "Routine financial-liability derecognition policy produces zero operating anchors without being called unread or needing a model.",
+        "A separate actual production/acquisition/capacity business clause inside a financial note remains eligible with its qualifiers; do not reject an entire note/chapter.",
+        "Retain existing financial_totals_are_not_business_composition and accounting-table negative assertions."
+      ],
+      "pytest_status": "NOT_WRITTEN_NOT_RUN"
+    },
+    {
+      "id": "T08-C",
+      "name": "numeric_background_route_preserves_source_owned_header_unit_period_note_or_stays_unresolved",
+      "suggested_files": [
+        "tests/unit/document_understanding_selection/test_reading_table_admission.py",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py"
+      ],
+      "fixture": "test_reading_table_admission.fixture; existing table_rows/multiline_tables controls",
+      "assertions": [
+        "For the same declared original header/body/note dependency, the row's own required/context partition survives background expansion; package kind alone cannot erase genuine context.",
+        "Carry valid period/currency/unit/qualifier references through finalize -> groups/citation_views -> formal select/bundle/model material, without adding them to support as if they asserted the body.",
+        "Change units/currency, remove a header, or reuse a page-local table ID across a page boundary without physical continuity proof: interpretation changes or existing unresolved/deferred/quality observations remain honest; do not borrow another table's header.",
+        "Do not require a naked numeric row to become operating_table when source binding cannot prove a table. Existing table_structure_ambiguous/source-card deferral can express failure without invented columns."
+      ],
+      "observed_current_failure": "Changing only the existing fixture's package kind operating_table -> background removes required original indices [0,2], admits the row as description with [], and returns complete=true. This is a synthetic package seam, not a real parser replay.",
+      "unresolved_design_boundary": "Actual frozen numeric rows were background/native_continuity; no real-source native_continuity RED was executed here. Do not count a forced kind fixture as proof that the actual upstream route is fixed.",
+      "pytest_status": "NOT_WRITTEN_NOT_RUN"
+    },
+    {
+      "id": "T08-D",
+      "name": "own_business_ancestor_is_preserved_without_cross_subject_borrowing_or_text_dedup",
+      "suggested_files": [
+        "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py"
+      ],
+      "fixture": "test_reading_native_carriers.source_fixture with two explicit parent_id branches and distinct original IDs",
+      "assertions": [
+        "Given true source section parent_id edges, each repeated >30% body cites its own business parent, never its sibling's parent; keep both original locators despite identical text.",
+        "Swap business order, insert an unrelated actor, remove one parent, and vary source parent: no nearest-text fallback, no guessed business, no cross-original context.",
+        "If a real parser did not declare a business parent, first prove the available native structural relationship; existing unknown/unresolved/partial is acceptable when real structure cannot close."
+      ],
+      "observed_current_failure": "Two anchors at original indices 2 and 4 have required_original_indices=[] even though parent_id explicitly links each leaf to its different business heading.",
+      "unresolved_design_boundary": "This proves missing ancestor inheritance for an explicit synthetic tree. It does not prove that the original p14 lost parent is already represented by such a tree; a real upstream structure check is still required.",
+      "pytest_status": "NOT_WRITTEN_NOT_RUN"
+    },
+    {
+      "id": "T08-E",
+      "name": "actual_changed_dependencies_miss_old_cache_and_new_public_material_is_bound",
+      "suggested_files": [
+        "tests/unit/document_understanding_selection/test_reading_decision_inventory.py"
+      ],
+      "reuse_existing_tests": [
+        "tests/unit/test_narrative_reading_transport.py",
+        "tests/unit/test_narrative_reading_generation_store.py",
+        "tests/unit/test_narrative_reading_projection_generation.py",
+        "tests/integration/test_shared_reading_production_e2e.py"
+      ],
+      "assertions": [
+        "Freeze a complete real decision trace; current code is same. Alter only each actually changed module in a tmp source-file seam and compare using real freeze/compare -> changed; missing/partial dependencies remain miss.",
+        "An old complete candidate fails current_reading_decision_matches before original/model IO; corrected current complete material remains reusable.",
+        "Support/context changes affect reading_material_sha256, final selection_generation and actual model input SHA; SourceRef/original identity and old bundle bytes stay fixed.",
+        "Legacy omitted context and selector 0.8 behavior remain frozen. Existing model-input/5 and AUTO store are reused."
+      ],
+      "pytest_status": "NOT_WRITTEN_NOT_RUN"
+    }
+  ],
+  "expected_file_boundary": {
+    "primary_source": [
+      "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "src/company_wiki/source_catalog/narrative_reading.py"
+    ],
+    "conditional_source": [
+      "src/company_wiki/source_catalog/narrative_operating_relations.py only if the actual SourceOperatingSession ownership/projection seam requires it",
+      "Existing native section/table producer only after real upstream structure evidence",
+      "src/company_wiki/document_understanding/source_cards.py only if existing public context/quality observations cannot honestly express unresolved material"
+    ],
+    "do_not_change_initially": [
+      "src/company_wiki/source_catalog/narrative_budget.py: first correct fact/context metadata and test the unchanged planner",
+      "narrative-model-input/5 protocol, AUTO/cache stores, public DTO schemas: no demonstrated gap yet"
+    ],
+    "skill_card_correction": "SourceOperatingSession.fact is actually in narrative_operating_relations.py:220 (the current physical source places it around222), not narrative_reading.py. ROOT should explicitly include the existing owner file if a change is needed.",
+    "prohibited": [
+      "production config/raw/catalog",
+      "sealed runs/reports",
+      "RF/audit author inputs/research state",
+      "Dayu/IQS",
+      "other owner WIP",
+      "index or git index"
+    ]
+  },
+  "public_version_and_cache": {
+    "current": {
+      "selector": "0.9.0",
+      "business_policy": "reading-business-policy/9",
+      "budget": "reading_plan/3",
+      "max_reading_chars": 48000,
+      "model_projection": "reading-model-input/5"
+    },
+    "required": [
+      "Semantic admission changes should advance the existing READING_BUSINESS_POLICY_VERSION and retain the current business_algorithms digest over actual changed source bytes.",
+      "decision_inventory._versions already hashes business_policy, source_purpose, operating_relations, narrative_reading, finalize and existing relation grammar/matching dependencies; test real changed closure, not only a bumped label.",
+      "If native section/table producer changes outside that hash closure, advance/bind its actual existing feature identity and prove current_decision_trace differs. Do not add a second version registry.",
+      "select/finalize already freezes evidence/material/policy/decision hashes; verify changed support/context material yields a new final generation and old cache misses.",
+      "If source_cards changes, extractive_boundary_identity already hashes source_cards and summary_tasks; verify the actual decoder dependency SHA changes.",
+      "Do not arbitrarily introduce selector0.9.1: execution code has exact0.9.0 dispatch checks. Keep0.8 default decision with ROOT and bind the real changed behavior using existing dependency machinery unless ROOT freezes a broader selector-version migration.",
+      "No model projection/prompt bump is required merely because source selection changes. If instructions/schema/decoder actually change, bind the real corresponding identity."
+    ],
+    "selected_reusable_paths": [
+      "src/company_wiki/document_understanding/decision_inventory.py:_versions",
+      "src/company_wiki/automation/narrative_generation.py:find_reuse_pin/current_reading_decision_matches",
+      "src/company_wiki/automation/narrative_selection_generation.py:reading_material_sha256",
+      "src/company_wiki/automation/narrative_model_extractive.py:extractive_boundary_identity"
+    ]
+  },
+  "probes": [
+    {
+      "id": "P02-stable-ascii",
+      "status": "EXECUTED_PURE_FUNCTIONS_NOT_PYTEST",
+      "inputs": {
+        "cases": {
+          "revenue_project_stage": "研发制造服务本期实现收入126.4亿元，同比增长18.6%；本期新增项目560个，期末项目总数2480个，其中临床后期项目64个。",
+          "capacity_stock": "截至报告期末，公司反应釜总容积达到2400kL。",
+          "customers_molecules": "公司的专门服务业务本期客户数为172家，分子项目数量为2390个。",
+          "derecognition_template": "当金融负债的现时义务全部或部分已经解除时，公司终止确认该金融负债或已解除义务部分。"
+        },
+        "own_scope": [
+          "（一）检测服务",
+          "新产品收入占比超过30%。",
+          "（二）技术服务",
+          "新产品收入占比超过30%。"
+        ]
+      },
+      "command": "@'\nimport sys, json\nsys.path[:0] = ['src', 'tests']\nfrom unit.document_understanding_selection.test_reading_native_carriers import source_fixture, selected\nfrom company_wiki.source_catalog import narrative_reading as reading\ninputs=json.loads(r'''{\"cases\":{\"revenue_project_stage\":\"\\u7814\\u53d1\\u5236\\u9020\\u670d\\u52a1\\u672c\\u671f\\u5b9e\\u73b0\\u6536\\u5165126.4\\u4ebf\\u5143\\uff0c\\u540c\\u6bd4\\u589e\\u957f18.6%\\uff1b\\u672c\\u671f\\u65b0\\u589e\\u9879\\u76ee560\\u4e2a\\uff0c\\u671f\\u672b\\u9879\\u76ee\\u603b\\u65702480\\u4e2a\\uff0c\\u5176\\u4e2d\\u4e34\\u5e8a\\u540e\\u671f\\u9879\\u76ee64\\u4e2a\\u3002\",\"capacity_stock\":\"\\u622a\\u81f3\\u62a5\\u544a\\u671f\\u672b\\uff0c\\u516c\\u53f8\\u53cd\\u5e94\\u91dc\\u603b\\u5bb9\\u79ef\\u8fbe\\u52302400kL\\u3002\",\"customers_molecules\":\"\\u516c\\u53f8\\u7684\\u4e13\\u95e8\\u670d\\u52a1\\u4e1a\\u52a1\\u672c\\u671f\\u5ba2\\u6237\\u6570\\u4e3a172\\u5bb6\\uff0c\\u5206\\u5b50\\u9879\\u76ee\\u6570\\u91cf\\u4e3a2390\\u4e2a\\u3002\",\"derecognition_template\":\"\\u5f53\\u91d1\\u878d\\u8d1f\\u503a\\u7684\\u73b0\\u65f6\\u4e49\\u52a1\\u5168\\u90e8\\u6216\\u90e8\\u5206\\u5df2\\u7ecf\\u89e3\\u9664\\u65f6\\uff0c\\u516c\\u53f8\\u7ec8\\u6b62\\u786e\\u8ba4\\u8be5\\u91d1\\u878d\\u8d1f\\u503a\\u6216\\u5df2\\u89e3\\u9664\\u4e49\\u52a1\\u90e8\\u5206\\u3002\"},\"own_scope\":[\"\\uff08\\u4e00\\uff09\\u68c0\\u6d4b\\u670d\\u52a1\",\"\\u65b0\\u4ea7\\u54c1\\u6536\\u5165\\u5360\\u6bd4\\u8d85\\u8fc730%\\u3002\",\"\\uff08\\u4e8c\\uff09\\u6280\\u672f\\u670d\\u52a1\",\"\\u65b0\\u4ea7\\u54c1\\u6536\\u5165\\u5360\\u6bd4\\u8d85\\u8fc730%\\u3002\"]}''')\nfor label,text in inputs['cases'].items():\n parsed,pipeline=source_fixture([(text,)])\n state={}\n candidates,meta,packages,complete,withheld=reading._candidates(parsed,pipeline,_session_state=state)\n session=state['session']\n print(json.dumps({'case':label,'input':text,'facts':[{'eligible':f.eligible,'purpose':f.purpose,'score':f.score,'reasons':f.reasons} for f in session.facts.values()],'candidates':[{'score':c.score,'value_band':meta[c.unit.unit_id]['value_band']} for c in candidates],'complete':complete,'withheld':[w['reason'] for w in withheld]},ensure_ascii=True))\npositive=inputs['cases']['revenue_project_stage']\npolicy=inputs['cases']['derecognition_template']\nparsed,pipeline=source_fixture([(positive,),(policy,)])\ncandidates,metadata,packages,complete,withheld=reading._candidates(parsed,pipeline)\nchosen=selected(parsed,pipeline,candidates,metadata,limit=1)\nprint(json.dumps({'case':'equal_priority_one_span','selected_case_labels':['positive' if s.raw_text==positive else 'accounting_template' if s.raw_text==policy else 'unexpected' for s in chosen.evidence_spans],'selection_diagnostics':chosen.selection_diagnostics},ensure_ascii=True))\nparsed,pipeline=source_fixture([(text,) for text in inputs['own_scope']],heading=True)\nids=[u.unit_id for u in parsed.units]\nfor i in (1,3): pipeline['observation']['units'][i]['kind']='heading'\npipeline['structure']['sections']=[\n {'section_id':'root','parent_id':None,'heading_unit_ids':[ids[0]],'body_unit_ids':[]},\n {'section_id':'scope-a','parent_id':'root','heading_unit_ids':[ids[1]],'body_unit_ids':[]},\n {'section_id':'leaf-a','parent_id':'scope-a','heading_unit_ids':[],'body_unit_ids':[ids[2]]},\n {'section_id':'scope-b','parent_id':'root','heading_unit_ids':[ids[3]],'body_unit_ids':[]},\n {'section_id':'leaf-b','parent_id':'scope-b','heading_unit_ids':[],'body_unit_ids':[ids[4]]},\n]\ncandidates,metadata,packages,complete,withheld=reading._candidates(parsed,pipeline)\nprint(json.dumps({'case':'explicit_ancestor_business_scope','input_texts':[u.raw_text for u in parsed.units],'anchors':[{'original_index':ids.index(c.unit.unit_id),'required_original_indices':[ids.index(x) for x in metadata[c.unit.unit_id]['required']]} for c in candidates if not metadata[c.unit.unit_id]['context_only']],'complete':complete,'withheld':[w['reason'] for w in withheld]},ensure_ascii=True))\n'@ | & '.\\.venv\\Scripts\\python.exe' -B -",
+      "exit_code": 0,
+      "stdout_raw": "{\"case\": \"revenue_project_stage\", \"input\": \"\\u7814\\u53d1\\u5236\\u9020\\u670d\\u52a1\\u672c\\u671f\\u5b9e\\u73b0\\u6536\\u5165126.4\\u4ebf\\u5143\\uff0c\\u540c\\u6bd4\\u589e\\u957f18.6%\\uff1b\\u672c\\u671f\\u65b0\\u589e\\u9879\\u76ee560\\u4e2a\\uff0c\\u671f\\u672b\\u9879\\u76ee\\u603b\\u65702480\\u4e2a\\uff0c\\u5176\\u4e2d\\u4e34\\u5e8a\\u540e\\u671f\\u9879\\u76ee64\\u4e2a\\u3002\", \"facts\": [{\"eligible\": false, \"purpose\": \"unknown\", \"score\": 0, \"reasons\": []}], \"candidates\": [{\"score\": 0, \"value_band\": \"description\"}], \"complete\": true, \"withheld\": []}\r\n{\"case\": \"capacity_stock\", \"input\": \"\\u622a\\u81f3\\u62a5\\u544a\\u671f\\u672b\\uff0c\\u516c\\u53f8\\u53cd\\u5e94\\u91dc\\u603b\\u5bb9\\u79ef\\u8fbe\\u52302400kL\\u3002\", \"facts\": [{\"eligible\": false, \"purpose\": \"unknown\", \"score\": 0, \"reasons\": []}], \"candidates\": [{\"score\": 0, \"value_band\": \"description\"}], \"complete\": true, \"withheld\": []}\r\n{\"case\": \"customers_molecules\", \"input\": \"\\u516c\\u53f8\\u7684\\u4e13\\u95e8\\u670d\\u52a1\\u4e1a\\u52a1\\u672c\\u671f\\u5ba2\\u6237\\u6570\\u4e3a172\\u5bb6\\uff0c\\u5206\\u5b50\\u9879\\u76ee\\u6570\\u91cf\\u4e3a2390\\u4e2a\\u3002\", \"facts\": [{\"eligible\": false, \"purpose\": \"unknown\", \"score\": 0, \"reasons\": []}], \"candidates\": [{\"score\": 0, \"value_band\": \"description\"}], \"complete\": true, \"withheld\": []}\r\n{\"case\": \"derecognition_template\", \"input\": \"\\u5f53\\u91d1\\u878d\\u8d1f\\u503a\\u7684\\u73b0\\u65f6\\u4e49\\u52a1\\u5168\\u90e8\\u6216\\u90e8\\u5206\\u5df2\\u7ecf\\u89e3\\u9664\\u65f6\\uff0c\\u516c\\u53f8\\u7ec8\\u6b62\\u786e\\u8ba4\\u8be5\\u91d1\\u878d\\u8d1f\\u503a\\u6216\\u5df2\\u89e3\\u9664\\u4e49\\u52a1\\u90e8\\u5206\\u3002\", \"facts\": [{\"eligible\": true, \"purpose\": \"unknown\", \"score\": 3, \"reasons\": [\"operating_restriction\"]}], \"candidates\": [{\"score\": 3, \"value_band\": \"meaningful_fact\"}], \"complete\": true, \"withheld\": []}\r\n{\"case\": \"equal_priority_one_span\", \"selected_case_labels\": [\"accounting_template\"], \"selection_diagnostics\": [{\"code\": \"budget_full\", \"count\": 1}]}\r\n{\"case\": \"explicit_ancestor_business_scope\", \"input_texts\": [\"\\u4e1a\\u52a1\\u8fdb\\u5c55\", \"\\uff08\\u4e00\\uff09\\u68c0\\u6d4b\\u670d\\u52a1\", \"\\u65b0\\u4ea7\\u54c1\\u6536\\u5165\\u5360\\u6bd4\\u8d85\\u8fc730%\\u3002\", \"\\uff08\\u4e8c\\uff09\\u6280\\u672f\\u670d\\u52a1\", \"\\u65b0\\u4ea7\\u54c1\\u6536\\u5165\\u5360\\u6bd4\\u8d85\\u8fc730%\\u3002\"], \"anchors\": [{\"original_index\": 2, \"required_original_indices\": []}, {\"original_index\": 4, \"required_original_indices\": []}], \"complete\": true, \"withheld\": []}\r\n",
+      "observations": [
+        {
+          "case": "revenue_project_stage",
+          "input": "研发制造服务本期实现收入126.4亿元，同比增长18.6%；本期新增项目560个，期末项目总数2480个，其中临床后期项目64个。",
+          "facts": [
+            {
+              "eligible": false,
+              "purpose": "unknown",
+              "score": 0,
+              "reasons": []
+            }
+          ],
+          "candidates": [
+            {
+              "score": 0,
+              "value_band": "description"
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        },
+        {
+          "case": "capacity_stock",
+          "input": "截至报告期末，公司反应釜总容积达到2400kL。",
+          "facts": [
+            {
+              "eligible": false,
+              "purpose": "unknown",
+              "score": 0,
+              "reasons": []
+            }
+          ],
+          "candidates": [
+            {
+              "score": 0,
+              "value_band": "description"
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        },
+        {
+          "case": "customers_molecules",
+          "input": "公司的专门服务业务本期客户数为172家，分子项目数量为2390个。",
+          "facts": [
+            {
+              "eligible": false,
+              "purpose": "unknown",
+              "score": 0,
+              "reasons": []
+            }
+          ],
+          "candidates": [
+            {
+              "score": 0,
+              "value_band": "description"
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        },
+        {
+          "case": "derecognition_template",
+          "input": "当金融负债的现时义务全部或部分已经解除时，公司终止确认该金融负债或已解除义务部分。",
+          "facts": [
+            {
+              "eligible": true,
+              "purpose": "unknown",
+              "score": 3,
+              "reasons": [
+                "operating_restriction"
+              ]
+            }
+          ],
+          "candidates": [
+            {
+              "score": 3,
+              "value_band": "meaningful_fact"
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        },
+        {
+          "case": "equal_priority_one_span",
+          "selected_case_labels": [
+            "accounting_template"
+          ],
+          "selection_diagnostics": [
+            {
+              "code": "budget_full",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "case": "explicit_ancestor_business_scope",
+          "input_texts": [
+            "业务进展",
+            "（一）检测服务",
+            "新产品收入占比超过30%。",
+            "（二）技术服务",
+            "新产品收入占比超过30%。"
+          ],
+          "anchors": [
+            {
+              "original_index": 2,
+              "required_original_indices": []
+            },
+            {
+              "original_index": 4,
+              "required_original_indices": []
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        }
+      ]
+    },
+    {
+      "id": "P03-typed-table-route",
+      "status": "EXECUTED_PURE_FUNCTIONS_NOT_PYTEST",
+      "inputs": {
+        "header": "在手订单数量 | 截至2026年6月末 | 套",
+        "rows": [
+          "设备甲 | 45"
+        ],
+        "note": "注：统计不包含尚未交付的试用订单。"
+      },
+      "command": "@'\nimport sys,json\nfrom copy import deepcopy\nsys.path[:0]=['src','tests']\nfrom unit.document_understanding_selection.test_reading_table_admission import fixture\nfrom company_wiki.source_catalog import narrative_reading as reading\ninputs=json.loads(r'''{\"header\":\"\\u5728\\u624b\\u8ba2\\u5355\\u6570\\u91cf | \\u622a\\u81f32026\\u5e746\\u6708\\u672b | \\u5957\",\"rows\":[\"\\u8bbe\\u5907\\u7532 | 45\"],\"note\":\"\\u6ce8\\uff1a\\u7edf\\u8ba1\\u4e0d\\u5305\\u542b\\u5c1a\\u672a\\u4ea4\\u4ed8\\u7684\\u8bd5\\u7528\\u8ba2\\u5355\\u3002\"}''')\nfor kind in ('operating_table','background'):\n parsed,pipeline=fixture(inputs['header'],inputs['rows'],note=inputs['note'])\n ids=[u.unit_id for u in parsed.units]\n pipeline['packages']['packages'][0]['kind']=kind\n for profile in pipeline['reading_plan']['unit_profiles'].values(): profile['section_role']='business'\n candidates,metadata,packages,complete,withheld=reading._candidates(parsed,pipeline)\n row=ids[1]\n print(json.dumps({'case':'typed_table_kind_route','kind':kind,'row_admitted':row in metadata and not metadata[row]['context_only'],'row_value_band':metadata.get(row,{}).get('value_band'),'row_required_original_indices':[ids.index(uid) for uid in metadata.get(row,{}).get('required',())],'eligible_packages':[{'kind':p['kind'],'members':[ids.index(uid) for uid in p['member_unit_ids']],'required':[ids.index(uid) for uid in p.get('required_context_unit_ids',())]} for p in packages],'complete':complete,'withheld':[w['reason'] for w in withheld]},ensure_ascii=True))\n'@ | & '.\\.venv\\Scripts\\python.exe' -B -",
+      "exit_code": 0,
+      "stdout_raw": "{\"case\": \"typed_table_kind_route\", \"kind\": \"operating_table\", \"row_admitted\": true, \"row_value_band\": \"meaningful_fact\", \"row_required_original_indices\": [0, 2], \"eligible_packages\": [{\"kind\": \"operating_table\", \"members\": [0, 1, 2], \"required\": [0, 2]}], \"complete\": true, \"withheld\": []}\r\n{\"case\": \"typed_table_kind_route\", \"kind\": \"background\", \"row_admitted\": true, \"row_value_band\": \"description\", \"row_required_original_indices\": [], \"eligible_packages\": [{\"kind\": \"background\", \"members\": [0], \"required\": []}, {\"kind\": \"background\", \"members\": [1], \"required\": []}, {\"kind\": \"background\", \"members\": [2], \"required\": []}], \"complete\": true, \"withheld\": []}\r\n",
+      "observations": [
+        {
+          "case": "typed_table_kind_route",
+          "kind": "operating_table",
+          "row_admitted": true,
+          "row_value_band": "meaningful_fact",
+          "row_required_original_indices": [
+            0,
+            2
+          ],
+          "eligible_packages": [
+            {
+              "kind": "operating_table",
+              "members": [
+                0,
+                1,
+                2
+              ],
+              "required": [
+                0,
+                2
+              ]
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        },
+        {
+          "case": "typed_table_kind_route",
+          "kind": "background",
+          "row_admitted": true,
+          "row_value_band": "description",
+          "row_required_original_indices": [],
+          "eligible_packages": [
+            {
+              "kind": "background",
+              "members": [
+                0
+              ],
+              "required": []
+            },
+            {
+              "kind": "background",
+              "members": [
+                1
+              ],
+              "required": []
+            },
+            {
+              "kind": "background",
+              "members": [
+                2
+              ],
+              "required": []
+            }
+          ],
+          "complete": true,
+          "withheld": []
+        }
+      ]
+    }
+  ],
+  "preliminary_probe_note": "Two exploratory commands preceded P02: a four-case classifier print and a pair/ancestor print. The latter's non-ASCII text echo was mojibake at the terminal. P02 re-ran the inputs with an ASCII-only shell program and ensure_ascii=True, included the exact input in stdout, and reproduced the classifications/pair/ancestor result. The garbled text echo is not relied upon as evidence.",
+  "unexamined_scope": [
+    "No pytest command was run, no test authored, no implementation changed, and no engineering/content acceptance is claimed.",
+    "No original PDF/HTML opened or parsed, no SourceVersionReader replay, no full real target->carrier->purpose->plan trace, and no assertion that the frozen 1413-candidate generation is exactly replayed.",
+    "No actual source-native numeric continuity route was re-produced; the background table and explicit section tree probes are declared synthetic package/structure seams.",
+    "No existing MSFT HTML original was located and opened. Literal searches found transcript/saved test snippets, which do not establish the W08 real HTML control. The broader companies/raw lake was not enumerated.",
+    "The actual p14 business-parent representation has not been inspected in current parser structure; determine whether the defect is missing native declaration or missing inherited projection before choosing a source file.",
+    "No exhaustive 646-page semantic read, source inventory, raw/config before-after full census, RF consumer execution, lifecycle/cache recovery rerun, paid summary, network/provider request, fresh holdout, or full suite."
+  ],
+  "proposed_execution_after_root_m1": [
+    "Freeze actual implementation HEAD/owned attempt and test tmp boundary; preserve old evidence and source identities.",
+    "Author only the minimal scoped tests; first run them unchanged against the frozen old code and preserve full JUnit/stdout as actual RED.",
+    "Correct shared source fact/context responsibility; rerun the affected tests and type/lint gates justified by changed files; keep the original budget and negative assertions.",
+    "Use the same verified source SHA for a bounded offline full target route replay; preserve the blind target denominator and unknown/deferred reasons.",
+    "Verify at least one existing different company/format with a verified original before any real-generation claim.",
+    "At M2 share one planned paid run/public consumption/cache check with W12 and the existing W07 controller; no extra paid repair experiments."
+  ]
+}
+

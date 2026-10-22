@@ -1,0 +1,31 @@
+{
+  "schema_version": "w09-source-preparation-checkpoint/1",
+  "at": "2026-10-22T22:39:10.974145+00:00",
+  "status": "PREPARATION_COMPLETE_RESEARCH_REPAIR_NOT_IMPLEMENTED",
+  "attempt_id": "r1-remediation-02",
+  "run_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
+  "role_checkpoint": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\pause-checkpoint.md",
+  "page_inventory": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\verified-source-pages.json",
+    "sha256": "66dced5bfbe7c5b6f206e62252a8f9dfca86d03b4e17293cb053b2a076537e7a",
+    "bytes": 30371,
+    "sources": 2,
+    "physical_pages": 10
+  },
+  "capture_id": "00de11d34cb746d3a4bacb35b904d90c",
+  "capture_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\roles\\executor\\commands\\00de11d34cb746d3a4bacb35b904d90c",
+  "protected_config_and_catalog_before_equals_after": true,
+  "sealed_final3": {
+    "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+    "files_checked": 501,
+    "bytes_checked": 89049507,
+    "mismatches": []
+  },
+  "new_model_calls": 0,
+  "new_network_calls": 0,
+  "new_downloads": 0,
+  "new_raw_copies": 0,
+  "business_pass": false,
+  "native_rf_new_attempt_executed": false,
+  "remaining": "precise claim binding; RPO/guidance roles; component operating bridge; new RF native execution; W08/W10 adoption; W11; W12 independent reviews"
+}

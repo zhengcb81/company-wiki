@@ -1,0 +1,34 @@
+{
+  "schema_version": "w08-paused-candidate-root-checkpoint/1",
+  "at": "2026-10-22T22:54:22.726021+00:00",
+  "status": "PAUSED_CANDIDATE_INCOMPLETE_NOT_MERGED_NOT_INSTALLED",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+  "branch": "codex/r1-final3-source-semantics",
+  "candidate_commit": "115023723bb590d9a3600ba253bf99813eb49586",
+  "candidate_commit_normal_hooks": "PASS",
+  "pushed": false,
+  "published_to_main": false,
+  "handoff_path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\handoff.json",
+  "handoff_sha256": "e5462d071252ad4ec6080cf54fcc9f6f276393d2c32aa120db8dcc73e95dd98e",
+  "engineering": {
+    "combined_passed_before_typing_only_delta": 850,
+    "combined_seconds": 33.74,
+    "after_typing_affected_passed": 185,
+    "mypy_src_files": 366,
+    "mypy_errors": 0,
+    "ruff": "PASS"
+  },
+  "open": [
+    "Public cache regression: original target context count0; stronger delivery fixture also lacks own business parent",
+    "Digit identifiers falsely promoted as quantity facts; legitimate increased-to revenue recall missing in finite probe",
+    "Real same-source selection partial, both30% facts not selected",
+    "Whole W08 independent review and full content acceptance incomplete"
+  ],
+  "byte_map": "r1-w08-candidate-byte-map-20261022.json",
+  "raw_test_source_to_git_only_crlf_normalization": true,
+  "cleanup_all_three_owned_paths_removed": true,
+  "new_provider_calls": 0,
+  "new_paid_calls": 0,
+  "business_pass": false,
+  "next": "Repair exact public/cache/own-parent regression and generic fact eligibility, then independent large-node review before any integration or release."
+}

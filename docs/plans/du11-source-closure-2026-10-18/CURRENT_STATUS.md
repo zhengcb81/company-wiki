@@ -1,24 +1,28 @@
 # 当前项目状态与接手入口
 
-**目标已更新并启动（2026-10-22）：** 原生目标回读为active，正文见[当前主线循环目标](MAINLINE_LOOP_GOAL.md)，[启动收据](review/mainline-goal-activation-20261022.json)。四审后的独立方案已交付并经ROOT实核14/14完整问题键、10根因、11份计划工件SHA，见[接收记录](review/r1-final3-plan-root-reception-20261022.json)。当前进入W08只读RED设计，W08–W12尚未完成实施/验收；接收计划不是业务PASS。累计费用与未完责任不重置。
+**用户要求当前事项收尾后暂停（2026-10-22）。** 本轮工程与交接收尾已保存；不再启动公司、模型调用或新实施。原生目标在最终提交推送结束后执行暂停，未宣称整体计划完成。恢复只从本页与[交接文档](HANDOFF-2026-10-22.md)继续。
 
-更新日期：2026-10-22。**这是本项目 PWF 当前状态、剩余任务和下一步的唯一入口。**
-
-总计划：`document-understanding-2026-10-13`；当前子计划：`du11-source-closure-2026-10-18`，均位于 `docs/plans/`。机器可读状态见 [CURRENT_STATUS.json](CURRENT_STATUS.json)。历史计划、交接、审查和运行收据保留发生时的结论；其中“当前”“Next Step”“待推送”不能覆盖本页。
+更新日期：2026-10-22。**这是本项目 PWF 当前状态、剩余任务和下一步的唯一入口。** 总计划`document-understanding-2026-10-13`，当前子计划`du11-source-closure-2026-10-18`，根`docs/plans`；机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)。历史Next Step不覆盖本页。
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；已封存final3和完整15步/30次capture；ROOT实核501文件89,049,507B全匹配，四路独审已全部封存FAIL，共14个finding出现（不能相加当不同根因）；包括业务漏选/上下文、业务摘录错配、矩阵旧状态及独立量级/资料限制。独立专家共因PWF已ROOT接收，W08只读RED设计已启动；尚未修改产品或原封存。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
+本轮三个切面已经分清，不能把测试绿或原文重开当业务验收：
 
-既有已完成接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
+| 切面 | 当前结果 | 发布/边界 |
+|---|---|---|
+| W08 来源选材、业务父级、缓存依赖 | 保存候选`11502372`；集中850P在最后等价类型改动前，类型修正后185P、全src mypy366文件0错、Ruff绿 | **未验收、未并母线、未安装、未推送**。原公开cache回归仍失败，真实内容partial及数字标识误判未修。见[暂停检查点](review/r1-w08-candidate-checkpoint-20261022.json) |
+| W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
+| W09 研究准备 | 新attempt`r1-remediation-02`；实际capture经SourceVersionReader读取年报/H1的10个关键页、30371B | 0模型/网络/下载/原件复制；配置和目录库未变。**尚未生成新研究输入、经营桥或运行新RF**。旧501封存逐SHA不变。见[准备收据](review/r1-w09-preparation-checkpoint-20261022.json) |
 
-唯一下一主线：**四路独审已齐、共因方案已接收。完成W08 RED设计后，按W08–W12先测试后实施共同根因修复、原公司受影响链复验，再药明合联→Snowflake泛化和后续清单循环。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，实际公式消费已证明；不把可读/算式正确当内容完整或经济质量通过。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
+**恢复后的唯一第一步：修W08已经保留的公开cache/业务父级失败及通用事实误判，完成独立大节点审查后才并线。** 复现脚本在`C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/docs/plans/r1-final3-source-semantics-20261022/review/reproduce-public-cache.ps1`，全部原断言保留。不得把换谓词的实验当原例通过，也不抬96/48000等现有限额。候选源码工作字节CRLF、Git规范LF，已保存[逐文件字节映射](review/r1-w08-candidate-byte-map-20261022.json)；候选不是精确业务签收版本。
 
-本地读取诊断共因跟进已三层独审并线：[ROOT组合收据](review/r1-local-observation-integration-20261022.md)。RF `10bf6111`、FF `7f6a9268`均已正常push、定点安装及精确CI SUCCESS；CWP最终 `27be00fb`独审49P并入主线 `69a5490b`，与两份已安装消费端真实联调通过，随 `aa2dd822`正常push（7097P/24S267.37s、146契约P36.11s），精确CI39854576322 SUCCESS。另5项旧contract及发现过程丢历史的真缺陷均已根修，保留原断言；只复用现有owner资格、不提高读取配额、不加权限门禁。
+随后按已接收W08–W12计划完成W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
-并行技能升级：按用户要求在原六步后增加**全面代码质量/模块化/泛化及买方收入研究能力改善→由本公司新问题升级后续检测**。独立建设PWF位于`revenue-forecast-audit/docs/plans/audit-continuous-quality-20261022/`，七场景独立试读、记录共因修复10个独立CLI反控及完整632测试（2skip）通过；安装工具有界修复另6项独立验证，使用默认Miniconda同步两目录39文件匹配。源码已提交623054c，发布收尾738d99a（该仓未配置远端）；Git原始收据字节与两个安装根39文件已独立核对，三个自有测试目录恢复原样。见[技能收尾收据](review/audit-skill-quality-closeout-20261022.json)。不改写本轮sealed材料。
+W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。此前三仓读取诊断已发布并有精确CI绿：CWP`aa2dd822`/CI39854576322，RF`10bf6111`、FF`7f6a9268`。W08候选没有新生产CI验收，不借旧CI签候选。
 
-初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
+用户要求的审查技能八步升级已在上一节点完成；本轮W10进一步把单据归属、阶段误判及明确版本矛盾固化为回归，现有fetch/process卡已更新。没有新增身份库、任务库、人工许可、逐材料签收或收费权威。两份安装包树SHA`f2be453617ac03359ccfffe2ebe98e5ee895deb1a6dc7e9510d0462e3d1efb0a`，对应W10收尾，旧`f50bf...`是前版历史。
+
+本轮无新增付费/资料下载；累计仍**1,561,352 tokens/$0.631959**，余**438,648 tokens/$19.368041**，全部unknown保留。原件保留，RF原三份assurance WIP、来源配置/目录库SHA不变，Dayu/IQS未改。独占测试资料已按各收据恢复；W08残留两Temp和mypy临时缓存已精确清理。历史`.planning`未做全仓清理，不宣称本地已无所有临时物。见[保护边界复核](review/r1-pause-safety-check-20261022.json)。
 
 ## 已完成及验收边界
 
@@ -45,7 +49,7 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W05工程和W07真实生命周期已完成；W06 final3四路复审全FAIL，专家共因PWF已接收，W08 RED设计启动；初始FAIL及639工件不回写 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
+| R1 主线 | W01–W07既有工程/真实生命周期完成；final3四审FAIL；W08候选已保存但有失败，W10工程已提交安装，W09来源准备完成；用户收尾后暂停，W08–W12整体未完 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
