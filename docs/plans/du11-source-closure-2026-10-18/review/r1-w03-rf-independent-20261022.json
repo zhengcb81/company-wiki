@@ -1,0 +1,179 @@
+{
+  "reviewer": "/root/r1_w04_summary_runtime",
+  "artifact_bytes": 22254.0,
+  "tests": {
+    "collected": 26,
+    "receipt": {
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "TMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3r",
+        "W03_RF_ROOT": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+        "TEMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3r"
+      },
+      "fees_usd": 0,
+      "started_utc": "2026-10-22T18:51:30.7227201Z",
+      "python": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+      "runtime_unchanged": true,
+      "api_calls": 0,
+      "downloads": 0,
+      "test_unchanged": true,
+      "collect_exit": 0,
+      "cwd": "C:/Users/郑曾波/Projects/company-wiki",
+      "finished_utc": "2026-10-22T18:51:32.6592608Z",
+      "test_exit": 0,
+      "argv": [
+        "-m",
+        "pytest",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\test_independent.py",
+        "--rootdir",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/r1-w03-rf-independent-20261022",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3r/run",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\results.xml"
+      ]
+    },
+    "original_golden_body_modified": false,
+    "author_test_helpers_imported": false,
+    "source": "r1-w03-rf-independent-20261022/test_independent.py",
+    "failed": 0,
+    "passed": 26,
+    "duration_seconds": 0.47,
+    "skipped": 0,
+    "checkpoint_counts": {
+      "unknown_historical_no_proof": 2,
+      "explicit_current_proof_clock": 2,
+      "legacy_current_omitted_null": 4,
+      "real_bounded_reader_child": 1,
+      "read_before_availability": 1,
+      "retrieval_after_read": 1,
+      "projected_shape_single_proof_rejected": 2,
+      "valid_exact_sha_bases": 3,
+      "malformed_foreign_proofs": 6,
+      "known_past_later_capture": 1,
+      "later_than_cutoff": 1,
+      "known_future_invalid_priority": 2
+    }
+  },
+  "product_binding": {
+    "product_changes_since_commit": [],
+    "test_sha256": "cc92859a40267cb4bca9d07a8df741c603149ff9b2ce350babfba79994c136a6",
+    "utc": "2026-10-22T18:51:29.0987987Z",
+    "head": "43b5d2429a76bfb7b887144c4dd8b7c4a12190d4",
+    "product_commit": "b76fb96f9b410abceefc6b264120c5101654492b",
+    "tracked_status": [],
+    "git_blob_oid": "69bacb6e92f96151105966149d0576e589891d71",
+    "root": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+    "sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6",
+    "lf_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6",
+    "path": "scripts/company_wiki_narrative_contracts.py"
+  },
+  "package_id": "W03-A-RF",
+  "source_review": {
+    "no_proof_legacy_current_behavior_preserved": true,
+    "only_changed_runtime_file": "scripts/company_wiki_narrative_contracts.py",
+    "projected3_extended": false,
+    "existing_source_clock_reused": true,
+    "known_publication_priority": true,
+    "raw2_2_lineage_rules_modified": false,
+    "proof_in_read_receipt_only": true,
+    "new_permission_or_manual_gate": false,
+    "complete_product_diff": true
+  },
+  "cleanup": {
+    "method": "native PowerShell Remove-Item -LiteralPath exact owned review root",
+    "peak_measured": false,
+    "root_exists_after": false,
+    "utc": "2026-10-22T18:53:17.4149926Z",
+    "restored_to_initial_absence": true,
+    "files_before_delete": 3,
+    "baseline_existed": false,
+    "rf_product_or_author_tests_modified": false,
+    "mother_pwf_modified": false,
+    "absolute_target_checked": true,
+    "bytes_before_delete": 6334.0,
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3r",
+    "raw_production_files_modified_or_deleted": 0
+  },
+  "fees_usd": 0,
+  "downloads": 0,
+  "schema_version": "independent-boundary-review/1",
+  "findings": [],
+  "sealed_utc": "2026-10-22T18:53:17.5276297Z",
+  "status": "PASS_ENGINEERING_CONSUMER_ONLY",
+  "source_after": {
+    "product_changes_since_commit": [],
+    "test_sha256": "cc92859a40267cb4bca9d07a8df741c603149ff9b2ce350babfba79994c136a6",
+    "utc": "2026-10-22T18:51:32.4431064Z",
+    "head": "43b5d2429a76bfb7b887144c4dd8b7c4a12190d4",
+    "product_commit": "b76fb96f9b410abceefc6b264120c5101654492b",
+    "tracked_status": [],
+    "git_blob_oid": "69bacb6e92f96151105966149d0576e589891d71",
+    "root": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+    "sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6",
+    "lf_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6",
+    "path": "scripts/company_wiki_narrative_contracts.py"
+  },
+  "api_calls": 0,
+  "artifacts": [
+    {
+      "sha256": "eb5ba153b2bcab17ce80e05a3418d2d4849ee48a00d537a682cfab160f68b60e",
+      "path": "r1-w03-rf-independent-20261022/cleanup.json",
+      "bytes": 564
+    },
+    {
+      "sha256": "b54d412389826d5abbd73dc1d3021f14bf9e72a68cc631ad3fcba6473975b263",
+      "path": "r1-w03-rf-independent-20261022/collect.log",
+      "bytes": 3688
+    },
+    {
+      "sha256": "a626987f5cd8327367a52f2cfb046c4071adfc95d76323a994ad15aac235c546",
+      "path": "r1-w03-rf-independent-20261022/README.md",
+      "bytes": 1676
+    },
+    {
+      "sha256": "3a2c65ef9349d6d5ae0522850943595887de1dffd971749ee759fdfdc564b49e",
+      "path": "r1-w03-rf-independent-20261022/receipt.json",
+      "bytes": 1360
+    },
+    {
+      "sha256": "486257372132477beea9834643cbda875e1e14e6de3c9dde1fa95b4456477807",
+      "path": "r1-w03-rf-independent-20261022/results.log",
+      "bytes": 1284
+    },
+    {
+      "sha256": "db156d81e41de0ce3660f02e5e1a753331fff2512e293d2023cd83117d03819f",
+      "path": "r1-w03-rf-independent-20261022/results.xml",
+      "bytes": 3833
+    },
+    {
+      "sha256": "fe56e0f53731eb20ef3d0286f3229e9e0f74053893c24f1b008f1c87dbda4bb2",
+      "path": "r1-w03-rf-independent-20261022/source-after.json",
+      "bytes": 672
+    },
+    {
+      "sha256": "e3813e007eb5dbe4c86c5e17cfedf5306fac0f7b609caccf499685b4d5f77834",
+      "path": "r1-w03-rf-independent-20261022/source-before.json",
+      "bytes": 672
+    },
+    {
+      "sha256": "cc92859a40267cb4bca9d07a8df741c603149ff9b2ce350babfba79994c136a6",
+      "path": "r1-w03-rf-independent-20261022/test_independent.py",
+      "bytes": 8505
+    }
+  ],
+  "runtime_unchanged": true,
+  "non_author": true,
+  "scope_limits": [
+    "Finite independent RF consumer boundary acceptance only",
+    "Projected controls test exact receipt shape, not a whole projected artifact semantic acceptance",
+    "One actual bounded RF reader child uses static public golden wire, not a real CWP producer/original/model",
+    "ROOT owns separate genuine CWP producer-consumer CLI integration, install, merge and publication",
+    "W03-B 0.9/v5 semantic work and W07 live summary/paid-resume/cache remain outside this review"
+  ],
+  "unresolved_product_findings": 0
+}

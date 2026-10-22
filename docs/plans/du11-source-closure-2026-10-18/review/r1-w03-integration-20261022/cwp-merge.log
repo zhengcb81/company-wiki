@@ -1,0 +1,54 @@
+warning: in the working copy of 'docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/W03-current-interface.md', LF will be replaced by CRLF the next time Git touches it
+Merge made by the 'ort' strategy.
+ .../evidence/cleanup.json                          | Bin 0 -> 736 bytes
+ .../evidence/collect.log                           | Bin 0 -> 3017 bytes
+ .../evidence/final-collect.log                     | Bin 0 -> 16485 bytes
+ .../evidence/final-receipt.json                    | Bin 0 -> 2047 bytes
+ .../evidence/final.log                             | Bin 0 -> 1858 bytes
+ .../evidence/final.xml                             | Bin 0 -> 27096 bytes
+ .../evidence/footprint-sample.json                 | Bin 0 -> 272 bytes
+ .../evidence/green-receipt.json                    | Bin 0 -> 731 bytes
+ .../evidence/green.log                             | Bin 0 -> 1911 bytes
+ .../evidence/green.xml                             | Bin 0 -> 4747 bytes
+ .../evidence/initial-environment.log               | Bin 0 -> 5314 bytes
+ .../evidence/invalid-fixture.log                   | Bin 0 -> 1075 bytes
+ .../evidence/invalid-fixture.xml                   | Bin 0 -> 421 bytes
+ .../r1-w03-availability-20261022/evidence/mypy.log | Bin 0 -> 46 bytes
+ .../evidence/product-commit.log                    | Bin 0 -> 686 bytes
+ .../evidence/red-receipt.json                      | Bin 0 -> 869 bytes
+ .../r1-w03-availability-20261022/evidence/red.log  | Bin 0 -> 7899 bytes
+ .../r1-w03-availability-20261022/evidence/red.xml  | Bin 0 -> 9392 bytes
+ .../r1-w03-availability-20261022/evidence/ruff.log | Bin 0 -> 20 bytes
+ .../plans/r1-w03-availability-20261022/findings.md |   9 +
+ .../r1-w03-availability-20261022/handoff.json      | 318 ++++++++++++++++++++
+ docs/plans/r1-w03-availability-20261022/handoff.md |  27 ++
+ .../plans/r1-w03-availability-20261022/progress.md |  14 +
+ .../r1-w03-availability-20261022/task_plan.md      |  18 ++
+ src/company_wiki/automation/narrative_transport.py |  26 +-
+ tests/contract/test_narrative_availability.py      | 322 +++++++++++++++++++++
+ 26 files changed, 729 insertions(+), 5 deletions(-)
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/cleanup.json
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/collect.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/final-collect.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/final-receipt.json
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/final.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/final.xml
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/footprint-sample.json
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/green-receipt.json
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/green.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/green.xml
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/initial-environment.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/invalid-fixture.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/invalid-fixture.xml
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/mypy.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/product-commit.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/red-receipt.json
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/red.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/red.xml
+ create mode 100644 docs/plans/r1-w03-availability-20261022/evidence/ruff.log
+ create mode 100644 docs/plans/r1-w03-availability-20261022/findings.md
+ create mode 100644 docs/plans/r1-w03-availability-20261022/handoff.json
+ create mode 100644 docs/plans/r1-w03-availability-20261022/handoff.md
+ create mode 100644 docs/plans/r1-w03-availability-20261022/progress.md
+ create mode 100644 docs/plans/r1-w03-availability-20261022/task_plan.md
+ create mode 100644 tests/contract/test_narrative_availability.py

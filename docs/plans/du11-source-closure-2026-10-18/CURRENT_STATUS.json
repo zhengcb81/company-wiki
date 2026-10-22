@@ -2,22 +2,17 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-22",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_R1_W03A_PRODUCER_CONSUMER_TDD",
+  "overall_status": "ACTIVE_R1_W03A_ENGINEERING_INTEGRATED_W07_OFFLINE_CONTROLLER",
   "current_authorized_scope": "resumed_2026_10_22_continue_PWF_W03_then_W07_W06_and_fresh_holdouts",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "last_code_commit": "52a5d368998bd829284e4a0295f2c06c1b9ef2c7",
   "code_ci": {
-    "run_id": 39831978563,
-    "head_sha": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
-    "status": "in_progress",
+    "status": "new_W03_head_not_yet_observed",
     "conclusion": null,
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39831978563",
-    "method": "anonymous public Actions API",
-    "verified_at": "2026-10-22T18:31:09.7189698Z",
-    "scope_note": "Current exact engineering HEAD, not historical feaef48a."
+    "scope_note": "Normal push and exact new HEAD CI next; prior successful baseline separate."
   },
   "completed": {
     "b2": {
@@ -69,6 +64,13 @@
       },
       "mypy_src_files": 366,
       "new_private_public_approval_gates": 0
+    },
+    "r1_w03_a": {
+      "status": "ENGINEERING_REVIEWED_MAINLINE_INTEGRATED",
+      "producer_independent_passed": 12,
+      "consumer_independent_passed": 58,
+      "root_combination_passed": 31,
+      "actual_paid_summary_recovery_rf_consumption": false
     }
   },
   "content": {
@@ -124,7 +126,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ROOT finalize exact-head CI/PWF publication while isolated W03-A producer/consumer TDD runs; then non-author joint review and consumer-before-producer integration.",
+  "next_step_now": "Publish reviewed W03-A integration; independently review W07 offline controller/preflight; then one configured real0.9/v5 summary with paid replay/activation/cache and RF actual use, W06 research and four reviews, HK/US holdouts.",
   "next_step_after_user_resumes": "already_resumed_2026_10_22",
   "budget_snapshot": {
     "observed_on": "2026-10-21",
@@ -152,15 +154,13 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "run_id": 39682544340,
+    "run_id": 39832649770,
+    "head_sha": "c3b4ebf1993b433d7501462388ae436e118be815",
     "status": "completed",
     "conclusion": "success",
-    "head_sha": "feaef48accdee0e076d2ecd3108718b06203b3ca",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39682544340",
-    "method": "anonymous_public_actions_api",
-    "verified_on": "2026-10-21",
-    "verified_at": "2026-10-21T23:00:05.081924+01:00",
-    "scope_note": "Historical last verified success before this closeout. It is not CI for current 2f632193; consult engineering-closeout-20261022.json for new exact-head observations."
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39832649770",
+    "verified_at": "2026-10-22T19:14:49.7581569Z",
+    "scope_note": "Published baseline before W03 merge, not new source CI."
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -171,5 +171,6 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
   "previous_pause_request": "Superseded by latest user message: 继续",
-  "last_updated_at": "2026-10-22T18:32:20.588173+00:00"
+  "last_updated_at": "2026-10-22T19:28:58.226402+00:00",
+  "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json"
 }

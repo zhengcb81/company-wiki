@@ -1,0 +1,14 @@
+..F.........                                                             [100%]
+================================== FAILURES ===================================
+______ test_old_known_publication_receipt_and_body_are_exactly_unchanged ______
+test_independent_producer.py:113: in test_old_known_publication_receipt_and_body_are_exactly_unchanged
+    assert canonical_json(result.receipt) == canonical_json(before.receipt)
+E   assert '{"as_of_date...status":"ok"}' == '{"as_of_date...status":"ok"}'
+E     
+E     Skipping 1600 identical leading characters in diff, use -v to show
+E     Skipping 209 identical trailing characters in diff, use -v to show
+E     - 18:54:47.678369+00:00","
+E     ?           ---
+E     + 18:54:47.664596+00:00","
+E     ?            ++ +
+1 failed, 11 passed in 7.29s

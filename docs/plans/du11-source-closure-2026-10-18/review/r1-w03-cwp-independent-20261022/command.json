@@ -1,0 +1,41 @@
+{
+  "argv": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022\\test_independent_producer.py",
+    "-c",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022\\pytest.ini",
+    "--rootdir",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022",
+    "--noconftest",
+    "-q",
+    "-rs",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w3crv\\final",
+    "--junitxml",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022\\result.xml"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022",
+  "exit_code": 0,
+  "seconds": 9.629,
+  "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+  "source_before": {
+    "src/company_wiki/automation/narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "tests/contract/test_narrative_availability.py": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+  },
+  "source_after": {
+    "src/company_wiki/automation/narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "tests/contract/test_narrative_availability.py": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+  },
+  "source_unchanged": true,
+  "sandbox_permissions": "require_escalated for isolated artifact os.link; no author/product writes",
+  "harness_correction": "Freeze actual SourceVersionReader clock for old/new exact-byte comparison; read_at remains included and is not normalized/dropped.",
+  "paid_api_calls": 0,
+  "original_downloads": 0,
+  "observed_at_utc": "2026-10-22T18:56:04.827674+00:00"
+}

@@ -1,3 +1,9 @@
+## 2026-10-22 W03-A组合验收与并线
+
+W03-A已TDD完成：同SHA可用时间证明仅进入raw narrative读取metadata；不造publication，不改frozen bundle/generation/cache，projected/3不变。CWP非作者12P、RF最终非作者58P；ROOT合并主线到已安装RF真实公开CLI与新contract共31P/0skip，mypy src366文件0错。RF正常push526P/1既有skip/+36subtests，main/remote674d08d9；consumer先发布安装（1文件×2物理副本/3逻辑入口、566其它文件元信息不变），producer后正常merge。旧b76收据和三份RF WIP保留。独立套件有重叠，不相加冒充一次总数。
+
+W03-B真实0.9/v5、W07真实paid replay/激活恢复/cache/实际RF公式消费、W06新研究四审与HK/US仍OPEN。W07离线工具正在完善纯preview；不把预检故障native run伪称真实恢复，不为测试增加生产重试/审批链。多进程重验放integration大节点，日常unit保持快速。默认0.8、原件、旧FAIL、预算及未知hold不变，本节点0收费/0下载。详细证据：DU11 review/r1-w03-integration-20261022.md/json。
+
 ## 当前进展补充：2026-10-22 四包发布与W03-A
 
 四包代码已正常推送三仓；CWP当前工程HEAD20a7fb0c，最终7083单测/24跳过和142独立smoke通过；FF899P/7S/+78subtests，RF477P/1S/+36subtests，安装后当前CWP→FF→RF固定35例9.88秒全绿且测试根恢复不存在。最终CI反控证实subset+follow_imports=skip漏本地跨模块类型，改为同一个缓存full-src命令；热缓存9.1秒，未增第二门禁。远端CI按精确SHA实录，不冒称pending已绿。

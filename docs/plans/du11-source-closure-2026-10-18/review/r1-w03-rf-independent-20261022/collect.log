@@ -1,0 +1,44 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w03-rf-independent-20261022
+configfile: ..\..\..\..\..\pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 26 items
+
+<Dir company-wiki>
+  <Dir docs>
+    <Dir plans>
+      <Dir du11-source-closure-2026-10-18>
+        <Dir review>
+          <Dir r1-w03-rf-independent-20261022>
+            <Module test_independent.py>
+              <Function test_same_sha_proof_is_retained_only_in_receipt_without_body_or_publication_rewrite[prior_verified_capture]>
+              <Function test_same_sha_proof_is_retained_only_in_receipt_without_body_or_publication_rewrite[primary_archive]>
+              <Function test_same_sha_proof_is_retained_only_in_receipt_without_body_or_publication_rewrite[current_verified_open]>
+              <Function test_malformed_or_foreign_proof_never_qualifies_unknown_publication[schema]>
+              <Function test_malformed_or_foreign_proof_never_qualifies_unknown_publication[sha]>
+              <Function test_malformed_or_foreign_proof_never_qualifies_unknown_publication[extra_path]>
+              <Function test_malformed_or_foreign_proof_never_qualifies_unknown_publication[extra_unknown]>
+              <Function test_malformed_or_foreign_proof_never_qualifies_unknown_publication[date]>
+              <Function test_malformed_or_foreign_proof_never_qualifies_unknown_publication[basis_type]>
+              <Function test_unknown_historical_no_proof_remains_named_gap[True]>
+              <Function test_unknown_historical_no_proof_remains_named_gap[False]>
+              <Function test_known_future_or_invalid_publication_wins_even_over_bad_earlier_proof[2026-09-02]>
+              <Function test_known_future_or_invalid_publication_wins_even_over_bad_earlier_proof[2026-02-30]>
+              <Function test_unknown_proof_later_than_historical_cutoff_is_refused>
+              <Function test_actual_read_cannot_precede_its_qualifying_availability>
+              <Function test_original_retrieval_cannot_be_after_actual_read>
+              <Function test_legacy_current_without_proof_gains_no_historical_gate[False-None]>
+              <Function test_legacy_current_without_proof_gains_no_historical_gate[False-2027-01-01]>
+              <Function test_legacy_current_without_proof_gains_no_historical_gate[True-None]>
+              <Function test_legacy_current_without_proof_gains_no_historical_gate[True-2027-01-01]>
+              <Function test_current_with_explicit_proof_uses_actual_read_day_and_not_a_new_authorization[False]>
+              <Function test_current_with_explicit_proof_uses_actual_read_day_and_not_a_new_authorization[True]>
+              <Function test_known_past_publication_is_not_replaced_by_later_capture>
+              <Function test_projected_receipt_shape_cannot_accept_a_single_parent_root_proof[None]>
+              <Function test_projected_receipt_shape_cannot_accept_a_single_parent_root_proof[proof]>
+              <Function test_actual_bounded_rf_reader_child_keeps_the_complete_optional_proof>
+
+========================= 26 tests collected in 0.19s =========================

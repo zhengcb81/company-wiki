@@ -1,0 +1,14 @@
+{
+  "passed": 9,
+  "seconds": 41.58,
+  "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3j",
+  "initially_absent": true,
+  "restored_absent": true,
+  "files_removed": 0,
+  "bytes_removed": null,
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "root_expected_config_changes": 0,
+  "producer_commit": "aff8be80",
+  "consumer_commit": "b76fb96f"
+}

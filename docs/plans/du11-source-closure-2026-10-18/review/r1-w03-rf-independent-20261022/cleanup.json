@@ -1,0 +1,15 @@
+{
+  "method": "native PowerShell Remove-Item -LiteralPath exact owned review root",
+  "peak_measured": false,
+  "root_exists_after": false,
+  "utc": "2026-10-22T18:53:17.4149926Z",
+  "restored_to_initial_absence": true,
+  "files_before_delete": 3,
+  "baseline_existed": false,
+  "rf_product_or_author_tests_modified": false,
+  "mother_pwf_modified": false,
+  "absolute_target_checked": true,
+  "bytes_before_delete": 6334.0,
+  "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3r",
+  "raw_production_files_modified_or_deleted": 0
+}

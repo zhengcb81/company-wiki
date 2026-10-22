@@ -1,0 +1,19 @@
+{
+  "python": "C:\\Miniconda\\python.exe",
+  "argv": [
+    "-m",
+    "mypy",
+    "scripts/contracts/",
+    "scripts/schema_compatibility.py",
+    "scripts/filing_fetch_client.py",
+    "scripts/trust_anchor.py",
+    "scripts/company_wiki_narrative_contracts.py",
+    "--cache-dir",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s/mypy"
+  ],
+  "started_utc": "2026-10-22T19:16:29.1226642Z",
+  "ignore_or_skip_flags_used": false,
+  "exit_code": 0,
+  "cwd": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-boundary",
+  "finished_utc": "2026-10-22T19:16:33.0718379Z"
+}

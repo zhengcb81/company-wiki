@@ -1,0 +1,20 @@
+{
+  "product_changes_since_commit": [],
+  "test_sha256": "5fc4d334780cadd0c6b8d1f5da9ded6a725f25d39b0d7824a069bc3d6c18e47d",
+  "product_commit": "2de4b9d3ad3c032c89a1987a3b2141610ac91233",
+  "tracked_status": [
+    " M docs/plans/r1-w03-availability-20261022/evidence/cleanup.json",
+    " M docs/plans/r1-w03-availability-20261022/findings.md",
+    " M docs/plans/r1-w03-availability-20261022/handoff.json",
+    " M docs/plans/r1-w03-availability-20261022/handoff.md",
+    " M docs/plans/r1-w03-availability-20261022/progress.md",
+    " M docs/plans/r1-w03-availability-20261022/task_plan.md"
+  ],
+  "lf_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+  "git_blob_oid": "5d60ae8d538765c300399693ebccba5b4cc6acbd",
+  "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+  "head": "2de4b9d3ad3c032c89a1987a3b2141610ac91233",
+  "root": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+  "path": "scripts/company_wiki_narrative_contracts.py",
+  "utc": "2026-10-22T19:16:35.0263246Z"
+}

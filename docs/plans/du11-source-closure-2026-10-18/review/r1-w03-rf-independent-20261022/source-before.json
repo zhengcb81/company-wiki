@@ -1,0 +1,13 @@
+{
+  "product_changes_since_commit": [],
+  "test_sha256": "cc92859a40267cb4bca9d07a8df741c603149ff9b2ce350babfba79994c136a6",
+  "utc": "2026-10-22T18:51:29.0987987Z",
+  "head": "43b5d2429a76bfb7b887144c4dd8b7c4a12190d4",
+  "product_commit": "b76fb96f9b410abceefc6b264120c5101654492b",
+  "tracked_status": [],
+  "git_blob_oid": "69bacb6e92f96151105966149d0576e589891d71",
+  "root": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+  "sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6",
+  "lf_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6",
+  "path": "scripts/company_wiki_narrative_contracts.py"
+}

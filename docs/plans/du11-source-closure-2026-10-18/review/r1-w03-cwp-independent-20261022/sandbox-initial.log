@@ -1,0 +1,96 @@
+FFFFFF....FF                                                             [100%]
+================================== FAILURES ===================================
+_ test_actual_owner_is_called_once_after_one_verified_original_and_cannot_write[pdf] _
+test_independent_producer.py:59: in test_actual_owner_is_called_once_after_one_verified_original_and_cannot_write
+    with published_fixture(tmp_path, kind=kind) as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-9613bbc1c7ffe6012955d2f84370e3d3', status='retry_scheduled', artifact_version_id=None)
+---------------------------- Captured stdout call -----------------------------
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+_ test_actual_owner_is_called_once_after_one_verified_original_and_cannot_write[json] _
+test_independent_producer.py:59: in test_actual_owner_is_called_once_after_one_verified_original_and_cannot_write
+    with published_fixture(tmp_path, kind=kind) as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-38e873bd5531fa1a4d6a27796b345409', status='retry_scheduled', artifact_version_id=None)
+______ test_old_known_publication_receipt_and_body_are_exactly_unchanged ______
+test_independent_producer.py:105: in test_old_known_publication_receipt_and_body_are_exactly_unchanged
+    with published_fixture(tmp_path, kind="json") as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-52aaad1ca8aa77dc66fe5e38ffe64358', status='retry_scheduled', artifact_version_id=None)
+_ test_real_current_verified_owner_proof_keeps_null_publication_and_no_artifact_mutation _
+test_independent_producer.py:120: in test_real_current_verified_owner_proof_keeps_null_publication_and_no_artifact_mutation
+    with published_fixture(tmp_path, kind="json") as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-dd9566eb65aca663ae8f96a24de431d4', status='retry_scheduled', artifact_version_id=None)
+_ test_owner_metadata_refresh_does_not_change_artifact_or_generation_db_on_read _
+test_independent_producer.py:133: in test_owner_metadata_refresh_does_not_change_artifact_or_generation_db_on_read
+    with published_fixture(tmp_path, kind="json") as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-f5aa03d12c0314e294d4c0b363e05951', status='retry_scheduled', artifact_version_id=None)
+_______ test_valid_owner_proof_does_not_replace_the_requested_identity ________
+test_independent_producer.py:150: in test_valid_owner_proof_does_not_replace_the_requested_identity
+    with published_fixture(tmp_path, kind="json") as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-4da2d796dc8d013fc749bf12339e9eaa', status='retry_scheduled', artifact_version_id=None)
+_ test_current_unknown_no_proof_preserves_legacy_read_without_creating_observation _
+test_independent_producer.py:178: in test_current_unknown_no_proof_preserves_legacy_read_without_creating_observation
+    with published_fixture(tmp_path, kind="txt") as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\support\narrative_transport_fixture.py:152: in published_fixture
+    assert receipt.artifact_version_id is not None, receipt
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: NarrativeProjectionReceipt(effect_id='eff-c165867897141c087661efca778141d3', status='retry_scheduled', artifact_version_id=None)
+_ test_projected_parent_a_proof_cannot_cover_parent_b_tamper_or_extend_receipt _
+test_independent_producer.py:195: in test_projected_parent_a_proof_cannot_cover_parent_b_tamper_or_extend_receipt
+    _, generation, payload = publish(state, subject, "independent-w03")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\tests\integration\test_official_json_transport_subject.py:326: in publish
+    prepared = state.artifacts.prepare(draft, payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\src\company_wiki\source_catalog\narrative_artifact_store.py:261: in prepare
+    object_key = self._objects.put(payload)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki\src\company_wiki\source_catalog\narrative_artifact_store.py:180: in put
+    os.link(temporary_name, target)
+E   PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w3crv\\run\\test_projected_parent_a_proof_0\\subject-artifacts-4cnwjimq\\catalog\\objects\\sha256\\65\\.narrative-jmtmhuwb.partial' -> 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w3crv\\run\\test_projected_parent_a_proof_0\\subject-artifacts-4cnwjimq\\catalog\\objects\\sha256\\65\\654380fa14145e72b1725cbf69171823b1954cc5e53cb343f43b784862d03c44.json'
+8 failed, 4 passed in 7.99s

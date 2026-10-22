@@ -1,0 +1,212 @@
+{
+  "schema_version": "r1-w03-root-integration/1",
+  "observed_at": "2026-10-22T19:28:58.226402+00:00",
+  "status": "ENGINEERING_PASS_MAINLINE_INTEGRATED_CWP_NORMAL_PUSH_NEXT",
+  "producer": {
+    "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+    "merge_commit": "52a5d368998bd829284e4a0295f2c06c1b9ef2c7",
+    "source_sha256": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "independent_review": "r1-w03-cwp-independent-20261022.json",
+    "independent_passed": 12
+  },
+  "consumer": {
+    "product_commit": "2de4b9d3ad3c032c89a1987a3b2141610ac91233",
+    "main_and_remote": "674d08d92fe2ec64e1d42a3ebab0b364e0ac4354",
+    "source_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+    "independent_review": "r1-w03-rf-final-supplement-20261022.json",
+    "independent_passed": 58,
+    "old_b76_review_preserved": true,
+    "normal_push": {
+      "passed": 526,
+      "skipped": 1,
+      "subtests_passed": 36,
+      "seconds": 55.29
+    },
+    "installation": {
+      "checks": [
+        {
+          "exit": 0,
+          "logical_root": ".agents",
+          "stdout": "final consumer import PASS",
+          "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+        },
+        {
+          "exit": 0,
+          "logical_root": ".claude",
+          "stdout": "final consumer import PASS",
+          "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+        },
+        {
+          "exit": 0,
+          "logical_root": ".codex",
+          "stdout": "final consumer import PASS",
+          "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+        }
+      ],
+      "method": "Native PowerShell exact-byte same-directory atomic move after Python tempfile retry",
+      "selected": [
+        "scripts/company_wiki_narrative_contracts.py"
+      ],
+      "schema_version": "w03-rf-selective-native-install/1",
+      "timestamp": "2026-10-22T19:24:15.6255308Z",
+      "physical_writes": 2,
+      "new_paid_calls": 0,
+      "new_downloads": 0,
+      "targets": [
+        {
+          "after_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+          "physical_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast",
+          "before_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6"
+        },
+        {
+          "after_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+          "physical_root": "C:/Users/郑曾波/.codex/skills/revenue-forecast",
+          "before_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6"
+        }
+      ],
+      "physical_targets": 2,
+      "outside_scope_file_metadata_unchanged": 566,
+      "source_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+    },
+    "ci_observation": {
+      "runs": [
+        {
+          "id": 39838978477,
+          "head_sha": "674d08d92fe2ec64e1d42a3ebab0b364e0ac4354",
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/39838978477"
+        }
+      ],
+      "observed_at": "2026-10-22T19:25:42.1132611Z",
+      "head_sha": "674d08d92fe2ec64e1d42a3ebab0b364e0ac4354"
+    },
+    "three_existing_assurance_wip_sha_unchanged": true,
+    "untracked_output_preserved": true
+  },
+  "root_validation": {
+    "passed": 31,
+    "skipped": 0,
+    "seconds": 120.262,
+    "split": {
+      "producer_new_contract": 22,
+      "real_public_cwp_to_installed_rf_cli": 9
+    },
+    "mypy_src_files": 366,
+    "mypy_errors": 0,
+    "temporary_root": {
+      "restored_absent": true,
+      "new_paid_calls": 0,
+      "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w3g",
+      "new_downloads": 0,
+      "initially_absent": true,
+      "bytes_removed": null,
+      "files_removed": 0,
+      "rf_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast"
+    }
+  },
+  "earlier_pair": {
+    "receipt": "r1-w03-integration-20261022/receipt.json",
+    "producer": "aff8be80",
+    "consumer": "b76fb96f",
+    "passed": 9,
+    "seconds": 41.58,
+    "scope": "Earlier source binding only; not re-signed as final consumer."
+  },
+  "semantics": {
+    "manifest_publication_not_invented": true,
+    "proof_only_optional_raw_receipt_metadata": true,
+    "historical_known_publication_priority": true,
+    "current_no_synthetic_asof": true,
+    "projected_receipt_3_unchanged": true,
+    "default_selector": "0.8.0",
+    "frozen_bundle_generation_model_input_cache_unchanged": true
+  },
+  "still_open": [
+    "W03-B real selector0.9/v5 original-language summary semantics",
+    "W07 configured paid recovery, activation, cache, actual RF formula consumption",
+    "W06 new research attempt and four independent reviews",
+    "HK/US fresh holdouts"
+  ],
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "artifacts": [
+    {
+      "path": "r1-w03-integration-20261022/cwp-merge.log",
+      "sha256": "a263b6dd5e1290e0337106b2e1d4a3b5ed82c0447605b6c1407a402de749190b",
+      "bytes": 4195
+    },
+    {
+      "path": "r1-w03-integration-20261022/cwp-merged-cleanup.json",
+      "sha256": "551f97300d2bafe0f63d182fad6a9069a2016414b6e76e6e50fbba79217edf12",
+      "bytes": 311
+    },
+    {
+      "path": "r1-w03-integration-20261022/cwp-merged-final.log",
+      "sha256": "e7e229078c841d7746ca956b0746ce1382e12aecc77dfb95f28c605b19b6150c",
+      "bytes": 1107
+    },
+    {
+      "path": "r1-w03-integration-20261022/cwp-merged-final.xml",
+      "sha256": "d898c27f45243edcdb83141ff6e6426086cef1131e8080e8e9abc821980d9dd2",
+      "bytes": 5579
+    },
+    {
+      "path": "r1-w03-integration-20261022/cwp-merged-mypy.log",
+      "sha256": "435a96adb1511d2ad62c452be9d967a288353e7c12f32caef696f41408aed2ec",
+      "bytes": 46
+    },
+    {
+      "path": "r1-w03-integration-20261022/live-source-before.json",
+      "sha256": "0cce44ad8042fb163706aa188e1ab542ef1a68a750c8b225595f8232c1ae771f",
+      "bytes": 1749
+    },
+    {
+      "path": "r1-w03-integration-20261022/real.log",
+      "sha256": "69610832023265c18e0886d3eb0e1328c8255f8c0c175234a50bb4fe14ba2d43",
+      "bytes": 101
+    },
+    {
+      "path": "r1-w03-integration-20261022/real.xml",
+      "sha256": "4d0edf63c51579813131a3d02429346501b3280c544b293c9410da2988eab464",
+      "bytes": 1665
+    },
+    {
+      "path": "r1-w03-integration-20261022/receipt.json",
+      "sha256": "a87a66fb58b78708311d8d0bac5c8ba83cc3076fcd6792c77a270a822184dda5",
+      "bytes": 388
+    },
+    {
+      "path": "r1-w03-integration-20261022/rf-final-ci.json",
+      "sha256": "322204f2d6f032152def2973a0c860495cf5c4499203c22cd159e9376217d822",
+      "bytes": 387
+    },
+    {
+      "path": "r1-w03-integration-20261022/rf-final-install-native-fallback.json",
+      "sha256": "f630246bd7523b7706aea0dbd46e9e5fbe033382b1f5655a87f7a1d19384b9a3",
+      "bytes": 375
+    },
+    {
+      "path": "r1-w03-integration-20261022/rf-final-install-plan.json",
+      "sha256": "a5d3e774941301ed8bd72c6bf570e9ec0aa02891ea693128a249b98dc6f24f44",
+      "bytes": 1455
+    },
+    {
+      "path": "r1-w03-integration-20261022/rf-final-install-receipt.json",
+      "sha256": "04211c1138472652135de89aada666861ddd0234f379a255a18a7d7248c5f7c8",
+      "bytes": 1942
+    },
+    {
+      "path": "r1-w03-integration-20261022/rf-final-push.log",
+      "sha256": "9c7ff432f35610e085460d178913117c8b08e5d31896aa467f81343b616b6078",
+      "bytes": 789
+    },
+    {
+      "path": "r1-w03-integration-20261022/test_real_availability.py",
+      "sha256": "3cf5b553770c77314a86da2f303faca67c9c83410532698f145d27fca3b875b5",
+      "bytes": 6251
+    }
+  ]
+}

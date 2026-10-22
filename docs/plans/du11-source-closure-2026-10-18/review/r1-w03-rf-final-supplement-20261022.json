@@ -1,0 +1,210 @@
+{
+  "non_author": true,
+  "status": "PASS_FINAL_ENGINEERING_CONSUMER_ONLY",
+  "schema_version": "independent-boundary-review-supplement/1",
+  "only_runtime_file": "scripts/company_wiki_narrative_contracts.py",
+  "old_b76_seal_unchanged": true,
+  "recommended_next_action": "ROOT accepts final consumer engineering version, then publishes/installs consumer compatibility before CWP producer; retain subsequent W03-B/W07 work",
+  "cleanup": {
+    "files_before_delete": 186,
+    "old_b76_seal_mismatches": 0,
+    "restored_to_initial_absence": true,
+    "bytes_before_delete": 10219109.0,
+    "peak_measurement": "not continuously sampled; final pre-cleanup footprint only",
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3s",
+    "baseline_existed": false,
+    "absolute_target_checked": true,
+    "utc": "2026-10-22T19:18:29.5692439Z",
+    "raw_production_files_modified_or_deleted": 0,
+    "rf_product_or_tests_modified": false
+  },
+  "mypy": {
+    "result": "PASS",
+    "source_files": 12,
+    "receipt": {
+      "python": "C:\\Miniconda\\python.exe",
+      "argv": [
+        "-m",
+        "mypy",
+        "scripts/contracts/",
+        "scripts/schema_compatibility.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/trust_anchor.py",
+        "scripts/company_wiki_narrative_contracts.py",
+        "--cache-dir",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s/mypy"
+      ],
+      "started_utc": "2026-10-22T19:16:29.1226642Z",
+      "ignore_or_skip_flags_used": false,
+      "exit_code": 0,
+      "cwd": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-boundary",
+      "finished_utc": "2026-10-22T19:16:33.0718379Z"
+    }
+  },
+  "downloads": 0,
+  "findings": [],
+  "artifact_bytes": 36271.0,
+  "old_seal_files_checked": 11,
+  "product_binding": {
+    "product_changes_since_commit": [],
+    "test_sha256": "5fc4d334780cadd0c6b8d1f5da9ded6a725f25d39b0d7824a069bc3d6c18e47d",
+    "product_commit": "2de4b9d3ad3c032c89a1987a3b2141610ac91233",
+    "tracked_status": [
+      " M docs/plans/r1-w03-availability-20261022/findings.md",
+      " M docs/plans/r1-w03-availability-20261022/handoff.json",
+      " M docs/plans/r1-w03-availability-20261022/progress.md"
+    ],
+    "lf_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+    "git_blob_oid": "5d60ae8d538765c300399693ebccba5b4cc6acbd",
+    "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+    "head": "2de4b9d3ad3c032c89a1987a3b2141610ac91233",
+    "root": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+    "path": "scripts/company_wiki_narrative_contracts.py",
+    "utc": "2026-10-22T19:16:29.6943726Z"
+  },
+  "reviewer": "/root/r1_w04_summary_runtime",
+  "api_calls": 0,
+  "sealed_utc": "2026-10-22T19:18:29.8165031Z",
+  "package_id": "W03-A-RF-FINAL",
+  "scope_limits": [
+    "Final single-file consumer supplement, not real-company content or full W03-B/W07 acceptance",
+    "One bounded reader child uses static public wire; real producer-consumer composition belongs to ROOT",
+    "Original b76 report remains an old-version finite result; it did not cover these two current metadata compatibility cases or the newly included product in the type gate",
+    "No product changes, install, merge, publication or mother PWF edit by this reviewer"
+  ],
+  "unresolved_product_findings": 0,
+  "tests": {
+    "test_unchanged": true,
+    "collected": 58,
+    "existing_public_helper_cases": 26,
+    "new_current_metadata_comparisons": 2,
+    "failed": 0,
+    "new_guard_cast_controls": 4,
+    "source_unchanged": true,
+    "original_fixed_suite_cases": 26,
+    "duration_seconds": 0.82,
+    "source": "r1-w03-rf-final-supplement-20261022/test_supplement.py",
+    "passed": 58,
+    "independent_cases": 32,
+    "skipped": 0,
+    "copied_current_late_proof_assertion": "source_clock_conflict; actual rejection retained, no historical cutoff is invented",
+    "receipt": {
+      "test_exit": 0,
+      "cwd": "C:/Users/郑曾波/Projects/company-wiki",
+      "python": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+      "started_utc": "2026-10-22T19:16:32.5338281Z",
+      "runtime_unchanged": true,
+      "test_unchanged": true,
+      "finished_utc": "2026-10-22T19:16:35.2768917Z",
+      "argv": [
+        "-m",
+        "pytest",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-final-supplement-20261022\\test_supplement.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-boundary\\tests\\test_w04_public_consumer.py",
+        "--rootdir",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/r1-w03-rf-final-supplement-20261022",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s/run",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-final-supplement-20261022\\results.xml"
+      ],
+      "downloads": 0,
+      "fees_usd": 0,
+      "collect_exit": 0,
+      "environment": {
+        "TMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s",
+        "TEMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s",
+        "W03_RF_ROOT": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+        "PYTHONUTF8": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "api_calls": 0
+    }
+  },
+  "artifacts": [
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/cleanup.json",
+      "sha256": "2f07a4c26ed44f306a352bc8480fafa7572b36881356e867e01e1a9f4b787c56",
+      "bytes": 507
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/collect.log",
+      "sha256": "47a2bf97915f61daf57d24956a3dd160cf8a00bb3e98924b965c201b988f60f4",
+      "bytes": 5278
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/mypy-receipt.json",
+      "sha256": "d2393401982f0eed05e932bc71331f26842344d8611aa8c93566ee82b36dc3e4",
+      "bytes": 600
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/mypy.log",
+      "sha256": "99774ae94d9c061d2ee8a3c00a79bb1c6dfd2b0998f7cb389be50e19a0dc7d15",
+      "bytes": 45
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/old-seal-after.json",
+      "sha256": "3158b5182766d1e76e94fa35cbecfce8dd8aeccaf20ceae8555f6ddfacaecd1e",
+      "bytes": 2778
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/old-seal-before.json",
+      "sha256": "a984fcc1a5221c2f4e36567b158d68bcce260557e2d03794ff3d5cab25232258",
+      "bytes": 2778
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/README.md",
+      "sha256": "c99d3f5e6a96dd60c80c7e94603194c96c87ca97c39bf84aee4a8be62cb33e67",
+      "bytes": 1939
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/receipt.json",
+      "sha256": "f87b59377307c3559e972555b32a0ca81b1e736b8d240b955737e6df646e522d",
+      "bytes": 1479
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/results.log",
+      "sha256": "8399de46d3e42428bfa8fc6d4d6a63d7fc87ead384671cbf1952e94ad19d2f6a",
+      "bytes": 101
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/results.xml",
+      "sha256": "4639c961534a71b02abde895a0e7524fef4040c0d9514469676fe473c8a69ef2",
+      "bytes": 7839
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/source-after.json",
+      "sha256": "c315984fa280cad38f4f34f08156da27d8118b69ba389df4025f8c9c11120199",
+      "bytes": 1064
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/source-before.json",
+      "sha256": "59782c620e2ecae13f28870bc7439fd743163ccf050d71d4b3cb6553e6f9b515",
+      "bytes": 865
+    },
+    {
+      "path": "r1-w03-rf-final-supplement-20261022/test_supplement.py",
+      "sha256": "5fc4d334780cadd0c6b8d1f5da9ded6a725f25d39b0d7824a069bc3d6c18e47d",
+      "bytes": 10998
+    }
+  ],
+  "runtime_unchanged": true,
+  "fees_usd": 0,
+  "clarification_source": "ROOT final supplement assignment: current as_of=None must not manufacture historical cutoff from read_at; typed publication metadata is not historical eligibility",
+  "product_commit": "2de4b9d3ad3c032c89a1987a3b2141610ac91233",
+  "source_review": {
+    "cast_runtime_equivalence": true,
+    "actual_event_conflicts_still_rejected": true,
+    "manifest_dates_preserved": true,
+    "explicit_historical_still_uses_common_qualification": true,
+    "guarded_cast_sites": 4,
+    "current_transient_eligibility_published_date_is_null": true,
+    "current_proof_uses_common_validation_and_InformationEligibility": true,
+    "full_b76_to_final_file_diff": true,
+    "raw2_2_lineage_or_projected_contract_modified": false
+  },
+  "old_b76_report_rewritten": false
+}

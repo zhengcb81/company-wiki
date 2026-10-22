@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-22T18:32:20.588173+00:00",
-  "status": "ACTIVE_W03A_ISOLATED_PRODUCER_CONSUMER_TDD",
+  "updated_at": "2026-10-22T19:28:58.226402+00:00",
+  "status": "ACTIVE_W03A_ENGINEERING_INTEGRATED_W07_OFFLINE_CONTROLLER",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
   "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
@@ -46,8 +46,8 @@
     },
     {
       "id": "W03",
-      "status": "W03_A_TDD_TWO_ISOLATED_LANES_W03_B_REAL_ENGINE_STILL_OPEN",
-      "engineering_observation": "Public narrative timestamp/receipt consumes publication only; wire existing same-SHA availability proof without invented publication, then 0.9/v5 production context.",
+      "status": "W03_A_ENGINEERING_REVIEWED_INTEGRATED_W03_B_REAL_OPEN",
+      "engineering_observation": "Producer12 independent; final consumer58 independent; mainline->installed RF31 actual public CLI/contract PASS, full src366 mypy0. Real0.9/v5 summary acceptance remains open.",
       "current_interface": "W03-current-interface.md",
       "producer_worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
       "consumer_worktree": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
@@ -61,8 +61,9 @@
     },
     {
       "id": "W07",
-      "status": "WAIT_W03_THEN_JOINT_REAL_ACCEPTANCE",
-      "engineering_observation": "One configured real call jointly verifies 0.9 semantics, persisted paid response -> interrupted activation -> resume 0 POST, cross-run cache 0 reservation, actual RF consumption."
+      "status": "OFFLINE_CONTROLLER_AND_PURE_PREFLIGHT_IMPLEMENTING",
+      "engineering_observation": "Finite configured lifecycle tool in isolated worktree; real paid/API and RF use not yet performed. Heavy E2E separated from fast unit CI; no new approval gate.",
+      "current_interface": "W07-controller-current-interface.md"
     }
   ],
   "resource_observation": {
@@ -77,6 +78,7 @@
     "rf_owned_sparse_checkout_bytes_each_approx": 21792950,
     "initial_full_checkout_peak_measured": false
   },
-  "next_action": "ROOT finalize current exact-head CI/PWF; complete W03-A joint independent review and consumer-before-producer integration; W03-B/W07/W06 and fresh holdouts remain.",
-  "engineering_closeout_ref": "engineering-closeout-20261022.json"
+  "next_action": "Publish reviewed W03-A integration; independently review W07 offline controller/preflight; then one configured real0.9/v5 summary with paid replay/activation/cache and RF actual use, W06 research and four reviews, HK/US holdouts.",
+  "engineering_closeout_ref": "engineering-closeout-20261022.json",
+  "w03_integration_ref": "../review/r1-w03-integration-20261022.json"
 }

@@ -1,0 +1,46 @@
+[
+  {
+    "sha256": "0d3c36eeff07622d0dd87abee7d65d50040df8da8a54b0f3da7202db30a7fe42",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022.md"
+  },
+  {
+    "sha256": "41cb7b2e8ac7f4a9d3f26e6f20986aac523928b59382d4956683421f08068c53",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022.json"
+  },
+  {
+    "sha256": "eb5ba153b2bcab17ce80e05a3418d2d4849ee48a00d537a682cfab160f68b60e",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\cleanup.json"
+  },
+  {
+    "sha256": "b54d412389826d5abbd73dc1d3021f14bf9e72a68cc631ad3fcba6473975b263",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\collect.log"
+  },
+  {
+    "sha256": "a626987f5cd8327367a52f2cfb046c4071adfc95d76323a994ad15aac235c546",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\README.md"
+  },
+  {
+    "sha256": "3a2c65ef9349d6d5ae0522850943595887de1dffd971749ee759fdfdc564b49e",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\receipt.json"
+  },
+  {
+    "sha256": "486257372132477beea9834643cbda875e1e14e6de3c9dde1fa95b4456477807",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\results.log"
+  },
+  {
+    "sha256": "db156d81e41de0ce3660f02e5e1a753331fff2512e293d2023cd83117d03819f",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\results.xml"
+  },
+  {
+    "sha256": "fe56e0f53731eb20ef3d0286f3229e9e0f74053893c24f1b008f1c87dbda4bb2",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\source-after.json"
+  },
+  {
+    "sha256": "e3813e007eb5dbe4c86c5e17cfedf5306fac0f7b609caccf499685b4d5f77834",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\source-before.json"
+  },
+  {
+    "sha256": "cc92859a40267cb4bca9d07a8df741c603149ff9b2ce350babfba79994c136a6",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-independent-20261022\\test_independent.py"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "files_before_delete": 186,
+  "old_b76_seal_mismatches": 0,
+  "restored_to_initial_absence": true,
+  "bytes_before_delete": 10219109.0,
+  "peak_measurement": "not continuously sampled; final pre-cleanup footprint only",
+  "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w3s",
+  "baseline_existed": false,
+  "absolute_target_checked": true,
+  "utc": "2026-10-22T19:18:29.5692439Z",
+  "raw_production_files_modified_or_deleted": 0,
+  "rf_product_or_tests_modified": false
+}

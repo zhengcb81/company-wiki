@@ -1,0 +1,35 @@
+{
+  "test_exit": 0,
+  "cwd": "C:/Users/郑曾波/Projects/company-wiki",
+  "python": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+  "started_utc": "2026-10-22T19:16:32.5338281Z",
+  "runtime_unchanged": true,
+  "test_unchanged": true,
+  "finished_utc": "2026-10-22T19:16:35.2768917Z",
+  "argv": [
+    "-m",
+    "pytest",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-final-supplement-20261022\\test_supplement.py",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-boundary\\tests\\test_w04_public_consumer.py",
+    "--rootdir",
+    "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/r1-w03-rf-final-supplement-20261022",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s/run",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-rf-final-supplement-20261022\\results.xml"
+  ],
+  "downloads": 0,
+  "fees_usd": 0,
+  "collect_exit": 0,
+  "environment": {
+    "TMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s",
+    "TEMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3s",
+    "W03_RF_ROOT": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "api_calls": 0
+}

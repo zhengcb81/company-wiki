@@ -4,7 +4,7 @@
 
 ## Next Step
 
-ROOT先收口当前四包发布CI/PWF；W03-A CWP/RF两隔离工区已按W03-current-interface.md TDD施工，集中独审与consumer先发布后再做W03-B现成0.9/v5接线→W07一次真实摘要联合普通paid恢复/cache/RF消费→W06原公司新研究和四审→药明合联/Snowflake泛化。四包已工程完成，不重派；初始FAIL、未知费用、原件、旧目标不变。精确发布观察和详细实施步骤见DU11 CURRENT_STATUS与HANDOFF-2026-10-22.md。
+W03-A集中独审与主线/已安装RF31项组合通过，ROOT正常发布此节点；先独审W07离线恢复控制器及无native副作用的纯preview，再W03-B/W07一次真实0.9/v5摘要联合paid replay/激活恢复/cache/RF实际公式消费→W06药明康德新研究和四审→药明合联/Snowflake泛化。四个早先包不重派；新CI按exact HEAD观察，初始FAIL、未知费用、原件和旧目标保留。详细步骤见DU11 CURRENT_STATUS与HANDOFF-2026-10-22.md。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

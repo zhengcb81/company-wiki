@@ -32,6 +32,7 @@ W01 已能在不补造发布日期的情况下，用同 SHA 原件的既有真�
 3. manifest的`published_date`仍可为null，不修改`retrieved_at`。CWP用common `qualify_source`；RF用现有 `qualify_source_information`/`validate_availability_evidence`和已验证ref/manifest SHA。known未来或invalid publication保留拒绝优先；availability不能倒填旧as-of。
 4. proof是读取时metadata，不进入immutable bundle、reading generation、模型输入或cache identity。receipt仍遵守原16KiB上限。
 5. `narrative-read-receipt/3` projected分支**不接此顶层键**。多parent各自已验元信息仍由原来源owner负责；不能用A的proof放行B或整个projection。本切面不新增parent-proof数组、不借机放宽其它精确字段合同。
+6. RF复用common `validate_source_events` 校验真实read_at/retrieved_at与所得eligibility，而不只校验日期格式。显式historical as-of仍由publication优先资格决定，known-past-pub不因晚capture退化。`as_of=None`是current读取，不能用read_at日期伪造historical cutoff；无proof/null保持旧语义，有proof只按同SHA合法proof的basis/available_by构造共用event资格（该资格published_date=None，manifest仍保留真实值）。proof不能晚于真实read_at、retrieved不能晚于read_at；已验证typed publication晚于read或retrieved早于publication的既有current元数据，不因新增proof被强行套入历史资格。current晚proof报真实`source_clock_conflict`，不报虚构as-of。
 
 ## 施工线与文件所有权
 

@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "exit": 0,
+      "logical_root": ".agents",
+      "stdout": "final consumer import PASS",
+      "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+    },
+    {
+      "exit": 0,
+      "logical_root": ".claude",
+      "stdout": "final consumer import PASS",
+      "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+    },
+    {
+      "exit": 0,
+      "logical_root": ".codex",
+      "stdout": "final consumer import PASS",
+      "sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+    }
+  ],
+  "method": "Native PowerShell exact-byte same-directory atomic move after Python tempfile retry",
+  "selected": [
+    "scripts/company_wiki_narrative_contracts.py"
+  ],
+  "schema_version": "w03-rf-selective-native-install/1",
+  "timestamp": "2026-10-22T19:24:15.6255308Z",
+  "physical_writes": 2,
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "targets": [
+    {
+      "after_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "physical_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast",
+      "before_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6"
+    },
+    {
+      "after_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "physical_root": "C:/Users/郑曾波/.codex/skills/revenue-forecast",
+      "before_sha256": "0af725599bda25c883a040605a20e1bc2d3204de0a032ce1116f8c2b0e248ac6"
+    }
+  ],
+  "physical_targets": 2,
+  "outside_scope_file_metadata_unchanged": 566,
+  "source_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204"
+}

@@ -1,0 +1,213 @@
+{
+  "schema_version": "r1-w03-independent-producer-review/1",
+  "status": "PASS_ENGINEERING_PRODUCER_ONLY",
+  "reviewer": "/root/r1_w02_source_boundary",
+  "non_author": true,
+  "author": "/root/r1_w04_summary_runtime",
+  "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "observed_head": "5101939799a14b73488b72dace39f0277b243531",
+  "old_parent_commit": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "binding": [
+    {
+      "path": "src/company_wiki/automation/narrative_transport.py",
+      "physical_sha256": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+      "lf_sha256": "cecd9a1ec365b05edd9ec99db39d8a69503ca6a42d18902629ccbb0c7081e56c",
+      "product_git_blob_sha256": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+      "product_git_blob_lf_sha256": "cecd9a1ec365b05edd9ec99db39d8a69503ca6a42d18902629ccbb0c7081e56c",
+      "physical_equals_git_blob": true,
+      "bytes": 21527
+    },
+    {
+      "path": "tests/contract/test_narrative_availability.py",
+      "physical_sha256": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22",
+      "lf_sha256": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22",
+      "product_git_blob_sha256": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22",
+      "product_git_blob_lf_sha256": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22",
+      "physical_equals_git_blob": true,
+      "bytes": 16160
+    }
+  ],
+  "runtime_and_author_test_before_after_unchanged": true,
+  "tests": {
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 8.63,
+    "real_owner_artifact_controls": 8,
+    "pure_qualification_negatives": 4,
+    "coverage": [
+      "PDF/native JSON: one actual original verification then one real owner lookup bound to same ref; no source_fact writes and DB unchanged; null publication retained",
+      "Actual current_verified_open metadata from source owner, with artifact/ref/DB unchanged",
+      "Old Git parent vs new known-publication source: exact body and full canonical receipt bytes; actual source reader clock frozen; read_at retained, not normalized",
+      "Refresh stored owner proof changes receipt only; read does not mutate artifact reference or generation DB",
+      "Proof cannot replace requested source identity",
+      "Wrong SHA/later proof/known future pub/invalid pub refused through common qualification",
+      "Current unknown/no-proof remains readable and creates no observation",
+      "Projected two-parent result never calls root raw-proof lookup, rejects extra key, and rejects same-size B raw tamper despite real A proof"
+    ],
+    "source": "r1-w03-cwp-independent-20261022/test_independent_producer.py",
+    "command": {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022\\test_independent_producer.py",
+        "-c",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022\\pytest.ini",
+        "--rootdir",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022",
+        "--noconftest",
+        "-q",
+        "-rs",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w3crv\\final",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022\\result.xml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w03-cwp-independent-20261022",
+      "exit_code": 0,
+      "seconds": 9.629,
+      "product_commit": "aff8be80c68b9f39c76dad2011354031132c9cef",
+      "source_before": {
+        "src/company_wiki/automation/narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+        "tests/contract/test_narrative_availability.py": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+      },
+      "source_after": {
+        "src/company_wiki/automation/narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+        "tests/contract/test_narrative_availability.py": "f96219b67d35eb57ef9fc4258f5f74d800508d7becb373570bb7b574af736f22"
+      },
+      "source_unchanged": true,
+      "sandbox_permissions": "require_escalated for isolated artifact os.link; no author/product writes",
+      "harness_correction": "Freeze actual SourceVersionReader clock for old/new exact-byte comparison; read_at remains included and is not normalized/dropped.",
+      "paid_api_calls": 0,
+      "original_downloads": 0,
+      "observed_at_utc": "2026-10-22T18:56:04.827674+00:00"
+    },
+    "shared_setup_only": "Existing local published_fixture and owner-provenance constructors reused for setup; review scenarios/assertions independent."
+  },
+  "author_evidence_not_counted_as_independent": {
+    "new_passed": 22,
+    "related_passed": 166,
+    "related_skipped": 1,
+    "skip": "Explicit original SEC HTML source not provided"
+  },
+  "source_review": {
+    "scope": "One producer runtime file; no immutable bundle/generation/request schema change.",
+    "time": "Common qualify_source supplies historical eligibility after already verified ref/buffer. Known future/invalid publication retains refusal priority.",
+    "proof_owner": "verified_availability_evidence reads bounded exact-version owner metadata/provenance once after raw buffer opened; no new proof creation/raw rehash.",
+    "raw_dto": "Optional /1 receipt metadata only; omitted absent proof; published_date null not replaced.",
+    "projected": "No top-level extension or raw proof lookup; each original remains checked by projection owner."
+  },
+  "findings": [],
+  "unresolved_product_findings": [],
+  "harness_issues": [
+    {
+      "kind": "Sandbox fixture setup",
+      "detail": "Initial 4 pure PASS /8 preparations failed on immutable object os.link PermissionError, before product read. Same tests/product rerun under existing authorized normal filesystem permissions; no mocked hardlink."
+    },
+    {
+      "kind": "Review clock injection",
+      "detail": "First normal run11PASS/1FAIL because read_at comes from source reader, not transport. Freeze actual owner clock for old/new byte pair; keep read_at in strict equality. No producer or author test changes."
+    },
+    {
+      "kind": "Review binding serialization",
+      "detail": "Author product Git blob is CRLF. Initial metadata seal incorrectly compared normalized physical LF hash to raw Git hash. Both raw bytes match aff exactly; now raw/raw and LF/LF recorded without product change."
+    },
+    {
+      "kind": "Read-only discovery",
+      "detail": "Actual author test is test_narrative_availability.py, not assumed test_r1_ name. CodeGraph unavailable in author worktree; no initialization or source write."
+    }
+  ],
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w3crv",
+    "exists_before": false,
+    "exists_after": false,
+    "removed_files": 0,
+    "removed_bytes": 0,
+    "restored_initial_absence": true,
+    "production_original_deletions": 0,
+    "author_worktree_cleaned": false
+  },
+  "artifacts": [
+    {
+      "path": "r1-w03-cwp-independent-20261022\\cleanup.json",
+      "sha256": "e66d9346adfc5bb7f1329dff0ea2a0fabf0ac84066a28fa1104e73ba530d9f60",
+      "bytes": 303
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\clock-harness-initial-command.json",
+      "sha256": "0e297eef280f5c71d085b3e106122475c3172fbc0bf1bd1f3bd9dfd7e3564bde",
+      "bytes": 2181
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\clock-harness-initial.log",
+      "sha256": "0243116c28d0139ed24723d61120b1a0f6186d102ec39781cbda39fed10ea2a4",
+      "bytes": 803
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\clock-harness-initial.xml",
+      "sha256": "27fbffdf35bff0b56b8a85216bc334af4f29c3f120ef5df70d70ad35f8b4592a",
+      "bytes": 3100
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\command.json",
+      "sha256": "27595d3c3276227e4645a49beea64bc9a6c7425677b23ebebf63d244d78b49e6",
+      "bytes": 2259
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\pytest.ini",
+      "sha256": "bf86cec34582454295d6d58edcaa5238eb52160b89a3032263d679455e826480",
+      "bytes": 21
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\result.log",
+      "sha256": "f3af41d0e5fa209d0b3a96bd07a19550ddcf12040cf49e1e7adc794817c4d9b8",
+      "bytes": 101
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\result.xml",
+      "sha256": "f6af120d374f96de0994af50d21627f5827dc5e1e812ad2a00e8006d21f5d466",
+      "bytes": 2137
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\sandbox-initial-command.json",
+      "sha256": "e56310eb418e5226d27fd56d2c4fa71efe03eafaadba582d67119503196e373c",
+      "bytes": 2161
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\sandbox-initial.log",
+      "sha256": "465b09a0427973f3aff41cdebc878ca9ed9f787af2227e2819bac41ddc0a216c",
+      "bytes": 8185
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\sandbox-initial.xml",
+      "sha256": "437b1c829f9fc6207b20ec4c65f047526de17e1295b5694dbd012ea8d2d72e68",
+      "bytes": 10961
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\temp-before.json",
+      "sha256": "9245a9b6a6bc06dac61065a92e1ace9f4abd3a96b3100286dcf49187e536bdef",
+      "bytes": 119
+    },
+    {
+      "path": "r1-w03-cwp-independent-20261022\\test_independent_producer.py",
+      "sha256": "7fee689f61565adba5e0559e9a4885d7a0c47a1dbb68676ea942b13706f93523",
+      "bytes": 13122
+    }
+  ],
+  "paid_api_calls": 0,
+  "downloads": 0,
+  "fees_usd": 0,
+  "scope_limits": [
+    "No author source/test/PWF/index changed, no author .planning cleanup",
+    "No paid/model calls/new company/default/config/install/budget changes",
+    "ROOT owns actual public CWP->FF/RF CLI composition, sequential consumer-first publication/install",
+    "No W03-B 0.9/v5 semantic quality, W07 live paid/cache recovery or research/PWF final signature"
+  ],
+  "sealed_at_utc": "2026-10-22T19:03:00.561707+00:00"
+}

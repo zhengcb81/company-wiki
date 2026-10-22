@@ -6,11 +6,11 @@
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05工程根修、非作者独审和三仓整合已完成；ROOT正在收口 CWP 本轮 CI/发布及PWF；CWP producer和RF consumer两个隔离工区已开始W03-A TDD，互不写母仓或安装副本。交接见[10月22日实施交接](HANDOFF-2026-10-22.md)；精确提交、推送、CI、安装和联调见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)。本轮0新收费/0新下载，原件、初稿和母账不变。
+**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05工程根修、非作者独审和三仓整合已完成；W03-A已集中独审、按consumer先发布/安装后producer并线，合并主线到已安装RF的31项公开组合全绿；ROOT正正常发布该节点，并行完善W07离线控制器/纯预检。交接见[10月22日实施交接](HANDOFF-2026-10-22.md)；精确提交、推送、CI、安装和联调见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)。本轮0新收费/0新下载，原件、初稿和母账不变。
 
-当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。ROOT集中组合审查后先发布/安装consumer，再发布producer；不把分线测试当完整共享引擎完成。
+当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
 
-唯一下一主线：**W03：接通现有 narrative 读取端的同 SHA 可用时间证明与 0.9/v5 共享引擎，保持未知发布日期为 null。** 然后一次配置内真实摘要联合验 W07 的普通付费后激活前恢复、同代缓存和 RF 实际消费，再做 W06 药明康德新研究 attempt/四审，最后药明合联→Snowflake 泛化。默认仍0.8；工程绿不能代签生产0.9、真实恢复、内容或预测质量。
+唯一下一主线：**W03-B/W07：独审离线恢复控制器及纯预检后，跑配置内0.9/v5真实摘要、paid-response重放、激活恢复和跨run缓存；公开RF读取后实际用于参数/公式。** 同SHA时间证明W03-A已接通，未知发布日期仍为null。 然后一次配置内真实摘要联合验 W07 的普通付费后激活前恢复、同代缓存和 RF 实际消费，再做 W06 药明康德新研究 attempt/四审，最后药明合联→Snowflake 泛化。默认仍0.8；工程绿不能代签生产0.9、真实恢复、内容或预测质量。
 
 初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
 
@@ -39,7 +39,7 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | 已恢复；W01/W02/W04/W05工程完成，当前收尾CI后接W03；初始FAIL及639工件不回写 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
+| R1 主线 | 已恢复；W01/W02/W04/W05工程完成，W03-A工程完成，正接W03-B/W07；初始FAIL及639工件不回写 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复仍须验收，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
@@ -54,7 +54,7 @@
 
 - CWP W01 `a7da184e`；W04 已从独审作者提交转为主线 `e1cc1621`/`5a267d37`，交接 `2f632193`。W01 155 项独审绑定旧物理字节；后续仅 LF 归一和 CLI 局部变量改名，独立[补审](review/r1-w01-source-review-postprocess-20261022.md)证明文本/行为等价，并复跑 7 项 CLI。全 `mypy src` 366 文件 0 错误。W04合线后Optional pin类型漏检已于 `ae7b15d6`/`20a7fb0c`修复；单一完整src检查热缓存9.1秒，CI删除重复步骤。独立[最终反控](review/r1-ci-owner-final-review-20261022.md)证明旧版真RED、修复真GREEN，不靠单文件Any或无效移动HEAD探测代签。
 - RF W02 产品 `768b6dd3`、W05 产品 `36433047` 已并入 main；`92b69682` 仅将两份必要回归纳入现有 smoke、让既有小型 mypy 在传递依赖修改时也触发。FF 最终主线和三仓推送/安装/新 CI 见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)，不从历史 pin 推断实时状态。
-- 上次精确代码 CI [39682544340](https://github.com/zhengcb81/company-wiki/actions/runs/39682544340) 对应 `feaef48a`，已验证 SUCCESS；它是历史基线，不能代签当前代码。本轮使用正常 hooks，不跳测试；新 CI 未完成时如实记录 pending。
+- 上次精确代码 CI [39682544340](https://github.com/zhengcb81/company-wiki/actions/runs/39682544340) 对应 `feaef48a`，已验证 SUCCESS；它是历史基线，不能代签当前代码。本轮使用正常hooks。最新已核成功基线为c3b4ebf1 / CI39832649770；它在W03合并前，不代签新源码。新W03 exact HEAD CI完成前保留pending。
 - 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。新原件、key、生产配置、Dayu、IQS 和旧 campaign 未修改。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
 
 ## 模型与预算
