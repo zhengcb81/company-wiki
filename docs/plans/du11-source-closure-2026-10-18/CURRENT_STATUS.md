@@ -6,11 +6,13 @@
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05工程根修、非作者独审和三仓整合已完成；W03-A已集中独审、按consumer先发布/安装后producer并线，合并主线到已安装RF的31项公开组合全绿；ROOT正正常发布该节点，并行完善W07离线控制器/纯预检。交接见[10月22日实施交接](HANDOFF-2026-10-22.md)；精确提交、推送、CI、安装和联调见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)。本轮0新收费/0新下载，原件、初稿和母账不变。
+**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05及W03-A工程已独审、并线和发布；W03-A当前CWP精确CI `1b39032c / 39842895271` SUCCESS。W07控制器非作者9个不同场景通过，已合入本地主线 `9eba8c4e`，待正常推送；9场景来自最终源码的多次运行，不冒称一次全绿。W06资料阶段A已交接：8份新原件10,229,835B、10份合格来源，研究/模型阶段B尚未执行。母模型账仍未新增收费，旧初稿和未知预留保留。
 
 当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
 
-唯一下一主线：**W03-B/W07：独审离线恢复控制器及纯预检后，跑配置内0.9/v5真实摘要、paid-response重放、激活恢复和跨run缓存；公开RF读取后实际用于参数/公式。** 同SHA时间证明W03-A已接通，未知发布日期仍为null。 然后一次配置内真实摘要联合验 W07 的普通付费后激活前恢复、同代缓存和 RF 实际消费，再做 W06 药明康德新研究 attempt/四审，最后药明合联→Snowflake 泛化。默认仍0.8；工程绿不能代签生产0.9、真实恢复、内容或预测质量。
+唯一下一主线：**正常发布W07，按重分配预算重跑冻结纯预检，再跑配置内0.9/v5真实摘要、paid-response重放、激活恢复和跨run缓存；公开RF读取后实际用于参数/公式。** 首次真实纯预检0POST，73560B请求的原生保守token上界81,880超过旧公司余量60,974。ROOT仅把自行收窄的公司累计token上限100k重分配为150k，单请求deploy仍100k，公司$1及母级2M/$20不变；不缩小配置输出、不释放unknown，原冻结scope不改，当前修订见[预算重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。完成后做W06阶段B/四审，最后药明合联→Snowflake泛化。默认仍0.8；工程绿不能代签生产0.9、真实恢复、内容或预测质量。
+
+新增共因跟进：[本地读取诊断接口](r1-holdout-20261021/local_budget_observation_interface.md)。真实H1首次复用的`budget_exceeded`缺少阶段/计量，不能事后猜原因；CWP保留失败前操作和owner预算观察，FF/RF透明传递有界诊断。FF作者127项通过正在非作者审查，RF先写测试，ROOT CWP7项通过；另5项旧contract失败已在原主线同样复现，独立分析中。此项不提高本地读取配额、不增加权限门禁。
 
 初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
 
@@ -54,7 +56,7 @@
 
 - CWP W01 `a7da184e`；W04 已从独审作者提交转为主线 `e1cc1621`/`5a267d37`，交接 `2f632193`。W01 155 项独审绑定旧物理字节；后续仅 LF 归一和 CLI 局部变量改名，独立[补审](review/r1-w01-source-review-postprocess-20261022.md)证明文本/行为等价，并复跑 7 项 CLI。全 `mypy src` 366 文件 0 错误。W04合线后Optional pin类型漏检已于 `ae7b15d6`/`20a7fb0c`修复；单一完整src检查热缓存9.1秒，CI删除重复步骤。独立[最终反控](review/r1-ci-owner-final-review-20261022.md)证明旧版真RED、修复真GREEN，不靠单文件Any或无效移动HEAD探测代签。
 - RF W02 产品 `768b6dd3`、W05 产品 `36433047` 已并入 main；`92b69682` 仅将两份必要回归纳入现有 smoke、让既有小型 mypy 在传递依赖修改时也触发。FF 最终主线和三仓推送/安装/新 CI 见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)，不从历史 pin 推断实时状态。
-- 上次精确代码 CI [39682544340](https://github.com/zhengcb81/company-wiki/actions/runs/39682544340) 对应 `feaef48a`，已验证 SUCCESS；它是历史基线，不能代签当前代码。本轮使用正常hooks。最新已核成功基线为c3b4ebf1 / CI39832649770；它在W03合并前，不代签新源码。新W03 exact HEAD CI完成前保留pending。
+- 最新已核CWP代码CI：[39842895271](https://github.com/zhengcb81/company-wiki/actions/runs/39842895271)，精确HEAD `1b39032c` SUCCESS。正常push最终7083单测/24跳过、145独立smoke；首次push本地两项旧OCR替身缺catalog组成，补正确owner后通过，未改生产资格或断言。W07 `9eba8c4e`尚未推送，不能借W03 CI代签。RF `674d08d9`的同次jobs API显示verify SUCCESS；workflow API仍返回in_progress，保留两个实际观察，不捏造workflow conclusion。
 - 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。新原件、key、生产配置、Dayu、IQS 和旧 campaign 未修改。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
 
 ## 模型与预算

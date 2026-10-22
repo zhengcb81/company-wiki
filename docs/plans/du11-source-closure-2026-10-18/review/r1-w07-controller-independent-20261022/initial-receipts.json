@@ -1,0 +1,27 @@
+{
+  "tests": 9,
+  "passed": 7,
+  "failed": 2,
+  "skipped": 0,
+  "elapsed_seconds": 129.01,
+  "files": {
+    "initial.log": {
+      "sha256": "7baf9deb3202c0e539bde43036f09a9858c8703dc85001d706e2f4a71fe13a8c",
+      "bytes": 8535
+    },
+    "initial.xml": {
+      "sha256": "ca796221dc38c338bf81f4ff6a92d695644835bd2fec4eb4ad6f7e5fc76109e7",
+      "bytes": 10130
+    },
+    "initial-test.py.snapshot": {
+      "sha256": "eacdc5ac81121d043017acfd44a84d1ae5ec4e156098739716f52d904c88838e",
+      "bytes": 13238
+    }
+  },
+  "finding": "native retry classifier terminalizes unregistered HOLDOUT_AFTER_PAID; not a test setup error",
+  "static": {
+    "ruff_exit": 0,
+    "mypy_exit": 0,
+    "mypy_modules": 4
+  }
+}

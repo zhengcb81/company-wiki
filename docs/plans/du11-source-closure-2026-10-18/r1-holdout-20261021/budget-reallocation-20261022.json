@@ -1,0 +1,50 @@
+{
+  "schema_version": "coordinator-scope-amendment/1",
+  "observed_at": "2026-10-22T20:09:05.027042+00:00",
+  "audit_run_id": "r1-20261021-cn-wuxi-apptec",
+  "audit_attempt_id": "r1-remediation-01",
+  "authority": "Existing user cumulative authorization: 2000000 tokens / USD20; coordinator reallocates its own narrower sample allowance.",
+  "supersedes_current_execution_only": {
+    "company_total_tokens": {
+      "old": 100000,
+      "new": 150000
+    }
+  },
+  "unchanged": {
+    "company_total_usd": "1.00",
+    "per_request_deploy_tokens": 100000,
+    "parent_tokens": 2000000,
+    "parent_usd": "20.00",
+    "unknown_holds_retained": true,
+    "model_generation_config": true,
+    "original_scope_and_initial_manifest": true
+  },
+  "reason": "Actual configured body73560B plus128 and output8192 has native bound81880, above old company remainder60974. No model output shrink, estimator relaxation or unknown-hold release.",
+  "frozen_scope": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+    "sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df"
+  },
+  "old_preflight": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090\\receipts\\controller-result.json",
+    "sha256": "a5254945ac3bbd3f1afb2b65e79e1fb54ffd785024673cf9a5cd0445c12652df",
+    "posts": 0
+  },
+  "mother": {
+    "charged_tokens": 1544023,
+    "charged_micro_usd": 625258,
+    "new_unknown_count": 4,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "company_charged_tokens": 39026,
+  "company_charged_micro_usd": 9720,
+  "next_request_tokens": 100000,
+  "next_request_micro_usd": 990280,
+  "not_a_fee_ledger": true,
+  "no_new_user_budget": true,
+  "next_spec": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\controller-spec.json",
+    "sha256": "b7ae3a231cfed6054b152fad1bfedfaab3a5efedfb82839ccefc3e0878a71bb8"
+  }
+}

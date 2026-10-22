@@ -1,0 +1,14 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w7rv",
+    "files": 9,
+    "bytes": 189.0,
+    "scope": "explicit independent pytest basetemp / mypy cache only"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w7type",
+    "files": 159,
+    "bytes": 9471061.0,
+    "scope": "explicit independent pytest basetemp / mypy cache only"
+  }
+]

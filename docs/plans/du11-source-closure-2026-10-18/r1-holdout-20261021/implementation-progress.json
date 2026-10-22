@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-22T19:28:58.226402+00:00",
-  "status": "ACTIVE_W03A_ENGINEERING_INTEGRATED_W07_OFFLINE_CONTROLLER",
+  "updated_at": "2026-10-22T20:09:05.027042+00:00",
+  "status": "ACTIVE_W07_REVIEWED_REAL_PREFLIGHT_BUDGET_REALLOCATED",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
   "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
@@ -56,19 +56,19 @@
     },
     {
       "id": "W06",
-      "status": "WAIT_W03_W07_SOURCE_CONTEXT_THEN_NEW_RESEARCH_ATTEMPT",
-      "engineering_observation": "Latest H1/IR/Q1/guidance/RPO recognition bridge, scoped targets, independent magnitude and combined stress, then four reviews."
+      "status": "PHASE_A_PARTIAL_COMPLETE_WAIT_NEW_NARRATIVE_THEN_PHASE_B",
+      "engineering_observation": "40 captured calls,10 qualified originals;8 new raw10229835B;20 fact records/6 targets; provider/network unknown not zero. No new model call or forecast. Catalog writer exited; H1/RPO/funding limits explicit."
     },
     {
       "id": "W07",
-      "status": "OFFLINE_CONTROLLER_AND_PURE_PREFLIGHT_IMPLEMENTING",
-      "engineering_observation": "Finite configured lifecycle tool in isolated worktree; real paid/API and RF use not yet performed. Heavy E2E separated from fast unit CI; no new approval gate.",
+      "status": "OFFLINE_NONAUTHOR_PASS_MERGED_REAL_PREFLIGHT_RECORDED",
+      "engineering_observation": "9 independent distinct scenarios PASS across final-source runs; real preview0POST bound81880 exceeds old60974, recorded own-cap reallocation150k within parent2M/$20. Real paid still NOT_RUN.",
       "current_interface": "W07-controller-current-interface.md"
     }
   ],
   "resource_observation": {
     "new_paid_calls": 0,
-    "new_downloads": 0,
+    "new_downloads": 8,
     "mother_tokens": 1544023,
     "mother_micro_usd": 625258,
     "company_tokens": 39026,
@@ -76,9 +76,17 @@
     "unknown_holds_preserved": true,
     "rf_owned_sparse_checkout_files": 2136,
     "rf_owned_sparse_checkout_bytes_each_approx": 21792950,
-    "initial_full_checkout_peak_measured": false
+    "initial_full_checkout_peak_measured": false,
+    "company_cap_tokens": 150000,
+    "new_downloaded_original_files": 8,
+    "new_downloaded_original_bytes": 10229835
   },
-  "next_action": "Publish reviewed W03-A integration; independently review W07 offline controller/preflight; then one configured real0.9/v5 summary with paid replay/activation/cache and RF actual use, W06 research and four reviews, HK/US holdouts.",
+  "next_action": "Publish reviewed W07 controller; rerun frozen pure preview within reallocated company cap, then configured one-paid lifecycle, public RF consumption, W06 phaseB/four reviews and HK/US holdouts.",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
-  "w03_integration_ref": "../review/r1-w03-integration-20261022.json"
+  "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
+  "local_budget_observation_followup": {
+    "status": "CWP_TDD_7PASS_BASELINE5_CONTRACT_FAILURES_UNDER_ANALYSIS_FF_AUTHOR127PASS_RF_TDD_ACTIVE",
+    "interface": "local_budget_observation_interface.md",
+    "purpose": "Preserve owner diagnostics end to end; no larger local cap or invented historical usage."
+  }
 }

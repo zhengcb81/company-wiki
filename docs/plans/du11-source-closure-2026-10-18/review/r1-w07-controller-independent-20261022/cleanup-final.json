@@ -1,0 +1,21 @@
+{
+  "at_utc": "2026-10-22T20:00:41.0443852Z",
+  "originals_deleted": 0,
+  "author_temp_removed": 0,
+  "targets": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w7rv",
+      "files": 2,
+      "bytes": 42.0,
+      "restored_absent": true,
+      "scope": "owned independent test root / explicitly created mypy cache"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w7type",
+      "files": 159,
+      "bytes": 9471140.0,
+      "restored_absent": true,
+      "scope": "owned independent test root / explicitly created mypy cache"
+    }
+  ]
+}

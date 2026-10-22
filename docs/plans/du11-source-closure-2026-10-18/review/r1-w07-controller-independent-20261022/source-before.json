@@ -1,0 +1,55 @@
+{
+  "product_commit": "8b00fd7f8d858ced08f9eb247a76428df977389f",
+  "observed_HEAD": "4810e779572cbf276341a482a1e07d8fe393015a",
+  "git_status": "",
+  "files": {
+    "tools/document_understanding_benchmark/holdout_acceptance.py": {
+      "raw_sha256": "365060882d0d07383ab31881b0fe003245963e3ff028e301fcd52a6a73f47aec",
+      "raw_bytes": 20693,
+      "lf_sha256": "8ef94b3e8c9b10841ece51705f90c6122b4e380b225f120a6066e0e11d2b4a19",
+      "git_blob_sha256": "8ef94b3e8c9b10841ece51705f90c6122b4e380b225f120a6066e0e11d2b4a19",
+      "matches_author": true,
+      "lf_matches_frozen_blob": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+      "raw_sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+      "raw_bytes": 6307,
+      "lf_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+      "git_blob_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+      "matches_author": true,
+      "lf_matches_frozen_blob": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+      "raw_sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+      "raw_bytes": 362,
+      "lf_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+      "git_blob_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+      "matches_author": true,
+      "lf_matches_frozen_blob": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+      "raw_sha256": "106df715a8c1ce2244cd2734834b3ded4ac2c13393b459e058d4dc1167c5e19f",
+      "raw_bytes": 9001,
+      "lf_sha256": "a087e7d08e3ffd1ec932a741c5f727902be8ce80bdd5fec1f7aaea050c915a6a",
+      "git_blob_sha256": "a087e7d08e3ffd1ec932a741c5f727902be8ce80bdd5fec1f7aaea050c915a6a",
+      "matches_author": true,
+      "lf_matches_frozen_blob": true
+    },
+    "tests/unit/test_holdout_acceptance_controller.py": {
+      "raw_sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+      "raw_bytes": 1974,
+      "lf_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64",
+      "git_blob_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64",
+      "matches_author": true,
+      "lf_matches_frozen_blob": true
+    },
+    "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+      "raw_sha256": "74166ebee3cd72744c1efe5c20729a101d44d74fa96251c48607e904e91d5961",
+      "raw_bytes": 10681,
+      "lf_sha256": "0626fa77bafe8378edd49383022cc8a7321c70b1e293e1608fe86a78213b26b1",
+      "git_blob_sha256": "0626fa77bafe8378edd49383022cc8a7321c70b1e293e1608fe86a78213b26b1",
+      "matches_author": true,
+      "lf_matches_frozen_blob": true
+    }
+  }
+}

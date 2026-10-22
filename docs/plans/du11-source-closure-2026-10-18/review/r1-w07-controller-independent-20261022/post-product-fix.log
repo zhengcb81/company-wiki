@@ -1,0 +1,58 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0 -- C:\Miniconda\python.exe
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+metadata: {'Python': '3.13.9', 'Platform': 'Windows-11-10.0.26300-SP0', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.5.0'}, 'Plugins': {'anyio': '4.13.0', 'Faker': '40.19.1', 'langsmith': '0.14.4', 'asyncio': '1.3.0', 'base-url': '2.1.0', 'benchmark': '5.2.3', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1', 'mock': '3.15.1', 'playwright': '0.7.2', 'timeout': '2.4.0', 'xdist': '3.8.0'}, 'Base URL': ''}
+rootdir: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 9 items
+
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_full_native_chain_exact_preview_new_lease_and_stale_worker[known] FAILED [ 11%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_full_native_chain_exact_preview_new_lease_and_stale_worker[unknown] FAILED [ 22%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[missing_pin_object] PASSED [ 33%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[tampered_pin_object] PASSED [ 44%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[changed_request] PASSED [ 55%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[current_parent] PASSED [ 66%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_formal_different_actual_body_refused_before_any_reservation[max_tokens-401] PASSED [ 77%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_formal_different_actual_body_refused_before_any_reservation[model-changed-stub-model] PASSED [ 88%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_insufficient_exact_preview_then_formal_never_posts_or_reserves PASSED [100%]
+
+================================== FAILURES ===================================
+___ test_full_native_chain_exact_preview_new_lease_and_stale_worker[known] ____
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py:145: in test_full_native_chain_exact_preview_new_lease_and_stale_worker
+    AutomationStore(Path(spec['automation_db'])).finish_attempt(
+src\company_wiki\automation\store.py:1467: in finish_attempt
+    return self._write_transaction(_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:919: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1432: in _op
+    attempt, job = _require_active_attempt(
+src\company_wiki\automation\store.py:280: in _require_active_attempt
+    _enabled_gate(connection, runtime_generation)
+src\company_wiki\automation\store.py:256: in _enabled_gate
+    raise RuntimeGateClosedError("runtime gate is paused")
+E   company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused
+__ test_full_native_chain_exact_preview_new_lease_and_stale_worker[unknown] ___
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py:145: in test_full_native_chain_exact_preview_new_lease_and_stale_worker
+    AutomationStore(Path(spec['automation_db'])).finish_attempt(
+src\company_wiki\automation\store.py:1467: in finish_attempt
+    return self._write_transaction(_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:919: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1432: in _op
+    attempt, job = _require_active_attempt(
+src\company_wiki\automation\store.py:280: in _require_active_attempt
+    _enabled_gate(connection, runtime_generation)
+src\company_wiki\automation\store.py:256: in _enabled_gate
+    raise RuntimeGateClosedError("runtime gate is paused")
+E   company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\final.xml -
+=========================== short test summary info ===========================
+FAILED ..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_full_native_chain_exact_preview_new_lease_and_stale_worker[known]
+FAILED ..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py::test_full_native_chain_exact_preview_new_lease_and_stale_worker[unknown]
+=================== 2 failed, 7 passed in 121.35s (0:02:01) ===================

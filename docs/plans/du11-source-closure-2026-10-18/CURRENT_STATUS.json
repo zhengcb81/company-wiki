@@ -2,17 +2,17 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-22",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_R1_W03A_ENGINEERING_INTEGRATED_W07_OFFLINE_CONTROLLER",
+  "overall_status": "ACTIVE_W07_REVIEWED_REAL_PREFLIGHT_BUDGET_REALLOCATED",
   "current_authorized_scope": "resumed_2026_10_22_continue_PWF_W03_then_W07_W06_and_fresh_holdouts",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "52a5d368998bd829284e4a0295f2c06c1b9ef2c7",
+  "last_code_commit": "9eba8c4e",
   "code_ci": {
-    "status": "new_W03_head_not_yet_observed",
+    "status": "W07_NOT_YET_PUSHED",
     "conclusion": null,
-    "scope_note": "Normal push and exact new HEAD CI next; prior successful baseline separate."
+    "scope_note": "W03 producer1b39032c exact CI39842895271 SUCCESS; not a W07 CI receipt."
   },
   "completed": {
     "b2": {
@@ -66,11 +66,20 @@
       "new_private_public_approval_gates": 0
     },
     "r1_w03_a": {
-      "status": "ENGINEERING_REVIEWED_MAINLINE_INTEGRATED",
+      "status": "ENGINEERING_REVIEWED_PUBLISHED_CI_SUCCESS",
       "producer_independent_passed": 12,
       "consumer_independent_passed": 58,
       "root_combination_passed": 31,
       "actual_paid_summary_recovery_rf_consumption": false
+    },
+    "r1_w07_offline": {
+      "status": "NONAUTHOR_PASS_MERGED_NOT_YET_PUBLISHED",
+      "product": "5a1548e228bfdf231ca624767661ed138c962136",
+      "merge": "9eba8c4e",
+      "independent_scenarios": 9,
+      "single_all_green_invocation": false,
+      "review": "review/r1-w07-controller-independent-20261022.json",
+      "real_paid": false
     }
   },
   "content": {
@@ -126,7 +135,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Publish reviewed W03-A integration; independently review W07 offline controller/preflight; then one configured real0.9/v5 summary with paid replay/activation/cache and RF actual use, W06 research and four reviews, HK/US holdouts.",
+  "next_step_now": "Publish reviewed W07 controller; rerun frozen pure preview within reallocated company cap, then configured one-paid lifecycle, public RF consumption, W06 phaseB/four reviews and HK/US holdouts.",
   "next_step_after_user_resumes": "already_resumed_2026_10_22",
   "budget_snapshot": {
     "observed_on": "2026-10-21",
@@ -141,7 +150,9 @@
     "cumulative_cap_tokens": 2000000,
     "cumulative_cap_usd": 20,
     "cost_kind": "budget proxy and conservative unknown holds, not provider invoice",
-    "latest_native_observation_ref": "r1-holdout-20261021/initial-execution-seal.json"
+    "latest_native_observation_ref": "r1-holdout-20261021/initial-execution-seal.json",
+    "company_cap_tokens": 150000,
+    "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json"
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -154,13 +165,17 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "run_id": 39832649770,
-    "head_sha": "c3b4ebf1993b433d7501462388ae436e118be815",
-    "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39832649770",
-    "verified_at": "2026-10-22T19:14:49.7581569Z",
-    "scope_note": "Published baseline before W03 merge, not new source CI."
+    "observed_at": "2026-10-22T19:51:17.7241764Z",
+    "head_sha": "1b39032c9c72fd089a5a8a8e94858bbe399ceac1",
+    "runs": [
+      {
+        "id": 39842895271,
+        "head_sha": "1b39032c9c72fd089a5a8a8e94858bbe399ceac1",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39842895271"
+      }
+    ]
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -170,7 +185,7 @@
   "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
-  "previous_pause_request": "Superseded by latest user message: 继续",
-  "last_updated_at": "2026-10-22T19:28:58.226402+00:00",
+  "previous_pause_request": "Superseded by latest user continue request.",
+  "last_updated_at": "2026-10-22T20:09:05.027042+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json"
 }

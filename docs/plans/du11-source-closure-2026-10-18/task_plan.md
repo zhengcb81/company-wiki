@@ -4,7 +4,7 @@
 
 ## Next Step
 
-W03-A集中独审与主线/已安装RF31项组合通过，ROOT正常发布此节点；先独审W07离线恢复控制器及无native副作用的纯preview，再W03-B/W07一次真实0.9/v5摘要联合paid replay/激活恢复/cache/RF实际公式消费→W06药明康德新研究和四审→药明合联/Snowflake泛化。四个早先包不重派；新CI按exact HEAD观察，初始FAIL、未知费用、原件和旧目标保留。详细步骤见DU11 CURRENT_STATUS与HANDOFF-2026-10-22.md。
+W03-A已发布且精确CI绿；W07离线非作者9场景通过、合入9eba8c4e，先正常推送并重跑冻结纯预检（公司自定token额度重分配150k，母级2M/$20不变），再W03-B/W07一次真实0.9/v5摘要联合paid replay/激活恢复/cache/RF实际公式消费→W06阶段B研究及四审→药明合联/Snowflake泛化。W06阶段A已交接8新原件，模型阶段未跑；本地读预算诊断CWP/FF/RF共因修复并行隔离，不提高读取上限。保留旧FAIL、未知费用、原件和冻结scope。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

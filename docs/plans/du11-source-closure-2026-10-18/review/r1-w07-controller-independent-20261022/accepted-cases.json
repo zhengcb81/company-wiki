@@ -1,0 +1,81 @@
+{
+  "source_product": "5a1548e228bfdf231ca624767661ed138c962136",
+  "count": 9,
+  "all_passed": true,
+  "cases": [
+    {
+      "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[missing_pin_object]",
+      "seconds": 18.186,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[tampered_pin_object]",
+      "seconds": 17.949,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[changed_request]",
+      "seconds": 10.064,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[current_parent]",
+      "seconds": 21.112,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_formal_different_actual_body_refused_before_any_reservation[max_tokens-401]",
+      "seconds": 8.187,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_formal_different_actual_body_refused_before_any_reservation[model-changed-stub-model]",
+      "seconds": 9.126,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_insufficient_exact_preview_then_formal_never_posts_or_reserves",
+      "seconds": 7.482,
+      "passed": true,
+      "receipt": "post-product-fix.xml",
+      "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_full_native_chain_exact_preview_new_lease_and_stale_worker[known]",
+      "seconds": 28.51,
+      "passed": true,
+      "receipt": "final-positive.xml",
+      "receipt_sha256": "66105c729cedb18288b0317648fc8dd02aeb7448698e73f23e00d968930b6ee6",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    },
+    {
+      "name": "test_full_native_chain_exact_preview_new_lease_and_stale_worker[unknown]",
+      "seconds": 23.744,
+      "passed": true,
+      "receipt": "final-positive.xml",
+      "receipt_sha256": "66105c729cedb18288b0317648fc8dd02aeb7448698e73f23e00d968930b6ee6",
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+    }
+  ],
+  "combined_testcase_seconds": 144.36,
+  "note": "7 passing negative/budget cases from same final product + only 2 affected positives rerun after reviewer exception expectation correction; not a claim of one nine-green invocation"
+}

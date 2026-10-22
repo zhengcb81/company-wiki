@@ -1,3 +1,9 @@
+## 2026-10-22 W07非作者复核、真实预检与W06资料交接
+
+W07非作者查出未注册错误码让“可重试”实际变成DEAD_LETTER；工具改用原生IO_TRANSIENT且核实持久化RETRYABLE，产品5a1548e2经9个不同场景复核通过，正常合入9eba8c4e。两次最终版本运行合并覆盖，不宣称一次9绿。真实纯预检0POST：请求73560B、配置输出8192、保守上界81880，旧公司余量60974不足。协调员在原用户2M/$20内把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、旧unknown全保留；旧scope/预检封存，后续使用新spec/effective-scope。
+
+W03-A已正常push7083P/24S及145smoke，精确1b39032c/CI39842895271 SUCCESS。W06阶段A完成40个capture、10合格来源、8新原件10229835B，20事实/6目标；阶段B、预测、真实摘要新消费均NOT_RUN。catalog writer已退出。其H1首次复用budget_exceeded缺少owner计量，CWP/FF/RF正在隔离TDD根修，不重扫历史猜计量。母模型账仍1544023tokens/625258microUSD；下载网络未知不能写零。
+
 ## 2026-10-22 W03-A组合验收与并线
 
 W03-A已TDD完成：同SHA可用时间证明仅进入raw narrative读取metadata；不造publication，不改frozen bundle/generation/cache，projected/3不变。CWP非作者12P、RF最终非作者58P；ROOT合并主线到已安装RF真实公开CLI与新contract共31P/0skip，mypy src366文件0错。RF正常push526P/1既有skip/+36subtests，main/remote674d08d9；consumer先发布安装（1文件×2物理副本/3逻辑入口、566其它文件元信息不变），producer后正常merge。旧b76收据和三份RF WIP保留。独立套件有重叠，不相加冒充一次总数。

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="9" time="121.350" timestamp="2026-10-22T20:54:17.410464+01:00" hostname="DESKTOP-156V213"><testcase classname="test_controller_independent" name="test_full_native_chain_exact_preview_new_lease_and_stale_worker[known]" time="13.977"><failure message="company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused">..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py:145: in test_full_native_chain_exact_preview_new_lease_and_stale_worker
+    AutomationStore(Path(spec['automation_db'])).finish_attempt(
+src\company_wiki\automation\store.py:1467: in finish_attempt
+    return self._write_transaction(_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:919: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1432: in _op
+    attempt, job = _require_active_attempt(
+src\company_wiki\automation\store.py:280: in _require_active_attempt
+    _enabled_gate(connection, runtime_generation)
+src\company_wiki\automation\store.py:256: in _enabled_gate
+    raise RuntimeGateClosedError("runtime gate is paused")
+E   company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused</failure></testcase><testcase classname="test_controller_independent" name="test_full_native_chain_exact_preview_new_lease_and_stale_worker[unknown]" time="13.227"><failure message="company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused">..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w07-controller-independent-20261022\test_controller_independent.py:145: in test_full_native_chain_exact_preview_new_lease_and_stale_worker
+    AutomationStore(Path(spec['automation_db'])).finish_attempt(
+src\company_wiki\automation\store.py:1467: in finish_attempt
+    return self._write_transaction(_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:919: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1432: in _op
+    attempt, job = _require_active_attempt(
+src\company_wiki\automation\store.py:280: in _require_active_attempt
+    _enabled_gate(connection, runtime_generation)
+src\company_wiki\automation\store.py:256: in _enabled_gate
+    raise RuntimeGateClosedError("runtime gate is paused")
+E   company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused</failure></testcase><testcase classname="test_controller_independent" name="test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[missing_pin_object]" time="18.186" /><testcase classname="test_controller_independent" name="test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[tampered_pin_object]" time="17.949" /><testcase classname="test_controller_independent" name="test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[changed_request]" time="10.064" /><testcase classname="test_controller_independent" name="test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[current_parent]" time="21.112" /><testcase classname="test_controller_independent" name="test_formal_different_actual_body_refused_before_any_reservation[max_tokens-401]" time="8.187" /><testcase classname="test_controller_independent" name="test_formal_different_actual_body_refused_before_any_reservation[model-changed-stub-model]" time="9.126" /><testcase classname="test_controller_independent" name="test_insufficient_exact_preview_then_formal_never_posts_or_reserves" time="7.482" /></testsuite></testsuites>

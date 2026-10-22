@@ -1,0 +1,87 @@
+{
+  "jobs": [
+    {
+      "id": 120034671855,
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-22T19:18:55Z",
+      "completed_at": "2026-10-22T19:19:55Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-22T19:18:56Z",
+          "completed_at": "2026-10-22T19:18:57Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-22T19:18:57Z",
+          "completed_at": "2026-10-22T19:18:59Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-22T19:18:59Z",
+          "completed_at": "2026-10-22T19:18:59Z"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-22T19:18:59Z",
+          "completed_at": "2026-10-22T19:19:15Z"
+        },
+        {
+          "name": "Fetch pinned source dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-22T19:19:15Z",
+          "completed_at": "2026-10-22T19:19:26Z"
+        },
+        {
+          "name": "Shared local and CI checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-22T19:19:26Z",
+          "completed_at": "2026-10-22T19:19:52Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-22T19:19:52Z",
+          "completed_at": "2026-10-22T19:19:52Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-22T19:19:52Z",
+          "completed_at": "2026-10-22T19:19:52Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-22T19:19:52Z",
+          "completed_at": "2026-10-22T19:19:52Z"
+        }
+      ]
+    }
+  ],
+  "observed_at": "2026-10-22T19:34:02.8674772Z"
+}

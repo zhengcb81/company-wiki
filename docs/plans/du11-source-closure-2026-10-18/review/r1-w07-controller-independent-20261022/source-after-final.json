@@ -1,0 +1,39 @@
+{
+  "product_commit": "5a1548e228bfdf231ca624767661ed138c962136",
+  "observed_HEAD": "8a9b57b191a09c4ae85491a02fcf1b983a1e6b49",
+  "git_status": "",
+  "files": {
+    "tools/document_understanding_benchmark/holdout_acceptance.py": {
+      "raw_sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec",
+      "raw_bytes": 21743,
+      "lf_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd"
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+      "raw_sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+      "raw_bytes": 6307,
+      "lf_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d"
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+      "raw_sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+      "raw_bytes": 362,
+      "lf_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34"
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+      "raw_sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0",
+      "raw_bytes": 9881,
+      "lf_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb"
+    },
+    "tests/unit/test_holdout_acceptance_controller.py": {
+      "raw_sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+      "raw_bytes": 1974,
+      "lf_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64"
+    },
+    "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+      "raw_sha256": "865b2523241371264c1b38549a836db3c586793c6aac0545ec307a3820c6b943",
+      "raw_bytes": 13206,
+      "lf_sha256": "624c94da1e1a02962c2460d1c91722042465350cc17943b2685293f246cf5410"
+    }
+  },
+  "all_product_bytes_unchanged": true,
+  "production_src_config_ci_diff": ""
+}

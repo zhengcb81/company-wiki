@@ -1,0 +1,1571 @@
+{
+  "schema_version": "r1-w07-controller-independent-review/1",
+  "status": "PASS_ENGINEERING_CONTROLLER_ONLY",
+  "reviewed_at_utc": "2026-10-22T20:02:19.509551+00:00",
+  "reviewer_role": "non-author; RF source boundary owner, no W07 product edits",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki-r1-holdout-controller",
+  "original_product_commit": "8b00fd7f8d858ced08f9eb247a76428df977389f",
+  "final_product_commit": "5a1548e228bfdf231ca624767661ed138c962136",
+  "observed_final_docs_head": "8a9b57b191a09c4ae85491a02fcf1b983a1e6b49",
+  "author_git_status_after": "",
+  "file_fingerprints": {
+    "tools/document_understanding_benchmark/holdout_acceptance.py": {
+      "raw_sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec",
+      "raw_bytes": 21743,
+      "lf_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd",
+      "git_blob_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd",
+      "before_raw_sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec",
+      "unchanged": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+      "raw_sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+      "raw_bytes": 6307,
+      "lf_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+      "git_blob_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+      "before_raw_sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+      "unchanged": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+      "raw_sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+      "raw_bytes": 362,
+      "lf_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+      "git_blob_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+      "before_raw_sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+      "unchanged": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+      "raw_sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0",
+      "raw_bytes": 9881,
+      "lf_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb",
+      "git_blob_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb",
+      "before_raw_sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0",
+      "unchanged": true
+    },
+    "tests/unit/test_holdout_acceptance_controller.py": {
+      "raw_sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+      "raw_bytes": 1974,
+      "lf_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64",
+      "git_blob_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64",
+      "before_raw_sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+      "unchanged": true
+    },
+    "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+      "raw_sha256": "865b2523241371264c1b38549a836db3c586793c6aac0545ec307a3820c6b943",
+      "raw_bytes": 13206,
+      "lf_sha256": "624c94da1e1a02962c2460d1c91722042465350cc17943b2685293f246cf5410",
+      "git_blob_sha256": "624c94da1e1a02962c2460d1c91722042465350cc17943b2685293f246cf5410",
+      "before_raw_sha256": "865b2523241371264c1b38549a836db3c586793c6aac0545ec307a3820c6b943",
+      "unchanged": true
+    }
+  },
+  "independent_tests": {
+    "distinct_cases": 9,
+    "accepted_passed": 9,
+    "unresolved_failed": 0,
+    "skipped": 0,
+    "accepted_cases": [
+      {
+        "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[missing_pin_object]",
+        "seconds": 18.186,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[tampered_pin_object]",
+        "seconds": 17.949,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[changed_request]",
+        "seconds": 10.064,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_failed_reentry_is_repeatable_without_repost_or_unknown_refund[current_parent]",
+        "seconds": 21.112,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_formal_different_actual_body_refused_before_any_reservation[max_tokens-401]",
+        "seconds": 8.187,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_formal_different_actual_body_refused_before_any_reservation[model-changed-stub-model]",
+        "seconds": 9.126,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_insufficient_exact_preview_then_formal_never_posts_or_reserves",
+        "seconds": 7.482,
+        "passed": true,
+        "receipt": "post-product-fix.xml",
+        "receipt_sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_full_native_chain_exact_preview_new_lease_and_stale_worker[known]",
+        "seconds": 28.51,
+        "passed": true,
+        "receipt": "final-positive.xml",
+        "receipt_sha256": "66105c729cedb18288b0317648fc8dd02aeb7448698e73f23e00d968930b6ee6",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      },
+      {
+        "name": "test_full_native_chain_exact_preview_new_lease_and_stale_worker[unknown]",
+        "seconds": 23.744,
+        "passed": true,
+        "receipt": "final-positive.xml",
+        "receipt_sha256": "66105c729cedb18288b0317648fc8dd02aeb7448698e73f23e00d968930b6ee6",
+        "product_commit": "5a1548e228bfdf231ca624767661ed138c962136"
+      }
+    ],
+    "combined_accepted_testcase_seconds": 144.36,
+    "execution_receipts": [
+      {
+        "product": "8b00fd7f",
+        "receipt": "r1-w07-controller-independent-20261022/initial.xml",
+        "passed": 7,
+        "failed": 2,
+        "skipped": 0,
+        "seconds": 129.01,
+        "meaning": "true product RED: unregistered injected error became native terminal failure"
+      },
+      {
+        "product": "5a1548e2",
+        "receipt": "r1-w07-controller-independent-20261022/post-product-fix.xml",
+        "passed": 7,
+        "failed": 2,
+        "skipped": 0,
+        "seconds": 121.35,
+        "meaning": "seven final negative/budget passes; positives reach actual retry/replay but reviewer did not yet accept native PAUSED-gate refusal for stale finish"
+      },
+      {
+        "product": "5a1548e2",
+        "receipt": "r1-w07-controller-independent-20261022/final-positive.xml",
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "deselected": 7,
+        "seconds": 53.79,
+        "meaning": "only affected positive scenarios rerun after reviewer exception expectation correction; no product changes"
+      }
+    ],
+    "not_one_green_invocation": true,
+    "author_tests_counted_as_independent": false
+  },
+  "resolved_findings": [
+    {
+      "id": "W07-INDEP-01",
+      "severity": "material_test_tool",
+      "root_cause": "HOLDOUT_AFTER_PAID is not an existing retryable registry code; native worker correctly classifies it as TERMINAL_FAILURE despite exception outcome RETRYABLE",
+      "repair_commit": "5a1548e228bfdf231ca624767661ed138c962136",
+      "repair": "existing IO_TRANSIENT plus process-local owned attempt/job/lease/fence marker; native finish state read before pause, and controller independently reads actual RETRYABLE outcome",
+      "production_registry_or_SQL_changed": false,
+      "status": "RESOLVED"
+    }
+  ],
+  "reviewer_harness_corrections": [
+    {
+      "receipt": "r1-w07-controller-independent-20261022/post-product-fix.xml",
+      "cause": "bounded native batch leaves runtime PAUSED, so stale finish is validly refused by RuntimeGateClosedError before lease/fence checks",
+      "correction": "accept that explicit native refusal; additionally read actual new lease/fence and directly inspect native budget after rejected finish; only two affected positives rerun",
+      "product_change": false
+    }
+  ],
+  "lifecycle_observations": {
+    "known": {
+      "preflight": {
+        "conservative_token_bound": 8590,
+        "fits_token_limit": true,
+        "http_body_bytes": 8062,
+        "http_body_sha256": "9df8c540f52656f62f10d09fbdee9b707b1de47aa7ed7fcfa211a572ba494d89",
+        "max_output_tokens": 400,
+        "model_id": "stub-model",
+        "model_input_sha256": "911844755e45cd92024b6d8ae0ac65704561a15a8340dd513c6e59b786aa3ff4",
+        "model_request_schema": "narrative-model-request/6",
+        "normalization_snapshot_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "output_token_field": "max_tokens",
+        "preview_kind": "non-native",
+        "prompt_version": "reading-source-extractive/5.0.0",
+        "reading_model_projection": "reading-model-input/5",
+        "selector_version": "0.9.0"
+      },
+      "account": {
+        "generations": {
+          "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+            "bundle_producer": "1.0.0",
+            "bundle_schema": "narrative-bundle/2.0",
+            "execution_versions": {
+              "adapter": "openai-compatible-http/1",
+              "handlers": {
+                "source.narrative_select": "1.1.0",
+                "source.narrative_summarize": "1.1.0",
+                "source.narrative_verify": "1.1.0"
+              },
+              "model_request_schema": "narrative-model-request/6",
+              "parser": "0.1.1",
+              "prompt": "reading-source-extractive/5.0.0",
+              "selector": "0.9.0"
+            },
+            "material_extractor": "transcript-original-text/1.0.0",
+            "model": {
+              "endpoint": "http://127.0.0.1:62736/v1/chat/completions",
+              "max_output_tokens": 400,
+              "model_id": "stub-model",
+              "output_token_field": "max_tokens",
+              "temperature": 1.0,
+              "thinking": "disabled"
+            },
+            "parser_component": {
+              "name": "selective_narrative_parser",
+              "version": "0.3.1"
+            },
+            "profile": "P1",
+            "reading_dependencies": {
+              "candidates": [
+                {
+                  "candidate_id": "facet|facet_capacity_projects",
+                  "component_ids": [
+                    "facet|facet_capacity_projects"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_core_business",
+                  "component_ids": [
+                    "facet|facet_core_business"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_customer_orders",
+                  "component_ids": [
+                    "facet|facet_customer_orders"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_industry_competition",
+                  "component_ids": [
+                    "facet|facet_industry_competition"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_new_business",
+                  "component_ids": [
+                    "facet|facet_new_business"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_operating_metrics",
+                  "component_ids": [
+                    "facet|facet_operating_metrics"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_overseas",
+                  "component_ids": [
+                    "facet|facet_overseas"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_risk_denial",
+                  "component_ids": [
+                    "facet|facet_risk_denial"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_biopharma_cdmo",
+                  "component_ids": [
+                    "facet|mechanism_biopharma_cdmo"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_manufacturing",
+                  "component_ids": [
+                    "facet|mechanism_manufacturing"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_store_network",
+                  "component_ids": [
+                    "facet|mechanism_store_network"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_subscription_consumption",
+                  "component_ids": [
+                    "facet|mechanism_subscription_consumption"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|semantic_capacity_project",
+                  "component_ids": [
+                    "facet|semantic_capacity_project"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|semantic_stage_progression",
+                  "component_ids": [
+                    "facet|semantic_stage_progression"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|container_attachment",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|container_attachment"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|event_response",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|event_response"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|lifecycle_revision_overlay",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|lifecycle_revision_overlay"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|secondary_research",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|secondary_research"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                }
+              ],
+              "components": [
+                {
+                  "component_id": "binding|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|generic",
+                  "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+                  "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "catalog-binding/1"
+                },
+                {
+                  "component_id": "carrier|text/plain",
+                  "content_digest": "41ae70f4c6e8e84e2163295def0e3dc7397ef38bd69531a19f970e79e81926a3",
+                  "matcher_digest": "41ae70f4c6e8e84e2163295def0e3dc7397ef38bd69531a19f970e79e81926a3",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "source-carrier/1"
+                },
+                {
+                  "component_id": "facet|facet_capacity_projects",
+                  "content_digest": "daa039b9fa9203341010226c286e9f1689c09f004a87e913f0f5384df54e4216",
+                  "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_core_business",
+                  "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+                  "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_customer_orders",
+                  "content_digest": "9bb10d12aeab54732dce7472692ce646328c05069e604c197b772c0bd0c41879",
+                  "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_industry_competition",
+                  "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+                  "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_new_business",
+                  "content_digest": "aea6170bd370f7b8baedcae971134c453a1ef9899ebd35b53d921aef5848c23a",
+                  "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_operating_metrics",
+                  "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+                  "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_overseas",
+                  "content_digest": "5cd275c10df7ecf2046fa03b2fd4a3ddb656c397d038a026d004a5aee66666d9",
+                  "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_risk_denial",
+                  "content_digest": "0e54c3a014380955a878f4a9cc04975986536a1e1d2b3b58a4de157009832006",
+                  "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_biopharma_cdmo",
+                  "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+                  "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_manufacturing",
+                  "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+                  "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_store_network",
+                  "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+                  "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_subscription_consumption",
+                  "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+                  "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_capacity_project",
+                  "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+                  "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_stage_progression",
+                  "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+                  "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "fallback|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root",
+                  "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "1.0.1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|container_attachment",
+                  "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+                  "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|event_response",
+                  "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+                  "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|lifecycle_revision_overlay",
+                  "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+                  "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|secondary_research",
+                  "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+                  "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+                  "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "parsed-material-matcher/1"
+                }
+              ],
+              "decision_digest": "a25d84df43d8b2dbab98c4422e0ab1d9efb89b78e867ba63f1ff6c438ab39d8b",
+              "diagnostics": [],
+              "schema_version": "du-decision-dependencies/1",
+              "scopes": [
+                {
+                  "family": "unknown",
+                  "form_type": "unknown",
+                  "purpose": "unknown",
+                  "regime": "unknown",
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                }
+              ],
+              "status": "complete",
+              "versions": {
+                "budget": "reading_plan/3",
+                "business_algorithms": "f5d663764e149a16c3e8055271ece6f7ac7e1e32c4c03a9b2734203cbfdc505b",
+                "business_policy": "reading-business-policy/9",
+                "continuity": "native-narrative-continuity/4",
+                "continuity_algorithms": "8204fca6d63c2927b32eced32f0eccd4cfd007634b780fa22135c7948c7c163d",
+                "inventory": "1.8.0",
+                "layout": "1.2.0",
+                "native_table_bridge": "2.1.1",
+                "observation_adapter": "du-observation-adapter/2",
+                "pipeline": "1.12.0",
+                "script_matching": "source-script-match/1",
+                "selector": "0.9.0",
+                "source_usability": "source-usability/3+a4a80876e649cb4197ba1f45f483ec4a7423d30ad60e1dd4c5dd2b8753211cae",
+                "strategy_binding": "reading-strategy-binding/3",
+                "summary": "1.1.0",
+                "table_purpose": "operating-table-purpose/5"
+              }
+            },
+            "reading_model_boundary": {
+              "decoder_sha256": "2fc24c299fc968735c14709aa8ea7a9344fc50418e1baf8d041395b46dd33a5e",
+              "decoder_version": "reading-source-extractive-decoder/5",
+              "implementation_dependencies": {
+                "canonical_contracts": "8100d58309fb1ed7721e914ae26333086a43abead11795e066f45638d7766ce3",
+                "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+                "execution_contract": "0c6dd028c36bac773535090025be1a3f92b2d4eb12f8c9275c9338d3db94985d",
+                "legacy_utilities": "c61b9515c064c05c61f35cd69065e3585a76abe269c0b14c96d73ae343985d96",
+                "protocol": "12fefdead1471a40324591bcecd499d19429944313aa409b24615c73e96bab4d",
+                "role_quality_owner": "82541f8da90ba00482adb12acdef1c8a1e42eacaa74d0d8aafa32c2f226ad624",
+                "runtime": "24811cc291d22db7f382aad73aaf0edbd859ed5f91b8127a0521ff4ab2b5218f",
+                "source_cards": "211607dd830bc91fe1772a8ae779acfc6dc17acca7d35d5fb47bcb53cb58d4db",
+                "source_task_plan": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+                "source_view": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+                "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+              },
+              "instruction_sha256": "ed6edb714a7a7db6a18c5a360a59deaa5adeb9947a7f2e7f967eccabcd5a8b43",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "reading_projection_version": "reading-model-input/5",
+              "request_schema": "narrative-model-request/6",
+              "response_schema_sha256": "01d2fdb6bc9bcaeef101483cbe196254db2bd11f370fabff78a4ae20100995f5",
+              "schema_version": "reading-model-boundary/1",
+              "source_card_allocation_version": "source-card-allocation/1"
+            },
+            "reading_model_projection": "reading-model-input/5",
+            "schema_version": "narrative-generation/1",
+            "select_schema": "narrative-select-result/2.0",
+            "selection_generation": {
+              "decision_digest": "a25d84df43d8b2dbab98c4422e0ab1d9efb89b78e867ba63f1ff6c438ab39d8b",
+              "evidence_sha256": "cafa5932d3c84cc39beb141778275eb6698c7aa0250f55a007a31f5d030a6a73",
+              "material_sha256": "90a9af1a1c2c9b04c1be8dd42eded3062a2c79f7e52bb98790f31cd9a19affe9",
+              "reading_policy_version": "du-sent-policy/1+f4bde1155ee497ef636c48f6e4fa098e82636fff43ce7b0845dec56f9bd6e63f",
+              "schema_version": "narrative-selection-generation/1",
+              "select_result_sha256": "c315a75c3dbfc8d652c79f553f13be4f9a121abccb8422743e37015db57c44f3"
+            },
+            "source_metadata": {
+              "document_kind": "investor_call_transcript",
+              "language": "en",
+              "source_class": "transcript",
+              "title": "Acme 2026 Q1 earnings call"
+            },
+            "source_ref": {
+              "byte_size": 95,
+              "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "mime_type": "text/plain",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+            },
+            "summary_schema": "narrative-summary-result/2.0",
+            "summary_validation": {
+              "detector_distribution": "py3langid/0.4.0",
+              "language_observer": {
+                "numpy": {
+                  "distribution": "numpy",
+                  "status": "available",
+                  "version": "2.4.6"
+                },
+                "py3langid": {
+                  "distribution": "py3langid",
+                  "model": {
+                    "bytes": 4586720,
+                    "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+                    "status": "available"
+                  },
+                  "module": {
+                    "bytes": 12687,
+                    "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+                    "status": "available"
+                  },
+                  "status": "available",
+                  "version": "0.4.0"
+                },
+                "schema_version": "narrative-language-observer/1"
+              },
+              "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+              "schema_version": "narrative-summary-validation/2",
+              "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+            }
+          }
+        },
+        "micro_usd": 111,
+        "paid": [
+          {
+            "attempt_id": "cf9ec8c0742e4b3d9b44dec925551c5e",
+            "estimated_micro_usd": 111,
+            "input_tokens": 73,
+            "output_tokens": 19,
+            "paid_response_pin": {
+              "adapter_id": "openai-compatible-http/1",
+              "body_sha256": "306eddc3073f92e3a4c763f6a44c18c5aa1c9f40ad238e54450b75543f25bb29",
+              "byte_size": 240,
+              "duration_ms": 10,
+              "http_status": 200,
+              "model_id": "stub-model",
+              "object_key": "objects/sha256/30/306eddc3073f92e3a4c763f6a44c18c5aa1c9f40ad238e54450b75543f25bb29.json",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+              "schema_version": "narrative-paid-response/1"
+            },
+            "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+            "response_sha256": "988ff365749d1bf967fde44895b3fabb0cd050fcd18deb97156c146b54655dd0",
+            "usage_status": "known"
+          }
+        ],
+        "rows": 1,
+        "tokens": 92,
+        "unknown": 0
+      },
+      "initial_paid_worker": {
+        "attempt_id": "cf9ec8c0742e4b3d9b44dec925551c5e",
+        "body_sha256": "306eddc3073f92e3a4c763f6a44c18c5aa1c9f40ad238e54450b75543f25bb29",
+        "charged_micro_usd": 111,
+        "charged_tokens": 92,
+        "event": "after_paid",
+        "fault_scope": "test_local_after_paid",
+        "injected_error_code": "IO_TRANSIENT",
+        "pid": 6960,
+        "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+        "runtime_generation": 2,
+        "stage": "after_paid",
+        "supplier_failure": false,
+        "usage_status": "known",
+        "worker_attempt_id": "cf9ec8c0742e4b3d9b44dec925551c5e"
+      },
+      "recovered": {
+        "body_sha256": "306eddc3073f92e3a4c763f6a44c18c5aa1c9f40ad238e54450b75543f25bb29",
+        "event": "paid_recover",
+        "paid_attempt_id": "cf9ec8c0742e4b3d9b44dec925551c5e",
+        "pid": 22632,
+        "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+        "runtime_generation": 4,
+        "stage": "activation_pending",
+        "worker_attempt_id": "ef5cfe9798374b2fbd714a87b825e454"
+      },
+      "replayed": {
+        "body_sha256": "306eddc3073f92e3a4c763f6a44c18c5aa1c9f40ad238e54450b75543f25bb29",
+        "event": "paid_replay",
+        "pid": 22632,
+        "request_input_sha256": "911844755e45cd92024b6d8ae0ac65704561a15a8340dd513c6e59b786aa3ff4",
+        "response_sha256": "988ff365749d1bf967fde44895b3fabb0cd050fcd18deb97156c146b54655dd0",
+        "stage": "activation_pending"
+      },
+      "actual_http_posts": 1,
+      "activation_recovery": {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-31a405f78322449a9ef5c1cf9846ffdf",
+          "byte_size": 10879,
+          "content_sha256": "42d2fd012a05d89c3beef2182f57c401a7b8d670298b5e04e3c17b51452fa0e3",
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+        },
+        "executed": true
+      },
+      "cross_run_cache": {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-31a405f78322449a9ef5c1cf9846ffdf",
+          "byte_size": 10879,
+          "content_sha256": "42d2fd012a05d89c3beef2182f57c401a7b8d670298b5e04e3c17b51452fa0e3",
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+        },
+        "new_reservations": 0,
+        "new_tokens": 0,
+        "run_id": "review-native-cache"
+      },
+      "rf_consumption": {
+        "reason": "ROOT must bind this public read to an actually used RF parameter and segment formula",
+        "status": "not_consumed"
+      }
+    },
+    "unknown": {
+      "preflight": {
+        "conservative_token_bound": 8590,
+        "fits_token_limit": true,
+        "http_body_bytes": 8062,
+        "http_body_sha256": "9df8c540f52656f62f10d09fbdee9b707b1de47aa7ed7fcfa211a572ba494d89",
+        "max_output_tokens": 400,
+        "model_id": "stub-model",
+        "model_input_sha256": "911844755e45cd92024b6d8ae0ac65704561a15a8340dd513c6e59b786aa3ff4",
+        "model_request_schema": "narrative-model-request/6",
+        "normalization_snapshot_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "output_token_field": "max_tokens",
+        "preview_kind": "non-native",
+        "prompt_version": "reading-source-extractive/5.0.0",
+        "reading_model_projection": "reading-model-input/5",
+        "selector_version": "0.9.0"
+      },
+      "account": {
+        "generations": {
+          "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+            "bundle_producer": "1.0.0",
+            "bundle_schema": "narrative-bundle/2.0",
+            "execution_versions": {
+              "adapter": "openai-compatible-http/1",
+              "handlers": {
+                "source.narrative_select": "1.1.0",
+                "source.narrative_summarize": "1.1.0",
+                "source.narrative_verify": "1.1.0"
+              },
+              "model_request_schema": "narrative-model-request/6",
+              "parser": "0.1.1",
+              "prompt": "reading-source-extractive/5.0.0",
+              "selector": "0.9.0"
+            },
+            "material_extractor": "transcript-original-text/1.0.0",
+            "model": {
+              "endpoint": "http://127.0.0.1:62759/v1/chat/completions",
+              "max_output_tokens": 400,
+              "model_id": "stub-model",
+              "output_token_field": "max_tokens",
+              "temperature": 1.0,
+              "thinking": "disabled"
+            },
+            "parser_component": {
+              "name": "selective_narrative_parser",
+              "version": "0.3.1"
+            },
+            "profile": "P1",
+            "reading_dependencies": {
+              "candidates": [
+                {
+                  "candidate_id": "facet|facet_capacity_projects",
+                  "component_ids": [
+                    "facet|facet_capacity_projects"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_core_business",
+                  "component_ids": [
+                    "facet|facet_core_business"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_customer_orders",
+                  "component_ids": [
+                    "facet|facet_customer_orders"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_industry_competition",
+                  "component_ids": [
+                    "facet|facet_industry_competition"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_new_business",
+                  "component_ids": [
+                    "facet|facet_new_business"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_operating_metrics",
+                  "component_ids": [
+                    "facet|facet_operating_metrics"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_overseas",
+                  "component_ids": [
+                    "facet|facet_overseas"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|facet_risk_denial",
+                  "component_ids": [
+                    "facet|facet_risk_denial"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_biopharma_cdmo",
+                  "component_ids": [
+                    "facet|mechanism_biopharma_cdmo"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_manufacturing",
+                  "component_ids": [
+                    "facet|mechanism_manufacturing"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_store_network",
+                  "component_ids": [
+                    "facet|mechanism_store_network"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|mechanism_subscription_consumption",
+                  "component_ids": [
+                    "facet|mechanism_subscription_consumption"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|semantic_capacity_project",
+                  "component_ids": [
+                    "facet|semantic_capacity_project"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "facet|semantic_stage_progression",
+                  "component_ids": [
+                    "facet|semantic_stage_progression"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|container_attachment",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|container_attachment"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|event_response",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|event_response"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|lifecycle_revision_overlay",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|lifecycle_revision_overlay"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|secondary_research",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|secondary_research"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                }
+              ],
+              "components": [
+                {
+                  "component_id": "binding|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|generic",
+                  "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+                  "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "catalog-binding/1"
+                },
+                {
+                  "component_id": "carrier|text/plain",
+                  "content_digest": "41ae70f4c6e8e84e2163295def0e3dc7397ef38bd69531a19f970e79e81926a3",
+                  "matcher_digest": "41ae70f4c6e8e84e2163295def0e3dc7397ef38bd69531a19f970e79e81926a3",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "source-carrier/1"
+                },
+                {
+                  "component_id": "facet|facet_capacity_projects",
+                  "content_digest": "daa039b9fa9203341010226c286e9f1689c09f004a87e913f0f5384df54e4216",
+                  "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_core_business",
+                  "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+                  "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_customer_orders",
+                  "content_digest": "9bb10d12aeab54732dce7472692ce646328c05069e604c197b772c0bd0c41879",
+                  "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_industry_competition",
+                  "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+                  "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_new_business",
+                  "content_digest": "aea6170bd370f7b8baedcae971134c453a1ef9899ebd35b53d921aef5848c23a",
+                  "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_operating_metrics",
+                  "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+                  "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_overseas",
+                  "content_digest": "5cd275c10df7ecf2046fa03b2fd4a3ddb656c397d038a026d004a5aee66666d9",
+                  "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_risk_denial",
+                  "content_digest": "0e54c3a014380955a878f4a9cc04975986536a1e1d2b3b58a4de157009832006",
+                  "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_biopharma_cdmo",
+                  "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+                  "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_manufacturing",
+                  "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+                  "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_store_network",
+                  "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+                  "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_subscription_consumption",
+                  "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+                  "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_capacity_project",
+                  "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+                  "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_stage_progression",
+                  "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+                  "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "fallback|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root",
+                  "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "1.0.1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|container_attachment",
+                  "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+                  "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|event_response",
+                  "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+                  "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|lifecycle_revision_overlay",
+                  "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+                  "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root|secondary_research",
+                  "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+                  "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+                  "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                  ],
+                  "version": "parsed-material-matcher/1"
+                }
+              ],
+              "decision_digest": "a25d84df43d8b2dbab98c4422e0ab1d9efb89b78e867ba63f1ff6c438ab39d8b",
+              "diagnostics": [],
+              "schema_version": "du-decision-dependencies/1",
+              "scopes": [
+                {
+                  "family": "unknown",
+                  "form_type": "unknown",
+                  "purpose": "unknown",
+                  "regime": "unknown",
+                  "scope_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8|root"
+                }
+              ],
+              "status": "complete",
+              "versions": {
+                "budget": "reading_plan/3",
+                "business_algorithms": "f5d663764e149a16c3e8055271ece6f7ac7e1e32c4c03a9b2734203cbfdc505b",
+                "business_policy": "reading-business-policy/9",
+                "continuity": "native-narrative-continuity/4",
+                "continuity_algorithms": "8204fca6d63c2927b32eced32f0eccd4cfd007634b780fa22135c7948c7c163d",
+                "inventory": "1.8.0",
+                "layout": "1.2.0",
+                "native_table_bridge": "2.1.1",
+                "observation_adapter": "du-observation-adapter/2",
+                "pipeline": "1.12.0",
+                "script_matching": "source-script-match/1",
+                "selector": "0.9.0",
+                "source_usability": "source-usability/3+a4a80876e649cb4197ba1f45f483ec4a7423d30ad60e1dd4c5dd2b8753211cae",
+                "strategy_binding": "reading-strategy-binding/3",
+                "summary": "1.1.0",
+                "table_purpose": "operating-table-purpose/5"
+              }
+            },
+            "reading_model_boundary": {
+              "decoder_sha256": "2fc24c299fc968735c14709aa8ea7a9344fc50418e1baf8d041395b46dd33a5e",
+              "decoder_version": "reading-source-extractive-decoder/5",
+              "implementation_dependencies": {
+                "canonical_contracts": "8100d58309fb1ed7721e914ae26333086a43abead11795e066f45638d7766ce3",
+                "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+                "execution_contract": "0c6dd028c36bac773535090025be1a3f92b2d4eb12f8c9275c9338d3db94985d",
+                "legacy_utilities": "c61b9515c064c05c61f35cd69065e3585a76abe269c0b14c96d73ae343985d96",
+                "protocol": "12fefdead1471a40324591bcecd499d19429944313aa409b24615c73e96bab4d",
+                "role_quality_owner": "82541f8da90ba00482adb12acdef1c8a1e42eacaa74d0d8aafa32c2f226ad624",
+                "runtime": "24811cc291d22db7f382aad73aaf0edbd859ed5f91b8127a0521ff4ab2b5218f",
+                "source_cards": "211607dd830bc91fe1772a8ae779acfc6dc17acca7d35d5fb47bcb53cb58d4db",
+                "source_task_plan": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+                "source_view": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+                "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+              },
+              "instruction_sha256": "ed6edb714a7a7db6a18c5a360a59deaa5adeb9947a7f2e7f967eccabcd5a8b43",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "reading_projection_version": "reading-model-input/5",
+              "request_schema": "narrative-model-request/6",
+              "response_schema_sha256": "01d2fdb6bc9bcaeef101483cbe196254db2bd11f370fabff78a4ae20100995f5",
+              "schema_version": "reading-model-boundary/1",
+              "source_card_allocation_version": "source-card-allocation/1"
+            },
+            "reading_model_projection": "reading-model-input/5",
+            "schema_version": "narrative-generation/1",
+            "select_schema": "narrative-select-result/2.0",
+            "selection_generation": {
+              "decision_digest": "a25d84df43d8b2dbab98c4422e0ab1d9efb89b78e867ba63f1ff6c438ab39d8b",
+              "evidence_sha256": "cafa5932d3c84cc39beb141778275eb6698c7aa0250f55a007a31f5d030a6a73",
+              "material_sha256": "90a9af1a1c2c9b04c1be8dd42eded3062a2c79f7e52bb98790f31cd9a19affe9",
+              "reading_policy_version": "du-sent-policy/1+f4bde1155ee497ef636c48f6e4fa098e82636fff43ce7b0845dec56f9bd6e63f",
+              "schema_version": "narrative-selection-generation/1",
+              "select_result_sha256": "c315a75c3dbfc8d652c79f553f13be4f9a121abccb8422743e37015db57c44f3"
+            },
+            "source_metadata": {
+              "document_kind": "investor_call_transcript",
+              "language": "en",
+              "source_class": "transcript",
+              "title": "Acme 2026 Q1 earnings call"
+            },
+            "source_ref": {
+              "byte_size": 95,
+              "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "mime_type": "text/plain",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+            },
+            "summary_schema": "narrative-summary-result/2.0",
+            "summary_validation": {
+              "detector_distribution": "py3langid/0.4.0",
+              "language_observer": {
+                "numpy": {
+                  "distribution": "numpy",
+                  "status": "available",
+                  "version": "2.4.6"
+                },
+                "py3langid": {
+                  "distribution": "py3langid",
+                  "model": {
+                    "bytes": 4586720,
+                    "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+                    "status": "available"
+                  },
+                  "module": {
+                    "bytes": 12687,
+                    "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+                    "status": "available"
+                  },
+                  "status": "available",
+                  "version": "0.4.0"
+                },
+                "schema_version": "narrative-language-observer/1"
+              },
+              "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+              "schema_version": "narrative-summary-validation/2",
+              "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+            }
+          }
+        },
+        "micro_usd": 8990,
+        "paid": [
+          {
+            "attempt_id": "dcff4ab4de83481698fafbc7168e9339",
+            "estimated_micro_usd": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "paid_response_pin": {
+              "adapter_id": "openai-compatible-http/1",
+              "body_sha256": "5aef0553fddf538cdce04836e46c40adc38ba29afb42d20195c8419714f2a305",
+              "byte_size": 196,
+              "duration_ms": 11,
+              "http_status": 200,
+              "model_id": "stub-model",
+              "object_key": "objects/sha256/5a/5aef0553fddf538cdce04836e46c40adc38ba29afb42d20195c8419714f2a305.json",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+              "schema_version": "narrative-paid-response/1"
+            },
+            "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+            "response_sha256": "988ff365749d1bf967fde44895b3fabb0cd050fcd18deb97156c146b54655dd0",
+            "usage_status": "unknown"
+          }
+        ],
+        "rows": 1,
+        "tokens": 8590,
+        "unknown": 1
+      },
+      "initial_paid_worker": {
+        "attempt_id": "dcff4ab4de83481698fafbc7168e9339",
+        "body_sha256": "5aef0553fddf538cdce04836e46c40adc38ba29afb42d20195c8419714f2a305",
+        "charged_micro_usd": 8990,
+        "charged_tokens": 8590,
+        "event": "after_paid",
+        "fault_scope": "test_local_after_paid",
+        "injected_error_code": "IO_TRANSIENT",
+        "pid": 3864,
+        "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+        "runtime_generation": 2,
+        "stage": "after_paid",
+        "supplier_failure": false,
+        "usage_status": "unknown",
+        "worker_attempt_id": "dcff4ab4de83481698fafbc7168e9339"
+      },
+      "recovered": {
+        "body_sha256": "5aef0553fddf538cdce04836e46c40adc38ba29afb42d20195c8419714f2a305",
+        "event": "paid_recover",
+        "paid_attempt_id": "dcff4ab4de83481698fafbc7168e9339",
+        "pid": 23816,
+        "request_sha256": "5ec19ec5c0428e2183b8e179cb4c8a035fd56b0d69f3f281723b5165a0872873",
+        "runtime_generation": 4,
+        "stage": "activation_pending",
+        "worker_attempt_id": "b0c5567b0d1b4a7dace1740b37823ab8"
+      },
+      "replayed": {
+        "body_sha256": "5aef0553fddf538cdce04836e46c40adc38ba29afb42d20195c8419714f2a305",
+        "event": "paid_replay",
+        "pid": 23816,
+        "request_input_sha256": "911844755e45cd92024b6d8ae0ac65704561a15a8340dd513c6e59b786aa3ff4",
+        "response_sha256": "988ff365749d1bf967fde44895b3fabb0cd050fcd18deb97156c146b54655dd0",
+        "stage": "activation_pending"
+      },
+      "actual_http_posts": 1,
+      "activation_recovery": {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-4715b0045a2445a594c307e96cfb2fc5",
+          "byte_size": 10879,
+          "content_sha256": "42d2fd012a05d89c3beef2182f57c401a7b8d670298b5e04e3c17b51452fa0e3",
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+        },
+        "executed": true
+      },
+      "cross_run_cache": {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-4715b0045a2445a594c307e96cfb2fc5",
+          "byte_size": 10879,
+          "content_sha256": "42d2fd012a05d89c3beef2182f57c401a7b8d670298b5e04e3c17b51452fa0e3",
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+        },
+        "new_reservations": 0,
+        "new_tokens": 0,
+        "run_id": "review-native-cache"
+      },
+      "rf_consumption": {
+        "reason": "ROOT must bind this public read to an actually used RF parameter and segment formula",
+        "status": "not_consumed"
+      }
+    }
+  },
+  "commands": {
+    "environment": "PYTHONPATH=<author-root>;<author-root>/src;<author-root>/scripts;<author-root>/tests; PYTHONDONTWRITEBYTECODE=1; PYTHON_DOTENV_DISABLED=1; own hermetic conftest removes real provider credentials and supplies fake loopback key",
+    "initial_and_post_fix": "python -B -X utf8 -m pytest -c <evidence>/pytest.ini <evidence>/test_controller_independent.py --basetemp=<mother>/.planning/w7rv --junitxml=<evidence>/<phase>.xml -v --tb=short",
+    "final_affected": "same command with -k full_native_chain; 2 passed, 7 deselected; exit 0",
+    "ruff": "python -B -X utf8 -m ruff check <four W07 tools> <two author tests> <two independent test/support files> --no-cache; exit 0; corrected independent file/support rechecked exit 0",
+    "mypy": "python -B -X utf8 -m mypy --cache-dir=<mother>/.planning/w7type <four W07 tools>; exit 0; 4 source files"
+  },
+  "scope": {
+    "configured_CLI_and_loopback": true,
+    "actual_native_catalog_AUTO_worker_HTTP_pin_outbox_cache": true,
+    "independent_scenarios_new": 9,
+    "fixture_builders_shared_for_setup_only": true,
+    "external_API_calls": 0,
+    "supplier_fees_usd": "0",
+    "real_keys_read": false,
+    "downloads": 0,
+    "production_originals_modified": false,
+    "synthetic_negative_originals_restored": true,
+    "author_product_or_test_edits_by_reviewer": false,
+    "production_src_config_CI_changed": false,
+    "installed_skills_modified": false,
+    "author_scripts_run_unfrozen": false,
+    "new_permission_gate_or_ledger": false,
+    "author_temp_deleted_by_reviewer": false
+  },
+  "not_covered": [
+    "real supplier HTTP/API, current live budgets or real paid holdout execution",
+    "semantic/source-selection quality of a real model output",
+    "RF consume_narrative_input, actually used parameters and segment formulas",
+    "integration-base/main/push/installed acceptance owned by ROOT"
+  ],
+  "cleanup": {
+    "at_utc": "2026-10-22T20:00:41.0443852Z",
+    "originals_deleted": 0,
+    "author_temp_removed": 0,
+    "targets": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w7rv",
+        "files": 2,
+        "bytes": 42.0,
+        "restored_absent": true,
+        "scope": "owned independent test root / explicitly created mypy cache"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w7type",
+        "files": 159,
+        "bytes": 9471140.0,
+        "restored_absent": true,
+        "scope": "owned independent test root / explicitly created mypy cache"
+      }
+    ]
+  },
+  "unresolved_findings": [],
+  "root_next": "Integrate source preserving LF-equivalent frozen bytes; use existing scope/current Config and native budgets for pure preview then paid lifecycle; keep RF actual consumption separate.",
+  "evidence_manifest": {
+    "accepted-cases.json": {
+      "sha256": "a817a06a3d49ea6574610435148f4b81845c250998d81acc8f238861f9fb0c44",
+      "bytes": 3644
+    },
+    "cleanup-final.json": {
+      "sha256": "ae32cfdebadb1d0474c522e0c2a57e5b07ed113a79d0a0f53c0fa41ef910eb13",
+      "bytes": 628
+    },
+    "cleanup-initial.json": {
+      "sha256": "a4e1950cf6a844256bad913e44abd684f92e90c1c3566abcb8e191a8fe1da4a2",
+      "bytes": 409
+    },
+    "conftest.py": {
+      "sha256": "6287c5a137f509eab6c33cc569a879c56c78da6d373a851fb7c91eb66a853af7",
+      "bytes": 984
+    },
+    "final-mypy.log": {
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76",
+      "bytes": 44
+    },
+    "final-positive.log": {
+      "sha256": "3815c3dbb31d428ebd06f9528c7629427ce71183ae14c610739df1e36548aea5",
+      "bytes": 2013
+    },
+    "final-positive.xml": {
+      "sha256": "66105c729cedb18288b0317648fc8dd02aeb7448698e73f23e00d968930b6ee6",
+      "bytes": 542
+    },
+    "final-ruff.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "final-static.json": {
+      "sha256": "71292bb8df55058ae4e95727758dfce4b60ef439d2047944489cfa7f256d388a",
+      "bytes": 60
+    },
+    "initial-receipts.json": {
+      "sha256": "4ec9b57ae6a32b2f01ab6bfff5fd21af2d0842a214d72b8bdab391293f62859c",
+      "bytes": 737
+    },
+    "initial-test.py.snapshot": {
+      "sha256": "eacdc5ac81121d043017acfd44a84d1ae5ec4e156098739716f52d904c88838e",
+      "bytes": 13238
+    },
+    "initial.log": {
+      "sha256": "7baf9deb3202c0e539bde43036f09a9858c8703dc85001d706e2f4a71fe13a8c",
+      "bytes": 8535
+    },
+    "initial.xml": {
+      "sha256": "ca796221dc38c338bf81f4ff6a92d695644835bd2fec4eb4ad6f7e5fc76109e7",
+      "bytes": 10130
+    },
+    "post-product-fix-test.py.snapshot": {
+      "sha256": "c762f8bd9e051fe6b168864bb06060575288ef3ecb4a56a8e893e2d880d90722",
+      "bytes": 13321
+    },
+    "post-product-fix.log": {
+      "sha256": "a697a2d7caf78d95c65293dabe185dab822f4f492ce421215594ab371d53dcb1",
+      "bytes": 6295
+    },
+    "post-product-fix.xml": {
+      "sha256": "214117ec6e9229be610689b62e46c54d9b8d0cb31da509a24d4ab64884de9de3",
+      "bytes": 3783
+    },
+    "proofs\\body-max_tokens.json": {
+      "sha256": "4e3989adc3df71106bf0fb8e325671f174949a4c523a913abc698caaf17129af",
+      "bytes": 26771
+    },
+    "proofs\\body-model.json": {
+      "sha256": "2fbe40803aad97fc8382e784b7e950c49f388f9bb18dbfff848f4200b5966d73",
+      "bytes": 26779
+    },
+    "proofs\\budget-boundary.json": {
+      "sha256": "e6dee4d64248ff584c9b732ad6fd873ddcb377f53fa1897c9917f2b0c9ff13b4",
+      "bytes": 27676
+    },
+    "proofs\\changed_request.json": {
+      "sha256": "723b5cb03a97745f3bb98174dff10872503821ff324b5fc96b519c0d652d7931",
+      "bytes": 30205
+    },
+    "proofs\\current_parent.json": {
+      "sha256": "9ac47c5f9c0466f99aa915da55ee049650b2632da49f7967b8b6a64aaa9342e9",
+      "bytes": 31727
+    },
+    "proofs\\full-False.json": {
+      "sha256": "dacc7446534386b8d1d3d64ec53ce8d8e540fb2ff5b19389a8564e6e7d5a8e32",
+      "bytes": 37924
+    },
+    "proofs\\full-True.json": {
+      "sha256": "6e30762e0ebf763514355050423503dd4d059a8feda0f9514448658696ab23e3",
+      "bytes": 37946
+    },
+    "proofs\\missing_pin_object.json": {
+      "sha256": "f2b5d9272d2c2e1d35fa9c8333b8e60efd7131f382dc176536f64303235d24e2",
+      "bytes": 31691
+    },
+    "proofs\\tampered_pin_object.json": {
+      "sha256": "eef1a164bd3cede821a888d75bb4028efe3ba5f284cd30b2a474f41da5824c44",
+      "bytes": 31692
+    },
+    "pytest.ini": {
+      "sha256": "aaabed120d2fb059160bb38bf8843dc0bbb6abca5f013dffb5228bfffb9a3404",
+      "bytes": 39
+    },
+    "source-after-final.json": {
+      "sha256": "3d029697238df72d964d71f6deb334e23cab82faa876bb0f292f8e4a44784889",
+      "bytes": 1956
+    },
+    "source-before-final.json": {
+      "sha256": "0e93793939ec988e47c1592ff501182cfe7e890a3724aa0c2a576610cc6d038f",
+      "bytes": 8511
+    },
+    "source-before.json": {
+      "sha256": "67c9c76b0c17637d918a348fb788b84041c088961cf9ca9d86bcf800ec1f43e1",
+      "bytes": 2860
+    },
+    "test_controller_independent.py": {
+      "sha256": "92df83d327f35b7c9814305bc9cf65607a4fdc0660443c6c206987fb34a7480d",
+      "bytes": 14248
+    }
+  }
+}

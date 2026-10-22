@@ -1,0 +1,50 @@
+{
+  "product_commit": "5a1548e228bfdf231ca624767661ed138c962136",
+  "observed_HEAD": "5a1548e228bfdf231ca624767661ed138c962136",
+  "git_status": "?? .planning/w07-review-fix/\n?? \"pytest-of-\\351\\203\\221\\346\\233\\276\\346\\263\\242/\"\n",
+  "files": {
+    "tools/document_understanding_benchmark/holdout_acceptance.py": {
+      "raw_sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec",
+      "raw_bytes": 21743,
+      "lf_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd",
+      "git_blob_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd",
+      "lf_matches_frozen_blob": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+      "raw_sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+      "raw_bytes": 6307,
+      "lf_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+      "git_blob_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+      "lf_matches_frozen_blob": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+      "raw_sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+      "raw_bytes": 362,
+      "lf_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+      "git_blob_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+      "lf_matches_frozen_blob": true
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+      "raw_sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0",
+      "raw_bytes": 9881,
+      "lf_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb",
+      "git_blob_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb",
+      "lf_matches_frozen_blob": true
+    },
+    "tests/unit/test_holdout_acceptance_controller.py": {
+      "raw_sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+      "raw_bytes": 1974,
+      "lf_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64",
+      "git_blob_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64",
+      "lf_matches_frozen_blob": true
+    },
+    "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+      "raw_sha256": "865b2523241371264c1b38549a836db3c586793c6aac0545ec307a3820c6b943",
+      "raw_bytes": 13206,
+      "lf_sha256": "624c94da1e1a02962c2460d1c91722042465350cc17943b2685293f246cf5410",
+      "git_blob_sha256": "624c94da1e1a02962c2460d1c91722042465350cc17943b2685293f246cf5410",
+      "lf_matches_frozen_blob": true
+    }
+  },
+  "runtime_diff": "diff --git a/tools/document_understanding_benchmark/holdout_acceptance.py b/tools/document_understanding_benchmark/holdout_acceptance.py\nindex 4f6c283e..fd3eb6b3 100644\n--- a/tools/document_understanding_benchmark/holdout_acceptance.py\n+++ b/tools/document_understanding_benchmark/holdout_acceptance.py\n@@ -227,6 +227,20 @@ def run_controller(spec, *, stop_after=None):\n             paid = _native(database, run_id)\n             require(len(paid['reservations']) == 1 and paid['reservations'][0]['paid_response_pin'],\n                     'HOLDOUT_NO_UNIQUE_DURABLE_PAID_PIN')\n+            from company_wiki.automation.models import HandlerOutcome\n+            from company_wiki.automation.store import AutomationStore\n+            boundary = next((row for row in reversed(seen) if row['event'] == 'after_paid_paused'), None)\n+            native_attempt = AutomationStore(database).get_attempt(boundary['attempt_id']) if boundary else None\n+            if native_attempt is None:\n+                raise ControllerError('HOLDOUT_NATIVE_RETRYABLE_NOT_PROVEN')\n+            require(native_attempt.outcome is HandlerOutcome.RETRYABLE\n+                    and native_attempt.error_code == 'IO_TRANSIENT'\n+                    and native_attempt.job_id == paid['reservations'][0]['job_id'],\n+                    'HOLDOUT_NATIVE_RETRYABLE_NOT_PROVEN')\n+            result['injected_fault'] = {'scope': 'test_local_after_paid', 'supplier_failure': False,\n+                'native_attempt_id': native_attempt.attempt_id, 'native_outcome': native_attempt.outcome.value,\n+                'native_error_code': native_attempt.error_code}\n+\n             require(all(value.get('reading_model_projection') == 'reading-model-input/5'\n                         for value in paid['generations'].values()) and paid['generations'],\n                     'HOLDOUT_NO_FROZEN_V5_GENERATION')\ndiff --git a/tools/document_understanding_benchmark/holdout_acceptance_observer.py b/tools/document_understanding_benchmark/holdout_acceptance_observer.py\nindex 46ab67cb..4a3bcc19 100644\n--- a/tools/document_understanding_benchmark/holdout_acceptance_observer.py\n+++ b/tools/document_understanding_benchmark/holdout_acceptance_observer.py\n@@ -88,6 +88,7 @@ def install() -> None:\n \n     from tools.document_understanding_benchmark.holdout_acceptance_contracts import request_preflight\n \n+    owned_after_paid = {}  # This process only; never a supplier error or stored permission.\n     original_generate = BudgetedNarrativeCaller.generate\n \n     def observed_generate(caller, context, request):\n@@ -114,8 +115,11 @@ def install() -> None:\n                   body_sha256=pin.body_sha256, usage_status=record.usage_status,\n                   charged_tokens=record.charged_tokens, charged_micro_usd=record.charged_micro_usd,\n                   worker_attempt_id=context.attempt.attempt_id,\n-                  runtime_generation=context.attempt.runtime_generation)\n-            raise NarrativeBudgetCallError('HOLDOUT_AFTER_PAID', HandlerOutcome.RETRYABLE, metrics)\n+                  runtime_generation=context.attempt.runtime_generation,\n+                  injected_error_code='IO_TRANSIENT', fault_scope='test_local_after_paid', supplier_failure=False)\n+            owned_after_paid[context.attempt.attempt_id] = (context.job.job_id, context.attempt.lease_token,\n+                context.attempt.runtime_generation)\n+            raise NarrativeBudgetCallError('IO_TRANSIENT', HandlerOutcome.RETRYABLE, metrics)\n         return response, metrics\n \n     setattr(BudgetedNarrativeCaller, 'generate', observed_generate)\n@@ -145,15 +149,21 @@ def install() -> None:\n \n     def finish_and_pause(store, *args, **kwargs):\n         result = original_finish(store, *args, **kwargs)\n-        native_result = kwargs.get('result')\n-        if (config['stage'] == 'after_paid' and native_result is not None\n-                and native_result.error is not None and native_result.error.code == 'HOLDOUT_AFTER_PAID'):\n-            # Pause only after the ordinary RETRYABLE result has committed.\n-            # This existing public runtime operation prevents an automatic\n-            # retry racing ahead of the test's intended process restart.\n+        marker = owned_after_paid.get(kwargs.get('attempt_id'))\n+        if config['stage'] == 'after_paid' and marker is not None:\n+            native = store.get_attempt(kwargs['attempt_id'])\n+            if (native is None or native.outcome is not HandlerOutcome.RETRYABLE\n+                    or native.error_code != 'IO_TRANSIENT' or native.finished_at is None\n+                    or (native.job_id, native.lease_token, native.runtime_generation) != marker):\n+                event('after_paid_native_outcome_invalid', attempt_id=kwargs['attempt_id'])\n+                raise RuntimeError('HOLDOUT_NATIVE_RETRYABLE_NOT_PROVEN')\n+            # Only this process's injected attempt, after the native classified\n+            # RETRYABLE finish committed. Unrelated IO failures cannot pause it.\n             gate = store.set_runtime_gate(RuntimeState.PAUSED, updated_at=kwargs['finished_at'])\n-            event(config['stage'] + '_paused', attempt_id=kwargs['attempt_id'],\n-                  control_generation=gate.control_generation)\n+            owned_after_paid.pop(native.attempt_id)\n+            event('after_paid_paused', attempt_id=native.attempt_id,\n+                  native_outcome=native.outcome.value, native_error_code=native.error_code,\n+                  fault_scope='test_local_after_paid', control_generation=gate.control_generation)\n         return result\n \n     setattr(AutomationStore, 'finish_attempt', finish_and_pause)\n"
+}
