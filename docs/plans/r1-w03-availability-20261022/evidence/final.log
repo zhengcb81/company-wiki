@@ -1,0 +1,23 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w3a\\final", "requested_basetemp_len": 56, "cwd_len": 66, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 167 items
+
+tests\contract\test_narrative_availability.py ......................     [ 13%]
+tests\contract\test_narrative_transport_cli.py ................          [ 22%]
+tests\contract\test_source_availability.py ...............               [ 31%]
+tests\unit\test_source_qualification.py ...............................  [ 50%]
+tests\unit\test_narrative_transport_contracts.py ....................... [ 64%]
+......                                                                   [ 67%]
+tests\integration\test_narrative_transport.py .......................... [ 83%]
+.....                                                                    [ 86%]
+tests\integration\test_official_json_transport_subject.py .............. [ 94%]
+.....                                                                    [ 97%]
+tests\integration\test_narrative_format_transport.py ...s                [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1w3a\final.xml -
+================= 166 passed, 1 skipped in 168.51s (0:02:48) ==================

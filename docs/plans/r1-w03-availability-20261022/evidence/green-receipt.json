@@ -1,0 +1,22 @@
+{
+  "phase": "GREEN",
+  "started_utc": "2026-10-22T18:35:16.9131041Z",
+  "source_head": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "argv": [
+    "-m",
+    "pytest",
+    "tests/contract/test_narrative_availability.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/g1",
+    "--junitxml",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w3a/green.xml"
+  ],
+  "product_sha256": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+  "live_api_calls": 0,
+  "exit_code": 1,
+  "finished_utc": "2026-10-22T18:36:51.5561248Z",
+  "test_sha256": "b6390b917c5fb1346627a812c8787d32a73f3e5587120af7154126da63135630"
+}

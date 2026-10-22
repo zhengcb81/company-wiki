@@ -1,0 +1,37 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\du11-extractive-runtime\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+<Dir company-wiki>
+  <Dir tests>
+    <Dir contract>
+      <Module test_narrative_availability.py>
+        <Function test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[prior_verified_capture-pdf]>
+        <Function test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[prior_verified_capture-json]>
+        <Function test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[current_verified_open-pdf]>
+        <Function test_actual_cli_null_publication_reuses_the_same_owner_proof_and_bundle[current_verified_open-json]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[missing]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[wrong_sha]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[late_capture]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[schema]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[wrong_type]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[bare_first_seen]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[future_publication]>
+        <Function test_real_cli_proof_never_manufactures_historical_eligibility[invalid_publication]>
+        <Function test_known_publication_controls_cutoff_even_when_capture_is_later>
+        <Function test_current_mode_keeps_null_publication_without_inventing_a_proof>
+        <Function test_caller_cannot_supply_a_proof_or_extra_path_in_a_read_request[injected0]>
+        <Function test_caller_cannot_supply_a_proof_or_extra_path_in_a_read_request[injected1]>
+        <Function test_caller_cannot_supply_a_proof_or_extra_path_in_a_read_request[injected2]>
+        <Function test_caller_cannot_supply_a_proof_or_extra_path_in_a_read_request[first_seen_at]>
+        <Function test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[pdf]>
+        <Function test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[json]>
+        <Function test_new_owner_metadata_changes_only_the_receipt_not_frozen_artifact>
+        <Function test_projected_two_parents_cannot_borrow_one_raw_proof>
+
+========================= 22 tests collected in 7.93s =========================

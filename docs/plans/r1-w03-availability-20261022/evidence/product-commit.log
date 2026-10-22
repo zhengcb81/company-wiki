@@ -1,0 +1,8 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy runtime source (same command as CI)..............................................Passed
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/r1-narrative-availability aff8be80] fix: carry source availability into narrative reads
+ 2 files changed, 343 insertions(+), 5 deletions(-)
+ create mode 100644 tests/contract/test_narrative_availability.py
