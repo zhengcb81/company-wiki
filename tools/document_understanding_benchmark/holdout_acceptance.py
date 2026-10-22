@@ -227,6 +227,20 @@ def run_controller(spec, *, stop_after=None):
             paid = _native(database, run_id)
             require(len(paid['reservations']) == 1 and paid['reservations'][0]['paid_response_pin'],
                     'HOLDOUT_NO_UNIQUE_DURABLE_PAID_PIN')
+            from company_wiki.automation.models import HandlerOutcome
+            from company_wiki.automation.store import AutomationStore
+            boundary = next((row for row in reversed(seen) if row['event'] == 'after_paid_paused'), None)
+            native_attempt = AutomationStore(database).get_attempt(boundary['attempt_id']) if boundary else None
+            if native_attempt is None:
+                raise ControllerError('HOLDOUT_NATIVE_RETRYABLE_NOT_PROVEN')
+            require(native_attempt.outcome is HandlerOutcome.RETRYABLE
+                    and native_attempt.error_code == 'IO_TRANSIENT'
+                    and native_attempt.job_id == paid['reservations'][0]['job_id'],
+                    'HOLDOUT_NATIVE_RETRYABLE_NOT_PROVEN')
+            result['injected_fault'] = {'scope': 'test_local_after_paid', 'supplier_failure': False,
+                'native_attempt_id': native_attempt.attempt_id, 'native_outcome': native_attempt.outcome.value,
+                'native_error_code': native_attempt.error_code}
+
             require(all(value.get('reading_model_projection') == 'reading-model-input/5'
                         for value in paid['generations'].values()) and paid['generations'],
                     'HOLDOUT_NO_FROZEN_V5_GENERATION')

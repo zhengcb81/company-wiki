@@ -1,0 +1,29 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items
+
+tests\integration\test_holdout_acceptance_controller_e2e.py FF           [100%]
+
+================================== FAILURES ===================================
+_ test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[False] _
+tests\integration\test_holdout_acceptance_controller_e2e.py:206: in test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease
+    assert old is not None and old.outcome is HandlerOutcome.RETRYABLE
+E   assert (Attempt(attempt_id='ec43bc8b09b04526b24fbb1e3638757e', job_id='a885a9cf44ac30bc', attempt_no=1, worker_id='mixed-1', l...lt":{}}', error_code='HOLDOUT_AFTER_PAID', error_detail='metered model attempt did not complete', runtime_generation=2) is not None and <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> is <HandlerOutcome.RETRYABLE: 'retryable'>)
+E    +  where <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = Attempt(attempt_id='ec43bc8b09b04526b24fbb1e3638757e', job_id='a885a9cf44ac30bc', attempt_no=1, worker_id='mixed-1', l...lt":{}}', error_code='HOLDOUT_AFTER_PAID', error_detail='metered model attempt did not complete', runtime_generation=2).outcome
+E    +  and   <HandlerOutcome.RETRYABLE: 'retryable'> = <enum 'HandlerOutcome'>.RETRYABLE
+_ test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[True] _
+tests\integration\test_holdout_acceptance_controller_e2e.py:206: in test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease
+    assert old is not None and old.outcome is HandlerOutcome.RETRYABLE
+E   assert (Attempt(attempt_id='9659fbef3c4a409b920e6eb5beae0357', job_id='6bc55b3025bbbabf', attempt_no=1, worker_id='mixed-1', l...lt":{}}', error_code='HOLDOUT_AFTER_PAID', error_detail='metered model attempt did not complete', runtime_generation=2) is not None and <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> is <HandlerOutcome.RETRYABLE: 'retryable'>)
+E    +  where <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = Attempt(attempt_id='9659fbef3c4a409b920e6eb5beae0357', job_id='6bc55b3025bbbabf', attempt_no=1, worker_id='mixed-1', l...lt":{}}', error_code='HOLDOUT_AFTER_PAID', error_detail='metered model attempt did not complete', runtime_generation=2).outcome
+E    +  and   <HandlerOutcome.RETRYABLE: 'retryable'> = <enum 'HandlerOutcome'>.RETRYABLE
+- generated xml file: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller\.planning\w07-review-fix\native-outcome-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/integration/test_holdout_acceptance_controller_e2e.py::test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[False]
+FAILED tests/integration/test_holdout_acceptance_controller_e2e.py::test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[True]
+============================= 2 failed in 12.75s ==============================

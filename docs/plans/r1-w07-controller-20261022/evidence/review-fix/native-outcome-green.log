@@ -1,0 +1,49 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items
+
+tests\integration\test_holdout_acceptance_controller_e2e.py FF           [100%]
+
+================================== FAILURES ===================================
+_ test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[False] _
+tests\integration\test_holdout_acceptance_controller_e2e.py:211: in test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease
+    store.finish_attempt(attempt_id=old.attempt_id, lease_token=old.lease_token,
+src\company_wiki\automation\store.py:1467: in finish_attempt
+    return self._write_transaction(_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:919: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1432: in _op
+    attempt, job = _require_active_attempt(
+src\company_wiki\automation\store.py:280: in _require_active_attempt
+    _enabled_gate(connection, runtime_generation)
+src\company_wiki\automation\store.py:256: in _enabled_gate
+    raise RuntimeGateClosedError("runtime gate is paused")
+E   company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused
+_ test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[True] _
+tests\integration\test_holdout_acceptance_controller_e2e.py:211: in test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease
+    store.finish_attempt(attempt_id=old.attempt_id, lease_token=old.lease_token,
+src\company_wiki\automation\store.py:1467: in finish_attempt
+    return self._write_transaction(_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:919: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1432: in _op
+    attempt, job = _require_active_attempt(
+src\company_wiki\automation\store.py:280: in _require_active_attempt
+    _enabled_gate(connection, runtime_generation)
+src\company_wiki\automation\store.py:256: in _enabled_gate
+    raise RuntimeGateClosedError("runtime gate is paused")
+E   company_wiki.automation.store.RuntimeGateClosedError: runtime gate is paused
+- generated xml file: C:\Users\֣����\Projects\company-wiki-r1-holdout-controller\.planning\w07-review-fix\native-outcome-green.xml -
+=========================== short test summary info ===========================
+FAILED tests/integration/test_holdout_acceptance_controller_e2e.py::test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[False]
+FAILED tests/integration/test_holdout_acceptance_controller_e2e.py::test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease[True]
+============================= 2 failed in 10.71s ==============================

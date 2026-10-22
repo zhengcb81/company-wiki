@@ -88,6 +88,7 @@ def install() -> None:
 
     from tools.document_understanding_benchmark.holdout_acceptance_contracts import request_preflight
 
+    owned_after_paid = {}  # This process only; never a supplier error or stored permission.
     original_generate = BudgetedNarrativeCaller.generate
 
     def observed_generate(caller, context, request):
@@ -114,8 +115,11 @@ def install() -> None:
                   body_sha256=pin.body_sha256, usage_status=record.usage_status,
                   charged_tokens=record.charged_tokens, charged_micro_usd=record.charged_micro_usd,
                   worker_attempt_id=context.attempt.attempt_id,
-                  runtime_generation=context.attempt.runtime_generation)
-            raise NarrativeBudgetCallError('HOLDOUT_AFTER_PAID', HandlerOutcome.RETRYABLE, metrics)
+                  runtime_generation=context.attempt.runtime_generation,
+                  injected_error_code='IO_TRANSIENT', fault_scope='test_local_after_paid', supplier_failure=False)
+            owned_after_paid[context.attempt.attempt_id] = (context.job.job_id, context.attempt.lease_token,
+                context.attempt.runtime_generation)
+            raise NarrativeBudgetCallError('IO_TRANSIENT', HandlerOutcome.RETRYABLE, metrics)
         return response, metrics
 
     setattr(BudgetedNarrativeCaller, 'generate', observed_generate)
@@ -145,15 +149,21 @@ def install() -> None:
 
     def finish_and_pause(store, *args, **kwargs):
         result = original_finish(store, *args, **kwargs)
-        native_result = kwargs.get('result')
-        if (config['stage'] == 'after_paid' and native_result is not None
-                and native_result.error is not None and native_result.error.code == 'HOLDOUT_AFTER_PAID'):
-            # Pause only after the ordinary RETRYABLE result has committed.
-            # This existing public runtime operation prevents an automatic
-            # retry racing ahead of the test's intended process restart.
+        marker = owned_after_paid.get(kwargs.get('attempt_id'))
+        if config['stage'] == 'after_paid' and marker is not None:
+            native = store.get_attempt(kwargs['attempt_id'])
+            if (native is None or native.outcome is not HandlerOutcome.RETRYABLE
+                    or native.error_code != 'IO_TRANSIENT' or native.finished_at is None
+                    or (native.job_id, native.lease_token, native.runtime_generation) != marker):
+                event('after_paid_native_outcome_invalid', attempt_id=kwargs['attempt_id'])
+                raise RuntimeError('HOLDOUT_NATIVE_RETRYABLE_NOT_PROVEN')
+            # Only this process's injected attempt, after the native classified
+            # RETRYABLE finish committed. Unrelated IO failures cannot pause it.
             gate = store.set_runtime_gate(RuntimeState.PAUSED, updated_at=kwargs['finished_at'])
-            event(config['stage'] + '_paused', attempt_id=kwargs['attempt_id'],
-                  control_generation=gate.control_generation)
+            owned_after_paid.pop(native.attempt_id)
+            event('after_paid_paused', attempt_id=native.attempt_id,
+                  native_outcome=native.outcome.value, native_error_code=native.error_code,
+                  fault_scope='test_local_after_paid', control_generation=gate.control_generation)
         return result
 
     setattr(AutomationStore, 'finish_attempt', finish_and_pause)

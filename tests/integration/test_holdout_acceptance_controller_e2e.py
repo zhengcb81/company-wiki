@@ -185,3 +185,42 @@ def test_preflight_mismatch_or_budget_is_explicit_and_never_posts(prepared, chan
         assert result['reason'] == 'HOLDOUT_MODEL_INPUT_CHANGED'
         assert not result['native']['reservations']
         assert result['model_post_count'] == len(server.requests) == 0
+
+
+@pytest.mark.parametrize('unknown_usage', [False, True])
+def test_injected_paid_fault_is_native_retryable_and_resume_has_new_valid_lease(prepared, unknown_usage):
+    from datetime import UTC, datetime
+    from company_wiki.automation.models import HandlerMetrics, HandlerOutcome, HandlerResult
+    from company_wiki.automation.store import AutomationStore, LeaseLostError, RuntimeGateClosedError
+    from company_wiki.automation.narrative_run_store import NarrativeRunStore
+    spec, _state, server = prepared
+    if unknown_usage:
+        server.response_usage = {}
+    paused = run_controller(spec, stop_after='after_paid')
+    assert paused['status'] == 'paused_for_test', paused
+    events_path = Path(spec['receipt_dir'])/'events.jsonl'
+    events = [json.loads(line) for line in events_path.read_text(encoding='utf-8').splitlines()]
+    injected = next(row for row in events if row['event'] == 'after_paid')
+    store = AutomationStore(Path(spec['automation_db']))
+    old = store.get_attempt(injected['worker_attempt_id'])
+    assert old is not None and old.outcome is HandlerOutcome.RETRYABLE
+    assert old.error_code == 'IO_TRANSIENT'
+    runs = NarrativeRunStore(Path(spec['automation_db']))
+    before_stale = runs.budget_snapshot(spec['batch_run_id'])
+    with pytest.raises((LeaseLostError, RuntimeGateClosedError)):
+        store.finish_attempt(attempt_id=old.attempt_id, lease_token=old.lease_token,
+            runtime_generation=old.runtime_generation,
+            finished_at=datetime.now(UTC).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            result=HandlerResult(HandlerOutcome.SUCCEEDED, {}, (), (), HandlerMetrics(0, 0.0, 0), None))
+    assert runs.budget_snapshot(spec['batch_run_id']) == before_stale
+    completed = run_controller(spec)
+    assert completed['status'] == 'passed', completed.get('reason')
+    events = [json.loads(line) for line in events_path.read_text(encoding='utf-8').splitlines()]
+    recovered = next(row for row in events if row['event'] == 'paid_recover')
+    current = store.get_attempt(recovered['worker_attempt_id'])
+    assert current is not None and current.outcome is HandlerOutcome.SUCCEEDED
+    assert current.attempt_id != old.attempt_id and current.lease_token != old.lease_token
+    assert current.runtime_generation > old.runtime_generation
+    assert recovered['pid'] != injected['pid']
+    assert len(server.requests) == completed['model_post_count'] == 1
+    assert not any(row['event'] == 'post_refused' for row in events)
