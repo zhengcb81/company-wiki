@@ -1,0 +1,25 @@
+{
+  "schema_version": "w08-freeze-verification/1",
+  "all_11_source_test_sha_match": true,
+  "regression_python_syntax": "PASS (AST parse only,no rerun)",
+  "git_diff_check": "PASS",
+  "git_status": [
+    " M src/company_wiki/document_understanding/decision_inventory.py",
+    " M src/company_wiki/document_understanding/structure/sections.py",
+    " M src/company_wiki/source_catalog/narrative_business_policy.py",
+    " M src/company_wiki/source_catalog/narrative_reading.py",
+    " M src/company_wiki/source_catalog/narrative_source_purpose.py",
+    " M tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    " M tests/unit/document_understanding_selection/test_reading_hk_mechanisms.py",
+    " M tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+    " M tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+    " M tests/unit/document_understanding_selection/test_reading_semantic_value.py",
+    " M tests/unit/document_understanding_selection/test_reading_table_admission.py",
+    "?? docs/plans/r1-final3-source-semantics-20261022/"
+  ],
+  "basetemp_root_entries": 0,
+  "handoff_md_sha256": "931dfa51e9f959b62631d56bd2ede5094fa5651ea85e4d21db790244e9495387",
+  "handoff_json_sha256": "e5462d071252ad4ec6080cf54fcc9f6f276393d2c32aa120db8dcc73e95dd98e",
+  "reproducer_script_sha256": "09485304ea464004d85bfea7745cb2ad00bcc454aa15d7a7920419c2e0ed4962",
+  "no_additional_test_or_content_execution": true
+}

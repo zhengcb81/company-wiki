@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="22.304" timestamp="2026-10-22T23:38:32.327353+01:00" hostname="DESKTOP-156V213"><testcase classname="docs.plans.r1-final3-source-semantics-20261022.review.test_w08_public_cache" name="test_w08_old_sections_cache_misses_then_new_public_parent_and_cache_restore" time="21.362"><failure message="assert (0 == 2)&#10; +  where 0 = len([])">docs\plans\r1-final3-source-semantics-20261022\review\test_w08_public_cache.py:95: in test_w08_old_sections_cache_misses_then_new_public_parent_and_cache_restore
+    assert len(new_context) == 2 and len({row["locator"] for row in new_context}) == 2
+E   assert (0 == 2)
+E    +  where 0 = len([])</failure></testcase></testsuite></testsuites>

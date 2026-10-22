@@ -1,0 +1,196 @@
+{
+  "schema_version": "w08-context-native-check/1",
+  "source_ref": {
+    "byte_size": 1608226,
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+  },
+  "parse_observation": {
+    "table_pages": [
+      13,
+      14
+    ],
+    "page_count": 249,
+    "pages_read": 249,
+    "units": 5644,
+    "coverage_complete": false,
+    "note": "Bounded structural diagnostic, not sealed replay or all-page table capture."
+  },
+  "native_numbered_sections": [
+    {
+      "section_id": "s53",
+      "parent_id": "s52",
+      "heading_texts": [
+        "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。",
+        "报告期内："
+      ],
+      "body_count": 4,
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "single_row_display_heading",
+        "native_numbered_list"
+      ]
+    },
+    {
+      "section_id": "s54",
+      "parent_id": "s52",
+      "heading_texts": [
+        "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。",
+        "报告期内："
+      ],
+      "body_count": 5,
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "single_row_display_heading",
+        "native_numbered_list"
+      ]
+    },
+    {
+      "section_id": "s55",
+      "parent_id": "s52",
+      "heading_texts": [
+        "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。",
+        "报告期内："
+      ],
+      "body_count": 6,
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "single_row_display_heading",
+        "native_numbered_list"
+      ]
+    }
+  ],
+  "own_scope_targets": [
+    {
+      "original_unit_id": "urn:company-wiki:narrative-unit:sha256:56f7fc0136ea7469e97ee4fdeeb0df9a021c4370b915474cb5ebd62f74310d65",
+      "original_text": "新分子业务持续发力，2025 年收入占比进一\n步提升至超30%，在核酸类、偶联类、多特异性抗体类、多肽类等领域保持领先地位。",
+      "owner_unit_id": "urn:company-wiki:narrative-unit:sha256:ab3ce09b6986b46488bcc7a57819d38511eeb2b1443e760768f685a20b3e7461",
+      "owner_text": "-\n公司积极助力客户开展全球授权许可合作。新分子业务持续发力，2025 年收入占比进一\n步提升至超30%，在核酸类、偶联类、多特异性抗体类、多肽类等领域保持领先地位。",
+      "owner_kind": "pdf_native_range",
+      "value_band": "description",
+      "context_only": false,
+      "required": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+          "text": "五、报告期内主要经营情况",
+          "page": 13
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+          "text": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。",
+          "page": 14
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+          "text": "报告期内：",
+          "page": 14
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+          "text": "第三节\n管理层讨论与分析",
+          "page": 11
+        }
+      ],
+      "selected_span_id": null,
+      "package_kinds": [
+        "native_continuity"
+      ]
+    },
+    {
+      "original_unit_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+      "original_text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+      "owner_unit_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+      "owner_text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+      "owner_kind": "pdf_text_block",
+      "value_band": "meaningful_fact",
+      "context_only": false,
+      "required": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+          "text": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。",
+          "page": 14
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+          "text": "五、报告期内主要经营情况",
+          "page": 13
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+          "text": "报告期内：",
+          "page": 14
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+          "text": "第三节\n管理层讨论与分析",
+          "page": 11
+        }
+      ],
+      "selected_span_id": null,
+      "package_kinds": [
+        "background"
+      ]
+    }
+  ],
+  "numeric_header_targets": [
+    {
+      "original_unit_id": "urn:company-wiki:narrative-unit:sha256:4532060d28d071ee472b8387808145e2f0e234ba8e11b1f62a4e8acb7651e5d5",
+      "original_text": "单位：万元\n币种：人民币\n报告分部\n本期数\n上年同期数\n变动比例（%）\n化学业务\n（WuXi Chemistry）\n3,646,584.69\n2,905,240.91\n25.52",
+      "owner_unit_id": "urn:company-wiki:narrative-unit:sha256:4532060d28d071ee472b8387808145e2f0e234ba8e11b1f62a4e8acb7651e5d5",
+      "owner_text": "单位：万元\n币种：人民币\n报告分部\n本期数\n上年同期数\n变动比例（%）\n化学业务\n（WuXi Chemistry）\n3,646,584.69\n2,905,240.91\n25.52",
+      "owner_kind": "pdf_text_block",
+      "value_band": null,
+      "context_only": null,
+      "required": [],
+      "selected_span_id": null,
+      "package_kinds": []
+    },
+    {
+      "original_unit_id": "urn:company-wiki:narrative-unit:sha256:11e56f31ed8aa10ef8acd0232145bf201c6e820a4a9a50994683202fc27edc3e",
+      "original_text": "化学业务\n（WuXi Chemistry） | 3,646,584.69 | 2,905,240.91 | 25.52",
+      "owner_unit_id": "urn:company-wiki:narrative-unit:sha256:11e56f31ed8aa10ef8acd0232145bf201c6e820a4a9a50994683202fc27edc3e",
+      "owner_text": "化学业务\n（WuXi Chemistry） | 3,646,584.69 | 2,905,240.91 | 25.52",
+      "owner_kind": "pdf_table_row",
+      "value_band": null,
+      "context_only": null,
+      "required": [],
+      "selected_span_id": null,
+      "package_kinds": []
+    }
+  ],
+  "planner": {
+    "max_selected": 96,
+    "max_chars": 48000,
+    "candidate_count": 1459,
+    "selected_count": 96,
+    "selected_chars": 8433,
+    "status": "partial",
+    "coverage_complete": false,
+    "selection_diagnostics": [
+      {
+        "code": "budget_full",
+        "count": 206
+      }
+    ],
+    "context_deferred_count": 263
+  },
+  "candidate_processing": {
+    "complete": false,
+    "withheld_count": 57,
+    "withheld_reasons": [
+      "INCOMPLETE_NATIVE_CONTINUITY",
+      "INCOMPLETE_OR_NONSELECTABLE_CONTEXT"
+    ]
+  },
+  "module_file": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+  "unchanged_config_and_db_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+  }
+}

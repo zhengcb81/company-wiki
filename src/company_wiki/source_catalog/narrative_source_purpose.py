@@ -18,6 +18,9 @@ NON_OPERATING_PURPOSES = frozenset({
 
 _ACCOUNTING = re.compile(
     r"期权定价|股份支付|股票期权|使用权资产|租赁负债|账面价值|计入损益|"
+    r"金融负债.{0,120}终止确认|终止确认.{0,120}金融负债|"
+    r"\bfinancial liabilit(?:y|ies)\b.{0,160}\bderecogni[sz]\w*\b|"
+    r"\bderecogni[sz]\w*\b.{0,160}\bfinancial liabilit(?:y|ies)\b|"
     r"\b(?:employee share options?|share.based (?:payments?|compensation)|"
     r"option.pricing|right.of.use assets?|lease liabilities|carrying (?:value|amount)|"
     r"accounting estimates?|accounting polic(?:y|ies)|consolidated financial statements|"

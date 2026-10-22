@@ -1,0 +1,72 @@
+{"phase": "before_pytest", "module_files": ["C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py"]}
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\main-red-temp", "requested_basetemp_len": 123, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-222305-828a01d6", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 33 items / 19 deselected / 14 selected
+
+tests\unit\document_understanding_selection\test_reading_semantic_value.py F [  7%]
+FFFFFF.......                                                            [100%]
+
+================================== FAILURES ===================================
+_ test_w08_operating_quantity_is_not_merely_a_section_description[\u7814\u53d1\u5236\u9020\u670d\u52a1\u672c\u671f\u5b9e\u73b0\u6536\u5165126.4\u4ebf\u5143\uff0c\u540c\u6bd4\u589e\u957f18.6%\uff1b\u672c\u671f\u65b0\u589e\u9879\u76ee560\u4e2a\uff0c\u671f\u672b\u9879\u76ee\u603b\u65702480\u4e2a\uff0c\u5176\u4e2d\u4e34\u5e8a\u540e\u671f\u9879\u76ee64\u4e2a\u3002] _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:241: in test_w08_operating_quantity_is_not_merely_a_section_description
+    assert metadata[candidates[0].unit.unit_id]["value_band"] == "meaningful_fact"
+E   AssertionError: assert 'description' == 'meaningful_fact'
+E     
+E     - meaningful_fact
+E     + description
+_ test_w08_operating_quantity_is_not_merely_a_section_description[\u622a\u81f3\u62a5\u544a\u671f\u672b\uff0c\u516c\u53f8\u53cd\u5e94\u91dc\u603b\u5bb9\u79ef\u8fbe\u52302400kL\u3002] _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:241: in test_w08_operating_quantity_is_not_merely_a_section_description
+    assert metadata[candidates[0].unit.unit_id]["value_band"] == "meaningful_fact"
+E   AssertionError: assert 'description' == 'meaningful_fact'
+E     
+E     - meaningful_fact
+E     + description
+_ test_w08_operating_quantity_is_not_merely_a_section_description[\u516c\u53f8\u7684\u4e13\u95e8\u670d\u52a1\u4e1a\u52a1\u672c\u671f\u5ba2\u6237\u6570\u4e3a172\u5bb6\uff0c\u5206\u5b50\u9879\u76ee\u6570\u91cf\u4e3a2390\u4e2a\u3002] _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:241: in test_w08_operating_quantity_is_not_merely_a_section_description
+    assert metadata[candidates[0].unit.unit_id]["value_band"] == "meaningful_fact"
+E   AssertionError: assert 'description' == 'meaningful_fact'
+E     
+E     - meaningful_fact
+E     + description
+_ test_w08_operating_quantity_is_not_merely_a_section_description[\u6280\u672f\u670d\u52a1\u4e1a\u52a1\u672c\u671f\u5b9e\u73b0\u6536\u5165\u4eba\u6c11\u5e0126.5\u4ebf\u5143\uff0c\u540c\u6bd4\u589e\u957f16.2%\u3002] _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:241: in test_w08_operating_quantity_is_not_merely_a_section_description
+    assert metadata[candidates[0].unit.unit_id]["value_band"] == "meaningful_fact"
+E   AssertionError: assert 'description' == 'meaningful_fact'
+E     
+E     - meaningful_fact
+E     + description
+_ test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget[False] _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:257: in test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget
+    assert [span.raw_text for span in result.evidence_spans] == [operating]
+E   AssertionError: assert ['当金融负债的现时义务全...融负债或已解除义务部分。'] == ['服务业务本期客户数为172家，项目总数为2390个。']
+E     
+E     At index 0 diff: '当金融负债的现时义务全部或部分已经解除时，公司终止确认该金融负债或已解除义务部分。' != '服务业务本期客户数为172家，项目总数为2390个。'
+E     Use -v to get more diff
+_ test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget[True] _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:257: in test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget
+    assert [span.raw_text for span in result.evidence_spans] == [operating]
+E   AssertionError: assert ['当金融负债的现时义务全...融负债或已解除义务部分。'] == ['服务业务本期客户数为172家，项目总数为2390个。']
+E     
+E     At index 0 diff: '当金融负债的现时义务全部或部分已经解除时，公司终止确认该金融负债或已解除义务部分。' != '服务业务本期客户数为172家，项目总数为2390个。'
+E     Use -v to get more diff
+_ test_w08_accounting_derecognition_is_read_no_business_without_hiding_real_note_events _
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:266: in test_w08_accounting_derecognition_is_read_no_business_without_hiding_real_note_events
+    assert complete and not withheld and not candidates and not packages
+E   AssertionError: assert (True and not [] and not (EvidenceCandidate(unit=NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:e9a1bd5f5b08ee14a17e7ffab732cea1...nfc_unchanged': True})})})})), topics=('core_business',), reasons=('reading_plan', 'operating_restriction'), score=3),))
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\review\main-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_operating_quantity_is_not_merely_a_section_description[\u7814\u53d1\u5236\u9020\u670d\u52a1\u672c\u671f\u5b9e\u73b0\u6536\u5165126.4\u4ebf\u5143\uff0c\u540c\u6bd4\u589e\u957f18.6%\uff1b\u672c\u671f\u65b0\u589e\u9879\u76ee560\u4e2a\uff0c\u671f\u672b\u9879\u76ee\u603b\u65702480\u4e2a\uff0c\u5176\u4e2d\u4e34\u5e8a\u540e\u671f\u9879\u76ee64\u4e2a\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_operating_quantity_is_not_merely_a_section_description[\u622a\u81f3\u62a5\u544a\u671f\u672b\uff0c\u516c\u53f8\u53cd\u5e94\u91dc\u603b\u5bb9\u79ef\u8fbe\u52302400kL\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_operating_quantity_is_not_merely_a_section_description[\u516c\u53f8\u7684\u4e13\u95e8\u670d\u52a1\u4e1a\u52a1\u672c\u671f\u5ba2\u6237\u6570\u4e3a172\u5bb6\uff0c\u5206\u5b50\u9879\u76ee\u6570\u91cf\u4e3a2390\u4e2a\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_operating_quantity_is_not_merely_a_section_description[\u6280\u672f\u670d\u52a1\u4e1a\u52a1\u672c\u671f\u5b9e\u73b0\u6536\u5165\u4eba\u6c11\u5e0126.5\u4ebf\u5143\uff0c\u540c\u6bd4\u589e\u957f16.2%\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget[False]
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget[True]
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_accounting_derecognition_is_read_no_business_without_hiding_real_note_events
+================= 7 failed, 7 passed, 19 deselected in 0.62s ==================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-222305-828a01d6", "existed": true, "removed": true}
+{"phase": "after_pytest", "module_files": ["C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py"], "pytest_exit": 1}

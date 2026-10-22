@@ -63,3 +63,6 @@
 /docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/remediation/** -text -diff
 /docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/diagnosis/** -text -diff
 /docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/expert-remediation-overview.* -text -diff
+
+# Preserve paused W08 candidate native receipts byte for byte.
+/docs/plans/r1-final3-source-semantics-20261022/review/** -text -eol whitespace=cr-at-eol,-blank-at-eof,-blank-at-eol

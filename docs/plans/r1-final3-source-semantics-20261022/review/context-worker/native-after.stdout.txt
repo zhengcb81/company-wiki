@@ -1,0 +1,7 @@
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+Traceback (most recent call last):
+  File "<stdin>", line 22, in <module>
+  File "C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\src\company_wiki\source_catalog\narrative_reading.py", line 421, in _candidates
+    reading = pipeline["reading_plan"]["unit_profiles"]
+              ~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'reading_plan'

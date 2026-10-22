@@ -222,3 +222,71 @@ def test_different_native_sources_never_share_a_linguistic_view_even_with_two_la
     packages, _facts, _continuity, _blocked = reading._prose_reading_packages(parsed, pipeline, classify)
     assert "公司产品将通过合作研发提高效率。" not in seen
     assert all(package["kind"] != "native_continuity" for package in packages)
+
+
+# W08 source quantity/purpose regressions use the real native source owner.
+@pytest.mark.parametrize("text", [
+    "研发制造服务本期实现收入126.4亿元，同比增长18.6%；本期新增项目560个，期末项目总数2480个，其中临床后期项目64个。",
+    "截至报告期末，公司反应釜总容积达到2400kL。",
+    "公司的专门服务业务本期客户数为172家，分子项目数量为2390个。",
+    "技术服务业务本期实现收入人民币26.5亿元，同比增长16.2%。",
+])
+def test_w08_operating_quantity_is_not_merely_a_section_description(text):
+    from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+    parsed, pipeline = source_fixture([(text,)])
+    before = tuple(unit.to_evidence_span(topics=(), selection_reasons=()) for unit in parsed.units)
+    candidates, metadata, _, complete, withheld = reading._candidates(parsed, pipeline)
+    assert complete and not withheld
+    assert len(candidates) == 1
+    assert metadata[candidates[0].unit.unit_id]["value_band"] == "meaningful_fact"
+    assert tuple(unit.to_evidence_span(topics=(), selection_reasons=()) for unit in parsed.units) == before
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_w08_accounting_template_cannot_win_an_equal_priority_one_span_budget(reverse):
+    from unit.document_understanding_selection.test_reading_native_carriers import source_fixture, selected
+    operating = "服务业务本期客户数为172家，项目总数为2390个。"
+    accounting = "当金融负债的现时义务全部或部分已经解除时，公司终止确认该金融负债或已解除义务部分。"
+    texts = [operating, accounting]
+    if reverse:
+        texts.reverse()
+    parsed, pipeline = source_fixture([(text,) for text in texts])
+    candidates, metadata, _, complete, withheld = reading._candidates(parsed, pipeline)
+    result = selected(parsed, pipeline, candidates, metadata, limit=1)
+    assert complete and not withheld
+    assert [span.raw_text for span in result.evidence_spans] == [operating]
+    assert reading.MAX_READING_CHARS == 48000 and reading.READING_BUDGET_POLICY == "reading_plan/3"
+
+
+def test_w08_accounting_derecognition_is_read_no_business_without_hiding_real_note_events():
+    from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+    accounting = "当金融负债的现时义务全部或部分已经解除时，公司终止确认该金融负债或已解除义务部分。"
+    parsed, pipeline = source_fixture([(accounting,)])
+    candidates, _, packages, complete, withheld = reading._candidates(parsed, pipeline)
+    assert complete and not withheld and not candidates and not packages
+    real = "公司新增生产线已经投入运行，但仍需完成客户认证。"
+    parsed, pipeline = source_fixture([(accounting,), (real,)])
+    candidates, _, _, complete, withheld = reading._candidates(parsed, pipeline)
+    assert complete and not withheld
+    assert [candidate.unit.raw_text for candidate in candidates] == [real]
+
+
+@pytest.mark.parametrize("text", [
+    "客户贷款账面余额为172万元。",
+    "项目账面价值为2390万元。",
+    "客户数是一项定义，示例数字为172。",
+    "客户服务中心项目总投资为300万元。",
+    "The customer loan carrying amount was 172 million.",
+    "A glossary mentions customers. Total assets were 172 million.",
+])
+def test_w08_unrelated_financial_values_and_definition_numbers_are_not_operating_stock(text):
+    fact = reading.detect_reading_business_fact(text)
+    assert not fact.eligible
+
+
+def test_w08_imports_resolve_to_the_owned_source_tree():
+    from pathlib import Path
+    from company_wiki.source_catalog import narrative_business_policy, narrative_source_purpose
+    root = Path(__file__).resolve().parents[3] / "src"
+    assert all(Path(module.__file__).resolve().is_relative_to(root)
+               for module in (reading, narrative_business_policy, narrative_source_purpose))

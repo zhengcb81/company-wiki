@@ -158,6 +158,57 @@ def _display_heading_groups(units, excluded):
     return groups
 
 
+
+def _native_numbered_list_scopes(ordering: layout_mod.Ordering):
+    """Source numbered introductions plus indented bullets, never nearby prose.
+
+    The native parser can split a numbered introduction after its first full
+    sentence. Equal boxes retain that original block boundary; an indented
+    bullet supplies the separate child-level evidence. Without both, keep the
+    existing unknown body structure. Scopes end at the next non-bullet block.
+    """
+    scopes = {}
+    ordered = ordering.ordered
+    marker = re.compile(r"^(?:\(\d{1,2}\)|（\d{1,2}）)\s+\S")
+    bullet = re.compile(r"^\s*[-•●▪]\s+\S")
+    excluded = ordering.toc_ids | ordering.running_header_ids
+    index = 0
+    while index + 2 < len(ordered):
+        opener, intro, first = ordered[index:index + 3]
+        if (opener.unit_id in excluded or not marker.match(opener.text)
+                or opener.source_id is None or opener.bbox is None or opener.dom_path is not None
+                or opener.table_id or opener.is_table_furniture or opener.is_footnote
+                or intro.table_id or intro.is_table_furniture or intro.is_footnote
+                or (intro.source_id, intro.page, intro.column, intro.bbox)
+                != (opener.source_id, opener.page, opener.column, opener.bbox)
+                or not intro.text.rstrip().endswith(("：", ":"))
+                or first.bbox is None or first.bbox[0] <= opener.bbox[0]
+                or first.bbox[1] < opener.bbox[3] or not bullet.match(first.text)):
+            index += 1
+            continue
+        members = [opener, intro]
+        previous_box = None
+        cursor = index + 2
+        while cursor < len(ordered):
+            unit = ordered[cursor]
+            if (unit.unit_id in excluded or unit.table_id or unit.is_table_furniture
+                    or unit.is_footnote or unit.bbox is None
+                    or (unit.source_id, unit.page, unit.column)
+                    != (opener.source_id, opener.page, opener.column)
+                    or unit.bbox[0] <= opener.bbox[0]
+                    or not (bullet.match(unit.text) or unit.bbox == previous_box)):
+                break
+            members.append(unit)
+            previous_box = unit.bbox
+            cursor += 1
+            if len(members) > MAX_CONTINUATION_UNITS:
+                break
+        if 2 < len(members) <= MAX_CONTINUATION_UNITS:
+            scopes[opener.unit_id] = tuple(members)
+        index = max(index + 1, cursor)
+    return scopes
+
+
 def build_sections(
     units: Sequence[ObservationUnit],
     ordering: layout_mod.Ordering,
@@ -194,6 +245,10 @@ def build_sections(
     active_item = None
     previous_source: str | None = None
     source_seen = False
+    numbered_scopes = _native_numbered_list_scopes(ordering)
+    native_scope_members: set[str] = set()
+    native_parent_stack: list[SectionDraft] = []
+    native_intro_ids = set()
 
     def open_section(
         unit: ObservationUnit,
@@ -250,6 +305,9 @@ def build_sections(
         return draft
 
     for unit in ordering.ordered:
+        if native_scope_members and unit.unit_id not in native_scope_members:
+            stack[:] = native_parent_stack
+            native_scope_members = set()
         if source_seen and unit.source_id != previous_source:
             # Attribution changes are real boundaries even on a pageless
             # projection. A prior parent's heading cannot classify this body.
@@ -262,7 +320,22 @@ def build_sections(
         source_seen = True
         if unit.unit_id in toc_ids:
             continue
-        if unit.unit_id in furniture or unit.unit_id in display_title_ids:
+        if (unit.unit_id in furniture or unit.unit_id in display_title_ids
+                or unit.unit_id in native_intro_ids):
+            continue
+        native_scope = numbered_scopes.get(unit.unit_id)
+        if native_scope is not None:
+            native_parent_stack = list(stack)
+            parent_depth = stack[-1].depth if stack else 0
+            current = open_section(unit, heading_units=list(native_scope[:2]),
+                depth_override=(parent_depth or 0) + 1, contextual_outline=True)
+            current.basis.append("native_numbered_list")
+            native_scope_members = {member.unit_id for member in native_scope}
+            native_intro_ids.add(native_scope[1].unit_id)
+            unit_section[unit.unit_id] = current.section_id
+            unit_section[native_scope[1].unit_id] = current.section_id
+            last_page = unit.page
+            carry_units = 0
             continue
         compound = display_headings.get(unit.unit_id)
         is_heading = layout_mod.is_heading(unit, toc_ids=toc_ids)

@@ -87,3 +87,111 @@ def test_new_segment_relation_does_not_modify_the_explicit_legacy_detector():
     current = detect_reading_business_fact(text)
     assert "business_reporting_scope" not in legacy.reasons
     assert "business_reporting_scope" in current.reasons
+
+
+
+def _explicit_scope_fixture(*, reverse=False):
+    from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+
+    scopes = ["（一）检测服务", "（二）技术服务"]
+    if reverse:
+        scopes.reverse()
+    parsed, pipeline = source_fixture([
+        (scopes[0],), ("新产品收入占比超过30%。",),
+        (scopes[1],), ("新产品收入占比超过30%。",),
+    ], heading=True)
+    ids = [unit.unit_id for unit in parsed.units]
+    for index in (1, 3):
+        pipeline["observation"]["units"][index]["kind"] = "heading"
+    pipeline["structure"]["sections"] = [
+        {"section_id": "root", "parent_id": None,
+         "heading_unit_ids": [ids[0]], "body_unit_ids": []},
+        {"section_id": "scope-a", "parent_id": "root",
+         "heading_unit_ids": [ids[1]], "body_unit_ids": []},
+        {"section_id": "leaf-a", "parent_id": "scope-a",
+         "heading_unit_ids": [], "body_unit_ids": [ids[2]]},
+        {"section_id": "scope-b", "parent_id": "root",
+         "heading_unit_ids": [ids[3]], "body_unit_ids": []},
+        {"section_id": "leaf-b", "parent_id": "scope-b",
+         "heading_unit_ids": [], "body_unit_ids": [ids[4]]},
+    ]
+    return parsed, pipeline
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_explicit_business_ancestors_follow_their_own_original_branch(reverse):
+    from company_wiki.source_catalog import narrative_reading as reading
+    from unit.document_understanding_selection.test_reading_native_carriers import selected
+
+    parsed, pipeline = _explicit_scope_fixture(reverse=reverse)
+    candidates, metadata, packages, complete, withheld = reading._candidates(parsed, pipeline)
+    ids = [unit.unit_id for unit in parsed.units]
+    for anchor, parent, sibling in ((2, 1, 3), (4, 3, 1)):
+        assert set(metadata[ids[anchor]]["required"]) == {ids[0], ids[parent]}
+        assert ids[sibling] not in metadata[ids[anchor]]["required"]
+    assert complete and not withheld
+    result = selected(parsed, pipeline, candidates, metadata, limit=5)
+    repeated = [span for span in result.evidence_spans if span.raw_text == parsed.units[2].raw_text]
+    assert len(repeated) == 2 and len({span.span_id for span in repeated}) == 2
+    assert {span.coordinates for span in repeated} == {
+        parsed.units[2].coordinates, parsed.units[4].coordinates,
+    }
+
+
+
+@pytest.mark.parametrize("broken", ["missing", "cycle", "foreign-parent"])
+def test_unproven_business_parent_cannot_borrow_another_branch_or_source(broken):
+    from dataclasses import replace
+    from company_wiki.source_catalog import narrative_reading as reading
+    from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+
+    parsed, pipeline = _explicit_scope_fixture()
+    ids = [unit.unit_id for unit in parsed.units]
+    sections = pipeline["structure"]["sections"]
+    if broken == "missing":
+        sections.remove(sections[1])
+    elif broken == "cycle":
+        sections[1]["parent_id"] = "leaf-a"
+    else:
+        foreign, other = source_fixture([("其他来源的业务标题",)], source_sha="e" * 64)
+        parsed = replace(parsed, units=(*parsed.units, *foreign.units))
+        pipeline["observation"]["units"].extend(other["observation"]["units"])
+        pipeline["reading_plan"]["unit_profiles"].update(other["reading_plan"]["unit_profiles"])
+        sections[1]["heading_unit_ids"] = [foreign.units[0].unit_id]
+    candidates, metadata, packages, complete, withheld = reading._candidates(parsed, pipeline)
+    assert ids[2] not in {candidate.unit.unit_id for candidate in candidates}
+    assert ids[4] in metadata and set(metadata[ids[4]]["required"]) == {ids[0], ids[3]}
+    assert not complete and withheld
+
+
+def test_changed_original_parent_edge_changes_context_without_nearest_heading_fallback():
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    parsed, pipeline = _explicit_scope_fixture()
+    ids = [unit.unit_id for unit in parsed.units]
+    pipeline["structure"]["sections"][2]["parent_id"] = "scope-b"
+    _, metadata, _, complete, withheld = reading._candidates(parsed, pipeline)
+    assert set(metadata[ids[2]]["required"]) == {ids[0], ids[3]}
+    assert ids[1] not in metadata[ids[2]]["required"]
+    assert complete and not withheld
+
+
+
+def test_own_parent_context_reaches_public_groups_without_becoming_factual_support(monkeypatch):
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    parsed, supplied = _explicit_scope_fixture()
+    actual = reading._understand(parsed, title="年度报告", kind="annual_report", mime_type="application/pdf")
+    actual["packages"] = supplied["packages"]
+    actual["structure"]["sections"] = supplied["structure"]["sections"]
+    actual["reading_plan"]["unit_profiles"] = supplied["reading_plan"]["unit_profiles"]
+    monkeypatch.setattr(reading, "_understand", lambda *a, **k: actual)
+    result = reading.select_reading_evidence(parsed, title="年度报告", existing_kind="annual_report", max_selected=5)
+    by_locator = {span.coordinates: span.span_id for span in result.evidence_spans}
+    ids = [by_locator[unit.coordinates] for unit in parsed.units]
+    views = [view for group in result.reading_context["groups"] for view in group["citation_views"]]
+    for anchor, parent, sibling in ((2, 1, 3), (4, 3, 1)):
+        relevant = [view for view in views if view["support_evidence_ids"] == [ids[anchor]]]
+        assert relevant and all(set(view["context_evidence_ids"]) == {ids[0], ids[parent]} for view in relevant)
+        assert all(ids[sibling] not in view["context_evidence_ids"] for view in relevant)
+    assert all(not {ids[0], ids[1], ids[3]}.intersection(view["support_evidence_ids"]) for view in views)

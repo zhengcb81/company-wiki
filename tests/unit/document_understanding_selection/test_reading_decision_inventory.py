@@ -323,3 +323,29 @@ def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complet
         assert scope["family"] == actual[key]["family"]
         assert scope["regime"] == actual[key]["regime"]
     assert {view["reading_profile_key"] for view in pipeline["reading_plan"]["unit_profiles"].values()} == set(actual)
+
+
+@pytest.mark.parametrize("module_name", [
+    "company_wiki.source_catalog.narrative_business_policy",
+    "company_wiki.source_catalog.narrative_source_purpose",
+    "company_wiki.source_catalog.narrative_reading",
+    "company_wiki.document_understanding.structure.sections",
+])
+def test_w08_changed_source_implementation_invalidates_the_real_complete_decision(tmp_path, monkeypatch, module_name):
+    from types import SimpleNamespace
+    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.document_understanding.decision_dependencies import (
+        compare_decision_dependencies, freeze_decision_dependencies,
+    )
+    observed = _real_interim_pipeline()
+    observed["observation"]["metadata"]["mime_type"] = "text/html"
+    source_file = tmp_path / "owned-source.py"
+    source_file.write_bytes(b"def source_rule():\\n    return True\\n")
+    actual_import = inventory.import_module
+    monkeypatch.setattr(inventory, "import_module",
+        lambda name: SimpleNamespace(__file__=str(source_file)) if name == module_name else actual_import(name))
+    frozen = freeze_decision_dependencies(inventory.build_decision_trace(observed))
+    assert frozen["status"] == "complete"
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "same"
+    source_file.write_bytes(b"def source_rule():\\n    return False\\n")
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"

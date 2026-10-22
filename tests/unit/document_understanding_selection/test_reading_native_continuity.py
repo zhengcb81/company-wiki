@@ -745,3 +745,73 @@ def test_body_definition_colon_is_an_open_continuation_not_a_heading(colon):
     assert result["complete"]
     assert len(result["windows"]) == 1
     assert result["windows"][0]["member_unit_ids"] == [r[0]["unit_id"] for r in rows]
+
+
+
+def _native_numbered_scope_case(*, reverse=False, indented=True):
+    from dataclasses import replace
+    from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+    from company_wiki.source_catalog.narrative_native_ranges import build_native_page_view
+
+    names = ["检测服务", "技术服务"]
+    if reverse:
+        names.reverse()
+    blocks = [
+        ("一、经营情况",),
+        ("(1) " + names[0] + "实现收入12亿元。", "报告期内："),
+        ("-\n新产品收入占比超过30%。",),
+        ("(2) " + names[1] + "实现收入9亿元。", "报告期内："),
+        ("-\n新产品收入占比超过30%。",),
+        ("公司整体计划仍受市场变化影响。",),
+    ]
+    parsed, _ = source_fixture(blocks)
+    boxes = [(110 if indented and i in {2, 4} else 90, 100 + 20*i,
+              550, 112 + 20*i) for i in range(len(blocks))]
+    view = build_native_page_view([(i, box, "\n".join(blocks[i])) for i, box in enumerate(boxes)])
+    updated=[]
+    for unit in parsed.units:
+        metadata={key: deepcopy(value) for key, value in unit.metadata.items()
+                  if key != "native_source_view"}
+        metadata["reading_layout"]["layout"]["bbox"] = list(boxes[metadata["pdf_block"]])
+        metadata["native_source_view"] = view
+        updated.append(replace(unit, metadata=metadata))
+    return replace(parsed, units=tuple(updated))
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope(reverse):
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    parsed = _native_numbered_scope_case(reverse=reverse)
+    pipeline = reading._understand(parsed, title="年度报告", kind="annual_report", mime_type="application/pdf")
+    units = {unit.unit_id: unit for unit in parsed.units}
+    scope_for = {uid: section for section in pipeline["structure"]["sections"]
+                 for uid in section.get("body_unit_ids", ())}
+    for anchor, parent, intro, sibling in ((3, 1, 2, 4), (6, 4, 5, 1)):
+        heads = scope_for[parsed.units[anchor].unit_id]["heading_unit_ids"]
+        assert set(heads) == {parsed.units[parent].unit_id, parsed.units[intro].unit_id}
+        assert parsed.units[sibling].unit_id not in heads
+    assert not any("实现收入" in units[uid].raw_text
+                   for uid in scope_for[parsed.units[-1].unit_id]["heading_unit_ids"])
+    candidates, metadata, packages, complete, withheld = reading._candidates(parsed, pipeline)
+    for anchor, parent, intro, sibling in ((3, 1, 2, 4), (6, 4, 5, 1)):
+        required = set(metadata[parsed.units[anchor].unit_id]["required"])
+        assert {parsed.units[parent].unit_id, parsed.units[intro].unit_id} <= required
+        assert parsed.units[sibling].unit_id not in required
+    assert complete and not withheld
+
+
+def test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope():
+    from dataclasses import replace
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    parsed = _native_numbered_scope_case(indented=False)
+    pipeline = reading._understand(parsed, title="年度报告", kind="annual_report", mime_type="application/pdf")
+    assert not any("native_numbered_list" in section.get("basis", ())
+                   for section in pipeline["structure"]["sections"])
+    parsed = replace(parsed, units=tuple(
+        replace(unit, raw_text="正文提到" + unit.raw_text) if unit.raw_text.startswith("(") else unit
+        for unit in parsed.units))
+    pipeline = reading._understand(parsed, title="年度报告", kind="annual_report", mime_type="application/pdf")
+    assert not any("native_numbered_list" in section.get("basis", ())
+                   for section in pipeline["structure"]["sections"])

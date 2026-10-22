@@ -215,7 +215,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/9"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/10"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -283,14 +283,23 @@ _REVENUE_GROWTH = re.compile(
 _DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting)\b|主要由|由于|因为|受.{0,12}带动|得益于", re.I)
 _OPERATING_MEASURE = re.compile(
     r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
-    r"capacity utilization|product mix|使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
-    r"产能利用率|产品组合", re.I)
+    r"capacity utilization|product mix|\b(?:projects?|orders?|capacity|output|total volume)\b|"
+    r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
+    r"产能利用率|产品组合|项目|項目|产能|產能|产量|產量|容积|容積", re.I)
 _MEASURE_CHANGE = re.compile(
     r"\b(?:higher|lower|growing|rising|falling|increas\w*|decreas\w*|grew|growth|"
     r"declin\w*|expansion|adoption|mix|improv\w*|changed|shift\w*|rose)\b|"
     r"增长|增長|上升|下降|提升|减少|減少|增加|扩张|擴張|提高|变动|变化", re.I)
-_MEASURE_COUNT = re.compile(r"^\s*(?:(?:of|was|were|reached|at|to)\s+)?\d|"
-                            r"\d[\d,.]*\s+(?:(?:million|billion|thousand|paid|active|licensed)\s+)*$", re.I)
+_MEASURE_COUNT = re.compile(
+    r"^\s*(?:(?:(?:total|count|number)\s+)?(?:of|was|were|is|are|reached|at|to)\s+|"
+    r"(?:(?:总|總)?(?:数|數|数量|數量|总数|總數|总量|總量))?"
+    r"(?:为|為|达到|達到|达|達|增至|约为|約為|超过|超過)?\s*)?\d|"
+    r"\d[\d,.]*\s+(?:(?:million|billion|thousand|paid|active|licensed)\s+)*$", re.I)
+_REVENUE_VALUE = re.compile(
+    r"(?:营业收入|營業收入|收入|\b(?:revenues?|net sales)\b)\s*"
+    r"(?:(?:was|were|is|are|of|totaled|totalled|reached|amounted to)\s+|"
+    r"为|為|达到|達到|达|達)?\s*"
+    r"(?:(?:人民币|人民幣|港币|港幣|美元|USD|RMB|CNY|HKD)\s*)?[$¥€£]?\s*\d[\d,.]*", re.I)
 _CONTRACT_OBJECT = re.compile(
     r"\b(?:remaining (?:performance )?obligations?|contract(?:ed)? backlog|order backlog|"
     r"unfulfilled customer contracts?)\b|剩余履约义务|剩餘履約義務|合同负债|合同負債|在手订单|在手訂單|未履行客户合同|未履行客戶合同", re.I)
@@ -438,6 +447,37 @@ def _measured_driver(explanation: str) -> bool:
     return False
 
 
+def _source_quantity_relation(clause: str) -> bool:
+    """A count/physical measure binds its adjacent source quantity.
+
+    Reuse the operating-measure owner; do not infer throughput, a completed
+    milestone, or an economic conversion from the reported stock.
+    """
+    if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
+        return False
+    for measure in _OPERATING_MEASURE.finditer(clause):
+        after = clause[measure.end():measure.end() + 60]
+        quantity = re.search(r"\d[\d,]*(?:\.\d+)?", after)
+        if quantity is None or not _MEASURE_COUNT.match(after):
+            continue
+        # An adjacent date/year is not the metric's count.
+        if re.match(r"\s*(?:年|年度|years?\b|quarters?\b)", after[quantity.end():], re.I):
+            continue
+        return True
+    return False
+
+
+def _business_revenue_measure(clause: str) -> bool:
+    """An explicitly scoped business amount is source data, not composition."""
+    if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
+        return False
+    for value in _REVENUE_VALUE.finditer(clause):
+        subject = re.split(r"[,，]", clause[max(0, value.start() - 100):value.start()])[-1]
+        if _PRODUCT_SUBJECT.search(subject):
+            return True
+    return False
+
+
 def _segment_reporting_relation(clause: str) -> bool:
     """Bind an issuer's actual segment to its composition/reporting relation.
 
@@ -568,6 +608,10 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             reasons.append("business_reporting_scope")
         if _business_coverage_relation(clause):
             reasons.append("business_coverage_relation")
+        if _source_quantity_relation(clause):
+            reasons.append("operating_quantity")
+        if _business_revenue_measure(clause):
+            reasons.append("business_revenue_measure")
         growth = _REVENUE_GROWTH.search(clause)
         link = _DRIVER_LINK.search(clause)
         if growth and link:
@@ -630,7 +674,8 @@ def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
         *(("capacity_projects",) if activity and "production" in families else ()))))
     return OperatingFact(True, topics, tuple(dict.fromkeys((*fact.reasons, *relations,
                          *(("operating_activity",) if activity else ())))),
-                         max(fact.score, 3), fact.financial_exempt or bool(relations))
+                         max(fact.score, 3), fact.financial_exempt or
+                         any(reason != "business_revenue_measure" for reason in relations))
 
 
 def detect_reading_business_fact(text: str) -> OperatingFact:
@@ -646,6 +691,8 @@ def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
         purpose = "operating_contract_stock"
     if purpose in NON_OPERATING_PURPOSES:
         return OperatingFact(False, (), (), 0, False, purpose)
+    if purpose == "unknown" and {"operating_quantity", "business_revenue_measure"} & set(fact.reasons):
+        purpose = "operating_metric"
     if purpose == "operating_contract_stock":
         return OperatingFact(True, tuple(dict.fromkeys((*fact.topics, "operating_metrics"))),
             tuple(dict.fromkeys((*fact.reasons, "operating_contract_stock"))),

@@ -1,0 +1,26 @@
+[
+  {
+    "target": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-222921-af3d0f48",
+    "containment_checked": true,
+    "existed": true,
+    "entries_before": 6,
+    "removed": true,
+    "method": "PowerShell Remove-Item -LiteralPath -Recurse -Force"
+  },
+  {
+    "target": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-223921-8c8782c8",
+    "containment_checked": true,
+    "existed": true,
+    "entries_before": 6,
+    "removed": true,
+    "method": "PowerShell Remove-Item -LiteralPath -Recurse -Force"
+  },
+  {
+    "target": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\mypy-cache",
+    "containment_checked": true,
+    "existed": true,
+    "entries_before": 1169,
+    "removed": true,
+    "method": "PowerShell Remove-Item -LiteralPath -Recurse -Force"
+  }
+]

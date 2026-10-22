@@ -122,6 +122,8 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     audited_kinds = prose_kinds | {"project"}
     owners: dict[str, list[Mapping[str, Any]]] = {}
     owner_external_context = {}
+    table_owners: set[int] = set()
+    context_blocked: set[str] = set()
     other_members: set[str] = set()
     for package in packages:
         members = package.get("member_unit_ids", ())
@@ -129,11 +131,25 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         work_budget.charge(3 * len(members) + 2 * len(required)
                            + len(package.get("anchor_unit_ids", ())) + 1)
         external = set(required) - set(members)
+        # A prose label does not erase a source-declared typed table. Preserve
+        # its original header/note edges and anchors as one package. Local table
+        # indices on another page/parent cannot certify the same table.
+        table_members = [units[uid] for uid in members if uid in units
+                         and units[uid].coordinates.table_index is not None]
+        work_budget.charge(len(table_members))
+        if package["kind"] in audited_kinds and table_members:
+            table_keys = {(unit.source_id, unit.coordinates.page_number,
+                           unit.coordinates.table_index) for unit in table_members}
+            if len(table_keys) == 1:
+                table_owners.add(id(package))
+            else:
+                context_blocked.update(members)
         # Each source member can consume this external dependency only once.
         # Reserve actual edges before expanding, not only container count.
         work_budget.charge(len(members) * len(external))
         owner_external_context[id(package)] = external
-        if package["kind"] in audited_kinds and not package.get("truncated"):
+        if (package["kind"] in audited_kinds and id(package) not in table_owners
+                and not package.get("truncated")):
             for uid in members:
                 owners.setdefault(uid, []).append(package)
         else:
@@ -142,13 +158,55 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     headings: dict[str, set[str]] = {}
     section_for_unit = {}
     sections = pipeline.get("structure", {}).get("sections", ())
+    section_index = {}
+    duplicate_sections = set()
     for section in sections:
+        sid = section.get("section_id")
+        work_budget.charge(1 + len(section.get("heading_unit_ids", ())))
+        # Older callers may declare one local section without an ID. Its
+        # explicit headings are usable locally; it cannot become a named
+        # ancestor or collide with a different anonymous section.
+        if sid is not None:
+            if sid in section_index:
+                duplicate_sections.add(sid)
+            section_index[sid] = section
+    inherited: dict[str, tuple[frozenset[str], bool]] = {}
+    for section in sections:
+        sid = section.get("section_id")
+        path, visiting = [], set()
+        cursor = sid if sid is not None else section.get("parent_id")
+        while cursor is not None and cursor not in inherited:
+            work_budget.charge()
+            if cursor in visiting or cursor not in section_index or cursor in duplicate_sections:
+                inherited[cursor] = (frozenset(), False)
+                break
+            visiting.add(cursor)
+            path.append(cursor)
+            cursor = section_index[cursor].get("parent_id")
+        actual_heads, valid = inherited.get(cursor, (frozenset(), True))
+        for parent in reversed(path):
+            own_heads = section_index[parent].get("heading_unit_ids", ())
+            # Debit each real inherited edge before materialising its closure;
+            # missing/cyclic parents cannot become a smaller complete context.
+            work_budget.charge(len(actual_heads) + len(own_heads) + 1)
+            actual_heads = actual_heads.union(own_heads)
+            inherited[parent] = (actual_heads, valid)
+        if sid is not None:
+            actual_heads, valid = inherited[sid]
+        else:
+            own_heads = section.get("heading_unit_ids", ())
+            work_budget.charge(len(actual_heads) + len(own_heads) + 1)
+            actual_heads = actual_heads.union(own_heads)
         heads, body = section.get("heading_unit_ids", ()), section.get("body_unit_ids", ())
-        work_budget.charge(1 + 2 * len(heads) + 2 * len(body) + len(heads) * len(body))
-        actual_heads = set(section.get("heading_unit_ids", ()))
-        for uid in (*section.get("heading_unit_ids", ()), *section.get("body_unit_ids", ())):
-            section_for_unit[uid] = section.get("section_id")
-        for uid in section.get("body_unit_ids", ()):
+        work_budget.charge(1 + len(heads) + len(body) * (len(actual_heads) + 1))
+        for uid in (*heads, *body):
+            section_for_unit[uid] = sid
+        for uid in body:
+            if (not valid or uid not in units or any(
+                    head not in units or units[head].source_id != units[uid].source_id
+                    for head in actual_heads)):
+                context_blocked.add(uid)
+                continue
             headings.setdefault(uid, set()).update(actual_heads)
 
     def context(member_ids):
@@ -163,7 +221,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         work_budget.charge(len(result) * max(1, len(result).bit_length()))
         return sorted(result - set(member_ids))
 
-    exclusions = other_members | excluded
+    exclusions = other_members | excluded | context_blocked
     views = []
     for unit in observation:
         uid = unit["unit_id"]
@@ -202,7 +260,9 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             (entry["first_ordinal"], entry["last_ordinal"]))
     ranges = {key: sorted(values) for key, values in ranges.items()}
     starts = {key: [a for a, _b in values] for key, values in ranges.items()}
-    blocked: set[str] = set()
+    blocked: set[str] = set(context_blocked)
+    if context_blocked:
+        continuity = {**continuity, "complete": False}
     for index, wire in enumerate(observation):
         key = (wire.get("hints", {}).get("source_id"), wire.get("page"))
         intervals = ranges.get(key, ())
@@ -333,7 +393,8 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             expanded.append({**package, **({"citation_support_views": [ordered_support],
                 "native_analysis_views": windows} if windows and support <= members else {})})
             continue
-        if package["kind"] not in prose_kinds or package.get("truncated"):
+        if (package["kind"] not in prose_kinds or package.get("truncated")
+                or id(package) in table_owners):
             expanded.append(package)
             continue
         for uid in package.get("member_unit_ids", ()):
