@@ -77,6 +77,10 @@ FAST_CONTRACT_CASES = (
     "tests/contract/test_official_transcript_layouts.py",
     "tests/contract/test_transcript_speaker_affiliation.py",
     "tests/contract/test_source_scope_qualification.py",
+    # In-process owner/projection controls (~2s); full cross-repo CLI replay is
+    # an explicit major-node suite, not repeated on every push.
+    "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+    "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
     "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
     "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
     "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
