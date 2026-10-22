@@ -1,0 +1,9 @@
+{
+  "restored": true,
+  "files": {
+    "src\\company_wiki\\source_catalog\\local_inventory.py": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+    "src\\company_wiki\\source_catalog\\local_reconcile.py": "ddf6d7ed2fcccd857c230926217435137cdf5ef8c4ac05b909b2a96f4f4e388a"
+  },
+  "zero_provider_calls": true,
+  "zero_original_downloads": true
+}

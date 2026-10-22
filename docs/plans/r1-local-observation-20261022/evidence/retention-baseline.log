@@ -1,0 +1,33 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\lbtmp\\rb", "requested_basetemp_len": 53, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Ö£Ôø²¨\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 9 items / 7 deselected / 2 selected
+
+tests\unit\test_local_budget_observation.py FF                           [100%]
+
+================================== FAILURES ===================================
+______ test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic _______
+tests\unit\test_local_budget_observation.py:131: in test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic
+    assert any(row["reason"] == "trusted_scope_not_relevant" for row in result["diagnostics"]), result
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'unavailable', 'reason': 'budget_exceeded', 'source_ref': None, ...}
+E   assert False
+E    +  where False = any(<generator object test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic.<locals>.<genexpr> at 0x00000254AE8DD700>)
+_ test_orchestration_failure_keeps_completed_owner_operations_and_diagnostics _
+tests\unit\test_local_budget_observation.py:152: in test_orchestration_failure_keeps_completed_owner_operations_and_diagnostics
+    result = prepare_local_source(catalog, cn_request())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:796: in prepare_local_source
+    return _prepare_local_source(
+tests\unit\test_local_budget_observation.py:144: in bounded_owner
+    progress = kwargs["_progress"]
+               ^^^^^^^^^^^^^^^^^^^
+E   KeyError: '_progress'
+- generated xml file: C:\Users\Ö£Ôø²¨\Projects\company-wiki-r1-local-observation\docs\plans\r1-local-observation-20261022\evidence\retention-baseline.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_local_budget_observation.py::test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic
+FAILED tests/unit/test_local_budget_observation.py::test_orchestration_failure_keeps_completed_owner_operations_and_diagnostics
+======================= 2 failed, 7 deselected in 2.46s =======================

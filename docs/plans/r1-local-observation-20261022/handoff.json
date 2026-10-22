@@ -1,0 +1,60 @@
+{
+  "schema_version": "cwp-local-observation-handoff/1",
+  "status": "author_complete_pending_root_independent_review",
+  "base": "1b39032c9c72fd089a5a8a8e94858bbe399ceac1",
+  "product_commit": "96ca254d60fe416598e47d108b5f561d2dc48179",
+  "branch": "codex/r1-local-observation",
+  "files": {
+    "src/company_wiki/source_catalog/local_inventory.py": {
+      "physical_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "git_lf_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550"
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "physical_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c",
+      "git_lf_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c"
+    },
+    "tests/unit/test_local_budget_observation.py": {
+      "physical_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "git_lf_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae"
+    },
+    "tests/contract/test_local_prepare_failure_boundaries.py": {
+      "physical_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48",
+      "git_lf_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48"
+    }
+  },
+  "runtime_install_together": [
+    "src/company_wiki/source_catalog/local_inventory.py",
+    "src/company_wiki/source_catalog/local_reconcile.py"
+  ],
+  "wire": {
+    "schema": "local-source-prepare/1",
+    "top_level_keys_unchanged": 8,
+    "nonready_operation_schema": "local-read-budget/1",
+    "owner_semantics": "actual local original verification budget; accepted charged bytes separate from observed rejected tail; not provider/network/fee usage",
+    "unknown_trigger": null,
+    "call_history_preserved": true
+  },
+  "results": {
+    "focused57": "review/baseline-contract-evidence/final-green.xml",
+    "later7_with6overlap": "review/baseline-contract-evidence/label-control.xml",
+    "full_src_mypy": "review/baseline-contract-evidence/mypy.log",
+    "normal_commit_hooks": "ruff/fullsrcmypy/host guard PASS"
+  },
+  "independent_review": "ROOT to arrange non-author fixed-source review; not author-signed acceptance",
+  "remaining": [
+    "ROOT independent same-source review and address findings",
+    "ROOT producer/FF/RF offline child-chain acceptance",
+    "ROOT consumer-first release and installation with exact runtime set",
+    "ROOT normal merge/push/PWF integration; no merge/push/install by this lane"
+  ],
+  "prohibited_actions": {
+    "provider_calls": 0,
+    "downloads": 0,
+    "llm_calls": 0,
+    "key_reads": 0,
+    "live_lake_scans": 0,
+    "production_config_changes": 0,
+    "other_lane_source_changes": 0,
+    "push_merge_install": 0
+  }
+}

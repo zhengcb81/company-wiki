@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="22" time="10.221" timestamp="2026-10-22T20:57:38.373981+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.contract.test_local_request_relevance" name="test_actual_wrong_scope_is_excluded_before_irrelevant_date_error[2022-FY-10-K]" time="0.735"><failure message="company_wiki.source_catalog.dayu_fiscal_metadata.FiscalMetadataError: SEC primary inline date cannot be normalized">src\company_wiki\source_catalog\dayu_fiscal_metadata.py:85: in _inline_date
+    raise ValueError("unsupported or invalid inline date")
+E   ValueError: unsupported or invalid inline date
+
+The above exception was the direct cause of the following exception:
+tests\contract\test_local_request_relevance.py:41: in test_actual_wrong_scope_is_excluded_before_irrelevant_date_error
+    result = prepare_local_source(cat, request())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:796: in prepare_local_source
+    return _prepare_local_source(
+src\company_wiki\source_catalog\local_reconcile.py:769: in _prepare_local_source
+    if not _discovery_done and _discover_source_groups(catalog, identity, budget, request):
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:484: in _discover_source_groups
+    restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
+src\company_wiki\source_catalog\assertion_service.py:473: in restore_document_facts
+    replayed_facts, replayed_evidence = fact_replay(original)
+                                        ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:482: in prove
+    return _facts_with_availability(catalog, original, identity, broad, budget, match_scope=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:389: in _facts_with_availability
+    facts, evidence = _proven_facts(catalog, original, identity, request, budget, **options)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:284: in _proven_facts
+    primary = complete_sec_primary(primary)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:163: in complete_sec_primary
+    dates = _normalize_sec_dates(scope["date_observations"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:127: in _normalize_sec_dates
+    return [{**item, "normalized": _inline_date(item["text"], item["format"])}
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:92: in _inline_date
+    raise FiscalMetadataError("SEC primary inline date cannot be normalized") from exc
+E   company_wiki.source_catalog.dayu_fiscal_metadata.FiscalMetadataError: SEC primary inline date cannot be normalized</failure></testcase><testcase classname="tests.contract.test_local_request_relevance" name="test_actual_wrong_scope_is_excluded_before_irrelevant_date_error[2026-Q1-10-Q]" time="0.387"><failure message="company_wiki.source_catalog.dayu_fiscal_metadata.FiscalMetadataError: SEC primary inline date cannot be normalized">src\company_wiki\source_catalog\dayu_fiscal_metadata.py:85: in _inline_date
+    raise ValueError("unsupported or invalid inline date")
+E   ValueError: unsupported or invalid inline date
+
+The above exception was the direct cause of the following exception:
+tests\contract\test_local_request_relevance.py:41: in test_actual_wrong_scope_is_excluded_before_irrelevant_date_error
+    result = prepare_local_source(cat, request())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:796: in prepare_local_source
+    return _prepare_local_source(
+src\company_wiki\source_catalog\local_reconcile.py:769: in _prepare_local_source
+    if not _discovery_done and _discover_source_groups(catalog, identity, budget, request):
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:484: in _discover_source_groups
+    restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
+src\company_wiki\source_catalog\assertion_service.py:473: in restore_document_facts
+    replayed_facts, replayed_evidence = fact_replay(original)
+                                        ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:482: in prove
+    return _facts_with_availability(catalog, original, identity, broad, budget, match_scope=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:389: in _facts_with_availability
+    facts, evidence = _proven_facts(catalog, original, identity, request, budget, **options)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:284: in _proven_facts
+    primary = complete_sec_primary(primary)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:163: in complete_sec_primary
+    dates = _normalize_sec_dates(scope["date_observations"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:127: in _normalize_sec_dates
+    return [{**item, "normalized": _inline_date(item["text"], item["format"])}
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:92: in _inline_date
+    raise FiscalMetadataError("SEC primary inline date cannot be normalized") from exc
+E   company_wiki.source_catalog.dayu_fiscal_metadata.FiscalMetadataError: SEC primary inline date cannot be normalized</failure></testcase><testcase classname="tests.contract.test_local_request_relevance" name="test_genuine_target_gap_never_becomes_byte_absence[bad_date]" time="0.292" /><testcase classname="tests.contract.test_local_request_relevance" name="test_genuine_target_gap_never_becomes_byte_absence[unknown_publication]" time="0.292" /><testcase classname="tests.contract.test_local_request_relevance" name="test_genuine_target_gap_never_becomes_byte_absence[wrong_cik]" time="0.267" /><testcase classname="tests.contract.test_local_request_relevance" name="test_genuine_target_gap_never_becomes_byte_absence[bad_sha]" time="0.234" /><testcase classname="tests.contract.test_local_request_relevance" name="test_known_wrong_cache_year_is_not_an_exclusion_proof" time="0.273" /><testcase classname="tests.contract.test_local_request_relevance" name="test_unknown_title_is_description_not_eligibility" time="0.277" /><testcase classname="tests.contract.test_local_request_relevance" name="test_cached_request_hit_requires_actual_original_scope[wrong_cik-initial]" time="0.314" /><testcase classname="tests.contract.test_local_request_relevance" name="test_cached_request_hit_requires_actual_original_scope[wrong_cik-after_discovery]" time="0.282"><failure message="company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_issuer_conflict">tests\contract\test_local_request_relevance.py:176: in test_cached_request_hit_requires_actual_original_scope
+    result = _prepare_local_source(cat, request(), _discovery_done=phase == "after_discovery")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:540: in _prepare_local_source
+    reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+src\company_wiki\source_catalog\source_reader.py:650: in verify_version
+    result = self._verified_version(
+src\company_wiki\source_catalog\source_reader.py:763: in _verified_version
+    scope_qualification.verify(data, budget=budget)
+src\company_wiki\source_catalog\assertion_service.py:188: in verify
+    primary = self.scope(data, budget=budget)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:179: in scope
+    raise SourceReadError("blocked", "primary_issuer_conflict")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_issuer_conflict</failure></testcase><testcase classname="tests.contract.test_local_request_relevance" name="test_cached_request_hit_requires_actual_original_scope[wrong_year-initial]" time="0.315" /><testcase classname="tests.contract.test_local_request_relevance" name="test_cached_request_hit_requires_actual_original_scope[wrong_year-after_discovery]" time="0.278"><failure message="company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_scope_conflict">tests\contract\test_local_request_relevance.py:176: in test_cached_request_hit_requires_actual_original_scope
+    result = _prepare_local_source(cat, request(), _discovery_done=phase == "after_discovery")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:540: in _prepare_local_source
+    reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+src\company_wiki\source_catalog\source_reader.py:650: in verify_version
+    result = self._verified_version(
+src\company_wiki\source_catalog\source_reader.py:763: in _verified_version
+    scope_qualification.verify(data, budget=budget)
+src\company_wiki\source_catalog\assertion_service.py:193: in verify
+    raise SourceReadError("blocked", "primary_scope_conflict")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_scope_conflict</failure></testcase><testcase classname="tests.contract.test_local_request_relevance" name="test_correct_cache_is_qualified_once_with_existing_budget_and_reuses_proof" time="0.334" /><testcase classname="tests.contract.test_local_request_relevance" name="test_annual_kind_cannot_be_qualified_by_actual_quarter_form" time="0.293" /><testcase classname="tests.contract.test_local_request_relevance" name="test_partial_or_unbound_scope_proof_is_checked_from_original[primary_cik]" time="0.461" /><testcase classname="tests.contract.test_local_request_relevance" name="test_partial_or_unbound_scope_proof_is_checked_from_original[hash]" time="0.426" /><testcase classname="tests.contract.test_local_request_relevance" name="test_partial_or_unbound_scope_proof_is_checked_from_original[locator]" time="0.439" /><testcase classname="tests.contract.test_local_request_relevance" name="test_partial_or_unbound_scope_proof_is_checked_from_original[method]" time="0.490" /><testcase classname="tests.contract.test_local_request_relevance" name="test_bad_metadata_remains_gap_only_for_proven_requested_scope[True]" time="0.285" /><testcase classname="tests.contract.test_local_request_relevance" name="test_bad_metadata_remains_gap_only_for_proven_requested_scope[False]" time="0.379"><failure message="AssertionError: assert ('blocked' == 'not_found'&#10;  &#10;  - not_found&#10;  + blocked)">tests\contract\test_local_request_relevance.py:289: in test_bad_metadata_remains_gap_only_for_proven_requested_scope
+    assert result["status"] == "not_found" and not result["blocks_download"]
+E   AssertionError: assert ('blocked' == 'not_found'
+E     
+E     - not_found
+E     + blocked)</failure></testcase><testcase classname="tests.contract.test_local_request_relevance" name="test_genuine_scope_cache_does_not_reverify_unrelated_annuals" time="0.597" /><testcase classname="tests.contract.test_local_request_relevance" name="test_healthy_dayu_primary_is_usable_despite_unreadable_attachment" time="0.197" /></testsuite></testsuites>
