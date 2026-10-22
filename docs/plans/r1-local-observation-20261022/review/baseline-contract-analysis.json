@@ -1,0 +1,88 @@
+{
+  "status": "remediation_complete_pending_root_independent_acceptance",
+  "baseline": "1b39032c9c72fd089a5a8a8e94858bbe399ceac1",
+  "baseline_evidence": [
+    "evidence/baseline-contract.log",
+    "evidence/baseline-contract.xml"
+  ],
+  "candidate_evidence": [
+    "evidence/related.log",
+    "evidence/related.xml"
+  ],
+  "baseline_results": {
+    "passed": 17,
+    "failed": 5
+  },
+  "candidate_results": {
+    "passed": 44,
+    "failed": 5
+  },
+  "tests_obsolete": false,
+  "incorrect_initial_hypothesis_withdrawn": "after_discovery does not bypass qualification; native source_reader rejects and exception escapes private result path",
+  "source_before": {
+    "src/company_wiki/source_catalog/local_inventory.py": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+    "src/company_wiki/source_catalog/local_reconcile.py": "ddf6d7ed2fcccd857c230926217435137cdf5ef8c4ac05b909b2a96f4f4e388a"
+  },
+  "no_external_calls": true,
+  "product_commit": "96ca254d60fe416598e47d108b5f561d2dc48179",
+  "source_after": {
+    "src/company_wiki/source_catalog/local_inventory.py": {
+      "physical_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "git_lf_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550"
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "physical_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c",
+      "git_lf_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c"
+    },
+    "tests/unit/test_local_budget_observation.py": {
+      "physical_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "git_lf_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae"
+    },
+    "tests/contract/test_local_prepare_failure_boundaries.py": {
+      "physical_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48",
+      "git_lf_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48"
+    }
+  },
+  "tests_unchanged": [
+    "tests/contract/test_local_request_relevance.py"
+  ],
+  "red_current": {
+    "passed": 18,
+    "failed": 10,
+    "seconds": 10.38,
+    "receipt": "review/baseline-contract-evidence/red-current.xml"
+  },
+  "intermediate": {
+    "passed": 55,
+    "failed": 2,
+    "seconds": 15.03,
+    "receipt": "review/baseline-contract-evidence/green.xml",
+    "interpretation": "real same-call reread failures, retained assertions and fixed recursion"
+  },
+  "final_concentrated": {
+    "passed": 57,
+    "failed": 0,
+    "seconds": 14.46,
+    "receipt": "review/baseline-contract-evidence/final-green.xml"
+  },
+  "later_positive_module": {
+    "passed": 7,
+    "failed": 0,
+    "seconds": 2.79,
+    "overlap_with_final_concentrated": 6,
+    "receipt": "review/baseline-contract-evidence/label-control.xml"
+  },
+  "typecheck": {
+    "files": 366,
+    "errors": 0,
+    "receipt": "review/baseline-contract-evidence/mypy.log"
+  },
+  "root_budget_evidence_caveats": [
+    "red.xml valid7RED",
+    "retention-baseline.xml one real history-loss RED plus one missing-_progress interface/setup error; no claim2 businessRED",
+    "retention-baseline child print encoding failure; source finally restoration receipttrue",
+    "retention-copy-invalid is setup-invalid/reranold7, not9",
+    "retention-valid.xml9P4.17s valid"
+  ],
+  "source_frozen": true
+}

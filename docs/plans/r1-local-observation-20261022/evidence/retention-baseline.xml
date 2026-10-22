@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="2.413" timestamp="2026-10-22T21:17:21.819565+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_local_budget_observation" name="test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic" time="0.529"><failure message="AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'unavailable', 'reason': 'budget_exceeded', 'source_ref': None, ...}&#10;assert False&#10; +  where False = any(&lt;generator object test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic.&lt;locals&gt;.&lt;genexpr&gt; at 0x00000254AE8DD700&gt;)">tests\unit\test_local_budget_observation.py:131: in test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic
+    assert any(row["reason"] == "trusted_scope_not_relevant" for row in result["diagnostics"]), result
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'unavailable', 'reason': 'budget_exceeded', 'source_ref': None, ...}
+E   assert False
+E    +  where False = any(&lt;generator object test_real_later_budget_failure_keeps_an_earlier_scope_diagnostic.&lt;locals&gt;.&lt;genexpr&gt; at 0x00000254AE8DD700&gt;)</failure></testcase><testcase classname="tests.unit.test_local_budget_observation" name="test_orchestration_failure_keeps_completed_owner_operations_and_diagnostics" time="0.010"><failure message="KeyError: '_progress'">tests\unit\test_local_budget_observation.py:152: in test_orchestration_failure_keeps_completed_owner_operations_and_diagnostics
+    result = prepare_local_source(catalog, cn_request())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:796: in prepare_local_source
+    return _prepare_local_source(
+tests\unit\test_local_budget_observation.py:144: in bounded_owner
+    progress = kwargs["_progress"]
+               ^^^^^^^^^^^^^^^^^^^
+E   KeyError: '_progress'</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,36 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\lbtmp\\bca-green", "requested_basetemp_len": 60, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 57 items
+
+tests\contract\test_local_request_relevance.py ......................    [ 38%]
+tests\contract\test_local_prepare_failure_boundaries.py ....FF           [ 49%]
+tests\unit\test_local_budget_observation.py .........                    [ 64%]
+tests\unit\test_local_source_boundaries.py .........                     [ 80%]
+tests\unit\test_latest_local_source_discovery.py .....                   [ 89%]
+tests\contract\test_local_discovery_limits.py ......                     [100%]
+
+================================== FAILURES ===================================
+________ test_actual_nonrelevance_is_not_reproved_in_same_call[False] _________
+tests\contract\test_local_prepare_failure_boundaries.py:67: in test_actual_nonrelevance_is_not_reproved_in_same_call
+    assert calls == [ref.content_sha256]
+E   AssertionError: assert ['70c6d0a6f24...80cff5981f96'] == ['70c6d0a6f24...80cff5981f96']
+E     
+E     Left contains one more item: '70c6d0a6f2488126349ad86a220e4281908df3145445923c032380cff5981f96'
+E     Use -v to get more diff
+_________ test_actual_nonrelevance_is_not_reproved_in_same_call[True] _________
+tests\contract\test_local_prepare_failure_boundaries.py:67: in test_actual_nonrelevance_is_not_reproved_in_same_call
+    assert calls == [ref.content_sha256]
+E   AssertionError: assert ['cde5cd326f4...6210d9e4ee67'] == ['cde5cd326f4...6210d9e4ee67']
+E     
+E     Left contains one more item: 'cde5cd326f4ca5e910c4c970aff15f1cbe68f9e228cf6ece42856210d9e4ee67'
+E     Use -v to get more diff
+- generated xml file: C:\Users\֣����\Projects\company-wiki-r1-local-observation\docs\plans\r1-local-observation-20261022\review\baseline-contract-evidence\green.xml -
+=========================== short test summary info ===========================
+FAILED tests/contract/test_local_prepare_failure_boundaries.py::test_actual_nonrelevance_is_not_reproved_in_same_call[False]
+FAILED tests/contract/test_local_prepare_failure_boundaries.py::test_actual_nonrelevance_is_not_reproved_in_same_call[True]
+======================== 2 failed, 55 passed in 15.03s ========================

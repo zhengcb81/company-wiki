@@ -1,0 +1,76 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\lbtmp\\p", "requested_basetemp_len": 52, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items
+
+tests\unit\test_local_budget_observation.py FFFFFFF                      [100%]
+
+================================== FAILURES ===================================
+____ test_candidate_exhaustion_reports_the_owner_bound_and_accepted_count _____
+tests\unit\test_local_budget_observation.py:28: in test_candidate_exhaustion_reports_the_owner_bound_and_accepted_count
+    value = report(budget)
+            ^^^^^^^^^^^^^^
+tests\unit\test_local_budget_observation.py:14: in report
+    value = budget.observation(reason=reason)
+            ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LocalReadBudget' object has no attribute 'observation'
+___ test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes ___
+tests\unit\test_local_budget_observation.py:38: in test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes
+    value = report(budget)
+            ^^^^^^^^^^^^^^
+tests\unit\test_local_budget_observation.py:14: in report
+    value = budget.observation(reason=reason)
+            ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LocalReadBudget' object has no attribute 'observation'
+__________ test_metadata_preflight_does_not_invent_actual_read_bytes __________
+tests\unit\test_local_budget_observation.py:50: in test_metadata_preflight_does_not_invent_actual_read_bytes
+    value = report(budget)
+            ^^^^^^^^^^^^^^
+tests\unit\test_local_budget_observation.py:14: in report
+    value = budget.observation(reason=reason)
+            ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LocalReadBudget' object has no attribute 'observation'
+_ test_discovery_limit_records_the_attempted_entry[observe_group-max_discovery_groups-local_source_group_limit-discovery_groups] _
+tests\unit\test_local_budget_observation.py:67: in test_discovery_limit_records_the_attempted_entry
+    value = report(budget, reason)
+            ^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_local_budget_observation.py:14: in report
+    value = budget.observation(reason=reason)
+            ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LocalReadBudget' object has no attribute 'observation'
+_ test_discovery_limit_records_the_attempted_entry[observe_entry-max_discovery_entries-local_discovery_entry_limit-discovery_entries] _
+tests\unit\test_local_budget_observation.py:67: in test_discovery_limit_records_the_attempted_entry
+    value = report(budget, reason)
+            ^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_local_budget_observation.py:14: in report
+    value = budget.observation(reason=reason)
+            ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LocalReadBudget' object has no attribute 'observation'
+_____ test_deadline_and_cancellation_are_distinct_and_do_not_claim_bytes ______
+tests\unit\test_local_budget_observation.py:80: in test_deadline_and_cancellation_are_distinct_and_do_not_claim_bytes
+    value = report(budget, "local_prepare_deadline")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_local_budget_observation.py:14: in report
+    value = budget.observation(reason=reason)
+            ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LocalReadBudget' object has no attribute 'observation'
+__ test_real_prepare_failure_keeps_originals_and_the_actual_budget_operation __
+tests\unit\test_local_budget_observation.py:105: in test_real_prepare_failure_keeps_originals_and_the_actual_budget_operation
+    assert len(rows) == 1, value
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'unavailable', 'reason': 'budget_exceeded', 'source_ref': None, ...}
+E   assert 0 == 1
+E    +  where 0 = len([])
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-local-observation-20261022\evidence\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_local_budget_observation.py::test_candidate_exhaustion_reports_the_owner_bound_and_accepted_count
+FAILED tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes
+FAILED tests/unit/test_local_budget_observation.py::test_metadata_preflight_does_not_invent_actual_read_bytes
+FAILED tests/unit/test_local_budget_observation.py::test_discovery_limit_records_the_attempted_entry[observe_group-max_discovery_groups-local_source_group_limit-discovery_groups]
+FAILED tests/unit/test_local_budget_observation.py::test_discovery_limit_records_the_attempted_entry[observe_entry-max_discovery_entries-local_discovery_entry_limit-discovery_entries]
+FAILED tests/unit/test_local_budget_observation.py::test_deadline_and_cancellation_are_distinct_and_do_not_claim_bytes
+FAILED tests/unit/test_local_budget_observation.py::test_real_prepare_failure_keeps_originals_and_the_actual_budget_operation
+============================== 7 failed in 3.20s ==============================

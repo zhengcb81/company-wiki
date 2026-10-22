@@ -1,13 +1,13 @@
 """Bounded registered originals, including inactive inventory (never consumer eligibility)."""
 
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 import hashlib
 import json
 import os
 from pathlib import Path
 import time
-from typing import Any
+from typing import Any, NoReturn
 from .resolver import _ReadBudget, _inside_configured_roots, _read_verified_bytes
 from .policy import _effective_reusable
 from .source_reader import SourceReadError, SourceRef, _relative_segments
@@ -43,32 +43,69 @@ class LocalReadBudget(_ReadBudget):
         super().__init__(
             max_candidates=limits.max_candidates, max_bytes=limits.max_bytes
         )
-        self.deadline = time.monotonic() + limits.timeout_seconds
+        self.limits = limits
+        self.started_at = time.monotonic()
+        self.deadline = self.started_at + limits.timeout_seconds
+        self.phase = "preparation"
+        self.triggered_bound: str | None = None
+        self.observed_charge_bytes = 0
         self.max_discovery_groups = limits.max_discovery_groups
         self.max_discovery_entries = limits.max_discovery_entries
         self.discovery_groups = 0
         self.discovery_entries = 0
 
+    def _stop(self, reason: str, bound: str) -> NoReturn:
+        self.triggered_bound = bound
+        raise SourceReadError("unavailable", reason)
+
     def check(self):
         if time.monotonic() >= self.deadline:
-            raise SourceReadError("unavailable", "local_prepare_deadline")
+            self._stop("local_prepare_deadline", "timeout_seconds")
         if self.cancelled:
-            raise SourceReadError("unavailable", "cancelled")
+            self._stop("cancelled", "cancelled")
+
+    def observation(self, *, reason: str) -> dict[str, Any]:
+        """Read-only owner measurements, not network usage or a fee ledger.
+
+        A rejected tail can already have been read when charge() is called.
+        Keep it separate from bytes accepted into the existing budget. A
+        generic refusal from another owner leaves triggered_bound unknown.
+        """
+        return {
+            "schema_version": "local-read-budget/1",
+            "operation": "local_read_budget",
+            "usage_scope": "local_original_verification",
+            "phase": self.phase,
+            "reason": reason,
+            "limits": asdict(self.limits),
+            "consumed": {
+                "candidates": self.candidates,
+                "charged_read_bytes": self.bytes_read,
+                "observed_charge_bytes": self.observed_charge_bytes,
+                "discovery_groups": self.discovery_groups,
+                "discovery_entries": self.discovery_entries,
+                "elapsed_seconds": round(max(0.0, time.monotonic() - self.started_at), 6),
+            },
+            "triggered_bound": self.triggered_bound,
+        }
 
     def observe_group(self):
+        self.phase = "source_group_discovery"
         self.check()
         self.discovery_groups += 1
         if self.discovery_groups > self.max_discovery_groups:
-            raise SourceReadError("unavailable", "local_source_group_limit")
+            self._stop("local_source_group_limit", "max_discovery_groups")
 
     def observe_entry(self):
+        self.phase = "source_entry_discovery"
         self.check()
         self.discovery_entries += 1
         if self.discovery_entries > self.max_discovery_entries:
-            raise SourceReadError("unavailable", "local_discovery_entry_limit")
+            self._stop("local_discovery_entry_limit", "max_discovery_entries")
 
     def read_metadata_observation(self, path, *, root):
         """Read one small JSON under the current aggregate byte/deadline ceiling."""
+        self.phase = "metadata_read"
         self.check()
         resolved = Path(os.path.realpath(path))
         try:
@@ -85,7 +122,7 @@ class LocalReadBudget(_ReadBudget):
         if not resolved.is_file() or before.st_size > 131072:
             raise SourceReadError("unavailable", "local_metadata_byte_limit")
         if before.st_size > self.max_bytes - self.bytes_read:
-            raise SourceReadError("unavailable", "budget_exceeded")
+            self._stop("budget_exceeded", "max_bytes")
         with resolved.open("rb") as stream:
             data = stream.read(min(131073, self.max_bytes - self.bytes_read + 1))
         stop = self.charge(len(data))
@@ -136,6 +173,7 @@ class LocalReadBudget(_ReadBudget):
 
     def hash_file(self, path, *, root, original=True):
         """Stream a registration SHA under the same remaining read budget."""
+        self.phase = "original_read" if original else "auxiliary_read"
         self.check()
         resolved = Path(os.path.realpath(path))
         try:
@@ -149,7 +187,7 @@ class LocalReadBudget(_ReadBudget):
         if path.is_symlink() or getattr(path.lstat(), "st_file_attributes", 0) & 0x400:
             raise SourceReadError("blocked", "artifact_path_outside_allowed_root")
         if before.st_size > self.max_bytes - self.bytes_read:
-            raise SourceReadError("unavailable", "budget_exceeded")
+            self._stop("budget_exceeded", "max_bytes")
         if original:
             stop = self.take_candidate()
             if stop:
@@ -174,12 +212,23 @@ class LocalReadBudget(_ReadBudget):
         return digest.hexdigest(), size
 
     def take_candidate(self):
+        self.phase = "original_read"
         self.check()
-        return super().take_candidate()
+        stop = super().take_candidate()
+        if stop:
+            self.triggered_bound = "cancelled" if stop == "cancelled" else "max_candidates"
+        return stop
 
     def charge(self, size):
+        # Local storage calls this after reading a chunk. Observe even a chunk
+        # rejected by deadline/cancellation/bytes without changing old decisions.
+        if type(size) is int and size >= 0:
+            self.observed_charge_bytes += size
         self.check()
-        return super().charge(size)
+        stop = super().charge(size)
+        if stop:
+            self.triggered_bound = "cancelled" if stop == "cancelled" else "max_bytes"
+        return stop
 
 
 @dataclass(frozen=True)
