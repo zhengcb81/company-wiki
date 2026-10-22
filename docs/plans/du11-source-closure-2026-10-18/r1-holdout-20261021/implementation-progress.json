@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-22T20:09:05.027042+00:00",
-  "status": "ACTIVE_W07_REVIEWED_REAL_PREFLIGHT_BUDGET_REALLOCATED",
+  "updated_at": "2026-10-22T20:25:05.169196+00:00",
+  "status": "ACTIVE_W07_LIVE_LIFECYCLE_PUBLIC_RF_READ_PASS_W06_RESEARCH_NEXT",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
   "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
@@ -61,18 +61,18 @@
     },
     {
       "id": "W07",
-      "status": "OFFLINE_NONAUTHOR_PASS_MERGED_REAL_PREFLIGHT_RECORDED",
-      "engineering_observation": "9 independent distinct scenarios PASS across final-source runs; real preview0POST bound81880 exceeds old60974, recorded own-cap reallocation150k within parent2M/$20. Real paid still NOT_RUN.",
+      "status": "LIVE_LIFECYCLE_PUBLIC_RF_READ_PASS_ACTUAL_FORMULA_AND_QUALITY_REVIEW_OPEN",
+      "engineering_observation": "Configured DS1POST17329tokens/6701microUSD; native RETRYABLE paid replay on new process/lease/fence, activationpending/recovery/cache same415965B artifact; RF public418917B read verified, selectionpartial needs_review, actual formula not consumed.",
       "current_interface": "W07-controller-current-interface.md"
     }
   ],
   "resource_observation": {
-    "new_paid_calls": 0,
+    "new_paid_calls": 1,
     "new_downloads": 8,
-    "mother_tokens": 1544023,
-    "mother_micro_usd": 625258,
-    "company_tokens": 39026,
-    "company_micro_usd": 9720,
+    "mother_tokens": 1561352,
+    "mother_micro_usd": 631959,
+    "company_tokens": 56355,
+    "company_micro_usd": 16421,
     "unknown_holds_preserved": true,
     "rf_owned_sparse_checkout_files": 2136,
     "rf_owned_sparse_checkout_bytes_each_approx": 21792950,
@@ -81,12 +81,13 @@
     "new_downloaded_original_files": 8,
     "new_downloaded_original_bytes": 10229835
   },
-  "next_action": "Publish reviewed W07 controller; rerun frozen pure preview within reallocated company cap, then configured one-paid lifecycle, public RF consumption, W06 phaseB/four reviews and HK/US holdouts.",
+  "next_action": "W06 phaseB: actual narrative parameter/formula consumption, independent operating bridge and full RF15-step forecast; independently review real lifecycle and all four company quality roles; integrate local-observation consumer-first, then HK/US holdouts.",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
     "status": "CWP_TDD_7PASS_BASELINE5_CONTRACT_FAILURES_UNDER_ANALYSIS_FF_AUTHOR127PASS_RF_TDD_ACTIVE",
     "interface": "local_budget_observation_interface.md",
     "purpose": "Preserve owner diagnostics end to end; no larger local cap or invented historical usage."
-  }
+  },
+  "w07_live_ref": "../review/r1-w07-live-20261022.json"
 }

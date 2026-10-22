@@ -1,0 +1,388 @@
+"""New non-author wire/CLI checks; shared old identity setup is not an assertion."""
+
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+import pytest
+
+import fetch_filing
+from ff_local_preparation_observation import (
+    MAX_BYTES,
+    local_preparation_observation,
+    validated_local_preparation_observation,
+)
+from ff_provider_cause import source_condition
+from ff_v2_envelope import error_envelope
+from test_source_ref_v2_db_query import _identity, _query, _wiki
+
+EVIDENCE = Path(__file__).parent
+LIMITS = {"max_candidates": 64, "max_bytes": 134217728, "timeout_seconds": 17.25}
+
+
+def encode(value):
+    return json.dumps(
+        value, ensure_ascii=False, allow_nan=False, separators=(",", ":")
+    ).encode()
+
+
+def native_payload():
+    return {
+        "schema_version": "local-source-prepare/1",
+        "status": "unavailable",
+        "reason": "budget_exceeded",
+        "source_ref": None,
+        "blocks_download": True,
+        "download_events": 0,
+        "operations": [
+            {"operation": "metadata_assertion", "status": "recorded"},
+            {
+                "schema_version": "local-read-budget/1",
+                "operation": "local_read_budget",
+                "usage_scope": "local_original_verification",
+                "phase": "original_read",
+                "reason": "budget_exceeded",
+                "limits": {
+                    **LIMITS,
+                    "max_discovery_groups": 256,
+                    "max_discovery_entries": 4096,
+                },
+                "consumed": {
+                    "candidates": 6,
+                    "charged_read_bytes": 134217720,
+                    "observed_charge_bytes": 134217729,
+                    "discovery_groups": 3,
+                    "discovery_entries": 19,
+                    "elapsed_seconds": 0.125,
+                },
+                "triggered_bound": None,
+            },
+        ],
+        "diagnostics": [
+            {
+                "phase": "metadata",
+                "status": "unavailable",
+                "reason": "local_original_missing",
+            }
+        ],
+    }
+
+
+def valid():
+    result = local_preparation_observation(native_payload(), LIMITS)
+    assert result is not None
+    return result
+
+
+def envelope(observation):
+    return error_envelope(
+        "upstream_error",
+        "local_budget_failure",
+        retryable=False,
+        stats={"calls": 3, "downloads": 0},
+        stage="local_prepare",
+        producer_exit_code=7,
+        upstream_cause=source_condition("local_prepare", "budget_exceeded"),
+        local_preparation_observation=observation,
+    )
+
+
+def test_unknown_owner_machine_fields_and_amounts_are_verbatim_not_recomputed():
+    payload = native_payload()
+    payload["operations"].append(
+        {
+            "schema_version": "future-owner-budget/9",
+            "owner_value": {"seen": True, "nullable": None},
+        }
+    )
+    payload["operations"].append(
+        {"schema_version": "urn:owner:budget/2", "machine_code": "file:missing"}
+    )
+    payload["reason"] = "future_owner_bound"
+    observed = local_preparation_observation(payload, LIMITS)
+    assert observed["reason"] == "future_owner_bound"
+    assert (
+        observed["operations"] == payload["operations"]
+        and observed["diagnostics"] == payload["diagnostics"]
+    )
+    assert observed["local_io_usage"] is None
+    assert observed["operations"][1]["triggered_bound"] is None
+    output = envelope(observed)
+    assert output["local_preparation_observation"] == observed
+    assert output["filing"]["upstream_cause"] == source_condition(
+        "local_prepare", "budget_exceeded"
+    )
+    assert (
+        output["filing"]["retryable"] is False
+        and output["calls"] == 3
+        and output["downloads"] == 0
+    )
+    payload["operations"][1]["consumed"]["observed_charge_bytes"] = 0
+    observed["diagnostics"].clear()
+    assert (
+        output["local_preparation_observation"]["operations"][1]["consumed"][
+            "observed_charge_bytes"
+        ]
+        == 134217729
+    )
+    assert output["local_preparation_observation"]["diagnostics"]
+
+
+def mutate(case):
+    value = valid()
+    if case == "version":
+        value["schema_version"] = "filing-local-preparation-observation/2"
+    elif case == "scope":
+        value["usage_scope"] = "provider_acquisition"
+    elif case == "aggregate":
+        value["local_io_usage"] = {"bytes_read": 0}
+    elif case == "bool_limit":
+        value["local_read_limits"]["max_candidates"] = True
+    elif case == "nonfinite":
+        value["operations"][1]["consumed"]["elapsed_seconds"] = float("inf")
+    elif case == "list":
+        value["diagnostics"] = [{"reason": "code"}] * 1025
+    elif case == "dict":
+        value["diagnostics"] = [{f"key{i}": 0 for i in range(33)}]
+    elif case == "string":
+        value["diagnostics"] = [{"reason": "a" * 257}]
+    elif case == "raw":
+        value["operations"][1]["response"] = {"StDeRr": "content"}
+    elif case == "physical_key":
+        value["operations"][1]["counters"] = {"CaNoNiCaL_PaTh": "machine-token"}
+    elif case == "physical_schema_windows":
+        value["operations"].append({"schema_version": "C:/Users/example/raw.pdf"})
+    elif case == "physical_schema_file_uri":
+        value["operations"].append(
+            {"schema_version": "file:///C:/Users/example/raw.pdf"}
+        )
+    elif case == "physical_schema_file_uri_single_slash":
+        value["operations"].append(
+            {"schema_version": "file:/C:/Users/example/raw.pdf"}
+        )
+    elif case == "depth":
+        node = {"value": None}
+        for _ in range(9):
+            node = {"value": node}
+        value["diagnostics"] = [node]
+    else:
+        raise AssertionError(case)
+    return value
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "version",
+        "scope",
+        "aggregate",
+        "bool_limit",
+        "nonfinite",
+        "list",
+        "dict",
+        "string",
+        "raw",
+        "physical_key",
+        "physical_schema_windows",
+        "physical_schema_file_uri",
+        "physical_schema_file_uri_single_slash",
+        "depth",
+    ],
+)
+def test_invalid_optional_is_omitted_and_six_field_cause_unchanged(case):
+    value = mutate(case)
+    assert validated_local_preparation_observation(value) is None
+    output = envelope(value)
+    assert "local_preparation_observation" not in output
+    assert output["filing"]["upstream_cause"] == source_condition(
+        "local_prepare", "budget_exceeded"
+    )
+    assert len(output["filing"]["upstream_cause"]) == 6
+    assert output["filing"]["producer_exit_code"] == 7
+
+
+def sized(target):
+    value = valid()
+    value["operations"] = []
+    value["diagnostics"] = []
+    while (
+        len(
+            encode(
+                {**value, "diagnostics": value["diagnostics"] + [{"reason": "a" * 256}]}
+            )
+        )
+        <= target
+    ):
+        value["diagnostics"].append({"reason": "a" * 256})
+    value["diagnostics"].append({"reason": "a"})
+    remaining = target - len(encode(value))
+    if remaining < 0:
+        value["diagnostics"][-2]["reason"] = value["diagnostics"][-2]["reason"][
+            :remaining
+        ]
+    else:
+        value["diagnostics"][-1]["reason"] += "a" * remaining
+    assert len(encode(value)) == target
+    assert all(1 <= len(row["reason"]) <= 256 for row in value["diagnostics"])
+    return value
+
+
+def test_exact_compact_byte_cap_is_not_truncation_or_raised():
+    at = sized(MAX_BYTES)
+    assert validated_local_preparation_observation(at) == at
+    over = deepcopy(at)
+    row = next(row for row in over["diagnostics"] if len(row["reason"]) < 256)
+    row["reason"] += "a"
+    assert len(encode(over)) == MAX_BYTES + 1
+    assert validated_local_preparation_observation(over) is None
+    assert envelope(over)["filing"]["upstream_cause"]["code"] == "budget_exceeded"
+
+
+@pytest.mark.parametrize("large,producer_exit", [(False, 0), (True, 7)])
+def test_actual_ff_cli_keeps_local_budget_and_causes_without_provider_or_retry(
+    tmp_path, large, producer_exit
+):
+    initial = {"keep.bin": b"preexisting isolated marker"}
+    for name, raw in initial.items():
+        (tmp_path / name).write_bytes(raw)
+    owned = tmp_path / "owned"
+    owned.mkdir()
+    try:
+        root = _wiki(owned)
+        config = owned / "connection.json"
+        config.write_text(
+            json.dumps({"schema_version": "1.0", "company_wiki_root": str(root)}),
+            encoding="utf-8",
+        )
+        request = {
+            "schema_version": "2.0",
+            "company_query": "AMD",
+            "market": "US",
+            "document_kind": "semi_annual_report",
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "H1",
+            "as_of_date": "2026-10-21",
+            "filing_intent": "reuse_only",
+            "companion_transcript": {
+                "intent": "fetch_if_missing",
+                "provider": "company_ir",
+                "fiscal_year": 2026,
+                "fiscal_quarter": 2,
+                "acquisition_limits": {
+                    "max_bytes": 100000,
+                    "timeout_seconds": 10,
+                    "max_cost_usd": "0",
+                },
+            },
+        }
+        request_file = owned / "request.json"
+        request_file.write_text(json.dumps(request), encoding="utf-8")
+        payload = native_payload()
+        if large:
+            payload["diagnostics"] *= 950
+        payload_file = owned / "producers.json"
+        payload_file.write_text(
+            json.dumps(
+                {
+                    "identity": _identity(),
+                    "query": _query("not_found"),
+                    "local": payload,
+                }
+            ),
+            encoding="utf-8",
+        )
+        log = owned / "routes.jsonl"
+        launcher = owned / "cli.py"
+        launcher.write_text(
+            """import json,sys,socket
+from pathlib import Path
+def no_network(*a,**k): raise AssertionError('independent-offline-network')
+socket.socket.connect=no_network
+socket.create_connection=no_network
+sys.path.insert(0,sys.argv.pop(1))
+import fetch_filing as ff
+import ff_process_transport as t
+file=sys.argv.pop(1); output=Path(sys.argv.pop(1)); local_rc=int(sys.argv.pop(1))
+real=t.run_bounded_json
+def actual(command,**kwargs):
+    name='local' if 'company_wiki.source_catalog.local_prepare_cli' in command else ('query' if 'company_wiki.source_catalog.source_query_cli' in command else ('identity' if 'identify' in command else None))
+    assert name is not None, command
+    request=json.loads(kwargs['input_bytes']) if kwargs.get('input_bytes') else None
+    with output.open('a',encoding='utf-8') as stream: stream.write(json.dumps({'route':name,'request':request})+'\\n')
+    code="import json,sys; print(json.dumps(json.load(open(sys.argv[1],encoding='utf-8'))[sys.argv[2]]));sys.exit(int(sys.argv[3]))"
+    return real([sys.executable,'-S','-c',code,file,name,str(local_rc if name=='local' else 0)],**kwargs)
+ff._run_bounded_json=actual
+raise SystemExit(ff.main(sys.argv[1:]))
+""",
+            encoding="utf-8",
+        )
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                "-X",
+                "utf8",
+                str(launcher),
+                str(Path(fetch_filing.__file__).parent),
+                str(payload_file),
+                str(log),
+                str(producer_exit),
+                "--request-file",
+                str(request_file),
+                "--config",
+                str(config),
+                "--source-ref-v2",
+                "--timeout-seconds",
+                "20",
+            ],
+            capture_output=True,
+            timeout=30,
+            check=False,
+        )
+        assert result.returncode == 2, result.stderr.decode()
+        output = json.loads(result.stdout)
+        observed = output["local_preparation_observation"]
+        assert (
+            observed["operations"] == payload["operations"]
+            and observed["diagnostics"] == payload["diagnostics"]
+        )
+        assert observed["local_io_usage"] is None
+        assert output["calls"] == 3 and output["downloads"] == 0
+        assert output["filing"]["producer_exit_code"] == producer_exit
+        assert output["filing"]["upstream_cause"] == source_condition(
+            "local_prepare", "budget_exceeded"
+        )
+        assert (
+            output["transcript"]["status"] == "not_run"
+            and output["transcript"]["provider"] == "company_ir"
+        )
+        assert output["transcript"]["provider_requests"] == 0
+        routes = [json.loads(row) for row in log.read_text().splitlines()]
+        assert [row["route"] for row in routes] == ["identity", "query", "local"]
+        assert routes[-1]["request"]["limits"] == observed["local_read_limits"]
+        assert routes[-1]["request"]["source_request"]["allow_download"] is False
+        assert observed["local_read_limits"]["max_candidates"] == 64
+        assert observed["local_read_limits"]["max_bytes"] == 134217728
+        if large:
+            assert len(result.stdout) > 65536
+        safe = {
+            "cli_exit": result.returncode,
+            "producer_exit": producer_exit,
+            "stdout_bytes": len(result.stdout),
+            "stdout_sha256": hashlib.sha256(result.stdout).hexdigest(),
+            "stderr_bytes": len(result.stderr),
+            "routes": routes,
+            "envelope": output,
+        }
+        (EVIDENCE / ("actual-cli-" + str(large) + ".json")).write_text(
+            json.dumps(safe, indent=2) + "\n", encoding="utf-8"
+        )
+    finally:
+        assert owned.resolve().parent == tmp_path.resolve()
+        shutil.rmtree(owned)
+        assert {p.name: p.read_bytes() for p in tmp_path.iterdir()} == initial

@@ -1,0 +1,23 @@
+{
+  "product": "6dbb9e84d8389f4d4f2d8305c788b59e4f91d2bd",
+  "cases": 17,
+  "passed": 15,
+  "failed": 2,
+  "skipped": 0,
+  "seconds": 2.92,
+  "finding": "schema-version value accepts explicit physical drive path and file URI",
+  "files": {
+    "initial.log": {
+      "sha256": "0dbbc6a5b841bc0e5576e0e2b9fefb16740ce2b021e073dd5efba3f59f20ee42",
+      "bytes": 8066
+    },
+    "initial.xml": {
+      "sha256": "00f3c9cd1c47239d90ca5b64edb75301e30aea04de42649b9ce9a2a7cfbe3288",
+      "bytes": 5744
+    },
+    "initial-test.py.snapshot": {
+      "sha256": "3f04f71ce84d3ca90189219061adfbdb78d9356c4e19b23d0385259f5661ea14",
+      "bytes": 11501
+    }
+  }
+}

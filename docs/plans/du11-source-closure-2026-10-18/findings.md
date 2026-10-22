@@ -1,3 +1,9 @@
+## 2026-10-22 实际付费恢复通过，活动索引必须与历史封存分开
+
+原生真实paid pin可跨进程/attempt/fence重放，激活和cache皆未重发HTTP；RF公开实读同artifact。内容仍partial，下一步必须有usedparameter/formula消费，不能把“context可读”代签。17329实际token显著低于81880预留上界，属于原生结算，不是下调预算估算。
+
+协调员使用原roles/executor操作索引登记新run后，发现它也在初始manifest。新索引已分到replay attempt，旧文件按SHA精确恢复，639件0差异；这是协调器生命周期细节，后续卡和交接需明确“不可变历史证据”和“当前attempt运行引用”两个所有权，不能通过改旧manifest解决。模型费用依旧只有既有原生owner/母账，索引不是第二费用库。
+
 ## 2026-10-22 恢复验收不能只看工具事件，诊断必须来自责任层
 
 W07旧故障工具虽写“retryable”事件，未注册的错误码仍被原生框架转终止失败；已修成既有IO_TRANSIENT并核实际attempt终态、新lease/fence和paid pin。离线9场景只证明工具机制，真实0.9摘要/内容/RF消费仍开放。73560B实际请求在旧公司余量外，保留原预算失败并记录自定额度重分配，不改token估算和模型输出。

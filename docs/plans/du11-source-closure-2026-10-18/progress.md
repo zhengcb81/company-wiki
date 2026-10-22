@@ -1,3 +1,9 @@
+## 2026-10-22 W07真实生命周期完成，交W06阶段B
+
+正常推送755e87cd：7088P/24S/271.80s，145smoke/30.31s。纯预检重分配后真实调用一次DS，17329tokens/6701microUSD；新进程/attempt/fence同paid operation原生恢复0新增POST/reservation/token，激活pending→完成、新run cache同415965Bartifact。已安装RF公开CLI退出0/完整418917Bcontext/96spans，selectionpartial/needs_review，不宣称公式/内容已验收。约610KB便携收据已归档，原件/数据库没有复制。
+
+母账1561352tokens/631959microUSD，公司56355/16421，所有unknown保留。ROOT发现操作索引本已包含在initial639封存，误追加后已先保新引用到attempt，再按原SHA恢复原3763字节；639件实核0差异，新scope-v2和attempt索引为当前入口。研究agent继续阶段B，之后四审；FF136ab独审18P，RFdedebe作者201P1S正独审，CWP新9P加旧5真缺陷窄修继续。详见review/r1-w07-live-20261022.md/json。
+
 ## 2026-10-22 W07非作者复核、真实预检与W06资料交接
 
 W07非作者查出未注册错误码让“可重试”实际变成DEAD_LETTER；工具改用原生IO_TRANSIENT且核实持久化RETRYABLE，产品5a1548e2经9个不同场景复核通过，正常合入9eba8c4e。两次最终版本运行合并覆盖，不宣称一次9绿。真实纯预检0POST：请求73560B、配置输出8192、保守上界81880，旧公司余量60974不足。协调员在原用户2M/$20内把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、旧unknown全保留；旧scope/预检封存，后续使用新spec/effective-scope。

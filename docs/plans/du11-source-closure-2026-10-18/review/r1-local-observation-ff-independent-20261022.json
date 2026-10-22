@@ -1,0 +1,463 @@
+{
+  "schema_version": "r1-local-observation-ff-independent-review/1",
+  "status": "PASS_FF_LOCAL_OBSERVATION_ONLY",
+  "reviewed_at_utc": "2026-10-22T20:24:39.903984+00:00",
+  "reviewer": "non-author; no FF product edits or commits",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\filing-fetch-r1-local-observation",
+  "initial_product_commit": "6dbb9e84d8389f4d4f2d8305c788b59e4f91d2bd",
+  "intermediate_repair_commit": "a30024e57fd22b68662fbdfb1c344b8709391556",
+  "final_product_commit": "136ab5a627083f173c60fc88b7b3f74879a4bf99",
+  "final_docs_observation": {
+    "observed_docs_HEAD": "130fd6b67c227768c6bbb8eb1acdf327bdf32428",
+    "git_status": "",
+    "frozen_files_unchanged": true
+  },
+  "source_fingerprints": {
+    "scripts/fetch_filing.py": {
+      "physical_sha256": "09a522bb2f9c5532e5f23aedaf316712275c9f26024294cf6461d091ca106e84",
+      "physical_bytes": 71829,
+      "lf_sha256": "a004bee1db025dafbcffd55bc73dea3a9064f122f3e5296e88173052ce7665c4",
+      "git_blob_sha256": "a004bee1db025dafbcffd55bc73dea3a9064f122f3e5296e88173052ce7665c4"
+    },
+    "scripts/ff_local_source_prepare.py": {
+      "physical_sha256": "e02d37f4ffb5f61ab190b00ca8082dd0c0e4556b428ad3ba7f4dc73f75022ccd",
+      "physical_bytes": 6066,
+      "lf_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+      "git_blob_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee"
+    },
+    "scripts/ff_v2_envelope.py": {
+      "physical_sha256": "97f65b1bbcc6c0a6ba7988ec89d028ab59b1d8c630cad368d0fdaa2034cacb36",
+      "physical_bytes": 8489,
+      "lf_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+      "git_blob_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f"
+    },
+    "scripts/filing_contracts.py": {
+      "physical_sha256": "b11c9fbb1c0d248f9fe602e1d01b5decdb90c21df6d6f58f20abc560b9305efb",
+      "physical_bytes": 33679,
+      "lf_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+      "git_blob_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659"
+    },
+    "scripts/ff_local_preparation_observation.py": {
+      "physical_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+      "physical_bytes": 4474,
+      "lf_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+      "git_blob_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f"
+    },
+    "tests/test_local_preparation_observation.py": {
+      "physical_sha256": "1f36424a1df6434b1ac910c1ac15ddba9a996c7a4a50b064cc8cbb65394392f1",
+      "physical_bytes": 11177,
+      "lf_sha256": "1f36424a1df6434b1ac910c1ac15ddba9a996c7a4a50b064cc8cbb65394392f1",
+      "git_blob_sha256": "1f36424a1df6434b1ac910c1ac15ddba9a996c7a4a50b064cc8cbb65394392f1"
+    },
+    "tests/test_ci_tests.py": {
+      "physical_sha256": "4633d759b2847f813522fa667fe54fb0d4a97adef6fc0f5995c03a2c15006e83",
+      "physical_bytes": 10429,
+      "lf_sha256": "ba8d6cad6a53e5ed6731b7d35027bd267ae893033f3a166c1c046788b9d4fcfa",
+      "git_blob_sha256": "ba8d6cad6a53e5ed6731b7d35027bd267ae893033f3a166c1c046788b9d4fcfa"
+    },
+    "tools/ci_tests.py": {
+      "physical_sha256": "acba5a47d8f6ab17e9c5d9dfc60edd4e8236c543aafd98055257bcc287de83c6",
+      "physical_bytes": 5027,
+      "lf_sha256": "33b98e113d17243597d3d9b1375963104c0fa499ccfd3c239db2f2887a2b1e66",
+      "git_blob_sha256": "33b98e113d17243597d3d9b1375963104c0fa499ccfd3c239db2f2887a2b1e66"
+    },
+    "tests/contract/host_assumption_baseline.json": {
+      "physical_sha256": "06f3217c7ee65311676411974faf6eb12c0021fc0e96186945bc94614515bafa",
+      "physical_bytes": 2236,
+      "lf_sha256": "06f3217c7ee65311676411974faf6eb12c0021fc0e96186945bc94614515bafa",
+      "git_blob_sha256": "06f3217c7ee65311676411974faf6eb12c0021fc0e96186945bc94614515bafa"
+    }
+  },
+  "source_before_after_unchanged": true,
+  "tests": {
+    "independent_new_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 2.21,
+    "exit": 0,
+    "cases": [
+      {
+        "name": "test_unknown_owner_machine_fields_and_amounts_are_verbatim_not_recomputed",
+        "seconds": 0.108,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[version]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[scope]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[aggregate]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[bool_limit]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[nonfinite]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[list]",
+        "seconds": 0.005,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[dict]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[string]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[raw]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[physical_key]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[physical_schema_windows]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[physical_schema_file_uri]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[physical_schema_file_uri_single_slash]",
+        "seconds": 0.001,
+        "status": "PASS"
+      },
+      {
+        "name": "test_invalid_optional_is_omitted_and_six_field_cause_unchanged[depth]",
+        "seconds": 0.002,
+        "status": "PASS"
+      },
+      {
+        "name": "test_exact_compact_byte_cap_is_not_truncation_or_raised",
+        "seconds": 0.09,
+        "status": "PASS"
+      },
+      {
+        "name": "test_actual_ff_cli_keeps_local_budget_and_causes_without_provider_or_retry[False-0]",
+        "seconds": 0.932,
+        "status": "PASS"
+      },
+      {
+        "name": "test_actual_ff_cli_keeps_local_budget_and_causes_without_provider_or_retry[True-7]",
+        "seconds": 0.91,
+        "status": "PASS"
+      }
+    ],
+    "initial_red": {
+      "product": "6dbb9e84",
+      "passed": 15,
+      "failed": 2,
+      "seconds": 2.92,
+      "receipt": "initial.xml"
+    },
+    "same_root_uri_supplement": {
+      "product": "a30024e5",
+      "passed": 17,
+      "failed": 1,
+      "seconds": 3.06,
+      "receipt": "uri-supplement-red.xml"
+    },
+    "final_receipt": "final.xml",
+    "author_tests_counted_as_independent": false,
+    "shared_test_support": "old _identity/_query/_wiki used only for synthetic setup; no author assertions reused"
+  },
+  "finding": {
+    "id": "FF-OBS-INDEP-01",
+    "status": "RESOLVED",
+    "cause": "nested schema_version used a colon/slash token grammar, while the existing physical field guard checked keys only; explicit drive/file addresses escaped as supposedly pathless machine observations",
+    "initial_counterexamples": [
+      "C:/Users/example/raw.pdf",
+      "file:///C:/Users/example/raw.pdf"
+    ],
+    "same_root_supplement": "file:/C:/Users/example/raw.pdf is a standard single-slash absolute file URI, initially omitted by scheme:// matcher",
+    "repair": "keep opaque schema token grammar; reject explicit drive:/, file:/ (case insensitive) and scheme:// address prefixes; preserve urn:owner:budget/2, file:missing and unknown owner fields",
+    "production_business_or_permission_change": false,
+    "final_repair_commit": "136ab5a627083f173c60fc88b7b3f74879a4bf99"
+  },
+  "actual_FF_cli": {
+    "small": {
+      "entry": "actual subprocess imports production fetch_filing.main; only CWP upstream transport commands routed to synthetic real bounded JSON children",
+      "cli_exit": 2,
+      "producer_exit": 0,
+      "stdout_bytes": 2654,
+      "stdout_sha256": "e8fb9e780cc9a463b551ba533f54e3eddefe8e311d578c5488429eb75ed93d22",
+      "routes": [
+        "identity",
+        "query",
+        "local"
+      ],
+      "calls": 3,
+      "downloads": 0,
+      "cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "local_limits": {
+        "max_candidates": 64,
+        "max_bytes": 134217728,
+        "timeout_seconds": 19.572426700004144
+      },
+      "diagnostic_count": 1,
+      "local_io_usage": null,
+      "transcript": {
+        "status": "not_run",
+        "reason": "filing_failed_before_companion_dispatch",
+        "retryable": false,
+        "intent": "fetch_if_missing",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider": "company_ir",
+        "acquisition_limits": {
+          "max_bytes": 100000,
+          "timeout_seconds": 10,
+          "max_cost_usd": "0"
+        },
+        "provider_started": false,
+        "provider_requests": 0,
+        "provider_response_bytes": 0,
+        "provider_usage_complete": true
+      }
+    },
+    "large": {
+      "entry": "actual subprocess imports production fetch_filing.main; only CWP upstream transport commands routed to synthetic real bounded JSON children",
+      "cli_exit": 2,
+      "producer_exit": 7,
+      "stdout_bytes": 123177,
+      "stdout_sha256": "7d225dd8f45357816bbf5de8a082f7a7f2cf24e5929bdfd80760d5d499079abe",
+      "routes": [
+        "identity",
+        "query",
+        "local"
+      ],
+      "calls": 3,
+      "downloads": 0,
+      "cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "local_limits": {
+        "max_candidates": 64,
+        "max_bytes": 134217728,
+        "timeout_seconds": 19.588446399997338
+      },
+      "diagnostic_count": 950,
+      "local_io_usage": null,
+      "transcript": {
+        "status": "not_run",
+        "reason": "filing_failed_before_companion_dispatch",
+        "retryable": false,
+        "intent": "fetch_if_missing",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider": "company_ir",
+        "acquisition_limits": {
+          "max_bytes": 100000,
+          "timeout_seconds": 10,
+          "max_cost_usd": "0"
+        },
+        "provider_started": false,
+        "provider_requests": 0,
+        "provider_response_bytes": 0,
+        "provider_usage_complete": true
+      }
+    }
+  },
+  "wire_boundaries": {
+    "outer_version": "filing-local-preparation-observation/1",
+    "original_FF_envelope": "2.0 unchanged",
+    "original_CWP_receipt": "local-source-prepare/1 unchanged8fields",
+    "max_compact_UTF8_bytes": 131072,
+    "at_cap_accepted": true,
+    "cap_plus_one_drops_whole_optional_without_truncating": true,
+    "safe_original_cause_preserved": true,
+    "max_depth": 8,
+    "max_list_items": 1024,
+    "max_dict_keys": 32,
+    "local_io_usage_remains_null": true,
+    "owner_operation_verbatim": true,
+    "charged_and_observed_tail_bytes_distinct": true,
+    "unknown_trigger_remains_null": true,
+    "unknown_machine_schema_fields_preserved": true,
+    "deep_copy_isolation": true
+  },
+  "commands": {
+    "environment": "PYTHONPATH=<author>/scripts;<author>/tests; PYTHONDONTWRITEBYTECODE=1; PYTHON_DOTENV_DISABLED=1; own conftest removes real provider keys and denies sockets",
+    "tests": "python -B -X utf8 -m pytest -c <evidence>/pytest.ini <evidence>/test_observation_independent.py --basetemp=<mother>/.planning/fforv --junitxml=<evidence>/final.xml -v --tb=short",
+    "ruff": "python -B -X utf8 -m ruff check <8 changed product Python files> <2 independent test/support files> --no-cache; exit0",
+    "mypy": "python -B -X utf8 -m mypy --cache-dir=<mother>/.planning/fforv/mypy scripts/filing_contracts.py scripts/fetch_filing.py; exit0"
+  },
+  "host_guard_baseline_review": {
+    "new_entries": 2,
+    "exact_negative_strings": [
+      "C:/Users/example/raw.pdf",
+      "D:/1"
+    ],
+    "rationale": "malicious opaque JSON test strings, never filesystem paths; rejection is required cross-platform; exact per-file/string baseline entries only",
+    "guard_code_or_global_rule_changed": false,
+    "native_normal_hooks": "author reports PASS; independently inspected exact baseline diff"
+  },
+  "scope": {
+    "external_network": 0,
+    "provider_requests": 0,
+    "LLM_calls": 0,
+    "supplier_cost_usd": "0",
+    "real_keys_read": false,
+    "real_lake_scans": 0,
+    "downloads": 0,
+    "production_originals_opened_or_modified": false,
+    "production_config_or_hook_changes": false,
+    "author_product_edits_by_reviewer": false,
+    "author_index_or_branch_edits": false,
+    "author_temp_deleted_by_reviewer": false,
+    "main_merge_push_install_by_reviewer": false,
+    "new_identity_permission_retry_fee_semantics": false
+  },
+  "cleanup": {
+    "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\fforv",
+    "files": 223,
+    "bytes": 11204185.0,
+    "initial_state": "absent (observed before tests)",
+    "final_state": "absent",
+    "author_roots_removed": 0,
+    "real_originals_removed": 0,
+    "at_utc": "2026-10-22T20:22:28.9425383Z"
+  },
+  "not_covered": [
+    "actual CWP local-read budget ownership/partial-operation persistence against original files (ROOT producer lane)",
+    "CWP→FF→RF combined real offline producer chain and RF large-sidecar/stderr limits (ROOT)",
+    "live H1 preparation/history, download/providers/paid APIs",
+    "main push/CI and selective installation (ROOT)"
+  ],
+  "install_runtime_files_together": [
+    "scripts/fetch_filing.py",
+    "scripts/ff_local_source_prepare.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/ff_local_preparation_observation.py"
+  ],
+  "setup_note": "one preliminary inline probe omitted tests import path and failed before execution; not counted as RED. Formal isolated pytest reproduced actual URI failure with valid imports.",
+  "unresolved_findings": [],
+  "evidence_manifest": {
+    "actual-cli-False.json": {
+      "sha256": "0b4f1ef4818f6c9a1436372507cc9e1069e44cf69f90613ed18f1bb85647c07c",
+      "bytes": 4225
+    },
+    "actual-cli-True.json": {
+      "sha256": "a29759370d8b06476184a2d90719dcd731716238de40562f03377d0bd8fabe59",
+      "bytes": 134240
+    },
+    "cleanup.json": {
+      "sha256": "d2d5e3c0789424a03bb569f26d2b5bb5e38dc5fc3280b17a0a4ccae1d15ad8df",
+      "bytes": 314
+    },
+    "conftest.py": {
+      "sha256": "f8794383b77f059b03c5b59e96cefcd70d74fd774f5cee671caaaf28747d65d9",
+      "bytes": 644
+    },
+    "final-docs-observation.json": {
+      "sha256": "fb705aa13ef6086a2b5490eb9edb7f6446fde51ef4dd9dfa05d812b6e09b7eb2",
+      "bytes": 130
+    },
+    "final-exits.json": {
+      "sha256": "23f950d6f8c79b2f079e1526d7473608189086ca86f59cc3a15a7cdbddc0bc64",
+      "bytes": 84
+    },
+    "final-mypy.log": {
+      "sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+      "bytes": 44
+    },
+    "final-ruff.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "final-test.py.snapshot": {
+      "sha256": "7325d569be1fa7a0a11a4dd469fa00f51a8e4d6bb24473a2a9abc47b6f9c7221",
+      "bytes": 13888
+    },
+    "final.log": {
+      "sha256": "24ae10640aca2222e0fa1c8375450715f0e95cd32b2dbfdb4bafbae6b6b88592",
+      "bytes": 5752
+    },
+    "final.xml": {
+      "sha256": "c9fbc5a19c954713397996bad794980e46a5d9f7322eddba7f524ea54f6a271a",
+      "bytes": 2931
+    },
+    "initial-receipts.json": {
+      "sha256": "97fc68fe32852c3b35591dc068d0a26b738bc6384ac879327b38cbb473aa4a44",
+      "bytes": 678
+    },
+    "initial-test.py.snapshot": {
+      "sha256": "3f04f71ce84d3ca90189219061adfbdb78d9356c4e19b23d0385259f5661ea14",
+      "bytes": 11501
+    },
+    "initial.log": {
+      "sha256": "0dbbc6a5b841bc0e5576e0e2b9fefb16740ce2b021e073dd5efba3f59f20ee42",
+      "bytes": 8066
+    },
+    "initial.xml": {
+      "sha256": "00f3c9cd1c47239d90ca5b64edb75301e30aea04de42649b9ce9a2a7cfbe3288",
+      "bytes": 5744
+    },
+    "pytest.ini": {
+      "sha256": "aaabed120d2fb059160bb38bf8843dc0bbb6abca5f013dffb5228bfffb9a3404",
+      "bytes": 39
+    },
+    "source-after-final.json": {
+      "sha256": "66a7f1171a622c78d6bf19d5250b8b663af7a681987aea63e02a854a191b14ea",
+      "bytes": 3098
+    },
+    "source-before-final.json": {
+      "sha256": "43b71374cf2d6aeb1706b7e91e0046a85df8247631963e50b3cd4e17810c8e7f",
+      "bytes": 5868
+    },
+    "source-before.json": {
+      "sha256": "e4fdd36aa6167f4d5976add2f3c068c10a47544de2ebb5284dd0d4c3b58f21c9",
+      "bytes": 2966
+    },
+    "test_observation_independent.py": {
+      "sha256": "7325d569be1fa7a0a11a4dd469fa00f51a8e4d6bb24473a2a9abc47b6f9c7221",
+      "bytes": 13888
+    },
+    "uri-supplement-red.log": {
+      "sha256": "5c6198284d93a9e7d3f16232672c1df107bc725f278a60b69984f0fc5eceeef4",
+      "bytes": 7160
+    },
+    "uri-supplement-red.xml": {
+      "sha256": "f5e7567e3cb5d4c0e9b1b2b2df0fccc5eff57cdd7fc457962d9153a55fb9c3e9",
+      "bytes": 4426
+    }
+  }
+}

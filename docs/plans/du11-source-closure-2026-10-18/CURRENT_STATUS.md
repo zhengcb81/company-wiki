@@ -6,13 +6,13 @@
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05及W03-A工程已独审、并线和发布；W03-A当前CWP精确CI `1b39032c / 39842895271` SUCCESS。W07控制器非作者9个不同场景通过，已合入本地主线 `9eba8c4e`，待正常推送；9场景来自最终源码的多次运行，不冒称一次全绿。W06资料阶段A已交接：8份新原件10,229,835B、10份合格来源，研究/模型阶段B尚未执行。母模型账仍未新增收费，旧初稿和未知预留保留。
+**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05及W03-A已发布。W07控制器及独审记录已正常推送 `755e87cd`（7088单测/24跳过、契约145通过）；真实配置内0.9/v5摘要、付费响应重放、激活恢复、跨run缓存和已安装RF公开读取均通过：[真实节点](review/r1-w07-live-20261022.md)。它们共用一次POST，17329tokens/估算$0.006701；独立真实质量复审与RF实际公式消费仍未完成。W06阶段A有8份新原件10,229,835B、10份合格来源；阶段B已交执行agent继续，不标已完成。
 
 当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
 
-唯一下一主线：**正常发布W07，按重分配预算重跑冻结纯预检，再跑配置内0.9/v5真实摘要、paid-response重放、激活恢复和跨run缓存；公开RF读取后实际用于参数/公式。** 首次真实纯预检0POST，73560B请求的原生保守token上界81,880超过旧公司余量60,974。ROOT仅把自行收窄的公司累计token上限100k重分配为150k，单请求deploy仍100k，公司$1及母级2M/$20不变；不缩小配置输出、不释放unknown，原冻结scope不改，当前修订见[预算重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。完成后做W06阶段B/四审，最后药明合联→Snowflake泛化。默认仍0.8；工程绿不能代签生产0.9、真实恢复、内容或预测质量。
+唯一下一主线：**W06阶段B：将新摘要真实绑定实际使用的RF参数/公式，完成独立经营桥、15步预测与四路独审，再药明合联→Snowflake泛化。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，不把可读当内容完整或已入模型。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
 
-新增共因跟进：[本地读取诊断接口](r1-holdout-20261021/local_budget_observation_interface.md)。真实H1首次复用的`budget_exceeded`缺少阶段/计量，不能事后猜原因；CWP保留失败前操作和owner预算观察，FF/RF透明传递有界诊断。FF作者127项通过正在非作者审查，RF先写测试，ROOT CWP7项通过；另5项旧contract失败已在原主线同样复现，独立分析中。此项不提高本地读取配额、不增加权限门禁。
+新增共因跟进：[本地读取诊断接口](r1-holdout-20261021/local_budget_observation_interface.md)。H1旧budget_exceeded无法事后推计量，三层改为保留owner事实。FF `136ab5a6`独审18项通过；RF `dedebe0b`作者201项/1既有跳过正在独审；CWP9项新预算测试通过，另5个旧contract真缺陷正根修（无关源重复处理、已有owner异常未转结构化结果），不新增第二身份校验。此项不提高本地读取配额、不增加权限门禁，按consumer先发布后producer整合。
 
 初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
 
@@ -63,7 +63,9 @@
 
 当前模型表：MiMo `mimo-v2.6-flash`、DeepSeek `deepseek-flash`、MiniMax `MiniMax-M3.1-Flash`。10月18日 US 收据使用的是当时的 `MiniMax-M3`；这属于历史事实，不是当前运行配置。
 
-2026-10-21通过既有 `phase_c_runner.mother_totals` 重计：累计 **1,544,023 tokens / $0.625258**（估算及保守预留），剩余 **455,977 tokens / $19.374742**。先前1,091,219 tokens / $0.278311仅为追加账，须加历史基数413,778 tokens / $0.334463和FX预留$0.002764；不能把追加账当总账。旧7笔和新增4笔unknown均保留其预留，不当零、不重复加算。冻结前基数见[预算观察](r1-holdout-20261021/budget-observation.json)，本轮实际与原生费用引用见[封存观察](r1-holdout-20261021/initial-execution-seal.json)。累计上限仍为2,000,000 tokens / $20，每次实际调用前重读母账及原生费用记录，本观察不另建收费账。
+2026-10-22通过既有 `append_native` / `mother_totals` 重计：累计 **1,561,352 tokens / $0.631959**（配置价格估算及保守预留），剩余 **438,648 tokens / $19.368041**。W07新增17329tokens/6701microUSD，公司累计56355tokens/16421microUSD；旧7笔和新增4笔unknown全保留，不当零、不重复加算。见[最终原生观察](review/r1-w07-live-20261022/accounting-final-observation.json)。旧1544023/$0.625258为本次调用前基数，不再当当前总数；累计授权仍2M/$20。
+
+新运行的操作索引保存在replay attempt，初始索引曾被ROOT误追加，已按封存SHA精确恢复并实核639件全匹配，见[恢复记录](review/r1-w07-live-20261022/sealed-index-restoration.json)。有效scope用`coordinator-effective-scope-v2.json`，不能改写initial历史材料或把新账引用写回旧封存。
 
 ## 文档导航及状态规则
 

@@ -1,0 +1,145 @@
+{
+  "cli_exit": 2,
+  "producer_exit": 0,
+  "stdout_bytes": 2654,
+  "stdout_sha256": "e8fb9e780cc9a463b551ba533f54e3eddefe8e311d578c5488429eb75ed93d22",
+  "stderr_bytes": 0,
+  "routes": [
+    {
+      "route": "identity",
+      "request": null
+    },
+    {
+      "route": "query",
+      "request": {
+        "market": "US",
+        "document_kind": "semi_annual_report",
+        "mode": "exact",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "as_of_date": "2026-10-21",
+        "entity": "Advanced Micro Devices, Inc.",
+        "security_id": "AMD",
+        "schema_version": "1.0",
+        "allow_download": false
+      }
+    },
+    {
+      "route": "local",
+      "request": {
+        "schema_version": "local-source-prepare-request/1",
+        "source_request": {
+          "market": "US",
+          "document_kind": "semi_annual_report",
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "H1",
+          "as_of_date": "2026-10-21",
+          "entity": "Advanced Micro Devices, Inc.",
+          "security_id": "AMD",
+          "schema_version": "1.0",
+          "allow_download": false
+        },
+        "limits": {
+          "max_candidates": 64,
+          "max_bytes": 134217728,
+          "timeout_seconds": 19.572426700004144
+        }
+      }
+    }
+  ],
+  "envelope": {
+    "schema_version": "2.0",
+    "status": "upstream_error",
+    "request_period": {
+      "mode": "exact",
+      "fiscal_year": 2026,
+      "fiscal_period": "H1",
+      "as_of_date": "2026-10-21"
+    },
+    "filing": {
+      "status": "upstream_error",
+      "reason": "local source preparation unavailable: budget_exceeded",
+      "retryable": true,
+      "producer_exit_code": 0,
+      "upstream_cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "stage": "local_prepare"
+    },
+    "transcript": {
+      "status": "not_run",
+      "reason": "filing_failed_before_companion_dispatch",
+      "retryable": false,
+      "intent": "fetch_if_missing",
+      "fiscal_year": 2026,
+      "fiscal_quarter": 2,
+      "provider": "company_ir",
+      "acquisition_limits": {
+        "max_bytes": 100000,
+        "timeout_seconds": 10,
+        "max_cost_usd": "0"
+      },
+      "provider_started": false,
+      "provider_requests": 0,
+      "provider_response_bytes": 0,
+      "provider_usage_complete": true
+    },
+    "calls": 3,
+    "downloads": 0,
+    "local_preparation_observation": {
+      "schema_version": "filing-local-preparation-observation/1",
+      "usage_scope": "local_original_verification",
+      "status": "unavailable",
+      "reason": "budget_exceeded",
+      "blocks_download": true,
+      "operations": [
+        {
+          "operation": "metadata_assertion",
+          "status": "recorded"
+        },
+        {
+          "schema_version": "local-read-budget/1",
+          "operation": "local_read_budget",
+          "usage_scope": "local_original_verification",
+          "phase": "original_read",
+          "reason": "budget_exceeded",
+          "limits": {
+            "max_candidates": 64,
+            "max_bytes": 134217728,
+            "timeout_seconds": 17.25,
+            "max_discovery_groups": 256,
+            "max_discovery_entries": 4096
+          },
+          "consumed": {
+            "candidates": 6,
+            "charged_read_bytes": 134217720,
+            "observed_charge_bytes": 134217729,
+            "discovery_groups": 3,
+            "discovery_entries": 19,
+            "elapsed_seconds": 0.125
+          },
+          "triggered_bound": null
+        }
+      ],
+      "diagnostics": [
+        {
+          "phase": "metadata",
+          "status": "unavailable",
+          "reason": "local_original_missing"
+        }
+      ],
+      "local_read_limits": {
+        "max_candidates": 64,
+        "max_bytes": 134217728,
+        "timeout_seconds": 19.572426700004144
+      },
+      "local_io_usage": null
+    }
+  }
+}

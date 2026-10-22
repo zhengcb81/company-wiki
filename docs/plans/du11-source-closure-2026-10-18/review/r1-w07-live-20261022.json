@@ -1,0 +1,190 @@
+{
+  "schema_version": "r1-w07-live-observation/1",
+  "observed_at": "2026-10-22T20:21:41.886511+00:00",
+  "status": "LIFECYCLE_AND_PUBLIC_RF_READ_PASS_CONTENT_AND_RF_FORMULA_NOT_YET_ACCEPTED",
+  "company": "药明康德",
+  "audit_attempt_id": "r1-remediation-01",
+  "code_head": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+  "source_ref": {
+    "byte_size": 1608226,
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+  },
+  "as_of_date": "2026-10-21",
+  "model": {
+    "configured_provider": "deepseek",
+    "configured_model": "deepseek-flash",
+    "selector": "0.9.0",
+    "projection": "reading-model-input/5",
+    "model_wire": "narrative-model-request/6",
+    "prompt": "reading-source-extractive/5.0.0"
+  },
+  "actual_posts": 1,
+  "charge": {
+    "tokens": 17329,
+    "estimated_micro_usd": 6701,
+    "kind": "native provider usage plus configured price proxy, not invoice"
+  },
+  "paid_replay": {
+    "executed": true,
+    "new_reservations": 0,
+    "new_tokens": 0
+  },
+  "activation_recovery": {
+    "executed": true,
+    "artifact_ref": {
+      "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+      "byte_size": 415965,
+      "content_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    }
+  },
+  "cache": {
+    "new_reservations": 0,
+    "new_tokens": 0,
+    "artifact_ref": {
+      "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+      "byte_size": 415965,
+      "content_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "run_id": "r1-cn-annual-090-recovery-20261022-cache"
+  },
+  "new_process_and_attempt": true,
+  "runtime_fence_advanced": true,
+  "paid_operation_same": true,
+  "public_rf_read": {
+    "exit_code": 0,
+    "bytes": 418917,
+    "sha256": "953da486f9d4f5d78102209572b219c1b9f6b91b24ad73d0964d142f70610c44",
+    "context_schema": "revenue-narrative-context/1",
+    "evidence_spans": 96,
+    "selection": {
+      "candidate_count": 1413,
+      "coverage_complete": false,
+      "dropped_financial_count": 283,
+      "lines_total": 0,
+      "omitted_candidate_count": 1317,
+      "pages_read": 249,
+      "pages_total": 249,
+      "selected_count": 96,
+      "source_units": 4923,
+      "status": "partial",
+      "tables_scanned": 1,
+      "tables_total": 141
+    },
+    "quality_status": "needs_review",
+    "is_actual_formula_consumption": false
+  },
+  "configs_unchanged": true,
+  "old_unknown_holds_retained": true,
+  "original_files_downloaded_by_this_lifecycle": 0,
+  "translate": false,
+  "remaining": [
+    "RF consume_narrative_input on actually used parameter/formula",
+    "W06 independent operating model, complete native flow and four quality reviews",
+    "HK/US fresh company holdouts"
+  ],
+  "artifacts": [
+    {
+      "path": "accounting-final-observation.json",
+      "sha256": "e06896e482046b76db39b8f2e41ad4b2888ffc1f91f35006cae85223d9edf95e",
+      "bytes": 925
+    },
+    {
+      "path": "accounting-observation.json",
+      "sha256": "10530eba48447576fa67ac374e834ff383a3abe97079f384472735ecb194f9fc",
+      "bytes": 901
+    },
+    {
+      "path": "controller-result.json",
+      "sha256": "4fb4d0fba0fc8439ad241a6e9f5d5a7f95c3fbc550256e7aaa97bdb04c619474",
+      "bytes": 161842
+    },
+    {
+      "path": "controller-spec.json",
+      "sha256": "b7ae3a231cfed6054b152fad1bfedfaab3a5efedfb82839ccefc3e0878a71bb8",
+      "bytes": 2244
+    },
+    {
+      "path": "events.jsonl",
+      "sha256": "802b2457c8543aea5bd2706aedfa880cb16dff10822c5123f09885c95d4b5088",
+      "bytes": 3014
+    },
+    {
+      "path": "narrative-read-request.json",
+      "sha256": "088a1b500b631f64a1f974052afb86269698c2e613cc37ff5138939eafc61fc2",
+      "bytes": 1016
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "1ba5ba8e80b8f28930be8209e84f4792cc1c5dbcf9dd9fc9d90aa333d4cfc896",
+      "bytes": 724
+    },
+    {
+      "path": "public-read.receipt.json",
+      "sha256": "e311fa27e8132318808d7f3787d304e91be219c28539085a69324bb3e9d0f89c",
+      "bytes": 2181
+    },
+    {
+      "path": "rf-public-context.json",
+      "sha256": "953da486f9d4f5d78102209572b219c1b9f6b91b24ad73d0964d142f70610c44",
+      "bytes": 418917
+    },
+    {
+      "path": "sealed-index-restoration.json",
+      "sha256": "b39761d24abc763cbb37519da7e47640c4cd3af198b05c27562b8a7c63618005",
+      "bytes": 1036
+    },
+    {
+      "path": "w06-context-handoff.json",
+      "sha256": "897e03517f65b7075d6fb7276c19f68a151776867ae1f855d0fdd0b306c4f338",
+      "bytes": 1932
+    },
+    {
+      "path": "w07-published-ci.json",
+      "sha256": "b961e12dfca6f644f067280d6ca2427732208f16283def8d53b556e97d87b84a",
+      "bytes": 383
+    },
+    {
+      "path": "w07-real-activation-pending-capture.json",
+      "sha256": "65b7103bbe1deb88b0c440bbb29241bd76f7c921461a01ebebfc08c56d33cc8b",
+      "bytes": 2416
+    },
+    {
+      "path": "w07-real-after-paid-capture.json",
+      "sha256": "cb8cadb377415ae05638f27bebd32f1f857c097899b432a0bee4f3189ffd8073",
+      "bytes": 2416
+    },
+    {
+      "path": "w07-real-complete-cache-capture.json",
+      "sha256": "3b50a2b2ad34a374ab555ce7de5443367d63d0945911669265cdecb620d85ebc",
+      "bytes": 2417
+    },
+    {
+      "path": "w07-real-preflight-capture.json",
+      "sha256": "132f2f86435445573c1d5affb839cb5fb90542de2df0acb4a18a15f555184f15",
+      "bytes": 2404
+    },
+    {
+      "path": "w07-real-rf-read-capture.json",
+      "sha256": "529649b0538da378fd61228ea34c517cb7ac03fdfc93af5e09a2d0a91502db95",
+      "bytes": 2439
+    },
+    {
+      "path": "w07-reallocated-preflight-capture.json",
+      "sha256": "01a23c03372280c351a3e8bc78fcd2b39bfaebf1152c937376478abdc1c1e9a4",
+      "bytes": 2416
+    }
+  ],
+  "no_raw_original_or_database_copy": true,
+  "initial_639_artifacts_verified_after_index_restoration": true,
+  "independent_live_review": "PENDING; independent offline9 review does not substitute real quality review"
+}

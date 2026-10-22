@@ -1,0 +1,23 @@
+{
+  "schema_version": "w07-to-w06-research-context/1",
+  "attempt_id": "r1-remediation-01",
+  "public_context": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\commands\\07954b99db604aaea970e41c54e9a2b6\\stdout.txt",
+  "public_context_sha256": "953da486f9d4f5d78102209572b219c1b9f6b91b24ad73d0964d142f70610c44",
+  "public_request": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\narrative-read-request.json",
+  "source_ref": {
+    "byte_size": 1608226,
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+  },
+  "catalog_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+  "read_role_capture": "07954b99db604aaea970e41c54e9a2b6",
+  "effective_scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\coordinator-effective-scope-v2.json",
+  "selection_status": "partial",
+  "quality_status": "needs_review",
+  "no_quality_pass_inferred": true,
+  "next": "Actual consume_narrative_input with qualitative support bound to used parameter and native segment formula; return to originals for numbers; then complete RF15 steps and source->parameter->formula ledger.",
+  "native_operation_index": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\native_operation_index.json"
+}

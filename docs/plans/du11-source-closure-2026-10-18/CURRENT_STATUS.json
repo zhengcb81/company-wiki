@@ -2,17 +2,19 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-22",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W07_REVIEWED_REAL_PREFLIGHT_BUDGET_REALLOCATED",
+  "overall_status": "ACTIVE_W07_LIVE_LIFECYCLE_PUBLIC_RF_READ_PASS_W06_RESEARCH_NEXT",
   "current_authorized_scope": "resumed_2026_10_22_continue_PWF_W03_then_W07_W06_and_fresh_holdouts",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "9eba8c4e",
+  "last_code_commit": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
   "code_ci": {
-    "status": "W07_NOT_YET_PUSHED",
-    "conclusion": null,
-    "scope_note": "W03 producer1b39032c exact CI39842895271 SUCCESS; not a W07 CI receipt."
+    "id": 39847355377,
+    "head_sha": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39847355377"
   },
   "completed": {
     "b2": {
@@ -73,13 +75,23 @@
       "actual_paid_summary_recovery_rf_consumption": false
     },
     "r1_w07_offline": {
-      "status": "NONAUTHOR_PASS_MERGED_NOT_YET_PUBLISHED",
+      "status": "NONAUTHOR_PASS_MERGED_PUSHED",
       "product": "5a1548e228bfdf231ca624767661ed138c962136",
       "merge": "9eba8c4e",
       "independent_scenarios": 9,
       "single_all_green_invocation": false,
       "review": "review/r1-w07-controller-independent-20261022.json",
       "real_paid": false
+    },
+    "r1_w07_live_lifecycle": {
+      "status": "LIFECYCLE_AND_PUBLIC_RF_READ_PASS",
+      "report": "review/r1-w07-live-20261022.json",
+      "actual_posts": 1,
+      "tokens": 17329,
+      "estimated_micro_usd": 6701,
+      "formula_consumption": false,
+      "content_quality": "NOT_YET_ACCEPTED",
+      "independent_live_review": "PENDING"
     }
   },
   "content": {
@@ -135,24 +147,26 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Publish reviewed W07 controller; rerun frozen pure preview within reallocated company cap, then configured one-paid lifecycle, public RF consumption, W06 phaseB/four reviews and HK/US holdouts.",
+  "next_step_now": "W06 phaseB: actual narrative parameter/formula consumption, independent operating bridge and full RF15-step forecast; independently review real lifecycle and all four company quality roles; integrate local-observation consumer-first, then HK/US holdouts.",
   "next_step_after_user_resumes": "already_resumed_2026_10_22",
   "budget_snapshot": {
-    "observed_on": "2026-10-21",
+    "observed_on": "2026-10-22",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
-    "tokens": 1544023,
-    "estimated_micro_usd": 625258,
-    "remaining_tokens": 455977,
-    "remaining_micro_usd": 19374742,
+    "tokens": 1561352,
+    "estimated_micro_usd": 631959,
+    "remaining_tokens": 438648,
+    "remaining_micro_usd": 19368041,
     "includes_prior_baseline_and_retained_fx": true,
     "new_unknown_count": 4,
     "prior_unknown_hold_count": 7,
     "cumulative_cap_tokens": 2000000,
     "cumulative_cap_usd": 20,
     "cost_kind": "budget proxy and conservative unknown holds, not provider invoice",
-    "latest_native_observation_ref": "r1-holdout-20261021/initial-execution-seal.json",
+    "latest_native_observation_ref": "review/r1-w07-live-20261022/accounting-final-observation.json",
     "company_cap_tokens": 150000,
-    "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json"
+    "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json",
+    "company_tokens": 56355,
+    "company_estimated_micro_usd": 16421
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -161,21 +175,15 @@
     "minimax": "MiniMax-M3.1-Flash"
   },
   "historical_us_c_model": "MiniMax-M3",
-  "new_paid_calls_in_this_update": 0,
+  "new_paid_calls_in_this_update": 1,
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "observed_at": "2026-10-22T19:51:17.7241764Z",
-    "head_sha": "1b39032c9c72fd089a5a8a8e94858bbe399ceac1",
-    "runs": [
-      {
-        "id": 39842895271,
-        "head_sha": "1b39032c9c72fd089a5a8a8e94858bbe399ceac1",
-        "status": "completed",
-        "conclusion": "success",
-        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39842895271"
-      }
-    ]
+    "id": 39847355377,
+    "head_sha": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39847355377"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -186,6 +194,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
   "previous_pause_request": "Superseded by latest user continue request.",
-  "last_updated_at": "2026-10-22T20:09:05.027042+00:00",
-  "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json"
+  "last_updated_at": "2026-10-22T20:25:05.169196+00:00",
+  "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
+  "r1_w07_live_ref": "review/r1-w07-live-20261022.json"
 }

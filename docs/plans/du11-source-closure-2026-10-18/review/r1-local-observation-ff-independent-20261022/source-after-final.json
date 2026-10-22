@@ -1,0 +1,54 @@
+{
+  "product_commit": "136ab5a627083f173c60fc88b7b3f74879a4bf99",
+  "HEAD": "136ab5a627083f173c60fc88b7b3f74879a4bf99",
+  "status": "?? .planning/ffloc-file-uri-green/\n?? docs/plans/r1-local-observation-20261022/evidence/schema-hygiene-fix/file-uri-final-source.json\n?? docs/plans/r1-local-observation-20261022/evidence/schema-hygiene-fix/file-uri-green.log\n?? docs/plans/r1-local-observation-20261022/evidence/schema-hygiene-fix/file-uri-green.xml\n?? docs/plans/r1-local-observation-20261022/evidence/schema-hygiene-fix/file-uri-red.log\n?? docs/plans/r1-local-observation-20261022/evidence/schema-hygiene-fix/file-uri-red.xml\n",
+  "files": {
+    "scripts/fetch_filing.py": {
+      "physical_sha256": "09a522bb2f9c5532e5f23aedaf316712275c9f26024294cf6461d091ca106e84",
+      "physical_bytes": 71829,
+      "lf_sha256": "a004bee1db025dafbcffd55bc73dea3a9064f122f3e5296e88173052ce7665c4"
+    },
+    "scripts/ff_local_source_prepare.py": {
+      "physical_sha256": "e02d37f4ffb5f61ab190b00ca8082dd0c0e4556b428ad3ba7f4dc73f75022ccd",
+      "physical_bytes": 6066,
+      "lf_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee"
+    },
+    "scripts/ff_v2_envelope.py": {
+      "physical_sha256": "97f65b1bbcc6c0a6ba7988ec89d028ab59b1d8c630cad368d0fdaa2034cacb36",
+      "physical_bytes": 8489,
+      "lf_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f"
+    },
+    "scripts/filing_contracts.py": {
+      "physical_sha256": "b11c9fbb1c0d248f9fe602e1d01b5decdb90c21df6d6f58f20abc560b9305efb",
+      "physical_bytes": 33679,
+      "lf_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659"
+    },
+    "scripts/ff_local_preparation_observation.py": {
+      "physical_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+      "physical_bytes": 4474,
+      "lf_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f"
+    },
+    "tests/test_local_preparation_observation.py": {
+      "physical_sha256": "1f36424a1df6434b1ac910c1ac15ddba9a996c7a4a50b064cc8cbb65394392f1",
+      "physical_bytes": 11177,
+      "lf_sha256": "1f36424a1df6434b1ac910c1ac15ddba9a996c7a4a50b064cc8cbb65394392f1"
+    },
+    "tests/test_ci_tests.py": {
+      "physical_sha256": "4633d759b2847f813522fa667fe54fb0d4a97adef6fc0f5995c03a2c15006e83",
+      "physical_bytes": 10429,
+      "lf_sha256": "ba8d6cad6a53e5ed6731b7d35027bd267ae893033f3a166c1c046788b9d4fcfa"
+    },
+    "tools/ci_tests.py": {
+      "physical_sha256": "acba5a47d8f6ab17e9c5d9dfc60edd4e8236c543aafd98055257bcc287de83c6",
+      "physical_bytes": 5027,
+      "lf_sha256": "33b98e113d17243597d3d9b1375963104c0fa499ccfd3c239db2f2887a2b1e66"
+    },
+    "tests/contract/host_assumption_baseline.json": {
+      "physical_sha256": "06f3217c7ee65311676411974faf6eb12c0021fc0e96186945bc94614515bafa",
+      "physical_bytes": 2236,
+      "lf_sha256": "06f3217c7ee65311676411974faf6eb12c0021fc0e96186945bc94614515bafa"
+    }
+  },
+  "all_frozen_bytes_unchanged": true,
+  "configuration_or_hook_diff": ""
+}

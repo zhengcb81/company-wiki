@@ -1,0 +1,2844 @@
+{
+  "schema_version": "holdout-acceptance-result/1",
+  "status": "passed",
+  "company": "药明康德",
+  "audit_run_id": "r1-20261021-cn-wuxi-apptec",
+  "audit_attempt_id": "r1-remediation-01",
+  "batch_run_id": "r1-cn-annual-090-recovery-20261022",
+  "as_of_date": "2026-10-21",
+  "source_ref": {
+    "byte_size": 1608226,
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+  },
+  "fingerprints": {
+    "catalog_config": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+    "llm_config": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e"
+  },
+  "stages": [
+    {
+      "stage": "complete",
+      "native_exit": 0,
+      "receipt": {
+        "budget": {
+          "estimated_micro_usd": 6701,
+          "tokens": 17329,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+              "byte_size": 415965,
+              "content_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+              "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+            },
+            "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+            "errors": [],
+            "model_diagnostics": [
+              {
+                "attempt_id": "633d7c1a338a4be39f3572738eea3952",
+                "execution": {
+                  "model_coverage_complete": true,
+                  "model_diagnostic": null,
+                  "plan_sha256": "9f4ceb451b9d773eb56e2a132c7aecc22116da5227b7dfc784bb53b1822278c9",
+                  "schema_version": "source-extractive-execution/1",
+                  "source_coverage_complete": true,
+                  "tasks": [
+                    {
+                      "claim_id": "t1-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t1",
+                      "task_binding_sha256": "7e877a49b840f08eb171907fee449ef664f8751507e87d833220f32a53126e78"
+                    },
+                    {
+                      "claim_id": "t2-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t2",
+                      "task_binding_sha256": "11d85672e807a068592cb157aadbdb2dd02f0870cb930b047e08ace747729a9e"
+                    },
+                    {
+                      "claim_id": "t3-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t3",
+                      "task_binding_sha256": "59e301519c2e6ee24d8f02a27e5fe9e8ab9eee74c04cc5d795a825b4905fd1b6"
+                    },
+                    {
+                      "claim_id": "t4-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t4",
+                      "task_binding_sha256": "68a36ff1bb99ddfefe9806bacfaf16379d8ffdf5733f3bb4009049c8a52adc55"
+                    },
+                    {
+                      "claim_id": "t5-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t5",
+                      "task_binding_sha256": "2d750c69ba249bf6b0a681578b16243d54e4066a53b802b263f5b065cd025793"
+                    },
+                    {
+                      "claim_id": "t6-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t6",
+                      "task_binding_sha256": "4d3249ee57b8f74254a3e927aae9a61bf938f3b9d883049e91f6bb62e6912c38"
+                    },
+                    {
+                      "claim_id": "t7-source",
+                      "model_disposition": "unclear",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t7",
+                      "task_binding_sha256": "28b0b5815c31ab94ec17d162a61004f1a93d1b4bf9d8e37cbeff8c6517719870"
+                    },
+                    {
+                      "claim_id": "t8-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t8",
+                      "task_binding_sha256": "d5b413782e9d8ef045702a4b85f4fe04744afc22d901ab3c9ccf2602e39e7003"
+                    },
+                    {
+                      "claim_id": "t9-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t9",
+                      "task_binding_sha256": "770b2922de3501db6cef45175521e17875b54183524fbdae67d3e67ec1d99071"
+                    },
+                    {
+                      "claim_id": "t10-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t10",
+                      "task_binding_sha256": "e8589c73428ef1ed94bc5ed7024038b7355b2dbfad7dfc2b9490aed327d8e452"
+                    },
+                    {
+                      "claim_id": "t11-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t11",
+                      "task_binding_sha256": "5db873baa836289e8a34ec58a061c1927442bea786a4b3b59003754530362189"
+                    },
+                    {
+                      "claim_id": "t12-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t12",
+                      "task_binding_sha256": "975187dc2eced85d7a3e7bc3b3d595d562c0c64b75fcb98962a97bb8575b981a"
+                    },
+                    {
+                      "claim_id": "t13-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t13",
+                      "task_binding_sha256": "9cbb6a88343c0235a7598913cc044ed792326acc12dd1feb9f01b0931785d30d"
+                    },
+                    {
+                      "claim_id": "t14-source",
+                      "model_disposition": "unclear",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t14",
+                      "task_binding_sha256": "fb43f1b4fc963333d5a41cebcccd754641ed5e829ad7586fbf44f95b12311981"
+                    },
+                    {
+                      "claim_id": "t15-source",
+                      "model_disposition": "unclear",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t15",
+                      "task_binding_sha256": "9d3b2c847ef449265ba2534039ad72567d88eb3eed78d1f7b33da2d722c50675"
+                    },
+                    {
+                      "claim_id": "t16-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t16",
+                      "task_binding_sha256": "7c54443443e770f6ff5fdab1f259c18fa151515ab05bc0eac7dccfab23c9c0f5"
+                    },
+                    {
+                      "claim_id": "t17-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t17",
+                      "task_binding_sha256": "0a148dccbc3be21f2a897734885454722c67e7eae9eb972ffc4a4dfe9a408dc5"
+                    },
+                    {
+                      "claim_id": "t18-source",
+                      "model_disposition": "unclear",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t18",
+                      "task_binding_sha256": "a1f87b84d6ab684985cb22637185d2bc5c1ea23df20b60b95ae58058167ac60c"
+                    },
+                    {
+                      "claim_id": "t19-source",
+                      "model_disposition": "unclear",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t19",
+                      "task_binding_sha256": "e9b0da6a17093c918b38605b45e288fa9b8a1ac5c4f1711eb181a6bb58c65c74"
+                    },
+                    {
+                      "claim_id": "t20-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t20",
+                      "task_binding_sha256": "e71ca39f69696d8cd6813e5a5056b56454f18c4964582ca257f631f0a606442c"
+                    },
+                    {
+                      "claim_id": "t21-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t21",
+                      "task_binding_sha256": "fdc93673127c1f3138164adc6126f119120a95a2b4dfc1655ce3fb02986aef2d"
+                    },
+                    {
+                      "claim_id": "t22-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t22",
+                      "task_binding_sha256": "074734abe7d843e41409e8a9d09ca6341ca05d1dce7c205a2dc23fb50581e313"
+                    },
+                    {
+                      "claim_id": "t23-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t23",
+                      "task_binding_sha256": "f9f1cbc5455a9d182eaf1da3873cb0ee02a2ebbc544a42064b0490c86dc25331"
+                    },
+                    {
+                      "claim_id": "t24-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t24",
+                      "task_binding_sha256": "a316af97ed961baf87cd1b5f26318a2ebe8af3a7fc22696eff6a9c17cc34552d"
+                    },
+                    {
+                      "claim_id": "t25-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t25",
+                      "task_binding_sha256": "719d90951c852a04f0902eb2cfcf74c6cce787a9c8598b956dff2bf5e5d3802a"
+                    },
+                    {
+                      "claim_id": "t26-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t26",
+                      "task_binding_sha256": "d11708984a819d307bc662d859c2499478b987dc3b93b52b209aab6a0c19d61f"
+                    },
+                    {
+                      "claim_id": "t27-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t27",
+                      "task_binding_sha256": "4b74a0a60b4a571d656ad23c3d85b319b34d2b89fef3c10e65cf99a2970969d0"
+                    },
+                    {
+                      "claim_id": "t28-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t28",
+                      "task_binding_sha256": "806d7378b7f9b64702b77b9f5f57c3cf4256883ca76a1fdb36472fc99c304291"
+                    },
+                    {
+                      "claim_id": "t29-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t29",
+                      "task_binding_sha256": "58dc436710ce606bcd761ff1bab57cd4625aec06302cd1f68414bde220841d45"
+                    },
+                    {
+                      "claim_id": "t30-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t30",
+                      "task_binding_sha256": "bca951e9e3c95905bbdbb1970294e4af9fd02eccd0c435306f54230960632e54"
+                    },
+                    {
+                      "claim_id": "t31-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t31",
+                      "task_binding_sha256": "2a6cc3c12da914b03954d202bcc28f99949333efbfe9d9d30376800601b2a0a9"
+                    },
+                    {
+                      "claim_id": "t32-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t32",
+                      "task_binding_sha256": "827e441e04aacef7ea1bd05a6987c899b063afc84f26f570c7e77626aa6f061c"
+                    },
+                    {
+                      "claim_id": "t33-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t33",
+                      "task_binding_sha256": "65a48949b4f960689dac2ab8243b1c56111d32cb08e56a248dc0d8eff13a6709"
+                    },
+                    {
+                      "claim_id": "t34-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t34",
+                      "task_binding_sha256": "ddbe0f2d9c6153fd243a62d4220eddfc474cd49ca3aa049dc760469a56b8f73e"
+                    },
+                    {
+                      "claim_id": "t35-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t35",
+                      "task_binding_sha256": "e26746602e2e867b25a83892894430a32e023924ba59cff63aea41aad2f6aeff"
+                    },
+                    {
+                      "claim_id": "t36-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t36",
+                      "task_binding_sha256": "7f1824e3809fa7211bd5a7bcf0e34eb1eb676145a126dd205ea3991807ad98ed"
+                    },
+                    {
+                      "claim_id": "t37-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t37",
+                      "task_binding_sha256": "744771000c4155a248e9fb9fd20618a401d7b5ab74132d67f6ed7a56f482161d"
+                    },
+                    {
+                      "claim_id": "t38-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t38",
+                      "task_binding_sha256": "a32c5c1e3947fd469f6d811c9c0460aa1489aa7b49cdc8217510e62c451f1026"
+                    },
+                    {
+                      "claim_id": "t39-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t39",
+                      "task_binding_sha256": "1c5e0ab31cf6bcd8b1108040ec5569af4927d62a4183a576b544486364bcaa5c"
+                    },
+                    {
+                      "claim_id": "t40-source",
+                      "model_disposition": "consider",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t40",
+                      "task_binding_sha256": "3a1f5da821f1a7553404088f1797614b5035cea45060af2e16af4984d7ffa9db"
+                    },
+                    {
+                      "claim_id": "t41-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t41",
+                      "task_binding_sha256": "0eb9bd6b830086ae117f8ff8141f6a7edc2c845b139189fcf5e26ce52e4da4b2"
+                    },
+                    {
+                      "claim_id": "t42-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t42",
+                      "task_binding_sha256": "ba9762eb6f22d3e12d0a049ea2cf4811cc2778a54e4ca9111694d618c98a42d2"
+                    },
+                    {
+                      "claim_id": "t43-source",
+                      "model_disposition": "consider",
+                      "priority": "high",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t43",
+                      "task_binding_sha256": "d5b59d8f7b13e41978256ac7f6af8de197b7a5b1efe1ae1cad33d5950dfb4048"
+                    },
+                    {
+                      "claim_id": "t44-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t44",
+                      "task_binding_sha256": "0a41d81d15a90b72e55dd7f4a8654786bd09d9da1a26933b5395c56f5eb9dbc7"
+                    },
+                    {
+                      "claim_id": "t45-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t45",
+                      "task_binding_sha256": "719af392c9c0c2c0088c176f88c6933e839d212c511aa66d314c3c51117882af"
+                    },
+                    {
+                      "claim_id": "t46-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t46",
+                      "task_binding_sha256": "641d4c8f9c3fccb65dcb8f96fecf5c748d9c0ef0923a8c4d4a5c005f357668dd"
+                    },
+                    {
+                      "claim_id": "t47-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t47",
+                      "task_binding_sha256": "7c1b71dbb1dc21f2d9b1f369c679322a62a90aa0df374c6d908b72a17307a86e"
+                    },
+                    {
+                      "claim_id": "t48-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t48",
+                      "task_binding_sha256": "921716d18b4877c415e0d0b94432b704899b6b553c103b3f69a7e2ffa3f3f57e"
+                    },
+                    {
+                      "claim_id": "t49-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t49",
+                      "task_binding_sha256": "b6b765f71b371804b9db2eeba88bd036f458ad8a634be25d87af04ffd08c9c2e"
+                    },
+                    {
+                      "claim_id": "t50-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t50",
+                      "task_binding_sha256": "6d09fe2216e52d94f1a20eacfcf00a51fa92a62a9c9dff00709463d059f25e2b"
+                    },
+                    {
+                      "claim_id": "t51-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t51",
+                      "task_binding_sha256": "e86e80a0e8f9540f83cb7a01f5985fcd1cb426ffaf98ef7936eb3d53cc376317"
+                    },
+                    {
+                      "claim_id": "t52-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t52",
+                      "task_binding_sha256": "d176b44508d11f01cd0a73112de089ea449c8e1554139a406df2494b000f7ba3"
+                    },
+                    {
+                      "claim_id": "t53-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t53",
+                      "task_binding_sha256": "26014058f9e1e3fb7f72507c5de8fe5a9b2587c889b16699ea2ae74438757ab3"
+                    },
+                    {
+                      "claim_id": "t54-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t54",
+                      "task_binding_sha256": "13e75f0d0be900bf165161073aad45a725903d5ab8a4575dfad1feb50253df66"
+                    },
+                    {
+                      "claim_id": "t55-source",
+                      "model_disposition": "redundant",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t55",
+                      "task_binding_sha256": "5c2a9d68a7b537b12291392916b23f51ded7053477edce14c6519795060c682d"
+                    },
+                    {
+                      "claim_id": "t56-source",
+                      "model_disposition": "consider",
+                      "priority": "normal",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t56",
+                      "task_binding_sha256": "5758bf8bca4f34bba48e3212df949921b4964b8243ae8a819e884d91954c348a"
+                    },
+                    {
+                      "claim_id": "t57-source",
+                      "model_disposition": "unclear",
+                      "priority": "low",
+                      "reason": "source_card",
+                      "source_disposition": "admitted",
+                      "task": "t57",
+                      "task_binding_sha256": "b35f58e49630ecefc59d8ee9c59613f1285ac1fdef28d398c3c81df2b5258a1c"
+                    }
+                  ]
+                },
+                "input_tokens": null,
+                "output_tokens": null,
+                "reasoning_tokens": null,
+                "usage_diagnostic": null,
+                "usage_status": "unknown"
+              }
+            ],
+            "status": "completed"
+          }
+        ],
+        "run_id": "r1-cn-annual-090-recovery-20261022",
+        "schema_version": "narrative-batch-result/1",
+        "status": "completed",
+        "storage": {
+          "persistent_added_bytes": 1129907,
+          "scratch_peak_bytes": 4478,
+          "scratch_peak_observation": "committed_writer_lower_bound"
+        }
+      },
+      "before": {
+        "run": {
+          "run_id": "r1-cn-annual-090-recovery-20261022",
+          "input_hash": "2b5bbb7fb5146cc3edecad5b2fac12de95158b622ceea70696bf8a1cdfda56ab",
+          "binding_sha256": "0533aaf38ecf6628ad4b2259cd77db9b3bd7d63aafabeefd71d1701c8c9a7e89",
+          "model_id": "deepseek-flash",
+          "state": "open"
+        },
+        "reservations": [
+          {
+            "attempt_id": "d49c896b618149d48ccc16d547aeb115",
+            "run_id": "r1-cn-annual-090-recovery-20261022",
+            "job_id": "39bb9b7bd0a75f49",
+            "request_sha256": "ecff99dae621aa6e1346bca26d0f0858a688ce0d837354a5d734f7c118569bbe",
+            "input_tokens_bound": 73688,
+            "max_output_tokens": 8192,
+            "output_bytes_bound": 2097152,
+            "reserved_micro_usd": 35486,
+            "usage_status": "known",
+            "input_tokens": 16405,
+            "output_tokens": 924,
+            "estimated_micro_usd": 6701,
+            "response_sha256": "bd4599f345830e9d6c9bd82af86045b71c2abc37031bbb3b646ce79873559602",
+            "error_code": null,
+            "output_bytes": null,
+            "output_sha256": null,
+            "reserved_at": "2026-10-22T20:16:45Z",
+            "usage_settled_at": "2026-10-22T20:16:48Z",
+            "output_settled_at": null,
+            "paid_response_pin": {
+              "adapter_id": "openai-compatible-http/1",
+              "body_sha256": "68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365",
+              "byte_size": 4478,
+              "duration_ms": 3804,
+              "http_status": 200,
+              "model_id": "deepseek-flash",
+              "object_key": "objects/sha256/68/68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365.json",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "request_sha256": "ecff99dae621aa6e1346bca26d0f0858a688ce0d837354a5d734f7c118569bbe",
+              "schema_version": "narrative-paid-response/1"
+            }
+          }
+        ],
+        "generations": {
+          "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2": {
+            "bundle_producer": "1.0.0",
+            "bundle_schema": "narrative-bundle/2.0",
+            "execution_versions": {
+              "adapter": "openai-compatible-http/1",
+              "handlers": {
+                "source.narrative_select": "1.1.0",
+                "source.narrative_summarize": "1.1.0",
+                "source.narrative_verify": "1.1.0"
+              },
+              "model_request_schema": "narrative-model-request/6",
+              "parser": "0.1.1",
+              "prompt": "reading-source-extractive/5.0.0",
+              "selector": "0.9.0"
+            },
+            "model": {
+              "endpoint": "https://api.deepseek.com/chat/completions",
+              "max_output_tokens": 8192,
+              "model_id": "deepseek-flash",
+              "output_token_field": "max_tokens",
+              "temperature": 1.0,
+              "thinking": "disabled"
+            },
+            "parser_component": {
+              "name": "selective_narrative_parser",
+              "version": "0.1.1"
+            },
+            "profile": "P1",
+            "reading_dependencies": {
+              "candidates": [
+                {
+                  "candidate_id": "facet|facet_capacity_projects",
+                  "component_ids": [
+                    "facet|facet_capacity_projects"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_core_business",
+                  "component_ids": [
+                    "facet|facet_core_business"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_customer_orders",
+                  "component_ids": [
+                    "facet|facet_customer_orders"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_industry_competition",
+                  "component_ids": [
+                    "facet|facet_industry_competition"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_new_business",
+                  "component_ids": [
+                    "facet|facet_new_business"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_operating_metrics",
+                  "component_ids": [
+                    "facet|facet_operating_metrics"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_overseas",
+                  "component_ids": [
+                    "facet|facet_overseas"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_risk_denial",
+                  "component_ids": [
+                    "facet|facet_risk_denial"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_biopharma_cdmo",
+                  "component_ids": [
+                    "facet|mechanism_biopharma_cdmo"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_manufacturing",
+                  "component_ids": [
+                    "facet|mechanism_manufacturing"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_store_network",
+                  "component_ids": [
+                    "facet|mechanism_store_network"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_subscription_consumption",
+                  "component_ids": [
+                    "facet|mechanism_subscription_consumption"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|semantic_capacity_project",
+                  "component_ids": [
+                    "facet|semantic_capacity_project"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|semantic_stage_progression",
+                  "component_ids": [
+                    "facet|semantic_stage_progression"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                }
+              ],
+              "components": [
+                {
+                  "component_id": "binding|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual",
+                  "content_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "matcher_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "catalog-binding/1"
+                },
+                {
+                  "component_id": "binding|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual",
+                  "content_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "matcher_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "catalog-binding/1"
+                },
+                {
+                  "component_id": "carrier|application/pdf",
+                  "content_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+                  "matcher_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "source-carrier/1"
+                },
+                {
+                  "component_id": "facet|facet_capacity_projects",
+                  "content_digest": "336ac25658ecb1d2ad6d240611eb9264c9948a6afa8322e89756ace37eff895b",
+                  "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_core_business",
+                  "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+                  "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_customer_orders",
+                  "content_digest": "d93b61446b2466f2d27a94008806b5efbaa38ecdaafc9f170c0ebea6e929f662",
+                  "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_industry_competition",
+                  "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+                  "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_new_business",
+                  "content_digest": "b214743decfe41040ac06093abe5a863a4e0f8f221d7a1b1f95d33b99c08aacd",
+                  "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_operating_metrics",
+                  "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+                  "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_overseas",
+                  "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+                  "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_risk_denial",
+                  "content_digest": "9c46a442bd56b260476022e9e26af117d0dc61b1ed72fc34e4b63e7278dd14b9",
+                  "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_biopharma_cdmo",
+                  "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+                  "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_manufacturing",
+                  "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+                  "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_store_network",
+                  "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+                  "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_subscription_consumption",
+                  "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+                  "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_capacity_project",
+                  "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+                  "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_stage_progression",
+                  "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+                  "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "fallback|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                  "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "1.0.1"
+                },
+                {
+                  "component_id": "fallback|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root",
+                  "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "1.0.1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report",
+                  "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219",
+                  "matcher_digest": "db23659eda692454e01d92777ab5c3bd6d76c138385170927e7d29dfedb544ad",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report",
+                  "content_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "matcher_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay",
+                  "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+                  "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k",
+                  "content_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "matcher_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f",
+                  "content_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "matcher_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report",
+                  "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219",
+                  "matcher_digest": "db23659eda692454e01d92777ab5c3bd6d76c138385170927e7d29dfedb544ad",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report",
+                  "content_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "matcher_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay",
+                  "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+                  "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k",
+                  "content_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "matcher_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f",
+                  "content_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "matcher_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "pdf-capture-used|5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+                  "content_digest": "5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+                  "matcher_digest": "5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "source-capture-use/1"
+                },
+                {
+                  "component_id": "pdf-frontend-used|pdf-reading-layout/2",
+                  "content_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+                  "matcher_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "native-frontend-use/1"
+                },
+                {
+                  "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+                  "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "parsed-material-matcher/1"
+                }
+              ],
+              "decision_digest": "2d118b5d2d663a690e13929ca25423466f658a905111d5d905eee7faa2b17a6c",
+              "diagnostics": [],
+              "schema_version": "du-decision-dependencies/1",
+              "scopes": [
+                {
+                  "family": "annual",
+                  "form_type": "unknown",
+                  "purpose": "annual",
+                  "regime": "cn_exchange",
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "family": "annual",
+                  "form_type": "unknown",
+                  "purpose": "annual",
+                  "regime": "cn_exchange",
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                }
+              ],
+              "status": "complete",
+              "versions": {
+                "budget": "reading_plan/3",
+                "business_algorithms": "f5d663764e149a16c3e8055271ece6f7ac7e1e32c4c03a9b2734203cbfdc505b",
+                "business_policy": "reading-business-policy/9",
+                "continuity": "native-narrative-continuity/4",
+                "continuity_algorithms": "8204fca6d63c2927b32eced32f0eccd4cfd007634b780fa22135c7948c7c163d",
+                "inventory": "1.8.0",
+                "layout": "1.2.0",
+                "native_table_bridge": "2.1.1",
+                "observation_adapter": "du-observation-adapter/2",
+                "pdf_capture": "requested-pages/1",
+                "pdf_frontend": "pdf-reading-layout/2",
+                "pdf_native_prose": "pdf-native-prose-layout/1",
+                "pdf_native_range": "native-pdf-page-view/1",
+                "pdf_native_range_parser": "0.1.0",
+                "pdf_page_intent": "pdf-reading-execution/1",
+                "pdf_projection": "du3-geometry/1",
+                "pdf_reading_algorithms": "8fd9d3c17366743c0561d3008bc30f5c252cd36cd97822c564a62f6559642f27",
+                "pdf_reading_bridge": "pdf-geometry-reading/1",
+                "pipeline": "1.12.0",
+                "script_matching": "source-script-match/1",
+                "selector": "0.9.0",
+                "source_usability": "source-usability/3+a4a80876e649cb4197ba1f45f483ec4a7423d30ad60e1dd4c5dd2b8753211cae",
+                "strategy_binding": "reading-strategy-binding/3",
+                "summary": "1.1.0",
+                "table_purpose": "operating-table-purpose/5"
+              }
+            },
+            "reading_model_boundary": {
+              "decoder_sha256": "2fc24c299fc968735c14709aa8ea7a9344fc50418e1baf8d041395b46dd33a5e",
+              "decoder_version": "reading-source-extractive-decoder/5",
+              "implementation_dependencies": {
+                "canonical_contracts": "8100d58309fb1ed7721e914ae26333086a43abead11795e066f45638d7766ce3",
+                "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+                "execution_contract": "0c6dd028c36bac773535090025be1a3f92b2d4eb12f8c9275c9338d3db94985d",
+                "legacy_utilities": "c61b9515c064c05c61f35cd69065e3585a76abe269c0b14c96d73ae343985d96",
+                "protocol": "12fefdead1471a40324591bcecd499d19429944313aa409b24615c73e96bab4d",
+                "role_quality_owner": "82541f8da90ba00482adb12acdef1c8a1e42eacaa74d0d8aafa32c2f226ad624",
+                "runtime": "24811cc291d22db7f382aad73aaf0edbd859ed5f91b8127a0521ff4ab2b5218f",
+                "source_cards": "211607dd830bc91fe1772a8ae779acfc6dc17acca7d35d5fb47bcb53cb58d4db",
+                "source_task_plan": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+                "source_view": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+                "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+              },
+              "instruction_sha256": "ed6edb714a7a7db6a18c5a360a59deaa5adeb9947a7f2e7f967eccabcd5a8b43",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "reading_projection_version": "reading-model-input/5",
+              "request_schema": "narrative-model-request/6",
+              "response_schema_sha256": "01d2fdb6bc9bcaeef101483cbe196254db2bd11f370fabff78a4ae20100995f5",
+              "schema_version": "reading-model-boundary/1",
+              "source_card_allocation_version": "source-card-allocation/1"
+            },
+            "reading_model_projection": "reading-model-input/5",
+            "schema_version": "narrative-generation/1",
+            "select_schema": "narrative-select-result/2.0",
+            "selection_generation": {
+              "decision_digest": "2d118b5d2d663a690e13929ca25423466f658a905111d5d905eee7faa2b17a6c",
+              "evidence_sha256": "8eac6b03cd234859d2c6a2a83b85800bc0e3ef3d345324bc826d6fe133a2f371",
+              "material_sha256": "f068f54e9a9b2c850ee7de3e1b23401f7a8f5625cf06216c05402ea1416ab997",
+              "reading_policy_version": "du-sent-policy/1+0d5e607c29467af553bdda8e8a906bff09fbf138a397b36184bca86777158a72",
+              "schema_version": "narrative-selection-generation/1",
+              "select_result_sha256": "e47e3589c06e8bf4645235f29db3c0b286d23b9aac4fa779ca0f045a6d1cdc43"
+            },
+            "source_metadata": {
+              "document_kind": "annual_report",
+              "language": "zh",
+              "source_class": "filing",
+              "title": "无锡药明康德新药开发股份有限公司2025年年度报告"
+            },
+            "source_ref": {
+              "byte_size": 1608226,
+              "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "mime_type": "application/pdf",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+            },
+            "summary_schema": "narrative-summary-result/2.0",
+            "summary_validation": {
+              "detector_distribution": "py3langid/0.4.0",
+              "language_observer": {
+                "numpy": {
+                  "distribution": "numpy",
+                  "status": "available",
+                  "version": "2.5.4"
+                },
+                "py3langid": {
+                  "distribution": "py3langid",
+                  "model": {
+                    "bytes": 4586720,
+                    "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+                    "status": "available"
+                  },
+                  "module": {
+                    "bytes": 12687,
+                    "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+                    "status": "available"
+                  },
+                  "status": "available",
+                  "version": "0.4.0"
+                },
+                "schema_version": "narrative-language-observer/1"
+              },
+              "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+              "schema_version": "narrative-summary-validation/2",
+              "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+            }
+          }
+        },
+        "charged_tokens": 17329,
+        "charged_micro_usd": 6701,
+        "unknown_reservations": 0
+      },
+      "after": {
+        "run": {
+          "run_id": "r1-cn-annual-090-recovery-20261022",
+          "input_hash": "2b5bbb7fb5146cc3edecad5b2fac12de95158b622ceea70696bf8a1cdfda56ab",
+          "binding_sha256": "0533aaf38ecf6628ad4b2259cd77db9b3bd7d63aafabeefd71d1701c8c9a7e89",
+          "model_id": "deepseek-flash",
+          "state": "open"
+        },
+        "reservations": [
+          {
+            "attempt_id": "d49c896b618149d48ccc16d547aeb115",
+            "run_id": "r1-cn-annual-090-recovery-20261022",
+            "job_id": "39bb9b7bd0a75f49",
+            "request_sha256": "ecff99dae621aa6e1346bca26d0f0858a688ce0d837354a5d734f7c118569bbe",
+            "input_tokens_bound": 73688,
+            "max_output_tokens": 8192,
+            "output_bytes_bound": 2097152,
+            "reserved_micro_usd": 35486,
+            "usage_status": "known",
+            "input_tokens": 16405,
+            "output_tokens": 924,
+            "estimated_micro_usd": 6701,
+            "response_sha256": "bd4599f345830e9d6c9bd82af86045b71c2abc37031bbb3b646ce79873559602",
+            "error_code": null,
+            "output_bytes": 415965,
+            "output_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+            "reserved_at": "2026-10-22T20:16:45Z",
+            "usage_settled_at": "2026-10-22T20:16:48Z",
+            "output_settled_at": "2026-10-22T20:18:32Z",
+            "paid_response_pin": {
+              "adapter_id": "openai-compatible-http/1",
+              "body_sha256": "68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365",
+              "byte_size": 4478,
+              "duration_ms": 3804,
+              "http_status": 200,
+              "model_id": "deepseek-flash",
+              "object_key": "objects/sha256/68/68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365.json",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "request_sha256": "ecff99dae621aa6e1346bca26d0f0858a688ce0d837354a5d734f7c118569bbe",
+              "schema_version": "narrative-paid-response/1"
+            }
+          }
+        ],
+        "generations": {
+          "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2": {
+            "bundle_producer": "1.0.0",
+            "bundle_schema": "narrative-bundle/2.0",
+            "execution_versions": {
+              "adapter": "openai-compatible-http/1",
+              "handlers": {
+                "source.narrative_select": "1.1.0",
+                "source.narrative_summarize": "1.1.0",
+                "source.narrative_verify": "1.1.0"
+              },
+              "model_request_schema": "narrative-model-request/6",
+              "parser": "0.1.1",
+              "prompt": "reading-source-extractive/5.0.0",
+              "selector": "0.9.0"
+            },
+            "model": {
+              "endpoint": "https://api.deepseek.com/chat/completions",
+              "max_output_tokens": 8192,
+              "model_id": "deepseek-flash",
+              "output_token_field": "max_tokens",
+              "temperature": 1.0,
+              "thinking": "disabled"
+            },
+            "parser_component": {
+              "name": "selective_narrative_parser",
+              "version": "0.1.1"
+            },
+            "profile": "P1",
+            "reading_dependencies": {
+              "candidates": [
+                {
+                  "candidate_id": "facet|facet_capacity_projects",
+                  "component_ids": [
+                    "facet|facet_capacity_projects"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_core_business",
+                  "component_ids": [
+                    "facet|facet_core_business"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_customer_orders",
+                  "component_ids": [
+                    "facet|facet_customer_orders"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_industry_competition",
+                  "component_ids": [
+                    "facet|facet_industry_competition"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_new_business",
+                  "component_ids": [
+                    "facet|facet_new_business"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_operating_metrics",
+                  "component_ids": [
+                    "facet|facet_operating_metrics"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_overseas",
+                  "component_ids": [
+                    "facet|facet_overseas"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|facet_risk_denial",
+                  "component_ids": [
+                    "facet|facet_risk_denial"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_biopharma_cdmo",
+                  "component_ids": [
+                    "facet|mechanism_biopharma_cdmo"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_manufacturing",
+                  "component_ids": [
+                    "facet|mechanism_manufacturing"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_store_network",
+                  "component_ids": [
+                    "facet|mechanism_store_network"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|mechanism_subscription_consumption",
+                  "component_ids": [
+                    "facet|mechanism_subscription_consumption"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|semantic_capacity_project",
+                  "component_ids": [
+                    "facet|semantic_capacity_project"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "facet|semantic_stage_progression",
+                  "component_ids": [
+                    "facet|semantic_stage_progression"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay"
+                  ],
+                  "eligible": true,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                },
+                {
+                  "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f",
+                  "component_ids": [
+                    "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f"
+                  ],
+                  "eligible": false,
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                }
+              ],
+              "components": [
+                {
+                  "component_id": "binding|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual",
+                  "content_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "matcher_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "catalog-binding/1"
+                },
+                {
+                  "component_id": "binding|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual",
+                  "content_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "matcher_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "catalog-binding/1"
+                },
+                {
+                  "component_id": "carrier|application/pdf",
+                  "content_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+                  "matcher_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "source-carrier/1"
+                },
+                {
+                  "component_id": "facet|facet_capacity_projects",
+                  "content_digest": "336ac25658ecb1d2ad6d240611eb9264c9948a6afa8322e89756ace37eff895b",
+                  "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_core_business",
+                  "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+                  "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_customer_orders",
+                  "content_digest": "d93b61446b2466f2d27a94008806b5efbaa38ecdaafc9f170c0ebea6e929f662",
+                  "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_industry_competition",
+                  "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+                  "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_new_business",
+                  "content_digest": "b214743decfe41040ac06093abe5a863a4e0f8f221d7a1b1f95d33b99c08aacd",
+                  "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_operating_metrics",
+                  "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+                  "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_overseas",
+                  "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+                  "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|facet_risk_denial",
+                  "content_digest": "9c46a442bd56b260476022e9e26af117d0dc61b1ed72fc34e4b63e7278dd14b9",
+                  "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_biopharma_cdmo",
+                  "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+                  "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_manufacturing",
+                  "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+                  "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_store_network",
+                  "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+                  "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|mechanism_subscription_consumption",
+                  "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+                  "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_capacity_project",
+                  "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+                  "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "facet|semantic_stage_progression",
+                  "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+                  "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "facet-decision/1"
+                },
+                {
+                  "component_id": "fallback|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                  "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "1.0.1"
+                },
+                {
+                  "component_id": "fallback|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root",
+                  "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "1.0.1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report",
+                  "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219",
+                  "matcher_digest": "db23659eda692454e01d92777ab5c3bd6d76c138385170927e7d29dfedb544ad",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report",
+                  "content_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "matcher_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay",
+                  "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+                  "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k",
+                  "content_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "matcher_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f",
+                  "content_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "matcher_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report",
+                  "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219",
+                  "matcher_digest": "db23659eda692454e01d92777ab5c3bd6d76c138385170927e7d29dfedb544ad",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report",
+                  "content_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "matcher_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay",
+                  "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+                  "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k",
+                  "content_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "matcher_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f",
+                  "content_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "matcher_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "family-decision/1"
+                },
+                {
+                  "component_id": "pdf-capture-used|5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+                  "content_digest": "5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+                  "matcher_digest": "5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "source-capture-use/1"
+                },
+                {
+                  "component_id": "pdf-frontend-used|pdf-reading-layout/2",
+                  "content_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+                  "matcher_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "native-frontend-use/1"
+                },
+                {
+                  "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+                  "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+                  "scope_ids": [
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                    "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                  ],
+                  "version": "parsed-material-matcher/1"
+                }
+              ],
+              "decision_digest": "2d118b5d2d663a690e13929ca25423466f658a905111d5d905eee7faa2b17a6c",
+              "diagnostics": [],
+              "schema_version": "du-decision-dependencies/1",
+              "scopes": [
+                {
+                  "family": "annual",
+                  "form_type": "unknown",
+                  "purpose": "annual",
+                  "regime": "cn_exchange",
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+                },
+                {
+                  "family": "annual",
+                  "form_type": "unknown",
+                  "purpose": "annual",
+                  "regime": "cn_exchange",
+                  "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+                }
+              ],
+              "status": "complete",
+              "versions": {
+                "budget": "reading_plan/3",
+                "business_algorithms": "f5d663764e149a16c3e8055271ece6f7ac7e1e32c4c03a9b2734203cbfdc505b",
+                "business_policy": "reading-business-policy/9",
+                "continuity": "native-narrative-continuity/4",
+                "continuity_algorithms": "8204fca6d63c2927b32eced32f0eccd4cfd007634b780fa22135c7948c7c163d",
+                "inventory": "1.8.0",
+                "layout": "1.2.0",
+                "native_table_bridge": "2.1.1",
+                "observation_adapter": "du-observation-adapter/2",
+                "pdf_capture": "requested-pages/1",
+                "pdf_frontend": "pdf-reading-layout/2",
+                "pdf_native_prose": "pdf-native-prose-layout/1",
+                "pdf_native_range": "native-pdf-page-view/1",
+                "pdf_native_range_parser": "0.1.0",
+                "pdf_page_intent": "pdf-reading-execution/1",
+                "pdf_projection": "du3-geometry/1",
+                "pdf_reading_algorithms": "8fd9d3c17366743c0561d3008bc30f5c252cd36cd97822c564a62f6559642f27",
+                "pdf_reading_bridge": "pdf-geometry-reading/1",
+                "pipeline": "1.12.0",
+                "script_matching": "source-script-match/1",
+                "selector": "0.9.0",
+                "source_usability": "source-usability/3+a4a80876e649cb4197ba1f45f483ec4a7423d30ad60e1dd4c5dd2b8753211cae",
+                "strategy_binding": "reading-strategy-binding/3",
+                "summary": "1.1.0",
+                "table_purpose": "operating-table-purpose/5"
+              }
+            },
+            "reading_model_boundary": {
+              "decoder_sha256": "2fc24c299fc968735c14709aa8ea7a9344fc50418e1baf8d041395b46dd33a5e",
+              "decoder_version": "reading-source-extractive-decoder/5",
+              "implementation_dependencies": {
+                "canonical_contracts": "8100d58309fb1ed7721e914ae26333086a43abead11795e066f45638d7766ce3",
+                "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+                "execution_contract": "0c6dd028c36bac773535090025be1a3f92b2d4eb12f8c9275c9338d3db94985d",
+                "legacy_utilities": "c61b9515c064c05c61f35cd69065e3585a76abe269c0b14c96d73ae343985d96",
+                "protocol": "12fefdead1471a40324591bcecd499d19429944313aa409b24615c73e96bab4d",
+                "role_quality_owner": "82541f8da90ba00482adb12acdef1c8a1e42eacaa74d0d8aafa32c2f226ad624",
+                "runtime": "24811cc291d22db7f382aad73aaf0edbd859ed5f91b8127a0521ff4ab2b5218f",
+                "source_cards": "211607dd830bc91fe1772a8ae779acfc6dc17acca7d35d5fb47bcb53cb58d4db",
+                "source_task_plan": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+                "source_view": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+                "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+              },
+              "instruction_sha256": "ed6edb714a7a7db6a18c5a360a59deaa5adeb9947a7f2e7f967eccabcd5a8b43",
+              "prompt_version": "reading-source-extractive/5.0.0",
+              "reading_projection_version": "reading-model-input/5",
+              "request_schema": "narrative-model-request/6",
+              "response_schema_sha256": "01d2fdb6bc9bcaeef101483cbe196254db2bd11f370fabff78a4ae20100995f5",
+              "schema_version": "reading-model-boundary/1",
+              "source_card_allocation_version": "source-card-allocation/1"
+            },
+            "reading_model_projection": "reading-model-input/5",
+            "schema_version": "narrative-generation/1",
+            "select_schema": "narrative-select-result/2.0",
+            "selection_generation": {
+              "decision_digest": "2d118b5d2d663a690e13929ca25423466f658a905111d5d905eee7faa2b17a6c",
+              "evidence_sha256": "8eac6b03cd234859d2c6a2a83b85800bc0e3ef3d345324bc826d6fe133a2f371",
+              "material_sha256": "f068f54e9a9b2c850ee7de3e1b23401f7a8f5625cf06216c05402ea1416ab997",
+              "reading_policy_version": "du-sent-policy/1+0d5e607c29467af553bdda8e8a906bff09fbf138a397b36184bca86777158a72",
+              "schema_version": "narrative-selection-generation/1",
+              "select_result_sha256": "e47e3589c06e8bf4645235f29db3c0b286d23b9aac4fa779ca0f045a6d1cdc43"
+            },
+            "source_metadata": {
+              "document_kind": "annual_report",
+              "language": "zh",
+              "source_class": "filing",
+              "title": "无锡药明康德新药开发股份有限公司2025年年度报告"
+            },
+            "source_ref": {
+              "byte_size": 1608226,
+              "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "mime_type": "application/pdf",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+            },
+            "summary_schema": "narrative-summary-result/2.0",
+            "summary_validation": {
+              "detector_distribution": "py3langid/0.4.0",
+              "language_observer": {
+                "numpy": {
+                  "distribution": "numpy",
+                  "status": "available",
+                  "version": "2.5.4"
+                },
+                "py3langid": {
+                  "distribution": "py3langid",
+                  "model": {
+                    "bytes": 4586720,
+                    "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+                    "status": "available"
+                  },
+                  "module": {
+                    "bytes": 12687,
+                    "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+                    "status": "available"
+                  },
+                  "status": "available",
+                  "version": "0.4.0"
+                },
+                "schema_version": "narrative-language-observer/1"
+              },
+              "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+              "schema_version": "narrative-summary-validation/2",
+              "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+            }
+          }
+        },
+        "charged_tokens": 17329,
+        "charged_micro_usd": 6701,
+        "unknown_reservations": 0
+      },
+      "request_sha256": "2fa8c3116a23a1cdb992dd348a4c076ffa34447b7d2b9362042a7520e542355a"
+    },
+    {
+      "stage": "cache",
+      "native_exit": 0,
+      "receipt": {
+        "budget": {
+          "estimated_micro_usd": 0,
+          "tokens": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+              "byte_size": 415965,
+              "content_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+              "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+              "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+            },
+            "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+            "errors": [],
+            "generation_status": "reused",
+            "status": "completed"
+          }
+        ],
+        "run_id": "r1-cn-annual-090-recovery-20261022-cache",
+        "schema_version": "narrative-batch-result/1",
+        "status": "completed",
+        "storage": {
+          "persistent_added_bytes": 141,
+          "scratch_peak_bytes": 0
+        }
+      },
+      "before": {
+        "run": null,
+        "reservations": [],
+        "generations": {},
+        "charged_tokens": 0,
+        "charged_micro_usd": 0
+      },
+      "after": {
+        "run": {
+          "run_id": "r1-cn-annual-090-recovery-20261022-cache",
+          "input_hash": "8b0178a773a5364112c115ed4b141469e48113c2e9317df33ba26e9c68d4f6d1",
+          "binding_sha256": "af916ffd730010962df2a62092482403fc9202048a7a8b30d69d33ae1e82dea7",
+          "model_id": "deepseek-flash",
+          "state": "open"
+        },
+        "reservations": [],
+        "generations": {},
+        "charged_tokens": 0,
+        "charged_micro_usd": 0,
+        "unknown_reservations": 0
+      },
+      "request_sha256": "b6cf494c6e3f890a310389a85d609072b08533d99293b32aa64a6db0f20455ff"
+    }
+  ],
+  "rf_consumption": {
+    "status": "not_consumed",
+    "reason": "ROOT must bind this public read to an actually used RF parameter and segment formula"
+  },
+  "injected_fault": {
+    "scope": "test_local_after_paid",
+    "supplier_failure": false,
+    "native_attempt_id": "d49c896b618149d48ccc16d547aeb115",
+    "native_outcome": "retryable",
+    "native_error_code": "IO_TRANSIENT"
+  },
+  "paid_replay": {
+    "executed": true,
+    "new_reservations": 0,
+    "new_tokens": 0
+  },
+  "activation_recovery": {
+    "executed": true,
+    "artifact_ref": {
+      "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+      "byte_size": 415965,
+      "content_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    }
+  },
+  "cross_run_cache": {
+    "new_reservations": 0,
+    "new_tokens": 0,
+    "artifact_ref": {
+      "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+      "byte_size": 415965,
+      "content_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "run_id": "r1-cn-annual-090-recovery-20261022-cache"
+  },
+  "public_read": {
+    "verified": true,
+    "receipt": {
+      "schema_version": "narrative-read-receipt/1",
+      "status": "ok",
+      "narrative_ref": {
+        "schema_version": "narrative-ref/1",
+        "artifact_version_id": "narrative-7396e53b8db44544ae1bdde018fca4a4",
+        "artifact_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+        "byte_size": 415965,
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "byte_size": 1608226,
+          "mime_type": "application/pdf"
+        }
+      },
+      "as_of_date": "2026-10-21",
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "byte_size": 1608226,
+        "mime_type": "application/pdf",
+        "title": "无锡药明康德新药开发股份有限公司2025年年度报告",
+        "document_kind": "annual_report",
+        "published_date": "2026-03-24",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-24/1225025225.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "药明康德",
+        "market": "CN",
+        "security_id": "603259",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "period_end": "2025-12-31",
+        "form_type": "annual_report",
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "source_read_policy_sha256": "4bac4574a6132ac1deeda8dde82b6b0cd3b452ff495bdaa28e0183036167f656",
+      "read_at": "2026-10-22T20:18:36.122882+00:00",
+      "locator_count": 96,
+      "selection_status": "partial",
+      "quality_status": "needs_review",
+      "replay_status": "verified"
+    },
+    "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\narrative-read-request.json",
+    "reading_context_sha256": "71355aa6afc4de89b701c164b31f8dbe3ad2a9aaafc4655eecdd914a3f9b2afe"
+  },
+  "native": {
+    "run": {
+      "run_id": "r1-cn-annual-090-recovery-20261022",
+      "input_hash": "2b5bbb7fb5146cc3edecad5b2fac12de95158b622ceea70696bf8a1cdfda56ab",
+      "binding_sha256": "0533aaf38ecf6628ad4b2259cd77db9b3bd7d63aafabeefd71d1701c8c9a7e89",
+      "model_id": "deepseek-flash",
+      "state": "open"
+    },
+    "reservations": [
+      {
+        "attempt_id": "d49c896b618149d48ccc16d547aeb115",
+        "run_id": "r1-cn-annual-090-recovery-20261022",
+        "job_id": "39bb9b7bd0a75f49",
+        "request_sha256": "ecff99dae621aa6e1346bca26d0f0858a688ce0d837354a5d734f7c118569bbe",
+        "input_tokens_bound": 73688,
+        "max_output_tokens": 8192,
+        "output_bytes_bound": 2097152,
+        "reserved_micro_usd": 35486,
+        "usage_status": "known",
+        "input_tokens": 16405,
+        "output_tokens": 924,
+        "estimated_micro_usd": 6701,
+        "response_sha256": "bd4599f345830e9d6c9bd82af86045b71c2abc37031bbb3b646ce79873559602",
+        "error_code": null,
+        "output_bytes": 415965,
+        "output_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+        "reserved_at": "2026-10-22T20:16:45Z",
+        "usage_settled_at": "2026-10-22T20:16:48Z",
+        "output_settled_at": "2026-10-22T20:18:32Z",
+        "paid_response_pin": {
+          "adapter_id": "openai-compatible-http/1",
+          "body_sha256": "68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365",
+          "byte_size": 4478,
+          "duration_ms": 3804,
+          "http_status": 200,
+          "model_id": "deepseek-flash",
+          "object_key": "objects/sha256/68/68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365.json",
+          "prompt_version": "reading-source-extractive/5.0.0",
+          "request_sha256": "ecff99dae621aa6e1346bca26d0f0858a688ce0d837354a5d734f7c118569bbe",
+          "schema_version": "narrative-paid-response/1"
+        }
+      }
+    ],
+    "generations": {
+      "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2": {
+        "bundle_producer": "1.0.0",
+        "bundle_schema": "narrative-bundle/2.0",
+        "execution_versions": {
+          "adapter": "openai-compatible-http/1",
+          "handlers": {
+            "source.narrative_select": "1.1.0",
+            "source.narrative_summarize": "1.1.0",
+            "source.narrative_verify": "1.1.0"
+          },
+          "model_request_schema": "narrative-model-request/6",
+          "parser": "0.1.1",
+          "prompt": "reading-source-extractive/5.0.0",
+          "selector": "0.9.0"
+        },
+        "model": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "max_output_tokens": 8192,
+          "model_id": "deepseek-flash",
+          "output_token_field": "max_tokens",
+          "temperature": 1.0,
+          "thinking": "disabled"
+        },
+        "parser_component": {
+          "name": "selective_narrative_parser",
+          "version": "0.1.1"
+        },
+        "profile": "P1",
+        "reading_dependencies": {
+          "candidates": [
+            {
+              "candidate_id": "facet|facet_capacity_projects",
+              "component_ids": [
+                "facet|facet_capacity_projects"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_core_business",
+              "component_ids": [
+                "facet|facet_core_business"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_customer_orders",
+              "component_ids": [
+                "facet|facet_customer_orders"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_industry_competition",
+              "component_ids": [
+                "facet|facet_industry_competition"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_new_business",
+              "component_ids": [
+                "facet|facet_new_business"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_operating_metrics",
+              "component_ids": [
+                "facet|facet_operating_metrics"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_overseas",
+              "component_ids": [
+                "facet|facet_overseas"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|facet_risk_denial",
+              "component_ids": [
+                "facet|facet_risk_denial"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|mechanism_biopharma_cdmo",
+              "component_ids": [
+                "facet|mechanism_biopharma_cdmo"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|mechanism_manufacturing",
+              "component_ids": [
+                "facet|mechanism_manufacturing"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|mechanism_store_network",
+              "component_ids": [
+                "facet|mechanism_store_network"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|mechanism_subscription_consumption",
+              "component_ids": [
+                "facet|mechanism_subscription_consumption"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|semantic_capacity_project",
+              "component_ids": [
+                "facet|semantic_capacity_project"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "facet|semantic_stage_progression",
+              "component_ids": [
+                "facet|semantic_stage_progression"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay"
+              ],
+              "eligible": true,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+            },
+            {
+              "candidate_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f",
+              "component_ids": [
+                "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f"
+              ],
+              "eligible": false,
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+            }
+          ],
+          "components": [
+            {
+              "component_id": "binding|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual",
+              "content_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+              "matcher_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "catalog-binding/1"
+            },
+            {
+              "component_id": "binding|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual",
+              "content_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+              "matcher_digest": "753f09fddcc86378f51a218df7ac41c2f50c435b36b3f041e635bbfc6bfa9293",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "catalog-binding/1"
+            },
+            {
+              "component_id": "carrier|application/pdf",
+              "content_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+              "matcher_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "source-carrier/1"
+            },
+            {
+              "component_id": "facet|facet_capacity_projects",
+              "content_digest": "336ac25658ecb1d2ad6d240611eb9264c9948a6afa8322e89756ace37eff895b",
+              "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_core_business",
+              "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+              "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_customer_orders",
+              "content_digest": "d93b61446b2466f2d27a94008806b5efbaa38ecdaafc9f170c0ebea6e929f662",
+              "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_industry_competition",
+              "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+              "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_new_business",
+              "content_digest": "b214743decfe41040ac06093abe5a863a4e0f8f221d7a1b1f95d33b99c08aacd",
+              "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_operating_metrics",
+              "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+              "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_overseas",
+              "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+              "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|facet_risk_denial",
+              "content_digest": "9c46a442bd56b260476022e9e26af117d0dc61b1ed72fc34e4b63e7278dd14b9",
+              "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|mechanism_biopharma_cdmo",
+              "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+              "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|mechanism_manufacturing",
+              "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+              "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|mechanism_store_network",
+              "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+              "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|mechanism_subscription_consumption",
+              "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+              "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|semantic_capacity_project",
+              "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+              "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "facet|semantic_stage_progression",
+              "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+              "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "facet-decision/1"
+            },
+            {
+              "component_id": "fallback|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+              "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+              "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "1.0.1"
+            },
+            {
+              "component_id": "fallback|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root",
+              "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+              "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "1.0.1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|cn_annual_report",
+              "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219",
+              "matcher_digest": "db23659eda692454e01d92777ab5c3bd6d76c138385170927e7d29dfedb544ad",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|hk_annual_report",
+              "content_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+              "matcher_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|lifecycle_revision_overlay",
+              "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+              "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_10k",
+              "content_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+              "matcher_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent|sec_20f",
+              "content_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+              "matcher_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|cn_annual_report",
+              "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219",
+              "matcher_digest": "db23659eda692454e01d92777ab5c3bd6d76c138385170927e7d29dfedb544ad",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|hk_annual_report",
+              "content_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+              "matcher_digest": "2e5ec4e3d6d57913d865fc00f14732a0436399ce25fde2e41b8fb9010501c5b0",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|lifecycle_revision_overlay",
+              "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+              "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_10k",
+              "content_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+              "matcher_digest": "8e2f33bdeb960d4c74141b9e05752eaffb3a2ed721248b7eaff58008d8f468b6",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "family|urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root|sec_20f",
+              "content_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+              "matcher_digest": "a6724278489e84d621c9ab42bd930037f74dc48882538a1cc4024bca5d53be8e",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "family-decision/1"
+            },
+            {
+              "component_id": "pdf-capture-used|5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+              "content_digest": "5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+              "matcher_digest": "5d1eb62e9091bf39dc3722bad128ff04b360772272b03c8fb53f35acf6ea5230",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "source-capture-use/1"
+            },
+            {
+              "component_id": "pdf-frontend-used|pdf-reading-layout/2",
+              "content_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+              "matcher_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "native-frontend-use/1"
+            },
+            {
+              "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+              "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+              "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+              "scope_ids": [
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent",
+                "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+              ],
+              "version": "parsed-material-matcher/1"
+            }
+          ],
+          "decision_digest": "2d118b5d2d663a690e13929ca25423466f658a905111d5d905eee7faa2b17a6c",
+          "diagnostics": [],
+          "schema_version": "du-decision-dependencies/1",
+          "scopes": [
+            {
+              "family": "annual",
+              "form_type": "unknown",
+              "purpose": "annual",
+              "regime": "cn_exchange",
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|pdf-native-intent"
+            },
+            {
+              "family": "annual",
+              "form_type": "unknown",
+              "purpose": "annual",
+              "regime": "cn_exchange",
+              "scope_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2|root"
+            }
+          ],
+          "status": "complete",
+          "versions": {
+            "budget": "reading_plan/3",
+            "business_algorithms": "f5d663764e149a16c3e8055271ece6f7ac7e1e32c4c03a9b2734203cbfdc505b",
+            "business_policy": "reading-business-policy/9",
+            "continuity": "native-narrative-continuity/4",
+            "continuity_algorithms": "8204fca6d63c2927b32eced32f0eccd4cfd007634b780fa22135c7948c7c163d",
+            "inventory": "1.8.0",
+            "layout": "1.2.0",
+            "native_table_bridge": "2.1.1",
+            "observation_adapter": "du-observation-adapter/2",
+            "pdf_capture": "requested-pages/1",
+            "pdf_frontend": "pdf-reading-layout/2",
+            "pdf_native_prose": "pdf-native-prose-layout/1",
+            "pdf_native_range": "native-pdf-page-view/1",
+            "pdf_native_range_parser": "0.1.0",
+            "pdf_page_intent": "pdf-reading-execution/1",
+            "pdf_projection": "du3-geometry/1",
+            "pdf_reading_algorithms": "8fd9d3c17366743c0561d3008bc30f5c252cd36cd97822c564a62f6559642f27",
+            "pdf_reading_bridge": "pdf-geometry-reading/1",
+            "pipeline": "1.12.0",
+            "script_matching": "source-script-match/1",
+            "selector": "0.9.0",
+            "source_usability": "source-usability/3+a4a80876e649cb4197ba1f45f483ec4a7423d30ad60e1dd4c5dd2b8753211cae",
+            "strategy_binding": "reading-strategy-binding/3",
+            "summary": "1.1.0",
+            "table_purpose": "operating-table-purpose/5"
+          }
+        },
+        "reading_model_boundary": {
+          "decoder_sha256": "2fc24c299fc968735c14709aa8ea7a9344fc50418e1baf8d041395b46dd33a5e",
+          "decoder_version": "reading-source-extractive-decoder/5",
+          "implementation_dependencies": {
+            "canonical_contracts": "8100d58309fb1ed7721e914ae26333086a43abead11795e066f45638d7766ce3",
+            "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+            "execution_contract": "0c6dd028c36bac773535090025be1a3f92b2d4eb12f8c9275c9338d3db94985d",
+            "legacy_utilities": "c61b9515c064c05c61f35cd69065e3585a76abe269c0b14c96d73ae343985d96",
+            "protocol": "12fefdead1471a40324591bcecd499d19429944313aa409b24615c73e96bab4d",
+            "role_quality_owner": "82541f8da90ba00482adb12acdef1c8a1e42eacaa74d0d8aafa32c2f226ad624",
+            "runtime": "24811cc291d22db7f382aad73aaf0edbd859ed5f91b8127a0521ff4ab2b5218f",
+            "source_cards": "211607dd830bc91fe1772a8ae779acfc6dc17acca7d35d5fb47bcb53cb58d4db",
+            "source_task_plan": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+            "source_view": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+            "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+          },
+          "instruction_sha256": "ed6edb714a7a7db6a18c5a360a59deaa5adeb9947a7f2e7f967eccabcd5a8b43",
+          "prompt_version": "reading-source-extractive/5.0.0",
+          "reading_projection_version": "reading-model-input/5",
+          "request_schema": "narrative-model-request/6",
+          "response_schema_sha256": "01d2fdb6bc9bcaeef101483cbe196254db2bd11f370fabff78a4ae20100995f5",
+          "schema_version": "reading-model-boundary/1",
+          "source_card_allocation_version": "source-card-allocation/1"
+        },
+        "reading_model_projection": "reading-model-input/5",
+        "schema_version": "narrative-generation/1",
+        "select_schema": "narrative-select-result/2.0",
+        "selection_generation": {
+          "decision_digest": "2d118b5d2d663a690e13929ca25423466f658a905111d5d905eee7faa2b17a6c",
+          "evidence_sha256": "8eac6b03cd234859d2c6a2a83b85800bc0e3ef3d345324bc826d6fe133a2f371",
+          "material_sha256": "f068f54e9a9b2c850ee7de3e1b23401f7a8f5625cf06216c05402ea1416ab997",
+          "reading_policy_version": "du-sent-policy/1+0d5e607c29467af553bdda8e8a906bff09fbf138a397b36184bca86777158a72",
+          "schema_version": "narrative-selection-generation/1",
+          "select_result_sha256": "e47e3589c06e8bf4645235f29db3c0b286d23b9aac4fa779ca0f045a6d1cdc43"
+        },
+        "source_metadata": {
+          "document_kind": "annual_report",
+          "language": "zh",
+          "source_class": "filing",
+          "title": "无锡药明康德新药开发股份有限公司2025年年度报告"
+        },
+        "source_ref": {
+          "byte_size": 1608226,
+          "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+        },
+        "summary_schema": "narrative-summary-result/2.0",
+        "summary_validation": {
+          "detector_distribution": "py3langid/0.4.0",
+          "language_observer": {
+            "numpy": {
+              "distribution": "numpy",
+              "status": "available",
+              "version": "2.5.4"
+            },
+            "py3langid": {
+              "distribution": "py3langid",
+              "model": {
+                "bytes": 4586720,
+                "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+                "status": "available"
+              },
+              "module": {
+                "bytes": 12687,
+                "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+                "status": "available"
+              },
+              "status": "available",
+              "version": "0.4.0"
+            },
+            "schema_version": "narrative-language-observer/1"
+          },
+          "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+          "schema_version": "narrative-summary-validation/2",
+          "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+        }
+      }
+    },
+    "charged_tokens": 17329,
+    "charged_micro_usd": 6701,
+    "unknown_reservations": 0
+  },
+  "preflight": {
+    "conservative_token_bound": 81880,
+    "event": "request_preflight",
+    "http_body_bytes": 73560,
+    "http_body_sha256": "ca04ce5ad2b514b2788665750305e4cfcf4adf0d2b27ec94007a101f16b7c3d8",
+    "max_output_tokens": 8192,
+    "model_id": "deepseek-flash",
+    "model_input_sha256": "4e6eff39980ead3dfa67154338939444657f8403cd8f296e54c28fa28d46d001",
+    "model_request_schema": "narrative-model-request/6",
+    "output_token_field": "max_tokens",
+    "pid": 15192,
+    "prompt_version": "reading-source-extractive/5.0.0",
+    "run_id": "r1-cn-annual-090-recovery-20261022",
+    "stage": "activation_pending",
+    "worker_attempt_id": "633d7c1a338a4be39f3572738eea3952"
+  },
+  "model_post_count": 1,
+  "native_causes": [],
+  "protected_configs_unchanged": true
+}

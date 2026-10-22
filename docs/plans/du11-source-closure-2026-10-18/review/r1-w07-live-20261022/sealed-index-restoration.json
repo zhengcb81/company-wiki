@@ -1,0 +1,14 @@
+{
+  "schema_version": "sealed-index-restoration/1",
+  "observed_at": "2026-10-22T20:23:34.388909+00:00",
+  "cause": "Coordinator reused the initial operational index, which was already included in the sealed initial manifest. New operational references belong to the replay attempt.",
+  "original_index_sha256_restored": "55ab1ff4a1852c9434c7d6c567977db463aa28589bdf9e2d134a9598a874e7c7",
+  "original_index_exact_bytes": 3763,
+  "new_attempt_index": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\native_operation_index.json",
+  "new_effective_scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\coordinator-effective-scope-v2.json",
+  "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+  "artifacts_checked": 639,
+  "mismatches": [],
+  "no_charge_record_removed": true,
+  "old_unknown_holds_unchanged": true
+}

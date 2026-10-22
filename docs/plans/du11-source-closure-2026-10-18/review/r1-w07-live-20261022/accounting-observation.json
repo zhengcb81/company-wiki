@@ -1,0 +1,21 @@
+{
+  "schema_version": "w07-native-accounting-observation/1",
+  "observed_at": "2026-10-22T20:17:40.245443+00:00",
+  "stage": "reconcile",
+  "mother": {
+    "charged_tokens": 1561352,
+    "charged_micro_usd": 631959,
+    "new_unknown_count": 4,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "company_tokens": 56355,
+  "company_micro_usd": 16421,
+  "company_cap_tokens": 150000,
+  "company_cap_micro_usd": 1000000,
+  "unknown_holds_retained": true,
+  "not_a_fee_ledger": true,
+  "native_operation_index": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\native_operation_index.json",
+  "new_scope_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\coordinator-effective-scope.json"
+}
