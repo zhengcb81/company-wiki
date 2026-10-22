@@ -1,0 +1,11 @@
+{
+  "initially_absent": true,
+  "retained_evidence": ".planning/r1-w03-join and versioned PWF receipts",
+  "restored_absent": true,
+  "schema_version": "root-local-observation-temp-cleanup/1",
+  "original_downloads": 0,
+  "model_calls": 0,
+  "files_removed": 2372,
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\lbtmp",
+  "bytes_removed": 79471652.0
+}

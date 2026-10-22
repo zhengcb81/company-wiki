@@ -41,6 +41,8 @@ ROOT，2026-10-22。只实现可复用测试控制器与离线真实链路；真
 
 ## 后续真实执行（本施工禁止运行）
 
+2026-10-22 ROOT更新：下述真实执行现已完成onePOST17329tokens/6701microUSD，paid replay、激活恢复、跨run缓存、公开RF读取通过，见`../review/r1-w07-live-20261022.md/json`。旧60,974余量为首次预检时观察；ROOT在原2M/$20内记录公司自定cap100k→150k，单请求deploy100k不变。不要据旧卡重发付费操作。RF实际参数/公式消费及内容质量仍由W06当前卡完成。新操作索引只写replay attempt；原roles/executor索引已封存，不再可追加。
+
 ROOT将复用R1既有scoped wiki，年报原件SHA`7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`、1,608,226B；不重init/复制整湖/重新下载。先母账与公司native索引重计，当前母余455,977tokens/$19.374742，公司余60,974tokens/$0.990280；实际调用前以更小实时值为准。旧MiMo UNKNOWN无pin不能重发、旧DS0.8无pin不能代演练新paid replay。
 
 真实payload的保守预算沿用原生`len(body)+128+max_output_tokens`，不能按字符猜更小；超公司余量先报告实际字节/原生bound，不擅自缩小用户配置输出或释放旧预留。阶段原生费用汇入现有`append_native`/`mother_totals`，无第二收费账。

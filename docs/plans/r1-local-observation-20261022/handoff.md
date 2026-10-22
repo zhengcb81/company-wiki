@@ -1,6 +1,10 @@
 # CWP local preparation observation and relevance handoff
 
-## Unique entry and state
+## ROOT latest reception
+
+Final product27be00fb5b16503b867886ea8cbc641027d6a8e2 fixes the non-author discovery-history counterexample; independent49PASS, main merge69a5490b, actual mainline→installed FF/RF1PASS. Normal CWP publication next. Current overall entry is ../du11-source-closure-2026-10-18/CURRENT_STATUS.md. The author96ca handoff below is a historical snapshot, not the final accepted source.
+
+## Author snapshot entry and state
 
 Read this file, handoff.json and review/baseline-contract-analysis.md. Product96ca254d60fe416598e47d108b5f561d2dc48179 on codex/r1-local-observation, baseline1b39032c. Author implementation/testing complete; ROOT non-author acceptance and producer→FF→RF integration remain. Do not rerun real W06/source lake just to infer old missing counters. No permissions, caps or provider intent changed.
 

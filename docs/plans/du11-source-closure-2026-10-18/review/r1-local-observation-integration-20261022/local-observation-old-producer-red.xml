@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="7.838" timestamp="2026-10-22T21:39:34.480369+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.integration.test_local_budget_observation_rf_e2e" name="test_actual_local_discovery_bound_reaches_rf_with_owner_measurements" time="7.418"><failure message="AssertionError: {'schema_version': 'filing-local-preparation-observation/1', 'usage_scope': 'local_original_verification', 'status': 'unavailable', 'reason': 'local_source_group_limit', ...}&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\integration\test_local_budget_observation_rf_e2e.py:75: in test_actual_local_discovery_bound_reaches_rf_with_owner_measurements
+    assert len(rows) == 1, observation
+E   AssertionError: {'schema_version': 'filing-local-preparation-observation/1', 'usage_scope': 'local_original_verification', 'status': 'unavailable', 'reason': 'local_source_group_limit', ...}
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase></testsuite></testsuites>

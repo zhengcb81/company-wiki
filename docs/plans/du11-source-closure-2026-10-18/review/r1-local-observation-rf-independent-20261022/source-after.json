@@ -1,0 +1,39 @@
+{
+  "product_commit": "dedebe0be27bad0723e6a642be5083bf53b357fc",
+  "HEAD": "32f013a979dedd6310a43877e818c69f614dd2b2",
+  "status": "",
+  "files": {
+    "scripts/filing_upstream_cause.py": {
+      "physical_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "physical_bytes": 32785,
+      "lf_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08"
+    },
+    "tests/contract/host_assumption_baseline.json": {
+      "physical_sha256": "1a849d32d6f7b76ca85bf67b6cfcd776febf19bb18c97cb8c7fe334c657802e8",
+      "physical_bytes": 2969,
+      "lf_sha256": "1a849d32d6f7b76ca85bf67b6cfcd776febf19bb18c97cb8c7fe334c657802e8"
+    },
+    "tests/fixtures/r1_local_observation/README.md": {
+      "physical_sha256": "daa50f8129fb36dea91511f636059792465e2dcbd7e65c71d8a9e770bd5a8f81",
+      "physical_bytes": 642,
+      "lf_sha256": "daa50f8129fb36dea91511f636059792465e2dcbd7e65c71d8a9e770bd5a8f81"
+    },
+    "tests/fixtures/r1_local_observation/ff-v2-failure.json": {
+      "physical_sha256": "f746446b622ba2354229d9826c781ac5d23146913c57e740a3c37ac9fb36e8b9",
+      "physical_bytes": 2352,
+      "lf_sha256": "c9f455c288157bc1246d974ae29ee5fe9d46fb2f61e39ede4ab9a6f2df725d7e"
+    },
+    "tests/test_r1_local_preparation_observation.py": {
+      "physical_sha256": "fb6699a6e5eb9201b32ea35397b7c2c5c439ea6fb2941ec1fc742112abd46b4d",
+      "physical_bytes": 14218,
+      "lf_sha256": "fb6699a6e5eb9201b32ea35397b7c2c5c439ea6fb2941ec1fc742112abd46b4d"
+    },
+    "tools/pre_push_gate.py": {
+      "physical_sha256": "5be48ef0ba8924c8d321328d29d362776e5159287ff30f618c8cd3c58d9b8562",
+      "physical_bytes": 5025,
+      "lf_sha256": "5be48ef0ba8924c8d321328d29d362776e5159287ff30f618c8cd3c58d9b8562"
+    }
+  },
+  "frozen_files_unchanged": true,
+  "hook_config_diff": ""
+}

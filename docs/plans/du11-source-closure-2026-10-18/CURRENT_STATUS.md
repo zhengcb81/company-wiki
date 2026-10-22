@@ -6,13 +6,13 @@
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W01/W02/W04/W05及W03-A已发布。W07控制器及独审记录已正常推送 `755e87cd`（7088单测/24跳过、契约145通过）；真实配置内0.9/v5摘要、付费响应重放、激活恢复、跨run缓存和已安装RF公开读取均通过：[真实节点](review/r1-w07-live-20261022.md)。它们共用一次POST，17329tokens/估算$0.006701；独立真实质量复审与RF实际公式消费仍未完成。W06阶段A有8份新原件10,229,835B、10份合格来源；阶段B已交执行agent继续，不标已完成。
+**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；正在修正作者通信字段并封最终版本，尚无四路业务质量结论。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
 
 当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
 
 唯一下一主线：**W06阶段B：将新摘要真实绑定实际使用的RF参数/公式，完成独立经营桥、15步预测与四路独审，再药明合联→Snowflake泛化。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，不把可读当内容完整或已入模型。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
 
-新增共因跟进：[本地读取诊断接口](r1-holdout-20261021/local_budget_observation_interface.md)。H1旧budget_exceeded无法事后推计量，三层改为保留owner事实。FF `136ab5a6`独审18项通过；RF `dedebe0b`作者201项/1既有跳过正在独审；CWP9项新预算测试通过，另5个旧contract真缺陷正根修（无关源重复处理、已有owner异常未转结构化结果），不新增第二身份校验。此项不提高本地读取配额、不增加权限门禁，按consumer先发布后producer整合。
+本地读取诊断共因跟进已三层独审并线：[ROOT组合收据](review/r1-local-observation-integration-20261022.md)。RF `10bf6111`、FF `7f6a9268`均已正常push、定点安装及精确CI SUCCESS；CWP最终 `27be00fb`独审49P并入主线 `69a5490b`，与两份已安装消费端真实联调通过，待正常push。另5项旧contract及发现过程丢历史的真缺陷均已根修，保留原断言；只复用现有owner资格、不提高读取配额、不加权限门禁。
 
 初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
 

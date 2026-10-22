@@ -1,0 +1,18 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\cwporv",
+    "initial_state": "absent",
+    "files_removed": 354,
+    "bytes_removed": 19444599.0,
+    "final_state": "absent",
+    "only_owned_temp": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\cwporvf",
+    "initial_state": "absent",
+    "files_removed": 354,
+    "bytes_removed": 19444649.0,
+    "final_state": "absent",
+    "only_owned_temp": true
+  }
+]

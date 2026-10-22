@@ -1,6 +1,6 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-22T20:25:05.169196+00:00",
+  "updated_at": "2026-10-22T20:48:17.715879+00:00",
   "status": "ACTIVE_W07_LIVE_LIFECYCLE_PUBLIC_RF_READ_PASS_W06_RESEARCH_NEXT",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
@@ -68,7 +68,7 @@
   ],
   "resource_observation": {
     "new_paid_calls": 1,
-    "new_downloads": 8,
+    "new_downloads": 9,
     "mother_tokens": 1561352,
     "mother_micro_usd": 631959,
     "company_tokens": 56355,
@@ -78,16 +78,15 @@
     "rf_owned_sparse_checkout_bytes_each_approx": 21792950,
     "initial_full_checkout_peak_measured": false,
     "company_cap_tokens": 150000,
-    "new_downloaded_original_files": 8,
-    "new_downloaded_original_bytes": 10229835
+    "new_downloaded_original_files": 9,
+    "new_downloaded_original_bytes": 10342094
   },
   "next_action": "W06 phaseB: actual narrative parameter/formula consumption, independent operating bridge and full RF15-step forecast; independently review real lifecycle and all four company quality roles; integrate local-observation consumer-first, then HK/US holdouts.",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
-    "status": "CWP_TDD_7PASS_BASELINE5_CONTRACT_FAILURES_UNDER_ANALYSIS_FF_AUTHOR127PASS_RF_TDD_ACTIVE",
-    "interface": "local_budget_observation_interface.md",
-    "purpose": "Preserve owner diagnostics end to end; no larger local cap or invented historical usage."
+    "status": "ENGINEERING_REVIEWED_THREE_LAYERS_MAINLINE_JOIN_PASS_CWP_PUSH_NEXT",
+    "report": "review/r1-local-observation-integration-20261022.json"
   },
   "w07_live_ref": "../review/r1-w07-live-20261022.json"
 }

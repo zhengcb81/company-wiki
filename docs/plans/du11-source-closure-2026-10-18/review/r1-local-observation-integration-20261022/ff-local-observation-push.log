@@ -1,0 +1,69 @@
+
+=== ruff (CI WU-1.2 full scope) ===
+ok
+
+=== compileall ===
+ok
+
+=== import smoke (scripts.fetch_filing, scripts.filing_contracts) ===
+ok
+
+=== mypy public contracts (CI FC-1204-c set) ===
+ok
+
+=== unique test symbols (CI WU-7.1) ===
+ok
+
+=== host assumption guard (FC-1307-a) ===
+ok
+
+=== config doctor (FC-1202 three-repo contract) ===
+ok
+
+=== plan claim verifier (CI WU-8.3) ===
+ok
+
+=== UTF-8 BOM scan (CA-304/final_ratchet surface) ===
+ok
+
+=== shared focused CI behavior tests ===
+.....................................................................FFF [  7%]
+.........F.............................................................. [ 15%]
+........................................................................ [ 23%]
+........................................................................ [ 30%]
+...........s............................................................ [ 38%]
+...................................sss.................................. [ 46%]
+........................................................................ [ 53%]
+........................................................................ [ 61%]
+......................s........................... [ 66%]
+......................................................... [ 72%]
+...........................s.................... [ 77%]
+............................................................................................................................... [ 91%]
+................................s....................................... [ 99%]
+........                                                                 [100%]
+================================== FAILURES ===================================
+_ test_local_condition_is_safe_machine_subtype[local_metadata_gap-local_metadata_gap] _
+tests\test_failure_usage_continuity.py:77: in test_local_condition_is_safe_machine_subtype
+    local._validated(payload, lambda value: False)
+E   TypeError: _validated() missing 1 required keyword-only argument: 'limits'
+_ test_local_condition_is_safe_machine_subtype[no_registered_local_source-no_registered_local_source] _
+tests\test_failure_usage_continuity.py:77: in test_local_condition_is_safe_machine_subtype
+    local._validated(payload, lambda value: False)
+E   TypeError: _validated() missing 1 required keyword-only argument: 'limits'
+_ test_local_condition_is_safe_machine_subtype[api_key=synthetic-w08-secret-unknown] _
+tests\test_failure_usage_continuity.py:77: in test_local_condition_is_safe_machine_subtype
+    local._validated(payload, lambda value: False)
+E   TypeError: _validated() missing 1 required keyword-only argument: 'limits'
+_________ test_invalid_local_wire_is_different_from_real_metadata_gap _________
+tests\test_failure_usage_continuity.py:121: in test_invalid_local_wire_is_different_from_real_metadata_gap
+    local._validated({"schema_version": "unknown"}, lambda value: False)
+E   TypeError: _validated() missing 1 required keyword-only argument: 'limits'
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_source_ref_v2_db_query.py:276: set CWP_V2_CODE_ROOT to the isolated CWP checkout
+SKIPPED [3] tests\test_transcript_launch_contract.py:201: W07 real ET checkout integration requires an explicit test tool path
+SKIPPED [2] tests\test_fetch_filing.py:1636: production security-master snapshots not present
+SKIPPED [1] tests\test_bundle_compat.py:156: symlink unsupported on this platform
+4 failed, 927 passed, 7 skipped, 78 subtests passed in 83.90s (0:01:23)
+
+PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.
+error: failed to push some refs to 'https://github.com/zhengcb81/filing-fetch.git'

@@ -1,0 +1,135 @@
+{
+  "schema_version": "r1-w07-live-independent-review/1",
+  "reviewer": "/root/r1_w04_summary_runtime",
+  "non_author_of_tool_and_live_execution": true,
+  "status": "PASS_LIFECYCLE_AND_PUBLIC_READ_WITH_EXPLICIT_LIMITATIONS",
+  "code_head": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+  "ci": {
+    "conclusion": "success",
+    "id": 39847355377,
+    "evidence_kind": "later captured success receipt; no fresh network query"
+  },
+  "finite_checks": {
+    "checker": "r1-w07-live-independent-20261022/check_readonly.py",
+    "passed": 65,
+    "failed": 0,
+    "evidence": "r1-w07-live-independent-20261022/checks.json",
+    "count": 65
+  },
+  "actual_model": {
+    "actual_posts": 1,
+    "provider": "deepseek",
+    "http_body_bytes": 73560,
+    "selector": "0.9.0",
+    "model": "deepseek-flash",
+    "http_body_sha256": "ca04ce5ad2b514b2788665750305e4cfcf4adf0d2b27ec94007a101f16b7c3d8",
+    "projection": "reading-model-input/5",
+    "wire": "narrative-model-request/6",
+    "output_limit": 8192
+  },
+  "this_run_actual_usage": {
+    "not_invoice": true,
+    "input_tokens": 16405,
+    "estimated_micro_usd": 6701,
+    "output_tokens": 924,
+    "tokens": 17329
+  },
+  "company_budget": {
+    "cap_micro_usd": 1000000,
+    "known_tokens": 24184,
+    "cap_tokens": 150000,
+    "charged_micro_usd": 16421,
+    "unknown_hold_micro_usd": 6728,
+    "charged_tokens": 56355,
+    "unknown_preserved": true,
+    "unknown_hold_tokens": 32171,
+    "known_micro_usd": 9693
+  },
+  "mother_budget": {
+    "token_limit": 2000000,
+    "charged_tokens": 1561352,
+    "prior_unknown_hold_count": 7,
+    "charged_micro_usd": 631959,
+    "unknown_current_count": 4,
+    "micro_usd_limit": 20000000
+  },
+  "retry": {
+    "supplier_failure": false,
+    "paid_pid": 5052,
+    "paid_operation_preserved": true,
+    "recovery_pid": 15192,
+    "error": "IO_TRANSIENT",
+    "lease_changed": true,
+    "new_reservations": 0,
+    "attempt_no": [
+      1,
+      2
+    ],
+    "runtime_fence": [
+      6,
+      8
+    ],
+    "new_tokens": 0
+  },
+  "cache": {
+    "artifact_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+    "new_run": true,
+    "micro_usd": 0,
+    "workdir_absent_after": true,
+    "tokens": 0,
+    "workdir_empty_before": "not separately observed; do not claim verified",
+    "scratch_peak_bytes": 0,
+    "artifact_bytes": 415965,
+    "new_reservations": 0,
+    "same_artifact": true
+  },
+  "public_rf_read": {
+    "quality_status": "needs_review",
+    "selection_status": "partial",
+    "schema": "revenue-narrative-context/1",
+    "coverage_complete": false,
+    "bytes": 418917,
+    "stderr_bytes": 0,
+    "sha256": "953da486f9d4f5d78102209572b219c1b9f6b91b24ad73d0964d142f70610c44",
+    "formula_consumption_verified": false,
+    "exit_code": 0,
+    "business_quality_accepted": false,
+    "spans": 96
+  },
+  "sealed_index": {
+    "affected_index_bytes": 3763,
+    "manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+    "manifest_entries": 639,
+    "affected_index_sha256": "55ab1ff4a1852c9434c7d6c567977db463aa28589bdf9e2d134a9598a874e7c7",
+    "reviewer_scope": "rehash manifest and affected index only; full639 content verification is ROOT restoration receipt"
+  },
+  "counterevidence": [
+    "company charged totals include preserved old unknown hold, not all known usage",
+    "earlier CI snapshot in_progress, later success separately observed",
+    "original sealed index was modified and then exactly restored, not erased from history",
+    "initial cache workdir emptiness lacks separate before snapshot",
+    "partial selection and needs_review are not business/RF formula acceptance"
+  ],
+  "next": [
+    "actual RF parameter/formula consumption and four content/model reviews",
+    "next company existing cache checkpoint adds bounded before-directory observation without new permission/gate",
+    "fresh HK/US holdouts remain separate"
+  ],
+  "cleanup": {
+    "native_mutations": false,
+    "author_attempts_modified": false,
+    "product_code_modified": false,
+    "credentials_extracted_or_printed": false,
+    "current_status_modified": false,
+    "downloads": 0,
+    "source_or_db_copies": 0,
+    "scratch_created": false,
+    "paid_calls": 0
+  },
+  "bindings": {
+    "author_md_sha256": "ae107e0ff8ee4209a0c5d2cbc540c631203555c94df072b4905a2941476f0bdf",
+    "author_json_sha256": "5fd0cb230f2fde5cda2095fa315f6637b8ff57e2f604873d6ceef0436ff3dc6e",
+    "checker_sha256": "d701762bfa3d01af4db08fdd421458998029095f5eab4562f658face07f83be3",
+    "checks_sha256": "c3009d148b8751fba35f2340a855f8f96b8a6a4e1ee0d4e89363ea97aa79145b"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "physical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+    "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch"
+  ],
+  "entries": [
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "new_sha256": "a004bee1db025dafbcffd55bc73dea3a9064f122f3e5296e88173052ce7665c4",
+      "old_sha256": "1566516dde93945502c2107e19d6192c5b6f16394fc808c8780e9954aa1659a9"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "new_sha256": "a004bee1db025dafbcffd55bc73dea3a9064f122f3e5296e88173052ce7665c4",
+      "old_sha256": "1566516dde93945502c2107e19d6192c5b6f16394fc808c8780e9954aa1659a9"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "new_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+      "old_sha256": "97b469d6df2c3e600ae768153bd78857f55770d664996b5916d0070bfc392377"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "new_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+      "old_sha256": "97b469d6df2c3e600ae768153bd78857f55770d664996b5916d0070bfc392377"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "new_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+      "old_sha256": "8950720f1b83119053ca055ee4585f40a422e1c6bd01db19ee427b2ec24980b9"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "new_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+      "old_sha256": "8950720f1b83119053ca055ee4585f40a422e1c6bd01db19ee427b2ec24980b9"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "new_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+      "old_sha256": "2e58487cc0459b088652c6d9ceabd2a9974e9aeffde180169c13be4fa77a6b80"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "new_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+      "old_sha256": "2e58487cc0459b088652c6d9ceabd2a9974e9aeffde180169c13be4fa77a6b80"
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_local_preparation_observation.py",
+      "new_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+      "old_sha256": null
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_local_preparation_observation.py",
+      "new_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+      "old_sha256": null
+    }
+  ],
+  "only_runtime_files": [
+    "scripts/fetch_filing.py",
+    "scripts/ff_local_source_prepare.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/ff_local_preparation_observation.py"
+  ]
+}

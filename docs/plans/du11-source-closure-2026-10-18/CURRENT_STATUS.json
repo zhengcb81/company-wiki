@@ -8,13 +8,10 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+  "last_code_commit": "69a5490baab216fe6d234c53c5f8e7c51672da25",
   "code_ci": {
-    "id": 39847355377,
-    "head_sha": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39847355377"
+    "status": "NEW_PRODUCER_NOT_YET_PUSHED",
+    "scope_note": "755e87cd W07 CI SUCCESS is earlier code; CWP new producer normal push next."
   },
   "completed": {
     "b2": {
@@ -89,9 +86,12 @@
       "actual_posts": 1,
       "tokens": 17329,
       "estimated_micro_usd": 6701,
-      "formula_consumption": false,
+      "formula_consumption": true,
       "content_quality": "NOT_YET_ACCEPTED",
-      "independent_live_review": "PENDING"
+      "independent_live_review": "PASS65_FINITE_CHECKS_LIFECYCLE_PUBLIC_READ_ONLY",
+      "independent_review_ref": "review/r1-w07-live-independent-20261022.json",
+      "formula_consumption_status": "Actual public API consumed support span into a used native TIDES parameter/formula; native compute done, final author seal and quality reviews pending.",
+      "consumption_capture_id": "66fb1d54f9f34ea484244999c60e8b6b"
     }
   },
   "content": {
@@ -166,7 +166,11 @@
     "company_cap_tokens": 150000,
     "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json",
     "company_tokens": 56355,
-    "company_estimated_micro_usd": 16421
+    "company_estimated_micro_usd": 16421,
+    "company_known_tokens": 24184,
+    "company_known_micro_usd": 9693,
+    "company_unknown_hold_tokens": 32171,
+    "company_unknown_hold_micro_usd": 6728
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -194,7 +198,11 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
   "previous_pause_request": "Superseded by latest user continue request.",
-  "last_updated_at": "2026-10-22T20:25:05.169196+00:00",
+  "last_updated_at": "2026-10-22T20:48:17.715879+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
-  "r1_w07_live_ref": "review/r1-w07-live-20261022.json"
+  "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
+  "local_observation_followup": {
+    "status": "ENGINEERING_REVIEWED_THREE_LAYERS_MAINLINE_JOIN_PASS_CWP_PUSH_NEXT",
+    "report": "review/r1-local-observation-integration-20261022.json"
+  }
 }

@@ -56,5 +56,10 @@
     "production_config_changes": 0,
     "other_lane_source_changes": 0,
     "push_merge_install": 0
-  }
+  },
+  "author_snapshot_product_commit": "96ca254d60fe416598e47d108b5f561d2dc48179",
+  "root_final_product_commit": "27be00fb5b16503b867886ea8cbc641027d6a8e2",
+  "root_main_merge": "69a5490baab216fe6d234c53c5f8e7c51672da25",
+  "root_independent_review": "../du11-source-closure-2026-10-18/review/r1-local-observation-cwp-independent-20261022.json",
+  "root_latest_state": "ROOT final product independently49PASS, real mainline->installedFF/RF1PASS; normal CWP publication next. Original author96ca receipts are historical."
 }

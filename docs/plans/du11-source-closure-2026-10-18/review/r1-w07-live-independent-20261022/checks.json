@@ -1,0 +1,623 @@
+{
+  "schema_version": "w07-independent-readonly-checks/1",
+  "reviewer": "/root/r1_w04_summary_runtime",
+  "code_head": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+  "checks": [
+    {
+      "check": "author_code_head",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:accounting-final-observation.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:accounting-observation.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:controller-result.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:controller-spec.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:events.jsonl",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:narrative-read-request.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:preflight.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:public-read.receipt.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:rf-public-context.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:sealed-index-restoration.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w06-context-handoff.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-published-ci.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-real-activation-pending-capture.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-real-after-paid-capture.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-real-complete-cache-capture.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-real-preflight-capture.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-real-rf-read-capture.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "packet_binding:w07-reallocated-preflight-capture.json",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "recorded_ci_success",
+      "passed": true,
+      "observed": {
+        "id": 39847355377,
+        "head_sha": "755e87cd85de7ca02bcb88b8e34f79c35f3763f3",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39847355377"
+      }
+    },
+    {
+      "check": "published_source:tools/document_understanding_benchmark/holdout_acceptance.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd",
+        "physical_sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec"
+      }
+    },
+    {
+      "check": "published_source:tools/document_understanding_benchmark/holdout_acceptance_launcher.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34",
+        "physical_sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0"
+      }
+    },
+    {
+      "check": "published_source:tools/document_understanding_benchmark/holdout_acceptance_observer.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb",
+        "physical_sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0"
+      }
+    },
+    {
+      "check": "published_source:tools/document_understanding_benchmark/holdout_acceptance_contracts.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d",
+        "physical_sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b"
+      }
+    },
+    {
+      "check": "published_source:src/company_wiki/automation/narrative_model_caller.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "3ba4996ea0de8db311c3b57ad63c691656f0e02d4065dff766b42e4b8afbe349",
+        "physical_sha256": "495055ae46fa22335240826808be87854bd4263f4c5ba0b8e6fa54802d20ae06"
+      }
+    },
+    {
+      "check": "published_source:src/company_wiki/automation/narrative_http_model.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "be2f8fbe353a1e23eb551a28180b2e2a879af5e0fe682b3c784363863e5553cc",
+        "physical_sha256": "0526d4a87b7ce5661399c2a34ad599da7c0611199d005caa1399d1be872ee66d"
+      }
+    },
+    {
+      "check": "published_source:src/company_wiki/automation/narrative_paid_response.py",
+      "passed": true,
+      "observed": {
+        "committed_lf_sha256": "bd6e31fd999af211a1b3f133c18f3eca5db911364c3138bcec1ad8c4fda47fb7",
+        "physical_sha256": "8fc0bf0fe6885d04a40013738ddefbab267f4608476ebfa76db75c7d7d85205b"
+      }
+    },
+    {
+      "check": "live_spec_matches_packet",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "one_actual_post_observation",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "preflight_exact_http_body",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "configured_model_and_wire",
+      "passed": true,
+      "observed": {
+        "model": "deepseek-flash",
+        "max_tokens": 8192,
+        "thinking": {
+          "type": "disabled"
+        },
+        "wire": "narrative-model-request/6",
+        "tasks": 57
+      }
+    },
+    {
+      "check": "prior_preflight_zero_post_same_body",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "conservative_bound_not_relaxed",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "actual_cli_stage:001-after_paid",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "actual_cli_stage:002-activation_pending",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "actual_cli_stage:003-complete",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "actual_cli_stage:004-cache",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "actual_native_stage_outcomes",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "one_durable_paid_operation",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "same_paid_operation_no_new_charge",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "same_frozen_generation",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "frozen_configured_generation",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "live_auto_retry_and_fence",
+      "passed": true,
+      "observed": [
+        {
+          "attempt_id": "d49c896b618149d48ccc16d547aeb115",
+          "attempt_no": 1,
+          "outcome": "retryable",
+          "error_code": "IO_TRANSIENT",
+          "fence": 6,
+          "lease_sha256": "7373fd58840ba71ab23747ffc27ad22237d7c077ddd595759466244e09b1c842"
+        },
+        {
+          "attempt_id": "633d7c1a338a4be39f3572738eea3952",
+          "attempt_no": 2,
+          "outcome": "succeeded",
+          "error_code": null,
+          "fence": 8,
+          "lease_sha256": "aa84308d196a040778510b0042e438a2a8018042ba007721d358728e8682eca0"
+        }
+      ]
+    },
+    {
+      "check": "new_pid_native_recover_and_replay",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "preflight_and_paid_replay_input_binding",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "durable_response_bytes_and_usage",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "fee_proxy_matches_native",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "same_artifact_cache_zero_native",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "cache_work_is_new_run_no_scratch_claim",
+      "passed": true,
+      "observed": {
+        "run_id": "r1-cn-annual-090-recovery-20261022-cache",
+        "work_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\work\\w07-090-20261022\\r1-cn-annual-090-recovery-20261022-cache",
+        "present_after_run": true
+      }
+    },
+    {
+      "check": "actual_visible_artifact_bytes",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "original_pdf_preserved",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "public_installed_rf_read_bytes",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "public_context_not_formula_acceptance",
+      "passed": true,
+      "observed": {
+        "selection": {
+          "candidate_count": 1413,
+          "coverage_complete": false,
+          "dropped_financial_count": 283,
+          "lines_total": 0,
+          "omitted_candidate_count": 1317,
+          "pages_read": 249,
+          "pages_total": 249,
+          "selected_count": 96,
+          "source_units": 4923,
+          "status": "partial",
+          "tables_scanned": 1,
+          "tables_total": 141
+        },
+        "quality_status": "needs_review"
+      }
+    },
+    {
+      "check": "installed_public_cli_capture_adapter",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "initial_manifest_and_affected_index_exactly_restored",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "new_attempt_index_retains_initial_plus_new_run",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "independent_mother_totals_and_unchanged_user_cap",
+      "passed": true,
+      "observed": {
+        "charged_tokens": 1561352,
+        "charged_micro_usd": 631959,
+        "new_unknown_count": 4,
+        "prior_unknown7_retained": 7,
+        "token_limit": 2000000,
+        "micro_usd_limit": 20000000
+      }
+    },
+    {
+      "check": "unknown_holds_not_forgiven",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "root_reallocation_not_user_budget_increase",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "company_charged_totals_keep_native_unknown_hold",
+      "passed": true,
+      "observed": {
+        "known_tokens": 24184,
+        "known_micro_usd": 9693,
+        "unknown_hold_tokens": 32171,
+        "unknown_hold_micro_usd": 6728
+      }
+    },
+    {
+      "check": "protected_configs_unchanged_hash_only",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "counterfactual_second_post_fails",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "counterfactual_new_paid_request_fails",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "counterfactual_cache_other_artifact_fails",
+      "passed": true,
+      "observed": null
+    },
+    {
+      "check": "counterfactual_zero_usage_fails",
+      "passed": true,
+      "observed": null
+    }
+  ],
+  "check_count": 65,
+  "all_passed": true,
+  "file_bindings": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\accounting-final-observation.json": {
+      "bytes": 925,
+      "sha256": "e06896e482046b76db39b8f2e41ad4b2888ffc1f91f35006cae85223d9edf95e"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\accounting-observation.json": {
+      "bytes": 901,
+      "sha256": "10530eba48447576fa67ac374e834ff383a3abe97079f384472735ecb194f9fc"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\controller-result.json": {
+      "bytes": 161842,
+      "sha256": "4fb4d0fba0fc8439ad241a6e9f5d5a7f95c3fbc550256e7aaa97bdb04c619474"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\controller-spec.json": {
+      "bytes": 2244,
+      "sha256": "b7ae3a231cfed6054b152fad1bfedfaab3a5efedfb82839ccefc3e0878a71bb8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\events.jsonl": {
+      "bytes": 3014,
+      "sha256": "802b2457c8543aea5bd2706aedfa880cb16dff10822c5123f09885c95d4b5088"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\narrative-read-request.json": {
+      "bytes": 1016,
+      "sha256": "088a1b500b631f64a1f974052afb86269698c2e613cc37ff5138939eafc61fc2"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\preflight.json": {
+      "bytes": 724,
+      "sha256": "1ba5ba8e80b8f28930be8209e84f4792cc1c5dbcf9dd9fc9d90aa333d4cfc896"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\public-read.receipt.json": {
+      "bytes": 2181,
+      "sha256": "e311fa27e8132318808d7f3787d304e91be219c28539085a69324bb3e9d0f89c"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\rf-public-context.json": {
+      "bytes": 418917,
+      "sha256": "953da486f9d4f5d78102209572b219c1b9f6b91b24ad73d0964d142f70610c44"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\sealed-index-restoration.json": {
+      "bytes": 1036,
+      "sha256": "b39761d24abc763cbb37519da7e47640c4cd3af198b05c27562b8a7c63618005"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w06-context-handoff.json": {
+      "bytes": 1932,
+      "sha256": "897e03517f65b7075d6fb7276c19f68a151776867ae1f855d0fdd0b306c4f338"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-published-ci.json": {
+      "bytes": 383,
+      "sha256": "b961e12dfca6f644f067280d6ca2427732208f16283def8d53b556e97d87b84a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-real-activation-pending-capture.json": {
+      "bytes": 2416,
+      "sha256": "65b7103bbe1deb88b0c440bbb29241bd76f7c921461a01ebebfc08c56d33cc8b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-real-after-paid-capture.json": {
+      "bytes": 2416,
+      "sha256": "cb8cadb377415ae05638f27bebd32f1f857c097899b432a0bee4f3189ffd8073"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-real-complete-cache-capture.json": {
+      "bytes": 2417,
+      "sha256": "3b50a2b2ad34a374ab555ce7de5443367d63d0945911669265cdecb620d85ebc"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-real-preflight-capture.json": {
+      "bytes": 2404,
+      "sha256": "132f2f86435445573c1d5affb839cb5fb90542de2df0acb4a18a15f555184f15"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-real-rf-read-capture.json": {
+      "bytes": 2439,
+      "sha256": "529649b0538da378fd61228ea34c517cb7ac03fdfc93af5e09a2d0a91502db95"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-reallocated-preflight-capture.json": {
+      "bytes": 2416,
+      "sha256": "01a23c03372280c351a3e8bc78fcd2b39bfaebf1152c937376478abdc1c1e9a4"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w07-live-20261022\\w07-ci-success.json": {
+      "bytes": 225,
+      "sha256": "f47570d673d8980d520164d1d1792d3451e71ba9324b269cc328c6ff1afe59ec"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\holdout_acceptance.py": {
+      "bytes": 21743,
+      "sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\holdout_acceptance_launcher.py": {
+      "bytes": 362,
+      "sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\holdout_acceptance_observer.py": {
+      "bytes": 9881,
+      "sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\holdout_acceptance_contracts.py": {
+      "bytes": 6307,
+      "sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_model_caller.py": {
+      "bytes": 20879,
+      "sha256": "495055ae46fa22335240826808be87854bd4263f4c5ba0b8e6fa54802d20ae06"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_http_model.py": {
+      "bytes": 22896,
+      "sha256": "0526d4a87b7ce5661399c2a34ad599da7c0611199d005caa1399d1be872ee66d"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_paid_response.py": {
+      "bytes": 5704,
+      "sha256": "8fc0bf0fe6885d04a40013738ddefbab267f4608476ebfa76db75c7d7d85205b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\events.jsonl": {
+      "bytes": 3014,
+      "sha256": "802b2457c8543aea5bd2706aedfa880cb16dff10822c5123f09885c95d4b5088"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\model-input.json": {
+      "bytes": 73560,
+      "sha256": "ca04ce5ad2b514b2788665750305e4cfcf4adf0d2b27ec94007a101f16b7c3d8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090\\receipts\\model-input.json": {
+      "bytes": 73560,
+      "sha256": "ca04ce5ad2b514b2788665750305e4cfcf4adf0d2b27ec94007a101f16b7c3d8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\cli-001-after_paid.native.json": {
+      "bytes": 40902,
+      "sha256": "b67a22e1729ef753d3357695cda699a98ba1a773ad1ebb49ddf0f7a4e74341e5"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\cli-002-activation_pending.native.json": {
+      "bytes": 104953,
+      "sha256": "801f4dff7423a72e57f3184a26df7da9c457c6c8ad65eb12248b9d281a38cbbb"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\cli-003-complete.native.json": {
+      "bytes": 105563,
+      "sha256": "657948c1457e9e18541c16b2c75d17f529f6755fe31e0ebfba5b18289edb6d0b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w07-live\\20261022-annual-090-reallocated\\receipts\\cli-004-cache.native.json": {
+      "bytes": 2017,
+      "sha256": "40e2501553ae2c2b4d139226269d50402e06d9b3593dddb1e19a31a6ac58e55a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\objects\\sha256\\68\\68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365.json": {
+      "bytes": 4478,
+      "sha256": "68ae4656ea3003eba72610a04557960d4dd8f1fef8b4c01dd2f56506e2758365"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\objects\\sha256\\d4\\d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4.json": {
+      "bytes": 415965,
+      "sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\药明康德\\raw\\financial_reports\\药明康德：2025年年度报告.pdf": {
+      "bytes": 1608226,
+      "sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\commands\\07954b99db604aaea970e41c54e9a2b6\\stdout.txt": {
+      "bytes": 418917,
+      "sha256": "953da486f9d4f5d78102209572b219c1b9f6b91b24ad73d0964d142f70610c44"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w03-join\\read_installed_rf_narrative.py": {
+      "bytes": 1076,
+      "sha256": "a381c4be5580bf2505926a1b4c1d1b30e8fa20d8ca839806af6042dcaf201425"
+    },
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py": {
+      "bytes": 2400,
+      "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72"
+    },
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\manifest.json": {
+      "bytes": 371444,
+      "sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458"
+    },
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\native_operation_index.json": {
+      "bytes": 3763,
+      "sha256": "55ab1ff4a1852c9434c7d6c567977db463aa28589bdf9e2d134a9598a874e7c7"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": {
+      "bytes": 3984,
+      "sha256": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\models.yaml": {
+      "bytes": 827,
+      "sha256": "387bdce7ff8b688422311a2f74c6c05b4ed25a3796aa7efb25490a0d1abe3d93"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": {
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": {
+      "bytes": 1656,
+      "sha256": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": {
+      "bytes": 1481,
+      "sha256": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_acquisition.yaml": {
+      "bytes": 2342,
+      "sha256": "18cf393cb52637e38d28cef28d80e8ef4d2678390c7ac25d156797c3cbd27413"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog_worker.yaml": {
+      "bytes": 2242,
+      "sha256": "25a19354733d76434789d507683f7f4e2a5b2abc8fc18238b54c2a03639b5054"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json": {
+      "bytes": 306,
+      "sha256": "b32bc38b0bb125f2ed65703b1910df7cbd4ee0a0a9a75e628b61ea6237b1fda5"
+    }
+  },
+  "native_databases_opened": "SQLite URI mode=ro + PRAGMA query_only; no store constructors",
+  "paid_calls_by_reviewer": 0,
+  "downloads_by_reviewer": 0,
+  "key_values_read": false,
+  "native_mutations": false,
+  "temporary_scratch_created": false,
+  "scope": "lifecycle/payment-replay/cache/public-byte-read only; not content or RF formula acceptance"
+}

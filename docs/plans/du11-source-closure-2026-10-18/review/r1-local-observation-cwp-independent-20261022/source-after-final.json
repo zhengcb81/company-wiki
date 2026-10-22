@@ -1,0 +1,31 @@
+{
+  "product_commit": "27be00fb5b16503b867886ea8cbc641027d6a8e2",
+  "HEAD": "27be00fb5b16503b867886ea8cbc641027d6a8e2",
+  "git_status": "",
+  "files": {
+    "src/company_wiki/source_catalog/local_inventory.py": {
+      "physical_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "unchanged_during_final": true
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "physical_sha256": "0a6b5cc2972791380b24ec306f53f0535473bf9b3961c7ea2cc9c8f9591a4126",
+      "unchanged_during_final": true
+    },
+    "tests/unit/test_local_budget_observation.py": {
+      "physical_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "unchanged_during_final": true
+    },
+    "tests/contract/test_local_prepare_failure_boundaries.py": {
+      "physical_sha256": "8e7881c8ecb4972af63a4adc5d1c51491b4bc2ab8bd05337ae689d0ec5468b90",
+      "unchanged_during_final": true
+    },
+    "tests/contract/test_local_request_relevance.py": {
+      "physical_sha256": "18c85868c81acaf19cc4725c104999bcc0c6611a03a26b03dc5ef047543d7bb2",
+      "unchanged_during_final": true
+    },
+    "tests/unit/test_latest_local_source_discovery.py": {
+      "physical_sha256": "93b1326c7cbdf998e26d16c59ce2a90c62066e8c90676337bc6ebaa16d5e14f9",
+      "unchanged_during_final": true
+    }
+  }
+}

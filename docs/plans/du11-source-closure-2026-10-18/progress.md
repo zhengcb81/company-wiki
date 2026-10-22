@@ -1,5 +1,11 @@
 ## 2026-10-22 W07真实生命周期完成，交W06阶段B
 
+### 后续三仓根修接收与RF实际消费（20:54UTC）
+
+W07已有65项有限独立实读复核通过，只签生命周期/公开读取，cache开始为空缺独立清单已下调表述。W06真实`consume_narrative_input`将support span→tides_base_2026_activity→native TIDES base公式绑定，随后主/共享确认压力已原生validate/compute/render/snapshot；作者正在最终字段修正/封存，尚无业务质量PASS。独立storage reviewer先读11原件并冻结源侧inventory，不先看新模型或摘要；source-index已交，catalog最后写者20:53:50UTC退出。
+
+本地诊断CWP/FF/RF分别49/18/16独审通过（不同套件不合计）。RF10bf6111和FF7f6a9268已正常push/install，精确CI均SUCCESS；CWP27be00fb已merge69a5490b，主线→已安装FF/RF真实1例8.19s通过，旧main同例缺ownerop真RED。发现路径漏history共因已统一record_operation，永久回归保留；原资格/配额不变。既有快速smoke只增加2个owner/history控制，2.31s，无新门禁/重型跨仓测试入日常CI。ROOT自有临时根2372files/79,471,652B已恢复不存在，实际运行证据与原件保留；CWP正常发布下一步。
+
 正常推送755e87cd：7088P/24S/271.80s，145smoke/30.31s。纯预检重分配后真实调用一次DS，17329tokens/6701microUSD；新进程/attempt/fence同paid operation原生恢复0新增POST/reservation/token，激活pending→完成、新run cache同415965Bartifact。已安装RF公开CLI退出0/完整418917Bcontext/96spans，selectionpartial/needs_review，不宣称公式/内容已验收。约610KB便携收据已归档，原件/数据库没有复制。
 
 母账1561352tokens/631959microUSD，公司56355/16421，所有unknown保留。ROOT发现操作索引本已包含在initial639封存，误追加后已先保新引用到attempt，再按原SHA恢复原3763字节；639件实核0差异，新scope-v2和attempt索引为当前入口。研究agent继续阶段B，之后四审；FF136ab独审18P，RFdedebe作者201P1S正独审，CWP新9P加旧5真缺陷窄修继续。详见review/r1-w07-live-20261022.md/json。
@@ -533,3 +539,6 @@ Metadata performance root cause reproduced on actual _prose:16/32members visited
 ## 2026-10-21 专家封存后四线并行实施
 
 26问题已映射11根因/7施工包，M1共用接口由ROOT一次接收；W01来源发现/时间资格、W02 FF与RF边界、W04实验补写退役与历史final恢复、W05比例/分部组已在独立工区TDD施工。方案及完整7卡的小型字节副本已收进R1 packet，原initial/四审/设计封存不改。RF两新工区采用sparse checkout各2136文件约21.8MB，未保留46969份旧.planning输出副本；临时完整检出峰值未测。当前无新增API/下载，预算及unknown不变。ROOT首轮source反例因长TEMP/父目录未建及测试冷catalog前置假设产生的环境/夹具失败已分开留证，真正2个发现机制RED与7个资格API RED已保留；75相关例已绿，新增cold/current-open和扩展resolver验证进行中。工程candidate不等于真实0.9/付费恢复/研究闭环通过。
+
+自动审批拒绝了整子计划目录的递归暂存，理由是可能夹带无关/敏感WIP；未执行提交。ROOT改为先逐项核对本次PWF/独审/收据文件，再显式逐文件暂存；不跳过审批、不把raw、密钥或其它计划带入。
+

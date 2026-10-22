@@ -1,0 +1,214 @@
+{
+  "schema_version": "independent-engineering-review/1",
+  "status": "PASS_CWP_LOCAL_OBSERVATION_ENGINEERING_ONLY",
+  "reviewer_task": "/root/r1_w02_source_boundary",
+  "non_author": true,
+  "initial_product_commit": "96ca254d60fe416598e47d108b5f561d2dc48179",
+  "final_product_commit": "27be00fb5b16503b867886ea8cbc641027d6a8e2",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation",
+  "source_fingerprints": {
+    "src/company_wiki/source_catalog/local_inventory.py": {
+      "physical_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "physical_bytes": 15533,
+      "lf_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "git_blob_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550"
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "physical_sha256": "0a6b5cc2972791380b24ec306f53f0535473bf9b3961c7ea2cc9c8f9591a4126",
+      "physical_bytes": 40940,
+      "lf_sha256": "0a6b5cc2972791380b24ec306f53f0535473bf9b3961c7ea2cc9c8f9591a4126",
+      "git_blob_sha256": "0a6b5cc2972791380b24ec306f53f0535473bf9b3961c7ea2cc9c8f9591a4126"
+    },
+    "tests/unit/test_local_budget_observation.py": {
+      "physical_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "physical_bytes": 7593,
+      "lf_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "git_blob_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae"
+    },
+    "tests/contract/test_local_prepare_failure_boundaries.py": {
+      "physical_sha256": "8e7881c8ecb4972af63a4adc5d1c51491b4bc2ab8bd05337ae689d0ec5468b90",
+      "physical_bytes": 5666,
+      "lf_sha256": "8e7881c8ecb4972af63a4adc5d1c51491b4bc2ab8bd05337ae689d0ec5468b90",
+      "git_blob_sha256": "8e7881c8ecb4972af63a4adc5d1c51491b4bc2ab8bd05337ae689d0ec5468b90"
+    },
+    "tests/contract/test_local_request_relevance.py": {
+      "physical_sha256": "18c85868c81acaf19cc4725c104999bcc0c6611a03a26b03dc5ef047543d7bb2",
+      "physical_bytes": 15907,
+      "lf_sha256": "2b38aa926d19dfbae7d0de568c8a792789965c17f5f7d1347caa5a6b05035557",
+      "git_blob_sha256": "2b38aa926d19dfbae7d0de568c8a792789965c17f5f7d1347caa5a6b05035557"
+    },
+    "tests/unit/test_latest_local_source_discovery.py": {
+      "physical_sha256": "93b1326c7cbdf998e26d16c59ce2a90c62066e8c90676337bc6ebaa16d5e14f9",
+      "physical_bytes": 5494,
+      "lf_sha256": "2a12d7b87d870e865e31235ba83d943f61fec5edea6e66137dca7ce7d5bb2076",
+      "git_blob_sha256": "2a12d7b87d870e865e31235ba83d943f61fec5edea6e66137dca7ce7d5bb2076"
+    }
+  },
+  "unchanged_during_final": true,
+  "final_author_git_status": "",
+  "initial": {
+    "exit_code": 1,
+    "passed": 48,
+    "failed": 1,
+    "skipped": 0,
+    "seconds": 18.23,
+    "independent_passed": 5,
+    "independent_failed": 1,
+    "related_passed": 43
+  },
+  "final": {
+    "exit_code": 0,
+    "passed": 49,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 18.43,
+    "independent_passed": 6,
+    "related_passed": 43,
+    "new_permanent_author_test_not_double_counted": true
+  },
+  "findings": [
+    {
+      "id": "CWP-OBS-1",
+      "severity": "material_observability_gap",
+      "status": "RESOLVED",
+      "root_cause": "Discovery completed native owner writes were not appended to the shared per-call preparation progress; later semantic failure returned a budget operation but lost already committed operations.",
+      "fix": "One _PreparationProgress.record_operation sanitizer is used by both candidate and discovery paths; actual not_relevant stays call-local scope proof, not a fictitious write.",
+      "fix_commit": "27be00fb5b16503b867886ea8cbc641027d6a8e2",
+      "red_proof": "initial-discovery-before-later-failure.json",
+      "green_proof": "final-discovery-before-later-failure.json"
+    }
+  ],
+  "independent_controls": [
+    "Native latest discovery records real first source before later unknown scope failure; completed operation and one budget operation survive.",
+    "Actual metadata file read followed by cancellation retains observed tail bytes while accepted charged bytes remain zero.",
+    "Original-proved non-relevance is scoped to one call, re-proved next call, and cannot hide later exact requested scope with bad metadata.",
+    "Wrong old filename label plus conflicting actual primary issuer cannot inherit another document non-relevance.",
+    "Wrong old label plus unknown actual scope remains blocking.",
+    "Latest valid old cached source cannot hide a newly discovered actual target with unresolved period."
+  ],
+  "related_controls": [
+    "Original22 request relevance contracts unchanged.",
+    "Author9 budget observation tests.",
+    "Original7 newly authored failure boundary cases, selected by exact four test nodes.",
+    "Existing5 latest source discovery tests."
+  ],
+  "quality": {
+    "independent_ruff": {
+      "exit_code": 0,
+      "files": 2
+    },
+    "root_reported_not_independent": "ROOT44 related /13.85s and full-src mypy/Ruff/normal hooks PASS; not added to independent count.",
+    "patch_inspection": "27be shared record_operation only; no source_reader/qualification/cap/query/raw semantics changed."
+  },
+  "execution": {
+    "command": "$env:PYTHONPATH='<worktree>;<worktree>/src;<worktree>/scripts;<worktree>/tests'\n$env:PYTHONDONTWRITEBYTECODE='1'\n$env:PYTHON_DOTENV_DISABLED='1'\npython -B -X utf8 -m pytest -c <evidence>/pytest.ini <evidence>/test_cwp_independent.py tests/contract/test_local_request_relevance.py tests/unit/test_local_budget_observation.py tests/contract/test_local_prepare_failure_boundaries.py::test_discovered_unrelated_original_ignores_its_unusable_date tests/contract/test_local_prepare_failure_boundaries.py::test_discovered_target_or_unknown_never_becomes_absence tests/contract/test_local_prepare_failure_boundaries.py::test_actual_nonrelevance_is_not_reproved_in_same_call tests/contract/test_local_prepare_failure_boundaries.py::test_wrong_declared_old_year_does_not_exclude_actual_requested_original tests/unit/test_latest_local_source_discovery.py --basetemp=<owned fresh TEMP> --junitxml=<evidence>/final.xml -v --tb=short",
+    "cwd": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation",
+    "network": "socket connect/create_connection denied in review fixtures",
+    "external_api_calls": 0,
+    "downloads": 0,
+    "paid_requests": 0,
+    "credentials_read": false,
+    "original_bytes": "Native synthetic fixture original bytes asserted unchanged; real production originals untouched.",
+    "production_config_or_database_writes": false,
+    "author_source_edits_by_reviewer": false
+  },
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\cwporv",
+      "initial_state": "absent",
+      "files_removed": 354,
+      "bytes_removed": 19444599.0,
+      "final_state": "absent",
+      "only_owned_temp": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\cwporvf",
+      "initial_state": "absent",
+      "files_removed": 354,
+      "bytes_removed": 19444649.0,
+      "final_state": "absent",
+      "only_owned_temp": true
+    }
+  ],
+  "boundaries": [
+    "Not live provider/paid/content/model-quality acceptance.",
+    "Not installed-copy/publish/merge acceptance.",
+    "ROOT owns actual CWP->FF->RF CLI join; its separate passing budget-operation integration does not replace discovery-history review.",
+    "Independent archive uses explicit 2026-10-22 information date with actual current owner proof; permanent transferred native regression uses current UTC to avoid cross-day fixture invalidity.",
+    "CodeGraph absent in read-only worktree; no index initialization, exact frozen file/diff fallback."
+  ],
+  "evidence": {
+    "actual-cancel-after-read.json": {
+      "sha256": "ed8bc81f2991d1510ada2d90fe44a68ba7ec9b251b6a526ead2367759fdd7fea",
+      "bytes": 595
+    },
+    "cleanup.json": {
+      "sha256": "106a74ae46abd9968fa3d573f65f46691798040ba5cd5896aac97d999d1e9aff",
+      "bytes": 492
+    },
+    "conftest.py": {
+      "sha256": "2346cd78b11c2759836863ca17433496a316a7f69e7eea9c605bf6954db37bf7",
+      "bytes": 640
+    },
+    "discovery-before-later-failure.json": {
+      "sha256": "742c6740b267016fe86c9445a914134bf35006203c8a65c1e9bcc51bd8c193cc",
+      "bytes": 1342
+    },
+    "final-discovery-before-later-failure.json": {
+      "sha256": "742c6740b267016fe86c9445a914134bf35006203c8a65c1e9bcc51bd8c193cc",
+      "bytes": 1342
+    },
+    "final.log": {
+      "sha256": "af9fdd92fc428dc1470844452d3e75e79be4986d8023adb387fe526b2d7dacce",
+      "bytes": 12244
+    },
+    "final.xml": {
+      "sha256": "e0c0268dfa8ecbdffd4713c73c84d3e26e7f5c8486b7b17d0e3aea646cf656ec",
+      "bytes": 6810
+    },
+    "initial-discovery-before-later-failure.json": {
+      "sha256": "2a7a9c35b6c66205991c9106b90856c521898a1c71d265515dd99fb2281ac859",
+      "bytes": 1194
+    },
+    "initial.log": {
+      "sha256": "20048c2879ac67dc8ba73aea4ad49c4bfe0d8bdef94df457e46a5bc0f5ba49d4",
+      "bytes": 13306
+    },
+    "initial.xml": {
+      "sha256": "c8e1acc2ecc0b4d299be6273ea8ef571bceea8dfc2ea6df979a798ce22776596",
+      "bytes": 7805
+    },
+    "negative-scope-is-not-persistent.json": {
+      "sha256": "6ee0c310f52aa66dba8107726366ca83d086e43fb57e1c6ffce7448a0bf732a1",
+      "bytes": 3407
+    },
+    "pytest.ini": {
+      "sha256": "aaabed120d2fb059160bb38bf8843dc0bbb6abca5f013dffb5228bfffb9a3404",
+      "bytes": 39
+    },
+    "source-after-final.json": {
+      "sha256": "f39ce59ebe412284d14b75c61f155178cafc3e468e231a9f33c79d172c46c0a3",
+      "bytes": 1363
+    },
+    "source-after-initial.json": {
+      "sha256": "ee96cf4aeb3b25a193560894e23795b1c9b5cd84e2c517382aade7b59a6b00ab",
+      "bytes": 1268
+    },
+    "source-before-final.json": {
+      "sha256": "9e81f8c21d6e7bd06f4c3a9131b8374324a43f784374f2032bec0001080f6ee9",
+      "bytes": 2410
+    },
+    "source-before.json": {
+      "sha256": "23e9e2175b29ad64c09e422648234b42cc47eeac4a35ba25d4c5f98410754785",
+      "bytes": 2389
+    },
+    "static-review.log": {
+      "sha256": "47025a5b7602a93215dc9faf001f76955476d56ec56c56c46319903477b3c1cc",
+      "bytes": 357
+    },
+    "test_cwp_independent.py": {
+      "sha256": "8ffb281b85bc6ea29dcd54a8196af2654d2debe25dd3f82ec7e1278384b40a5e",
+      "bytes": 8389
+    }
+  }
+}

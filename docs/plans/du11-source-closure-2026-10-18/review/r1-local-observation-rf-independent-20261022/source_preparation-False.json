@@ -1,0 +1,39 @@
+{
+  "entry": "source_preparation.py",
+  "rf_exit": 3,
+  "replayed_ff_exit": 2,
+  "local_producer_exit": 0,
+  "stderr_bytes": 2854,
+  "stderr_sha256": "e0958fc641657fbe7b51dae78b503fd90b3995a340089c5b9032ca8fd3c17820",
+  "complete_sidecar_sha256": "05bd65183c7045a055616851a3cba2435d0888732b2df7873f708dd0450431ed",
+  "expected_sidecar_sha256": "05bd65183c7045a055616851a3cba2435d0888732b2df7873f708dd0450431ed",
+  "diagnostics": 1,
+  "cause": {
+    "schema_version": "filing-upstream-cause/1",
+    "operation": "local_prepare",
+    "code": "budget_exceeded",
+    "provider_started": false,
+    "usage_complete": true,
+    "retry_scope": "none"
+  },
+  "companion": {
+    "status": "not_run",
+    "reason": "filing_failed_before_companion_dispatch",
+    "retryable": false,
+    "intent": "fetch_if_missing",
+    "fiscal_year": 2026,
+    "fiscal_quarter": 2,
+    "provider": "company_ir",
+    "acquisition_limits": {
+      "max_bytes": 100000,
+      "timeout_seconds": 10,
+      "max_cost_usd": "0"
+    },
+    "provider_started": false,
+    "provider_requests": 0,
+    "provider_response_bytes": 0,
+    "provider_usage_complete": true
+  },
+  "calls": 3,
+  "downloads": 0
+}

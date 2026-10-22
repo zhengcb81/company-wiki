@@ -1,0 +1,53 @@
+
+=== ruff (CI WU-1.2 full scope) ===
+ok
+
+=== compileall ===
+ok
+
+=== import smoke (scripts.fetch_filing, scripts.filing_contracts) ===
+ok
+
+=== mypy public contracts (CI FC-1204-c set) ===
+ok
+
+=== unique test symbols (CI WU-7.1) ===
+ok
+
+=== host assumption guard (FC-1307-a) ===
+ok
+
+=== config doctor (FC-1202 three-repo contract) ===
+ok
+
+=== plan claim verifier (CI WU-8.3) ===
+ok
+
+=== UTF-8 BOM scan (CA-304/final_ratchet surface) ===
+ok
+
+=== shared focused CI behavior tests ===
+........................................................................ [  7%]
+........................................................................ [ 15%]
+........................................................................ [ 23%]
+........................................................................ [ 30%]
+...........s............................................................ [ 38%]
+...................................sss.................................. [ 46%]
+........................................................................ [ 53%]
+........................................................................ [ 61%]
+......................s........................... [ 66%]
+......................................................... [ 72%]
+...........................s.................... [ 77%]
+............................................................................................................................... [ 91%]
+................................s....................................... [ 99%]
+........                                                                 [100%]
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_source_ref_v2_db_query.py:276: set CWP_V2_CODE_ROOT to the isolated CWP checkout
+SKIPPED [3] tests\test_transcript_launch_contract.py:201: W07 real ET checkout integration requires an explicit test tool path
+SKIPPED [2] tests\test_fetch_filing.py:1636: production security-master snapshots not present
+SKIPPED [1] tests\test_bundle_compat.py:156: symlink unsupported on this platform
+931 passed, 7 skipped, 78 subtests passed in 85.62s (0:01:25)
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/filing-fetch.git
+   a1cb84d..7f6a926  main -> main

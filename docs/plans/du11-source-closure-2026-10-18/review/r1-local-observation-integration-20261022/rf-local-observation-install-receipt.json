@@ -1,0 +1,48 @@
+{
+  "schema_version": "local-observation-rf-selective-install/1",
+  "method": "Native PowerShell exact-byte same-directory atomic move",
+  "physical_targets": 2,
+  "timestamp": "2026-10-22T20:32:04.0924885Z",
+  "physical_writes": 2,
+  "targets": [
+    {
+      "physical_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast",
+      "before_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "after_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08"
+    },
+    {
+      "physical_root": "C:/Users/郑曾波/.codex/skills/revenue-forecast",
+      "before_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "after_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08"
+    }
+  ],
+  "new_downloads": 0,
+  "selected": [
+    "scripts/filing_upstream_cause.py"
+  ],
+  "source_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+  "outside_scope_file_metadata_unchanged": 566,
+  "checks": [
+    {
+      "exit": 0,
+      "stdout": "final consumer import PASS",
+      "sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "logical_root": ".agents"
+    },
+    {
+      "exit": 0,
+      "stdout": "final consumer import PASS",
+      "sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "logical_root": ".claude"
+    },
+    {
+      "exit": 0,
+      "stdout": "final consumer import PASS",
+      "sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "logical_root": ".codex"
+    }
+  ],
+  "new_paid_calls": 0
+}

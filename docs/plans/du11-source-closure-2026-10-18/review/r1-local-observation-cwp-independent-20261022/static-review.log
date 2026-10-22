@@ -1,0 +1,4 @@
+Independent test source: python -m ruff check <evidence>/test_cwp_independent.py <evidence>/conftest.py
+Exit0: All checks passed!
+Runtime supplemental diff read: git diff 37bb74fc 27be00fb -- src/company_wiki/source_catalog/local_reconcile.py
+Only shared record_operation plus both caller uses; no qualification, quota or publication semantics changed.

@@ -1,0 +1,112 @@
+{
+  "calls": 3,
+  "first": {
+    "blocks_download": false,
+    "diagnostics": [],
+    "download_events": 0,
+    "operations": [
+      {
+        "consumed": {
+          "candidates": 2,
+          "charged_read_bytes": 5768,
+          "discovery_entries": 6,
+          "discovery_groups": 4,
+          "elapsed_seconds": 0.124025,
+          "observed_charge_bytes": 5768
+        },
+        "limits": {
+          "max_bytes": 268435456,
+          "max_candidates": 16,
+          "max_discovery_entries": 4096,
+          "max_discovery_groups": 256,
+          "timeout_seconds": 30.0
+        },
+        "operation": "local_read_budget",
+        "phase": "auxiliary_read",
+        "reason": "no_matching_local_period",
+        "schema_version": "local-read-budget/1",
+        "triggered_bound": null,
+        "usage_scope": "local_original_verification"
+      }
+    ],
+    "reason": "no_matching_local_period",
+    "schema_version": "local-source-prepare/1",
+    "source_ref": null,
+    "status": "not_found"
+  },
+  "original_sha256": "6301c771c1aa49c0a3d528cf587229d4fba77ceae6369cfa33a59ad156cd6498",
+  "second": {
+    "blocks_download": false,
+    "diagnostics": [],
+    "download_events": 0,
+    "operations": [
+      {
+        "consumed": {
+          "candidates": 2,
+          "charged_read_bytes": 876,
+          "discovery_entries": 6,
+          "discovery_groups": 4,
+          "elapsed_seconds": 0.047307,
+          "observed_charge_bytes": 876
+        },
+        "limits": {
+          "max_bytes": 268435456,
+          "max_candidates": 16,
+          "max_discovery_entries": 4096,
+          "max_discovery_groups": 256,
+          "timeout_seconds": 30.0
+        },
+        "operation": "local_read_budget",
+        "phase": "source_entry_discovery",
+        "reason": "no_matching_local_period",
+        "schema_version": "local-read-budget/1",
+        "triggered_bound": null,
+        "usage_scope": "local_original_verification"
+      }
+    ],
+    "reason": "no_matching_local_period",
+    "schema_version": "local-source-prepare/1",
+    "source_ref": null,
+    "status": "not_found"
+  },
+  "target": {
+    "blocks_download": true,
+    "diagnostics": [
+      {
+        "document_id": "urn:company-wiki:document:sha256:6301c771c1aa49c0a3d528cf587229d4fba77ceae6369cfa33a59ad156cd6498",
+        "reason": "local_metadata_unreadable",
+        "status": "blocked"
+      }
+    ],
+    "download_events": 0,
+    "operations": [
+      {
+        "consumed": {
+          "candidates": 2,
+          "charged_read_bytes": 883,
+          "discovery_entries": 0,
+          "discovery_groups": 0,
+          "elapsed_seconds": 0.043583,
+          "observed_charge_bytes": 883
+        },
+        "limits": {
+          "max_bytes": 268435456,
+          "max_candidates": 16,
+          "max_discovery_entries": 4096,
+          "max_discovery_groups": 256,
+          "timeout_seconds": 30.0
+        },
+        "operation": "local_read_budget",
+        "phase": "metadata_read",
+        "reason": "local_metadata_gap",
+        "schema_version": "local-read-budget/1",
+        "triggered_bound": null,
+        "usage_scope": "local_original_verification"
+      }
+    ],
+    "reason": "local_metadata_gap",
+    "schema_version": "local-source-prepare/1",
+    "source_ref": null,
+    "status": "blocked"
+  }
+}

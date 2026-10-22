@@ -1,0 +1,440 @@
+{
+  "schema_version": "r1-local-observation-rf-independent-review/1",
+  "status": "PASS_RF_LOCAL_OBSERVATION_CONSUMER_ONLY",
+  "reviewed_at_utc": "2026-10-22T20:32:14.809868+00:00",
+  "reviewer": "non-author; did not implement this RF consumer or its author tests",
+  "product_commit": "dedebe0be27bad0723e6a642be5083bf53b357fc",
+  "observed_docs_HEAD": "32f013a979dedd6310a43877e818c69f614dd2b2",
+  "author_git_status": "",
+  "sole_runtime": "scripts/filing_upstream_cause.py",
+  "runtime_physical_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+  "source_fingerprints": {
+    "scripts/filing_upstream_cause.py": {
+      "physical_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "physical_bytes": 32785,
+      "lf_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "git_blob_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08"
+    },
+    "tests/contract/host_assumption_baseline.json": {
+      "physical_sha256": "1a849d32d6f7b76ca85bf67b6cfcd776febf19bb18c97cb8c7fe334c657802e8",
+      "physical_bytes": 2969,
+      "lf_sha256": "1a849d32d6f7b76ca85bf67b6cfcd776febf19bb18c97cb8c7fe334c657802e8",
+      "git_blob_sha256": "1a849d32d6f7b76ca85bf67b6cfcd776febf19bb18c97cb8c7fe334c657802e8"
+    },
+    "tests/fixtures/r1_local_observation/README.md": {
+      "physical_sha256": "daa50f8129fb36dea91511f636059792465e2dcbd7e65c71d8a9e770bd5a8f81",
+      "physical_bytes": 642,
+      "lf_sha256": "daa50f8129fb36dea91511f636059792465e2dcbd7e65c71d8a9e770bd5a8f81",
+      "git_blob_sha256": "daa50f8129fb36dea91511f636059792465e2dcbd7e65c71d8a9e770bd5a8f81"
+    },
+    "tests/fixtures/r1_local_observation/ff-v2-failure.json": {
+      "physical_sha256": "f746446b622ba2354229d9826c781ac5d23146913c57e740a3c37ac9fb36e8b9",
+      "physical_bytes": 2352,
+      "lf_sha256": "c9f455c288157bc1246d974ae29ee5fe9d46fb2f61e39ede4ab9a6f2df725d7e",
+      "git_blob_sha256": "c9f455c288157bc1246d974ae29ee5fe9d46fb2f61e39ede4ab9a6f2df725d7e"
+    },
+    "tests/test_r1_local_preparation_observation.py": {
+      "physical_sha256": "fb6699a6e5eb9201b32ea35397b7c2c5c439ea6fb2941ec1fc742112abd46b4d",
+      "physical_bytes": 14218,
+      "lf_sha256": "fb6699a6e5eb9201b32ea35397b7c2c5c439ea6fb2941ec1fc742112abd46b4d",
+      "git_blob_sha256": "fb6699a6e5eb9201b32ea35397b7c2c5c439ea6fb2941ec1fc742112abd46b4d"
+    },
+    "tools/pre_push_gate.py": {
+      "physical_sha256": "5be48ef0ba8924c8d321328d29d362776e5159287ff30f618c8cd3c58d9b8562",
+      "physical_bytes": 5025,
+      "lf_sha256": "5be48ef0ba8924c8d321328d29d362776e5159287ff30f618c8cd3c58d9b8562",
+      "git_blob_sha256": "5be48ef0ba8924c8d321328d29d362776e5159287ff30f618c8cd3c58d9b8562"
+    }
+  },
+  "six_product_files_unchanged": true,
+  "tests": {
+    "independent_new_cases": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 3.12,
+    "exit": 0,
+    "cases": [
+      {
+        "name": "test_owner_future_fields_remain_opaque_and_deep_copied",
+        "seconds": 0.121,
+        "passed": true
+      },
+      {
+        "name": "test_unknown_provider_observations_stay_unknown_not_zero",
+        "seconds": 0.001,
+        "passed": true
+      },
+      {
+        "name": "test_legacy_no_optional_and_normal_gap_do_not_need_new_proof",
+        "seconds": 0.001,
+        "passed": true
+      },
+      {
+        "name": "test_optional_extension_does_not_raise_old_base_limit",
+        "seconds": 0.013,
+        "passed": true
+      },
+      {
+        "name": "test_exact_optional_128k_and_plus_one_copy_or_reject_whole",
+        "seconds": 0.101,
+        "passed": true
+      },
+      {
+        "name": "test_small_bad_optional_cannot_claim_full_but_safe_cause_and_exit_survive[version]",
+        "seconds": 0.001,
+        "passed": true
+      },
+      {
+        "name": "test_small_bad_optional_cannot_claim_full_but_safe_cause_and_exit_survive[physical_schema]",
+        "seconds": 0.003,
+        "passed": true
+      },
+      {
+        "name": "test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[duplicate]",
+        "seconds": 0.004,
+        "passed": true
+      },
+      {
+        "name": "test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[truncated]",
+        "seconds": 0.003,
+        "passed": true
+      },
+      {
+        "name": "test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[raw_cap]",
+        "seconds": 0.005,
+        "passed": true
+      },
+      {
+        "name": "test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[untrusted_wrapper]",
+        "seconds": 0.022,
+        "passed": true
+      },
+      {
+        "name": "test_large_invalid_optional_cannot_use_new_extended_window",
+        "seconds": 0.004,
+        "passed": true
+      },
+      {
+        "name": "test_actual_rf_child_and_preparation_keep_final_ff_wire[filing_fetch_client.py-False]",
+        "seconds": 0.493,
+        "passed": true
+      },
+      {
+        "name": "test_actual_rf_child_and_preparation_keep_final_ff_wire[filing_fetch_client.py-True]",
+        "seconds": 0.434,
+        "passed": true
+      },
+      {
+        "name": "test_actual_rf_child_and_preparation_keep_final_ff_wire[source_preparation.py-False]",
+        "seconds": 0.833,
+        "passed": true
+      },
+      {
+        "name": "test_actual_rf_child_and_preparation_keep_final_ff_wire[source_preparation.py-True]",
+        "seconds": 0.976,
+        "passed": true
+      }
+    ],
+    "actual_RF_CLI_cases": 4,
+    "author_201_pass_one_skip_not_counted_as_independent": true,
+    "findings": []
+  },
+  "actual_child_proofs": {
+    "filing_fetch_client-True.json": {
+      "entry": "filing_fetch_client.py",
+      "rf_exit": 2,
+      "replayed_ff_exit": 2,
+      "local_producer_exit": 7,
+      "stderr_bytes": 82588,
+      "stderr_sha256": "dce9af571c991b8bd1831ecaf0ad40280d59d485c86b356dce4fa3856ac05602",
+      "complete_sidecar_sha256": "02f507a7a8473fb625778fba48c381a5824602c52fbde73483f8a25d85ff8771",
+      "expected_sidecar_sha256": "02f507a7a8473fb625778fba48c381a5824602c52fbde73483f8a25d85ff8771",
+      "diagnostics": 950,
+      "cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "companion": {
+        "status": "not_run",
+        "reason": "filing_failed_before_companion_dispatch",
+        "retryable": false,
+        "intent": "fetch_if_missing",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider": "company_ir",
+        "acquisition_limits": {
+          "max_bytes": 100000,
+          "timeout_seconds": 10,
+          "max_cost_usd": "0"
+        },
+        "provider_started": false,
+        "provider_requests": 0,
+        "provider_response_bytes": 0,
+        "provider_usage_complete": true
+      },
+      "calls": 3,
+      "downloads": 0
+    },
+    "source_preparation-True.json": {
+      "entry": "source_preparation.py",
+      "rf_exit": 3,
+      "replayed_ff_exit": 2,
+      "local_producer_exit": 7,
+      "stderr_bytes": 82570,
+      "stderr_sha256": "7f67267748911fa5d47b86ddb1e56750a8c23e046ef8f2b82a3565c21e15715b",
+      "complete_sidecar_sha256": "02f507a7a8473fb625778fba48c381a5824602c52fbde73483f8a25d85ff8771",
+      "expected_sidecar_sha256": "02f507a7a8473fb625778fba48c381a5824602c52fbde73483f8a25d85ff8771",
+      "diagnostics": 950,
+      "cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "companion": {
+        "status": "not_run",
+        "reason": "filing_failed_before_companion_dispatch",
+        "retryable": false,
+        "intent": "fetch_if_missing",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider": "company_ir",
+        "acquisition_limits": {
+          "max_bytes": 100000,
+          "timeout_seconds": 10,
+          "max_cost_usd": "0"
+        },
+        "provider_started": false,
+        "provider_requests": 0,
+        "provider_response_bytes": 0,
+        "provider_usage_complete": true
+      },
+      "calls": 3,
+      "downloads": 0
+    },
+    "filing_fetch_client-False.json": {
+      "entry": "filing_fetch_client.py",
+      "rf_exit": 2,
+      "replayed_ff_exit": 2,
+      "local_producer_exit": 0,
+      "stderr_bytes": 2872,
+      "stderr_sha256": "db1177a7d62c1f4a7ff7d2fef46e46d0b5a05b3981d65c845ac03203d5839f5e",
+      "complete_sidecar_sha256": "05bd65183c7045a055616851a3cba2435d0888732b2df7873f708dd0450431ed",
+      "expected_sidecar_sha256": "05bd65183c7045a055616851a3cba2435d0888732b2df7873f708dd0450431ed",
+      "diagnostics": 1,
+      "cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "companion": {
+        "status": "not_run",
+        "reason": "filing_failed_before_companion_dispatch",
+        "retryable": false,
+        "intent": "fetch_if_missing",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider": "company_ir",
+        "acquisition_limits": {
+          "max_bytes": 100000,
+          "timeout_seconds": 10,
+          "max_cost_usd": "0"
+        },
+        "provider_started": false,
+        "provider_requests": 0,
+        "provider_response_bytes": 0,
+        "provider_usage_complete": true
+      },
+      "calls": 3,
+      "downloads": 0
+    },
+    "source_preparation-False.json": {
+      "entry": "source_preparation.py",
+      "rf_exit": 3,
+      "replayed_ff_exit": 2,
+      "local_producer_exit": 0,
+      "stderr_bytes": 2854,
+      "stderr_sha256": "e0958fc641657fbe7b51dae78b503fd90b3995a340089c5b9032ca8fd3c17820",
+      "complete_sidecar_sha256": "05bd65183c7045a055616851a3cba2435d0888732b2df7873f708dd0450431ed",
+      "expected_sidecar_sha256": "05bd65183c7045a055616851a3cba2435d0888732b2df7873f708dd0450431ed",
+      "diagnostics": 1,
+      "cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "local_prepare",
+        "code": "budget_exceeded",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "companion": {
+        "status": "not_run",
+        "reason": "filing_failed_before_companion_dispatch",
+        "retryable": false,
+        "intent": "fetch_if_missing",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider": "company_ir",
+        "acquisition_limits": {
+          "max_bytes": 100000,
+          "timeout_seconds": 10,
+          "max_cost_usd": "0"
+        },
+        "provider_started": false,
+        "provider_requests": 0,
+        "provider_response_bytes": 0,
+        "provider_usage_complete": true
+      },
+      "calls": 3,
+      "downloads": 0
+    }
+  },
+  "FF_fixture_provenance": {
+    "actual-cli-False.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-local-observation-ff-independent-20261022\\actual-cli-False.json",
+      "sha256": "0b4f1ef4818f6c9a1436372507cc9e1069e44cf69f90613ed18f1bb85647c07c"
+    },
+    "actual-cli-True.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-local-observation-ff-independent-20261022\\actual-cli-True.json",
+      "sha256": "a29759370d8b06476184a2d90719dcd731716238de40562f03377d0bd8fabe59"
+    }
+  },
+  "boundary_coverage": [
+    "actual RF client and source_preparation subprocesses replay this independent FF136 CLI small and123177-byte large envelope",
+    "complete FF sidecar/cause/local producer exit0 or7/3calls0downloads/company_ir-not_run copied unchanged",
+    "unknown provider_started and usage_complete remain null; local_io_usage remains null",
+    "opaque future owner status/code/namespaced schema/fields copied; max_candidates512 accepted without interpreting owner cap policy",
+    "deep copy isolation; no original source open/hash or identity/period verification is added",
+    "legacy no-optional failures and normal GAP unchanged",
+    "old16KiB base still enforced even when optional is present",
+    "exact131072B compact optional accepted,131073B rejects complete but safe cause remains independently available",
+    "bad small optional version/address cannot become complete; old safe cause/exit/calls retained",
+    "large raw window only for fully validated complete extension; invalid large optional does not inherit generic large-JSON acceptance",
+    "duplicates/truncation/raw1MiB overrun/untrusted large wrapper rejected"
+  ],
+  "wire_limits": {
+    "legacy_base_bytes": 16384,
+    "optional_compact_bytes": 131072,
+    "full_compact_bytes": 147456,
+    "legacy_small_error_characters": 65536,
+    "extended_raw_utf8_bytes": 1048576
+  },
+  "commands": {
+    "environment": "PYTHONPATH=<RF-author>/scripts; PYTHONDONTWRITEBYTECODE=1; PYTHON_DOTENV_DISABLED=1; own conftest removes credentials; child sitecustomize denies sockets",
+    "pytest": "python -B -X utf8 -m pytest -c <evidence>/pytest.ini <evidence>/test_consumer_independent.py --basetemp=<mother>/.planning/rforv --junitxml=<evidence>/final.xml -v --tb=short; exit0",
+    "ruff": "python -B -X utf8 -m ruff check scripts/filing_upstream_cause.py tests/test_r1_local_preparation_observation.py tools/pre_push_gate.py <two owned review files> --no-cache; exit0",
+    "mypy": "python -B -X utf8 -m mypy scripts/filing_upstream_cause.py scripts/contracts/ scripts/schema_compatibility.py scripts/filing_fetch_client.py scripts/trust_anchor.py scripts/company_wiki_narrative_contracts.py --cache-dir=<mother>/.planning/rforv/mypy; exit0,13 source files"
+  },
+  "scope": {
+    "external_API_calls": 0,
+    "provider_calls": 0,
+    "LLM_calls": 0,
+    "fees_usd": "0",
+    "downloads": 0,
+    "true_keys_read": false,
+    "originals_opened_or_modified": false,
+    "production_config_modified": false,
+    "author_source_test_or_index_edits": false,
+    "author_scripts_run_unfrozen": false,
+    "installed_files_modified": false,
+    "merge_push_commit_by_reviewer": false,
+    "new_permission_identity_budget_semantic_decisions": false,
+    "new_test_gate": false
+  },
+  "cleanup": {
+    "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\rforv",
+    "files": 191,
+    "bytes": 10566636.0,
+    "initial_state": "absent (verified before testing)",
+    "final_state": "absent",
+    "author_roots_removed": 0,
+    "real_originals_removed": 0,
+    "at_utc": "2026-10-22T20:30:58.1204331Z"
+  },
+  "unresolved_findings": [],
+  "not_covered": [
+    "actual CWP producer local-read counters/partial operations against real originals",
+    "combined native CWP→FF→RF integration (ROOT-owned)",
+    "real provider/LLM calls or W07 paid/model-quality/actual RF formula consumption",
+    "main installation/publication/CI receipt (ROOT-owned)"
+  ],
+  "runtime_install_files": [
+    "scripts/filing_upstream_cause.py"
+  ],
+  "root_next": "Same independent acceptance node FF136 + RFdedebe is engineering-green. ROOT can integrate owner producer, run actual CWP→FF→RF offline join, selectively install consumer first, then publish producer.",
+  "evidence_manifest": {
+    "cleanup.json": {
+      "sha256": "adb7e96e0c745af515286b8461b76581680ae5a965d8a3c8af9390c4e500a6d5",
+      "bytes": 316
+    },
+    "conftest.py": {
+      "sha256": "49b71f8d02f9ae0d6a3f7eaf1f73b0147262d57f5b71ba2c147c832a8c39857b",
+      "bytes": 656
+    },
+    "ff-replay-provenance.json": {
+      "sha256": "e2fadbeb4910db5658727edee336b4a054a0ef542694b0a595770124c5df52ba",
+      "bytes": 623
+    },
+    "filing_fetch_client-False.json": {
+      "sha256": "f472f632c93c98be657c3cdae73fad7e803bf84c603f7243c708e58361dca278",
+      "bytes": 1210
+    },
+    "filing_fetch_client-True.json": {
+      "sha256": "3ee38835194a1bb702233b22cd6afd3694986ce9162972ea7705f3a82ec112b5",
+      "bytes": 1213
+    },
+    "final-mypy.log": {
+      "sha256": "a3aaf5f81b19b41bca4db48201304558d1f7ca3800bae38ee86392e044969fad",
+      "bytes": 45
+    },
+    "final-ruff.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "final-static.json": {
+      "sha256": "0d1a0d76015839305099441a344470685d97e4f3422a15288bdb75a689f9fbd6",
+      "bytes": 71
+    },
+    "final.log": {
+      "sha256": "16234a1f2bd1139a96bd66baeb0a37be06b0e12f7767db601fb39c6038f2a55b",
+      "bytes": 5228
+    },
+    "final.xml": {
+      "sha256": "36aa4da9c33c3902fad0f40426313442397ad1854db172f0cd402863041df2c9",
+      "bytes": 2577
+    },
+    "pytest.ini": {
+      "sha256": "aaabed120d2fb059160bb38bf8843dc0bbb6abca5f013dffb5228bfffb9a3404",
+      "bytes": 39
+    },
+    "source-after.json": {
+      "sha256": "7a64a05177a3fdefc7ff8eb883457884578a5a6d4193266c75438a2ffc1097a0",
+      "bytes": 1853
+    },
+    "source-before.json": {
+      "sha256": "5bca9cdcb2ad99b09f7210cdbe78a35e7d056d6731e1a497aaaeb34c766f63de",
+      "bytes": 2338
+    },
+    "source_preparation-False.json": {
+      "sha256": "c5e91ddc62aa0e4de25e2eb0637233e524a83e7e590af216a9f57f718ddedc39",
+      "bytes": 1209
+    },
+    "source_preparation-True.json": {
+      "sha256": "9c381d55971bb265055ae3eec4928556db71b2d8ca354d3ab751c45cd4c61cf3",
+      "bytes": 1212
+    },
+    "test_consumer_independent.py": {
+      "sha256": "8eaf63b95474f30701541038c8e6bf58a408b28844107f99ed50e0bf41c82b7c",
+      "bytes": 11094
+    }
+  }
+}

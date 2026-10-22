@@ -59,6 +59,9 @@ CURRENT_CI_REGRESSION_CASES = (
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
 )
 FAST_CONTRACT_CASES = (
+    # Fast owner/history checks; the three-repository CLI stays at integration.
+    "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+    "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
     # Small OCR resource regressions; real model replay remains a major-node test.
     'tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer',
     'tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget',

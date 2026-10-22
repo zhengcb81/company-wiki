@@ -1,0 +1,23 @@
+{
+  "consumed": {
+    "candidates": 0,
+    "charged_read_bytes": 0,
+    "discovery_entries": 0,
+    "discovery_groups": 0,
+    "elapsed_seconds": 0.015907,
+    "observed_charge_bytes": 16
+  },
+  "limits": {
+    "max_bytes": 1024,
+    "max_candidates": 16,
+    "max_discovery_entries": 4096,
+    "max_discovery_groups": 256,
+    "timeout_seconds": 30.0
+  },
+  "operation": "local_read_budget",
+  "phase": "metadata_read",
+  "reason": "cancelled",
+  "schema_version": "local-read-budget/1",
+  "triggered_bound": "cancelled",
+  "usage_scope": "local_original_verification"
+}

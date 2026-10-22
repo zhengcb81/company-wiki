@@ -1,0 +1,272 @@
+{
+  "schema_version": "r1-local-observation-root-integration/1",
+  "observed_at": "2026-10-22T20:48:17.715879+00:00",
+  "status": "THREE_LAYERS_INTEGRATED_CWP_NORMAL_PUBLICATION_NEXT",
+  "producer": {
+    "product": "27be00fb",
+    "main_merge": "69a5490baab216fe6d234c53c5f8e7c51672da25",
+    "runtime": {
+      "src\\company_wiki\\source_catalog\\local_inventory.py": {
+        "raw_sha256": "59c8a70d2acc46cdbe77d1dd87e0fca30f9ce9108c683bbc2b6a7b0901d6276b",
+        "lf_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550"
+      },
+      "src\\company_wiki\\source_catalog\\local_reconcile.py": {
+        "raw_sha256": "c677faed036a5c8973c510015b41fa092dbe97afe851873ca650a4e8dd5da8e6",
+        "lf_sha256": "0a6b5cc2972791380b24ec306f53f0535473bf9b3961c7ea2cc9c8f9591a4126"
+      }
+    },
+    "independent_final_passed": 49,
+    "review": "r1-local-observation-cwp-independent-20261022.json",
+    "prior_96ca_review": "48PASS1RED; discovery history common root fixed; old evidence retained"
+  },
+  "ff": {
+    "product": "136ab5a627083f173c60fc88b7b3f74879a4bf99",
+    "main_remote": "7f6a9268da90281c28b55d437860bc2d2b60106e",
+    "independent_passed": 18,
+    "normal_push_passed": 931,
+    "normal_push_skipped": 7,
+    "normal_push_subtests": 78,
+    "ci": {
+      "id": 39850675373,
+      "head_sha": "7f6a9268da90281c28b55d437860bc2d2b60106e",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39850675373"
+    },
+    "test_only_followup": "7f6a926 fixes four old helper fixtures missing limits; all original assertions retained and strengthened; runtime bytes unchanged",
+    "installation": {
+      "only_runtime_files": [
+        "scripts/fetch_filing.py",
+        "scripts/ff_local_source_prepare.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/filing_contracts.py",
+        "scripts/ff_local_preparation_observation.py"
+      ],
+      "physical_writes": 10,
+      "outside_scope_file_metadata_unchanged": 45,
+      "schema_version": "local-observation-ff-selective-install/1",
+      "checks": [
+        {
+          "stdout": "observation imports PASS",
+          "exit": 0,
+          "logical_root": ".agents"
+        },
+        {
+          "stdout": "observation imports PASS",
+          "exit": 0,
+          "logical_root": ".claude"
+        },
+        {
+          "stdout": "observation imports PASS",
+          "exit": 0,
+          "logical_root": ".codex"
+        }
+      ],
+      "new_downloads": 0,
+      "physical_roots": [
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch"
+      ],
+      "new_model_calls": 0,
+      "observed_at": "2026-10-22T20:37:09.8359837Z"
+    }
+  },
+  "rf": {
+    "product": "dedebe0be27bad0723e6a642be5083bf53b357fc",
+    "main_remote": "10bf611166013bd68ce14bfa19bb70e89a92dd5b",
+    "independent_passed": 16,
+    "normal_push_passed": 582,
+    "normal_push_skipped": 1,
+    "normal_push_subtests": 36,
+    "installation": {
+      "schema_version": "local-observation-rf-selective-install/1",
+      "method": "Native PowerShell exact-byte same-directory atomic move",
+      "physical_targets": 2,
+      "timestamp": "2026-10-22T20:32:04.0924885Z",
+      "physical_writes": 2,
+      "targets": [
+        {
+          "physical_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast",
+          "before_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "after_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08"
+        },
+        {
+          "physical_root": "C:/Users/郑曾波/.codex/skills/revenue-forecast",
+          "before_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "after_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08"
+        }
+      ],
+      "new_downloads": 0,
+      "selected": [
+        "scripts/filing_upstream_cause.py"
+      ],
+      "source_sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+      "outside_scope_file_metadata_unchanged": 566,
+      "checks": [
+        {
+          "exit": 0,
+          "stdout": "final consumer import PASS",
+          "sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+          "logical_root": ".agents"
+        },
+        {
+          "exit": 0,
+          "stdout": "final consumer import PASS",
+          "sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+          "logical_root": ".claude"
+        },
+        {
+          "exit": 0,
+          "stdout": "final consumer import PASS",
+          "sha256": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+          "logical_root": ".codex"
+        }
+      ],
+      "new_paid_calls": 0
+    }
+  },
+  "real_join": {
+    "old_current_producer": "1 genuine RED, owner budget operation absent",
+    "reviewed_candidate": "1 PASS7.43s",
+    "mainline_to_installed_ff_rf": "1 PASS8.19s",
+    "scenario": "Actual257 local source groups exceed native256; same owner counters/trigger/phase/limits survive CWP CLI -> installed FF -> installed RF source-preparation CLI",
+    "no_mock_upstream_result": true,
+    "network_attempts": 0,
+    "downloads": 0,
+    "model_calls": 0,
+    "coverage_limit": "Single concrete owner-budget flow; large wire and prior-history controls are separate independent suites, not claimed by this case."
+  },
+  "new_gate_or_permission": false,
+  "caps_increased": false,
+  "remaining": [
+    "normal CWP push and exact CI",
+    "W06 full forecast four quality reviews",
+    "HK/US holdouts"
+  ],
+  "artifacts": [
+    {
+      "path": "ff-legacy-limits-green.log",
+      "bytes": 101,
+      "sha256": "efbe19a935a845a23ac114099aa70866b982c01523544b811e7e6862a5ab4614"
+    },
+    {
+      "path": "ff-legacy-limits-green.xml",
+      "bytes": 3156,
+      "sha256": "c3d43b6990664f415c94e9e1714a37f9541a7ddd178ec691e508fced80ed04a3"
+    },
+    {
+      "path": "ff-local-observation-ci-success.json",
+      "bytes": 225,
+      "sha256": "b45061e47194233131a5a9a4ad801cd41dbc8ed02cb6ae5d0b272bab7b1669c6"
+    },
+    {
+      "path": "ff-local-observation-fixed-push.log",
+      "bytes": 2341,
+      "sha256": "297389aee1f433ab00ea286729a9d86236c97c172d7a0a8acb37bb5cca1d1b45"
+    },
+    {
+      "path": "ff-local-observation-install-plan.json",
+      "bytes": 4231,
+      "sha256": "565c9e662c442f268a6ac6067dbdccfa38be4f6c40211050392c3e118ae89baa"
+    },
+    {
+      "path": "ff-local-observation-install-receipt.json",
+      "bytes": 970,
+      "sha256": "ae1323e7a961182e07ebf44bb630f59f93fb777acf658d4d6092a7e17238b91f"
+    },
+    {
+      "path": "ff-local-observation-push.log",
+      "bytes": 3756,
+      "sha256": "9555f8560a2a9b8ac1e08058e894afd2c17a7fe6ef29d32759f0667076646bf8"
+    },
+    {
+      "path": "local-observation-ci.json",
+      "bytes": 894,
+      "sha256": "43abdfe1b5ab95df000944bf5a9f2374e03075141baf5d7a10495f4052c4eb34"
+    },
+    {
+      "path": "local-observation-fast-two.log",
+      "bytes": 1005,
+      "sha256": "ceb944ccb28a6b6b7feb59004fb5deba4126a42c04c2a31a276e590285d24325"
+    },
+    {
+      "path": "local-observation-join-cleanup.json",
+      "bytes": 152,
+      "sha256": "4b17acc7e9b31db47730922d99ea3fdbde561dd4f650d5d71cd035de0b9650f6"
+    },
+    {
+      "path": "local-observation-main-join.log",
+      "bytes": 1048,
+      "sha256": "03f201edcb0d18f6a42a11b3a563ac39cd28f2e5004fadd67eaeae5acb7db77f"
+    },
+    {
+      "path": "local-observation-main-join.xml",
+      "bytes": 419,
+      "sha256": "76c3531477f465da215ca287f155e6f80e4afb3a94c1f13c1f05e9366a88ff46"
+    },
+    {
+      "path": "local-observation-main-wire.json",
+      "bytes": 2107,
+      "sha256": "9523dabd9bb83efcce98def8d13abfa1d1bfcfb49d7e98d4ff93b7df904b9975"
+    },
+    {
+      "path": "local-observation-old-producer-red.log",
+      "bytes": 1851,
+      "sha256": "df666dee0881dda2b9fa8c3ab593851c7e9222e0946867c7edd060af0e8728ab"
+    },
+    {
+      "path": "local-observation-old-producer-red.xml",
+      "bytes": 1107,
+      "sha256": "0ead4ffa366096876b0c940a5b197fde848d6a306a1b138fd92b072fa3099795"
+    },
+    {
+      "path": "local-observation-old-producer-wire.json",
+      "bytes": 1543,
+      "sha256": "35947ef2f5aa56067e73aa467662270f16a9bc02639eb1ca5f3144bb85eac919"
+    },
+    {
+      "path": "local-observation-real-join.log",
+      "bytes": 1048,
+      "sha256": "87dc016cb4fe0f7d0a6117367a221af100ec59dca3acdc95326b1b9812b5d6b3"
+    },
+    {
+      "path": "local-observation-real-join.xml",
+      "bytes": 419,
+      "sha256": "5020e18859c6b9a431941ee27bab2dc47f294b959e960095e07e598087ae8323"
+    },
+    {
+      "path": "local-observation-real-wire.json",
+      "bytes": 2107,
+      "sha256": "c72d6c7daa21736380d95a8547bdf5385e27ea740f7f7c5007fa11fe46eed4eb"
+    },
+    {
+      "path": "local-observation-root-temp-cleanup.json",
+      "bytes": 390,
+      "sha256": "f845dddd06c0f25b6d49eaa6ade012e6c938292cae3fcf0338fdb3c5f3095f86"
+    },
+    {
+      "path": "rf-local-observation-install-receipt.json",
+      "bytes": 1888,
+      "sha256": "4b4ebffd3b7cb0c6328704fd7f19a49c657aefd1272b60ddcada7c55db2fa13d"
+    },
+    {
+      "path": "rf-local-observation-push.log",
+      "bytes": 789,
+      "sha256": "5998bd2a9b1670412342e655a96ac008e452a8b6023e06852fd5a1b97933bb27"
+    }
+  ],
+  "fast_existing_smoke_added_cases": 2,
+  "root_owned_temp_restored": {
+    "initially_absent": true,
+    "retained_evidence": ".planning/r1-w03-join and versioned PWF receipts",
+    "restored_absent": true,
+    "schema_version": "root-local-observation-temp-cleanup/1",
+    "original_downloads": 0,
+    "model_calls": 0,
+    "files_removed": 2372,
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\lbtmp",
+    "bytes_removed": 79471652.0
+  }
+}

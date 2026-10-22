@@ -1,0 +1,42 @@
+{
+  "product_commit": "96ca254d60fe416598e47d108b5f561d2dc48179",
+  "HEAD": "37bb74fcce365e51e53b40b3d69699d2254b06ea",
+  "files": {
+    "src/company_wiki/source_catalog/local_inventory.py": {
+      "physical_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "physical_bytes": 15533,
+      "lf_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550",
+      "git_blob_sha256": "11d2dd529216d17d982c673b490754b8b199123ae43302047527282c9f8c4550"
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "physical_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c",
+      "physical_bytes": 40725,
+      "lf_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c",
+      "git_blob_sha256": "9f4f282fdc267219341f6f3b3c4e0a7d264841c458afc12eaa9f72b92054530c"
+    },
+    "tests/unit/test_local_budget_observation.py": {
+      "physical_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "physical_bytes": 7593,
+      "lf_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae",
+      "git_blob_sha256": "072358df5e0dbaf2965d6e770280584f91d1e9f65582b269fee3823565819eae"
+    },
+    "tests/contract/test_local_prepare_failure_boundaries.py": {
+      "physical_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48",
+      "physical_bytes": 3510,
+      "lf_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48",
+      "git_blob_sha256": "6802723f93807a36c3bec22f68f902acbb436af7851ad461eb325870a24b6d48"
+    },
+    "tests/contract/test_local_request_relevance.py": {
+      "physical_sha256": "18c85868c81acaf19cc4725c104999bcc0c6611a03a26b03dc5ef047543d7bb2",
+      "physical_bytes": 15907,
+      "lf_sha256": "2b38aa926d19dfbae7d0de568c8a792789965c17f5f7d1347caa5a6b05035557",
+      "git_blob_sha256": "2b38aa926d19dfbae7d0de568c8a792789965c17f5f7d1347caa5a6b05035557"
+    },
+    "tests/unit/test_latest_local_source_discovery.py": {
+      "physical_sha256": "93b1326c7cbdf998e26d16c59ce2a90c62066e8c90676337bc6ebaa16d5e14f9",
+      "physical_bytes": 5494,
+      "lf_sha256": "2a12d7b87d870e865e31235ba83d943f61fec5edea6e66137dca7ce7d5bb2076",
+      "git_blob_sha256": "2a12d7b87d870e865e31235ba83d943f61fec5edea6e66137dca7ce7d5bb2076"
+    }
+  }
+}

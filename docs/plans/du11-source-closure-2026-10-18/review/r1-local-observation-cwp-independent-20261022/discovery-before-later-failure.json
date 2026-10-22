@@ -1,0 +1,48 @@
+{
+  "owner_completed": [
+    {
+      "assertion_id": "sa-57bb587203394f8da3c74acf4c352177",
+      "restore_audit_id": null,
+      "status": "recorded"
+    }
+  ],
+  "result": {
+    "blocks_download": true,
+    "diagnostics": [],
+    "download_events": 0,
+    "operations": [
+      {
+        "assertion_id": "sa-57bb587203394f8da3c74acf4c352177",
+        "restore_audit_id": null,
+        "status": "recorded"
+      },
+      {
+        "consumed": {
+          "candidates": 4,
+          "charged_read_bytes": 976,
+          "discovery_entries": 2,
+          "discovery_groups": 1,
+          "elapsed_seconds": 0.535118,
+          "observed_charge_bytes": 976
+        },
+        "limits": {
+          "max_bytes": 268435456,
+          "max_candidates": 16,
+          "max_discovery_entries": 4096,
+          "max_discovery_groups": 256,
+          "timeout_seconds": 30.0
+        },
+        "operation": "local_read_budget",
+        "phase": "original_read",
+        "reason": "fiscal_period_unresolved",
+        "schema_version": "local-read-budget/1",
+        "triggered_bound": null,
+        "usage_scope": "local_original_verification"
+      }
+    ],
+    "reason": "fiscal_period_unresolved",
+    "schema_version": "local-source-prepare/1",
+    "source_ref": null,
+    "status": "blocked"
+  }
+}

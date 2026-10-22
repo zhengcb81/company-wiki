@@ -1,0 +1,29 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0 -- C:\Miniconda\python.exe
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+metadata: {'Python': '3.13.9', 'Platform': 'Windows-11-10.0.26300-SP0', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.5.0'}, 'Plugins': {'anyio': '4.13.0', 'Faker': '40.19.1', 'langsmith': '0.14.4', 'asyncio': '1.3.0', 'base-url': '2.1.0', 'benchmark': '5.2.3', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1', 'mock': '3.15.1', 'playwright': '0.7.2', 'timeout': '2.4.0', 'xdist': '3.8.0'}, 'Base URL': ''}
+rootdir: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 16 items
+
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_owner_future_fields_remain_opaque_and_deep_copied PASSED [  6%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_unknown_provider_observations_stay_unknown_not_zero PASSED [ 12%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_legacy_no_optional_and_normal_gap_do_not_need_new_proof PASSED [ 18%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_optional_extension_does_not_raise_old_base_limit PASSED [ 25%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_exact_optional_128k_and_plus_one_copy_or_reject_whole PASSED [ 31%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_small_bad_optional_cannot_claim_full_but_safe_cause_and_exit_survive[version] PASSED [ 37%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_small_bad_optional_cannot_claim_full_but_safe_cause_and_exit_survive[physical_schema] PASSED [ 43%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[duplicate] PASSED [ 50%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[truncated] PASSED [ 56%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[raw_cap] PASSED [ 62%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_extended_raw_window_is_bounded_and_not_generic_large_json_permission[untrusted_wrapper] PASSED [ 68%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_large_invalid_optional_cannot_use_new_extended_window PASSED [ 75%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_actual_rf_child_and_preparation_keep_final_ff_wire[filing_fetch_client.py-False] PASSED [ 81%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_actual_rf_child_and_preparation_keep_final_ff_wire[filing_fetch_client.py-True] PASSED [ 87%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_actual_rf_child_and_preparation_keep_final_ff_wire[source_preparation.py-False] PASSED [ 93%]
+..\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\test_consumer_independent.py::test_actual_rf_child_and_preparation_keep_final_ff_wire[source_preparation.py-True] PASSED [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-local-observation-rf-independent-20261022\final.xml -
+============================= 16 passed in 3.12s ==============================

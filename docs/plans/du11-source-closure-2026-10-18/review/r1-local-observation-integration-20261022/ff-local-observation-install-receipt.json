@@ -1,0 +1,36 @@
+{
+  "only_runtime_files": [
+    "scripts/fetch_filing.py",
+    "scripts/ff_local_source_prepare.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/ff_local_preparation_observation.py"
+  ],
+  "physical_writes": 10,
+  "outside_scope_file_metadata_unchanged": 45,
+  "schema_version": "local-observation-ff-selective-install/1",
+  "checks": [
+    {
+      "stdout": "observation imports PASS",
+      "exit": 0,
+      "logical_root": ".agents"
+    },
+    {
+      "stdout": "observation imports PASS",
+      "exit": 0,
+      "logical_root": ".claude"
+    },
+    {
+      "stdout": "observation imports PASS",
+      "exit": 0,
+      "logical_root": ".codex"
+    }
+  ],
+  "new_downloads": 0,
+  "physical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+    "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch"
+  ],
+  "new_model_calls": 0,
+  "observed_at": "2026-10-22T20:37:09.8359837Z"
+}
