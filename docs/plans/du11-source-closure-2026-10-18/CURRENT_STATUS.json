@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-22",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W07_LIVE_LIFECYCLE_PUBLIC_RF_READ_PASS_W06_RESEARCH_NEXT",
+  "overall_status": "ACTIVE_W06_FINAL3_FOUR_REVIEWS_FAIL_ROOT_CAUSE_PLAN_RUNNING_AUDIT_SKILL_UPGRADE_COMPLETE",
   "current_authorized_scope": "resumed_2026_10_22_continue_PWF_W03_then_W07_W06_and_fresh_holdouts",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -10,8 +10,12 @@
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
   "last_code_commit": "69a5490baab216fe6d234c53c5f8e7c51672da25",
   "code_ci": {
-    "status": "NEW_PRODUCER_NOT_YET_PUSHED",
-    "scope_note": "755e87cd W07 CI SUCCESS is earlier code; CWP new producer normal push next."
+    "id": 39854576322,
+    "head_sha": "aa2dd822faed3b464a713cff737ba425dd6e2a91",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39854576322",
+    "scope_note": "Actual published producer and CI success; supersedes historical pending-push state."
   },
   "completed": {
     "b2": {
@@ -90,7 +94,7 @@
       "content_quality": "NOT_YET_ACCEPTED",
       "independent_live_review": "PASS65_FINITE_CHECKS_LIFECYCLE_PUBLIC_READ_ONLY",
       "independent_review_ref": "review/r1-w07-live-independent-20261022.json",
-      "formula_consumption_status": "Actual public API consumed support span into a used native TIDES parameter/formula; native compute done, final author seal and quality reviews pending.",
+      "formula_consumption_status": "Actual public API support consumed in a used native TIDES parameter/formula. Final3 sealed; four business reviews FAIL, shared root-cause plan in preparation.",
       "consumption_capture_id": "66fb1d54f9f34ea484244999c60e8b6b"
     }
   },
@@ -118,13 +122,13 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W01_W02_W04_W05_ENGINEERING_REVIEWED_INTEGRATED_W03_NEXT_W06_W07_HOLDOUTS_OPEN",
+      "status": "W03_W07_ENGINEERING_LIVE_COMPLETE_W06_FINAL3_FOUR_REVIEWS_FAIL_ROOT_CAUSE_PLAN_RUNNING_HOLDOUTS_OPEN",
       "mainline": true
     },
     {
       "id": "R2",
       "task": "repair or remove experimental two-attempt coverage-repair recovery",
-      "status": "NEW_PAID_REPAIR_RETIRED_LEGACY_OWNER_ENGINEERING_FIXED_LIVE_SINGLE_OPERATION_RECOVERY_OPEN"
+      "status": "NEW_PAID_REPAIR_RETIRED_LEGACY_FIXED_REAL_SINGLE_OPERATION_RECOVERY_PASSED_W07_CONTENT_SEPARATE"
     },
     {
       "id": "R3",
@@ -147,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W06 final3 sealed, storage/process independent quality reviews running; dispatch fetch/analyst on free slots. Upgrade audit skill end stages with independent offline forward test and selective install. Then root-cause remediation and HK/US holdouts.",
+  "next_step_now": "Receive independent comprehensive final3 root-cause PWF for all 14 finding occurrences, reconcile counterevidence, implement shared corrections, retest original company, then HK/US holdouts. Skill steps7/8 effective in subsequent attempts; do not rewrite sealed history.",
   "next_step_after_user_resumes": "already_resumed_2026_10_22",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -179,7 +183,7 @@
     "minimax": "MiniMax-M3.1-Flash"
   },
   "historical_us_c_model": "MiniMax-M3",
-  "new_paid_calls_in_this_update": 1,
+  "new_paid_calls_in_this_update": 0,
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
@@ -198,7 +202,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-22T18:19:15.710106+00:00",
   "previous_pause_request": "Superseded by latest user continue request.",
-  "last_updated_at": "2026-10-22T21:12:07.030576+00:00",
+  "last_updated_at": "2026-10-22T21:56:19.364110+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -214,7 +218,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "SEALED_FOR_FOUR_INDEPENDENT_QUALITY_REVIEWS",
+    "status": "FOUR_INDEPENDENT_REVIEWS_COMPLETE_FAIL_EXPERT_ROOT_CAUSE_PLAN_RUNNING",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -222,20 +226,84 @@
     "business_pass": false,
     "author_arithmetic_checks": 1594,
     "author_arithmetic_not_independent_review": true,
-    "reviews_running": [
+    "reviews_running": [],
+    "reviews_pending": [],
+    "reviews_complete": [
       "storage",
-      "process"
-    ],
-    "reviews_pending": [
       "fetch",
+      "process",
       "analyst"
-    ]
+    ],
+    "known_outcomes": {
+      "storage": {
+        "outcome": "FAIL",
+        "checks": 18,
+        "counts": {
+          "PASS": 9,
+          "FAIL": 5,
+          "BLOCKED": 2,
+          "N/A": 2
+        },
+        "issues": 5,
+        "report_sha256": "50374edc361621f2d1aeb49dd1b1b325cc2d5f7eafd06c81d930bfd631064c9b"
+      },
+      "fetch": {
+        "outcome": "FAIL",
+        "checks": 17,
+        "counts": {
+          "PASS": 10,
+          "BLOCKED": 3,
+          "FAIL": 2,
+          "NOT_RUN": 1,
+          "N/A": 1
+        },
+        "issues": 3,
+        "report_sha256": "f91a9b5c8b970876705ca0b778a5ab00f5b81b0e062d7f606589699053e01b6c"
+      },
+      "process": {
+        "outcome": "FAIL",
+        "checks": 20,
+        "counts": {
+          "PASS": 14,
+          "FAIL": 3,
+          "N/A": 3
+        },
+        "issues": 3,
+        "report_sha256": "e4868ec2cab4ae824e3b50655f698ba26a77d3f846dd32ce84868383d66c32d1"
+      },
+      "analyst": {
+        "outcome": "FAIL",
+        "checks": 18,
+        "counts": {
+          "PASS": 11,
+          "FAIL": 2,
+          "BLOCKED": 4,
+          "N/A": 1
+        },
+        "issues": 3,
+        "report_sha256": "4397d6a3f020bbc9d48a8ba232bcfe91b418ae74499be1777f2af0f80f4bb33a"
+      }
+    },
+    "review_index": "review/r1-phase-b-four-review-index-20261022.json"
   },
   "audit_skill_quality_upgrade": {
-    "status": "SOURCE_FROZEN_INDEPENDENT_SEVEN_SCENARIO_FORWARD_TEST_RUNNING",
+    "status": "COMPLETE_INDEPENDENTLY_REVIEWED_COMMITTED_INSTALLED_CLEANED",
     "owner_project": "revenue-forecast-audit",
     "plan": "docs/plans/audit-continuous-quality-20261022",
     "scope": "final shared code/architecture and revenue research quality improvement; generalize new risks into future audit detection; no rewrite of sealed history",
-    "source_tree_sha256": "96b1dedfa8ccb97c0acc0dd6f250db63ffe7b45bff3ebc09127e0c20a1f075cb"
+    "source_tree_sha256": "f50bf54b0d3c49c59081814846432110468b6b797df0b700ab79fe0e314556f0",
+    "validation": {
+      "offline_cases": 7,
+      "independent_real_cli_probes": 10,
+      "full_tests_run": 632,
+      "skipped": 2,
+      "failures": 0,
+      "seconds": 103.965
+    },
+    "code_commit": "623054ca6b33d6a039137065271ad65b6552ba3d",
+    "code_remote": null,
+    "publication_commit": "738d99a8cdcf7f33b96e89f4e304b3440e4c5e51",
+    "closeout_ref": "review/audit-skill-quality-closeout-20261022.json",
+    "publication_byte_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json"
   }
 }

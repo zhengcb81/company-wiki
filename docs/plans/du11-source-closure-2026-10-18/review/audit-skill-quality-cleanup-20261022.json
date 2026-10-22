@@ -1,0 +1,30 @@
+{
+  "production_configuration_changed": 0,
+  "roots": [
+    {
+      "restored_absent": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\cqmaptest",
+      "files": 18,
+      "bytes": 122038,
+      "initially_absent": true
+    },
+    {
+      "restored_absent": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\audit-quality-forward-20261022",
+      "files": 4,
+      "bytes": 30482,
+      "initially_absent": true
+    },
+    {
+      "restored_absent": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\audit-quality-fix",
+      "files": 21,
+      "bytes": 257822,
+      "initially_absent": true
+    }
+  ],
+  "at": "2026-10-22T21:48:02.9113898Z",
+  "permanent_receipts": "revenue-forecast-audit/docs/plans/audit-continuous-quality-20261022/review",
+  "original_documents_removed": 0,
+  "schema_version": "audit-quality-owned-cleanup/1"
+}

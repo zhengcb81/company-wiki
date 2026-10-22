@@ -1,0 +1,138 @@
+{
+  "schema_version": "r1-phase-b-four-review-index/1",
+  "observed_at": "2026-10-22T21:47:15.786637+00:00",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "review_attempt": "r1-remediation-01",
+  "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+  "reports": [
+    {
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\storage.json",
+      "sha256": "50374edc361621f2d1aeb49dd1b1b325cc2d5f7eafd06c81d930bfd631064c9b",
+      "checks": {
+        "PASS": 9,
+        "FAIL": 5,
+        "BLOCKED": 2,
+        "N/A": 2
+      },
+      "findings": [
+        {
+          "issue_id": "STORAGE-R1-001",
+          "severity": "P1",
+          "category": "code"
+        },
+        {
+          "issue_id": "STORAGE-R1-002",
+          "severity": "P2",
+          "category": "code"
+        },
+        {
+          "issue_id": "STORAGE-R1-003",
+          "severity": "P2",
+          "category": "research"
+        },
+        {
+          "issue_id": "STORAGE-R1-004",
+          "severity": "P2",
+          "category": "observability"
+        },
+        {
+          "issue_id": "STORAGE-R1-005",
+          "severity": "P2",
+          "category": "provider"
+        }
+      ],
+      "outcome": "FAIL"
+    },
+    {
+      "role": "fetch",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\fetch.json",
+      "sha256": "f91a9b5c8b970876705ca0b778a5ab00f5b81b0e062d7f606589699053e01b6c",
+      "checks": {
+        "PASS": 10,
+        "BLOCKED": 3,
+        "FAIL": 2,
+        "NOT_RUN": 1,
+        "N/A": 1
+      },
+      "findings": [
+        {
+          "issue_id": "FETCH-001",
+          "severity": "P2",
+          "category": "observability"
+        },
+        {
+          "issue_id": "FETCH-002",
+          "severity": "P2",
+          "category": "provider"
+        },
+        {
+          "issue_id": "FETCH-003",
+          "severity": "P2",
+          "category": "provider"
+        }
+      ],
+      "outcome": "FAIL"
+    },
+    {
+      "role": "process",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\process.json",
+      "sha256": "e4868ec2cab4ae824e3b50655f698ba26a77d3f846dd32ce84868383d66c32d1",
+      "checks": {
+        "PASS": 14,
+        "FAIL": 3,
+        "N/A": 3
+      },
+      "findings": [
+        {
+          "issue_id": "PROCESS-001",
+          "severity": "P2",
+          "category": "research"
+        },
+        {
+          "issue_id": "PROCESS-002",
+          "severity": "P2",
+          "category": "data"
+        },
+        {
+          "issue_id": "PROCESS-003",
+          "severity": "P2",
+          "category": "observability"
+        }
+      ],
+      "outcome": "FAIL"
+    },
+    {
+      "role": "analyst",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\analyst.json",
+      "sha256": "4397d6a3f020bbc9d48a8ba232bcfe91b418ae74499be1777f2af0f80f4bb33a",
+      "checks": {
+        "PASS": 11,
+        "FAIL": 2,
+        "BLOCKED": 4,
+        "N/A": 1
+      },
+      "findings": [
+        {
+          "issue_id": "ANALYST-001",
+          "severity": "P2",
+          "category": "research"
+        },
+        {
+          "issue_id": "ANALYST-002",
+          "severity": "P1",
+          "category": "research"
+        },
+        {
+          "issue_id": "ANALYST-003",
+          "severity": "P2",
+          "category": "provider"
+        }
+      ],
+      "outcome": "FAIL"
+    }
+  ],
+  "finding_occurrences": 14,
+  "root_causes_not_counted_by_adding_reports": true,
+  "next": "Independent expert read source and all reports; diagnosis/remediation/r1-final3-review-20261022; no production modifications before plan."
+}

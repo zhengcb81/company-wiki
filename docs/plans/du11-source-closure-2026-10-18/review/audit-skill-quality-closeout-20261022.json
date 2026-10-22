@@ -1,0 +1,51 @@
+{
+  "schema_version": "audit-skill-quality-upgrade/1",
+  "observed_at": "2026-10-22T21:56:19.364110+00:00",
+  "owner_project": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+  "code_commit": "623054ca6b33d6a039137065271ad65b6552ba3d",
+  "publication_commit": "738d99a8cdcf7f33b96e89f4e304b3440e4c5e51",
+  "remote": null,
+  "remote_note": "No remote configured; skill commits are local. CWP PWF will be pushed to its existing remote.",
+  "source_tree_sha256": "f50bf54b0d3c49c59081814846432110468b6b797df0b700ab79fe0e314556f0",
+  "independent_review": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json",
+    "sha256": "30b7d59b4b716d3d44cf90b05ed8f3f85af35217f378be7033b39c52ca028a27",
+    "outcome": "PASS"
+  },
+  "installation_check": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\root-reception\\publication-install-check.json",
+    "sha256": "ef76b0e5f2081283da7cf5990ad75c11265fc0a41b1b722155c8314e32393120",
+    "results": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 39,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 39,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      }
+    ]
+  },
+  "validation": {
+    "offline_cases": 7,
+    "independent_cli_probes": 10,
+    "full_tests_run": 632,
+    "passed": 630,
+    "skipped": 2,
+    "failures": 0,
+    "full_seconds": 103.965,
+    "installer_separate_tests": 6,
+    "scope_note": "Engineering regression and synthetic forward cases do not certify real company quality."
+  },
+  "cleanup": "review/audit-skill-quality-cleanup-20261022.json",
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "sealed_history_modified": false,
+  "new_approval_gates": 0
+}

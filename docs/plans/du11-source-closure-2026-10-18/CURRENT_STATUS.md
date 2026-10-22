@@ -6,15 +6,15 @@
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；已封存final3和完整15步/30次capture；ROOT实核501文件89,049,507B全匹配，来源与流程两位独审进行中，采集与模型两位待空槽调度，尚无四路业务质量结论。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
+**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；已封存final3和完整15步/30次capture；ROOT实核501文件89,049,507B全匹配，四路独审已全部封存FAIL，共14个finding出现（不能相加当不同根因）；包括业务漏选/上下文、业务摘录错配、矩阵旧状态及独立量级/资料限制。独立专家正在统一根因与新PWF，尚未修改产品或原封存。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
 
 当前实施接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
 
-唯一下一主线：**W06阶段B：将新摘要真实绑定实际使用的RF参数/公式，完成独立经营桥、15步预测与四路独审，再药明合联→Snowflake泛化。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，不把可读当内容完整或已入模型。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
+唯一下一主线：**W06阶段B已封存final3，汇齐四路独审后统一根因修复、受影响链复验，再药明合联→Snowflake泛化。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，实际公式消费已证明；不把可读/算式正确当内容完整或经济质量通过。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
 
 本地读取诊断共因跟进已三层独审并线：[ROOT组合收据](review/r1-local-observation-integration-20261022.md)。RF `10bf6111`、FF `7f6a9268`均已正常push、定点安装及精确CI SUCCESS；CWP最终 `27be00fb`独审49P并入主线 `69a5490b`，与两份已安装消费端真实联调通过，随 `aa2dd822`正常push（7097P/24S267.37s、146契约P36.11s），精确CI39854576322 SUCCESS。另5项旧contract及发现过程丢历史的真缺陷均已根修，保留原断言；只复用现有owner资格、不提高读取配额、不加权限门禁。
 
-并行技能升级：按用户要求在原六步后增加**全面代码质量/模块化/泛化及买方收入研究能力改善→由本公司新问题升级后续检测**。独立建设PWF位于`revenue-forecast-audit/docs/plans/audit-continuous-quality-20261022/`，源码已冻结，623工程测试OK（2skip）；正独立七场景行为试读，随后定点安装与正常提交，不改写本轮sealed材料。
+并行技能升级：按用户要求在原六步后增加**全面代码质量/模块化/泛化及买方收入研究能力改善→由本公司新问题升级后续检测**。独立建设PWF位于`revenue-forecast-audit/docs/plans/audit-continuous-quality-20261022/`，七场景独立试读、记录共因修复10个独立CLI反控及完整632测试（2skip）通过；安装工具有界修复另6项独立验证，使用默认Miniconda同步两目录39文件匹配。源码已提交623054c，发布收尾738d99a（该仓未配置远端）；Git原始收据字节与两个安装根39文件已独立核对，三个自有测试目录恢复原样。见[技能收尾收据](review/audit-skill-quality-closeout-20261022.json)。不改写本轮sealed材料。
 
 初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
 
@@ -43,8 +43,8 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | 已恢复；W01/W02/W04/W05工程完成，W03-A工程完成，正接W03-B/W07；初始FAIL及639工件不回写 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
-| R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复仍须验收，不能用cache代签 |
+| R1 主线 | W01–W05工程和W07真实生命周期已完成；W06 final3四路复审全FAIL，专家统一根因/PWF进行中；初始FAIL及639工件不回写 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
+| R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
 | R5 已知测试债 | 两份旧contract及相关实现已TDD修复、独审PASS并入master `a5214bda`（已随`feaef48a`正常push） | 最终受影响195项全绿，保留旧golden并新增current版；独审反例发现并修四条reservation读路径共因，准确字节已核对恢复入master。见[并线记录](r1-holdout-20261021/r5-integration.json)；不把113项相关 contract通过说成全体 contract通过，不以删测自动收尾 |
