@@ -1,0 +1,134 @@
+{
+  "schema_version": "w07-controller-handoff/1",
+  "status": "engineering_candidate_pending_root_independent_review",
+  "branch": "codex/r1-holdout-controller",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller",
+  "base_commit": "c3b4ebf1993b433d7501462388ae436e118be815",
+  "product_commit": "8b00fd7f8d858ced08f9eb247a76428df977389f",
+  "code": {
+    "tools/document_understanding_benchmark/holdout_acceptance.py": {
+      "sha256": "365060882d0d07383ab31881b0fe003245963e3ff028e301fcd52a6a73f47aec",
+      "bytes": 20693,
+      "git_lf_blob_sha256": "8ef94b3e8c9b10841ece51705f90c6122b4e380b225f120a6066e0e11d2b4a19"
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
+      "sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
+      "bytes": 6307,
+      "git_lf_blob_sha256": "acf02afe04ecb32295e9f6bdba6482e3ab2e72a9a8e708797193dd43eb99e83d"
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": {
+      "sha256": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+      "bytes": 362,
+      "git_lf_blob_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34"
+    },
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
+      "sha256": "106df715a8c1ce2244cd2734834b3ded4ac2c13393b459e058d4dc1167c5e19f",
+      "bytes": 9001,
+      "git_lf_blob_sha256": "a087e7d08e3ffd1ec932a741c5f727902be8ce80bdd5fec1f7aaea050c915a6a"
+    },
+    "tests/unit/test_holdout_acceptance_controller.py": {
+      "sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
+      "bytes": 1974,
+      "git_lf_blob_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64"
+    },
+    "tests/integration/test_holdout_acceptance_controller_e2e.py": {
+      "sha256": "74166ebee3cd72744c1efe5c20729a101d44d74fa96251c48607e904e91d5961",
+      "bytes": 10681,
+      "git_lf_blob_sha256": "0626fa77bafe8378edd49383022cc8a7321c70b1e293e1608fe86a78213b26b1"
+    }
+  },
+  "independent_review": "ROOT assigns a non-author; not claimed complete by author",
+  "tests": {
+    "behavioral_red": {
+      "tests": 5,
+      "failures": 5,
+      "receipt": "evidence/red-valid-corrected.xml"
+    },
+    "preflight_red": {
+      "tests": 4,
+      "failures": 3,
+      "passes": 1,
+      "receipt": "evidence/preflight-red.xml"
+    },
+    "unit_native": {
+      "command": "python -m pytest tests/unit/test_holdout_acceptance_controller.py tests/unit/du11_paid_response/test_paid_response.py::test_paid_usage_survives_lease_loss_and_replay_uses_new_fence tests/unit/du11_paid_response/test_paid_response.py::test_crash_before_envelope_then_reopen_replays_same_paid_attempt tests/unit/du11_paid_response/test_paid_response.py::test_old_hash_without_complete_pin_is_not_replayable_or_free tests/unit/test_narrative_legacy_final_output.py::test_ordinary_single_paid_operation_recovers_then_activates_with_no_new_reservation -q --tb=short",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 3.35,
+      "receipt": "evidence/final-unit.xml"
+    },
+    "integration": {
+      "command": "python -m pytest tests/integration/test_holdout_acceptance_controller_e2e.py -q -s --tb=short",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 101.2,
+      "receipt": "evidence/final-integration.xml"
+    },
+    "wire_assertion_strengthening": {
+      "command": "python -m pytest tests/integration/test_holdout_acceptance_controller_e2e.py::test_preflight_is_non_native_and_formal_configured_body_is_identical -q --tb=short",
+      "passed": 1,
+      "elapsed_seconds": 17.14,
+      "receipt": "evidence/wire-binding-final.xml",
+      "binding": "Two additional server-wire assertions added after full integration run; affected current test rerun passes; tool implementation unchanged"
+    },
+    "whitespace_only": "evidence/final-whitespace-only.json",
+    "mypy": "4 owned tool modules pass",
+    "ruff": "6 owned tool/test files pass",
+    "precommit": "evidence/precommit.json"
+  },
+  "preview": {
+    "native": false,
+    "creates_AUTO": false,
+    "catalog_tree_unchanged": true,
+    "creates_generation_locator": false,
+    "posts": 0,
+    "reservations": 0,
+    "body_contract": "exact actual adapter.request_bytes; no time/context normalization",
+    "bound": "len(body) + 128 + actual configured max_output_tokens",
+    "preview_failed_experiments": [
+      "evidence/preflight-resume.xml",
+      "evidence/preflight-separated-green.xml"
+    ],
+    "generation_owner": "Only formal run owns the final frozen generation; preview makes no native generation or lease claim"
+  },
+  "actual_configured_lifecycle": {
+    "mode": "loopback",
+    "supplier_calls": 0,
+    "supplier_cost_usd": "0",
+    "http_posts_per_positive_fixture": 1,
+    "paid_replay": "actual _recover plus replay_response in new worker/lease; same run and paid operation; no new reservation/token/POST",
+    "activation": "actual activation_pending followed by same-run successful activation",
+    "cache": "new run/workdir; same artifact; zero reservation/token/POST",
+    "unknown": "existing unknown reservation amount retained through replay/cache",
+    "public_read": "verified versioned NarrativeTransportReader; explicitly not RF consumed"
+  },
+  "product_boundaries": {
+    "production_src_changed": false,
+    "production_config_changed": false,
+    "ci_or_hooks_changed": false,
+    "other_repositories_changed": false,
+    "real_keys_read": false,
+    "real_raw_changed": false,
+    "downloads": 0,
+    "installed_skills_changed": false
+  },
+  "runtime_files": [
+    "tools/document_understanding_benchmark/holdout_acceptance.py",
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py",
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py"
+  ],
+  "installed_skill_sync": [],
+  "cleanup_receipt": "evidence/cleanup.json",
+  "root_next_steps": [
+    "Non-author review current product commit and run both unit/native and explicit integration layers on integration base",
+    "Wait for other source writer to exit; use ROOT current scoped wiki/explicit holdout and real SourceRef, do not redownload/reset old AUTO",
+    "Recompute mother and company scope budgets retaining MiMo UNKNOWN; pure preflight and inspect actual configured body bound before any live call",
+    "If budget fits, run same frozen spec through after_paid; append actual native usage with existing append_native/mother_totals",
+    "Resume same audit attempt/native run through activation_pending, complete and same-artifact zero-charge cache",
+    "Bind actual public artifact to RF consume_narrative_input, genuinely used parameter and segment formula; until then rf_consumption stays not_consumed",
+    "ROOT integrates/pushes and performs only required targeted installation; lane must not push/merge/install/API"
+  ]
+}
