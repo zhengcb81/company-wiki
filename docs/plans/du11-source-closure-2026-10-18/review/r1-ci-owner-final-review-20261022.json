@@ -1,0 +1,149 @@
+{
+  "schema_version": "r1-ci-owner-independent-review/1",
+  "reviewer": "/root/r1_w05_rf_targets",
+  "status": "PASS_ENGINEERING_CONTENT_BOUND",
+  "observed_at_utc": "2026-10-22T18:27:07.739274+00:00",
+  "source_head": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "bound_working_sha256": {
+    "src/company_wiki/automation/narrative_run_store.py": "88e5452057d043d9b31594cd1cc6d2b243e704ae58160ef09b8b9b1fb993b75a",
+    ".pre-commit-config.yaml": "80b3bd29f36d8a968fac2e5ae35eacb25b26a6084328543e1f118b15dbf12f77",
+    ".github/workflows/ci.yml": "f2fec1e5e2815f649812e57302a027e690afe36c8c181a7f031cba9245ac3f80",
+    "tests/unit/test_commit_policy.py": "877e22d21e9e810b4c6f73a72c7f5e7fd09e51e7f4e4b9b1b39170207bb67d9a",
+    "pyproject.toml": "d8ee07509da2fd6982efa9ea8994a68bf4150f647064003b8dd61044136685d8"
+  },
+  "scope": "Only the output-owner Optional narrowing, existing type hook coverage and duplicate CI type check.",
+  "independence": "Reviewer authored neither W04 owner recovery nor this CI repair; no product, hook, test-policy or PWF edits by reviewer.",
+  "owner_change": {
+    "old_git_lf_sha256": "e51c0f7c28db9710a2a25ca449ee0b20bbe3342e50e70785f011aee7b06a8811",
+    "new_working_sha256": "88e5452057d043d9b31594cd1cc6d2b243e704ae58160ef09b8b9b1fb993b75a",
+    "new_normalized_lf_sha256": "d03d92600a37fbbc62cb596489c473c3d15a528da172a3cd68d66d38f2781471",
+    "reverse_guard_text_equals_old_normalized_source": true,
+    "reason": "ReservationRecord is frozen; splitting the existing len/None guard and retaining one local value preserves short-circuiting, named error and parse input.",
+    "no_new_permission_identity_hash_review_or_task_gate": true
+  },
+  "material_finding": {
+    "priority": "P1",
+    "status": "FIXED_BY_ROOT_BEFORE_SEAL",
+    "summary": "A changed-source-only mypy hook with follow_imports=skip still misses the exact original cross-module Optional argument error.",
+    "valid_original_counterexample": {
+      "case": "changed-original-explicit-2f",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "pre_commit",
+        "run",
+        "mypy-contract",
+        "--config",
+        ".pre-commit-config.yaml",
+        "--files",
+        "src/company_wiki/automation/narrative_run_store.py"
+      ],
+      "returncode": 0,
+      "seconds": 2.187,
+      "source_commit": "2f632193014a1bbdd223dd578d6a3a697555b1b8",
+      "output": "mypy runtime source (same command as CI).................................Passed\n"
+    },
+    "final_fix": "The same existing mypy-contract hook runs python -m mypy src, pass_filenames=false; trigger remains src Python changes. No second hook, behavior test invocation or maintained module allowlist."
+  },
+  "candidate_observations": [
+    {
+      "case": "silent-original-cold",
+      "entry": "python -m mypy --follow-imports=silent",
+      "pass_filenames": true,
+      "returncode": 1,
+      "seconds": 14.561,
+      "output": "mypy changed runtime modules (same configuration as CI).......................Failed\n- hook id: mypy-contract\n- exit code: 2\n\nC:\\Users\\֣����\\Projects\\company-wiki\\.venv\\Lib\\site-packages\\numpy\\__init__.pyi:737: error: Type statement is only supported in Python 3.12 and greater  [syntax]\nFound 1 error in 1 file (errors prevented further checking)\n\n"
+    },
+    {
+      "case": "full-original-cold",
+      "entry": "python -m mypy src",
+      "pass_filenames": false,
+      "returncode": 1,
+      "seconds": 42.574,
+      "output": "mypy changed runtime modules (same configuration as CI).......................Failed\n- hook id: mypy-contract\n- exit code: 1\n\nsrc\\company_wiki\\automation\\narrative_run_store.py:1252: error: Argument 1 to \"from_json\" of \"PaidResponsePin\" has incompatible type \"str | None\"; expected \"str\"  [arg-type]\nFound 1 error in 1 file (checked 366 source files)\n\n"
+    },
+    {
+      "case": "full-fixed-warm",
+      "entry": "python -m mypy src",
+      "pass_filenames": false,
+      "returncode": 0,
+      "seconds": 22.577,
+      "output": "mypy changed runtime modules (same configuration as CI).......................Passed\n"
+    }
+  ],
+  "timing_scope": {
+    "independent_isolated_full_original_cold_seconds": 42.574,
+    "independent_isolated_full_fixed_warm_seconds": 22.577,
+    "root_original_checkout_direct_mypy_warm_seconds": 9.1063069,
+    "root_timing_is_author_observation_not_reviewer_repeat": true,
+    "note": "Isolated timings include pre_commit overhead and newly populated caches. Do not advertise 9 seconds as a guaranteed cold hook duration."
+  },
+  "ci": {
+    "single_full_type_command": "python -m mypy src",
+    "fixed_list_duplicate_removed": true,
+    "unique_type_flags_removed": false,
+    "remote_rerun_status": "Not observed by this reviewer; ROOT owns publication and new CI result."
+  },
+  "tests": {
+    "native_owner_counterexamples_plus_paid_control_and_then_current_policy": {
+      "passed": 10,
+      "seconds": 7.07,
+      "xml": "r1-ci-owner-final-review-20261022/native-policy-elevated.xml",
+      "note": "Five prior independent owner counterexamples, one ordinary paid recovery/activation control and four policy tests. The later final hook assertion changed; rechecked separately below."
+    },
+    "final_policy": {
+      "passed": 4,
+      "seconds": 0.46,
+      "xml": "r1-ci-owner-final-review-20261022/policy-final.xml"
+    },
+    "counts_not_added_due_overlap": true,
+    "sandbox_attempt": {
+      "passed": 4,
+      "failed": 6,
+      "xml": "r1-ci-owner-final-review-20261022/native-policy.xml",
+      "note": "Artifact publish returned retry_scheduled instead of activation_pending; paid artifact creation also failed before the changed settlement branch. The same finite selection passes elevated. This does not establish an exact filesystem failure mechanism."
+    }
+  },
+  "harness_corrections": [
+    "An initial probe used moving HEAD while ROOT committed. Its two original-error labels actually used repaired normalized source d03d9260..., so they are invalid RED evidence and excluded from the conclusion. Final evidence pins original 2f632193/e51c0f7c... explicitly.",
+    "A one-line shell-quoted equivalence helper had an unterminated string before execution. Replaced by prove_guard.py; the normalized inverse proof passed."
+  ],
+  "limits": [
+    "No new live provider/model/download activity. This is engineering validation, not W03/W06/W07 or a new company research run.",
+    "Original W04 and W01 historical SHA-bound reports remain unchanged; this report does not relabel their previous test counts as reruns of current bytes.",
+    "The hook remains a finite static check. Unchanged caller errors caused only by signature edits outside this repository and environment/CI differences are not claimed impossible.",
+    "pyproject existing comment about only contract modules is stale documentation; the actual hook and CI full-src commands are explicit and verified. No behavioral blocker."
+  ],
+  "cleanup": {
+    "schema_version": "r1-independent-owned-test-cleanup/1",
+    "targets": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ci-independent\\hook-fixture",
+        "files_removed": 2016,
+        "bytes_removed": 44677134,
+        "scope": "owned by this narrow review",
+        "exists_after": false
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1civ",
+        "files_removed": 42,
+        "bytes_removed": 2863700,
+        "scope": "owned by this narrow review",
+        "exists_after": false
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1civ-elevated",
+        "files_removed": 59,
+        "bytes_removed": 3230077,
+        "scope": "owned by this narrow review",
+        "exists_after": false
+      }
+    ],
+    "first_cleanup_attempt": "Owned isolated Git object was read-only on Windows; initial removal stopped after partial progress. Counts below are remaining-file lower bounds, not original complete footprint."
+  },
+  "network_calls": 0,
+  "paid_calls": 0,
+  "downloads": 0,
+  "production_raw_writes": 0,
+  "next_action": "ROOT publish the accepted CI repair and PWF/review receipts, observe the new remote CI, then continue its current authorized mainline scope."
+}

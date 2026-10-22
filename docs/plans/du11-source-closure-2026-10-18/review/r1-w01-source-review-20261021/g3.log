@@ -1,0 +1,27 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w1v\\g3", "requested_basetemp_len": 53, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 9 items
+
+.planning\r1-w01-independent\test_w01_counterexamples.py ......F.F       [100%]
+
+================================== FAILURES ===================================
+_______ test_real_writer_must_not_relabel_ir_reference_as_registered_h1 _______
+.planning\r1-w01-independent\test_w01_counterexamples.py:129: in test_real_writer_must_not_relabel_ir_reference_as_registered_h1
+    assert rows and all(row["document_kind"] == "investor_relations" for row in rows)
+E   assert ([<sqlite3.Row object at 0x000001B25FAA08E0>] and False)
+E    +  where False = all(<generator object test_real_writer_must_not_relabel_ir_reference_as_registered_h1.<locals>.<genexpr> at 0x000001B25FD5FE00>)
+_____ test_unknown_generic_registered_original_is_not_proof_of_absent_h1 ______
+.planning\r1-w01-independent\test_w01_counterexamples.py:174: in test_unknown_generic_registered_original_is_not_proof_of_absent_h1
+    assert result["blocks_download"] is True, result
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'not_found', 'reason': 'no_registered_local_source', 'source_ref': None, ...}
+E   assert False is True
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w01-independent\g3.xml -
+=========================== short test summary info ===========================
+FAILED .planning/r1-w01-independent/test_w01_counterexamples.py::test_real_writer_must_not_relabel_ir_reference_as_registered_h1
+FAILED .planning/r1-w01-independent/test_w01_counterexamples.py::test_unknown_generic_registered_original_is_not_proof_of_absent_h1
+========================= 2 failed, 7 passed in 2.74s =========================

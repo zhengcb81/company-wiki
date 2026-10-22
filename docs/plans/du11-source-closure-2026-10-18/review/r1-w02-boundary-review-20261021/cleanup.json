@@ -1,0 +1,17 @@
+{
+  "root_exists_after": false,
+  "retained_evidence": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1-w02-independent",
+  "method": "PowerShell Remove-Item -LiteralPath exact checked owned root",
+  "files_before_delete": 10,
+  "absolute_target_checked": true,
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1w2v",
+  "initial_baseline": "absent at initial reviewer setup",
+  "bytes_before_delete": 2673.0,
+  "cross_owner_paths_modified": 0,
+  "restored_to_initial_absence": true,
+  "utc": "2026-10-21T23:00:54.4524848Z",
+  "raw_files_modified_or_removed": 0,
+  "test_peak_measured": false,
+  "baseline_existed": false,
+  "production_configs_modified": 0
+}

@@ -1,0 +1,7 @@
+mypy changed runtime modules (same configuration as CI).......................Failed
+- hook id: mypy-contract
+- exit code: 2
+
+C:\Users\֣����\Projects\company-wiki\.venv\Lib\site-packages\numpy\__init__.pyi:737: error: Type statement is only supported in Python 3.12 and greater  [syntax]
+Found 1 error in 1 file (errors prevented further checking)
+

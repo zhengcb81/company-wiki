@@ -1,0 +1,15 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 17 items
+
+tests\unit\test_commit_policy.py ...                                     [ 17%]
+tests\unit\test_narrative_legacy_final_output.py ........                [ 64%]
+tests\unit\test_narrative_summary_coverage_repair.py ......              [100%]
+
+- generated xml file: C:\Users\֣����\Projects\company-wiki\.planning\r1-closeout\type-owner-green.xml -
+============================= 17 passed in 10.35s =============================

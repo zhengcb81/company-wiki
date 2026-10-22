@@ -1,0 +1,14 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w1p\\cli", "requested_basetemp_len": 54, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items
+
+tests\contract\test_single_intent_latest_acquisition.py ......           [ 85%]
+tests\contract\test_source_catalog_security_identity.py .                [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w01-postprocess\cli.xml -
+============================== 7 passed in 2.41s ==============================

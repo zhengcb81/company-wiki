@@ -1,0 +1,136 @@
+{
+  "schema_version": "r1-expert-remediation-overview/1",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "state": "diagnosis_complete_implementation_not_started",
+  "manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+  "reviewer_issue_count": 26,
+  "severity_counts": {
+    "P0": 0,
+    "P1": 15,
+    "P2": 11,
+    "P3": 0
+  },
+  "root_cause_count": 11,
+  "work_package_count": 7,
+  "main_pwf": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation",
+  "diagnosis": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis",
+  "primary_next_action": "ROOT accept fixed interfaces and RED plan once; parallel W01/W02/W04/W05 immediately",
+  "work_packages": [
+    {
+      "id": "W01",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W01.md"
+    },
+    {
+      "id": "W02",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W02.md"
+    },
+    {
+      "id": "W03",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W03.md"
+    },
+    {
+      "id": "W04",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W04.md"
+    },
+    {
+      "id": "W05",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W05.md"
+    },
+    {
+      "id": "W06",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W06.md"
+    },
+    {
+      "id": "W07",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W07.md"
+    }
+  ],
+  "artifact_bindings": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\root_causes.json",
+      "sha256": "59d7d3ddef14f66a39502a351c3e33979c1ed75f9b1115790b422bfb5e8b5b2b",
+      "bytes": 30444
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\coverage.json",
+      "sha256": "7b4aed4307f0958731dac3af37044a12e92e63b5df54c63d470b0549c6142e6a",
+      "bytes": 89044
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\baseline_files.json",
+      "sha256": "c03efbf51525b7ad806bc72d4bc699612b6ce19236f731de87cdd35e22afc2f9",
+      "bytes": 24781
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\task_plan.md",
+      "sha256": "82d8f78902ef987934139693374f9904ca7df48baa8cf1def3e17adde9a8e12a",
+      "bytes": 3627
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\findings.md",
+      "sha256": "236bac71cd09af7ec0cfd357e0fe47b9f03642111acbcb4b67b123dc39eec500",
+      "bytes": 6236
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\progress.md",
+      "sha256": "915ad015b3a4dd8ab30c5814820c2bff32ff768f7d9bcd6dcff80390a41d8c98",
+      "bytes": 2542
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\shared_contract.md",
+      "sha256": "efcf74fe3225d8a2c3ec235089985c9055ea831f3fddc9d479528323a79480e4",
+      "bytes": 6586
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W01.md",
+      "sha256": "744e2baff9b271d19b6c49370caecc6ae8405f0c39775b6cb9e1b94aab19b1aa",
+      "bytes": 6363
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W02.md",
+      "sha256": "28eaf7ba1206feac0c78d198947974fe249e52489c117d51bdef828dc2894d03",
+      "bytes": 5035
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W03.md",
+      "sha256": "f333b40c0044ad07428b05ac0ce052e0d250ad96a7cc7406e7aa2b186e843197",
+      "bytes": 4561
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W04.md",
+      "sha256": "6dbbac61511d030cc0eefa44185068d895d8382820d8fa72e5adb500bb53f1fe",
+      "bytes": 5976
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W05.md",
+      "sha256": "d96736dfa32c594514ff49f0e98872d5ff9a0c71e600bd9773eecc7951977f1c",
+      "bytes": 4273
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W06.md",
+      "sha256": "623bea25c0207c90323ac774b39630cd1e263f228bea037e335667b029449f70",
+      "bytes": 6097
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W07.md",
+      "sha256": "e808aae8e5560968e8a81a5187d811ea817fecabf16886140c8eb7929aa93740",
+      "bytes": 7497
+    }
+  ],
+  "expert_activity": {
+    "paid_model_calls": 0,
+    "downloads": 0,
+    "product_mutations": 0,
+    "configuration_mutations": 0,
+    "install_mutations": 0,
+    "commits": 0
+  },
+  "historical_responsibilities_preserved": [
+    "DU11-R5 complete not repeated",
+    "NVDA 14 root causes / 7 packages",
+    "original eight company target sequence",
+    "unknown charges / prior rejected cleanup"
+  ],
+  "external_limit_not_prejudged": true,
+  "quality_status": "not_evaluated"
+}

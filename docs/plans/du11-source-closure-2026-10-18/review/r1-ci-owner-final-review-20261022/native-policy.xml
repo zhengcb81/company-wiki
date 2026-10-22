@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="10" time="9.292" timestamp="2026-10-22T19:19:54.991210+01:00" hostname="DESKTOP-156V213"><testcase classname="" name="test_cannot_charge_final_to_an_unrelated_native_job[select]" time="1.247"><failure message="AssertionError: assert 'retry_scheduled' == 'activation_pending'&#10;  &#10;  - activation_pending&#10;  + retry_scheduled">.planning\r1-w04-w05-independent\test_w04_review.py:35: in test_cannot_charge_final_to_an_unrelated_native_job
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled</failure></testcase><testcase classname="" name="test_cannot_charge_final_to_an_unrelated_native_job[not-in-run]" time="1.100"><failure message="AssertionError: assert 'retry_scheduled' == 'activation_pending'&#10;  &#10;  - activation_pending&#10;  + retry_scheduled">.planning\r1-w04-w05-independent\test_w04_review.py:35: in test_cannot_charge_final_to_an_unrelated_native_job
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled</failure></testcase><testcase classname="" name="test_successful_model_record_not_equal_to_consumed_verify_is_refused" time="1.033"><failure message="AssertionError: assert 'retry_scheduled' == 'activation_pending'&#10;  &#10;  - activation_pending&#10;  + retry_scheduled">.planning\r1-w04-w05-independent\test_w04_review.py:51: in test_successful_model_record_not_equal_to_consumed_verify_is_refused
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled</failure></testcase><testcase classname="" name="test_missing_single_paid_object_cannot_dispatch_or_release_charge" time="0.696"><failure message="dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'">.planning\r1-w04-w05-independent\test_w04_review.py:73: in test_missing_single_paid_object_cannot_dispatch_or_release_charge
+    owned.caller.generate(owned.context(), request)
+src\company_wiki\automation\narrative_model_caller.py:301: in generate
+    raise NarrativeBudgetCallError(
+E   company_wiki.automation.narrative_model_caller.NarrativeBudgetCallError: MODEL_PAID_RESPONSE_UNAVAILABLE
+
+During handling of the above exception, another exception occurred:
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:195: in __exit__
+    exc.__traceback__ = traceback
+    ^^^^^^^^^^^^^^^^^
+E   dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'</failure></testcase><testcase classname="" name="test_final_native_settlement_cannot_exceed_reserved_output" time="1.120"><failure message="AssertionError: assert 'retry_scheduled' == 'activation_pending'&#10;  &#10;  - activation_pending&#10;  + retry_scheduled">.planning\r1-w04-w05-independent\test_w04_review.py:96: in test_final_native_settlement_cannot_exceed_reserved_output
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled</failure></testcase><testcase classname="" name="test_ordinary_single_paid_operation_recovers_then_activates_with_no_new_reservation" time="0.681"><failure message="dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'">tests\unit\test_narrative_legacy_final_output.py:287: in test_ordinary_single_paid_operation_recovers_then_activates_with_no_new_reservation
+    own.caller.generate(own.context(), request)
+src\company_wiki\automation\narrative_model_caller.py:301: in generate
+    raise NarrativeBudgetCallError(
+E   company_wiki.automation.narrative_model_caller.NarrativeBudgetCallError: MODEL_PAID_RESPONSE_UNAVAILABLE
+
+During handling of the above exception, another exception occurred:
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:195: in __exit__
+    exc.__traceback__ = traceback
+    ^^^^^^^^^^^^^^^^^
+E   dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'</failure></testcase><testcase classname="" name="test_commit_does_not_repeat_behavior_tests" time="0.009" /><testcase classname="" name="test_config_check_only_runs_for_config_and_loader_changes" time="0.008" /><testcase classname="" name="test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist" time="0.009" /><testcase classname="" name="test_ci_runs_the_complete_source_type_check_once" time="0.014" /></testsuite></testsuites>

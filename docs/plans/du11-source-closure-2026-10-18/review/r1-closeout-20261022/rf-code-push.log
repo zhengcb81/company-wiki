@@ -1,0 +1,19 @@
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 11 source files
+
+=== current source and forecast behavior ===
+....................................... [ 39%]
+........................................................................ [ 54%]
+................................................................ [ 67%]
+........................................................................ [ 82%]
+.....................................s.................................. [ 97%]
+..........                                                               [100%]
+477 passed, 1 skipped, 36 subtests passed in 64.98s (0:01:04)
+
+pre-push/CI checks GREEN
+To https://github.com/zhengcb81/revenue-forecast.git
+   9669c4d7..92b69682  main -> main

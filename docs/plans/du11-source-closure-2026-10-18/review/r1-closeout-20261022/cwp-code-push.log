@@ -1,0 +1,32 @@
+Push unit scope: affected unit tests (309 paths)
+
+=== affected units and CI contract smoke ===
+================ 5564 passed, 11 skipped in 276.35s (0:04:36) =================
+============================ slowest 15 durations =============================
+11.42s call     tests/unit/test_w04_source_transport.py::test_compact_65_parent_wire_stays_small_without_truncating_body
+9.91s call     tests/unit/test_narrative_output_failure_finalization.py::test_explicit_failed_summary_public_cli_settles_output_and_resumes_with_zero_extra_post
+9.46s call     tests/unit/document_understanding_selection/test_reading_production_selection.py::test_large_actual_candidate_pool_keeps_all_three_important_late_scopes
+8.64s call     tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee
+7.21s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+6.29s call     tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+4.58s call     tests/integration/test_m3_official_json_acceptance.py::test_public_cli_reloads_by_projection_id
+4.51s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+4.38s call     tests/unit/test_narrative_extractive_production.py::test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse
+4.20s call     tests/unit/test_narrative_extractive_production.py::test_real_default_policy_document_skips_model_and_does_not_require_fictional_execution
+3.72s call     tests/unit/test_shared_reading_cache_precheck.py::test_one_hundred_base_bindings_keep_shared_settings_without_original_or_decision_copies
+3.51s call     tests/unit/test_acquisition_usage_recovery.py::test_hard_timeout_stops_owned_grandchild_and_late_writes
+3.17s call     tests/unit/test_narrative_business_recall.py::test_default_old_selector_keeps_entire_ordered_fingerprint
+3.14s call     tests/unit/test_identity_audit/test_1_checks.py::test_a_failing_check_exits_two_and_a_clean_audit_exits_zero
+2.94s call     tests/integration/test_legacy_local_reconcile.py::test_bounded_discovery_keeps_progress_and_does_not_invent_absence
+================ 5564 passed, 11 skipped in 276.35s (0:04:36) =================
+
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+
+pre-push gate GREEN �� safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/company-wiki.git
+   0622f242..2f632193  master -> master

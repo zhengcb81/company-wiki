@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-21T22:55:12.554468+00:00",
+  "files": {
+    "assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+    "canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+    "local_reconcile.py": "d67ecec11b4204eb6312a40c30f3e08fb50d2495a8396c7fcbcc8cf24dd23b92",
+    "local_inventory.py": "56c913846f7f67e9d0185c9ee82caa0d1eabc9493ce69c5b84c8ba98e677b726",
+    "qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+    "resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+    "source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de",
+    "source_reader.py": "f976e2954f032c54653a0f06485301b6d0628ba9ccba75aeb243cd874462920b",
+    "cli.py": "8fa777ad012b0377e278408ba2d6d17bb3025555be7e6dc48efedb9b612fe7d3"
+  },
+  "tests": {
+    "test_w01_counterexamples.py": "6d0b613c6efc7eb50e3d8e9ef6f69ee993cb3b983f652e2ecb573dc08b9c0d75",
+    "test_latest_discovery.py": "178484e44af779046513a0f07d807ae466b01e200701188d176263ae70d71784"
+  }
+}

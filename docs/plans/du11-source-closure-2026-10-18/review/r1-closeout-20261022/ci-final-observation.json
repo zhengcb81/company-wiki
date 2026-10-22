@@ -1,0 +1,50 @@
+[
+  {
+    "repo": "company-wiki",
+    "expected": "20a7fb0c",
+    "runs": [
+      {
+        "id": 39831978563,
+        "head_sha": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39831978563",
+        "name": "CI"
+      }
+    ],
+    "method": "anonymous public Actions API",
+    "observed_at": "2026-10-22T18:31:09.7189698Z"
+  },
+  {
+    "repo": "revenue-forecast",
+    "expected": "92b69682",
+    "runs": [
+      {
+        "id": 39691152846,
+        "head_sha": "92b6968294988122aad89d963ec330945fc8dc58",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/39691152846",
+        "name": "quality"
+      }
+    ],
+    "method": "anonymous public Actions API",
+    "observed_at": "2026-10-22T18:31:10.2101099Z"
+  },
+  {
+    "repo": "filing-fetch",
+    "expected": "a1cb84da",
+    "runs": [
+      {
+        "id": 39691450316,
+        "head_sha": "a1cb84da5e055e41a21305147d1991b839f47aba",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39691450316",
+        "name": "quality"
+      }
+    ],
+    "method": "anonymous public Actions API",
+    "observed_at": "2026-10-22T18:31:10.6337691Z"
+  }
+]

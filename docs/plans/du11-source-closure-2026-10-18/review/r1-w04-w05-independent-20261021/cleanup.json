@@ -1,0 +1,33 @@
+{
+  "production_raw_deleted": 0,
+  "observed_at_utc": "2026-10-21T22:58:32.6708382Z",
+  "other_owner_preexisting_removed": 0,
+  "targets": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w04-native-tmp",
+      "exists_after": false,
+      "bytes": 7059401,
+      "files": 132
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w05-native-tmp",
+      "exists_after": false,
+      "bytes": 986110,
+      "files": 18
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\temp",
+      "exists_after": false,
+      "bytes": 0,
+      "files": 0
+    },
+    {
+      "reason": "initial review inherited mother pytest.ini autorelocation; corrected to isolated -c and --noconftest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-targets\\cw-pytest-basetemp\\20261021-225348-55197a50",
+      "exists_after": false,
+      "bytes": 40764,
+      "files": 4
+    }
+  ],
+  "schema_version": "independent-review-cleanup/1"
+}

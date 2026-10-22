@@ -1,0 +1,700 @@
+{
+  "schema_version": "r1-ff-integration/1",
+  "status": "COMPLETE_FF_MAIN_PUSH_AND_SELECTIVE_INSTALL",
+  "observed_at_utc": "2026-10-21T23:10:53.115236+00:00",
+  "owner": "/root/r1_w02_source_boundary",
+  "scope": "FF only; ROOT owns RF integration and shared CURRENT_STATUS/PWF commit.",
+  "repository": {
+    "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+    "remote": "https://github.com/zhengcb81/filing-fetch.git",
+    "branch": "main",
+    "base_head": "e8740748f91999cb24169b42f8e789726ed50482",
+    "reviewed_product_commit": "cf15aeaa90667a8b8aeac01af713dd984f057fe5",
+    "integrated_reviewed_branch_head": "df9a1d3edab46768e30de134bdf9f71ca3fcf745",
+    "main_and_remote_head": "a1cb84da5e055e41a21305147d1991b839f47aba",
+    "tracked_clean": true,
+    "remaining_untracked_paths": [
+      ".planning/du11-empty-placeholder-original.py",
+      "config/FMP_API_KEY.txt"
+    ],
+    "remaining_untracked_metadata_unchanged": true,
+    "key_contents_read": false
+  },
+  "ci_change": {
+    "file": "tools/ci_tests.py",
+    "change": "Add tests/test_r1_source_business_failure.py exactly once to existing CI_TESTS",
+    "new_workflow_or_gate": false,
+    "commit": "a1cb84da5e055e41a21305147d1991b839f47aba"
+  },
+  "independent_review": {
+    "status": "PASS_ENGINEERING_BOUNDARY_ONLY",
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 9.62,
+    "reports": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w02-boundary-review-20261021.md",
+        "sha256": "355e85cd6028a4ba79bdf32f2f06a65ee0b401bfcca8384b0f0cfa99b0a79efe"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w02-boundary-review-20261021.json",
+        "sha256": "0295b91bde7b6486693704437218d7714692cb08dd4e5f899379b2271838abe7"
+      }
+    ]
+  },
+  "tests": {
+    "focused": {
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0,
+      "pytest_seconds": 9.42,
+      "command": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/test_r1_source_business_failure.py",
+          "tests/test_ci_tests.py",
+          "-q",
+          "-rs",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\test-temp\\focused",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\focused.xml"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+        "exit_code": 0,
+        "seconds": 14.196
+      }
+    },
+    "normal_commit_hooks": {
+      "ruff": "PASS",
+      "host_assumption_guard": "PASS",
+      "mypy": "SKIP_TOOLS_ONLY_DIFF; full mypy passed in normal pre-push",
+      "commands": [
+        {
+          "argv": [
+            "git",
+            "add",
+            "--",
+            "tools/ci_tests.py"
+          ],
+          "exit_code": 0,
+          "seconds": 0.146
+        },
+        {
+          "argv": [
+            "git",
+            "commit",
+            "-m",
+            "test: include source business failures in focused CI"
+          ],
+          "exit_code": 0,
+          "seconds": 8.436
+        }
+      ]
+    },
+    "normal_push": {
+      "exit_code": 0,
+      "passed": 899,
+      "skipped": 7,
+      "subtests_passed": 78,
+      "pytest_seconds": 132.39,
+      "static_compile_import_mypy_host_guard_doctor_plan_bom": "ALL_PASS",
+      "skip_reasons": [
+        "1 actual CWP integration requires explicit CWP_V2_CODE_ROOT",
+        "3 actual ET integration requires explicit test tool path",
+        "2 production security-master snapshots unavailable",
+        "1 symlink unsupported"
+      ],
+      "command": {
+        "argv": [
+          "git",
+          "push",
+          "origin",
+          "main"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+        "exit_code": 0,
+        "seconds": 150.58,
+        "source_runtime_pin": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki/src"
+      }
+    },
+    "remote_ci": {
+      "api_url": "https://api.github.com/repos/zhengcb81/filing-fetch/actions/runs?head_sha=a1cb84da5e055e41a21305147d1991b839f47aba&per_page=10",
+      "status": "OBSERVED",
+      "runs": [
+        {
+          "id": 39691450316,
+          "name": "quality",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "a1cb84da5e055e41a21305147d1991b839f47aba",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39691450316",
+          "created_at": "2026-10-21T23:08:40Z",
+          "updated_at": "2026-10-21T23:08:44Z"
+        }
+      ],
+      "final_recheck_error": "<urlopen error [Errno 11001] getaddrinfo failed>"
+    }
+  },
+  "installation": {
+    "tool": "tools/sync_installs_b3.py",
+    "modes": [
+      "--plan",
+      "--install",
+      "--check"
+    ],
+    "scope": [
+      "scripts/fetch_filing.py",
+      "scripts/ff_local_source_prepare.py",
+      "scripts/ff_provider_cause.py",
+      "scripts/ff_source_failure.py",
+      "scripts/ff_v2_envelope.py",
+      "scripts/filing_contracts.py"
+    ],
+    "logical_destinations": 3,
+    "physical_targets": 2,
+    "old_sha_checks": [
+      {
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "file": "scripts/fetch_filing.py",
+        "before_sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "1566516dde93945502c2107e19d6192c5b6f16394fc808c8780e9954aa1659a9",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "file": "scripts/filing_contracts.py",
+        "before_sha256": "ddd6a0d36a658464757cc1016a31e79f85869623e68c06720d448a9199ed0d08",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "2e58487cc0459b088652c6d9ceabd2a9974e9aeffde180169c13be4fa77a6b80",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "file": "scripts/ff_provider_cause.py",
+        "before_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "file": "scripts/ff_source_failure.py",
+        "before_sha256": null,
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "file": "scripts/ff_local_source_prepare.py",
+        "before_sha256": "e7620fc21d22a53f57f4789b12142c999b808bda5266614f57ed691c8a326ddb",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "97b469d6df2c3e600ae768153bd78857f55770d664996b5916d0070bfc392377",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "file": "scripts/ff_v2_envelope.py",
+        "before_sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "8950720f1b83119053ca055ee4585f40a422e1c6bd01db19ee427b2ec24980b9",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "file": "scripts/fetch_filing.py",
+        "before_sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "1566516dde93945502c2107e19d6192c5b6f16394fc808c8780e9954aa1659a9",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "file": "scripts/filing_contracts.py",
+        "before_sha256": "ddd6a0d36a658464757cc1016a31e79f85869623e68c06720d448a9199ed0d08",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "2e58487cc0459b088652c6d9ceabd2a9974e9aeffde180169c13be4fa77a6b80",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "file": "scripts/ff_provider_cause.py",
+        "before_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "file": "scripts/ff_source_failure.py",
+        "before_sha256": null,
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "file": "scripts/ff_local_source_prepare.py",
+        "before_sha256": "e7620fc21d22a53f57f4789b12142c999b808bda5266614f57ed691c8a326ddb",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "97b469d6df2c3e600ae768153bd78857f55770d664996b5916d0070bfc392377",
+        "reviewed_lf_sha_match": true
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "file": "scripts/ff_v2_envelope.py",
+        "before_sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346",
+        "reviewed_old_sha_match": true,
+        "current_source_sha256": "8950720f1b83119053ca055ee4585f40a422e1c6bd01db19ee427b2ec24980b9",
+        "reviewed_lf_sha_match": true
+      }
+    ],
+    "source_reviewed_lf_sha_match": true,
+    "written_per_physical_target": [
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "written": [
+          "scripts/fetch_filing.py",
+          "scripts/ff_local_source_prepare.py",
+          "scripts/ff_provider_cause.py",
+          "scripts/ff_source_failure.py",
+          "scripts/ff_v2_envelope.py",
+          "scripts/filing_contracts.py"
+        ],
+        "not_written": [],
+        "errors": []
+      },
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "written": [
+          "scripts/fetch_filing.py",
+          "scripts/ff_local_source_prepare.py",
+          "scripts/ff_provider_cause.py",
+          "scripts/ff_source_failure.py",
+          "scripts/ff_v2_envelope.py",
+          "scripts/filing_contracts.py"
+        ],
+        "not_written": [],
+        "errors": []
+      }
+    ],
+    "logical_aliases": [
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.agents\\skills",
+          "C:\\Users\\郑曾波\\.claude\\skills"
+        ]
+      },
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.codex\\skills"
+        ]
+      }
+    ],
+    "selected_check_exit": 0,
+    "all_owned_runtime_byte_complete": true,
+    "outside_scope_runtime_drift": [
+      [],
+      []
+    ],
+    "fresh_process_validation": {
+      "results": [
+        {
+          "logical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "check": "imports",
+          "argv": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import importlib,json,sys; from pathlib import Path; root=Path(sys.argv[1]).resolve(); sys.path.insert(0,str(root/'scripts')); names=['fetch_filing','filing_contracts','ff_provider_cause','ff_source_failure','ff_local_source_prepare','ff_v2_envelope']; modules=[importlib.import_module(n) for n in names]; assert all(Path(m.__file__).resolve().is_relative_to(root/'scripts') for m in modules); print(json.dumps({'fresh_imports':names,'correct_owner':True}))",
+            "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch"
+          ],
+          "exit_code": 0,
+          "seconds": 0.236,
+          "stdout_sha256": "6739001eca76aff49ff9ef51dbec1a8dbf4f50ff0d34e9b21f2d4ec69b9c3188"
+        },
+        {
+          "logical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "check": "help",
+          "argv": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-E",
+            "-B",
+            "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+            "--help"
+          ],
+          "exit_code": 0,
+          "seconds": 0.232,
+          "stdout_sha256": "bfbd7e7d38612b52e92d6c68a63ba77543a698212a9ba675a02fc9f0b676e4ed"
+        },
+        {
+          "logical_target": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch",
+          "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "check": "imports",
+          "argv": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import importlib,json,sys; from pathlib import Path; root=Path(sys.argv[1]).resolve(); sys.path.insert(0,str(root/'scripts')); names=['fetch_filing','filing_contracts','ff_provider_cause','ff_source_failure','ff_local_source_prepare','ff_v2_envelope']; modules=[importlib.import_module(n) for n in names]; assert all(Path(m.__file__).resolve().is_relative_to(root/'scripts') for m in modules); print(json.dumps({'fresh_imports':names,'correct_owner':True}))",
+            "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch"
+          ],
+          "exit_code": 0,
+          "seconds": 0.219,
+          "stdout_sha256": "6739001eca76aff49ff9ef51dbec1a8dbf4f50ff0d34e9b21f2d4ec69b9c3188"
+        },
+        {
+          "logical_target": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch",
+          "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "check": "help",
+          "argv": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-E",
+            "-B",
+            "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+            "--help"
+          ],
+          "exit_code": 0,
+          "seconds": 0.248,
+          "stdout_sha256": "bfbd7e7d38612b52e92d6c68a63ba77543a698212a9ba675a02fc9f0b676e4ed"
+        },
+        {
+          "logical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+          "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+          "check": "imports",
+          "argv": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import importlib,json,sys; from pathlib import Path; root=Path(sys.argv[1]).resolve(); sys.path.insert(0,str(root/'scripts')); names=['fetch_filing','filing_contracts','ff_provider_cause','ff_source_failure','ff_local_source_prepare','ff_v2_envelope']; modules=[importlib.import_module(n) for n in names]; assert all(Path(m.__file__).resolve().is_relative_to(root/'scripts') for m in modules); print(json.dumps({'fresh_imports':names,'correct_owner':True}))",
+            "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch"
+          ],
+          "exit_code": 0,
+          "seconds": 0.23,
+          "stdout_sha256": "6739001eca76aff49ff9ef51dbec1a8dbf4f50ff0d34e9b21f2d4ec69b9c3188"
+        },
+        {
+          "logical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+          "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+          "check": "help",
+          "argv": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-E",
+            "-B",
+            "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+            "--help"
+          ],
+          "exit_code": 0,
+          "seconds": 0.216,
+          "stdout_sha256": "bfbd7e7d38612b52e92d6c68a63ba77543a698212a9ba675a02fc9f0b676e4ed"
+        }
+      ],
+      "preserved_outside_scope": [
+        {
+          "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "outside_selected_files": 27,
+          "metadata_unchanged": true
+        },
+        {
+          "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+          "outside_selected_files": 14,
+          "metadata_unchanged": true
+        }
+      ],
+      "network_calls": 0,
+      "paid_api_calls": 0
+    },
+    "commands": [
+      {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "tools/sync_installs_b3.py",
+          "--install",
+          "--json",
+          "--file",
+          "scripts/fetch_filing.py",
+          "--file",
+          "scripts/ff_local_source_prepare.py",
+          "--file",
+          "scripts/ff_provider_cause.py",
+          "--file",
+          "scripts/ff_source_failure.py",
+          "--file",
+          "scripts/ff_v2_envelope.py",
+          "--file",
+          "scripts/filing_contracts.py"
+        ],
+        "exit_code": 0,
+        "seconds": 0.513
+      },
+      {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "tools/sync_installs_b3.py",
+          "--check",
+          "--json",
+          "--file",
+          "scripts/fetch_filing.py",
+          "--file",
+          "scripts/ff_local_source_prepare.py",
+          "--file",
+          "scripts/ff_provider_cause.py",
+          "--file",
+          "scripts/ff_source_failure.py",
+          "--file",
+          "scripts/ff_v2_envelope.py",
+          "--file",
+          "scripts/filing_contracts.py"
+        ],
+        "exit_code": 0,
+        "seconds": 0.23
+      }
+    ]
+  },
+  "preservation": {
+    "production_raw_changes": 0,
+    "production_original_deletions": 0,
+    "source_provider_downloads": 0,
+    "paid_model_calls": 0,
+    "charged_api_cost_usd": 0,
+    "budget_or_ledger_mutations": 0,
+    "dayu_iqs_rf_installs_changed": false,
+    "untracked_key_contents_read": false,
+    "outside_selected_install_metadata_unchanged": true,
+    "git_and_public_github_network_only": true
+  },
+  "harness_errors": {
+    "initial_import_exit": 0,
+    "initial_help_exit": 1,
+    "cause": "Review harness incorrectly used Python -I for direct script execution, which removes the script directory from sys.path. No product failure.",
+    "reporting_error": "The parent wrapper tried to print UTF-8 replacement characters using GBK and raised UnicodeEncodeError while reporting.",
+    "correction": "Use -X utf8 for output and -E for direct public script help; retain -I only for explicit sys.path import validation. Runtime product untouched."
+  },
+  "initial_sandbox_status_error": "Sandbox git status initially reported must be run in a work tree; authorized escalated read showed ordinary main, core.bare=false and clean tracked state. No repository-config modification.",
+  "cleanup": {
+    "observed_at_utc": "2026-10-21T23:09:56.878196+00:00",
+    "scope": "Four exact lane-owned test/cache directories only; retained logs and receipts",
+    "targets": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\test-temp",
+        "existed": true,
+        "files": 27,
+        "bytes": 1777,
+        "removed": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\mypy",
+        "existed": true,
+        "files": 219,
+        "bytes": 11195527,
+        "removed": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\ruff",
+        "existed": true,
+        "files": 10,
+        "bytes": 5852,
+        "removed": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\pycache",
+        "existed": true,
+        "files": 116,
+        "bytes": 1863204,
+        "removed": true
+      }
+    ],
+    "removed_bytes": 13066360,
+    "removed_files": 372,
+    "production_original_deletions": 0,
+    "test_source_downloads": 0,
+    "peak_scratch_measured": false
+  },
+  "evidence_artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\cleanup.json",
+      "sha256": "a4c367408d085e4da1764f214efa1db8ced6fa70d784fb447a39715c5764595a",
+      "bytes": 1238
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\commit-0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\commit-1.log",
+      "sha256": "20fe4a7b3dd47c48a811239cf074ce389d1c7a49469ace3079aa011331aae885",
+      "bytes": 384
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\commit-command.json",
+      "sha256": "512c0bffed48438435f88aa1219cc5e678d6ad603c4acd5e119574e40464700c",
+      "bytes": 333
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\final-repository-state.json",
+      "sha256": "31a410487e90ae33f90d6bde9c3a067927a664224b61a2c928355a9786433305",
+      "bytes": 1615
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\focused-command.json",
+      "sha256": "c80fe191b6ca9a75cde2afb408a7ab577f96f5a0cea031b50f32b8be18ea801c",
+      "bytes": 633
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\focused.log",
+      "sha256": "fe7ace37fc07fa6b2a7479126e7abaefec14884d7c40effb087f56c9b695a572",
+      "bytes": 101
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\focused.xml",
+      "sha256": "ad68773d5d4dc6d520d3af35fe7ef7843cfd6d7c40a39d0fd39c73f25ba5a625",
+      "bytes": 5287
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-agents-help.log",
+      "sha256": "847c66b500e5f8af59831fcd1108350c5f022e512150125f1575ca7825f4ea37",
+      "bytes": 1746
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-agents-imports.log",
+      "sha256": "25be1498a420709ad34b24b70e72607119e2fdc981f3cf5cefd51ad358bc8d79",
+      "bytes": 167
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-claude-help.log",
+      "sha256": "847c66b500e5f8af59831fcd1108350c5f022e512150125f1575ca7825f4ea37",
+      "bytes": 1746
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-claude-imports.log",
+      "sha256": "25be1498a420709ad34b24b70e72607119e2fdc981f3cf5cefd51ad358bc8d79",
+      "bytes": 167
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-codex-help.log",
+      "sha256": "847c66b500e5f8af59831fcd1108350c5f022e512150125f1575ca7825f4ea37",
+      "bytes": 1746
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-codex-imports.log",
+      "sha256": "25be1498a420709ad34b24b70e72607119e2fdc981f3cf5cefd51ad358bc8d79",
+      "bytes": 167
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-harness-correction.json",
+      "sha256": "c9f2de1835f69427b5124c932a637544a9c36c8dbff48a7beff490320e1855b4",
+      "bytes": 526
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-isolated-script-harness-error.log",
+      "sha256": "27958eed15b238a933e44f16de9236670b6ae75c16ed6ed096e7668693621144",
+      "bytes": 291
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\fresh-validation.json",
+      "sha256": "a727b4ad8a9edca94c5dfc3ca5b61b3c433f3f46534812a378c7cb21865db215",
+      "bytes": 5389
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-check.json",
+      "sha256": "abe259af3db2737cc222f747ef2535f1351349c94186b2772d5a32845cf4dbbb",
+      "bytes": 3359
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-check.log",
+      "sha256": "35773f3c29f19ff50d0628046ac7b198dcf587951868ef5d1ff1fddef801da7f",
+      "bytes": 2920
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-commands.json",
+      "sha256": "afb32b4954e61e916f6fcd39e901775c7cbab4ac22bc54b57103e8cd46c83f27",
+      "bytes": 1064
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-old-sha-checks.json",
+      "sha256": "956de23835ea2894d608d595e9aab323bfad8f62b48ea86baffb680d1057992b",
+      "bytes": 4609
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-plan.json",
+      "sha256": "131e647e4ba6daa7b4b780dbd6b79730786d44d83bedf7ecc8314b9ea9061332",
+      "bytes": 4237
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-plan.log",
+      "sha256": "fb01d7bdd2369e4b23e5d070e0fd4f3ccd10357cb1421b1627198af4120a55da",
+      "bytes": 3546
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-result.json",
+      "sha256": "8d900616f68d3d399ce396205969595ebf510f7fa33453167b2ecde3a46440eb",
+      "bytes": 1951
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\install-result.log",
+      "sha256": "ec0979c33bfa413b6482d44cf29438753040e2693a657fea0f11f3520d61dde4",
+      "bytes": 1533
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\preserved-agents.json",
+      "sha256": "e056a10278a30b080a6678cc7a16d520908a1e887f747ca356a23d757d9cc066",
+      "bytes": 3088
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\preserved-codex.json",
+      "sha256": "2c796c239e0c281ac1a07d39f26e64f6f5007d4ac9574bf0bde6d87f28104fc6",
+      "bytes": 1588
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\push-command.json",
+      "sha256": "f60cfcedf9ec207ef4627e622b40d363f1041c8ca3af9e30b23cc2514c2cdd24",
+      "bytes": 298
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\push.log",
+      "sha256": "e19a6f92d1e9cd954d3713353ca239d9d4da5959ff645a7351c9a2c2964bc2c9",
+      "bytes": 2261
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-ff-integration-20261022\\untracked-before.json",
+      "sha256": "ae04dbfa7f1c900cbb4e0d483312096335c9af24985057af3f66c9670746d55b",
+      "bytes": 210
+    }
+  ],
+  "remaining": [
+    "ROOT incorporates these two review files in the common PWF commit.",
+    "Remote CI is observed separately; do not equate a running CI with PASS.",
+    "W03 unknown-publication narrative integration and paid/live W07 remain deferred per pause instruction."
+  ],
+  "next_action": "STOP after reporting. No new code, new company loop, paid API or W03 work."
+}

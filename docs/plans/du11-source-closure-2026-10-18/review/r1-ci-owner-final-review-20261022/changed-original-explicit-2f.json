@@ -1,0 +1,18 @@
+{
+  "case": "changed-original-explicit-2f",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pre_commit",
+    "run",
+    "mypy-contract",
+    "--config",
+    ".pre-commit-config.yaml",
+    "--files",
+    "src/company_wiki/automation/narrative_run_store.py"
+  ],
+  "returncode": 0,
+  "seconds": 2.187,
+  "source_commit": "2f632193014a1bbdd223dd578d6a3a697555b1b8",
+  "output": "mypy runtime source (same command as CI).................................Passed\n"
+}

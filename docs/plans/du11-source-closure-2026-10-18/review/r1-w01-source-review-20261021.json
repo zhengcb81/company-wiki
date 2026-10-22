@@ -1,0 +1,154 @@
+{
+  "schema_version": "independent-source-review/1",
+  "status": "PASS_ENGINEERING_CONTENT_BOUND",
+  "reviewer": "r1_w05_rf_targets",
+  "author": "ROOT",
+  "completed_at": "2026-10-21T22:58:45.853647+00:00",
+  "subject": "W01 CWP source preparation, bounded discovery, qualification/availability/latest and CLI compatibility",
+  "subject_source_sha256": {
+    "assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+    "canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+    "local_reconcile.py": "d67ecec11b4204eb6312a40c30f3e08fb50d2495a8396c7fcbcc8cf24dd23b92",
+    "local_inventory.py": "56c913846f7f67e9d0185c9ee82caa0d1eabc9493ce69c5b84c8ba98e677b726",
+    "qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+    "resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+    "source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de",
+    "source_reader.py": "f976e2954f032c54653a0f06485301b6d0628ba9ccba75aeb243cd874462920b",
+    "cli.py": "8fa777ad012b0377e278408ba2d6d17bb3025555be7e6dc48efedb9b612fe7d3"
+  },
+  "source_before_after_unchanged": true,
+  "independent_test_sha256": {
+    "test_w01_counterexamples.py": "6d0b613c6efc7eb50e3d8e9ef6f69ee993cb3b983f652e2ecb573dc08b9c0d75",
+    "test_latest_discovery.py": "178484e44af779046513a0f07d807ae466b01e200701188d176263ae70d71784"
+  },
+  "test_before_after_unchanged": true,
+  "test_results": {
+    "exit_code": 0,
+    "passed": 155,
+    "failed": 0,
+    "seconds": 45.66,
+    "independent_cases": 14,
+    "command": "PYTHONPATH=<CWP>/src;<CWP>/tests/contract <CWP>/.venv/Scripts/python.exe -m pytest .planning/r1-w01-independent/test_w01_counterexamples.py .planning/r1-w01-independent/test_latest_discovery.py tests/contract/test_source_availability.py tests/contract/test_source_scope_qualification.py tests/contract/test_single_intent_latest_acquisition.py tests/integration/test_source_qualification_e2e.py tests/integration/test_legacy_local_reconcile.py tests/unit/test_source_qualification.py -q --tb=short --basetemp .planning/r1w1v/review2 --junitxml .planning/r1-w01-independent/review2.xml",
+    "execution_environment": "require_escalated, actual mother CWP source, Python3.14.2/pytest9.1.1; no PYTHONPATH substitution of another worktree",
+    "evidence_prefix": "r1-w01-source-review-20261021/"
+  },
+  "findings": [
+    {
+      "id": "W01-REVIEW-001",
+      "severity": "P1",
+      "summary": "IR mention wrongly classified as periodic original",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_ir_mention_of_periodic_report_is_not_the_periodic_original",
+        "test_real_writer_must_not_relabel_ir_reference_as_registered_h1"
+      ]
+    },
+    {
+      "id": "W01-REVIEW-002",
+      "severity": "P1",
+      "summary": "Explicit body security code conflict ignored by name hit",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_cover_explicit_security_code_conflict_cannot_be_ignored_by_name_hit"
+      ]
+    },
+    {
+      "id": "W01-REVIEW-003",
+      "severity": "P2",
+      "summary": "Different versions on same proved fiscal period/publication day sorted by arbitrary IDs",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_same_verified_period_and_publication_day_different_versions_are_ambiguous"
+      ]
+    },
+    {
+      "id": "W01-REVIEW-004",
+      "severity": "P2",
+      "summary": "Mixed proved and unknown scope falls back to publication order",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_mixed_verified_and_unproved_period_does_not_revert_to_legacy_publication_sort"
+      ]
+    },
+    {
+      "id": "W01-REVIEW-005",
+      "severity": "P1",
+      "summary": "Valid CN source with wrong legacy labels declared absent before existing body repair",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_cn_raw_cover_repairs_wrong_registered_labels_instead_of_declaring_absence"
+      ]
+    },
+    {
+      "id": "W01-REVIEW-006",
+      "severity": "P1",
+      "summary": "Generic unresolved originals dropped and declared missing target kind",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_unknown_generic_registered_original_is_not_proof_of_absent_h1",
+        "test_real_writer_must_not_relabel_ir_reference_as_registered_h1"
+      ]
+    },
+    {
+      "id": "W01-REVIEW-007",
+      "severity": "P1",
+      "summary": "First-existing/first-found source incorrectly completes latest before inventory",
+      "status": "FIXED_AND_REVIEWED",
+      "independent_tests": [
+        "test_latest_discovery_does_not_stop_at_first_valid_old_period",
+        "test_latest_prepare_existing_old_catalog_still_discovers_new_original",
+        "test_latest_does_not_pick_registered_revision_before_unregistered_same_period",
+        "test_latest_bounded_retries_advance_beyond_twenty_old_originals",
+        "test_latest_existing_proved_source_does_not_hide_new_unknown_original"
+      ]
+    }
+  ],
+  "unresolved_engineering_findings": [],
+  "environment_observation": {
+    "sandbox_concentrated": "119 PASS/1 fixture initial artifact projection retry_scheduled; source/date assertion not reached",
+    "narrow_elevated": "1 PASS/1.78s (same named node); prior narrow attempt helper import failure recorded",
+    "claim_scope": "Sandbox-dependent artifact setup observation; no invented exact hardlink diagnosis, final complete set passed elevated."
+  },
+  "costs": {
+    "provider_post_count": 0,
+    "paid_calls": 0,
+    "tokens_added": 0,
+    "download_calls": 0
+  },
+  "permissions_review": {
+    "new_manual_approval_gates": false,
+    "new_identity_registry": false,
+    "new_parallel_fee_or_task_store": false,
+    "consumer_physical_root_logic": false
+  },
+  "product_files_written_by_reviewer": [],
+  "raw_documents_touched_by_reviewer": [],
+  "cleanup": {
+    "owned_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w1v",
+    "status": "RESTORED_INITIAL_ABSENCE",
+    "files": 1837,
+    "bytes": 81627461,
+    "initial_state": "absent; reviewer created this exclusive temporary test root",
+    "raw_downloads": 0,
+    "raw_production_modified": false,
+    "only_synthetic_fixtures": true,
+    "after_files": 0,
+    "after_bytes": 0,
+    "completed_at": "2026-10-21T22:57:45.022965+00:00",
+    "evidence_retained": "Compact final tests/logs/XML and content bindings outside the removed synthetic tmp root; no original documents copied."
+  },
+  "permanent_regression_handoff": {
+    "test_copies": "r1-w01-source-review-20261021/checks/",
+    "status": "READY_FOR_ROOT_PROMOTION",
+    "permitted_change": "Move to permanent tests and adjust helper import path only; keep assertions. ROOT owns integration."
+  },
+  "not_claimed": [
+    "W03 production default selection cutover",
+    "genuine paid model interruption/recovery",
+    "installed FF/RF final chain",
+    "W06 genuine revised forecast economic acceptance",
+    "new holdout/company audit PASS",
+    "remote CI for uncommitted subject"
+  ],
+  "next_action": "ROOT close current reviewed milestone, commit/push exact accepted source and evidence, update PWF then pause per latest user direction."
+}

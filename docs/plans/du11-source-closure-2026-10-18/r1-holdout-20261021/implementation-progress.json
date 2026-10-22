@@ -1,0 +1,82 @@
+{
+  "schema_version": "r1-systemic-implementation/1",
+  "updated_at": "2026-10-22T18:32:20.588173+00:00",
+  "status": "ACTIVE_W03A_ISOLATED_PRODUCER_CONSUMER_TDD",
+  "design": "remediation/task_plan.md",
+  "design_seal": "diagnosis/expert_handoff.json",
+  "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+  "issues": 26,
+  "roots": 11,
+  "packages": [
+    {
+      "id": "W01",
+      "owner": "ROOT",
+      "worktree": "C:/Users/郑曾波/Projects/company-wiki",
+      "status": "ENGINEERING_REVIEWED_INTEGRATED",
+      "red_evidence": ".planning/r1-w01-test/red-initialized.xml",
+      "engineering_observation": "155 PASS plus 7 postprocess CLI; 14 independent counterexamples now permanent tests; mypy src 366 PASS",
+      "independent_review_ref": "../review/r1-w01-source-review-20261021.json"
+    },
+    {
+      "id": "W02",
+      "owner": "/root/r1_w02_source_boundary",
+      "worktrees": [
+        "C:/Users/郑曾波/Projects/filing-fetch-r1-boundary",
+        "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary"
+      ],
+      "status": "ENGINEERING_REVIEWED_INTEGRATED",
+      "engineering_observation": "35 PASS / 0 skip; final FF cf15aeaa and RF 768b6dd3; ordinary unknown publication narrative still W03",
+      "independent_review_ref": "../review/r1-w02-boundary-review-20261021.json"
+    },
+    {
+      "id": "W04",
+      "owner": "/root/r1_w04_summary_runtime",
+      "worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+      "status": "ENGINEERING_REVIEWED_INTEGRATED",
+      "engineering_observation": "19 PASS / 5 independent, author related suite 129 PASS; real paid activation recovery still W07",
+      "independent_review_ref": "../review/r1-w04-independent-20261021.json"
+    },
+    {
+      "id": "W05",
+      "owner": "/root/r1_w05_rf_targets",
+      "worktree": "C:/Users/郑曾波/Projects/revenue-forecast-r1-targets",
+      "status": "ENGINEERING_REVIEWED_INTEGRATED",
+      "engineering_observation": "106 PASS + 60 subtests, author suite 171 PASS + 81 subtests; actual economic group perimeter remains W06",
+      "independent_review_ref": "../review/r1-w05-independent-20261021.json"
+    },
+    {
+      "id": "W03",
+      "status": "W03_A_TDD_TWO_ISOLATED_LANES_W03_B_REAL_ENGINE_STILL_OPEN",
+      "engineering_observation": "Public narrative timestamp/receipt consumes publication only; wire existing same-SHA availability proof without invented publication, then 0.9/v5 production context.",
+      "current_interface": "W03-current-interface.md",
+      "producer_worktree": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+      "consumer_worktree": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+      "branch": "codex/r1-narrative-availability",
+      "initial_freeze_design_unchanged": true
+    },
+    {
+      "id": "W06",
+      "status": "WAIT_W03_W07_SOURCE_CONTEXT_THEN_NEW_RESEARCH_ATTEMPT",
+      "engineering_observation": "Latest H1/IR/Q1/guidance/RPO recognition bridge, scoped targets, independent magnitude and combined stress, then four reviews."
+    },
+    {
+      "id": "W07",
+      "status": "WAIT_W03_THEN_JOINT_REAL_ACCEPTANCE",
+      "engineering_observation": "One configured real call jointly verifies 0.9 semantics, persisted paid response -> interrupted activation -> resume 0 POST, cross-run cache 0 reservation, actual RF consumption."
+    }
+  ],
+  "resource_observation": {
+    "new_paid_calls": 0,
+    "new_downloads": 0,
+    "mother_tokens": 1544023,
+    "mother_micro_usd": 625258,
+    "company_tokens": 39026,
+    "company_micro_usd": 9720,
+    "unknown_holds_preserved": true,
+    "rf_owned_sparse_checkout_files": 2136,
+    "rf_owned_sparse_checkout_bytes_each_approx": 21792950,
+    "initial_full_checkout_peak_measured": false
+  },
+  "next_action": "ROOT finalize current exact-head CI/PWF; complete W03-A joint independent review and consumer-before-producer integration; W03-B/W07/W06 and fresh holdouts remain.",
+  "engineering_closeout_ref": "engineering-closeout-20261022.json"
+}

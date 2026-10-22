@@ -1,0 +1,12 @@
+{
+  "phase": "investigating",
+  "scope": "independent narrow CI owner and changed-body type hook",
+  "files": {
+    "src/company_wiki/automation/narrative_run_store.py": "88e5452057d043d9b31594cd1cc6d2b243e704ae58160ef09b8b9b1fb993b75a",
+    ".pre-commit-config.yaml": "b288b86ba24c3fa4cb90ecfa3e957beb49af4c66d112cc8d663d4ee225956860",
+    ".github/workflows/ci.yml": "f2fec1e5e2815f649812e57302a027e690afe36c8c181a7f031cba9245ac3f80",
+    "tests/unit/test_commit_policy.py": "8ea10003cacc41bb3250fc43c000362197b6ab3399d9c956cc7fcd20ade30c5b",
+    "pyproject.toml": "d8ee07509da2fd6982efa9ea8994a68bf4150f647064003b8dd61044136685d8"
+  },
+  "source_copy_bytes": 5052298
+}

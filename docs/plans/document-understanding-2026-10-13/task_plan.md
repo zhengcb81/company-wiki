@@ -1,10 +1,10 @@
-# 当前行动计划（2026-10-21）
+# 当前行动计划（2026-10-22）
 
-**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
+**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划未完成，用户最新“继续”已恢复实施。以下历史记录不覆盖入口。
 
 ## Next Step
 
-N1准备已通过，首家药明康德initial已partial封存。四位真正独立reviewer完成73检查/26问题（15P1、11P2），当前专家统一根因和七包细则；随后按责任层TDD并行施工→原公司新attempt/正式0.9摘要与context消费/缓存和普通故障恢复→新公司泛化。R5已并线推送，195受影响、7047单测/24跳过、142smoke及远端CI39682544340全部绿；R2独立4RED/1控制PASS已证未修。原件、旧NVDA/八公司目标不重置，当前唯一入口为CURRENT_STATUS。
+ROOT先收口当前四包发布CI/PWF；W03-A CWP/RF两隔离工区已按W03-current-interface.md TDD施工，集中独审与consumer先发布后再做W03-B现成0.9/v5接线→W07一次真实摘要联合普通paid恢复/cache/RF消费→W06原公司新研究和四审→药明合联/Snowflake泛化。四包已工程完成，不重派；初始FAIL、未知费用、原件、旧目标不变。精确发布观察和详细实施步骤见DU11 CURRENT_STATUS与HANDOFF-2026-10-22.md。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

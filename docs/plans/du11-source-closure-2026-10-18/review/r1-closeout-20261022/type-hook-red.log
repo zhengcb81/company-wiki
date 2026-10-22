@@ -1,0 +1,23 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\unit\test_commit_policy.py ..F                                     [100%]
+
+================================== FAILURES ===================================
+___ test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist ___
+tests\unit\test_commit_policy.py:43: in test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist
+    assert trigger.search(filename), filename
+E   AssertionError: src/company_wiki/automation/narrative_run_store.py
+E   assert None
+E    +  where None = <built-in method search of re.Pattern object at 0x000002CBDC462D30>('src/company_wiki/automation/narrative_run_store.py')
+E    +    where <built-in method search of re.Pattern object at 0x000002CBDC462D30> = re.compile('(?x)^src/company_wiki/ (source_catalog/ (artifact_handle|source_bundle|runtime_policy|activation|close_gap| policy_2x|canary_registry|normalized_meta|flags|policy|restore| operation_contract|operatio, re.VERBOSE).search
+- generated xml file: C:\Users\֣����\Projects\company-wiki\.planning\r1-closeout\type-hook-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_commit_policy.py::test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist
+========================= 1 failed, 2 passed in 0.85s =========================

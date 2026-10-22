@@ -1,0 +1,12 @@
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to C:\Users\郑曾波\.cache\pre-commit\patch1792693023-7672.
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy changed runtime modules (same configuration as CI)...............................Passed
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[INFO] Restored changes from C:\Users\郑曾波\.cache\pre-commit\patch1792693023-7672.
+Auto packing the repository for optimum performance.
+See "git help gc" for manual housekeeping.
+[master ae7b15d6] fix: align changed-source type checks and narrow paid response proof
+ 5 files changed, 39 insertions(+), 73 deletions(-)

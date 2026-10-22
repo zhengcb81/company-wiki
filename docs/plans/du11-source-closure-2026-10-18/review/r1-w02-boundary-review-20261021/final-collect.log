@@ -1,0 +1,50 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w02-independent
+configfile: ..\..\pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 35 items
+
+<Dir company-wiki>
+  <Dir .planning>
+    <Dir r1-w02-independent>
+      <Module test_boundary_independent.py>
+        <Function test_real_child_exit_preserves_business_failure_and_native_request_id[1]>
+        <Function test_real_child_exit_preserves_business_failure_and_native_request_id[2]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[schema]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[request]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[action]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[field]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[path]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[truncated]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[html]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[array]>
+        <Function test_actual_child_malformed_failure_does_not_pass_as_named_local_success[unexpected_exit]>
+        <Function test_companion_unresolved_absent_and_requested_are_distinct>
+        <Function test_non_fmp_reuse_provider_intent_is_not_discarded_by_rf>
+        <Function test_complete_native_gap_sidecar_remains_available>
+        <Function test_actual_rf_cli_preserves_nonexception_native_gap>
+        <Function test_current_verified_open_cannot_override_source_clock[known_future]>
+        <Function test_current_verified_open_cannot_override_source_clock[wrong_sha]>
+        <Function test_current_verified_open_cannot_override_source_clock[past_asof]>
+        <Function test_current_verified_open_cannot_override_source_clock[bare_first_seen]>
+        <Function test_current_open_dto_without_public_receipt_does_not_prove_eligibility>
+        <Function test_actual_cwp_ff_rf_cli_cold_catalog_is_named_and_zero_provider>
+        <Function test_unknown_acquisition_usage_stays_unknown_separately_from_zero_companion_dispatch[adapter_timeout]>
+        <Function test_unknown_acquisition_usage_stays_unknown_separately_from_zero_companion_dispatch[budget_exceeded]>
+        <Function test_bounded_transport_failure_is_not_reclassified_as_valid_business_json[stdout_limit]>
+        <Function test_bounded_transport_failure_is_not_reclassified_as_valid_business_json[timeout]>
+        <Function test_transcript_failure_does_not_replace_valid_filing_source_candidate>
+        <Function test_request_fingerprint_matches_actual_owner_across_markets[variant0]>
+        <Function test_request_fingerprint_matches_actual_owner_across_markets[variant1]>
+        <Function test_request_fingerprint_matches_actual_owner_across_markets[variant2]>
+        <Function test_nonzero_failure_must_not_invent_zero_provider_from_inconsistent_accounting[bool_event_count]>
+        <Function test_nonzero_failure_must_not_invent_zero_provider_from_inconsistent_accounting[download_outcome_with_local_block]>
+        <Function test_w01_final_local_reasons_cross_existing_contract_without_another_identity_check[local_document_kind_unresolved]>
+        <Function test_w01_final_local_reasons_cross_existing_contract_without_another_identity_check[local_original_unreadable]>
+        <Function test_w01_final_local_reasons_cross_existing_contract_without_another_identity_check[primary_issuer_conflict]>
+        <Function test_w01_final_local_reasons_cross_existing_contract_without_another_identity_check[budget_exceeded]>
+
+========================= 35 tests collected in 0.61s =========================

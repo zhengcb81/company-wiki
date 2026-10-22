@@ -1,0 +1,307 @@
+{
+  "schema_version": "r1-rf-install-closeout/1",
+  "observed_at": "2026-10-21T23:06:28.116812+00:00",
+  "selected_files": [
+    "scripts/contracts/source_clock.py",
+    "scripts/filing_fetch_client.py",
+    "scripts/filing_upstream_cause.py",
+    "scripts/source_preparation.py",
+    "scripts/research/targets.py",
+    "scripts/research/target_measurement.py",
+    "scripts/research/native_dependencies.py",
+    "scripts/research/target_scope.py",
+    "scripts/revenue_report.py",
+    "references/management-targets.md"
+  ],
+  "writes": 20,
+  "observations": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "before_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "canonical_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+      "after_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "before_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "canonical_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+      "after_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "before_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "canonical_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+      "after_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "before_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "canonical_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+      "after_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "before_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "canonical_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+      "after_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "before_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "canonical_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+      "after_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "canonical_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "after_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "canonical_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "after_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "canonical_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "after_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "before_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5",
+      "canonical_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7",
+      "after_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "before_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5",
+      "canonical_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7",
+      "after_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "before_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5",
+      "canonical_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7",
+      "after_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "before_sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "canonical_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+      "after_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "before_sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "canonical_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+      "after_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "before_sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "canonical_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+      "after_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+      "before_sha256": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de",
+      "canonical_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+      "after_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+      "before_sha256": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de",
+      "canonical_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+      "after_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+      "before_sha256": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de",
+      "canonical_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+      "after_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\native_dependencies.py",
+      "before_sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83",
+      "canonical_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "after_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\native_dependencies.py",
+      "before_sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83",
+      "canonical_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "after_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\native_dependencies.py",
+      "before_sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83",
+      "canonical_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "after_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_scope.py",
+      "before_sha256": null,
+      "canonical_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+      "after_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\target_scope.py",
+      "before_sha256": null,
+      "canonical_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+      "after_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\target_scope.py",
+      "before_sha256": null,
+      "canonical_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+      "after_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "before_sha256": "d3eeecf893fbf5e7c6faa278afe17389bfba5962f35451e36eb7828ed836162b",
+      "canonical_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "after_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "before_sha256": "d3eeecf893fbf5e7c6faa278afe17389bfba5962f35451e36eb7828ed836162b",
+      "canonical_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "after_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "before_sha256": "d3eeecf893fbf5e7c6faa278afe17389bfba5962f35451e36eb7828ed836162b",
+      "canonical_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "after_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+      "before_sha256": "b80cc75a98802efdc831781e8bc5477fb0b0fb7b3320ef405ef3ff9a30534113",
+      "canonical_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547",
+      "after_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\management-targets.md",
+      "before_sha256": "b80cc75a98802efdc831781e8bc5477fb0b0fb7b3320ef405ef3ff9a30534113",
+      "canonical_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547",
+      "after_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\references\\management-targets.md",
+      "before_sha256": "b80cc75a98802efdc831781e8bc5477fb0b0fb7b3320ef405ef3ff9a30534113",
+      "canonical_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547",
+      "after_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547"
+    }
+  ],
+  "reviewed_to_canonical_source_maps": [
+    {
+      "path": "scripts/contracts/source_clock.py",
+      "reviewed_raw_sha256": "9e60c85f57b4616905427e1ec6204c938a537895fe4daec2adb7b67eedb3a9fe",
+      "canonical_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+      "normalized_lf_sha256": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/filing_fetch_client.py",
+      "reviewed_raw_sha256": "7eea52e6319200603c7d6e0daaf0aade5366d3921d6d69fee3564a203c81e66d",
+      "canonical_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+      "normalized_lf_sha256": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/filing_upstream_cause.py",
+      "reviewed_raw_sha256": "624571108b01a1e7f429258b659994d75fef73097529c5f49ed9249a6ab73f1c",
+      "canonical_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "normalized_lf_sha256": "2c954a0498bd55efd88e82e1108a9b9ad27aa0db78b08b062b7eedd986a1624b",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/source_preparation.py",
+      "reviewed_raw_sha256": "17a439fb9a48719e57f2fcc5345dc938a5cfa99a94d0ec004a596d18d922be9b",
+      "canonical_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7",
+      "normalized_lf_sha256": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/research/targets.py",
+      "reviewed_raw_sha256": "b800b6ac1e4e5ff719d8964d68f7e91989eda31d0e54a03f195f3a630a6a1f84",
+      "canonical_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+      "normalized_lf_sha256": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/research/target_measurement.py",
+      "reviewed_raw_sha256": "9095b09a657901c8dfde6d1776b7783bffe956caef5cbd8e18f7dedf38533424",
+      "canonical_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+      "normalized_lf_sha256": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/research/native_dependencies.py",
+      "reviewed_raw_sha256": "0e4c7e60d767ede95b50197f703a9f216b76326227b75dd59eec2c6bf892ed0a",
+      "canonical_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "normalized_lf_sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/research/target_scope.py",
+      "reviewed_raw_sha256": "9d75ef70e641e65899b2336bc83492d810bfb01ea5baab3c67323be8ee4a18b5",
+      "canonical_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+      "normalized_lf_sha256": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "scripts/revenue_report.py",
+      "reviewed_raw_sha256": "b7e9f729b782eac886e21461dd74ec8309693359c499e12be5a0573549cb11dd",
+      "canonical_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "normalized_lf_sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "reviewed_text_equivalent": true
+    },
+    {
+      "path": "references/management-targets.md",
+      "reviewed_raw_sha256": "d181b4f935cc7b760b7de6046b5e7c1500003adf633212295745ef5268785387",
+      "canonical_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547",
+      "normalized_lf_sha256": "5de69279b6882f4042acccccda405b7d2c6f0fb335bb459f9f234e27fee73547",
+      "reviewed_text_equivalent": true
+    }
+  ],
+  "fresh_process_checks": [
+    {
+      "installation": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "exit": 0,
+      "stdout": "installed runtime imports and group scope PASS\r\n",
+      "stderr": ""
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "exit": 0,
+      "stdout": "installed runtime imports and group scope PASS\r\n",
+      "stderr": ""
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "exit": 0,
+      "stdout": "installed runtime imports and group scope PASS\r\n",
+      "stderr": ""
+    }
+  ],
+  "initial_read_only_attempt": "W05 handoff stores CRLF raw hashes; first preview stopped before writes. Final run checks reviewed raw SHA then LF-text equivalence and records actual installed byte SHA.",
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "config_output_unknown_files_touched": false,
+  "logical_file_observations": 30,
+  "physical_target_count": 2,
+  "physical_destinations": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "logical_roots": [
+    ".agents",
+    ".claude",
+    ".codex"
+  ],
+  "alias_note": "Three logical skill roots resolve to two physical targets. Native selective installer deduplicated aliases; 10 files x 2 = 20 actual writes, 30 logical hash observations."
+}

@@ -1,0 +1,10 @@
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to C:\Users\郑曾波\.cache\pre-commit\patch1792693318-21376.
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy runtime source (same command as CI)..........................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[INFO] Restored changes from C:\Users\郑曾波\.cache\pre-commit\patch1792693318-21376.
+[master 20a7fb0c] fix: preserve local dependency types in the single cached source check
+ 2 files changed, 8 insertions(+), 9 deletions(-)

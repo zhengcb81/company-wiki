@@ -1,3 +1,19 @@
+## 当前进展补充：2026-10-22 四包发布与W03-A
+
+四包代码已正常推送三仓；CWP当前工程HEAD20a7fb0c，最终7083单测/24跳过和142独立smoke通过；FF899P/7S/+78subtests，RF477P/1S/+36subtests，安装后当前CWP→FF→RF固定35例9.88秒全绿且测试根恢复不存在。最终CI反控证实subset+follow_imports=skip漏本地跨模块类型，改为同一个缓存full-src命令；热缓存9.1秒，未增第二门禁。远端CI按精确SHA实录，不冒称pending已绿。
+
+ROOT已固定W03-current-interface.md；两个复用自有工区分别实施CWP producer与RF consumer（同名新分支），不碰母仓/安装/配置；旧W04/W02分支保留。ROOT负责一次集中独审/组合E2E及consumer先发布。W03-B正式0.9/v5、真实paid恢复/cache/实际RF消费与研究四审仍OPEN；0新费用/0下载。
+
+## 最新指令：2026-10-22 继续实施
+
+用户“继续”取代本轮此前暂停要求。四包工程已独审并线，先修复/验收当前CWP CI、更新发布和PWF，再接W03→W07/W06→新公司。合并后完整src检查发现Optional pin别名类型漏检；已同变量验空根修，改既有commit钩子采用单一完整src命令（热缓存约9秒）、CI去掉重复名单步骤，不加人工门禁或每次全量commit测试。以下暂停条目为较早历史，不覆盖本段及CURRENT_STATUS。
+
+## 2026-10-22 收尾后暂停
+
+- W01 有界增量发现/实际范围证明/latest歧义、W02 FF/RF业务错误与companion、W04退役付费补写并恢复可证明legacy final、W05统一目标成员范围和比率量纲均完成工程修复及非作者独审。代码已整合；推送、安装和组合检查的最终结论见子计划收尾收据，工程通过不代表真实摘要/研究通过。
+- 全src mypy366文件0错；独审 W01 155P+换行/变量补审7P，W02 35P，W04 19P，W05 106P+60subtests。各套件有重叠，不能相加成一次总测试数。
+- 用户要求本阶段告一段落；W03/W06/W07、新收费与公司循环暂停。本轮0新收费/0新下载；母账1,544,023tokens/$0.625258，unknown完整保留。唯一入口为DU11 CURRENT_STATUS，细则为10月22日交接。
+
 # 当前过程记录（2026-10-21）
 
 **唯一当前状态与接手入口：** [CURRENT_STATUS.md](CURRENT_STATUS.md)。整体计划仍开放，用户已恢复R1实施。旧记录中的“当前”“待推送”“Next Step”均只适用于当时，不覆盖此入口。
@@ -495,3 +511,7 @@ Metadata performance root cause reproduced on actual _prose:16/32members visited
 ### 2026-10-21 R1 N1冻结节点完成
 
 已固定药明康德→药明合联→Snowflake、20项通用检查、真实代码/195份安装内容SHA、母预算和首家隔离scope。配置脚本真正执行通过原生schema校验，0下载/0模型；独立agent终审PASS_PREPARATION_ONLY（r1-holdout-freeze-review-20261021），不是来源或预测通过。母账真累计1,504,997tokens/$0.615538，剩495,003tokens。下一步立即派独立executor完整RF，封存后四路独审及根因专家；旧NVDA和未来八家任务保留。
+
+## 2026-10-21 专家封存后四线并行实施
+
+26问题已映射11根因/7施工包，M1共用接口由ROOT一次接收；W01来源发现/时间资格、W02 FF与RF边界、W04实验补写退役与历史final恢复、W05比例/分部组已在独立工区TDD施工。方案及完整7卡的小型字节副本已收进R1 packet，原initial/四审/设计封存不改。RF两新工区采用sparse checkout各2136文件约21.8MB，未保留46969份旧.planning输出副本；临时完整检出峰值未测。当前无新增API/下载，预算及unknown不变。ROOT首轮source反例因长TEMP/父目录未建及测试冷catalog前置假设产生的环境/夹具失败已分开留证，真正2个发现机制RED与7个资格API RED已保留；75相关例已绿，新增cold/current-open和扩展resolver验证进行中。工程candidate不等于真实0.9/付费恢复/研究闭环通过。

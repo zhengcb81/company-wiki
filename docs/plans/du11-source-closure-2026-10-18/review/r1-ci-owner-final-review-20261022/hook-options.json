@@ -1,0 +1,26 @@
+[
+  {
+    "case": "silent-original-cold",
+    "entry": "python -m mypy --follow-imports=silent",
+    "pass_filenames": true,
+    "returncode": 1,
+    "seconds": 14.561,
+    "output": "mypy changed runtime modules (same configuration as CI).......................Failed\n- hook id: mypy-contract\n- exit code: 2\n\nC:\\Users\\\u05a3\ufffd\ufffd\ufffd\ufffd\\Projects\\company-wiki\\.venv\\Lib\\site-packages\\numpy\\__init__.pyi:737: error: Type statement is only supported in Python 3.12 and greater  [syntax]\nFound 1 error in 1 file (errors prevented further checking)\n\n"
+  },
+  {
+    "case": "full-original-cold",
+    "entry": "python -m mypy src",
+    "pass_filenames": false,
+    "returncode": 1,
+    "seconds": 42.574,
+    "output": "mypy changed runtime modules (same configuration as CI).......................Failed\n- hook id: mypy-contract\n- exit code: 1\n\nsrc\\company_wiki\\automation\\narrative_run_store.py:1252: error: Argument 1 to \"from_json\" of \"PaidResponsePin\" has incompatible type \"str | None\"; expected \"str\"  [arg-type]\nFound 1 error in 1 file (checked 366 source files)\n\n"
+  },
+  {
+    "case": "full-fixed-warm",
+    "entry": "python -m mypy src",
+    "pass_filenames": false,
+    "returncode": 0,
+    "seconds": 22.577,
+    "output": "mypy changed runtime modules (same configuration as CI).......................Passed\n"
+  }
+]

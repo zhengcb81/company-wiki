@@ -1,0 +1,10 @@
+{
+  "head": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+  "files": {
+    "src/company_wiki/automation/narrative_run_store.py": "88e5452057d043d9b31594cd1cc6d2b243e704ae58160ef09b8b9b1fb993b75a",
+    ".pre-commit-config.yaml": "80b3bd29f36d8a968fac2e5ae35eacb25b26a6084328543e1f118b15dbf12f77",
+    ".github/workflows/ci.yml": "f2fec1e5e2815f649812e57302a027e690afe36c8c181a7f031cba9245ac3f80",
+    "tests/unit/test_commit_policy.py": "877e22d21e9e810b4c6f73a72c7f5e7fd09e51e7f4e4b9b1b39170207bb67d9a",
+    "pyproject.toml": "d8ee07509da2fd6982efa9ea8994a68bf4150f647064003b8dd61044136685d8"
+  }
+}

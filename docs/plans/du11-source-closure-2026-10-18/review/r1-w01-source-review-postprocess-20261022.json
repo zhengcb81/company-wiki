@@ -1,0 +1,102 @@
+{
+  "schema_version": "independent-source-postprocess-review/1",
+  "status": "PASS_POSTPROCESS_CONTENT_BINDING",
+  "reviewer": "r1_w05_rf_targets",
+  "completed_at": "2026-10-21T23:04:09.985999+00:00",
+  "historical_review": {
+    "path": "r1-w01-source-review-20261021.json",
+    "sha256": "6edaabba5b83821db762d05220f268c48e241818ffeb55b380d51258bd156452",
+    "passed": 155,
+    "seconds": 45.66,
+    "source_sha256": {
+      "assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+      "canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+      "local_reconcile.py": "d67ecec11b4204eb6312a40c30f3e08fb50d2495a8396c7fcbcc8cf24dd23b92",
+      "local_inventory.py": "56c913846f7f67e9d0185c9ee82caa0d1eabc9493ce69c5b84c8ba98e677b726",
+      "qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+      "resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+      "source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de",
+      "source_reader.py": "f976e2954f032c54653a0f06485301b6d0628ba9ccba75aeb243cd874462920b",
+      "cli.py": "8fa777ad012b0377e278408ba2d6d17bb3025555be7e6dc48efedb9b612fe7d3"
+    },
+    "claim": "Historical 155 PASS remains bound to these original physical bytes. It was not rerun on all current bytes."
+  },
+  "current_source_sha256": {
+    "assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+    "canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+    "local_reconcile.py": "d67ecec11b4204eb6312a40c30f3e08fb50d2495a8396c7fcbcc8cf24dd23b92",
+    "local_inventory.py": "56c913846f7f67e9d0185c9ee82caa0d1eabc9493ce69c5b84c8ba98e677b726",
+    "qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+    "resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+    "source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de",
+    "source_reader.py": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+    "cli.py": "1eeec29a081121bb496d93b24c028d0f524dc8d372ad409732768dbb53c25ef6"
+  },
+  "changes": {
+    "source_reader.py": {
+      "before_sha256": "f976e2954f032c54653a0f06485301b6d0628ba9ccba75aeb243cd874462920b",
+      "after_sha256": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+      "kind": "CRLF_to_LF_only",
+      "line_count": 793,
+      "reverse_all_LF_to_CRLF_matches_historical_raw_sha256": true,
+      "LF_normalized_text_identical": true,
+      "AST_parse": "PASS"
+    },
+    "cli.py": {
+      "before_sha256": "8fa777ad012b0377e278408ba2d6d17bb3025555be7e6dc48efedb9b612fe7d3",
+      "after_sha256": "1eeec29a081121bb496d93b24c028d0f524dc8d372ad409732768dbb53c25ef6",
+      "kind": "identify_branch_local_identifier_rename_only",
+      "definition_rename": "identity = SecurityIdentityResolver -> identified_identity = SecurityIdentityResolver",
+      "use_rename": "result = identity.to_dict() -> result = identified_identity.to_dict()",
+      "each_exactly_once": true,
+      "inverse_exact_two_replacements_matches_historical_raw_sha256": true,
+      "AST_parse": "PASS",
+      "behavior": "Same identify result, no optional identity/download/source policy change."
+    }
+  },
+  "unchanged_other_seven_source_files": {
+    "assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+    "canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+    "local_reconcile.py": "d67ecec11b4204eb6312a40c30f3e08fb50d2495a8396c7fcbcc8cf24dd23b92",
+    "local_inventory.py": "56c913846f7f67e9d0185c9ee82caa0d1eabc9493ce69c5b84c8ba98e677b726",
+    "qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+    "resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+    "source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de"
+  },
+  "current_targeted_cli_tests": {
+    "exit_code": 0,
+    "passed": 7,
+    "seconds": 2.41,
+    "command": "PYTHONPATH=<CWP>/src;<CWP>/tests/contract .venv/Scripts/python.exe -m pytest tests/contract/test_single_intent_latest_acquisition.py::test_close_gap_cli_uses_one_intent_and_optional_scope_file tests/contract/test_source_catalog_security_identity.py::test_source_resolve_identifies_company_before_opening_catalog -q --tb=short --basetemp .planning/r1w1p/cli --junitxml .planning/r1-w01-postprocess/cli.xml",
+    "coverage": "6 close-gap/ensure optional-scope/resolve paths and 1 ambiguous-identity resolution path; identify-only rename also proved by exact inverse-byte mapping, not mislabeled as directly executed by these seven tests.",
+    "evidence": "r1-w01-source-review-postprocess-20261022/cli.xml"
+  },
+  "author_observation_not_reviewer_rerun": {
+    "permanent_regressions": "14 PASS/8.43s reported by ROOT after only helper import changed; not added to this reviewer seven count.",
+    "full_src_mypy": "ROOT reported final full src mypy PASS, 366 files. Not a separate reviewer rerun."
+  },
+  "reviewer_product_writes": [],
+  "network_calls": 0,
+  "paid_calls": 0,
+  "download_calls": 0,
+  "remaining_findings": [],
+  "full_155_rerun_on_current_physical_bytes": false,
+  "next_action": "ROOT commit/push current accepted milestone and update PWF then pause; reviewer stops after this addendum.",
+  "git_observation": {
+    "head": "2f632193014a1bbdd223dd578d6a3a697555b1b8",
+    "w01_commit_reported_by_root": "a7da184e",
+    "W04_merge_head_reported_by_root": "2f632193",
+    "source_content_reconfirmed_at": "2026-10-21T23:04:47.035828+00:00"
+  },
+  "cleanup": {
+    "owned_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w1p",
+    "initial_state": "absent, created by reviewer for this narrow follow-up",
+    "before_files": 85,
+    "before_bytes": 2535098,
+    "status": "RESTORED_INITIAL_ABSENCE",
+    "after_files": 0,
+    "after_bytes": 0,
+    "completed_at": "2026-10-21T23:04:10.336225+00:00",
+    "production_originals_touched": false
+  }
+}

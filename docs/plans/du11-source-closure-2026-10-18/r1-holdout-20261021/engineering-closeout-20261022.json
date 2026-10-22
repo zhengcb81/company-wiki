@@ -1,0 +1,401 @@
+{
+  "schema_version": "r1-four-package-engineering-closeout/1",
+  "observed_at_utc": "2026-10-22T18:31:16.208150+00:00",
+  "user_instruction": "Latest 继续 supersedes earlier pause. Complete current engineering publication then continue W03.",
+  "status": "ENGINEERING_REVIEWED_INTEGRATED_PUSHED_INSTALL_JOINT_PASS_CURRENT_CI_RECORDED",
+  "repositories": [
+    {
+      "repository": "company-wiki",
+      "branch": "master",
+      "engineering_code_head": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+      "current_local_head_at_observation": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+      "remote_head_at_observation": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+      "engineering_code_in_remote": true,
+      "exact_engineering_head_pushed": true,
+      "tests": {
+        "affected_push_passed_initial": 5564,
+        "affected_push_skipped_initial": 11,
+        "initial_seconds": 276.35,
+        "final_full_unit_passed": 7083,
+        "final_full_unit_skipped": 24,
+        "final_full_unit_seconds": 352.21,
+        "final_independent_smoke_passed": 142,
+        "final_independent_smoke_seconds": 40.4
+      }
+    },
+    {
+      "repository": "filing-fetch",
+      "branch": "main",
+      "engineering_code_head": "a1cb84da5e055e41a21305147d1991b839f47aba",
+      "current_local_head_at_observation": "a1cb84da5e055e41a21305147d1991b839f47aba",
+      "remote_head_at_observation": "a1cb84da5e055e41a21305147d1991b839f47aba",
+      "engineering_code_in_remote": true,
+      "exact_engineering_head_pushed": true,
+      "tests": {
+        "passed": 899,
+        "skipped": 7,
+        "subtests": 78,
+        "seconds": 132.39
+      }
+    },
+    {
+      "repository": "revenue-forecast",
+      "branch": "main",
+      "engineering_code_head": "92b6968294988122aad89d963ec330945fc8dc58",
+      "current_local_head_at_observation": "92b6968294988122aad89d963ec330945fc8dc58",
+      "remote_head_at_observation": "92b6968294988122aad89d963ec330945fc8dc58",
+      "engineering_code_in_remote": true,
+      "exact_engineering_head_pushed": true,
+      "tests": {
+        "passed": 477,
+        "skipped": 1,
+        "subtests": 36,
+        "seconds": 64.98
+      }
+    }
+  ],
+  "independent_reviews": {
+    "W01": "review/r1-w01-source-review-20261021.json",
+    "W01_postprocess": "review/r1-w01-source-review-postprocess-20261022.json",
+    "W02": "review/r1-w02-boundary-review-20261021.json",
+    "W04": "review/r1-w04-independent-20261021.json",
+    "W05": "review/r1-w05-independent-20261021.json",
+    "CI_owner_final": "review/r1-ci-owner-final-review-20261022.json"
+  },
+  "ci_initial_failure": {
+    "head": "2f632193014a1bbdd223dd578d6a3a697555b1b8",
+    "run": 39691563817,
+    "step": "Strict type check on src",
+    "cause": "Optional paid response string alias not narrowed; fixed module omitted by fixed-list hook and follow_imports=skip.",
+    "fixes": [
+      "ae7b15d6",
+      "20a7fb0c"
+    ],
+    "full_src_final": "PASS 366 source files",
+    "review_valid_old_red_and_fixed_green": true,
+    "changed_only_probe_initial_racing_HEAD_invalidated": true,
+    "single_cached_type_hook_warm_seconds": 9.1063069,
+    "new_human_permission_gates": 0
+  },
+  "ci_observations": [
+    {
+      "repo": "company-wiki",
+      "expected": "20a7fb0c",
+      "runs": [
+        {
+          "id": 39831978563,
+          "head_sha": "20a7fb0cae4c3e1a56cb0cb7cb9adb9346b58deb",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/zhengcb81/company-wiki/actions/runs/39831978563",
+          "name": "CI"
+        }
+      ],
+      "method": "anonymous public Actions API",
+      "observed_at": "2026-10-22T18:31:09.7189698Z"
+    },
+    {
+      "repo": "revenue-forecast",
+      "expected": "92b69682",
+      "runs": [
+        {
+          "id": 39691152846,
+          "head_sha": "92b6968294988122aad89d963ec330945fc8dc58",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/39691152846",
+          "name": "quality"
+        }
+      ],
+      "method": "anonymous public Actions API",
+      "observed_at": "2026-10-22T18:31:10.2101099Z"
+    },
+    {
+      "repo": "filing-fetch",
+      "expected": "a1cb84da",
+      "runs": [
+        {
+          "id": 39691450316,
+          "head_sha": "a1cb84da5e055e41a21305147d1991b839f47aba",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39691450316",
+          "name": "quality"
+        }
+      ],
+      "method": "anonymous public Actions API",
+      "observed_at": "2026-10-22T18:31:10.6337691Z"
+    }
+  ],
+  "installed_joint": {
+    "schema_version": "r1-installed-joint-check/1",
+    "started_at": "2026-10-22T00:10:15.393508+01:00",
+    "completed_at": "2026-10-22T00:10:26.660642+01:00",
+    "test_sha256": "22d9e75660a506300e014962dae7308cf8df6a3a9a5e6731aa1a5b8aeb83626b",
+    "argv": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w02-boundary-review-20261021\\test_boundary_independent.py",
+      "-c",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-closeout\\joint-pytest.ini",
+      "--noconftest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "--tb=short",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1joint\\tests",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-closeout\\installed-joint.xml"
+    ],
+    "scope": "Current CWP W01/W04 main producer with physically installed FF W02 and RF W02/W05, one fresh process, 35 fixed independent offline counterexamples including real cold CWP->FF->RF CLI. No live acceptance.",
+    "environment": {
+      "W02_FF_CODE_ROOT": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "W02_RF_CODE_ROOT": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "CWP_V2_CODE_ROOT": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "TEMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1joint",
+      "TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1joint"
+    },
+    "exit_code": 0,
+    "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1joint",
+    "temporary_initially_absent": true,
+    "cleanup": "RESTORED_INITIAL_ABSENT",
+    "live_api_calls": 0,
+    "paid_calls": 0,
+    "downloads": 0,
+    "cleanup_file_count": 5,
+    "cleanup_bytes": 1340.0,
+    "temporary_absent_after": true,
+    "passed": 35,
+    "seconds": 9.88
+  },
+  "rf_installation": {
+    "receipt": "review/r1-closeout-20261022/rf-install-receipt.json",
+    "status": "PASS",
+    "logical_roots": 3,
+    "physical_targets": 2,
+    "runtime_files": 10,
+    "physical_writes": 20,
+    "fresh_process_checks": 3
+  },
+  "ff_installation": {
+    "report": "review/r1-ff-integration-20261022.json",
+    "status": "COMPLETE_FF_MAIN_PUSH_AND_SELECTIVE_INSTALL",
+    "logical_roots": 3,
+    "physical_targets": 2,
+    "runtime_files": 6,
+    "physical_writes": 12,
+    "fresh_process_import_help_checks": 6
+  },
+  "rf_preexisting_wip": {
+    "before": {
+      "assurance/runs/daily_alert.jsonl": "de196752c314b10f75d4f44cb30c357d3f0dbcdd410d0afbca2a3da8db1bc9e2",
+      "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+    },
+    "after": {
+      "assurance/runs/daily_alert.jsonl": "de196752c314b10f75d4f44cb30c357d3f0dbcdd410d0afbca2a3da8db1bc9e2",
+      "assurance/runs/weekly_alert.jsonl": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "assurance/runs/weekly_manifest.json": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324"
+    },
+    "unchanged": true,
+    "committed": false
+  },
+  "frozen_expert_mirrors": [
+    {
+      "path": "r1-holdout-20261021/diagnosis/root_causes.json",
+      "sha256": "59d7d3ddef14f66a39502a351c3e33979c1ed75f9b1115790b422bfb5e8b5b2b"
+    },
+    {
+      "path": "r1-holdout-20261021/diagnosis/coverage.json",
+      "sha256": "7b4aed4307f0958731dac3af37044a12e92e63b5df54c63d470b0549c6142e6a"
+    },
+    {
+      "path": "r1-holdout-20261021/diagnosis/baseline_files.json",
+      "sha256": "c03efbf51525b7ad806bc72d4bc699612b6ce19236f731de87cdd35e22afc2f9"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/task_plan.md",
+      "sha256": "82d8f78902ef987934139693374f9904ca7df48baa8cf1def3e17adde9a8e12a"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/findings.md",
+      "sha256": "236bac71cd09af7ec0cfd357e0fe47b9f03642111acbcb4b67b123dc39eec500"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/progress.md",
+      "sha256": "915ad015b3a4dd8ab30c5814820c2bff32ff768f7d9bcd6dcff80390a41d8c98"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/shared_contract.md",
+      "sha256": "efcf74fe3225d8a2c3ec235089985c9055ea831f3fddc9d479528323a79480e4"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W01.md",
+      "sha256": "744e2baff9b271d19b6c49370caecc6ae8405f0c39775b6cb9e1b94aab19b1aa"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W02.md",
+      "sha256": "28eaf7ba1206feac0c78d198947974fe249e52489c117d51bdef828dc2894d03"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W03.md",
+      "sha256": "f333b40c0044ad07428b05ac0ce052e0d250ad96a7cc7406e7aa2b186e843197"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W04.md",
+      "sha256": "6dbbac61511d030cc0eefa44185068d895d8382820d8fa72e5adb500bb53f1fe"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W05.md",
+      "sha256": "d96736dfa32c594514ff49f0e98872d5ff9a0c71e600bd9773eecc7951977f1c"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W06.md",
+      "sha256": "623bea25c0207c90323ac774b39630cd1e263f228bea037e335667b029449f70"
+    },
+    {
+      "path": "r1-holdout-20261021/remediation/work_packages/W07.md",
+      "sha256": "e808aae8e5560968e8a81a5187d811ea817fecabf16886140c8eb7929aa93740"
+    },
+    {
+      "path": "r1-holdout-20261021/expert-remediation-overview.json",
+      "sha256": "8cf8bf382d1b2a9afb941c2444d018c885e29e1547f14d4d644c6732bece31b1"
+    },
+    {
+      "path": "r1-holdout-20261021/expert-remediation-overview.md",
+      "sha256": "3ab064db3b5b881c4025c86b33b4d97389934db1364dc68f2e05bd967271ee42"
+    }
+  ],
+  "portable_evidence": [
+    {
+      "path": "review/r1-closeout-20261022/cwp-code-push.log",
+      "sha256": "32614db529a9c600c6065fb9b6f62c4808e87488823a5a28f6a3454dd6befeb9",
+      "bytes": 3417
+    },
+    {
+      "path": "review/r1-closeout-20261022/cwp-final-code-push.log",
+      "sha256": "d1d6af18881378e83c8858471e560a036774aff4c1d38fd92d321a739d55b8dd",
+      "bytes": 3695
+    },
+    {
+      "path": "review/r1-closeout-20261022/rf-code-push.log",
+      "sha256": "e2496896f300242ea68097759de13f9b8745f235ee38af525875c7b2cc779ebc",
+      "bytes": 789
+    },
+    {
+      "path": "review/r1-closeout-20261022/mypy-final.log",
+      "sha256": "435a96adb1511d2ad62c452be9d967a288353e7c12f32caef696f41408aed2ec",
+      "bytes": 46
+    },
+    {
+      "path": "review/r1-closeout-20261022/mypy-warm.log",
+      "sha256": "435a96adb1511d2ad62c452be9d967a288353e7c12f32caef696f41408aed2ec",
+      "bytes": 46
+    },
+    {
+      "path": "review/r1-closeout-20261022/mypy-warm-time.json",
+      "sha256": "2a04e74a50ffb0d12b9d4a33a46cc8bf8aed303ce3b557cad7da5a38a8b226ca",
+      "bytes": 49
+    },
+    {
+      "path": "review/r1-closeout-20261022/rf-install-receipt.json",
+      "sha256": "a644b0aa106ac8d0a902546fe2aca668ca184e532e9db4d91fc3aa1bd284c1f1",
+      "bytes": 17590
+    },
+    {
+      "path": "review/r1-closeout-20261022/rf-install-apply.json",
+      "sha256": "a406cffff4ae38681811416f91c71970f8801c40ba7d3817344b48f4ed18e5a6",
+      "bytes": 3181
+    },
+    {
+      "path": "review/r1-closeout-20261022/rf-install-check.json",
+      "sha256": "244b99eb9e0618f0e10864310b2fa3cb43053222b882c7a26674d70db69c006b",
+      "bytes": 3181
+    },
+    {
+      "path": "review/r1-closeout-20261022/installed-joint.json",
+      "sha256": "c5f040559423573d983adea283a1d43aba681537daac6f12117f4f9f765362dd",
+      "bytes": 1985
+    },
+    {
+      "path": "review/r1-closeout-20261022/installed-joint.xml",
+      "sha256": "8a03630091fa8c26ee19b201ef1722e8e99167bc65ea0e286dd2193c4b5ab4b9",
+      "bytes": 4655
+    },
+    {
+      "path": "review/r1-closeout-20261022/installed-joint.log",
+      "sha256": "ca975595d78a135a3f63506a534076e4a6fc8d824026cccd51ed0b61cd67e07a",
+      "bytes": 101
+    },
+    {
+      "path": "review/r1-closeout-20261022/type-hook-red.log",
+      "sha256": "4b20cced7f7cbff69bc8301f34c3dfc591c1681d4ba627997939f6292980b622",
+      "bytes": 1980
+    },
+    {
+      "path": "review/r1-closeout-20261022/type-hook-red.xml",
+      "sha256": "03c102fa019dce75740a13c77ac780ce95f0098c6ea78e0fcc99a3cc540f7b4a",
+      "bytes": 1962
+    },
+    {
+      "path": "review/r1-closeout-20261022/type-ci-duplicate-red.log",
+      "sha256": "3756aa5921291d025d3a60134a7b738356985fe0731821a391235dee3b36b631",
+      "bytes": 2032
+    },
+    {
+      "path": "review/r1-closeout-20261022/type-owner-green.log",
+      "sha256": "266b0972d348dcf2fc6d72d8475bddc789adb498bab739abbd7a52489c28387a",
+      "bytes": 1077
+    },
+    {
+      "path": "review/r1-closeout-20261022/type-owner-green.xml",
+      "sha256": "abad0015357e3c3f5d71b812b25c1fd29867cf7ec3e79db534a44f0d0a8f13a2",
+      "bytes": 3057
+    },
+    {
+      "path": "review/r1-closeout-20261022/type-hook-closure-green.log",
+      "sha256": "ee9311ab2cfa63e3e6d9d42668452d3f09e7f37789e98f6c38bb04c4ef43e8aa",
+      "bytes": 800
+    },
+    {
+      "path": "review/r1-closeout-20261022/cwp-ci-fix-commit.log",
+      "sha256": "377c2c704782bd8f040e2e3d6f3d6db777a3503d343d8d909db4f5ffcd0450e0",
+      "bytes": 928
+    },
+    {
+      "path": "review/r1-closeout-20261022/cwp-type-closure-commit.log",
+      "sha256": "b712f0a6f5b0c3c30e08dbea4fda530a77560ad0c07080dcabc785edd04eabb6",
+      "bytes": 832
+    },
+    {
+      "path": "review/r1-closeout-20261022/ci-observation.json",
+      "sha256": "ffd96e3b873fa4dc65fbbee9869a040e0dbfcd5c2b70ffcdccc9134ac21218e4",
+      "bytes": 1448
+    },
+    {
+      "path": "review/r1-closeout-20261022/ci-final-observation.json",
+      "sha256": "78f453880dfa3300acdcd261e2690e606c7f9b2670855feb3251d0e66d45f1e2",
+      "bytes": 1445
+    }
+  ],
+  "portable_evidence_bytes": 54296,
+  "resource_observation": {
+    "new_paid_calls": 0,
+    "new_downloads": 0,
+    "mother_tokens": 1544023,
+    "mother_micro_usd": 625258,
+    "unknown_holds_preserved": true,
+    "production_raw_deleted": 0,
+    "production_config_changed": false,
+    "external_Dayu_IQS_changed": false
+  },
+  "quality_limits": [
+    "Engineering and offline installed CLI pass are not 0.9/v5 real summary, live paid activation recovery, coverage, actual RF formula consumption or new research four-review PASS.",
+    "Initial 639-artifact partial manifest and FAIL reports unchanged; complete live tree is still local, not fresh-clone reproducible.",
+    "Current W03 two isolated producer/consumer lanes are new work and not included in this closeout acceptance."
+  ],
+  "next": "W03-current-interface.md producer/consumer TDD, ROOT joint independent review, consumer before producer publication; then W03-B/W07/W06 and HK/US holdouts."
+}

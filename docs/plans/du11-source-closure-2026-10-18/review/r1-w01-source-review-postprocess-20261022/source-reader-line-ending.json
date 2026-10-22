@@ -1,0 +1,6 @@
+{
+  "file": "src/company_wiki/source_catalog/source_reader.py",
+  "before_sha256": "F976E2954F032C54653A0F06485301B6D0628BA9CCBA75AEB243CD874462920B",
+  "after_sha256": "FF66EE735FB3D7CA7FFAE9C82615240468807C894E1A9E883E09075B12A44E39",
+  "change": "CRLF to LF only; source text unchanged"
+}

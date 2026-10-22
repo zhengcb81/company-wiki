@@ -1,0 +1,479 @@
+{
+  "observed_at_utc": "2026-10-21T22:11:31.224380+00:00",
+  "repo_observations": [
+    {
+      "repo": "company_wiki",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "head": "feaef48accdee0e076d2ecd3108718b06203b3ca",
+      "git_status_returncode": 0,
+      "git_status_stdout": " M docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json\n M docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md\n M docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/r5-integration.json\n?? .planning/architecture-quality-20261013/baseline.json\n?? .planning/architecture-quality-20261013/preserved-midpoint.json\n?? .planning/architecture-quality-20261013/worktree-cleanup-plan.json\n?? .planning/du8-ff41-root-20261016/\n?? .planning/r1-r2-triage/\n?? .planning/r1ctfix/\n?? .planning/r1rv21/\n?? .planning/shared-reading-production/\n?? .planning/w04-selector-reception/complete_boundary_support.py\n?? .planning/w04-selector-reception/context-review/\n?? .planning/w04-selector-reception/finalize_current.py\n?? .planning/w04-selector-reception/fix_migration_duplicate_expectation.py\n?? .planning/w04-selector-reception/fix_owner_argument_type.py\n?? .planning/w04-selector-reception/implement_root_boundaries.py\n?? .planning/w04-selector-reception/implementation-commit.json\n?? .planning/w04-selector-reception/legacy-failures-replay/\n?? .planning/w04-selector-reception/migrate_proven_budget_policy.py\n?? .planning/w04-selector-reception/prepare_boundary_tests.py\n?? .planning/w04-selector-reception/preserve_legacy_coalescing.py\n?? .planning/w04-selector-reception/publish_w04.py\n?? .planning/w04-selector-reception/replay_fixed_six.py\n?? .planning/w04-selector-reception/replay_legacy_failures.py\n?? .planning/w04-selector-reception/root-fix/boundary-combined-final/\n?? .planning/w04-selector-reception/root-fix/budget-migration-tests/\n?? .planning/w04-selector-reception/root-fix/final-after-legacy-preservation/junit.xml\n?? .planning/w04-selector-reception/root-fix/final-after-legacy-preservation/stderr.log\n?? .planning/w04-selector-reception/root-fix/fixed-six-native-inputs-complete/stderr.log\n?? .planning/w04-selector-reception/root-fix/fixed-six-native-inputs-complete/stdout.log\n?? .planning/w04-selector-reception/root-fix/fixed-six-native/\n?? .planning/w04-selector-reception/root-fix/original-budget-after-support/\n?? .planning/w04-selector-reception/root-fix/related-boundary-first/\n?? .planning/w04-selector-reception/root-fix/related-boundary-valid/\n?? .planning/w04-selector-reception/root-fix/root-boundary-first-green/\n?? .planning/w04-selector-reception/root-fix/root-boundary-red/\n?? .planning/w04-selector-reception/root-fix/root-boundary-support/\n?? .planning/w04-selector-reception/run_focused.py\n?? .planning/w08-root-reception/accept_cwp.py\n?? .planning/w08-root-reception/cleanup_cwp_duplicates.py\n?? .planning/w08-root-reception/close_cwp_publication.py\n?? .planning/w08-root-reception/correct_cwp_cutoff.py\n?? .planning/w08-root-reception/finish_cwp_checks.py\n?? .planning/w08-root-reception/implement_cwp_observations.py\n?? .planning/w08-root-reception/intake.py\n?? .planning/w08-root-reception/prepare_cwp_red.py\n?? .planning/w08-root-reception/rf/owner-wip-before.json\n?? .planning/w08-root-reception/verify_cwp.py\n?? docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/initial-audit/\n?? docs/plans/du11-source-closure-2026-10-18/review/r1-r2-recovery-triage-20261021.json\n?? docs/plans/du11-source-closure-2026-10-18/review/r1-r2-recovery-triage-20261021.md\n",
+      "git_status_stderr": "",
+      "clean": false
+    },
+    {
+      "repo": "filing_fetch",
+      "root": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "head": "e8740748f91999cb24169b42f8e789726ed50482",
+      "git_status_returncode": 0,
+      "git_status_stdout": "?? .planning/du11-empty-placeholder-original.py\n?? config/FMP_API_KEY.txt\n",
+      "git_status_stderr": "",
+      "clean": false
+    },
+    {
+      "repo": "revenue_forecast",
+      "root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "head": "9669c4d79cff7bf3e023dbd6cb74c411f4bef7bf",
+      "git_status_returncode": 0,
+      "git_status_stdout": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/\n",
+      "git_status_stderr": "",
+      "clean": false
+    }
+  ],
+  "files": [
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/source_catalog/local_reconcile.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\local_reconcile.py",
+      "exists": true,
+      "sha256": "92b4292f760d1d36ada3b449757f4d02c682213964bb1cfe64bc8ad67ea97877",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/source_catalog/local_inventory.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\local_inventory.py",
+      "exists": true,
+      "sha256": "8952cb86018f2c5debda5b866d62926c10d47e3dd04b4ebe20bdb5a9994d3d07",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/source_catalog/qualification.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\qualification.py",
+      "exists": true,
+      "sha256": "d772560bc43b74ee481694f0ea6ebe07ec0179b36b00a1164e6218c97256fdee",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/source_catalog/source_availability.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_availability.py",
+      "exists": true,
+      "sha256": "f7ff615541cb2742f3aae74c11222093193496b7de064a62661343f5b1827d79",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/source_catalog/source_location.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_location.py",
+      "exists": true,
+      "sha256": "1b521cd1f6133335e4e934adb3e8e8220ce27409612a195cd62ece0f9c3c3676",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "exists": true,
+      "sha256": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/automation/narrative_summarize.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_summarize.py",
+      "exists": true,
+      "sha256": "11db1f35266075deaece4e3f19c884ab294c7a82b8b88a50ff2104f6016c9150",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/automation/narrative_batch.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_batch.py",
+      "exists": true,
+      "sha256": "dfe6f8b34f73983976fac326917e16283fe1631bb311d3b7a280ecd6af74b986",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/automation/narrative_run_store.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_run_store.py",
+      "exists": true,
+      "sha256": "ebbb54bbd1acaab71d29016b650c470198a6f1b67da592be66c092cdf661c15f",
+      "installed_copies": []
+    },
+    {
+      "repo": "company_wiki",
+      "relative_path": "src/company_wiki/automation/narrative_model_caller.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_model_caller.py",
+      "exists": true,
+      "sha256": "495055ae46fa22335240826808be87854bd4263f4c5ba0b8e6fa54802d20ae06",
+      "installed_copies": []
+    },
+    {
+      "repo": "filing_fetch",
+      "relative_path": "SKILL.md",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\SKILL.md",
+      "exists": true,
+      "sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md",
+          "exists": true,
+          "old_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\SKILL.md",
+          "exists": true,
+          "old_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\SKILL.md",
+          "exists": true,
+          "old_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022"
+        }
+      ]
+    },
+    {
+      "repo": "filing_fetch",
+      "relative_path": "scripts/fetch_filing.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+      "exists": true,
+      "sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+          "exists": true,
+          "old_sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+          "exists": true,
+          "old_sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+          "exists": true,
+          "old_sha256": "8e569e89c8af860d6966d104351933c20fe6260bb5281c13d613034d1373c3b7"
+        }
+      ]
+    },
+    {
+      "repo": "filing_fetch",
+      "relative_path": "scripts/filing_contracts.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py",
+      "exists": true,
+      "sha256": "ddd6a0d36a658464757cc1016a31e79f85869623e68c06720d448a9199ed0d08",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+          "exists": true,
+          "old_sha256": "ddd6a0d36a658464757cc1016a31e79f85869623e68c06720d448a9199ed0d08"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+          "exists": true,
+          "old_sha256": "ddd6a0d36a658464757cc1016a31e79f85869623e68c06720d448a9199ed0d08"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+          "exists": true,
+          "old_sha256": "ddd6a0d36a658464757cc1016a31e79f85869623e68c06720d448a9199ed0d08"
+        }
+      ]
+    },
+    {
+      "repo": "filing_fetch",
+      "relative_path": "scripts/ff_v2_envelope.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "exists": true,
+      "sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+          "exists": true,
+          "old_sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+          "exists": true,
+          "old_sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+          "exists": true,
+          "old_sha256": "78c6a51afef3fd00fe6deed0e17b651e965b0c4ccb5ddf5fbc669e767aaf3346"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "SKILL.md",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\SKILL.md",
+      "exists": true,
+      "sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+          "exists": true,
+          "old_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\SKILL.md",
+          "exists": true,
+          "old_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\SKILL.md",
+          "exists": true,
+          "old_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/source_preparation.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "exists": true,
+      "sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "exists": true,
+          "old_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "exists": true,
+          "old_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "exists": true,
+          "old_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/filing_upstream_cause.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "exists": true,
+      "sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "exists": true,
+          "old_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "exists": true,
+          "old_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "exists": true,
+          "old_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/company_wiki_narrative_contracts.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "exists": true,
+      "sha256": "94b57485a6327259969cc02ef67041a873e88509a5211b38bc652b156d46fc4d",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+          "exists": true,
+          "old_sha256": "94b57485a6327259969cc02ef67041a873e88509a5211b38bc652b156d46fc4d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+          "exists": true,
+          "old_sha256": "94b57485a6327259969cc02ef67041a873e88509a5211b38bc652b156d46fc4d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+          "exists": true,
+          "old_sha256": "94b57485a6327259969cc02ef67041a873e88509a5211b38bc652b156d46fc4d"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/source_narrative_context.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_narrative_context.py",
+      "exists": true,
+      "sha256": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_narrative_context.py",
+          "exists": true,
+          "old_sha256": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_narrative_context.py",
+          "exists": true,
+          "old_sha256": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\source_narrative_context.py",
+          "exists": true,
+          "old_sha256": "ee271c3f5be61b2c7df845b60f7962422fd45808c0c38b727a700ecc93ede259"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/narrative_citation_context.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_citation_context.py",
+      "exists": true,
+      "sha256": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_citation_context.py",
+          "exists": true,
+          "old_sha256": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\narrative_citation_context.py",
+          "exists": true,
+          "old_sha256": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\narrative_citation_context.py",
+          "exists": true,
+          "old_sha256": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/research/targets.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\targets.py",
+      "exists": true,
+      "sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+          "exists": true,
+          "old_sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+          "exists": true,
+          "old_sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+          "exists": true,
+          "old_sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87"
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/target_measurement.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\target_measurement.py",
+      "exists": false,
+      "sha256": null,
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\target_measurement.py",
+          "exists": false,
+          "old_sha256": null
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\target_measurement.py",
+          "exists": false,
+          "old_sha256": null
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\target_measurement.py",
+          "exists": false,
+          "old_sha256": null
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/native_dependencies.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\native_dependencies.py",
+      "exists": false,
+      "sha256": null,
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\native_dependencies.py",
+          "exists": false,
+          "old_sha256": null
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\native_dependencies.py",
+          "exists": false,
+          "old_sha256": null
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\native_dependencies.py",
+          "exists": false,
+          "old_sha256": null
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/target_comparison.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\target_comparison.py",
+      "exists": false,
+      "sha256": null,
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\target_comparison.py",
+          "exists": false,
+          "old_sha256": null
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\target_comparison.py",
+          "exists": false,
+          "old_sha256": null
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\target_comparison.py",
+          "exists": false,
+          "old_sha256": null
+        }
+      ]
+    },
+    {
+      "repo": "revenue_forecast",
+      "relative_path": "scripts/contracts/source_clock.py",
+      "source_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "exists": true,
+      "sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "installed_copies": [
+        {
+          "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+          "exists": true,
+          "old_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+          "exists": true,
+          "old_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+          "exists": true,
+          "old_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b"
+        }
+      ]
+    }
+  ],
+  "sync_rule": "Only implementation-touched runtime files and changed imports. Before install re-read old_sha256; drift stops that target and is resolved as owner change, never overwritten. Tests/tools not copied as runtime. No blanket install.",
+  "root_preflight_supersedes_normal_git_errors": {
+    "source": "ROOT preflight 2026-10-21",
+    "note": "FF main e8740748 origin0/0 trackedclean; RF main9669c4d7 origin0/0 with existing assurance/runs three WIP+output. Escalated Git resolves earlier normal status worktree error. No new Git audit required. Existing CWP runtime worktree reusable; ROOT source lane and automation runtime lane separate."
+  }
+}

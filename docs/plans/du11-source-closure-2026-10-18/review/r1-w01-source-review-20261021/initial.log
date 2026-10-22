@@ -1,0 +1,39 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w1v\\initial", "requested_basetemp_len": 58, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 6 items
+
+.planning\r1-w01-independent\test_w01_counterexamples.py .FFFF.          [100%]
+
+================================== FAILURES ===================================
+_______ test_ir_mention_of_periodic_report_is_not_the_periodic_original _______
+.planning\r1-w01-independent\test_w01_counterexamples.py:43: in test_ir_mention_of_periodic_report_is_not_the_periodic_original
+    with pytest.raises(SourceReadError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+__ test_cover_explicit_security_code_conflict_cannot_be_ignored_by_name_hit ___
+.planning\r1-w01-independent\test_w01_counterexamples.py:49: in test_cover_explicit_security_code_conflict_cannot_be_ignored_by_name_hit
+    with pytest.raises(SourceReadError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+_ test_same_verified_period_and_publication_day_different_versions_are_ambiguous _
+.planning\r1-w01-independent\test_w01_counterexamples.py:58: in test_same_verified_period_and_publication_day_different_versions_are_ambiguous
+    assert latest_source_index(versions) is None
+E   AssertionError: assert 1 is None
+E    +  where 1 = latest_source_index([{'fiscal_year': 2026, 'fiscal_period': 'H1', 'scope_verified': True, 'published_date': '2026-08-01', ...}, {'fiscal_year': 2026, 'fiscal_period': 'H1', 'scope_verified': True, 'published_date': '2026-08-01', ...}])
+_ test_mixed_verified_and_unproved_period_does_not_revert_to_legacy_publication_sort _
+.planning\r1-w01-independent\test_w01_counterexamples.py:65: in test_mixed_verified_and_unproved_period_does_not_revert_to_legacy_publication_sort
+    assert latest_source_index(versions) is None
+E   AssertionError: assert 1 is None
+E    +  where 1 = latest_source_index([{'fiscal_year': 2026, 'fiscal_period': 'H1', 'scope_verified': True, 'published_date': '2026-08-01', ...}, {'scope_verified': False, 'published_date': '2026-10-01', 'source_id': 'unproved'}])
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w01-independent\initial.xml -
+=========================== short test summary info ===========================
+FAILED .planning/r1-w01-independent/test_w01_counterexamples.py::test_ir_mention_of_periodic_report_is_not_the_periodic_original
+FAILED .planning/r1-w01-independent/test_w01_counterexamples.py::test_cover_explicit_security_code_conflict_cannot_be_ignored_by_name_hit
+FAILED .planning/r1-w01-independent/test_w01_counterexamples.py::test_same_verified_period_and_publication_day_different_versions_are_ambiguous
+FAILED .planning/r1-w01-independent/test_w01_counterexamples.py::test_mixed_verified_and_unproved_period_does_not_revert_to_legacy_publication_sort
+========================= 4 failed, 2 passed in 3.75s =========================

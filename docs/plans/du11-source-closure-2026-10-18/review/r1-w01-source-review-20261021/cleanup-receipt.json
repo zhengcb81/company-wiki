@@ -1,0 +1,14 @@
+{
+  "owned_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w1v",
+  "status": "RESTORED_INITIAL_ABSENCE",
+  "files": 1837,
+  "bytes": 81627461,
+  "initial_state": "absent; reviewer created this exclusive temporary test root",
+  "raw_downloads": 0,
+  "raw_production_modified": false,
+  "only_synthetic_fixtures": true,
+  "after_files": 0,
+  "after_bytes": 0,
+  "completed_at": "2026-10-21T22:57:45.022965+00:00",
+  "evidence_retained": "Compact final tests/logs/XML and content bindings outside the removed synthetic tmp root; no original documents copied."
+}

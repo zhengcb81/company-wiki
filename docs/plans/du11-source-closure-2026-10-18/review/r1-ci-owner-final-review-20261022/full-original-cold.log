@@ -1,0 +1,7 @@
+mypy changed runtime modules (same configuration as CI).......................Failed
+- hook id: mypy-contract
+- exit code: 1
+
+src\company_wiki\automation\narrative_run_store.py:1252: error: Argument 1 to "from_json" of "PaidResponsePin" has incompatible type "str | None"; expected "str"  [arg-type]
+Found 1 error in 1 file (checked 366 source files)
+

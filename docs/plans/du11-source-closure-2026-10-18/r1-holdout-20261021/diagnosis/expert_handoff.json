@@ -1,0 +1,152 @@
+{
+  "schema_version": "expert-remediation-handoff/1",
+  "run_id": "r1-20261021-cn-wuxi-apptec",
+  "attempt": "initial",
+  "sealed_at_utc": "2026-10-21T22:19:47.249251+00:00",
+  "state": "diagnosis_complete_ready_for_implementation",
+  "manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
+  "counts": {
+    "reviewer_issues": 26,
+    "P1": 15,
+    "P2": 11,
+    "mapped_issues": 26,
+    "root_causes": 11,
+    "work_packages": 7,
+    "additional_coordinator_findings": 1,
+    "carried_R2": 1
+  },
+  "document_integrity_checks": {
+    "all_26_unique_and_mapped": true,
+    "mapped_package_paths_exist": true,
+    "all_primary_mapping_json_pointers_resolved": true,
+    "manifest_still_sealed": true,
+    "all_plan_files_nonempty": true
+  },
+  "product_tests_run_by_expert": false,
+  "existing_diagnostic_tests": "sealed R2 4 expected RED + 1 control PASS; sealed reviewer probes; not remediation GREEN",
+  "source_byte_checks": {
+    "unchanged_count": 22,
+    "drift_since_baseline": []
+  },
+  "expert_activity": {
+    "paid_calls": 0,
+    "downloads": 0,
+    "product_changes": 0,
+    "config_changes": 0,
+    "install_changes": 0,
+    "commits": 0
+  },
+  "artifact_bindings": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\root_causes.json",
+      "sha256": "59d7d3ddef14f66a39502a351c3e33979c1ed75f9b1115790b422bfb5e8b5b2b",
+      "bytes": 30444
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\coverage.json",
+      "sha256": "7b4aed4307f0958731dac3af37044a12e92e63b5df54c63d470b0549c6142e6a",
+      "bytes": 89044
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\baseline_files.json",
+      "sha256": "c03efbf51525b7ad806bc72d4bc699612b6ce19236f731de87cdd35e22afc2f9",
+      "bytes": 24781
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\task_plan.md",
+      "sha256": "82d8f78902ef987934139693374f9904ca7df48baa8cf1def3e17adde9a8e12a",
+      "bytes": 3627
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\findings.md",
+      "sha256": "236bac71cd09af7ec0cfd357e0fe47b9f03642111acbcb4b67b123dc39eec500",
+      "bytes": 6236
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\progress.md",
+      "sha256": "915ad015b3a4dd8ab30c5814820c2bff32ff768f7d9bcd6dcff80390a41d8c98",
+      "bytes": 2542
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\shared_contract.md",
+      "sha256": "efcf74fe3225d8a2c3ec235089985c9055ea831f3fddc9d479528323a79480e4",
+      "bytes": 6586
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W01.md",
+      "sha256": "744e2baff9b271d19b6c49370caecc6ae8405f0c39775b6cb9e1b94aab19b1aa",
+      "bytes": 6363
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W02.md",
+      "sha256": "28eaf7ba1206feac0c78d198947974fe249e52489c117d51bdef828dc2894d03",
+      "bytes": 5035
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W03.md",
+      "sha256": "f333b40c0044ad07428b05ac0ce052e0d250ad96a7cc7406e7aa2b186e843197",
+      "bytes": 4561
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W04.md",
+      "sha256": "6dbbac61511d030cc0eefa44185068d895d8382820d8fa72e5adb500bb53f1fe",
+      "bytes": 5976
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W05.md",
+      "sha256": "d96736dfa32c594514ff49f0e98872d5ff9a0c71e600bd9773eecc7951977f1c",
+      "bytes": 4273
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W06.md",
+      "sha256": "623bea25c0207c90323ac774b39630cd1e263f228bea037e335667b029449f70",
+      "bytes": 6097
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\work_packages\\W07.md",
+      "sha256": "e808aae8e5560968e8a81a5187d811ea817fecabf16886140c8eb7929aa93740",
+      "bytes": 7497
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\expert-remediation-overview.json",
+      "sha256": "8cf8bf382d1b2a9afb941c2444d018c885e29e1547f14d4d644c6732bece31b1",
+      "bytes": 6218
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\r1-holdout-20261021\\expert-remediation-overview.md",
+      "sha256": "3ab064db3b5b881c4025c86b33b4d97389934db1364dc68f2e05bd967271ee42",
+      "bytes": 4399
+    }
+  ],
+  "package_order": {
+    "parallel_first": [
+      "W01",
+      "W02",
+      "W04",
+      "W05"
+    ],
+    "then": [
+      "W03 after W04 integration",
+      "W06 after source/boundary/targets integration",
+      "W07 real integrated E2E/reviews/default/generalization"
+    ]
+  },
+  "critical_decisions": [
+    "latest H1 target-aware bounded incremental discovery, not infinite candidate caps",
+    "reuse existing availability; optional current verified open is exact-byte/currentUTC only and does not block the rest",
+    "retire new default-off coverage repair paid dispatch; keep legacy results and immutable charges, restore proven final owner; no operation framework",
+    "ordinary single operation paid before activation recovery remains mandatory real test",
+    "0.9 actual model projection→RF formula-consuming context→cache/resume before production default decision",
+    "research corrections from primary counterevidence and minimal operational bridges; no forced guidance/base or arithmetic-engine rewrite"
+  ],
+  "budget_reference": {
+    "mother_tokens": 1544023,
+    "mother_micro_usd": 625258,
+    "company_tokens": 39026,
+    "company_micro_usd": 9720,
+    "unknown_preserved": true,
+    "authority": "existing native stores + phase_c_runner mother_totals, recount before real calls; not a new ledger"
+  },
+  "next_action": "ROOT accepts shared DTO/RED plan once and immediately dispatches W01/W02/W04/W05 in nonoverlapping lanes; no small-node permission loop",
+  "final_quality": "not_evaluated_implementation_pending"
+}

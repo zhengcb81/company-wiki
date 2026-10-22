@@ -1,0 +1,89 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    "references/management-targets.md",
+    "scripts/contracts/source_clock.py",
+    "scripts/filing_fetch_client.py",
+    "scripts/filing_upstream_cause.py",
+    "scripts/research/native_dependencies.py",
+    "scripts/research/target_measurement.py",
+    "scripts/research/target_scope.py",
+    "scripts/research/targets.py",
+    "scripts/revenue_report.py",
+    "scripts/source_preparation.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "references/management-targets.md",
+        "scripts/contracts/source_clock.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research/target_measurement.py",
+        "scripts/research/target_scope.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py",
+        "scripts/source_preparation.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "references/management-targets.md",
+        "scripts/contracts/source_clock.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research/target_measurement.py",
+        "scripts/research/target_scope.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py",
+        "scripts/source_preparation.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "references/management-targets.md",
+        "scripts/contracts/source_clock.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research/target_measurement.py",
+        "scripts/research/target_scope.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py",
+        "scripts/source_preparation.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "references/management-targets.md",
+        "scripts/contracts/source_clock.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research/target_measurement.py",
+        "scripts/research/target_scope.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py",
+        "scripts/source_preparation.py"
+      ]
+    }
+  ]
+}

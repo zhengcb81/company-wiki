@@ -1,0 +1,23 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+tests\unit\test_commit_policy.py F                                       [100%]
+
+================================== FAILURES ===================================
+______________ test_ci_runs_the_complete_source_type_check_once _______________
+tests\unit\test_commit_policy.py:54: in test_ci_runs_the_complete_source_type_check_once
+    assert checks == ["python -m mypy src"]
+E   AssertionError: assert ['python -m m... -m mypy src'] == ['python -m mypy src']
+E     
+E     At index 0 diff: 'python -m mypy src/company_wiki/source_catalog/artifact_handle.py src/company_wiki/source_catalog/source_bundle.py src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/close_gap.py src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/canary_registry.py src/company_wiki/source_catalog/normalized_meta.py src/company_wiki/source_catalog/flags.py src/company_wiki/source_catalog/policy.py src/company_wiki/source_catalog/restore.py src/company_wiki/source_catalog/opera...
+E     
+E     ...Full output truncated (3 lines hidden), use '-vv' to show
+=========================== short test summary info ===========================
+FAILED tests/unit/test_commit_policy.py::test_ci_runs_the_complete_source_type_check_once
+============================== 1 failed in 0.46s ==============================

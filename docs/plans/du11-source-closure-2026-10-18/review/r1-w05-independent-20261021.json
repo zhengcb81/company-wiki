@@ -1,0 +1,116 @@
+{
+  "schema_version": "r1-independent-engineering-review/1",
+  "package_id": "W05",
+  "reviewer": "/root/r1_w02_source_boundary",
+  "reviewer_independence": "Reviewer authored W02 only, not W04 or W05. This review did not modify either product or author handoff.",
+  "observed_at_utc": "2026-10-21T22:59:55.198491+00:00",
+  "status": "PASS_ENGINEERING_CONTENT_BOUND",
+  "product_commit": "364330472e2f7ecc263400f8daa0f29ffcfd897f",
+  "checkout_head_at_seal": "95c8136a64e2049a8f63e47de33bdfaa82534cc1",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-targets",
+  "author_handoff_sha256": "e4965422baf426e34c1dc1489b9d6dedfb6e8c49983ff00a727e9c2abe8fd912",
+  "changed_files": [
+    {
+      "path": "scripts/research/targets.py",
+      "sha256": "b800b6ac1e4e5ff719d8964d68f7e91989eda31d0e54a03f195f3a630a6a1f84",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "scripts/research/target_measurement.py",
+      "sha256": "9095b09a657901c8dfde6d1776b7783bffe956caef5cbd8e18f7dedf38533424",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "scripts/research/native_dependencies.py",
+      "sha256": "0e4c7e60d767ede95b50197f703a9f216b76326227b75dd59eec2c6bf892ed0a",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "scripts/research/target_scope.py",
+      "sha256": "9d75ef70e641e65899b2336bc83492d810bfb01ea5baab3c67323be8ee4a18b5",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "scripts/revenue_report.py",
+      "sha256": "b7e9f729b782eac886e21461dd74ec8309693359c499e12be5a0573549cb11dd",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "references/management-targets.md",
+      "sha256": "d181b4f935cc7b760b7de6046b5e7c1500003adf633212295745ef5268785387",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "tests/test_r1_target_scope.py",
+      "sha256": "c07693ad24c00ea968103b956de10c263c4d92aab20f9b9ab2c6d88c9a437697",
+      "matches_author_handoff": true
+    }
+  ],
+  "source_hashes_match_author": true,
+  "material_findings": [],
+  "tests": {
+    "passed": 106,
+    "independent_new_cases": 6,
+    "subtests_passed": 60,
+    "xml_testcase_count": 166,
+    "failures": 0,
+    "skipped": 0,
+    "author_related_controls_rerun": 100,
+    "xml": "r1-w04-w05-independent-20261021/w05-native.xml",
+    "xml_sha256": "adae8fca81012f4199c63fd045d859fd4cb82e6d27e2010b28bca39c6652657d",
+    "log": "r1-w04-w05-independent-20261021/w05-native.log",
+    "test_source": "r1-w04-w05-independent-20261021/test_w05_review.py",
+    "test_source_sha256": "89235ae05e8f3801bea144fe19a02aeaa644358e71ac44ac1692613cf4d843c7",
+    "configuration": "Explicit owned pytest.ini, --noconftest, no cache provider; author helper fixtures reconstruct only synthetic native state."
+  },
+  "checks": [
+    "One native member resolver serves validation, actual dependency ancestry and base/future measurement; subsets exclude unrelated business and company adjustments.",
+    "Independent permutation/non-mutation control, forward scenario base-period control and excluded-business shock control all pass.",
+    "USD billion to USD million works on the selected members; foreign currency is not silently converted. Typed rate quantities stay dimensionless and raw statements are not rewritten.",
+    "Unknown/duplicate/nested/overlapping-base membership is rejected; missing/nonpositive denominators are named gaps, without zero filling.",
+    "Native quarter ancestry, money/FX constraints, endpoint range semantics, legacy qualitative/custom behavior and publish/render/snapshot controls are covered."
+  ],
+  "limits_and_remaining": [
+    "The first review inherited mother CWP pytest.ini because its independent test file lived under the mother tree; all assertions passed but the temporary directory auto-relocated. A second authoritative run used an owned -c and --noconftest, and the created temporary directory was removed.",
+    "Flat native segment names/base IDs cannot establish real economic disjointness. Source-backed perimeter review remains a W06 research obligation; no company-specific branch or inferred hierarchy was added.",
+    "W06 must actually use the installed group/rate contracts on the corrected company model. Engineering comparison tests are not a forecast-quality pass."
+  ],
+  "live_provider_calls": 0,
+  "paid_model_calls": 0,
+  "downloads": 0,
+  "product_raw_config_install_writes": 0,
+  "cleanup": {
+    "production_raw_deleted": 0,
+    "observed_at_utc": "2026-10-21T22:58:32.6708382Z",
+    "other_owner_preexisting_removed": 0,
+    "targets": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w04-native-tmp",
+        "exists_after": false,
+        "bytes": 7059401,
+        "files": 132
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w05-native-tmp",
+        "exists_after": false,
+        "bytes": 986110,
+        "files": 18
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\temp",
+        "exists_after": false,
+        "bytes": 0,
+        "files": 0
+      },
+      {
+        "reason": "initial review inherited mother pytest.ini autorelocation; corrected to isolated -c and --noconftest",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-targets\\cw-pytest-basetemp\\20261021-225348-55197a50",
+        "exists_after": false,
+        "bytes": 40764,
+        "files": 4
+      }
+    ],
+    "schema_version": "independent-review-cleanup/1"
+  },
+  "next_action": "ROOT integrate current reviewed product version with W01/W02, run selected combined regression, publish and update PWF, then pause per latest user. Do not start W03/live calls now."
+}

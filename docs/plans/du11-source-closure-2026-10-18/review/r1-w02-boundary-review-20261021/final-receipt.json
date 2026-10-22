@@ -1,0 +1,39 @@
+{
+  "python": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+  "collect_exit": 0,
+  "environment": {
+    "PYTHONUTF8": "1",
+    "W02_RF_CODE_ROOT": "C:/Users/郑曾波/Projects/revenue-forecast-r1-boundary",
+    "TEMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w2v",
+    "CWP_V2_CODE_ROOT": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+    "W02_FF_CODE_ROOT": "C:/Users/郑曾波/Projects/filing-fetch-r1-boundary",
+    "TMP": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w2v",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki/src"
+  },
+  "argv": [
+    "-m",
+    "pytest",
+    ".planning/r1-w02-independent/test_boundary_independent.py",
+    "--rootdir",
+    ".planning/r1-w02-independent",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w2v/final",
+    "--junitxml",
+    ".planning/r1-w02-independent/final.xml"
+  ],
+  "started_utc": "2026-10-21T22:59:55.9797206Z",
+  "downloads": 0,
+  "temp": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1w2v",
+  "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "test_exit": 0,
+  "live_api_calls": 0,
+  "cost_usd": 0,
+  "source_unchanged": true,
+  "finished_utc": "2026-10-21T23:00:06.9047804Z",
+  "source_after": "source-after.json",
+  "source_before": "source-before.json"
+}

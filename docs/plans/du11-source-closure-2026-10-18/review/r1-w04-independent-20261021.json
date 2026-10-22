@@ -1,0 +1,112 @@
+{
+  "schema_version": "r1-independent-engineering-review/1",
+  "package_id": "W04",
+  "reviewer": "/root/r1_w02_source_boundary",
+  "reviewer_independence": "Reviewer authored W02 only, not W04 or W05. This review did not modify either product or author handoff.",
+  "observed_at_utc": "2026-10-21T22:59:55.198491+00:00",
+  "status": "PASS_ENGINEERING_CONTENT_BOUND",
+  "product_commit": "375c29f915fd9206be1ee01fef2bf2eea4d99a58",
+  "checkout_head_at_seal": "3b80e0ec9d35db7777d00f419dfe9d5072306f8a",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+  "author_handoff_sha256": "28267cffb0003770c748100ebf5c2bb2131d2996a089555a6bfaca67a95ebfc6",
+  "changed_files": [
+    {
+      "path": "src/company_wiki/automation/execution_snapshot.py",
+      "sha256": "015cb1978ec1f391fd14e1e3eb894d228dcbf5c9cd6d865098e42842d6071128",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summarize.py",
+      "sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_run_store.py",
+      "sha256": "e51c0f7c28db9710a2a25ca449ee0b20bbe3342e50e70785f011aee7b06a8811",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "sha256": "f6ec52b18322223c23abb4b4bd2f2806cfc3ff9dc44cfd9af6b7be0df6c335e3",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "tests/unit/test_narrative_summary_coverage_repair.py",
+      "sha256": "649d886e4a4d5a317569ec830c512c44b1b1a6861a3906295839c264be6fb7c9",
+      "matches_author_handoff": true
+    },
+    {
+      "path": "tests/unit/test_narrative_legacy_final_output.py",
+      "sha256": "492f1594d34ff8756c6a1854a596a77db1167b6f3d6e76b45311f93ddaf603c0",
+      "matches_author_handoff": true
+    }
+  ],
+  "source_hashes_match_author": true,
+  "material_findings": [],
+  "tests": {
+    "passed": 19,
+    "independent_new_cases": 5,
+    "subtests_passed": 0,
+    "xml_testcase_count": 19,
+    "failures": 0,
+    "skipped": 0,
+    "author_related_controls_rerun": 14,
+    "xml": "r1-w04-w05-independent-20261021/w04-native.xml",
+    "xml_sha256": "998882a811978f32112050f4e3161a3d3f029ca0bc1bd8721181e611a894b380",
+    "log": "r1-w04-w05-independent-20261021/w04-native.log",
+    "test_source": "r1-w04-w05-independent-20261021/test_w04_review.py",
+    "test_source_sha256": "1f5e34c96b69fac12fb3b46c3652c529324414a853e32a08493d9d813aefd549",
+    "configuration": "Explicit owned pytest.ini, --noconftest, no cache provider; author helper fixtures reconstruct only synthetic native state."
+  },
+  "checks": [
+    "Retired env cannot create a new coverage repair operation for raw or official JSON; old partial is readable without a new model/generation.",
+    "Successful verify depends on the exact summary job in the immutable run; a different native job cannot receive the final output charge.",
+    "Delivered effect, exact final bytes and successful consumed summary must agree; changed successful-summary model response is rejected atomically.",
+    "Historical first zero remains byte-identical; final settles once to proven causal operation, later identical reads are idempotent.",
+    "Missing single paid-response object does not create another provider request/reservation or release existing fees.",
+    "Legacy unresolved output owner stays named/readable rather than overwriting zero; ordinary local paid replay/activation and immutable compaction controls are retained."
+  ],
+  "limits_and_remaining": [
+    "Initial independent launch hit a host temporary-directory FileNotFoundError before collection. It was a harness error, not a product failure; fixed with an owned TEMP/TMP and explicit review configuration.",
+    "Real configured 0.9/v5 paid response interruption, cache and RF consumption remain W07. Offline finite model integration is not a live API pass.",
+    "The original historical R2 database was not present; no claim that old dirty code or all historical fallback outputs were recovered."
+  ],
+  "live_provider_calls": 0,
+  "paid_model_calls": 0,
+  "downloads": 0,
+  "product_raw_config_install_writes": 0,
+  "cleanup": {
+    "production_raw_deleted": 0,
+    "observed_at_utc": "2026-10-21T22:58:32.6708382Z",
+    "other_owner_preexisting_removed": 0,
+    "targets": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w04-native-tmp",
+        "exists_after": false,
+        "bytes": 7059401,
+        "files": 132
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w05-native-tmp",
+        "exists_after": false,
+        "bytes": 986110,
+        "files": 18
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\temp",
+        "exists_after": false,
+        "bytes": 0,
+        "files": 0
+      },
+      {
+        "reason": "initial review inherited mother pytest.ini autorelocation; corrected to isolated -c and --noconftest",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-targets\\cw-pytest-basetemp\\20261021-225348-55197a50",
+        "exists_after": false,
+        "bytes": 40764,
+        "files": 4
+      }
+    ],
+    "schema_version": "independent-review-cleanup/1"
+  },
+  "next_action": "ROOT integrate current reviewed product version with W01/W02, run selected combined regression, publish and update PWF, then pause per latest user. Do not start W03/live calls now."
+}

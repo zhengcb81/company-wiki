@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="1.748" timestamp="2026-10-21T23:49:35.528713+01:00" hostname="DESKTOP-156V213"><testcase classname=".planning.r1-w01-independent.test_latest_discovery" name="test_latest_discovery_does_not_stop_at_first_valid_old_period" time="0.337"><failure message="AssertionError: {'document_id': 'urn:company-wiki:document:sha256:4901afe46ca13c022ebf9adc5b2643d2ca324e292c6cfecf8c1587894204b2ef', '...204b2ef', 'content_sha256': '4901afe46ca13c022ebf9adc5b2643d2ca324e292c6cfecf8c1587894204b2ef', 'byte_size': 1248, ...}&#10;assert '4901afe46ca1...587894204b2ef' == 'df19422c2407...a0677f9aea5b6'&#10;  &#10;  - df19422c2407f6d52e7084c6fd518ece26e3bf90f6696ec1247a0677f9aea5b6&#10;  + 4901afe46ca13c022ebf9adc5b2643d2ca324e292c6cfecf8c1587894204b2ef">.planning\r1-w01-independent\test_latest_discovery.py:22: in test_latest_discovery_does_not_stop_at_first_valid_old_period
+    assert ref.content_sha256 == expected, SourceVersionReader(cat).describe_version(ref)
+E   AssertionError: {'document_id': 'urn:company-wiki:document:sha256:4901afe46ca13c022ebf9adc5b2643d2ca324e292c6cfecf8c1587894204b2ef', '...204b2ef', 'content_sha256': '4901afe46ca13c022ebf9adc5b2643d2ca324e292c6cfecf8c1587894204b2ef', 'byte_size': 1248, ...}
+E   assert '4901afe46ca1...587894204b2ef' == 'df19422c2407...a0677f9aea5b6'
+E     
+E     - df19422c2407f6d52e7084c6fd518ece26e3bf90f6696ec1247a0677f9aea5b6
+E     + 4901afe46ca13c022ebf9adc5b2643d2ca324e292c6cfecf8c1587894204b2ef</failure></testcase><testcase classname=".planning.r1-w01-independent.test_latest_discovery" name="test_latest_prepare_existing_old_catalog_still_discovers_new_original" time="0.208"><failure message="AssertionError: assert 'fc83c30dc8e9...cddeddab1f9cb' == '8bc279b3c677...d51cbd412caf4'&#10;  &#10;  - 8bc279b3c67774ee6312fbb54d4fd7abb31da008e5ac81ef029d51cbd412caf4&#10;  + fc83c30dc8e95c50403a7d3e249c835124cb0ec47b809f0ce86cddeddab1f9cb">.planning\r1-w01-independent\test_latest_discovery.py:41: in test_latest_prepare_existing_old_catalog_still_discovers_new_original
+    assert result["source_ref"]["content_sha256"] == new.ref.content_sha256
+E   AssertionError: assert 'fc83c30dc8e9...cddeddab1f9cb' == '8bc279b3c677...d51cbd412caf4'
+E     
+E     - 8bc279b3c67774ee6312fbb54d4fd7abb31da008e5ac81ef029d51cbd412caf4
+E     + fc83c30dc8e95c50403a7d3e249c835124cb0ec47b809f0ce86cddeddab1f9cb</failure></testcase><testcase classname=".planning.r1-w01-independent.test_latest_discovery" name="test_latest_does_not_pick_registered_revision_before_unregistered_same_period" time="0.188"><failure message="AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'ready', 'reason': 'existing_active_source', 'source_ref': {'do...c', 'content_sha256': 'eed7d0b3e98cf5eae3bb5aefc9fba4a462cd16c733db1423a6a2a81df10fc79c', 'byte_size': 1247, ...}, ...}&#10;assert 'ready' == 'ambiguous'&#10;  &#10;  - ambiguous&#10;  + ready">.planning\r1-w01-independent\test_latest_discovery.py:60: in test_latest_does_not_pick_registered_revision_before_unregistered_same_period
+    assert result["status"] == "ambiguous", result
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'ready', 'reason': 'existing_active_source', 'source_ref': {'do...c', 'content_sha256': 'eed7d0b3e98cf5eae3bb5aefc9fba4a462cd16c733db1423a6a2a81df10fc79c', 'byte_size': 1247, ...}, ...}
+E   assert 'ready' == 'ambiguous'
+E     
+E     - ambiguous
+E     + ready</failure></testcase></testsuite></testsuites>

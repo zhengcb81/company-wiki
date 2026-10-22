@@ -1,0 +1,27 @@
+{
+  "schema_version": "r1-independent-owned-test-cleanup/1",
+  "targets": [
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-ci-independent\\hook-fixture",
+      "files_removed": 2016,
+      "bytes_removed": 44677134,
+      "scope": "owned by this narrow review",
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1civ",
+      "files_removed": 42,
+      "bytes_removed": 2863700,
+      "scope": "owned by this narrow review",
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1civ-elevated",
+      "files_removed": 59,
+      "bytes_removed": 3230077,
+      "scope": "owned by this narrow review",
+      "exists_after": false
+    }
+  ],
+  "first_cleanup_attempt": "Owned isolated Git object was read-only on Windows; initial removal stopped after partial progress. Counts below are remaining-file lower bounds, not original complete footprint."
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="3.481" timestamp="2026-10-21T23:54:44.136567+01:00" hostname="DESKTOP-156V213"><testcase classname="test_boundary_independent" name="test_nonzero_failure_must_not_invent_zero_provider_from_inconsistent_accounting[bool_event_count]" time="0.434"><failure message="AssertionError: assert 'local_candidate_limit' == 'invalid_producer_schema'&#10;  &#10;  - invalid_producer_schema&#10;  + local_candidate_limit">.planning\r1-w02-independent\test_boundary_independent.py:274: in test_nonzero_failure_must_not_invent_zero_provider_from_inconsistent_accounting
+    assert caught.value.upstream_cause['code']=='invalid_producer_schema'
+E   AssertionError: assert 'local_candidate_limit' == 'invalid_producer_schema'
+E     
+E     - invalid_producer_schema
+E     + local_candidate_limit</failure></testcase><testcase classname="test_boundary_independent" name="test_nonzero_failure_must_not_invent_zero_provider_from_inconsistent_accounting[download_outcome_with_local_block]" time="0.416"><failure message="AssertionError: assert 'local_candidate_limit' == 'invalid_producer_schema'&#10;  &#10;  - invalid_producer_schema&#10;  + local_candidate_limit">.planning\r1-w02-independent\test_boundary_independent.py:274: in test_nonzero_failure_must_not_invent_zero_provider_from_inconsistent_accounting
+    assert caught.value.upstream_cause['code']=='invalid_producer_schema'
+E   AssertionError: assert 'local_candidate_limit' == 'invalid_producer_schema'
+E     
+E     - invalid_producer_schema
+E     + local_candidate_limit</failure></testcase></testsuite></testsuites>

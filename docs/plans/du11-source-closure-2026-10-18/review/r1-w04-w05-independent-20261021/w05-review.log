@@ -1,0 +1,17 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w04-w05-independent\\w05-tmp", "requested_basetemp_len": 75, "cwd_len": 49, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast-r1-targets\\cw-pytest-basetemp\\20261021-225348-55197a50", "effective_basetemp_len": 93}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 106 items
+
+..\company-wiki\.planning\r1-w04-w05-independent\test_w05_review.py .... [  3%]
+..                                                                       [  5%]
+..\company-wiki ........................................................ [ 58%]
+............................................                             [100%]
+
+- generated xml file: C:\Users\֣����\Projects\company-wiki\.planning\r1-w04-w05-independent\w05-review.xml -
+============================= 106 passed in 6.81s =============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast-r1-targets\\cw-pytest-basetemp\\20261021-225348-55197a50", "existed": true, "removed": false}

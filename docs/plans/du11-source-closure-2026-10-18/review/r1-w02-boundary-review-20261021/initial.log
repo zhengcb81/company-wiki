@@ -1,0 +1,37 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1w2v\\t1", "requested_basetemp_len": 53, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w02-independent
+configfile: ..\..\pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 21 items
+
+.planning\r1-w02-independent\test_boundary_independent.py ............FF [ 66%]
+F......                                                                  [100%]
+
+================================== FAILURES ===================================
+__________ test_non_fmp_reuse_provider_intent_is_not_discarded_by_rf __________
+.planning\r1-w02-independent\test_boundary_independent.py:104: in test_non_fmp_reuse_provider_intent_is_not_discarded_by_rf
+    assert observed.get('companion_observation')==native['transcript']
+E   AssertionError: assert None == {'status': 'not_run', 'reason': 'filing_failed_before_companion_dispatch', 'retryable': False, 'intent': 'reuse_only', ...}
+E    +  where None = <built-in method get of dict object at 0x0000018F5A5AEA00>('companion_observation')
+E    +    where <built-in method get of dict object at 0x0000018F5A5AEA00> = {'producer_exit_code': 2, 'calls': 2, 'downloads': 0}.get
+_____________ test_complete_native_gap_sidecar_remains_available ______________
+.planning\r1-w02-independent\test_boundary_independent.py:118: in test_complete_native_gap_sidecar_remains_available
+    assert observed.get('filing_fetch_result')==native
+E   AssertionError: assert None == {'schema_version': '2.0', 'status': 'gap', 'request_period': {'mode': 'exact', 'fiscal_year': 2025, 'fiscal_period': '..._gap_plan', 'gap_hash': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'download_events': 0}, ...}
+E    +  where None = <built-in method get of dict object at 0x0000018F5A684E00>('filing_fetch_result')
+E    +    where <built-in method get of dict object at 0x0000018F5A684E00> = {'companion_observation': {'status': 'not_applicable', 'reason': 'filing_not_capture_ready', 'retryable': False}, 'calls': 3, 'downloads': 0}.get
+____________ test_actual_rf_cli_preserves_nonexception_native_gap _____________
+.planning\r1-w02-independent\test_boundary_independent.py:137: in test_actual_rf_cli_preserves_nonexception_native_gap
+    assert error.get('filing_fetch_result')==native
+E   AssertionError: assert None == {'schema_version': '2.0', 'status': 'gap', 'request_period': {'mode': 'exact', 'fiscal_year': 2025, 'fiscal_period': '..._gap_plan', 'gap_hash': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'download_events': 0}, ...}
+E    +  where None = <built-in method get of dict object at 0x0000018F5A683640>('filing_fetch_result')
+E    +    where <built-in method get of dict object at 0x0000018F5A683640> = {'error_code': 'upstream', 'error': 'filing-fetch client exited 2: status=gap: unspecified', 'companion_observation': {'status': 'not_applicable', 'reason': 'filing_not_capture_ready', 'retryable': False}, 'calls': 3, ...}.get
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\r1-w02-independent\initial.xml -
+=========================== short test summary info ===========================
+FAILED .planning\r1-w02-independent\test_boundary_independent.py::test_non_fmp_reuse_provider_intent_is_not_discarded_by_rf
+FAILED .planning\r1-w02-independent\test_boundary_independent.py::test_complete_native_gap_sidecar_remains_available
+FAILED .planning\r1-w02-independent\test_boundary_independent.py::test_actual_rf_cli_preserves_nonexception_native_gap
+======================== 3 failed, 18 passed in 7.40s =========================

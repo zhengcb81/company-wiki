@@ -1,0 +1,82 @@
+FFFFFF....                                                               [100%]
+================================== FAILURES ===================================
+_________ test_cannot_charge_final_to_an_unrelated_native_job[select] _________
+.planning\r1-w04-w05-independent\test_w04_review.py:35: in test_cannot_charge_final_to_an_unrelated_native_job
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+_______ test_cannot_charge_final_to_an_unrelated_native_job[not-in-run] _______
+.planning\r1-w04-w05-independent\test_w04_review.py:35: in test_cannot_charge_final_to_an_unrelated_native_job
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+____ test_successful_model_record_not_equal_to_consumed_verify_is_refused _____
+.planning\r1-w04-w05-independent\test_w04_review.py:51: in test_successful_model_record_not_equal_to_consumed_verify_is_refused
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+______ test_missing_single_paid_object_cannot_dispatch_or_release_charge ______
+.planning\r1-w04-w05-independent\test_w04_review.py:73: in test_missing_single_paid_object_cannot_dispatch_or_release_charge
+    owned.caller.generate(owned.context(), request)
+src\company_wiki\automation\narrative_model_caller.py:301: in generate
+    raise NarrativeBudgetCallError(
+E   company_wiki.automation.narrative_model_caller.NarrativeBudgetCallError: MODEL_PAID_RESPONSE_UNAVAILABLE
+
+During handling of the above exception, another exception occurred:
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:195: in __exit__
+    exc.__traceback__ = traceback
+    ^^^^^^^^^^^^^^^^^
+E   dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'
+_________ test_final_native_settlement_cannot_exceed_reserved_output __________
+.planning\r1-w04-w05-independent\test_w04_review.py:96: in test_final_native_settlement_cannot_exceed_reserved_output
+    owned.publish(monkeypatch)
+tests\unit\test_narrative_legacy_final_output.py:184: in publish
+    assert receipt.status == "activation_pending"
+E   AssertionError: assert 'retry_scheduled' == 'activation_pending'
+E     
+E     - activation_pending
+E     + retry_scheduled
+------------------------------ Captured log call ------------------------------
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+WARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNCERTAIN
+_ test_ordinary_single_paid_operation_recovers_then_activates_with_no_new_reservation _
+tests\unit\test_narrative_legacy_final_output.py:287: in test_ordinary_single_paid_operation_recovers_then_activates_with_no_new_reservation
+    own.caller.generate(own.context(), request)
+src\company_wiki\automation\narrative_model_caller.py:301: in generate
+    raise NarrativeBudgetCallError(
+E   company_wiki.automation.narrative_model_caller.NarrativeBudgetCallError: MODEL_PAID_RESPONSE_UNAVAILABLE
+
+During handling of the above exception, another exception occurred:
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:195: in __exit__
+    exc.__traceback__ = traceback
+    ^^^^^^^^^^^^^^^^^
+E   dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'
+=========================== short test summary info ===========================
+FAILED .planning\r1-ci-independent::test_cannot_charge_final_to_an_unrelated_native_job[select]
+FAILED .planning\r1-ci-independent::test_cannot_charge_final_to_an_unrelated_native_job[not-in-run]
+FAILED .planning\r1-ci-independent::test_successful_model_record_not_equal_to_consumed_verify_is_refused
+FAILED .planning\r1-ci-independent::test_missing_single_paid_object_cannot_dispatch_or_release_charge
+FAILED .planning\r1-ci-independent::test_final_native_settlement_cannot_exceed_reserved_output
+FAILED .planning\r1-ci-independent::test_ordinary_single_paid_operation_recovers_then_activates_with_no_new_reservation
+6 failed, 4 passed in 9.50s
