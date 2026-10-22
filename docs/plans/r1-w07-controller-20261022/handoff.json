@@ -1,15 +1,15 @@
 {
   "schema_version": "w07-controller-handoff/1",
-  "status": "engineering_candidate_pending_root_independent_review",
+  "status": "engineering_candidate_native_outcome_fixed_pending_same_sha_independent_replay",
   "branch": "codex/r1-holdout-controller",
   "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-holdout-controller",
   "base_commit": "c3b4ebf1993b433d7501462388ae436e118be815",
-  "product_commit": "8b00fd7f8d858ced08f9eb247a76428df977389f",
+  "product_commit": "5a1548e228bfdf231ca624767661ed138c962136",
   "code": {
     "tools/document_understanding_benchmark/holdout_acceptance.py": {
-      "sha256": "365060882d0d07383ab31881b0fe003245963e3ff028e301fcd52a6a73f47aec",
-      "bytes": 20693,
-      "git_lf_blob_sha256": "8ef94b3e8c9b10841ece51705f90c6122b4e380b225f120a6066e0e11d2b4a19"
+      "sha256": "b138a5c3a88dbebf73a03b85ef1d6f3ac55813f5d6ce63c30e884c4391df23ec",
+      "bytes": 21743,
+      "git_lf_blob_sha256": "8c715b6168c2a060d9cafddb1844ae57c17b4fafae8b038626c041ce3b20abdd"
     },
     "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": {
       "sha256": "c2f030c642c8f61027de3ce7406f82b31a8d875f82ab0fd8a5ae2db1dd7ba10b",
@@ -22,9 +22,9 @@
       "git_lf_blob_sha256": "e341903bce2964d455232fcbc5e6b90c6998dbd1586f5dbfcd28bb78bba78f34"
     },
     "tools/document_understanding_benchmark/holdout_acceptance_observer.py": {
-      "sha256": "106df715a8c1ce2244cd2734834b3ded4ac2c13393b459e058d4dc1167c5e19f",
-      "bytes": 9001,
-      "git_lf_blob_sha256": "a087e7d08e3ffd1ec932a741c5f727902be8ce80bdd5fec1f7aaea050c915a6a"
+      "sha256": "597329a4a1c05df48aa39df2146d2504203dff67c7181ebf7c49d2725d6e38e0",
+      "bytes": 9881,
+      "git_lf_blob_sha256": "c00ca485d15645d0fa11f0125d950066a695b41f03d695aa1dba58bad877f8cb"
     },
     "tests/unit/test_holdout_acceptance_controller.py": {
       "sha256": "c08c60443801ec151d719fc1a7c552ad0286159de4e1fc1372c768bd0c57656b",
@@ -32,9 +32,9 @@
       "git_lf_blob_sha256": "c3320f745b78fba967ab3872f197e89d137c18f0a8453fc7171af81c0f3b4d64"
     },
     "tests/integration/test_holdout_acceptance_controller_e2e.py": {
-      "sha256": "74166ebee3cd72744c1efe5c20729a101d44d74fa96251c48607e904e91d5961",
-      "bytes": 10681,
-      "git_lf_blob_sha256": "0626fa77bafe8378edd49383022cc8a7321c70b1e293e1608fe86a78213b26b1"
+      "sha256": "865b2523241371264c1b38549a836db3c586793c6aac0545ec307a3820c6b943",
+      "bytes": 13206,
+      "git_lf_blob_sha256": "624c94da1e1a02962c2460d1c91722042465350cc17943b2685293f246cf5410"
     }
   },
   "independent_review": "ROOT assigns a non-author; not claimed complete by author",
@@ -76,7 +76,25 @@
     "whitespace_only": "evidence/final-whitespace-only.json",
     "mypy": "4 owned tool modules pass",
     "ruff": "6 owned tool/test files pass",
-    "precommit": "evidence/precommit.json"
+    "precommit": "evidence/precommit.json",
+    "prior_unit_integration_version": "8b00fd7f; its lifecycle reached paid replay but did not prove native RETRYABLE; W02 7P2RED exposed custom-code classification",
+    "native_outcome_review_fix": {
+      "product_commit": "5a1548e228bfdf231ca624767661ed138c962136",
+      "red": "evidence/review-fix/native-outcome-red.xml",
+      "green": "evidence/review-fix/native-outcome-green-current.xml",
+      "red_failed": 2,
+      "green_passed": 2,
+      "elapsed_seconds": 31.41,
+      "known_and_unknown_usage": true,
+      "assertions": [
+        "actual persisted Attempt.RETRYABLE and IO_TRANSIENT",
+        "controlled marker before public pause",
+        "new PID/attempt/lease/higher runtime fence",
+        "old native finish refused by paused gate or lost lease without budget mutation",
+        "one actual POST and no post_refused"
+      ],
+      "independent_same_sha_nine_cases": "pending W02; no old result overwritten"
+    }
   },
   "preview": {
     "native": false,
@@ -102,7 +120,8 @@
     "activation": "actual activation_pending followed by same-run successful activation",
     "cache": "new run/workdir; same artifact; zero reservation/token/POST",
     "unknown": "existing unknown reservation amount retained through replay/cache",
-    "public_read": "verified versioned NarrativeTransportReader; explicitly not RF consumed"
+    "public_read": "verified versioned NarrativeTransportReader; explicitly not RF consumed",
+    "fault": "test-local after-paid IO_TRANSIENT, supplier_failure=false; real persisted RETRYABLE verified before pause"
   },
   "product_boundaries": {
     "production_src_changed": false,
@@ -130,5 +149,6 @@
     "Resume same audit attempt/native run through activation_pending, complete and same-artifact zero-charge cache",
     "Bind actual public artifact to RF consume_narrative_input, genuinely used parameter and segment formula; until then rf_consumption stays not_consumed",
     "ROOT integrates/pushes and performs only required targeted installation; lane must not push/merge/install/API"
-  ]
+  ],
+  "prior_product_commit": "8b00fd7f8d858ced08f9eb247a76428df977389f"
 }

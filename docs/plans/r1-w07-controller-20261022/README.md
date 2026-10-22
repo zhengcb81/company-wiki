@@ -1,6 +1,6 @@
 # W07 controller: one acceptance entry
 
-Status: isolated engineering candidate. ROOT owns non-author review, integration, live execution and RF consumption. The runtime is production code from the branch base; this lane changes test tools only.
+Status: current independent-review repair candidate `5a1548e228bfdf231ca624767661ed138c962136`; see handoff.md latest section. Old8b00fd7f native RETRYABLE claim was disproved and repaired with registered IO_TRANSIENT plus a native persisted-outcome check. The same-SHA W02 replay is pending. Isolated engineering candidate. ROOT owns non-author review, integration, live execution and RF consumption. The runtime is production code from the branch base; this lane changes test tools only.
 
 ## Run entry
 

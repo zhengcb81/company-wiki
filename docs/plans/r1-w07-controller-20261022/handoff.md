@@ -1,5 +1,14 @@
 # W07交接：离线控制器
 
+## 最新优先：独审修复候选 `5a1548e228bfdf231ca624767661ed138c962136`
+
+W02对旧`8b00fd7f`得到7P/2RED：自定义HOLDOUT_AFTER_PAID虽传RETRYABLE，却被原生未知错误分类成TERMINAL_FAILURE。因此旧10P不能证明普通RETRYABLE恢复，该旧结论明确撤回；历史日志原样保留。
+
+当前工具用已注册IO_TRANSIENT模拟**测试本地付费后I/O中断**，不是供应商故障。仅本进程注入的attempt/job/lease/fence marker可触发暂停；必须读到真正已提交的原生RETRYABLE/IO_TRANSIENT后才pause，controller另读取原生记录确认。新增known/UNKNOWN两例先2RED后2P/31.41s，含新lease/fence/PID、旧提交被原生拒且账不变、1POST无post_refused。生产registry/SQL/src无修改。原9例同SHA独立复核交W02进行，未在本作者交接里预签通过。
+
+当前产品逐文件物理/Git LF SHA见`evidence/review-fix/current-fingerprints.json`；机器交接的product_commit已更新，旧宽测标为历史版本。下面为首轮历史交付记录。
+
+
 - 产品commit：`8b00fd7f8d858ced08f9eb247a76428df977389f`，分支`codex/r1-holdout-controller`，基线`c3b4ebf1`。
 - 唯一执行说明：[README.md](README.md)；机器接口和逐文件SHA：[handoff.json](handoff.json)。Windows工作字节与Git LF blob分别记录，不能混用SHA。
 - 本线已完成：纯非native预检；真正configured CLI的一次POST、原生paid pin持久化、受控RETRYABLE后新lease真实paid replay、activation_pending恢复、跨run同artifact零计费缓存及公开读；未知费用不释放。正式run和paid operation保持，worker fence可以合法前进。
