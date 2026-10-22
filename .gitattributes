@@ -56,3 +56,9 @@
 /tools/document_understanding_benchmark/*.json text eol=lf
 /tools/document_understanding_benchmark/gold/*.json text eol=lf
 /tools/document_understanding_benchmark/reviews/*.json text eol=lf
+
+# R1 independent reviews and the sealed expert design cite physical byte hashes.
+/docs/plans/du11-source-closure-2026-10-18/review/r1-*.* -text -diff
+/docs/plans/du11-source-closure-2026-10-18/review/r1-*/** -text -diff
+/docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/remediation/** -text -diff
+/docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/diagnosis/** -text -diff

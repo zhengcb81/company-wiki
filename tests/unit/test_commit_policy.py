@@ -31,3 +31,24 @@ def test_config_check_only_runs_for_config_and_loader_changes():
     for filename in ("README.md", "docs/plans/current/task_plan.md",
                      "src/company_wiki/automation/worker.py"):
         assert not trigger.search(filename), filename
+
+
+def test_type_check_covers_changed_runtime_bodies_without_a_fixed_allowlist():
+    hook = next(hook for hook in _hooks() if hook["id"] == "mypy-contract")
+    trigger = re.compile(hook["files"])
+    for filename in ("src/company_wiki/automation/narrative_run_store.py",
+                     "src/company_wiki/source_catalog/cli.py",
+                     "src/company_wiki/source_catalog/local_reconcile.py",
+                     "src/company_wiki/new_runtime_module.py"):
+        assert trigger.search(filename), filename
+    assert hook.get("pass_filenames", True), "mypy must check each changed body, not only skipped imports"
+    assert "src/" not in hook["entry"], "the commit hook must not repeat all-src CI"
+    assert not trigger.search("docs/plans/current/progress.md")
+
+
+def test_ci_runs_the_complete_source_type_check_once():
+    workflow = Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml"
+    config = yaml.safe_load(workflow.read_text(encoding="utf-8"))
+    checks = [step["run"] for job in config["jobs"].values() for step in job["steps"]
+              if "-m mypy" in step.get("run", "")]
+    assert checks == ["python -m mypy src"]

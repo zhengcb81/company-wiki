@@ -1245,11 +1245,14 @@ class NarrativeRunStore:
                 charged = [r for r in records if not (
                     r.usage_status == "known" and r.input_tokens == r.output_tokens == 0
                     and r.paid_response_json is None and r.response_sha256 is None)]
-                if len(charged) != 1 or charged[0].paid_response_json is None:
+                if len(charged) != 1:
                     raise FinalOutputOwnerUnresolved("successful summary has no provable paid output owner")
                 owner = charged[0]
+                paid_response_json = owner.paid_response_json
+                if paid_response_json is None:
+                    raise FinalOutputOwnerUnresolved("successful summary has no provable paid output owner")
                 try:
-                    paid_pin = PaidResponsePin.from_json(owner.paid_response_json)
+                    paid_pin = PaidResponsePin.from_json(paid_response_json)
                 except PaidResponseError as exc:
                     raise FinalOutputOwnerUnresolved("paid replay pin is invalid") from exc
                 if (owner.error_code is not None or owner.response_sha256 != summary.model.response_sha256

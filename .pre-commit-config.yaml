@@ -25,75 +25,14 @@ repos:
         files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$|^tools/(check_dependencies|changed_unit_tests|pre_push_gate|summarize_junit_failures)\.py$
 
       - id: mypy-contract
-        name: mypy contract modules (FC-1204-c, mirrors CI)
-        entry: >-
-          python -m mypy
-          src/company_wiki/source_catalog/artifact_handle.py
-          src/company_wiki/source_catalog/source_bundle.py
-          src/company_wiki/source_catalog/runtime_policy.py
-          src/company_wiki/source_catalog/activation.py
-          src/company_wiki/source_catalog/close_gap.py
-          src/company_wiki/source_catalog/policy_2x.py
-          src/company_wiki/source_catalog/canary_registry.py
-          src/company_wiki/source_catalog/normalized_meta.py
-          src/company_wiki/source_catalog/flags.py
-          src/company_wiki/source_catalog/policy.py
-          src/company_wiki/source_catalog/restore.py
-          src/company_wiki/source_catalog/operation_contract.py
-          src/company_wiki/source_catalog/operation_projection.py
-          src/company_wiki/source_catalog/source_operation.py
-          src/company_wiki/source_catalog/source_reader.py
-          src/company_wiki/source_catalog/narrative_document.py
-          src/company_wiki/source_catalog/narrative_routing.py
-          src/company_wiki/source_catalog/narrative_candidates.py
-          src/company_wiki/source_catalog/narrative_context.py
-          src/company_wiki/source_catalog/narrative_budget.py
-          src/company_wiki/source_catalog/narrative_group_candidates.py
-          src/company_wiki/source_catalog/narrative_neighbors.py
-          src/company_wiki/source_catalog/narrative_finalize.py
-          src/company_wiki/source_catalog/narrative_pdf_groups.py
-          src/company_wiki/source_catalog/narrative_replay.py
-          src/company_wiki/source_catalog/narrative_evidence.py
-          src/company_wiki/source_catalog/transcript_tool_contract.py
-          src/company_wiki/source_catalog/transcript_import.py
-          src/company_wiki/source_catalog/transcript_text_extract.py
-          src/company_wiki/source_catalog/transcript_lineage.py
-          src/company_wiki/source_catalog/transcript_material.py
-          src/company_wiki/source_catalog/transcript_import_cli.py
-          src/company_wiki/automation/narrative_contracts.py
-          src/company_wiki/automation/execution_snapshot.py
-          src/company_wiki/automation/execution_context.py
-          src/company_wiki/automation/worker.py
-          src/company_wiki/automation/registry.py
-          src/company_wiki/automation/planner.py
-          src/company_wiki/automation/cli.py
-          src/company_wiki/automation/narrative_select.py
-          src/company_wiki/automation/narrative_model.py
-          src/company_wiki/automation/narrative_summarize.py
-          src/company_wiki/automation/narrative_source_guard.py
-          src/company_wiki/automation/narrative_verify.py
-          src/company_wiki/automation/narrative_runtime.py
+        name: mypy changed runtime modules (same configuration as CI)
+        entry: python -m mypy
         language: system
-        pass_filenames: false
-        # Run only when one of the checked modules is staged.
-        files: >-
-          (?x)^src/company_wiki/
-          (source_catalog/
-          (artifact_handle|source_bundle|runtime_policy|activation|close_gap|
-          policy_2x|canary_registry|normalized_meta|flags|policy|restore|
-          operation_contract|operation_projection|source_operation|source_reader|
-          narrative_document|narrative_routing|narrative_candidates|
-          narrative_context|narrative_budget|narrative_group_candidates|
-          narrative_neighbors|narrative_finalize|narrative_pdf_groups|
-          narrative_replay|narrative_evidence|
-          transcript_tool_contract|transcript_import|
-          transcript_text_extract|transcript_lineage|transcript_material|
-          transcript_import_cli)|
-          automation/(narrative_contracts|execution_snapshot|execution_context|
-          worker|registry|planner|cli|narrative_select|narrative_model|
-          narrative_summarize|narrative_source_guard|narrative_verify|
-          narrative_runtime))\.py$
-
+        pass_filenames: true
+        # Check the staged bodies directly. With follow_imports=skip, an imported
+        # module is not checked merely because a fixed contract module imports it.
+        # Full src stays in CI; commits do not repeat its complete module list.
+        files: ^src/.*\.py$
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)
         entry: >-
