@@ -1,0 +1,53 @@
+{
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\sync_installations.py",
+    "--apply",
+    "--json",
+    "--file",
+    "scripts/research/authoring_projection.py",
+    "--file",
+    "scripts/research_projection.py",
+    "--file",
+    "references/evidence-role-calibration.md",
+    "--file",
+    "references/buy-side-methodology.md",
+    "--file",
+    "references/input-construction.md",
+    "--destination",
+    "C:\\Users\\郑曾波\\.agents\\skills",
+    "--destination",
+    "C:\\Users\\郑曾波\\.claude\\skills",
+    "--destination",
+    "C:\\Users\\郑曾波\\.codex\\skills"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 0.7874150999996345,
+  "selected_runtime_files": [
+    "scripts/research/authoring_projection.py",
+    "scripts/research_projection.py",
+    "references/evidence-role-calibration.md",
+    "references/buy-side-methodology.md",
+    "references/input-construction.md"
+  ],
+  "test_files_not_installable": 2,
+  "config_and_output_unchanged": true,
+  "selected_match": [
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "matches": 5
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "matches": 5
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "matches": 5
+    }
+  ]
+}

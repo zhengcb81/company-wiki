@@ -1,0 +1,7 @@
+{
+  "old_body_sha256": "1fafb1991e3994b542bc025391846e3ec1cbd2f4ce5a88e9d51e0f83b976bc74",
+  "original_body_bytes": 1428,
+  "new_sha256": "e61b824bc8d9a5292903b91e17366726c752bfa600a7365b7451c98524655d4e",
+  "original_body_preserved_as_exact_suffix": true,
+  "operation": "Add current-entry explanation only; no removal or replacement of historical author body."
+}

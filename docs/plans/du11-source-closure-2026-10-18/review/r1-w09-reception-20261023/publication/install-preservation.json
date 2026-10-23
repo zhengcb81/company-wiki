@@ -1,0 +1,341 @@
+[
+  {
+    "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "files": [
+      {
+        "path": "config/company_wiki.json",
+        "bytes": 1443,
+        "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "mtime_ns": 1791225761075910800
+      },
+      {
+        "path": "config/filing_fetch.json",
+        "bytes": 94,
+        "sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "mtime_ns": 1791225761078085900
+      },
+      {
+        "path": "output/coreweave_forecast.json",
+        "bytes": 81853,
+        "sha256": "cae82642254997c6806e2f2e550c1aa95cdb320e590c0981ac91fd16b1899ab5",
+        "mtime_ns": 1784990293892160900
+      },
+      {
+        "path": "output/coreweave_forecast.md",
+        "bytes": 16633,
+        "sha256": "8ce9160c4dc807f6cb9c847ea597a678a8cbd2c7128b21f33121de584027f27e",
+        "mtime_ns": 1784990293896152100
+      },
+      {
+        "path": "output/coreweave_forecast_5yr.json",
+        "bytes": 139037,
+        "sha256": "744292bbc5b393a3474850679372043664e47b9828ba2ac7d6238d8723bd9e1d",
+        "mtime_ns": 1784991161653314800
+      },
+      {
+        "path": "output/coreweave_forecast_5yr.md",
+        "bytes": 26818,
+        "sha256": "86b2bb9fa49f697cb0ea04344a1be7ba899a49fd20c61930b245b37453061925",
+        "mtime_ns": 1784991161656035700
+      },
+      {
+        "path": "output/coreweave_input.json",
+        "bytes": 63262,
+        "sha256": "87d28e41eacc7825151f7c3ae61b0043a030bc91db40df8531687d82b4746264",
+        "mtime_ns": 1784990287295728300
+      },
+      {
+        "path": "output/coreweave_input_5yr.json",
+        "bytes": 115678,
+        "sha256": "97af406c88baf898be83f537b98b5f7131c23d6d8a915c5e418082cf4f6e940d",
+        "mtime_ns": 1784991154232209100
+      },
+      {
+        "path": "output/microsoft_us_forecast.json",
+        "bytes": 33871,
+        "sha256": "89085f1233c70677bbb42aa5758fb68974a5ef3f2751c896a2002645fc2398d9",
+        "mtime_ns": 1784665155965094000
+      },
+      {
+        "path": "output/microsoft_us_forecast.md",
+        "bytes": 8621,
+        "sha256": "27748d08f9971c6ced20e53bc3190f04dd8fa8c16c989bd8fcde25521b78bde0",
+        "mtime_ns": 1784665155965094000
+      },
+      {
+        "path": "output/tencent_hk_forecast.json",
+        "bytes": 33785,
+        "sha256": "46caf738d9d92794cdaf537a1d502547c7d0e929d089e648def6a64bad8aeb86",
+        "mtime_ns": 1784665155959332700
+      },
+      {
+        "path": "output/tencent_hk_forecast.md",
+        "bytes": 8561,
+        "sha256": "851e85d3925a71343ede75e1934102198c67e6b20a12f1ae122b1b0877f9b642",
+        "mtime_ns": 1784665155959332700
+      },
+      {
+        "path": "output/zijin_backtest_snapshot.json",
+        "bytes": 121816,
+        "sha256": "9222e1ec82de9c54392a5bbbcad2adb05ff1aa361fdd0e9173676d2da2ef59f1",
+        "mtime_ns": 1784977061192473100
+      },
+      {
+        "path": "output/zijin_backtest_v3.json",
+        "bytes": 318238,
+        "sha256": "e0d0ca2801170a0504c82e1aad546757e97ae19e3b8245178fd6f15893437ac1",
+        "mtime_ns": 1784978424058026300
+      },
+      {
+        "path": "output/zijin_forecast.json",
+        "bytes": 55942,
+        "sha256": "f9ae7d72bc19aa581621214be730f0e5ab3d6893b817d4a67ea3299d5d77ed5e",
+        "mtime_ns": 1784972762310126400
+      },
+      {
+        "path": "output/zijin_forecast.md",
+        "bytes": 15278,
+        "sha256": "0627dfbf80be2345ca6fe8292e0cf3fadb2bcb5538bf841f13a3924d542876c9",
+        "mtime_ns": 1784972762313082700
+      },
+      {
+        "path": "output/zijin_forecast_v2.json",
+        "bytes": 66075,
+        "sha256": "92da88613db71c73902f333a40567675c64c3547318e0c8bc8f3e7357283be71",
+        "mtime_ns": 1784976980597278600
+      },
+      {
+        "path": "output/zijin_forecast_v2.md",
+        "bytes": 17544,
+        "sha256": "a78dffa5344e6bf30c6cd9cbd4404a9e572f3c21e295c834e3dfd4856c39682c",
+        "mtime_ns": 1784976980602276900
+      },
+      {
+        "path": "output/zijin_forecast_v3.json",
+        "bytes": 162161,
+        "sha256": "a8a8d20c749e348dc16a9d9f8576151ca58647c44918943f3438e2e5f337d658",
+        "mtime_ns": 1784978245541477500
+      },
+      {
+        "path": "output/zijin_forecast_v3.md",
+        "bytes": 23692,
+        "sha256": "e3e3f087374d12514c3d1d083e09f2368cbee6f9924dbeb6f8703194c6984a92",
+        "mtime_ns": 1784978245547986000
+      },
+      {
+        "path": "output/zijin_forecast_v4.json",
+        "bytes": 156323,
+        "sha256": "1d0e76a58497c87b837a16e5bf881cfb2d14b62ef56f6f1b80e9e627080e706f",
+        "mtime_ns": 1784980908575831800
+      },
+      {
+        "path": "output/zijin_forecast_v4.md",
+        "bytes": 29560,
+        "sha256": "7841b376cc84f230286b837889b4bca579a8dfa83d594a8a73cefea6ef711322",
+        "mtime_ns": 1784980908575831800
+      },
+      {
+        "path": "output/zijin_input.json",
+        "bytes": 39844,
+        "sha256": "352ae0ad98120bdb892ae70594d27e82cf02ae9bba8e3352d522e0a987b8fb7d",
+        "mtime_ns": 1784972736932829100
+      },
+      {
+        "path": "output/zijin_input_v2.json",
+        "bytes": 49112,
+        "sha256": "c7e1ec4a418b1d216bc49fffcf1f8352d0d956337d009d85523d8c562cb8ecc4",
+        "mtime_ns": 1784976949771211200
+      },
+      {
+        "path": "output/zijin_input_v3.json",
+        "bytes": 139472,
+        "sha256": "595b53060fed99493eccb1a15ff735a69d1c791ce0851c7e4819e786a4c92de8",
+        "mtime_ns": 1784978192695565200
+      },
+      {
+        "path": "output/zijin_input_v4.json",
+        "bytes": 123342,
+        "sha256": "7276163560082658814c3115e09e3bd22c33779827bd39dfb60f1b81e893444a",
+        "mtime_ns": 1784980872022076200
+      }
+    ]
+  },
+  {
+    "target": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+    "files": [
+      {
+        "path": "config/company_wiki.json",
+        "bytes": 1443,
+        "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "mtime_ns": 1791225761075910800
+      },
+      {
+        "path": "config/filing_fetch.json",
+        "bytes": 94,
+        "sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "mtime_ns": 1791225761078085900
+      },
+      {
+        "path": "output/coreweave_forecast.json",
+        "bytes": 81853,
+        "sha256": "cae82642254997c6806e2f2e550c1aa95cdb320e590c0981ac91fd16b1899ab5",
+        "mtime_ns": 1784990293892160900
+      },
+      {
+        "path": "output/coreweave_forecast.md",
+        "bytes": 16633,
+        "sha256": "8ce9160c4dc807f6cb9c847ea597a678a8cbd2c7128b21f33121de584027f27e",
+        "mtime_ns": 1784990293896152100
+      },
+      {
+        "path": "output/coreweave_forecast_5yr.json",
+        "bytes": 139037,
+        "sha256": "744292bbc5b393a3474850679372043664e47b9828ba2ac7d6238d8723bd9e1d",
+        "mtime_ns": 1784991161653314800
+      },
+      {
+        "path": "output/coreweave_forecast_5yr.md",
+        "bytes": 26818,
+        "sha256": "86b2bb9fa49f697cb0ea04344a1be7ba899a49fd20c61930b245b37453061925",
+        "mtime_ns": 1784991161656035700
+      },
+      {
+        "path": "output/coreweave_input.json",
+        "bytes": 63262,
+        "sha256": "87d28e41eacc7825151f7c3ae61b0043a030bc91db40df8531687d82b4746264",
+        "mtime_ns": 1784990287295728300
+      },
+      {
+        "path": "output/coreweave_input_5yr.json",
+        "bytes": 115678,
+        "sha256": "97af406c88baf898be83f537b98b5f7131c23d6d8a915c5e418082cf4f6e940d",
+        "mtime_ns": 1784991154232209100
+      },
+      {
+        "path": "output/microsoft_us_forecast.json",
+        "bytes": 33871,
+        "sha256": "89085f1233c70677bbb42aa5758fb68974a5ef3f2751c896a2002645fc2398d9",
+        "mtime_ns": 1784665155965094000
+      },
+      {
+        "path": "output/microsoft_us_forecast.md",
+        "bytes": 8621,
+        "sha256": "27748d08f9971c6ced20e53bc3190f04dd8fa8c16c989bd8fcde25521b78bde0",
+        "mtime_ns": 1784665155965094000
+      },
+      {
+        "path": "output/tencent_hk_forecast.json",
+        "bytes": 33785,
+        "sha256": "46caf738d9d92794cdaf537a1d502547c7d0e929d089e648def6a64bad8aeb86",
+        "mtime_ns": 1784665155959332700
+      },
+      {
+        "path": "output/tencent_hk_forecast.md",
+        "bytes": 8561,
+        "sha256": "851e85d3925a71343ede75e1934102198c67e6b20a12f1ae122b1b0877f9b642",
+        "mtime_ns": 1784665155959332700
+      },
+      {
+        "path": "output/zijin_backtest_snapshot.json",
+        "bytes": 121816,
+        "sha256": "9222e1ec82de9c54392a5bbbcad2adb05ff1aa361fdd0e9173676d2da2ef59f1",
+        "mtime_ns": 1784977061192473100
+      },
+      {
+        "path": "output/zijin_backtest_v3.json",
+        "bytes": 318238,
+        "sha256": "e0d0ca2801170a0504c82e1aad546757e97ae19e3b8245178fd6f15893437ac1",
+        "mtime_ns": 1784978424058026300
+      },
+      {
+        "path": "output/zijin_forecast.json",
+        "bytes": 55942,
+        "sha256": "f9ae7d72bc19aa581621214be730f0e5ab3d6893b817d4a67ea3299d5d77ed5e",
+        "mtime_ns": 1784972762310126400
+      },
+      {
+        "path": "output/zijin_forecast.md",
+        "bytes": 15278,
+        "sha256": "0627dfbf80be2345ca6fe8292e0cf3fadb2bcb5538bf841f13a3924d542876c9",
+        "mtime_ns": 1784972762313082700
+      },
+      {
+        "path": "output/zijin_forecast_v2.json",
+        "bytes": 66075,
+        "sha256": "92da88613db71c73902f333a40567675c64c3547318e0c8bc8f3e7357283be71",
+        "mtime_ns": 1784976980597278600
+      },
+      {
+        "path": "output/zijin_forecast_v2.md",
+        "bytes": 17544,
+        "sha256": "a78dffa5344e6bf30c6cd9cbd4404a9e572f3c21e295c834e3dfd4856c39682c",
+        "mtime_ns": 1784976980602276900
+      },
+      {
+        "path": "output/zijin_forecast_v3.json",
+        "bytes": 162161,
+        "sha256": "a8a8d20c749e348dc16a9d9f8576151ca58647c44918943f3438e2e5f337d658",
+        "mtime_ns": 1784978245541477500
+      },
+      {
+        "path": "output/zijin_forecast_v3.md",
+        "bytes": 23692,
+        "sha256": "e3e3f087374d12514c3d1d083e09f2368cbee6f9924dbeb6f8703194c6984a92",
+        "mtime_ns": 1784978245547986000
+      },
+      {
+        "path": "output/zijin_forecast_v4.json",
+        "bytes": 156323,
+        "sha256": "1d0e76a58497c87b837a16e5bf881cfb2d14b62ef56f6f1b80e9e627080e706f",
+        "mtime_ns": 1784980908575831800
+      },
+      {
+        "path": "output/zijin_forecast_v4.md",
+        "bytes": 29560,
+        "sha256": "7841b376cc84f230286b837889b4bca579a8dfa83d594a8a73cefea6ef711322",
+        "mtime_ns": 1784980908575831800
+      },
+      {
+        "path": "output/zijin_input.json",
+        "bytes": 39844,
+        "sha256": "352ae0ad98120bdb892ae70594d27e82cf02ae9bba8e3352d522e0a987b8fb7d",
+        "mtime_ns": 1784972736932829100
+      },
+      {
+        "path": "output/zijin_input_v2.json",
+        "bytes": 49112,
+        "sha256": "c7e1ec4a418b1d216bc49fffcf1f8352d0d956337d009d85523d8c562cb8ecc4",
+        "mtime_ns": 1784976949771211200
+      },
+      {
+        "path": "output/zijin_input_v3.json",
+        "bytes": 139472,
+        "sha256": "595b53060fed99493eccb1a15ff735a69d1c791ce0851c7e4819e786a4c92de8",
+        "mtime_ns": 1784978192695565200
+      },
+      {
+        "path": "output/zijin_input_v4.json",
+        "bytes": 123342,
+        "sha256": "7276163560082658814c3115e09e3bd22c33779827bd39dfb60f1b81e893444a",
+        "mtime_ns": 1784980872022076200
+      }
+    ]
+  },
+  {
+    "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+    "files": [
+      {
+        "path": "config/company_wiki.json",
+        "bytes": 1443,
+        "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "mtime_ns": 1791225761075910800
+      },
+      {
+        "path": "config/filing_fetch.json",
+        "bytes": 94,
+        "sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "mtime_ns": 1791225761078085900
+      }
+    ]
+  }
+]

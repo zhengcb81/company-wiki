@@ -940,3 +940,13 @@ W08候选11502372保存独立支线，公开cache/父级与数字标识误判、
 W08公开cache、跨列/缺页父级和通用事实误判的有限工程独审已绿：15上下文+36事实反控及1正式公开cache（32.59s）；但真实249页原件oracle仍FAIL，两条30%事实未入选，未并线/安装/推送。W09已完成49项原文绑定建议及经营桥准备（42 Decimal公式/14来源加总/10作者反控）；新正式RF尚未执行。W10工程已提交安装但真实矩阵OPEN。详见review/r1-w08-resume-20261023/checkpoint.json。0新增付费/下载，预算unknown均保留。
 
 ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。 工区实际检出和独立PWF已正常提交：RF42393ea1、CWP0d7ada21；仅准备文档，不是任务已完成。两卡及共用接口由独立agent静态审查，发现空工区、输入清单漏项、交接schema冲突、测试选择漏项和无缺陷路径要求RED等问题，均已修正。
+
+## 2026-10-24 两包真实发布完成与W08有限复审
+
+W11 ROOT修复664d3a1d、作者真实ancestry merge44b722ec、确定性解码1be42a76已正常push。首次正常prepush真实1F/7196P被拦，保留故障并复用既有HTML解码owner，从源头消除环境猜码；最终普通7202P/24skip/187.45s，另146smokeP/26.12s，精确代码CI40040509874成功。132相关P属于编码前版本，未篡称最终全套重跑。实际IR正文恢复未完成。
+
+W09四项内容问题通过共享投影owner修复，作者真实ancestry merge9dcce304、当前RF599d17b8已push且精确CI40040969386成功，正常595P/1skip/36subtests45.28s。5运行文件同步到两个物理安装根，共10写入；103owned文件全部匹配。保留原assurance/output/作者工区。平台曾拒绝排除作者交付的操作，未执行；改为完整保留约24MB作者交付的更安全正常合线，没有换通道重复被拒绝删除，也不宣称去重已完。
+
+W08独审17项原8F/9P暴露actual/future与收入指引重复状态根因，重构不可变PredicateObservation供二者共用。有限相关677P，独审原17不变+6真实selector/citation/model未来目标召回+1源码cache身份共24P；原77/20/24断言不改，预算独审版本保持，暂未保存merge/并母线或安装。跨页、annual14、正式摘要/缓存/RF矩阵/W12仍OPEN。
+
+母PWF/两级Next Step/机器checkpoint/施工包总入口统一。错误读了不存在的旧dispatch路径已纠正到harness_lanes/20261023/dispatch.json；沙箱普通Git读外部linked worktree报must be run in a work tree，按既有授权使用escalated正常Git，未重置或改索引规避。0新增模型/原件下载/费用；10M/$20总额、旧unknown和原始文档/封存均保留。

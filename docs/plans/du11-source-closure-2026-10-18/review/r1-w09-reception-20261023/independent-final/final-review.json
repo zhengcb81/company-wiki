@@ -1,0 +1,146 @@
+{
+  "status": "PASS_FINITE_W09_ROOT_CONTENT_INTEGRATION",
+  "handoff_sha256": "39ec769279845512db78c0658ec4b32155437f1f65ae170c81543b49daff3d59",
+  "source_and_test_reference_versions": [
+    {
+      "rf_destination": "scripts/research/authoring_projection.py",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research\\authoring_projection.py",
+      "bytes": 5509,
+      "sha256": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703",
+      "lf_sha256": "d6fcdf606e93c96386f6151f49e3c5d6d1c878c692013cc4ab02e3a0e42233a4"
+    },
+    {
+      "rf_destination": "scripts/research_projection.py",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research_projection.py",
+      "bytes": 1427,
+      "sha256": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353",
+      "lf_sha256": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353"
+    },
+    {
+      "rf_destination": "tests/test_authoring_projection.py",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\tests\\test_authoring_projection.py",
+      "bytes": 7841,
+      "sha256": "9a306dd1e116a02d037a763636108369b6581d5f900206adb91871cc64bb6f06",
+      "lf_sha256": "9a306dd1e116a02d037a763636108369b6581d5f900206adb91871cc64bb6f06"
+    },
+    {
+      "rf_destination": "tests/test_authoring_projection_basis.py",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\tests\\test_authoring_projection_basis.py",
+      "bytes": 2324,
+      "sha256": "f16dbe1929c762fd417eaa6ff877034034e346e6a5e88c7540247a481fd249f8",
+      "lf_sha256": "f16dbe1929c762fd417eaa6ff877034034e346e6a5e88c7540247a481fd249f8"
+    },
+    {
+      "rf_destination": "references/evidence-role-calibration.md",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\references\\evidence-role-calibration.md",
+      "bytes": 17292,
+      "sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "lf_sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81"
+    },
+    {
+      "rf_destination": "references/buy-side-methodology.md",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\references\\buy-side-methodology.md",
+      "bytes": 15830,
+      "sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "lf_sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f"
+    },
+    {
+      "rf_destination": "references/input-construction.md",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\references\\input-construction.md",
+      "bytes": 20259,
+      "sha256": "d8cccba419e5c08d054c633cf77aac9f543504374a52ffd0c073fee065e3e951",
+      "lf_sha256": "e534d02ca38cd52d211b75a22699e61ee3741cdf4d5854f7b7ac8cff9f585334"
+    }
+  ],
+  "independent_tests": {
+    "tests": 16,
+    "passed": 16,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 4.45
+  },
+  "findings": [],
+  "resolved_original_findings": [
+    "C01",
+    "C02",
+    "C03",
+    "C04"
+  ],
+  "integrity_identities_checked": 79,
+  "numerical_evidence": {
+    "segment_cells": 108,
+    "group_cells": 18,
+    "max_grid_delta": "0",
+    "derived_formulas": 276,
+    "max_formula_stored_value_delta": "4.0400E-12",
+    "bridge_rows_unchanged": 25
+  },
+  "original6_capture_bytes_verified": true,
+  "new_independent_cli_operations": 3,
+  "new_native_validation_actual_read_sha256": "67dca05aac91c874ad207364a078f148aaf6d0aada0f28cfc9b19efa5444d262",
+  "candidate51_unchanged_during_tests": true,
+  "scratch_initially_absent": true,
+  "scratch_finally_absent": true,
+  "external_http_model_download_raw_original_reads": 0,
+  "production_promoted_or_installed_by_this_review": false,
+  "w08_latest_summary_or_w12_company_pass": false,
+  "artifacts": {
+    "data-audit.json": {
+      "bytes": 28797,
+      "sha256": "9854e461fd52af1ac90172d501305dca56b803805f14c02f635edb20b98ef5a7"
+    },
+    "final-review.md": {
+      "bytes": 7441,
+      "sha256": "8633af66939378b56fd8b400a6e464e732888aa14331c1fabceddd77dc1d76d9"
+    },
+    "junit.xml": {
+      "bytes": 3859,
+      "sha256": "db2cfa2d9f00940a8d9abaddee138823a8c071d4a3547c307f383630826f293d"
+    },
+    "REPRODUCE.md": {
+      "bytes": 1164,
+      "sha256": "b53a599c33d94ecf704e0bde003f401c89b4b1009199a3d345f76566bb020802"
+    },
+    "run-receipt.json": {
+      "bytes": 18714,
+      "sha256": "13fb9e2da6f065930b15cd779fdb3745ce30a4496a5d6570b58a551747b34452"
+    },
+    "run_independent.py": {
+      "bytes": 4441,
+      "sha256": "0ceef78a2dadf900c8f1c2ea4bae8a4319f2c4c713ea8b6e7c6556693b7230e3"
+    },
+    "run_independent.py.txt": {
+      "bytes": 4441,
+      "sha256": "0ceef78a2dadf900c8f1c2ea4bae8a4319f2c4c713ea8b6e7c6556693b7230e3"
+    },
+    "sitecustomize.py.txt": {
+      "bytes": 1160,
+      "sha256": "9302cad63af611fe6cb6a3f38e7841f40f4adb17fa8a93fc6789b8335a375fd9"
+    },
+    "stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout.txt": {
+      "bytes": 923,
+      "sha256": "6461e7d3f874e9dff333444e2416bb4cbd38f8ccc10b37c961550c913a3d2a03"
+    },
+    "test_independent_projection.py": {
+      "bytes": 9479,
+      "sha256": "40e9e56320c6cd634cd69c6ad6aa3cc46918a4a9950cd38d5a90b26e9a57d242"
+    },
+    "test_independent_projection.py.txt": {
+      "bytes": 9479,
+      "sha256": "40e9e56320c6cd634cd69c6ad6aa3cc46918a4a9950cd38d5a90b26e9a57d242"
+    },
+    "verify_artifacts.py": {
+      "bytes": 10620,
+      "sha256": "f3f7529fe512e89952d65e4d5222718a2b3ffb436be69b05a33be0b44dfb8b55"
+    },
+    "verify_artifacts.py.txt": {
+      "bytes": 10620,
+      "sha256": "f3f7529fe512e89952d65e4d5222718a2b3ffb436be69b05a33be0b44dfb8b55"
+    }
+  }
+}

@@ -474,3 +474,13 @@ W11实际e808404e/clean，四个源码与测试路径绑定6b538ca2独审字节�
 ## W08独审：共享状态归属仍有实际缺陷
 
 17项独立真实公共selector探针8F9P：未来有望/力争/anticipate/project数量被误当实际；收入guidance借用其他谓词的预期或历史期间。共因是两套来源状态/谓词/时间观察分裂，不能分别加孤立公司/未来词表；ROOT实施者正统一同一纯source observer。预算合入独审84P仅证明预算边界。初始版本/原始XML/同组断言/source SHA见review/r1-w08-measure-guidance-independent-20261024，不改旧77/20。
+
+## 2026-10-24 两包真实发布完成与W08有限复审
+
+W11 ROOT修复664d3a1d、作者真实ancestry merge44b722ec、确定性解码1be42a76已正常push。首次正常prepush真实1F/7196P被拦，保留故障并复用既有HTML解码owner，从源头消除环境猜码；最终普通7202P/24skip/187.45s，另146smokeP/26.12s，精确代码CI40040509874成功。132相关P属于编码前版本，未篡称最终全套重跑。实际IR正文恢复未完成。
+
+W09四项内容问题通过共享投影owner修复，作者真实ancestry merge9dcce304、当前RF599d17b8已push且精确CI40040969386成功，正常595P/1skip/36subtests45.28s。5运行文件同步到两个物理安装根，共10写入；103owned文件全部匹配。保留原assurance/output/作者工区。平台曾拒绝排除作者交付的操作，未执行；改为完整保留约24MB作者交付的更安全正常合线，没有换通道重复被拒绝删除，也不宣称去重已完。
+
+W08独审17项原8F/9P暴露actual/future与收入指引重复状态根因，重构不可变PredicateObservation供二者共用。有限相关677P，独审原17不变+6真实selector/citation/model未来目标召回+1源码cache身份共24P；原77/20/24断言不改，预算独审版本保持，暂未保存merge/并母线或安装。跨页、annual14、正式摘要/缓存/RF矩阵/W12仍OPEN。
+
+母PWF/两级Next Step/机器checkpoint/施工包总入口统一。错误读了不存在的旧dispatch路径已纠正到harness_lanes/20261023/dispatch.json；沙箱普通Git读外部linked worktree报must be run in a work tree，按既有授权使用escalated正常Git，未重置或改索引规避。0新增模型/原件下载/费用；10M/$20总额、旧unknown和原始文档/封存均保留。

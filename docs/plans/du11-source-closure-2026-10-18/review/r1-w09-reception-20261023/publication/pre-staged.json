@@ -1,0 +1,14 @@
+{
+  "command": [
+    "git",
+    "-C",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "diff",
+    "--cached",
+    "--name-only"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 0.061090200004400685,
+  "at": "2026-10-23T23:34:40.467503+00:00"
+}

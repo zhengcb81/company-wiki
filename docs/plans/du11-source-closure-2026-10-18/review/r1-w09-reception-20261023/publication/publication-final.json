@@ -1,0 +1,158 @@
+{
+  "schema_version": "w09-root-publication-final/1",
+  "recorded_utc": "2026-10-23T23:41:31.154211+00:00",
+  "status": "NORMAL_MERGE_PUSH_AND_SELECTIVE_INSTALL_COMPLETED",
+  "merge": {
+    "head": "9dcce3049c23e974790b66d24455c1c08378447b",
+    "parents": [
+      "10bf611166013bd68ce14bfa19bb70e89a92dd5b",
+      "eb7c2deec3650889a10220fdfe8fccb168b28c72"
+    ],
+    "normal_merge_ancestry": true,
+    "full_author_delivery_and_bootstrap_retained": true,
+    "staged_paths": 261
+  },
+  "doc_commit": "599d17b89d8baee42ce203747496731ace2d0148",
+  "remote_main": "599d17b89d8baee42ce203747496731ace2d0148",
+  "remote_exact_match": true,
+  "normal_hooks": {
+    "commit": "ruff/mypy/host guard passed, no skip/force",
+    "push": "ruff all passed; mypy12source0issues;595passed/1skipped/36subtests in45.28s",
+    "push_seconds": 52.67918360000476
+  },
+  "formal_source_owner_tests": "16passed incl13 generic and3 existing CI entry tests",
+  "final7_files": [
+    {
+      "path": "scripts/research/authoring_projection.py",
+      "byte_sha256": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703",
+      "git_blob_lf_equal": true
+    },
+    {
+      "path": "scripts/research_projection.py",
+      "byte_sha256": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353",
+      "git_blob_lf_equal": true
+    },
+    {
+      "path": "tests/test_authoring_projection.py",
+      "byte_sha256": "9a306dd1e116a02d037a763636108369b6581d5f900206adb91871cc64bb6f06",
+      "git_blob_lf_equal": true
+    },
+    {
+      "path": "tests/test_authoring_projection_basis.py",
+      "byte_sha256": "f16dbe1929c762fd417eaa6ff877034034e346e6a5e88c7540247a481fd249f8",
+      "git_blob_lf_equal": true
+    },
+    {
+      "path": "references/evidence-role-calibration.md",
+      "byte_sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "git_blob_lf_equal": true
+    },
+    {
+      "path": "references/buy-side-methodology.md",
+      "byte_sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "git_blob_lf_equal": true
+    },
+    {
+      "path": "references/input-construction.md",
+      "byte_sha256": "d8cccba419e5c08d054c633cf77aac9f543504374a52ffd0c073fee065e3e951",
+      "git_blob_lf_equal": true
+    }
+  ],
+  "ci": {
+    "observed_utc": "2026-10-23T23:41:29.994091+00:00",
+    "head_sha": "599d17b89d8baee42ce203747496731ace2d0148",
+    "status": "observed",
+    "runs": [
+      {
+        "id": 40040969386,
+        "name": "quality",
+        "head_sha": "599d17b89d8baee42ce203747496731ace2d0148",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/40040969386",
+        "created_at": "2026-10-23T23:40:20Z",
+        "updated_at": "2026-10-23T23:41:21Z"
+      }
+    ],
+    "http_status": 200
+  },
+  "assurance_3_sha_mtime_preserved": [
+    {
+      "path": "assurance/runs/daily_alert.jsonl",
+      "bytes": 5631,
+      "sha256": "be13806c5731e373eefe722a33362589d9059dde658a99bd9754b5834c2b8a39",
+      "mtime_ns": 1792789283184337200
+    },
+    {
+      "path": "assurance/runs/weekly_alert.jsonl",
+      "bytes": 1039,
+      "sha256": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "mtime_ns": 1792695330327375700
+    },
+    {
+      "path": "assurance/runs/weekly_manifest.json",
+      "bytes": 353,
+      "sha256": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324",
+      "mtime_ns": 1792695330327375700
+    }
+  ],
+  "preexisting_output_147_files_sha_mtime_preserved": 147,
+  "author_head_unchanged": true,
+  "author_status": "",
+  "original28_author_artifact_hashes_unchanged": true,
+  "rf_main_remaining_status": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/\n",
+  "retained_author_delivery": {
+    "namespace": "delivery/w09",
+    "all_original_files_retained": true,
+    "actual_file_bytes": 23990533,
+    "root_deduplication_still_deferred": true
+  },
+  "bootstrap": {
+    "old_body_sha256": "1fafb1991e3994b542bc025391846e3ec1cbd2f4ce5a88e9d51e0f83b976bc74",
+    "original_body_bytes": 1428,
+    "new_sha256": "e61b824bc8d9a5292903b91e17366726c752bfa600a7365b7451c98524655d4e",
+    "original_body_preserved_as_exact_suffix": true,
+    "operation": "Add current-entry explanation only; no removal or replacement of historical author body."
+  },
+  "installed": {
+    "selected_runtime_files": 5,
+    "physical_targets": 2,
+    "actual_writes": 10,
+    "targets": [
+      {
+        "requested": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "physical": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "owned_runtime_file_count": 103,
+        "full_owned_manifest_match": true
+      },
+      {
+        "requested": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+        "physical": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "owned_runtime_file_count": 103,
+        "full_owned_manifest_match": true
+      },
+      {
+        "requested": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+        "physical": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+        "owned_runtime_file_count": 103,
+        "full_owned_manifest_match": true
+      }
+    ],
+    "configuration_and_output_sha_mtime_preserved": true,
+    "selected_and_unselected_drift": 0,
+    "engineering_tests_not_installed": 2
+  },
+  "cleanup": {
+    "raw_deleted": 0,
+    "initially_absent": true,
+    "removed": true,
+    "files": [],
+    "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\publication\\formal-pytest-temp"
+  },
+  "no_new_model_api_download_or_fee_ledger_changes": true,
+  "scope_limits": [
+    "Finite W09 node, not W08 latest-summary adoption or W12 fullcompany four-review.",
+    "CI only stated from this exact current head; local green is not borrowed remote green.",
+    "Full author delivery retained after safer no-deletion merge; ROOT may separately plan deduplication and should keep preserved history/raw."
+  ]
+}

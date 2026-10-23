@@ -1,0 +1,3 @@
+START_HERE.md
+docs/plans/w09-root-publication-20261024/progress.md
+docs/plans/w09-root-publication-20261024/task_plan.md

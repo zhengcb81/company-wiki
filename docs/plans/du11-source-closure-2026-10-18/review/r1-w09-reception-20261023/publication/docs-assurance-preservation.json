@@ -1,0 +1,8 @@
+{
+  "sha_and_mtime_preserved": true,
+  "normal_precommit_stash_mtime_restored": [
+    "assurance/runs/daily_alert.jsonl",
+    "assurance/runs/weekly_alert.jsonl",
+    "assurance/runs/weekly_manifest.json"
+  ]
+}

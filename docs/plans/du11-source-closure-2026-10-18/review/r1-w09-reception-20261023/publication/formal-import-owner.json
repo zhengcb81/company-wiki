@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-c",
+    "import pathlib,sys;sys.path.insert(0,str(pathlib.Path.cwd()/'scripts'));import research.authoring_projection as m; print(m.__file__);assert pathlib.Path(m.__file__).resolve()==pathlib.Path('scripts/research/authoring_projection.py').resolve()"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 0.08850029998575337
+}

@@ -1,0 +1,173 @@
+"""Independent neutral controls and real public candidate CLI adoption."""
+from copy import deepcopy
+from decimal import Decimal
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+import pytest
+
+from research import authoring_projection as owner
+
+ROOT = Path(__file__).resolve().parents[6]
+ATTEMPT = ROOT / ".planning/r1-w09-root-integration-20261023"
+RUNTIME = ATTEMPT / "rf-runtime"
+
+
+def fixture():
+    document = {"company_name": "Neutral licensing group", "evidence_claims": [
+        {"claim_id": "legacy_history", "evidence_role": "history_base"},
+        {"claim_id": "new_contract", "evidence_role": "mechanism_direction"},
+        {"claim_id": "contrary", "evidence_role": "conversion_assumption"}],
+        "parameters": [], "growth_driver_tree": {"drivers": []},
+        "operating_research": {"calibrations": []}}
+    for name, claim in [("legacy", "legacy_history"), ("licensing", "new_contract")]:
+        document["growth_driver_tree"]["drivers"].append({"driver_id": name,
+            "segment_attribution": [{"segment_name": name, "weight": 1}],
+            "title": "Disclosed ramp", "thesis": "Disclosed forward deliveries",
+            "causal_chain": ["backlog", "recognized revenue"],
+            "persistence_rationale": "Disclosed operating continuation",
+            "leading_indicators": ["deliveries"], "falsifiers": ["cancelled"],
+            "evidence_nodes": [{"claim_ids": [claim], "evidence_type": "operating",
+                "inference_distance": "one_step", "conclusion": "Future operating direction"},
+                {"claim_ids": ["contrary"], "inference_distance": "contrary",
+                 "conclusion": "Customer cancellation risk remains"}]})
+    for scope in ["legacy", "licensing", "unrelated"]:
+        document["operating_research"]["calibrations"].append({"scope": scope,
+            "limitations": ["original " + scope], "status": "unverified", "observed_range": None})
+    bridges = []
+    for scenario, amount in [("low", 180), ("base", 240), ("high", 320)]:
+        document["parameters"] += [
+            {"parameter_id": "parent_" + scenario, "scenario": scenario,
+             "period": "FY2033", "unit": "CAD million", "value": amount},
+            {"parameter_id": "activity_" + scenario, "scenario": scenario,
+             "period": "FY2033", "unit": "ratio", "value": Decimal('0.9'),
+             "rationale": "Copied base explanation"}]
+        bridges.append({"explanation_parameter_id": "activity_" + scenario,
+            "parent_parameter_id": "parent_" + scenario, "scenario": scenario,
+            "period": "FY2033", "period_label": "H2 FY2033", "scope": "licensing",
+            "component_name": "Recurring licensing", "residual_amount": "40",
+            "prior_component_amount": "100", "unit": "CAD million",
+            "condition": "project services repeat the comparable half-year"})
+    context = {"historical_context": "Only historical decline and the scope are observed.",
+        "forward_condition": "Runoff is an explicit analyst condition.",
+        "leading_indicators": ["a newly disclosed continuing stream"],
+        "falsifiers": ["perimeter changes"]}
+    plan = {"historical_driver_contexts": {"legacy": context, "licensing": context},
+        "calibration_limitations": {"legacy": ["No continuing renewal cohort"],
+                                   "licensing": ["No comparable realization range"]},
+        "scenario_bridges": bridges}
+    return document, plan
+
+
+def test_real_owner_import_is_candidate():
+    assert Path(owner.__file__).resolve() == (RUNTIME / "scripts/research/authoring_projection.py").resolve()
+
+
+def test_history_all_parallel_explanations_and_contrary_are_coherent():
+    source, plan = fixture()
+    result = owner.reconcile_authoring_explanations(source, plan)
+    d = result["growth_driver_tree"]["drivers"][0]
+    for key in ["thesis", "persistence_rationale"]:
+        assert "No disclosed forward mechanism" in d[key]
+    assert "conditional baseline" in d["title"]
+    assert d["causal_chain"] != source["growth_driver_tree"]["drivers"][0]["causal_chain"]
+    assert d["evidence_nodes"][0]["evidence_type"] == "issuer_historical_context"
+    assert "No disclosed forward mechanism" in d["evidence_nodes"][0]["conclusion"]
+    assert d["evidence_nodes"][1] == source["growth_driver_tree"]["drivers"][0]["evidence_nodes"][1]
+    assert d["leading_indicators"] == plan["historical_driver_contexts"]["legacy"]["leading_indicators"]
+
+
+@pytest.mark.parametrize("mode", ["mechanism", "mixed", "unclassified"])
+def test_genuine_mixed_and_unclassified_evidence_are_not_erased(mode):
+    source, plan = fixture()
+    d = source["growth_driver_tree"]["drivers"][0]
+    if mode == "mechanism":
+        d["evidence_nodes"][0]["claim_ids"] = ["new_contract"]
+    elif mode == "mixed":
+        d["evidence_nodes"][0]["claim_ids"].append("new_contract")
+    else:
+        source["evidence_claims"][0].pop("evidence_role")
+    assert owner.reconcile_authoring_explanations(source, plan)["growth_driver_tree"] == source["growth_driver_tree"]
+
+
+def test_scope_notes_leave_unrelated_calibration_and_status_intact():
+    source, plan = fixture()
+    result = owner.reconcile_authoring_explanations(source, plan)
+    by = {r["scope"]: r for r in result["operating_research"]["calibrations"]}
+    assert by["legacy"]["limitations"] == ["No continuing renewal cohort"]
+    assert by["licensing"]["limitations"] == ["No comparable realization range"]
+    assert by["unrelated"] == source["operating_research"]["calibrations"][-1]
+    assert all(r["status"] == "unverified" and r["observed_range"] is None for r in by.values())
+
+
+@pytest.mark.parametrize("scenario,expected", [("low", "40.00%"), ("base", "100.00%"), ("high", "180.00%")])
+def test_each_scenario_uses_its_own_numerical_bridge(scenario, expected):
+    source, plan = fixture()
+    result = owner.reconcile_authoring_explanations(source, plan)
+    row = next(p for p in result["parameters"] if p["parameter_id"] == "activity_" + scenario)
+    assert expected in row["rationale"] and "parent_" + scenario in row["rationale"]
+    assert "conditional decomposition" in row["rationale"] and "CAD million" in row["rationale"]
+
+
+@pytest.mark.parametrize("field,value", [("scenario", "high"), ("period", "FY2034"), ("unit", "EUR million")])
+def test_mismatched_plan_data_is_refused(field, value):
+    source, plan = fixture()
+    plan["scenario_bridges"][0][field] = value
+    with pytest.raises(ValueError):
+        owner.reconcile_authoring_explanations(source, plan)
+
+
+def test_unknown_comparable_and_timing_basis_do_not_invent_component_actuals():
+    source, plan = fixture()
+    plan["scenario_bridges"][0]["prior_component_amount"] = "0"
+    plan["scenario_bridges"][0]["basis"] = "Before the joint delay; allocation to licensing versus projects is unknown."
+    text = owner.reconcile_authoring_explanations(source, plan)["parameters"][1]["rationale"]
+    assert "not defined" in text and "allocation" in text and "No future actual" in text
+
+
+def test_claims_formulas_amounts_input_and_plan_are_immutable():
+    source, plan = fixture()
+    before, before_plan = deepcopy(source), deepcopy(plan)
+    out = owner.reconcile_authoring_explanations(source, plan)
+    assert source == before and plan == before_plan
+    assert out["evidence_claims"] == before["evidence_claims"]
+    assert [p["value"] for p in out["parameters"]] == [p["value"] for p in before["parameters"]]
+    assert owner.reconcile_authoring_explanations(out, plan) == out
+
+
+def run_cli(args, tmp_path, watch):
+    env = dict(os.environ, W09_WATCH=json.dumps([str(p.resolve()) for p in watch]))
+    run = subprocess.run([sys.executable, "-X", "utf8", "-B", *map(str, args)], cwd=tmp_path,
+        env=env, capture_output=True, text=True, encoding="utf-8", timeout=40)
+    assert run.returncode == 0, run.stderr
+    return run
+
+
+def test_public_cli_neutral_adopts_owner_and_preserves_inputs(tmp_path):
+    source, plan = fixture()
+    src, p, out = [tmp_path / s for s in ["source.json", "plan.json", "projected.json"]]
+    src.write_text(json.dumps(source, default=str), encoding="utf-8")
+    p.write_text(json.dumps(plan), encoding="utf-8")
+    before = [hashlib.sha256(f.read_bytes()).hexdigest() for f in [src, p]]
+    run_cli([RUNTIME / "scripts/research_projection.py", "--input", src, "--plan", p, "--output", out], tmp_path, [src, p])
+    actual = json.loads(out.read_text(encoding="utf-8"))
+    assert "40.00%" in actual["parameters"][1]["rationale"]
+    assert "No disclosed forward mechanism" in actual["growth_driver_tree"]["drivers"][0]["thesis"]
+    assert before == [hashlib.sha256(f.read_bytes()).hexdigest() for f in [src, p]]
+
+
+def test_actual_main_cli_reprojection_and_native_validation(tmp_path):
+    source = ATTEMPT / "v3/inputs/main-input.json"
+    plan = ATTEMPT / "v3/research/main-explanation-plan.json"
+    out = tmp_path / "actual-reprojected-main.json"
+    run_cli([RUNTIME / "scripts/research_projection.py", "--input", source, "--plan", plan, "--output", out], tmp_path, [source, plan])
+    assert json.loads(out.read_text(encoding="utf-8")) == json.loads(source.read_text(encoding="utf-8"))
+    frozen = out.read_bytes()
+    run = run_cli([RUNTIME / "scripts/revenue_forecast.py", out, "--validate-only", "--verbose"], tmp_path, [out])
+    assert run.stdout.strip() == "valid"
+    assert out.read_bytes() == frozen
+    assert [p.name for p in tmp_path.iterdir()] == [out.name]

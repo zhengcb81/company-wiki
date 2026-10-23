@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_authoring_projection.py",
+    "tests/test_authoring_projection_basis.py",
+    "tests/test_ci_smoke_plan.py",
+    "--confcutdir",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\publication\\formal-pytest-temp",
+    "--junitxml",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\publication\\formal-source.xml"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 3.8564137000066694
+}

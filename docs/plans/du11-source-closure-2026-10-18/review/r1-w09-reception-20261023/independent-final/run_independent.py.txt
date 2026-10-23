@@ -1,0 +1,85 @@
+"""Own scratch, exact candidate identities, no external I/O, preserved evidence."""
+from pathlib import Path
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+
+REPORT = Path(__file__).resolve().parent
+ROOT = REPORT.parents[5]
+ATTEMPT = ROOT / ".planning/r1-w09-root-integration-20261023"
+SCRATCH = ROOT / ".planning/r1-w09-independent-final-20261023"
+
+
+def digest(p):
+    raw = p.read_bytes()
+    return {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+def main():
+    assert not SCRATCH.exists()
+    handoff = json.loads((ATTEMPT / "handoff.json").read_text(encoding="utf-8"))
+    assert digest(ATTEMPT / "handoff.json")["sha256"] == "39ec769279845512db78c0658ec4b32155437f1f65ae170c81543b49daff3d59"
+    files = handoff["production_promotions"] + handoff["final_files"]
+    frozen = {r["path"]: digest(Path(r["path"])) for r in files}
+    assert all(frozen[r["path"]] == {k:r[k] for k in ["bytes", "sha256"]} for r in files)
+    start = time.monotonic()
+    SCRATCH.mkdir()
+    guards = SCRATCH / "guard"
+    guards.mkdir()
+    traces = SCRATCH / "traces"
+    traces.mkdir()
+    guard_text = '''import atexit, hashlib, json, os, pathlib, socket, sys
+def blocked(*args, **kwargs):
+    raise RuntimeError("W09 independent network blocked")
+socket.socket.connect = blocked
+socket.socket.connect_ex = blocked
+socket.create_connection = blocked
+socket.getaddrinfo = blocked
+reads = []
+original_read = pathlib.Path.read_text
+def read_text(self, *args, **kwargs):
+    result = original_read(self, *args, **kwargs)
+    if str(self.resolve()) in json.loads(os.environ.get("W09_WATCH", "[]")):
+        reads.append({"path":str(self.resolve()),"returned_utf8_sha256":hashlib.sha256(result.encode("utf-8")).hexdigest(),"returned_utf8_bytes":len(result.encode("utf-8"))})
+    return result
+pathlib.Path.read_text = read_text
+def done():
+    names = ["research.authoring_projection", "revenue_forecast", "__main__"]
+    modules = {n:str(pathlib.Path(sys.modules[n].__file__).resolve()) for n in names if n in sys.modules and getattr(sys.modules[n],"__file__",None)}
+    pathlib.Path(os.environ["W09_TRACE_DIR"], str(os.getpid())+".json").write_text(json.dumps({"modules":modules,"actual_read_results":reads}),encoding="utf-8")
+atexit.register(done)
+'''
+    (guards / "sitecustomize.py").write_text(guard_text, encoding="utf-8")
+    (REPORT / "sitecustomize.py.txt").write_text(guard_text, encoding="utf-8")
+    env = {k:v for k,v in os.environ.items() if not any(t in k.upper() for t in ["API_KEY","ACCESS_TOKEN","SECRET_KEY"])}
+    env.update(PYTHONPATH=os.pathsep.join([str(guards), str(ATTEMPT / "rf-runtime/scripts")]),
+        PYTHONDONTWRITEBYTECODE="1", PYTHON_DOTENV_DISABLED="1", COMPANY_WIKI_NETWORK="blocked",
+        COMPANY_WIKI_REAL_LLM="0", W09_TRACE_DIR=str(traces))
+    command = [sys.executable,"-X","utf8","-B","-m","pytest",str(REPORT / "test_independent_projection.py"),
+        "--confcutdir",str(REPORT),"-q","--tb=short","-p","no:cacheprovider",
+        "--basetemp",str(SCRATCH / "pytest"),"--junitxml",str(REPORT / "junit.xml")]
+    run = subprocess.run(command,cwd=SCRATCH,env=env,capture_output=True,text=True,encoding="utf-8",timeout=100)
+    (REPORT / "stdout.txt").write_text(run.stdout,encoding="utf-8")
+    (REPORT / "stderr.txt").write_text(run.stderr,encoding="utf-8")
+    after = {r["path"]:digest(Path(r["path"])) for r in files}
+    logs = [json.loads(p.read_text(encoding="utf-8")) for p in traces.glob("*.json")]
+    receipt = {"command":command,"exit_code":run.returncode,"seconds":time.monotonic()-start,
+        "handoff_sha256":digest(ATTEMPT / "handoff.json")["sha256"],"frozen51":frozen,
+        "all51_unchanged":frozen==after,"actual_processes":logs,"scratch_initially_absent":True,
+        "external_http_model_download_original_reads":0}
+    assert SCRATCH.resolve().parent == (ROOT / ".planning").resolve()
+    receipt["removed_files"] = sum(p.is_file() for p in SCRATCH.rglob("*"))
+    shutil.rmtree(SCRATCH)
+    receipt["scratch_finally_absent"] = not SCRATCH.exists()
+    (REPORT / "run-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+    print(run.stdout)
+    print(json.dumps({"exit_code":run.returncode,"all51_unchanged":receipt["all51_unchanged"],"scratch_finally_absent":receipt["scratch_finally_absent"]}))
+    return run.returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

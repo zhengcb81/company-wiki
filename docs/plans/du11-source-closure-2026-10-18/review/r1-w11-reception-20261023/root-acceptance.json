@@ -1,7 +1,7 @@
 {
   "schema_version": "w11-root-acceptance/1",
-  "observed_at": "2026-10-23T23:13:28.884176+00:00",
-  "status": "ENGINEERING_INDEPENDENT_ENCODING_FOLLOWUP_PASS_NORMAL_PUBLICATION_PENDING",
+  "observed_at": "2026-10-23T23:48:21.361050+00:00",
+  "status": "ENGINEERING_MERGED_PUSHED_EXACT_CODE_CI_SUCCESS_ACTUAL_SOURCE_RECOVERY_OPEN",
   "author_delivery_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
   "author_product_head": "6b538ca2f18fb8d5805f2ff59a41404b6e8302cd",
   "code_and_tests": [
@@ -131,6 +131,43 @@
     "venv_unit_and_public_cli_passed": 39,
     "independent_same_cases_passed": 37,
     "independent_report": "independent-final/encoding-followup.md",
-    "new_full_normal_push": "PENDING"
+    "new_full_normal_push": "SUCCESS_7202_PASS_24_SKIP_AND_146_CONTRACT_SMOKE_PASS"
+  },
+  "publication": {
+    "schema_version": "w11-root-publication/1",
+    "observed_at": "2026-10-23T23:48:21.361050+00:00",
+    "status": "MERGED_PUSHED_EXACT_CODE_CI_SUCCESS",
+    "source_commit": "1be42a7639393b9211b35bcf905f0546df344d73",
+    "author_delivery_ancestor": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
+    "merge_commit_prefix": "44b722ec",
+    "normal_pre_push": {
+      "unit_passed": 7202,
+      "unit_skipped": 24,
+      "unit_seconds": 187.45,
+      "contract_smoke_passed": 146,
+      "contract_smoke_seconds": 26.12,
+      "ruff": "PASS",
+      "full_src_mypy": "PASS",
+      "hooks_bypassed": false
+    },
+    "local_full_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w11-publication-20261023\\normal-push-encoding-fixed.txt",
+    "local_full_log_bytes": 3616,
+    "local_full_log_sha256": "9ac35af29240757fc89bdfff344eceb014c173d2d616cba6ff2c1a95047e7e75",
+    "code_ci": {
+      "id": 40040509874,
+      "head_sha": "1be42a7639393b9211b35bcf905f0546df344d73",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40040509874",
+      "updated_at": "2026-10-23T23:39:37Z"
+    },
+    "encoding_independent_followup": "independent-final/encoding-followup.json",
+    "originals_modified_or_downloaded": 0,
+    "new_model_calls": 0,
+    "limits": [
+      "Finite source-discovery engineering only.",
+      "Actual IR/Q&A original recovery, W08 new-summary adoption and W12 business audit remain open.",
+      "132 related cases are the pre-decoder version; final-version normal unit7202 and smoke146 are distinct actual runs."
+    ]
   }
 }

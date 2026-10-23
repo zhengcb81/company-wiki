@@ -1,0 +1,10 @@
+{
+  "head": "9dcce3049c23e974790b66d24455c1c08378447b",
+  "parents": [
+    "10bf611166013bd68ce14bfa19bb70e89a92dd5b",
+    "eb7c2deec3650889a10220fdfe8fccb168b28c72"
+  ],
+  "normal_merge_ancestry": true,
+  "full_author_delivery_and_bootstrap_retained": true,
+  "staged_paths": 261
+}

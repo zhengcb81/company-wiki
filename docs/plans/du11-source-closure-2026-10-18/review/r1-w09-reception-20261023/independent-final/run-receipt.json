@@ -1,0 +1,294 @@
+{
+  "command": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\independent-final\\test_independent_projection.py",
+    "--confcutdir",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\independent-final",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-independent-final-20261023\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\independent-final\\junit.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 5.946212800015928,
+  "handoff_sha256": "39ec769279845512db78c0658ec4b32155437f1f65ae170c81543b49daff3d59",
+  "frozen51": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research\\authoring_projection.py": {
+      "bytes": 5509,
+      "sha256": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research_projection.py": {
+      "bytes": 1427,
+      "sha256": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\tests\\test_authoring_projection.py": {
+      "bytes": 7841,
+      "sha256": "9a306dd1e116a02d037a763636108369b6581d5f900206adb91871cc64bb6f06"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\tests\\test_authoring_projection_basis.py": {
+      "bytes": 2324,
+      "sha256": "f16dbe1929c762fd417eaa6ff877034034e346e6a5e88c7540247a481fd249f8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\references\\evidence-role-calibration.md": {
+      "bytes": 17292,
+      "sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\references\\buy-side-methodology.md": {
+      "bytes": 15830,
+      "sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\references\\input-construction.md": {
+      "bytes": 20259,
+      "sha256": "d8cccba419e5c08d054c633cf77aac9f543504374a52ffd0c073fee065e3e951"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\inputs\\main-input.json": {
+      "bytes": 665235,
+      "sha256": "67dca05aac91c874ad207364a078f148aaf6d0aada0f28cfc9b19efa5444d262"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\outputs\\main-forecast.json": {
+      "bytes": 1495423,
+      "sha256": "44c47bcdd014e13d8d4f490c686d7459637fea1bacbe4c9ca10e3bd8453de89a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\outputs\\main-forecast.md": {
+      "bytes": 203424,
+      "sha256": "d1607fc26396185a2b181a36b2a8b90260947d21baeb60c5a939920d5a374bd9"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\snapshots\\main-v3.json": {
+      "bytes": 1785501,
+      "sha256": "05468e690ed48db5f8f9bbb62a7a210920f502cd3e0568e1024daf0496ebe5f8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\inputs\\stress-input.json": {
+      "bytes": 706982,
+      "sha256": "5a85c2a599ab4e2f56872c1fe72a19de72afb5ad165d8de6ea7a66396f9796e1"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\outputs\\stress-forecast.json": {
+      "bytes": 1586902,
+      "sha256": "a99d0827a62272f95780d12820b8db73c6bf4ac661f45532850d21461c714731"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\outputs\\stress-forecast.md": {
+      "bytes": 209625,
+      "sha256": "c974330ec632a204cdf51349cba9d61849e04226486d9fe4c8926e4db980a0ac"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\snapshots\\stress-v3.json": {
+      "bytes": 1900956,
+      "sha256": "d2769e05a8d9d3047401b3ae0a8d3c9b8a9d31a97d3a2aca2715fe8504c8242f"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\explanation-plan.json": {
+      "bytes": 5331,
+      "sha256": "2486f42a3bedb3f37171d28ea486f0d1769d1edb28ed836a3d06baef53b7509a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\main-explanation-plan.json": {
+      "bytes": 5814,
+      "sha256": "8cbd4b503308e06f18b0026a80567845e4248d5c9b11cde1cb39548bae9d60e1"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\stress-explanation-plan.json": {
+      "bytes": 6330,
+      "sha256": "da1b2fb862f724aaef99dca29da14efbec9b849f55dc44311500394693c76625"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\projection-calls.json": {
+      "bytes": 2301,
+      "sha256": "6fe79b05e100c0e8f55af5fb77552d66c5bf62bb79d8034864f3edaaacc3f094"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\component-bridge.json": {
+      "bytes": 18092,
+      "sha256": "44b6c4671b7992e2876b585c8ec9b705afd9ed87c43ff8f01d071f4f769d06d8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\research-memo.md": {
+      "bytes": 11858,
+      "sha256": "b8e011e39d4e0c2f60e1c2b0eb909fce3983f78ad782d0cc943b49ff38c1b9e9"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\component-baseline-provenance.json": {
+      "bytes": 363,
+      "sha256": "abb93a27907cf71904b1a5224defcfae0e141e09b02e632bf12eb6a5450143ef"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\native-verification.json": {
+      "bytes": 14471,
+      "sha256": "e73500aa48cbd21548597325aaf36147b4eb88d1ebf4e7fb96ad10a5abe95e81"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\native-calls.jsonl": {
+      "bytes": 33461,
+      "sha256": "82b883e0fea0fb957d3252324a38b1087f51179b1c20b1d41f8325662013ca5a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\registry\\publications.jsonl": {
+      "bytes": 4640,
+      "sha256": "40e3fe9e0667e10cd43850a5fbf6206f487d995c3075a729c48167d7bacffd4a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\final62.txt": {
+      "bytes": 112,
+      "sha256": "e5defb2673b3a6521bbdbaee53222a106f751d3f13a5fdabe78027f60d1755b9"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\final62.xml": {
+      "bytes": 9704,
+      "sha256": "fe4d8a8afc0f24a0bbbd2e4589d28fb7d3d4664820fcd7c1d835daf095a96eed"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\final62.json": {
+      "bytes": 7071,
+      "sha256": "6405e6489d76e09b318c7fdd037c13215362e15a23a75fd3d8b933650564f1fc"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\final-cleanup.json": {
+      "bytes": 6544,
+      "sha256": "0219bf9978f18d24b60010c5be9310896f782259b826ed66d23f1713f11c9c57"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\intermediate-cleanup.json": {
+      "bytes": 28761,
+      "sha256": "b7fc2010cbfeea0a8c357c470ac343a85f7a8397feb3f980d59a057deacc8714"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\red.txt": {
+      "bytes": 4789,
+      "sha256": "8a332ce722f827c23c3eb3a9158fc31c323bfd842f51184b0a30873338d58cc6"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\red.xml": {
+      "bytes": 5067,
+      "sha256": "cec8b55ea5e43e132a3b3607b91f246d45c3f86bb956f0c6a0d93ce77cfa2a96"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\red.json": {
+      "bytes": 2368,
+      "sha256": "1776101fa59d825dcaecb330034a99633b419ee259fe6310948ef95243e61fad"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\basis-full-red.txt": {
+      "bytes": 3636,
+      "sha256": "699aabe5ccb780bec4b01d18019e18e67e39474abdd9e77b44c6d9981ba17d10"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\basis-full-red.xml": {
+      "bytes": 5949,
+      "sha256": "89b1f9217919d7d6c15772fd07da4f7a39c1c4794f34937dd234c329709fa51f"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\logs\\basis-full-red.json": {
+      "bytes": 2284,
+      "sha256": "29a145052353b617821dd1a3a2a2b552949d0147ca0f6827d37d6890d2d25114"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\research\\native-verification.json": {
+      "bytes": 11605,
+      "sha256": "0d09353f321f50077121b530c38d9fb511a72ced7b021d03a8ef545039ada1f8"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\research\\v2-authoring-projection.py.txt": {
+      "bytes": 5355,
+      "sha256": "0976ed2684e9acc0036aace25ec2151e50c0c36ce2df256bf0db94126da2c1cb"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\verify_native_artifacts.py": {
+      "bytes": 7344,
+      "sha256": "106b4d20196103978df6b969b52899b220778eecd0b17f5c29f30fc5dce6d33f"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\d13488f123564317ae5cd10537863ceb\\input-0001-7e9258321e4c.json": {
+      "bytes": 563619,
+      "sha256": "7e9258321e4c1c65a1f26d60e2a1389a8e542b2e24dff188fe855f62c88ac93b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\d13488f123564317ae5cd10537863ceb\\consume-0001-7e9258321e4c.json": {
+      "bytes": 563619,
+      "sha256": "7e9258321e4c1c65a1f26d60e2a1389a8e542b2e24dff188fe855f62c88ac93b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\75d23712a5244005af37aecb063139df\\input-0001-7e9258321e4c.json": {
+      "bytes": 563619,
+      "sha256": "7e9258321e4c1c65a1f26d60e2a1389a8e542b2e24dff188fe855f62c88ac93b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\75d23712a5244005af37aecb063139df\\consume-0001-7e9258321e4c.json": {
+      "bytes": 563619,
+      "sha256": "7e9258321e4c1c65a1f26d60e2a1389a8e542b2e24dff188fe855f62c88ac93b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\4157cc528f45437d8ebd4f4e948c573b\\input-0001-7e9258321e4c.json": {
+      "bytes": 563619,
+      "sha256": "7e9258321e4c1c65a1f26d60e2a1389a8e542b2e24dff188fe855f62c88ac93b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\4157cc528f45437d8ebd4f4e948c573b\\consume-0001-7e9258321e4c.json": {
+      "bytes": 563619,
+      "sha256": "7e9258321e4c1c65a1f26d60e2a1389a8e542b2e24dff188fe855f62c88ac93b"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\043110a3565d483e890825d02bbe06dd\\input-0001-0c84634ce2a9.json": {
+      "bytes": 600382,
+      "sha256": "0c84634ce2a9dbde53f9a5dd2b36f171fca1e74fda5736afb4cb396720c792ca"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\043110a3565d483e890825d02bbe06dd\\consume-0001-0c84634ce2a9.json": {
+      "bytes": 600382,
+      "sha256": "0c84634ce2a9dbde53f9a5dd2b36f171fca1e74fda5736afb4cb396720c792ca"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\c8a495f876534bf3a05a2019ca6eb164\\input-0001-0c84634ce2a9.json": {
+      "bytes": 600382,
+      "sha256": "0c84634ce2a9dbde53f9a5dd2b36f171fca1e74fda5736afb4cb396720c792ca"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\c8a495f876534bf3a05a2019ca6eb164\\consume-0001-0c84634ce2a9.json": {
+      "bytes": 600382,
+      "sha256": "0c84634ce2a9dbde53f9a5dd2b36f171fca1e74fda5736afb4cb396720c792ca"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\34ee5e629f10406f89c4174089072861\\input-0001-0c84634ce2a9.json": {
+      "bytes": 600382,
+      "sha256": "0c84634ce2a9dbde53f9a5dd2b36f171fca1e74fda5736afb4cb396720c792ca"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\recorder\\w09-root-integration-20261023-v3\\roles\\executor\\commands\\34ee5e629f10406f89c4174089072861\\consume-0001-0c84634ce2a9.json": {
+      "bytes": 600382,
+      "sha256": "0c84634ce2a9dbde53f9a5dd2b36f171fca1e74fda5736afb4cb396720c792ca"
+    }
+  },
+  "all51_unchanged": true,
+  "actual_processes": [
+    {
+      "modules": {
+        "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\revenue_forecast.py"
+      },
+      "actual_read_results": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-independent-final-20261023\\pytest\\test_actual_main_cli_reproject0\\actual-reprojected-main.json",
+          "returned_utf8_sha256": "67dca05aac91c874ad207364a078f148aaf6d0aada0f28cfc9b19efa5444d262",
+          "returned_utf8_bytes": 665235
+        }
+      ]
+    },
+    {
+      "modules": {
+        "research.authoring_projection": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research\\authoring_projection.py",
+        "revenue_forecast": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\revenue_forecast.py",
+        "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research_projection.py"
+      },
+      "actual_read_results": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-independent-final-20261023\\pytest\\test_public_cli_neutral_adopts0\\source.json",
+          "returned_utf8_sha256": "c610aa03dcf9b46423c018254d767496050b35a3dbfe368fc9b36a4888dd16e4",
+          "returned_utf8_bytes": 2697
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-independent-final-20261023\\pytest\\test_public_cli_neutral_adopts0\\plan.json",
+          "returned_utf8_sha256": "620aa1c39d33e9f5b23fc926faa4c6af13b76e23e681e86b8810bea6084aa9a4",
+          "returned_utf8_bytes": 1774
+        }
+      ]
+    },
+    {
+      "modules": {
+        "research.authoring_projection": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research\\authoring_projection.py",
+        "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Lib\\site-packages\\pytest\\__main__.py"
+      },
+      "actual_read_results": []
+    },
+    {
+      "modules": {
+        "research.authoring_projection": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research\\authoring_projection.py",
+        "revenue_forecast": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\revenue_forecast.py",
+        "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\rf-runtime\\scripts\\research_projection.py"
+      },
+      "actual_read_results": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\inputs\\main-input.json",
+          "returned_utf8_sha256": "67dca05aac91c874ad207364a078f148aaf6d0aada0f28cfc9b19efa5444d262",
+          "returned_utf8_bytes": 665235
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w09-root-integration-20261023\\v3\\research\\main-explanation-plan.json",
+          "returned_utf8_sha256": "63854fa241394024cf2765a605d95053bce22d22441562d0bbc539cd27e8417a",
+          "returned_utf8_bytes": 5721
+        }
+      ]
+    }
+  ],
+  "scratch_initially_absent": true,
+  "external_http_model_download_original_reads": 0,
+  "removed_files": 9,
+  "scratch_finally_absent": true
+}

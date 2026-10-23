@@ -82,7 +82,7 @@
     "new_downloaded_original_files": 9,
     "new_downloaded_original_bytes": 10342094
   },
-  "next_action": "ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。",
+  "next_action": "W09与W11已完成真实作者支线并入、推送及精确代码CI成功；RF安装103个owned运行文件全匹配。W08共用谓词/模态/期间owner重构已获同组独审24P（原17+6真实目标召回+1源码cache身份），ROOT先正常保存现有预算merge和该有限节点、并入母线；再完成可信跨页父级、固定容量选材/分批、真实249页14项回放，然后正式摘要/缓存/RF逐文档矩阵/W12。原件、旧FAIL、unknown及原测试不变。",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
@@ -97,14 +97,14 @@
     "issues": 14,
     "roots": 10,
     "packages": {
-      "W08": "ENGINEERING_SCOPE_PASS_REAL_ORACLE_FAIL_ROOT_OWNED",
-      "W09": "PREPARATION_COMPLETE_EXTERNAL_PACKET_READY",
+      "W08": "PREDICATE_NODE_REVIEW24_PASS_SAVE_MERGE_NEXT_ANNUAL14_PARTIAL",
+      "W09": "ROOT_REPAIRED_MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
       "W10": "ENGINEERING_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
-      "W11": "OFFLINE_SOURCE_PACKET_READY",
+      "W11": "ROOT_REPAIRED_MERGED_PUSHED_EXACT_CI_SUCCESS_REAL_IR_RECOVERY_OPEN",
       "W12": "NOT_STARTED"
     },
     "business_pass": false,
-    "current_checkpoint_ref": "../review/r1-w08-resume-20261023/checkpoint.json",
+    "current_checkpoint_ref": "../CURRENT_STATUS.json",
     "parallel_dispatch_ref": "../harness_lanes/20261023/dispatch.json"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "git",
+    "-C",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "add",
+    "--",
+    "START_HERE.md",
+    "docs/plans/w09-root-publication-20261024/task_plan.md",
+    "docs/plans/w09-root-publication-20261024/progress.md"
+  ],
+  "exit_code": 0,
+  "seconds": 0.10971230000723153
+}

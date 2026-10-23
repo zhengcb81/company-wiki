@@ -1,0 +1,32 @@
+{
+  "command": [
+    "git",
+    "commit",
+    "-m",
+    "Merge W09 research and reviewed authoring projection"
+  ],
+  "exit_code": 0,
+  "seconds": 14.14563780001481,
+  "at": "2026-10-23T23:36:31.999313+00:00",
+  "hooks": "Normal configured .githooks/pre-commit, no skips/force or alternate config.",
+  "assurance_after": [
+    {
+      "path": "assurance/runs/daily_alert.jsonl",
+      "sha256": "be13806c5731e373eefe722a33362589d9059dde658a99bd9754b5834c2b8a39",
+      "mtime_ns": 1792789283184337200,
+      "normal_hook_stash_mtime_restored": true
+    },
+    {
+      "path": "assurance/runs/weekly_alert.jsonl",
+      "sha256": "a05699bf906b1cf3e78eda8cf98c4c1b3105e7f9ddf418aac39640d9fa11e7c2",
+      "mtime_ns": 1792695330327375700,
+      "normal_hook_stash_mtime_restored": true
+    },
+    {
+      "path": "assurance/runs/weekly_manifest.json",
+      "sha256": "49803e12057c3fd284797a67678ce47a0829db40dbcebafc92af7c9d53d22324",
+      "mtime_ns": 1792695330327375700,
+      "normal_hook_stash_mtime_restored": true
+    }
+  ]
+}

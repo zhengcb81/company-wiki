@@ -1,0 +1,12 @@
+{
+  "command": [
+    "git",
+    "-C",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "push",
+    "origin",
+    "main"
+  ],
+  "exit_code": 0,
+  "seconds": 52.67918360000476
+}

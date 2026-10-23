@@ -1,0 +1,12 @@
+{
+  "command": [
+    "git",
+    "-C",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "diff",
+    "--cached",
+    "--name-only"
+  ],
+  "exit_code": 0,
+  "seconds": 0.04831390001345426
+}

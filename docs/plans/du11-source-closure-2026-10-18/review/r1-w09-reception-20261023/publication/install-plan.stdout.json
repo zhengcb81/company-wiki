@@ -1,0 +1,101 @@
+{
+  "canonical": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    "references/buy-side-methodology.md",
+    "references/evidence-role-calibration.md",
+    "references/input-construction.md",
+    "scripts/research/authoring_projection.py",
+    "scripts/research_projection.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f",
+          "operation": "replace",
+          "path": "references/buy-side-methodology.md",
+          "size": 15830,
+          "source_sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f"
+        },
+        {
+          "before_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21",
+          "operation": "replace",
+          "path": "references/evidence-role-calibration.md",
+          "size": 17292,
+          "source_sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81"
+        },
+        {
+          "before_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f",
+          "operation": "replace",
+          "path": "references/input-construction.md",
+          "size": 20259,
+          "source_sha256": "d8cccba419e5c08d054c633cf77aac9f543504374a52ffd0c073fee065e3e951"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/authoring_projection.py",
+          "size": 5509,
+          "source_sha256": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research_projection.py",
+          "size": 1427,
+          "source_sha256": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 5,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f",
+          "operation": "replace",
+          "path": "references/buy-side-methodology.md",
+          "size": 15830,
+          "source_sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f"
+        },
+        {
+          "before_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21",
+          "operation": "replace",
+          "path": "references/evidence-role-calibration.md",
+          "size": 17292,
+          "source_sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81"
+        },
+        {
+          "before_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f",
+          "operation": "replace",
+          "path": "references/input-construction.md",
+          "size": 20259,
+          "source_sha256": "d8cccba419e5c08d054c633cf77aac9f543504374a52ffd0c073fee065e3e951"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/authoring_projection.py",
+          "size": 5509,
+          "source_sha256": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research_projection.py",
+          "size": 1427,
+          "source_sha256": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 5,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    }
+  ]
+}

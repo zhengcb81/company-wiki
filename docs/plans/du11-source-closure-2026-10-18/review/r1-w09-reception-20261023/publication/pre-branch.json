@@ -1,0 +1,13 @@
+{
+  "command": [
+    "git",
+    "-C",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "branch",
+    "--show-current"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 0.04147799999918789,
+  "at": "2026-10-23T23:34:40.405566+00:00"
+}

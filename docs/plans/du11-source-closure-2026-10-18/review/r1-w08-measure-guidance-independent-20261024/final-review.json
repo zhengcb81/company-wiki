@@ -1,0 +1,150 @@
+{
+  "schema_version": "w08-measure-guidance-independent-final/1",
+  "recorded_at_utc": "2026-10-23T23:45:36.808562+00:00",
+  "verdict": "PASS_FINITE_PREDICATE_MEASURE_GUIDANCE_NODE",
+  "findings": [],
+  "scope": "Same reviewer recheck of original unchanged independent17 plus six actual selector/citation/model future-target recall controls and one real complete-cache source-byte identity control. Not a whole-project signoff.",
+  "author_worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+  "independence": "This reviewer authored no current predicate-state owner/measure/guidance changes. Prior historical qualifier contribution is excluded from renewed independent certification.",
+  "initial_failures": {
+    "tests": 17,
+    "failures": 8,
+    "passes": 9,
+    "preserved_artifacts": [
+      "initial-review.md",
+      "initial-review.json",
+      "independent-red.txt",
+      "independent-red.xml",
+      "semantic-probes-red.json"
+    ]
+  },
+  "actual_recheck": {
+    "tests": 24,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 2.569,
+    "cases": {
+      "archived_independent": 17,
+      "public_target_recall": 6,
+      "actual_source_cache_identity": 1
+    },
+    "pytest_xml": "final-tests.xml",
+    "pytest_log": "final-tests.txt",
+    "python": "3.14.2 mother .venv; does not replace author CI3.12 typing result"
+  },
+  "original_oracles_preserved": "Only observation output filename changed from semantic-probes-latest.json to final-semantic-probes.json; all inputs/oracles/assertions preserved.",
+  "original_tests_preserved": {
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": {
+      "original_sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "current_sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "unchanged": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "original_sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "current_sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "unchanged": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": {
+      "original_sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "current_sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "unchanged": true
+    }
+  },
+  "budget_baseline_retained": {
+    "src/company_wiki/resource_budget.py": {
+      "previous_independent_budget_review_sha256": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+      "current_sha256": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+      "unchanged": true
+    },
+    "config/resource_budget.yaml": {
+      "previous_independent_budget_review_sha256": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+      "current_sha256": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+      "unchanged": true
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "previous_independent_budget_review_sha256": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+      "current_sha256": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+      "unchanged": true
+    },
+    "src/company_wiki/source_catalog/narrative_finalize.py": {
+      "previous_independent_budget_review_sha256": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+      "current_sha256": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+      "unchanged": true
+    }
+  },
+  "architecture_checks": [
+    "Both actual quantity/rate projections and revenue outlook call one immutable PredicateObservation owner; former duplicate expectation/actual/past vocabularies removed.",
+    "Observer bounds local target assertion and keeps predicate modality, measured time, condition and outer expectation; consumers project existing reasons only, no fabricated values, actors, source coordinates or persisted schema.",
+    "Four quantity aspirations no longer become actual; four unrelated/past/disclosure revenue assertions no longer become future revenue guidance. Original actual/Traditional/forward/passive/subject/scope/direction controls remain green.",
+    "Source operating_plan retains six exact future capacity/customer/user quantity targets in actual EvidenceSpan and compiled scoped model tasks with original source identity, without actual/current tags.",
+    "Source guidance and new predicate owner actual bytes participate in existing business_algorithms cache identity. In-memory read-byte mutation invalidates a real complete decision, restoration matches; no source file mutation.",
+    "Existing 8-unit/4-block/2048-character dependency owner not rewritten. Public helper enforces raw-unit/metadata conservation, positive bounded work, max96spans/48000characters and complete reference closure.",
+    "Budget files, parsing/selection owner and partial diagnostics remain byte-identical to earlier independent budget-only84P scope. New predicate semantic byte change is deliberate; money/company target policy is not added to semantic inventory."
+  ],
+  "sources_and_tests": {
+    "head": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
+    "merge_head": "ab95027b5b1452c4403db482362b59a9f8976286",
+    "index_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git\\worktrees\\company-wiki-r1-local-observation\\index",
+    "index_sha256": "ad3f1022323cdaf888180214d29ff3ec9d492ffe9d4ab4ac3f91f5b9c3b5a837",
+    "index_entries_sha256": "feb82716bf7db8b5657249705d216b09ee2d1de03c2d27d9718f6bf379cf7b62",
+    "source_sha256": {
+      "config/resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+      "src/company_wiki/document_understanding/decision_inventory.py": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+      "src/company_wiki/resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+      "src/company_wiki/source_catalog/narrative_business_policy.py": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8",
+      "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+      "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+      "src/company_wiki/source_catalog/narrative_predicate_state.py": "b0b95c78c60e7d57897e70a58a134af5000a90ae8d33363324f8ad648c6062ac",
+      "src/company_wiki/source_catalog/narrative_reading.py": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+      "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+      "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "tools/document_understanding_benchmark/phase_c_runner.py": "d1ffbfe8f4e37a0f909c0dc0237900b0b9ff9f1c0e843074c5161b4bf9b8cd44"
+    }
+  },
+  "source_and_index_stable": true,
+  "effective_budget": {
+    "mother_tokens": 10000000,
+    "mother_micro_usd": 20000000,
+    "company_soft_tokens": 150000,
+    "company_soft_micro_usd": 1000000,
+    "document_work_limit": 16000000
+  },
+  "cleanup": [
+    {
+      "absent_after_cleanup": true,
+      "existed_before_cleanup": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-mg-final-20261024"
+    },
+    {
+      "absent_after_cleanup": true,
+      "existed_before_cleanup": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-234345-0ca323eb"
+    },
+    {
+      "absent_after_cleanup": true,
+      "existed_before_cleanup": false,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-234345-504a708a"
+    }
+  ],
+  "external_calls": {
+    "network": 0,
+    "model": 0,
+    "downloads": 0,
+    "raw_documents_opened": 0
+  },
+  "writes": "Only new final-* review files and own removed scratch/generated pytest temp; product, original tests, Git/index and common PWF unchanged.",
+  "not_certified": [
+    "cross-page business ancestry",
+    "whole annual14 source replay",
+    "96/48000 selection diversity beyond bounded helper checks",
+    "formal paid summaries and cache recovery lifecycle",
+    "full RF audit/research",
+    "all company/industry semantic variants"
+  ],
+  "next": "ROOT may save the current normal budget merge and finite measure/guidance source node, then continue existing PWF remaining work."
+}

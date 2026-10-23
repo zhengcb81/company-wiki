@@ -1,0 +1,184 @@
+"""Independent data audit: no product imports, no author code execution or writes."""
+import ast
+from decimal import Decimal, localcontext
+import hashlib
+import json
+from pathlib import Path
+
+REPORT = Path(__file__).resolve().parent
+ROOT = REPORT.parents[5]
+ATTEMPT = ROOT / ".planning/r1-w09-root-integration-20261023"
+AUTHOR = Path("C:/Users/郑曾波/Projects/revenue-forecast-r1-research/delivery/w09")
+
+
+def read(p, decimal=False):
+    return json.loads(p.read_text(encoding="utf-8"), **({"parse_float": Decimal} if decimal else {}))
+
+
+def sha(p):
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def canonical(value):
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def numbers(value, pointer=""):
+    if isinstance(value, (Decimal, int)) and not isinstance(value, bool):
+        return {pointer: Decimal(value)}
+    result = {}
+    if isinstance(value, (dict, list)):
+        for key, child in (value.items() if isinstance(value, dict) else enumerate(value)):
+            result.update(numbers(child, pointer + "/" + str(key)))
+    return result
+
+
+def arithmetic(node, inputs):
+    if isinstance(node, ast.Expression):
+        return arithmetic(node.body, inputs)
+    if isinstance(node, ast.Name):
+        return inputs[node.id]
+    if isinstance(node, ast.Constant) and isinstance(node.value, int):
+        return Decimal(node.value)
+    if isinstance(node, ast.UnaryOp):
+        x = arithmetic(node.operand, inputs)
+        if isinstance(node.op, ast.USub):
+            return -x
+        if isinstance(node.op, ast.UAdd):
+            return x
+    if isinstance(node, ast.BinOp):
+        a, b = arithmetic(node.left, inputs), arithmetic(node.right, inputs)
+        if isinstance(node.op, ast.Add):
+            return a+b
+        if isinstance(node.op, ast.Sub):
+            return a-b
+        if isinstance(node.op, ast.Mult):
+            return a*b
+        if isinstance(node.op, ast.Div):
+            return a/b
+    raise ValueError("unsupported arithmetic syntax")
+
+
+def main():
+    h = read(ATTEMPT / "handoff.json")
+    assert sha(ATTEMPT / "handoff.json") == "39ec769279845512db78c0658ec4b32155437f1f65ae170c81543b49daff3d59"
+    integrity = []
+    for r in h["production_promotions"] + h["final_files"] + h["original_author_artifacts_unchanged"]:
+        p = Path(r["path"])
+        assert p.stat().st_size == r["bytes"] and sha(p) == r["sha256"], str(p)
+        integrity.append({"path":str(p),"bytes":r["bytes"],"sha256":r["sha256"]})
+    variants = []
+    outputs = {}
+    for variant in ["main", "stress"]:
+        ip = ATTEMPT / f"v3/inputs/{variant}-input.json"
+        op = ATTEMPT / f"v3/outputs/{variant}-forecast.json"
+        old_input = read(AUTHOR / f"forecast/{variant}-input.json", True)
+        current = read(ip, True)
+        old_output = read(AUTHOR / f"forecast/{variant}-forecast.json", True)
+        output = read(op, True)
+        outputs[variant] = output
+        assert current["sources"] == old_input["sources"]
+        assert current["evidence_claims"] == old_input["evidence_claims"]
+        strip_rationale = lambda d:[{k:v for k,v in p.items() if k != "rationale"} for p in d["parameters"]]
+        assert strip_rationale(current) == strip_rationale(old_input)
+        assert current["segments"] == old_input["segments"]
+        assert numbers(old_output) == numbers(output)
+        params = {p["parameter_id"]:p for p in current["parameters"]}
+        formula_deltas = []
+        with localcontext() as ctx:
+            ctx.prec = 50
+            for p in params.values():
+                if "formula" in p:
+                    inputs = {"x" + str(i):Decimal(params[pid]["value"]) for i,pid in enumerate(p["input_parameter_ids"])}
+                    calculated = arithmetic(ast.parse(p["formula"], mode="eval"), inputs)
+                    formula_deltas.append(abs(calculated - Decimal(p["value"])))
+            assert max(formula_deltas) < Decimal("0.00000001")
+            plan = read(ATTEMPT / f"v3/research/{variant}-explanation-plan.json")
+            rates = []
+            for b in plan["scenario_bridges"]:
+                parent = Decimal(params[b["parent_parameter_id"]]["value"])
+                component = parent - Decimal(b["residual_amount"])
+                growth = (component / Decimal(b["prior_component_amount"]) - 1) * 100
+                rationale = params[b["explanation_parameter_id"]]["rationale"]
+                assert f"{growth:.2f}%" in rationale and b["basis"] in rationale
+                assert b["scenario"] in rationale and b["parent_parameter_id"] in rationale
+                assert "conditional decomposition" in rationale and "No future actual" in rationale
+                if variant == "stress":
+                    assert "3000" in rationale and "allocation" in rationale and "unknown" in rationale
+                    assert "does not describe final stressed recognized H2 revenue" in rationale
+                rates.append({"scenario":b["scenario"],"parent":str(parent),"component":str(component),"growth_percent":str(growth),"basis":b["basis"]})
+        ordinary = read(ip)
+        out_ordinary = read(op)
+        snapshot = read(ATTEMPT / f"v3/snapshots/{variant}-v3.json")
+        assert canonical(ordinary) == out_ordinary["input_sha256"] == snapshot["input_sha256"]
+        assert snapshot["input_document"] == ordinary and snapshot["forecast_result"] == out_ordinary
+        assert canonical(out_ordinary) == snapshot["forecast_result_sha256"]
+        claim_hashes = 0
+        for claim in current["evidence_claims"]:
+            if "excerpt" in claim:
+                assert hashlib.sha256(claim["excerpt"].strip().encode()).hexdigest() == claim["excerpt_sha256"]
+                claim_hashes += 1
+        segment_cells = 0
+        for seg in output["segments"]:
+            old_seg = next(s for s in old_output["segments"] if s["name"] == seg["name"])
+            for scenario,row in seg["scenarios"].items():
+                for year,value in row["effective_revenue"].items():
+                    assert value == old_seg["scenarios"][scenario]["effective_revenue"][year]
+                    segment_cells += 1
+        group_cells = sum(len(s["annual_revenue"]) for s in output["consolidated_forecast"].values())
+        headwinds = {d["driver_id"]:d for d in output["growth_driver_analysis"]["headwinds"]}
+        for d in current["growth_driver_tree"]["drivers"]:
+            if d["driver_id"] in ["driver_other", "driver_discontinued"]:
+                assert "No disclosed forward mechanism" in d["thesis"]
+                assert d["thesis"] == headwinds[d["driver_id"]]["thesis"]
+                for node in d["evidence_nodes"]:
+                    if node.get("inference_distance") != "contrary":
+                        assert node["conclusion"] == d["thesis"] and node["evidence_type"] == "issuer_historical_context"
+        assert all(c["status"] == "unverified" and c["observed_range"] is None for c in current["operating_research"]["calibrations"])
+        variants.append({"variant":variant,"segment_cells":segment_cells,"group_cells":group_cells,
+            "all_output_numeric_leaves_equal":len(numbers(output)),"max_grid_delta":"0",
+            "independently_recomputed_formulas":len(formula_deltas),"max_formula_stored_value_delta":str(max(formula_deltas)),
+            "claims_preserved":len(current["evidence_claims"]),"excerpt_hashes_checked":claim_hashes,
+            "component_rates":rates,"snapshot_canonical_bindings":True})
+    calls = []
+    for line in (ATTEMPT / "v3/recorder/native-calls.jsonl").read_text(encoding="utf-8").splitlines():
+        c = json.loads(line)
+        cap, built = c["capture"], c["built"]
+        assert cap["exit_code"] == 0 and cap["child_started"] and cap["input_complete"] and cap["output_complete"]
+        r = cap["input_snapshots"][0]
+        frozen, consumed = Path(r["frozen_path"]), Path(r["consumed_path"])
+        assert frozen.read_bytes() == consumed.read_bytes()
+        assert sha(frozen) == built["request_sha256"] == r["sha256"] == r["consumed_after_sha256"]
+        assert read(frozen) == read(ATTEMPT / f"v3/inputs/{c['variant']}-input.json")
+        calls.append({"variant":c["variant"],"operation":c["operation"],"capture_id":cap["capture_id"],
+            "consumed_bytes":consumed.stat().st_size,"actual_sha256":sha(consumed),"frozen_consumed_equal":True})
+    assert len(calls) == 6
+    joint = {}
+    for scenario in ["low", "base", "high"]:
+        delta = {year:outputs["stress"]["consolidated_forecast"][scenario]["annual_revenue"][year] - value
+                 for year,value in outputs["main"]["consolidated_forecast"][scenario]["annual_revenue"].items()}
+        assert abs(delta["2026"] + 4500) < Decimal("1e-8")
+        assert abs(delta["2027"] - 3600) < Decimal("1e-8")
+        assert abs(delta["2028"]) < Decimal("1e-8")
+        joint[scenario] = {y:str(v) for y,v in delta.items()}
+    bridge = read(ATTEMPT / "v3/research/component-bridge.json")
+    old_bridge = read(AUTHOR / "research/component-bridge.json")
+    assert [(r["metric_id"],r["value"]) for r in bridge["rows"]] == [(r["metric_id"],r["value"]) for r in old_bridge["rows"]]
+    residual = next(r for r in bridge["rows"] if r["metric_id"] == "residual_h1_yoy")
+    assert "several percentage points" not in residual["rounding_basis"] and "not a display-rounding table" in residual["note"]
+    wip = read(ROOT / ".planning/r1-w09-publication-20261023/rf-main-preservation.json")
+    for row in wip:
+        p = Path("C:/Users/郑曾波/Projects/revenue-forecast") / row["path"]
+        assert sha(p) == row["sha256"] and p.stat().st_size == row["bytes"]
+    result = {"status":"PASS_FINITE_DATA_AND_LINEAGE_CHECK", "identities":integrity,"variants":variants,
+        "actual6_consumed_captures":calls,"joint_timing_delta_cny_million":joint,
+        "bridge_numeric_rows_unchanged":len(bridge["rows"]),"rf_main3_assurance_wip_unchanged":wip,
+        "executed_author_scripts":0,"raw_original_or_pdf_reads":0,"external_network_model_downloads":0,
+        "limits":["No new source text verification or W08 latest-summary adoption", "No W12 four-way or company economic acceptance"]}
+    (REPORT / "data-audit.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+    print(json.dumps({"identities":len(integrity),"segment_cells":sum(r["segment_cells"] for r in variants),
+        "group_cells":sum(r["group_cells"] for r in variants),"max_grid_delta":"0","captures":len(calls),"bridge_rows":len(bridge["rows"])}))
+
+
+if __name__ == "__main__":
+    main()

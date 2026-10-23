@@ -1,0 +1,15 @@
+{
+  "command": [
+    "git",
+    "-C",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+    "merge",
+    "--no-ff",
+    "--no-commit",
+    "eb7c2deec3650889a10220fdfe8fccb168b28c72"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 11.400149599998258,
+  "at": "2026-10-23T23:34:51.869161+00:00"
+}

@@ -8,7 +8,7 @@
   ],
   "current_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
   "current_attempt": "r1-remediation-02",
-  "status": "ACTIVE_W08_REAL_CONTENT_ROOT_REPAIR_W09_W11_DISPATCH_READY",
+  "status": "ACTIVE_W09_W11_MERGED_CI_SUCCESS_W08_FINITE_REVIEW_PASS_INTEGRATION_NEXT",
   "source_writes_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
   "old_campaign_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\company-pool-cycle-2026-10-09\\campaign.json",
   "old_nvda_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pool-20261009-001-us-nvda",
@@ -78,5 +78,7 @@
   "latest_four_review_ref": "../review/r1-phase-b-four-review-index-20261022.json",
   "current_checkpoint_owner": "../CURRENT_STATUS.json",
   "active_workers_after_closeout": "ROOT owns W08; two external lanes READY, not yet reported started",
-  "historical_initial_fields_note": "publication, first_native_observation, execution_outcome, artifact_completeness and four_review retain the original initial attempt observations; final3 review and new preparation are explicitly referenced separately."
+  "historical_initial_fields_note": "publication, first_native_observation, execution_outcome, artifact_completeness and four_review retain the original initial attempt observations; final3 review and new preparation are explicitly referenced separately.",
+  "current_next_action": "W09与W11已完成真实作者支线并入、推送及精确代码CI成功；RF安装103个owned运行文件全匹配。W08共用谓词/模态/期间owner重构已获同组独审24P（原17+6真实目标召回+1源码cache身份），ROOT先正常保存现有预算merge和该有限节点、并入母线；再完成可信跨页父级、固定容量选材/分批、真实249页14项回放，然后正式摘要/缓存/RF逐文档矩阵/W12。原件、旧FAIL、unknown及原测试不变。",
+  "current_checkpoint_ref": "../CURRENT_STATUS.json"
 }
