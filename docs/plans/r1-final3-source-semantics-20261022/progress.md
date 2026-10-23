@@ -43,3 +43,5 @@ Independent reverse controls4F exposed unsupported arbitrary three-letter prefix
 
 ## 2026-10-23T20:28:51.484783+00:00 shared context-owner repair
 Final source snapshot249pages/5647units96spans8137chars, work7298096/16M; both distinct30%contexts retained. p184 owncontext now financial-report chapter and local income/cost heading only; wrong p160/p98numeric-row ancestors removed at inference ownership, no downstream deletion. Independent review reports bound in resume/root/checkpoint-v3.json; annual14 stillPARTIAL. Test asset9files242299B restored byte-clean from ownHEAD to fix sparse prepush failure, no originalPDF copy. W09/W11 remain external exclusive scopes. No paid/download.
+
+Final annual14 report is9,330B and remainsPARTIAL; p184root fixed but p16three unknown rows, Chemistryparent and six missing fact groups remain. Saved code48a8c86d passed normal precommitRuff/fullsrcmypy/hostguard. Explicit current-session pytest1/2 plus mypy cache29,226,312B removed safely; historical pytest0 retained. Normal isolated-branch push will rerun required full suite with its missing tracked test assets now present; no gate bypass.

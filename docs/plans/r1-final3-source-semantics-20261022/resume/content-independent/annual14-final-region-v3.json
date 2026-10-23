@@ -1,0 +1,304 @@
+{
+ "schema_version": "w08-annual14-final-region-v3/1",
+ "created_at": "2026-10-23T20:29:05.640705+00:00",
+ "verdict": "PARTIAL_NOT_WHOLE_CONTENT_PASS",
+ "scope": "Same14 annual targets within frozen42;supplied final snapshot,not final summary/code-test signoff.",
+ "snapshot": {
+  "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\candidate-final-region-v3.json",
+  "sha256": "d7e5201d8330b700b87dc13140910f508b70dac20aa798e6c7a5c31b6cf4ad23",
+  "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "selected_evidence_sha256": "23e8d82975e3fc4d803419ea60c4e826998f9e82fcc4292ea0267c126b1dc891",
+  "reading_context_sha256": "7a58e8f957da193bd4d02d5cde3ce5cb8601a4c42f5cd298c200a2d365a02d3f",
+  "pages": 249,
+  "candidates": 1527,
+  "selected": 96,
+  "chars": 8137,
+  "status": "partial",
+  "coverage_complete": false,
+  "work_budget": {
+   "used": 7298096,
+   "limit": 16000000,
+   "exhausted": false,
+   "same_instance_for_parse_and_select": true
+  },
+  "diagnostics": [
+   {
+    "code": "budget_full",
+    "count": 250
+   }
+  ],
+  "code_sha256": {
+   "source_catalog/narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+   "source_catalog/narrative_reading.py": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+   "source_catalog/narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+   "source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+   "document_understanding/structure/sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+   "document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+   "document_understanding/observation_adapter.py": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+   "document_understanding/structure/layout.py": "db6df3eea9fa6af1b20398e7a7339a52b8dc5dfdb626871331af26af58234c74",
+   "document_understanding/layout_hints/headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+   "document_normalization/form_fields.py": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d",
+   "document_normalization/table_shapes.py": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+   "source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+   "document_understanding/layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+   "document_understanding/structure/contract.py": "ca693bed1cba4423d8c9b3a2dc0d204b48ab467d395eef91890f501407754a3a"
+  }
+ },
+ "reused_evidence_hashes": {
+  "annual14-intermediate-content-review-20261023.json": "dcfb1c4ad4f8bf6ac6c4ea505a3becc74551c14deff6e89f0ff9bf791c3488fd",
+  "annual14-shared-owner-full-context-review-20261023.json": "403b75cfd240d0ebeeb1ca83e17640cc10424a8f23679c8c16d0e1c06a065d46",
+  "context-diagnosis.json": "21077359db99d3d5cd3a890ff4ad5e8ad6f031d9e9c2d4c505f2bbeb23964988"
+ },
+ "reuse_rule": "First report page_evidence/read_receipt only;other old reports are detail/history refs.No original text copied.No old actual trace used as final ranking evidence.",
+ "this_round": {
+  "original_reads": 0,
+  "parser_runs": 0,
+  "models": 0,
+  "downloads": 0,
+  "source_or_code_edits": 0
+ },
+ "pointers": "support/context numbers are zero-based selected_evidence indices;g/v point to final reading_context.groups/citation_views.",
+ "closure": {
+  "p184": {
+   "state": "old_wrong_ancestor_resolved",
+   "support": 91,
+   "g": 18,
+   "v": 0,
+   "context": [
+    84,
+    90
+   ],
+   "context_locators": [
+    "loc:v1/page:83/paragraph:2",
+    "loc:v1/page:183/paragraph:7"
+   ],
+   "p160_balance_absent": true
+  },
+  "p16": {
+   "state": "still_unknown_headers_unit_period",
+   "support": [
+    39,
+    40,
+    41
+   ],
+   "g": [
+    2,
+    3,
+    4
+   ],
+   "kind": "background",
+   "context": [
+    5,
+    38
+   ],
+   "quality_flags": [
+    [],
+    [],
+    []
+   ],
+   "targeted_table_ambiguity_constraint": false,
+   "new_row_p16_16_not_a_closure_fix": true
+  },
+  "Chemistry": {
+   "state": "parent_still_missing",
+   "children": [
+    26,
+    27,
+    28
+   ],
+   "g": [
+    29,
+    30,
+    13
+   ],
+   "context": [
+    5,
+    23
+   ],
+   "selected_parent_not_in_own_views": 25
+  },
+  "two30pct": {
+   "state": "own_business_retained",
+   "Testing": {
+    "support": 31,
+    "g": 31,
+    "parent": 29
+   },
+   "Biology": {
+    "support": 34,
+    "g": 16,
+    "parent": 32
+   }
+  }
+ },
+ "six_omissions": {
+  "R42w_310": "absent",
+  "small_molecule4000kL": "absent",
+  "safety4.6pct": "absent",
+  "quantified_guidance_and_conditions": "absent",
+  "peptide_completion_100000L": "absent",
+  "Biology_customer20pct": "absent"
+ },
+ "rows": [
+  {
+   "id": "ST-A01",
+   "state": "partial",
+   "support": [
+    10,
+    19,
+    25,
+    26,
+    27,
+    28
+   ],
+   "retained": "Four businesses/local D&M,TIDES.",
+   "gap": "p119 molecule/formulation scope and Chemistry parent missing.",
+   "revenue_risk": "Hierarchy/double-count boundary incomplete."
+  },
+  {
+   "id": "ST-A02",
+   "state": "partial_unknown",
+   "support": [
+    14,
+    24,
+    36,
+    39,
+    40,
+    41,
+    91
+   ],
+   "retained": "Total4545616.58 CNY-wan/+15.84%;continuous434.2 CNY-yi;restatement.",
+   "gap": "Exact yuan table absent;p16/p235 headers/units unclosed.",
+   "revenue_risk": "Do not infer continuous/discontinued column meanings."
+  },
+  {
+   "id": "ST-A03",
+   "state": "partial",
+   "support": [
+    14
+   ],
+   "retained": "Four customer regions and changes.",
+   "gap": "Customer-parent-location definition absent.",
+   "revenue_risk": "Customer geography is not plant geography."
+  },
+  {
+   "id": "ST-A04",
+   "state": "partial",
+   "support": [
+    14
+   ],
+   "retained": "Year-end continuous orders580.0yi/+28.8%.",
+   "gap": "RPO definition/exact amount/2026 recognition schedule absent.",
+   "revenue_risk": "Stock-to-revenue timing incomplete."
+  },
+  {
+   "id": "ST-A05",
+   "state": "partial_parent",
+   "support": [
+    25,
+    26,
+    27
+   ],
+   "retained": "Chemistry364.7yi;D&M199.2yi/+11.4%;TIDES113.7yi/+96%.",
+   "gap": "Child views omit Chemistry;pure-R residual unsupported.",
+   "revenue_risk": "No parent-plus-children double count."
+  },
+  {
+   "id": "ST-A06",
+   "state": "covered_local",
+   "support": [
+    26
+   ],
+   "retained": "D&M839 additions;3452 stock;83/91/377/2901 stages;late-stage+22.",
+   "gap": "No new summary reviewed;ancestor covered inA01/A05.",
+   "revenue_risk": "Flows,stock and stages are distinct;not revenue."
+  },
+  {
+   "id": "ST-A07",
+   "state": "missing",
+   "support": [],
+   "retained": "None.",
+   "gap": "42w compounds/R-to-D310 absent.",
+   "revenue_risk": "Discovery-to-development flow evidence absent."
+  },
+  {
+   "id": "ST-A08",
+   "state": "covered_local",
+   "support": [
+    27,
+    28
+   ],
+   "retained": "TIDES orders+20.2%;customers+25%;molecules+45%.",
+   "gap": "No new summary reviewed.",
+   "revenue_risk": "Three denominators distinct;45% is not revenue growth."
+  },
+  {
+   "id": "ST-A09",
+   "state": "missing",
+   "support": [],
+   "retained": "General capacity strategy only.",
+   "gap": "4000kL,100000L,Taixing completion absent.",
+   "revenue_risk": "Physical capacity/timing cannot be replaced by strategy."
+  },
+  {
+   "id": "ST-A10",
+   "state": "partial",
+   "support": [
+    29,
+    31,
+    42
+   ],
+   "retained": "Testing40.4yi/+4.7%;own30%;margin-6.32pp/price.",
+   "gap": "Safety revenue+4.6% absent.",
+   "revenue_risk": "Total4.7% cannot replace safety4.6%;pp is not percent."
+  },
+  {
+   "id": "ST-A11",
+   "state": "partial",
+   "support": [
+    32,
+    34
+   ],
+   "retained": "Biology26.8yi/+5.2%;own new-molecule revenue30%.",
+   "gap": "Group new-customer inflow20% absent.",
+   "revenue_risk": "Customer-count and revenue-share denominators differ."
+  },
+  {
+   "id": "ST-A12",
+   "state": "missing",
+   "support": [],
+   "retained": "General2026 plan only.",
+   "gap": "513-530yi/continuous18-22% guidance and conditions absent.",
+   "revenue_risk": "Quantified conditional outlook unavailable."
+  },
+  {
+   "id": "ST-A13",
+   "state": "missing",
+   "support": [],
+   "retained": "Heading/restatement are not recognition support.",
+   "gap": "Time/point recognition amounts,policy,advance-liability rule absent.",
+   "revenue_risk": "Order/cash-to-recognition bridge missing;p184 ancestor separately fixed."
+  },
+  {
+   "id": "ST-A14",
+   "state": "partial",
+   "support": [
+    49,
+    71,
+    73,
+    75,
+    77
+   ],
+   "retained": "Demand/regulation/build-delay risks;generic FX hedge.",
+   "gap": "48.11% concentration,USD settlement/RMB translation,competition absent.",
+   "revenue_risk": "Hedging is not settlement-currency revenue sensitivity."
+  }
+ ],
+ "limits": [
+  "Only specific p160-to-p184 relation signed resolved;other context/content gaps remain.",
+  "budget_full250 is aggregate,not per-target cause;WorkBudget not exhausted,96 slots full.",
+  "Source API availability is not selection coverage;all financial rows need not enter96.",
+  "Frost2025-09 is not Taixing completion evidence.",
+  "Engineering passes are not whole-content passes;no final summary reviewed."
+ ]
+}

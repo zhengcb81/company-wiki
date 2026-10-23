@@ -106,6 +106,14 @@
     "resume/root/cleanup-current-session.json": {
       "sha256": "6e2f700ef5b7235c6eca248ee861763789563b3139fe4e59338503fceb542eb5",
       "bytes": 795
+    },
+    "resume/content-independent/annual14-final-region-v3.md": {
+      "sha256": "4c2a78a7cbf8495e14f41fcd372695b5570917d8c22df5b73a5163044b1f9fa8",
+      "bytes": 2985
+    },
+    "resume/content-independent/annual14-final-region-v3.json": {
+      "sha256": "f5be22df566777b44e7a9e399639789a7ee1c9154b0bea2fcda3da90fbf33cf4",
+      "bytes": 9330
     }
   },
   "root_cause": "Upstream negative table-region evidence was discarded before structural numbering fallback; source numeric rows became distant ancestor headings.",
@@ -123,5 +131,7 @@
   "new_downloads": 0,
   "new_raw_copies": 0,
   "mainline_merged": false,
-  "external_lanes": "W09 and W11 running user-reported; exclusive directories not modified"
+  "external_lanes": "W09 and W11 running user-reported; exclusive directories not modified",
+  "code_commit": "48a8c86d74006a83a6fdabbbfea7970756dd4d9a",
+  "annual14_status": "PARTIAL_NOT_WHOLE_CONTENT_PASS"
 }
