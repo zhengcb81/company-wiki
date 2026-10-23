@@ -75,6 +75,9 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         # Native outline declarations change each statement's own source scope.
         "company_wiki.document_understanding.structure.sections",
         "company_wiki.document_understanding.structure.layout",
+        "company_wiki.document_understanding.structure.contract",
+        "company_wiki.document_understanding.layout_bridge",
+        "company_wiki.document_understanding.observation_adapter",
         "company_wiki.document_understanding.layout_hints.headings",
         # Source boundaries and facts reuse this single grammar/matching owner.
         # Hash its actual dependency closure, not just the source adapter that
@@ -84,6 +87,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.document_understanding.operating_states.text_view",
         "company_wiki.document_normalization.text_matching",
         "company_wiki.document_normalization.form_fields",
+        "company_wiki.document_normalization.table_shapes",
         "company_wiki.source_catalog.n6_candidate_operating_facts",
     )
     def _module_path(name: str) -> Path:

@@ -23,10 +23,11 @@ import json
 import re
 
 from company_wiki.document_normalization.form_fields import has_inline_form_response
+from company_wiki.document_normalization.table_shapes import has_tabular_value_tail
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/3"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/4"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
@@ -199,7 +200,7 @@ def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
         explicit = int(tag[1])
     if isinstance(explicit, int) and not isinstance(explicit, bool) and explicit > 0:
         return explicit
-    if has_inline_form_response(text):
+    if has_inline_form_response(text) or has_tabular_value_tail(text):
         return None
     if metadata.get("heading_like") is True:
         return 2

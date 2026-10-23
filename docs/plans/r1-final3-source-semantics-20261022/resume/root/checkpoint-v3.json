@@ -1,0 +1,127 @@
+{
+  "schema_version": "w08-root-context-checkpoint/3",
+  "created_at": "2026-10-23T20:28:51.484783+00:00",
+  "status": "SHARED_HEADING_ROOT_REVIEW_PASS_ANNUAL_CONTENT_PARTIAL",
+  "prior_code_checkpoint": "181200bc",
+  "source_selection": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\candidate-final-region-v3.json",
+    "sha256": "d7e5201d8330b700b87dc13140910f508b70dac20aa798e6c7a5c31b6cf4ad23",
+    "bytes": 546549,
+    "physical_pages": 249,
+    "units": 5647,
+    "selected": 96,
+    "chars": 8137,
+    "work_budget": {
+      "used": 7298096,
+      "limit": 16000000,
+      "exhausted": false,
+      "same_instance_for_parse_and_select": true
+    },
+    "two_distinct_business_scopes": true,
+    "whole_content_pass": false,
+    "actual_p184_context": [
+      {
+        "locator": "loc:v1/page:83/paragraph:2",
+        "raw_text": "第八节\n财务报告"
+      },
+      {
+        "locator": "loc:v1/page:183/paragraph:7",
+        "raw_text": "(2).营业收入、营业成本的分解信息"
+      }
+    ],
+    "code_sha256": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\observation_adapter.py": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\layout.py": "db6df3eea9fa6af1b20398e7a7339a52b8dc5dfdb626871331af26af58234c74",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\layout_hints\\headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_normalization\\form_fields.py": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_normalization\\table_shapes.py": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\contract.py": "ca693bed1cba4423d8c9b3a2dc0d204b48ab467d395eef91890f501407754a3a"
+    }
+  },
+  "reports": {
+    "resume/heading-independent/review-v3.md": {
+      "sha256": "c2f09f5b336bd9d6d6ce4f598ad2308b52c87edc83eb1ef68312a69320e3dfdd",
+      "bytes": 2650
+    },
+    "resume/heading-independent/review-v3.json": {
+      "sha256": "6a2486503c428431449cd09a8f3cd9a8c7fd2450f98ee3b3c542d41da358ceb1",
+      "bytes": 4845
+    },
+    "resume/content-independent/context-diagnosis.md": {
+      "sha256": "3fc0c57a63ed670d1606bf365dcee22f76d0a609cefaf5d7c08dbd575b79cbf1",
+      "bytes": 5597
+    },
+    "resume/content-independent/context-diagnosis.json": {
+      "sha256": "21077359db99d3d5cd3a890ff4ad5e8ad6f031d9e9c2d4c505f2bbeb23964988",
+      "bytes": 26791
+    },
+    "resume/content-independent/context-actual-target-structure.json": {
+      "sha256": "5a0e4bd554b36d56818fd3585d24ef2d758e14e06ab09c22c7808b16c4e09798",
+      "bytes": 14312
+    },
+    "resume/measure-independent/trace-more/six-omissions-report.md": {
+      "sha256": "28ade2eeaa18e0bb0bc9af8703e885114790eabba332cb7dcf82786c8319b346",
+      "bytes": 5436
+    },
+    "resume/measure-independent/trace-more/six-omissions-report.json": {
+      "sha256": "dd73da824774eebbf89d9e216c96a395974d449e4fd0e5ab79ff929288e622a9",
+      "bytes": 82004
+    },
+    "resume/root/table-region-red.txt": {
+      "sha256": "f0fe4d2e72129420e039089cd5f6ea7b3b535211372907c99fce38a62378e8dd",
+      "bytes": 4424
+    },
+    "resume/root/table-region-red.xml": {
+      "sha256": "81451cfe58919601d5ab02bf14644b1619368de1d48610df7c4a4ba97024f011",
+      "bytes": 5379
+    },
+    "resume/root/heading-format-red.txt": {
+      "sha256": "1618b4ea853fb4220134579ba710b3f6442a8f8d18eb5b11b072d45ec73d1b5f",
+      "bytes": 12533
+    },
+    "resume/root/heading-format-red.xml": {
+      "sha256": "bb36cfd604bbb5f8eca8e39042c2a033033d995d5e93070e9725eeb7b3c4de97",
+      "bytes": 21356
+    },
+    "resume/root/heading-format-green.txt": {
+      "sha256": "97d12b7562afdc89e0090a7e2e0054a83d284010e874f76ef957ea999cc34ea3",
+      "bytes": 1493
+    },
+    "resume/root/heading-format-green.xml": {
+      "sha256": "f88d18ad12cf613efe034fc2ac2edad6ad91ea3a91dfcb81e5d87fd58b1c7bc1",
+      "bytes": 37507
+    },
+    "resume/root/sparse-test-input-restoration.json": {
+      "sha256": "8c41c4a70e6b87361be3ecef18d8eee9888081a2f58929a9f3dcfb0575d36938",
+      "bytes": 3285
+    },
+    "resume/root/cleanup-current-session.json": {
+      "sha256": "6e2f700ef5b7235c6eca248ee861763789563b3139fe4e59338503fceb542eb5",
+      "bytes": 795
+    }
+  },
+  "root_cause": "Upstream negative table-region evidence was discarded before structural numbering fallback; source numeric rows became distant ancestor headings.",
+  "fix": "Transport existing table-region boolean, honor it in structural fallback, preserve native headings, one shared literal value-cell shape and actual source-byte cache closure.",
+  "test_boundaries": "Prior992P and cache success retain their byte scope; current independent review and native precommit/prepush bind this final source. No relabel of older green receipts.",
+  "remaining": [
+    "untyped numeric table missing header/unit needs honest ambiguity or actual source binding",
+    "genuine cross-page business ancestry",
+    "operating measure eligibility and project anchor/body/conditional closure",
+    "actual selected coverage then new summary/RF native matrix/W12"
+  ],
+  "default_selector": "0.8.0",
+  "candidate_selector": "0.9.0",
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "new_raw_copies": 0,
+  "mainline_merged": false,
+  "external_lanes": "W09 and W11 running user-reported; exclusive directories not modified"
+}

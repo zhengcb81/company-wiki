@@ -6,7 +6,7 @@
 Repair source meaning, purpose, native context and table dependencies in their shared owning layer. Preserve original documents, existing limits and default selector. Engineering green is not annual content acceptance.
 
 ## Next Step
-ROOT diagnoses and repairs the observed numbered numeric-row false heading (p160 leaking into p184 context), then table header/unit and genuine cross-page business ancestry. Independently trace six omitted operating facts through actual eligibility/offer/defer paths before changing selection. W09/W11 are running in their exclusive external worktrees; ROOT does not edit those scopes.
+ROOT continues honest untyped-table ambiguity, native cross-page business ancestry and the individually traced eligibility/project/body/forecast-condition roots. The false numeric-row ancestor root is now repaired at layout-to-structure ownership and independently checked, including the actual p184 citation view. Keep96/48000/16M and default0.8; annual content remains PARTIAL. W09/W11 external authors own their disjoint worktrees.
 
 ## Phases
 1. Original public cache and source semantic RED — complete; failures preserved.

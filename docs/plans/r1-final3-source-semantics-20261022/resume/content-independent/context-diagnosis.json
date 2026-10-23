@@ -1,0 +1,556 @@
+{
+  "schema_version": "w08-context-root-diagnosis/1",
+  "created_at": "2026-10-23T20:15:22.858243+00:00",
+  "scope": "只读actual中间态及代码责任层诊断；未改源码/测试/PWF/Git，未碰W09/W11；最终源码由ROOT实施验收。",
+  "verdict": "p160错误heading与s649→s567 parent链已实证；p16质量守卫旁路已实证，首次typed table丢失原因未过度声称。",
+  "artifacts": {
+    "full_selection": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\candidate-shared-owner-full.json",
+      "sha256": "b0178aecc041aac84cad508f4a7b5bbbd14984735ba348023f6ad62a7c553b7c"
+    },
+    "actual_structure": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\content-independent\\context-actual-target-structure.json",
+      "sha256": "5a0e4bd554b36d56818fd3585d24ef2d758e14e06ab09c22c7808b16c4e09798",
+      "bytes": 14312
+    },
+    "prior_full_content_report": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\content-independent\\annual14-shared-owner-full-context-review-20261023.json",
+      "sha256": "403b75cfd240d0ebeeb1ca83e17640cc10424a8f23679c8c16d0e1c06a065d46"
+    }
+  },
+  "actual_probe": {
+    "method": "SourceVersionReader preview -> public parse_pdf_bytes(selector0.9.0) -> public understand_units; same WorkBudget; no select/model run.",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "diagnosis_source_bytes_total": 4824678,
+    "diagnosis_open_calls": 3,
+    "entire_this_agent_content_and_diagnosis_source_bytes_total": 8041130,
+    "byte_limit": 8388608,
+    "source_fingerprint_guards": true,
+    "code_unchanged_during_successful_probe": true,
+    "budget_used": 3699183,
+    "budget_limit": 16000000,
+    "failures": [
+      "asdict hit mappingproxy after public build; no artifact saved",
+      "full nested metadata made output908431B;64KiB guard refused write; no artifact saved"
+    ],
+    "third_gate": {
+      "passed": true,
+      "synthetic_bytes": 1725,
+      "huge_metadata_not_emitted": true,
+      "whitelist_scalar_fields": [
+        "font_size",
+        "heading_level",
+        "heading_level_source",
+        "kind",
+        "layout_basis",
+        "layout_confidence",
+        "layout_heading_level",
+        "observation_kind",
+        "page",
+        "paragraph",
+        "table_id",
+        "text",
+        "unit_id"
+      ]
+    },
+    "raw_copies": 0,
+    "downloads": 0,
+    "model_calls": 0
+  },
+  "probe_code_sha256": {
+    "source_catalog/narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+    "source_catalog/narrative_reading.py": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+    "document_understanding/structure/sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+    "document_understanding/structure/layout.py": "0e1506f22be701c66caf3bfba1b720b598ad612bafc5e1e8f461a1cde70c626a",
+    "document_understanding/layout_hints/headings.py": "261581a1578e5189e877f8084ae07433cd5344d1f877fe86ad0866bcdd73f122",
+    "document_understanding/structure/tables.py": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+    "document_understanding/structure/table_purpose.py": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+    "document_understanding/pipeline.py": "97c4cdd57fca617e1313446283c6a8121b074d3666ffbb2356a6a4591b52e029",
+    "document_understanding/observation_adapter.py": "dd5091c4e0f4a32cd2eb329c0891f27be4ef8185c8c63cc58e3dbcaaf60b4ddb"
+  },
+  "version_boundary": "sections.py observed SHA d4b8aed… differs from fullselection39fee1… only by native_intro_ids: set[str] annotation, independently verified via in-memory inverse exact SHA. Other relevant heading/projection files match fullselection exactly. ROOT was explicitly released to edit only after successful observation; these are pre-fix fingerprints.",
+  "findings": [
+    {
+      "id": "CTX-ROOT-01",
+      "status": "confirmed_actual_and_code",
+      "problem": "结构层重新推断标题，覆盖上游table-region拒绝",
+      "actual_evidence": {
+        "p160": {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c",
+          "kind": "pdf_text_block",
+          "page": 160,
+          "paragraph": 19,
+          "text": "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43",
+          "font_size": 10.449999809265137,
+          "observation_kind": "paragraph",
+          "heading_level": null,
+          "heading_level_source": null,
+          "table_id": null,
+          "layout_heading_level": null,
+          "layout_confidence": "low",
+          "layout_basis": "in_table_region",
+          "section_paths": [
+            {
+              "role": "heading",
+              "ancestors": [
+                {
+                  "id": "s567",
+                  "parent": "s1",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c"
+                  ],
+                  "heading_text": [
+                    "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 0,
+                  "basis": "reading_order;heading_numbering",
+                  "confidence": "medium"
+                },
+                {
+                  "id": "s1",
+                  "parent": null,
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [],
+                  "heading_text": [],
+                  "heading_count": 0,
+                  "body_count": 1,
+                  "basis": "reading_order;no_preceding_heading",
+                  "confidence": "low"
+                }
+              ],
+              "limited": false
+            }
+          ]
+        },
+        "p183": {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:851ec64a9e52ae74f586dcaa2692d2885b499be9edc1f6281dd78b882525b1be",
+          "kind": "pdf_text_block",
+          "page": 183,
+          "paragraph": 7,
+          "text": "(2).营业收入、营业成本的分解信息",
+          "font_size": 10.449999809265137,
+          "observation_kind": "heading",
+          "heading_level": 2,
+          "heading_level_source": "numbering",
+          "table_id": null,
+          "layout_heading_level": 2,
+          "layout_confidence": "medium",
+          "layout_basis": "numbered_heading;conservative_horizontal_clearance;isolated;short_text",
+          "section_paths": [
+            {
+              "role": "heading",
+              "ancestors": [
+                {
+                  "id": "s649",
+                  "parent": "s567",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:851ec64a9e52ae74f586dcaa2692d2885b499be9edc1f6281dd78b882525b1be"
+                  ],
+                  "heading_text": [
+                    "(2).营业收入、营业成本的分解信息"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 15,
+                  "basis": "reading_order;heading_level;spans_pages",
+                  "confidence": "high"
+                },
+                {
+                  "id": "s567",
+                  "parent": "s1",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c"
+                  ],
+                  "heading_text": [
+                    "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 0,
+                  "basis": "reading_order;heading_numbering",
+                  "confidence": "medium"
+                },
+                {
+                  "id": "s1",
+                  "parent": null,
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [],
+                  "heading_text": [],
+                  "heading_count": 0,
+                  "body_count": 1,
+                  "basis": "reading_order;no_preceding_heading",
+                  "confidence": "low"
+                }
+              ],
+              "limited": false
+            }
+          ]
+        },
+        "p184": {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f909c596b3686412cd635a7e7e237d11129fa8257eb48cde72140b1dd2c14742",
+          "kind": "pdf_text_block",
+          "page": 184,
+          "paragraph": 4,
+          "text": "注：依据企业会计准则规定，公司将本年或对比年度内已签署股权出售协议、完成出售或正处于终止阶段的相关业务，划分为终止经营业务，相应重述\n了可比期间的数据。",
+          "font_size": 10.449999809265137,
+          "observation_kind": "footnote",
+          "heading_level": null,
+          "heading_level_source": null,
+          "table_id": null,
+          "layout_heading_level": null,
+          "layout_confidence": "low",
+          "layout_basis": "sentence_like_text;no_lane_split",
+          "section_paths": [
+            {
+              "role": "body",
+              "ancestors": [
+                {
+                  "id": "s649",
+                  "parent": "s567",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:851ec64a9e52ae74f586dcaa2692d2885b499be9edc1f6281dd78b882525b1be"
+                  ],
+                  "heading_text": [
+                    "(2).营业收入、营业成本的分解信息"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 15,
+                  "basis": "reading_order;heading_level;spans_pages",
+                  "confidence": "high"
+                },
+                {
+                  "id": "s567",
+                  "parent": "s1",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c"
+                  ],
+                  "heading_text": [
+                    "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 0,
+                  "basis": "reading_order;heading_numbering",
+                  "confidence": "medium"
+                },
+                {
+                  "id": "s1",
+                  "parent": null,
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [],
+                  "heading_text": [],
+                  "heading_count": 0,
+                  "body_count": 1,
+                  "basis": "reading_order;no_preceding_heading",
+                  "confidence": "low"
+                }
+              ],
+              "limited": false
+            }
+          ]
+        }
+      },
+      "mechanism": [
+        {
+          "file": "src/company_wiki/document_understanding/observation_adapter.py",
+          "symbol": "_heading_level",
+          "line": 178,
+          "finding": "拒绝多行编号文本；actual p160 observation仍是paragraph，heading_level/source均None。"
+        },
+        {
+          "file": "src/company_wiki/document_understanding/layout_hints/headings.py",
+          "symbol": "heading_evidence",
+          "line": 83,
+          "finding": "table region在标题推断前否定；actual layout_basis=in_table_region、heading=None。"
+        },
+        {
+          "file": "src/company_wiki/document_understanding/structure/layout.py",
+          "symbol": "is_heading",
+          "line": 196,
+          "finding": "短编号paragraph fallback允许len<=80且编号开头，不检查多行数量尾部；p160实际被structure升为heading，section basis=heading_numbering。"
+        },
+        {
+          "file": "src/company_wiki/document_understanding/structure/layout.py",
+          "symbol": "heading_depth",
+          "line": 215,
+          "finding": "无hint时编号5.的当前规则得到level1；wire不导出depth，本报告不把wire中的None当实际层级。"
+        },
+        {
+          "file": "src/company_wiki/document_understanding/structure/sections.py",
+          "symbol": "build_sections/open_section",
+          "line": 266,
+          "finding": "按depth栈设parent。actual s567(p160) parent=s1，s649(p183) parent=s567；p184 body属于s649。"
+        },
+        {
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "symbol": "_prose_reading_packages",
+          "line": 173,
+          "finding": "沿section parent闭包收集heading；合法传递逻辑消费了结构层错误parent。"
+        },
+        {
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "symbol": "_context",
+          "line": 811,
+          "finding": "required IDs完整分成support/context；已封存group3669a74…把余额行暴露为p184脚注context。"
+        }
+      ],
+      "not_the_fix": "不在_context按页距删除祖先或删除p160字样，不关闭所有ancestor context。"
+    },
+    {
+      "id": "CTX-ROOT-02",
+      "status": "confirmed_actual_guard_gap_first_owner_loss_unresolved",
+      "problem": "p16裸数行是paragraph而非typed table，qualification/ambiguity守卫按package kind限定，prose旁路漏掉质量unknown",
+      "actual_evidence": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f1792f9a341c3aa352957312fb77af3219d4afdc8fcf624443aaae88e7724113",
+          "kind": "pdf_text_block",
+          "page": 16,
+          "paragraph": 2,
+          "text": "持续经营业务小计\n4,342,082.37\n2,218,493.11\n48.91\n21.40\n12.01\n增加4.28\n个百分点",
+          "font_size": 10.449999809265137,
+          "observation_kind": "paragraph",
+          "heading_level": null,
+          "heading_level_source": null,
+          "table_id": null,
+          "layout_heading_level": null,
+          "layout_confidence": "unknown",
+          "layout_basis": "no_heading_evidence;no_lane_split",
+          "section_paths": [
+            {
+              "role": "body",
+              "ancestors": [
+                {
+                  "id": "s59",
+                  "parent": "s40",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:638900d620c22d605cf354972afa441068ed7b13eb005948d03f7fa19bcb8a1e"
+                  ],
+                  "heading_text": [
+                    "(1). 分行业、分产品、分地区、分销售模式情况"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 45,
+                  "basis": "reading_order;heading_level;spans_pages",
+                  "confidence": "high"
+                },
+                {
+                  "id": "s40",
+                  "parent": "s1",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+                  ],
+                  "heading_text": [
+                    "第三节\n管理层讨论与分析"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 0,
+                  "basis": "reading_order;heading_level",
+                  "confidence": "high"
+                },
+                {
+                  "id": "s1",
+                  "parent": null,
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [],
+                  "heading_text": [],
+                  "heading_count": 0,
+                  "body_count": 1,
+                  "basis": "reading_order;no_preceding_heading",
+                  "confidence": "low"
+                }
+              ],
+              "limited": false
+            }
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:02ad67596bb525120cd9a83b8c7848420442acc540156f34df4dd30a6b626a65",
+          "kind": "pdf_text_block",
+          "page": 16,
+          "paragraph": 3,
+          "text": "终止经营业务\n203,534.20\n161,650.35\n20.58\n-41.42\n-48.82\n增加11.47",
+          "font_size": 10.449999809265137,
+          "observation_kind": "paragraph",
+          "heading_level": null,
+          "heading_level_source": null,
+          "table_id": null,
+          "layout_heading_level": null,
+          "layout_confidence": "unknown",
+          "layout_basis": "no_heading_evidence;no_lane_split",
+          "section_paths": [
+            {
+              "role": "body",
+              "ancestors": [
+                {
+                  "id": "s59",
+                  "parent": "s40",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:638900d620c22d605cf354972afa441068ed7b13eb005948d03f7fa19bcb8a1e"
+                  ],
+                  "heading_text": [
+                    "(1). 分行业、分产品、分地区、分销售模式情况"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 45,
+                  "basis": "reading_order;heading_level;spans_pages",
+                  "confidence": "high"
+                },
+                {
+                  "id": "s40",
+                  "parent": "s1",
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [
+                    "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+                  ],
+                  "heading_text": [
+                    "第三节\n管理层讨论与分析"
+                  ],
+                  "heading_count": 1,
+                  "body_count": 0,
+                  "basis": "reading_order;heading_level",
+                  "confidence": "high"
+                },
+                {
+                  "id": "s1",
+                  "parent": null,
+                  "depth": null,
+                  "wire_has_depth": false,
+                  "heading_ids": [],
+                  "heading_text": [],
+                  "heading_count": 0,
+                  "body_count": 1,
+                  "basis": "reading_order;no_preceding_heading",
+                  "confidence": "low"
+                }
+              ],
+              "limited": false
+            }
+          ]
+        }
+      ],
+      "mechanism": [
+        {
+          "file": "src/company_wiki/document_understanding/structure/tables.py",
+          "symbol": "_scopes",
+          "line": 96,
+          "finding": "收集table_header/table_row/html_table_cell及caption/note；typed坐标缺失的普通paragraph本身不进入此table scope。无table_id loose scope逐页重置，不能凭此证明p15→p16 continuation。"
+        },
+        {
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "symbol": "_prose_reading_packages",
+          "line": 138,
+          "finding": "只有真实coordinates.table_index非None的成员被保作table owner；actual p16两行table_index及table_id均None，仍走prose。"
+        },
+        {
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "symbol": "_candidates",
+          "line": 449,
+          "finding": "非operating_table包直接加入scoped packages；_qualified_table只检查operating_table。actual选材两行group kind=background。"
+        },
+        {
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "symbol": "select_reading_evidence",
+          "line": 1024,
+          "finding": "table_structure_ambiguous仅对eligible operating_table且binding不完整的row写入；background两行不在集合，actual quality_flags=[]。"
+        },
+        {
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "symbol": "_context",
+          "line": 880,
+          "finding": "追加表结构unknown约束又以已有table_structure_ambiguous为前提，因此旁路同样没有该定向约束。"
+        }
+      ],
+      "source_comparison": "已核p15完整页有万元/人民币及收入/成本/毛利率/同比表头；p16开头是其续行。本版view只携带一般分行业标题，不能恢复真实列义。",
+      "unresolved": "本轮没有导出完整fine-table descriptor/初始候选表诊断，不能再断言p16首次未typed究竟源于fine detection、fragmentation还是跨页策略。已证实的是actual paragraph结果及其后守卫旁路。",
+      "safe_priority": "以真实质量unknown为首要；不强制所有财务表行进入96。"
+    }
+  ],
+  "red_test_designs": [
+    {
+      "id": "RED-H1-neutral-short-number-row",
+      "boundary": "shared heading primitive and all inference callers",
+      "fixture": "普通paragraph，无table/heading hint：7.Closing balance\\n-\\n-\\n5,000.00\\n-\\n75,000.00\\n80,000.00；保持40<len<=80。另用中文普通余额标签和tab分隔。",
+      "expected": "不会成为inferred heading；原文字节/locator不变。",
+      "positive_controls": [
+        "1.2 Operating progress（编号后有空格）",
+        "真实中文短小节",
+        "source-declared DOM/native heading保留"
+      ],
+      "why_current_red": "现structure/layout短编号fallback静态满足，而adapter多行门不同；ROOT已在独立中性包复现，此报告未代跑其测试。"
+    },
+    {
+      "id": "RED-H2-real-pipeline-ancestor",
+      "boundary": "synthetic PDF -> real parser -> public understand_units -> selected context",
+      "fixture": "中性公司、真实短编号标题、同形多行余额行、后续更深小节与脚注；覆盖紧邻页及连续多页。不给expected section/parent手工注入。",
+      "expected": "余额行不出现在heading_unit_ids或脚注祖先/citation context；真实小节仍保留，脚注与正确父级闭合。",
+      "negative_mutations": [
+        "更换金额/行标签/页号和顺序",
+        "layout returns heading=None,in_table_region时structure不得重猜",
+        "同形显式native标题与普通row分开处理"
+      ]
+    },
+    {
+      "id": "RED-T1-prose-table-ambiguity",
+      "boundary": "source observation/structure ambiguity -> selector quality propagation",
+      "fixture": "中性业务一般标题下，table_index/table_id均None、PDF paragraph为一行文字标签加多行数值；分别由background和native_continuity拥有，禁止伪造typed table。",
+      "expected": "若该行被选，必须携真实可证明表头/单位/期间；无法闭合时逐span/table row显式unknown/partial或deferred，不能flags=[]静默当可解释列。raw/ID/locator保持。",
+      "scope": "断言source合同，不要求固定96、某score或某个实现分支。"
+    },
+    {
+      "id": "RED-T2-crosspage-unit-and-no-borrow",
+      "boundary": "native table continuation/context owner",
+      "fixture": "上一页真实表头及单位、本页续行；分别变单位CNY元/万元、删除表头、插入同页另一业务不同币种的表；另设已有typed/native完整表正控。",
+      "expected": "有显式continuation证据才绑定同原始parent/table；变单位改变上下文解释，缺表头/单位保持unknown。不能借相邻表/页底成本表caption补头。",
+      "safe_fallback": "无可靠native continuation时只诚实unknown，预算不放宽。"
+    }
+  ],
+  "credible_fixes": [
+    {
+      "id": "FIX-H",
+      "confidence": "supported_by_actual_owner_chain",
+      "proposal": "把多行/制表符“文字行标签+至少两个完整数值cell”的形状判断放在共享source shape primitive，供adapter、layout heading推断和structure fallback同用；只约束推断，不抹掉source显式标题。必须保留真实heading正控，防止版本间同形文本被不同owner重新升格。",
+      "reject": [
+        "只在_context删远页ID",
+        "公司/页号/期末余额词特判",
+        "删除全部祖先闭包"
+      ]
+    },
+    {
+      "id": "FIX-T",
+      "confidence": "credible_design_requires_owner_RED",
+      "proposal": "由source/structure所有者标记已观测的tabular ambiguity，所有被选的prose/table carrier都传播同一质量状态；typed/native已闭合表继续使用既有header/unit/period真实refs。无跨页闭合证据时传unknown，不在下游猜列头。",
+      "reject": [
+        "强制全部财务数表进96",
+        "用operating_state_unknown理由名代替table结构质量状态",
+        "旁路另建业务数字词表/平行打分器",
+        "借同页其他claim或相邻表补列义"
+      ]
+    }
+  ],
+  "limitations": [
+    "Structure wire does not export depth; recorded depth=None means absent field, not observed no hierarchy.",
+    "No claim that all tables/249 pages/14 targets or final model output pass.",
+    "No per-target budget reason inferred from264 aggregate budget_full.",
+    "ROOT new RED count is a received coordination update, not a test executed by this reviewer.",
+    "CodeGraph symbols were used first; index line offsets lagged disk, so precise file snippets/child inspection supplied current pre-fix line references."
+  ]
+}

@@ -16,6 +16,7 @@ degrade to ordinal/adjacency evidence and report lower confidence.
 from __future__ import annotations
 
 from company_wiki.document_normalization.form_fields import has_inline_form_response
+from company_wiki.document_normalization.table_shapes import has_tabular_value_tail
 
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -199,13 +200,21 @@ def is_heading(unit: ObservationUnit, *, toc_ids: frozenset[str] | None = None) 
         return False
     if unit.is_header_furniture:
         return False
+    if unit.table_region:
+        native_heading = (
+            unit.heading_level is not None and unit.heading_level_source == "native"
+            or unit.kind == "html_heading"
+            or unit.kind == "heading" and unit.heading_level_source not in {"layout", "numbering"}
+        )
+        if not native_heading:
+            return False
     if unit.heading_level is not None:
         return True
     if unit.kind in {"heading", "html_heading"}:
         return True
     if unit.is_table_furniture:
         return False  # table values are not chapter numbering
-    if has_inline_form_response(unit.text):
+    if has_inline_form_response(unit.text) or has_tabular_value_tail(unit.text):
         return False
     if _HEADING_NUMBER.match(unit.text) and len(unit.text) <= 80:
         return not unit.text.rstrip().endswith(("。", "；", ";", "."))

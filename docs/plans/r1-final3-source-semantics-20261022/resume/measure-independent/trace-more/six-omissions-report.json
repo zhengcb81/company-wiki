@@ -1,0 +1,1765 @@
+{
+  "schema_version": "w08-six-omissions-observe-only-report/1",
+  "status": "ACTUAL_CHAIN_DIAGNOSED_NOT_WHOLE_CONTENT_PASS",
+  "reference": {
+    "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\candidate-shared-owner-full.json",
+    "sha256": "b0178aecc041aac84cad508f4a7b5bbbd14984735ba348023f6ad62a7c553b7c"
+  },
+  "actual_result": {
+    "physical_pages": 249,
+    "source_units": 5647,
+    "selected_count": 96,
+    "selected_chars": 8156,
+    "candidate_count": 1509,
+    "selected_canonical_sha256": "853df4608ea21aa5821458d755f2d130acbd57a316c3280546cc575a9a4e7127",
+    "context_canonical_sha256": "c5ab4bd4d1ede34a94144503acaacfd3246df06e9b49f06df05d89c57404561c",
+    "reference_selected_canonical_sha256": "853df4608ea21aa5821458d755f2d130acbd57a316c3280546cc575a9a4e7127",
+    "reference_context_canonical_sha256": "c5ab4bd4d1ede34a94144503acaacfd3246df06e9b49f06df05d89c57404561c",
+    "selected_matches_reference": true,
+    "context_matches_reference": true,
+    "work": {
+      "used": 7304116,
+      "limit": 16000000,
+      "exhausted": false
+    },
+    "seconds": 10.718215900007635
+  },
+  "trace_artifacts": {
+    "trace-more.json": "6f0a32ffd1e725b4034610dce2a45e1cefb10f3baac9e5658145ff6f83172b63",
+    "trace-more-v2.json": "be45b074d213fb3b6e43217709618946163a30a303bc5d6a42fa45cae72539a6"
+  },
+  "code_sha256": {
+    "company_wiki.source_catalog.narrative_evidence": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+    "company_wiki.source_catalog.narrative_reading": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+    "company_wiki.source_catalog.narrative_finalize": "930998511d033c606ce8e92b2973cff620251a927870b96bf6200098dff33dc8",
+    "company_wiki.source_catalog.narrative_budget": "44d2a739f4a1db6efcf0aa7fc33bb2227537b03f2659ec430c8220c838ca75b8",
+    "company_wiki.source_catalog.narrative_business_policy": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+    "company_wiki.source_catalog.narrative_business_meaning": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb"
+  },
+  "two_public_replays": {
+    "open_calls": 2,
+    "bytes_read_total": 3216452,
+    "bytes_per_call": 1608226,
+    "raw_copies": 0,
+    "external_calls": 0,
+    "protected_config_database_unchanged_each_run": true,
+    "reason_for_second_read": "First trace did not capture non-target project heading qualification, so the second added related-anchor cache/admission observation only."
+  },
+  "ranking_observation": {
+    "budget_items": 484,
+    "candidate_counter": 1509,
+    "selected_anchor_count": 51,
+    "selected_context_count": 45,
+    "all_selected_anchor_value_bands": {
+      "meaningful_fact": 51
+    },
+    "selected_topic_visits": {
+      "core_business": 41,
+      "operating_metric_change": 12,
+      "capacity_projects": 17,
+      "industry_dynamics": 4,
+      "business_revenue_measure": 9,
+      "business_coverage_relation": 1,
+      "products_rd": 2,
+      "operating_causal_driver": 2,
+      "new_business": 6
+    },
+    "selected_core_only": [
+      {
+        "locator": "loc:v1/page:11/paragraph:10/chars:403-487",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:11/paragraph:13/chars:497-624",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:12/paragraph:8/chars:277-354",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:12/paragraph:12/chars:476-995",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:16/paragraph:2",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:16/paragraph:3",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:19/paragraph:6/chars:89-238",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:25/paragraph:11",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:27/paragraph:11/chars:512-688",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:29/paragraph:19/chars:887-1147",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:29/paragraph:25/chars:1156-1280",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:29/paragraph:30",
+        "priority": 1,
+        "score": 3
+      },
+      {
+        "locator": "loc:v1/page:30/paragraph:19",
+        "priority": 1,
+        "score": 3
+      }
+    ],
+    "important_limit": "No target anchor was actually popped. Actual rank tuple is null, not invented. Per-item closed graph and actual budget_full diagnostics were observed after the96-slot short circuit; static rank fields and final visit state do not claim an earlier numeric offer rank."
+  },
+  "targets": [
+    {
+      "id": "R_42W_310",
+      "originals": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:42a92ef22478939ecba4add5727dd600f6c19c13bb6596daf20257e84eb6d805",
+          "tags": [
+            "R_42W_310"
+          ],
+          "locator": "loc:v1/page:13/paragraph:24",
+          "text": "2025 \u5e74\uff0c\u516c\u53f8\u4e3a\u5ba2\u6237\u6210\u529f\u5408\u6210\n\u5e76\u4ea4\u4ed8\u8d85\u8fc742 \u4e07\u4e2a\u65b0\u5316\u5408\u7269\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:162f851a1c78a5595f3b2b425866ac200efe263aa3f62ba5c79b7860591f0bb4",
+          "tags": [
+            "R_42W_310"
+          ],
+          "locator": "loc:v1/page:13/paragraph:25",
+          "text": "\u540c\u65f6\uff0c2025 \u5e74R \u5230D \u8f6c\u5316\u5206\u5b50310 \u4e2a\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        }
+      ],
+      "material": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511",
+          "tags": [
+            "R_42W_310"
+          ],
+          "locator": "loc:v1/page:13/paragraph:23/chars:1211-1300",
+          "text": "-\n\u5c0f\u5206\u5b50\u836f\u7269\u53d1\u73b0\uff08\u201cR\u201d\uff0cResearch\uff09\u4e1a\u52a1\u4e3a\u4e0b\u6e38\u6301\u7eed\u5f15\u6d41\u30022025 \u5e74\uff0c\u516c\u53f8\u4e3a\u5ba2\u6237\u6210\u529f\u5408\u6210\n\u5e76\u4ea4\u4ed8\u8d85\u8fc742 \u4e07\u4e2a\u65b0\u5316\u5408\u7269\u3002\u540c\u65f6\uff0c2025 \u5e74R \u5230D \u8f6c\u5316\u5206\u5b50310 \u4e2a\u3002",
+          "kind": "pdf_native_range",
+          "role": "company_filing",
+          "parser": "native_pdf_range_parser",
+          "version": "0.1.0",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:b1e52cfa5ea242b819b48fef90f86244cd164ffc0a4579686a2733f6eb771e89",
+            "urn:company-wiki:narrative-unit:sha256:42a92ef22478939ecba4add5727dd600f6c19c13bb6596daf20257e84eb6d805",
+            "urn:company-wiki:narrative-unit:sha256:162f851a1c78a5595f3b2b425866ac200efe263aa3f62ba5c79b7860591f0bb4"
+          ]
+        }
+      ],
+      "budget": [
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511",
+            "tags": [
+              "R_42W_310"
+            ],
+            "locator": "loc:v1/page:13/paragraph:23/chars:1211-1300",
+            "text": "-\n\u5c0f\u5206\u5b50\u836f\u7269\u53d1\u73b0\uff08\u201cR\u201d\uff0cResearch\uff09\u4e1a\u52a1\u4e3a\u4e0b\u6e38\u6301\u7eed\u5f15\u6d41\u30022025 \u5e74\uff0c\u516c\u53f8\u4e3a\u5ba2\u6237\u6210\u529f\u5408\u6210\n\u5e76\u4ea4\u4ed8\u8d85\u8fc742 \u4e07\u4e2a\u65b0\u5316\u5408\u7269\u3002\u540c\u65f6\uff0c2025 \u5e74R \u5230D \u8f6c\u5316\u5206\u5b50310 \u4e2a\u3002",
+            "score": 3,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+              "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "context_only": false,
+            "value_band": "meaningful_fact",
+            "chars": 89,
+            "order_key": [
+              13,
+              23,
+              -1,
+              -1,
+              -1,
+              1211,
+              1300
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+              "urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511",
+              "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "closure_span_count": 5,
+            "final_marginal_spans": 2,
+            "final_marginal_chars": 94,
+            "value": 0,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "core_business": 41
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511"
+              ],
+              "locator": "loc:v1/page:13/paragraph:23/chars:1211-1300",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:10",
+              "text": "\u4e94\u3001\u62a5\u544a\u671f\u5185\u4e3b\u8981\u7ecf\u8425\u60c5\u51b5",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                13,
+                10,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:22",
+              "text": "\u62a5\u544a\u671f\u5185\uff1a",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 5,
+              "order_key": [
+                13,
+                22,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:ca962370fd8b502a9e3f5c4bd6a7ae00ebacc5958dfcdae2239c0186be55a511",
+              "tags": [
+                "R_42W_310"
+              ],
+              "locator": "loc:v1/page:13/paragraph:23/chars:1211-1300",
+              "text": "-\n\u5c0f\u5206\u5b50\u836f\u7269\u53d1\u73b0\uff08\u201cR\u201d\uff0cResearch\uff09\u4e1a\u52a1\u4e3a\u4e0b\u6e38\u6301\u7eed\u5f15\u6d41\u30022025 \u5e74\uff0c\u516c\u53f8\u4e3a\u5ba2\u6237\u6210\u529f\u5408\u6210\n\u5e76\u4ea4\u4ed8\u8d85\u8fc742 \u4e07\u4e2a\u65b0\u5316\u5408\u7269\u3002\u540c\u65f6\uff0c2025 \u5e74R \u5230D \u8f6c\u5316\u5206\u5b50310 \u4e2a\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "core_business"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+                "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+                "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 89,
+              "order_key": [
+                13,
+                23,
+                -1,
+                -1,
+                -1,
+                1211,
+                1300
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:21",
+              "text": "(1) \u5316\u5b66\u4e1a\u52a1\u5b9e\u73b0\u6536\u5165\u4eba\u6c11\u5e01364.7 \u4ebf\u5143\uff0c\u540c\u6bd4\u589e\u957f25.5%\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "business_revenue_measure"
+              ],
+              "required_ids": [],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 34,
+              "order_key": [
+                13,
+                21,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+              "tags": [],
+              "locator": "loc:v1/page:11/paragraph:2",
+              "text": "\u7b2c\u4e09\u8282\n\u7ba1\u7406\u5c42\u8ba8\u8bba\u4e0e\u5206\u6790",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                11,
+                2,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        }
+      ],
+      "target_withheld": []
+    },
+    {
+      "id": "SM_4000KL",
+      "originals": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a8a520f9865d28d4ec5bc2b860a9b458a222134e9e1a5e438ea525774fe79363",
+          "tags": [
+            "SM_4000KL"
+          ],
+          "locator": "loc:v1/page:12/paragraph:28",
+          "text": "2025 \u5e74\u5e95\uff0c\u5c0f\u5206\u5b50\u539f\u6599\u836f\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d854,000kL\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5",
+          "tags": [
+            "SM_4000KL"
+          ],
+          "locator": "loc:v1/page:14/paragraph:10",
+          "text": "\u622a\u81f32025 \u5e74\u672b\uff0c\u5c0f\u5206\u5b50\u539f\u6599\u836f\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85\n4,000kL\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        }
+      ],
+      "material": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a8a520f9865d28d4ec5bc2b860a9b458a222134e9e1a5e438ea525774fe79363",
+          "tags": [
+            "SM_4000KL"
+          ],
+          "locator": "loc:v1/page:12/paragraph:28",
+          "text": "2025 \u5e74\u5e95\uff0c\u5c0f\u5206\u5b50\u539f\u6599\u836f\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d854,000kL\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a8a520f9865d28d4ec5bc2b860a9b458a222134e9e1a5e438ea525774fe79363"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a",
+          "tags": [
+            "SM_4000KL"
+          ],
+          "locator": "loc:v1/page:14/paragraph:8/chars:302-395",
+          "text": "ii.\n\u516c\u53f8\u6301\u7eed\u63a8\u8fdb\u5c0f\u5206\u5b50\u4ea7\u80fd\u5efa\u8bbe\u30022025 \u5e74\uff0c\u5e38\u5dde\u3001\u6cf0\u5174\u53ca\u91d1\u5c71\u539f\u6599\u836f\u57fa\u5730\u5747\u4ee5\u96f6\u7f3a\u9677\n\u6210\u529f\u901a\u8fc7FDA \u73b0\u573a\u68c0\u67e5\u3002\u622a\u81f32025 \u5e74\u672b\uff0c\u5c0f\u5206\u5b50\u539f\u6599\u836f\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85\n4,000kL\u3002",
+          "kind": "pdf_native_range",
+          "role": "company_filing",
+          "parser": "native_pdf_range_parser",
+          "version": "0.1.0",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:edc814fc72a985e95b36f8331f2e1cd244e98312ae01a11c46b90aba1b1b3021",
+            "urn:company-wiki:narrative-unit:sha256:f0622f88b4a53c0ef553ffd3b418c53587aa5ae38b9906fe1fb7c7ed0487e9c9",
+            "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5"
+          ]
+        }
+      ],
+      "budget": [
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a",
+            "tags": [
+              "SM_4000KL"
+            ],
+            "locator": "loc:v1/page:14/paragraph:8/chars:302-395",
+            "text": "ii.\n\u516c\u53f8\u6301\u7eed\u63a8\u8fdb\u5c0f\u5206\u5b50\u4ea7\u80fd\u5efa\u8bbe\u30022025 \u5e74\uff0c\u5e38\u5dde\u3001\u6cf0\u5174\u53ca\u91d1\u5c71\u539f\u6599\u836f\u57fa\u5730\u5747\u4ee5\u96f6\u7f3a\u9677\n\u6210\u529f\u901a\u8fc7FDA \u73b0\u573a\u68c0\u67e5\u3002\u622a\u81f32025 \u5e74\u672b\uff0c\u5c0f\u5206\u5b50\u539f\u6599\u836f\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85\n4,000kL\u3002",
+            "score": 0,
+            "priority": 2,
+            "topics": [
+              "operating_metrics"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "context_only": false,
+            "value_band": "description",
+            "chars": 93,
+            "order_key": [
+              14,
+              8,
+              -1,
+              -1,
+              -1,
+              302,
+              395
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a",
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "closure_span_count": 3,
+            "final_marginal_spans": 1,
+            "final_marginal_chars": 93,
+            "value": 1,
+            "priority": 2,
+            "topics": [
+              "operating_metrics"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "operating_metrics": 0
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a"
+              ],
+              "locator": "loc:v1/page:14/paragraph:8/chars:302-395",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:312c57dc618ced42d0731f1ad88d2b157f079c79d45997aebb63e33f05ac163a",
+              "tags": [
+                "SM_4000KL"
+              ],
+              "locator": "loc:v1/page:14/paragraph:8/chars:302-395",
+              "text": "ii.\n\u516c\u53f8\u6301\u7eed\u63a8\u8fdb\u5c0f\u5206\u5b50\u4ea7\u80fd\u5efa\u8bbe\u30022025 \u5e74\uff0c\u5e38\u5dde\u3001\u6cf0\u5174\u53ca\u91d1\u5c71\u539f\u6599\u836f\u57fa\u5730\u5747\u4ee5\u96f6\u7f3a\u9677\n\u6210\u529f\u901a\u8fc7FDA \u73b0\u573a\u68c0\u67e5\u3002\u622a\u81f32025 \u5e74\u672b\uff0c\u5c0f\u5206\u5b50\u539f\u6599\u836f\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85\n4,000kL\u3002",
+              "score": 0,
+              "priority": 2,
+              "topics": [
+                "operating_metrics"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "context_only": false,
+              "value_band": "description",
+              "chars": 93,
+              "order_key": [
+                14,
+                8,
+                -1,
+                -1,
+                -1,
+                302,
+                395
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:10",
+              "text": "\u4e94\u3001\u62a5\u544a\u671f\u5185\u4e3b\u8981\u7ecf\u8425\u60c5\u51b5",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                13,
+                10,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+              "tags": [],
+              "locator": "loc:v1/page:11/paragraph:2",
+              "text": "\u7b2c\u4e09\u8282\n\u7ba1\u7406\u5c42\u8ba8\u8bba\u4e0e\u5206\u6790",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                11,
+                2,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        }
+      ],
+      "target_withheld": []
+    },
+    {
+      "id": "SAFETY_4P6",
+      "originals": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+          "tags": [
+            "SAFETY_4P6"
+          ],
+          "locator": "loc:v1/page:14/paragraph:19",
+          "text": "-\n\u836f\u7269\u5b89\u5168\u6027\u8bc4\u4ef7\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f4.6%\uff0c\u6301\u7eed\u4fdd\u6301\u4e9a\u592a\u884c\u4e1a\u9886\u5148\u5730\u4f4d\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        }
+      ],
+      "material": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+          "tags": [
+            "SAFETY_4P6"
+          ],
+          "locator": "loc:v1/page:14/paragraph:19",
+          "text": "-\n\u836f\u7269\u5b89\u5168\u6027\u8bc4\u4ef7\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f4.6%\uff0c\u6301\u7eed\u4fdd\u6301\u4e9a\u592a\u884c\u4e1a\u9886\u5148\u5730\u4f4d\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877"
+          ]
+        }
+      ],
+      "budget": [
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+            "tags": [
+              "SAFETY_4P6"
+            ],
+            "locator": "loc:v1/page:14/paragraph:19",
+            "text": "-\n\u836f\u7269\u5b89\u5168\u6027\u8bc4\u4ef7\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f4.6%\uff0c\u6301\u7eed\u4fdd\u6301\u4e9a\u592a\u884c\u4e1a\u9886\u5148\u5730\u4f4d\u3002",
+            "score": 0,
+            "priority": 2,
+            "topics": [
+              "operating_metrics"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+              "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "context_only": false,
+            "value_band": "description",
+            "chars": 35,
+            "order_key": [
+              14,
+              19,
+              -1,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+              "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "closure_span_count": 5,
+            "final_marginal_spans": 1,
+            "final_marginal_chars": 35,
+            "value": 1,
+            "priority": 2,
+            "topics": [
+              "operating_metrics"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "operating_metrics": 0
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877"
+              ],
+              "locator": "loc:v1/page:14/paragraph:19",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+              "tags": [
+                "SAFETY_4P6"
+              ],
+              "locator": "loc:v1/page:14/paragraph:19",
+              "text": "-\n\u836f\u7269\u5b89\u5168\u6027\u8bc4\u4ef7\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f4.6%\uff0c\u6301\u7eed\u4fdd\u6301\u4e9a\u592a\u884c\u4e1a\u9886\u5148\u5730\u4f4d\u3002",
+              "score": 0,
+              "priority": 2,
+              "topics": [
+                "operating_metrics"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+                "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+                "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "context_only": false,
+              "value_band": "description",
+              "chars": 35,
+              "order_key": [
+                14,
+                19,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:10",
+              "text": "\u4e94\u3001\u62a5\u544a\u671f\u5185\u4e3b\u8981\u7ecf\u8425\u60c5\u51b5",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                13,
+                10,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+              "tags": [],
+              "locator": "loc:v1/page:14/paragraph:17",
+              "text": "(2) \u6d4b\u8bd5\u4e1a\u52a1\u5b9e\u73b0\u6536\u5165\u4eba\u6c11\u5e0140.4 \u4ebf\u5143\uff0c\u540c\u6bd4\u6062\u590d\u6b63\u589e\u957f4.7%\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "business_revenue_measure"
+              ],
+              "required_ids": [],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 35,
+              "order_key": [
+                14,
+                17,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+              "tags": [],
+              "locator": "loc:v1/page:14/paragraph:18",
+              "text": "\u62a5\u544a\u671f\u5185\uff1a",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 5,
+              "order_key": [
+                14,
+                18,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+              "tags": [],
+              "locator": "loc:v1/page:11/paragraph:2",
+              "text": "\u7b2c\u4e09\u8282\n\u7ba1\u7406\u5c42\u8ba8\u8bba\u4e0e\u5206\u6790",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                11,
+                2,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        }
+      ],
+      "target_withheld": []
+    },
+    {
+      "id": "GUIDANCE_CONDITION",
+      "originals": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+          "tags": [
+            "GUIDANCE_CONDITION"
+          ],
+          "locator": "loc:v1/page:14/paragraph:32",
+          "text": "\u9884\u8ba12026\u5e74\u516c\u53f8\u6574\u4f53\u6536\u5165\u8fbe\u5230513-530\u4ebf\u5143\uff0c\u6301\u7eed\u7ecf\u8425\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f18%-22%\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+          "tags": [
+            "GUIDANCE_CONDITION"
+          ],
+          "locator": "loc:v1/page:14/paragraph:34",
+          "text": "\u4e0a\u8ff0\u63d0\u53ca\u76842026\u5e74\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u5c55\u671b\u4ee5\u516c\u53f8\u76ee\u524d\u5728\u624b\u8ba2\u5355\u60c5\u51b5\u4e3a\u57fa\u7840\u9884\u6d4b\uff0c\u5e76\u4ee5\u5168\u7403\u533b\u836f\u884c\n\u4e1a\u53d1\u5c55\u5e73\u7a33\u3001\u56fd\u9645\u8d38\u6613\u73af\u5883\u548c\u4e3b\u8981\u8fd0\u8425\u6240\u5728\u5730\u56fd\u5bb6\u76d1\u7ba1\u73af\u5883\u7a33\u5b9a\u7b49\u4e3a\u524d\u63d0\u57fa\u7840\uff0c\u5e76\u4e0d\u4ee3\u8868\u516c\u53f8\u7ba1\n\u7406\u5c42\u5bf92026\u5e74\u5ea6\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u7684\u76c8\u5229\u9884\u6d4b\uff0c\u4e0d\u6784\u6210\u516c\u53f8\u5bf9\u6295\u8d44\u8005\u7684\u5b9e\u8d28\u627f\u8bfa\uff0c\u80fd\u5426\u5b9e\u73b0\u53d6\u51b3\u4e8e\u5185\n\u5916\u90e8\u73af\u5883\u53d8\u5316\u7b49\u591a\u79cd\u56e0\u7d20\u5f71\u54cd\uff0c\u5b58\u5728\u8f83\u5927\u7684\u4e0d\u786e\u5b9a\u6027\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        }
+      ],
+      "material": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+          "tags": [
+            "GUIDANCE_CONDITION"
+          ],
+          "locator": "loc:v1/page:14/paragraph:32/chars:1168-1257",
+          "text": "\u9884\u8ba12026\u5e74\u516c\u53f8\u6574\u4f53\u6536\u5165\u8fbe\u5230513-530\u4ebf\u5143\uff0c\u6301\u7eed\u7ecf\u8425\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f18%-22%\u3002\u516c\u53f8\u5c06\u66f4\n\u52a0\u805a\u7126CRDMO\u6838\u5fc3\u6218\u7565\uff0c\u52a0\u901f\u5168\u7403\u5316\u80fd\u529b\u5efa\u8bbe\u548c\u4ea7\u80fd\u6295\u653e\uff0c\u6301\u7eed\u63d0\u9ad8\u751f\u4ea7\u7ecf\u8425\u6548\u7387\u3002",
+          "kind": "pdf_native_range",
+          "role": "company_filing",
+          "parser": "native_pdf_range_parser",
+          "version": "0.1.0",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+            "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+          "tags": [
+            "GUIDANCE_CONDITION"
+          ],
+          "locator": "loc:v1/page:14/paragraph:34",
+          "text": "\u4e0a\u8ff0\u63d0\u53ca\u76842026\u5e74\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u5c55\u671b\u4ee5\u516c\u53f8\u76ee\u524d\u5728\u624b\u8ba2\u5355\u60c5\u51b5\u4e3a\u57fa\u7840\u9884\u6d4b\uff0c\u5e76\u4ee5\u5168\u7403\u533b\u836f\u884c\n\u4e1a\u53d1\u5c55\u5e73\u7a33\u3001\u56fd\u9645\u8d38\u6613\u73af\u5883\u548c\u4e3b\u8981\u8fd0\u8425\u6240\u5728\u5730\u56fd\u5bb6\u76d1\u7ba1\u73af\u5883\u7a33\u5b9a\u7b49\u4e3a\u524d\u63d0\u57fa\u7840\uff0c\u5e76\u4e0d\u4ee3\u8868\u516c\u53f8\u7ba1\n\u7406\u5c42\u5bf92026\u5e74\u5ea6\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u7684\u76c8\u5229\u9884\u6d4b\uff0c\u4e0d\u6784\u6210\u516c\u53f8\u5bf9\u6295\u8d44\u8005\u7684\u5b9e\u8d28\u627f\u8bfa\uff0c\u80fd\u5426\u5b9e\u73b0\u53d6\u51b3\u4e8e\u5185\n\u5916\u90e8\u73af\u5883\u53d8\u5316\u7b49\u591a\u79cd\u56e0\u7d20\u5f71\u54cd\uff0c\u5b58\u5728\u8f83\u5927\u7684\u4e0d\u786e\u5b9a\u6027\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+          ]
+        }
+      ],
+      "budget": [
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+            "tags": [
+              "GUIDANCE_CONDITION"
+            ],
+            "locator": "loc:v1/page:14/paragraph:32/chars:1168-1257",
+            "text": "\u9884\u8ba12026\u5e74\u516c\u53f8\u6574\u4f53\u6536\u5165\u8fbe\u5230513-530\u4ebf\u5143\uff0c\u6301\u7eed\u7ecf\u8425\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f18%-22%\u3002\u516c\u53f8\u5c06\u66f4\n\u52a0\u805a\u7126CRDMO\u6838\u5fc3\u6218\u7565\uff0c\u52a0\u901f\u5168\u7403\u5316\u80fd\u529b\u5efa\u8bbe\u548c\u4ea7\u80fd\u6295\u653e\uff0c\u6301\u7eed\u63d0\u9ad8\u751f\u4ea7\u7ecf\u8425\u6548\u7387\u3002",
+            "score": 3,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "context_only": false,
+            "value_band": "meaningful_fact",
+            "chars": 89,
+            "order_key": [
+              14,
+              32,
+              -1,
+              -1,
+              -1,
+              1168,
+              1257
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "closure_span_count": 3,
+            "final_marginal_spans": 1,
+            "final_marginal_chars": 89,
+            "value": 0,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "core_business": 41
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e"
+              ],
+              "locator": "loc:v1/page:14/paragraph:32/chars:1168-1257",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+              "tags": [
+                "GUIDANCE_CONDITION"
+              ],
+              "locator": "loc:v1/page:14/paragraph:32/chars:1168-1257",
+              "text": "\u9884\u8ba12026\u5e74\u516c\u53f8\u6574\u4f53\u6536\u5165\u8fbe\u5230513-530\u4ebf\u5143\uff0c\u6301\u7eed\u7ecf\u8425\u4e1a\u52a1\u6536\u5165\u540c\u6bd4\u589e\u957f18%-22%\u3002\u516c\u53f8\u5c06\u66f4\n\u52a0\u805a\u7126CRDMO\u6838\u5fc3\u6218\u7565\uff0c\u52a0\u901f\u5168\u7403\u5316\u80fd\u529b\u5efa\u8bbe\u548c\u4ea7\u80fd\u6295\u653e\uff0c\u6301\u7eed\u63d0\u9ad8\u751f\u4ea7\u7ecf\u8425\u6548\u7387\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "core_business"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 89,
+              "order_key": [
+                14,
+                32,
+                -1,
+                -1,
+                -1,
+                1168,
+                1257
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:10",
+              "text": "\u4e94\u3001\u62a5\u544a\u671f\u5185\u4e3b\u8981\u7ecf\u8425\u60c5\u51b5",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                13,
+                10,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+              "tags": [],
+              "locator": "loc:v1/page:11/paragraph:2",
+              "text": "\u7b2c\u4e09\u8282\n\u7ba1\u7406\u5c42\u8ba8\u8bba\u4e0e\u5206\u6790",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                11,
+                2,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        },
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+            "tags": [
+              "GUIDANCE_CONDITION"
+            ],
+            "locator": "loc:v1/page:14/paragraph:34",
+            "text": "\u4e0a\u8ff0\u63d0\u53ca\u76842026\u5e74\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u5c55\u671b\u4ee5\u516c\u53f8\u76ee\u524d\u5728\u624b\u8ba2\u5355\u60c5\u51b5\u4e3a\u57fa\u7840\u9884\u6d4b\uff0c\u5e76\u4ee5\u5168\u7403\u533b\u836f\u884c\n\u4e1a\u53d1\u5c55\u5e73\u7a33\u3001\u56fd\u9645\u8d38\u6613\u73af\u5883\u548c\u4e3b\u8981\u8fd0\u8425\u6240\u5728\u5730\u56fd\u5bb6\u76d1\u7ba1\u73af\u5883\u7a33\u5b9a\u7b49\u4e3a\u524d\u63d0\u57fa\u7840\uff0c\u5e76\u4e0d\u4ee3\u8868\u516c\u53f8\u7ba1\n\u7406\u5c42\u5bf92026\u5e74\u5ea6\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u7684\u76c8\u5229\u9884\u6d4b\uff0c\u4e0d\u6784\u6210\u516c\u53f8\u5bf9\u6295\u8d44\u8005\u7684\u5b9e\u8d28\u627f\u8bfa\uff0c\u80fd\u5426\u5b9e\u73b0\u53d6\u51b3\u4e8e\u5185\n\u5916\u90e8\u73af\u5883\u53d8\u5316\u7b49\u591a\u79cd\u56e0\u7d20\u5f71\u54cd\uff0c\u5b58\u5728\u8f83\u5927\u7684\u4e0d\u786e\u5b9a\u6027\u3002",
+            "score": 3,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "context_only": false,
+            "value_band": "meaningful_fact",
+            "chars": 155,
+            "order_key": [
+              14,
+              34,
+              -1,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "closure_span_count": 3,
+            "final_marginal_spans": 1,
+            "final_marginal_chars": 155,
+            "value": 0,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "core_business": 41
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+              ],
+              "locator": "loc:v1/page:14/paragraph:34",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:10",
+              "text": "\u4e94\u3001\u62a5\u544a\u671f\u5185\u4e3b\u8981\u7ecf\u8425\u60c5\u51b5",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                13,
+                10,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+              "tags": [
+                "GUIDANCE_CONDITION"
+              ],
+              "locator": "loc:v1/page:14/paragraph:34",
+              "text": "\u4e0a\u8ff0\u63d0\u53ca\u76842026\u5e74\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u5c55\u671b\u4ee5\u516c\u53f8\u76ee\u524d\u5728\u624b\u8ba2\u5355\u60c5\u51b5\u4e3a\u57fa\u7840\u9884\u6d4b\uff0c\u5e76\u4ee5\u5168\u7403\u533b\u836f\u884c\n\u4e1a\u53d1\u5c55\u5e73\u7a33\u3001\u56fd\u9645\u8d38\u6613\u73af\u5883\u548c\u4e3b\u8981\u8fd0\u8425\u6240\u5728\u5730\u56fd\u5bb6\u76d1\u7ba1\u73af\u5883\u7a33\u5b9a\u7b49\u4e3a\u524d\u63d0\u57fa\u7840\uff0c\u5e76\u4e0d\u4ee3\u8868\u516c\u53f8\u7ba1\n\u7406\u5c42\u5bf92026\u5e74\u5ea6\u5168\u5e74\u7ecf\u8425\u4e1a\u7ee9\u7684\u76c8\u5229\u9884\u6d4b\uff0c\u4e0d\u6784\u6210\u516c\u53f8\u5bf9\u6295\u8d44\u8005\u7684\u5b9e\u8d28\u627f\u8bfa\uff0c\u80fd\u5426\u5b9e\u73b0\u53d6\u51b3\u4e8e\u5185\n\u5916\u90e8\u73af\u5883\u53d8\u5316\u7b49\u591a\u79cd\u56e0\u7d20\u5f71\u54cd\uff0c\u5b58\u5728\u8f83\u5927\u7684\u4e0d\u786e\u5b9a\u6027\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "core_business"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 155,
+              "order_key": [
+                14,
+                34,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+              "tags": [],
+              "locator": "loc:v1/page:11/paragraph:2",
+              "text": "\u7b2c\u4e09\u8282\n\u7ba1\u7406\u5c42\u8ba8\u8bba\u4e0e\u5206\u6790",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                11,
+                2,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        }
+      ],
+      "target_withheld": []
+    },
+    {
+      "id": "PEPTIDE_100000L_SEP",
+      "originals": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+          "tags": [
+            "PEPTIDE_100000L_SEP"
+          ],
+          "locator": "loc:v1/page:12/paragraph:29",
+          "text": "2025\n\u5e749 \u6708\uff0c\u516c\u53f8\u63d0\u524d\u5b8c\u6210\u6cf0\u5174\u591a\u80bd\u4ea7\u80fd\u5efa\u8bbe\uff1b",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f",
+          "tags": [
+            "PEPTIDE_100000L_SEP"
+          ],
+          "locator": "loc:v1/page:12/paragraph:30",
+          "text": "\u516c\u53f8\u591a\u80bd\u56fa\u76f8\u5408\u6210\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85100,000L\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        }
+      ],
+      "material": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+          "tags": [
+            "PEPTIDE_100000L_SEP"
+          ],
+          "locator": "loc:v1/page:12/paragraph:29",
+          "text": "2025\n\u5e749 \u6708\uff0c\u516c\u53f8\u63d0\u524d\u5b8c\u6210\u6cf0\u5174\u591a\u80bd\u4ea7\u80fd\u5efa\u8bbe\uff1b",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15"
+          ]
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f",
+          "tags": [
+            "PEPTIDE_100000L_SEP"
+          ],
+          "locator": "loc:v1/page:12/paragraph:30",
+          "text": "\u516c\u53f8\u591a\u80bd\u56fa\u76f8\u5408\u6210\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85100,000L\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f"
+          ]
+        }
+      ],
+      "budget": [
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+            "tags": [
+              "PEPTIDE_100000L_SEP"
+            ],
+            "locator": "loc:v1/page:12/paragraph:29",
+            "text": "2025\n\u5e749 \u6708\uff0c\u516c\u53f8\u63d0\u524d\u5b8c\u6210\u6cf0\u5174\u591a\u80bd\u4ea7\u80fd\u5efa\u8bbe\uff1b",
+            "score": 3,
+            "priority": 1,
+            "topics": [
+              "core_business"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:b75b4912af06375ea71ac17cbd7c309df02f9c76a3634822d2ee4de8735627dc",
+              "urn:company-wiki:narrative-unit:sha256:bec7304d035b47e0ed6089c990c4a7f0491a3590a320e1c830c5d1d9491f29b0",
+              "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f"
+            ],
+            "context_only": false,
+            "value_band": "meaningful_fact",
+            "chars": 25,
+            "order_key": [
+              12,
+              29,
+              -1,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:b75b4912af06375ea71ac17cbd7c309df02f9c76a3634822d2ee4de8735627dc",
+              "urn:company-wiki:narrative-unit:sha256:bec7304d035b47e0ed6089c990c4a7f0491a3590a320e1c830c5d1d9491f29b0",
+              "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+              "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f"
+            ],
+            "closure_span_count": 4,
+            "final_marginal_spans": 4,
+            "final_marginal_chars": 174,
+            "value": 0,
+            "priority": 1,
+            "topics": [
+              "core_business"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "core_business": 41
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15"
+              ],
+              "locator": "loc:v1/page:12/paragraph:29",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:b75b4912af06375ea71ac17cbd7c309df02f9c76a3634822d2ee4de8735627dc",
+              "tags": [],
+              "locator": "loc:v1/page:12/paragraph:31",
+              "text": "\u672a\u6765\uff0c\u968f\u7740\u79d1\u5b66\u6280\u672f\u7684\u4e0d\u65ad\u521b\u65b0\uff0c\u884c\u4e1a\u548c\u5ba2\u6237\u5bf9\u4e8e\u9ad8\u8d28\u91cf\u7684\u80fd\u529b\u3001\u4ea7\u80fd\u548c\u670d\u52a1\u7684\u9700\u6c42\u5728\u6301\u7eed\n\u589e\u52a0\u3002",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 44,
+              "order_key": [
+                12,
+                31,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:bec7304d035b47e0ed6089c990c4a7f0491a3590a320e1c830c5d1d9491f29b0",
+              "tags": [],
+              "locator": "loc:v1/page:12/paragraph:32",
+              "text": "\u516c\u53f8\u4e3a\u5168\u7403\u533b\u836f\u53ca\u751f\u547d\u79d1\u5b66\u884c\u4e1a\u63d0\u4f9b\u4e00\u4f53\u5316\u3001\u7aef\u5230\u7aef\u7684\u65b0\u836f\u7814\u53d1\u548c\u751f\u4ea7\u670d\u52a1\uff0c\u516c\u53f8\u5c06\u6301\u7eed\n\u52a0\u5f3a\u81ea\u8eab\u80fd\u529b\u548c\u89c4\u6a21\u7684\u5efa\u8bbe\uff0c\u63d0\u5347\u7ecf\u8425\u6548\u7387\uff0c\u4e3a\u5ba2\u6237\u63d0\u4f9b\u6781\u81f4\u670d\u52a1\uff0c\u9020\u798f\u5168\u7403\u75c5\u60a3\u3002",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 77,
+              "order_key": [
+                12,
+                32,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+              "tags": [
+                "PEPTIDE_100000L_SEP"
+              ],
+              "locator": "loc:v1/page:12/paragraph:29",
+              "text": "2025\n\u5e749 \u6708\uff0c\u516c\u53f8\u63d0\u524d\u5b8c\u6210\u6cf0\u5174\u591a\u80bd\u4ea7\u80fd\u5efa\u8bbe\uff1b",
+              "score": 3,
+              "priority": 1,
+              "topics": [
+                "core_business"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:b75b4912af06375ea71ac17cbd7c309df02f9c76a3634822d2ee4de8735627dc",
+                "urn:company-wiki:narrative-unit:sha256:bec7304d035b47e0ed6089c990c4a7f0491a3590a320e1c830c5d1d9491f29b0",
+                "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f"
+              ],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 25,
+              "order_key": [
+                12,
+                29,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f",
+              "tags": [
+                "PEPTIDE_100000L_SEP"
+              ],
+              "locator": "loc:v1/page:12/paragraph:30",
+              "text": "\u516c\u53f8\u591a\u80bd\u56fa\u76f8\u5408\u6210\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85100,000L\u3002",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 28,
+              "order_key": [
+                12,
+                30,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        },
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f",
+            "tags": [
+              "PEPTIDE_100000L_SEP"
+            ],
+            "locator": "loc:v1/page:12/paragraph:30",
+            "text": "\u516c\u53f8\u591a\u80bd\u56fa\u76f8\u5408\u6210\u53cd\u5e94\u91dc\u603b\u4f53\u79ef\u5df2\u63d0\u5347\u81f3\u8d85100,000L\u3002",
+            "score": 0,
+            "priority": 2,
+            "topics": [],
+            "required_ids": [],
+            "context_only": true,
+            "value_band": "description",
+            "chars": 28,
+            "order_key": [
+              12,
+              30,
+              -1,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          "selected": false,
+          "offer": null,
+          "diagnostics": []
+        }
+      ],
+      "target_withheld": []
+    },
+    {
+      "id": "BIO_CUSTOMER20",
+      "originals": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5",
+          "tags": [
+            "BIO_CUSTOMER20"
+          ],
+          "locator": "loc:v1/page:14/paragraph:27",
+          "text": "\u79ef\u6781\u62d3\u5c55\u5168\u7403\u4e1a\n\u52a1\uff0c\u4e3a\u516c\u53f8CRDMO \u4e1a\u52a1\u6a21\u5f0f\u9ad8\u6548\u5f15\u6d41\uff0c\u6301\u7eed\u4e3a\u516c\u53f8\u5e26\u6765\u8d85\u8fc720%\u7684\u65b0\u5ba2\u6237\u3002",
+          "kind": "pdf_text_block",
+          "role": "company_filing",
+          "parser": "selective_narrative_parser",
+          "version": "0.1.1"
+        }
+      ],
+      "material": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153",
+          "tags": [
+            "BIO_CUSTOMER20"
+          ],
+          "locator": "loc:v1/page:14/paragraph:26/chars:919-997",
+          "text": "-\n\u751f\u7269\u5b66\u4e1a\u52a1\u79c9\u6301\u79d1\u5b66\u9a71\u52a8\u7406\u5ff5\uff0c\u524d\u77bb\u5e03\u5c40\u836f\u7269\u53d1\u73b0\u70ed\u70b9\u53ca\u5dee\u5f02\u5316\u80fd\u529b\uff1b\u79ef\u6781\u62d3\u5c55\u5168\u7403\u4e1a\n\u52a1\uff0c\u4e3a\u516c\u53f8CRDMO \u4e1a\u52a1\u6a21\u5f0f\u9ad8\u6548\u5f15\u6d41\uff0c\u6301\u7eed\u4e3a\u516c\u53f8\u5e26\u6765\u8d85\u8fc720%\u7684\u65b0\u5ba2\u6237\u3002",
+          "kind": "pdf_native_range",
+          "role": "company_filing",
+          "parser": "native_pdf_range_parser",
+          "version": "0.1.0",
+          "original_member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:5301f72f83990c4394c8881e5264cc5c8e4fbf75db8cdb5d2c81f2709a75faec",
+            "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5"
+          ]
+        }
+      ],
+      "budget": [
+        {
+          "item": {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153",
+            "tags": [
+              "BIO_CUSTOMER20"
+            ],
+            "locator": "loc:v1/page:14/paragraph:26/chars:919-997",
+            "text": "-\n\u751f\u7269\u5b66\u4e1a\u52a1\u79c9\u6301\u79d1\u5b66\u9a71\u52a8\u7406\u5ff5\uff0c\u524d\u77bb\u5e03\u5c40\u836f\u7269\u53d1\u73b0\u70ed\u70b9\u53ca\u5dee\u5f02\u5316\u80fd\u529b\uff1b\u79ef\u6781\u62d3\u5c55\u5168\u7403\u4e1a\n\u52a1\uff0c\u4e3a\u516c\u53f8CRDMO \u4e1a\u52a1\u6a21\u5f0f\u9ad8\u6548\u5f15\u6d41\uff0c\u6301\u7eed\u4e3a\u516c\u53f8\u5e26\u6765\u8d85\u8fc720%\u7684\u65b0\u5ba2\u6237\u3002",
+            "score": 3,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "required_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "context_only": false,
+            "value_band": "meaningful_fact",
+            "chars": 78,
+            "order_key": [
+              14,
+              26,
+              -1,
+              -1,
+              -1,
+              919,
+              997
+            ]
+          },
+          "selected": false,
+          "offer": {
+            "closure_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+              "urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153",
+              "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+              "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+            ],
+            "closure_span_count": 5,
+            "final_marginal_spans": 1,
+            "final_marginal_chars": 78,
+            "value": 0,
+            "priority": 2,
+            "topics": [
+              "core_business"
+            ],
+            "signature_repeated": false,
+            "final_topic_visits": {
+              "core_business": 41
+            },
+            "unlabelled_visits": 0,
+            "was_popped": false,
+            "actual_pop": null,
+            "remaining_at_return": true,
+            "selected_final_count": 96
+          },
+          "diagnostics": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153",
+              "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153",
+              "group_id": null,
+              "category": "reading",
+              "item_count": 1,
+              "item_ids": [
+                "urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153"
+              ],
+              "locator": "loc:v1/page:14/paragraph:26/chars:919-997",
+              "reason": "budget_full"
+            }
+          ],
+          "closure_members": [
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+              "tags": [],
+              "locator": "loc:v1/page:14/paragraph:24",
+              "text": "(3) \u751f\u7269\u5b66\u4e1a\u52a1\u5b9e\u73b0\u6536\u5165\u4eba\u6c11\u5e0126.8 \u4ebf\u5143\uff0c\u540c\u6bd4\u6062\u590d\u6b63\u589e\u957f5.2%\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "business_revenue_measure"
+              ],
+              "required_ids": [],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 36,
+              "order_key": [
+                14,
+                24,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:1ac8c8dd440f47cdb7355d40334df706e65a92461a3f0679e46b7040d69f2153",
+              "tags": [
+                "BIO_CUSTOMER20"
+              ],
+              "locator": "loc:v1/page:14/paragraph:26/chars:919-997",
+              "text": "-\n\u751f\u7269\u5b66\u4e1a\u52a1\u79c9\u6301\u79d1\u5b66\u9a71\u52a8\u7406\u5ff5\uff0c\u524d\u77bb\u5e03\u5c40\u836f\u7269\u53d1\u73b0\u70ed\u70b9\u53ca\u5dee\u5f02\u5316\u80fd\u529b\uff1b\u79ef\u6781\u62d3\u5c55\u5168\u7403\u4e1a\n\u52a1\uff0c\u4e3a\u516c\u53f8CRDMO \u4e1a\u52a1\u6a21\u5f0f\u9ad8\u6548\u5f15\u6d41\uff0c\u6301\u7eed\u4e3a\u516c\u53f8\u5e26\u6765\u8d85\u8fc720%\u7684\u65b0\u5ba2\u6237\u3002",
+              "score": 3,
+              "priority": 2,
+              "topics": [
+                "core_business"
+              ],
+              "required_ids": [
+                "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+                "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+                "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "context_only": false,
+              "value_band": "meaningful_fact",
+              "chars": 78,
+              "order_key": [
+                14,
+                26,
+                -1,
+                -1,
+                -1,
+                919,
+                997
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+              "tags": [],
+              "locator": "loc:v1/page:13/paragraph:10",
+              "text": "\u4e94\u3001\u62a5\u544a\u671f\u5185\u4e3b\u8981\u7ecf\u8425\u60c5\u51b5",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                13,
+                10,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+              "tags": [],
+              "locator": "loc:v1/page:14/paragraph:25",
+              "text": "\u62a5\u544a\u671f\u5185\uff1a",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 5,
+              "order_key": [
+                14,
+                25,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            },
+            {
+              "item_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+              "tags": [],
+              "locator": "loc:v1/page:11/paragraph:2",
+              "text": "\u7b2c\u4e09\u8282\n\u7ba1\u7406\u5c42\u8ba8\u8bba\u4e0e\u5206\u6790",
+              "score": 0,
+              "priority": 2,
+              "topics": [],
+              "required_ids": [],
+              "context_only": true,
+              "value_band": "description",
+              "chars": 12,
+              "order_key": [
+                11,
+                2,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1
+              ]
+            }
+          ]
+        }
+      ],
+      "target_withheld": []
+    }
+  ],
+  "root_causes": [
+    {
+      "id": "CHAIN-01",
+      "status": "observed_prebudget_loss",
+      "title": "Project container first heading is the only anchor; its rejection suppresses later body facts",
+      "evidence": [
+        "p12/22 is the sole m123 project anchor, is_heading and eligible=false, so _admitted returns false.",
+        "m123 includes p12/28 4000kL but produces no candidate; no target withholding is reported. Cached p12/28 fact is absent at candidate return.",
+        "m124 admits only p12/29 as anchor; p12/30 100000L becomes context_only even though the shared analysis view contains both originals."
+      ],
+      "symbols": [
+        "narrative_reading._prose_reading_packages:372-395",
+        "narrative_reading._admitted:80-81",
+        "narrative_reading._candidates:699-751"
+      ],
+      "neutral_red": "Source-owned project with a generic non-factual heading and two complete independent operating body statements. A rejected heading must not certify that the body has no facts. A nearby future generic paragraph must not become a mandatory dependency without an actual source relation. Require same original IDs, own project scope and unchanged hard costs; no company or number reservation."
+    },
+    {
+      "id": "CHAIN-02",
+      "status": "observed_value_downgrade",
+      "title": "Observed capacity volume and scoped revenue growth receive no meaningful metric relation",
+      "evidence": [
+        "p14/8 native carrier contains ongoing small-molecule capacity, zero-defect site inspection and >4000kL, but source fact eligible=false/score0/purpose unknown.",
+        "p14/19 explicitly names safety-evaluation business and revenue YoY+4.6%, but source fact eligible=false/score0/purpose unknown.",
+        "Both admitted only by operating_metrics section, become description with value=1 and exact key-level budget_full; every selected anchor is value=0 meaningful_fact."
+      ],
+      "symbols": [
+        "narrative_business_policy._OPERATING_MEASURE",
+        "narrative_business_policy._SOURCE_QUANTITY",
+        "narrative_business_policy._REVENUE_VALUE",
+        "narrative_reading._candidates:721-744",
+        "narrative_budget._reading_plan:859-860"
+      ],
+      "neutral_red": "Test named equipment total vessel volume already increased to >8200kL and named support-service revenue YoY+6.3% as distinct observed source relationships. Pair with vessel ID/date/currency, financial total, other actor, hypothetical and unknown controls. Preserve unit and growth-rate denominator; do not label forecasts as actual stocks."
+    },
+    {
+      "id": "CHAIN-03",
+      "status": "observed_pending_closures_not_aggregate_proxy",
+      "title": "Distinct operating facts collapse into one coarse core_business competition",
+      "evidence": [
+        "R42\u4e07/310, Biology20%, guidance, condition and peptide project all have score3, only core_business topic, repeated_signature=false, and complete closures.",
+        "All corresponding closure keys remain pending without being popped; each gets its own actual budget_full diagnostic from the cap-full short circuit.",
+        "core_business has41 visits at return. R/Biology/guidance priority2 compete behind priority1 within this seen topic; peptide priority1 carries4 unique spans including two general future paragraphs."
+      ],
+      "symbols": [
+        "narrative_business_policy.project_reading_business_fact",
+        "narrative_reading._candidates:721-744",
+        "narrative_budget._reading_plan:800-801,859-860,954-957"
+      ],
+      "neutral_red": "A bounded synthetic fixture should distinguish two independent source scopes and relationship types that currently share core_business, retain true scope/qualifiers, and compare eligibility/rank metadata with an equal-cost generic description. Specify a finite coverage contract before asserting recall; do not require every real fact in96 or add oracle keywords."
+    },
+    {
+      "id": "CHAIN-04",
+      "status": "observed_unclosed_forecast_context",
+      "title": "Forecast and explicit conditions are independent cards; the forecast cache contains actual/current business_scope",
+      "evidence": [
+        "Guidance p14/32 native carrier and p14/34 conditions each have only MD&A/operating-results headings as required IDs; neither closure includes the other.",
+        "Condition antecedent window contains guidance originals, but no required-context edge is generated.",
+        "Forecast carrier cached relation is issuer/positive/current/actual business_scope; source numeric forecast is not represented as a forecast relation. Neither card was selected, so no wrong emitted summary is claimed."
+      ],
+      "symbols": [
+        "narrative_reading._candidates:573-657",
+        "narrative_reading._context:827-866",
+        "narrative_operating_relations.SourceOperatingSession.fact",
+        "operating_states relations/modality scope"
+      ],
+      "neutral_red": "A neutral company forecasts next-year revenue range and continuing-business growth, followed by an explicit local assumption/noncommitment paragraph. Verify forecast/conditional states and dependency closure under tight slots, plus an independent nearby risk paragraph that must not be attached. Keep raw words and separate units unchanged."
+    }
+  ],
+  "limitations": [
+    "Not all omitted facts must fit96. The observed cap and selection policy are not by themselves proof that every omission is a product bug.",
+    "p12 capacity original was never independently source-fact assessed in the observed candidate pass; no hypothetical fact result is substituted for that actual missing stage.",
+    "Guidance actual/current cache relation is a metadata observation on unselected material; no model call or summary error is claimed.",
+    "Preexisting code/types after the traced run are not automatically covered.",
+    "Neutral RED suggestions are designs, not executed failing tests."
+  ],
+  "no_product_or_root_test_edits": true,
+  "no_model_or_downloads": true,
+  "git_operations": 0
+}

@@ -1,0 +1,111 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 46 items
+
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py F [  2%]
+FFFF....FFFFF....FFFFF.......................                            [100%]
+
+================================== FAILURES ===================================
+_ test_numbered_value_row_is_not_an_inferred_observation_heading[7. Inventories\n$1,200\n$1,100] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:47: in test_numbered_value_row_is_not_an_inferred_observation_heading
+    assert _heading_level(text, {"heading_like": True}) is None
+E   AssertionError: assert 2 is None
+E    +  where 2 = _heading_level('7. Inventories\n$1,200\n$1,100', {'heading_like': True})
+_ test_numbered_value_row_is_not_an_inferred_observation_heading[3. \u73fe\u91d1\n1,234.50*\n900.00*] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:47: in test_numbered_value_row_is_not_an_inferred_observation_heading
+    assert _heading_level(text, {"heading_like": True}) is None
+E   AssertionError: assert 2 is None
+E    +  where 2 = _heading_level('3. 現金\n1,234.50*\n900.00*', {'heading_like': True})
+_ test_numbered_value_row_is_not_an_inferred_observation_heading[8. Revenue\n(1,200)\n2,500\n15.0%\xb9] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:47: in test_numbered_value_row_is_not_an_inferred_observation_heading
+    assert _heading_level(text, {"heading_like": True}) is None
+E   AssertionError: assert 2 is None
+E    +  where 2 = _heading_level('8. Revenue\n(1,200)\n2,500\n15.0%¹', {'heading_like': True})
+_ test_numbered_value_row_is_not_an_inferred_observation_heading[2. Revenue\n\u20ac12,300\n\u20ac10,100] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:47: in test_numbered_value_row_is_not_an_inferred_observation_heading
+    assert _heading_level(text, {"heading_like": True}) is None
+E   AssertionError: assert 2 is None
+E    +  where 2 = _heading_level('2. Revenue\n€12,300\n€10,100', {'heading_like': True})
+_ test_numbered_value_row_is_not_an_inferred_observation_heading[5. \u671f\u672b\u9918\u984d\n1 234,50\n2 345,60] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:47: in test_numbered_value_row_is_not_an_inferred_observation_heading
+    assert _heading_level(text, {"heading_like": True}) is None
+E   AssertionError: assert 2 is None
+E    +  where 2 = _heading_level('5. 期末餘額\n1 234,50\n2 345,60', {'heading_like': True})
+_ test_numbered_value_row_is_not_an_inferred_structure_heading[7. Inventories\n$1,200\n$1,100] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:52: in test_numbered_value_row_is_not_an_inferred_structure_heading
+    assert not is_heading(ObservationUnit(wire(text), 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x00000291397906D0>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x00000291397906D0> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '7. Inventories\n$1,200\n$1,100', ...}, 0)
+E    +      where {'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '7. Inventories\n$1,200\n$1,100', ...} = wire('7. Inventories\n$1,200\n$1,100')
+_ test_numbered_value_row_is_not_an_inferred_structure_heading[3. \u73fe\u91d1\n1,234.50*\n900.00*] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:52: in test_numbered_value_row_is_not_an_inferred_structure_heading
+    assert not is_heading(ObservationUnit(wire(text), 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029139791990>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029139791990> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '3. 現金\n1,234.50*\n900.00*', ...}, 0)
+E    +      where {'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '3. 現金\n1,234.50*\n900.00*', ...} = wire('3. 現金\n1,234.50*\n900.00*')
+_ test_numbered_value_row_is_not_an_inferred_structure_heading[8. Revenue\n(1,200)\n2,500\n15.0%\xb9] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:52: in test_numbered_value_row_is_not_an_inferred_structure_heading
+    assert not is_heading(ObservationUnit(wire(text), 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029139792980>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029139792980> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '8. Revenue\n(1,200)\n2,500\n15.0%¹', ...}, 0)
+E    +      where {'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '8. Revenue\n(1,200)\n2,500\n15.0%¹', ...} = wire('8. Revenue\n(1,200)\n2,500\n15.0%¹')
+_ test_numbered_value_row_is_not_an_inferred_structure_heading[2. Revenue\n\u20ac12,300\n\u20ac10,100] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:52: in test_numbered_value_row_is_not_an_inferred_structure_heading
+    assert not is_heading(ObservationUnit(wire(text), 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029139793970>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029139793970> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '2. Revenue\n€12,300\n€10,100', ...}, 0)
+E    +      where {'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '2. Revenue\n€12,300\n€10,100', ...} = wire('2. Revenue\n€12,300\n€10,100')
+_ test_numbered_value_row_is_not_an_inferred_structure_heading[5. \u671f\u672b\u9918\u984d\n1 234,50\n2 345,60] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:52: in test_numbered_value_row_is_not_an_inferred_structure_heading
+    assert not is_heading(ObservationUnit(wire(text), 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x00000291397BC5E0>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x00000291397BC5E0> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '5. 期末餘額\n1 234,50\n2 345,60', ...}, 0)
+E    +      where {'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '5. 期末餘額\n1 234,50\n2 345,60', ...} = wire('5. 期末餘額\n1 234,50\n2 345,60')
+_ test_numbered_value_row_is_not_promoted_by_font_hints[7. Inventories\n$1,200\n$1,100] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:57: in test_numbered_value_row_is_not_promoted_by_font_hints
+    assert heading_evidence(font_unit(text), {"value-row": (20., 20.)}, 15.)["level"] is None
+E   assert 2 is None
+_ test_numbered_value_row_is_not_promoted_by_font_hints[3. \u73fe\u91d1\n1,234.50*\n900.00*] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:57: in test_numbered_value_row_is_not_promoted_by_font_hints
+    assert heading_evidence(font_unit(text), {"value-row": (20., 20.)}, 15.)["level"] is None
+E   assert 2 is None
+_ test_numbered_value_row_is_not_promoted_by_font_hints[8. Revenue\n(1,200)\n2,500\n15.0%\xb9] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:57: in test_numbered_value_row_is_not_promoted_by_font_hints
+    assert heading_evidence(font_unit(text), {"value-row": (20., 20.)}, 15.)["level"] is None
+E   assert 2 is None
+_ test_numbered_value_row_is_not_promoted_by_font_hints[2. Revenue\n\u20ac12,300\n\u20ac10,100] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:57: in test_numbered_value_row_is_not_promoted_by_font_hints
+    assert heading_evidence(font_unit(text), {"value-row": (20., 20.)}, 15.)["level"] is None
+E   assert 2 is None
+_ test_numbered_value_row_is_not_promoted_by_font_hints[5. \u671f\u672b\u9918\u984d\n1 234,50\n2 345,60] _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:57: in test_numbered_value_row_is_not_promoted_by_font_hints
+    assert heading_evidence(font_unit(text), {"value-row": (20., 20.)}, 15.)["level"] is None
+E   assert 2 is None
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\root\heading-format-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_observation_heading[7. Inventories\n$1,200\n$1,100]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_observation_heading[3. \u73fe\u91d1\n1,234.50*\n900.00*]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_observation_heading[8. Revenue\n(1,200)\n2,500\n15.0%\xb9]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_observation_heading[2. Revenue\n\u20ac12,300\n\u20ac10,100]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_observation_heading[5. \u671f\u672b\u9918\u984d\n1 234,50\n2 345,60]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_structure_heading[7. Inventories\n$1,200\n$1,100]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_structure_heading[3. \u73fe\u91d1\n1,234.50*\n900.00*]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_structure_heading[8. Revenue\n(1,200)\n2,500\n15.0%\xb9]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_structure_heading[2. Revenue\n\u20ac12,300\n\u20ac10,100]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_an_inferred_structure_heading[5. \u671f\u672b\u9918\u984d\n1 234,50\n2 345,60]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_promoted_by_font_hints[7. Inventories\n$1,200\n$1,100]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_promoted_by_font_hints[3. \u73fe\u91d1\n1,234.50*\n900.00*]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_promoted_by_font_hints[8. Revenue\n(1,200)\n2,500\n15.0%\xb9]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_promoted_by_font_hints[2. Revenue\n\u20ac12,300\n\u20ac10,100]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_numbered_value_row_is_not_promoted_by_font_hints[5. \u671f\u672b\u9918\u984d\n1 234,50\n2 345,60]
+======================== 15 failed, 31 passed in 1.50s ========================
