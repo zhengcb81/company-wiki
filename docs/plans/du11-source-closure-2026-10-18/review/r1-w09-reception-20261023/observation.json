@@ -1,0 +1,1055 @@
+{
+  "schema_version": "root-w09-readonly-reception/1",
+  "observed_utc": "2026-10-23T22:26:55.490422+00:00",
+  "status": "INITIAL_SCREENING_NOT_CONTENT_ACCEPTANCE",
+  "git": {
+    "head": {
+      "exit_code": 0,
+      "stdout": "eb7c2deec3650889a10220fdfe8fccb168b28c72",
+      "stderr": ""
+    },
+    "branch": {
+      "exit_code": 0,
+      "stdout": "codex/r1-w09-research-20261023",
+      "stderr": ""
+    },
+    "status": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "remote": {
+      "exit_code": 0,
+      "stdout": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)",
+      "stderr": ""
+    },
+    "cached_remote_head": {
+      "exit_code": 0,
+      "stdout": "eb7c2deec3650889a10220fdfe8fccb168b28c72",
+      "stderr": ""
+    },
+    "changed_path_count": 253,
+    "outside_declared_write_scope": [],
+    "changed_production_paths": [
+      "START_HERE.md",
+      "references/buy-side-methodology.md",
+      "references/evidence-role-calibration.md",
+      "references/input-construction.md"
+    ],
+    "handoff_final_head": "bc38fffc34ae4919e9b7457d1fc23dda0d5138be",
+    "remote_refresh_performed": false
+  },
+  "artifacts": [
+    {
+      "path": "delivery/w09/forecast/main-input.json",
+      "sha256": "cb155a827f6a241ba5d45cf41b6e8e59eef98aa4b122e955106a51ae9770f022",
+      "bytes": 634766,
+      "actual_sha256": "cb155a827f6a241ba5d45cf41b6e8e59eef98aa4b122e955106a51ae9770f022",
+      "actual_bytes": 634766,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/forecast/main-forecast.json",
+      "sha256": "f8e0d60e7927ce5bab2c294796b4564768ab82728ba0a967964bf3b82ab5519e",
+      "bytes": 1491902,
+      "actual_sha256": "f8e0d60e7927ce5bab2c294796b4564768ab82728ba0a967964bf3b82ab5519e",
+      "actual_bytes": 1491902,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/forecast/main-forecast.md",
+      "sha256": "831ba6c276cd63af69f14ff0c7883be44edaba296b00d36913101af520ad60c5",
+      "bytes": 201840,
+      "actual_sha256": "831ba6c276cd63af69f14ff0c7883be44edaba296b00d36913101af520ad60c5",
+      "actual_bytes": 201840,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/forecast/stress-input.json",
+      "sha256": "7f0cf9d92d4ac7aa1a3509ac849aa08631021108212d0b1bee6f69fd02838b12",
+      "bytes": 674672,
+      "actual_sha256": "7f0cf9d92d4ac7aa1a3509ac849aa08631021108212d0b1bee6f69fd02838b12",
+      "actual_bytes": 674672,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/forecast/stress-forecast.json",
+      "sha256": "f493de09927454363568e65edb3048ad613e13260eb754525687c968879f000a",
+      "bytes": 1582349,
+      "actual_sha256": "f493de09927454363568e65edb3048ad613e13260eb754525687c968879f000a",
+      "actual_bytes": 1582349,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/forecast/stress-forecast.md",
+      "sha256": "597ff053fb548f1d7590b29d4609c77f21faa4fd4bb9f9ae6b882ba7fec89692",
+      "bytes": 208041,
+      "actual_sha256": "597ff053fb548f1d7590b29d4609c77f21faa4fd4bb9f9ae6b882ba7fec89692",
+      "actual_bytes": 208041,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/snapshots/main-v1.json",
+      "sha256": "8aed9773cd7a0b45552e5de58d311bd39cbed1072f5561f7235bc63e21c45baa",
+      "bytes": 1779937,
+      "actual_sha256": "8aed9773cd7a0b45552e5de58d311bd39cbed1072f5561f7235bc63e21c45baa",
+      "actual_bytes": 1779937,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/snapshots/stress-v1.json",
+      "sha256": "3e5bf8e6dddffb70b701fceec2f745aa531b49fdb468764bffac5e0dc4423393",
+      "bytes": 1893844,
+      "actual_sha256": "3e5bf8e6dddffb70b701fceec2f745aa531b49fdb468764bffac5e0dc4423393",
+      "actual_bytes": 1893844,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/registry/publications.jsonl",
+      "sha256": "68d30f9f8f063f1bc72d1c617de9566eeeccead94b332b86b5aaa1a7e0cc6bd3",
+      "bytes": 4640,
+      "actual_sha256": "68d30f9f8f063f1bc72d1c617de9566eeeccead94b332b86b5aaa1a7e0cc6bd3",
+      "actual_bytes": 4640,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/inputs/readonly-inputs.json",
+      "sha256": "b2dc696f1e3307a2e03efdbbd3bd00872b73d759442a5e8b2083165d915d1585",
+      "bytes": 16441,
+      "actual_sha256": "b2dc696f1e3307a2e03efdbbd3bd00872b73d759442a5e8b2083165d915d1585",
+      "actual_bytes": 16441,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/inputs/consumed-inputs.json",
+      "sha256": "10f4281a3945838ca471496812e5154c18a40b7020f20ffeb73b1317154294e5",
+      "bytes": 9542,
+      "actual_sha256": "10f4281a3945838ca471496812e5154c18a40b7020f20ffeb73b1317154294e5",
+      "actual_bytes": 9542,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/research-memo.md",
+      "sha256": "9f7cb39826c252269c143b4f42628d48abcdad39526dfc1655a3f33351f2ea19",
+      "bytes": 10196,
+      "actual_sha256": "9f7cb39826c252269c143b4f42628d48abcdad39526dfc1655a3f33351f2ea19",
+      "actual_bytes": 10196,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/claim-changes.json",
+      "sha256": "d2534f19ddae2240a42e77f9239f2cad6254187859c9ab14ccdbf1bb0adeb0ab",
+      "bytes": 127757,
+      "actual_sha256": "d2534f19ddae2240a42e77f9239f2cad6254187859c9ab14ccdbf1bb0adeb0ab",
+      "actual_bytes": 127757,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/excerpts.json",
+      "sha256": "7e6f814dc40536d06845b6a29a778c6f3af63ec14bddaced79df6547fd7369ea",
+      "bytes": 29665,
+      "actual_sha256": "7e6f814dc40536d06845b6a29a778c6f3af63ec14bddaced79df6547fd7369ea",
+      "actual_bytes": 29665,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/component-bridge.json",
+      "sha256": "d3243ed5ab1645e2a835708072ab06770c9db445281cdf8f6ab71e413231b784",
+      "bytes": 16800,
+      "actual_sha256": "d3243ed5ab1645e2a835708072ab06770c9db445281cdf8f6ab71e413231b784",
+      "actual_bytes": 16800,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/sensitivity.json",
+      "sha256": "c51832e034dd60959609d2b91d1c0e74e175db3ee7ad677269b799809fd426ae",
+      "bytes": 12190,
+      "actual_sha256": "c51832e034dd60959609d2b91d1c0e74e175db3ee7ad677269b799809fd426ae",
+      "actual_bytes": 12190,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/remaining-unknowns.json",
+      "sha256": "430035c4b8e890934e2d63038d510418cc0073fee659408309cbe0b718dd3945",
+      "bytes": 8505,
+      "actual_sha256": "430035c4b8e890934e2d63038d510418cc0073fee659408309cbe0b718dd3945",
+      "actual_bytes": 8505,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/acceptance-checkpoints.json",
+      "sha256": "1f1f411118df0cd87eda793d9afd33d204851d68ed7d58e8946a64859ee96b39",
+      "bytes": 7996,
+      "actual_sha256": "1f1f411118df0cd87eda793d9afd33d204851d68ed7d58e8946a64859ee96b39",
+      "actual_bytes": 7996,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/acceptance-checkpoints-graded.json",
+      "sha256": "82aa0185c4a7e49ce1c7d7b9fac68f6a041b2e71e1859fe898384cff0fa27e86",
+      "bytes": 10118,
+      "actual_sha256": "82aa0185c4a7e49ce1c7d7b9fac68f6a041b2e71e1859fe898384cff0fa27e86",
+      "actual_bytes": 10118,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/generalization-probe.json",
+      "sha256": "80ccca81613f65b088c1d0144776452bbc6f6d4e9e66649bc85aea77a27955cf",
+      "bytes": 3185,
+      "actual_sha256": "80ccca81613f65b088c1d0144776452bbc6f6d4e9e66649bc85aea77a27955cf",
+      "actual_bytes": 3185,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/native-chain.json",
+      "sha256": "b3b2e9ac96764f49a9bfa3f379a01bb22509838abde5cc7075257142e28a6b3f",
+      "bytes": 17952,
+      "actual_sha256": "b3b2e9ac96764f49a9bfa3f379a01bb22509838abde5cc7075257142e28a6b3f",
+      "actual_bytes": 17952,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/research/method-changes.md",
+      "sha256": "0492a0685a1f01ec9d3eafb184e42009f7ce40c1ac8ecc2c2f98204e9e62fb0e",
+      "bytes": 4325,
+      "actual_sha256": "0492a0685a1f01ec9d3eafb184e42009f7ce40c1ac8ecc2c2f98204e9e62fb0e",
+      "actual_bytes": 4325,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/review/independent-review.md",
+      "sha256": "47cdc7109a721cfc4dfb72c3d0eb5d3d998d52ddbc105fcce1e27cc639f1e737",
+      "bytes": 7348,
+      "actual_sha256": "47cdc7109a721cfc4dfb72c3d0eb5d3d998d52ddbc105fcce1e27cc639f1e737",
+      "actual_bytes": 7348,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/review/independent-review.json",
+      "sha256": "87ea44cce8a2bb14155873276c894dcf95d21e0eae3988a991ea1fcbade91e47",
+      "bytes": 8918,
+      "actual_sha256": "87ea44cce8a2bb14155873276c894dcf95d21e0eae3988a991ea1fcbade91e47",
+      "actual_bytes": 8918,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/review/review-fixes.md",
+      "sha256": "6a0c4094cc9108fd106711dfb38db1346f8409fdeb65852378a9f343f30c6986",
+      "bytes": 4748,
+      "actual_sha256": "6a0c4094cc9108fd106711dfb38db1346f8409fdeb65852378a9f343f30c6986",
+      "actual_bytes": 4748,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/review/final-independent-review.md",
+      "sha256": "28e5e1cf505122e7a6e20fbce59b5e0e9ab21c2f9e4004853c0ad1c3799b739e",
+      "bytes": 11799,
+      "actual_sha256": "28e5e1cf505122e7a6e20fbce59b5e0e9ab21c2f9e4004853c0ad1c3799b739e",
+      "actual_bytes": 11799,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/review/final-independent-review.json",
+      "sha256": "701db227d8bec1e8a4da319654a210730a437f9a0f21211d497794f96341e6b9",
+      "bytes": 19972,
+      "actual_sha256": "701db227d8bec1e8a4da319654a210730a437f9a0f21211d497794f96341e6b9",
+      "actual_bytes": 19972,
+      "match": true
+    },
+    {
+      "path": "delivery/w09/cleanup/receipt.json",
+      "sha256": "bbf4f9ae1836df3dfe49b6923dc75923a8157145e2165a12252f74ad954a7e33",
+      "bytes": 3376,
+      "actual_sha256": "bbf4f9ae1836df3dfe49b6923dc75923a8157145e2165a12252f74ad954a7e33",
+      "actual_bytes": 3376,
+      "match": true
+    }
+  ],
+  "all_artifacts_match": true,
+  "requirements": [
+    {
+      "id": "R1-claim-coverage",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\claim-changes.json",
+      "pointer": "/rows",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "list"
+    },
+    {
+      "id": "R2-own-scope-citations",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\excerpts.json",
+      "pointer": "/excerpts",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "dict"
+    },
+    {
+      "id": "R3-rpo-guidance-vs-actual",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\claim-changes.json",
+      "pointer": "/rpo_correction",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "dict"
+    },
+    {
+      "id": "R4-honest-weakening",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\claim-changes.json",
+      "pointer": "/unknown_mechanism_handling",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "dict"
+    },
+    {
+      "id": "R5-largest-driver-bridge",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\component-bridge.json",
+      "pointer": "/rows",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "list"
+    },
+    {
+      "id": "R6-sensitivity-falsifiers",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\sensitivity.json",
+      "pointer": "/",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "dict"
+    },
+    {
+      "id": "R7-native-chain",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\native-chain.json",
+      "pointer": "/calls",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "list"
+    },
+    {
+      "id": "R8-no-numeric-drift",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\native-chain.json",
+      "pointer": "/sealed_comparison",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "dict"
+    },
+    {
+      "id": "R9-unknowns-kept-unknown",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\remaining-unknowns.json",
+      "pointer": "/unknowns",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "list"
+    },
+    {
+      "id": "R10-method-writeback",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\method-changes.md",
+      "pointer": "/",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "str"
+    },
+    {
+      "id": "R11-independent-review",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\review\\final-independent-review.md",
+      "pointer": "/",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "str"
+    },
+    {
+      "id": "R12-cleanup",
+      "declared_status": "PASS",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\cleanup\\receipt.json",
+      "pointer": "/",
+      "pointer_resolves": true,
+      "sha_match": true,
+      "value_type": "dict"
+    }
+  ],
+  "final_independent_review_bindings": [
+    {
+      "path": "delivery/w09/research/excerpts.json",
+      "expected": "7e6f814dc40536d06845b6a29a778c6f3af63ec14bddaced79df6547fd7369ea",
+      "actual": "7e6f814dc40536d06845b6a29a778c6f3af63ec14bddaced79df6547fd7369ea",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/research/claim-changes.json",
+      "expected": "d2534f19ddae2240a42e77f9239f2cad6254187859c9ab14ccdbf1bb0adeb0ab",
+      "actual": "d2534f19ddae2240a42e77f9239f2cad6254187859c9ab14ccdbf1bb0adeb0ab",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/research/native-chain.json",
+      "expected": "b3b2e9ac96764f49a9bfa3f379a01bb22509838abde5cc7075257142e28a6b3f",
+      "actual": "b3b2e9ac96764f49a9bfa3f379a01bb22509838abde5cc7075257142e28a6b3f",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/research/research-memo.md",
+      "binding": "read-in-full; stale SHAs absent",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    },
+    {
+      "path": "delivery/w09/tools/verify_excerpts.py",
+      "binding": "read-in-full; self-check assertion present (lines 136-148)",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    },
+    {
+      "path": "delivery/w09/forecast/main-input.json",
+      "expected": "cb155a827f6a241ba5d45cf41b6e8e59eef98aa4b122e955106a51ae9770f022",
+      "actual": "cb155a827f6a241ba5d45cf41b6e8e59eef98aa4b122e955106a51ae9770f022",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/forecast/stress-input.json",
+      "expected": "7f0cf9d92d4ac7aa1a3509ac849aa08631021108212d0b1bee6f69fd02838b12",
+      "actual": "7f0cf9d92d4ac7aa1a3509ac849aa08631021108212d0b1bee6f69fd02838b12",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/forecast/main-forecast.json",
+      "expected": "f8e0d60e7927ce5bab2c294796b4564768ab82728ba0a967964bf3b82ab5519e",
+      "actual": "f8e0d60e7927ce5bab2c294796b4564768ab82728ba0a967964bf3b82ab5519e",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/forecast/stress-forecast.json",
+      "expected": "f493de09927454363568e65edb3048ad613e13260eb754525687c968879f000a",
+      "actual": "f493de09927454363568e65edb3048ad613e13260eb754525687c968879f000a",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/snapshots/main-v1.json",
+      "expected": "8aed9773cd7a0b45552e5de58d311bd39cbed1072f5561f7235bc63e21c45baa",
+      "actual": "8aed9773cd7a0b45552e5de58d311bd39cbed1072f5561f7235bc63e21c45baa",
+      "exact_match": true
+    },
+    {
+      "path": "delivery/w09/snapshots/stress-v1.json",
+      "expected": "3e5bf8e6dddffb70b701fceec2f745aa531b49fdb468764bffac5e0dc4423393",
+      "actual": "3e5bf8e6dddffb70b701fceec2f745aa531b49fdb468764bffac5e0dc4423393",
+      "exact_match": true
+    },
+    {
+      "path": "sealed/final3-forecast.json",
+      "binding": "41ea79efa319226ac93e65d5210bb304b4d458cfac95ef5998fdf06eaf12279d (matches card)",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    },
+    {
+      "path": "sealed/final3-input.json",
+      "binding": "e54ba7df7a5914772222e88e56661d0822e251e257814b9dc7c976c454660257 (matches card)",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    },
+    {
+      "path": "verified-source-pages.json",
+      "binding": "66dced5bfbe7c5b6... (matches card 66dced5b...)",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    },
+    {
+      "path": "source-page-addendum-20261023.json",
+      "binding": "993cc92c0c914430... (matches card 993cc92c...)",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    },
+    {
+      "path": "claim-scope-bindings.json",
+      "binding": "7e7dd04ecf6b9c20... (matches card 7e7dd04e...)",
+      "exact_match": null,
+      "note": "descriptive/truncated or historical alias, not a complete SHA binding"
+    }
+  ],
+  "reviewed_code_sha": null,
+  "final_review_conclusion": "PASS_WITH_MINOR",
+  "claim_keys": [
+    "schema_version",
+    "package_id",
+    "created_at",
+    "expected_union_count",
+    "actual_union_count",
+    "rows_present",
+    "duplicate_rows",
+    "sealed_input_path",
+    "sealed_input_sha256",
+    "new_input_path",
+    "new_input_sha256",
+    "old_forecast_version",
+    "new_forecast_version",
+    "old_role_counts",
+    "new_role_counts",
+    "role_change_summary",
+    "price_negative_control",
+    "biology_rebase_conversion",
+    "unknown_mechanism_handling",
+    "rpo_correction",
+    "parameter_edits",
+    "rows",
+    "out_of_union_repairs",
+    "out_of_union_requirement_repairs",
+    "unchanged_claim_ids"
+  ],
+  "union_count": 49,
+  "claim_rows_roles": {
+    "mechanism_direction": 26,
+    "conversion_assumption": 21,
+    "history_base": 2
+  },
+  "native_chain_keys": [
+    "schema_version",
+    "package_id",
+    "recorder_run",
+    "calls",
+    "all_calls_clean",
+    "outputs",
+    "sealed_comparison",
+    "stress_minus_main",
+    "note"
+  ],
+  "calls_count": 6,
+  "native_calls_summary": [
+    {
+      "operation": "validate",
+      "request_id": "w09-main-validate",
+      "request_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205254Z-367cbf2c\\request.json",
+      "request_sha256": "770cd309353c158827c7b31fc983f4eb47660ff63536de4a440d6d2754bd33c2",
+      "request_bytes": 561849,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205254Z-367cbf2c\\request.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "input_argv_positions": [
+        5
+      ],
+      "capture_id": "533350056b2f43d693e8e2507aee30ab",
+      "capture_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\533350056b2f43d693e8e2507aee30ab",
+      "child_started": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "input_complete": true,
+      "output_complete": true,
+      "input_cleanup_complete": true,
+      "frozen_input_sha256": "770cd309353c158827c7b31fc983f4eb47660ff63536de4a440d6d2754bd33c2",
+      "frozen_input_bytes": 561849,
+      "frozen_input_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\533350056b2f43d693e8e2507aee30ab\\input-0001-770cd309353c.json",
+      "consumed_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\533350056b2f43d693e8e2507aee30ab\\consume-0001-770cd309353c.json",
+      "stdout_total_bytes": 7,
+      "stderr_total_bytes": 0,
+      "warnings": [],
+      "frozen_matches_request": true
+    },
+    {
+      "operation": "compute",
+      "request_id": "w09-main-compute",
+      "request_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205259Z-7d313ac5\\request.json",
+      "request_sha256": "770cd309353c158827c7b31fc983f4eb47660ff63536de4a440d6d2754bd33c2",
+      "request_bytes": 561849,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205259Z-7d313ac5\\request.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\main-forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\main-forecast.md"
+      ],
+      "input_argv_positions": [
+        5
+      ],
+      "capture_id": "1cdef2fc59fd4b3795b804bbdca8fe2e",
+      "capture_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\1cdef2fc59fd4b3795b804bbdca8fe2e",
+      "child_started": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "input_complete": true,
+      "output_complete": true,
+      "input_cleanup_complete": true,
+      "frozen_input_sha256": "770cd309353c158827c7b31fc983f4eb47660ff63536de4a440d6d2754bd33c2",
+      "frozen_input_bytes": 561849,
+      "frozen_input_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\1cdef2fc59fd4b3795b804bbdca8fe2e\\input-0001-770cd309353c.json",
+      "consumed_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\1cdef2fc59fd4b3795b804bbdca8fe2e\\consume-0001-770cd309353c.json",
+      "stdout_total_bytes": 0,
+      "stderr_total_bytes": 0,
+      "warnings": [],
+      "frozen_matches_request": true
+    },
+    {
+      "operation": "snapshot",
+      "request_id": "w09-main-snapshot",
+      "request_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205313Z-e91339ee\\request.json",
+      "request_sha256": "770cd309353c158827c7b31fc983f4eb47660ff63536de4a440d6d2754bd33c2",
+      "request_bytes": 561849,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205313Z-e91339ee\\request.json",
+        "--version",
+        "w09-rf-research-20261023-main-v1",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\snapshots\\main-v1.json"
+      ],
+      "input_argv_positions": [
+        6
+      ],
+      "capture_id": "03f33c747d6f44ecbe180feba2a82865",
+      "capture_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\03f33c747d6f44ecbe180feba2a82865",
+      "child_started": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "input_complete": true,
+      "output_complete": true,
+      "input_cleanup_complete": true,
+      "frozen_input_sha256": "770cd309353c158827c7b31fc983f4eb47660ff63536de4a440d6d2754bd33c2",
+      "frozen_input_bytes": 561849,
+      "frozen_input_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\03f33c747d6f44ecbe180feba2a82865\\input-0001-770cd309353c.json",
+      "consumed_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\03f33c747d6f44ecbe180feba2a82865\\consume-0001-770cd309353c.json",
+      "stdout_total_bytes": 0,
+      "stderr_total_bytes": 0,
+      "warnings": [],
+      "frozen_matches_request": true
+    },
+    {
+      "operation": "validate",
+      "request_id": "w09-stress-validate",
+      "request_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205325Z-edba19ec\\request.json",
+      "request_sha256": "c0c45687f9cf3ba309f9d5e6411c593b5b49b6eb6ecd07ce8fe9db6dbb0d7c19",
+      "request_bytes": 598096,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205325Z-edba19ec\\request.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "input_argv_positions": [
+        5
+      ],
+      "capture_id": "ddf52f27e3df4521874008a34ee3a842",
+      "capture_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\ddf52f27e3df4521874008a34ee3a842",
+      "child_started": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "input_complete": true,
+      "output_complete": true,
+      "input_cleanup_complete": true,
+      "frozen_input_sha256": "c0c45687f9cf3ba309f9d5e6411c593b5b49b6eb6ecd07ce8fe9db6dbb0d7c19",
+      "frozen_input_bytes": 598096,
+      "frozen_input_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\ddf52f27e3df4521874008a34ee3a842\\input-0001-c0c45687f9cf.json",
+      "consumed_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\ddf52f27e3df4521874008a34ee3a842\\consume-0001-c0c45687f9cf.json",
+      "stdout_total_bytes": 7,
+      "stderr_total_bytes": 0,
+      "warnings": [],
+      "frozen_matches_request": true
+    },
+    {
+      "operation": "compute",
+      "request_id": "w09-stress-compute",
+      "request_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205333Z-e6045349\\request.json",
+      "request_sha256": "c0c45687f9cf3ba309f9d5e6411c593b5b49b6eb6ecd07ce8fe9db6dbb0d7c19",
+      "request_bytes": 598096,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205333Z-e6045349\\request.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\stress-forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\stress-forecast.md"
+      ],
+      "input_argv_positions": [
+        5
+      ],
+      "capture_id": "2b9e064bf8e846f78764418a43d2bc3b",
+      "capture_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\2b9e064bf8e846f78764418a43d2bc3b",
+      "child_started": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "input_complete": true,
+      "output_complete": true,
+      "input_cleanup_complete": true,
+      "frozen_input_sha256": "c0c45687f9cf3ba309f9d5e6411c593b5b49b6eb6ecd07ce8fe9db6dbb0d7c19",
+      "frozen_input_bytes": 598096,
+      "frozen_input_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\2b9e064bf8e846f78764418a43d2bc3b\\input-0001-c0c45687f9cf.json",
+      "consumed_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\2b9e064bf8e846f78764418a43d2bc3b\\consume-0001-c0c45687f9cf.json",
+      "stdout_total_bytes": 0,
+      "stderr_total_bytes": 0,
+      "warnings": [],
+      "frozen_matches_request": true
+    },
+    {
+      "operation": "snapshot",
+      "request_id": "w09-stress-snapshot",
+      "request_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205347Z-0ea45da7\\request.json",
+      "request_sha256": "c0c45687f9cf3ba309f9d5e6411c593b5b49b6eb6ecd07ce8fe9db6dbb0d7c19",
+      "request_bytes": 598096,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\requests\\20261023T205347Z-0ea45da7\\request.json",
+        "--version",
+        "w09-rf-research-20261023-stress-v1",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\snapshots\\stress-v1.json"
+      ],
+      "input_argv_positions": [
+        6
+      ],
+      "capture_id": "a768f8090046420b9462c488d1c0fabe",
+      "capture_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\a768f8090046420b9462c488d1c0fabe",
+      "child_started": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "input_complete": true,
+      "output_complete": true,
+      "input_cleanup_complete": true,
+      "frozen_input_sha256": "c0c45687f9cf3ba309f9d5e6411c593b5b49b6eb6ecd07ce8fe9db6dbb0d7c19",
+      "frozen_input_bytes": 598096,
+      "frozen_input_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\a768f8090046420b9462c488d1c0fabe\\input-0001-c0c45687f9cf.json",
+      "consumed_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\recorder\\w09-rf-research-20261023\\roles\\executor\\commands\\a768f8090046420b9462c488d1c0fabe\\consume-0001-c0c45687f9cf.json",
+      "stdout_total_bytes": 0,
+      "stderr_total_bytes": 0,
+      "warnings": [],
+      "frozen_matches_request": true
+    }
+  ],
+  "sealed_comparison": {
+    "main": {
+      "low": {
+        "old": {
+          "2026": 53517.23730582589,
+          "2027": 53386.852857821665,
+          "2028": 52240.00170843531
+        },
+        "new": {
+          "2026": 53517.23730582589,
+          "2027": 53386.852857821665,
+          "2028": 52240.00170843531
+        },
+        "identical": true
+      },
+      "base": {
+        "old": {
+          "2026": 59466.12444323827,
+          "2027": 69526.2277014774,
+          "2028": 77228.85767968993
+        },
+        "new": {
+          "2026": 59466.12444323827,
+          "2027": 69526.2277014774,
+          "2028": 77228.85767968993
+        },
+        "identical": true
+      },
+      "high": {
+        "old": {
+          "2026": 65177.00516109457,
+          "2027": 86566.54922782998,
+          "2028": 106395.38294036867
+        },
+        "new": {
+          "2026": 65177.00516109457,
+          "2027": 86566.54922782998,
+          "2028": 106395.38294036867
+        },
+        "identical": true
+      }
+    },
+    "stress": {
+      "low": {
+        "old": {
+          "2026": 49017.23730582588,
+          "2027": 56986.852857821665,
+          "2028": 52240.00170843531
+        },
+        "new": {
+          "2026": 49017.23730582588,
+          "2027": 56986.852857821665,
+          "2028": 52240.00170843531
+        },
+        "identical": true
+      },
+      "base": {
+        "old": {
+          "2026": 54966.12444323827,
+          "2027": 73126.22770147742,
+          "2028": 77228.85767968993
+        },
+        "new": {
+          "2026": 54966.12444323827,
+          "2027": 73126.22770147742,
+          "2028": 77228.85767968993
+        },
+        "identical": true
+      },
+      "high": {
+        "old": {
+          "2026": 60677.00516109457,
+          "2027": 90166.54922782998,
+          "2028": 106395.38294036867
+        },
+        "new": {
+          "2026": 60677.00516109457,
+          "2027": 90166.54922782998,
+          "2028": 106395.38294036867
+        },
+        "identical": true
+      }
+    }
+  },
+  "consumed_input_keys": [
+    "schema_version",
+    "package_id",
+    "created_at",
+    "rf_base_commit",
+    "rf_start_head",
+    "rf_implementation_commit",
+    "branch",
+    "workdir",
+    "python",
+    "rf_cli_sha256",
+    "recorder_sha256",
+    "source_inputs",
+    "summary",
+    "root_input_manifest",
+    "root_version_reservation",
+    "new_model_calls",
+    "new_network_calls",
+    "new_downloads",
+    "raw_files_copied",
+    "source_tree",
+    "source_tree_sha256",
+    "method_reference_sha256"
+  ],
+  "consumed_sources": {
+    "scripts/revenue_forecast.py": {
+      "sha256": "1759dd25c094ed0c5be2d108b53de92ea22e6475b6fbad78573939713f455378",
+      "byte_size": 4182
+    },
+    "scripts/revenue_backtest.py": {
+      "sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+      "byte_size": 30110
+    },
+    "scripts/lint_input.py": {
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "byte_size": 21589
+    },
+    "scripts/fix_hashes.py": {
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "byte_size": 8484
+    },
+    "scripts/revenue_core.py": {
+      "sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+      "byte_size": 26101
+    },
+    "scripts/revenue_report.py": {
+      "sha256": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "byte_size": 88682
+    },
+    "scripts/contracts/document.py": {
+      "sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd",
+      "byte_size": 52038
+    },
+    "scripts/contracts/constants.py": {
+      "sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+      "byte_size": 8718
+    },
+    "scripts/research/evidence_roles.py": {
+      "sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+      "byte_size": 16538
+    },
+    "scripts/research/drivers.py": {
+      "sha256": "5ba825340431fc6ebf1f38e8facc1b23ae4ced9222312ccd63fbfe9199a9dd1f",
+      "byte_size": 25818
+    },
+    "scripts/research/native_dependencies.py": {
+      "sha256": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "byte_size": 5567
+    },
+    "scripts/contracts/period_flow.py": {
+      "sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+      "byte_size": 26965
+    },
+    "references/buy-side-methodology.md": {
+      "sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "byte_size": 15830
+    },
+    "references/evidence-role-calibration.md": {
+      "sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "byte_size": 17292
+    },
+    "references/input-construction.md": {
+      "sha256": "67e0245df2270e1829c1d600d7ae1a0b6ccfd71583ee05e5c2df1a39996dd3aa",
+      "byte_size": 18664
+    }
+  },
+  "consumed_source_tree_sha256": "ee7d374a9f12b82f0827cb968b5cf87a23466a5f66a332b115176a3eff6a2835",
+  "cleanup_declared": {
+    "schema_version": "w09-cleanup-receipt/1",
+    "package_id": "W09-RF-RESEARCH",
+    "created_at": "2026-10-23T20:54:06.682978+00:00",
+    "tmp_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\tmp",
+    "scratch_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\scratch",
+    "initial_state": {
+      "tmp": {
+        "exists": true,
+        "files": 0,
+        "bytes": 0,
+        "note": "delivery/w09/tmp was created empty by this package at stage A"
+      },
+      "scratch": {
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "note": "delivery/w09/research/scratch did not exist before this package; it was created only for author-side inspection and has been removed."
+      }
+    },
+    "final_state": {
+      "tmp": {
+        "exists": true,
+        "files": 0,
+        "bytes": 0,
+        "entries": []
+      },
+      "scratch": {
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "entries": []
+      }
+    },
+    "restored": true,
+    "removed_this_package": [
+      "delivery/w09/tmp/* (author probe outputs: main-probe.*, stress-probe.*)",
+      "delivery/w09/research/scratch/ (author inspection dumps)",
+      "delivery/w09/recorder/requests/<24 superseded attempt dirs> (earlier iterations of the same six operations; only the six recorded in native-calls.jsonl remain)"
+    ],
+    "retained_because_required": [
+      "delivery/w09/recorder/ (all six final captures: frozen input, consumed copy, stdout/stderr)",
+      "delivery/w09/recorder/native-calls.jsonl (one line per executed native call)",
+      "delivery/w09/forecast/ (inputs + native outputs + rendered markdown)",
+      "delivery/w09/snapshots/ (write-once snapshots)",
+      "delivery/w09/registry/publications.jsonl (local publication chain)"
+    ],
+    "protected_artifacts_after_cleanup": {
+      "delivery/w09/inputs/readonly-inputs.json": {
+        "sha256": "b2dc696f1e3307a2e03efdbbd3bd00872b73d759442a5e8b2083165d915d1585",
+        "byte_size": 16441
+      },
+      "delivery/w09/forecast/main-input.json": {
+        "sha256": "cb155a827f6a241ba5d45cf41b6e8e59eef98aa4b122e955106a51ae9770f022",
+        "byte_size": 634766
+      },
+      "delivery/w09/forecast/stress-input.json": {
+        "sha256": "7f0cf9d92d4ac7aa1a3509ac849aa08631021108212d0b1bee6f69fd02838b12",
+        "byte_size": 674672
+      },
+      "delivery/w09/forecast/main-forecast.json": {
+        "sha256": "f8e0d60e7927ce5bab2c294796b4564768ab82728ba0a967964bf3b82ab5519e",
+        "byte_size": 1491902
+      },
+      "delivery/w09/forecast/stress-forecast.json": {
+        "sha256": "f493de09927454363568e65edb3048ad613e13260eb754525687c968879f000a",
+        "byte_size": 1582349
+      },
+      "delivery/w09/snapshots/main-v1.json": {
+        "sha256": "8aed9773cd7a0b45552e5de58d311bd39cbed1072f5561f7235bc63e21c45baa",
+        "byte_size": 1779937
+      },
+      "delivery/w09/snapshots/stress-v1.json": {
+        "sha256": "3e5bf8e6dddffb70b701fceec2f745aa531b49fdb468764bffac5e0dc4423393",
+        "byte_size": 1893844
+      },
+      "delivery/w09/registry/publications.jsonl": {
+        "sha256": "68d30f9f8f063f1bc72d1c617de9566eeeccead94b332b86b5aaa1a7e0cc6bd3",
+        "byte_size": 4640
+      }
+    },
+    "no_original_deleted": true,
+    "no_other_owner_files_touched": true,
+    "note": "Deletions were limited to this package's own declared tmp/scratch and to superseded request attempts of the same six operations. No sealed run file, original PDF, central run artifact, other workspace or installed copy was deleted or moved."
+  },
+  "cleanup_current": {
+    "tmp_exists": true,
+    "tmp_entries": 0,
+    "scratch_exists": false
+  },
+  "footprint_actual": {
+    "files": 246,
+    "bytes": 24093197,
+    "pdf_sqlite_files": []
+  },
+  "handoff_declared_footprint": {
+    "delivery_bytes": 24045766,
+    "raw_copies": 0,
+    "peak_bytes": 24045766,
+    "peak_note": "peak == current delivery size; author-side tmp/scratch (3.3 MiB probe outputs) were removed after use and are not part of the delivery"
+  },
+  "handoff_sha256": "d6517e32bbd2855ec9ce680757b4dbabc3eae3d52d52afe57d4f9efa531f2b0a",
+  "final_review_sha256": "701db227d8bec1e8a4da319654a210730a437f9a0f21211d497794f96341e6b9",
+  "read_only_boundary": {
+    "author_scripts_or_tests_executed": 0,
+    "author_worktree_writes": 0,
+    "git_config_index_mutations": 0,
+    "network_paid_original_access": 0,
+    "writes_only_under": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023"
+  },
+  "source_bindings": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\buy-side-methodology.md",
+      "sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "bytes": 15830
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\evidence-role-calibration.md",
+      "sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "bytes": 17292
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\input-construction.md",
+      "sha256": "67e0245df2270e1829c1d600d7ae1a0b6ccfd71583ee05e5c2df1a39996dd3aa",
+      "bytes": 18664
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\tools\\verify_excerpts.py",
+      "sha256": "37353d8d37b12782dd0562108bada00bd74d6ed7589d19dff131552141a8575c",
+      "bytes": 11298
+    }
+  ]
+}

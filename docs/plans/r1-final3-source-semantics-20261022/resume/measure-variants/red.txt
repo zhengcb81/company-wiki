@@ -1,0 +1,202 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\red-temp", "requested_basetemp_len": 135, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220135-a8791639", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 58 items
+
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py F [  1%]
+FFFF...FFFFFF...FFFFFFFFFFFFF............................                [100%]
+
+================================== FAILURES ===================================
+_____ test_observed_physical_volume_is_quantity_not_amount[cn-reactor-kl] _____
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:129: in test_observed_physical_volume_is_quantity_not_amount
+    assert fact.eligible and "operating_quantity" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+____ test_observed_physical_volume_is_quantity_not_amount[trad-reactor-kl] ____
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:129: in test_observed_physical_volume_is_quantity_not_amount
+    assert fact.eligible and "operating_quantity" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_____ test_observed_physical_volume_is_quantity_not_amount[cn-storage-l] ______
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:129: in test_observed_physical_volume_is_quantity_not_amount
+    assert fact.eligible and "operating_quantity" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+___ test_observed_physical_volume_is_quantity_not_amount[trad-equipment-l] ____
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:129: in test_observed_physical_volume_is_quantity_not_amount
+    assert fact.eligible and "operating_quantity" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+____ test_observed_physical_volume_is_quantity_not_amount[cn-treatment-m3] ____
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:129: in test_observed_physical_volume_is_quantity_not_amount
+    assert fact.eligible and "operating_quantity" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_____ test_observed_physical_volume_is_quantity_not_amount[en-volume-to] ______
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:129: in test_observed_physical_volume_is_quantity_not_amount
+    assert fact.eligible and "operating_quantity" in fact.reasons
+E   AssertionError: assert (True and 'operating_quantity' in ('operating_metric_change',))
+E    +  where True = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').eligible
+E    +  and   ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+_ test_public_volume_support_preserves_exact_quantity_and_unit[cn-reactor-kl] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:136: in test_public_volume_support_preserves_exact_quantity_and_unit
+    select_original(text, "operating_quantity", literal)
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_volume_support_preserves_exact_quantity_and_unit[trad-reactor-kl] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:136: in test_public_volume_support_preserves_exact_quantity_and_unit
+    select_original(text, "operating_quantity", literal)
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_volume_support_preserves_exact_quantity_and_unit[cn-storage-l] __
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:136: in test_public_volume_support_preserves_exact_quantity_and_unit
+    select_original(text, "operating_quantity", literal)
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_volume_support_preserves_exact_quantity_and_unit[trad-equipment-l] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:136: in test_public_volume_support_preserves_exact_quantity_and_unit
+    select_original(text, "operating_quantity", literal)
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_volume_support_preserves_exact_quantity_and_unit[cn-treatment-m3] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:136: in test_public_volume_support_preserves_exact_quantity_and_unit
+    select_original(text, "operating_quantity", literal)
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_volume_support_preserves_exact_quantity_and_unit[en-volume-to] __
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:136: in test_public_volume_support_preserves_exact_quantity_and_unit
+    select_original(text, "operating_quantity", literal)
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:110: in select_original
+    assert expected_reason in span.structured_value["selection_reasons"]
+E   AssertionError: assert 'operating_quantity' in ('reading_plan', 'operating_metric_change')
+_ test_named_business_growth_rate_is_change_not_revenue_level_or_share[cn-support-up] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:143: in test_named_business_growth_rate_is_change_not_revenue_level_or_share
+    assert fact.eligible and "operating_metric_change" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_ test_named_business_growth_rate_is_change_not_revenue_level_or_share[trad-repair-down] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:143: in test_named_business_growth_rate_is_change_not_revenue_level_or_share
+    assert fact.eligible and "operating_metric_change" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_ test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-maintenance-up] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:143: in test_named_business_growth_rate_is_change_not_revenue_level_or_share
+    assert fact.eligible and "operating_metric_change" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_ test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-cloud-down] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:143: in test_named_business_growth_rate_is_change_not_revenue_level_or_share
+    assert fact.eligible and "operating_metric_change" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_ test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-owned-from] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:143: in test_named_business_growth_rate_is_change_not_revenue_level_or_share
+    assert fact.eligible and "operating_metric_change" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_ test_named_business_growth_rate_is_change_not_revenue_level_or_share[trad-currency-basis] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:143: in test_named_business_growth_rate_is_change_not_revenue_level_or_share
+    assert fact.eligible and "operating_metric_change" in fact.reasons
+E   AssertionError: assert (False)
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+_ test_public_named_business_growth_support_keeps_original_percent_and_scope[cn-support-up] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:150: in test_public_named_business_growth_support_keeps_original_percent_and_scope
+    span = select_original(text, "operating_metric_change", literal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_named_business_growth_support_keeps_original_percent_and_scope[trad-repair-down] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:150: in test_public_named_business_growth_support_keeps_original_percent_and_scope
+    span = select_original(text, "operating_metric_change", literal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_named_business_growth_support_keeps_original_percent_and_scope[en-maintenance-up] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:150: in test_public_named_business_growth_support_keeps_original_percent_and_scope
+    span = select_original(text, "operating_metric_change", literal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_named_business_growth_support_keeps_original_percent_and_scope[en-cloud-down] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:150: in test_public_named_business_growth_support_keeps_original_percent_and_scope
+    span = select_original(text, "operating_metric_change", literal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_named_business_growth_support_keeps_original_percent_and_scope[en-owned-from] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:150: in test_public_named_business_growth_support_keeps_original_percent_and_scope
+    span = select_original(text, "operating_metric_change", literal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+_ test_public_named_business_growth_support_keeps_original_percent_and_scope[trad-currency-basis] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:150: in test_public_named_business_growth_support_keeps_original_percent_and_scope
+    span = select_original(text, "operating_metric_change", literal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:108: in select_original
+    assert len(spans) == 1, "the original observed operating measure remains source evidence"
+E   AssertionError: the original observed operating measure remains source evidence
+E   assert 0 == 1
+E    +  where 0 = len([])
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\measure-variants\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_observed_physical_volume_is_quantity_not_amount[cn-reactor-kl]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_observed_physical_volume_is_quantity_not_amount[trad-reactor-kl]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_observed_physical_volume_is_quantity_not_amount[cn-storage-l]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_observed_physical_volume_is_quantity_not_amount[trad-equipment-l]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_observed_physical_volume_is_quantity_not_amount[cn-treatment-m3]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_observed_physical_volume_is_quantity_not_amount[en-volume-to]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_volume_support_preserves_exact_quantity_and_unit[cn-reactor-kl]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_volume_support_preserves_exact_quantity_and_unit[trad-reactor-kl]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_volume_support_preserves_exact_quantity_and_unit[cn-storage-l]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_volume_support_preserves_exact_quantity_and_unit[trad-equipment-l]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_volume_support_preserves_exact_quantity_and_unit[cn-treatment-m3]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_volume_support_preserves_exact_quantity_and_unit[en-volume-to]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_named_business_growth_rate_is_change_not_revenue_level_or_share[cn-support-up]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_named_business_growth_rate_is_change_not_revenue_level_or_share[trad-repair-down]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-maintenance-up]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-cloud-down]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-owned-from]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_named_business_growth_rate_is_change_not_revenue_level_or_share[trad-currency-basis]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_named_business_growth_support_keeps_original_percent_and_scope[cn-support-up]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_named_business_growth_support_keeps_original_percent_and_scope[trad-repair-down]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_named_business_growth_support_keeps_original_percent_and_scope[en-maintenance-up]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_named_business_growth_support_keeps_original_percent_and_scope[en-cloud-down]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_named_business_growth_support_keeps_original_percent_and_scope[en-owned-from]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_public_named_business_growth_support_keeps_original_percent_and_scope[trad-currency-basis]
+======================== 24 failed, 34 passed in 2.16s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220135-a8791639", "existed": true, "removed": true}

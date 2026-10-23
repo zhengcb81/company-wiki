@@ -1,0 +1,658 @@
+{
+  "source_sha_before": {
+    "src/company_wiki/resource_budget.py": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+    "config/resource_budget.yaml": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "d1ffbfe8f4e37a0f909c0dc0237900b0b9ff9f1c0e843074c5161b4bf9b8cd44",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "src/company_wiki/source_catalog/narrative_reading.py": "8f3f43afdb905fd70df6452b472a0195b4bddf8ee25c69b63463bd83be7fa2cf",
+    "src/company_wiki/automation/narrative_select.py": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e",
+    "src/company_wiki/document_understanding/decision_inventory.py": "2b0974a586fbb2ec417192e17ddc03be8456fa47cb38bb72881ef3ed6bb8f54b",
+    "tests/unit/test_resource_budget_policy.py": "1f7856b22c3e928155d7591148f985f731b7de6cae94af9e6e07a6cde73d25f6"
+  },
+  "source_fixture": {
+    "kind": "in-memory PDF",
+    "pages": 3,
+    "bytes": 3599,
+    "sha256": "eece29ad912d10360917d7d1a4669b0ad41e1ad54b8df65481af6b0a828b3aaf"
+  },
+  "observations": [
+    {
+      "configured_work_limit": 0,
+      "port_result": "select_failure",
+      "failure": {
+        "code": "PARSER_INCOMPLETE",
+        "detail": "empty selection does not have complete coverage"
+      },
+      "account_limit": 0,
+      "used": 0,
+      "exhausted": true,
+      "same_account": true,
+      "after_parse": 0,
+      "before_select": 0,
+      "after_select": 0,
+      "source": {
+        "pages_read": 3,
+        "units": 11,
+        "coverage_complete": false,
+        "layout_coverage": {
+          "feature_version": "pdf-reading-layout/2",
+          "complete": false,
+          "processed_unit_count": 0,
+          "processed_page_count": 0,
+          "deferred_unit_count": 11,
+          "deferred_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bf969f2cacea7badec5059b4695386210ea3df023bc0090307d54b8a68fcb85b",
+            "urn:company-wiki:narrative-unit:sha256:a31e14d9ac7b3951974eb6093a71a21d18c029e23c0adae58a83fb62597757b0",
+            "urn:company-wiki:narrative-unit:sha256:43e96526b69c668092406ce26eb4fb0217823b859f208a024c6411caa338adf7",
+            "urn:company-wiki:narrative-unit:sha256:37f5bd937ab306aebcb49cbb8efb4ee66a7f27547dd0e0b4b84391effcd8e8c3",
+            "urn:company-wiki:narrative-unit:sha256:594488959f5128d9a77f396fbf2a0527418677dce17cae2e53e59c0b8512114f",
+            "urn:company-wiki:narrative-unit:sha256:d0713e059d8a976109d9ad3b15bc66ae5ed8fd73ccbc49518a6d434fc22e027e",
+            "urn:company-wiki:narrative-unit:sha256:023da2c04e37a6acca393deb3d878a34aa563d4f8018a99d927f4ea03343bea6",
+            "urn:company-wiki:narrative-unit:sha256:2f0099a905038f36644a796d671b0ef64783497edd22fe03762342ffda36fc3a",
+            "urn:company-wiki:narrative-unit:sha256:4aefcea1ec241dc4f575c75e1702106db42fb85c17c6ffefbe8cec17e0d9b418",
+            "urn:company-wiki:narrative-unit:sha256:9308d29bbba0451d133b9dda5012ea9ddda3b2b882dbe68e357fdd051afc5931",
+            "urn:company-wiki:narrative-unit:sha256:9bf30f3ee74e5de38e873ee2b7f63d811fb55427dde701b3ef8370a3f292bd0c"
+          ],
+          "deferred_limited": false,
+          "fine_element_count": 0,
+          "work_units": 0,
+          "capture": {
+            "schema_version": "pdf-layout-capture/1",
+            "strategy": "requested-pages/1",
+            "mode": "reading-policy",
+            "request_sha256": "14a2fefdc7b8a764490fff6d6d59164f92a7a12f16886eec6a5baa79170d18a6",
+            "complete": false,
+            "not_requested_page_count": 3,
+            "requested_page_count": 0,
+            "requested_pages": [],
+            "requested_pages_limited": false,
+            "captured_page_count": 0,
+            "captured_pages": [],
+            "captured_pages_limited": false,
+            "projected_page_count": 0,
+            "projected_pages": [],
+            "projected_pages_limited": false,
+            "deferred_page_count": 0,
+            "deferred_pages": [],
+            "deferred_pages_limited": false,
+            "reading_request_digest": "db0dda176ca401dd78b24d35a326fed5d83a04e7f5633e13c3c2b6ead44307c5"
+          },
+          "planning": {
+            "feature_version": "pdf-reading-execution/1",
+            "request_digest": "db0dda176ca401dd78b24d35a326fed5d83a04e7f5633e13c3c2b6ead44307c5",
+            "profile_id": "unknown",
+            "profile_scope": {
+              "profile_id": "unknown",
+              "family": "unknown",
+              "regime": "unknown",
+              "form_type": "unknown"
+            },
+            "policy_digest": "952fe308243eebf40fb991b5494adf0f8169058ad94bc093a6ba959416ab6547",
+            "route": {
+              "profile_id": "unknown",
+              "family": "unknown",
+              "confidence": "unknown"
+            },
+            "plan_digest": "096ea4db305442723ab9c102bb437d3d99bbbe5fab4fa67f1809a6685172820f",
+            "complete": false,
+            "navigation_missing": true,
+            "unresolved_navigation_count": 0,
+            "window_count": 0,
+            "reason_counts": {
+              "work_budget_exhausted": 3
+            },
+            "exploration_pages": [],
+            "deferred_pages": [
+              1,
+              2,
+              3
+            ],
+            "deferred_page_count": 3,
+            "diagnostics": [
+              {
+                "code": "READING_WORK_BUDGET_EXCEEDED",
+                "detail": "preparation incomplete; no renewed budget or guessed windows",
+                "window_keys": []
+              },
+              {
+                "code": "READING_NAVIGATION_PARTIAL",
+                "detail": "source navigation is not a complete request plan",
+                "window_keys": []
+              }
+            ],
+            "admission": {
+              "schema_version": "du-geometry-run-summary/1",
+              "plan_digest": "096ea4db305442723ab9c102bb437d3d99bbbe5fab4fa67f1809a6685172820f",
+              "reason_counts": {
+                "admitted": 0,
+                "deduplicated": 0,
+                "not_found": 0,
+                "unknown": 0,
+                "exhausted": 0,
+                "cancelled": 0,
+                "rejected": 0
+              },
+              "not_arrived": 0,
+              "spent": {
+                "pages": 0,
+                "requests": 0
+              },
+              "class_spent": {},
+              "window_admissions": {}
+            }
+          },
+          "native_ranges": {
+            "feature_version": "native-pdf-page-view/1",
+            "complete": true,
+            "captured_chars": 435,
+            "deferred_page_count": 0,
+            "deferred_pages": []
+          }
+        }
+      },
+      "selection": {
+        "status": "needs_review",
+        "coverage_complete": false,
+        "spans": 0,
+        "diagnostics": [
+          {
+            "code": "work_budget_exhausted",
+            "count": 1,
+            "dimension": "document_work",
+            "external_model_cost": false,
+            "phase": "document",
+            "used": 0,
+            "requested": 1,
+            "limit": 0,
+            "detail": "unexamined source content remains unknown; original is unchanged"
+          }
+        ],
+        "dependencies_present": false,
+        "dependencies_status": null
+      },
+      "trace": {
+        "inventory_complete": false,
+        "sha256": "c92b2d5b6f737cf974f892a27a3666aa599d9f075a5e58da3947ab8c25aeda5a"
+      }
+    },
+    {
+      "configured_work_limit": 1000,
+      "port_result": "select_failure",
+      "failure": {
+        "code": "PARSER_INCOMPLETE",
+        "detail": "empty selection does not have complete coverage"
+      },
+      "account_limit": 1000,
+      "used": 989,
+      "exhausted": true,
+      "same_account": true,
+      "after_parse": 989,
+      "before_select": 989,
+      "after_select": 989,
+      "source": {
+        "pages_read": 3,
+        "units": 11,
+        "coverage_complete": false,
+        "layout_coverage": {
+          "feature_version": "pdf-reading-layout/2",
+          "complete": false,
+          "processed_unit_count": 0,
+          "processed_page_count": 0,
+          "deferred_unit_count": 11,
+          "deferred_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bf969f2cacea7badec5059b4695386210ea3df023bc0090307d54b8a68fcb85b",
+            "urn:company-wiki:narrative-unit:sha256:a31e14d9ac7b3951974eb6093a71a21d18c029e23c0adae58a83fb62597757b0",
+            "urn:company-wiki:narrative-unit:sha256:43e96526b69c668092406ce26eb4fb0217823b859f208a024c6411caa338adf7",
+            "urn:company-wiki:narrative-unit:sha256:37f5bd937ab306aebcb49cbb8efb4ee66a7f27547dd0e0b4b84391effcd8e8c3",
+            "urn:company-wiki:narrative-unit:sha256:594488959f5128d9a77f396fbf2a0527418677dce17cae2e53e59c0b8512114f",
+            "urn:company-wiki:narrative-unit:sha256:d0713e059d8a976109d9ad3b15bc66ae5ed8fd73ccbc49518a6d434fc22e027e",
+            "urn:company-wiki:narrative-unit:sha256:023da2c04e37a6acca393deb3d878a34aa563d4f8018a99d927f4ea03343bea6",
+            "urn:company-wiki:narrative-unit:sha256:2f0099a905038f36644a796d671b0ef64783497edd22fe03762342ffda36fc3a",
+            "urn:company-wiki:narrative-unit:sha256:4aefcea1ec241dc4f575c75e1702106db42fb85c17c6ffefbe8cec17e0d9b418",
+            "urn:company-wiki:narrative-unit:sha256:9308d29bbba0451d133b9dda5012ea9ddda3b2b882dbe68e357fdd051afc5931",
+            "urn:company-wiki:narrative-unit:sha256:9bf30f3ee74e5de38e873ee2b7f63d811fb55427dde701b3ef8370a3f292bd0c"
+          ],
+          "deferred_limited": false,
+          "fine_element_count": 0,
+          "work_units": 2,
+          "capture": {
+            "schema_version": "pdf-layout-capture/1",
+            "strategy": "requested-pages/1",
+            "mode": "reading-policy",
+            "request_sha256": "14a2fefdc7b8a764490fff6d6d59164f92a7a12f16886eec6a5baa79170d18a6",
+            "complete": false,
+            "not_requested_page_count": 3,
+            "requested_page_count": 0,
+            "requested_pages": [],
+            "requested_pages_limited": false,
+            "captured_page_count": 0,
+            "captured_pages": [],
+            "captured_pages_limited": false,
+            "projected_page_count": 0,
+            "projected_pages": [],
+            "projected_pages_limited": false,
+            "deferred_page_count": 0,
+            "deferred_pages": [],
+            "deferred_pages_limited": false,
+            "reading_request_digest": "db0dda176ca401dd78b24d35a326fed5d83a04e7f5633e13c3c2b6ead44307c5"
+          },
+          "planning": {
+            "feature_version": "pdf-reading-execution/1",
+            "request_digest": "db0dda176ca401dd78b24d35a326fed5d83a04e7f5633e13c3c2b6ead44307c5",
+            "profile_id": "unknown",
+            "profile_scope": {
+              "profile_id": "unknown",
+              "family": "unknown",
+              "regime": "unknown",
+              "form_type": "unknown"
+            },
+            "policy_digest": "952fe308243eebf40fb991b5494adf0f8169058ad94bc093a6ba959416ab6547",
+            "route": {
+              "profile_id": "unknown",
+              "family": "unknown",
+              "confidence": "unknown"
+            },
+            "plan_digest": "096ea4db305442723ab9c102bb437d3d99bbbe5fab4fa67f1809a6685172820f",
+            "complete": false,
+            "navigation_missing": true,
+            "unresolved_navigation_count": 0,
+            "window_count": 0,
+            "reason_counts": {
+              "work_budget_exhausted": 3
+            },
+            "exploration_pages": [],
+            "deferred_pages": [
+              1,
+              2,
+              3
+            ],
+            "deferred_page_count": 3,
+            "diagnostics": [
+              {
+                "code": "READING_WORK_BUDGET_EXCEEDED",
+                "detail": "preparation incomplete; no renewed budget or guessed windows",
+                "window_keys": []
+              },
+              {
+                "code": "READING_NAVIGATION_PARTIAL",
+                "detail": "source navigation is not a complete request plan",
+                "window_keys": []
+              }
+            ],
+            "admission": {
+              "schema_version": "du-geometry-run-summary/1",
+              "plan_digest": "096ea4db305442723ab9c102bb437d3d99bbbe5fab4fa67f1809a6685172820f",
+              "reason_counts": {
+                "admitted": 0,
+                "deduplicated": 0,
+                "not_found": 0,
+                "unknown": 0,
+                "exhausted": 0,
+                "cancelled": 0,
+                "rejected": 0
+              },
+              "not_arrived": 0,
+              "spent": {
+                "pages": 0,
+                "requests": 0
+              },
+              "class_spent": {},
+              "window_admissions": {}
+            }
+          },
+          "native_ranges": {
+            "feature_version": "native-pdf-page-view/1",
+            "complete": true,
+            "captured_chars": 435,
+            "deferred_page_count": 0,
+            "deferred_pages": []
+          }
+        }
+      },
+      "selection": {
+        "status": "needs_review",
+        "coverage_complete": false,
+        "spans": 0,
+        "diagnostics": [
+          {
+            "code": "work_budget_exhausted",
+            "count": 1,
+            "dimension": "document_work",
+            "external_model_cost": false,
+            "phase": "document",
+            "used": 989,
+            "requested": 1,
+            "limit": 1000,
+            "detail": "unexamined source content remains unknown; original is unchanged"
+          }
+        ],
+        "dependencies_present": false,
+        "dependencies_status": null
+      },
+      "trace": {
+        "inventory_complete": false,
+        "sha256": "034062caf2a2e305748bd40c1631b407035c4e525c32d265c781dd6ef2e61c0d"
+      }
+    },
+    {
+      "configured_work_limit": 20000,
+      "port_result": "usable",
+      "account_limit": 20000,
+      "used": 19913,
+      "exhausted": true,
+      "same_account": true,
+      "after_parse": 3284,
+      "before_select": 3284,
+      "after_select": 19913,
+      "source": {
+        "pages_read": 3,
+        "units": 11,
+        "coverage_complete": true,
+        "layout_coverage": {
+          "feature_version": "pdf-reading-layout/2",
+          "complete": false,
+          "processed_unit_count": 0,
+          "processed_page_count": 0,
+          "deferred_unit_count": 11,
+          "deferred_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bf969f2cacea7badec5059b4695386210ea3df023bc0090307d54b8a68fcb85b",
+            "urn:company-wiki:narrative-unit:sha256:a31e14d9ac7b3951974eb6093a71a21d18c029e23c0adae58a83fb62597757b0",
+            "urn:company-wiki:narrative-unit:sha256:43e96526b69c668092406ce26eb4fb0217823b859f208a024c6411caa338adf7",
+            "urn:company-wiki:narrative-unit:sha256:37f5bd937ab306aebcb49cbb8efb4ee66a7f27547dd0e0b4b84391effcd8e8c3",
+            "urn:company-wiki:narrative-unit:sha256:594488959f5128d9a77f396fbf2a0527418677dce17cae2e53e59c0b8512114f",
+            "urn:company-wiki:narrative-unit:sha256:d0713e059d8a976109d9ad3b15bc66ae5ed8fd73ccbc49518a6d434fc22e027e",
+            "urn:company-wiki:narrative-unit:sha256:023da2c04e37a6acca393deb3d878a34aa563d4f8018a99d927f4ea03343bea6",
+            "urn:company-wiki:narrative-unit:sha256:2f0099a905038f36644a796d671b0ef64783497edd22fe03762342ffda36fc3a",
+            "urn:company-wiki:narrative-unit:sha256:4aefcea1ec241dc4f575c75e1702106db42fb85c17c6ffefbe8cec17e0d9b418",
+            "urn:company-wiki:narrative-unit:sha256:9308d29bbba0451d133b9dda5012ea9ddda3b2b882dbe68e357fdd051afc5931",
+            "urn:company-wiki:narrative-unit:sha256:9bf30f3ee74e5de38e873ee2b7f63d811fb55427dde701b3ef8370a3f292bd0c"
+          ],
+          "deferred_limited": false,
+          "fine_element_count": 0,
+          "work_units": 3,
+          "capture": {
+            "schema_version": "pdf-layout-capture/1",
+            "strategy": "requested-pages/1",
+            "mode": "reading-policy",
+            "request_sha256": "782cc9ade6bca38ce5d07f1a319ac632cab396025007bb5de03055d4c06c8874",
+            "complete": true,
+            "not_requested_page_count": 3,
+            "requested_page_count": 0,
+            "requested_pages": [],
+            "requested_pages_limited": false,
+            "captured_page_count": 0,
+            "captured_pages": [],
+            "captured_pages_limited": false,
+            "projected_page_count": 0,
+            "projected_pages": [],
+            "projected_pages_limited": false,
+            "deferred_page_count": 0,
+            "deferred_pages": [],
+            "deferred_pages_limited": false,
+            "reading_request_digest": "118578e1d1f1dbadb3355960bb99952499ca2b23b4c129528040394461f577f4"
+          },
+          "planning": {
+            "feature_version": "pdf-reading-execution/1",
+            "request_digest": "118578e1d1f1dbadb3355960bb99952499ca2b23b4c129528040394461f577f4",
+            "profile_id": "generic",
+            "profile_scope": {
+              "profile_id": "generic",
+              "family": "unknown",
+              "regime": "unknown",
+              "form_type": "unknown"
+            },
+            "policy_digest": "e3afcc2f086dc83cccf84c208c5458e24881f4f685bb9d8acfe00606c5e68f14",
+            "route": {
+              "profile_id": "generic",
+              "family": "unknown",
+              "regime": "unknown",
+              "form_type": "unknown",
+              "confidence": "low"
+            },
+            "plan_digest": "b77a6420c1970417afba87b48f1be8ebbf51ec23cd23f63b12fd65684c891672",
+            "complete": true,
+            "navigation_missing": false,
+            "unresolved_navigation_count": 0,
+            "window_count": 1,
+            "reason_counts": {
+              "not_requested_by_intent": 3
+            },
+            "exploration_pages": [],
+            "deferred_pages": [],
+            "deferred_page_count": 0,
+            "diagnostics": [],
+            "admission": {
+              "schema_version": "du-geometry-run-summary/1",
+              "plan_digest": "b77a6420c1970417afba87b48f1be8ebbf51ec23cd23f63b12fd65684c891672",
+              "reason_counts": {
+                "admitted": 0,
+                "deduplicated": 0,
+                "not_found": 0,
+                "unknown": 0,
+                "exhausted": 0,
+                "cancelled": 0,
+                "rejected": 0
+              },
+              "not_arrived": 0,
+              "spent": {
+                "pages": 0,
+                "requests": 0
+              },
+              "class_spent": {
+                "unknown": 0
+              },
+              "window_admissions": {
+                "1347cca83c1d36f6aca5a9d93229fea572be0311642bb2a6c040286f85cc96cc": 0
+              }
+            }
+          },
+          "native_ranges": {
+            "feature_version": "native-pdf-page-view/1",
+            "complete": true,
+            "captured_chars": 435,
+            "deferred_page_count": 0,
+            "deferred_pages": []
+          }
+        }
+      },
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "spans": 3,
+        "diagnostics": [
+          {
+            "code": "work_budget_exhausted",
+            "count": 1,
+            "dimension": "document_work",
+            "external_model_cost": false,
+            "phase": "document",
+            "used": 19913,
+            "requested": null,
+            "limit": 20000,
+            "detail": "unexamined source content remains unknown; original is unchanged"
+          }
+        ],
+        "dependencies_present": true,
+        "dependencies_status": "partial"
+      },
+      "real_cache_match_same_policy": false,
+      "trace": {
+        "inventory_complete": true,
+        "sha256": "4f7bc81dde29159036fdb005bc0934c29fb0ba9c71519003abd03d7c67811287"
+      }
+    },
+    {
+      "configured_work_limit": 16000000,
+      "port_result": "usable",
+      "account_limit": 16000000,
+      "used": 27929,
+      "exhausted": false,
+      "same_account": true,
+      "after_parse": 3284,
+      "before_select": 3284,
+      "after_select": 27929,
+      "source": {
+        "pages_read": 3,
+        "units": 11,
+        "coverage_complete": true,
+        "layout_coverage": {
+          "feature_version": "pdf-reading-layout/2",
+          "complete": false,
+          "processed_unit_count": 0,
+          "processed_page_count": 0,
+          "deferred_unit_count": 11,
+          "deferred_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bf969f2cacea7badec5059b4695386210ea3df023bc0090307d54b8a68fcb85b",
+            "urn:company-wiki:narrative-unit:sha256:a31e14d9ac7b3951974eb6093a71a21d18c029e23c0adae58a83fb62597757b0",
+            "urn:company-wiki:narrative-unit:sha256:43e96526b69c668092406ce26eb4fb0217823b859f208a024c6411caa338adf7",
+            "urn:company-wiki:narrative-unit:sha256:37f5bd937ab306aebcb49cbb8efb4ee66a7f27547dd0e0b4b84391effcd8e8c3",
+            "urn:company-wiki:narrative-unit:sha256:594488959f5128d9a77f396fbf2a0527418677dce17cae2e53e59c0b8512114f",
+            "urn:company-wiki:narrative-unit:sha256:d0713e059d8a976109d9ad3b15bc66ae5ed8fd73ccbc49518a6d434fc22e027e",
+            "urn:company-wiki:narrative-unit:sha256:023da2c04e37a6acca393deb3d878a34aa563d4f8018a99d927f4ea03343bea6",
+            "urn:company-wiki:narrative-unit:sha256:2f0099a905038f36644a796d671b0ef64783497edd22fe03762342ffda36fc3a",
+            "urn:company-wiki:narrative-unit:sha256:4aefcea1ec241dc4f575c75e1702106db42fb85c17c6ffefbe8cec17e0d9b418",
+            "urn:company-wiki:narrative-unit:sha256:9308d29bbba0451d133b9dda5012ea9ddda3b2b882dbe68e357fdd051afc5931",
+            "urn:company-wiki:narrative-unit:sha256:9bf30f3ee74e5de38e873ee2b7f63d811fb55427dde701b3ef8370a3f292bd0c"
+          ],
+          "deferred_limited": false,
+          "fine_element_count": 0,
+          "work_units": 3,
+          "capture": {
+            "schema_version": "pdf-layout-capture/1",
+            "strategy": "requested-pages/1",
+            "mode": "reading-policy",
+            "request_sha256": "782cc9ade6bca38ce5d07f1a319ac632cab396025007bb5de03055d4c06c8874",
+            "complete": true,
+            "not_requested_page_count": 3,
+            "requested_page_count": 0,
+            "requested_pages": [],
+            "requested_pages_limited": false,
+            "captured_page_count": 0,
+            "captured_pages": [],
+            "captured_pages_limited": false,
+            "projected_page_count": 0,
+            "projected_pages": [],
+            "projected_pages_limited": false,
+            "deferred_page_count": 0,
+            "deferred_pages": [],
+            "deferred_pages_limited": false,
+            "reading_request_digest": "118578e1d1f1dbadb3355960bb99952499ca2b23b4c129528040394461f577f4"
+          },
+          "planning": {
+            "feature_version": "pdf-reading-execution/1",
+            "request_digest": "118578e1d1f1dbadb3355960bb99952499ca2b23b4c129528040394461f577f4",
+            "profile_id": "generic",
+            "profile_scope": {
+              "profile_id": "generic",
+              "family": "unknown",
+              "regime": "unknown",
+              "form_type": "unknown"
+            },
+            "policy_digest": "e3afcc2f086dc83cccf84c208c5458e24881f4f685bb9d8acfe00606c5e68f14",
+            "route": {
+              "profile_id": "generic",
+              "family": "unknown",
+              "regime": "unknown",
+              "form_type": "unknown",
+              "confidence": "low"
+            },
+            "plan_digest": "b77a6420c1970417afba87b48f1be8ebbf51ec23cd23f63b12fd65684c891672",
+            "complete": true,
+            "navigation_missing": false,
+            "unresolved_navigation_count": 0,
+            "window_count": 1,
+            "reason_counts": {
+              "not_requested_by_intent": 3
+            },
+            "exploration_pages": [],
+            "deferred_pages": [],
+            "deferred_page_count": 0,
+            "diagnostics": [],
+            "admission": {
+              "schema_version": "du-geometry-run-summary/1",
+              "plan_digest": "b77a6420c1970417afba87b48f1be8ebbf51ec23cd23f63b12fd65684c891672",
+              "reason_counts": {
+                "admitted": 0,
+                "deduplicated": 0,
+                "not_found": 0,
+                "unknown": 0,
+                "exhausted": 0,
+                "cancelled": 0,
+                "rejected": 0
+              },
+              "not_arrived": 0,
+              "spent": {
+                "pages": 0,
+                "requests": 0
+              },
+              "class_spent": {
+                "unknown": 0
+              },
+              "window_admissions": {
+                "1347cca83c1d36f6aca5a9d93229fea572be0311642bb2a6c040286f85cc96cc": 0
+              }
+            }
+          },
+          "native_ranges": {
+            "feature_version": "native-pdf-page-view/1",
+            "complete": true,
+            "captured_chars": 435,
+            "deferred_page_count": 0,
+            "deferred_pages": []
+          }
+        }
+      },
+      "selection": {
+        "status": "selected",
+        "coverage_complete": true,
+        "spans": 4,
+        "diagnostics": [],
+        "dependencies_present": true,
+        "dependencies_status": "complete"
+      },
+      "trace": {
+        "inventory_complete": true,
+        "sha256": "168dfc58b0950440f2c47b084300e0cb244f3235a4d31292f67c0a051fa05b6e"
+      }
+    }
+  ],
+  "cache_policy_observation": {
+    "baseline_trace_sha": "168dfc58b0950440f2c47b084300e0cb244f3235a4d31292f67c0a051fa05b6e",
+    "fee_only_trace_sha": "168dfc58b0950440f2c47b084300e0cb244f3235a4d31292f67c0a051fa05b6e",
+    "work_changed_trace_sha": "03f3f30708f548543d19589f679a86b6d5d8180905e61564659028c0a84a76c4",
+    "fee_change_same": true,
+    "work_change_same": false,
+    "real_partial_frozen_compare_after_increase": {
+      "schema_version": "du-decision-comparison/1",
+      "status": "unavailable",
+      "changed_component_ids": [],
+      "added_candidate_ids": [],
+      "removed_candidate_ids": [],
+      "diagnostics": [
+        {
+          "code": "FROZEN_PARTIAL",
+          "detail": "the frozen manifest is partial, so it carries lineage only and is not reuse evidence"
+        },
+        {
+          "code": "CURRENT_TRACE_NOT_FREEZABLE",
+          "detail": "the current trace froze as partial (['INVENTORY_INCOMPLETE', 'INVENTORY_NOT_COMPLETE']), so no reuse verdict is issued"
+        }
+      ]
+    },
+    "real_partial_cache_match_after_increase": false,
+    "dependency_module": "src\\company_wiki\\document_understanding\\decision_dependencies\\__init__.py"
+  },
+  "tmp_path": "probe-eyvpw6ys",
+  "scratch_removed": true,
+  "source_sha_after": {
+    "src/company_wiki/resource_budget.py": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+    "config/resource_budget.yaml": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "d1ffbfe8f4e37a0f909c0dc0237900b0b9ff9f1c0e843074c5161b4bf9b8cd44",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "src/company_wiki/source_catalog/narrative_reading.py": "8f3f43afdb905fd70df6452b472a0195b4bddf8ee25c69b63463bd83be7fa2cf",
+    "src/company_wiki/automation/narrative_select.py": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e",
+    "src/company_wiki/document_understanding/decision_inventory.py": "2b0974a586fbb2ec417192e17ddc03be8456fa47cb38bb72881ef3ed6bb8f54b",
+    "tests/unit/test_resource_budget_policy.py": "1f7856b22c3e928155d7591148f985f731b7de6cae94af9e6e07a6cde73d25f6"
+  },
+  "source_stable": true
+}

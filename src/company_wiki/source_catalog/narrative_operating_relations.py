@@ -18,6 +18,7 @@ from company_wiki.document_understanding.operating_states.product_reference impo
 from company_wiki.document_understanding.operating_states.text_view import strip_connector
 
 from .n6_candidate_operating_facts import OperatingFact
+from .narrative_revenue_guidance import revenue_guidance_premise
 from .narrative_business_policy import assess_reading_business_fact, project_reading_business_fact
 
 
@@ -285,6 +286,15 @@ class SourceOperatingSession:
                     continue
                 right_text, right_marker = right_scope
                 self.work_budget.charge(2 * len(right_text))
+                # Revenue outlooks are not product objects. Their explicit
+                # local premise uses this same source dependency projection,
+                # while the caller owns transitive envelope/budget closure.
+                if left != right:
+                    self.work_budget.charge(2 * (len(a.raw_text) + len(b.raw_text)))
+                    if (revenue_guidance_premise(a.raw_text, b.raw_text, follows=True)
+                            or revenue_guidance_premise(b.raw_text, a.raw_text, follows=False)):
+                        dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
+                        continue
                 deictics = find_product_deictic(right_text)
                 if len(deictics) != 1:
                     continue

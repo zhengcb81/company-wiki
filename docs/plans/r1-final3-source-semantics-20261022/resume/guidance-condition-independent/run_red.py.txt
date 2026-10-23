@@ -1,0 +1,16 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import os,json,subprocess,xml.etree.ElementTree as ET
+root=Path.cwd().resolve(); own=root/'docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent'
+paths=['src/company_wiki/source_catalog/narrative_business_policy.py','src/company_wiki/source_catalog/narrative_operating_relations.py','src/company_wiki/source_catalog/narrative_reading.py','src/company_wiki/source_catalog/n6_candidate_operating_facts.py','src/company_wiki/document_understanding/operating_states/relations.py','src/company_wiki/document_understanding/operating_states/patterns.py','src/company_wiki/document_understanding/summary_tasks.py','src/company_wiki/automation/narrative_model_scoped.py','src/company_wiki/document_understanding/narrative_continuity.py','tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py']
+def bind(): return {p:{'sha256':sha256((root/p).read_bytes()).hexdigest(),'bytes':(root/p).stat().st_size} for p in paths}
+before=bind(); requested=own/'red-temp'; assert not requested.exists()
+cmd=[r'C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe','-X','utf8','-B','-m','pytest','tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py','-q','-p','no:cacheprovider','--basetemp',str(requested),'--junitxml',str(own/'red.xml')]
+p=subprocess.run(cmd,env={**os.environ,'PYTHONPATH':str(root/'src'),'PYTHONDONTWRITEBYTECODE':'1'},stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf-8',errors='replace')
+(own/'red.txt').write_text(p.stdout,encoding='utf-8'); after=bind()
+line=next(line for line in p.stdout.splitlines() if line.startswith('CW-BASETEMP-CLEANUP ')); cleanup=json.loads(line.partition(' ')[2]);cleanup.update(actual_absent_verified=not Path(cleanup['dir']).exists(),requested_absent_verified=not requested.exists())
+xml=ET.parse(own/'red.xml').getroot(); suites=list(xml) if xml.tag=='testsuites' else [xml]; counts={k:sum(int(s.attrib.get(k,0)) for s in suites) for k in ['tests','failures','errors','skipped']}
+receipt={'schema':'guidance-condition-independent-red/1','utc':datetime.now(timezone.utc).isoformat(),'before':before,'after':after,'bytes_stable':before==after,'counts':counts,'exit_code':p.returncode,'command':cmd,'cleanup':cleanup,'external_actions':{'original_reads':0,'format_parser_calls':0,'network':0,'paid_model':0}}
+(own/'red.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(p.stdout); print(json.dumps({'counts':counts,'stable':before==after,'cleanup':cleanup},ensure_ascii=False))

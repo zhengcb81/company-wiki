@@ -1,0 +1,235 @@
+{
+  "schema": "w08-budget-baseline-join/1",
+  "status": "MERGED_NOT_COMMITTED_READY_FOR_ROOT_REVIEW",
+  "at_utc": "2026-10-23T22:55:34.607138+00:00",
+  "head": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
+  "incoming": "ab95027b5b1452c4403db482362b59a9f8976286",
+  "merge_head": "ab95027b5b1452c4403db482362b59a9f8976286",
+  "merge_strategy": "normal git merge --no-commit --no-ff; one version conflict manually unioned; no stash or cleanup of old work",
+  "conflict": "decision_inventory version kept1.9.0 plus incoming document_work_limit",
+  "staged_tree": "ad1260ccfb8f0a81eaeb431616d770a8f5a5f356",
+  "staged_paths": [
+    "config/resource_budget.yaml",
+    "docs/plans/document-understanding-2026-10-13/findings.md",
+    "docs/plans/document-understanding-2026-10-13/progress.md",
+    "docs/plans/document-understanding-2026-10-13/task_plan.md",
+    "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json",
+    "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md",
+    "docs/plans/du11-source-closure-2026-10-18/HANDOFF-2026-10-22.md",
+    "docs/plans/du11-source-closure-2026-10-18/MAINLINE_LOOP_GOAL.md",
+    "docs/plans/du11-source-closure-2026-10-18/budget-regime-20261023.md",
+    "docs/plans/du11-source-closure-2026-10-18/findings.md",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/INPUTS.json",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/INTERFACES.md",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/README.md",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/W09-RF-RESEARCH.md",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/W11-CWP-SOURCES.md",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/dispatch.json",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/handoff.template.json",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/packet-review.json",
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/packet-review.md",
+    "docs/plans/du11-source-closure-2026-10-18/progress.md",
+    "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/implementation-progress.json",
+    "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/stage-progress.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/accounting-policy-observation.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/cleanup.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/probe-result-sandbox-attempt.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/probe-result-v1-17.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/probe-result.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/review-in-progress.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/review.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/review.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/effective-scope-observation.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/engineering-closeout.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/README.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/cache-boundary-final.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/cache-boundary-final.xml",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/final-review.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/final-review.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-final.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-final.xml",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-initial.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-initial.xml",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/initial-review.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/loopback-production.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/loopback-production.xml",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/probe-final.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/probe-final.xml",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/probe_budget_production_initial.py.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/production-probes-initial.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/production-probes.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/README.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/red.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/red.xml",
+    "docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/red_receipt.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-pause-safety-check-20261022.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-candidate-byte-map-20261022.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-candidate-checkpoint-20261022.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/candidate-final.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/checkpoint.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/engineering-v2.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/engineering-v3.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/engineering-v4.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/main-baseline.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/normal-push-1712ed10.txt",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/oracle.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/project-qualification-v3.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/review-final.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/review-final.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-resume-20261023/untyped-quality-v5.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w09-preparation-checkpoint-20261022.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/deep-observation.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/observation.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/reception.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/reception.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w10-engineering-closeout-20261022.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/w08-red-design-20261022.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/w08-red-design-20261022.md",
+    "docs/plans/du11-source-closure-2026-10-18/task_plan.md",
+    "src/company_wiki/document_understanding/decision_inventory.py",
+    "src/company_wiki/resource_budget.py",
+    "src/company_wiki/source_catalog/narrative_finalize.py",
+    "src/company_wiki/source_catalog/narrative_reading.py",
+    "tests/test_budget_policy_totals.py",
+    "tests/test_phase_c_extractive.py",
+    "tests/unit/du11_production/test_document_work_policy.py",
+    "tests/unit/du11_production/test_pdf_production.py",
+    "tests/unit/test_budget_dimension_diagnostics.py",
+    "tests/unit/test_resource_budget_policy.py",
+    "tools/document_understanding_benchmark/phase_c_runner.py"
+  ],
+  "unstaged_tracked_paths": [
+    "src/company_wiki/source_catalog/narrative_business_policy.py"
+  ],
+  "sources": [
+    {
+      "path": "config/resource_budget.yaml",
+      "bytes": 364,
+      "sha256": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+    },
+    {
+      "path": "src/company_wiki/resource_budget.py",
+      "bytes": 5743,
+      "sha256": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "bytes": 25927,
+      "sha256": "b03166f0a577b6c2297b632e2b5faceba7b8d11715cf3b27fc19603b9876a05a"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "bytes": 10457,
+      "sha256": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 71832,
+      "sha256": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 48973,
+      "sha256": "24eca71e12270f19f742cf09faae481e9969a32469d1c493098aca18c3edf8dc"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "bytes": 75969,
+      "sha256": "d1ffbfe8f4e37a0f909c0dc0237900b0b9ff9f1c0e843074c5161b4bf9b8cd44"
+    },
+    {
+      "path": "tests/unit/test_resource_budget_policy.py",
+      "bytes": 10836,
+      "sha256": "3185fff73595cefd0228890992186549179a6b3158f6956b274a427a1fbab097"
+    },
+    {
+      "path": "tests/test_budget_policy_totals.py",
+      "bytes": 3373,
+      "sha256": "e651de739e6c46b820824df116c7782d2ff77dbc83d6296b2dc8eb46adc673d7"
+    },
+    {
+      "path": "tests/unit/test_budget_dimension_diagnostics.py",
+      "bytes": 3276,
+      "sha256": "ae7f12af95a9390ef99f0d334c0adbb011d3c01d4e549bb34dec8a6955ff91ad"
+    },
+    {
+      "path": "tests/unit/du11_production/test_document_work_policy.py",
+      "bytes": 5647,
+      "sha256": "f0974c8749358bc15d2d18a76ca6009c6444f7db30d17e85f7eec4f98f8f1fa4"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+      "bytes": 11035,
+      "sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "bytes": 11327,
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35"
+    }
+  ],
+  "tests": {
+    "bounded": {
+      "cases": 335,
+      "passed": 335,
+      "failed": 0,
+      "errors": 0,
+      "failed_ids": [],
+      "by_classname": {
+        "tests.unit.test_resource_budget_policy": 63,
+        "tests.test_budget_policy_totals": 2,
+        "tests.unit.test_budget_dimension_diagnostics": 3,
+        "tests.unit.du11_production.test_document_work_policy": 2,
+        "tests.unit.document_understanding_selection.test_reading_decision_inventory": 29,
+        "tests.unit.document_understanding_decision_dependencies.test_a_completeness_honesty": 16,
+        "tests.unit.document_understanding_decision_dependencies.test_a_mutation_matrix": 39,
+        "tests.unit.document_understanding_decision_dependencies.test_b_engineering": 64,
+        "tests.unit.document_understanding_decision_dependencies.test_c_catalog_replay": 19,
+        "tests.unit.document_understanding_root.test_structure_shared_work_budget": 19,
+        "tests.unit.du11_production.test_shared_work_budget": 2,
+        "tests.unit.document_understanding_selection.test_reading_operating_measure_variants": 77
+      }
+    },
+    "guidance": {
+      "cases": 20,
+      "passed": 13,
+      "failed": 7,
+      "errors": 0,
+      "failed_ids": [
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels[en-subscription]",
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-equipment]",
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[trad-logistics]",
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[en-subscription]",
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-materials]",
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise",
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope::test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten[en-subscription]"
+      ],
+      "by_classname": {
+        "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope": 20
+      }
+    }
+  },
+  "preservation": {
+    "count": 370,
+    "bytes": 5969379,
+    "all_unchanged": true
+  },
+  "committed": false,
+  "pushed": false,
+  "external_model_network_download_calls": 0,
+  "remaining": [
+    "Independent ROOT review of merged source before commit",
+    "Measure implementation independent review remains pending",
+    "Guidance7failures remain OPEN and unmodified",
+    "Crosspage, real annual14 acceptance and summary/cache/RF business flow remain OPEN"
+  ],
+  "diff_check": {
+    "source_config_tests_tools_exit": 0,
+    "all_staged_exit": 2,
+    "all_staged_findings": [
+      "incoming historical review/w08-red-design-20261022.json:468 extra EOF blank",
+      "incoming historical review/w08-red-design-20261022.md:216 extra EOF blank"
+    ],
+    "action": "Preserve historical bound receipts; ROOT decides documentation normalization if its normal commit path requires it. No source whitespace error."
+  }
+}

@@ -1,0 +1,61 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\budget-baseline-join-20261023\\guidance-temp", "requested_basetemp_len": 153, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-225446-bbcf7aaf", "effective_basetemp_len": 99}
+..F.FFFFF....F......                                                     [100%]
+================================== FAILURES ===================================
+_ test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels[en-subscription] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:117: in test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels
+    assert spans, "Do not drop future segment guidance as a financial historical-number row."
+E   AssertionError: Do not drop future segment guidance as a financial historical-number row.
+E   assert []
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-equipment] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x0000023ED349E4D0>)
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[trad-logistics] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x0000023ED349F880>)
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[en-subscription] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:94: in _assert_premise_closed
+    assert support, "A source-authored future revenue outlook is useful narrative, not a historical total."
+E   AssertionError: A source-authored future revenue outlook is useful narrative, not a historical total.
+E   assert []
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-materials] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x0000023ED351D6C0>)
+_ test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:139: in test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise
+    _assert_premise_closed(_select(parsed), parsed.units[2], parsed.units[1])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:796ce7ecc4ee856e02950444ece6ac81a47f8e10047178629f53...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x0000023ED351E980>)
+_ test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten[en-subscription] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:155: in test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten
+    assert spans and all(body in span.raw_text for span in spans)
+E   assert ([])
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels[en-subscription]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-equipment]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[trad-logistics]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[en-subscription]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-materials]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten[en-subscription]
+7 failed, 13 passed in 2.01s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-225446-bbcf7aaf", "existed": true, "removed": true}

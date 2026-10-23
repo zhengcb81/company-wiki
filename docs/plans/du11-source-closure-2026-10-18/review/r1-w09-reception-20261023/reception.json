@@ -1,0 +1,299 @@
+{
+  "schema_version": "root-w09-reception-summary/1",
+  "observed_utc": "2026-10-23T22:29:34.121826+00:00",
+  "decision": "DELIVERY_PRESENT_READY_FOR_ROOT_CONTENT_REVIEW",
+  "quality_scope": "Read-only reception screening; not formal company/forecast or W08/W12 acceptance",
+  "actual_head": {
+    "exit_code": 0,
+    "stdout": "eb7c2deec3650889a10220fdfe8fccb168b28c72",
+    "stderr": ""
+  },
+  "working_tree_status": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "cached_remote_tip": {
+    "exit_code": 0,
+    "stdout": "eb7c2deec3650889a10220fdfe8fccb168b28c72",
+    "stderr": ""
+  },
+  "remote_refresh_performed": false,
+  "handoff_tip_difference_paths": {
+    "exit_code": 0,
+    "stdout": "delivery/w09/handoff.json",
+    "stderr": ""
+  },
+  "verified": {
+    "artifacts": 28,
+    "all_artifacts_match": true,
+    "requirement_pointers": 12,
+    "all_requirement_pointers_resolve": true,
+    "claim_union": {
+      "rows": 49,
+      "unique": 49,
+      "price_negative_controls": 18,
+      "price_roles_unchanged": true
+    },
+    "native_calls": 6,
+    "all_capture_bytes_and_inputs_match": true,
+    "source_manifest_files": 15,
+    "all_source_files_and_manifest_hash_match": true,
+    "readonly_inputs_checked": 23,
+    "readonly_inputs_match": true,
+    "rpo_and_snapshot_checks": [
+      {
+        "variant": "main",
+        "rpo_kind": "management_guidance",
+        "rpo_value": 42207.0646,
+        "forecast_input_sha": "93ba13a5207a8e141dd96aca1a417ab926a280d20dfcc2866135d8d012d692f5",
+        "snapshot_input_sha": "93ba13a5207a8e141dd96aca1a417ab926a280d20dfcc2866135d8d012d692f5",
+        "same_engine_input_sha": true
+      },
+      {
+        "variant": "stress",
+        "rpo_kind": "management_guidance",
+        "rpo_value": 42207.0646,
+        "forecast_input_sha": "4c82c3c1baf516c1a7155e41a366fb1e3415c3ab7feccdce14549556c5e80bd7",
+        "snapshot_input_sha": "4c82c3c1baf516c1a7155e41a366fb1e3415c3ab7feccdce14549556c5e80bd7",
+        "same_engine_input_sha": true
+      }
+    ],
+    "no_out_of_scope_committed_paths": true,
+    "cleanup_actual": {
+      "tmp_exists": true,
+      "tmp_entries": 0,
+      "scratch_exists": false
+    },
+    "delivery_footprint": {
+      "files": 246,
+      "bytes": 24093197,
+      "pdf_sqlite_files": []
+    }
+  },
+  "findings": [
+    {
+      "id": "W09-S01",
+      "severity": "MINOR",
+      "kind": "handoff version pointer",
+      "evidence": "handoff.final_head is bc38fffc; actual/cached remote branch tip is eb7c2dee. Both exist with the same82194551 parent; diff is handoff.json only. PWF Next Step still says commit/handoff/push remain, although committed delivery exists.",
+      "root_action": "Record actual received tip and immutable implementation4fdaa86b/source-treeSHA in ROOT acceptance; correct current handoff/PWF wording when integrating. No product rerun or extra user permission needed.",
+      "does_not_establish": "No evidence of source/data change after code review from this tip discrepancy."
+    },
+    {
+      "id": "W09-S02",
+      "severity": "MINOR",
+      "kind": "final review source binding",
+      "evidence": "Final independent review supplies exact full SHA for9 current artifacts, but verify_excerpts.py and memo are descriptive read-in-full entries; reviewed_code_sha is absent. First review records three method Git blob prefixes, rather than full SHA256. The consumed manifest has15 exact matching current engine/method SHA and treeSHA; it omits package authoring helpers. Three small tail fixes occurred after the final review.",
+      "root_action": "Bind the already-reviewed final15-file manifest and exact final helper/memo bytes in ROOT acceptance, with one focused check of the loop move/memo edits and relevant offline integration. Retain both old FAIL and PASS_WITH_MINOR reports. Do not pretend the historical final-review receipt independently tested later helper bytes.",
+      "does_not_establish": "No current excerpt/forecast corruption found: all28 declared artifacts,6 captures and15 current manifest files match."
+    },
+    {
+      "id": "W09-S03",
+      "severity": "MINOR",
+      "kind": "regression evidence completeness",
+      "evidence": "handoff.tests declares49 pytest passes plus8 subtests but log_path and log_sha256 are null. Native6-call capture and independent probe outputs are present and match.",
+      "root_action": "Use a real ROOT isolated relevant-test run at integration and attach its log/cleanup; do not repeat paid RF/summary calls solely to fill this offline receipt.",
+      "does_not_establish": "Missing log does not prove tests were skipped, nor invalidate the actual native captures."
+    },
+    {
+      "id": "W09-S04",
+      "severity": "INFO",
+      "kind": "footprint reporting",
+      "evidence": "Current delivery is 24093197 bytes/246 files, versus handoff24045766 bytes. Below32MiB. A measured peak is not evidenced by the declaration peak==current while a removed scratch area existed.",
+      "root_action": "Record current measured bytes and peak-not-measured on ROOT import. No large data cleanup required."
+    }
+  ],
+  "withdrawn_initial_suspicions": [
+    "Sandbox git status initially said must be run in a work tree. Same no-optional-locks command under require_escalated succeeds with clean output. This is a known tool boundary, not a repository/bare defect; no configuration was changed.",
+    "Cleanup names24 superseded request-build directories. It does not identify lost failed native captures; six final requests/captures remain byte-consistent and historical review probe outputs remain. No evidence supports upgrading it to a lost-failure finding."
+  ],
+  "root_remaining_content_acceptance": [
+    "Import into a new central attempt without modifying sealed final3.",
+    "Adopt accepted W08 new summary/source refs in a NEW output version; this package explicitly has not consumed W08, and its historical bundle was contextual only.",
+    "Integrate W11 document/source results and W10 actual native matrix, then W12 four independent reviews.",
+    "Independently assess largest-driver component economics and the8 explicit unresolved external-data limits; computational/structural success is not buy-side forecast accuracy."
+  ],
+  "budget_boundary": "The dispatched old2M text is immutable history, superseded by current10M tokens/USD20 policy. This package made0 new paid/network/download calls and is not blocked by the old cap.",
+  "protected_inputs": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+      "expected_sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+      "actual_sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\phase_b_manifest.json",
+      "expected_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+      "actual_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022\\task_plan.md",
+      "expected_sha256": "3f070242cc0a20a2fbcfd20c358ac289f69b9fc1aeed22a80495eb15297f0058",
+      "actual_sha256": "3f070242cc0a20a2fbcfd20c358ac289f69b9fc1aeed22a80495eb15297f0058",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022\\work_packages\\W09.md",
+      "expected_sha256": "377fb5421453cf11d167db8b9f382468f782d421ed4e85f868d907082c450127",
+      "actual_sha256": "377fb5421453cf11d167db8b9f382468f782d421ed4e85f868d907082c450127",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\forecast\\final3-input.json",
+      "expected_sha256": "e54ba7df7a5914772222e88e56661d0822e251e257814b9dc7c976c454660257",
+      "actual_sha256": "e54ba7df7a5914772222e88e56661d0822e251e257814b9dc7c976c454660257",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\forecast\\final3-forecast.json",
+      "expected_sha256": "41ea79efa319226ac93e65d5210bb304b4d458cfac95ef5998fdf06eaf12279d",
+      "actual_sha256": "41ea79efa319226ac93e65d5210bb304b4d458cfac95ef5998fdf06eaf12279d",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\source_refs_index.json",
+      "expected_sha256": "e8fdf01712dd3a5f774305cdca13bbf3cdc73bbc722dbbbaa9ce1d5b404c5111",
+      "actual_sha256": "e8fdf01712dd3a5f774305cdca13bbf3cdc73bbc722dbbbaa9ce1d5b404c5111",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\verified-source-pages.json",
+      "expected_sha256": "66dced5bfbe7c5b6f206e62252a8f9dfca86d03b4e17293cb053b2a076537e7a",
+      "actual_sha256": "66dced5bfbe7c5b6f206e62252a8f9dfca86d03b4e17293cb053b2a076537e7a",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\source-page-addendum-20261023.json",
+      "expected_sha256": "993cc92c0c914430e5f93edfca6b3bbc421624da146490435c4dda3f0e478a98",
+      "actual_sha256": "993cc92c0c914430e5f93edfca6b3bbc421624da146490435c4dda3f0e478a98",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\handoff.md",
+      "expected_sha256": "f209b4845e119e9a7b14b02c6cb522dc8424b00f2d7fe84e58fff32dbece24d9",
+      "actual_sha256": "f209b4845e119e9a7b14b02c6cb522dc8424b00f2d7fe84e58fff32dbece24d9",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\handoff.json",
+      "expected_sha256": "b1820987692ac6ceb3c715bf3f670938af593a1e568d9c8c29e5d00eec54082c",
+      "actual_sha256": "b1820987692ac6ceb3c715bf3f670938af593a1e568d9c8c29e5d00eec54082c",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\calculation-request.json",
+      "expected_sha256": "1edb0a67691e95ea5277a37a4366170a71214a73fa51f0d319989131d5370f2a",
+      "actual_sha256": "1edb0a67691e95ea5277a37a4366170a71214a73fa51f0d319989131d5370f2a",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\claim-binding-request.json",
+      "expected_sha256": "5672fc76cd6a18b613cab971e079abc8c0a8c8a36829c6105451e9b340fbec7f",
+      "actual_sha256": "5672fc76cd6a18b613cab971e079abc8c0a8c8a36829c6105451e9b340fbec7f",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\claim-scope-bindings.json",
+      "expected_sha256": "7e7dd04ecf6b9c20194790af268f87d4f9ac3644e5e60bbd8bf45408eb43cf88",
+      "actual_sha256": "7e7dd04ecf6b9c20194790af268f87d4f9ac3644e5e60bbd8bf45408eb43cf88",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\claim-scope-bindings.md",
+      "expected_sha256": "72c1764a32e0e085ed4ec11479fd776e2579fbc4ae38a5e190e0dab28c8ab260",
+      "actual_sha256": "72c1764a32e0e085ed4ec11479fd776e2579fbc4ae38a5e190e0dab28c8ab260",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\component-bridge.json",
+      "expected_sha256": "95eccc0622b12ec5e292ae6817ab2154a7f98da44ab287255f2d9df09cb40bc7",
+      "actual_sha256": "95eccc0622b12ec5e292ae6817ab2154a7f98da44ab287255f2d9df09cb40bc7",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\component-bridge.md",
+      "expected_sha256": "631730a903466d9179507fb97aa4f94dae77640f632d654fc66d41e41dcfe12d",
+      "actual_sha256": "631730a903466d9179507fb97aa4f94dae77640f632d654fc66d41e41dcfe12d",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\receipt.json",
+      "expected_sha256": "d52c091b122ea8ffc36738a0500a19a5308a46f56bf5340a8e7cbe7f1a240271",
+      "actual_sha256": "d52c091b122ea8ffc36738a0500a19a5308a46f56bf5340a8e7cbe7f1a240271",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\rpo-role-advice.json",
+      "expected_sha256": "70d04b6f58be2c0075ab90ddf596905392603897c3dc4653b1287c6c347e605d",
+      "actual_sha256": "70d04b6f58be2c0075ab90ddf596905392603897c3dc4653b1287c6c347e605d",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\r1-final3-review-20261022\\root_causes.json",
+      "expected_sha256": "45e088482d956ce18d6fd64548aed69711299c11fb35fc35df795a8efca72bab",
+      "actual_sha256": "45e088482d956ce18d6fd64548aed69711299c11fb35fc35df795a8efca72bab",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\storage-source-inventory\\B\\public-bundle.json",
+      "expected_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "actual_sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\prepare_w09.py",
+      "expected_sha256": "9639f6fe2d1aa7da347cb89ca702c476b4c24c6e62117a016474ca2655cddfe0",
+      "actual_sha256": "9639f6fe2d1aa7da347cb89ca702c476b4c24c6e62117a016474ca2655cddfe0",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\selfcheck_w09.py",
+      "expected_sha256": "4c3030c0def137b4ad8603fe3fc7c720922f06c20159d7f49f53ef28d69dc5df",
+      "actual_sha256": "4c3030c0def137b4ad8603fe3fc7c720922f06c20159d7f49f53ef28d69dc5df",
+      "match": true
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\buy-side-methodology.md",
+      "sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "bytes": 15830
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\evidence-role-calibration.md",
+      "sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "bytes": 17292
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\input-construction.md",
+      "sha256": "67e0245df2270e1829c1d600d7ae1a0b6ccfd71583ee05e5c2df1a39996dd3aa",
+      "bytes": 18664
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\tools\\verify_excerpts.py",
+      "sha256": "37353d8d37b12782dd0562108bada00bd74d6ed7589d19dff131552141a8575c",
+      "bytes": 11298
+    }
+  ],
+  "audit_files_frozen_and_untouched": true,
+  "io_receipt": {
+    "author_worktree_writes": 0,
+    "author_scripts_or_tests_executed": 0,
+    "network_model_original_document_reads": 0,
+    "git_index_config_mutations": 0,
+    "temporary_dirs_created": 0,
+    "writes_only_under": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023"
+  },
+  "diagnostic_failures": [
+    "Initial read requested INPUTS.md; the canonical is INPUTS.json and was read afterward.",
+    "Initial own deep-reader used id instead of actual parameter_id; corrected after schema inspection. Own inspect.py filename also shadowed the Python stdlib inspect module, so renamed reception_inspector.py. No author script was executed and no author file was written."
+  ],
+  "report_inputs": {
+    "observation.json": "cf42f2fe80c8f8f69d8fb7e85d1ce2e4b094d464597cc69bb29fe623e358618d",
+    "deep-observation.json": "794f656ba874492fe4bd5ff7c6d6851482e27380b9cbe01e65495ca4be9d1d46",
+    "handoff.json": "d6517e32bbd2855ec9ce680757b4dbabc3eae3d52d52afe57d4f9efa531f2b0a",
+    "final-independent-review.json": "701db227d8bec1e8a4da319654a210730a437f9a0f21211d497794f96341e6b9"
+  }
+}

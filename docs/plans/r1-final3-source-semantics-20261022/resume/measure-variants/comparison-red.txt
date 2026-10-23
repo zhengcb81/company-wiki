@@ -1,0 +1,61 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\comparison-red-temp", "requested_basetemp_len": 146, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221315-067bb3eb", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 93 items
+
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py . [  1%]
+.....................................FF................................. [ 78%]
+                                                                         [ 78%]
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py . [ 79%]
+......FF..                                                               [ 90%]
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py . [ 91%]
+...F....                                                                 [100%]
+
+================================== FAILURES ===================================
+_ test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[cn-missing-comparator] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:177: in test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure
+    assert not ACTUAL_MEASURE_REASONS.intersection(fact.reasons)
+E   AssertionError: assert not {'operating_metric_change'}
+E    +  where {'operating_metric_change'} = <built-in method intersection of set object at 0x000002835F68AC00>(('operating_metric_change',))
+E    +    where <built-in method intersection of set object at 0x000002835F68AC00> = {'business_revenue_measure', 'operating_causal_driver', 'operating_metric_change', 'operating_quantity', 'product_operating_driver'}.intersection
+E    +    and   ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+_ test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[en-missing-comparator] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:177: in test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure
+    assert not ACTUAL_MEASURE_REASONS.intersection(fact.reasons)
+E   AssertionError: assert not {'operating_metric_change'}
+E    +  where {'operating_metric_change'} = <built-in method intersection of set object at 0x000002835F68AC00>(('operating_metric_change',))
+E    +    where <built-in method intersection of set object at 0x000002835F68AC00> = {'business_revenue_measure', 'operating_causal_driver', 'operating_metric_change', 'operating_quantity', 'product_operating_driver'}.intersection
+E    +    and   ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+_ test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[Our service revenue grew 15% driven by happy customers and a great product philosophy.] _
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py:177: in test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance
+    assert not _select(_document(text)).evidence_spans
+E   AssertionError: assert not (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:5da91cda2bda0a060b81b63e9c1e63563...1892f967e7c1bdf97a8ae7fc584ef191559255d41196dc9fe814', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),)
+E    +  where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:5da91cda2bda0a060b81b63e9c1e63563...1892f967e7c1bdf97a8ae7fc584ef191559255d41196dc9fe814', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '950c4521e4f6eeb9fd0d9d0294c9bfdfb528a78a11fb09fcd09d519f61dbef10'}).evidence_spans
+E    +    where NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '950c4521e4f6eeb9fd0d9d0294c9bfdfb528a78a11fb09fcd09d519f61dbef10'}) = _select(DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()))
+E    +      where DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()) = _document('Our service revenue grew 15% driven by happy customers and a great product philosophy.')
+_ test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[\u516c\u53f8\u8f6f\u4ef6\u6536\u5165\u589e\u957f20%\uff0c\u4e3b\u8981\u7531\u4e8e\u5ba2\u6237\u6ee1\u610f\u548c\u521b\u65b0\u7406\u5ff5\u3002] _
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py:177: in test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance
+    assert not _select(_document(text)).evidence_spans
+E   AssertionError: assert not (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:48d315ea43c26d409ec6d392d0b389a12...f4270885e9e747dc698c1b95d03b5065a10910a540dc78065b01', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),)
+E    +  where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:48d315ea43c26d409ec6d392d0b389a12...f4270885e9e747dc698c1b95d03b5065a10910a540dc78065b01', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '7776be70be54f3301f88980bddeb7dd33ed4a20ead7b6a6e74e0dd2b10771bbb'}).evidence_spans
+E    +    where NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '7776be70be54f3301f88980bddeb7dd33ed4a20ead7b6a6e74e0dd2b10771bbb'}) = _select(DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()))
+E    +      where DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()) = _document('公司软件收入增长20%，主要由于客户满意和创新理念。')
+_ test_financial_totals_are_not_business_composition[\u516c\u53f8\u667a\u80fd\u670d\u52a1\u5206\u90e8\u6536\u5165\u589e\u957f20%\uff0c\u5206\u90e8\u5229\u6da6\u4e3a3\u4ebf\u5143\u3002] _
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py:81: in test_financial_totals_are_not_business_composition
+    assert "business_reporting_scope" not in fact.reasons and not fact.financial_exempt
+E   AssertionError: assert ('business_reporting_scope' not in ('operating_metric_change',) and not True)
+E    +  where ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+E    +  and   True = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').financial_exempt
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\measure-variants\comparison-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[cn-missing-comparator]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[en-missing-comparator]
+FAILED tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py::test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[Our service revenue grew 15% driven by happy customers and a great product philosophy.]
+FAILED tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py::test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[\u516c\u53f8\u8f6f\u4ef6\u6536\u5165\u589e\u957f20%\uff0c\u4e3b\u8981\u7531\u4e8e\u5ba2\u6237\u6ee1\u610f\u548c\u521b\u65b0\u7406\u5ff5\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_named_segment_scope.py::test_financial_totals_are_not_business_composition[\u516c\u53f8\u667a\u80fd\u670d\u52a1\u5206\u90e8\u6536\u5165\u589e\u957f20%\uff0c\u5206\u90e8\u5229\u6da6\u4e3a3\u4ebf\u5143\u3002]
+======================== 5 failed, 88 passed in 5.89s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221315-067bb3eb", "existed": true, "removed": true}

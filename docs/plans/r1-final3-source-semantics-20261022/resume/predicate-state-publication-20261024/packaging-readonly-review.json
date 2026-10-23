@@ -1,0 +1,46 @@
+{
+  "schema_version": "w08-publication-scope-review/1",
+  "reviewer": "/root/w08_budget_baseline_join/publication_scope_readonly",
+  "independent_from_packager": true,
+  "scope": "Read only package completeness, not a new behavior acceptance",
+  "findings": [],
+  "verified": [
+    "original88staged retained",
+    "all15 reviewed source/test SHA match",
+    "five formal tests have no missing untracked import helper",
+    "root PWF paths sparse excluded, not deleted",
+    "eight diagnostic script evidence mappings correct"
+  ],
+  "advice_resolved": [
+    "portable independent final12files copied byte for byte",
+    "five initial failure reference files copied byte for byte",
+    "historical states superseded only by new publication README; no old receipt rewritten"
+  ],
+  "copied_initial_failure_files": [
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/initial-review.md",
+      "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\initial-review.md",
+      "sha256": "cf28a25c5895bc0df5031be049ab3e72f94c7bcff3db3991c33a7c7a44996d47"
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/initial-review.json",
+      "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\initial-review.json",
+      "sha256": "ce7477f0010f23997ad21d44c7912ee81337bb601ce9b7f2fc636223df12614c"
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/independent-red.txt",
+      "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\independent-red.txt",
+      "sha256": "3691d10d71d3e491bfc4aaf08548c45829a5c7d1b7b6b13ad708b5bdff7fb771"
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/independent-red.xml",
+      "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\independent-red.xml",
+      "sha256": "eb211c2203dd0c76327d5112c03063e219fefd5af541aa899ab67a7ac1e4c220"
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/semantic-probes-red.json",
+      "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\semantic-probes-red.json",
+      "sha256": "6825b08eb767c62002405543568336d987c7c7f1e5882c22cf4352f5c7445750"
+    }
+  ]
+}

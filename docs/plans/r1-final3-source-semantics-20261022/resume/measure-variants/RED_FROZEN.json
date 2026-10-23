@@ -1,0 +1,75 @@
+{
+  "status": "RED_PRODUCT_ASSERTIONS_FROZEN",
+  "baseline": "1712ed10",
+  "schema_observed": {
+    "public_detector": "OperatingFact eligible/topics/reasons/score/financial_exempt/purpose",
+    "existing_measure_kinds_internal": [
+      "quantity",
+      "direction",
+      "revenue"
+    ],
+    "measurement_structural_note": "No ObservedMeasure schema/class found in current src. Local tuple offsets are classifier-view positions, not source refs. Existing source EvidenceSpan/source_id/coordinates and exact raw numeric-unit slice are asserted."
+  },
+  "tests": 58,
+  "fail": 24,
+  "pass": 34,
+  "errors": 0,
+  "failures": [
+    "test_observed_physical_volume_is_quantity_not_amount[cn-reactor-kl]",
+    "test_observed_physical_volume_is_quantity_not_amount[trad-reactor-kl]",
+    "test_observed_physical_volume_is_quantity_not_amount[cn-storage-l]",
+    "test_observed_physical_volume_is_quantity_not_amount[trad-equipment-l]",
+    "test_observed_physical_volume_is_quantity_not_amount[cn-treatment-m3]",
+    "test_observed_physical_volume_is_quantity_not_amount[en-volume-to]",
+    "test_public_volume_support_preserves_exact_quantity_and_unit[cn-reactor-kl]",
+    "test_public_volume_support_preserves_exact_quantity_and_unit[trad-reactor-kl]",
+    "test_public_volume_support_preserves_exact_quantity_and_unit[cn-storage-l]",
+    "test_public_volume_support_preserves_exact_quantity_and_unit[trad-equipment-l]",
+    "test_public_volume_support_preserves_exact_quantity_and_unit[cn-treatment-m3]",
+    "test_public_volume_support_preserves_exact_quantity_and_unit[en-volume-to]",
+    "test_named_business_growth_rate_is_change_not_revenue_level_or_share[cn-support-up]",
+    "test_named_business_growth_rate_is_change_not_revenue_level_or_share[trad-repair-down]",
+    "test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-maintenance-up]",
+    "test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-cloud-down]",
+    "test_named_business_growth_rate_is_change_not_revenue_level_or_share[en-owned-from]",
+    "test_named_business_growth_rate_is_change_not_revenue_level_or_share[trad-currency-basis]",
+    "test_public_named_business_growth_support_keeps_original_percent_and_scope[cn-support-up]",
+    "test_public_named_business_growth_support_keeps_original_percent_and_scope[trad-repair-down]",
+    "test_public_named_business_growth_support_keeps_original_percent_and_scope[en-maintenance-up]",
+    "test_public_named_business_growth_support_keeps_original_percent_and_scope[en-cloud-down]",
+    "test_public_named_business_growth_support_keeps_original_percent_and_scope[en-owned-from]",
+    "test_public_named_business_growth_support_keeps_original_percent_and_scope[trad-currency-basis]"
+  ],
+  "before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+    "src/company_wiki/source_catalog/narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "a1f873d52b683dbd98237f68825c3c49049aae7848166bf1ad130b2358c7d249"
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+    "src/company_wiki/source_catalog/narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "a1f873d52b683dbd98237f68825c3c49049aae7848166bf1ad130b2358c7d249"
+  },
+  "all_bindings_stable": true,
+  "cleanup": [
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220135-a8791639",
+      "existed": true,
+      "removed": true,
+      "verified_absent_after": true
+    }
+  ],
+  "requested_temp_absent": true,
+  "production_edits": 0,
+  "originals_network_model": 0,
+  "implementation_authority_change": "After freezing this RED, ROOT exclusively delegates policy shared quantity/direction/revenue owner and necessary grammar to this lane. Guidance is excluded and ROOT remains its later owner."
+}

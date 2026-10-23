@@ -1,0 +1,35 @@
+{
+  "suite": "bounded",
+  "exit_code": 0,
+  "elapsed_seconds": 16.23371749999933,
+  "arguments": [
+    "tests/unit/test_resource_budget_policy.py",
+    "tests/test_budget_policy_totals.py",
+    "tests/unit/test_budget_dimension_diagnostics.py",
+    "tests/unit/du11_production/test_document_work_policy.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_decision_dependencies",
+    "tests/unit/document_understanding_root/test_structure_shared_work_budget.py",
+    "tests/unit/du11_production/test_shared_work_budget.py",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py"
+  ],
+  "imports": {
+    "budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py",
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+  },
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-225420-b2c46875",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-225420-b2c46875",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\budget-baseline-join-20261023\\bounded-temp",
+      "absent": true
+    }
+  ],
+  "no_external_calls": true
+}

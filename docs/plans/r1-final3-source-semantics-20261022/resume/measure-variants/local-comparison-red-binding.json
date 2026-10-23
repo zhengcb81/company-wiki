@@ -1,0 +1,10 @@
+{
+  "policy_sha256": "949c95aa71971c36693bc4470374aa9f240733a258b1ab9d3b3303da3a5e4d6a",
+  "test_sha256": "7e8432e82e05f3c96bd5eef5fdc130d956555f96ac30f353d5c5ac4a878f407e",
+  "red": "5 FAIL / 72 PASS; local-comparison-red.txt/xml",
+  "causes": [
+    "comparative basis borrowed from another financial predicate",
+    "valid bare preceding comparison frame not inherited",
+    "new current-then-future English control omitted the explicit comparator required by this feature; source fixture corrected to include year over year, while original 58 RED cases/expectations remain unchanged"
+  ]
+}

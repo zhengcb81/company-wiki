@@ -13,6 +13,8 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 from .n6_candidate_operating_facts import OperatingFact
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
 from .narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
+from .narrative_revenue_guidance import revenue_guidance
+from .narrative_predicate_state import observe_metric_predicate, predicate_scope
 
 from .narrative_business_meaning import (
     _CLAUSES,
@@ -36,7 +38,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/13"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/16"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -106,7 +108,7 @@ _OPERATING_MEASURE = re.compile(
     r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
     r"capacity utilization|product mix|\b(?:projects?|orders?|capacity|output|total volume)\b|"
     r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
-    r"产能利用率|产品组合|项目|項目|产能|產能|产量|產量|容积|容積", re.I)
+    r"产能利用率|产品组合|项目|項目|产能|產能|产量|產量|容积|容積|体积|體積", re.I)
 _REVENUE_VALUE = re.compile(
     r"(?:营业收入|營業收入|收入|\b(?:revenues?|net sales)\b(?:\s+(?:share|proportion))?)\s*"
     r"(?:(?:(?:has|have|had)\s+)?(?:(?:further|now|already|currently)\s+)*"
@@ -266,13 +268,18 @@ _SOURCE_PRE_QUANTITY = re.compile(
 _SOURCE_QUANTITY = re.compile(
     r"^\s*(?P<label>(?:(?:total\s+)?(?:counts?|numbers?|quantit(?:y|ies))\b|"
     r"(?:总|總)?(?:数量|數量|数|數|总量|總量))?)\s*"
-    r"(?P<relation>(?:(?:of|was|were|is|are|reached|at|to|stood\s+at|stands\s+at|numbered|totals?|totaled|totalled|totaling|totalling)\s+|"
-    r"(?:为|為|达到|達到|达|達|增至|约为|約為|超过|超過)))?\s*"
-    r"(?:(?:about|over|nearly|approximately)\s+)?(?P<value>\d[\d,]*(?:\.\d+)?)", re.I)
+    r"(?P<relation>(?:(?:(?:has|have|had)\s+)?(?:of|was|were|is|are|reached|at|to|stood\s+at|stands\s+at|"
+    r"numbered|totals?|totaled|totalled|totaling|totalling)\s+|"
+    r"(?:(?:has|have|had)\s+)?(?:increased|decreased|expanded|grew|grown|rose|fallen|fell)\s+to\s+|"
+    r"(?:(?:已|已经|已經|进一步|進一步|继续|繼續|持续|持續)\s*)*"
+    r"(?:提升至|提高至|增加至|上升至|减少至|減少至|下降至|降至|为|為|达到|達到|达|達|增至|约为|約為|超过|超過)))?\s*"
+    r"(?:(?:about|over|nearly|approximately|more\s+than)\s+|约|約|逾|超(?:过|過)?)?"
+    r"(?P<value>\d[\d,]*(?:\.\d+)?)", re.I)
 _QUANTITY_SCALE = r"(?:(?:万|萬|亿|億|thousand|million|billion)\s*)?"
 _SOURCE_QUANTITY_UNIT = re.compile(
     r"^\s*" + _QUANTITY_SCALE +
-    r"(?:个|個|家|项|項|名|人|台|套|件|条|條|吨|噸|升|米|kL\b|mL\b|L\b|"
+    r"(?:个|個|家|项|項|名|人|台|套|件|条|條|吨|噸|立方米|立方公尺|公升|升|米|"
+    r"m[³3](?=$|[\s,，。.;；])|cubic\s+met(?:er|re)s?\b|kL\b|mL\b|L\b|"
     r"units?\b|customers?\b|projects?\b|subscribers?\b|lit(?:er|re)s?\b|tonnes?\b)", re.I)
 _SOURCE_NON_QUANTITY = re.compile(
     r"^\s*" + _QUANTITY_SCALE +
@@ -308,7 +315,7 @@ _MEASURE_NOMINAL_END = re.compile(
     r"(?=$|[,，:]|\b(?:during|at|in|from|for|on|across|within|throughout)\b|带动|帶動)", re.I)
 
 
-def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+def _source_metric_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
     """Observe metric spans with a bound quantity or change predicate.
 
     Both count and causal consumers use these exact relations. A rejected
@@ -320,8 +327,13 @@ def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
     relations: list[tuple[str, int, int]] = []
     for metric in _OPERATING_MEASURE.finditer(clause):
         before, after = clause[:metric.start()], clause[metric.end():]
-        if not _observed_measure_scope(clause, metric.start(), metric.end()):
+        state = observe_metric_predicate(clause, metric.start(), metric.end())
+        if not state.observed and not state.forward_outlook:
             continue
+        # The same source-bound quantity relation can be an actual observation
+        # or an explicit target. Preserve target recall without letting count,
+        # causal or actual-metric consumers turn it into an achieved result.
+        projection = "" if state.observed else "planned_"
         if _MEASURE_FINANCIAL_SUBJECT.match(after):
             continue
         quantity = _SOURCE_QUANTITY.match(after)
@@ -335,10 +347,10 @@ def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
                 # an identifier/date/other value, even beside directional text.
                 continue
         if after_quantity or _SOURCE_PRE_QUANTITY.search(before):
-            relations.append(("quantity", metric.start(), metric.end()))
+            relations.append((projection + "quantity", metric.start(), metric.end()))
         if (_MEASURE_DIRECTION_AFTER.match(after) or (
                 _MEASURE_DIRECTION_BEFORE.search(before) and _MEASURE_NOMINAL_END.match(after))):
-            relations.append(("direction", metric.start(), metric.end()))
+            relations.append((projection + "direction", metric.start(), metric.end()))
     # Component sales changes are source relations too. Causal consumers do
     # not get a separate noun/direction fallback when this owner rejects them.
     for change in _SALES_COMPONENT_CHANGE.finditer(clause):
@@ -350,6 +362,12 @@ def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
             relations.append(("direction", change.start(), change.end()))
     relations.extend(_revenue_measure_relations(clause))
     return tuple(relations)
+
+
+def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+    """Compatibility observed-only view of the same source metric relations."""
+    return tuple(relation for relation in _source_metric_relations(clause)
+                 if not relation[0].startswith("planned_"))
 
 
 def _source_quantity_relation(clause: str) -> bool:
@@ -371,36 +389,13 @@ _BUSINESS_CONTINUATION_PREDICATE = re.compile(
     r"(?:发力|發力|贡献增长|貢獻增長|增长|增長|发展|發展|扩张|擴張)|"
     r"\s*(?:(?:continued|continues?)\s+to\s+)?"
     r"(?:grow|expand|contribute\s+to\s+growth|gained\s+traction)", re.I)
-_MEASURE_UNREALIZED = re.compile(
-    r"假设|假設|假如|如果|若|预计|預計|预期|預期|计划|計劃|拟|擬|目标|目標|"
-    r"可能|假定|是否|尚未|未能|没有|沒有|并未|並未|不曾|不明|"
-    r"明年|下一(?:年|季度|月)|\b(?:next|upcoming)\s+(?:year|quarter|month)\b|"
-    r"\b(?:if|unless|expected|forecast\w*|plans?|planned|aims?|targets?|"
-    r"may|might|could|would|will(?=\s+(?:have|be|reach|increase|grow|serve|include|number|total))|"
-    r"expects?(?=\s+(?:to|that))|expecting(?=\s+to)|not|never|unknown|whether|assum\w*|uncertain|unclear|"
-    r"don't|doesn't|didn't|can't|cannot|isn't|aren't|wasn't|weren't)\b", re.I)
-
-
-_MEASURE_SCOPE_SEPARATOR = re.compile(r"(?<!\d)[,，]|[,，](?!\d)")
-_MEASURE_CONDITION = re.compile(r"假设|假設|假定|假如|如果|若(?!干)|\b(?:if|unless|assuming)\b", re.I)
+def _source_measure_scope(clause: str, start: int, end: int) -> tuple[int, int]:
+    return predicate_scope(clause, start, end)
 
 
 def _observed_measure_scope(clause: str, start: int, end: int) -> bool:
-    """Qualify the metric's local state without erasing independent plans.
-
-    A preceding conditional governs its consequent comma parts. An unrelated
-    plan or restriction in a different comma part does not rewrite a current
-    observation. All measurement projections share this exact state gate.
-    """
-    left, right = 0, len(clause)
-    for separator in _MEASURE_SCOPE_SEPARATOR.finditer(clause):
-        if separator.end() <= start:
-            left = separator.end()
-        elif separator.start() >= end:
-            right = separator.start()
-            break
-    return not (_MEASURE_UNREALIZED.search(clause[left:right])
-                or (left and _MEASURE_CONDITION.search(clause[:left])))
+    """Actual quantities and forward outlooks share predicate/time ownership."""
+    return observe_metric_predicate(clause, start, end).observed
 
 
 _REVENUE_MEASURE_UNIT = re.compile(
@@ -410,12 +405,59 @@ _REVENUE_CURRENCY = re.compile(
     r"[$¥€£]|人民币|人民幣|港币|港幣|美元|\b(?:USD|RMB|CNY|HKD)\b", re.I)
 
 
-def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
-    """Bind an observed amount/share to its local business subject.
+_REVENUE_COMPARISON = re.compile(
+    r"同比|环比|環比|按年|按季|较上年|較上年|較去年|较去年|"
+    r"\b(?:yoy|qoq|mom|year[- ]over[- ]year|year[- ]on[- ]year|"
+    r"quarter[- ]over[- ]quarter|month[- ]over[- ]month)\b|"
+    r"\b(?:compared|relative)\s+(?:with|to)\s+(?:the\s+)?"
+    r"(?:prior|previous|preceding)\s+(?:year|quarter|month|period)\b", re.I)
 
-    Only one immediately preceding comma part can supply an omitted subject,
-    through a finite continuation predicate and a period/possessive prefix.
-    A new actor, unknown predicate, modal state or a sentence boundary cannot.
+
+_REVENUE_COMPARISON_SUFFIX = re.compile(
+    r"^\s*(?:[（(]\s*)?(?:" + _REVENUE_COMPARISON.pattern + ")", re.I)
+_REVENUE_RATE_CHANGE = re.compile(
+    r"(?:收入|\brevenues?\b)\s*"
+    r"(?:(?:from|of)\s+(?P<owner>[^,，。;!?]{1,90}?)\s+)?"
+    r"(?:(?:has|have|had)\s+)?"
+    r"(?:(?:按(?:固定|不变|不變)(?:汇率|匯率)|on\s+a\s+constant[- ]currency\s+basis)\s*)?"
+    r"(?:" + _MEASURE_CHANGE_MODIFIER + r"\s*)*"
+    r"(?:增长|增長|下降|减少|減少|增加|上升|increased|decreased|grew|declined|rose|fell)"
+    r"\s*(?:了|by\s+)?\s*\d[\d,]*(?:\.\d+)?\s*(?:[%％]|percent\b)", re.I)
+
+
+def _owned_revenue_subject(clause: str, start: int) -> bool:
+    """One local business-owner proof shared by revenue levels and changes."""
+    parts = re.split(r"[,，]", clause[max(0, start - 120):start])
+    local = parts[-1]
+    if any(_REVENUE_SUBJECT_GAP.fullmatch(local[owner.end():])
+           for owner in _PRODUCT_SUBJECT.finditer(local)):
+        return True
+    if len(parts) > 1 and _REVENUE_CONTINUATION_PREFIX.fullmatch(local):
+        previous = parts[-2]
+        return any(_BUSINESS_CONTINUATION_PREDICATE.fullmatch(previous[owner.end():])
+                   for owner in _PRODUCT_SUBJECT.finditer(previous))
+    return False
+
+
+def _revenue_change_has_comparison(clause: str, change: re.Match[str]) -> bool:
+    """Bind comparison to this change, not another metric in the same clause."""
+    if _REVENUE_COMPARISON.search(change.group()):
+        return True
+    following = clause[change.end():]
+    if _REVENUE_COMPARISON_SUFFIX.match(following):
+        return True
+    left, _right = _source_measure_scope(clause, change.start(), change.end())
+    # A bare source-authored frame may precede the issuer statement. A complete
+    # other predicate cannot donate its comparison basis across the comma.
+    return bool(left and _REVENUE_COMPARISON.fullmatch(clause[:left].rstrip(",， ")))
+
+
+def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+    """Bind observed revenue levels/shares or rate changes to a local business.
+
+    The same source-state gate and owner proof govern every projection. A
+    percentage change is direction, not an amount/share; its original wording
+    and basis remain in source evidence and are never numerically converted.
     """
     if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
         return ()
@@ -427,16 +469,25 @@ def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
         if not (_REVENUE_MEASURE_UNIT.match(clause[value.end():])
                 or _REVENUE_CURRENCY.search(value.group())):
             continue
-        parts = re.split(r"[,，]", clause[max(0, value.start() - 120):value.start()])
-        local = parts[-1]
-        owned = any(_REVENUE_SUBJECT_GAP.fullmatch(local[owner.end():])
-                    for owner in _PRODUCT_SUBJECT.finditer(local))
-        if not owned and len(parts) > 1 and _REVENUE_CONTINUATION_PREFIX.fullmatch(local):
-            previous = parts[-2]
-            owned = any(_BUSINESS_CONTINUATION_PREDICATE.fullmatch(previous[owner.end():])
-                        for owner in _PRODUCT_SUBJECT.finditer(previous))
-        if owned:
+        if _owned_revenue_subject(clause, value.start()):
             relations.append(("revenue", value.start(), value.end()))
+    for change in _REVENUE_RATE_CHANGE.finditer(clause):
+        if not _observed_measure_scope(clause, change.start(), change.end()):
+            continue
+        if not _revenue_change_has_comparison(clause, change):
+            # A percentage without its disclosed comparison basis is not a
+            # source-complete growth observation; never infer a prior period.
+            continue
+        explicit_owner = change.group("owner")
+        owned = _owned_revenue_subject(clause, change.start())
+        if explicit_owner:
+            financial_owner = re.sub(r"^(?:(?:the|our|their|its|a|an)\s+)+", "",
+                                     explicit_owner.strip(), flags=re.I)
+            owned = (not _FINANCIAL_COMPONENT.search(financial_owner)
+                     and any(_REVENUE_SUBJECT_GAP.fullmatch(explicit_owner[owner.end():])
+                             for owner in _PRODUCT_SUBJECT.finditer(explicit_owner)))
+        if owned:
+            relations.append(("direction", change.start(), change.end()))
     return tuple(relations)
 
 
@@ -575,13 +626,17 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             reasons.append("business_reporting_scope")
         if _business_coverage_relation(clause):
             reasons.append("business_coverage_relation")
-        measures = _source_measure_relations(clause)
+        if revenue_guidance(clause):
+            reasons.append("source_revenue_guidance")
+        measures = _source_metric_relations(clause)
         if any(kind == "quantity" for kind, _start, _end in measures):
             reasons.append("operating_quantity")
         if any(kind == "direction" for kind, _start, _end in measures):
             reasons.append("operating_metric_change")
         if any(kind == "revenue" for kind, _start, _end in measures):
             reasons.append("business_revenue_measure")
+        if any(kind in {"planned_quantity", "planned_direction"} for kind, _start, _end in measures):
+            reasons.append("operating_plan")
         growth = _REVENUE_GROWTH.search(clause)
         link = _DRIVER_LINK.search(clause)
         if growth and link:
@@ -661,6 +716,10 @@ def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
         return OperatingFact(False, (), (), 0, False, purpose)
     if purpose == "unknown" and {"operating_quantity", "operating_metric_change", "business_revenue_measure"} & set(fact.reasons):
         purpose = "operating_metric"
+    if "operating_plan" in fact.reasons and purpose == "unknown":
+        purpose = "operating"
+    if "source_revenue_guidance" in fact.reasons and purpose in {"unknown", "operating"}:
+        purpose = "operating_guidance"
     if purpose == "operating_contract_stock":
         return OperatingFact(True, tuple(dict.fromkeys((*fact.topics, "operating_metrics"))),
             tuple(dict.fromkeys((*fact.reasons, "operating_contract_stock"))),

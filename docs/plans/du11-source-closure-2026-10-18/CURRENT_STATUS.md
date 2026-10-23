@@ -1,24 +1,30 @@
 # 当前项目状态与接手入口
 
-**目标已更新并启动（2026-10-22）：** 原生目标回读为active，正文见[当前主线循环目标](MAINLINE_LOOP_GOAL.md)，[启动收据](review/mainline-goal-activation-20261022.json)。四审后的独立方案已交付并经ROOT实核14/14完整问题键、10根因、11份计划工件SHA，见[接收记录](review/r1-final3-plan-root-reception-20261022.json)。当前进入W08只读RED设计，W08–W12尚未完成实施/验收；接收计划不是业务PASS。累计费用与未完责任不重置。
+**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT修W08真实选材/context，W09研究及W11离线来源两包已交外部harness施工。新摘要/矩阵/W12由ROOT整合，原暂停快照仅保留历史。
 
-更新日期：2026-10-22。**这是本项目 PWF 当前状态、剩余任务和下一步的唯一入口。**
-
-总计划：`document-understanding-2026-10-13`；当前子计划：`du11-source-closure-2026-10-18`，均位于 `docs/plans/`。机器可读状态见 [CURRENT_STATUS.json](CURRENT_STATUS.json)。历史计划、交接、审查和运行收据保留发生时的结论；其中“当前”“Next Step”“待推送”不能覆盖本页。
+更新日期：2026-10-23。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
 ## 当前执行状态与唯一下一步
 
-**用户最新“继续”已恢复实施，取代此前收尾后暂停的指令。** W07真实0.9/v5摘要、paid replay、激活恢复/cache和公开RF读取均通过，已有[非作者65项有限复核](review/r1-w07-live-independent-20261022.md)，只签生命周期不签业务。共用一次POST，17329tokens/估算$0.006701。W06已实际绑定摘要support到used parameter/native formula，并完成原生compute/render/snapshot与共享压力；已封存final3和完整15步/30次capture；ROOT实核501文件89,049,507B全匹配，四路独审已全部封存FAIL，共14个finding出现（不能相加当不同根因）；包括业务漏选/上下文、业务摘录错配、矩阵旧状态及独立量级/资料限制。独立专家共因PWF已ROOT接收，W08只读RED设计已启动；尚未修改产品或原封存。资料新增9原件10,342,094B（含Bachem免费官方112259B），不把注册数当下载数。
+**2026-10-23预算制度升级正在集中验收：** 用户已明确授权累计10M tokens/USD20，公司150k/USD1仅软目标；唯一运行配置为`config/resource_budget.yaml`，旧账/metadata和全部unknown原样保留。实读母账仍1,561,352tokens/631,959microUSD，新剩余8,438,648tokens/USD19.368041。本地计算量可配置、费用/片段/字符/计算分维度诊断已实现；Audit的low误停正在改为提醒。尚未发布完成，实施与边界见[预算制度实施单](budget-regime-20261023.md)。W08业务语义、跨页与分批选材未因此验收通过，W09/W11独占工区不改。
 
-既有已完成接口：[W03-A责任层补正与TDD卡](r1-holdout-20261021/W03-current-interface.md)。该切面已完成；[W03-A组合验收](review/r1-w03-integration-20261022.md)记录最终SHA、独审、安装与31项组合；[W07控制器接口](r1-holdout-20261021/W07-controller-current-interface.md)负责离线可复用验收工具。
+本轮三个切面已经分清，不能把测试绿或原文重开当业务验收：
 
-唯一下一主线：**四路独审已齐、共因方案已接收。完成W08 RED设计后，按W08–W12先测试后实施共同根因修复、原公司受影响链复验，再药明合联→Snowflake泛化和后续清单循环。** 首次真实纯预检0POST、81880上界超过旧公司余量60974；ROOT只把自定公司累计token100k重分配150k，单请求deploy100k、公司$1、母级2M/$20不变，原冻结scope与unknown保留，见[重分配](r1-holdout-20261021/budget-reallocation-20261022.json)。新摘要415965B、96个证据span，公开RFcontext418917B；selection仍partial/qualityneeds_review，实际公式消费已证明；不把可读/算式正确当内容完整或经济质量通过。默认仍0.8，本次显式0.9运行通过不代表已经全局切换。
+| 切面 | 当前结果 | 发布/边界 |
+|---|---|---|
+| W08 来源选材、业务父级、缓存依赖 | 共用语义/用途与标题节点已通过；新增裸数质量/优先级计量独审44P，项目正文/原始限制闭包独审165P；全src369/0。真实249页96片段8156字符、821万/1600万工作，两个30%各自scope正确；整体14目标仍PARTIAL | 隔离提交`1712ed10`已正常推送：完整7558P/24既有skip（403.02s），另smoke146P（47.71s）；本地与origin一致、tracked干净。未并母线、未安装。[当前收据](review/r1-w08-resume-20261023/engineering-v4.json)保留全部原RED和验收范围 |
+| W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
+| W09 研究准备 / W11 来源发现 | 49摘录及经营桥准备已成；用户已将两卡交其他harness，当前仅人报施工中 | 两份独立工区/独占写集保持冻结；交接前必须独立agent全面审查并修复。见[派发状态](harness_lanes/20261023/dispatch.json)，未见交接不记完成 |
 
-本地读取诊断共因跟进已三层独审并线：[ROOT组合收据](review/r1-local-observation-integration-20261022.md)。RF `10bf6111`、FF `7f6a9268`均已正常push、定点安装及精确CI SUCCESS；CWP最终 `27be00fb`独审49P并入主线 `69a5490b`，与两份已安装消费端真实联调通过，随 `aa2dd822`正常push（7097P/24S267.37s、146契约P36.11s），精确CI39854576322 SUCCESS。另5项旧contract及发现过程丢历史的真缺陷均已根修，保留原断言；只复用现有owner资格、不提高读取配额、不加权限门禁。
+**当前唯一第一步：ROOT按NEXT步骤3先TDD修经营体积/具名业务同比与指引角色/前提闭包，再做可信跨页祖先和固定预算重要性选材；裸数质量与独立项目正文/局部限制链节点已独审44P/165P，全src369/0。真实249页仍整体PARTIAL。W09/W11外部施工写集不动；随后正式摘要、缓存与真实RF矩阵/W12。** 实施细节见[ROOT后续步骤](https://github.com/zhengcb81/company-wiki/blob/1712ed10/docs/plans/r1-final3-source-semantics-20261022/NEXT_IMPLEMENTATION.md)；工区路径见新收据。未增加人工许可/新门禁，默认仍0.8，原96/48000/16M不变。
 
-并行技能升级：按用户要求在原六步后增加**全面代码质量/模块化/泛化及买方收入研究能力改善→由本公司新问题升级后续检测**。独立建设PWF位于`revenue-forecast-audit/docs/plans/audit-continuous-quality-20261022/`，七场景独立试读、记录共因修复10个独立CLI反控及完整632测试（2skip）通过；安装工具有界修复另6项独立验证，使用默认Miniconda同步两目录39文件匹配。源码已提交623054c，发布收尾738d99a（该仓未配置远端）；Git原始收据字节与两个安装根39文件已独立核对，三个自有测试目录恢复原样。见[技能收尾收据](review/audit-skill-quality-closeout-20261022.json)。不改写本轮sealed材料。
+随后按已接收W08–W12计划完成W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
-初始药明康德 partial、四审73检查/26问题（15P1/11P2）、639工件原manifest仍封存。四包状态及未验证项在[实施进度](r1-holdout-20261021/implementation-progress.json)逐包列明。专家设计镜像“未施工”是冻结时刻，不是当前状态；见[目录说明](r1-holdout-20261021/README.md)。不重派已完成四包，不重开 B2/R5，不新增逐材料或小节点人工签收。
+W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。此前三仓读取诊断已发布并有精确CI绿：CWP`aa2dd822`/CI39854576322，RF`10bf6111`、FF`7f6a9268`。W08候选没有新生产CI验收，不借旧CI签候选。
+
+用户要求的审查技能八步升级已在上一节点完成；本轮W10进一步把单据归属、阶段误判及明确版本矛盾固化为回归，现有fetch/process卡已更新。没有新增身份库、任务库、人工许可、逐材料签收或收费权威。两份安装包树SHA`f2be453617ac03359ccfffe2ebe98e5ee895deb1a6dc7e9510d0462e3d1efb0a`，对应W10收尾，旧`f50bf...`是前版历史。
+
+本轮无新增付费/资料下载；累计仍**1,561,352 tokens/$0.631959**，最新10M/$20额度下余**8,438,648 tokens/$19.368041**，全部unknown保留。原件保留，RF原三份assurance WIP、来源配置/目录库SHA不变，Dayu/IQS未改。独占测试资料已按各收据恢复；W08残留两Temp和mypy临时缓存已精确清理。历史`.planning`未做全仓清理，不宣称本地已无所有临时物。见[保护边界复核](review/r1-pause-safety-check-20261022.json)。
 
 ## 已完成及验收边界
 
@@ -45,7 +51,7 @@
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W05工程和W07真实生命周期已完成；W06 final3四路复审全FAIL，专家共因PWF已接收，W08 RED设计启动；初始FAIL及639工件不回写 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
+| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08来源质量/项目正文最新有限独审44P和165P、真实14目标仍PARTIAL；W09/W11外部施工；W10组件通过但实际矩阵OPEN；W12未开始 | 先完成本页唯一下一步，再真实摘要、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
@@ -67,7 +73,7 @@
 
 当前模型表：MiMo `mimo-v2.6-flash`、DeepSeek `deepseek-flash`、MiniMax `MiniMax-M3.1-Flash`。10月18日 US 收据使用的是当时的 `MiniMax-M3`；这属于历史事实，不是当前运行配置。
 
-2026-10-22通过既有 `append_native` / `mother_totals` 重计：累计 **1,561,352 tokens / $0.631959**（配置价格估算及保守预留），剩余 **438,648 tokens / $19.368041**。W07新增17329tokens/6701microUSD，公司累计56355tokens/16421microUSD；旧7笔和新增4笔unknown全保留，不当零、不重复加算。见[最终原生观察](review/r1-w07-live-20261022/accounting-final-observation.json)。旧1544023/$0.625258为本次调用前基数，不再当当前总数；累计授权仍2M/$20。
+2026-10-22通过既有 `append_native` / `mother_totals` 重计：累计 **1,561,352 tokens / $0.631959**（配置价格估算及保守预留），新10M/$20额度下剩余 **8,438,648 tokens / $19.368041**。W07新增17329tokens/6701microUSD，公司累计56355tokens/16421microUSD；旧7笔和新增4笔unknown全保留，不当零、不重复加算。见[最终原生观察](review/r1-w07-live-20261022/accounting-final-observation.json)。旧1544023/$0.625258为本次调用前基数，不再当当前总数；旧累计授权2M/$20已由用户2026-10-23明确指令升级为10M/$20，旧账未重置。
 
 新运行的操作索引保存在replay attempt，初始索引曾被ROOT误追加，已按封存SHA精确恢复并实核639件全匹配，见[恢复记录](review/r1-w07-live-20261022/sealed-index-restoration.json)。有效scope用`coordinator-effective-scope-v2.json`，不能改写initial历史材料或把新账引用写回旧封存。
 

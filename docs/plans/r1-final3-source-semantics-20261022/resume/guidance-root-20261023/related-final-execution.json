@@ -1,0 +1,46 @@
+{
+  "suite": "related-final",
+  "exit_code": 0,
+  "elapsed_seconds": 18.588980400003493,
+  "arguments": [
+    "tests/unit/test_resource_budget_policy.py",
+    "tests/test_budget_policy_totals.py",
+    "tests/unit/test_budget_dimension_diagnostics.py",
+    "tests/unit/du11_production/test_document_work_policy.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_decision_dependencies",
+    "tests/unit/document_understanding_root/test_structure_shared_work_budget.py",
+    "tests/unit/du11_production/test_shared_work_budget.py",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+    "tests/unit/document_understanding_selection/test_reading_measure_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py",
+    "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py",
+    "tests/unit/document_understanding_selection/test_reading_local_qualification.py",
+    "tests/unit/document_understanding_selection/test_reading_project_body_admission.py",
+    "tests/unit/document_understanding_selection/test_reading_native_carriers.py",
+    "tests/unit/test_narrative_scoped_model_view.py",
+    "tests/unit/test_narrative_citation_attribution_contract.py",
+    "tests/unit/test_narrative_citation_unit_runtime_binding.py"
+  ],
+  "imports": {
+    "budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py",
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+  },
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230944-cd2a4df6",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230944-cd2a4df6",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\related-final-temp",
+      "absent": true
+    }
+  ],
+  "no_external_calls": true
+}

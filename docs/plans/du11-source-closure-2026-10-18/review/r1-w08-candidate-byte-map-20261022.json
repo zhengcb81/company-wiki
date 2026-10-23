@@ -1,0 +1,106 @@
+{
+  "schema_version": "w08-paused-candidate-byte-map/1",
+  "not_acceptance": true,
+  "rows": [
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "working_sha256": "e007af6d57606bf658c10c28a8a4e72bcf2c9401cdc37a7e790746f77cf9d920",
+      "staged_sha256": "79eae31eb11927e1e401c5469f87d66e012c1a36af6394cf3c10d72647038ae8",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 422,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/sections.py",
+      "working_sha256": "976e90865d690916a04d91840fcc941359e99ae5626abf67dd5fa38f51dbed96",
+      "staged_sha256": "62f79d8f34dc465b73e3dd53d8f5ec65272cf5833f7ebe3370c1ce8f56efaccf",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 571,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "working_sha256": "688e93acae88c6cf72e482ae2a1599ad0bc7689b093ca4a87fd5b420ebcfa92d",
+      "staged_sha256": "04516851c26169897f76648ce82eef44318034fdbc839b386222f15d8838a9a0",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 791,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "working_sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+      "staged_sha256": "99af765891cd86920def759fd1aec0b9b30a9cf1b9463934dfd4933c606418bf",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 1072,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "working_sha256": "593440a36eedfc78f1d62eef486f461c93519022468219a68352d464d7b69b41",
+      "staged_sha256": "c13257d0f72a432e26bf98ebb462898caed717caa60c626294f7ee0433757a26",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 125,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+      "working_sha256": "aace0c9eec7e0e260edc063c3d5d1c29bc83a52fa8dd251b72b3e4d15ee7bf68",
+      "staged_sha256": "35a8cb7ef4f77a3a9cc0ef46e11711e9261fbd47715c93d31cfbca6857cc015c",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 351,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_hk_mechanisms.py",
+      "working_sha256": "9d3ae5476b47cb12a7e8c81c77b4545278485f612be2f49b7852844ffe2d77c2",
+      "staged_sha256": "394b06c5d12e67147b678939f58bd0cc9596edcfa883f14d9c52df6534fa662c",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 262,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+      "working_sha256": "511b4240ecd303de285dbdc0e3416d8f0533628c257840c46400be652c01d05b",
+      "staged_sha256": "97bcf8a2f43dad90bf22749758e4098159809daae78118c0be375269974887b7",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 197,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "working_sha256": "48e5a30a8f8ffccaf56a853556f1c20024554a7c382757dfbb9508ca408391c6",
+      "staged_sha256": "f32c796faa760b49e6c71ba7d52062be579c36ce1a596f4fc60217d07206caea",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 817,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_semantic_value.py",
+      "working_sha256": "c603e13f64b84e5afed970e8ca565f3514f8c4aee9cf128da103424ffc31fa2c",
+      "staged_sha256": "bfc7445f84428cb3166f9bd1b1adbbed693b5f9248a84b12b50f1beea6e024fc",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 292,
+      "raw_lone_lf": 0
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_table_admission.py",
+      "working_sha256": "6613841374673a54a7dbb28ed4de17f5768e4798a7006c33256d1de9bb96ab3a",
+      "staged_sha256": "74af705095bd007af8dd4a3d4b26e1c03c98cbd53c283ac2d852289a92a83c2c",
+      "working_equals_staged": false,
+      "only_crlf_normalization": true,
+      "raw_crlf": 384,
+      "raw_lone_lf": 0
+    }
+  ],
+  "scope": "Raw tested source hashes versus Git canonical staged blobs. Text equality after CRLF normalization only; no independent acceptance or semantic changes."
+}

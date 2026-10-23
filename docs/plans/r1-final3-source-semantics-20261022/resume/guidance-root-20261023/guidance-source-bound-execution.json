@@ -1,0 +1,47 @@
+{
+  "source_before": {
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "44fb64818412f9b90541c3528f22c1102c49b98cad5d363dcb1b685714bca30e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+  },
+  "source_after": {
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "44fb64818412f9b90541c3528f22c1102c49b98cad5d363dcb1b685714bca30e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+  },
+  "source_stable": true,
+  "suite": "guidance-source-bound",
+  "exit_code": 0,
+  "elapsed_seconds": 1.7463585000077728,
+  "arguments": [
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py"
+  ],
+  "imports": {
+    "budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py",
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+  },
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-231207-2e9d203f",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-231207-2e9d203f",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-source-bound-temp",
+      "absent": true
+    }
+  ],
+  "no_external_calls": true
+}

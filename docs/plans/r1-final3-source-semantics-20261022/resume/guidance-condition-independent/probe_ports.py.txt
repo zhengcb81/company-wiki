@@ -1,0 +1,30 @@
+from pathlib import Path
+from dataclasses import replace
+from types import SimpleNamespace
+import sys,json
+root=Path(__file__).resolve().parents[5]
+sys.path.insert(0,str(root/'tests'))
+from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+from company_wiki.resource_budget import WorkBudget
+from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
+from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+
+CASES=[
+ ('cn-equipment','公司预计2027年设备服务业务收入为24至27亿元，同比增长12%至18%。','上述收入指引以新增客户按期完成验收为前提。'),
+ ('trad-logistics','公司預計2028年度物流服務收入介於65億至72億港元，同比增長9%至14%。','上述收入指引以兩名海外客戶的訂單按期完成驗收為前提。'),
+ ('en-subscription','We expect subscription revenue of USD 410 to 435 million in fiscal 2027, representing growth of 13% to 19%.','This revenue outlook assumes the overseas customers complete acceptance of their orders before year end.'),
+ ('cn-new-unit','公司预计2027年新材料业务收入达到18至21亿元。','上述收入指引以海外工厂按期取得经营许可为前提。'),
+]
+rows=[]
+for name,guidance,condition in CASES:
+ parsed,_=source_fixture([(x,) for x in ['三、未来经营展望',guidance,condition,'未来公司计划改善内部管理。']])
+ session=SourceOperatingSession({u.unit_id:u for u in parsed.units},work_budget=WorkBudget(100000))
+ selected=reading.select_reading_evidence(parsed,title='Annual report',existing_kind='annual_report')
+ byid={s.span_id:s for s in selected.evidence_spans}
+ target=[s for s in selected.evidence_spans if s.raw_text==guidance]
+ context=[{'kind':g['kind'],'section_role':g['section_role'],'support':[byid[i].raw_text for i in v['support_evidence_ids']],'context':[byid[i].raw_text for i in v['context_evidence_ids']]} for g in selected.reading_context['groups'] for v in g['citation_views'] if any(s.span_id in v['support_evidence_ids'] for s in target)]
+ model=compile_scoped_model_view(SimpleNamespace(evidence_spans=selected.evidence_spans,reading_context=selected.reading_context),max_claims=20)
+ rows.append({'label':name,'guidance':guidance,'condition':condition,'fact':repr(session.fact(parsed.units[1].unit_id)),'relations':session.relations(parsed.units[1].unit_id),'selected':[{'text':s.raw_text,'structured':dict(s.structured_value)} for s in selected.evidence_spans],'contexts':context,'model':model.to_model_dict(),'binding':model.to_binding()})
+Path(__file__).with_name('port-probes.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps([{k:r[k] for k in ['label','fact','relations','contexts']} for r in rows],ensure_ascii=False))

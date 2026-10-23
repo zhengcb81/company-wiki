@@ -1,0 +1,54 @@
+{
+  "schema_version": "w08-diagnostic-archive/1",
+  "policy": "Diagnostic execution scripts are evidence only, not product/test-discovery modules. Byte-identical .py.txt copies enter Git; original untracked .py companions retained so old receipts remain true.",
+  "scripts": [
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/frozen-initial-test.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/frozen-initial-test.py.txt",
+      "sha256": "a1f873d52b683dbd98237f68825c3c49049aae7848166bf1ad130b2358c7d249",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/pre-local-comparison-controls.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/pre-local-comparison-controls.py.txt",
+      "sha256": "7e8432e82e05f3c96bd5eef5fdc130d956555f96ac30f353d5c5ac4a878f407e",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/probe_ports.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/probe_ports.py.txt",
+      "sha256": "07af81363e0a0d71c91490c36fc38a513654816fe1c82225b4214e3acb84bddd",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/run_red.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/run_red.py.txt",
+      "sha256": "907b1837738b8ff9345a54aa6b65a6d582f6d96873bbcb5f6ab76ad2f06b7a07",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/write_report.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/write_report.py.txt",
+      "sha256": "84fbaba42eaca6c091516fb88ea4b07b4751ef3f2f4e72104d89595c3eded26c",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/run_bounded.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/run_bounded.py.txt",
+      "sha256": "1ae8f7a72b45dd0274bd09b3e9cf9a50115f1ed7638679d91b528319c72e8314",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/run_bounded.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/run_bounded.py.txt",
+      "sha256": "a1333b615b58a2c16a05d1c5af8efc233e9dbf629249915c86e927439af9c2be",
+      "original_retained_untracked": true
+    },
+    {
+      "local_original": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/run_bounded.py",
+      "git_evidence": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/run_bounded.py.txt",
+      "sha256": "267cf4ab3fb32a986a96feb21d3bfe1eff6ad6c50eccbfffbddf40177f8a59cf",
+      "original_retained_untracked": true
+    }
+  ]
+}

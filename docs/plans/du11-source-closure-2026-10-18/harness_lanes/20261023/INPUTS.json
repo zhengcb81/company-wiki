@@ -1,0 +1,230 @@
+{
+  "schema_version": "r1-parallel-readonly-inputs/1",
+  "created_at": "2026-10-23T19:04:30.816290+00:00",
+  "note": "Reproducibility inventory, not authorization or quality acceptance. No raw PDF copies. Existing summaries describe their actual historical producer, not current W08 adoption.",
+  "common": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\scope.json",
+      "sha256": "2178d7fe559f659ba1810250aed9d978130302c9c984dfa12235fbcb6b6a95df",
+      "bytes": 9335,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\phase_b_manifest.json",
+      "sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+      "bytes": 124325,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022\\task_plan.md",
+      "sha256": "3f070242cc0a20a2fbcfd20c358ac289f69b9fc1aeed22a80495eb15297f0058",
+      "bytes": 6051,
+      "access": "read_only"
+    }
+  ],
+  "W09-RF-RESEARCH": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022\\work_packages\\W09.md",
+      "sha256": "377fb5421453cf11d167db8b9f382468f782d421ed4e85f868d907082c450127",
+      "bytes": 8253,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\forecast\\final3-input.json",
+      "sha256": "e54ba7df7a5914772222e88e56661d0822e251e257814b9dc7c976c454660257",
+      "bytes": 652626,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\forecast\\final3-forecast.json",
+      "sha256": "41ea79efa319226ac93e65d5210bb304b4d458cfac95ef5998fdf06eaf12279d",
+      "bytes": 1429317,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\source_refs_index.json",
+      "sha256": "e8fdf01712dd3a5f774305cdca13bbf3cdc73bbc722dbbbaa9ce1d5b404c5111",
+      "bytes": 28214,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\verified-source-pages.json",
+      "sha256": "66dced5bfbe7c5b6f206e62252a8f9dfca86d03b4e17293cb053b2a076537e7a",
+      "bytes": 30371,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\source-page-addendum-20261023.json",
+      "sha256": "993cc92c0c914430e5f93edfca6b3bbc421624da146490435c4dda3f0e478a98",
+      "bytes": 4340,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\handoff.md",
+      "sha256": "f209b4845e119e9a7b14b02c6cb522dc8424b00f2d7fe84e58fff32dbece24d9",
+      "bytes": 3310,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\handoff.json",
+      "sha256": "b1820987692ac6ceb3c715bf3f670938af593a1e568d9c8c29e5d00eec54082c",
+      "bytes": 6279,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\calculation-request.json",
+      "sha256": "1edb0a67691e95ea5277a37a4366170a71214a73fa51f0d319989131d5370f2a",
+      "bytes": 21968,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\claim-binding-request.json",
+      "sha256": "5672fc76cd6a18b613cab971e079abc8c0a8c8a36829c6105451e9b340fbec7f",
+      "bytes": 13742,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\claim-scope-bindings.json",
+      "sha256": "7e7dd04ecf6b9c20194790af268f87d4f9ac3644e5e60bbd8bf45408eb43cf88",
+      "bytes": 163339,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\claim-scope-bindings.md",
+      "sha256": "72c1764a32e0e085ed4ec11479fd776e2579fbc4ae38a5e190e0dab28c8ab260",
+      "bytes": 18243,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\component-bridge.json",
+      "sha256": "95eccc0622b12ec5e292ae6817ab2154a7f98da44ab287255f2d9df09cb40bc7",
+      "bytes": 43088,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\component-bridge.md",
+      "sha256": "631730a903466d9179507fb97aa4f94dae77640f632d654fc66d41e41dcfe12d",
+      "bytes": 10641,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\receipt.json",
+      "sha256": "d52c091b122ea8ffc36738a0500a19a5308a46f56bf5340a8e7cbe7f1a240271",
+      "bytes": 3117,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\w09-preparation\\rpo-role-advice.json",
+      "sha256": "70d04b6f58be2c0075ab90ddf596905392603897c3dc4653b1287c6c347e605d",
+      "bytes": 2316,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\r1-final3-review-20261022\\root_causes.json",
+      "sha256": "45e088482d956ce18d6fd64548aed69711299c11fb35fc35df795a8efca72bab",
+      "bytes": 38852,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\storage-source-inventory\\B\\public-bundle.json",
+      "sha256": "d4aaddb10fedc7204cb8e278bb998380c59eff44ce8c7a4dac0be85453bf62e4",
+      "bytes": 415965,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\prepare_w09.py",
+      "sha256": "9639f6fe2d1aa7da347cb89ca702c476b4c24c6e62117a016474ca2655cddfe0",
+      "bytes": 14395,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\executor\\r1-remediation-02\\w09-bridge\\selfcheck_w09.py",
+      "sha256": "4c3030c0def137b4ad8603fe3fc7c720922f06c20159d7f49f53ef28d69dc5df",
+      "bytes": 3664,
+      "access": "read_only"
+    }
+  ],
+  "W11-CWP-SOURCES": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022\\work_packages\\W11.md",
+      "sha256": "6a18ccf053525daff75f68cc07d586953b04d59e94d927a56f8fcd383ffa2ba3",
+      "bytes": 5795,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\fetch.json",
+      "sha256": "f91a9b5c8b970876705ca0b778a5ab00f5b81b0e062d7f606589699053e01b6c",
+      "bytes": 54215,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\storage.json",
+      "sha256": "50374edc361621f2d1aeb49dd1b1b325cc2d5f7eafd06c81d930bfd631064c9b",
+      "bytes": 39225,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\research\\phase_a_manifest.json",
+      "sha256": "ebd109d48659149102e4c018b20470ead6e9331948a6250a02260bd0dcc78e98",
+      "bytes": 185967,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\document_matrix.json",
+      "sha256": "3f608dcd49ed31ee2d0b25d6eafbb99627c58137a9dc8c0c0862867363cde6f5",
+      "bytes": 20480,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\stdout.txt",
+      "sha256": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52",
+      "bytes": 2839,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\fetch.md",
+      "sha256": "1649aa7e13a674cf9ea209b7c4a511503894f3a528b2886d1573f152c1b50215",
+      "bytes": 18661,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\input-0001-9c235138bbbf.json",
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+      "bytes": 250,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\consume-0001-9c235138bbbf.json",
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+      "bytes": 250,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\events.jsonl",
+      "sha256": "6ad7640bb36adcc7dd9f12f78b9708ebb6fdb45ca056d8f1f0b699c960071142",
+      "bytes": 278268,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\research\\web_discovery.json",
+      "sha256": "d4276ba93bf68b017c7ddbbbdd728498b0123a01d0e2479f886893a921c35b0a",
+      "bytes": 1507,
+      "access": "read_only"
+    }
+  ],
+  "unknown_or_absent": [
+    {
+      "artifact": "486789-byte official IR response body",
+      "status": "NOT_LOCATED_IN_BOUNDED_INITIAL_SEARCH",
+      "known_hash": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+      "must_not_reconstruct_or_claim_retained": true,
+      "searched_scope": "Original audit run and CWP .planning/shared-reading-production/r1-holdout-20261021 bounded inventory; not a whole-disk absence claim."
+    }
+  ],
+  "root_owned_current_runtime": {
+    "CWP_engine": "W08 in progress, no shared new summary released yet",
+    "audit_projection_code": "71c7762bb40ed68d3fda98078d259231c1e58935",
+    "audit_source_head": "ae13ef76dffec558f9ce7589a01ffdd05faf0f67",
+    "installed_audit_files": 39
+  }
+}

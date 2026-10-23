@@ -1,0 +1,51 @@
+{
+  "schema_version": "w10-engineering-publication-closeout/1",
+  "at": "2026-10-22T22:47:54.059918+00:00",
+  "status": "COMPONENT_ENGINEERING_PASS_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
+  "code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
+  "remote_configured": false,
+  "push_status": "NO_REMOTE_CONFIGURED",
+  "independent_final": "review/independent/delta2/review.json",
+  "independent_probes": 41,
+  "source_and_raw_receipt_git_byte_checks": 56,
+  "all_git_working_bytes_equal": true,
+  "full_unittest": {
+    "run": 658,
+    "passed": 656,
+    "skipped": 2,
+    "seconds": 79.153
+  },
+  "additional_pytest": {
+    "passed": 17,
+    "seconds": 2.92
+  },
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 39,
+      "all_bytes_equal": true
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 39,
+      "all_bytes_equal": true
+    }
+  ],
+  "package_files_sha256": {},
+  "package_tree_method": "sha256(canonical sorted JSON path-to-sha256 map)",
+  "package_tree_sha256": "f2be453617ac03359ccfffe2ebe98e5ee895deb1a6dc7e9510d0462e3d1efb0a",
+  "new_model_calls": 0,
+  "new_network_calls": 0,
+  "new_downloads": 0,
+  "business_pass": false,
+  "real_12_material_matrix_rebuilt": false,
+  "limitations": [
+    "New attempt matrix and actual RF four-review remain open",
+    "W08 selection/context engineering candidate not accepted by this component",
+    "Old FAIL reports and sealed company run unchanged"
+  ],
+  "owner_project": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+  "owner_plan": "docs/plans/audit-final3-projection-20261022",
+  "publication_commit": "ae13ef7",
+  "full_file_map_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-final3-projection-20261022\\review\\publication-closeout.json"
+}

@@ -1,0 +1,30 @@
+from pathlib import Path
+import contextlib, json, os, sys, hashlib, shutil, time
+root=Path.cwd().resolve(); out=root/"docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023"
+os.environ["PYTHON_DOTENV_DISABLED"]="1"; os.environ["COMPANY_WIKI_NETWORK"]="blocked"; os.environ["COMPANY_WIKI_REAL_LLM"]="0"
+sys.path.insert(0,str(root/"src")); sys.path.insert(0,str(root/"tests"))
+import company_wiki.resource_budget as budget
+import company_wiki.source_catalog.narrative_reading as reading
+assert Path(budget.__file__).resolve().is_relative_to(root/"src")
+assert Path(reading.__file__).resolve().is_relative_to(root/"src")
+import pytest
+args=["tests/unit/test_resource_budget_policy.py","tests/test_budget_policy_totals.py","tests/unit/test_budget_dimension_diagnostics.py","tests/unit/du11_production/test_document_work_policy.py","tests/unit/document_understanding_selection/test_reading_decision_inventory.py","tests/unit/document_understanding_decision_dependencies","tests/unit/document_understanding_root/test_structure_shared_work_budget.py","tests/unit/du11_production/test_shared_work_budget.py","tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py"]
+if sys.argv[1]=="guidance": args=["tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py"]
+name=sys.argv[1]; requested=out/(name+"-temp"); decision=out/(name+"-basetemp.jsonl")
+assert not requested.exists(); os.environ["CW_BASETEMP_DECISION_FILE"]=str(decision)
+start=time.monotonic()
+with (out/(name+".txt")).open("w",encoding="utf-8") as log,contextlib.redirect_stdout(log),contextlib.redirect_stderr(log):
+ code=int(pytest.main([*args,"-q","-o","addopts=","--tb=short","--basetemp",str(requested),"--junitxml",str(out/(name+".xml"))]))
+cleanup=[]
+for row in [json.loads(x) for x in decision.read_text(encoding="utf-8").splitlines()] if decision.exists() else []:
+ for key in ("effective_basetemp","dir"):
+  if row.get(key):
+   p=Path(row[key]).resolve(); assert p.is_relative_to(root/"cw-pytest-basetemp") or p.is_relative_to(Path(os.environ["TEMP"])/"cw-pytest-basetemp")
+   if p.exists(): shutil.rmtree(p)
+   cleanup.append({"path":str(p),"absent":not p.exists()})
+if requested.exists(): shutil.rmtree(requested)
+cleanup.append({"path":str(requested),"absent":not requested.exists()})
+receipt={"suite":name,"exit_code":code,"elapsed_seconds":time.monotonic()-start,"arguments":args,"imports":{"budget":budget.__file__,"reading":reading.__file__},"cleanup":cleanup,"no_external_calls":True}
+(out/(name+"-execution.json")).write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+print(json.dumps(receipt,ensure_ascii=True)); print((out/(name+".txt")).read_text(encoding="utf-8")[-2300:])
+sys.exit(code)

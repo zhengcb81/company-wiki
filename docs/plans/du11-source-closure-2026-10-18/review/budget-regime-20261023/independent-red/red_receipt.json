@@ -1,0 +1,46 @@
+{
+  "schema": "independent-budget-policy-red/1",
+  "at_utc": "2026-10-23T22:09:12.258421+00:00",
+  "command": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests\\unit\\test_resource_budget_policy.py",
+    "-q",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\budget-policy-test-red",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\independent-red\\red.xml"
+  ],
+  "exit_code": 1,
+  "totals": {
+    "tests": 63,
+    "failures": 56,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256_before": "17ef6e5a3ffa87d0527d03e86ec4b325273fb38f275b57600db2dcff406dab1e",
+  "source_sha256_after": "17ef6e5a3ffa87d0527d03e86ec4b325273fb38f275b57600db2dcff406dab1e",
+  "source_unchanged": true,
+  "test_sha256": "1f7856b22c3e928155d7591148f985f731b7de6cae94af9e6e07a6cde73d25f6",
+  "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\budget-policy-test-red",
+  "requested_absent": true,
+  "cleanup": [
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-pytest-basetemp\\20261023-220908-0fac36e7",
+      "existed": true,
+      "removed": true,
+      "path_absent_after_run": true
+    }
+  ],
+  "interpretation": "New loader/factory/structured work-exhaustion API is absent or incomplete on unchanged production source; these are expected product RED assertions, not fixture failures.",
+  "side_effects": {
+    "production_edits": 0,
+    "old_test_edits": 0,
+    "network_calls": 0,
+    "model_calls": 0,
+    "ledger_reads": 0,
+    "git_mutations": 0
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "independent-review-cleanup/1",
+  "observed_utc": "2026-10-23T22:31:46.515058+00:00",
+  "checks": [
+    {
+      "receipt": "probe-result-sandbox-attempt.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\owned-neutral-cli-pt250o7z",
+      "finally_absent": true
+    },
+    {
+      "receipt": "probe-result-v1-17.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\owned-neutral-cli-litn5ssx",
+      "finally_absent": true
+    },
+    {
+      "receipt": "probe-result.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\owned-neutral-cli-ey7tyhc6",
+      "finally_absent": true
+    },
+    {
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\red.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\red-temporary",
+      "finally_absent": true
+    },
+    {
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\related.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\related-temporary",
+      "finally_absent": true
+    },
+    {
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\full.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\full-temporary",
+      "finally_absent": true
+    },
+    {
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\validate.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\budget-regime-20261023\\validate-temporary",
+      "finally_absent": true
+    }
+  ],
+  "all_absent": true,
+  "only_owned_synthetic_temporary_directories": true,
+  "originals_removed": 0
+}

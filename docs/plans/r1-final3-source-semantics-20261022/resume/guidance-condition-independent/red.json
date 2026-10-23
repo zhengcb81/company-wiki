@@ -1,0 +1,126 @@
+{
+  "schema": "guidance-condition-independent-red/1",
+  "utc": "2026-10-23T22:02:49.026222+00:00",
+  "before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+      "bytes": 44296
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+      "bytes": 21580
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+      "bytes": 69468
+    },
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": {
+      "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007",
+      "bytes": 14203
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+      "bytes": 50229
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+      "bytes": 21667
+    },
+    "src/company_wiki/document_understanding/summary_tasks.py": {
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+      "bytes": 7561
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+      "bytes": 32830
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "bytes": 11327
+    }
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+      "bytes": 44296
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+      "bytes": 21580
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+      "bytes": 69468
+    },
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": {
+      "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007",
+      "bytes": 14203
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+      "bytes": 50229
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+      "bytes": 21667
+    },
+    "src/company_wiki/document_understanding/summary_tasks.py": {
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+      "bytes": 7561
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+      "bytes": 32830
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "bytes": 11327
+    }
+  },
+  "bytes_stable": true,
+  "counts": {
+    "tests": 20,
+    "failures": 7,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exit_code": 1,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-condition-independent\\red-temp",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-condition-independent\\red.xml"
+  ],
+  "cleanup": {
+    "event": "cleanup",
+    "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220246-55f28126",
+    "existed": true,
+    "removed": true,
+    "actual_absent_verified": true,
+    "requested_absent_verified": true
+  },
+  "external_actions": {
+    "original_reads": 0,
+    "format_parser_calls": 0,
+    "network": 0,
+    "paid_model": 0
+  }
+}

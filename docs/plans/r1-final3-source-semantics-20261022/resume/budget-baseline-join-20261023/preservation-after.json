@@ -1,0 +1,2597 @@
+{
+  "preserved_count": 370,
+  "preserved_bytes": 5969379,
+  "all_unchanged": true,
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "exists": true,
+      "bytes": 48973,
+      "sha256": "24eca71e12270f19f742cf09faae481e9969a32469d1c493098aca18c3edf8dc",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/cache.txt",
+      "exists": true,
+      "bytes": 1727,
+      "sha256": "0b3c95cd3de5d0e0ba993453ea63d983239721d8fec412f84becf43aab9311e7",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/commit.txt",
+      "exists": true,
+      "bytes": 12406,
+      "sha256": "d47d1ae5cfe378898c6491992d0f6e49bbcd02846cc4515e651f3f0760581f59",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/connected.txt",
+      "exists": true,
+      "bytes": 2091,
+      "sha256": "a6e17bef0bc774136f57d8aca3e6bf624a6fb902efb9dede932dd82f27a9189b",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/final.txt",
+      "exists": true,
+      "bytes": 14523,
+      "sha256": "36d4d30ec983cd63d13c7fe3a344c10789227310e4e98d37d01c897d63dc124f",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/final.xml",
+      "exists": true,
+      "bytes": 374032,
+      "sha256": "7f3f647c9b1f2cd3e9321db33989e7af8c365eefcc7cd601294ddb03d6d2a26f",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/initial.txt",
+      "exists": true,
+      "bytes": 10420,
+      "sha256": "5004073fc4639027be7b1135cb0fa0ce91d74e6637bda9222994422142bcfac9",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/mypy-e03.txt",
+      "exists": true,
+      "bytes": 46,
+      "sha256": "a82d6e6f1a4a8482df143d2d21671dd7187c4022cea07389afe3c2a5ba76dba7",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/mypy-final.txt",
+      "exists": true,
+      "bytes": 512,
+      "sha256": "c8ced6d150b77990ee78c1d0b8d7050375f2531a09b49f3acf876227748eba11",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/mypy-priority.txt",
+      "exists": true,
+      "bytes": 46,
+      "sha256": "a82d6e6f1a4a8482df143d2d21671dd7187c4022cea07389afe3c2a5ba76dba7",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/priority.txt",
+      "exists": true,
+      "bytes": 2225,
+      "sha256": "d85245c6e25cb07b48cb513cc30cf3c7f8eaac4f37fb9539448fa1997e59b522",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/priority.xml",
+      "exists": true,
+      "bytes": 13086,
+      "sha256": "3c2604d527c5031c94262fa7db8ebf20c19f160476ac6149839896a277eae74f",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/push.txt",
+      "exists": true,
+      "bytes": 3695,
+      "sha256": "dbdea695bdd52d25e1dfffb56a40f35f05bb3cb2a77bb50cf59b5c4c117b6bc5",
+      "unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/structural-controls.txt",
+      "exists": true,
+      "bytes": 1560,
+      "sha256": "258544450fd303a0d72af99a6942dbf528c3286c9aafd3118205c966e7f81e61",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-regime-audit/diagnosis.md",
+      "exists": true,
+      "bytes": 7701,
+      "sha256": "f23d63d8e24d3e15bf999a47c403c1e5a8f076fe4d331400b960f300df3d9891",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-regime-audit/observation.json",
+      "exists": true,
+      "bytes": 19750,
+      "sha256": "b76511e4124e54ba13c39f25c205a3d691a309569cd15c69e81235457ea5e9a1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-regime-audit/observe.py",
+      "exists": true,
+      "bytes": 6262,
+      "sha256": "59bda1cccce66875ca0bb19c8bfc6fda117769ce35510659709c96bb306b206f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/content-independent/annual14-intermediate-content-review-20261023.json",
+      "exists": true,
+      "bytes": 29710,
+      "sha256": "dcfb1c4ad4f8bf6ac6c4ea505a3becc74551c14deff6e89f0ff9bf791c3488fd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/content-independent/annual14-intermediate-content-review-20261023.md",
+      "exists": true,
+      "bytes": 5646,
+      "sha256": "83cc89a1329ec0349c49656bc85de4b13a93f23fcb93bae262f99cf2a4096e9e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/cache-green-1.stdout.txt",
+      "exists": true,
+      "bytes": 2057,
+      "sha256": "80f76e8f9e3d49c4f8a9b93a6f22607438a65e572973c50e9568438195ca918c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/cache-green-1.xml",
+      "exists": true,
+      "bytes": 11302,
+      "sha256": "ec9a27140fa5e914c526f25b5ab61e692b84da04cc7213e8e9e888fcf2b9aa17",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/green-parent.stdout.txt",
+      "exists": true,
+      "bytes": 1409,
+      "sha256": "fcab71adb5af08fc996328b9a4fca2feb343cf5f998876d74594b47658e4d414",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/green-parent.xml",
+      "exists": true,
+      "bytes": 23101,
+      "sha256": "cfde68a7016294e7f186f62c3b222db4c5f0dff3ecf38037032385acbeafc96c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/handoff.json",
+      "exists": true,
+      "bytes": 4730,
+      "sha256": "98aa2b98f5ec4905d544d147e25d1251df8f8cfabfeb45e6a692fbe8c7e27141",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/handoff.md",
+      "exists": true,
+      "bytes": 2448,
+      "sha256": "ce893c6df42555fb7b7e60a2b0008f89df7a06434d22539ff58d96b57341a117",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/red-unsplit.stdout.txt",
+      "exists": true,
+      "bytes": 2503,
+      "sha256": "1726cec2aa8ab9f30d6baf53f35be3e5e2c0f12bcc149fc8cb96bbbc607125c6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/red-unsplit.xml",
+      "exists": true,
+      "bytes": 1454,
+      "sha256": "a36eceb57398d2fcb9e643dc72d5df75acb7b2b1676e991b7403c31123048b70",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/design.json",
+      "exists": true,
+      "bytes": 5960,
+      "sha256": "74af7b41b98db96c01c5b718a29bd286860742cfc30cd8bc098369071c5fb998",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/design.md",
+      "exists": true,
+      "bytes": 12400,
+      "sha256": "d51c2dd722e5eccec7e9085f4042145abff98e3f721a6194f4f0e7ff0464467c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/probes.json",
+      "exists": true,
+      "bytes": 11933,
+      "sha256": "9d42077d50412b7ec4cdf3b0dc31e934a44571872a05ae26abe465d32948dd8d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/causal-red.stdout.txt",
+      "exists": true,
+      "bytes": 6407,
+      "sha256": "017c36e218bf905482801d32cd095dc630005c7a6b382921eb25a5b7dc188d67",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/causal-red.xml",
+      "exists": true,
+      "bytes": 6241,
+      "sha256": "3bb41328cd9ae91c59b3337e36c51af6a1e8994af91d75bcac3200dcd38bd329",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final-2.stdout.txt",
+      "exists": true,
+      "bytes": 2001,
+      "sha256": "b24ed0ae2e14172d1abd7a14bcfdbd16b6f3c19450dc12cd877e799b407cada9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final-2.xml",
+      "exists": true,
+      "bytes": 44090,
+      "sha256": "1ca613c8e475a91a0ad2cd94d0eb545f830ca4c013e57837e96f675bce0dc278",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final.stdout.txt",
+      "exists": true,
+      "bytes": 1997,
+      "sha256": "5c1dafdd7550998ccba8d57f3ff803cac2325f75a6e00b1f4ca91bdf7253a449",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final.xml",
+      "exists": true,
+      "bytes": 42537,
+      "sha256": "1906ff1628741fa98ad9085d0b3505a1756142b72a296a168542e2c20db3f633",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/green.stdout.txt",
+      "exists": true,
+      "bytes": 3006,
+      "sha256": "432a9f869f71a2c19d2152502759e3dbad664e0f3511ddc2fef10b15df96b4ce",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/green.xml",
+      "exists": true,
+      "bytes": 17584,
+      "sha256": "cc37b2b88db08e1f7ae309c15c9ee61666f07007ff1f9675f2e3bc1b2749d38a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/handoff.json",
+      "exists": true,
+      "bytes": 7733,
+      "sha256": "47eb4be664983bd1ae5a31b5ed4cbc2f24ef6e56d405bddc9bc81b168bf8d098",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/handoff.md",
+      "exists": true,
+      "bytes": 2177,
+      "sha256": "0c2b3ce758702fb73b3853f9cbcabaf2a8edcb3f6b157eb6d398ff509cb89a94",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/mypy.stdout.txt",
+      "exists": true,
+      "bytes": 44,
+      "sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/red.stdout.txt",
+      "exists": true,
+      "bytes": 16730,
+      "sha256": "3b60f6513509dc59f0f656a8eebe6e82a0eb5ad288f6c470867779d90d3555be",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/red.xml",
+      "exists": true,
+      "bytes": 19918,
+      "sha256": "b75e7cf63123560f3b8a02fb9151c06c5816fbda7615eea0fb4f3c7b8c9e94ac",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-green.stdout.txt",
+      "exists": true,
+      "bytes": 2096,
+      "sha256": "ff32fb8ce8db0d4c8be0acd438609c1aeb6687b1093d10854753d22f0b00b1fd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-green.xml",
+      "exists": true,
+      "bytes": 51018,
+      "sha256": "bb32809d8916c43c2143ad650724c82676b01da7534051d25b6d35b4fb16221f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-handoff.json",
+      "exists": true,
+      "bytes": 5015,
+      "sha256": "205e0f1b964ce11e394da766c7093ba4341b7f1134675ce331f3d8084502a9ec",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-handoff.md",
+      "exists": true,
+      "bytes": 1526,
+      "sha256": "580be3d06eff4a622f1fbf232e3c23751e0a6549adc476ff5c505c7773f8f2c2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-mypy.stdout.txt",
+      "exists": true,
+      "bytes": 44,
+      "sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-red.stdout.txt",
+      "exists": true,
+      "bytes": 17163,
+      "sha256": "3ee09c3a8b331cb8b78497c12f5a50c8c45a3287e57343c81e5c4b06273e7380",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-red.xml",
+      "exists": true,
+      "bytes": 23833,
+      "sha256": "d5260bcece4b6d8dbb749d96223d62968d746f2c053367266ca0ce0a0f111db3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-ruff.stdout.txt",
+      "exists": true,
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/ruff.stdout.txt",
+      "exists": true,
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/semantic-green.stdout.txt",
+      "exists": true,
+      "bytes": 1679,
+      "sha256": "0f3fcbacd6bc7a0f380445e789a9082458d9d153ea8fd7aa10bb6bda642f2350",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/semantic-green.xml",
+      "exists": true,
+      "bytes": 17706,
+      "sha256": "4c5653b8a0348c14f16767d6f0a27f52686058c923f7d1958a7f9c4c8f8c6361",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/subject-red.stdout.txt",
+      "exists": true,
+      "bytes": 4664,
+      "sha256": "8abfc31610f683ca9a4215e92829fa60b1b0ab68bb433c347689bf02c435a595",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/subject-red.xml",
+      "exists": true,
+      "bytes": 4242,
+      "sha256": "603898105c2d7905c58f2a5f75af1438771d5f65dadabe2e56a14b03825e556c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/diagnosis.json",
+      "exists": true,
+      "bytes": 8325,
+      "sha256": "e9f2be0628606783c0c3b01abccdf872e52ccbb45b3a71638839ca557325f4a9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/diagnosis.md",
+      "exists": true,
+      "bytes": 3117,
+      "sha256": "ebe524d82de0b6607f3e272f9e149fc48e89f58f4a01963347f6c0fab7f6cba0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/port-probes.json",
+      "exists": true,
+      "bytes": 42146,
+      "sha256": "2059cf777002faf81a272e035ee910a3483f927114e10af2fa3488a1819e2750",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/probe_ports.py",
+      "exists": true,
+      "bytes": 2923,
+      "sha256": "07af81363e0a0d71c91490c36fc38a513654816fe1c82225b4214e3acb84bddd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.json",
+      "exists": true,
+      "bytes": 5167,
+      "sha256": "e43d8a1a3f6c77df9f2ebb33313f526d0c31b6402a573a82b793caae107a2eb2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.txt",
+      "exists": true,
+      "bytes": 8853,
+      "sha256": "336ddc726b1553b46757e251917048012477fe2632765ac6aee33d623e4fd0d8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.xml",
+      "exists": true,
+      "bytes": 12357,
+      "sha256": "299c78a6b84e2d470362017e721f8d27356a0884f00af2aaa0499d78704e25b1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/run_red.py",
+      "exists": true,
+      "bytes": 2670,
+      "sha256": "907b1837738b8ff9345a54aa6b65a6d582f6d96873bbcb5f6ab76ad2f06b7a07",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/write_report.py",
+      "exists": true,
+      "bytes": 9215,
+      "sha256": "84fbaba42eaca6c091516fb88ea4b07b4751ef3f2f4e72104d89595c3eded26c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-reverse-red.jsonl",
+      "exists": true,
+      "bytes": 762,
+      "sha256": "bb51e134a4e18cf92cad6950e3685de6821d7503da238648cdf297cc7c51a331",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-v1.jsonl",
+      "exists": true,
+      "bytes": 2287,
+      "sha256": "09a952df68c655c14fa5b7e65989fd5548ccab32aa44bc996afe99c4e31efbcf",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-v2.jsonl",
+      "exists": true,
+      "bytes": 2287,
+      "sha256": "c4b1968339eee1640f70fab187e3f82509145c2ecd314ab37a8c6bfa86ce3ec0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-v3.jsonl",
+      "exists": true,
+      "bytes": 2287,
+      "sha256": "9390b280c8d8512eba3ba9fb5a85cab6e3363a48543c7af8acf02a1eb842afa0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/cleanup-final.json",
+      "exists": true,
+      "bytes": 6494,
+      "sha256": "ff62853cb29f4628bc6613d66565d7658bc574ba60e7c572eb4f160b4c81854f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/cleanup-v1.json",
+      "exists": true,
+      "bytes": 2075,
+      "sha256": "065165b6a7309515c08e1b8227180ff4975b3489d1bb112e5ed988bf041c63a2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v1.txt",
+      "exists": true,
+      "bytes": 4068,
+      "sha256": "a259a49a72c8973dc1f88c0c4881bf0da204ac3d40c8d75094e0e9d754dfe6ef",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v1.xml",
+      "exists": true,
+      "bytes": 12714,
+      "sha256": "243f91e6be9cff4264c6cb23707cb2cbbc70d9cb035b606e7663d2be1e74c6c3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v2.txt",
+      "exists": true,
+      "bytes": 3143,
+      "sha256": "2533ce97ee2fc06c6fcf66995f0b74bec331f8f897c7ec960abea9cd099d2b6c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v2.xml",
+      "exists": true,
+      "bytes": 12107,
+      "sha256": "6d5482a2456039a36ba98605661afd2a92e026203aaef19ec1bf5440e5eeccad",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v3.txt",
+      "exists": true,
+      "bytes": 3259,
+      "sha256": "c10b83fcec62a413cae9ee6834ba6bdc38ba9d3a6d09045abed01f10a3cb0d12",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v3.xml",
+      "exists": true,
+      "bytes": 13013,
+      "sha256": "1bfea86b72ab8a1507f0233f28482ab8cfbe4ab067f181f8ec4f7a2bbe06e672",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/execution-v1.json",
+      "exists": true,
+      "bytes": 9986,
+      "sha256": "07415aee10c1a9cab884090194735a8f03a3ad2cfbfc1c4ee37a63c640f105a8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/execution-v2.json",
+      "exists": true,
+      "bytes": 9987,
+      "sha256": "eedc63aa3e02d78b932fe7916f71fb3da3879e601a41e95827b3b4ea14019655",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/execution-v3.json",
+      "exists": true,
+      "bytes": 10481,
+      "sha256": "e9055ecf879fed9bec929cbc9ee1dc4b855608fc6c1ce79decaeb8d6010de1dc",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v1.txt",
+      "exists": true,
+      "bytes": 7505,
+      "sha256": "c185704a29876c75687d17c27f24b5be37ace65f971c9105c3bbe30fa383199b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v1.xml",
+      "exists": true,
+      "bytes": 9180,
+      "sha256": "48bf9ac5e634776c19d0e32a6010cd47cdd08704174771daa470108202e94da9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v2.txt",
+      "exists": true,
+      "bytes": 1678,
+      "sha256": "772238d32d70daac6a0e720491511c486e4e329484c67b2504cdbc69bbd02242",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v2.xml",
+      "exists": true,
+      "bytes": 1388,
+      "sha256": "949b1566ea7dcc0526188708aca6012d6f2386c8670ada5f0216502fed4bb356",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v3.txt",
+      "exists": true,
+      "bytes": 1678,
+      "sha256": "1ff35addb20ec405c0bee4b3316f0dd202b845855bacebd9f5676b1a29073be3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v3.xml",
+      "exists": true,
+      "bytes": 1388,
+      "sha256": "99cad6b6793694bdfd4c935410e47980989ff715b2f942bb88d2e2276fd19b95",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/real-context-v1.json",
+      "exists": true,
+      "bytes": 2282,
+      "sha256": "9b32d91ee9f9b1bc0c9b321b9d90bc3cfc053c3e8c8ca19177f731f5d459e8d5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/real-context-v3.json",
+      "exists": true,
+      "bytes": 7240,
+      "sha256": "b2597c4364a2909a3bd383bc0ad1427ee09dd1b6bf88c2ac0e5f1bfecd5bfac1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v1.txt",
+      "exists": true,
+      "bytes": 1930,
+      "sha256": "1decaa46ea838cf8dd0a25740e122e6b8217fb5ac9891a64f7cf861b87a8c311",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v1.xml",
+      "exists": true,
+      "bytes": 13902,
+      "sha256": "3cd55f672e7059ac4a971c303c33449b8688e1e37d225617ee19405c17c1f2a1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v2.txt",
+      "exists": true,
+      "bytes": 1950,
+      "sha256": "1e6011d68287f6216e75b2f16e9b409218bc5f3aa3b5e8de7cfbf7f6261c069d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v2.xml",
+      "exists": true,
+      "bytes": 18120,
+      "sha256": "02156284f860c7213ea0fa0a5ae1ccb70397e061adcd80e5bf7f39cd745174ec",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v3.txt",
+      "exists": true,
+      "bytes": 1954,
+      "sha256": "2cda8bf99dc290ed60005e1a39b1d7a2b9833cc136beedcc81c360a67a50a63b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v3.xml",
+      "exists": true,
+      "bytes": 18828,
+      "sha256": "d7f1697b16d67466b79223df693eb3d3653ab4c7edf44366a8b743c391b12ed0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/reverse-red.txt",
+      "exists": true,
+      "bytes": 4870,
+      "sha256": "a51b26cf572b2553be870e8296fbaf531e643a32e7d439b5530c46eed2c84e7f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/reverse-red.xml",
+      "exists": true,
+      "bytes": 4377,
+      "sha256": "7d8841e0c5fe1e88e611cd7a4c8e49395a5a64563957c58f1dd3bb69ac7eb4cf",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v1.json",
+      "exists": true,
+      "bytes": 3667,
+      "sha256": "ef81699ba30223940b3c829f2b855a073afdb7e8d8aa7642a6f1f8182bdbcd2a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v1.md",
+      "exists": true,
+      "bytes": 1551,
+      "sha256": "96ce35cbb85fb6b05d1d2d2cb743276a7f3688bc22454e8efb21cc32dbcb31e5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v2.json",
+      "exists": true,
+      "bytes": 1147,
+      "sha256": "9a42bafa69f41c2048a1af80423fbf113c1abcb7019fca71ecb64c1f65fdb8a2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v2.md",
+      "exists": true,
+      "bytes": 606,
+      "sha256": "4703645bfe94ee7d2b1ca2bbde263372c7e08baa0e915f2a5a15b7b00ac70c54",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/run_review.py",
+      "exists": true,
+      "bytes": 3777,
+      "sha256": "7514bc419ebff18ffb6250ed48e1a8faea8afdc814fd03a0296e56405f36e5c5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/run_review_v2.py",
+      "exists": true,
+      "bytes": 3779,
+      "sha256": "4fbcee5ee02b6966b4afdcf5e95257b9af97a705b92c342c09f4bd72956fb1ee",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/run_review_v3.py",
+      "exists": true,
+      "bytes": 4043,
+      "sha256": "8e70910c59204fe842ba14b3c02ffb58c53ad561041dec81a3987bf994ae4744",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/test_heading_independent.py",
+      "exists": true,
+      "bytes": 11961,
+      "sha256": "b7e1319e0d3725f256e3795fdf4cd62e9caa17ccd392374ea0520b1b4bf0f329",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/test_heading_word_prefix_reverse.py",
+      "exists": true,
+      "bytes": 542,
+      "sha256": "167eb610e4ed35ebd83363ea3e998cf43cc9e8eb96e439f6a67b9c7b0a033396",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-independent-receipt.json",
+      "exists": true,
+      "bytes": 3351,
+      "sha256": "867ace86ea8bbd302bf57d48a90c723ee5eddb48ae392dde7b5a97aa3b3aad35",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-independent.stdout.txt",
+      "exists": true,
+      "bytes": 4522,
+      "sha256": "6b2301698c3717ddfc647751c705d11e7b322881d6e0ec83b1f4c1c6ebb1b785",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-independent.xml",
+      "exists": true,
+      "bytes": 423,
+      "sha256": "e3a458deea1a355d30d5fcd6e9bbd7e0651dcfc94ee7fcb03df111b013f0b441",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-runner-initial-temp-error.stdout.txt",
+      "exists": true,
+      "bytes": 819,
+      "sha256": "43902dfa0805152d2d50592621be5ccd18423dcfdfb835fae1043ac1c7d2e2c4",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-runner-system-temp-error.stdout.txt",
+      "exists": true,
+      "bytes": 851,
+      "sha256": "be76db11120e4503ce257d6098d23516309e759a3db36915ca45e67f48e6ced0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-temp-decisions.jsonl",
+      "exists": true,
+      "bytes": 690,
+      "sha256": "62ff968a16e705e4c4db03ee1b597349114de718f99c979c942844a5be00baec",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/context_probe.before-root-fix.json",
+      "exists": true,
+      "bytes": 18072,
+      "sha256": "e104b4aa6cbaa538341a2eb3f0d8dc2b024c15727c9995a567c35a4aaab1f943",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/context_probe.json",
+      "exists": true,
+      "bytes": 17450,
+      "sha256": "6b15c0cb4daf7df880e095acefda8e2232958cedcd676a0a3bd0ddca16191cc7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/context_probe.py",
+      "exists": true,
+      "bytes": 5432,
+      "sha256": "d36888b85a0a597705a127e6d97f05937e4bc286ab79ac50b00e8760d06fe048",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/facts_probe.before-facts-fix.json",
+      "exists": true,
+      "bytes": 25606,
+      "sha256": "e8eeb41d2511ac28dd9659dd11a17f28716370a852caa60c1e4b629a117e227f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/facts_probe.json",
+      "exists": true,
+      "bytes": 25428,
+      "sha256": "1d73c9e49412d351dbf741f3733b47d2e9dc6ef71a9084b034ab5bbc189fbcc1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/facts_probe.py",
+      "exists": true,
+      "bytes": 5813,
+      "sha256": "cdff7fc62cf5733da57c422d189dd9ac879157ebc69bc494bdbcd39d78874084",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-final.json",
+      "exists": true,
+      "bytes": 8619,
+      "sha256": "02477440d5689e8c1ecc8cf71731f4ba579a5b02f89dde951a2aeacb9e244474",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-final.md",
+      "exists": true,
+      "bytes": 4470,
+      "sha256": "fd4e82d6e7bc498c21d9860ccf0da75d07d8b8a7d9700e892890a9f6df384d58",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-interim.json",
+      "exists": true,
+      "bytes": 2486,
+      "sha256": "8278f0c303c358004ad49f62fc8b3d781d252853d0f90b21ad7727b081135d23",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-interim.md",
+      "exists": true,
+      "bytes": 1673,
+      "sha256": "011ebbb7c8a3c1512dd3e0695222f12d61e243c278cb8336687fa52bf057733b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/run_public_cache.py",
+      "exists": true,
+      "bytes": 3020,
+      "sha256": "82de6cb4874747a03123d90af6e62aa337099e871a03af55d0b5238a23855b32",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/architecture-v3-harness-error.stdout.txt",
+      "exists": true,
+      "bytes": 1140,
+      "sha256": "77736fff710430ad702662be53210e81ad0b3a78f502d9ede25e59428233474b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/architecture-v3.json",
+      "exists": true,
+      "bytes": 2078,
+      "sha256": "da56fc4456ddc574023aafe7bb782dead0cd3c0aacb834a4ab028089d9319843",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/architecture-v3.stdout.txt",
+      "exists": true,
+      "bytes": 2080,
+      "sha256": "ed049503515090f74506c680c7a4585ab6b48ea8af8eb58801fd91a40a539f18",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/build_final_report.py",
+      "exists": true,
+      "bytes": 5814,
+      "sha256": "a1ecc7517752e28cc754dafd7a8d846cfdecd18a9a50ac0e798ea38f7d5fcc81",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/build_report.py",
+      "exists": true,
+      "bytes": 6476,
+      "sha256": "d7242b1f9a1ba40219473418f975a2f8cb66d82ee34bc239a0011f759168009f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/charge-order.stdout.txt",
+      "exists": true,
+      "bytes": 2595,
+      "sha256": "d2622708844cf8638fc43ff8413d11cfe6c889a60fbc437d760904500458799e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/cleanup-final.json",
+      "exists": true,
+      "bytes": 1489,
+      "sha256": "71924c9ee7f244e9b793c2619706c9e936f1af425baeea80f955689434cc8755",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/cleanup.json",
+      "exists": true,
+      "bytes": 895,
+      "sha256": "9a2f71fe115ca841ad2839a48029bde8b570a229e1b2bcd60f8a88cfc831f778",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/observe_charge_order.py",
+      "exists": true,
+      "bytes": 2932,
+      "sha256": "ff7433940f4cc6b4fb802bec6ee6eccdf360aba54b8001683a5605e80937b7a2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-final.stdout.txt",
+      "exists": true,
+      "bytes": 1665,
+      "sha256": "04479b6bcb2a2a48b891c746108e75cd67c2b9e4e5dfc393d80a1de1757db298",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-final.xml",
+      "exists": true,
+      "bytes": 752,
+      "sha256": "5dc33426df1a5174c86215ebfe68eeb692ce8079de81b7cdfe80593cfcaa1d0a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-red.stdout.txt",
+      "exists": true,
+      "bytes": 2812,
+      "sha256": "20e8da43a8a66fffbfc2c078e01a74b0a3cefd6eb95f6f83c7cf9d150628b35f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-red.xml",
+      "exists": true,
+      "bytes": 1810,
+      "sha256": "2b7d86bfcdcc7d9a033e3efc03ee3143b425e660db5350890902a480cab3a275",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/probe-final.stdout.txt",
+      "exists": true,
+      "bytes": 2527,
+      "sha256": "d64fc12126a91e75d8ed6c0782d1d37c0d8f09d5ddf0cc2c1d176884c3572cb7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/probe_final.py",
+      "exists": true,
+      "bytes": 5351,
+      "sha256": "a8bc0ec193863f93546cb070087744eb7b7d97e2d18d48912a7b5b43bcc6f52b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/report-build.stdout.txt",
+      "exists": true,
+      "bytes": 397,
+      "sha256": "951e60c89bfb311abc2b7b1fe805cd9dfde8d7e9b95e394789d3cf64db132b2f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/report.json",
+      "exists": true,
+      "bytes": 6887,
+      "sha256": "3888cf2f887f0bab4eee901fc3d956d078a6499ad56ccefbe9f3e53a848a81d2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/report.md",
+      "exists": true,
+      "bytes": 2326,
+      "sha256": "44cdb9866df8f1f93102e2cdaca779d66de7abf0c23e188b85bb99abb6710d1c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/review-final-build.stdout.txt",
+      "exists": true,
+      "bytes": 428,
+      "sha256": "661354173827abad995340e09dc70b0b8de708b9527e1ffdd06916466802ec5b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/build_report-v2.py",
+      "exists": true,
+      "bytes": 10095,
+      "sha256": "4b82bd943653d13bf4eed01503b52a3494ad256cc18c900aabb54f6f54f3fea8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/build_report-v3.py",
+      "exists": true,
+      "bytes": 7500,
+      "sha256": "e4e5c9d2274870a4c0c6a0c7a407892edb64154dbe6912f0439abd95e20a8544",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/build_report.py",
+      "exists": true,
+      "bytes": 10502,
+      "sha256": "c47ba13be1eea5e890eb893e6237ce4232746dc9265b86b8557281b0600da980",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/cleanup-v2.json",
+      "exists": true,
+      "bytes": 1945,
+      "sha256": "97ce37d16f1c131ce0af0d7b2089ee6dab1b86f7f6578a5ebbcf5deb0c03f04b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/cleanup-v3.json",
+      "exists": true,
+      "bytes": 3467,
+      "sha256": "b2a4c5f12459e35c3e0e21c1e9fedc8a0ee926a56b817ec604e09c13489657c1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/cleanup.json",
+      "exists": true,
+      "bytes": 1083,
+      "sha256": "cd8bd8738ce3855ac893001d06e9e038db29224a8a93c4a043d2290dcad5d571",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/execution-v3.json",
+      "exists": true,
+      "bytes": 2976,
+      "sha256": "d82c03862d060c5c6cf23942846a14b0ccf5da720b676511a8918797a1d1214c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/execution-v3.stdout.txt",
+      "exists": true,
+      "bytes": 2978,
+      "sha256": "3d3ca2732bd3db9536b17f94f3af627a4c7c8901ca734e88e70ed156ebb125b7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v2.json",
+      "exists": true,
+      "bytes": 33318,
+      "sha256": "892ab5249e0add974bb4084d888eeec189381fe28e2db426e638c0751bdc1ebf",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v2.stdout.txt",
+      "exists": true,
+      "bytes": 5313,
+      "sha256": "dd5e0ff2e2882ee83a8e0e16f8574bb2fef7196c10cb9d3c2f27b5069cadd24b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v3.json",
+      "exists": true,
+      "bytes": 29537,
+      "sha256": "ac645c597d1178af965933d787efe36d48259511ac64ec2068a9b8ad2ff71a18",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v3.stdout.txt",
+      "exists": true,
+      "bytes": 1189,
+      "sha256": "b0aec0b49c38326e36dac88ed21c310a01d693df5e8a0f9d46123b52b548abc8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v2.json",
+      "exists": true,
+      "bytes": 18299,
+      "sha256": "07181828ba2b87c135612e59a61e91b11fcb90245d6d93fbf699eb41befb5734",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v2.stdout.txt",
+      "exists": true,
+      "bytes": 9645,
+      "sha256": "afbe3d41c0d34e2aee373c93bed58807f6b4fecdf29f697104b31854a184e903",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v3.json",
+      "exists": true,
+      "bytes": 15655,
+      "sha256": "e309ae83474a15cc72e2293efb39b1765e87eff456ff0758a0afb23d9bb16939",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v3.stdout.txt",
+      "exists": true,
+      "bytes": 492,
+      "sha256": "8f86df1263cb95e6b4c3baddac29babf44d9a148f3ad2b4d9d44b401e287c8ad",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v2.json",
+      "exists": true,
+      "bytes": 11826,
+      "sha256": "db1e6d32e38616098c03346fe15ce024e4e3631be48f2d3c0be44706bba466d0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v2.stdout.txt",
+      "exists": true,
+      "bytes": 492,
+      "sha256": "d63fe3c81c084e7854be518fb4262f39bd1b4c9e7bd39f0bf62c82494edd8b31",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v3.json",
+      "exists": true,
+      "bytes": 12720,
+      "sha256": "1020a9556fda215120420fe194a9bd86925c0d78c9918079dbd9b4c69a92c6ea",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v3.stdout.txt",
+      "exists": true,
+      "bytes": 492,
+      "sha256": "0c6b43b4435d7a55755b7cfafd9a8b1950c52284cc32649f291d9c6a4e6780ac",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v1.json",
+      "exists": true,
+      "bytes": 40329,
+      "sha256": "52f571a228f3a9cc10f0ae48569decf6d88d204e892cb97ac8ad6411356c178d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v1.stdout.txt",
+      "exists": true,
+      "bytes": 39433,
+      "sha256": "5dd0db445f491b87bb552a3830e931bab4f3769073ffb55a8ffd193867a428a6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v2.json",
+      "exists": true,
+      "bytes": 14121,
+      "sha256": "82a914010acccb931752b785332a199d986dc040120343a367beb2a2715ab27c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v2.stdout.txt",
+      "exists": true,
+      "bytes": 7480,
+      "sha256": "92dec78574bdd7c69845e87933448eb17c6c89ee64078e7d4956c7d404de53d3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/ledger.md",
+      "exists": true,
+      "bytes": 4177,
+      "sha256": "0d4077006525fc61df32bdddafb5516d1c9cdcd3367a0ddc804dfeab1276cf4c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_architecture-v3-harness-error.py",
+      "exists": true,
+      "bytes": 4350,
+      "sha256": "6981f55dc7237ed36244e8b08d872b8c38d51597c8ea869bb8fa21bcf1a7fbb3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_architecture-v3.py",
+      "exists": true,
+      "bytes": 4355,
+      "sha256": "550e7720f9d518fa8ffedaa4292925d2cf122ef2e82d24c6993d2fddd9d31b68",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_holdouts-review-v2.py",
+      "exists": true,
+      "bytes": 11388,
+      "sha256": "26b25a16aefd9532835cf82ad8c79c1648470b787235910ecafb61afddb33d7c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_holdouts-review-v3.py",
+      "exists": true,
+      "bytes": 11526,
+      "sha256": "be93a505f7ab41b694c2388b95a291ac1280ee1bed9a9beefa9d7be66ce699e2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-holdouts-review-v2.py",
+      "exists": true,
+      "bytes": 5361,
+      "sha256": "7e1bb5b2c123317115cf220636ae15a058ca9241fbfa3523d12f2910c7061362",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-holdouts-review-v3.py",
+      "exists": true,
+      "bytes": 5416,
+      "sha256": "6219f56a2f95136ab630db4e10736cdc9653489d1cace6f3a481ac614c2c7ab0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-review-v2.py",
+      "exists": true,
+      "bytes": 5318,
+      "sha256": "fb621bf3a91361466f306438c936123aeb39f03705d6d42e034b1a21c9399bf8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-review-v3.py",
+      "exists": true,
+      "bytes": 5373,
+      "sha256": "b8edcb3cde6ea185c1f973b02f4972fda18821ba8768980fc63a8340650e75e5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-v1-harness-error.py",
+      "exists": true,
+      "bytes": 5315,
+      "sha256": "38220afb28b6035f5fcb7839a5a82e727fc7d8df1b58e7c64d0c14c9dfd89f30",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration.py",
+      "exists": true,
+      "bytes": 5309,
+      "sha256": "c6c44d20e4f4727d322214a92d8e82d85c2963074e5cfb830187497459f7d34f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_measure-review-v2.py",
+      "exists": true,
+      "bytes": 8473,
+      "sha256": "c849555c841f2a1d3cbeaad58638b586d8145fe5624914811aa4b304e50c4aeb",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_measure-review-v3.py",
+      "exists": true,
+      "bytes": 8580,
+      "sha256": "1bb74fc61c036cb2fde3ae660db1042d71cc02eb4befbb25ededc6b1d4638e88",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_measure.py",
+      "exists": true,
+      "bytes": 8464,
+      "sha256": "09ba5d109b1cf1d04c403ee541c5e32a99333fbd8e9efff82d8234569d3c5fd7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v2.json",
+      "exists": true,
+      "bytes": 51407,
+      "sha256": "e7d3ecd7f9b190257530172093dd90e192f84431b11b51ec544c8193f0a3471f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v2.stdout.txt",
+      "exists": true,
+      "bytes": 1189,
+      "sha256": "36e2fcbb267f708db76ab796e3e2cbf4a33739a6553827982c255912ff53735a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v3.json",
+      "exists": true,
+      "bytes": 52301,
+      "sha256": "1a9372af9ebeecba98ba71f793efcc1e5b35b130bb6a734d35a0aaa0a1952fb2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v3.stdout.txt",
+      "exists": true,
+      "bytes": 1189,
+      "sha256": "1704715b50b59e37b99bea9b25506244ad63917a3b1bd8b40b588407f03d2a69",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-v1.json",
+      "exists": true,
+      "bytes": 55170,
+      "sha256": "e4b88f3ebbdfa955e7e54de7444036521c395998858b6bfad713bfb90c9bc868",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-v1.stdout.txt",
+      "exists": true,
+      "bytes": 4110,
+      "sha256": "fcf7304802fa603e63eccd1a6411b153a5fe23bdf22a0ee1eefa10f5cb8ff076",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/report-build-v2.stdout.txt",
+      "exists": true,
+      "bytes": 373,
+      "sha256": "90dbda63a8b1e086469a2fb7b8fcc7ee3abdf9246cd1bb96b5559abc6ac46567",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/report-build-v3.stdout.txt",
+      "exists": true,
+      "bytes": 317,
+      "sha256": "7112b304e090f2c3530d44dd2482ca2a0e0144b72417d0f70be8edf6cd301e43",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/report-build.stdout.txt",
+      "exists": true,
+      "bytes": 535,
+      "sha256": "01543235c30e7b5431fae04b31103c53adb9182a71e41bc08e0190bf490072d4",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review-v2.json",
+      "exists": true,
+      "bytes": 5811,
+      "sha256": "7b8149854cdb9a5549de869b4cd988c4b45433de6e9033edeb8cc68c5aea0a1b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review-v2.md",
+      "exists": true,
+      "bytes": 3545,
+      "sha256": "10c68203ca4755080088c4e2ea50d522a28cadb12469ac9e77c7e44b98ef0839",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review.json",
+      "exists": true,
+      "bytes": 6756,
+      "sha256": "a2ee5d23320457efc1ec23b9648f7ee9c0a36812f9dc395bc19fadfb5b1977b1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review.md",
+      "exists": true,
+      "bytes": 4102,
+      "sha256": "c1914f41e52dbeea7ba6cdfa7520ca3e184fdc6eff18a7578163aa737459dfbf",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/run_review_v3.py",
+      "exists": true,
+      "bytes": 2927,
+      "sha256": "6854d28e657a740e5a46d3195db9b55210e90fd3d71b8e9e44d98f15b4c2f4b1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/augment_trace.py",
+      "exists": true,
+      "bytes": 1410,
+      "sha256": "3316f74ba3c971dff50d03a102bd2470b84f9609172674f28c64a3cc5556f3f3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/build_six_report.py",
+      "exists": true,
+      "bytes": 15338,
+      "sha256": "a69f35b7d688405222ce072deae7c50e7c18e84ccdfbbd95b267152f7565edf6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/cleanup.json",
+      "exists": true,
+      "bytes": 2252,
+      "sha256": "c94d20a3063ca842d0372399a0f2c9f6de216f320c7f726d52ac68c2783d25f4",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/observe_trace-v2.py",
+      "exists": true,
+      "bytes": 14918,
+      "sha256": "2c3b2f98f3b6d0119f087ad39ec10d4f526845b478d2944b30ac29c0168bf16f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/observe_trace.py",
+      "exists": true,
+      "bytes": 13885,
+      "sha256": "344c934b56d15f761dda362ea222c6fe02892aef7ba164dff25bb67e316e6bb0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/six-omissions-report.stdout.txt",
+      "exists": true,
+      "bytes": 678,
+      "sha256": "4fef1ed26ed5bb4633e520370af59b776d07f1238db3d99b1029465937e66b8f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more-v2.json",
+      "exists": true,
+      "bytes": 472282,
+      "sha256": "be45b074d213fb3b6e43217709618946163a30a303bc5d6a42fa45cae72539a6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more-v2.stdout.txt",
+      "exists": true,
+      "bytes": 1223,
+      "sha256": "b44afc7f5e82620427f027a8b3cbee548893ad91bde2b29d052abe51735b7d98",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more.json",
+      "exists": true,
+      "bytes": 360156,
+      "sha256": "6f0a32ffd1e725b4034610dce2a45e1cefb10f3baac9e5658145ff6f83172b63",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more.stdout.txt",
+      "exists": true,
+      "bytes": 1223,
+      "sha256": "90bee39e989a16d040509cb0eb22c1529206a12df2015eab2e60d75d17d619fd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/RED_AND_DESIGN.md",
+      "exists": true,
+      "bytes": 3002,
+      "sha256": "e50c5ef3df43337fb44a6c0335748022938398a95e26f41a23f7db613f40cea6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/RED_FROZEN.json",
+      "exists": true,
+      "bytes": 5440,
+      "sha256": "77107fde4dc83e64c2bbd1a261a3f746837fc5794a7dcf2486638ecacfe72c6a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/cleanup-final.json",
+      "exists": true,
+      "bytes": 4989,
+      "sha256": "c3d80ae78ddf1c8d9aef3725020c18d1eb6021dda90fc092c378c702b039b454",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red-binding.json",
+      "exists": true,
+      "bytes": 388,
+      "sha256": "3a52d12d7c8601ffea4f13b09494cc678e963ec21c32ccd2bb7d7378e3e03ac1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red.txt",
+      "exists": true,
+      "bytes": 10578,
+      "sha256": "399f9346ceaf884e1bc3f504857a30e1a05f0e46c89ad92c5942ee4dca4d1708",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red.xml",
+      "exists": true,
+      "bytes": 33438,
+      "sha256": "ce27a71da3c0fe4727200b2906688141853cad1040f37444d167e826a169c5c8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection-execution.json",
+      "exists": true,
+      "bytes": 3144,
+      "sha256": "840b279b91cec1dd2ebd6ace64fa65954ebe57b7f0c0fa24448b62b0ec01be4e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection.txt",
+      "exists": true,
+      "bytes": 7989,
+      "sha256": "3885aa3ae235fded4682818c65d3a70efcdb33661919b247408cc9645ddf9208",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection.xml",
+      "exists": true,
+      "bytes": 266713,
+      "sha256": "78b7b8a1b2b20e7908a1672e0abc20ddcd3ecf74d4aee210bed41e15fe87958f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/frozen-initial-test.py",
+      "exists": true,
+      "bytes": 9217,
+      "sha256": "a1f873d52b683dbd98237f68825c3c49049aae7848166bf1ad130b2358c7d249",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection-execution.json",
+      "exists": true,
+      "bytes": 2861,
+      "sha256": "0e9927fe7dc61cebdbcca4dbf53cf7e869df9af9b8f5f9c8e7ec795849a3bd8e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection.txt",
+      "exists": true,
+      "bytes": 21093,
+      "sha256": "bddaba974d79c499124b7239439b59c11c1977086fc7763252929c662a75e6b8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection.xml",
+      "exists": true,
+      "bytes": 285871,
+      "sha256": "68f518b360d8f99580ca92fa062637e52c6d80c6926e447dbe9729dc4f347b5f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-binding.json",
+      "exists": true,
+      "bytes": 534,
+      "sha256": "7b7124a572c0584100002f64c72fec866642a7d72bd387cbba0076923469f65f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-v2.txt",
+      "exists": true,
+      "bytes": 7828,
+      "sha256": "fa88d894920de1b79e31ad9d9bb9531c0991f2809193b99cc9f4bf432ac8645c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-v2.xml",
+      "exists": true,
+      "bytes": 23733,
+      "sha256": "e36ebb82fabc7c1e9d0848f046e47e8bd0602abe6374943bfba91e7a2b6a689a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red.txt",
+      "exists": true,
+      "bytes": 5456,
+      "sha256": "2340f199fd5c114c41ead4bc90c4aca6bbf89c5cc5ab291f8da6afcef2ec561f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red.xml",
+      "exists": true,
+      "bytes": 20132,
+      "sha256": "0a576042d48785fe94b69fd62f25efd1eeb9772340a07c827dbedc4aea853163",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/green-v1.txt",
+      "exists": true,
+      "bytes": 2195,
+      "sha256": "c6720475509467299cf001710bfd8a28001455842b6f2306d3632b4d66af60ed",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/green-v1.xml",
+      "exists": true,
+      "bytes": 63871,
+      "sha256": "a120770dfc70f479e2df2d78a7eaa99652e264759088e07228ae5e2fa53f7351",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/handoff.json",
+      "exists": true,
+      "bytes": 8397,
+      "sha256": "61876a6e95aee2f6f04db19625e0660b754fdbd4e4ec7bc67891bea29936c925",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/handoff.md",
+      "exists": true,
+      "bytes": 3307,
+      "sha256": "914621cdb002715e7e18845ddf0b53f3aa1df419f6daa18072ab6062eea96ea6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red-binding.json",
+      "exists": true,
+      "bytes": 603,
+      "sha256": "fac5de0e9bfcacf141cdac36bd77e0d582ae35326aed1d725d849ff1337aed75",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red.txt",
+      "exists": true,
+      "bytes": 7274,
+      "sha256": "77470ab7bd8fa2c914adb64b479fd7274ad58aa024a92304b97d8771a35824a0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red.xml",
+      "exists": true,
+      "bytes": 23209,
+      "sha256": "7dd13aba2f71239ed13574f8adcb6b077bb70349020d5ebbb0e1848c3fee5d6e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/mypy-runtime312.txt",
+      "exists": true,
+      "bytes": 43,
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/mypy.txt",
+      "exists": true,
+      "bytes": 228,
+      "sha256": "5bb3c48f1f00e73c40c303b2917944aa796230f80e9b01a9e2c1c6d4c111384c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/pre-local-comparison-controls.py",
+      "exists": true,
+      "bytes": 11020,
+      "sha256": "7e8432e82e05f3c96bd5eef5fdc130d956555f96ac30f353d5c5ac4a878f407e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red-execution.json",
+      "exists": true,
+      "bytes": 2809,
+      "sha256": "7a90036c986a09dbf1d51a3329e535c01287a8f81d8fe9fe18d1954b445c8cd6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red.txt",
+      "exists": true,
+      "bytes": 20492,
+      "sha256": "454b56adc364ea666db7ed2663ea53d8ea25e39d3c80ebb1edafb907c0731485",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red.xml",
+      "exists": true,
+      "bytes": 29654,
+      "sha256": "c113d8010d60b02fd0562b13c59a7254482ca69ab4219013f1f66d39789ba218",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/related-final.txt",
+      "exists": true,
+      "bytes": 2627,
+      "sha256": "5e5e5660908391e804df6f0a9e51626138841add62f990e3208a0d33dc3178fb",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/related-final.xml",
+      "exists": true,
+      "bytes": 91098,
+      "sha256": "1a5a6b4e8f5b762e6ad1977b112b1a92622d4a7edccc5643d634bafe3bedc328",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-1.stdout.txt",
+      "exists": true,
+      "bytes": 1145,
+      "sha256": "b328567ec686c19567ec20b07d5b2e9428ca820365cd35c86d741b8da78980d9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-1.xml",
+      "exists": true,
+      "bytes": 38852,
+      "sha256": "f3b4fbfb3cffe438e409052557a92aa733ab4bb613b80131d3bba7d0584ef951",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-final.stdout.txt",
+      "exists": true,
+      "bytes": 1230,
+      "sha256": "8b1cd0d6fb5636b76b24b33c03dd351c6d4afa382eaf23799f9b2e5a4674dc0f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-final.xml",
+      "exists": true,
+      "bytes": 41537,
+      "sha256": "6a3a327a7d32d24247a32628e5ff8bc50ccdf6343255de3470bbbca7f557684c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/receipt.json",
+      "exists": true,
+      "bytes": 2215,
+      "sha256": "4947ac55f29903e4160205955a9e9d863c9bcc2171091b4405049f0d076ef61d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red-boundaries.stdout.txt",
+      "exists": true,
+      "bytes": 8539,
+      "sha256": "adb366ed8de6e656f8fc4e23dc06488ca87e7ae4a6a3c3676450bf4b522e1f75",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red-boundaries.xml",
+      "exists": true,
+      "bytes": 22929,
+      "sha256": "c11741a58800aa6878418478770865a91609ac40ce0fd40adc45da167c6728a2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red.stdout.txt",
+      "exists": true,
+      "bytes": 14938,
+      "sha256": "b05f524930f8e4567bb9564199ee321a5229fb5fab915158d961297f2644516d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red.xml",
+      "exists": true,
+      "bytes": 23528,
+      "sha256": "a303de1bb6b96d6dd889477deda93834237910ee84982eaa8282ec0cd1d37bb7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-fix-receipt.json",
+      "exists": true,
+      "bytes": 1546,
+      "sha256": "f3bf0c4f5444a02d72fbd19340a8cc58a9acbfaba86d282effcd1dd84c29767f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-green.stdout.txt",
+      "exists": true,
+      "bytes": 1231,
+      "sha256": "627a2dd532155b874ecf9dacf91c4dfd9693529458454772d3eac083af9f8a54",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-green.xml",
+      "exists": true,
+      "bytes": 46757,
+      "sha256": "69cb9385410a307f3da6330be9c47857c8610988cdeb515066ca1903082ac1ec",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-red.stdout.txt",
+      "exists": true,
+      "bytes": 14309,
+      "sha256": "660d03dec456d63572f1426baa480216ef450ff555911d6b9f76f9f7a3f7ed28",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-red.xml",
+      "exists": true,
+      "bytes": 20471,
+      "sha256": "ae5089c957dd20364f371aa573aacc8f091e7373e864fa2fa339a3da1c8b96bb",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/extend_original_envelope_tests.py",
+      "exists": true,
+      "bytes": 3988,
+      "sha256": "fbe3f2ff9a440cb63e9e0e192313171c20588c59a4758c6013cfc329d6460648",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/freeze_carrier_test.py",
+      "exists": true,
+      "bytes": 965,
+      "sha256": "eb15c1a4f3dbcc1dfb94f4f12b7ce223392c1f96e0fa24bce9ae83fc2c806b74",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/prepare_final_v2.py",
+      "exists": true,
+      "bytes": 630,
+      "sha256": "6e9a35d345a2a9e736a1f9bd3ef464590f29ccc2b50a2bbb7e9707cf11dad4e9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/prepare_final_v3.py",
+      "exists": true,
+      "bytes": 745,
+      "sha256": "6fa1257a739c520e90264fffcaa2e0f8d30177fa336213c2b747968fc5f837b4",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/probe_chains.py",
+      "exists": true,
+      "bytes": 1664,
+      "sha256": "7cc86e15d450c740683a81f20105728fb88241f3464da0de198525a85f4c90ee",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/probe_qualifications.py",
+      "exists": true,
+      "bytes": 4178,
+      "sha256": "df6705de2c12b939c0dd55f994085768aaf700f3555e0e582c65475b0d0e27bd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/probe_unit_envelope.py",
+      "exists": true,
+      "bytes": 2177,
+      "sha256": "19101ac08ee83d0699c4ffafd0d07741f7141d92a1188253fc7980df90b4d37d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_envelope_bound.py",
+      "exists": true,
+      "bytes": 2536,
+      "sha256": "649c53e91a4705bc1be110da7d233570bd1c3ea8dbf2a190e736650f3018f746",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_final_review.py",
+      "exists": true,
+      "bytes": 3919,
+      "sha256": "7503e70218f412abe15138bcc516d1655056a45196c5d9521df7e39ad387df0b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_final_review_v2.py",
+      "exists": true,
+      "bytes": 4137,
+      "sha256": "23093517266c900b2f6a715023c90245162316a053175773f3dd43d5c054d879",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_final_review_v3.py",
+      "exists": true,
+      "bytes": 4322,
+      "sha256": "08769c1d9ac14fce689fff04f588e4df4afbef24a4249ef08b671ae0c8e15e45",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_independent.py",
+      "exists": true,
+      "bytes": 2489,
+      "sha256": "3c73dacfc8528c99fdeef7a13ab982700501c55bda2ca6cf49985f647387b9a0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/write_checkpoint.py",
+      "exists": true,
+      "bytes": 3013,
+      "sha256": "c0ceca5a1e114cd2484580bbc675ba9ea7dcb8a4eb9aeeeda711d4e5d9adda7a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/write_review_v2.py",
+      "exists": true,
+      "bytes": 2706,
+      "sha256": "5a62e6f3168c2ff1fcf5d2943ac4bbd85addc1cbfe3cd3f10f44deeb0c217026",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/write_review_v3.py",
+      "exists": true,
+      "bytes": 12627,
+      "sha256": "bd754825f4cca86398ee347826287bc93c337b290b749192e5fc0ffa7a17f858",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ab-counterfactual.json",
+      "exists": true,
+      "bytes": 3751,
+      "sha256": "16f9a3e96d4a379d57465a5d8c7b69038a1b7608e7f4e8c5ae4c366b0b0e8117",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ab-counterfactual.log",
+      "exists": true,
+      "bytes": 3753,
+      "sha256": "db087aa5fb18a1d4423b57361cef94e4e9869d7f0d522457287349d97db2c77d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ab_counterfactual.py",
+      "exists": true,
+      "bytes": 3295,
+      "sha256": "a9d9b868fb70de326c5dad7543bf1580407f6600995653685e2973c8ac5f9ead",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ledger.md",
+      "exists": true,
+      "bytes": 1757,
+      "sha256": "8cac259b4ad2566b2e8de3199d5839d2428f7a1bc66b3f72fb034e58bb6fe9f7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report.py",
+      "exists": true,
+      "bytes": 13571,
+      "sha256": "61c12befee96646180d6f4cc33a3439a3cc26a9017107d065b48b443ae09bf5c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report_v2.py",
+      "exists": true,
+      "bytes": 9000,
+      "sha256": "c74bda2cbb4ef60c86f20588ad5e18a939619e9682e3ecf883464c6e08055cbc",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report_v3_final.py",
+      "exists": true,
+      "bytes": 10858,
+      "sha256": "f7197eb4fced60a2c912f6738ff0d5d272d2c4fbca97a97bae3a22f96c7f92df",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report_v3_interim.py",
+      "exists": true,
+      "bytes": 5382,
+      "sha256": "933dacb2d210ef422bd14ff89b481c7bcc6c4401b90c76ab73606668b4d08fdd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.asdict-error.log",
+      "exists": true,
+      "bytes": 1425,
+      "sha256": "e73e8dc36128a43a27c8141cd9ea0fa7800b89e9c790324359aede07ca7ae3b5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.initial-error.log",
+      "exists": true,
+      "bytes": 587,
+      "sha256": "193069da2160d4e9ee3ee3b4117b5716423c06200e9c67ec5d61ec322914d746",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.json",
+      "exists": true,
+      "bytes": 305656,
+      "sha256": "d4f887122b48d9cd39372b59f73ba6b7caa34359ccee556eacce2a152e6741e7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.log",
+      "exists": true,
+      "bytes": 305658,
+      "sha256": "56358846274c664189148610852c5ca3e2993b145c62c901b972d7c681db793c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v2.json",
+      "exists": true,
+      "bytes": 9054,
+      "sha256": "e486531880433826b4d75c6a07a1a091d9db4bb68cf2c6674eb05a13f69ccda2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v2.log",
+      "exists": true,
+      "bytes": 9056,
+      "sha256": "48cc181247e09fea04f9e14eb74351a84d23d1b1a033b50aa172836bd5f58c6e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3-final.json",
+      "exists": true,
+      "bytes": 10606,
+      "sha256": "e9fd5620d0679ddd6168472371258683b1f41bd5e7f9ff3cddc0465b0f7ca1cb",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3-final.log",
+      "exists": true,
+      "bytes": 10608,
+      "sha256": "69e1a20b993b018b8b49caabea2d025466af91ecb5c0772db49750abd22615b5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3.json",
+      "exists": true,
+      "bytes": 10328,
+      "sha256": "bdbee22df3a8ec0ba069cbcdb278000c897ba243f4c00a2d3b3a11c9120c798c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3.log",
+      "exists": true,
+      "bytes": 10330,
+      "sha256": "946e9e22ffc72556ff56e46ec6fbd94c0cb87f6daf45200628a15ea6356221b1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe.json",
+      "exists": true,
+      "bytes": 8645,
+      "sha256": "2d73445119da0b44085b9f132b2de667efb1a0020a436fe19aaf873b32977652",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe.log",
+      "exists": true,
+      "bytes": 8647,
+      "sha256": "a54a67cc9a41bd733017168bd90ee5994b97932b3e34efeb9a7076ded8d7d489",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-trace-v2.json",
+      "exists": true,
+      "bytes": 23903,
+      "sha256": "161c85b5b50eb093641d67eb3d079a365623fb8dc931bbc32846fac3fc48cd28",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-trace-v2.log",
+      "exists": true,
+      "bytes": 23905,
+      "sha256": "de975ee3aebaa6e890edfa70dd2f8f6dfaace1aa46b09bec98508ca9e0efc219",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_details_v2.py",
+      "exists": true,
+      "bytes": 3036,
+      "sha256": "6dcff923a8f659b1cee3c8e124e845005f75b84978b9fd9b0be0a1f19a7666f1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe.py",
+      "exists": true,
+      "bytes": 3802,
+      "sha256": "0440f1ef4e82a1462bd6760112803f9118d322a59737ba02c111aaf1844d9713",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe_v2.py",
+      "exists": true,
+      "bytes": 3808,
+      "sha256": "a8a63b1be5ae5cf0cd0f7dc36296f5af4cb1035bf6029021af960307beffe88f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe_v3.py",
+      "exists": true,
+      "bytes": 3808,
+      "sha256": "a8b03151c4c28dc003dc4e4548814af192c48e0ee6052d9c634fa784d3e23c07",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe_v3_final.py",
+      "exists": true,
+      "bytes": 3880,
+      "sha256": "3f7b91faf8671cb4d757d91f88f51e69c9f251fe95a3181de87f5ec03c55d2b6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_trace_v2.py",
+      "exists": true,
+      "bytes": 2558,
+      "sha256": "23594110181c919ab57bf56ebd0c4e4210bf21b71787252401cda8a1fa9a4cd2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v2.json",
+      "exists": true,
+      "bytes": 27427,
+      "sha256": "e608bb226dc165b84b554e0ae4b8cf0b5e7738bc5735761e785e1c2747812431",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v2.log",
+      "exists": true,
+      "bytes": 42,
+      "sha256": "d7c08b21495b02b1a235cb3936917ab8b495eb63984333b26479333981e44690",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v3.json",
+      "exists": true,
+      "bytes": 28790,
+      "sha256": "5e85525273c07bb9fe62715e6f7522f85e3733a7f81b7712afdf79269ffcc643",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v3.log",
+      "exists": true,
+      "bytes": 42,
+      "sha256": "d7c08b21495b02b1a235cb3936917ab8b495eb63984333b26479333981e44690",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.initial.json",
+      "exists": true,
+      "bytes": 26731,
+      "sha256": "f97e3632bbaf372cb9d37cd38162e9c8d1a242741944a8c6d5b6006207c2d055",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.initial.log",
+      "exists": true,
+      "bytes": 8268,
+      "sha256": "ec7bd8198832291bfadbaa166e01cddfabb7bf8808cd783296184946d6e5973f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.json",
+      "exists": true,
+      "bytes": 26731,
+      "sha256": "f97e3632bbaf372cb9d37cd38162e9c8d1a242741944a8c6d5b6006207c2d055",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.log",
+      "exists": true,
+      "bytes": 8268,
+      "sha256": "ec7bd8198832291bfadbaa166e01cddfabb7bf8808cd783296184946d6e5973f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose_probe.py",
+      "exists": true,
+      "bytes": 9572,
+      "sha256": "7b0d0753343dd52e822254c5eb278a5b94a38cd11e1c8820b047dd77c36f4e87",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose_probe_v2.py",
+      "exists": true,
+      "bytes": 9692,
+      "sha256": "01f8e92c5dce0fab430b4ab53c78c113ffd2bd10ed967f5bb1cc3bd68ee40a16",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose_probe_v3.py",
+      "exists": true,
+      "bytes": 10007,
+      "sha256": "2a04f4115903374efa75b633c0d2c4bdb6100e0ddb086cefc007e1f3aadab10c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-fail.json",
+      "exists": true,
+      "bytes": 13213,
+      "sha256": "061564f6631ab9ab1876f9d65d13df6533999d279d8b23c0b20d1fdf48c3637b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-fail.md",
+      "exists": true,
+      "bytes": 6722,
+      "sha256": "86dc975bf46060e805079da5608207d4f1c068480eabfc796282ab94d42f4c31",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v2.json",
+      "exists": true,
+      "bytes": 8501,
+      "sha256": "db58596c49f273b9328a6394537882955eb9cf3b3b8cb00aa4e6f3e98aaf4288",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v2.md",
+      "exists": true,
+      "bytes": 2932,
+      "sha256": "d2d2d3588d9daf465f688366534940a12a60ee30fa7fc56c09d2003948466243",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v3.interim.json",
+      "exists": true,
+      "bytes": 7859,
+      "sha256": "b6ac4bcef2e9587fd477cc3e9ef69bdb479abec39f0da2d0a1034689e8f74917",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v3.interim.md",
+      "exists": true,
+      "bytes": 1388,
+      "sha256": "b640027085d8394f58369d8316864199ad044db8846c2e8d2e51d75f1de61deb",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/root-26.junit.xml",
+      "exists": true,
+      "bytes": 10608,
+      "sha256": "e5788af017b12a32a87837be5facfc423b959a5dd69ee3838001a0db074f4048",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/root-26.log",
+      "exists": true,
+      "bytes": 1962,
+      "sha256": "022fcdca22165673ac349113d67c3b91c105f8fe16ea40b2fd8c88399e9973af",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3-final.json",
+      "exists": true,
+      "bytes": 13340,
+      "sha256": "c14be48e469b26b298f8aa3780714db7227088f8769c548ef7e614b02125ec12",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3-final.log",
+      "exists": true,
+      "bytes": 13342,
+      "sha256": "e37fca88fb721886a90369be88d0ff7ac3cba39a4408938461883dca4654167d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3.json",
+      "exists": true,
+      "bytes": 13645,
+      "sha256": "00a8944a92645f27e03746308295262e37db3da4f7676ec2baef4c76b96c8ae0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3.log",
+      "exists": true,
+      "bytes": 13647,
+      "sha256": "d22502984edbe6840503e02fd05f01c8fabf41035054b29977d8c300741d98c5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure_fingerprint_v3.py",
+      "exists": true,
+      "bytes": 7107,
+      "sha256": "4012e58061ce6234965c3ed647e2572d81b7898065149d464b09c98033cbb9cc",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure_fingerprint_v3_final.py",
+      "exists": true,
+      "bytes": 7119,
+      "sha256": "b86e42bbb3f1df5a144d176b7cee862c19ef88774c17a59c54a9556cb0a34d23",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-1.txt",
+      "exists": true,
+      "bytes": 1061,
+      "sha256": "395f11eff857e5b1896d6920fc7778fffc89497a0bd9f84837d30b35bb229730",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-1.xml",
+      "exists": true,
+      "bytes": 10608,
+      "sha256": "8c64e0aa92bd8e3edd9d770b10ceda5bbd8ae2a2503542a3e694c192f7c0a142",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-shared-owner.txt",
+      "exists": true,
+      "bytes": 1072,
+      "sha256": "e879860365d4b261285c4fef9047ebbadd777048cd7bcfb84d946c0f95d1017b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-shared-owner.xml",
+      "exists": true,
+      "bytes": 10608,
+      "sha256": "f53513886a3d19ee2b8a08be36bd20a289531736a68e2b36bb4bd3124abad064",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red-initialized.txt",
+      "exists": true,
+      "bytes": 18097,
+      "sha256": "8ee922ae185b73ad4a477878529d35bb8f7e03a7da80001c10e4c0b8bb673bcd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red-initialized.xml",
+      "exists": true,
+      "bytes": 19547,
+      "sha256": "a39937af3251b61f8b89c8932c995ab76a222e34cf603fef38b230af04b544e9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red.txt",
+      "exists": true,
+      "bytes": 19172,
+      "sha256": "26c37db0727ffd72e57e9b32d48fa2c1ccc61324350892784b07fa7d3532a576",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red.xml",
+      "exists": true,
+      "bytes": 19035,
+      "sha256": "bf7f05d4fa985489efd27372e60d96ba368b27891f2e14dbab9b0580a116099e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/shared-independent-green.txt",
+      "exists": true,
+      "bytes": 1158,
+      "sha256": "3619e26afb0e14cf32af20eb1756ab0a19cc8d5ee94c20ade7070cd2c70b4a0b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/shared-independent-green.xml",
+      "exists": true,
+      "bytes": 21979,
+      "sha256": "1cc8b6a23159888b18667d8d9a64f1effb2eea0f79bf7f9fedd8ee14db18f2a3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/cache-region-final.txt",
+      "exists": true,
+      "bytes": 984,
+      "sha256": "326165cb5d361a8ab69df0877b81bf2e4a816d3620fa7fd811ba8afd97dd3dec",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/cache-region-final.xml",
+      "exists": true,
+      "bytes": 423,
+      "sha256": "ca72b2da1daa046fb96679514ae8258caa179c757b907be3b3c40446019db74f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/column-page-cache-green.txt",
+      "exists": true,
+      "bytes": 1158,
+      "sha256": "d66aef02ce88b984bfdf9889c1a9d77930c906c00cba4e0d8772a54d56af6ade",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/column-page-red.txt",
+      "exists": true,
+      "bytes": 3013,
+      "sha256": "66372acdd9f79d35a1d18e02d44b56b32117e1188548bb28bc9a9b2ebfc87c06",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/column-red.txt",
+      "exists": true,
+      "bytes": 1637,
+      "sha256": "1d9494447262f0db6609b60319fd4d85eb0e89d080e1d14122ca13631f844e0c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-assets-green.txt",
+      "exists": true,
+      "bytes": 1898,
+      "sha256": "3a4e8602c1913fcad16cf2cb999e3c99334d6a007824947436c184edb851653a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-assets-green.xml",
+      "exists": true,
+      "bytes": 34764,
+      "sha256": "e9ae08a5ca33b03f7e11fa9144931e082070b19025f1a02ed49fe8ea135b6c4d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-green.txt",
+      "exists": true,
+      "bytes": 2163,
+      "sha256": "f4bad19ef49b5e49f34432f6c1554983f689242ee5a14efb998e80c3ffbafcfe",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-green.xml",
+      "exists": true,
+      "bytes": 32339,
+      "sha256": "4117bc22c489ae75a8146860e9e23b375ec9b7e0f4241807280b45b7454d3993",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-red.txt",
+      "exists": true,
+      "bytes": 11204,
+      "sha256": "5224a57f50a3d4fc10d6ce278881669877cca8229f0f875b08202cf98bba9490",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-red.xml",
+      "exists": true,
+      "bytes": 14189,
+      "sha256": "96497485abceb184a029ce1893e77a5164e28bac9514e12d1fafbe8d2355d38a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/mypy-owner.txt",
+      "exists": true,
+      "bytes": 233,
+      "sha256": "4acdc3fe17b866426880faffd04366c73a301f5e52a00349b41863f6932fec93",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/mypy-region-final.txt",
+      "exists": true,
+      "bytes": 46,
+      "sha256": "a82d6e6f1a4a8482df143d2d21671dd7187c4022cea07389afe3c2a5ba76dba7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/ruff-owner.txt",
+      "exists": true,
+      "bytes": 20,
+      "sha256": "98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/runtime-assets-replay.txt",
+      "exists": true,
+      "bytes": 5575,
+      "sha256": "fe8f2b402406f4c2230d266f7374ce55d27b761c6cf07f5ebba668f290891730",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/runtime-assets-replay.xml",
+      "exists": true,
+      "bytes": 32661,
+      "sha256": "33e04d8f993e351085d87d193d309eaa12392f3aed6c1371a893cc5d7012dedd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-all-layers-green.txt",
+      "exists": true,
+      "bytes": 1648,
+      "sha256": "ea83ad003853fe94e038eb944448996b1799f943d0953dd3efebc431cf075831",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-all-layers-green.xml",
+      "exists": true,
+      "bytes": 74822,
+      "sha256": "e727223da52f836e47972bf6f1bf637e781ce250e109bf87f7041599a494d6a1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-green.txt",
+      "exists": true,
+      "bytes": 3768,
+      "sha256": "456d8e3cef2c4293112326e7eac5d69d6985791275cd3859b8b840bc0a1e6c41",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-green.xml",
+      "exists": true,
+      "bytes": 2901,
+      "sha256": "9f2b8dce52332ff5d5d4acef27791ee3b4025782aaa1cc888df8a8dd45b9106d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-import-green.txt",
+      "exists": true,
+      "bytes": 1481,
+      "sha256": "947cce703826e326a19605838122d3550a735379084c10fb8b30c74b8ce52f6e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-import-green.xml",
+      "exists": true,
+      "bytes": 68484,
+      "sha256": "286717c4bc296501a778b8fe30205968d298da5457bd398c602237d374e5f701",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-fixed-green.txt",
+      "exists": true,
+      "bytes": 3882,
+      "sha256": "051e2d93ee81e84703c7b301f37079c661646036f718b3ae6684cd98997af4f0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-fixed-green.xml",
+      "exists": true,
+      "bytes": 75629,
+      "sha256": "8e242256aaa962f561615d359ac7520004769045a3e7d0e6bff1ec79ace63b68",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-green.txt",
+      "exists": true,
+      "bytes": 3236,
+      "sha256": "cdd52eb2282acc8159f4eae4ffd47f5b87bf473b934f119cbc097543fd1a7bf6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-green.xml",
+      "exists": true,
+      "bytes": 2420,
+      "sha256": "de844b3cfe4bfbc34348906e152d4f2c21e8d4172b6bfd9b26c62c9f884b7e9b",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-scope-green.txt",
+      "exists": true,
+      "bytes": 3875,
+      "sha256": "3f37da92bb06702e6dd128b127e980cbfd8c86749c4b0dcc99d3b8c9967f58a3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-scope-green.xml",
+      "exists": true,
+      "bytes": 75629,
+      "sha256": "84a69df49f0f41d97b31118f7eed6ee632d488257a4392e8d074262f5368d35c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/table-region-green.txt",
+      "exists": true,
+      "bytes": 1232,
+      "sha256": "221a78da9ec67c0b926ca71f82e480cd5f852323ea0497ee76f54a297ea4cc26",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/table-region-green.xml",
+      "exists": true,
+      "bytes": 8405,
+      "sha256": "e93a600d6f9c8da1486344eaf2fb4fac8657f38223d678492d2e9cb7b18897e0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/finalize_report.py",
+      "exists": true,
+      "bytes": 6832,
+      "sha256": "b65f6f93ffbbc971473a6ea8c5a75e85ab0825f681c75badad51912065b17b2f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/probe_carrier.py",
+      "exists": true,
+      "bytes": 2383,
+      "sha256": "7b7e17a56d0047c09038c0e3e8f2a2720a00cf26e4aa1c85e3b248e049ef10cf",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/probe_untyped.py",
+      "exists": true,
+      "bytes": 5770,
+      "sha256": "d74eccf135e681b2bf415bb55c7f66a31822717b2e037064fa05e64f7bf37fe1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/run_formal.py",
+      "exists": true,
+      "bytes": 2423,
+      "sha256": "431d478d801ba8d952c49de56aa86885ff54a45d9e04b4117bc3ff196bd6222d",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/run_red.py",
+      "exists": true,
+      "bytes": 2382,
+      "sha256": "a111cf79bed300d6e19a2f3050808fb52ea571c6100787b438ffbe848ebc00cd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/test_untyped_red.py",
+      "exists": true,
+      "bytes": 2747,
+      "sha256": "9a05d0d3693c2626fe7ff64c9e89aaf5de169c166ef93126497fc0dc7f3acf1f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/prior-prose-controls-v3.py",
+      "exists": true,
+      "bytes": 4412,
+      "sha256": "1a72a3df1eb607a53dbf3c88d3bfb0a48e972fdc40b8c3670ff3f675497e1d92",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/prior-untyped-probe-v3.py",
+      "exists": true,
+      "bytes": 5046,
+      "sha256": "545a308e8c0ea46534d4e27fd7dc52a00b479e593fbe564df7d96e3f02ab1a51",
+      "unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/test_untyped_probe.py",
+      "exists": true,
+      "bytes": 5453,
+      "sha256": "763faa54db74d98c49722c07b3e758ff27eda0569f894bd3e1f944eb4f53c77e",
+      "unchanged": true
+    },
+    {
+      "path": "pytest-of-郑曾波/pytest-0/test_old_sections_cache_misses0/public-cache-result.json",
+      "exists": true,
+      "bytes": 82502,
+      "sha256": "f606f7210631d7deeaaacc26b3005baaafa3eb118f22913561db15636fcfd1aa",
+      "unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "exists": true,
+      "bytes": 11327,
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+      "exists": true,
+      "bytes": 11035,
+      "sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "unchanged": true
+    }
+  ]
+}

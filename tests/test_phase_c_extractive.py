@@ -30,7 +30,14 @@ def test_mother_budget_keeps_unknown_holds_without_a_second_global_stop(tmp_path
            "charged_tokens": 300, "charged_micro_usd": 400}
     ledger.write_text(json.dumps(row) + '\n', encoding="utf-8")
     before = ledger.read_bytes()
-    totals = runner.mother_totals(metadata, ledger)
+    # Historic usage is immutable; current ceilings are a separate input.
+    policy = tmp_path / "policy.yaml"
+    policy.write_text("""schema_version: company-wiki-budget-policy/1
+external_model: {cumulative_tokens: 1000, cumulative_micro_usd: 2000}
+company_allocation: {enforcement: soft, target_tokens: 1, target_micro_usd: 1}
+document_processing: {max_work_units: 16000000}
+""", encoding="utf-8")
+    totals = runner.mother_totals(metadata, ledger, budget_policy_path=policy)
     assert totals["new_unknown_count"] == 1 and totals["prior_unknown7_retained"] == 7
     assert totals["charged_tokens"] == 400 and totals["charged_micro_usd"] == 650
     assert runner.mother_budget_fits(totals, tokens_bound=600, micro_usd_bound=1350)

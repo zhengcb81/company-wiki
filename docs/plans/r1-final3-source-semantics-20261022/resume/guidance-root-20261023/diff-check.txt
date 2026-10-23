@@ -1,0 +1,4 @@
+exit=0
+warning: in the working copy of 'src/company_wiki/document_understanding/decision_inventory.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/source_catalog/narrative_business_policy.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/source_catalog/narrative_operating_relations.py', LF will be replaced by CRLF the next time Git touches it

@@ -1,10 +1,14 @@
-# 当前行动计划（2026-10-22）
+# 当前行动计划（2026-10-23恢复）
 
-**唯一当前状态与接手入口：** [CURRENT_STATUS.md](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。整体计划未完成，用户最新“继续”已恢复实施。以下历史记录不覆盖入口。
+**唯一入口：** [CURRENT_STATUS](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。用户2026-10-23“继续”已恢复实施，原生目标active；整体计划未完成。以下历史记录不覆盖入口。
 
 ## Next Step
 
-W03/W07工程、真实0.9/v5摘要与paid replay/激活恢复/cache/公开读取均完成；三仓诊断发布及精确CI绿。W06 final3已封存，501件实核一致，四路复审全FAIL、14个发现出现项；专家统一根因PWF已ROOT实核接收，当前W08只读RED设计启动，随后分责任层实施、原公司复验再药明合联→Snowflake泛化。当前原生目标已更新并回读active，正文见DU11 MAINLINE_LOOP_GOAL.md。审查技能新增两步收尾已独审、安装和本地提交（623054c/738d99a，无remote）；下一有效attempt采用，不倒写历史、不增加许可门。最新状态/精确CI/预算及交接均以DU11 CURRENT_STATUS为唯一入口。
+ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。
+
+W08公开cache、跨列/缺页父级和通用事实误判的有限工程独审已绿：15上下文+36事实反控及1正式公开cache（32.59s）；但真实249页原件oracle仍FAIL，两条30%事实未入选，未并线/安装/推送。W09已完成49项原文绑定建议及经营桥准备（42 Decimal公式/14来源加总/10作者反控）；新正式RF尚未执行。W10工程已提交安装但真实矩阵OPEN。详见review/r1-w08-resume-20261023/checkpoint.json。0新增付费/下载，预算unknown均保留。
+
+[两份可启动施工包](../du11-source-closure-2026-10-18/harness_lanes/20261023/README.md)：RF研究和CWP官方来源离线诊断分属不同工区；ROOT保留W08/新摘要/预算/中央四审/合线。原公司复验后仍依次药明合联→Snowflake及后续清单。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

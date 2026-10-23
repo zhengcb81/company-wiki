@@ -1,0 +1,118 @@
+{
+  "schema_version": "r1-isolated-harness-dispatch/1",
+  "date": "2026-10-23",
+  "status": "DISPATCHED_USER_REPORTED_RUNNING",
+  "canonical_readme": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\README.md",
+  "packages": [
+    {
+      "id": "W09-RF-RESEARCH",
+      "short": "w09",
+      "root": "C:/Users/郑曾波/Projects/revenue-forecast-r1-research",
+      "branch": "codex/r1-w09-research-20261023",
+      "base": "10bf611166013bd68ce14bfa19bb70e89a92dd5b",
+      "plan": "r1-research-20261023",
+      "purpose": "正式来源引用与角色、最大驱动经营桥、主/压力原生预测及通用买方研究方法",
+      "write": [
+        "references/buy-side-methodology.md",
+        "references/evidence-role-calibration.md",
+        "references/input-construction.md",
+        "RED证明有必要的现有authoring helper及其测试",
+        "delivery/w09/",
+        "docs/plans/r1-research-20261023/"
+      ],
+      "start_head": "42393ea1ca75dc28e751308246dbf856180882bd",
+      "checkout_files": 840,
+      "checkout_bytes": 9149233,
+      "card": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\W09-RF-RESEARCH.md",
+        "sha256": "61ccce0418183a59a9d1da83ba9c4c87d0712ec8550f22df0a0f248ba65fd88b",
+        "bytes": 26880,
+        "access": "read_only"
+      },
+      "status": "DELIVERED_ROOT_SCREENED_CONTENT_REVIEW_PENDING",
+      "handoff": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\handoff.json",
+      "implementation_independently_observed": true,
+      "observed_final_head": "eb7c2dee",
+      "root_screening_ref": "../../review/r1-w09-reception-20261023/reception.json"
+    },
+    {
+      "id": "W11-CWP-SOURCES",
+      "short": "w11",
+      "root": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery",
+      "branch": "codex/r1-w11-source-recovery-20261023",
+      "base": "a2f99db676846b7f475def253c541e12c49ae5fe",
+      "plan": "r1-source-recovery-20261023",
+      "purpose": "官方材料发现的离线分类、漏解析与覆盖状态根因诊断和修复",
+      "write": [
+        "src/company_wiki/source_catalog/official_discovery.py",
+        "src/company_wiki/source_catalog/official_source_cli.py（仅discover）",
+        "专属发现测试与小夹具",
+        "delivery/w11/",
+        "docs/plans/r1-source-recovery-20261023/"
+      ],
+      "start_head": "0d7ada2138d41053598fcbfab5ac1e2bbd6684f5",
+      "checkout_files": 8895,
+      "checkout_bytes": 111767888,
+      "card": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\W11-CWP-SOURCES.md",
+        "sha256": "5c203b3c12545262d1cc1976cc938d4e4d9405407565827affc482f39c7dc8d8",
+        "bytes": 18950,
+        "access": "read_only"
+      },
+      "status": "IN_PROGRESS_USER_REPORTED",
+      "handoff": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\handoff.json",
+      "implementation_independently_observed": false
+    }
+  ],
+  "root_reserved": [
+    "W08 selection/context/cache",
+    "actual network/source restoration",
+    "paid new summary and cumulative budget",
+    "central run/matrix/W12",
+    "mainline merge/push/install"
+  ],
+  "new_downloads": 0,
+  "new_model_calls": 0,
+  "raw_copies": 0,
+  "both_can_start_now": true,
+  "independent_review_required_before_handoff": true,
+  "shared_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\README.md",
+      "sha256": "4d1a1162c8cccf908b407f248453052b0503e0956141641d892a76e1d80d765f",
+      "bytes": 2857,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\INTERFACES.md",
+      "sha256": "87adff0f9e07d012110b06a66c3c1a327c82aee02d7c1ce8c2a01847ec0315f6",
+      "bytes": 5140,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\INPUTS.json",
+      "sha256": "725fd432ad81e13b5c1f95053fced7e0a2aeff6a591f93dde8867896d926760d",
+      "bytes": 12335,
+      "access": "read_only"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\handoff.template.json",
+      "sha256": "26ddbdd0039ffb127dafc7d0d9c1a03509e632beca77fd43c6ed37f5cd13d32b",
+      "bytes": 1633,
+      "access": "read_only"
+    }
+  ],
+  "shared_git_objects_reused": true,
+  "packet_independent_review": "packet-review.json",
+  "user_dispatch_recorded_at": "2026-10-23T19:39:22.878730+00:00",
+  "root_budget_policy_amendment": {
+    "date": "2026-10-23",
+    "ref": "../../budget-regime-20261023.md",
+    "current_tokens": 10000000,
+    "current_usd": "20",
+    "company_enforcement": "soft",
+    "frozen_inputs_unchanged": true,
+    "external_packages_still_offline_no_new_paid_authority_needed": true,
+    "root_integrates_current_policy_after_handoff": true
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "schema_version": "root-w09-deep-readonly-screen/1",
+  "source_bindings": [
+    {
+      "path": "scripts/revenue_forecast.py",
+      "expected": "1759dd25c094ed0c5be2d108b53de92ea22e6475b6fbad78573939713f455378",
+      "actual": "1759dd25c094ed0c5be2d108b53de92ea22e6475b6fbad78573939713f455378",
+      "match": true
+    },
+    {
+      "path": "scripts/revenue_backtest.py",
+      "expected": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+      "actual": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+      "match": true
+    },
+    {
+      "path": "scripts/lint_input.py",
+      "expected": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "actual": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "match": true
+    },
+    {
+      "path": "scripts/fix_hashes.py",
+      "expected": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "actual": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "match": true
+    },
+    {
+      "path": "scripts/revenue_core.py",
+      "expected": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+      "actual": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+      "match": true
+    },
+    {
+      "path": "scripts/revenue_report.py",
+      "expected": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "actual": "76744525f76d81d68e76ef5ba1f38e304fdb62e42b04b64b5224ce24facc4ae4",
+      "match": true
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "expected": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd",
+      "actual": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd",
+      "match": true
+    },
+    {
+      "path": "scripts/contracts/constants.py",
+      "expected": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+      "actual": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+      "match": true
+    },
+    {
+      "path": "scripts/research/evidence_roles.py",
+      "expected": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+      "actual": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+      "match": true
+    },
+    {
+      "path": "scripts/research/drivers.py",
+      "expected": "5ba825340431fc6ebf1f38e8facc1b23ae4ced9222312ccd63fbfe9199a9dd1f",
+      "actual": "5ba825340431fc6ebf1f38e8facc1b23ae4ced9222312ccd63fbfe9199a9dd1f",
+      "match": true
+    },
+    {
+      "path": "scripts/research/native_dependencies.py",
+      "expected": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "actual": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+      "match": true
+    },
+    {
+      "path": "scripts/contracts/period_flow.py",
+      "expected": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+      "actual": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+      "match": true
+    },
+    {
+      "path": "references/buy-side-methodology.md",
+      "expected": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "actual": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "match": true
+    },
+    {
+      "path": "references/evidence-role-calibration.md",
+      "expected": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "actual": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "match": true
+    },
+    {
+      "path": "references/input-construction.md",
+      "expected": "67e0245df2270e1829c1d600d7ae1a0b6ccfd71583ee05e5c2df1a39996dd3aa",
+      "actual": "67e0245df2270e1829c1d600d7ae1a0b6ccfd71583ee05e5c2df1a39996dd3aa",
+      "match": true
+    }
+  ],
+  "source_manifest_sha_matches": true,
+  "all_source_files_match": true,
+  "native_captures": [
+    {
+      "request_id": "w09-main-validate",
+      "operation": "validate",
+      "request_exists": true,
+      "all_three_bytes_identical": true,
+      "request_sha_match": true,
+      "request_bytes_match": true,
+      "logical_input_equals_actual_request": true,
+      "stdout_bytes_match": true,
+      "stderr_bytes_match": true,
+      "claimed_clean": true
+    },
+    {
+      "request_id": "w09-main-compute",
+      "operation": "compute",
+      "request_exists": true,
+      "all_three_bytes_identical": true,
+      "request_sha_match": true,
+      "request_bytes_match": true,
+      "logical_input_equals_actual_request": true,
+      "stdout_bytes_match": true,
+      "stderr_bytes_match": true,
+      "claimed_clean": true
+    },
+    {
+      "request_id": "w09-main-snapshot",
+      "operation": "snapshot",
+      "request_exists": true,
+      "all_three_bytes_identical": true,
+      "request_sha_match": true,
+      "request_bytes_match": true,
+      "logical_input_equals_actual_request": true,
+      "stdout_bytes_match": true,
+      "stderr_bytes_match": true,
+      "claimed_clean": true
+    },
+    {
+      "request_id": "w09-stress-validate",
+      "operation": "validate",
+      "request_exists": true,
+      "all_three_bytes_identical": true,
+      "request_sha_match": true,
+      "request_bytes_match": true,
+      "logical_input_equals_actual_request": true,
+      "stdout_bytes_match": true,
+      "stderr_bytes_match": true,
+      "claimed_clean": true
+    },
+    {
+      "request_id": "w09-stress-compute",
+      "operation": "compute",
+      "request_exists": true,
+      "all_three_bytes_identical": true,
+      "request_sha_match": true,
+      "request_bytes_match": true,
+      "logical_input_equals_actual_request": true,
+      "stdout_bytes_match": true,
+      "stderr_bytes_match": true,
+      "claimed_clean": true
+    },
+    {
+      "request_id": "w09-stress-snapshot",
+      "operation": "snapshot",
+      "request_exists": true,
+      "all_three_bytes_identical": true,
+      "request_sha_match": true,
+      "request_bytes_match": true,
+      "logical_input_equals_actual_request": true,
+      "stdout_bytes_match": true,
+      "stderr_bytes_match": true,
+      "claimed_clean": true
+    }
+  ],
+  "all_native_capture_structure_matches": true,
+  "recorder_events_count": 12,
+  "event_keys": [
+    "schema_version",
+    "event_id",
+    "run_id",
+    "role",
+    "kind",
+    "recorded_at",
+    "usage",
+    "cost",
+    "data"
+  ],
+  "event_kinds": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "claim_union": {
+    "rows": 49,
+    "unique": 49,
+    "price_negative_controls": 18,
+    "price_roles_unchanged": true
+  },
+  "variant_checks": [
+    {
+      "variant": "main",
+      "rpo_kind": "management_guidance",
+      "rpo_value": 42207.0646,
+      "forecast_input_sha": "93ba13a5207a8e141dd96aca1a417ab926a280d20dfcc2866135d8d012d692f5",
+      "snapshot_input_sha": "93ba13a5207a8e141dd96aca1a417ab926a280d20dfcc2866135d8d012d692f5",
+      "same_engine_input_sha": true
+    },
+    {
+      "variant": "stress",
+      "rpo_kind": "management_guidance",
+      "rpo_value": 42207.0646,
+      "forecast_input_sha": "4c82c3c1baf516c1a7155e41a366fb1e3415c3ab7feccdce14549556c5e80bd7",
+      "snapshot_input_sha": "4c82c3c1baf516c1a7155e41a366fb1e3415c3ab7feccdce14549556c5e80bd7",
+      "same_engine_input_sha": true
+    }
+  ],
+  "first_review_code_binding": {
+    "references/buy-side-methodology.md": "69f701fa",
+    "references/evidence-role-calibration.md": "d3e781c7",
+    "references/input-construction.md": "f3cbc905",
+    "delivery/w09/tools/verify_excerpts.py": "as-reviewed-in-worktree",
+    "delivery/w09/tools/author_main_input.py": "as-reviewed-in-worktree"
+  },
+  "final_review_exact_code_binding": null,
+  "current_request_dirs": 6,
+  "cleanup_removed_superseded_requests_evidence": "receipt identifies24 superseded request-build dirs, not finalcapture dirs. Current six formal request dirs and all six capture directories remain. No evidence establishes deleted dirs contained failed executed native calls; do not report lost failures without such evidence.",
+  "unit_test_log_evidence": {
+    "declared": {
+      "command": "python -m pytest tests/test_research_evidence_roles.py tests/test_m3_evidence_roles.py tests/test_input_construction_consistency.py tests/test_input_semantics_e2e.py tests/test_evidence_input_lineage.py -q",
+      "exit_code": 0,
+      "result": "49 passed, 8 subtests passed",
+      "log_path": null,
+      "log_sha256": null
+    },
+    "observed_log_path_and_sha": null
+  },
+  "history_head_ref_check": {
+    "bc38fffc34ae4919e9b7457d1fc23dda0d5138be": {
+      "exit_code": 0,
+      "stdout": "bc38fffc34ae4919e9b7457d1fc23dda0d5138be w09: record final handoff commit hash",
+      "stderr": ""
+    },
+    "42393ea1ca75dc28e751308246dbf856180882bd": {
+      "exit_code": 0,
+      "stdout": "42393ea1ca75dc28e751308246dbf856180882bd docs: prepare isolated W09-RF-RESEARCH handoff",
+      "stderr": ""
+    }
+  }
+}

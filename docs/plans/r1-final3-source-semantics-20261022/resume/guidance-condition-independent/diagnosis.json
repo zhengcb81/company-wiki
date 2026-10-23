@@ -1,0 +1,158 @@
+{
+  "schema": "guidance-condition-independent-diagnosis/1",
+  "status": "FROZEN_PUBLIC_RED_AND_EXISTING_SCHEMA_GAP",
+  "counts": {
+    "tests": 20,
+    "failures": 7,
+    "errors": 0,
+    "skipped": 0
+  },
+  "version_bindings": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+      "bytes": 44296
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+      "bytes": 21580
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+      "bytes": 69468
+    },
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": {
+      "sha256": "1d0ac665822cdf927f8214cd08c6a2d3043becd6ed10efdd5f69ff2f52bed007",
+      "bytes": 14203
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+      "bytes": 50229
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+      "bytes": 21667
+    },
+    "src/company_wiki/document_understanding/summary_tasks.py": {
+      "sha256": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+      "bytes": 7561
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+      "bytes": 32830
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "bytes": 11327
+    }
+  },
+  "source_bytes_stable": true,
+  "public_findings": [
+    {
+      "id": "GC01",
+      "root": "Reading business policy future revenue recognition/financial exemption",
+      "observation": "CN/traditional future ranges remain weak descriptions and English subscription revenue guidance is dropped as financial-only. Future revenue guidance is neither an observed actual measure nor a routine historical total.",
+      "red_tests": 3
+    },
+    {
+      "id": "GC02",
+      "root": "SourceOperatingSession source-support dependency semantics plus ROOT shared envelope wiring",
+      "observation": "Explicitly linked local premises may be independently selected, but their guidance citation/task has only its heading. This affects CN, traditional and a condition explicitly preceding following outlook.",
+      "red_tests": 4,
+      "note": "The EN closure test currently fails even earlier at missing guidance; its real condition-binding behavior must be rechecked after recall is repaired."
+    }
+  ],
+  "contract_inventory": [
+    {
+      "owner": "OperatingFact",
+      "fields": [
+        "eligible",
+        "topics",
+        "reasons",
+        "score",
+        "financial_exempt",
+        "purpose"
+      ],
+      "no_fields": [
+        "stage",
+        "modality"
+      ],
+      "meaning": "Admission/value description; cannot assert an absent forecast/modality attribute in a test."
+    },
+    {
+      "owner": "du4-operating-relations/1",
+      "fields": [
+        "assertion_refs",
+        "actor_refs",
+        "object_refs",
+        "predicate_refs",
+        "qualifier_refs",
+        "activity",
+        "polarity",
+        "stage",
+        "attribution",
+        "modality"
+      ],
+      "current_guidance_result": "complete with zero relations on all4 source guidance examples",
+      "meaning": "Operating-predicate states are not generic revenue-guidance observations."
+    },
+    {
+      "owner": "EvidenceSpan/du-production-reading/2",
+      "actual_contract": "Original text+source ID+locator+selection_reasons/topics, citation support/context membership and existing quality flags.",
+      "limitation": "No dedicated source forecast field exists."
+    },
+    {
+      "owner": "source-summary-task-plan/1 and source-scoped-model-view/1",
+      "actual_contract": "Task binding preserves selection reasons/support/context; model input preserves original text, source role, quality, kind/section_role/topics.",
+      "limitation": "The forecast enum belongs to model-output modality, not a program-proven model-input observation."
+    }
+  ],
+  "minimum_common_fix": [
+    "One source-policy owner should observe future revenue amount/range/growth, using the same native/script matching and future scope as current measure rules. Do not promote it into actual operating quantity or historical revenue achievement.",
+    "Retain source forecast as valuable disclosure in every language and supply explicit meaning through one documented existing channel (purpose and/or source selection reason); if a machine-verifiable forecast tag is required, ROOT must define and document that minimal contract before new assertions, rather than tests inventing fields.",
+    "A shared source-support dependency owner should recognize explicit references to this/above/following revenue guidance and its local assumption/condition, with real source frame/section/parent and object attribution. Revenue guidance is not a product/device declaration; do not add it to the product-head dictionary.",
+    "Feed genuine condition IDs through the existing required source-context graph. Retain native IDs and any actual carrier members, debit one existing WorkBudget, and apply the full original8/4/2048 envelope and96/48000 material budgets. No new persistent schema/store/permission or copied paragraph tree.",
+    "An unrelated adjacent risk, future internal-process sentence, another partys outlook, another parent or another section is not evidence of guidance dependence. Already-inline conditions must remain in the same original unchanged text.",
+    "Do not alter forecast numbers, currency or units, synthesize a midpoint, raise limits, reserve company/oracle slots, or use company/industry/known-number special cases."
+  ],
+  "test_contract_scope": "20 public tests use actual selectable spans, exact source/canonical carrier membership, real citation views, SummaryTaskPlan member IDs and scoped model parts/shared references. No fake pipeline, raw reading, model call or invented field. Future-not-actual checks forbid existing current/milestone labels and preserve expected/year/range text; they do not claim an absent dedicated forecast-input tag was validated.",
+  "controls": [
+    "cross-parent",
+    "cross-section",
+    "nearby unlinked weather risk",
+    "future internal process",
+    "supplier own revenue outlook",
+    "same-original inline conditions",
+    "tight1/2source slots",
+    "real character bound",
+    "source text/ID/locator/metadata unchanged",
+    "96/48000/16000000 constants"
+  ],
+  "frozen_test": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+  "test_sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+  "ruff": "PASS",
+  "execution": "red.json",
+  "logs": [
+    "red.txt",
+    "red.xml"
+  ],
+  "cleanup": {
+    "event": "cleanup",
+    "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220246-55f28126",
+    "existed": true,
+    "removed": true,
+    "actual_absent_verified": true,
+    "requested_absent_verified": true
+  },
+  "external_actions": {
+    "original_reads": 0,
+    "format_parser_calls": 0,
+    "network": 0,
+    "paid_model": 0
+  },
+  "next": "ROOT implements the common owner, then independently replay the same20 and existing measured-state/qualification/typed-table controls. Reevaluate EN condition closure after recall passes; preserve this original RED.",
+  "boundary": "Diagnostic/TDD packet only; no production changes, source reads, schema inventions, Git writes or final whole-node acceptance."
+}

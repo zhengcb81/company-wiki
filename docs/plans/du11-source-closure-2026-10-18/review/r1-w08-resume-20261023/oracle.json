@@ -1,0 +1,33 @@
+{
+  "schema_version": "w08-original-content-checkpoints/1",
+  "source_name": "annual-2025-reuse",
+  "selector_version": "0.9.0",
+  "document_kind": "annual_report",
+  "language": "zh",
+  "title": "2025年年度报告",
+  "frozen_before_candidate_run": true,
+  "source_inventory": "verified-source-pages.json annual source pdf_page14",
+  "facts": [
+    {
+      "id": "testing_new_molecule_share",
+      "pdf_page": 14,
+      "required_text": [
+        "新分子业务持续发力",
+        "2025年收入占比进一步提升至超30%"
+      ],
+      "own_business": "测试业务",
+      "forbidden_business": "生物学业务"
+    },
+    {
+      "id": "biology_new_molecule_share",
+      "pdf_page": 14,
+      "required_text": [
+        "新分子业务持续贡献增长",
+        "2025年收入占比进一步提升至超30%"
+      ],
+      "own_business": "生物学业务",
+      "forbidden_business": "测试业务"
+    }
+  ],
+  "acceptance_scope": "Two required distinct real-source business facts and own/sibling scope under existing limits; not whole-document completeness or investment quality."
+}

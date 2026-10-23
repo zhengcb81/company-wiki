@@ -1,0 +1,42 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-public-recall-red-temp", "requested_basetemp_len": 181, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233402-d4f81929", "effective_basetemp_len": 99}
+...........................................FFFFFF                        [100%]
+================================== FAILURES ===================================
+_ test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[We anticipate our reactor volume of 143 kL.] _
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py:124: in test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual
+    assert "operating_plan" in fact.reasons
+E   AssertionError: assert 'operating_plan' in ()
+E    +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+_ test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[We project our reactor volume of 143 kL.] _
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py:124: in test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual
+    assert "operating_plan" in fact.reasons
+E   AssertionError: assert 'operating_plan' in ()
+E    +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+_ test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[\u516c\u53f8\u6709\u671b\u5c06\u53cd\u5e94\u5668\u603b\u4f53\u79ef\u589e\u52a0\u81f3143kL\u3002] _
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py:124: in test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual
+    assert "operating_plan" in fact.reasons
+E   AssertionError: assert 'operating_plan' in ()
+E    +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+_ test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[\u516c\u53f8\u529b\u4e89\u53cd\u5e94\u5668\u603b\u4f53\u79ef\u589e\u52a0\u81f3143kL\u3002] _
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py:124: in test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual
+    assert "operating_plan" in fact.reasons
+E   AssertionError: assert 'operating_plan' in ()
+E    +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+_ test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[We anticipate our active user count of 217 next year.] _
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py:124: in test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual
+    assert "operating_plan" in fact.reasons
+E   AssertionError: assert 'operating_plan' in ()
+E    +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+_ test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[\u516c\u53f8\u529b\u4e89\u660e\u5e74\u5ba2\u6237\u6570\u91cf\u8fbe\u5230217\u5bb6\u3002] _
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py:124: in test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual
+    assert "operating_plan" in fact.reasons
+E   AssertionError: assert 'operating_plan' in ()
+E    +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_generalization.py::test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[We anticipate our reactor volume of 143 kL.]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_generalization.py::test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[We project our reactor volume of 143 kL.]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_generalization.py::test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[\u516c\u53f8\u6709\u671b\u5c06\u53cd\u5e94\u5668\u603b\u4f53\u79ef\u589e\u52a0\u81f3143kL\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_generalization.py::test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[\u516c\u53f8\u529b\u4e89\u53cd\u5e94\u5668\u603b\u4f53\u79ef\u589e\u52a0\u81f3143kL\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_generalization.py::test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[We anticipate our active user count of 217 next year.]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_generalization.py::test_a_source_capacity_or_business_quantity_target_remains_exact_model_evidence_not_actual[\u516c\u53f8\u529b\u4e89\u660e\u5e74\u5ba2\u6237\u6570\u91cf\u8fbe\u5230217\u5bb6\u3002]
+6 failed, 43 passed in 1.27s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233402-d4f81929", "existed": true, "removed": true}

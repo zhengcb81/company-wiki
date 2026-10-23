@@ -1,0 +1,95 @@
+{
+  "status": "PASS_BUDGET_REGIME_ONLY",
+  "scope": "CWP single budget policy, historical mother accounting, real memory PDF shared parse/select work account, selection diagnostics, source-decision cache budget identity and same-run lifecycle compatibility",
+  "source_sha256": {
+    "src/company_wiki/resource_budget.py": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+    "config/resource_budget.yaml": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "d1ffbfe8f4e37a0f909c0dc0237900b0b9ff9f1c0e843074c5161b4bf9b8cd44",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "src/company_wiki/source_catalog/narrative_reading.py": "8f3f43afdb905fd70df6452b472a0195b4bddf8ee25c69b63463bd83be7fa2cf",
+    "src/company_wiki/automation/narrative_select.py": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e",
+    "src/company_wiki/document_understanding/decision_inventory.py": "2b0974a586fbb2ec417192e17ddc03be8456fa47cb38bb72881ef3ed6bb8f54b",
+    "tests/unit/test_resource_budget_policy.py": "1f7856b22c3e928155d7591148f985f731b7de6cae94af9e6e07a6cde73d25f6"
+  },
+  "initial_real_red": {
+    "passed": 71,
+    "failed": 2,
+    "errors": 0,
+    "seconds": 5.28,
+    "receipt": "independent-initial.xml"
+  },
+  "final_runs": [
+    {
+      "passed": 99,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 7.22,
+      "receipt": "independent-final.xml",
+      "includes": "4 independent real-production assertions, original63 TDD, mother boundaries, dimensions,23 inventory,3cache identities"
+    },
+    {
+      "passed": 47,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 36.73,
+      "receipt": "cache-boundary-final.xml",
+      "includes": "real public PDF summary and same-run restart plus precheck/generation/partial compatibility"
+    },
+    {
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 5.98,
+      "receipt": "probe-final.xml",
+      "includes": "same unchanged independent assertions after probe import-style cleanup"
+    }
+  ],
+  "additional_initial_production_regression": {
+    "passed": 13,
+    "failed": 0,
+    "seconds": 10.06,
+    "receipt": "loopback-production.xml"
+  },
+  "resolved_findings": [
+    {
+      "id": "BUDGET-CACHE-01",
+      "result": "Fixed at shared causal inventory and real source processing owner. Work limit participates; pure mother-fee changes do not. Exhausted partial trace freezes partial, real comparison unavailable and production cache precheck false."
+    },
+    {
+      "id": "BUDGET-DIAGNOSTIC-02",
+      "result": "Fixed at source selection owner. Real partial selection has dimension=document_work, used=19913,limit=20000,phase=document,requested=null. Retains source-backed selected spans without inventing original refusal size."
+    }
+  ],
+  "observed_policy": {
+    "mother_tokens": 10000000,
+    "mother_micro_usd": 20000000,
+    "company_token_target": 150000,
+    "company_micro_usd_target": 1000000,
+    "company_enforcement": "soft",
+    "document_work_limit": 16000000
+  },
+  "old_test_adjustments": "Existing unknown charge and exact boundary assertions retained; temporary current policy replaces stale historical metadata ceilings. Existing same-account test now configures loader rather than removed effective constant. No frozen independent acceptance assertion relaxed.",
+  "cleanup": {
+    "memory_pdf_written_to_disk": false,
+    "tmp_policy_removed": true,
+    "pytest_roots_absent": {
+      "cw-pytest-basetemp/20261023-222149-76da81d8": true,
+      "cw-pytest-basetemp/20261023-222259-7873b364": true,
+      "cw-pytest-basetemp/20261023-222542-88aba120": true,
+      "cw-pytest-basetemp/20261023-222615-f7d9f1a3": true,
+      "cw-pytest-basetemp/20261023-222810-2f60eb43": true
+    },
+    "manual_retry": "47-case run hook reported removed=false for3 owned SQLite fixture directories. Exact absolute effective path verified under current workspace; only this run directory removed after process exit and final absence checked. No historical temp directories removed.",
+    "report_bytecode_removed": true
+  },
+  "limits": "No external network, API calls, supplier credentials, production raw originals, source mutations, installed-skill sync or Git mutation performed. This report does not certify audit-skill low-budget changes, pending real company semantics, paid matrix or entire PWF completion.",
+  "review_error_retracted": "Initial .py-versus-package path assumption was corrected before reporting product findings; actual dependency package import/freeze/compare verified.",
+  "permanent_regression_review": {
+    "path": "tests/unit/du11_production/test_document_work_policy.py",
+    "sha256": "3f24cdab811236736707afb6a71892ecb49e948e51c581e00c4e16e349b88e42",
+    "independent_static_review": "PASS",
+    "root_reported_execution": "2P / 4.11s; independent review did not duplicate this optional rerun",
+    "isolation": "All policy writes are tmp_path only. Environment and socket changes use monkeypatch fixture so are restored. PDF bytes only in memory; PyMuPDF document context closed. Real parser/selector unmodified except subclass observation. No real network or keys. Partial work sample derives from current full algorithm work rather than a fixed company/operation threshold.",
+    "meaning": "Promotes both independent initial findings into normal unit suite without relaxing acceptance. Full same-run lifecycle is independently covered by47-case review run; minimal cache manifest here tests only production cache predicate."
+  }
+}

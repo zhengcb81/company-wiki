@@ -1,0 +1,8 @@
+16da576b438c047c9763fc0c3029377050311ab2
+100644 ae9fda73461bc55ae39ee5bb59a89bdf360bab3b 1	src/company_wiki/document_understanding/decision_inventory.py
+100644 8b7615643103e48c957e5b4eb3b00bdbb05b90f9 2	src/company_wiki/document_understanding/decision_inventory.py
+100644 a98a5a65a001d8f435fd47a9139e87c8aa5f75dc 3	src/company_wiki/document_understanding/decision_inventory.py
+
+Auto-merging src/company_wiki/document_understanding/decision_inventory.py
+CONFLICT (content): Merge conflict in src/company_wiki/document_understanding/decision_inventory.py
+Auto-merging src/company_wiki/source_catalog/narrative_reading.py

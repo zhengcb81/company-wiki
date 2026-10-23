@@ -1,0 +1,176 @@
+{
+  "test_directories": [
+    {
+      "receipt": "independent17-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-232534-479af077",
+      "absent": true
+    },
+    {
+      "receipt": "independent17-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-232534-479af077",
+      "absent": true
+    },
+    {
+      "receipt": "independent17-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\independent17-red-temp",
+      "absent": true
+    },
+    {
+      "receipt": "independent17-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-232730-565973c7",
+      "absent": true
+    },
+    {
+      "receipt": "independent17-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-232730-565973c7",
+      "absent": true
+    },
+    {
+      "receipt": "independent17-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\independent17-v1-temp",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-inline-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233224-122a01ac",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-inline-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233224-122a01ac",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-inline-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-inline-final-temp",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-inline-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233134-0bbde38e",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-inline-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233134-0bbde38e",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-inline-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-inline-red-temp",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-outer-actor-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233613-dbde10ac",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-outer-actor-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233613-dbde10ac",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-outer-actor-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-outer-actor-red-temp",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-public-recall-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233432-e4fd8ab2",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-public-recall-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233432-e4fd8ab2",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-public-recall-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-public-recall-final-temp",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-public-recall-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233402-d4f81929",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-public-recall-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233402-d4f81929",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-public-recall-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-public-recall-red-temp",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-232941-5d021cce",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-232941-5d021cce",
+      "absent": true
+    },
+    {
+      "receipt": "predicate-controls-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-v1-temp",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233505-862d7636",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233505-862d7636",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\related-final-temp",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-v2-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233643-701e405b",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-v2-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233643-701e405b",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-v2-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\related-final-v2-temp",
+      "absent": true
+    },
+    {
+      "receipt": "related-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233018-0d731cac",
+      "absent": true
+    },
+    {
+      "receipt": "related-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233018-0d731cac",
+      "absent": true
+    },
+    {
+      "receipt": "related-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\related-v1-temp",
+      "absent": true
+    }
+  ],
+  "mypy_cache": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\mypy-cache",
+    "removed_bytes": 66615825,
+    "absent": true
+  },
+  "historical_directories_removed": 0,
+  "raw_originals_or_author_worktree_writes": 0
+}

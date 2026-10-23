@@ -1,9 +1,9 @@
 {
   "schema_version": "company-wiki-current-plan-status/1",
-  "as_of_date": "2026-10-22",
+  "as_of_date": "2026-10-23",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_GOAL_UPDATED_R1_FINAL3_PLAN_ACCEPTED_W08_RED_DESIGN",
-  "current_authorized_scope": "User explicitly updated and started current mainline audit loop on 2026-10-22; goal active verified via get_goal.",
+  "overall_status": "ACTIVE_W08_ROOT_REPAIR_W09_W11_EXTERNAL_RUNNING",
+  "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -122,7 +122,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "W03_W07_ENGINEERING_LIVE_COMPLETE_W06_FINAL3_FOUR_REVIEWS_FAIL_ROOT_CAUSE_PLAN_RUNNING_HOLDOUTS_OPEN",
+      "status": "ACTIVE_W08_ENGINEERING_GREEN_REAL_ANNUAL_PARTIAL_W09_W11_EXTERNAL_RUNNING",
       "mainline": true
     },
     {
@@ -151,22 +151,22 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Finish W08 minimal RED/fixture/version design, freeze implementation attempt and exact code/install/config; implement W08-W11 by ownership, integrate W12 original-company retest and independent reviews, then fresh HK/US and remaining company-list loop.",
-  "next_step_after_user_resumes": "already_resumed_2026_10_22",
+  "next_step_now": "先完成预算制度集中独审与发布（母10M/$20、公司软预算、low提醒继续、配置和诊断单一化），然后恢复ROOT W08步骤3指引前提闭包/经营量根修；W09/W11独占施工不动，正式摘要/cache/矩阵/W12随后。",
+  "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
     "tokens": 1561352,
     "estimated_micro_usd": 631959,
-    "remaining_tokens": 438648,
+    "remaining_tokens": 8438648,
     "remaining_micro_usd": 19368041,
     "includes_prior_baseline_and_retained_fx": true,
     "new_unknown_count": 4,
     "prior_unknown_hold_count": 7,
-    "cumulative_cap_tokens": 2000000,
+    "cumulative_cap_tokens": 10000000,
     "cumulative_cap_usd": 20,
     "cost_kind": "budget proxy and conservative unknown holds, not provider invoice",
-    "latest_native_observation_ref": "review/r1-w07-live-20261022/accounting-final-observation.json",
+    "latest_native_observation_ref": "review/budget-regime-20261023/accounting-policy-observation.json",
     "company_cap_tokens": 150000,
     "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json",
     "company_tokens": 56355,
@@ -174,7 +174,9 @@
     "company_known_tokens": 24184,
     "company_known_micro_usd": 9693,
     "company_unknown_hold_tokens": 32171,
-    "company_unknown_hold_micro_usd": 6728
+    "company_unknown_hold_micro_usd": 6728,
+    "policy_ref": "../../../config/resource_budget.yaml",
+    "company_allocation_enforcement": "soft"
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -200,9 +202,9 @@
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "resume_handoff": "HANDOFF-2026-10-22.md",
-  "resumed_at": "2026-10-22T18:19:15.710106+00:00",
-  "previous_pause_request": "Superseded by latest user continue request.",
-  "last_updated_at": "2026-10-22T22:09:01.132594+00:00",
+  "resumed_at": "2026-10-23T18:41:33.912794+00:00",
+  "previous_pause_request": "Superseded by user continue2026-10-23",
+  "last_updated_at": "2026-10-23T22:31:30.296232+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -218,7 +220,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "FOUR_REVIEWS_FAIL_EXPERT_PLAN_ACCEPTED_W08_RED_DESIGN_STARTED",
+    "status": "FOUR_REVIEWS_FAIL_W08_NUMERIC_PROSE_NODE_REVIEWED_ANNUAL_PARTIAL_W09_W11_EXTERNAL_RUNNING",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -306,13 +308,50 @@
     "code_remote": null,
     "publication_commit": "738d99a8cdcf7f33b96e89f4e304b3440e4c5e51",
     "closeout_ref": "review/audit-skill-quality-closeout-20261022.json",
-    "publication_byte_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json"
+    "publication_byte_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\audit-continuous-quality-20261022\\review\\publication-byte-check.json",
+    "current_projection_followup": "review/r1-w10-engineering-closeout-20261022.json",
+    "prior_package_tree_is_historical": true
   },
   "mainline_goal": {
     "status": "active",
     "objective_file": "MAINLINE_LOOP_GOAL.md",
     "activation_receipt": "review/mainline-goal-activation-20261022.json",
     "native_get_goal_verified": true,
-    "project_budget_preserved": true
+    "project_budget_preserved": true,
+    "pause_request": "手头事情做好可以暂停",
+    "native_pause_to_be_called_after_final_push": false,
+    "pause_request_superseded": true
+  },
+  "r1_final3_current_checkpoint": {
+    "W08": "NUMERIC_PROSE_RESTRICTION_NODES_REVIEWED_BRANCH_PUSH_GREEN_ANNUAL_PARTIAL",
+    "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
+    "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
+    "W09": "DELIVERED_USER_REPORTED_ROOT_SCREENED_CONTENT_REVIEW_PENDING",
+    "W09_ref": "review/r1-w09-reception-20261023/reception.json",
+    "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
+    "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
+    "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
+    "W11": "EXTERNAL_HARNESS_RUNNING_USER_REPORTED_OFFLINE_SCOPE",
+    "W12": "NOT_STARTED",
+    "business_pass": false,
+    "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
+    "W08_mainline_integrated": false,
+    "W08_branch_head_prefix": "1712ed10",
+    "W08_branch_published": true,
+    "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1"
+  },
+  "budget_regime": {
+    "status": "ENGINEERING_PASS_PENDING_PUBLICATION",
+    "authorization": "User2026-10-23: 根据你的建议改进额度制度",
+    "policy": "config/resource_budget.yaml",
+    "plan": "budget-regime-20261023.md",
+    "effective_scope_ref": "review/budget-regime-20261023/effective-scope-observation.json",
+    "current_limits_tokens": 10000000,
+    "current_limits_micro_usd": 20000000,
+    "company_targets_enforcement": "soft",
+    "old_metadata_and_unknown_holds_unchanged": true,
+    "native_goal_old_budget_text_superseded_by_latest_user_instruction": true,
+    "selection_batching": "W08_step5_open_not_claimed_complete",
+    "independent_review": "review/budget-regime-20261023/independent-final/final-review.json"
   }
 }

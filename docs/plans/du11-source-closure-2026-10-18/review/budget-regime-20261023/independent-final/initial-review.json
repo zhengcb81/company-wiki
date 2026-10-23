@@ -1,0 +1,67 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "findings": [
+    {
+      "id": "BUDGET-CACHE-01",
+      "severity": "high",
+      "root_cause": "Actual computation limit/exhaustion not bound into current decision cache causality; partial selection can freeze complete dependencies.",
+      "evidence": {
+        "configured_work": 20000,
+        "used": 19913,
+        "exhausted": true,
+        "partial_spans": 3,
+        "full_spans": 4,
+        "dependency_status": "complete",
+        "after_increase_compare": "same",
+        "after_increase_cache_match": true
+      }
+    },
+    {
+      "id": "BUDGET-DIAGNOSTIC-02",
+      "severity": "medium",
+      "root_cause": "Only early all-deferred path emits computation-budget diagnostic; partial candidate path can exhaust same parent yet expose no work-budget diagnostic.",
+      "evidence": {
+        "partial_status": "partial",
+        "selection_diagnostics": []
+      }
+    }
+  ],
+  "positive_checks": [
+    "actual memory PDF producer and selector share same configured account",
+    "zero work yields honest empty needs_review",
+    "pure fee ceiling change does not affect source semantic decision identity",
+    "63 API/TDD boundary cases green",
+    "historical charged/unknown mother bounds preserved",
+    "soft company target greater than mother allowed"
+  ],
+  "test_result": {
+    "passed": 71,
+    "failed": 2,
+    "errors": 0,
+    "duration_seconds": 5.28
+  },
+  "source_sha": {
+    "src/company_wiki/resource_budget.py": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+    "config/resource_budget.yaml": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "d1ffbfe8f4e37a0f909c0dc0237900b0b9ff9f1c0e843074c5161b4bf9b8cd44",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "src/company_wiki/source_catalog/narrative_reading.py": "6c61ca7c45f10096fcfdf60ee64b7353ee4b5153f324b94d7351b488a6d4094a",
+    "src/company_wiki/automation/narrative_select.py": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b242b1f9cc645d01740afc87d328c772ab47e1365e4fb45948baded41f0f672b",
+    "tests/unit/test_resource_budget_policy.py": "1f7856b22c3e928155d7591148f985f731b7de6cae94af9e6e07a6cde73d25f6"
+  },
+  "source_unchanged": true,
+  "temporary_material_removed": true,
+  "pytest_temporary_root": "cw-pytest-basetemp/20261023-222149-76da81d8",
+  "pytest_temporary_root_absent": true,
+  "actual_dependency_package": "src/company_wiki/document_understanding/decision_dependencies/__init__.py",
+  "retracted_nonfinding": "An initial read used nonexistent .py instead of actual package. No actual import failed; package confirmed by real freeze/compare. This path assumption is not a product finding.",
+  "loopback_production_result": {
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 10.06,
+    "local_http_only": true,
+    "temp_root_absent": true
+  }
+}
