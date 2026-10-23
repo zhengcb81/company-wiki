@@ -303,9 +303,10 @@
  ],
  "git": {
   "working_tree_explained": true,
-  "push_status": "PENDING (see final report)",
+  "push_status": "pushed to origin/codex/r1-w11-source-recovery-20261023 (new branch; no force-push; no mainline merge; remote https://github.com/zhengcb81/company-wiki.git)",
   "mainline_merged": false,
-  "skills_installed": false
+  "skills_installed": false,
+  "pushed_head": "c9901a24"
  },
  "quality_scope": "Package only; no global business/forecast acceptance",
  "delivery_commit_note": "final_head 6b538ca2 is the approved product commit; the commit that adds handoff.md/handoff.json is docs-only and leaves the product tree identical."

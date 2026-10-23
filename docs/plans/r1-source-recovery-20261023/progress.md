@@ -51,3 +51,10 @@
 - 矩阵：62 新 + 7 既有 = **69 passed**；全两文件 98 passed。
 - 待办：审查 4、handoff.json、门禁重跑与推送。
 
+
+## 2026-10-23 收尾
+
+- 审查 4 绑定 6b538ca2：**APPROVE**（R3-01 PASS；NR/IR 全项复核通过）。
+- 最终矩阵：69 passed / 29 deselected（JUnit 69）；全两文件 98 passed。
+- 交付：delivery/w11/{handoff.md,handoff.json,evidence_inventory.json,test_results.json,cleanup.json,root_followup.md,probes,review}。
+- 支线已推送 origin（新建 branch，无 force-push、未合主线）。
