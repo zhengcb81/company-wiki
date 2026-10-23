@@ -151,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ROOT先修W08已证实的数值表格行误判标题及错误父级，再补表头/单位不明的诚实质量状态和真实跨页业务父级；六项遗漏按逐项实际offer/defer证据修资格或选材，不提高96/48000/16M。W09-RF-RESEARCH与W11-CWP-SOURCES已由用户交外部harness施工，ROOT不改其独占写集。",
+  "next_step_now": "ROOT先TDD修W08未绑定表头/单位的裸数行质量状态，再修项目标题遮蔽正文、经营量/同比识别、指引前提闭包及可信跨页业务父级，按实际证据调整固定预算选材；然后真实摘要/RF矩阵/W12。数值行错误祖先节点已修且独审152P，不重复列为待修。W09/W11由外部harness独占施工，ROOT不改其写集。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -202,7 +202,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-23T20:07:26.112790+00:00",
+  "last_updated_at": "2026-10-23T20:55:52.617812+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -218,7 +218,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "FOUR_REVIEWS_FAIL_W08_FINITE_ENGINEERING_GREEN_ANNUAL_PARTIAL_W09_W11_EXTERNAL_RUNNING",
+    "status": "FOUR_REVIEWS_FAIL_W08_HEADING_ROOT_FIXED_ANNUAL_PARTIAL_W09_W11_EXTERNAL_RUNNING",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -321,9 +321,9 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "BOUNDED_ENGINEERING_PASS_REAL_TWO_SCOPES_PASS_ANNUAL14_PARTIAL_WRONG_CONTEXT",
-    "W08_commit": "181200bc",
-    "W08_ref": "review/r1-w08-resume-20261023/engineering-v2.json",
+    "W08": "SHARED_HEADING_ROOT_REVIEW_PASS_BRANCH_PUSHED_ANNUAL14_PARTIAL",
+    "W08_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
+    "W08_ref": "review/r1-w08-resume-20261023/engineering-v3.json",
     "W09": "EXTERNAL_HARNESS_RUNNING_USER_REPORTED",
     "W09_ref": "review/r1-w09-preparation-checkpoint-20261022.json",
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
@@ -333,6 +333,8 @@
     "W12": "NOT_STARTED",
     "business_pass": false,
     "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
-    "W08_mainline_integrated": false
+    "W08_mainline_integrated": false,
+    "W08_branch_head_prefix": "b6395b6c",
+    "W08_branch_published": true
   }
 }
