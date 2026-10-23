@@ -10,202 +10,23 @@ import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text, matching_script_text
 
-from .n6_candidate_operating_facts import OperatingFact, detect_operating_fact
+from .n6_candidate_operating_facts import OperatingFact
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
 from .narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
 
-_OBJECT = re.compile(
-    r"\b(?:products?|services?|platforms?|solutions?|(?:multi[- ]?)?models?|agents?|"
-    r"workloads?|workflows?|systems?|tokens?|silicon|performance|components?|production|capacity|"
-    r"assembly|manufacturing|equipment|deliver(?:y|ies)|shipments?|customers?|pricing|subscriptions?|distributors?|"
-    r"knowledge work|coding|cyber (?:operations|defense)|infrastructure|applications?|stack)\b|"
-    r"产品|服务|平台|方案|模型|产能|产线|人工|设备|部件|原材料|供应商|生产|制造|"
-    r"工艺|客户|用户|渠道|订单|转化率|广告价格|研发|技术|业务|海外需求", re.IGNORECASE)
-_EVENT = re.compile(r"\b(?:launch\w*|introduc\w*|deploy\w*|releas\w*|"
-    r"open(?:ed)?|commission\w*|roll(?:ed)? out)\b|推出|发布|上线|投入运行", re.IGNORECASE)
-_MECHANISM = re.compile(
-    r"\b(?:reduc\w*|lower\w*|less|sav\w*|improv\w*|efficien\w*|"
-    r"price performance|depends? on|diversif\w*|mix(?:ing)?|routing|modular assembly|standardized modules|"
-    r"triag\w*|red teaming|fix\w*|continuously operating)\b|"
-    r"\b(?:tasks?|workloads?)\b[^。.!?;]{0,80}\b(?:done by|served by|routed to|processed by|assigned to)\b|"
-    r"\bperformance\b[^。.!?;]{0,100}\bcost\b|"
-    r"\bcost\b[^。.!?;]{0,100}\bperformance\b|"
-    r"\b(?:multi[- ]?model|model)\b[^。.!?;]{0,90}\b(?:critical|important)\b|"
-    r"\b(?:critical|important)\b[^。.!?;]{0,90}\b(?:multi[- ]?model|model)\b|"
-    r"通过.{0,50}(?:提高|减少|降低|提升|实现)|因(?:为|此)|取决于|"
-    r"模块化|先组装|生产流程.{0,30}(?:按照|采用|通过|分为)|供货能力|人工.{0,25}(?:安排|调整)|"
-    r"降低.{0,30}(?:成本|能耗|风险)|提升.{0,30}(?:效率|转化率|价格)", re.IGNORECASE)
-_STRUCTURE = re.compile(
-    r"\b(?:consist\w*|compris\w*|divided into|made up of|"
-    r"direct sales|mix of the portfolio|supplied through)\b|"
-    r"\b(?:through|via|using)\b[^。.!?;]{0,50}\b(?:distributors?|distribution networks?|supply channels?)\b|"
-    r"\bdistributors?\b[^。.!?;]{0,60}\b(?:handle|provide|sell|supply|support|serve)\b|"
-    r"\btargets?\s+(?:(?:industrial|enterprise|manufacturing|overseas|international|institutional|retail)\s+(?:customers?|users?|markets?)|manufacturers?|equipment makers)\b|"
-    r"产品.{0,40}(?:用于|应用于|可覆盖)|"
-    r"通过.{0,35}(?:直销|渠道|经销|外购)|模块化|"
-    r"主要采用.{1,40}(?:生产模式|销售模式|工艺)|"
-    r"(?:生产模式|生产流程|生产组织|销售渠道|客户群体|研发平台)"
-    r".{0,35}(?:采用|按照|分为|由|包括|通过|面向)|"
-    r"原材料.{0,30}(?:来源于|外购|供应渠道)", re.IGNORECASE)
-# Enumerating identifiable components is useful static source meaning. A list
-# consisting entirely of generic categories or business activities is not.
-_COMPONENT_LIST = re.compile(
-    r"(?:产品|业务|服务|设备|部件|系统)(?:主要)?(?:分为|包括|由)"
-    r"(?P<components>[^，。；]{1,100})")
-_COMPONENT_SEPARATOR = re.compile(r"以及|与|和|及|、")
-# Normalize only list grammar in classification tokens; source units and
-# component names such as 等离子刻蚀设备 remain byte-for-byte unchanged.
-_COMPONENT_ENUMERATION_SUFFIX = re.compile(r"(?:等等|等)(?:类型|种类|类别|产品|服务|设备|业务|方案)?$")
-_GENERIC_COMPONENT = re.compile(
-    r"(?:(?:高端|先进|各类|多类|各种|相关|主要|配套|核心|多种|综合|的)|"
-    r"研发|研究|开发|生产|制造|销售|经营|管理|业务|产品|服务|设备|装备|"
-    r"解决方案|方案)+")
-
-
-def _component_structure(clause: str) -> bool:
-    for match in _COMPONENT_LIST.finditer(clause):
-        parts = tuple(_COMPONENT_ENUMERATION_SUFFIX.sub("", part.strip()).strip()
-            for part in _COMPONENT_SEPARATOR.split(match.group("components")))
-        if len(parts) > 1 and any(part and not _GENERIC_COMPONENT.fullmatch(part)
-            for part in parts):
-            return True
-    return False
-
-
-_CONSTRAINT = re.compile(
-    r"\b(?:constraints?|shortages?|bottleneck|limited|restrict\w*|fails?|"
-    r"goes away|resilience|remain available|qualification required|"
-    r"required before|cannot|can't be|short.term|subject to)\b|"
-    r"限制|约束|瓶颈|受限|中断|短期|突发|须.{0,25}(?:验证|认证)|"
-    r"尚.{0,25}(?:不确定|验证|认证)|不确定性", re.IGNORECASE)
-_INDUSTRY_SUBJECT = re.compile(r"\b(?:industry|sector|market demand|export licensing)\b|行业|产业|供需格局|行业政策", re.IGNORECASE)
-_INDUSTRY_OPERATING_OBJECT = re.compile(
-    r"\b(?:export licensing|export permits?|export approvals?|import licensing|"
-    r"regulatory (?:approvals?|requirements?)|(?:market|industry) demand|"
-    r"(?:market|industry) supply|industry pricing|supply-demand|supply chains?|"
-    r"production standards?|market access)\b|"
-    r"出口许可|出口审批|进出口政策|行业(?:政策|准入|标准|供需|竞争)|"
-    r"市场需求|市场供给|供需格局|供应链", re.IGNORECASE)
-_INDUSTRY_CHANGE = re.compile(r"\b(?:shift\w*|tighten\w*|loosen\w*|"
-    r"restrict(?:s|ed|ing)?|rising|falling|introduced|revoked|enacted)\b|"
-    r"变化|转向|收紧|放宽|调整|新增|延长|缩短|生效|取消", re.IGNORECASE)
-_STRATEGY = re.compile(r"\b(?:plan|intend|aim|will)\b[^。.!?;]{0,100}"
-    r"\b(?:build|develop|expand|enter|establish|commercialize)\b[^。.!?;]{0,80}"
-    r"\b(?:markets?|networks?|products?|services?|manufacturing|countries|customers?)\b|"
-    r"(?:拟|计划|将|致力于)[^。；]{0,45}(?:建设|拓展|进入|开发|形成)[^。；]{0,40}"
-    r"(?:市场|网络|产品|服务|客户|研发平台)", re.IGNORECASE)
-_CLAUSES = re.compile(r"[。！？!?;；\n]|\.(?:\s|$)")
-_FINANCE = re.compile(r"^\s*(?:(?:our|the|total)\s+)?"
-    r"(?:revenue|sales|earnings|profits?|income|dividends?|cash flow|EPS)\b"
-    r"[^。.!?;]{0,70}\b(?:increas\w*|grew|grow\w*|rose|declin\w*)\b", re.IGNORECASE)
-_GENERIC_DEFINITION = re.compile(r"是指|定义为|\bis defined as\b", re.IGNORECASE)
-_COMPANY_ANCHOR = re.compile(r"公司|本企业|我们|\b(?:our|we|this company)\b", re.IGNORECASE)
-_QUALIFIER = re.compile(
-    r"\b(?:return calculation|investment framework|my math|our math|"
-    r"return framework)\b[^。.!?;]{0,100}\b(?:changed|unchanged|remains?|same)\b|"
-    r"^\s*(?:not just for cost|all of these things contribute|"
-    r"you need to be able to still continue)\b|"
-    r"(?:回报|计算|投资)(?:框架|口径|方法).{0,30}(?:未变|不变|没有变化)", re.IGNORECASE)
-_FAMILIES = (
-    ("model", re.compile(r"\b(?:models?|multimodel|tokens?|tasks?|silicon|performance|workloads?)\b|模型|算力", re.IGNORECASE)),
-    ("operations", re.compile(r"\b(?:agents?|cyber|operations?|triag\w*|vulnerabilities)\b|运营|安全防御", re.IGNORECASE)),
-    ("production", re.compile(r"\b(?:production|capacity|assembly|manufacturing|suppli\w*|labor|components?)\b|产能|生产|人工|原材料|供应商|组装|设备", re.IGNORECASE)),
-    ("commercial", re.compile(r"\b(?:customers?|distribut\w*|sales|pricing|subscriptions?|portfolio|products?|services?)\b|客户|渠道|产品|服务|转化|广告|海外", re.IGNORECASE)),
-    ("infrastructure", re.compile(r"\b(?:infrastructure|stack|application|silicon|hyperscale)\b|基础设施|工艺", re.IGNORECASE)),
+from .narrative_business_meaning import (
+    _CLAUSES,
+    _COMPANY_ANCHOR,
+    _FINANCE,
+    _GENERIC_DEFINITION,
+    _OBJECT,
+    _business_fact,
+    business_objects,
+    business_qualification,
+    concrete_operating_event,
+    detect_business_fact,
+    reject_finance_only_text,
 )
-
-
-def business_objects(text: str) -> frozenset[str]:
-    """Coarse operating families for nearby context, never an issuer identity."""
-    return frozenset(name for name, pattern in _FAMILIES if pattern.search(text))
-
-
-def business_qualification(text: str) -> bool:
-    """A qualifier may join an independent business seed; it is not a seed itself."""
-    return _QUALIFIER.search(text) is not None
-
-
-_EVENT_FINANCE = re.compile(r"\b(?:revenues?|dividends?|earnings|financial statements?|accounting)\b|"
-    r"分红|股利|财务报表|资产负债表", re.IGNORECASE)
-_PASSIVE_GAP = re.compile(r"\s*(?:(?:has|have|had|been|being|was|were|is|are|will|be|now|also)\s+)*", re.IGNORECASE)
-
-
-def _business_event(clause: str) -> bool:
-    """An action targets an operating object within a finite clause window."""
-    for event in _EVENT.finditer(clause):
-        for obj in _OBJECT.finditer(clause):
-            if event.end() <= obj.start():
-                gap = clause[event.end():obj.start()]
-                if len(gap) <= 160 and not _EVENT_FINANCE.search(gap):
-                    return True
-            elif obj.end() <= event.start():
-                gap = clause[obj.end():event.start()]
-                if len(gap) <= 40 and not _EVENT_FINANCE.search(gap):
-                    if _PASSIVE_GAP.fullmatch(gap) or re.fullmatch(r"[已将正新计划预计即及\s]{0,10}", gap):
-                        return True
-    return False
-
-
-def _business_fact(text: str) -> OperatingFact:
-    reasons: list[str] = []
-    for clause in _CLAUSES.split(text):
-        if not clause or len(clause) > BUSINESS_CHARACTER_WINDOW:
-            continue
-        if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
-            continue
-        # An industry operating-policy/supply/demand change is source meaning
-        # without requiring an invented company product or customer noun.
-        if (_INDUSTRY_SUBJECT.search(clause) and _INDUSTRY_OPERATING_OBJECT.search(clause)
-            and _INDUSTRY_CHANGE.search(clause)):
-            reasons.append("current_industry_context")
-        if not _OBJECT.search(clause):
-            continue
-        # Relations must occur in the same bounded clause, unlike a finance
-        # growth statement followed by an unrelated operating noun far away.
-        if _business_event(clause):
-            reasons.append("specific_business_event")
-        if _MECHANISM.search(clause):
-            reasons.append("operating_mechanism")
-        if _STRUCTURE.search(clause) or _component_structure(clause):
-            reasons.append("business_structure")
-        if _CONSTRAINT.search(clause):
-            reasons.append("business_risk_or_constraint")
-        if _STRATEGY.search(clause):
-            reasons.append("business_strategy")
-    reasons = list(dict.fromkeys(reasons))
-    if not reasons:
-        return OperatingFact()
-    families = business_objects(text)
-    topics = ["industry_dynamics"] if "current_industry_context" in reasons else ["core_business"]
-    if "business_strategy" in reasons:
-        topics.append("new_business")
-    if "production" in families:
-        topics.append("capacity_projects")
-    if re.search(r"海外|境外|\b(?:overseas|international)\b", text, re.IGNORECASE):
-        topics.append("overseas")
-    if "model" in families or "operations" in families:
-        topics.append("products_rd")
-    return OperatingFact(True, tuple(topics), tuple(reasons), 3, False)
-
-
-def detect_business_fact(text: str) -> OperatingFact:
-    """Extend the unchanged legacy fact detector with explicit business meaning."""
-    legacy = detect_operating_fact(text)
-    business = _business_fact(text)
-    return OperatingFact(
-        eligible=legacy.eligible or business.eligible,
-        topics=tuple(dict.fromkeys((*legacy.topics, *business.topics))),
-        reasons=tuple(dict.fromkeys((*legacy.reasons, *business.reasons))),
-        score=legacy.score + business.score,
-        financial_exempt=legacy.financial_exempt,
-    )
-
-
-def reject_finance_only_text(text: str) -> bool:
-    """Reject a financial-growth subject without concrete operating meaning."""
-    return (_FINANCE.search(text) is not None and not _business_fact(text).eligible
-        and not detect_operating_fact(text).eligible)
-
 
 _ACTIVITY = re.compile(
     r"\b(?:expand\w*|enter\w*|qualif\w*|certif\w*|commercializ\w*|"
@@ -215,7 +36,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/10"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/13"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -286,19 +107,15 @@ _OPERATING_MEASURE = re.compile(
     r"capacity utilization|product mix|\b(?:projects?|orders?|capacity|output|total volume)\b|"
     r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
     r"产能利用率|产品组合|项目|項目|产能|產能|产量|產量|容积|容積", re.I)
-_MEASURE_CHANGE = re.compile(
-    r"\b(?:higher|lower|growing|rising|falling|increas\w*|decreas\w*|grew|growth|"
-    r"declin\w*|expansion|adoption|mix|improv\w*|changed|shift\w*|rose)\b|"
-    r"增长|增長|上升|下降|提升|减少|減少|增加|扩张|擴張|提高|变动|变化", re.I)
-_MEASURE_COUNT = re.compile(
-    r"^\s*(?:(?:(?:total|count|number)\s+)?(?:of|was|were|is|are|reached|at|to)\s+|"
-    r"(?:(?:总|總)?(?:数|數|数量|數量|总数|總數|总量|總量))?"
-    r"(?:为|為|达到|達到|达|達|增至|约为|約為|超过|超過)?\s*)?\d|"
-    r"\d[\d,.]*\s+(?:(?:million|billion|thousand|paid|active|licensed)\s+)*$", re.I)
 _REVENUE_VALUE = re.compile(
-    r"(?:营业收入|營業收入|收入|\b(?:revenues?|net sales)\b)\s*"
-    r"(?:(?:was|were|is|are|of|totaled|totalled|reached|amounted to)\s+|"
-    r"为|為|达到|達到|达|達)?\s*"
+    r"(?:营业收入|營業收入|收入|\b(?:revenues?|net sales)\b(?:\s+(?:share|proportion))?)\s*"
+    r"(?:(?:(?:has|have|had)\s+)?(?:(?:further|now|already|currently)\s+)*"
+    r"(?:was|were|is|are|of|totaled|totalled|reached|amounted to|exceed(?:s|ed)?|"
+    r"represented|represents|accounted for|accounts for|"
+    r"(?:increased|decreased|grew|declined|rose|fell)\s+(?:(?:further|steadily|significantly)\s+)*to)\s+|"
+    r"(?:占比|佔比)?(?:(?:进一步|進一步|已|已经|已經|继续|繼續|同比|环比|環比|持续|持續)\s*)*"
+    r"(?:提升至|增至|减至|減至|为|為|达到|達到|达|達|超过|超過|超|逾))?\s*"
+    r"(?:(?:over|more than|nearly|approximately|about)\s+|超过|超過|超|逾|约|約)?\s*"
     r"(?:(?:人民币|人民幣|港币|港幣|美元|USD|RMB|CNY|HKD)\s*)?[$¥€£]?\s*\d[\d,.]*", re.I)
 _CONTRACT_OBJECT = re.compile(
     r"\b(?:remaining (?:performance )?obligations?|contract(?:ed)? backlog|order backlog|"
@@ -426,56 +243,206 @@ def _ownership_scope(clause: str) -> bool:
 
 def _operating_causal_relation(clause: str) -> bool:
     for link in _DRIVER_LINK.finditer(clause):
-        explanation = clause[link.end():]
-        if _measured_driver(explanation):
+        if _measured_driver(clause, after=link.end()):
             return True
-        for relation in _SALES_COMPONENT_CHANGE.finditer(explanation):
-            component = relation.group('component').strip()
-            if not _FINANCIAL_COMPONENT.search(component) and any(c.isalpha() for c in component):
-                return True
     return False
 
 
-def _measured_driver(explanation: str) -> bool:
-    """A metric has a measure or observed change, not merely a customer noun."""
-    for metric in _OPERATING_MEASURE.finditer(explanation):
-        before = explanation[max(0, metric.start() - 32):metric.start()]
-        after = explanation[metric.end():metric.end() + 60]
-        if (_MEASURE_CHANGE.search(before) or _MEASURE_CHANGE.search(after)
-                or _MEASURE_COUNT.search(before) or _MEASURE_COUNT.search(after)):
-            return True
-    return False
+def _measured_driver(clause: str, *, after: int = 0) -> bool:
+    """Consume source relations without discarding their modality/scope.
+
+    The causal link restricts where the evidence must occur. It does not
+    create a fresh source sentence from a substring after that link.
+    """
+    return any(kind in {"quantity", "direction"} and start >= after
+               for kind, start, _end in _source_measure_relations(clause))
+
+
+_SOURCE_PRE_QUANTITY = re.compile(
+    r"(?:^\s*|\b(?:with|of|to|had|have|has|served|serves|serving|includes?|including|"
+    r"over|nearly|about|approximately)\s+)\d[\d,]*(?:\.\d+)?\s+"
+    r"(?:(?:million|billion|thousand|paid|active|licensed|new)\s+)*$|"
+    r"(?<![第\d])\d[\d,]*(?:\.\d+)?(?:万|萬|亿|億)?(?:个|個|家|项|項|名|台|套)\s*$", re.I)
+_SOURCE_QUANTITY = re.compile(
+    r"^\s*(?P<label>(?:(?:total\s+)?(?:counts?|numbers?|quantit(?:y|ies))\b|"
+    r"(?:总|總)?(?:数量|數量|数|數|总量|總量))?)\s*"
+    r"(?P<relation>(?:(?:of|was|were|is|are|reached|at|to|stood\s+at|stands\s+at|numbered|totals?|totaled|totalled|totaling|totalling)\s+|"
+    r"(?:为|為|达到|達到|达|達|增至|约为|約為|超过|超過)))?\s*"
+    r"(?:(?:about|over|nearly|approximately)\s+)?(?P<value>\d[\d,]*(?:\.\d+)?)", re.I)
+_QUANTITY_SCALE = r"(?:(?:万|萬|亿|億|thousand|million|billion)\s*)?"
+_SOURCE_QUANTITY_UNIT = re.compile(
+    r"^\s*" + _QUANTITY_SCALE +
+    r"(?:个|個|家|项|項|名|人|台|套|件|条|條|吨|噸|升|米|kL\b|mL\b|L\b|"
+    r"units?\b|customers?\b|projects?\b|subscribers?\b|lit(?:er|re)s?\b|tonnes?\b)", re.I)
+_SOURCE_NON_QUANTITY = re.compile(
+    r"^\s*" + _QUANTITY_SCALE +
+    r"(?:元|美元|港元|人民币|人民幣|USD\b|RMB\b|CNY\b|HKD\b|dollars?\b|"
+    r"年|年度|号|號|years?\b|quarters?\b|accounts?\b|is\b|was\b|在|为|為)", re.I)
+
+
+_MEASURE_FINANCIAL_SUBJECT = re.compile(
+    r"^\s*(?:['’]s\s*)?(?:accounts?\b|loans?\b|balances?\b|receivables?\b|"
+    r"payables?\b|assets?\b|liabilities\b|amorti[sz]ation\b|"
+    r"账户|帳戶|账面|帳面|贷款|貸款|余额|餘額|资产|資產|负债|負債|摊销|攤銷)", re.I)
+_DIRECTION_NOMINAL = (
+    r"(?:(?:counts?|numbers?|bases?|adoption|retention|engagement|utili[sz]ation|"
+    r"conversion|volumes?)\b|数量|數量|数|數|总数|總數|总量|總量|利用率|转化率|轉化率)")
+_DIRECTION_WORD = (
+    r"(?:higher|lower|grows?|growing|rising|falling|increas\w*|decreas\w*|grew|growth|"
+    r"declin\w*|expansion|adoption|improv\w*|changed|shift\w*|rose|fell|up|down)\b|"
+    r"(?:增长|增長|上升|下降|提升|减少|減少|增加|扩张|擴張|提高|变动|变動|变化|變化)")
+_MEASURE_CHANGE_MODIFIER = (
+    r"(?:(?:rapidly|quickly|steadily|further|significantly|substantially|"
+    r"year[- ]over[- ]year|year on year)\s+|"
+    r"(?:同比|环比|環比|快速|迅速|持续|持續|继续|繼續|进一步|進一步|显著|顯著|稳步|穩步))")
+_MEASURE_DIRECTION_AFTER = re.compile(
+    r"^\s*(?:" + _DIRECTION_NOMINAL + r"\s*)?"
+    r"(?:(?:has|have|had|was|were|is|are|been)\s+)*"
+    r"(?:" + _MEASURE_CHANGE_MODIFIER + r"\s*)*"
+    r"(?:(?:continued|continues?)\s+to\s+)?(?:" + _DIRECTION_WORD + r")", re.I)
+_MEASURE_DIRECTION_BEFORE = re.compile(
+    r"(?:" + _DIRECTION_WORD + r")\s*(?:(?:in|of)\s+|的)?"
+    r"(?:(?:the|our|total|active|paid|licensed|new|average|annual|monthly|daily)\s+)*$", re.I)
+_MEASURE_NOMINAL_END = re.compile(
+    r"^\s*(?:" + _DIRECTION_NOMINAL + r"\s*)?"
+    r"(?=$|[,，:]|\b(?:during|at|in|from|for|on|across|within|throughout)\b|带动|帶動)", re.I)
+
+
+def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+    """Observe metric spans with a bound quantity or change predicate.
+
+    Both count and causal consumers use these exact relations. A rejected
+    identifier/financial subject cannot borrow a nearby growth word through a
+    second detector. Spans are local classification offsets, not new locators.
+    """
+    if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
+        return ()
+    relations: list[tuple[str, int, int]] = []
+    for metric in _OPERATING_MEASURE.finditer(clause):
+        before, after = clause[:metric.start()], clause[metric.end():]
+        if not _observed_measure_scope(clause, metric.start(), metric.end()):
+            continue
+        if _MEASURE_FINANCIAL_SUBJECT.match(after):
+            continue
+        quantity = _SOURCE_QUANTITY.match(after)
+        after_quantity = False
+        if quantity is not None:
+            tail = after[quantity.end():]
+            after_quantity = bool(not _SOURCE_NON_QUANTITY.match(tail) and (
+                quantity.group("label") or quantity.group("relation") or _SOURCE_QUANTITY_UNIT.match(tail)))
+            if not after_quantity:
+                # An immediate number without a valid measurement relation is
+                # an identifier/date/other value, even beside directional text.
+                continue
+        if after_quantity or _SOURCE_PRE_QUANTITY.search(before):
+            relations.append(("quantity", metric.start(), metric.end()))
+        if (_MEASURE_DIRECTION_AFTER.match(after) or (
+                _MEASURE_DIRECTION_BEFORE.search(before) and _MEASURE_NOMINAL_END.match(after))):
+            relations.append(("direction", metric.start(), metric.end()))
+    # Component sales changes are source relations too. Causal consumers do
+    # not get a separate noun/direction fallback when this owner rejects them.
+    for change in _SALES_COMPONENT_CHANGE.finditer(clause):
+        component = re.sub(r"^(?:(?:the|our|their|its|a|an)\s+)+", "",
+                           change.group("component").strip(), flags=re.I)
+        if (_observed_measure_scope(clause, change.start(), change.end())
+                and not _FINANCIAL_COMPONENT.search(component)
+                and any(character.isalpha() for character in component)):
+            relations.append(("direction", change.start(), change.end()))
+    relations.extend(_revenue_measure_relations(clause))
+    return tuple(relations)
 
 
 def _source_quantity_relation(clause: str) -> bool:
-    """A count/physical measure binds its adjacent source quantity.
+    """The quantity projection of the single source metric relation owner."""
+    return any(kind == "quantity" for kind, _start, _end in _source_measure_relations(clause))
 
-    Reuse the operating-measure owner; do not infer throughput, a completed
-    milestone, or an economic conversion from the reported stock.
+
+_REVENUE_PERIOD = (
+    r"(?:\d{4}\s*年(?:度)?|本期|报告期内|報告期內|本年度|年度|本年|期内|期內|"
+    r"in\s+(?:fiscal\s+)?\d{4}|(?:during|for)\s+the\s+(?:year|period)|this\s+year)")
+_REVENUE_SUBJECT_GAP = re.compile(
+    r"\s*(?:(?:['’]s|business|segment|licensing|subscriptions?|maintenance|support|sales)\s*)*|"
+    r"\s*(?:(?:的|实现|實現|产生|產生|所|业务|業務|销售|銷售|营业|營業|"
+    + _REVENUE_PERIOD + r")\s*)*", re.I)
+_REVENUE_CONTINUATION_PREFIX = re.compile(
+    r"\s*(?:(?:and\s+)?(?:its|their)\s+|(?:" + _REVENUE_PERIOD + r")\s*)", re.I)
+_BUSINESS_CONTINUATION_PREDICATE = re.compile(
+    r"\s*(?:(?:持续|持續|继续|繼續|保持|维持|維持|稳步|穩步|强劲|強勁)\s*)*"
+    r"(?:发力|發力|贡献增长|貢獻增長|增长|增長|发展|發展|扩张|擴張)|"
+    r"\s*(?:(?:continued|continues?)\s+to\s+)?"
+    r"(?:grow|expand|contribute\s+to\s+growth|gained\s+traction)", re.I)
+_MEASURE_UNREALIZED = re.compile(
+    r"假设|假設|假如|如果|若|预计|預計|预期|預期|计划|計劃|拟|擬|目标|目標|"
+    r"可能|假定|是否|尚未|未能|没有|沒有|并未|並未|不曾|不明|"
+    r"明年|下一(?:年|季度|月)|\b(?:next|upcoming)\s+(?:year|quarter|month)\b|"
+    r"\b(?:if|unless|expected|forecast\w*|plans?|planned|aims?|targets?|"
+    r"may|might|could|would|will(?=\s+(?:have|be|reach|increase|grow|serve|include|number|total))|"
+    r"expects?(?=\s+(?:to|that))|expecting(?=\s+to)|not|never|unknown|whether|assum\w*|uncertain|unclear|"
+    r"don't|doesn't|didn't|can't|cannot|isn't|aren't|wasn't|weren't)\b", re.I)
+
+
+_MEASURE_SCOPE_SEPARATOR = re.compile(r"(?<!\d)[,，]|[,，](?!\d)")
+_MEASURE_CONDITION = re.compile(r"假设|假設|假定|假如|如果|若(?!干)|\b(?:if|unless|assuming)\b", re.I)
+
+
+def _observed_measure_scope(clause: str, start: int, end: int) -> bool:
+    """Qualify the metric's local state without erasing independent plans.
+
+    A preceding conditional governs its consequent comma parts. An unrelated
+    plan or restriction in a different comma part does not rewrite a current
+    observation. All measurement projections share this exact state gate.
+    """
+    left, right = 0, len(clause)
+    for separator in _MEASURE_SCOPE_SEPARATOR.finditer(clause):
+        if separator.end() <= start:
+            left = separator.end()
+        elif separator.start() >= end:
+            right = separator.start()
+            break
+    return not (_MEASURE_UNREALIZED.search(clause[left:right])
+                or (left and _MEASURE_CONDITION.search(clause[:left])))
+
+
+_REVENUE_MEASURE_UNIT = re.compile(
+    r"^\s*(?:[%％]|percent\b|亿元|億元|万元|萬元|亿|億|万|萬|元|"
+    r"USD\b|RMB\b|CNY\b|HKD\b|dollars?\b|billion\b|million\b|thousand\b)", re.I)
+_REVENUE_CURRENCY = re.compile(
+    r"[$¥€£]|人民币|人民幣|港币|港幣|美元|\b(?:USD|RMB|CNY|HKD)\b", re.I)
+
+
+def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+    """Bind an observed amount/share to its local business subject.
+
+    Only one immediately preceding comma part can supply an omitted subject,
+    through a finite continuation predicate and a period/possessive prefix.
+    A new actor, unknown predicate, modal state or a sentence boundary cannot.
     """
     if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
-        return False
-    for measure in _OPERATING_MEASURE.finditer(clause):
-        after = clause[measure.end():measure.end() + 60]
-        quantity = re.search(r"\d[\d,]*(?:\.\d+)?", after)
-        if quantity is None or not _MEASURE_COUNT.match(after):
+        return ()
+    relations = []
+    for value in _REVENUE_VALUE.finditer(clause):
+        if not _observed_measure_scope(clause, value.start(), value.end()):
             continue
-        # An adjacent date/year is not the metric's count.
-        if re.match(r"\s*(?:年|年度|years?\b|quarters?\b)", after[quantity.end():], re.I):
+        # Bare years, numbered fields and unidentified values are not amounts.
+        if not (_REVENUE_MEASURE_UNIT.match(clause[value.end():])
+                or _REVENUE_CURRENCY.search(value.group())):
             continue
-        return True
-    return False
+        parts = re.split(r"[,，]", clause[max(0, value.start() - 120):value.start()])
+        local = parts[-1]
+        owned = any(_REVENUE_SUBJECT_GAP.fullmatch(local[owner.end():])
+                    for owner in _PRODUCT_SUBJECT.finditer(local))
+        if not owned and len(parts) > 1 and _REVENUE_CONTINUATION_PREFIX.fullmatch(local):
+            previous = parts[-2]
+            owned = any(_BUSINESS_CONTINUATION_PREDICATE.fullmatch(previous[owner.end():])
+                        for owner in _PRODUCT_SUBJECT.finditer(previous))
+        if owned:
+            relations.append(("revenue", value.start(), value.end()))
+    return tuple(relations)
 
 
 def _business_revenue_measure(clause: str) -> bool:
-    """An explicitly scoped business amount is source data, not composition."""
-    if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
-        return False
-    for value in _REVENUE_VALUE.finditer(clause):
-        subject = re.split(r"[,，]", clause[max(0, value.start() - 100):value.start()])[-1]
-        if _PRODUCT_SUBJECT.search(subject):
-            return True
-    return False
+    """Revenue projection of the shared source-owned measurement relation."""
+    return any(kind == "revenue" for kind, _start, _end in _source_measure_relations(clause))
 
 
 def _segment_reporting_relation(clause: str) -> bool:
@@ -608,21 +575,21 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             reasons.append("business_reporting_scope")
         if _business_coverage_relation(clause):
             reasons.append("business_coverage_relation")
-        if _source_quantity_relation(clause):
+        measures = _source_measure_relations(clause)
+        if any(kind == "quantity" for kind, _start, _end in measures):
             reasons.append("operating_quantity")
-        if _business_revenue_measure(clause):
+        if any(kind == "direction" for kind, _start, _end in measures):
+            reasons.append("operating_metric_change")
+        if any(kind == "revenue" for kind, _start, _end in measures):
             reasons.append("business_revenue_measure")
         growth = _REVENUE_GROWTH.search(clause)
         link = _DRIVER_LINK.search(clause)
         if growth and link:
-            # The operating object belongs to the subject, and its explanation
-            # must give an actual operating measure or nested growth relation.
+            # An operating subject needs the same source-owned measurement
+            # as the generic causal consumer; unrelated product/revenue nouns
+            # cannot create a nested-growth fallback.
             subject = clause[:growth.start()]
-            explanation = clause[link.end():]
-            if (_PRODUCT_SUBJECT.search(subject) and (
-                _measured_driver(explanation)
-                or (_PRODUCT_SUBJECT.search(explanation) and _REVENUE_GROWTH.search(explanation))
-            )):
+            if _PRODUCT_SUBJECT.search(subject) and _measured_driver(clause, after=link.end()):
                 reasons.append("product_operating_driver")
         if (_CONTRACT_OBJECT.search(clause) and _CONTRACT_CONVERSION.search(clause)
                 and _FORWARD_PERIOD.search(clause)):
@@ -655,7 +622,8 @@ def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
     # material. A long wrapped tail must not erase an already observed fact.
     fact = recognize('. '.join(source_clauses) if len(source_clauses) != len(clauses)
                      else matching_script_text(text))
-    activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) for clause in clauses)
+    activity = any(concrete_operating_event(clause) or
+                   (_OBJECT.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
     relations = _reading_relations(clauses)
     if not relations and not activity and not _business_fact(interpreted).eligible:
         # The historical English event recognizer can treat a product-labelled
@@ -691,7 +659,7 @@ def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
         purpose = "operating_contract_stock"
     if purpose in NON_OPERATING_PURPOSES:
         return OperatingFact(False, (), (), 0, False, purpose)
-    if purpose == "unknown" and {"operating_quantity", "business_revenue_measure"} & set(fact.reasons):
+    if purpose == "unknown" and {"operating_quantity", "operating_metric_change", "business_revenue_measure"} & set(fact.reasons):
         purpose = "operating_metric"
     if purpose == "operating_contract_stock":
         return OperatingFact(True, tuple(dict.fromkeys((*fact.topics, "operating_metrics"))),

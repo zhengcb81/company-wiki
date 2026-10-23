@@ -25,3 +25,10 @@
 
 ## Pause correction/freeze
 Earlier weak-fixture description of third cache failure was unproven. Fourth stronger-fixture experiment also fails own-parent and is not original GREEN. Original2bullet texts restored; failures/experiment/exact repro preserved. No content/review run after freeze. Type185P/src-mypy366PASS/RuffPASS;850P preceded equivalent type-only edits. Two removed=false basetemp leftovers+owned mypy cache explicitly cleaned with containment/LiteralPath;cleanup-final.json removed=true. Frozen SHA and OPEN items in review/handoff.md/json.ROOT owns preservation/later review/release.
+
+## 2026-10-23 ROOT continues after external card dispatch
+Previous goal turn was progress: actual independent packet review fixed interface issues, worktrees prepared and mother e00d2b93 pushed with154 prepush tests. This turn observed actual public selector with unchanged code/limits: both target source units are budget offers and budget_full; no reference withholding. Source-purpose pure accounting anchors and checkbox/navigation also observed selected. No new API/download/raw write.
+
+## 2026-10-23T20:04:30.996694+00:00 bounded engineering checkpoint
+ROOT992P in82.35s; RuffPASS; fullsrc mypy368/0. Final test basetemp absent. Independent measure/purpose v3 PASS only finite scopes; actual249page two-fact checkpoint passes, but unchanged14 annual targets PARTIAL with wrong p160 numeric-row context on p184. No new paid/download/raw copy. Saving branch progress before next genuine context repair; no mainline release.
+`nCheckpoint staging first refused selected planning paths because this isolated checkout is sparse. Source/test paths were staged; use git add --sparse only for the explicit existing plan files, without widening checkout or altering other worktrees.

@@ -1,0 +1,214 @@
+{
+  "review": "W08 independent purpose v3 final",
+  "status": "PASS_BOUNDED_ENGINEERING_SCOPE",
+  "created_utc": "2026-10-23T20:00:25.349591+00:00",
+  "final_reviewed_sha256": {
+    "src/company_wiki/document_normalization/form_fields.py": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d",
+    "src/company_wiki/document_understanding/observation_adapter.py": "dd5091c4e0f4a32cd2eb329c0891f27be4ef8185c8c63cc58e3dbcaaf60b4ddb",
+    "src/company_wiki/document_understanding/layout_hints/headings.py": "261581a1578e5189e877f8084ae07433cd5344d1f877fe86ad0866bcdd73f122",
+    "src/company_wiki/document_understanding/structure/layout.py": "0e1506f22be701c66caf3bfba1b720b598ad612bafc5e1e8f461a1cde70c626a",
+    "src/company_wiki/document_understanding/decision_inventory.py": "44aa51750047a46ddc31dece234debbea86d5cb19f83acf8974ebbea489f3e9a",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "tests/fixtures/narrative_source_purpose_cases.json": "bf3f5103b7d61bcfc471271aeefcc83dc7b244f57c6477de3423f080433ecfd7",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py": "49a95d13238d238267eb31fbf6946075cd7ad3a5df9e3bd764f894f8933939ba",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+    "src/company_wiki/document_normalization/text_matching.py": "8235c0597674faa61de0494e7d74ca2c78dfb4c01a8b301bbe2f7f2c1a8a3105",
+    "src/company_wiki/document_understanding/structure/sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+    "src/company_wiki/source_catalog/narrative_reading.py": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71"
+  },
+  "stable_during_final_public": true,
+  "stable_during_final_structure": true,
+  "announced_delta_byte_verification": [
+    {
+      "path": "src/company_wiki/document_normalization/form_fields.py",
+      "prior_sha256": "10741ef39c755cc3da16ee8d1a844caab2a4f3186cb002e550514855dcb1709d",
+      "final_sha256": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d",
+      "reverse_only_announced_delta_matches_prior_raw_sha256": true,
+      "reverse_sha256": "10741ef39c755cc3da16ee8d1a844caab2a4f3186cb002e550514855dcb1709d",
+      "semantic_delta": "Single shared applicability regex now accepts适or適 in both labels; classification grammar and raw source unchanged."
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/sections.py",
+      "prior_sha256": "39fee1e19129ea08fb40f96fc24b494a9ceea1f274257f60d500e18ebab149be",
+      "final_sha256": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+      "reverse_only_announced_delta_matches_prior_raw_sha256": true,
+      "reverse_sha256": "39fee1e19129ea08fb40f96fc24b494a9ceea1f274257f60d500e18ebab149be",
+      "semantic_delta": "Local variable annotation only; assignment value/control flow unchanged."
+    }
+  ],
+  "case_integrity": {
+    "original59_input_expectations_unchanged": true,
+    "root_fixture59_exact": true
+  },
+  "checks": [
+    {
+      "id": "same59-purpose",
+      "command": "python .../purpose_probe_v3.py",
+      "exit_code": 0,
+      "counts": {
+        "total": 59,
+        "passed": 59,
+        "failed": 0
+      },
+      "receipt": "purpose-probe-v3.json/log",
+      "execution_binding": "Executed before the finalform_fields/sections delta. The directpurpose/meaning/policy/matching/reading/evidence functions retain identical SHA; this prior59P receipt is reused, not claimed rerun.",
+      "direct_dependency_sha_unchanged": true,
+      "direct_dependency_files": [
+        "src/company_wiki/source_catalog/narrative_source_purpose.py",
+        "src/company_wiki/source_catalog/narrative_business_meaning.py",
+        "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "src/company_wiki/document_normalization/text_matching.py",
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ]
+    },
+    {
+      "id": "same14-public-final",
+      "command": "python .../public_probe_v3_final.py",
+      "exit_code": 0,
+      "counts": {
+        "total": 14,
+        "passed": 14,
+        "failed": 0
+      },
+      "receipt": "public-probe-v3-final.json/log",
+      "execution_binding": "Actually rerun against every final14source/test byte hash listed here, including helper and sections."
+    },
+    {
+      "id": "same8-structural-native-script-final",
+      "command": "python .../structure_fingerprint_v3_final.py",
+      "exit_code": 0,
+      "counts": {
+        "total": 8,
+        "passed": 8,
+        "failed": 0
+      },
+      "receipt": "structure-fingerprint-v3-final.json/log",
+      "execution_binding": "Actually rerun final4prefixes times simplified/traditional, with form predicate/inferred/native/font checks for each."
+    },
+    {
+      "id": "traditional-public-final",
+      "command": "Same structure_fingerprint_v3_final.py execution",
+      "exit_code": 0,
+      "counts": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "actual": "Numbered traditional no-event form omitted; independent business control retained."
+    },
+    {
+      "id": "module-byte-fingerprints-final",
+      "command": "Same structure_fingerprint_v3_final.py execution",
+      "exit_code": 0,
+      "counts": {
+        "total": 8,
+        "passed": 8,
+        "failed": 0
+      },
+      "actual": "Four module byte targets times generic/PDF scopes invalidate business_algorithms identity; restored reads restore whole versions. Path.read_bytes interception is in-memory only; no product bytes changed."
+    }
+  ],
+  "closed_issues": [
+    "Originalaccounting-definition/mixed-static-description false rejection",
+    "No-event prefix and long-label purpose errors",
+    "Pure navigation topic-event errors",
+    "Common accounting order/word-form errors",
+    "Independentcompany-subject comma boundary and English product/factory purpose errors",
+    "Numericform inference retained as context in final public path",
+    "Factoryevent fact projection omitted despite operating purpose",
+    "Traditionalform inference helper missed適用and leaked reading_context"
+  ],
+  "remaining_scope_findings": [],
+  "architecture": {
+    "pure_meaning_no_import_cycle": true,
+    "pure_owner_duplicate_definitions_removed": true,
+    "shared_runtime_identities": {
+      "business_objects": true,
+      "business_qualification": true,
+      "_business_fact": true,
+      "detect_business_fact": true,
+      "reject_finance_only_text": true,
+      "concrete_operating_event": true
+    },
+    "prior7_ast_equivalence": "v2 recorded7pure function ASTs identical between pre-extractionpolicy and meaning; meaning SHA3cef4830 remains unchanged in final source. Policy now imports shared symbols.",
+    "structure_owner": "Inline response detection belongs toshared form_fields and is consumed by observation adapter, font heading inference and structure layout; explicit native headings remain accepted. No downstreamcontext deletion was added for these fixes.",
+    "cache_owner": "decision_inventory hashes actualmeaning/form_fields/layout/headings bytes with CRLF normalization and records observation_adapter/3 and policy/13; all8 targeted generic/PDF fingerprint probes passed."
+  },
+  "genuine_heading_positive": {
+    "text": "1.2 经营情况",
+    "adapter_level": 3,
+    "structure_heading": true,
+    "font_level": 2
+  },
+  "bounded_inputs": [
+    {
+      "id": "zh_48000",
+      "chars": 48000,
+      "repeats": 5,
+      "elapsed_seconds": 0.4490511000039987,
+      "purpose": "unknown",
+      "deterministic": true,
+      "input_equal": true
+    },
+    {
+      "id": "en_48000",
+      "chars": 48000,
+      "repeats": 5,
+      "elapsed_seconds": 0.4811886000097729,
+      "purpose": "accounting_policy",
+      "deterministic": true,
+      "input_equal": true
+    },
+    {
+      "id": "form_1200",
+      "chars": 1199,
+      "repeats": 5,
+      "elapsed_seconds": 0.0018974000122398138,
+      "purpose": "template_no_event",
+      "deterministic": true,
+      "input_equal": true
+    },
+    {
+      "id": "mixed_48000",
+      "chars": 45622,
+      "repeats": 5,
+      "elapsed_seconds": 1.0229715000023134,
+      "purpose": "operating",
+      "deterministic": true,
+      "input_equal": true
+    }
+  ],
+  "root_real_receipt": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\candidate-shared-owner-full.json",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "pages": 249,
+    "checkpoint_pass": true,
+    "whole_content_pass": false,
+    "coverage_complete": false,
+    "selected_count": 96,
+    "selected_chars": 8156,
+    "work_used": 7304116,
+    "receipt_vs_final_byte_delta": [
+      {
+        "path": "src/company_wiki/document_understanding/structure/sections.py",
+        "receipt_sha256": "39fee1e19129ea08fb40f96fc24b494a9ceea1f274257f60d500e18ebab149be",
+        "final_sha256": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c"
+      },
+      {
+        "path": "src/company_wiki/document_normalization/form_fields.py",
+        "receipt_sha256": "10741ef39c755cc3da16ee8d1a844caab2a4f3186cb002e550514855dcb1709d",
+        "final_sha256": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d"
+      }
+    ],
+    "binding_note": "ROOT prior249-page source checkpoint receipt was read, not independently rerun. Two30%checkpoints passed on its listed source bytes; final helper/annotation bytes differ and this receipt is not relabelled as a final-byte or whole-content acceptance."
+  },
+  "out_of_scope": [
+    "ROOT identified broaderannual14target budget omissions/tableheaders/cross-page wrong-parent issues and continues that work. No full-company or whole-content approval.",
+    "ROOT concentratedsuite/ruff/type results belong to ROOT; not reported as independently executed by this reviewer.",
+    "No API/LLM/download/product/config/Git/mother-PWFwrites; all artifacts restricted to purpose-independent.",
+    "OriginalFAIL/v2/v3interim receipts remain unchanged."
+  ]
+}

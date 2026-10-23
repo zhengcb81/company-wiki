@@ -18,3 +18,8 @@ PWF source design: mother docs/plans/du11-source-closure-2026-10-18/review/w08-r
 
 ## Frozen pause checkpoint
 Business-policy10/inventory1.9.0 includes sections actual bytes. Combined850P then typing-only185P/full366-source mypyPASS. Public migration fails:original target0;experiment target2 but own-parent absent. Original fixture restored. Quantity identifier and increased-to revenue observations OPEN. Actual content partial; independent review incomplete. See review/handoff.md/json.
+
+## 2026-10-23 Actual failure stage
+Trace in mother .planning/r1-w08-real-20261023/candidate-trace.json proves testing carrier description/score0 versus Biology meaningful/score3; both budget_full. Confirms source_measure grammar/line-wrap gap and selected standalone accounting definitions as meaningful anchors. Fix shared relation owner and bounded source purpose, not company/numeric reservations. Wrong guessed coordinator-effective-scope-v2 in attempt02 was a diagnostic path error; actual file is coordinator-effective-scope.json; guessed test_reading_source_mechanisms file absent, use dedicated new purpose test. Neither missing path changed code/data.
+
+Actual fullcontext review proves three context classes remain: wrong numeric-row heading, absent numeric table headers/unit, and unclosed cross-page Chemistry ancestry. Six operating omissions need individual trace; selected-slot saturation cannot prove their causes. Main task and isolated plan now explicitly prioritize these shared roots.

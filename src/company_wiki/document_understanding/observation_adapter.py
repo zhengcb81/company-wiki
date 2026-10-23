@@ -22,9 +22,11 @@ import hashlib
 import json
 import re
 
+from company_wiki.document_normalization.form_fields import has_inline_form_response
+
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/2"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/3"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
@@ -197,6 +199,8 @@ def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
         explicit = int(tag[1])
     if isinstance(explicit, int) and not isinstance(explicit, bool) and explicit > 0:
         return explicit
+    if has_inline_form_response(text):
+        return None
     if metadata.get("heading_like") is True:
         return 2
     if _part_heading_level(text) is not None:
@@ -209,8 +213,6 @@ def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
         return None
     if stripped.endswith(_HEADING_TERMINATOR):
         return None
-    import re
-
     for pattern, level in _NUMBERED_HEADING:
         if re.match(pattern, stripped):
             return level

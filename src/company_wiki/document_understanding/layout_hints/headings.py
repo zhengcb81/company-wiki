@@ -6,6 +6,8 @@ high-confidence heading, and year/date lines are never headings at all.
 
 from __future__ import annotations
 
+from company_wiki.document_normalization.form_fields import has_inline_form_response
+
 from .contract import Doc, Unit
 from .geometry import band_height
 from .neighbours import vertical_clearances as vertical_clearances
@@ -81,6 +83,8 @@ def body_font_size(doc: Doc, excluded: set) -> float | None:
 def heading_evidence(unit: Unit, clearances: dict, body_font: float | None) -> dict:
     """Return {level, confidence, basis} for one unit's heading claim."""
     text = normalize_ws(unit.text)
+    if has_inline_form_response(text):
+        return {"level": None, "confidence": "low", "basis": ["inline_form_response"]}
     basis: list = []
     if not text:
         return {"level": None, "confidence": "unknown", "basis": ["empty_text"]}

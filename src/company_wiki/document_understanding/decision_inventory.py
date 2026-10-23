@@ -67,12 +67,15 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
 
     business_modules = (
         "company_wiki.source_catalog.narrative_business_policy",
+        "company_wiki.source_catalog.narrative_business_meaning",
         "company_wiki.source_catalog.narrative_source_purpose",
         "company_wiki.source_catalog.narrative_operating_relations",
         "company_wiki.source_catalog.narrative_reading",
         "company_wiki.source_catalog.narrative_finalize",
         # Native outline declarations change each statement's own source scope.
         "company_wiki.document_understanding.structure.sections",
+        "company_wiki.document_understanding.structure.layout",
+        "company_wiki.document_understanding.layout_hints.headings",
         # Source boundaries and facts reuse this single grammar/matching owner.
         # Hash its actual dependency closure, not just the source adapter that
         # imports it: a rule-only change must invalidate an old decision too.
@@ -80,6 +83,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.document_understanding.operating_states.patterns",
         "company_wiki.document_understanding.operating_states.text_view",
         "company_wiki.document_normalization.text_matching",
+        "company_wiki.document_normalization.form_fields",
         "company_wiki.source_catalog.n6_candidate_operating_facts",
     )
     def _module_path(name: str) -> Path:

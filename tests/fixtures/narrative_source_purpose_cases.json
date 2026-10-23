@@ -1,0 +1,359 @@
+{
+  "description": "Frozen independent purpose counterexamples, neutral source text. No source originals or model outputs.",
+  "cases": [
+    {
+      "id": "control_zh_trad",
+      "text": "控制是指投資方擁有對被投資方的權力，通過參與被投資方的相關活動而享有可變回報。",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "control_en_canonical",
+      "text": "Control exists when an investor has power over an investee and is exposed to variable returns.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "control_en_company_owns_investee",
+      "text": "The Company controls an investee when it has power over the investee, exposure to variable returns and the ability to affect those returns.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "control_en_if",
+      "text": "An investor controls an investee if it has power over the investee and exposure or rights to variable returns.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "trade_en_canonical",
+      "text": "Financial assets are recognised on the trade date.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "trade_zh_trad",
+      "text": "對於以常規方式購買金融資產的，在交易日確認將收到的資產。",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "credit_en_canonical",
+      "text": "The Group assesses credit risk on financial instruments since initial recognition.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "credit_en_reversed",
+      "text": "For financial instruments, credit risk is assessed since initial recognition.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "credit_zh_reversed",
+      "text": "信用风险是否自初始确认后显著增加，需要在每个报告日对金融工具重新评估。",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "discontinued_en_plural",
+      "text": "Discontinued operations are components that have been disposed of or are held for sale.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "discontinued_en_represent",
+      "text": "A discontinued operation represents a component of the entity that has been disposed of or classified as held for sale.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "discontinued_zh_canonical",
+      "text": "终止经营是指能够单独区分且已处置的组成部分。",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "discontinued_en_loss",
+      "text": "Profit or loss from discontinued operations is presented separately in the income statement.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "discontinued_en_loss_reversed",
+      "text": "In the income statement, the profit or loss from discontinued operations is presented separately.",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "discontinued_zh_loss_reversed",
+      "text": "利润表中分别列示持续经营损益与终止经营损益。",
+      "expected_nonoperating": true,
+      "group": "accounting_variants"
+    },
+    {
+      "id": "form_prefix_0",
+      "text": "A.报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_1",
+      "text": "B.报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_2",
+      "text": "1.报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_3",
+      "text": "12.报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_4",
+      "text": "一、报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_5",
+      "text": "（一）报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_6",
+      "text": "A、报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_7",
+      "text": "a.报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_8",
+      "text": "(B).报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_prefix_9",
+      "text": "B．报告期内公司新产品交付取得重大进展情况\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_long_label",
+      "text": "A.本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明本报告期间公司主要新产品客户交付情况及相关变动说明\n□适用√不适用",
+      "expected_nonoperating": true,
+      "group": "form"
+    },
+    {
+      "id": "form_affirmative",
+      "text": "1.报告期内新产品交付情况\n√适用□不适用\n公司已向客户交付新产品。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "navigation_en_simple",
+      "text": "For further details see Section 8 of this report.",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_en_comma",
+      "text": "For further details, see Section 8 of this report.",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_en_comma_event",
+      "text": "For further details, see Section 8 regarding software delivered to customers.",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_en_event",
+      "text": "Refer to Note 8 for details of software delivered to customers.",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_en_word_section",
+      "text": "See the section on software delivered to customers.",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_zh_event",
+      "text": "具体详见本报告第三节有关新产品交付客户的情况。",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_zh_suffix_event",
+      "text": "新产品交付情况请参见本报告第三节。",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "navigation_zh_pure_suffix",
+      "text": "具体情况请参阅本报告第三节。",
+      "expected_nonoperating": true,
+      "group": "navigation"
+    },
+    {
+      "id": "business_zh_delivery",
+      "text": "公司本年已向客户交付产品。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_en_delivery",
+      "text": "The company delivered software to customers this year.",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_en_product",
+      "text": "The company launched a new product.",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_en_factory",
+      "text": "The company acquired a factory this year.",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_zh_control_system",
+      "text": "公司控制系统产品已完成客户验证。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_zh_credit_software",
+      "text": "公司推出面向银行客户的金融工具信用风险管理软件。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_en_credit_platform",
+      "text": "The company launched a financial instruments credit risk management software platform.",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_no_event_phrase_plus_real",
+      "text": "A.公司未在报告期内交付产品\n□适用√不适用。公司已推出面向新客户的软件平台。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "business_zh_new_orders",
+      "text": "公司新增订单同比增长20%，具体详见本报告第三节。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    },
+    {
+      "id": "mixed_en_product_dot",
+      "text": "The company launched a new product. Accounting policies are described below.",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_en_factory_dot",
+      "text": "The company acquired a factory. Right-of-use assets were recognized at carrying value.",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_zh_structure_dot",
+      "text": "公司主要产品包括刻蚀机及薄膜沉积设备。终止经营是指能够单独区分且已处置的组成部分。",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_zh_operating_dot",
+      "text": "控制是指投资方对被投资方的权力并享有可变回报。公司已向客户交付产品。",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_en_no_space_dot",
+      "text": "Accounting policies are described below.The company launched a software platform.",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_en_semicolon",
+      "text": "Accounting policies are described below; the company launched a software platform.",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_zh_audit_period",
+      "text": "审计程序包括检查收入确认。公司已向客户交付产品。",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_zh_audit_comma",
+      "text": "审计程序包括检查收入确认，公司已向客户交付产品。",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_en_audit_period",
+      "text": "Audit procedures included testing revenue. The company delivered software to customers.",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "mixed_en_audit_comma",
+      "text": "Audit procedures included testing revenue, and the company delivered software to customers.",
+      "expected_nonoperating": false,
+      "group": "mixed"
+    },
+    {
+      "id": "audit_scope_zh",
+      "text": "审计程序包括检查公司已向客户交付产品的收入确认情况。",
+      "expected_nonoperating": true,
+      "group": "audit"
+    },
+    {
+      "id": "audit_scope_en",
+      "text": "Our audit procedures included testing revenue from software delivered to customers.",
+      "expected_nonoperating": true,
+      "group": "audit"
+    },
+    {
+      "id": "treasury_canonical",
+      "text": "董事会批准使用闲置资金购买理财产品。",
+      "expected_nonoperating": true,
+      "group": "treasury"
+    },
+    {
+      "id": "treasury_board_en",
+      "text": "The board approved investing idle funds in wealth management products.",
+      "expected_nonoperating": true,
+      "group": "treasury"
+    },
+    {
+      "id": "treasury_operating_product",
+      "text": "公司推出了面向客户的现金管理软件。",
+      "expected_nonoperating": false,
+      "group": "operations"
+    }
+  ]
+}

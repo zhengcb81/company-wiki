@@ -1,21 +1,21 @@
 # W08 source semantics candidate
 
-**Status:** paused_by_user_request_incomplete_candidate
+**Status:** active_root_repair_real_content_partial
 
 ## Goal
-Repair source fact/purpose, own-parent and numeric prose/table context at existing source responsibilities. Frozen for pause, not completed acceptance.
+Repair source meaning, purpose, native context and table dependencies in their shared owning layer. Preserve original documents, existing limits and default selector. Engineering green is not annual content acceptance.
 
 ## Next Step
-ROOT may preserve candidate in isolated branch, then pause. On explicit resume use review/handoff.md/json and reproduce-public-cache.ps1 to root-repair OPEN public cache/parent and quantity identifier problems; independent review before integration/release.
+ROOT diagnoses and repairs the observed numbered numeric-row false heading (p160 leaking into p184 context), then table header/unit and genuine cross-page business ancestry. Independently trace six omitted operating facts through actual eligibility/offer/defer paths before changing selection. W09/W11 are running in their exclusive external worktrees; ROOT does not edit those scopes.
 
 ## Phases
-1.Isolation and actual unchanged-code RED — complete; raw stdout/JUnit retained.
-2.Common repair and bounded GREEN — candidate:850P before equivalent typing edits;185P/full366src mypy after.
-3.Public cache migration and actual content acceptance — OPEN FAILED/PARTIAL.
-4.Independent large-node review/integration/release — not started;ROOT owns.
+1. Original public cache and source semantic RED — complete; failures preserved.
+2. Shared meaning owner, observed-measure modality/causal scope, accounting/form purpose, all three form-heading owners and cache fingerprint — finite engineering PASS. ROOT992P, RuffPASS, full src mypy368/0; measure/purpose independent reviews PASS in their bounded scopes.
+3. Real annual source-to-selection — PARTIAL. Two independent business30% scopes now pass on the recorded source bytes; unchanged14 annual targets expose omissions and incorrect table-row parent. No new paid summary yet.
+4. Correct remaining shared causes, actual summary/recovery/public RF read, independent content review and mainline integration — OPEN, ROOT owns. Checkpoint resume/root/checkpoint-v2.json; current content report resume/content-independent/annual14-shared-owner-full-context-review-20261023.md.
 
 ## Boundaries
-Only5relevant source,6tests and exclusive plan changed in worktree. Mother design reports completed earlier. Limits/default0.8 retained. No originals/config/index/sealed run/RF/audit code/install/merge/push;this worker made no commit.ROOT may preserve candidate.
+This worktree owns W08 source selection and tests. No changes to external W09 RF research or W11 official discovery, originals, sealed attempts, production configuration, default selection, budget limits or installed copies. Commit on own branch may preserve reviewed progress; it does not mean mainline release or full acceptance.
 
 ## Errors Encountered
-Original7F/7P and1F/3P RED retained. First combined845P/5F fixed preserving assertions;final850P. Type12errors fixed equivalently. Public fixture setup errors and2actual semantic failures retained. Two tmp cleanup failures corrected with exact native receipts. Frozen SHA/status:review/handoff.md/json.
+Historical7F/7P and cache1F/3P RED, initial combined845P/5F, setup/AST import/helper insertion errors and original independent findings remain in prior logs. Final992P covers actual repaired code. Corrected source file lookup: structure/layout.py is under document_understanding, not directly company_wiki. Sandbox Git read requires normal platform escalation; do not change core.bare/index to work around it.

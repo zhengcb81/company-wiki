@@ -815,3 +815,110 @@ def test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_sco
     pipeline = reading._understand(parsed, title="年度报告", kind="annual_report", mime_type="application/pdf")
     assert not any("native_numbered_list" in section.get("basis", ())
                    for section in pipeline["structure"]["sections"])
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_actual_pdf_native_unsplit_numbered_intro_declares_own_parent(reverse):
+    import hashlib
+    import pymupdf as fitz
+    from company_wiki.source_catalog.narrative_evidence import parse_pdf_bytes
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    names = ["Diagnostics services", "Technical services"]
+    if reverse:
+        names.reverse()
+    doc = fitz.open()
+    page = doc.new_page()
+    page.insert_text((90, 80), "I. Management discussion", fontsize=12)
+    for index, name in enumerate(names):
+        y = 120 + index * 90
+        page.insert_text((90, y), f"({index+1}) {name} generated USD 12 million.\nDuring the period:", fontsize=11)
+        page.insert_text((110, y+45), "- New product revenue exceeds 30%.", fontsize=11)
+    page.insert_text((90, 350), "The company plans remain subject to market conditions.", fontsize=11)
+    data = doc.tobytes()
+    doc.close()
+    digest = hashlib.sha256(data).hexdigest()
+    parsed = parse_pdf_bytes(data, source_id="urn:company-wiki:source:sha256:" + digest,
+                             source_sha256=digest, selector_version="0.9.0", language="en")
+    pipeline = reading._understand(parsed, title="Annual report", kind="annual_report", mime_type="application/pdf")
+    texts = {unit.unit_id: unit.raw_text for unit in parsed.units}
+    targets = [unit for unit in parsed.units if "New product revenue exceeds 30%" in unit.raw_text]
+    sections = {uid: section for section in pipeline["structure"]["sections"]
+                for uid in section.get("body_unit_ids", ())}
+    assert len(targets) == 2
+    for index, target in enumerate(targets):
+        own = "\n".join(texts[uid] for uid in sections[target.unit_id]["heading_unit_ids"])
+        assert names[index] in own and names[1-index] not in own
+        assert "During the period:" in own
+    tail = sections[parsed.units[-1].unit_id]
+    assert all("services generated" not in texts[uid] for uid in tail["heading_unit_ids"])
+
+
+@pytest.mark.parametrize("broken", ["unindented", "overlap", "foreign_source", "foreign_page", "missing_page", "known_disjoint_column", "table", "dom", "inline", "non_colon"])
+def test_unsplit_numbered_list_requires_complete_native_parent_evidence(broken):
+    from company_wiki.document_understanding.structure.contract import ObservationUnit, DEFAULT_LIMITS
+    from company_wiki.document_understanding.structure.layout import order_units
+    from company_wiki.document_understanding.structure.sections import build_sections
+
+    rows = [
+        {"unit_id": "head", "ordinal": 0, "page": 1, "kind": "paragraph",
+         "text": "(1) Diagnostics services generated USD 12 million.\nDuring the period:",
+         "hints": {"source_id": "one"}, "layout": {"bbox": [90, 100, 500, 130]}},
+        {"unit_id": "body", "ordinal": 1, "page": 1, "kind": "paragraph",
+         "text": "- New product revenue exceeds 30%.",
+         "hints": {"source_id": "one"}, "layout": {"bbox": [110, 150, 500, 170]}},
+    ]
+    if broken == "unindented":
+        rows[1]["layout"]["bbox"][0] = 90
+    elif broken == "overlap":
+        rows[1]["layout"]["bbox"][1] = 125
+    elif broken == "foreign_source":
+        rows[1]["hints"]["source_id"] = "two"
+    elif broken == "foreign_page":
+        rows[1]["page"] = 2
+    elif broken == "missing_page":
+        rows[0].pop("page")
+        rows[1].pop("page")
+    elif broken == "known_disjoint_column":
+        rows[0]["layout"]["column"] = rows[1]["layout"]["column"] = 1
+        rows[1]["layout"]["bbox"] = [550, 150, 740, 170]
+    elif broken == "table":
+        rows[1]["hints"]["table_id"] = "t1"
+    elif broken == "dom":
+        rows[0]["hints"]["dom_path"] = "/div/p[1]"
+    elif broken == "inline":
+        rows[0]["text"] = "The prose refers to " + rows[0]["text"]
+    elif broken == "non_colon":
+        rows[0]["text"] = rows[0]["text"].replace("period:", "period.")
+    units = [ObservationUnit(row, index) for index, row in enumerate(rows)]
+    result = build_sections(units, order_units(units), limits=DEFAULT_LIMITS)
+    assert not any("native_numbered_list" in section.basis for section in result.sections)
+
+
+@pytest.mark.parametrize("bullet_x, own_parent", [(110, True), (380, False)])
+def test_actual_pdf_unknown_columns_need_horizontal_lane_evidence(bullet_x, own_parent):
+    import hashlib
+    import pymupdf as fitz
+    from company_wiki.source_catalog.narrative_evidence import parse_pdf_bytes
+    from company_wiki.source_catalog import narrative_reading as reading
+    from company_wiki.resource_budget import new_document_work_budget
+
+    doc = fitz.open()
+    page = doc.new_page()
+    page.insert_text((70, 100), "(1) Diagnostics\nDuring the period:", fontsize=12)
+    page.insert_text((bullet_x, 160), "- New product revenue exceeds 30%.", fontsize=10)
+    data = doc.tobytes()
+    doc.close()
+    digest = hashlib.sha256(data).hexdigest()
+    budget = new_document_work_budget()
+    parsed = parse_pdf_bytes(data, source_id="urn:company-wiki:source:sha256:" + digest,
+                             source_sha256=digest, selector_version="0.9.0", language="en",
+                             work_budget=budget)
+    pipeline = reading._understand(parsed, title="Annual report", kind="annual_report",
+                                   mime_type="application/pdf", work_budget=budget)
+    texts = {unit.unit_id: unit.raw_text for unit in parsed.units}
+    target = next(unit for unit in parsed.units if "New product revenue" in unit.raw_text)
+    section = next(section for section in pipeline["structure"]["sections"]
+                   if target.unit_id in section.get("body_unit_ids", ()))
+    parent_text = "\n".join(texts[uid] for uid in section["heading_unit_ids"])
+    assert ("Diagnostics" in parent_text) is own_parent

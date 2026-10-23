@@ -160,12 +160,12 @@ def _display_heading_groups(units, excluded):
 
 
 def _native_numbered_list_scopes(ordering: layout_mod.Ordering):
-    """Source numbered introductions plus indented bullets, never nearby prose.
+    """Bound a numbered introduction by its own indented native list.
 
-    The native parser can split a numbered introduction after its first full
-    sentence. Equal boxes retain that original block boundary; an indented
-    bullet supplies the separate child-level evidence. Without both, keep the
-    existing unknown body structure. Scopes end at the next non-bullet block.
+    Source parsers may retain the introduction as one multiline block or split
+    it at a sentence boundary into units sharing one original box. Both are
+    source evidence; neither the number alone nor the nearest prose heading is
+    enough to declare a business parent. Stop before a sibling/unindented block.
     """
     scopes = {}
     ordered = ordering.ordered
@@ -173,29 +173,42 @@ def _native_numbered_list_scopes(ordering: layout_mod.Ordering):
     bullet = re.compile(r"^\s*[-•●▪]\s+\S")
     excluded = ordering.toc_ids | ordering.running_header_ids
     index = 0
-    while index + 2 < len(ordered):
-        opener, intro, first = ordered[index:index + 3]
+    while index + 1 < len(ordered):
+        opener = ordered[index]
         if (opener.unit_id in excluded or not marker.match(opener.text)
-                or opener.source_id is None or opener.bbox is None or opener.dom_path is not None
-                or opener.table_id or opener.is_table_furniture or opener.is_footnote
-                or intro.table_id or intro.is_table_furniture or intro.is_footnote
-                or (intro.source_id, intro.page, intro.column, intro.bbox)
-                != (opener.source_id, opener.page, opener.column, opener.bbox)
-                or not intro.text.rstrip().endswith(("：", ":"))
-                or first.bbox is None or first.bbox[0] <= opener.bbox[0]
-                or first.bbox[1] < opener.bbox[3] or not bullet.match(first.text)):
+                or opener.source_id is None or opener.page is None or opener.bbox is None
+                or opener.dom_path is not None
+                or opener.table_id or opener.is_table_furniture or opener.is_footnote):
             index += 1
             continue
-        members = [opener, intro]
+        heads = [opener]
+        cursor = index + 1
+        if not opener.text.rstrip().endswith(("：", ":")):
+            intro = ordered[cursor]
+            if (intro.unit_id in excluded or intro.table_id or intro.is_table_furniture
+                    or intro.is_footnote or intro.dom_path is not None
+                    or (intro.source_id, intro.page, intro.column, intro.bbox)
+                    != (opener.source_id, opener.page, opener.column, opener.bbox)
+                    or not intro.text.rstrip().endswith(("：", ":"))):
+                index += 1
+                continue
+            heads.append(intro)
+            cursor += 1
+        members = list(heads)
         previous_box = None
-        cursor = index + 2
         while cursor < len(ordered):
             unit = ordered[cursor]
+            # Missing column ids do not prove a shared lane. Require positive
+            # horizontal overlap even when an explicit id claims the same lane;
+            # contradictory geometry cannot establish this local list scope.
+            horizontal_overlap = layout_mod.visual_overlap(opener, unit)
             if (unit.unit_id in excluded or unit.table_id or unit.is_table_furniture
-                    or unit.is_footnote or unit.bbox is None
+                    or unit.is_footnote or unit.bbox is None or unit.dom_path is not None
                     or (unit.source_id, unit.page, unit.column)
                     != (opener.source_id, opener.page, opener.column)
+                    or horizontal_overlap is None or horizontal_overlap <= 0
                     or unit.bbox[0] <= opener.bbox[0]
+                    or unit.bbox[1] < opener.bbox[3]
                     or not (bullet.match(unit.text) or unit.bbox == previous_box)):
                 break
             members.append(unit)
@@ -203,8 +216,8 @@ def _native_numbered_list_scopes(ordering: layout_mod.Ordering):
             cursor += 1
             if len(members) > MAX_CONTINUATION_UNITS:
                 break
-        if 2 < len(members) <= MAX_CONTINUATION_UNITS:
-            scopes[opener.unit_id] = tuple(members)
+        if len(heads) < len(members) <= MAX_CONTINUATION_UNITS:
+            scopes[opener.unit_id] = (tuple(heads), tuple(members))
         index = max(index + 1, cursor)
     return scopes
 
@@ -248,7 +261,7 @@ def build_sections(
     numbered_scopes = _native_numbered_list_scopes(ordering)
     native_scope_members: set[str] = set()
     native_parent_stack: list[SectionDraft] = []
-    native_intro_ids = set()
+    native_intro_ids: set[str] = set()
 
     def open_section(
         unit: ObservationUnit,
@@ -327,13 +340,14 @@ def build_sections(
         if native_scope is not None:
             native_parent_stack = list(stack)
             parent_depth = stack[-1].depth if stack else 0
-            current = open_section(unit, heading_units=list(native_scope[:2]),
+            scope_heads, scope_members = native_scope
+            current = open_section(unit, heading_units=list(scope_heads),
                 depth_override=(parent_depth or 0) + 1, contextual_outline=True)
             current.basis.append("native_numbered_list")
-            native_scope_members = {member.unit_id for member in native_scope}
-            native_intro_ids.add(native_scope[1].unit_id)
-            unit_section[unit.unit_id] = current.section_id
-            unit_section[native_scope[1].unit_id] = current.section_id
+            native_scope_members = {member.unit_id for member in scope_members}
+            native_intro_ids.update(head.unit_id for head in scope_heads[1:])
+            for head in scope_heads:
+                unit_section[head.unit_id] = current.section_id
             last_page = unit.page
             carry_units = 0
             continue
