@@ -1,0 +1,33 @@
+{
+  "status": "INDEPENDENT_ENGINEERING_PASS_PENDING_NORMAL_PUSH",
+  "policy": "config/resource_budget.yaml",
+  "cumulative_tokens": 10000000,
+  "cumulative_micro_usd": 20000000,
+  "company_enforcement": "soft",
+  "charged_tokens": 1561352,
+  "charged_micro_usd": 631959,
+  "remaining_tokens": 8438648,
+  "remaining_micro_usd": 19368041,
+  "unknown_holds": "old7 plus new4 retained unchanged",
+  "cwp_independent": "independent-final/final-review.json",
+  "audit_independent": "audit-independent/review.json",
+  "formal_new_regressions": 70,
+  "full_src_typing": {
+    "files": 366,
+    "errors": 0
+  },
+  "root_lifecycle_loopback": {
+    "passed": 12,
+    "seconds": 210.7,
+    "external_provider_posts": 0
+  },
+  "root_dynamic_memory_pdf_regressions": {
+    "passed": 2,
+    "seconds": 4.11
+  },
+  "tests_overlap_not_additive": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "originals_and_history_unchanged": true,
+  "remaining": "W08 guidance/context/ancestry/selection batching plus true summary, RF matrix and W12; W09 content reception pending; W11 exclusive"
+}

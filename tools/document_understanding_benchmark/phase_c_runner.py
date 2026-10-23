@@ -56,9 +56,13 @@ def read_rows(path: Path) -> list[dict]:
     )
 
 
-def mother_totals(metadata_path: str | Path, usage_path: str | Path) -> dict:
+def mother_totals(metadata_path: str | Path, usage_path: str | Path, *,
+                  budget_policy_path: str | Path | None = None) -> dict:
+    from company_wiki.resource_budget import load_budget_policy
+
     meta = json.loads(Path(metadata_path).read_text(encoding="utf8"))
     baseline = meta["mother_budget"]
+    policy = load_budget_policy(budget_policy_path)
     latest = {}
     for row in read_rows(Path(usage_path)):
         if row["kind"] != "native_model_charge" or row["mode"] != "live":
@@ -73,8 +77,8 @@ def mother_totals(metadata_path: str | Path, usage_path: str | Path) -> dict:
         "new_unknown_count": sum(
             row["usage_status"] != "known" for row in latest.values()
         ),
-        "token_limit": baseline["token_limit"],
-        "micro_usd_limit": baseline["micro_usd_limit"],
+        "token_limit": policy.cumulative_tokens,
+        "micro_usd_limit": policy.cumulative_micro_usd,
         "prior_unknown7_retained": baseline[
             "old_unknown_hold_count_already_in_baseline"
         ],

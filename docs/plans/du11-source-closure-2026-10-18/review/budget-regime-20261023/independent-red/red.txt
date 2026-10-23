@@ -1,0 +1,353 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\budget-policy-test-red", "requested_basetemp_len": 67, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-pytest-basetemp\\20261023-220908-0fac36e7", "effective_basetemp_len": 78}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 63 items
+
+tests\unit\test_resource_budget_policy.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 47%]
+FFFFFFFFFFFFFFF....FFFFF.FF..FFFF                                        [100%]
+
+================================== FAILURES ===================================
+____ test_public_loader_reads_frozen_policy_without_changing_source[Path] _____
+tests\unit\test_resource_budget_policy.py:68: in test_public_loader_reads_frozen_policy_without_changing_source
+    policy = budget.load_budget_policy(path_kind(path))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_____ test_public_loader_reads_frozen_policy_without_changing_source[str] _____
+tests\unit\test_resource_budget_policy.py:68: in test_public_loader_reads_frozen_policy_without_changing_source
+    policy = budget.load_budget_policy(path_kind(path))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_______________ test_explicit_policy_path_wins_over_environment _______________
+tests\unit\test_resource_budget_policy.py:81: in test_explicit_policy_path_wins_over_environment
+    assert budget.load_budget_policy(explicit).document_work_limit == 16_000_000
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_______ test_environment_path_is_used_independent_of_current_directory ________
+C:\Users\֣����\Projects\company-wiki\tests\unit\test_resource_budget_policy.py:92: in test_environment_path_is_used_independent_of_current_directory
+    assert budget.load_budget_policy().document_work_limit == 29
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_________ test_bad_environment_path_cannot_silently_fall_back[False] __________
+tests\unit\test_resource_budget_policy.py:102: in test_bad_environment_path_cannot_silently_fall_back
+    budget.load_budget_policy()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+__________ test_bad_environment_path_cannot_silently_fall_back[True] __________
+tests\unit\test_resource_budget_policy.py:102: in test_bad_environment_path_cannot_silently_fall_back
+    budget.load_budget_policy()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_every_numeric_policy_dimension_can_be_zero[external_model-cumulative_tokens] _
+tests\unit\test_resource_budget_policy.py:109: in test_every_numeric_policy_dimension_can_be_zero
+    policy = budget.load_budget_policy(write_policy(tmp_path, configured))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_every_numeric_policy_dimension_can_be_zero[external_model-cumulative_micro_usd] _
+tests\unit\test_resource_budget_policy.py:109: in test_every_numeric_policy_dimension_can_be_zero
+    policy = budget.load_budget_policy(write_policy(tmp_path, configured))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_every_numeric_policy_dimension_can_be_zero[company_allocation-target_tokens] _
+tests\unit\test_resource_budget_policy.py:109: in test_every_numeric_policy_dimension_can_be_zero
+    policy = budget.load_budget_policy(write_policy(tmp_path, configured))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_every_numeric_policy_dimension_can_be_zero[company_allocation-target_micro_usd] _
+tests\unit\test_resource_budget_policy.py:109: in test_every_numeric_policy_dimension_can_be_zero
+    policy = budget.load_budget_policy(write_policy(tmp_path, configured))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_every_numeric_policy_dimension_can_be_zero[document_processing-max_work_units] _
+tests\unit\test_resource_budget_policy.py:109: in test_every_numeric_policy_dimension_can_be_zero
+    policy = budget.load_budget_policy(write_policy(tmp_path, configured))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[-1-external_model-cumulative_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[-1-external_model-cumulative_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[-1-company_allocation-target_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[-1-company_allocation-target_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[-1-document_processing-max_work_units] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[True-external_model-cumulative_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[True-external_model-cumulative_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[True-company_allocation-target_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[True-company_allocation-target_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[True-document_processing-max_work_units] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[1.5-external_model-cumulative_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[1.5-external_model-cumulative_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[1.5-company_allocation-target_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[1.5-company_allocation-target_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[1.5-document_processing-max_work_units] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[100-external_model-cumulative_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[100-external_model-cumulative_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[100-company_allocation-target_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[100-company_allocation-target_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[100-document_processing-max_work_units] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[None-external_model-cumulative_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[None-external_model-cumulative_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[None-company_allocation-target_tokens] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[None-company_allocation-target_micro_usd] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_policy_numbers_require_actual_nonnegative_integers[None-document_processing-max_work_units] _
+tests\unit\test_resource_budget_policy.py:121: in test_policy_numbers_require_actual_nonnegative_integers
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+____ test_invalid_policy_cannot_turn_into_implicit_default_values[schema] _____
+tests\unit\test_resource_budget_policy.py:134: in test_invalid_policy_cannot_turn_into_implicit_default_values
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+____ test_invalid_policy_cannot_turn_into_implicit_default_values[missing] ____
+tests\unit\test_resource_budget_policy.py:134: in test_invalid_policy_cannot_turn_into_implicit_default_values
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_ test_invalid_policy_cannot_turn_into_implicit_default_values[hard_company_limit] _
+tests\unit\test_resource_budget_policy.py:134: in test_invalid_policy_cannot_turn_into_implicit_default_values
+    budget.load_budget_policy(write_policy(tmp_path, configured))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+_______ test_company_allocation_is_soft_and_can_exceed_mother_allowance _______
+tests\unit\test_resource_budget_policy.py:143: in test_company_allocation_is_soft_and_can_exceed_mother_allowance
+    policy = budget.load_budget_policy(path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.resource_budget' has no attribute 'load_budget_policy'
+__ test_external_token_money_and_company_targets_do_not_reset_or_charge_work __
+tests\unit\test_resource_budget_policy.py:154: in test_external_token_money_and_company_targets_do_not_reset_or_charge_work
+    work = budget.new_document_work_budget(policy_path=write_policy(tmp_path, configured))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: new_document_work_budget() got an unexpected keyword argument 'policy_path'
+___________ test_factory_uses_selected_policy_work_limit_and_phase ____________
+tests\unit\test_resource_budget_policy.py:162: in test_factory_uses_selected_policy_work_limit_and_phase
+    work = budget.new_document_work_budget(policy_path=write_policy(tmp_path, configured), phase="parse")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: new_document_work_budget() got an unexpected keyword argument 'policy_path'
+__ test_explicit_request_work_override_is_not_clamped_to_the_old_constant[0] __
+tests\unit\test_resource_budget_policy.py:171: in test_explicit_request_work_override_is_not_clamped_to_the_old_constant
+    work = budget.new_document_work_budget(max_work_units=explicit, policy_path=path, phase="select")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: new_document_work_budget() got an unexpected keyword argument 'max_work_units'
+_ test_explicit_request_work_override_is_not_clamped_to_the_old_constant[23] __
+tests\unit\test_resource_budget_policy.py:171: in test_explicit_request_work_override_is_not_clamped_to_the_old_constant
+    work = budget.new_document_work_budget(max_work_units=explicit, policy_path=path, phase="select")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: new_document_work_budget() got an unexpected keyword argument 'max_work_units'
+_ test_explicit_request_work_override_is_not_clamped_to_the_old_constant[48000000] _
+tests\unit\test_resource_budget_policy.py:171: in test_explicit_request_work_override_is_not_clamped_to_the_old_constant
+    work = budget.new_document_work_budget(max_work_units=explicit, policy_path=path, phase="select")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: new_document_work_budget() got an unexpected keyword argument 'max_work_units'
+__________ test_work_account_constructor_rejects_invalid_limits[-1] ___________
+tests\unit\test_resource_budget_policy.py:184: in test_work_account_constructor_rejects_invalid_limits
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+_________ test_work_account_constructor_rejects_invalid_limits[True] __________
+tests\unit\test_resource_budget_policy.py:184: in test_work_account_constructor_rejects_invalid_limits
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+__________ test_work_account_constructor_rejects_invalid_limits[2.5] __________
+tests\unit\test_resource_budget_policy.py:184: in test_work_account_constructor_rejects_invalid_limits
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+__________ test_work_account_constructor_rejects_invalid_limits[10] ___________
+tests\unit\test_resource_budget_policy.py:184: in test_work_account_constructor_rejects_invalid_limits
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+_________ test_work_account_constructor_rejects_invalid_limits[None] __________
+tests\unit\test_resource_budget_policy.py:184: in test_work_account_constructor_rejects_invalid_limits
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+_____________ test_invalid_charge_cannot_mutate_the_account[True] _____________
+tests\unit\test_resource_budget_policy.py:191: in test_invalid_charge_cannot_mutate_the_account
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+_____________ test_invalid_charge_cannot_mutate_the_account[2.5] ______________
+tests\unit\test_resource_budget_policy.py:191: in test_invalid_charge_cannot_mutate_the_account
+    with pytest.raises((ValueError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, TypeError)
+_ test_zero_limit_allows_noop_but_reports_real_dimension_and_phase_on_first_work _
+tests\unit\test_resource_budget_policy.py:206: in test_zero_limit_allows_noop_but_reports_real_dimension_and_phase_on_first_work
+    work = budget.WorkBudget(0, phase="parse")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: WorkBudget.__init__() got an unexpected keyword argument 'phase'
+__ test_scoped_limit_rejects_atomically_without_exhausting_parent_allowance ___
+tests\unit\test_resource_budget_policy.py:215: in test_scoped_limit_rejects_atomically_without_exhausting_parent_allowance
+    parent = budget.WorkBudget(10, phase="document")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: WorkBudget.__init__() got an unexpected keyword argument 'phase'
+____ test_scoped_default_phase_and_sibling_scopes_share_one_parent_account ____
+tests\unit\test_resource_budget_policy.py:227: in test_scoped_default_phase_and_sibling_scopes_share_one_parent_account
+    parent = budget.WorkBudget(10, phase="document")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: WorkBudget.__init__() got an unexpected keyword argument 'phase'
+___________ test_parsing_and_selection_reuse_the_same_spent_account ___________
+tests\unit\test_resource_budget_policy.py:241: in test_parsing_and_selection_reuse_the_same_spent_account
+    work = budget.new_document_work_budget(max_work_units=10, policy_path=write_policy(tmp_path))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: new_document_work_budget() got an unexpected keyword argument 'max_work_units'
+- generated xml file: C:\Users\֣����\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\budget-regime-20261023\independent-red\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_resource_budget_policy.py::test_public_loader_reads_frozen_policy_without_changing_source[Path]
+FAILED tests/unit/test_resource_budget_policy.py::test_public_loader_reads_frozen_policy_without_changing_source[str]
+FAILED tests/unit/test_resource_budget_policy.py::test_explicit_policy_path_wins_over_environment
+FAILED tests/unit/test_resource_budget_policy.py::test_environment_path_is_used_independent_of_current_directory
+FAILED tests/unit/test_resource_budget_policy.py::test_bad_environment_path_cannot_silently_fall_back[False]
+FAILED tests/unit/test_resource_budget_policy.py::test_bad_environment_path_cannot_silently_fall_back[True]
+FAILED tests/unit/test_resource_budget_policy.py::test_every_numeric_policy_dimension_can_be_zero[external_model-cumulative_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_every_numeric_policy_dimension_can_be_zero[external_model-cumulative_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_every_numeric_policy_dimension_can_be_zero[company_allocation-target_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_every_numeric_policy_dimension_can_be_zero[company_allocation-target_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_every_numeric_policy_dimension_can_be_zero[document_processing-max_work_units]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[-1-external_model-cumulative_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[-1-external_model-cumulative_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[-1-company_allocation-target_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[-1-company_allocation-target_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[-1-document_processing-max_work_units]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[True-external_model-cumulative_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[True-external_model-cumulative_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[True-company_allocation-target_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[True-company_allocation-target_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[True-document_processing-max_work_units]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[1.5-external_model-cumulative_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[1.5-external_model-cumulative_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[1.5-company_allocation-target_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[1.5-company_allocation-target_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[1.5-document_processing-max_work_units]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[100-external_model-cumulative_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[100-external_model-cumulative_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[100-company_allocation-target_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[100-company_allocation-target_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[100-document_processing-max_work_units]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[None-external_model-cumulative_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[None-external_model-cumulative_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[None-company_allocation-target_tokens]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[None-company_allocation-target_micro_usd]
+FAILED tests/unit/test_resource_budget_policy.py::test_policy_numbers_require_actual_nonnegative_integers[None-document_processing-max_work_units]
+FAILED tests/unit/test_resource_budget_policy.py::test_invalid_policy_cannot_turn_into_implicit_default_values[schema]
+FAILED tests/unit/test_resource_budget_policy.py::test_invalid_policy_cannot_turn_into_implicit_default_values[missing]
+FAILED tests/unit/test_resource_budget_policy.py::test_invalid_policy_cannot_turn_into_implicit_default_values[hard_company_limit]
+FAILED tests/unit/test_resource_budget_policy.py::test_company_allocation_is_soft_and_can_exceed_mother_allowance
+FAILED tests/unit/test_resource_budget_policy.py::test_external_token_money_and_company_targets_do_not_reset_or_charge_work
+FAILED tests/unit/test_resource_budget_policy.py::test_factory_uses_selected_policy_work_limit_and_phase
+FAILED tests/unit/test_resource_budget_policy.py::test_explicit_request_work_override_is_not_clamped_to_the_old_constant[0]
+FAILED tests/unit/test_resource_budget_policy.py::test_explicit_request_work_override_is_not_clamped_to_the_old_constant[23]
+FAILED tests/unit/test_resource_budget_policy.py::test_explicit_request_work_override_is_not_clamped_to_the_old_constant[48000000]
+FAILED tests/unit/test_resource_budget_policy.py::test_work_account_constructor_rejects_invalid_limits[-1]
+FAILED tests/unit/test_resource_budget_policy.py::test_work_account_constructor_rejects_invalid_limits[True]
+FAILED tests/unit/test_resource_budget_policy.py::test_work_account_constructor_rejects_invalid_limits[2.5]
+FAILED tests/unit/test_resource_budget_policy.py::test_work_account_constructor_rejects_invalid_limits[10]
+FAILED tests/unit/test_resource_budget_policy.py::test_work_account_constructor_rejects_invalid_limits[None]
+FAILED tests/unit/test_resource_budget_policy.py::test_invalid_charge_cannot_mutate_the_account[True]
+FAILED tests/unit/test_resource_budget_policy.py::test_invalid_charge_cannot_mutate_the_account[2.5]
+FAILED tests/unit/test_resource_budget_policy.py::test_zero_limit_allows_noop_but_reports_real_dimension_and_phase_on_first_work
+FAILED tests/unit/test_resource_budget_policy.py::test_scoped_limit_rejects_atomically_without_exhausting_parent_allowance
+FAILED tests/unit/test_resource_budget_policy.py::test_scoped_default_phase_and_sibling_scopes_share_one_parent_account
+FAILED tests/unit/test_resource_budget_policy.py::test_parsing_and_selection_reuse_the_same_spent_account
+======================== 56 failed, 7 passed in 3.53s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-pytest-basetemp\\20261023-220908-0fac36e7", "existed": true, "removed": true}

@@ -910,10 +910,10 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         budget.charge()
         pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type,
                                work_budget=budget)
-    except WorkBudgetExceeded:
-        return _deferred_selection(parsed, route)
+    except WorkBudgetExceeded as refusal:
+        return _deferred_selection(parsed, route, budget=budget, refusal=refusal)
     if pipeline.get("analysis_status") == "deferred":
-        return _deferred_selection(parsed, route)
+        return _deferred_selection(parsed, route, budget=budget)
     session_state: dict[str, Any] = {}
     candidates, reading, eligible, graph_complete, withheld = _candidates(
         parsed, pipeline, work_budget=budget, _session_state=session_state)
@@ -957,6 +957,9 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     if any(diagnostic["code"] == "work_budget_exhausted" for diagnostic in result.selection_diagnostics):
         result = replace(result, coverage_complete=False,
                          status="partial" if result.evidence_spans else "needs_review")
+    if budget.exhausted:
+        result = replace(result, selection_diagnostics=(
+            *result.selection_diagnostics, _document_work_diagnostic(budget)))
     pipeline["selected_span_ids"] = _selected_unit_spans(parsed, result, pipeline)
     # Preserve source bytes and IDs. The existing quality vocabulary carries
     # unresolved table attribution into every model view, without an IO gate.
@@ -993,19 +996,35 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         context["selection_diagnostics"].append({"code": "DECISION_DEPENDENCIES_UNAVAILABLE", "count": 1})
     else:
         from company_wiki.document_understanding.decision_inventory import build_decision_trace
-        dependencies = dependency_port.freeze_decision_dependencies(build_decision_trace(
+        trace = build_decision_trace(
             pipeline, used_facet_ids=[facet["id"] for facet in context["business_facets"]],
-            source_parser_names=tuple({unit.parser_name for unit in parsed.units})))
+            source_parser_names=tuple({unit.parser_name for unit in parsed.units}),
+            document_work_limit=budget.max_work_units)
+        if budget.exhausted or any(row["code"] == "work_budget_exhausted"
+                                   for row in result.selection_diagnostics):
+            trace["inventory_complete"] = False
+        dependencies = dependency_port.freeze_decision_dependencies(trace)
     return replace(result, reading_context=context, reading_dependencies=dependencies)
 
 
-def _deferred_selection(parsed: DocumentStructure, route: DocumentRoute) -> NarrativeEvidencePackage:
+def _document_work_diagnostic(budget: WorkBudget,
+                              refusal: WorkBudgetExceeded | None = None) -> dict[str, Any]:
+    return {"code": "work_budget_exhausted", "count": 1,
+            "dimension": "document_work", "external_model_cost": False,
+            "phase": refusal.phase if refusal is not None else budget.phase,
+            "used": refusal.used if refusal is not None else budget.used,
+            "requested": refusal.requested if refusal is not None else None,
+            "limit": refusal.limit if refusal is not None else budget.max_work_units,
+            "detail": "unexamined source content remains unknown; original is unchanged"}
+
+
+def _deferred_selection(parsed: DocumentStructure, route: DocumentRoute, *,
+                        budget: WorkBudget, refusal: WorkBudgetExceeded | None = None) -> NarrativeEvidencePackage:
     return NarrativeEvidencePackage(source_id=parsed.source_id, source_sha256=parsed.source_sha256,
         document_kind=route.document_kind, status="needs_review", evidence_spans=(),
         selection_limit=route.selection_limit, candidate_count=0, dropped_financial_count=0,
         source_units=len(parsed.units), omitted_candidate_count=0, coverage_complete=False,
-        selection_diagnostics=({"code": "work_budget_exhausted", "count": 1,
-                               "detail": "unexamined source content remains unknown; original is unchanged"},))
+        selection_diagnostics=(_document_work_diagnostic(budget, refusal),))
 
 
 __all__ = ["select_reading_evidence", "READING_SELECTOR_VERSION"]

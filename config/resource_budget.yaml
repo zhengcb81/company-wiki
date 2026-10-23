@@ -1,0 +1,11 @@
+# Current task policy. Historical charges and unknown holds remain in native accounting.
+schema_version: company-wiki-budget-policy/1
+external_model:
+  cumulative_tokens: 10000000
+  cumulative_micro_usd: 20000000
+company_allocation:
+  enforcement: soft
+  target_tokens: 150000
+  target_micro_usd: 1000000
+document_processing:
+  max_work_units: 16000000

@@ -200,6 +200,18 @@ def finalize_selection(
         selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
     spans = _evidence_spans(selected, effective_groups,
         reading_metadata if budget_policy == READING_BUDGET_POLICY else None)
+    diagnostic_rows = []
+    for reason, count in sorted(counts.items()):
+        row: dict[str, Any] = {"code": reason, "count": count,
+                               "phase": "selection", "external_model_cost": False}
+        if reason == "budget_full":
+            row.update(dimension="selection_spans", used=len(spans), limit=route.selection_limit)
+        elif reason == "character_budget":
+            row.update(dimension="selection_characters",
+                       used=sum(len(span.raw_text or "") for span in spans), limit=max_chars)
+        else:
+            row["dimension"] = "selection_work" if reason == "work_budget_exhausted" else "selection_policy"
+        diagnostic_rows.append(row)
     return NarrativeEvidencePackage(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,
@@ -212,8 +224,7 @@ def finalize_selection(
         source_units=len(structure.units),
         omitted_candidate_count=omitted,
         coverage_complete=structure.coverage_complete,
-        selection_diagnostics=(tuple({"code": reason, "count": count}
-                                     for reason, count in sorted(counts.items()))
+        selection_diagnostics=(tuple(diagnostic_rows)
                                if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY,
                                                     REPLAY_VALUE_READING_BUDGET_POLICY} else ()),
     )

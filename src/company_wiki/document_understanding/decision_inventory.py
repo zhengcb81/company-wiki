@@ -64,6 +64,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
     from .structure import table_purpose
     from .native_table_bridge import NATIVE_TABLE_BRIDGE_VERSION
     from company_wiki.document_normalization import text_matching
+    from company_wiki.resource_budget import load_budget_policy
 
     business_modules = (
         "company_wiki.source_catalog.narrative_business_policy",
@@ -87,6 +88,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         return Path(path)
 
     versions = {"inventory": "1.8.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+            "document_work_limit": str(load_budget_policy().document_work_limit),
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
@@ -148,7 +150,8 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
 def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
                used_facets: set[str], *, complete: bool = True,
                carrier: str | None = None, actual_frontend: str | None = None,
-               material_matcher: str | None = None, capture_digest: str | None = None) -> dict[str, Any]:
+               material_matcher: str | None = None, capture_digest: str | None = None,
+               document_work_limit: int | None = None) -> dict[str, Any]:
     components = []
     candidates = []
     if len(scopes) > 64:
@@ -219,6 +222,8 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
             "scope_ids": [scope["scope_id"] for scope in scopes]})
     pdf_used = carrier == "application/pdf" and bool(actual_frontend)
     versions = _versions(pdf_frontend=pdf_used, mime_type=carrier, material_matcher=material_matcher)
+    if document_work_limit is not None:
+        versions["document_work_limit"] = str(document_work_limit)
     if carrier == "application/pdf":
         if not pdf_used or not versions.get("pdf_projection") or versions.get("pdf_frontend") != actual_frontend:
             complete = False
@@ -239,7 +244,8 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
 
 
 def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequence[str] = (),
-                         source_parser_names: Sequence[str] | None = None) -> dict[str, Any]:
+                         source_parser_names: Sequence[str] | None = None,
+                         document_work_limit: int | None = None) -> dict[str, Any]:
     route = pipeline["route"]
     metadata = pipeline.get("observation", {}).get("metadata", {})
     source = pipeline["source_ref"]["source_id"]
@@ -338,7 +344,8 @@ def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequenc
         bindings[sid] = actual.get('profile_id', 'generic')
     return _inventory(scopes, bindings, set(used_facet_ids), complete=complete, carrier=carrier,
                       actual_frontend=frontend, material_matcher=material_matcher,
-                      capture_digest=_digest(capture) if isinstance(capture, Mapping) else None)
+                      capture_digest=_digest(capture) if isinstance(capture, Mapping) else None,
+                      document_work_limit=document_work_limit)
 
 
 def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:

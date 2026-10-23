@@ -1,3 +1,11 @@
+## 2026-10-23 预算制度根因改造与W09接收
+
+用户明确授权累计10Mtokens/USD20，公司150k/USD1改软目标。ROOT单一config/resource_budget.yaml接入真实mother_totals，旧metadata/usage/unknown全不变，余额8,438,648tokens/19,368,041microUSD；追加新effective scope而不重写旧材料。初始独立56F/7P及母账2F留证；维度套件两次夹具错误另列，第三次才是3个真实RED。独审再查出partial耗尽漏报和缓存错误复用2F，已从共享owner修复并固化普通内存PDF回归。最终独审99P/47P，ROOT loopback恢复12P/210.70s、动态工作计量回归2P，全src类型/发布另附收据；不重复付费、不混加测试计数。
+
+Audit low误停共因4F→58P，完整662run=660P/2skip；独立18控制通过，文档端序笔误只改文字，算法/原结果不变。待ROOT串行提交/定点同步，CWP待正常push。PWF入口/预算目标/外包整合说明已更新，源14目标和W08指引/跨页未冒充完成。
+
+W09用户报告完成，独立只读初筛核实际eb7c2dee/clean、28交付工件和6原生capture，写集无越界，可进入ROOT内容复核；剩版本指针/最终review绑定/测试日志与体积口径小修。作者工区只读，W11未接管。
+
 ## 2026-10-22 W07真实生命周期完成，交W06阶段B
 
 ### 后续三仓根修接收与RF实际消费（20:54UTC）

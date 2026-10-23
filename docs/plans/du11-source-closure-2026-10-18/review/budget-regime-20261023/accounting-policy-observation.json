@@ -1,0 +1,33 @@
+{
+  "kind": "current_policy_observation_not_charge_ledger",
+  "totals": {
+    "charged_tokens": 1561352,
+    "charged_micro_usd": 631959,
+    "new_unknown_count": 4,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "remaining_tokens": 8438648,
+  "remaining_micro_usd": 19368041,
+  "policy": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\resource_budget.yaml",
+  "policy_fingerprint": {
+    "sha256": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+    "bytes": 353,
+    "mtime_ns": 1792793421440749500
+  },
+  "historical_inputs_unchanged": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\metadata.json": {
+      "sha256": "638776f2c61d970ee432af60abf29ce3d4c9ccd0bd14eceb00eb8d7b07eda5b9",
+      "bytes": 19273,
+      "mtime_ns": 1792533555632117800
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\live\\usage.jsonl": {
+      "sha256": "575b85e05838a497b940b58d3f73bb4052a48546adfde3ff48512c697faa379b",
+      "bytes": 84652,
+      "mtime_ns": 1792700675550676100
+    }
+  },
+  "external_model_calls": 0,
+  "downloads": 0
+}

@@ -39,7 +39,9 @@ def test_shared_empty_selection_never_resets_source_by_full_scan(version, expect
 
 def test_production_passes_one_budget_from_source_to_builtin_selector(monkeypatch):
     from company_wiki import resource_budget
-    monkeypatch.setattr(resource_budget, 'DEFAULT_DOCUMENT_WORK_LIMIT', 123_456)
+    from dataclasses import replace
+    configured = replace(resource_budget.load_budget_policy(), document_work_limit=123_456)
+    monkeypatch.setattr(resource_budget, 'load_budget_policy', lambda *args, **kwargs: configured)
     observed = {}
     def parser(data, **kwargs):
         observed['source'] = kwargs.get('work_budget')

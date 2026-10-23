@@ -1,0 +1,126 @@
+{
+  "schema_version": "audit-low-budget-independent-review/1",
+  "status": "PASS",
+  "observed_utc": "2026-10-23T22:31:46.517024+00:00",
+  "scope": "Audit low warning / global exhausted / unknown charge recovery only",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "priority": "P3",
+      "status": "FIXED_BY_ROOT_AND_INDEPENDENTLY_VERIFIED",
+      "file": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "line": 36,
+      "detail": "Existing documentation said little-endian while frozen code uses big-endian; ROOT corrected this phrase and normalized newlines.",
+      "byte_verification": {
+        "exact_reverse_reconstruction_sha256": "aa0af71b736b9055ca6e097d0c1b8b1b20c89dbb179eb2be1e3cd8049886068c",
+        "root_delta": "one endian phrase + LF/CRLF normalization only",
+        "prior_bytes": 13831,
+        "final_bytes": 13944,
+        "prior_newlines": {
+          "LF_only": 113,
+          "CRLF": 1
+        },
+        "final_newlines": {
+          "LF_only": 0,
+          "CRLF": 114
+        }
+      }
+    }
+  ],
+  "independent_probes": {
+    "count": 18,
+    "passed": 18,
+    "failed": 0,
+    "seconds": 7.11829,
+    "cli_subprocesses": 13,
+    "report": "probe-result.json",
+    "source_bindings_during_probe": [
+      {
+        "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+        "sha256": "eff14102ef7258eb8c5588043884004f11f3cd2388d1ecc8bc40e11d6895a492",
+        "bytes": 68223
+      },
+      {
+        "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+        "sha256": "aa0af71b736b9055ca6e097d0c1b8b1b20c89dbb179eb2be1e3cd8049886068c",
+        "bytes": 13831
+      },
+      {
+        "path": "skills/revenue-forecast-audit/SKILL.md",
+        "sha256": "45f554ffe41d72c8e5aced668251c2fd05ac413d1ba4d97c627a5d46cc62ca5c",
+        "bytes": 13518
+      },
+      {
+        "path": "tests/test_pool_progress.py",
+        "sha256": "07008f5078e4b20c53b4c372948dde3fe03088e8f349107c27f152118df38560",
+        "bytes": 39282
+      },
+      {
+        "path": "tests/test_pool_progress_cli.py",
+        "sha256": "12090639c366653882081720aea7fc3d3688da2e073be2226f2ea784dd8070c3",
+        "bytes": 16643
+      }
+    ]
+  },
+  "final_bindings": [
+    {
+      "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+      "sha256": "eff14102ef7258eb8c5588043884004f11f3cd2388d1ecc8bc40e11d6895a492",
+      "bytes": 68223
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "sha256": "33db81fa6fb4e08e8598fe010fc133ad1aa7528fc3bfc2e0311d34ccd6822478",
+      "bytes": 13944
+    },
+    {
+      "path": "skills/revenue-forecast-audit/SKILL.md",
+      "sha256": "45f554ffe41d72c8e5aced668251c2fd05ac413d1ba4d97c627a5d46cc62ca5c",
+      "bytes": 13518
+    },
+    {
+      "path": "tests/test_pool_progress.py",
+      "sha256": "07008f5078e4b20c53b4c372948dde3fe03088e8f349107c27f152118df38560",
+      "bytes": 39282
+    },
+    {
+      "path": "tests/test_pool_progress_cli.py",
+      "sha256": "12090639c366653882081720aea7fc3d3688da2e073be2226f2ea784dd8070c3",
+      "bytes": 16643
+    }
+  ],
+  "post_probe_change": {
+    "file": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+    "old_sha256": "aa0af71b736b9055ca6e097d0c1b8b1b20c89dbb179eb2be1e3cd8049886068c",
+    "new_sha256": "33db81fa6fb4e08e8598fe010fc133ad1aa7528fc3bfc2e0311d34ccd6822478",
+    "change": "one endian phrase and newline normalization; no executable or test change",
+    "retest": "Read-only exact byte reverse reconstruction; no suite rerun"
+  },
+  "author_evidence": {
+    "red": "58 run / 4 expected failing new assertions",
+    "related": "58 PASS",
+    "full": "662 run / 660 PASS / 2 existing skips",
+    "full_bound_current_code_tests": true,
+    "validate": "PASS",
+    "cleanup": "full-cleanup.json plus independent absence checks"
+  },
+  "operational_notes": [
+    "ROOT owns current effective global10M tokens/$20 scope; no ledger or scope edit was part of review.",
+    "After installation use existing request_next to recompute any prior-version cached next_action; no migration or history rewrite.",
+    "Three changed skill files still require ROOT targeted sync/check and commit."
+  ],
+  "review_environment_notes": [
+    "Initial sandbox CLI os.replace was denied (WinError5); exact probe passed in native context without changing product.",
+    "An initial final-document byte-only reversal check rejected native newline normalization; restoring the exact original mixed newline shape reconstructed author SHA and closed the check."
+  ],
+  "cleanup": "cleanup.json",
+  "no_side_effects": {
+    "audit_source_mutations_by_reviewer": 0,
+    "audit_git_mutations_by_reviewer": 0,
+    "install_mutations_by_reviewer": 0,
+    "originals_or_keys_read": 0,
+    "provider_calls": 0,
+    "paid_calls": 0,
+    "historical_run_or_ledger_mutations": 0
+  }
+}

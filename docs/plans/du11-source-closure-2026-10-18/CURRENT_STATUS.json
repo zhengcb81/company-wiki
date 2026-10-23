@@ -151,22 +151,22 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ROOT按NEXT步骤3先TDD修经营体积/具名业务同比与指引角色/前提闭包，再做可信跨页祖先和固定预算重要性选材；裸数质量与独立项目正文/局部限制链节点已独审44P/165P，全src369/0。真实249页仍整体PARTIAL。W09/W11外部施工写集不动；随后正式摘要、缓存与真实RF矩阵/W12。",
+  "next_step_now": "先完成预算制度集中独审与发布（母10M/$20、公司软预算、low提醒继续、配置和诊断单一化），然后恢复ROOT W08步骤3指引前提闭包/经营量根修；W09/W11独占施工不动，正式摘要/cache/矩阵/W12随后。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
     "tokens": 1561352,
     "estimated_micro_usd": 631959,
-    "remaining_tokens": 438648,
+    "remaining_tokens": 8438648,
     "remaining_micro_usd": 19368041,
     "includes_prior_baseline_and_retained_fx": true,
     "new_unknown_count": 4,
     "prior_unknown_hold_count": 7,
-    "cumulative_cap_tokens": 2000000,
+    "cumulative_cap_tokens": 10000000,
     "cumulative_cap_usd": 20,
     "cost_kind": "budget proxy and conservative unknown holds, not provider invoice",
-    "latest_native_observation_ref": "review/r1-w07-live-20261022/accounting-final-observation.json",
+    "latest_native_observation_ref": "review/budget-regime-20261023/accounting-policy-observation.json",
     "company_cap_tokens": 150000,
     "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json",
     "company_tokens": 56355,
@@ -174,7 +174,9 @@
     "company_known_tokens": 24184,
     "company_known_micro_usd": 9693,
     "company_unknown_hold_tokens": 32171,
-    "company_unknown_hold_micro_usd": 6728
+    "company_unknown_hold_micro_usd": 6728,
+    "policy_ref": "../../../config/resource_budget.yaml",
+    "company_allocation_enforcement": "soft"
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -202,7 +204,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-23T21:53:13.151496+00:00",
+  "last_updated_at": "2026-10-23T22:31:30.296232+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -324,8 +326,8 @@
     "W08": "NUMERIC_PROSE_RESTRICTION_NODES_REVIEWED_BRANCH_PUSH_GREEN_ANNUAL_PARTIAL",
     "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
     "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
-    "W09": "EXTERNAL_HARNESS_RUNNING_USER_REPORTED",
-    "W09_ref": "review/r1-w09-preparation-checkpoint-20261022.json",
+    "W09": "DELIVERED_USER_REPORTED_ROOT_SCREENED_CONTENT_REVIEW_PENDING",
+    "W09_ref": "review/r1-w09-reception-20261023/reception.json",
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
     "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
     "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
@@ -337,5 +339,19 @@
     "W08_branch_head_prefix": "1712ed10",
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1"
+  },
+  "budget_regime": {
+    "status": "ENGINEERING_PASS_PENDING_PUBLICATION",
+    "authorization": "User2026-10-23: 根据你的建议改进额度制度",
+    "policy": "config/resource_budget.yaml",
+    "plan": "budget-regime-20261023.md",
+    "effective_scope_ref": "review/budget-regime-20261023/effective-scope-observation.json",
+    "current_limits_tokens": 10000000,
+    "current_limits_micro_usd": 20000000,
+    "company_targets_enforcement": "soft",
+    "old_metadata_and_unknown_holds_unchanged": true,
+    "native_goal_old_budget_text_superseded_by_latest_user_instruction": true,
+    "selection_batching": "W08_step5_open_not_claimed_complete",
+    "independent_review": "review/budget-regime-20261023/independent-final/final-review.json"
   }
 }

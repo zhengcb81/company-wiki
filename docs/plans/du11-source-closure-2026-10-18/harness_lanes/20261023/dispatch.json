@@ -29,9 +29,11 @@
         "bytes": 26880,
         "access": "read_only"
       },
-      "status": "IN_PROGRESS_USER_REPORTED",
+      "status": "DELIVERED_ROOT_SCREENED_CONTENT_REVIEW_PENDING",
       "handoff": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\handoff.json",
-      "implementation_independently_observed": false
+      "implementation_independently_observed": true,
+      "observed_final_head": "eb7c2dee",
+      "root_screening_ref": "../../review/r1-w09-reception-20261023/reception.json"
     },
     {
       "id": "W11-CWP-SOURCES",
@@ -102,5 +104,15 @@
   ],
   "shared_git_objects_reused": true,
   "packet_independent_review": "packet-review.json",
-  "user_dispatch_recorded_at": "2026-10-23T19:39:22.878730+00:00"
+  "user_dispatch_recorded_at": "2026-10-23T19:39:22.878730+00:00",
+  "root_budget_policy_amendment": {
+    "date": "2026-10-23",
+    "ref": "../../budget-regime-20261023.md",
+    "current_tokens": 10000000,
+    "current_usd": "20",
+    "company_enforcement": "soft",
+    "frozen_inputs_unchanged": true,
+    "external_packages_still_offline_no_new_paid_authority_needed": true,
+    "root_integrates_current_policy_after_handoff": true
+  }
 }

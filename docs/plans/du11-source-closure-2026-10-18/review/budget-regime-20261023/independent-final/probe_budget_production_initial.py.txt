@@ -1,0 +1,131 @@
+"""Independent offline observations; production algorithms remain unmodified."""
+from __future__ import annotations
+import hashlib
+import json
+import os
+from pathlib import Path
+import socket
+import sys
+import tempfile
+from types import SimpleNamespace
+
+ROOT = Path(__file__).resolve().parents[6]
+sys.path.insert(0, str(ROOT / "src"))
+for secret in ("OPENAI_API_KEY", "DEEPSEEK_API_KEY", "MINIMAX_API_KEY", "MIMO_API_KEY", "TAVILY_API_KEY", "ANTHROPIC_API_KEY"):
+    os.environ.pop(secret, None)
+os.environ["PYTHON_DOTENV_DISABLED"] = "1"
+os.environ["COMPANY_WIKI_NETWORK"] = "blocked"
+os.environ["COMPANY_WIKI_REAL_LLM"] = "0"
+def blocked(*args, **kwargs):
+    raise RuntimeError("independent offline review: network disabled")
+socket.socket.connect = blocked
+socket.create_connection = blocked
+
+import pymupdf as fitz
+from company_wiki import resource_budget
+from company_wiki.automation.narrative_select import NarrativeSelectHandler, _SelectFailure
+from company_wiki.document_understanding.decision_inventory import build_decision_trace, current_decision_trace
+from company_wiki.document_understanding import decision_dependencies
+from company_wiki.automation.narrative_generation import current_reading_decision_matches
+from company_wiki.source_catalog.narrative_reading import _understand
+
+HERE = Path(__file__).resolve().parent
+OWNER_FILES = ["src/company_wiki/resource_budget.py", "config/resource_budget.yaml", "tools/document_understanding_benchmark/phase_c_runner.py", "src/company_wiki/source_catalog/narrative_finalize.py", "src/company_wiki/source_catalog/narrative_reading.py", "src/company_wiki/automation/narrative_select.py", "src/company_wiki/document_understanding/decision_inventory.py", "tests/unit/test_resource_budget_policy.py"]
+def hashes():
+    return {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in OWNER_FILES}
+
+def policy(path, work, *, tokens=10000000, usd=20000000):
+    path.write_text(f"""schema_version: company-wiki-budget-policy/1
+external_model: {{cumulative_tokens: {tokens}, cumulative_micro_usd: {usd}}}
+company_allocation: {{enforcement: soft, target_tokens: 90000000, target_micro_usd: 90000000}}
+document_processing: {{max_work_units: {work}}}
+""", encoding="utf-8")
+
+with fitz.open() as doc:
+    for i in range(3):
+        page = doc.new_page()
+        lines = (["Annual Report 2025", "Management Discussion and Analysis", "Business Review", "Our company has launched a new production line.", "Our company delivered new equipment to customers."] if i == 0 else ["Products and capacity", "Our company has expanded the factory and increased capacity.", "Our new product has entered customer qualification."])
+        for n, line in enumerate(lines):
+            page.insert_text((50, 50+n*24), line, fontsize=11)
+    doc.set_toc([[1, "Management Discussion and Analysis", 1], [2, "Products and capacity", 2]])
+    pdf = doc.tobytes()
+digest = hashlib.sha256(pdf).hexdigest()
+payload = SimpleNamespace(source_ref=SimpleNamespace(mime_type="application/pdf", source_id="urn:company-wiki:source:sha256:"+digest, content_sha256=digest), source_metadata=SimpleNamespace(language="en", title="Annual Report 2025", document_kind="annual_report"))
+context = SimpleNamespace(checkpoint=lambda: None)
+result = {"source_sha_before": hashes(), "source_fixture": {"kind": "in-memory PDF", "pages": 3, "bytes": len(pdf), "sha256": digest}, "observations": []}
+old_env = os.environ.get("COMPANY_WIKI_BUDGET_CONFIG")
+scratch = HERE/"probe-scratch"
+assert not scratch.exists(), "scratch must begin absent"
+try:
+    with tempfile.TemporaryDirectory(prefix="probe-", dir=HERE) as tmp:
+        config = Path(tmp)/"budget.yaml"
+        os.environ["COMPANY_WIKI_BUDGET_CONFIG"] = str(config)
+        for work in (0, 1000, 20000, 16000000):
+            policy(config, work)
+            observed = {}
+            class ObservedHandler(NarrativeSelectHandler):
+                def _parse_pdf(self, *args, **kwargs):
+                    budget=kwargs["work_budget"]
+                    observed["budget"] = budget
+                    value = super()._parse_pdf(*args, **kwargs)
+                    observed["parsed"] = value
+                    observed["after_parse"] = budget.used
+                    return value
+                def _run_selector(self, *args, **kwargs):
+                    budget=kwargs["work_budget"]
+                    observed["same_account"] = budget is observed["budget"]
+                    observed["before_select"] = budget.used
+                    value = super()._run_selector(*args, **kwargs)
+                    observed["package"] = value
+                    observed["after_select"] = budget.used
+                    return value
+            handler=ObservedHandler(reader=object(), selector_version="0.9.0")
+            row={"configured_work_limit": work}
+            try:
+                actual=handler._select_pdf(payload,pdf,context)
+                row["port_result"]="usable"
+            except _SelectFailure as exc:
+                row["port_result"]="select_failure"
+                row["failure"]={"code":exc.code,"detail":exc.detail}
+            budget=observed["budget"]
+            parsed=observed.get("parsed")
+            package=observed.get("package")
+            row.update(account_limit=budget.max_work_units,used=budget.used,exhausted=budget.exhausted,same_account=observed.get("same_account"),after_parse=observed.get("after_parse"),before_select=observed.get("before_select"),after_select=observed.get("after_select"))
+            if parsed:
+                row["source"]={"pages_read":parsed.pages_read,"units":len(parsed.units),"coverage_complete":parsed.coverage_complete,"layout_coverage":parsed.layout_coverage}
+            if package:
+                row["selection"]={"status":package.status,"coverage_complete":package.coverage_complete,"spans":len(package.evidence_spans),"diagnostics":list(package.selection_diagnostics),"dependencies_present":package.reading_dependencies is not None,"dependencies_status":(package.reading_dependencies or {}).get("status")}
+                if work==20000:
+                    partial_dependencies=package.reading_dependencies
+                    partial_manifest={"reading_dependencies":partial_dependencies,"selection_generation":{"decision_digest":partial_dependencies["decision_digest"]}}
+                    row["real_cache_match_same_policy"]=current_reading_decision_matches(partial_manifest)
+            if parsed:
+                # Actual parsed capture, same code path; separate abundant account only
+                # constructs trace for independent cache inventory examination.
+                pipeline=_understand(parsed,title=payload.source_metadata.title,kind="annual_report",mime_type="application/pdf",work_budget=resource_budget.WorkBudget(16000000))
+                if pipeline.get("analysis_status") != "deferred":
+                    trace=build_decision_trace(pipeline,source_parser_names=tuple({unit.parser_name for unit in parsed.units}))
+                    row["trace"]={"inventory_complete":trace["inventory_complete"],"sha256":hashlib.sha256(json.dumps(trace,sort_keys=True).encode()).hexdigest()}
+                    if work==1000:
+                        low_trace=trace
+                    if work==16000000:
+                        high_trace=trace
+            result["observations"].append(row)
+        # Pure policy changes only: test what current replay actually observes.
+        def trace_digest(value):
+            return hashlib.sha256(json.dumps(value,sort_keys=True).encode()).hexdigest()
+        baseline=current_decision_trace(high_trace)
+        policy(config,16000000,tokens=5,usd=7)
+        fees_only=current_decision_trace(high_trace)
+        policy(config,32000000,tokens=5,usd=7)
+        work_changed=current_decision_trace(high_trace)
+        result["cache_policy_observation"]={"baseline_trace_sha":trace_digest(baseline),"fee_only_trace_sha":trace_digest(fees_only),"work_changed_trace_sha":trace_digest(work_changed),"fee_change_same":baseline==fees_only,"work_change_same":fees_only==work_changed,"real_partial_frozen_compare_after_increase":decision_dependencies.compare_decision_dependencies(partial_dependencies,current_decision_trace(partial_dependencies)),"real_partial_cache_match_after_increase":current_reading_decision_matches(partial_manifest),"dependency_module":str(Path(decision_dependencies.__file__).relative_to(ROOT))}
+        result["tmp_path"] = str(Path(tmp).relative_to(HERE))
+    result["scratch_removed"] = not (HERE/result["tmp_path"]).exists()
+finally:
+    if old_env is None:os.environ.pop("COMPANY_WIKI_BUDGET_CONFIG",None)
+    else:os.environ["COMPANY_WIKI_BUDGET_CONFIG"]=old_env
+result["source_sha_after"] = hashes()
+result["source_stable"] = result["source_sha_before"] == result["source_sha_after"]
+(HERE/"production-probes.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+print(json.dumps({"source_stable":result["source_stable"],"scratch_removed":result["scratch_removed"],"observations":[{key:row.get(key) for key in ("configured_work_limit","port_result","account_limit","used","exhausted","same_account","after_parse","before_select","after_select","selection","trace")} for row in result["observations"]],"cache":result["cache_policy_observation"]},ensure_ascii=False))

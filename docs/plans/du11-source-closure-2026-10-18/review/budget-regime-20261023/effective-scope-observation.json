@@ -1,0 +1,19 @@
+{
+  "kind": "effective_scope_observation_not_authorization_or_charge_ledger",
+  "old_scope": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\coordinator-effective-scope.json",
+    "sha256": "d06e2934c92206f9eba8e59e8b0f13474a88e6d94877642665e6f6ced3df7178",
+    "scope": "current budget interpretation only; frozen original and unrelated run fields unchanged"
+  },
+  "new_scope": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\coordinator-effective-scope-budget-20261023.json",
+    "sha256": "77c6af8cccfbd7feb3cbc1291d8434444530ba4f5772548947b39a7fa4915233"
+  },
+  "policy": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\resource_budget.yaml",
+  "company_hard_cap_removed": true,
+  "global_tokens": 10000000,
+  "global_micro_usd": 20000000,
+  "old_original_bytes_unchanged": true,
+  "model_calls": 0,
+  "downloads": 0
+}

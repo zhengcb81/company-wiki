@@ -1,0 +1,167 @@
+{
+  "schema": "audit-budget-independent-probe/1",
+  "source_before": [
+    {
+      "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+      "sha256": "eff14102ef7258eb8c5588043884004f11f3cd2388d1ecc8bc40e11d6895a492",
+      "bytes": 68223
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "sha256": "aa0af71b736b9055ca6e097d0c1b8b1b20c89dbb179eb2be1e3cd8049886068c",
+      "bytes": 13831
+    },
+    {
+      "path": "skills/revenue-forecast-audit/SKILL.md",
+      "sha256": "45f554ffe41d72c8e5aced668251c2fd05ac413d1ba4d97c627a5d46cc62ca5c",
+      "bytes": 13518
+    },
+    {
+      "path": "tests/test_pool_progress.py",
+      "sha256": "07008f5078e4b20c53b4c372948dde3fe03088e8f349107c27f152118df38560",
+      "bytes": 39282
+    },
+    {
+      "path": "tests/test_pool_progress_cli.py",
+      "sha256": "12090639c366653882081720aea7fc3d3688da2e073be2226f2ea784dd8070c3",
+      "bytes": 16643
+    }
+  ],
+  "source_after": [
+    {
+      "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+      "sha256": "eff14102ef7258eb8c5588043884004f11f3cd2388d1ecc8bc40e11d6895a492",
+      "bytes": 68223
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "sha256": "aa0af71b736b9055ca6e097d0c1b8b1b20c89dbb179eb2be1e3cd8049886068c",
+      "bytes": 13831
+    },
+    {
+      "path": "skills/revenue-forecast-audit/SKILL.md",
+      "sha256": "45f554ffe41d72c8e5aced668251c2fd05ac413d1ba4d97c627a5d46cc62ca5c",
+      "bytes": 13518
+    },
+    {
+      "path": "tests/test_pool_progress.py",
+      "sha256": "07008f5078e4b20c53b4c372948dde3fe03088e8f349107c27f152118df38560",
+      "bytes": 39282
+    },
+    {
+      "path": "tests/test_pool_progress_cli.py",
+      "sha256": "12090639c366653882081720aea7fc3d3688da2e073be2226f2ea784dd8070c3",
+      "bytes": 16643
+    }
+  ],
+  "source_unchanged": true,
+  "module_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\pool_progress.py",
+  "audit_run_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+  "python": "3.14.2 (main, Dec  9 2025, 19:03:14) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+  "checks": [
+    {
+      "name": "ok_low_stage_parity/selected",
+      "status": "PASS",
+      "seconds": 0.00023
+    },
+    {
+      "name": "ok_low_stage_parity/executor_in_flight",
+      "status": "PASS",
+      "seconds": 0.00023
+    },
+    {
+      "name": "ok_low_stage_parity/executor_failed",
+      "status": "PASS",
+      "seconds": 0.00023
+    },
+    {
+      "name": "ok_low_stage_parity/executor_sealed",
+      "status": "PASS",
+      "seconds": 0.00024
+    },
+    {
+      "name": "ok_low_stage_parity/one_active_writer",
+      "status": "PASS",
+      "seconds": 0.00025
+    },
+    {
+      "name": "ok_low_stage_parity/all_active_writers",
+      "status": "PASS",
+      "seconds": 0.0003
+    },
+    {
+      "name": "ok_low_stage_parity/unknown_writer",
+      "status": "PASS",
+      "seconds": 0.00026
+    },
+    {
+      "name": "ok_low_stage_parity/four_reports",
+      "status": "PASS",
+      "seconds": 0.00031
+    },
+    {
+      "name": "ok_low_stage_parity/expert_clean",
+      "status": "PASS",
+      "seconds": 0.00032
+    },
+    {
+      "name": "ok_low_stage_parity/expert_major",
+      "status": "PASS",
+      "seconds": 0.00033
+    },
+    {
+      "name": "ok_low_stage_parity/retest_pending",
+      "status": "PASS",
+      "seconds": 0.00034
+    },
+    {
+      "name": "ok_low_stage_parity/version_changed",
+      "status": "PASS",
+      "seconds": 0.00034
+    },
+    {
+      "name": "ok_low_stage_parity/true_sample_stop",
+      "status": "PASS",
+      "seconds": 0.00039
+    },
+    {
+      "name": "ok_low_stage_parity/pool_exhaustion_not_success",
+      "status": "PASS",
+      "seconds": 0.0003
+    },
+    {
+      "name": "unknown_reconcile_hard_exhaustion_and_recovery",
+      "status": "PASS",
+      "seconds": 0.00089
+    },
+    {
+      "name": "low_idempotency_and_event_conflict",
+      "status": "PASS",
+      "seconds": 0.00026
+    }
+  ],
+  "passed": 16,
+  "error": {
+    "type": "AssertionError",
+    "detail": "('', '{\"error\": \"ValueError: atomic state write failed: [WinError 5] 拒绝访问。: \\'C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\郑曾波\\\\\\\\\\\\\\\\Projects\\\\\\\\\\\\\\\\company-wiki\\\\\\\\\\\\\\\\docs\\\\\\\\\\\\\\\\plans\\\\\\\\\\\\\\\\du11-source-closure-2026-10-18\\\\\\\\\\\\\\\\review\\\\\\\\\\\\\\\\budget-regime-20261023\\\\\\\\\\\\\\\\audit-independent\\\\\\\\\\\\\\\\owned-neutral-cli-pt250o7z\\\\\\\\\\\\\\\\.pool-progress-b_fn0zqu\\' -> \\'C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\郑曾波\\\\\\\\\\\\\\\\Projects\\\\\\\\\\\\\\\\company-wiki\\\\\\\\\\\\\\\\docs\\\\\\\\\\\\\\\\plans\\\\\\\\\\\\\\\\du11-source-closure-2026-10-18\\\\\\\\\\\\\\\\review\\\\\\\\\\\\\\\\budget-regime-20261023\\\\\\\\\\\\\\\\audit-independent\\\\\\\\\\\\\\\\owned-neutral-cli-pt250o7z\\\\\\\\\\\\\\\\state.json\\'\"}\\n')",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\probe.py\", line 301, in <module>\n    check(\"separate_process_cli_plan_apply_recovery\", cli_flow)\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\probe.py\", line 49, in check\n    fn()\n    ~~^^\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\probe.py\", line 253, in cli_flow\n    cli(\"init\", \"--pool-ref\", pool, \"--seed\", \"neutral-cli\",\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"--versions-ref\", versions, \"--budget-ref\", budget, \"--out\", target)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\probe.py\", line 250, in cli\n    assert done.returncode == 0, (done.stdout, done.stderr)\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('', '{\"error\": \"ValueError: atomic state write failed: [WinError 5] 拒绝访问。: \\'C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\郑曾波\\\\\\\\\\\\\\\\Projects\\\\\\\\\\\\\\\\company-wiki\\\\\\\\\\\\\\\\docs\\\\\\\\\\\\\\\\plans\\\\\\\\\\\\\\\\du11-source-closure-2026-10-18\\\\\\\\\\\\\\\\review\\\\\\\\\\\\\\\\budget-regime-20261023\\\\\\\\\\\\\\\\audit-independent\\\\\\\\\\\\\\\\owned-neutral-cli-pt250o7z\\\\\\\\\\\\\\\\.pool-progress-b_fn0zqu\\' -> \\'C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\郑曾波\\\\\\\\\\\\\\\\Projects\\\\\\\\\\\\\\\\company-wiki\\\\\\\\\\\\\\\\docs\\\\\\\\\\\\\\\\plans\\\\\\\\\\\\\\\\du11-source-closure-2026-10-18\\\\\\\\\\\\\\\\review\\\\\\\\\\\\\\\\budget-regime-20261023\\\\\\\\\\\\\\\\audit-independent\\\\\\\\\\\\\\\\owned-neutral-cli-pt250o7z\\\\\\\\\\\\\\\\state.json\\'\"}\\n')\n"
+  },
+  "cli_invocations": [
+    {
+      "action": "init",
+      "returncode": 1
+    }
+  ],
+  "seconds": 0.8128,
+  "temp_roots": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\budget-regime-20261023\\audit-independent\\owned-neutral-cli-pt250o7z",
+      "finally_absent": true
+    }
+  ],
+  "network": "blocked in reducer probe; CLI contains no network/provider dispatch",
+  "originals_read": 0,
+  "paid_calls": 0,
+  "audit_mutations": []
+}
