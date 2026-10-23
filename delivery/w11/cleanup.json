@@ -59,7 +59,13 @@
     ],
     "retained_evidence": [
       "delivery/w11/probes/red_probe.py + red-probe-output.txt (base 0d7ada21 module rebuilt from git; D1/D2/D3 RED and post-fix control)",
-      "delivery/w11/review/ (independent review 1 report, JSON and raw evidence)"
+      "delivery/w11/review/independent-review-1.{md,json} + evidence/",
+      "delivery/w11/review/independent-review-2.{md,json} + review-2 probe evidence"
+    ],
+    "known_bounded_limits": [
+      "多链接表格行（Download+View，两个锚指向同一文档且无文档后缀）仍可能不产出候选（NR-06，未修）",
+      "法律/导航识别是标题词 + nav/header/footer 结构 + section 标签的有限启发式，不是站点结构学习",
+      "页面是否由 JS 动态注入材料无法离线判定"
     ],
     "real_originals_deleted": 0,
     "sealed_evidence_modified": 0

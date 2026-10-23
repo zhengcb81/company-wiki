@@ -1,6 +1,6 @@
 {
  "schema_version": "w11-evidence-inventory/1",
- "prepared_at": "2026-10-23T23:20:00+00:00",
+ "prepared_at": "2026-10-23T23:35:00+00:00",
  "lane": "W11-CWP-SOURCES",
  "common_prefix": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/",
  "items": [
@@ -108,8 +108,8 @@
    "id": "derived-minimal-fixture",
    "class": "derived_minimal_fixture",
    "path": "tests/integration/test_official_discovery_offline.py",
-   "bytes": 26655,
-   "sha256": "fd65dc34c6c126ad549811b4ff7745c4e6375c7f72d8f3f5bfef9ddb8379aff1",
+   "bytes": 29924,
+   "sha256": "8e6a558d981216ee2bd438a053f03ba48d27f53342d9950104a5f370694d8368",
    "upstream_reference": "镜像 sealed faa5bf stdout SHA 1c33f18b… 中的隐私/条款候选标题与 URL；非原网页重放",
    "supports": [
     "法律导航标题在当前/修复后 parser 下的行为差异（修复前进入候选、修复后不进）"
@@ -122,8 +122,8 @@
    "id": "red-probe-evidence",
    "class": "derived_minimal_fixture",
    "path": "delivery/w11/probes/red-probe-output.txt",
-   "bytes": 5762,
-   "sha256": "be0cc1616756b38fb1bbea9179c2ad2a6921331abe1d01e95d40cab7ca857088",
+   "bytes": 2931,
+   "sha256": "54dd99e10d7f95492f7a25b25296d811456c513b52d98366cbe92f5195542ce1",
    "upstream_reference": "delivery/w11/probes/red_probe.py 从 git 0d7ada21 重建 base 模块（blob SHA-256 7d8fb1292c6728adae9edf5a179242a3718b756e8659bbbb19154aff9f8ec2c3）后运行 D1/D2/D3 探针",
    "supports": [
     "三个缺陷在 base 代码上的真实 RED 输出，以及修复后同一输入的对照",
@@ -137,8 +137,8 @@
    "id": "synthetic-neutral-fixtures",
    "class": "synthetic_fixture",
    "path": "tests/integration/test_official_discovery_offline.py",
-   "bytes": 26655,
-   "sha256": "fd65dc34c6c126ad549811b4ff7745c4e6375c7f72d8f3f5bfef9ddb8379aff1",
+   "bytes": 29924,
+   "sha256": "8e6a558d981216ee2bd438a053f03ba48d27f53342d9950104a5f370694d8368",
    "upstream_reference": "纯中性构造（Neutral Instruments / Neutral Materials / ir.example 等），无任何真实公司数据",
    "supports": [
     "分类正负控、lead 提取、时间窗口与 item 级日期、URL/去重、载荷诚实性、限界诚实性、CLI subprocess 双 issuer 语义"
@@ -159,13 +159,13 @@
      "root": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec",
      "files_scanned": 2052,
      "total_bytes": 166731220,
-     "method": "精确 486789B 大小扫描=0；400–600KB 带内 89 个文件全量 SHA-256 比对=0；正文 needle 引用扫描=3（全部是结果/回执引用）"
+     "method": "精确 486789B 大小扫描=0；400–600KB 带内 84 个文件全量 SHA-256 比对=0；正文 needle 引用扫描=3（全部是结果/回执引用）"
     },
     {
      "root": "C:/Users/郑曾波/Projects/company-wiki/.planning/shared-reading-production/r1-holdout-20261021",
      "files_scanned": 65,
      "total_bytes": 17360200,
-     "method": "精确 486789B 大小扫描=0；catalog.sqlite3 sources 90 条无该 hash；WAL 逐字节 needle 扫描无 body SHA、无 event id；objects/sha256 3 个 JSON 投影无正文"
+     "method": "精确 486789B 大小扫描=0；400–600KB 带内 5 个文件全量 SHA-256 比对=0；catalog.sqlite3 sources 90 条无该 hash；WAL 逐字节 needle 扫描无 body SHA、无 event id；objects/sha256 3 个 JSON 投影无正文"
     }
    ],
    "supports": [
@@ -174,7 +174,13 @@
    "does_not_support": [
     "全盘不存在声明；不可重放结论之外的任何断言"
    ],
-   "must_not": "不得从 3 个候选复原正文；不得凭旧 SHA 宣称 replay 已过；不得为取得正文联网重抓（归 ROOT 后续 attempt）"
+   "must_not": "不得从 3 个候选复原正文；不得凭旧 SHA 宣称 replay 已过；不得为取得正文联网重抓（归 ROOT 后续 attempt）",
+   "band_files_total": 89
   }
+ ],
+ "known_bounded_limits": [
+  "多链接表格行（如 Download+View，两个锚指向同一文档且无文档后缀）仍可能不产出候选；这是本线未修的已知边界，不声称已覆盖。",
+  "法律/导航识别是标题词 + nav/header/footer 结构 + section-label 的有限启发式，不是站点结构学习；个别标题（如 \"Legal Entity Identifier\"）可能被页级否决。",
+  "页面是否由 JS 动态注入材料无法离线判定；dynamic heuristic 保守。"
  ]
 }

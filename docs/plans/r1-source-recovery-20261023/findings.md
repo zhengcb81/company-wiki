@@ -88,3 +88,24 @@
 
 修复后矩阵：新离线套件 40 例 + 既有 7 例 = **47 passed**（重跑 JUnit/日志已更新）。
 
+## 独立审查 2（agent 68a33bb8，绑定 a6d12a53）与修复轮 2
+
+审查确认 12/13 项已修，但指出 token 扩宽引入新 Medium：导航/section 标签（`公告`/`业绩`/`Annual Reports`/`Results`/`News Releases`）被当作候选并抢占 `max_items`。另 IR-12 残留（测试文件无 EOF 换行）。逐项处置：
+
+| 审查项 | 级别 | 处置 |
+|---|---|---|
+| NR-01 导航/section 链接成为材料候选并挤占预算 | Medium | **已修**：`nav/header/footer` 结构否决（无文档后缀时）；精确 section 标签（reports/results/announcements/公告/业绩/报告…）否决；强/弱 token 分层（弱 token 需文档后缀或带日期 item）；候选排序改为「文档后缀优先 → 其他材料 → notice」 |
+| NR-02 单链接页面级 `<time>` 仍被当作材料日期 | Low | **已修**：日期容器不再回退 div，只认 article/li/tr |
+| NR-03 `unclassified_document_links` 对有意排除的法律链接误报 partial | Low | **已修**：删除该 limitation；法律/导航排除是意图，不是覆盖缺口 |
+| NR-04 页级 legal 否决误杀 "Annual Report 2025 - Legal Entity Changes" | Low | **已修**：强线索 + 文档后缀可豁免页级 legal 否决 |
+| NR-05 容器正文可变成 300 字标题 | Low | **已修**：标题截断到 120 字符并做词边界 |
+| NR-06 多链接表格行（Download+View、无后缀）仍静默丢失 | Low | **未修，如实记为 bounded limit**（R1 不扩 scope） |
+| NR-07 `?page=2` 自指链接成为候选 | Low | **已修**：同 path 且非文档后缀的 query 链接按自身/分页跳过 |
+| NR-08 非法 page URL 返回干净空结果 | Low | **已修**：库层校验 page URL，非法则 ValueError（CLI exit 2） |
+| NR-09 交付卫生（UTF-16 日志、band 计数、prepared_at、handoff 缺失） | Info | **已修**：日志改 UTF-8；band 拆为 84+5；时间戳更新；handoff 本轮补齐 |
+| NR-10 `max_items` 不再约束工作量、每候选重算整页 SHA | Low | **已修**：每页只算一次 page SHA；pending 有界并在溢出时记 item_limit_reached |
+| IR-12 残留：测试文件无 EOF 换行 | Low | **已修**：补 EOF 换行，删除冗余 `半年报` token |
+
+修复后矩阵：新套件 48 例 + 既有 7 例 = **55 passed**；ruff 通过；审查 2 的 NR-01/02/03/04/05/07/08/10 场景均有回归用例。
+
+

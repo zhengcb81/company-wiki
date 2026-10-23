@@ -1,7 +1,7 @@
 """W11: offline deterministic discovery regression for classification and coverage.
 
 Issuer-neutral synthetic fixtures only. No network, no model, no production
-catalog. The two privacy/terms titles used by the legal-navigation regression
+catalog. The three privacy/terms titles used by the legal-navigation regression
 mirror the sealed faa5bf discover result (stdout SHA-256
 ``1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52``); they
 are a derived minimal fixture, not a replay of the original page, whose
@@ -159,9 +159,10 @@ class TestNonMaterialExclusion:
         )])
         assert out["candidates"] == []
         assert out["no_documents_claimed"] is False
-        # The discovery result stays honest: zero material leads is a partial
-        # coverage fact, never a "no documents exist" claim.
-        assert out["coverage_status"] in {"partial", "checked_index_only"}
+        # Legal navigation is excluded intentionally, not treated as
+        # incomplete coverage; zero material leads is still not "no documents".
+        assert out["limitations"] == []
+        assert out["coverage_status"] == "checked_index_only"
 
     def test_generic_navigation_keywords_are_not_material_clues(self):
         out = _discover([_page(
@@ -171,8 +172,46 @@ class TestNonMaterialExclusion:
             '<a href="/nav4.pdf">Contact Information</a>'
         )])
         assert out["candidates"] == []
-        # A dropped document-suffix link is visible, never a clean index.
-        assert "unclassified_document_links" in out["limitations"]
+        # Legal/navigation exclusion is intentional: it is not incomplete
+        # coverage, so it must not inflate coverage_status to partial.
+        assert out["limitations"] == []
+        assert out["coverage_status"] == "checked_index_only"
+
+    def test_navigation_and_section_links_are_not_material_candidates(self):
+        out = _discover([_page(
+            '<nav><a href="/investors/announcement">公告</a>'
+            '<a href="/investors/results">业绩</a></nav>'
+            '<header><a href="/investors/results">Results</a>'
+            '<a href="/investors/reports">Annual Reports</a></header>'
+            '<footer><a href="/reports">Reports</a></footer>'
+            '<a href="/investors/publications">News Releases</a>'
+        )])
+        assert out["candidates"] == []
+
+    def test_nav_link_does_not_consume_the_item_budget(self):
+        out = _discover([_page(
+            '<nav><a href="/investors/announcement">公告</a></nav>'
+            '<a href="/files/2025-report.pdf">2025年年度报告</a>'
+        )], max_items=1)
+        assert [c["source_url"] for c in out["candidates"]] == [
+            "https://ir.example/files/2025-report.pdf"
+        ]
+
+    def test_default_bound_keeps_real_documents_over_section_links(self):
+        body = ('<a href="/investors/reports">Annual Reports</a>'
+                + "".join(
+                    '<a href="/f/r%d.pdf">2025 Annual Report %d</a>' % (i, i)
+                    for i in range(30)
+                ))
+        out = _discover([_page(body)], max_items=30)
+        assert len(out["candidates"]) == 30
+        assert all(c["source_url"].endswith(".pdf") for c in out["candidates"])
+
+    def test_legal_word_does_not_veto_a_document_file(self):
+        out = _discover([_page(
+            '<a href="/ar.pdf">Annual Report 2025 - Legal Entity Changes</a>'
+        )])
+        assert len(out["candidates"]) == 1
 
     def test_media_and_press_briefing_are_not_material_leads(self):
         out = _discover([_page(
@@ -261,6 +300,16 @@ class TestTimeWindowBoundaries:
         assert all(c["published_date"] is None for c in out["candidates"])
         assert out["excluded"] == []
 
+    def test_single_material_under_a_page_timestamp_is_not_dated(self):
+        # Even a wrapper with one link can carry a page-level timestamp.
+        out = _discover([_page(
+            '<div class="content"><time datetime="2026-10-22">Last updated</time>'
+            '<a href="/ar.pdf">Annual Report 2025</a></div>'
+        )])
+        assert len(out["candidates"]) == 1
+        assert out["candidates"][0]["published_date"] is None
+        assert out["excluded"] == []
+
     def test_item_scoped_datetime_is_truncated_to_a_date(self):
         out = _discover([_page(
             '<article><time datetime="2026-09-15T10:30:00Z"></time>'
@@ -313,6 +362,15 @@ class TestUrlAndDedup:
         out = _discover([_page(
             '<a href="">Annual Report 2025</a>'
             '<a href="#">Interim Report 2026</a>'
+            '<a href="/real.pdf">Annual Report 2025</a>'
+        )])
+        assert [c["source_url"] for c in out["candidates"]] == [
+            "https://ir.example/real.pdf"
+        ]
+
+    def test_query_only_pagination_link_is_not_a_document_lead(self):
+        out = _discover([_page(
+            '<a href="?page=2">Annual Report 2025 page two</a>'
             '<a href="/real.pdf">Annual Report 2025</a>'
         )])
         assert [c["source_url"] for c in out["candidates"]] == [
@@ -428,6 +486,20 @@ class TestLimitsHonesty:
             _discover([_page('<a href="/x.pdf">Earnings call</a>')], max_items=31)
         with pytest.raises(ValueError, match="invalid_discovery_limits"):
             _discover([_page('<a href="/x.pdf">Earnings call</a>')], max_bytes=0)
+
+    def test_invalid_index_page_url_is_refused(self):
+        with pytest.raises(ValueError, match="invalid_index_page_url"):
+            _discover([_page('<a href="/x.pdf">Earnings call</a>',
+                             url="not-a-url")])
+
+    def test_recovered_title_is_bounded(self):
+        out = _discover([_page(
+            '<article><h2>Welcome to our investor centre</h2>'
+            '<p>' + "Read our latest annual report and proxy statement. " * 8 +
+            '</p><a href="/uploads/abc123.pdf">Download</a></article>'
+        )])
+        assert len(out["candidates"]) == 1
+        assert len(out["candidates"][0]["title"]) <= 121
 
     def test_notice_never_consumes_the_material_item_budget(self):
         out = _discover([_page(

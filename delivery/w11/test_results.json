@@ -19,21 +19,21 @@
    "purpose": "final combined verification (new offline suite + existing discovery regressions)",
    "command": "python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -k 'discovery or official_index_http or cn_fundraising or TestMaterial or TestNonMaterial or TestTimeWindow or TestUrlAndDedup or TestPagePayload or TestLimits or TestPublicCli' -p no:cacheprovider --junitxml=delivery/w11/test-results.xml",
    "exit_code": 0,
-   "passed": 47,
+   "passed": 55,
    "failed": 0,
    "skipped": 0,
    "deselected": 29,
-   "duration_seconds": 11.66,
+   "duration_seconds": 10.35,
    "log_path": "delivery/w11/test-run-stdout.txt",
-   "log_sha256": "c6d9d487cc7faa922b28e7bf8a919e9ea6e3e2fe0df4bce2a78c7a89ab8c768d",
+   "log_sha256": "00bfa74658684b13ad47ae00aa109bc3bb9440a418d657aab7ee856e1c099a67",
    "junit_path": "delivery/w11/test-results.xml",
-   "junit_sha256": "c8d98ffdf66a1dcef78039dc1fd1147742c2a04fd352c336c32aecb580be8d6c"
+   "junit_sha256": "88b883e82ec041c3dddbc05b473c81e111e194b5a9105d36b3af7ece4e9b0446"
   },
   {
    "purpose": "cleanup verification run (owned basetemp, protected-input before/after)",
    "command": "w11_cleanup_verify.py harness (see cleanup.json)",
    "exit_code": 0,
-   "passed": 47,
+   "passed": 55,
    "failed": 0,
    "skipped": 0,
    "deselected": 29,
@@ -42,10 +42,10 @@
   }
  ],
  "input_source_shas": {
-  "src/company_wiki/source_catalog/official_discovery.py": "f2ad8e578b221993c7fba984d31f874c324e2b651ef3a1c22aaa7c85384695f5",
+  "src/company_wiki/source_catalog/official_discovery.py": "855e57dec9c0f6971fdb7f8d10216086d981e2f9fa9f46ec78bc0e8c1d1ad279",
   "src/company_wiki/source_catalog/official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
   "tests/integration/test_official_source_flow.py": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
-  "tests/integration/test_official_discovery_offline.py": "fd65dc34c6c126ad549811b4ff7745c4e6375c7f72d8f3f5bfef9ddb8379aff1"
+  "tests/integration/test_official_discovery_offline.py": "8e6a558d981216ee2bd438a053f03ba48d27f53342d9950104a5f370694d8368"
  },
  "network_calls": 0,
  "model_calls": 0,

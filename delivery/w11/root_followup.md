@@ -7,7 +7,7 @@
 - **真实意图**：`official-discovery-request/1`，`urls=["https://www.wuxiapptec.cn/investors/announcement/ir-material"]`，`start_date=2026-01-01`、`as_of=2026-10-21`（或恢复当日新 as-of）、`max_items=30`、`max_bytes=1048576`、`max_seconds=20`。
 - **已知**：该页 2026-10-22 真实响应 486789 B、SHA `f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e`、HTTP 200、7.4s 内完成（fetch receipt 已封存）。页面含外部 script（`dynamic_content_unresolved` 为真实观察）。
 - **缺什么**：正文 HTML 本身（`body_available=false`，两条已配根内 0 命中，含 sqlite/WAL/objects 逐字节检查）。
-- **验证条件**：新 attempt 抓取后，先核大小/SHA 与 receipt 是否一致（站点可能更新，不一致不是失败，如实记录新版本即可）；再核材料锚点是否在静态 HTML 内。**修复后的 discovery 已能正确排除隐私/条款导航并把真正的业务材料锚（deck/report/transcript/业绩说明会等）作为候选输出。**
+- **验证条件**：新 attempt 抓取后，先核大小/SHA 与 receipt 是否一致（站点可能更新，不一致不是失败，如实记录新版本即可）；再核材料锚点是否在静态 HTML 内。**修复后的 discovery 能排除隐私/条款等法律导航，并把真正的业务材料锚（deck/report/transcript/业绩说明会等）作为候选输出；但导航/法律识别是有限启发式（标题词 + nav/header/footer 结构 + section 标签），不是站点结构学习：多链接 Download+View 行、个别 legal 标题仍可能漏/误，需以新抓正文复核。**
 - **若材料锚由 JS 动态注入**：静态重抓仍只有导航锚时，这是 external_limit，不是 parser 缺陷；需要 DOM 渲染类采集能力（新工具决策归 ROOT，本线不新增）。
 
 ## 2. H1 2026 deck / JPM 演示 / 专门 IR 活动记录

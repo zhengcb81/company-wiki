@@ -25,16 +25,18 @@ _DOCUMENT_SUFFIXES = (
     ".xlsx",
 )
 
-# Title cues that identify a business-material lead on an index page.
-_MATERIAL_TITLE_TOKENS = (
+# Strong title cues identify a document by itself ("Annual Report 2025",
+# "Q3 Earnings Call Transcript", "2026年半年度报告").
+_STRONG_TITLE_TOKENS = (
     "earnings",
     "transcript",
     "presentation",
-    "results",
-    "announcement",
-    "press release",
-    "news release",
-    "report",
+    "annual report",
+    "interim report",
+    "semi-annual report",
+    "semiannual report",
+    "quarterly report",
+    "results announcement",
     "prospectus",
     "circular",
     "proxy",
@@ -48,13 +50,12 @@ _MATERIAL_TITLE_TOKENS = (
     "发行",
     "可转债",
     "活动记录",
-    "业绩",
-    "说明会",
-    "路演",
-    "公告",
-    "报告",
+    "业绩说明会",
+    "业绩报告",
+    "年度报告",
+    "半年度报告",
+    "季度报告",
     "年报",
-    "半年报",
     "季报",
     "募集说明",
     "电话会",
@@ -62,7 +63,50 @@ _MATERIAL_TITLE_TOKENS = (
 )
 # Short Latin filing/meeting codes need word boundaries: "agm" is a substring
 # of ordinary words such as "fragment".
-_MATERIAL_TITLE_PATTERNS = (re.compile(r"\b(?:agm|egm|6-k|8-k|10-k|10-q|20-f)\b"),)
+_STRONG_TITLE_PATTERNS = (re.compile(r"\b(?:agm|egm|6-k|8-k|10-k|10-q|20-f)\b"),)
+# Broad title cues ("Results", "Reports", "公告") are also section/navigation
+# labels. They identify a document only when the URL is a document file or the
+# anchor sits in a dated item block.
+_WEAK_TITLE_TOKENS = (
+    "results",
+    "announcement",
+    "press release",
+    "news release",
+    "report",
+    "公告",
+    "业绩",
+    "报告",
+    "说明会",
+    "路演",
+)
+# Exact section labels that are navigation to a listing, not a document.
+_SECTION_LABEL_TITLES = frozenset(
+    {
+        "annual report",
+        "annual reports",
+        "interim report",
+        "interim reports",
+        "report",
+        "reports",
+        "results",
+        "announcement",
+        "announcements",
+        "news release",
+        "news releases",
+        "press release",
+        "press releases",
+        "publications",
+        "filings",
+        "financial reports",
+        "公告",
+        "公司公告",
+        "公告及通函",
+        "业绩",
+        "报告",
+        "定期报告",
+        "临时公告",
+    }
+)
 
 # Page-section/legal navigation: never a material lead, even when one material
 # word also appears in the same title.
@@ -127,28 +171,57 @@ def _is_event_notice(folded: str) -> bool:
     )
 
 
-def _has_material_clue(folded: str) -> bool:
-    return any(token in folded for token in _MATERIAL_TITLE_TOKENS) or any(
-        pattern.search(folded) for pattern in _MATERIAL_TITLE_PATTERNS
+def _has_strong_clue(folded: str) -> bool:
+    return any(token in folded for token in _STRONG_TITLE_TOKENS) or any(
+        pattern.search(folded) for pattern in _STRONG_TITLE_PATTERNS
     )
 
 
-def _is_material_link(folded: str, path: str) -> bool:
+def _has_weak_clue(folded: str) -> bool:
+    return any(token in folded for token in _WEAK_TITLE_TOKENS)
+
+
+def _normalized_title(folded: str) -> str:
+    return " ".join(folded.split()).strip(" :：-–—|")
+
+
+def _is_section_label(folded: str) -> bool:
+    return _normalized_title(folded) in _SECTION_LABEL_TITLES
+
+
+def _is_in_site_chrome(anchor) -> bool:
+    """True when the anchor sits in nav/header/footer chrome."""
+    return anchor.find_parent(["nav", "header", "footer"]) is not None
+
+
+def _is_document_path(path: str) -> bool:
+    return path.lower().endswith(_DOCUMENT_SUFFIXES)
+
+
+def _is_material_link(folded: str, path: str, *, has_date_context: bool,
+                      in_chrome: bool) -> bool:
     """Decide whether an anchor is a business-material lead.
 
-    Order matters: a page-section/legal veto wins; an explicit material clue
-    wins over secondary legal-document and navigation words; otherwise a
-    document suffix is accepted; everything else is not a lead.
+    Order matters: a title-only section label is navigation; a page-section
+    legal veto wins unless a strong clue points at a document file; a strong
+    clue wins; a legal document title is excluded; a weak/broad clue needs a
+    document suffix or a dated item block; chrome-only links need a suffix.
     """
-    if any(token in folded for token in _LEGAL_PAGE_TITLE_TOKENS):
+    if _is_section_label(folded):
         return False
-    if _has_material_clue(folded):
+    if in_chrome and not _is_document_path(path):
+        return False
+    if any(token in folded for token in _LEGAL_PAGE_TITLE_TOKENS):
+        return _has_strong_clue(folded) and _is_document_path(path)
+    if _has_strong_clue(folded):
         return True
     if any(token in folded for token in _LEGAL_DOCUMENT_TITLE_TOKENS):
         return False
     if any(token in folded for token in _NAVIGATION_TITLE_TOKENS):
         return False
-    return path.lower().endswith(_DOCUMENT_SUFFIXES)
+    if _has_weak_clue(folded):
+        return _is_document_path(path) or has_date_context
+    return _is_document_path(path)
 
 
 def _anchor_title(anchor) -> str:
@@ -169,20 +242,36 @@ def _anchor_title(anchor) -> str:
     return ""
 
 
-def _item_container(anchor):
-    """Nearest item-level block: article/li/tr, or a div containing one link.
+def _item_container(anchor, *, allow_div: bool = True):
+    """Nearest item-level block: article/li/tr, optionally a one-link div.
 
     A wider wrapper is not an item container: its date children belong to the
-    page or to a list, not to this anchor.
+    page or to a list, not to this anchor. Dates never use the div fallback,
+    so a page-level "Last updated" cannot become a material date.
     """
     for name in ("article", "li", "tr"):
         block = anchor.find_parent(name)
         if block is not None:
             return block if len(block.find_all("a", href=True)) == 1 else None
+    if not allow_div:
+        return None
     block = anchor.find_parent("div")
     if block is not None and len(block.find_all("a", href=True)) == 1:
         return block
     return None
+
+
+def _item_has_date(anchor) -> bool:
+    block = _item_container(anchor)
+    return block is not None and block.find("time") is not None
+
+
+def _shorten(text: str, limit: int = 120) -> str:
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0] or text[:limit]
+    return cut.strip(" -|·\t") + "…"
 
 
 def _item_title(anchor, title: str, folded: str) -> tuple[str, str]:
@@ -191,12 +280,12 @@ def _item_title(anchor, title: str, folded: str) -> tuple[str, str]:
     Index tables often put the document name in a neighbouring cell and only
     "Download" inside the anchor; the item block supplies the real lead.
     """
-    if _has_material_clue(folded):
+    if _has_strong_clue(folded) or _has_weak_clue(folded):
         return title, folded
     block = _item_container(anchor)
     if block is None:
         return title, folded
-    block_text = block.get_text(" ", strip=True)[:300]
+    block_text = _shorten(block.get_text(" ", strip=True))
     if title and title in block_text:
         block_text = block_text.replace(title, " ", 1).strip(" -|·\t")
     return (block_text, block_text.casefold()) if block_text else (title, folded)
@@ -226,7 +315,8 @@ def discover_official_documents(
     used = 0
     seen = set()
     excluded = []
-    pending: list[tuple[dict, bool]] = []
+    pending: list[tuple[dict, bool, bool]] = []
+    pending_limit = max_items * 10 + 30
     for page in pages:
         original = page["original"]
         used += len(original)
@@ -237,15 +327,23 @@ def discover_official_documents(
         if page.get("mime_type") not in {"text/html", "application/xhtml+xml"}:
             limitations.append("unsupported_index_format")
             continue
-        soup = BeautifulSoup(original, "html.parser")
-        text = soup.get_text(" ", strip=True).casefold()
-        if "loading" in text or soup.find("script", src=True):
-            limitations.append("dynamic_content_unresolved")
         page_parts = urlsplit(page["url"])
+        if (
+            page_parts.scheme not in {"http", "https"}
+            or not page_parts.hostname
+            or page_parts.username
+            or page_parts.password
+        ):
+            raise ValueError("invalid_index_page_url")
+        soup = BeautifulSoup(original, "html.parser")
+        page_text = soup.get_text(" ", strip=True).casefold()
+        if "loading" in page_text or soup.find("script", src=True):
+            limitations.append("dynamic_content_unresolved")
         page_key = urlunsplit(
             (page_parts.scheme, page_parts.netloc, page_parts.path,
              page_parts.query, "")
         )
+        page_sha256 = hashlib.sha256(original).hexdigest()
         for anchor in soup.find_all("a", href=True):
             href = anchor.get("href")
             if not isinstance(href, str) or not href.strip() or href.strip() == "#":
@@ -264,34 +362,42 @@ def discover_official_documents(
             ):
                 continue
             # Fragments never reach the server: dedupe on the resource URL and
-            # never let an empty/hash anchor point back at the index itself.
+            # never let a same-document/pagination anchor become a lead.
             dedupe_key = urlunsplit(
                 (parsed.scheme, parsed.netloc, parsed.path, parsed.query, "")
             )
-            if dedupe_key == page_key or dedupe_key in seen:
+            same_document = (
+                parsed.scheme == page_parts.scheme
+                and parsed.netloc == page_parts.netloc
+                and parsed.path == page_parts.path
+                and not _is_document_path(parsed.path)
+            )
+            if dedupe_key == page_key or same_document or dedupe_key in seen:
                 continue
             title = _anchor_title(anchor)
             folded = title.casefold()
-            if not _has_material_clue(folded):
+            if not (_has_strong_clue(folded) or _has_weak_clue(folded)):
                 # Icon/table rows often carry the document name outside the
                 # anchor text; prefer the item block when it names a document.
                 recovered_title, recovered_folded = _item_title(
                     anchor, title, folded
                 )
-                if _has_material_clue(recovered_folded):
+                if _has_strong_clue(recovered_folded) or _has_weak_clue(
+                    recovered_folded
+                ):
                     title, folded = recovered_title, recovered_folded
-            if not _is_material_link(folded, parsed.path) and not _is_event_notice(
-                folded
-            ):
-                if parsed.path.lower().endswith(_DOCUMENT_SUFFIXES):
-                    # A document link whose title carried no recognised clue:
-                    # never silently report a clean index.
-                    limitations.append("unclassified_document_links")
+            material = _is_material_link(
+                folded,
+                parsed.path,
+                has_date_context=_item_has_date(anchor),
+                in_chrome=_is_in_site_chrome(anchor),
+            )
+            if not material and not _is_event_notice(folded):
                 continue
             seen.add(dedupe_key)
             published = anchor.get("data-date")
             if not published:
-                block = _item_container(anchor)
+                block = _item_container(anchor, allow_div=False)
                 time = block.find("time") if block is not None else None
                 published = time.get("datetime") if time is not None else None
             if published:
@@ -310,7 +416,9 @@ def discover_official_documents(
                     }
                 )
                 continue
-            notice = any(t in folded for t in _NOTICE_TITLE_TOKENS)
+            notice = (not material) or any(
+                t in folded for t in _NOTICE_TITLE_TOKENS
+            )
             kind = classify_document_kind(title, "investor_relations")
             if any(token in folded for token in _TRANSCRIPT_TITLE_TOKENS):
                 kind = "investor_call_transcript"
@@ -335,20 +443,28 @@ def discover_official_documents(
                         "published_date": published,
                         "disposition": disposition,
                         "capture_id": page["capture_id"],
-                        "index_source_sha256": hashlib.sha256(original).hexdigest(),
+                        "index_source_sha256": page_sha256,
                         "is_business_original": False,
                         "materiality": "not_assessed",
                         "metadata_only": True,
                     },
                     notice,
+                    _is_document_path(parsed.path),
                 )
             )
-    # Materials first: an event notice must never consume the item budget
-    # ahead of a real document, and the total stays bounded by max_items.
-    materials = [record for record, notice in pending if not notice]
-    notices = [record for record, notice in pending if notice]
-    candidates = materials[:max_items]
-    if len(materials) > max_items:
+            if len(pending) >= pending_limit:
+                break
+        if len(pending) >= pending_limit:
+            limitations.append("item_limit_reached")
+            break
+    # Document files first, then other materials, then notices: navigation and
+    # event links never consume the item budget ahead of a real document.
+    materials = [(record, suffix) for record, notice, suffix in pending if not notice]
+    notices = [record for record, notice, _suffix in pending if notice]
+    materials.sort(key=lambda pair: not pair[1])
+    ordered = [record for record, _suffix in materials]
+    candidates = ordered[:max_items]
+    if len(ordered) > max_items:
         limitations.append("item_limit_reached")
     remaining = max_items - len(candidates)
     if remaining > 0:

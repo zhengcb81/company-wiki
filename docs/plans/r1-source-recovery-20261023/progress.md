@@ -36,3 +36,11 @@
 - 修复后矩阵：新套件 40 例 + 既有 7 例 = **47 passed**；ruff 通过。
 - 待办：复审最终版本、handoff 六件套、门禁重跑与推送。
 
+## 2026-10-23 C 阶段：独立审查 2 与修复轮 2
+
+- 审查 2（agent 68a33bb8）绑定 a6d12a53：12/13 前项 PASS；新 Medium NR-01（导航/section token 抢占候选预算），IR-12 残留 EOF 换行。
+- 修复：nav/header/footer 结构否决 + 精确 section 标签否决 + 强/弱 token 分层（弱 token 需后缀或带日期 item）+ 候选排序「文档后缀优先→材料→notice」；日期容器去掉 div 回退；删除误报 limitation；legal 否决对强线索+文档后缀豁免；标题截断 120；query 自指跳过；page URL 校验；每页 SHA 缓存 + pending 上限；补 EOF 换行。
+- NR-06（多链接 Download+View 行）不修，作为 bounded limit 记录，不声称已覆盖。
+- 修复后矩阵：48 新 + 7 既有 = **55 passed**；ruff 通过。
+- 待办：复审新 SHA、handoff、门禁与推送。
+
