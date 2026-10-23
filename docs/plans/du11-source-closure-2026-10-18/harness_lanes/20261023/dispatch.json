@@ -59,9 +59,10 @@
         "bytes": 18950,
         "access": "read_only"
       },
-      "status": "IN_PROGRESS_USER_REPORTED",
+      "status": "DELIVERED_USER_REPORTED_ROOT_SCREENING",
       "handoff": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\handoff.json",
-      "implementation_independently_observed": false
+      "implementation_independently_observed": false,
+      "root_screening_ref": "../../review/r1-w11-reception-20261023/"
     }
   ],
   "root_reserved": [

@@ -1,0 +1,47 @@
+{
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 39,
+      "changed": [
+        "SKILL.md",
+        "scripts/pool_progress.py",
+        "references/pool-progress-contract.md"
+      ],
+      "mismatches": [],
+      "status": "MATCH"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 39,
+      "changed": [
+        "SKILL.md",
+        "scripts/pool_progress.py",
+        "references/pool-progress-contract.md"
+      ],
+      "mismatches": [],
+      "status": "MATCH"
+    }
+  ],
+  "verification": {
+    "installations": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 39,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 39,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      }
+    ]
+  },
+  "source_commit": "564f77a304adbd1abda31bf198e2b0f4275c071c",
+  "remote_configured": false,
+  "prior_file_manifest_and_old_git_bytes_verified": true
+}

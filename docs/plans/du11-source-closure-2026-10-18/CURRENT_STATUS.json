@@ -8,14 +8,14 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "69a5490baab216fe6d234c53c5f8e7c51672da25",
+  "last_code_commit": "ab95027b5b1452c4403db482362b59a9f8976286",
   "code_ci": {
-    "id": 39854576322,
-    "head_sha": "aa2dd822faed3b464a713cff737ba425dd6e2a91",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39854576322",
-    "scope_note": "Actual published producer and CI success; supersedes historical pending-push state."
+    "id": 40034980056,
+    "head_sha": "ab95027b5b1452c4403db482362b59a9f8976286",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056",
+    "scope_note": "Current budget source commit observed running; previous successful CI retained separately, not borrowed as new success"
   },
   "completed": {
     "b2": {
@@ -151,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "先完成预算制度集中独审与发布（母10M/$20、公司软预算、low提醒继续、配置和诊断单一化），然后恢复ROOT W08步骤3指引前提闭包/经营量根修；W09/W11独占施工不动，正式摘要/cache/矩阵/W12随后。",
+  "next_step_now": "预算节点已正常发布并安装。ROOT完成W09内容/最终版本复核，修历史driver正向模板和跨scenario说明共因后并线；W08先合当前预算基线再继续指引前提/跨页/选材分批，随后正式摘要/缓存/RF矩阵/W12。W11独占工区不动。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -204,7 +204,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-23T22:31:30.296232+00:00",
+  "last_updated_at": "2026-10-23T22:41:37.228452+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -331,17 +331,18 @@
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
     "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
     "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
-    "W11": "EXTERNAL_HARNESS_RUNNING_USER_REPORTED_OFFLINE_SCOPE",
+    "W11": "DELIVERED_USER_REPORTED_ROOT_SCREENING",
     "W12": "NOT_STARTED",
     "business_pass": false,
     "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
     "W08_mainline_integrated": false,
     "W08_branch_head_prefix": "1712ed10",
     "W08_branch_published": true,
-    "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1"
+    "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
+    "W11_ref": "review/r1-w11-reception-20261023/"
   },
   "budget_regime": {
-    "status": "ENGINEERING_PASS_PENDING_PUBLICATION",
+    "status": "PASS_COMMITTED_PUSHED_INSTALLED",
     "authorization": "User2026-10-23: 根据你的建议改进额度制度",
     "policy": "config/resource_budget.yaml",
     "plan": "budget-regime-20261023.md",
@@ -352,6 +353,20 @@
     "old_metadata_and_unknown_holds_unchanged": true,
     "native_goal_old_budget_text_superseded_by_latest_user_instruction": true,
     "selection_batching": "W08_step5_open_not_claimed_complete",
-    "independent_review": "review/budget-regime-20261023/independent-final/final-review.json"
+    "independent_review": "review/budget-regime-20261023/independent-final/final-review.json",
+    "current_effective_scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\coordinator-effective-scope-budget-20261023.json",
+    "current_effective_scope_sha256": "77c6af8cccfbd7feb3cbc1291d8434444530ba4f5772548947b39a7fa4915233",
+    "audit_code_commit": "564f77a304adbd1abda31bf198e2b0f4275c071c",
+    "audit_installations": "MATCH39_EACH_THREE_CHANGED_FILES",
+    "publication_ref": "review/budget-regime-20261023/engineering-closeout.json",
+    "cwp_code_commit": "ab95027b5b1452c4403db482362b59a9f8976286",
+    "audit_remote_configured": false,
+    "ci_observation": {
+      "id": 40034980056,
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "ab95027b5b1452c4403db482362b59a9f8976286",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056"
+    }
   }
 }

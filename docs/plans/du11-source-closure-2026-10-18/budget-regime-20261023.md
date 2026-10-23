@@ -20,7 +20,7 @@
 
 ## 当前状态
 
-ENGINEERING_PASS_PENDING_PUBLICATION：累计限额和工量接入单一config/resource_budget.yaml。现母账仍1,561,352tokens/631,959microUSD、新余额8,438,648tokens/19,368,041microUSD，旧7+新4unknown保留。当前有效scope以review/budget-regime-20261023/effective-scope-observation.json所指新文件为准，原scope未改。
+PASS_COMMITTED_PUSHED_INSTALLED：CWP源码ab95027b已正常推送，完整7165P/24既有skip、另146smokeP；Audit源码564f77a及收尾af255d4已提交，两份39/39技能安装已核。Audit无remote，不声称远端发布。精确CWP CI40034980056目前in_progress，状态收据见review/budget-regime-20261023/engineering-closeout.json。累计限额和工量接入单一config/resource_budget.yaml。现母账仍1,561,352tokens/631,959microUSD、新余额8,438,648tokens/19,368,041microUSD，旧7+新4unknown保留。当前有效scope以review/budget-regime-20261023/effective-scope-observation.json所指新文件为准，原scope未改。
 
 独审先确认两个真实缺陷：有选中片段时计算耗尽漏报、计算额度变更后未完整读取结果仍可命中cache。ROOT已修为实际document_work诊断，未观察requested记null；资源中断的因果inventory保留partial，实际工作额度进入来源cache身份，费用/公司软目标不进入来源语义。普通tests/unit/du11_production/test_document_work_policy.py固化真实内存PDF反控，不依赖固定耗尽数字。最终独审99P及实际摘要/同run恢复47P，ROOT本机loopback恢复12P、常规2个真实PDF回归P；测试有重叠，不相加冒充单次总量。Audit low另有18项独审，完整662项660P/2skip；未重置账、未重复付费测试。
 
@@ -29,3 +29,5 @@ W08业务14目标、指引/跨页、96片段分批及正式真实新摘要仍OPE
 ## 验收与交接
 
 只有上述实际执行行为和对账通过，才称预算制度生效。报告必须区分累计费用、token、公司软目标、请求技术限制、本地工作量和选材容量；附实际配置来源、before/after合计、测试版本及清理收据。旧2M用户授权文档保留，新的明确指令优先。native goal正文暂保留旧字样不代表旧额度仍约束当前任务；唯一CURRENT_STATUS及新有效policy记录最新授权。
+
+下一步回ROOT主线：W09内容修复及并线、W08合当前预算配置后继续指引/跨页/选材。当前预算恢复scope为CURRENT_STATUS.json.budget_regime.current_effective_scope所指文件；旧scope和外包冻结输入不重写。

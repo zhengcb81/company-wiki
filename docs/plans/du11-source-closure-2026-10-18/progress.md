@@ -606,3 +606,7 @@ W08已保存隔离支线181200bc，集中992P/82.35s、RuffPASS、src mypy368/0�
 
 ### W08正常发布确认
 1712ed10已正常push到既有隔离支线，本地/origin相同，tracked干净；完整7558P/24既有skip403.02s，smoke146P47.71s。不将403秒当每文档解析耗时，不将本地green冒称remoteCI成功；真实年报9.27s、工作821万/1600万，0新增模型费用。主线代码合并/安装、完整14目标、后续正式摘要仍未完成。
+
+## 2026-10-23预算发布收尾
+
+CWP ab95027b正常push：7165P/24既有skip294.50s，另146契约P36.56s；全src366/0。精确CI40034980056已观察in_progress，不借旧绿。Audit564f77a源码/af255d4计划收尾，无remote；两安装各39文件MATCH仅改3文件及manifest。旧账仍1561352tokens/631959microUSD，旧7+新4unknown全留；所有本节点pytest有效临时目录恢复，ROOT两缓存精确清除37,221,622B，未全仓清理。W09完整内容复核正在追历史driver正向模板与跨scenario说明共因，未代签研究PASS。

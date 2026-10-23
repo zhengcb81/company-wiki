@@ -1,0 +1,48 @@
+{
+  "scope": "post-review formatting only; no code behavior or document content change",
+  "files": [
+    {
+      "path": "docs/plans/budget-regime-20261023/findings.md",
+      "before_sha256": "6f874be72b421f7a301d67301fc4ebcd47ba8a168ce9b41712daf36a8c2bb984",
+      "after_sha256": "47640551b04e6a1a7c243e46f9842d9f3cfa1cf6894eaf8c20dace1512e44e51",
+      "only_line_endings_and_eof_blank_lines": true
+    },
+    {
+      "path": "docs/plans/budget-regime-20261023/task_plan.md",
+      "before_sha256": "562a935d8c0a9b66fed45174fe827ffa9699c298be5a5c6460b1c3b4e541c094",
+      "after_sha256": "6f42953566132ea84a315d33936f4764b65de4cdfb8ca7da24fe56771f417fc7",
+      "only_line_endings_and_eof_blank_lines": true
+    },
+    {
+      "path": "skills/revenue-forecast-audit/SKILL.md",
+      "before_sha256": "45f554ffe41d72c8e5aced668251c2fd05ac413d1ba4d97c627a5d46cc62ca5c",
+      "after_sha256": "5cef343ebbf0b9a1386b9f0c276f3a87248c241f82374186503ceb9719b51252",
+      "only_line_endings_and_eof_blank_lines": true
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "before_sha256": "33db81fa6fb4e08e8598fe010fc133ad1aa7528fc3bfc2e0311d34ccd6822478",
+      "after_sha256": "2a05e9bcc8edcc4b2d5f38eceeb2b82605b261089a36e7d911457f6549ba6eb7",
+      "only_line_endings_and_eof_blank_lines": true
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+      "before_sha256": "eff14102ef7258eb8c5588043884004f11f3cd2388d1ecc8bc40e11d6895a492",
+      "after_sha256": "fe7687793ac6e2690c9eab980b19f08465acde8f2ed3c6e1cb7b285ebceb7537",
+      "only_line_endings_and_eof_blank_lines": true
+    },
+    {
+      "path": "tests/test_pool_progress.py",
+      "before_sha256": "07008f5078e4b20c53b4c372948dde3fe03088e8f349107c27f152118df38560",
+      "after_sha256": "14052590388a2f3de0301bbf02413ed88461203820a9fb83e3eea8aa1942a570",
+      "only_line_endings_and_eof_blank_lines": true
+    },
+    {
+      "path": "tests/test_pool_progress_cli.py",
+      "before_sha256": "12090639c366653882081720aea7fc3d3688da2e073be2226f2ea784dd8070c3",
+      "after_sha256": "a91e21ee7555482d96c78eb19eee83327ca178f7bb64e894d33b13dc88dec991",
+      "only_line_endings_and_eof_blank_lines": true
+    }
+  ],
+  "reason": "normal git diff --check rejected trailing empty lines; no hook bypass"
+}

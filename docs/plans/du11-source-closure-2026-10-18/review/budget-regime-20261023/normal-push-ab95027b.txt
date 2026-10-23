@@ -1,0 +1,94 @@
+warning: in the working copy of 'docs/plans/du11-source-closure-2026-10-18/findings.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/resource_budget.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/unit/du11_production/test_pdf_production.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'config/resource_budget.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/plans/du11-source-closure-2026-10-18/budget-regime-20261023.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/final-review.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/test_budget_policy_totals.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/unit/du11_production/test_document_work_policy.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/unit/test_budget_dimension_diagnostics.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/unit/test_resource_budget_policy.py', LF will be replaced by CRLF the next time Git touches it
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy runtime source (same command as CI)..............................................Passed
+config doctor (WU-7.1, mirrors CI)....................................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[master ab95027b] feat: unify budget policy and preserve partial source accounting
+ 55 files changed, 3989 insertions(+), 43 deletions(-)
+ create mode 100644 config/resource_budget.yaml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/budget-regime-20261023.md
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/accounting-policy-observation.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/cleanup.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/probe-result-sandbox-attempt.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/probe-result-v1-17.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/probe-result.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/review-in-progress.md
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/review.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/audit-independent/review.md
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/effective-scope-observation.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/engineering-closeout.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/README.md
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/cache-boundary-final.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/cache-boundary-final.xml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/final-review.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/final-review.md
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-final.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-final.xml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-initial.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/independent-initial.xml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/initial-review.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/loopback-production.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/loopback-production.xml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/probe-final.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/probe-final.xml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/probe_budget_production_initial.py.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/production-probes-initial.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-final/production-probes.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/README.md
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/red.txt
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/red.xml
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/budget-regime-20261023/independent-red/red_receipt.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/deep-observation.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/observation.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/reception.json
+ create mode 100644 docs/plans/du11-source-closure-2026-10-18/review/r1-w09-reception-20261023/reception.md
+ create mode 100644 tests/test_budget_policy_totals.py
+ create mode 100644 tests/unit/du11_production/test_document_work_policy.py
+ create mode 100644 tests/unit/test_budget_dimension_diagnostics.py
+ create mode 100644 tests/unit/test_resource_budget_policy.py
+Push unit scope: configuration or test entrypoint changed (1 paths)
+
+=== independent CI contract smoke ===
+=== full affected unit suite ===
+
+============================ 146 passed in 36.56s =============================
+================ 7165 passed, 24 skipped in 294.50s (0:04:54) =================
+============================ slowest 15 durations =============================
+13.11s call     tests/unit/test_w04_source_transport.py::test_compact_65_parent_wire_stays_small_without_truncating_body
+11.79s call     tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee
+11.69s call     tests/unit/document_understanding_selection/test_reading_production_selection.py::test_large_actual_candidate_pool_keeps_all_three_important_late_scopes
+9.45s call     tests/unit/document_understanding_layout_hints/test_b_integrity_and_budget.py::test_work_units_grow_about_linearly
+8.59s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+8.24s call     tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+7.14s call     tests/unit/test_narrative_extractive_production.py::test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse
+7.07s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+6.75s call     tests/unit/test_narrative_output_failure_finalization.py::test_explicit_failed_summary_public_cli_settles_output_and_resumes_with_zero_extra_post
+6.66s call     tests/unit/test_shared_reading_cache_precheck.py::test_one_hundred_base_bindings_keep_shared_settings_without_original_or_decision_copies
+5.43s call     tests/unit/test_narrative_extractive_production.py::test_real_default_policy_document_skips_model_and_does_not_require_fictional_execution
+4.67s call     tests/unit/document_understanding_selection/test_reading_budget_scale.py::test_twenty_thousand_candidates_keep_all_late_priority_one_business_and_fill_cap[distinct]
+3.64s call     tests/unit/test_narrative_worker_factory.py::test_spawned_production_factory_reads_original_source_with_zero_network
+3.61s call     tests/unit/test_narrative_selector_binding.py::test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.6.0]
+3.52s call     tests/unit/test_acquisition_usage_recovery.py::test_hard_timeout_stops_owned_grandchild_and_late_writes
+================ 7165 passed, 24 skipped in 294.50s (0:04:54) =================
+
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/company-wiki.git
+   b1c49670..ab95027b  master -> master

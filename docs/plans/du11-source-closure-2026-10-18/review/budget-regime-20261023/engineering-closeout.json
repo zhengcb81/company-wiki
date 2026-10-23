@@ -1,5 +1,5 @@
 {
-  "status": "INDEPENDENT_ENGINEERING_PASS_PENDING_NORMAL_PUSH",
+  "status": "PASS_COMMITTED_PUSHED_INSTALLED",
   "policy": "config/resource_budget.yaml",
   "cumulative_tokens": 10000000,
   "cumulative_micro_usd": 20000000,
@@ -29,5 +29,26 @@
   "model_calls": 0,
   "downloads": 0,
   "originals_and_history_unchanged": true,
-  "remaining": "W08 guidance/context/ancestry/selection batching plus true summary, RF matrix and W12; W09 content reception pending; W11 exclusive"
+  "remaining": "W08 guidance/context/ancestry/selection batching plus true summary, RF matrix and W12; W09 content reception pending; W11 exclusive",
+  "cwp_code_commit": "ab95027b5b1452c4403db482362b59a9f8976286",
+  "cwp_normal_push": {
+    "unit_passed": 7165,
+    "unit_skipped": 24,
+    "unit_seconds": 294.5,
+    "separate_contract_smoke_passed": 146,
+    "separate_contract_smoke_seconds": 36.56,
+    "hooks_bypassed": false
+  },
+  "audit_code_commit": "564f77a304adbd1abda31bf198e2b0f4275c071c",
+  "audit_closeout_commit": "af255d4",
+  "audit_remote_configured": false,
+  "audit_installation": "audit-installation.json",
+  "root_cache_cleanup": "root-cache-cleanup.json",
+  "current_ci": {
+    "id": 40034980056,
+    "status": "in_progress",
+    "conclusion": null,
+    "head_sha": "ab95027b5b1452c4403db482362b59a9f8976286",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056"
+  }
 }
