@@ -1,0 +1,416 @@
+{
+ "reviewed_head": "a6d12a53",
+ "committed_blob_sha256": "a008e1cb5a9fc5140c1dd3b7470e107abc2611cc397d279e7a97b2ad46b2a079",
+ "committed_blob_bytes": 18436,
+ "note": "worktree official_discovery.py was concurrently modified after the reviewer's probes; this run loads the committed HEAD bytes",
+ "cases": {
+  "IR01-table-download": {
+   "candidates": [
+    [
+     "2027 Interim Results",
+     "https://ir.example/files/ir2027.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR01-cn-call": {
+   "candidates": [
+    [
+     "2026年第三季度电话会纪要",
+     "https://ir.example/cn/2026q3-call.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR01-corporate-deck": {
+   "candidates": [
+    [
+     "Corporate Deck 2026",
+     "https://ir.example/deck/corporate-2026.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR02-budget": {
+   "candidates": [
+    [
+     "Annual Report 2025",
+     "https://ir.example/files/ar2025.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "item_limit_reached",
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR02-briefings": {
+   "candidates": [],
+   "limitations": [],
+   "coverage": "checked_index_only",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR03-legal": {
+   "candidates": [],
+   "limitations": [],
+   "coverage": "checked_index_only",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR03-material": {
+   "candidates": [
+    [
+     "Annual Report 2025 - Contact Information",
+     "https://ir.example/ar.pdf",
+     "date_unknown"
+    ],
+    [
+     "Investor Presentation - Privacy Update",
+     "https://ir.example/p.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR04-page-time-two": {
+   "candidates": [
+    [
+     "Annual Report 2025",
+     "https://ir.example/ar.pdf",
+     "date_unknown"
+    ],
+    [
+     "Interim Report 2026",
+     "https://ir.example/ir.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR04-item-time": {
+   "candidates": [
+    [
+     "Investor presentation",
+     "https://ir.example/deck.pdf",
+     "candidate"
+    ]
+   ],
+   "limitations": [],
+   "coverage": "checked_index_only",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR05-fragment-query": {
+   "candidates": [
+    [
+     "Earnings call transcript plain",
+     "https://ir.example/doc.pdf",
+     "date_unknown"
+    ],
+    [
+     "Earnings call transcript query",
+     "https://ir.example/doc.pdf?dl=1",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "IR08-empty-hash": {
+   "candidates": [
+    [
+     "Annual Report 2025 real",
+     "https://ir.example/real.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "NR01-nav-cn": {
+   "candidates": [
+    [
+     "公告",
+     "https://ir.example/investors/announcement",
+     "date_unknown"
+    ],
+    [
+     "业绩",
+     "https://ir.example/investors/results",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "NR01-nav-cn-budget": {
+   "candidates": [
+    [
+     "公告",
+     "https://ir.example/investors/announcement",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "item_limit_reached",
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "NR01-nav-reports-budget": {
+   "candidates": [
+    [
+     "Annual Reports",
+     "https://ir.example/investors/reports",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "item_limit_reached",
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "NR01-nav-plus-30": {
+   "candidates": [
+    [
+     "Annual Reports",
+     "https://ir.example/investors/reports",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2000",
+     "https://ir.example/f0.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2001",
+     "https://ir.example/f1.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2002",
+     "https://ir.example/f2.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2003",
+     "https://ir.example/f3.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2004",
+     "https://ir.example/f4.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2005",
+     "https://ir.example/f5.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2006",
+     "https://ir.example/f6.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2007",
+     "https://ir.example/f7.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2008",
+     "https://ir.example/f8.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2009",
+     "https://ir.example/f9.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2010",
+     "https://ir.example/f10.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2011",
+     "https://ir.example/f11.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2012",
+     "https://ir.example/f12.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2013",
+     "https://ir.example/f13.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2014",
+     "https://ir.example/f14.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2015",
+     "https://ir.example/f15.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2016",
+     "https://ir.example/f16.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2017",
+     "https://ir.example/f17.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2018",
+     "https://ir.example/f18.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2019",
+     "https://ir.example/f19.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2020",
+     "https://ir.example/f20.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2021",
+     "https://ir.example/f21.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2022",
+     "https://ir.example/f22.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2023",
+     "https://ir.example/f23.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2024",
+     "https://ir.example/f24.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2025",
+     "https://ir.example/f25.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2026",
+     "https://ir.example/f26.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2027",
+     "https://ir.example/f27.pdf",
+     "date_unknown"
+    ],
+    [
+     "Annual Report 2028",
+     "https://ir.example/f28.pdf",
+     "date_unknown"
+    ]
+   ],
+   "limitations": [
+    "item_limit_reached",
+    "publication_date_unknown"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "NR02-page-time-one": {
+   "candidates": [],
+   "limitations": [],
+   "coverage": "checked_index_only",
+   "excluded": [
+    {
+     "source_url": "https://ir.example/ar.pdf",
+     "published_date": "2026-10-22",
+     "reason": "after_as_of"
+    }
+   ],
+   "no_documents_claimed": false
+  },
+  "NR04-legal-hybrid": {
+   "candidates": [],
+   "limitations": [
+    "unclassified_document_links"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  },
+  "NR09-derived-sealed": {
+   "candidates": [],
+   "limitations": [
+    "dynamic_content_unresolved",
+    "unclassified_document_links"
+   ],
+   "coverage": "partial",
+   "excluded": [],
+   "no_documents_claimed": false
+  }
+ }
+}

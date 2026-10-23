@@ -1,0 +1,365 @@
+{
+  "schema_version": "w11-independent-review/1",
+  "reviewer_role": "independent_reviewer (not the author; no part in implementation)",
+  "reviewed_at": "2026-10-23T22:52:00+01:00",
+  "workspace": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery",
+  "reviewed_head": "ecc7d6223c46073896089d68046ffcfa180822e9",
+  "reviewed_base": "0d7ada2138d41053598fcbfab5ac1e2bbd6684f5",
+  "code_base": "a2f99db676846b7f475def253c541e12c49ae5fe",
+  "branch": "codex/r1-w11-source-recovery-20261023",
+  "verdict": "CHANGES_REQUIRED",
+  "verdict_note": "Observed sealed-result defect (privacy/terms candidates) and earnings-as-transcript misclassification are genuinely fixed and independently reproduced against the base module. Handoff is not approved: the new title whitelist introduces realistic silent false negatives (IR-01 High), admits non-material event/nav titles (IR-02 Medium), still misattributes shared-container dates while a new test claims otherwise (IR-04 Medium), and a required delivery JSON is invalid (IR-09 Medium).",
+  "reviewed_file_sha256": {
+    "src/company_wiki/source_catalog/official_discovery.py": "5073da1872d56577980b0c94ba43aca527a4e87bbdfd4fdca885f87d4ad5b17d",
+    "src/company_wiki/source_catalog/official_source_cli.py": "18746c6b0904e38e3b24b5a015d79ebf8b814bf0bab5f73a539154c2c94eae46",
+    "tests/integration/test_official_discovery_offline.py": "dae893398172c29ab497d197d245452ebf4e75f66ff59608619c2d19ab9c2996",
+    "tests/integration/test_official_source_flow.py": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+    "delivery/w11/evidence_inventory.json": "d39a214aede7b2a44c9ea36dce9c6bef6e8681d377d4d1c53b244cbc68f59fe7",
+    "delivery/w11/test_results.json": "e9d610de6d3cc492ef5de5d810f110b392eb77ebd1a776bd51b1e8c9eb19df53",
+    "delivery/w11/cleanup.json": "324fd327758f9dd40f7e53a39e56ea3f526fd5a6bef714c5aed56e270be6311d",
+    "delivery/w11/root_followup.md": "1cab80bfc64994f2188c4d72d6f7cc90d7f1bfd72bdf1f3ff0093ff45388df2c",
+    "delivery/w11/test-results.xml": "1d5c9c0c12ebd058a5ec4db00be7f3a635121b7a6a602315b3cbcb665b9b4962",
+    "delivery/w11/test-run-stdout.txt": "c641cbaee6b7776677faa0a8e5777578de2db87211be482f372f3a1acdd82e6e",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config.yaml": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e",
+    "sealed/faa5bf2650964e9480566759c565ce11/stdout.txt": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52",
+    "sealed/faa5bf2650964e9480566759c565ce11/input-0001-9c235138bbbf.json": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+    "sealed/faa5bf2650964e9480566759c565ce11/consume-0001-9c235138bbbf.json": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+    "sealed/r1-remediation-01/roles/executor/events.jsonl": "6ad7640bb36adcc7dd9f12f78b9708ebb6fdb45ca056d8f1f0b699c960071142",
+    "base/0d7ada21:src/company_wiki/source_catalog/official_discovery.py": "7d8fb1292c6728adae9edf5a179242a3718b756e8659bbbb19154aff9f8ec2c3"
+  },
+  "head_blob_sha256_note": "Working-tree SHA-256 values above are the bytes tested and match test_results.json input_source_shas. HEAD blob SHA-256 values differ only by CRLF checkout normalization; after EOL normalization the content is identical (official_discovery.py HEAD 7991558f774cc5f0d3ef0f30212604f34334bc866f475039c9f217eec2130637, official_source_cli.py HEAD 3eaaa40a9286c133c6fbe5af2b0027c4b8903e4e175caba4cb0a633aef65a295, test_official_source_flow.py HEAD ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142; test_official_discovery_offline.py is byte-identical at HEAD).",
+  "tests_you_ran": [
+    {
+      "id": "T1",
+      "purpose": "in-session module __file__ check (two product modules)",
+      "command": "PYTHONPATH=C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery/src;C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery/tests C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe -X utf8 -B -c \"from pathlib import Path; import company_wiki.source_catalog.official_discovery as d; import company_wiki.source_catalog.official_source_cli as c; r=Path.cwd()/'src'; assert all(Path(m.__file__).resolve().is_relative_to(r.resolve()) for m in (d,c)); print(d.__file__, c.__file__)\"",
+      "exit_code": 0,
+      "result": "both module files resolve under the workspace src",
+      "log_path": null
+    },
+    {
+      "id": "T2",
+      "purpose": "prove imports inside a pytest session come from workspace src (not a conftest-injected path)",
+      "command": "PYTHONPATH=<workspace>/src;<workspace>/tests;<workspace>/tmp/review python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py -q -p no:cacheprovider -p pathcheck_plugin --collect-only",
+      "exit_code": 0,
+      "result": "26 tests collected; REVIEW-MODULE-FILE both <workspace>/src, in_workspace_src=True",
+      "log_path": null
+    },
+    {
+      "id": "T3",
+      "purpose": "new offline suite",
+      "command": "PYTHONPATH=<workspace>/src;<workspace>/tests python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py -q -p no:cacheprovider --basetemp=<workspace>/tmp/review-pytest-1",
+      "exit_code": 0,
+      "result": "26 passed in 17.15s; relocated basetemp removed by conftest",
+      "duration_seconds": 17.15,
+      "log_path": "delivery/w11/review/evidence/offline-26-stdout.txt"
+    },
+    {
+      "id": "T4a",
+      "purpose": "existing official source flow file (first full run)",
+      "command": "PYTHONPATH=<workspace>/src;<workspace>/tests python -X utf8 -B -m pytest tests/integration/test_official_source_flow.py -q -p no:cacheprovider",
+      "exit_code": 0,
+      "result": "36 passed in 141.62s",
+      "duration_seconds": 141.62,
+      "log_path": null
+    },
+    {
+      "id": "T4b",
+      "purpose": "repeat full existing file (log preserved)",
+      "command": "PYTHONPATH=<workspace>/src;<workspace>/tests python -X utf8 -B -m pytest tests/integration/test_official_source_flow.py -q -p no:cacheprovider",
+      "exit_code": 0,
+      "result": "36 passed in 48.05s",
+      "duration_seconds": 48.05,
+      "log_path": "delivery/w11/review/evidence/existing-36-stdout.txt"
+    },
+    {
+      "id": "T5",
+      "purpose": "exact delivered combined selection (independent re-run)",
+      "command": "PYTHONPATH=<workspace>/src;<workspace>/tests python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -k 'discovery or official_index_http or cn_fundraising or TestMaterial or TestNonMaterial or TestTimeWindow or TestUrlAndDedup or TestPagePayload or TestLimits or TestPublicCli' -p no:cacheprovider",
+      "exit_code": 0,
+      "result": "33 passed, 29 deselected in 15.24s (delivered artifact: 33 passed/0 failed/0 skipped/29 deselected, 11.48s)",
+      "duration_seconds": 15.24,
+      "log_path": "delivery/w11/review/evidence/combined-selection-stdout.txt"
+    },
+    {
+      "id": "T6",
+      "purpose": "45 adversarial probes, patched module vs 0d7ada21 base module",
+      "command": "python -X utf8 -B tmp/review/w11_probe.py",
+      "exit_code": 0,
+      "result": "45 probe results (classification/date/url/limits/coverage/receipt/CLI/sealed-derived)",
+      "log_path": "delivery/w11/review/evidence/probe-output.json"
+    },
+    {
+      "id": "T7",
+      "purpose": "14 extra probes (page-level timestamps, multi-page limits, CLI edges, derived dynamic variant)",
+      "command": "python -X utf8 -B tmp/review/extra_probe.py",
+      "exit_code": 0,
+      "result": "14 probe results",
+      "log_path": "delivery/w11/review/evidence/extra-probe-output.json"
+    },
+    {
+      "id": "T8",
+      "purpose": "independent sealed-root body search (read-only, full SHA-256 of every file <=60 MB)",
+      "command": "python -X utf8 -B -c \"walk both authorized roots; hash every file <=60 MB; count size==486789 and sha256==f1e822a8...\"",
+      "exit_code": 0,
+      "result": "audit run: 2052 files / 166,731,220 bytes, exact-size 0, body-SHA 0; holdout: 65 files / 17,360,200 bytes, exact-size 0, body-SHA 0; 89 files in the 400-600KB band",
+      "log_path": null
+    },
+    {
+      "id": "T9",
+      "purpose": "verify all 11 INPUTS.json W11 entries",
+      "command": "python -X utf8 -B -c \"compare len and sha256 for each INPUTS['W11-CWP-SOURCES']\"",
+      "exit_code": 0,
+      "result": "11/11 byte counts and SHA-256 values match",
+      "log_path": null
+    },
+    {
+      "id": "T10",
+      "purpose": "lint the changed files",
+      "command": "python -X utf8 -B -m ruff check src/company_wiki/source_catalog/official_discovery.py tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py",
+      "exit_code": 0,
+      "result": "All checks passed!",
+      "log_path": null
+    },
+    {
+      "id": "T11",
+      "purpose": "post-run production-write / config check",
+      "command": "Test-Path companies/.source_catalog/catalog; sha256 config/source_catalog.yaml and config.yaml; git status --short",
+      "exit_code": 0,
+      "result": "all three production roots absent; config hashes 3d159a4e.../15541ba4... unchanged; git status only '?? delivery/w11/push-gate-rerun.log'",
+      "log_path": null
+    }
+  ],
+  "findings": [
+    {
+      "id": "IR-01",
+      "severity": "High",
+      "title": "Material-title whitelist silently drops legitimate material links",
+      "status": "introduced by ecc7d622",
+      "evidence": [
+        "probe class-download-anchor-FN: '<table><tr><td>2026 Interim Report</td><td><a href=\"/ir2026.pdf\">Download</a></td></tr></table>' -> patched candidates=[], coverage_status=checked_index_only, limitations=[]; base 0d7ada21 -> 1 candidate https://ir.example/ir2026.pdf",
+        "probe class-aria-label-icon-FN: '<a href=\"/deck.pdf\" aria-label=\"Investor Presentation\"><img alt=\"Investor Presentation\"></a>' -> patched []; base 1 candidate (empty title)",
+        "probe class-annual-results-FN: '2025 Annual Results' + 'Interim Results 2026' + 'Q3 2026 Financial Results' -> patched []; base 3 candidates",
+        "probe class-cn-phone-call-FN: '2026年半年度电话会纪要' -> patched []; base 1 candidate; '电话会' is in _TRANSCRIPT_TITLE_TOKENS but not _MATERIAL_TITLE_TOKENS while 'transcript' is in both",
+        "probe class-corporate-deck-FN: 'Corporate Deck 2026' -> patched []; base 1 candidate",
+        "probe coverage-all-filtered-static: '2025 Annual Results' + 'Board Deck' -> checked_index_only, limitations=[], no_documents_claimed=false (no signal that anchors were rejected)",
+        "commands: python -X utf8 -B tmp/review/w11_probe.py, python -X utf8 -B tmp/review/extra_probe.py"
+      ],
+      "expected": "Business-material leads remain candidates; anchor text is not the only lead source; if links are rejected, coverage does not silently look clean.",
+      "actual": "Deterministic silent loss for Download/aria-label/Annual Results/Corporate Deck/CN transcript markup; checked_index_only with no limitation.",
+      "required_fix": "Derive the lead from anchor text + aria-label/title/alt + nearest item-container text (tr/li/article) or a URL-basename token under a strict legal veto; add an explicit ignored/title_unmatched limitation or count for rejected anchors; add regression tests for the five inputs; re-run and re-review."
+    },
+    {
+      "id": "IR-02",
+      "severity": "Medium",
+      "title": "briefing/upcoming admitted as material document clues; notices consume item budget",
+      "status": "introduced by ecc7d622",
+      "evidence": [
+        "probe nonmaterial-briefing-FP: dated 'Media Briefing' and 'Press Briefing' -> patched 2 candidates (disposition=candidate, kind=investor_relations); base 0",
+        "probe nonmaterial-upcoming-FP: 'Upcoming Events' and 'Upcoming Careers Fair' -> patched index_notice candidates; base 0",
+        "slot probe: max_items=1 with '<a href=\"/events\">Upcoming Events</a><a href=\"/ar.pdf\">Annual Report 2025</a>' -> only the notice is emitted, Annual Report omitted, limitations=[item_limit_reached, publication_date_unknown]; base emits the Annual Report"
+      ],
+      "expected": "Non-material event/nav titles do not qualify as material documents; at most index_notice; they must not consume the material item budget ahead of real documents.",
+      "actual": "Dated media/press briefing is a full candidate; an upcoming-events nav link can crowd out a real report under max_items.",
+      "required_fix": "Restrict 'briefing' to investor/analyst briefing; separate notice tokens from material tokens (or exclude notices from max_items); add negative tests for media/press/careers/upcoming and the max_items interaction; re-run."
+    },
+    {
+      "id": "IR-03",
+      "severity": "Low",
+      "title": "Legal/site denylist both leaks (legal/accessibility) and over-vetoes material titles (contact/privacy)",
+      "status": "introduced/mixed",
+      "evidence": [
+        "probe legal-hybrid-slip: 'Legal Information - Investor Day 2026' (/legal) and 'Accessibility - Annual Report Archive' (/access) become candidates; the list has 'legal notice' but no 'legal'/'accessibility'",
+        "probe material-contact-veto-FN: 'Annual Report 2025 - Contact Information' -> patched [], base candidate",
+        "probe material-privacy-veto-FN: 'Investor Presentation - Privacy Update' -> patched [], base candidate",
+        "' Cookie' (leading space) is subsumed by 'cookie'; most denylist entries are unreachable because the material gate already excludes titles lacking a material token"
+      ],
+      "expected": "Legal/navigation pages never candidates; genuine material titles not vetoed for a secondary word.",
+      "actual": "Finite denylist remains both leaky and over-broad.",
+      "required_fix": "Use structural/section (footer/nav/header/role, legal URL segments) plus word-boundary tokens; do not let one secondary token veto a strong material token; add both-direction tests or record as an explicit bounded heuristic."
+    },
+    {
+      "id": "IR-04",
+      "severity": "Medium",
+      "title": "Shared-container <time> becomes each material's date; page-level 'last updated' excludes all materials",
+      "status": "pre-existing at 0d7ada21; overclaimed by new test/A5",
+      "evidence": [
+        "probe date-page-level-timestamp: '<div class=\"content\"><time datetime=\"2026-10-22\">Last updated</time><a href=\"/ar.pdf\">Annual Report 2025</a><a href=\"/ir.pdf\">Interim Report 2026</a></div>' -> both excluded as after_as_of with published_date 2026-10-22, 0 candidates (base identical)",
+        "probe date-shared-parent-misattribution / date-shared-list: both anchors get the first <time> (2021-08-15 / 2022-01-01), the later 2026 item is wrongly before_window",
+        "new test test_page_retrieval_marker_is_not_a_publication_date: discover() has no fetch-time input; the test feeds <time datetime=\"2026-10-21T19:39:09Z\"> and asserts published_date 2026-10-21, i.e. verifies ISO truncation, not retrieval-time separation; the real sealed started_at is 2026-10-22T19:39:09Z"
+      ],
+      "expected": "Material date comes from the material's own item; page/container timestamps and fetch/receipt time never become published_date.",
+      "actual": "Shared wrapper's first <time> is applied to every anchor beneath it, causing false exclusions/labels.",
+      "required_fix": "Scope <time> to the anchor's nearest item container (li/tr/article) and reject page-level times, or only accept data-date per anchor; add a page-level timestamp test. If deferred out of lane scope, remove the A5 '通过' claim / misleading test name and record as a known limitation."
+    },
+    {
+      "id": "IR-05",
+      "severity": "Low",
+      "title": "Fragment variants duplicate the same resource",
+      "status": "pre-existing; new test enshrines it",
+      "evidence": "probe url-fragment-duplicate: /ar.pdf#page=1 and /ar.pdf#page=2 -> 2 candidates; base identical; new test test_query_and_fragment_variants_stay_distinct asserts 3 candidates for plain/query/fragment",
+      "expected": "Fragments are not sent to the server; same PDF dedupes. Query semantics may stay distinct but should be explicit.",
+      "actual": "Duplicate candidates for one resource; downstream capture would collide on content hash.",
+      "required_fix": "Strip fragment (and default port) before seen/candidate creation and add a test, or document the intentional fragment-distinct semantics and downstream cost."
+    },
+    {
+      "id": "IR-06",
+      "severity": "Low",
+      "title": "CLI duplicate byte_limit_reached; malformed page rows crash with traceback",
+      "status": "pre-existing CLI (unchanged by lane)",
+      "evidence": [
+        "probe cli-duplicate-byte-limitation: single file > max_bytes(100) through public CLI -> limitations ['byte_limit_reached','byte_limit_reached']; delivered test uses exactly-cap file and misses it",
+        "probe cli-missing-page-key / cli-missing-entity / cli-missing-mime: exit 1 with KeyError traceback instead of official-source-failure JSON exit 2; other malformed shapes (pages not list, 7 pages, max_items=0, urls+pages) refuse cleanly"
+      ],
+      "expected": "Unique limitations list; malformed request -> clean JSON refusal.",
+      "actual": "Duplicate limitation; KeyError tracebacks.",
+      "required_fix": "Dedupe before append; validate required page-row/top-level keys and raise a caught ValueError; add tests. Or record as external limit."
+    },
+    {
+      "id": "IR-07",
+      "severity": "Low",
+      "title": "One malformed href aborts the whole discovery",
+      "status": "pre-existing",
+      "evidence": "probe url-malformed-ipv6: '<a href=\"/ok.pdf\">Annual Report 2025</a><a href=\"http://[\">Annual Report malformed</a>' -> ValueError('Invalid IPv6 URL') from urljoin/urlsplit; no partial result (CLI becomes generic official_source_ValueError exit 2)",
+      "expected": "Skip the malformed anchor, keep valid candidates, record a limitation/count.",
+      "actual": "Whole page lost for one bad link.",
+      "required_fix": "Per-anchor try/except ValueError around URL resolution plus an invalid_url limitation/count; add test."
+    },
+    {
+      "id": "IR-08",
+      "severity": "Low",
+      "title": "Empty/# href becomes a self-referential candidate",
+      "status": "introduced by the material-title path",
+      "evidence": "probe url-self-link: '<a href=\"\">Annual Report 2025</a><a href=\"#\">Interim Report 2026</a>' -> patched 2 candidates whose source_url is the index page (https://ir.example/ir and .../ir#); base 0",
+      "expected": "Empty/#/same-document anchors are not document leads.",
+      "actual": "Candidate points at the index page itself.",
+      "required_fix": "Skip zero-length/hash-only refs and URLs resolving to the index document before candidate creation; add test."
+    },
+    {
+      "id": "IR-09",
+      "severity": "Medium",
+      "title": "evidence_inventory.json is invalid JSON; scan byte totals do not reproduce",
+      "status": "delivery defect",
+      "evidence": [
+        "json.loads(git show HEAD:delivery/w11/evidence_inventory.json) -> JSONDecodeError: Expecting ',' delimiter: line 146 column 29 (Python underscore literals 167_018_437 / 17_449_142)",
+        "independent scan: 2052 files / 166,731,220 B (claim 167,018,437); 65 files / 17,360,200 B (claim 17,449,142); file counts, 89 files 400-600KB, exact-486789=0, body-SHA hits=0 reproduce",
+        "body_available=false / 'not a whole-disk absence claim' / must_not caveats are honest and independently corroborated"
+      ],
+      "expected": "Every required delivery JSON parses; numeric evidence reproducible from the recorded method.",
+      "actual": "Required machine-readable artifact cannot be parsed; totals unreproducible.",
+      "required_fix": "Replace with plain JSON integers, correct totals or record the exact scan command/config, and json.load-validate all delivery JSON before handoff."
+    },
+    {
+      "id": "IR-10",
+      "severity": "Low",
+      "title": "Required RED/probe evidence not retained",
+      "status": "process/delivery gap",
+      "evidence": [
+        "card A.4 requires preserving original RED stdout/JUnit and the failing assertion when a defect is observed; delivery/w11 has no RED log",
+        "findings.md cites probe_defects.py/probe12.py output; cleanup.json says those diagnostic scripts were removed",
+        "independent reproduction against base 0d7ada21: earnings release/presentation -> investor_call_transcript; privacy/terms PDFs -> 3 candidates; Business/Investor/Conference/Contact Information -> 4 candidates (so D1-D3 claims are true)"
+      ],
+      "expected": "Raw RED/probe evidence or an explicit 'probe outputs not retained' statement.",
+      "actual": "Only a narrative table; no raw artifact.",
+      "required_fix": "Attach the base-code probe stdout with the base blob SHA (regenerable) or amend the delivery narrative; do not imply a pytest RED that did not happen."
+    },
+    {
+      "id": "IR-11",
+      "severity": "Low",
+      "title": "Test names/comments overclaim; derivation constants unused",
+      "status": "test-quality gap",
+      "evidence": [
+        "test_page_retrieval_marker_is_not_a_publication_date is vacuous for the named property (IR-04); it asserts a <time> timestamp is used as the publication date",
+        "_offline_socket_guard comment: 'the CLI subprocess only needs a local socket pair for asyncio's loop' - the pages branch never runs asyncio/sockets, and the in-process guard does not cover the subprocess",
+        "SEALED_RESULT_SHA256 and DERIVED_FIXTURE_NOTE are defined but never used/asserted; the docstring 'bound to that result's SHA' is decorative",
+        "test timestamp 2026-10-21T19:39:09Z differs by one day from the sealed started_at 2026-10-22T19:39:09Z"
+      ],
+      "expected": "Test names/comments state exactly what is verified; derivation binding asserted.",
+      "actual": "Misleading/vacuous tests and dead constants.",
+      "required_fix": "Rename/split the date test, fix the socket comment, assert the derived-fixture SHA/note (or delete the constants)."
+    },
+    {
+      "id": "IR-12",
+      "severity": "Low",
+      "title": "Redundant/dead title tokens and inaccurate comment",
+      "status": "code quality",
+      "evidence": [
+        "_TRANSCRIPT_TITLE_TOKENS = ('call transcript','transcript','电话会','transcript of'): 'call transcript' and 'transcript of' are substrings of 'transcript'",
+        "comment says 'requires an explicit call/transcript clue' but there is no bare 'call' token (e.g. 'Q2 2026 Earnings Call' is not a transcript)",
+        "' Cookie' (leading space) is subsumed by 'cookie'; most denylist entries are unreachable through the material gate",
+        "tests/integration/test_official_discovery_offline.py has no final newline (ruff still passes)"
+      ],
+      "expected": "No dead/redundant tokens; comments accurate.",
+      "actual": "Decorative tokens and a comment that overstates the rule.",
+      "required_fix": "Simplify token tuples, correct the comment (or implement the stated call clue), remove ' Cookie', add the trailing newline."
+    },
+    {
+      "id": "IR-13",
+      "severity": "Info",
+      "title": "Handoff/environment hygiene: delivery files removed mid-review by sparse reapply; stray push-gate log; cleanup list scope",
+      "status": "environment/parent action",
+      "evidence": [
+        "delivery/w11 tracked files were present at review start (read and hashed) and absent from the working tree by 22:43; git status stayed clean because core.sparseCheckout=true and delivery/ is outside the cone (S skip-worktree); HEAD blobs intact",
+        "untracked 0-byte delivery/w11/push-gate-rerun.log (created 22:32:51, after the lane commit) is not in cleanup.json",
+        "cleanup.json only_lane_writes_in_tree is a tracked-path list; .mypy_cache/.ruff_cache/.benchmarks/.coverage/.ingested have post-baseline mtimes (ignored tool caches)",
+        "no production/catalog/config writes found; companies/, .source_catalog/, catalog/ absent; config hashes unchanged",
+        "the test run also leaves pytest-of-郑曾波/ in the workspace under this write sandbox (writes outside the workspace are blocked; the default basetemp was observed in cwd); the author removed one per cleanup.json, my combined-selection run re-created one and I removed it. Reviewer scratch tmp/review and empty cw-pytest-basetemp/20261023-213342-29888771 were also removed; evidence is retained under delivery/w11/review/evidence/"
+      ],
+      "expected": "Clean, restorable working tree for handoff; cleanup inventory scope stated.",
+      "actual": "git status cannot prove delivery presence; stray file remains.",
+      "required_fix": "Parent/ROOT: restore/verify delivery files from HEAD, remove the stray log, avoid sparse reapply while assembling the handoff, clarify cleanup scope."
+    }
+  ],
+  "positives_verified": [
+    "Sealed stdout is exactly 2839 B / SHA-256 1c33f18b..., JSON parses, and contains exactly 3 privacy/terms candidates with coverage_status=partial, dynamic_content_unresolved + publication_date_unknown, no_documents_claimed=false, response_bytes=486789, body SHA f1e822a8... only in fetch_receipts.",
+    "All 11 INPUTS.json W11 files match byte count and SHA-256; events.jsonl lines 9-10 are exactly the faa5bf discover command and capture.",
+    "The 486789 B body is genuinely absent: full SHA-256 scan of both authorized roots (2052 + 65 files) found 0 exact-size files and 0 body-SHA hits; the capture dir has no body. The delivery does not claim the body exists or that the original replay passed.",
+    "Observed defect D1 fixed: base labels 'Q2 2026 Earnings Release' and 'Q2 2026 Earnings Presentation' as investor_call_transcript; patched labels them investor_relations (kind unchanged for 'Earnings Call Transcript').",
+    "Observed defect D2 fixed: base emits 3 candidates for Privacy Statement / Terms of Use / Legal Notice and Disclaimer; patched emits 0.",
+    "Observed defect D3 fixed: base emits Business / Investor / Conference / Contact Information as candidates; patched emits 0.",
+    "Derived-minimal sealed fixture (403 B, SHA-256 37e86e59..., exact three sealed titles/URLs, entity 药明康德, window 2026-01-01..2026-10-21) through the public CLI pages branch: candidates=[], no_documents_claimed=false, exit 0; the base module on the same fixture emits exactly the 3 sealed candidates. Clearly marked as derived_minimal_fixture, not an original replay.",
+    "Derived dynamic variant (same 3 anchors + external script) -> coverage_status=partial, limitations=['dynamic_content_unresolved'], candidates=[], no_documents_claimed=false, consistent with the real page's known dynamic symptom; still not a replay.",
+    "Receipt honesty: receipt.event_sha256 recomputes from the payload; event_ids bind the consumed captures; response_bytes counts consumed bytes.",
+    "Limit honesty: item limit -> item_limit_reached + partial + no_documents_claimed=false; exact-max emits no false item limitation; byte limit (first and second page) -> byte_limit_reached + partial; first-page-over-cap -> 0 candidates + limitation; unsupported MIME -> limitation + later HTML parsed; index_fetch_incomplete propagates for a non-opened fetch receipt.",
+    "Payload honesty: inline JSON-LD (script without src) does not trigger dynamic_content_unresolved; external script does and keeps the partial status; candidates remain metadata_only=true / is_business_original=false / materiality=not_assessed.",
+    "CLI layering: local pages require absolute input_file; urls+pages together, 7 pages, max_items=0 and non-list pages are clean exit-2 refusals; two-neutral-issuer subprocess semantics pass; no production catalog/config opened on the pages path.",
+    "Delivery numbers: combined delivered selection reproduces 33 passed / 0 failed / 0 skipped / 29 deselected; JUnit tests=33 with no failures; test-run-stdout SHA-256 matches test_results.json log_sha256; input_source_shas match the working-tree files.",
+    "No schema drift: official-discovery-result/1 keys unchanged; no company/domain/year-specific branch; input bounds enforced; ruff passes on the changed files.",
+    "No production writes: companies/, .source_catalog/, catalog/ absent; config/source_catalog.yaml and config.yaml hashes unchanged; no tracked product/test diff."
+  ],
+  "external_limits": [
+    "The 486789 B original IR body is unavailable; it was not re-fetched, reconstructed, or replayed. The derived fixture is explicitly not an original replay.",
+    "Coverage remains checked_index_only or partial; no claim of full-site/search completeness or of new source acquisition.",
+    "No live HTTP was used; real transport/redirect/budget behavior was exercised only through the existing MockTransport test, which passed.",
+    "ET unsupported_exchange / CN wire-fee issues named in the card are out of this lane and were not assessed.",
+    "The dynamic-content heuristic (external script or the word 'loading') is conservative and unchanged; a static page with the prose word 'Loading' still becomes partial."
+  ],
+  "delivery_claims_audit": {
+    "test_results_numbers_match_actual_runs": true,
+    "test_run_stdout_and_junit_hashes_match": true,
+    "evidence_inventory_body_absence_claim_honest": true,
+    "evidence_inventory_json_valid": false,
+    "evidence_inventory_scan_totals_reproduce": false,
+    "red_evidence_retained": false,
+    "cleanup_claims_verified_except_scope": "production roots absent and config hashes unchanged; cleanup list is a tracked-path list, not a full filesystem delta; untracked push-gate log not listed; default-basetemp pytest-of-郑曾波/ stray is a sandbox behaviour the author removed and the reviewer re-created/removed",
+    "replay_passed_claimed": false,
+    "body_available_claimed": false
+  },
+  "conclusion": "CHANGES REQUIRED. The lane truly fixes the two observed defects (legal-nav candidates in the sealed result; earnings release/presentation mislabeled as transcript), keeps the missing-body story honest, preserves pure parse + thin CLI, and its delivered test counts are accurate. It does not meet the handoff bar: the new material-title whitelist silently drops realistic material anchors (High), admits non-material briefing/upcoming titles and lets them consume item budget (Medium), still misattributes shared-container/page-level dates while a new test claims otherwise (Medium), and evidence_inventory.json is invalid JSON (Medium). Fix IR-01/IR-02/IR-04/IR-09, address or explicitly limit IR-03/05/06/07/08/10/11/12, then re-run the full matrix and obtain an independent re-review of the final product SHA.",
+  "required_fixes_before_handoff": [
+    "IR-01: broaden material-lead extraction and expose rejected-anchor loss; add the five regression inputs; re-run.",
+    "IR-02: restrict 'briefing'; separate notice tokens from material tokens or exclude notices from max_items; add negative and max_items interaction tests.",
+    "IR-09: valid JSON with corrected/reproducible byte totals; json.load-validate every delivery JSON.",
+    "IR-04: scope <time> to the item and add a page-level timestamp test, or record as a known limitation and remove the '通过'/test-name overclaim.",
+    "IR-03/05/06/07/08: fix or record as bounded external limits with tests; do not mark them 'correct'.",
+    "IR-10/11/12: retain honest RED/probe evidence; fix test names/comments and unused constants; clean redundant tokens/EOF.",
+    "IR-13 (parent/ROOT): restore/verify delivery files from HEAD, remove the stray push-gate log, avoid sparse reapply during handoff.",
+    "Independent re-review of the same final product SHA after the fixes."
+  ],
+  "environment_notes": [
+    "core.sparseCheckout=true; the cone excludes delivery/, so tracked delivery files carry S (skip-worktree). They vanished from the working tree mid-review without a git status deletion; HEAD blobs remain intact and were the source for the final hash verification.",
+    "Reviewer writes: tmp/review (scratch, removed at end) and delivery/w11/review/ (report + evidence). No product/test/config writes.",
+    "Reviewer artifacts removed: tmp/review; cw-pytest-basetemp/20261023-213342-29888771 (empty, aborted pytest invocation); pytest-of-郑曾波/ (re-created by the combined-selection run; this write sandbox permits writes only inside the workspace and pytest's default basetemp was observed to land in cwd; the author had removed the same artifact per cleanup.json). No product/test/config writes."
+  ]
+}

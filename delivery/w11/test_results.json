@@ -1,0 +1,66 @@
+{
+ "schema_version": "w11-test-results/1",
+ "lane": "W11-CWP-SOURCES",
+ "workspace": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery",
+ "interpreter": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe (3.14.2, Windows)",
+ "pytest": "9.1.1",
+ "pythonpath": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery/src;C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery/tests",
+ "red_phase": {
+  "status": "RED_not_observed_for_existing_suite",
+  "detail": "未改产品时对现有 discovery 相关 7 测试全通过（7 passed）。缺陷通过新中性 fixture 主动触发证实（probe 输出记录于 findings A5 表），不是现有套件内失败。",
+  "defects_proven_by_new_probes": [
+   "W11-D1: 'Q2 2026 Earnings Release/Presentation' 被标 investor_call_transcript",
+   "W11-D2: 'Privacy Statement'/'Terms of Use' PDF 靠后缀进入候选（与真实 faa5bf 结果 3/3 一致）",
+   "W11-D3: 'Business'/'Investor'/'Conference'/'Contact Information' 纯导航靠关键词进入候选"
+  ]
+ },
+ "runs": [
+  {
+   "purpose": "final combined verification (new offline suite + existing discovery regressions)",
+   "command": "python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -k 'discovery or official_index_http or cn_fundraising or TestMaterial or TestNonMaterial or TestTimeWindow or TestUrlAndDedup or TestPagePayload or TestLimits or TestPublicCli' -p no:cacheprovider --junitxml=delivery/w11/test-results.xml",
+   "exit_code": 0,
+   "passed": 69,
+   "failed": 0,
+   "skipped": 0,
+   "deselected": 29,
+   "duration_seconds": 10.17,
+   "log_path": "delivery/w11/test-run-stdout.txt",
+   "log_sha256": "973fdbb236d66be41651905d2fa728d3d12b080555f76a4b4de0e4988e351ebd",
+   "junit_path": "delivery/w11/test-results.xml",
+   "junit_sha256": "749f18b1d2d7c1062743d785e8c7212fa0eb26e9e89ff6b81d2be860557c5b54"
+  },
+  {
+   "purpose": "cleanup verification run (owned basetemp, protected-input before/after)",
+   "command": "w11_cleanup_verify.py harness (see cleanup.json)",
+   "exit_code": 0,
+   "passed": 69,
+   "failed": 0,
+   "skipped": 0,
+   "deselected": 29,
+   "duration_seconds": null,
+   "basetemp_removed": true
+  },
+  {
+   "purpose": "full two-file run (62 new + 36 existing)",
+   "command": "python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -p no:cacheprovider",
+   "exit_code": 0,
+   "passed": 98,
+   "failed": 0,
+   "skipped": 0,
+   "deselected": 0,
+   "duration_seconds": null,
+   "log_path": "delivery/w11/test-run-full-stdout.txt",
+   "log_sha256": "5688ebdc2d0de72d1b4894a598685f1779dfc2bc7cbaa104cfe0b68ba0ae174d"
+  }
+ ],
+ "input_source_shas": {
+  "src/company_wiki/source_catalog/official_discovery.py": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+  "src/company_wiki/source_catalog/official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+  "tests/integration/test_official_source_flow.py": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+  "tests/integration/test_official_discovery_offline.py": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069"
+ },
+ "network_calls": 0,
+ "model_calls": 0,
+ "production_catalog_opened": false,
+ "notes": "全部测试离线：socket 守卫只放行 loopback；CLI subprocess 走本地 pages 分支，不打开生产 catalog、不发 HTTP。该矩阵在审查 IR-01/02/04 修复后重跑。"
+}

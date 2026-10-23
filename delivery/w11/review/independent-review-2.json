@@ -1,0 +1,413 @@
+{
+ "schema_version": "w11-independent-review-2/1",
+ "lane": "W11-CWP-SOURCES",
+ "reviewer_role": "independent re-reviewer (not the author; did not write or fix the code)",
+ "review_time": "2026-10-23 22:54-23:15 Europe/London",
+ "workspace": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery",
+ "interpreter": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe (3.14.2, Windows); pytest 9.1.1",
+ "authority": "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/W11-CWP-SOURCES.md",
+ "reviewed_head": "a6d12a537bcacdf3d03d0045caa2ef2ddabafb87",
+ "reviewed_branch": "codex/r1-w11-source-recovery-20261023",
+ "prior_reviewed_head": "ecc7d6223c46073896089d68046ffcfa180822e9",
+ "lane_base": "0d7ada2138d41053598fcbfab5ac1e2bbd6684f5",
+ "reviewed_file_sha256": {
+  "src/company_wiki/source_catalog/official_discovery.py": {
+   "bytes": 18937,
+   "sha256_working_tree": "f2ad8e578b221993c7fba984d31f874c324e2b651ef3a1c22aaa7c85384695f5",
+   "sha256_head_blob_lf": "a008e1cb5a9fc5140c1dd3b7470e107abc2611cc397d279e7a97b2ad46b2a079"
+  },
+  "src/company_wiki/source_catalog/official_source_cli.py": {
+   "bytes": 13362,
+   "sha256_working_tree": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+   "sha256_head_blob_lf": "7fb9a8031e6d98fd9788518b9fb41904179f326fba57c2bbb08fb48d1dee1adf"
+  },
+  "tests/integration/test_official_discovery_offline.py": {
+   "bytes": 26655,
+   "sha256_working_tree": "fd65dc34c6c126ad549811b4ff7745c4e6375c7f72d8f3f5bfef9ddb8379aff1",
+   "sha256_head_blob_lf": "fd65dc34c6c126ad549811b4ff7745c4e6375c7f72d8f3f5bfef9ddb8379aff1"
+  },
+  "tests/integration/test_official_source_flow.py": {
+   "bytes": 56854,
+   "sha256_working_tree": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+   "sha256_head_blob_lf": "ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142"
+  },
+  "delivery/w11/evidence_inventory.json": {
+   "bytes": 7684,
+   "sha256_working_tree": "87833dbc8d496429d6057259e7834cf02137cc08b2799cafd01ec0c083e34fb7"
+  },
+  "delivery/w11/test_results.json": {
+   "bytes": 3120,
+   "sha256_working_tree": "8cb423a1bba78623294d1511218e9729114c5dc40b5d7a0a07a5fb4fe695f242"
+  },
+  "delivery/w11/test-results.xml": {
+   "bytes": 8051,
+   "sha256_working_tree": "c8d98ffdf66a1dcef78039dc1fd1147742c2a04fd352c336c32aecb580be8d6c"
+  },
+  "delivery/w11/test-run-stdout.txt": {
+   "bytes": 2222,
+   "sha256_working_tree": "c6d9d487cc7faa922b28e7bf8a919e9ea6e3e2fe0df4bce2a78c7a89ab8c768d"
+  },
+  "delivery/w11/cleanup.json": {
+   "bytes": 4209,
+   "sha256_working_tree": "a2b041586b370d122e0cbadb5394aa9eaa50663b6e2a783963da6790b479f3e3"
+  },
+  "delivery/w11/root_followup.md": {
+   "bytes": 2770,
+   "sha256_working_tree": "8bf94a3489ac5dbac7204aaebb8201570a040164ee9cb43069b816d33006b06f"
+  },
+  "delivery/w11/probes/red_probe.py": {
+   "bytes": 4967,
+   "sha256_working_tree": "22506fac4dc7212e882a8441e1c8a2ebc6bbeebc80ac58bb3a1dd86dbcc3a741"
+  },
+  "delivery/w11/probes/red-probe-output.txt": {
+   "bytes": 5762,
+   "sha256_working_tree": "be0cc1616756b38fb1bbea9179c2ad2a6921331abe1d01e95d40cab7ca857088"
+  }
+ },
+ "config_sha256": {
+  "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "config.yaml": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e"
+ },
+ "tests_you_ran": [
+  {
+   "id": "T1",
+   "purpose": "in-session import path proof",
+   "command": "python -X utf8 -B -c \"...Path(m.__file__).is_relative_to(cwd/src) for official_discovery and official_source_cli...\"",
+   "exit": 0,
+   "result": "both module __file__ under <workspace>/src"
+  },
+  {
+   "id": "T2",
+   "purpose": "in-session pytest import proof + collected counts",
+   "command": "pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -p no:cacheprovider -p pathcheck_plugin --collect-only",
+   "exit": 0,
+   "result": "76 collected (40 + 36); PATHCHECK lines show both modules under <workspace>/src"
+  },
+  {
+   "id": "T3",
+   "purpose": "new offline suite",
+   "command": "pytest tests/integration/test_official_discovery_offline.py -q -p no:cacheprovider --basetemp=tmp/review2-pytest-a",
+   "exit": 0,
+   "result": "40 passed in 6.65 s"
+  },
+  {
+   "id": "T4",
+   "purpose": "existing official source flow suite",
+   "command": "pytest tests/integration/test_official_source_flow.py -q -p no:cacheprovider --basetemp=tmp/review2-pytest-b",
+   "exit": 0,
+   "result": "36 passed in 35.69 s"
+  },
+  {
+   "id": "T5",
+   "purpose": "exact delivered selection",
+   "command": "pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -k 'discovery or official_index_http or cn_fundraising or TestMaterial or TestNonMaterial or TestTimeWindow or TestUrlAndDedup or TestPagePayload or TestLimits or TestPublicCli' -p no:cacheprovider",
+   "exit": 0,
+   "result": "47 passed, 29 deselected in 11.58 s (delivered 47/0/0, 29 deselected, 11.66 s)"
+  },
+  {
+   "id": "T6",
+   "purpose": "61-case differential probe, current vs base 0d7ada21",
+   "command": "python -X utf8 -B tmp/review2/probe.py",
+   "exit": 0,
+   "result": "61 cases; no current-module errors; no_documents_claimed=false everywhere; receipt.event_sha256 recomputes in all cases; output delivery/w11/review/evidence/review-2-probe-output.json"
+  },
+  {
+   "id": "T7",
+   "purpose": "public CLI probe (15 cases)",
+   "command": "python -X utf8 -B tmp/review2/cli_probe.py",
+   "exit": 0,
+   "result": "malformed rows/fields exit 2 JSON with no traceback; file over cap -> exactly one byte_limit_reached; exact cap -> candidate; output delivery/w11/review/evidence/review-2-cli-probe-output.json"
+  },
+  {
+   "id": "T8",
+   "purpose": "re-run retained RED probe",
+   "command": "TEMP=<workspace>/tmp/review2/tmpdir python -X utf8 -B delivery/w11/probes/red_probe.py",
+   "exit": 0,
+   "result": "base blob 7d8fb129...; delivered (UTF-16) and rerun outputs semantically identical; D1/D2/D3 reproduce"
+  },
+  {
+   "id": "T9",
+   "purpose": "independent full SHA-256 walk of sealed roots",
+   "command": "python walk+rglob+sha256 over the audit run and holdout roots",
+   "exit": 0,
+   "result": "audit 2052 files / 166,731,220 B; holdout 65 / 17,360,200 B; exact-486789 hits 0; body-SHA hits 0; 400-600KB band 84 + 5 = 89; capture dir 250/250/0/2839 B with the card's SHAs"
+  },
+  {
+   "id": "T10",
+   "purpose": "delivery JSON validity",
+   "command": "json.load every delivery/w11/**/*.json",
+   "exit": 0,
+   "result": "6/6 delivery JSON + independent-review-1.json OK"
+  },
+  {
+   "id": "T11",
+   "purpose": "verify all 11 INPUTS.json W11 entries",
+   "command": "python read+sha256 of the 11 W11-CWP-SOURCES paths",
+   "exit": 0,
+   "result": "11/11 byte count and SHA-256 match"
+  },
+  {
+   "id": "T12",
+   "purpose": "lint",
+   "command": "python -m ruff check src/.../official_discovery.py src/.../official_source_cli.py tests/.../test_official_discovery_offline.py tests/.../test_official_source_flow.py",
+   "exit": 0,
+   "result": "All checks passed!"
+  },
+  {
+   "id": "T13",
+   "purpose": "EOF/BOM/trailing whitespace check",
+   "command": "python read_bytes checks",
+   "exit": 0,
+   "result": "offline test file has NO final newline (IR-12 residual); other changed text files clean"
+  },
+  {
+   "id": "T14",
+   "purpose": "derived sealed fixture via public CLI pages branch",
+   "command": "python -X utf8 -B -m company_wiki.source_catalog.official_source_cli --operation discover --request <derived-sealed-request.json>",
+   "exit": 0,
+   "result": "candidates=[]; coverage=partial; no_documents_claimed=false; limitations=[dynamic_content_unresolved, unclassified_document_links]; base module yields exactly the 3 sealed privacy/terms candidates"
+  },
+  {
+   "id": "T15",
+   "purpose": "anchors scale/limit probe, current vs base",
+   "command": "python -X utf8 -B tmp/review2/scale_base.py",
+   "exit": 0,
+   "result": "1k: 0.10 s vs 0.02 s; 5k: 0.99 s vs 0.09 s; 10k: 4.79 s vs 0.65 s (max_items=30)"
+  },
+  {
+   "id": "T16",
+   "purpose": "bind the findings to the committed a6d12a53 bytes after the concurrent worktree edit",
+   "command": "python -X utf8 -B tmp/review2b/head_probe.py (loads git show a6d12a53:src/company_wiki/source_catalog/official_discovery.py)",
+   "exit": 0,
+   "result": "committed blob 18,436 B / a008e1cb...; IR-01 table/CN/deck positives, IR-02 budget, IR-03 legal/material, IR-04 page/item time, IR-05 fragment/query, IR-08 empty/hash, NR-01 nav (CN+EN, max_items=1 and 30), NR-02 single-link page time, NR-04 legal hybrid and the sealed-derived fixture all reproduce; review/evidence/review-2-head-bytes-probes.json"
+  }
+ ],
+ "prior_findings_verification": [
+  {
+   "id": "IR-01",
+   "status": "PASS",
+   "evidence": "Table row '2027 Interim Results' + Download -> 1 candidate titled '2027 Interim Results'; aria-label icon and img alt -> candidates; FY2025 Annual Results / Interim Results 2026 / Q1 2027 Financial Results -> 3 candidates; 2026年第三季度电话会纪要 -> investor_call_transcript; Corporate Deck 2026 -> candidate; a dropped document-suffix link (legal/nav-vetoed PDF) adds unclassified_document_links + partial instead of a clean index."
+  },
+  {
+   "id": "IR-02",
+   "status": "PASS",
+   "evidence": "Media/Press Briefing -> 0; Upcoming Events/Careers Fair -> 0; max_items=1 with Upcoming Investor Conference before Annual Report 2025 -> only the report emitted; lone Notice of Upcoming Investor Conference -> index_notice, is_business_original=false; 3 materials + 2 notices at max_items=2 -> 2 materials, item_limit_reached exactly once."
+  },
+  {
+   "id": "IR-03",
+   "status": "PASS",
+   "evidence": "Legal Information - Investor Day 2026 and Accessibility - Annual Report Archive -> 0 candidates; Annual Report 2025 - Contact Information -> candidate; Investor Presentation - Privacy Update -> candidate. Residual over-veto recorded as NR-04."
+  },
+  {
+   "id": "IR-04",
+   "status": "PASS",
+   "evidence": "Page-level time with 2 materials -> both candidates, dates None, excluded []; item-scoped time -> 2026-09-15; sibling li does not borrow; data-date wins; tr with 2 links does not borrow. Residual single-link page-level case recorded as NR-02."
+  },
+  {
+   "id": "IR-05",
+   "status": "PASS",
+   "evidence": "plain/query/fragment-x2 -> exactly 2 candidates (plain + query); base 4; fragments deduped, query distinct."
+  },
+  {
+   "id": "IR-06",
+   "status": "PASS",
+   "evidence": "CLI missing capture_id/url/mime/empty capture/non-dict row/missing or blank entity/missing or typed start_date -> exit 2 JSON official-source-failure/1 with no traceback/KeyError; single file over cap -> exactly one byte_limit_reached; exact cap -> candidate and no limit."
+  },
+  {
+   "id": "IR-07",
+   "status": "PASS",
+   "evidence": "/ok.pdf + http://[ -> valid candidate kept + invalid_anchor_url; base raises ValueError; malformed-only page -> 0 candidates + limitation + partial."
+  },
+  {
+   "id": "IR-08",
+   "status": "PASS",
+   "evidence": "href='', href='#', absolute self URL -> only real.pdf candidate; '#page2' fragment-only skipped. Query-only variant recorded as NR-07."
+  },
+  {
+   "id": "IR-09",
+   "status": "PASS",
+   "evidence": "All delivery JSON parses; independent walk reproduces 2052/166,731,220 and 65/17,360,200 exactly; 0 exact-486789 and 0 body-SHA hits; 84+5 band; capture dir 250/250/0/2839 with card SHAs; body_available=false honest. Info nits in NR-09."
+  },
+  {
+   "id": "IR-10",
+   "status": "PASS",
+   "evidence": "red_probe.py rerun exit 0, base blob 7d8fb129..., output semantically identical to delivered (decoded UTF-16); D1/D2/D3 reproduce; delivered output retained under delivery/w11/probes/."
+  },
+  {
+   "id": "IR-11",
+   "status": "PASS",
+   "evidence": "Date tests renamed/split; socket comment accurate; unused SEALED_RESULT_SHA256/DERIVED_FIXTURE_NOTE constants removed. Minor docstring/tautological-assertion nits in NR-09."
+  },
+  {
+   "id": "IR-12",
+   "status": "FAIL",
+   "evidence": "Transcript tokens simplified to ('transcript','电话会','纪要'), ' Cookie' removed, comment corrected, BUT tests/integration/test_official_discovery_offline.py still has no final newline (last bytes '...not in call.stderr'); '半年报' is now redundant under '年报'. Cosmetic only."
+  },
+  {
+   "id": "IR-13",
+   "status": "PASS",
+   "evidence": "push-gate-rerun.log gone; delivery files tracked normally (git ls-files -v H, not skip-worktree) and present; worktree clean at start/end; cleanup.json records sparse restoration; companies/, .source_catalog/, catalog/ absent; config hashes match."
+  }
+ ],
+ "new_findings": [
+  {
+   "id": "NR-01",
+   "severity": "Medium",
+   "title": "Navigation/section links are emitted as material candidates and can consume the item budget ahead of real documents",
+   "evidence": "CN nav <nav>公告</a><a>业绩</a></nav> -> 2 candidates (base 0). max_items=1 with nav '公告' before '2025年年度报告' -> only nav emitted + item_limit_reached, real report lost; base emitted the report. Default max_items=30 with 'Annual Reports' nav + 30 report PDFs -> nav + 29 reports, item_limit_reached; base 30 reports. header Results/Annual Reports and footer Reports also admitted; Results/News Releases are new vs base. Nav candidates inject publication_date_unknown/partial even when every real document is dated.",
+   "required_fix": "Do not treat nav/header/footer section anchors (generic section labels, no document suffix) as candidate material; skip or demote to deferred index_notice. At minimum rank document-suffix links ahead of non-suffix material links within max_items. Add EN + CN regression tests with a nav link before a real report at max_items=1 and at the default bound."
+  },
+  {
+   "id": "NR-02",
+   "severity": "Low",
+   "title": "Single-link page-level <time> is still adopted as a material date and can exclude the only material",
+   "evidence": "<div class=content><time datetime=2026-10-22>Last updated</time><a href=/ar.pdf>Annual Report 2025</a></div> -> candidates [], excluded [{ar.pdf,2026-10-22,after_as_of}], no limitations, checked_index_only; base identical. The div fallback in _item_container treats a one-link page container as an item; the new test only covers a two-link div.",
+   "required_fix": "Drop the generic div fallback (article/li/tr only) or accept a div time only for item-like divs; or record as a known bounded limitation and narrow the page-level-time claim."
+  },
+  {
+   "id": "NR-03",
+   "severity": "Low",
+   "title": "unclassified_document_links is emitted for deliberate legal/navigation vetoes, producing false partial coverage",
+   "evidence": "Privacy Statement PDF -> limitations [unclassified_document_links], partial; Annual Report + privacy PDF -> 1 candidate + same limitation; sealed-derived fixture -> limitations [dynamic_content_unresolved, unclassified_document_links]. By construction any doc-suffix link without a legal/page/nav token is admitted, so this limitation only fires for intentional legal/nav exclusions; ordinary IR pages with a privacy PDF become partial for a non-coverage reason.",
+   "required_fix": "Separate an intentional legal/nav exclusion (excluded_legal_document_links or no limitation) from a genuinely unclassified document link; keep 'no silent clean index' for the latter."
+  },
+  {
+   "id": "NR-04",
+   "severity": "Low",
+   "title": "Legal page-section veto still over-vetoes titles with a strong material clue",
+   "evidence": "'Annual Report 2025 - Legal Entity Changes' (/ar.pdf) -> 0 candidates + unclassified_document_links; base 1 candidate. '2026 Annual Report - Accessibility Statement' -> 0. _LEGAL_PAGE_TITLE_TOKENS runs before the material-clue path, contrary to IR-03's 'do not let a single secondary token veto a strong material title' requirement; the delivery says 'correctly excludes' without the bounded-heuristic caveat.",
+   "required_fix": "Use structural legal/nav signals for page-section vetoes or let a strong material clue win when the URL is a document; otherwise record as a bounded heuristic in the delivery."
+  },
+  {
+   "id": "NR-05",
+   "severity": "Low",
+   "title": "Item-title recovery can promote a 300-character prose blob to the title",
+   "evidence": "article with prose 'Read our latest annual report and proxy statement...' + <a href=...abc123.pdf>Download</a> -> candidate title 'Welcome to our investor centre Read our latest annual report and proxy statement' (up to 300 chars). Candidate was already admitted by suffix in base (title Download), so admission is not new, but the title/classifier input is distorted.",
+   "required_fix": "Prefer a heading/cell label or cap the recovered title (e.g. 120 chars) and require item-like block text; add a regression test."
+  },
+  {
+   "id": "NR-06",
+   "severity": "Low",
+   "title": "Multi-link table rows without a document suffix still lose the document silently",
+   "evidence": "<tr><td>2026 Annual Report</td><td><a href=/download?id=42>Download</a><a href=/viewer?id=42>View</a></td></tr> -> 0 candidates, 0 limitations, checked_index_only. _item_container requires exactly one anchor, so the row title is not recovered; base also 0 (pre-existing), but this is a silent clean index for a row that names an annual report.",
+   "required_fix": "Allow container title recovery when all anchors in the item resolve to the same resource, or use the row text for generic action labels (download/view/open), or emit a limitation when such an anchor is dropped."
+  },
+  {
+   "id": "NR-07",
+   "severity": "Low",
+   "title": "Query-only self/pagination links are not recognized as self-references",
+   "evidence": "<a href='?page=2'>Annual Report 2025 page two</a> -> candidate https://ir.example/ir?page=2; base 0. The self check compares the query-bearing dedupe key with the page key.",
+   "required_fix": "Treat same scheme/netloc/path as the index document as self (or skip pagination query params); add a test."
+  },
+  {
+   "id": "NR-08",
+   "severity": "Low",
+   "title": "Malformed page URL yields a clean empty result instead of a refusal/limitation",
+   "evidence": "page url 'not-a-url' or 'https://' -> 0 candidates, no limitations, checked_index_only, exit 0; relative anchors silently skipped. CLI validates page-row keys but not URL shape; base identical (pre-existing).",
+   "required_fix": "Validate page url as absolute http(s) with hostname and refuse with exit 2, or emit invalid_index_url."
+  },
+  {
+   "id": "NR-09",
+   "severity": "Info",
+   "title": "Delivery/metadata hygiene nits",
+   "evidence": "Offline test file still lacks final newline (IR-12); red-probe-output.txt and test-run-stdout.txt (and prior evidence logs) are UTF-16LE with BOM and git-binary; evidence_inventory attributes the combined 89-file 400-600KB band to the audit scope (actual 84 + 5) and prepared_at 23:20Z postdates the 21:53Z commit; cleanup.json lists a handoff file that does not exist yet; test docstring says 'two privacy/terms titles' while three sealed titles/four anchors are used; coverage assertion in test_legal_navigation_pdfs_are_not_candidates is tautological; empty cw-pytest-basetemp parent dir remains.",
+   "required_fix": "Add the newline, prefer UTF-8 logs, correct the inventory scope/prepared_at and handoff note, tighten the test comments/assertion."
+  },
+  {
+   "id": "NR-10",
+   "severity": "Low",
+   "title": "Deferred item truncation removes max_items as a work bound; per-candidate whole-page SHA-256 makes large indexes O(items x page_bytes)",
+   "evidence": "max_items=30, N material anchors: N=1000 0.10s vs base 0.02s; N=5000 0.99s vs 0.09s; N=10000 4.79s vs 0.65s. Profile: 10,001 sha256 calls / 0.62s for 5000 anchors (index_source_sha256 = sha256(original) per pending record); base stops after 30 candidates. A byte-capped 8 MiB page with many anchor rows can spend minutes and hold a large pending list while returning only 30 items.",
+   "required_fix": "Cache the page hash once per page and cap pending collection (max_items + bounded notice allowance, recording item_limit_reached)."
+  }
+ ],
+ "positives_verified": [
+  "All 13 prior findings addressed in substance except IR-12's final newline; the two observed classification defects are fixed and covered by regression tests; my differential probes reproduce the RED and corrected behaviour.",
+  "Sealed-evidence story honest: faa5bf stdout 2839 B / 1c33f18b...; 11/11 INPUTS entries match; independent walk 2052/166,731,220 and 65/17,360,200; 0 exact-size/body-SHA hits; body_available=false; derived fixture is not a replay and yields 0 candidates/partial/no_documents_claimed=false through the public CLI.",
+  "Notice budget semantics work: notices require notice+business-event clues, are emitted after materials, never displace a real document under max_items, and item_limit_reached is emitted once and only when something was deferred.",
+  "Limit mechanics sound: malformed href isolated; fragment-insensitive dedupe with distinct queries; empty/#/self anchors skipped; byte-limit truncation partial with one byte_limit_reached; exact cap does not emit a false limit; unsupported MIME limitation does not stop later HTML; no_documents_claimed always false.",
+  "Receipt integrity and schema stability: receipt.event_sha256 recomputes in all 61 probe cases; candidate/result/receipt key sets identical to 0d7ada21; no company/domain/year branch; pure parse + thin CLI; input bounds still enforced.",
+  "Test/evidence counts truthful: 40 new + 36 existing = 76 collected; delivered selection 47 passed / 29 deselected; JUnit 47 cases no failures; log and JUnit SHAs match test_results.json; ruff passes.",
+  "No production writes: companies/, .source_catalog/, catalog/ absent; config hashes match; worktree clean at review start, with the only mid-review product change being the concurrent uncommitted edit (not reviewer-owned, excluded); push-gate log gone; delivery files tracked normally.",
+  "RED probe reproducible from git 0d7ada21 (base blob 7d8fb129...)."
+ ],
+ "external_limits": [
+  "The real 486,789 B IR body remains unavailable; no replay claim. The derived sealed fixture is not an original replay.",
+  "No live HTTP; fetch_official_indexes real transport/redirect/budget only covered by the existing MockTransport test.",
+  "Nav/legal/section classification is a bounded heuristic; EN/CN examples are synthetic and the sealed page body is unavailable for inspection.",
+  "Did not run the full-repo suite (per card; ROOT owns that); re-ran the prior-review probes needed for the 13 findings plus a 61-case differential set.",
+  "NR-10 wall-clock impact is measured on synthetic pages only.",
+  "Concurrent uncommitted product/test edits: official_discovery.py was modified by another process at ~23:08 (21,748 B / bdfd5d14... then 22,790 B / 855e57de...) and test_official_discovery_offline.py at ~23:09 (29,884 B / dd555b43...), with untracked dirs; outside a6d12a53, not reviewed or approved here; if intended as the next fix it must be committed as a new SHA and re-reviewed."
+ ],
+ "conclusion": "CHANGES_REQUIRED",
+ "blocking_items": [
+  "NR-01"
+ ],
+ "required_fixes_before_handoff": [
+  "NR-01 (Medium, blocking): do not emit nav/header/footer section links as candidate material or let them consume max_items ahead of document links; handle EN+CN labels and add the max_items=1/default-bound regression tests; re-run the 40+7 matrix and return for re-review of the new SHA.",
+  "IR-12 residual (Low, trivial): add the missing final newline to tests/integration/test_official_discovery_offline.py; remove the now-redundant 半年报 token while touching the list.",
+  "Delivery narrative honesty (Low): narrow root_followup.md line 10 and the findings-table '已修' wording for the bounded heuristics in NR-02 (single-link page-level time), NR-04 (legal over-veto) and NR-03 (unclassified_document_links false-partial); fix them or record them as known limitations for ROOT.",
+  "Recommended non-blocking: NR-05 title cap, NR-06 multi-link row recovery, NR-07 query-only self, NR-08 page URL validation, NR-09 delivery hygiene, NR-10 page-hash cache + pending cap."
+ ],
+ "worktree_status": "clean at review start; concurrent uncommitted edits to src/company_wiki/source_catalog/official_discovery.py (22,790 B / 855e57de...) and tests/integration/test_official_discovery_offline.py (29,884 B / dd555b43...) appeared at ~23:08-23:10, plus untracked dirs; none are reviewer-owned and all are excluded from this review",
+ "concurrent_edit": {
+  "path": "src/company_wiki/source_catalog/official_discovery.py",
+  "observed_uncommitted_revisions": [
+   {
+    "bytes": 21748,
+    "sha256": "bdfd5d146ddf0245c7fa09e803c345fe9d33138db3ec013fbd80d8cba36e4a3a"
+   },
+   {
+    "bytes": 22790,
+    "sha256": "855e57dec9c0f6971fdb7f8d10216086d981e2f9fa9f46ec78bc0e8c1d1ad279",
+    "mtime": "2026-10-23 23:08:49.702"
+   },
+   {
+    "path": "tests/integration/test_official_discovery_offline.py",
+    "bytes": 29884,
+    "sha256": "dd555b435952c152c0117abc7377eeb289117c95776c42a830488d0450e30148",
+    "mtime": "2026-10-23 23:09:30.618",
+    "note": "in-progress revision; still ended without a final newline when sampled"
+   }
+  ],
+  "committed_head": "a6d12a537bcacdf3d03d0045caa2ef2ddabafb87",
+  "committed_head_blob": {
+   "bytes": 18436,
+   "sha256_lf": "a008e1cb5a9fc5140c1dd3b7470e107abc2611cc397d279e7a97b2ad46b2a079"
+  },
+  "reviewer_action": "did not modify/revert it; re-ran the decisive cases from the committed a6d12a53 bytes (T16, evidence/review-2-head-bytes-probes.json)",
+  "note": "The uncommitted edit appears to touch the same areas as NR-01/NR-02/NR-04/NR-05, but it is outside a6d12a53 and was not reviewed.",
+  "untracked_dirs_from_concurrent_activity": [
+   "cwpaW03-p122fzr2/",
+   "pytest-of-郑曾波/",
+   "tmp49oqmktc",
+   "tmp9st97nlj"
+  ],
+  "delivery_artifacts_overwritten": [
+   {
+    "path": "delivery/w11/test-results.xml",
+    "bytes": 9377,
+    "sha256": "88b883e82ec041c3dddbc05b473c81e111e194b5a9105d36b3af7ece4e9b0446",
+    "mtime": "2026-10-23 23:10:58"
+   },
+   {
+    "path": "delivery/w11/test-run-stdout.txt",
+    "bytes": 1125,
+    "sha256": "00bfa74658684b13ad47ae00aa109bc3bb9440a418d657aab7ee856e1c099a67",
+    "mtime": "2026-10-23 23:10:59"
+   },
+   {
+    "path": "delivery/w11/probes/red-probe-output.txt",
+    "bytes": 2931,
+    "sha256": "54dd99e10d7f95492f7a25b25296d811456c513b52d98366cbe92f5195542ce1",
+    "mtime": "2026-10-23 23:11:03"
+   }
+  ],
+  "a6d12a53_delivery_blobs": {
+   "delivery/w11/test-results.xml": "c8d98ffdf66a1dcef78039dc1fd1147742c2a04fd352c336c32aecb580be8d6c",
+   "delivery/w11/test-run-stdout.txt": "c6d9d487cc7faa922b28e7bf8a919e9ea6e3e2fe0df4bce2a78c7a89ab8c768d",
+   "delivery/w11/probes/red-probe-output.txt": "be0cc1616756b38fb1bbea9179c2ad2a6921331abe1d01e95d40cab7ca857088"
+  },
+  "recovery": "git show a6d12a53:<path>"
+ }
+}

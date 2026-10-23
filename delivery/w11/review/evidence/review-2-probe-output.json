@@ -1,0 +1,5081 @@
+{
+ "module": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\src\\company_wiki\\source_catalog\\official_discovery.py",
+ "base_module": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\tmp\\review2\\base_discovery.py",
+ "cases": {
+  "ir01-table-download": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/ir2027.pdf",
+      "title": "2027 Interim Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/ir2027.pdf",
+      "title": "Download",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-aria-icon": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/assets/deck-q3.pdf",
+      "title": "Q3 2026 Corporate Deck",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/assets/deck-q3.pdf",
+      "title": "",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-img-alt": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/assets/board-deck.pdf",
+      "title": "Board Deck 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/assets/board-deck.pdf",
+      "title": "",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-results-variants": {
+   "current": {
+    "n": 3,
+    "candidates": [
+     {
+      "url": "https://ir.example/a1.pdf",
+      "title": "FY2025 Annual Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/a2.pdf",
+      "title": "Interim Results 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/a3.pdf",
+      "title": "Q1 2027 Financial Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 3,
+    "candidates": [
+     {
+      "url": "https://ir.example/a1.pdf",
+      "title": "FY2025 Annual Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/a2.pdf",
+      "title": "Interim Results 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/a3.pdf",
+      "title": "Q1 2027 Financial Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-cn-call": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/cn/2026q3-call.pdf",
+      "title": "2026年第三季度电话会纪要",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/cn/2026q3-call.pdf",
+      "title": "2026年第三季度电话会纪要",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-corporate-deck": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/deck/corporate-2026.pdf",
+      "title": "Corporate Deck 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/deck/corporate-2026.pdf",
+      "title": "Corporate Deck 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-dropped-pdf": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/board-pack-v2.pdf",
+      "title": "Board pack (internal)",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/board-pack-v2.pdf",
+      "title": "Board pack (internal)",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-privacy-pdf": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "unclassified_document_links"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/privacy.pdf",
+      "title": "Privacy Statement",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir01-material-plus-privacy": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/ar2025.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "unclassified_document_links",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/ar2025.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/privacy.pdf",
+      "title": "Privacy Statement",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir02-briefings": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "ir02-upcoming": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "ir02-budget-crowd": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/ar2025.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/events/conf",
+      "title": "Upcoming Investor Conference",
+      "kind": "investor_relations",
+      "disp": "index_notice",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir02-notice-alone": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/events/conf.pdf",
+      "title": "Notice of Upcoming Investor Conference",
+      "kind": "investor_relations",
+      "disp": "index_notice",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/events/conf.pdf",
+      "title": "Notice of Upcoming Investor Conference",
+      "kind": "investor_relations",
+      "disp": "index_notice",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir02-notice-after-materials": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/b.pdf",
+      "title": "Interim Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/b.pdf",
+      "title": "Interim Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir02-notice-order": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/e1",
+      "title": "Upcoming Investor Conference",
+      "kind": "investor_relations",
+      "disp": "index_notice",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/e1",
+      "title": "Upcoming Investor Conference",
+      "kind": "investor_relations",
+      "disp": "index_notice",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir03-legal-pages": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/legal",
+      "title": "Legal Information - Investor Day 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir03-material-contact": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025 - Contact Information",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025 - Contact Information",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir03-material-privacy": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/p.pdf",
+      "title": "Investor Presentation - Privacy Update",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/p.pdf",
+      "title": "Investor Presentation - Privacy Update",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir03-legal-material-hybrid": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "unclassified_document_links"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025 - Legal Entity Changes",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir03-nav-contact-pdf": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "unclassified_document_links"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/contact.pdf",
+      "title": "Contact Information",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir04-page-time-two": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/ir.pdf",
+      "title": "Interim Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/ar.pdf",
+      "published_date": "2026-10-22",
+      "reason": "after_as_of"
+     },
+     {
+      "source_url": "https://ir.example/ir.pdf",
+      "published_date": "2026-10-22",
+      "reason": "after_as_of"
+     }
+    ],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "ir04-page-time-one": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/ar.pdf",
+      "published_date": "2026-10-22",
+      "reason": "after_as_of"
+     }
+    ],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/ar.pdf",
+      "published_date": "2026-10-22",
+      "reason": "after_as_of"
+     }
+    ],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "ir04-item-time": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/deck.pdf",
+      "title": "Investor presentation",
+      "kind": "investor_relations",
+      "disp": "candidate",
+      "date": "2026-09-15"
+     }
+    ],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/deck.pdf",
+      "title": "Investor presentation",
+      "kind": "investor_relations",
+      "disp": "candidate",
+      "date": "2026-09-15"
+     }
+    ],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir04-sibling-li": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/b.pdf",
+      "title": "Interim Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/a.pdf",
+      "published_date": "2021-08-15",
+      "reason": "before_window"
+     }
+    ],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/b.pdf",
+      "title": "Interim Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/a.pdf",
+      "published_date": "2021-08-15",
+      "reason": "before_window"
+     }
+    ],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir04-tr-multi-link": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/a.pdf?fmt=page",
+      "title": "View",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "candidate",
+      "date": "2026-09-01"
+     },
+     {
+      "url": "https://ir.example/a.pdf?fmt=page",
+      "title": "View",
+      "kind": "investor_relations",
+      "disp": "candidate",
+      "date": "2026-09-01"
+     }
+    ],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir04-data-date": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "candidate",
+      "date": "2026-09-01"
+     }
+    ],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "candidate",
+      "date": "2026-09-01"
+     }
+    ],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir05-fragment-query": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/doc.pdf",
+      "title": "Earnings call transcript plain",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/doc.pdf?dl=1",
+      "title": "Earnings call transcript query",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 4,
+    "candidates": [
+     {
+      "url": "https://ir.example/doc.pdf",
+      "title": "Earnings call transcript plain",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/doc.pdf?dl=1",
+      "title": "Earnings call transcript query",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/doc.pdf#p2",
+      "title": "Earnings call transcript fragment two",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/doc.pdf#p3",
+      "title": "Earnings call transcript fragment three",
+      "kind": "investor_call_transcript",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir08-empty-hash-self": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/real.pdf",
+      "title": "Annual Report 2025 real",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/real.pdf",
+      "title": "Annual Report 2025 real",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "ir08-query-self": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ir?page=2",
+      "title": "Annual Report 2025 page two",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "ir07-malformed": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ok.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "invalid_anchor_url",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "error": "ValueError",
+    "detail": "Invalid IPv6 URL"
+   }
+  },
+  "ir07-malformed-only": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "invalid_anchor_url"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "error": "ValueError",
+    "detail": "Invalid IPv6 URL"
+   }
+  },
+  "reg-nav-reports-budget": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/investors/reports",
+      "title": "Annual Reports",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/ar2025.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-nav-results": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/results",
+      "title": "Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-nav-presentations": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/presentations",
+      "title": "Presentations",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/presentations",
+      "title": "Presentations",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-nav-news": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/news",
+      "title": "News Releases",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-title-overreach": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/wp-content/uploads/abc123.pdf",
+      "title": "Welcome to our investor centre Read our latest annual report and proxy statement for details about the meeting, voting and the board of directors.",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/wp-content/uploads/abc123.pdf",
+      "title": "Download",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-row-two-links": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Download",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/a.pdf",
+      "title": "Download",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-view-then-material": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/x.pdf",
+      "title": "View",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/x.pdf",
+      "title": "View",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-seen-before-date": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/x.pdf",
+      "published_date": "2026-10-22",
+      "reason": "after_as_of"
+     }
+    ],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [
+     {
+      "source_url": "https://ir.example/x.pdf",
+      "published_date": "2026-10-22",
+      "reason": "after_as_of"
+     }
+    ],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-cn-table": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/cn/semi.pdf",
+      "title": "2026年半年度报告",
+      "kind": "semi_annual_report",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/cn/semi.pdf",
+      "title": "下载",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-legal-doc-pdf": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "unclassified_document_links"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/legal-notice.pdf",
+      "title": "Legal Notice",
+      "kind": "investor_relations",
+      "disp": "index_notice",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-mime-then-html": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/deck.pdf",
+      "title": "Investor Presentation",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "unsupported_index_format",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/deck.pdf",
+      "title": "Investor Presentation",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "unsupported_index_format",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-byte-limit-two": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "byte_limit_reached"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "byte_limit_reached"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-zero-pages": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-max-items-exact": {
+   "current": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-max-items-31": {
+   "current": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-30-materials-1-notice": {
+   "current": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-nav-plus-30-materials": {
+   "current": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/investors/reports",
+      "title": "Annual Reports",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 30,
+    "candidates": [
+     {
+      "url": "https://ir.example/f0.pdf",
+      "title": "Annual Report 2000",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f1.pdf",
+      "title": "Annual Report 2001",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f2.pdf",
+      "title": "Annual Report 2002",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f3.pdf",
+      "title": "Annual Report 2003",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f4.pdf",
+      "title": "Annual Report 2004",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f5.pdf",
+      "title": "Annual Report 2005",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f6.pdf",
+      "title": "Annual Report 2006",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f7.pdf",
+      "title": "Annual Report 2007",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f8.pdf",
+      "title": "Annual Report 2008",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f9.pdf",
+      "title": "Annual Report 2009",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f10.pdf",
+      "title": "Annual Report 2010",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f11.pdf",
+      "title": "Annual Report 2011",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f12.pdf",
+      "title": "Annual Report 2012",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f13.pdf",
+      "title": "Annual Report 2013",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f14.pdf",
+      "title": "Annual Report 2014",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f15.pdf",
+      "title": "Annual Report 2015",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f16.pdf",
+      "title": "Annual Report 2016",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f17.pdf",
+      "title": "Annual Report 2017",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f18.pdf",
+      "title": "Annual Report 2018",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f19.pdf",
+      "title": "Annual Report 2019",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f20.pdf",
+      "title": "Annual Report 2020",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f21.pdf",
+      "title": "Annual Report 2021",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f22.pdf",
+      "title": "Annual Report 2022",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f23.pdf",
+      "title": "Annual Report 2023",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f24.pdf",
+      "title": "Annual Report 2024",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f25.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f26.pdf",
+      "title": "Annual Report 2026",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f27.pdf",
+      "title": "Annual Report 2027",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f28.pdf",
+      "title": "Annual Report 2028",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/f29.pdf",
+      "title": "Annual Report 2029",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-nav-cn": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/investors/announcement",
+      "title": "公告",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/investors/results",
+      "title": "业绩",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-nav-cn-budget": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/investors/announcement",
+      "title": "公告",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/files/2025-report.pdf",
+      "title": "2025年年度报告",
+      "kind": "annual_report",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-nav-structural-en": {
+   "current": {
+    "n": 2,
+    "candidates": [
+     {
+      "url": "https://ir.example/investors/results",
+      "title": "Results",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://ir.example/investors/reports",
+      "title": "Annual Reports",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-footer-reports": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/reports",
+      "title": "Reports",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "derived-sealed-legal-titles": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "dynamic_content_unresolved",
+     "unclassified_document_links"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 3,
+    "candidates": [
+     {
+      "url": "https://officialsite-static.wuxiapptec.com/upload/CN_20250912_315745c95e.pdf",
+      "title": "隐私声明",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://officialsite-static.wuxiapptec.com/upload/terms_of_use_zh_3199a05fec.pdf",
+      "title": "使用条款",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     },
+     {
+      "url": "https://officialsite-static.wuxiapptec.com/upload/Wu_Xi_App_Tec_Privacy_Policy_CN_2023_67982492ef.pdf",
+      "title": "|  隐私声明",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "dynamic_content_unresolved",
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-page-url-invalid": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-row-two-links-nosuffix": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-legal-hybrid-accessibility": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [
+     "unclassified_document_links"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "2026 Annual Report - Accessibility Statement",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-pagination-next": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-bad-port": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "http://example.com:bad/x.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "http://example.com:bad/x.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  },
+  "reg-fragment-only": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-empty-page": {
+   "current": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   },
+   "base": {
+    "n": 0,
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "coverage": "checked_index_only",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": null
+   }
+  },
+  "reg-legal-nav-plus-material": {
+   "current": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   },
+   "base": {
+    "n": 1,
+    "candidates": [
+     {
+      "url": "https://ir.example/ar.pdf",
+      "title": "Annual Report 2025",
+      "kind": "investor_relations",
+      "disp": "date_unknown",
+      "date": null
+     }
+    ],
+    "excluded": [],
+    "limitations": [
+     "publication_date_unknown"
+    ],
+    "coverage": "partial",
+    "no_documents_claimed": false,
+    "receipt_sha_ok": true,
+    "candidate_keys": [
+     "candidate_id",
+     "capture_id",
+     "disposition",
+     "document_kind",
+     "entity",
+     "index_source_sha256",
+     "is_business_original",
+     "materiality",
+     "metadata_only",
+     "published_date",
+     "source_url",
+     "title"
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "schema_version": "w11-independent-review-3/1",
+ "lane": "W11-CWP-SOURCES",
+ "reviewer_role": "independent re-reviewer (not the author; did not write or fix the code)",
+ "review_time": "2026-10-23 23:14-23:25 Europe/London",
+ "workspace": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery",
+ "interpreter": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe (3.14.2, Windows); pytest 9.1.1",
+ "reviewed_head": "2e1dfd041fdfb9e14a0a1b911049b077df1e06d4",
+ "reviewed_branch": "codex/r1-w11-source-recovery-20261023",
+ "parents": [
+  "a6d12a53",
+  "ecc7d622",
+  "0d7ada21"
+ ],
+ "worktree_status": "product/test content clean (CRLF checkout only); untracked delivery/w11/handoff.md and 0-byte delivery/w11/push-gate-round2.log; reviewer files untracked",
+ "reviewed_file_sha256": {
+  "src/company_wiki/source_catalog/official_discovery.py": {
+   "bytes_worktree": 22790,
+   "sha256_worktree": "855e57dec9c0f6971fdb7f8d10216086d981e2f9fa9f46ec78bc0e8c1d1ad279",
+   "bytes_head_blob": 22173,
+   "sha256_head_blob": "4eaeee5fb8317d11f610facd587218dd8db394840b0e38f72e4b7bb7b3c096cd"
+  },
+  "src/company_wiki/source_catalog/official_source_cli.py": {
+   "bytes_worktree": 13362,
+   "sha256_worktree": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+   "bytes_head_blob": 13081,
+   "sha256_head_blob": "7fb9a8031e6d98fd9788518b9fb41904179f326fba57c2bbb08fb48d1dee1adf"
+  },
+  "tests/integration/test_official_discovery_offline.py": {
+   "bytes": 29924,
+   "sha256": "8e6a558d981216ee2bd438a053f03ba48d27f53342d9950104a5f370694d8368",
+   "head_blob_same": true
+  },
+  "tests/integration/test_official_source_flow.py": {
+   "bytes_worktree": 56854,
+   "sha256_worktree": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+   "bytes_head_blob": 55444,
+   "sha256_head_blob": "ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142"
+  },
+  "delivery/w11/test_results.json": {
+   "bytes_worktree": 3120,
+   "sha256_worktree": "4a50f38251659315e77e536de7668d4f268676c1adf7fae917c295d73d9f3cdb"
+  },
+  "delivery/w11/test-results.xml": {
+   "bytes": 9377,
+   "sha256": "88b883e82ec041c3dddbc05b473c81e111e194b5a9105d36b3af7ece4e9b0446"
+  },
+  "delivery/w11/test-run-stdout.txt": {
+   "bytes_worktree": 1125,
+   "sha256_worktree": "00bfa74658684b13ad47ae00aa109bc3bb9440a418d657aab7ee856e1c099a67"
+  },
+  "delivery/w11/probes/red-probe-output.txt": {
+   "bytes_worktree": 2931,
+   "sha256_worktree": "54dd99e10d7f95492f7a25b25296d811456c513b52d98366cbe92f5195542ce1"
+  },
+  "delivery/w11/handoff.md": {
+   "bytes_worktree": 5246,
+   "sha256_worktree": "5cf07b1b57c882bb5dcd6882cdd5932a64e1b226f730270521dd1483f200653e",
+   "in_commit": false
+  }
+ },
+ "config_sha256": {
+  "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "config.yaml": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e"
+ },
+ "tests_you_ran": [
+  {
+   "id": "T1",
+   "purpose": "in-session import path proof",
+   "command": "python -X utf8 -B -c \"Path(module.__file__).is_relative_to(cwd/src) for both modules\"",
+   "exit": 0,
+   "result": "both __file__ under workspace src"
+  },
+  {
+   "id": "T2",
+   "purpose": "new offline suite",
+   "command": "pytest tests/integration/test_official_discovery_offline.py -q -p no:cacheprovider",
+   "exit": 0,
+   "result": "48 passed in 26.10 s"
+  },
+  {
+   "id": "T3",
+   "purpose": "existing official source flow suite",
+   "command": "pytest tests/integration/test_official_source_flow.py -q -p no:cacheprovider",
+   "exit": 0,
+   "result": "36 passed in 89.07 s"
+  },
+  {
+   "id": "T4",
+   "purpose": "delivered selection",
+   "command": "pytest <both files> -q -k '<delivered selection>' -p no:cacheprovider",
+   "exit": 0,
+   "result": "55 passed, 29 deselected in 27.12 s; JUnit 55 cases, 0 failures/errors; delivered 55/0/0, 10.35 s"
+  },
+  {
+   "id": "T5",
+   "purpose": "75-case differential probe from committed bytes",
+   "command": "python -X utf8 -B tmp/review3/probe.py (loads git show 2e1dfd04:...official_discovery.py; old a6d12a53 separately)",
+   "exit": 0,
+   "result": "review/evidence/review-3-probe-output.json; all non-error cases receipt_sha_ok and no_documents_claimed=false; NR-01/IR-12/NR-02..NR-10 covered; R3-01 reproduced"
+  },
+  {
+   "id": "T6",
+   "purpose": "CLI + scale + hash-count checks",
+   "command": "python -X utf8 -B tmp/review3/cli_scale.py",
+   "exit": 0,
+   "result": "invalid page URL/malformed row -> exit 2 JSON no traceback; byte cap -> one byte_limit_reached; 10k anchors 0.808 s vs a6d12a53 7.292 s; 30-anchor page 1 whole-page hash (32 calls) vs 30 (61 calls); review/evidence/review-3-cli-scale.json"
+  },
+  {
+   "id": "T7",
+   "purpose": "public CLI reproduction of exact section-label documents",
+   "command": "python -X utf8 -B tmp/review3/cli_labels.py",
+   "exit": 0,
+   "result": "CN 公告 table and EN Press Release/Announcement table -> exit 0, candidates [], checked_index_only, limitations [], no_documents_claimed=false; review/evidence/review-3-cli-section-labels.json"
+  },
+  {
+   "id": "T8",
+   "purpose": "delivery/schema/evidence checks",
+   "command": "json.load delivery JSON; JUnit parse; SHA bindings; 11 INPUTS.json W11 entries",
+   "exit": 0,
+   "result": "all delivery JSON parses (red-probe needs utf-8-sig BOM); JUnit 55/no failures; log+JUnit SHAs match test_results.json; input_source_shas match worktree; 11/11 INPUTS match"
+  },
+  {
+   "id": "T9",
+   "purpose": "lint",
+   "command": "python -m ruff check <two product + two test files>",
+   "exit": 0,
+   "result": "All checks passed!"
+  },
+  {
+   "id": "T10",
+   "purpose": "IR-12 committed-byte checks",
+   "command": "python read git show 2e1dfd04:tests/integration/test_official_discovery_offline.py",
+   "exit": 0,
+   "result": "ends with newline (29,924 B); 半年报 absent"
+  },
+  {
+   "id": "T11",
+   "purpose": "product/state checks",
+   "command": "sha256 config; path existence; git status/content diff",
+   "exit": 0,
+   "result": "config hashes unchanged; companies/.source_catalog/catalog absent; product/test content clean apart from CRLF; untracked handoff.md/push-gate log"
+  }
+ ],
+ "prior_findings_verification": [
+  {
+   "id": "NR-01",
+   "status": "PASS",
+   "evidence": "CN nav 公告/业绩 -> 0 candidates (old 2); EN header Results/Annual Reports, footer Reports, News Releases -> 0 (old 4); max_items=1 nav 公告 before 2025年年度报告 -> report emitted; max_items=30 nav + 30 real PDFs -> 30 PDFs, no nav; CN variant same. R3-01 is a side effect of the section-label rule, not a failure of the NR-01 requirement."
+  },
+  {
+   "id": "IR-12",
+   "status": "PASS",
+   "evidence": "Committed test file ends with newline (29,924 B); 半年报 removed from the strong tokens."
+  },
+  {
+   "id": "NR-02",
+   "status": "PASS",
+   "evidence": "Single material under page-level time -> 1 candidate date None, excluded []; two-material page dates None; item-scoped time -> 2026-09-15; sibling li no borrow."
+  },
+  {
+   "id": "NR-03",
+   "status": "PASS",
+   "evidence": "Dated annual report + privacy PDF -> 1 candidate, limitations [], checked_index_only; privacy/contact-only -> 0 candidates no limitations; sealed-derived -> 0 candidates, limitations [dynamic_content_unresolved], partial."
+  },
+  {
+   "id": "NR-04",
+   "status": "PASS",
+   "evidence": "Annual Report 2025 - Legal Entity Changes (/ar.pdf) -> candidate; Legal Information - Investor Day 2026 and Accessibility - Annual Report Archive -> 0."
+  },
+  {
+   "id": "NR-05",
+   "status": "PASS",
+   "evidence": "Prose container -> title length 116 (<=120); no-space container falls back to Download; worst-case truncation is 120 content + ellipsis (<=121), author test allows 121."
+  },
+  {
+   "id": "NR-06",
+   "status": "PASS",
+   "evidence": "Still not fixed by design; findings.md/root_followup.md/handoff.md record it as a bounded limit (未修)."
+  },
+  {
+   "id": "NR-07",
+   "status": "PASS",
+   "evidence": "?page=2 and absolute same-path query skipped; only /real.pdf remains (old 2)."
+  },
+  {
+   "id": "NR-08",
+   "status": "PASS",
+   "evidence": "Library ValueError('invalid_index_page_url') for not-a-url/https:///ftp/credentials; CLI exit 2 official-source-failure/1, no traceback."
+  },
+  {
+   "id": "NR-09",
+   "status": "PARTIAL",
+   "evidence": "EOF/log encoding/inventory band counts/tautological assertion fixed (logs UTF-8; inventory 84+5=89). Remaining: handoff.json absent, handoff.md untracked, 0-byte push-gate-round2.log untracked, red-probe JSON BOM (needs utf-8-sig), prepared_at postdates commit."
+  },
+  {
+   "id": "NR-10",
+   "status": "PASS",
+   "evidence": "index_source_sha256 once per page (30-anchor page: 1 whole-page hash vs 30); pending cap -> item_limit_reached; 10k anchors 0.808 s vs 7.292 s; 400-anchor page 30 candidates + item_limit."
+  },
+  {
+   "id": "round-1",
+   "status": "PASS",
+   "evidence": "IR-01 positives still work (table Download, aria-label, img alt, results variants, CN 电话会纪要, Corporate Deck); notices index_notice and not budget-consuming; malformed href/fragment/empty-self/byte-limit behaviour unchanged."
+  }
+ ],
+ "new_findings": [
+  {
+   "id": "R3-01",
+   "severity": "High",
+   "title": "Exact section-label titles pointing at document files are silently dropped",
+   "evidence": "With 2e1dfd04 bytes, each of Annual Report / Annual Reports / Press Release / News Release / Announcement / Report / Results / 公告 / 业绩 / 报告 / Financial Reports as a .pdf link -> 0 candidates, limitations [], coverage checked_index_only; a6d12a53 -> 1 each. CN announcement table (2 PDFs titled 公告) -> 0 (old 2); EN Press Release/Announcement table -> 0 (old 2); public CLI reproduces exit 0/candidates []/checked_index_only/limitations []. Dated li/article variants -> 0 (old 1). Cause: _is_material_link checks _is_section_label before the document-path branch; the section set contains these exact labels and ignores _is_document_path.",
+   "required_fix": "Apply the section-label veto only when the URL is not a document path (or move it after the document/strong-clue branches); add regression tests for exact section labels with .pdf suffixes including a CN 公告 table and an EN Press Release/Announcement table; re-run the 48/55/84 matrix and re-review the new SHA.",
+   "narrative_note": "Until R3-01 is fixed, root_followup.md's claim that the fixed discovery outputs the real business-material anchors as candidates is overbroad: exact Press Release/Announcement/公告 document files are silently dropped."
+  },
+  {
+   "id": "R3-02",
+   "severity": "Low",
+   "title": "Delivery packaging remains incomplete",
+   "evidence": "delivery/w11/handoff.json absent; handoff.md (5,246 B) untracked and not in 2e1dfd04; push-gate-round2.log 0 B untracked; red-probe-output.txt is UTF-8 with BOM so json.loads(bytes) fails without utf-8-sig; evidence_inventory.prepared_at 23:35Z postdates the 22:12Z commit. The card requires handoff.md+json in the final handoff commit.",
+   "required_fix": "Add handoff.json, commit handoff.md, remove the stray 0-byte log, write red-probe JSON without BOM (or decode utf-8-sig), and correct prepared_at."
+  },
+  {
+   "id": "R3-03",
+   "severity": "Info",
+   "title": "Bounded residuals worth recording in the known-limits section",
+   "evidence": "Header/footer strong material titles without a document suffix are dropped by design (header Annual Report 2025 -> 0, old 1); /ir/ trailing-slash self link remains a candidate; pending_limit=max_items*10+30 can drop later docs behind >330 non-doc materials (item_limit reported); title cap is 120 content + ellipsis (<=121; prose 116); Annual Report 2025 Legal Notice becomes index_notice due to the notice token.",
+   "required_fix": "Record these in the handoff known-limits section; they are bounded and do not block by themselves."
+  }
+ ],
+ "positives_verified": [
+  "NR-01 fixed: CN/EN nav/header/footer section links are not candidates; max_items=1 keeps the real report; default max_items=30 keeps 30 real PDFs ahead of a section link; document-suffix ordering works.",
+  "IR-12 fixed: test file final newline; 半年报 removed.",
+  "NR-02/03/04/05/07/08/10 fixed: single-material page-level time keeps date_unknown; legal/nav exclusion no false partial; legal-word document survives; recovered title 116; ?page=2 self skipped; invalid page URL ValueError/CLI exit 2; page hash once and pending bounded (10k 0.808 s vs 7.292 s; 1 vs 30 whole-page hashes).",
+  "No new regressions in notices/limits/schema/transaction mechanics: event notices index_notice and never consume budget; 31 materials -> 30 + one item_limit_reached; 30 materials -> no item limit; byte limit -> one byte_limit_reached + partial; malformed href -> invalid_anchor_url; fragment dedupe with distinct queries; empty/# skipped; unsupported MIME limitation does not stop later HTML; no_documents_claimed=false; candidate/result/receipt keys identical to a6d12a53; receipt.event_sha256 recomputes.",
+  "Delivery narrative records NR-06 and the legal/nav heuristic as bounded limits in root_followup.md (committed) and handoff.md (untracked); findings.md marks NR-06 '未修，如实记为 bounded limit'.",
+  "Tests/evidence truthful: 48 new + 36 existing = 84; delivered selection 55 passed/29 deselected; JUnit 55 no failures; log/JUnit SHAs match test_results.json; input_source_shas match worktree; ruff passes; all delivery JSON parses (red-probe utf-8-sig); 11/11 INPUTS match; config unchanged; production roots absent.",
+  "RED evidence still reproducible: red-probe-output.txt (UTF-8 BOM) decodes to the same D1/D2/D3 base/current story with base blob 7d8fb129..."
+ ],
+ "external_limits": [
+  "The 486,789 B IR body remains unavailable; no replay claim. The derived sealed fixture is not an original replay.",
+  "No live HTTP; real transport/redirects only via the existing MockTransport test.",
+  "Nav/legal/section classification is a bounded heuristic; R3-01's CN/EN fixtures are synthetic but realistic; the sealed page body cannot be inspected.",
+  "Did not run the full-repo suite; reviewed the W11 product/tests plus the 75-case differential probe and CLI/scale checks.",
+  "R3-03 pending-cap/header-CTA behaviour measured on synthetic pages only."
+ ],
+ "conclusion": "CHANGES_REQUIRED",
+ "blocking_items": [
+  "R3-01"
+ ],
+ "required_fixes_before_handoff": [
+  "R3-01 (High, blocking): do not apply the exact section-label veto to document-suffix URLs; a .pdf titled Press Release/Announcement/Annual Report/公告/业绩/报告/Results must remain a candidate. Add CN announcement-table and EN press-release-table tests with .pdf and re-run 48/55/84; then submit the new SHA for fresh review.",
+  "R3-02 (Low, packaging): add delivery/w11/handoff.json, commit handoff.md, remove the 0-byte push-gate-round2.log, write red-probe JSON without BOM (or decode utf-8-sig), correct prepared_at.",
+  "R3-03 (Info): record the header/footer strong-CTA behaviour, trailing-slash self link, pending cap, 120+ellipsis title cap and legal-notice disposition in the handoff known-limits."
+ ],
+ "verdict_summary": "CHANGES_REQUIRED - one new High regression (R3-01: exact section-label document files are silently dropped). All other requested checks pass: NR-01 nav/budget, IR-12, NR-02/03/04/05/07/08/10, notices, limits, receipt/schema, no_documents_claimed, pure parse/thin CLI, no production writes, and the NR-06/heuristic narrative."
+}

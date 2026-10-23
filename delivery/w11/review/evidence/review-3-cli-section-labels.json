@@ -1,0 +1,52 @@
+{
+ "reviewed_head": "2e1dfd041fdfb9e14a0a1b911049b077df1e06d4",
+ "schema": {
+  "result_keys_equal": true,
+  "receipt_keys_equal": true,
+  "candidate_keys_equal": true,
+  "candidate_keys": [
+   "candidate_id",
+   "entity",
+   "title",
+   "source_url",
+   "document_kind",
+   "published_date",
+   "disposition",
+   "capture_id",
+   "index_source_sha256",
+   "is_business_original",
+   "materiality",
+   "metadata_only"
+  ],
+  "receipt": {
+   "entity": "E",
+   "start_date": "2026-01-01",
+   "as_of_date": "2026-10-21",
+   "event_ids": [
+    "c"
+   ],
+   "response_bytes": 40,
+   "max_items": 30,
+   "max_bytes": 8388608,
+   "event_sha256": "994c8c6d5e349c74297f19689ca4206673518a43065c8eed8c2362cd903d750d"
+  }
+ },
+ "cli_exact_section_label_documents": {
+  "cn_announcement_table": {
+   "exit": 0,
+   "candidates": [],
+   "coverage": "checked_index_only",
+   "limitations": [],
+   "no_documents_claimed": false,
+   "traceback": false
+  },
+  "en_press_release_table": {
+   "exit": 0,
+   "candidates": [],
+   "coverage": "checked_index_only",
+   "limitations": [],
+   "no_documents_claimed": false,
+   "traceback": false
+  }
+ }
+}

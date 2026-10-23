@@ -1,0 +1,313 @@
+{
+ "schema_version": "r1-harness-handoff/1",
+ "package_id": "W11-CWP-SOURCES",
+ "status": "COMPLETE_WITH_EXTERNAL_LIMITS",
+ "code_base_commit": "a2f99db676846b7f475def253c541e12c49ae5fe",
+ "start_head": "0d7ada2138d41053598fcbfab5ac1e2bbd6684f5",
+ "final_head": "6b538ca2",
+ "branch": "codex/r1-w11-source-recovery-20261023",
+ "workdir": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery",
+ "changed_paths": [
+  "src/company_wiki/source_catalog/official_discovery.py",
+  "src/company_wiki/source_catalog/official_source_cli.py",
+  "tests/integration/test_official_source_flow.py",
+  "tests/integration/test_official_discovery_offline.py",
+  "docs/plans/r1-source-recovery-20261023/task_plan.md",
+  "docs/plans/r1-source-recovery-20261023/findings.md",
+  "docs/plans/r1-source-recovery-20261023/progress.md",
+  "delivery/w11/handoff.md",
+  "delivery/w11/evidence_inventory.json",
+  "delivery/w11/test_results.json",
+  "delivery/w11/cleanup.json",
+  "delivery/w11/root_followup.md",
+  "delivery/w11/test-results.xml",
+  "delivery/w11/test-run-stdout.txt",
+  "delivery/w11/test-run-full-stdout.txt",
+  "delivery/w11/probes/red_probe.py",
+  "delivery/w11/probes/red-probe-output.txt"
+ ],
+ "requirements": [
+  {
+   "id": "R-A1-evidence-freeze",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/evidence_inventory.json",
+    "locator": "items[missing-ir-body]",
+    "sha256": "ba0ad08e40ee0f2c8491066ed8893ff8aae07ea75f87756a276a06c6e875a9b3"
+   }
+  },
+  {
+   "id": "R-A1-body-availability",
+   "status": "EXTERNAL_LIMIT",
+   "evidence": {
+    "path": "delivery/w11/evidence_inventory.json",
+    "locator": "missing-ir-body.body_available=false",
+    "sha256": "ba0ad08e40ee0f2c8491066ed8893ff8aae07ea75f87756a276a06c6e875a9b3"
+   }
+  },
+  {
+   "id": "R-B1-deterministic-defects",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/probes/red-probe-output.txt",
+    "locator": "D1/D2/D3 base vs current",
+    "sha256": "e4d1fd13b517ce019cd46717110c023080d34e7ba0552a7a2debfa9926ae4855"
+   }
+  },
+  {
+   "id": "R-B2-matrix",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/test-results.xml",
+    "locator": "69 cases, 0 failures",
+    "sha256": "749f18b1d2d7c1062743d785e8c7212fa0eb26e9e89ff6b81d2be860557c5b54"
+   }
+  },
+  {
+   "id": "R-C1-cli-e2e",
+   "status": "PASS",
+   "evidence": {
+    "path": "tests/integration/test_official_discovery_offline.py",
+    "locator": "TestPublicCliEndToEnd",
+    "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069"
+   }
+  },
+  {
+   "id": "R-C2-cleanup",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/cleanup.json",
+    "locator": "final_state",
+    "sha256": "552f0769cf99ddae381c562401f77c071e63bf8345598e9e996cb1616253aba5"
+   }
+  },
+  {
+   "id": "R-C3-independent-review",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/review/independent-review-4.json",
+    "locator": "conclusion",
+    "sha256": "c679de976e9fe854b82df4dc057e62864180dcee8af7ec5049bc55e2c1a6e53d"
+   }
+  },
+  {
+   "id": "R-C5-delivery-artifacts",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/handoff.md",
+    "locator": "complete handoff narrative",
+    "sha256": "db6aed874cbc72f3b7945bed447454eaa46acf5e797b017c76d01dfa33833710"
+   }
+  },
+  {
+   "id": "R-zero-network-model-download",
+   "status": "PASS",
+   "evidence": {
+    "path": "delivery/w11/test_results.json",
+    "locator": "network_calls/model_calls=0",
+    "sha256": "835a3813f5786b865c46c61547078a8e7fc86fdb8c770beab107c326a53548d4"
+   }
+  }
+ ],
+ "artifacts": [
+  {
+   "path": "src/company_wiki/source_catalog/official_discovery.py",
+   "bytes": 22972,
+   "sha256": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5"
+  },
+  {
+   "path": "src/company_wiki/source_catalog/official_source_cli.py",
+   "bytes": 13362,
+   "sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162"
+  },
+  {
+   "path": "tests/integration/test_official_source_flow.py",
+   "bytes": 56854,
+   "sha256": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66"
+  },
+  {
+   "path": "tests/integration/test_official_discovery_offline.py",
+   "bytes": 31358,
+   "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069"
+  },
+  {
+   "path": "docs/plans/r1-source-recovery-20261023/task_plan.md",
+   "bytes": 3540,
+   "sha256": "48d1755683d74c7dcf1302c74520100b6e2a0a7e86008fb88d80d4ae8d0c0471"
+  },
+  {
+   "path": "docs/plans/r1-source-recovery-20261023/findings.md",
+   "bytes": 13885,
+   "sha256": "9a1366b89d23be80c88931593961f2493864de2fafbb62ac46395d7e6de7fdf8"
+  },
+  {
+   "path": "docs/plans/r1-source-recovery-20261023/progress.md",
+   "bytes": 5087,
+   "sha256": "d88ad39fdb712f055ba405ef218a42151dcb200ff70bc877aaf8a3bd974a61b8"
+  },
+  {
+   "path": "delivery/w11/handoff.md",
+   "bytes": 6081,
+   "sha256": "db6aed874cbc72f3b7945bed447454eaa46acf5e797b017c76d01dfa33833710"
+  },
+  {
+   "path": "delivery/w11/evidence_inventory.json",
+   "bytes": 8313,
+   "sha256": "ba0ad08e40ee0f2c8491066ed8893ff8aae07ea75f87756a276a06c6e875a9b3"
+  },
+  {
+   "path": "delivery/w11/test_results.json",
+   "bytes": 3625,
+   "sha256": "835a3813f5786b865c46c61547078a8e7fc86fdb8c770beab107c326a53548d4"
+  },
+  {
+   "path": "delivery/w11/cleanup.json",
+   "bytes": 4654,
+   "sha256": "552f0769cf99ddae381c562401f77c071e63bf8345598e9e996cb1616253aba5"
+  },
+  {
+   "path": "delivery/w11/root_followup.md",
+   "bytes": 2997,
+   "sha256": "5122c30fbe0ac3b5afac0d3e67a7bc179bd292f2b45194a6a29879f24ccc7116"
+  },
+  {
+   "path": "delivery/w11/test-results.xml",
+   "bytes": 12268,
+   "sha256": "749f18b1d2d7c1062743d785e8c7212fa0eb26e9e89ff6b81d2be860557c5b54"
+  },
+  {
+   "path": "delivery/w11/test-run-stdout.txt",
+   "bytes": 1122,
+   "sha256": "973fdbb236d66be41651905d2fa728d3d12b080555f76a4b4de0e4988e351ebd"
+  },
+  {
+   "path": "delivery/w11/test-run-full-stdout.txt",
+   "bytes": 1058,
+   "sha256": "5688ebdc2d0de72d1b4894a598685f1779dfc2bc7cbaa104cfe0b68ba0ae174d"
+  },
+  {
+   "path": "delivery/w11/probes/red_probe.py",
+   "bytes": 4967,
+   "sha256": "22506fac4dc7212e882a8441e1c8a2ebc6bbeebc80ac58bb3a1dd86dbcc3a741"
+  },
+  {
+   "path": "delivery/w11/probes/red-probe-output.txt",
+   "bytes": 2928,
+   "sha256": "e4d1fd13b517ce019cd46717110c023080d34e7ba0552a7a2debfa9926ae4855"
+  }
+ ],
+ "tests": [
+  {
+   "command": "python -X utf8 -B -m pytest <offline> <flow> -k <delivered selection> -q -p no:cacheprovider --junitxml=delivery/w11/test-results.xml",
+   "exit_code": 0,
+   "result": "69 passed, 0 failed, 0 skipped, 29 deselected; 10.17s",
+   "log_path": "delivery/w11/test-run-stdout.txt",
+   "log_sha256": "973fdbb236d66be41651905d2fa728d3d12b080555f76a4b4de0e4988e351ebd"
+  },
+  {
+   "command": "python -X utf8 -B -m pytest <offline> <flow> -q -p no:cacheprovider",
+   "exit_code": 0,
+   "result": "98 passed; 51.64s",
+   "log_path": "delivery/w11/test-run-full-stdout.txt",
+   "log_sha256": "5688ebdc2d0de72d1b4894a598685f1779dfc2bc7cbaa104cfe0b68ba0ae174d"
+  }
+ ],
+ "independent_review": {
+  "agent_role": "independent_reviewer (not the author; 4 rounds on one agent across successive SHAs)",
+  "report_md": "delivery/w11/review/independent-review-4.md",
+  "report_json": "delivery/w11/review/independent-review-4.json",
+  "reviewed_sha256": {
+   "src/company_wiki/source_catalog/official_discovery.py": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+   "src/company_wiki/source_catalog/official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+   "tests/integration/test_official_discovery_offline.py": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+   "tests/integration/test_official_source_flow.py": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66"
+  },
+  "reviewed_head": "6b538ca2",
+  "rounds": [
+   {
+    "report": "delivery/w11/review/independent-review-1.json",
+    "bound": "ecc7d622",
+    "verdict": "CHANGES_REQUIRED",
+    "fixed": true
+   },
+   {
+    "report": "delivery/w11/review/independent-review-2.json",
+    "bound": "a6d12a53",
+    "verdict": "CHANGES_REQUIRED",
+    "fixed": true
+   },
+   {
+    "report": "delivery/w11/review/independent-review-3.json",
+    "bound": "2e1dfd04",
+    "verdict": "CHANGES_REQUIRED",
+    "fixed": true
+   },
+   {
+    "report": "delivery/w11/review/independent-review-4.json",
+    "bound": "6b538ca2",
+    "verdict": "APPROVE",
+    "fixed": true
+   }
+  ],
+  "issues": [
+   "R4-01",
+   "R4-02",
+   "R3-01",
+   "NR-01",
+   "IR-12",
+   "NR-02",
+   "NR-03",
+   "NR-04",
+   "NR-05",
+   "NR-06",
+   "NR-07",
+   "NR-08",
+   "NR-10",
+   "NR-09/R3-02",
+   "round-1/round-2"
+  ],
+  "all_internal_findings_fixed_and_rechecked": true,
+  "conclusion": "APPROVE on 6b538ca2 (review 4): R3-01 PASS, NR/IR set re-confirmed, only handoff-document items remained and are completed in this report commit."
+ },
+ "protected_inputs_unchanged": true,
+ "cleanup": {
+  "initial_inventory": "delivery/w11/cleanup.json#initial_state",
+  "final_inventory": "delivery/w11/cleanup.json#final_state",
+  "restored": true
+ },
+ "new_model_calls": 0,
+ "new_network_calls": 0,
+ "new_downloads": 0,
+ "footprint": {
+  "delivery_bytes": 781574,
+  "raw_copies": 0,
+  "peak_bytes": 8781574
+ },
+ "external_limits": [
+  "486789-byte IR index body unavailable in both authorized roots (exact-size, 400-600KB band SHA, sqlite/WAL scans all zero); not re-fetched, reconstructed or replayed.",
+  "Coverage remains checked_index_only/partial; no site-wide or search-exhaustiveness claim.",
+  "Nav/legal classifier is a bounded title+structure heuristic (multi-link Download+View rows, extensionless document endpoints, header/footer strong CTA without suffix remain limits).",
+  "Dynamic-content detection is conservative; page JS injection cannot be judged offline.",
+  "ET unsupported_exchange and CN wire/fee are out of this lane."
+ ],
+ "interface_requests": [
+  {
+   "target": "ROOT / shared classifier",
+   "request": "consider annual_report / investor_presentation explicit kinds in narrative_routing.classify_document_kind; discovery consumes the classifier unchanged."
+  }
+ ],
+ "root_next_actions": [
+  "One bounded real re-fetch of the IR index under the unified budget; verify new body size/SHA and whether material anchors are static.",
+  "Restore real H1 deck / JPM / IR activity sources via existing configured tools; register through CWP capture/import.",
+  "Decide the shared-classifier interface request; no lane code change needed for it."
+ ],
+ "git": {
+  "working_tree_explained": true,
+  "push_status": "pushed to origin/codex/r1-w11-source-recovery-20261023 (new branch; no force-push; no mainline merge; remote https://github.com/zhengcb81/company-wiki.git)",
+  "mainline_merged": false,
+  "skills_installed": false,
+  "pushed_head": "c9901a24"
+ },
+ "quality_scope": "Package only; no global business/forecast acceptance",
+ "delivery_commit_note": "final_head 6b538ca2 is the approved product commit; the commit that adds handoff.md/handoff.json is docs-only and leaves the product tree identical."
+}

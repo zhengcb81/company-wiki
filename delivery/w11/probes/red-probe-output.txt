@@ -1,0 +1,94 @@
+{
+ "schema_version": "w11-red-probe/1",
+ "base_commit": "0d7ada21",
+ "base_module_sha256": "7d8fb1292c6728adae9edf5a179242a3718b756e8659bbbb19154aff9f8ec2c3",
+ "sealed_result_sha256": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52",
+ "derived_minimal_fixture": true,
+ "original_page_replay": false,
+ "probes": {
+  "D1-earnings-release-is-not-a-transcript": {
+   "input_title_only": "<a href=\"/er.pdf\">Q2 2026 Earnings Release</a><a href=\"/ep.pdf\">Q2 2026 Earnings Presentation</a><a href=\"/t.pdf\">Q2 2026 Earnings Call Transcript</a>",
+   "base_candidates": [
+    {
+     "title": "Q2 2026 Earnings Release",
+     "kind": "investor_call_transcript",
+     "url": "https://ir.example/er.pdf"
+    },
+    {
+     "title": "Q2 2026 Earnings Presentation",
+     "kind": "investor_call_transcript",
+     "url": "https://ir.example/ep.pdf"
+    },
+    {
+     "title": "Q2 2026 Earnings Call Transcript",
+     "kind": "investor_call_transcript",
+     "url": "https://ir.example/t.pdf"
+    }
+   ],
+   "current_candidates": [
+    {
+     "title": "Q2 2026 Earnings Release",
+     "kind": "investor_relations",
+     "url": "https://ir.example/er.pdf"
+    },
+    {
+     "title": "Q2 2026 Earnings Presentation",
+     "kind": "investor_relations",
+     "url": "https://ir.example/ep.pdf"
+    },
+    {
+     "title": "Q2 2026 Earnings Call Transcript",
+     "kind": "investor_call_transcript",
+     "url": "https://ir.example/t.pdf"
+    }
+   ]
+  },
+  "D2-legal-navigation-is-not-a-material": {
+   "input_title_only": "<a href=\"/privacy.pdf\">隐私声明</a><a href=\"/terms.pdf\">使用条款</a><a href=\"/privacy2.pdf\">|  隐私声明</a>",
+   "base_candidates": [
+    {
+     "title": "隐私声明",
+     "kind": "investor_relations",
+     "url": "https://ir.example/privacy.pdf"
+    },
+    {
+     "title": "使用条款",
+     "kind": "investor_relations",
+     "url": "https://ir.example/terms.pdf"
+    },
+    {
+     "title": "|  隐私声明",
+     "kind": "investor_relations",
+     "url": "https://ir.example/privacy2.pdf"
+    }
+   ],
+   "current_candidates": []
+  },
+  "D3-generic-navigation-is-not-a-material": {
+   "input_title_only": "<a href=\"/c.html\">Conference</a><a href=\"/b.html\">Business</a><a href=\"/i.html\">Investor</a><a href=\"/ci.pdf\">Contact Information</a>",
+   "base_candidates": [
+    {
+     "title": "Conference",
+     "kind": "investor_relations",
+     "url": "https://ir.example/c.html"
+    },
+    {
+     "title": "Business",
+     "kind": "investor_relations",
+     "url": "https://ir.example/b.html"
+    },
+    {
+     "title": "Investor",
+     "kind": "investor_relations",
+     "url": "https://ir.example/i.html"
+    },
+    {
+     "title": "Contact Information",
+     "kind": "investor_relations",
+     "url": "https://ir.example/ci.pdf"
+    }
+   ],
+   "current_candidates": []
+  }
+ }
+}
