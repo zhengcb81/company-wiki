@@ -11,7 +11,7 @@
 - W03/W07 的共享引擎公开接线、一次真实摘要、激活前故障恢复、缓存及RF消费已有工程验收，不重复收费重做。
 - 药明康德 final3 的四份报告均已完成，14个问题出现项归并到10个根因、W08–W12五张卡。旧报告、639件初始封存及501件final3封存均保留。
 - 共因方案位于 `C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/`，诊断与交接位于同run的 `diagnosis/r1-final3-review-20261022/`。
-- ROOT已冻结新attempt。W08公开cache/上下文及事实误判的有限工程独审通过，真实249页两项oracle仍FAIL，继续从候选链修共同根因；W10组件已提交安装但真实矩阵OPEN。W09准备已完成，研究实施与W11离线来源包已准备可并行，详见harness_lanes/20261023/README.md。
+- ROOT已冻结新attempt。W08共用语义/用途及标题/context/cache的有限工程独审通过，隔离支线`b6395b6c`已正常推送，全量7464P/24既有skip及独立smoke146P；真实249页两条30%事实及各自业务父级已通过，但原14目标仍PARTIAL（裸数质量/项目正文节点现已独审44P/165P，隔离1712ed10已正常push，完整7558P/24skip及smoke146P；经营量/同比、指引条件、跨页父级和固定预算选材仍开）。W10组件已提交安装但真实矩阵OPEN。用户已把W09研究与W11离线来源两包交外部harness施工，ROOT不改其独占写集；正式交接前不记完成。详见harness_lanes/20261023/dispatch.json及唯一CURRENT_STATUS。
 - W08负责CWP来源语义/结构，W09负责RF研究输入与方法，W10负责audit逐文档结果投影；目录不重叠部分可并行，共享接口和技能卡由ROOT串行整合。W11有界恢复实际来源缺口；W12整合、原公司复验、泛化和质量/检测收尾。
 
 ## 每轮的八步
