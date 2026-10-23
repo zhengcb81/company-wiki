@@ -219,6 +219,9 @@ def test_discovery_notice_dynamic_future_and_unknown_are_explicit():
         max_bytes=8388608,
     )
     by = {x["source_url"]: x for x in out["candidates"]}
+    # W11: event notices carry a material clue (业绩说明会/conference call) so
+    # they surface as index_notice; "Investor presentation business expansion"
+    # on 2026-10-21 is after as-of and lands in excluded, not candidates.
     assert by["https://official.example/notice"]["disposition"] == "index_notice"
     assert (
         by["https://official.example/call.pdf"]["document_kind"]
@@ -229,6 +232,13 @@ def test_discovery_notice_dynamic_future_and_unknown_are_explicit():
         and by["https://official.example/unknown.pdf"]["disposition"] == "date_unknown"
     )
     assert "https://official.example/speech.pdf" not in by
+    assert out["excluded"] == [
+        {
+            "source_url": "https://official.example/speech.pdf",
+            "published_date": "2026-10-21",
+            "reason": "after_as_of",
+        }
+    ]
     assert (
         out["coverage_status"] == "partial"
         and "dynamic_content_unresolved" in out["limitations"]

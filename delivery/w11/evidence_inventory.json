@@ -1,0 +1,165 @@
+{
+  "schema_version": "w11-evidence-inventory/1",
+  "prepared_at": "2026-10-23T22:05:00+00:00",
+  "lane": "W11-CWP-SOURCES",
+  "common_prefix": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/",
+  "items": [
+    {
+      "id": "sealed-original-w11-card",
+      "class": "original_snapshot",
+      "path": "remediation/r1-final3-review-20261022/work_packages/W11.md",
+      "bytes": 5795,
+      "sha256": "6a18ccf053525daff75f68cc07d586953b04d59e94d927a56f8fcd383ffa2ba3",
+      "upstream_reference": "INPUTS.json W11-CWP-SOURCES[0]",
+      "supports": [
+        "外包范围只承接 discovery 工程子集；T11-partial-discovery-negative 的期望语义"
+      ],
+      "does_not_support": [
+        "486789B 正文存在或可重放；正文材料实际内容"
+      ]
+    },
+    {
+      "id": "sealed-fetch-report",
+      "class": "original_snapshot",
+      "path": "reports/r1-remediation-01/fetch.md",
+      "bytes": 18661,
+      "sha256": "1649aa7e13a674cf9ea209b7c4a511503894f3a528b2886d1573f152c1b50215",
+      "upstream_reference": "INPUTS.json W11-CWP-SOURCES[6]",
+      "supports": [
+        "FETCH-002 定性为覆盖不完整（最新deck/JPM/IR活动未取得），不是已证明的分类数值错误",
+        "FETCH-003 CN wire/fee unknown 与本线无关"
+      ],
+      "does_not_support": [
+        "把 3 个隐私/条款候选解释为 parser 漏掉业务材料（正文不可读，无法证明材料在正文内）"
+      ]
+    },
+    {
+      "id": "sealed-manifest",
+      "class": "original_snapshot",
+      "path": "execution_replays/r1-remediation-01/phase_b/research/phase_b_manifest.json",
+      "bytes": 124325,
+      "sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
+      "upstream_reference": "INPUTS.json common[1]",
+      "supports": [
+        "501 件封存清单的存在性与定位线索"
+      ],
+      "does_not_support": [
+        "manifest 本身包含 486789B 正文"
+      ]
+    },
+    {
+      "id": "real-discover-stdout",
+      "class": "result_receipt",
+      "path": "execution_replays/r1-remediation-01/roles/executor/commands/faa5bf2650964e9480566759c565ce11/stdout.txt",
+      "bytes": 2839,
+      "sha256": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52",
+      "upstream_reference": "INPUTS.json W11-CWP-SOURCES[5]",
+      "supports": [
+        "真实 discover 输出：3 候选全为隐私/条款 PDF、dynamic_content_unresolved、publication_date_unknown、coverage=partial、no_documents_claimed=false",
+        "fetch_receipt 记录 486789B 响应与 content_sha256 f1e822a8…（结果引用，非正文）"
+      ],
+      "does_not_support": [
+        "正文 HTML 内容；材料是否在正文内；正文可重放"
+      ]
+    },
+    {
+      "id": "real-discover-input",
+      "class": "result_receipt",
+      "path": "execution_replays/r1-remediation-01/roles/executor/commands/faa5bf2650964e9480566759c565ce11/input-0001-9c235138bbbf.json",
+      "bytes": 250,
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+      "upstream_reference": "INPUTS.json W11-CWP-SOURCES[7]",
+      "supports": [
+        "实际请求参数：urls 分支、2026-01-01..2026-10-21、30 items、1048576 B、20 s"
+      ],
+      "does_not_support": [
+        "任何正文内容"
+      ]
+    },
+    {
+      "id": "real-events-capture",
+      "class": "result_receipt",
+      "path": "execution_replays/r1-remediation-01/roles/executor/events.jsonl",
+      "bytes": 278268,
+      "sha256": "6ad7640bb36adcc7dd9f12f78b9708ebb6fdb45ca056d8f1f0b699c960071142",
+      "upstream_reference": "INPUTS.json W11-CWP-SOURCES[9]（按 capture_id 定位读取 line 9-10）",
+      "supports": [
+        "executed_command 走 CLI --operation discover --request（urls 分支）；capture 目录只有输入 JSON×2 与 2839B stdout，无正文落盘"
+      ],
+      "does_not_support": [
+        "正文曾在磁盘上存在过"
+      ]
+    },
+    {
+      "id": "real-web-discovery",
+      "class": "result_receipt",
+      "path": "execution_replays/r1-remediation-01/research/web_discovery.json",
+      "bytes": 1507,
+      "sha256": "d4276ba93bf68b017c7ddbbbdd728498b0123a01d0e2479f886893a921c35b0a",
+      "upstream_reference": "INPUTS.json W11-CWP-SOURCES[10]",
+      "supports": [
+        "搜索查询与 native response ID lead（turn438…444）"
+      ],
+      "does_not_support": [
+        "离线可读搜索正文；搜索穷尽性"
+      ]
+    },
+    {
+      "id": "derived-minimal-fixture",
+      "class": "derived_minimal_fixture",
+      "path": "tests/integration/test_official_discovery_offline.py（TestNonMaterialExclusion.test_legal_navigation_pdfs_are_not_candidates 等）",
+      "bytes": 20632,
+      "sha256": "dae893398172c29ab497d197d245452ebf4e75f66ff59608619c2d19ab9c2996",
+      "upstream_reference": "镜像 sealed faa5bf stdout SHA 1c33f18b… 中的隐私/条款候选标题；非原网页重放",
+      "supports": [
+        "法律导航标题在当前/修复后 parser 下的行为差异（修复前进入候选、修复后不进）"
+      ],
+      "does_not_support": [
+        "486789B 原始页面结构；原文其他内容；重放已通过的声明"
+      ]
+    },
+    {
+      "id": "synthetic-neutral-fixtures",
+      "class": "synthetic_fixture",
+      "path": "tests/integration/test_official_discovery_offline.py（其余全部用例）",
+      "bytes": 20632,
+      "sha256": "dae893398172c29ab497d197d245452ebf4e75f66ff59608619c2d19ab9c2996",
+      "upstream_reference": "纯中性构造（Neutral Instruments / Neutral Materials / ir.example 等），无任何真实公司数据",
+      "supports": [
+        "分类正负控、时间窗口边界、URL/去重、载荷诚实性、限界诚实性、CLI subprocess 双 issuer 语义"
+      ],
+      "does_not_support": [
+        "对任何真实站点的行为声明"
+      ]
+    },
+    {
+      "id": "missing-ir-body",
+      "class": "absent_body",
+      "path": null,
+      "bytes": null,
+      "sha256_known_receipt_only": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+      "body_available": false,
+      "searched_scopes": [
+        {
+          "root": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec",
+          "files_scanned": 2052,
+          "total_bytes": 167_018_437,
+          "method": "精确 486789B 大小扫描=0；400–600KB 全量 SHA 比对（89 文件）=0；needle 引用扫描=3（全是结果/回执引用）"
+        },
+        {
+          "root": "C:/Users/郑曾波/Projects/company-wiki/.planning/shared-reading-production/r1-holdout-20261021",
+          "files_scanned": 65,
+          "total_bytes": 17_449_142,
+          "method": "精确 486789B 大小扫描=0；catalog.sqlite3 sources 90 条无该 hash；WAL 逐字节 needle 扫描无 body SHA 无 event id；objects/sha256 3 个 JSON 投影无正文"
+        }
+      ],
+      "supports": [
+        "在卡片指定的两条根内正文不可得（body_available=false）"
+      ],
+      "does_not_support": [
+        "全盘不存在声明；不可重放结论之外的任何断言"
+      ],
+      "must_not": "不得从 3 个候选复原正文；不得凭旧 SHA 宣称 replay 已过；不得为取得正文联网重抓（归 ROOT 后续 attempt）"
+    }
+  ]
+}

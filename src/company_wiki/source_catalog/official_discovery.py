@@ -11,6 +11,70 @@ from .narrative_routing import classify_document_kind
 
 DISCOVERY_RESULT_SCHEMA = "official-discovery-result/1"
 
+# Title tokens that indicate a material-document lead on an index page.
+# A link becomes a candidate only through one of these document clues,
+# never merely because it is an anchor or points at a file suffix.
+_MATERIAL_TITLE_TOKENS = (
+    "earnings",
+    "transcript",
+    "presentation",
+    "results announcement",
+    "annual report",
+    "interim report",
+    "semi-annual report",
+    "semiannual report",
+    "quarterly report",
+    "prospectus",
+    "招股",
+    "发行",
+    "可转债",
+    "活动记录",
+    "业绩说明会",
+    "年度报告",
+    "半年度报告",
+    "季度报告",
+    "年报",
+    "半年报",
+    "季报",
+    "募集说明",
+    "investor conference",
+    "conference call",
+    "investor day",
+    "briefing",
+    "conference event notice",
+    "event notice",
+    "upcoming",
+)
+# Title tokens for static legal/site navigation that must never be
+# reported as business material candidates, whatever the file suffix is.
+_NON_MATERIAL_TITLE_TOKENS = (
+    "privacy",
+    "terms of use",
+    "term of use",
+    "cookie",
+    "disclaimer",
+    "legal notice",
+    "隐私声明",
+    "隐私政策",
+    "使用条款",
+    "免责声明",
+    "法律声明",
+    " Cookie",
+    "contact",
+    "联系方式",
+    "网站地图",
+    "sitemap",
+)
+# The call-transcript identity requires an explicit call/transcript clue;
+# the word "earnings" alone denotes a release or presentation, not a call.
+_TRANSCRIPT_TITLE_TOKENS = ("call transcript", "transcript", "电话会", "transcript of")
+
+
+def _is_material_title(folded: str) -> bool:
+    if any(token in folded for token in _NON_MATERIAL_TITLE_TOKENS):
+        return False
+    return any(token in folded for token in _MATERIAL_TITLE_TOKENS)
+
 
 def discover_official_documents(
     pages, *, entity, as_of_date, start_date, max_items=30, max_bytes=8388608
@@ -62,26 +126,11 @@ def discover_official_documents(
                 or url in seen
             ):
                 continue
-            # Content links, not every navigation/footer link.
+            # Content links, not every navigation/footer link: a file suffix
+            # alone never qualifies; a material document clue in the title is
+            # required, and static legal/navigation titles are excluded.
             folded = title.casefold()
-            if not (
-                parsed.path.lower().endswith((".pdf", ".txt", ".json", ".pptx"))
-                or any(
-                    t in folded
-                    for t in [
-                        "earnings",
-                        "transcript",
-                        "presentation",
-                        "conference",
-                        "business",
-                        "investor",
-                        "招股",
-                        "发行",
-                        "可转债",
-                        "活动记录",
-                    ]
-                )
-            ):
+            if not _is_material_title(folded):
                 continue
             seen.add(url)
             parent = anchor.find_parent(["article", "li", "tr", "div"])
@@ -110,8 +159,10 @@ def discover_official_documents(
                 for t in ["upcoming", "notice", "will present", "会议通知", "关于召开"]
             )
             kind = classify_document_kind(title, "investor_relations")
-            if "earnings" in folded or "transcript" in folded:
+            if any(token in folded for token in _TRANSCRIPT_TITLE_TOKENS):
                 kind = "investor_call_transcript"
+            # "Earnings release/presentation/event notice" stays the shared
+            # classifier's kind: the word "earnings" is not a call identity.
             disposition = (
                 "index_notice"
                 if notice
