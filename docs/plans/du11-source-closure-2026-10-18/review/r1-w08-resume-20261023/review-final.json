@@ -1,0 +1,193 @@
+{
+  "schema_version": "w08-resume-independent-review/1",
+  "reviewer": "/root/w08_resume_independent",
+  "completed_at_utc": "2026-10-23T19:03:12.251507+00:00",
+  "status": "PASS_REVIEWED_ENGINEERING_SCOPE_ONLY_CONTENT_NOT_ACCEPTED",
+  "whole_w08_accepted": false,
+  "source_and_test_binding": {
+    "src/company_wiki/document_understanding/structure/sections.py": {
+      "sha256": "39fee1e19129ea08fb40f96fc24b494a9ceea1f274257f60d500e18ebab149be",
+      "bytes": 22426
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "fa49c66dc15f2d41bd2e94eab3a95a49bc2aa1de009cd541c3c9b2d559ce3fc8",
+      "bytes": 50346
+    },
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": {
+      "sha256": "593440a36eedfc78f1d62eef486f461c93519022468219a68352d464d7b69b41",
+      "bytes": 7128
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+      "bytes": 63203
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "e007af6d57606bf658c10c28a8a4e72bcf2c9401cdc37a7e790746f77cf9d920",
+      "bytes": 25319
+    },
+    "tests/integration/test_reading_parent_cache_migration.py": {
+      "sha256": "b4c2c1b1cb91d084cdb33ced814e14257a4e80b90743ce1954ecd78950d6dae8",
+      "bytes": 11041
+    },
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": {
+      "sha256": "4e0be6773a1c9839f6b205256a38a3ee1b753d7123571267d5c50e7edaa1a29f",
+      "bytes": 25821
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py": {
+      "sha256": "1f7c23dfa565a8fb0f052af60e81cd5dce71cb7c8d20aec37a5eca12f0416f8b",
+      "bytes": 36954
+    },
+    "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py": {
+      "sha256": "511b4240ecd303de285dbdc0e3416d8f0533628c257840c46400be652c01d05b",
+      "bytes": 11571
+    }
+  },
+  "independent_checks": {
+    "context_controls": {
+      "passed": 15,
+      "failed": 0,
+      "original_before_fix": {
+        "passed": 13,
+        "failed": 2
+      },
+      "receipt": "context_probe.json"
+    },
+    "fact_controls": {
+      "passed": 36,
+      "failed": 0,
+      "original_before_fix": {
+        "passed": 29,
+        "failed": 7
+      },
+      "production_meaningful_fact_false_positives_after": 0,
+      "receipt": "facts_probe.json"
+    },
+    "public_cache": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 32.59,
+      "receipt": "cache-independent.xml",
+      "source_stable": true,
+      "actual_module_paths_verified": true,
+      "fixture_posts": 2
+    }
+  },
+  "closed_findings": [
+    {
+      "id": "IND-W08-C01",
+      "description": "Missing page/lane evidence previously inferred same physical scope. Actual disjoint-column PDF and missing-page probe now rejected; legal indentation and swapped two-business30% contexts retained.",
+      "fixed_in": "sections.py SHA39fee1e...",
+      "status": "CLOSED_ON_BOUND_BYTES"
+    },
+    {
+      "id": "IND-W08-F01",
+      "description": "Change proximity formerly re-promoted numeric IDs/customer-account amounts as causal driver meaningful_fact. Shared source_measure_relations now owns quantity+direction, and original three production counterexamples no longer meaningful_fact.",
+      "fixed_in": "narrative_business_policy.py SHAfa49c66d...",
+      "status": "CLOSED_ON_BOUND_BYTES"
+    },
+    {
+      "id": "IND-W08-F02",
+      "description": "English count labels and past exceeded business threshold now retained by finite native controls, including numeric changes from author examples.",
+      "status": "CLOSED_ON_BOUND_BYTES"
+    },
+    {
+      "id": "IND-W08-F03",
+      "description": "Leading whitespace after causal link no longer drops valid new-customer causal relation; the source quantity was never entirely absent.",
+      "status": "CLOSED_ON_BOUND_BYTES"
+    }
+  ],
+  "architecture_review": {
+    "single_fact_owner": "quantity and directional projections consume one source_measure_relations; no second nearby-change fallback",
+    "source_context": "existing source section parent graph and source locators; physical numbered list source evidence, no company-name inference",
+    "cache": "sections bytes are in existing decision_inventory business_algorithms closure, no extra version table/cache",
+    "budget": "existing48000chars/96spans and default0.8 remain; reviewer did not run entire0.8golden suite",
+    "complexity": "bounded linear section-scope scan; no newly observed N-squared traversal or company dictionary; no claim of full repository complexity audit"
+  },
+  "required_remaining_outside_review": [
+    "ROOT real249-page annual oracle is stillFAIL: candidate1453/96 selected, bothp14new-molecule30% facts unselected. Need source selection/ranking/context root repair and independent content acceptance.",
+    "No true-company model summary or RF four-review accepted by this engineering review.",
+    "Any subsequent source change needs bound-byte delta review; these receipts cannot sign changed runtime.",
+    "ROOT owns combined larger regression/mypy/release/merge/push and exactCI; reviewer did not install or mutateGit."
+  ],
+  "cleanup": {
+    "context_and_facts_pdf_generation": "inmemory only;0PDFfiles",
+    "public_cache_runtime": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\w8i-49f27dad",
+      "initially_exists": false,
+      "removed": true
+    },
+    "public_cache_runtime_absent_rechecked": true,
+    "fallback_removed": true,
+    "probe_harness_errors": "Initial context root-parent index/locator JSON issues corrected only in reviewer script. Two cache runner temp-create attempts gotOSWinError5 before tests started; no product defect or platformapproval rejection; configured writable worktree unique runtime used andremoved."
+  },
+  "boundaries": {
+    "source_or_author_test_writes_by_reviewer": 0,
+    "originals_or_production_config_writes": 0,
+    "external_network_calls": 0,
+    "model_or_paid_calls": 0,
+    "git_or_install_writes": 0,
+    "persistent_writes": "resume/independent only; explicitlyowned runtime tmp wasremoved"
+  },
+  "receipt_sha256": {
+    "context_probe.py": {
+      "sha256": "d36888b85a0a597705a127e6d97f05937e4bc286ab79ac50b00e8760d06fe048",
+      "bytes": 5432
+    },
+    "context_probe.json": {
+      "sha256": "6b15c0cb4daf7df880e095acefda8e2232958cedcd676a0a3bd0ddca16191cc7",
+      "bytes": 17450
+    },
+    "context_probe.before-root-fix.json": {
+      "sha256": "e104b4aa6cbaa538341a2eb3f0d8dc2b024c15727c9995a567c35a4aaab1f943",
+      "bytes": 18072
+    },
+    "facts_probe.py": {
+      "sha256": "cdff7fc62cf5733da57c422d189dd9ac879157ebc69bc494bdbcd39d78874084",
+      "bytes": 5813
+    },
+    "facts_probe.json": {
+      "sha256": "1d73c9e49412d351dbf741f3733b47d2e9dc6ef71a9084b034ab5bbc189fbcc1",
+      "bytes": 25428
+    },
+    "facts_probe.before-facts-fix.json": {
+      "sha256": "e8eeb41d2511ac28dd9659dd11a17f28716370a852caa60c1e4b629a117e227f",
+      "bytes": 25606
+    },
+    "run_public_cache.py": {
+      "sha256": "82de6cb4874747a03123d90af6e62aa337099e871a03af55d0b5238a23855b32",
+      "bytes": 3020
+    },
+    "cache-independent.stdout.txt": {
+      "sha256": "6b2301698c3717ddfc647751c705d11e7b322881d6e0ec83b1f4c1c6ebb1b785",
+      "bytes": 4522
+    },
+    "cache-independent.xml": {
+      "sha256": "e3a458deea1a355d30d5fcd6e9bbd7e0651dcfc94ee7fcb03df111b013f0b441",
+      "bytes": 423
+    },
+    "cache-independent-receipt.json": {
+      "sha256": "867ace86ea8bbd302bf57d48a90c723ee5eddb48ae392dde7b5a97aa3b3aad35",
+      "bytes": 3351
+    },
+    "cache-temp-decisions.jsonl": {
+      "sha256": "62ff968a16e705e4c4db03ee1b597349114de718f99c979c942844a5be00baec",
+      "bytes": 690
+    },
+    "review-interim.md": {
+      "sha256": "011ebbb7c8a3c1512dd3e0695222f12d61e243c278cb8336687fa52bf057733b",
+      "bytes": 1673
+    },
+    "review-interim.json": {
+      "sha256": "8278f0c303c358004ad49f62fc8b3d781d252853d0f90b21ad7727b081135d23",
+      "bytes": 2486
+    },
+    "cache-runner-initial-temp-error.stdout.txt": {
+      "sha256": "43902dfa0805152d2d50592621be5ccd18423dcfdfb835fae1043ac1c7d2e2c4",
+      "bytes": 819
+    },
+    "cache-runner-system-temp-error.stdout.txt": {
+      "sha256": "be76db11120e4503ce257d6098d23516309e759a3db36915ca45e67f48e6ced0",
+      "bytes": 851
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "r1-resume-engineering-checkpoint/1",
+  "observed_at": "2026-10-23T19:15:10.339548+00:00",
+  "W08": {
+    "candidate_commit": "115023723bb590d9a3600ba253bf99813eb49586",
+    "current_uncommitted_engineering_fixes": true,
+    "independent_engineering": {
+      "context_controls_passed": 15,
+      "fact_controls_passed": 36,
+      "formal_public_cache_passed": 1,
+      "cache_seconds": 32.59,
+      "report": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-resume-20261023\\review-final.json",
+        "sha256": "02477440d5689e8c1ecc8cf71731f4ba579a5b02f89dde951a2aeacb9e244474",
+        "bytes": 8619
+      }
+    },
+    "actual_annual_report": {
+      "physical_pages": 249,
+      "units": 5647,
+      "limit_spans": 96,
+      "limit_chars": 48000,
+      "limit_work": 16000000,
+      "baseline_candidates": 1413,
+      "candidate_candidates": 1453,
+      "candidate_work_used": 7303854,
+      "work_exhausted": false,
+      "frozen_two_own_scope_facts": "FAIL_BOTH_MISSING_IN_CANDIDATE",
+      "oracle": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-resume-20261023\\oracle.json",
+        "sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+        "bytes": 1142
+      },
+      "baseline": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-resume-20261023\\main-baseline.json",
+        "sha256": "1a2b650e18a6ed44b06ce78e13cae412ef79c82e65798d2796e4c95d669b1199",
+        "bytes": 78079
+      },
+      "candidate": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-resume-20261023\\candidate-final.json",
+        "sha256": "5edb892aa073cb9f4b3d320127c3f6db2f00f5b5689d09e1b550254c1e705712",
+        "bytes": 75478
+      }
+    },
+    "accepted": false,
+    "merged": false,
+    "installed": false,
+    "pushed": false,
+    "next": "ROOT traces candidate eligibility/ranking/context of the two real p14 facts under unchanged budget; engineering green cannot sign content."
+  },
+  "W09": {
+    "preparation_completed": true,
+    "claim_quotes_exact": 49,
+    "own_scope_suggestions": 29,
+    "indirect_price_context": 18,
+    "unknown_mechanisms": 2,
+    "decimal_formulas": 42,
+    "source_and_addition_checks": 14,
+    "author_negative_controls": 10,
+    "formal_new_rf_executed": false,
+    "packet": "harness_lanes/20261023/W09-RF-RESEARCH.md"
+  },
+  "W11": {
+    "packet": "harness_lanes/20261023/W11-CWP-SOURCES.md",
+    "offline_only": true,
+    "known_ir_body_bytes": 486789,
+    "known_ir_body_sha256": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+    "body_found_in_bounded_search": false
+  },
+  "new_model_calls": 0,
+  "new_downloads": 0,
+  "raw_copies": 0,
+  "budget_unchanged": true,
+  "independent_engineering_not_business_acceptance": true
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-22T22:54:22.726021+00:00",
-  "status": "PAUSED_W08_CANDIDATE_W10_COMPONENT_COMPLETE_W09_PREPARATION",
+  "updated_at": "2026-10-23T19:15:10.339548+00:00",
+  "status": "ACTIVE_W08_REAL_CONTENT_ROOT_REPAIR_W09_W11_DISPATCH_READY",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
   "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
@@ -82,7 +82,7 @@
     "new_downloaded_original_files": 9,
     "new_downloaded_original_bytes": 10342094
   },
-  "next_action": "Repair preserved W08 public-cache/own-parent and generic quantity false positives, independently review before integration; then W09/W10 real adoption, W11/W12 and new companies.",
+  "next_action": "ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
@@ -97,13 +97,14 @@
     "issues": 14,
     "roots": 10,
     "packages": {
-      "W08": "PAUSED_INCOMPLETE_CANDIDATE_11502372_NOT_MERGED",
-      "W09": "SOURCE_PREPARATION_ONLY_NEW_FORECAST_OPEN",
+      "W08": "ENGINEERING_SCOPE_PASS_REAL_ORACLE_FAIL_ROOT_OWNED",
+      "W09": "PREPARATION_COMPLETE_EXTERNAL_PACKET_READY",
       "W10": "ENGINEERING_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
-      "W11": "NOT_STARTED",
+      "W11": "OFFLINE_SOURCE_PACKET_READY",
       "W12": "NOT_STARTED"
     },
     "business_pass": false,
-    "current_checkpoint_ref": "../review/r1-w08-candidate-checkpoint-20261022.json"
+    "current_checkpoint_ref": "../review/r1-w08-resume-20261023/checkpoint.json",
+    "parallel_dispatch_ref": "../harness_lanes/20261023/dispatch.json"
   }
 }

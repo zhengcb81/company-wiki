@@ -1,8 +1,8 @@
 # 当前项目状态与接手入口
 
-**用户要求当前事项收尾后暂停（2026-10-22）。** 本轮工程与交接收尾已保存；不再启动公司、模型调用或新实施。原生目标在最终提交推送结束后执行暂停，未宣称整体计划完成。恢复只从本页与[交接文档](HANDOFF-2026-10-22.md)继续。
+**已按用户2026-10-23“继续”恢复实施。** 原生目标回读active；ROOT先修W08真实内容保留失败，有限工程已复验；W09研究和W11离线来源卡可独立并行，最终摘要/矩阵/W12由ROOT整合。此前暂停快照保留为历史，不再约束当前施工。
 
-更新日期：2026-10-22。**这是本项目 PWF 当前状态、剩余任务和下一步的唯一入口。** 总计划`document-understanding-2026-10-13`，当前子计划`du11-source-closure-2026-10-18`，根`docs/plans`；机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)。历史Next Step不覆盖本页。
+更新日期：2026-10-23。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
 ## 当前执行状态与唯一下一步
 
@@ -10,11 +10,11 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 保存候选`11502372`；集中850P在最后等价类型改动前，类型修正后185P、全src mypy366文件0错、Ruff绿 | **未验收、未并母线、未安装、未推送**。原公开cache回归仍失败，真实内容partial及数字标识误判未修。见[暂停检查点](review/r1-w08-candidate-checkpoint-20261022.json) |
+| W08 来源选材、业务父级、缓存依赖 | 独立工程15上下文+36事实反控及1正式公开cache通过；真实249页/5647units oracle两条30%事实仍未入选 | **未验收、未并母线、未安装、未推送**。ROOT继续实际候选链根因修复，不以工程绿代签内容。[当前收据](review/r1-w08-resume-20261023/checkpoint.json) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
-| W09 研究准备 | 新attempt`r1-remediation-02`；实际capture经SourceVersionReader读取年报/H1的10个关键页、30371B | 0模型/网络/下载/原件复制；配置和目录库未变。**尚未生成新研究输入、经营桥或运行新RF**。旧501封存逐SHA不变。见[准备收据](review/r1-w09-preparation-checkpoint-20261022.json) |
+| W09 研究准备 | SourceVersionReader重开年报/H1十页及年报p183；49摘录精确绑定建议、42公式/14来源加总/10作者反控完成 | 正式新RF尚未运行；[独立RF研究施工卡](harness_lanes/20261023/W09-RF-RESEARCH.md)已准备可立即启动，不等待新W08摘要 |
 
-**恢复后的唯一第一步：修W08已经保留的公开cache/业务父级失败及通用事实误判，完成独立大节点审查后才并线。** 复现脚本在`C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/docs/plans/r1-final3-source-semantics-20261022/review/reproduce-public-cache.ps1`，全部原断言保留。不得把换谓词的实验当原例通过，也不抬96/48000等现有限额。候选源码工作字节CRLF、Git规范LF，已保存[逐文件字节映射](review/r1-w08-candidate-byte-map-20261022.json)；候选不是精确业务签收版本。
+**当前唯一第一步：ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。** 原公开cache失败已经共因修复，保留原断言的正式测试及独审复跑均通过；不再把这项写成待修。有限工程绿不代签新真实内容，候选p14两条事实仍FAIL。详见[新检查点](review/r1-w08-resume-20261023/checkpoint.json)和[两包总入口](harness_lanes/20261023/README.md)。两包各自独立工区/PWF/测试/交接，最终均须独立agent全面审查、全部修复并复审后交接。
 
 随后按已接收W08–W12计划完成W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
@@ -49,7 +49,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W07既有工程/真实生命周期完成；final3四审FAIL；W08候选已保存但有失败，W10工程已提交安装，W09来源准备完成；用户收尾后暂停，W08–W12整体未完 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
+| R1 主线 | W01–W07既有工程/真实生命周期完成；final3四审FAIL；W08候选已保存但有失败，W10工程已提交安装，W09来源准备完成；现已恢复W08并行根修与W09免费准备，W08–W12整体未完 | [独立专家总览](r1-holdout-20261021/expert-remediation-overview.md)及[进度](r1-holdout-20261021/implementation-progress.json)。先TDD根修，再真实0.9/研究/四审及新公司泛化；修复样本转regression |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |

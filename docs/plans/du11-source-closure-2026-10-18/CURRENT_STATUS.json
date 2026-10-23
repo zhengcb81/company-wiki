@@ -1,9 +1,9 @@
 {
   "schema_version": "company-wiki-current-plan-status/1",
-  "as_of_date": "2026-10-22",
+  "as_of_date": "2026-10-23",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "PAUSED_BY_USER_W08_CANDIDATE_W10_ENGINEERING_COMPLETE_W09_PREPARATION_ONLY",
-  "current_authorized_scope": "User requested current work closeout then pause; no new implementation/company cycle until resume.",
+  "overall_status": "ACTIVE_W08_REAL_CONTENT_ROOT_REPAIR_TWO_DISJOINT_PACKETS_READY",
+  "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -122,7 +122,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "PAUSED_W08_CANDIDATE_OPEN_W10_ENGINEERING_COMPLETE_W09_PREPARATION_W11_W12_OPEN",
+      "status": "ACTIVE_W08_REAL_CONTENT_REPAIR_W09_W11_PACKETS_READY_W10_MATRIX_W12_OPEN",
       "mainline": true
     },
     {
@@ -151,8 +151,8 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Finish documentation commit/push, pause native goal; do not start new implementation.",
-  "next_step_after_user_resumes": "Repair preserved W08 public-cache/own-parent and generic quantity false positives, independently review before integration; then W09/W10 real adoption, W11/W12 and new companies.",
+  "next_step_now": "ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。",
+  "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
@@ -200,9 +200,9 @@
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "resume_handoff": "HANDOFF-2026-10-22.md",
-  "resumed_at": "2026-10-22T18:19:15.710106+00:00",
-  "previous_pause_request": "Latest user pause after current closeout is authoritative.",
-  "last_updated_at": "2026-10-22T22:56:43.593643+00:00",
+  "resumed_at": "2026-10-23T18:41:33.912794+00:00",
+  "previous_pause_request": "Superseded by user continue2026-10-23",
+  "last_updated_at": "2026-10-23T19:15:10.339548+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -218,7 +218,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "FOUR_REVIEWS_FAIL_W08_CANDIDATE_W10_COMPONENT_PASS_W09_PREPARATION_PAUSED",
+    "status": "FOUR_REVIEWS_FAIL_W08_ENGINEERING_PASS_REAL_CONTENT_FAIL_W09_W11_PACKETS_READY",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -311,25 +311,27 @@
     "prior_package_tree_is_historical": true
   },
   "mainline_goal": {
-    "status": "pause_requested_after_publication",
+    "status": "active",
     "objective_file": "MAINLINE_LOOP_GOAL.md",
     "activation_receipt": "review/mainline-goal-activation-20261022.json",
     "native_get_goal_verified": true,
     "project_budget_preserved": true,
     "pause_request": "手头事情做好可以暂停",
-    "native_pause_to_be_called_after_final_push": true
+    "native_pause_to_be_called_after_final_push": false,
+    "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "PAUSED_CANDIDATE_INCOMPLETE_NOT_MERGED_NOT_INSTALLED",
+    "W08": "ENGINEERING_SCOPE_REVIEW_PASS_REAL_TWO_FACT_ORACLE_FAIL_NOT_ACCEPTED",
     "W08_commit": "115023723bb590d9a3600ba253bf99813eb49586",
-    "W08_ref": "review/r1-w08-candidate-checkpoint-20261022.json",
-    "W09": "SOURCE_REOPENED_NEW_FORECAST_NOT_EXECUTED",
+    "W08_ref": "review/r1-w08-resume-20261023/checkpoint.json",
+    "W09": "PREPARATION_COMPLETE_EXTERNAL_RESEARCH_PACKET_READY_NEW_NATIVE_RF_NOT_RUN",
     "W09_ref": "review/r1-w09-preparation-checkpoint-20261022.json",
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
     "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
     "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
-    "W11": "NOT_STARTED",
+    "W11": "OFFLINE_DISCOVERY_PACKET_READY_NOT_STARTED",
     "W12": "NOT_STARTED",
-    "business_pass": false
+    "business_pass": false,
+    "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json"
   }
 }

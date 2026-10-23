@@ -8,7 +8,7 @@
   ],
   "current_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
   "current_attempt": "r1-remediation-02",
-  "status": "PAUSED_BY_USER_FINAL3_FOLLOWUP_CANDIDATE_SAVED",
+  "status": "ACTIVE_W08_REAL_CONTENT_ROOT_REPAIR_W09_W11_DISPATCH_READY",
   "source_writes_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
   "old_campaign_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\company-pool-cycle-2026-10-09\\campaign.json",
   "old_nvda_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pool-20261009-001-us-nvda",
@@ -43,7 +43,7 @@
     "continuation": "normal bounded owner register/scan initialization permitted, retain first failure and new capture; no direct database edit",
     "paid_model_calls_before_this_observation": 0
   },
-  "updated_at": "2026-10-22T22:56:43.593643+00:00",
+  "updated_at": "2026-10-23T19:15:10.339548+00:00",
   "execution_seal_ref": "initial-execution-seal.json",
   "execution_outcome": "partial",
   "artifact_completeness": "partial",
@@ -65,8 +65,8 @@
   "four_review_ref": "initial-audit/four-review-observation.json",
   "expert_agent": "/root/r1_root_cause_expert",
   "r5_integration_ref": "r5-integration.json",
-  "current_stage": "W08_CANDIDATE_OPEN_W10_COMPONENT_COMPLETE_W09_SOURCE_PREPARATION_ONLY",
-  "resume_stage": "Repair W08 preserved public-cache own-parent/quantity failures; independent review before integration, then W09/W10 actual adoption W11/W12.",
+  "current_stage": "W08 real-source two-fact oracle repair; W09/W11 independent packets prepared",
+  "resume_stage": "ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。",
   "initial_attempt_status": "SEALED_PARTIAL_FOUR_REVIEWS_FAIL",
   "implementation_ref": "implementation-progress.json",
   "resume_handoff": "../HANDOFF-2026-10-22.md",
@@ -77,6 +77,6 @@
   "current_company_paid_operations_scope": "Historical initial count retained; current cumulative fees use native budget observation, not this old count",
   "latest_four_review_ref": "../review/r1-phase-b-four-review-index-20261022.json",
   "current_checkpoint_owner": "../CURRENT_STATUS.json",
-  "active_workers_after_closeout": [],
+  "active_workers_after_closeout": "ROOT owns W08; two external lanes READY, not yet reported started",
   "historical_initial_fields_note": "publication, first_native_observation, execution_outcome, artifact_completeness and four_review retain the original initial attempt observations; final3 review and new preparation are explicitly referenced separately."
 }
