@@ -27,3 +27,12 @@
 - 修复过程中环境教训：subprocess env 必须 `{**os.environ, ...}`（剥离 env 会致 Windows asyncio WSAStartup 失败）。
 - 状态：26 新增 + 7 既有 = 33 passed；in-session 模块 `__file__` 核验通过。
 - 待办：C 阶段 E2E 清理核验、独审×2、delivery、commit/push。
+
+## 2026-10-23 C 阶段：独立审查 1 与修复
+
+- 首次提交 ecc7d622；pre-push 门禁因 `benchmarks/`、`control/` 未在稀疏检出内失败（与本线无关），按 tracked 内容物化后两测试恢复通过。
+- 独立审查 1（agent 638a667b）绑定 ecc7d622，结论 CHANGES_REQUIRED，13 项；High=IR-01 标题白名单静默漏检，Medium=IR-02/IR-04/IR-09。审查同时确认：sealed 证据 11/11 hash 一致、486789B 正文两条根内确实不可得、D1–D3 修复真实、无生产写入。
+- 修复全部 13 项（明细见 findings.md 修复轮表）：lead 提取支持 aria-label/img/表格行回补；材料 token 扩充；notice 预算分离；item 级日期；fragment 去重；CLI 校验与 limitations 去重；坏 href/自指链接隔离；evidence_inventory 修正并全 JSON 校验；RED 探针脚本与输出留存；测试与 token 清理。
+- 修复后矩阵：新套件 40 例 + 既有 7 例 = **47 passed**；ruff 通过。
+- 待办：复审最终版本、handoff 六件套、门禁重跑与推送。
+

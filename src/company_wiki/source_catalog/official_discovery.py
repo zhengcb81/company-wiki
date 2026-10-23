@@ -4,76 +4,202 @@ from __future__ import annotations
 from datetime import date
 import hashlib
 import json
-from urllib.parse import urljoin, urlsplit
+import re
+from urllib.parse import urljoin, urlsplit, urlunsplit
 from typing import Any
 from bs4 import BeautifulSoup
 from .narrative_routing import classify_document_kind
 
 DISCOVERY_RESULT_SCHEMA = "official-discovery-result/1"
 
-# Title tokens that indicate a material-document lead on an index page.
-# A link becomes a candidate only through one of these document clues,
-# never merely because it is an anchor or points at a file suffix.
+# Document file suffixes are a bounded lead signal: accepted only when no
+# legal/site-section veto applies, and never treated as a business original.
+_DOCUMENT_SUFFIXES = (
+    ".pdf",
+    ".txt",
+    ".json",
+    ".pptx",
+    ".doc",
+    ".docx",
+    ".xls",
+    ".xlsx",
+)
+
+# Title cues that identify a business-material lead on an index page.
 _MATERIAL_TITLE_TOKENS = (
     "earnings",
     "transcript",
     "presentation",
-    "results announcement",
-    "annual report",
-    "interim report",
-    "semi-annual report",
-    "semiannual report",
-    "quarterly report",
+    "results",
+    "announcement",
+    "press release",
+    "news release",
+    "report",
     "prospectus",
+    "circular",
+    "proxy",
+    "webcast",
+    "dividend",
+    "deck",
+    "investor conference",
+    "conference call",
+    "investor day",
     "招股",
     "发行",
     "可转债",
     "活动记录",
-    "业绩说明会",
-    "年度报告",
-    "半年度报告",
-    "季度报告",
+    "业绩",
+    "说明会",
+    "路演",
+    "公告",
+    "报告",
     "年报",
     "半年报",
     "季报",
     "募集说明",
-    "investor conference",
-    "conference call",
-    "investor day",
-    "briefing",
-    "conference event notice",
-    "event notice",
-    "upcoming",
+    "电话会",
+    "纪要",
 )
-# Title tokens for static legal/site navigation that must never be
-# reported as business material candidates, whatever the file suffix is.
-_NON_MATERIAL_TITLE_TOKENS = (
+# Short Latin filing/meeting codes need word boundaries: "agm" is a substring
+# of ordinary words such as "fragment".
+_MATERIAL_TITLE_PATTERNS = (re.compile(r"\b(?:agm|egm|6-k|8-k|10-k|10-q|20-f)\b"),)
+
+# Page-section/legal navigation: never a material lead, even when one material
+# word also appears in the same title.
+_LEGAL_PAGE_TITLE_TOKENS = (
+    "legal",
+    "accessibility",
+    "imprint",
+    "sitemap",
+    "site map",
+    "网站地图",
+    "法律声明",
+    "免责声明",
+)
+# A legal document title is excluded unless a material clue is also present
+# (for example "Investor Presentation - Privacy Update" stays material).
+_LEGAL_DOCUMENT_TITLE_TOKENS = (
     "privacy",
     "terms of use",
     "term of use",
     "cookie",
-    "disclaimer",
-    "legal notice",
-    "隐私声明",
-    "隐私政策",
+    "media briefing",
+    "press briefing",
+    "隐私",
     "使用条款",
-    "免责声明",
-    "法律声明",
-    " Cookie",
+)
+# Site utility/navigation text: excluded unless a material clue or a document
+# suffix is present, so "Contact Information" is a lead only as a file.
+_NAVIGATION_TITLE_TOKENS = (
     "contact",
     "联系方式",
-    "网站地图",
-    "sitemap",
+    "careers",
+    "招聘",
+    "subscribe",
+    "订阅",
 )
-# The call-transcript identity requires an explicit call/transcript clue;
-# the word "earnings" alone denotes a release or presentation, not a call.
-_TRANSCRIPT_TITLE_TOKENS = ("call transcript", "transcript", "电话会", "transcript of")
+# The call-transcript identity requires a transcript/record clue; the word
+# "earnings" alone denotes a release or presentation, not a transcript.
+_TRANSCRIPT_TITLE_TOKENS = ("transcript", "电话会", "纪要")
+# Event notices stay candidates with disposition "index_notice" but never
+# consume the material item budget ahead of real documents. A notice needs a
+# business-event noun, so "Upcoming Events" or "Upcoming Careers Fair" is not
+# promoted to a candidate.
+_NOTICE_TITLE_TOKENS = (
+    "upcoming",
+    "notice",
+    "will present",
+    "会议通知",
+    "关于召开",
+)
+_EVENT_TITLE_TOKENS = (
+    "conference",
+    "investor",
+    "说明会",
+    "路演",
+    "电话会",
+)
 
 
-def _is_material_title(folded: str) -> bool:
-    if any(token in folded for token in _NON_MATERIAL_TITLE_TOKENS):
+def _is_event_notice(folded: str) -> bool:
+    return any(token in folded for token in _NOTICE_TITLE_TOKENS) and any(
+        token in folded for token in _EVENT_TITLE_TOKENS
+    )
+
+
+def _has_material_clue(folded: str) -> bool:
+    return any(token in folded for token in _MATERIAL_TITLE_TOKENS) or any(
+        pattern.search(folded) for pattern in _MATERIAL_TITLE_PATTERNS
+    )
+
+
+def _is_material_link(folded: str, path: str) -> bool:
+    """Decide whether an anchor is a business-material lead.
+
+    Order matters: a page-section/legal veto wins; an explicit material clue
+    wins over secondary legal-document and navigation words; otherwise a
+    document suffix is accepted; everything else is not a lead.
+    """
+    if any(token in folded for token in _LEGAL_PAGE_TITLE_TOKENS):
         return False
-    return any(token in folded for token in _MATERIAL_TITLE_TOKENS)
+    if _has_material_clue(folded):
+        return True
+    if any(token in folded for token in _LEGAL_DOCUMENT_TITLE_TOKENS):
+        return False
+    if any(token in folded for token in _NAVIGATION_TITLE_TOKENS):
+        return False
+    return path.lower().endswith(_DOCUMENT_SUFFIXES)
+
+
+def _anchor_title(anchor) -> str:
+    """Lead text for an anchor: visible text, then accessibility attributes."""
+    text = anchor.get_text(" ", strip=True)
+    if text:
+        return text
+    for attribute in ("aria-label", "title"):
+        value = anchor.get(attribute)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    image = anchor.find("img")
+    if image is not None:
+        for attribute in ("alt", "title"):
+            value = image.get(attribute)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    return ""
+
+
+def _item_container(anchor):
+    """Nearest item-level block: article/li/tr, or a div containing one link.
+
+    A wider wrapper is not an item container: its date children belong to the
+    page or to a list, not to this anchor.
+    """
+    for name in ("article", "li", "tr"):
+        block = anchor.find_parent(name)
+        if block is not None:
+            return block if len(block.find_all("a", href=True)) == 1 else None
+    block = anchor.find_parent("div")
+    if block is not None and len(block.find_all("a", href=True)) == 1:
+        return block
+    return None
+
+
+def _item_title(anchor, title: str, folded: str) -> tuple[str, str]:
+    """Recover the document name when the anchor text is only an icon label.
+
+    Index tables often put the document name in a neighbouring cell and only
+    "Download" inside the anchor; the item block supplies the real lead.
+    """
+    if _has_material_clue(folded):
+        return title, folded
+    block = _item_container(anchor)
+    if block is None:
+        return title, folded
+    block_text = block.get_text(" ", strip=True)[:300]
+    if title and title in block_text:
+        block_text = block_text.replace(title, " ", 1).strip(" -|·\t")
+    return (block_text, block_text.casefold()) if block_text else (title, folded)
 
 
 def discover_official_documents(
@@ -100,6 +226,7 @@ def discover_official_documents(
     used = 0
     seen = set()
     excluded = []
+    pending: list[tuple[dict, bool]] = []
     for page in pages:
         original = page["original"]
         used += len(original)
@@ -114,30 +241,59 @@ def discover_official_documents(
         text = soup.get_text(" ", strip=True).casefold()
         if "loading" in text or soup.find("script", src=True):
             limitations.append("dynamic_content_unresolved")
+        page_parts = urlsplit(page["url"])
+        page_key = urlunsplit(
+            (page_parts.scheme, page_parts.netloc, page_parts.path,
+             page_parts.query, "")
+        )
         for anchor in soup.find_all("a", href=True):
-            title = anchor.get_text(" ", strip=True)
-            url = urljoin(page["url"], anchor["href"])
-            parsed = urlsplit(url)
+            href = anchor.get("href")
+            if not isinstance(href, str) or not href.strip() or href.strip() == "#":
+                continue
+            try:
+                url = urljoin(page["url"], href)
+                parsed = urlsplit(url)
+            except ValueError:
+                limitations.append("invalid_anchor_url")
+                continue
             if (
                 parsed.scheme not in {"http", "https"}
                 or not parsed.hostname
                 or parsed.username
                 or parsed.password
-                or url in seen
             ):
                 continue
-            # Content links, not every navigation/footer link: a file suffix
-            # alone never qualifies; a material document clue in the title is
-            # required, and static legal/navigation titles are excluded.
-            folded = title.casefold()
-            if not _is_material_title(folded):
-                continue
-            seen.add(url)
-            parent = anchor.find_parent(["article", "li", "tr", "div"])
-            time = parent.find("time") if parent else None
-            published = anchor.get("data-date") or (
-                time.get("datetime") if time else None
+            # Fragments never reach the server: dedupe on the resource URL and
+            # never let an empty/hash anchor point back at the index itself.
+            dedupe_key = urlunsplit(
+                (parsed.scheme, parsed.netloc, parsed.path, parsed.query, "")
             )
+            if dedupe_key == page_key or dedupe_key in seen:
+                continue
+            title = _anchor_title(anchor)
+            folded = title.casefold()
+            if not _has_material_clue(folded):
+                # Icon/table rows often carry the document name outside the
+                # anchor text; prefer the item block when it names a document.
+                recovered_title, recovered_folded = _item_title(
+                    anchor, title, folded
+                )
+                if _has_material_clue(recovered_folded):
+                    title, folded = recovered_title, recovered_folded
+            if not _is_material_link(folded, parsed.path) and not _is_event_notice(
+                folded
+            ):
+                if parsed.path.lower().endswith(_DOCUMENT_SUFFIXES):
+                    # A document link whose title carried no recognised clue:
+                    # never silently report a clean index.
+                    limitations.append("unclassified_document_links")
+                continue
+            seen.add(dedupe_key)
+            published = anchor.get("data-date")
+            if not published:
+                block = _item_container(anchor)
+                time = block.find("time") if block is not None else None
+                published = time.get("datetime") if time is not None else None
             if published:
                 try:
                     published = date.fromisoformat(published[:10]).isoformat()
@@ -154,10 +310,7 @@ def discover_official_documents(
                     }
                 )
                 continue
-            notice = any(
-                t in folded
-                for t in ["upcoming", "notice", "will present", "会议通知", "关于召开"]
-            )
+            notice = any(t in folded for t in _NOTICE_TITLE_TOKENS)
             kind = classify_document_kind(title, "investor_relations")
             if any(token in folded for token in _TRANSCRIPT_TITLE_TOKENS):
                 kind = "investor_call_transcript"
@@ -170,26 +323,38 @@ def discover_official_documents(
                 if published is None
                 else "candidate"
             )
-            if len(candidates) >= max_items:
-                limitations.append("item_limit_reached")
-                break
-            candidates.append(
-                {
-                    "candidate_id": "urn:company-wiki:official-candidate:sha256:"
-                    + hashlib.sha256(url.encode()).hexdigest(),
-                    "entity": entity,
-                    "title": title,
-                    "source_url": url,
-                    "document_kind": kind,
-                    "published_date": published,
-                    "disposition": disposition,
-                    "capture_id": page["capture_id"],
-                    "index_source_sha256": hashlib.sha256(original).hexdigest(),
-                    "is_business_original": False,
-                    "materiality": "not_assessed",
-                    "metadata_only": True,
-                }
+            pending.append(
+                (
+                    {
+                        "candidate_id": "urn:company-wiki:official-candidate:sha256:"
+                        + hashlib.sha256(url.encode()).hexdigest(),
+                        "entity": entity,
+                        "title": title,
+                        "source_url": url,
+                        "document_kind": kind,
+                        "published_date": published,
+                        "disposition": disposition,
+                        "capture_id": page["capture_id"],
+                        "index_source_sha256": hashlib.sha256(original).hexdigest(),
+                        "is_business_original": False,
+                        "materiality": "not_assessed",
+                        "metadata_only": True,
+                    },
+                    notice,
+                )
             )
+    # Materials first: an event notice must never consume the item budget
+    # ahead of a real document, and the total stays bounded by max_items.
+    materials = [record for record, notice in pending if not notice]
+    notices = [record for record, notice in pending if notice]
+    candidates = materials[:max_items]
+    if len(materials) > max_items:
+        limitations.append("item_limit_reached")
+    remaining = max_items - len(candidates)
+    if remaining > 0:
+        candidates.extend(notices[:remaining])
+    if len(notices) > remaining:
+        limitations.append("item_limit_reached")
     if any(x["published_date"] is None for x in candidates):
         limitations.append("publication_date_unknown")
     payload = {

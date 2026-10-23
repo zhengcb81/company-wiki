@@ -1,0 +1,1995 @@
+{
+  "schema_version": "w11-independent-review-probes/1",
+  "patched_module": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\src\\company_wiki\\source_catalog\\official_discovery.py",
+  "base_module": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\tmp\\review\\base_discovery.py",
+  "probe_count": 45,
+  "results": [
+    {
+      "id": "class-deck-positive",
+      "category": "classification",
+      "question": "Investor presentation deck must stay a candidate",
+      "input_html": "<a href=\"/deck.pdf\">Investor Presentation H1 2026</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Investor Presentation H1 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 79
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Investor Presentation H1 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 79
+      }
+    },
+    {
+      "id": "class-annual-report-positive",
+      "category": "classification",
+      "question": "Annual report must stay a candidate",
+      "input_html": "<a href=\"/ar.pdf\">Annual Report 2025</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 66
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 66
+      }
+    },
+    {
+      "id": "class-annual-results-FN",
+      "category": "classification-false-negative",
+      "question": "Common 'Annual Results' material title has no exact token -> dropped?",
+      "input_html": "<a href=\"/ar2025.pdf\">2025 Annual Results</a><a href=\"/ir2026.pdf\">Interim Results 2026</a><a href=\"/q3.pdf\">Q3 2026 Financial Results</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 164
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "2025 Annual Results",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar2025.pdf"
+          },
+          {
+            "title": "Interim Results 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ir2026.pdf"
+          },
+          {
+            "title": "Q3 2026 Financial Results",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/q3.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 164
+      }
+    },
+    {
+      "id": "class-download-anchor-FN",
+      "category": "classification-false-negative",
+      "question": "IR table row: title in cell, anchor text 'Download' -> dropped?",
+      "input_html": "<table><tr><td>2026 Interim Report</td><td><a href=\"/ir2026.pdf\">Download</a></td></tr></table>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 121
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Download",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ir2026.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 121
+      }
+    },
+    {
+      "id": "class-aria-label-icon-FN",
+      "category": "classification-false-negative",
+      "question": "Icon-only anchor with aria-label -> dropped?",
+      "input_html": "<a href=\"/deck.pdf\" aria-label=\"Investor Presentation\"><img src=\"/pdf.png\" alt=\"Investor Presentation\"></a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 133
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 133
+      }
+    },
+    {
+      "id": "class-corporate-deck-FN",
+      "category": "classification-false-negative",
+      "question": "Deck titled 'Corporate Deck' -> dropped?",
+      "input_html": "<a href=\"/corp.pdf\">Corporate Deck 2026</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 69
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Corporate Deck 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/corp.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 69
+      }
+    },
+    {
+      "id": "class-transcript-positive",
+      "category": "classification",
+      "question": "Earnings call transcript must be transcript kind",
+      "input_html": "<a href=\"/t.pdf\">Q2 2026 Earnings Call Transcript</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Q2 2026 Earnings Call Transcript",
+            "kind": "investor_call_transcript",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/t.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 79
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Q2 2026 Earnings Call Transcript",
+            "kind": "investor_call_transcript",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/t.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 79
+      }
+    },
+    {
+      "id": "class-earnings-release-not-transcript",
+      "category": "classification",
+      "question": "'Earnings release' must not become a transcript",
+      "input_html": "<a href=\"/r.pdf\">Q2 2026 Earnings Release</a><a href=\"/p.pdf\">Q2 2026 Earnings Presentation</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Q2 2026 Earnings Release",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/r.pdf"
+          },
+          {
+            "title": "Q2 2026 Earnings Presentation",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/p.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 121
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Q2 2026 Earnings Release",
+            "kind": "investor_call_transcript",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/r.pdf"
+          },
+          {
+            "title": "Q2 2026 Earnings Presentation",
+            "kind": "investor_call_transcript",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/p.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 121
+      }
+    },
+    {
+      "id": "class-cn-phone-call-FN",
+      "category": "classification-false-negative",
+      "question": "Chinese transcript title ('电话会纪要') has transcript token but no material token -> dropped?",
+      "input_html": "<a href=\"/cn-call.pdf\">2026年半年度电话会纪要</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 84
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "2026年半年度电话会纪要",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/cn-call.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 84
+      }
+    },
+    {
+      "id": "class-cn-positive",
+      "category": "classification",
+      "question": "CN report / activity / meeting notice positive controls",
+      "input_html": "<a href=\"/semi.pdf\">2026年半年度报告</a><a href=\"/act.pdf\">投资者关系活动记录表</a><a href=\"/notice.pdf\">关于召开业绩说明会的会议通知</a><a href=\"/q3.pdf\">2026年第三季度报告</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "2026年半年度报告",
+            "kind": "semi_annual_report",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/semi.pdf"
+          },
+          {
+            "title": "投资者关系活动记录表",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/act.pdf"
+          },
+          {
+            "title": "关于召开业绩说明会的会议通知",
+            "kind": "meeting_notice",
+            "disposition": "index_notice",
+            "published": null,
+            "url": "https://ir.example/notice.pdf"
+          },
+          {
+            "title": "2026年第三季度报告",
+            "kind": "quarterly_report",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/q3.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 240
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "2026年半年度报告",
+            "kind": "semi_annual_report",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/semi.pdf"
+          },
+          {
+            "title": "投资者关系活动记录表",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/act.pdf"
+          },
+          {
+            "title": "关于召开业绩说明会的会议通知",
+            "kind": "meeting_notice",
+            "disposition": "index_notice",
+            "published": null,
+            "url": "https://ir.example/notice.pdf"
+          },
+          {
+            "title": "2026年第三季度报告",
+            "kind": "quarterly_report",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/q3.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 240
+      }
+    },
+    {
+      "id": "class-cn-earnings-preview-FN",
+      "category": "classification-false-negative",
+      "question": "CN 业绩预告 / 业绩快报 / AGM notice have no material token -> dropped?",
+      "input_html": "<a href=\"/pre.pdf\">2026年半年度业绩预告</a><a href=\"/flash.pdf\">2026年度业绩快报</a><a href=\"/agm.pdf\">关于召开2026年第一次临时股东大会的通知</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 202
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "2026年半年度业绩预告",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/pre.pdf"
+          },
+          {
+            "title": "2026年度业绩快报",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/flash.pdf"
+          },
+          {
+            "title": "关于召开2026年第一次临时股东大会的通知",
+            "kind": "investor_relations",
+            "disposition": "index_notice",
+            "published": null,
+            "url": "https://ir.example/agm.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 202
+      }
+    },
+    {
+      "id": "legal-privacy-terms-positive",
+      "category": "non-material-exclusion",
+      "question": "Sealed-result class: privacy/terms PDFs must not be candidates",
+      "input_html": "<a href=\"/privacy.pdf\">Privacy Statement</a><a href=\"/terms.pdf\">Terms of Use</a><a href=\"/legal.pdf\">Legal Notice and Disclaimer</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 159
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Privacy Statement",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/privacy.pdf"
+          },
+          {
+            "title": "Terms of Use",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/terms.pdf"
+          },
+          {
+            "title": "Legal Notice and Disclaimer",
+            "kind": "investor_relations",
+            "disposition": "index_notice",
+            "published": null,
+            "url": "https://ir.example/legal.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 159
+      }
+    },
+    {
+      "id": "legal-hybrid-slip",
+      "category": "non-material-exclusion-gap",
+      "question": "Legal/site page whose title also contains a material token -> slips?",
+      "input_html": "<a href=\"/legal\">Legal Information - Investor Day 2026</a><a href=\"/access\">Accessibility - Annual Report Archive</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Legal Information - Investor Day 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/legal"
+          },
+          {
+            "title": "Accessibility - Annual Report Archive",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/access"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 143
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Legal Information - Investor Day 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/legal"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 143
+      }
+    },
+    {
+      "id": "nonmaterial-briefing-FP",
+      "category": "classification-false-positive",
+      "question": "Non-material 'Media Briefing' / 'Press Briefing' becomes a candidate?",
+      "input_html": "<article><time datetime=\"2026-05-01\"></time><a href=\"/events/media-briefing\">Media Briefing</a></article><article><time datetime=\"2026-06-01\"></time><a href=\"/events/press-briefing\">Press Briefing</a></article>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [
+          {
+            "title": "Media Briefing",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-05-01",
+            "url": "https://ir.example/events/media-briefing"
+          },
+          {
+            "title": "Press Briefing",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-06-01",
+            "url": "https://ir.example/events/press-briefing"
+          }
+        ],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 236
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 236
+      }
+    },
+    {
+      "id": "nonmaterial-upcoming-FP",
+      "category": "classification-false-positive",
+      "question": "Non-material 'Upcoming Events' navigation becomes an index_notice candidate?",
+      "input_html": "<a href=\"/events\">Upcoming Events</a><a href=\"/careers\">Upcoming Careers Fair</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Upcoming Events",
+            "kind": "investor_relations",
+            "disposition": "index_notice",
+            "published": null,
+            "url": "https://ir.example/events"
+          },
+          {
+            "title": "Upcoming Careers Fair",
+            "kind": "investor_relations",
+            "disposition": "index_notice",
+            "published": null,
+            "url": "https://ir.example/careers"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 107
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 107
+      }
+    },
+    {
+      "id": "material-contact-veto-FN",
+      "category": "classification-false-negative",
+      "question": "Material title that also contains 'contact' is vetoed?",
+      "input_html": "<a href=\"/ar.pdf\">Annual Report 2025 - Contact Information</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 88
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025 - Contact Information",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 88
+      }
+    },
+    {
+      "id": "material-privacy-veto-FN",
+      "category": "classification-false-negative",
+      "question": "Material title that also contains 'privacy' is vetoed?",
+      "input_html": "<a href=\"/deck.pdf\">Investor Presentation - Privacy Update</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 88
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Investor Presentation - Privacy Update",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 88
+      }
+    },
+    {
+      "id": "date-window-inclusive",
+      "category": "date",
+      "question": "start and as-of day inclusive",
+      "input_html": "<article><time datetime=\"2026-01-01\"></time><a href=\"/s.pdf\">Annual Report 2025</a></article><article><time datetime=\"2026-10-21\"></time><a href=\"/e.pdf\">Interim Report 2026</a></article><article><time datetime=\"2025-12-31\"></time><a href=\"/b.pdf\">Annual Report 2024</a></article><article><time datetime=\"2026-10-22\"></time><a href=\"/f.pdf\">Annual Report 2025 future</a></article>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-01-01",
+            "url": "https://ir.example/s.pdf"
+          },
+          {
+            "title": "Interim Report 2026",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-10-21",
+            "url": "https://ir.example/e.pdf"
+          }
+        ],
+        "excluded": [
+          {
+            "source_url": "https://ir.example/b.pdf",
+            "published_date": "2025-12-31",
+            "reason": "before_window"
+          },
+          {
+            "source_url": "https://ir.example/f.pdf",
+            "published_date": "2026-10-22",
+            "reason": "after_as_of"
+          }
+        ],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 406
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-01-01",
+            "url": "https://ir.example/s.pdf"
+          },
+          {
+            "title": "Interim Report 2026",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-10-21",
+            "url": "https://ir.example/e.pdf"
+          }
+        ],
+        "excluded": [
+          {
+            "source_url": "https://ir.example/b.pdf",
+            "published_date": "2025-12-31",
+            "reason": "before_window"
+          },
+          {
+            "source_url": "https://ir.example/f.pdf",
+            "published_date": "2026-10-22",
+            "reason": "after_as_of"
+          }
+        ],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 406
+      }
+    },
+    {
+      "id": "date-invalid-and-missing",
+      "category": "date",
+      "question": "invalid / missing dates stay unknown, no fetch time adoption",
+      "input_html": "<article><time datetime=\"not-a-date\"></time><a href=\"/bad.pdf\">Annual Report bad</a></article><a href=\"/none.pdf\">Annual Report no date</a><a href=\"/iso.pdf\" data-date=\"2026-10-21T23:59:59\">Annual Report iso attr</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report bad",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/bad.pdf"
+          },
+          {
+            "title": "Annual Report no date",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/none.pdf"
+          },
+          {
+            "title": "Annual Report iso attr",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-10-21",
+            "url": "https://ir.example/iso.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 242
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report bad",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/bad.pdf"
+          },
+          {
+            "title": "Annual Report no date",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/none.pdf"
+          },
+          {
+            "title": "Annual Report iso attr",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-10-21",
+            "url": "https://ir.example/iso.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 242
+      }
+    },
+    {
+      "id": "date-shared-parent-misattribution",
+      "category": "date-defect",
+      "question": "Two dated items sharing one <div>: both anchors get the first <time>?",
+      "input_html": "<div class=\"list\"><time datetime=\"2021-08-15\"></time><a href=\"/old.pdf\">Annual Report 2021</a><time datetime=\"2026-09-15\"></time><a href=\"/new.pdf\">Annual Report 2025</a></div>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [
+          {
+            "source_url": "https://ir.example/old.pdf",
+            "published_date": "2021-08-15",
+            "reason": "before_window"
+          },
+          {
+            "source_url": "https://ir.example/new.pdf",
+            "published_date": "2021-08-15",
+            "reason": "before_window"
+          }
+        ],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 202
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [
+          {
+            "source_url": "https://ir.example/old.pdf",
+            "published_date": "2021-08-15",
+            "reason": "before_window"
+          },
+          {
+            "source_url": "https://ir.example/new.pdf",
+            "published_date": "2021-08-15",
+            "reason": "before_window"
+          }
+        ],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 202
+      }
+    },
+    {
+      "id": "date-basic-format-input",
+      "category": "date-defect",
+      "question": "fromisoformat accepts basic YYYYMMDD, but window compare is string-based",
+      "input_html": "<article><time datetime=\"2026-09-15\"></time><a href=\"/ar.pdf\">Annual Report 2025</a></article>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [
+          {
+            "source_url": "https://ir.example/ar.pdf",
+            "published_date": "2026-09-15",
+            "reason": "before_window"
+          }
+        ],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 120
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [
+          {
+            "source_url": "https://ir.example/ar.pdf",
+            "published_date": "2026-09-15",
+            "reason": "before_window"
+          }
+        ],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 120
+      }
+    },
+    {
+      "id": "date-fetch-time-not-input",
+      "category": "date",
+      "question": "discover() has no fetch-time input; capture_id only -> date stays unknown",
+      "input_html": "<a href=\"/ar.pdf\">Annual Report 2025</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 66
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 66
+      }
+    },
+    {
+      "id": "url-relative",
+      "category": "url",
+      "question": "relative / nested resolution",
+      "input_html": "<a href=\"rel.pdf\">Annual Report 2025</a><a href=\"sub/dir/rel2.pdf\">Interim Report 2026</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/rel.pdf"
+          },
+          {
+            "title": "Interim Report 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/sub/dir/rel2.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 116
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/rel.pdf"
+          },
+          {
+            "title": "Interim Report 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/sub/dir/rel2.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 116
+      }
+    },
+    {
+      "id": "url-bad-scheme-credentials",
+      "category": "url",
+      "question": "javascript/mailto/ftp/credentials rejected",
+      "input_html": "<a href=\"javascript:void(0)\">Annual Report js</a><a href=\"mailto:ir@example.com\">Annual Report mail</a><a href=\"ftp://ir.example/x.pdf\">Annual Report ftp</a><a href=\"https://u:p@ir.example/x.pdf\">Annual Report creds</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 245
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 245
+      }
+    },
+    {
+      "id": "url-fragment-duplicate",
+      "category": "url-defect",
+      "question": "Same PDF with #page fragments becomes two candidates?",
+      "input_html": "<a href=\"/ar.pdf#page=1\">Annual Report 2025 one</a><a href=\"/ar.pdf#page=2\">Annual Report 2025 two</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025 one",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf#page=1"
+          },
+          {
+            "title": "Annual Report 2025 two",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf#page=2"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 128
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025 one",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf#page=1"
+          },
+          {
+            "title": "Annual Report 2025 two",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf#page=2"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 128
+      }
+    },
+    {
+      "id": "url-self-link",
+      "category": "url-false-positive",
+      "question": "Empty / '#' href with material text points at the index page itself",
+      "input_html": "<a href=\"\">Annual Report 2025</a><a href=\"#\">Interim Report 2026</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ir"
+          },
+          {
+            "title": "Interim Report 2026",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ir#"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 94
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 94
+      }
+    },
+    {
+      "id": "url-malformed-ipv6",
+      "category": "url-defect",
+      "question": "One malformed href must not abort the whole discovery",
+      "input_html": "<a href=\"/ok.pdf\">Annual Report 2025</a><a href=\"http://[\">Annual Report malformed</a>",
+      "limits": {},
+      "patched": {
+        "raised": "ValueError",
+        "message": "Invalid IPv6 URL"
+      },
+      "base_0d7ada21": {
+        "raised": "ValueError",
+        "message": "Invalid IPv6 URL"
+      }
+    },
+    {
+      "id": "url-scheme-relative-cdn",
+      "category": "url",
+      "question": "protocol-relative CDN link resolves and stays",
+      "input_html": "<a href=\"//cdn.example/ar.pdf\">Annual Report 2025</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://cdn.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 79
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://cdn.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 79
+      }
+    },
+    {
+      "id": "trunc-item-limit",
+      "category": "limits",
+      "question": "item limit keeps partial + limitation, never no_documents",
+      "input_html": "<a href=\"/1.pdf\">Annual Report one</a><a href=\"/2.pdf\">Annual Report two</a><a href=\"/3.pdf\">Annual Report three</a>",
+      "limits": {
+        "max_items": 1
+      },
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report one",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/1.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "item_limit_reached",
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 142
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report one",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/1.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "item_limit_reached",
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 142
+      }
+    },
+    {
+      "id": "trunc-byte-limit",
+      "category": "limits",
+      "question": "byte limit on second page keeps partial + limitation",
+      "input_pages": [
+        {
+          "url": "https://ir.example/ir",
+          "capture_id": "BIG",
+          "bytes": 13526,
+          "mime": "text/html"
+        },
+        {
+          "url": "https://ir.example/ir",
+          "capture_id": "SMALL",
+          "bytes": 70,
+          "mime": "text/html"
+        }
+      ],
+      "limits": {
+        "max_bytes": 13536
+      },
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report big one",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/big1.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "byte_limit_reached",
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "BIG",
+          "SMALL"
+        ],
+        "response_bytes": 13596
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report big one",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/big1.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "byte_limit_reached",
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "BIG",
+          "SMALL"
+        ],
+        "response_bytes": 13596
+      }
+    },
+    {
+      "id": "trunc-byte-limit-first-page",
+      "category": "limits",
+      "question": "first page over byte cap: zero candidates + honest limitation",
+      "input_pages": [
+        {
+          "url": "https://ir.example/ir",
+          "capture_id": "BIG",
+          "bytes": 13526,
+          "mime": "text/html"
+        }
+      ],
+      "limits": {
+        "max_bytes": 100
+      },
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [
+          "byte_limit_reached"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "BIG"
+        ],
+        "response_bytes": 13526
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [
+          "byte_limit_reached"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "BIG"
+        ],
+        "response_bytes": 13526
+      }
+    },
+    {
+      "id": "coverage-zero-pages",
+      "category": "coverage",
+      "question": "library call with zero pages yields checked_index_only?",
+      "input_pages": [],
+      "limits": {
+        "max_items": 30
+      },
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [],
+        "response_bytes": 0
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [],
+        "response_bytes": 0
+      }
+    },
+    {
+      "id": "coverage-dynamic-shell",
+      "category": "coverage",
+      "question": "empty dynamic shell stays partial + no_documents false",
+      "input_html": "<div id='app'></div><script src='/app.js'></script>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [
+          "dynamic_content_unresolved"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 77
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [
+          "dynamic_content_unresolved"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 77
+      }
+    },
+    {
+      "id": "coverage-external-script-with-material",
+      "category": "coverage",
+      "question": "static material + analytics script -> dynamic partial but candidate kept",
+      "input_html": "<script src=\"https://analytics.example/a.js\"></script><article><time datetime=\"2026-09-01\"></time><a href=\"/ar.pdf\">Annual Report 2025</a></article>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-09-01",
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "dynamic_content_unresolved"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 174
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-09-01",
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "dynamic_content_unresolved"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 174
+      }
+    },
+    {
+      "id": "coverage-inline-jsonld",
+      "category": "coverage",
+      "question": "inline JSON-LD is declarative, not dynamic unresolved",
+      "input_html": "<script type=\"application/ld+json\">{\"@type\":\"Event\",\"name\":\"Investor Day\"}</script><article><time datetime=\"2026-09-01\"></time><a href=\"/deck.pdf\">Investor Presentation</a></article>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [
+          {
+            "title": "Investor Presentation",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-09-01",
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 208
+      },
+      "base_0d7ada21": {
+        "coverage_status": "checked_index_only",
+        "candidates": [
+          {
+            "title": "Investor Presentation",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-09-01",
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 208
+      }
+    },
+    {
+      "id": "coverage-loading-word",
+      "category": "coverage",
+      "question": "static prose containing the word 'loading' triggers dynamic partial?",
+      "input_html": "<p>Loading dock expansion completed.</p><article><time datetime=\"2026-09-01\"></time><a href=\"/ar.pdf\">Annual Report 2025</a></article>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-09-01",
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "dynamic_content_unresolved"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 160
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "candidate",
+            "published": "2026-09-01",
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "dynamic_content_unresolved"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 160
+      }
+    },
+    {
+      "id": "coverage-all-filtered-static",
+      "category": "coverage-observability",
+      "question": "all anchors dropped by title policy -> checked_index_only with no signal?",
+      "input_html": "<a href=\"/ar2025.pdf\">2025 Annual Results</a><a href=\"/deck.pdf\">Board Deck</a>",
+      "limits": {},
+      "patched": {
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 105
+      },
+      "base_0d7ada21": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "2025 Annual Results",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar2025.pdf"
+          },
+          {
+            "title": "Board Deck",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/deck.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "probe"
+        ],
+        "response_bytes": 105
+      }
+    },
+    {
+      "id": "receipt-event-sha",
+      "category": "receipt",
+      "question": "receipt.event_sha256 recomputes from payload; event_ids bind captures",
+      "patched": {
+        "event_ids": [
+          "receipt-cap"
+        ],
+        "event_sha256_matches": true,
+        "candidate_capture_ids": [
+          "receipt-cap"
+        ],
+        "index_source_sha256": [
+          "09dc0dcb8f3ff90d28f874698f07987a297bb227279bfcacd3cac0328e5c1e85"
+        ]
+      }
+    },
+    {
+      "id": "cli-pages-basic",
+      "category": "cli",
+      "question": "public CLI pages branch: material kept, legal excluded",
+      "exit": 0,
+      "stdout": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "Annual Report 2025",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://ir.example/ar.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "cli-cap"
+        ],
+        "response_bytes": 110
+      },
+      "stderr": ""
+    },
+    {
+      "id": "cli-duplicate-byte-limitation",
+      "category": "cli-defect",
+      "question": "single oversized page: does byte_limit_reached appear twice?",
+      "exit": 0,
+      "limitations": [
+        "byte_limit_reached",
+        "byte_limit_reached"
+      ],
+      "coverage_status": "partial",
+      "candidates": []
+    },
+    {
+      "id": "cli-missing-page-key",
+      "category": "cli-defect",
+      "question": "missing page-row key must be a clean JSON refusal, not a traceback",
+      "exit": 1,
+      "stdout": "",
+      "stderr_tail": [
+        "    \"capture_id\": row[\"capture_id\"],",
+        "                  ~~~^^^^^^^^^^^^^^",
+        "KeyError: 'capture_id'"
+      ]
+    },
+    {
+      "id": "cli-missing-entity",
+      "category": "cli-defect",
+      "question": "missing request.entity must be a clean JSON refusal",
+      "exit": 1,
+      "stdout": "",
+      "stderr_tail": [
+        "    entity=request[\"entity\"],",
+        "           ~~~~~~~^^^^^^^^^^",
+        "KeyError: 'entity'"
+      ]
+    },
+    {
+      "id": "cli-both-inputs",
+      "category": "cli",
+      "question": "urls+pages both supplied -> refusal exit 2",
+      "exit": 2,
+      "stderr": "{\"schema_version\": \"official-source-failure/1\", \"status\": \"failed\", \"error_code\": \"official_source_ValueError\"}"
+    },
+    {
+      "id": "cli-index-fetch-incomplete",
+      "category": "cli",
+      "question": "failed index fetch propagates partial + index_fetch_incomplete",
+      "exit": 0,
+      "coverage_status": "partial",
+      "limitations": [
+        "publication_date_unknown",
+        "index_fetch_incomplete"
+      ],
+      "fetch_receipts": [
+        {
+          "status": "opened"
+        },
+        {
+          "status": "failed",
+          "error_type": "ConnectError"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "id": "sealed-derived-minimal-fixture",
+      "category": "sealed-evidence",
+      "question": "derived_minimal_fixture: exact 3 sealed titles/URLs through public CLI pages branch; NOT an original replay (real 486789B body absent)",
+      "binding": {
+        "sealed_result_sha256": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52",
+        "sealed_body_sha256_receipt_only": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+        "sealed_event_id": "official-index-6eed999bdccb40c595c01c5c4b76f16c",
+        "derived_fixture_sha256": "37e86e5969f210b5499d17b858a05621b67efbc0159dfda359cf92a6a444e516",
+        "derived_fixture_bytes": 403,
+        "fixture_class": "derived_minimal_fixture",
+        "original_body_available": false
+      },
+      "patched_cli": {
+        "exit": 0,
+        "coverage_status": "checked_index_only",
+        "candidates": [],
+        "excluded": [],
+        "limitations": [],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "w11-derived-minimal"
+        ],
+        "fetch_receipts": [],
+        "stderr": ""
+      },
+      "base_0d7ada21_same_fixture": {
+        "coverage_status": "partial",
+        "candidates": [
+          {
+            "title": "隐私声明",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://officialsite-static.wuxiapptec.com/upload/CN_20250912_315745c95e.pdf"
+          },
+          {
+            "title": "使用条款",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://officialsite-static.wuxiapptec.com/upload/terms_of_use_zh_3199a05fec.pdf"
+          },
+          {
+            "title": "|  隐私声明",
+            "kind": "investor_relations",
+            "disposition": "date_unknown",
+            "published": null,
+            "url": "https://officialsite-static.wuxiapptec.com/upload/Wu_Xi_App_Tec_Privacy_Policy_CN_2023_67982492ef.pdf"
+          }
+        ],
+        "excluded": [],
+        "limitations": [
+          "publication_date_unknown"
+        ],
+        "no_documents_claimed": false,
+        "receipt_event_ids": [
+          "w11-derived-minimal"
+        ],
+        "response_bytes": 403
+      }
+    }
+  ]
+}

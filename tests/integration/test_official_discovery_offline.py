@@ -1,9 +1,11 @@
 """W11: offline deterministic discovery regression for classification and coverage.
 
 Issuer-neutral synthetic fixtures only. No network, no model, no production
-catalog. Fixtures derived from the sealed wuxi IR result are marked
-``derived_minimal_fixture`` and bound to that result's SHA; they are not a
-replay of the original page, which is not retained anywhere in scope.
+catalog. The two privacy/terms titles used by the legal-navigation regression
+mirror the sealed faa5bf discover result (stdout SHA-256
+``1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52``); they
+are a derived minimal fixture, not a replay of the original page, whose
+486789-byte body is not retained anywhere in the authorized scope.
 """
 
 import json
@@ -19,8 +21,8 @@ from company_wiki.source_catalog.official_discovery import (
     discover_official_documents,
 )
 
-# The hermetic autouse fixture blocks every socket; the CLI subprocess only
-# needs a local socket pair for asyncio's loop (no external connection).
+# Any incidental socket use in-process stays loopback-only. The discover
+# pages branch itself performs no network I/O; this guard is defence in depth.
 _SOCKET_CONNECT = socket.socket.connect
 
 
@@ -43,18 +45,6 @@ def _cli_env(repo: Path) -> dict:
         "PYTHONPATH": str(repo / "src"),
         "PYTHONDONTWRITEBYTECODE": "1",
     }
-
-# Sealed real discover result (result_receipt, not the 486789B body):
-# sha256 of execution_replays/r1-remediation-01/roles/executor/commands/
-# faa5bf2650964e9480566759c565ce11/stdout.txt
-SEALED_RESULT_SHA256 = (
-    "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52"
-)
-DERIVED_FIXTURE_NOTE = (
-    "derived_minimal_fixture: titles mirror the sealed faa5bf result SHA "
-    + SEALED_RESULT_SHA256
-    + "; not an original page replay; body_available=false"
-)
 
 
 def _page(body: str, url="https://ir.example/ir", capture="fx"):
@@ -119,6 +109,42 @@ class TestMaterialClassification:
             "meeting_notice", "index_notice",
         )
 
+    def test_table_row_document_name_recovers_a_download_anchor(self):
+        # Index tables often put the document name in a neighbouring cell and
+        # only "Download" inside the anchor.
+        out = _discover([_page(
+            '<table><tr><td>2026 Interim Report</td>'
+            '<td><a href="/ir2026.pdf">Download</a></td></tr></table>'
+        )])
+        assert len(out["candidates"]) == 1
+        candidate = out["candidates"][0]
+        assert candidate["source_url"] == "https://ir.example/ir2026.pdf"
+        assert "Interim Report" in candidate["title"]
+
+    def test_aria_label_and_image_alt_supply_the_lead(self):
+        out = _discover([_page(
+            '<a href="/deck.pdf" aria-label="Investor Presentation">'
+            '<img alt="Investor Presentation"></a>'
+        )])
+        assert out["candidates"][0]["title"] == "Investor Presentation"
+
+    def test_annual_and_interim_results_titles_are_material(self):
+        out = _discover([_page(
+            '<a href="/a1.pdf">2025 Annual Results</a>'
+            '<a href="/a2.pdf">Interim Results 2026</a>'
+            '<a href="/a3.pdf">Q3 2026 Financial Results</a>'
+        )])
+        assert len(out["candidates"]) == 3
+
+    def test_cn_call_record_and_corporate_deck_are_material(self):
+        out = _discover([_page(
+            '<a href="/c1.pdf">2026年半年度电话会纪要</a>'
+            '<a href="/d1.pdf">Corporate Deck 2026</a>'
+        )])
+        by = {c["source_url"]: c["document_kind"] for c in out["candidates"]}
+        assert by["https://ir.example/c1.pdf"] == "investor_call_transcript"
+        assert by["https://ir.example/d1.pdf"] == "investor_relations"
+
 
 class TestNonMaterialExclusion:
     """Negative controls: legal/static navigation never becomes material."""
@@ -145,6 +171,38 @@ class TestNonMaterialExclusion:
             '<a href="/nav4.pdf">Contact Information</a>'
         )])
         assert out["candidates"] == []
+        # A dropped document-suffix link is visible, never a clean index.
+        assert "unclassified_document_links" in out["limitations"]
+
+    def test_media_and_press_briefing_are_not_material_leads(self):
+        out = _discover([_page(
+            '<article><time datetime="2026-05-01"></time>'
+            '<a href="/mb">Media Briefing</a></article>'
+            '<article><time datetime="2026-05-02"></time>'
+            '<a href="/pb">Press Briefing</a></article>'
+        )])
+        assert out["candidates"] == []
+
+    def test_upcoming_events_navigation_is_not_a_notice_candidate(self):
+        out = _discover([_page(
+            '<a href="/events">Upcoming Events</a>'
+            '<a href="/careers">Upcoming Careers Fair</a>'
+        )])
+        assert out["candidates"] == []
+
+    def test_legal_page_section_is_vetoed_even_with_a_material_word(self):
+        out = _discover([_page(
+            '<a href="/legal">Legal Information - Investor Day 2026</a>'
+            '<a href="/access">Accessibility - Annual Report Archive</a>'
+        )])
+        assert out["candidates"] == []
+
+    def test_secondary_navigation_word_does_not_veto_a_material_title(self):
+        out = _discover([_page(
+            '<a href="/ar.pdf">Annual Report 2025 - Contact Information</a>'
+            '<a href="/p.pdf">Investor Presentation - Privacy Update</a>'
+        )])
+        assert len(out["candidates"]) == 2
 
     def test_event_notice_is_index_notice_not_a_business_original(self):
         out = _discover([_page(
@@ -191,16 +249,34 @@ class TestTimeWindowBoundaries:
             assert c["disposition"] == "date_unknown"
         assert "publication_date_unknown" in out["limitations"]
 
-    def test_page_retrieval_marker_is_not_a_publication_date(self):
-        # A capture timestamp near the anchor must not be adopted as the
-        # material's published date.
+    def test_page_level_timestamp_is_not_a_material_date(self):
+        # A page/section "Last updated" time must never become every
+        # material's publication date, and it must not exclude the materials.
         out = _discover([_page(
-            '<article><time datetime="2026-10-21T19:39:09Z"></time>'
-            '<a href="/m.pdf">Investor presentation</a></article>'
+            '<div class="content"><time datetime="2026-10-22">Last updated</time>'
+            '<a href="/ar.pdf">Annual Report 2025</a>'
+            '<a href="/ir.pdf">Interim Report 2026</a></div>'
         )])
-        assert out["candidates"][0]["published_date"] == "2026-10-21"
-        # in-window date is a candidate; the point is the date comes from the
-        # index's own time element only, never from our fetch time.
+        assert len(out["candidates"]) == 2
+        assert all(c["published_date"] is None for c in out["candidates"])
+        assert out["excluded"] == []
+
+    def test_item_scoped_datetime_is_truncated_to_a_date(self):
+        out = _discover([_page(
+            '<article><time datetime="2026-09-15T10:30:00Z"></time>'
+            '<a href="/deck.pdf">Investor presentation</a></article>'
+        )])
+        assert out["candidates"][0]["published_date"] == "2026-09-15"
+
+    def test_shared_list_item_time_is_not_borrowed_by_siblings(self):
+        out = _discover([_page(
+            '<tr><time datetime="2026-09-01"></time>'
+            '<a href="/a.pdf">Annual Report 2025</a></tr>'
+            '<tr><a href="/b.pdf">Interim Report 2026</a></tr>'
+        )])
+        by = {c["source_url"]: c["published_date"] for c in out["candidates"]}
+        assert by["https://ir.example/a.pdf"] == "2026-09-01"
+        assert by["https://ir.example/b.pdf"] is None
 
 
 class TestUrlAndDedup:
@@ -222,13 +298,36 @@ class TestUrlAndDedup:
         )])
         assert len(out["candidates"]) == 1
 
-    def test_query_and_fragment_variants_stay_distinct(self):
+    def test_fragment_variants_dedupe_but_query_variants_stay_distinct(self):
         out = _discover([_page(
             '<a href="/doc.pdf">Earnings call transcript plain</a>'
             '<a href="/doc.pdf?x=1">Earnings call transcript query</a>'
             '<a href="/doc.pdf#s1">Earnings call transcript fragment</a>'
         )])
-        assert len(out["candidates"]) == 3
+        assert [c["source_url"] for c in out["candidates"]] == [
+            "https://ir.example/doc.pdf",
+            "https://ir.example/doc.pdf?x=1",
+        ]
+
+    def test_self_link_and_empty_href_are_not_document_leads(self):
+        out = _discover([_page(
+            '<a href="">Annual Report 2025</a>'
+            '<a href="#">Interim Report 2026</a>'
+            '<a href="/real.pdf">Annual Report 2025</a>'
+        )])
+        assert [c["source_url"] for c in out["candidates"]] == [
+            "https://ir.example/real.pdf"
+        ]
+
+    def test_one_malformed_href_does_not_abort_the_page(self):
+        out = _discover([_page(
+            '<a href="/ok.pdf">Annual Report 2025</a>'
+            '<a href="http://[">Annual Report malformed</a>'
+        )])
+        assert [c["source_url"] for c in out["candidates"]] == [
+            "https://ir.example/ok.pdf"
+        ]
+        assert "invalid_anchor_url" in out["limitations"]
 
     def test_same_title_different_originals_are_kept(self):
         out = _discover([_page(
@@ -329,6 +428,15 @@ class TestLimitsHonesty:
             _discover([_page('<a href="/x.pdf">Earnings call</a>')], max_items=31)
         with pytest.raises(ValueError, match="invalid_discovery_limits"):
             _discover([_page('<a href="/x.pdf">Earnings call</a>')], max_bytes=0)
+
+    def test_notice_never_consumes_the_material_item_budget(self):
+        out = _discover([_page(
+            '<a href="/events">Upcoming Events</a>'
+            '<a href="/ar.pdf">Annual Report 2025</a>'
+        )], max_items=1)
+        assert [c["source_url"] for c in out["candidates"]] == [
+            "https://ir.example/ar.pdf"
+        ]
 
 
 class TestPublicCliEndToEnd:
@@ -477,5 +585,35 @@ class TestPublicCliEndToEnd:
         assert call.returncode == 0, call.stderr
         out = json.loads(call.stdout)
         assert out["coverage_status"] == "partial"
-        assert "byte_limit_reached" in out["limitations"]
+        assert out["limitations"].count("byte_limit_reached") == 1
         assert out["no_documents_claimed"] is False
+
+    def test_cli_malformed_page_row_is_a_clean_refusal(self, tmp_path):
+        repo = Path(__file__).resolve().parents[2]
+        request = {
+            "schema_version": "official-discovery-request/1",
+            "entity": "Neutral Instruments",
+            "start_date": "2026-01-01",
+            "as_of_date": "2026-10-21",
+            "pages": [{"url": "https://ir.example/ir", "mime_type": "text/html"}],
+        }
+        request_file = tmp_path / "req.json"
+        request_file.write_text(json.dumps(request), encoding="utf-8")
+        call = subprocess.run(
+            [
+                sys.executable, "-X", "utf8", "-B",
+                "-m", "company_wiki.source_catalog.official_source_cli",
+                "--operation", "discover",
+                "--request", str(request_file),
+            ],
+            cwd=tmp_path,
+            env=_cli_env(repo),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            timeout=30,
+        )
+        assert call.returncode == 2
+        failure = json.loads(call.stderr)
+        assert failure["status"] == "failed"
+        assert "KeyError" not in call.stderr

@@ -3,6 +3,16 @@
   "lane": "W11-CWP-SOURCES",
   "initial_state": {
     "workspace_git_status_before_lane": "clean at 0d7ada21 (dispatch start_head match)",
+    "sparse_checkout_cone": [
+      ".githooks",
+      ".github",
+      "config",
+      "docs",
+      "scripts",
+      "src",
+      "tests",
+      "tools"
+    ],
     "protected_inputs_sha256": {
       "src/company_wiki/source_catalog/official_discovery.py": "5073da1872d56577980b0c94ba43aca527a4e87bbdfd4fdca885f87d4ad5b17d",
       "src/company_wiki/source_catalog/official_source_cli.py": "18746c6b0904e38e3b24b5a015d79ebf8b814bf0bab5f73a539154c2c94eae46",
@@ -22,26 +32,38 @@
     "protected_inputs_unchanged_after_tests": true,
     "production_roots_still_absent_and_unchanged": true,
     "basetemp_removed": true,
-    "stray_pytest_dir_in_workspace": "removed (pytest-of-郑曾波 detected and deleted; it was an early pytest default basetemp artifact)",
+    "stray_pytest_dir_in_workspace": "removed (pytest-of-郑曾波; default-basetemp artifact re-created by review runs and removed again)",
+    "stray_push_gate_log_removed": "delivery/w11/push-gate-rerun.log (0-byte, created by a cancelled baseline gate run; removed before handoff)",
+    "delivery_files_restored_after_sparse_op": {
+      "reason": "`git sparse-checkout add benchmarks control` re-applied skip-worktree and removed the six tracked delivery/w11/* files from the working tree because delivery/ was outside the cone; HEAD blobs were intact",
+      "action": "`git sparse-checkout add delivery` then `git checkout HEAD -- delivery/w11/<six files>`; review artifacts were backed up to %TEMP% before the operation and re-verified after",
+      "verified_present": true
+    },
     "only_lane_writes_in_tree": [
       "docs/plans/r1-source-recovery-20261023/task_plan.md (modified)",
       "docs/plans/r1-source-recovery-20261023/findings.md (modified)",
       "docs/plans/r1-source-recovery-20261023/progress.md (modified)",
       "src/company_wiki/source_catalog/official_discovery.py (modified)",
+      "src/company_wiki/source_catalog/official_source_cli.py (modified; discover branch only)",
       "tests/integration/test_official_source_flow.py (modified)",
       "tests/integration/test_official_discovery_offline.py (new)",
-      "delivery/w11/ (new)"
+      "delivery/w11/ (new: handoff, evidence, tests, cleanup, probes, review)"
     ]
   },
   "restored": {
     "owned_tmp_dirs_removed": [
       "%TEMP%/w11-cleanup-* (verification basetemp)",
-      "workspace pytest-of-* stray (early run artifact)",
-      "%TEMP%/probe*.py, recheck*.py, verify_final.py, needle_search.py, full_hash_scan.py, w11_cleanup_verify.py (diagnostic scripts)"
+      "%TEMP%/w11-review-backup-* (temporary review backup taken before the sparse operation)",
+      "workspace pytest-of-* stray (default-basetemp artifact, twice)",
+      "%TEMP%/probe*.py, recheck*.py, verify_final.py, needle_search.py, full_hash_scan.py, w11_cleanup_verify.py (diagnostic scripts, not evidence)"
+    ],
+    "retained_evidence": [
+      "delivery/w11/probes/red_probe.py + red-probe-output.txt (base 0d7ada21 module rebuilt from git; D1/D2/D3 RED and post-fix control)",
+      "delivery/w11/review/ (independent review 1 report, JSON and raw evidence)"
     ],
     "real_originals_deleted": 0,
     "sealed_evidence_modified": 0
   },
-  "verification_command": "w11_cleanup_verify.py harness (in-session; script removed after run, methodology recorded here)",
-  "method_note": "清理只针对本线新增物；封存证据/原件零删改。真实 486789B 正文本就不存在于范围内，无可清理。"
+  "verification_command": "in-session harness: snapshot protected-input SHA-256 before/after the matrix run, assert production roots absent, assert owned basetemp removed; recorded methodology in test_results.json",
+  "method_note": "清理只针对本线新增物；封存证据/原件零删改。真实 486789B 正文本就不存在于范围内，无可清理。唯一的环境面改动是 sparse checkout 增补 benchmarks/control/delivery 三个 tracked 目录（无内容编辑），用于跑通 pre-push 门禁并保护交付文件。"
 }

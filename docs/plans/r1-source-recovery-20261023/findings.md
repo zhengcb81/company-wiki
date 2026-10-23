@@ -66,6 +66,25 @@
 
 **RED 判定**：缺陷 1/2/3 由中性 fixture 在未改产品上稳定复现（probe_defects.py / probe12.py 实测输出），构成确定性内部缺陷；真实 faa5bf… 结果（3/3 隐私/条款候选）与缺陷 2 的机制直接对应。其余行为按表如实记录通过，不预设全改。
 
-## 后续发现
+## 独立审查 1（agent 638a667b，绑定 ecc7d622）与修复轮
 
-由实施者追加实际证据与根因，不把待办改写成已完成。
+审查结论 CHANGES_REQUIRED，发现 13 项。逐项处置：
+
+| 审查项 | 级别 | 处置 |
+|---|---|---|
+| IR-01 标题白名单静默漏掉真实材料链接（表格 Download、aria-label、Annual Results、Corporate Deck、CN 电话会纪要） | High | **已修**：`_anchor_title` 支持 aria-label/img alt；表格/列表行由 item container 回补文档名；材料 token 扩到 results/announcement/press release/report/prospectus/circular/proxy/webcast/dividend/deck/公告/报告/电话会/纪要 等；`agm/egm/6-k/8-k/10-k/10-q/20-f` 用词边界；无标题文档后缀链接记 `unclassified_document_links` limitation，不再静默 checked_index_only |
+| IR-02 briefing/upcoming 误作材料线索；notice 抢占 item 预算 | Medium | **已修**：删除 briefing/upcoming 材料 token；event notice 需 notice+event 双线索；候选按 materials 优先分配 max_items，notice 只占剩余名额 |
+| IR-03 denylist 既漏（Legal/Accessibility）又误杀（Contact/Privacy 混排） | Low | **已修**：legal/accessibility/imprint 页级否决优先；material 线索优先于二级 legal-doc/nav 词；media/press briefing 显式排除；contact 仅在无材料线索时否决 |
+| IR-04 共享容器/页面级 `<time>` 被当成每份材料日期；测试名与断言不符 | Medium | **已修**：日期只取 anchor `data-date` 或「仅含该一个链接」的 article/li/tr/div 内 `<time>`；页面级 time 不再排除材料；测试改为 page-level timestamp 语义 + item 级截断 + sibling 不借用 |
+| IR-05 fragment 变体重复计数 | Low | **已修**：去重键去 fragment；query 仍区分 |
+| IR-06 CLI 重复 byte_limit_reached；坏 page row KeyError | Low | **已修**：limitations 去重；page row/entity/date 校验，坏输入走结构化 exit 2 |
+| IR-07 一个坏 href 中断全页 | Low | **已修**：per-anchor try/except，记 `invalid_anchor_url` 并保留其他候选 |
+| IR-08 空/# href 自指候选 | Low | **已修**：空/hash 与指向索引自身的 URL 直接跳过 |
+| IR-09 evidence_inventory.json 非法 JSON、字节总数不可复现 | Medium | **已修**：纯整数（audit 2052/166,731,220；holdout 65/17,360,200），全部 delivery JSON `json.load` 校验 |
+| IR-10 无 RED 证据留存 | Low | **已修**：`delivery/w11/probes/red_probe.py` 从 git 0d7ada21 重建 base 模块（blob SHA 7d8fb129…），保留 D1/D2/D3 的 base/修复后对照输出 |
+| IR-11 测试名/注释/未用常量 | Low | **已修**：删未用常量、修正 socket 注释、重命名日期测试 |
+| IR-12 冗余 token、无 EOF 换行 | Low | **已修**：`_TRANSCRIPT_TITLE_TOKENS` 精简为 transcript/电话会/纪要；删 `" Cookie"`；测试文件带 EOF 换行 |
+| IR-13 稀疏检出误删 delivery 文件 / 残留 0B 日志 | Info | **已修**：`sparse-checkout add delivery` + `checkout HEAD --` 恢复；删除 push-gate-rerun.log；cleanup.json 记录 |
+
+修复后矩阵：新离线套件 40 例 + 既有 7 例 = **47 passed**（重跑 JUnit/日志已更新）。
+

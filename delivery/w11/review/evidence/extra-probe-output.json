@@ -1,0 +1,378 @@
+[
+  {
+    "id": "date-page-level-timestamp",
+    "question": "page-level <time> in a shared div becomes every material's published_date?",
+    "patched": {
+      "coverage": "checked_index_only",
+      "candidates": [],
+      "excluded": [
+        {
+          "source_url": "https://ir.example/ar.pdf",
+          "published_date": "2026-10-22",
+          "reason": "after_as_of"
+        },
+        {
+          "source_url": "https://ir.example/ir.pdf",
+          "published_date": "2026-10-22",
+          "reason": "after_as_of"
+        }
+      ],
+      "limitations": [],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 181,
+      "no_documents": false
+    },
+    "base": {
+      "coverage": "checked_index_only",
+      "candidates": [],
+      "excluded": [
+        {
+          "source_url": "https://ir.example/ar.pdf",
+          "published_date": "2026-10-22",
+          "reason": "after_as_of"
+        },
+        {
+          "source_url": "https://ir.example/ir.pdf",
+          "published_date": "2026-10-22",
+          "reason": "after_as_of"
+        }
+      ],
+      "limitations": [],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 181,
+      "no_documents": false
+    },
+    "limits": {}
+  },
+  {
+    "id": "date-shared-list",
+    "question": "shared <ul><li> wrapper: first <time> wins for later anchors?",
+    "patched": {
+      "coverage": "checked_index_only",
+      "candidates": [],
+      "excluded": [
+        {
+          "source_url": "https://ir.example/old.pdf",
+          "published_date": "2022-01-01",
+          "reason": "before_window"
+        },
+        {
+          "source_url": "https://ir.example/new.pdf",
+          "published_date": "2022-01-01",
+          "reason": "before_window"
+        }
+      ],
+      "limitations": [],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 161,
+      "no_documents": false
+    },
+    "base": {
+      "coverage": "checked_index_only",
+      "candidates": [],
+      "excluded": [
+        {
+          "source_url": "https://ir.example/old.pdf",
+          "published_date": "2022-01-01",
+          "reason": "before_window"
+        },
+        {
+          "source_url": "https://ir.example/new.pdf",
+          "published_date": "2022-01-01",
+          "reason": "before_window"
+        }
+      ],
+      "limitations": [],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 161,
+      "no_documents": false
+    },
+    "limits": {}
+  },
+  {
+    "id": "limit-item-across-pages",
+    "question": "item limit on page1: page2 anchors omitted, both events recorded, partial",
+    "patched": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Annual Report one",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "item_limit_reached",
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "P1",
+        "P2"
+      ],
+      "response_bytes": 128,
+      "no_documents": false
+    },
+    "base": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Annual Report one",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "item_limit_reached",
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "P1",
+        "P2"
+      ],
+      "response_bytes": 128,
+      "no_documents": false
+    },
+    "limits": {
+      "max_items": 1
+    }
+  },
+  {
+    "id": "limit-exact-max-no-false-limitation",
+    "question": "exactly max_items candidates with no further anchor: no item_limit claim",
+    "patched": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Annual Report one",
+          null,
+          "date_unknown"
+        ],
+        [
+          "Annual Report two",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 102,
+      "no_documents": false
+    },
+    "base": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Annual Report one",
+          null,
+          "date_unknown"
+        ],
+        [
+          "Annual Report two",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 102,
+      "no_documents": false
+    },
+    "limits": {
+      "max_items": 2
+    }
+  },
+  {
+    "id": "base-d3-generic-nav",
+    "question": "pre-fix D3: Business/Investor/Conference/Contact Information became candidates",
+    "patched": {
+      "coverage": "checked_index_only",
+      "candidates": [],
+      "excluded": [],
+      "limitations": [],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 149,
+      "no_documents": false
+    },
+    "base": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Business",
+          null,
+          "date_unknown"
+        ],
+        [
+          "Investor",
+          null,
+          "date_unknown"
+        ],
+        [
+          "Conference",
+          null,
+          "date_unknown"
+        ],
+        [
+          "Contact Information",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "probe"
+      ],
+      "response_bytes": 149,
+      "no_documents": false
+    },
+    "limits": {}
+  },
+  {
+    "id": "coverage-mixture-formats",
+    "question": "unsupported mime is a limitation; later HTML index still parsed",
+    "patched": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Annual Report 2025",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "unsupported_index_format",
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "PDF",
+        "HTML"
+      ],
+      "response_bytes": 74,
+      "no_documents": false
+    },
+    "base": {
+      "coverage": "partial",
+      "candidates": [
+        [
+          "Annual Report 2025",
+          null,
+          "date_unknown"
+        ]
+      ],
+      "excluded": [],
+      "limitations": [
+        "unsupported_index_format",
+        "publication_date_unknown"
+      ],
+      "event_ids": [
+        "PDF",
+        "HTML"
+      ],
+      "response_bytes": 74,
+      "no_documents": false
+    },
+    "limits": {}
+  },
+  {
+    "id": "date-invalid-bad-start",
+    "question": "invalid window inputs (bad-start) must raise",
+    "patched": {
+      "raised": "ValueError",
+      "message": "month must be in 1..12, not 13"
+    },
+    "base": {
+      "raised": "ValueError",
+      "message": "month must be in 1..12, not 13"
+    },
+    "limits": {}
+  },
+  {
+    "id": "date-invalid-bad-asof",
+    "question": "invalid window inputs (bad-asof) must raise",
+    "patched": {
+      "raised": "ValueError",
+      "message": "Invalid isoformat string: 'not-a-date'"
+    },
+    "base": {
+      "raised": "ValueError",
+      "message": "Invalid isoformat string: 'not-a-date'"
+    },
+    "limits": {}
+  },
+  {
+    "id": "date-invalid-start-after-asof",
+    "question": "invalid window inputs (start-after-asof) must raise",
+    "patched": {
+      "raised": "ValueError",
+      "message": "invalid_discovery_limits"
+    },
+    "base": {
+      "raised": "ValueError",
+      "message": "invalid_discovery_limits"
+    },
+    "limits": {}
+  },
+  {
+    "id": "cli-seven-pages",
+    "question": ">6 local pages refused cleanly",
+    "exit": 2,
+    "stderr": "{\"schema_version\": \"official-source-failure/1\", \"status\": \"failed\", \"error_code\": \"official_source_ValueError\"}"
+  },
+  {
+    "id": "cli-max-items-zero",
+    "question": "max_items=0 refused cleanly",
+    "exit": 2,
+    "stderr": "{\"schema_version\": \"official-source-failure/1\", \"status\": \"failed\", \"error_code\": \"official_source_ValueError\"}"
+  },
+  {
+    "id": "cli-missing-mime",
+    "question": "missing page mime_type refused cleanly",
+    "exit": 1,
+    "stderr_tail": [
+      "                 ~~~^^^^^^^^^^^^^",
+      "KeyError: 'mime_type'"
+    ]
+  },
+  {
+    "id": "cli-pages-not-list",
+    "question": "pages='nope' refused cleanly",
+    "exit": 2,
+    "stderr": "{\"schema_version\": \"official-source-failure/1\", \"status\": \"failed\", \"error_code\": \"official_source_ValueError\"}"
+  },
+  {
+    "id": "sealed-derived-minimal-dynamic",
+    "question": "derived_minimal_fixture variant with external script: 3 legal anchors excluded and dynamic partial retained (NOT an original replay)",
+    "exit": 0,
+    "coverage": "partial",
+    "candidates": [],
+    "limitations": [
+      "dynamic_content_unresolved"
+    ],
+    "no_documents": false
+  }
+]
