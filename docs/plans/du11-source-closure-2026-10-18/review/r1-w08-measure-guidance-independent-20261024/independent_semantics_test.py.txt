@@ -1,0 +1,32 @@
+"""Frozen independent17 source-state observations; actual API in isolated process."""
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
+REPORT = ROOT / "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-measure-guidance-independent-20261024"
+NAMES = ("actual-en", "anticipate-en", "project-en", "hope-cn", "strive-cn", "actual-trad",
+         "future-en", "future-trad", "actual-present-after-independent-expectation",
+         "actual-reached-after-independent-expectation", "past-completed-quantity",
+         "past-future-disclosure", "positive-passive", "own-en", "third-actor-en",
+         "different-scope-en", "forward-en")
+
+
+@pytest.fixture(scope="module")
+def observation():
+    script = Path(__file__).with_name("semantic_probe.py")
+    run = subprocess.run([sys.executable, "-B", str(script)], cwd=ROOT,
+                         capture_output=True, timeout=45)
+    assert run.returncode == 0, run.stderr
+    result = json.loads((REPORT / "semantic-probes-latest.json").read_text(encoding="utf-8"))
+    assert result["source_stable"]
+    return {row["name"]: row for row in result["cases"]}
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_source_state_is_owned_by_its_revenue_or_quantity_assertion(observation, name):
+    row = observation[name]
+    assert row["pass"], json.dumps(row, ensure_ascii=True)

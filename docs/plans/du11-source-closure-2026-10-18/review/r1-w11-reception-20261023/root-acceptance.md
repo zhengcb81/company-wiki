@@ -9,3 +9,9 @@
 预算/narrative/config未改，无外部请求、模型调用或原件下载，作者工区只读。ROOT测试目录与独占mypy缓存13,463,462B均已恢复；原文、旧封存和原失败日志不动。仅有源发现的有界metadata候选能力，未冒称Q&A正文、全站完整或公司PASS；486789B旧HTML正文缺失仍是实际来源恢复待办。
 
 发布顺序：保存ROOT修复，再正常合入e808404e实际ancestry；只对重叠的已独审来源文件保留ROOT字节。作者START_HERE.md是独占工区bootstrap，不提升为母入口。所有作者小型PWF/交付报告可作为历史保留，当前状态只由母CURRENT_STATUS负责。最后正常pre-push并观察精确代码CI。
+
+## 普通pre-push发现的环境根因与补审
+
+首次正常推送在Conda3.13.9实测1F/7196P/24skip，146契约smoke通过；推送已被阻止，未引发远端失败。短UTF8的Loading…被BeautifulSoup可选编码检测器猜为windows-1252，原venv3.14则猜UTF8。ROOT复用已有确定性HTML字节解码器（BOM、声明、UTF8、显式fallback诊断），不改成乱码关键词、不删断言或只强迫测试跑venv。
+
+新增5个正式编码边界，最新unit共37例；Conda37P、venv37+2公共CLI=39P，独立原同37例在实际Conda环境再次37P。前述132P属于解码补丁前的关联版本，不当成新字节重跑。原6文件中的4份未改；最新源码与unit精确SHA在本JSON，旧source SHA及原FAIL/PASS仍保留。正常完整pre-push与精确CI仍待真实结果。

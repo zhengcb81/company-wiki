@@ -1,0 +1,18 @@
+{
+  "test_run": false,
+  "no_conftest_required": true,
+  "artifacts": {
+    "network-sitecustomize.py.txt": {
+      "bytes": 732,
+      "sha256": "b429c8ed2367be11b9ea511fb28797978a744f994fdd33bf22dce2294ebe498e"
+    },
+    "run_final_review.py.txt": {
+      "bytes": 4808,
+      "sha256": "84cff012b63fe1e5c38b927dcfa3b923e166c415821986fe0353a699bb1b6072"
+    },
+    "REPRODUCE.md": {
+      "bytes": 1486,
+      "sha256": "8d7818102a7880331dabde04ae01115fe8fb51d8a6224cd95dea4beccbf1fbf4"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+================================== FAILURES ===================================
+_ test_unreadable_mount_or_explicit_loading_placeholder_remains_partial[<main><div>Loading\u2026</div></main>] _
+[gw0] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\test_official_discovery_scope.py:189: in test_unreadable_mount_or_explicit_loading_placeholder_remains_partial
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+============================ slowest 15 durations =============================
+10.43s call     tests/unit/test_w04_source_transport.py::test_compact_65_parent_wire_stays_small_without_truncating_body
+9.26s call     tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee
+7.49s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+7.04s call     tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+6.41s call     tests/unit/document_understanding_selection/test_reading_production_selection.py::test_large_actual_candidate_pool_keeps_all_three_important_late_scopes
+5.74s call     tests/unit/test_narrative_output_failure_finalization.py::test_explicit_failed_summary_public_cli_settles_output_and_resumes_with_zero_extra_post
+5.13s call     tests/unit/document_understanding_layout_hints/test_b_integrity_and_budget.py::test_work_units_grow_about_linearly
+4.81s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+4.78s call     tests/unit/test_narrative_extractive_production.py::test_real_default_policy_document_skips_model_and_does_not_require_fictional_execution
+4.57s call     tests/unit/test_narrative_extractive_production.py::test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse
+3.51s call     tests/unit/test_acquisition_usage_recovery.py::test_hard_timeout_stops_owned_grandchild_and_late_writes
+2.73s call     tests/unit/test_narrative_worker_factory.py::test_spawned_production_factory_reads_original_source_with_zero_network
+2.71s call     tests/unit/test_latest_local_source_discovery.py::test_latest_bounded_retries_advance_beyond_twenty_old_originals
+2.35s call     tests/unit/test_shared_reading_cache_precheck.py::test_one_hundred_base_bindings_keep_shared_settings_without_original_or_decision_copies
+2.29s call     tests/unit/test_pre_push_full_unit_workers.py::test_real_worker_processes_keep_inventory_failure_and_owned_cleanup[False]
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_discovery_scope.py::test_unreadable_mount_or_explicit_loading_placeholder_remains_partial[<main><div>Loading\u2026</div></main>] - AssertionError: assert 'checked_index_only' == 'partial'
+  
+  - partial
+  + checked_index_only
+=========== 1 failed, 7196 passed, 24 skipped in 202.23s (0:03:22) ============
+
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+C:\Miniconda\Lib\site-packages\pytest_benchmark\logger.py:44: PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks cannot be performed reliably in a parallelized environment.
+  warner(PytestBenchmarkWarning(text))
+
+FAILED: full affected unit suite
+
+PUSH CHECKS RED — fix the failing phase; do not bypass.
+
+PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.
+error: failed to push some refs to 'https://github.com/zhengcb81/company-wiki.git'

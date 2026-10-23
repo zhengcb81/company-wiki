@@ -1,0 +1,39 @@
+"""Only the reported short-UTF8 failure; not an additional general test suite."""
+import os
+from pathlib import Path
+import socket
+import sys
+import json
+import hashlib
+
+for name in list(os.environ):
+    if any(term in name.upper() for term in ("API_KEY", "ACCESS_TOKEN", "SECRET_KEY")):
+        os.environ.pop(name)
+os.environ["PYTHON_DOTENV_DISABLED"] = "1"
+os.environ["COMPANY_WIKI_NETWORK"] = "blocked"
+os.environ["COMPANY_WIKI_REAL_LLM"] = "0"
+def blocked(*args, **kwargs):
+    raise RuntimeError("W11 independent encoding probe network blocked")
+socket.socket.connect = blocked
+socket.socket.connect_ex = blocked
+socket.create_connection = blocked
+socket.getaddrinfo = blocked
+root = Path(__file__).resolve().parents[6]
+sys.path.insert(0, str(root / "src"))
+from company_wiki.source_catalog import official_discovery as d
+from company_wiki.document_normalization.html_parser import decode_html_bytes
+assert d.decode_html_bytes is decode_html_bytes
+source = Path(d.__file__)
+assert hashlib.sha256(source.read_bytes()).hexdigest() == "6869349b5d6f4861e9c78cdc8748aaa7f547d2866cf278fc5f721418a137b123"
+body = '<main><div>Loading…</div></main>'.encode("utf-8")
+decoded, encoding, strategy, repaired = decode_html_bytes(body)
+result = d.discover_official_documents(
+    [{"url":"https://neutral.example/ir","original":body,
+      "mime_type":"text/html","capture_id":"specific-short-utf8"}],
+    entity="Neutral Holding",start_date="2026-01-01",as_of_date="2026-10-21")
+assert decoded == body.decode("utf-8") and encoding == "utf-8" and strategy == "utf8_strict" and not repaired
+assert result["coverage_status"] == "partial" and "dynamic_content_unresolved" in result["limitations"]
+print(json.dumps({"python":sys.version,"source":str(source),"shared_decoder_identity":True,
+    "original_utf8_bytes":len(body),"original_utf8_sha256":hashlib.sha256(body).hexdigest(),
+    "decoder":{"encoding":encoding,"strategy":strategy,"repaired":repaired},
+    "actual_result":result},ensure_ascii=False))

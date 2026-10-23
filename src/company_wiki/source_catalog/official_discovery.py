@@ -8,6 +8,7 @@ import re
 from urllib.parse import urljoin, urlsplit, urlunsplit
 from typing import Any
 from bs4 import BeautifulSoup, Comment
+from ..document_normalization.html_parser import decode_html_bytes
 from .narrative_routing import classify_document_kind
 
 DISCOVERY_RESULT_SCHEMA = "official-discovery-result/1"
@@ -462,7 +463,13 @@ def discover_official_documents(
             or page_parts.password
         ):
             raise ValueError("invalid_index_page_url")
-        soup = BeautifulSoup(original, "html.parser")
+        # Use the same deterministic byte decoder as normalized HTML sources.
+        # BeautifulSoup's optional detection backends can otherwise interpret
+        # identical short UTF-8 content differently between environments.
+        decoded, _encoding, _strategy, repaired = decode_html_bytes(original)
+        if repaired:
+            limitations.append("index_encoding_repaired")
+        soup = BeautifulSoup(decoded, "html.parser")
         limitations.extend(_embedded_document_limitations(soup))
         page_key = urlunsplit(
             (page_parts.scheme, page_parts.netloc, page_parts.path,

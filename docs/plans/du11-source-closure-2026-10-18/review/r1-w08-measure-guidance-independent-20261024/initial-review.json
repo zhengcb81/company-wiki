@@ -1,0 +1,236 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "scope": "Independent review of this measure/guidance delta and composed budget baseline only; not fullannual14/source or own prior qualifier baseline acceptance",
+  "raw_red": {
+    "cases": 17,
+    "failed": 8,
+    "passed": 9,
+    "errors": 0,
+    "warnings": 1,
+    "seconds": 3.07,
+    "junit": "independent-red.xml",
+    "log": "independent-red.txt",
+    "warning": "Unused captured child stdout used host GBK while parent attempted UTF8 decode. Persisted UTF8 observation JSON and17 assertion results complete. Future runner captures bytes; testinputs/oracles/assertions unchanged. No product fix inferred from the warning."
+  },
+  "frozen_sha256": {
+    "probe": "adda3576c11f0f435328084c70212a0e0fea7dc8ccf6ee3b44ba8bab1f04b526",
+    "executed_test": "eb7a929a6e9f1ed692f7d58a05a9e61ad993fe7958466c3faf492a6a30cc70e2",
+    "future_capture_only_test": "0d43a157eb3b8a8a5ad65f4bd24d3cf141347b22f4b64f2f674cb42239e0ba24"
+  },
+  "source_and_test_sha256": {
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "44fb64818412f9b90541c3528f22c1102c49b98cad5d363dcb1b685714bca30e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+    "src/company_wiki/resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+    "src/company_wiki/source_catalog/narrative_reading.py": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+  },
+  "original77_test_sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+  "original20_test_sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+  "source_unchanged_during_actual_probe": true,
+  "actual_imports": {
+    "company_wiki.source_catalog.narrative_revenue_guidance": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_revenue_guidance.py",
+    "company_wiki.source_catalog.narrative_business_policy": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.source_catalog.narrative_operating_relations": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+    "company_wiki.resource_budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py"
+  },
+  "findings": [
+    {
+      "id": "W08-MG-01",
+      "priority": "P1",
+      "root_cause": "Future/goal state ownership is duplicated across measure unrealized gate and guidance expectation grammar. The measure actual-observation path admits explicit anticipation/projection/aspiration quantity as operating_quantity/operating_metric_change.",
+      "case_names": [
+        "anticipate-en",
+        "project-en",
+        "hope-cn",
+        "strive-cn"
+      ],
+      "fix_direction": "One predicate/state owner for source actual-versus-future/goal scope reused by quantity, comparison and guidance. Keep actual quantity positives; do not maintain two diverging cue lists or add company exceptions."
+    },
+    {
+      "id": "W08-MG-02",
+      "priority": "P1",
+      "root_cause": "Guidance expectation is not bound to the revenue own predicate and its period: unrelated expectation leaks across and/while, retrospective period after the metric is ignored, and future disclosure of a completed prior-period result is mislabeled future revenue guidance.",
+      "case_names": [
+        "actual-present-after-independent-expectation",
+        "actual-reached-after-independent-expectation",
+        "past-completed-quantity",
+        "past-future-disclosure"
+      ],
+      "fix_direction": "Same assertion/predicate/time owner: separate forecast revenue from independent expectation/current revenue and future reporting action/past measured period. Preserve genuine issuer forward/passive guidance and rawvalue/unit text; do not solve by broad allfuture-word rejection."
+    }
+  ],
+  "failed_cases": [
+    {
+      "kind": "measure",
+      "name": "anticipate-en",
+      "text": "We anticipate our reactor volume of 143 kL.",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "project-en",
+      "text": "We project our reactor volume of 143 kL.",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "hope-cn",
+      "text": "公司有望将反应器总体积增加至143kL。",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "strive-cn",
+      "text": "公司力争反应器总体积增加至143kL。",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "guidance",
+      "name": "actual-present-after-independent-expectation",
+      "text": "We expect customer renewals to improve and our subscription revenue is USD 143 million.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "operating_mechanism",
+        "source_revenue_guidance",
+        "operating_activity"
+      ],
+      "spans": [
+        {
+          "text": "We expect customer renewals to improve and our subscription revenue is USD 143 million.",
+          "reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "source_revenue_guidance",
+            "operating_description_unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "actual-reached-after-independent-expectation",
+      "text": "We expect customer renewals to improve while subscription revenue has reached USD 143 million.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "operating_mechanism",
+        "source_revenue_guidance",
+        "operating_activity"
+      ],
+      "spans": [
+        {
+          "text": "We expect customer renewals to improve while subscription revenue has reached USD 143 million.",
+          "reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "source_revenue_guidance",
+            "operating_description_unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "past-completed-quantity",
+      "text": "We expect subscription revenue to have grown by 14% last quarter.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "We expect subscription revenue to have grown by 14% last quarter.",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "past-future-disclosure",
+      "text": "We will announce that subscription revenue increased by 14% last quarter.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "We will announce that subscription revenue increased by 14% last quarter.",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    }
+  ],
+  "positive_controls": [
+    "actual-en",
+    "actual-trad",
+    "future-en",
+    "future-trad",
+    "positive-passive",
+    "own-en",
+    "third-actor-en",
+    "different-scope-en",
+    "forward-en"
+  ],
+  "actual_model_port": "Real select_reading_evidence plus existing compile_scoped_model_view invoked; source spans and support/member IDs and final modeltask rawtexts recorded. No stub pipeline or invented forecast/modality/normalized numeric fields.",
+  "next_implementation_document": "Explicit plan/NEXT_IMPLEMENTATION.md missing; CodeGraph and bounded plan subtree filename scan did notfindit. Read actual4 handoffs/diagnoses; not a product failure.",
+  "independence": "Reviewer did not implement this delta. Reviewer previously worked old qualifier baseline; not independently recertifying that own old implementation.",
+  "followup": "ROOT refactors shared source-state owner; restore same17 frozen probes/tests into call-owned scratch and rerun after implementation. No further variants or product reads/tests now.",
+  "external_calls": 0,
+  "git_write": false,
+  "source_or_original_test_writes": false,
+  "cleanup": {
+    "owned_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-mg-independent-20261024",
+    "files_removed": 2,
+    "bytes_removed": 7930,
+    "scratch_absent": true,
+    "pytest_effective_temp": "cw-pytest-basetemp/20261023-231931-23e0fd88",
+    "effective_temp_absent": true,
+    "oldW08untracked_or_red_paths_removed": false
+  }
+}

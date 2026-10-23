@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_GUIDANCE_W09_ROOT_REPAIR_W11_ENGINEERING_PASS_INTEGRATING",
+  "overall_status": "ACTIVE_W11_MERGED_PUSH_PENDING_W09_REVIEW_W08_SHARED_STATE_REPAIR",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -151,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Publish independently reviewed W11 source discovery fixes with normal author ancestry merge; preserve author bootstrap as lane-only. Continue W09 shared role/scope/scenario/basis projection and W08 guidance/measure independent acceptance, cross-page ancestry and bounded selection batching. Actual original recovery, summary/cache/RF matrix and W12 remain open.",
+  "next_step_now": "Publish W11 deterministic HTML decoder adoption after actual normal prepush failure, retaining original discovery version and same37-case independent followup. W09 finite content review16P accepted; integrate7 formal RF files and author ancestry preserving assurance WIP. W08 shared predicate/modality/time owner is repairing frozen17 cases8F9P; budget join84P does not clear them. Cross-page ancestry, selection batching, real summary/cache/RF matrix/W12 remain open.",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -205,7 +205,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-23T23:13:28.898272+00:00",
+  "last_updated_at": "2026-10-23T23:30:19.955456+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -327,12 +327,12 @@
     "W08": "NUMERIC_PROSE_RESTRICTION_NODES_REVIEWED_BRANCH_PUSH_GREEN_ANNUAL_PARTIAL",
     "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
     "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
-    "W09": "DELIVERED_TWO_P2_TWO_P3_ROOT_PROJECTION_REPAIR_IN_PROGRESS",
+    "W09": "ROOT_V3_INDEPENDENT_16_PASS_RF_MAIN_PUBLICATION_IN_PROGRESS",
     "W09_ref": "review/r1-w09-reception-20261023/content-review.json",
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
     "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
     "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
-    "W11": "ROOT_ENGINEERING_INDEPENDENT_37_PASS_NORMAL_INTEGRATION_PENDING",
+    "W11": "NORMAL_PREPUSH_CAUGHT_ENCODING_ROOT_FIXED_TWO_ENVIRONMENTS_AND_INDEPENDENT_37_PASS_REPUBLISH_PENDING",
     "W12": "NOT_STARTED",
     "business_pass": false,
     "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
@@ -341,7 +341,10 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "Budget baseline merged without commit; guidance/measure new work not yet independently accepted"
+    "W08_pending_work": "Guidance/measure independent17=8F9P; shared predicate/modality/time root repair in progress; do not commit merge or claim source/business PASS yet",
+    "W11_root_repair_commit": "664d3a1db575d64bd4f11658478593a508d03f9b",
+    "W11_merge_commit_prefix": "44b722ec",
+    "W08_current_independent_review": "review/r1-w08-measure-guidance-independent-20261024/initial-review.json"
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",

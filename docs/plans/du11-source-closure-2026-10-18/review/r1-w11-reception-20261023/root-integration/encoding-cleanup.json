@@ -1,0 +1,20 @@
+[
+  {
+    "path": ".planning/w11encoding",
+    "existed": false,
+    "bytes": 0,
+    "removed": true
+  },
+  {
+    "path": ".planning/w11vencoding",
+    "existed": true,
+    "bytes": 1003.0,
+    "removed": true
+  },
+  {
+    "path": ".planning/r1-w11-publication-20261023/reviewed-source",
+    "existed": true,
+    "bytes": 141583.0,
+    "removed": true
+  }
+]

@@ -470,3 +470,7 @@ W11实际e808404e/clean，四个源码与测试路径绑定6b538ca2独审字节�
 ## W11独审第二轮共因
 
 来源覆盖的共同问题是把“没有当前实现支持的证据”误写为“已检查”，或用script存在/loading子串猜动态失败。ROOT现分别观察显式document关系、结构歧义、真实待加载占位/不可读shell，沿原partial诊断；普通Event/Organization及静态可读材料保留正控，不加人工许可。详W11 initial/final独审及root-acceptance。
+
+## W08独审：共享状态归属仍有实际缺陷
+
+17项独立真实公共selector探针8F9P：未来有望/力争/anticipate/project数量被误当实际；收入guidance借用其他谓词的预期或历史期间。共因是两套来源状态/谓词/时间观察分裂，不能分别加孤立公司/未来词表；ROOT实施者正统一同一纯source observer。预算合入独审84P仅证明预算边界。初始版本/原始XML/同组断言/source SHA见review/r1-w08-measure-guidance-independent-20261024，不改旧77/20。

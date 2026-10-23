@@ -1,0 +1,116 @@
+{
+  "head": "44b722ecf706e1d56a920b8d65e564f9770adf0e",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w11-reception-20261023\\independent-final\\test_neutral_review.py",
+    "--confcutdir",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w11-reception-20261023\\independent-final",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w11-independent-20261023\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w11-reception-20261023\\independent-final\\encoding-followup-junit.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 11.390977300005034,
+  "frozen": {
+    "src/company_wiki/source_catalog/official_discovery.py": {
+      "bytes": 29818,
+      "sha256": "6869349b5d6f4861e9c78cdc8748aaa7f547d2866cf278fc5f721418a137b123",
+      "lf_sha256": "f0739c12e2b1962ddb5097606ee6e11f7536b6f14f6dc642ff7f7eaae9b5ca0f"
+    },
+    "src/company_wiki/source_catalog/official_source_cli.py": {
+      "bytes": 13362,
+      "sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+      "lf_sha256": "7fb9a8031e6d98fd9788518b9fb41904179f326fba57c2bbb08fb48d1dee1adf"
+    },
+    "tests/integration/test_official_source_flow.py": {
+      "bytes": 56854,
+      "sha256": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+      "lf_sha256": "ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142"
+    },
+    "tests/integration/test_official_discovery_offline.py": {
+      "bytes": 31358,
+      "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+      "lf_sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069"
+    },
+    "tests/unit/test_official_discovery_scope.py": {
+      "bytes": 10321,
+      "sha256": "506ad107b01bef410ecbea297e8d8a89ccb230db3de591ce15dfe1123af754c8",
+      "lf_sha256": "fd0b70cdec035d84dda0dbfd47f004dd0b8bf7681620e8aa7f4097b9eddab6e2"
+    },
+    "tests/integration/test_official_discovery_root_scope.py": {
+      "bytes": 2019,
+      "sha256": "a84df73d21b46708bd6aa2035408a7f8603cf3e870e6d1524b99e49ca5c3b4a0",
+      "lf_sha256": "a80669f0c0c690b765079eb986467374d95a8b239bf735729482251a90093f3c"
+    },
+    "config/source_catalog.yaml": {
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "lf_sha256": "992897c8cfa54f5094f6c56c1ac7be1651577c744865f9b76c0ebc948cb0726c"
+    },
+    "config/resource_budget.yaml": {
+      "bytes": 353,
+      "sha256": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+      "lf_sha256": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7"
+    },
+    "src/company_wiki/resource_budget.py": {
+      "bytes": 5613,
+      "sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+      "lf_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7"
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "bytes": 61188,
+      "sha256": "8f3f43afdb905fd70df6452b472a0195b4bddf8ee25c69b63463bd83be7fa2cf",
+      "lf_sha256": "568b12acbfcca90e8f065c06663d6098890135b8169f9a872cbbd1583cd432a2"
+    },
+    "src/company_wiki/source_catalog/narrative_finalize.py": {
+      "bytes": 10457,
+      "sha256": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+      "lf_sha256": "e8cf685a08702b7e031709f37fc5bd7c8644358520cd0af504c5eb9c0b149539"
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "bytes": 25614,
+      "sha256": "2b0974a586fbb2ec417192e17ddc03be8456fa47cb38bb72881ef3ed6bb8f54b",
+      "lf_sha256": "c74ff043a6adbb871d02152514f74fa8cd359db746a7c1ab16f2dd4466ef25f5"
+    }
+  },
+  "frozen_unchanged": true,
+  "imports": [
+    {
+      "__main__": "C:\\Miniconda\\Lib\\site-packages\\pytest\\__main__.py",
+      "company_wiki.source_catalog.official_discovery": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_discovery.py",
+      "company_wiki.source_catalog.official_source_cli": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py"
+    },
+    {
+      "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py",
+      "company_wiki.source_catalog.official_discovery": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_discovery.py"
+    },
+    {
+      "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py",
+      "company_wiki.source_catalog.official_discovery": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_discovery.py"
+    },
+    {
+      "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py",
+      "company_wiki.source_catalog.official_discovery": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_discovery.py"
+    },
+    {
+      "__main__": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py",
+      "company_wiki.source_catalog.official_discovery": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_discovery.py"
+    }
+  ],
+  "scratch_initially_absent": true,
+  "source_material_reads": 0,
+  "network_guard": "all socket connect/connect_ex/create_connection/getaddrinfo blocked, including subprocesses",
+  "external_http_model_download_calls": 0,
+  "scratch_files_removed": 18,
+  "scratch_finally_absent": true
+}

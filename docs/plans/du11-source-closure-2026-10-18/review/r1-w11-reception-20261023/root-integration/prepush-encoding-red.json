@@ -1,0 +1,18 @@
+{
+  "status": "NORMAL_PUSH_BLOCKED_BEFORE_REMOTE_PUBLICATION",
+  "head_prefix": "44b722ec",
+  "unit_failed": 1,
+  "unit_passed": 7196,
+  "unit_skipped": 24,
+  "unit_seconds": 202.23,
+  "contract_smoke_passed": 146,
+  "contract_smoke_seconds": 28.74,
+  "interpreter": "C:/Miniconda/python.exe Python3.13.9",
+  "failing_case": "test_unreadable_mount_or_explicit_loading_placeholder_remains_partial[Loading U+2026]",
+  "root_cause": "Optional BeautifulSoup byte-detection backend chose windows-1252 for valid short UTF-8; venv chose UTF-8",
+  "repair": "Reuse existing document_normalization.html_parser.decode_html_bytes; preserve original receipt bytes/SHA",
+  "local_full_stdout_path": ".planning/r1-w11-publication-20261023/normal-push.txt",
+  "local_full_stdout_bytes": 2132804,
+  "local_full_stdout_sha256": "f5db7022dd8833a6fe8ec03b05a5e4a996fbd9674fc04f51079e9a5e9351c601",
+  "compact_tail_in_git": "prepush-encoding-red.txt"
+}

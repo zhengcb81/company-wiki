@@ -1,0 +1,14 @@
+import atexit, json, os, pathlib, socket, sys
+def blocked(*args, **kwargs):
+    raise RuntimeError("W11 independent network blocked")
+socket.socket.connect = blocked
+socket.socket.connect_ex = blocked
+socket.create_connection = blocked
+socket.getaddrinfo = blocked
+def done():
+    modules = {name: str(pathlib.Path(module.__file__).resolve())
+      for name, module in list(sys.modules.items())
+      if name in {"company_wiki.source_catalog.official_discovery", "company_wiki.source_catalog.official_source_cli", "__main__"}
+      and getattr(module, "__file__", None)}
+    pathlib.Path(os.environ["W11_IMPORT_DIR"], str(os.getpid()) + ".json").write_text(json.dumps(modules), encoding="utf-8")
+atexit.register(done)

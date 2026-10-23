@@ -1,0 +1,263 @@
+{
+  "head": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
+  "merge_head": "ab95027b5b1452c4403db482362b59a9f8976286",
+  "unmerged_paths": [],
+  "identities": {
+    "src/company_wiki/resource_budget.py": {
+      "sha256": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+      "normalized_lf_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+      "bytes": 5743
+    },
+    "config/resource_budget.yaml": {
+      "sha256": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+      "normalized_lf_sha256": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7",
+      "bytes": 364
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+      "normalized_lf_sha256": "3517d828206d52ab7127f0943c4a24b49d8dce900eb9cdf65cc25529482b872f",
+      "bytes": 71832
+    },
+    "src/company_wiki/source_catalog/narrative_finalize.py": {
+      "sha256": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+      "normalized_lf_sha256": "e8cf685a08702b7e031709f37fc5bd7c8644358520cd0af504c5eb9c0b149539",
+      "bytes": 10457
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+      "normalized_lf_sha256": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+      "bytes": 25993
+    },
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": {
+      "sha256": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+      "normalized_lf_sha256": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+      "bytes": 5722
+    },
+    "src/company_wiki/automation/narrative_select.py": {
+      "sha256": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e",
+      "normalized_lf_sha256": "627ae7678e0f0952f362d73db865fce653c5c1e5c1692c22785347490fc9ea4f",
+      "bytes": 28403
+    },
+    "config/source_catalog.yaml": {
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "normalized_lf_sha256": "992897c8cfa54f5094f6c56c1ac7be1651577c744865f9b76c0ebc948cb0726c",
+      "bytes": 866
+    }
+  },
+  "budget_merge_retention": {
+    "src/company_wiki/resource_budget.py": {
+      "identical_to_merge_head_after_lf_normalization": true,
+      "merge_head_normalized_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7"
+    },
+    "config/resource_budget.yaml": {
+      "identical_to_merge_head_after_lf_normalization": true,
+      "merge_head_normalized_sha256": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7"
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "identical_to_merge_head_after_lf_normalization": false,
+      "merge_head_normalized_sha256": "568b12acbfcca90e8f065c06663d6098890135b8169f9a872cbbd1583cd432a2"
+    },
+    "src/company_wiki/source_catalog/narrative_finalize.py": {
+      "identical_to_merge_head_after_lf_normalization": true,
+      "merge_head_normalized_sha256": "e8cf685a08702b7e031709f37fc5bd7c8644358520cd0af504c5eb9c0b149539"
+    }
+  },
+  "business_owner_closure": {
+    "head_modules": [
+      "company_wiki.source_catalog.narrative_business_policy",
+      "company_wiki.source_catalog.narrative_business_meaning",
+      "company_wiki.source_catalog.narrative_source_purpose",
+      "company_wiki.source_catalog.narrative_operating_relations",
+      "company_wiki.source_catalog.narrative_reading",
+      "company_wiki.source_catalog.narrative_finalize",
+      "company_wiki.document_understanding.structure.sections",
+      "company_wiki.document_understanding.structure.layout",
+      "company_wiki.document_understanding.structure.contract",
+      "company_wiki.document_understanding.layout_bridge",
+      "company_wiki.document_understanding.observation_adapter",
+      "company_wiki.document_understanding.layout_hints.headings",
+      "company_wiki.document_understanding.operating_states.relations",
+      "company_wiki.document_understanding.operating_states.patterns",
+      "company_wiki.document_understanding.operating_states.text_view",
+      "company_wiki.document_understanding.operating_states.product_reference",
+      "company_wiki.document_normalization.text_matching",
+      "company_wiki.document_normalization.form_fields",
+      "company_wiki.document_normalization.table_shapes",
+      "company_wiki.source_catalog.n6_candidate_operating_facts"
+    ],
+    "merge_head_modules": [
+      "company_wiki.source_catalog.narrative_business_policy",
+      "company_wiki.source_catalog.narrative_source_purpose",
+      "company_wiki.source_catalog.narrative_operating_relations",
+      "company_wiki.source_catalog.narrative_reading",
+      "company_wiki.source_catalog.narrative_finalize",
+      "company_wiki.document_understanding.operating_states.relations",
+      "company_wiki.document_understanding.operating_states.patterns",
+      "company_wiki.document_understanding.operating_states.text_view",
+      "company_wiki.document_normalization.text_matching",
+      "company_wiki.source_catalog.n6_candidate_operating_facts"
+    ],
+    "current_modules": [
+      "company_wiki.source_catalog.narrative_business_policy",
+      "company_wiki.source_catalog.narrative_revenue_guidance",
+      "company_wiki.source_catalog.narrative_business_meaning",
+      "company_wiki.source_catalog.narrative_source_purpose",
+      "company_wiki.source_catalog.narrative_operating_relations",
+      "company_wiki.source_catalog.narrative_reading",
+      "company_wiki.source_catalog.narrative_finalize",
+      "company_wiki.document_understanding.structure.sections",
+      "company_wiki.document_understanding.structure.layout",
+      "company_wiki.document_understanding.structure.contract",
+      "company_wiki.document_understanding.layout_bridge",
+      "company_wiki.document_understanding.observation_adapter",
+      "company_wiki.document_understanding.layout_hints.headings",
+      "company_wiki.document_understanding.operating_states.relations",
+      "company_wiki.document_understanding.operating_states.patterns",
+      "company_wiki.document_understanding.operating_states.text_view",
+      "company_wiki.document_understanding.operating_states.product_reference",
+      "company_wiki.document_normalization.text_matching",
+      "company_wiki.document_normalization.form_fields",
+      "company_wiki.document_normalization.table_shapes",
+      "company_wiki.source_catalog.n6_candidate_operating_facts"
+    ],
+    "removed_from_head": [],
+    "removed_from_merge_head": [],
+    "added_to_head": [
+      "company_wiki.source_catalog.narrative_revenue_guidance"
+    ]
+  },
+  "test_results": {
+    "tests": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 3.971,
+    "case_counts": {
+      "tests.test_budget_policy_totals": 2,
+      "tests.unit.test_resource_budget_policy": 63,
+      "tests.unit.test_budget_dimension_diagnostics": 3,
+      "tests.unit.du11_production.test_document_work_policy": 2,
+      "tests.unit.du11_production.test_shared_work_budget": 2,
+      "tests.unit.du11_source_closure.test_source_dependency_scope": 5,
+      "tests.unit.document_understanding_selection.test_reading_decision_inventory": 6,
+      "tests.unit.document_understanding_selection.test_reading_guidance_source_controls": 1
+    }
+  },
+  "module_origins": {
+    "company_wiki.resource_budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.source_catalog.narrative_finalize": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_finalize.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+    "company_wiki.source_catalog.narrative_revenue_guidance": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_revenue_guidance.py",
+    "company_wiki.automation.narrative_select": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\automation\\narrative_select.py",
+    "tools.document_understanding_benchmark.phase_c_runner": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\tools\\document_understanding_benchmark\\phase_c_runner.py"
+  },
+  "schema_version": "w08-budget-merge-independent-review/1",
+  "recorded_at_utc": "2026-10-24T00:20:04.299219+01:00",
+  "scope_verdict": "PASS_BUDGET_MERGE_ONLY",
+  "findings": [],
+  "author_worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+  "scope": [
+    "resource budget policy and validation",
+    "current cumulative mother policy and preserved historical usage/unknown holds",
+    "company soft allocation",
+    "shared parse/selection work account",
+    "partial diagnostics and cache eligibility",
+    "inventory 1.9.0 original owner closure plus guidance byte/work identity",
+    "budget merge retention"
+  ],
+  "checks": [
+    {
+      "id": "mother_and_soft",
+      "status": "pass",
+      "evidence": "config/resource_budget.yaml external_model = 10000000 tokens / 20000000 micro-USD; company soft targets 150000 tokens / 1000000 micro-USD; 16000000 document work units. Existing totals tests preserve old charges and retained/unknown holds while taking current ceilings from policy."
+    },
+    {
+      "id": "shared_account",
+      "status": "pass",
+      "evidence": "NarrativeSelectHandler._select_pdf creates one account and passes the same object to parsing and selection (narrative_select.py:460-464); real synthetic PDF tests assert object identity and already-spent balance; scope tests prove no sibling reset."
+    },
+    {
+      "id": "partial_diagnostic",
+      "status": "pass",
+      "evidence": "narrative_reading.py:1115-1138 sets partial/needs_review and coverage false when work is incomplete, appends document_work dimension counters, and 1183-1190 forces incomplete dependencies. Diagnostics distinguish source work, selection span and character ceilings and carry external_model_cost=false."
+    },
+    {
+      "id": "owner_identity",
+      "status": "pass",
+      "evidence": "decision_inventory.py:69-110 retains all 20 HEAD business owner modules and adds narrative_revenue_guidance (21 total), still inventory=1.9.0; actual normalized source byte hash participates in business_algorithms. Existing owner/product/guidance cache tests pass."
+    },
+    {
+      "id": "work_vs_money_identity",
+      "status": "pass",
+      "evidence": "decision_inventory.py:103 and 234-238 include current/effective document_work_limit. Existing real PDF test confirms 16M -> 32M invalidates the prior complete cache; token/money change to zero at unchanged work leaves source interpretation cache valid."
+    },
+    {
+      "id": "merge_retention",
+      "status": "pass",
+      "evidence": "resource_budget.py, config/resource_budget.yaml and narrative_finalize.py are LF-normalized byte-identical to MERGE_HEAD. narrative_reading.py differs for W08 source handling; its diff against MERGE_HEAD retains the budget diagnostics, effective work identity and partial-cache guards. decision_inventory differs by W08 owner closure/inventory 1.9.0 additions while retaining all budget work identity plumbing. No unmerged paths."
+    }
+  ],
+  "verification": {
+    "executable": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "pythonpath": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/src;C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/tests",
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHON_DOTENV_DISABLED": "1",
+      "COMPANY_WIKI_NETWORK": "blocked",
+      "COMPANY_WIKI_REAL_LLM": "0",
+      "TEMP_and_TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-budget-merge-independent-20261024"
+    },
+    "network": "socket.connect and create_connection blocked before imports; existing hermetic fixtures also active",
+    "pytest_options": [
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=<exclusive scratch>/pytest-temp",
+      "--junitxml=<exclusive scratch>/budget-cache.xml"
+    ],
+    "targets": [
+      "tests/test_budget_policy_totals.py",
+      "tests/unit/test_resource_budget_policy.py",
+      "tests/unit/test_budget_dimension_diagnostics.py",
+      "tests/unit/du11_production/test_document_work_policy.py",
+      "tests/unit/du11_production/test_shared_work_budget.py",
+      "tests/unit/du11_source_closure/test_source_dependency_scope.py::test_actual_source_grammar_bytes_invalidate_decision_without_a_version_bump",
+      "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision",
+      "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_product_identity_source_bytes_are_part_of_the_actual_current_decision",
+      "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_actual_guidance_module_bytes_invalidate_the_real_complete_cache_and_restore"
+    ],
+    "test_file_sha256": {
+      "tests/test_budget_policy_totals.py": "e651de739e6c46b820824df116c7782d2ff77dbc83d6296b2dc8eb46adc673d7",
+      "tests/unit/test_resource_budget_policy.py": "3185fff73595cefd0228890992186549179a6b3158f6956b274a427a1fbab097",
+      "tests/unit/test_budget_dimension_diagnostics.py": "ae7f12af95a9390ef99f0d334c0adbb011d3c01d4e549bb34dec8a6955ff91ad",
+      "tests/unit/du11_production/test_document_work_policy.py": "f0974c8749358bc15d2d18a76ca6009c6444f7db30d17e85f7eec4f98f8f1fa4",
+      "tests/unit/du11_production/test_shared_work_budget.py": "aac8ce416f07131cc9c33e406a4cb2fafa0b82e5c2cd1ad343b6f9d6e6360a9c",
+      "tests/unit/du11_source_closure/test_source_dependency_scope.py": "ebf8561776558c128f8d143fddccabc791185ff4712aa78a6e02239bcbb70dca",
+      "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "a6fa6ced762b4dc6e64012414d584a65a1bdf2838c40569e9ac4aed8d73c95fc",
+      "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+    },
+    "console_summary": "84 passed, 1 warning in 4.14s",
+    "warning": "Unknown config option asyncio_mode because plugin autoload is disabled; no failed tests.",
+    "transient_log_sha256": "7ba9cadc90334e015dbc70eea2c531e64be0925d0352b205bbf07eb8bb9b58ea",
+    "transient_junit_sha256": "4073566da1899781691cda295409137d6d8215831c353704b507ec81439e65aa"
+  },
+  "limitations": [
+    "Only the named budget merge boundaries and selected existing tests were reviewed; no complete W08 acceptance.",
+    "No real annual report, live source, download, network, LLM request, API key, or full test suite was used.",
+    "Guidance/measure grammar and broader source quality are delegated to separate review; this result is not a source corpus quality signoff.",
+    "HEAD and MERGE_HEAD identify the uncommitted merge; file byte identities pin the reviewed working contents."
+  ],
+  "cleanup": {
+    "exclusive_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-budget-merge-independent-20261024",
+    "status": "removed and absence verified",
+    "pytest_relocated_basetemp": "All relocated pytest files remained inside exclusive scratch because TEMP/TMP were pinned; pytest reported removal of its run directory.",
+    "author_product_test_git_index_writes": false,
+    "final_owned_outputs": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\budget-merge-review.md",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\budget-merge-review.json"
+    ],
+    "scratch_exists_after_cleanup": false
+  }
+}

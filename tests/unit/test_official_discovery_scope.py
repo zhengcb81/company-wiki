@@ -195,3 +195,34 @@ def test_ordinary_jsonld_literal_arrays_are_not_invalid_document_nodes():
                                 "keywords": ["business", "manufacturing"]}))
     assert result["coverage_status"] == "checked_index_only"
     assert result["limitations"] == []
+
+
+@pytest.mark.parametrize("encoding,declaration,title", [
+    ("utf-8", "", "公司季度报告与业务进展"),
+    ("gb18030", '<meta charset="gb18030">', "公司季度报告与业务进展"),
+    ("windows-1252", '<meta charset="windows-1252">', "Investor presentation—Europe"),
+    ("utf-16", "", "Interim Report 2026—Europe"),
+])
+def test_html_bytes_use_the_shared_deterministic_declared_or_unicode_decoder(encoding, declaration, title):
+    html = declaration + '<article><time datetime="2026-09-01"></time><a href="/update.pdf">' + title + '</a></article>'
+    original = html.encode(encoding)
+    result = discover_official_documents(
+        [{"url": "https://neutral.example/ir", "original": original,
+          "mime_type": "text/html", "capture_id": "encoding-neutral"}],
+        entity="Neutral Holding", start_date="2026-01-01", as_of_date="2026-10-21",
+    )
+    assert result["candidates"][0]["title"] == title
+    assert result["candidates"][0]["published_date"] == "2026-09-01"
+    assert result["coverage_status"] == "checked_index_only"
+
+
+def test_repaired_undeclared_encoding_is_an_explicit_coverage_limitation():
+    original = b'<a data-date="2026-09-01" href="/update.pdf">Annual Report 2025 \xff</a>'
+    result = discover_official_documents(
+        [{"url": "https://neutral.example/ir", "original": original,
+          "mime_type": "text/html", "capture_id": "encoding-repair"}],
+        entity="Neutral Holding", start_date="2026-01-01", as_of_date="2026-10-21",
+    )
+    assert len(result["candidates"]) == 1
+    assert result["coverage_status"] == "partial"
+    assert "index_encoding_repaired" in result["limitations"]
