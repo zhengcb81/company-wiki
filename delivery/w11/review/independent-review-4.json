@@ -1,0 +1,251 @@
+{
+ "schema_version": "w11-independent-review-4/1",
+ "lane": "W11-CWP-SOURCES",
+ "reviewer_role": "independent re-reviewer (not the author; did not write or fix the code)",
+ "review_time": "2026-10-23 23:26-23:40 Europe/London",
+ "workspace": "C:/Users/郑曾波/Projects/company-wiki-r1-source-recovery",
+ "interpreter": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe (3.14.2, Windows); pytest 9.1.1",
+ "reviewed_head": "6b538ca2f18fb8d5805f2ff59a41404b6e8302cd",
+ "reviewed_branch": "codex/r1-w11-source-recovery-20261023",
+ "parents": [
+  "2e1dfd04",
+  "a6d12a53",
+  "ecc7d622",
+  "0d7ada21"
+ ],
+ "worktree_status": "product/test content clean (CRLF checkout only); only untracked delivery/w11/handoff.md plus reviewer files",
+ "reviewed_file_sha256": {
+  "src/company_wiki/source_catalog/official_discovery.py": {
+   "bytes_worktree": 22972,
+   "sha256_worktree": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+   "bytes_head_blob": 22353,
+   "sha256_head_blob": "6bba88a286f588caad6d3de6235eff3effe15204a07a91883d03ae1bc458493d"
+  },
+  "src/company_wiki/source_catalog/official_source_cli.py": {
+   "bytes_worktree": 13362,
+   "sha256_worktree": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+   "bytes_head_blob": 13081,
+   "sha256_head_blob": "7fb9a8031e6d98fd9788518b9fb41904179f326fba57c2bbb08fb48d1dee1adf"
+  },
+  "tests/integration/test_official_discovery_offline.py": {
+   "bytes": 31358,
+   "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+   "head_blob_same": true
+  },
+  "tests/integration/test_official_source_flow.py": {
+   "bytes_worktree": 56854,
+   "sha256_worktree": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+   "bytes_head_blob": 55444,
+   "sha256_head_blob": "ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142"
+  },
+  "delivery/w11/test_results.json": {
+   "bytes_worktree": 3120,
+   "sha256_worktree": "bf7b96bed13bb6874a7a44616b442657f7d0a0557f18e3b9a3a4660bda74c41c"
+  },
+  "delivery/w11/test-results.xml": {
+   "bytes": 12268,
+   "sha256": "749f18b1d2d7c1062743d785e8c7212fa0eb26e9e89ff6b81d2be860557c5b54"
+  },
+  "delivery/w11/test-run-stdout.txt": {
+   "bytes_worktree": 1122,
+   "sha256_worktree": "973fdbb236d66be41651905d2fa728d3d12b080555f76a4b4de0e4988e351ebd"
+  },
+  "delivery/w11/probes/red-probe-output.txt": {
+   "bytes_worktree": 2928,
+   "sha256_worktree": "e4d1fd13b517ce019cd46717110c023080d34e7ba0552a7a2debfa9926ae4855"
+  },
+  "delivery/w11/evidence_inventory.json": {
+   "bytes_worktree": 8275,
+   "sha256_worktree": "0dcdc565b1104aec710b7e9e31bd7abc2965b8026bfd16bfb2cb735a76e514dc"
+  },
+  "delivery/w11/handoff.md": {
+   "bytes_worktree": 5765,
+   "sha256_worktree": "e34cc459e7cfb3bf30bb2a6dc4f2d40c6222cb818fcb796cbefbf704f53bffec",
+   "in_commit": false
+  }
+ },
+ "config_sha256": {
+  "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "config.yaml": "15541ba44e9621456cab7c6956c4f33be3f33e9b20f7053f1dc4aa6f0371bd1e"
+ },
+ "tests_you_ran": [
+  {
+   "id": "T1",
+   "purpose": "collected counts per file",
+   "command": "pytest <offline file> --collect-only; pytest <flow file> --collect-only",
+   "exit": 0,
+   "result": "62 new + 36 existing = 98"
+  },
+  {
+   "id": "T2",
+   "purpose": "full W11 files",
+   "command": "pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -p no:cacheprovider",
+   "exit": 0,
+   "result": "98 passed in 87.51 s"
+  },
+  {
+   "id": "T3",
+   "purpose": "delivered selection",
+   "command": "pytest <both files> -q -k '<delivered selection>' -p no:cacheprovider",
+   "exit": 0,
+   "result": "69 passed, 29 deselected in 17.16 s; JUnit 69 cases, 0 failures/errors"
+  },
+  {
+   "id": "T4",
+   "purpose": "78-case differential probe from committed bytes",
+   "command": "python -X utf8 -B tmp/review4/probe.py (git show 6b538ca2:...; old 2e1dfd04)",
+   "exit": 0,
+   "result": "review/evidence/review-4-probe-output.json; all non-error cases receipt_sha_ok and no_documents_claimed=false; 30 non-empty schema-key comparisons identical; R3-01 and prior set re-verified"
+  },
+  {
+   "id": "T5",
+   "purpose": "CLI + scale + hash-count checks",
+   "command": "python -X utf8 -B tmp/review4/cli_scale.py",
+   "exit": 0,
+   "result": "exact-label CN/EN tables -> 2 candidates each; nav listing -> 0; invalid URL/malformed row -> exit 2 no traceback; byte cap -> one byte_limit_reached; 10k anchors 0.314 s vs 2e1dfd04 0.332 s; 30-anchor page 1 whole-page hash (32 calls); review/evidence/review-4-cli-scale.json"
+  },
+  {
+   "id": "T6",
+   "purpose": "packaging/evidence checks",
+   "command": "red-probe BOM parse; gate-log presence; test_results vs JUnit/log hashes; JUnit cases; full run; handoff.json; prepared_at",
+   "exit": 0,
+   "result": "red output BOM-free and parses; push-gate-round2.log gone; log/JUnit SHAs match; JUnit 69/no failures; full 98 reproduced; handoff.json absent; prepared_at 23:40Z postdates 22:25Z commit"
+  },
+  {
+   "id": "T7",
+   "purpose": "delivery/product state",
+   "command": "all delivery JSON; 11 INPUTS.json W11 entries; config hashes; production roots; ruff; in-session __file__",
+   "exit": 0,
+   "result": "all pass; config unchanged; companies/.source_catalog/catalog absent; ruff clean; modules under workspace src"
+  },
+  {
+   "id": "T8",
+   "purpose": "IR-12 committed bytes",
+   "command": "read git show 6b538ca2:tests/integration/test_official_discovery_offline.py",
+   "exit": 0,
+   "result": "ends with newline (31,358 B); 半年报 absent"
+  },
+  {
+   "id": "T9",
+   "purpose": "RED evidence",
+   "command": "parse delivery/w11/probes/red-probe-output.txt",
+   "exit": 0,
+   "result": "BOM-free UTF-8; base blob 7d8fb129...; D1/D2/D3 base/current story intact"
+  }
+ ],
+ "prior_findings_verification": [
+  {
+   "id": "R3-01",
+   "status": "PASS",
+   "evidence": "11/11 .pdf exact labels -> 1 candidate each (2e1dfd04 -> 0): Annual Report, Annual Reports, Press Release, News Release, Announcement, Report, Results, Financial Reports, 公告, 业绩, 报告. Table rows (Annual Report/公告/Press Release) -> 1; dated li/article for 公告 and Press Release -> candidate with 2026-08-30; same labels as listing links (no suffix) -> 0; nav/header/footer section anchors -> 0; max_items=1 and default-bound nav pass; public CLI CN/EN tables -> 2 candidates each."
+  },
+  {
+   "id": "NR-01",
+   "status": "PASS",
+   "evidence": "nav 公告/业绩 and header/footer Results/Annual Reports/Reports -> 0; max_items=1 nav 公告 before 2025年年度报告 -> report; default max_items=30 nav + 30 real PDFs -> 30 PDFs, no nav (EN+CN)."
+  },
+  {
+   "id": "IR-12",
+   "status": "PASS",
+   "evidence": "test file ends with newline (31,358 B); 半年报 removed."
+  },
+  {
+   "id": "NR-02",
+   "status": "PASS",
+   "evidence": "single material page-level time -> candidate date None, excluded []; two-material page dates None; item time 2026-09-15; sibling li no borrow."
+  },
+  {
+   "id": "NR-03",
+   "status": "PASS",
+   "evidence": "dated report+privacy -> checked_index_only no limitations; privacy-only -> 0 no limitations; sealed-derived -> 0 candidates, dynamic_content_unresolved only."
+  },
+  {
+   "id": "NR-04",
+   "status": "PASS",
+   "evidence": "Annual Report 2025 - Legal Entity Changes -> candidate; legal nav and accessibility nav -> 0."
+  },
+  {
+   "id": "NR-05",
+   "status": "PASS",
+   "evidence": "prose title 116 (<=120); no-space falls back to Download; worst case 120+ellipsis (<=121)."
+  },
+  {
+   "id": "NR-06",
+   "status": "PASS",
+   "evidence": "still not fixed by design; findings/root_followup/handoff record it as bounded limit."
+  },
+  {
+   "id": "NR-07",
+   "status": "PASS",
+   "evidence": "?page=2 and absolute same-path query skipped; only /real.pdf remains."
+  },
+  {
+   "id": "NR-08",
+   "status": "PASS",
+   "evidence": "invalid page URL -> ValueError; CLI exit 2 JSON no traceback."
+  },
+  {
+   "id": "NR-10",
+   "status": "PASS",
+   "evidence": "page SHA once (32 calls, 1 whole-page hash); pending cap item_limit; 10k 0.314 s vs 0.332 s; 400-anchor page 30 candidates + item_limit."
+  },
+  {
+   "id": "NR-09/R3-02",
+   "status": "PARTIAL",
+   "evidence": "BOM-free red-probe, gate log gone, log/JUnit hashes match, 69 selection and 98 full verified. Open: handoff.json absent; prepared_at postdates commit; test_results records only the 69 selection (98 full verified but not recorded)."
+  },
+  {
+   "id": "round-1/round-2",
+   "status": "PASS",
+   "evidence": "IR-01 positives; notices index_notice and not budget-consuming; malformed href; fragment dedupe with distinct queries; empty/self skipped; byte limit one; unsupported MIME; 31->30+item_limit; 30->no limit; no_documents_claimed=false; candidate keys identical; receipt.event_sha256 recomputes."
+  }
+ ],
+ "new_findings": [
+  {
+   "id": "R4-01",
+   "severity": "Low",
+   "title": "Handoff-document completion remains (no product change required)",
+   "evidence": "delivery/w11/handoff.json is absent; handoff.md (5,765 B) is untracked and belongs to the final report commit; handoff known-limits cover NR-06, legal/nav heuristic, header/footer strong CTA, trailing-slash self, pending cap, 120+ellipsis, index_notice, but not the extensionless-document-endpoint residual (exact section labels on /download?id=42, /press-release/2026-q3 remain non-candidates); evidence_inventory.prepared_at 23:40Z postdates the 22:25Z commit; test_results records only the 69 selection (98 full verified but not recorded).",
+   "required_fix": "Handoff-document only: add handoff.json, commit handoff.md, add the extensionless-endpoint known limit, correct prepared_at and optionally record the full 98 run. No product change or re-review."
+  },
+  {
+   "id": "R4-02",
+   "severity": "Info",
+   "title": "Bounded behaviors to keep explicit in the handoff",
+   "evidence": "nav/header/footer anchors with a document suffix remain candidates (e.g. nav Annual Report .pdf -> 1) while no-suffix chrome/section links are non-candidates; extensionless document endpoints remain non-candidates; header/footer strong CTA without suffix dropped; /ir/ trailing slash not self; pending_limit can drop later docs behind >330 non-doc candidates; title 120+ellipsis; Annual Report 2025 Legal Notice -> index_notice.",
+   "required_fix": "Record/clarify in handoff known-limits; bounded, no product change."
+  }
+ ],
+ "positives_verified": [
+  "R3-01 fixed narrowly: section-label veto gated on not _is_document_path; 11 exact labels, 3 table rows, 4 dated-item cases and public CLI CN/EN tables produce candidates again, while 11 listing links and nav/header/footer section anchors remain non-candidates; 14 new tests (62 total).",
+  "No regression in prior set: NR-01/02/03/04/05/07/08/10, IR-12, IR-01 positives, notices/budget, limits, dedupe, malformed href, byte cap, receipt integrity, schema keys, no_documents_claimed, pure parse/thin CLI and no production writes.",
+  "Performance/bounds preserved: 10k anchors 0.314 s vs 0.332 s at 2e1dfd04; page hash once; pending cap item_limit; 400-anchor page bounded.",
+  "Tests/evidence truthful: 62+36=98 full; selection 69/29; JUnit 69/no failures; log and JUnit SHAs match test_results.json; input_source_shas match worktree; red-probe BOM-free UTF-8 and parses; 11/11 INPUTS; config unchanged; production roots absent; ruff clean.",
+  "Handoff narrative records NR-06 and legal/nav heuristic bounded limits and references review 4; only the extensionless-endpoint known limit is missing.",
+  "RED evidence intact: base blob 7d8fb129..., D1/D2/D3 base/current story unchanged."
+ ],
+ "bounded_limits_to_record": [
+  "Exact section labels pointing at document URLs without a recognized document suffix (e.g. /download?id=42, /press-release/2026-q3) remain non-candidates; add to handoff known-limits.",
+  "nav/header/footer anchors with a document suffix remain candidates (document files); no-suffix chrome/section links are non-candidates; clarify if all chrome anchors were intended to be excluded.",
+  "Header/footer strong CTA without a document suffix is dropped (already in handoff).",
+  "/ir/ trailing slash is not treated as the same document as /ir (already in handoff).",
+  "pending_limit=max_items*10+30 can drop later documents behind >330 non-doc candidates; item_limit_reached/partial is reported (already in handoff).",
+  "Title recovery is 120 content chars + ellipsis (already in handoff).",
+  "Annual Report 2025 Legal Notice becomes index_notice due to the notice token (already in handoff).",
+  "NR-06 multi-link Download+View rows without a document suffix remain bounded (already in handoff).",
+  "486789 B body unavailable; coverage at most checked_index_only/partial (already in handoff)."
+ ],
+ "external_limits": [
+  "486,789 B IR body remains unavailable; no replay claim; derived sealed fixture is not an original replay.",
+  "No live HTTP; real transport/redirects only via the existing MockTransport test.",
+  "Nav/legal/section classification is a bounded heuristic; R3-01 EN/CN fixtures are synthetic; sealed page body cannot be inspected.",
+  "Did not run the full-repo suite; reviewed W11 product/tests plus 78-case probe and CLI/scale checks.",
+  "Extensionless-endpoint residual is measured synthetically; known heuristic limit, not a .pdf regression."
+ ],
+ "conclusion": "APPROVE",
+ "blocking_items": [],
+ "approval_scope": "product SHA 6b538ca2 approved; handoff-document completion items remain and do not require product change or re-review",
+ "required_fixes_before_handoff": [
+  "Handoff-document only (no product change): add delivery/w11/handoff.json; commit handoff.md; add the extensionless-document-endpoint known limit; correct prepared_at and optionally record the full 98-file run in test_results.json."
+ ]
+}

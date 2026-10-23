@@ -1,6 +1,6 @@
 {
  "schema_version": "w11-evidence-inventory/1",
- "prepared_at": "2026-10-23T23:40:00+00:00",
+ "prepared_at": "2026-10-23T22:36:00+00:00",
  "lane": "W11-CWP-SOURCES",
  "common_prefix": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/",
  "items": [
@@ -182,5 +182,6 @@
   "多链接表格行（如 Download+View，两个锚指向同一文档且无文档后缀）仍可能不产出候选；这是本线未修的已知边界，不声称已覆盖。",
   "法律/导航识别是标题词 + nav/header/footer 结构 + section-label 的有限启发式，不是站点结构学习；个别标题（如 \"Legal Entity Identifier\"）可能被页级否决。",
   "页面是否由 JS 动态注入材料无法离线判定；dynamic heuristic 保守。"
- ]
+ ],
+ "bound_product_commit": "6b538ca2"
 }

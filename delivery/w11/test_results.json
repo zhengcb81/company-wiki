@@ -39,6 +39,18 @@
    "deselected": 29,
    "duration_seconds": null,
    "basetemp_removed": true
+  },
+  {
+   "purpose": "full two-file run (62 new + 36 existing)",
+   "command": "python -X utf8 -B -m pytest tests/integration/test_official_discovery_offline.py tests/integration/test_official_source_flow.py -q -p no:cacheprovider",
+   "exit_code": 0,
+   "passed": 98,
+   "failed": 0,
+   "skipped": 0,
+   "deselected": 0,
+   "duration_seconds": null,
+   "log_path": "delivery/w11/test-run-full-stdout.txt",
+   "log_sha256": "5688ebdc2d0de72d1b4894a598685f1779dfc2bc7cbaa104cfe0b68ba0ae174d"
   }
  ],
  "input_source_shas": {

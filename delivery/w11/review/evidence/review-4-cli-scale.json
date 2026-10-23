@@ -1,0 +1,140 @@
+{
+ "reviewed_head": "6b538ca2f18fb8d5805f2ff59a41404b6e8302cd",
+ "committed_blob": {
+  "bytes": 22353,
+  "sha256": "6bba88a286f588caad6d3de6235eff3effe15204a07a91883d03ae1bc458493d"
+ },
+ "old_blob": {
+  "ref": "2e1dfd04",
+  "bytes": 22173,
+  "sha256": "4eaeee5fb8317d11f610facd587218dd8db394840b0e38f72e4b7bb7b3c096cd"
+ },
+ "scale": {
+  "n=1000": {
+   "current": {
+    "seconds": 0.097,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   },
+   "old_2e1": {
+    "seconds": 0.095,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   }
+  },
+  "n=10000": {
+   "current": {
+    "seconds": 0.314,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   },
+   "old_2e1": {
+    "seconds": 0.332,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   }
+  }
+ },
+ "hash_counts_30_anchors": {
+  "current": {
+   "calls": 32,
+   "whole_page_hashes": 1,
+   "candidates": 30
+  },
+  "old_2e1": {
+   "calls": 32,
+   "whole_page_hashes": 1,
+   "candidates": 30
+  }
+ },
+ "cli": {
+  "cn_announcement_table": {
+   "exit": 0,
+   "candidates": [
+    "https://ir.example/upload/2026/a1.pdf",
+    "https://ir.example/upload/2026/a2.pdf"
+   ],
+   "coverage": "partial",
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "no_documents_claimed": false,
+   "traceback": false
+  },
+  "en_press_release_table": {
+   "exit": 0,
+   "candidates": [
+    "https://ir.example/upload/pr1.pdf",
+    "https://ir.example/upload/pr2.pdf"
+   ],
+   "coverage": "partial",
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "no_documents_claimed": false,
+   "traceback": false
+  },
+  "cn_nav_listing": {
+   "exit": 0,
+   "candidates": [],
+   "coverage": "checked_index_only",
+   "limitations": [],
+   "no_documents_claimed": false,
+   "traceback": false
+  },
+  "cli_ok": {
+   "exit": 0,
+   "schema": "official-discovery-result/1",
+   "status": null,
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "candidates": [
+    "https://ir.example/ar.pdf"
+   ],
+   "coverage": "partial",
+   "traceback": false
+  },
+  "cli_invalid_page_url": {
+   "exit": 2,
+   "schema": "official-source-failure/1",
+   "status": "failed",
+   "limitations": null,
+   "candidates": [],
+   "coverage": null,
+   "traceback": false
+  },
+  "cli_missing_capture": {
+   "exit": 2,
+   "schema": "official-source-failure/1",
+   "status": "failed",
+   "limitations": null,
+   "candidates": [],
+   "coverage": null,
+   "traceback": false
+  },
+  "cli_byte_over": {
+   "exit": 0,
+   "schema": "official-discovery-result/1",
+   "status": null,
+   "limitations": [
+    "byte_limit_reached"
+   ],
+   "candidates": [],
+   "coverage": "partial",
+   "traceback": false
+  }
+ }
+}
