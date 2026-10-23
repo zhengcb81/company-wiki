@@ -1,15 +1,15 @@
 # W08 finite node publication
 
-Owner: ROOT subagent; parent owns the mother PWF. Entry for this publication only.
+Owner: ROOT subagent. Parent owns the mother PWF; this is the small assigned publication ledger.
 
 ## Goal
-Save the accepted budget + measure/guidance/predicate node in a normal dual-parent merge commit; do not push or certify unfinished mainline work.
+Save the accepted budget + measure/guidance/predicate node in normal commits; do not push or certify unfinished mainline work.
 
 ## Phases
-1. Complete: inventory all existing dirty/untracked files and 88 incoming staged budget paths; verify independent final review and frozen sources.
-2. Complete: package finite source/tests and exact native evidence, retaining all RED and archived diagnostic scripts.
-3. In progress: normal Git pre-commit and merge commit without bypass.
-4. Pending: record actual commit, two parents, byte mapping, remaining files and own-cache cleanup for ROOT.
+1. Complete: inventory all506 existing dirty/untracked files and88 incoming staged paths; verify independent final24P review and frozen15 source/test hashes.
+2. Complete: package only accepted source/tests and exact native evidence; preserve all RED and eight local diagnostic scripts with committed .py.txt copies.
+3. Complete: normal dual-parent merge1896d9fb35afa7421433f12ade47010596a297e9 committed284 paths. Configured hooks ran without bypass in48.696s; Ruff/full-source mypy/host guard passed. Merge hook selected conflict files only; dependency/config-doctor reported no files.
+4. Complete: actual commit/parents/path list, raw+LF+blob digests, remaining files, byte-preserved receipts and cache cleanup recorded. Independent read-only packaging review found no product omissions. Normal docs publication is the final bookkeeping action.
 
 ## Next Step
-Run normal commit on this explicit stage set. ROOT subsequently integrates this branch with the current mother mainline; crosspage/annual14/formal paid summary/full RF remain separate work.
+ROOT merges the final branch HEAD into latest mother mainline, carries its latest unique PWF entry, and runs one normal pre-push. Crosspage ancestry, annual14 diversity, paid formal summary/cache and full RF remain separate work. Do not rerun this finite node or treat its historical RED as current failures.

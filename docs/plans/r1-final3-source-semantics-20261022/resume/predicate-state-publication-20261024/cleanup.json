@@ -1,0 +1,16 @@
+{
+  "schema_version": "w08-publication-cleanup/1",
+  "source_test_hashes_match_final15": true,
+  "all506_initial_material_bytes_preserved": true,
+  "own_merge_hook_cache_removed": true,
+  "removed_cache_bytes": 29619001,
+  "removed_cache_files": 1170,
+  "temporary_test_roots_created": 0,
+  "native_diagnostic_py_companions_retained": 8,
+  "next_node_red_untouched": true,
+  "mother_and_author_worktree_writes": 0,
+  "network_model_download_calls": 0,
+  "unrelated_files_deleted": 0,
+  "production_originals_modified": 0,
+  "followup": "normal docs-only commit uses separate disposable cache, post-commit execution receipt given to ROOT"
+}

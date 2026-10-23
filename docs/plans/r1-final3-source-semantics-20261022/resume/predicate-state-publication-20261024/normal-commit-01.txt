@@ -1,0 +1,7 @@
+[INFO] Checking merge-conflict files only.
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy runtime source (same command as CI)..............................................Passed
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/r1-final3-source-semantics 1896d9fb] Merge budget policy and reviewed source predicate semantics

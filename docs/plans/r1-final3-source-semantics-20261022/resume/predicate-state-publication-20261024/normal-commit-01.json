@@ -1,0 +1,15 @@
+{
+  "command": [
+    "git",
+    "commit",
+    "-m",
+    "Merge budget policy and reviewed source predicate semantics"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 48.696,
+  "log": "normal-commit-01.txt",
+  "log_sha256": "51cfdc1fd1e932c92566e34868bbd91123ef6e3766f3243b248bf86b36843485",
+  "hooks_skipped": false,
+  "cache_root": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\.planning\\w08-publication-hook-cache-20261024",
+  "network_model_download_calls": 0
+}
