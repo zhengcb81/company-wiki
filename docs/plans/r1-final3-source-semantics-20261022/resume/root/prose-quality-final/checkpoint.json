@@ -1,0 +1,75 @@
+{
+  "schema_version": "w08-prose-quality-engineering/1",
+  "at": "2026-10-23T21:41:20.356845+00:00",
+  "status": "INDEPENDENT_NODES_PASS_NORMAL_PUSH_PENDING",
+  "source_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\observation_adapter.py": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\layout.py": "db6df3eea9fa6af1b20398e7a7339a52b8dc5dfdb626871331af26af58234c74",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\layout_hints\\headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_normalization\\form_fields.py": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_normalization\\table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\contract.py": "ca693bed1cba4423d8c9b3a2dc0d204b48ab467d395eef91890f501407754a3a",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\narrative_continuity.py": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\operating_states\\relations.py": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\operating_states\\patterns.py": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\operating_states\\product_reference.py": "d13fa02d745814f8a264493f5214bdb9b038ce2adbd3768561cbe1e1ef919b08",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\operating_states\\text_view.py": "eba28e54cd339b0db9104439e059eb752beb24e89a5e82f349b3e5c8abc754a3"
+  },
+  "independent_numeric": {
+    "report": "resume/untyped-quality-independent-review/review-v5.json",
+    "passed": 44,
+    "scope": "source priority quality, original20k unchanged, numeric/citation/model/cache/purity controls"
+  },
+  "independent_project": {
+    "report": "resume/project-qualification-independent/review-v3.json",
+    "passed": 165,
+    "scope": "independent facts, explicit bounded same-object restrictions, typed rows/header/notes controls"
+  },
+  "root_combined_before_last_repairs": {
+    "passed": 1680,
+    "failed": 1,
+    "skipped": 11,
+    "note": "real unchanged20k priority regression fixed; original FAIL retained"
+  },
+  "root_priority_followup": {
+    "passed": 54,
+    "failed": 0,
+    "note": "before session-state purity-only delta; final independent165/44 bind e03"
+  },
+  "typing": {
+    "files": 369,
+    "errors": 0
+  },
+  "real_annual": {
+    "pages": 249,
+    "units": 5647,
+    "candidates": 1511,
+    "selected": 96,
+    "chars": 8156,
+    "work": {
+      "used": 8210077,
+      "limit": 16000000,
+      "exhausted": false,
+      "same_instance_for_parse_and_select": true
+    },
+    "two30_scope_pass": true,
+    "p16_2_and_3_untyped_rows": "selected with table_structure_ambiguous; no unit/period guesses",
+    "p16_16": "not selected in this snapshot; not asserted as covered",
+    "p184_parent": "only p83 financial report and p183 decomposition title",
+    "all14_whole_content": "PARTIAL",
+    "new_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0
+  },
+  "external_W09_W11": "user reported running; no writes in their scopes",
+  "notes": "Current mainline CURRENT_STATUS owns publication state after normal push. Local diagnostic Python scripts are not all shipped; normal permanent regression tests and bounded review receipts are committed. No full fresh-clone whole audit claim."
+}

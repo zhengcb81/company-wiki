@@ -1,0 +1,282 @@
+{
+  "schema": "project-qualification-independent-review/3",
+  "utc": "2026-10-23T21:39:24.745751+00:00",
+  "status": "PASS_BOUNDED_PROJECT_BODY_AND_LOCAL_QUALIFICATION_ENGINEERING_NODE",
+  "reviewer_role": "Non-author of production project expansion, native adjacency, relation grammar, SourceOperatingSession dependencies and ROOT closure. Reviewer owns independent scope control tests and this report only.",
+  "scope": "Real public selector citation closure over synthetic source IR, shared relation semantics, exact native carrier projection, typed/header/note legacy invariants, original-envelope budget and caller pipeline purity.",
+  "final_execution": "final-review-v3.json",
+  "logs": [
+    "final-review-v3.txt",
+    "final-review-v3.xml"
+  ],
+  "counts": {
+    "tests": 165,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "time_seconds": 14.5,
+  "ruff": "PASS",
+  "final_source_and_test_bindings": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+      "bytes": 69468
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+      "bytes": 21580
+    },
+    "src/company_wiki/source_catalog/narrative_antecedent.py": {
+      "sha256": "2cad72bbb90fef2ae6727aed26c1e41cfbe53e13bbdbc0c96f9d1e063c586877",
+      "bytes": 8545
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+      "bytes": 32830
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+      "bytes": 21667
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+      "bytes": 50229
+    },
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": {
+      "sha256": "d13fa02d745814f8a264493f5214bdb9b038ce2adbd3768561cbe1e1ef919b08",
+      "bytes": 21893
+    },
+    "src/company_wiki/document_understanding/operating_states/text_view.py": {
+      "sha256": "eba28e54cd339b0db9104439e059eb752beb24e89a5e82f349b3e5c8abc754a3",
+      "bytes": 4989
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+      "bytes": 25491
+    },
+    "src/company_wiki/document_understanding/structure/projects.py": {
+      "sha256": "2d7f1994b130c8a1948491b506f5af6ce59c5ed598a40fbfb215f4274984902e",
+      "bytes": 12454
+    },
+    "src/company_wiki/document_understanding/structure/tables.py": {
+      "sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "bytes": 11047
+    },
+    "src/company_wiki/document_understanding/structure/table_purpose.py": {
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    "src/company_wiki/document_understanding/selection_bridge.py": {
+      "sha256": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8",
+      "bytes": 8609
+    },
+    "src/company_wiki/source_catalog/narrative_native_ranges.py": {
+      "sha256": "a867a7ed856bf4eb577c41869ba8fa869bd7ad57cd865bae3608c2ace3d39461",
+      "bytes": 12206
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_carriers.py": {
+      "sha256": "8b3dfd6e37da804cb2ee3f4b0d670e0554dc6423bf847d34ff1d40d66d73c71f",
+      "bytes": 14460
+    },
+    "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py": {
+      "sha256": "0128cad62353beee128ef4cd5e7411c4586ee6ae5534e23f4aa086d5034bf6b5",
+      "bytes": 11844
+    },
+    "tests/unit/document_understanding_selection/test_reading_project_body_admission.py": {
+      "sha256": "b5860cf7a1370ed6e58113d08e672c763cce378d6f4fd43cdd0de3b12b7a6f2f",
+      "bytes": 5994
+    },
+    "tests/unit/document_understanding_selection/test_reading_local_qualification.py": {
+      "sha256": "33e5e876874cdc1c7924f2f9bef6c7d1854bb34b831673a5497bc15a0b5701a3",
+      "bytes": 10222
+    },
+    "tests/unit/document_understanding_selection/test_reading_table_admission.py": {
+      "sha256": "6613841374673a54a7dbb28ed4de17f5768e4798a7006c33256d1de9bb96ab3a",
+      "bytes": 16468
+    },
+    "tests/unit/document_understanding_selection/test_reading_table_rows.py": {
+      "sha256": "ae5121c92b4427b6b67bceef00dbebc8dea2b23a0b83376d8cdf83900d31e2d9",
+      "bytes": 7313
+    },
+    "tests/unit/document_understanding_selection/test_reading_multiline_tables.py": {
+      "sha256": "3d4c5e9463c17e5aee870f5621cd3c971a05f5dc046d65f2184aee683e4dfde1",
+      "bytes": 9669
+    },
+    "tests/unit/du11_source_closure/test_antecedent_wiring.py": {
+      "sha256": "b2f5f09625e9105373ac2a9d14cacfdea4d65049b4ac137d68e9afb9ff61b240",
+      "bytes": 12515
+    }
+  },
+  "source_bytes_stable": true,
+  "author_handoff": "../qualifier-design/handoff-v3.json",
+  "author_handoff_sha256": "ca4f0539875c76bface647df1b0cab730263cebc78b4ae6b8e0ad9ab4fc6f397",
+  "author_versions_match": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": true,
+    "src/company_wiki/document_understanding/operating_states/relations.py": true,
+    "src/company_wiki/document_understanding/operating_states/patterns.py": true,
+    "src/company_wiki/document_understanding/operating_states/text_view.py": true,
+    "tests/unit/document_understanding_selection/test_reading_local_qualification.py": true
+  },
+  "findings": [
+    {
+      "id": "PQ01",
+      "issue": "Mixed successful validation and later genuinely missing production certification lost the later restriction.",
+      "fix": "Shared connector/object binder preserves the source object for truly elided later predicates; positive validation and negative/not-yet approval remain separate.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ02",
+      "issue": "Another device belonging to the original devices supplier was falsely bound to the issuer device.",
+      "fix": "Shared source attribution identifies the actual third-party possessive object; dependency requires actual object_refs intersection instead of broad assertion cooccurrence.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ03",
+      "issue": "A denied nominalised proposition became an asserted restriction.",
+      "fix": "Shared relation owner marks predicate-local reported proposition scope unknown/uncertain, keeping original exact refs.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ04",
+      "issue": "A competitors reported claim explicitly rejected by the company became a restriction.",
+      "fix": "Same shared proposition-scope owner, no company-specific denial scanner or cross-sentence inversion.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ05",
+      "issue": "Only the first same-object restriction reached its earlier subject; a bare final deictic could survive a smaller selection budget.",
+      "fix": "Identity only continues an already proven issuer object; ROOT restores reciprocal context and one transitive component with actual budget costs.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ06",
+      "issue": "Several original qualifiers compressed into a carrier were rejected by whole-carrier pronoun count, erasing original identity edges and the eight-original-unit bound.",
+      "fix": "Observe actual edge endpoint original text and map its observed native_range offsets into the material relation-ref namespace; internal carrier edges still propagate proved original identity.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ07",
+      "issue": "Pairwise admissible physical neighbours do not by themselves prove the complete transitive original envelope.",
+      "fix": "Independent public tests isolate original units>8 at4blocks/122chars, blocks>4, and full chars>2048 with each pair<2048 at exactly4blocks. Whole component is deferred, never shortened into trusted prefixes.",
+      "status": "FIXED_RETESTED"
+    },
+    {
+      "id": "PQ08",
+      "issue": "A local component could repeatedly expand its material fanout after the shared work budget was exhausted.",
+      "fix": "ROOT checks existing exhausted state and debits member/component fanout before material-set construction. Code-reviewed on final bytes; existing shared-budget/partial controls remain green. No performance claim inferred from wall time.",
+      "status": "FIXED_CODE_REVIEWED_AND_AFFECTED_TESTS_PASS"
+    },
+    {
+      "id": "PQ09",
+      "issue": "An intermediate ROOT quality collector unconditionally added an empty private field to caller pipeline and broke13 old purity controls.",
+      "fix": "Transient numeric shape result uses the existing call-local _session_state. Old pipeline equality assertions remain unchanged; all13 former failures now pass.",
+      "status": "FIXED_RETESTED"
+    }
+  ],
+  "architecture": [
+    "Plain project prose uses each actual source member through shared native continuity and source operating session; a project title does not gate all body eligibility.",
+    "Affirmative original typed row/header/note dependencies retain atomic table/project semantics; table-purpose filtering and original context tests pass.",
+    "Native adjacency is physical source proof only (semantic_status not_evaluated), carries actual IDs and scope, and cannot assert event meaning.",
+    "Shared product-head grammar, relation object/actor/predicate/qualifier refs and bounded native offset mapping supply identity/state. No duplicate device vocabulary, guessed row/period, company ID or known-number branch was added.",
+    "ROOT applies the same existing graph budget and transitive original envelope including headings and expanded native members. Unknown or over-envelope cases are deferred; generic future paragraphs and other parent/project/section scopes are not attached.",
+    "Cache decision inventory binds actual relation/product-reference/native-continuity/narrative-reading bytes. No new persistent task store, cache, permission, approval receipt or API was introduced."
+  ],
+  "coverage_breakdown": {
+    "independent_public_scope": 20,
+    "root_public_project_body": 9,
+    "author_local_shared_semantics": 40,
+    "legacy_table_admission": 33,
+    "legacy_table_rows": 26,
+    "legacy_multiline_table": 18,
+    "antecedent_original_envelope": 19
+  },
+  "old_failures_preserved": {
+    "initial_semantics": "independent-red.txt/xml/json:4F12P",
+    "carrier_original_units": "envelope-red-bound.txt/xml/json:1F19P",
+    "intermediate_root_purity": "final-review-v2.txt/xml/json:13F152P"
+  },
+  "cleanup": {
+    "actual_generations": [
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212058-b34d74f7",
+        "existed": true,
+        "removed": true,
+        "log": "independent-red.txt",
+        "actual_absent_verified": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212327-5fd04b63",
+        "existed": true,
+        "removed": true,
+        "log": "chain-current.txt",
+        "actual_absent_verified": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212550-5e595938",
+        "existed": true,
+        "removed": true,
+        "log": "envelope-red.txt",
+        "actual_absent_verified": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212701-81fafa11",
+        "existed": true,
+        "removed": true,
+        "log": "envelope-red-bound.txt",
+        "actual_absent_verified": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213040-e21ff30e",
+        "existed": true,
+        "removed": true,
+        "log": "final-review.txt",
+        "actual_absent_verified": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213459-406b244c",
+        "existed": true,
+        "removed": true,
+        "log": "final-review-v2.txt",
+        "actual_absent_verified": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213707-441fdd07",
+        "existed": true,
+        "removed": true,
+        "log": "final-review-v3.txt",
+        "actual_absent_verified": true
+      }
+    ],
+    "all_requested_dirs_absent": true,
+    "requested_names": [
+      "red-temp",
+      "chain-temp",
+      "envelope-temp",
+      "envelope-bound-temp",
+      "final-temp",
+      "final-v2-temp",
+      "final-v3-temp"
+    ]
+  },
+  "external_actions": {
+    "original_reads": 0,
+    "format_parser_calls": 0,
+    "network_calls": 0,
+    "paid_model_calls": 0
+  },
+  "write_scope": "Only test_reading_qualification_scope_controls.py and own resume/project-qualification-independent reports. No production, original/config/catalog, Git/index or external W09/W11 harness writes.",
+  "limitations": [
+    "Synthetic in-memory source observations are openly labelled; no original annual document was re-read for this review.",
+    "This accepts a finite engineering root-cause node only. It does not accept annual14 content completeness, chemistry ancestry, table/source coverage, formal paid summaries, cache restore/public RF consumption, or the whole W08/RF audit loop.",
+    "Previously sealed real-source FAIL/PARTIAL outcomes remain historical evidence. ROOT must bind real replays and subsequent summaries to its actual final version."
+  ]
+}

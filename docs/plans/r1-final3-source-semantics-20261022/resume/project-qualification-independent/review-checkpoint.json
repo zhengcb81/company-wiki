@@ -1,0 +1,68 @@
+{
+  "schema": "project-qualification-review-checkpoint/1",
+  "status": "AUTHOR_FROZEN_IMPLEMENTATION_AND_CURRENT_ROOT_WIRING_165_PASS_PENDING_ROOT_RESOURCE_DELTA",
+  "author_handoff": "docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\handoff-v3.json",
+  "author_bound_versions_match": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": true,
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": true,
+    "src/company_wiki/document_understanding/operating_states/relations.py": true,
+    "src/company_wiki/document_understanding/operating_states/patterns.py": true,
+    "src/company_wiki/document_understanding/operating_states/text_view.py": true,
+    "tests/unit/document_understanding_selection/test_reading_local_qualification.py": true
+  },
+  "independent_execution": "final-review.json",
+  "independent_counts": {
+    "tests": 165,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "findings": [
+    {
+      "id": "PQ01",
+      "issue": "A completed validation followed by a genuine missing production certification lost its later qualifier.",
+      "status": "FIXED_BY_SHARED_BINDER_AND_PUBLIC_RETEST"
+    },
+    {
+      "id": "PQ02",
+      "issue": "Another device belonging to the first devices supplier was mistaken for the same issuer object.",
+      "status": "FIXED_BY_ACTUAL_OBJECT_REFS_AND_ATTRIBUTION"
+    },
+    {
+      "id": "PQ03",
+      "issue": "A denied nominalised proposition became an asserted restriction.",
+      "status": "FIXED_BY_SHARED_PROPOSITION_SCOPE"
+    },
+    {
+      "id": "PQ04",
+      "issue": "A competitors claim explicitly denied by the company became a restriction.",
+      "status": "FIXED_BY_SHARED_PROPOSITION_SCOPE"
+    },
+    {
+      "id": "PQ05",
+      "issue": "Only the first of two actual same-object restrictions bound to its earlier source subject; a final bare deictic could fit a smaller cap.",
+      "status": "FIXED_BY_PROVED_OBJECT_CHAIN_AND_BIDIRECTIONAL_COMPONENT_CLOSURE"
+    },
+    {
+      "id": "PQ06",
+      "issue": "Several original qualifiers inside a native carrier bypassed the local identity recognizer and full original-unit envelope.",
+      "status": "FIXED_BY_EXACT_NATIVE_MEMBER_REF_PROJECTION_AND_PUBLIC_EIGHT_UNIT_RETEST"
+    },
+    {
+      "id": "PQ07",
+      "issue": "Pairwise measured neighbours are insufficient to prove full transitive original envelope compliance.",
+      "status": "FIXED_BLOCK_CHAR_UNIT_LIMITS_INDEPENDENTLY_TESTED"
+    },
+    {
+      "id": "PQ08",
+      "issue": "A component package could expand a large material set again after the shared work budget was already exhausted.",
+      "status": "ROOT_ACCEPTED_CODE_REVIEW_FINDING_PENDING_FINAL_GUARD_AND_BYTE_RETEST"
+    }
+  ],
+  "old_evidence": {
+    "initial_scope": "independent-red.txt/xml/json:4F12P",
+    "carrier_scope": "envelope-red-bound.txt/xml/json:1F19P"
+  },
+  "boundary": "This finite engineering review does not accept annual14 source coverage, real source processing, formal summaries, cache restore, RF downstream results, or the whole W08 node."
+}

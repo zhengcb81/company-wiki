@@ -1,0 +1,42 @@
+{
+  "actual": [
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211202-2fd24876",
+      "existed": true,
+      "removed": true,
+      "log": "review-v1.txt",
+      "absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211331-5f42d310",
+      "existed": true,
+      "removed": true,
+      "log": "reverse-red.txt",
+      "absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211409-256c63b9",
+      "existed": true,
+      "removed": true,
+      "log": "review-v2.txt",
+      "absent_after": true
+    }
+  ],
+  "requested": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\probe-temp",
+      "absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\reverse-red-temp",
+      "absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v2-temp",
+      "absent_after": true
+    }
+  ]
+}

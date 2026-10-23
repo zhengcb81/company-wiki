@@ -1,0 +1,73 @@
+{
+  "schema": "w08-project-body-red/1",
+  "status": "RED_PRODUCT_ASSERTIONS",
+  "read_code_binding": "after_RED_before_ROOT_implementation; baseline source SHA captured on delivery, not a historical ranking trace",
+  "bound_files": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+      "bytes": 63203
+    },
+    "src/company_wiki/document_understanding/structure/projects.py": {
+      "sha256": "2d7f1994b130c8a1948491b506f5af6ce59c5ed598a40fbfb215f4274984902e",
+      "bytes": 12454
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "16a3e0bb8cbc3ad50c69ab9310a457d18a70ee955016c0cb3a823715c00e2a09",
+      "bytes": 31508
+    },
+    "tests/unit/document_understanding_selection/test_reading_project_body_admission.py": {
+      "sha256": "b5860cf7a1370ed6e58113d08e672c763cce378d6f4fd43cdd0de3b12b7a6f2f",
+      "bytes": 5994
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_carriers.py": {
+      "sha256": "8b3dfd6e37da804cb2ee3f4b0d670e0554dc6423bf847d34ff1d40d66d73c71f",
+      "bytes": 14460
+    }
+  },
+  "pytest": {
+    "command": "mother .venv Python -m pytest tests/unit/document_understanding_selection/test_reading_project_body_admission.py -q --basetemp=<own>/pytest-red-temp --junitxml=<own>/red.xml",
+    "exit_code": 1,
+    "failed": 8,
+    "passed": 1,
+    "seconds": 1.84,
+    "module_location_checked_inside_pytest": true
+  },
+  "prior_fixture_error": {
+    "failed": 9,
+    "reason": "deepcopy on immutable nested mappingproxy; snapshot helper fixed without changing expected behavior",
+    "receipt": "fixture-error.txt"
+  },
+  "product_failures": [
+    "generic project title blocks full body admission",
+    "eligible title turns all body into context rather than support",
+    "three-source-slot closure unnecessarily costs all project members",
+    "tight two-slot independent fact absent",
+    "local explicit qualifier preservation cannot be reached because no fact admitted"
+  ],
+  "cleanup": {
+    "actual_cleanup_events": [
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210222-4d094115",
+        "existed": true,
+        "removed": true,
+        "observed_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210242-e4f81d11",
+        "existed": true,
+        "removed": true,
+        "observed_absent_after": true
+      }
+    ],
+    "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\project-body-independent\\pytest-red-temp",
+    "requested_absent_after": true,
+    "network_calls": 0,
+    "model_calls": 0,
+    "downloaded_originals": 0,
+    "raw_copies": 0
+  },
+  "no_production_edits": true,
+  "no_git_mutation": true
+}

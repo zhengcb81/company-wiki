@@ -1,0 +1,8 @@
+{
+  "baseline": "b6395b6c",
+  "path": "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+  "normalized_file_equal": true,
+  "baseline_function_sha256": "5e4dc91827d528915071f731aaaa1dcc7ebc1f8ea02bb75d819b44e081298278",
+  "current_function_sha256": "5e4dc91827d528915071f731aaaa1dcc7ebc1f8ea02bb75d819b44e081298278",
+  "function_unchanged": true
+}

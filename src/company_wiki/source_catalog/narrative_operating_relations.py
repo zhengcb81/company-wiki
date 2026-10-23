@@ -12,6 +12,10 @@ from typing import Any
 
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from company_wiki.document_understanding.operating_states.relations import OperatingRelationSession
+from company_wiki.document_understanding.operating_states.product_reference import (
+    find_product_deictic, head_class, product_head_spans,
+)
+from company_wiki.document_understanding.operating_states.text_view import strip_connector
 
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_business_policy import assess_reading_business_fact, project_reading_business_fact
@@ -63,6 +67,7 @@ class SourceOperatingSession:
         self.financial: dict[str, bool | None] = {}
         self.references: dict[str, dict[str, Any]] = {}
         self.complete = True
+        self.qualifications: dict[tuple[int, int], tuple[Any, Any, dict[str, tuple[str, ...]]]] = {}
 
     def owner_for(self, uid: str) -> str:
         return self.owners.get(uid, uid)
@@ -195,6 +200,152 @@ class SourceOperatingSession:
                 result = {**result, "declaration_refs": declarations, "member_refs": members}
         self.references[uid] = result
         return result
+
+    def _source_material_range(self, original_id: str, material_id: str):
+        """Exact original body range in the current relation-ref namespace.
+
+        A native carrier retains the observed page-view member offsets. Use
+        those actual offsets, never text search or whole-carrier pronoun counts.
+        Non-carried original units already share the relation namespace.
+        """
+        original = self.originals.get(original_id) or self.units.get(original_id)
+        material = self.units.get(material_id)
+        self.work_budget.charge()
+        if original is None or material is None or original.source_id != material.source_id:
+            return None
+        if original_id == material_id:
+            return original.raw_text, {"unit_id": material_id, "char_start": 0,
+                                      "char_end": len(original.raw_text)}
+        binding = material.metadata.get("native_range")
+        if isinstance(binding, Mapping) and binding.get("schema_version") == "native-pdf-range/1":
+            members = binding.get("members", ())
+            self.work_budget.charge(len(members))
+            for member in members:
+                if member.get("unit_id") != original_id:
+                    continue
+                start, end = member.get("view_char_start"), member.get("view_char_end")
+                base = material.coordinates.char_start
+                if type(start) is not int or type(end) is not int or type(base) is not int:
+                    return None
+                start, end = start - base, end - base
+                self.work_budget.charge(len(original.raw_text))
+                if (0 <= start < end <= len(material.raw_text)
+                        and material.raw_text[start:end] == original.raw_text):
+                    return original.raw_text, {"unit_id": material_id, "char_start": start,
+                                              "char_end": end}
+                return None
+        # A caller's identity-preserving alias has no joined character space.
+        # It is usable only when its complete observed characters are equal.
+        if material.raw_text == original.raw_text:
+            return original.raw_text, {"unit_id": material_id, "char_start": 0,
+                                      "char_end": len(original.raw_text)}
+        return None
+
+    def local_qualification_dependencies(self, edges, *, origins=None) -> dict[str, tuple[str, ...]]:
+        """Explicit restrictions on original neighbours, projected to material.
+
+        Geometry owns original IDs, relation extraction owns state and object
+        refs, and native bindings own character projection. Carrier admission
+        cannot erase source-unit dependencies or invent one shared pronoun.
+        Reading still counts the whole transitive original envelope.
+        """
+        key = (id(edges), id(origins))
+        cached = self.qualifications.get(key)
+        if cached is not None:
+            return cached[2]
+        origins = origins if origins is not None else {}
+        dependencies: dict[str, tuple[str, ...]] = {}
+        bound_heads: dict[str, str] = {}
+
+        def intersects(ref, marker):
+            return (ref["unit_id"] == marker["unit_id"]
+                    and ref["char_start"] < marker["char_end"]
+                    and marker["char_start"] < ref["char_end"])
+
+        try:
+            self.work_budget.charge(1 + len(edges))
+            for edge in edges:
+                if edge.get("basis") != "source_body_adjacency":
+                    continue
+                left_original, right_original = edge.get("left"), edge.get("right")
+                if (not isinstance(left_original, str) or not isinstance(right_original, str)
+                        or left_original == right_original):
+                    continue
+                left, right = origins.get(left_original, left_original), origins.get(right_original, right_original)
+                if left not in self.units or right not in self.units:
+                    continue
+                a, b = self.units[left], self.units[right]
+                if (a.source_id != b.source_id or edge.get("source_id") != a.source_id
+                        or a.source_role != b.source_role
+                        or a.source_role not in {"company_filing", "management", "management_discussion"}):
+                    continue
+                left_scope = self._source_material_range(left_original, left)
+                right_scope = self._source_material_range(right_original, right)
+                if left_scope is None or right_scope is None:
+                    continue
+                right_text, right_marker = right_scope
+                self.work_budget.charge(2 * len(right_text))
+                deictics = find_product_deictic(right_text)
+                if len(deictics) != 1:
+                    continue
+                deictic = deictics[0]
+                if strip_connector(right_text[:deictic.span[0]].strip())[0].strip(" ,，:："):
+                    continue
+                marker = {**right_marker,
+                          "char_start": right_marker["char_start"] + deictic.span[0],
+                          "char_end": right_marker["char_start"] + deictic.span[1]}
+                result = self.relations(right)
+                if result["status"] != "complete":
+                    continue
+                restriction = False
+                for relation in result["relations"]:
+                    self.work_budget.charge(1 + len(relation["object_refs"]))
+                    if (relation["attribution"] in {"other", "quoted_related_party"}
+                            or relation["modality"] not in {"actual", "conditional"}
+                            or not (relation["polarity"] == "negative" or relation["stage"] in {
+                                "not_yet", "conditional", "suspended", "discontinued"})):
+                        continue
+                    if any(intersects(ref, marker) for ref in relation["object_refs"]):
+                        restriction = True
+                        break
+                if not restriction:
+                    continue
+                previous = self.relations(left)
+                if previous["status"] != "complete":
+                    continue
+                objects: list[tuple[str, int, int]] = []
+                left_marker = left_scope[1]
+                self.work_budget.charge(len(previous["relations"]))
+                for relation in previous["relations"]:
+                    inherited = (relation["attribution"] == "unknown"
+                                 and bound_heads.get(left_original) == head_class(deictic.head))
+                    if ((relation["attribution"] != "issuer" and not inherited)
+                            or relation["modality"] not in {"actual", "conditional"}):
+                        continue
+                    self.work_budget.charge(len(relation["object_refs"]))
+                    for ref in relation["object_refs"]:
+                        if not intersects(ref, left_marker):
+                            continue
+                        unit = self.units.get(ref["unit_id"]) or self.originals.get(ref["unit_id"])
+                        if unit is None or not 0 <= ref["char_start"] < ref["char_end"] <= len(unit.raw_text):
+                            continue
+                        text = unit.raw_text[ref["char_start"]:ref["char_end"]]
+                        self.work_budget.charge(len(text))
+                        objects.extend((ref["unit_id"], ref["char_start"] + start,
+                                        ref["char_start"] + end)
+                                       for start, end, head in product_head_spans(text)
+                                       if head == head_class(deictic.head))
+                if len(set(objects)) != 1:
+                    continue
+                bound_heads[right_original] = head_class(deictic.head)
+                # Internal carrier edges still establish the next original's
+                # identity. Only the published material graph suppresses self.
+                if left != right:
+                    dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
+        except WorkBudgetExceeded:
+            self.complete = False
+        self.qualifications[key] = (edges, origins, dependencies)
+        return dependencies
 
     def _validate_original_refs(self, refs) -> list[dict[str, Any]] | None:
         projected: list[dict[str, Any]] = []

@@ -24,7 +24,7 @@ _ABBREVIATION_END = re.compile(
     r"(?:\b(?:Ltd|Inc|Corp|Co|Mr|Mrs|Ms|Dr|Prof|vs|etc|No)\.)$", re.IGNORECASE
 )
 CONNECTOR_PREFIX = re.compile(
-    r"^(?:並且|并且|并|且|同时|以及|随后|接着|另外|而其|而|该|其|"
+    r"^(?:但是|然而|不过|但|並且|并且|并|且|同时|以及|随后|接着|另外|而其|而|该|其|"
     r"and|also|then|while|but|however|moreover|furthermore)\s*",
     re.IGNORECASE,
 )

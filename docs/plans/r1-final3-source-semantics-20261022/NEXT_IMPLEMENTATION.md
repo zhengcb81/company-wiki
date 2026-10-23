@@ -6,6 +6,10 @@ Code48a8c86d fixes lost table-region negative evidence, source numeric-row title
 
 External W09-RF-RESEARCH and W11-CWP-SOURCES own their dispatched directories and interfaces. This note changes neither card nor authority; ROOT continues only W08/new paid summary/central matrix/merge.
 
+## Current follow-up node (2026-10-23)
+
+Steps1–2 below are now bounded engineering PASS on e03 reading source, independent44P and165P; all original RED and full-run failures preserved. Quality belongs to the source-priority required-source admission pass, observed once under the same WorkBudget and projected through existing call-local session_state; no late re-scan or mutation of caller pipeline. Real249-page/5647-unit replay:96spans8156chars, work8210077/16M, both30% own-business scopes PASS, p16 two selected numeric rows honest unknown. Whole14 stillPARTIAL. See resume/root/prose-quality-final/checkpoint.json. Next starts step3; no new paid summary yet.
+
 ## Implementation order: tests then shared owner
 
 1. **Untyped numeric evidence.** Freeze neutral PDF text rows with several number cells and a descriptive change cell, plus a fully bound table positive. An unbound numeric row must not appear as a trusted amount or silently bypass table purpose because package.kind=background. Preserve raw/source IDs. Reuse the structure/table-purpose and quality vocabulary: either obtain genuine header/unit/period edges from the source or expose table_structure_ambiguous/unknown and constrain numeric interpretation. No nearest header guessed across pages, fake typed table, source name rule, or blanket financial-chapter exclusion. Keep genuine business-event prose in notes. First test the public selection output and citation view, not just a helper.

@@ -1,0 +1,37 @@
+{
+  "before": {
+    "src/company_wiki/document_normalization/table_shapes.py": "231d245c09570f74096e9e2716e5521bbc8f9d98294f8babf81668d63152cf3b",
+    "src/company_wiki/source_catalog/narrative_reading.py": "74b55d55c81987576fc4a2416f03c9f96ffef781436d5a0fe9889bc2317d23aa",
+    "src/company_wiki/document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "quality_section": "c79ccc89db434637c56a16caa248dd2a4cdd3036c93f909bb42cb17ef93be5c2",
+    "shape_function": "e70cb13793bdeb46b7cb7acb730842b616e192bdea62824129396459a6606578"
+  },
+  "after": {
+    "src/company_wiki/document_normalization/table_shapes.py": "231d245c09570f74096e9e2716e5521bbc8f9d98294f8babf81668d63152cf3b",
+    "src/company_wiki/source_catalog/narrative_reading.py": "74b55d55c81987576fc4a2416f03c9f96ffef781436d5a0fe9889bc2317d23aa",
+    "src/company_wiki/document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "quality_section": "c79ccc89db434637c56a16caa248dd2a4cdd3036c93f909bb42cb17ef93be5c2",
+    "shape_function": "e70cb13793bdeb46b7cb7acb730842b616e192bdea62824129396459a6606578"
+  },
+  "exit_code": 1,
+  "seconds": 13.793963000003714,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py",
+    "-q",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\probe-temp",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\review-v1.xml"
+  ],
+  "original_reads": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "production_writes": 0
+}

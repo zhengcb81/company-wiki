@@ -1,0 +1,117 @@
+{
+  "schema": "untyped-numeric-quality-formal-tests/1",
+  "status": "FINAL_CURRENT_GREEN_NOT_RELABELED_RED",
+  "utc": "2026-10-23T21:07:58.628729+00:00",
+  "exit_code": 0,
+  "test_count": 15,
+  "before": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "824b2891b996cfb51691ce5792e5d3375412024b0e4c5f43d06003c766594a73",
+      "bytes": 61456
+    },
+    "src/company_wiki/document_normalization/table_shapes.py": {
+      "sha256": "231d245c09570f74096e9e2716e5521bbc8f9d98294f8babf81668d63152cf3b",
+      "bytes": 2149
+    },
+    "src/company_wiki/document_understanding/structure/table_purpose.py": {
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    "src/company_wiki/document_understanding/structure/tables.py": {
+      "sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "bytes": 11047
+    },
+    "src/company_wiki/document_understanding/native_table_bridge.py": {
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+      "bytes": 11888
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "sha256": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "bytes": 26322
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "bytes": 25839
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    },
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": {
+      "sha256": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+      "bytes": 12328
+    }
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "824b2891b996cfb51691ce5792e5d3375412024b0e4c5f43d06003c766594a73",
+      "bytes": 61456
+    },
+    "src/company_wiki/document_normalization/table_shapes.py": {
+      "sha256": "231d245c09570f74096e9e2716e5521bbc8f9d98294f8babf81668d63152cf3b",
+      "bytes": 2149
+    },
+    "src/company_wiki/document_understanding/structure/table_purpose.py": {
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    "src/company_wiki/document_understanding/structure/tables.py": {
+      "sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "bytes": 11047
+    },
+    "src/company_wiki/document_understanding/native_table_bridge.py": {
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+      "bytes": 11888
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "sha256": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "bytes": 26322
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "bytes": 25839
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    },
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": {
+      "sha256": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+      "bytes": 12328
+    }
+  },
+  "source_bytes_stable": true,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\formal-final-temp",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\formal-final.xml"
+  ],
+  "cleanup": {
+    "event": "cleanup",
+    "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210756-6c8cbb28",
+    "existed": true,
+    "removed": true,
+    "actual_absent_verified": true,
+    "requested_absent_verified": true
+  },
+  "original_red": "red.txt/xml:6F7P before ROOT shape/quality implementation",
+  "prior_formal_first_run": "formal-red.txt/xml:15P filename historical, not proof of RED; ROOT concurrently implemented source quality before this first formal test run",
+  "scope": "Only one new official test file plus own independent report directory; no production/Git changes",
+  "external_actions": {
+    "original_reads": 0,
+    "parser_calls": 0,
+    "network": 0,
+    "llm": 0
+  }
+}

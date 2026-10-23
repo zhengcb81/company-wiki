@@ -1,0 +1,116 @@
+{
+  "schema": "w08-untyped-quality-independent/1",
+  "status": "PASS_BOUNDED_ENGINEERING_NODE",
+  "scope": [
+    "source value-cell shape",
+    "selected evidence/citation/model quality propagation",
+    "fully bound table positive",
+    "exact native carrier and cross-parent isolation",
+    "same WorkBudget refusal without fabricated facts",
+    "public decision dependency invalidation on actual quality-helper bytes"
+  ],
+  "not_accepted": [
+    "project body/root W08 other code",
+    "real original annual14 whole selection",
+    "formal model summary",
+    "production merge or release"
+  ],
+  "tests": {
+    "formal_unchanged": 15,
+    "permanent_reverse": 8,
+    "independent_public_probes": 11,
+    "passed": 34,
+    "failed": 0,
+    "pytest_seconds": 5.91,
+    "exit_code": 0
+  },
+  "bound_version": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "f654189d0cc32c0c3c5d7cf4fab3ee202dbb401579145075094e5fafcb0705eb",
+    "src/company_wiki/document_understanding/decision_inventory.py": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "1a72a3df1eb607a53dbf3c88d3bfb0a48e972fdc40b8c3670ff3f675497e1d92",
+    "docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py": "545a308e8c0ea46534d4e27fd7dc52a00b479e593fbe564df7d96e3f02ab1a51",
+    "quality_section": "276cddedda6ed27bf22ad906102382c1789cc5aeaa369d9595e8304b939d724b",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "all_bindings_stable_during_run": true,
+  "findings": [
+    {
+      "id": "UQ-01",
+      "status": "FIXED_RETESTED",
+      "root": "any two bare native numeric tokens wrongly treated as cells",
+      "fix": "shared literal helper now requires consecutive values; original raw prose/source proof retained; no native-carrier exemption or unit dictionary",
+      "historical_red": "review-v1.txt / execution-v1.json",
+      "permanent_test": "test_complete_prose_quantity_tokens_split_by_native_wrapping_are_not_table_cells"
+    },
+    {
+      "id": "UQ-02",
+      "status": "FIXED_RETESTED",
+      "root": "quality scan resource refusal reported as observed table ambiguity",
+      "fix": "existing _deferred_selection(parsed,effective_route) with work_budget_exhausted, no false table flag or unmetered scan",
+      "historical_observed_red": "budget-risk-red.json",
+      "permanent_test": "test_refused_numeric_quality_scan_is_work_deferred_without_fabricated_table_shape",
+      "fresh_limit": "baseline actual budget.used - 1, no numeric cost hardcode"
+    }
+  ],
+  "history_note": "v1/v2 executions retain their historical meaning. Own budget probe updated for corrected resource contract. Permanent reverse file first ran GREEN because ROOT fix already landed; it is not claimed as its own RED. Historical public probe demonstrated the same wrapped-prose failures and pure-prose budget misattribution before fixes.",
+  "cleanup": {
+    "actual": [
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211202-2fd24876",
+        "existed": true,
+        "removed": true,
+        "log": "review-v1.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211331-5f42d310",
+        "existed": true,
+        "removed": true,
+        "log": "reverse-red.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211409-256c63b9",
+        "existed": true,
+        "removed": true,
+        "log": "review-v2.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211738-6c8a05e7",
+        "existed": true,
+        "removed": true,
+        "log": "review-v3.txt",
+        "verified_absent_after": true
+      }
+    ],
+    "requested": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\probe-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\reverse-red-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v2-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v3-temp",
+        "verified_absent_after": true
+      }
+    ]
+  },
+  "no_original_io": true,
+  "no_network_or_model": true,
+  "no_production_edits": true,
+  "no_git_mutations": true
+}

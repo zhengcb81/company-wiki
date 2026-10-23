@@ -1,0 +1,1654 @@
+[
+  {
+    "label": "positive-cn",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备尚未完成量产认证，不代表已经形成批量销售。",
+    "expected_link": true,
+    "actual_link": true,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目",
+        "该设备尚未完成量产认证，不代表已经形成批量销售。"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:cc157188a49d65a7ff0c52d0461c64c7dabe25ef59efd5daecbdd3e11a4a30e5",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc157188a49d65a7ff0c52d0461c64c7dabe25ef59efd5daecbdd3e11a4a30e5",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc157188a49d65a7ff0c52d0461c64c7dabe25ef59efd5daecbdd3e11a4a30e5",
+              "char_start": 1,
+              "char_end": 3
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc157188a49d65a7ff0c52d0461c64c7dabe25ef59efd5daecbdd3e11a4a30e5",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc157188a49d65a7ff0c52d0461c64c7dabe25ef59efd5daecbdd3e11a4a30e5",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc157188a49d65a7ff0c52d0461c64c7dabe25ef59efd5daecbdd3e11a4a30e5",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    }
+  },
+  {
+    "label": "positive-pending",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备仍需客户完成认证，预计下一期才能进入量产。",
+    "expected_link": true,
+    "actual_link": true,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目",
+        "该设备仍需客户完成认证，预计下一期才能进入量产。"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9259f884862f862a7f4c6ddde6bf184723a67f598d8948b4bdd33792485b7e08",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9259f884862f862a7f4c6ddde6bf184723a67f598d8948b4bdd33792485b7e08",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9259f884862f862a7f4c6ddde6bf184723a67f598d8948b4bdd33792485b7e08",
+              "char_start": 1,
+              "char_end": 3
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9259f884862f862a7f4c6ddde6bf184723a67f598d8948b4bdd33792485b7e08",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9259f884862f862a7f4c6ddde6bf184723a67f598d8948b4bdd33792485b7e08",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "positive",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1045
+    }
+  },
+  {
+    "label": "device-customer",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备的客户尚未完成量产认证。",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:37e8a9a6c970458500b14d40e01e38fda3f3188bd466093dd9cfe1ddaaa8fae5",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:37e8a9a6c970458500b14d40e01e38fda3f3188bd466093dd9cfe1ddaaa8fae5",
+              "char_start": 0,
+              "char_end": 14
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:37e8a9a6c970458500b14d40e01e38fda3f3188bd466093dd9cfe1ddaaa8fae5",
+              "char_start": 1,
+              "char_end": 6
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:37e8a9a6c970458500b14d40e01e38fda3f3188bd466093dd9cfe1ddaaa8fae5",
+              "char_start": 10,
+              "char_end": 12
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:37e8a9a6c970458500b14d40e01e38fda3f3188bd466093dd9cfe1ddaaa8fae5",
+              "char_start": 12,
+              "char_end": 14
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:37e8a9a6c970458500b14d40e01e38fda3f3188bd466093dd9cfe1ddaaa8fae5",
+              "char_start": 6,
+              "char_end": 8
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "other",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 678
+    }
+  },
+  {
+    "label": "device-supplier",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备的供应商尚未完成量产认证。",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:355746a2fbe0eaf9a892218b3dd2cd7a7627c19f38e6c8d23a3822456918ae22",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:355746a2fbe0eaf9a892218b3dd2cd7a7627c19f38e6c8d23a3822456918ae22",
+              "char_start": 0,
+              "char_end": 15
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:355746a2fbe0eaf9a892218b3dd2cd7a7627c19f38e6c8d23a3822456918ae22",
+              "char_start": 1,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:355746a2fbe0eaf9a892218b3dd2cd7a7627c19f38e6c8d23a3822456918ae22",
+              "char_start": 11,
+              "char_end": 13
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:355746a2fbe0eaf9a892218b3dd2cd7a7627c19f38e6c8d23a3822456918ae22",
+              "char_start": 13,
+              "char_end": 15
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:355746a2fbe0eaf9a892218b3dd2cd7a7627c19f38e6c8d23a3822456918ae22",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "other",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 725
+    }
+  },
+  {
+    "label": "device-supplier-prod",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备的供应商尚未进入量产。",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:40c944b6457a973fa253b5ca934934be6c1919ea05bf19040f3fa699ad3e5bb1",
+      "relations": [],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 606
+    }
+  },
+  {
+    "label": "question",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备是否尚未完成量产认证？",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b81a794ff3d207d587df53bdac28b84adbf3198ca2d008877e7076850b1e2d8a",
+      "relations": [],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 190
+    }
+  },
+  {
+    "label": "claimed-restriction-denied",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备尚未完成量产认证的说法并不成立。",
+    "expected_link": false,
+    "actual_link": true,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目",
+        "该设备尚未完成量产认证的说法并不成立。"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a9ba5ccbeb8636433b87396c0671ba7985e87de65531f2b32e66fe59cc6c5a",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a9ba5ccbeb8636433b87396c0671ba7985e87de65531f2b32e66fe59cc6c5a",
+              "char_start": 0,
+              "char_end": 18
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a9ba5ccbeb8636433b87396c0671ba7985e87de65531f2b32e66fe59cc6c5a",
+              "char_start": 1,
+              "char_end": 3
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a9ba5ccbeb8636433b87396c0671ba7985e87de65531f2b32e66fe59cc6c5a",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a9ba5ccbeb8636433b87396c0671ba7985e87de65531f2b32e66fe59cc6c5a",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a9ba5ccbeb8636433b87396c0671ba7985e87de65531f2b32e66fe59cc6c5a",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 859
+    }
+  },
+  {
+    "label": "quoted-restriction",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备尚未完成认证是竞争对手的说法，公司已澄清该说法不实。",
+    "expected_link": false,
+    "actual_link": true,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目",
+        "该设备尚未完成认证是竞争对手的说法，公司已澄清该说法不实。"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3a3dee3c75f6252fd7ecbedd3fff9b272a30dc6617ba255f7bc3a4f06d18feac",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3a3dee3c75f6252fd7ecbedd3fff9b272a30dc6617ba255f7bc3a4f06d18feac",
+              "char_start": 0,
+              "char_end": 17
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3a3dee3c75f6252fd7ecbedd3fff9b272a30dc6617ba255f7bc3a4f06d18feac",
+              "char_start": 1,
+              "char_end": 3
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3a3dee3c75f6252fd7ecbedd3fff9b272a30dc6617ba255f7bc3a4f06d18feac",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3a3dee3c75f6252fd7ecbedd3fff9b272a30dc6617ba255f7bc3a4f06d18feac",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 954
+    }
+  },
+  {
+    "label": "en-device-supplier",
+    "left": "We delivered dedicated devices to customers for testing.",
+    "right": "This device's supplier has not obtained customer certification.",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 0,
+              "char_end": 55
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 13,
+              "char_end": 43
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 3,
+              "char_end": 12
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 3,
+              "char_end": 12
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 2545
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:dbf8d134095b8562542e57a5350e11265763ef91db934e7b9de5b2d1a1c55c17",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:dbf8d134095b8562542e57a5350e11265763ef91db934e7b9de5b2d1a1c55c17",
+              "char_start": 0,
+              "char_end": 62
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:dbf8d134095b8562542e57a5350e11265763ef91db934e7b9de5b2d1a1c55c17",
+              "char_start": 0,
+              "char_end": 22
+            }
+          ],
+          "object_refs": [],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:dbf8d134095b8562542e57a5350e11265763ef91db934e7b9de5b2d1a1c55c17",
+              "char_start": 49,
+              "char_end": 62
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:dbf8d134095b8562542e57a5350e11265763ef91db934e7b9de5b2d1a1c55c17",
+              "char_start": 27,
+              "char_end": 30
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:dbf8d134095b8562542e57a5350e11265763ef91db934e7b9de5b2d1a1c55c17",
+              "char_start": 23,
+              "char_end": 30
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "other",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 2915
+    }
+  },
+  {
+    "label": "en-device-owner",
+    "left": "We delivered dedicated devices to customers for testing.",
+    "right": "The owner of this device has not obtained certification.",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 0,
+              "char_end": 55
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 13,
+              "char_end": 43
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 3,
+              "char_end": 12
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3e5d7edc11708770409926017cf05b87b0e356ec1d41e7a654577578ee24a658",
+              "char_start": 3,
+              "char_end": 12
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 2545
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:faf3ed7b4a3c5ae295c3db5540edf71724d50c9c3024400422b21b28aa0fa0d7",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:faf3ed7b4a3c5ae295c3db5540edf71724d50c9c3024400422b21b28aa0fa0d7",
+              "char_start": 0,
+              "char_end": 55
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:faf3ed7b4a3c5ae295c3db5540edf71724d50c9c3024400422b21b28aa0fa0d7",
+              "char_start": 0,
+              "char_end": 24
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:faf3ed7b4a3c5ae295c3db5540edf71724d50c9c3024400422b21b28aa0fa0d7",
+              "char_start": 42,
+              "char_end": 55
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:faf3ed7b4a3c5ae295c3db5540edf71724d50c9c3024400422b21b28aa0fa0d7",
+              "char_start": 29,
+              "char_end": 32
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:faf3ed7b4a3c5ae295c3db5540edf71724d50c9c3024400422b21b28aa0fa0d7",
+              "char_start": 25,
+              "char_end": 32
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 2586
+    }
+  },
+  {
+    "label": "named-other-device",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备供应商的另一设备尚未完成量产认证。",
+    "expected_link": false,
+    "actual_link": true,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目",
+        "该设备供应商的另一设备尚未完成量产认证。"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2afeb2c7f308a431475f4a490d621c112be3bba2b64e02ce1f5c4a072a4a1bfd",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2afeb2c7f308a431475f4a490d621c112be3bba2b64e02ce1f5c4a072a4a1bfd",
+              "char_start": 0,
+              "char_end": 19
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2afeb2c7f308a431475f4a490d621c112be3bba2b64e02ce1f5c4a072a4a1bfd",
+              "char_start": 1,
+              "char_end": 11
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2afeb2c7f308a431475f4a490d621c112be3bba2b64e02ce1f5c4a072a4a1bfd",
+              "char_start": 15,
+              "char_end": 17
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2afeb2c7f308a431475f4a490d621c112be3bba2b64e02ce1f5c4a072a4a1bfd",
+              "char_start": 17,
+              "char_end": 19
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2afeb2c7f308a431475f4a490d621c112be3bba2b64e02ce1f5c4a072a4a1bfd",
+              "char_start": 11,
+              "char_end": 13
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 913
+    }
+  },
+  {
+    "label": "multi-object",
+    "left": "公司已交付甲型设备和乙型设备至客户进行生产验证。",
+    "right": "该设备尚未完成量产认证。",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3ce7b67ff1fcf85c72804820af7ef3ee53da361e4f3bf01c6910f19bfeb2aa98",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3ce7b67ff1fcf85c72804820af7ef3ee53da361e4f3bf01c6910f19bfeb2aa98",
+              "char_start": 0,
+              "char_end": 23
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3ce7b67ff1fcf85c72804820af7ef3ee53da361e4f3bf01c6910f19bfeb2aa98",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3ce7b67ff1fcf85c72804820af7ef3ee53da361e4f3bf01c6910f19bfeb2aa98",
+              "char_start": 5,
+              "char_end": 23
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3ce7b67ff1fcf85c72804820af7ef3ee53da361e4f3bf01c6910f19bfeb2aa98",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3ce7b67ff1fcf85c72804820af7ef3ee53da361e4f3bf01c6910f19bfeb2aa98",
+              "char_start": 2,
+              "char_end": 3
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1079
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f946372bc218247dea1e8fa3c4d781525daa0a2b6a88a3dcb4717af7b9f69fa1",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f946372bc218247dea1e8fa3c4d781525daa0a2b6a88a3dcb4717af7b9f69fa1",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f946372bc218247dea1e8fa3c4d781525daa0a2b6a88a3dcb4717af7b9f69fa1",
+              "char_start": 1,
+              "char_end": 3
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f946372bc218247dea1e8fa3c4d781525daa0a2b6a88a3dcb4717af7b9f69fa1",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f946372bc218247dea1e8fa3c4d781525daa0a2b6a88a3dcb4717af7b9f69fa1",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f946372bc218247dea1e8fa3c4d781525daa0a2b6a88a3dcb4717af7b9f69fa1",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 537
+    }
+  },
+  {
+    "label": "same-issuer-other-object",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该平台尚未完成客户认证。",
+    "expected_link": false,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee54ccd8fcfcd0c41b161bfcd2945e5312f3677aca8708850d46dea949a1b5",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee54ccd8fcfcd0c41b161bfcd2945e5312f3677aca8708850d46dea949a1b5",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee54ccd8fcfcd0c41b161bfcd2945e5312f3677aca8708850d46dea949a1b5",
+              "char_start": 1,
+              "char_end": 3
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee54ccd8fcfcd0c41b161bfcd2945e5312f3677aca8708850d46dea949a1b5",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee54ccd8fcfcd0c41b161bfcd2945e5312f3677aca8708850d46dea949a1b5",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee54ccd8fcfcd0c41b161bfcd2945e5312f3677aca8708850d46dea949a1b5",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 533
+    }
+  },
+  {
+    "label": "complete-then-true-limit",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备已完成客户验证，但尚未获得量产认证。",
+    "expected_link": true,
+    "actual_link": false,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 0,
+              "char_end": 10
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 1,
+              "char_end": 3
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 3,
+              "char_end": 4
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 4,
+              "char_end": 6
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "unknown",
+          "modality": "actual"
+        },
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 11,
+              "char_end": 20
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 11,
+              "char_end": 12
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 16,
+              "char_end": 18
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 18,
+              "char_end": 20
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1e75eb7f016ff0c120cefd8e7adf527ae452e937941e1c65109ad3db1940f79",
+              "char_start": 12,
+              "char_end": 14
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 919
+    }
+  },
+  {
+    "label": "following-qualifier-forward",
+    "left": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+    "right": "该设备尚未完成量产认证，未来公司将继续强化组织管理。",
+    "expected_link": true,
+    "actual_link": true,
+    "public_context": [
+      [
+        "一、设备生产线扩建项目",
+        "该设备尚未完成量产认证，未来公司将继续强化组织管理。"
+      ]
+    ],
+    "relations_left": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 1050
+    },
+    "relations_right": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bdcde6d730facff2aeb93ca718c46222df792059695c9677cea9fe20249a4462",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:bdcde6d730facff2aeb93ca718c46222df792059695c9677cea9fe20249a4462",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:bdcde6d730facff2aeb93ca718c46222df792059695c9677cea9fe20249a4462",
+              "char_start": 1,
+              "char_end": 3
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:bdcde6d730facff2aeb93ca718c46222df792059695c9677cea9fe20249a4462",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:bdcde6d730facff2aeb93ca718c46222df792059695c9677cea9fe20249a4462",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:bdcde6d730facff2aeb93ca718c46222df792059695c9677cea9fe20249a4462",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 726
+    }
+  }
+]

@@ -1,0 +1,171 @@
+{
+  "schema": "w08-untyped-quality-independent/2",
+  "status": "PASS_BOUNDED_ENGINEERING_NODE",
+  "current_authoritative_review": "review-v5.json",
+  "accepted_source_sha256": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+  "scope": [
+    "literal table numeric shape and original exact source identity",
+    "quality precharge on required source members before semantic admission in reading-priority order",
+    "current-call observations via existing _session_state only, no mutable pipeline quality state",
+    "no false observed shape when actual scan refused; only local source group resource deferral",
+    "preserve fully verified important candidate prefix after lower priority exhaustion",
+    "model/citation quality propagation and decision byte dependency invalidation",
+    "targeted original table pipeline purity"
+  ],
+  "not_complete": [
+    "whole W08 architecture and production",
+    "real annual14 source selection",
+    "formal paid summary and RF native end-to-end",
+    "all project/body/qualification source cases"
+  ],
+  "tests": {
+    "formal_unchanged": 15,
+    "permanent_reverse": 8,
+    "independent_public": 11,
+    "legacy20k": 1,
+    "actual_targeted_pipeline_purity_parameters": 9,
+    "passed": 44,
+    "failed": 0,
+    "pytest_seconds": 18.45,
+    "process_seconds": 24.65833279999788,
+    "exit_code": 0
+  },
+  "bound_before": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "src/company_wiki/document_understanding/decision_inventory.py": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "f3df05c698105bba5e7601051ef019ee22c97c742c985cff0578f4ff0a12ebe8",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py": "0e488ce6f91538178fbc82cd46742b595539ff97f821fe85a57d1ab3651d8b8a",
+    "docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py": "763faa54db74d98c49722c07b3e758ff27eda0569f894bd3e1f944eb4f53c77e",
+    "tests/unit/document_understanding_selection/test_reading_table_admission.py": "6613841374673a54a7dbb28ed4de17f5768e4798a7006c33256d1de9bb96ab3a",
+    "quality_ingress_section": "e7b591c82dfee6ecdb3059fcefee192ff7d81d16aec786e4fec1e448cd723d96",
+    "quality_projection_section": "27f17cec26acffdb740133145ccc366427d4027e002d91083f525f7034644c73",
+    "full_candidate_function": "f16876deb04b95b1dff554557f1bebe6977dafff6a13b0b1fa67a010b01b0c5f",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "bound_after": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "src/company_wiki/document_understanding/decision_inventory.py": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "f3df05c698105bba5e7601051ef019ee22c97c742c985cff0578f4ff0a12ebe8",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py": "0e488ce6f91538178fbc82cd46742b595539ff97f821fe85a57d1ab3651d8b8a",
+    "docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py": "763faa54db74d98c49722c07b3e758ff27eda0569f894bd3e1f944eb4f53c77e",
+    "tests/unit/document_understanding_selection/test_reading_table_admission.py": "6613841374673a54a7dbb28ed4de17f5768e4798a7006c33256d1de9bb96ab3a",
+    "quality_ingress_section": "e7b591c82dfee6ecdb3059fcefee192ff7d81d16aec786e4fec1e448cd723d96",
+    "quality_projection_section": "27f17cec26acffdb740133145ccc366427d4027e002d91083f525f7034644c73",
+    "full_candidate_function": "f16876deb04b95b1dff554557f1bebe6977dafff6a13b0b1fa67a010b01b0c5f",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "all_test_and_source_bindings_stable": true,
+  "legacy20k_original_protection": {
+    "baseline": "b6395b6c",
+    "path": "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+    "normalized_file_equal": true,
+    "baseline_function_sha256": "5e4dc91827d528915071f731aaaa1dcc7ebc1f8ea02bb75d819b44e081298278",
+    "current_function_sha256": "5e4dc91827d528915071f731aaaa1dcc7ebc1f8ea02bb75d819b44e081298278",
+    "function_unchanged": true
+  },
+  "resolution_history": [
+    {
+      "id": "UQ-01",
+      "resolution": "Consecutive literal source value runs; no native carrier bypass; original wrapped-prose and true-row reverse controls pass."
+    },
+    {
+      "id": "UQ-02",
+      "previous_v3_design": "Global end-of-selection _deferred_selection avoids fabricated shape but broader unchanged 20k regression showed it discards earlier verified high-priority facts when low-priority analysis exhausts work. v3 finite green is not current acceptance.",
+      "current_fix": "Priority-ordered admission checks charge/check every actual required source once on the same WorkBudget; current-call observations survive later unrelated exhaustion. Unexamined group is honestly deferred; final only projects observed shape and incurs no second scan/charge.",
+      "test_contract_change": "Budget reverse observes actual has_unbound_numeric_cells callback on the public path, then rejects first actual precharge using observed used-1. No final-phase timing or hardcoded cost. Preserves zero scans on refusal, no fabricated flag, resource reason, original source equality."
+    },
+    {
+      "id": "UQ-03",
+      "previous_v4_limitation": "35 finite checks green on 0da06520 but broader original pipeline purity assertions rejected storing new quality state in pipeline.",
+      "current_fix": "Existing _session_state owns transient quality records; no new store/schema; actual final e03e20ab run includes original purity checks."
+    }
+  ],
+  "test_edit_scope": "Only owned test_reading_untyped_numeric_prose_controls.py updated; earlier exact v3 file saved as prior-prose-controls-v3.py. Existing formal15 and legacy20k test unchanged.",
+  "cleanup": {
+    "actual": [
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211202-2fd24876",
+        "existed": true,
+        "removed": true,
+        "log": "review-v1.txt",
+        "verified_absent_now": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211331-5f42d310",
+        "existed": true,
+        "removed": true,
+        "log": "reverse-red.txt",
+        "verified_absent_now": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211409-256c63b9",
+        "existed": true,
+        "removed": true,
+        "log": "review-v2.txt",
+        "verified_absent_now": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211738-6c8a05e7",
+        "existed": true,
+        "removed": true,
+        "log": "review-v3.txt",
+        "verified_absent_now": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213527-bcbf22e3",
+        "existed": true,
+        "removed": true,
+        "log": "review-v4.txt",
+        "verified_absent_now": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213810-bcc66487",
+        "existed": true,
+        "removed": true,
+        "log": "review-v5.txt",
+        "verified_absent_now": true
+      }
+    ],
+    "requested": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\probe-temp",
+        "verified_absent_now": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\reverse-red-temp",
+        "verified_absent_now": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v2-temp",
+        "verified_absent_now": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v3-temp",
+        "verified_absent_now": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v4-temp",
+        "verified_absent_now": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v5-temp",
+        "verified_absent_now": true
+      }
+    ]
+  },
+  "original_io": 0,
+  "network_calls": 0,
+  "model_calls": 0,
+  "production_edits": 0,
+  "git_mutations": 0
+}

@@ -349,3 +349,22 @@ def test_w08_changed_source_implementation_invalidates_the_real_complete_decisio
     assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "same"
     source_file.write_bytes(b"def source_rule():\\n    return False\\n")
     assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+
+
+@pytest.mark.parametrize("pdf", [False, True])
+def test_product_identity_source_bytes_are_part_of_the_actual_current_decision(monkeypatch, pdf):
+    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.document_understanding.operating_states import product_reference
+    target = Path(product_reference.__file__).resolve()
+    assert target.is_relative_to(Path(__file__).resolve().parents[3] / "src")
+    read_bytes = Path.read_bytes
+    before = decision_inventory._versions(pdf_frontend=pdf)
+    with monkeypatch.context() as patch:
+        def changed_source(path):
+            raw = read_bytes(path)
+            return raw + b"\n# changed source identity policy\n" if path.resolve() == target else raw
+        patch.setattr(Path, "read_bytes", changed_source)
+        changed = decision_inventory._versions(pdf_frontend=pdf)
+        assert changed["business_algorithms"] != before["business_algorithms"]
+        assert changed["budget"] == before["budget"]
+    assert decision_inventory._versions(pdf_frontend=pdf) == before

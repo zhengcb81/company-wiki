@@ -1,0 +1,105 @@
+{
+  "schema": "project-local-qualification-envelope-red-bound/1",
+  "utc": "2026-10-23T21:27:04.885626+00:00",
+  "exit_code": 1,
+  "before": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "6783dac418a27a3b1aed709ccfec23d1325590e4a8c96023cc39347b0a5fe148",
+      "bytes": 68043
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "6138aba40e7af23a630ab5a17b8feb26a13a548074a1217db1750fb4b7a517db",
+      "bytes": 19358
+    },
+    "src/company_wiki/source_catalog/narrative_antecedent.py": {
+      "sha256": "2cad72bbb90fef2ae6727aed26c1e41cfbe53e13bbdbc0c96f9d1e063c586877",
+      "bytes": 8545
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+      "bytes": 32830
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+      "bytes": 21667
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+      "bytes": 50229
+    },
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": {
+      "sha256": "d13fa02d745814f8a264493f5214bdb9b038ce2adbd3768561cbe1e1ef919b08",
+      "bytes": 21893
+    },
+    "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py": {
+      "sha256": "0128cad62353beee128ef4cd5e7411c4586ee6ae5534e23f4aa086d5034bf6b5",
+      "bytes": 11844
+    }
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "6783dac418a27a3b1aed709ccfec23d1325590e4a8c96023cc39347b0a5fe148",
+      "bytes": 68043
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "6138aba40e7af23a630ab5a17b8feb26a13a548074a1217db1750fb4b7a517db",
+      "bytes": 19358
+    },
+    "src/company_wiki/source_catalog/narrative_antecedent.py": {
+      "sha256": "2cad72bbb90fef2ae6727aed26c1e41cfbe53e13bbdbc0c96f9d1e063c586877",
+      "bytes": 8545
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+      "bytes": 32830
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2",
+      "bytes": 21667
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+      "bytes": 50229
+    },
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": {
+      "sha256": "d13fa02d745814f8a264493f5214bdb9b038ce2adbd3768561cbe1e1ef919b08",
+      "bytes": 21893
+    },
+    "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py": {
+      "sha256": "0128cad62353beee128ef4cd5e7411c4586ee6ae5534e23f4aa086d5034bf6b5",
+      "bytes": 11844
+    }
+  },
+  "source_bytes_stable": true,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\project-qualification-independent\\envelope-bound-temp",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\project-qualification-independent\\envelope-red-bound.xml"
+  ],
+  "cleanup": {
+    "event": "cleanup",
+    "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212701-81fafa11",
+    "existed": true,
+    "removed": true,
+    "actual_absent_verified": true,
+    "requested_absent_verified": true
+  },
+  "external_actions": {
+    "original_reads": 0,
+    "parser_calls": 0,
+    "network": 0,
+    "llm": 0
+  },
+  "write_scope": "one independent official test plus own report directory only; no production/Git changes"
+}

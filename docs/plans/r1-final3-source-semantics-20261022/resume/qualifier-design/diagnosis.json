@@ -1,0 +1,263 @@
+{
+  "schema": "w08-qualifier-design-diagnosis/1",
+  "recorded_at_utc": "2026-10-23T21:09:22.969330+00:00",
+  "status": "DIAGNOSIS_AND_DESIGN_ONLY_NOT_IMPLEMENTED",
+  "production_edited": false,
+  "tests_edited": false,
+  "git_edited": false,
+  "originals_read": 0,
+  "network_calls": 0,
+  "model_calls": 0,
+  "work_used": 3173,
+  "imported_file": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\operating_states\\relations.py",
+  "files_observed": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "2cbba6a68350b8d25ce68a3a6c0dd25f14377cbe7dc0f850b1b8a0cb1e2c332c"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_antecedent.py",
+      "sha256": "2cad72bbb90fef2ae6727aed26c1e41cfbe53e13bbdbc0c96f9d1e063c586877"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "16a3e0bb8cbc3ad50c69ab9310a457d18a70ee955016c0cb3a823715c00e2a09"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "bed487816480d1570da6977b3076b24335508f9253ca020bc2d52045e2da0282"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "sha256": "ed59ec58928896e3c06a120d2f7f1ae8e547d37328a54ef6f034f637c20a479f"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "038eaa2fe63353f54acc51686ecaae81bb89e2451e21f726865d65243397c53a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_project_body_admission.py",
+      "sha256": "b5860cf7a1370ed6e58113d08e672c763cce378d6f4fd43cdd0de3b12b7a6f2f"
+    }
+  ],
+  "neutral_probes": [
+    {
+      "source_text": "报告期内，公司已交付27台专用设备至客户进行生产验证。",
+      "deictics": [],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "0",
+              "char_start": 5,
+              "char_end": 26
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "0",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "0",
+              "char_start": 10,
+              "char_end": 26
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "0",
+              "char_start": 8,
+              "char_end": 10
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "0",
+              "char_start": 7,
+              "char_end": 8
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual",
+          "source_slices": {
+            "actor_refs": [
+              "公司"
+            ],
+            "object_refs": [
+              "27台专用设备至客户进行生产验证"
+            ],
+            "predicate_refs": [
+              "交付"
+            ],
+            "qualifier_refs": [
+              "已"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_text": "该设备尚未完成量产认证，不代表已经形成批量销售。",
+      "deictics": [
+        {
+          "text": "该设备",
+          "head": "设备",
+          "family": false
+        }
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "1",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [],
+          "object_refs": [
+            {
+              "unit_id": "1",
+              "char_start": 1,
+              "char_end": 3
+            },
+            {
+              "unit_id": "1",
+              "char_start": 5,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "1",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "1",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "unknown",
+          "modality": "actual",
+          "source_slices": {
+            "actor_refs": [],
+            "object_refs": [
+              "设备",
+              "完成量产"
+            ],
+            "predicate_refs": [
+              "认证"
+            ],
+            "qualifier_refs": [
+              "尚未"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_text": "该设备仍需客户完成认证，预计下一期才能进入量产。",
+      "deictics": [
+        {
+          "text": "该设备",
+          "head": "设备",
+          "family": false
+        }
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "2",
+              "char_start": 0,
+              "char_end": 11
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "2",
+              "char_start": 1,
+              "char_end": 7
+            }
+          ],
+          "object_refs": [],
+          "predicate_refs": [
+            {
+              "unit_id": "2",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "2",
+              "char_start": 7,
+              "char_end": 9
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "other",
+          "modality": "actual",
+          "source_slices": {
+            "actor_refs": [
+              "设备仍需客户"
+            ],
+            "object_refs": [],
+            "predicate_refs": [
+              "认证"
+            ],
+            "qualifier_refs": [
+              "完成"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_text": "未来公司计划进一步完善内部流程。",
+      "deictics": [],
+      "relations": []
+    }
+  ],
+  "findings": [
+    "Different native PDF blocks cannot form a continuity edge after an actual terminal marker; this is intentional statement closure, not an identity proof.",
+    "Current reference closure handles named family deictics only. Singular 该设备 is detected but deliberately not_applicable, and a descriptive 专用设备 declaration is not a named series.",
+    "Observed negative qualifier is qualification/negative/not_yet. Passive pending customer-certification variant is currently misread qualification/positive/current with actor other.",
+    "Generic future internal-process prose has neither product deictic nor operating relation."
+  ],
+  "recommended_owner_split": [
+    "Native geometry owner exposes or reuses positively measured adjacent-body proof separately from wrap continuity. Do not globally ignore terminal punctuation.",
+    "OperatingRelationSession retains sole ownership of pending/negative/conditional stage and exact original offsets; fix passive pending certification in the existing grammar.",
+    "SourceOperatingSession shares a bounded explicit object-deictic qualifier closure using existing relation/object refs and shared product head vocabulary; no second future/negation recognizer.",
+    "Source reading reverses a proven following-qualifier dependency into the earlier fact required_context, counts all original identities via within_reference_envelope, and uses existing graph/budget withholding on incomplete closure."
+  ],
+  "acceptance_controls": [
+    "Two existing explicit local qualifier positives, simplified/traditional and English neutral variants, original source refs unchanged.",
+    "Unrelated future process, next complete issuer statement, mismatched head and other-party device are not imported as qualifiers.",
+    "Competing prior object identities remain unknown; do not choose by nearest text alone.",
+    "Changed source/role/section/project/column/frame, missing proof, ordinal gap and unproved cross-page flow cannot become a positive adjacency proof.",
+    "8-unit/4-block/2048-char original envelope, max_selected and max_chars cannot detach a proven qualifier; carriers must expand to original members.",
+    "Budget charged before scans/offset arrays/edge expansion; exhaustion is partial and cannot restart through raw text; repeated requests use current identity-scoped cache."
+  ],
+  "limitations": [
+    "No real PDF read, parser execution, model calls or production acceptance was performed.",
+    "This records current diagnosis from independently read owner modules; ROOT is editing narrative_reading concurrently and no frozen production-source claim is made.",
+    "Design is a recommendation. No proposed new method or wire field exists yet."
+  ]
+}

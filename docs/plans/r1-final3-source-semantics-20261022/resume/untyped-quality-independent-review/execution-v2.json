@@ -1,0 +1,40 @@
+{
+  "before": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "159f301c109a31542c603f9f72bc5e762eeebdd848f870e21539691b6e0ca835",
+    "src/company_wiki/document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "ab73da2cedc910ea095d1eaa941b22f29113c73309e4a3d14c19155be21ac53c",
+    "quality_section": "c79ccc89db434637c56a16caa248dd2a4cdd3036c93f909bb42cb17ef93be5c2",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "after": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "159f301c109a31542c603f9f72bc5e762eeebdd848f870e21539691b6e0ca835",
+    "src/company_wiki/document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "ab73da2cedc910ea095d1eaa941b22f29113c73309e4a3d14c19155be21ac53c",
+    "quality_section": "c79ccc89db434637c56a16caa248dd2a4cdd3036c93f909bb42cb17ef93be5c2",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "exit_code": 0,
+  "seconds": 7.784503899980336,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py",
+    "-q",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v2-temp",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\review-v2.xml"
+  ],
+  "original_reads": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "production_writes": 0
+}

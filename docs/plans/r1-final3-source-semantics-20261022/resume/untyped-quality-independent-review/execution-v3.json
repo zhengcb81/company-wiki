@@ -1,0 +1,43 @@
+{
+  "before": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "f654189d0cc32c0c3c5d7cf4fab3ee202dbb401579145075094e5fafcb0705eb",
+    "src/company_wiki/document_understanding/decision_inventory.py": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "1a72a3df1eb607a53dbf3c88d3bfb0a48e972fdc40b8c3670ff3f675497e1d92",
+    "docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py": "545a308e8c0ea46534d4e27fd7dc52a00b479e593fbe564df7d96e3f02ab1a51",
+    "quality_section": "276cddedda6ed27bf22ad906102382c1789cc5aeaa369d9595e8304b939d724b",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "after": {
+    "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+    "src/company_wiki/source_catalog/narrative_reading.py": "f654189d0cc32c0c3c5d7cf4fab3ee202dbb401579145075094e5fafcb0705eb",
+    "src/company_wiki/document_understanding/decision_inventory.py": "ec1866af7c02d9db32e698c66320e2825688048e0e9e5e78a2b6de3ddbb8414e",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "1a72a3df1eb607a53dbf3c88d3bfb0a48e972fdc40b8c3670ff3f675497e1d92",
+    "docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py": "545a308e8c0ea46534d4e27fd7dc52a00b479e593fbe564df7d96e3f02ab1a51",
+    "quality_section": "276cddedda6ed27bf22ad906102382c1789cc5aeaa369d9595e8304b939d724b",
+    "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+  },
+  "exit_code": 0,
+  "seconds": 8.953827199991792,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\test_untyped_probe.py",
+    "-q",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v3-temp",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\review-v3.xml"
+  ],
+  "original_reads": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "production_writes": 0,
+  "probe_revision_change": "Own budget probe now requires truthful work_budget_exhausted deferral, replacing the old incorrect assertion that unexamined spans receive a table ambiguity flag. Old v1/v2 executions remain historical and are not rebound to current helper."
+}
