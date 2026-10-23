@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-isolated-harness-dispatch/1",
   "date": "2026-10-23",
-  "status": "READY_FOR_USER_DISPATCH",
+  "status": "DISPATCHED_USER_REPORTED_RUNNING",
   "canonical_readme": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\README.md",
   "packages": [
     {
@@ -29,8 +29,9 @@
         "bytes": 26880,
         "access": "read_only"
       },
-      "status": "READY_NOT_STARTED",
-      "handoff": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\handoff.json"
+      "status": "IN_PROGRESS_USER_REPORTED",
+      "handoff": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\handoff.json",
+      "implementation_independently_observed": false
     },
     {
       "id": "W11-CWP-SOURCES",
@@ -56,8 +57,9 @@
         "bytes": 18950,
         "access": "read_only"
       },
-      "status": "READY_NOT_STARTED",
-      "handoff": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\handoff.json"
+      "status": "IN_PROGRESS_USER_REPORTED",
+      "handoff": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\handoff.json",
+      "implementation_independently_observed": false
     }
   ],
   "root_reserved": [
@@ -99,5 +101,6 @@
     }
   ],
   "shared_git_objects_reused": true,
-  "packet_independent_review": "packet-review.json"
+  "packet_independent_review": "packet-review.json",
+  "user_dispatch_recorded_at": "2026-10-23T19:39:22.878730+00:00"
 }
