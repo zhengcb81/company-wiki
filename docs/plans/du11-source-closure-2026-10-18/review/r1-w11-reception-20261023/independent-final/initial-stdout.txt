@@ -1,0 +1,71 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 37 items
+
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py . [  2%]
+........F.F....FF.....FFF...........                                     [100%]
+
+================================== FAILURES ===================================
+_ test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui[<script src="/assets/analytics.js" defer></script>] _
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:99: in test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui
+    assert result["coverage_status"] == "checked_index_only"
+E   AssertionError: assert 'partial' == 'checked_index_only'
+E     
+E     - checked_index_only
+E     + partial
+_ test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui[<p>Downloading the Annual Report requires a PDF reader.</p>] _
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:99: in test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui
+    assert result["coverage_status"] == "checked_index_only"
+E   AssertionError: assert 'partial' == 'checked_index_only'
+E     
+E     - checked_index_only
+E     + partial
+______ test_explicit_unsupported_document_shape_retains_unknown[value0] _______
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:130: in test_explicit_unsupported_document_shape_retains_unknown
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+______ test_explicit_unsupported_document_shape_retains_unknown[value1] _______
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:130: in test_explicit_unsupported_document_shape_retains_unknown
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_malformed_declared_structures_remain_partial[[{"@type":"Organization"},42]] _
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:143: in test_malformed_declared_structures_remain_partial
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_____ test_malformed_declared_structures_remain_partial[{"@graph":[42]}] ______
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:143: in test_malformed_declared_structures_remain_partial
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_malformed_declared_structures_remain_partial[{"@type":"DigitalDocument","@type":"Organization"}] _
+..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py:143: in test_malformed_declared_structures_remain_partial
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\initial-junit.xml -
+=========================== short test summary info ===========================
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui[<script src="/assets/analytics.js" defer></script>]
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui[<p>Downloading the Annual Report requires a PDF reader.</p>]
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_explicit_unsupported_document_shape_retains_unknown[value0]
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_explicit_unsupported_document_shape_retains_unknown[value1]
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_malformed_declared_structures_remain_partial[[{"@type":"Organization"},42]]
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_malformed_declared_structures_remain_partial[{"@graph":[42]}]
+FAILED ..\..\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\independent-final\test_neutral_review.py::test_malformed_declared_structures_remain_partial[{"@type":"DigitalDocument","@type":"Organization"}]
+======================== 7 failed, 30 passed in 9.09s =========================

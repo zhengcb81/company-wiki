@@ -1,0 +1,17 @@
+{
+  "test_result": {
+    "failed": 10,
+    "passed": 3,
+    "errors": 0,
+    "seconds": 2.78
+  },
+  "source_and_test_sha256": {
+    "src/company_wiki/source_catalog/official_discovery.py": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+    "src/company_wiki/source_catalog/official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+    "tests/integration/test_official_discovery_offline.py": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+    "tests/integration/test_official_source_flow.py": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+    "tests/integration/test_official_discovery_root_scope.py": "1e1dc6717428ce65e23a4c7e195cc09c35001b01bd86182e74252d40889b011b"
+  },
+  "temp_root": "cw-pytest-basetemp/20261023-225210-4d064c4b",
+  "temp_root_absent": true
+}

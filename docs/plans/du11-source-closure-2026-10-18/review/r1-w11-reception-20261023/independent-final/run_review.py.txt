@@ -1,0 +1,93 @@
+"""Own-temp runner. Product stays read-only; no network or dotenv in subprocesses."""
+from pathlib import Path
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+
+REPORT = Path(__file__).resolve().parent
+ROOT = REPORT.parents[5]
+SCRATCH = ROOT / ".planning/r1-w11-independent-20261023"
+PRODUCT = ["src/company_wiki/source_catalog/official_discovery.py",
+    "src/company_wiki/source_catalog/official_source_cli.py",
+    "tests/integration/test_official_source_flow.py",
+    "tests/integration/test_official_discovery_offline.py",
+    "tests/unit/test_official_discovery_scope.py",
+    "tests/integration/test_official_discovery_root_scope.py"]
+PROTECTED = ["config/source_catalog.yaml", "config/resource_budget.yaml",
+    "src/company_wiki/resource_budget.py", "src/company_wiki/source_catalog/narrative_reading.py",
+    "src/company_wiki/source_catalog/narrative_finalize.py",
+    "src/company_wiki/document_understanding/decision_inventory.py"]
+
+
+def frozen(paths):
+    result = {}
+    for relative in paths:
+        data = (ROOT / relative).read_bytes()
+        result[relative] = {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(),
+            "lf_sha256": hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest()}
+    return result
+
+
+def main():
+    assert ROOT == Path("C:/Users/郑曾波/Projects/company-wiki")
+    assert not SCRATCH.exists(), "Own scratch must initially be absent"
+    start = time.monotonic()
+    initial = frozen(PRODUCT + PROTECTED)
+    SCRATCH.mkdir()
+    guard = SCRATCH / "guard"
+    guard.mkdir()
+    (guard / "sitecustomize.py").write_text('''import atexit, json, os, pathlib, socket, sys
+def blocked(*args, **kwargs):
+    raise RuntimeError("W11 independent network blocked")
+socket.socket.connect = blocked
+socket.socket.connect_ex = blocked
+socket.create_connection = blocked
+socket.getaddrinfo = blocked
+def done():
+    modules = {name: str(pathlib.Path(module.__file__).resolve())
+      for name, module in list(sys.modules.items())
+      if name in {"company_wiki.source_catalog.official_discovery", "company_wiki.source_catalog.official_source_cli", "__main__"}
+      and getattr(module, "__file__", None)}
+    pathlib.Path(os.environ["W11_IMPORT_DIR"], str(os.getpid()) + ".json").write_text(json.dumps(modules), encoding="utf-8")
+atexit.register(done)
+''', encoding="utf-8")
+    imports = SCRATCH / "imports"
+    imports.mkdir()
+    env = {key: value for key, value in os.environ.items()
+           if not any(token in key.upper() for token in ("API_KEY", "ACCESS_TOKEN", "SECRET_KEY"))}
+    env.update(PYTHONPATH=os.pathsep.join([str(guard), str(ROOT / "src")]),
+        PYTHONDONTWRITEBYTECODE="1", PYTHON_DOTENV_DISABLED="1",
+        COMPANY_WIKI_NETWORK="blocked", COMPANY_WIKI_REAL_LLM="0", W11_IMPORT_DIR=str(imports))
+    command = [sys.executable, "-X", "utf8", "-B", "-m", "pytest",
+        str(REPORT / "test_neutral_review.py"), "--confcutdir", str(REPORT),
+        "-q", "--tb=short", "-p", "no:cacheprovider", "--basetemp", str(SCRATCH / "pytest"),
+        "--junitxml", str(REPORT / "initial-junit.xml")]
+    result = subprocess.run(command, cwd=SCRATCH, env=env, capture_output=True,
+        text=True, encoding="utf-8", timeout=100)
+    (REPORT / "initial-stdout.txt").write_text(result.stdout, encoding="utf-8")
+    (REPORT / "initial-stderr.txt").write_text(result.stderr, encoding="utf-8")
+    final = frozen(PRODUCT + PROTECTED)
+    records = [json.loads(p.read_text(encoding="utf-8")) for p in imports.glob("*.json")]
+    receipt = {"head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+        "command": command, "exit_code": result.returncode, "seconds": time.monotonic()-start,
+        "frozen": initial, "frozen_unchanged": initial == final, "imports": records,
+        "scratch_initially_absent": True, "source_material_reads": 0,
+        "network_guard": "all socket connect/connect_ex/create_connection/getaddrinfo blocked, including subprocesses",
+        "external_http_model_download_calls": 0}
+    assert SCRATCH.resolve().parent == (ROOT / ".planning").resolve()
+    receipt["scratch_files_removed"] = sum(1 for p in SCRATCH.rglob("*") if p.is_file())
+    shutil.rmtree(SCRATCH)
+    receipt["scratch_finally_absent"] = not SCRATCH.exists()
+    (REPORT / "initial-receipt.json").write_text(json.dumps(receipt, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(result.stdout)
+    print(json.dumps({"exit_code": result.returncode, "frozen_unchanged": initial == final,
+        "scratch_finally_absent": not SCRATCH.exists(), "import_processes": len(records)}))
+    return result.returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

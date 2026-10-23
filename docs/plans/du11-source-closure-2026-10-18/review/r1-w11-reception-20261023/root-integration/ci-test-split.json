@@ -1,0 +1,9 @@
+{
+  "historical_red_path": "tests/integration/test_official_discovery_root_scope.py",
+  "current_unit_path": "tests/unit/test_official_discovery_scope.py",
+  "current_cli_path": "tests/integration/test_official_discovery_root_scope.py",
+  "all_original_function_and_assertion_AST_identical": true,
+  "pure_unit_cases": 20,
+  "integration_cli_cases": 2,
+  "duplicate_test_cases": 0
+}

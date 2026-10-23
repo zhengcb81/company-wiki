@@ -2,7 +2,7 @@
 
 **已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT修W08真实选材/context。W09研究及W11离线来源两包均已交付，ROOT正修复接收审查发现的共用问题并整合。新摘要/矩阵/W12仍待完成，原暂停快照仅保留历史。
 
-更新日期：2026-10-23。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
+更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
 ## 当前执行状态与唯一下一步
 
@@ -14,9 +14,11 @@
 |---|---|---|
 | W08 来源选材、业务父级、缓存依赖 | 共用语义/用途与标题节点已通过；新增裸数质量/优先级计量独审44P，项目正文/原始限制闭包独审165P；全src369/0。真实249页96片段8156字符、821万/1600万工作，两个30%各自scope正确；整体14目标仍PARTIAL | 隔离提交`1712ed10`已正常推送：完整7558P/24既有skip（403.02s），另smoke146P（47.71s）；本地与origin一致、tracked干净。未并母线、未安装。[当前收据](review/r1-w08-resume-20261023/engineering-v4.json)保留全部原RED和验收范围 |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
-| W09 研究准备 / W11 来源发现 | 两包已交付并完成只读初筛。W09内容独审发现2项P2、2项P3，ROOT修角色/业务范围/场景解释投影；W11实际源码与独审绑定一致，ROOT补最近条目容器和未处理内嵌文档覆盖诊断的回归与根修 | 作者工区保持只读，ROOT在独立写集整合。W09见[内容审查](review/r1-w09-reception-20261023/content-review.md)及[实施顺序](review/r1-w09-reception-20261023/ROOT_NEXT.md)，W11见[初筛](review/r1-w11-reception-20261023/初筛.md)。未修复并独立复核前，不记集成或研究PASS |
+| W09 研究准备 / W11 来源发现 | 两包已交付并完成只读初筛。W09内容独审发现2项P2、2项P3，ROOT修角色/业务范围/场景解释投影；W11共同根修后相关132P，独审原37例由30P/7F修至37P；32纯解析回归进入日常unit CI，正在正常并线 | 作者工区保持只读，ROOT在独立写集整合。W09见[内容审查](review/r1-w09-reception-20261023/content-review.md)及[实施顺序](review/r1-w09-reception-20261023/ROOT_NEXT.md)，W11见[初筛](review/r1-w11-reception-20261023/初筛.md)。未修复并独立复核前，不记集成或研究PASS |
 
-**当前唯一第一步：预算节点已发布。ROOT并行修复W09角色/场景投影与W11条目边界/覆盖诊断，完成各自测试和一次独立整合审查后并线；W08先合预算基线再继续指引前提/经营量最终独审、可信跨页祖先与固定容量选材/分批。真实249页仍整体PARTIAL，随后才正式摘要、缓存、真实RF矩阵与W12。两包作者工区保持只读。** 实施细节见[ROOT后续步骤](https://github.com/zhengcb81/company-wiki/blob/1712ed10/docs/plans/r1-final3-source-semantics-20261022/NEXT_IMPLEMENTATION.md)；工区路径见新收据。未增加人工许可/新门禁，默认仍0.8，原96/48000/16M不变。
+**当前唯一第一步：预算节点已发布。ROOT发布独审通过的W11来源发现并保留实际支线ancestry；W09继续角色/场景/压力基准投影根修；W08先合预算基线再继续指引前提/经营量最终独审、可信跨页祖先与固定容量选材/分批。真实249页仍整体PARTIAL，随后才正式摘要、缓存、真实RF矩阵与W12。两包作者工区保持只读。W11仅工程验收，真实来源恢复仍OPEN。** 实施细节见[ROOT后续步骤](https://github.com/zhengcb81/company-wiki/blob/1712ed10/docs/plans/r1-final3-source-semantics-20261022/NEXT_IMPLEMENTATION.md)；工区路径见新收据。未增加人工许可/新门禁，默认仍0.8，原96/48000/16M不变。
+
+W08表格的`1712ed10`/tracked干净是该次发布快照。当前ROOT工区已三方接入预算，merge尚未提交；经营量77项原测试和指引20项原测试字节不变，指引原7F已修至20P，新反控合44P、有限相关626P，正在独立审查，未并母线或安装。跨页和选材分批仍OPEN，不把这些有限工程结果记为整份年报通过。
 
 随后按已接收W08–W12计划完成W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 

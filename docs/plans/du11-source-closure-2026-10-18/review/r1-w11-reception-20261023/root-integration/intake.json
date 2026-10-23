@@ -1,0 +1,36 @@
+{
+  "mother_head": "fa667547484eb29082c6d70f4cea452c3e3a46a7",
+  "author_product_head": "6b538ca2f18fb8d5805f2ff59a41404b6e8302cd",
+  "author_delivery_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
+  "approved_delta": [
+    {
+      "path": "src/company_wiki/source_catalog/official_discovery.py",
+      "mother_existed_before": true,
+      "before_sha256": "01e5a8abc85ca521e72209e323333ab4c81b3ce8c3b42338b639c8b33227b155",
+      "approved_incoming_sha256": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+      "reason": "Existing mother content equals approved author base; no mainline semantic hunk is overwritten."
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_source_cli.py",
+      "mother_existed_before": true,
+      "before_sha256": "18746c6b0904e38e3b24b5a015d79ebf8b814bf0bab5f73a539154c2c94eae46",
+      "approved_incoming_sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+      "reason": "Existing mother content equals approved author base; no mainline semantic hunk is overwritten."
+    },
+    {
+      "path": "tests/integration/test_official_source_flow.py",
+      "mother_existed_before": true,
+      "before_sha256": "5fd719b9730fc0ac118b82744b57c0e06f2e0cfe3f48312e1c3f1cd1f2930083",
+      "approved_incoming_sha256": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+      "reason": "Existing mother content equals approved author base; no mainline semantic hunk is overwritten."
+    },
+    {
+      "path": "tests/integration/test_official_discovery_offline.py",
+      "mother_existed_before": false,
+      "before_sha256": null,
+      "approved_incoming_sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+      "reason": "Existing mother content equals approved author base; no mainline semantic hunk is overwritten."
+    }
+  ],
+  "outside_approved_paths_changed": false
+}

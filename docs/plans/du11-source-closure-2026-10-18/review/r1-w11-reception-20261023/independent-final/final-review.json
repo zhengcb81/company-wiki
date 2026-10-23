@@ -1,0 +1,123 @@
+{
+  "status": "PASS_LIMITED_ENGINEERING_REVIEW",
+  "head_at_review": "6c5f6f04312c38aea7125a47ce0ea8c9409c4f7a",
+  "source_and_test_versions": {
+    "src/company_wiki/source_catalog/official_discovery.py": {
+      "bytes": 29358,
+      "sha256": "06794d6826c1dc05bd505871cb32c17cd13ed7a9c7e12afb7be0b5d6f3c2d6d0",
+      "lf_sha256": "bc2a3955d550435893bc6752d40bc7b37f53c35a0de2044a42b1b9e0721d3710"
+    },
+    "src/company_wiki/source_catalog/official_source_cli.py": {
+      "bytes": 13362,
+      "sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+      "lf_sha256": "7fb9a8031e6d98fd9788518b9fb41904179f326fba57c2bbb08fb48d1dee1adf"
+    },
+    "tests/integration/test_official_source_flow.py": {
+      "bytes": 56854,
+      "sha256": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+      "lf_sha256": "ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142"
+    },
+    "tests/integration/test_official_discovery_offline.py": {
+      "bytes": 31358,
+      "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+      "lf_sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069"
+    },
+    "tests/unit/test_official_discovery_scope.py": {
+      "bytes": 8632,
+      "sha256": "5611b2ea250a789bbd6c834b418d86c36386808b8b39a8564e4e1899d6e81f0c",
+      "lf_sha256": "b3670e1f60d74e4fa654bc83424b0ba99d87bcf122cb9a1f80f99310a1b515a5"
+    },
+    "tests/integration/test_official_discovery_root_scope.py": {
+      "bytes": 2019,
+      "sha256": "a84df73d21b46708bd6aa2035408a7f8603cf3e870e6d1524b99e49ca5c3b4a0",
+      "lf_sha256": "a80669f0c0c690b765079eb986467374d95a8b239bf735729482251a90093f3c"
+    }
+  },
+  "results": {
+    "tests": 37,
+    "passed": 37,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 6.73
+  },
+  "same37_case_bytes": true,
+  "initial_failure_artifacts_unchanged": {
+    "test_neutral_review.py": true,
+    "run_review.py": true,
+    "initial-junit.xml": true,
+    "initial-stdout.txt": true,
+    "initial-stderr.txt": true,
+    "initial-receipt.json": true,
+    "initial-review.md": true
+  },
+  "protected_files_unchanged_since_initial": {
+    "config/source_catalog.yaml": true,
+    "config/resource_budget.yaml": true,
+    "src/company_wiki/resource_budget.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_finalize.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true
+  },
+  "unaffected4_source_test_files_unchanged": {
+    "src/company_wiki/source_catalog/official_source_cli.py": true,
+    "tests/integration/test_official_source_flow.py": true,
+    "tests/integration/test_official_discovery_offline.py": true,
+    "tests/integration/test_official_discovery_root_scope.py": true
+  },
+  "source_test_files_unchanged_during_final_run": true,
+  "findings": [
+    {
+      "id": "IF-01",
+      "status": "CLOSED_BY_ROOT_FIX_AND_SAME_CASE_REPLAY"
+    },
+    {
+      "id": "IF-02",
+      "status": "CLOSED_BY_ROOT_FIX_AND_SAME_CASE_REPLAY"
+    },
+    {
+      "id": "IF-03",
+      "status": "CLOSED_BY_ROOT_FIX_AND_SAME_CASE_REPLAY"
+    }
+  ],
+  "cleanup": {
+    "initially_absent": true,
+    "finally_absent": true,
+    "files_removed": 18
+  },
+  "actual_import_processes": 5,
+  "external_http_model_download_original_reads": 0,
+  "artifacts": {
+    "test_neutral_review.py": {
+      "bytes": 10417,
+      "sha256": "0a7e66c29f7780274fe48c5ca6b9fb4cd3bb7baecb23e0492ef1d8041275fe90"
+    },
+    "run_final_review.py": {
+      "bytes": 4808,
+      "sha256": "84cff012b63fe1e5c38b927dcfa3b923e166c415821986fe0353a699bb1b6072"
+    },
+    "final-junit.xml": {
+      "bytes": 8834,
+      "sha256": "8b63e15ac852bb4d6cdc0a83e359916c250ede45ce2c1fc90dc3bac14b7d6a5c"
+    },
+    "final-stdout.txt": {
+      "bytes": 921,
+      "sha256": "4162b365487e52f860d208bbd10b8068590d5628a60b269baadddb6e71c6d4a3"
+    },
+    "final-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "final-receipt.json": {
+      "bytes": 6147,
+      "sha256": "dab79d516830919f0ad6d744c8f00f0e76d4cd0cd13f89f6d041cb8d6a78f3cd"
+    },
+    "final-review.md": {
+      "bytes": 5540,
+      "sha256": "3b0caa3a97621dde3d4f55a218a4110870645d76281d9b9558f18f5aefe38837"
+    }
+  },
+  "real_IR_original_or_company_research_pass": false,
+  "full_repo_or132_suite_run_by_this_review": false,
+  "lf_equivalence_scope": "Only exact CRLF-to-LF normalization of these6 Python files; compare lf_sha256 to actual Git blob bytes."
+}

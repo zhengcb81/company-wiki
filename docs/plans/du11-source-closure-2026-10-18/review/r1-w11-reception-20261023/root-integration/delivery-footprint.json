@@ -1,0 +1,89 @@
+{
+  "author_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
+  "changed_paths_since_a2_count": 45,
+  "groups": {
+    "product": {
+      "count": 4,
+      "paths": [
+        "src/company_wiki/source_catalog/official_discovery.py",
+        "src/company_wiki/source_catalog/official_source_cli.py",
+        "tests/integration/test_official_discovery_offline.py",
+        "tests/integration/test_official_source_flow.py"
+      ],
+      "worktree_bytes": 124546
+    },
+    "own_plan": {
+      "count": 3,
+      "paths": [
+        "docs/plans/r1-source-recovery-20261023/findings.md",
+        "docs/plans/r1-source-recovery-20261023/progress.md",
+        "docs/plans/r1-source-recovery-20261023/task_plan.md"
+      ],
+      "worktree_bytes": 22926
+    },
+    "delivery": {
+      "count": 37,
+      "paths": [
+        "delivery/w11/cleanup.json",
+        "delivery/w11/evidence_inventory.json",
+        "delivery/w11/handoff.json",
+        "delivery/w11/handoff.md",
+        "delivery/w11/probes/red-probe-output.txt",
+        "delivery/w11/probes/red_probe.py",
+        "delivery/w11/review/evidence/README.md",
+        "delivery/w11/review/evidence/combined-selection-stdout.txt",
+        "delivery/w11/review/evidence/existing-36-stdout.txt",
+        "delivery/w11/review/evidence/extra-probe-output.json",
+        "delivery/w11/review/evidence/offline-26-stdout.txt",
+        "delivery/w11/review/evidence/probe-output.json",
+        "delivery/w11/review/evidence/review-2-README.md",
+        "delivery/w11/review/evidence/review-2-cli-probe-output.json",
+        "delivery/w11/review/evidence/review-2-head-bytes-probes.json",
+        "delivery/w11/review/evidence/review-2-probe-output.json",
+        "delivery/w11/review/evidence/review-2-red-probe-rerun.txt",
+        "delivery/w11/review/evidence/review-3-README.md",
+        "delivery/w11/review/evidence/review-3-cli-scale.json",
+        "delivery/w11/review/evidence/review-3-cli-section-labels.json",
+        "delivery/w11/review/evidence/review-3-probe-output.json",
+        "delivery/w11/review/evidence/review-4-README.md",
+        "delivery/w11/review/evidence/review-4-cli-scale.json",
+        "delivery/w11/review/evidence/review-4-probe-output.json",
+        "delivery/w11/review/independent-review-1.json",
+        "delivery/w11/review/independent-review-1.md",
+        "delivery/w11/review/independent-review-2.json",
+        "delivery/w11/review/independent-review-2.md",
+        "delivery/w11/review/independent-review-3.json",
+        "delivery/w11/review/independent-review-3.md",
+        "delivery/w11/review/independent-review-4.json",
+        "delivery/w11/review/independent-review-4.md",
+        "delivery/w11/root_followup.md",
+        "delivery/w11/test-results.xml",
+        "delivery/w11/test-run-full-stdout.txt",
+        "delivery/w11/test-run-stdout.txt",
+        "delivery/w11/test_results.json"
+      ],
+      "worktree_bytes": 792942
+    },
+    "prepared_start": {
+      "count": 1,
+      "paths": [
+        "START_HERE.md"
+      ],
+      "worktree_bytes": 1430
+    },
+    "other": {
+      "count": 0,
+      "paths": [],
+      "worktree_bytes": 0
+    }
+  },
+  "delivery_tree": {
+    "tracked_files": 37,
+    "tracked_blob_bytes": 769816,
+    "actual_files": 37,
+    "actual_bytes": 792942,
+    "raw_pdf_or_html_copies": 0,
+    "raw_copy_basis": "Delivery filenames contain reports/JSON/test logs/neutral probe scripts, no original PDF/HTML body; evidence inventory explicitly absent_body for486789B."
+  },
+  "mother_intake_copies": "Only approved4 product/test files and own ROOT integration receipts. Entire author delivery/PWF trees have not been copied."
+}

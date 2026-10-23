@@ -60,11 +60,12 @@
         "bytes": 18950,
         "access": "read_only"
       },
-      "status": "DELIVERED_VERSION_BOUND_ROOT_COMMON_CAUSE_REPAIR_IN_PROGRESS",
+      "status": "ROOT_ENGINEERING_132_PASS_INDEPENDENT_37_PASS_INTEGRATING",
       "handoff": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\handoff.json",
       "implementation_independently_observed": true,
       "root_screening_ref": "../../review/r1-w11-reception-20261023/初筛.json",
-      "observed_final_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947"
+      "observed_final_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
+      "root_acceptance_ref": "../../review/r1-w11-reception-20261023/root-acceptance.json"
     }
   ],
   "root_reserved": [

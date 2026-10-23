@@ -1,0 +1,80 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w11rtest", "requested_basetemp_len": 53, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 32 items
+
+tests\unit\test_official_discovery_scope.py ....................FFFFFFFF [ 87%]
+....                                                                     [100%]
+
+================================== FAILURES ===================================
+_ test_document_properties_do_not_need_a_known_type_to_remain_unexamined[payload0] _
+tests\unit\test_official_discovery_scope.py:155: in test_document_properties_do_not_need_a_known_type_to_remain_unexamined
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_document_properties_do_not_need_a_known_type_to_remain_unexamined[payload1] _
+tests\unit\test_official_discovery_scope.py:155: in test_document_properties_do_not_need_a_known_type_to_remain_unexamined
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_document_properties_do_not_need_a_known_type_to_remain_unexamined[payload2] _
+tests\unit\test_official_discovery_scope.py:155: in test_document_properties_do_not_need_a_known_type_to_remain_unexamined
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data[[{"@type":"Organization"},17]] _
+tests\unit\test_official_discovery_scope.py:166: in test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data[{"@graph":[17]}] _
+tests\unit\test_official_discovery_scope.py:166: in test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data[{"@type":"DigitalDocument","@type":"Organization"}] _
+tests\unit\test_official_discovery_scope.py:166: in test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+_ test_readable_static_material_does_not_become_an_unresolved_dynamic_shell[<script src="/assets/metrics.js"></script>] _
+tests\unit\test_official_discovery_scope.py:179: in test_readable_static_material_does_not_become_an_unresolved_dynamic_shell
+    assert result["coverage_status"] == "checked_index_only"
+E   AssertionError: assert 'partial' == 'checked_index_only'
+E     
+E     - checked_index_only
+E     + partial
+_ test_readable_static_material_does_not_become_an_unresolved_dynamic_shell[<p>Downloading this report may take a moment.</p>] _
+tests\unit\test_official_discovery_scope.py:179: in test_readable_static_material_does_not_become_an_unresolved_dynamic_shell
+    assert result["coverage_status"] == "checked_index_only"
+E   AssertionError: assert 'partial' == 'checked_index_only'
+E     
+E     - checked_index_only
+E     + partial
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\root-integration\expanded-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_discovery_scope.py::test_document_properties_do_not_need_a_known_type_to_remain_unexamined[payload0]
+FAILED tests/unit/test_official_discovery_scope.py::test_document_properties_do_not_need_a_known_type_to_remain_unexamined[payload1]
+FAILED tests/unit/test_official_discovery_scope.py::test_document_properties_do_not_need_a_known_type_to_remain_unexamined[payload2]
+FAILED tests/unit/test_official_discovery_scope.py::test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data[[{"@type":"Organization"},17]]
+FAILED tests/unit/test_official_discovery_scope.py::test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data[{"@graph":[17]}]
+FAILED tests/unit/test_official_discovery_scope.py::test_invalid_graph_members_and_duplicate_fields_cannot_hide_unexamined_data[{"@type":"DigitalDocument","@type":"Organization"}]
+FAILED tests/unit/test_official_discovery_scope.py::test_readable_static_material_does_not_become_an_unresolved_dynamic_shell[<script src="/assets/metrics.js"></script>]
+FAILED tests/unit/test_official_discovery_scope.py::test_readable_static_material_does_not_become_an_unresolved_dynamic_shell[<p>Downloading this report may take a moment.</p>]
+======================== 8 failed, 24 passed in 1.25s =========================

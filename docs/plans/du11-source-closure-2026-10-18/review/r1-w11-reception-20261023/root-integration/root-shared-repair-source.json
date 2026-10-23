@@ -1,0 +1,12 @@
+[
+  {
+    "path": "src/company_wiki/source_catalog/official_discovery.py",
+    "bytes": 29358,
+    "sha256": "06794d6826c1dc05bd505871cb32c17cd13ed7a9c7e12afb7be0b5d6f3c2d6d0"
+  },
+  {
+    "path": "tests/unit/test_official_discovery_scope.py",
+    "bytes": 8632,
+    "sha256": "5611b2ea250a789bbd6c834b418d86c36386808b8b39a8564e4e1899d6e81f0c"
+  }
+]

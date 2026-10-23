@@ -1,0 +1,225 @@
+"""Independent synthetic checks; no captured issuer material or external I/O."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+import pytest
+
+from company_wiki.source_catalog import official_discovery as discovery
+from company_wiki.source_catalog import official_source_cli as cli
+
+ROOT = Path(__file__).resolve().parents[6]
+
+
+def page(body, domain="neutral-a.example", capture="independent"):
+    return {"url": f"https://{domain}/ir/index.html", "original": body.encode(),
+            "mime_type": "text/html", "capture_id": capture}
+
+
+def discover(body, **kwargs):
+    return discovery.discover_official_documents(
+        [page(body)], entity="Neutral Components", start_date="2026-01-01",
+        as_of_date="2026-10-21", **kwargs)
+
+
+def static(body=""):
+    return ('<main><article><time datetime="2026-10-21"></time>'
+            '<a href="/current.pdf">Annual Report 2025</a></article></main>' + body)
+
+
+def declared(value):
+    return '<script type="application/ld+json">' + json.dumps(value) + '</script>'
+
+
+def test_actual_import_and_network_guard():
+    for module in (discovery, cli):
+        assert Path(module.__file__).resolve().is_relative_to((ROOT / "src").resolve())
+    import socket
+    with pytest.raises(RuntimeError, match="W11 independent network blocked"):
+        socket.create_connection(("127.0.0.1", 9))
+
+
+@pytest.mark.parametrize("nearest,outer", [("li", "article"), ("tr", "article"),
+                                           ("article", "li")])
+def test_nearest_item_wins_both_title_and_date(nearest, outer):
+    body = (f'<{outer}><time datetime="2026-12-31"></time><{nearest}>'
+            '<time datetime="2026-01-01"></time><strong>Quarterly Report 2026</strong>'
+            '<a href="/download?file=q">Download</a>'
+            f'</{nearest}></{outer}>')
+    result = discover(body)
+    assert result["excluded"] == []
+    assert len(result["candidates"]) == 1
+    row = result["candidates"][0]
+    assert "Quarterly Report 2026" in row["title"]
+    assert row["published_date"] == "2026-01-01"
+    assert row["disposition"] == "candidate"
+
+
+def test_ambiguous_nearest_block_cannot_borrow_outer_date():
+    result = discover('<article><time datetime="2026-12-31"></time><li>'
+        '<time datetime="2026-09-01"></time><a href="/a.pdf">Annual Report 2025</a>'
+        '<a href="/b.pdf">Interim Report 2026</a></li></article>')
+    assert result["excluded"] == []
+    assert len(result["candidates"]) == 2
+    assert all(row["published_date"] is None for row in result["candidates"])
+
+
+def test_temporal_window_is_inclusive_and_invalid_is_unknown():
+    dates = ["2026-01-01", "2026-10-21", "2025-12-31", "2026-10-22", "bad"]
+    result = discover("".join('<li><time datetime="' + day + '"></time>'
+        f'<a href="/{index}.pdf">Investor Presentation</a></li>'
+        for index, day in enumerate(dates)))
+    assert [row["published_date"] for row in result["candidates"]] == [dates[0], dates[1], None]
+    assert {row["reason"] for row in result["excluded"]} == {"before_window", "after_as_of"}
+
+
+@pytest.mark.parametrize("value", [
+    {"@type": "Organization", "name": "Neutral Components"},
+    {"@type": "Event", "name": "Investor Day"},
+    {"@graph": [{"@type": "Organization"}, {"@type": "Event"}]},
+])
+def test_harmless_declarations_with_visible_dated_material_are_checked(value):
+    result = discover(static(declared(value)))
+    assert result["coverage_status"] == "checked_index_only"
+    assert result["limitations"] == []
+    assert len(result["candidates"]) == 1
+
+
+@pytest.mark.parametrize("extra", [
+    '<script src="/assets/analytics.js" defer></script>',
+    '<script type="text/javascript">window.uiReady=true;</script>',
+    '<p>Downloading the Annual Report requires a PDF reader.</p>',
+])
+def test_static_material_index_does_not_infer_dynamic_failure_from_unrelated_ui(extra):
+    result = discover(static(extra))
+    assert len(result["candidates"]) == 1
+    assert result["coverage_status"] == "checked_index_only"
+    assert result["limitations"] == []
+
+
+def test_empty_external_script_shell_keeps_unknown():
+    result = discover('<div id="app"></div><script src="/app.js"></script>')
+    assert result["coverage_status"] == "partial"
+    assert "dynamic_content_unresolved" in result["limitations"]
+    assert result["no_documents_claimed"] is False
+
+
+@pytest.mark.parametrize("value", [
+    {"@type": "DigitalDocument", "contentUrl": "/annual.pdf"},
+    {"@type": ["Thing", "https://schema.org/PresentationDigitalDocument"]},
+    {"@graph": [{"@type": "schema:DataDownload", "contentUrl": "/data.csv"}]},
+])
+def test_declared_document_stays_unresolved_without_inventing_urls(value):
+    result = discover(static(declared(value)))
+    assert result["coverage_status"] == "partial"
+    assert "embedded_document_unresolved" in result["limitations"]
+    assert len(result["candidates"]) == 1
+    assert all(not row["is_business_original"] and row["metadata_only"] for row in result["candidates"])
+
+
+@pytest.mark.parametrize("value", [
+    {"name": "Annual Report 2025", "contentUrl": "/annual.pdf"},
+    {"@type": "CreativeWork", "name": "Annual Report 2025",
+     "encoding": {"contentUrl": "/annual.pdf", "encodingFormat": "application/pdf"}},
+])
+def test_explicit_unsupported_document_shape_retains_unknown(value):
+    result = discover(static(declared(value)))
+    assert result["coverage_status"] == "partial"
+    assert any(name in result["limitations"] for name in
+               ("embedded_document_unresolved", "embedded_data_unresolved"))
+    assert len(result["candidates"]) == 1
+
+
+@pytest.mark.parametrize("raw", [
+    '{"@type":true}', '{"@graph":4}', '{"@type":[] , "v": Infinity}',
+    '{"@type":', 'null', '[{"@type":"Organization"},42]',
+    '{"@graph":[42]}', '{"@type":"DigitalDocument","@type":"Organization"}',
+])
+def test_malformed_declared_structures_remain_partial(raw):
+    result = discover(static('<script type="application/ld+json">' + raw + '</script>'))
+    assert result["coverage_status"] == "partial"
+    assert "embedded_data_unresolved" in result["limitations"]
+    assert len(result["candidates"]) == 1
+
+
+@pytest.mark.parametrize("mode", ["bytes", "nodes", "depth", "scripts"])
+def test_observer_bounds_are_honest_and_keep_visible_material(mode):
+    if mode == "bytes":
+        block = declared({"@type": "Organization", "name": "Z" * 65536})
+    elif mode == "nodes":
+        block = declared({"@graph": [{"@type": "Organization"}] * 130})
+    elif mode == "scripts":
+        block = declared({"@type": "Organization"}) * 33
+    else:
+        value = {"@type": "DigitalDocument"}
+        for _ in range(12):
+            value = {"mainEntity": value}
+        block = declared(value)
+    result = discover(static(block))
+    assert result["coverage_status"] == "partial"
+    assert "embedded_data_unresolved" in result["limitations"]
+    assert len(result["candidates"]) == 1
+
+
+def test_normal_size_and_node_boundary_are_not_blanket_rejected():
+    result = discover(static(declared({"@graph": [{"@type": "Organization"}] * 100})))
+    assert result["coverage_status"] == "checked_index_only"
+    assert result["limitations"] == []
+
+
+def test_issuer_names_and_page_order_do_not_change_metadata_semantics():
+    body = static('<a href="/privacy.pdf">Privacy Statement</a>'
+        '<li><time datetime="2026-09-01"></time>'
+        '<a href="/earn.pdf">Earnings Release</a></li>')
+    pages = [page(body, "neutral-a.example", "a"), page(body, "neutral-b.example", "b")]
+    for name, ordered in [("Neutral Components", pages), ("Neutral Substrates", pages[::-1])]:
+        result = discovery.discover_official_documents(ordered, entity=name,
+            start_date="2026-01-01", as_of_date="2026-10-21")
+        assert len(result["candidates"]) == 4
+        assert result["coverage_status"] == "checked_index_only"
+        assert all(row["entity"] == name and row["metadata_only"] for row in result["candidates"])
+        assert all(row["document_kind"] != "investor_call_transcript" for row in result["candidates"])
+
+
+def test_duplicate_resource_fragment_query_and_same_title_semantics():
+    result = discover(''.join('<a data-date="2026-09-01" href="' + url + '">Annual Report 2025</a>'
+        for url in ["/a.pdf", "/a.pdf#page=3", "/a.pdf?lang=en", "/b.pdf"]))
+    assert len(result["candidates"]) == 3
+    assert result["coverage_status"] == "checked_index_only"
+
+
+@pytest.mark.parametrize("kind", ["static", "embedded", "bad-row", "oversize"])
+def test_public_local_pages_cli_and_input_restoration(tmp_path, kind):
+    body = static(declared({"@type": "Organization"}) if kind == "static" else
+                  declared({"@type": "DigitalDocument"}))
+    html = tmp_path / "index.html"
+    html.write_text(body, encoding="utf-8")
+    request = {"schema_version": "official-discovery-request/1", "entity": "Neutral Systems",
+        "start_date": "2026-01-01", "as_of_date": "2026-10-21", "max_bytes": 65536,
+        "pages": [{"input_file": str(html), "url": "https://neutral.example/ir",
+                   "mime_type": "text/html", "capture_id": "independent-cli"}]}
+    if kind == "bad-row":
+        del request["pages"][0]["input_file"]
+    if kind == "oversize":
+        request["max_bytes"] = 16
+    req = tmp_path / "request.json"
+    req.write_text(json.dumps(request), encoding="utf-8")
+    sentinel = tmp_path / "sentinel"
+    sentinel.write_bytes(b"W11 preexisting independent input sentinel")
+    before = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in tmp_path.iterdir()}
+    run = subprocess.run([sys.executable, "-X", "utf8", "-B", "-m",
+        "company_wiki.source_catalog.official_source_cli", "--operation", "discover",
+        "--request", str(req)], cwd=tmp_path, env=os.environ.copy(),
+        capture_output=True, text=True, encoding="utf-8", timeout=30)
+    assert run.returncode == (2 if kind == "bad-row" else 0), run.stderr
+    result = json.loads(run.stderr if kind == "bad-row" else run.stdout)
+    if kind == "bad-row":
+        assert result["status"] == "failed" and "Traceback" not in run.stderr
+    else:
+        assert result["coverage_status"] == ("checked_index_only" if kind == "static" else "partial")
+        assert result["fetch_receipts"] == []
+        assert result["no_documents_claimed"] is False
+    assert before == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in tmp_path.iterdir()}

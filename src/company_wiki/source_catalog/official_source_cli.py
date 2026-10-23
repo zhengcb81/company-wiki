@@ -183,6 +183,12 @@ def main(argv=None):
         else:
             if request.get("schema_version") != "official-discovery-request/1":
                 raise ValueError("invalid_discovery_schema")
+            entity = request.get("entity")
+            if not isinstance(entity, str) or not entity.strip():
+                raise ValueError("invalid_discovery_entity")
+            for field in ("start_date", "as_of_date"):
+                if not isinstance(request.get(field), str):
+                    raise ValueError("invalid_discovery_dates")
             pages = []
             local_truncated = False
             if ("urls" in request) == ("pages" in request):
@@ -204,6 +210,12 @@ def main(argv=None):
                     or not 0 < cap <= 8388608
                 ):
                     raise ValueError("invalid_local_index_limits")
+                for row in local_pages:
+                    if not isinstance(row, dict) or not all(
+                        isinstance(row.get(key), str) and row.get(key)
+                        for key in ("input_file", "url", "mime_type", "capture_id")
+                    ):
+                        raise ValueError("invalid_local_index_page")
                 remaining = cap
                 for index, row in enumerate(local_pages):
                     path = Path(row["input_file"])
@@ -227,7 +239,7 @@ def main(argv=None):
                         break
             result = discover_official_documents(
                 pages,
-                entity=request["entity"],
+                entity=entity,
                 as_of_date=request["as_of_date"],
                 start_date=request["start_date"],
                 max_items=request.get("max_items", 30),
@@ -240,6 +252,8 @@ def main(argv=None):
             if any(row.get("status") != "opened" for row in fetch_receipts):
                 result["coverage_status"] = "partial"
                 result["limitations"].append("index_fetch_incomplete")
+            # The parse and the CLI can both observe the same limit.
+            result["limitations"] = list(dict.fromkeys(result["limitations"]))
         print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
         return 0
     except (OSError, ValueError, RuntimeError, ProviderBudgetStop, httpx.HTTPError) as exc:

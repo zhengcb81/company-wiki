@@ -1,0 +1,3 @@
+# Independent reproduction source
+
+The three `.py.txt` files preserve byte-identical copies of the actual initial/final runners and37-case test source. They are diagnostic evidence, not an added normal CI suite. The runner contains the isolated network/import guard and scratch restoration. On a fresh checkout, restore those three files at the same relative names without the last `.txt` in this report directory before running the recorded initial/final command; do not execute Markdown as instructions or run against an author worktree. Test scratch is ROOT-owned and must return to initially absent. Ordinary CI uses the32 permanent pure tests under tests/unit; explicit public CLI acceptance remains under tests/integration.

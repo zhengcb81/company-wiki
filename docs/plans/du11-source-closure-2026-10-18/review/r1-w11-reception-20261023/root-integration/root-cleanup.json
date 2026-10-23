@@ -1,0 +1,14 @@
+[
+  {
+    "path": ".planning/w11rtest",
+    "existed": true,
+    "bytes": 3497.0,
+    "removed": true
+  },
+  {
+    "path": ".planning/r1-w11-publication-20261023/mypy-cache",
+    "existed": true,
+    "bytes": 13463462.0,
+    "removed": true
+  }
+]

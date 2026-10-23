@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w11-root-scope-green", "requested_basetemp_len": 65, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-pytest-basetemp\\20261023-225549-c779eab4", "effective_basetemp_len": 78}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+tests\integration\test_official_discovery_root_scope.py ................ [ 72%]
+F.....                                                                   [100%]
+
+================================== FAILURES ===================================
+_ test_invalid_declared_node_shapes_do_not_look_examined[<script type="application/ld+json">{"@graph":"not a node"}</script>] _
+tests\integration\test_official_discovery_root_scope.py:132: in test_invalid_declared_node_shapes_do_not_look_examined
+    assert result["coverage_status"] == "partial"
+E   AssertionError: assert 'checked_index_only' == 'partial'
+E     
+E     - partial
+E     + checked_index_only
+- generated xml file: C:\Users\֣����\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\root-integration\first-green.xml -
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_discovery_root_scope.py::test_invalid_declared_node_shapes_do_not_look_examined[<script type="application/ld+json">{"@graph":"not a node"}</script>]
+======================== 1 failed, 21 passed in 3.69s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-pytest-basetemp\\20261023-225549-c779eab4", "existed": true, "removed": true}

@@ -1,0 +1,18 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w11-root-final", "requested_basetemp_len": 59, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 120 items
+
+tests\integration\test_official_discovery_root_scope.py ................ [ 13%]
+......                                                                   [ 18%]
+tests\integration\test_official_discovery_offline.py ................... [ 34%]
+...........................................                              [ 70%]
+tests\integration\test_official_source_flow.py ......................... [ 90%]
+...........                                                              [100%]
+
+- generated xml file: C:\Users\֣����\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w11-reception-20261023\root-integration\final-tests.xml -
+============================ 120 passed in 54.91s =============================

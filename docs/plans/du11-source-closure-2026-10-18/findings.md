@@ -466,3 +466,7 @@ W08已保存隔离支线181200bc，集中992P/82.35s、RuffPASS、src mypy368/0�
 ## 2026-10-23 W11接收共因及并行写集
 
 W11实际e808404e/clean，四个源码与测试路径绑定6b538ca2独审字节，11输入一致。独立静态复核发现：条目容器按标签类型而非最近祖先选择，可能丢标题/日期并漏extensionless文档；明确DigitalDocument/contentUrl无可见anchor时被误报checked_index_only。ROOT先冻中性RED再修共用owner，普通Event不得一律partial，不实现未授权的全站递归抓取。详review/r1-w11-reception-20261023/初筛。W09投影、W11发现、W08预算接线各有独立写集；两个作者工区只读，母PWF仅ROOT维护。
+
+## W11独审第二轮共因
+
+来源覆盖的共同问题是把“没有当前实现支持的证据”误写为“已检查”，或用script存在/loading子串猜动态失败。ROOT现分别观察显式document关系、结构歧义、真实待加载占位/不可读shell，沿原partial诊断；普通Event/Organization及静态可读材料保留正控，不加人工许可。详W11 initial/final独审及root-acceptance。
