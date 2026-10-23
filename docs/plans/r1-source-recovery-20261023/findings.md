@@ -108,4 +108,17 @@
 
 修复后矩阵：新套件 48 例 + 既有 7 例 = **55 passed**；ruff 通过；审查 2 的 NR-01/02/03/04/05/07/08/10 场景均有回归用例。
 
+## 独立审查 3（agent 68a33bb8，绑定 2e1dfd04）与修复轮 3
+
+审查确认 NR-01/IR-12 及 NR-02..NR-10 均通过，但发现一个 High 回归：exact section 标签（`Annual Report`/`Press Release`/`公告` 等）指向 `.pdf` 时被 section veto 静默丢弃。
+
+| 审查项 | 级别 | 处置 |
+|---|---|---|
+| R3-01 exact section 标签 + 文档后缀被静默丢弃 | High | **已修**：section-label 否决只对非文档路径生效；新增 EN/CN 精确标签 + `.pdf` 的 11 个参数化用例与 3 个表格行用例 |
+| R3-02 打包卫生（缺 handoff.json、handoff.md 未提交、0B 日志、probe UTF-8 BOM、prepared_at 时间） | Low | **已修**：本报告提交补齐 handoff.md/json；删除 0B 日志；probe 输出改为无 BOM UTF-8；时间戳更新 |
+| R3-03 剩余 bounded 残差需记录 | Info | **已记录**：handoff.md/handoff.json 的 known limits 增加 header/footer 强 CTA 无后缀、trailing-slash 自指、pending 上限、120+省略号截断、legal-notice disposition |
+
+修复后矩阵：新套件 62 例 + 既有 7 例 = **69 passed**；全文件 62+36=98 passed（本地完整两文件运行）。
+
+
 

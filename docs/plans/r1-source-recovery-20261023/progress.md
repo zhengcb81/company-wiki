@@ -44,3 +44,10 @@
 - 修复后矩阵：48 新 + 7 既有 = **55 passed**；ruff 通过。
 - 待办：复审新 SHA、handoff、门禁与推送。
 
+## 2026-10-23 C 阶段：独立审查 3 与修复轮 3
+
+- 审查 3 绑定 2e1dfd04：NR-01/IR-12 与 NR-02..NR-10 全通过；新 High R3-01：exact section 标签指 `.pdf` 被静默丢弃。
+- 修复：section-label veto 仅对非文档路径生效；补 EN/CN 精确标签 `.pdf` 参数化用例 + 表格行用例；打包卫生（handoff 文件、删除 0B 日志、probe 无 BOM、时间戳）。
+- 矩阵：62 新 + 7 既有 = **69 passed**；全两文件 98 passed。
+- 待办：审查 4、handoff.json、门禁重跑与推送。
+

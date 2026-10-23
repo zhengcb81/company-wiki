@@ -1,0 +1,152 @@
+{
+ "reviewed_head": "2e1dfd041fdfb9e14a0a1b911049b077df1e06d4",
+ "committed_blob": {
+  "bytes": 22173,
+  "sha256": "4eaeee5fb8317d11f610facd587218dd8db394840b0e38f72e4b7bb7b3c096cd"
+ },
+ "old_blob": {
+  "ref": "a6d12a53",
+  "bytes": 18436,
+  "sha256": "a008e1cb5a9fc5140c1dd3b7470e107abc2611cc397d279e7a97b2ad46b2a079"
+ },
+ "scale": {
+  "n=1000": {
+   "current": {
+    "seconds": 0.131,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   },
+   "old_a6": {
+    "seconds": 0.203,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   }
+  },
+  "n=5000": {
+   "current": {
+    "seconds": 0.344,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   },
+   "old_a6": {
+    "seconds": 2.68,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   }
+  },
+  "n=10000": {
+   "current": {
+    "seconds": 0.808,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   },
+   "old_a6": {
+    "seconds": 7.292,
+    "candidates": 30,
+    "limitations": [
+     "item_limit_reached",
+     "publication_date_unknown"
+    ]
+   }
+  }
+ },
+ "hash_counts_30_anchors": {
+  "current": {
+   "calls": 32,
+   "whole_page_hashes": 1,
+   "candidates": 30
+  },
+  "old_a6": {
+   "calls": 61,
+   "whole_page_hashes": 30,
+   "candidates": 30
+  }
+ },
+ "cli": {
+  "cli_ok": {
+   "exit": 0,
+   "schema": "official-discovery-result/1",
+   "status": null,
+   "error_code": null,
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "candidates": [
+    "https://ir.example/ar.pdf"
+   ],
+   "coverage": "partial",
+   "traceback": false
+  },
+  "cli_invalid_page_url": {
+   "exit": 2,
+   "schema": "official-source-failure/1",
+   "status": "failed",
+   "error_code": "official_source_ValueError",
+   "limitations": null,
+   "candidates": [],
+   "coverage": null,
+   "traceback": false
+  },
+  "cli_empty_host_page_url": {
+   "exit": 2,
+   "schema": "official-source-failure/1",
+   "status": "failed",
+   "error_code": "official_source_ValueError",
+   "limitations": null,
+   "candidates": [],
+   "coverage": null,
+   "traceback": false
+  },
+  "cli_missing_capture": {
+   "exit": 2,
+   "schema": "official-source-failure/1",
+   "status": "failed",
+   "error_code": "official_source_ValueError",
+   "limitations": null,
+   "candidates": [],
+   "coverage": null,
+   "traceback": false
+  },
+  "cli_byte_over": {
+   "exit": 0,
+   "schema": "official-discovery-result/1",
+   "status": null,
+   "error_code": null,
+   "limitations": [
+    "byte_limit_reached"
+   ],
+   "candidates": [],
+   "coverage": "partial",
+   "traceback": false
+  },
+  "cli_max_items_1": {
+   "exit": 0,
+   "schema": "official-discovery-result/1",
+   "status": null,
+   "error_code": null,
+   "limitations": [
+    "publication_date_unknown"
+   ],
+   "candidates": [
+    "https://ir.example/ar.pdf"
+   ],
+   "coverage": "partial",
+   "traceback": false
+  }
+ }
+}

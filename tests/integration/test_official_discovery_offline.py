@@ -188,6 +188,37 @@ class TestNonMaterialExclusion:
         )])
         assert out["candidates"] == []
 
+    @pytest.mark.parametrize(
+        "title,target",
+        [
+            ("Annual Report", "/files/annual-2025.pdf"),
+            ("Annual Reports", "/files/annual-2025.pdf"),
+            ("Press Release", "/files/pr-2026.pdf"),
+            ("News Release", "/files/nr-2026.pdf"),
+            ("Announcement", "/files/ann-2026.pdf"),
+            ("Report", "/files/report-2026.pdf"),
+            ("Results", "/files/results-2026.pdf"),
+            ("Financial Reports", "/files/fin-2026.pdf"),
+            ("公告", "/files/ann-2026.pdf"),
+            ("业绩", "/files/results-2026.pdf"),
+            ("报告", "/files/report-2026.pdf"),
+        ],
+    )
+    def test_exact_section_label_pointing_at_a_document_is_a_lead(self, title, target):
+        # The same label that is navigation as a listing link is the document
+        # itself when it points at a document file.
+        out = _discover([_page('<a href="%s">%s</a>' % (target, title))])
+        assert len(out["candidates"]) == 1
+        assert out["candidates"][0]["source_url"].endswith(target)
+
+    @pytest.mark.parametrize("title", ["公告", "Press Release", "Annual Report"])
+    def test_exact_label_document_in_a_table_row_is_a_lead(self, title):
+        out = _discover([_page(
+            '<table><tr><td>%s</td><td><a href="/files/doc-2026.pdf">%s</a></td></tr></table>'
+            % (title, title)
+        )])
+        assert len(out["candidates"]) == 1
+
     def test_nav_link_does_not_consume_the_item_budget(self):
         out = _discover([_page(
             '<nav><a href="/investors/announcement">公告</a></nav>'

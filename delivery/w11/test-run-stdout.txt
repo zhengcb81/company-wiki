@@ -1,15 +1,15 @@
-﻿CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
 ============================= test session starts =============================
 platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
 rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-source-recovery
 configfile: pytest.ini
 plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
-collected 84 items / 29 deselected / 55 selected
+collected 98 items / 29 deselected / 69 selected
 
-tests\integration\test_official_discovery_offline.py ................... [ 34%]
-.............................                                            [ 87%]
+tests\integration\test_official_discovery_offline.py ................... [ 27%]
+...........................................                              [ 89%]
 tests\integration\test_official_source_flow.py .......                   [100%]
 
 - generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-source-recovery\delivery\w11\test-results.xml -
-===================== 55 passed, 29 deselected in 10.35s ======================
+===================== 69 passed, 29 deselected in 10.17s ======================

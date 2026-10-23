@@ -1,6 +1,6 @@
 {
  "schema_version": "w11-evidence-inventory/1",
- "prepared_at": "2026-10-23T23:35:00+00:00",
+ "prepared_at": "2026-10-23T23:40:00+00:00",
  "lane": "W11-CWP-SOURCES",
  "common_prefix": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/",
  "items": [
@@ -108,8 +108,8 @@
    "id": "derived-minimal-fixture",
    "class": "derived_minimal_fixture",
    "path": "tests/integration/test_official_discovery_offline.py",
-   "bytes": 29924,
-   "sha256": "8e6a558d981216ee2bd438a053f03ba48d27f53342d9950104a5f370694d8368",
+   "bytes": 31358,
+   "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
    "upstream_reference": "镜像 sealed faa5bf stdout SHA 1c33f18b… 中的隐私/条款候选标题与 URL；非原网页重放",
    "supports": [
     "法律导航标题在当前/修复后 parser 下的行为差异（修复前进入候选、修复后不进）"
@@ -122,8 +122,8 @@
    "id": "red-probe-evidence",
    "class": "derived_minimal_fixture",
    "path": "delivery/w11/probes/red-probe-output.txt",
-   "bytes": 2931,
-   "sha256": "54dd99e10d7f95492f7a25b25296d811456c513b52d98366cbe92f5195542ce1",
+   "bytes": 2928,
+   "sha256": "e4d1fd13b517ce019cd46717110c023080d34e7ba0552a7a2debfa9926ae4855",
    "upstream_reference": "delivery/w11/probes/red_probe.py 从 git 0d7ada21 重建 base 模块（blob SHA-256 7d8fb1292c6728adae9edf5a179242a3718b756e8659bbbb19154aff9f8ec2c3）后运行 D1/D2/D3 探针",
    "supports": [
     "三个缺陷在 base 代码上的真实 RED 输出，以及修复后同一输入的对照",
@@ -137,8 +137,8 @@
    "id": "synthetic-neutral-fixtures",
    "class": "synthetic_fixture",
    "path": "tests/integration/test_official_discovery_offline.py",
-   "bytes": 29924,
-   "sha256": "8e6a558d981216ee2bd438a053f03ba48d27f53342d9950104a5f370694d8368",
+   "bytes": 31358,
+   "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
    "upstream_reference": "纯中性构造（Neutral Instruments / Neutral Materials / ir.example 等），无任何真实公司数据",
    "supports": [
     "分类正负控、lead 提取、时间窗口与 item 级日期、URL/去重、载荷诚实性、限界诚实性、CLI subprocess 双 issuer 语义"

@@ -207,7 +207,9 @@ def _is_material_link(folded: str, path: str, *, has_date_context: bool,
     clue wins; a legal document title is excluded; a weak/broad clue needs a
     document suffix or a dated item block; chrome-only links need a suffix.
     """
-    if _is_section_label(folded):
+    if _is_section_label(folded) and not _is_document_path(path):
+        # "Annual Reports" / "公告" as a listing link is navigation; the same
+        # label pointing at a document file is the document itself.
         return False
     if in_chrome and not _is_document_path(path):
         return False

@@ -1,4 +1,4 @@
-﻿{
+{
  "schema_version": "w11-red-probe/1",
  "base_commit": "0d7ada21",
  "base_module_sha256": "7d8fb1292c6728adae9edf5a179242a3718b756e8659bbbb19154aff9f8ec2c3",
