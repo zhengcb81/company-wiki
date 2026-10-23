@@ -131,6 +131,9 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         work_budget.charge(3 * len(members) + 2 * len(required)
                            + len(package.get("anchor_unit_ids", ())) + 1)
         external = set(required) - set(members)
+        # Each source member can consume this external dependency only once.
+        # Reserve actual edges before expanding, not only container count.
+        work_budget.charge(len(members) * len(external))
         # A prose label does not erase a source-declared typed table. Preserve
         # its original header/note edges and anchors as one package. Local table
         # indices on another page/parent cannot certify the same table.
@@ -144,9 +147,6 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
                 table_owners.add(id(package))
             else:
                 context_blocked.update(members)
-        # Each source member can consume this external dependency only once.
-        # Reserve actual edges before expanding, not only container count.
-        work_budget.charge(len(members) * len(external))
         owner_external_context[id(package)] = external
         if (package["kind"] in audited_kinds and id(package) not in table_owners
                 and not package.get("truncated")):

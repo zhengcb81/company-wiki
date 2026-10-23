@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\root\\runtime-all-final-temp", "requested_basetemp_len": 137, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-204207-f09c5ad5", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 239 items
+
+tests\unit\test_g5_legacy_checks_retirement.py ......................... [ 10%]
+.............................                                            [ 22%]
+tests\unit\test_main_ocr_selection.py .................................. [ 36%]
+.........                                                                [ 40%]
+tests\unit\test_cross_market_suite.py .............................      [ 52%]
+tests\unit\document_understanding_root\test_du2_policy_registry.py ..... [ 54%]
+...................                                                      [ 62%]
+tests\unit\document_understanding_root\test_du2_strategy_binding.py .... [ 64%]
+..............                                                           [ 70%]
+tests\unit\du11_source_closure\test_source_metadata_budget.py .........  [ 74%]
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py . [ 74%]
+.............................................................            [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\root\runtime-all-final.xml -
+============================ 239 passed in 23.06s =============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-204207-f09c5ad5", "existed": true, "removed": true}
