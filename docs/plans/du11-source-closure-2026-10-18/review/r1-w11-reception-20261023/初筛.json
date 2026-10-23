@@ -1,0 +1,353 @@
+{
+  "status": "ROOT_READONLY_RECEPTION_CHANGES_REQUIRED_NOT_INTEGRATION_ACCEPTED",
+  "author_workspace": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery",
+  "git": {
+    "head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
+    "branch": "codex/r1-w11-source-recovery-20261023",
+    "dirty": "",
+    "remote_url": "https://github.com/zhengcb81/company-wiki.git",
+    "remote_cached_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947",
+    "ahead_behind_cached": "0\t0",
+    "live_remote_checked": false,
+    "common_base_with_master": "a2f99db676846b7f475def253c541e12c49ae5fe",
+    "product_changes_after_review": ""
+  },
+  "actual_changed_paths_since_start": [
+    "delivery/w11/cleanup.json",
+    "delivery/w11/evidence_inventory.json",
+    "delivery/w11/handoff.json",
+    "delivery/w11/handoff.md",
+    "delivery/w11/probes/red-probe-output.txt",
+    "delivery/w11/probes/red_probe.py",
+    "delivery/w11/review/evidence/README.md",
+    "delivery/w11/review/evidence/combined-selection-stdout.txt",
+    "delivery/w11/review/evidence/existing-36-stdout.txt",
+    "delivery/w11/review/evidence/extra-probe-output.json",
+    "delivery/w11/review/evidence/offline-26-stdout.txt",
+    "delivery/w11/review/evidence/probe-output.json",
+    "delivery/w11/review/evidence/review-2-README.md",
+    "delivery/w11/review/evidence/review-2-cli-probe-output.json",
+    "delivery/w11/review/evidence/review-2-head-bytes-probes.json",
+    "delivery/w11/review/evidence/review-2-probe-output.json",
+    "delivery/w11/review/evidence/review-2-red-probe-rerun.txt",
+    "delivery/w11/review/evidence/review-3-README.md",
+    "delivery/w11/review/evidence/review-3-cli-scale.json",
+    "delivery/w11/review/evidence/review-3-cli-section-labels.json",
+    "delivery/w11/review/evidence/review-3-probe-output.json",
+    "delivery/w11/review/evidence/review-4-README.md",
+    "delivery/w11/review/evidence/review-4-cli-scale.json",
+    "delivery/w11/review/evidence/review-4-probe-output.json",
+    "delivery/w11/review/independent-review-1.json",
+    "delivery/w11/review/independent-review-1.md",
+    "delivery/w11/review/independent-review-2.json",
+    "delivery/w11/review/independent-review-2.md",
+    "delivery/w11/review/independent-review-3.json",
+    "delivery/w11/review/independent-review-3.md",
+    "delivery/w11/review/independent-review-4.json",
+    "delivery/w11/review/independent-review-4.md",
+    "delivery/w11/root_followup.md",
+    "delivery/w11/test-results.xml",
+    "delivery/w11/test-run-full-stdout.txt",
+    "delivery/w11/test-run-stdout.txt",
+    "delivery/w11/test_results.json",
+    "docs/plans/r1-source-recovery-20261023/findings.md",
+    "docs/plans/r1-source-recovery-20261023/progress.md",
+    "docs/plans/r1-source-recovery-20261023/task_plan.md",
+    "src/company_wiki/source_catalog/official_discovery.py",
+    "src/company_wiki/source_catalog/official_source_cli.py",
+    "tests/integration/test_official_discovery_offline.py",
+    "tests/integration/test_official_source_flow.py"
+  ],
+  "product_version_checks": [
+    {
+      "path": "src/company_wiki/source_catalog/official_discovery.py",
+      "worktree_sha256": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+      "head_blob_sha256": "6bba88a286f588caad6d3de6235eff3effe15204a07a91883d03ae1bc458493d",
+      "review_binding_match": true,
+      "head_same_as_reviewed_product": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_source_cli.py",
+      "worktree_sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+      "head_blob_sha256": "7fb9a8031e6d98fd9788518b9fb41904179f326fba57c2bbb08fb48d1dee1adf",
+      "review_binding_match": true,
+      "head_same_as_reviewed_product": true
+    },
+    {
+      "path": "tests/integration/test_official_source_flow.py",
+      "worktree_sha256": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+      "head_blob_sha256": "ff255559a09fbb00dfe6e2f233f2eebb779d2f0daf43fcb6d6de6c1aaaa7b142",
+      "review_binding_match": true,
+      "head_same_as_reviewed_product": true
+    },
+    {
+      "path": "tests/integration/test_official_discovery_offline.py",
+      "worktree_sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+      "head_blob_sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+      "review_binding_match": true,
+      "head_same_as_reviewed_product": true
+    }
+  ],
+  "frozen_inputs": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-final3-review-20261022\\work_packages\\W11.md",
+      "bytes": 5795,
+      "sha256": "6a18ccf053525daff75f68cc07d586953b04d59e94d927a56f8fcd383ffa2ba3",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\fetch.json",
+      "bytes": 54215,
+      "sha256": "f91a9b5c8b970876705ca0b778a5ab00f5b81b0e062d7f606589699053e01b6c",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\storage.json",
+      "bytes": 39225,
+      "sha256": "50374edc361621f2d1aeb49dd1b1b325cc2d5f7eafd06c81d930bfd631064c9b",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\research\\phase_a_manifest.json",
+      "bytes": 185967,
+      "sha256": "ebd109d48659149102e4c018b20470ead6e9331948a6250a02260bd0dcc78e98",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\phase_b\\research\\document_matrix.json",
+      "bytes": 20480,
+      "sha256": "3f608dcd49ed31ee2d0b25d6eafbb99627c58137a9dc8c0c0862867363cde6f5",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\stdout.txt",
+      "bytes": 2839,
+      "sha256": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\fetch.md",
+      "bytes": 18661,
+      "sha256": "1649aa7e13a674cf9ea209b7c4a511503894f3a528b2886d1573f152c1b50215",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\input-0001-9c235138bbbf.json",
+      "bytes": 250,
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\consume-0001-9c235138bbbf.json",
+      "bytes": 250,
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\events.jsonl",
+      "bytes": 278268,
+      "sha256": "6ad7640bb36adcc7dd9f12f78b9708ebb6fdb45ca056d8f1f0b699c960071142",
+      "matches_frozen_input": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\research\\web_discovery.json",
+      "bytes": 1507,
+      "sha256": "d4276ba93bf68b017c7ddbbbdd728498b0123a01d0e2479f886893a921c35b0a",
+      "matches_frozen_input": true
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "src/company_wiki/source_catalog/official_discovery.py",
+      "bytes": 22972,
+      "sha256": "7436057e7291d336f2084f3fec0b912b3b32c15ae6690a96b8ff3a0c4af2f6b5",
+      "matches_manifest": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_source_cli.py",
+      "bytes": 13362,
+      "sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+      "matches_manifest": true
+    },
+    {
+      "path": "tests/integration/test_official_source_flow.py",
+      "bytes": 56854,
+      "sha256": "f374c7d7ff39677c9b30c9f4ac9c8429740c7e8df1655fb95efc3bb453564b66",
+      "matches_manifest": true
+    },
+    {
+      "path": "tests/integration/test_official_discovery_offline.py",
+      "bytes": 31358,
+      "sha256": "b1a0da0228b3b077c076ea1a4665728dd022fc33358248d16c53bc4d9dd16069",
+      "matches_manifest": true
+    },
+    {
+      "path": "docs/plans/r1-source-recovery-20261023/task_plan.md",
+      "bytes": 3540,
+      "sha256": "48d1755683d74c7dcf1302c74520100b6e2a0a7e86008fb88d80d4ae8d0c0471",
+      "matches_manifest": true
+    },
+    {
+      "path": "docs/plans/r1-source-recovery-20261023/findings.md",
+      "bytes": 13885,
+      "sha256": "9a1366b89d23be80c88931593961f2493864de2fafbb62ac46395d7e6de7fdf8",
+      "matches_manifest": true
+    },
+    {
+      "path": "docs/plans/r1-source-recovery-20261023/progress.md",
+      "bytes": 5501,
+      "sha256": "ae3bddbba245b04cebe7a548ffc4b7927c431a761c6b7b4cf555a5a484129078",
+      "matches_manifest": false
+    },
+    {
+      "path": "delivery/w11/handoff.md",
+      "bytes": 6081,
+      "sha256": "db6aed874cbc72f3b7945bed447454eaa46acf5e797b017c76d01dfa33833710",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/evidence_inventory.json",
+      "bytes": 8313,
+      "sha256": "ba0ad08e40ee0f2c8491066ed8893ff8aae07ea75f87756a276a06c6e875a9b3",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/test_results.json",
+      "bytes": 3625,
+      "sha256": "835a3813f5786b865c46c61547078a8e7fc86fdb8c770beab107c326a53548d4",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/cleanup.json",
+      "bytes": 4654,
+      "sha256": "552f0769cf99ddae381c562401f77c071e63bf8345598e9e996cb1616253aba5",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/root_followup.md",
+      "bytes": 2997,
+      "sha256": "5122c30fbe0ac3b5afac0d3e67a7bc179bd292f2b45194a6a29879f24ccc7116",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/test-results.xml",
+      "bytes": 12268,
+      "sha256": "749f18b1d2d7c1062743d785e8c7212fa0eb26e9e89ff6b81d2be860557c5b54",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/test-run-stdout.txt",
+      "bytes": 1122,
+      "sha256": "973fdbb236d66be41651905d2fa728d3d12b080555f76a4b4de0e4988e351ebd",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/test-run-full-stdout.txt",
+      "bytes": 1058,
+      "sha256": "5688ebdc2d0de72d1b4894a598685f1779dfc2bc7cbaa104cfe0b68ba0ae174d",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/probes/red_probe.py",
+      "bytes": 4967,
+      "sha256": "22506fac4dc7212e882a8441e1c8a2ebc6bbeebc80ac58bb3a1dd86dbcc3a741",
+      "matches_manifest": true
+    },
+    {
+      "path": "delivery/w11/probes/red-probe-output.txt",
+      "bytes": 2928,
+      "sha256": "e4d1fd13b517ce019cd46717110c023080d34e7ba0552a7a2debfa9926ae4855",
+      "matches_manifest": true
+    }
+  ],
+  "independent_delivery_review": {
+    "head": "6b538ca2f18fb8d5805f2ff59a41404b6e8302cd",
+    "conclusion": "APPROVE",
+    "scope": "product SHA 6b538ca2 approved; handoff-document completion items remain and do not require product change or re-review",
+    "report_sha256": "c679de976e9fe854b82df4dc057e62864180dcee8af7ec5049bc55e2c1a6e53d",
+    "original_required_docs_fixes": [
+      "Handoff-document only (no product change): add delivery/w11/handoff.json; commit handoff.md; add the extensionless-document-endpoint known limit; correct prepared_at and optionally record the full 98-file run in test_results.json."
+    ]
+  },
+  "receipts_observed_not_rerun": {
+    "xml_suites": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "69",
+        "time": "10.091",
+        "timestamp": "2026-10-23T23:25:04.908109+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "full_two_file_log_tail": "============================= 98 passed in 51.64s =============================",
+    "new_tests": 62,
+    "selected_old_tests": 7,
+    "full_old_tests": 36,
+    "zero_external_calls": "author test_results+independent review attest0; this ROOT precheck made0 calls as well"
+  },
+  "current_roots": {
+    "companies": {
+      "exists": false
+    },
+    ".source_catalog": {
+      "exists": false
+    },
+    "catalog": {
+      "exists": false
+    },
+    "tmp/review4": {
+      "exists": false
+    }
+  },
+  "initial_findings": [
+    {
+      "id": "W11-RC-01",
+      "priority": "P2",
+      "status": "STATIC_SOURCE_ROOT_CAUSE_CONFIRMED_NEEDS_ROOT_NEUTRAL_RED",
+      "path": "src/company_wiki/source_catalog/official_discovery.py",
+      "line": 254,
+      "issue": "_item_container searches ancestor types in article/li/tr order rather than nearest item. A wide multi-link outer article causes immediate None before a nearer one-link li/tr is examined. Same helper feeds date scope and title recovery.",
+      "minimal_case": "article > ul > 2 li, each containing own time datetime and one anchor with distinct material URLs. li dates must not be lost or borrowed.",
+      "root_fix": "Resolve the nearest native article/li/tr ancestor once, then enforce its single-anchor invariant. Keep explicit multi-link item unresolved; div fallback remains title-only, not publication-date proof. Add nested article/li/tr positives and wide/shared-time negatives at ROOT integration."
+    },
+    {
+      "id": "W11-RC-02",
+      "priority": "P2",
+      "status": "STATIC_COVERAGE_GAP_NEEDS_ROOT_REQUIREMENT_VALIDATION",
+      "path": "src/company_wiki/source_catalog/official_discovery.py",
+      "line": 342,
+      "issue": "Inline declared payload is ignored: only external script src/loading marks unresolved and only a[href] enumerates material. An inline declared DigitalDocument/contentUrl without anchors can yield checked_index_only with no reason despite unexamined material-bearing payload. Existing inline test covers Event plus visible anchor only.",
+      "root_fix": "ROOT first freezes a neutral unsupported embedded material/bad-structure counterexample. Either bounded supported declarative document schema extraction or explicit not_supported/partial reason; do not execute JS, crawl scripts or recursively treat arbitrary strings as URLs. Keep non-material JSON-LD/visible-link positives. This does not prove the unavailable real IR page had such payload."
+    },
+    {
+      "id": "W11-DOC-03",
+      "priority": "P3",
+      "status": "DOCUMENTATION_DRIFT_ROOT_CAN_RECONCILE",
+      "issue": "handoff.md names product2e1dfd04 and counts55/84; actual approved source6b538ca2 and bound receipts69/98. task_plan C stillin_progress with unfinished A checkbox; progress reports completed. JSON progress artifact SHA stale after e808 report-only commit, pushed_head c990 while actual/cachedremotee808.",
+      "root_fix": "Keep original signed reports/evidence; ROOT reception summary states observed current versions/counts and fixes current PWF/handoff metadata as docs-only. No author rerun or new permission required."
+    }
+  ],
+  "integration_plan": {
+    "new_mother_budget": "10,000,000tokens /20,000,000microUSD and soft company allocation from mother config/resource_budget.yaml; frozen2M card text is historical, not current limit. W11 remainsoffline0HTTP/LLM.",
+    "allowed_delta": "4 source/test files plus own PWF/delivery; no config/resource budget/narrative/transport/DTO/provider writes observed.",
+    "merge_safety": "Use actual common-base three-way integration or explicit approved commits; never replace mother tree with old checkout or copy all ancestor files. Preserve ab95027b resource policy/cache fix. Resolve shared helper/coverage RED first, then concentrated discovery+CLI/normal gate once; real bounded re-fetch and SourceRef capture/summary remain ROOT later work."
+  },
+  "external_limits": [
+    "No retained486789B realIR HTML; old responseSHA is receipt-only, not replay.",
+    "Metadata leads are not business originals, issuer validation, acquiredQ&A, fullsite coverage or research acceptance.",
+    "Known heuristic limits include extensionless exactsection download endpoints and multi-link Download+View rows.",
+    "This precheck did not run author programs/tests, query live remote, initialize indexes or touch writer worktrees."
+  ],
+  "codegraph": "not initialized in author worktree; read known specific files only, no init or index write",
+  "author_workspace_unchanged_by_reviewer": true,
+  "static_independent_crosscheck": {
+    "agent": "/root/w08_qualifier_design/w11_static_controls",
+    "mode": "independent read-only source/test inspection; no authorsource execution, writes, Git, network or credentials",
+    "result": "Both nearest-item scope root cause and explicit unexamined embedded-document coverage gap confirmed by static control flow. Ordinary Event JSON-LD is a valid negative control and must not become blanket partial.",
+    "minimal_nested_item": "<article><ul><li><time datetime=\"2026-09-01\"></time><span>Annual Report 2025</span><a href=\"/a.pdf\">Download</a></li><li><a href=\"/b.pdf\">Interim Report 2026</a></li></ul></article>",
+    "minimal_embedded_document": "<script type=\"application/ld+json\">{\"@type\":\"DigitalDocument\",\"name\":\"Annual Report 2025\",\"contentUrl\":\"https://ir.example/a.pdf\",\"datePublished\":\"2026-09-01\"}</script>"
+  }
+}

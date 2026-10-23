@@ -462,3 +462,7 @@ W08已保存隔离支线181200bc，集中992P/82.35s、RuffPASS、src mypy368/0�
 真实3页内存PDF独审进一步证实两个漏洞：部分选中后计算耗尽漏诊断、增加工量后旧未完整prefix仍可命中cache。现实际资源中断总有document_work维度/真实used/limit，缺原拒绝大小requested=null；因果inventory保持partial，实际工作额度入cache身份，费用/公司软目标不入来源语义。永久普通回归动态从实际full-work寻找部分耗尽，不绑定20k旧实现常数。CWP独审99P/47P、正常push7165P/24既有skip294.50s＋独立smoke146P36.56s，全src366/0，源码ab95027b已推。精确CI40034980056仍待终态，不能借旧绿。独占测试目录已恢复，ROOT两临时类型缓存约37.2MB已精确清除，未全仓清历史。
 
 预算制度不等于来源内容完工：W08指引/跨页与96片段分批、正式新摘要及W12仍开。用户已报告W09与W11全部交付，ROOT分开只读接收；W09内容初审抓到history driver仍套正向模板及low/high场景沿用base说明，作为语义共因修复，不用再加门禁或重跑收费步骤。
+
+## 2026-10-23 W11接收共因及并行写集
+
+W11实际e808404e/clean，四个源码与测试路径绑定6b538ca2独审字节，11输入一致。独立静态复核发现：条目容器按标签类型而非最近祖先选择，可能丢标题/日期并漏extensionless文档；明确DigitalDocument/contentUrl无可见anchor时被误报checked_index_only。ROOT先冻中性RED再修共用owner，普通Event不得一律partial，不实现未授权的全站递归抓取。详review/r1-w11-reception-20261023/初筛。W09投影、W11发现、W08预算接线各有独立写集；两个作者工区只读，母PWF仅ROOT维护。

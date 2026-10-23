@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-isolated-harness-dispatch/1",
   "date": "2026-10-23",
-  "status": "DISPATCHED_USER_REPORTED_RUNNING",
+  "status": "BOTH_DELIVERED_ROOT_REPAIR_AND_INTEGRATION_IN_PROGRESS",
   "canonical_readme": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\harness_lanes\\20261023\\README.md",
   "packages": [
     {
@@ -29,11 +29,12 @@
         "bytes": 26880,
         "access": "read_only"
       },
-      "status": "DELIVERED_ROOT_SCREENED_CONTENT_REVIEW_PENDING",
+      "status": "DELIVERED_CONTENT_REVIEW_ROOT_PROJECTION_REPAIR_IN_PROGRESS",
       "handoff": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\handoff.json",
       "implementation_independently_observed": true,
       "observed_final_head": "eb7c2dee",
-      "root_screening_ref": "../../review/r1-w09-reception-20261023/reception.json"
+      "root_screening_ref": "../../review/r1-w09-reception-20261023/reception.json",
+      "root_content_review_ref": "../../review/r1-w09-reception-20261023/content-review.json"
     },
     {
       "id": "W11-CWP-SOURCES",
@@ -59,10 +60,11 @@
         "bytes": 18950,
         "access": "read_only"
       },
-      "status": "DELIVERED_USER_REPORTED_ROOT_SCREENING",
+      "status": "DELIVERED_VERSION_BOUND_ROOT_COMMON_CAUSE_REPAIR_IN_PROGRESS",
       "handoff": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\handoff.json",
-      "implementation_independently_observed": false,
-      "root_screening_ref": "../../review/r1-w11-reception-20261023/"
+      "implementation_independently_observed": true,
+      "root_screening_ref": "../../review/r1-w11-reception-20261023/初筛.json",
+      "observed_final_head": "e808404ed50d33f0c7e4e08be79e0d04beb4d947"
     }
   ],
   "root_reserved": [

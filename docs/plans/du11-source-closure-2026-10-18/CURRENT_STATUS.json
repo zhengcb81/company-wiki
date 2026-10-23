@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-23",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_ROOT_REPAIR_W09_W11_EXTERNAL_RUNNING",
+  "overall_status": "ACTIVE_W08_BASELINE_JOIN_W09_W11_ROOT_REPAIR",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -12,10 +12,10 @@
   "code_ci": {
     "id": 40034980056,
     "head_sha": "ab95027b5b1452c4403db482362b59a9f8976286",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056",
-    "scope_note": "Current budget source commit observed running; previous successful CI retained separately, not borrowed as new success"
+    "updated_at": "2026-10-23T22:42:48Z"
   },
   "completed": {
     "b2": {
@@ -122,7 +122,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_ENGINEERING_GREEN_REAL_ANNUAL_PARTIAL_W09_W11_EXTERNAL_RUNNING",
+      "status": "ACTIVE_W08_ANNUAL_PARTIAL_W09_W11_DELIVERED_ROOT_REPAIR",
       "mainline": true
     },
     {
@@ -151,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "预算节点已正常发布并安装。ROOT完成W09内容/最终版本复核，修历史driver正向模板和跨scenario说明共因后并线；W08先合当前预算基线再继续指引前提/跨页/选材分批，随后正式摘要/缓存/RF矩阵/W12。W11独占工区不动。",
+  "next_step_now": "Budget policy published and exact code CI successful. Integrate W09 research role/scope/scenario projection repairs and W11 nearest-item/embedded-document coverage repairs in disjoint ROOT write sets; test and independently review each integration. Join the current budget baseline into W08 while preserving pending measure implementation and open guidance RED, then finish guidance/cross-page ancestry/selection batching, actual summary/cache/RF matrix and W12. Author worktrees stay read-only.",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -189,11 +189,12 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 39854576322,
-    "head_sha": "aa2dd822faed3b464a713cff737ba425dd6e2a91",
+    "id": 40034980056,
+    "head_sha": "ab95027b5b1452c4403db482362b59a9f8976286",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39854576322"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056",
+    "updated_at": "2026-10-23T22:42:48Z"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -204,7 +205,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-23T22:41:37.228452+00:00",
+  "last_updated_at": "2026-10-23T22:52:31.996292+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -220,7 +221,7 @@
     }
   },
   "r1_w06_phase_b": {
-    "status": "FOUR_REVIEWS_FAIL_W08_NUMERIC_PROSE_NODE_REVIEWED_ANNUAL_PARTIAL_W09_W11_EXTERNAL_RUNNING",
+    "status": "FOUR_REVIEWS_FAIL_W08_ANNUAL_PARTIAL_W09_W11_ROOT_REPAIR",
     "manifest_sha256": "24d857e09fca9f8ee033434d602774ecfe9712beacb67d583617caa0d894546f",
     "root_seal_check": "review/r1-w06-phase-b-seal-20261022.json",
     "files_checked": 501,
@@ -326,12 +327,12 @@
     "W08": "NUMERIC_PROSE_RESTRICTION_NODES_REVIEWED_BRANCH_PUSH_GREEN_ANNUAL_PARTIAL",
     "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
     "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
-    "W09": "DELIVERED_USER_REPORTED_ROOT_SCREENED_CONTENT_REVIEW_PENDING",
-    "W09_ref": "review/r1-w09-reception-20261023/reception.json",
+    "W09": "DELIVERED_TWO_P2_TWO_P3_ROOT_PROJECTION_REPAIR_IN_PROGRESS",
+    "W09_ref": "review/r1-w09-reception-20261023/content-review.json",
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
     "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
     "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
-    "W11": "DELIVERED_USER_REPORTED_ROOT_SCREENING",
+    "W11": "DELIVERED_VERSION_BOUND_ROOT_TWO_COMMON_CAUSE_REPAIRS_IN_PROGRESS",
     "W12": "NOT_STARTED",
     "business_pass": false,
     "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
@@ -339,7 +340,7 @@
     "W08_branch_head_prefix": "1712ed10",
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
-    "W11_ref": "review/r1-w11-reception-20261023/"
+    "W11_ref": "review/r1-w11-reception-20261023/初筛.json"
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",
@@ -363,10 +364,12 @@
     "audit_remote_configured": false,
     "ci_observation": {
       "id": 40034980056,
-      "status": "in_progress",
-      "conclusion": null,
       "head_sha": "ab95027b5b1452c4403db482362b59a9f8976286",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056"
-    }
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40034980056",
+      "updated_at": "2026-10-23T22:42:48Z"
+    },
+    "publication_docs_commit": "fa667547"
   }
 }

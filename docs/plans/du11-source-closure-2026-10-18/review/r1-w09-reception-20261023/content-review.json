@@ -1,0 +1,1641 @@
+{
+  "schema_version": "root-w09-independent-content-review/1",
+  "reviewed_utc": "2026-10-23T22:43:51.875938+00:00",
+  "reviewer_role": "Independent ROOT content reviewer, not W09 implementer; numeric subreview by /root/w08_untyped_table_diagnosis/w09_numeric_content",
+  "actual_author_head": "eb7c2deec3650889a10220fdfe8fccb168b28c72",
+  "conclusion": "FIX_REQUIRED_FOR_TWO_SUBSTANTIVE_ARTIFACT_NARRATIVE_ERRORS",
+  "scope": "Limited W09 package content/semantics review. It does not replace ROOT integration, new W08 summary adoption, source completeness or W12 four-way company review.",
+  "finding_counts": {
+    "P2": 2,
+    "P3": 2
+  },
+  "findings": [
+    {
+      "id": "W09-C01",
+      "severity": "P2",
+      "status": "OPEN_ROOT_FIXABLE",
+      "title": "Evidence downgrade does not propagate to driver narrative and scope-specific projections",
+      "locations": [
+        "forecast/main-input.json:/growth_driver_tree/drivers[driver_id=driver_other]",
+        "forecast/main-input.json:/growth_driver_tree/drivers[driver_id=driver_discontinued]",
+        "forecast/stress-input.json: same drivers",
+        "forecast/main-forecast.json:/growth_driver_analysis/headwinds",
+        "forecast/stress-forecast.json:/growth_driver_analysis/headwinds",
+        "forecast/main-input.json:/operating_research/calibrations[scope=Testing or Biology]/limitations"
+      ],
+      "evidence": {
+        "history_only_claims": [
+          "claim_driver_other",
+          "claim_driver_discontinued"
+        ],
+        "unsupported_thesis": "Actual latest half-year anchor and disclosed project/ramp mechanisms support conditional continuation; net price, FX and recognition timing can offset workload.",
+        "unsupported_evidence_node": {
+          "evidence_type": "issuer_current_operating_update",
+          "inference_distance": "one_step",
+          "conclusion": "Latest H1 gives actual workload/conversion direction. Counts and capacity stock cannot establish a future price or a three-year range."
+        },
+        "actual_source_support": "Other only the H1 historical decline row; discontinued only zero/prior revenue and perimeter context. Neither supplies a forward workload/project/ramp mechanism.",
+        "secondary_projection": "All12 calibrations repeat H2TIDES comparable from72.6/44.3% and Bachem limitations; these are not own-business bases for the6 Testing/Biology entries."
+      },
+      "impact": "Native reports publish a positive operating assertion that the repaired evidence does not support; the honest U07/no-future-mechanism limitation elsewhere does not retract that assertion. Figures remain arithmetically unchanged.",
+      "root_cause": "Repair updates primary claim role/quote but leaves copied driver and parallel calibration text as independent stale projections.",
+      "minimal_fix": "At the authoring owner regenerate thesis/evidence-node explanation/causal-chain/falsifiers and relevant limitation text from the current evidence disposition and actual scope. For history-only drivers describe explicitly conditional runoff/zero, not disclosed ramp. Keep legitimate known mechanisms, negative/zero contributions and all revenue math. No company-keyword classifier or global validator relaxation.",
+      "acceptance": "A neutral history-only/zero-perimeter fixture preserves amounts but no longer exports a disclosed operating-mechanism assertion; a genuinely sourced mechanism remains positive. Both main and stress rendered outputs must reflect the same corrected disposition."
+    },
+    {
+      "id": "W09-C02",
+      "severity": "P2",
+      "status": "OPEN_ROOT_FIXABLE",
+      "title": "Base-only D&M implied growth is falsely asserted for Low and High",
+      "locations": [
+        "forecast/main-input.json:/parameters[non_tides_low_2026_activity]/rationale",
+        "forecast/main-input.json:/parameters[non_tides_high_2026_activity]/rationale",
+        "forecast/stress-input.json: inherited rationales"
+      ],
+      "evidence": {
+        "copied_assertion": "this index requires H2 D&M growth of about +35.3%",
+        "activities": {
+          "low": "1.1",
+          "base": "1.3",
+          "high": "1.5"
+        },
+        "condition": "Hold H2 residual at comparable H2 FY2025 =2585.45306019 CNYm; prior H2 D&M=11240.20845397 CNYm.",
+        "recalculated_by_scenario": [
+          {
+            "scenario": "low",
+            "h2_non_tides_cny_million": "14309.42141054",
+            "implied_h2_dm_cny_million": "11723.96835035",
+            "implied_yoy_pct": "4.30383385"
+          },
+          {
+            "scenario": "base",
+            "h2_non_tides_cny_million": "17793.62636872",
+            "implied_h2_dm_cny_million": "15208.17330853",
+            "implied_yoy_pct": "35.30152373"
+          },
+          {
+            "scenario": "high",
+            "h2_non_tides_cny_million": "21153.26211666",
+            "implied_h2_dm_cny_million": "18567.80905647",
+            "implied_yoy_pct": "65.19096716"
+          }
+        ]
+      },
+      "impact": "The explanation understates High and overstates Low implied operating requirements in the largest driver; the native amounts are correct.",
+      "root_cause": "A Base cross-check was copied across scope/scenario-specific target parameters without retaining its Base label.",
+      "minimal_fix": "Generate scenario-specific explanations from the existing common component bridge, or explicitly label35.3% as a Base-only comparison rather than this index. Use the scenario whole recognized H2 amount, including its price/FX, not activity alone. Do not tune forecast numbers to match the mistaken text.",
+      "acceptance": "Low/Base/High explanations either disclose their own4.3/35.3/65.2% conditional requirement or name only the Base comparison; a different neutral multi-scenario fixture cannot inherit the first scenario number."
+    },
+    {
+      "id": "W09-C03",
+      "severity": "P3",
+      "status": "OPEN_ROOT_FIXABLE",
+      "title": "Rounding amplification is overstated and points to an absent rounding table",
+      "locations": [
+        "research/component-bridge.json:/rows[metric_id=residual_h1_yoy]/rounding_basis",
+        "research/component-bridge.json:/rows[metric_id=residual_h1_yoy]/note",
+        "research/sensitivity.json"
+      ],
+      "evidence": {
+        "claimed": "several percentage points of uncertainty; the sensitivity table shows how the implied number moves with the rounding basis",
+        "actual_tables": "Only native sensitivities and ±10% residual-condition tables, not a displayed-input rounding table.",
+        "independent_rounding_only_probe": "Assuming conventional nearest rounding for H1 TIDES72.6±0.05亿元 and D&M149.9±0.05亿元 and their44.3/72.7% rates±0.05 percentage point,16 corner combinations give about5.31867–5.91918% residual H1 growth (width0.6005 percentage point), not several points. This is not empirical uncertainty or a confidence interval."
+      },
+      "root_cause": "A qualitative caution was given quantitative magnitude without calculating it; a conditional scenario sensitivity was confused with display-rounding propagation.",
+      "minimal_fix": "Remove the unsupported several-points claim and absent-table reference, or provide the small explicitly rounding-only calculation with its assumptions. Keep approximately5.6% and current forecast values.",
+      "acceptance": "Documentation names actual existing tables; any rounding interval is separated from empirical uncertainty and residual scenario sensitivity."
+    },
+    {
+      "id": "W09-C04",
+      "severity": "P3",
+      "status": "OPEN_ROOT_FIXABLE",
+      "title": "Tail fix record overstates memo correction and constant confidence is not numerical integrity proof",
+      "locations": [
+        "research/research-memo.md:§2.1 and§6",
+        "review/review-fixes.md:post-round2 tail fixes"
+      ],
+      "evidence": {
+        "remaining_sentence": "§2.1 still says 重算结果与封存旧输出逐位相同 without segment_subtotal qualification, while the tail fix record says this specific occurrence was fixed. §3 does define the narrower meaning.",
+        "confidence_sentence": "§6 calls an unchanged24.017059... confidence score one piece of proof that numbers were not secretly changed. That structural score is not a test of forecast-value equality."
+      },
+      "impact": "Full-document readers have the proper subtotal qualification elsewhere, so this is a precision/provenance issue rather than a discovered amount defect.",
+      "root_cause": "Manual narrative updates and completion statements are not checked against the exact field/sentence changed.",
+      "minimal_fix": "Qualify the remaining sentence as scenario segment_subtotal and cite actual numerical-diff reconciliation. Do not use constant confidence as a numerical-integrity check. Correct the tail closure statement to the actual final text. No new full-chain/model rerun needed for memo-only edits."
+    }
+  ],
+  "claim_review": {
+    "rows": 49,
+    "unique_claims": 49,
+    "all_integrity_checks_pass": true,
+    "integrity_method": "Re-slice existing verified page text by actual Unicode-code-point offsets; compare current input source/physical-page locator/target/role/excerpt and stripped/raw/page UTF8 SHA. No PDF re-open or author helper executed.",
+    "row_results": [
+      {
+        "claim_id": "claim_biology_base_2026_activity",
+        "target_type": "parameter",
+        "target_id": "biology_base_2026_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_base_2027_activity",
+        "target_type": "parameter",
+        "target_id": "biology_base_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_base_2028_activity",
+        "target_type": "parameter",
+        "target_id": "biology_base_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_base_h2_2026_rebase",
+        "target_type": "parameter",
+        "target_id": "biology_base_h2_2026_rebase",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 14,
+        "contiguous_span": [
+          877,
+          1168
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_high_2026_activity",
+        "target_type": "parameter",
+        "target_id": "biology_high_2026_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_high_2027_activity",
+        "target_type": "parameter",
+        "target_id": "biology_high_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_high_2028_activity",
+        "target_type": "parameter",
+        "target_id": "biology_high_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_high_h2_2026_rebase",
+        "target_type": "parameter",
+        "target_id": "biology_high_h2_2026_rebase",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 14,
+        "contiguous_span": [
+          877,
+          1168
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_low_2026_activity",
+        "target_type": "parameter",
+        "target_id": "biology_low_2026_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_low_2027_activity",
+        "target_type": "parameter",
+        "target_id": "biology_low_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_low_2028_activity",
+        "target_type": "parameter",
+        "target_id": "biology_low_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_biology_low_h2_2026_rebase",
+        "target_type": "parameter",
+        "target_id": "biology_low_h2_2026_rebase",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 14,
+        "contiguous_span": [
+          877,
+          1168
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_driver_biology",
+        "target_type": "growth_driver",
+        "target_id": "biology_operating_evidence",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          400,
+          685
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_driver_discontinued",
+        "target_type": "growth_driver",
+        "target_id": "discontinued_operating_evidence",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          384,
+          412
+        ],
+        "evidence_role": "history_base",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_driver_non_tides",
+        "target_type": "growth_driver",
+        "target_id": "non_tides_operating_evidence",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          920,
+          1250
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_driver_other",
+        "target_type": "growth_driver",
+        "target_id": "other_operating_evidence",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          304,
+          343
+        ],
+        "evidence_role": "history_base",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_base_2026_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_base_2026_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_base_2026_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_base_2026_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_base_2027_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_base_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_base_2027_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_base_2027_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_base_2028_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_base_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_base_2028_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_base_2028_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_high_2026_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_high_2026_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_high_2026_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_high_2026_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_high_2027_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_high_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_high_2027_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_high_2027_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_high_2028_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_high_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_high_2028_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_high_2028_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_low_2026_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_low_2026_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_low_2026_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_low_2026_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_low_2027_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_low_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_low_2027_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_low_2027_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_low_2028_activity",
+        "target_type": "parameter",
+        "target_id": "non_tides_low_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 11,
+        "contiguous_span": [
+          657,
+          920
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_non_tides_low_2028_price",
+        "target_type": "parameter",
+        "target_id": "non_tides_low_2028_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_base_2026_price",
+        "target_type": "parameter",
+        "target_id": "tides_base_2026_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_base_2027_activity",
+        "target_type": "parameter",
+        "target_id": "tides_base_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          37,
+          88
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_base_2027_price",
+        "target_type": "parameter",
+        "target_id": "tides_base_2027_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_base_2028_activity",
+        "target_type": "parameter",
+        "target_id": "tides_base_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          37,
+          88
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_base_2028_price",
+        "target_type": "parameter",
+        "target_id": "tides_base_2028_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_high_2026_price",
+        "target_type": "parameter",
+        "target_id": "tides_high_2026_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_high_2027_activity",
+        "target_type": "parameter",
+        "target_id": "tides_high_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          37,
+          88
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_high_2027_price",
+        "target_type": "parameter",
+        "target_id": "tides_high_2027_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_high_2028_activity",
+        "target_type": "parameter",
+        "target_id": "tides_high_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          37,
+          88
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_high_2028_price",
+        "target_type": "parameter",
+        "target_id": "tides_high_2028_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_low_2026_price",
+        "target_type": "parameter",
+        "target_id": "tides_low_2026_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_low_2027_activity",
+        "target_type": "parameter",
+        "target_id": "tides_low_2027_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          37,
+          88
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_low_2027_price",
+        "target_type": "parameter",
+        "target_id": "tides_low_2027_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_low_2028_activity",
+        "target_type": "parameter",
+        "target_id": "tides_low_2028_activity",
+        "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+        "pdf_page": 12,
+        "contiguous_span": [
+          37,
+          88
+        ],
+        "evidence_role": "mechanism_direction",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      },
+      {
+        "claim_id": "claim_tides_low_2028_price",
+        "target_type": "parameter",
+        "target_id": "tides_low_2028_price",
+        "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "pdf_page": 16,
+        "contiguous_span": [
+          803,
+          975
+        ],
+        "evidence_role": "conversion_assumption",
+        "checks": {
+          "source_id": true,
+          "locator": true,
+          "role": true,
+          "target": true,
+          "excerpt": true,
+          "excerpt_sha256": true,
+          "contiguous_sha256": true,
+          "page_sha256": true
+        },
+        "all_integrity_checks_pass": true
+      }
+    ],
+    "semantic_groups": [
+      {
+        "claims": 10,
+        "group": "Biology activity+driver",
+        "result": "Own H1 Biology mechanism; no future magnitude claimed by the excerpt."
+      },
+      {
+        "claims": 3,
+        "group": "Biology H2 rebase",
+        "result": "Future analyst condition anchored to own FY25 Biology; exact comparable rebase2677.17503051−1251.6049=1425.57013051 correctly disclosed, not future actual."
+      },
+      {
+        "claims": 9,
+        "group": "non-TIDES activity",
+        "result": "Chemistry R/D&M own qualitative mechanism; aggregate53.3% and D&M72.7% are not claimed as measured future rates. C02 scenario explanation still needs correction."
+      },
+      {
+        "claims": 1,
+        "group": "non-TIDES driver",
+        "result": "D&M pipeline/revenue mechanism supports dominant component direction; residual and future magnitude remain conditional."
+      },
+      {
+        "claims": 18,
+        "group": "Chemistry/TIDES price controls",
+        "result": "All correctly retain conversion_assumption; actual excerpt concerns Testing/Biology margins, explicitly indirect cross-business risk, not observed Chemistry price."
+      },
+      {
+        "claims": 6,
+        "group": "TIDES later-year activity",
+        "result": "Own H1 client/molecule counts describe direction only; not a future amount, annual throughput or ASP."
+      },
+      {
+        "claims": 2,
+        "group": "Other/discontinued",
+        "result": "Correct history-only quote/role, but C01 parallel driver narrative still incorrectly claims a current operating mechanism."
+      }
+    ]
+  },
+  "template_recheck": {
+    "count": 22,
+    "all_match": true,
+    "templates": [
+      {
+        "excerpt_id": "biology_h1_own",
+        "pdf_page": 12,
+        "chars": 284,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "biology_fy25_own",
+        "pdf_page": 14,
+        "chars": 290,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "tides_h1_own",
+        "pdf_page": 12,
+        "chars": 50,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "price_other_businesses",
+        "pdf_page": 16,
+        "chars": 171,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "other_h1_table",
+        "pdf_page": 11,
+        "chars": 38,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "discontinued_h1_table",
+        "pdf_page": 11,
+        "chars": 27,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "perimeter_footnote",
+        "pdf_page": 11,
+        "chars": 78,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "rpo_expected",
+        "pdf_page": 184,
+        "chars": 126,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "annual_dm",
+        "pdf_page": 14,
+        "chars": 293,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "annual_tides",
+        "pdf_page": 14,
+        "chars": 214,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "h1_dm",
+        "pdf_page": 11,
+        "chars": 326,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "h1_tides_amount",
+        "pdf_page": 11,
+        "chars": 95,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "chem_h1_exact",
+        "pdf_page": 138,
+        "chars": 86,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "chem_h1_comparable",
+        "pdf_page": 11,
+        "chars": 53,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "fy25_segment_rounded",
+        "pdf_page": 15,
+        "chars": 162,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "biology_h1_comparable",
+        "pdf_page": 11,
+        "chars": 48,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "recognition",
+        "pdf_page": 139,
+        "chars": 313,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "concentration",
+        "pdf_page": 186,
+        "chars": 111,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "fy25_exact_segment",
+        "pdf_page": 183,
+        "chars": 87,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "chemistry_dm_operating",
+        "pdf_page": 11,
+        "chars": 262,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "chemistry_r_operating",
+        "pdf_page": 11,
+        "chars": 329,
+        "all_checks_pass": true
+      },
+      {
+        "excerpt_id": "testing_h1_own",
+        "pdf_page": 12,
+        "chars": 311,
+        "all_checks_pass": true
+      }
+    ],
+    "tail_helper": "Current verify_excerpts self-check is after Testing template insertion; all22 current templates independently reconstruct exactly. This fixes the previous21-only guard without schema/company routing changes."
+  },
+  "numeric_subreview": {
+    "implementation": "Independent Decimal + whitelisted arithmetic AST; no author engine/scripts executed. Read actual main/stress inputs and outputs and existing source-page text.",
+    "main": {
+      "parameters": 228,
+      "formulas": 128
+    },
+    "stress": {
+      "parameters": 253,
+      "formulas": 148
+    },
+    "segment_year_values_checked": 54,
+    "component_bridge_rows_checked": 25,
+    "sensitivity_checks": 7,
+    "maximum_abs_difference_cny_million": "2.46e-11",
+    "units": {
+      "one_yi_cny_in_cny_million": "100",
+      "one_wanyuan_in_cny_million": "0.01",
+      "one_yuan_in_cny_million": "0.000001"
+    },
+    "key_independent_values": {
+      "non_tides_fy25_cny_million": "25095.84688297",
+      "residual_fy25_cny_million": "5175.84688297",
+      "dm_h1_fy25_cny_million": "8679.79154603",
+      "residual_h1_fy25_cny_million": "2590.39382278",
+      "residual_h1_fy26_cny_million": "2735.95323039",
+      "residual_h1_yoy_pct": "5.61919992",
+      "base_dm_h2_yoy_pct": "35.30152373",
+      "base_fy28_dm_vs_fy25_multiple": "2.04983284",
+      "non_tides_share_group_net_increment_pct": "65.81963630",
+      "non_tides_share_positive_driver_increment_pct": "61.57107649"
+    },
+    "pressure": {
+      "queue_cny_million": "9000",
+      "mutually_exclusive_pools": [
+        "3000",
+        "6000"
+      ],
+      "exposure": "0.5",
+      "catchup": "0.8",
+      "year_deltas_cny_million": {
+        "2026": "-4500",
+        "2027": "3600",
+        "2028": "0"
+      },
+      "cumulative_loss_cny_million": "900",
+      "interpretation": "FY2028 same annual path does not recover the900 cancelled cumulative revenue. Shared shock/FX counted once."
+    },
+    "rpo": {
+      "fy25_stock_cny_million": "58004.7875",
+      "expected_fy26_cny_million": "42207.0646",
+      "remaining_cny_million": "15797.7229",
+      "dag_consumers": 0,
+      "conclusion": "Stock is dated reported fact; expected cohort recognition is management guidance; not added to H1 or new orders and not a full-year floor."
+    }
+  },
+  "unknown_boundary_review": {
+    "count": 8,
+    "results": "U01 subgroup split,U02 netprice/mix,U03 utilisation/throughput,U04 cancellations/cohort recognition,U05 customer allocation,U06 empirical calibration,U07 Other/termination mechanism,U08 peer transfer remain real explicit limits with consistent monetary exposure. No need to fabricate future observations to close them.",
+    "all12_calibrations_status": "unverified",
+    "all_observed_ranges": null,
+    "historical_accuracy_records": "empty",
+    "scenario_probabilities": "not an empirically calibrated interval",
+    "remaining_issue": "C01 scope-specific narrative/limitations still require truthful projection; none of these unknowns is solved by a passing calculation."
+  },
+  "method_review": {
+    "three_references": "Generic scope/role, largest-driver component bridge and source-repair rules; no production company-name/industry keyword routing or new schema introduced.",
+    "good_controls": [
+      "preserve18 already-correct roles",
+      "keep historical base versus issuer future expectation separate",
+      "do not infer sales from projects/capacity without a conversion",
+      "no guidance-fitting Base",
+      "source repair parity is limited to subtotal while role/limitations may change",
+      "unknown observed ranges remain null"
+    ],
+    "improvement_needed": "Add a compact final coherence check tying all driver/parameter/calibration/memo projections to current evidence scope and scenario; use counterexamples rather than another approval layer. Constant confidence cannot prove unchanged forecast values."
+  },
+  "root_minimal_integration_plan": [
+    "Preserve author delivery and old FAIL; create a new ROOT integration version.",
+    "Fix the common target/scope/scenario-aware explanatory projection in the authoring owner and actual main/stress inputs; regenerate dependent native outputs/snapshots/captures under a new version with no paid calls.",
+    "TDD neutral history-only driver + genuine mechanism, multi-scenario distinct requirement, and own-scope calibration controls before common fix. Preserve numeric values and negative/zero contributions; explicit subtotal diff must remain zero unless ROOT makes a separately justified research change.",
+    "Correct rounding and memo-only claims directly; no separate manual sign-off or paid run for those edits.",
+    "ROOT runs missing49-test offline evidence once in isolation, then proceeds to W08 adoption and W12 four reviews."
+  ],
+  "bindings": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\main-input.json",
+      "sha256": "cb155a827f6a241ba5d45cf41b6e8e59eef98aa4b122e955106a51ae9770f022",
+      "bytes": 634766
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\stress-input.json",
+      "sha256": "7f0cf9d92d4ac7aa1a3509ac849aa08631021108212d0b1bee6f69fd02838b12",
+      "bytes": 674672
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\main-forecast.json",
+      "sha256": "f8e0d60e7927ce5bab2c294796b4564768ab82728ba0a967964bf3b82ab5519e",
+      "bytes": 1491902
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\stress-forecast.json",
+      "sha256": "f493de09927454363568e65edb3048ad613e13260eb754525687c968879f000a",
+      "bytes": 1582349
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\main-forecast.md",
+      "sha256": "831ba6c276cd63af69f14ff0c7883be44edaba296b00d36913101af520ad60c5",
+      "bytes": 201840
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\forecast\\stress-forecast.md",
+      "sha256": "597ff053fb548f1d7590b29d4609c77f21faa4fd4bb9f9ae6b882ba7fec89692",
+      "bytes": 208041
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\claim-changes.json",
+      "sha256": "d2534f19ddae2240a42e77f9239f2cad6254187859c9ab14ccdbf1bb0adeb0ab",
+      "bytes": 127757
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\excerpts.json",
+      "sha256": "7e6f814dc40536d06845b6a29a778c6f3af63ec14bddaced79df6547fd7369ea",
+      "bytes": 29665
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\component-bridge.json",
+      "sha256": "d3243ed5ab1645e2a835708072ab06770c9db445281cdf8f6ab71e413231b784",
+      "bytes": 16800
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\sensitivity.json",
+      "sha256": "c51832e034dd60959609d2b91d1c0e74e175db3ee7ad677269b799809fd426ae",
+      "bytes": 12190
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\remaining-unknowns.json",
+      "sha256": "430035c4b8e890934e2d63038d510418cc0073fee659408309cbe0b718dd3945",
+      "bytes": 8505
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\research-memo.md",
+      "sha256": "9f7cb39826c252269c143b4f42628d48abcdad39526dfc1655a3f33351f2ea19",
+      "bytes": 10196
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\research\\generalization-probe.json",
+      "sha256": "80ccca81613f65b088c1d0144776452bbc6f6d4e9e66649bc85aea77a27955cf",
+      "bytes": 3185
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\tools\\verify_excerpts.py",
+      "sha256": "37353d8d37b12782dd0562108bada00bd74d6ed7589d19dff131552141a8575c",
+      "bytes": 11298
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\tools\\author_main_input.py",
+      "sha256": "733570b1df8d56d5a38d8e7ec43a7bcb9aaf16bd7ca7d74ce8dad816e0c63c3e",
+      "bytes": 36124
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\delivery\\w09\\review\\review-fixes.md",
+      "sha256": "6a0c4094cc9108fd106711dfb38db1346f8409fdeb65852378a9f343f30c6986",
+      "bytes": 4748
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\buy-side-methodology.md",
+      "sha256": "e74781a92c7edb64f2d15c1e90c411966cd27912af2473b45c8963f1aba6cf5f",
+      "bytes": 15830
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\evidence-role-calibration.md",
+      "sha256": "1b87ef549be31f213fc538534290ed22dac24f4da409fb45bb69d9b8bfe86e81",
+      "bytes": 17292
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r1-research\\references\\input-construction.md",
+      "sha256": "67e0245df2270e1829c1d600d7ae1a0b6ccfd71583ee05e5c2df1a39996dd3aa",
+      "bytes": 18664
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\verified-source-pages.json",
+      "sha256": "66dced5bfbe7c5b6f206e62252a8f9dfca86d03b4e17293cb053b2a076537e7a",
+      "bytes": 30371
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\phase_b\\research\\source-page-addendum-20261023.json",
+      "sha256": "993cc92c0c914430e5f93edfca6b3bbc421624da146490435c4dda3f0e478a98",
+      "bytes": 4340
+    }
+  ],
+  "source_text_proof_boundary": "Verified page-text inventories were read. This review did not independently reopen the underlying PDFs or repeat SourceVersionReader; content/source truth is limited to those existing hashed inventories and actual local artifacts.",
+  "io_receipt": {
+    "author_worktree_writes": 0,
+    "author_scripts_tests_executed": 0,
+    "network_model_downloads": 0,
+    "keys_or_underlying_pdf_originals_read": 0,
+    "git_index_config_writes": 0,
+    "temporary_directories_created": 0,
+    "writes_only": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\content-review.md",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w09-reception-20261023\\content-review.json"
+    ]
+  },
+  "independent_numeric_worker": "/root/w08_untyped_table_diagnosis/w09_numeric_content (read-only, no file writes; SHA matched current artifacts)"
+}

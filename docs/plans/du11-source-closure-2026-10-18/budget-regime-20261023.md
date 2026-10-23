@@ -20,7 +20,7 @@
 
 ## 当前状态
 
-PASS_COMMITTED_PUSHED_INSTALLED：CWP源码ab95027b已正常推送，完整7165P/24既有skip、另146smokeP；Audit源码564f77a及收尾af255d4已提交，两份39/39技能安装已核。Audit无remote，不声称远端发布。精确CWP CI40034980056目前in_progress，状态收据见review/budget-regime-20261023/engineering-closeout.json。累计限额和工量接入单一config/resource_budget.yaml。现母账仍1,561,352tokens/631,959microUSD、新余额8,438,648tokens/19,368,041microUSD，旧7+新4unknown保留。当前有效scope以review/budget-regime-20261023/effective-scope-observation.json所指新文件为准，原scope未改。
+PASS_COMMITTED_PUSHED_INSTALLED：CWP源码ab95027b已正常推送，完整7165P/24既有skip、另146smokeP；Audit源码564f77a及收尾af255d4已提交，两份39/39技能安装已核。Audit无remote，不声称远端发布。精确CWP CI40034980056已completed/success，状态收据见review/budget-regime-20261023/engineering-closeout.json。累计限额和工量接入单一config/resource_budget.yaml。现母账仍1,561,352tokens/631,959microUSD、新余额8,438,648tokens/19,368,041microUSD，旧7+新4unknown保留。当前有效scope以review/budget-regime-20261023/effective-scope-observation.json所指新文件为准，原scope未改。
 
 独审先确认两个真实缺陷：有选中片段时计算耗尽漏报、计算额度变更后未完整读取结果仍可命中cache。ROOT已修为实际document_work诊断，未观察requested记null；资源中断的因果inventory保留partial，实际工作额度进入来源cache身份，费用/公司软目标不进入来源语义。普通tests/unit/du11_production/test_document_work_policy.py固化真实内存PDF反控，不依赖固定耗尽数字。最终独审99P及实际摘要/同run恢复47P，ROOT本机loopback恢复12P、常规2个真实PDF回归P；测试有重叠，不相加冒充单次总量。Audit low另有18项独审，完整662项660P/2skip；未重置账、未重复付费测试。
 
