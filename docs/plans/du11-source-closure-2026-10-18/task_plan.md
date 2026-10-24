@@ -4,9 +4,9 @@
 
 ## Next Step
 
-最新发布依赖：M2 commit65cd8f58的正常push被8315项总时限600s拦截（84%，无已见断言失败，146契约P）。先集中独审并接收已有W13 bounded daily push；ROOT不写作者工区，保留完整验证待办和远端CI。W13已经有实现、缺最终独审，下面READY_NOT_DISPATCHED为较早快照。M3只读调查继续，暂不混入新产品改动。
+最新发布依赖：W13 ROOT修正版已经独立验收PASS，154项定向测试、18项独立探针、5项真实Git ref检查及Ruff通过；独立报告绑定八个文件的完整SHA-256，见review/w13-root-reception-20261024/。当前只剩标准merge commit、正常bounded push和精确远端CI观察。没有重跑全量单测。作者冻结候选FAIL及作者后续未审文件分开保留。随后进入M3真实指标定义/版本/历史指引共因的TDD实现；M3发现和集中验收方法见study/m3-discovery/report.md。
 
-2026-10-24执行补记：M1新源侧检查点独审PASS（51事实、139锚点、102P），不再待作者冻结。当前先收尾M2：跨DOCX/TXT共享native turn、未知身份、经营意向、计划限定进入真实请求和原文卡片、批处理版本能力统一；关键节点独审后正常提交推送。阶段530相关P/11既有skip与374源文件mypy零错只对应当时源码，最终以独审绑定版本和发布收据为准。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持单引擎/单family registry，不另造市场专用全文处理器。
+2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13接收不代表真实产品全量、远端CI或跨仓RF验收；这些分别由根接收记录和精确CI收据绑定。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
 
 五family阅读策略组件已TDD与独立61P验收，75相关P，正常推送c990e389已完成（8216P/24既有skip，另146契约P）；原source/request根修已发布3b4110a3且精确CI40087657562成功。25原件调查/4真实选材与26critical独审后，按[跨市场后续共因](review/market-family-upgrade-20261024/remaining_root_causes.md)先冻结语义正确的源侧金标，修匿名DOCX电话会、指标定义/历史指引、局部上下文与稀疏降噪，合并原annual14六partial责任；不得为旧金标错项或财务全表扩大切片。再正式摘要/cache、实际采用矩阵与W12四审、新公司循环。USIPO补样本地计量错误先精确诊断，不重试同失败/加审批。详细[实施细则](review/market-family-upgrade-20261024/strategy_upgrade_design.md)；唯一状态CURRENT_STATUS。
 

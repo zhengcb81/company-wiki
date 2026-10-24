@@ -155,27 +155,18 @@ def test_hook_and_ci_keep_fast_commit_and_use_correct_entrypoints():
     assert "--fast-contracts-only" in workflow
 
 
-@pytest.mark.parametrize("failed_phase", ["units", "contracts"])
-def test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch, failed_phase):
+def test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch):
     seen = []
     monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
     monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"test"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: (["tests/unit"], "fixture fallback"))
-    def pytest_gate(cmd, label):
-        seen.append(cmd)
-        phase = "units" if "tests/unit" in cmd else "contracts"
-        return 7 if phase == failed_phase else 0
-    monkeypatch.setattr(gate, "_run_pytest_gate", pytest_gate)
+    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: (["tests/unit/test_reader.py"], "affected unit tests"))
+    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 7)
     assert gate.main(["--push-checks"]) == 7
-    assert len(seen) == 2
-    unit_cmd = next(cmd for cmd in seen if "tests/unit" in cmd)
-    smoke_cmd = next(cmd for cmd in seen if "tests/unit" not in cmd)
-    assert unit_cmd[unit_cmd.index("--timeout=180") + 1:] == ["tests/unit"]
-    smoke_cases = smoke_cmd[smoke_cmd.index("--timeout=180") + 1:]
-    expected_smoke = [case for case in gate.FAST_CONTRACT_CASES if not case.startswith("tests/unit/")]
-    assert smoke_cases == expected_smoke
-    assert len(smoke_cases) == len(set(smoke_cases))
-    assert not any(case.startswith("tests/unit/") for case in smoke_cases)
+    assert len(seen) == 1
+    targets = seen[0][seen[0].index("--timeout=180") + 1:]
+    expected_smoke = ["tests/unit/test_reader.py", *gate.FAST_CONTRACT_CASES]
+    assert targets == expected_smoke
+    assert len(targets) == len(set(targets))
 
 
 @pytest.mark.parametrize("entrypoint", ["--push-checks", "--fast-contracts-only"])

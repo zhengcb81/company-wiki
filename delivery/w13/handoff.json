@@ -1,0 +1,105 @@
+{
+  "schema_version": "r1-harness-handoff/1",
+  "package_id": "w13-cwp-gates-2026-10-24",
+  "status": "INCOMPLETE_EXTERNAL_BLOCKER",
+  "blocker_note": "independent review not yet executed: platform 5-hour usage limit reached 2026-10-24 19:04, reset 23:28:49; a scheduled run dispatches the reviewer, fixes findings, re-reviews, and flips this status. Engineering and evidence are complete.",
+  "code_base_commit": "a31300a70215319e6bcf3a03d32b2882bdf1aeaa",
+  "start_head": "8746be6f7dd90d4b6cdd45695d2154d835c78062",
+  "final_head": "cab4ed82d1614b994a83e439e5ee1029c0921f29",
+  "branch": "codex/w13-cwp-gates-20261024",
+  "workdir": "C:/Users/郑曾波/Projects/company-wiki-w13-gates",
+  "changed_paths": [
+    ".githooks/pre-push",
+    ".pre-commit-config.yaml",
+    "docs/plans/w13-cwp-gates-2026-10-24/**",
+    "delivery/w13/**",
+    "tests/unit/test_daily_push_policy.py",
+    "tests/unit/test_ci_push_selection.py",
+    "tests/unit/test_pre_push_parallel_phases.py",
+    "tools/pre_push_gate.py"
+  ],
+  "requirements": [
+    {"id": "G01", "status": "PASS", "evidence": {"path": ".githooks/pre-push", "locator": "python tools/pre_push_gate.py --push-checks; real-ref E2E in tests/unit/test_daily_push_policy.py::test_real_push_*", "sha256_prefix": "3f7f309e8690"}},
+    {"id": "G02", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "_push_targets: full recommendation -> FAST_CONTRACT_CASES + explicit deferral; select_unit_tests untouched", "sha256_prefix": "61b09b3ee83f"}},
+    {"id": "G03", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "FAST_CONTRACT_CASES constant unchanged from base; membership asserted by test_daily_push_policy::test_remote_and_full_mode_sets_are_unchanged_by_the_push_policy", "sha256_prefix": "61b09b3ee83f"}},
+    {"id": "G04", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "main() full-mode gates and --fast-contracts-only/--junitxml unchanged; _run_pytest_gate -n 2 and owned TEMP preserved; full-mode stage order asserted by test_daily_push_policy::test_full_local_mode_runs_every_existing_stage_in_order", "sha256_prefix": "61b09b3ee83f"}},
+    {"id": "G05", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "local_fast_pass / full_validation_pending tokens; distinct full/fast green wording; 'safe to push' absent from product code", "sha256_prefix": "61b09b3ee83f"}},
+    {"id": "G06", "status": "PASS", "evidence": {"path": ".githooks/pre-push + tools/pre_push_gate.py", "locator": "missing runner exit 1 (hook); OSError/timeout/exception -> non-zero (_run/_dispatch_gate); tests test_hook_blocks_and_reports_a_missing_gate_runner, test_runner_start_failure_returns_nonzero", "sha256_prefix": "3f7f309e8690"}},
+    {"id": "G07", "status": "PASS", "evidence": {"path": "tests/unit/test_daily_push_policy.py", "locator": "empty stdin / full-recommendation reasons / closed lists / docs-only matrices; deletion+multi-ref behavior inherited from changed_paths tests", "sha256_prefix": "82d8b57e1949"}},
+    {"id": "G08", "status": "PASS", "evidence": {"path": "tests/unit/test_daily_push_policy.py", "locator": "test_real_push_* : green push accepted, ran-scope true failure blocks push, missing runner blocks push, wide defer + serial full catches hidden failure; legacy full-on-push assertions adjusted per card", "sha256_prefix": "82d8b57e1949"}},
+    {"id": "G09", "status": "PASS", "evidence": {"path": "delivery/w13/scope-report.json", "locator": "docs 44.5s / narrow 66.8s / unknown 46.6s (former ~430s) / wide 628.6s exit 124 at pre-existing 600s cap, unchanged path; no wall-clock approval threshold", "sha256_prefix": null}}
+  ],
+  "artifacts": [
+    "delivery/w13/scope-report.json",
+    "delivery/w13/logs/scope-docs.log",
+    "delivery/w13/logs/scope-narrow.log",
+    "delivery/w13/logs/scope-unknown.log",
+    "delivery/w13/logs/scope-wide.log",
+    "delivery/w13/logs/full-local-mode.log",
+    "delivery/w13/logs/full-mode-remaining-stages.log",
+    "delivery/w13/logs/full-mode-focused-contracts.log"
+  ],
+  "tests": [
+    {"command": "python -m pytest -q -p no:cacheprovider --tb=short tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0, "result": "145 passed in 35.88s", "log_path": "session", "log_sha256": null},
+    {"command": "python -m ruff check tools/pre_push_gate.py tools/changed_unit_tests.py tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0, "result": "All checks passed!", "log_path": "session", "log_sha256": null},
+    {"command": "python tools/pre_push_gate.py  (full local mode, once)", "exit_code": 1, "result": "first red honored at config_doctor (worktree lacks .source_catalog; baseline-identical); remaining stages rerun for evidence: host guard 0, units 8126 passed/24 skip/19 xdist tmp-file flakes (serial 58/58 green), focused contracts 221 passed/3 baseline b10 ratchet failures", "log_path": "delivery/w13/logs/full-local-mode.log", "log_sha256": null},
+    {"command": "git push -u origin codex/w13-cwp-gates-20261024 (real hook, new branch)", "exit_code": 0, "result": "42.2s; unknown range -> FAST_CONTRACT_CASES only; local_fast_pass + full_validation_pending printed", "log_path": "session", "log_sha256": null}
+  ],
+  "independent_review": {
+    "agent_role": "NOT_EXECUTED",
+    "report_md": null,
+    "report_json": null,
+    "reviewed_sha256": {},
+    "issues": [],
+    "all_internal_findings_fixed_and_rechecked": false,
+    "conclusion": "platform usage limit reached before dispatch (reset 2026-10-24 23:28:49); scheduled continuation dispatches the reviewer against code commit 56baea4c, fixes findings, re-reviews, then finalizes this handoff",
+    "reviewed_code_commit": "56baea4c"
+  },
+  "protected_inputs_unchanged": true,
+  "cleanup": {
+    "initial_inventory": "worktree clean at 8746be6f; E2E used pytest tmp_path only; measurement drivers written to system TEMP",
+    "final_inventory": "worktree clean after cab4ed82; delivery/w13 4.5MiB (<16MiB target)",
+    "restored": "no repo files created outside write scope; no downloads; 0 model calls"
+  },
+  "new_model_calls": 0,
+  "new_network_calls": 1,
+  "new_network_calls_note": "git push of the package's own codex branch to origin (authorized by INTERFACES section 4)",
+  "new_downloads": 0,
+  "footprint": {
+    "delivery_bytes": 4718592,
+    "raw_copies": 0,
+    "peak_bytes": null
+  },
+  "external_limits": [
+    "config_doctor requires the .source_catalog runtime data dir absent from fresh worktrees (baseline-identical failure)",
+    "Windows xdist tmp-file flake class: 19 unit failures in this host's full run, all pass serially; executor path untouched by this package",
+    "tests/contract/test_b10_read_chain.py: 3 ratchet failures exist at frozen base a31300a7 (src byte-identical)"
+  ],
+  "interface_requests": [
+    {
+      "id": "IR-1",
+      "trigger_input": "python -m pytest tests/contract/test_b10_read_chain.py -q",
+      "expected": "ratchet tests pass or violations are registered in read_chain baselines",
+      "actual": "test_b10_no_new_column_value_handoff, test_b10_handoff_baseline_has_no_stale_entry, test_b10_no_new_confirmed_direct_reader fail at base a31300a7",
+      "raw_error": "see delivery/w13/logs/full-mode-focused-contracts.log",
+      "reproduction": "any worktree at <= cab4ed82; src/ byte-identical to base (git diff a31300a7..HEAD -- src/ scripts/ config/ is empty)",
+      "suggested_owner": "ROOT / source-code ratchet registration",
+      "affected_requirements": "none in this package (smoke member test_b10_scan_is_not_vacuous passes)",
+      "independent_parts_done": "W13 scheduling layer unaffected and green"
+    }
+  ],
+  "root_next_actions": [
+    "await scheduled independent review; fix findings and flip status to COMPLETE",
+    "monitor remote CI for the pushed branch (tools/ change triggers full CI)",
+    "merge scheduling-layer changes; b10 ratchet and .source_catalog items stay with ROOT"
+  ],
+  "git": {
+    "working_tree_explained": true,
+    "push_status": "pushed origin/codex/w13-cwp-gates-20261024 through the real pre-push hook (42.2s, deferred, green)",
+    "mainline_merged": false,
+    "skills_installed": false
+  },
+  "quality_scope": "Package only: the push-scheduling layer is correct and faster; no source truth, no annual14 completion, no mainline release is implied.",
+  "reviewed_code_commit": "56baea4c",
+  "scope_note": "Engineering package only. Local fast green proves only the ran scope (local_fast_pass); full validation stays with full local mode and CI (full_validation_pending)."
+}

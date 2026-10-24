@@ -1,0 +1,462 @@
+{
+  "scope": "read-only source/selected-output diagnosis; not model/RF acceptance",
+  "observations": {
+    "du5-us-msft-ex991": {
+      "observation_path": "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/m2-final-real-selection/du5-us-msft-ex991.json.gz",
+      "observation_sha256": "2ef2464b2f0e6d3ff2833070087b7a1ed69a9ab50de402282c91d8eec582aafc",
+      "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "selected_rows": 7,
+      "mapped_rows": 7,
+      "context_evidence_present": false,
+      "canonical_spans_present": false,
+      "rows_with_scope_id": 0,
+      "rows_with_line": 0,
+      "reading_groups": 7,
+      "selected_trace_count": 7,
+      "selected_trace_samples": 7,
+      "selected_trace_limited": false,
+      "admission_counts": {
+        "count": 21,
+        "admitted_count": 7,
+        "rejected_count": 14,
+        "limited": true,
+        "rejection_counts": {
+          "no_supported_business_signal": 7,
+          "financial_only": 6,
+          "non_operating_purpose": 1
+        }
+      },
+      "withheld_counts": {
+        "count": 0,
+        "limited": false
+      },
+      "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\MICROSOFT CORP\\raw\\other\\2026-09-02_sec_0001193125-26-380280_MICROSOFT CORP EX-99.1 2026-09-02.htm",
+      "original_unchanged": true,
+      "accepted_gold_sha256": "abc0f51255a55f1da13cf07e8d627e8606468e7cd677d30744679ab191718231"
+    },
+    "du5-hk-kingsoft-interim": {
+      "observation_path": "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/m2-final-real-selection/du5-hk-kingsoft-interim.json.gz",
+      "observation_sha256": "ee4bd5e77c54a1faaf27d749ba7e16faf798f9bf0fcd917d1e5a586d5509d24f",
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "selected_rows": 96,
+      "mapped_rows": 96,
+      "context_evidence_present": false,
+      "canonical_spans_present": false,
+      "rows_with_scope_id": 0,
+      "rows_with_line": 0,
+      "reading_groups": 55,
+      "selected_trace_count": 96,
+      "selected_trace_samples": 16,
+      "selected_trace_limited": true,
+      "admission_counts": {
+        "count": 2090,
+        "admitted_count": 307,
+        "rejected_count": 1783,
+        "limited": true,
+        "rejection_counts": {
+          "non_narrative_unit": 45,
+          "bare_numeric_marker": 1,
+          "no_supported_business_signal": 1719,
+          "non_operating_purpose": 18
+        }
+      },
+      "withheld_counts": {
+        "count": 1,
+        "limited": false
+      },
+      "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\semi_annual\\2025-09-26_hkexnews_11857348_2025 中期報告.pdf",
+      "original_unchanged": true,
+      "accepted_gold_sha256": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604"
+    },
+    "du5-cn-proya-q1": {
+      "observation_path": "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/m2-final-real-selection/du5-cn-proya-q1.json.gz",
+      "observation_sha256": "3f3915110721b6e7792ce24c57631ccd9aae1fefb4c5cecd8089e7006ebd06c3",
+      "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "selected_rows": 30,
+      "mapped_rows": 30,
+      "context_evidence_present": false,
+      "canonical_spans_present": false,
+      "rows_with_scope_id": 0,
+      "rows_with_line": 0,
+      "reading_groups": 17,
+      "selected_trace_count": 30,
+      "selected_trace_samples": 16,
+      "selected_trace_limited": true,
+      "admission_counts": {
+        "count": 362,
+        "admitted_count": 17,
+        "rejected_count": 345,
+        "limited": true,
+        "rejection_counts": {
+          "heading_without_business_fact": 1,
+          "non_operating_purpose": 12,
+          "no_supported_business_signal": 294,
+          "non_narrative_unit": 22,
+          "financial_only": 16
+        }
+      },
+      "withheld_counts": {
+        "count": 0,
+        "limited": false
+      },
+      "preserved_counterexample_to_zero_content": [
+        {
+          "locator": "loc:v1/page:3/paragraph:23",
+          "text": "经营活动产生的现金流\n量净额\n-84.16\n主要系收回货款减少以及支付的\n推广费增加。",
+          "page": 3,
+          "line": null,
+          "line_end": null,
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:2af22a25304ebc91b1c446d9492e3fe6e260d4a4e90140afc4cdb287506ee38a",
+          "source_role": "company_filing",
+          "language": "zh",
+          "scope_id": null,
+          "period": null
+        }
+      ]
+    },
+    "du5-cn-gbits-call": {
+      "observation_path": "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/m2-final-real-selection/du5-cn-gbits-call.json.gz",
+      "observation_sha256": "f6fff7665ca6f63c24b3f4481f4fee594acf9c4057a455ac61cc81c7e3de7f20",
+      "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "selected_rows": 23,
+      "mapped_rows": 23,
+      "context_evidence_present": false,
+      "canonical_spans_present": false,
+      "rows_with_scope_id": 0,
+      "rows_with_line": 0,
+      "reading_groups": 23,
+      "selected_trace_count": 23,
+      "selected_trace_samples": 16,
+      "selected_trace_limited": true,
+      "admission_counts": {
+        "count": 116,
+        "admitted_count": 23,
+        "rejected_count": 93,
+        "limited": true,
+        "rejection_counts": {
+          "no_supported_business_signal": 93
+        }
+      },
+      "withheld_counts": {
+        "count": 0,
+        "limited": false
+      },
+      "preserved_counterexamples_to_zero_content": [
+        {
+          "locator": "loc:v1/paragraph:1",
+          "text": "说话人1 00:00 下滑的算是比较明显。然后考虑到市场竞争的情况，就是5月和6月分别上线了一些比较火的休闲类产品，或者就是一些新品，像寻道包括凡人修仙传这一类的。然后目前市场的竞争环境观察下来是否的这种类型游戏有一定趋缓。然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？想请教一下你，",
+          "page": null,
+          "line": null,
+          "line_end": null,
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:175023b6155870bea1993d26490589f64c4cdf42581789c4b905f456fb731907",
+          "source_role": "unknown",
+          "language": "und",
+          "scope_id": null,
+          "period": null
+        },
+        {
+          "locator": "loc:v1/paragraph:16",
+          "text": "然后在这些调整的话，我们是在7年前推出了一个比较比较完善的一个更新，然后清明争取的假期的时间把拉了一波，然后把好评率刷了一下，然后再往后的话可能也是会有几个重要的节点，跟着steam上面，包括b站的一些集中的这些活动，生存玩家节这种集中的活动，我们也会跟着这些节点再去集中推出一些更新迭代的版本，希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+          "page": null,
+          "line": null,
+          "line_end": null,
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bd02c82d9ac956fd6dd2afdb31f89d1b5a4735b8ab8a56a3352f8b8ea681e1b3",
+          "source_role": "unknown",
+          "language": "und",
+          "scope_id": null,
+          "period": null
+        },
+        {
+          "locator": "loc:v1/paragraph:89",
+          "text": "说话人2 26:44 因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+          "page": null,
+          "line": null,
+          "line_end": null,
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:38df9c9cdee81014cdf3a27f07708d16ae92009f7653c013f74a6bb1d310f396",
+          "source_role": "unknown",
+          "language": "und",
+          "scope_id": null,
+          "period": null
+        }
+      ]
+    }
+  },
+  "msft_html_normalized_unit_findings": [
+    {
+      "paragraph": 6,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e2a43b836aab69413488e70d2ac79de90f91277f891db09914ce1a0be45a2dee",
+      "locator": "loc:v1/paragraph:6",
+      "source_locator": "cwp-html-dom/1|n=0.1.25",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "2f3a018343fba92e5adc9759ec09ca62eb8060591c95bbab0b56fd360cc896fb",
+      "char_count": 2440,
+      "selected": true,
+      "pure_current_port": {
+        "eligible": true,
+        "purpose": "unknown",
+        "reasons": [
+          "business_scope_change",
+          "reporting_definition_change",
+          "reporting_rename",
+          "scope_unchanged"
+        ],
+        "financial_only": false
+      },
+      "excerpt": "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and"
+    },
+    {
+      "paragraph": 10,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bb2d8898b08b507b758eda25491c1a3bec13641a5b0fd135050251bc2f17572e",
+      "locator": "loc:v1/paragraph:10",
+      "source_locator": "cwp-html-dom/1|n=0.1.41",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "a1fceec1f219fc34a3c921340f2a22425dfd4ba44f467702c45c72c89c60ac4e",
+      "char_count": 1374,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "As a result of the product and service reporting updates, the following metrics have been updated: Azure revenue growth metric definition has been updated to reflect the move of GitHub cloud and other developer cloud services revenue, and t"
+    },
+    {
+      "paragraph": 11,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:334f40e6f5697a4890dea3109cab0084a1542630dd8b04335c07123938a445a2",
+      "locator": "loc:v1/paragraph:11",
+      "source_locator": "cwp-html-dom/1|n=0.1.45",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "8b62fe91e3c254a5d4a9a4fb5ea1507a9053753f5ff9f00c3504689d36d41861",
+      "char_count": 1158,
+      "selected": true,
+      "pure_current_port": {
+        "eligible": true,
+        "purpose": "operating_metric",
+        "reasons": [
+          "operating_metric_change"
+        ],
+        "financial_only": false
+      },
+      "excerpt": "Investor Metrics FY26 Investor Metrics Commercial; Intelligent Cloud; Productivity & Business Processes Commercial bookings growth Commercial remaining performance obligation Microsoft Cloud revenue and revenue growth Microsoft Cloud gross "
+    },
+    {
+      "paragraph": 12,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2ce631f32797b4de6cbc438a38f9ee7fc9d3d457cc93549c16339268a5492f9e",
+      "locator": "loc:v1/paragraph:12",
+      "source_locator": "cwp-html-dom/1|n=0.1.49",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "86d63b3abf0e2a9b24d772b271591a9df5222a5cfee614601506f549fa58aee4",
+      "char_count": 2586,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "accounting_policy",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "Commercial bookings growth: for commercial products and cloud services, sum of revenue growth, plus change in balance of unearned revenue plus the change in contracted not billed balance Commercial remaining performance obligation: commerci"
+    },
+    {
+      "paragraph": 14,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:167196a7c24cdd06311b09ed12503c2a86c855fc7083e4bbb628c6bf78f66bf4",
+      "locator": "loc:v1/paragraph:14",
+      "source_locator": "cwp-html-dom/1|n=0.1.57",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "5d8ff19a5e21631efe915e8a0d91423248a713c671264e5edefb47a0edc72a2f",
+      "char_count": 1366,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "($ in millions) 2026 2025 Agents and Infra Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2 Q3 Q4 Fiscal Year Revenue $61,672 $64,441 $67,438 $74,576 $268,127 $50,476 $52,766 $54,763 $60,778 $218,783 Cost of revenue $17,701 $19,307 $20,949 $23,460 $81,417 $13"
+    },
+    {
+      "paragraph": 15,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1dbcbaae14ccd9e4eaec7f20faa5e5492fea0964b5cacab1fa46bae216173d31",
+      "locator": "loc:v1/paragraph:15",
+      "source_locator": "cwp-html-dom/1|n=0.1.61",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "57b235b884143cf0e49041e013390369ddb4d027a6c916b1835dbbd692690c48",
+      "char_count": 1808,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "($ in millions) 2026 2025 Productivity and Business Processes Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2 Q3 Q4 Fiscal Year Revenue $33,020 $34,116 $35,013 $37,847 $139,996 $28,317 $29,437 $29,944 $33,112 $120,810 Cost of revenue $5,721 $6,110 $6,197 $6,"
+    },
+    {
+      "paragraph": 16,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e08ece04844d85d95d007004c75db7c3afa13ff4dd8ce4419a2736fae5996e5e",
+      "locator": "loc:v1/paragraph:16",
+      "source_locator": "cwp-html-dom/1|n=0.1.65",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "dca917850dd95efd3060277bde0353377b220c694e241205863879d6fa6a7656",
+      "char_count": 2227,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "Products and Service Offerings Revenue As Reported 2026 2025 ($ in millions) Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2 Q3 Q4 Fiscal Year Server products and cloud services $28,872 $30,865 $32,592 $37,096 $129,425 $22,155 $23,641 $24,761 $27,878 $98,435"
+    },
+    {
+      "paragraph": 17,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1864c6a9f8e1af1f8dfbf69f2f0954a14a53dfb29b1d0f5690779418368a4b11",
+      "locator": "loc:v1/paragraph:17",
+      "source_locator": "cwp-html-dom/1|n=0.1.69",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "7efd9db2bc49f058b7e8b3b1f79fdb4eee66e491c99ac56bd82b5ea27f17aa38",
+      "char_count": 1537,
+      "selected": true,
+      "pure_current_port": {
+        "eligible": true,
+        "purpose": "operating_metric",
+        "reasons": [
+          "reporting_definition_change",
+          "operating_metric_change"
+        ],
+        "financial_only": false
+      },
+      "excerpt": "FY27 Investor Metrics As Reported 2026 Q1 Q2 Q3 Q4 Fiscal Year Azure and other cloud services revenue growth (y/y) 40% / 39% 39% / 38% 40% / 39% 43% 41% / 40% Microsoft 365 commercial cloud revenue growth (y/y) 17% / 15% 17% / 14% 19% / 15%"
+    },
+    {
+      "paragraph": 19,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2a290a1c5105f4a5a919a2d1f3876f1defeab666241b2a144a714ede358e3946",
+      "locator": "loc:v1/paragraph:19",
+      "source_locator": "cwp-html-dom/1|n=0.1.77",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "d095c6ea41bd4f1029565644d0fe90273313020083439768fdf0b5cef2245132",
+      "char_count": 1847,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "FY27 Q1 Outlook We will report our FY27 Q1 results in the structure discussed on the prior slides. Therefore, we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presen"
+    },
+    {
+      "paragraph": 20,
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:77a3f0f0f29c56b9da5b031ca104f3622c056c7ff4c0b61e1d115030c5e3ae45",
+      "locator": "loc:v1/paragraph:20",
+      "source_locator": "cwp-html-dom/1|n=0.1.81",
+      "unit_kind": "html_paragraph",
+      "raw_text_sha256": "ef6b5f752ecb6adb97da79419145d9458744f4468a288fa4f31ed1d3e1d24129",
+      "char_count": 2208,
+      "selected": false,
+      "pure_current_port": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      },
+      "excerpt": "FY27 Q1 Outlook Detail As provided July 29, 2026 Commercial Business Commercial bookings Healthy growth on a growing expiry base when adjusted for OpenAI contracts in the prior year Microsoft Cloud gross margin percentage Relatively stable "
+    }
+  ],
+  "owner_bindings": {
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": {
+      "sha256": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf"
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "a0075b5c0793209238eb7dae40c566d0d278d38a65554726769489f6975013d7",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "a0075b5c0793209238eb7dae40c566d0d278d38a65554726769489f6975013d7"
+    },
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": {
+      "sha256": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28"
+    },
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": {
+      "sha256": "7e2d233ef914057f8f91c7292e94e7d0ce6192e0f48689feac9de1ec9eff78b7",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "7e2d233ef914057f8f91c7292e94e7d0ce6192e0f48689feac9de1ec9eff78b7"
+    },
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": {
+      "sha256": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22"
+    },
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": {
+      "sha256": "f895322ef6b6b5f189b35fdb4bd4b8b4f2482cc78564b141ea6c743826cb7e44",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "f895322ef6b6b5f189b35fdb4bd4b8b4f2482cc78564b141ea6c743826cb7e44"
+    },
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": {
+      "sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460"
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "41b3e004611dc127ffdb8011c6f7df8b9a702a00835efe5f9f103164bef135a9",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "41b3e004611dc127ffdb8011c6f7df8b9a702a00835efe5f9f103164bef135a9"
+    },
+    "src/company_wiki/source_catalog/narrative_antecedent.py": {
+      "sha256": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237"
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "8c7bd79687df95233b91d378d42476f17ae5b90db801203b18711caae8165fb0",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "8c7bd79687df95233b91d378d42476f17ae5b90db801203b18711caae8165fb0"
+    },
+    "src/company_wiki/source_catalog/narrative_budget.py": {
+      "sha256": "508688f14b98c862926adb8a6b22435f6f1bb087925b04f81f41892266987586",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "508688f14b98c862926adb8a6b22435f6f1bb087925b04f81f41892266987586"
+    },
+    "src/company_wiki/document_understanding/selection_bridge.py": {
+      "sha256": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8"
+    },
+    "src/company_wiki/document_understanding/summary_tasks.py": {
+      "sha256": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2"
+    },
+    "src/company_wiki/document_understanding/source_cards.py": {
+      "sha256": "17a831002d74e69b906dea029b5f19f51ffd9d61cea98a63a8c8cc6ee5725eb5",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "17a831002d74e69b906dea029b5f19f51ffd9d61cea98a63a8c8cc6ee5725eb5"
+    },
+    "src/company_wiki/document_normalization/html_parser.py": {
+      "sha256": "e0dce2f1b8b933ecdf14de3983a2a505ae47ef6c5ea827e40f247c91257350d8",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "e0dce2f1b8b933ecdf14de3983a2a505ae47ef6c5ea827e40f247c91257350d8"
+    },
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": {
+      "sha256": "6e42c29ae05a8bd904598aba9d5944ec2f90ea01585ede8b21839081cf19ee40",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "6e42c29ae05a8bd904598aba9d5944ec2f90ea01585ede8b21839081cf19ee40"
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "same_as_observation_producer": true,
+      "observation_producer_sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26"
+    }
+  },
+  "observation_producer_tree_sha256": "53f891204a9cbf573fe6babb22d699a46ceba7c56a05bc0a1d2b72ff4d36f593",
+  "m2_replay_binding_sha256": "3d70d455395d0a4fa4192b5b50798424de856c267722c21b7053d0729d15b052",
+  "development_evaluation_sha256": "12f8c8c12c4e641385b84c5e99458f03cd5e439724bd2f90b8323fca09fb307b",
+  "source_bindings_sha256": "afb250b2aacb9648375d33c6e20526159bd21394c5daf5fc61c12878f0b69cbd",
+  "downloads": 0,
+  "external_model_calls": 0,
+  "selector_replays": 0,
+  "original_copies": 0,
+  "note": "Pure current-port observations are not attributed to unavailable per-unit trace samples. No alternative score/oracle produced."
+}

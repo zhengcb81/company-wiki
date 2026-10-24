@@ -1,0 +1,17 @@
+{
+  "root_head": "885e140d2d69baad61ef791497e85e4f30fff366",
+  "pending_merge": true,
+  "author_code_commit": "56baea4cdd8c89b5cf778d0bda948c31ec5af162",
+  "copied_from": "ROOT master working tree frozen by parent",
+  "source_file_sha256": {
+    ".githooks/pre-push": "ce4822bb5a082f9d940a0181498215ffb5584f49aee351a38a5651885b03687d",
+    ".pre-commit-config.yaml": "b126f9d2bacd3c2d127603e681048021e23fdf7e32d7cf560265ead30e7046c8",
+    "tools/pre_push_gate.py": "a307933c216105d4a180a307c1ea4e29910432175211109afb78fbe2c6175b73",
+    "tools/changed_unit_tests.py": "0b9305ce0a7413276946ca3089e65c00fe9b17e1a6f759fb8b05775ee877105a",
+    "tests/unit/test_ci_push_selection.py": "bb4b45634569ea4bc177a38716d6d7a1e08206be24e03d1f33d54019f8260e6e",
+    "tests/unit/test_daily_push_policy.py": "7b37ad1500fdfca9a8d34fade6898624ae64757291d6e2509048e69bd34c7e53",
+    "tests/unit/test_pre_push_parallel_phases.py": "452ac09a43b86acc903ee552c3a7c2b64c40968ea9c2497bf7828f4730fd73ed",
+    "tests/unit/test_daily_push_bounds.py": "c7c5486aeb27a05c768cba811e28606f2fa31f93242c63d2fc3ff4fb10885f50"
+  },
+  "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv"
+}

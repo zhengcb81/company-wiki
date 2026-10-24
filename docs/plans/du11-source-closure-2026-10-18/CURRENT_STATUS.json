@@ -152,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "M2已独审且commit65cd8f58，正常push600s总时限失败、未发布；先完成已有W13独审与安全并线，再正常推送。M3只读调查并行，M3/M4/M5及正式摘要/cache/RF循环仍OPEN。",
+  "next_step_now": "W13 ROOT修正版独立验收PASS，当前 pending merge；按常规merge commit和有界pre-push正常发布，并观察精确HEAD的CI。然后基于M3真实样本6 RED/4 PASS调查实施指标定义、定义版本、机械重列和H1限定的共享source-meaning/局部依赖根修；用定向测试、同源回放和跨市场真实样本集中验收，不重跑超时全量。M4稀疏降噪、M5本地准备诊断、正式摘要/cache、RF采用与四审仍OPEN。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -642,7 +642,7 @@
     "按remaining_root_causes.md先冻结语义正确的跨市场检查点，修匿名电话会/指标定义/局部依赖与降噪；USIPO本地准备计量精确诊断",
     "正式摘要/cache与RF实际采用矩阵、四审、新公司循环"
   ],
-  "last_updated_utc": "2026-10-24T11:13:48.894097+00:00",
+  "last_updated_utc": "2026-10-24T13:28:42Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -785,7 +785,7 @@
     "raw_copies": 0,
     "existing_family_policies": 24,
     "existing_facets": 14,
-    "remaining": "M1源侧development检查点已独审PASS；M2最终独审/批处理生命周期与发布收尾；M3定义/旧新基数/局部依赖；M4稀疏降噪；M5本地准备超限诊断；再真实摘要/cache/RF四审及未用于调规则的新公司。",
+    "remaining": "W13 ROOT修正版已独立验收PASS，pending merge commit/push与精确CI；M3定义/版本/旧新基数/局部依赖TDD；M4稀疏降噪；M5本地准备超限诊断；其后正式摘要/cache/RF四审及未用于调规则的新公司。",
     "samples_sha_verified": 25,
     "source_sample_count_note": "13 initial + 9 DU5 + 3 supplemental; bounded targeted reading, not full 25-document acceptance",
     "independent_review": "review/market-family-upgrade-20261024/independent-final/report.json",
@@ -835,7 +835,7 @@
     },
     "current_work": {
       "M1": "PASS_SOURCE_DEVELOPMENT_GOLD_ONLY",
-      "M2": "REVIEW_PASS_COMMITTED_LOCAL_PUSH_TIMEOUT_NOT_PUBLISHED",
+      "M2": "INDEPENDENT_REVIEW_PASS_COMMITTED_LOCAL_PUSH_PENDING",
       "implementation": "review/market-family-upgrade-20261024/M2_IMPLEMENTATION.md",
       "formal_summary_pass": false,
       "M1_review": "review/market-family-upgrade-20261024/m1-independent/report.json",
@@ -865,8 +865,16 @@
       "M2_receipt": "review/market-family-upgrade-20261024/m2-root-receipt.json",
       "M2_local_source_commit": "65cd8f58",
       "M2_first_push": "review/market-family-upgrade-20261024/m2-first-push-timeout.json",
-      "W13": "IMPLEMENTATION_OBSERVED_AUTHOR_INDEPENDENT_REVIEW_PENDING_ROOT_REVIEW_STARTED",
-      "M3": "READ_ONLY_ROOT_CAUSE_DISCOVERY_IN_PROGRESS"
+      "W13": "ROOT_FIXES_INDEPENDENT_PASS_PENDING_MERGE_COMMIT_PUSH",
+      "M3": "READ_ONLY_DISCOVERY_COMPLETE_6_RED_4_PASS_TDD_NEXT",
+      "W13_review": "review/w13-root-reception-20261024/independent/report.json",
+      "W13_acceptance": "review/w13-root-reception-20261024/root-acceptance.json",
+      "W13_focused_tests_passed": 154,
+      "W13_independent_probes_passed": 18,
+      "W13_real_git_checks_passed": 5,
+      "W13_full_unit_suite_rerun": false,
+      "W13_author_candidate": "FAIL",
+      "M3_report": "review/market-family-upgrade-20261024/study/m3-discovery/report.json"
     }
   }
 }

@@ -1,0 +1,58 @@
+
+=== focused contracts, recent CI regressions, and gate regression tests ===
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-w13-gates\\cwpp-wj9xckoy", "requested_basetemp_len": 58, "cwd_len": 44, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki-w13-gates
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 224 items
+
+tests\unit\test_narrative_evidence.py .................................. [ 15%]
+...............................                                          [ 29%]
+tests\unit\test_narrative_transport_contracts.py ....................... [ 39%]
+......                                                                   [ 41%]
+tests\contract\test_legacy_observation.py ...................            [ 50%]
+tests\contract\test_zr506_section_chunk_fact.py ..............           [ 56%]
+tests\unit\test_narrative_retrieval.py ............                      [ 62%]
+tests\contract\test_fc905_receipt_envelope.py ..........                 [ 66%]
+tests\contract\test_b10_read_chain.py .FF.....F.......                   [ 73%]
+tests\unit\test_writer_freeze.py ..........                              [ 78%]
+tests\contract\test_fc1307_host_assumption_gate.py ..................... [ 87%]
+......................                                                   [ 97%]
+tests\unit\test_automation_migrations.py .                               [ 97%]
+tests\contract\test_zr203_reader_rewire.py .                             [ 98%]
+tests\contract\test_zr1003_shadow_assertions.py .                        [ 98%]
+tests\contract\test_zr1006_broker_cohort.py .                            [ 99%]
+tests\contract\test_source_catalog_temp_worker_governance.py ..          [100%]
+
+================================== FAILURES ===================================
+____________________ test_b10_no_new_column_value_handoff _____________________
+tests\contract\test_b10_read_chain.py:182: in test_b10_no_new_column_value_handoff
+    assert not new, (
+E   AssertionError: new places hand the shared column's value into a call: assertion_service.py::restore_document_facts, narrative_artifact_store.py::NarrativeArtifactReader.visible_subject_metadata, narrative_artifact_store.py::_require_subject_match, official_source_flow.py::_import_retained, official_source_flow.py::_replay_completed, source_reader.py::SourceVersionReader._describe_version, source_reader.py::SourceVersionReader.metadata_diagnostics - if that call parses the column, converge it onto store.metadata_object; if it does not, register it in read_chain.COLUMN_VALUE_HANDOFFS with the reason (the ratchet may only shrink)
+E   assert not ['assertion_service.py::restore_document_facts', 'narrative_artifact_store.py::NarrativeArtifactReader.visible_subject...etained', 'official_source_flow.py::_replay_completed', 'source_reader.py::SourceVersionReader._describe_version', ...]
+________________ test_b10_handoff_baseline_has_no_stale_entry _________________
+tests\contract\test_b10_read_chain.py:200: in test_b10_handoff_baseline_has_no_stale_entry
+    assert not stale, (
+E   AssertionError: the handoff baseline still lists sites that no longer pass the column: canonical_writer.py::CanonicalSourceWriter._verify_unknown_date_index, source_reader.py::SourceVersionReader._verified_version, source_reader.py::SourceVersionReader.describe_version - remove them so the ratchet keeps meaning something
+E   assert not ['canonical_writer.py::CanonicalSourceWriter._verify_unknown_date_index', 'source_reader.py::SourceVersionReader._verified_version', 'source_reader.py::SourceVersionReader.describe_version']
+___________________ test_b10_no_new_confirmed_direct_reader ___________________
+tests\contract\test_b10_read_chain.py:343: in test_b10_no_new_confirmed_direct_reader
+    assert not new, (
+E   AssertionError: new direct readers of the shared column: narrative_artifact_store.py::NarrativeArtifactReader.visible_subject_metadata - converge them onto store.metadata_object, or register and justify them in read_chain.CONFIRMED_DIRECT_READERS (the ratchet may only shrink)
+E   assert not ['narrative_artifact_store.py::NarrativeArtifactReader.visible_subject_metadata']
+=========================== short test summary info ===========================
+FAILED tests/contract/test_b10_read_chain.py::test_b10_no_new_column_value_handoff
+FAILED tests/contract/test_b10_read_chain.py::test_b10_handoff_baseline_has_no_stale_entry
+FAILED tests/contract/test_b10_read_chain.py::test_b10_no_new_confirmed_direct_reader
+================== 3 failed, 221 passed in 106.59s (0:01:46) ==================
+
+
+FAILED: focused contracts, recent CI regressions, and gate regression tests
+W13_STAGE focused exit=1 seconds=116.7

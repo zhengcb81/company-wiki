@@ -1,0 +1,48 @@
+{
+  "scope": "neutral OS atomic-temp boundary probe; no business code modified",
+  "rows": [
+    {
+      "planned_file_path_chars": 259,
+      "parent_chars": 176,
+      "status": "OPEN_OK",
+      "actual_file_path_chars": 259
+    },
+    {
+      "planned_file_path_chars": 260,
+      "parent_chars": 177,
+      "status": "OPEN_FAILED",
+      "error_type": "FileNotFoundError",
+      "errno": 2,
+      "winerror": null,
+      "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.length\\\\ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\\\\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json.cs5fyovg.tmp'"
+    },
+    {
+      "planned_file_path_chars": 261,
+      "parent_chars": 178,
+      "status": "OPEN_FAILED",
+      "error_type": "FileNotFoundError",
+      "errno": 2,
+      "winerror": null,
+      "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.length\\\\dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\\\\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json.9bnwxuib.tmp'"
+    },
+    {
+      "planned_file_path_chars": 263,
+      "parent_chars": 180,
+      "status": "OPEN_FAILED",
+      "error_type": "FileNotFoundError",
+      "errno": 2,
+      "winerror": null,
+      "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.length\\\\dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\\\\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json.iddnt8z_.tmp'"
+    },
+    {
+      "planned_file_path_chars": 264,
+      "parent_chars": 181,
+      "status": "OPEN_FAILED",
+      "error_type": "FileNotFoundError",
+      "errno": 2,
+      "winerror": null,
+      "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.length\\\\ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\\\\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json.mf500ldf.tmp'"
+    }
+  ],
+  "scratch_restored_absent": true
+}

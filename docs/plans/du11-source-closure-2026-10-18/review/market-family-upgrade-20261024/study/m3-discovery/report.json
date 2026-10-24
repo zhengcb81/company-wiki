@@ -1,0 +1,293 @@
+{
+  "schema_version": "m3-discovery-handoff/1",
+  "status": "design_diagnosis_complete_implementation_not_started",
+  "scope": "source-only read-only M3 discovery on already-used development samples, not acceptance",
+  "report_sha256": "25f8f820ac19a88a0a01f3f0792638ffeb35698fb32079476ce5a608c46401ab",
+  "observations_sha256": "a15c06c073a6877ee00e8b80a3cdf841a0dbe2bfb7ab0c6050044defa8a5fbb2",
+  "root_causes": [
+    {
+      "id": "M3-R1",
+      "confirmed": "finite clause admission discards >1200 character clauses; HTML source uses long native p/font text, not real table rows",
+      "owners": [
+        "narrative_business_policy._reading_clauses",
+        "n6_candidate_completion.BUSINESS_CHARACTER_WINDOW",
+        "document_normalization.html_parser"
+      ],
+      "minimal_action": "observe bounded source-authored definition/reporting/outlook assertions in existing prepared original view; preserve canonical raw/locator; do not raise bound or create fake rows"
+    },
+    {
+      "id": "M3-R2",
+      "confirmed": "business metric composition is masked by allocated-financial accounting purpose, while metric-change/unchanged-outlook have no useful independent source meaning",
+      "owners": [
+        "narrative_source_purpose._clause_purpose",
+        "narrative_business_policy._purpose_fact",
+        "narrative_business_disclosures.disclosure_relations"
+      ],
+      "minimal_action": "one pure source-disclosure semantic owner used by purpose and material projection; definition != achieved metric; no duplicate recognizers"
+    },
+    {
+      "id": "M3-R3",
+      "confirmed": "existing product reference and explicit revenue premise ports do not provide typed metric definition-version and old-adjusted basis closure",
+      "owners": [
+        "SourceOperatingSession.local_qualification_dependencies",
+        "OperatingRelationSession.reference_closure",
+        "narrative_revenue_guidance.revenue_guidance_premise",
+        "narrative_predicate_state.observe_metric_predicate"
+      ],
+      "minimal_action": "extend source-owned explicit local relationship observations and existing dependency graph, keep same-source/same-period/unique-basis constraints; no second router or store"
+    },
+    {
+      "id": "MEASUREMENT-R1",
+      "confirmed": "observer omits canonical span/group/turn context; all scope_id None; no context_evidence; selected-trace is bounded; single-row exact-anchor matcher cannot prove joint original fragments",
+      "owners": [
+        "tools.document_understanding_benchmark.observer._source_evidence",
+        "tools.document_understanding_benchmark.checkers._support_set_status"
+      ],
+      "minimal_action": "next real replay preserves canonical spans and actual task bindings; existing evaluator consumes only genuinely observed source scopes/context, no flattened global proof or retrospective fabricated scopes"
+    }
+  ],
+  "real_target_findings": [
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "original_locator": "cwp-html-dom/1|n=0.1.41",
+      "paragraph": 10,
+      "gold_target_ids": [
+        "seat-growth-includes-github",
+        "azure-fy27q1-growth-outlook"
+      ],
+      "selected": false,
+      "observation": "actual selected-output absence; current pure source port is ineligible/financial, not proof of every omitted sampled trace reason",
+      "source_fact_risk": "definition changes are not organic metric changes; paid GitHub scope matters",
+      "owner_evidence": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      }
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "original_locator": "cwp-html-dom/1|n=0.1.49",
+      "paragraph": 12,
+      "gold_target_ids": [
+        "commercial-bookings-definition",
+        "commercial-rpo-definition",
+        "seat-growth-includes-github"
+      ],
+      "selected": false,
+      "observation": "actual selected-output absence; current pure source port is ineligible/financial, not proof of every omitted sampled trace reason",
+      "source_fact_risk": "bookings composite formula; RPO future invoice/recognition; paid end-period seat scope",
+      "owner_evidence": {
+        "eligible": false,
+        "purpose": "accounting_policy",
+        "reasons": [],
+        "financial_only": true
+      }
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "original_locator": "cwp-html-dom/1|n=0.1.77",
+      "paragraph": 19,
+      "gold_target_ids": [
+        "fy27q1-outlook-mechanical-only",
+        "total-company-fy27q1-revenue-outlook"
+      ],
+      "selected": false,
+      "observation": "actual selected-output absence; current pure source port is ineligible/financial, not proof of every omitted sampled trace reason",
+      "source_fact_risk": "July29 old total range plus adjusted total no-change; mechanical reclassification is not economic upgrade",
+      "owner_evidence": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      }
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "original_locator": "cwp-html-dom/1|n=0.1.81",
+      "paragraph": 20,
+      "gold_target_ids": [
+        "azure-fy27q1-growth-outlook"
+      ],
+      "selected": false,
+      "observation": "actual selected-output absence; current pure source port is ineligible/financial, not proof of every omitted sampled trace reason",
+      "source_fact_risk": "old metric vs new metric; constant currency, FX less-than-one-point direction, target fiscal quarter",
+      "owner_evidence": {
+        "eligible": false,
+        "purpose": "unknown",
+        "reasons": [],
+        "financial_only": true
+      }
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 13,
+      "gold_target_ids": [
+        "cloud-revenue-operating-drivers"
+      ],
+      "selected_fragment_locators": [
+        "loc:v1/page:13/paragraph:4"
+      ],
+      "observation": "selected prefix ends before CDN object/offsetting clause",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 13,
+      "gold_target_ids": [
+        "cloud-service-growth-causal-split"
+      ],
+      "selected_fragment_locators": [
+        "loc:v1/page:13/paragraph:9"
+      ],
+      "observation": "industry-cloud amount prefix only; its IT-demand/solution-replication explanation missing",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 13,
+      "gold_target_ids": [
+        "gross-margin-decline"
+      ],
+      "selected_fragment_locators": [
+        "loc:v1/page:13/paragraph:34"
+      ],
+      "observation": "cause tail exists; preceding gross-margin subject/direction/rate absent",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 11,
+      "gold_target_ids": [
+        "h2-2025-business-outlook"
+      ],
+      "selected_fragment_locators": [],
+      "observation": "full second-half outlook not selected; needs reporting-period parent",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 15,
+      "gold_target_ids": [
+        "no-material-investments-or-capex-plans"
+      ],
+      "selected_fragment_locators": [],
+      "observation": "material-investment threshold/current and future negatives not retained together",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 50,
+      "gold_target_ids": [
+        "single-operating-segment"
+      ],
+      "selected_fragment_locators": [],
+      "observation": "single operating segment and no geographic segment absent; service revenue categories must not substitute",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "original_physical_page": 66,
+      "gold_target_ids": [
+        "idc-purchase-commitment-stage"
+      ],
+      "selected_fragment_locators": [],
+      "observation": "contract-signing date, one-year noncancellable minimum purchase, as-of remaining balance and section units not selected",
+      "complete_task_local_support": "not provable from current frozen observer; actual global missing text is reported separately",
+      "exact_per_unit_withheld_or_admission_reason": "not proved; trace is bounded"
+    }
+  ],
+  "preserved_positive_controls": [
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "paragraphs": [
+        3,
+        6
+      ],
+      "facts": "FY27 two-segment transition and full named Azure excluded-business moves already selected"
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "paragraph": 17,
+      "facts": "AsReported/AsRestated and GAAP%/CC% retained; do not mark all restatement material missing"
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "locator": "loc:v1/page:3/paragraph:23",
+      "facts": "-84.16, reduced cash collections and increased promotion expense retained; exact header/period proof separate"
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "locators": [
+        "loc:v1/paragraph:1",
+        "loc:v1/paragraph:13",
+        "loc:v1/paragraph:16"
+      ],
+      "facts": "question and full uncommitted update/qualification words present; require_same_scope is unobserved, not source absence"
+    }
+  ],
+  "measurements": {
+    "no_new_recall_rate": true,
+    "evaluator_changed": false,
+    "gold_changed": false,
+    "source_vs_task_scope_distinguished": true,
+    "frozen_artifact_cannot_prove_full_model_task_closure": true,
+    "no_summary_or_rf_acceptance": true
+  },
+  "neutral_red": {
+    "path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\study\\m3-discovery\\test_neutral_red.py",
+    "sha256": "1ddf402d0cd42f10d116efca1d13be72aea8063b5ee52e02c8cbe66ab4b323cc",
+    "receipt_sha256": "910843aa91fac6ace23370b2c04c626aff96a568bac9d0c54bdff1a72d39bdbf",
+    "tests": 10,
+    "failures": 6,
+    "passes": 4,
+    "scope": "existing pure meaning ports only; not a new oracle or pipeline acceptance"
+  },
+  "implementation_interfaces": {
+    "existing": [
+      "source_purpose(text) -> purpose",
+      "disclosure_relations(clause) -> source reasons",
+      "assess_reading_business_fact(text, source_relations) -> OperatingFact/financial_only",
+      "SourceOperatingSession caches and local_qualification_dependencies(edges, origins, section_ids)",
+      "required_context_unit_ids/citation_support_views -> build_context_graph/dependency_closure",
+      "build_summary_task_plan(canonical spans, reading_context) -> source_cards/compile_scoped_model_view"
+    ],
+    "proposed_transient_observation_fields": [
+      "source unit/range refs",
+      "definition/reporting-basis/change/no-change semantic kind",
+      "observed label and explicit old/new version/period refs",
+      "support refs vs qualification/context refs",
+      "complete/ambiguous/partial diagnostics"
+    ],
+    "persistent_new_taskstore": false,
+    "company_name_rules": false,
+    "new_router": false,
+    "new_authorization": false,
+    "budget_raise": false
+  },
+  "concentrated_acceptance": [
+    "one final frozen source/strategy/observer/compiler+M1 gold SHA snapshot",
+    "group related unit/integration boundaries once, then one same-source MSFT/HK/annual14 production replay under existing budget",
+    "preserve full canonical spans, groups and actual model task support/context IDs with receipts",
+    "independent source->span->task review of target semantics including negatives, parents, dates, units and old/new versions",
+    "fix all material findings and reverify integrated node; do not turn development cases into fresh holdout",
+    "then existing production summary/recovery/cache/RF node and separately unseen company/layout holdout"
+  ],
+  "limitations": [
+    "HK targeted text reading only; no new table visual/OCR proof",
+    "MSFT flattened 1pt native text does not prove table columns",
+    "full canonical model task mapping cannot be reconstructed from frozen diagnostic gz alone",
+    "exact per-target HK rejection cause cannot be assigned from limited trace; global span cap and some pure-port rejection confirmed"
+  ],
+  "no_product_or_shared_plan_writes": true,
+  "no_commit": true,
+  "new_external_model_calls": 0,
+  "new_downloads": 0,
+  "original_copies": 0
+}

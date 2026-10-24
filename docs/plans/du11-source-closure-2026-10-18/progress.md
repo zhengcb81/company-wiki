@@ -837,3 +837,9 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 未盲重跑同次全量。只读查W13工区HEAD=a8045416，已实现但handoff=INCOMPLETE_EXTERNAL_BLOCKER（作者未做最终独审），故母表READY_NOT_DISPATCHED已过期。ROOT另派未参与实现者从冻结Git对象隔离审查，不改作者工区/索引，不自动把草稿签PASS。通过后接收已有bounded fast push并保留full_validation_pending/完整模式/远端CI，不绕hook。M3继续只读定义/口径共因调查，产品源码暂不改动。
 
 用M1新development gold评同一final选择另留development-gold-evaluation.json；Gbits/Proya/HK出现0值同时含quote跨fragment/缺line/scope观察信息，不能拿这些未拆解数字宣称M2退步或召回率通过；完整源侧锚点检查和真实卡片仍需对应locator/作用域复核，旧gold/旧观察不改。该诊断文件不是新验收。
+
+## 2026-10-24 W13 ROOT 修正、独审与并线待发布
+
+W13作者冻结候选a8045416的独立审查为FAIL：33/65/333个已关闭文件仍扩成62/94/362个pytest目标，提前输出local_fast_pass，且不列实际目标；作者handoff将Git blob前缀误标成SHA-256。ROOT在pending merge内修正为32个文件预算、宽/目录/未知整体defer到CI、先列完整目标并在成功后报告pass。独立审查绑定八个文件物理SHA，ROOT版本154P/125.60s、18独立探针P、5真实Git ref端到端检查P、Ruff PASS；不重跑8k全量。原作者候选和作者工区随后新增的未提交review分开保存，未混入接收。证据与不通过项见review/w13-root-reception-20261024/。旧19路径失败已证实是Windows路径长度（259可用、260+稳定失败），以及B10 3F/13P均未由本包修复。当前需要常规merge commit和正常push，再查精确远端CI。
+
+M3只读真实样本调查已完成：MSFT指标定义、RPO口径、新旧/机械重列指引漏入选择；HK中报AI/CDN反向因素、单一经营分部、下半年计划、重大投资否定及编制/币种说明不完整。另有observer没有canonical span/task scope证据，因此一些旧分数不可判，不能统一当产品召回失败。neutral probe为6 RED/4 PASS。下一节点按报告在共享source-disclosure、既有predicate/time和局部依赖owner先写RED，再实现及集中实测；不抬限额、不拼全文、不新增router，不以scope观测不足宣称产品修复。报告见study/m3-discovery/report.md。

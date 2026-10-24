@@ -1,0 +1,104 @@
+{
+  "schema_version": "w13-scope-report/1",
+  "machine": "one Windows 10 host (26300 x64), same interpreter for all runs",
+  "method": "tools/pre_push_gate.py --push-checks executed in-process with a fixed changeset (driver) or real refs (push); wall time measured around gate.main; logs in delivery/w13/logs/",
+  "card_baseline_not_rerun": {
+    "code_push_full_fallback": "8126 unit tests / 24 skips / 389.84s + 146 contract smoke 42.09s (from W13-CWP-GATES.md)",
+    "docs_push": "154 items 45.17s (from W13-CWP-GATES.md)"
+  },
+  "scopes": [
+    {
+      "name": "docs",
+      "changeset": ["docs/plans/w13-cwp-gates-2026-10-24/progress.md"],
+      "selection_reason": "no behavior changes",
+      "targets_count": 29,
+      "targets": "FAST_CONTRACT_CASES (29)",
+      "deferred_scope": "all unit tests",
+      "deferred_reason": "no behavior changes; full unit suite recommendation deferred to CI",
+      "exit_code": 0,
+      "wall_seconds": 44.5,
+      "pytest_summary": "154 passed in 37.93s",
+      "log": "delivery/w13/logs/scope-docs.log"
+    },
+    {
+      "name": "narrow",
+      "changeset": ["tests/unit/test_narrative_evidence.py"],
+      "selection_reason": "affected unit tests",
+      "targets_count": 28,
+      "targets": "1 affected file + 27 smoke cases (2 node cases deduplicated)",
+      "deferred_scope": "unit tests outside the 28 ran targets",
+      "deferred_reason": "affected-set-only fast policy; full suite runs in remote CI",
+      "exit_code": 0,
+      "wall_seconds": 66.8,
+      "pytest_summary": "217 passed in 46.49s",
+      "log": "delivery/w13/logs/scope-narrow.log"
+    },
+    {
+      "name": "unknown",
+      "changeset": ["config/source_catalog.yaml"],
+      "selection_reason": "configuration or test entrypoint changed",
+      "targets_count": 29,
+      "targets": "FAST_CONTRACT_CASES (29)",
+      "deferred_scope": "tests/unit (entire suite)",
+      "deferred_reason": "full unit suite recommendation deferred to CI",
+      "exit_code": 0,
+      "wall_seconds": 46.6,
+      "pytest_summary": "154 passed in 39.09s",
+      "log": "delivery/w13/logs/scope-unknown.log",
+      "note": "this is the case that took ~430s (389.84s units + 42.09s smoke) before the policy change; it now defers and reports full_validation_pending"
+    },
+    {
+      "name": "wide",
+      "changeset": ["src/company_wiki/source_catalog/narrative_business_meaning.py"],
+      "selection_reason": "affected unit tests (closed list, 333 files)",
+      "targets_count": 357,
+      "targets": "333 affected files + 24 smoke cases",
+      "deferred_scope": "unit tests outside the 357 ran targets",
+      "deferred_reason": "affected-set-only fast policy; full suite runs in remote CI",
+      "exit_code": 124,
+      "wall_seconds": 628.6,
+      "pytest_summary": "timeout at the pre-existing 600s subprocess cap",
+      "log": "delivery/w13/logs/scope-wide.log",
+      "note": "identical executor, target set and cap as before this package (closed lists always ran completely); not a regression and intentionally not mitigated with a bigger timeout per G09. A change with 333 affected test files is a major node: use the full local mode and CI."
+    },
+    {
+      "name": "real_push_new_branch_unknown",
+      "changeset": "real git push of codex/w13-cwp-gates-20261024 to origin through .githooks/pre-push (new branch, old SHA all-zero)",
+      "selection_reason": "unknown push range",
+      "targets_count": 29,
+      "targets": "FAST_CONTRACT_CASES (29)",
+      "deferred_scope": "tests/unit (entire suite)",
+      "deferred_reason": "full unit suite recommendation deferred to CI",
+      "exit_code": 0,
+      "wall_seconds": 42.2,
+      "pytest_summary": "hook output: Push fast gate GREEN (local_fast_pass); full_validation_pending",
+      "log": "inline in session; same code path as scope-unknown.log"
+    }
+  ],
+  "target": "daily push usually <= 60s: docs 44.5s, unknown 46.6s, real push 42.2s meet it; narrow 66.8s is smoke-dominated (46.5s of it is the shared smoke set); wide is an explicit non-goal for the fast layer",
+  "full_local_mode_once": {
+    "command": "python tools/pre_push_gate.py",
+    "stages": [
+      {"stage": "ruff (CI WU-1.2 full scope)", "exit_code": 0},
+      {"stage": "compileall", "exit_code": 0},
+      {"stage": "config_doctor (CI WU-7.1)", "exit_code": 1,
+       "detail": "CONFIG-PROBLEM: catalog_dir is not a directory: ...w13-gates\\.source_catalog — this worktree has no runtime .source_catalog data directory; identical failure at base commit a31300a7 in any fresh worktree; environment limit, not a package defect"},
+      {"stage": "host assumption guard", "exit_code": 0, "seconds": 22.2},
+      {"stage": "unit tests", "exit_code": 1, "seconds": 594.1,
+       "detail": "8126 passed, 24 skipped, 19 failed — all 19 are FileNotFoundError on atomic-write *.json.*.tmp inside the owned basetemp under xdist -n 2; the same 3 files pass 58/58 serially (53.02s); executor code path untouched by this package; Windows xdist/AV flake class"},
+      {"stage": "focused contracts", "exit_code": 1, "seconds": 116.7,
+       "detail": "221 passed, 3 failed — tests/contract/test_b10_read_chain.py ratchet tests only; they scan src business files byte-identical to base a31300a7 (git diff a31300a7..HEAD -- src/ scripts/ config/ is empty), so the failures exist at the frozen base"}
+    ],
+    "first_red_honored": "gate stopped at config_doctor with exit 1 (G06); remaining stages were rerun individually for evidence only",
+    "log": "delivery/w13/logs/full-local-mode.log",
+    "diagnostic_rerun_logs": [
+      "delivery/w13/logs/full-mode-remaining-stages.log",
+      "delivery/w13/logs/full-mode-focused-contracts.log"
+    ]
+  },
+  "card_test_set": {
+    "command": "python -m pytest -q -p no:cacheprovider tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py",
+    "result": "145 passed in 35.88s",
+    "ruff": "All checks passed! (card file list)"
+  }
+}

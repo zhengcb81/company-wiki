@@ -1,0 +1,140 @@
+{
+  "schema_version": "w13-root-independent-review/1",
+  "reviewer": "/root/w08_reporting_rule_review",
+  "verdict": "PASS_ROOT_INTEGRATED_FIXES",
+  "original_author_candidate_verdict": "FAIL",
+  "scope": "W13 push scheduling, including ROOT corrections; no product full-suite, CI, summary or RF acceptance",
+  "author_frozen_head": "a804541661f73cd035fc25179b116ba9a51c5e55",
+  "author_code_commit": "56baea4cdd8c89b5cf778d0bda948c31ec5af162",
+  "reviewed_root_head": "885e140d2d69baad61ef791497e85e4f30fff366",
+  "reviewed_root_state": "pending merge working tree plus precise file SHA-256 below",
+  "reviewed_file_sha256": {
+    ".githooks/pre-push": "ce4822bb5a082f9d940a0181498215ffb5584f49aee351a38a5651885b03687d",
+    ".pre-commit-config.yaml": "b126f9d2bacd3c2d127603e681048021e23fdf7e32d7cf560265ead30e7046c8",
+    "tools/pre_push_gate.py": "a307933c216105d4a180a307c1ea4e29910432175211109afb78fbe2c6175b73",
+    "tools/changed_unit_tests.py": "0b9305ce0a7413276946ca3089e65c00fe9b17e1a6f759fb8b05775ee877105a",
+    "tests/unit/test_ci_push_selection.py": "bb4b45634569ea4bc177a38716d6d7a1e08206be24e03d1f33d54019f8260e6e",
+    "tests/unit/test_daily_push_policy.py": "7b37ad1500fdfca9a8d34fade6898624ae64757291d6e2509048e69bd34c7e53",
+    "tests/unit/test_pre_push_parallel_phases.py": "452ac09a43b86acc903ee552c3a7c2b64c40968ea9c2497bf7828f4730fd73ed",
+    "tests/unit/test_daily_push_bounds.py": "c7c5486aeb27a05c768cba811e28606f2fa31f93242c63d2fc3ff4fb10885f50"
+  },
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "154",
+    "time": "125.550",
+    "timestamp": "2026-10-24T14:20:26.868264+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "independent_probes": {
+    "old_author": {
+      "passed": 9,
+      "failed": 9
+    },
+    "final_root": {
+      "passed": 18,
+      "failed": 0
+    }
+  },
+  "real_ref_checks": [
+    {
+      "name": "real_new_branch_push",
+      "passed": true
+    },
+    {
+      "name": "real_33_file_closed_range_defers_whole_set",
+      "passed": true,
+      "actual_exit_code": 0
+    },
+    {
+      "name": "real_full_unit_command_finds_hidden_failure",
+      "passed": true
+    },
+    {
+      "name": "real_ran_scope_red_blocks_push",
+      "passed": true
+    },
+    {
+      "name": "real_missing_runner_blocks_push",
+      "passed": true
+    }
+  ],
+  "ruff": "PASS",
+  "resolved_findings": [
+    "wide closed list had no budget; 32 affected file budget now wholly defers wide sets",
+    "premature local_fast_pass removed",
+    "actual planned targets now printed"
+  ],
+  "legacy_findings": [
+    {
+      "issue": "19 old full-mode atomic tempfile failures",
+      "classification": "Windows path length boundary; not proven random AV/xdist flake",
+      "proof": "259 chars succeeds; 260/261/263/264 stable errno2; 19 original paths all261/263/264",
+      "fixed_by_w13": false
+    },
+    {
+      "issue": "B10 ratchet old baseline",
+      "proof": "independently3F13P with unchanged frozen src/helper/test",
+      "fixed_by_w13": false
+    },
+    {
+      "issue": "handoff sha256_prefix is Gitblob id, not file SHA256",
+      "proof": "this receipt binds actual complete SHA256",
+      "fixed_by_w13": "root reception evidence corrected"
+    }
+  ],
+  "remaining_scope": [
+    "legacy Windows long paths",
+    "old B10 ratchet",
+    "fresh worktree config_doctor absent runtime directory",
+    "remote CI and full real product validation",
+    "real narrow-file runtime and selector AST planning overhead"
+  ],
+  "cleanup": {
+    "scratch_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv",
+    "initial_state": "absent",
+    "final_state": "absent",
+    "restored": true,
+    "root_ci_workflows_match_author_base": {
+      ".github/workflows/ci.yml": true
+    },
+    "author_final_observed_head": "852dff283ed9f18dd4e0dd1376c4ca89a52b1795",
+    "author_final_untracked_paths": [
+      "delivery/w13/review.md",
+      "delivery/w13/review.json"
+    ],
+    "author_note": "Advanced by its owner during review; reviewer read only, reviewed frozen a804 not these later changes",
+    "models": 0,
+    "downloads": 0,
+    "external_network": 0
+  },
+  "test_command": "in isolated .w13rv: python -m pytest -q --tb=short -p no:cacheprovider --override-ini addopts='' --basetemp=.pt tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py tests/unit/test_daily_push_bounds.py --junitxml=<independent>/root-final-tests.xml",
+  "external_calls": {
+    "network": 0,
+    "models": 0,
+    "downloads": 0
+  },
+  "reviewed_at": "2026-10-24T13:26:35.299953+00:00",
+  "report_md_sha256": "95448b1394094004257c2ad22465a17a8640f05a3276264bc8b09e49828a21f2",
+  "receipts_sha256": {
+    "author-b10-baseline.xml": "cd35c6154c053e728fe49cef18a58fdffc5e07c6f3e3b786b5121808de9dde07",
+    "author-original-probes.json": "f855a8a59fae22b9f5d2e9d64f14423ac24be1e7732628a8a12b59ffbdb3a593",
+    "author-original-real-ref.json": "6d6d472e592018131f8497e4715ea6652f5593a25009e846421d8e6788432383",
+    "card-tests-unsandboxed.xml": "e215aaf2e6591bfca3c0dfebb78745b187d470abcd6fc23832ea6c2b647a9136",
+    "card-tests.xml": "f4866ff9ed6d6da135b75462890db8ba01e480ea97865b8d3cdf093d13ffa118",
+    "cleanup.json": "35b0eb5149c5fac6591347ebb0cc0a89a2065f7614044c8841b58f080cd5ba04",
+    "frozen-inputs.json": "1cf0968ea161df78a4e885373d01ab2ab643e4160219d56ba695d30ef996a1b0",
+    "path-boundary-probe.json": "2c47facd16e1daae82340605b648246ffd2f76dcc399b521924a57993ce623cf",
+    "pre-cleanup-final-bindings.json": "577f275cc2e642deae705875e039bff0ce5058fdb4b3066aad1b258f334dae3d",
+    "real_ref_probe.py": "0455159432e4347fdb99e2124c44e603a8f9fe210d162f99fd348c7b3ea8ad00",
+    "report.md": "95448b1394094004257c2ad22465a17a8640f05a3276264bc8b09e49828a21f2",
+    "review_probe.py": "3797eacfb2a795be58274f9ee7fb53b576c8970ffafc34a8f0843b49cd8257fb",
+    "root-final-probes.json": "1393f99e12194b6c94428ebf4da92f9e283f90b0b1b540ba51982c331a5e967a",
+    "root-final-real-ref.json": "7cc6c78cf80062949d009e9926df575367513721389eaa4094fbf8b3716258b6",
+    "root-final-scope-matrix.json": "7713bb06105f813af484ba4efaaea144542d4823bc953d22df8a79c7ad49e581",
+    "root-final-source-bindings.json": "c7fc627cd72fe82f2c23b114c81dc29bc485d73530428a01ace75c10138289ae",
+    "root-final-tests.xml": "0f31e4a2d9bc592f93324f9df842fc3af106f2393a0e5bae514d611e7e92497d"
+  }
+}

@@ -1,7 +1,8 @@
 #!/bin/sh
 # Check affected Unit files across ALL commits/ref updates being pushed, plus
-# the CI contract smoke set once. Unknown/configuration changes use all Units.
-# GitHub CI still runs all Units; full portable Contract stays manual.
+# the CI contract smoke set once. Wide, dynamic or unknown scopes run the
+# smoke set only and defer the full unit suite to CI; a green push proves the
+# ran scope (local_fast_pass), never the whole project.
 #
 # Installed as .githooks/pre-push (git config core.hooksPath .githooks).
 # Keep push latency short; the full seven-stage local gate remains available
@@ -14,8 +15,8 @@
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 
 if [ ! -f "$ROOT/tools/pre_push_gate.py" ]; then
-  echo "pre-push gate: tools/pre_push_gate.py missing - skipping" >&2
-  exit 0
+  echo "pre-push gate: tools/pre_push_gate.py missing - cannot validate this push" >&2
+  exit 1
 fi
 
 python "$ROOT/tools/pre_push_gate.py" --push-checks

@@ -1,0 +1,83 @@
+{
+  "scope": "independent offline execution-policy controls, not business testing",
+  "label": "root-final",
+  "source_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv",
+  "gate_sha256": "a307933c216105d4a180a307c1ea4e29910432175211109afb78fbe2c6175b73",
+  "helper_sha256": "0b9305ce0a7413276946ca3089e65c00fe9b17e1a6f759fb8b05775ee877105a",
+  "results": [
+    {
+      "name": "wide_closed_33_wholly_deferred",
+      "status": "PASS"
+    },
+    {
+      "name": "wide_closed_65_wholly_deferred",
+      "status": "PASS"
+    },
+    {
+      "name": "wide_closed_333_wholly_deferred",
+      "status": "PASS"
+    },
+    {
+      "name": "small_boundary_complete_and_deduplicated",
+      "status": "PASS"
+    },
+    {
+      "name": "directory_not_one_small_file:tests/unit",
+      "status": "PASS"
+    },
+    {
+      "name": "directory_not_one_small_file:tests/unit/source_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "directory_not_one_small_file:tests/contract",
+      "status": "PASS"
+    },
+    {
+      "name": "honest_output_and_exact_exit:0",
+      "status": "PASS"
+    },
+    {
+      "name": "honest_output_and_exact_exit:7",
+      "status": "PASS"
+    },
+    {
+      "name": "honest_output_and_exact_exit:124",
+      "status": "PASS"
+    },
+    {
+      "name": "exception_blocks:OSError",
+      "status": "PASS"
+    },
+    {
+      "name": "exception_blocks:TimeoutError",
+      "status": "PASS"
+    },
+    {
+      "name": "exception_blocks:ValueError",
+      "status": "PASS"
+    },
+    {
+      "name": "all_fast_members_and_full_executors_unchanged_from_base",
+      "status": "PASS"
+    },
+    {
+      "name": "full_and_ci_actual_command_contract:[]",
+      "status": "PASS"
+    },
+    {
+      "name": "full_and_ci_actual_command_contract:['--skip-contract']",
+      "status": "PASS"
+    },
+    {
+      "name": "full_and_ci_actual_command_contract:['--fast-contracts-only']",
+      "status": "PASS"
+    },
+    {
+      "name": "full_and_ci_actual_command_contract:['--fast-contracts-only', '--junitxml', 'report.xml']",
+      "status": "PASS"
+    }
+  ],
+  "passed": 18,
+  "failed": 0
+}

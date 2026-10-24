@@ -656,3 +656,13 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 未盲重跑同次全量。只读查W13工区HEAD=a8045416，已实现但handoff=INCOMPLETE_EXTERNAL_BLOCKER（作者未做最终独审），故母表READY_NOT_DISPATCHED已过期。ROOT另派未参与实现者从冻结Git对象隔离审查，不改作者工区/索引，不自动把草稿签PASS。通过后接收已有bounded fast push并保留full_validation_pending/完整模式/远端CI，不绕hook。M3继续只读定义/口径共因调查，产品源码暂不改动。
 
 用M1新development gold评同一final选择另留development-gold-evaluation.json；Gbits/Proya/HK出现0值同时含quote跨fragment/缺line/scope观察信息，不能拿这些未拆解数字宣称M2退步或召回率通过；完整源侧锚点检查和真实卡片仍需对应locator/作用域复核，旧gold/旧观察不改。该诊断文件不是新验收。
+
+## W13 ROOT 独审发现与校正
+
+旧候选宽范围策略没有日常预算：测试选择层推荐`tests/unit`时只兜得住该字面值，33/65/333闭合文件集分别会运行62/94/362目标；源实际357目标跑628.6秒超时。ROOT增加32文件上限，超限或目录/动态/未知建议整体defer，固定29项快集合保留，完整unit仍由CI运行。push输出现在分清planned与真实成功结果，并列实际目标。独立真实bare remote证明新分支成功、33文件确实整体延后、快集真红和缺runner阻断，且完整unit命令能找到快集外隐藏红。最终绑定源码SHA下154P、18探针P、5 E2E P，Ruff P；不代表全产品suite/CWP业务/CI已通过。
+
+旧19个atomic tempfile失败的根因是Windows路径：原路径长261/263/264，独立基准259成功、260及以上稳定FileNotFoundError。是历史测试基座安排的可复现共因，不是随机杀毒或xdist；W13未修，留ROOT单独短路径/Temp root改造。B10在冻结旧source/helper/test版本同样稳定3F/13P，生产源/CI树/helper不属于W13，故作为既有baseline缺陷，不删测试、不代签。handoff中`sha256_prefix`与Git blob ID一致，不是sha256；ROOT使用报告中逐文件完整物理SHA作为接收绑定。
+
+## M3真实文种观察的测量边界
+
+真实MSFT p10/p12/p19/p20原文可读但被筛掉；p3/p6/p17本来已选，不重复报缺。长于1200字的source clause当前直接丢弃，且指标定义被`financial_only/accounting_policy`压掉；旧新范围/机械no-change不进入现predicate/time图。HK中报同时存在真实漏半句/限定、96 span预算满，以及observer没有canonical EvidenceSpan、scope/task/compiler binding，导致部分旧gold状态只能NOT_EVALUATED。以后需把source-side false negative、selected-but-cut、task-local support和observer unknown分列；禁止整篇串接、猜scope或放宽quote金标。具体原文与源码绑定见study/m3-discovery/observations.json和report.json。

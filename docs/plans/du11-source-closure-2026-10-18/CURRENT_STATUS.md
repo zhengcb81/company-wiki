@@ -1,8 +1,10 @@
 # 当前项目状态与接手入口
 
-**最新发布状态：** M2已正常commit `65cd8f58`；第一次push的8315项单测到84%无已见断言失败，但600秒总超时，146契约通过。**尚未发布远端。** ROOT正从冻结对象独审已有W13快推送实现（作者工区只读，HEAD a8045416；其最终独审待补），通过后并线并正常push，不绕hook、不反复原样重试。M3定义/口径共因同时只读调查。详见机器状态和[m2-first-push-timeout](review/market-family-upgrade-20261024/m2-first-push-timeout.json)。
+**最新状态（2026-10-24）：** W13 有界推送调度已由 ROOT 修复并独审通过，常规合并、提交和推送待执行。作者冻结版 `a8045416` 的独审为 FAIL；ROOT 版本为 `PASS_ROOT_INTEGRATED_FIXES`：154 定向测试、18 独立探针、5 项真实本地 Git 推送检查及 Ruff 通过。没有重跑 8 千余项全量单测；完整 suite 留给现有 CI。详见[ROOT接收记录](review/w13-root-reception-20261024/ROOT_ACCEPTANCE.md)及[独立审查](review/w13-root-reception-20261024/independent/report.md)。
 
-**最新执行补记（2026-10-24，优先于下方历史快照）：** M1四份源侧development gold已独立实读验收：51事实/139源锚点，102测试通过，旧版及错误历史保留；不是生产准确率通过。M2共享匿名轮次、定性经营计划及同轮计划限定正在集中复审，已有DOCX/TXT实际select→序列化→model-input/5→原文卡片正反检查。新DOCX1.2的批处理版本能力接线也在TDD修复，尚未发布。真实Gbits的19→23条选材是阶段性冻结观察，原件未改，旧gold仍FAIL；不能当正式摘要/cache/RF验收。唯一下一步：完成M2独审和正常发布，再处理M3/M4/M5；见[M2实施](review/market-family-upgrade-20261024/M2_IMPLEMENTATION.md)及[M1独审](review/market-family-upgrade-20261024/m1-independent/report.md)。
+此前 M2 源码提交 `65cd8f58` 的首次 push 因 8315 项全量单测运行至 84% 后触发 600 秒总时限、146 项契约通过而未发布。W13 修复正是为避免每次日常 push 隐式重跑全量；正常 push 将按当前边界执行。M3真实样本只读调查已完成，发现指标定义/定义版本/机械重列指引、港股中报限定和 scope观测都存在真实或测量缺口，下一步在 W13 发布后先写中性反例，再按共享 owner 根修，见[M3调查](review/market-family-upgrade-20261024/study/m3-discovery/report.md)。
+
+**本轮执行状态：** M1源侧 development gold 已独立通过（51事实/139锚点/102项）；M2源码独审386项通过，吉比特、珀莱雅、金山云、微软真实选材仍需按旧 gold 如实复核，正式摘要/cache/RF尚未验收。M2源码仍在本地待正常发布。W13 根修与审查结果已记入上方唯一入口；其余 W13 未修问题（Windows长路径、B10基线、fresh worktree config_doctor目录）分列，不混成同一通过结论。
 
 **主线ACTIVE；最新：跨市场/文种真实样本升级，五family策略组件独审通过并正常推送；真实内容共因修复继续。** 原来源材料/request根修已正常推送`3b4110a3`，完整8199P/24既有skip、另146契约P，精确[CI40087657562](https://github.com/zhengcb81/company-wiki/actions/runs/40087657562) completed/success；首次失败与最终补审收据保留。
 
@@ -14,7 +16,7 @@
 
 真实4样本回放及26项critical独审也发现仍需共因修复：匿名DOCX电话会generic/后段计划遗漏、EX99.1指标定义与指引限定遗漏、稀疏财报噪声；同时旧金标ASR强否定/财务职责/替代support及观察字段有错误。最终同样本回放没有改善这些内容分数，如实保持OPEN，不因匹配测试绿称准确率已提升到某数字。USIPO正规FF补采在provider启动前budget_exceeded、0HTTP/0下载，未证实费用耗尽，精确本地计量待诊断。[后续共因与顺序](review/market-family-upgrade-20261024/remaining_root_causes.md)、[详细实施](review/market-family-upgrade-20261024/strategy_upgrade_design.md)。
 
-原annual14最新仍8通过/6部分/0缺失，A02旧15.84%支持已恢复；正式摘要/cache、RF采用与四审、公司循环未完成。W13–W15独占范围不改，Dayu/IQS代码不改；新模型调用0/下载0，原件不改。
+原annual14最新为8通过/6部分/0缺失，正式摘要/cache、RF采用与四审、公司循环未完成。W14/W15独占范围不改，Dayu/IQS代码不改；本次无模型调用/下载，原件不改。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 

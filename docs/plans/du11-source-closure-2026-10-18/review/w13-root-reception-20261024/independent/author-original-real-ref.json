@@ -1,0 +1,295 @@
+{
+  "label": "author-original",
+  "scope": "real local Git refs with actual reviewed hook/selector/executor and synthetic business bodies",
+  "source_sha256": "b5dec4446a6e61fa2859502f78c07099fd24e00e400b3f8b742a642692a78a5c",
+  "checks": [
+    {
+      "name": "real_new_branch_push",
+      "passed": true
+    },
+    {
+      "name": "real_33_file_closed_range_defers_whole_set",
+      "passed": false,
+      "actual_exit_code": 1
+    },
+    {
+      "name": "real_full_unit_command_finds_hidden_failure",
+      "passed": true
+    },
+    {
+      "name": "real_ran_scope_red_blocks_push",
+      "passed": true
+    },
+    {
+      "name": "real_missing_runner_blocks_push",
+      "passed": true
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "git",
+        "init",
+        "-q",
+        "-b",
+        "master"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.419,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "user.email",
+        "independent-review@example.invalid"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.149,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "user.name",
+        "W13 independent reviewer"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.113,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "core.hooksPath",
+        ".githooks"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.118,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "init",
+        "--bare",
+        "-q",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\remote.git"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original",
+      "exit_code": 0,
+      "seconds": 0.33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "remote",
+        "add",
+        "origin",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\remote.git"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.279,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "-A"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.515,
+      "stdout": "",
+      "stderr": "warning: in the working copy of '.githooks/pre-push', LF will be replaced by CRLF the next time Git touches it\n"
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-qm",
+        "neutral baseline"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.624,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "push",
+        "origin",
+        "master"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 20.7,
+      "stdout": "Push scope: unknown push range; ran 29 target(s) (local_fast_pass); full_validation_pending: full unit suite recommendation deferred to CI.\n\n=== daily push fast feedback: affected units and CI contract smoke ===\n============================= 29 passed in 1.11s ==============================\n\nPush fast gate GREEN (local_fast_pass for the ran scope only); full_validation_pending — CI still runs the full suites.\n",
+      "stderr": "To C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\remote.git\n * [new branch]      master -> master\n"
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "tests/unit"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.365,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-qm",
+        "thirty-three closed affected files include hidden failure"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.343,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.119,
+      "stdout": "9f6dd59aaa98c443dba313bd6f1e58a97999f4f8\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "push",
+        "origin",
+        "master"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 1,
+      "seconds": 17.925,
+      "stdout": "Push scope: affected unit tests; ran 62 target(s) (local_fast_pass); full_validation_pending: tests/unit outside the 62 ran targets deferred to CI.\n\n=== daily push fast feedback: affected units and CI contract smoke ===\nCW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.e2e-author-original\\\\work\\\\cwpp-7fb2rmzi\", \"requested_basetemp_len\": 81, \"cwd_len\": 67, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.e2e-author-original\\\\work\\\\cwpp-7fb2rmzi\\\\cw-pytest-basetemp\\\\20261024-131835-c9a13f3c\", \"effective_basetemp_len\": 125}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ntimeout: 180.0s\ntimeout method: thread\ntimeout func_only: False\ncollected 62 items\n\ntests\\unit\\test_review_new_00.py F                                       [  1%]\ntests\\unit\\test_review_new_01.py .                                       [  3%]\ntests\\unit\\test_review_new_02.py .                                       [  4%]\ntests\\unit\\test_review_new_03.py .                                       [  6%]\ntests\\unit\\test_review_new_04.py .                                       [  8%]\ntests\\unit\\test_review_new_05.py .                                       [  9%]\ntests\\unit\\test_review_new_06.py .                                       [ 11%]\ntests\\unit\\test_review_new_07.py .                                       [ 12%]\ntests\\unit\\test_review_new_08.py .                                       [ 14%]\ntests\\unit\\test_review_new_09.py .                                       [ 16%]\ntests\\unit\\test_review_new_10.py .                                       [ 17%]\ntests\\unit\\test_review_new_11.py .                                       [ 19%]\ntests\\unit\\test_review_new_12.py .                                       [ 20%]\ntests\\unit\\test_review_new_13.py .                                       [ 22%]\ntests\\unit\\test_review_new_14.py .                                       [ 24%]\ntests\\unit\\test_review_new_15.py .                                       [ 25%]\ntests\\unit\\test_review_new_16.py .                                       [ 27%]\ntests\\unit\\test_review_new_17.py .                                       [ 29%]\ntests\\unit\\test_review_new_18.py .                                       [ 30%]\ntests\\unit\\test_review_new_19.py .                                       [ 32%]\ntests\\unit\\test_review_new_20.py .                                       [ 33%]\ntests\\unit\\test_review_new_21.py .                                       [ 35%]\ntests\\unit\\test_review_new_22.py .                                       [ 37%]\ntests\\unit\\test_review_new_23.py .                                       [ 38%]\ntests\\unit\\test_review_new_24.py .                                       [ 40%]\ntests\\unit\\test_review_new_25.py .                                       [ 41%]\ntests\\unit\\test_review_new_26.py .                                       [ 43%]\ntests\\unit\\test_review_new_27.py .                                       [ 45%]\ntests\\unit\\test_review_new_28.py .                                       [ 46%]\ntests\\unit\\test_review_new_29.py .                                       [ 48%]\ntests\\unit\\test_review_new_30.py .                                       [ 50%]\ntests\\unit\\test_review_new_31.py .                                       [ 51%]\ntests\\unit\\test_review_new_32.py .                                       [ 53%]\ntests\\unit\\test_local_budget_observation.py .                            [ 54%]\ntests\\contract\\test_local_prepare_failure_boundaries.py .                [ 56%]\ntests\\document_normalization\\test_ocr_region_recovery.py ...             [ 61%]\ntests\\document_normalization\\test_isolated_ocr.py ...                    [ 66%]\ntests\\integration\\test_m3_official_json_acceptance.py .                  [ 67%]\ntests\\unit\\test_runtime_dependencies.py .                                [ 69%]\ntests\\unit\\test_automation_migrations.py .                               [ 70%]\ntests\\contract\\test_zr203_reader_rewire.py .                             [ 72%]\ntests\\contract\\test_zr1003_shadow_assertions.py .                        [ 74%]\ntests\\contract\\test_zr1006_broker_cohort.py .                            [ 75%]\ntests\\contract\\test_source_catalog_temp_worker_governance.py ..          [ 79%]\ntests\\contract\\test_narrative_output_plan.py .                           [ 80%]\ntests\\contract\\test_summary_group_coverage.py .                          [ 82%]\ntests\\contract\\test_official_transcript_layouts.py .                     [ 83%]\ntests\\contract\\test_transcript_speaker_affiliation.py .                  [ 85%]\ntests\\contract\\test_source_scope_qualification.py .                      [ 87%]\ntests\\contract\\test_narrative_availability.py ..                         [ 90%]\ntests\\unit\\test_narrative_evidence.py ..                                 [ 93%]\ntests\\unit\\test_narrative_transport_contracts.py .                       [ 95%]\ntests\\contract\\test_fc905_receipt_envelope.py .                          [ 96%]\ntests\\unit\\test_narrative_retrieval.py .                                 [ 98%]\ntests\\contract\\test_b10_read_chain.py .                                  [100%]\n\n================================== FAILURES ===================================\n________________________________ test_changed _________________________________\ntests\\unit\\test_review_new_00.py:1: in test_changed\n    def test_changed(): assert False, 'hidden-wide-red'\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: hidden-wide-red\nE   assert False\n=========================== short test summary info ===========================\nFAILED tests\\unit\\test_review_new_00.py::test_changed - AssertionError: hidde...\n======================== 1 failed, 61 passed in 3.89s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.e2e-author-original\\\\work\\\\cwpp-7fb2rmzi\\\\cw-pytest-basetemp\\\\20261024-131835-c9a13f3c\", \"existed\": true, \"removed\": true}\n\n\nFAILED: daily push fast feedback: affected units and CI contract smoke\n\nPUSH CHECKS RED — fix the failing phase; do not bypass.\n",
+      "stderr": "\nPUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.\nerror: failed to push some refs to 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\remote.git'\n"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 1,
+      "seconds": 13.707,
+      "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"relocated\": false, \"reason\": \"no-explicit-basetemp\", \"detail\": \"pytest derives its default basetemp from %TEMP%; short by construction\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 40 items\n\ntests\\unit\\test_automation_migrations.py .                               [  2%]\ntests\\unit\\test_local_budget_observation.py .                            [  5%]\ntests\\unit\\test_narrative_evidence.py ..                                 [ 10%]\ntests\\unit\\test_narrative_retrieval.py .                                 [ 12%]\ntests\\unit\\test_narrative_transport_contracts.py .                       [ 15%]\ntests\\unit\\test_review_new_00.py F                                       [ 17%]\ntests\\unit\\test_review_new_01.py .                                       [ 20%]\ntests\\unit\\test_review_new_02.py .                                       [ 22%]\ntests\\unit\\test_review_new_03.py .                                       [ 25%]\ntests\\unit\\test_review_new_04.py .                                       [ 27%]\ntests\\unit\\test_review_new_05.py .                                       [ 30%]\ntests\\unit\\test_review_new_06.py .                                       [ 32%]\ntests\\unit\\test_review_new_07.py .                                       [ 35%]\ntests\\unit\\test_review_new_08.py .                                       [ 37%]\ntests\\unit\\test_review_new_09.py .                                       [ 40%]\ntests\\unit\\test_review_new_10.py .                                       [ 42%]\ntests\\unit\\test_review_new_11.py .                                       [ 45%]\ntests\\unit\\test_review_new_12.py .                                       [ 47%]\ntests\\unit\\test_review_new_13.py .                                       [ 50%]\ntests\\unit\\test_review_new_14.py .                                       [ 52%]\ntests\\unit\\test_review_new_15.py .                                       [ 55%]\ntests\\unit\\test_review_new_16.py .                                       [ 57%]\ntests\\unit\\test_review_new_17.py .                                       [ 60%]\ntests\\unit\\test_review_new_18.py .                                       [ 62%]\ntests\\unit\\test_review_new_19.py .                                       [ 65%]\ntests\\unit\\test_review_new_20.py .                                       [ 67%]\ntests\\unit\\test_review_new_21.py .                                       [ 70%]\ntests\\unit\\test_review_new_22.py .                                       [ 72%]\ntests\\unit\\test_review_new_23.py .                                       [ 75%]\ntests\\unit\\test_review_new_24.py .                                       [ 77%]\ntests\\unit\\test_review_new_25.py .                                       [ 80%]\ntests\\unit\\test_review_new_26.py .                                       [ 82%]\ntests\\unit\\test_review_new_27.py .                                       [ 85%]\ntests\\unit\\test_review_new_28.py .                                       [ 87%]\ntests\\unit\\test_review_new_29.py .                                       [ 90%]\ntests\\unit\\test_review_new_30.py .                                       [ 92%]\ntests\\unit\\test_review_new_31.py .                                       [ 95%]\ntests\\unit\\test_review_new_32.py .                                       [ 97%]\ntests\\unit\\test_runtime_dependencies.py .                                [100%]\n\n================================== FAILURES ===================================\n________________________________ test_changed _________________________________\ntests\\unit\\test_review_new_00.py:1: in test_changed\n    def test_changed(): assert False, 'hidden-wide-red'\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: hidden-wide-red\nE   assert False\n=========================== short test summary info ===========================\nFAILED tests\\unit\\test_review_new_00.py::test_changed - AssertionError: hidde...\n======================== 1 failed, 39 passed in 1.80s =========================\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "tests/unit/test_local_budget_observation.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.134,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-qm",
+        "ran-scope smoke fails"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.286,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "push",
+        "origin",
+        "master"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 1,
+      "seconds": 16.754,
+      "stdout": "Push scope: affected unit tests; ran 62 target(s) (local_fast_pass); full_validation_pending: tests/unit outside the 62 ran targets deferred to CI.\n\n=== daily push fast feedback: affected units and CI contract smoke ===\nCW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.e2e-author-original\\\\work\\\\cwpp-002_aqnn\", \"requested_basetemp_len\": 81, \"cwd_len\": 67, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.e2e-author-original\\\\work\\\\cwpp-002_aqnn\\\\cw-pytest-basetemp\\\\20261024-131907-3bf4ea2b\", \"effective_basetemp_len\": 125}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ntimeout: 180.0s\ntimeout method: thread\ntimeout func_only: False\ncollected 62 items\n\ntests\\unit\\test_local_budget_observation.py F                            [  1%]\ntests\\unit\\test_review_new_00.py F                                       [  3%]\ntests\\unit\\test_review_new_01.py .                                       [  4%]\ntests\\unit\\test_review_new_02.py .                                       [  6%]\ntests\\unit\\test_review_new_03.py .                                       [  8%]\ntests\\unit\\test_review_new_04.py .                                       [  9%]\ntests\\unit\\test_review_new_05.py .                                       [ 11%]\ntests\\unit\\test_review_new_06.py .                                       [ 12%]\ntests\\unit\\test_review_new_07.py .                                       [ 14%]\ntests\\unit\\test_review_new_08.py .                                       [ 16%]\ntests\\unit\\test_review_new_09.py .                                       [ 17%]\ntests\\unit\\test_review_new_10.py .                                       [ 19%]\ntests\\unit\\test_review_new_11.py .                                       [ 20%]\ntests\\unit\\test_review_new_12.py .                                       [ 22%]\ntests\\unit\\test_review_new_13.py .                                       [ 24%]\ntests\\unit\\test_review_new_14.py .                                       [ 25%]\ntests\\unit\\test_review_new_15.py .                                       [ 27%]\ntests\\unit\\test_review_new_16.py .                                       [ 29%]\ntests\\unit\\test_review_new_17.py .                                       [ 30%]\ntests\\unit\\test_review_new_18.py .                                       [ 32%]\ntests\\unit\\test_review_new_19.py .                                       [ 33%]\ntests\\unit\\test_review_new_20.py .                                       [ 35%]\ntests\\unit\\test_review_new_21.py .                                       [ 37%]\ntests\\unit\\test_review_new_22.py .                                       [ 38%]\ntests\\unit\\test_review_new_23.py .                                       [ 40%]\ntests\\unit\\test_review_new_24.py .                                       [ 41%]\ntests\\unit\\test_review_new_25.py .                                       [ 43%]\ntests\\unit\\test_review_new_26.py .                                       [ 45%]\ntests\\unit\\test_review_new_27.py .                                       [ 46%]\ntests\\unit\\test_review_new_28.py .                                       [ 48%]\ntests\\unit\\test_review_new_29.py .                                       [ 50%]\ntests\\unit\\test_review_new_30.py .                                       [ 51%]\ntests\\unit\\test_review_new_31.py .                                       [ 53%]\ntests\\unit\\test_review_new_32.py .                                       [ 54%]\ntests\\contract\\test_local_prepare_failure_boundaries.py .                [ 56%]\ntests\\document_normalization\\test_ocr_region_recovery.py ...             [ 61%]\ntests\\document_normalization\\test_isolated_ocr.py ...                    [ 66%]\ntests\\integration\\test_m3_official_json_acceptance.py .                  [ 67%]\ntests\\unit\\test_runtime_dependencies.py .                                [ 69%]\ntests\\unit\\test_automation_migrations.py .                               [ 70%]\ntests\\contract\\test_zr203_reader_rewire.py .                             [ 72%]\ntests\\contract\\test_zr1003_shadow_assertions.py .                        [ 74%]\ntests\\contract\\test_zr1006_broker_cohort.py .                            [ 75%]\ntests\\contract\\test_source_catalog_temp_worker_governance.py ..          [ 79%]\ntests\\contract\\test_narrative_output_plan.py .                           [ 80%]\ntests\\contract\\test_summary_group_coverage.py .                          [ 82%]\ntests\\contract\\test_official_transcript_layouts.py .                     [ 83%]\ntests\\contract\\test_transcript_speaker_affiliation.py .                  [ 85%]\ntests\\contract\\test_source_scope_qualification.py .                      [ 87%]\ntests\\contract\\test_narrative_availability.py ..                         [ 90%]\ntests\\unit\\test_narrative_evidence.py ..                                 [ 93%]\ntests\\unit\\test_narrative_transport_contracts.py .                       [ 95%]\ntests\\contract\\test_fc905_receipt_envelope.py .                          [ 96%]\ntests\\unit\\test_narrative_retrieval.py .                                 [ 98%]\ntests\\contract\\test_b10_read_chain.py .                                  [100%]\n\n================================== FAILURES ===================================\n___ test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes ___\ntests\\unit\\test_local_budget_observation.py:1: in test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\n    def test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes(): assert False, 'real-ran-scope-red'\n                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: real-ran-scope-red\nE   assert False\n________________________________ test_changed _________________________________\ntests\\unit\\test_review_new_00.py:1: in test_changed\n    def test_changed(): assert False, 'hidden-wide-red'\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: hidden-wide-red\nE   assert False\n=========================== short test summary info ===========================\nFAILED tests\\unit\\test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\nFAILED tests\\unit\\test_review_new_00.py::test_changed - AssertionError: hidde...\n======================== 2 failed, 60 passed in 3.76s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.w13rv\\\\.e2e-author-original\\\\work\\\\cwpp-002_aqnn\\\\cw-pytest-basetemp\\\\20261024-131907-3bf4ea2b\", \"existed\": true, \"removed\": true}\n\n\nFAILED: daily push fast feedback: affected units and CI contract smoke\n\nPUSH CHECKS RED — fix the failing phase; do not bypass.\n",
+      "stderr": "\nPUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.\nerror: failed to push some refs to 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\remote.git'\n"
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "tools/pre_push_gate.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.205,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-qm",
+        "runner missing"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 0,
+      "seconds": 0.439,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "push",
+        "origin",
+        "master"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\work",
+      "exit_code": 1,
+      "seconds": 0.531,
+      "stdout": "",
+      "stderr": "pre-push gate: tools/pre_push_gate.py missing - cannot validate this push\nerror: failed to push some refs to 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.w13rv\\.e2e-author-original\\remote.git'\n"
+    }
+  ],
+  "external_network_calls": 0,
+  "model_calls": 0,
+  "sentinel_preserved": true,
+  "fixture_restored_absent": true
+}
