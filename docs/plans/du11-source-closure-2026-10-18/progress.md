@@ -843,3 +843,17 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 W13作者冻结候选a8045416的独立审查为FAIL：33/65/333个已关闭文件仍扩成62/94/362个pytest目标，提前输出local_fast_pass，且不列实际目标；作者handoff将Git blob前缀误标成SHA-256。ROOT在pending merge内修正为32个文件预算、宽/目录/未知整体defer到CI、先列完整目标并在成功后报告pass。独立审查绑定八个文件物理SHA，ROOT版本154P/125.60s、18独立探针P、5真实Git ref端到端检查P、Ruff PASS；不重跑8k全量。原作者候选和作者工区随后新增的未提交review分开保存，未混入接收。证据与不通过项见review/w13-root-reception-20261024/。旧19路径失败已证实是Windows路径长度（259可用、260+稳定失败），以及B10 3F/13P均未由本包修复。当前需要常规merge commit和正常push，再查精确远端CI。
 
 M3只读真实样本调查已完成：MSFT指标定义、RPO口径、新旧/机械重列指引漏入选择；HK中报AI/CDN反向因素、单一经营分部、下半年计划、重大投资否定及编制/币种说明不完整。另有observer没有canonical span/task scope证据，因此一些旧分数不可判，不能统一当产品召回失败。neutral probe为6 RED/4 PASS。下一节点按报告在共享source-disclosure、既有predicate/time和局部依赖owner先写RED，再实现及集中实测；不抬限额、不拼全文、不新增router，不以scope观测不足宣称产品修复。报告见study/m3-discovery/report.md。
+
+## 2026-10-24 W13 CI 根因修复与 M3 R5 验收
+
+精确CI `40098625678` 在 W13 合并HEAD `3bcfc202e1657cdd9d5e3797c4b76cd40b8b8c57` 失败，三项 `tests.unit.test_daily_push_policy` 行为测试均指向同一Git mode 根因：hook在Linux checkout不可执行；测试fixture还用`shutil.copyfile`丢失执行位。ROOT已将`.githooks/pre-push`暂存为`100755`、fixture改`copy2`并加mode回归。隔离本地Git push E2E 4/4、mode回归1/1通过；未重复跑8k全量。正常push和精确新CI待本次提交后完成。
+
+M3 R5独审`PASS_REVIEWED_M3_SOURCE_BEHAVIOR`，报告绑定六份当前源码SHA；五份原件与回放卡绑定一致。596项相关测试30.43秒通过，Ruff/diff-check通过。R4发现的`, which represents...`解释从句借谓词问题已由R5反例验证关闭。Proya 2026Q1原件12页，逐页文本检查并视觉核对1/3/11页；仅第3页包含对经营现金流下滑的有意义经营解释，其余以财务表/股东信息为主，现选中该解释合理。M3不代签正式摘要/cache/RF或完整业务覆盖。
+
+## 2026-10-24 M4 稀疏季报根因修复与复验（覆盖上面的调查中间状态）
+
+按真PDF定位到三个共因：连续性引擎把完整句与未闭合尾巴一并延后；同页下一行实测间距1.074em超出旧1.0em阈值；法定非经常性损益补助模板误成为业务卡片。TDD先确认行距回归旧版失败，再修复为最大1.15em并保留超限拒绝；连续性改为只延后未闭合片段，避免页边界二次扩大defer；报告规则屏蔽套话。
+
+中微公司2026Q1真实正控再次回放后22 spans/1,340字符/13可用卡+1不可用卡，8300+、300+、Angnova 140:1、Domingo >700:1、薄膜设备224.23%均有来源卡；珀莱雅2026Q1负控4 spans/87字符/1可用卡，现金流原因被保留。零下载、零模型调用、两份PDF原件SHA不变。中微仍partial，未被证明的其他内容不提升为摘要。
+
+连续性/几何136P，当前组合346P，Ruff和diff-check通过，M4验收报告及结果JSON已保存。W13远端hook mode修复在受限环境出现4个隔离Git/sh环境错误后，正常本机Git环境该定向文件25/25通过。当前仍待提交推送并核对精确远端CI；未重跑8k全量。下一步提交推送这批W13/M3/M4代码与PWF，CI通过后按计划进入M5 provider启动前预算拒绝根因诊断。

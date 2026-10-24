@@ -1,6 +1,6 @@
 {
   "schema_version": "w13-root-acceptance/1",
-  "status": "ROOT_ACCEPTED_PENDING_MERGE_COMMIT_AND_PUSH",
+  "status": "ROOT_ACCEPTED_MERGED_W13_FIX_COMMITTED_STRATEGY_BATCH_AND_PUSH_PENDING_EXACT_CI",
   "author_code_commit": "56baea4cdd8c89b5cf778d0bda948c31ec5af162",
   "author_frozen_head_reviewed": "a804541661f73cd035fc25179b116ba9a51c5e55",
   "author_candidate_verdict": "FAIL",
@@ -11,7 +11,7 @@
   "tests": {
     "focused_passed": 154,
     "focused_failed": 0,
-    "focused_seconds": 125.60,
+    "focused_seconds": 125.6,
     "independent_policy_probes_passed": 18,
     "real_git_ref_checks_passed": 5,
     "ruff": "PASS",
@@ -37,5 +37,29 @@
   "cleanup": "independent reviewer restored its initially absent .w13rv and Git fixture directories; ROOT .w13-root-bt was safely removed and is absent",
   "external_downloads": 0,
   "model_calls": 0,
-  "external_network_calls": 0
+  "external_network_calls": 0,
+  "post_merge_ci_failure": {
+    "id": 40098625678,
+    "head_sha": "3bcfc202e1657cdd9d5e3797c4b76cd40b8b8c57",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40098625678",
+    "root_cause": [
+      ".githooks/pre-push Git mode lacked Linux executable bit",
+      "test fixture copied hook via shutil.copyfile and dropped file mode"
+    ],
+    "fix": [
+      "track hook as 100755",
+      "use shutil.copy2 in repository fixture",
+      "assert indexed hook mode"
+    ],
+    "focused_validation": {
+      "isolated_git_push_e2e": "4/4 PASS (independent root-fix probes)",
+      "mode_regression": "1/1 PASS",
+      "full_w13_targeted_file": "25/25 PASS in normal local Git environment",
+      "restricted_environment": "21 passed; 4 were blocked by unavailable isolated remote credentials or sh child-process failure; re-run outside restriction passed all 25",
+      "full_suite_repeated": false
+    },
+    "publication": "W13_FIX_COMMITTED_STRATEGY_BATCH_AND_PUSH_PENDING_EXACT_CI"
+  },
+  "local_fix_commit": "4e593c71",
+  "exact_new_head_ci": null
 }

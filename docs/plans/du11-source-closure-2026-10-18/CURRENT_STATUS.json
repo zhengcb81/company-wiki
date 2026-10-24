@@ -2,13 +2,13 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_MARKET_FAMILY_COMPONENT_REVIEWED_REAL_CONTENT_GAPS_OPEN",
+  "overall_status": "ACTIVE_W13_FIX_MERGED_LOCAL_VALIDATION_PASS_PENDING_PUBLICATION_M3_ACCEPTED_M4_REAL_SAMPLE_PASS_M5_NEXT",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+  "last_code_commit": "4e593c71",
   "code_ci": {
     "id": 40090199646,
     "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
@@ -97,6 +97,28 @@
       "independent_review_ref": "review/r1-w07-live-independent-20261022.json",
       "formula_consumption_status": "Actual public API support consumed in a used native TIDES parameter/formula. Final3 sealed; four business reviews FAIL, shared root-cause plan in preparation.",
       "consumption_capture_id": "66fb1d54f9f34ea484244999c60e8b6b"
+    },
+    "market_family_upgrade_m3": {
+      "status": "M3_INDEPENDENT_R5_PASS",
+      "review": "review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/report.md",
+      "review_json": "review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/report.json",
+      "review_verdict": "PASS_REVIEWED_M3_SOURCE_BEHAVIOR",
+      "replay_receipt_sha256": "91595d633cdea86b8d9f3877551eb2af7e72ddb4bd53e7e0af559c5e107f4fff",
+      "producer_tree_sha256": "c8da20402eb12cc96b4478b12b283c35b523cce5385e24b054151c50f2825074",
+      "focused_tests_passed": 596,
+      "focused_seconds": 30.43,
+      "ruff": "PASS",
+      "real_samples": {
+        "US_MSFT_EX99_1": "12/12",
+        "HK_Kingsoft_interim": "96 selected spans; partial",
+        "CN_Proya_2026Q1": "4 spans, one useful operating explanation card; partial",
+        "CN_Gbits_call": "23/23",
+        "CN_AMEC_IPO": "160 selected spans; partial"
+      },
+      "limitations": [
+        "M3 acceptance covers source selection behavior and exact replay bindings only",
+        "does not accept complete content coverage, formal LLM summaries, cache recovery, or RF consumption"
+      ]
     }
   },
   "content": {
@@ -123,7 +145,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_MARKET_CONTENT_M1_M5_AND_ANNUAL14_PARTIAL_BEFORE_SUMMARY_RF_FOUR_REVIEWS",
+      "status": "ACTIVE_M4_SPARSE_REPORT_NOISE_THEN_M5_US_IPO_PREACQUISITION_DIAGNOSTIC_AND_FORMAL_SUMMARY_CACHE_RF_FOUR_REVIEWS",
       "mainline": true
     },
     {
@@ -152,7 +174,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W13 ROOT修正版独立验收PASS，当前 pending merge；按常规merge commit和有界pre-push正常发布，并观察精确HEAD的CI。然后基于M3真实样本6 RED/4 PASS调查实施指标定义、定义版本、机械重列和H1限定的共享source-meaning/局部依赖根修；用定向测试、同源回放和跨市场真实样本集中验收，不重跑超时全量。M4稀疏降噪、M5本地准备诊断、正式摘要/cache、RF采用与四审仍OPEN。",
+  "next_step_now": "W13修复已本地提交4e593c71；将M3/M4真实样本读取策略修复、审查与PWF一起提交，然后正常推送并检查精确HEAD CI。之后按remaining_root_causes诊断M5 US IPO provider启动前预算拒绝，再继续正式摘要/cache恢复、RF采用与四审、annual14及holdout循环；不重跑全量本地suite。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -785,7 +807,7 @@
     "raw_copies": 0,
     "existing_family_policies": 24,
     "existing_facets": 14,
-    "remaining": "W13 ROOT修正版已独立验收PASS，pending merge commit/push与精确CI；M3定义/版本/旧新基数/局部依赖TDD；M4稀疏降噪；M5本地准备超限诊断；其后正式摘要/cache/RF四审及未用于调规则的新公司。",
+    "remaining": "W13已在主线，CI mode根修本地25/25定向测试通过，待发布和精确CI；M3 R5通过；M4双真实季报回放和根修通过但正控仍partial；接着M5 provider启动前预算诊断，然后正式摘要/cache/RF四审及未用于调规则的新公司。",
     "samples_sha_verified": 25,
     "source_sample_count_note": "13 initial + 9 DU5 + 3 supplemental; bounded targeted reading, not full 25-document acceptance",
     "independent_review": "review/market-family-upgrade-20261024/independent-final/report.json",
@@ -865,8 +887,8 @@
       "M2_receipt": "review/market-family-upgrade-20261024/m2-root-receipt.json",
       "M2_local_source_commit": "65cd8f58",
       "M2_first_push": "review/market-family-upgrade-20261024/m2-first-push-timeout.json",
-      "W13": "ROOT_FIXES_INDEPENDENT_PASS_PENDING_MERGE_COMMIT_PUSH",
-      "M3": "READ_ONLY_DISCOVERY_COMPLETE_6_RED_4_PASS_TDD_NEXT",
+      "W13": "FIX_COMMITTED_4e593c71_PENDING_NORMAL_PUSH_AND_EXACT_CI",
+      "M3": "IMPLEMENTED_R5_INDEPENDENT_PASS_REAL_REPLAY_BOUND",
       "W13_review": "review/w13-root-reception-20261024/independent/report.json",
       "W13_acceptance": "review/w13-root-reception-20261024/root-acceptance.json",
       "W13_focused_tests_passed": 154,
@@ -874,7 +896,56 @@
       "W13_real_git_checks_passed": 5,
       "W13_full_unit_suite_rerun": false,
       "W13_author_candidate": "FAIL",
-      "M3_report": "review/market-family-upgrade-20261024/study/m3-discovery/report.json"
+      "M3_report": "review/market-family-upgrade-20261024/study/m3-discovery/report.json",
+      "M4": "ROOT_CAUSE_FIXED_REAL_Q1_REPLAY_PASS_PARTIAL_COVERAGE",
+      "M4_report": "review/market-family-upgrade-20261024/m4-sparse-quarterly/report.md",
+      "M4_receipt": "review/market-family-upgrade-20261024/m4-sparse-quarterly/discovery.json",
+      "M4_focused_tests_passed": 136,
+      "M4_positive_sample": "中微公司 2026Q1: 22 spans, 1,340 chars, 13 available cards + 1 unavailable",
+      "M4_negative_sample": "珀莱雅 2026Q1: 4 spans, 87 chars, 1 useful card",
+      "M4_source_originals_unchanged": true,
+      "M4_external_model_calls": 0,
+      "M4_downloads": 0
     }
+  },
+  "w13_ci_root_fix": {
+    "status": "ROOT_CAUSE_FIXED_W13_FIX_COMMITTED_STRATEGY_BATCH_AND_PUSH_PENDING_EXACT_CI",
+    "failed_run": {
+      "id": 40098625678,
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40098625678",
+      "conclusion": "failure",
+      "head_sha": "3bcfc202e1657cdd9d5e3797c4b76cd40b8b8c57"
+    },
+    "root_cause": [
+      ".githooks/pre-push executable bit was not recorded as Git mode 100755, so Linux checkout could not run the intended hook",
+      "tests/unit/test_daily_push_policy.py fixture used shutil.copyfile and discarded executable mode, invalidating three hook behavior assertions"
+    ],
+    "fix": [
+      "track .githooks/pre-push as 100755",
+      "preserve fixture metadata with shutil.copy2",
+      "assert git ls-files --stage records mode 100755"
+    ],
+    "focused_e2e": {
+      "normal_local_git_environment": "tests/unit/test_daily_push_policy.py 25/25 PASS",
+      "restricted_environment": "21 passed; 4 isolated git/sh checks unable to run because remote credentials/sh process are unavailable",
+      "no_full_unit_suite_rerun": true,
+      "commit_hook": "PASS (normal pre-commit checks completed)"
+    },
+    "next": "commit, normal push, inspect the CI run bound to the resulting exact HEAD",
+    "local_fix_commit": "4e593c71"
+  },
+  "market_family_upgrade_m4_discovery": {
+    "status": "ROOT_CAUSE_FIXED_REAL_SAMPLE_REPLAY_ACCEPTED",
+    "report": "review/market-family-upgrade-20261024/m4-sparse-quarterly/report.md",
+    "receipt": "review/market-family-upgrade-20261024/m4-sparse-quarterly/discovery.json",
+    "negative_sample": "Proya 2026Q1: 4 spans/87 chars, one useful cash-flow explanation card; no generic statutory subsidy card",
+    "positive_sample": "Zhongwei 2026Q1: 22 spans/1,340 chars; 13 available cards and 1 unavailable card; critical facts 8300+, 300+, Angnova 140:1, Domingo >700:1, thin-film revenue +224.23% retained",
+    "confirmed_noise": "generic statutory non-recurring-gain subsidy exception is excluded from available cards",
+    "confirmed_missed_business_facts": 0,
+    "raw_sha_unchanged": true,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "next": "M5: diagnose pre-provider budget rejection accurately; later continue multi-market/document-type strategy and formal summary/cache/RF validation.",
+    "native_continuity_tests": "136 passed"
   }
 }

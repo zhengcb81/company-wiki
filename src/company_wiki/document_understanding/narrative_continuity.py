@@ -20,7 +20,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/6"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/7"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -539,7 +539,11 @@ class _Analysis:
             abs(a[0] - b[0]) > 2.1 * size
             or overlap <= 0
             or overlap < 0.8 * min(a[2] - a[0], b[2] - b[0])
-            or not 0 <= gap <= size
+            # Native PDF baselines can drift slightly beyond one em even on
+            # adjacent wrapped lines. Keep the tolerance font-relative and
+            # bounded; source, block order, scope, font and horizontal-flow
+            # proofs above still have to agree.
+            or not 0 <= gap <= 1.15 * size
         ):
             return None
         return {
@@ -638,10 +642,19 @@ class _Analysis:
                 self.defer(run[start:])
                 return
             if not limited and end != len(run):
-                # A complete first statement cannot confer completeness on an
-                # observed open continuation at the end of the run.
+                # A trailing open continuation cannot make a prior closed
+                # statement incomplete. Keep only the closed prefix; the
+                # suffix remains withheld and keeps the document partial.
                 self.diagnostics["CONTINUITY_OPEN_END"] += 1
-                self.defer(run[start:])
+                prefix = run[start:end]
+                if len(prefix) == 1:
+                    # One complete original unit needs no borrowed continuity
+                    # window. Its source owner can assess that unit alone.
+                    self.standalone_units += 1
+                elif not self.emit(prefix, proof[start : end - 1]):
+                    self.defer(run[start:])
+                    return
+                self.defer(run[end:])
                 return
             if not self.emit(run[start:end], proof[start : end - 1]):
                 self.defer(run[start:])
@@ -731,8 +744,11 @@ def build_native_continuity(
             if state.pending_page_transition(unresolved_page_tail[-1], current):
                 # Unproved headers/footers cannot be silently filtered into a
                 # positive edge, nor can their gap certify the right fragment.
+                # The left run has already passed through finish(); defer only
+                # the current page fragment here. Re-deferring the whole run
+                # would overlap a previously emitted closed statement prefix.
                 state.diagnostics["CONTINUITY_PAGE_BOUNDARY_UNPROVEN"] += 1
-                state.defer([*unresolved_page_tail, current])
+                state.defer([current])
                 unresolved_page_tail = []
             elif not (current.page == unresolved_page_tail[-1].page + 1
                       and current.bbox[1] > 0.2 * current.frame[3]):

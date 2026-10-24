@@ -1,0 +1,68 @@
+{
+  "schema_version": "m4-quarterly-sparse-noise-discovery/1",
+  "status": "ACCEPTED_REAL_SAMPLE_REPLAY",
+  "observed_on": "2026-10-24",
+  "negative_control": {
+    "company": "珀莱雅",
+    "document": "2026年第一季度报告",
+    "source": "../../../companies/珀莱雅/raw/financial_reports/珀莱雅：珀莱雅化妆品股份有限公司2026年第一季度报告.pdf",
+    "sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+    "pages": 12,
+    "result": "selector 0.9.0 emits 4 spans and one useful card: the company-specific page-3 explanation for lower operating cash flow (lower collections and higher promotion costs). The filing otherwise consists of standard quarterly tables/shareholder data and has no management business review.",
+    "model_calls": 0,
+    "downloads": 0,
+    "original_unchanged": true
+  },
+  "positive_control": {
+    "company": "中微公司",
+    "document": "2026年第一季度报告",
+    "source": "../../../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf",
+    "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+    "bytes": 217264,
+    "pages": 15,
+    "route": "parse_pdf_bytes + selector 0.9.0 + existing summary task/card compiler",
+    "parsed_units": 515,
+    "parse_work_units": 211295,
+    "selection_work_units": 506351,
+    "trace_work_units": 382248,
+    "prose_work_units": 30890,
+    "work_limit_per_phase": 16000000,
+    "selection": {
+      "status": "partial",
+      "coverage_complete": false,
+      "candidate_count": 326,
+      "omitted_candidate_count": 304,
+      "selected_spans": 22,
+      "selected_chars": 1340,
+      "available_cards": 13,
+      "unavailable_cards": 1
+    },
+    "retained_useful_content": [
+      "over 8,300 reactors across 180+ production lines in mass production",
+      "300+ high-aspect-ratio etch reactors in mass production",
+      "Primo Angnova 140:1 result and customer certification",
+      "Primo Domingo >700:1 result and lab validation",
+      "2025 thin-film equipment revenue growth of about 224.23%",
+      "MOCVD products at customer validation with some batch orders",
+      "EPI customer validation stages",
+      "cash-flow change explanation"
+    ],
+    "confirmed_false_positive": "A generic statutory government-subsidy exception from the non-recurring-gain template was selected as the sole support of one card; it is not a company-specific business fact.",
+    "important_source_content_not_in_selected_cards": [
+      "more than 8,300 reactors across 180+ production lines",
+      "300+ high-aspect-ratio etch reactors in mass production (sentence crosses the page boundary)",
+      "Primo Angnova 140:1 result and client certification",
+      "Primo Domingo >700:1 lab validation",
+      "2025 thin-film equipment revenue growth of about 224.23%"
+    ],
+    "source_file_sha_before_after": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+    "model_calls": 0,
+    "downloads": 0
+  },
+  "diagnosis": {
+    "confirmed": "Three shared causes were fixed: native continuity had deferred closed sentence prefixes with later open tails; line-gap tolerance rejected an observed 1.074-em adjacent PDF line; a statutory non-recurring-gain template was misclassified as a company-specific operating fact.",
+    "fixes": "Preserve terminal closed prefixes and defer only the unfinished suffix; prevent overlapping broad page-tail deferrals; allow up to 1.15-em measured adjacent-line gap while preserving source/page/block/scope/font/alignment barriers; exclude the statutory subsidy boilerplate in shared reporting rules.",
+    "acceptance": "Targeted native-continuity and geometry tests pass 136/136. The real replay assertions pass for five Zhongwei business facts, Proya's operating cash-flow explanation, absence of the generic subsidy clause from available cards, and unchanged original-file SHA-256.",
+    "remaining_limit": "Zhongwei output remains partial because unrelated open statements, unproven page transitions, and bounded windows remain withheld. This acceptance covers the targeted high-value facts and the sparse-report negative control, not complete document coverage."
+  }
+}

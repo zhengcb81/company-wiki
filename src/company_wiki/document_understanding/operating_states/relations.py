@@ -618,6 +618,8 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             continue
         construction = p.EVENT_PATTERNS[order][0]
         groups = match.groupdict()
+        if construction == "scope_cn" and _nominal_scope_event(clause_text, match):
+            continue
         # The existing English shipment grammar binds its verbal phrase in
         # ``qual`` (shipped / delivered / suspend shipments). It is both an
         # aspect/state cue and the actual source predicate, not a noun list.
@@ -959,6 +961,26 @@ def detect_operating_relations(
 _FRONTED_CONDITION = re.compile(r"^\s*(?:如果|若|一旦|假如|\bif\b|\bunless\b)", re.I)
 _CONTRAST_BOUNDARY = re.compile(r"^\s*(?:但是|然而|不过|但|\bhowever\b|\bbut\b|\bnevertheless\b)", re.I)
 _SENTENCE_END = re.compile(r"[。！？!?；;]|\.(?:\s|$)")
+_SCOPE_EXCLUSION = re.compile(r"^\s*除(?:了)?(?P<body>[^，,。；;]{0,160})")
+_SCOPE_TEMPLATE_LABEL = re.compile(
+    r"(?:业务|活动)情况(?:说明|描述)?"
+    r"(?:\s*[（(]\s*(?:如有|若有)\s*[）)])?\s*$"
+)
+
+
+def _nominal_scope_event(clause_text: str, match: re.Match[str]) -> bool:
+    """Reject scope predicates used inside exclusion/heading noun phrases.
+
+    Chinese event vocabulary overlaps with statutory definitions and table
+    headings. These forms describe a scope or request information instead of
+    asserting that the named actor performs the activity.
+    """
+    exclusion = _SCOPE_EXCLUSION.match(clause_text)
+    if exclusion is not None:
+        body_start, body_end = exclusion.span("body")
+        if body_start <= match.start() < body_end and "外" in exclusion.group("body"):
+            return True
+    return bool(_SCOPE_TEMPLATE_LABEL.search(match.groupdict().get("obj") or ""))
 
 
 def _detect_operating_relations(

@@ -12,6 +12,7 @@ import re
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_business_meaning import _component_structure, _STRUCTURE, _OBJECT
 from .narrative_predicate_state import predicate_scope
+from .n6_scope_changes import scope_change_reasons
 
 
 READING_DISCLOSURE_SCAN_PASSES = 4
@@ -64,6 +65,95 @@ _PERIOD = re.compile(
     r"(?:下一|未来)(?:会计|财务)?年(?:度)?|未来|之后期间|以后期间|\bFY\s*\d{4}\b|"
     r"\b(?:fiscal|calendar)\s+year\s+\d{4}\b|\b(?:future periods?|thereafter|"
     r"over the next|within the next|next\s+(?:year|quarter|(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|eighteen|twenty(?:[- ]four)?|thirty(?:[- ]six)?)\s+(?:months?|quarters?|years?)))\b", re.I)
+
+# Labelled metric definitions commonly arrive as one flattened native HTML
+# paragraph in SEC exhibits. A colon alone is not enough: require a business
+# metric label and a definitional relation in the same short source clause.
+_METRIC_LABEL_NOUN = re.compile(
+    r"(?:\b(?:bookings?|remaining\s+performance\s+obligations?|RPO|revenue|sales|"
+    r"growth|gross\s+margin|margins?|seats?|users?|customers?|orders?|backlog|"
+    r"consumption|usage|operating\s+segments?)\s*)$", re.I)
+_METRIC_LABEL_WORDS = frozenset({
+    "a", "an", "and", "at", "average", "backlog", "billings", "booking",
+    "bookings", "billed", "business", "businesses", "cloud", "commercial",
+    "company", "company's", "consumer", "consumption", "contract", "contracted",
+    "customer", "customers", "deferred", "ex", "gross", "growth", "group",
+    "industry", "license", "licenses", "licensing", "margin", "margins", "net",
+    "of", "operating", "obligation", "obligations", "order", "orders", "other",
+    "our", "paid", "percentage", "performance", "per", "product", "products",
+    "remaining", "reportable", "revenue", "revenues", "sales", "search", "seat",
+    "seats", "segment", "segments", "server", "service", "services", "solution",
+    "solutions", "subscription", "subscriptions", "tac", "total", "unearned",
+    "the", "usage", "user", "users", "xbox", "yoy", "y/y",
+})
+_METRIC_LABEL_HEAD_WORDS = frozenset({
+    "backlog", "booking", "bookings", "growth", "margin", "margins", "obligation",
+    "obligations", "order", "orders", "revenue", "revenues", "rpo", "sales",
+    "seat", "seats", "usage", "user", "users",
+})
+_METRIC_LABEL_NONBUSINESS = re.compile(
+    r"\b(?:audit(?:or|ing)?|training|train(?:ed|ing)?|test(?:ed|ing)?|"
+    r"review(?:ed|ing)?|inspect(?:ed|ing|ion)?|employee)\b", re.I)
+_METRIC_LABEL_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9’'./&+-]*|\d+")
+_METRIC_DEFINITION_CUE = re.compile(
+    r"\b(?:sum\s+of|revenue\s+from|revenue\s+allocated|commercial\s+portion|"
+    r"number\s+of|count\s+of|includes?|including|compris\w*|consists?\s+of|"
+    r"defined\s+as|calculated\s+(?:as|by)|measured\s+by)\b|"
+    r"(?:按.{0,12}(?:計算|计算|统计)|由.{0,24}(?:組成|组成|包括|包含))", re.I)
+_METRIC_ASSERTION_SUBJECT = re.compile(
+    r"\b(?:(?:active|average|cloud|commercial|contracted|customer|daily|gross|"
+    r"licensed|monthly|new|operating|paid|remaining|reportable|service|subscription|"
+    r"total|unbilled|unearned)\s+)*(?:remaining\s+performance\s+obligations?|"
+    r"bookings?|revenues?|sales|margins?|seats?|users?|customers?|orders?|backlog|"
+    r"consumption|usage|subscribers?|projects?|capacity|output|volumes?)\b"
+    r"(?:\s+(?:growth|margin|usage|count|number|volume))?", re.I)
+_INDEPENDENT_METRIC_ASSERTION = re.compile(
+    r"^\s*(?:(?:has|have|had|is|are|was|were|will|would|may|might|could|can|"
+    r"expects?|expected|plans?|planned)\s+)*(?:to\s+|be\s+)?"
+    r"(?:increas\w*|decreas\w*|expand\w*|grow(?:s|ing)?|grew|grown|rise|rises|"
+    r"rose|risen|fall|falls|fell|fallen|declin\w*|reach\w*|number(?:s|ed|ing)?|"
+    r"total(?:s|ed|led|ing|ling)?|account(?:s|ed)?\s+for|represent(?:s|ed)|"
+    r"amount(?:s|ed)\s+to|remain(?:s|ed)|continue(?:s|d)\s+to\s+"
+    r"(?:grow|increase|expand|decline)|contribut\w*\s+to)\b|"
+    r"^\s*(?:is|are|was|were|has|have|had)\s+(?:(?:about|approximately|nearly|over)\s+)?"
+    r"(?:up|down|higher|lower|[$¥€£]?\s*\d)", re.I)
+
+
+def _has_independent_metric_assertion(tail: str) -> bool:
+    """Require a predicate directly after the new metric subject phrase."""
+    subject = _METRIC_ASSERTION_SUBJECT.search(tail)
+    return bool(subject and _INDEPENDENT_METRIC_ASSERTION.match(tail[subject.end():]))
+_METRIC_DEFINITION_TAG = re.compile(
+    r"\bmetric\s+(?:definition\s+(?:(?:has|have|was|were|is)\s+)?"
+    r"(?:(?:been)\s+)?(?:updated|changed|revised|created)|"
+    r"(?:is\s+)?created\s+by\s+combining)\b", re.I)
+_UPDATED_METRIC_DEFINITION = re.compile(
+    r"\b[^。！？;；.!?\n]{0,100}\b(?:revenue|sales|bookings?|seats?|growth|"
+    r"margin|usage|consumption|customer|subscriber)[^。！？;；.!?\n]{0,35}"
+    r"\bmetric\s+definition\s+(?:(?:has|have|was|were|is)\s+)?"
+    r"(?:(?:been)\s+)?(?:updated|changed|revised|created)\b|"
+    r"\bmetric\s+(?:definition\s+)?(?:is\s+)?created\s+by\s+combining\b", re.I)
+_MECHANICAL_OUTLOOK = re.compile(
+    r"\bmechanical\s+adjustments?\s+only\b.{0,100}\b(?:outlook|guidance)\b|"
+    r"\b(?:outlook|guidance)\b.{0,80}\b(?:only\s+mechanical\s+adjustments?|"
+    r"mechanical\s+adjustments?\s+only)\b", re.I)
+_UNCHANGED_OUTLOOK = re.compile(
+    r"\b(?:outlook|guidance)\b.{0,100}\b(?:unchanged|no\s+change)\b|"
+    r"\bno\s+change\s+to\s+(?:the\s+)?(?:company\s+)?outlook\b|"
+    r"(?:展望|指引).{0,40}(?:保持不變|保持不变|沒有變化|没有变化|無變化|无变化)|"
+    r"(?:展望|指引).{0,30}(?:沒有改變|没有改变|不變|不变)", re.I)
+_SINGLE_OPERATING_SEGMENT = re.compile(
+    r"\b(?:only\s+(?:(?:has|have|reports?|is|are)\s+)?(?:one|a\s+single)|"
+    r"(?:one|a\s+single)\s+and\s+only)\s+(?:(?:reportable|operating|reporting)\s+)?segments?\b|"
+    r"(?:僅有|仅有|只有|僅為|仅为|只有)\s*(?:一個|一个)\s*(?:經營|经营|報告|报告)?分部", re.I)
+_NO_FUTURE_MATERIAL_INVESTMENT = re.compile(
+    r"\bno\s+(?:future\s+)?material\s+investments?\b.{0,90}"
+    r"\b(?:capital\s+assets?|capital\s+expenditures?|plans?|commitments?)\b|"
+    r"\b(?:no|not\s+(?:have|plan)|does\s+not\s+have|has\s+no)\b.{0,70}"
+    r"\b(?:future\s+)?material\s+(?:investments?|capital\s+assets?)\b.{0,70}"
+    r"(?:計劃|计划|投資|投资)|"
+    r"(?:並無|并无|沒有|没有|未有).{0,18}(?:未來|未来).{0,16}重大"
+    r".{0,30}(?:投資|投资).{0,50}(?:資本資產|资本资产|計劃|计划)", re.I)
 # Finite links connect a contract head/part to a conversion predicate. Only
 # grammatical carriers, quantities and time frames may intervene; another
 # actor/object cannot borrow this contract's relation, even after "of which".
@@ -238,6 +328,122 @@ def _customer_geography(clause: str) -> bool:
     return False
 
 
+def _metric_label_noun_phrase(label: str) -> bool:
+    """Accept a metric noun phrase, not any sentence that happens to end in revenue."""
+    if _METRIC_LABEL_NOUN.search(label) is None or _METRIC_LABEL_NONBUSINESS.search(label):
+        return False
+    tokens = _METRIC_LABEL_TOKEN.findall(label)
+    if not tokens:
+        return False
+    unknown = [token for token in tokens
+               if token.casefold() not in _METRIC_LABEL_WORDS and not token.isdigit()]
+    metric_heads = sum(token.casefold() in _METRIC_LABEL_HEAD_WORDS for token in tokens)
+    # Capitalization alone cannot turn prose headings or verbs into metric
+    # names. Unknown title-case words are tolerated only when the label has a
+    # strong, multiword metric signature (for example, "Azure revenue growth").
+    return not unknown or (
+        metric_heads >= 2
+        and all(token[0].isupper() or token.isupper() for token in unknown)
+    )
+
+
+def _metric_label_candidates(text: str, end: int, start: int) -> tuple[tuple[int, str], ...]:
+    """Find bounded label candidates before a colon or definition marker."""
+    candidates = {start}
+    candidates.update(
+        start + match.start()
+        for match in re.finditer(r"(?<!\w)[A-Z][A-Za-z0-9’'./&+-]*", text[start:end])
+    )
+    return tuple(
+        (candidate, text[candidate:end].strip())
+        for candidate in sorted(candidates)
+        if not _METRIC_LABEL_NONBUSINESS.search(text[start:candidate])
+        if _metric_label_noun_phrase(text[candidate:end].strip())
+    )
+
+
+def reporting_metric_definition_spans(clause: str) -> tuple[tuple[int, int], ...]:
+    """Return source-local label/definition ranges, excluding separate assertions.
+
+    SEC exhibits often flatten adjacent definitions into one paragraph. The
+    label boundary is grammatical and local: metric noun phrase + definition
+    cue. Updated metric labels without a colon are bounded at their own
+    "metric definition" marker. A new issuer assertion after a definition is
+    left outside the range so it can still be recognized as an actual change.
+    """
+    spans: list[tuple[int, int]] = []
+
+    for colon in re.finditer(r"[:：]", clause):
+        previous = max(
+            (match.end() for match in re.finditer(r"[。！？.!?;；:：]", clause[:colon.start()])),
+            default=0,
+        )
+        label = next(iter(_metric_label_candidates(clause, colon.start(), previous)), None)
+        if label is None:
+            continue
+        label_start, _label_text = label
+        next_colon = re.search(r"[:：]", clause[colon.end():])
+        body_end = colon.end() + next_colon.start() if next_colon else len(clause)
+        terminator = re.search(r"[。！？.!?;；\n]", clause[colon.end():body_end])
+        if terminator is not None:
+            body_end = colon.end() + terminator.start()
+        restart = re.search(
+            r"(?:[,，;；]\s*(?:and\s+)?|\band\s+)"
+            r"(?:we|our|the company|the group)\b",
+            clause[colon.end():body_end], re.I,
+        )
+        restart_tail = (
+            clause[colon.end() + restart.end():body_end]
+            if restart is not None else ""
+        )
+        if restart is not None and _has_independent_metric_assertion(restart_tail):
+            body_end = colon.end() + restart.start()
+        body = clause[colon.end():body_end]
+        if _METRIC_DEFINITION_CUE.search(body):
+            spans.append((label_start, body_end))
+
+    for marker in _METRIC_DEFINITION_TAG.finditer(clause):
+        previous = max(
+            (match.end() for match in re.finditer(r"[。！？.!?;；:：]", clause[:marker.start()])),
+            default=0,
+        )
+        label = next(iter(_metric_label_candidates(clause, marker.start(), previous)), None)
+        if label is not None:
+            spans.append((label[0], marker.end()))
+
+    return tuple(sorted(set(spans)))
+
+
+def reporting_basis_relations(clause: str) -> tuple[str, ...]:
+    """Observe metric definitions, reporting changes and explicit outlook limits.
+
+    These are source-defined business bases, not numeric results. The same
+    observer is reused by reading purpose and fact projection so a revenue or
+    accounting term cannot make two competing classifiers disagree.
+    """
+    relations: list[str] = []
+    definition_spans = reporting_metric_definition_spans(clause)
+    if definition_spans:
+        relations.append("reporting_metric_definition")
+    if _UPDATED_METRIC_DEFINITION.search(clause) and any(
+        span for span in definition_spans
+        if _METRIC_DEFINITION_TAG.search(clause[span[0]:span[1]])
+    ):
+        relations.append("reporting_definition_change")
+        # A metric-definition change is still metadata about how to read a
+        # comparison. Keep it distinct from an observed change in the metric.
+        relations.append("reporting_metric_definition")
+    relations.extend(reason for reason in scope_change_reasons(clause)
+                     if reason in {"reporting_definition_change", "scope_unchanged"})
+    if _MECHANICAL_OUTLOOK.search(clause) or _UNCHANGED_OUTLOOK.search(clause):
+        relations.append("reporting_outlook_recast")
+    if _SINGLE_OPERATING_SEGMENT.search(clause):
+        relations.append("reporting_segment_scope")
+    if _NO_FUTURE_MATERIAL_INVESTMENT.search(clause):
+        relations.append("future_investment_disclosure")
+    return tuple(dict.fromkeys(relations))
+
+
 # Readability is intentionally broader than scarce summary material. Unknown
 # state and generic benefit/vision remain retrievable descriptions. Independently
 # observed quantities, scope, mechanisms, plans or constraints retain their value.
@@ -270,6 +476,7 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
     if _qualitative_operating_intent(clause):
         relations.append("operating_plan")
     relations.extend(_contract_uses(clause))
+    relations.extend(reporting_basis_relations(clause))
     return tuple(dict.fromkeys(relations))
 
 

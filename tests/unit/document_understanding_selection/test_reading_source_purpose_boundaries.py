@@ -39,6 +39,10 @@ NAVIGATION = [
     "具体详见本报告第三节、五、报告期内主要经营情况。",
     "For further details see Section 8 of this report.",
 ]
+STATUTORY_SUBSIDY_EXCEPTION = (
+    "计入当期损益的政府补助，但与公司正常经营业务密切相关、符合国家政策规定、"
+    "按照确定的标准享有、对公司损益产生持续影响的政府补助除外"
+)
 
 
 def unit(text, index=0):
@@ -165,6 +169,28 @@ def test_public_selector_retains_factory_event_inside_accounting_note():
         page_count=1, pages_read=1, mime_type="text/plain")
     result=select_narrative_evidence(parsed,title="Annual report",existing_kind="annual_report",selector_version="0.9.0")
     assert text in [span.raw_text for span in result.evidence_spans]
+
+
+def test_standard_government_subsidy_exception_is_not_a_current_operating_state():
+    assert source_purpose(STATUTORY_SUBSIDY_EXCEPTION) == "accounting_policy"
+    fact = detect_reading_business_fact(STATUTORY_SUBSIDY_EXCEPTION)
+    assert not fact.eligible
+
+
+def test_standard_government_subsidy_exception_does_not_become_a_source_card():
+    digest = sha256(b"quarterly-template-source").hexdigest()
+    parsed = DocumentStructure(source_id_for_sha256(digest), digest, "zh",
+        (unit(STATUTORY_SUBSIDY_EXCEPTION),), page_count=1, pages_read=1,
+        mime_type="text/plain")
+    result = select_narrative_evidence(parsed, title="季度报告",
+        existing_kind="quarterly_report", selector_version="0.9.0")
+    assert not result.evidence_spans
+
+
+def test_real_operating_and_subsidy_events_are_not_treated_as_statutory_template():
+    actual = "公司新增软件产品已经交付客户，客户完成生产验证。"
+    assert source_purpose(actual) not in NON_OPERATING_PURPOSES
+    assert detect_reading_business_fact(actual).eligible
 
 
 @pytest.mark.parametrize("prefix", ["1.", "12.", "a.", "(B)."])

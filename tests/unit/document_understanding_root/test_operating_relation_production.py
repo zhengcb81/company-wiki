@@ -70,6 +70,31 @@ def test_actual_issuer_milestone_is_recalled():
     assert "operating_milestone" in candidates[0].reasons
 
 
+@pytest.mark.parametrize("text", [
+    "除同公司正常经营业务相关的有效套期保值业务外，非金融企业持有金融资产产生的损益。",
+    "前10名股东参与融资融券及转融通业务情况说明（如有）",
+])
+def test_nominal_scope_mentions_do_not_become_operating_assertions(text):
+    result = relations.detect_operating_relations(observation(text), work_budget=WorkBudget(100000))
+    assert not [relation for relation in result["relations"]
+                if relation["activity"] == "business_scope"]
+
+    parsed, pipeline = native([(text,)])
+    candidates, *_rest = reading._candidates(parsed, pipeline)
+    bad_state_reasons = {"operating_current_state", "operating_other_party_state"}
+    assert not any(bad_state_reasons.intersection(candidate.reasons) for candidate in candidates)
+
+
+@pytest.mark.parametrize("text", [
+    "公司经营电子材料业务。",
+    "股东已参与新产品商业化项目。",
+])
+def test_asserted_scope_relations_survive_nominal_scope_filter(text):
+    result = relations.detect_operating_relations(observation(text), work_budget=WorkBudget(100000))
+    assert [relation for relation in result["relations"]
+            if relation["activity"] == "business_scope"]
+
+
 @pytest.mark.parametrize("text,stage,modality,polarity", [
     ("The company has shipped ZX-9 products.", "current", "actual", "positive"),
     ("The company has not shipped ZX-9 products.", "current", "actual", "negative"),

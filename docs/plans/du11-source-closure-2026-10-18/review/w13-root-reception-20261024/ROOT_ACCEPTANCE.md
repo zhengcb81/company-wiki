@@ -23,3 +23,15 @@ ROOT 修复后的最终验证为 154 项通过（125.60 秒；含并行审查的
 ## 发布状态
 
 本记录创建时，W13 的作者祖先已在 ROOT 的 pending merge 中，ROOT 修复、验收记录和 PWF 待提交。必须使用常规 merge commit、正常 pre-push 和正常远端推送；完整 suite 留给现有 CI。提交后更新本节、`CURRENT_STATUS.md/json` 及精确 CI 收据。全量 Windows 长路径和 B10 问题不阻止 W13 有界调度接收，但不能标为解决。
+
+
+## 后续精确 CI 的根因修复（2026-10-24）
+
+合并后精确CI `40098625678` 失败；失败集中在`tests.unit.test_daily_push_policy`的hook行为测试。根因是`.githooks/pre-push`提交mode缺少Linux执行位，测试checkout中未能执行；fixture的`shutil.copyfile`也丢弃了执行位。ROOT已准备跟踪mode `100755`、fixture使用`copy2`并加`git ls-files --stage`模式回归。隔离真实Git push E2E 4/4、mode回归1/1通过；全量套件未重复运行。原始失败仍作为历史记录。本次根修并提交后需核对与新HEAD完全一致的远端CI，再更新本记录最终发布字段。
+
+### ROOT复验（提交前）
+
+- 当前主线已含W13合并提交`3bcfc202e1657cdd9d5e3797c4b76cd40b8b8c57`；本次是合并后同一根因的修复，不再重做分支合并。
+- `tests/unit/test_daily_push_policy.py` 在受限环境中21项通过、4项受Windows `sh`/隔离Git远端凭证限制未能执行；在正常本机Git环境重跑后25/25通过。
+- hook在Git index mode回归为`100755`；Ruff及W13/M3/M4相关diff检查通过。M4真实季报连续性/几何136项通过，整套8k+本地测试未重跑。
+- 当前发布状态：待提交推送，之后只接受绑定新HEAD的远端CI结果；既有CI失败继续保留为历史，未将其改写成通过。

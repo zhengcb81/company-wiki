@@ -328,7 +328,11 @@ CN_REVISION_WORDS = ("修订稿", "修订版", "更新稿", "更正", "补充公
 CN_SUMMARY_WORDS = ("摘要",)
 
 HK_OFFERING_WORDS = ("全球發售", "全球发售", "發售股份", "发售股份", "上市文件")
-HK_PROSPECTUS_WORDS = ("招股章程", "招股说明书")
+# "招股说明书" is shared by CN and HK Simplified Chinese material, so it
+# cannot identify an HK filing by itself. HK Simplified prospectuses still
+# route through market-specific cover/TOC evidence such as 全球发售; the
+# traditional filing term remains a useful standalone cover signal.
+HK_PROSPECTUS_WORDS = ("招股章程",)
 HK_ANNUAL_WORDS = ("annual report", "年報", "年报")
 #: Traditional and Simplified forms are distinct codepoints, so both must be listed.
 #: NFKC folding does *not* convert Traditional to Simplified; a Han-variant-aware

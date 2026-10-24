@@ -1,0 +1,2090 @@
+{
+  "schema_version": "m4-real-q1-probe/1",
+  "samples": [
+    {
+      "company": "中微公司",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf",
+      "sha256_before": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "sha256_after": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "pages": 15,
+      "parsed_units": 515,
+      "parse_work_units": 211295,
+      "selection_work_units": 516478,
+      "trace_work_units": 399034,
+      "prose_work_units": 34018,
+      "base_owner_packages_for_key_units": [
+        {
+          "kind": "background",
+          "package_id": "m24",
+          "target_ids": [
+            "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f"
+          ],
+          "member_count": 1
+        },
+        {
+          "kind": "background",
+          "package_id": "m29",
+          "target_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860"
+          ],
+          "member_count": 3
+        },
+        {
+          "kind": "background",
+          "package_id": "m32",
+          "target_ids": [
+            "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537"
+          ],
+          "member_count": 3
+        },
+        {
+          "kind": "background",
+          "package_id": "m33",
+          "target_ids": [
+            "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25",
+            "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16"
+          ],
+          "member_count": 6
+        }
+      ],
+      "continuity_for_key_units": [
+        {
+          "unit": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+            "page": 3,
+            "paragraph": 6,
+            "text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的",
+            "pdf_block": 4,
+            "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+            "block_char_start": 15,
+            "block_char_end": 53
+          },
+          "observation_kind": "paragraph",
+          "observation_role": "company_filing",
+          "section_role": null,
+          "ordinal": 77,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              126.07035827636719,
+              531.489990234375,
+              141.72769165039062
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": null,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 3,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "source_block": {
+            "pdf_block": 4,
+            "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+            "block_char_start": 15,
+            "block_char_end": 53
+          },
+          "profile": {
+            "reading_profile_key": null,
+            "section_role": "unknown",
+            "priority": 2,
+            "family": "quarterly",
+            "document_kind": null
+          },
+          "base_packages": [
+            {
+              "kind": "native_continuity",
+              "package_id": "native-continuity:1b070e49a870452b785bac3340ef44c8f19ffc81f2424d440e4c4e20a21d1d1b"
+            }
+          ],
+          "base_package_members": [
+            {
+              "kind": "background",
+              "members": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+                  "page": 3,
+                  "paragraph": 6,
+                  "text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的",
+                  "pdf_block": 4,
+                  "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+                  "block_char_start": 15,
+                  "block_char_end": 53
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+                  "page": 3,
+                  "paragraph": 7,
+                  "text": "业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀",
+                  "pdf_block": 5,
+                  "block_sha256": "0d54d1ad67a9fdb612a762c0518b32f4800ab8c16262001f85be10f17e5896ce",
+                  "block_char_start": 0,
+                  "block_char_end": 51
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:0297344369ad95da5dc744b30667469af4a322a095c35d2bf87ff05e0927d6b7",
+                  "page": 3,
+                  "paragraph": 8,
+                  "text": "性能，全面满足客户的各项工艺指标要求。",
+                  "pdf_block": 6,
+                  "block_sha256": "4e226056f4ba871f6f3e3038aca9ca92389b794dbbab59a6df34170f57620d59",
+                  "block_char_start": 0,
+                  "block_char_end": 19
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:a8f854111de77a6d6aa4a0125f6bbe62c9e171d61731fa8c4a98d18d1ef69112",
+                  "page": 3,
+                  "paragraph": 9,
+                  "text": "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、",
+                  "pdf_block": 7,
+                  "block_sha256": "b58cb790d0220090ed7dcdbffd003545fda03b1a5a75aeeb9b4a90c9e9139224",
+                  "block_char_start": 0,
+                  "block_char_end": 43
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:b2444a1eb4f6407f196043e3faa68c51bc3c822f6c458fc7224824772cff0409",
+                  "page": 3,
+                  "paragraph": 10,
+                  "text": "EPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年",
+                  "pdf_block": 8,
+                  "block_sha256": "18b73007f0d28e77a4b24e8344405f64bc5a7f16a40c0cdfdb30e1e760be3c46",
+                  "block_char_start": 0,
+                  "block_char_end": 53
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25",
+                  "page": 3,
+                  "paragraph": 11,
+                  "text": "薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+                  "pdf_block": 9,
+                  "block_sha256": "4e4ab6a531e69f41fc77e6887e12fcaa0a76ae52786c024caa15b81cc0d502a6",
+                  "block_char_start": 0,
+                  "block_char_end": 36
+                }
+              ]
+            }
+          ],
+          "continuity_window": [
+            "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+            "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+            "urn:company-wiki:narrative-unit:sha256:0297344369ad95da5dc744b30667469af4a322a095c35d2bf87ff05e0927d6b7"
+          ],
+          "blocked": false,
+          "deferred_ranges": []
+        },
+        {
+          "unit": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25",
+            "page": 3,
+            "paragraph": 11,
+            "text": "薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+            "pdf_block": 9,
+            "block_sha256": "4e4ab6a531e69f41fc77e6887e12fcaa0a76ae52786c024caa15b81cc0d502a6",
+            "block_char_start": 0,
+            "block_char_end": 36
+          },
+          "observation_kind": "paragraph",
+          "observation_role": "company_filing",
+          "section_role": null,
+          "ordinal": 82,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              245.01730346679688,
+              531.3653564453125,
+              258.7276916503906
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 3,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "source_block": {
+            "pdf_block": 9,
+            "block_sha256": "4e4ab6a531e69f41fc77e6887e12fcaa0a76ae52786c024caa15b81cc0d502a6",
+            "block_char_start": 0,
+            "block_char_end": 36
+          },
+          "profile": {
+            "reading_profile_key": null,
+            "section_role": "unknown",
+            "priority": 2,
+            "family": "quarterly",
+            "document_kind": null
+          },
+          "base_packages": [
+            {
+              "kind": "native_continuity",
+              "package_id": "native-continuity:8881d6cb0e4121cdbb1782c9c7a8917410c209ae749e89366dd65dede207755d"
+            }
+          ],
+          "base_package_members": [
+            {
+              "kind": "background",
+              "members": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+                  "page": 3,
+                  "paragraph": 6,
+                  "text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的",
+                  "pdf_block": 4,
+                  "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+                  "block_char_start": 15,
+                  "block_char_end": 53
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+                  "page": 3,
+                  "paragraph": 7,
+                  "text": "业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀",
+                  "pdf_block": 5,
+                  "block_sha256": "0d54d1ad67a9fdb612a762c0518b32f4800ab8c16262001f85be10f17e5896ce",
+                  "block_char_start": 0,
+                  "block_char_end": 51
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:0297344369ad95da5dc744b30667469af4a322a095c35d2bf87ff05e0927d6b7",
+                  "page": 3,
+                  "paragraph": 8,
+                  "text": "性能，全面满足客户的各项工艺指标要求。",
+                  "pdf_block": 6,
+                  "block_sha256": "4e226056f4ba871f6f3e3038aca9ca92389b794dbbab59a6df34170f57620d59",
+                  "block_char_start": 0,
+                  "block_char_end": 19
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:a8f854111de77a6d6aa4a0125f6bbe62c9e171d61731fa8c4a98d18d1ef69112",
+                  "page": 3,
+                  "paragraph": 9,
+                  "text": "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、",
+                  "pdf_block": 7,
+                  "block_sha256": "b58cb790d0220090ed7dcdbffd003545fda03b1a5a75aeeb9b4a90c9e9139224",
+                  "block_char_start": 0,
+                  "block_char_end": 43
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:b2444a1eb4f6407f196043e3faa68c51bc3c822f6c458fc7224824772cff0409",
+                  "page": 3,
+                  "paragraph": 10,
+                  "text": "EPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年",
+                  "pdf_block": 8,
+                  "block_sha256": "18b73007f0d28e77a4b24e8344405f64bc5a7f16a40c0cdfdb30e1e760be3c46",
+                  "block_char_start": 0,
+                  "block_char_end": 53
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25",
+                  "page": 3,
+                  "paragraph": 11,
+                  "text": "薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+                  "pdf_block": 9,
+                  "block_sha256": "4e4ab6a531e69f41fc77e6887e12fcaa0a76ae52786c024caa15b81cc0d502a6",
+                  "block_char_start": 0,
+                  "block_char_end": 36
+                }
+              ]
+            }
+          ],
+          "continuity_window": [
+            "urn:company-wiki:narrative-unit:sha256:a8f854111de77a6d6aa4a0125f6bbe62c9e171d61731fa8c4a98d18d1ef69112",
+            "urn:company-wiki:narrative-unit:sha256:b2444a1eb4f6407f196043e3faa68c51bc3c822f6c458fc7224824772cff0409",
+            "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25"
+          ],
+          "blocked": false,
+          "deferred_ranges": []
+        },
+        {
+          "unit": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+            "page": 3,
+            "paragraph": 4,
+            "text": "备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并",
+            "pdf_block": 3,
+            "block_sha256": "f7f258dbd48b156458e99678e7da688e0cf7aff02ecaf6bc51cfedeba8cdfcf0",
+            "block_char_start": 0,
+            "block_char_end": 57
+          },
+          "observation_kind": "paragraph",
+          "observation_role": "company_filing",
+          "section_role": null,
+          "ordinal": 75,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              102.67035675048828,
+              531.489990234375,
+              118.32769775390625
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": null,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 3,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "source_block": {
+            "pdf_block": 3,
+            "block_sha256": "f7f258dbd48b156458e99678e7da688e0cf7aff02ecaf6bc51cfedeba8cdfcf0",
+            "block_char_start": 0,
+            "block_char_end": 57
+          },
+          "profile": {
+            "reading_profile_key": null,
+            "section_role": "unknown",
+            "priority": 2,
+            "family": "quarterly",
+            "document_kind": null
+          },
+          "base_packages": [
+            {
+              "kind": "native_continuity",
+              "package_id": "native-continuity:118195c812208e1f2940b5587bee93d72ec67b4a22bc4d4d5274dad5c7a24d3a"
+            }
+          ],
+          "base_package_members": [
+            {
+              "kind": "background",
+              "members": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+                  "page": 3,
+                  "paragraph": 3,
+                  "text": "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设",
+                  "pdf_block": 2,
+                  "block_sha256": "65f68fcaf8d4c6427d0e300473c4459f206041fc5881806514ce90313c3b164e",
+                  "block_char_start": 12,
+                  "block_char_end": 46
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+                  "page": 3,
+                  "paragraph": 4,
+                  "text": "备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并",
+                  "pdf_block": 3,
+                  "block_sha256": "f7f258dbd48b156458e99678e7da688e0cf7aff02ecaf6bc51cfedeba8cdfcf0",
+                  "block_char_start": 0,
+                  "block_char_end": 57
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f",
+                  "page": 3,
+                  "paragraph": 5,
+                  "text": "付运到国内领先存储客户端认证。",
+                  "pdf_block": 4,
+                  "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+                  "block_char_start": 0,
+                  "block_char_end": 15
+                }
+              ]
+            }
+          ],
+          "continuity_window": [
+            "urn:company-wiki:narrative-unit:sha256:4ef8c4d77fee8fc40ce22fd85215bafc73bcd1f70682de6bb97a455369b5328f",
+            "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+            "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+            "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f"
+          ],
+          "blocked": false,
+          "deferred_ranges": []
+        },
+        {
+          "unit": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f",
+            "page": 2,
+            "paragraph": 34,
+            "text": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "pdf_block": 34,
+            "block_sha256": "9f3296024e61733c2b1befe1593f2309c46a5eae57025ebf96c0cb7af60cb504",
+            "block_char_start": 0,
+            "block_char_end": 44
+          },
+          "observation_kind": "paragraph",
+          "observation_role": "company_filing",
+          "section_role": null,
+          "ordinal": 56,
+          "layout": {
+            "bbox": [
+              110.87999725341797,
+              544.0562744140625,
+              531.4894409179688,
+              557.7666625976562
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 2,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "source_block": {
+            "pdf_block": 34,
+            "block_sha256": "9f3296024e61733c2b1befe1593f2309c46a5eae57025ebf96c0cb7af60cb504",
+            "block_char_start": 0,
+            "block_char_end": 44
+          },
+          "profile": {
+            "reading_profile_key": null,
+            "section_role": "unknown",
+            "priority": 2,
+            "family": "quarterly",
+            "document_kind": null
+          },
+          "base_packages": [
+            {
+              "kind": "native_continuity",
+              "package_id": "native-continuity:952ae5faf6f8a5f4d617e51ca59ef9468867d716a4afb003c564fffeaaac0e79:statement:8324529152f6ea278eabc49e6448edb3107beed63418c5d8c9f253b2cca21e8c"
+            }
+          ],
+          "base_package_members": [
+            {
+              "kind": "background",
+              "members": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f",
+                  "page": 2,
+                  "paragraph": 34,
+                  "text": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+                  "pdf_block": 34,
+                  "block_sha256": "9f3296024e61733c2b1befe1593f2309c46a5eae57025ebf96c0cb7af60cb504",
+                  "block_char_start": 0,
+                  "block_char_end": 44
+                }
+              ]
+            }
+          ],
+          "continuity_window": [
+            "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f",
+            "urn:company-wiki:narrative-unit:sha256:6187af16b80477dd4e83df5ca38a05148d45fe2fd098ba9e428d5cf66dd11e31",
+            "urn:company-wiki:narrative-unit:sha256:191543e1d03560c45d49bd9ca71c8616cdbae255374ca9a9a23c57a3b54e37e2",
+            "urn:company-wiki:narrative-unit:sha256:f31ab9982f20b69c5eedd8d2a7962a93731374eb750626abbabf5455dc8f6e23",
+            "urn:company-wiki:narrative-unit:sha256:dd7a5f0ee149a85e7174ef504ed39e52b782ecfa9e2a7c669bfe76fc0aab1451",
+            "urn:company-wiki:narrative-unit:sha256:44253f50972ea771bedacf5a76fcf2ed15d14db4a2629cae8ac61c660df84ba3"
+          ],
+          "blocked": false,
+          "deferred_ranges": []
+        },
+        {
+          "unit": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+            "page": 2,
+            "paragraph": 45,
+            "text": "存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应",
+            "pdf_block": 41,
+            "block_sha256": "e1bc67e9e37c08050d20d569cccca9826f23cb9fec72081855436010f06435c9",
+            "block_char_start": 0,
+            "block_char_end": 44
+          },
+          "observation_kind": "paragraph",
+          "observation_role": "company_filing",
+          "section_role": null,
+          "ordinal": 67,
+          "layout": {
+            "bbox": [
+              89.87999725341797,
+              707.8563232421875,
+              531.4886474609375,
+              721.5667114257812
+            ],
+            "page_width": 595.2999877929688,
+            "page_height": 841.9000244140625,
+            "font_size": 10.449999809265137,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block",
+            "page": 2,
+            "coordinate_frame": "dict",
+            "rotation": 0,
+            "granularity": "block",
+            "frame_converted": false,
+            "reading_layout_feature_version": "pdf-native-prose-layout/1"
+          },
+          "source_block": {
+            "pdf_block": 41,
+            "block_sha256": "e1bc67e9e37c08050d20d569cccca9826f23cb9fec72081855436010f06435c9",
+            "block_char_start": 0,
+            "block_char_end": 44
+          },
+          "profile": {
+            "reading_profile_key": null,
+            "section_role": "unknown",
+            "priority": 2,
+            "family": "quarterly",
+            "document_kind": null
+          },
+          "base_packages": [
+            {
+              "kind": "native_continuity",
+              "package_id": "native-continuity:8f2dcc64bed2f2a760f00ad5f7e2fe717c62a221c824f25ba061b55df5e66e6e"
+            }
+          ],
+          "base_package_members": [
+            {
+              "kind": "background",
+              "members": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+                  "page": 2,
+                  "paragraph": 44,
+                  "text": "在先进",
+                  "pdf_block": 40,
+                  "block_sha256": "d31b3b318be70f814a784e29aab2380860c0552893a2632ae6fa44f6aed404c9",
+                  "block_char_start": 37,
+                  "block_char_end": 40
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+                  "page": 2,
+                  "paragraph": 45,
+                  "text": "存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应",
+                  "pdf_block": 41,
+                  "block_sha256": "e1bc67e9e37c08050d20d569cccca9826f23cb9fec72081855436010f06435c9",
+                  "block_char_start": 0,
+                  "block_char_end": 44
+                },
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d",
+                  "page": 2,
+                  "paragraph": 46,
+                  "text": "器实现了稳定可靠的大规模量产。",
+                  "pdf_block": 42,
+                  "block_sha256": "fc098782db28542a03e8268aa05adcee8cc623827df50d2de988b7ece1016141",
+                  "block_char_start": 0,
+                  "block_char_end": 15
+                }
+              ]
+            }
+          ],
+          "continuity_window": [
+            "urn:company-wiki:narrative-unit:sha256:81f1ee8c61f982ae5a73e9042925925bdc7ff7b42144bcbc3572a6db6ef3b17b",
+            "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+            "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+            "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d"
+          ],
+          "blocked": false,
+          "deferred_ranges": []
+        }
+      ],
+      "page_flow_rows": [
+        {
+          "ordinal": 60,
+          "page": 2,
+          "paragraph": 38,
+          "text": "归母净利润较去年",
+          "bbox": [
+            89.87999725341797,
+            590.8572998046875,
+            531.3676147460938,
+            604.5676879882812
+          ],
+          "column": null,
+          "pdf_block": 36,
+          "block_char_start": 40,
+          "block_char_end": 48,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f",
+            "urn:company-wiki:narrative-unit:sha256:6187af16b80477dd4e83df5ca38a05148d45fe2fd098ba9e428d5cf66dd11e31",
+            "urn:company-wiki:narrative-unit:sha256:191543e1d03560c45d49bd9ca71c8616cdbae255374ca9a9a23c57a3b54e37e2",
+            "urn:company-wiki:narrative-unit:sha256:f31ab9982f20b69c5eedd8d2a7962a93731374eb750626abbabf5455dc8f6e23",
+            "urn:company-wiki:narrative-unit:sha256:dd7a5f0ee149a85e7174ef504ed39e52b782ecfa9e2a7c669bfe76fc0aab1451",
+            "urn:company-wiki:narrative-unit:sha256:44253f50972ea771bedacf5a76fcf2ed15d14db4a2629cae8ac61c660df84ba3"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 61,
+          "page": 2,
+          "paragraph": 39,
+          "text": "同期增长197.20%，达到9.30 亿元。",
+          "bbox": [
+            89.87999725341797,
+            614.2562866210938,
+            531.3690185546875,
+            627.9666748046875
+          ],
+          "column": null,
+          "pdf_block": 37,
+          "block_char_start": 0,
+          "block_char_end": 22,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f",
+            "urn:company-wiki:narrative-unit:sha256:6187af16b80477dd4e83df5ca38a05148d45fe2fd098ba9e428d5cf66dd11e31",
+            "urn:company-wiki:narrative-unit:sha256:191543e1d03560c45d49bd9ca71c8616cdbae255374ca9a9a23c57a3b54e37e2",
+            "urn:company-wiki:narrative-unit:sha256:f31ab9982f20b69c5eedd8d2a7962a93731374eb750626abbabf5455dc8f6e23",
+            "urn:company-wiki:narrative-unit:sha256:dd7a5f0ee149a85e7174ef504ed39e52b782ecfa9e2a7c669bfe76fc0aab1451",
+            "urn:company-wiki:narrative-unit:sha256:44253f50972ea771bedacf5a76fcf2ed15d14db4a2629cae8ac61c660df84ba3"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 62,
+          "page": 2,
+          "paragraph": 40,
+          "text": "2026 年第一季度公司研发支出9.08 亿元，较去年同期增长约",
+          "bbox": [
+            89.87999725341797,
+            614.2562866210938,
+            531.3690185546875,
+            627.9666748046875
+          ],
+          "column": null,
+          "pdf_block": 37,
+          "block_char_start": 22,
+          "block_char_end": 54,
+          "window": null,
+          "blocked": true
+        },
+        {
+          "ordinal": 63,
+          "page": 2,
+          "paragraph": 41,
+          "text": "32.15%，研发支出占公司营业收入比例约为31.14%，以远高于科创板上市公司的平均研发投入水",
+          "bbox": [
+            89.87999725341797,
+            637.6563110351562,
+            531.483154296875,
+            651.36669921875
+          ],
+          "column": null,
+          "pdf_block": 38,
+          "block_char_start": 0,
+          "block_char_end": 48,
+          "window": null,
+          "blocked": false
+        },
+        {
+          "ordinal": 64,
+          "page": 2,
+          "paragraph": 42,
+          "text": "平，推进六大类、超20 款新设备的研发。",
+          "bbox": [
+            89.87999725341797,
+            661.0562744140625,
+            283.9276123046875,
+            674.7666625976562
+          ],
+          "column": null,
+          "pdf_block": 39,
+          "block_char_start": 0,
+          "block_char_end": 20,
+          "window": null,
+          "blocked": false
+        },
+        {
+          "ordinal": 65,
+          "page": 2,
+          "paragraph": 43,
+          "text": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。",
+          "bbox": [
+            110.87999725341797,
+            685.9893188476562,
+            531.4727172851562,
+            696.4393310546875
+          ],
+          "column": null,
+          "pdf_block": 40,
+          "block_char_start": 0,
+          "block_char_end": 37,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:81f1ee8c61f982ae5a73e9042925925bdc7ff7b42144bcbc3572a6db6ef3b17b",
+            "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+            "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+            "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 66,
+          "page": 2,
+          "paragraph": 44,
+          "text": "在先进",
+          "bbox": [
+            110.87999725341797,
+            685.9893188476562,
+            531.4727172851562,
+            696.4393310546875
+          ],
+          "column": null,
+          "pdf_block": 40,
+          "block_char_start": 37,
+          "block_char_end": 40,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:81f1ee8c61f982ae5a73e9042925925bdc7ff7b42144bcbc3572a6db6ef3b17b",
+            "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+            "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+            "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 67,
+          "page": 2,
+          "paragraph": 45,
+          "text": "存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应",
+          "bbox": [
+            89.87999725341797,
+            707.8563232421875,
+            531.4886474609375,
+            721.5667114257812
+          ],
+          "column": null,
+          "pdf_block": 41,
+          "block_char_start": 0,
+          "block_char_end": 44,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:81f1ee8c61f982ae5a73e9042925925bdc7ff7b42144bcbc3572a6db6ef3b17b",
+            "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+            "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+            "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 68,
+          "page": 2,
+          "paragraph": 46,
+          "text": "器实现了稳定可靠的大规模量产。",
+          "bbox": [
+            89.87999725341797,
+            731.2562866210938,
+            531.3622436523438,
+            744.9666748046875
+          ],
+          "column": null,
+          "pdf_block": 42,
+          "block_char_start": 0,
+          "block_char_end": 15,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:81f1ee8c61f982ae5a73e9042925925bdc7ff7b42144bcbc3572a6db6ef3b17b",
+            "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+            "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+            "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 69,
+          "page": 2,
+          "paragraph": 47,
+          "text": "CCP 方面，用于关键刻蚀工艺的介质刻蚀产品持续保持高速增",
+          "bbox": [
+            89.87999725341797,
+            731.2562866210938,
+            531.3622436523438,
+            744.9666748046875
+          ],
+          "column": null,
+          "pdf_block": 42,
+          "block_char_start": 15,
+          "block_char_end": 44,
+          "window": null,
+          "blocked": true
+        },
+        {
+          "ordinal": 70,
+          "page": 2,
+          "paragraph": 48,
+          "text": "长，下一代90:1 超高深宽比低温刻蚀设备已运付客户端进行验证，公司已全面覆盖存储器刻蚀应",
+          "bbox": [
+            89.87999725341797,
+            754.6563110351562,
+            531.3668212890625,
+            768.36669921875
+          ],
+          "column": null,
+          "pdf_block": 43,
+          "block_char_start": 0,
+          "block_char_end": 45,
+          "window": null,
+          "blocked": true
+        },
+        {
+          "ordinal": 71,
+          "page": 3,
+          "paragraph": 0,
+          "text": "中微半导体设备（上海）股份有限公司2026 年第一季度报告",
+          "bbox": [
+            191.52000427246094,
+            43.91633224487305,
+            428.6390686035156,
+            52.91633224487305
+          ],
+          "column": null,
+          "pdf_block": 0,
+          "block_char_start": 0,
+          "block_char_end": 29,
+          "window": null,
+          "blocked": false
+        },
+        {
+          "ordinal": 72,
+          "page": 3,
+          "paragraph": 1,
+          "text": "3 / 15",
+          "bbox": [
+            297.1199951171875,
+            770.2753295898438,
+            324.0598449707031,
+            779.2753295898438
+          ],
+          "column": null,
+          "pdf_block": 1,
+          "block_char_start": 0,
+          "block_char_end": 6,
+          "window": null,
+          "blocked": false
+        },
+        {
+          "ordinal": 73,
+          "page": 3,
+          "paragraph": 2,
+          "text": "用中各类超高深宽比需求；",
+          "bbox": [
+            89.87999725341797,
+            81.21730041503906,
+            531.3687744140625,
+            94.92770385742188
+          ],
+          "column": null,
+          "pdf_block": 2,
+          "block_char_start": 0,
+          "block_char_end": 12,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:4ef8c4d77fee8fc40ce22fd85215bafc73bcd1f70682de6bb97a455369b5328f",
+            "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+            "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+            "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f"
+          ],
+          "blocked": true
+        },
+        {
+          "ordinal": 74,
+          "page": 3,
+          "paragraph": 3,
+          "text": "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设",
+          "bbox": [
+            89.87999725341797,
+            81.21730041503906,
+            531.3687744140625,
+            94.92770385742188
+          ],
+          "column": null,
+          "pdf_block": 2,
+          "block_char_start": 12,
+          "block_char_end": 46,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:4ef8c4d77fee8fc40ce22fd85215bafc73bcd1f70682de6bb97a455369b5328f",
+            "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+            "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+            "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 75,
+          "page": 3,
+          "paragraph": 4,
+          "text": "备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并",
+          "bbox": [
+            89.87999725341797,
+            102.67035675048828,
+            531.489990234375,
+            118.32769775390625
+          ],
+          "column": null,
+          "pdf_block": 3,
+          "block_char_start": 0,
+          "block_char_end": 57,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:4ef8c4d77fee8fc40ce22fd85215bafc73bcd1f70682de6bb97a455369b5328f",
+            "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+            "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+            "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 76,
+          "page": 3,
+          "paragraph": 5,
+          "text": "付运到国内领先存储客户端认证。",
+          "bbox": [
+            89.87999725341797,
+            126.07035827636719,
+            531.489990234375,
+            141.72769165039062
+          ],
+          "column": null,
+          "pdf_block": 4,
+          "block_char_start": 0,
+          "block_char_end": 15,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:4ef8c4d77fee8fc40ce22fd85215bafc73bcd1f70682de6bb97a455369b5328f",
+            "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+            "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+            "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 77,
+          "page": 3,
+          "paragraph": 6,
+          "text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的",
+          "bbox": [
+            89.87999725341797,
+            126.07035827636719,
+            531.489990234375,
+            141.72769165039062
+          ],
+          "column": null,
+          "pdf_block": 4,
+          "block_char_start": 15,
+          "block_char_end": 53,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+            "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+            "urn:company-wiki:narrative-unit:sha256:0297344369ad95da5dc744b30667469af4a322a095c35d2bf87ff05e0927d6b7"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 78,
+          "page": 3,
+          "paragraph": 7,
+          "text": "业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀",
+          "bbox": [
+            89.87999725341797,
+            151.41729736328125,
+            531.4877319335938,
+            165.127685546875
+          ],
+          "column": null,
+          "pdf_block": 5,
+          "block_char_start": 0,
+          "block_char_end": 51,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+            "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+            "urn:company-wiki:narrative-unit:sha256:0297344369ad95da5dc744b30667469af4a322a095c35d2bf87ff05e0927d6b7"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 79,
+          "page": 3,
+          "paragraph": 8,
+          "text": "性能，全面满足客户的各项工艺指标要求。",
+          "bbox": [
+            89.87999725341797,
+            176.35035705566406,
+            289.33001708984375,
+            186.80035400390625
+          ],
+          "column": null,
+          "pdf_block": 6,
+          "block_char_start": 0,
+          "block_char_end": 19,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+            "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+            "urn:company-wiki:narrative-unit:sha256:0297344369ad95da5dc744b30667469af4a322a095c35d2bf87ff05e0927d6b7"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 80,
+          "page": 3,
+          "paragraph": 9,
+          "text": "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、",
+          "bbox": [
+            110.87999725341797,
+            198.21730041503906,
+            531.489990234375,
+            211.9276885986328
+          ],
+          "column": null,
+          "pdf_block": 7,
+          "block_char_start": 0,
+          "block_char_end": 43,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:a8f854111de77a6d6aa4a0125f6bbe62c9e171d61731fa8c4a98d18d1ef69112",
+            "urn:company-wiki:narrative-unit:sha256:b2444a1eb4f6407f196043e3faa68c51bc3c822f6c458fc7224824772cff0409",
+            "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25"
+          ],
+          "blocked": false
+        },
+        {
+          "ordinal": 81,
+          "page": 3,
+          "paragraph": 10,
+          "text": "EPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年",
+          "bbox": [
+            89.87999725341797,
+            221.6173095703125,
+            531.489990234375,
+            235.32769775390625
+          ],
+          "column": null,
+          "pdf_block": 8,
+          "block_char_start": 0,
+          "block_char_end": 53,
+          "window": [
+            "urn:company-wiki:narrative-unit:sha256:a8f854111de77a6d6aa4a0125f6bbe62c9e171d61731fa8c4a98d18d1ef69112",
+            "urn:company-wiki:narrative-unit:sha256:b2444a1eb4f6407f196043e3faa68c51bc3c822f6c458fc7224824772cff0409",
+            "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25"
+          ],
+          "blocked": false
+        }
+      ],
+      "continuity_diagnostics": [
+        {
+          "code": "CONTINUITY_OPEN_END",
+          "count": 28
+        },
+        {
+          "code": "CONTINUITY_PAGE_BOUNDARY_UNPROVEN",
+          "count": 10
+        },
+        {
+          "code": "CONTINUITY_WINDOW_LIMIT",
+          "count": 16
+        }
+      ],
+      "continuity_ranges": [
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 25,
+          "last_ordinal": 28
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 29,
+          "last_ordinal": 33
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 35,
+          "last_ordinal": 37
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 41,
+          "last_ordinal": 43
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 48,
+          "last_ordinal": 51
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 52,
+          "last_ordinal": 54
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 62,
+          "last_ordinal": 62
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 2,
+          "first_ordinal": 69,
+          "last_ordinal": 70
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 3,
+          "first_ordinal": 73,
+          "last_ordinal": 73
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 3,
+          "first_ordinal": 86,
+          "last_ordinal": 86
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 4,
+          "first_ordinal": 114,
+          "last_ordinal": 114
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 4,
+          "first_ordinal": 120,
+          "last_ordinal": 139
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 5,
+          "first_ordinal": 142,
+          "last_ordinal": 142
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 5,
+          "first_ordinal": 145,
+          "last_ordinal": 145
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 6,
+          "first_ordinal": 176,
+          "last_ordinal": 177
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 6,
+          "first_ordinal": 178,
+          "last_ordinal": 179
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 6,
+          "first_ordinal": 180,
+          "last_ordinal": 181
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 6,
+          "first_ordinal": 184,
+          "last_ordinal": 186
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 7,
+          "first_ordinal": 205,
+          "last_ordinal": 205
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 8,
+          "first_ordinal": 257,
+          "last_ordinal": 271
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 8,
+          "first_ordinal": 273,
+          "last_ordinal": 278
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 9,
+          "first_ordinal": 281,
+          "last_ordinal": 281
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 9,
+          "first_ordinal": 281,
+          "last_ordinal": 282
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 9,
+          "first_ordinal": 283,
+          "last_ordinal": 306
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 9,
+          "first_ordinal": 307,
+          "last_ordinal": 322
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 325,
+          "last_ordinal": 325
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 325,
+          "last_ordinal": 326
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 328,
+          "last_ordinal": 333
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 334,
+          "last_ordinal": 338
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 340,
+          "last_ordinal": 348
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 349,
+          "last_ordinal": 352
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 10,
+          "first_ordinal": 354,
+          "last_ordinal": 363
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 366,
+          "last_ordinal": 366
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 372,
+          "last_ordinal": 373
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 374,
+          "last_ordinal": 376
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 377,
+          "last_ordinal": 378
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 379,
+          "last_ordinal": 391
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 393,
+          "last_ordinal": 394
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 395,
+          "last_ordinal": 396
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 11,
+          "first_ordinal": 398,
+          "last_ordinal": 399
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 12,
+          "first_ordinal": 402,
+          "last_ordinal": 402
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 12,
+          "first_ordinal": 402,
+          "last_ordinal": 410
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 12,
+          "first_ordinal": 415,
+          "last_ordinal": 418
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 13,
+          "first_ordinal": 435,
+          "last_ordinal": 437
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 13,
+          "first_ordinal": 439,
+          "last_ordinal": 440
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 13,
+          "first_ordinal": 442,
+          "last_ordinal": 442
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 13,
+          "first_ordinal": 448,
+          "last_ordinal": 466
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 14,
+          "first_ordinal": 469,
+          "last_ordinal": 469
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 14,
+          "first_ordinal": 469,
+          "last_ordinal": 475
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 14,
+          "first_ordinal": 477,
+          "last_ordinal": 490
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 14,
+          "first_ordinal": 492,
+          "last_ordinal": 501
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 15,
+          "first_ordinal": 504,
+          "last_ordinal": 504
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 15,
+          "first_ordinal": 506,
+          "last_ordinal": 508
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "page": 15,
+          "first_ordinal": 510,
+          "last_ordinal": 511
+        }
+      ],
+      "continuity_complete": false,
+      "trace_candidate_count": 22,
+      "trace_eligible_count": 14,
+      "trace_complete": false,
+      "trace_withheld_counts": {
+        "INCOMPLETE_NATIVE_CONTINUITY": 1,
+        "INCOMPLETE_OR_NONSELECTABLE_CONTEXT": 39
+      },
+      "trace_admission_counts": {
+        "not_admitted": 112,
+        "admitted": 14
+      },
+      "trace_rejection_counts": {
+        "heading_without_business_fact": 1,
+        "non_operating_purpose": 7,
+        "no_supported_business_signal": 69,
+        "non_narrative_unit": 20,
+        "financial_only": 15
+      },
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "candidate_count": 326,
+        "omitted_candidate_count": 304,
+        "selection_limit": 96,
+        "selected_spans": 22,
+        "selected_chars": 1340
+      },
+      "diagnostics": [],
+      "hit_windows": [
+        {
+          "matched_unit_index": 56,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:567c857eca9fb2417017e7cf28ecd4f4576ba365a412107fb3879e8b82c4ef60",
+              "page": 2,
+              "paragraph": 33,
+              "text": "24,309,292,593.59\n22,694,616,797.16\n7.11%",
+              "pdf_block": 33,
+              "block_sha256": "99023f0c5a49b5d8d8cd6222d383dd94c1d5e6958b8ef9a8c42154a5b5b3ff35",
+              "block_char_start": 0,
+              "block_char_end": 41
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:fa3b4590d0933ce7a3886f19a58e855e17b4c5d59bf651a12880e9c102518c7f",
+              "page": 2,
+              "paragraph": 34,
+              "text": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+              "pdf_block": 34,
+              "block_sha256": "9f3296024e61733c2b1befe1593f2309c46a5eae57025ebf96c0cb7af60cb504",
+              "block_char_start": 0,
+              "block_char_end": 44
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:6187af16b80477dd4e83df5ca38a05148d45fe2fd098ba9e428d5cf66dd11e31",
+              "page": 2,
+              "paragraph": 35,
+              "text": "公司",
+              "pdf_block": 34,
+              "block_sha256": "9f3296024e61733c2b1befe1593f2309c46a5eae57025ebf96c0cb7af60cb504",
+              "block_char_start": 44,
+              "block_char_end": 46
+            }
+          ],
+          "joined_fact": {
+            "eligible": true,
+            "reasons": [
+              "specific_business_event",
+              "operating_activity"
+            ],
+            "score": 6,
+            "financial_exempt": true
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:a4a7787045e1f51ec37d6f56ac6294ab4dd2f1020cccce698a11932ccfb614af",
+          "production_source_text": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+          "production_fact": {
+            "eligible": true,
+            "reasons": [
+              "operating_description_unknown"
+            ],
+            "purpose": "operating",
+            "financial_exempt": true
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [
+            "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+            "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+            "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+            "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+          ],
+          "source_purpose_joined": "operating",
+          "selected_needle_matches": [
+            "8300",
+            "300 多台",
+            "Angnova",
+            "140:1",
+            "Domingo",
+            "700:1",
+            "224.23%"
+          ]
+        },
+        {
+          "matched_unit_index": 67,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:ab1457c2025294504ad32693766a5c36f818343c834040a6c96095ff4a194c81",
+              "page": 2,
+              "paragraph": 44,
+              "text": "在先进",
+              "pdf_block": 40,
+              "block_sha256": "d31b3b318be70f814a784e29aab2380860c0552893a2632ae6fa44f6aed404c9",
+              "block_char_start": 37,
+              "block_char_end": 40
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a6a78f669ab3f6eccd1daecd86856e4af87d53dce3b443b21462c6bce3865860",
+              "page": 2,
+              "paragraph": 45,
+              "text": "存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应",
+              "pdf_block": 41,
+              "block_sha256": "e1bc67e9e37c08050d20d569cccca9826f23cb9fec72081855436010f06435c9",
+              "block_char_start": 0,
+              "block_char_end": 44
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:d1547662abd8688c160146e4fe271752b580be0c1d214af815024efdaf42202d",
+              "page": 2,
+              "paragraph": 46,
+              "text": "器实现了稳定可靠的大规模量产。",
+              "pdf_block": 42,
+              "block_sha256": "fc098782db28542a03e8268aa05adcee8cc623827df50d2de988b7ece1016141",
+              "block_char_start": 0,
+              "block_char_end": 15
+            }
+          ],
+          "joined_fact": {
+            "eligible": true,
+            "reasons": [
+              "operating_activity"
+            ],
+            "score": 6,
+            "financial_exempt": false
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:514158476b2e8dc5d92bf3461271dfcfd8c052cc045b246541b556fc204dd2af",
+          "production_source_text": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+          "production_fact": {
+            "eligible": true,
+            "reasons": [
+              "operating_description_unknown"
+            ],
+            "purpose": "operating",
+            "financial_exempt": true
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [
+            "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+            "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+            "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+            "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+          ],
+          "source_purpose_joined": "operating",
+          "selected_needle_matches": [
+            "8300",
+            "300 多台",
+            "Angnova",
+            "140:1",
+            "Domingo",
+            "700:1",
+            "224.23%"
+          ]
+        },
+        {
+          "matched_unit_index": 75,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:fa240ae295d526b8389e56c8b6c7018285ebfebef66de293366771eb4764beea",
+              "page": 3,
+              "paragraph": 3,
+              "text": "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设",
+              "pdf_block": 2,
+              "block_sha256": "65f68fcaf8d4c6427d0e300473c4459f206041fc5881806514ce90313c3b164e",
+              "block_char_start": 12,
+              "block_char_end": 46
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9897c201eba59c5b30e65425da32a4e3a8b9208ca6f233685e00164034ba7537",
+              "page": 3,
+              "paragraph": 4,
+              "text": "备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并",
+              "pdf_block": 3,
+              "block_sha256": "f7f258dbd48b156458e99678e7da688e0cf7aff02ecaf6bc51cfedeba8cdfcf0",
+              "block_char_start": 0,
+              "block_char_end": 57
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f",
+              "page": 3,
+              "paragraph": 5,
+              "text": "付运到国内领先存储客户端认证。",
+              "pdf_block": 4,
+              "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+              "block_char_start": 0,
+              "block_char_end": 15
+            }
+          ],
+          "joined_fact": {
+            "eligible": true,
+            "reasons": [
+              "specific_business_event",
+              "operating_activity"
+            ],
+            "score": 6,
+            "financial_exempt": true
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:3dfdb60a2f2dabe1655f03d4916ac441803a6313508bdefed7ff66575e13fb71",
+          "production_source_text": "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+          "production_fact": {
+            "eligible": true,
+            "reasons": [
+              "operating_description_unknown"
+            ],
+            "purpose": "unknown",
+            "financial_exempt": true
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [
+            "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+            "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+            "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+            "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+          ],
+          "source_purpose_joined": "unknown",
+          "selected_needle_matches": [
+            "8300",
+            "300 多台",
+            "Angnova",
+            "140:1",
+            "Domingo",
+            "700:1",
+            "224.23%"
+          ]
+        },
+        {
+          "matched_unit_index": 77,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b04c4b4c57217cef87198c7f868ba82f742ffea3b7c092d093b035ab916a607f",
+              "page": 3,
+              "paragraph": 5,
+              "text": "付运到国内领先存储客户端认证。",
+              "pdf_block": 4,
+              "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+              "block_char_start": 0,
+              "block_char_end": 15
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:62c83c246e7395c5b19a4e3588e0f2e0d14bb673d472f4c16424ff864868ef16",
+              "page": 3,
+              "paragraph": 6,
+              "text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的",
+              "pdf_block": 4,
+              "block_sha256": "3ee8f05f0bb20204d7765bba0ca77fccbf089254b072c57c518741bc2eeeb522",
+              "block_char_start": 15,
+              "block_char_end": 53
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:8fccdda978f441fe18dec1816ca09dd801ac7024dc8bd51f51001d083afabde6",
+              "page": 3,
+              "paragraph": 7,
+              "text": "业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀",
+              "pdf_block": 5,
+              "block_sha256": "0d54d1ad67a9fdb612a762c0518b32f4800ab8c16262001f85be10f17e5896ce",
+              "block_char_start": 0,
+              "block_char_end": 51
+            }
+          ],
+          "joined_fact": {
+            "eligible": true,
+            "reasons": [
+              "operating_activity"
+            ],
+            "score": 6,
+            "financial_exempt": false
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:e92a3d707cb6e41370554015b2b0bf013d76b81dc2a917ca77a845684588df60",
+          "production_source_text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+          "production_fact": {
+            "eligible": true,
+            "reasons": [
+              "operating_description_unknown"
+            ],
+            "purpose": "unknown",
+            "financial_exempt": true
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [
+            "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+            "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+            "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+            "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+          ],
+          "source_purpose_joined": "unknown",
+          "selected_needle_matches": [
+            "8300",
+            "300 多台",
+            "Angnova",
+            "140:1",
+            "Domingo",
+            "700:1",
+            "224.23%"
+          ]
+        },
+        {
+          "matched_unit_index": 82,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b2444a1eb4f6407f196043e3faa68c51bc3c822f6c458fc7224824772cff0409",
+              "page": 3,
+              "paragraph": 10,
+              "text": "EPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年",
+              "pdf_block": 8,
+              "block_sha256": "18b73007f0d28e77a4b24e8344405f64bc5a7f16a40c0cdfdb30e1e760be3c46",
+              "block_char_start": 0,
+              "block_char_end": 53
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:170eb5a90c9ca7cc4c76e323d8e879feb749dabba43482b4b0f989f15ef81f25",
+              "page": 3,
+              "paragraph": 11,
+              "text": "薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+              "pdf_block": 9,
+              "block_sha256": "4e4ab6a531e69f41fc77e6887e12fcaa0a76ae52786c024caa15b81cc0d502a6",
+              "block_char_start": 0,
+              "block_char_end": 36
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e1b963588f2fb5a2818bf72df76033192accaddf2f843dadd8407d17e1c884fb",
+              "page": 3,
+              "paragraph": 12,
+              "text": "公司为先进逻辑和先",
+              "pdf_block": 9,
+              "block_sha256": "4e4ab6a531e69f41fc77e6887e12fcaa0a76ae52786c024caa15b81cc0d502a6",
+              "block_char_start": 36,
+              "block_char_end": 45
+            }
+          ],
+          "joined_fact": {
+            "eligible": true,
+            "reasons": [
+              "quantified_operating_status",
+              "operating_activity"
+            ],
+            "score": 6,
+            "financial_exempt": true
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:562d627bfdc87c468a87f5e7b8285a6d1d41d9a5f44c2141a76f4cc18bf68327",
+          "production_source_text": "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+          "production_fact": {
+            "eligible": true,
+            "reasons": [
+              "quantified_operating_status",
+              "operating_description_unknown"
+            ],
+            "purpose": "unknown",
+            "financial_exempt": true
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [
+            "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+            "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+            "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+            "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+          ],
+          "source_purpose_joined": "unknown",
+          "selected_needle_matches": [
+            "8300",
+            "300 多台",
+            "Angnova",
+            "140:1",
+            "Domingo",
+            "700:1",
+            "224.23%"
+          ]
+        },
+        {
+          "matched_unit_index": 116,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:25af9fb3e56455c18d7b563cefb7ce6b7098d64e517cfed1d802996986a088fe",
+              "page": 4,
+              "paragraph": 3,
+              "text": "主要系公司本期出售了\n部分持有的拓荆科技股\n份有限公司股票",
+              "pdf_block": 3,
+              "block_sha256": "278ebe33544aa6434ba231acb640f6b0e3dc3978d661ba2d66f1924751c3ce03",
+              "block_char_start": 0,
+              "block_char_end": 29
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:6ad41c4d8cb05d1e8ba7c9905b8da0f62933c1a49ecd284584cd8a210579293f",
+              "page": 4,
+              "paragraph": 4,
+              "text": "计入当期损益的政府补助，但与公司正常经\n营业务密切相关、符合国家政策规定、按照\n确定的标准享有、对公司损益产生持续影响\n的政府补助除外",
+              "pdf_block": 4,
+              "block_sha256": "4e4793f5a040f55b6f54640b03e1adea1e1e35456eb8b5fb62f09290b77b0ac2",
+              "block_char_start": 0,
+              "block_char_end": 67
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:85e7966c5d254c34b0c283ded47789ab2d855741c8cf306296a3306f3f6128c2",
+              "page": 4,
+              "paragraph": 5,
+              "text": "6,392,084.84",
+              "pdf_block": 5,
+              "block_sha256": "89927dd53e341e6fd6259b2fd9f997eaa4a45ebcc5f2a516215f6dcd64b0891f",
+              "block_char_start": 0,
+              "block_char_end": 12
+            }
+          ],
+          "joined_fact": {
+            "eligible": false,
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:6ad41c4d8cb05d1e8ba7c9905b8da0f62933c1a49ecd284584cd8a210579293f",
+          "production_source_text": "计入当期损益的政府补助，但与公司正常经\n营业务密切相关、符合国家政策规定、按照\n确定的标准享有、对公司损益产生持续影响\n的政府补助除外",
+          "production_fact": {
+            "eligible": false,
+            "reasons": [],
+            "purpose": "accounting_policy",
+            "financial_exempt": false
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [
+            "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+            "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+            "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+            "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+            "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+          ],
+          "source_purpose_joined": "accounting_policy",
+          "selected_needle_matches": [
+            "8300",
+            "300 多台",
+            "Angnova",
+            "140:1",
+            "Domingo",
+            "700:1",
+            "224.23%"
+          ]
+        }
+      ],
+      "selected_needle_matches": [
+        "8300",
+        "300 多台",
+        "Angnova",
+        "140:1",
+        "Domingo",
+        "700:1",
+        "224.23%"
+      ],
+      "selected_span_text": [
+        "2026 年第一季度报告",
+        "一、主要财务数据",
+        "(一)主要会计数据和财务指标",
+        "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+        "32.15%，研发支出占公司营业收入比例约为31.14%，以远高于科创板上市公司的平均研发投入水",
+        "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。",
+        "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。",
+        "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。",
+        "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+        "公司为先进逻辑和先\n进存储器件金属栅应用开发的ALD 系列产品，设备性能达到国际领先水平的同时，表现出更优异\n的生产效率。",
+        "公司所开发的多款核心介质沉积设备都在有序推进，与客户的各项验证工作也有良好的进\n展。",
+        "公司的减压EPI 设备已在成熟制程客户端验证成功，也已付运先进制程客户端，部分先进工\n艺已进入量产验证阶段；常压外延设备现已完成开发，进入晶圆验证阶段。",
+        "公司持续保持国际氮化镓基MOCVD 设备市场领先地位，积极布局用于SiC 和GaN 基功率\n器件应用的市场，并在Micro-LED 和其他显示领域的专用MOCVD 设备开发上取得了良好进展。",
+        "四款MOCVD 新产品包括用于SiC 和GaN 功率器件的MOCVD，用于Micro LED 的GaN MOCVD\n和用于红黄光LED 的GaAs MOCVD 设备已进入客户端验证阶段，并且部分得到批量订货。",
+        "（3）公司本期出售了部分持有的拓荆科技股份有限公司股票，产生",
+        "(三)主要会计数据、财务指标发生变动的情况、原因",
+        "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高\n端产品新增付运量显著提升，先进逻辑器件中段关键刻\n蚀工艺和先进存储器件超高深宽比刻蚀工艺实现量产。",
+        "公司为先进存储器件和逻辑器件开发的LPCVD, ALD\n等多款导体和介质薄膜设备已经顺利进入市场，薄膜设\n备的覆盖率不断增加，新增付运量保持快速增长，并在\n客户端持续应用在迭代产品上。",
+        "归属于上市公司股东的\n净利润\n197.20\n经营活动产生的现金流\n量净额\n-142.12\n公司业务持续增长下，本期购买商品、接受劳务支付的\n现金以及支付给职工以及为职工支付的现金增加。",
+        "四、季度财务报表",
+        "（一）按经营持续性分类",
+        "1.持续经营净利润（净亏损以“-”\n号填列）\n918,439,904.12\n308,245,968.10"
+      ],
+      "cards": [
+        {
+          "available": false,
+          "reason": "source_table_unresolved",
+          "text": ""
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。在先进\n存储器件制造工艺中，公司完全自主开发的针对超高深宽比刻蚀工艺的刻蚀机已有300 多台反应\n器实现了稳定可靠的大规模量产。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "ICP 方面，适用于新一代逻辑和存储芯片制造用的第二代ICP 刻蚀设\n备Primo AngnovaTM 在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并\n付运到国内领先存储客户端认证。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "全新的化学气相刻蚀设备Primo DomingoTM 实现大于700:1 的\n业界领先SiGe/Si 的高选择比，在GAA 和3D DRAM 关键工艺的实验室验证中，展现优异的刻蚀\n性能，全面满足客户的各项工艺指标要求。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备,包括LPCVD、ALD、\nEPI、PVD CuBS 和PECVD 等产品在先进存储和先进逻辑市场新增付运量保持快速增长，2025 年\n薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司为先进逻辑和先\n进存储器件金属栅应用开发的ALD 系列产品，设备性能达到国际领先水平的同时，表现出更优异\n的生产效率。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司所开发的多款核心介质沉积设备都在有序推进，与客户的各项验证工作也有良好的进\n展。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司的减压EPI 设备已在成熟制程客户端验证成功，也已付运先进制程客户端，部分先进工\n艺已进入量产验证阶段；常压外延设备现已完成开发，进入晶圆验证阶段。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司持续保持国际氮化镓基MOCVD 设备市场领先地位，积极布局用于SiC 和GaN 基功率\n器件应用的市场，并在Micro-LED 和其他显示领域的专用MOCVD 设备开发上取得了良好进展。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "四款MOCVD 新产品包括用于SiC 和GaN 功率器件的MOCVD，用于Micro LED 的GaN MOCVD\n和用于红黄光LED 的GaAs MOCVD 设备已进入客户端验证阶段，并且部分得到批量订货。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高\n端产品新增付运量显著提升，先进逻辑器件中段关键刻\n蚀工艺和先进存储器件超高深宽比刻蚀工艺实现量产。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "公司为先进存储器件和逻辑器件开发的LPCVD, ALD\n等多款导体和介质薄膜设备已经顺利进入市场，薄膜设\n备的覆盖率不断增加，新增付运量保持快速增长，并在\n客户端持续应用在迭代产品上。"
+        },
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "归属于上市公司股东的\n净利润\n197.20\n经营活动产生的现金流\n量净额\n-142.12\n公司业务持续增长下，本期购买商品、接受劳务支付的\n现金以及支付给职工以及为职工支付的现金增加。"
+        }
+      ]
+    },
+    {
+      "company": "珀莱雅",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\珀莱雅\\raw\\financial_reports\\珀莱雅：珀莱雅化妆品股份有限公司2026年第一季度报告.pdf",
+      "sha256_before": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "sha256_after": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "pages": 12,
+      "parsed_units": 416,
+      "parse_work_units": 166825,
+      "selection_work_units": 349925,
+      "trace_work_units": 245171,
+      "prose_work_units": 13168,
+      "base_owner_packages_for_key_units": [],
+      "continuity_for_key_units": [],
+      "page_flow_rows": [],
+      "continuity_diagnostics": {},
+      "continuity_ranges": [],
+      "continuity_complete": null,
+      "trace_candidate_count": 4,
+      "trace_eligible_count": 1,
+      "trace_complete": false,
+      "trace_withheld_counts": {
+        "INCOMPLETE_NATIVE_CONTINUITY": 1,
+        "INCOMPLETE_OR_NONSELECTABLE_CONTEXT": 7
+      },
+      "trace_admission_counts": {
+        "not_admitted": 86,
+        "admitted": 1
+      },
+      "trace_rejection_counts": {
+        "heading_without_business_fact": 1,
+        "non_operating_purpose": 7,
+        "no_supported_business_signal": 61,
+        "non_narrative_unit": 15,
+        "financial_only": 2
+      },
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "candidate_count": 279,
+        "omitted_candidate_count": 275,
+        "selection_limit": 96,
+        "selected_spans": 4,
+        "selected_chars": 87
+      },
+      "diagnostics": [],
+      "hit_windows": [
+        {
+          "matched_unit_index": 54,
+          "units": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:0c4f83af02b93832c35926158f8c7ce0ac28294b2cdf6c979bd4e33b208c9536",
+              "page": 2,
+              "paragraph": 27,
+              "text": "非流动性资产处置损益，包括已计提资产减\n值准备的冲销部分\n1,563,102.30",
+              "pdf_block": 27,
+              "block_sha256": "23f3fe3d8a846be15397653eea5cffc2ac8df2d23d527278c2a34ea00242bce9",
+              "block_char_start": 0,
+              "block_char_end": 41
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:11b2afacdceb2fb97e0bd1918a7112d6f211fc4de1e33b7b4a52e79acab67005",
+              "page": 2,
+              "paragraph": 28,
+              "text": "计入当期损益的政府补助，但与公司正常经\n营业务密切相关、符合国家政策规定、按照\n确定的标准享有、对公司损益产生持续影响\n的政府补助除外",
+              "pdf_block": 28,
+              "block_sha256": "4e4793f5a040f55b6f54640b03e1adea1e1e35456eb8b5fb62f09290b77b0ac2",
+              "block_char_start": 0,
+              "block_char_end": 67
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a8f26708a11717ff0fea72c005834d534bdcdb341eac7555778a9145f8c098cc",
+              "page": 2,
+              "paragraph": 29,
+              "text": "28,613,308.30",
+              "pdf_block": 29,
+              "block_sha256": "9775c391cdbb72bee20a555a7d952a5a6a47f298f4544cba4e241a588561091b",
+              "block_char_start": 0,
+              "block_char_end": 13
+            }
+          ],
+          "joined_fact": {
+            "eligible": false,
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "production_owner_id": "urn:company-wiki:narrative-unit:sha256:11b2afacdceb2fb97e0bd1918a7112d6f211fc4de1e33b7b4a52e79acab67005",
+          "production_source_text": "计入当期损益的政府补助，但与公司正常经\n营业务密切相关、符合国家政策规定、按照\n确定的标准享有、对公司损益产生持续影响\n的政府补助除外",
+          "production_fact": {
+            "eligible": false,
+            "reasons": [],
+            "purpose": "accounting_policy",
+            "financial_exempt": false
+          },
+          "eligible_package_kinds": [],
+          "eligible_package_text": [],
+          "candidate_text": [],
+          "source_purpose_joined": "accounting_policy",
+          "selected_needle_matches": []
+        }
+      ],
+      "selected_needle_matches": [],
+      "selected_span_text": [
+        "2026 年第一季度报告",
+        "一、主要财务数据",
+        "(三)主要会计数据、财务指标发生变动的情况、原因",
+        "经营活动产生的现金流\n量净额\n-84.16\n主要系收回货款减少以及支付的\n推广费增加。"
+      ],
+      "cards": [
+        {
+          "available": true,
+          "reason": "source_card",
+          "text": "经营活动产生的现金流\n量净额\n-84.16\n主要系收回货款减少以及支付的\n推广费增加。"
+        }
+      ]
+    }
+  ]
+}

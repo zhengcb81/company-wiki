@@ -13,7 +13,7 @@ from types import MappingProxyType
 
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW, MAX_COMPLETION_UNITS, ends_sentence
 from .narrative_business_policy import business_objects, business_qualification
-from .narrative_business_policy import detect_business_fact
+from .narrative_business_policy import detect_business_fact, detect_reading_business_fact
 from .narrative_stage_assertions import commercialization_milestone
 
 from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
@@ -347,8 +347,10 @@ def _operating_fact(text: str, rules: CandidateRules | None = None) -> Operating
     # Current recall extends established scope/operating facts; it cannot
     # suppress valid reporting, M&A or platform metrics before evaluating them.
     old = detect_business_fact(text)
+    reading = detect_reading_business_fact(text)
     reasons = [reason for reason in old.reasons
         if reason != "new_product_commercialization_milestone"]
+    reasons.extend(reason for reason in reading.reasons if reason not in reasons)
     if _OPERATING_QUANTITY.search(text) and _OPERATING_VALUE.search(text):
         reasons.append("quantified_operating_status")
     if _SERVICE_REVENUE.search(text):
@@ -364,8 +366,11 @@ def _operating_fact(text: str, rules: CandidateRules | None = None) -> Operating
     if _DEFINITION.search(text):
         reasons.append("reporting_definition_change")
     reasons = list(dict.fromkeys(reasons))
-    return OperatingFact(bool(reasons), old.topics or (("core_business",) if reasons else ()),
-        tuple(reasons), old.score + (3 if len(reasons) > len(old.reasons) else 0), old.financial_exempt)
+    topics = tuple(dict.fromkeys((*old.topics, *reading.topics)))
+    return OperatingFact(bool(reasons) or reading.eligible,
+        topics or (("core_business",) if reasons else ()), tuple(reasons),
+        max(old.score, reading.score) + (3 if len(reasons) > len(old.reasons) else 0),
+        old.financial_exempt or reading.financial_exempt)
 
 
 def _structural_barrier(unit: NarrativeUnit, rules: CandidateRules) -> bool:

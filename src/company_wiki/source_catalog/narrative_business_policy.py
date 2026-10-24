@@ -11,7 +11,6 @@ import re
 from company_wiki.document_normalization.text_matching import matching_reading_text, matching_script_text
 
 from .n6_candidate_operating_facts import OperatingFact
-from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
 from .narrative_source_purpose import (
     NON_OPERATING_PURPOSES,
     revenue_recognition_mechanism,
@@ -22,6 +21,7 @@ from .narrative_predicate_state import observe_metric_predicate, predicate_scope
 from .narrative_business_disclosures import (
     READING_DISCLOSURE_SCAN_PASSES,
     disclosure_relations,
+    reporting_metric_definition_spans,
     reading_material_value as reading_material_value,
 )
 
@@ -208,8 +208,10 @@ def _reading_clauses(text: str) -> tuple[str, ...]:
     # Company suffix punctuation is not a sentence boundary. Only this predicate
     # view elides it; the source string and locator remain untouched.
     interpreted = _READING_ABBREVIATION.sub(lambda match: match.group()[:-1], text)
-    return tuple(clause for clause in _CLAUSES.split(interpreted)
-                 if clause and len(clause) <= BUSINESS_CHARACTER_WINDOW)
+    # Native HTML can flatten several metric labels into one paragraph. Keep
+    # that original clause for bounded source-purpose/relationship checks; a
+    # relevance window is not a license to silently erase a long source span.
+    return tuple(clause for clause in _CLAUSES.split(interpreted) if clause)
 
 
 def _brand_portfolio(clause: str) -> tuple[bool, bool]:
@@ -325,7 +327,11 @@ def _source_metric_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
     if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
         return ()
     relations: list[tuple[str, int, int]] = []
+    definition_spans = reporting_metric_definition_spans(clause)
     for metric in _OPERATING_MEASURE.finditer(clause):
+        if any(start <= metric.start() and metric.end() <= end
+               for start, end in definition_spans):
+            continue
         before, after = clause[:metric.start()], clause[metric.end():]
         state = observe_metric_predicate(clause, metric.start(), metric.end())
         if not state.observed and not state.forward_outlook:
@@ -640,6 +646,9 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             reasons.append("source_revenue_guidance")
         if revenue_recognition_mechanism(clause):
             reasons.append("business_revenue_recognition")
+        # The metric relation detector itself requires a source-bound predicate.
+        # A definition elsewhere in the same flattened paragraph cannot cancel a
+        # separate observed predicate later in that paragraph.
         measures = _source_metric_relations(clause)
         if any(kind == "quantity" for kind, _start, _end in measures):
             reasons.append("operating_quantity")

@@ -31,6 +31,12 @@ _RULES = tuple(re.compile(pattern, re.I) for pattern in (
     r"金融工具[^。；;!?]{0,100}信用风险[^。；;!?]{0,65}是否[^。；;!?]{0,32}(?:显著|指标)|"
     r"\b(?:assess|determine|evaluate)\w*\b.{0,35}\bwhether\b.{0,35}\bcredit risk\b"
     r".{0,45}\bfinancial instruments?\b.{0,70}\b(?:increased|changed)\b",
+    # The standard non-recurring-gain table's government-subsidy exception
+    # defines which grants count as non-recurring. Words like "normal
+    # operations" and "continuous impact" describe the rule, not this
+    # issuer's observed business activity.
+    r"政府补助[^。；;!?]{0,100}正常经营业务[^。；;!?]{0,50}符合(?:国家)?政策规定"
+    r"[^。；;!?]{0,80}(?:按照|依照)[^。；;!?]{0,30}标准[^。；;!?]{0,80}政府补助除外",
 ))
 
 

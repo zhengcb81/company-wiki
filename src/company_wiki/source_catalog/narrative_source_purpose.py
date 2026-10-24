@@ -11,6 +11,7 @@ import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
 
+from .narrative_business_disclosures import reporting_basis_relations
 from .narrative_business_meaning import concrete_operating_event, describes_business
 from .narrative_reporting_rules import reporting_rule_without_operating_event
 
@@ -136,6 +137,15 @@ def _clause_purpose(value: str) -> str:
         return "template_no_event"
     if _NAVIGATION.search(value):
         return "navigation"
+    basis = reporting_basis_relations(value)
+    if "reporting_outlook_recast" in basis:
+        return "operating_guidance"
+    if "reporting_segment_scope" in basis:
+        return "operating_structure_basis"
+    if "future_investment_disclosure" in basis:
+        return "operating_investment_disclosure"
+    if basis:
+        return "operating_metric_basis"
     if _AUDIT_SPEECH.search(value) or _AUDIT_OWNER.search(value):
         return "audit_procedure"
     if reporting_rule_without_operating_event(value):
@@ -194,7 +204,9 @@ def source_purpose(text: str) -> str:
     sentences = re.split(r"[。！？；;]|(?<=[.!?])\s+", value)
     clauses = (part for sentence in sentences for part in _ASSERTION_ACTOR.split(sentence))
     purposes = tuple(_clause_purpose(clause.strip()) for clause in clauses if clause.strip())
-    for purpose in ("operating_contract_stock", "operating"):
+    for purpose in ("operating_contract_stock", "operating", "operating_metric_basis",
+                    "operating_guidance", "operating_structure_basis",
+                    "operating_investment_disclosure"):
         if purpose in purposes:
             return purpose
     return next((purpose for purpose in purposes if purpose in NON_OPERATING_PURPOSES), "unknown")

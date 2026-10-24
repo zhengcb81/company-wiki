@@ -387,6 +387,10 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             result = result.rstrip() + ("" if cjk_boundary else " ") + text.lstrip()
         return result
 
+    def source_statement_closed(uid: str) -> bool:
+        text = units[uid].raw_text.rstrip().rstrip("\"'”’）)]》")
+        return text.endswith(("。", "！", "？", ".", "!", "?", ";", "；"))
+
     def statement_members(member_ids):
         # The continuity owner has already proven the native frame/scope and
         # closed the window. A terminator alone cannot detach a forward or
@@ -422,9 +426,28 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         return result
 
     for window in continuity["windows"]:
-        members = window["member_unit_ids"]
-        if not set(members) <= units.keys() or set(members) & blocked:
+        members = list(window["member_unit_ids"])
+        if not set(members) <= units.keys():
             continue
+        withheld_members = [index for index, uid in enumerate(members) if uid in blocked]
+        if withheld_members:
+            prefix_end = next((index for index, uid in enumerate(members) if uid not in blocked),
+                              len(members))
+            # A deferred prefix remains withheld. A later source-complete
+            # statement may still stand on its own when an observed terminal
+            # boundary separates it from that prefix and native continuity
+            # proves the suffix members. Structural/context failures are not
+            # recoverable through this path.
+            if (prefix_end == 0
+                    or withheld_members != list(range(prefix_end))
+                    or not source_statement_closed(members[prefix_end - 1])):
+                continue
+            suffix = members[prefix_end:]
+            if (not suffix or any(uid in context_blocked for uid in suffix)
+                    or not source_statement_closed(suffix[-1])
+                    or dependent_statement.search(linguistic_text([suffix[0]]))):
+                continue
+            members = suffix
         # Actual row/header/note projects retain their existing atomic
         # source semantics; plain project prose uses independent statements.
         if any(id(owner) in atomic_projects for uid in members for owner in owners.get(uid, ())):

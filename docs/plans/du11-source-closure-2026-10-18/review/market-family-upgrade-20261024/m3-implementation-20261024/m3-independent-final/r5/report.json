@@ -1,0 +1,274 @@
+{
+  "status": "PASS_REVIEWED_M3_SOURCE_BEHAVIOR",
+  "review_head": "3bcfc202e1657cdd9d5e3797c4b76cd40b8b8c57",
+  "receipt_sha256": "91595d633cdea86b8d9f3877551eb2af7e72ddb4bd53e7e0af559c5e107f4fff",
+  "producer_tree_sha256": "c8da20402eb12cc96b4478b12b283c35b523cce5385e24b054151c50f2825074",
+  "producer_file_count": 375,
+  "producer_all_files_match_start_and_after_replay": true,
+  "bound_source_sha256": {
+    "src/company_wiki/document_understanding/operating_states/relations.py": "0b65b713bedca344d09bd2fe00ae52941433b91aaaf2ecdc6be137abf8c2386e",
+    "src/company_wiki/document_understanding/profiles/signals.py": "e55a6bd92ef0bd5a42f248668e3a01a71ff8478a55f945bfbd6cea2ad5a178b0",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "5679a8b7faa7153d9a44aaebb6ac38a5e3673f712ec298e6a7478e8b6aa52dfb",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "ce0a4830be140dc554cc154f95fff1320c8424d9dce0833ec554b5d582379b70",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "a4bfabf5bec677996d9ef2ff0f2f81808bb328eb6b2c156ff5011c56617450ba",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "498909375cee9c51f2508286963995b6d2da27982fc0dd44cbe9750a12def703"
+  },
+  "bound_reviewed_test_sha256": {
+    "tests/unit/document_understanding_selection/test_reading_reporting_basis.py": "6cfd96418d50b2a37fc8484498cfb9be996ee67a553b7f6b6e5ba880d88c658c",
+    "tests/unit/document_understanding_selection/test_reading_pdf_operating_continuity.py": "105baddb3cb6932399a2559bca0a51e973d89e09844e6911ef09c8f98ce175e1",
+    "tests/unit/document_understanding_profiles/test_a_routing_matrix.py": "2d33a9e39330f3e3a3bc3a4562fd24ce0684762ac33a8e9248c36abc76c42df7",
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": "096dd15b91bcd4ef3bb6515e29e7db404be9e0379fa835e1a67f0e172382075b"
+  },
+  "closed_findings": [
+    {
+      "id": "M3-FINAL-01",
+      "status": "CLOSED",
+      "evidence": "Seven original/title-case audit-training labels remain ineligible with no reporting_metric_definition; case no longer substitutes for metric-head ownership."
+    },
+    {
+      "id": "M3-FINAL-02",
+      "status": "CLOSED_FOR_REVIEWED_BOUNDARIES",
+      "evidence": "Both pure formula and its explanatory which-represents relative clause remain only reporting context. Comma and no-comma independent paid-seats increased predicates retain operating_metric_change. Actual MSFT p10/p12 definitions no longer carry observed-growth tags."
+    }
+  ],
+  "independent_neutral_assertions": {
+    "cases": [
+      {
+        "kind": "audit_training",
+        "text": "The auditor tested revenue controls: number of samples included 40 contracts.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "audit_training",
+        "text": "Employee revenue training: includes instructions for reviewing deferred revenue.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "audit_training",
+        "text": "The auditor tested revenue: includes manual inspection of contract samples.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "audit_training",
+        "text": "Training for revenue: includes instructions for reviewing deferred revenue.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "audit_training",
+        "text": "Audit of revenue: includes contract sample testing.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "audit_training",
+        "text": "The Auditor Tested Revenue: includes manual inspection of contract samples.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "audit_training",
+        "text": "Training for Revenue: includes instructions for reviewing deferred revenue.",
+        "eligible": false,
+        "reasons": [],
+        "definition_spans": [],
+        "pass": true
+      },
+      {
+        "kind": "actual",
+        "text": "Paid seats: number of licensed users and our paid seats increased 20% to 240 in 2026.",
+        "eligible": true,
+        "reasons": [
+          "reporting_metric_definition",
+          "operating_metric_change"
+        ],
+        "definition_spans": [
+          [
+            0,
+            37
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "actual",
+        "text": "Paid seats: number of licensed users, and our paid seats increased 20% to 240 in 2026.",
+        "eligible": true,
+        "reasons": [
+          "reporting_metric_definition",
+          "operating_metric_change"
+        ],
+        "definition_spans": [
+          [
+            0,
+            36
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "formula",
+        "text": "Commercial bookings growth: sum of service revenue growth and our paid seats growth.",
+        "eligible": true,
+        "reasons": [
+          "reporting_metric_definition"
+        ],
+        "definition_spans": [
+          [
+            0,
+            83
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "formula",
+        "text": "Commercial bookings growth: sum of service revenue growth and our paid seats growth, which represents the change in subscriptions.",
+        "eligible": true,
+        "reasons": [
+          "reporting_metric_definition"
+        ],
+        "definition_spans": [
+          [
+            0,
+            129
+          ]
+        ],
+        "pass": true
+      }
+    ],
+    "passed": 11
+  },
+  "independent_original_source_and_card_checks": {
+    "sources": [
+      {
+        "id": "du5-us-msft-ex991",
+        "sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+        "spans": 12,
+        "cards": 12,
+        "source_replay_and_task_card_sha_match": true,
+        "original_unchanged": true,
+        "status": "selected",
+        "coverage_complete": true,
+        "checks": {
+          "p10_p12_definitions_no_actual_growth": true,
+          "p19_p20_mechanical_guidance_text_reachable": true
+        }
+      },
+      {
+        "id": "du5-hk-kingsoft-interim",
+        "sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "spans": 96,
+        "cards": 52,
+        "source_replay_and_task_card_sha_match": true,
+        "original_unchanged": true,
+        "status": "partial",
+        "coverage_complete": false,
+        "checks": {
+          "p13_offset_cause": true,
+          "p15_no_future_investment": true,
+          "p50_one_segment": true
+        }
+      },
+      {
+        "id": "du5-cn-proya-q1",
+        "sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+        "spans": 4,
+        "cards": 1,
+        "source_replay_and_task_card_sha_match": true,
+        "original_unchanged": true,
+        "status": "partial",
+        "coverage_complete": false,
+        "checks": {
+          "actual_cash_reason_and_no_templates": true
+        }
+      },
+      {
+        "id": "du5-cn-gbits-call",
+        "sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+        "spans": 23,
+        "cards": 23,
+        "source_replay_and_task_card_sha_match": true,
+        "original_unchanged": true,
+        "status": "partial",
+        "coverage_complete": false,
+        "checks": {
+          "23_unknown_original_language_cards": true
+        }
+      },
+      {
+        "id": "cn-ipo",
+        "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "spans": 160,
+        "cards": 81,
+        "source_replay_and_task_card_sha_match": true,
+        "original_unchanged": true,
+        "status": "partial",
+        "coverage_complete": false,
+        "checks": {}
+      }
+    ],
+    "proya_controls": [
+      {
+        "text": "除同公司正常经营业务相关的有效套期保值业务外，金融资产产生的公允价值变动损益。",
+        "eligible": false,
+        "reasons": []
+      },
+      {
+        "text": "股东参与融资融券业务情况说明（如有）",
+        "eligible": false,
+        "reasons": []
+      },
+      {
+        "text": "公司经营电子材料业务。",
+        "eligible": true,
+        "reasons": [
+          "operating_current_state"
+        ]
+      },
+      {
+        "text": "股东已参与新产品商业化项目。",
+        "eligible": true,
+        "reasons": [
+          "operating_other_party_state"
+        ]
+      }
+    ],
+    "cn_hk_route_pair_pass": true,
+    "producer_unchanged_and_match": true,
+    "model_calls": 0,
+    "downloads": 0,
+    "production_writes": 0
+  },
+  "reviewed_logic": "Restart requires a located metric subject phrase followed directly by its own finite predicate. It no longer searches an arbitrary later explanatory tail as evidence of an actual assertion. Definition range remains source-local; raw text unchanged.",
+  "exact_tested_sources": [
+    "MICROSOFT CORP 2026-09-02 EX99.1 HTML (12 selected spans /12 cards)",
+    "金山云2025中期报告PDF (96 selected spans /52 cards)",
+    "珀莱雅2026Q1 PDF (4 selected spans /1 card)",
+    "吉比特财报交流会DOCX (23 selected spans /23 cards)",
+    "中微公司/AMEC科创板IPO招股书PDF (160 selected spans /81 cards)"
+  ],
+  "limits": [
+    "This PASS is code/source-material behavior for the listed controls and actual selected spans, not full source content coverage or investment-quality summary acceptance.",
+    "Independently replayed all receipt spans from actual original bytes and rebuilt every task/card binding. Did not independently regenerate full raw selection.",
+    "HK,Proya,Gbits and AMEC IPO remain partial; span/work caps and structural gaps are not complete. MSFT selection coverage_complete is not content-gold PASS.",
+    "Explicit selector0.9 tested; production default0.8 switch, catalog acquisition, paid summary/cache lifecycle and RF remain separate.",
+    "No full-suite run. No product/old-test/config/original writes, no external model/download, no commit."
+  ],
+  "history": "All provisional and R1-R4 failure reports remain unchanged. No former failure receipt rewritten as green."
+}

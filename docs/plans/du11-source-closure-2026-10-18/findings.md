@@ -666,3 +666,17 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 ## M3真实文种观察的测量边界
 
 真实MSFT p10/p12/p19/p20原文可读但被筛掉；p3/p6/p17本来已选，不重复报缺。长于1200字的source clause当前直接丢弃，且指标定义被`financial_only/accounting_policy`压掉；旧新范围/机械no-change不进入现predicate/time图。HK中报同时存在真实漏半句/限定、96 span预算满，以及observer没有canonical EvidenceSpan、scope/task/compiler binding，导致部分旧gold状态只能NOT_EVALUATED。以后需把source-side false negative、selected-but-cut、task-local support和observer unknown分列；禁止整篇串接、猜scope或放宽quote金标。具体原文与源码绑定见study/m3-discovery/observations.json和report.json。
+
+## 2026-10-24 M3 独审收口与稀疏季报反控
+
+- M3 R5独立审查PASS，发现的两个P2均关闭：定义/公式/解释性从句不能通过远处谓词伪装成实际指标；有限谓词必须直接跟在指标主体后。真实MSFT实际增长保留，RPO定义和机械指引可读。绑定六份源码SHA、五源回放及11项独立断言见`review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/`。
+- Proya 2026Q1 PDF共12页，包含财务数据、股东信息、附表及一条现金流变动原因；视觉/文本抽查未见经营回顾、新品、渠道或出海正文。它支持“低业务密度季报可只切实质经营解释”的策略，但不能推断所有季度报告都可跳过；M4需用真实有经营事件的季报作正控。
+- W13远端三个失败测试并非hook策略设计随机失败，而是Git mode契约遗漏：100644使Linux worktree不能执行hook，`copyfile`又在测试副本中丢了mode。修复同时补生产仓模式、测试夹具和mode断言，覆盖分工完整。新CI待推送后验证。
+
+## 2026-10-24 M4 根因修复与真实季报复验（覆盖上面的调查中间状态）
+
+中微2026Q1原文中，闭合句后的未闭合尾巴曾导致整个连续性run延后；页边界分支还会重复延后已处理过的左段。现在只延后未闭合尾部或当前页不确定片段。Domingo验证句的相邻行距实测11.22/10.45=1.074em，旧1.0em硬上限拒绝连接；连续性逻辑仅将字体相对间距上限放到1.15em，其他来源、页、相邻块、同范围/字体及实测对齐条件保持。更大间距反控仍拒绝。共享报告规则排除了非经常性损益中的法定补助模板条款。
+
+真实离线回放中，中微8,300+台/180余产线、300多台量产、Angnova 140:1及客户认证、Domingo大于700:1及实验室验证、薄膜设备收入约224.23%都进入选中span/来源卡；珀莱雅保留“收回货款减少、推广费增加”的公司特定现金流说明，模板条款不进可用卡。中微仍是`partial`，其他未证明的连续段/页边界继续暂缓。两个原件SHA前后相同，零下载/零LLM调用。
+
+M4定向连续性和几何136P，当前M3/M4组合346P；Ruff、diff-check通过。实现、命中结果、work-unit各阶段计数与边界见`review/market-family-upgrade-20261024/m4-sparse-quarterly/report.md`及`discovery.json`。结论仍是按材料中实际业务信息密度选取，不按“季报”整体跳过。

@@ -109,6 +109,33 @@ def test_only_original_ids_of_closed_two_to_four_native_blocks_are_windowed(text
     assert rows == before
 
 
+def test_observed_line_flow_allows_small_font_relative_pdf_baseline_variation():
+    left = native("全新的设备已在客户关键工艺中实现稳定验证", 0,
+                  box=[89.87999725341797, 151.41729736328125, 531.4877319335938, 165.127685546875])
+    right = native("并完成相关工艺指标验证。", 1,
+                   box=[89.87999725341797, 176.35035705566406, 289.33001708984375, 186.80035400390625])
+    for view, _provenance, _profile in (left, right):
+        view["layout"]["font_size"] = 10.449999809265137
+        view["hints"]["font_runs"][0]["font_size"] = 10.449999809265137
+
+    result = run([left, right])
+
+    assert len(result["windows"]) == 1
+    assert result["windows"][0]["member_unit_ids"] == [left[0]["unit_id"], right[0]["unit_id"]]
+
+
+def test_native_line_flow_still_rejects_a_gap_beyond_the_measured_tolerance():
+    left = native("全新的设备已在客户关键工艺中实现稳定验证", 0,
+                  box=[89.87999725341797, 151.41729736328125, 531.4877319335938, 165.127685546875])
+    right = native("并完成相关工艺指标验证。", 1,
+                   box=[89.87999725341797, 178.0, 289.33001708984375, 188.45001220703125])
+    for view, _provenance, _profile in (left, right):
+        view["layout"]["font_size"] = 10.449999809265137
+        view["hints"]["font_runs"][0]["font_size"] = 10.449999809265137
+
+    assert run([left, right])["windows"] == []
+
+
 def test_same_actual_block_fragments_use_original_char_ranges_not_guessed_line_boxes():
     box = [90, 100, 550, 132]
     rows = [
@@ -194,6 +221,78 @@ def test_long_connected_unclosed_run_cannot_create_overlapping_windows_or_a_chap
     assert not result["windows"]
     assert not result["complete"]
     assert any(d["code"] == "CONTINUITY_WINDOW_LIMIT" for d in result["diagnostics"])
+
+
+def test_complete_statement_prefix_survives_a_later_unclosed_native_tail():
+    rows = [
+        native("公司累计已有超过8300台反应台全面量产。", 0),
+        native("另一新设备已进入客户生产验", 1),
+        native("证阶段，后续还需", 2),
+        native("等待客户端决定", 3),
+    ]
+    result = run(rows)
+    assert result["windows"] == []
+    assert result["standalone_unit_count"] == 1
+    assert not result["complete"]
+    assert result["deferred_unit_ranges"] == [{
+        "source_id": "source-a", "page": 7, "first_ordinal": 1, "last_ordinal": 3,
+    }]
+    assert all("source-a:0" not in row for row in result["deferred_unit_ranges"])
+
+
+def test_closed_multifragment_statement_prefix_is_windowed_before_open_tail():
+    rows = [
+        native("新设备已完成客户生产验", 0),
+        native("证并开始交付。", 1),
+        native("另一产品尚在等", 2),
+        native("客户反馈", 3),
+    ]
+    result = run(rows)
+    assert [window["member_unit_ids"] for window in result["windows"]] == [
+        ["source-a:0", "source-a:1"]
+    ]
+    assert not result["complete"]
+    assert result["deferred_unit_ranges"] == [{
+        "source_id": "source-a", "page": 7, "first_ordinal": 2, "last_ordinal": 3,
+    }]
+
+
+def test_unproven_page_transition_does_not_redefer_closed_left_prefix():
+    from company_wiki.document_understanding.narrative_continuity import (
+        SourcePageFlow,
+        build_native_continuity,
+    )
+    from company_wiki.document_understanding.operating_states.relations import (
+        independent_statement_start,
+    )
+
+    first = "公司累计已有超过8300台反应台全面量产。"
+    rows = [
+        native(first, 0, block=5, box=[90, 680, 550, 712]),
+        native("另一设备正在客户进行生产验", 1, block=5, start=len(first),
+               box=[90, 680, 550, 712]),
+        native("页脚文字", 2, kind="footer", box=[200, 770, 400, 780]),
+        native("证阶段。", 3, page=8, box=[90, 80, 550, 92]),
+    ]
+    views = [row[0] for row in rows]
+    provenance = {row[0]["unit_id"]: row[1] for row in rows}
+    profiles = {row[0]["unit_id"]: row[2] for row in rows}
+    result = build_native_continuity(
+        views,
+        provenance=provenance,
+        unit_profiles=profiles,
+        source_page_flow=SourcePageFlow(
+            frozenset(), independent_statement_start, coarse_complete=True,
+            unproven_pages=frozenset({8}),
+        ),
+    )
+    ranges = result["deferred_unit_ranges"]
+    assert not any(row["first_ordinal"] <= 0 <= row["last_ordinal"] for row in ranges)
+    assert any(row["page"] == 7 and row["first_ordinal"] == row["last_ordinal"] == 1
+               for row in ranges), (ranges, result["diagnostics"], result["windows"])
+    assert any(row["page"] == 8 and row["first_ordinal"] == row["last_ordinal"] == 3
+               for row in ranges)
+    assert not result["complete"]
 
 
 def test_independent_closed_runs_do_not_share_original_members():
@@ -504,6 +603,36 @@ def test_known_deferred_native_statement_cannot_fall_back_to_complete_single_fra
     )
     assert not candidates and not eligible and not complete
     assert set(withheld[0]["known_unit_ids"]) == {u.unit_id for u in parsed.units}
+
+
+def test_complete_statement_after_deferred_terminal_prefix_keeps_own_source_window(monkeypatch):
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    parsed, pipeline = source_case([
+        "用中各类超高深宽比需求；",
+        "ICP方面，适用于新一代逻辑和存储芯片制造用的第二代ICP刻蚀设备",
+        "Primo Angnova在3D DRAM中取得140:1刻蚀结果，并付运到客户进行认证。",
+    ])
+    ids = [unit.unit_id for unit in parsed.units]
+
+    def partial_continuity(*_args, **_kwargs):
+        return {
+            "windows": [{"window_id": "measured-window", "member_unit_ids": ids}],
+            "deferred_unit_ranges": [{"source_id": parsed.source_id, "page": 7,
+                                      "first_ordinal": 0, "last_ordinal": 0}],
+            "unexamined_from_index": None,
+            "complete": False,
+            "adjacency_edges": [],
+        }
+
+    monkeypatch.setattr(reading, "build_native_continuity", partial_continuity)
+    packages, _, continuity, blocked = reading._prose_reading_packages(parsed, pipeline)
+    recovered = [package for package in packages if package["kind"] == "native_continuity"]
+    assert not continuity["complete"]
+    assert ids[0] in blocked
+    assert len(recovered) == 1, ([(p["kind"], p.get("member_unit_ids"), p["package_id"])
+                                  for p in packages], blocked)
+    assert recovered[0]["member_unit_ids"] == ids[1:]
 
 
 def test_diagnostic_id_cap_cannot_silently_admit_remaining_deferred_originals(

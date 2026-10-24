@@ -201,6 +201,26 @@ def test_cn_ipo_prospectus_is_a_prospectus():
     assert route["disposition_hint"] == "read"
 
 
+def test_simplified_cn_prospectus_word_does_not_create_hk_offering_signal():
+    observation = b.observation(
+        [
+            *[b.unit(f"c{i}", i, text, kind="heading", page=1, role="company_filing")
+              for i, text in enumerate(b.CN_IPO_COVER)],
+        ],
+        title="中微公司：首次公开发行股票并在科创板上市招股说明书",
+        declared_kind="prospectus",
+        regime="unknown",
+        language="zh",
+    )
+
+    route = _route(observation)
+
+    assert route["profile_id"] == "prospectus"
+    assert route["family"] == "prospectus"
+    assert route["regime"] == "cn_exchange"
+    assert route["subtype"] == "ipo"
+
+
 def test_hk_periodic_bilingual_routes_to_hk_periodic():
     observation = b.observation(
         [
@@ -261,6 +281,23 @@ def test_hk_ipo_cover_without_the_word_prospectus_is_recognized():
     )
     route = _route(observation)
     assert route["family"] == "prospectus"
+    assert route["profile_id"] == "prospectus"
+    assert route["regime"] == "hkex"
+
+
+def test_simplified_hk_prospectus_uses_global_offering_evidence():
+    observation = b.observation(
+        [
+            b.unit("c0", 0, "招股说明书", kind="heading", page=1),
+            b.unit("c1", 1, "全球发售", kind="heading", page=1),
+            b.unit("t0", 10, "所得款项用途", kind="heading", page=2),
+        ],
+        title="公司全球发售招股说明书",
+        declared_kind="prospectus",
+        regime="unknown",
+        language="zh",
+    )
+    route = _route(observation)
     assert route["profile_id"] == "prospectus"
     assert route["regime"] == "hkex"
 
