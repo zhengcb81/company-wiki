@@ -1,9 +1,12 @@
 """Local validation helpers for the GitHub CI fast gate.
 
-The push hook adds affected unit files to the same CI contract smoke set.
-GitHub Actions runs every unit test. Run this script without arguments for the
-optional full local gate; all portable Contract tests remain available by
-running pytest directly.
+Three bounded layers share one script. Commits keep static checks (pre-commit).
+Daily pushes run the affected unit files plus the shared fast contract set
+once, and defer everything else to CI; a wide, dynamic or unknown scope runs
+the fast contract set alone and says so. The full local suite below stays an
+explicit decision and is never started implicitly by a push. A green fast pass
+only proves the scope that actually ran (`local_fast_pass`), never the whole
+project (`full_validation_pending` covers the rest).
 
 Run without flags for the optional full local validation suite:
 
@@ -21,20 +24,19 @@ class the local gate never ran - the gate must run the tests that judge the
 gate.  Add a new `scripts/*.py` CLI and this step tells you locally whether it
 needs the legacy-writer freeze.
 
-Exit non-zero on the first red check. The full local run is useful before a
-large integration but is not part of every push. GitHub CI runs all Unit and
-the curated Contract smoke set; full Contract tests, full-tree coverage and
-coverage are manual. Complexity is an optional diagnostic report, not a gate.
-Local pytest gates use an isolated short basetemp and UTF-8 subprocess streams
-so host TEMP ACL/encoding do not create false reds.
-
-The small hook path is intentionally narrower than this full local gate.
+Exit non-zero on the first red check, on a failed child launch, and on any
+runner exception: a push must never be waved through because the check could
+not run. The full local run is useful before a large integration but is not
+part of every push. GitHub CI runs all Unit and the curated Contract smoke
+set; full Contract tests, full-tree coverage and coverage are manual.
+Complexity is an optional diagnostic report, not a gate. Local pytest gates
+use an isolated short basetemp and UTF-8 subprocess streams so host
+TEMP ACL/encoding do not create false reds.
 """
 
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 import os
 import subprocess
 import sys
@@ -185,24 +187,34 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
         )
 
 
-def _run_parallel_pytest_gates(gates: list[tuple[list[str], str]]) -> int:
-    """Full units and nonunit smoke are separate isolated CI responsibilities.
+def _push_targets(selected: list[str]) -> tuple[list[str], str]:
+    """Decide what a daily push runs; a full recommendation defers to CI.
 
-    Starting both together avoids consuming one 600s subprocess allowance on
-    their sum. Neither allowance increases; every child must finish green and
-    owns a distinct short TEMP with cache/bytecode writes disabled. Wait for all
-    children on failure too, so their diagnostic and cleanup are not abandoned.
+    The selection layer may still recommend the whole unit suite for wide,
+    dynamic, configuration or unknown scopes. That recommendation stays with
+    CI: silently starting all unit tests on every push is the regression this
+    policy exists to prevent. The push itself always runs the shared fast
+    contract set once, deduplicated against whole-file selections, and a small
+    explainable affected set keeps running its complete files.
     """
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        pending = [(label, executor.submit(_run_pytest_gate, cmd, label)) for cmd, label in gates]
-        results = []
-        for label, future in pending:
-            try:
-                results.append(future.result())
-            except Exception as exc:
-                _print_output(f"FAILED: {label} ({type(exc).__name__})")
-                results.append(1)
-    return next((result for result in results if result), 0)
+    if "tests/unit" in selected:
+        return list(FAST_CONTRACT_CASES), "full unit suite recommendation deferred to CI"
+    targets = list(selected)
+    targets.extend(case for case in FAST_CONTRACT_CASES
+                   if not any(case.split("::")[0] == path or case.startswith(path + "/")
+                              for path in selected))
+    return targets, f"tests/unit outside the {len(targets)} ran targets deferred to CI"
+
+
+def _dispatch_gate(cmd: list[str], label: str, env_extra: dict | None = None) -> int:
+    """Run one gate and never let a launch failure look like a green check."""
+    try:
+        if "-m" in cmd and "pytest" in cmd:
+            return _run_pytest_gate(cmd, label)
+        return _run(cmd, label, env_extra=env_extra)
+    except Exception as exc:
+        _print_output(f"FAILED: {label} ({type(exc).__name__}: {exc})")
+        return 1
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -258,43 +270,47 @@ def main(argv: list[str] | None = None) -> int:
         None,
     )
     if args.push_checks:
-        selected, reason = select_unit_tests(PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()))
-        print(f"Push unit scope: {reason} ({len(selected)} paths)")
-        cases = [*selected, *(case for case in FAST_CONTRACT_CASES
-                 if not any(case.split('::')[0] == path or case.startswith(path + '/') for path in selected))]
-        if selected == ["tests/unit"]:
-            command = [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180"]
-            code = _run_parallel_pytest_gates([
-                ([*command, "tests/unit"], "full affected unit suite"),
-                ([*command, *cases[1:]], "independent CI contract smoke"),
-            ])
-            print("\npre-push gate GREEN — safe to push (then self-monitor CI)." if code == 0
-                  else "\nPUSH CHECKS RED — fix the failing phase; do not bypass.")
-            return code
-        gates = [([sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *cases],
-                  "affected units and CI contract smoke", None)]
-    elif args.fast_contracts_only:
+        selected, reason = select_unit_tests(
+            PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()))
+        targets, deferred = _push_targets(selected)
+        print(f"Push scope: {reason}; ran {len(targets)} target(s) (local_fast_pass); "
+              f"full_validation_pending: {deferred}.")
+        code = _dispatch_gate(
+            [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *targets],
+            "daily push fast feedback: affected units and CI contract smoke")
+        if code:
+            print("\nPUSH CHECKS RED — fix the failing phase; do not bypass.")
+        else:
+            print("\nPush fast gate GREEN (local_fast_pass for the ran scope only); "
+                  "full_validation_pending — CI still runs the full suites.")
+        return code
+    if args.fast_contracts_only:
         fast_gate = fast_contract_gate
         if args.junitxml:
             fast_gate = (
-                [*fast_contract_gate[0], f"--junitxml={args.junitxml}"],
-                fast_contract_gate[1],
-                fast_contract_gate[2],
+                [*fast_gate[0], f"--junitxml={args.junitxml}"],
+                fast_gate[1],
+                fast_gate[2],
             )
         gates = [fast_gate]
-    elif not args.skip_contract:
-        gates.append(focused_contract_gate)
+        green_message = ("fast contract gate GREEN (local_fast_pass for the curated "
+                         "set); full_validation_pending — full suites stay with CI "
+                         "and the explicit full local mode.")
+    else:
+        if not args.skip_contract:
+            gates.append(focused_contract_gate)
+        green_message = ("full local gate GREEN (contracts skipped by --skip-contract); "
+                         "this was not a full validation run."
+                         if args.skip_contract else
+                         "full local gate GREEN — full validation ran locally; self-monitor CI.")
 
     for cmd, label, env_extra in gates:
-        if "-m" in cmd and "pytest" in cmd:
-            rc = _run_pytest_gate(cmd, label)
-        else:
-            rc = _run(cmd, label, env_extra=env_extra)
+        rc = _dispatch_gate(cmd, label, env_extra)
         if rc != 0:
             print(f"\nGATE RED at: {label}\nFix the root cause (see "
                   f"revenue-forecast ci_root_fix.md), do not bypass.")
             return rc
-    print("\npre-push gate GREEN — safe to push (then self-monitor CI).")
+    print(f"\n{green_message}")
     return 0
 
 
