@@ -12,11 +12,11 @@
 
 ---
 
-**最新状态（2026-10-24）：** W13 有界推送调度已由 ROOT 修复并独审通过，常规合并、提交和推送待执行。作者冻结版 `a8045416` 的独审为 FAIL；ROOT 版本为 `PASS_ROOT_INTEGRATED_FIXES`：154 定向测试、18 独立探针、5 项真实本地 Git 推送检查及 Ruff 通过。没有重跑 8 千余项全量单测；完整 suite 留给现有 CI。详见[ROOT接收记录](review/w13-root-reception-20261024/ROOT_ACCEPTANCE.md)及[独立审查](review/w13-root-reception-20261024/independent/report.md)。
+**最新状态（2026-10-24）：** W13/W14/W15三卡已逐项完成ROOT接收，边界和证据见[三卡接收总记录](review/package-reception-w13-w15-20261024/README.md)。W13作者冻结版有缺陷；ROOT保留“受影响文件数≤32才运行，否则转CI”的快反馈边界，并提交精准标签、去重修复`67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c`，154项定向测试、18项独立探针、5项真实Git推送检查通过，尚待本次文档一并正常推送后观察精确CI。W14已进入RF主线`aa19b653da18566e582e802269f5908471c456db`，离线全门禁595通过；不代表真实公司分析/下载已验收。W15已进入Audit本地主线`37e12e6ff4674fa1989b2616cff3c31faa4d8cb0`，28项测试和真实移位回放通过；接收中另修复Windows换行差异导致的fixture SHA错误，该仓无remote。正式摘要、缓存中断恢复、RF实际读取和真实样本业务覆盖仍是主线待办。
 
-此前 M2 源码提交 `65cd8f58` 的首次 push 因 8315 项全量单测运行至 84% 后触发 600 秒总时限、146 项契约通过而未发布。W13 修复正是为避免每次日常 push 隐式重跑全量；正常 push 将按当前边界执行。M3真实样本只读调查已完成，发现指标定义/定义版本/机械重列指引、港股中报限定和 scope观测都存在真实或测量缺口，下一步在 W13 发布后先写中性反例，再按共享 owner 根修，见[M3调查](review/market-family-upgrade-20261024/study/m3-discovery/report.md)。
+此前 M2 源码提交 `65cd8f58` 的首次 push 因 8315 项全量单测运行至 84% 后触发 600 秒总时限、146 项契约通过而未发布，这是历史失败记录。W13 已修复每次日常 push 隐式重跑全量的问题；当前实现让≤32目标走本地受影响测试，宽/动态/未知范围转CI。W13新的根提交和本状态文档推送后只检查绑定精确HEAD的CI，不重跑8千全量。M3真实样本只读调查发现指标定义/定义版本/机械重列指引、港股中报限定和scope观测真实或测量缺口；按共享owner根修已在M3/M4/M5推进，接下来转真实正式摘要/cache/RF，见[M3调查](review/market-family-upgrade-20261024/study/m3-discovery/report.md)。
 
-**本轮执行状态：** M1源侧 development gold 已独立通过（51事实/139锚点/102项）；M2源码独审386项通过，吉比特、珀莱雅、金山云、微软真实选材仍需按旧 gold 如实复核，正式摘要/cache/RF尚未验收。M2源码仍在本地待正常发布。W13 根修与审查结果已记入上方唯一入口；其余 W13 未修问题（Windows长路径、B10基线、fresh worktree config_doctor目录）分列，不混成同一通过结论。
+**本轮执行状态：** M1源侧development gold独立通过（51事实/139锚点/102项）；M2源码独审386项通过。W13/W14/W15工程施工包已接收，但吉比特、珀莱雅、金山云、微软真实选材的正式摘要/cache/RF消费仍未验收。W13剩余Windows长路径、B10基线、fresh worktree `config_doctor`目录单列，不混成同一通过结论；详见三卡ROOT接收总记录。当前代码可发布状态、精确CI与下一步只以本段及`CURRENT_STATUS.json`为准。
 
 **主线ACTIVE；最新：跨市场/文种真实样本升级，五family策略组件独审通过并正常推送；真实内容共因修复继续。** 原来源材料/request根修已正常推送`3b4110a3`，完整8199P/24既有skip、另146契约P，精确[CI40087657562](https://github.com/zhengcb81/company-wiki/actions/runs/40087657562) completed/success；首次失败与最终补审收据保留。
 
@@ -74,11 +74,11 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 精确GitHub CI 40076059766已completed/success，与推送HEAD一致。用户再次确认W11-CWP-SOURCES A/B/C全部交付并推送，W11卡关闭；真实IR正文、W08 annual14业务内容、正式摘要/cache恢复、实际采用矩阵与W12审查仍开放。未新增外部LLM调用、真实文档下载或费用；本次自有pytest/debug目录已精确清理。
 
-## 可立即分发的三张独立施工卡（2026-10-24）
+## 已关闭的三张独立施工卡（2026-10-24）
 
-[本批唯一总入口](harness_lanes/20261024/README.md)包含W13-CWP-GATES、W14-RF-CLEAN-CHAIN、W15-AUDIT-PORTABLE三张卡，三个独占worktree和子PWF已就绪、bootstrap已提交且tracked clean。当前是READY_NOT_DISPATCHED，尚未实施产品；施工卡独立审查发现5项接口/验证歧义，已全部修完并复审。各包交付前仍必须独立agent全面审实现，修完全部内部问题后交接。
+[本批唯一总入口](harness_lanes/20261024/README.md)中的W13-CWP-GATES、W14-RF-CLEAN-CHAIN、W15-AUDIT-PORTABLE现均已ROOT接收。W13作者原候选不直接照搬，保留≤32目标有界快反馈；W14离线跨仓E2E已并入并推送RF主线；W15工程回放已并入Audit本地主线，并由ROOT补上字节可移植性修复。版本、独立审查、测试、清理及接收边界见[dispatch](harness_lanes/20261024/dispatch.json)、[ROOT接收总记录](review/package-reception-w13-w15-20261024/README.md)和各包收据。
 
-ROOT继续annual14选材/上下文、正式摘要/cache、真实采用矩阵和W12；W13独占测试调度/hook，W14只改RF离线E2E，W15只改Audit工程移位回放工具。作者不写母PWF/中央run/生产湖/其他仓，ROOT不同时写委派文件。W14三仓生产代码从冻结Git对象部署，避免母仓继续变化导致漂移；本批0收费/下载。实际路径、分支、base/start HEAD、交接接口和并线顺序见[dispatch](harness_lanes/20261024/dispatch.json)及[共同接口](harness_lanes/20261024/INTERFACES.md)。包就绪不改变主线Next Step或代签内容通过。
+ROOT恢复唯一主线工作：annual14真实材料、正式摘要/cache恢复、RF消费与真实业务覆盖；三卡工程验收不代替这些内容验收。本批无外部模型调用/下载；W15仓无remote，不能声称已推送。
 
 ## 已完成及验收边界
 

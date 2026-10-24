@@ -695,7 +695,7 @@
     }
   },
   "parallel_packages_20261024": {
-    "status": "READY_NOT_DISPATCHED",
+    "status": "ROOT_ACCEPTED_ALL_THREE_W13_PUSH_CI_PENDING",
     "entry": "harness_lanes/20261024/README.md",
     "dispatch": "harness_lanes/20261024/dispatch.json",
     "independent_packet_review": "harness_lanes/20261024/packet-review.json",
@@ -704,10 +704,11 @@
       "W14-RF-CLEAN-CHAIN",
       "W15-AUDIT-PORTABLE"
     ],
-    "product_implementation_started": false,
+    "product_implementation_started": true,
     "root_exclusive": "annual14 source/context; formal summary/cache; actual adoption matrix and W12; no editing the delegated gate/tool/test scopes",
     "independent_final_implementation_review_required": true,
-    "new_paid_calls": 0
+    "new_paid_calls": 0,
+    "root_acceptance": "review/package-reception-w13-w15-20261024/receipt.json"
   },
   "w08_reporting_rules_20261024": {
     "status": "PUBLISHED_EXACT_CI_SUCCESS",
@@ -911,7 +912,7 @@
     }
   },
   "w13_ci_root_fix": {
-    "status": "ROOT_CAUSE_FIXED_W13_AND_STRATEGY_BATCH_COMMITTED_PENDING_NORMAL_PUSH_AND_EXACT_CI",
+    "status": "ROOT_FIX_COMMITTED_PENDING_NORMAL_PUSH_AND_EXACT_CI",
     "failed_run": {
       "id": 40098625678,
       "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40098625678",
@@ -933,8 +934,8 @@
       "no_full_unit_suite_rerun": true,
       "commit_hook": "PASS (normal pre-commit checks completed)"
     },
-    "next": "commit, normal push, inspect the CI run bound to the resulting exact HEAD",
-    "local_fix_commit": "4e593c71",
+    "next": "push current CWP HEAD after PWF receipt commit; inspect CI only when its head_sha exactly matches the resulting remote HEAD",
+    "local_fix_commit": "67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c",
     "strategy_batch_commit": "159770e9"
   },
   "market_family_upgrade_m4_discovery": {
@@ -978,5 +979,16 @@
     "snowflake_2020_s1_original_present_locally": false,
     "historical_original_trigger_bound_replayed": false,
     "dayu_modified": false
+  },
+  "external_package_reception_20261024": {
+    "status": "ROOT_ACCEPTED_ALL_THREE",
+    "receipt": "review/package-reception-w13-w15-20261024/receipt.json",
+    "report": "review/package-reception-w13-w15-20261024/README.md",
+    "W13": "ROOT_BOUNDED_ADAPTATION_COMMITTED_PENDING_PUSH_CI_67439d0a",
+    "W14": "FAST_FORWARD_PUSHED_REVENUE_FORECAST_MAIN_AA19B653",
+    "W15": "ROOT_LINE_ENDING_PORTABILITY_FIX_COMMITTED_LOCAL_NO_REMOTE_37E12E6F",
+    "formal_summary_cache_recovery_and_real_company_rf_acceptance_complete": false,
+    "downloads": 0,
+    "external_model_calls": 0
   }
 }

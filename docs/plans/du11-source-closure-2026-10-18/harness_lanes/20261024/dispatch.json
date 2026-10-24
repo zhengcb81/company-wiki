@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-harness-dispatch/1",
   "as_of_date": "2026-10-24",
-  "status": "READY_NOT_DISPATCHED",
+  "status": "ROOT_ACCEPTED_ALL_THREE_W13_EXACT_CI_PENDING",
   "parent_plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "package_count": 3,
@@ -20,7 +20,7 @@
       "plan_root": "docs/plans",
       "start_here": "docs/plans/w13-cwp-gates-2026-10-24/START_HERE.md",
       "delivery": "delivery/w13/handoff.json",
-      "status": "READY_NOT_DISPATCHED",
+      "status": "ROOT_ACCEPTED_BOUNDED_ADAPTATION_PENDING_PUSH_CI",
       "independent_final_review_required": true,
       "push_target": "own codex branch only",
       "new_model_calls": 0,
@@ -29,7 +29,13 @@
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
       "worktree_bytes": 184365557,
-      "product_implementation_started": false
+      "product_implementation_started": true,
+      "actual_head": "6efd4fccb31c71bf732d401aacb5dbe49eca0035",
+      "reviewed_code_commit": "852dff283ed9f18dd4e0dd1376c4ca89a52b1795",
+      "handoff_final_head_is_stale": true,
+      "root_integration_commit": "67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c",
+      "remote_ci": "PENDING_EXACT_HEAD",
+      "root_adaptation": "retain local affected-test cap 32; broad/directory/dynamic/unknown scopes defer to fixed smoke and CI"
     },
     {
       "package_id": "W14-RF-CLEAN-CHAIN",
@@ -43,7 +49,7 @@
       "plan_root": "docs/plans",
       "start_here": "docs/plans/w14-rf-clean-chain-2026-10-24/START_HERE.md",
       "delivery": "delivery/w14/handoff.json",
-      "status": "READY_NOT_DISPATCHED",
+      "status": "ROOT_ACCEPTED_PUSHED_RF_MAIN",
       "independent_final_review_required": true,
       "push_target": "own codex branch only",
       "new_model_calls": 0,
@@ -52,10 +58,15 @@
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
       "worktree_bytes": 54019102,
-      "product_implementation_started": false,
+      "product_implementation_started": true,
       "sparse_omitted_paths": [
         ".planning/"
-      ]
+      ],
+      "actual_head": "aa19b653da18566e582e802269f5908471c456db",
+      "reviewed_code_commit": "3bc0508e2a1ae97df2d0d67458fe288f677030a5",
+      "root_main_head": "aa19b653da18566e582e802269f5908471c456db",
+      "real_download_or_company_run": false,
+      "pushed": true
     },
     {
       "package_id": "W15-AUDIT-PORTABLE",
@@ -69,7 +80,7 @@
       "plan_root": "docs/plans",
       "start_here": "docs/plans/w15-audit-portable-2026-10-24/START_HERE.md",
       "delivery": "delivery/w15/handoff.json",
-      "status": "READY_NOT_DISPATCHED",
+      "status": "ROOT_ACCEPTED_LOCAL_MAIN_NO_REMOTE",
       "independent_final_review_required": true,
       "push_target": "NO_REMOTE_CONFIGURED",
       "new_model_calls": 0,
@@ -78,7 +89,13 @@
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
       "worktree_bytes": 7134749,
-      "product_implementation_started": false
+      "product_implementation_started": true,
+      "actual_head": "9bc2248f7d66636a7ce5e5d23933b0f7ac12eb49",
+      "reviewed_code_commit": "77d1264f8e3e7fdd9418e304ee5a621d738ec883",
+      "root_main_commit": "37e12e6ff4674fa1989b2616cff3c31faa4d8cb0",
+      "root_fix": "cross-platform byte-stable fixture/export line endings",
+      "pushed": false,
+      "remote_configured": false
     }
   ],
   "packet_review": "packet-review.json",
@@ -86,5 +103,6 @@
     "W13-CWP-GATES",
     "W14-RF-CLEAN-CHAIN",
     "W15-AUDIT-PORTABLE"
-  ]
+  ],
+  "root_acceptance": "../../review/package-reception-w13-w15-20261024/receipt.json"
 }

@@ -6,13 +6,13 @@
 
 最新状态（2026-10-24，覆盖旧Next Step）：M5 CWP→FF→RF本地预算观察链已做根修；CWP在blocks_download时透传唯一、严格验证的`local_read_budget/1`；FF映射到已有`filing-local-preparation-observation/1`，provider未启动。同一最终CWP HEAD的合同、历史scope、跨仓E2E 46项通过；Ruff、3文件mypy、host-assumption guard和diff-check通过。canonical local group二次发现遗漏historical scope/已登记metadata的旧期次问题已修复，完整22项scope组通过。FF精确CI `40115441655` 成功；CWP源码`0f64289e`和PWF`0acae348`已推送，精确CWP CI `40116401110` 对应HEAD `0acae348484d661278faa62641ad426f2c8cf485` completed/success。**当前下一步：** 从本地已有真实原件冻结跨市场/文种样本及SHA，用共享引擎和已配置provider完成正式摘要、引用/限定、缓存复用与进程中断恢复，再验证RF消费和四路审查；不重跑8k全量。不能声称查明旧Snowflake S-1事故触发bound：本地无该原件且未重跑原请求，保持OPEN。
 
-2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13接收不代表真实产品全量、远端CI或跨仓RF验收；这些分别由根接收记录和精确CI收据绑定。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
+2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13根修、W14离线链和W15可移位回放现已ROOT接收；W13精确CI待本次发布确认，W14主线离线gate 595通过，W15无remote。三卡不代表正式摘要/cache/真实公司预测验收。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
 
 五family阅读策略组件已TDD与独立61P验收，75相关P，正常推送c990e389已完成（8216P/24既有skip，另146契约P）；原source/request根修已发布3b4110a3且精确CI40087657562成功。25原件调查/4真实选材与26critical独审后，按[跨市场后续共因](review/market-family-upgrade-20261024/remaining_root_causes.md)先冻结语义正确的源侧金标，修匿名DOCX电话会、指标定义/历史指引、局部上下文与稀疏降噪，合并原annual14六partial责任；不得为旧金标错项或财务全表扩大切片。再正式摘要/cache、实际采用矩阵与W12四审、新公司循环。USIPO补样本地计量错误先精确诊断，不重试同失败/加审批。详细[实施细则](review/market-family-upgrade-20261024/strategy_upgrade_design.md)；唯一状态CURRENT_STATUS。
 
 **W11状态：** W11-CWP-SOURCES A/B/C全流程已由用户确认完成并推送，卡片关闭；ROOT的真实IR原件与内容覆盖验收仍按单独业务证据处理，不重开作者施工卡。
 
-**独立分包：** [20261024三卡总入口](harness_lanes/20261024/README.md)：W13-CWP-GATES（日常push有界快反馈）、W14-RF-CLEAN-CHAIN（既有三仓离线E2E清洁复现）、W15-AUDIT-PORTABLE（工程证据移位回放）。独占worktree及子PWF已提交准备，当前READY_NOT_DISPATCHED，三个包可同时启动；最终实现必须独立agent全面审查、修完全部内部发现后交接。ROOT继续上述annual14下一步，不写外包的调度/测试/工具范围。没有增加小节点许可，也未把已交付W09/W11重新派发。
+**独立分包（已关闭）：** [20261024三卡总入口](harness_lanes/20261024/README.md)：W13-CWP-GATES以ROOT有界适配接收，W14-RF-CLEAN-CHAIN并入并推送RF主线，W15-AUDIT-PORTABLE并入Audit本地主线并由ROOT修复字节可移植性。ROOT现继续正式摘要/cache恢复、RF实际读取、真实样本覆盖与W12；三卡工程验收不代签这些内容验收。详见[三卡ROOT接收总记录](review/package-reception-w13-w15-20261024/README.md)。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

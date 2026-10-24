@@ -1,0 +1,62 @@
+{
+  "schema_version": "cwp-package-reception/1",
+  "as_of": "2026-10-24",
+  "overall_status": "ROOT_ACCEPTED_ALL_THREE",
+  "root_repo": "company-wiki",
+  "cwp_root_commit": "67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c",
+  "packages": {
+    "W13-CWP-GATES": {
+      "status": "ROOT_ACCEPTED_BOUNDED_ADAPTATION_PENDING_PUSH_CI",
+      "author_workdir": "C:/Users/郑曾波/Projects/company-wiki-w13-gates",
+      "author_branch": "codex/w13-cwp-gates-20261024",
+      "author_actual_head": "6efd4fccb31c71bf732d401aacb5dbe49eca0035",
+      "author_reviewed_code_commit": "852dff283ed9f18dd4e0dd1376c4ca89a52b1795",
+      "author_handoff_final_head_stale": true,
+      "root_commit": "67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c",
+      "independent_review": "PASS_ROOT_INTEGRATED_FIXES",
+      "focused_tests_passed": 154,
+      "independent_probes_passed": 18,
+      "real_git_push_checks_passed": 5,
+      "ruff": "PASS",
+      "full_unit_suite_rerun": false,
+      "policy": "local affected scope capped at 32; broad, directory, dynamic, or unknown scopes defer to fixed smoke/CI",
+      "remote_ci": "PENDING_EXACT_HEAD"
+    },
+    "W14-RF-CLEAN-CHAIN": {
+      "status": "ROOT_ACCEPTED_PUSHED_RF_MAIN",
+      "repo": "revenue-forecast",
+      "main_head": "aa19b653da18566e582e802269f5908471c456db",
+      "author_reviewed_code_commit": "3bc0508e2a1ae97df2d0d67458fe288f677030a5",
+      "independent_final_review": "APPROVE",
+      "relevant_tests_passed": 22,
+      "full_pre_push_gate": {
+        "passed": 595,
+        "skipped": 1,
+        "subtests_passed": 36
+      },
+      "ruff": "PASS",
+      "real_download_or_company_run": false,
+      "pushed": true
+    },
+    "W15-AUDIT-PORTABLE": {
+      "status": "ROOT_ACCEPTED_LOCAL_MAIN_NO_REMOTE",
+      "repo": "revenue-forecast-audit",
+      "author_actual_head": "9bc2248f7d66636a7ce5e5d23933b0f7ac12eb49",
+      "author_reviewed_code_commit": "77d1264f8e3e7fdd9418e304ee5a621d738ec883",
+      "root_main_commit": "37e12e6ff4674fa1989b2616cff3c31faa4d8cb0",
+      "root_fix": "pin byte-sensitive fixture/export paths and canonicalize expected fixture SHA for cross-platform line endings",
+      "focused_tests_passed": 28,
+      "adoption_replay_outcome": "complete",
+      "counterexamples": 8,
+      "cleanup_verified": true,
+      "remote_configured": false,
+      "pushed": false
+    }
+  },
+  "cross_cutting": {
+    "source_originals_changed": false,
+    "downloads": 0,
+    "external_model_calls": 0,
+    "formal_summary_cache_recovery_and_real_rf_acceptance_complete": false
+  }
+}

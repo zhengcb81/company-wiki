@@ -874,3 +874,13 @@ FF曾有6个pre-push测试因合成请求3秒总预算/Windows探针1秒预算�
 CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110` 绑定HEAD `0acae348484d661278faa62641ad426f2c8cf485`，completed/success。FF `e0d96426445e4b93bc6cc7a6e6014996ad0a777d`的精确CI `40115441655`也已success。M5机制验收关闭，但Snowflake 2020 S-1原件本地缺失，故旧事件的精确触发bound仍OPEN。
 
 当前转入真实正式摘要与缓存恢复：从已经在库且原件SHA可冻结的跨市场/文种材料中选样，使用配置的共享引擎与provider，检查原语言正式摘要、引用和限定、同源缓存复用、进程中断恢复及RF实际读取；不重跑8k全量、不重复下载已存在的原件。M5本身仍为零provider请求、零下载、零模型调用，Dayu未改。
+
+## 2026-10-24 W13/W14/W15外包包ROOT接收
+
+三包均已按最终代码、独审绑定版本、测试结果及清理收据完成ROOT接收，具体证据：[三包ROOT接收报告](review/package-reception-w13-w15-20261024/README.md)、[机器收据](review/package-reception-w13-w15-20261024/receipt.json)、[更新后的dispatch](harness_lanes/20261024/dispatch.json)。
+
+- W13：作者最终取消32目标保护，宽范围实测357个目标耗时628秒，触及旧600秒边界，因此ROOT不整包复制；主线保留≤32本地目标、宽/动态/目录/未知转固定smoke/CI。`67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c`加入精确节点去重和smoke-only truthful label回归。154项定向测试、18项独立策略探针、5项真实Git push检查、Ruff通过；未跑8k全量。PWF一并正常push后等待精确HEAD CI。
+- W14：RF main已快进并推送至`aa19b653da18566e582e802269f5908471c456db`；独立审查APPROVE，22项相关回归和pre-push 595 passed/1 skipped/36 subtests通过。范围只覆盖离线工程E2E，没有真实下载或公司分析；不重跑其长时端到端。RF中既有3份修改的assurance文件和untracked output未触碰。
+- W15：Audit本地main接收至ROOT修复提交`37e12e6ff4674fa1989b2616cff3c31faa4d8cb0`。集成回放发现固定SHA受到Windows CRLF/LF变化影响；`.gitattributes -text`和canonical SHA修复后28项通过，adoption replay complete、8 counterexamples、cleanup_verified；14个fixture SHA均匹配。Audit无remote，因此只记录本地提交，不称已推送；不相关预算脚本未动。
+
+三包本轮没有改原件、下载或调用外部模型。CWP W13仍需正常push并读精确CI；随后恢复正式摘要、缓存复用/中断恢复、RF实际读取、跨市场/文种真实内容与四路审查。工程施工包全部接收并未关闭整体PWF目标。
