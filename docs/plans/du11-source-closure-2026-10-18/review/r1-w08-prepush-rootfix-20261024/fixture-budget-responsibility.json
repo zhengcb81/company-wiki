@@ -1,0 +1,122 @@
+{
+  "schema_version": "native-list-fixture-budget-responsibility-readonly/1",
+  "at_utc": "2026-10-24T00:30:51.146164+00:00",
+  "status": "STATIC_CONTRACT_ANALYSIS_NOT_TEST_PASS",
+  "recommendation": "Keep semantic/reference material 8units4blocks2048chars unchanged; physical positive running-furniture proof costs shared parser WorkBudget and actual physical-client bounds/source refs, not model material.",
+  "correction_to_prior_message": "The count6 source blocks is true. My earlier conclusion that it necessarily forces citation deferral conflated proof source inventory with model semantic material. The new source-only docstring introduced this stronger rule; it is not evidence that the legacy envelope already required it.",
+  "originals": [
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:08d0eaffe72ac4eaecdeab43339f7c37bfcceabc4af43c09f1216638ee733b00",
+      "responsibility": "semantic_ancestor",
+      "page": 1,
+      "pdf_block": 0,
+      "raw_chars": 6
+    },
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:91b10ae3e2f822fe454cee54146359756cf47bfb6dcbc6068fc8e7deb974b798",
+      "responsibility": "semantic_parent",
+      "page": 1,
+      "pdf_block": 1,
+      "raw_chars": 17
+    },
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:910b192a079b2cd8f4f8c6d527b5f5e7c6b30f2629c459af3023164b929b5d90",
+      "responsibility": "semantic_intro",
+      "page": 1,
+      "pdf_block": 1,
+      "raw_chars": 5
+    },
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:edb9d9daec28255a76ca25151dff94bd3b44728c554d125822157114e3fbebfe",
+      "responsibility": "readable_left_body",
+      "page": 1,
+      "pdf_block": 2,
+      "raw_chars": 15
+    },
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:bdff3c5f35d36facea1ae17836ec48b5e734a7d88495c62cf48fe759dec1ee3f",
+      "responsibility": "physical_footer",
+      "page": 1,
+      "pdf_block": 3,
+      "raw_chars": 21
+    },
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:c995a0f5cd2f54b3b19357f997771253cb598b6857cc425fb99908fb48be059a",
+      "responsibility": "physical_header",
+      "page": 2,
+      "pdf_block": 0,
+      "raw_chars": 21
+    },
+    {
+      "original_id": "urn:company-wiki:narrative-unit:sha256:b67791f91a1a6c6a99ec499abe79b0122fbee0750865f1d35e91be5be3accfb2",
+      "responsibility": "semantic_target",
+      "page": 2,
+      "pdf_block": 1,
+      "raw_chars": 14
+    }
+  ],
+  "joint_source_inventory": {
+    "original_units": 7,
+    "original_blocks": 6,
+    "original_raw_chars": 99
+  },
+  "semantic_material_envelope": {
+    "original_units": 5,
+    "original_blocks": 4,
+    "original_raw_chars": 57
+  },
+  "physical_furniture_proof_inventory": {
+    "original_units": 2,
+    "original_blocks": 2,
+    "original_raw_chars": 42
+  },
+  "raw_character_note": "These are original raw characters. Actual native separators must still count wherever transported; no separator affects this fixture threshold.",
+  "case_consequence": {
+    "cross_page_furniture": "semantic5units4blocks57chars can satisfy unchanged reference/material budget; physical2furniture IDs are verified and charged in parser, not hidden/free. No reason to change original selected oracle solely because total physical source blocks6.",
+    "unfinished_furniture": "root+left+right =3 semantic units/3blocks; two furniture witnesses are separate physical proof inventory, so previous claim that5 total source blocks mandates model deferral is withdrawn.",
+    "no_furniture_cross_page": "semantic5units4blocks; remains a genuine material-bound positive.",
+    "semantic_overflow": "If actual semantic targets+ancestors+intro+left-body+declarations+limitations exceed8/4/2048, honest deferral remains mandatory; no carriers or footnotes can be discounted."
+  },
+  "actual_source_basis": [
+    "1712ed10 within_reference_envelope docstring and call shape count body/existing context/reference declarations and expand carriers, not geometry-only observation inventory.",
+    "1712ed10 sentence loop separately charges positive running furniture, saves page/ordinal/paragraph proof and continues without appending it into business run.",
+    "Current NativeSourceDependencies docstring explicitly makes source-only join the material envelope; this is a NEW stronger policy statement, not a legacy requirement.",
+    "Current source context precharges one observation index, validates source IDs/coverage/ordinal/frame/lane/font, and native list client keeps2pages and members+skipped24.",
+    "Current NativeSourceContext.page_neighbour restricts gap<=24, but legacy sentence skip uses per-unit work/seen bounds and no furniture-in-run. Do not claim every legacy sentence skip already had the same24 hard boundary merely because a structural constant exists."
+  ],
+  "implementation_guidance_not_implementation": [
+    "Document material and physical-proof budgets separately in the existing owner/contract; avoid a new store, semantic schema, classifier or authorization gate.",
+    "Use only positively identified same-source running furniture as physical-only. Existing body/footnote/table/negative qualification/deictic evidence stays readable semantic context. Producer/consumer must not accept an arbitrary source-only label to evade material bounds.",
+    "Keep real skipped IDs, original locator/source/hash and physical proof trace plus true work charge. Missing/foreign/unknown furniture proof blocks that ancestry edge with a precise diagnostic; never guess a parent or treat absence as a smaller valid proof.",
+    "No fresh cap may be invented to obtain a desired fixture result. Preserve current declared physical-client bounds and account every inspected witness, while semantic8/4/2048 remains unchanged.",
+    "Source byte/dependency cache identity must continue to reflect actual reading/proof owner changes; external money/company soft targets remain distinct from source semantics.",
+    "Keep original9 inputs/assertions and RED evidence intact. A later independent review should check geometry correctness, resource accounting and semantic material separately rather than approving a changed docstring as proof."
+  ],
+  "bindings_current_read_sha256": {
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-root-20261024/structure-integration-probe.json": "40919a0a14d4c0f0eab1021fca97ac65bce5136e02c95f88b6871f3afb898837",
+    "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-root-20261024/owned-current-state.json": "b3ca69bc932f59f89f58ed3af2e11508dd214296d37e72cb33cfe238ea7e7206",
+    "src/company_wiki/source_catalog/narrative_antecedent.py": "2cad72bbb90fef2ae6727aed26c1e41cfbe53e13bbdbc0c96f9d1e063c586877",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "eba97944a522b1cbe17dbcac30770fae9b67ae88973d80ee0d2451e667c30ca2",
+    "src/company_wiki/document_understanding/structure/sections.py": "9573882e3cfa50a22c1363e0c6bb0de2c0177462b4748100fc2941c639e2c897",
+    "src/company_wiki/document_understanding/structure/contract.py": "92a941af60e23836c8e3129e6bb8b0e64edc4fae2186e746ab19403366a36ad3"
+  },
+  "historical_code_read": {
+    "src/company_wiki/source_catalog/narrative_antecedent.py": {
+      "ref": "1712ed10",
+      "blob_sha256": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237"
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "ref": "1712ed10",
+      "blob_sha256": "6701ab178ac47dd2ac5ea70a61fe11e3b4ac03e953c3a7dfbfdf4d7b39685699"
+    }
+  },
+  "old9_and_old_red_receipts_unchanged": true,
+  "source_or_test_execution": 0,
+  "external_calls": 0,
+  "git_writes": 0,
+  "temporary_files_created": 0,
+  "writes": "Only these2 new notes; no old freeze/PWF/source/test change.",
+  "independence": "Cross-page test author responsibility analysis, not independent final implementation acceptance.",
+  "pre_note_error": "First note writer stopped before file creation on Windows relative-path slash key mismatch; no fixture/product action was attempted and no failed note was published."
+}

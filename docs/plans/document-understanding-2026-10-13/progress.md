@@ -954,3 +954,7 @@ W08独审17项原8F/9P暴露actual/future与收入指引重复状态根因，重
 ## 2026-10-24 W08真实并线、发布失败根修和W11索引保存
 
 W08正常合7b1c015b为b0344200，15源/test按review原始字节恢复（11仅LF等价），W11源和母入口不变。第一次正常prepush5F/7830P/24skip201.29s挡住；ROOT统一project词性/假设条件，正式新22例和旧套件362P4.64s，独审首轮42=34P8F保留、最终原42全P2.00s。等待正常发布，不借旧CI。跨页下一公共RED9=7F2P，结构47有限P，per-target原文依赖出口与预算fixture澄清未完。W11单次GET已正规保存486901B新索引，binary read/source SHA校验、同字节本地发现；0业务文件。临时body恢复不存在、原件/封存/配置/母模型账不变。业务材料external_limit仍开，无LLM调用。
+
+## 2026-10-24 W08有限主线发布与下一节点分层
+
+4e3e0231正常push成功：7857P/24skip192.88s，另146smokeP25.12s；精确CI40044921473 completed/success。原5/7830/24失败与独审8失败证据保留；同42复审通过。旧10路径只有newline/stat显示变化，逐份LF==HEAD blob、正常index刷新前后tree相同，tracked干净。下一prototype只在ROOT工区：physical47P、order170P、初版引用19P尚非一个冻结组合验收。独立复核撤回source-only家具也占模型block预算的拟新门槛，语义材料和物理证明按各责任层计量，原9与全部源/旧FAIL不改。累计外部模型账仍1561352tokens/631959microUSD；原件保留、源索引新增486901B已单列。

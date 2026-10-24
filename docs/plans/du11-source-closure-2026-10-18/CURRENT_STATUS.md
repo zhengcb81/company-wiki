@@ -12,21 +12,23 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 共用语义/用途与标题节点已通过；新增裸数质量/优先级计量独审44P，项目正文/原始限制闭包独审165P；全src369/0。真实249页96片段8156字符、821万/1600万工作，两个30%各自scope正确；整体14目标仍PARTIAL | 隔离提交`1712ed10`已正常推送：完整7558P/24既有skip（403.02s），另smoke146P（47.71s）；本地与origin一致、tracked干净。未并母线、未安装。[当前收据](review/r1-w08-resume-20261023/engineering-v4.json)保留全部原RED和验收范围 |
+| W08 来源选材、业务父级、缓存依赖 | 前有限来源/用途/项目/谓词节点已真实合线：b0344200并支线7b1c015b，旧5回归与独审8反例根修4e3e0231；独审42P、正常7857P/24skip+146smokeP，精确CI40044921473成功。真实249页14项仍PARTIAL | 新跨页/订单/逐target引用在ROOT原工区有意保留working changes，尚未并线/发布/完整独审。47P/170P/19P是不同有限观察，不相加代签。见[发布](review/r1-w08-prepush-rootfix-20261024/publication-final.md) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。**
+**当前唯一第一步：完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。**
 
-W09/W11的真实并线与精确CI成功保持。W08母线已正常merge b0344200，第一次正常prepush5F已拦住未远端发布。共用谓词的project名词/预测动词与假设治理已根修；原17/77/20/24及旧semantic_value断言保留，最新[独审42P](review/r1-w08-prepush-rootfix-20261024/independent/final-review.md)、[相关362P](review/r1-w08-prepush-rootfix-20261024/root-closeout.md)。早前677P未覆盖旧semantic_value是验证选取缺口，不以其代签整体。当前待再次正常push与代码CI。
+W08有限节点已真实并线推送，源码4e3e0231的精确CI成功；W09/RF599d17b8和W11/1be42a76此前发布亦保持。所有原5失败、独审8失败及旧断言保留，普通prepush有效拦截后根修，未引发远端失败。10个旧文件只换行/stat缓存状态已逐份LF/blob核实、正常刷新，Git树不变、母仓tracked干净。
 
-下一阶段在ROOT W08独占工区推进，公共9例原7F2P已封存，原件未读；源码发现跨页/Roman父级、原column白名单传输与订单中英语言覆盖缺口。结构/纯物理47项有限正反控已过，但还需ROOT接线；furniture必要原始proof与8/4/2048联合成本的fixture矛盾要先讲清，不能抹证据换绿。跨页设计实际路径为工区resume/cross-page-ancestry-design/design.md，旧NEXT_IMPLEMENTATION指针已确认不存在。默认0.8和96/48000/16M不变；249页14项仍PARTIAL，新正式摘要/真实RF矩阵/W12仍OPEN。
+下一节点仍在ROOT W08独占工区（HEAD7b1c015b，working changes属于当前施工，不能清理回主线）。物理/结构47项、订单170项以及初版引用接线含原9的19项各有有限绿，尚未全部冻结/集中独审，不能写完成。publisher已把母谓词2ed1433e和22回归定点同步，旧node freeze保留历史。默认0.8、96/48000/16M及语义材料8/4/2048不变。
 
-W11已用当前owner一次1MiB/20s/0费GET正规保存官方索引，486901B、SourceRef校验成功，临时工作body已删。页面有H1/Q1/JPM文字、没有实际业务下载锚；0业务文件下载，业务资料external_limit仍开。新快照不冒充旧486789B历史正文。[真实恢复收据](review/r1-w11-actual-recovery-20261024.md)。
+已查出并撤回一项本轮拟新增门槛：不能把用于排版连续性的页眉/页脚物理proof也算成模型材料。源7units/6blocks不等于模型语义材料5units/4blocks；后者仍受原限额，前者按实际解析工作、真实页序、coverage和原client窗口留痕。业务父级、脚注、限制和指代真正语义依赖仍完整联合计费，不能冒充physical-only。用途决定计量：独立完整业务条目若仅作列表/版面见证，其无关数字也不自动进模型；若同时有语义责任仍必须保留。共享producer只观察一次，消费者不逐card重算几何。见[职责决策](review/r1-w08-prepush-rootfix-20261024/dependency-role-decision.md)。[独立职责复核](review/r1-w08-prepush-rootfix-20261024/fixture-budget-responsibility.md)保留最初误判及撤回原因；原9断言未改。
 
-随后按已接收W08–W12计划完成W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
+W11官方索引已单次有界正规保存486901B并按SourceRef回放，新快照不充旧486789B正文。有H1/Q1/JPM文字但无业务下载锚，0业务文件下载，材料external_limit继续OPEN；临时body已删、原件保留。[实际来源收据](review/r1-w11-actual-recovery-20261024.md)。
 
-W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。此前三仓读取诊断已发布并有精确CI绿：CWP当前来源源码`1be42a76`/CI40040509874 success（预算ab95027b/CI40034980056保留历史），RF`599d17b8`/CI40040969386 success、FF`7f6a9268`。W08候选没有新生产CI验收，不借旧CI签候选。
+随后按已接收W08–W12计划在新摘要上采用已发布W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
+
+W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。此前三仓读取诊断已发布并有精确CI绿：CWP当前有限来源/谓词源码`4e3e0231`/CI40044921473 success（W11 1be42a76/40040509874及预算ab95027b/40034980056保留历史），RF`599d17b8`/CI40040969386 success、FF`7f6a9268`。新跨页prototype没有生产CI验收，不借已发布4e3e0231的绿签尚未发布增量。
 
 用户要求的审查技能八步升级已在上一节点完成；本轮W10进一步把单据归属、阶段误判及明确版本矛盾固化为回归，现有fetch/process卡已更新。没有新增身份库、任务库、人工许可、逐材料签收或收费权威。预算节点最新每份仅同步3文件并核39/39，见review/budget-regime-20261023/audit-installation.json；树SHA`f2be453617ac03359ccfffe2ebe98e5ee895deb1a6dc7e9510d0462e3d1efb0a`是W10收尾历史，旧`f50bf...`是前版历史。
 
@@ -57,7 +59,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08来源质量/项目正文最新有限独审44P和165P、真实14目标仍PARTIAL；W09/W11已修复并线推送、精确CI成功；W10组件通过但实际矩阵OPEN；W12未开始 | 先完成本页唯一下一步，再真实摘要、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
+| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08有限主线4e3e0231/CI成功、下一跨页组合尚未验收、真实14目标仍PARTIAL；W09/W11已修复并线推送、精确CI成功；W10组件通过但实际矩阵OPEN；W12未开始 | 先完成本页唯一下一步，再真实摘要、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |
@@ -72,8 +74,8 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 - CWP W01 `a7da184e`；W04 已从独审作者提交转为主线 `e1cc1621`/`5a267d37`，交接 `2f632193`。W01 155 项独审绑定旧物理字节；后续仅 LF 归一和 CLI 局部变量改名，独立[补审](review/r1-w01-source-review-postprocess-20261022.md)证明文本/行为等价，并复跑 7 项 CLI。全 `mypy src` 366 文件 0 错误。W04合线后Optional pin类型漏检已于 `ae7b15d6`/`20a7fb0c`修复；单一完整src检查热缓存9.1秒，CI删除重复步骤。独立[最终反控](review/r1-ci-owner-final-review-20261022.md)证明旧版真RED、修复真GREEN，不靠单文件Any或无效移动HEAD探测代签。
 - RF W02 产品 `768b6dd3`、W05 产品 `36433047` 已并入 main；`92b69682` 仅将两份必要回归纳入现有 smoke、让既有小型 mypy 在传递依赖修改时也触发。FF 最终主线和三仓推送/安装/新 CI 见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)，不从历史 pin 推断实时状态。
-- 当前已成功CWP代码CI：[40040509874](https://github.com/zhengcb81/company-wiki/actions/runs/40040509874)，精确HEAD `1be42a76` completed/SUCCESS。预算`ab95027b`/40034980056、读取`aa2dd822`及此前绿点保留为历史，不代签待并W08候选。RF主线`599d17b8`的[40040969386](https://github.com/zhengcb81/revenue-forecast/actions/runs/40040969386)亦精确SUCCESS；FF保留`7f6a9268`节点。
-- 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。新原件、key、生产配置、Dayu、IQS 和旧 campaign 未修改。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
+- 当前已成功CWP代码CI：[40044921473](https://github.com/zhengcb81/company-wiki/actions/runs/40044921473)，精确HEAD `4e3e0231` completed/SUCCESS。W11 `1be42a76`/40040509874、预算`ab95027b`/40034980056及此前绿点保留为历史，不代签下一跨页prototype。RF主线`599d17b8`/40040969386精确SUCCESS；FF保留`7f6a9268`节点。
+- 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。原始财报/key/生产配置/Dayu/IQS/旧campaign未修改；新增一份官方索引486901B已单列，不是业务财报下载。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
 
 ## 模型与预算
 

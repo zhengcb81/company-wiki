@@ -2,20 +2,21 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_MERGED_LOCAL_PREPUSH_ROOT_FIXED_REVIEW42_PASS_REPUBLISH_PENDING",
+  "overall_status": "ACTIVE_W08_FINITE_MAIN_PUBLISHED_CI_SUCCESS_NEXT_CROSSPAGE_COMBINATION",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "1be42a7639393b9211b35bcf905f0546df344d73",
+  "last_code_commit": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
   "code_ci": {
-    "id": 40040509874,
-    "head_sha": "1be42a7639393b9211b35bcf905f0546df344d73",
+    "id": 40044921473,
+    "head_sha": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40040509874",
-    "updated_at": "2026-10-23T23:39:37Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40044921473",
+    "updated_at": "2026-10-24T00:29:43Z",
+    "observed_at": "2026-10-24T00:32:22.304409+00:00"
   },
   "completed": {
     "b2": {
@@ -122,7 +123,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_FINITE_REVIEW_PASS_ANNUAL_PARTIAL_W09_W11_PUBLISHED",
+      "status": "ACTIVE_W08_NEXT_CROSSPAGE_COMBINATION_ANNUAL14_PARTIAL_W09_W11_PUBLISHED",
       "mainline": true
     },
     {
@@ -151,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。",
+  "next_step_now": "完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -189,12 +190,13 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40040509874,
-    "head_sha": "1be42a7639393b9211b35bcf905f0546df344d73",
+    "id": 40044921473,
+    "head_sha": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40040509874",
-    "updated_at": "2026-10-23T23:39:37Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40044921473",
+    "updated_at": "2026-10-24T00:29:43Z",
+    "observed_at": "2026-10-24T00:32:22.304409+00:00"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -205,7 +207,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T00:21:08.821046+00:00",
+  "last_updated_at": "2026-10-24T00:40:12.983252+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -324,7 +326,7 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "LOCAL_ANCESTRY_MERGED_PREPUSH_ROOT_FIXED_INDEPENDENT42_PASS_REPUBLISH_PENDING",
+    "W08": "FINITE_MAINLINE_MERGED_PUSHED_EXACT_CI_SUCCESS_NEXT_CROSSPAGE_OPEN",
     "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
     "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
     "W09": "MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
@@ -341,7 +343,7 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。",
+    "W08_pending_work": "完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。",
     "W11_root_repair_commit": "664d3a1db575d64bd4f11658478593a508d03f9b",
     "W11_merge_commit_prefix": "44b722ec",
     "W08_current_independent_review": "review/r1-w08-prepush-rootfix-20261024/independent/final-review.json",
@@ -365,8 +367,16 @@
       "updated_at": "2026-10-23T23:39:37Z"
     },
     "W08_mainline_merge_commit_prefix": "b0344200",
-    "W08_mainline_pushed": false,
-    "W08_mainline_exact_ci": "NOT_RUN_YET",
+    "W08_mainline_pushed": true,
+    "W08_mainline_exact_ci": {
+      "id": 40044921473,
+      "head_sha": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40044921473",
+      "updated_at": "2026-10-24T00:29:43Z",
+      "observed_at": "2026-10-24T00:32:22.304409+00:00"
+    },
     "W08_current_root_fix": "review/r1-w08-prepush-rootfix-20261024/root-closeout.json",
     "W08_next_public_red": {
       "tests": 9,
@@ -375,7 +385,24 @@
       "worktree_ref": "resume/cross-page-public-red-20261024/freeze.json"
     },
     "W11_actual_source_recovery": "INDEX_REGISTERED_REPLAYABLE_BUSINESS_MATERIAL_GAP_STILL_OPEN",
-    "W11_actual_source_ref": "review/r1-w11-actual-recovery-20261024.json"
+    "W11_actual_source_ref": "review/r1-w11-actual-recovery-20261024.json",
+    "W08_mainline_source_commit": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
+    "W08_current_publication": "review/r1-w08-prepush-rootfix-20261024/publication-final.json",
+    "W08_next_prototype": {
+      "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+      "head": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
+      "working_changes_expected": true,
+      "merged_or_published": false,
+      "next_reading_policy_version": "reading-business-policy/17",
+      "next_independent_initial_red": "resume/cross-page-public-red-20261024/",
+      "physical_structure_owner_report": "resume/cross-page-root-20261024/owned-current-state.json",
+      "order_owner_report": "resume/order-metric-language-20261024/",
+      "predicate_sync": "resume/cross-page-root-20261024/root-predicate-sync.json",
+      "current_finite_observations": "physical47P; order49+77+20+24=170P; first reading public19P; not one stable combined acceptance",
+      "not_done": "freeze all, full natural package, independent architecture/quality review, actual annual replay"
+    },
+    "W08_proof_budget_responsibility": "Actual target facts plus required parent, intro, qualifier, footnote, declaration and deictic closure retain the joint original 8 units / 4 blocks / 2048 raw chars; expand carriers. Required meaning is never removed by a structural-proof label. Dependency role determines accounting. A preceding independently complete business bullet may witness only list marker, indent, lane or page continuity; its unrelated numbers need not become model context. Preserve real source IDs, locators, producer edge endpoints, skipped witnesses and charged parser work.",
+    "W08_dependency_role_decision": "review/r1-w08-prepush-rootfix-20261024/dependency-role-decision.json"
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",

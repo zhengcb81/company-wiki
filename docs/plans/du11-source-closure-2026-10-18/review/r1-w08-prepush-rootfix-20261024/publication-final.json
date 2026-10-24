@@ -1,0 +1,48 @@
+{
+  "schema_version": "w08-finite-main-publication/1",
+  "observed_at": "2026-10-24T00:34:39.204021+00:00",
+  "status": "MERGED_PUSHED_EXACT_CODE_CI_SUCCESS",
+  "source_commit": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
+  "mother_merge_commit_prefix": "b0344200",
+  "incoming_ancestor": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
+  "normal_pre_push": {
+    "unit_passed": 7857,
+    "unit_skipped": 24,
+    "unit_seconds": 192.88,
+    "contract_smoke_passed": 146,
+    "contract_smoke_seconds": 25.12,
+    "ruff": "PASS",
+    "full_src_mypy": "PASS",
+    "hooks_bypassed": false
+  },
+  "initial_push_failure": "normal-prepush-red.json",
+  "initial_and_independent_failures_preserved": true,
+  "independent_final": "independent/final-review.json",
+  "independent_final_passed": 42,
+  "code_ci": {
+    "id": 40044921473,
+    "head_sha": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40044921473",
+    "updated_at": "2026-10-24T00:29:43Z",
+    "observed_at": "2026-10-24T00:32:22.304409+00:00"
+  },
+  "actual_reviewed_owner_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+  "local_verbose_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-main-integration-20261024\\normal-push-fixed.txt",
+  "local_verbose_log_bytes": 3617,
+  "local_verbose_log_sha256": "31e400a941e526a91a7ff007b67c05007c070fa734172a985d77bbcc47939324",
+  "newline_stat_refresh": {
+    "files": 10,
+    "all_lf_equal_HEAD_blob": true,
+    "index_tree_unchanged": true,
+    "tracked_clean_after": true
+  },
+  "not_certified": [
+    "next cross-page prototype",
+    "real249page annual14",
+    "selection batching",
+    "new formal summaries/cache",
+    "RF/W12 company audit"
+  ]
+}

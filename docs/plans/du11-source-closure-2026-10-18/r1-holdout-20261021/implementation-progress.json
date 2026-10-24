@@ -82,7 +82,7 @@
     "new_downloaded_original_files": 9,
     "new_downloaded_original_bytes": 10342094
   },
-  "next_action": "正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。",
+  "next_action": "完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
@@ -97,7 +97,7 @@
     "issues": 14,
     "roots": 10,
     "packages": {
-      "W08": "LOCAL_ANCESTRY_MERGED_PREPUSH_ROOT_FIXED_INDEPENDENT42_PASS_REPUBLISH_PENDING",
+      "W08": "FINITE_MAINLINE_MERGED_PUSHED_EXACT_CI_SUCCESS_NEXT_CROSSPAGE_OPEN",
       "W09": "ROOT_REPAIRED_MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
       "W10": "ENGINEERING_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
       "W11": "ROOT_REPAIRED_MERGED_PUSHED_EXACT_CI_SUCCESS_REAL_IR_RECOVERY_OPEN",
@@ -106,6 +106,7 @@
     "business_pass": false,
     "current_checkpoint_ref": "../CURRENT_STATUS.json",
     "parallel_dispatch_ref": "../harness_lanes/20261023/dispatch.json",
-    "W11_actual_ref": "../review/r1-w11-actual-recovery-20261024.json"
+    "W11_actual_ref": "../review/r1-w11-actual-recovery-20261024.json",
+    "W08_publication": "../review/r1-w08-prepush-rootfix-20261024/publication-final.json"
   }
 }

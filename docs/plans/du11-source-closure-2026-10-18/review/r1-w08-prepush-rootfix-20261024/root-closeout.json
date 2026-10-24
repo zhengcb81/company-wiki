@@ -1,7 +1,7 @@
 {
   "schema_version": "w08-normal-publication-root-fix/1",
   "observed_at": "2026-10-24T00:21:08.821046+00:00",
-  "status": "LOCAL_ANCESTRY_MERGED_SHARED_ROOT_FIXED_INDEPENDENT42_PASS_NORMAL_PUBLICATION_NEXT",
+  "status": "MERGED_PUSHED_EXACT_CODE_CI_SUCCESS",
   "mother_merge_commit": "b0344200",
   "incoming_final_head": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
   "normal_first_push": "normal-prepush-red.json",
@@ -27,5 +27,16 @@
     "whole annual14",
     "formal new summaries/cache",
     "RF/W12 business audit"
-  ]
+  ],
+  "publication": "publication-final.json",
+  "source_commit": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
+  "code_ci": {
+    "id": 40044921473,
+    "head_sha": "4e3e0231617f0c9cea2504c08fbafed41d29bfe3",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40044921473",
+    "updated_at": "2026-10-24T00:29:43Z",
+    "observed_at": "2026-10-24T00:32:22.304409+00:00"
+  }
 }
