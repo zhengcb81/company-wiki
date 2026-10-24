@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 import re
 from typing import Any, cast, Literal
 
@@ -158,21 +159,100 @@ def _optional_text(value: object, name: str) -> str | None:
     return value
 
 
+def _local_read_budget(value: object) -> dict[str, Any] | None:
+    """Validate the bounded local-read owner snapshot before projection."""
+    if value is None:
+        return None
+    observation = _object(value, "local_read_budget")
+    expected = {
+        "schema_version", "operation", "usage_scope", "phase", "reason",
+        "limits", "consumed", "triggered_bound",
+    }
+    if (set(observation) != expected
+            or observation["schema_version"] != "local-read-budget/1"
+            or observation["operation"] != "local_read_budget"
+            or observation["usage_scope"] != "local_original_verification"):
+        raise SourceOperationProjectionError("invalid local read budget observation")
+    for name in ("phase", "reason"):
+        if not isinstance(observation[name], str) or not re.fullmatch(
+            r"[a-z][a-z0-9_]{0,79}", observation[name]
+        ):
+            raise SourceOperationProjectionError("invalid local read budget token")
+
+    limits = _object(observation["limits"], "local_read_budget.limits")
+    if set(limits) != {
+        "max_candidates", "max_bytes", "timeout_seconds",
+        "max_discovery_groups", "max_discovery_entries",
+    }:
+        raise SourceOperationProjectionError("invalid local read budget limits")
+    integer_limits = {
+        "max_candidates": (1, 256), "max_bytes": (1, 1073741824),
+        "max_discovery_groups": (1, 4096), "max_discovery_entries": (1, 65536),
+    }
+    for name, (minimum, maximum) in integer_limits.items():
+        number = limits[name]
+        if type(number) is not int or not minimum <= number <= maximum:
+            raise SourceOperationProjectionError("invalid local read budget limits")
+    timeout = limits["timeout_seconds"]
+    if (type(timeout) not in (int, float) or not math.isfinite(timeout)
+            or not 0 < timeout <= 600):
+        raise SourceOperationProjectionError("invalid local read budget timeout")
+
+    consumed = _object(observation["consumed"], "local_read_budget.consumed")
+    if set(consumed) != {
+        "candidates", "charged_read_bytes", "observed_charge_bytes",
+        "discovery_groups", "discovery_entries", "elapsed_seconds",
+    }:
+        raise SourceOperationProjectionError("invalid local read budget counters")
+    for name in (
+        "candidates", "charged_read_bytes", "observed_charge_bytes",
+        "discovery_groups", "discovery_entries",
+    ):
+        number = consumed[name]
+        if type(number) is not int or not 0 <= number <= 2**63 - 1:
+            raise SourceOperationProjectionError("invalid local read budget counters")
+    elapsed = consumed["elapsed_seconds"]
+    if (type(elapsed) not in (int, float) or not math.isfinite(elapsed) or elapsed < 0):
+        raise SourceOperationProjectionError("invalid local read budget elapsed time")
+    bound = observation["triggered_bound"]
+    allowed_bounds = {
+        "max_candidates", "max_bytes", "timeout_seconds", "cancelled",
+        "max_discovery_groups", "max_discovery_entries",
+    }
+    if bound is not None and (not isinstance(bound, str) or bound not in allowed_bounds):
+        raise SourceOperationProjectionError("invalid local read budget bound")
+    return {
+        "schema_version": observation["schema_version"],
+        "operation": observation["operation"],
+        "usage_scope": observation["usage_scope"],
+        "phase": observation["phase"],
+        "reason": observation["reason"],
+        "limits": dict(limits),
+        "consumed": dict(consumed),
+        "triggered_bound": bound,
+    }
+
+
 def _local_preparation(value):
     if value is None:
         return None
     diagnostic = _object(value,"local_preparation")
-    if (set(diagnostic) != {"status","reason","blocks_download","causes"}
+    fields = {"status", "reason", "blocks_download", "causes"}
+    if (set(diagnostic) not in (fields, fields | {"local_read_budget"})
+        or not isinstance(diagnostic["status"], str)
         or diagnostic["status"] not in {"blocked","unavailable","ambiguous"}
         or diagnostic["blocks_download"] is not True
-        or not isinstance(diagnostic["causes"],list)):
+        or not isinstance(diagnostic["causes"],list) or len(diagnostic["causes"]) > 64):
         raise SourceOperationProjectionError("invalid local preparation diagnostic")
     reasons = [diagnostic["reason"],*diagnostic["causes"]]
     if not all(isinstance(reason,str) and re.fullmatch(r"[a-z][a-z0-9_]{0,79}",reason)
                for reason in reasons):
         raise SourceOperationProjectionError("local preparation reason must be a named code")
-    return {"status":diagnostic["status"],"reason":diagnostic["reason"],
-            "blocks_download":True,"causes":list(diagnostic["causes"])}
+    result = {"status":diagnostic["status"],"reason":diagnostic["reason"],
+              "blocks_download":True,"causes":list(diagnostic["causes"])}
+    if "local_read_budget" in diagnostic:
+        result["local_read_budget"] = _local_read_budget(diagnostic["local_read_budget"])
+    return result
 
 
 def parse_operation_payload(

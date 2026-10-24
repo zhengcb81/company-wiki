@@ -189,6 +189,82 @@ def _formal_gap_payload(tmp_path) -> dict:
     return {"source_ensure": ensure.to_dict()}
 
 
+def _local_read_budget_observation() -> dict:
+    return {
+        "schema_version": "local-read-budget/1",
+        "operation": "local_read_budget",
+        "usage_scope": "local_original_verification",
+        "phase": "source_group_discovery",
+        "reason": "local_source_group_limit",
+        "limits": {
+            "max_candidates": 16,
+            "max_bytes": 268435456,
+            "timeout_seconds": 30.0,
+            "max_discovery_groups": 256,
+            "max_discovery_entries": 4096,
+        },
+        "consumed": {
+            "candidates": 0,
+            "charged_read_bytes": 0,
+            "observed_charge_bytes": 0,
+            "discovery_groups": 257,
+            "discovery_entries": 0,
+            "elapsed_seconds": 0.125,
+        },
+        "triggered_bound": "max_discovery_groups",
+    }
+
+
+def _blocked_ensure_payload(local_preparation: dict) -> dict:
+    request_id = "urn:req:local-budget"
+    resolution = {
+        "schema_version": "1.0", "request_id": request_id,
+        "status": "missing", "matches": [],
+    }
+    return {"source_ensure": {
+        "schema_version": "1.0", "status": "unavailable", "request_id": request_id,
+        "acquisition": {
+            "schema_version": "1.0", "status": "missing",
+            "resolution": resolution, "local_preparation": local_preparation,
+        },
+        "resolution": resolution,
+    }}
+
+
+def test_ensure_v2_preserves_valid_local_read_budget_observation() -> None:
+    observation = _local_read_budget_observation()
+    payload = _blocked_ensure_payload({
+        "status": "unavailable", "reason": "local_source_group_limit",
+        "blocks_download": True, "causes": [], "local_read_budget": observation,
+    })
+
+    result = project_operation_result(payload, operation="ensure", reader=_Reader())
+
+    assert result["status"] == "unavailable"
+    assert result["local_preparation"]["local_read_budget"] == observation
+    assert not _contains_physical_field(result)
+
+
+@pytest.mark.parametrize("change", [
+    {"unexpected": 1},
+    {"limits": {"max_candidates": 16, "max_bytes": 100, "timeout_seconds": 30.0}},
+    {"consumed": {"candidates": -1}},
+    {"triggered_bound": "lake/budget.json"},
+    {"triggered_bound": ["max_bytes"]},
+    {"reason": "lake/original.pdf"},
+])
+def test_ensure_v2_rejects_malformed_local_read_budget_observation(change: dict) -> None:
+    observation = _local_read_budget_observation()
+    observation.update(change)
+    payload = _blocked_ensure_payload({
+        "status": "unavailable", "reason": "local_source_group_limit",
+        "blocks_download": True, "causes": [], "local_read_budget": observation,
+    })
+
+    with pytest.raises(SourceOperationProjectionError, match="local read budget"):
+        project_operation_result(payload, operation="ensure", reader=_Reader())
+
+
 def test_ensure_v2_projects_source_and_acquisition_receipt_without_paths(tmp_path) -> None:
     payload = _formal_completed_payload(tmp_path)
 

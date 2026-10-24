@@ -422,11 +422,22 @@ class AcquisitionCoordinator:
                     status=AcquisitionStatus.REUSED, resolution=resolution,
                     reason="existing_local_source_reconciled_before_adapter")
         elif local["blocks_download"]:
+            local_read_budgets = [
+                item for item in local.get("operations", ())
+                if isinstance(item, dict) and item.get("operation") == "local_read_budget"
+            ]
+            if len(local_read_budgets) > 1:
+                raise AcquisitionError("local preparation returned multiple owner budget observations")
+            local_preparation = {
+                "status": local["status"], "reason": local["reason"],
+                "blocks_download": True,
+                "causes": sorted({item["reason"] for item in local.get("diagnostics", ())}),
+            }
+            if local_read_budgets:
+                local_preparation["local_read_budget"] = local_read_budgets[0]
             return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
-                resolution=resolution, reason=local["reason"], local_preparation={
-                    "status":local["status"],"reason":local["reason"],"blocks_download":True,
-                    "causes":sorted({item["reason"] for item in local.get("diagnostics",())})})
+                resolution=resolution, reason=local["reason"], local_preparation=local_preparation)
         if request.mode == "latest_as_of":
             return self._gap_plan_result(request, resolution, budget=budget,
                                          candidate_scope=candidate_scope)

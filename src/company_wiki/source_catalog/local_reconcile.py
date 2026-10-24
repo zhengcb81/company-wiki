@@ -417,7 +417,7 @@ def _facts_with_availability(catalog, original, identity, request, budget, **opt
     return facts, evidence
 
 
-def _discover_source_groups(catalog, identity, budget, request, *, _progress=None):
+def _discover_source_groups(catalog, identity, budget, request, *, historical=None, _progress=None):
     """Finite issuer-layout metadata enumeration, separate from raw verification."""
     from .adapter_dispatch import discover_issuer_paths
     from .policy import _effective_reusable
@@ -477,7 +477,13 @@ def _discover_source_groups(catalog, identity, budget, request, *, _progress=Non
             if row is None:
                 raise SourceReadError("unavailable", "local_original_registration_failed")
             ref = SourceRef(row["document_id"], row["source_id"], row["content_sha256"], row["byte_size"], row["mime_type"])
-            scope = qualified_source_scope(catalog, ref, {"document_kind": row["document_kind"]})
+            from .metadata_observation import observe_metadata
+            metadata = observe_metadata(row["metadata_json"]).metadata
+            scope = qualified_source_scope(
+                catalog, ref,
+                {"document_kind": row["document_kind"], "metadata": metadata},
+                historical=historical,
+            )
             relation = scope_relatedness(scope, request)
             if relation is ScopeRelation.NOT_RELEVANT:
                 continue
@@ -539,6 +545,7 @@ def _prepare_local_source(
         raise TypeError("request must be SourceRequest")
     budget = _budget or LocalReadBudget(limits or LocalPrepareLimits())
     progress = _progress or _PreparationProgress()
+    historical = HistoricalCaptureScopes(catalog, budget)
     if not catalog.config.database_path.exists():
         # Explicit prepare owns a finite writer operation; pure query/open
         # keeps its read-only missing-catalog refusal.
@@ -558,7 +565,8 @@ def _prepare_local_source(
                 identity = SimpleNamespace(canonical_name=request.entity, market=request.market,
                     security_id=request.security_id, ticker=request.security_id, _discovery_only=True,
                     _identity_cache_dir=identity_cache_dir)
-        _discover_source_groups(catalog, identity, budget, request, _progress=progress)
+        _discover_source_groups(catalog, identity, budget, request,
+                                historical=historical, _progress=progress)
         return _prepare_local_source(catalog, request, identity_cache_dir=identity_cache_dir,
             limits=limits, _discovery_done=True, _budget=budget, _progress=progress)
     if query.status == "found" and _discovery_done:
@@ -619,7 +627,8 @@ def _prepare_local_source(
                 identity = _identity(catalog, request, identity_cache_dir)
             except (ValueError, SourceReadError):
                 return _result("not_found", "no_registered_local_source")
-            if _discover_source_groups(catalog, identity, budget, request, _progress=progress):
+            if _discover_source_groups(catalog, identity, budget, request,
+                                       historical=historical, _progress=progress):
                 return _prepare_local_source(
                     catalog,
                     request,
@@ -634,7 +643,6 @@ def _prepare_local_source(
     operations = progress.operations
     qualified_documents = set()
     targeted = False
-    historical = HistoricalCaptureScopes(catalog,budget)
     eligible = []
     known_identity = None
     for candidate in candidates:
@@ -661,7 +669,9 @@ def _prepare_local_source(
             known_identity = known_identity or qualified.identity()
     candidates = eligible
     if not candidates:
-        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget,request,_progress=progress):
+        if not _discovery_done and known_identity and _discover_source_groups(
+            catalog, known_identity, budget, request, historical=historical, _progress=progress
+        ):
             return _prepare_local_source(catalog,request,identity_cache_dir=identity_cache_dir,
                 limits=limits,_discovery_done=True,_budget=budget, _progress=progress)
         return _result("not_found","no_matching_local_period",diagnostics=diagnostics)
@@ -794,7 +804,9 @@ def _prepare_local_source(
             operations=operations,
             diagnostics=diagnostics,
         )
-    if not _discovery_done and _discover_source_groups(catalog, identity, budget, request, _progress=progress):
+    if not _discovery_done and _discover_source_groups(
+        catalog, identity, budget, request, historical=historical, _progress=progress
+    ):
         return _prepare_local_source(
             catalog,
             request,
