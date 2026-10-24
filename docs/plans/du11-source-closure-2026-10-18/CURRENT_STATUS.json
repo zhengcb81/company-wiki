@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_M5_SOURCE_COMMITTED_PWF_COMMIT_AND_CWP_PUSH_EXACT_CI_PENDING",
+  "overall_status": "ACTIVE_FORMAL_SUMMARY_CACHE_RECOVERY_AND_RF_ACCEPTANCE",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -10,14 +10,14 @@
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
   "last_code_commit": "0f64289e",
   "code_ci": {
-    "id": 40109033205,
-    "check_id": 120916666195,
-    "head_sha": "e3e7d2fb0c5163878680b4405cd263c120eeed23",
+    "id": 40116401110,
+    "check_id": 120938472665,
+    "head_sha": "0acae348484d661278faa62641ad426f2c8cf485",
     "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40109033205",
-    "failed_test_count": 5,
-    "junit_report": "unavailable_or_invalid",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40116401110",
+    "failed_test_count": 0,
+    "junit_report": "not_needed_for_successful_run",
     "updated_at": "2026-10-24"
   },
   "completed": {
@@ -176,7 +176,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "M5本地预算观察从CWP owner→existing ensure contract→FF local preparation observation→RF已由离线跨仓E2E验收；同一最终CWP HEAD的三模块46P、Ruff、三文件mypy、host-assumption guard、diff-check通过。CWP源码commit 0f64289e已完成；提交/推送PWF并检查精确HEAD CI。FF commit e0d96426445e4b93bc6cc7a6e6014996ad0a777d已推送，精确CI 40115441655 success。旧Snowflake原件当前不在本地，历史触发bound未重放，仍OPEN；随后推进正式摘要/cache恢复、RF采用与四审、annual14和holdout。",
+  "next_step_now": "M5本地预算观察从CWP owner→existing ensure contract→FF local preparation observation→RF已由离线跨仓E2E验收；同一最终CWP HEAD的三模块46P、Ruff、三文件mypy、host-assumption guard、diff-check通过。CWP源码0f64289e与PWF 0acae348已推送；CWP精确CI 40116401110对HEAD 0acae348484d661278faa62641ad426f2c8cf485 completed/success。FF commit e0d96426445e4b93bc6cc7a6e6014996ad0a777d已推送，精确CI 40115441655 success。旧Snowflake原件当前不在本地，历史触发bound未重放，仍OPEN；当前转入以本地已有真实原件为样本的正式摘要/引用/限定、缓存复用与进程中断恢复，再验RF消费与四路审查。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -627,7 +627,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "按remaining_root_causes.md先冻结语义正确的跨市场检查点，修匿名电话会/指标定义/局部依赖与降噪；USIPO本地准备计量精确诊断",
+  "next_step_after_publication": "按共享引擎对已冻结SHA的跨市场/文种真实原件做正式原语言摘要，验证引用/限定、相同来源缓存复用与进程中断恢复，然后验RF按原artifact/hash实际采用并完成四路审查",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -809,7 +809,7 @@
     "raw_copies": 0,
     "existing_family_policies": 24,
     "existing_facets": 14,
-    "remaining": "M3 R5独审通过，M4双季报targeted回放通过但正控为partial。M5预算观察传递链已根修并在CWP/FF/RF离线E2E通过；FF推送及CI成功。CWP源码0f64289e已提交；PWF commit、推送、精确CI待完成。原Snowflake 2020 S-1的历史local bound因原件当前不在本地未重放、保持OPEN。随后正式摘要/cache恢复、RF采用/四审和holdout。",
+    "remaining": "M3 R5独审通过，M4双季报targeted回放通过但正控为partial。M5预算观察传递链已根修并在CWP/FF/RF离线E2E通过；FF与CWP推送及精确CI均成功。原Snowflake 2020 S-1历史local bound因原件当前不在本地未重放、保持OPEN。当前继续正式摘要/cache恢复、RF采用/四审和holdout。",
     "samples_sha_verified": 25,
     "source_sample_count_note": "13 initial + 9 DU5 + 3 supplemental; bounded targeted reading, not full 25-document acceptance",
     "independent_review": "review/market-family-upgrade-20261024/independent-final/report.json",
@@ -952,7 +952,7 @@
     "native_continuity_tests": "136 passed"
   },
   "m5_local_budget_observation": {
-    "status": "OBSERVATION_CHAIN_FIXED_SOURCE_COMMITTED_CWP_PUSH_PENDING_ORIGINAL_SNOWFLAKE_BOUND_OPEN",
+    "status": "OBSERVATION_CHAIN_FIXED_PUBLISHED_EXACT_CI_SUCCESS_ORIGINAL_SNOWFLAKE_BOUND_OPEN",
     "report": "review/market-family-upgrade-20261024/m5-local-budget-observation-20261024/report.md",
     "cwp_commit": "0f64289e",
     "cwp_tests": "46 passed: operation contract, canonical historical scope, and CWP→FF→RF offline E2E",
@@ -965,6 +965,12 @@
       "head_sha": "e0d96426445e4b93bc6cc7a6e6014996ad0a777d",
       "conclusion": "success",
       "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/40115441655"
+    },
+    "cwp_ci": {
+      "id": 40116401110,
+      "head_sha": "0acae348484d661278faa62641ad426f2c8cf485",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40116401110"
     },
     "provider_requests": 0,
     "downloads": 0,

@@ -1,7 +1,7 @@
 {
   "schema_version": "company-wiki-m5-observation-receipt/1",
   "date": "2026-10-24",
-  "status": "IMPLEMENTATION_GREEN_CWP_PUBLICATION_PENDING_ORIGINAL_SNOWFLAKE_BOUND_OPEN",
+  "status": "PUBLISHED_EXACT_CWP_CI_SUCCESS_ORIGINAL_SNOWFLAKE_BOUND_OPEN",
   "cwp_source_commit": "0f64289e",
   "ff_source_commit": "324ced2",
   "ff_test_root_fix_commit": "e0d9642",
@@ -10,6 +10,14 @@
     "head_sha": "e0d96426445e4b93bc6cc7a6e6014996ad0a777d",
     "conclusion": "success",
     "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/40115441655"
+  },
+  "cwp_publication": {
+    "source_commit": "0f64289e",
+    "receipt_commit": "0acae348",
+    "ci_id": 40116401110,
+    "ci_head_sha": "0acae348484d661278faa62641ad426f2c8cf485",
+    "ci_conclusion": "success",
+    "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40116401110"
   },
   "cwp_validation": {
     "tests": 46,
@@ -52,5 +60,5 @@
   "provider_requests": 0,
   "model_calls": 0,
   "dayu_modified": false,
-  "next": "Commit/push the PWF receipt with normal gates, inspect exact CWP CI, then continue formal summary/cache recovery and RF consumption/review. Keep the historical Snowflake bound open until the original sample/request can be safely replayed."
+  "next": "M5 publication and exact CWP CI are complete. Continue formal summaries on SHA-frozen real sources already in the lake, verify citations/qualifiers, same-source cache reuse and interrupted-process recovery, then verify RF consumption/reviews. Keep the historical Snowflake bound open until the original sample/request can be safely replayed."
 }

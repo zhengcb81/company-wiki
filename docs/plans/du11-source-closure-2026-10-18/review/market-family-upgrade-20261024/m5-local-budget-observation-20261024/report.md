@@ -6,7 +6,7 @@
 
 修复 CWP 本地准备被限额阻断时，owner 计量无法穿过 ensure、FF 和 RF 的共同传递断点；同时修复本轮回归暴露的历史期次二次发现丢失scope的问题。CWP源码提交为 `0f64289e`。FF 改动 `324ced2` 和测试时限根修 `e0d9642` 已推送；精确 FF CI [40115441655](https://github.com/zhengcb81/filing-fetch/actions/runs/40115441655) 成功。
 
-**验收结论：** 三模块合同/历史scope/跨仓离线端到端组合46项通过；Ruff、CWP三个修改源文件的mypy、host-assumption guard与diff-check通过。FF完整pre-push为933 passed、7 skipped、78 subtests，耗时127.92秒。CWP源码已常规提交；本PWF收据提交、CWP正常推送及精确CI仍待完成。
+**验收结论：** 三模块合同/历史scope/跨仓离线端到端组合46项通过；Ruff、CWP三个修改源文件的mypy、host-assumption guard与diff-check通过。FF完整pre-push为933 passed、7 skipped、78 subtests，耗时127.92秒；精确FF CI `40115441655` success。CWP源码`0f64289e`与PWF收据`0acae348`已推送；CWP精确CI `40116401110` 对应HEAD `0acae348484d661278faa62641ad426f2c8cf485` completed/success。
 
 ## 根因和修复
 
@@ -27,4 +27,4 @@ CWP端到端使用独立临时lake、构造的有限issuer目录、socket拒绝�
 
 ## 限制与剩余项
 
-没有provider请求、原件下载、模型调用或Dayu修改。真实Snowflake 2020 S-1原件当前不在`companies/`，也未重跑旧请求。因此此修复证明**观测路径**可用，不证明已查明历史事故触发的是哪一项local bound；原始触发bound保持OPEN。以后从可得的原请求/原件离线复放时，可沿同一owner observation直接读出阶段和限制，而不需要再造诊断机制。PWF后续主线继续正式摘要与缓存恢复验收、RF实际采用及四审。
+没有provider请求、原件下载、模型调用或Dayu修改。真实Snowflake 2020 S-1原件当前不在`companies/`，也未重跑旧请求。因此此修复证明**观测路径**可用，不证明已查明历史事故触发的是哪一项local bound；原始触发bound保持OPEN。以后从可得的原请求/原件离线复放时，可沿同一owner observation直接读出阶段和限制，而不需要再造诊断机制。PWF下一步继续对本地已有跨市场真实原件做正式摘要、引用/限定、缓存恢复和RF消费验收。

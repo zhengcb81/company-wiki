@@ -4,7 +4,7 @@
 
 ## Next Step
 
-最新状态（2026-10-24，覆盖旧Next Step）：M5 CWP→FF→RF本地预算观察链已做根修；CWP在blocks_download时透传唯一、严格验证的`local_read_budget/1`；FF映射到已有`filing-local-preparation-observation/1`，provider未启动。同一最终CWP HEAD的合同、历史scope、跨仓E2E 46项通过；Ruff、3文件mypy、host-assumption guard和diff-check通过。canonical local group二次发现遗漏historical scope/已登记metadata的旧期次问题已修复，完整22项scope组通过。FF根修/测试已正常推送，精确CI `40115441655` 成功；CWP源码commit `0f64289e` 已完成，PWF更新与正常push pending。**当前下一步：** 提交/推送PWF并查精确CI。不能声称已查明旧Snowflake S-1事故触发bound：本地无该公司原件且未重跑原请求；此边界保留OPEN。CWP CI通过后按本计划转入正式摘要/cache恢复、RF消费与四审；不重跑8k全量。
+最新状态（2026-10-24，覆盖旧Next Step）：M5 CWP→FF→RF本地预算观察链已做根修；CWP在blocks_download时透传唯一、严格验证的`local_read_budget/1`；FF映射到已有`filing-local-preparation-observation/1`，provider未启动。同一最终CWP HEAD的合同、历史scope、跨仓E2E 46项通过；Ruff、3文件mypy、host-assumption guard和diff-check通过。canonical local group二次发现遗漏historical scope/已登记metadata的旧期次问题已修复，完整22项scope组通过。FF精确CI `40115441655` 成功；CWP源码`0f64289e`和PWF`0acae348`已推送，精确CWP CI `40116401110` 对应HEAD `0acae348484d661278faa62641ad426f2c8cf485` completed/success。**当前下一步：** 从本地已有真实原件冻结跨市场/文种样本及SHA，用共享引擎和已配置provider完成正式摘要、引用/限定、缓存复用与进程中断恢复，再验证RF消费和四路审查；不重跑8k全量。不能声称查明旧Snowflake S-1事故触发bound：本地无该原件且未重跑原请求，保持OPEN。
 
 2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13接收不代表真实产品全量、远端CI或跨仓RF验收；这些分别由根接收记录和精确CI收据绑定。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
 

@@ -868,3 +868,9 @@ CWP AcquisitionCoordinator此前在本地准备阻止下载时丢弃唯一local_
 同一回归还发现issuer layout二次发现未复用historical scope journal/已有metadata，使已知旧期来源被重新当作未分类。修复后canonical scope 22项通过；合同/历史scope/E2E最终组合46项通过，Ruff、三模块mypy、host guard（68既有违规/0新增）、diff-check通过。CWP源码commit 0f64289e已由正常pre-commit提交，尚待PWF commit、push和精确CI。
 
 FF曾有6个pre-push测试因合成请求3秒总预算/Windows探针1秒预算被全套运行调度延迟耗尽；提高测试合成预算而保持生产deadline/清理/隔离规则后，8项聚焦回归通过，完整pre-push为933P/7既有skip/78 subtests，FF精确CI 40115441655 completed/success。旧Snowflake 2020 S-1原件目前不在公司池，未重试原请求；原历史bound仍OPEN。无provider调用、下载、模型调用、Dayu变更。本节点报告见review/market-family-upgrade-20261024/m5-local-budget-observation-20261024/report.md。
+
+## 2026-10-24 M5 发布与精确 CI 收口
+
+CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110` 绑定HEAD `0acae348484d661278faa62641ad426f2c8cf485`，completed/success。FF `e0d96426445e4b93bc6cc7a6e6014996ad0a777d`的精确CI `40115441655`也已success。M5机制验收关闭，但Snowflake 2020 S-1原件本地缺失，故旧事件的精确触发bound仍OPEN。
+
+当前转入真实正式摘要与缓存恢复：从已经在库且原件SHA可冻结的跨市场/文种材料中选样，使用配置的共享引擎与provider，检查原语言正式摘要、引用和限定、同源缓存复用、进程中断恢复及RF实际读取；不重跑8k全量、不重复下载已存在的原件。M5本身仍为零provider请求、零下载、零模型调用，Dayu未改。
