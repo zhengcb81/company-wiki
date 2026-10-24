@@ -911,3 +911,11 @@ CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110
 CI run `40130559322` 精确绑定commit `61ecfc2b9ae33e87691e4765c36c82481959db6c`，在`Unit tests`失败。公开check-run注解定位N6的`<=96`断言和production-selection `_select` 默认仍显式传96。两者由第一轮修复未枚举全部财报默认限制假设造成；不是112路由产品逻辑错误。将前者绑定`FINANCIAL_REPORT_SELECTION_LIMIT`，后者helper改为`limit=None`，让正式路由决定默认值，显式budget测试仍显式传参。
 
 五个相关测试文件与routing architecture测试共181 passed/36.88s；Ruff与diff-check通过。一次无basetemp的同套运行为180 passed/1环境setup error（Windows沙箱系统temp无法再创建pytest numbered directory）；该唯一用例显式使用仓库内隔离basetemp后通过，临时目录清理完成。接下来正常提交并push，等待新精确CI；通过后继续MSFT 10-K零费预检。旁线三卡已推送，卡片要求各自实现者提交后由非实现agent独立审查最终SHA并修复所有发现再交接。
+
+## 2026-10-24 根修发布与产物盘点开始
+
+根修和PWF提交`808623377905520ec0c28c7330fe14243e4c6c04`已推送；精确CI `40131924884` success。正常pre-push跑58 targets/640 passed/392.40s（full validation仍由CI负责），没有绕过门禁。三张独立卡随先前提交已推送。只读库存显示CWP有16,893个未跟踪文件共413,986,038 bytes：`.planning`占12,687个/367.17MiB，`docs`占108个/14.10MiB，其他多为重名测试scratch和pytest目录。由于其中有已被PWF引用的audit receipts与本地live evidence，不能整体删除；下一步先按引用和测试归属做分类，暂不改变原件或清理外仓。
+
+## 2026-10-24 本地仓库卫生审计收尾
+
+按准确路径核实并删除25个CWP pytest/debug临时根：13,919个文件、379,243,632 filesystem bytes。Git可见未跟踪从16,893/413,986,038 bytes降至8,007/185,882,840 bytes。删前保留所有被PWF或发布收据引用的审计/运行证据；检查确认未触碰公司原件目录，且没有改写外仓。CWP、RF、FF、StockWiki、ET、MeetingConverter及两个研究仓库的branch/worktree初筛完成；CWP/RF/FF有代码型候选待按当前实现逐个核对，StockWiki没有可见origin配置。无分支/worktree被合并或删除。详见`review/local-repository-hygiene-20261024.md`。当前主线恢复到微软FY2025 10-K零费用预检。

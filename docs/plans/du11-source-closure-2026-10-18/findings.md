@@ -712,3 +712,12 @@ CWP生产导出的正式上下文已升至`du-production-reading/3`并带selecti
 ## 2026-10-24 CI 40130559322 二次漏项
 
 第二次CI对`61ecfc2b9ae33e87691e4765c36c82481959db6c`仍在Unit tests失败，check-run `120981176883`指出N6密集事件回归断言`<=96`及production-selection `_select()`默认预算仍为96。两项本机逐例重放都呈现实际112与旧96冲突。它们不是新的产品回归，而是同一次政策升级后的测试合同迁移不完整：前次只按出现的helper改值，未枚举所有默认预算假设。保留显式小预算与transcript通用96测试；N6断言引用路由常量，production测试helper默认`limit=None`表达“不覆盖生产默认”。六个受影响测试文件181 passed；第一次181项运行仅一项因本机系统temp创建权限失败，使用仓库内隔离basetemp复跑通过并删除临时根。修复待正常提交推送及精确新HEAD CI。
+
+修复提交`808623377905520ec0c28c7330fe14243e4c6c04`的精确CI run `40131924884` completed/success。正常pre-push扩大到58个目标，640 passed、392.40秒；这显示依赖映射把两个测试文件扩展为较宽关联集，作为后续效率评估依据。主线产品上限保持112，不撤测试。
+
+## 2026-10-24 本地未跟踪文件与支线判定
+
+- Git `??` 不能直接等同“垃圾”：`.planning`和`docs/plans`混有被审查/发布收据引用的真实输入、输出和测试日志。只有能绑定pytest/debug运行且没有当前收据依赖的精确根才可删除。
+- 本次通过Git状态体积统计、文件树类别、PWF引用搜索、合成fixture特征和活动Python/pytest进程检查，确认并删除25个CWP临时根；未清理所有剩余8,007个Git可见untracked文件。未清理worktree，因为本次只证明文件归属，没有证明每个checkout都可丢弃。
+- `branch --no-merged`只表示提交祖先关系，不表示补丁没有已并入。候选需再做patch-equivalence和当前代码语义比对。外仓只读盘点不授权代替维护者合并/删分支。
+- CWP、RF、FF配置的主线与远端一致，不代表所有支线都并入；StockWiki无`origin`引用，所以远端状态未知。盘点数据与候选分支列表见`review/local-repository-hygiene-20261024.md`。

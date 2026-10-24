@@ -549,3 +549,16 @@ RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，
 1. 从CI `40130559322`精确注解及本机逐例复现确认，第一轮只迁移了三个旧helper，仍漏N6 `<=96` 与production-selection `_select` 默认96。统一调整：N6断言引用财报选择限额常量，测试helper默认`None`以使用生产路由预算；明确小预算用例保持显式参数。
 2. 五个受影响测试文件与routing架构测试181/181通过（36.88s），Ruff与diff-check通过；首次系统temp创建权限错误的单例用隔离basetemp复跑成功并清理。提交/推送后只查该SHA的CI，不重跑8k全量。
 3. CI通过后回到主线真实资料顺序：对已有微软FY2025 10-K作零费用预算/输出容量预检，再执行配置内摘要、cache恢复与RF只读消费；不重新下载原件。内容与四审/holdout仍OPEN。
+
+## 当前节点更新（2026-10-24 CI通过及工作区盘点，优先于上方）
+
+1. 财报selection-limit测试根修 `80862337` 已推送，精确CI `40131924884` success；181项聚焦测试通过。正常pre-push 58 targets/640 passed/392.40s，记录为效率诊断，不跳过验证。
+2. 只读盘点CWP确认16,893个未跟踪文件/413,986,038 bytes；其中12,687个在`.planning`、367.17MiB，108个在`docs`、14.10MiB。已证实有PWF引用的audit/live证据混在其中，因此先检查引用与临时目录归属，仅清理确证的测试scratch；暂不全局清空。
+3. 同时审查主线差异，不能把“有未合并分支头”直接等同待合并代码；按远端主线祖先关系先筛出候选，再检查代码/测试文件差异和PWF交付记录。外仓当前权限只读；Revenue Forecast三份修改及MeetingConverter `.coverage` 暂保留。
+
+## 2026-10-24 本地文件与支线盘点收尾
+
+- CWP 清理前 Git 可见未跟踪项 16,893 个/413,986,038 bytes；定点清理 25 个可验证的 pytest/debug 临时根，共删除 13,919 个文件、回收 379,243,632 filesystem bytes。清理后 Git 可见未跟踪项 8,007 个/185,882,840 bytes。保留 `.planning`/`docs` 中有 PWF 收据引用的审计、真实运行与交付证据；没有触碰 `companies/`、`sectors/`、`themes/` 下原始资料，没有改外仓文件。完整分类和删除边界见 [本地卫生报告](review/local-repository-hygiene-20261024.md)。
+- 分支盘点采用“当前远端主线祖先关系 + patch 等价检查 + PWF/变更路径核对”，未把非祖先分支一律当成待合并，也没有合并、删除任何分支或 worktree。CWP 仍有 3 个需按当前代码逐项对照的代码候选；RF `codex/revenue-source-reader`、FF `codex/transcript-companion` 各有代码候选；文档/历史分支单列。StockWiki 未配置可见 `origin`，不能判断远端是否同步。详见报告的逐仓结果。
+- 独立施工卡仍为 READY_NOT_STARTED；QA-RAG 卡明确限定为应用层索引重建失败保护，不涉及向量数据库引擎/schema 重构或真实库迁移。三卡入口见 `harness_lanes/20261024-independent/README.md`。
+- 后续唯一主线节点仍为本地微软FY2025 10-K零费用/容量预检，然后按原配置做摘要、cache恢复与RF读取；内容审查、跨市场/文种复验、W12四审和holdout仍OPEN。外仓分支候选不得批量合并。

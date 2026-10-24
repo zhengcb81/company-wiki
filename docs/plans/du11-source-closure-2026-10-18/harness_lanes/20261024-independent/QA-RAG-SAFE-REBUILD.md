@@ -1,6 +1,10 @@
-# QA-RAG-SAFE-REBUILD：安全重建本地知识库
+# QA-RAG-SAFE-REBUILD：RAG 索引重建失败保护（不做数据库重构）
 
 状态：READY；与 company-wiki 主线没有代码依赖。项目 C:/Users/郑曾波/Projects/QAbyLLM。独立工作目录 C:/Users/郑曾波/Projects/QAbyLLM-rag-safe-rebuild。branch codex/qa-rag-safe-rebuild-20261024。冻结起点 main@ad389f84cd15e54207fc6fcfe4881f86edac63f1，检查时 origin/main 一致且干净。PLAN_ID=qa-rag-safe-rebuild-2026-10-24，PWF_PLAN_ROOT=docs/plans。
+
+## 范围澄清
+
+本卡只改 `rag_system.py` 的应用层索引重建/发布顺序，避免重建失败破坏当前可用索引；不更换向量数据库引擎、不改数据库 schema、不迁移现有库、不清空真实 collection，也不设计通用存储平台。generation staging/publish 只是让新索引验证后再成为 active 的最小生命周期机制。
 
 ## 根因与目标
 

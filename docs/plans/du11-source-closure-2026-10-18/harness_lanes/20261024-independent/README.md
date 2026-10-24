@@ -5,7 +5,7 @@
 | 卡片 | 独立仓库与代码范围 | 建议工作目录 | 冻结起点 |
 |---|---|---|---|
 | [IR-REPORT-GENERATION](IR-REPORT-GENERATION.md) | industry-research：tools/report_generator.py 和新报告测试 | C:/Users/郑曾波/Projects/industry-research-report-generation | main 4a80f9988f9325fb0a348c8acd9e41d615005c5f；原仓干净；未显示 remote |
-| [QA-RAG-SAFE-REBUILD](QA-RAG-SAFE-REBUILD.md) | QAbyLLM：rag_system.py 和专属重建测试 | C:/Users/郑曾波/Projects/QAbyLLM-rag-safe-rebuild | main ad389f84cd15e54207fc6fcfe4881f86edac63f；与 origin/main 一致且干净 |
+| [QA-RAG-SAFE-REBUILD](QA-RAG-SAFE-REBUILD.md) | QAbyLLM：只保护应用层 RAG 索引重建与发布；不改数据库引擎/schema、不迁移真实库 | C:/Users/郑曾波/Projects/QAbyLLM-rag-safe-rebuild | main ad389f84cd15e54207fc6fcfe4881f86edac63f；与 origin/main 一致且干净 |
 | [MC-OUTPUT-INTEGRITY](MC-OUTPUT-INTEGRITY.md) | MeetingConverter：core/output.py 和 tests/test_output.py | C:/Users/郑曾波/Projects/MeetingConverter-output-integrity | master 8a33a7f96292af8e6574d98b959703c6d11919eb；origin/master；原仓已有 M .coverage，必须保留 |
 
 每项应从指定冻结提交新建独立 worktree 与任务分支，不在原工作区切换分支。若建议工作目录已存在，先核对其身份与状态，不得覆盖。不同卡不共享缓存、数据库、测试输出或运行服务。

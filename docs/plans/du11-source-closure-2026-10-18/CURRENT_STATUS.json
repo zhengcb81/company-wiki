@@ -8,18 +8,18 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "61ecfc2b9ae33e87691e4765c36c82481959db6c",
+  "last_code_commit": "808623377905520ec0c28c7330fe14243e4c6c04",
   "code_ci": {
-    "id": 40130559322,
-    "check_id": 120981176883,
-    "head_sha": "61ecfc2b9ae33e87691e4765c36c82481959db6c",
+    "id": 40131924884,
+    "check_id": 120985257266,
+    "head_sha": "808623377905520ec0c28c7330fe14243e4c6c04",
     "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40130559322",
-    "failed_test_count": 2,
-    "junit_report": "unavailable",
-    "failure_summary": "Two stale selection_limit=96 expectations remained after the first test migration: N6 maximum bound and production selection helper default. Both reproduce as 112 vs 96; product routing is unchanged.",
-    "updated_at": "2026-10-24T20:40:17Z"
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40131924884",
+    "failed_test_count": 0,
+    "junit_report": "available_from_ci_success",
+    "failure_summary": null,
+    "updated_at": "2026-10-24T20:55:13Z"
   },
   "completed": {
     "b2": {
@@ -177,7 +177,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Commit and push the two remaining stale-96 contract fixes with PWF, then verify exact new-head CI. If green, continue the already-local MSFT FY2025 10-K zero-cost budget and output-capacity preflight; do not redownload the original.",
+  "next_step_now": "Preflight the already-local Microsoft FY2025 10-K with zero provider/model cost and verify output capacity; if it passes, run the configured summary, cache-recovery, and read-only RF-consumption path without redownloading. Reconcile the listed CWP/RF/FF code-branch candidates one by one against current behavior and PWF receipts; do not bulk-merge. Remaining untracked artifacts stay preserved until receipt ownership is resolved.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -252,7 +252,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T20:10:22+00:00",
+  "last_updated_at": "2026-10-24T21:28:22+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -688,7 +688,7 @@
     "预检通过后验证US年报的业务选择、摘要质量、引用限定、缓存恢复和RF消费；小样本不替代其他文种/市场。",
     "完成跨市场/文种真实样本、内容审查、W12四审及目标公司循环；本样本技术通过不关闭整体目标。"
   ],
-  "last_updated_utc": "2026-10-24T20:10:22Z",
+  "last_updated_utc": "2026-10-24T21:28:22Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1029,16 +1029,52 @@
     "status": "PASS_FOCUSED_AFTER_CI_ROOT_CAUSE_FIX",
     "tests": 181,
     "seconds": 36.88,
-    "scope": [
-      "test_n6_candidate_main_boundaries.py",
-      "test_reading_production_selection.py",
-      "test_reading_operating_measure_variants.py",
-      "test_reading_untyped_numeric_prose_controls.py",
-      "test_reading_untyped_numeric_quality.py",
-      "test_narrative_selection_architecture.py"
-    ],
     "ruff": "PASS",
     "diff_check": "PASS",
+    "pre_push_targets": 58,
+    "pre_push_passed": 640,
+    "pre_push_seconds": 392.4,
+    "pre_push_status": "PASS",
     "pytest_temp": "one sandbox temp setup error on first run; same case passed with isolated workspace basetemp, which was removed"
+  },
+  "previous_code_ci_failure": {
+    "id": 40130559322,
+    "head_sha": "61ecfc2b9ae33e87691e4765c36c82481959db6c",
+    "check_id": 120981176883,
+    "conclusion": "failure",
+    "root_cause": "Two remaining stale selection_limit=96 test assumptions; repaired without changing product routing."
+  },
+  "local_repository_hygiene_20261024": {
+    "status": "COMPLETED_READ_ONLY_CROSS_REPO_AUDIT_AND_EXACT_CWP_SCRATCH_CLEANUP",
+    "audited_at": "2026-10-24T21:26:33Z",
+    "report": "review/local-repository-hygiene-20261024.md",
+    "company_wiki": {
+      "git_visible_untracked_before": {
+        "files": 16893,
+        "bytes": 413986038
+      },
+      "exact_generated_roots_removed": 25,
+      "filesystem_files_removed": 13919,
+      "filesystem_bytes_reclaimed": 379243632,
+      "git_visible_untracked_after": {
+        "files": 8007,
+        "bytes": 185882840
+      },
+      "company_originals_touched": false,
+      "tracked_code_changed": false
+    },
+    "other_repositories_modified": false,
+    "branches_or_worktrees_merged_or_deleted": false,
+    "branch_follow_up": {
+      "company_wiki_code_candidates": [
+        "codex/du3-dependencies-20261014",
+        "codex/n4t2-selective-narrative-coverage",
+        "codex/w13-cwp-gates-20261024 (check whether mainline supersedes it)"
+      ],
+      "revenue_forecast_code_candidate": "codex/revenue-source-reader",
+      "filing_fetch_code_candidate": "codex/transcript-companion",
+      "stockwiki_remote_status": "UNKNOWN_NO_VISIBLE_ORIGIN_REF"
+    },
+    "mainline_next_step": "Preflight the existing Microsoft FY2025 10-K with zero provider/model cost, then proceed to configured summary, cache recovery, and read-only RF consumption."
   }
 }
