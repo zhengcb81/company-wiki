@@ -2,7 +2,9 @@
 
 **最新状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** 微软 FY2025 10-K formal-v4 的生产链路按界限完成：恰好一次 POST 得到 HTTP 200，token/成本估算 17,666 / $0.007102；原件和 gold SHA 未变，未下载、未翻译，缓存/启动恢复及 FF 原文复用通过，临时湖清理。MiniMax 返回的精确 schema 元数据此前被 decoder 拒绝，窄范围修复和独审已通过，捕获响应离线重放为 50/50 排序项。**工程链路 PASS 不等于内容 PASS：**本次只选 112/484 单元、314 deferred、layout incomplete；43 条摘要 claim 被代码默认标为 uncertain/needs_review，50个任务中还含5条 deferred和2条unsupported，RF 标记 not_consumed/needs_review。下一步分别验证排名重放、source-card完整性、claim质量映射及未分配单元含义，再设计可恢复的分批覆盖和有出处摘要；不只是提高上限，也不放宽质量门槛来制造消费。不能重跑本次付费请求来掩盖覆盖问题。详见[formal-v4与三卡ROOT验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)。
 
-**发布状态：** 根因修复与上述验收记录已提交为 `73ba5aa2352ac90bf57d1156a204b0445c83a473`（Ruff、mypy、config doctor、host-assumption guard 均通过）；正在准备推送，当前提交的远端 CI 尚未启动，不能沿用上一提交的 CI 成功结论。
+**选择与结构根因（零费用精确复现）：** 同一微软原件 SHA 重放得 5,215 个HTML单元、1,120个进入语义结构、4,087个未映射到语义分区（不能直接等同“未读”）。年报路由的 112-span硬上限选入112/484，产生308个`budget_full`诊断；358个合格业务包中314个延期（308个受选择预算影响、6个引用未闭合）。结构侧另有24个超长section、3个continuation limit、2个表格正文未读。HTML没有bbox，于是5,215个单元都记为缺几何、layout不完整，但DOM文字仍可读；这应与内容是否读全分开验证。摘要代码又将所有非问题型原文卡固定设为`uncertain/needs_review`，当前模型请求只做排序，不生成自然语言摘要。不会仅提高cap或把needs_review改成通过。
+
+**发布/CI状态：** 修复提交 `73ba5aa2352ac90bf57d1156a204b0445c83a473` 已推送；精确 CI `40143579006` 因测试仍要求MiniMax使用旧 `thinking=disabled` 失败，MiniMax现配置 `reasoning_effort=low` 是已验证的正确请求。未删测试，provider-specific测试契约已在本地修复提交 `275c8295f2924939695fdbfd2d19a6cc603f1111`，64项相关测试、Ruff、diff-check通过；该修复尚未推送，远端CI待重跑。失败与根因证据已写入`CURRENT_STATUS.json`。
 
 **前一节点快照（formal-v4之前）：** 微软 FY2025 10-K formal-v3 只发出一次 HTTP POST，收到 HTTP 400（`MODEL_HTTP_CLIENT_ERROR`）后作为 terminal dead-letter 停止；没有保存响应正文、付费响应凭据或正式摘要，未重试。原件 SHA `99d693f6…01d0bbe`、gold SHA `4dd0875a…7e28a2a8`未变，未下载、未翻译，临时数据湖清理。93,648 tokens / $0.041379 的保守 hold 已计入母账，不等于供应商确认账单。
 
