@@ -786,3 +786,8 @@ source-value首批25个中性测试实际18F/7P（2.90s）后实现25P（2.18s�
 首13+DU5九+补三共25真实原件SHA核验，有界页/段落/HTML研究窗口，无raw副本/模型/下载；USIPO正规FF试取0HTTP/0provider因budget_exceeded，精确限额待诊断。五family在单catalog内升级：20F层级、HK中报期后/业务root、CN/HK招股root/行业/募资、电话会条件CC；旧错误case01字节保留，新02及active引用修正。首5F/4P及IPO真4F/13P→75相关P，最终独立61P/3.71s、16被审文件SHA前后一致。中途sandbox Temp故障、ROOT错误profileid夹具、审查者漏封面夹具等失败均保留，不计产品根因。
 
 三FAIL不是全假警报：真实漏DOCX后续计划/不确定性和EX99.1指标/指引；也有oldgold ASR/精确财务值职责/替代support错误。四份本次来源映射0遗漏；最终同样本无内容得分提升，不能说五policy匹配绿等于内容验收通过。见review/market-family-upgrade-20261024/的三份独审、strategy_upgrade_design与remaining_root_causes。旧公司formal summary/cache/RF循环仍OPEN。原source/request根修正常推送3b4110a3：8199P/24skip+146契约，精确CI40087657562 success；本轮策略组件正常发布待收。
+
+
+## 2026-10-24 策略正常发布前兼容基线补审
+
+策略提交912f6fbd的第一次正常push在本地拦下旧geometry policy全profile SHA：8215P/1F/24既有skip（279.15s），另146契约P。测试名/注释明确“only change with explicit policy upgrade”，因此未删断言或改产品，按五份已独审授权策略更新四legacy预期SHA，另11不变；old/new保留于policy-baseline-upgrade.json。ROOT109相关P；独立112P/2.57s，含Git旧catalog+旧fixture全部15反事实、当前15对齐、未授权语义仍失败与geometry-only仍通过。原16被审文件/原测试/旧case不改，自有临时目录清理。正常跟进commit/push待完成，不将一次失败push说成远端CI失败。新behavior-checkpoints.json冻结10条跨市场源侧语义检查点，明确已用于诊断不属blind holdout；其端到端检查仍OPEN。

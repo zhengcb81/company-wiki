@@ -1,0 +1,48 @@
+{
+  "schema_version": "explicit-reading-policy-baseline-upgrade/1",
+  "source_commit": "912f6fbd",
+  "first_push_published": false,
+  "unit_passed": 8215,
+  "unit_failed": 1,
+  "unit_skipped_existing": 24,
+  "unit_seconds": 279.15,
+  "contract_smoke_passed": 146,
+  "contract_smoke_seconds": 30.51,
+  "failure": "test_legacy_wire_fingerprints_only_change_with_an_explicit_policy_upgrade",
+  "reason": "The test explicitly permits reviewed policy upgrades. Five reviewed family records change exactly these four legacy projections; preserve the drift guard and update only their approved expected hashes.",
+  "changed": {
+    "hk_periodic": {
+      "before": "d8ddaced1b301ad4d4c8282fad67d0333a5e6c199425097d79477962891f67d0",
+      "after": "0adc630576692e9902c75767a16302ec922a1b972fb06d6cd657b6262727e2d4"
+    },
+    "sec_20f": {
+      "before": "ec398844b85c81ee75aed951b633c78623873cf273a942c3a137e37726eeb019",
+      "after": "6679f443a260954061054888b37b7c2f0eccd2fc0dcb84411faa55cb2899d614"
+    },
+    "prospectus": {
+      "before": "89d7dea31b6093b8de1ca67e6858ce7e2f9d106e71d17f08112010b4547e99c0",
+      "after": "9b83de88c69c630801d64f95f9f7b41ac1f1a516b0ec21a9fe441fb5478edb5d"
+    },
+    "earnings_call": {
+      "before": "7b179add41923b21fc75cee306f7f0c3ec0b606341069e26c1697a3738f25c07",
+      "after": "c9a98dce692214f44b1f89c60b3e0e6e4b2b71500584f1bbc7cc0efc7deba8b9"
+    }
+  },
+  "unchanged_profile_ids": [
+    "administrative",
+    "cn_annual",
+    "cn_interim",
+    "cn_quarterly",
+    "generic",
+    "investor_qa",
+    "offering",
+    "presentation",
+    "results_release",
+    "sec_10k",
+    "sec_10q"
+  ],
+  "old_source_gold_case_preserved": true,
+  "product_source_changed_by_baseline_update": false,
+  "prior_independent_component_review": "independent-final/report.json",
+  "no_hook_bypass": true
+}

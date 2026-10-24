@@ -18,5 +18,9 @@
   {
     "Name": ".tmp-market-ipo-red2",
     "Absent": true
+  },
+  {
+    "Name": ".tmp-market-compat",
+    "Absent": true
   }
 ]

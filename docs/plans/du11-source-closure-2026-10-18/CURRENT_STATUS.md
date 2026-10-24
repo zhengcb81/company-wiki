@@ -2,6 +2,8 @@
 
 **主线ACTIVE；最新：跨市场/文种真实样本升级，五family策略组件独审通过，正常发布待完成。** 原来源材料/request根修已正常推送`3b4110a3`，完整8199P/24既有skip、另146契约P，精确[CI40087657562](https://github.com/zhengcb81/company-wiki/actions/runs/40087657562) completed/success；首次失败与最终补审收据保留。
 
+**发布补记：** 本地策略提交912f6fbd首次正常push被唯一旧几何指纹基线阻止（8215P/1F/24skip，另146契约P），没有发布。原测试明确允许经过审查的policy upgrade；保持原测试/产品/旧case不改，只更新五份已审策略对应的四个legacy预期SHA，另11不变。独立Git反事实、未授权语义突变与geometry-only反控112P通过，见[补审](review/market-family-upgrade-20261024/independent-final/baseline-followup.md)。正常重推待完成，不能沿用旧CI。
+
 本轮共25份真实原件SHA核验与有界定向阅读资料：A/H/US年报、中报/半年累计10-Q、IR/电话会、IPO/增发/转债，以及稀疏季报/8-K附件反控。首批46个PDF页、另DU5 51个PDF页窗口/80个DOCX段落及HTML窗口不等于全文读完；已补TAL真实业务正文与微软完整多轮片段。新增阿里2019二次上市招股书、VRSK真正半年累计和腾讯第三方业绩会纪要；第三方不能冒充正式逐字稿。[样本矩阵](review/market-family-upgrade-20261024/sample_matrix.md)。
 
 五family已修真实章节/口径问题：20-F风险父子路径；HK中报英文期后与独立业务章；A/H招股业务根标题、市场机会/募集资金标题；电话会条件CC新case替代错误旧解释（旧case原字节保留）。保持单24family/14facet registry，无新router/权限门。TDD首组5F/4P、IPO真4F/13P → 75相关P；最终独审61P（20独立+17永久+24registry），编译/实际pipeline/请求/局部cache反控均过。见[独审](review/market-family-upgrade-20261024/independent-final/report.md)。该组件尚未发布，不能借前一CI签绿。

@@ -1,0 +1,255 @@
+{
+  "schema_version": "market-family-behavior-checkpoints/1",
+  "scope": "existing DU-BENCH extension design; not a new scoring oracle",
+  "fresh_blind_validation": false,
+  "frozen_after_sample_diagnosis": true,
+  "all_rows_acceptance_status": "OPEN_EXCEPT_SEPARATELY_REVIEWED_PROFILE_MATCHER_COMPONENT",
+  "source_gold_unchanged": true,
+  "checkpoints": [
+    {
+      "id": "CP01",
+      "sample_id": "us-20f",
+      "source_sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
+      "anchor_scope": "Item3 Key Information / D Risk Factors; Item4 Business; Item5 Operating Results",
+      "physical_pages": null,
+      "must_keep": [
+        "20-F实际目录/正文分层，不套10-K Item1/7",
+        "业务转型与2021停止K9业务，地区/年龄范围和历史时点一起"
+      ],
+      "must_not_infer": [
+        "Item7股东交易变MD&A",
+        "把see Item4或目录当已读业务正文"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP02",
+      "sample_id": "hk-interim",
+      "source_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+      "anchor_scope": "RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD",
+      "physical_pages": [
+        19
+      ],
+      "must_keep": [
+        "期后已完成融资的actual与H2展望分开",
+        "事件时点不并入半年累计"
+      ],
+      "must_not_infer": [
+        "outlook角色自动等于planned",
+        "融资算上半年业务增量"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP03",
+      "sample_id": "hk-ipo-alibaba-2019",
+      "source_sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+      "anchor_scope": "我們的市場機會 / 我們的業務 / 募集資金用途",
+      "physical_pages": [
+        186,
+        191,
+        192,
+        193,
+        400
+      ],
+      "must_keep": [
+        "全球发售/二次上市/2019发行时点",
+        "市场统计来源、GMV定义/排行脚注",
+        "募资净额超额配售权假设与拟用途分开"
+      ],
+      "must_not_infer": [
+        "2019愿景成为2026最新公司指引",
+        "Gartner观点或10万亿消费规模成为公司实际收入"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP04",
+      "sample_id": "us-txt",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "anchor_scope": "Jonathan Neilson opening qualification; actual Q+A",
+      "physical_pages": null,
+      "must_keep": [
+        "同比默认除非另说明",
+        "CC when available，reported/CC相同时可一数",
+        "不同口径的局部两数、分析师问句与管理层续段分开"
+      ],
+      "must_not_infer": [
+        "全部数字重标CC/GAAP",
+        "编辑takeaways或尾部LLM声明冒充公司发言"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP05",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "anchor_scope": "Q13及其回答/追问",
+      "physical_pages": [
+        5,
+        6
+      ],
+      "must_keep": [
+        "问题10以上收益不补单位/不变公司目标",
+        "已有销售、拟建751吨与中试预期各自状态",
+        "合作意向书与已经销售不同"
+      ],
+      "must_not_infer": [
+        "提问假设变10%收入承诺",
+        "拟中试或意向变已量产订单"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP06",
+      "sample_id": "cn-h1",
+      "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "anchor_scope": "产品验证/重复订单与下一阶段",
+      "physical_pages": [
+        13,
+        18
+      ],
+      "must_keep": [
+        "每种型号及具体应用绑定其进度",
+        "收购完成与未来五年目标分开",
+        "即将送样/计划量产不抬高为实绩"
+      ],
+      "must_not_infer": [
+        "把同段多个器件合并阶段",
+        "报告期后/下半年计划算H1完成"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP07",
+      "sample_id": "du5-cn-gbits-call",
+      "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "anchor_scope": "说话人编号/时间戳与后段回答",
+      "physical_pages": null,
+      "must_keep": [
+        "匿名编号未映射时角色保持unknown，不设speaker2=管理层",
+        "存量运营计划、企稳不确定性、更新未定保留",
+        "买量会不会再等ASR歧义原样保留，不无音频强校正"
+      ],
+      "must_not_infer": [
+        "分析师倒算利润当公司披露",
+        "2000多用户补万单位",
+        "把会不会再强定不会"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP08",
+      "sample_id": "du5-us-msft-ex991",
+      "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "anchor_scope": "Bookings / RPO / FY27 definitions and outlook",
+      "physical_pages": null,
+      "must_keep": [
+        "指标定义与基数/重述年度",
+        "mechanical adjustment与no change to outlook",
+        "原Azure定义/恒汇率口径跟随局部展望"
+      ],
+      "must_not_infer": [
+        "新报告分部当新业务收购",
+        "机械调整当经营超预期上调",
+        "capex当收入"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP09",
+      "sample_id": "du5-cn-proya-q1",
+      "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "anchor_scope": "现金流回款减少/推广费增加",
+      "physical_pages": null,
+      "must_keep": [
+        "少量经营解释保留",
+        "常规财表/治理材料可不切片不摘要",
+        "如输出数值，期间/单位/方向必须正确"
+      ],
+      "must_not_infer": [
+        "数多就强制付费摘要",
+        "降噪删掉唯一经营解释"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    },
+    {
+      "id": "CP10",
+      "sample_id": "us-h1-vrsk-2025",
+      "source_sha256": "92bde7be303774a2f672a8fac7af50efe747df544afc9418ac7834ece42bc64e",
+      "anchor_scope": "10-Q three months vs six months; hosted subscriptions",
+      "physical_pages": null,
+      "must_keep": [
+        "Q2单季与H1累计各自列头",
+        "年度/季度预收早于确认与Q1现金季节性",
+        "订阅协议1至5年与收入占比六个月口径"
+      ],
+      "must_not_infer": [
+        "Q1季度报告代签H1",
+        "预收现金等于已确认收入",
+        "原HTML隐藏iXBRL token作可见正文"
+      ],
+      "required_observations": [
+        "source-side anchors",
+        "actual selected source refs",
+        "compiled task-local support/context",
+        "configured summary output and per-clause semantic review",
+        "RF actual read/use if applicable"
+      ]
+    }
+  ]
+}

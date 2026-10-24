@@ -778,7 +778,7 @@
     "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
   },
   "market_family_upgrade": {
-    "status": "FIVE_POLICY_COMPONENT_INDEPENDENT_PASS_AWAIT_NORMAL_PUBLICATION",
+    "status": "COMPONENT_AND_APPROVED_BASELINE_REVIEW_PASS_AWAIT_NORMAL_PUSH",
     "entry": "review/market-family-upgrade-20261024/task_scope.md",
     "samples_sha_verified_targeted_read": 13,
     "pdf_pages_targeted_read": 46,
@@ -811,6 +811,14 @@
     ],
     "us_true_six_month_sample": "us-h1-vrsk-2025",
     "provider_downloads": 0,
-    "failed_acquisition": "review/market-family-upgrade-20261024/us-ipo-acquisition-gap.json"
+    "failed_acquisition": "review/market-family-upgrade-20261024/us-ipo-acquisition-gap.json",
+    "local_source_commit": "912f6fbd",
+    "first_push_published": false,
+    "first_push_unit_passed": 8215,
+    "first_push_unit_failed": 1,
+    "first_push_unit_skipped_existing": 24,
+    "compatibility_followup_independent_passed": 112,
+    "compatibility_followup_review": "review/market-family-upgrade-20261024/independent-final/baseline-followup.json",
+    "behavior_checkpoints": "review/market-family-upgrade-20261024/behavior-checkpoints.json"
   }
 }
