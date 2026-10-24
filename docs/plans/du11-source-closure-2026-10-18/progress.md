@@ -861,3 +861,10 @@ M3 R5独审`PASS_REVIEWED_M3_SOURCE_BEHAVIOR`，报告绑定六份当前源码SH
 中微公司2026Q1真实正控再次回放后22 spans/1,340字符/13可用卡+1不可用卡，8300+、300+、Angnova 140:1、Domingo >700:1、薄膜设备224.23%均有来源卡；珀莱雅2026Q1负控4 spans/87字符/1可用卡，现金流原因被保留。零下载、零模型调用、两份PDF原件SHA不变。中微仍partial，未被证明的其他内容不提升为摘要。
 
 连续性/几何136P，当前组合346P，Ruff和diff-check通过，M4验收报告及结果JSON已保存。W13远端hook mode修复在受限环境出现4个隔离Git/sh环境错误后，正常本机Git环境该定向文件25/25通过。W13根修`4e593c71`与M3/M4源码及PWF`159770e9`已提交；现待正常推送并核对精确远端CI，未重跑8k全量。CI通过后按计划进入M5 provider启动前预算拒绝根因诊断。
+## 2026-10-24 M5 观测链与二次发现根修
+
+CWP AcquisitionCoordinator此前在本地准备阻止下载时丢弃唯一local_read_budget/1观察；新增严格operation-contract验证后将其透传，FF用现有filing-local-preparation-observation/1承接，不新建状态账本。独立真实路径E2E驱动RF→FF→CWP，设置offline socket拒绝器与marker provider；观察到source-group limit及limit+1计数，provider_started=false、0下载、marker不存在、路径不泄露。
+
+同一回归还发现issuer layout二次发现未复用historical scope journal/已有metadata，使已知旧期来源被重新当作未分类。修复后canonical scope 22项通过；合同/历史scope/E2E最终组合46项通过，Ruff、三模块mypy、host guard（68既有违规/0新增）、diff-check通过。CWP源码commit 0f64289e已由正常pre-commit提交，尚待PWF commit、push和精确CI。
+
+FF曾有6个pre-push测试因合成请求3秒总预算/Windows探针1秒预算被全套运行调度延迟耗尽；提高测试合成预算而保持生产deadline/清理/隔离规则后，8项聚焦回归通过，完整pre-push为933P/7既有skip/78 subtests，FF精确CI 40115441655 completed/success。旧Snowflake 2020 S-1原件目前不在公司池，未重试原请求；原历史bound仍OPEN。无provider调用、下载、模型调用、Dayu变更。本节点报告见review/market-family-upgrade-20261024/m5-local-budget-observation-20261024/report.md。

@@ -684,3 +684,10 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 真实离线回放中，中微8,300+台/180余产线、300多台量产、Angnova 140:1及客户认证、Domingo大于700:1及实验室验证、薄膜设备收入约224.23%都进入选中span/来源卡；珀莱雅保留“收回货款减少、推广费增加”的公司特定现金流说明，模板条款不进可用卡。中微仍是`partial`，其他未证明的连续段/页边界继续暂缓。两个原件SHA前后相同，零下载/零LLM调用。
 
 M4定向连续性和几何136P，当前M3/M4组合346P；Ruff、diff-check通过。实现、命中结果、work-unit各阶段计数与边界见`review/market-family-upgrade-20261024/m4-sparse-quarterly/report.md`及`discovery.json`。结论仍是按材料中实际业务信息密度选取，不按“季报”整体跳过。
+## 2026-10-24 M5 预算观察传递与 historical scope 二次发现
+
+真实FF→CWP→RF离线链此前在blocks_download处丢失LocalReadBudget.observation()，所以FF只收到泛化budget_exceeded；本轮按已有层职责接通local_read_budget/1，严格验证shape/边界，再投影进FF现有local-preparation observation。网络拒绝器和marker provider确认RF所见bound及计数为精确owner数据、provider未启动。新增合同畸形值反控覆盖unhashable triggered_bound，统一产生契约错误。
+
+另一项旧期次回归来自_discover_source_groups二次发现重新判定period scope，却未传同一个HistoricalCaptureScopes也未带已登记metadata_json。可信的历史commit记录因此被当成未知来源，导致会打开旧原件。现在二次发现复用请求journal并恢复已登记metadata，保护旧期排除。完整合同/历史scope/CWP→FF→RF离线E2E 46项通过；Ruff、3源文件mypy、host guard（68既有/0新增）、diff-check通过。源码commit 0f64289e已正常提交。
+
+FF第一轮push gate的6个失败后来确认为夹具把请求总预算3秒用在身份识别后还期待ensure启动，另把Windows进程probe自身启动放入1秒预算。只调大相应合成测试预算，没有改生产deadline行为；8个独立失败用例通过、完整pre-push 933 passed/7 skipped/78 subtests，FF精确CI 40115441655 success。无真实provider请求、下载、模型调用、Dayu代码改动。当前公司池无Snowflake原件，故旧S-1历史事件的具体触发bound仍OPEN，不能宣称已重放/确诊；观测链修复本身已验证。详见review/market-family-upgrade-20261024/m5-local-budget-observation-20261024/report.md。

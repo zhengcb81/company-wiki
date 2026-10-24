@@ -4,7 +4,7 @@
 
 ## Next Step
 
-最新状态（2026-10-24，覆盖旧Next Step）：W13已提交并推送；随后精确CI `40109033205` 暴露叙述筛选和跨页连续性五个回归。ROOT根修提交`c22a952f`，322项相关unit、4项integration、Ruff及diff-check通过；中微/珀莱雅真实季报原件复验SHA。根因、测试与样本收据见`review/market-family-upgrade-20261024/ci-regression-fix-20261024/report.md`。**当前下一步仅为**提交/推送PWF收据与根修，并检查精确新HEAD CI；不重跑8k全量。精确CI通过后按`remaining_root_causes.md`诊断M5 provider启动前预算拒绝，再继续摘要/cache/RF/四审及年度holdout循环。
+最新状态（2026-10-24，覆盖旧Next Step）：M5 CWP→FF→RF本地预算观察链已做根修；CWP在blocks_download时透传唯一、严格验证的`local_read_budget/1`；FF映射到已有`filing-local-preparation-observation/1`，provider未启动。同一最终CWP HEAD的合同、历史scope、跨仓E2E 46项通过；Ruff、3文件mypy、host-assumption guard和diff-check通过。canonical local group二次发现遗漏historical scope/已登记metadata的旧期次问题已修复，完整22项scope组通过。FF根修/测试已正常推送，精确CI `40115441655` 成功；CWP源码commit `0f64289e` 已完成，PWF更新与正常push pending。**当前下一步：** 提交/推送PWF并查精确CI。不能声称已查明旧Snowflake S-1事故触发bound：本地无该公司原件且未重跑原请求；此边界保留OPEN。CWP CI通过后按本计划转入正式摘要/cache恢复、RF消费与四审；不重跑8k全量。
 
 2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13接收不代表真实产品全量、远端CI或跨仓RF验收；这些分别由根接收记录和精确CI收据绑定。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
 

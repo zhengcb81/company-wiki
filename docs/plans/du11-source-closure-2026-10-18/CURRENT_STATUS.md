@@ -1,14 +1,14 @@
 # 当前项目状态与接手入口
 
-**最新状态（2026-10-24，覆盖以下旧段）：** 主线已推送的 `e3e7d2fb` 对应精确CI `40109033205` 暴露5个叙述筛选/跨页连续性回归。按根因修复后，四源码提交 `c22a952f` 已通过正常提交钩子；针对性单测322项、集成测试4项、Ruff及diff-check通过。M4中微/珀莱雅真实季报回放仍按来源SHA验收通过。当前待更新PWF并正常推送，再核对精确新HEAD CI；未重跑全量suite。验收证据：[CI回归根修报告](review/market-family-upgrade-20261024/ci-regression-fix-20261024/report.md)。
+**最新状态（2026-10-24，覆盖以下旧段）：** M5 找到并修复了 CWP→FF→RF 观测链的共同根因：CWP 在 `blocks_download` 时丢掉本地读取预算快照；FF 又未把 owner 诊断映射到既有 `filing-local-preparation-observation/1`。新回归证明 `local_read_budget/1` 的精确 phase/bound/counters 穿过现有层级，provider 未启动、网络/下载/模型调用均为零。独立历史期次回归还发现 source-group 二次发现遗漏 historical scope/已登记 metadata；已按原职责层补传，canonical scope 22 项通过。CWP源码提交 `0f64289e` 已通过正常pre-commit；同一最终代码HEAD的合同、历史scope、跨仓E2E组合46项通过，Ruff、定向mypy、host-assumption guard及diff-check通过。FF commit `e0d96426445e4b93bc6cc7a6e6014996ad0a777d` 已推送，远端CI [40115441655](https://github.com/zhengcb81/filing-fetch/actions/runs/40115441655) 成功（933 passed、7 skipped、78 subtests）。CWP待PWF提交、正常推送及精确CI。
 
-**当前唯一下一步：** 提交并推送本次PWF收据；推送时只按W13有界门执行已有提交范围检查，再观察精确新HEAD CI。如果CI仍失败，按失败测试根因修复，继续使用窄范围回归。新HEAD CI成功后按`remaining_root_causes.md`进入M5 US IPO provider启动前预算拒绝诊断；随后继续正式摘要/cache恢复、RF消费与四审、annual14和holdout循环。
+**当前唯一下一步：** 提交本 PWF 收据，与CWP源码`0f64289e`一并正常推送，核对精确新HEAD CI；不重跑8k全量。观测合同和离线跨仓链已验收，但当前 lake 没有 Snowflake 公司原件，未重放原始 S-1 请求，所以原事件究竟触发哪一项本地 bound 仍明确 OPEN。之后继续配置摘要、引用与缓存恢复的真实验收，再做 RF 实际消费/四审、annual14 和未用于调规则的新公司 holdout 循环。
 
 **M3 验收范围：** 596 个受影响测试通过（30.43 秒），Ruff 与 `git diff --check` 通过；R5 独审绑定六份源码 SHA 和五份真实原件，11 项断言通过。MSFT指标定义/解释性从句不会冒充实际增长；真实增长和机械指引仍可读。五份回放范围、partial 状态和未验收项见 [M3 R5 报告](review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/report.md)。珀莱雅2026Q1原件共12页，视觉核对的第1、3、11页与逐页文本确认：这份季报基本是财务表、股东信息和附表；第3页确有经营现金流变动原因，未发现另有经营回顾/新品/渠道/出海段落。因此该文种应保留这条实质解释，其余常规财务数据继续由结构化API覆盖，不能把这一例推广成所有季报都可跳读。
 
 **跨市场策略进度：** M3的真实指标定义/解释性从句修复已通过R5独审；此前596项相关测试和Ruff通过，五份真实来源回放保持原件SHA。M4现以珀莱雅2026Q1为负控、中微公司2026Q1为正控完成真实离线回放：中微的8300+、300+、Angnova 140:1、Domingo 700:1及薄膜设备224.23%事实进入来源卡；珀莱雅仅保留现金流变动原因，法定补助模板没有变成业务卡。正控覆盖仍为partial，未闭合句和不明页边界继续暂缓。
 
-**下一步：** 提交推送W13根修与M3/M4本次策略改动，核对精确HEAD CI；随后按剩余根因计划检查M5 provider启动前预算拒绝诊断，再继续正式摘要/cache恢复、RF采用与四审、年度14项和holdout循环。未重跑全量单测；本轮无模型调用/下载/原件修改。
+**本轮下一步：** CWP源码`0f64289e`已经常规提交；PWF收据提交后正常推送并核对精确HEAD CI。M5传递机制经同一最终HEAD的46项合同/历史scope/跨仓离线E2E复验；原Snowflake S-1的精确历史bound未重放（公司原件当前不在本地），不把机制验证误报成原事件已确诊。其后进入正式摘要/cache恢复、RF消费与四审、annual14及holdout。当前无模型调用、provider请求、下载或原件修改。
 
 ---
 

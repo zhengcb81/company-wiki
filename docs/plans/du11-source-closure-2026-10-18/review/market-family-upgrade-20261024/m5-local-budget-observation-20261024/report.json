@@ -1,0 +1,56 @@
+{
+  "schema_version": "company-wiki-m5-observation-receipt/1",
+  "date": "2026-10-24",
+  "status": "IMPLEMENTATION_GREEN_CWP_PUBLICATION_PENDING_ORIGINAL_SNOWFLAKE_BOUND_OPEN",
+  "cwp_source_commit": "0f64289e",
+  "ff_source_commit": "324ced2",
+  "ff_test_root_fix_commit": "e0d9642",
+  "ff_ci": {
+    "id": 40115441655,
+    "head_sha": "e0d96426445e4b93bc6cc7a6e6014996ad0a777d",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/40115441655"
+  },
+  "cwp_validation": {
+    "tests": 46,
+    "historical_scope_tests": 22,
+    "duration_seconds": 26.44,
+    "mypy_source_files": 3,
+    "ruff": "pass",
+    "host_assumption_guard": "68 existing baseline violations, 0 new",
+    "diff_check": "pass",
+    "pre_commit": "pass"
+  },
+  "ff_validation": {
+    "targeted_regressions": "8 passed",
+    "pre_push_gate": {
+      "passed": 933,
+      "skipped": 7,
+      "subtests_passed": 78,
+      "duration_seconds": 127.92,
+      "result": "pass"
+    }
+  },
+  "offline_e2e": {
+    "route": "RF source_preparation -> FF -> CWP ensure",
+    "bound": "max_discovery_groups",
+    "provider_started": false,
+    "downloads": 0,
+    "network_attempts": 0,
+    "model_calls": 0,
+    "provider_marker_written": false,
+    "local_path_leaked": false
+  },
+  "historical_scope_root_fix": {
+    "root_cause": "second-pass source group discovery omitted the request historical journal and registered metadata",
+    "regression": "test_real_historical_commit_request_excludes_old_period",
+    "result": "pass"
+  },
+  "snowflake_2020_s1_original_present_locally": false,
+  "historical_original_trigger_bound_replayed": false,
+  "downloads": 0,
+  "provider_requests": 0,
+  "model_calls": 0,
+  "dayu_modified": false,
+  "next": "Commit/push the PWF receipt with normal gates, inspect exact CWP CI, then continue formal summary/cache recovery and RF consumption/review. Keep the historical Snowflake bound open until the original sample/request can be safely replayed."
+}

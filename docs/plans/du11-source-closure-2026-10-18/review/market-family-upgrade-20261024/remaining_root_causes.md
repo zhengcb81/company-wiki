@@ -30,6 +30,14 @@
 
 正式FF→CWP调用返回budget_exceeded、provider_started=false、0HTTP/0下载、费用null，母预算耗尽没有证据；见us-ipo-acquisition-gap.json。CWP已有local_preparation blocks_download分支及LocalReadBudget.observation（phase/limit/counter）；需将真实诊断透传已有upstream_cause，而非再加审批。先只读重建该请求本地发现/准备的计量，定位究竟字节/候选/遍历限制；不重跑同一失败下载、不盲目升10MB或归咎供应商付费。若本地索引漏筛而扫全湖，按实体/期间/类型先筛候选、共享一次观察，在所属层TDD根修。Dayu代码保持纯外部、不改。
 
+### 2026-10-24 owner observation 链修复结果
+
+- 根因：`AcquisitionCoordinator.ensure` 在 local preparation 阻止下载时，只复制 status/reason/causes；`LocalReadBudget.observation()` 的 phase、限制、消耗和触发bound在CWP层丢失，故FF只见`budget_exceeded`而没有owner计量。修复将且仅将零/一个`local_read_budget/1`并入已有`local_preparation`；重复观察拒绝。CWP `operation_contract` 对schema、usage scope、key set、令牌、limits、counters、elapsed及bound作有界严格验证，无路径字段；FF把它映射进已有`filing-local-preparation-observation/1`，不创建新诊断账本或权限门。
+- 离线跨仓E2E故意令source-group discovery超限，并安装网络拒绝器、marker provider；RF结果中可见唯一触发bound及精确`limit+1`，`provider_started=false`、0 downloads、provider marker absent、无`local_io_usage`，原error中不含lake路径。测试不伪称复现了真实Snowflake原件。
+- 同轮canonical regression暴露另一共同条件：issuer layout二次发现调用`qualified_source_scope`时没有historical capture journal，也没读已有登记的`metadata_json`。known old-period S-1因而失去trusted vintage，并可被打开。修复在二次发现中复用同一个`HistoricalCaptureScopes`，从已登记metadata恢复document kind/period约束；原`test_real_historical_commit_request_excludes_old_period`由RED转GREEN，`test_canonical_acquisition_scope.py` 22/22通过。
+- FF首轮pre-push的6个失败不属于production行为回归：请求超时用3秒涵盖识别和被测ensure；Windows process probe用1秒涵盖测试子进程自身启动，满套运行下测试在目标子进程启动前超时。只扩大合成请求/探针时间窗，保留端到端总deadline、timeout cleanup和“不杀无关进程”断言；相关8例8/8、两个完整FF受影响模块见FF记录。FF commit `324ced2` 加测试修复 `e0d9642` 已推送，远端CI `40115441655` success。
+- 当前CWP验证：`test_source_operation_v2.py`、`test_canonical_acquisition_scope.py`、`test_local_budget_observation_rf_e2e.py` 共45/45通过；Ruff、acquisition/local_reconcile/operation_contract三文件mypy及diff-check通过。CWP发布及精确CI待本次正常提交/推送。当前`companies/`无Snowflake目录，故原Snowflake 2020 S-1的历史本地bound仍未被观测；保持OPEN。0 provider请求、0下载、0模型调用、原件不改，Dayu未改。
+
 ## 后续大节点
 
 M1冻结准确的源侧语义检查点 → M2/M3/M4共享修复及集中独审 → 正式配置摘要/引用和缓存恢复 → RF实际采用/四审 → 未用于调规则的新公司/版式。当前五family匹配/请求组件通过不等于本页已完成，不能冒称25份文档或全部15市场文种格生产验收通过。
