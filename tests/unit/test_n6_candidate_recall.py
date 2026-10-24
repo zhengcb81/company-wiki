@@ -190,6 +190,31 @@ def test_high_information_operating_facets_are_distinguished_for_fair_selection(
         assert topic in fact.topics, (name, fact)
 
 
+@pytest.mark.parametrize("text,topic", (
+    (
+        "研究团队筛选出420000种新化合物，并推动310个候选分子从发现阶段进入开发。",
+        "research_pipeline",
+    ),
+    ("通过拓展全球客户，公司持续带来超过20%的新增客户。", "customer_acquisition"),
+    ("2025年9月公司提前完成新生产基地建设。", "capacity_projects"),
+    ("前五大客户合计占营业收入的35%。", "customer_concentration_risk"),
+    ("美元兑本币汇率波动可能造成汇兑损失并影响经营结果。", "currency_risk"),
+    ("行业竞争持续加剧，竞品价格下降可能压缩产品利润空间。", "competition_risk"),
+))
+def test_new_operating_facets_do_not_change_pinned_legacy_selector_versions(
+    text: str,
+    topic: str,
+):
+    from company_wiki.source_catalog.narrative_evidence import _candidate_rules
+
+    for selector_version in ("0.6.0", "0.7.0", "0.7.1"):
+        legacy = _candidate_rules(selector_version=selector_version)
+        assert topic not in legacy.operating_facts(text).topics, selector_version
+
+    current = _candidate_rules(selector_version="0.8.0")
+    assert topic in current.operating_facts(text).topics
+
+
 @pytest.mark.parametrize("text", (
     "公司计划拓展更多客户，但未披露新客户数量或占比。",
     "The company acquired a 20% stake in a new plant.",

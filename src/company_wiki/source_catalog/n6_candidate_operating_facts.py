@@ -264,7 +264,7 @@ _SUPPLY_DELIVERY_RISK = re.compile(
     re.IGNORECASE,
 )
 
-_DETECTOR_SIGNALS: tuple[
+_CURRENT_SELECTOR_ONLY_SIGNALS: tuple[
     tuple[re.Pattern[str], tuple[str, ...], tuple[str, ...], int], ...
 ] = (
     (_RESEARCH_PIPELINE, ("research_pipeline",), ("quantified_research_pipeline",), 3),
@@ -273,6 +273,14 @@ _DETECTOR_SIGNALS: tuple[
     (_CUSTOMER_CONCENTRATION, ("customer_concentration_risk",), ("business_risk_or_constraint",), 3),
     (_CURRENCY_EXPOSURE, ("currency_risk",), ("business_risk_or_constraint",), 3),
     (_COMPETITIVE_PRESSURE, ("competition_risk",), ("business_risk_or_constraint",), 3),
+)
+
+# Frozen at the pre-W08 detector boundary. Explicit 0.6/0.7 selectors must not
+# inherit later recall facets unless a deliberate selector-version migration
+# updates this tuple and its pinned output contracts.
+_LEGACY_DETECTOR_SIGNALS: tuple[
+    tuple[re.Pattern[str], tuple[str, ...], tuple[str, ...], int], ...
+] = (
     (_PROJECT_TIMELINE, ("capacity_projects",), ("project_execution_timeline", "project_plan_or_status"), 4),
     (_ADOPTION_MILESTONE, ("core_business",), ("applied_operating_milestone",), 3),
     # Classification only: one adoption action must not gain duplicate score.
@@ -304,21 +312,30 @@ _DETECTOR_SIGNALS: tuple[
     (_SUPPLY_DELIVERY_RISK, ("capacity_projects",), ("business_risk_or_constraint",), 3),
 )
 
+# Current behavior is the explicitly versioned legacy set plus the new facets.
+_DETECTOR_SIGNALS = (*_CURRENT_SELECTOR_ONLY_SIGNALS, *_LEGACY_DETECTOR_SIGNALS)
+
 # Union used to find minimal unit windows whose joined text carries a fact that
 # no single unit expresses (a sentence split across PDF blocks).
 OPERATING_FACT_JOIN = re.compile(
     "|".join([*(pattern.pattern for pattern, _, _, _ in _DETECTOR_SIGNALS), SCOPE_CHANGE_JOIN.pattern]),
     re.IGNORECASE,
 )
+LEGACY_OPERATING_FACT_JOIN = re.compile(
+    "|".join([*(pattern.pattern for pattern, _, _, _ in _LEGACY_DETECTOR_SIGNALS), SCOPE_CHANGE_JOIN.pattern]),
+    re.IGNORECASE,
+)
 
 
-def detect_operating_fact(text: str) -> OperatingFact:
-    """Return the accumulated generic operating-fact signal for one text span."""
+def _detect_operating_fact(
+    text: str,
+    signals: tuple[tuple[re.Pattern[str], tuple[str, ...], tuple[str, ...], int], ...],
+) -> OperatingFact:
     reasons: list[str] = []
     topics: list[str] = []
     score = 0
     matched = False
-    for pattern, fact_topics, fact_reasons, fact_score in _DETECTOR_SIGNALS:
+    for pattern, fact_topics, fact_reasons, fact_score in signals:
         if pattern.search(text) is None:
             continue
         matched = True
@@ -348,4 +365,20 @@ def detect_operating_fact(text: str) -> OperatingFact:
     )
 
 
-__all__ = ["OPERATING_FACT_JOIN", "OperatingFact", "detect_operating_fact"]
+def detect_operating_fact(text: str) -> OperatingFact:
+    """Return the current expanded operating-fact signal for one span."""
+    return _detect_operating_fact(text, _DETECTOR_SIGNALS)
+
+
+def detect_legacy_operating_fact(text: str) -> OperatingFact:
+    """Return the signal set pinned to explicit 0.6/0.7 selector versions."""
+    return _detect_operating_fact(text, _LEGACY_DETECTOR_SIGNALS)
+
+
+__all__ = [
+    "LEGACY_OPERATING_FACT_JOIN",
+    "OPERATING_FACT_JOIN",
+    "OperatingFact",
+    "detect_legacy_operating_fact",
+    "detect_operating_fact",
+]

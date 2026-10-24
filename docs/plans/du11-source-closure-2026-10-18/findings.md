@@ -535,3 +535,9 @@ TDD暴露并修复的合同根因：① `max_chars=0`是合法硬上限，但`ch
 V4独立复核把“收入确认 + 履约义务 + 客户控制”纯名词触发经营事件判定列为P2。根因在共享source-purpose owner的客户控制关系规则只查词共现，没有要求实际取得/转移控制或交付关系。先写中英文纯会计政策反例并观测RED，再要求客户取得/获得控制、控制转移或向客户交付/提供等真实关系；旧业务正例及履行期间、预收转收入规则仍保留。119项聚焦测试、2155项自然测试/11既有skip、Ruff、mypy通过；V5独立复核确认该根因已关闭且无新工程blocker。
 
 同一真实249页原件V5仍选96 spans/7,767字符，工作8,845,814/16M未耗尽，14项目标为7pass/5partial/2missing。独审展开55个task context，未发现Testing/Biology兄弟业务串入。A12指引和完整前提进入`t31`；A13政策入选但确认金额及业务期间分类仍缺。A03/A04缺精确业务/财务数据；A01/A02/A05/A09/A13仍有部分范围、口径或跨任务关系缺口。V5的两项checkpoint oracle不是冻结14项目标清单；该结果只说明选中证据可见性，不是summary/model/business PASS。对每个未闭目标下一步由有界诊断定位candidate/source role/dependency/offer-admit/task closure；必要的精确财务值再从现有API/SourceRef取得，叙述引擎负责业务关系。V5回执绑定见`review/r1-w08-crosspage-20261024/annual14-v5/`。本轮无收费模型调用、下载或原文复制。
+
+## 2026-10-24 W08 pre-push旧selector指纹失败的根因
+
+正常pre-push在本地提交`808fca1484b01a5f86768f79a119f28764fe143a`首次阻断：affected-unit共6,669项，6,655 passed、11既有skip、3 failed；三项失败均是显式selector 0.6.0/0.7.0/0.7.1的同一份真实CN原生输入输出SHA变化。临时只将`n6_candidate_operating_facts.py`恢复为提交父版，三项全绿；依次只恢复本轮另外6个变更源码文件的父版均仍失败。根因是新增六类N6 detector无版本边界，进入显式旧版共享的`detect_operating_fact`和操作事实分组。
+
+修复保留旧事实检测、旧finance-only判断及旧join表达式，0.6/0.7明确路由到旧版，当前0.8/0.9保留扩展检测器；固定gold测试断言未改。增加的版本边界用例证明新signal只进入0.8及更新策略。9个直接相关测试文件349 passed，三个旧fingerprint及新增边界断言共5项通过；Ruff与`mypy src` 372文件无错。独立复审发现旧集合若由新集合“排除六个已知项”生成会让未来信号自动进入旧版，故改成显式冻结历史tuple，由当前tuple组合六个新facet和冻结旧集合；六类facet分别覆盖0.6/0.7.0/0.7.1/0.8，独立复核9项通过。最终受影响9文件357 passed，Ruff及mypy 372文件全绿。该修复及PWF待正常提交、pre-push、push和精确CI；不以局部绿替代完整门禁。

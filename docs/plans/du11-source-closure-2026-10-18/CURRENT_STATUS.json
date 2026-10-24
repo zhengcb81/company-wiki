@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_V5_ANNUAL14_PARTIAL_ROOT_FIX_PENDING_PUBLICATION",
+  "overall_status": "ACTIVE_W08_V5_CONTENT_PARTIAL_LEGACY_COMPAT_FIX_PENDING_PUBLICATION",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -125,7 +125,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_V5_7_PASS_5_PARTIAL_2_MISSING_ROOTFIX_PUBLISH_PENDING_W10_MATRIX_W12_OPEN",
+      "status": "ACTIVE_W08_V5_7_PASS_5_PARTIAL_2_MISSING_LEGACY_COMPAT_FIX_PENDING_PUSH_W10_MATRIX_W12_OPEN",
       "mainline": true
     },
     {
@@ -154,7 +154,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "按V5的14项目标逐项诊断source candidate、来源职责、semantic dependency、offer/admit/withhold及task/model闭包；优先分清A03/A04精确财务值应由现有API/SourceRef提供，和A01/A02/A05/A09/A13叙述业务关系缺口。按共用根因TDD修复，不抬96/48000/16M与8/4/2048限额，不用aggregate budget_full推断单目标原因。修复后仅对同一真实249页来源回放一个新版本并独立复核同一冻结14项；通过后进入正式摘要、cache恢复、W09/W10实际采用矩阵和W12四审。",
+  "next_step_now": "正常pre-push曾在本地提交808fca14上拦下3个旧selector固定指纹。现已查明并修复N6新增六类信号影响显式0.6/0.7版本的问题；旧信号集显式冻结，当前信号由旧集与六个新facet组成。独立复审无剩余blocker，固定指纹及六项边界共9项通过；9个相关测试文件357项通过，Ruff及mypy src 372文件均通过。下一步提交兼容根修与PWF，再走原pre-push及正常push，观察该提交精确GitHub CI。发布后继续按V5逐目标诊断annual14缺口，保持既有限额，再择大节点进行同一真实来源回放和14项复核。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -211,7 +211,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T05:38:43Z",
+  "last_updated_at": "2026-10-24T06:01:39Z",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -330,7 +330,7 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "V5_ROOTFIX_INDEPENDENT_REVIEW_NO_ENGINEERING_BLOCKER_ANNUAL14_CONTENT_7_PASS_5_PARTIAL_2_MISSING",
+    "W08": "V5_CONTENT_PARTIAL_LEGACY_SELECTOR_COMPATIBILITY_ROOTFIX_TESTED_PENDING_PUBLICATION",
     "W08_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
     "W08_ref": "review/r1-w08-crosspage-20261024/root-acceptance.json",
     "W09": "MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
@@ -347,7 +347,7 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "V5 control-noun classification P2 is root-fixed, focused119P/natural2155P11skip/Ruff/mypy and independent review pass; exact same 249-page annual14 selection remains 7P5partial2missing. Diagnose per target through candidate/source-role/dependency/offer-admit/task closure, close shared roots, publish exact code+PWF, then one same-source V6 and independent 14-target review before formal summary/cache recovery, W09/W10 adoption matrix and W12. No model call, download or raw copy in V5.",
+    "W08_pending_work": "First push attempt for local commit 808fca1484b01a5f86768f79a119f28764fe143a was correctly blocked by 3 pinned 0.6/0.7 native selector fingerprint tests (6655 passed, 11 skipped, 3 failed). Differential isolation showed reverting n6_candidate_operating_facts alone restores the fingerprints; reverting each other changed source alone does not. Root cause: six new operating-fact signals were wired into a globally shared detector used by old selector versions. The root fix explicitly freezes the pre-W08 legacy signal tuple and composes current signals from the six new facets plus that legacy tuple; legacy detector/business/finance-rejection/window rules route only to 0.6/0.7. Independent re-review found no blocker and independently passed 3 pinned fingerprints plus six facet boundaries (9 passed). The nine related test files pass 357 tests; Ruff passes; mypy src passes 372 files. No assertions changed or hooks bypassed. Commit/push/precise CI pending; annual14 V5 remains 7 pass/5 partial/2 missing.",
     "W08_selection_trace_contract": {
       "status": "PUBLISHED_EXACT_CI_SUCCESS",
       "related_tests_passed": 171,
@@ -534,7 +534,19 @@
       "binds": "V2 actual replay only, not later V3",
       "review": "review/r1-w08-crosspage-20261024/annual14/review.json"
     },
-    "W08_current_v5_review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json"
+    "W08_current_v5_review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json",
+    "W08_legacy_selector_compatibility": {
+      "status": "ROOT_CAUSE_FIXED_INDEPENDENT_REVIEW_PASSED_PUBLICATION_PENDING",
+      "failed_push_commit": "808fca1484b01a5f86768f79a119f28764fe143a",
+      "failure": "affected units: 6655 passed, 11 skipped, 3 failed; three legacy selector output fingerprints changed",
+      "root_cause": "Six newly added N6 operating-fact detectors were added to a shared detector consumed by explicit selector versions 0.6.0/0.7.0/0.7.1; legacy output semantics were therefore not version-isolated.",
+      "fix": "Freeze the pre-W08 legacy signal tuple explicitly; compose current signals as the six new facets plus that immutable tuple. Route 0.6/0.7 through legacy detector, business detector, finance rejection and legacy join.",
+      "focused_tests": "357 passed across nine related test files; independent fingerprint and six-facet boundary rerun: 9 passed",
+      "ruff": "PASS",
+      "mypy_src": "372 files; 0 errors",
+      "fingerprint_assertions_changed": false,
+      "hook_bypassed": false
+    }
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",

@@ -78,6 +78,7 @@ class GroupCandidateRules:
     progress: re.Pattern[str] = _NEVER
     recency: re.Pattern[str] = _NEVER
     downstream_center_timeline: re.Pattern[str] = _NEVER
+    operating_fact_join: re.Pattern[str] = OPERATING_FACT_JOIN
 
 
 @dataclass(frozen=True)
@@ -524,7 +525,7 @@ def _add_operating_fact_windows(
     windows = _merge_fact_windows(
         tuple(
             _complete_fact_window(members, start, end, rules)
-            for start, end in rules.window_finder(members, OPERATING_FACT_JOIN)
+            for start, end in rules.window_finder(members, rules.operating_fact_join)
         ),
         members=members,
     )

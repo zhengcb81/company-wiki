@@ -696,3 +696,9 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 以同一真实249页来源回放V5：1,533候选、96 selected spans/7,767字符、8,845,814/16,000,000工作量；2项运行checkpoint通过，零模型调用/下载/raw copy。与checkpoint oracle分开的冻结14项清单独审7pass/5partial/2missing；55个编译任务context未见Testing/Biology兄弟业务串入。A03/A04仍missing，A01/A02/A05/A09/A13仍partial；A12前提已同任务可见，A13具体确认金额/业务期间仍缺。详细逐项状态、代码/测试哈希及准确结论见`review/r1-w08-crosspage-20261024/annual14-v5/review.md/json`；正式摘要与模型结果仍未验收。
 
 本轮无外部模型费用、无业务文档下载、无raw copy。用户再次确认W11-CWP-SOURCES A/B/C全流程完成并推送；该交付进入PWF记录，ROOT真实IR业务材料检查仍按其独立收据状态OPEN。
+
+## 2026-10-24T05:55:48Z W08 pre-push旧selector指纹根因修复
+
+首次正常push被pre-push拦下：受影响unit测试6669项，6655通过、11既有skip、3失败。失败都来自`test_stage_classifier_explicit_legacy_native_fingerprint_unchanged`的0.6.0/0.7.0/0.7.1参数，期望`54c4bd…`、实际`d220d0…`。逐源反事实验证证明：仅将新增N6候选源码恢复提交父版本，三个指纹立即恢复；分别只恢复其余每个改动源码文件，指纹仍失败。根因是W08六个新N6信号被接入全版本共用detector。
+
+生产修复明确拆开旧版检测器、旧business fact/finance-only路径和旧group join；0.6/0.7继续旧规则，0.8保留新信号。独立复审发现由“新tuple排除已知六项”生成旧集合存在未来漏隔离风险；改成显式冻结历史tuple，并以新增六facet + 历史tuple组成当前检测器。六个facet分别验证0.6.0/0.7.0/0.7.1不变、0.8启用；固定指纹及边界独立复核9P。最终9个相关测试文件357P、Ruff PASS、`mypy src` 372文件0错。未修改原金标断言、未绕过pre-push。失败提交`808fca1484b01a5f86768f79a119f28764fe143a`仍未推送；下一步提交当前修复后重跑原hook。此事件不改变V5年度14目标的7P/5partial/2missing业务结论。

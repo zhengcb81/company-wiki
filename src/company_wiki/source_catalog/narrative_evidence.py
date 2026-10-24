@@ -21,7 +21,17 @@ import unicodedata
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
 
 from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
-from .narrative_business_policy import detect_business_fact, reject_finance_only_text
+from .n6_candidate_operating_facts import (
+    LEGACY_OPERATING_FACT_JOIN,
+    OPERATING_FACT_JOIN,
+    detect_legacy_operating_fact,
+)
+from .narrative_business_meaning import (
+    detect_legacy_business_fact,
+    reject_finance_only_text,
+    reject_legacy_finance_only_text,
+)
+from .narrative_business_policy import detect_business_fact
 from .narrative_business_groups import enrich_business_groups
 from .narrative_context import ContextRules, build_section_context
 from .narrative_document import (
@@ -2388,6 +2398,8 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
         heading_only=_HEADING_ONLY,
         static_definition=_STATIC_DEFINITION,
     )
+    if effective == "0.6.0":
+        return replace(rules, operating_facts=detect_legacy_operating_fact)
     if effective == "0.8.0":
         from .narrative_business_groups import (
             _operating_fact,
@@ -2403,8 +2415,8 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
     if effective in {"0.7.0", "0.7.1"}:
         return replace(
             rules,
-            operating_facts=detect_business_fact,
-            reject_text=reject_finance_only_text,
+            operating_facts=detect_legacy_business_fact,
+            reject_text=reject_legacy_finance_only_text,
         )
     return rules
 
@@ -2495,6 +2507,7 @@ def select_narrative_evidence(
         from .narrative_reading import select_reading_evidence
         return select_reading_evidence(parsed, title=title, existing_kind=existing_kind,
                                       max_selected=max_selected, work_budget=work_budget)
+    candidate_rules = _candidate_rules(selector_version=effective_version)
     original = parsed
     parsed = matching_document(parsed)
     route = route_document(
@@ -2531,6 +2544,12 @@ def select_narrative_evidence(
         rules=GroupCandidateRules(
             topics=_topics,
             window_finder=_minimal_matching_unit_windows,
+            operating_facts=candidate_rules.operating_facts,
+            operating_fact_join=(
+                LEGACY_OPERATING_FACT_JOIN
+                if effective_version in {"0.6.0", "0.7.0", "0.7.1"}
+                else OPERATING_FACT_JOIN
+            ),
             project_heading=_PROJECT_SECTION_HEADING,
             business_heading=_BUSINESS_SECTION_HEADING,
             heading_only=_HEADING_ONLY,
@@ -2543,9 +2562,7 @@ def select_narrative_evidence(
             quantified_market_coverage_target=_QUANTIFIED_MARKET_COVERAGE_TARGET,
             permit_milestone=_PERMIT_ACQUIRED_MILESTONE,
             new_product_milestone=_NEW_PRODUCT_COMMERCIALIZATION,
-            new_product_detector=_candidate_rules(
-                selector_version=effective_version
-            ).new_product_detector,
+            new_product_detector=candidate_rules.new_product_detector,
             project_rationale=_PROJECT_RATIONALE_SIGNAL,
             downstream_extension=_DOWNSTREAM_BUSINESS_EXTENSION,
             project_plan=_PROJECT_PLAN,
@@ -2583,7 +2600,7 @@ def select_narrative_evidence(
     previous_ids = {candidate.unit.unit_id for candidate in neighbors.candidates}
     dropped_financial -= sum(
         assess_unit(
-            candidate.unit, _candidate_rules(selector_version=effective_version)
+            candidate.unit, candidate_rules
         ).dropped_financial
         for candidate in projects.candidates
         if candidate.unit.unit_id not in previous_ids
@@ -2595,7 +2612,7 @@ def select_narrative_evidence(
         final_candidates = tuple(
             candidate
             for candidate in final_candidates
-            if not reject_finance_only_text(candidate.unit.raw_text)
+            if not candidate_rules.reject_text(candidate.unit.raw_text)
         )
         group_options = {
             "respect_native_structure": effective_version in {"0.7.1", "0.8.0"}
@@ -2606,7 +2623,7 @@ def select_narrative_evidence(
             parsed.units,
             initial_candidates=final_candidates,
             initial_group_ids=final_group_ids,
-            rules=_candidate_rules(selector_version=effective_version),
+            rules=candidate_rules,
             atomic_owners=enriched.atomic_owners
             if effective_version == "0.8.0"
             else (),

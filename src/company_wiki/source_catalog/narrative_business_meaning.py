@@ -5,9 +5,14 @@ here. Legacy meaning predicates are preserved; consumers choose their policy.
 """
 from __future__ import annotations
 
+from collections.abc import Callable
 import re
 
-from .n6_candidate_operating_facts import OperatingFact, detect_operating_fact
+from .n6_candidate_operating_facts import (
+    OperatingFact,
+    detect_legacy_operating_fact,
+    detect_operating_fact,
+)
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
 
 _OBJECT = re.compile(
@@ -184,9 +189,11 @@ def _business_fact(text: str) -> OperatingFact:
     return OperatingFact(True, tuple(topics), tuple(reasons), 3, False)
 
 
-def detect_business_fact(text: str) -> OperatingFact:
-    """Extend the unchanged legacy fact detector with explicit business meaning."""
-    legacy = detect_operating_fact(text)
+def _detect_business_fact(
+    text: str,
+    operating_detector: Callable[[str], OperatingFact],
+) -> OperatingFact:
+    legacy = operating_detector(text)
     business = _business_fact(text)
     return OperatingFact(
         eligible=legacy.eligible or business.eligible,
@@ -197,10 +204,26 @@ def detect_business_fact(text: str) -> OperatingFact:
     )
 
 
+def detect_business_fact(text: str) -> OperatingFact:
+    """Combine current operating signals with the reusable business grammar."""
+    return _detect_business_fact(text, detect_operating_fact)
+
+
+def detect_legacy_business_fact(text: str) -> OperatingFact:
+    """Combine historical operating signals with the original business grammar."""
+    return _detect_business_fact(text, detect_legacy_operating_fact)
+
+
 def reject_finance_only_text(text: str) -> bool:
     """Reject a financial-growth subject without concrete operating meaning."""
     return (_FINANCE.search(text) is not None and not _business_fact(text).eligible
         and not detect_operating_fact(text).eligible)
+
+
+def reject_legacy_finance_only_text(text: str) -> bool:
+    """Preserve finance-only rejection for explicitly pinned legacy selectors."""
+    return (_FINANCE.search(text) is not None and not _business_fact(text).eligible
+        and not detect_legacy_operating_fact(text).eligible)
 
 
 
