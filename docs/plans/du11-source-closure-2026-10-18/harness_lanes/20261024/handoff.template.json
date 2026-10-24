@@ -1,0 +1,68 @@
+{
+  "schema_version": "r1-harness-handoff/1",
+  "package_id": "REPLACE",
+  "status": "COMPLETE_OR_INCOMPLETE_EXTERNAL_BLOCKER",
+  "code_base_commit": "REPLACE",
+  "start_head": "REPLACE",
+  "final_head": "REPLACE",
+  "branch": "REPLACE",
+  "workdir": "REPLACE",
+  "changed_paths": [],
+  "requirements": [
+    {
+      "id": "REPLACE",
+      "status": "PASS_FAIL_EXTERNAL_LIMIT_NOT_APPLICABLE",
+      "evidence": {
+        "path": "REPLACE",
+        "locator": "REPLACE",
+        "sha256": "REPLACE"
+      }
+    }
+  ],
+  "artifacts": [],
+  "tests": [
+    {
+      "command": "REPLACE",
+      "exit_code": null,
+      "result": "REPLACE",
+      "log_path": "REPLACE",
+      "log_sha256": "REPLACE"
+    }
+  ],
+  "independent_review": {
+    "agent_role": "REPLACE",
+    "report_md": "REPLACE",
+    "report_json": "REPLACE",
+    "reviewed_sha256": {},
+    "issues": [],
+    "all_internal_findings_fixed_and_rechecked": false,
+    "conclusion": "REPLACE",
+    "reviewed_code_commit": "REPLACE_LAST_REVIEWED_CODE_COMMIT"
+  },
+  "protected_inputs_unchanged": null,
+  "cleanup": {
+    "initial_inventory": "REPLACE",
+    "final_inventory": "REPLACE",
+    "restored": null
+  },
+  "new_model_calls": 0,
+  "new_network_calls": 0,
+  "new_downloads": 0,
+  "footprint": {
+    "delivery_bytes": null,
+    "raw_copies": 0,
+    "peak_bytes": null
+  },
+  "external_limits": [],
+  "interface_requests": [],
+  "root_next_actions": [],
+  "git": {
+    "working_tree_explained": false,
+    "push_status": "REPLACE",
+    "mainline_merged": false,
+    "skills_installed": false
+  },
+  "quality_scope": "Package only; no global business/forecast acceptance",
+  "reviewed_code_commit": "REPLACE_LAST_REVIEWED_CODE_COMMIT",
+  "scope_note": "Engineering package only. No source truth, company audit PASS, or mainline release is implied."
+}

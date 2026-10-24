@@ -10,6 +10,8 @@ V5已用同一真实249页来源完成一次新选材：96/7,767字符、工作8
 
 **W11状态：** W11-CWP-SOURCES A/B/C全流程已由用户确认完成并推送，卡片关闭；ROOT的真实IR原件与内容覆盖验收仍按单独业务证据处理，不重开作者施工卡。
 
+**独立分包：** [20261024三卡总入口](harness_lanes/20261024/README.md)：W13-CWP-GATES（日常push有界快反馈）、W14-RF-CLEAN-CHAIN（既有三仓离线E2E清洁复现）、W15-AUDIT-PORTABLE（工程证据移位回放）。独占worktree及子PWF已提交准备，当前READY_NOT_DISPATCHED，三个包可同时启动；最终实现必须独立agent全面审查、修完全部内部发现后交接。ROOT继续上述annual14下一步，不写外包的调度/测试/工具范围。没有增加小节点许可，也未把已交付W09/W11重新派发。
+
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 
 ## 历史记录（保留原过程，不作为当前待办）

@@ -557,3 +557,15 @@ V4独立复核把“收入确认 + 履约义务 + 客户控制”纯名词触发
 4. push前hook实际命令为整个`tests/unit -n 2`，本次8126 passed/24既有skip耗时389.84秒，另契约smoke146项42.09秒。其作用域不是改动文件的受影响子集。记录真实成本，后续在PWF中评估日常push等待的分层方案；保留全部覆盖，不以跳测、拉长时间上限或绕钩子冒充修复。
 
 精确GitHub CI 40076059766绑定源码HEAD`aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`，已completed/success（4分38秒）；测试/类型/lint及clean loopback的本地发布记录均匹配该源码。W11-CWP-SOURCES按用户确认完成关闭。
+
+
+## 2026-10-24 新一批独立施工包调查（规划中）
+
+当前PWF唯一入口及主线代码a31300a7已读取，W09/W11交付关闭不重开。ROOT继续独占annual14来源选材/上下文、正式摘要/cache、真实矩阵和W12；本次只准备施工包，不实施产品。已实读CWP push调度与配置：全量fallback触发时本地8126 unit耗389.84秒，随后远端又跑全量；文档push则154项45.17秒。拟把日常快反馈与完整CI责任分开，保留全量测试和失败回传，不扩审批。RF只读调查发现旧跨仓E2E依赖生产PDF/security_master、固定旧源码hash及已退役prompt-review阻断，独立清洁复现包有实际价值；Audit R3全量live子收据仍为本机路径，便携工程回放可独立于W10实际矩阵交付。每包独占worktree/目录和文件集合，交付前必须独立agent复核最终代码、测试、清理及需求完整度，内部问题修完再交接。具体冻结接口与可写范围以新dispatch为准。
+
+
+## 2026-10-24 并行卡冻结后的设计约束
+
+W13提速应改变本地/远端的执行责任，不能从共享FAST_CONTRACT_CASES删成员导致CI覆盖变少；保留原集合约45秒快反馈和完整mode/CI。缺runner退出0是真实hook漏报，应由该独占调度包修。W14旧E2E的生产PDF/security_master依赖、四个过期源码pin、退役人工审查期望及先删已有work-root属于同一可复现性问题；要改现有runner，三仓生产源码从Git对象冻结部署，记录实际加载路径，并消费TXT而非只登记。W15只做普通工程目录导出和现有join回放，不引入第二采用语义；原生失败和unknown应保持，工程可搬迁不等于公司内容通过。三包独审5项发现全部关闭，路径/接口/最终实现独审约束见本批文档。
+
+RF当前tracked.planning约806MiB，普通worktree会再检出副本；本批仅新W14工区启用sparse省略旧.planning，保留主工区和Git对象。这是避免复制历史膨胀，不是删除原件或历史记录。CWP测试调度相关文件实际名通过CodeGraph定位，最初猜测test_changed_unit_tests.py不存在，已改用实际test_ci_push_selection/test_changed_resource_scope/test_changed_test_module_scope，不将不存在路径写入施工卡。

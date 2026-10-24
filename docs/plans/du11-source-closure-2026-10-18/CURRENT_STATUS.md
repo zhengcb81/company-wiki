@@ -46,6 +46,12 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 精确GitHub CI 40076059766已completed/success，与推送HEAD一致。用户再次确认W11-CWP-SOURCES A/B/C全部交付并推送，W11卡关闭；真实IR正文、W08 annual14业务内容、正式摘要/cache恢复、实际采用矩阵与W12审查仍开放。未新增外部LLM调用、真实文档下载或费用；本次自有pytest/debug目录已精确清理。
 
+## 可立即分发的三张独立施工卡（2026-10-24）
+
+[本批唯一总入口](harness_lanes/20261024/README.md)包含W13-CWP-GATES、W14-RF-CLEAN-CHAIN、W15-AUDIT-PORTABLE三张卡，三个独占worktree和子PWF已就绪、bootstrap已提交且tracked clean。当前是READY_NOT_DISPATCHED，尚未实施产品；施工卡独立审查发现5项接口/验证歧义，已全部修完并复审。各包交付前仍必须独立agent全面审实现，修完全部内部问题后交接。
+
+ROOT继续annual14选材/上下文、正式摘要/cache、真实采用矩阵和W12；W13独占测试调度/hook，W14只改RF离线E2E，W15只改Audit工程移位回放工具。作者不写母PWF/中央run/生产湖/其他仓，ROOT不同时写委派文件。W14三仓生产代码从冻结Git对象部署，避免母仓继续变化导致漂移；本批0收费/下载。实际路径、分支、base/start HEAD、交接接口和并线顺序见[dispatch](harness_lanes/20261024/dispatch.json)及[共同接口](harness_lanes/20261024/INTERFACES.md)。包就绪不改变主线Next Step或代签内容通过。
+
 ## 已完成及验收边界
 
 | 事项 | 已完成结果 | 证据及适用范围 |
@@ -86,7 +92,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 - CWP W01 `a7da184e`；W04 已从独审作者提交转为主线 `e1cc1621`/`5a267d37`，交接 `2f632193`。W01 155 项独审绑定旧物理字节；后续仅 LF 归一和 CLI 局部变量改名，独立[补审](review/r1-w01-source-review-postprocess-20261022.md)证明文本/行为等价，并复跑 7 项 CLI。全 `mypy src` 366 文件 0 错误。W04合线后Optional pin类型漏检已于 `ae7b15d6`/`20a7fb0c`修复；单一完整src检查热缓存9.1秒，CI删除重复步骤。独立[最终反控](review/r1-ci-owner-final-review-20261022.md)证明旧版真RED、修复真GREEN，不靠单文件Any或无效移动HEAD探测代签。
 - RF W02 产品 `768b6dd3`、W05 产品 `36433047` 已并入 main；`92b69682` 仅将两份必要回归纳入现有 smoke、让既有小型 mypy 在传递依赖修改时也触发。FF 最终主线和三仓推送/安装/新 CI 见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)，不从历史 pin 推断实时状态。
-- 当前已成功CWP代码CI：[40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303)，精确HEAD `f2b8f2bf` completed/SUCCESS。旧4e3e0231/40044921473、W11 1be42a76/40040509874和预算ab95027b保持历史；RF599d17b8/40040969386精确SUCCESS，FF保留7f6a9268节点。
+- 当前已成功CWP代码CI：[40076059766](https://github.com/zhengcb81/company-wiki/actions/runs/40076059766)，精确HEAD `aade6b93` completed/SUCCESS；共享原生观察发布节点f2b8f2bf/40050949303、旧4e3e0231/40044921473、W11 1be42a76/40040509874和预算ab95027b保持历史。RF599d17b8/40040969386精确SUCCESS，FF保留7f6a9268节点；后续纯PWF提交不改代码CI绑定。
 - 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。原始财报/key/生产配置/Dayu/IQS/旧campaign未修改；新增一份官方索引486901B已单列，不是业务财报下载。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
 
 ## 模型与预算
