@@ -18,3 +18,9 @@
 - 真实 `git push -u origin codex/w13-cwp-gates-20261024`：42.2s，真实 hook，unknown range → defer → GREEN(local_fast_pass + full_validation_pending)，分支已上 origin。
 - handoff 草稿就绪（`delivery/w13/handoff.md/json`，状态 INCOMPLETE_EXTERNAL_BLOCKER）：独审派发撞平台5小时用量上限（19:04 触顶，23:28:49 重置）；已登记一次性定时任务在重置后自动派独审→修复→补审→翻状态→push。工程与证据不依赖该步骤，均已提交。
 
+## 2026-10-24 独审与收尾完成
+
+- 独审（平台恢复后派出，非实现者）：**APPROVE**，G01–G09 全 PASS（自跑 145 passed、ruff clean、真实hook缺runner exit 1、12场景G07矩阵、E2E 3 passed、FAST常量AST与基线一致、无悬挂引用）。报告 `delivery/w13/review.md/json`。
+- 3 个 minor（F1 标签/F2 去重/F3 报告措辞）修复于 `852dff28`；修复后卡内测试 145 passed、ruff 清零；同一独立agent差异补审 **APPROVE**（F2 经7对抗场景验证）。
+- handoff 定稿 **COMPLETE**；分支推送 origin；定时收尾任务已删除（未触发即完成）。包完成：调度层正确且更快；不表示 ROOT annual14 或主线并线完成。
+

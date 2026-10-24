@@ -1,8 +1,9 @@
 # W13-CWP-GATES 交接（handoff）
 
-- 状态：**INCOMPLETE_EXTERNAL_BLOCKER — 独立审查待执行**（平台5小时用量上限于 2026-10-24 19:04 触顶，23:28:49 重置后自动派出独审；独审完成并修复全部发现后本状态翻为 COMPLETE。工程实现与验证证据已全部就绪）。
+- 状态：**COMPLETE**。独立审查 APPROVE（G01–G09 全 PASS，3 个 minor 发现已修复并经差异补审验证关闭，补审结论 APPROVE）；全部内部发现修复完毕。
 - 工区：`C:/Users/郑曾波/Projects/company-wiki-w13-gates`；分支 `codex/w13-cwp-gates-20261024`（已推 origin）。
-- code_base_commit：`a31300a70215319e6bcf3a03d32b2882bdf1aeaa`；start_head `8746be6f`；最终head `cab4ed82`；被审代码commit `56baea4c`（其后仅证据/文档）。
+- code_base_commit：`a31300a70215319e6bcf3a03d32b2882bdf1aeaa`；start_head `8746be6f`；最终head 见 push 后记录；最终被审代码commit `852dff28`（修复commit；初判56baea4c、补审852dff28）。
+- 独立审查：`delivery/w13/review.md` / `review.json`（含 delta_re_review 段）。审查者非实现者，实测命令与退出码全记录（145 passed、ruff clean、真实hook缺runner exit 1、12场景G07矩阵、E2E 3 passed 等）。
 
 ## 交付内容
 
@@ -43,6 +44,12 @@
 1. `tests/contract/test_b10_read_chain.py` 3个ratchet在基线 a31300a7 已失败（`test_b10_no_new_column_value_handoff` 等3项；复现 `python -m pytest tests/contract/test_b10_read_chain.py -q`；日志 `delivery/w13/logs/full-mode-focused-contracts.log`）。责任层：ROOT/来源源码 ratchet 登记，非本包可修。
 2. 环境限制（非缺陷）：fresh worktree 无 `.source_catalog` 使 config_doctor 必红；本机 Windows xdist 存在 tmp-file 并发抖动19例（串行全绿）。完整模式验收以远端CI为准。
 
+## 独立审查与修复闭环
+
+- 初审（被审 `56baea4c`）：APPROVE，G01–G09 全 PASS；3 个 minor——F1 defer路径标签仍称"affected units"、F2 节点级选择与FAST同文件节点的潜在重复、F3 scope-report 未注明墙钟受负载影响。
+- 修复 commit `852dff28`：F1 标签按实际ran范围措辞；F2 去重重构（整文件选择覆盖该文件全部节点；节点选择只去重精确同节点，兄弟FAST节点保留，G03无损）；F3 增加 measurement_caveat。修复后卡内测试 145 passed、ruff 清零。
+- 差异补审（同一独立agent，绑定 `852dff28`）：APPROVE；F2 经7个对抗场景验证 dupes=[]/lost_fast_members=[]。遗留3条均为外观/信息级（其中1条为 `.planning/du3-quality/` 既有 ruff F401/E401，先于本包、写范围外，已记录）。
+
 ## ROOT 下一步
 
-等独审完成（自动于用量重置后执行）：修复全部发现→补审→状态翻COMPLETE并push。远端CI（tools/ 变更触发）与并线由ROOT核。
+远端CI（tools/ 变更触发）与并线由ROOT核；b10 ratchet、`.source_catalog` 环境限制见上节 interface_requests。

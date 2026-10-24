@@ -1,8 +1,7 @@
 {
   "schema_version": "r1-harness-handoff/1",
   "package_id": "w13-cwp-gates-2026-10-24",
-  "status": "INCOMPLETE_EXTERNAL_BLOCKER",
-  "blocker_note": "independent review not yet executed: platform 5-hour usage limit reached 2026-10-24 19:04, reset 23:28:49; a scheduled run dispatches the reviewer, fixes findings, re-reviews, and flips this status. Engineering and evidence are complete.",
+  "status": "COMPLETE",
   "code_base_commit": "a31300a70215319e6bcf3a03d32b2882bdf1aeaa",
   "start_head": "8746be6f7dd90d4b6cdd45695d2154d835c78062",
   "final_head": "cab4ed82d1614b994a83e439e5ee1029c0921f29",
@@ -19,15 +18,87 @@
     "tools/pre_push_gate.py"
   ],
   "requirements": [
-    {"id": "G01", "status": "PASS", "evidence": {"path": ".githooks/pre-push", "locator": "python tools/pre_push_gate.py --push-checks; real-ref E2E in tests/unit/test_daily_push_policy.py::test_real_push_*", "sha256_prefix": "3f7f309e8690"}},
-    {"id": "G02", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "_push_targets: full recommendation -> FAST_CONTRACT_CASES + explicit deferral; select_unit_tests untouched", "sha256_prefix": "61b09b3ee83f"}},
-    {"id": "G03", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "FAST_CONTRACT_CASES constant unchanged from base; membership asserted by test_daily_push_policy::test_remote_and_full_mode_sets_are_unchanged_by_the_push_policy", "sha256_prefix": "61b09b3ee83f"}},
-    {"id": "G04", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "main() full-mode gates and --fast-contracts-only/--junitxml unchanged; _run_pytest_gate -n 2 and owned TEMP preserved; full-mode stage order asserted by test_daily_push_policy::test_full_local_mode_runs_every_existing_stage_in_order", "sha256_prefix": "61b09b3ee83f"}},
-    {"id": "G05", "status": "PASS", "evidence": {"path": "tools/pre_push_gate.py", "locator": "local_fast_pass / full_validation_pending tokens; distinct full/fast green wording; 'safe to push' absent from product code", "sha256_prefix": "61b09b3ee83f"}},
-    {"id": "G06", "status": "PASS", "evidence": {"path": ".githooks/pre-push + tools/pre_push_gate.py", "locator": "missing runner exit 1 (hook); OSError/timeout/exception -> non-zero (_run/_dispatch_gate); tests test_hook_blocks_and_reports_a_missing_gate_runner, test_runner_start_failure_returns_nonzero", "sha256_prefix": "3f7f309e8690"}},
-    {"id": "G07", "status": "PASS", "evidence": {"path": "tests/unit/test_daily_push_policy.py", "locator": "empty stdin / full-recommendation reasons / closed lists / docs-only matrices; deletion+multi-ref behavior inherited from changed_paths tests", "sha256_prefix": "82d8b57e1949"}},
-    {"id": "G08", "status": "PASS", "evidence": {"path": "tests/unit/test_daily_push_policy.py", "locator": "test_real_push_* : green push accepted, ran-scope true failure blocks push, missing runner blocks push, wide defer + serial full catches hidden failure; legacy full-on-push assertions adjusted per card", "sha256_prefix": "82d8b57e1949"}},
-    {"id": "G09", "status": "PASS", "evidence": {"path": "delivery/w13/scope-report.json", "locator": "docs 44.5s / narrow 66.8s / unknown 46.6s (former ~430s) / wide 628.6s exit 124 at pre-existing 600s cap, unchanged path; no wall-clock approval threshold", "sha256_prefix": null}}
+    {
+      "id": "G01",
+      "status": "PASS",
+      "evidence": {
+        "path": ".githooks/pre-push",
+        "locator": "python tools/pre_push_gate.py --push-checks; real-ref E2E in tests/unit/test_daily_push_policy.py::test_real_push_*",
+        "sha256_prefix": "3f7f309e8690"
+      }
+    },
+    {
+      "id": "G02",
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/pre_push_gate.py",
+        "locator": "_push_targets: full recommendation -> FAST_CONTRACT_CASES + explicit deferral; select_unit_tests untouched",
+        "sha256_prefix": "61b09b3ee83f"
+      }
+    },
+    {
+      "id": "G03",
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/pre_push_gate.py",
+        "locator": "FAST_CONTRACT_CASES constant unchanged from base; membership asserted by test_daily_push_policy::test_remote_and_full_mode_sets_are_unchanged_by_the_push_policy",
+        "sha256_prefix": "61b09b3ee83f"
+      }
+    },
+    {
+      "id": "G04",
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/pre_push_gate.py",
+        "locator": "main() full-mode gates and --fast-contracts-only/--junitxml unchanged; _run_pytest_gate -n 2 and owned TEMP preserved; full-mode stage order asserted by test_daily_push_policy::test_full_local_mode_runs_every_existing_stage_in_order",
+        "sha256_prefix": "61b09b3ee83f"
+      }
+    },
+    {
+      "id": "G05",
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/pre_push_gate.py",
+        "locator": "local_fast_pass / full_validation_pending tokens; distinct full/fast green wording; 'safe to push' absent from product code",
+        "sha256_prefix": "61b09b3ee83f"
+      }
+    },
+    {
+      "id": "G06",
+      "status": "PASS",
+      "evidence": {
+        "path": ".githooks/pre-push + tools/pre_push_gate.py",
+        "locator": "missing runner exit 1 (hook); OSError/timeout/exception -> non-zero (_run/_dispatch_gate); tests test_hook_blocks_and_reports_a_missing_gate_runner, test_runner_start_failure_returns_nonzero",
+        "sha256_prefix": "3f7f309e8690"
+      }
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "evidence": {
+        "path": "tests/unit/test_daily_push_policy.py",
+        "locator": "empty stdin / full-recommendation reasons / closed lists / docs-only matrices; deletion+multi-ref behavior inherited from changed_paths tests",
+        "sha256_prefix": "82d8b57e1949"
+      }
+    },
+    {
+      "id": "G08",
+      "status": "PASS",
+      "evidence": {
+        "path": "tests/unit/test_daily_push_policy.py",
+        "locator": "test_real_push_* : green push accepted, ran-scope true failure blocks push, missing runner blocks push, wide defer + serial full catches hidden failure; legacy full-on-push assertions adjusted per card",
+        "sha256_prefix": "82d8b57e1949"
+      }
+    },
+    {
+      "id": "G09",
+      "status": "PASS",
+      "evidence": {
+        "path": "delivery/w13/scope-report.json",
+        "locator": "docs 44.5s / narrow 66.8s / unknown 46.6s (former ~430s) / wide 628.6s exit 124 at pre-existing 600s cap, unchanged path; no wall-clock approval threshold",
+        "sha256_prefix": null
+      }
+    }
   ],
   "artifacts": [
     "delivery/w13/scope-report.json",
@@ -40,20 +111,69 @@
     "delivery/w13/logs/full-mode-focused-contracts.log"
   ],
   "tests": [
-    {"command": "python -m pytest -q -p no:cacheprovider --tb=short tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0, "result": "145 passed in 35.88s", "log_path": "session", "log_sha256": null},
-    {"command": "python -m ruff check tools/pre_push_gate.py tools/changed_unit_tests.py tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0, "result": "All checks passed!", "log_path": "session", "log_sha256": null},
-    {"command": "python tools/pre_push_gate.py  (full local mode, once)", "exit_code": 1, "result": "first red honored at config_doctor (worktree lacks .source_catalog; baseline-identical); remaining stages rerun for evidence: host guard 0, units 8126 passed/24 skip/19 xdist tmp-file flakes (serial 58/58 green), focused contracts 221 passed/3 baseline b10 ratchet failures", "log_path": "delivery/w13/logs/full-local-mode.log", "log_sha256": null},
-    {"command": "git push -u origin codex/w13-cwp-gates-20261024 (real hook, new branch)", "exit_code": 0, "result": "42.2s; unknown range -> FAST_CONTRACT_CASES only; local_fast_pass + full_validation_pending printed", "log_path": "session", "log_sha256": null}
+    {
+      "command": "python -m pytest -q -p no:cacheprovider --tb=short tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py",
+      "exit_code": 0,
+      "result": "145 passed in 35.88s",
+      "log_path": "session",
+      "log_sha256": null
+    },
+    {
+      "command": "python -m ruff check tools/pre_push_gate.py tools/changed_unit_tests.py tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py",
+      "exit_code": 0,
+      "result": "All checks passed!",
+      "log_path": "session",
+      "log_sha256": null
+    },
+    {
+      "command": "python tools/pre_push_gate.py  (full local mode, once)",
+      "exit_code": 1,
+      "result": "first red honored at config_doctor (worktree lacks .source_catalog; baseline-identical); remaining stages rerun for evidence: host guard 0, units 8126 passed/24 skip/19 xdist tmp-file flakes (serial 58/58 green), focused contracts 221 passed/3 baseline b10 ratchet failures",
+      "log_path": "delivery/w13/logs/full-local-mode.log",
+      "log_sha256": null
+    },
+    {
+      "command": "git push -u origin codex/w13-cwp-gates-20261024 (real hook, new branch)",
+      "exit_code": 0,
+      "result": "42.2s; unknown range -> FAST_CONTRACT_CASES only; local_fast_pass + full_validation_pending printed",
+      "log_path": "session",
+      "log_sha256": null
+    }
   ],
   "independent_review": {
-    "agent_role": "NOT_EXECUTED",
-    "report_md": null,
-    "report_json": null,
-    "reviewed_sha256": {},
-    "issues": [],
-    "all_internal_findings_fixed_and_rechecked": false,
-    "conclusion": "platform usage limit reached before dispatch (reset 2026-10-24 23:28:49); scheduled continuation dispatches the reviewer against code commit 56baea4c, fixes findings, re-reviews, then finalizes this handoff",
-    "reviewed_code_commit": "56baea4c"
+    "agent_role": "independent review agent (not the implementer)",
+    "report_md": "delivery/w13/review.md",
+    "report_json": "delivery/w13/review.json",
+    "reviewed_sha256": {
+      "tools/pre_push_gate.py@56baea4c": "879905f697de",
+      ".githooks/pre-push@56baea4c": "ce4822bb5a08",
+      ".pre-commit-config.yaml@56baea4c": "be244d4c63e5",
+      "tests/unit/test_daily_push_policy.py@56baea4c": "7aaab7779e71",
+      "tests/unit/test_ci_push_selection.py@56baea4c": "5740e2dc4b7c",
+      "tests/unit/test_pre_push_parallel_phases.py@56baea4c": "e259bc8052fa",
+      "tools/changed_unit_tests.py (unchanged, base blob)": "6774558e8fdc",
+      "tools/pre_push_gate.py@852dff28": "94eb1003",
+      "delivery/w13/scope-report.json@852dff28": "c79431fd"
+    },
+    "issues": [
+      {
+        "id": "F1",
+        "severity": "minor",
+        "resolution": "fixed in 852dff28; verified by delta re-review"
+      },
+      {
+        "id": "F2",
+        "severity": "minor",
+        "resolution": "fixed in 852dff28; verified across 7 adversarial scenarios (no dupes, no lost fast members)"
+      },
+      {
+        "id": "F3",
+        "severity": "minor",
+        "resolution": "fixed in 852dff28 (measurement_caveat added)"
+      }
+    ],
+    "all_internal_findings_fixed_and_rechecked": true,
+    "conclusion": "APPROVE at 56baea4c; delta re-review of fix commit 852dff28 APPROVE (F1-F3 closed; residual items cosmetic/informational only)"
   },
   "protected_inputs_unchanged": true,
   "cleanup": {
@@ -89,9 +209,8 @@
     }
   ],
   "root_next_actions": [
-    "await scheduled independent review; fix findings and flip status to COMPLETE",
-    "monitor remote CI for the pushed branch (tools/ change triggers full CI)",
-    "merge scheduling-layer changes; b10 ratchet and .source_catalog items stay with ROOT"
+    "monitor remote CI for the pushed branch (tools/ change triggers full CI) and merge the scheduling layer",
+    "b10 ratchet registration and .source_catalog worktree limitation stay with ROOT (see interface_requests/external_limits)"
   ],
   "git": {
     "working_tree_explained": true,
@@ -100,6 +219,6 @@
     "skills_installed": false
   },
   "quality_scope": "Package only: the push-scheduling layer is correct and faster; no source truth, no annual14 completion, no mainline release is implied.",
-  "reviewed_code_commit": "56baea4c",
+  "reviewed_code_commit": "852dff28",
   "scope_note": "Engineering package only. Local fast green proves only the ran scope (local_fast_pass); full validation stays with full local mode and CI (full_validation_pending)."
 }
