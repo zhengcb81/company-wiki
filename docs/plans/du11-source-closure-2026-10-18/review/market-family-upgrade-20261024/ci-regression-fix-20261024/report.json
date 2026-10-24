@@ -1,0 +1,43 @@
+{
+  "schema_version": "company-wiki-ci-regression-fix/1",
+  "date": "2026-10-24",
+  "plan_id": "du11-source-closure-2026-10-18",
+  "failed_run": {
+    "id": 40109033205,
+    "check_id": 120916666195,
+    "head_sha": "e3e7d2fb0c5163878680b4405cd263c120eeed23",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40109033205",
+    "failed_tests": 5,
+    "junit_report": "unavailable_or_invalid"
+  },
+  "root_causes": [
+    "generic operating_metric_change incorrectly exempted financial-only revenue/profit changes from business filtering",
+    "governance and anti-fraud training text was misclassified as an operating customer/business event",
+    "unproved page-boundary handling deferred a closed prefix together with an unresolved suffix and could duplicate deferred unit IDs"
+  ],
+  "fix_commit": "c22a952f",
+  "changed_files": [
+    "src/company_wiki/document_understanding/narrative_continuity.py",
+    "src/company_wiki/source_catalog/narrative_business_groups.py",
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py"
+  ],
+  "tests": {
+    "focused_continuity_and_selection_unit": {"passed": 266, "seconds": 14.68},
+    "business_recall_unit": {"passed": 56, "seconds": 13.02},
+    "business_recall_integration": {"passed": 4, "seconds": 5.78},
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "full_suite_rerun": false
+  },
+  "real_samples": {
+    "downloads": 0,
+    "llm_calls": 0,
+    "originals_modified": 0,
+    "zhongwei_2026q1_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+    "proya_2026q1_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+    "acceptance_ref": "../m4-sparse-quarterly/report.md",
+    "content_status": "partial_for_zhongwei; finance-only_proya_controls_retained"
+  },
+  "remote_ci_after_fix": "pending_push"
+}

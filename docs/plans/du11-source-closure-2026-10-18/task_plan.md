@@ -4,7 +4,7 @@
 
 ## Next Step
 
-最新发布依赖：W13 ROOT修正版已经独立验收PASS，154项定向测试、18项独立探针、5项真实Git ref检查及Ruff通过；独立报告绑定八个文件的完整SHA-256，见review/w13-root-reception-20261024/。当前只剩标准merge commit、正常bounded push和精确远端CI观察。没有重跑全量单测。作者冻结候选FAIL及作者后续未审文件分开保留。随后进入M3真实指标定义/版本/历史指引共因的TDD实现；M3发现和集中验收方法见study/m3-discovery/report.md。
+最新状态（2026-10-24，覆盖旧Next Step）：W13已提交并推送；随后精确CI `40109033205` 暴露叙述筛选和跨页连续性五个回归。ROOT根修提交`c22a952f`，322项相关unit、4项integration、Ruff及diff-check通过；中微/珀莱雅真实季报原件复验SHA。根因、测试与样本收据见`review/market-family-upgrade-20261024/ci-regression-fix-20261024/report.md`。**当前下一步仅为**提交/推送PWF收据与根修，并检查精确新HEAD CI；不重跑8k全量。精确CI通过后按`remaining_root_causes.md`诊断M5 provider启动前预算拒绝，再继续摘要/cache/RF/四审及年度holdout循环。
 
 2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13接收不代表真实产品全量、远端CI或跨仓RF验收；这些分别由根接收记录和精确CI收据绑定。M3/M4/M5及正式摘要/cache/RF仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
 
@@ -529,3 +529,7 @@ RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，
 ### M4 已冻结的真实正反控与下一步
 
 负控珀莱雅2026Q1和正控中微2026Q1已各复跑一次，SHA前后不变，零下载/零模型调用。根因、源码修改、定向红绿测、选中结果和partial边界见[`M4验收报告`](review/market-family-upgrade-20261024/m4-sparse-quarterly/report.md)和机器收据；之后直接进入M5，不再按旧调查步骤重做。
+
+## 2026-10-24 精确CI根修（覆盖上述历史待推送状态）
+
+精确CI `40109033205` 在已推送HEAD `e3e7d2fb` 上暴露五个真实回归：通用财务变化错误成为业务动态，治理培训被误判为经营事件，未证明页边界把已闭合前缀与未闭合尾部一起延后。ROOT四源码修复提交`c22a952f`；定向unit322P、integration4P、Ruff和diff-check通过。M4两真实季报原件SHA与已验内容保持不变。收据在`review/market-family-upgrade-20261024/ci-regression-fix-20261024/report.md`。当前先提交PWF、正常push并检查精确新HEAD CI，不重跑8k全量；通过后再进入M5 provider启动前预算诊断。

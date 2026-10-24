@@ -2,21 +2,23 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W13_M3_M4_FIXES_COMMITTED_LOCAL_PENDING_PUSH_EXACT_CI_M5_NEXT",
+  "overall_status": "ACTIVE_CI_ROOT_FIX_COMMITTED_LOCAL_PENDING_PWF_PUSH_EXACT_CI_M5_NEXT",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "159770e9",
+  "last_code_commit": "c22a952f",
   "code_ci": {
-    "id": 40090199646,
-    "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+    "id": 40109033205,
+    "check_id": 120916666195,
+    "head_sha": "e3e7d2fb0c5163878680b4405cd263c120eeed23",
     "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
-    "created_at": "2026-10-24T11:30:47Z",
-    "updated_at": "2026-10-24T11:34:03Z"
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40109033205",
+    "failed_test_count": 5,
+    "junit_report": "unavailable_or_invalid",
+    "updated_at": "2026-10-24"
   },
   "completed": {
     "b2": {
@@ -174,7 +176,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W13修复提交4e593c71与M3/M4真实样本策略提交159770e9均已通过本地提交门；正常推送到origin/master并检查精确HEAD CI。随后按remaining_root_causes诊断M5 US IPO provider启动前预算拒绝，再继续正式摘要/cache恢复、RF采用与四审、annual14及holdout循环；不重跑全量本地suite。",
+  "next_step_now": "代码根修c22a952f已通过常规提交门；五项CI回归根因和定向测试见review/market-family-upgrade-20261024/ci-regression-fix-20261024/report.md。提交并推送本次PWF收据后，正常推送origin/master并检查精确新HEAD CI；不重跑全量本地suite。新HEAD CI通过后按remaining_root_causes诊断M5 US IPO provider启动前预算拒绝，再继续正式摘要/cache恢复、RF采用与四审、annual14及holdout循环。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",

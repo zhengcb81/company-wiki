@@ -667,6 +667,10 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 
 真实MSFT p10/p12/p19/p20原文可读但被筛掉；p3/p6/p17本来已选，不重复报缺。长于1200字的source clause当前直接丢弃，且指标定义被`financial_only/accounting_policy`压掉；旧新范围/机械no-change不进入现predicate/time图。HK中报同时存在真实漏半句/限定、96 span预算满，以及observer没有canonical EvidenceSpan、scope/task/compiler binding，导致部分旧gold状态只能NOT_EVALUATED。以后需把source-side false negative、selected-but-cut、task-local support和observer unknown分列；禁止整篇串接、猜scope或放宽quote金标。具体原文与源码绑定见study/m3-discovery/observations.json和report.json。
 
+## 2026-10-24 W13后续精确CI的叙述与跨页回归
+
+精确CI `40109033205` 在已发布HEAD `e3e7d2fb` 失败的五例揭示了两个共享根因：财务变化的通用方向谓词错误授予叙述豁免；页边界连续性只保留run，没有保留“已闭合前缀/未闭合尾部”的状态分割。另有治理培训语句被误判为客户/经营活动。修复中`finish()`返回实际未闭合后缀，边界决策只接续该后缀，并用增量ID集合保持延后集合唯一。验证覆盖266项连续性/选择测试、56项经营识别unit、4项生产integration，以及中微正控与珀莱雅负控真实季报；没有把“整份季报”设成统一跳过。精确证据见`review/market-family-upgrade-20261024/ci-regression-fix-20261024/report.md`。
+
 ## 2026-10-24 M3 独审收口与稀疏季报反控
 
 - M3 R5独立审查PASS，发现的两个P2均关闭：定义/公式/解释性从句不能通过远处谓词伪装成实际指标；有限谓词必须直接跟在指标主体后。真实MSFT实际增长保留，RPO定义和机械指引可读。绑定六份源码SHA、五源回放及11项独立断言见`review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/`。
