@@ -1,0 +1,15 @@
+
+=== ruff (CI WU-1.2 full scope) ===
+All checks passed!
+
+=== compileall ===
+ok
+
+=== config_doctor (CI WU-7.1) ===
+CONFIG-PROBLEM: catalog_dir is not a directory: C:\Users\郑曾波\Projects\company-wiki-w13-gates\.source_catalog
+
+
+FAILED: config_doctor (CI WU-7.1)
+
+GATE RED at: config_doctor (CI WU-7.1)
+Fix the root cause (see revenue-forecast ci_root_fix.md), do not bypass.

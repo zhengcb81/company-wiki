@@ -1,0 +1,7 @@
+Push scope: affected unit tests; ran 28 target(s) (local_fast_pass); full_validation_pending: tests/unit outside the 28 ran targets deferred to CI.
+
+=== daily push fast feedback: affected units and CI contract smoke ===
+============================ 217 passed in 46.49s =============================
+
+Push fast gate GREEN (local_fast_pass for the ran scope only); full_validation_pending — CI still runs the full suites.
+W13_SCOPE_RESULT {"label": "narrow", "exit_code": 0, "wall_seconds": 66.8}

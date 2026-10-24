@@ -1,0 +1,7 @@
+Push scope: configuration or test entrypoint changed; ran 29 target(s) (local_fast_pass); full_validation_pending: full unit suite recommendation deferred to CI.
+
+=== daily push fast feedback: affected units and CI contract smoke ===
+============================ 154 passed in 39.09s =============================
+
+Push fast gate GREEN (local_fast_pass for the ran scope only); full_validation_pending — CI still runs the full suites.
+W13_SCOPE_RESULT {"label": "unknown", "exit_code": 0, "wall_seconds": 46.6}
