@@ -154,7 +154,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "正常pre-push曾在本地提交808fca14上拦下3个旧selector固定指纹。现已查明并修复N6新增六类信号影响显式0.6/0.7版本的问题；旧信号集显式冻结，当前信号由旧集与六个新facet组成。独立复审无剩余blocker，固定指纹及六项边界共9项通过；9个相关测试文件357项通过，Ruff及mypy src 372文件均通过。下一步提交兼容根修与PWF，再走原pre-push及正常push，观察该提交精确GitHub CI。发布后继续按V5逐目标诊断annual14缺口，保持既有限额，再择大节点进行同一真实来源回放和14项复核。",
+  "next_step_now": "正常pre-push首先在808fca14拦下3个旧selector指纹；兼容修复后，提交2d92a00的第二次pre-push又发现2项当前0.8跨页分组回归。根因是旧版兼容detector被错误传入当前版group rules；已恢复当前版原detector、只让0.6/0.7使用冻结旧detector。11个相关测试文件478项通过，Ruff和mypy src 372文件通过；独立复审确认无剩余兼容问题，固定指纹及六类facet边界9项通过。下一步提交修正和PWF，重新运行原pre-push及正常push并查该精确CI。发布后继续按V5逐目标诊断annual14缺口，保持既有限额，再择大节点进行同一真实来源回放和14项复核。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -211,7 +211,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T06:01:39Z",
+  "last_updated_at": "2026-10-24T06:14:49Z",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -347,7 +347,7 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "First push attempt for local commit 808fca1484b01a5f86768f79a119f28764fe143a was correctly blocked by 3 pinned 0.6/0.7 native selector fingerprint tests (6655 passed, 11 skipped, 3 failed). Differential isolation showed reverting n6_candidate_operating_facts alone restores the fingerprints; reverting each other changed source alone does not. Root cause: six new operating-fact signals were wired into a globally shared detector used by old selector versions. The root fix explicitly freezes the pre-W08 legacy signal tuple and composes current signals from the six new facets plus that legacy tuple; legacy detector/business/finance-rejection/window rules route only to 0.6/0.7. Independent re-review found no blocker and independently passed 3 pinned fingerprints plus six facet boundaries (9 passed). The nine related test files pass 357 tests; Ruff passes; mypy src passes 372 files. No assertions changed or hooks bypassed. Commit/push/precise CI pending; annual14 V5 remains 7 pass/5 partial/2 missing.",
+    "W08_pending_work": "First push attempt for local commit 808fca1484b01a5f86768f79a119f28764fe143a was correctly blocked by 3 pinned 0.6/0.7 native selector fingerprint tests (6655 passed, 11 skipped, 3 failed). Root cause: six new operating-fact signals were wired into a shared detector consumed by historical selector versions. The root fix explicitly freezes the pre-W08 legacy signal tuple and composes current signals from six new facets plus that legacy tuple; the initial independent review also caught and fixed a fail-open allowlist design. A second normal pre-push on commit 2d92a00c found 2 additional regressions (6662 passed, 11 skipped): the compatibility detector had been incorrectly passed into current 0.8 group rules, changing product-name context selection and cross-page group joining. Current versions now keep their historical group detector; only 0.6/0.7 use the frozen legacy detector. The 11 related files pass 478 tests, Ruff passes, and mypy src passes 372 files. Independent review found no remaining compatibility blocker; pinned fingerprints and six facet boundaries pass 9 checks. No assertions changed or hooks bypassed. Corrective commit/push/exact CI pending; annual14 V5 remains 7 pass/5 partial/2 missing.",
     "W08_selection_trace_contract": {
       "status": "PUBLISHED_EXACT_CI_SUCCESS",
       "related_tests_passed": 171,
@@ -536,12 +536,13 @@
     },
     "W08_current_v5_review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json",
     "W08_legacy_selector_compatibility": {
-      "status": "ROOT_CAUSE_FIXED_INDEPENDENT_REVIEW_PASSED_PUBLICATION_PENDING",
+      "status": "SECOND_PREPUSH_ROOT_CAUSE_FIXED_INDEPENDENT_REVIEW_PASSED_PUBLICATION_PENDING",
       "failed_push_commit": "808fca1484b01a5f86768f79a119f28764fe143a",
       "failure": "affected units: 6655 passed, 11 skipped, 3 failed; three legacy selector output fingerprints changed",
       "root_cause": "Six newly added N6 operating-fact detectors were added to a shared detector consumed by explicit selector versions 0.6.0/0.7.0/0.7.1; legacy output semantics were therefore not version-isolated.",
       "fix": "Freeze the pre-W08 legacy signal tuple explicitly; compose current signals as the six new facets plus that immutable tuple. Route 0.6/0.7 through legacy detector, business detector, finance rejection and legacy join.",
-      "focused_tests": "357 passed across nine related test files; independent fingerprint and six-facet boundary rerun: 9 passed",
+      "focused_tests": "478 passed across eleven related test files; Ruff PASS; mypy src 372 files/0 errors; legacy fingerprint and six-facet boundary review rerun: 9 passed",
+      "independent_review_ref": "review/r1-w08-crosspage-20261024/legacy-selector-fix/independent-review.json",
       "ruff": "PASS",
       "mypy_src": "372 files; 0 errors",
       "fingerprint_assertions_changed": false,

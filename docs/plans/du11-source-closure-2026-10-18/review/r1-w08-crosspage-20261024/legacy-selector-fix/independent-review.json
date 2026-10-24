@@ -1,0 +1,33 @@
+{
+  "schema_version": "company-wiki-independent-code-review/1",
+  "review_date": "2026-10-24",
+  "review_timezone": "UTC",
+  "review_mode": "read_only",
+  "result": "PASS_NO_REMAINING_COMPATIBILITY_BLOCKER",
+  "review_base_commit": "2d92a00c32c7f6db30f4ebdb32104b43e73ed56b",
+  "reviewed_worktree_files": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": "6375ad3ba6aa2e7aba66e9c7ffe33ea2e78ba01325cdfb79a83264f607dce840",
+    "tests/unit/test_n6_candidate_recall.py": "36671178332fd8a0bc9d2c14a46ae33f21029612dcb64c5ac6ac9fcb449d9a97"
+  },
+  "version_routing": {
+    "0.6.0_0.7.0_0.7.1": "frozen legacy detector and join",
+    "0.8.0": "pre-change group detector and expanded join",
+    "0.9": "separate reader path"
+  },
+  "review_checks": [
+    "legacy candidate scoring and group expansion use frozen legacy signals",
+    "current 0.8 group expansion retains detect_operating_fact behavior",
+    "current candidate scoring retains its version-specific broader rules",
+    "six new facets do not change pinned legacy selector versions"
+  ],
+  "independent_regression": {
+    "pinned_fingerprints_and_six_facet_boundaries": "9 passed"
+  },
+  "root_validation": {
+    "related_tests": "478 passed across 11 files",
+    "ruff": "PASS",
+    "mypy_src": "372 files; 0 errors"
+  },
+  "findings": [],
+  "publication_gate": "normal pre-push and exact remote CI remain pending"
+}

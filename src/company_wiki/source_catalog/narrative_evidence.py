@@ -25,6 +25,7 @@ from .n6_candidate_operating_facts import (
     LEGACY_OPERATING_FACT_JOIN,
     OPERATING_FACT_JOIN,
     detect_legacy_operating_fact,
+    detect_operating_fact,
 )
 from .narrative_business_meaning import (
     detect_legacy_business_fact,
@@ -2544,7 +2545,11 @@ def select_narrative_evidence(
         rules=GroupCandidateRules(
             topics=_topics,
             window_finder=_minimal_matching_unit_windows,
-            operating_facts=candidate_rules.operating_facts,
+            operating_facts=(
+                detect_legacy_operating_fact
+                if effective_version in {"0.6.0", "0.7.0", "0.7.1"}
+                else detect_operating_fact
+            ),
             operating_fact_join=(
                 LEGACY_OPERATING_FACT_JOIN
                 if effective_version in {"0.6.0", "0.7.0", "0.7.1"}
