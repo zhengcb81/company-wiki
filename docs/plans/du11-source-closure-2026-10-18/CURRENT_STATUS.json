@@ -536,16 +536,17 @@
     },
     "W08_current_v5_review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json",
     "W08_legacy_selector_compatibility": {
-      "status": "COMMITTED_PUSHED_EXACT_CI_IN_PROGRESS",
+      "status": "COMMITTED_PUSHED_EXACT_CI_SUCCESS",
       "failed_push_commit": "808fca1484b01a5f86768f79a119f28764fe143a",
       "published_commit": "584c1101ec21141bca14c87cbaa3bca2769ddca6",
       "exact_ci": {
         "id": 40069847315,
         "head_sha": "584c1101ec21141bca14c87cbaa3bca2769ddca6",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40069847315",
-        "observed_at": "2026-10-24T06:22:26Z"
+        "observed_at": "2026-10-24 06:26:48Z",
+        "duration_seconds": 276
       },
       "normal_pre_push": {
         "passed": 6664,
@@ -562,7 +563,9 @@
       "root_causes_and_fixes": [
         "W08 six new operating-fact facets leaked into explicit 0.6/0.7 selector versions; old signal tuple is now explicitly frozen.",
         "Legacy compatibility detector was routed into current 0.8 group rules; current version now uses its original detect_operating_fact while 0.6/0.7 use the frozen detector."
-      ]
+      ],
+      "PWF_checkpoint_commit": "ce376d00",
+      "PWF_checkpoint_push": "PASS; commit ce376d00 pushed, local contract smoke 154 passed in 29.46s"
     }
   },
   "budget_regime": {
@@ -638,5 +641,5 @@
     "Close target-bound annual14 gaps (especially A12 premise, A13 revenue-recognition policy, A01/A05 hierarchy, A09 capacity/date relation) without raising selection/work caps; reselect once after root fixes.",
     "Then perform production-configured summary/cache recovery, W09/W10 real adoption matrix, and W12 four-review loop as specified in the canonical plan."
   ],
-  "last_updated_utc": "2026-10-24T06:22:26Z"
+  "last_updated_utc": "2026-10-24 06:26:48Z"
 }

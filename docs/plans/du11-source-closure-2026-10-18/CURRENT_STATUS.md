@@ -6,7 +6,7 @@
 
 ## 当前执行状态与唯一下一步
 
-**最新发布状态（2026-10-24 06:22 UTC）：** W08 selector兼容修复已提交并推送，源码HEAD为`584c1101ec21141bca14c87cbaa3bca2769ddca6`；正常pre-push 6664 passed / 11 skipped / 0 failed（270.68秒），11个相关测试文件478 passed，Ruff与全量mypy通过，独立复审9项通过。精确远端CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已启动、核对时仍在运行，尚未记为成功。CI完成后继续冻结下一批annual14逐目标候选、依赖和准入链证据，找到共因后再进行一次同条件选材。
+**最新发布状态（2026-10-24 06:22 UTC）：** W08 selector兼容修复已提交并推送，源码HEAD为`584c1101ec21141bca14c87cbaa3bca2769ddca6`；正常pre-push 6664 passed / 11 skipped / 0 failed（270.68秒），11个相关测试文件478 passed，Ruff与全量mypy通过，独立复审9项通过。精确远端CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已completed/success（4分36秒；仅有既有runner维护提示）。状态记录已提交并推送，提交钩子通过154项契约烟测。接下来冻结下一批annual14逐目标候选、依赖和准入链证据，找到共因后再进行一次同条件选材。
 
 **2026-10-23预算制度升级已提交、推送并安装：** 用户已明确授权累计10M tokens/USD20，公司150k/USD1仅软目标；唯一运行配置为`config/resource_budget.yaml`，旧账/metadata和全部unknown原样保留。实读母账仍1,561,352tokens/631,959microUSD，新剩余8,438,648tokens/USD19.368041。本地计算量可配置、费用/片段/字符/计算分维度诊断已实现；Audit的low误停已改提醒、18项独审通过；两份技能副本39/39一致。CWP正常push7165P/24既有skip，另146契约P；精确CI40034980056已实查completed/success（源码ab95027b）。实施与边界见[预算制度实施单](budget-regime-20261023.md)。W08业务语义、跨页与分批选材未因此验收通过，W09/W11独占工区不改。
 

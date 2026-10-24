@@ -707,3 +707,8 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 ## 2026-10-24T06:22:26Z W08 selector 兼容修复已推送
 
 提交 `584c1101ec21141bca14c87cbaa3bca2769ddca6` 已正常推送。正常 pre-push：6664 passed / 11 existing skipped / 0 failed，270.68s；相关11文件478P，Ruff PASS，mypy src 372文件0错误；独立复审确认固定指纹与六facet版本边界9P。GitHub 精确 CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已建立，观察时仍运行中，未记成功。根因分别为旧选择器共享detector污染和当前0.8 group误用兼容detector；没有修改原指纹断言或绕过hook。继续按唯一入口对annual14未闭合目标做候选/依赖/admit链诊断。
+
+
+## 2026-10-24 06:26:48Z W08 selector 精确 CI 成功
+
+精确源码 CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已completed/success，耗时4分36秒；只有既有 Node 20 runner提醒与Ubuntu 26迁移提示。提交 584c1101ec21141bca14c87cbaa3bca2769ddca6 的远端工程验证闭环。上一份PWF状态提交 ce376d00 已推送，pre-push 154项契约烟测通过。源码选择兼容问题关闭；annual14 V5内容仍7pass/5partial/2missing，继续依据冻结14项目标扩展有界trace，逐项核candidate、admission、dependency、offer/defer和task context。
