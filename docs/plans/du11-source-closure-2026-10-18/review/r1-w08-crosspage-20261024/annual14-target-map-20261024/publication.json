@@ -1,0 +1,36 @@
+{
+  "schema_version": "w08-reporting-publication/1",
+  "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
+  "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
+  "remote_master_at_code_push": "f73afb89be1f4caf610432211281e07a14e58c77",
+  "normal_commit_hooks": "PASS",
+  "normal_push_exit": 0,
+  "normal_pre_push": {
+    "unit_passed": 8160,
+    "existing_skipped": 24,
+    "unit_seconds": 409.5,
+    "independent_contract_passed": 146,
+    "contract_seconds": 32.46,
+    "bypassed": false
+  },
+  "independent_final": {
+    "passed": 320,
+    "failed": 0,
+    "seconds": 5.19
+  },
+  "ci": {
+    "id": 40081962182,
+    "head_sha": "f73afb89be1f4caf610432211281e07a14e58c77",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40081962182",
+    "created_at": "2026-10-24T09:26:32Z",
+    "updated_at": "2026-10-24T09:31:07Z"
+  },
+  "ci_observed_at": "2026-10-24T09:31:41.496766+00:00",
+  "new_model_calls": 0,
+  "downloads": 0,
+  "content_quality": "7_PASS_5_PARTIAL_2_MISSING_NO_NET_GAIN",
+  "next_action": "Source-owned value/coverage TDD; preserve existing planner and caps.",
+  "status": "PUBLISHED_EXACT_CI_SUCCESS"
+}

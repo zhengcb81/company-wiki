@@ -1,0 +1,101 @@
+{
+  "scope": "ROOT read-only pure compatibility-detector observations, not production source-session or value/selection pass. No gold used.",
+  "at_utc": "2026-10-24T09:21:32.130697+00:00",
+  "head": "f73afb89be1f4caf610432211281e07a14e58c77",
+  "source_sha256": "5d8927cc5cd7269ff9e7b699d2af373e82d32991f8efffa68538f0c8008e0fc5",
+  "observations": [
+    {
+      "case": "business_scope_cn",
+      "text": "本公司业务分为检测仪器、检测试剂和设备维护服务。",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "business_structure"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      }
+    },
+    {
+      "case": "business_scope_en",
+      "text": "Our company operates through two businesses: workflow subscriptions and device support.",
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      }
+    },
+    {
+      "case": "customer_definition_hk",
+      "text": "收入按客戶母公司所在地分區。",
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      }
+    },
+    {
+      "case": "backlog_cn",
+      "text": "本公司期末未交付订单余额为人民币80亿元，其中25亿元将在2028会计年度确认收入。",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "business_progress"
+        ],
+        "reasons": [
+          "operating_activity"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      }
+    },
+    {
+      "case": "rpo_en",
+      "text": "Our remaining performance obligations were $2.8 billion, of which 40% is expected to be recognized in FY2028.",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_metrics"
+        ],
+        "reasons": [
+          "operating_contract_stock"
+        ],
+        "score": 4,
+        "financial_exempt": true,
+        "purpose": "operating_contract_stock"
+      }
+    },
+    {
+      "case": "generic_benefit",
+      "text": "公司坚持以客户为中心，通过高质量服务提升客户研发效率。",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      }
+    }
+  ],
+  "source_writes": 0,
+  "paid_model_calls": 0,
+  "downloads": 0,
+  "tests_run": false
+}

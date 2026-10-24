@@ -4,9 +4,9 @@
 
 ## Next Step
 
-本轮来源用途/事件断言共因已独审320P，最终相关自然2302P/11既有skip/51.32s；真实14项仍7P/5partial/2missing，未净改善。新规则cache字节依赖补漏先RED、58项GREEN；待完成正常发布与精确CI观察。完整证据见CURRENT_STATUS及本轮根因记录。
+本轮来源用途/事件断言共因已独审320P，最终相关自然2302P/11既有skip/51.32s；真实14项仍7P/5partial/2missing，未净改善。新规则cache字节依赖补漏先RED、58项GREEN；已正常push f73afb89，完整8160P/24既有skip及146smoke通过；精确CI40081962182已completed/success。完整证据见CURRENT_STATUS及本轮根因记录。
 
-**下一步：** 先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。 具体共因和各层正反例见[设计](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md)。当前代码已commit`1e5e6c1a`；正常push/CI待完成。
+**下一步：** 先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。 具体共因和各层正反例见[设计](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md)。当前代码`1e5e6c1a`已正常push f73afb89；8160P/24既有skip、146smoke通过，精确CI40081962182已completed/success；本节点发布收尾完成。
 
 **W11状态：** W11-CWP-SOURCES A/B/C全流程已由用户确认完成并推送，卡片关闭；ROOT的真实IR原件与内容覆盖验收仍按单独业务证据处理，不重开作者施工卡。
 

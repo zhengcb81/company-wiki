@@ -1,6 +1,6 @@
 # 当前项目状态与接手入口
 
-**主线ACTIVE；2026-10-24 ROOT继续W08内容根因。** 本轮已修报告规则误入经营材料，以及评估条件“是否/能否/whether”冒充事件的共用判断；保留真实客户业务，不改原文。320项独立工程审查通过，相关自然包2302通过/11既有skip，Ruff与mypy src 373文件通过；发布前另发现新规则模块未进入cache算法依赖闭包，新增回归先RED后58项GREEN，只补入现有依赖列表。本轮源码与必要PWF已正常commit为`1e5e6c1a`，待正常pre-push/推送及精确CI观察，不借上一节点CI代签。
+**主线ACTIVE；2026-10-24 ROOT继续W08内容根因。** 本轮已修报告规则误入经营材料，以及评估条件“是否/能否/whether”冒充事件的共用判断；保留真实客户业务，不改原文。320项独立工程审查通过，相关自然包2302通过/11既有skip，Ruff与mypy src 373文件通过；发布前另发现新规则模块未进入cache算法依赖闭包，新增回归先RED后58项GREEN，只补入现有依赖列表。本轮源码`1e5e6c1a`及PWF已正常推送，精确远端推送HEAD=`f73afb89`。正常pre-push完整8160通过/24既有skip（409.50秒），另146契约smoke通过（32.46秒）；精确CI40081962182已completed/success（4分35秒），绑定推送HEAD f73afb89。
 
 同一真实249页年报新选材：1526候选、96片段/7689字符、8845814/16M，编译55任务；[本轮独立内容复核](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.md)仍为**7通过/5部分/2缺失**，没有净gold改善。下一根因已收敛到共享语义包排序和边际闭包竞争，随后是父子业务与日期关系。正式摘要/cache、真实采用矩阵、W12和新公司循环仍OPEN。W09/W11作者交付已关闭；W13–W15独占工区READY，ROOT不改委派文件。
 
@@ -8,7 +8,7 @@
 
 ## 当前执行状态与唯一下一步
 
-**本轮工程节点：** [根因、测试及真实结果](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/README.md)。规则对象分类与事件断言已独审通过；逐14项真实内容仍未通过。相关自然包在cache依赖注册和业务结构guard补漏之前运行；后续58项库存/cache与最终320项独审单独留证，正常发布全量hook另验证最终版本。最终源码已再次实读原SourceRef，完整96个EvidenceSpan、task-local groups与55任务成员均与已独审材料相同，见本节点final-source-receipt.json，不改写旧绑定。最近已成功的代码CI仍是历史`aade6b93`/40076059766，当前新源码发布及CI状态由后续发布收据确认。
+**本轮工程节点：** [根因、测试及真实结果](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/README.md)。规则对象分类与事件断言已独审通过；逐14项真实内容仍未通过。相关自然包在cache依赖注册和业务结构guard补漏之前运行；后续58项库存/cache与最终320项独审单独留证，正常发布全量hook另验证最终版本。最终源码已再次实读原SourceRef，完整96个EvidenceSpan、task-local groups与55任务成员均与已独审材料相同，见本节点final-source-receipt.json，不改写旧绑定。新源码已正常push；[发布收据](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/publication.json)记录8160全量/146smoke通过。精确[CI40081962182](https://github.com/zhengcb81/company-wiki/actions/runs/40081962182)已completed/success，精确HEAD f73afb89；历史`aade6b93`单列保留。
 
 **2026-10-23预算制度升级已提交、推送并安装：** 用户已明确授权累计10M tokens/USD20，公司150k/USD1仅软目标；唯一运行配置为`config/resource_budget.yaml`，旧账/metadata和全部unknown原样保留。实读母账仍1,561,352tokens/631,959microUSD，新剩余8,438,648tokens/USD19.368041。本地计算量可配置、费用/片段/字符/计算分维度诊断已实现；Audit的low误停已改提醒、18项独审通过；两份技能副本39/39一致。CWP正常push7165P/24既有skip，另146契约P；精确CI40034980056已实查completed/success（源码ab95027b）。实施与边界见[预算制度实施单](budget-regime-20261023.md)。W08业务语义、跨页与分批选材未因此验收通过，W09/W11独占工区不改。
 
@@ -16,7 +16,7 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码`f2b8f2bf`、公开trace/诊断合同`87a14a86`、DTO/cache绑定`baa77ab6`及selector兼容/分组/clean deployment测试修复`aade6b93`已发布；精确CI40076059766 success。两轮旧门禁失败根因均已修复，旧金标保留。当前通过8126 unit、146契约smoke、170聚焦/集成、Ruff及全src mypy。annual14 V5仍7pass/5partial/2missing，内容仍OPEN；V5只证明选中证据与模型任务可见性，不代表正式摘要/内容通过。正式摘要/cache/矩阵/W12仍OPEN。见[V5冻结](review/r1-w08-crosspage-20261024/annual14-v5/freeze.json)、[V5复核](review/r1-w08-crosspage-20261024/annual14-v5/review.md)、[V2–V4历史](review/r1-w08-crosspage-20261024/annual14-v2/) |
+| W08 来源选材、业务父级、缓存依赖 | 原共享引擎/context、trace、DTO/cache及兼容修复均已发布；本轮报告规则/事件断言及新规则cache依赖根修源码`1e5e6c1a`随`f73afb89`推送，精确CI40081962182成功。最终独审320P、完整unit8160P/24既有skip、146契约、Ruff/mypy373通过。 | 同一249页原文1526候选、96/7689字符，55任务。最终SourceRef、全部选中证据和局部任务与独审材料相同，内容仍7pass/5partial/2missing；正式摘要/cache、真实矩阵/W12仍OPEN。见[本轮根因](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/README.md)、[内容增量独审](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/delta.md)、[发布收据](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/publication.json) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 

@@ -582,3 +582,7 @@ annual14 V5选材/模型编译可见性仍7pass/5partial/2missing；A03地区/�
 ## 2026-10-24 下一共因纠偏：source value/coverage，非再造planner
 
 独立只读设计确认现有reading_plan/3的真实边际闭包/共享parent成本、主题平均访问和有界work已存在，本轮没有重复扣span/字符的证据。实际丢失发生在source metadata：eligible直接被当meaningful_fact，scope/region/stock/conversion压成core_business；把purpose/reasons原样塞给budget仍不够，因为其中多项已经unknown。下一步在所属source owner用中性TDD分开admission与value、细化固定关系用途，复用现有planner，再用同14项检验，不抬rank权重/额度或新建分类器。A03母公司地区口径admission=false、父子/日期缺依赖仍需来源责任层处理，不能用新topic代签。详见本轮budget-next/analysis.md/json。
+
+ROOT只读实测6个中性source-text观测：英文two businesses结构eligible=false，繁体客户母公司地区定义eligible=false；中文业务构成仅core_business/capacity_projects；绝对FY2028 RPO有stock而无conversion主题；泛“提升客户效率”却eligible=true/core_business。见budget-next/baseline-source-observations.json，仅兼容detector观测，尚未测试真实source-session/value或预算选择，不扩大成整链已证。最终正常pre-push8160P/24skip证明本节点最终4源/2测试版本全量unit通过。
+
+当前完整pre-push真实耗时409.50s，远端CI约275s；没有重启或跳过执行。这再次证明W13日常push分层包有实际价值，ROOT未修改其独占gate文件。GitHub公开API可读，全部CI观察不需Git凭证转换；本次gh CLI不存在，仅是工具环境事实，并非测试/产品失败。
