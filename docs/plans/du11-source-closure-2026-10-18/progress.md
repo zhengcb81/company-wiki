@@ -750,3 +750,5 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 ### 最终字节补审与同源等价复核
 
 最后发现纯会计方法“consists of”可触发新公开structure helper而绕过报告规则；原_business_fact本已有_OBJECT外层条件。两条英文负例先2F31P，helper补原条件后161项聚焦通过；最终独立320P/0F/0skip/5.19s，绑定4源/2作者测试。cache独立历史34P/6.64s及沙箱fixture ERROR均另存，不拿旧SHA代签。最终源码再次只读原SourceRef7.60s，全部96 EvidenceSpan/原文、task-local groups和55任务成员逐项等于内容独审材料，metadata差异保留；final-source-receipt绑定最终源摘要，内容仍7/5/2，零付费/下载/raw copy。
+
+源码与阶段PWF已正常commit 1e5e6c1a（47个明确拥有文件），静态commit hooks全部通过。最终来源内容增量独审确认全部96 evidence、local groups及55 tasks和完整模型payload与旧内容审查相同，7/5/2可沿用但没有改善。独立budget-next设计已收齐，下一动作改为先修source价值/覆盖元数据而非重写正确的边际closure计费。当前仅待正常push/精确CI；阶段费用未增加。

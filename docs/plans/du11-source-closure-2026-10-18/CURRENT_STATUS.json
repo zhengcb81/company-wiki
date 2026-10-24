@@ -8,7 +8,7 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
+  "last_code_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
   "code_ci": {
     "id": 40076059766,
     "name": "CI",
@@ -18,7 +18,8 @@
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40076059766",
     "updated_at": "2026-10-24T08:00:32Z",
     "created_at": "2026-10-24T07:55:51Z",
-    "observed_at": "2026-10-24T08:00:32Z"
+    "observed_at": "2026-10-24T08:00:32Z",
+    "scope": "Last verified successful historical code node, not the new 1e5e6c1a product commit."
   },
   "completed": {
     "b2": {
@@ -154,7 +155,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。",
+  "next_step_now": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -605,7 +606,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。",
+  "next_step_after_publication": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
   "w08_current_review": {
     "selection_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-selection.json",
     "review_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.json",
@@ -637,12 +638,12 @@
         "ST-A04"
       ]
     },
-    "next_action": "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。",
+    "next_action": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
     "selection_precedes_dependency_registration_only": false,
     "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
   },
   "next_steps": [
-    "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。"
+    "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。"
   ],
   "last_updated_utc": "2026-10-24T09:09:31.023977+00:00",
   "latest_publish_validation": {
@@ -684,7 +685,7 @@
     "new_paid_calls": 0
   },
   "w08_reporting_rules_20261024": {
-    "status": "REVIEWED_PENDING_PUBLICATION",
+    "status": "COMMITTED_PENDING_NORMAL_PUSH",
     "review": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/report.json",
     "independent_passed": 320,
     "natural_passed": 2302,
@@ -702,6 +703,9 @@
     "independent_seconds": 5.19,
     "natural_precedes_cache_registration_and_final_structure_guard": true,
     "final_source_recheck": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json",
-    "final_source_content_equivalence": true
-  }
+    "final_source_content_equivalence": true,
+    "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
+    "independent_content_delta": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/delta.json"
+  },
+  "w08_next_root_design": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md"
 }

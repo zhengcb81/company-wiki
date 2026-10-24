@@ -1,0 +1,92 @@
+{
+  "schema_version": "w08-budget-next-design/1",
+  "status": "read_only_design_not_implemented",
+  "created_at_utc": "2026-10-24T09:16:38.998283+00:00",
+  "inputs": {
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\README.md": "20f9cfcc4fae248622e58c1e5421e5bbff16f2482b2c1f30eba9591c7d7728c5",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\content-review\\report.md": "a1b67134b7b53d382cf1d9d6ef06b4cb3591502c902e506dd9190fa1b0dadc0a",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\content-review\\report.json": "3281ce00b65315bdce3827ffd00f744479da73c3ee6597cbded297044f480791",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\trace.json": "3efc8fd988b698f2e5c03fa738db03dc796722a5ed4d37f5ceb1a843194437bc",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\selection.json": "8da5b6cc809c71f169f4095c0ae15be0957e9f233d3c832abaab60b9ea02aa46"
+  },
+  "source_sha256": {
+    "narrative_budget.py": "508688f14b98c862926adb8a6b22435f6f1bb087925b04f81f41892266987586",
+    "narrative_reading.py": "45a871a3ec04de7d26328df4378cd2834a50c05769c1a442076b262fc0ec7d01",
+    "narrative_finalize.py": "b7190eda70265140b3195ddb7a2b068273065303d3de76dc70e158a862c3ac33",
+    "narrative_business_policy.py": "5d8927cc5cd7269ff9e7b699d2af373e82d32991f8efffa68538f0c8008e0fc5",
+    "narrative_semantic_coverage.py": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca"
+  },
+  "selection": {
+    "package_candidates": 1526,
+    "last_callback_candidates": 470,
+    "selected": 96,
+    "chars": 7689,
+    "meaningful_fact": 55,
+    "context_only": 41,
+    "original_gold_status": {
+      "pass": 7,
+      "partial": 5,
+      "missing": 2
+    }
+  },
+  "confirmed_roots": [
+    "eligible_is_used_as_material_value",
+    "source_specific_relationships_collapse_into_broad_topics",
+    "fact_purpose_and_fact_reasons_not_consumed_by_budget",
+    "existing_planner_has_real_marginal_closure_and_average_topic_visits"
+  ],
+  "not_proven": [
+    "exact_full_offer_order",
+    "regex_branch_causing_each_unknown",
+    "net_14_target_improvement_after_proposed_change",
+    "all_tables_wrongly_classified"
+  ],
+  "recommendation": {
+    "reuse_current_planner": true,
+    "first_red": "source-owned value/coverage intent through existing budget API under scarce cap",
+    "new_source_field": "optional value_band observation on existing fact (legacy default retains old path)",
+    "reuse_topic_field": true,
+    "generic_relation_topics": [
+      "business_scope",
+      "customer_geography",
+      "contract_stock",
+      "contract_conversion"
+    ],
+    "no_new_weights": true,
+    "no_new_queue_or_store": true
+  },
+  "limits_unchanged": {
+    "spans": 96,
+    "chars": 48000,
+    "work": 16000000,
+    "context_units": 8,
+    "context_blocks": 4,
+    "context_chars": 2048
+  },
+  "acceptance": [
+    "source owner neutral positive/negative RED",
+    "unknown issuer CN/English + HK traditional cases",
+    "public budget sparse fact versus templates",
+    "shared parent marginal cost and sibling exclusion",
+    "missing context and bounded work",
+    "pinned replay legacy compatibility",
+    "decision dependency invalidation",
+    "one current-source annual14 independent comparison with seven pass controls",
+    "actual formal summary/cache/RF remain separate acceptance"
+  ],
+  "actions_performed": {
+    "source_reads": true,
+    "frozen_json_reads": true,
+    "product_execution": false,
+    "author_scripts": false,
+    "tests": false,
+    "raw_lake_reads": false,
+    "model_calls": 0,
+    "downloads": 0,
+    "paid_calls": 0
+  },
+  "owned_outputs": [
+    "analysis.md",
+    "analysis.json"
+  ]
+}

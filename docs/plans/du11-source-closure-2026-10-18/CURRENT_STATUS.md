@@ -1,6 +1,6 @@
 # 当前项目状态与接手入口
 
-**主线ACTIVE；2026-10-24 ROOT继续W08内容根因。** 本轮已修报告规则误入经营材料，以及评估条件“是否/能否/whether”冒充事件的共用判断；保留真实客户业务，不改原文。320项独立工程审查通过，相关自然包2302通过/11既有skip，Ruff与mypy src 373文件通过；发布前另发现新规则模块未进入cache算法依赖闭包，新增回归先RED后58项GREEN，只补入现有依赖列表。本轮源码与必要PWF正在按正常hook提交/推送，尚不借上一节点CI代签。
+**主线ACTIVE；2026-10-24 ROOT继续W08内容根因。** 本轮已修报告规则误入经营材料，以及评估条件“是否/能否/whether”冒充事件的共用判断；保留真实客户业务，不改原文。320项独立工程审查通过，相关自然包2302通过/11既有skip，Ruff与mypy src 373文件通过；发布前另发现新规则模块未进入cache算法依赖闭包，新增回归先RED后58项GREEN，只补入现有依赖列表。本轮源码与必要PWF已正常commit为`1e5e6c1a`，待正常pre-push/推送及精确CI观察，不借上一节点CI代签。
 
 同一真实249页年报新选材：1526候选、96片段/7689字符、8845814/16M，编译55任务；[本轮独立内容复核](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.md)仍为**7通过/5部分/2缺失**，没有净gold改善。下一根因已收敛到共享语义包排序和边际闭包竞争，随后是父子业务与日期关系。正式摘要/cache、真实采用矩阵、W12和新公司循环仍OPEN。W09/W11作者交付已关闭；W13–W15独占工区READY，ROOT不改委派文件。
 
@@ -20,7 +20,7 @@
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：** 基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。 本轮完整trace已观察14项目标的72个原始单元；`trace.candidate_count=470`仅为最后一个candidate回调，整份package为1526，不能混用。A01业务分类、A03客户地域、A04集团订单等已有具体budget_full证据，删少数模板未解决排序共因。
+**当前唯一第一步：** 先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。 只读共因设计已确认planner现有边际闭包计费正确，没有本轮重复扣费证据；问题在source-owned材料价值和覆盖用途粗化。详见[证据与TDD方案](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md)。完整trace含14标签/72原单元，最后candidate回调470不能当全package1526。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

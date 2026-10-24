@@ -578,3 +578,7 @@ annual14 V5选材/模型编译可见性仍7pass/5partial/2missing；A03地区/�
 ## 2026-10-24 W08 reporting-rule根因与独审反控
 
 冻结V5的target-map从实际budget target行证明A01、A03/A04对应业务原文被96片段预算延期；不是aggregate推断。与此同时外币折算、套期会计及信用风险评估规则被业务广词误入。新对象+会计处理分类明确排除规则，保留完整clause中的真实客户事件/既有业务结构，不能擦掉匹配文本再判断。独审先发现8项误杀/泛benefit误纳，修完整clause后再发现“是否/能否”及后置question、whether共享列表同一断言共因；当前新增事件断言scope，明确已完成观察与问题/评估条件分开，不改旧_business_fact语义。独审最终补审进行中。第一版自然包2297P/11既有skip/56.87s，后续语序修订聚焦156P；尚不能把先前自然包作为最终版本通过。
+
+## 2026-10-24 下一共因纠偏：source value/coverage，非再造planner
+
+独立只读设计确认现有reading_plan/3的真实边际闭包/共享parent成本、主题平均访问和有界work已存在，本轮没有重复扣span/字符的证据。实际丢失发生在source metadata：eligible直接被当meaningful_fact，scope/region/stock/conversion压成core_business；把purpose/reasons原样塞给budget仍不够，因为其中多项已经unknown。下一步在所属source owner用中性TDD分开admission与value、细化固定关系用途，复用现有planner，再用同14项检验，不抬rank权重/额度或新建分类器。A03母公司地区口径admission=false、父子/日期缺依赖仍需来源责任层处理，不能用新topic代签。详见本轮budget-next/analysis.md/json。
