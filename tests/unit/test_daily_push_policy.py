@@ -228,6 +228,11 @@ def _git(cwd, *command):
     return proc
 
 
+def test_pre_push_hook_is_tracked_as_executable_for_linux_worktrees():
+    entry = _git(REPOSITORY_ROOT, "ls-files", "--stage", ".githooks/pre-push").stdout
+    assert entry.startswith("100755 "), entry
+
+
 def _write_smoke_stubs(root: Path) -> None:
     """Materialise every fast-contract node so the fixture repo can run them."""
     cases: dict[str, list[str]] = {}
@@ -259,7 +264,7 @@ def _fixture_repository(tmp_path: Path):
     for relative in HOOK_AND_GATE_FILES:
         target = work / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(REPOSITORY_ROOT / relative, target)
+        shutil.copy2(REPOSITORY_ROOT / relative, target)
     _write_smoke_stubs(work)
     probe = work / "tests/unit/test_gate_probe.py"
     probe.parent.mkdir(parents=True, exist_ok=True)
