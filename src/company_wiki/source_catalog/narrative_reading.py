@@ -17,7 +17,7 @@ from typing import Any
 from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
 from company_wiki.document_understanding.pipeline import understand_units
 from company_wiki.document_understanding.narrative_continuity import (
-    SourcePageFlow, build_native_continuity, native_section_key,
+    NativeSourceContext, SourcePageFlow, build_native_continuity, native_section_key,
 )
 from company_wiki.document_understanding.operating_states.relations import independent_statement_start
 from company_wiki.document_understanding.selection_bridge import build_context_graph
@@ -102,7 +102,8 @@ def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
 
 
 def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None, *,
-                           work_budget: WorkBudget | None = None):
+                           work_budget: WorkBudget | None = None,
+                           _native_contexts: Mapping[str, NativeSourceContext] | None = None):
     """Container membership is not a claim that all prose is one atomic fact.
 
     Audit every source-owned prose member. Only the shared native continuity
@@ -117,6 +118,13 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     units = {unit.unit_id: unit for unit in parsed.units}
     profiles = pipeline["reading_plan"]["unit_profiles"]
     packages = pipeline["packages"]["packages"]
+    from .narrative_native_dependencies import collect_native_dependencies
+    structure = pipeline.get("structure", {})
+    furniture_ids = frozenset(uid for diagnostic in structure.get("diagnostics", ())
+        if diagnostic.get("code") == "REPEATED_RUNNING_HEADER"
+        for uid in diagnostic.get("unit_ids", ()))
+    native_dependencies = collect_native_dependencies(structure.get("semantic_units", ()),
+        originals=units, furniture_ids=furniture_ids, work_budget=work_budget)
     # Package semantics cannot exempt original prose from physical continuity.
     # Tables and attributed Q&A retain their separate structural owners.
     prose_kinds = {"background", "paragraph_event", "risk", "project"}
@@ -125,7 +133,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     owner_external_context = {}
     table_owners: set[int] = set()
     atomic_projects: set[int] = set()
-    context_blocked: set[str] = set()
+    context_blocked: set[str] = set(native_dependencies.blocked)
     other_members: set[str] = set()
     table_furniture = {unit["unit_id"] for unit in observation
                        if unit.get("kind") in {"table_row", "table_header", "table_caption"}}
@@ -222,6 +230,9 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         result: set[str] = set()
         for uid in member_ids:
             result.update(headings.get(uid, ()))
+            native_context_ids = native_dependencies.context_for(uid)
+            work_budget.charge(len(native_context_ids))
+            result.update(native_context_ids)
             for owner in owners.get(uid, ()):
                 # ParagraphDraft's first anchor is also marked required. This
                 # is container bookkeeping, not a dependency on every later
@@ -230,10 +241,31 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         work_budget.charge(len(result) * max(1, len(result).bit_length()))
         return sorted(result - set(member_ids))
 
+    def native_fields(member_ids):
+        work_budget.charge(1 + len(member_ids))
+        physical: set[str] = set()
+        affected = []
+        proof_rows = {}
+        for uid in member_ids:
+            references = native_dependencies.source_for(uid)
+            work_budget.charge(1 + len(references))
+            physical.update(references)
+            proofs = native_dependencies.proofs_for(uid)
+            work_budget.charge(len(proofs))
+            proof_rows.update({(row["left"], row["right"]): row for row in proofs})
+            if references or native_dependencies.context_for(uid):
+                affected.append(uid)
+        return {"_native_source_original_ids": sorted(physical),
+                "_native_dependency_targets": affected,
+                "_native_source_proofs": tuple(proof_rows.values())} if affected else {}
+
     exclusions = other_members | excluded | context_blocked
+    work_budget.charge(len(observation))
+    observed_kinds = {}
     views = []
     for unit in observation:
         uid = unit["unit_id"]
+        observed_kinds[uid] = unit.get("kind")
         if uid not in owners or uid in exclusions:
             views.append({**unit, "kind": "continuity_boundary"})
             continue
@@ -248,6 +280,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         views.append(unit)
     provenance = {unit.unit_id: {"source_id": unit.source_id,
         "paragraph_index": unit.coordinates.paragraph_index,
+        "observed_kind": observed_kinds.get(unit.unit_id),
         **{key: unit.metadata.get(key) for key in (
             "pdf_block", "block_sha256", "block_char_start", "block_char_end")}}
         for unit in parsed.units if unit.unit_kind == "pdf_text_block"}
@@ -262,7 +295,10 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             coarse_complete=bool(parsed.page_count and parsed.pages_read == parsed.page_count and not parsed.errors),
             unproven_pages=frozenset((*parsed.opaque_pages, *parsed.deferred_table_pages)))
     continuity = build_native_continuity(views, provenance=provenance,
-        sections=sections, unit_profiles=profiles, work_budget=work_budget, source_page_flow=page_flow)
+        sections=sections, unit_profiles=profiles, work_budget=work_budget, source_page_flow=page_flow,
+        source_contexts=_native_contexts)
+    if native_dependencies.diagnostics:
+        continuity["native_dependency_diagnostics"] = native_dependencies.diagnostics
     ranges: dict[tuple[str, int], list[tuple[int, int]]] = {}
     for entry in continuity["deferred_unit_ranges"]:
         ranges.setdefault((entry["source_id"], entry["page"]), []).append(
@@ -370,7 +406,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
                 pid += ":statement:" + sha256("\0".join(piece).encode()).hexdigest()
             generated.append({"package_id": pid, "kind": "native_continuity",
                 "member_unit_ids": piece, "anchor_unit_ids": list(piece),
-                "required_context_unit_ids": context(piece)})
+                "required_context_unit_ids": context(piece), **native_fields(piece)})
             grouped.update(piece)
     expanded = []
     seen: set[str] = set()
@@ -411,13 +447,14 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             seen.add(uid)
             expanded.append({**package, "package_id": str(package["package_id"]) + ":" + uid,
                 "member_unit_ids": [uid], "anchor_unit_ids": [uid],
-                "required_context_unit_ids": context([uid])})
-    return [*expanded, *generated], joint_facts, continuity, blocked
+                "required_context_unit_ids": context([uid]), **native_fields([uid])})
+    return [*expanded, *generated], joint_facts, continuity, blocked | set(native_dependencies.blocked)
 
 
 def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 work_budget: WorkBudget | None = None,
-                _session_state: dict[str, Any] | None = None):
+                _session_state: dict[str, Any] | None = None,
+                _native_contexts: Mapping[str, NativeSourceContext] | None = None):
     from typing import cast
 
     from .narrative_native_ranges import native_range_unit
@@ -445,7 +482,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     numeric_shape_uncertain: set[str] = set()
     try:
         packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline,
-            work_budget=work_budget)
+            work_budget=work_budget, _native_contexts=_native_contexts)
+        withheld.extend(continuity.get("native_dependency_diagnostics", ()))
         sections = pipeline.get("structure", {}).get("sections", ())
         work_budget.charge(sum(1 + len(section.get("heading_unit_ids", ())) for section in sections))
         headings = {uid for section in sections for uid in section.get("heading_unit_ids", ())}
@@ -560,6 +598,19 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             if (original_units[left].coordinates.page_number
                     != original_units[right].coordinates.page_number):
                 carries.add((left, right))
+    list_edges = {}
+    for package in packages:
+        for proof in package.get("_native_source_proofs", ()):
+            work_budget.charge()
+            list_edges[(proof["left"], proof["right"])] = proof
+    if list_edges:
+        work_budget.charge(len(continuity.get("adjacency_edges", ())) + len(list_edges))
+        known_edges = {(edge["left"], edge["right"]) for edge in continuity.get("adjacency_edges", ())}
+        native_edges = [{**proof, "source_id": original_units[proof["left"]].source_id,
+            "basis": "source_body_adjacency", "physical_basis": proof["basis"]}
+            for pair, proof in list_edges.items() if pair not in known_edges]
+        continuity = {**continuity, "adjacency_edges": [*continuity.get("adjacency_edges", ()), *native_edges]}
+        carries.update(list_edges)
     try:
         windows = build_antecedent_windows(parsed, pipeline, prose_unit_ids=prose_ids,
             blocked=frozenset(blocked), excluded=frozenset(excluded),
@@ -624,17 +675,6 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         # The envelope is counted in original coordinates; carriers expand to
         # every member they replaced. A carrier id is never looked up as an
         # original unit.
-        target_originals = [member for uid in package.get("member_unit_ids", ())
-                            for member in original_members(uid)]
-        context_originals = [member for uid in package.get("required_context_unit_ids", ())
-                             for member in original_members(uid)]
-        if not within_reference_envelope(target_originals, context_originals,
-                                         sorted(needed_originals), original_units,
-                                         expand=original_members):
-            deferred_packages.add(index)
-            withheld.append({"package_id": str(package["package_id"]),
-                "reason": "REFERENCE_ENVELOPE", "known_unit_ids": sorted(needed_originals)})
-            continue
         original_extra[index] = needed_originals
         extra_context[index] = {origins.get(entry, entry) for entry in needed_originals}
     # Separate complete source statements can still explicitly qualify one
@@ -708,18 +748,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "known_unit_ids": list(package.get("member_unit_ids", ()))})
             continue
         needed_originals = {member for uid in needed_material for member in original_members(uid)}
-        target_originals = [member for uid in package.get("member_unit_ids", ())
-                            for member in original_members(uid)]
-        context_originals = [member for uid in package.get("required_context_unit_ids", ())
-                             for member in original_members(uid)]
         needed_originals.update(original_extra.get(index, ()))
-        if not within_reference_envelope(target_originals, context_originals,
-                                         sorted(needed_originals), original_units,
-                                         expand=original_members):
-            deferred_packages.add(index)
-            withheld.append({"package_id": str(package["package_id"]),
-                             "reason": "REFERENCE_ENVELOPE", "known_unit_ids": sorted(needed_originals)})
-            continue
         extra_context.setdefault(index, set()).update(needed_material)
         original_extra.setdefault(index, set()).update(needed_originals)
     if extra_context:
@@ -750,6 +779,33 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 contexts[owner] = context_ids - set(view)
     session.contexts = {uid: tuple(sorted(ids)) for uid, ids in contexts.items()}
     graph = build_context_graph({**pipeline["packages"], "packages": budget_packages}, texts)
+    # One union of readable native ancestry, product deictics and restrictions.
+    # Proven running furniture pays source work, never a new model-material fee.
+    for index, package in enumerate(budget_packages):
+        if index in deferred_packages or not (
+                package.get("_native_dependency_targets") or original_extra.get(index)):
+            continue
+        try:
+            member_ids = package.get("member_unit_ids", ())
+            context_ids = graph["groups"][index]["required_unit_ids"]
+            work_budget.charge(1 + len(member_ids) + len(context_ids)
+                + sum(len(inverse_origins.get(uid, (uid,))) for uid in (*member_ids, *context_ids))
+                + len(original_extra.get(index, ())))
+            target_originals = [member for uid in member_ids for member in original_members(uid)]
+            context_originals = [member for uid in context_ids for member in original_members(uid)]
+            needed = sorted(original_extra.get(index, ()))
+            valid = within_reference_envelope(target_originals, context_originals,
+                                              needed, original_units, expand=original_members)
+        except WorkBudgetExceeded:
+            valid = False
+            session.complete = False
+        if not valid:
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                "reason": "OPERATING_WORK_BUDGET" if work_budget.exhausted else "REFERENCE_ENVELOPE",
+                "known_unit_ids": list(package.get("_native_dependency_targets") or
+                                       package.get("member_unit_ids", ()))})
+
     if _session_state is not None:
         _session_state["session"] = session
     if not continuity["complete"]:
@@ -978,7 +1034,11 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
                 "context_evidence_ids": [sid for sid in ids if sid not in support_set]})
         groups.append({"group_id": "urn:company-wiki:reading-group:sha256:" + digest,
                        "kind": str(entry["kind"]), "section_role": str(entry.get("section_role") or "unknown"),
-                       "evidence_ids": ids, "citation_views": citation_views})
+                       "evidence_ids": ids, "citation_views": citation_views,
+                       **({"source_proof_unit_ids": list(entry["_native_source_original_ids"])}
+                          if entry.get("_native_source_original_ids") else {}),
+                       **({"source_proofs": list(entry["_native_source_proofs"])}
+                          if entry.get("_native_source_proofs") else {})})
     unread = _unread(pipeline["structure"], observation)
     # Coverage lists are diagnostic examples, not a second all-unit inventory.
     # Preserve full counts and mark truncation rather than persisting huge IDs.
@@ -1004,7 +1064,8 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
 
 
 def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: str,
-                work_budget: WorkBudget | None = None):
+                work_budget: WorkBudget | None = None,
+                _native_contexts: dict[str, NativeSourceContext] | None = None):
     """Each immutable parent has its own structure; selection stays global.
 
     A captured API projection may contain several genuine original parents.
@@ -1025,7 +1086,7 @@ def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: 
             mime_type=mime_type, language=parsed.language,
             native_scan="complete" if parsed.coverage_complete else "partial",
             opaque_pages=parsed.opaque_pages, deferred_pages=parsed.deferred_table_pages,
-            work_budget=budget)
+            work_budget=budget, _native_contexts=_native_contexts)
         if part.get("analysis_status") == "deferred":
             return part
         if native_frontend is not None:
@@ -1082,17 +1143,19 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                                     "application/pdf" if parsed.page_count else "text/html")
     from company_wiki.resource_budget import new_document_work_budget
     budget = work_budget if work_budget is not None else new_document_work_budget()
+    native_contexts: dict[str, NativeSourceContext] = {}
     try:
         budget.charge()
         pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type,
-                               work_budget=budget)
+                               work_budget=budget, _native_contexts=native_contexts)
     except WorkBudgetExceeded as refusal:
         return _deferred_selection(parsed, route, budget=budget, refusal=refusal)
     if pipeline.get("analysis_status") == "deferred":
         return _deferred_selection(parsed, route, budget=budget)
     session_state: dict[str, Any] = {}
     candidates, reading, eligible, graph_complete, withheld = _candidates(
-        parsed, pipeline, work_budget=budget, _session_state=session_state)
+        parsed, pipeline, work_budget=budget, _session_state=session_state,
+        _native_contexts=native_contexts)
     session = session_state["session"]
     origins = pipeline.get("_carrier_origins", {})
     dropped = 0

@@ -38,7 +38,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/16"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/17"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -108,7 +108,7 @@ _OPERATING_MEASURE = re.compile(
     r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
     r"capacity utilization|product mix|\b(?:projects?|orders?|capacity|output|total volume)\b|"
     r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
-    r"产能利用率|产品组合|项目|項目|产能|產能|产量|產量|容积|容積|体积|體積", re.I)
+    r"订单|訂單|产能利用率|产品组合|项目|項目|产能|產能|产量|產量|容积|容積|体积|體積", re.I)
 _REVENUE_VALUE = re.compile(
     r"(?:营业收入|營業收入|收入|\b(?:revenues?|net sales)\b(?:\s+(?:share|proportion))?)\s*"
     r"(?:(?:(?:has|have|had)\s+)?(?:(?:further|now|already|currently)\s+)*"
@@ -348,7 +348,16 @@ def _source_metric_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
                 continue
         if after_quantity or _SOURCE_PRE_QUANTITY.search(before):
             relations.append((projection + "quantity", metric.start(), metric.end()))
-        if (_MEASURE_DIRECTION_AFTER.match(after) or (
+        direction_after = after
+        if state.forward_outlook:
+            # Interpret an infinitive only under the existing forward owner.
+            # Reuse the same optional nominal and direction vocabulary; bare
+            # "orders to grow" cannot become an observed current metric.
+            nominal = re.match(r"^\s*(?:" + _DIRECTION_NOMINAL + r"\s*)?", after, re.I)
+            if nominal is not None:
+                direction_after = after[:nominal.end()] + re.sub(
+                    r"^to\s+", "", after[nominal.end():], count=1, flags=re.I)
+        if (_MEASURE_DIRECTION_AFTER.match(direction_after) or (
                 _MEASURE_DIRECTION_BEFORE.search(before) and _MEASURE_NOMINAL_END.match(after))):
             relations.append((projection + "direction", metric.start(), metric.end()))
     # Component sales changes are source relations too. Causal consumers do

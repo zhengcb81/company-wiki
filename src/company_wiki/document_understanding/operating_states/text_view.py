@@ -30,6 +30,16 @@ CONNECTOR_PREFIX = re.compile(
 )
 
 
+# A lexical prefix only: a delimiter is mandatory, so subtraction, decimal
+# quantities and ordinary words are never consumed as enumeration syntax.
+_DECLARATION_LIST_PREFIX = re.compile(
+    r"^\s*(?:[-•●▪]|\([0-9]{1,2}\)|（[0-9]{1,2}）|"
+    r"(?=[ivxlcdm]+[.)])m{0,3}(?:cm|cd|d?c{0,3})"
+    r"(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})[.)])\s+",
+    re.IGNORECASE,
+)
+
+
 @dataclass(frozen=True)
 class MatchingView:
     """Compacted matching text plus original index per kept character."""
@@ -122,8 +132,10 @@ def split_clauses(view: MatchingView) -> list[tuple[int, int]]:
 
 
 def strip_connector(text: str) -> tuple[str, int]:
-    """Drop a leading continuation connector; return (rest, stripped length)."""
-    match = CONNECTOR_PREFIX.match(text)
-    if match is None:
-        return text, 0
-    return text[match.end():], match.end()
+    """Match a list/continuation prefix without rewriting source coordinates."""
+    marker = _DECLARATION_LIST_PREFIX.match(text)
+    start = marker.end() if marker is not None else 0
+    # Match in a view but always return an offset in the untouched original.
+    match = CONNECTOR_PREFIX.match(text[start:])
+    end = start + (match.end() if match is not None else 0)
+    return text[end:], end

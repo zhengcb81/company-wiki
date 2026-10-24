@@ -26,7 +26,8 @@ _BOUNDARY = re.compile(
 # The single vocabulary describes predicate modality for every metric owner.
 # Consumers must not maintain their own expect/anticipate/goal/negative lists.
 _MODAL = re.compile(
-    r"(?P<conditional>假设|假定|假如|如果|若(?!干)|\b(?:if|unless|assuming)\b)|"
+    r"(?P<conditional>假设|假定|假如|如果|若(?!干)|\b(?:if|unless|assuming)\b|"
+    r"\bassumptions?\s+(?:that|of)\b)|"
     r"(?P<negative>尚未|未能|没有|并未|不曾|不是|不明|"
     r"\b(?:not|never|unknown|don't|doesn't|didn't|can't|cannot|isn't|aren't|wasn't|weren't)\b)|"
     r"(?P<uncertain>是否|可能|\b(?:may|might|could|would|whether|uncertain|unclear)\b)|"
@@ -53,7 +54,19 @@ _PRIOR_COMPLETION = re.compile(r"\bto\s+have\s+\w+\b", re.I)
 _DISCLOSURE_ACTION = re.compile(
     r"^\s*(?:(?:to|be)\s+)?(?:announce|report|publish|disclose|release|present)\b|"
     r"^\s*(?:公布|披露|发布|公告)", re.I)
-_NOMINAL_PROJECT = re.compile(r"\b(?:our|the|this|that|a|an|new|its|their)\s*$", re.I)
+_NOMINAL_PROJECT = re.compile(
+    r"\b(?:our|the|this|that|a|an|new|its|their|total)\s+"
+    r"(?:[a-z]+(?:ed|ing|est)\s+){0,4}$|"
+    r"\b\d[\d,.]*\s+(?:(?:thousand|million|billion)\s+)?$", re.I)
+_PROJECT_NOUN_PREDICATE = re.compile(
+    r"^\s+(?:(?:has|have|had)\s+)?"
+    r"(?:[a-z]+ed|stood|stands|grew|grown|rose|risen|fell|fallen|"
+    r"is|are|was|were|has|have|had|total(?:s|ing|ling|ed|led)?)\s+"
+    r"(?:(?:at|to|from|by)\s+)?(?=\d)", re.I)
+_PROJECT_VERBAL_COMPLEMENT = re.compile(r"^\s*(?:that\b|\d)", re.I)
+_LEADING_HYPOTHESIS = re.compile(
+    r"(?:^|[,，])\s*(?:on|under|given|based\s+on)\s+(?:(?:an?|the)\s+)?"
+    r"assumptions?\s+(?:that|of)\b", re.I)
 _REFERENCED_VALUE = re.compile(r"\b(?:below|above|versus|against)\s+(?:(?:the|our|its|previous|prior)\s+)*$", re.I)
 
 
@@ -105,8 +118,24 @@ def observe_metric_predicate(text: str, start: int, end: int) -> PredicateObserv
         a, b = left + marker.start(), left + marker.end()
         kind = marker.lastgroup
         assert kind is not None
-        if marker.group().casefold() in {"project", "projects"} and _NOMINAL_PROJECT.search(text[left:a]):
-            continue
+        if marker.group().casefold() in {"project", "projects"}:
+            # A quantified/possessed project or a project with its own stock/
+            # change predicate is the measured noun, not a forecast verb.
+            # The source's grammar supplies this distinction, not its issuer
+            # or a list of example sentences.
+            if (_NOMINAL_PROJECT.search(text[left:a])
+                    or _PROJECT_NOUN_PREDICATE.match(text[b:right])):
+                continue
+            if a < end and start < b:
+                # The metric's own noun cannot be its governing forecast
+                # verb. Conversely "we project 619 customers" contains a
+                # verbal complement: that project token is not a measured
+                # project stock at all, even though a lexical metric matcher
+                # can see it. The separate customer target still observes
+                # the actual preceding forecast predicate below.
+                if _PROJECT_VERBAL_COMPLEMENT.match(text[b:right]):
+                    modal.append(("referenced", a, b))
+                continue
         if kind == "planned" and marker.group().casefold() == "will" and a < start:
             if _DISCLOSURE_ACTION.match(text[b:start]):
                 modal.append(("referenced", a, b))
@@ -127,7 +156,10 @@ def observe_metric_predicate(text: str, start: int, end: int) -> PredicateObserv
     # A condition qualifies the metric assertion. It does not replace a real
     # expectation with an actual fact, or let a customer's negative predicate
     # inside the condition negate the issuer's outer forecast predicate.
-    leading_condition = next((m for m in _MODAL.finditer(prior) if m.lastgroup == "conditional"), None)
+    leading_condition = next((m for m in _MODAL.finditer(prior)
+        if m.lastgroup == "conditional" and (
+            not m.group().casefold().startswith("assumption")
+            or _LEADING_HYPOTHESIS.search(prior))), None)
     conditions = [m for m in modal if m[0] == "conditional"]
     has_condition = bool(conditions or leading_condition)
     condition_start = min((m[1] for m in conditions if m[1] >= end), default=right)

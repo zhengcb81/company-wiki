@@ -33,7 +33,7 @@ from company_wiki.document_understanding.layout_hints.contract import (
 
 from . import patterns as p
 from .product_reference import (find_product_deictic, head_class,
-                                is_generic_reference, scan_product_declarations)
+                                is_generic_reference, product_head_suffix, scan_product_declarations)
 from .text_view import (MatchingText, MatchingView, build_matching_view,
                         build_prepared_matching_view, prepare_matching_text,
                         split_clauses, strip_connector)
@@ -128,6 +128,12 @@ _NONPREDICATE_BOUNDARIES = frozenset({"and", "but", "or", "yet", "so", "then", "
                                         "still", "just", "not", "never"})
 
 
+def _subject_predicate_boundary(text: str, start: int = 0) -> re.Match[str] | None:
+    """First real predicate boundary; conjunctions do not erase subject NPs."""
+    return next((match for match in p.EN_AUX_BOUNDARY.finditer(text, start)
+                 if match.group().casefold() not in _NONPREDICATE_BOUNDARIES), None)
+
+
 def independent_statement_start(text: str) -> bool:
     """Conservative source boundary using the existing script and NP grammar.
 
@@ -141,17 +147,15 @@ def independent_statement_start(text: str) -> bool:
         return False
     if issuer.group().casefold() != "our":
         return True
-    for boundary in p.EN_AUX_BOUNDARY.finditer(prepared, issuer.end()):
-        if boundary.group().casefold() in _NONPREDICATE_BOUNDARIES:
-            continue
-        subject = prepared[issuer.end():boundary.start()].strip()
-        if re.search(r"[,;.!?]", subject):
-            return False
-        # A later predicate belongs to the predicate/object region, not to a
-        # successively longer subject. Decide once at the first real boundary.
-        return bool(p.PRODUCT_SUFFIX.search(subject)
-                    or (subject.endswith("s") and p.PRODUCT_SUFFIX.search(subject[:-1])))
-    return False
+    boundary = _subject_predicate_boundary(prepared, issuer.end())
+    if boundary is None:
+        return False
+    subject = prepared[issuer.end():boundary.start()].strip()
+    if re.search(r"[,;.!?]", subject):
+        return False
+    # A later predicate belongs to the predicate/object region, not to a
+    # successively longer subject. Decide once at the first real boundary.
+    return product_head_suffix(subject) is not None
 
 
 @dataclass
@@ -369,7 +373,8 @@ def _np_candidates(view: MatchingView, region: str, base: int) -> list[tuple[int
         core = core[trimmed.end():]
     cut = None
     for regex in (p.ACTOR_CUT, p.EN_AUX_BOUNDARY, p.CN_TOPIC_BOUNDARY):
-        match = regex.search(core)
+        match = (_subject_predicate_boundary(core) if regex is p.EN_AUX_BOUNDARY
+                 else regex.search(core))
         if match is not None:
             cut = match.start() if cut is None else min(cut, match.start())
     if cut is not None:
@@ -377,7 +382,7 @@ def _np_candidates(view: MatchingView, region: str, base: int) -> list[tuple[int
             return []
         core = core[:cut]
     if len(core) > 24:
-        match = p.EN_AUX_BOUNDARY.search(core)
+        match = _subject_predicate_boundary(core)
         if match is not None and match.start() > 0:
             core = core[:match.start()]
     tail = p.SUBJECT_TAIL.search(core)
@@ -421,9 +426,9 @@ def _classify_np(view: MatchingView, span: tuple[int, int],
     text = view.text[span[0]:span[1]].strip()
     if not text:
         return "none", "unknown"
-    product = p.PRODUCT_SUFFIX.search(text)
+    product = product_head_suffix(text)
     if product:
-        prefix = text[:product.start()]
+        prefix = text[:product[0]]
         for marker, attribution in ((p.THIRD_PARTY, "other"), (p.RELATED_PARTY, "quoted_related_party")):
             party = marker.search(prefix)
             if party and p.POSSESSIVE_LINK.match(prefix[party.end():]):

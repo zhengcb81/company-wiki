@@ -299,7 +299,7 @@ class SourceOperatingSession:
                 if len(deictics) != 1:
                     continue
                 deictic = deictics[0]
-                if strip_connector(right_text[:deictic.span[0]].strip())[0].strip(" ,，:："):
+                if strip_connector(right_text[:deictic.span[0]])[0].strip(" ,，:："):
                     continue
                 marker = {**right_marker,
                           "char_start": right_marker["char_start"] + deictic.span[0],

@@ -29,7 +29,7 @@ plan; the existing selector and budget still decide what is actually sent.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from typing import Any
+from typing import Any, TYPE_CHECKING
 from hashlib import sha256
 from dataclasses import replace
 
@@ -39,8 +39,11 @@ from .strategy_binding import bind_reading_plan
 from .layout_hints.contract import WorkBudget, WorkBudgetExceeded, resolve_limits as layout_limits
 from .native_signal_bridge import collect_native_signals
 
+if TYPE_CHECKING:
+    from .narrative_continuity import NativeSourceContext
+
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.12.0"
+PIPELINE_FEATURE_VERSION = "1.13.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -76,12 +79,14 @@ def understand_units(
     limits: Mapping[str, Any] | None = None,
     max_packages: int | None = None,
     work_budget: WorkBudget | None = None,
+    _native_contexts: dict[str, NativeSourceContext] | None = None,
 ) -> dict[str, Any]:
     """Run the full document-understanding chain over already-parsed units.
 
     Returns a ``du-pipeline/1`` mapping holding each stage's own output plus a small plan
     summary. Each stage keeps its own schema version, so a consumer can use one stage's
-    output without depending on the rest.
+    output without depending on the rest. A private sink can retain the borrowed
+    source observer for the current selection call; the JSON result never owns it.
     """
     # Imported here rather than at module import time: the parent package must stay usable
     # when a lane is absent (for example a partial deployment), and a missing lane should
@@ -132,7 +137,33 @@ def understand_units(
     profile = resolve_reading_profile(get_profile(route["profile_id"]), prepared,
                                       route, limits=limits)
     route["profile_version"] = profile["profile_version"]
-    structure = bind_layout_context(build_structure(observation, limits=limits, work_budget=budget), layout_hints,
+    from .narrative_continuity import NativeSourceContext
+    try:
+        # Borrow only already parsed provenance. Reserve the projection before
+        # a document-sized index is built; the same account pays both clients.
+        budget.charge(1 + 3 * source_unit_count)
+        native_provenance = {
+            unit.unit_id: {
+                "paragraph_index": getattr(unit.coordinates, "paragraph_index", None),
+                **{key: unit.metadata[key] for key in
+                   ("pdf_block", "block_sha256", "block_char_start", "block_char_end")
+                   if key in unit.metadata}}
+            for unit in units}
+        for wire in observation["units"]:
+            # Attribution is already normalised by the adapter/source_ref.
+            # Generic public parser inputs need no new identity attribute, and
+            # unknown paragraph coordinates remain unknown physical evidence.
+            native_provenance[wire["unit_id"]]["source_id"] = wire.get("hints", {}).get(
+                "source_id", source_id)
+        native_context = NativeSourceContext(observation["units"], provenance=native_provenance,
+            coverage=observation["coverage"], work_budget=budget)
+    except WorkBudgetExceeded:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
+                                  observation=observation, layout_hints=layout_hints)
+    if _native_contexts is not None:
+        _native_contexts[source_id] = native_context
+    structure = bind_layout_context(build_structure(observation, limits=limits, work_budget=budget,
+                                    native_context=native_context), layout_hints,
                                     work_budget=budget)
     if budget.exhausted:
         return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,

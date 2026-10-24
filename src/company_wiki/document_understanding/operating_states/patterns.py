@@ -389,10 +389,10 @@ EN_AUX_BOUNDARY = re.compile(
 SUBJECT_TAIL = re.compile(
     r"(?:已经|已經|已|正在|目前|当前|當前|现在|現在|尚未|还是|還是|将|把|被|曾|"
     r"从来|也|还|而|并|並且|并且|且|同时|以及|"
-    r"and|also|then|while|but|however|now|currently|just|still|already|ever|"
+    r"(?<![A-Za-z])(?:and|also|then|while|but|however|now|currently|just|still|already|ever|"
     r"is|are|was|were|has|have|had|be|been|being|will|would|can|could|may|"
     r"might|must|shall|should|do|does|did|to|the|a|an|its|their|our|this|that|"
-    r"in|on|at|of|for|with|about|from)\s*$",
+    r"in|on|at|of|for|with|about|from))\s*$",
     re.IGNORECASE,
 )
 CN_TOPIC_BOUNDARY = re.compile(
