@@ -97,6 +97,31 @@ def test_purpose_policy_is_fresh_and_provider_scoped(configured):
     assert options["thinking"] == "enabled" and options["reasoning_effort"] == "max"
 
 
+def test_minimax_m31_rejects_disabled_thinking_before_http(configured):
+    config = configured({
+        "provider": "minimax",
+        "generation_policy": {"minimax": {"narrative": {"thinking": "disabled"}}},
+    })
+
+    with pytest.raises(ValueError, match="MINIMAX_M3_1_FLASH_THINKING_CANNOT_BE_DISABLED"):
+        model_options_from_config(config.llm)
+
+
+def test_minimax_m31_narrative_uses_configured_supported_effort(configured):
+    config = configured({
+        "provider": "minimax",
+        "generation_policy": {
+            "minimax": {"narrative": {"reasoning_effort": "low"}},
+        },
+    })
+
+    options = model_options_from_config(config.llm)
+    body = json.loads(NarrativeHTTPModel(**options).request_bytes(
+        NarrativeModelRequest.from_selection(selection())))
+    assert options["reasoning_effort"] == body["reasoning_effort"] == "low"
+    assert "thinking" not in options and "thinking" not in body
+
+
 @pytest.mark.parametrize("policy", [
     [], None, {"deepsek": {}}, {"deepseek": []}, {"deepseek": {"narrative": []}},
     {"deepseek": {"narrative": {"unknown_option": "low"}}},

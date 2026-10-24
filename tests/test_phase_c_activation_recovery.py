@@ -141,6 +141,90 @@ def test_pre_reservation_refusal_rejects_ambiguous_or_malformed_evidence(tmp_pat
     ) is None
 
 
+def test_activation_recovery_requires_a_durable_held_paid_response():
+    from company_wiki.automation.narrative_paid_response import PaidResponsePin
+
+    dead_letter = {
+        "status": "failed",
+        "documents": [{"status": "dead_letter", "errors": ["MODEL_HTTP_TRANSPORT"]}],
+    }
+    assert runner.activation_recovery_precondition(
+        code=2,
+        receipt=dead_letter,
+        native_usage=[{"usage_status": "unknown", "response_sha256": None}],
+        events=[{"event": "http_post_attempt", "run_id": "run-3"}],
+        run_id="run-3",
+    ) == "initial_document_not_activation_pending"
+
+    held = {
+        "status": "failed",
+        "documents": [{"status": "activation_pending", "errors": ["ACTIVATION_HELD"]}],
+    }
+    body_sha256 = "a" * 64
+    pin = PaidResponsePin(
+        request_sha256="b" * 64,
+        body_sha256=body_sha256,
+        object_key=f"objects/sha256/{body_sha256[:2]}/{body_sha256}.json",
+        byte_size=123,
+        model_id="test-model",
+        adapter_id="test-adapter",
+        prompt_version="test-prompt/1",
+        http_status=200,
+        duration_ms=1,
+    ).to_json()
+    paid_row = {
+        "usage_status": "known",
+        "request_sha256": "b" * 64,
+        # This is the adapter-decoded response hash, intentionally distinct
+        # from pin.body_sha256, which covers the full HTTP response envelope.
+        "response_sha256": "c" * 64,
+        "paid_response_json": pin,
+    }
+    assert runner.activation_recovery_precondition(
+        code=2,
+        receipt=held,
+        native_usage=[paid_row],
+        events=[{"event": "activation_held", "run_id": "run-3"}],
+        run_id="run-3",
+    ) is None
+    assert runner.activation_recovery_precondition(
+        code=2,
+        receipt=held,
+        native_usage=[{**paid_row, "paid_response_json": None}],
+        events=[{"event": "activation_held", "run_id": "run-3"}],
+        run_id="run-3",
+    ) == "durable_paid_response_unavailable"
+    assert runner.activation_recovery_precondition(
+        code=2,
+        receipt=held,
+        native_usage=[{**paid_row, "paid_response_json": "{}"}],
+        events=[{"event": "activation_held", "run_id": "run-3"}],
+        run_id="run-3",
+    ) == "durable_paid_response_unavailable"
+    for invalid_hash in ("", "not-a-sha256"):
+        assert runner.activation_recovery_precondition(
+            code=2,
+            receipt=held,
+            native_usage=[{**paid_row, "response_sha256": invalid_hash}],
+            events=[{"event": "activation_held", "run_id": "run-3"}],
+            run_id="run-3",
+        ) == "durable_paid_response_unavailable"
+    assert runner.activation_recovery_precondition(
+        code=2,
+        receipt=held,
+        native_usage=[{**paid_row, "request_sha256": "d" * 64}],
+        events=[{"event": "activation_held", "run_id": "run-3"}],
+        run_id="run-3",
+    ) == "durable_paid_response_unavailable"
+    assert runner.activation_recovery_precondition(
+        code=2,
+        receipt=held,
+        native_usage=[{**paid_row, "usage_status": "unknown"}],
+        events=[{"event": "activation_held", "run_id": "run-3"}],
+        run_id="run-3",
+    ) == "durable_paid_response_unavailable"
+
+
 def test_public_span_limits_are_read_from_shared_router_configuration():
     from company_wiki.source_catalog.narrative_routing import (
         DEFAULT_SELECTION_LIMIT,
@@ -165,7 +249,7 @@ def test_actual_paid_outbox_resumes_same_run_without_new_post(tmp_path):
             mode="loopback", output=output, fixture_endpoint=server.endpoint,
             selected_versions="0.9.0", activation_recovery=True,
         )
-        assert result["status"] == "PASS", result
+        assert result["status"] == "PASS", json.dumps(result, indent=2)
         assert len(server.requests) == 1
     state = result["states"][0]
     recovered = state["activation_recovery"]

@@ -177,6 +177,12 @@ def model_options_from_config(llm: _LLMConfig, *, purpose: str = "narrative") ->
         options["reasoning_split"] = True
     resolver = getattr(llm, "generation_options", None)
     generation = resolver(purpose) if callable(resolver) else {}
+    if (
+        llm.provider == "minimax"
+        and llm.model.strip().casefold() == "minimax-m3.1-flash"
+        and generation.get("thinking") == {"type": "disabled"}
+    ):
+        raise ValueError("MINIMAX_M3_1_FLASH_THINKING_CANNOT_BE_DISABLED")
     if "thinking" in generation:
         options["thinking"] = generation["thinking"]["type"]
     if "reasoning_effort" in generation:

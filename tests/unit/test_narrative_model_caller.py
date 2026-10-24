@@ -159,6 +159,23 @@ def test_malformed_response_still_settles_valid_usage_and_carries_static_diagnos
     assert error.provider_code is None and model.calls == 1
 
 
+def test_http_transport_failure_is_not_mislabeled_as_invalid_provider_response():
+    from company_wiki.automation.narrative_model import ModelResponseError
+
+    ledger = Ledger()
+    model = Model(ledger, error=ModelResponseError("MODEL_HTTP_TRANSPORT"))
+    with pytest.raises(NarrativeBudgetCallError) as caught:
+        _caller(ledger, model).generate(_context(), REQUEST)
+
+    error = caught.value
+    assert error.code == "MODEL_HTTP_TRANSPORT"
+    assert error.outcome is HandlerOutcome.TERMINAL_FAILURE
+    assert ledger.settlements[0]["usage"] is None
+    assert ledger.settlements[0]["error_code"] == "MODEL_HTTP_TRANSPORT"
+    assert error.metrics.tokens == 100
+    assert model.calls == 1
+
+
 @pytest.mark.parametrize("case", ["denied", "duplicate"])
 def test_admission_failure_never_calls_model(case):
     ledger = Ledger()

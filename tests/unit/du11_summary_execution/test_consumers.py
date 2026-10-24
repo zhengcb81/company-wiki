@@ -162,6 +162,20 @@ def test_failure_review_keeps_inner_canonical_summary_and_report_separate(
     assert database.read_bytes() == before
 
 
+def test_failure_review_writer_falls_back_when_windows_denies_hardlinks(
+    tmp_path, monkeypatch
+):
+    def deny_hardlink(*_args):
+        raise PermissionError("hard links unavailable")
+
+    monkeypatch.setattr(review.os, "link", deny_hardlink)
+    path = tmp_path / "failure-review.json.gz"
+    review._write_once(path, b"complete review", rename_no_replace=review.os.rename)
+
+    assert path.read_bytes() == b"complete review"
+    assert list(tmp_path.glob(".failure-review-*")) == []
+
+
 @pytest.mark.parametrize(
     "response_bytes",
     [

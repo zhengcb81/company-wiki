@@ -7,6 +7,7 @@ details/usage are retained separately by the runner's existing append_native.
 """
 from __future__ import annotations
 
+from collections.abc import Callable
 from contextlib import closing
 import gzip
 import hashlib
@@ -103,7 +104,12 @@ def _native_material(database: Path, run_id: str) -> dict | None:
     }
 
 
-def _write_once(path: Path, payload: bytes) -> None:
+def _write_once(
+    path: Path,
+    payload: bytes,
+    *,
+    rename_no_replace: Callable[[Path, Path], None] | None = None,
+) -> None:
     if path.exists():
         if path.read_bytes() != payload:
             raise FailureReviewMaterialConflict("existing failure review material differs")
@@ -127,8 +133,22 @@ def _write_once(path: Path, payload: bytes) -> None:
         except FileExistsError:
             if path.read_bytes() != payload:
                 raise FailureReviewMaterialConflict("existing failure review material differs") from None
+        except PermissionError:
+            # Windows may deny hard-link creation even when same-directory
+            # writes are allowed. Its os.rename is atomic and fails if the
+            # destination already exists, preserving write-once semantics.
+            if rename_no_replace is None:
+                raise
+            try:
+                rename_no_replace(staging, path)
+            except FileExistsError:
+                if path.read_bytes() != payload:
+                    raise FailureReviewMaterialConflict(
+                        "existing failure review material differs"
+                    ) from None
     finally:
-        staging.unlink()
+        if staging.exists():
+            staging.unlink()
 
 
 def preserve_failure_review_material(
@@ -147,5 +167,9 @@ def preserve_failure_review_material(
     raw = json.dumps(material, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf8")
     payload = gzip.compress(raw, compresslevel=9, mtime=0)
     output_path = output_path.resolve()
-    _write_once(output_path, payload)
+    _write_once(
+        output_path,
+        payload,
+        rename_no_replace=os.rename if os.name == "nt" else None,
+    )
     return {"path": str(output_path), "sha256": hashlib.sha256(payload).hexdigest(), "bytes": len(payload)}

@@ -123,6 +123,80 @@ def test_public_selector_emits_the_original_metric_definition_span():
     assert text in [span.raw_text for span in result.evidence_spans]
 
 
+MICROSOFT_RPO_DISCLOSURE = (
+    "Revenue allocated to remaining performance obligations, which includes unearned "
+    "revenue and amounts that will be invoiced and recognized as revenue in future "
+    "periods, was $ 375 billion as of June 30, 2025, of which $ 368 billion is "
+    "related to the commercial portion of revenue. We expect to recognize "
+    "approximately 40 % of our total company remaining performance obligation "
+    "revenue over the next 12 months and the remainder thereafter."
+)
+
+
+def test_quantified_rpo_with_intervening_definition_is_an_operating_contract_stock():
+    fact = detect_reading_business_fact(MICROSOFT_RPO_DISCLOSURE)
+
+    # The text remains an accounting disclosure by source classification; the
+    # bounded stock/conversion relation makes this particular fact readable.
+    assert source_purpose(MICROSOFT_RPO_DISCLOSURE) == "accounting_policy"
+    assert fact.eligible
+    assert "operating_contract_stock" in fact.reasons
+    assert "contract_revenue_conversion" in fact.reasons
+    assert _admitted(
+        unit(MICROSOFT_RPO_DISCLOSURE),
+        {"section_role": "unknown"},
+        "background",
+        fact=fact,
+    )[0]
+
+
+def test_rpo_policy_definition_and_auditor_test_remain_non_operating():
+    definition = (
+        "Revenue allocated to remaining performance obligations includes unearned "
+        "revenue and amounts that will be invoiced and recognized as revenue in future periods."
+    )
+    audit = (
+        "The auditors' audit procedures tested revenue allocated to remaining "
+        "performance obligations and assessed management estimates."
+    )
+
+    assert source_purpose(definition) == "accounting_policy"
+    assert source_purpose(audit) == "audit_procedure"
+    assert not detect_reading_business_fact(definition).eligible
+    assert not detect_reading_business_fact(audit).eligible
+
+
+def test_rpo_mention_near_a_date_is_not_a_conversion_disclosure():
+    text = "Our remaining performance obligations were reviewed on June 30, 2025."
+    fact = detect_reading_business_fact(text)
+
+    assert source_purpose(text) not in {"operating", "operating_contract_stock"}
+    assert not fact.eligible
+    assert "contract_revenue_conversion" not in fact.reasons
+
+
+def test_public_selector_emits_actual_quantified_rpo_disclosure():
+    digest = sha256(b"microsoft-rpo-quantified-reading").hexdigest()
+    parsed = DocumentStructure(
+        source_id_for_sha256(digest),
+        digest,
+        "en",
+        (unit(MICROSOFT_RPO_DISCLOSURE),),
+        page_count=1,
+        pages_read=1,
+        mime_type="text/html",
+    )
+
+    result = select_narrative_evidence(
+        parsed,
+        title="Microsoft FY2025 Form 10-K",
+        existing_kind="sec_10k",
+        selector_version="0.9.0",
+    )
+
+    assert MICROSOFT_RPO_DISCLOSURE in [span.raw_text for span in result.evidence_spans]
+
+
 def test_multi_metric_definition_is_not_misclassified_as_reported_growth():
     text = (
         "Commercial bookings growth: sum of revenue growth for commercial cloud "

@@ -1,8 +1,8 @@
 {
   "schema_version": "company-wiki-current-plan-status/1",
-  "as_of_date": "2026-10-24",
+  "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_NEXT_CROSS_MARKET_REAL_SAMPLE_AFTER_CN_H1_RF_INTERFACE_PASS",
+  "overall_status": "ACTIVE_FORMAL_V4_PIPELINE_PASS_CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -122,6 +122,75 @@
         "M3 acceptance covers source selection behavior and exact replay bindings only",
         "does not accept complete content coverage, formal LLM summaries, cache recovery, or RF consumption"
       ]
+    },
+    "us10k_formal_v4": {
+      "status": "PIPELINE_PASS_CONTENT_RF_OPEN",
+      "run_ref": ".planning/shared-reading-production/du11/live-us-10k-m31-formal-v4-20261025",
+      "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "gold_sha256": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8",
+      "actual_posts": 1,
+      "http_status": 200,
+      "tokens": 17666,
+      "estimated_micro_usd": 7102,
+      "mother_budget_before": {
+        "tokens": 1765712,
+        "micro_usd": 717734,
+        "new_unknown_count": 6,
+        "prior_unknown_holds_retained": 7
+      },
+      "mother_budget_after": {
+        "tokens": 1783378,
+        "micro_usd": 724836,
+        "new_unknown_count": 6,
+        "prior_unknown_holds_retained": 7
+      },
+      "summary_persisted": true,
+      "activation_recovery": "PASS",
+      "cache_reuse": "PASS",
+      "ff_reuse_downloads": 0,
+      "rf_status": "NOT_CONSUMED_NEEDS_REVIEW",
+      "content_acceptance": "OPEN",
+      "selection": {
+        "selected": 112,
+        "candidates": 484,
+        "deferred": 314,
+        "layout_complete": false,
+        "pages_read": 0,
+        "tables_scanned": 0,
+        "eligible_packages": 358,
+        "unassigned_unit_diagnostics": 4087,
+        "unassigned_unit_meaning": "OPEN_TO_VERIFY; do not equate automatically to unread business content"
+      },
+      "claims": {
+        "count": 43,
+        "defaulted_to_uncertain": 43,
+        "needs_review": 43,
+        "summary_path": "advisory extractive ranking, not narrative generation"
+      },
+      "translation": false,
+      "temporary_lake_removed": true,
+      "receipt": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
+      "source_card_execution": {
+        "tasks": 50,
+        "admitted": 43,
+        "deferred": 5,
+        "unsupported": 2,
+        "source_coverage_complete": false,
+        "original_paid_run_rank_diagnostic": "RANK_INVALID",
+        "offline_replay_after_decoder_fix": "50/50 unique task IDs matched; no provider call"
+      },
+      "next_step_now": "Formal-v4 technical lifecycle passed, but RF/content acceptance remains open. Decoder repair passes exact-response offline replay; the immutable paid-run receipt still records the pre-fix RANK_INVALID result. Separately, selection admits 112/484 candidates (314 deferred), reports incomplete layout, and source-card execution has 43 admitted, 5 deferred and 2 unsupported. The current extractive ranking path constructs all 43 claims with uncertain modality/needs_review, which quality projection propagates; RF correctly reports not_consumed. Next reproduce these three contributors independently with offline artifacts, verify whether 4,087 unassigned units indicate real business-content gaps, and design resumable batching plus evidence-grounded summary generation. Do not retry or rewrite the formal-v4 paid receipt."
+    },
+    "independent_project_cards_20261024": {
+      "status": "ROOT_ACCEPTED_ALL_THREE_DELIVERIES_NOT_MERGED",
+      "dispatch": "harness_lanes/20261024-independent/dispatch.json",
+      "receipt": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
+      "card_ids": [
+        "QA-RAG-SAFE-REBUILD",
+        "IR-REPORT-GENERATION",
+        "MC-OUTPUT-INTEGRITY"
+      ],
+      "external_branch_merges_or_pushes": false
     }
   },
   "content": {
@@ -148,7 +217,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_NEXT_US_10K_SAMPLE; CN_H1_TECHNICAL_AND_RF_CONSUMER_PASS; CONTENT_QUALITY_AND_W12_HOLDOUT_LOOP_OPEN",
+      "status": "FORMAL_V4_PIPELINE_PASS_AFTER_ONE_HTTP_200; CACHE_ACTIVATION_RECOVERY_AND_FF_REUSE_PASS; RF_NOT_CONSUMED_NEEDS_REVIEW; PARTIAL_SELECTION_AND_CONTENT_QUALITY_OPEN; NEXT_DIAGNOSE_BATCHED_COVERAGE_ROOT_CAUSE",
       "mainline": true
     },
     {
@@ -177,42 +246,42 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Preflight the already-local Microsoft FY2025 10-K with zero provider/model cost and verify output capacity; if it passes, run the configured summary, cache-recovery, and read-only RF-consumption path without redownloading. Reconcile the listed CWP/RF/FF code-branch candidates one by one against current behavior and PWF receipts; do not bulk-merge. Remaining untracked artifacts stay preserved until receipt ownership is resolved.",
+  "next_step_now": "Formal-v4 pipeline passed, but content/RF acceptance did not: selection was 112/484 with 314 deferred and incomplete layout; all 43 claims remain uncertain/needs_review and RF status is not_consumed. Diagnose the shared selector allocation, unassigned-unit and batching/continuation root cause using offline replay and targeted tests first. Preserve the formal-v4 paid receipt; do not retry it. Consider a new bounded live summary only after the revised selection/batch path passes independent review, protected fingerprints and budget preflight.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
-      "status": "READY_NOT_STARTED",
+      "status": "DISPATCHED_BY_USER_STATUS_UNVERIFIED",
       "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md",
       "review_before_handoff": true
     },
     {
       "id": "QA-RAG-SAFE-REBUILD",
-      "status": "READY_NOT_STARTED",
+      "status": "DISPATCHED_BY_USER_STATUS_UNVERIFIED",
       "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md",
       "review_before_handoff": true
     },
     {
       "id": "MC-OUTPUT-INTEGRITY",
-      "status": "READY_NOT_STARTED",
+      "status": "DISPATCHED_BY_USER_STATUS_UNVERIFIED",
       "path": "harness_lanes/20261024-independent/MC-OUTPUT-INTEGRITY.md",
       "review_before_handoff": true
     }
   ],
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
-    "observed_on": "2026-10-22",
-    "observation_ref": "r1-holdout-20261021/budget-observation.json",
-    "tokens": 1561352,
-    "estimated_micro_usd": 631959,
-    "remaining_tokens": 8438648,
-    "remaining_micro_usd": 19368041,
+    "observed_on": "2026-10-25",
+    "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
+    "tokens": 1783378,
+    "estimated_micro_usd": 724836,
+    "remaining_tokens": 8216622,
+    "remaining_micro_usd": 19275164,
     "includes_prior_baseline_and_retained_fx": true,
-    "new_unknown_count": 4,
+    "new_unknown_count": 6,
     "prior_unknown_hold_count": 7,
     "cumulative_cap_tokens": 10000000,
     "cumulative_cap_usd": 20,
     "cost_kind": "budget proxy and conservative unknown holds, not provider invoice",
-    "latest_native_observation_ref": "review/budget-regime-20261023/accounting-policy-observation.json",
+    "latest_native_observation_ref": ".planning/shared-reading-production/du11/live-us-10k-m31-formal-v4-20261025/mother-after.json",
     "company_cap_tokens": 150000,
     "reallocation_ref": "r1-holdout-20261021/budget-reallocation-20261022.json",
     "company_tokens": 56355,
@@ -222,7 +291,8 @@
     "company_unknown_hold_tokens": 32171,
     "company_unknown_hold_micro_usd": 6728,
     "policy_ref": "../../../config/resource_budget.yaml",
-    "company_allocation_enforcement": "soft"
+    "company_allocation_enforcement": "soft",
+    "company_scope_observation_note": "Existing company-allocation fields retain their separately scoped 2026-10-22 observation; the new Microsoft attempt is included in global mother totals above."
   },
   "provider_configuration_owner": "config/models.yaml",
   "models_at_documentation_date": {
@@ -231,7 +301,7 @@
     "minimax": "MiniMax-M3.1-Flash"
   },
   "historical_us_c_model": "MiniMax-M3",
-  "new_paid_calls_in_this_update": 0,
+  "new_paid_calls_in_this_update": 1,
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
@@ -252,7 +322,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T21:28:22+00:00",
+  "last_updated_at": "2026-10-25",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -648,7 +718,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "微软FY2025 10-K零费用预检先确认原件SHA、预算与1MiB正式结果边界；通过后用项目配置中的provider做一次正式原语言摘要，再验证source/artifact引用、业务gold、缓存复用与中断恢复、RF直接消费。内容未通过则从共用选择/上下文/提示根因修复，不靠放大通用上限。之后再扩展其他市场与文种，并完成内容审查、W12四审与holdout公司循环。",
+  "next_step_after_publication": "Implement and offline-validate the root fix for partial document selection/layout and batch continuation; then independently review the exact source and test SHA before any new bounded live summary.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -683,12 +753,14 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "先完成本次CN H1接口收尾、PWF与主线提交/推送，并核对绑定提交的精确CI；W13/W14/W15接收已完成。",
-    "以微软FY2025 10-K既有原件（SHA 99d693f6…01d0bbe）作为US年报holdout候选，先做不调用provider的预算/容量预检；原件不下载。",
-    "预检通过后验证US年报的业务选择、摘要质量、引用限定、缓存恢复和RF消费；小样本不替代其他文种/市场。",
-    "完成跨市场/文种真实样本、内容审查、W12四审及目标公司循环；本样本技术通过不关闭整体目标。"
+    "Offline-replay the exact captured ranking response against its original 50-task request and persisted selection bundle; verify the decoder repair without a provider call, while keeping the original formal run immutable.",
+    "Trace the source-card plan: 43 admitted, 5 deferred by draft-byte budget, 2 unsupported. Determine how this and the 112-span/314-deferred selection affects coverage and whether 4,087 unassigned units are business omissions or non-narrative structure diagnostics.",
+    "Root-design a bounded resumable batching path that preserves source/group/context dependencies, deduplicates evidence, tracks aggregate coverage and native receipts/cache, and spends budget only on descriptive business content; do not merely raise the per-document cap.",
+    "Replace the current ranking-only output for acceptance with source-grounded concise claims that preserve actual/plan/conditional/uncertain modality; keep quality review for genuinely ambiguous/unsupported evidence. Add RED tests for claim quality and RF consumption before implementation.",
+    "Run focused offline and integration tests, independent review on final code/test SHA, then only if the major gate is green consider a newly preflighted bounded live summary and real RF consumption. Keep content acceptance open until company-level review passes.",
+    "The three independent project cards are ROOT-accepted as deliveries; their external repository branches remain unmerged/unpushed by this project."
   ],
-  "last_updated_utc": "2026-10-24T21:28:22Z",
+  "last_updated_utc": "2026-10-24T23:29:57Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -717,7 +789,7 @@
     }
   },
   "parallel_packages_20261024": {
-    "status": "ROOT_ACCEPTED_ALL_THREE_W13_PUSH_CI_PENDING",
+    "status": "AUTHOR_REPORTED_ALL_THREE_DELIVERED_ROOT_RECEPTION_PENDING",
     "entry": "harness_lanes/20261024/README.md",
     "dispatch": "harness_lanes/20261024/dispatch.json",
     "independent_packet_review": "harness_lanes/20261024/packet-review.json",
@@ -730,7 +802,8 @@
     "root_exclusive": "annual14 source/context; formal summary/cache; actual adoption matrix and W12; no editing the delegated gate/tool/test scopes",
     "independent_final_implementation_review_required": true,
     "new_paid_calls": 0,
-    "root_acceptance": "review/package-reception-w13-w15-20261024/receipt.json"
+    "root_acceptance": "review/package-reception-w13-w15-20261024/receipt.json",
+    "handoff_status": "User reports IR-REPORT-GENERATION, QA-RAG-SAFE-REBUILD, and MC-OUTPUT-INTEGRITY completed; ROOT must inspect handoff, independent review, scope and exact tests before acceptance. Their worktrees remain isolated and untouched."
   },
   "w08_reporting_rules_20261024": {
     "status": "PUBLISHED_EXACT_CI_SUCCESS",
@@ -1026,16 +1099,18 @@
     "cn_h1_business_content_review": "PENDING"
   },
   "latest_local_validation": {
-    "status": "PASS_FOCUSED_AFTER_CI_ROOT_CAUSE_FIX",
-    "tests": 181,
-    "seconds": 36.88,
-    "ruff": "PASS",
-    "diff_check": "PASS",
-    "pre_push_targets": 58,
-    "pre_push_passed": 640,
-    "pre_push_seconds": 392.4,
-    "pre_push_status": "PASS",
-    "pytest_temp": "one sandbox temp setup error on first run; same case passed with isolated workspace basetemp, which was removed"
+    "status": "PASS_DECODER_BOUNDARY_AND_PHASE_C_RECOVERY",
+    "tests": 24,
+    "seconds": 28.36,
+    "test_files": [
+      "tests/unit/test_narrative_extractive_runtime.py",
+      "tests/test_phase_c_activation_recovery.py"
+    ],
+    "temporary_test_root": ".tmp-phasec-focused",
+    "temporary_test_root_removed": true,
+    "independent_review": "PASS",
+    "independent_review_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
+    "provider_calls_in_validation": 0
   },
   "previous_code_ci_failure": {
     "id": 40130559322,
@@ -1043,6 +1118,90 @@
     "check_id": 120981176883,
     "conclusion": "failure",
     "root_cause": "Two remaining stale selection_limit=96 test assumptions; repaired without changing product routing."
+  },
+  "us_10k_rpo_preflight_20261024": {
+    "status": "ZERO_POST_SELECTION_PREFLIGHT_PASS_INDEPENDENTLY_REVIEWED",
+    "run": ".planning/shared-reading-production/du11/live-us-10k-m31-preflight-v4-20261024",
+    "independent_review": "review/market-family-upgrade-20261024/us-10k-rpo-preflight-review-20261024.md",
+    "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "source_bytes": 8158067,
+    "original_gold_sha256_unchanged": "61ffe4574220ac740ff8e74a34d4136b85acfaf9826ab40cca6fc6a4e59533c8",
+    "versioned_gold_sha256": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8",
+    "selected_evidence_count": 112,
+    "selected_evidence_characters": 40491,
+    "required_business_fact_count": 8,
+    "supported_business_fact_count": 8,
+    "post_attempts": 0,
+    "native_reservations": 0,
+    "mother_budget_before_after": {
+      "tokens": 1578416,
+      "micro_usd": 634976,
+      "unchanged": true
+    },
+    "temporary_lake_removed": true,
+    "focused_tests": 202,
+    "ruff": "PASS",
+    "diff_check": "PASS",
+    "formal_summary_cache_recovery_and_ff_rf_e2e": "OPEN_NOT_RUN"
+  },
+  "us_10k_formal_attempt_20261024": {
+    "status": "FAILED_AFTER_ONE_HTTP_ATTEMPT_UNKNOWN_PROVIDER_RECEIPT_HOLD_RETAINED_ROOT_CAUSES_FIXED",
+    "run": ".planning/shared-reading-production/du11/live-us-10k-m31-formal-v2-20261024",
+    "root_cause_receipt": "review/market-family-upgrade-20261024/us-10k-formal-v2-root-cause-20261024.json",
+    "network_probe": "review/market-family-upgrade-20261024/us-10k-formal-v2-network-probe-20261024.json",
+    "model_post_attempts": 1,
+    "provider_receipt_status": "UNKNOWN_NOT_PROVEN_RECEIVED_OR_NOT_RECEIVED",
+    "native_usage_status": "unknown",
+    "conservative_hold_tokens": 93648,
+    "conservative_hold_micro_usd": 41379,
+    "response_sha256": null,
+    "paid_response_artifact": null,
+    "materialized_summary": false,
+    "observed_error_code": "MODEL_RESPONSE_INVALID",
+    "failure_review_index_error_type": "PermissionError",
+    "protected_unchanged": true,
+    "downloads": 0,
+    "translation": false,
+    "temporary_lake_removed": true,
+    "network_egress_root_cause": "CONSISTENT_WITH_SANDBOX_DNS_BLOCK_BUT_HISTORICAL_LOW_LEVEL_ERROR_NOT_PERSISTED",
+    "prior_unknown_holds_retained": 7,
+    "mother_budget_before": {
+      "tokens": 1578416,
+      "micro_usd": 634976
+    },
+    "mother_budget_after": {
+      "tokens": 1672064,
+      "micro_usd": 676355
+    },
+    "fixes": [
+      "Preserve MODEL_HTTP_TRANSPORT and MODEL_HTTP_INCOMPLETE rather than collapsing them to MODEL_RESPONSE_INVALID.",
+      "Require a same-run activation_held event, known usage, valid response SHA, canonical PaidResponsePin, and matching request SHA before activation recovery; terminal dead-letter records a diagnosis and stops. HTTP-body and adapter-decoded response hashes are scoped differently and linked through the request SHA.",
+      "Use atomic same-directory no-replace rename fallback for Windows failure-review persistence when hard-link creation is denied."
+    ],
+    "focused_validation": {
+      "status": "PASS_NETWORK_ENABLED_LOCAL_TEST_ENVIRONMENT_INDEPENDENT_REVIEW_PASS",
+      "tests": 95,
+      "seconds": 35.14,
+      "ruff": "PASS",
+      "diff_check": "PASS",
+      "default_sandbox": "Not used for final suite because local loopback tests require network-enabled local test context",
+      "independent_review": "PASS",
+      "independent_review_ref": "review/market-family-upgrade-20261024/us-10k-formal-v2-root-cause-independent-review-20261024.md"
+    },
+    "next_attempt": {
+      "run": ".planning/shared-reading-production/du11/live-us-10k-m31-formal-v3-20261024",
+      "max_tokens": 100000,
+      "max_cost_usd": "0.10",
+      "max_final_bytes": 1048576,
+      "current_mother_tokens": 1672064,
+      "current_mother_micro_usd": 676355,
+      "worst_case_after_request_tokens": 1772064,
+      "worst_case_after_request_micro_usd": 776355,
+      "old_unknown_hold_included": true,
+      "retry_old_run": false,
+      "requires_independent_review_before_execution": false,
+      "independent_review_passed": true
+    }
   },
   "local_repository_hygiene_20261024": {
     "status": "COMPLETED_READ_ONLY_CROSS_REPO_AUDIT_AND_EXACT_CWP_SCRATCH_CLEANUP",
@@ -1075,6 +1234,123 @@
       "filing_fetch_code_candidate": "codex/transcript-companion",
       "stockwiki_remote_status": "UNKNOWN_NO_VISIBLE_ORIGIN_REF"
     },
-    "mainline_next_step": "Preflight the existing Microsoft FY2025 10-K with zero provider/model cost, then proceed to configured summary, cache recovery, and read-only RF consumption."
+    "mainline_next_step": "Formal-v3 made exactly one HTTP POST and received HTTP 400 (MODEL_HTTP_CLIENT_ERROR); the provider body was intentionally not persisted, no paid response/summary exists, and activation recovery correctly refused the terminal dead-letter. The diagnostic root cause is now established from the exact configured model plus official MiniMax documentation: MiniMax-M3.1-Flash cannot use thinking=disabled. Production narrative config now uses reasoning_effort=low, and exact provider/model fail-fast prevents this invalid configuration from reaching HTTP. Focused tests pass 111/111 in 8.07s; Ruff and diff-check pass; independent review PASS. Current mother budget is 1,765,712 tokens / 717,734 microUSD, including 6 new unknown holds and all 7 prior holds. Run exactly one fresh formal-v4 in .planning/shared-reading-production/du11/live-us-10k-m31-formal-v4-20261025, capped at 100,000 tokens/$0.10/1 MiB. Worst case after a fully consumed cap is 1,865,712 tokens / 817,734 microUSD, within the authorized 10M/$20 ceiling. Never replay v2 or v3. Then verify durable paid response, summary, activation/cache recovery, read-only FF/RF consumption, source/gold SHA and cleanup; if it fails, preserve the hold and diagnose before any new attempt."
+  },
+  "formal_fix_validation_20261024": {
+    "status": "FOCUSED_PASS_IN_NETWORK_ENABLED_TEST_CONTEXT_INDEPENDENT_REVIEW_PASS",
+    "test_files": [
+      "tests/unit/test_narrative_model_caller.py",
+      "tests/test_phase_c_activation_recovery.py",
+      "tests/unit/du11_summary_execution/test_consumers.py",
+      "tests/unit/test_narrative_http_model.py"
+    ],
+    "tests_passed": 95,
+    "elapsed_seconds": 35.14,
+    "ruff": "PASS",
+    "git_diff_check": "PASS",
+    "default_sandbox_result": "The final full focused suite used a network-enabled local test context because its existing loopback integration tests require local sockets",
+    "independent_review": "PASS",
+    "independent_review_ref": "review/market-family-upgrade-20261024/us-10k-formal-v2-root-cause-independent-review-20261024.md"
+  },
+  "independent_project_cards_20261024": {
+    "status": "ROOT_ACCEPTED_ALL_THREE_DELIVERIES_NOT_MERGED",
+    "cards": [
+      "QA-RAG-SAFE-REBUILD",
+      "IR-REPORT-GENERATION",
+      "MC-OUTPUT-INTEGRITY"
+    ],
+    "handoff_status": "Final handoff, independent review, test/cleanup receipt and reviewed code SHA were checked for each card; author branches remain independent and were not merged or pushed by company-wiki.",
+    "mainline_blocked": false,
+    "source": "harness_lanes/20261024-independent/dispatch.json",
+    "root_acceptance": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md"
+  },
+  "us_10k_formal_v3_attempt_20261024": {
+    "status": "FAILED_AFTER_ONE_HTTP_POST_HTTP_400_TERMINAL_NO_RETRY",
+    "run": ".planning/shared-reading-production/du11/live-us-10k-m31-formal-v3-20261024",
+    "receipt": "review/market-family-upgrade-20261024/us-10k-formal-v3-root-cause-20261025.json",
+    "model_post_attempts": 1,
+    "http_status": 400,
+    "error_code": "MODEL_HTTP_CLIENT_ERROR",
+    "error_body_saved": false,
+    "provider_receipt_status": "HTTP_CLIENT_ERROR_RECEIVED",
+    "native_usage_status": "unknown",
+    "conservative_hold_tokens": 93648,
+    "conservative_hold_micro_usd": 41379,
+    "paid_response_artifact": null,
+    "response_sha256": null,
+    "materialized_summary": false,
+    "activation_recovery": "REFUSED_TERMINAL_DEAD_LETTER_NO_RETRY",
+    "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "gold_sha256": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8",
+    "protected_unchanged": true,
+    "temporary_lake_removed": true,
+    "downloads": 0,
+    "translation": false,
+    "mother_budget_before": {
+      "tokens": 1672064,
+      "micro_usd": 676355,
+      "new_unknown_count": 5
+    },
+    "mother_budget_after": {
+      "tokens": 1765712,
+      "micro_usd": 717734,
+      "new_unknown_count": 6
+    },
+    "prior_unknown_holds_retained": 7,
+    "root_cause": "Configured MiniMax-M3.1-Flash request used thinking=disabled, which the provider documents as unsupported and returning HTTP 400. The exact provider response body was not persisted; do not quote its wording.",
+    "fix": "Set only minimax narrative policy to reasoning_effort=low; add exact-provider/exact-model fail-fast before HTTP for disabled thinking; add request-shape and production-config tests.",
+    "validation": {
+      "focused_tests": 111,
+      "seconds": 8.07,
+      "ruff": "PASS",
+      "diff_check": "PASS",
+      "independent_review": "PASS",
+      "independent_review_ref": "review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md"
+    },
+    "next_attempt": {
+      "run": ".planning/shared-reading-production/du11/live-us-10k-m31-formal-v4-20261025",
+      "max_tokens": 100000,
+      "max_cost_usd": "0.10",
+      "max_final_bytes": 1048576,
+      "current_mother_tokens": 1765712,
+      "current_mother_micro_usd": 717734,
+      "worst_case_after_request_tokens": 1865712,
+      "worst_case_after_request_micro_usd": 817734,
+      "old_unknown_holds_included": true,
+      "retry_v2_or_v3": false,
+      "config_reviewed": true,
+      "independent_review_passed": true,
+      "zero_post_preflight": "PASS",
+      "preflight_receipt": "review/market-family-upgrade-20261024/us-10k-formal-v4-preflight-20261025.json",
+      "preparation": ".planning/shared-reading-production/du11/live-prep-current-20261025-formal-v4.json",
+      "output_preflight": ".planning\\shared-reading-production\\du11\\live-us-10k-m31-preflight-v6-20261025"
+    }
+  },
+  "minimax_m31_configuration_root_cause_20261025": {
+    "status": "FIXED_TESTED_AND_INDEPENDENTLY_REVIEWED",
+    "config_path": "config.yaml",
+    "model_config": "config/models.yaml",
+    "configured_model": "MiniMax-M3.1-Flash",
+    "invalid_setting": "thinking=disabled",
+    "replacement": "reasoning_effort=low",
+    "fail_fast": "Exact provider/model-specific pre-HTTP guard rejects disabled thinking for MiniMax-M3.1-Flash.",
+    "official_reference": "https://platform.minimax.io/docs/api-reference/text-openai-api",
+    "provider_response_body_saved": false,
+    "tests": {
+      "test_files": [
+        "tests/unit/test_generation_policy.py",
+        "tests/unit/test_narrative_model_config.py",
+        "tests/unit/test_narrative_http_model.py"
+      ],
+      "passed": 111,
+      "seconds": 8.07,
+      "ruff": "PASS",
+      "diff_check": "PASS"
+    },
+    "independent_review": {
+      "verdict": "PASS",
+      "report": "review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md",
+      "reviewer_scope": "config scope, model-specific fail-fast, serialized request shape, no secret/API use"
+    }
   }
 }

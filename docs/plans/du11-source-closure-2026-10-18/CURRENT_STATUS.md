@@ -1,10 +1,18 @@
 # 当前项目状态与接手入口
 
-**最新状态（2026-10-24 21:26 UTC；唯一当前入口）：** W13/W14/W15已ROOT接收；中微CN H1正式摘要的RF真实只读消费v6通过，来源/产物SHA一致、112 EvidenceSpan、69 groups/views、0调用/下载；内容审查仍pending。财报selection-limit的五处旧测试假设已修复并发布：`808623377905520ec0c28c7330fe14243e4c6c04`，精确CI run `40131924884` completed/success。六个相关测试文件181 passed，Ruff、diff-check通过。本地pre-push实际选择58 targets、640 passed，耗时392.40s；该长耗时记录为CI/测试效率待办证据，不跳过或弱化门禁。三张旁线施工卡已发布，见 [总入口](harness_lanes/20261024-independent/README.md)，尚未开工。CWP本地未跟踪产物/支线盘点与定点清理已完成，详见[审计报告](review/local-repository-hygiene-20261024.md)：25个已确认pytest临时根删除，回收379,243,632字节；公司原件与外仓未改。仍有8,007个Git可见未跟踪文件/185,882,840字节，主要是有PWF引用的审计证据，继续按凭据保留。
+**最新状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** 微软 FY2025 10-K formal-v4 的生产链路按界限完成：恰好一次 POST 得到 HTTP 200，token/成本估算 17,666 / $0.007102；原件和 gold SHA 未变，未下载、未翻译，缓存/启动恢复及 FF 原文复用通过，临时湖清理。MiniMax 返回的精确 schema 元数据此前被 decoder 拒绝，窄范围修复和独审已通过，捕获响应离线重放为 50/50 排序项。**工程链路 PASS 不等于内容 PASS：**本次只选 112/484 单元、314 deferred、layout incomplete；43 条摘要 claim 被代码默认标为 uncertain/needs_review，50个任务中还含5条 deferred和2条unsupported，RF 标记 not_consumed/needs_review。下一步分别验证排名重放、source-card完整性、claim质量映射及未分配单元含义，再设计可恢复的分批覆盖和有出处摘要；不只是提高上限，也不放宽质量门槛来制造消费。不能重跑本次付费请求来掩盖覆盖问题。详见[formal-v4与三卡ROOT验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)。
 
-**当前唯一下一步：** 对本地已有微软FY2025 10-K原件（US年报，8,158,067 bytes，SHA 99d693f6…01d0bbe）做零费用预算/输出容量预检，再按配置进行正式摘要、缓存恢复和RF消费，原件不重下。仓库卫生报告列出的CWP/RF/FF代码分支候选之后逐项对照PWF与当前主线，不按非祖先关系批量合并；StockWiki当前没有origin引用，远端状态仍未知。本地剩余产物仅在对应收据核实后再清理。内容质量审查、不同市场/文种复验、W12四审和holdout循环仍OPEN；不跑8k全量。
+**前一节点快照（formal-v4之前）：** 微软 FY2025 10-K formal-v3 只发出一次 HTTP POST，收到 HTTP 400（`MODEL_HTTP_CLIENT_ERROR`）后作为 terminal dead-letter 停止；没有保存响应正文、付费响应凭据或正式摘要，未重试。原件 SHA `99d693f6…01d0bbe`、gold SHA `4dd0875a…7e28a2a8`未变，未下载、未翻译，临时数据湖清理。93,648 tokens / $0.041379 的保守 hold 已计入母账，不等于供应商确认账单。
 
-**可独立并行施工包：** [三卡总入口](harness_lanes/20261024-independent/README.md)。IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 分别位于 industry-research、QAbyLLM、MeetingConverter 仓库，产品代码路径不重叠且不阻塞本主线。每卡要求独立 agent 审查最终 commit、修复全部发现并复审 PASS 后才能交接；尚未开工。
+**失败根因和修复：** 生产配置曾对 `MiniMax-M3.1-Flash` 使用 `thinking=disabled`；MiniMax 官方文档说明该模型不支持禁用 thinking。配置已改为 `reasoning_effort=low`，并增加精确 provider/model 的请求前防错。111 项聚焦测试、Ruff、diff-check通过，独立审查PASS。新配置绑定的零请求v6预检也通过：同一原件和gold、112 spans/40,491字符、8/8必需业务事实有支持、0 POST、母账前后相同（1,765,712 tokens / $0.717734）、临时数据清理成功。详细见[根因收据](review/market-family-upgrade-20261024/us-10k-formal-v3-root-cause-20261025.json)、[独立复核](review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md)和[formal-v4零请求预检](review/market-family-upgrade-20261024/us-10k-formal-v4-preflight-20261025.json)。
+
+**formal-v4 后的唯一下一步：** 先解决“112-span选择上限 + 4,087个未分配单元 + 314 deferred → selection/layout partial → 43条claim needs_review → RF not_consumed”的共因。优先做零费用重放、选择器单元/集成测试和缓存内既有响应回放；设计能让高价值描述性内容分批覆盖而不把财务表整体切片的策略。新策略通过独立审查、原件/gold指纹核验和费用预检后，再决定是否做新的有界真实摘要；本轮不得重放或覆盖 formal-v4 收据。
+
+**主线状态：** formal-v4 正式摘要、激活恢复、cache 重用、FF 原文复用和真实 RF 只读读取均已跑通；RF 实际消费和内容质量仍未通过。跨市场/文种真实样本、W12四审及公司循环仍开放。IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 三卡均已按交接/独审/测试/版本绑定完成 ROOT 接收；作者仓仍各自独立，未替作者合并或推送。
+
+---
+
+**可独立并行施工包：** [三卡总入口](harness_lanes/20261024-independent/README.md)。IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY均已ROOT验收交付，作者分支保持独立，本项目未替它们合并或推送；接收与主线内容验收分开记录。
 **M3 验收范围：** 596 个受影响测试通过（30.43 秒），Ruff 与 `git diff --check` 通过；R5 独审绑定六份源码 SHA 和五份真实原件，11 项断言通过。MSFT指标定义/解释性从句不会冒充实际增长；真实增长和机械指引仍可读。五份回放范围、partial 状态和未验收项见 [M3 R5 报告](review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/report.md)。珀莱雅2026Q1原件共12页，视觉核对的第1、3、11页与逐页文本确认：这份季报基本是财务表、股东信息和附表；第3页确有经营现金流变动原因，未发现另有经营回顾/新品/渠道/出海段落。因此该文种应保留这条实质解释，其余常规财务数据继续由结构化API覆盖，不能把这一例推广成所有季报都可跳读。
 
 **跨市场策略进度：** M3的真实指标定义/解释性从句修复已通过R5独审；此前596项相关测试和Ruff通过，五份真实来源回放保持原件SHA。M4现以珀莱雅2026Q1为负控、中微公司2026Q1为正控完成真实离线回放：中微的8300+、300+、Angnova 140:1、Domingo 700:1及薄膜设备224.23%事实进入来源卡；珀莱雅仅保留现金流变动原因，法定补助模板没有变成业务卡。正控覆盖仍为partial，未闭合句和不明页边界继续暂缓。
@@ -13,7 +21,7 @@
 
 ---
 
-**最新状态（2026-10-24）：** W13/W14/W15三卡已逐项完成ROOT接收，边界和证据见[三卡接收总记录](review/package-reception-w13-w15-20261024/README.md)。W13作者冻结版有缺陷；ROOT保留“受影响文件数≤32才运行，否则转CI”的快反馈边界，并提交精准标签、去重修复`67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c`，154项定向测试、18项独立探针、5项真实Git推送检查通过，本入口最新状态已记录W13精确CI 40120507146 completed/success。W14已进入RF主线`aa19b653da18566e582e802269f5908471c456db`，离线全门禁595通过；不代表真实公司分析/下载已验收。W15已进入Audit本地主线`37e12e6ff4674fa1989b2616cff3c31faa4d8cb0`，28项测试和真实移位回放通过；接收中另修复Windows换行差异导致的fixture SHA错误，该仓无remote。正式摘要、缓存中断恢复、RF实际读取和真实样本业务覆盖仍是主线待办。
+**历史快照（2026-10-24 22:46 UTC，已被上方22:58状态取代）：** formal-v2结果未知，根因修复后的35项聚焦回归通过，独立代码复审尚未完成。详情以本页上方当前状态和正式复核收据为准。
 
 此前 M2 源码提交 `65cd8f58` 的首次 push 因 8315 项全量单测运行至 84% 后触发 600 秒总时限、146 项契约通过而未发布，这是历史失败记录。W13 已修复每次日常 push 隐式重跑全量的问题；当前实现让≤32目标走本地受影响测试，宽/动态/未知范围转CI。W13新的根提交和本状态文档推送后只检查绑定精确HEAD的CI，不重跑8千全量。M3真实样本只读调查发现指标定义/定义版本/机械重列指引、港股中报限定和scope观测真实或测量缺口；按共享owner根修已在M3/M4/M5推进，接下来转真实正式摘要/cache/RF，见[M3调查](review/market-family-upgrade-20261024/study/m3-discovery/report.md)。
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import http.client
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import socket
@@ -198,6 +199,25 @@ def test_empty_response_is_invalid_envelope_not_a_transport_failure(stub):
     with pytest.raises(ModelResponseError, match="MODEL_RESPONSE_INVALID"):
         _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
     assert len(stub.calls) == 1
+
+
+def test_connection_transport_failure_has_a_specific_response_free_code(
+    monkeypatch, hermetic_runtime
+):
+    monkeypatch.setenv(KEY_ENV, KEY)
+
+    def fail_request(*_args, **_kwargs):
+        raise OSError("synthetic connection failure")
+
+    monkeypatch.setattr(http.client.HTTPConnection, "request", fail_request)
+    model = _model(
+        endpoint="http://127.0.0.1:1/v1/chat/completions",
+        allow_local_http=True,
+    )
+    with pytest.raises(ModelResponseError) as caught:
+        model.generate(REQUEST)
+
+    assert str(caught.value) == "MODEL_HTTP_TRANSPORT"
 
 
 @pytest.mark.parametrize("overrides,stage", [

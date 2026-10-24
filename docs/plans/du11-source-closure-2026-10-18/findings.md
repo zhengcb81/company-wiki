@@ -1,3 +1,15 @@
+## 2026-10-24 Microsoft 10-K RPO 真实选材根修
+
+初次对 Microsoft FY2025 10-K 做零POST检查时，金标准 8 项只支持 4 项；复核后其中3项是原金标准锚句没有匹配已选中的同口径详细MD&A事实，另1项是真实漏选的RPO未来确认节奏。原文明确披露RPO总额3750亿美元、商业部分3680亿美元，并预期约40%在未来12个月确认。根因不是selector限额：现有 `_STOCK_CONVERSION_PREFIX` 只允许 `of the`，未覆盖真实自然语序 `of our total company ...`。
+
+宽泛的source-purpose金额规则试验已经完整撤回。保留的窄修仅在转换动词/比例、`of` 后最多四个固定限定词、紧接RPO存量词，并且既有同一谓词范围含未来/期间信号时建立 `contract_revenue_conversion`。source purpose仍是 `accounting_policy`；单句的有界经营关系才允许作为 `operating_contract_stock` 阅读。纯定义、审计描述、无转换节奏余额和“RPO附近出现日期”均不应升级成经营事实。
+
+四个定向测试文件 **202 passed / 13.47s**，Ruff 与 diff-check通过。独立审查认定限词规则无明显过宽匹配。按当前源码重新跑的`live-us-10k-m31-preflight-v4-20261024`在真实provider输入中包含完整RPO金额/期间原句，112 spans/40,491字符、8/8关键事实支持；0 POST、0预留、母账不变、源件/gold SHA不变、临时lake已删除。独立审查再次确认这些事实与清理收据。
+
+该run被设计为 `PHASE_C_CACHE_WOULD_GENERATE` 预留前拒绝；因此它只是选材与安全预检通过，不是模型摘要、缓存恢复、FF/RF消费或内容质量通过。正式摘要与后续复用仍是当前唯一主线节点。报告：`review/market-family-upgrade-20261024/us-10k-rpo-preflight-review-20261024.md`。
+
+首个正式路径尝试随后在POST前被`MODEL_BUDGET_DENIED`拒绝。不是母预算不足，也不是供应商拒绝：当时临时上限80k，小于系统按85,328-byte request body + 128 + 8,192输出上界计算的93,648-token预留。该次0 POST/0 reservation/账本不变/临时湖删除。已按真实输入把唯一后续attempt改用新output目录、100k token上限，费用仍$0.10；保守预留价约$0.041379。旧准备JSON记录2M累计上限，现已核实为10月23日预算升级前快照；当前有效授权为10M/$20。正式脚本必须从CURRENT_STATUS和resource_budget读取并核对10M/$20，再校验实时母账。见`review/market-family-upgrade-20261024/us-10k-formal-attempt-20261024.md`。独立审查已确认本次预算余量足够，并要求修复脚本额度来源后再运行。
+
 ## 2026-10-24 W08真实选材复核结果和剩余根因
 
 annual14 V2在同一冻结SourceRef上使用当前结构、候选事实和指引依赖代码完成一次真实选择，限额未上调。结果从首轮3 pass/9 partial/2 missing变为6/7/1：A07两类药物发现指标现同在`t23`，A11 Biology收入、新客和新分子占比的对象/指标分别在`t14`/`t29`/`t15`中，A14客户集中度及六类风险各有可读任务。新增research-pipeline、customer-acquisition、dated-project、concentration、FX、competition信号对这些通用事实有实际召回，不是仅靠单测推断。
@@ -721,3 +733,45 @@ CWP生产导出的正式上下文已升至`du-production-reading/3`并带selecti
 - 本次通过Git状态体积统计、文件树类别、PWF引用搜索、合成fixture特征和活动Python/pytest进程检查，确认并删除25个CWP临时根；未清理所有剩余8,007个Git可见untracked文件。未清理worktree，因为本次只证明文件归属，没有证明每个checkout都可丢弃。
 - `branch --no-merged`只表示提交祖先关系，不表示补丁没有已并入。候选需再做patch-equivalence和当前代码语义比对。外仓只读盘点不授权代替维护者合并/删分支。
 - CWP、RF、FF配置的主线与远端一致，不代表所有支线都并入；StockWiki无`origin`引用，所以远端状态未知。盘点数据与候选分支列表见`review/local-repository-hygiene-20261024.md`。
+
+## 2026-10-24 cross-repository branch disposition
+
+- RF `codex/du5-rf-units-20261015` commit `e2f6afd0` changed only handoff/progress/receipt evidence. Its exact documentation patch is now RF `main` commit `094d55ad`, confirmed at `origin/main`; normal push gate passed. Three pre-existing assurance modifications and untracked `output/` were excluded.
+- CWP G1 code commit `1cf81836` is an ancestor of the then-current `master` `e4ca7c1c`; code did not need re-merging. The absent formal handoff and final local PWF status were selected separately (`978c9ef8`, `a7660b90`) and reconciled in `5dc95c3e`, now confirmed at `origin/master`. Historical §6 follow-ups were not re-tested and remain neither accepted as open nor marked resolved.
+- Whole-branch merges remain inappropriate for N4T2/W13 behavior conflicts and RF/FF WIP overlaps. Preserve their refs and worktrees; no cleanup/reset was performed.
+
+## 2026-10-24 PWF resolver compatibility
+
+The selected goal explicitly binds `PLAN_ID=du11-source-closure-2026-10-18` and `PWF_PLAN_ROOT=docs/plans`. Installed `resolve-plan-dir.ps1` treats `PWF_PLAN_ROOT` as an absolute project directory containing `.planning/`, so this project-specific `docs/plans` pin yields no result. Recovery therefore used the exact explicitly pinned `docs/plans/du11-source-closure-2026-10-18` files; no alternate plan or mtime fallback was selected. This is an integration mismatch, not evidence that the plan is absent.
+
+
+## 2026-10-24 Microsoft 10-K formal-v2 实际失败与共因根修
+
+正式v2不是此前零POST的80k预算拒绝；它有1次HTTP请求尝试，模型运行器没有得到可持久化响应。native账将请求记为unknown，并按93,648 tokens/$0.041379全额保守hold，不能确认为供应商账单，也不能释放。没有response SHA、paid-response JSON或materialized summary；provider是否收到请求不能由当前旧收据证明。微软原件SHA、gold SHA未变，未下载、未翻译，临时数据湖清理成功。当前母账重读为1,672,064 tokens/$0.676355，含7笔旧unknown和新增5笔unknown。
+
+定位出三项共因：
+1. `BudgetedNarrativeCaller`把HTTP传输/不完整响应的`ModelResponseError`落为`MODEL_RESPONSE_INVALID`，丢失诊断类别；已保留`MODEL_HTTP_TRANSPORT`/`MODEL_HTTP_INCOMPLETE`，仍是terminal并保留unknown hold，不自动重试。
+2. Phase C runner把exit code 2误当成paid activation pending；dead-letter时随后断言遮蔽初次错误。已新增可测试的恢复前置条件，只有同run确有`activation_held`、known usage与持久response hash才恢复；其他情况写`NOT_RECOVERABLE`原因并停止。
+3. Windows对same-directory hardlink返回`PermissionError`，失败审查材料没能写出索引。已在Windows用原子、no-replace的same-directory `os.rename`回退，并覆盖已存在目标的字节一致性分支；写入冲突不会覆盖。
+
+网络诊断：默认沙箱无法解析`api.minimaxi.com`（gaierror 11001）；网络启用的只读TCP探针解析到`47.79.2.234`且443端口可连。历史v2没有保存底层异常或HTTP status，因此“默认沙箱DNS/出网导致v2失败”目前只能作为符合证据的推断，不是已证实事实。`review/market-family-upgrade-20261024/us-10k-formal-v2-network-probe-20261024.json`记录探针，`us-10k-formal-v2-root-cause-20261024.json`记录完整运行与账本数据。
+
+TDD新增传输错误映射、激活恢复拒绝和Windows失败材料回退测试。默认沙箱运行时34项通过、唯一失败是本机loopback服务不可达；用网络启用的本机测试执行后，三文件35项全部通过（34.18秒），Ruff与diff-check通过。独立代码审查待完成。后续只能以新目录`live-us-10k-m31-formal-v3-20261024`进行一次新bounded运行，不重放v2；v2完整hold已经包含在累计母账中。
+
+### 独立复核补充（22:58 UTC）
+
+独立审查提出并验证了paid response凭据缺口。修复后恢复条件要求完整canonical `PaidResponsePin`、known usage、合法响应SHA和匹配request SHA。`pin.body_sha256`（完整HTTP响应体）与reservation `response_sha256`（adapter解码响应）不可直接比较；真实loopback验证二者不同而请求哈希相同。95/95聚焦回归最终通过（35.14秒），真实同run恢复仍只发生原始1次fixture POST；Ruff、diff-check通过。独立审查PASS，收据见`us-10k-formal-v2-root-cause-independent-review-20261024.md`。
+
+## 2026-10-25 Formal-v3 HTTP 400 root cause
+
+Observed: one HTTP POST, HTTP 400, `MODEL_HTTP_CLIENT_ERROR`, terminal dead-letter, no response body saved, no paid response/response SHA/summary, no retry. The exact provider error text is therefore not known. The exact configured model was `MiniMax-M3.1-Flash` while its narrative generation policy serialized `thinking=disabled`. MiniMax's official API documentation states this model returns 400 when thinking is disabled and supports `reasoning_effort`; this matches the failure class and request configuration. Treat the model/config incompatibility as the established root cause, but do not quote a provider response message that was not captured.
+
+Root fix: set only MiniMax narrative generation to `reasoning_effort=low`; add a pre-HTTP guard scoped to exact provider/model; test both actual repository config and serialized request shape. 111/111 focused tests, Ruff, diff-check, and independent review passed. New holds: six total; mother budget 1,765,712 tokens/$0.717734. Formal-v4 is a new one-shot attempt after fresh preflight; do not retry v2 or v3.
+## 2026-10-25 formal-v4 finding: lifecycle success does not imply business output acceptance
+
+- Provider success exposed a response-contract mismatch: the ranking response had a valid `decisions` array plus an exact echoed `schema_version=narrative-model-request/6`; the decoder accepted the tasks semantically but rejected the whole envelope as `RANK_INVALID`.
+- Root repair permits only exact, optional `schema_version` and `type="json_object"`, while retaining `additionalProperties=false` and the decoder's closed allowlist. Exact response replay has 50 unique decision IDs matching the original 50 task IDs, with valid enums. No provider retry was made.
+- The separate downstream failure remains: selector v0.9 returned 112/484 candidates, 314 deferred, layout incomplete; the emitted 43 claims were all uncertain/review-required, so RF correctly reported not-consumed/needs-review. `coverage_complete=true` on the lower selection object must not be confused with full reading/layout coverage.
+- A second independent root cause is now visible in `src/company_wiki/automation/narrative_model_extractive.py::compile_extractive_plan`: each admitted source card is copied into a claim with `modality="uncertain"` and `needs_review=True` by construction. `project_summary_claim_quality()` then maps any uncertain claim to `needs_review`. This call is advisory ranking, not a natural-language business summary; fixing the rank decoder cannot produce an RF-consumable claim set.
+- The saved batch receipt has 50 tasks: 43 source cards admitted, 5 deferred by draft-byte budget, and 2 unsupported; source coverage is therefore incomplete. The formal-v4 recorded rank result also says `RANK_INVALID` because it predates the decoder fix. These are separate contributors and should be replayed independently before changing quality semantics.
+- Next diagnosis should inspect the shared ownership of selection-span cap, group/closure allocation, unassigned-unit reporting and batch continuation. Do not merely raise the cap: first prove that batches preserve parent/context dependencies, deduplicate spans, stay within aggregate token/byte budgets, resume from cache, and expose total vs per-batch coverage. Keep financial-table facts delegated to structured APIs where appropriate.

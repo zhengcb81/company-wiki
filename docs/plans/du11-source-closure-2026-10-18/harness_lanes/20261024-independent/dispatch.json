@@ -12,9 +12,27 @@
       "workdir": "C:/Users/郑曾波/Projects/industry-research-report-generation",
       "branch": "codex/ir-report-generation-20261024",
       "start_head": "4a80f9988f9325fb0a348c8acd9e41d615005c5f",
-      "owned_paths": ["tools/report_generator.py", "tests/test_report_generator.py", "tests/fixtures/report_generator/**"],
-      "status": "READY_NOT_STARTED",
-      "review_before_handoff": true
+      "owned_paths": [
+        "tools/report_generator.py",
+        "tests/test_report_generator.py",
+        "tests/fixtures/report_generator/**"
+      ],
+      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "review_before_handoff": true,
+      "root_acceptance": {
+        "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+        "reviewed_code_sha": "e5be80c877aba61f6e2b60c587a72b7d89262f0a",
+        "author_branch_tip": "1e84336eda1505748e5497b3910e29ba55cd43fe",
+        "tip_delta": "documentation-only after reviewed SHA",
+        "independent_review": "R1 PASS-with-nits; R2 PASS on exact final code SHA",
+        "review_path": "C:/Users/郑曾波/Projects/industry-research-report-generation/docs/handoff/IR-RG-2026-10-24/review.md",
+        "tests": {
+          "unittest": "67 passed",
+          "py_compile": "PASS",
+          "golden": "deterministic"
+        },
+        "publication": "repository has no remote; no push claimed; cleanup receipt present"
+      }
     },
     {
       "card_id": "QA-RAG-SAFE-REBUILD",
@@ -23,9 +41,27 @@
       "workdir": "C:/Users/郑曾波/Projects/QAbyLLM-rag-safe-rebuild",
       "branch": "codex/qa-rag-safe-rebuild-20261024",
       "start_head": "ad389f84cd15e54207fc6fcfe4881f86edac63f1",
-      "owned_paths": ["rag_system.py", "tests/unit/test_rag_safe_rebuild.py", "tests/integration/test_rag_rebuild_lifecycle.py", "tests/fixtures/rag_safe_rebuild/**"],
-      "status": "READY_NOT_STARTED",
-      "review_before_handoff": true
+      "owned_paths": [
+        "rag_system.py",
+        "tests/unit/test_rag_safe_rebuild.py",
+        "tests/integration/test_rag_rebuild_lifecycle.py",
+        "tests/fixtures/rag_safe_rebuild/**"
+      ],
+      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "review_before_handoff": true,
+      "root_acceptance": {
+        "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+        "reviewed_code_sha": "c762e4de96feff3ac0f2b3d3bd3bfe9d72398f99",
+        "author_branch_tip": "5e5f22b2d7d652738e54bbfaced1982117616c7a",
+        "tip_delta": "handoff/review/PWF/testlog only; no code changes after reviewed SHA",
+        "independent_review": "R2 PASS-with-findings; F1/F2 fixed; O1/O2 informational",
+        "review_path": "C:/Users/郑曾波/Projects/QAbyLLM-rag-safe-rebuild/docs/plans/qa-rag-safe-rebuild-2026-10-24/review/review-report.md",
+        "tests": {
+          "focused": "28 passed",
+          "repository": "97 passed"
+        },
+        "preservation": "source vector_db inventory and SHA unchanged; cleanup receipt present"
+      }
     },
     {
       "card_id": "MC-OUTPUT-INTEGRITY",
@@ -35,9 +71,26 @@
       "branch": "codex/meetingconverter-output-integrity-20261024",
       "start_head": "8a33a7f96292af8e6574d98b959703c6d11919eb",
       "preserved_preexisting_path": ".coverage",
-      "owned_paths": ["core/output.py", "tests/test_output.py"],
-      "status": "READY_NOT_STARTED",
-      "review_before_handoff": true
+      "owned_paths": [
+        "core/output.py",
+        "tests/test_output.py"
+      ],
+      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "review_before_handoff": true,
+      "root_acceptance": {
+        "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+        "reviewed_code_sha": "efbb51da26b98e990f97817a88e2b16bc66bb2f8",
+        "author_branch_tip": "ecf9ae82e77d6b9629e0919dd28d581540c800b8",
+        "tip_delta": "handoff/review/PWF only after reviewed SHA",
+        "independent_review": "PASS on exact final code SHA",
+        "review_path": "C:/Users/郑曾波/Projects/MeetingConverter-output-integrity/docs/plans/meetingconverter-output-integrity-2026-10-24/review-independent.md",
+        "tests": {
+          "pytest": "57 passed",
+          "ruff": "PASS"
+        },
+        "preservation": "pre-existing source .coverage unchanged; no remote push claimed; cleanup receipt present"
+      },
+      "root_acceptance_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md"
     }
   ],
   "isolation": {
@@ -47,5 +100,7 @@
     "downloads": 0,
     "company_wiki_mainline_dependency": false
   },
-  "handoff_rule": "A card is not complete until an independent non-implementer agent returns PASS on the exact final commit, all findings are fixed and rechecked, acceptance tests pass, and test-owned storage is restored."
+  "handoff_rule": "A card is not complete until an independent non-implementer agent returns PASS on the exact final commit, all findings are fixed and rechecked, acceptance tests pass, and test-owned storage is restored.",
+  "root_acceptance_date": "2026-10-25",
+  "root_acceptance_summary": "All three deliveries accepted against final code SHA, independent review, tests and cleanup evidence; external branches remain unmerged/unpushed by this project."
 }

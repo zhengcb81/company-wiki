@@ -131,6 +131,56 @@ def pre_reservation_refusal(
     }
 
 
+def activation_recovery_precondition(*, code, receipt, native_usage, events, run_id):
+    """Explain why a first run cannot safely resume a paid activation."""
+    from company_wiki.automation.narrative_paid_response import (
+        PaidResponseError,
+        PaidResponsePin,
+    )
+    from company_wiki.automation.models import require_sha256
+
+    if code != 2 or not isinstance(receipt, dict):
+        return "initial_result_unavailable"
+    documents = receipt.get("documents")
+    if (
+        not isinstance(documents, list)
+        or len(documents) != 1
+        or not isinstance(documents[0], dict)
+    ):
+        return "initial_document_receipt_unavailable"
+    if documents[0].get("status") != "activation_pending":
+        return "initial_document_not_activation_pending"
+    if not isinstance(events, list) or not any(
+        isinstance(row, dict)
+        and row.get("event") == "activation_held"
+        and row.get("run_id") == run_id
+        for row in events
+    ):
+        return "activation_held_event_missing"
+    if not isinstance(native_usage, list) or not native_usage:
+        return "durable_paid_response_unavailable"
+    for row in native_usage:
+        if (
+            not isinstance(row, dict)
+            or row.get("usage_status") != "known"
+        ):
+            return "durable_paid_response_unavailable"
+        try:
+            require_sha256(row.get("response_sha256"), field_name="response_sha256")
+        except (TypeError, ValueError):
+            return "durable_paid_response_unavailable"
+        try:
+            pin = PaidResponsePin.from_json(row.get("paid_response_json"))
+        except (PaidResponseError, TypeError, ValueError):
+            return "durable_paid_response_unavailable"
+        # The pin hashes the complete HTTP body; response_sha256 hashes the
+        # adapter's decoded model response bytes. Bind both receipts through
+        # the exact request instead of comparing hashes from different layers.
+        if pin.request_sha256 != row.get("request_sha256"):
+            return "durable_paid_response_unavailable"
+    return None
+
+
 def public_span_limits() -> dict[str, int]:
     """Expose the exact limits used by the production document router."""
     from company_wiki.source_catalog.narrative_routing import (
@@ -1150,12 +1200,39 @@ def run_pair(
                 outcome["status"] = "PRE_RESERVATION_BLOCKED"
                 break
             if activation_recovery:
-                assert code == 2 and receipt is not None
-                assert receipt["documents"][0]["status"] == "activation_pending"
-                assert any(row.get("event") == "activation_held"
-                           and row.get("run_id") == current_run for row in read_rows(events))
-                assert native and all(row["usage_status"] == "known"
-                                      and row["response_sha256"] for row in native)
+                initial_events = read_rows(events)
+                recovery_issue = activation_recovery_precondition(
+                    code=code,
+                    receipt=receipt,
+                    native_usage=native,
+                    events=initial_events,
+                    run_id=current_run,
+                )
+                if recovery_issue is not None:
+                    documents = receipt.get("documents", []) if receipt else []
+                    if not isinstance(documents, list):
+                        documents = []
+                    state["activation_recovery"] = {
+                        "status": "NOT_RECOVERABLE",
+                        "reason": recovery_issue,
+                        "initial_exit": code,
+                        "document_statuses": [
+                            row.get("status") for row in documents
+                            if isinstance(row, dict)
+                        ],
+                        "document_errors": [
+                            error for row in documents if isinstance(row, dict)
+                            for error in row.get("errors", [])
+                            if isinstance(error, str)
+                        ],
+                        "native_usage_statuses": [
+                            row.get("usage_status") for row in native
+                        ],
+                        "response_hashes_present": all(
+                            bool(row.get("response_sha256")) for row in native
+                        ),
+                    }
+                    raise RuntimeError("ACTIVATION_RECOVERY_NOT_AVAILABLE")
                 runs = NarrativeRunStore(database)
                 generation_before = runs.final_generations(current_run)
                 posts_before_recovery = sum(row["event"] == "http_post_attempt"

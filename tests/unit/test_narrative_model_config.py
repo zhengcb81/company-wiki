@@ -76,6 +76,15 @@ def test_default_loader_keeps_project_dotenv_authoritative(tmp_path, monkeypatch
     assert "project-fixture-key" not in json.dumps(options)
 
 
+def test_repository_minimax_narrative_config_uses_supported_reasoning_effort(monkeypatch):
+    monkeypatch.setenv("MINIMAX_API_KEY", "local-fixture-key-not-a-credential")
+    config = Config.load(llm_provider="minimax", validation_scope="llm")
+    options = model_options_from_config(config.llm)
+    assert options["model_id"] == "MiniMax-M3.1-Flash"
+    assert options["reasoning_effort"] == "low"
+    assert "thinking" not in options
+
+
 def test_adapter_does_not_switch_an_incompatible_configured_provider():
     with pytest.raises(ValueError, match="OpenAI-compatible"):
         model_options_from_config(LLMConfig(provider="claude"))

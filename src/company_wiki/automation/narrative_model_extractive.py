@@ -61,7 +61,14 @@ def extractive_response_schema() -> dict[str, Any]:
                     'priority': {'enum': ['high', 'normal', 'low']},
                     'disposition': {'enum': ['consider', 'redundant', 'unclear']}}}
     return {'type': 'object', 'required': ['decisions'], 'additionalProperties': False,
-            'properties': {'decisions': {'type': 'array', 'items': decision}}}
+            'properties': {
+                # Some compatible providers echo request-envelope metadata in
+                # JSON mode. Permit only these exact constants; never accept a
+                # caller/model supplied schema identifier as an authority.
+                'schema_version': {'const': EXTRACTIVE_REQUEST_SCHEMA},
+                'type': {'const': 'json_object'},
+                'decisions': {'type': 'array', 'items': decision},
+            }}
 
 
 @dataclass(frozen=True)
@@ -239,7 +246,9 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
     try:
         payload = json.loads(response.response_bytes.decode('utf-8'),
             object_pairs_hook=legacy._unique_object, parse_constant=legacy._invalid_json_number)
-        if (not isinstance(payload, dict) or set(payload) not in ({'decisions'}, {'decisions', 'type'})
+        if (not isinstance(payload, dict) or 'decisions' not in payload
+                or not set(payload) <= {'decisions', 'schema_version', 'type'}
+                or payload.get('schema_version', EXTRACTIVE_REQUEST_SCHEMA) != EXTRACTIVE_REQUEST_SCHEMA
                 or payload.get('type', 'json_object') != 'json_object'
                 or not isinstance(payload['decisions'], list)):
             raise ValueError('invalid rank shape')

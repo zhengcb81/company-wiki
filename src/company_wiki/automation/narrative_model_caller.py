@@ -285,6 +285,15 @@ class BudgetedNarrativeCaller:
                     usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif isinstance(error, PaidResponseError):
                 code = "MODEL_PAID_RESPONSE_UNAVAILABLE"
+            elif isinstance(error, ModelResponseError) and str(error) in {
+                "MODEL_HTTP_TRANSPORT",
+                "MODEL_HTTP_INCOMPLETE",
+            }:
+                # Keep response-free transport failures distinct from a
+                # complete provider response that violates the envelope.
+                # Neither is retried here: the provider may have processed
+                # the request, so usage remains an unknown held reservation.
+                code = str(error)
             elif not isinstance(error, ModelResponseError):
                 code = "MODEL_TRANSPORT_FAILED"
             try:

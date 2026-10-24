@@ -1,6 +1,6 @@
 # 独立项目施工包（2026-10-24）
 
-本目录是三张可分别交给不同 harness 的卡片总入口。三张卡分属三个独立 Git 仓库，产品代码路径互不重叠；不修改 company-wiki、filing-fetch、revenue-forecast、StockWiki 或 invest-quick-scan，也不依赖当前主线资料和供应商额度。它们是非阻塞旁路线。company-wiki 主线顺序不变：先做微软 FY2025 10-K 零费用预检，再决定正式摘要和 RF 消费。
+本目录是三张可分别交给不同 harness 的卡片总入口。三张卡分属三个独立 Git 仓库，产品代码路径互不重叠；不修改 company-wiki、filing-fetch、revenue-forecast、StockWiki 或 invest-quick-scan，也不依赖当前主线资料和供应商额度。三卡现均经 ROOT 核对最终交接、独立复审、测试/清理证据和代码 SHA 后接收：IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY。各外部仓库的作者分支仍独立保留；本次接收不代表已跨仓合并或推送。逐卡证据见[ROOT验收记录](../../review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)及 `dispatch.json`。company-wiki 主线现已跑完唯一 formal-v4 attempt、摘要持久化、恢复/cache 和 FF 复用；RF 内容消费、覆盖与业务质量仍开放，下一步先修选择/分批导致的 partial coverage 根因。
 
 | 卡片 | 独立仓库与代码范围 | 建议工作目录 | 冻结起点 |
 |---|---|---|---|

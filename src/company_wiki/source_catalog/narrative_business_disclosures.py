@@ -262,7 +262,10 @@ def _qualitative_operating_intent(clause: str) -> bool:
 _STOCK_CONVERSION_PREFIX = re.compile(
     r"\b(?:recogniz\w*|recognis\w*|invoic\w*|ship\w*|deliver\w*|convert\w*)\s+"
     r"(?:(?:approximately|about|nearly)\s+)?(?:\d[\d,.]*\s*[%％]?|some|most|all)\s+"
-    r"of\s+(?:the\s+)?$", re.I)
+    # SEC disclosures commonly scope the conversion quantity as "of our total
+    # company RPO". Keep this list short and bounded so dates or unrelated
+    # sentence material cannot bridge the conversion verb to the stock.
+    r"of\s+(?:(?:the|our|their|total|commercial|company|group|business)\s+){0,4}$", re.I)
 
 
 def _conversion_link(text: str) -> bool:

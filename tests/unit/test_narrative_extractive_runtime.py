@@ -102,6 +102,63 @@ def test_request_and_execution_report_account_for_every_task_without_free_prose_
     assert len(canonical_json(decoded.execution).encode()) <= 32 * 1024
 
 
+def test_decoder_accepts_only_the_exact_request_schema_echo_as_optional_metadata():
+    from company_wiki.automation.narrative_model_extractive import (
+        EXTRACTIVE_REQUEST_SCHEMA,
+        compile_extractive_plan,
+        decode_extractive_result,
+    )
+
+    source = selected(3)
+    request = build_model_request(source, reading_projection_version=VERSION)
+    tasks = compile_extractive_plan(source).execution['tasks']
+    decisions = [
+        {'task': row['task'], 'priority': 'normal', 'disposition': 'unclear'}
+        for row in tasks
+    ]
+
+    echoed = NarrativeModelResponse(
+        'offline', 'configured', request.prompt_version,
+        canonical_json({'schema_version': EXTRACTIVE_REQUEST_SCHEMA, 'decisions': decisions}).encode(),
+    )
+    decoded = decode_extractive_result(echoed, selected=source)
+    assert decoded.execution['model_diagnostic'] is None
+    assert decoded.execution['model_coverage_complete'] is True
+    assert all(row['model_disposition'] == 'unclear' for row in decoded.execution['tasks'])
+
+    echoed_type = NarrativeModelResponse(
+        'offline', 'configured', request.prompt_version,
+        canonical_json({'type': 'json_object', 'decisions': decisions}).encode(),
+    )
+    decoded_type = decode_extractive_result(echoed_type, selected=source)
+    assert decoded_type.execution['model_diagnostic'] is None
+    assert decoded_type.execution['model_coverage_complete'] is True
+
+    wrong_echo = NarrativeModelResponse(
+        'offline', 'configured', request.prompt_version,
+        canonical_json({'schema_version': 'narrative-model-request/999', 'decisions': decisions}).encode(),
+    )
+    rejected = decode_extractive_result(wrong_echo, selected=source)
+    assert rejected.execution['model_diagnostic'] == 'RANK_INVALID'
+    assert rejected.execution['model_coverage_complete'] is False
+
+    wrong_type = NarrativeModelResponse(
+        'offline', 'configured', request.prompt_version,
+        canonical_json({'type': 'json_schema', 'decisions': decisions}).encode(),
+    )
+    rejected_type = decode_extractive_result(wrong_type, selected=source)
+    assert rejected_type.execution['model_diagnostic'] == 'RANK_INVALID'
+    assert rejected_type.execution['model_coverage_complete'] is False
+
+    unknown_metadata = NarrativeModelResponse(
+        'offline', 'configured', request.prompt_version,
+        canonical_json({'unexpected': True, 'decisions': decisions}).encode(),
+    )
+    rejected_metadata = decode_extractive_result(unknown_metadata, selected=source)
+    assert rejected_metadata.execution['model_diagnostic'] == 'RANK_INVALID'
+    assert rejected_metadata.execution['model_coverage_complete'] is False
+
+
 def test_real_frozen_inventory_uses_source_cards_and_retains_all_budget_admitted_tasks():
     fixture = Path(__file__).parents[1] / 'fixtures/narrative_claim_grounding/cn_h1_unit3.json.gz'
     source = NarrativeSelectResult.from_dict(json.loads(gzip.decompress(fixture.read_bytes()))['selected'])

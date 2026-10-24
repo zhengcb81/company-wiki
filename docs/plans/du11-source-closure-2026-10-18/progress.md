@@ -919,3 +919,57 @@ CI run `40130559322` 精确绑定commit `61ecfc2b9ae33e87691e4765c36c82481959db6
 ## 2026-10-24 本地仓库卫生审计收尾
 
 按准确路径核实并删除25个CWP pytest/debug临时根：13,919个文件、379,243,632 filesystem bytes。Git可见未跟踪从16,893/413,986,038 bytes降至8,007/185,882,840 bytes。删前保留所有被PWF或发布收据引用的审计/运行证据；检查确认未触碰公司原件目录，且没有改写外仓。CWP、RF、FF、StockWiki、ET、MeetingConverter及两个研究仓库的branch/worktree初筛完成；CWP/RF/FF有代码型候选待按当前实现逐个核对，StockWiki没有可见origin配置。无分支/worktree被合并或删除。详见`review/local-repository-hygiene-20261024.md`。当前主线恢复到微软FY2025 10-K零费用预检。
+
+## 2026-10-24 ROOT 恢复主线与分包状态同步
+
+- 用户确认 IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 三卡已交给外部 harness。将 dispatch 与 CURRENT_STATUS 标为 `DISPATCHED_BY_USER_STATUS_UNVERIFIED`；尚无作者交付或独审报告，不提前标完成。三卡独立仓库，与本主线的微软原件摘要/cache/RF消费范围不重叠。
+- 上一节点的跨仓支线处理已闭环：RF 文档接收提交 `094d55ad` 已在 origin/main，正常 pre-push 595 passed/1 skipped/36 subtests；CWP G1 实现提交 `1cf81836` 已是主线祖先，只带入正式 handoff/PWF reconciliation，主线 `5dc95c3e` 已推送，fast push 154 passed。RF assurance 三份脏记录、`output/`、CWP原有hook文件模式改动及本地审计产物均保留。
+- 已重新读取唯一入口 `CURRENT_STATUS.md/json` 和当前 `task_plan.md`。下一步保持为微软FY2025 10-K零费用预检；当前冻结原件信息为8,158,067 bytes、SHA前缀`99d693f6`、后缀`01d0bbe`。预检通过前不发模型请求、不下载原件。
+- 工具说明不匹配：本机 `planning-with-files` 的 resolver 将 `PWF_PLAN_ROOT` 解释为绝对项目根并只查其 `.planning/`，而本项目唯一入口明确使用 `PWF_PLAN_ROOT=docs/plans`。按显式 PLAN_ID 直接读取 `docs/plans/du11-source-closure-2026-10-18/`；resolver 空输出后没有回退到其他计划。
+- 本次只同步PWF，没有产品源码变更；原始文档、预算账本与外包工区未触碰。
+
+## 2026-10-24 formal-v2恢复门最终修复与审查
+
+- 独立复核发现仅凭known usage与响应哈希字符串不能证明可恢复；必须检查持久付费响应pin。现已要求canonical有效`PaidResponsePin`、合法响应SHA及pin/账本request SHA一致，并保持缺证据即停止、不重放。
+- 初版把pin完整HTTP body SHA与adapter解码response SHA当成同一字段，真实loopback反例证明二者不同；依据生产`_recover()`/`reopen_paid_output()`合同改为用request SHA连接两类收据。相关正反例和原始恢复E2E均通过。
+- 最终验证：四文件95 passed/35.14秒；Ruff PASS；`git diff --check` PASS；独立复核 PASS（报告 `review/market-family-upgrade-20261024/us-10k-formal-v2-root-cause-independent-review-20261024.md`）。未调用外部模型/API。
+- formal-v2未知attempt及93,648-token/$0.041379 hold原样保留。运行前实时母账1,672,064 tokens/$0.676355；一次100,000-token/$0.10 v3最坏后为1,772,064 tokens/$0.776355，配置、PWF和账本累计上限同为10M/$20。输出目录不存在。
+- 下一步只执行唯一bounded formal-v3；随后核查正式摘要、同run激活恢复、cache恢复、只读FF/RF消费、原件/gold指纹及finally清理。不重放v2、不重下原件、不翻译。
+
+## 2026-10-24 Microsoft FY2025 10-K零POST选材预检通过
+
+- 根因：真实RPO确认节奏因`_STOCK_CONVERSION_PREFIX`只接受`of the`而漏选。撤回曾尝试的宽泛金额分类后，只允许`of`后最多四个固定范围词，再要求同一句内的RPO存量、确认/转换动词、未来方向与时间区间同时相连；source-purpose仍保持`accounting_policy`。新增“RPO附近只有日期”负例，并保留裸定义、审计陈述及无转换进度负例。
+- 验证：四个聚焦读取策略文件202 passed/13.47s，Ruff与diff-check通过。独立审查先审代码边界，再核本次实际收据，均通过。
+- 真实路径：本地既有微软10-K（8,158,067 bytes，SHA `99d693f6…01d0bbe`），注册只读、没有原件复制或重下载。新v2开发金标保持原gold不变，并补充同财年同业务范围的具体MD&A支持锚点；0.9实际选择112 spans/40,491字符，关键事实8/8；RPO原句含375/368十亿美元与未来12个月约40%确认进入模型材料。
+- 安全性：v4 run实际0 POST、0预留，母账前后1,578,416 tokens/634,976 micro-USD一致，旧unknown hold完整，protected fingerprints不变，临时lake删除。由于故意在`PHASE_C_CACHE_WOULD_GENERATE`前拒绝，状态仅为“零POST选材预检通过”，不是摘要/cache/RF端到端通过。一次临时目录权限错误发生在provider前且无费用，改用授权临时根重跑；失败setup留下的空v3目录未作为成功证据。
+- 当前下一步：使用正式配置MiniMax-M3.1-Flash一次执行selector 0.9，单请求上限80,000 tokens/$0.10/最终文件1MiB，再查激活恢复、cache、FF/RF只读消费和finally清理；结果交独立内容审查。原文不下载、不修改，真实请求若状态未知不盲发第二次。
+
+## 2026-10-24 正式摘要首次尝试的预算界限修正
+
+首次正式runner尝试沿用80,000 token人为上限，真实准备阶段把模型请求计算为85,328 input-body bytes + 128余量 + 8,192配置输出上界 = 93,648，因此内部在POST前返回`MODEL_BUDGET_DENIED`。native账、母预算均0变化，0 POST、0 reservation、原件SHA不变、temporary lake删除。错误码在本runner表现为FAIL，因为activation recovery路径预期的是付费held attempt；不应表述为模型或者provider坏了。
+
+根因是我们设定的预留上限低于真实序列化请求的保守token bound，而不是全局配额耗尽。计划唯一新的正式attempt提高到100,000 tokens，单价仍用配置内保守代理；按实际bound预留约$0.041379，`$0.10`硬上限未变，母预算最坏仍低于用户现行10M/$20累计限额。冻结准备JSON内的2M来自升级前旧快照；正式脚本改为以PWF机器状态、`resource_budget.yaml`和实时母账的限额一致性为准。独立复核确认后再执行这一次真实请求。
+
+
+## 2026-10-24 Microsoft FY2025 10-K formal-v2真实运行根因修复
+
+- formal-v2发出1次HTTP调用尝试后停止。native账为`usage_status=unknown`，没有响应SHA、付费响应材料或摘要；provider是否收到请求未知。将93,648 tokens/$0.041379作为保守hold保留，不重放旧run。原件SHA `99d693f6…01d0bbe`、gold SHA `4dd0875a…7e28a2a8`均未变，0下载、0翻译，临时lake删除。
+- 当前实时母账：1,672,064 tokens/676,355 micro-USD，新增unknown 5、原有7笔unknown保留；上限10M tokens/$20。
+- 根因修复：保留`MODEL_HTTP_TRANSPORT`与`MODEL_HTTP_INCOMPLETE`分类；仅对有durable paid response的activation_pending状态恢复，dead-letter只记具体诊断、不触发重放；Windows hardlink被拒时用同目录原子no-replace rename写失败材料。
+- 网络证据：默认沙箱DNS失败，network-enabled只读TCP探针连通MiniMax 443。它支持“sandbox egress影响请求”的推断，但历史v2未记录底层错误，因此未把推断写成事实。
+- 聚焦回归在network-enabled测试环境35/35通过（34.18s），Ruff与diff-check通过。默认沙箱34项通过/1个loopback用例因本地socket限制失败；相同用例在网络启用的本机测试环境独立通过。独立代码审查待回。
+- 下一步仅在独立审查通过后，以唯一新目录formal-v3执行一次100k-token/$0.10上限的受控正式调用；预算脚本将复核当前PWF、resource policy与live mother totals。当前预算下取满单次上限，累计最坏1,772,064 tokens/$0.776355。之后检查cache恢复与只读FF/RF消费；不重下原件、不重试formal-v2。
+
+## 2026-10-25 MiniMax M3.1 formal-v3 failure and configuration root fix
+
+Formal-v3 attempted exactly one HTTP POST and got HTTP 400 (`MODEL_HTTP_CLIENT_ERROR`). The run ended as a terminal dead-letter; no response body was persisted, so the provider's exact wording is unknown. There is no paid-response artifact, response SHA, or summary, and activation recovery correctly refused the terminal run. There was no retry, download, or translation; original and gold fingerprints stayed unchanged and the temporary lake was removed. The 93,648-token/$0.041379 conservative hold remains included.
+
+Root cause from the configured model and official MiniMax API documentation: `MiniMax-M3.1-Flash` cannot use `thinking=disabled`. The narrative policy now sends `reasoning_effort=low`, and the model adapter rejects the invalid exact provider/model setting before HTTP. Focused tests passed 111/111 in 8.07s; Ruff and diff-check passed. Independent reviewer PASS is recorded at `review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md`. Mother total is now 1,765,712 tokens/$0.717734; six new unknowns and seven prior holds retained. Next is one new formal-v4 at 100k tokens/$0.10/1MiB in a unique directory.
+# 2026-10-25 formal-v4 收尾与独立施工卡验收
+
+- 微软 FY2025 10-K formal-v4 恰好一次 POST、HTTP 200；本次估算增加 17,666 tokens / $0.007102，母账累计 1,783,378 tokens / $0.724836。原件/gold SHA 未变、零下载、未翻译，持久化、激活恢复、cache、FF零下载复用和隔离湖清理通过。
+- RF receipt 是 `not_consumed` / `needs_review`：112/484候选、314 deferred、layout incomplete；43条claim全为 `uncertain` 且 `needs_review`。因此本节点只接受工程生命周期，不接受业务摘要或RF消费质量。
+- 根因定位：provider响应在JSON根对象回显精确 `schema_version=narrative-model-request/6`，旧decoder把有效ranking信封拒绝。解码器现在只允许 `decisions` 与 exact `schema_version` / `type=json_object` 两种可选元数据；捕获响应零费用回放得到50/50唯一期望task IDs。新增边界测试覆盖有效/错误type与未知key。
+- 验证：decoder单文件 19 passed；decoder + activation recovery 共24 passed / 28.36s；精确 `.tmp-phasec-focused` 清理后不存在。独立follow-up确认封闭字段白名单与测试覆盖，无阻塞。
+- ROOT 已接收 IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 三卡的最终交付（reviewed code SHA、tip仅后续文档、独审、测试和清理证据逐项绑定）；接收不等于外部仓已合并/推送。见[验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)。
+- 下一节点先处理选择/分批和结构覆盖共因，禁止把 formal-v4 的 `PASS`泛化成内容PASS，也不对原次请求重放或追加收费。
