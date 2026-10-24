@@ -1,6 +1,6 @@
 {
   "schema_version": "w13-root-acceptance/1",
-  "status": "ROOT_ACCEPTED_MERGED_W13_FIX_COMMITTED_STRATEGY_BATCH_AND_PUSH_PENDING_EXACT_CI",
+  "status": "ROOT_ACCEPTED_MERGED_W13_FIX_AND_STRATEGY_BATCH_COMMITTED_PENDING_PUSH_EXACT_CI",
   "author_code_commit": "56baea4cdd8c89b5cf778d0bda948c31ec5af162",
   "author_frozen_head_reviewed": "a804541661f73cd035fc25179b116ba9a51c5e55",
   "author_candidate_verdict": "FAIL",
@@ -58,8 +58,9 @@
       "restricted_environment": "21 passed; 4 were blocked by unavailable isolated remote credentials or sh child-process failure; re-run outside restriction passed all 25",
       "full_suite_repeated": false
     },
-    "publication": "W13_FIX_COMMITTED_STRATEGY_BATCH_AND_PUSH_PENDING_EXACT_CI"
+    "publication": "W13_FIX_AND_STRATEGY_BATCH_COMMITTED_PENDING_NORMAL_PUSH_AND_EXACT_NEW_HEAD_CI"
   },
   "local_fix_commit": "4e593c71",
-  "exact_new_head_ci": null
+  "exact_new_head_ci": null,
+  "strategy_batch_commit": "159770e9"
 }

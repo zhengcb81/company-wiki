@@ -2,13 +2,13 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W13_FIX_MERGED_LOCAL_VALIDATION_PASS_PENDING_PUBLICATION_M3_ACCEPTED_M4_REAL_SAMPLE_PASS_M5_NEXT",
+  "overall_status": "ACTIVE_W13_M3_M4_FIXES_COMMITTED_LOCAL_PENDING_PUSH_EXACT_CI_M5_NEXT",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "4e593c71",
+  "last_code_commit": "159770e9",
   "code_ci": {
     "id": 40090199646,
     "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
@@ -174,7 +174,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W13修复已本地提交4e593c71；将M3/M4真实样本读取策略修复、审查与PWF一起提交，然后正常推送并检查精确HEAD CI。之后按remaining_root_causes诊断M5 US IPO provider启动前预算拒绝，再继续正式摘要/cache恢复、RF采用与四审、annual14及holdout循环；不重跑全量本地suite。",
+  "next_step_now": "W13修复提交4e593c71与M3/M4真实样本策略提交159770e9均已通过本地提交门；正常推送到origin/master并检查精确HEAD CI。随后按remaining_root_causes诊断M5 US IPO provider启动前预算拒绝，再继续正式摘要/cache恢复、RF采用与四审、annual14及holdout循环；不重跑全量本地suite。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -807,7 +807,7 @@
     "raw_copies": 0,
     "existing_family_policies": 24,
     "existing_facets": 14,
-    "remaining": "W13已在主线，CI mode根修本地25/25定向测试通过，待发布和精确CI；M3 R5通过；M4双真实季报回放和根修通过但正控仍partial；接着M5 provider启动前预算诊断，然后正式摘要/cache/RF四审及未用于调规则的新公司。",
+    "remaining": "W13 hook mode根修及M3/M4策略/真实样本改进已本地提交，待正常推送和精确CI；M3 R5独审通过，M4双季报targeted回放通过但正控为partial；接着M5 provider启动前预算诊断，然后正式摘要/cache/RF四审及未用于调规则的新公司。",
     "samples_sha_verified": 25,
     "source_sample_count_note": "13 initial + 9 DU5 + 3 supplemental; bounded targeted reading, not full 25-document acceptance",
     "independent_review": "review/market-family-upgrade-20261024/independent-final/report.json",
@@ -888,7 +888,7 @@
       "M2_local_source_commit": "65cd8f58",
       "M2_first_push": "review/market-family-upgrade-20261024/m2-first-push-timeout.json",
       "W13": "FIX_COMMITTED_4e593c71_PENDING_NORMAL_PUSH_AND_EXACT_CI",
-      "M3": "IMPLEMENTED_R5_INDEPENDENT_PASS_REAL_REPLAY_BOUND",
+      "M3": "R5_INDEPENDENT_PASS_COMMITTED_159770e9_PENDING_PUSH",
       "W13_review": "review/w13-root-reception-20261024/independent/report.json",
       "W13_acceptance": "review/w13-root-reception-20261024/root-acceptance.json",
       "W13_focused_tests_passed": 154,
@@ -897,7 +897,7 @@
       "W13_full_unit_suite_rerun": false,
       "W13_author_candidate": "FAIL",
       "M3_report": "review/market-family-upgrade-20261024/study/m3-discovery/report.json",
-      "M4": "ROOT_CAUSE_FIXED_REAL_Q1_REPLAY_PASS_PARTIAL_COVERAGE",
+      "M4": "REAL_Q1_REPLAY_PASS_COMMITTED_159770e9_PARTIAL_COVERAGE_PENDING_PUSH",
       "M4_report": "review/market-family-upgrade-20261024/m4-sparse-quarterly/report.md",
       "M4_receipt": "review/market-family-upgrade-20261024/m4-sparse-quarterly/discovery.json",
       "M4_focused_tests_passed": 136,
@@ -909,7 +909,7 @@
     }
   },
   "w13_ci_root_fix": {
-    "status": "ROOT_CAUSE_FIXED_W13_FIX_COMMITTED_STRATEGY_BATCH_AND_PUSH_PENDING_EXACT_CI",
+    "status": "ROOT_CAUSE_FIXED_W13_AND_STRATEGY_BATCH_COMMITTED_PENDING_NORMAL_PUSH_AND_EXACT_CI",
     "failed_run": {
       "id": 40098625678,
       "url": "https://github.com/zhengcb81/company-wiki/actions/runs/40098625678",
@@ -932,7 +932,8 @@
       "commit_hook": "PASS (normal pre-commit checks completed)"
     },
     "next": "commit, normal push, inspect the CI run bound to the resulting exact HEAD",
-    "local_fix_commit": "4e593c71"
+    "local_fix_commit": "4e593c71",
+    "strategy_batch_commit": "159770e9"
   },
   "market_family_upgrade_m4_discovery": {
     "status": "ROOT_CAUSE_FIXED_REAL_SAMPLE_REPLAY_ACCEPTED",
