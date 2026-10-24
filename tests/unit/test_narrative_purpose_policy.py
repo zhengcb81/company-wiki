@@ -93,12 +93,20 @@ def test_canonical_narrative_only_policy_reaches_wire_and_keeps_loaded_profile(c
     without_policy = deepcopy(canonical_copy.raw)
     without_policy["llm"].pop("generation_policy", None)
     original = canonical_copy.variant("legacy", without_policy, provider)
-    assert configured.llm.generation_options("narrative") == {"thinking": {"type": "disabled"}}
+    expected = ({"reasoning_effort": "low"} if provider == "minimax"
+                else {"thinking": {"type": "disabled"}})
+    wire_keys = set(expected)
+    expected_wire = ({"reasoning_effort": "low"} if provider == "minimax"
+                     else {"thinking": "disabled"})
+    assert configured.llm.generation_options("narrative") == expected
     options, body, _ = request_body(configured)
     old_options, old_body, _ = request_body(original)
-    assert options["thinking"] == "disabled" and body["thinking"] == {"type": "disabled"}
-    assert {key: value for key, value in options.items() if key != "thinking"} == old_options
-    assert {key: value for key, value in body.items() if key != "thinking"} == old_body
+    assert {key: options[key] for key in wire_keys} == expected_wire
+    expected_body = ({"reasoning_effort": "low"} if provider == "minimax"
+                     else {"thinking": {"type": "disabled"}})
+    assert {key: body[key] for key in wire_keys} == expected_body
+    assert {key: value for key, value in options.items() if key not in wire_keys} == old_options
+    assert {key: value for key, value in body.items() if key not in wire_keys} == old_body
     for field in ("provider", "model", "base_url", "max_tokens", "temperature", "reasoning_split", "api_key_env"):
         assert getattr(configured.llm, field) == getattr(original.llm, field)
     assert options["max_output_tokens"] == configured.llm.max_tokens == 8192
@@ -112,7 +120,7 @@ def test_canonical_narrative_only_policy_reaches_wire_and_keeps_loaded_profile(c
     for purpose in ("general", "research"):
         assert configured.llm.generation_options(purpose) == {}
         other_options, other_body, _ = request_body(configured, purpose=purpose)
-        assert "thinking" not in other_options and "thinking" not in other_body
+        assert not wire_keys.intersection(other_options) and not wire_keys.intersection(other_body)
         assert other_options == old_options and other_body == old_body
 
 
