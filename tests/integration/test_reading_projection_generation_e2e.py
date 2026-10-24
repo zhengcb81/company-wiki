@@ -75,7 +75,7 @@ def _assert_historical_wire(data, version):
     # selection. Exact pre-upgrade context/1 bytes are covered by immutable
     # golden packets and the separate old-code lifecycle replay.
     assert data["reading_strategy"]["schema_version"] == (
-        "du-production-reading/2" if version is None else version)
+        "du-production-reading/3" if version is None else version)
     assert {"source_id", "source_sha256", "language"} <= set(
         data["response_schema"]["properties"]["draft"]["properties"])
 

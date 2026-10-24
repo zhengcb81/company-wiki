@@ -663,6 +663,12 @@ W08正常合7b1c015b为b0344200，15源/test按review原始字节恢复（11仅L
 
 先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
+## 2026-10-24 W08公开诊断合同复核与回归
+
+按生产链新增并验证逐目标selection trace/diagnostic公开合同。TDD先暴露`max_chars=0`诊断无法越过DTO和selected trace计数未受证据/原始单元约束；修复后又由独立只读复审补出无证据正计数、admission样本与聚合不一致、路径样式locator及诊断detail文本边界。现有owner内完成修复，trace保持有界、哈希化且不进入模型提示；不引入第二内容库或新的许可/审查门。
+
+最终相关回归：171 PASS（unit/production selection/official JSON/selection contract），13 PASS（三组本地真实端到端，含worker、loopback、投影/summary/cache恢复）；Ruff PASS，`git diff --check` PASS。独立复审确认没有剩余blocker，提示的locator字段规范顺序/唯一性是非阻断的后续硬化项，本轮保持范围。上述测试未调用外部API、未下载真实材料。W11-CWP-SOURCES由用户重新确认A/B/C全流程交付并推送；已有W11源码1be42a76及精确CI40040509874记录仍适用。真实IR原件恢复、W08 annual14内容、正式摘要/cache和W12仍未关闭。当前代码/PWF提交推送与精确CI待做。
+
 ## 2026-10-24T01:49:23.487623+00:00 发布交接最终补正
 
 独立文档复核发现CURRENT_STATUS正文和MAINLINE_LOOP_GOAL当前起点各一段旧prototype未发布描述，均改为f2b8f2bf/CI40050949303；其余当前字段、17P、annual14的3/9/2和无新增门禁一致。仅文档补正，不改源码、旧审查或预算。

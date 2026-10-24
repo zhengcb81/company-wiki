@@ -204,11 +204,37 @@ def finalize_selection(
     for reason, count in sorted(counts.items()):
         row: dict[str, Any] = {"code": reason, "count": count,
                                "phase": "selection", "external_model_cost": False}
+        reason_diagnostics = [item for item in diagnostics if item.reason == reason]
+        if reason in {"budget_full", "character_budget", "group_exceeds_limit"}:
+            target_rows = []
+            for diagnostic in reason_diagnostics[:32]:
+                if diagnostic.used is None or diagnostic.requested is None or diagnostic.limit is None:
+                    continue
+                target_rows.append({
+                    "item_id": diagnostic.item_id,
+                    "item_ids": list(diagnostic.item_ids[:16]),
+                    "item_count": diagnostic.item_count,
+                    "item_ids_limited": diagnostic.item_count > 16,
+                    "group_id": diagnostic.group_id,
+                    "locator": diagnostic.locator,
+                    "used": diagnostic.used,
+                    "requested": diagnostic.requested,
+                    "limit": diagnostic.limit,
+                    "closure_size": diagnostic.closure_size,
+                })
+            row["targets"] = target_rows
+            row["targets_limited"] = count > len(target_rows)
         if reason == "budget_full":
             row.update(dimension="selection_spans", used=len(spans), limit=route.selection_limit)
         elif reason == "character_budget":
             row.update(dimension="selection_characters",
                        used=sum(len(span.raw_text or "") for span in spans), limit=max_chars)
+        elif reason == "group_exceeds_limit":
+            # The planner proved that one complete dependency closure alone is
+            # larger than the span ceiling. Keep its actual dimension instead
+            # of misreporting the refusal as a generic policy decision.
+            row.update(dimension="selection_spans", limit=route.selection_limit,
+                       max_closure_size=max((item.closure_size or 0 for item in reason_diagnostics), default=0))
         else:
             row["dimension"] = "selection_work" if reason == "work_budget_exhausted" else "selection_policy"
         diagnostic_rows.append(row)

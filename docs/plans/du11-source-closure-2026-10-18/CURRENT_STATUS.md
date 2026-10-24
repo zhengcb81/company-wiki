@@ -1,6 +1,6 @@
 # 当前项目状态与接手入口
 
-**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT修W08真实选材/context。W09研究及W11离线来源两包已修复接收审查发现的共用问题，真实并线、推送并获各自精确CI成功。新摘要/矩阵/W12仍待完成，原暂停快照仅保留历史。
+**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续修W08真实选材/context。W09研究及W11离线来源工程已并线、推送并获各自精确CI成功；用户2026-10-24再次确认W11-CWP-SOURCES的A/B/C全流程已交付并推送。当前W08逐目标诊断公开合同本地验证通过，待本轮正常发布。新摘要/矩阵/W12仍待完成，原暂停快照仅保留历史。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
@@ -12,11 +12,11 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码f2b8f2bf已合线推送、精确CI成功；独审17P，完整8056P/24skip+146smokeP | 真实annual14仍3pass/9partial/2missing；正式摘要/cache/矩阵/W12 OPEN。见[发布](review/r1-w08-crosspage-20261024/publication-final.md) |
+| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码f2b8f2bf已合线推送、精确CI成功；本轮公开trace/诊断合同修复本地171项相关测试+13项端到端全绿，独立只读复审无blocker，待提交推送/精确CI | 真实annual14仍3pass/9partial/2missing；正式摘要/cache/矩阵/W12 OPEN。见[发布](review/r1-w08-crosspage-20261024/publication-final.md)和[本轮发现](findings.md) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。**
+**当前唯一第一步：提交并推送本轮W08公开诊断合同修复和PWF，核精确CI；随后按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批。** 逐目标offer/defer trace已落地并由171项相关测试、13项本地端到端测试和独立复审验证。大节点完成后集中复核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 
@@ -24,11 +24,11 @@
 
 真实249页V2一次回放96/8518、工作8630449/16M，完整14独审3pass/9partial/2missing。业务父级、容量日期、集团新客户、指引前提等仍丢失，不能以全局另一个task、裸数字或原文fallback冒充采用。财务数表可按需SourceRef/API，未调用的不说已获取，不强迫全文财务切片。[内容审查](review/r1-w08-crosspage-20261024/annual14/review.md)与[具体下一阶段](review/r1-w08-crosspage-20261024/next-source-quality.md)保持OPEN。
 
-W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、材料external_limit仍OPEN。旧封存和费用unknown保留。
+W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11-CWP-SOURCES A/B/C已由用户确认全流程交付并推送。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、真实业务材料external_limit仍OPEN。旧封存和费用unknown保留。
 
 随后按已接收W08–W12计划在新摘要上采用已发布W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
-W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。CWP当前共享原生观察/跨页/逐target依赖源码`f2b8f2bf`已并线推送，精确CI40050949303 success；旧有限来源/谓词`4e3e0231`/40044921473、W11 1be42a76/40040509874及预算ab95027b/40034980056保留历史。RF`599d17b8`/CI40040969386 success、FF`7f6a9268`。当前已发布组件的工程验收不代签真实annual14完整内容、正式新摘要或RF/W12。
+W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。CWP当前共享原生观察/跨页/逐target依赖源码`f2b8f2bf`已并线推送，精确CI40050949303 success；本轮选择诊断合同修复已本地171+13测试通过、独审无blocker，提交/推送/CI待完成。旧有限来源/谓词`4e3e0231`/40044921473、W11 1be42a76/40040509874及预算ab95027b/40034980056保留历史。RF`599d17b8`/CI40040969386 success、FF`7f6a9268`。当前已发布组件的工程验收不代签真实annual14完整内容、正式新摘要或RF/W12。
 
 用户要求的审查技能八步升级已在上一节点完成；本轮W10进一步把单据归属、阶段误判及明确版本矛盾固化为回归，现有fetch/process卡已更新。没有新增身份库、任务库、人工许可、逐材料签收或收费权威。预算节点最新每份仅同步3文件并核39/39，见review/budget-regime-20261023/audit-installation.json；树SHA`f2be453617ac03359ccfffe2ebe98e5ee895deb1a6dc7e9510d0462e3d1efb0a`是W10收尾历史，旧`f50bf...`是前版历史。
 

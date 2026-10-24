@@ -83,6 +83,37 @@ def summary(selected):
     })
 
 
+def public_select_wire(package, document):
+    base = selection(4)
+    payload = base.to_dict()
+    payload["source_ref"].update(
+        source_id=package.source_id,
+        content_sha256=package.source_sha256,
+    )
+    event = SourceRevisionEventPayload.from_dict({
+        "schema_version": "source-revision-event/2.0",
+        "source_ref": payload["source_ref"],
+        "source_metadata": payload["source_metadata"],
+        "expected_read_policy_sha256": payload["expected_read_policy_sha256"],
+    })
+    parsed = SimpleNamespace(
+        page_count=document.page_count,
+        pages_read=document.pages_read,
+        line_count=0,
+        table_scan_pages=(),
+        deferred_table_pages=(),
+    )
+    work = SimpleNamespace(
+        parsed=parsed,
+        package=package,
+        material=None,
+        parser_identity=("narrative-parser", "0.1.0"),
+    )
+    return NarrativeSelectHandler._result_dict(
+        event, base.prompt_review, work, selector_version="0.9.0"
+    )
+
+
 def test_old_select_and_model_wire_are_identical_without_reading_context():
     selected = selection(3)
     assert "reading_context" not in selected.to_dict()
@@ -265,6 +296,362 @@ def test_actual_shared_engine_context_passes_formal_transport_at_48k_shared_budg
     assert len(data["reading_strategy"]["reading_policy_version"].split("+")[1]) == 64
     assert data["reading_strategy"]["reading_policies"] == package.reading_context["reading_policies"]
     assert "wrong_assertion" not in canonical_json(data)
+
+
+def test_actual_shared_engine_budget_diagnostics_survive_public_result_roundtrip(monkeypatch):
+    from unit.document_understanding_selection.test_reading_production_selection import (
+        _document, _package, _patch_reading, _select, _shared_projects, _unit,
+    )
+
+    _, footnote, first, second = _shared_projects()
+    header = _unit("Unit and reporting period: " + "auxiliary qualification context " * 900)
+    document = _document(header, footnote, first, second)
+    _patch_reading(monkeypatch, document,
+        packages=[_package("alpha", first, context=(header, footnote), kind="project"),
+                  _package("beta", second, context=(header, footnote), kind="project")],
+        priorities={first.unit_id: 1, second.unit_id: 1})
+    package = _select(document, limit=3)
+    budget_row = package.reading_context["selection_diagnostics"][0]
+    assert {key: value for key, value in budget_row.items() if key not in {"targets", "targets_limited"}} == {
+        "code": "budget_full", "count": 1, "phase": "selection",
+        "external_model_cost": False, "dimension": "selection_spans", "used": 3, "limit": 3,
+    }
+    assert len(budget_row["targets"]) == 1 and budget_row["targets_limited"] is False
+    assert budget_row["targets"][0]["used"] + budget_row["targets"][0]["requested"] > budget_row["targets"][0]["limit"]
+
+    base = selection(4)
+    payload = base.to_dict()
+    payload["source_ref"].update(source_id=package.source_id, content_sha256=package.source_sha256)
+    event = SourceRevisionEventPayload.from_dict({"schema_version": "source-revision-event/2.0",
+        "source_ref": payload["source_ref"], "source_metadata": payload["source_metadata"],
+        "expected_read_policy_sha256": payload["expected_read_policy_sha256"]})
+    work = SimpleNamespace(parsed=document, package=package, material=None,
+                           parser_identity=("narrative-parser", "0.1.0"))
+    wire = NarrativeSelectHandler._result_dict(event, base.prompt_review, work, selector_version="0.9.0")
+    restored = NarrativeSelectResult.from_dict(wire)
+    restored_context = restored.to_dict()["reading_context"]
+    assert restored_context["selection_diagnostics"] == package.reading_context["selection_diagnostics"]
+    assert restored_context["selection_trace"]["selected"]["samples"]
+    assert all(row["span_id"] in {span.span_id for span in package.evidence_spans}
+               for row in restored_context["selection_trace"]["selected"]["samples"])
+    trace = restored_context["selection_trace"]
+    invalid_counts = (len(package.evidence_spans) - 1, trace["source_unit_count"] + 1)
+    for invalid_count in invalid_counts:
+        malformed_trace = deepcopy(wire)
+        selected_trace = malformed_trace["reading_context"]["selection_trace"]["selected"]
+        selected_trace["count"] = invalid_count
+        if invalid_count < len(package.evidence_spans):
+            selected_trace["samples"] = []
+        selected_trace["limited"] = invalid_count > len(selected_trace["samples"])
+        with pytest.raises(NarrativeContractError, match="selected count"):
+            NarrativeSelectResult.from_dict(malformed_trace)
+    model_strategy = json.loads(NarrativeModelRequest.from_selection(
+        restored, reading_projection_version="reading-model-input/1").data_json)["reading_strategy"]
+    assert "selection_diagnostics" not in model_strategy
+    assert "selection_trace" not in model_strategy
+
+    from company_wiki.resource_budget import WorkBudget
+    from company_wiki.source_catalog.narrative_reading import _document_work_diagnostic
+
+    work_wire = deepcopy(wire)
+    work_wire["reading_context"]["selection_diagnostics"] = [
+        _document_work_diagnostic(WorkBudget(3, used=1, exhausted=True, phase="candidate_scan"))
+    ]
+    work_result = NarrativeSelectResult.from_dict(work_wire)
+    assert work_result.to_dict()["reading_context"]["selection_diagnostics"] == work_wire["reading_context"]["selection_diagnostics"]
+    unsafe_detail = deepcopy(work_wire)
+    unsafe_detail["reading_context"]["selection_diagnostics"][0]["detail"] = "source: C:/private/report.pdf"
+    with pytest.raises(NarrativeContractError, match="fixed safe message"):
+        NarrativeSelectResult.from_dict(unsafe_detail)
+
+    zero_limit_wire = deepcopy(wire)
+    zero_limit_wire["reading_context"]["selection_diagnostics"] = [
+        _document_work_diagnostic(WorkBudget(0, exhausted=True, phase="document"))
+    ]
+    zero_limit_result = NarrativeSelectResult.from_dict(zero_limit_wire)
+    assert zero_limit_result.to_dict()["reading_context"]["selection_diagnostics"][0]["limit"] == 0
+
+    malformed = deepcopy(wire)
+    malformed["reading_context"]["selection_diagnostics"][0]["unreviewed_field"] = "ignored"
+    with pytest.raises(NarrativeContractError, match="unknown fields"):
+        NarrativeSelectResult.from_dict(malformed)
+    malformed = deepcopy(wire)
+    malformed["reading_context"]["selection_diagnostics"][0]["dimension"] = []
+    with pytest.raises(NarrativeContractError, match="dimension"):
+        NarrativeSelectResult.from_dict(malformed)
+    malformed = deepcopy(wire)
+    malformed["reading_context"]["selection_diagnostics"][0]["count"] = 0
+    with pytest.raises(NarrativeContractError, match="count"):
+        NarrativeSelectResult.from_dict(malformed)
+    malformed = deepcopy(wire)
+    malformed["reading_context"]["selection_diagnostics"][0]["dimension"] = "selection_characters"
+    with pytest.raises(NarrativeContractError, match="code and dimension"):
+        NarrativeSelectResult.from_dict(malformed)
+    malformed = deepcopy(wire)
+    malformed["reading_context"]["selection_diagnostics"][0]["used"] = 4
+    with pytest.raises(NarrativeContractError, match="exceeds limit"):
+        NarrativeSelectResult.from_dict(malformed)
+
+
+def test_zero_character_budget_diagnostics_survive_public_result_roundtrip(monkeypatch):
+    from unit.document_understanding_selection.test_reading_production_selection import (
+        _document, _package, _patch_reading, _shared_projects,
+    )
+    from company_wiki.source_catalog.narrative_reading import select_reading_evidence
+
+    _, _, first, second = _shared_projects()
+    document = _document(first, second)
+    _patch_reading(monkeypatch, document, packages=[
+        _package("first-project", first, kind="project"),
+        _package("second-project", second, kind="project"),
+    ])
+    package = select_reading_evidence(document, title="Annual report", max_chars=0)
+    diagnostic = next(row for row in package.selection_diagnostics
+                      if row["code"] == "character_budget")
+    assert diagnostic["used"] == diagnostic["limit"] == 0
+    assert diagnostic["targets"] and all(row["limit"] == 0 for row in diagnostic["targets"])
+
+    restored = NarrativeSelectResult.from_dict(public_select_wire(package, document))
+    assert restored.to_dict()["reading_context"]["selection_diagnostics"] == list(
+        package.reading_context["selection_diagnostics"]
+    )
+
+
+def test_zero_document_work_budget_stops_safely_at_public_result_boundary():
+    from company_wiki.resource_budget import WorkBudget
+    from company_wiki.source_catalog.narrative_reading import select_reading_evidence
+    from unit.document_understanding_selection.test_reading_production_selection import (
+        _document, _unit,
+    )
+
+    document = _document(_unit("Business activity was described in this filing."))
+    package = select_reading_evidence(
+        document, title="Annual report", work_budget=WorkBudget(0)
+    )
+    assert package.status == "needs_review"
+    assert package.selection_diagnostics[0]["dimension"] == "document_work"
+    assert package.selection_diagnostics[0]["limit"] == 0
+
+    wire = public_select_wire(package, document)
+    assert wire["schema_version"] == "narrative-select-result/2.1"
+    result = NarrativeSelectResult.from_dict(wire)
+    assert result.selection.status == "needs_review"
+    assert result.evidence_spans == ()
+    assert [dict(row) for row in result.selection_diagnostics] == list(package.selection_diagnostics)
+
+
+def test_group_closure_limit_has_correct_dimension_through_public_result(monkeypatch):
+    from unit.document_understanding_selection.test_reading_production_selection import (
+        _document, _package, _patch_reading, _select, _shared_projects, _unit,
+    )
+
+    _, footnote, first, second = _shared_projects()
+    header = _unit("Unit and reporting period: project qualification context")
+    document = _document(header, footnote, first, second)
+    _patch_reading(
+        monkeypatch, document,
+        packages=[
+            _package("alpha", first, context=(header, footnote), kind="project"),
+            _package("beta", second, context=(header, footnote), kind="project"),
+        ],
+        priorities={first.unit_id: 1, second.unit_id: 1},
+    )
+    package = _select(document, limit=1)
+    rows = package.reading_context["selection_diagnostics"]
+    group_row = next(row for row in rows if row["code"] == "group_exceeds_limit")
+    assert group_row["dimension"] == "selection_spans"
+    assert group_row["limit"] == package.selection_limit
+    assert group_row["max_closure_size"] > group_row["limit"]
+    assert group_row["targets"] and all(
+        row["closure_size"] > row["limit"] for row in group_row["targets"]
+    )
+
+    result = NarrativeSelectResult.from_dict(public_select_wire(package, document))
+    public = result.to_dict()
+    assert public["reading_context"]["selection_diagnostics"] == rows
+    context = public["reading_context"]
+    assert context["schema_version"] == "du-production-reading/3"
+    trace = context["selection_trace"]
+    assert trace["schema_version"] == "selection-trace/1"
+    assert trace["selected"]["count"] == len(package.evidence_spans)
+    assert trace["selected"]["samples"] == []
+    assert trace["admission"]["count"] >= 1
+    assert trace["admission"]["count"] >= trace["admission"]["admitted_count"]
+    assert trace["admission"]["count"] >= trace["admission"]["rejected_count"]
+    assert all(row["selected_span_id"] is None or row["selected_span_id"] in {
+        span.span_id for span in package.evidence_spans
+    } for row in trace["admission"]["samples"])
+    assert not package.evidence_spans
+    forged_selected = deepcopy(public)
+    forged_trace = forged_selected["reading_context"]["selection_trace"]["selected"]
+    forged_trace.update(count=1, limited=True)
+    with pytest.raises(NarrativeContractError, match="selected count"):
+        NarrativeSelectResult.from_dict(forged_selected)
+    legacy_strategy = json.loads(NarrativeModelRequest.from_selection(result).data_json)["reading_strategy"]
+    assert "selection_trace" not in legacy_strategy
+    assert "selection_diagnostics" not in legacy_strategy
+
+
+def test_trace_separates_semantic_reject_defer_and_budget_omission(monkeypatch):
+    from unit.document_understanding_selection.test_reading_production_selection import (
+        _document, _package, _patch_reading, _select, _unit,
+    )
+
+    bare_number = _unit("2025 300 400", page=1)
+    first = _unit("Our water treatment project entered customer qualification.", page=2)
+    second = _unit("Our recycling service expanded into a second operating region.", page=3)
+    missing_reference = _unit("These products have not obtained customer certification.", page=4)
+    document = _document(bare_number, first, second, missing_reference)
+    _patch_reading(
+        monkeypatch, document,
+        packages=[
+            _package("bare-number", bare_number),
+            _package("first-project", first),
+            _package("second-project", second),
+            _package("missing-reference", missing_reference, kind="project"),
+        ],
+        priorities={first.unit_id: 1, second.unit_id: 2, missing_reference.unit_id: 3},
+    )
+    package = _select(document, limit=1)
+    trace = package.reading_context["selection_trace"]
+    assert trace["admission"]["rejection_counts"]
+    assert trace["admission"]["rejected_count"] >= 1
+    assert any(row["reason"] == "REFERENCE_UNRESOLVED" for row in trace["withheld"]["samples"]), trace["withheld"]
+    budget = next(row for row in package.selection_diagnostics if row["code"] == "budget_full")
+    selected_ids = {row["unit_id"] for row in trace["selected"]["samples"]}
+    omitted_ids = {
+        item_id for target in budget["targets"] for item_id in target["item_ids"]
+    } | {target["item_id"] for target in budget["targets"]}
+    assert omitted_ids - selected_ids
+
+    restored = NarrativeSelectResult.from_dict(public_select_wire(package, document))
+    model = json.loads(NarrativeModelRequest.from_selection(restored).data_json)
+    sent_text = {row[1] for row in model["evidence"]}
+    assert sent_text == {span.raw_text for span in package.evidence_spans}
+    assert "selection_trace" not in model["reading_strategy"]
+
+    inconsistent_admission = public_select_wire(package, document)
+    admission = inconsistent_admission["reading_context"]["selection_trace"]["admission"]
+    admission.update(admitted_count=0, rejected_count=admission["count"],
+                     rejection_counts={"FORGED_REJECTION": admission["count"]})
+    with pytest.raises(NarrativeContractError, match="sample exceeds aggregate"):
+        NarrativeSelectResult.from_dict(inconsistent_admission)
+
+
+def test_selection_trace_schema_rejects_raw_text_and_false_sample_counts():
+    selected = with_reading()
+    wire = selected.to_dict()
+    context = wire["reading_context"]
+    context["schema_version"] = "du-production-reading/3"
+    context["deferred"] = []
+    context["deferred_count"] = 0
+    context["deferred_limited"] = False
+    context["selection_diagnostics"] = []
+    for group in context["groups"]:
+        group["citation_views"] = [{
+            "support_evidence_ids": group["evidence_ids"][:1],
+            "context_evidence_ids": group["evidence_ids"][1:],
+        }]
+    context["selection_trace"] = {
+        "schema_version": "selection-trace/1",
+        "source_unit_count": 1,
+        "admission": {
+            "count": 1,
+            "admitted_count": 1,
+            "rejected_count": 0,
+            "limited": False,
+            "rejection_counts": {},
+            "samples": [{
+                "unit_id": "not-an-id", "package_ref": "not-a-ref", "status": "admitted",
+                "reason": None, "fact_purpose": "operating", "fact_reasons": [],
+                "fact_reason_count": 0, "fact_reasons_limited": False,
+                "required_unit_ids": [], "required_unit_count": 0,
+                "required_unit_ids_limited": False, "priority": 1, "selected_span_id": None,
+            }],
+        },
+        "eligible_packages": {"count": 0, "limited": False, "samples": []},
+        "withheld": {"count": 0, "limited": False, "samples": []},
+        "selected": {"count": 0, "limited": False, "samples": []},
+    }
+    with pytest.raises(NarrativeContractError, match="unit ID"):
+        NarrativeSelectResult.from_dict(wire)
+
+    trace = context["selection_trace"]
+    trace["admission"]["samples"][0]["unit_id"] = "urn:company-wiki:narrative-unit:sha256:" + "1" * 64
+    trace["admission"]["samples"][0]["package_ref"] = "urn:company-wiki:reading-package:sha256:" + "a" * 64
+    trace["admission"]["count"] = 0
+    trace["admission"]["admitted_count"] = 0
+    with pytest.raises(NarrativeContractError, match="sample count"):
+        NarrativeSelectResult.from_dict(wire)
+
+
+@pytest.mark.parametrize("mutation, error", [
+    ("parent_limit", "target limit differs"),
+    ("max_closure", "maximum closure size is inconsistent"),
+    ("sample_count", "target sample exceeds its count"),
+    ("limited_flag", "target sample count is inconsistent"),
+    ("raw_identifier", "target ID is invalid"),
+    ("raw_locator", "target locator is invalid"),
+    ("traversal_locator", "target locator is invalid"),
+    ("path_style_locator", "target locator is invalid"),
+])
+def test_group_diagnostic_rejects_inconsistent_or_unbounded_samples(monkeypatch, mutation, error):
+    from unit.document_understanding_selection.test_reading_production_selection import (
+        _document, _package, _patch_reading, _select, _shared_projects, _unit,
+    )
+
+    _, footnote, first, second = _shared_projects()
+    header = _unit("Unit and reporting period: project qualification context")
+    document = _document(header, footnote, first, second)
+    _patch_reading(
+        monkeypatch, document,
+        packages=[
+            _package("alpha", first, context=(header, footnote), kind="project"),
+            _package("beta", second, context=(header, footnote), kind="project"),
+        ],
+        priorities={first.unit_id: 1, second.unit_id: 1},
+    )
+    package = _select(document, limit=1)
+    wire = public_select_wire(package, document)
+    diagnostic = next(
+        row for row in wire["reading_context"]["selection_diagnostics"]
+        if row["code"] == "group_exceeds_limit"
+    )
+    target = diagnostic["targets"][0]
+    if mutation == "parent_limit":
+        target["limit"] += 1
+    elif mutation == "max_closure":
+        target["closure_size"] += 1
+    elif mutation == "sample_count":
+        diagnostic["targets"].append(deepcopy(target))
+    elif mutation == "limited_flag":
+        diagnostic["targets_limited"] = True
+    elif mutation == "raw_identifier":
+        target["item_id"] = "untrusted source text"
+    elif mutation == "raw_locator":
+        target["locator"] = "relative/source.pdf"
+    elif mutation == "traversal_locator":
+        target["locator"] = "loc:v1/../../private/source.pdf"
+    elif mutation == "path_style_locator":
+        target["locator"] = "loc:v1|relative/source.pdf"
+
+    with pytest.raises(NarrativeContractError, match=error):
+        NarrativeSelectResult.from_dict(wire)
+
+
+def test_select_result_rejects_diagnostics_split_across_two_public_fields():
+    selected = with_reading()
+    wire = selected.to_dict()
+    wire["selection_diagnostics"] = [{"code": "DECISION_DEPENDENCIES_UNAVAILABLE", "count": 1}]
+    with pytest.raises(NarrativeContractError, match="cannot be split"):
+        NarrativeSelectResult.from_dict(wire)
+
+
+def test_select_result_reader_keeps_previous_minor_schema_compatible():
+    wire = selection(3).to_dict()
+    assert wire["schema_version"] == "narrative-select-result/2.0"
+    restored = NarrativeSelectResult.from_dict(wire)
+    assert restored.to_dict()["schema_version"] == "narrative-select-result/2.0"
 
 
 def test_context_depth_cap_applies_before_any_unbounded_path_walk():

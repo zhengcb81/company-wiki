@@ -136,7 +136,7 @@ def test_real_two_parent_select_public_dto_roles_locators_and_single_export(tmp_
         wire = dto.to_dict()
         assert set(wire) == {"schema_version", "subject_binding", "source_metadata", "parser", "selector",
             "selection", "evidence_spans", "prompt_review", "summary_scope"}
-        assert wire["schema_version"] == "narrative-select-result/3.0"
+        assert wire["schema_version"] == "narrative-select-result/3.1"
         assert dto.subject == view.subject
         assert dto.item_key == projection.projection_id
         assert wire["parser"] == {"name": view.evidence_spans[0].parser_name,

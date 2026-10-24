@@ -27,7 +27,7 @@ def test_configured_summary_and_restart_without_unconsumed_config(
         assert len(server.requests) == 1 and not server.errors
         reference, bundle, replay = reuse.public_read(root, config, imported, kind)
         assert replay["replay_status"] == "verified"
-        assert bundle["reading_context"]["schema_version"] == "du-production-reading/2"
+        assert bundle["reading_context"]["schema_version"] == "du-production-reading/3"
         runs = NarrativeRunStore(root / "AUTO.sqlite")
         before = tuple(asdict(item) for item in runs.reservations_for_run("strict-config"))
         process, resumed = reuse.invoke(root, config, request, llm, "strict-config")

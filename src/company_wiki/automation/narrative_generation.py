@@ -13,6 +13,7 @@ from .models import canonical_json_hash
 from .narrative_contracts import (
     NarrativeBundle,
     BUNDLE_SCHEMA,
+    PROJECTED_SELECT_RESULT_SCHEMA,
     SELECT_RESULT_SCHEMA,
     SUMMARY_RESULT_SCHEMA,
 )
@@ -130,7 +131,11 @@ def generation_manifest(
         "source_metadata": payload.source_metadata.to_dict(),
         "execution_versions": versions,
         "bundle_schema": BUNDLE_SCHEMA,
-        "select_schema": SELECT_RESULT_SCHEMA,
+        "select_schema": (
+            SELECT_RESULT_SCHEMA
+            if versions.get("selector") == "0.9.0"
+            else "narrative-select-result/2.0"
+        ),
         "summary_schema": SUMMARY_RESULT_SCHEMA,
         "parser_component": {"name": parser_name, "version": parser_version},
         "bundle_producer": BUNDLE_PRODUCER_VERSION,
@@ -354,7 +359,7 @@ def projection_generation_manifest(
         "language": language,
         "execution_versions": versions,
         "bundle_schema": "narrative-bundle/3.0",
-        "select_schema": "narrative-select-result/3.0",
+        "select_schema": PROJECTED_SELECT_RESULT_SCHEMA,
         "summary_schema": "narrative-summary-result/3.0",
         "parser_component": {"name": parser_name, "version": parser_version},
         "bundle_producer": _projection_identity_text(

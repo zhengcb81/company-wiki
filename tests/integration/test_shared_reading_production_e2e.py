@@ -117,7 +117,7 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/5").prompt_version
     assert final["reading_model_boundary"]["prompt_version"] == final["execution_versions"]["prompt"]
     assert final["summary_validation"]["language_observer"]["py3langid"]["model"]["status"] == "available"
-    assert context["schema_version"] == "du-production-reading/2"
+    assert context["schema_version"] == "du-production-reading/3"
     # Public context is the full source audit view, bound by material_sha256
     # above; the model retains every actual semantic instruction independently.
     assert all("profile_version" in row and "policy_components" in row

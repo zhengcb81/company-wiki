@@ -6,7 +6,7 @@ selection, not IO, research conclusions, model calls or another task store.
 from __future__ import annotations
 
 from bisect import bisect_right
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import replace
 from hashlib import sha256
 from importlib import import_module
@@ -56,15 +56,47 @@ def _financial_only(text: str, fact: Any = None) -> bool:
 
 def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = None,
               is_heading: bool = False, table_qualified: bool = False,
-              financial_only: bool | None = None) -> tuple[bool, Any]:
+              financial_only: bool | None = None,
+              trace: dict[str, Any] | None = None, package_id: str | None = None,
+              required_unit_ids: Sequence[str] = ()) -> tuple[bool, Any]:
     fact = fact or detect_reading_business_fact(unit.raw_text)
+
+    def decision(admitted: bool, reason: str | None = None) -> tuple[bool, Any]:
+        if trace is not None:
+            status = "admitted" if admitted else "not_admitted"
+            counts = trace.setdefault("counts", {})
+            counts[status] = counts.get(status, 0) + 1
+            if reason is not None:
+                reasons = trace.setdefault("rejection_counts", {})
+                reasons[reason] = reasons.get(reason, 0) + 1
+            samples = trace.setdefault("samples", {})
+            rows = samples.setdefault(reason or status, [])
+            if len(rows) < 4:
+                rows.append({
+                    "target_id": unit.unit_id,
+                    "package_id": package_id,
+                    "status": status,
+                    "reason": reason,
+                    "fact_purpose": fact.purpose,
+                    "fact_reasons": list(fact.reasons[:4]),
+                    "fact_reason_count": len(fact.reasons),
+                    "required_unit_ids": list(required_unit_ids[:16]),
+                    "required_unit_count": len(required_unit_ids),
+                    "priority": max(1, int(reading.get("priority", 2))),
+                })
+        return admitted, fact
+
     if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == "unassessed":
-        return False, fact
+        return decision(False, "non_operating_purpose" if fact.purpose in NON_OPERATING_PURPOSES
+                        else "unassessed_purpose")
     if kind == "operating_table" and not table_qualified:
-        return False, fact
-    if unit.source_role in _CONTEXT_ROLES or (kind != "operating_table" and
-            (financial_only if financial_only is not None else _financial_only(unit.raw_text, fact))):
-        return False, fact
+        return decision(False, "table_not_qualified")
+    if unit.source_role in _CONTEXT_ROLES:
+        return decision(False, "source_context_role")
+    if kind != "operating_table" and (
+        financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)
+    ):
+        return decision(False, "financial_only")
     # Glyphs/page counters are observed text, not operating descriptions. A
     # numeric cell of an already qualified operating table is different: its
     # original headers, units and period travel in the complete dependency graph.
@@ -75,18 +107,20 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
         letter_marker = bool(re.fullmatch(r"\s*[(\[（【]\s*[A-Za-z]\s*[)\]）】]\s*[.、:]?\s*", unit.raw_text))
         if not any(character.isalpha() for character in unit.raw_text) or numeric_marker:
             if kind != "operating_table" or not any(character.isdigit() for character in unit.raw_text):
-                return False, fact
+                return decision(False, "non_narrative_unit" if not any(character.isalpha() for character in unit.raw_text)
+                                else "bare_numeric_marker")
         if roman_marker or letter_marker:
-            return False, fact
+            return decision(False, "outline_marker")
     if (is_heading or unit.unit_kind.endswith("_heading")) and not fact.eligible:
-        return False, fact
+        return decision(False, "heading_without_business_fact")
     # Family/role are observed reading intent, not proof of any specific fact.
     # They permit descriptive business material without requiring a number or a
     # particular project duration. Unknown prose still needs an operating signal.
     scoped = reading.get("section_role") in _BUSINESS_ROLES
     descriptive = reading.get("family") in {"prospectus", "offering"}
-    return bool(fact.eligible or scoped or kind == "operating_table" or
-                (descriptive and kind in {"project", "operating_table"})), fact
+    admitted = bool(fact.eligible or scoped or kind == "operating_table" or
+                    (descriptive and kind in {"project", "operating_table"}))
+    return decision(admitted, None if admitted else "no_supported_business_signal")
 
 
 def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
@@ -464,11 +498,14 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     mutable_pipeline.pop("_material_units", None)
     mutable_pipeline.pop("_carrier_origins", None)
     work_budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
+    admission_trace: dict[str, Any] = {"counts": {}, "rejection_counts": {}, "samples": {}}
     try:
         # Reserve source closure indexes before constructing them. Geometry
         # below tightens its own ceiling on this same account, never a clone.
         work_budget.charge(2 * len(parsed.units) + len(pipeline.get("non_selectable_unit_ids", ())) + 1)
     except WorkBudgetExceeded:
+        if _session_state is not None:
+            _session_state["admission_trace"] = admission_trace
         return [], {}, [], False, [{"package_id": "source-closure",
             "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": [], "unexamined_from_index": 0}]
     units = {unit.unit_id: unit for unit in parsed.units}
@@ -488,6 +525,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         work_budget.charge(sum(1 + len(section.get("heading_unit_ids", ())) for section in sections))
         headings = {uid for section in sections for uid in section.get("heading_unit_ids", ())}
     except WorkBudgetExceeded:
+        if _session_state is not None:
+            _session_state["admission_trace"] = admission_trace
         return [], {}, [], False, [{"package_id": "source-closure",
             "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": [], "unexamined_from_index": 0}]
     # Qualify actual table rows before the context graph establishes cost and
@@ -881,7 +920,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             admitted, fact = _admitted(unit, view, package["kind"],
                                        fact=fact,
                                        financial_only=session.financial_only(uid),
-                                       is_heading=uid in headings, table_qualified=table_qualified)
+                                       is_heading=uid in headings, table_qualified=table_qualified,
+                                       trace=admission_trace, package_id=str(package["package_id"]),
+                                       required_unit_ids=tuple(sorted(required - {uid})))
             if not admitted:
                 continue
             anchors.append(uid)
@@ -908,7 +949,11 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             metadata[uid] = {"priority": min(priority, int(previous["priority"])) if previous_anchor else priority,
                              "topics": topics, "context_only": False,
                              "value_band": "meaningful_fact" if meaningful or previous_meaningful else "description",
-                             "required": tuple(sorted(set(previous.get("required", ())) | (required - {uid})))}
+                             "required": tuple(sorted(set(previous.get("required", ())) | (required - {uid}))),
+                             "fact_purpose": fact.purpose,
+                             "fact_reasons": tuple(fact.reasons[:4]),
+                             "package_ids": tuple(dict.fromkeys((*previous.get("package_ids", ()),
+                                                                  str(package["package_id"]))))}
         if not anchors:
             continue
         eligible_packages.append(packages[index])
@@ -920,6 +965,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         _session_state["numeric_shape_uncertain_ids"] = {
             unit.unit_id for unit in parsed.units
             if origins.get(unit.unit_id, unit.unit_id) in numeric_shape_uncertain}
+        _session_state["admission_trace"] = admission_trace
     # Stable source order, never text-only identity deduplication.
     ordered = tuple(candidates[unit.unit_id] for unit in material_units if unit.unit_id in candidates)
     source_order = {package["package_id"]: index for index, package in enumerate(packages)}
@@ -1056,11 +1102,110 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
         constraints.append("Fragments flagged table_structure_ambiguous do not prove column, period, "
                            "row-label or unit attribution. Use independently supported business prose; "
                            "leave unproven numeric interpretations unknown.")
-    return {"schema_version": "du-production-reading/2", "reading_policy_version": version,
+    return {"schema_version": "du-production-reading/3", "reading_policy_version": version,
             "reading_policies": policies, "business_facets": facets,
             "constraints": constraints,
             "groups": groups, "unread": unread,
             "deferred": deferred, "layout_coverage": layout_coverage}
+
+
+def _trace_ref(value: object, namespace: str) -> str:
+    digest = sha256(str(value).encode("utf-8")).hexdigest()
+    return f"urn:company-wiki:{namespace}:sha256:{digest}"
+
+
+def _selection_trace(*, source_unit_count: int, admission: Mapping[str, Any],
+                     eligible: Sequence[Mapping[str, Any]], withheld: Sequence[Mapping[str, Any]],
+                     selected_span_ids: Mapping[str, str]) -> dict[str, Any]:
+    counts = admission.get("counts", {})
+    admitted_count = int(counts.get("admitted", 0))
+    rejected_count = int(counts.get("not_admitted", 0))
+    rejection_counts = dict(admission.get("rejection_counts", {}))
+    if len(rejection_counts) > 32:
+        kept = dict(sorted(rejection_counts.items())[:31])
+        kept["other_rejections"] = sum(
+            value for key, value in rejection_counts.items() if key not in kept
+        )
+        rejection_counts = kept
+
+    admission_samples = []
+    for sample_key in sorted(admission.get("samples", {})):
+        for row in admission["samples"][sample_key]:
+            required = tuple(row.get("required_unit_ids", ()))
+            fact_reasons = tuple(row.get("fact_reasons", ()))
+            admission_samples.append({
+                "unit_id": row["target_id"],
+                "package_ref": _trace_ref(row.get("package_id", "unknown"), "reading-package"),
+                "status": row["status"],
+                "reason": row["reason"],
+                "fact_purpose": row["fact_purpose"],
+                "fact_reasons": list(fact_reasons[:4]),
+                "fact_reason_count": int(row.get("fact_reason_count", len(fact_reasons))),
+                "fact_reasons_limited": int(row.get("fact_reason_count", len(fact_reasons))) > len(fact_reasons),
+                "required_unit_ids": list(required[:8]),
+                "required_unit_count": int(row.get("required_unit_count", len(required))),
+                "required_unit_ids_limited": int(row.get("required_unit_count", len(required))) > len(required[:8]),
+                "priority": row["priority"],
+                "selected_span_id": selected_span_ids.get(row["target_id"]),
+            })
+    admission_samples = admission_samples[:16]
+
+    eligible_samples = []
+    for package in eligible[:12]:
+        members = tuple(package.get("member_unit_ids", ()))
+        anchors = tuple(package.get("anchor_unit_ids", ()))
+        required = tuple(package.get("required_context_unit_ids", ()))
+        eligible_samples.append({
+            "package_ref": _trace_ref(package.get("package_id", "unknown"), "reading-package"),
+            "kind": str(package.get("kind", "unknown")),
+            "member_unit_ids": list(members[:8]), "member_count": len(members),
+            "member_limited": len(members) > 8,
+            "anchor_unit_ids": list(anchors[:8]), "anchor_count": len(anchors),
+            "anchor_limited": len(anchors) > 8,
+            "required_unit_ids": list(required[:8]), "required_count": len(required),
+            "required_limited": len(required) > 8,
+        })
+
+    withheld_samples = []
+    for row in withheld[:16]:
+        known = tuple(dict.fromkeys(row.get("known_unit_ids", ())))
+        withheld_samples.append({
+            "package_ref": _trace_ref(row.get("package_id", "unknown"), "reading-package"),
+            "reason": str(row.get("reason", "unknown")),
+            "status": row.get("status"),
+            "known_unit_ids": list(known[:8]),
+            "known_unit_count": len(known),
+            "known_unit_ids_limited": len(known) > 8,
+        })
+
+    selected_samples = [
+        {"unit_id": unit_id, "span_id": span_id}
+        for unit_id, span_id in sorted(selected_span_ids.items())[:16]
+    ]
+    return {
+        "schema_version": "selection-trace/1",
+        "source_unit_count": source_unit_count,
+        "admission": {
+            "count": admitted_count + rejected_count,
+            "admitted_count": admitted_count,
+            "rejected_count": rejected_count,
+            "limited": admitted_count + rejected_count > len(admission_samples),
+            "rejection_counts": rejection_counts,
+            "samples": admission_samples,
+        },
+        "eligible_packages": {
+            "count": len(eligible), "limited": len(eligible) > len(eligible_samples),
+            "samples": eligible_samples,
+        },
+        "withheld": {
+            "count": len(withheld), "limited": len(withheld) > len(withheld_samples),
+            "samples": withheld_samples,
+        },
+        "selected": {
+            "count": len(selected_span_ids), "limited": len(selected_span_ids) > len(selected_samples),
+            "samples": selected_samples,
+        },
+    }
 
 
 def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: str,
@@ -1234,6 +1379,10 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     context["deferred_limited"] = context["deferred_count"] > 128
     context["deferred"] = context["deferred"][:128]
     context["selection_diagnostics"] = list(result.selection_diagnostics)
+    context["selection_trace"] = _selection_trace(
+        source_unit_count=len(parsed.units), admission=session_state.get("admission_trace", {}),
+        eligible=eligible, withheld=withheld, selected_span_ids=pipeline["selected_span_ids"],
+    )
     dependencies = None
     try:
         dependency_port = import_module("company_wiki.document_understanding.decision_dependencies")

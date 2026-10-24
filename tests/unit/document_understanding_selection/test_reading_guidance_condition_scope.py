@@ -60,7 +60,7 @@ def _select(parsed, *, max_selected=96, max_chars=48000):
     assert DEFAULT_DOCUMENT_WORK_LIMIT == 16_000_000 and reading.MAX_READING_CHARS == 48000
     assert result.selection_limit == max_selected and len(result.evidence_spans) <= max_selected
     assert sum(len(s.raw_text or "") for s in result.evidence_spans) <= max_chars
-    assert result.reading_context["schema_version"] == "du-production-reading/2"
+    assert result.reading_context["schema_version"] == "du-production-reading/3"
     return result
 
 

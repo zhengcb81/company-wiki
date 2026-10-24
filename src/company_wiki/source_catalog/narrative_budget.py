@@ -505,6 +505,10 @@ class BudgetDiagnostic:
     item_ids: tuple[str, ...]
     locator: str
     reason: str
+    used: int | None = None
+    requested: int | None = None
+    limit: int | None = None
+    closure_size: int | None = None
 
 
 def budget_diagnostics(
@@ -555,10 +559,13 @@ def _reading_plan(
         return True
 
     def diagnostic(members: tuple[BudgetItem[PayloadT], ...], key: str,
-                   reason: str) -> BudgetDiagnostic:
+                   reason: str, *, used: int | None = None,
+                   requested: int | None = None, limit_value: int | None = None,
+                   closure_size: int | None = None) -> BudgetDiagnostic:
         first = min(members, key=lambda item: (item.order_key, item.item_id))
         return BudgetDiagnostic(first.item_id, key, first.group_id, "reading",
-            len(members), tuple(item.item_id for item in members), first.locator, reason)
+            len(members), tuple(item.item_id for item in members), first.locator, reason,
+            used, requested, limit_value, closure_size)
 
     def work_stop() -> BudgetDiagnostic:
         # A global limit is not evidence that a specific group was omitted:
@@ -898,7 +905,12 @@ def _reading_plan(
         elif max_chars is not None and spent_chars + chars[key] > max_chars:
             reason = "character_budget"
         if reason is not None:
-            dropped.append(diagnostic(anchors[key], key, reason))
+            is_character_budget = reason == "character_budget"
+            dropped.append(diagnostic(anchors[key], key, reason,
+                used=spent_chars if is_character_budget else len(selected_ids),
+                requested=chars[key] if is_character_budget else costs[key],
+                limit_value=max_chars if is_character_budget else limit,
+                closure_size=len(closures[key])))
         else:
             # Only an accepted offer expands its actual original set again.
             # Every accepted package is complete even if later index updates
@@ -953,7 +965,9 @@ def _reading_plan(
             # Diagnose the rest without doing another repetition/ranking pass.
             if len(selected_ids) == limit:
                 dropped.extend(diagnostic(anchors[other], other, "group_exceeds_limit"
-                    if len(closures[other]) > limit else "budget_full") for other in remaining)
+                    if len(closures[other]) > limit else "budget_full",
+                    used=len(selected_ids), requested=costs[other], limit_value=limit,
+                    closure_size=len(closures[other])) for other in remaining)
                 break
             if balanced_coverage and not bucket_topics[bid]:
                 # Missing labels are not proof that every subsequent table or

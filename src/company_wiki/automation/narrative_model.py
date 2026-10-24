@@ -483,7 +483,9 @@ def _compile_citation_units(
         context = selected.reading_context
         views = (tuple(tuple(tuple(view["support_evidence_ids"]) for view in group["citation_views"])
                        for group in context["groups"])
-                 if context is not None and context["schema_version"] == "du-production-reading/2" else None)
+                 if context is not None and context["schema_version"] in {
+                     "du-production-reading/2", "du-production-reading/3",
+                 } else None)
         return compile_citation_units(selected.evidence_spans, tuple(members for _, members in groups.values()),
                                       support_views=views)
     except CitationUnitError as exc:
@@ -617,6 +619,8 @@ class NarrativeModelRequest:
                 envelope["output_plan"] = _reading_output_plan(len(mapping), strategy["groups"])
             else:
                 strategy = _to_plain(selected.reading_context)
+                strategy.pop("selection_diagnostics", None)
+                strategy.pop("selection_trace", None)
                 strategy["groups"] = [{"id": alias, "kind": row["kind"], "section_role": row["section_role"]}
                                       for alias, row in zip(groups, strategy["groups"], strict=True)]
             envelope["reading_strategy"] = strategy

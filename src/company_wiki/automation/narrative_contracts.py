@@ -27,8 +27,18 @@ from .models import canonical_json, canonical_json_hash, _freeze_json, _to_plain
 
 SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/2.0"
 PROJECTED_SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/3.0"
-SELECT_RESULT_SCHEMA = "narrative-select-result/2.0"
-PROJECTED_SELECT_RESULT_SCHEMA = "narrative-select-result/3.0"
+SELECT_RESULT_SCHEMA = "narrative-select-result/2.1"
+PROJECTED_SELECT_RESULT_SCHEMA = "narrative-select-result/3.1"
+LEGACY_SELECT_RESULT_SCHEMAS = frozenset({
+    "narrative-select-result/2.0", "narrative-select-result/3.0",
+})
+PROJECTED_SELECT_RESULT_SCHEMAS = frozenset({
+    "narrative-select-result/3.0", PROJECTED_SELECT_RESULT_SCHEMA,
+})
+SUPPORTED_SELECT_RESULT_SCHEMAS = frozenset({
+    SELECT_RESULT_SCHEMA, PROJECTED_SELECT_RESULT_SCHEMA,
+    *LEGACY_SELECT_RESULT_SCHEMAS,
+})
 SUMMARY_RESULT_SCHEMA = "narrative-summary-result/2.0"
 PROJECTED_SUMMARY_RESULT_SCHEMA = "narrative-summary-result/3.0"
 BUNDLE_SCHEMA = "narrative-bundle/2.0"
@@ -41,6 +51,16 @@ READING_CONTEXT_MAX_BYTES = 192 * 1024
 
 _SHA = re.compile(r"[0-9a-f]{64}\Z")
 _DRIVE_PATH = re.compile(r"[A-Za-z]:[\\/]")
+_NARRATIVE_UNIT_ID = re.compile(r"urn:company-wiki:narrative-unit:sha256:[0-9a-f]{64}\Z")
+_READING_GROUP_ID = re.compile(r"urn:company-wiki:reading-group:sha256:[0-9a-f]{64}\Z")
+_READING_PACKAGE_ID = re.compile(r"urn:company-wiki:reading-package:sha256:[0-9a-f]{64}\Z")
+_EVIDENCE_SPAN_ID = re.compile(r"urn:company-wiki:evidence-span:sha256:[0-9a-f]{64}\Z")
+_LOCATOR = re.compile(
+    r"loc:v1(?:/(?:page|paragraph|table|row|column):[0-9]+)*"
+    r"(?:/chars:[0-9]+-[0-9]+)?\Z"
+)
+_DOCUMENT_WORK_DETAIL = "unexamined source content remains unknown; original is unchanged"
+_TRACE_CODE = re.compile(r"[A-Za-z][A-Za-z0-9_-]{0,79}\Z")
 _PATH_KEYS = frozenset(
     {
         "path",
@@ -757,21 +777,360 @@ def _reading_texts(value: object, name: str, *, limit: int = 4096) -> Sequence[A
     return rows
 
 
+def _selection_diagnostic_target(value: object, *, code: str) -> Mapping[str, Any]:
+    item = _exact(value, {
+        "item_id", "item_ids", "item_count", "item_ids_limited", "group_id",
+        "locator", "used", "requested", "limit", "closure_size",
+    }, "selection_diagnostic.target")
+    item_id = _text(item["item_id"], "selection_diagnostic.target.item_id")
+    if not _NARRATIVE_UNIT_ID.fullmatch(item_id):
+        raise NarrativeContractError("selection_diagnostic target ID is invalid")
+    item_ids = _array(item["item_ids"], "selection_diagnostic.target.item_ids")
+    if len(item_ids) > 16:
+        raise NarrativeContractError("selection_diagnostic target ID sample exceeds its bound")
+    for item_id in item_ids:
+        checked_id = _text(item_id, "selection_diagnostic.target.item_id")
+        if not _NARRATIVE_UNIT_ID.fullmatch(checked_id):
+            raise NarrativeContractError("selection_diagnostic target ID is invalid")
+    item_count = _integer(item["item_count"], "selection_diagnostic.target.item_count", positive=True)
+    if item_count < len(item_ids) or type(item["item_ids_limited"]) is not bool:
+        raise NarrativeContractError("selection_diagnostic target ID sample is inconsistent")
+    if item["item_ids_limited"] != (item_count > len(item_ids)):
+        raise NarrativeContractError("selection_diagnostic target ID limitation is inconsistent")
+    group_id = item["group_id"]
+    if group_id is not None and not _READING_GROUP_ID.fullmatch(
+        _text(group_id, "selection_diagnostic.target.group_id")
+    ):
+        raise NarrativeContractError("selection_diagnostic target group ID is invalid")
+    locator = item["locator"]
+    if (not isinstance(locator, str) or not _LOCATOR.fullmatch(locator)
+            or locator != locator.strip() or len(locator) > 512):
+        raise NarrativeContractError("selection_diagnostic target locator is invalid")
+    used = _integer(item["used"], "selection_diagnostic.target.used")
+    requested = _integer(item["requested"], "selection_diagnostic.target.requested", positive=True)
+    limit = _integer(item["limit"], "selection_diagnostic.target.limit",
+                     positive=code != "character_budget")
+    closure_size = _integer(item["closure_size"], "selection_diagnostic.target.closure_size", positive=True)
+    if used + requested <= limit:
+        raise NarrativeContractError("selection_diagnostic target does not exceed its limit")
+    if code == "group_exceeds_limit" and closure_size <= limit:
+        raise NarrativeContractError("selection_diagnostic closure does not exceed its span limit")
+    return item
+
+
+def _selection_diagnostic(value: object) -> Mapping[str, Any]:
+    item = _object(value, "selection_diagnostic")
+    required = {"code", "count"}
+    allowed = required | {
+        "phase", "external_model_cost", "dimension", "used", "requested", "limit", "detail",
+        "targets", "targets_limited", "max_closure_size",
+    }
+    unknown = set(item) - allowed
+    missing = required - set(item)
+    if unknown:
+        raise NarrativeContractError(f"selection_diagnostic unknown fields: {sorted(unknown)}")
+    if missing:
+        raise NarrativeContractError(f"selection_diagnostic missing fields: {sorted(missing)}")
+    code = _text(item["code"], "selection_diagnostic.code")
+    if len(code) > 80:
+        raise NarrativeContractError("selection_diagnostic.code is too long")
+    _integer(item["count"], "selection_diagnostic.count", positive=True)
+
+    if set(item) == required:
+        if code != "DECISION_DEPENDENCIES_UNAVAILABLE":
+            raise NarrativeContractError("selection_diagnostic without dimension is unsupported")
+        return item
+
+    _text(item.get("phase"), "selection_diagnostic.phase")
+    if len(item["phase"]) > 80:
+        raise NarrativeContractError("selection_diagnostic.phase is too long")
+    if item.get("external_model_cost") is not False:
+        raise NarrativeContractError("selection_diagnostic.external_model_cost must be false")
+    dimension = _text(item.get("dimension"), "selection_diagnostic.dimension")
+    if len(dimension) > 80:
+        raise NarrativeContractError("selection_diagnostic.dimension is too long")
+    combinations = {
+        "budget_full": "selection_spans",
+        "group_exceeds_limit": "selection_spans",
+        "character_budget": "selection_characters",
+        "work_budget_exhausted": {"selection_work", "document_work"},
+        "missing_required_context": "selection_policy",
+    }
+    expected_dimension = combinations.get(code)
+    if expected_dimension is None or dimension not in (
+        expected_dimension if isinstance(expected_dimension, set) else {expected_dimension}
+    ):
+        raise NarrativeContractError("selection_diagnostic code and dimension do not match")
+
+    metric_keys = {"used", "requested", "limit", "detail"}
+    if code in {"budget_full", "character_budget"}:
+        base = required | {"phase", "external_model_cost", "dimension", "used", "limit"}
+        enriched = base | {"targets", "targets_limited"}
+        if frozenset(item) not in {frozenset(base), frozenset(enriched)}:
+            raise NarrativeContractError("selection_diagnostic budget fields differ from its dimension")
+        used = _integer(item["used"], "selection_diagnostic.used")
+        limit = _integer(item["limit"], "selection_diagnostic.limit",
+                         positive=code != "character_budget")
+        if used > limit:
+            raise NarrativeContractError("selection_diagnostic used exceeds limit")
+        if set(item) == enriched:
+            targets = _array(item["targets"], "selection_diagnostic.targets")
+            if len(targets) > 32 or type(item["targets_limited"]) is not bool:
+                raise NarrativeContractError("selection_diagnostic target sample is invalid")
+            if len(targets) > item["count"]:
+                raise NarrativeContractError("selection_diagnostic target sample exceeds its count")
+            if item["targets_limited"] != (item["count"] > len(targets)):
+                raise NarrativeContractError("selection_diagnostic target sample count is inconsistent")
+            for target in targets:
+                checked_target = _selection_diagnostic_target(target, code=code)
+                if checked_target["limit"] != limit:
+                    raise NarrativeContractError("selection_diagnostic target limit differs from its parent")
+    elif dimension == "document_work":
+        expected = required | {"phase", "external_model_cost", "dimension", *metric_keys}
+        if set(item) != expected:
+            raise NarrativeContractError("selection_diagnostic work fields differ from its dimension")
+        _integer(item["used"], "selection_diagnostic.used")
+        limit = _integer(item["limit"], "selection_diagnostic.limit")
+        if item["used"] > limit:
+            raise NarrativeContractError("selection_diagnostic used exceeds limit")
+        if item["requested"] is not None:
+            _integer(item["requested"], "selection_diagnostic.requested")
+        detail = _text(item["detail"], "selection_diagnostic.detail")
+        if detail != _DOCUMENT_WORK_DETAIL:
+            raise NarrativeContractError("selection_diagnostic.detail is not the fixed safe message")
+    elif code == "group_exceeds_limit":
+        legacy = required | {"phase", "external_model_cost", "dimension"}
+        enriched = legacy | {"limit", "max_closure_size", "targets", "targets_limited"}
+        if frozenset(item) not in {frozenset(legacy), frozenset(enriched)}:
+            raise NarrativeContractError("selection_diagnostic policy fields differ from its dimension")
+        if set(item) == enriched:
+            limit = _integer(item["limit"], "selection_diagnostic.limit", positive=True)
+            closure_size = _integer(item["max_closure_size"], "selection_diagnostic.max_closure_size", positive=True)
+            if closure_size <= limit:
+                raise NarrativeContractError("selection_diagnostic maximum closure does not exceed its limit")
+            targets = _array(item["targets"], "selection_diagnostic.targets")
+            if len(targets) > 32 or type(item["targets_limited"]) is not bool:
+                raise NarrativeContractError("selection_diagnostic target sample is invalid")
+            if len(targets) > item["count"]:
+                raise NarrativeContractError("selection_diagnostic target sample exceeds its count")
+            if item["targets_limited"] != (item["count"] > len(targets)):
+                raise NarrativeContractError("selection_diagnostic target sample count is inconsistent")
+            checked_targets = [_selection_diagnostic_target(target, code=code) for target in targets]
+            if any(target["limit"] != limit for target in checked_targets):
+                raise NarrativeContractError("selection_diagnostic target limit differs from its parent")
+            if any(target["closure_size"] > closure_size for target in checked_targets):
+                raise NarrativeContractError("selection_diagnostic maximum closure size is inconsistent")
+    elif code in {"work_budget_exhausted", "missing_required_context"}:
+        expected = required | {"phase", "external_model_cost", "dimension"}
+        if set(item) != expected:
+            raise NarrativeContractError("selection_diagnostic policy fields differ from its dimension")
+    else:
+        raise NarrativeContractError("selection_diagnostic code has no supported field shape")
+    return item
+
+
+def _selection_diagnostics(value: object, *, name: str,
+                           legacy_aggregate: bool = False) -> tuple[Mapping[str, Any], ...]:
+    diagnostics = _array(value, name)
+    if len(diagnostics) > 128:
+        raise NarrativeContractError(f"{name} array bound exceeded")
+    checked = []
+    for row in diagnostics:
+        if legacy_aggregate and isinstance(row, Mapping) and set(row) == {"code", "count"}:
+            code = _text(row["code"], name + ".code")
+            if not _TRACE_CODE.fullmatch(code):
+                raise NarrativeContractError(f"{name} legacy code is invalid")
+            _integer(row["count"], name + ".count", positive=True)
+            checked.append(cast(Mapping[str, Any], _freeze_json(dict(row))))
+        else:
+            checked.append(cast(Mapping[str, Any], _freeze_json(_selection_diagnostic(row))))
+    return tuple(checked)
+
+
+def _trace_counted_samples(value: object, name: str, *, limit: int = 32) -> tuple[int, bool, Sequence[Any]]:
+    item = _exact(value, {"count", "limited", "samples"}, name)
+    count = _integer(item["count"], name + ".count")
+    samples = _array(item["samples"], name + ".samples")
+    if len(samples) > limit or type(item["limited"]) is not bool:
+        raise NarrativeContractError(f"{name} sample bound or flag is invalid")
+    if count < len(samples) or item["limited"] != (count > len(samples)):
+        raise NarrativeContractError(f"{name} sample count is inconsistent")
+    return count, item["limited"], samples
+
+
+def _trace_unit_ids(value: object, name: str, *, cap: int = 16) -> tuple[Sequence[str], int, bool]:
+    item = _exact(value, {"ids", "count", "limited"}, name)
+    ids = _reading_texts(item["ids"], name + ".ids", limit=cap)
+    if any(not _NARRATIVE_UNIT_ID.fullmatch(unit_id) for unit_id in ids):
+        raise NarrativeContractError(f"{name} contains an invalid unit ID")
+    count = _integer(item["count"], name + ".count")
+    if count < len(ids) or type(item["limited"]) is not bool or item["limited"] != (count > len(ids)):
+        raise NarrativeContractError(f"{name} count is inconsistent")
+    return ids, count, item["limited"]
+
+
+def _trace_package_ref(value: object, name: str) -> str:
+    package_ref = _text(value, name)
+    if not _READING_PACKAGE_ID.fullmatch(package_ref):
+        raise NarrativeContractError(f"{name} is invalid")
+    return package_ref
+
+
+def _selection_trace(value: object, spans: Sequence[EvidenceSpan]) -> Mapping[str, Any]:
+    item = _exact(value, {
+        "schema_version", "source_unit_count", "admission", "eligible_packages",
+        "withheld", "selected",
+    }, "selection_trace")
+    if item["schema_version"] != "selection-trace/1":
+        raise NarrativeContractError("unsupported selection_trace schema")
+    source_unit_count = _integer(item["source_unit_count"], "selection_trace.source_unit_count")
+    span_ids = {span.span_id for span in spans}
+
+    admission = _exact(item["admission"], {
+        "count", "admitted_count", "rejected_count", "limited", "rejection_counts", "samples",
+    }, "selection_trace.admission")
+    count, _, samples = _trace_counted_samples({
+        "count": admission["count"], "limited": admission["limited"], "samples": admission["samples"],
+    }, "selection_trace.admission")
+    admitted = _integer(admission["admitted_count"], "selection_trace.admission.admitted_count")
+    rejected = _integer(admission["rejected_count"], "selection_trace.admission.rejected_count")
+    if admitted + rejected != count:
+        raise NarrativeContractError("selection_trace admission counts are inconsistent")
+    rejection_counts = _object(admission["rejection_counts"], "selection_trace.admission.rejection_counts")
+    if len(rejection_counts) > 32 or sum(
+        _integer(number, "selection_trace.rejection_count", positive=True)
+        for number in rejection_counts.values()
+    ) != rejected:
+        raise NarrativeContractError("selection_trace rejection counts are inconsistent")
+    if any(not _TRACE_CODE.fullmatch(code) for code in rejection_counts):
+        raise NarrativeContractError("selection_trace rejection code is invalid")
+    sampled_admitted = 0
+    sampled_rejected = 0
+    for raw in samples:
+        row = _exact(raw, {
+            "unit_id", "package_ref", "status", "reason", "fact_purpose", "fact_reasons",
+            "fact_reason_count", "fact_reasons_limited", "required_unit_ids", "required_unit_count",
+            "required_unit_ids_limited", "priority", "selected_span_id",
+        }, "selection_trace.admission.sample")
+        unit_id = _text(row["unit_id"], "selection_trace.admission.unit_id")
+        if not _NARRATIVE_UNIT_ID.fullmatch(unit_id):
+            raise NarrativeContractError("selection_trace unit ID is invalid")
+        _trace_package_ref(row["package_ref"], "selection_trace.admission.package_ref")
+        if row["status"] not in {"admitted", "not_admitted"}:
+            raise NarrativeContractError("selection_trace admission status is invalid")
+        if row["status"] == "admitted":
+            sampled_admitted += 1
+        else:
+            sampled_rejected += 1
+        reason = row["reason"]
+        if row["status"] == "admitted" and reason is not None:
+            raise NarrativeContractError("admitted selection_trace row cannot have a rejection reason")
+        if row["status"] == "not_admitted" and (not isinstance(reason, str) or not _TRACE_CODE.fullmatch(reason)):
+            raise NarrativeContractError("rejected selection_trace row requires a reason code")
+        purpose = _text(row["fact_purpose"], "selection_trace.fact_purpose")
+        if not _TRACE_CODE.fullmatch(purpose):
+            raise NarrativeContractError("selection_trace fact purpose is invalid")
+        fact_reasons = _reading_texts(row["fact_reasons"], "selection_trace.fact_reasons", limit=4)
+        fact_reason_count = _integer(row["fact_reason_count"], "selection_trace.fact_reason_count")
+        if (fact_reason_count < len(fact_reasons) or type(row["fact_reasons_limited"]) is not bool
+                or row["fact_reasons_limited"] != (fact_reason_count > len(fact_reasons))):
+            raise NarrativeContractError("selection_trace fact reason sample is inconsistent")
+        if any(not _TRACE_CODE.fullmatch(code) for code in fact_reasons):
+            raise NarrativeContractError("selection_trace fact reason code is invalid")
+        required = _reading_texts(row["required_unit_ids"], "selection_trace.required_unit_ids", limit=8)
+        required_count = _integer(row["required_unit_count"], "selection_trace.required_unit_count")
+        if (required_count < len(required) or type(row["required_unit_ids_limited"]) is not bool
+                or row["required_unit_ids_limited"] != (required_count > len(required))
+                or any(not _NARRATIVE_UNIT_ID.fullmatch(unit_id) for unit_id in required)):
+            raise NarrativeContractError("selection_trace required unit sample is inconsistent")
+        _integer(row["priority"], "selection_trace.priority", positive=True)
+        selected_span = row["selected_span_id"]
+        if selected_span is not None and (not _EVIDENCE_SPAN_ID.fullmatch(_text(selected_span, "selection_trace.selected_span_id"))
+                                          or selected_span not in span_ids):
+            raise NarrativeContractError("selection_trace selected span is not in the public evidence")
+    if sampled_admitted > admitted or sampled_rejected > rejected:
+        raise NarrativeContractError("selection_trace admission sample exceeds aggregate status count")
+
+    packages_count, _, package_samples = _trace_counted_samples(
+        item["eligible_packages"], "selection_trace.eligible_packages", limit=16,
+    )
+    for raw in package_samples:
+        row = _exact(raw, {
+            "package_ref", "kind", "member_unit_ids", "member_count", "member_limited",
+            "anchor_unit_ids", "anchor_count", "anchor_limited", "required_unit_ids",
+            "required_count", "required_limited",
+        }, "selection_trace.eligible_package")
+        _trace_package_ref(row["package_ref"], "selection_trace.eligible_package.package_ref")
+        if not _TRACE_CODE.fullmatch(_text(row["kind"], "selection_trace.eligible_package.kind")):
+            raise NarrativeContractError("selection_trace package kind is invalid")
+        for ids_key, count_key, limited_key in (
+            ("member_unit_ids", "member_count", "member_limited"),
+            ("anchor_unit_ids", "anchor_count", "anchor_limited"),
+            ("required_unit_ids", "required_count", "required_limited"),
+        ):
+            ids = _reading_texts(row[ids_key], "selection_trace.eligible_package." + ids_key, limit=8)
+            count_value = _integer(row[count_key], "selection_trace.eligible_package." + count_key)
+            if (any(not _NARRATIVE_UNIT_ID.fullmatch(unit_id) for unit_id in ids)
+                    or count_value < len(ids) or type(row[limited_key]) is not bool
+                    or row[limited_key] != (count_value > len(ids))):
+                raise NarrativeContractError("selection_trace eligible package IDs are inconsistent")
+
+    withheld_count, _, withheld_samples = _trace_counted_samples(
+        item["withheld"], "selection_trace.withheld",
+    )
+    for raw in withheld_samples:
+        row = _exact(raw, {
+            "package_ref", "reason", "status", "known_unit_ids", "known_unit_count", "known_unit_ids_limited",
+        }, "selection_trace.withheld.sample")
+        _trace_package_ref(row["package_ref"], "selection_trace.withheld.package_ref")
+        if not _TRACE_CODE.fullmatch(_text(row["reason"], "selection_trace.withheld.reason")):
+            raise NarrativeContractError("selection_trace withheld reason is invalid")
+        if row["status"] is not None and not _TRACE_CODE.fullmatch(_text(row["status"], "selection_trace.withheld.status")):
+            raise NarrativeContractError("selection_trace withheld status is invalid")
+        _trace_unit_ids({
+            "ids": row["known_unit_ids"], "count": row["known_unit_count"],
+            "limited": row["known_unit_ids_limited"],
+        }, "selection_trace.withheld.known_unit_ids", cap=8)
+
+    selected_count, _, selected_samples = _trace_counted_samples(
+        item["selected"], "selection_trace.selected",
+    )
+    if (not len(spans) <= selected_count <= source_unit_count
+            or (not spans and selected_count != 0)):
+        raise NarrativeContractError("selection_trace selected count is inconsistent with source evidence")
+    unique_units: set[str] = set()
+    for raw in selected_samples:
+        row = _exact(raw, {"unit_id", "span_id"}, "selection_trace.selected.sample")
+        unit_id = _text(row["unit_id"], "selection_trace.selected.unit_id")
+        span_id = _text(row["span_id"], "selection_trace.selected.span_id")
+        if not _NARRATIVE_UNIT_ID.fullmatch(unit_id) or not _EVIDENCE_SPAN_ID.fullmatch(span_id):
+            raise NarrativeContractError("selection_trace selected ID is invalid")
+        if unit_id in unique_units or span_id not in span_ids:
+            raise NarrativeContractError("selection_trace selected mapping is inconsistent")
+        unique_units.add(unit_id)
+    if selected_count < len(unique_units) or packages_count < len(package_samples) or withheld_count < len(withheld_samples):
+        raise NarrativeContractError("selection_trace sample counts are inconsistent")
+    return cast(Mapping[str, Any], _freeze_json(item))
+
+
 def _reading_context(
     value: object, spans: Sequence[EvidenceSpan],
 ) -> Mapping[str, Any] | None:
     if value is None:
         return None
     plain = _bounded_reading_json(value)
-    extra = ({"deferred_count", "deferred_limited", "selection_diagnostics"}
-             if isinstance(plain, Mapping) and "deferred_count" in plain else set())
+    extra: set[str] = set()
+    if isinstance(plain, Mapping) and "deferred_count" in plain:
+        extra |= {"deferred_count", "deferred_limited", "selection_diagnostics"}
+    if isinstance(plain, Mapping) and plain.get("schema_version") == "du-production-reading/3":
+        extra |= {"deferred_count", "deferred_limited", "selection_diagnostics", "selection_trace"}
     item = _exact(plain, {
         "schema_version", "reading_policy_version", "reading_policies", "business_facets",
         "constraints", "groups", "unread", "deferred", "layout_coverage",
     } | extra, "reading_context")
-    if item["schema_version"] not in {"du-production-reading/1", "du-production-reading/2"}:
+    if item["schema_version"] not in {"du-production-reading/1", "du-production-reading/2", "du-production-reading/3"}:
         raise NarrativeContractError("unsupported reading_context schema")
-    attributed = item["schema_version"] == "du-production-reading/2"
+    attributed = item["schema_version"] in {"du-production-reading/2", "du-production-reading/3"}
     version = _text(item["reading_policy_version"], "reading_policy_version")
     prefix = "du-sent-policy/1+"
     if not version.startswith(prefix):
@@ -863,10 +1222,12 @@ def _reading_context(
         rows = item["deferred"]
         if count < len(rows) or type(item["deferred_limited"]) is not bool or item["deferred_limited"] != (count > len(rows)):
             raise NarrativeContractError("deferred sampling differs from its complete count")
-        for row in _array(item["selection_diagnostics"], "selection_diagnostics"):
-            diagnostic = _exact(row, {"code", "count"}, "selection_diagnostic")
-            _text(diagnostic["code"], "selection_diagnostic.code")
-            _integer(diagnostic["count"], "selection_diagnostic.count")
+        _selection_diagnostics(
+            item["selection_diagnostics"], name="selection_diagnostics",
+            legacy_aggregate=item["schema_version"] == "du-production-reading/2",
+        )
+        if "selection_trace" in extra:
+            _selection_trace(item["selection_trace"], spans)
     _enforce_cap(item, READING_CONTEXT_MAX_BYTES, "reading_context")
     return cast(Mapping[str, Any], _freeze_json(plain))
 
@@ -908,6 +1269,7 @@ class NarrativeSelectResult:
     subject_binding: NarrativeSubject | None = None
     reading_context: Mapping[str, Any] | None = None
     reading_dependencies: Mapping[str, Any] | None = None
+    selection_diagnostics: tuple[Mapping[str, Any], ...] = ()
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeSelectResult":
@@ -928,7 +1290,7 @@ class NarrativeSelectResult:
         }
         projected = (
             isinstance(value, Mapping)
-            and value.get("schema_version") == PROJECTED_SELECT_RESULT_SCHEMA
+            and value.get("schema_version") in PROJECTED_SELECT_RESULT_SCHEMAS
         )
         if projected:
             keys = (
@@ -944,11 +1306,15 @@ class NarrativeSelectResult:
             keys.add("reading_context")
         if isinstance(value, Mapping) and "reading_dependencies" in value:
             keys.add("reading_dependencies")
+        if isinstance(value, Mapping) and "selection_diagnostics" in value:
+            keys.add("selection_diagnostics")
+        if (isinstance(value, Mapping) and "reading_context" in value
+                and "selection_diagnostics" in value):
+            raise NarrativeContractError(
+                "selection diagnostics cannot be split between top-level and reading_context"
+            )
         item = _exact(value, keys, "narrative select result")
-        if item["schema_version"] not in {
-            SELECT_RESULT_SCHEMA,
-            PROJECTED_SELECT_RESULT_SCHEMA,
-        }:
+        if item["schema_version"] not in SUPPORTED_SELECT_RESULT_SCHEMAS:
             raise NarrativeContractError("unsupported narrative select schema")
         subject = _projection_subject(item["subject_binding"]) if projected else None
         source = SourceRefValue.from_dict(
@@ -993,6 +1359,7 @@ class NarrativeSelectResult:
             subject,
             _reading_context(item.get("reading_context"), spans),
             _reading_dependencies(item.get("reading_dependencies")),
+            _selection_diagnostics(item.get("selection_diagnostics", []), name="selection_diagnostics"),
         )
         result._validate()
         size = _enforce_cap(result.to_dict(), SELECT_RESULT_MAX_BYTES, "select")
@@ -1082,6 +1449,8 @@ class NarrativeSelectResult:
             value["reading_context"] = _to_plain(self.reading_context)
         if self.reading_dependencies is not None:
             value["reading_dependencies"] = _to_plain(self.reading_dependencies)
+        if self.selection_diagnostics:
+            value["selection_diagnostics"] = _to_plain(self.selection_diagnostics)
         return _subject_wire(
             value,
             self.subject_binding,

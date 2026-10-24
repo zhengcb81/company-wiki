@@ -131,14 +131,18 @@ def build_summary_task_plan(
         ))
 
     if reading_context is not None:
-        if reading_context.get("schema_version") not in {"du-production-reading/1", "du-production-reading/2"}:
+        if reading_context.get("schema_version") not in {
+            "du-production-reading/1", "du-production-reading/2", "du-production-reading/3",
+        }:
             raise ValueError("source summary requires a known native reading context")
         for group in reading_context.get("groups", ()):
             members = ids(group["evidence_ids"])
             origin = group["group_id"]
             if not isinstance(origin, str) or not origin:
                 raise ValueError("source summary task requires its actual origin group")
-            views = (group["citation_views"] if reading_context["schema_version"] == "du-production-reading/2"
+            views = (group["citation_views"] if reading_context["schema_version"] in {
+                "du-production-reading/2", "du-production-reading/3",
+            }
                      else ({"support_evidence_ids": members, "context_evidence_ids": ()},))
             if not isinstance(views, (tuple, list)) or not 1 <= len(views) <= 2:
                 raise ValueError("source summary requires the existing finite citation views")

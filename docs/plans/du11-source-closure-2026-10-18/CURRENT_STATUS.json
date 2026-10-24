@@ -338,7 +338,7 @@
     "W10": "COMPONENT_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
     "W10_code_commit": "71c7762bb40ed68d3fda98078d259231c1e58935",
     "W10_ref": "review/r1-w10-engineering-closeout-20261022.json",
-    "W11": "ENGINEERING_MERGED_PUSHED_EXACT_CI_SUCCESS_ACTUAL_SOURCE_RECOVERY_OPEN",
+    "W11": "A_B_C_DELIVERED_PUSHED_ENGINEERING_CI_SUCCESS_ACTUAL_SOURCE_RECOVERY_OPEN",
     "W12": "NOT_STARTED",
     "business_pass": false,
     "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
@@ -347,7 +347,15 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+    "W08_pending_work": "逐目标offer/defer诊断公开合同已本地验证（171相关测试+13端到端测试，独立只读复审无blocker）；先正常提交、推送并核精确CI。随后按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；大节点集中测试/独审并核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+    "W08_selection_trace_contract": {
+      "status": "LOCAL_ENGINEERING_GREEN_PENDING_NORMAL_PUBLICATION",
+      "related_tests_passed": 171,
+      "end_to_end_tests_passed": 13,
+      "independent_review": "NO_BLOCKER_NONBLOCKING_CANONICAL_COORDINATE_HARDENING_DEFERRED",
+      "external_api_or_paid_calls": false,
+      "summary": "Public selection trace and per-target diagnostics retain bounded, hashed source-unit evidence; validates zero character budget, source/span count bounds, admission aggregate consistency, locator path rejection, fixed safe detail, and model prompt exclusion."
+    },
     "W11_root_repair_commit": "664d3a1db575d64bd4f11658478593a508d03f9b",
     "W11_merge_commit_prefix": "44b722ec",
     "W08_current_independent_review": "review/r1-w08-crosspage-20261024/prepush-rootfix/independent/report-main-supplement.json",
@@ -384,6 +392,7 @@
       "observed_at": "2026-10-24T01:45:51.712039+00:00"
     },
     "W08_current_root_fix": "review/r1-w08-crosspage-20261024/prepush-rootfix/reception.json",
+    "W11_user_delivery_confirmed": "2026-10-24 W11-CWP-SOURCES A/B/C delivered and pushed",
     "W11_actual_source_recovery": "INDEX_REGISTERED_REPLAYABLE_BUSINESS_MATERIAL_GAP_STILL_OPEN",
     "W11_actual_source_ref": "review/r1-w11-actual-recovery-20261024.json",
     "W08_mainline_source_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",

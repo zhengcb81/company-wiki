@@ -11,7 +11,7 @@
 - W03/W07 的共享引擎公开接线、一次真实摘要、激活前故障恢复、缓存及RF消费已有工程验收，不重复收费重做。
 - 药明康德 final3 的四份报告均已完成，14个问题出现项归并到10个根因、W08–W12五张卡。旧报告、639件初始封存及501件final3封存均保留。
 - 共因方案位于 `C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/`，诊断与交接位于同run的 `diagnosis/r1-final3-review-20261022/`。
-- ROOT新attempt保留。W08共享原生观察/跨页/订单/逐target依赖已真实合线推送`f2b8f2bf`，独审17P、正常8056P/24skip+146smokeP，精确CI40050949303成功；旧4e3e0231有限节点保持历史。下一步按真实249页14项3pass/9partial/2missing修选材/上下文与分批，再正式摘要/cache和RF实际采用。W09已发布RF599d17b8并安装103文件匹配/CI成功；W11已并线来源发现且新索引SourceRef回放成功，业务IR材料仍external_limit。W10真实矩阵和W12未完成，作者工区只读、旧封存/账不改；具体状态以唯一CURRENT_STATUS为准。
+- ROOT新attempt保留。W08共享原生观察/跨页/订单/逐target依赖已真实合线推送`f2b8f2bf`，独审17P、正常8056P/24skip+146smokeP，精确CI40050949303成功；旧4e3e0231有限节点保持历史。本轮逐目标诊断/trace公开合同修复经171项相关测试、13项本地端到端测试和独立只读复审验证，当前待正常提交推送及精确CI；下一步按真实249页14项3pass/9partial/2missing继续修选材/上下文与分批，再正式摘要/cache和RF实际采用。W09已发布RF599d17b8并安装103文件匹配/CI成功；W11-CWP-SOURCES A/B/C由用户确认完成并推送，工程CI已有记录，新索引SourceRef回放成功，真实业务IR材料仍external_limit。W10真实矩阵和W12未完成，作者工区只读、旧封存/账不改；具体状态以唯一CURRENT_STATUS为准。
 - W08负责CWP来源语义/结构，W09负责RF研究输入与方法，W10负责audit逐文档结果投影；目录不重叠部分可并行，共享接口和技能卡由ROOT串行整合。W11有界恢复实际来源缺口；W12整合、原公司复验、泛化和质量/检测收尾。
 
 ## 每轮的八步
@@ -35,8 +35,8 @@
 
 ## 2026-10-24 当前追加节点（优先于历史状态）
 
-源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
+源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。本轮W08诊断合同新增171项相关测试、13项端到端测试全绿，独审未发现blocker；提交/推送及精确CI待完成。
 
-先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
+逐目标offer/defer诊断已完成。完成本轮正常提交、推送与精确CI后，按真实annual14断链继续修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
 真实14内容仍3P9partial2missing，整体目标active，未标complete。

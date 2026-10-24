@@ -497,6 +497,14 @@ W08独审17项原8F/9P暴露actual/future与收入指引重复状态根因，重
 
 共享观察一次、唯一结构父级、per-target语义/物理职责与共用词法修复，原13独审全绿、自然2121P/11既有skip39.36s。三共因63F与英文12P1F原证据不改；源码正常保存ef49ae3e并真实合母线，待正常发布。真实249页只解析一次，96/8518、8.630449M/16M，两scopeP；完整14独审3P9partial2missing，另仅补8页10888字符，原文/旧sealed/config/db/gold不变。下一步修层级/事件时间/条件闭包、财务孤片与定额选材/分批，阶段计划见review/r1-w08-crosspage-20261024/next-source-quality.md；不是扩大额度或强迫全文切片。本节点无付费模型/业务下载；W09/W11已发布既有状态保持。
 
+## 2026-10-24 W08 逐目标诊断投影：TDD复现与公开合同修复
+
+此前静态线索已用真实选择链复现：`select_reading_evidence`产生逐目标结果，经`NarrativeSelectHandler._result_dict`和`NarrativeSelectResult.from_dict`进入正式边界，再检查`NarrativeModelRequest`实际发送内容。公开投影保留有界的selection trace和逐目标诊断；模型提示仍只包含被选中的原文证据，不携带trace或诊断。候选、语义拒绝、前提缺失、预算遗漏由各自reason和计数区分，没有扩成第二套候选库或任务库。
+
+TDD暴露并修复的合同根因：① `max_chars=0`是合法硬上限，但`character_budget`诊断的父级及target `limit=0`被通用正数校验拒绝；仅字符维度现允许0，其他维度仍按原范围校验。② 选中trace只要求count覆盖样本，未与公开证据跨度及原始单元数比较；现要求`len(public evidence spans) <= selected.count <= source_unit_count`，空证据时count必须为0。③ sampled admission的status数现不得超过聚合的admitted/rejected数。④ locator仅接受`EvidenceCoordinates.locator()`数字字段形态，拒绝路径样式和`..`穿越输入；document-work detail限于固定安全文案。
+
+新增真实selector→public DTO roundtrip、零字符预算、空证据/越界计数、admission聚合伪造、路径样式与detail外泄反例。相关单元/契约测试171 PASS，三组本地端到端测试13 PASS；Ruff与`git diff --check`通过。独立只读复审未发现blocker，建议可再收紧locator坐标字段顺序/重复性；该建议不影响路径隔离，本轮不扩大范围。当前变更待正常提交、推送及精确CI，不等于annual14内容验收；业务事实漏选、正式摘要/cache、W09/W10实际采用矩阵和W12四审仍OPEN。
+
 ## 2026-10-24T01:37:02.500157+00:00 W08普通prepush四回归两共因已修
 
 原4F/8052P/24skip日志保留；长英文头词扫描复用原token边界、正证家具兼容原header/footer角色。原断言未改，物理最终194P，母仓原13+原4独审17P，27实际绑定不变。只恢复既有合同，不扩预算/词典特判/人工许可。正常完整push/精确CI待后续真实观察；annual14仍3P9partial2missing，0新增模型/PDF解析/业务下载。

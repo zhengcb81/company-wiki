@@ -120,7 +120,7 @@ def test_exact_subject_and_model_have_stable_canonical_identity():
     assert one["subject_binding"] == _binding()
     assert (one["bundle_schema"], one["select_schema"], one["summary_schema"]) == (
         "narrative-bundle/3.0",
-        "narrative-select-result/3.0",
+        "narrative-select-result/3.1",
         "narrative-summary-result/3.0",
     )
     assert one["parser_component"] == {"name": "cwp_official_json", "version": "1.0.1"}

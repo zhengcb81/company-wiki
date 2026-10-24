@@ -55,6 +55,7 @@ from .narrative_contracts import (
     NarrativeSelectResult,
     PhysicalPathLeakError,
     PromptReviewValue,
+    PROJECTED_SELECT_RESULT_SCHEMA,
     SELECT_RESULT_SCHEMA,
     SelectionValue,
     SourceRevisionEventPayload,
@@ -361,7 +362,7 @@ class NarrativeSelectHandler:
             "lines_total": 0, "tables_total": 0, "tables_scanned": 0,
         })
         raw: dict[str, Any] = {
-            "schema_version": "narrative-select-result/3.0",
+            "schema_version": PROJECTED_SELECT_RESULT_SCHEMA,
             "subject_binding": view.subject.to_dict(),
             "source_metadata": payload.source_metadata.to_dict(),
             "parser": {"name": parser_name, "version": parser_version},
@@ -651,6 +652,11 @@ class NarrativeSelectHandler:
         }
         if work.package.reading_context is not None:
             raw["reading_context"] = work.package.reading_context
+        elif work.package.selection_diagnostics:
+            # A source-work refusal can happen before the reading context is
+            # built. Keep its bounded cause on the public result instead of
+            # reducing a zero-work stop to status alone.
+            raw["selection_diagnostics"] = list(work.package.selection_diagnostics)
         if work.package.reading_dependencies is not None:
             raw["reading_dependencies"] = work.package.reading_dependencies
         return raw

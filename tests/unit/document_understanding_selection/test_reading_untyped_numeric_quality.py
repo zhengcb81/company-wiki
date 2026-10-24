@@ -94,7 +94,7 @@ def _select(parsed):
     assert reading.MAX_READING_CHARS == 48_000
     assert budget.max_work_units == DEFAULT_DOCUMENT_WORK_LIMIT == 16_000_000
     assert not budget.exhausted
-    assert selected.reading_context["schema_version"] == "du-production-reading/2"
+    assert selected.reading_context["schema_version"] == "du-production-reading/3"
     assert selected.summary_input()["schema_version"] == "narrative-summary-input/0.2.0"
     return selected
 
