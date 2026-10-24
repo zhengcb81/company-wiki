@@ -712,3 +712,11 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 ## 2026-10-24 06:26:48Z W08 selector 精确 CI 成功
 
 精确源码 CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已completed/success，耗时4分36秒；只有既有 Node 20 runner提醒与Ubuntu 26迁移提示。提交 584c1101ec21141bca14c87cbaa3bca2769ddca6 的远端工程验证闭环。上一份PWF状态提交 ce376d00 已推送，pre-push 154项契约烟测通过。源码选择兼容问题关闭；annual14 V5内容仍7pass/5partial/2missing，继续依据冻结14项目标扩展有界trace，逐项核candidate、admission、dependency、offer/defer和task context。
+
+## 2026-10-24 W08 DTO/cache根修、clean Phase C端到端与正常推送
+
+源码提交 `baa77ab6` 已绑定source proof endpoints、target-unit dependency closure与`reading-context-projection/1`缓存身份；`aade6b93`修复clean deployment与Phase C oracle对生产reading context `/3` 的适配。首次pre-push从沙箱失败后先定位两份漏带运行配置，再由最小TCP复现确认Windows `10013`禁止沙箱子进程回连`127.0.0.1`。在非沙箱运行真实本地loopback，E2E 95.42s通过；没有接触外部模型或真实付费API。聚焦selector/context/cache与Phase C 170项通过（176.56s），Ruff通过，`mypy src`372文件0错。
+
+完整正常pre-push通过8126项/24既有skip（389.84s），独立CI契约smoke146项通过（42.09s）；commit hooks通过。`aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`已推送且与`origin/master`相同；精确GitHub CI 40076059766待观察最终结论。W11-CWP-SOURCES A/B/C再次由用户确认交付并推送，关闭施工卡。
+
+本次门禁显示完整`tests/unit -n 2`是固定push前置项，即使变化面很窄也运行全量（389.84s）；保留测试与hook，不做本次绕过。后续应单独按当前项目计划评估测试分层/执行时机，确定跨模块回归、loopback E2E、快速单测与远端全量的职责及失败反馈，不重新制造一个审批门。精确CI40076059766已success；CURRENT_STATUS/JSON、task_plan、progress与findings同步了已发布HEAD和下一步。

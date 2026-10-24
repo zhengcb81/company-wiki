@@ -2,23 +2,23 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_V5_CONTENT_PARTIAL_LEGACY_COMPAT_FIX_PENDING_PUBLICATION",
+  "overall_status": "ACTIVE_W08_V5_CONTENT_PARTIAL_NEXT_SOURCE_QUALITY",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
+  "last_code_commit": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
   "code_ci": {
-    "id": 40060222913,
+    "id": 40076059766,
     "name": "CI",
-    "head_sha": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
+    "head_sha": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40060222913",
-    "updated_at": "2026-10-24T03:59:00Z",
-    "created_at": "2026-10-24T03:54:00Z",
-    "observed_at": "2026-10-24T03:59:21Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40076059766",
+    "updated_at": "2026-10-24T08:00:32Z",
+    "created_at": "2026-10-24T07:55:51Z",
+    "observed_at": "2026-10-24T08:00:32Z"
   },
   "completed": {
     "b2": {
@@ -125,7 +125,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_V5_7_PASS_5_PARTIAL_2_MISSING_LEGACY_COMPAT_FIX_PENDING_PUSH_W10_MATRIX_W12_OPEN",
+      "status": "ACTIVE_W08_V5_7_PASS_5_PARTIAL_2_MISSING_ROOT_FIX_PUSHED_EXACT_CI_SUCCESS_W10_MATRIX_W12_OPEN",
       "mainline": true
     },
     {
@@ -154,7 +154,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "正常pre-push首先在808fca14拦下3个旧selector指纹；兼容修复后，提交2d92a00的第二次pre-push又发现2项当前0.8跨页分组回归。根因是旧版兼容detector被错误传入当前版group rules；已恢复当前版原detector、只让0.6/0.7使用冻结旧detector。11个相关测试文件478项通过，Ruff和mypy src 372文件通过；独立复审确认无剩余兼容问题，固定指纹及六类facet边界9项通过。下一步提交修正和PWF，重新运行原pre-push及正常push并查该精确CI。发布后继续按V5逐目标诊断annual14缺口，保持既有限额，再择大节点进行同一真实来源回放和14项复核。",
+  "next_step_now": "W08 DTO/cache根修baa77ab6与clean Phase C修复aade6b93正常推送且精确CI40076059766 completed/success。pre-push 8126 passed/24 existing skipped、CI合同smoke146 passed、聚焦E2E/回归170 passed、Ruff和mypy src 372文件通过。继续annual14冻结14项目标的有界逐项诊断，分开定位candidate/admission/dependency/offer-defer/task-context及应由金融API/SourceRef提供的精确数值；W11-CWP-SOURCES A/B/C按用户确认已完成推送并关闭，不重开。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -192,15 +192,15 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40060222913,
+    "id": 40076059766,
     "name": "CI",
-    "head_sha": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
+    "head_sha": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40060222913",
-    "updated_at": "2026-10-24T03:59:00Z",
-    "created_at": "2026-10-24T03:54:00Z",
-    "observed_at": "2026-10-24T03:59:21Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40076059766",
+    "updated_at": "2026-10-24T08:00:32Z",
+    "created_at": "2026-10-24T07:55:51Z",
+    "observed_at": "2026-10-24T08:00:32Z"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -211,7 +211,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T06:14:49Z",
+  "last_updated_at": "2026-10-24T08:04:12Z",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -330,8 +330,8 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "V5_CONTENT_PARTIAL_LEGACY_SELECTOR_COMPATIBILITY_ROOTFIX_TESTED_PENDING_PUBLICATION",
-    "W08_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+    "W08": "V5_CONTENT_PARTIAL_ROOT_FIX_PUBLISHED_EXACT_CI_SUCCESS",
+    "W08_commit": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
     "W08_ref": "review/r1-w08-crosspage-20261024/root-acceptance.json",
     "W09": "MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
     "W09_ref": "review/r1-w09-reception-20261023/publication/publication-final.json",
@@ -347,7 +347,7 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "First push attempt for local commit 808fca1484b01a5f86768f79a119f28764fe143a was correctly blocked by 3 pinned 0.6/0.7 native selector fingerprint tests (6655 passed, 11 skipped, 3 failed). Root cause: six new operating-fact signals were wired into a shared detector consumed by historical selector versions. The root fix explicitly freezes the pre-W08 legacy signal tuple and composes current signals from six new facets plus that legacy tuple; the initial independent review also caught and fixed a fail-open allowlist design. A second normal pre-push on commit 2d92a00c found 2 additional regressions (6662 passed, 11 skipped): the compatibility detector had been incorrectly passed into current 0.8 group rules, changing product-name context selection and cross-page group joining. Current versions now keep their historical group detector; only 0.6/0.7 use the frozen legacy detector. The 11 related files pass 478 tests, Ruff passes, and mypy src passes 372 files. Independent review found no remaining compatibility blocker; pinned fingerprints and six facet boundaries pass 9 checks. No assertions changed or hooks bypassed. Corrective commit/push/exact CI pending; annual14 V5 remains 7 pass/5 partial/2 missing.",
+    "W08_pre_push_regressions": "RESOLVED_AND_PUBLISHED. First push attempt was blocked by 3 pinned 0.6/0.7 native selector fingerprint tests; second normal pre-push found 2 current 0.8 group regressions. Root causes were historical selector versions sharing the new signal detector and current 0.8 group rules receiving the compatibility detector. Fixes explicitly freeze legacy signal rules, keep current grouping rules separate, preserve the original assertions, and passed independent review. Later DTO/cache root fix baa77ab6 and clean Phase C test fix aade6b93 passed the normal full pre-push (8126 passed/24 existing skipped), smoke 146 passed, focused E2E/regression 170 passed, Ruff and mypy src 372 files; exact CI 40076059766 completed/success on aade6b933a065fae71a14b8baf2a3b16fcbb9bb9. Annual14 V5 remains 7 pass/5 partial/2 missing.",
     "W08_selection_trace_contract": {
       "status": "PUBLISHED_EXACT_CI_SUCCESS",
       "related_tests_passed": 171,
@@ -566,6 +566,13 @@
       ],
       "PWF_checkpoint_commit": "ce376d00",
       "PWF_checkpoint_push": "PASS; commit ce376d00 pushed, local contract smoke 154 passed in 29.46s"
+    },
+    "W08_latest_ci": {
+      "id": 40076059766,
+      "head_sha": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40076059766"
     }
   },
   "budget_regime": {
@@ -641,5 +648,28 @@
     "Close target-bound annual14 gaps (especially A12 premise, A13 revenue-recognition policy, A01/A05 hierarchy, A09 capacity/date relation) without raising selection/work caps; reselect once after root fixes.",
     "Then perform production-configured summary/cache recovery, W09/W10 real adoption matrix, and W12 four-review loop as specified in the canonical plan."
   ],
-  "last_updated_utc": "2026-10-24 06:26:48Z"
+  "last_updated_utc": "2026-10-24 08:04:12Z",
+  "latest_publish_validation": {
+    "local_pre_push_unit_passed": 8126,
+    "local_pre_push_unit_skipped_existing": 24,
+    "local_pre_push_unit_duration_seconds": 389.84,
+    "independent_contract_smoke_passed": 146,
+    "independent_contract_smoke_duration_seconds": 42.09,
+    "focused_and_integration_passed": 170,
+    "focused_and_integration_duration_seconds": 176.56,
+    "clean_phase_c_loopback_passed": true,
+    "clean_phase_c_loopback_duration_seconds": 95.42,
+    "ruff": "pass",
+    "mypy_src_files": 372,
+    "mypy_errors": 0,
+    "local_and_remote_master_equal": true,
+    "local_and_remote_master_sha": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9",
+    "remote_ci": {
+      "id": 40076059766,
+      "status": "completed",
+      "conclusion": "success",
+      "duration_seconds": 278,
+      "head_sha": "aade6b933a065fae71a14b8baf2a3b16fcbb9bb9"
+    }
+  }
 }

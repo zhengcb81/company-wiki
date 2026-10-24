@@ -11,7 +11,7 @@
 - W03/W07 的共享引擎公开接线、一次真实摘要、激活前故障恢复、缓存及RF消费已有工程验收，不重复收费重做。
 - 药明康德 final3 的四份报告均已完成，14个问题出现项归并到10个根因、W08–W12五张卡。旧报告、639件初始封存及501件final3封存均保留。
 - 共因方案位于 `C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/`，诊断与交接位于同run的 `diagnosis/r1-final3-review-20261022/`。
-- ROOT新attempt保留。W08共享原生观察/跨页/订单/逐target依赖已真实合线推送`f2b8f2bf`，独审17P、正常8056P/24skip+146smokeP，精确CI40050949303成功；旧4e3e0231有限节点保持历史。本轮逐目标诊断/trace公开合同及回归根修已正常推送`87a14a86`；正常pre-push通过8072单测/24既有skip及146契约测试，精确CI40060222913成功。修复官方JSON replay对selection-only标注的误拒绝，以及Windows pytest/SQLite子进程临时目录不可写造成的假失败。下一步按真实249页14项3pass/9partial/2missing继续修选材/上下文与分批，再正式摘要/cache和RF实际采用。W09已发布RF599d17b8并安装103文件匹配/CI成功；W11-CWP-SOURCES A/B/C由用户确认完成并推送，工程CI已有记录，新索引SourceRef回放成功，真实业务IR材料仍external_limit。W10真实矩阵和W12未完成，作者工区只读、旧封存/账不改；具体状态以唯一CURRENT_STATUS为准。
+- ROOT新attempt保留。W08共享原生观察/跨页/订单/逐target依赖已真实合线推送`f2b8f2bf`，独审17P、精确CI40050949303成功；诊断合同`87a14a86`及选择兼容修复`584c1101`均正常推送且精确CI成功。最新DTO/cache根修`baa77ab6`和clean Phase C端到端测试根修`aade6b93`已推送；pre-push完整单测8126P/24既有skip（389.84秒）、契约smoke146P、聚焦与集成170P、Ruff及mypy src 372文件全过；精确CI40076059766 completed/success。W11-CWP-SOURCES A/B/C已完成推送并关闭施工卡，真实业务IR材料仍有独立的内容验收缺口。W08年度14项目标仍7pass/5partial/2missing；下一步逐项定位有界选材/上下文缺口，之后再做正式摘要、cache恢复、RF实际采用矩阵及W12四审。具体状态以唯一CURRENT_STATUS为准。
 - W08负责CWP来源语义/结构，W09负责RF研究输入与方法，W10负责audit逐文档结果投影；目录不重叠部分可并行，共享接口和技能卡由ROOT串行整合。W11有界恢复实际来源缺口；W12整合、原公司复验、泛化和质量/检测收尾。
 
 ## 每轮的八步
@@ -40,3 +40,9 @@
 逐目标offer/defer诊断合同已发布。当前按真实annual14断链继续修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
 真实14内容仍3P9partial2missing，整体目标active，未标complete。
+
+## 2026-10-24 08:00 UTC 最新发布状态
+
+W08 DTO/cache根修`baa77ab6`与清洁Phase C测试修复`aade6b93`已正常推送；精确CI [40076059766](https://github.com/zhengcb81/company-wiki/actions/runs/40076059766) 对应 HEAD `aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`，completed/success。全量pre-push 8126 passed/24既有skipped，146项契约smoke、170项聚焦/集成E2E、Ruff及全源mypy均通过。测试根因和Windows沙箱loopback限制见CURRENT_STATUS；没有调用真实模型或付费API。
+
+用户确认W11-CWP-SOURCES A/B/C均已完成并推送，施工卡关闭。真实来源内容验收仍按独立业务证据状态处理。整体目标继续ACTIVE：先处理annual14的5项partial和2项missing，再进入正式摘要/cache恢复、实际采用矩阵与W12四审。全量pre-push约6分30秒的成本已记录，后续按计划评估测试分层，不跳过现有门禁或把未运行测试记作通过。

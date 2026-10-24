@@ -4,9 +4,11 @@
 
 ## Next Step
 
-V5已用同一真实249页来源完成一次新选材：96/7,767字符、工作8,845,814/16M；14项独立复核为7pass/5partial/2missing。上一轮发现的“纯名词导致收入确认政策被判业务经营”已用中英文反例根修。首次pre-push发现旧0.6/0.7选择器三个固定原生指纹失败，定位到N6新增信号未做selector版本隔离；修复已把历史信号集显式冻结，并让当前版按“六项新facet + 冻结旧集合”构造。显式冻结旧selector信号集和六facet边界经独立复审通过（9项）；随后第二次pre-push在6675项中报6662P/11skip/2F。根因是把旧兼容detector错误传给当前0.8 group rules，改变产品名上下文和跨页组行为；仅旧0.6/0.7组使用冻结detector，当前版本恢复原detect_operating_fact。11个相关测试文件478P，Ruff及全量mypy 372源码文件通过，独立复审确认无剩余阻塞。原金标不改、门禁不绕；源码提交`584c1101ec21141bca14c87cbaa3bca2769ddca6`已正常push；精确CI `40069847315`于2026-10-24约06:21 UTC启动，当前运行中；pre-push为6664 passed / 11 skipped / 0 failed（270.68秒）。精确CI 40069847315 completed/success（4分36秒；仅有既有runner维护提示）；PWF发布状态已提交推送。下一步针对V5剩余缺口扩展有界目标诊断覆盖，区分candidate/admission/dependency/offer/defer/task-context具体断点，不用aggregate budget_full推断单目标原因。新卡W11-CWP-SOURCES由用户再次确认A/B/C全流程完成并已推送，不重开。当前真实内容缺口为A03/A04 missing、A01/A02/A05/A09/A13 partial；下一步按逐目标候选→依赖→admit/withhold→task/model可见链确定根因，特别区分应由现有财务API/SourceRef提供的精确数值与应由叙述切片承载的业务关系；不抬96/48,000/16M与8/4/2048上限，不把aggregate `budget_full`当单目标因果。完成共因修复后只做一次同条件新版本选材并复核同一冻结14项，再进入正式摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
+V5已用同一真实249页来源完成一次新选材：96/7,767字符、工作8,845,814/16M；14项独立复核为7pass/5partial/2missing。纯名词会计政策误分类及旧selector兼容/当前分组语义已分别根修。最新DTO/cache根修`baa77ab6`与clean Phase C测试修复`aade6b93`已正常推送；完整pre-push 8126 passed / 24既有skip（389.84秒），独立合同smoke146 passed（42.09秒），聚焦回归与端到端170 passed，Ruff与`mypy src`372文件通过。精确CI `40076059766` completed/success（4分38秒）。测试根因：干净部署漏拷无密钥`models.yaml`与`resource_budget.yaml`，而旧独立oracle不识别已验证生产context `/3`；现通过白名单资源部署和仅按校验后成员关系投影修复。沙箱的子进程loopback收到Windows 10013，非沙箱真实本地HTTP回环测试通过。完整失败及修复记录见CURRENT_STATUS与最新progress/findings。
 
-W11-CWP-SOURCES已由用户再次确认A/B/C全流程交付并推送，工程源码及精确CI已有记录；ROOT的真实来源/业务材料内容验收仍是独立开放项，不因施工卡交付而关闭。
+**下一步：** W11-CWP-SOURCES已A/B/C完成并推送，施工卡关闭。按annual14冻结14项目标逐项扩展有界trace，分别读取candidate、admission、dependency、offer/defer、target task/model可见性和金融字段来源，避免将aggregate `budget_full`推断为单目标原因。共因修复后做一次同条件选材并复核同一冻结14项；再进入正式摘要/cache恢复、W09/W10实际采用矩阵和W12四审，原公司复验后药明合联→Snowflake。不得提高96/48,000/16M与8/4/2048上限来掩盖遗漏；分清由财务API/SourceRef提供的精确财数与叙述切片承载的业务关系。
+
+**W11状态：** W11-CWP-SOURCES A/B/C全流程已由用户确认完成并推送，卡片关闭；ROOT的真实IR原件与内容覆盖验收仍按单独业务证据处理，不重开作者施工卡。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

@@ -1,12 +1,12 @@
 # 当前项目状态与接手入口
 
-**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续W08真实选材/context。W09研究及W11来源工程已并线、推送并获各自精确CI成功；用户2026-10-24再次确认W11-CWP-SOURCES的A/B/C全流程已完成并推送。W08逐目标诊断合同及回归修复`87a14a86`已正常推送，精确CI `40060222913`成功。本地W08源层修复V5通过集中自然测试`2155 passed / 11 skipped`（54.08秒）、119项聚焦回归、Ruff及mypy；V5独立复核关闭“纯名词误分类会计政策”P2，但14项内容可见性仍为7 pass / 5 partial / 2 missing。首次推送被正常pre-push拦下3个旧选择器固定指纹回归；根因是新N6信号影响显式0.6/0.7选择器。修复过程中独立审查让旧信号集改为显式冻结，并覆盖六类新增facet的版本边界；第二次pre-push又发现当前0.8分组意外使用更宽的叙述事实检测器，破坏产品上下文预算和跨页不串组两项既有回归。已将分组检测恢复为当前版原检测器，只有0.6/0.7选择器使用冻结旧检测器；11个相关测试文件478项全过、Ruff及全量mypy（372源码文件）通过，第二轮独立复审已确认无剩余兼容性问题（固定指纹和六类边界共9项通过）。保留测试原指纹，不绕门禁；复审后提交并再次正常推送、核精确CI。正式摘要、缓存恢复、实际采用矩阵及W12仍待完成；原暂停快照仅保留历史。
+**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续W08真实选材/context。W09已发布；用户2026-10-24再次确认W11-CWP-SOURCES A/B/C全流程交付并推送，按完成项记录，不重开。W08源层V5已独立复核（年度14项7 pass / 5 partial / 2 missing），旧selector兼容和0.8跨页分组两项回归根修已发布。最近提交`baa77ab6`修复公开DTO/context投影与cache身份绑定，`aade6b93`修复干净部署端到端测试；正常推送到`origin/master`，本地与远端HEAD一致。pre-push完整单测8126 passed / 24既有skipped（389.84秒），独立CI契约烟测146 passed（42.09秒）；聚焦及清洁部署E2E共170 passed，Ruff和`mypy src`（372文件）通过。精确CI `40076059766` completed/success（4分38秒）。端到端根因是测试部署漏带无密钥的`models.yaml`与`resource_budget.yaml`；并将只识别`du-production-reading/1–2`的旧独立oracle在测试侧投影适配到生产`/3`，只消费已校验的分组成员。沙箱的Windows `10013`回环网络拒绝另经最小复现确认，在非沙箱下真实loopback E2E通过；没有绕过网络/模型测试。正式摘要、缓存恢复、实际采用矩阵及W12仍未完成；原暂停快照仅作历史。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
 ## 当前执行状态与唯一下一步
 
-**最新发布状态（2026-10-24 06:22 UTC）：** W08 selector兼容修复已提交并推送，源码HEAD为`584c1101ec21141bca14c87cbaa3bca2769ddca6`；正常pre-push 6664 passed / 11 skipped / 0 failed（270.68秒），11个相关测试文件478 passed，Ruff与全量mypy通过，独立复审9项通过。精确远端CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已completed/success（4分36秒；仅有既有runner维护提示）。状态记录已提交并推送，提交钩子通过154项契约烟测。接下来冻结下一批annual14逐目标候选、依赖和准入链证据，找到共因后再进行一次同条件选材。
+**最新源码发布状态（2026-10-24 08:00 UTC）：** W08阅读/context根修`baa77ab6`与clean Phase C测试修复`aade6b93`已正常推送；远端 `master`=`aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`。完整pre-push为8126 passed / 24既有 skipped / 0 failed（389.84秒），独立契约烟测146 passed（42.09秒）；聚焦E2E与W08回归170 passed，Ruff及`mypy src` 372文件通过。精确CI [40076059766](https://github.com/zhengcb81/company-wiki/actions/runs/40076059766) 已completed/success（4分38秒）。下一步按V5年度14项逐目标定位candidate/admission/dependency/offer/defer/task-context断点。
 
 **2026-10-23预算制度升级已提交、推送并安装：** 用户已明确授权累计10M tokens/USD20，公司150k/USD1仅软目标；唯一运行配置为`config/resource_budget.yaml`，旧账/metadata和全部unknown原样保留。实读母账仍1,561,352tokens/631,959microUSD，新剩余8,438,648tokens/USD19.368041。本地计算量可配置、费用/片段/字符/计算分维度诊断已实现；Audit的low误停已改提醒、18项独审通过；两份技能副本39/39一致。CWP正常push7165P/24既有skip，另146契约P；精确CI40034980056已实查completed/success（源码ab95027b）。实施与边界见[预算制度实施单](budget-regime-20261023.md)。W08业务语义、跨页与分批选材未因此验收通过，W09/W11独占工区不改。
 
@@ -14,7 +14,7 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码`f2b8f2bf`已合线推送、精确CI成功；公开trace/诊断合同及回归根修`87a14a86`已正常推送、精确CI成功。V5业务根修、真实选材和独审如上。首次pre-push的6669单元测试中6655P/11既有skip/3F，失败为三个同一旧指纹断言，根因是新N6信号影响旧版选择器。现将0.6/0.7历史检测信号显式冻结，当前版本在此基础上组合新信号；第二次pre-push的6675项中6662P/11既有skip/2F，又定位到0.8跨页分组误用了更宽的叙述事实检测器。已恢复当前分组检测器，旧版仅使用冻结检测器；11个相关测试文件478项通过，Ruff与全量mypy 372文件无错 | 两轮固定断言均保留、未跳过门禁；当前根修已获独立复审通过，待提交后重新正常推送并核对精确CI。annual14 V5为7pass/5partial/2missing，A03/A04 missing，A01/A02/A05/A09/A13 partial，内容仍OPEN。完整14项不是V5两项checkpoint oracle；V5只证明选中证据与模型任务可见性，不代表正式摘要/内容通过。正式摘要/cache/矩阵/W12仍OPEN。见[V5冻结](review/r1-w08-crosspage-20261024/annual14-v5/freeze.json)、[V5复核](review/r1-w08-crosspage-20261024/annual14-v5/review.md)、[V2–V4历史](review/r1-w08-crosspage-20261024/annual14-v2/) |
+| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码`f2b8f2bf`、公开trace/诊断合同`87a14a86`、DTO/cache绑定`baa77ab6`及selector兼容/分组/clean deployment测试修复`aade6b93`已发布；精确CI40076059766 success。两轮旧门禁失败根因均已修复，旧金标保留。当前通过8126 unit、146契约smoke、170聚焦/集成、Ruff及全src mypy。annual14 V5仍7pass/5partial/2missing，内容仍OPEN；V5只证明选中证据与模型任务可见性，不代表正式摘要/内容通过。正式摘要/cache/矩阵/W12仍OPEN。见[V5冻结](review/r1-w08-crosspage-20261024/annual14-v5/freeze.json)、[V5复核](review/r1-w08-crosspage-20261024/annual14-v5/review.md)、[V2–V4历史](review/r1-w08-crosspage-20261024/annual14-v2/) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
@@ -26,15 +26,25 @@
 
 V5仍使用真实249页原文，输出96/7,767字符、工作8,845,814/16M，14项独立复核7pass/5partial/2missing。A06/A07/A08/A10/A11/A12/A14 pass；A01/A02/A05/A09/A13 partial；A03/A04 missing。A12指引与完整前提同在`t31`；A13政策片段进入`t50–t53/t16`，但确认金额/业务期间仍缺。A09日期与产能仍跨任务。全部55个任务context经独立复核，未见Testing/Biology兄弟业务串入。选中材料可见性不代表摘要响应、业务正确性或实际采用。[V5冻结](review/r1-w08-crosspage-20261024/annual14-v5/freeze.json)、[V5独立复核](review/r1-w08-crosspage-20261024/annual14-v5/review.md)、[V2原始基线](review/r1-w08-crosspage-20261024/annual14-v2/review.md)保留各版本边界。财务数表可以由现有SourceRef/API补充，但未实际调用不能称已获取；不强迫全文财务切片。
 
-W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11-CWP-SOURCES A/B/C已由用户再次确认全流程交付并推送；ROOT仍需完成真实来源/业务材料验收，工程卡交付不代签内容完整性。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、真实业务材料external_limit仍OPEN。旧封存和费用unknown保留。
+W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11-CWP-SOURCES A/B/C已由用户再次确认全流程交付并推送；该施工卡关闭。ROOT仍需完成真实来源/业务材料验收，工程卡交付不代签内容完整性。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、真实业务材料external_limit仍OPEN。旧封存和费用unknown保留。
 
 随后按已接收W08–W12计划在新摘要上采用已发布W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
-W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。CWP当前共享原生观察/跨页/逐target依赖源码`f2b8f2bf`已并线推送，精确CI40050949303 success；本轮选择诊断合同修复已本地171+13测试通过、独审无blocker，提交/推送/CI待完成。旧有限来源/谓词`4e3e0231`/40044921473、W11 1be42a76/40040509874及预算ab95027b/40034980056保留历史。RF`599d17b8`/CI40040969386 success、FF`7f6a9268`。当前已发布组件的工程验收不代签真实annual14完整内容、正式新摘要或RF/W12。
+W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和公开RF消费已通过并有65项有限独立复核；**默认仍0.8**，不重复收费重跑已通过生命周期。final3四路独审仍为FAIL，501件89,049,507B与初始639封存保持原样，不能用当前W10工程绿覆盖旧业务结论。CWP共享原生观察/跨页/逐target依赖源码`f2b8f2bf`已发布，精确CI40050949303 success；本轮代码`baa77ab6`、测试根修`aade6b93`已推送且精确CI40076059766 success。旧有限来源/谓词`4e3e0231`/40044921473、W11 1be42a76/40040509874及预算ab95027b/40034980056保留历史。RF`599d17b8`/CI40040969386 success、FF`7f6a9268`。当前已发布组件的工程验收不代签真实annual14完整内容、正式新摘要或RF/W12。
 
 用户要求的审查技能八步升级已在上一节点完成；本轮W10进一步把单据归属、阶段误判及明确版本矛盾固化为回归，现有fetch/process卡已更新。没有新增身份库、任务库、人工许可、逐材料签收或收费权威。预算节点最新每份仅同步3文件并核39/39，见review/budget-regime-20261023/audit-installation.json；树SHA`f2be453617ac03359ccfffe2ebe98e5ee895deb1a6dc7e9510d0462e3d1efb0a`是W10收尾历史，旧`f50bf...`是前版历史。
 
 本轮未新增付费摘要/业务资料下载；新增1份486901B官方索引原文已在既有隔离湖保存，累计外部模型账仍**1,561,352 tokens/$0.631959**，最新10M/$20额度下余**8,438,648 tokens/$19.368041**，全部unknown保留。原件保留，RF原三份assurance WIP、来源配置/目录库SHA不变，Dayu/IQS未改。独占测试资料已按各收据恢复；W08残留两Temp和mypy临时缓存已精确清理。历史`.planning`未做全仓清理，不宣称本地已无所有临时物。见[保护边界复核](review/r1-pause-safety-check-20261022.json)。
+
+## 2026-10-24 W08 DTO/cache发布与Phase C端到端测试根修
+
+源码`baa77ab6`绑定source proof endpoint、target-unit闭包与`reading-context-projection/1`缓存身份；`aade6b93`修复Phase C干净部署和独立oracle对生产reading context `/3` 的测试侧适配。测试部署漏复制的`config/models.yaml`与`config/resource_budget.yaml`现按显式无密钥资源复制；oracle只投影已通过production DTO验证的成员字段，不自行复刻生产身份算法。
+
+聚焦`tests/test_phase_c_extractive.py`、`tests/integration/test_shared_scoped_public_request.py`及四个W08生成/闭包回归共170项全过（176.56秒），清洁部署loopback单项95.42秒通过；Ruff PASS，`mypy src` 372个文件0错。完整pre-push 8126 passed / 24既有skip（389.84秒），CI合同烟测146 passed（42.09秒）。正常推送完成，远端HEAD与本地`aade6b93`一致；精确CI40076059766已completed/success（4分38秒）。
+
+本次沙箱内loopback失败的环境根因通过最小TCP实验证实为Windows `10013`禁止子进程连接`127.0.0.1`；测试在非沙箱环境通过，未削弱断言或换成假模型结果。干净部署先后缺少两份配置也被固定为回归。全量单测用pre-push固定入口执行`tests/unit -n 2`，此次8126项耗时389.84秒；这是本地发布等待成本，后续仍需按PWF评估执行时机/分层，不通过跳过测试或将集成故障标为通过来缩短。
+
+精确GitHub CI 40076059766已completed/success，与推送HEAD一致。用户再次确认W11-CWP-SOURCES A/B/C全部交付并推送，W11卡关闭；真实IR正文、W08 annual14业务内容、正式摘要/cache恢复、实际采用矩阵与W12审查仍开放。未新增外部LLM调用、真实文档下载或费用；本次自有pytest/debug目录已精确清理。
 
 ## 已完成及验收边界
 
@@ -61,7 +71,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08跨页工程已发布，V5真实annual14选中证据为7pass/5partial/2missing，V5源层修复已集中测试并独审、代码发布待完成；W09/W11已发布且精确CI成功，W11-CWP-SOURCES A/B/C已由用户确认完成；W10组件通过但实际矩阵OPEN；W12未开始 | 继续补齐V5明确的内容缺口并完成根因修复/发布，再做正式摘要、cache恢复、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
+| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08跨页工程已发布，V5真实annual14选中证据为7pass/5partial/2missing，V5源层修复已集中测试、独审、推送并由精确CI40076059766验证成功；W09/W11已发布且精确CI成功，W11-CWP-SOURCES A/B/C已由用户确认完成；W10组件通过但实际矩阵OPEN；W12未开始 | 继续补齐V5明确的内容缺口并完成根因修复/发布，再做正式摘要、cache恢复、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |

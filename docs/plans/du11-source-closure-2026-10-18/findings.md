@@ -548,3 +548,12 @@ V4独立复核把“收入确认 + 履约义务 + 客户控制”纯名词触发
 - 首次推送失败的三个固定指纹回归来自新增 N6 facet 被共享 detector 全局读取；必须显式冻结 0.6/0.7 历史 detector。
 - 第二次 pre-push 的两个失败是兼容 detector 又被传入当前 0.8 group rules；兼容分支只适用于旧选择器，0.8 必须保持既有 `detect_operating_fact` 语义。
 - 最终提交 `584c1101ec21141bca14c87cbaa3bca2769ddca6` 已推送；正常 pre-push 6664P/11 skip/0F，远端精确 CI 40069847315 尚在运行。完整根因与版本边界见 `review/r1-w08-crosspage-20261024/legacy-selector-fix/independent-review.md`。
+
+## 2026-10-24 推送前Phase C失败的根因与门禁观测
+
+1. clean-source-deployment只复制`src`、`scripts`、benchmark Python/JSON，没有复制生产runtime需读取的`config/models.yaml`和`config/resource_budget.yaml`。自定义fixture模型与source catalog不会消除此配置依赖，因此模型请求第一次在reservation前因配置无效失败。测试现在只复制两份公开、无密钥的runtime配置。
+2. 当前typed production selection输出`du-production-reading/3`，Phase C独立support oracle只识别`/1`和`/2`。测试侧将已由production DTO校验过的group membership投影为oracle局部ID，保留kind/section role/evidence成员；oracle不重复实现生产的身份、citation或source proof算法。
+3. 沙箱测试仍失败且显示模型POST attempt、无最终响应。最小TCP实验确认沙箱外父进程监听127.0.0.1，而子进程连接返回Windows `10013`。非沙箱下同一E2E真实loopback 95.42秒通过。此为执行隔离约束，不能把它诊断成生产transport故障，也不能移除loopback断言。
+4. push前hook实际命令为整个`tests/unit -n 2`，本次8126 passed/24既有skip耗时389.84秒，另契约smoke146项42.09秒。其作用域不是改动文件的受影响子集。记录真实成本，后续在PWF中评估日常push等待的分层方案；保留全部覆盖，不以跳测、拉长时间上限或绕钩子冒充修复。
+
+精确GitHub CI 40076059766绑定源码HEAD`aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`，已completed/success（4分38秒）；测试/类型/lint及clean loopback的本地发布记录均匹配该源码。W11-CWP-SOURCES按用户确认完成关闭。
