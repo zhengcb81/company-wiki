@@ -20,7 +20,7 @@ from company_wiki.source_contract import source_id_for_sha256
 FIXTURE = Path(__file__).resolve().parents[1] / "fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt"
 FIXTURE_SHA = "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
 OLD_030_UNITS_SHA = "2acb887d51d0aa1ffeab9bb775419624ef68a9d63c83700402c8f20c0ffa238b"
-NEW_VERSION = "0.3.1"
+NEW_VERSION = "0.4.0"
 BUSINESS = "We launched a new product and expanded overseas capacity."
 FOOTER = "Website Editor: We launched invented editorial products."
 

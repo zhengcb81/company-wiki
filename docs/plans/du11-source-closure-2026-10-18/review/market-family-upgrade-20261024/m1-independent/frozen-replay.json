@@ -1,0 +1,42 @@
+[
+  {
+    "sample_id": "du5-cn-gbits-call",
+    "frozen_observation_path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\baseline-selection\\du5-cn-gbits-call.json.gz",
+    "frozen_observation_sha256": "a9491dd918c2b18445f0b7aa8c2059b30e6be5994bda3d0ad53eb2ee89827a27",
+    "old_gold_result": "FAIL",
+    "new_gold_result": "FAIL",
+    "old_required_declared": 9,
+    "new_required_declared": 10,
+    "scope": "prior diagnosis output; neither fresh nor current production acceptance"
+  },
+  {
+    "sample_id": "du5-cn-proya-q1",
+    "frozen_observation_path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\baseline-selection\\du5-cn-proya-q1.json.gz",
+    "frozen_observation_sha256": "93a2ec6e56da98c04f9fa4963ba4b8c7ed24fcca12dc28dbaf3f867c673cb9e7",
+    "old_gold_result": "PARTIAL",
+    "new_gold_result": "PARTIAL",
+    "old_required_declared": 1,
+    "new_required_declared": 1,
+    "scope": "prior diagnosis output; neither fresh nor current production acceptance"
+  },
+  {
+    "sample_id": "du5-hk-kingsoft-interim",
+    "frozen_observation_path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\baseline-selection\\du5-hk-kingsoft-interim.json.gz",
+    "frozen_observation_sha256": "35a7eb40490824e2fa3b7ed01bb38cbd93cacdfb9e322dc29a87a895940af02b",
+    "old_gold_result": "FAIL",
+    "new_gold_result": "FAIL",
+    "old_required_declared": 8,
+    "new_required_declared": 7,
+    "scope": "prior diagnosis output; neither fresh nor current production acceptance"
+  },
+  {
+    "sample_id": "du5-us-msft-ex991",
+    "frozen_observation_path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\baseline-selection\\du5-us-msft-ex991.json.gz",
+    "frozen_observation_sha256": "3c20588b7520315963e1be0f0384db4da874b78447cb11d255641e9216276bdb",
+    "old_gold_result": "FAIL",
+    "new_gold_result": "FAIL",
+    "old_required_declared": 6,
+    "new_required_declared": 7,
+    "scope": "prior diagnosis output; neither fresh nor current production acceptance"
+  }
+]

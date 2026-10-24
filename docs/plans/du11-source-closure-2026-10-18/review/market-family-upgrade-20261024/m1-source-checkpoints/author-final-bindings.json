@@ -1,0 +1,19 @@
+{
+  "schema_version": "m1-author-final-bindings/1",
+  "author_revision": 2,
+  "independent_acceptance": "PENDING_OTHER_REVIEWER",
+  "gold_sha256": {
+    "du5-cn-gbits-call.json": "831299c7393e4978f77b8811f31005df74310b27191d84192d6a332b7a4bb14a",
+    "du5-cn-proya-q1.json": "e2aeaf5c9344f82e7be802e612e1b7eed5f369c647dec4c0acc95788f75cc7b8",
+    "du5-hk-kingsoft-interim.json": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604",
+    "du5-us-msft-ex991.json": "abc0f51255a55f1da13cf07e8d627e8606468e7cd677d30744679ab191718231"
+  },
+  "revision_manifest_sha256": "d68b55bf8da6eed73eeb8c9e5bbb1b24dd3a54b8f31a0dec92b6a0413babad08",
+  "author_revision_2_sha256": "38e92acba98cbd4a982a95ceef74c1571fde2d8cc40b3ffd97c65251a68e477d",
+  "author_report_sha256": "3d7b50b8bedf850e6612a9bd7c73a8ef86d5f707cee9ebb5ef1044116aff9cf9",
+  "author_compatibility_sha256": "b81564f529e49f04c05d59f36c71463aead46a6764ec7fb576e200cc034167ef",
+  "author_scripts_sha256": {
+    "build_author_package.py": "0dc55b20e478f3a7d43fcba186aeb4292d028f5183d08e1e7b2ad951a2dede5e",
+    "verify_author_package.py": "212fa3d1126ffb928a998b0324f03205c7233208652ce7362f86b0e983f2e91d"
+  }
+}

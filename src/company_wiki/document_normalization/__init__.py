@@ -55,6 +55,7 @@ from .units import (
     PARSER_VERSION,
     PPTX_PARSER_VERSION,
     PPTX_OCR_PARSER_VERSION,
+    require_parser_version,
 )
 
 __all__ = [
@@ -124,8 +125,7 @@ def normalize_document(
     mime_main = mime_type.split(";")[0].strip().lower()
     if mime_main in _DOCX_MIME_TYPES:
         version = DOCX_PARSER_VERSION if parser_version is None else parser_version
-        if version not in {LEGACY_DOCX_PARSER_VERSION, DOCX_PARSER_VERSION}:
-            raise ValueError("unsupported DOCX parser_version")
+        require_parser_version(FORMAT_DOCX, version)
         return parse_docx(
             original, source_id=source_id, source_sha256=source_sha256,
             mime_type=mime_type, limits=limits, parser_version=version,

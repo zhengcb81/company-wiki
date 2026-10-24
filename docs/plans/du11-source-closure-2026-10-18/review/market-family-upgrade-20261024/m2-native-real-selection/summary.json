@@ -1,0 +1,62 @@
+[
+  {
+    "sample_id": "du5-cn-gbits-call",
+    "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+    "status": "FAIL",
+    "metrics": {
+      "critical_fact_recall": 0.2,
+      "critical_fact_recall_denominator": 5,
+      "critical_fact_recall_denominator_declared": 5,
+      "critical_fact_unavailable": 0,
+      "critical_fact_not_evaluated": 0,
+      "optional_correctness_facts": 0,
+      "critical_fact_coverage": 1.0,
+      "narrative_fact_recall": 0.3333333333333333,
+      "narrative_facts_passed": 3,
+      "narrative_facts_total": 9,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "fact_recall": 0.3333333333333333,
+      "fact_recall_denominator": 9,
+      "fact_recall_denominator_declared": 9,
+      "route_accuracy": null,
+      "evidence_validity": 1.0,
+      "basis_pass_rate": 0.0,
+      "context_completeness": null,
+      "selected_span_count": 19,
+      "claim_count": 0,
+      "semantic_unit_count": 0,
+      "review_supplied": false,
+      "reviewed_claims": 0,
+      "selected_spans": 19,
+      "selected_text_bytes": 6988
+    },
+    "route": null,
+    "selected_count": 19,
+    "reading_policies": [
+      {
+        "profile_id": "earnings_call",
+        "profile_version": "earnings_call/v2+bdb3377a9c0f9e08",
+        "family": "earnings_call",
+        "family_policy": {
+          "id": "earnings_call_transcript",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "当前样本为聚合平台抓取件，缺公司原始发布版",
+            "问答跨轮依赖未逐条核对"
+          ]
+        }
+      }
+    ],
+    "mapped_source_count": 19,
+    "producer_tree_sha256": "0f8ad7ae74e664268e8086c57fa419bd66c7da3229d2077ff9d466565f8c303a",
+    "parser_entry": "normalize_document",
+    "original_unchanged": true,
+    "external_calls": 0,
+    "seconds": 0.661
+  }
+]

@@ -4,11 +4,15 @@
 
 ## M1 先让观察与金标准确（第一顺位）
 
+2026-10-24最新：本节点已完成源侧独立验收，见m1-independent/report.md/json。保留旧47ID，最终51事实/139锚点，102P；保留全部旧版和修订理由、3项v1语义错误反控。仅源侧development gold通过，不代表选材或摘要通过。以下为当时问题发现记录。
+
 证据：independent-baseline-review/report.md/json。4份本次选择均完整映射（19/30/96/7），不能再拿helper潜在不兼容解释真漏材。reading_context不发布route，读其真实reading_policies/版本，不把null判未路由；新的replay工具已记录producer源码+catalog SHA并核前后一致。旧baseline缺完整producer冻结，保留该局限，不补造历史SHA。
 
 旧gold存在：ASR“会不会再”强定否定、编辑注释字符串当must_preserve、HKcapex以折旧作支持、百万元替代支持与千元精度要求冲突、非收入财务数强制入叙述分母。下一步先逐源冻结修订版，不改旧gold；required_business/disposition_context/correctness_if_emitted按本项目职责解释，原数据/支持组保留。新增语义/数字突变反例，不能仅降低重要性让分数变绿。
 
 ## M2 原语言电话会跨载体与匿名说话人（第二顺位）
+
+2026-10-24最新：已进入TDD实现/集中独审，见M2_IMPLEMENTATION.md。匿名DOCX真实路由已恢复为earnings_call；仅路由不增加召回，定性经营意向补材后19→23，仍未整体内容通过。独审又发现同轮计划限定未进入真实模型卡片、新DOCX批处理pin未接线，正在共因修复；不把中间工程绿作为节点完成。
 
 吉比特DOCX在实际0.9仍generic/unknown，且遗漏后段存量运营/企稳不确定性/未落地更新。当前native信号collector只消费已有carrier，不能向它添加重新扫描全文的正则。应调查现normalization DOCX原段落/原speaker时间戳与TXT turn owner的可共用端口；先冻结中性匿名speaker1/2+连续段、独立Q/A、未知映射、ASR噪声反例。匿名speaker编号本身不能证明谁是管理层/分析师，不以“说话人2一律公司”硬编码，不能自动把疑似ASR改为强否定/精确单位。
 

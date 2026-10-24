@@ -1,0 +1,51 @@
+{
+  "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+  "paragraph_count": 116,
+  "selected23_exact_original_matches": true,
+  "baseline_selected": 19,
+  "new_selected": 23,
+  "new_rows": [
+    {
+      "locator": "loc:v1/paragraph:5",
+      "paragraph_index": 5,
+      "source_role": "unknown",
+      "text": "新增的这一块的话会采用一些创新的营销方式，但是买量这块比较大幅度的减少了。往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。那版本有一些新版本推出来的时候，会配合一些短期的买量，但整体来看的话，买量会不会再走到原来的水平了。",
+      "text_sha256": "9dd2862809cb6875482d3251ca9d6bb79faa6a610da943654763b8eff6ce25dc",
+      "previous_paragraph_excerpt": "从效果来看，OA也一直维持在我们能接受的一个范围内，但是去年上半年观察到 Oa明显的有比较大的下降，相当于是从二三年下半年我们是主动买了买量的一个支出，这一块的话希望能够从在运营当中去精细化买量，然后把运营的重点更多放在存量用户的经营上面，包括他们的一个留存付费率提高，然后整体的一个流失短短期流失的一个回流，以及回来之后怎么样更好的能够能够留下来玩游戏，就更多是把精力放在存量用户的一个运营上面。",
+      "next_paragraph_excerpt": "所以后期的话我们希望能够在一个新的水平去稳住这款产品，但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。"
+    },
+    {
+      "locator": "loc:v1/paragraph:6",
+      "paragraph_index": 6,
+      "source_role": "unknown",
+      "text": "所以后期的话我们希望能够在一个新的水平去稳住这款产品，但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。",
+      "text_sha256": "dc03963c3c0533ca1af86b5ca87bc501e2163df33943d3bbfc4562b59e0e1d86",
+      "previous_paragraph_excerpt": "新增的这一块的话会采用一些创新的营销方式，但是买量这块比较大幅度的减少了。往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。那版本有一些新版本推出来的时候，会配合一些短期的买量，但整体来看的话，买量会不会再走到原来的水平了。",
+      "next_paragraph_excerpt": "说话人1 02:40 明白，您刚才提到 Roi的下降，因为roi的话这一块一部分是由于我们的整体用户的生命周期价值，然后另一部分还是跟买量的成本，它是一个相互影响的。"
+    },
+    {
+      "locator": "loc:v1/paragraph:16",
+      "paragraph_index": 16,
+      "source_role": "unknown",
+      "text": "然后在这些调整的话，我们是在7年前推出了一个比较比较完善的一个更新，然后清明争取的假期的时间把拉了一波，然后把好评率刷了一下，然后再往后的话可能也是会有几个重要的节点，跟着steam上面，包括b站的一些集中的这些活动，生存玩家节这种集中的活动，我们也会跟着这些节点再去集中推出一些更新迭代的版本，希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+      "text_sha256": "5ab072543820cbdf7df2820a0fd4259242ad2eea6fe11f34cd9eb2edaa8967ad",
+      "previous_paragraph_excerpt": "然后这一块的话，其实我们也只能是在后面后面的一些运营当中去做调整，但这次的话我们可能在一些游戏环节设置上减少，比如说像大家觉得占用时间太多的捡垃圾，减少压缩一些这方面的时间，然后去增加塔防等等其他方面的一些玩法的一个时间时长，那去综合平衡一下各方的一个需求。",
+      "next_paragraph_excerpt": "就是从整个看下来，我觉得研发团队一个是收集信息消化信息，面对这些负面的评论，自己怎么样去调节，调整到继续战斗的一个状态，我觉得研发团队还是做得非常出色的，然后整个调整的速度也是很快。"
+    },
+    {
+      "locator": "loc:v1/paragraph:89",
+      "paragraph_index": 89,
+      "source_role": "unknown",
+      "text": "说话人2 26:44 因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+      "text_sha256": "71beeec55a756df76075e401f5ad2c3eb54d9cb941fa16a382a1b724a7030e81",
+      "previous_paragraph_excerpt": "说话人1 26:42 明白，但是",
+      "next_paragraph_excerpt": "说话人1 26:54 好的明白，然后最最后一个就是跟买家相关的问题，是想请教一下我们刚上线航海王，然后这个产品的话现在我看排名上是相对有所下降，我们这款产品的话大体就是初期的投放以及回收。您能大概分享一下相关的一些数据情况吗？大地我们现在流水或者这个方面分享。"
+    }
+  ],
+  "all_selected_roles": [
+    "unknown"
+  ],
+  "old_gold_status": "FAIL",
+  "source_unchanged": true,
+  "limits": "Independent raw ZIP/XML check of frozen selection observations. Not current final source replay, new M1 gold acceptance, formal summary or RF PASS. First probe missed OOXML tabs; corrected XML-visible walker accounts for tab/br/cr."
+}

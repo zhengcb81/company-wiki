@@ -108,7 +108,8 @@ def test_docx_new_parser_preserves_old_public_history_and_creates_distinct_gener
         items = [{"kind": "raw", "source_ref": state.raw_ref}]
         old_path = fixtures.request_for(state, server.endpoint, "docx-old", items=items)
         process, old = _old_producer(state, old_path, "docx-old")
-        assert process.returncode == 0, (old, process.stderr)
+        assert process.returncode == 0, (
+            old.get('items'), server.errors, len(server.requests), process.stderr)
         old_ref, old_binding = _read(state, old, "1.0.0", context_selected=True)
         assert len(server.requests) == 1 and server.errors == []
         before_auto = _dump(state.automation_db)
@@ -124,7 +125,7 @@ def test_docx_new_parser_preserves_old_public_history_and_creates_distinct_gener
         process, current = fixtures.invoke_batch(state, current_path, "docx-current")
         assert process.returncode == 0, (current, process.stderr)
         new_ref, _ = _read(state, current, DOCX_PARSER_VERSION, context_selected=False)
-        assert DOCX_PARSER_VERSION == "1.1.0"
+        assert DOCX_PARSER_VERSION == "1.2.0"
         assert new_ref["artifact_version_id"] != old_ref["artifact_version_id"]
         assert len(server.requests) == 2 and server.errors == []
         assert old["budget"]["tokens"] == current["budget"]["tokens"] == 92

@@ -1,0 +1,475 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-cn-gbits-call",
+  "market": "CN",
+  "company": "吉比特",
+  "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+  "scope": "development",
+  "language": "zh",
+  "support_set_frozen_before_output": false,
+  "expected_route_families": [
+    "earnings_call",
+    "investor_call_transcript"
+  ],
+  "notes": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+  "facts": [
+    {
+      "id": "yy-flow-decline-premise",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "question",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人1 00:00",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人1",
+        "流水是否还有一定的回升的空间",
+        "如果相对趋缓"
+      ],
+      "must_not_assert": [
+        "公司确认一念逍遥流水下滑后将回升",
+        "公司称竞品趋缓使流水回升",
+        "公司披露5-6月竞品上线导致流水下滑"
+      ],
+      "reason": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。",
+      "require_same_scope": true
+    },
+    {
+      "id": "steam-activity-premise",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "count",
+      "modality": "question",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人1 08:18",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "然后我看现在每天的活跃人次，根据就steam时代上面的监测的话，我们一直是有这样过万的一个活跃，从绝对值可能不太准确，但是趋势是相对稳定的。",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "不没有，因为就初期的大量的负面评价，然后我们用户的活跃出现明显滑坡",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人1",
+        "steam时代",
+        "从绝对值可能不太准确",
+        "过万"
+      ],
+      "must_not_assert": [
+        "公司披露日活跃人次过万",
+        "公司确认活跃用户明显滑坡",
+        "公司公布Steam活跃数据"
+      ],
+      "reason": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。",
+      "require_same_scope": true
+    },
+    {
+      "id": "lei-ting-profit-analyst-inference",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "period_flow",
+      "modality": "question",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人1 19:03",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "我看了一下我们雷霆这边就是q三的利润是1.17亿，然后q4的话是1.8亿",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "因为他是不没有单季度的，只有半年度的，但是我们从少数股东这边推出来",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人1",
+        "1.17亿",
+        "1.8亿",
+        "从少数股东这边推出来"
+      ],
+      "must_not_assert": [
+        "公司披露雷霆Q3利润1.17亿、Q4利润1.8亿",
+        "公司确认Q4利润环比大幅提升是经营改善"
+      ],
+      "reason": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。",
+      "require_same_scope": true
+    },
+    {
+      "id": "yy-roi-decline-actual",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 00:39",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "但是去年上半年观察到 Oa明显的有比较大的下降",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "相当于是从二三年下半年我们是主动买了买量的一个支出",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "新增的这一块的话会采用一些创新的营销方式，但是买量这块比较大幅度的减少了。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "去年上半年",
+        "Oa",
+        "二三年下半年",
+        "买量这块比较大幅度的减少了"
+      ],
+      "must_not_assert": [
+        "ROI去年上半年明显上升",
+        "公司自21年上线起持续加大买量",
+        "二三年下半年主动增加了买量支出"
+      ],
+      "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。",
+      "require_same_scope": true
+    },
+    {
+      "id": "buydown-cut-and-stock-operation-plan",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 00:39",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "往后的话",
+        "更多的去存量运营"
+      ],
+      "must_not_assert": [
+        "公司已停止买量并完成存量运营转型",
+        "买量依赖已消除",
+        "公司已不再投放广告"
+      ],
+      "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。",
+      "require_same_scope": true
+    },
+    {
+      "id": "buydown-no-return-negation",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "unknown",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 00:39",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "那版本有一些新版本推出来的时候，会配合一些短期的买量，但整体来看的话，买量会不会再走到原来的水平了。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "短期的买量",
+        "买量会不会再走到原来的水平了"
+      ],
+      "must_not_assert": [
+        "买量会回到原来的水平",
+        "买量水平会随版本回升到历史高位",
+        "公司未对买量水平表态",
+        "公司明确承诺买量不会再回到原有水平",
+        "公司明确承诺买量一定回到原有水平"
+      ],
+      "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。",
+      "require_same_scope": true
+    },
+    {
+      "id": "yy-stabilize-target-uncertain",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 00:39",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "所以后期的话我们希望能够在一个新的水平去稳住这款产品，但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "希望",
+        "目前也不太好判断",
+        "再观察一段时间"
+      ],
+      "must_not_assert": [
+        "公司预计产品将在新水平企稳",
+        "公司承诺流水企稳时间表",
+        "公司判断产品已经稳定"
+      ],
+      "reason": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。",
+      "require_same_scope": true
+    },
+    {
+      "id": "outpost-update-plan-uncommitted",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 04:37",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "我们也会跟着这些节点再去集中推出一些更新迭代的版本，希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "希望",
+        "具体的计划还没有",
+        "可能还会有所变化"
+      ],
+      "must_not_assert": [
+        "公司已排定后续更新版本计划",
+        "公司将在Steam活动节点确定推出大更新",
+        "重装前哨更新路线图已落地"
+      ],
+      "reason": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。",
+      "require_same_scope": true
+    },
+    {
+      "id": "outpost-buyout-revenue-recognition",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 09:24这款的话会卖出卖出，然后会根据就看退货率的一个情况，会去做一个他是当即确认收入，但是会做一个利息负债什么类似的处理，",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "说话人2 09:42其他的消耗型道具一样，还要做一个递延。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "当即确认收入",
+        "利息负债什么类似的处理",
+        "消耗型道具",
+        "递延"
+      ],
+      "must_not_assert": [
+        "重装前哨收入按道具消耗递延确认",
+        "买断收入全额即时确认且无退货准备",
+        "公司披露了递延收入金额",
+        "公司明确披露了名为退款负债的金额",
+        "原文已经确认利息负债就是预计负债"
+      ],
+      "reason": "两个具名匿名speaker2短回合共同支持买断/道具对比；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。",
+      "require_same_scope": false
+    },
+    {
+      "id": "outpost-stage-problems-resolved",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 04:37",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "现在大部分的情况是可以解决了，还有一些少数的我们也会持续的去跟进跟调整。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "大部分的情况是可以解决了",
+        "少数",
+        "持续的去跟进跟调整"
+      ],
+      "must_not_assert": [
+        "技术卡顿问题已全部修复",
+        "重装前哨口碑已完全恢复",
+        "产品问题已经彻底解决"
+      ],
+      "reason": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。",
+      "require_same_scope": true
+    },
+    {
+      "id": "strategy-category-unchanged-negation",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "negation",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 30:51",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "品类上来看的话，目前没有一个很大的变化",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "品类上",
+        "没有一个很大的变化"
+      ],
+      "must_not_assert": [
+        "公司今年将大幅调整品类战略",
+        "公司决定转型新品类",
+        "公司战略方向发生重大变化"
+      ],
+      "reason": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。",
+      "require_same_scope": true
+    },
+    {
+      "id": "yy-user-base-scale",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "unknown",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 03:16",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "最开始我们现在整个大盘子有2000多用户，然后有一些流失再回来的",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "整个大盘子",
+        "2000多用户",
+        "流失再回来"
+      ],
+      "must_not_assert": [
+        "公司披露用户数2000万",
+        "公司公布月活/注册用户精确规模",
+        "用户规模为2000人"
+      ],
+      "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。",
+      "require_same_scope": true
+    },
+    {
+      "id": "buydown-dependence-reduction-intent",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "unknown",
+      "fact_scope": "narrative",
+      "require_same_scope": true,
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "说话人2 26:44",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人2",
+        "希望",
+        "尽量的去减少对买量的一个依赖"
+      ],
+      "must_not_assert": [
+        "公司已消除买量依赖",
+        "说话人2称已经停止广告投放"
+      ],
+      "reason": "从旧复合买量计划单独保留另一回合的减少依赖意向，仍critical，不因纠正OR漏掉责任；不将愿望写成完成。"
+    }
+  ],
+  "support_set_digest": "29af34d4df84ac680ce402eacd4f6c5e1b4eded1901f34a67e4c8a73f9bf7478"
+}

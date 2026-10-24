@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="10" skipped="0" tests="15" time="5.496" timestamp="2026-10-24T12:45:18.473047+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_observes_anonymous_turns_and_continuation_without_assigning_company_role" time="0.660"><failure message="AssertionError: native timestamps must reach the shared source port&#10;assert False&#10; +  where False = all([None, None, None, None, None])">def test_docx_observes_anonymous_turns_and_continuation_without_assigning_company_role():
+        data, document = normalized()
+        units = document.units
+        turns = [unit.metadata.get('native_speaker_turn') for unit in units]
+&gt;       assert all(turns), 'native timestamps must reach the shared source port'
+E       AssertionError: native timestamps must reach the shared source port
+E       assert False
+E        +  where False = all([None, None, None, None, None])
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:56: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_heading_stops_anonymous_continuation" time="0.006"><failure message="AssertionError: assert None&#10; +  where None = &lt;built-in method get of mappingproxy object at 0x000001D46F8537C0&gt;('native_speaker_turn')&#10; +    where &lt;built-in method get of mappingproxy object at 0x000001D46F8537C0&gt; = mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': '5f17bb91d451...60dca2daad2a9f1bae9f793c1019edc96673a2', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'}).get&#10; +      where mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': '5f17bb91d451...60dca2daad2a9f1bae9f793c1019edc96673a2', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:8e117f652b2be1aebde9a00357bcef1dcc81c00606200fcf877ce99f...0dca2daad2a9f1bae9f793c1019edc96673a2', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'})).metadata">def test_docx_heading_stops_anonymous_continuation():
+        _, document = normalized([LINES[0], '公司制度', '收入表格说明'], heading_after=1)
+&gt;       assert document.units[0].metadata.get('native_speaker_turn')
+E       AssertionError: assert None
+E        +  where None = &lt;built-in method get of mappingproxy object at 0x000001D46F8537C0&gt;('native_speaker_turn')
+E        +    where &lt;built-in method get of mappingproxy object at 0x000001D46F8537C0&gt; = mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': '5f17bb91d451...60dca2daad2a9f1bae9f793c1019edc96673a2', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'}).get
+E        +      where mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': '5f17bb91d451...60dca2daad2a9f1bae9f793c1019edc96673a2', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:8e117f652b2be1aebde9a00357bcef1dcc81c00606200fcf877ce99f...0dca2daad2a9f1bae9f793c1019edc96673a2', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'})).metadata
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:69: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 99:99 \u8ba8\u8bba\u6536\u5165]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 00:000 \u8ba8\u8bba\u6536\u5165]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u6587\u7ae0\u63d0\u5230\u8bf4\u8bdd\u4eba1 00:00 \u8ba8\u8bba\u6536\u5165]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 \u6536\u5165\u589e\u957f]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8425\u4e1a\u6536\u5165 00:39 \u4eba\u6c11\u5e01100\u4e07\u5143]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_labels_generalize_across_languages[\u8aaa\u8a71\u4eba 3 01:02:03 \u8ba1\u5212\u5c1a\u672a\u786e\u5b9a\u3002-\u8aaa\u8a71\u4eba 3]" time="0.004"><failure message="KeyError: 'native_speaker_turn'">label = '說話人 3 01:02:03 计划尚未确定。', expected = '說話人 3'
+
+    @pytest.mark.parametrize('label,expected', [
+        ('說話人 3 01:02:03 计划尚未确定。','說話人 3'),
+        ('Speaker 7 03:14 The launch has not been approved.','Speaker 7'),
+    ])
+    def test_anonymous_labels_generalize_across_languages(label, expected):
+        _, document = normalized([label])
+&gt;       assert document.units[0].metadata['native_speaker_turn']['speaker'] == expected
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'native_speaker_turn'
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:89: KeyError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_labels_generalize_across_languages[Speaker 7 03:14 The launch has not been approved.-Speaker 7]" time="0.004"><failure message="KeyError: 'native_speaker_turn'">label = 'Speaker 7 03:14 The launch has not been approved.'
+expected = 'Speaker 7'
+
+    @pytest.mark.parametrize('label,expected', [
+        ('說話人 3 01:02:03 计划尚未确定。','說話人 3'),
+        ('Speaker 7 03:14 The launch has not been approved.','Speaker 7'),
+    ])
+    def test_anonymous_labels_generalize_across_languages(label, expected):
+        _, document = normalized([label])
+&gt;       assert document.units[0].metadata['native_speaker_turn']['speaker'] == expected
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'native_speaker_turn'
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:89: KeyError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_native_docx_turns_reach_pipeline_and_support_chinese_call_route" time="0.013"><failure message="TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'">def test_native_docx_turns_reach_pipeline_and_support_chinese_call_route():
+        _, document = normalized()
+        source = observation(document)
+&gt;       output = understand_units(source)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:96: TypeError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines0-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.005"><failure message="TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'">lines = ['普通公司业务说明'], title = '某公司财报交流会'
+
+    @pytest.mark.parametrize('lines,title', [
+        (['普通公司业务说明'], TITLE),
+        (['说话人1 00:00 业务进展。','说话人1 01:00 研发计划。'], TITLE),
+        (LINES, '访谈记录'),
+    ])
+    def test_title_or_unrelated_interview_does_not_prove_earnings_call(lines,title):
+        _, document=normalized(lines)
+&gt;       output=understand_units(observation(document,title))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:112: TypeError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines1-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.005"><failure message="TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'">lines = ['说话人1 00:00 业务进展。', '说话人1 01:00 研发计划。'], title = '某公司财报交流会'
+
+    @pytest.mark.parametrize('lines,title', [
+        (['普通公司业务说明'], TITLE),
+        (['说话人1 00:00 业务进展。','说话人1 01:00 研发计划。'], TITLE),
+        (LINES, '访谈记录'),
+    ])
+    def test_title_or_unrelated_interview_does_not_prove_earnings_call(lines,title):
+        _, document=normalized(lines)
+&gt;       output=understand_units(observation(document,title))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:112: TypeError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines2-\u8bbf\u8c08\u8bb0\u5f55]" time="0.005"><failure message="TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'">lines = ['说话人1 00:00 请问新产品何时上线？', '说话人2 00:39 我们计划在海外渠道推出新产品。', '但具体计划尚未确定，可能会发生变化。', '说话人1 02:40 那么是否已经量产？', '说话人2 02:55 尚未量产，目前仍在客户验证阶段。']
+title = '访谈记录'
+
+    @pytest.mark.parametrize('lines,title', [
+        (['普通公司业务说明'], TITLE),
+        (['说话人1 00:00 业务进展。','说话人1 01:00 研发计划。'], TITLE),
+        (LINES, '访谈记录'),
+    ])
+    def test_title_or_unrelated_interview_does_not_prove_earnings_call(lines,title):
+        _, document=normalized(lines)
+&gt;       output=understand_units(observation(document,title))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: understand_units() missing 2 required keyword-only arguments: 'source_id' and 'source_sha256'
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:112: TypeError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_saved_docx_11_keeps_old_units_without_new_turn_metadata" time="0.004"><failure message="AssertionError: assert '1.1.0' != '1.1.0'&#10; +  where '1.1.0' = NormalizedDocument(source_id='urn:company-wiki:source:sha256:9e85260054cea9b7e52fd5b755e0da607d0df1bbb9851d7e07ba0073b..._count': 1, 'uncompressed_bytes': 550, 'external_relationship_count': 0, 'body_paragraph_count': 5, 'table_count': 0})).parser_version&#10; +  and   '1.1.0' = NormalizedDocument(source_id='urn:company-wiki:source:sha256:9e85260054cea9b7e52fd5b755e0da607d0df1bbb9851d7e07ba0073b..._count': 1, 'uncompressed_bytes': 550, 'external_relationship_count': 0, 'body_paragraph_count': 5, 'table_count': 0})).parser_version">def test_saved_docx_11_keeps_old_units_without_new_turn_metadata():
+        data, current=normalized()
+        old=normalize_document(data,source_id=current.source_id,source_sha256=current.source_sha256,
+                               mime_type=MIME,parser_version='1.1.0')
+        assert old.parser_version == '1.1.0'
+&gt;       assert current.parser_version != old.parser_version
+E       AssertionError: assert '1.1.0' != '1.1.0'
+E        +  where '1.1.0' = NormalizedDocument(source_id='urn:company-wiki:source:sha256:9e85260054cea9b7e52fd5b755e0da607d0df1bbb9851d7e07ba0073b..._count': 1, 'uncompressed_bytes': 550, 'external_relationship_count': 0, 'body_paragraph_count': 5, 'table_count': 0})).parser_version
+E        +  and   '1.1.0' = NormalizedDocument(source_id='urn:company-wiki:source:sha256:9e85260054cea9b7e52fd5b755e0da607d0df1bbb9851d7e07ba0073b..._count': 1, 'uncompressed_bytes': 550, 'external_relationship_count': 0, 'body_paragraph_count': 5, 'table_count': 0})).parser_version
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:121: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_txt_and_docx_share_native_anonymous_identity_without_role_guessing" time="0.014"><failure message="AssertionError: assert 0 == 5&#10; +  where 0 = len(())&#10; +    where () = DocumentStructure(source_id='urn:company-wiki:source:sha256:63219fc45e55ef51e02378eebd7913fe551f75dff6bf54776f778ade43...es=(), line_count=7, errors=('transcript_start_missing',), mime_type=None, layout_coverage=None, layout_diagnostics=()).units&#10; +  and   5 = len(['说话人1 00:00 请问新产品何时上线？', '说话人2 00:39 我们计划在海外渠道推出新产品。', '但具体计划尚未确定，可能会发生变化。', '说话人1 02:40 那么是否已经量产？', '说话人2 02:55 尚未量产，目前仍在客户验证阶段。'])">def test_txt_and_docx_share_native_anonymous_identity_without_role_guessing():
+        text=TITLE+'\n'+'\n'.join(LINES)+'\nEnd of transcript'
+        digest=sha256(text.encode()).hexdigest()
+        parsed=parse_transcript_text(text,source_id='urn:company-wiki:source:sha256:'+digest,
+                                     source_sha256=digest,language='zh')
+&gt;       assert len(parsed.units) == len(LINES)
+E       AssertionError: assert 0 == 5
+E        +  where 0 = len(())
+E        +    where () = DocumentStructure(source_id='urn:company-wiki:source:sha256:63219fc45e55ef51e02378eebd7913fe551f75dff6bf54776f778ade43...es=(), line_count=7, errors=('transcript_start_missing',), mime_type=None, layout_coverage=None, layout_diagnostics=()).units
+E        +  and   5 = len(['说话人1 00:00 请问新产品何时上线？', '说话人2 00:39 我们计划在海外渠道推出新产品。', '但具体计划尚未确定，可能会发生变化。', '说话人1 02:40 那么是否已经量产？', '说话人2 02:55 尚未量产，目前仍在客户验证阶段。'])
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:133: AssertionError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,464 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-cn-proya-q1",
+  "market": "CN",
+  "company": "珀莱雅",
+  "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+  "scope": "development",
+  "language": "zh",
+  "support_set_frozen_before_output": false,
+  "expected_route_families": [
+    "quarterly",
+    "a_share_quarterly",
+    "quarterly_report"
+  ],
+  "notes": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+  "facts": [
+    {
+      "id": "report-period-unaudited-identity",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "合并利润表\n2026 年1—3 月",
+            "page": 8,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "特此公告\n珀莱雅化妆品股份有限公司董事会\n2026 年4 月20 日",
+            "page": 12,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2026 年第一季度报告",
+        "2026 年1—3 月",
+        "珀莱雅化妆品股份有限公司",
+        "2026 年4 月20 日"
+      ],
+      "must_not_assert": [
+        "报告期为2026年上半年或2026年3月单月",
+        "该报告于2026年3月31日发布",
+        "报告期为2025年第一季度"
+      ],
+      "reason": "公司、流量期间和发布日期互为补充，必须联合；落款不能单独替代财报期间。归元数据通道。"
+    },
+    {
+      "id": "statements-unaudited-no-new-standards",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "第一季度财务报表是否经审计\n□是√否",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元\n币种:人民币\n审计类型：未经审计",
+            "page": 6,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "(三)2026 年起首次执行新会计准则或准则解释等涉及调整首次执行当年年初的财务报表\n□适用√不适用",
+            "page": 12,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "□是√否",
+        "未经审计",
+        "2026 年3 月31 日",
+        "□适用√不适用"
+      ],
+      "must_not_assert": [
+        "财务报表已经过审计",
+        "审计意见为标准无保留意见",
+        "2026年起首次执行新会计准则并调整年初报表"
+      ],
+      "reason": "联合未审计勾选/报表属性和首次执行导致期初调整不适用；不把不适用扩大成没有任何新准则。"
+    },
+    {
+      "id": "q1-revenue-yoy-decline",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "单位：元\n币种：人民币",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "营业收入\n2,305,344,625.43\n2,359,334,894.91\n-2.29",
+            "page": 1,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2,305,344,625.43",
+        "2,359,334,894.91",
+        "-2.29",
+        "本报告期",
+        "元"
+      ],
+      "must_not_assert": [
+        "营业收入同比增长2.29%",
+        "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入"
+      ],
+      "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+    },
+    {
+      "id": "attributable-net-profit-q1",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "单位：元\n币种：人民币",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "归属于上市公司股东的净\n利润\n366,686,734.14\n390,281,697.93\n-6.05",
+            "page": 1,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "366,686,734.14",
+        "390,281,697.93",
+        "-6.05",
+        "归属于"
+      ],
+      "must_not_assert": [
+        "归母净利润为383,647,847.96元（合并净利润）",
+        "归母净利润同比增长6.05%",
+        "366,686,734.14元覆盖2026年1—3月与2025年全年比较"
+      ],
+      "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+    },
+    {
+      "id": "deducted-net-profit-and-nonrecurring-total",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "单位：元\n币种：人民币",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "归属于上市公司股东的扣\n除非经常性损益的净利润\n341,157,237.18\n378,934,039.06\n-9.97",
+            "page": 2,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "非经常性损益项目\n本期金额\n说明",
+            "page": 2,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "合计\n25,529,496.96",
+            "page": 3,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "341,157,237.18",
+        "378,934,039.06",
+        "-9.97",
+        "扣除非经常性损益",
+        "本期金额",
+        "25,529,496.96"
+      ],
+      "must_not_assert": [
+        "扣非净利润为366,686,734.14元",
+        "非经常性损益合计25,529,496.96元是期末余额",
+        "扣非净利润同比下降9.97个百分点"
+      ],
+      "reason": "扣非行、非经常性本期金额列头及合计互补AND；只表名不能证明精确扣非/非经常总额。"
+    },
+    {
+      "id": "operating-cash-flow-collapse",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "单位：元\n币种：人民币",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "经营活动产生的现金流量\n净额\n106,971,167.62\n675,490,380.59\n-84.16",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "106,971,167.62",
+        "675,490,380.59",
+        "-84.16",
+        "本报告期"
+      ],
+      "must_not_assert": [
+        "经营活动现金流量净额同比下降84.16元",
+        "现金流量净额为负或流出",
+        "675,490,380.59元为本报告期金额"
+      ],
+      "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+    },
+    {
+      "id": "cash-flow-drop-driver",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "2026 年第一季度报告",
+            "page": 3,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "项目名称\n变动比例（%）\n主要原因\n经营活动产生的现金流\n量净额\n-84.16\n主要系收回货款减少以及支付的\n推广费增加。",
+            "page": 3,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "收回货款减少",
+        "推广费增加",
+        "-84.16"
+      ],
+      "must_not_assert": [
+        "现金流量下降主要系采购支出增加",
+        "公司称报告期内经营情况无其他重要变化因而收入下降",
+        "推广费减少导致现金流出下降"
+      ],
+      "reason": "经营解释本体包含下降对象/幅度与双原因，非原因标题OR。保留required_business和normal重要性，不要求三张主表全选。"
+    },
+    {
+      "id": "eps-basic-diluted-unit",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "基本每股收益（元/股）\n0.93\n0.99\n-6.06",
+            "page": 2,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "稀释每股收益（元/股）\n0.93\n0.99\n-6.06",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "0.93",
+        "0.99",
+        "元/股",
+        "-6.06",
+        "基本",
+        "稀释"
+      ],
+      "must_not_assert": [
+        "基本每股收益为0.93元/股，较上年增长6.06%",
+        "每股收益0.93元为年化口径或2026年上半年累计口径",
+        "稀释每股收益高于基本每股收益"
+      ],
+      "reason": "基本与稀释相等这一合取事实须两行共同支持；只一行不能证明另一行。季度和每股单位仍绑定。"
+    },
+    {
+      "id": "total-assets-point-in-time",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "单位：元\n币种：人民币",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本报告期末\n上年度末\n本报告期末比上\n年度末增减变动\n幅度(%)",
+            "page": 2,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "总资产\n8,912,125,388.70\n8,487,416,240.25\n5.00",
+            "page": 2,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "项目\n2026 年3 月31 日\n2025 年12 月31 日",
+            "page": 6,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "8,912,125,388.70",
+        "8,487,416,240.25",
+        "5.00",
+        "本报告期末",
+        "上年度末"
+      ],
+      "must_not_assert": [
+        "总资产8,912,125,388.70元为本报告期新增或季度流量",
+        "对比期为上年同期（2025年3月31日）",
+        "总资产较年初下降5.00%"
+      ],
+      "reason": "存量金额行、期末/上年末标签及两日期联合；不能把缺数表头当作完整资产支持。"
+    },
+    {
+      "id": "share-capital-and-buyback-holdings",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "实收资本（或股本）\n395,976,008.00\n395,975,998.00",
+            "page": 8,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "合并资产负债表\n2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元",
+            "page": 6,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "项目\n2026 年3 月31 日\n2025 年12 月31 日",
+            "page": 6,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "截至本报告期末，公司回购专用证券账户中持有公司股份3,757,848 股，占公司总股本的0.95%",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "395,976,008.00",
+        "395,975,998.00",
+        "3,757,848 股",
+        "0.95%",
+        "2026 年3 月31 日"
+      ],
+      "must_not_assert": [
+        "公司在报告期内增发了约100万股",
+        "回购专户持股3,757,848股占总股本9.5%",
+        "395,976,008.00为上年度末（2025年12月31日）的股本数"
+      ],
+      "reason": "股本货币额与回购持股数是两个量纲，联合而非OR。原件未给面值/发行因果，不能把股本10元差额推成10股或激励发行。"
+    }
+  ],
+  "support_set_digest": "3f692742fc79327b14b5b4b5e8611684cbe5b4b0eed3306887a740e8d5fd58c3"
+}

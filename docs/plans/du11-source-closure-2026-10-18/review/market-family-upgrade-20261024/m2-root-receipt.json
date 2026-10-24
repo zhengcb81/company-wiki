@@ -1,0 +1,32 @@
+{
+  "status": "REVIEW_PASS_PENDING_NORMAL_COMMIT_PUSH",
+  "source_tree_sha256": "55d7bb8c0eadce29bd309f199f8d8fca45e79bf0b2b2326c5f16d95e116ec560",
+  "independent_passed": 386,
+  "independent_cases": 47,
+  "worker_port_author_passed": 58,
+  "actual_public_docx_history_current_cache_passed": 1,
+  "actual_public_docx_history_seconds": 43.58,
+  "loopback_only_no_external_model": true,
+  "sandbox_attempt_failed_unknown_reservation": true,
+  "same_test_outside_sandbox_passed": true,
+  "sandbox_failure_exact_transport_cause": "not proven; do not describe as fee exhaustion",
+  "mypy_source_files": 374,
+  "mypy_errors": 0,
+  "ruff": "PASS",
+  "source_replay_and_review_current_files_verified": true,
+  "scratch_absent": {
+    ".tmp-market-m2": true,
+    ".tmp-market-m2-fix": true,
+    ".m2-history": true
+  },
+  "formal_configured_summary_and_RF_accepted": false,
+  "source_only_old_gold_statuses": [
+    "FAIL",
+    "PARTIAL",
+    "FAIL",
+    "FAIL"
+  ],
+  "new_paid_calls": 0,
+  "raw_copies": 0,
+  "downloads": 0
+}

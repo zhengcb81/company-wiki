@@ -1,0 +1,1516 @@
+{
+  "schema_version": "m1-source-checkpoint-author-qa/1",
+  "created_at": "2026-10-24T11:58:35.252742+00:00",
+  "author": "/root/w08_reporting_selection_content",
+  "verdict": "AUTHOR_PACKAGE_READY_FOR_INDEPENDENT_REVIEW",
+  "source_and_old_gold_unchanged": true,
+  "all_old_fact_ids_and_importances_retained": true,
+  "samples": [
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "gold_loads": true,
+      "anchor_count": 38,
+      "anchors_pass": 38,
+      "quote_chars": 1152,
+      "old_required_counts": {
+        "normal": 1
+      },
+      "new_required_counts": {
+        "normal": 1
+      },
+      "existing_baseline_evaluation_status": "PARTIAL",
+      "existing_baseline_metrics": {
+        "critical_fact_recall": null,
+        "critical_fact_recall_denominator": 0,
+        "critical_fact_recall_denominator_declared": 0,
+        "critical_fact_unavailable": 0,
+        "critical_fact_not_evaluated": 0,
+        "optional_correctness_facts": 7,
+        "critical_fact_coverage": null,
+        "narrative_fact_recall": 0.0,
+        "narrative_facts_passed": 0,
+        "narrative_facts_total": 1,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "fact_recall": 0.0,
+        "fact_recall_denominator": 1,
+        "fact_recall_denominator_declared": 1,
+        "route_accuracy": null,
+        "evidence_validity": 1.0,
+        "basis_pass_rate": null,
+        "context_completeness": null,
+        "selected_span_count": 30,
+        "claim_count": 0,
+        "semantic_unit_count": 0,
+        "review_supplied": false,
+        "reviewed_claims": 0,
+        "selected_spans": 30,
+        "selected_text_bytes": 2051
+      },
+      "existing_baseline_checks": [
+        {
+          "check_id": "integrity.source_identity",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+          "observed": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.selected_source_material",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every selected locator carries original source text",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "route.family",
+          "dimension": "route_type",
+          "status": "NOT_EVALUATED",
+          "expected": [
+            "quarterly",
+            "a_share_quarterly",
+            "quarterly_report"
+          ],
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation carries no route; baseline has no new router"
+        },
+        {
+          "check_id": "integrity.text_legibility",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "unusable-block ratio < 0.005",
+          "observed": {
+            "unusable_block_ratio": 0.0,
+            "unusable_chars": 0,
+            "dense_chars": 861,
+            "basis": "selected_text"
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "recall.cash-flow-drop-driver",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "经营解释本体包含下降对象/幅度与双原因，非原因标题OR。保留required_business和normal重要性，不要求三张主表全选。"
+        },
+        {
+          "check_id": "recall.report-period-unaudited-identity",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "recall.statements-unaudited-no-new-standards",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "basis.report-period-unaudited-identity",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.statements-unaudited-no-new-standards",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.q1-revenue-yoy-decline",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.attributable-net-profit-q1",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.deducted-net-profit-and-nonrecurring-total",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.operating-cash-flow-collapse",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.cash-flow-drop-driver",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.eps-basic-diluted-unit",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.total-assets-point-in-time",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.share-capital-and-buyback-holdings",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "replay.evidence_locators",
+          "dimension": "citation_replay",
+          "status": "PASS",
+          "expected": "all cited locators were selected",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.unsupported_claims",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every claim cites at least one selected locator",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "context.semantic_units",
+          "dimension": "context_completeness",
+          "status": "NOT_EVALUATED",
+          "expected": "semantic units with complete member sets",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "baseline has no new structure; context completeness unmeasurable"
+        },
+        {
+          "check_id": "coverage.no_false_complete",
+          "dimension": "context_completeness",
+          "status": "PASS",
+          "expected": "complete only when no page/unit is unread",
+          "observed": {
+            "complete": false,
+            "native_scan": "partial",
+            "opaque_pages": [],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": []
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "basis.quantity_provenance",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "each quantity carries unit and period",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no quantities"
+        },
+        {
+          "check_id": "bilingual.duplicate_summary",
+          "dimension": "bilingual_redundancy",
+          "status": "PASS",
+          "expected": "no duplicated fact across languages",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": "single language lane in observation"
+        },
+        {
+          "check_id": "derived_space.budget",
+          "dimension": "derived_space",
+          "status": "NOT_EVALUATED",
+          "expected": "derived_bytes <= 204800",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no derived size"
+        },
+        {
+          "check_id": "resource.elapsed",
+          "dimension": "time_resource",
+          "status": "PASS",
+          "expected": "elapsed_seconds <= 900.0",
+          "observed": 3.793055199988885,
+          "evidence_refs": [],
+          "detail": "elapsed is reported, not a throughput claim"
+        },
+        {
+          "check_id": "semantics.entailment",
+          "dimension": "untested_semantics",
+          "status": "NOT_EVALUATED",
+          "expected": "independent semantic review of each claim against its evidence",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "gold_loads": true,
+      "anchor_count": 42,
+      "anchors_pass": 42,
+      "quote_chars": 2214,
+      "old_required_counts": {
+        "critical": 6,
+        "normal": 2
+      },
+      "new_required_counts": {
+        "normal": 5,
+        "critical": 2
+      },
+      "existing_baseline_evaluation_status": "FAIL",
+      "existing_baseline_metrics": {
+        "critical_fact_recall": 0.0,
+        "critical_fact_recall_denominator": 2,
+        "critical_fact_recall_denominator_declared": 2,
+        "critical_fact_unavailable": 0,
+        "critical_fact_not_evaluated": 0,
+        "optional_correctness_facts": 6,
+        "critical_fact_coverage": 1.0,
+        "narrative_fact_recall": 0.0,
+        "narrative_facts_passed": 0,
+        "narrative_facts_total": 7,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "fact_recall": 0.0,
+        "fact_recall_denominator": 7,
+        "fact_recall_denominator_declared": 7,
+        "route_accuracy": null,
+        "evidence_validity": 1.0,
+        "basis_pass_rate": null,
+        "context_completeness": null,
+        "selected_span_count": 96,
+        "claim_count": 0,
+        "semantic_unit_count": 0,
+        "review_supplied": false,
+        "reviewed_claims": 0,
+        "selected_spans": 96,
+        "selected_text_bytes": 7780
+      },
+      "existing_baseline_checks": [
+        {
+          "check_id": "integrity.source_identity",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "observed": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.selected_source_material",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every selected locator carries original source text",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "route.family",
+          "dimension": "route_type",
+          "status": "NOT_EVALUATED",
+          "expected": [
+            "interim",
+            "hk_interim"
+          ],
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation carries no route; baseline has no new router"
+        },
+        {
+          "check_id": "integrity.text_legibility",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "unusable-block ratio < 0.005",
+          "observed": {
+            "unusable_block_ratio": 0.0,
+            "unusable_chars": 0,
+            "dense_chars": 3064,
+            "basis": "selected_text"
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "recall.gross-margin-decline",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。"
+        },
+        {
+          "check_id": "recall.no-material-investments-or-capex-plans",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "现有重大投资阈值与未来重大计划两否定须同包，不以不完整前半句替代；不将普通AI购置活动与公告重大投资计划混同。"
+        },
+        {
+          "check_id": "recall.h2-2025-business-outlook",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。"
+        },
+        {
+          "check_id": "recall.single-operating-segment",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+        },
+        {
+          "check_id": "recall.cloud-revenue-operating-drivers",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "源侧新增关键经营因果：AI客户与行业云扩张、主动缩减CDN的抵销必须同时保留；补正金融数责任拆分，不以降分母取绿。"
+        },
+        {
+          "check_id": "recall.cloud-service-growth-causal-split",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "按真实业务主体分开增长驱动，避免兄弟业务归因串线；数字在源包中保留但不要求把全表精度塞进叙述。"
+        },
+        {
+          "check_id": "recall.idc-purchase-commitment-stage",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "保留原period-meta错误OR曾引用的采购责任为独立业务合同阶段，完整金额原话与全节千元说明联合，迁移原错误单位反例；不凭正文元字抹去全节单位，也不自造已履约/收入。"
+        },
+        {
+          "check_id": "recall.us-gaap-basis-not-ifrs",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "recall.unit-and-fx-convention",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "recall.interim-period-meta",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "basis.total-revenue-h1-2025",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.segment-revenue-split",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.net-loss-us-gaap-widened",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.us-gaap-basis-not-ifrs",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.unit-and-fx-convention",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.gross-margin-decline",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.adjusted-ebitda-nongaap",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.capex-vs-revenue",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.no-material-investments-or-capex-plans",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.h2-2025-business-outlook",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.single-operating-segment",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.related-party-revenue",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.interim-period-meta",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.cloud-revenue-operating-drivers",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.cloud-service-growth-causal-split",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.idc-purchase-commitment-stage",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "replay.evidence_locators",
+          "dimension": "citation_replay",
+          "status": "PASS",
+          "expected": "all cited locators were selected",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.unsupported_claims",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every claim cites at least one selected locator",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "context.semantic_units",
+          "dimension": "context_completeness",
+          "status": "NOT_EVALUATED",
+          "expected": "semantic units with complete member sets",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "baseline has no new structure; context completeness unmeasurable"
+        },
+        {
+          "check_id": "coverage.no_false_complete",
+          "dimension": "context_completeness",
+          "status": "PASS",
+          "expected": "complete only when no page/unit is unread",
+          "observed": {
+            "complete": false,
+            "native_scan": "partial",
+            "opaque_pages": [],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": []
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "basis.quantity_provenance",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "each quantity carries unit and period",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no quantities"
+        },
+        {
+          "check_id": "bilingual.duplicate_summary",
+          "dimension": "bilingual_redundancy",
+          "status": "PASS",
+          "expected": "no duplicated fact across languages",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": "single language lane in observation"
+        },
+        {
+          "check_id": "derived_space.budget",
+          "dimension": "derived_space",
+          "status": "NOT_EVALUATED",
+          "expected": "derived_bytes <= 204800",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no derived size"
+        },
+        {
+          "check_id": "resource.elapsed",
+          "dimension": "time_resource",
+          "status": "PASS",
+          "expected": "elapsed_seconds <= 900.0",
+          "observed": 10.701253100007307,
+          "evidence_refs": [],
+          "detail": "elapsed is reported, not a throughput claim"
+        },
+        {
+          "check_id": "semantics.entailment",
+          "dimension": "untested_semantics",
+          "status": "NOT_EVALUATED",
+          "expected": "independent semantic review of each claim against its evidence",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "gold_loads": true,
+      "anchor_count": 31,
+      "anchors_pass": 31,
+      "quote_chars": 869,
+      "old_required_counts": {
+        "critical": 5,
+        "normal": 4
+      },
+      "new_required_counts": {
+        "critical": 6,
+        "normal": 4
+      },
+      "existing_baseline_evaluation_status": "FAIL",
+      "existing_baseline_metrics": {
+        "critical_fact_recall": 0.0,
+        "critical_fact_recall_denominator": 5,
+        "critical_fact_recall_denominator_declared": 6,
+        "critical_fact_unavailable": 0,
+        "critical_fact_not_evaluated": 1,
+        "optional_correctness_facts": 0,
+        "critical_fact_coverage": 0.8333333333333334,
+        "narrative_fact_recall": 0.0,
+        "narrative_facts_passed": 0,
+        "narrative_facts_total": 8,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "fact_recall": 0.0,
+        "fact_recall_denominator": 8,
+        "fact_recall_denominator_declared": 10,
+        "route_accuracy": null,
+        "evidence_validity": 1.0,
+        "basis_pass_rate": null,
+        "context_completeness": null,
+        "selected_span_count": 19,
+        "claim_count": 0,
+        "semantic_unit_count": 0,
+        "review_supplied": false,
+        "reviewed_claims": 0,
+        "selected_spans": 19,
+        "selected_text_bytes": 6988
+      },
+      "existing_baseline_checks": [
+        {
+          "check_id": "integrity.source_identity",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+          "observed": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.selected_source_material",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every selected locator carries original source text",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "route.family",
+          "dimension": "route_type",
+          "status": "NOT_EVALUATED",
+          "expected": [
+            "earnings_call",
+            "investor_call_transcript"
+          ],
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation carries no route; baseline has no new router"
+        },
+        {
+          "check_id": "integrity.text_legibility",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "unusable-block ratio < 0.005",
+          "observed": {
+            "unusable_block_ratio": 0.0,
+            "unusable_chars": 0,
+            "dense_chars": 2403,
+            "basis": "selected_text"
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "recall.yy-flow-decline-premise",
+          "dimension": "critical_fact_recall",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。"
+        },
+        {
+          "check_id": "recall.yy-roi-decline-actual",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+        },
+        {
+          "check_id": "recall.buydown-cut-and-stock-operation-plan",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+        },
+        {
+          "check_id": "recall.buydown-no-return-negation",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+        },
+        {
+          "check_id": "recall.yy-stabilize-target-uncertain",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。"
+        },
+        {
+          "check_id": "recall.outpost-update-plan-uncommitted",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。"
+        },
+        {
+          "check_id": "recall.outpost-buyout-revenue-recognition",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+        },
+        {
+          "check_id": "recall.outpost-stage-problems-resolved",
+          "dimension": "critical_fact_recall",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。"
+        },
+        {
+          "check_id": "recall.yy-user-base-scale",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+        },
+        {
+          "check_id": "recall.buydown-dependence-reduction-intent",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "从旧复合买量计划单独保留另一回合的减少依赖意向，仍critical，不因纠正OR漏掉责任；不将愿望写成完成。"
+        },
+        {
+          "check_id": "recall.steam-activity-premise",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "recall.lei-ting-profit-analyst-inference",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "recall.strategy-category-unchanged-negation",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "basis.yy-flow-decline-premise",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.steam-activity-premise",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.lei-ting-profit-analyst-inference",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.yy-roi-decline-actual",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.buydown-cut-and-stock-operation-plan",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.buydown-no-return-negation",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.yy-stabilize-target-uncertain",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.outpost-update-plan-uncommitted",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.outpost-buyout-revenue-recognition",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.outpost-stage-problems-resolved",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.strategy-category-unchanged-negation",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.yy-user-base-scale",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.buydown-dependence-reduction-intent",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "replay.evidence_locators",
+          "dimension": "citation_replay",
+          "status": "PASS",
+          "expected": "all cited locators were selected",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.unsupported_claims",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every claim cites at least one selected locator",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "context.semantic_units",
+          "dimension": "context_completeness",
+          "status": "NOT_EVALUATED",
+          "expected": "semantic units with complete member sets",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "baseline has no new structure; context completeness unmeasurable"
+        },
+        {
+          "check_id": "coverage.no_false_complete",
+          "dimension": "context_completeness",
+          "status": "PASS",
+          "expected": "complete only when no page/unit is unread",
+          "observed": {
+            "complete": false,
+            "native_scan": "partial",
+            "opaque_pages": [],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": []
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "basis.quantity_provenance",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "each quantity carries unit and period",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no quantities"
+        },
+        {
+          "check_id": "bilingual.duplicate_summary",
+          "dimension": "bilingual_redundancy",
+          "status": "PASS",
+          "expected": "no duplicated fact across languages",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": "single language lane in observation"
+        },
+        {
+          "check_id": "derived_space.budget",
+          "dimension": "derived_space",
+          "status": "NOT_EVALUATED",
+          "expected": "derived_bytes <= 204800",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no derived size"
+        },
+        {
+          "check_id": "resource.elapsed",
+          "dimension": "time_resource",
+          "status": "PASS",
+          "expected": "elapsed_seconds <= 900.0",
+          "observed": 1.075580099975923,
+          "evidence_refs": [],
+          "detail": "elapsed is reported, not a throughput claim"
+        },
+        {
+          "check_id": "semantics.entailment",
+          "dimension": "untested_semantics",
+          "status": "NOT_EVALUATED",
+          "expected": "independent semantic review of each claim against its evidence",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "gold_loads": true,
+      "anchor_count": 28,
+      "anchors_pass": 28,
+      "quote_chars": 3218,
+      "old_required_counts": {
+        "critical": 6
+      },
+      "new_required_counts": {
+        "critical": 5,
+        "normal": 2
+      },
+      "existing_baseline_evaluation_status": "FAIL",
+      "existing_baseline_metrics": {
+        "critical_fact_recall": 0.2,
+        "critical_fact_recall_denominator": 5,
+        "critical_fact_recall_denominator_declared": 5,
+        "critical_fact_unavailable": 0,
+        "critical_fact_not_evaluated": 0,
+        "optional_correctness_facts": 3,
+        "critical_fact_coverage": 1.0,
+        "narrative_fact_recall": 0.14285714285714285,
+        "narrative_facts_passed": 1,
+        "narrative_facts_total": 7,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "fact_recall": 0.14285714285714285,
+        "fact_recall_denominator": 7,
+        "fact_recall_denominator_declared": 7,
+        "route_accuracy": null,
+        "evidence_validity": 1.0,
+        "basis_pass_rate": 1.0,
+        "context_completeness": null,
+        "selected_span_count": 7,
+        "claim_count": 0,
+        "semantic_unit_count": 0,
+        "review_supplied": false,
+        "reviewed_claims": 0,
+        "selected_spans": 7,
+        "selected_text_bytes": 10518
+      },
+      "existing_baseline_checks": [
+        {
+          "check_id": "integrity.source_identity",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+          "observed": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.selected_source_material",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every selected locator carries original source text",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "route.family",
+          "dimension": "route_type",
+          "status": "NOT_EVALUATED",
+          "expected": [
+            "sec_exhibit",
+            "presentation_deck"
+          ],
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation carries no route; baseline has no new router"
+        },
+        {
+          "check_id": "integrity.text_legibility",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "unusable-block ratio < 0.005",
+          "observed": {
+            "unusable_block_ratio": 0.0,
+            "unusable_chars": 0,
+            "dense_chars": 8927,
+            "basis": "selected_text"
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "recall.fy27-two-reporting-segments",
+          "dimension": "critical_fact_recall",
+          "status": "PASS",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "recalled",
+          "evidence_refs": [
+            "loc:v1/paragraph:3"
+          ],
+          "detail": ""
+        },
+        {
+          "check_id": "recall.commercial-bookings-definition",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+        },
+        {
+          "check_id": "recall.commercial-rpo-definition",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+        },
+        {
+          "check_id": "recall.seat-growth-includes-github",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+        },
+        {
+          "check_id": "recall.fy27q1-outlook-mechanical-only",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "指引期次+旧指引机械改列联合；不能作为9月新上调/下调指引。"
+        },
+        {
+          "check_id": "recall.azure-fy27q1-growth-outlook",
+          "dimension": "critical_fact_recall",
+          "status": "FAIL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+        },
+        {
+          "check_id": "recall.total-company-fy27q1-revenue-outlook",
+          "dimension": "critical_fact_recall",
+          "status": "PARTIAL",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+        },
+        {
+          "check_id": "recall.forward-looking-caveat",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "recall.exhibit-identity-fy27-segments-metrics",
+          "dimension": "disposition_context",
+          "status": "NOT_EVALUATED",
+          "expected": "fact present with source-bound selected evidence",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+        },
+        {
+          "check_id": "basis.fy27-two-reporting-segments",
+          "dimension": "role_modality_quantity",
+          "status": "PASS",
+          "expected": "role/modality/quantity basis preserved",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "basis.prior-three-segments-retired",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.commercial-bookings-definition",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.commercial-rpo-definition",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.seat-growth-includes-github",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.fy27q1-outlook-mechanical-only",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.azure-fy27q1-growth-outlook",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.total-company-fy27q1-revenue-outlook",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "absent or unread",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.restated-segment-fy26-revenue",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "basis.forward-looking-caveat",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.exhibit-identity-fy27-segments-metrics",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "fact carried with correct role/modality/quantity basis",
+          "observed": "no source-bound mapping",
+          "evidence_refs": [],
+          "detail": "not recalled, so basis is not assessable"
+        },
+        {
+          "check_id": "basis.growth-comparison-fiscal-basis",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "correct if emitted",
+          "observed": "not emitted",
+          "evidence_refs": [],
+          "detail": "optional fact was not output"
+        },
+        {
+          "check_id": "replay.evidence_locators",
+          "dimension": "citation_replay",
+          "status": "PASS",
+          "expected": "all cited locators were selected",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "integrity.unsupported_claims",
+          "dimension": "observation_integrity",
+          "status": "PASS",
+          "expected": "every claim cites at least one selected locator",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "context.semantic_units",
+          "dimension": "context_completeness",
+          "status": "NOT_EVALUATED",
+          "expected": "semantic units with complete member sets",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "baseline has no new structure; context completeness unmeasurable"
+        },
+        {
+          "check_id": "coverage.no_false_complete",
+          "dimension": "context_completeness",
+          "status": "PASS",
+          "expected": "complete only when no page/unit is unread",
+          "observed": {
+            "complete": true,
+            "native_scan": "complete",
+            "opaque_pages": [],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": []
+          },
+          "evidence_refs": [],
+          "detail": ""
+        },
+        {
+          "check_id": "basis.quantity_provenance",
+          "dimension": "role_modality_quantity",
+          "status": "NOT_EVALUATED",
+          "expected": "each quantity carries unit and period",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no quantities"
+        },
+        {
+          "check_id": "bilingual.duplicate_summary",
+          "dimension": "bilingual_redundancy",
+          "status": "PASS",
+          "expected": "no duplicated fact across languages",
+          "observed": [],
+          "evidence_refs": [],
+          "detail": "single language lane in observation"
+        },
+        {
+          "check_id": "derived_space.budget",
+          "dimension": "derived_space",
+          "status": "NOT_EVALUATED",
+          "expected": "derived_bytes <= 204800",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "observation reports no derived size"
+        },
+        {
+          "check_id": "resource.elapsed",
+          "dimension": "time_resource",
+          "status": "PASS",
+          "expected": "elapsed_seconds <= 900.0",
+          "observed": 1.8375446000136435,
+          "evidence_refs": [],
+          "detail": "elapsed is reported, not a throughput claim"
+        },
+        {
+          "check_id": "semantics.entailment",
+          "dimension": "untested_semantics",
+          "status": "NOT_EVALUATED",
+          "expected": "independent semantic review of each claim against its evidence",
+          "observed": null,
+          "evidence_refs": [],
+          "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No product selection rerun or model output acceptance.",
+    "Anonymous voices/ASR uncertainty not repaired using unavailable audio.",
+    "Fixture compatibility and exact anchors do not replace independent semantic review."
+  ],
+  "external_calls": 0,
+  "downloads": 0,
+  "original_copies": 0,
+  "author_compatibility": {
+    "scope": "synthetic_source_quote_fixtures_only",
+    "fact_count": 51,
+    "forbidden_assertion_cases": 151,
+    "joint_anchor_omission_cases": 85,
+    "existing_evaluator_only": true,
+    "sha256": "b81564f529e49f04c05d59f36c71463aead46a6764ec7fb576e200cc034167ef"
+  },
+  "revision_manifest_sha256": "d68b55bf8da6eed73eeb8c9e5bbb1b24dd3a54b8f31a0dec92b6a0413babad08",
+  "author_revision_2_sha256": "38e92acba98cbd4a982a95ceef74c1571fde2d8cc40b3ffd97c65251a68e477d",
+  "independent_acceptance": "PENDING_OTHER_REVIEWER",
+  "all_old_error_counterexamples_preserved_in_same_sample": true
+}

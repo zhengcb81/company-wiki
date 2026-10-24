@@ -27,7 +27,7 @@ from company_wiki.document_normalization.table_shapes import has_tabular_value_t
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/5"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/6"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "column", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
@@ -322,6 +322,15 @@ def _qa_hints(unit: Any, metadata: Mapping[str, Any]) -> dict[str, str]:
     may contain several source originals. Prepared remarks carry a speaker but
     are explicitly not an answer to a neighbouring question.
     """
+    native_turn = metadata.get("native_speaker_turn")
+    if isinstance(native_turn, Mapping) and all(
+        isinstance(native_turn.get(key), str) and native_turn[key]
+        for key in ("speaker", "timestamp", "turn_id")
+    ):
+        return {
+            "speaker": native_turn["speaker"], "turn_id": native_turn["turn_id"],
+            "native_speaker_turn": native_turn["turn_id"],
+        }
     state = str(metadata.get("qa_state") or "")
     original_role = metadata.get("original_role")
     group = (metadata.get("official_record_group_id")
@@ -338,6 +347,9 @@ def _qa_hints(unit: Any, metadata: Mapping[str, Any]) -> dict[str, str]:
     elif state:
         speaker = "management" if "answer" in state else "investor"
     hints = {"speaker": speaker} if speaker else {}
+    if unit.unit_kind == "transcript_speaker_block" and isinstance(metadata.get("speaker"), str) and metadata["speaker"]:
+        # Keep the source's actual actor separate from the discourse-role hint.
+        hints["native_speaker"] = metadata["speaker"]
     if group:
         parent = getattr(unit, "source_id", None)
         if parent:

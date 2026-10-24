@@ -1,0 +1,64 @@
+{
+  "status": "CHANGES_REQUESTED",
+  "source_tree_sha256": "8408bba433a89ec0521001a8a5252b82d4a22141dcd4ff8833b496623846ea54",
+  "source_unchanged_during_candidate_suite": true,
+  "scratch_absent": true,
+  "candidate_tests": {
+    "passed": 382,
+    "failed": 3,
+    "seconds": 28.72
+  },
+  "product_blockers": [
+    {
+      "owner": "source_catalog.transcript_layout.AnonymousTurnObserver.clear",
+      "issue": "Structural boundary clears closed state and reopens ended transcript",
+      "independent_red_cases": 2,
+      "minimal_shared_fix": "Clear active turn at structure boundary while retaining closed; initialize a new observer for a new original."
+    }
+  ],
+  "test_contract_updates": [
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+      "test": "test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_use",
+      "issue": "Old context-only expectation conflicts with intentional intrinsic factual-support promotion",
+      "proof": "old-context-test-contract.json",
+      "fix": "Require restriction in support of every relevant view and exact source card alongside anchor; retain ordinary context distinction."
+    }
+  ],
+  "real_original_seam": {
+    "result": "PASS_SOURCE_SEAM_ONLY",
+    "spans": 23,
+    "cards": 23,
+    "model_calls": 0,
+    "critical_locators": [
+      5,
+      6,
+      16,
+      89
+    ],
+    "original_unchanged": true,
+    "evidence": "real-gbits-final-source-seam.json"
+  },
+  "limits": [
+    "No final engineering PASS until product blocker fixed and final immutable bytes retested.",
+    "No formal model summary, catalog acquisition, full crash recovery or RF/content-gold claim.",
+    "Version-owner 58P receipt is construction/normalization recovery only; its broader sandbox/public-history failures remain ROOT follow-up."
+  ],
+  "receipts": {
+    "candidate1-semantic-receipt.json": "176d70aef839f89797bfaab75b80006ac2698b503d921e95d9ca1788e1cea8fd",
+    "candidate1-semantic.log": "f1fd34a3843407225d7b02b1d72fc309ad121478dcd8cf70b670075611c1a923",
+    "candidate1-semantic.xml": "0c2b3d6f4f132db413e1e0d3cea42462fc0f8fd3367ab100bfc18c08a1d6d487",
+    "check_gbits_final_source.py": "f9d940e37fafa6e44b460753ce4534ea20a76eef426ef67e8501e2792f7c98e6",
+    "check_gbits_frozen_source.py": "512367469f6a7133a4030ec9a72225e19d9a31ee681e726c20edfb1309479a3f",
+    "closed-boundary-red.xml": "ef4a7b5a494dcfcfa4b8828b8deb5e8e20b4da28a97cf9ba162ad531cda863f5",
+    "expanded-semantic.xml": "16d6d5518ead1cb3e60625ad997a87cc77e4e912dd33214ba60d80b4ad492d57",
+    "expanded2-semantic.xml": "d671aa2cead926b76698ca405e5cd1d4c6bd5cdca46e5ef5d4be21d110a2a5f0",
+    "initial-semantic.xml": "56d3d587381252e2aab242022f08c1ffd393f43d872155a0a9ff622b36bdba77",
+    "old-context-test-contract.json": "0be7fbd868b237777bb7fc6c086e07c4538a38be698d99657da01112ca00ee46",
+    "real-gbits-final-source-seam.json": "c1fc49eb9635e8ba2632b91bf83d18688fcc685cedda5ee4820e84e52a634ddf",
+    "real-gbits-frozen-source-check.json": "aece009d7536d97d5bb27356eae58a8c5ff76e88ef23c0496039a1bec06b3ea7",
+    "run_final_review.py": "acbca89d357575ae993f96280252637b43ab1f655258d8e85fce7e120f4f5c81",
+    "test_m2_independent.py": "5c110b6d7da3b87c91249a46752ba8d065a392e06c8c30ffe9487820f8d35c4e",
+    "write_candidate_report.py": "efee2f6db44e43dd67c920730832bb704d896d7b8d2318b81102ca0894d8c3f4"
+  }
+}

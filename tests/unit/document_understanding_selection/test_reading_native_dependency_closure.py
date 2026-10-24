@@ -443,5 +443,13 @@ def test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_u
         if left_ids.intersection(c["support_evidence_ids"])
     ]
     assert views and all(
-        right_ids.intersection(c["context_evidence_ids"]) for c in views
+        right_ids.intersection(c["support_evidence_ids"]) for c in views
     )
+    from company_wiki.document_understanding.summary_tasks import build_summary_task_plan
+    from company_wiki.document_understanding.source_cards import source_cards
+    plan = build_summary_task_plan(selected.evidence_spans,
+                                   reading_context=selected.reading_context, max_claims=40)
+    cards = [card for card in source_cards(plan, {
+        span.span_id: span for span in selected.evidence_spans})
+        if left_ids.intersection(card.task.support_ids)]
+    assert cards and all(left in (card.text or '') and right in (card.text or '') for card in cards)

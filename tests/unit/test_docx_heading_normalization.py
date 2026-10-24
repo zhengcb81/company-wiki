@@ -222,17 +222,17 @@ def test_default_and_saved_old_pins_have_separate_generation_and_replay_identity
     source_id = source_id_for_sha256(sha)
     port = NarrativeNormalization()
     pinned = NarrativeNormalization(parser_versions={"saved-document": "1.0.0"})
-    assert dn.DOCX_PARSER_VERSION == "1.1.0"
-    assert parser_version_for_format("docx") == "1.1.0"
-    assert dn.normalization_identity(MIME)["parser_version"] == "1.1.0"
-    assert port.identity(MIME)["parser_version"] == "1.1.0"
+    assert dn.DOCX_PARSER_VERSION == "1.2.0"
+    assert parser_version_for_format("docx") == "1.2.0"
+    assert dn.normalization_identity(MIME)["parser_version"] == "1.2.0"
+    assert port.identity(MIME)["parser_version"] == "1.2.0"
     assert pinned.identity(MIME, document_id="saved-document")["parser_version"] == "1.0.0"
-    assert parser_component(MIME) == (dn.PARSER_NAME, "1.1.0")
+    assert parser_component(MIME) == (dn.PARSER_NAME, "1.2.0")
     current = port.normalize(data, source_id=source_id, source_sha256=sha, mime_type=MIME)
     old = pinned.normalize(data, source_id=source_id, source_sha256=sha, mime_type=MIME,
         document_id="saved-document")
     assert fingerprint(document_record(old)) == LEGACY_FINGERPRINT
-    assert current.parser_version == "1.1.0" and old.parser_version == "1.0.0"
+    assert current.parser_version == "1.2.0" and old.parser_version == "1.0.0"
     assert set(unit.unit_id for unit in current.units).isdisjoint(unit.unit_id for unit in old.units)
     for document in (old, current):
         for unit in document.units:

@@ -14,7 +14,7 @@ from .narrative_business_meaning import _component_structure, _STRUCTURE, _OBJEC
 from .narrative_predicate_state import predicate_scope
 
 
-READING_DISCLOSURE_SCAN_PASSES = 3
+READING_DISCLOSURE_SCAN_PASSES = 4
 _CN_SCOPE = re.compile(
     r"(?:业务(?:类型|范围)?|服务范围)(?:可以|主要|现有|目前|分别|可)?"
     r"(?:分为|包括|包含|由)(?P<parts>[^。；;!?]{1,240})|"
@@ -75,6 +75,99 @@ _CONVERSION_LINK_TOKEN = re.compile(
     r"\bwe\s+expect\s+to\b|其中|其余|并|预计|预期|将|于|在|未来|个月|季度|年度|年|"
     r"\d{4}(?:会计|财务)?年(?:度)?|" + _AMOUNT + r")", re.I)
 _COMPOSITION_VERB = re.compile(r"(?:consist\w*|compris\w*|divided into|made up of)", re.I)
+
+_INTENT_MARKER = re.compile(
+    r"计划|拟|打算|希望|将|会(?!不)|\b(?:plans?|intends?|hopes?|aims?|will)\b", re.I)
+_INTENT_ACTION = re.compile(
+    r"更新|迭代|推出|采用|延续|稳住|稳定|减少|降低|拓展|开发|"
+    r"\b(?:update|release|launch|adopt|continue|stabili[sz]e|reduce|expand|develop)\b", re.I)
+_INTENT_LINK_TOKEN = re.compile(
+    r"\s+|能够|在一个|新的水平|更多地?|尽量|主动|持续|继续|集中|跟随|跟着|"
+    r"这些节点|这些|节点|之后|未来|目前|还是|我们|本公司|本集团|公司|"
+    r"会|将|能|在|去|再|更|的|地|也|"
+    r"\b(?:to|further|continue|continuously|gradually|selectively|also)\b", re.I)
+_INTENT_TARGET_PREFIX = re.compile(
+    r"\s+|我们的|一些|这款|该|这一|创新|更新|迭代|现有|新的|对|的|"
+    r"\b(?:reliance\s+on|the|our|new|existing|paid|these|those)\b", re.I)
+_INTENT_OBJECT = re.compile(
+    r"产品|服务|业务|平台|渠道|版本|存量运营|用户留存|客户留存|广告投放|买量|营销方式|"
+    r"\b(?:products?|services?|business(?:es)?|platforms?|channels?|versions?|"
+    r"customer\s+(?:retention|acquisition|support)|user\s+retention|advertising)\b", re.I)
+_INTENT_SUBJECT = re.compile(
+    r"(?:产品|服务|业务|平台|渠道|版本)(?:的(?:运营|经营|发展|营销)?(?:思路|方式|策略|方向))?"
+    r"(?:还是|仍然|后续|未来|的话|\s)*$|"
+    r"\b(?:products?|services?|business|platforms?|channels?)\s*$", re.I)
+_INTENT_QUESTION = re.compile(r"请问|是否|会不会|\b(?:whether|will\s+(?:you|the\s+company))\b", re.I)
+
+_PLAN_REFERENCE = re.compile(
+    r"^\s*(?:(?:但|但是|不过|不過)\s*)?(?:具体|具體|上述|该|該|这项|這項|这一|這一)?"
+    r"(?:计划|計劃|上线时间|上線時間|推出时间|推出時間)|"
+    r"^\s*(?:(?:but|however)[, ]+)?(?:this|that|the above)\s+"
+    r"(?:(?:launch|release|expansion|development|operating)\s+)?(?:plan|schedule|timing)\b", re.I)
+_PLAN_UNCERTAINTY = re.compile(
+    r"尚未确定|尚未確定|还没有确定|還沒有確定|没有明确|沒有明確|可能.{0,8}(?:变化|變化|调整|調整)|"
+    r"\b(?:not (?:yet )?(?:been )?(?:finalized|finalised|confirmed|determined)|"
+    r"may (?:still )?change|subject to change|remains? uncertain)\b", re.I)
+
+
+def is_backward_plan_qualification(text: str) -> bool:
+    """Explicit reference to the preceding plan, never a free-floating caveat."""
+    prefix = _PLAN_REFERENCE.match(text)
+    return bool(prefix and _PLAN_UNCERTAINTY.search(text, prefix.end(), prefix.end() + 160))
+
+
+def _after_tokens(text: str, tokens: re.Pattern[str], *, stop: re.Pattern[str] | None = None) -> str:
+    """Consume each grammar token once; reject unrelated actors/objects."""
+    offset = 0
+    while offset < len(text):
+        if stop is not None and stop.match(text, offset):
+            break
+        token = tokens.match(text, offset)
+        if token is None:
+            break
+        offset = token.end()
+    return text[offset:]
+
+
+def _operating_object_head(text: str) -> bool:
+    """The business noun must head its phrase, not modify another head noun."""
+    match = _INTENT_OBJECT.match(text)
+    if match is None:
+        return False
+    rest = text[match.end():].strip()
+    # A sequence of business nouns may form a compound whose final head is
+    # still operational (service platform). Administrative
+    # heads such as training manuals/expense records cannot complete it.
+    while compound := _INTENT_OBJECT.match(rest):
+        rest = rest[compound.end():].strip()
+    return not rest or bool(re.match(
+        r"^(?:的(?:一个)?(?:依赖|方式|思路|模式|策略|方案))(?:[。；;!?]|$)|"
+        r"^(?:在|向|以|从|并|与|及)|"
+        r"^(?:for|in|on|at|with|by|through|across|that|which|and|to)\b", rest, re.I))
+
+
+def _qualitative_operating_intent(clause: str) -> bool:
+    """A local plan→action→business-object relation, not a completed event.
+
+    Descriptive qualitative plans carry source value even without a metric.
+    Tight grammar links prevent an employee/financial plan borrowing a product
+    noun elsewhere. Questions and unchanged raw uncertainties stay unasserted.
+    """
+    for piece in re.split(r"[,，]|但是|然而|\b(?:but|while|whereas)\b", clause):
+        if _INTENT_QUESTION.search(piece):
+            continue
+        for marker in _INTENT_MARKER.finditer(piece):
+            tail = piece[marker.end():marker.end() + 96]
+            verb_text = _after_tokens(tail, _INTENT_LINK_TOKEN, stop=_INTENT_ACTION)
+            action = _INTENT_ACTION.match(verb_text)
+            if action is None:
+                continue
+            target = _after_tokens(verb_text[action.end():], _INTENT_TARGET_PREFIX)
+            if _operating_object_head(target) or (
+                not target.strip() and _INTENT_SUBJECT.search(piece[:marker.start()])
+            ):
+                return True
+    return False
 
 _STOCK_CONVERSION_PREFIX = re.compile(
     r"\b(?:recogniz\w*|recognis\w*|invoic\w*|ship\w*|deliver\w*|convert\w*)\s+"
@@ -174,6 +267,8 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
         relations.append("business_structure_mechanism")
     if _customer_geography(clause):
         relations.append("customer_revenue_geography")
+    if _qualitative_operating_intent(clause):
+        relations.append("operating_plan")
     relations.extend(_contract_uses(clause))
     return tuple(dict.fromkeys(relations))
 

@@ -1,0 +1,72 @@
+{
+  "schema_version": "normalization-version-capability-author/1",
+  "status": "implemented_core_tests_pass_adjacent_failures_reported",
+  "scope": "normalization version capability and production worker composition; not full batch publication acceptance",
+  "root_cause": "NarrativeNormalization copied an outdated cross-format version whitelist instead of consulting the normalization owner; the owner already supports DOCX 1.2.0.",
+  "changes": [
+    "Single immutable format-to-supported-version capability registry in units.py; require_parser_version and composition derive from it.",
+    "NarrativeNormalization validates initial pins against the owner union once; actual identity still enforces MIME-specific support and OCR configuration.",
+    "New tests exercise unknown/invalid pins, wrong-format versions, real DOCX 1.0/1.1/1.2 parse+replay, production create_runtime startup/reconstruction, serialized evidence replay, empty replay and changed-source refusal."
+  ],
+  "source_sha256": {
+    "src/company_wiki/document_normalization/units.py": "a65813c07427c50c4a8d618e58bbf16d400519e7f8c4d190946815f94b9162c5",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "97eca82a8472c167b7b1cd065eae154dca2e7019b77649ccc748e8fadfbb627a",
+    "tests/unit/document_understanding_root/test_normalization_version_capability.py": "596cb0736ab8367a153d462526f6cb33ec3b05973f1a206f0c14eb958f284860"
+  },
+  "receipts": {
+    "red.xml": {
+      "sha256": "a775e924cf5b3667f3e70136ef6e67c407c962e797ace3a2698096fb01540c3f",
+      "tests": 17,
+      "failures": 6,
+      "errors": 0,
+      "skipped": 0
+    },
+    "first-green.xml": {
+      "sha256": "24230d6bdf666df6e32bc19593e79687a5f32ea7f6e5db9e199b799aef117396",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "related-attempt.xml": {
+      "sha256": "c1521455f2158cf548b9a5e248f22cd24a7744cc17870617a9d337276658df19",
+      "tests": 66,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "green.xml": {
+      "sha256": "f56ebc242f361265cf1e6995f553aef8fd568590ce3b6e2248e687459f97c733",
+      "tests": 58,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "red_note": "Recorded before implementation: 6 failed, 11 passed; test file was subsequently formatted without semantic change. Byte hash of pre-format red test was not captured.",
+  "checks": {
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS (3 files)",
+    "mypy": "PASS (2 source files)",
+    "git_diff_check": "PASS"
+  },
+  "adjacent_failures": [
+    {
+      "test": "tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence",
+      "observed": "PermissionError writing sandbox Temp marker before production work; no product assertion reached.",
+      "classification": "environment failure; not accepted as product pass"
+    },
+    {
+      "test": "tests/integration/test_docx_parser_public_history.py::test_docx_new_parser_preserves_old_public_history_and_creates_distinct_generation",
+      "observed": "Old 1.0.0 producer stage failed with one unknown loopback model reservation before current parser stage. Fixture cleaned its catalog/logs; exact transport/caller reason was not retained in the pytest output. Separately, source still asserts current DOCX_PARSER_VERSION == 1.1.0.",
+      "classification": "full integration not passed; ROOT to diagnose actual caller failure and update old current-version expectation for 1.2.0 in owned integration scope"
+    }
+  ],
+  "cleanup_sha256": "ad9f3a049ffdbf0b3568904b9ed7f4afd87f49d69b2fcd1ee1d66438f8d79ce1",
+  "boundaries": [
+    "No changes to factory, batch, parser algorithms, PWF, gold, config, originals, Git index or commits.",
+    "Actual worker create_runtime is used twice, with a fresh normalizer on reconstruction; evidence is JSON serialized and reloaded. This is runtime/port recovery, not OS process crash or complete paid summary/cache-publication acceptance.",
+    "The worker fixture catalog/run contains its existing isolated TXT fixture; the test-generated DOCX is supplied directly through the captured real normalization port. It does not assert DOCX catalog registration or job execution.",
+    "Adjacent public-history test used a local synthetic loopback HTTP model fixture only; no external model or paid service was called."
+  ]
+}

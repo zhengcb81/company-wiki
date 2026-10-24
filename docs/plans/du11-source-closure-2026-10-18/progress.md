@@ -796,3 +796,35 @@ source-value首批25个中性测试实际18F/7P（2.90s）后实现25P（2.18s�
 ## 2026-10-24 五family正常发布完成
 
 源码912f6fbd及已独审兼容基线c990e389正常推送成功，未绕hook。完整8216P/24既有skip（318.17s），契约146P（36.29s）；精确CI40090199646：completed/success。见review/market-family-upgrade-20261024/publication.json。25原件有界阅读/五family组件61独审/兼容112补审的scope分别保留；四样本真实内容仍3FAIL/1PARTIAL、正式摘要/cache/RF未通过，不将工程绿当准确率提升。当前按M1–M5继续，既有raw/旧gold/旧case不改，0新模型调用/0provider下载。
+
+
+## 2026-10-24 继续M1/M2共因实施
+
+上一目标回合是实际进展：五family发布及精确CI成功、PWF收尾已推送a8386389。当前核对主线仍active，M1交原baseline独立读源专家形成新development gold作者包（不自签验收、不改旧gold），ROOT同时先TDD修DOCX/TXT原生匿名轮次观察与连续段落。真实Gbits116段/19选中、97无经营信号拒绝已实查；路由缺陷不是唯一共因，晚段计划限定仍需内容复验。预算按最新唯一config/resource_budget.yaml的10M/$20，不按目标历史2M重置。无模型/下载，其他作者范围不改。
+
+
+## 2026-10-24 M1/M2实作中间证据
+
+M1四份development新版源侧gold作者包保留47旧ID/importance及错误反例，新增至51；独审真实读源发现漏09:41“它不像”否定桥、Azure完整移出/旧新口径和totalCompany nochange等，作者已修并保留v1及逐字段历史，最终139锚点/151错误断言/85缺joint反例作者QA通过，独审仍进行中，不自签acceptance。
+
+M2首轮真实RED7F/8P（首次错误pipeline调用夹具另留10F/5P历史）；DOCX1.2/TXT0.4共享native timestamped speaker观察、unknown机构角色、连续段落、不同source分隔、标题需真实多speaker证据已实施。首44P/4F揭示版本验证重复和旧预期，统一require_parser_version并保留旧1.0/1.1及0.3.1；57相关P。额外原生正文/inline end、trimmed offsets、空table边界3F/16P→57相关P。Ruff初1测试E702已格式化，mypy初2类型问题已修→374源文件0错。
+
+真实吉比特：原生轮次/路由修复先单独观察19段不变；同源经营意向共因修复（无数字plan→action→business-object，未知阶段不升actual，有限grammar拒借员工/现金/邻句名词）首7F/7P→33P，另2反例已补；READING_DISCLOSURE_SCAN_PASSES 3→4用于预扣新增扫描，原16M不提高。最新真实23段/8230UTF8字节/23映射，oldgold五critical字面源锚点1→5、overall仍FAIL；新增5/6/16/89段原文实读确认未来存量运营、企稳不确定性、未落地更新和降低买量依赖均在，ASR“会不会”原话不改。不是新gold/模型/公司验收。源码和原件SHA冻结见m2-intent-real-selection/replay-binding.json。M2相关集中测试同一82717句柄仍运行；独审由未参与实现者进行，当前不写其范围。不付费/不下载/不改生产配置。
+
+
+## 2026-10-24 M1验收与M2独审根因收敛
+
+M1独立源侧审查完成：四新development gold共51事实/139原文锚点，102P，旧47ID/importance/false assertions和v1修订历史完整保留；旧输出按新gold仍PARTIAL/FAIL/FAIL/FAIL，未将金标修订当产品通过。
+
+M2独审集中候选382P/3F，两个失败共同根因是clear重置closed导致文末附录重新获得speaker，已使物理边界仅clear active；第三项旧测试只要求限制在context，已强化成每个left的事实support及实际source card必须保留right，而非回退产品。匿名轮次、动作吞词、业务名词中心词、计划限定漏入请求、重复版本白名单均在各自共用owner修复。中文短句观察复用同一去标签substantive函数，空label/单汉字不能冒充正文。最终独审仍进行，既有失败保留。
+
+ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及独审工具夹具错误各自留证，不能累加成最终测试数。版本窄修58P证据只签actual factory→normalization→JSON/replay，完整DOCX历史/当前cache测试曾在旧1.0的本机HTTP阶段unknown reservation，现独立诊断中；不归咎费用耗尽，也不代签生命周期通过。
+
+最终冻结源码53f891204a9cbf573fe6babb22d699a46ceba7c56a05bc0a1d2b72ff4d36f593下四真实文档回放23/30/96/7全部精确映射，原件SHA不变/0下载/0模型。Gbits旧critical源锚点5/5、叙述7/9，overall仍FAIL；HK中报/US附件缺口和稀疏季报噪声仍保留。源侧回归不是正式摘要/cache/RF验收。最终回放见m2-final-real-selection，后续若源码变动须重新绑定。
+
+
+## 2026-10-24 M2最终独审与真实生命周期通过，待正常发布
+
+最终独审386P/31.14s（47独立反控），全374源码及真实Gbits首尾SHA一致，未修内部发现0。ROOT最终Ruff通过/mypy374源文件0错。真实DOCX public-history完整CLI/worker：旧1.0正式生产、历史resume不改DB/原artifact/预算，新1.2独立generation、当前cache复用0新增调用通过（1P/43.58s，合成本机HTTP）。sandbox内旧1.0阶段unknown reservation同一测试失败保留；在标准本机loopback权限下同测试通过，具体transport异常未单独保留，不宣称费用不足/产品预算修复。此前只签factory58P的边界已补，仍不代签正式配置真实公司摘要/cache。
+
+原生结束状态、NP head与限定事实support的最终修复已纳入此冻结版；四真实A电话会/稀疏季报、HK中报、US附件回放与独审源码文件逐SHA核对一致。原件未改，源选择oldgold状态FAIL/PARTIAL/FAIL/FAIL保留。自有三临时目录已恢复absent，详见m2-root-receipt.json。正常commit/push待执行，尚未宣称远端CI通过。

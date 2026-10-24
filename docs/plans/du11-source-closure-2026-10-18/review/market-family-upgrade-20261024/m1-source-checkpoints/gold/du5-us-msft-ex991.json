@@ -1,0 +1,439 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-us-msft-ex991",
+  "market": "US",
+  "company": "MICROSOFT CORP",
+  "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+  "scope": "development",
+  "language": "en",
+  "support_set_frozen_before_output": false,
+  "expected_route_families": [
+    "sec_exhibit",
+    "presentation_deck"
+  ],
+  "notes": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+  "facts": [
+    {
+      "id": "fy27-two-reporting-segments",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "count",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "Beginning with FY27, we will transition from our current three reporting segments, Productivity and Business Processes, Intelligent Cloud, and More Personal Computing, to two segments: Agents and Infra and Devices and Consumer.",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "two segments",
+        "Agents and Infra",
+        "Devices and Consumer",
+        "FY27"
+      ],
+      "must_not_assert": [
+        "Microsoft will report three segments in FY27",
+        "Azure and Microsoft 365 are separate reporting segments",
+        "Agents and Infra is a product line, not a reportable segment"
+      ],
+      "reason": "完整will transition/FY27/旧三段/新两段同句，不用只旧三段短语当充分OR；保留前瞻而非已完成。"
+    },
+    {
+      "id": "prior-three-segments-retired",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "count",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "Beginning with FY27, we will transition from our current three reporting segments, Productivity and Business Processes, Intelligent Cloud, and More Personal Computing, to two segments: Agents and Infra and Devices and Consumer.",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Productivity and Business Processes",
+        "Intelligent Cloud",
+        "More Personal Computing",
+        "three"
+      ],
+      "must_not_assert": [
+        "More Personal Computing remains a FY27 segment",
+        "The prior structure had two segments",
+        "Intelligent Cloud continues as a FY27 reportable segment"
+      ],
+      "reason": "来源为FY27将转换，旧三段名字必须与transition语境同在，不能表述为已经完成全部更改。"
+    },
+    {
+      "id": "commercial-bookings-definition",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Investor Metric Definitions",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Commercial bookings growth: for\ncommercial products and cloud services, sum of revenue growth, plus change in balance of unearned revenue plus the change in contracted not billed balance",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "sum of revenue growth",
+        "unearned revenue",
+        "contracted not billed",
+        "commercial",
+        "FY27"
+      ],
+      "must_not_assert": [
+        "Commercial bookings equals new contract value signed in the quarter",
+        "Bookings covers consumer and all revenue",
+        "Bookings is a GAAP revenue amount"
+      ],
+      "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+    },
+    {
+      "id": "commercial-rpo-definition",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Investor Metric Definitions",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Commercial remaining performance obligation: commercial portion of revenue allocated to\nremaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "commercial portion",
+        "remaining performance obligations",
+        "unearned revenue",
+        "future periods",
+        "FY27"
+      ],
+      "must_not_assert": [
+        "Remaining performance obligation is revenue recognized in the current quarter",
+        "RPO includes consumer revenue",
+        "RPO equals commercial bookings"
+      ],
+      "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+    },
+    {
+      "id": "seat-growth-includes-github",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Metric Updates",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Microsoft 365 commercial seat growth metric definition has been updated to include paid GitHub seats",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Microsoft 365 commercial seat growth: the number of Microsoft 365 Commercial seats and GitHub Cloud seats at end of period where seats are paid users\ncovered by a Microsoft 365 Commercial subscription or GitHub subscription",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "paid GitHub seats",
+        "paid users",
+        "end of period",
+        "Microsoft 365 Commercial seats",
+        "FY27"
+      ],
+      "must_not_assert": [
+        "Seat growth counts only Microsoft 365 Commercial seats",
+        "Seats are a revenue measure",
+        "Seat growth of 7% is a FY27 result"
+      ],
+      "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+    },
+    {
+      "id": "fy27q1-outlook-mechanical-only",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "company_statement",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Q1 Outlook",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "FY27 Q1",
+        "mechanical adjustments only",
+        "outlook",
+        "July 29, 2026"
+      ],
+      "must_not_assert": [
+        "Microsoft issued new FY27 Q1 guidance on September 2, 2026",
+        "The adjusted outlook revises total-company revenue guidance",
+        "Management raised or cut its FY27 Q1 outlook"
+      ],
+      "reason": "指引期次+旧指引机械改列联合；不能作为9月新上调/下调指引。"
+    },
+    {
+      "id": "azure-fy27q1-growth-outlook",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "ratio",
+      "modality": "plan",
+      "role": "company_statement",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Q1 Outlook",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud. Healthcare and Life Sciences cloud will move to the new Industry\nsolutions cloud metric.",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Adjusted Outlook Agents and Infra",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Azure revenue Growth of 44% to 45% in constant currency, with FX expected to decrease revenue by less than 1 point",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Azure",
+        "44% to 45%",
+        "constant currency",
+        "Growth",
+        "FY27 Q1",
+        "Adjusted Outlook",
+        "Healthcare and Life Sciences cloud",
+        "Industry solutions cloud"
+      ],
+      "must_not_assert": [
+        "Azure grew 44% to 45% in FY27 Q1 actual results",
+        "44% to 45% is a GAAP reported growth rate",
+        "This is full-year FY27 Azure growth"
+      ],
+      "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+    },
+    {
+      "id": "total-company-fy27q1-revenue-outlook",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "plan",
+      "role": "company_statement",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Q1 Outlook",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Total Company Revenue of $89.85 to $90.95 billion",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Adjusted Outlook Foreign currency impact Decrease to total\nrevenue growth by less than 1 point, with roughly 1 point in Agents and Infra, and no meaningful impact in Devices and Consumer No meaningful impact to COGS or operating expense growth Total Company No change to outlook",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "$89.85 to $90.95 billion",
+        "Total Company",
+        "Revenue",
+        "FY27 Q1",
+        "mechanical adjustments only",
+        "No change to outlook"
+      ],
+      "must_not_assert": [
+        "Microsoft's FY27 full-year revenue will be $89.85 to $90.95 billion",
+        "FY27 Q1 actual revenue was $90 billion",
+        "This figure is restated on the new segment basis"
+      ],
+      "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+    },
+    {
+      "id": "restated-segment-fy26-revenue",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "Restated Historical Financials",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "($ in millions) 2026 2025 Agents\nand Infra Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2 Q3 Q4 Fiscal Year Revenue $61,672 $64,441 $67,438 $74,576 $268,127",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Devices and Consumer Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2\nQ3 Q4 Fiscal Year Revenue $16,001 $16,832 $15,448 $15,431 $63,712",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "$268,127",
+        "$63,712",
+        "in millions",
+        "Fiscal Year",
+        "2026",
+        "Restated"
+      ],
+      "must_not_assert": [
+        "$268,127 million is Microsoft's FY27 revenue",
+        "These are as-reported segment figures",
+        "Devices and Consumer revenue exceeds Agents and Infra revenue"
+      ],
+      "reason": "精确历史财务表为correctness_if_emitted，critical与错误年份/单位反例不变；两分部金额+FY26/FY25列头+inmillions+重述背景联合，不能一分部OR替代两者。"
+    },
+    {
+      "id": "forward-looking-caveat",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "company_statement",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "forward-looking statements, which are any predictions, projections, or other statements about future events.",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "Actual results could\nmaterially differ because of factors discussed in the Risk Factors section",
+            "location_kind": "document"
+          },
+          {
+            "exact_quote": "We do not undertake any duty to update\nforward-looking statements.",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "forward-looking statements",
+        "predictions, projections",
+        "not undertake any duty to update",
+        "materially differ"
+      ],
+      "must_not_assert": [
+        "The outlook figures are guaranteed outcomes",
+        "Microsoft commits to update these statements",
+        "Actual results will match the projections"
+      ],
+      "reason": "风险不确定/预测属性/不负更新义务三者AND，只有风险一句不能替代不更新条款；仍critical document_meta。"
+    },
+    {
+      "id": "exhibit-identity-fy27-segments-metrics",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "FY27 Segments and Investor Metrics\nSeptember 2026 Exhibit 99.1",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Exhibit 99.1",
+        "FY27 Segments and Investor Metrics",
+        "September 2026"
+      ],
+      "must_not_assert": [
+        "This is a Form 10-K annual report",
+        "This is Microsoft's FY27 results release",
+        "The document is dated September 2, 2026 on its cover"
+      ],
+      "reason": "标题+月年+exhibit同封面，不能只标题或只月年OR，也不能从文件名回填封面具体9月2日。"
+    },
+    {
+      "id": "growth-comparison-fiscal-basis",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "All growth comparisons in this\npresentation relate to the corresponding period of last fiscal year unless otherwise noted. Numbers may not foot due to rounding.",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "corresponding period of last fiscal year",
+        "unless otherwise noted",
+        "rounding"
+      ],
+      "must_not_assert": [
+        "Growth rates compare with the prior quarter",
+        "Growth comparisons use calendar-year periods",
+        "All tables foot exactly"
+      ],
+      "reason": "同比财年/除非另说明及舍入限制联合；不得推成季度环比、日历年或强制每表精确加总。"
+    }
+  ],
+  "support_set_digest": "cfa99e5691b769118d87f7e728ace42f9d51480d411ab21b4f8bdf6b818a3b8e"
+}

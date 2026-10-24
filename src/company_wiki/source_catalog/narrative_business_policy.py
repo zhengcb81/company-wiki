@@ -47,7 +47,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/17"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/18"
 READING_BUSINESS_SCAN_PASSES = 6 + READING_DISCLOSURE_SCAN_PASSES
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"

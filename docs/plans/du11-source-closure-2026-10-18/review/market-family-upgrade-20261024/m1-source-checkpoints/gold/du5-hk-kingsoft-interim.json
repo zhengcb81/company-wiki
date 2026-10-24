@@ -1,0 +1,628 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-hk-kingsoft-interim",
+  "market": "HK",
+  "company": "金山雲",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "scope": "development",
+  "language": "zh-hant",
+  "support_set_frozen_before_output": false,
+  "expected_route_families": [
+    "interim",
+    "hk_interim"
+  ],
+  "notes": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+  "facts": [
+    {
+      "id": "total-revenue-h1-2025",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "截至六月三十日止六個月\n同比變動\n二零二四年\n二零二五年\n人民幣千元\n人民幣千元\n%",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "收入\n3,667,464\n4,319,204\n17.8%",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "4,319,204",
+        "人民幣千元",
+        "17.8%",
+        "3,667,464"
+      ],
+      "must_not_assert": [
+        "總收入為人民幣4,319.2千元",
+        "總收入按年下降17.8%",
+        "總收入4,319,204百萬元"
+      ],
+      "reason": "精确财报总额属correctness_if_emitted，与CN季报普通财务数同责；保留critical与全部单位/负方向反例。圆整百万元文字不是精确千元表的充分OR。"
+    },
+    {
+      "id": "segment-revenue-split",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "（除股數和每股數據外，所有金額以千計）\n截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+            "page": 12,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "公有雲服務\n2,421,912\n2,978,788\n415,823",
+            "page": 12,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+            "page": 12,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2,978,788",
+        "1,340,416",
+        "公有雲服務",
+        "行業雲服務",
+        "千計"
+      ],
+      "must_not_assert": [
+        "公有雲服務收入為人民幣2,978.8千元",
+        "行業雲服務收入高於公有雲服務",
+        "行業雲服務收入按年增長23.0%"
+      ],
+      "reason": "本项仅精确分业务金额，条件输出与CN财务金额同责；两行+三币种/年度列头联合。业务分类/驱动另有required检查，不因降精度假称整业务缺失。"
+    },
+    {
+      "id": "net-loss-us-gaap-widened",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "截至六月三十日止六個月\n同比變動\n二零二四年\n二零二五年\n人民幣千元\n人民幣千元\n%",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "淨虧損\n(717,334)\n(772,973)\n7.8%",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "(772,973)",
+        "717,334",
+        "淨虧損",
+        "7.8%",
+        "千元"
+      ],
+      "must_not_assert": [
+        "淨虧損收窄7.8%",
+        "公司錄得淨利潤772,973千元",
+        "淨虧損為人民幣772,973百萬元"
+      ],
+      "reason": "亏损精确数为条件输出，critical/数字反例不降级；金额符号、同比、会计基础、期间与币种同包，经营亏损不能替代净亏损。"
+    },
+    {
+      "id": "us-gaap-basis-not-ifrs",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "未經審計中期簡明財務報表乃根據美國公認會計準則編製，在若干方面有別於《國際財務報告準則》",
+            "page": 67,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "美國公認會計準則",
+        "《國際財務報告準則》",
+        "未經審計"
+      ],
+      "must_not_assert": [
+        "財務報表根據《國際財務報告準則》編製",
+        "財務報表已經審計",
+        "按IFRS編製並無重大差異"
+      ],
+      "reason": "会计框架/审计状态为document_meta disposition_context，保留critical；IFRS对账句自身同时支持USGAAP与差异，不以仅USGAAP一句代替完整差异命题。"
+    },
+    {
+      "id": "unit-and-fx-convention",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "（除股數和每股數據外，所有金額以千計）\n截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+            "page": 12,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+            "page": 45,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "美元金額乃為方便讀者而呈列，並於二零二五年六月三十日在紐約市就經紐約聯邦儲備銀行海關核證的\n人民幣電匯轉賬以人民幣7.1636元兌1.00美元的中午買入匯率換算。概不表示人民幣金額可以或可能\n按該匯率兌換為美元。",
+            "page": 45,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "千計",
+        "7.1636",
+        "人民幣千元",
+        "美元",
+        "概不表示"
+      ],
+      "must_not_assert": [
+        "所有金額以百萬元計",
+        "美元金額按期末官方匯率7.1636折算為實際兌換",
+        "每股數據亦以千元列示"
+      ],
+      "reason": "千元列头、股数例外与便捷美元换算/不可当实际兑换须联合，属于数值消费的元数据责任，critical不变。"
+    },
+    {
+      "id": "gross-margin-decline",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。",
+            "page": 13,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+            "page": 13,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "毛利",
+        "15.2%",
+        "16.7%",
+        "服務器成本增加",
+        "前期成本"
+      ],
+      "must_not_assert": [
+        "毛利率由15.2%提升至16.7%",
+        "毛利下降7.4%",
+        "毛利率提高因AI業務擴張"
+      ],
+      "reason": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。"
+    },
+    {
+      "id": "adjusted-ebitda-nongaap",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_statement",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "非公認會計準則EBITDA為人民幣724.6百萬元（101.1百萬美元），較二零二四年同期的人民幣93.8百萬元增\n加672.6%。",
+            "page": 14,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "非公認會計準則",
+        "724.6",
+        "101.1",
+        "百萬元"
+      ],
+      "must_not_assert": [
+        "經調整EBITDA為美國公認會計準則指標",
+        "公司經營利潤為724.6百萬元",
+        "經調整EBITDA為人民幣724.6千元"
+      ],
+      "reason": "普通非GAAP财务金额为correctness_if_emitted，若输出仍需非GAAP/币种/规模/期间，不强制叙述引入财务盈利指标。"
+    },
+    {
+      "id": "capex-vs-revenue",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "investment",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二四年及二零二五年六月三十日止六個月\n未經審計中期簡明合併現金流量表\n（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+            "page": 41,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+            "page": 41,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "投資活動產生的現金流量\n購買物業及設備及預付款項\n(1,866,298)\n(1,483,742)\n(207,123)",
+            "page": 41,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "1,483,742",
+        "1,866,298",
+        "千元",
+        "購買物業及設備"
+      ],
+      "must_not_assert": [
+        "資本開支1,483,742百萬元",
+        "資本開支即公司收入",
+        "投資活動為公司帶來現金流入1,483,742千元"
+      ],
+      "reason": "现金购置支出只有投资现金流原行及完整列头支持；删除折旧摊销替代，不把cash capex与费用/收入互证。critical与全部错误数字反例保留，条件输出与其他财务数同责。"
+    },
+    {
+      "id": "no-material-investments-or-capex-plans",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "investment",
+      "modality": "negation",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+            "page": 15,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "並無",
+        "重大投資",
+        "5%",
+        "資本資產計劃"
+      ],
+      "must_not_assert": [
+        "本集團持有佔總資產5%以上的重大投資",
+        "本集團計劃未來進行重大資本開支",
+        "本集團有重大收購計劃"
+      ],
+      "reason": "现有重大投资阈值与未来重大计划两否定须同包，不以不完整前半句替代；不将普通AI购置活动与公告重大投资计划混同。"
+    },
+    {
+      "id": "h2-2025-business-outlook",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "management_prepared",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。",
+            "page": 11,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "展望下半年",
+        "將",
+        "戰略",
+        "AI"
+      ],
+      "must_not_assert": [
+        "公司已完成全面AI能力提升",
+        "公司在上半年實現高質量盈利",
+        "公司將退出研發投入"
+      ],
+      "reason": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。"
+    },
+    {
+      "id": "single-operating-segment",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。",
+            "page": 50,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "本集團的大部分收入來自中國內地，且本集團的大部分長期資產位於中國內地，因此並無呈列地區分\n部。",
+            "page": 50,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "一個經營分部",
+        "並無呈列地區分"
+      ],
+      "must_not_assert": [
+        "公司披露公有雲與行業雲兩個報告分部",
+        "公司按地區披露海外分部收入",
+        "主要經營決策者按分部評估業績"
+      ],
+      "reason": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+    },
+    {
+      "id": "related-party-revenue",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+            "page": 64,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+            "page": 64,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "收益：\n 向小米集團提供公有雲服務\n490,133\n772,761\n107,873\n 向金山軟件集團提供公有雲服務\n136,596\n173,094\n24,163\n 向其他關聯方提供公有雲服務\n232\n336\n47\n 向小米集團提供行業雲服務\n67,117\n171,315\n23,915\n 向金山軟件集團提供行業雲服務\n7,996\n7,855\n1,097\n 向其他關聯方提供行業雲服務\n16\n–\n–\n 向其他關聯方提供其他服務\n291\n97\n14\n702,381\n1,125,458\n157,109",
+            "page": 64,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "小米集團",
+        "772,761",
+        "1,125,458",
+        "千元"
+      ],
+      "must_not_assert": [
+        "關聯方收入為人民幣1,125,458百萬元",
+        "關聯方收入按年下降",
+        "向小米集團提供行業雲服務772,761千元"
+      ],
+      "reason": "条件财务金额：小米公有云772761与全部关联方收入1125458分母不同；完整科目/列头联合，不把总关联收入说成小米收入。"
+    },
+    {
+      "id": "interim-period-meta",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "截至二零二五年六月三十日止六個月",
+        "未經審計"
+      ],
+      "must_not_assert": [
+        "報告期為截至二零二五年六月三十日止十二個月",
+        "數據為全年數據"
+      ],
+      "reason": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。"
+    },
+    {
+      "id": "cloud-revenue-operating-drivers",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。",
+            "page": 9,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "AI",
+        "行業雲項目",
+        "主動縮減",
+        "CDN",
+        "抵銷"
+      ],
+      "must_not_assert": [
+        "金山雲所有業務增長均來自AI且沒有抵銷因素",
+        "CDN服務擴張是收入增長的主要原因"
+      ],
+      "reason": "源侧新增关键经营因果：AI客户与行业云扩张、主动缩减CDN的抵销必须同时保留；补正金融数责任拆分，不以降分母取绿。"
+    },
+    {
+      "id": "cloud-service-growth-causal-split",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "來自公有雲服務的收入由二零二四年同期的人民幣2,421.9百萬元增加23.0%至人民幣2,978.8百萬元\n（415.8百萬美元）。該同比增加主要是由於AI相關服務增長。",
+            "page": 13,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4\n百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+            "page": 13,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "公有雲服務",
+        "AI相關服務增長",
+        "行業雲服務",
+        "IT需求",
+        "垂直行業客戶"
+      ],
+      "must_not_assert": [
+        "行業雲收入增長23.0%",
+        "公有雲增長全部因垂直行業方案複製且與AI無關"
+      ],
+      "reason": "按真实业务主体分开增长驱动，避免兄弟业务归因串线；数字在源包中保留但不要求把全表精度塞进叙述。"
+    },
+    {
+      "id": "idc-purchase-commitment-stage",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+            "page": 66,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "於二零二五年六月一日，本集團簽訂一份不可取消一年期互聯網數據中心服務協議，據此，本集團作出\n合同最低採購承諾，總金額為人民幣630,000元（87,945美元）。截至二零二五年六月三十日，剩餘採\n購承諾金額為人民幣576,101元（80,421美元）。",
+            "page": 66,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "二零二五年六月一日",
+        "不可取消一年期",
+        "服務協議",
+        "630,000",
+        "576,101",
+        "人民幣千元"
+      ],
+      "must_not_assert": [
+        "一年期IDC採購承諾已成為公司收入",
+        "金山雲已完成全部IDC服務採購履約",
+        "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+      ],
+      "reason": "保留原period-meta错误OR曾引用的采购责任为独立业务合同阶段，完整金额原话与全节千元说明联合，迁移原错误单位反例；不凭正文元字抹去全节单位，也不自造已履约/收入。"
+    }
+  ],
+  "support_set_digest": "6f533d0afe77c78cc951994a6c80a4898f10135214f02a663c9d451fea2e94a0"
+}

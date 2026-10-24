@@ -152,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "按market_family_upgrade.remaining_root_causes先修源侧语义检查点，再统一处理匿名电话会载体/指标定义与父子时间依赖/稀疏降噪；正式摘要/cache、RF实际采用与四审、新公司循环仍OPEN。",
+  "next_step_now": "M2独审386P、真实DOCX旧版本/当前worker/历史恢复/cache1P已通过，先正常提交推送，再推进M3/M4/M5与原annual14剩余，正式配置摘要/cache、RF四审及新公司循环仍OPEN。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -785,7 +785,7 @@
     "raw_copies": 0,
     "existing_family_policies": 24,
     "existing_facets": 14,
-    "remaining": "M1准确源侧语义金标；M2匿名电话会跨载体；M3定义/旧新基数/局部依赖；M4稀疏降噪；M5本地准备超限诊断；再真实摘要/cache/RF四审及未用于调规则的新公司。",
+    "remaining": "M1源侧development检查点已独审PASS；M2最终独审/批处理生命周期与发布收尾；M3定义/旧新基数/局部依赖；M4稀疏降噪；M5本地准备超限诊断；再真实摘要/cache/RF四审及未用于调规则的新公司。",
     "samples_sha_verified": 25,
     "source_sample_count_note": "13 initial + 9 DU5 + 3 supplemental; bounded targeted reading, not full 25-document acceptance",
     "independent_review": "review/market-family-upgrade-20261024/independent-final/report.json",
@@ -832,6 +832,37 @@
       "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
       "created_at": "2026-10-24T11:30:47Z",
       "updated_at": "2026-10-24T11:34:03Z"
+    },
+    "current_work": {
+      "M1": "PASS_SOURCE_DEVELOPMENT_GOLD_ONLY",
+      "M2": "INDEPENDENT_PASS_PUBLIC_HISTORY_PASS_PENDING_PUBLICATION",
+      "implementation": "review/market-family-upgrade-20261024/M2_IMPLEMENTATION.md",
+      "formal_summary_pass": false,
+      "M1_review": "review/market-family-upgrade-20261024/m1-independent/report.json",
+      "M1_facts": 51,
+      "M1_source_anchors": 139,
+      "M1_independent_tests_passed": 102,
+      "M2_concentrated_intermediate_passed": 530,
+      "M2_concentrated_existing_skips": 11,
+      "M2_final_real_selection": "review/market-family-upgrade-20261024/m2-final-real-selection/summary.json",
+      "M2_old_gold_statuses": [
+        "FAIL",
+        "PARTIAL",
+        "FAIL",
+        "FAIL"
+      ],
+      "M2_real_selected_spans": [
+        23,
+        30,
+        96,
+        7
+      ],
+      "M2_source_originals_unchanged": true,
+      "M2_formal_summary_or_RF_accepted": false,
+      "M2_review": "review/market-family-upgrade-20261024/m2-independent/report.json",
+      "M2_independent_passed": 386,
+      "M2_actual_public_history_passed": 1,
+      "M2_receipt": "review/market-family-upgrade-20261024/m2-root-receipt.json"
     }
   }
 }

@@ -1,0 +1,11 @@
+{
+  "workspace_temporary_directories": {
+    ".m2r": true,
+    ".m2g": true,
+    ".m2v": true,
+    ".m2c": true
+  },
+  "platform_relocated_failed_temp_paths_not_present_on_final_check": true,
+  "production_config_or_originals_written": false,
+  "external_api_or_paid_model_calls": 0
+}

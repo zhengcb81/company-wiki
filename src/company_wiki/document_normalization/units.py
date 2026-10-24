@@ -11,6 +11,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 import hashlib
 import json
+from types import MappingProxyType
 from typing import Any
 
 from company_wiki.source_catalog.narrative_document import NarrativeUnit
@@ -28,7 +29,7 @@ FORMAT_HTML = "html"
 FORMAT_PPTX = "pptx"
 FORMAT_DOCX = "docx"
 DOCX_LOCATOR_SCHEMA = "cwp-docx-body/1"
-DOCX_PARSER_VERSION = "1.1.0"
+DOCX_PARSER_VERSION = "1.2.0"
 LEGACY_DOCX_PARSER_VERSION = "1.0.0"
 
 HTML_LOCATOR_SCHEMA = "cwp-html-dom/1"
@@ -36,6 +37,31 @@ PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/2"
 LEGACY_PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/1"
 PPTX_PARSER_VERSION = "1.1.0"
 PPTX_OCR_PARSER_VERSION = "2.0.0"
+
+_SUPPORTED_PARSER_VERSIONS = MappingProxyType(
+    {
+        FORMAT_HTML: frozenset({PARSER_VERSION}),
+        FORMAT_PPTX: frozenset(
+            {PARSER_VERSION, PPTX_PARSER_VERSION, PPTX_OCR_PARSER_VERSION}
+        ),
+        FORMAT_DOCX: frozenset(
+            {LEGACY_DOCX_PARSER_VERSION, "1.1.0", DOCX_PARSER_VERSION}
+        ),
+    }
+)
+
+
+def supported_parser_versions(format_name: str | None = None) -> frozenset[str]:
+    """Owner capability for composition before MIME discovery and exact replay.
+
+    Without a format, return the union suitable for document-version pins.
+    Format validation still belongs to ``require_parser_version`` when the
+    actual MIME is known. Preserve the existing base-version fallback for
+    callers that use a non-specialized format name.
+    """
+    if format_name is None:
+        return frozenset().union(*_SUPPORTED_PARSER_VERSIONS.values())
+    return _SUPPORTED_PARSER_VERSIONS.get(format_name, frozenset({PARSER_VERSION}))
 
 
 def parser_version_for_format(format_name: str) -> str:
@@ -45,14 +71,7 @@ def parser_version_for_format(format_name: str) -> str:
 
 
 def require_parser_version(format_name: str, version: str) -> None:
-    allowed = (
-        {PARSER_VERSION, PPTX_PARSER_VERSION, PPTX_OCR_PARSER_VERSION}
-        if format_name == FORMAT_PPTX
-        else {LEGACY_DOCX_PARSER_VERSION, DOCX_PARSER_VERSION}
-        if format_name == FORMAT_DOCX
-        else {PARSER_VERSION}
-    )
-    if version not in allowed:
+    if version not in supported_parser_versions(format_name):
         raise ValueError("unsupported parser_version")
 
 
@@ -204,6 +223,7 @@ __all__ = [
     "PPTX_PARSER_VERSION",
     "PPTX_OCR_PARSER_VERSION",
     "parser_version_for_format",
+    "supported_parser_versions",
     "require_parser_version",
     "SOURCE_ROLE",
     "UNIT_ID_PREFIX",

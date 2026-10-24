@@ -1,0 +1,1449 @@
+{
+  "schema_version": "m1-author-evaluator-compatibility/1",
+  "scope": "synthetic_source_quote_fixtures_only",
+  "independent_acceptance": false,
+  "fact_count": 51,
+  "forbidden_assertion_cases": 151,
+  "joint_anchor_omission_cases": 85,
+  "existing_evaluator_only": true,
+  "cases": [
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "yy-flow-decline-premise",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司确认一念逍遥流水下滑后将回升",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司称竞品趋缓使流水回升",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司披露5-6月竞品上线导致流水下滑",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "steam-activity-premise",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司披露日活跃人次过万",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司确认活跃用户明显滑坡",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司公布Steam活跃数据",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "lei-ting-profit-analyst-inference",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司披露雷霆Q3利润1.17亿、Q4利润1.8亿",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司确认Q4利润环比大幅提升是经营改善",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "yy-roi-decline-actual",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "ROI去年上半年明显上升",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司自21年上线起持续加大买量",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "二三年下半年主动增加了买量支出",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 3,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "buydown-cut-and-stock-operation-plan",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司已停止买量并完成存量运营转型",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "买量依赖已消除",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司已不再投放广告",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "buydown-no-return-negation",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "买量会回到原来的水平",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "买量水平会随版本回升到历史高位",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司未对买量水平表态",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司明确承诺买量不会再回到原有水平",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司明确承诺买量一定回到原有水平",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "yy-stabilize-target-uncertain",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司预计产品将在新水平企稳",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司承诺流水企稳时间表",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司判断产品已经稳定",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "outpost-update-plan-uncommitted",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司已排定后续更新版本计划",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司将在Steam活动节点确定推出大更新",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "重装前哨更新路线图已落地",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "outpost-buyout-revenue-recognition",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "重装前哨收入按道具消耗递延确认",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "买断收入全额即时确认且无退货准备",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司披露了递延收入金额",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司明确披露了名为退款负债的金额",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "原文已经确认利息负债就是预计负债",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "outpost-stage-problems-resolved",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "技术卡顿问题已全部修复",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "重装前哨口碑已完全恢复",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "产品问题已经彻底解决",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "strategy-category-unchanged-negation",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司今年将大幅调整品类战略",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司决定转型新品类",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司战略方向发生重大变化",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "yy-user-base-scale",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司披露用户数2000万",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司公布月活/注册用户精确规模",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "用户规模为2000人",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "buydown-dependence-reduction-intent",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司已消除买量依赖",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "说话人2称已经停止广告投放",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "report-period-unaudited-identity",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "报告期为2026年上半年或2026年3月单月",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "该报告于2026年3月31日发布",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "报告期为2025年第一季度",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "statements-unaudited-no-new-standards",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "财务报表已经过审计",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "审计意见为标准无保留意见",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "2026年起首次执行新会计准则并调整年初报表",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "q1-revenue-yoy-decline",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "营业收入同比增长2.29%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "attributable-net-profit-q1",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "归母净利润为383,647,847.96元（合并净利润）",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "归母净利润同比增长6.05%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "366,686,734.14元覆盖2026年1—3月与2025年全年比较",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "deducted-net-profit-and-nonrecurring-total",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "扣非净利润为366,686,734.14元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "非经常性损益合计25,529,496.96元是期末余额",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "扣非净利润同比下降9.97个百分点",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "operating-cash-flow-collapse",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "经营活动现金流量净额同比下降84.16元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "现金流量净额为负或流出",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "675,490,380.59元为本报告期金额",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "cash-flow-drop-driver",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "现金流量下降主要系采购支出增加",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司称报告期内经营情况无其他重要变化因而收入下降",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "推广费减少导致现金流出下降",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "eps-basic-diluted-unit",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "基本每股收益为0.93元/股，较上年增长6.06%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "每股收益0.93元为年化口径或2026年上半年累计口径",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "稀释每股收益高于基本每股收益",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "total-assets-point-in-time",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "总资产8,912,125,388.70元为本报告期新增或季度流量",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "对比期为上年同期（2025年3月31日）",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "总资产较年初下降5.00%",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "share-capital-and-buyback-holdings",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "公司在报告期内增发了约100万股",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "回购专户持股3,757,848股占总股本9.5%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "395,976,008.00为上年度末（2025年12月31日）的股本数",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "total-revenue-h1-2025",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "總收入為人民幣4,319.2千元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "總收入按年下降17.8%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "總收入4,319,204百萬元",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "segment-revenue-split",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "公有雲服務收入為人民幣2,978.8千元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "行業雲服務收入高於公有雲服務",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "行業雲服務收入按年增長23.0%",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "net-loss-us-gaap-widened",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "淨虧損收窄7.8%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司錄得淨利潤772,973千元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "淨虧損為人民幣772,973百萬元",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "us-gaap-basis-not-ifrs",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "財務報表根據《國際財務報告準則》編製",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "財務報表已經審計",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "按IFRS編製並無重大差異",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "unit-and-fx-convention",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "所有金額以百萬元計",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "美元金額按期末官方匯率7.1636折算為實際兌換",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "每股數據亦以千元列示",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 3,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "gross-margin-decline",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "毛利率由15.2%提升至16.7%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "毛利下降7.4%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "毛利率提高因AI業務擴張",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "adjusted-ebitda-nongaap",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "經調整EBITDA為美國公認會計準則指標",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司經營利潤為724.6百萬元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "經調整EBITDA為人民幣724.6千元",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "capex-vs-revenue",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "資本開支1,483,742百萬元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "資本開支即公司收入",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "投資活動為公司帶來現金流入1,483,742千元",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "no-material-investments-or-capex-plans",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "本集團持有佔總資產5%以上的重大投資",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "本集團計劃未來進行重大資本開支",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "本集團有重大收購計劃",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "h2-2025-business-outlook",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司已完成全面AI能力提升",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司在上半年實現高質量盈利",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司將退出研發投入",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "single-operating-segment",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "公司披露公有雲與行業雲兩個報告分部",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公司按地區披露海外分部收入",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "主要經營決策者按分部評估業績",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "related-party-revenue",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "關聯方收入為人民幣1,125,458百萬元",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "關聯方收入按年下降",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "向小米集團提供行業雲服務772,761千元",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "interim-period-meta",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "報告期為截至二零二五年六月三十日止十二個月",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "數據為全年數據",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "cloud-revenue-operating-drivers",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "金山雲所有業務增長均來自AI且沒有抵銷因素",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "CDN服務擴張是收入增長的主要原因",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "cloud-service-growth-causal-split",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "行業雲收入增長23.0%",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "公有雲增長全部因垂直行業方案複製且與AI無關",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "fact_id": "idc-purchase-commitment-stage",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "一年期IDC採購承諾已成為公司收入",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "金山雲已完成全部IDC服務採購履約",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "採購承諾金額為人民幣630,000元整（非千元列示基準）",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "fy27-two-reporting-segments",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Microsoft will report three segments in FY27",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Azure and Microsoft 365 are separate reporting segments",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Agents and Infra is a product line, not a reportable segment",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "prior-three-segments-retired",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "More Personal Computing remains a FY27 segment",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "The prior structure had two segments",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Intelligent Cloud continues as a FY27 reportable segment",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "commercial-bookings-definition",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Commercial bookings equals new contract value signed in the quarter",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Bookings covers consumer and all revenue",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Bookings is a GAAP revenue amount",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "commercial-rpo-definition",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Remaining performance obligation is revenue recognized in the current quarter",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "RPO includes consumer revenue",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "RPO equals commercial bookings",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "seat-growth-includes-github",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Seat growth counts only Microsoft 365 Commercial seats",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Seats are a revenue measure",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Seat growth of 7% is a FY27 result",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "fy27q1-outlook-mechanical-only",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Microsoft issued new FY27 Q1 guidance on September 2, 2026",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "The adjusted outlook revises total-company revenue guidance",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Management raised or cut its FY27 Q1 outlook",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "azure-fy27q1-growth-outlook",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Azure grew 44% to 45% in FY27 Q1 actual results",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "44% to 45% is a GAAP reported growth rate",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "This is full-year FY27 Azure growth",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 3,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 4,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "total-company-fy27q1-revenue-outlook",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "Microsoft's FY27 full-year revenue will be $89.85 to $90.95 billion",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "FY27 Q1 actual revenue was $90 billion",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "This figure is restated on the new segment basis",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 3,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "restated-segment-fy26-revenue",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "$268,127 million is Microsoft's FY27 revenue",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "These are as-reported segment figures",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Devices and Consumer revenue exceeds Agents and Infra revenue",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "forward-looking-caveat",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "The outlook figures are guaranteed outcomes",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Microsoft commits to update these statements",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Actual results will match the projections",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 1,
+          "support_status": "FAIL"
+        },
+        {
+          "omitted_anchor_index": 2,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "exhibit-identity-fy27-segments-metrics",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "PASS",
+      "negative_cases": [
+        {
+          "forbidden": "This is a Form 10-K annual report",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "This is Microsoft's FY27 results release",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "The document is dated September 2, 2026 on its cover",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": [
+        {
+          "omitted_anchor_index": 0,
+          "support_status": "FAIL"
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "fact_id": "growth-comparison-fiscal-basis",
+      "full_source_support_status": "PASS",
+      "positive_basis_status": "NOT_EVALUATED",
+      "negative_cases": [
+        {
+          "forbidden": "Growth rates compare with the prior quarter",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "Growth comparisons use calendar-year periods",
+          "caught_by_existing_evaluator": true
+        },
+        {
+          "forbidden": "All tables foot exactly",
+          "caught_by_existing_evaluator": true
+        }
+      ],
+      "missing_joint_anchor_cases": []
+    }
+  ]
+}

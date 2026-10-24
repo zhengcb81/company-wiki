@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="48" time="12.458" timestamp="2026-10-24T12:47:27.253896+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_observes_anonymous_turns_and_continuation_without_assigning_company_role" time="0.775" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_heading_stops_anonymous_continuation" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 99:99 \u8ba8\u8bba\u6536\u5165]" time="0.006" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 00:000 \u8ba8\u8bba\u6536\u5165]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u6587\u7ae0\u63d0\u5230\u8bf4\u8bdd\u4eba1 00:00 \u8ba8\u8bba\u6536\u5165]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 \u6536\u5165\u589e\u957f]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8425\u4e1a\u6536\u5165 00:39 \u4eba\u6c11\u5e01100\u4e07\u5143]" time="0.006" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_labels_generalize_across_languages[\u8aaa\u8a71\u4eba 3 01:02:03 \u8ba1\u5212\u5c1a\u672a\u786e\u5b9a\u3002-\u8aaa\u8a71\u4eba 3]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_labels_generalize_across_languages[Speaker 7 03:14 The launch has not been approved.-Speaker 7]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_native_docx_turns_reach_pipeline_and_support_chinese_call_route" time="0.372" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines0-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.011" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines1-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.012" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines2-\u8bbf\u8c08\u8bb0\u5f55]" time="0.020" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_saved_docx_11_keeps_old_units_without_new_turn_metadata" time="0.005"><failure message="ValueError: unsupported DOCX parser_version">def test_saved_docx_11_keeps_old_units_without_new_turn_metadata():
+        data, current=normalized()
+&gt;       old=normalize_document(data,source_id=current.source_id,source_sha256=current.source_sha256,
+                               mime_type=MIME,parser_version='1.1.0')
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+original = b'PK\x03\x04\x14\x00\x00\x00\x00\x00\xf0eX]Pg\xf5r&amp;\x02\x00\x00&amp;\x02\x00\x00\x11\x00\x00\x00word/document.xml&lt;w:docume...0\x80\x01\x00\x00\x00\x00word/document.xmlPK\x05\x06\x00\x00\x00\x00\x01\x00\x01\x00?\x00\x00\x00U\x02\x00\x00\x00\x00'
+source_id = 'urn:company-wiki:source:sha256:b6ab41d23895bff2d4332d571fd534945b96e2ce47d5a554319485a505c2dd85'
+source_sha256 = 'b6ab41d23895bff2d4332d571fd534945b96e2ce47d5a554319485a505c2dd85'
+mime_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+limits = NormalizationLimits(max_source_bytes=67108864, max_total_uncompressed_bytes=536870912, max_text_output_bytes=16777216, max_units=20000, max_pages=5000, max_media_bytes=268435456, deadline=None)
+parser_version = '1.1.0', ocr = None, ocr_limits = None
+
+    def normalize_document(
+        original: bytes,
+        *,
+        source_id: str,
+        source_sha256: str,
+        mime_type: str,
+        limits: NormalizationLimits | None = None,
+        parser_version: str | None = None,
+        ocr=None,
+        ocr_limits=None,
+    ) -&gt; NormalizedDocument:
+        """Normalize one verified source document from its actual bytes."""
+        if not isinstance(original, bytes):
+            raise TypeError("original must be bytes")
+        if not isinstance(source_id, str) or not source_id:
+            raise TypeError("source_id must be non-empty text")
+        if not isinstance(mime_type, str) or not mime_type.strip():
+            raise UnsupportedFormatError("mime_type must be non-empty text")
+        if limits is None:
+            limits = DEFAULT_LIMITS
+        if not isinstance(limits, NormalizationLimits):
+            raise TypeError("limits must be a NormalizationLimits")
+        if hashlib.sha256(original).hexdigest() != source_sha256:
+            raise ValueError("source bytes do not match source_sha256")
+        if len(original) &gt; limits.max_source_bytes:
+            raise NormalizationLimitError(
+                "max_source_bytes", limits.max_source_bytes, f"got {len(original)}"
+            )
+        mime_main = mime_type.split(";")[0].strip().lower()
+        if mime_main in _DOCX_MIME_TYPES:
+            version = DOCX_PARSER_VERSION if parser_version is None else parser_version
+            if version not in {LEGACY_DOCX_PARSER_VERSION, DOCX_PARSER_VERSION}:
+&gt;               raise ValueError("unsupported DOCX parser_version")
+E               ValueError: unsupported DOCX parser_version
+
+src\company_wiki\document_normalization\__init__.py:128: ValueError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_txt_and_docx_share_native_anonymous_identity_without_role_guessing" time="0.003" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_current_parser_identity_and_public_imports_agree" time="0.004"><failure message="AssertionError: assert '0.4.0' == '0.3.1'&#10;  &#10;  - 0.3.1&#10;  + 0.4.0">def test_current_parser_identity_and_public_imports_agree():
+&gt;       assert transcript_parser_contract().parser_version == NEW_VERSION
+E       AssertionError: assert '0.4.0' == '0.3.1'
+E         
+E         - 0.3.1
+E         + 0.4.0
+
+tests\unit\test_transcript_boundary_versions.py:43: AssertionError</failure></testcase><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_generation_manifest_binds_the_actual_current_transcript_parser" time="0.230"><failure message="AssertionError: assert {'name': 'sel...ion': '0.4.0'} == {'name': 'sel...ion': '0.3.1'}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'version': '0.4.0'} != {'version': '0.3.1'}&#10;  Use -v to get more diff">def test_generation_manifest_binds_the_actual_current_transcript_parser():
+        from types import SimpleNamespace
+        from company_wiki.automation.narrative_contracts import SourceRevisionEventPayload
+        from company_wiki.automation.narrative_generation import generation_manifest
+    
+        payload = SourceRevisionEventPayload.from_dict({
+            "schema_version": "source-revision-event/2.0",
+            "source_ref": {"schema_version": "2.0", "document_id": "fixture-transcript",
+                           "source_id": source_id_for_sha256(FIXTURE_SHA),
+                           "content_sha256": FIXTURE_SHA, "byte_size": 66324,
+                           "mime_type": "text/plain"},
+            "expected_read_policy_sha256": "a" * 64,
+            "source_metadata": {"source_class": "transcript", "title": "MSFT Q4 2026 earnings call",
+                                "document_kind": "investor_call_transcript", "language": "en"},
+        })
+        manifest = generation_manifest(SimpleNamespace(model_options={}, profile="P4"), payload,
+                                       execution_versions={"prompt": "fixture"})
+&gt;       assert manifest["parser_component"] == {
+            "name": "selective_narrative_parser", "version": NEW_VERSION}
+E       AssertionError: assert {'name': 'sel...ion': '0.4.0'} == {'name': 'sel...ion': '0.3.1'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'version': '0.4.0'} != {'version': '0.3.1'}
+E         Use -v to get more diff
+
+tests\unit\test_transcript_boundary_versions.py:68: AssertionError</failure></testcase><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span" time="2.244" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_saved_030_real_fixture_is_not_reinterpreted" time="1.010" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_explicit_body_takes_precedence_over_roster_like_speaker_labels" time="0.004" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_natural_body_end_marker_stops_on_any_recognized_speaker_line[Alex Host, Operator: This concludes today's conference call. You may disconnect.]" time="0.004" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_natural_body_end_marker_stops_on_any_recognized_speaker_line[Alex Host \u2014 Operator\nThis concludes today's conference call. You may disconnect.]" time="0.005" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_natural_body_end_marker_stops_on_any_recognized_speaker_line[CEO: You may now disconnect your lines.]" time="0.004" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_natural_fallback_without_end_is_still_incomplete" time="0.003" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_explicit_legacy_format_retains_its_existing_eof_semantics[0.1.0]" time="0.002" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_explicit_legacy_format_retains_its_existing_eof_semantics[0.1.1]" time="0.003" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_explicit_legacy_format_retains_its_existing_eof_semantics[0.2.0]" time="0.003" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_explicit_legacy_format_retains_its_existing_eof_semantics[0.3.0]" time="0.003" /><testcase classname="tests.unit.test_transcript_boundary_versions" name="test_explicit_legacy_format_retains_its_existing_eof_semantics[0.3.1]" time="0.002" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_builtin_heading_from_real_word_style_keeps_paragraph_locator" time="0.706" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_inherited_style_and_direct_outline_take_real_precedence[&lt;w:pStyle w:val=&quot;Custom&quot;/&gt;-docx_heading-1-style_outline]" time="0.010" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_inherited_style_and_direct_outline_take_real_precedence[&lt;w:outlineLvl w:val=&quot;3&quot;/&gt;-docx_heading-4-paragraph_outline]" time="0.021" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_inherited_style_and_direct_outline_take_real_precedence[&lt;w:pStyle w:val=&quot;Custom&quot;/&gt;&lt;w:outlineLvl w:val=&quot;9&quot;/&gt;-docx_paragraph-None-None]" time="0.010" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_inherited_style_and_direct_outline_take_real_precedence[&lt;w:pStyle w:val=&quot;Custom&quot;/&gt;&lt;w:outlineLvl w:val=&quot;2&quot;/&gt;-docx_heading-3-paragraph_outline]" time="0.006" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_style_name_and_heading_wording_do_not_guess_structure" time="0.005" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_default_paragraph_style_uses_its_real_outline" time="0.005" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_style_cycle_is_bounded_and_marks_incomplete_structure" time="0.004" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_missing_style_and_invalid_outline_are_explicit_diagnostics" time="0.005" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_styles_part_uses_existing_xml_limits_and_deadline" time="0.006" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_style_heading_inside_table_retains_table_semantics_and_body_order" time="0.005" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze" time="0.008" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_default_and_saved_old_pins_have_separate_generation_and_replay_identity" time="0.003"><failure message="AssertionError: assert '1.2.0' == '1.1.0'&#10;  &#10;  - 1.1.0&#10;  ?   ^&#10;  + 1.2.0&#10;  ?   ^">def test_default_and_saved_old_pins_have_separate_generation_and_replay_identity():
+        from company_wiki.automation.narrative_formats import parser_component
+        data = legacy_original()
+        sha = hashlib.sha256(data).hexdigest()
+        source_id = source_id_for_sha256(sha)
+        port = NarrativeNormalization()
+        pinned = NarrativeNormalization(parser_versions={"saved-document": "1.0.0"})
+&gt;       assert dn.DOCX_PARSER_VERSION == "1.1.0"
+E       AssertionError: assert '1.2.0' == '1.1.0'
+E         
+E         - 1.1.0
+E         ?   ^
+E         + 1.2.0
+E         ?   ^
+
+tests\unit\test_docx_heading_normalization.py:225: AssertionError</failure></testcase><testcase classname="tests.unit.test_docx_heading_normalization" name="test_parser_capabilities_remain_specific_to_their_format[docx-2.0.0]" time="0.003" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_parser_capabilities_remain_specific_to_their_format[html-1.1.0]" time="0.005" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_parser_capabilities_remain_specific_to_their_format[html-2.0.0]" time="0.004" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_real_heading_stops_native_business_group_context" time="0.022" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_legacy_fixture_bytes_are_independent_of_zip_host_default[0]" time="0.010" /><testcase classname="tests.unit.test_docx_heading_normalization" name="test_legacy_fixture_bytes_are_independent_of_zip_host_default[3]" time="0.015" /></testsuite></testsuites>

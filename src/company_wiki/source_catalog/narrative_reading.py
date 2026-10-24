@@ -750,6 +750,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     # closure, not several cheap pairs. Share component sets across owners;
     # never materialise a quadratic per-member copy of a project or chapter.
     local_components: dict[str, set[str]] = {}
+    intrinsic_support: dict[int, set[str]] = {}
     local_unexamined: set[str] = set()
     try:
         for start in local_context:
@@ -806,6 +807,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "known_unit_ids": list(package.get("member_unit_ids", ()))})
             continue
         needed_originals = {member for uid in needed_material for member in original_members(uid)}
+        intrinsic_support[index] = set(needed_originals)
         needed_originals.update(original_extra.get(index, ()))
         extra_context.setdefault(index, set()).update(needed_material)
         original_extra.setdefault(index, set()).update(needed_originals)
@@ -819,6 +821,23 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         packages = [{**package, "required_context_unit_ids": sorted(
             set(package.get("required_context_unit_ids", ())) | original_extra.get(index, set()))}
             for index, package in enumerate(packages)]
+    if intrinsic_support:
+        # An intrinsic restriction belongs to the quote itself. A context-only
+        # link would still let extractive cards publish a naked plan. Ordinary
+        # questions, headings and antecedents retain their separate context role.
+        try:
+            work_budget.charge(len(original_units))
+            original_order = {uid: position for position, uid in enumerate(original_units)}
+            for index, extra in intrinsic_support.items():
+                package = packages[index]
+                views = package.get("citation_support_views", [list(
+                    package.get("anchor_unit_ids", package["member_unit_ids"]))])
+                work_budget.charge(sum(len(view) + len(extra) for view in views))
+                packages[index] = {**package, "citation_support_views": [
+                    sorted(set(view) | extra, key=original_order.__getitem__) for view in views]}
+        except WorkBudgetExceeded:
+            session.complete = False
+            deferred_packages.update(intrinsic_support)
     contexts: dict[str, set[str]] = {}
     for package in budget_packages:
         context_ids = set(package.get("required_context_unit_ids", ()))

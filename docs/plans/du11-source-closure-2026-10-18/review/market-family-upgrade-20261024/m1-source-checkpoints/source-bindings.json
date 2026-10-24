@@ -1,0 +1,30 @@
+{
+  "du5-cn-proya-q1": {
+    "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\珀莱雅\\raw\\financial_reports\\珀莱雅：珀莱雅化妆品股份有限公司2026年第一季度报告.pdf",
+    "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+    "byte_size": 155557,
+    "old_gold_path": "tools\\document_understanding_benchmark\\gold\\du5-cn-proya-q1.json",
+    "old_gold_sha256": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12"
+  },
+  "du5-hk-kingsoft-interim": {
+    "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\semi_annual\\2025-09-26_hkexnews_11857348_2025 中期報告.pdf",
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "byte_size": 3396644,
+    "old_gold_path": "tools\\document_understanding_benchmark\\gold\\du5-hk-kingsoft-interim.json",
+    "old_gold_sha256": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5"
+  },
+  "du5-cn-gbits-call": {
+    "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\吉比特\\raw\\research\\中泰-吉比特财报交流会0409.mp3-文稿-转写结果.docx",
+    "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+    "byte_size": 17222,
+    "old_gold_path": "tools\\document_understanding_benchmark\\gold\\du5-cn-gbits-call.json",
+    "old_gold_sha256": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d"
+  },
+  "du5-us-msft-ex991": {
+    "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\MICROSOFT CORP\\raw\\other\\2026-09-02_sec_0001193125-26-380280_MICROSOFT CORP EX-99.1 2026-09-02.htm",
+    "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+    "byte_size": 34288,
+    "old_gold_path": "tools\\document_understanding_benchmark\\gold\\du5-us-msft-ex991.json",
+    "old_gold_sha256": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5"
+  }
+}

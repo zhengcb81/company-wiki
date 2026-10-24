@@ -1,0 +1,679 @@
+{
+  "root_head": "a83863894fe5db5ad8a2afa39a7a994eb1f35b10",
+  "captured_at": "2026-10-24T11:57:23.118982+00:00",
+  "author_files_sha256": {
+    "author-compatibility.json": "7e07f60903a6757b02b8192aa915385db92a0d9f393e52c1892032237cc77315",
+    "author-notes.md": "9216b136931347ddc32293e4818f994073aea6f3ac0b8f43d390a0b2363bc1a0",
+    "author-report.json": "863957de21f1b22980f91ab48f091967beeb314d8f4632a0ded5242cae7e63da",
+    "author-report.md": "ed2ffa67ea22105a5dbd682acbef8be19b45dc1fda78033a3af757802a44fc7b",
+    "build_author_package.py": "d66147ea4608a9b6745c6aef900fbf515df2eb2e7fb9aef3496a49bbfb906338",
+    "gold/du5-cn-gbits-call.json": "94bb507097a4d10da2407ec3318fbc2770c4891ad6d9ce67ebb1d7bd3d288895",
+    "gold/du5-cn-proya-q1.json": "e2aeaf5c9344f82e7be802e612e1b7eed5f369c647dec4c0acc95788f75cc7b8",
+    "gold/du5-hk-kingsoft-interim.json": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604",
+    "gold/du5-us-msft-ex991.json": "43d826fb46a8f58c3361e5e894eaa80bcebbaec6d839a0654398a732e0bb6f25",
+    "revision_manifest.json": "89ab2866fe788c4a4dcfdba288c1e3c0374c2db494b163dfcd73beb75a6edc21",
+    "source-bindings.json": "afb250b2aacb9648375d33c6e20526159bd21394c5daf5fc61c12878f0b69cbd",
+    "verify_author_package.py": "212fa3d1126ffb928a998b0324f03205c7233208652ce7362f86b0e983f2e91d"
+  },
+  "sources": [
+    {
+      "sample": "du5-cn-proya-q1",
+      "actual_source_sha": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "expected_source_sha": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "source_bytes": 155557,
+      "old_gold_actual_sha": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12",
+      "old_gold_expected_sha": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12",
+      "facts_new": 10,
+      "facts_old": 10,
+      "old_fact_changes": [
+        {
+          "id": "report-period-unaudited-identity",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "报告期为2026年上半年或2026年3月单月",
+            "该报告于2026年3月31日发布",
+            "报告期为2025年第一季度"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "statements-unaudited-no-new-standards",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "财务报表已经过审计",
+            "审计意见为标准无保留意见",
+            "2026年起首次执行新会计准则并调整年初报表"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "q1-revenue-yoy-decline",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "营业收入同比增长2.29%",
+            "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "attributable-net-profit-q1",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "归母净利润为383,647,847.96元（合并净利润）",
+            "归母净利润同比增长6.05%",
+            "366,686,734.14元覆盖2026年1—3月与2025年全年比较"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "deducted-net-profit-and-nonrecurring-total",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "扣非净利润为366,686,734.14元",
+            "非经常性损益合计25,529,496.96元是期末余额",
+            "扣非净利润同比下降9.97个百分点"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "operating-cash-flow-collapse",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "经营活动现金流量净额同比下降84.16元",
+            "现金流量净额为负或流出",
+            "675,490,380.59元为本报告期金额"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "cash-flow-drop-driver",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "现金流量下降主要系采购支出增加",
+            "公司称报告期内经营情况无其他重要变化因而收入下降",
+            "推广费减少导致现金流出下降"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "eps-basic-diluted-unit",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "基本每股收益为0.93元/股，较上年增长6.06%",
+            "每股收益0.93元为年化口径或2026年上半年累计口径",
+            "稀释每股收益高于基本每股收益"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "total-assets-point-in-time",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "总资产8,912,125,388.70元为本报告期新增或季度流量",
+            "对比期为上年同期（2025年3月31日）",
+            "总资产较年初下降5.00%"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "share-capital-and-buyback-holdings",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "公司在报告期内增发了约100万股",
+            "回购专户持股3,757,848股占总股本9.5%",
+            "395,976,008.00为上年度末（2025年12月31日）的股本数"
+          ],
+          "missing_samefact_errors": []
+        }
+      ]
+    },
+    {
+      "sample": "du5-hk-kingsoft-interim",
+      "actual_source_sha": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "expected_source_sha": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "source_bytes": 3396644,
+      "old_gold_actual_sha": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5",
+      "old_gold_expected_sha": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5",
+      "facts_new": 16,
+      "facts_old": 13,
+      "old_fact_changes": [
+        {
+          "id": "total-revenue-h1-2025",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "總收入為人民幣4,319.2千元",
+            "總收入按年下降17.8%",
+            "總收入4,319,204百萬元"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "segment-revenue-split",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "公有雲服務收入為人民幣2,978.8千元",
+            "行業雲服務收入高於公有雲服務",
+            "行業雲服務收入按年增長23.0%"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "net-loss-us-gaap-widened",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "淨虧損收窄7.8%",
+            "公司錄得淨利潤772,973千元",
+            "淨虧損為人民幣772,973百萬元"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "us-gaap-basis-not-ifrs",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "財務報表根據《國際財務報告準則》編製",
+            "財務報表已經審計",
+            "按IFRS編製並無重大差異"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "unit-and-fx-convention",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "所有金額以百萬元計",
+            "美元金額按期末官方匯率7.1636折算為實際兌換",
+            "每股數據亦以千元列示"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "gross-margin-decline",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "毛利率由15.2%提升至16.7%",
+            "毛利下降7.4%",
+            "毛利率提高因AI業務擴張"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "adjusted-ebitda-nongaap",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "經調整EBITDA為美國公認會計準則指標",
+            "公司經營利潤為724.6百萬元",
+            "經調整EBITDA為人民幣724.6千元"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "capex-vs-revenue",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "資本開支1,483,742百萬元",
+            "資本開支即公司收入",
+            "投資活動為公司帶來現金流入1,483,742千元"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "no-material-investments-or-capex-plans",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "本集團持有佔總資產5%以上的重大投資",
+            "本集團計劃未來進行重大資本開支",
+            "本集團有重大收購計劃"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "h2-2025-business-outlook",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司已完成全面AI能力提升",
+            "公司在上半年實現高質量盈利",
+            "公司將退出研發投入"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "single-operating-segment",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司披露公有雲與行業雲兩個報告分部",
+            "公司按地區披露海外分部收入",
+            "主要經營決策者按分部評估業績"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "related-party-revenue",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "關聯方收入為人民幣1,125,458百萬元",
+            "關聯方收入按年下降",
+            "向小米集團提供行業雲服務772,761千元"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "interim-period-meta",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "報告期為截至二零二五年六月三十日止十二個月",
+            "數據為全年數據",
+            "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+          ],
+          "missing_samefact_errors": [
+            "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": "du5-cn-gbits-call",
+      "actual_source_sha": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "expected_source_sha": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "source_bytes": 17222,
+      "old_gold_actual_sha": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d",
+      "old_gold_expected_sha": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d",
+      "facts_new": 13,
+      "facts_old": 12,
+      "old_fact_changes": [
+        {
+          "id": "yy-flow-decline-premise",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司确认一念逍遥流水下滑后将回升",
+            "公司称竞品趋缓使流水回升",
+            "公司披露5-6月竞品上线导致流水下滑"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "steam-activity-premise",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "公司披露日活跃人次过万",
+            "公司确认活跃用户明显滑坡",
+            "公司公布Steam活跃数据"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "lei-ting-profit-analyst-inference",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "公司披露雷霆Q3利润1.17亿、Q4利润1.8亿",
+            "公司确认Q4利润环比大幅提升是经营改善"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "yy-roi-decline-actual",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "ROI去年上半年明显上升",
+            "公司自21年上线起持续加大买量",
+            "二三年下半年主动增加了买量支出"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "buydown-cut-and-stock-operation-plan",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司已停止买量并完成存量运营转型",
+            "买量依赖已消除",
+            "公司已不再投放广告"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "buydown-no-return-negation",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "买量会回到原来的水平",
+            "买量水平会随版本回升到历史高位",
+            "公司未对买量水平表态"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "yy-stabilize-target-uncertain",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司预计产品将在新水平企稳",
+            "公司承诺流水企稳时间表",
+            "公司判断产品已经稳定"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "outpost-update-plan-uncommitted",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司已排定后续更新版本计划",
+            "公司将在Steam活动节点确定推出大更新",
+            "重装前哨更新路线图已落地"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "outpost-buyout-revenue-recognition",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "重装前哨收入按道具消耗递延确认",
+            "买断收入全额即时确认且无退货准备",
+            "公司披露了递延收入金额"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "outpost-stage-problems-resolved",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "技术卡顿问题已全部修复",
+            "重装前哨口碑已完全恢复",
+            "产品问题已经彻底解决"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "strategy-category-unchanged-negation",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "公司今年将大幅调整品类战略",
+            "公司决定转型新品类",
+            "公司战略方向发生重大变化"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "yy-user-base-scale",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "公司披露用户数2000万",
+            "公司公布月活/注册用户精确规模",
+            "用户规模为2000人"
+          ],
+          "missing_samefact_errors": []
+        }
+      ]
+    },
+    {
+      "sample": "du5-us-msft-ex991",
+      "actual_source_sha": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "expected_source_sha": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "source_bytes": 34288,
+      "old_gold_actual_sha": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5",
+      "old_gold_expected_sha": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5",
+      "facts_new": 12,
+      "facts_old": 12,
+      "old_fact_changes": [
+        {
+          "id": "fy27-two-reporting-segments",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "Microsoft will report three segments in FY27",
+            "Azure and Microsoft 365 are separate reporting segments",
+            "Agents and Infra is a product line, not a reportable segment"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "prior-three-segments-retired",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "More Personal Computing remains a FY27 segment",
+            "The prior structure had two segments",
+            "Intelligent Cloud continues as a FY27 reportable segment"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "commercial-bookings-definition",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "Commercial bookings equals new contract value signed in the quarter",
+            "Bookings covers consumer and all revenue",
+            "Bookings is a GAAP revenue amount"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "commercial-rpo-definition",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "Remaining performance obligation is revenue recognized in the current quarter",
+            "RPO includes consumer revenue",
+            "RPO equals commercial bookings"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "seat-growth-includes-github",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "required_business",
+          "old_errors": [
+            "Seat growth counts only Microsoft 365 Commercial seats",
+            "Seats are a revenue measure",
+            "Seat growth of 7% is a FY27 result"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "fy27q1-outlook-mechanical-only",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "Microsoft issued new FY27 Q1 guidance on September 2, 2026",
+            "The adjusted outlook revises total-company revenue guidance",
+            "Management raised or cut its FY27 Q1 outlook"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "azure-fy27q1-growth-outlook",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "required_business",
+          "old_errors": [
+            "Azure grew 44% to 45% in FY27 Q1 actual results",
+            "44% to 45% is a GAAP reported growth rate",
+            "This is full-year FY27 Azure growth"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "total-company-fy27q1-revenue-outlook",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "required_business",
+          "old_errors": [
+            "Microsoft's FY27 full-year revenue will be $89.85 to $90.95 billion",
+            "FY27 Q1 actual revenue was $90 billion",
+            "This figure is restated on the new segment basis"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "restated-segment-fy26-revenue",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "required_business",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "$268,127 million is Microsoft's FY27 revenue",
+            "These are as-reported segment figures",
+            "Devices and Consumer revenue exceeds Agents and Infra revenue"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "forward-looking-caveat",
+          "importance_old": "critical",
+          "importance_new": "critical",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "The outlook figures are guaranteed outcomes",
+            "Microsoft commits to update these statements",
+            "Actual results will match the projections"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "exhibit-identity-fy27-segments-metrics",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "disposition_context",
+          "target_new": "disposition_context",
+          "old_errors": [
+            "This is a Form 10-K annual report",
+            "This is Microsoft's FY27 results release",
+            "The document is dated September 2, 2026 on its cover"
+          ],
+          "missing_samefact_errors": []
+        },
+        {
+          "id": "growth-comparison-fiscal-basis",
+          "importance_old": "normal",
+          "importance_new": "normal",
+          "target_old": "correctness_if_emitted",
+          "target_new": "correctness_if_emitted",
+          "old_errors": [
+            "Growth rates compare with the prior quarter",
+            "Growth comparisons use calendar-year periods",
+            "All tables foot exactly"
+          ],
+          "missing_samefact_errors": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "status": "PASS_M2_ENGINEERING_AND_REAL_SOURCE_SEAM",
+  "tests": {
+    "passed": 386,
+    "failed": 0,
+    "seconds": 31.14,
+    "independent_cases": 47
+  },
+  "source_tree_sha256": "55d7bb8c0eadce29bd309f199f8d8fca45e79bf0b2b2326c5f16d95e116ec560",
+  "source_file_count": 374,
+  "source_unchanged_during_test_and_real_replay": true,
+  "imports": {
+    "company_wiki.document_normalization": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\__init__.py",
+      "sha256": "4b4d2112e01a3779d2eaa1e7df9ffa077e05c49b451efb95c92a1c807b80bb06"
+    },
+    "company_wiki.document_normalization.docx_parser": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\docx_parser.py",
+      "sha256": "5eaf43d938334ab106db66aef5a0cc4ef7acd7e57c6d96f61b77d09179ff303d"
+    },
+    "company_wiki.document_normalization.units": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\units.py",
+      "sha256": "a65813c07427c50c4a8d618e58bbf16d400519e7f8c4d190946815f94b9162c5"
+    },
+    "company_wiki.document_understanding.native_signal_bridge": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\native_signal_bridge.py",
+      "sha256": "4a9cebce8aed14129dee1e70a50c98b2e5dac01285c1a42386a920d69d0ba2c2"
+    },
+    "company_wiki.document_understanding.observation_adapter": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\observation_adapter.py",
+      "sha256": "bd46c2e4ecd8ebe5b65fb00d9cf6c39cfa9ec02f1baecaf4ff98b74c5ee202af"
+    },
+    "company_wiki.document_understanding.pipeline": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\pipeline.py",
+      "sha256": "a61068bcfba03c36985b556cc2542f9f0e17291500070cbbef66aeb02abdb0cc"
+    },
+    "company_wiki.document_understanding.profiles.signals": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\profiles\\signals.py",
+      "sha256": "1f8199fccc438667179f4f5b48c5b2be1080fb7741484f40ca7a4f3b9b0951f0"
+    },
+    "company_wiki.source_catalog.narrative_business_disclosures": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_disclosures.py",
+      "sha256": "7e2d233ef914057f8f91c7292e94e7d0ce6192e0f48689feac9de1ec9eff78b7"
+    },
+    "company_wiki.source_catalog.narrative_business_policy": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+      "sha256": "a0075b5c0793209238eb7dae40c566d0d278d38a65554726769489f6975013d7"
+    },
+    "company_wiki.source_catalog.narrative_evidence": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py",
+      "sha256": "002fc2908149d3e5da1def7a789eec6478dbe07ec28f4a5bf29edd1e68f02318"
+    },
+    "company_wiki.source_catalog.narrative_normalization": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_normalization.py",
+      "sha256": "97eca82a8472c167b7b1cd065eae154dca2e7019b77649ccc748e8fadfbb627a"
+    },
+    "company_wiki.source_catalog.narrative_operating_relations": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+      "sha256": "41b3e004611dc127ffdb8011c6f7df8b9a702a00835efe5f9f103164bef135a9"
+    },
+    "company_wiki.source_catalog.narrative_reading": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+      "sha256": "8c7bd79687df95233b91d378d42476f17ae5b90db801203b18711caae8165fb0"
+    },
+    "company_wiki.source_catalog.transcript_layout": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\transcript_layout.py",
+      "sha256": "b3e0eb04d68f0195d7726f03a0ab1daba04ec10a90874f4b2201f56382b9f34c"
+    },
+    "company_wiki.source_catalog.transcript_versions": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\transcript_versions.py",
+      "sha256": "868e931fc2d077cb4dab2707f4533a202ab0289b6f4b422c4b8eaf9784da45cd"
+    }
+  },
+  "tested_file_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\m2-independent\\test_m2_independent.py": "5c110b6d7da3b87c91249a46752ba8d065a392e06c8c30ffe9487820f8d35c4e",
+    "tests\\unit\\document_understanding_root\\test_native_anonymous_turns.py": "6610c839b68e1095701592489d13084c76cc55b83763d784bf514ce1ca977d7b",
+    "tests\\unit\\document_understanding_root\\test_qualitative_operating_intent.py": "b1632883049acee556100c90a770451f2ec8db34572a5a468002c1b2ce12b182",
+    "tests\\unit\\document_understanding_root\\test_turn_plan_qualification.py": "05569e12b1cb98b5ae4224907a298b1e286b3d9c39ea47b021c97e66ac7efc5a",
+    "tests\\unit\\document_understanding_root\\test_normalization_version_capability.py": "596cb0736ab8367a153d462526f6cb33ec3b05973f1a206f0c14eb958f284860",
+    "tests\\unit\\test_docx_heading_normalization.py": "aca1d1a1bf6ff5bad4afb1f312ed46478185c9ff4f3e12544c3b9fd36d1b163f",
+    "tests\\unit\\test_native_document_pipeline.py": "ea70137cff999466c56fe1b1479ce11ee1765896e58e53b686cc396d076ea251",
+    "tests\\unit\\test_transcript_boundary_versions.py": "e21deb9a5fe73d26137608e2f2b249183da2dafdc1bcc41bc854582217afc18a",
+    "tests\\unit\\test_transcript_parser_compatibility.py": "d96c910595d5ab94d7ec8810525cb0b79dc3d069d7dea206066b407f9f2f6b6d",
+    "tests\\unit\\document_understanding_selection\\test_reading_native_dependency_closure.py": "4a870373ecc34eb3a0e8aa95f9fe57bed9499a734c691d23da3b2a00164d2787",
+    "tests\\unit\\document_understanding_selection\\test_reading_native_continuity.py": "5a47e4901e0c231b66633c822bb69b5f582deb6fe3c2cb4408286e57a36cd113",
+    "tests\\unit\\document_understanding_selection\\test_reading_native_carriers.py": "41abe62bb12748e0864a4fd161d37e9ca59c922748572defb1688a7edbe2e015",
+    "tests\\unit\\test_narrative_reading_model_projection.py": "0386330152db38b21573a156e8de3d20c34d4442d833baeef2b632f98c091bf3",
+    "tests\\unit\\test_narrative_reading_transport.py": "d1693ad415fd6172861cad0dc2f20bef27c7b65d3af605c980f5ffae56d718a5",
+    "tests\\unit\\du11_source_quality\\test_business_admission.py": "daf303059c5fb6df434d07fd78a378e2ba21562597aaee439bb5a46aaaf123ae",
+    "tests\\unit\\du11_source_quality\\test_material_readiness.py": "81183ad80e95e0ea3d8a8b9197c6e5636a4b1dc21a7d73aea5d6a1445dd8739a",
+    "tests\\unit\\test_p2_office_table\\test_docx_structure.py": "376ecfda439a8138a1ac2a33bc47ea830eeda444e2f3c73e0bee3a5e40d604c6",
+    "tests\\unit\\test_p2_office_table\\test_docx_footnotes.py": "36844e006370d1a77e6b6cbc376d8226467e031ae6b39815214bd4ade5e8618c"
+  },
+  "scratch_absent": true,
+  "internal_findings_open": [],
+  "resolved_findings": [
+    "shared observer closed state now survives structural boundaries",
+    "TXT shares one native event stream and one substantive body proof",
+    "actual timed short CJK observed; empty label or one-CJK pseudo-body refused",
+    "operating intent action and business NP head bounded and generic",
+    "anonymous actor identity scoped to original and turn without role inference",
+    "same-turn direct plan qualification enters citation support and actual model/card",
+    "DOCX1.2 accepted by owner capability and actual serialized batch pin path",
+    "old cross-page intrinsic qualification assertion strengthened to support and card"
+  ],
+  "real_source_seam": {
+    "status": "PASS_SOURCE_SEAM_ONLY",
+    "original_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+    "original_unchanged": true,
+    "source_unchanged": true,
+    "selected_span_count": 23,
+    "model_schema": "narrative-model-request/6",
+    "model_request_sha256": "81c8ae5559c02a5c3d45e82b4c2edb4cb7d908cb271161faf5db97311c50518c",
+    "model_request_chars": 14659,
+    "source_card_count": 23,
+    "critical_new_locators_5_6_16_89_retained": true,
+    "paragraph16_caveat_in_model_and_card": true,
+    "roles": [
+      "unknown"
+    ],
+    "model_calls": 0,
+    "limits": "Real original bytes with isolated FakeReader only; no manifest, dates, filing provider or RF validation claimed. Old content gold remains a separate quality question. No source correction or translation."
+  },
+  "limits": [
+    "No paid model; formal LLM summary and analyst/RF/content-gold quality outside this node.",
+    "This review does not sign full public-history OS worker/crash/cache lifecycle; ROOT is executing that separately.",
+    "M1 gold acceptance remains separate independent review.",
+    "Finite operating intent grammar does not claim all natural-language plans are covered."
+  ],
+  "history": [
+    "candidate1-semantic.xml:382P3F; two common closed-state defects and one outdated context-only test",
+    "candidate1-report.md/json retained unchanged",
+    "initial-semantic.xml and expanded-semantic.xml keep true findings and reviewer fixture errors"
+  ],
+  "evidence_sha256": {
+    "candidate1-report.json": "cae6683fe549bdc1bb022596a12a1a352ae9b250403f5fe3f2b6eaab154d40bf",
+    "candidate1-semantic-receipt.json": "176d70aef839f89797bfaab75b80006ac2698b503d921e95d9ca1788e1cea8fd",
+    "candidate1-semantic.log": "f1fd34a3843407225d7b02b1d72fc309ad121478dcd8cf70b670075611c1a923",
+    "candidate1-semantic.xml": "0c2b3d6f4f132db413e1e0d3cea42462fc0f8fd3367ab100bfc18c08a1d6d487",
+    "check_gbits_final_source.py": "f9d940e37fafa6e44b460753ce4534ea20a76eef426ef67e8501e2792f7c98e6",
+    "check_gbits_frozen_source.py": "512367469f6a7133a4030ec9a72225e19d9a31ee681e726c20edfb1309479a3f",
+    "closed-boundary-red.xml": "ef4a7b5a494dcfcfa4b8828b8deb5e8e20b4da28a97cf9ba162ad531cda863f5",
+    "expanded-semantic.xml": "16d6d5518ead1cb3e60625ad997a87cc77e4e912dd33214ba60d80b4ad492d57",
+    "expanded2-semantic.xml": "d671aa2cead926b76698ca405e5cd1d4c6bd5cdca46e5ef5d4be21d110a2a5f0",
+    "final-semantic-receipt.json": "8a637cf0cae725be95718d94d4d85404154697c8c1ff3e91a54821be0dba621f",
+    "final-semantic.log": "966008850f4fe367ade91286c4c5aca59a44858fe1ae3d8ca644684cc3443bdd",
+    "final-semantic.xml": "60ee40a7065220e090c05484e09b8dec33c717c2906e8fa02c1d5d5c2a7fb492",
+    "initial-semantic.xml": "56d3d587381252e2aab242022f08c1ffd393f43d872155a0a9ff622b36bdba77",
+    "old-context-test-contract.json": "0be7fbd868b237777bb7fc6c086e07c4538a38be698d99657da01112ca00ee46",
+    "real-gbits-final-source-seam.json": "f0f6ff12a9145267102edd93193a9f16d2b12fdcb0868c4eec212a3f2c85fb7f",
+    "real-gbits-frozen-source-check.json": "aece009d7536d97d5bb27356eae58a8c5ff76e88ef23c0496039a1bec06b3ea7",
+    "run_final_review.py": "acbca89d357575ae993f96280252637b43ab1f655258d8e85fce7e120f4f5c81",
+    "test_m2_independent.py": "5c110b6d7da3b87c91249a46752ba8d065a392e06c8c30ffe9487820f8d35c4e",
+    "write_candidate_report.py": "efee2f6db44e43dd67c920730832bb704d896d7b8d2318b81102ca0894d8c3f4",
+    "write_final_report.py": "32cfe61176e2c40d12692820d4c9cb231a2d35a7ba9cf12c11e0ff1958ea8ca6"
+  }
+}

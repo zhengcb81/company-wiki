@@ -1,0 +1,434 @@
+{
+  "schema_version": "m1-author-review-fixes/1",
+  "created_at": "2026-10-24T11:59:22.396613+00:00",
+  "author_only": true,
+  "independent_acceptance": "PENDING_OTHER_REVIEWER",
+  "review_feedback_root_causes": [
+    "丢失否定连接词使跨说话人比较关系翻转",
+    "源侧定义只取一部分移出项目，遗漏版本范围",
+    "旧数值与通用机械调整不能独立证明新数值保持不变"
+  ],
+  "revisions": [
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "author_v1_gold_path": "revisions\\author-v1\\du5-cn-gbits-call.json",
+      "author_v1_sha256": "94bb507097a4d10da2407ec3318fbc2770c4891ad6d9ce67ebb1d7bd3d288895",
+      "author_v2_gold_path": "gold/du5-cn-gbits-call.json",
+      "author_v2_sha256": "831299c7393e4978f77b8811f31005df74310b27191d84192d6a332b7a4bb14a",
+      "changes": [
+        {
+          "fact_id": "outpost-buyout-revenue-recognition",
+          "fields": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "说话人2 09:24这款的话会卖出卖出，然后会根据就看退货率的一个情况，会去做一个他是当即确认收入，但是会做一个利息负债什么类似的处理，",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "说话人2 09:42其他的消耗型道具一样，还要做一个递延。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 09:24这款的话会卖出卖出，然后会根据就看退货率的一个情况，会去做一个他是当即确认收入，但是会做一个利息负债什么类似的处理，",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "说话人1 09:41它不像",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "说话人2 09:42其他的消耗型道具一样，还要做一个递延。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "说话人2",
+                "当即确认收入",
+                "利息负债什么类似的处理",
+                "消耗型道具",
+                "递延"
+              ],
+              "new": [
+                "说话人2",
+                "当即确认收入",
+                "利息负债什么类似的处理",
+                "它不像",
+                "消耗型道具",
+                "递延"
+              ],
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "reason",
+              "old": "两个具名匿名speaker2短回合共同支持买断/道具对比；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。",
+              "new": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。",
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "author_v1_gold_path": "revisions\\author-v1\\du5-us-msft-ex991.json",
+      "author_v1_sha256": "43d826fb46a8f58c3361e5e894eaa80bcebbaec6d839a0654398a732e0bb6f25",
+      "author_v2_gold_path": "gold/du5-us-msft-ex991.json",
+      "author_v2_sha256": "abc0f51255a55f1da13cf07e8d627e8606468e7cd677d30744679ab191718231",
+      "changes": [
+        {
+          "fact_id": "commercial-bookings-definition",
+          "fields": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Commercial bookings growth: for\ncommercial products and cloud services, sum of revenue growth, plus change in balance of unearned revenue plus the change in contracted not billed balance",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Investor Metric Definitions",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Commercial bookings growth: for\ncommercial products and cloud services, sum of revenue growth, plus change in balance of unearned revenue plus the change in contracted not billed balance",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "sum of revenue growth",
+                "unearned revenue",
+                "contracted not billed",
+                "commercial"
+              ],
+              "new": [
+                "sum of revenue growth",
+                "unearned revenue",
+                "contracted not billed",
+                "commercial",
+                "FY27"
+              ],
+              "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+            },
+            {
+              "field": "reason",
+              "old": "商业范围与三项复合计算完整同句；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额。",
+              "new": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。",
+              "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+            }
+          ]
+        },
+        {
+          "fact_id": "commercial-rpo-definition",
+          "fields": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Commercial remaining performance obligation: commercial portion of revenue allocated to\nremaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Investor Metric Definitions",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Commercial remaining performance obligation: commercial portion of revenue allocated to\nremaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "commercial portion",
+                "remaining performance obligations",
+                "unearned revenue",
+                "future periods"
+              ],
+              "new": [
+                "commercial portion",
+                "remaining performance obligations",
+                "unearned revenue",
+                "future periods",
+                "FY27"
+              ],
+              "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+            },
+            {
+              "field": "reason",
+              "old": "商业范围、未实现/未来开票及未来确认互补同定义，不能只选名字或末半句。",
+              "new": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。",
+              "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+            }
+          ]
+        },
+        {
+          "fact_id": "seat-growth-includes-github",
+          "fields": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Microsoft 365 commercial seat growth metric definition has been updated to include paid GitHub seats",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Microsoft 365 commercial seat growth: the number of Microsoft 365 Commercial seats and GitHub Cloud seats at end of period where seats are paid users\ncovered by a Microsoft 365 Commercial subscription or GitHub subscription",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Metric Updates",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Microsoft 365 commercial seat growth metric definition has been updated to include paid GitHub seats",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Microsoft 365 commercial seat growth: the number of Microsoft 365 Commercial seats and GitHub Cloud seats at end of period where seats are paid users\ncovered by a Microsoft 365 Commercial subscription or GitHub subscription",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "paid GitHub seats",
+                "paid users",
+                "end of period",
+                "Microsoft 365 Commercial seats"
+              ],
+              "new": [
+                "paid GitHub seats",
+                "paid users",
+                "end of period",
+                "Microsoft 365 Commercial seats",
+                "FY27"
+              ],
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            },
+            {
+              "field": "reason",
+              "old": "定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量。",
+              "new": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。",
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            }
+          ]
+        },
+        {
+          "fact_id": "azure-fy27q1-growth-outlook",
+          "fields": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Adjusted Outlook Agents and Infra",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Azure revenue Growth of 44% to 45% in constant currency, with FX expected to decrease revenue by less than 1 point",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud. Healthcare and Life Sciences cloud will move to the new Industry\nsolutions cloud metric.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Adjusted Outlook Agents and Infra",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Azure revenue Growth of 44% to 45% in constant currency, with FX expected to decrease revenue by less than 1 point",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "Azure",
+                "44% to 45%",
+                "constant currency",
+                "Growth",
+                "FY27 Q1",
+                "Adjusted Outlook"
+              ],
+              "new": [
+                "Azure",
+                "44% to 45%",
+                "constant currency",
+                "Growth",
+                "FY27 Q1",
+                "Adjusted Outlook",
+                "Healthcare and Life Sciences cloud",
+                "Industry solutions cloud"
+              ],
+              "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+            },
+            {
+              "field": "reason",
+              "old": "新Azure定义、FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不把历史FY26或报告汇率结果混入。",
+              "new": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。",
+              "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+            }
+          ]
+        },
+        {
+          "fact_id": "total-company-fy27q1-revenue-outlook",
+          "fields": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Total Company Revenue of $89.85 to $90.95 billion",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Total Company Revenue of $89.85 to $90.95 billion",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Adjusted Outlook Foreign currency impact Decrease to total\nrevenue growth by less than 1 point, with roughly 1 point in Agents and Infra, and no meaningful impact in Devices and Consumer No meaningful impact to COGS or operating expense growth Total Company No change to outlook",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "$89.85 to $90.95 billion",
+                "Total Company",
+                "Revenue",
+                "FY27 Q1",
+                "mechanical adjustments only"
+              ],
+              "new": [
+                "$89.85 to $90.95 billion",
+                "Total Company",
+                "Revenue",
+                "FY27 Q1",
+                "mechanical adjustments only",
+                "No change to outlook"
+              ],
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            },
+            {
+              "field": "reason",
+              "old": "收入预测核心总公司区间改required_business而非disposition；normal保留，必须带机械调整/季度时点，不因把历史财务数条件化降低主要责任。",
+              "new": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。",
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "all_gold_qualifier_recheck": [
+    {
+      "scope": "CN quarter all10facts",
+      "check": "否定勾选、元/股/元、单季流量与期末存量、双列时期、股本货币与回购股份分开",
+      "author_result": "实读复核现联合原文，未发现本范围其他被省略的决定性否定；待独审"
+    },
+    {
+      "scope": "HK interim all16facts",
+      "check": "六个月列头、千元/百万元、美元便捷换算与不可实际兑换、USGAAP/IFRS差异、重大投资5%否定、AI/CDN抵销与毛利额/率不同方向",
+      "author_result": "实读复核。元数据/现金capex/金额责任分开且无折旧互证；待独审"
+    },
+    {
+      "scope": "CN DOCX all13facts",
+      "check": "匿名speaker续接、ASR单位与负债名、已发生/愿望/不确定性、比较连接词不像",
+      "author_result": "09:24/09:41/09:42三回合补完整否定比较；其余源内不会/没有/希望/大部分/少数限定已复核；未知身份/ASR仍未知，待独审"
+    },
+    {
+      "scope": "US exhibit all12facts",
+      "check": "FY27计划vs旧三段、Metric Definitions版本、新Azure全排除项、July29旧指引vsAdjusted Nochange、历史重述inmillions与财年",
+      "author_result": "补Healthcare/LifeSciences→Industry solutions、总公司Adjusted Nochange；共因扩到bookings/RPO/seat均携FY27定义版本；待独审"
+    }
+  ]
+}

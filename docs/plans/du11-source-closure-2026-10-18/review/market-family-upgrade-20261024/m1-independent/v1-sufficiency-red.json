@@ -1,0 +1,25 @@
+{
+  "scope": "independent sufficiency probes on preserved author-v1, no production execution",
+  "results": [
+    {
+      "test": "test_buyout_comparison_retains_intervening_questioner_negation",
+      "status": "EXPECTED_RED",
+      "reason": "09:42 alone changes the comparison polarity"
+    },
+    {
+      "test": "test_azure_outlook_carries_both_removed_business_groups",
+      "status": "EXPECTED_RED",
+      "reason": "Healthcare and Life Sciences cloud"
+    },
+    {
+      "test": "test_current_total_range_joins_explicit_adjusted_no_change",
+      "status": "EXPECTED_RED",
+      "reason": ""
+    }
+  ],
+  "source_test_sha256": "d7b8b91d6f37e5b77e8c971da3f5656f54bee790c23801bdf6794ed4166744e6",
+  "gold_sha256": {
+    "du5-cn-gbits-call": "94bb507097a4d10da2407ec3318fbc2770c4891ad6d9ce67ebb1d7bd3d288895",
+    "du5-us-msft-ex991": "43d826fb46a8f58c3361e5e894eaa80bcebbaec6d839a0654398a732e0bb6f25"
+  }
+}

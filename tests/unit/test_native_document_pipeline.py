@@ -92,7 +92,8 @@ def test_native_documents_select_verify_public_replay_and_roles(
             for s in selected.evidence_spans
         )
     else:
-        assert selected.parser.version == "0.3.1" and selected.transcript_byte_bindings
+        from company_wiki.source_catalog.transcript_versions import TRANSCRIPT_PARSER_VERSION
+        assert selected.parser.version == TRANSCRIPT_PARSER_VERSION and selected.transcript_byte_bindings
         assert all(
             "unrelated retail" not in s.raw_text for s in selected.evidence_spans
         )

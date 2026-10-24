@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="8.062" timestamp="2026-10-24T13:16:11.033471+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_root.test_turn_plan_qualification" name="test_same_turn_plan_limitation_is_model_material_and_card_support[application/vnd.openxmlformats-officedocument.wordprocessingml.document]" time="0.781"><failure message="AssertionError: HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')&#10;assert &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; is &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt;&#10; +  where &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; = HandlerResult(outcome=&lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt;, result=mappingproxy({}), artifacts=(), ef...age_diagnostic=None), error=HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')).outcome&#10; +  and   &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt; = HandlerOutcome.SUCCEEDED">tests\unit\document_understanding_root\test_turn_plan_qualification.py:31: in test_same_turn_plan_limitation_is_model_material_and_card_support
+    selected = select(['Speaker 1 00:00 When will production begin?', PLAN, LIMIT,
+tests\unit\document_understanding_root\test_turn_plan_qualification.py:25: in select
+    assert result.outcome is HandlerOutcome.SUCCEEDED, result.error
+E   AssertionError: HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')
+E   assert &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; is &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt;
+E    +  where &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; = HandlerResult(outcome=&lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt;, result=mappingproxy({}), artifacts=(), ef...age_diagnostic=None), error=HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')).outcome
+E    +  and   &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt; = HandlerOutcome.SUCCEEDED</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_turn_plan_qualification" name="test_same_turn_plan_limitation_is_model_material_and_card_support[text/plain]" time="0.671"><failure message="TypeError: Object of type mappingproxy is not JSON serializable">tests\unit\document_understanding_root\test_turn_plan_qualification.py:31: in test_same_turn_plan_limitation_is_model_material_and_card_support
+    selected = select(['Speaker 1 00:00 When will production begin?', PLAN, LIMIT,
+tests\unit\document_understanding_root\test_turn_plan_qualification.py:26: in select
+    return NarrativeSelectResult.from_dict(json.loads(json.dumps(result.result)))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\__init__.py:231: in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\encoder.py:180: in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+E   TypeError: Object of type mappingproxy is not JSON serializable</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_turn_plan_qualification" name="test_other_speaker_limitation_does_not_become_plan_support[application/vnd.openxmlformats-officedocument.wordprocessingml.document]" time="0.004"><failure message="AssertionError: HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')&#10;assert &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; is &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt;&#10; +  where &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; = HandlerResult(outcome=&lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt;, result=mappingproxy({}), artifacts=(), ef...age_diagnostic=None), error=HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')).outcome&#10; +  and   &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt; = HandlerOutcome.SUCCEEDED">tests\unit\document_understanding_root\test_turn_plan_qualification.py:44: in test_other_speaker_limitation_does_not_become_plan_support
+    selected = select(['Speaker 1 00:00 When will production begin?', PLAN,
+tests\unit\document_understanding_root\test_turn_plan_qualification.py:25: in select
+    assert result.outcome is HandlerOutcome.SUCCEEDED, result.error
+E   AssertionError: HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')
+E   assert &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; is &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt;
+E    +  where &lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt; = HandlerResult(outcome=&lt;HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'&gt;, result=mappingproxy({}), artifacts=(), ef...age_diagnostic=None), error=HandlerError(code='UNSUPPORTED_SOURCE_TYPE', detail='transcript MIME type is unsupported')).outcome
+E    +  and   &lt;HandlerOutcome.SUCCEEDED: 'succeeded'&gt; = HandlerOutcome.SUCCEEDED</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_turn_plan_qualification" name="test_other_speaker_limitation_does_not_become_plan_support[text/plain]" time="0.071"><failure message="TypeError: Object of type mappingproxy is not JSON serializable">tests\unit\document_understanding_root\test_turn_plan_qualification.py:44: in test_other_speaker_limitation_does_not_become_plan_support
+    selected = select(['Speaker 1 00:00 When will production begin?', PLAN,
+tests\unit\document_understanding_root\test_turn_plan_qualification.py:26: in select
+    return NarrativeSelectResult.from_dict(json.loads(json.dumps(result.result)))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\__init__.py:231: in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\json\encoder.py:180: in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+E   TypeError: Object of type mappingproxy is not JSON serializable</failure></testcase></testsuite></testsuites>

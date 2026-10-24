@@ -43,7 +43,7 @@ if TYPE_CHECKING:
     from .narrative_continuity import NativeSourceContext
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.13.0"
+PIPELINE_FEATURE_VERSION = "1.14.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the

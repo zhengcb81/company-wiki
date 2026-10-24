@@ -1,0 +1,62 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.m2-independent-bt", "requested_basetemp_len": 53, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 385 items
+
+docs\plans\du11-source-closure-2026-10-18\review\market-family-upgrade-20261024\m2-independent\test_m2_independent.py . [  0%]
+..FF..........................................                           [ 12%]
+tests\unit\document_understanding_root\test_native_anonymous_turns.py .. [ 12%]
+.......................                                                  [ 18%]
+tests\unit\document_understanding_root\test_qualitative_operating_intent.py . [ 18%]
+......................                                                   [ 24%]
+tests\unit\document_understanding_root\test_turn_plan_qualification.py . [ 24%]
+........                                                                 [ 27%]
+tests\unit\document_understanding_root\test_normalization_version_capability.py . [ 27%]
+................                                                         [ 31%]
+tests\unit\test_docx_heading_normalization.py ...................        [ 36%]
+tests\unit\test_native_document_pipeline.py .....                        [ 37%]
+tests\unit\test_transcript_boundary_versions.py ..............           [ 41%]
+tests\unit\test_transcript_parser_compatibility.py ...................   [ 46%]
+tests\unit\document_understanding_selection\test_reading_native_dependency_closure.py . [ 46%]
+...............F                                                         [ 50%]
+tests\unit\document_understanding_selection\test_reading_native_continuity.py . [ 50%]
+...........................................................              [ 66%]
+tests\unit\document_understanding_selection\test_reading_native_carriers.py . [ 66%]
+.........                                                                [ 68%]
+tests\unit\test_narrative_reading_model_projection.py ...........        [ 71%]
+tests\unit\test_narrative_reading_transport.py ......................... [ 78%]
+..........................                                               [ 84%]
+tests\unit\du11_source_quality\test_business_admission.py .............. [ 88%]
+...................                                                      [ 93%]
+tests\unit\du11_source_quality\test_material_readiness.py .......        [ 95%]
+tests\unit\test_p2_office_table\test_docx_structure.py ...............   [ 99%]
+tests\unit\test_p2_office_table\test_docx_footnotes.py ...               [100%]
+
+================================== FAILURES ===================================
+___ test_docx_structural_boundary_after_end_never_reopens_closed_transcript ___
+docs\plans\du11-source-closure-2026-10-18\review\market-family-upgrade-20261024\m2-independent\test_m2_independent.py:55: in test_docx_structural_boundary_after_end_never_reopens_closed_transcript
+    assert 'native_speaker_turn' not in d.units[-1].metadata
+E   AssertionError: assert 'native_speaker_turn' not in mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': '477b61f326ce..., 'timestamp': '01:20', 'turn_id': 'native-speaker:02148cd3377d8056258c5ddd55b9d21d8cb05cad83859dfb8f928ade99d03363'}})
+E    +  where mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': '477b61f326ce..., 'timestamp': '01:20', 'turn_id': 'native-speaker:02148cd3377d8056258c5ddd55b9d21d8cb05cad83859dfb8f928ade99d03363'}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:948a4ad188c06c01cd26639eedb334dc3983cc5149270638d68998e1... 'timestamp': '01:20', 'turn_id': 'native-speaker:02148cd3377d8056258c5ddd55b9d21d8cb05cad83859dfb8f928ade99d03363'}})).metadata
+________ test_shared_turn_clear_is_a_boundary_not_a_new_source_session ________
+docs\plans\du11-source-closure-2026-10-18\review\market-family-upgrade-20261024\m2-independent\test_m2_independent.py:63: in test_shared_turn_clear_is_a_boundary_not_a_new_source_session
+    assert observer.observe('Speaker 7 01:20 A footer placeholder.',source_id='s',locator='p:3') is None
+E   AssertionError: assert {'speaker': 'Speaker 7', 'timestamp': '01:20', 'turn_id': 'native-speaker:7f1417d1b75dfd8de2895f95d4479ff7f202ab551c80cef55c1cf52b0f609032'} is None
+E    +  where {'speaker': 'Speaker 7', 'timestamp': '01:20', 'turn_id': 'native-speaker:7f1417d1b75dfd8de2895f95d4479ff7f202ab551c80cef55c1cf52b0f609032'} = observe('Speaker 7 01:20 A footer placeholder.', source_id='s', locator='p:3')
+E    +    where observe = AnonymousTurnObserver(active={'speaker': 'Speaker 7', 'timestamp': '01:20', 'turn_id': 'native-speaker:7f1417d1b75dfd8de2895f95d4479ff7f202ab551c80cef55c1cf52b0f609032'}, closed=False).observe
+_ test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_use _
+tests\unit\document_understanding_selection\test_reading_native_dependency_closure.py:445: in test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_use
+    assert views and all(
+E   AssertionError: assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:0ffe679859e51ac9518121b03a18f9309cc7327fe80249f547a5...0f5c5cdd5', 'urn:company-wiki:evidence-span:sha256:a2df48523cf7ffa49d78230432dedbc5b791a70842c331016faf4b483fb47e74']}] and False)
+E    +  where False = all(<generator object test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_use.<locals>.<genexpr> at 0x000002313BC8B060>)
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\market-family-upgrade-20261024\m2-independent\final-semantic.xml -
+=========================== short test summary info ===========================
+FAILED docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/m2-independent/test_m2_independent.py::test_docx_structural_boundary_after_end_never_reopens_closed_transcript
+FAILED docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/m2-independent/test_m2_independent.py::test_shared_turn_clear_is_a_boundary_not_a_new_source_session
+FAILED tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py::test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_use
+======================= 3 failed, 382 passed in 28.72s ========================

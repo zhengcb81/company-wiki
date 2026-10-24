@@ -1,0 +1,3331 @@
+{
+  "schema_version": "m1-source-checkpoint-revisions/1",
+  "created_at": "2026-10-24T11:58:35.250381+00:00",
+  "scope": "development",
+  "author_only": true,
+  "independent_review_status": "PENDING_OTHER_REVIEWER",
+  "samples": [
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "old_gold_sha256": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12",
+      "new_gold_path": "gold/du5-cn-proya-q1.json",
+      "new_gold_sha256": "e2aeaf5c9344f82e7be802e612e1b7eed5f369c647dec4c0acc95788f75cc7b8",
+      "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "support_set_digest": "3f692742fc79327b14b5b4b5e8611684cbe5b4b0eed3306887a740e8d5fd58c3",
+      "original_fact_count": 10,
+      "revised_fact_count": 10,
+      "original_importances_preserved": true,
+      "fact_revisions": [
+        {
+          "fact_id": "report-period-unaudited-identity",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司\n2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "合并利润表\n2026 年1—3 月",
+                    "page": 8,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "特此公告\n珀莱雅化妆品股份有限公司董事会\n2026 年4 月20 日",
+                    "page": 12,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "合并利润表\n2026 年1—3 月",
+                    "page": 8,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "特此公告\n珀莱雅化妆品股份有限公司董事会\n2026 年4 月20 日",
+                    "page": 12,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "公司、流量期间和发布日期互为补充，必须联合；落款不能单独替代财报期间。归元数据通道。"
+            },
+            {
+              "field": "reason",
+              "old": "Anchors the sample's period definition; a Q1 report's 1—3月 flow window is the reference every table number must be matched against.",
+              "new": "公司、流量期间和发布日期互为补充，必须联合；落款不能单独替代财报期间。归元数据通道。",
+              "reason": "公司、流量期间和发布日期互为补充，必须联合；落款不能单独替代财报期间。归元数据通道。"
+            }
+          ]
+        },
+        {
+          "fact_id": "statements-unaudited-no-new-standards",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "第一季度财务报表是否经审计\n□是√否",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "(一)审计意见类型\n□适用√不适用",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元\n币种:人民币\n审计类型：未经审计",
+                    "page": 6,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "第一季度财务报表是否经审计\n□是√否",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元\n币种:人民币\n审计类型：未经审计",
+                    "page": 6,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "(三)2026 年起首次执行新会计准则或准则解释等涉及调整首次执行当年年初的财务报表\n□适用√不适用",
+                    "page": 12,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "联合未审计勾选/报表属性和首次执行导致期初调整不适用；不把不适用扩大成没有任何新准则。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "□是√否",
+                "未经审计",
+                "2026 年3 月31 日"
+              ],
+              "new": [
+                "□是√否",
+                "未经审计",
+                "2026 年3 月31 日",
+                "□适用√不适用"
+              ],
+              "reason": "联合未审计勾选/报表属性和首次执行导致期初调整不适用；不把不适用扩大成没有任何新准则。"
+            },
+            {
+              "field": "reason",
+              "old": "Unaudited status is disposition-critical; the √ marks are in the 否/不适用 boxes and are easy to invert.",
+              "new": "联合未审计勾选/报表属性和首次执行导致期初调整不适用；不把不适用扩大成没有任何新准则。",
+              "reason": "联合未审计勾选/报表属性和首次执行导致期初调整不适用；不把不适用扩大成没有任何新准则。"
+            }
+          ]
+        },
+        {
+          "fact_id": "q1-revenue-yoy-decline",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "营业收入\n2,305,344,625.43\n2,359,334,894.91\n-2.29",
+                    "page": 1,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "一、营业总收入\n2,305,344,625.43\n2,359,334,894.91",
+                    "page": 8,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "单位：元\n币种：人民币",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "营业收入\n2,305,344,625.43\n2,359,334,894.91\n-2.29",
+                    "page": 1,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+            },
+            {
+              "field": "reason",
+              "old": "Q1-only flow in 元 with a NEGATIVE YoY; sign flip and period widening (YTD vs quarter) are the classic corruptions.",
+              "new": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。",
+              "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+            }
+          ]
+        },
+        {
+          "fact_id": "attributable-net-profit-q1",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "归属于上市公司股东的净\n利润\n366,686,734.14\n390,281,697.93\n-6.05",
+                    "page": 1,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "1.归属于母公司股东的净利润（净\n亏损以“-”号填列）\n366,686,734.14\n390,281,697.93",
+                    "page": 10,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "单位：元\n币种：人民币",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "归属于上市公司股东的净\n利润\n366,686,734.14\n390,281,697.93\n-6.05",
+                    "page": 1,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+            },
+            {
+              "field": "reason",
+              "old": "合并净利润 383,647,847.96 (incl. 少数股东损益 16,961,113.82) vs 归母 366,686,734.14 — attribution mixing is the trap.",
+              "new": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。",
+              "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+            }
+          ]
+        },
+        {
+          "fact_id": "deducted-net-profit-and-nonrecurring-total",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "归属于上市公司股东的扣\n除非经常性损益的净利润\n341,157,237.18\n378,934,039.06\n-9.97",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "(二)非经常性损益项目和金额\n√适用□不适用\n单位:元币种:人民币",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "单位：元\n币种：人民币",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "归属于上市公司股东的扣\n除非经常性损益的净利润\n341,157,237.18\n378,934,039.06\n-9.97",
+                    "page": 2,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "非经常性损益项目\n本期金额\n说明",
+                    "page": 2,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "合计\n25,529,496.96",
+                    "page": 3,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "扣非行、非经常性本期金额列头及合计互补AND；只表名不能证明精确扣非/非经常总额。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "341,157,237.18",
+                "378,934,039.06",
+                "-9.97",
+                "扣除非经常性损益",
+                "本期金额"
+              ],
+              "new": [
+                "341,157,237.18",
+                "378,934,039.06",
+                "-9.97",
+                "扣除非经常性损益",
+                "本期金额",
+                "25,529,496.96"
+              ],
+              "reason": "扣非行、非经常性本期金额列头及合计互补AND；只表名不能证明精确扣非/非经常总额。"
+            },
+            {
+              "field": "reason",
+              "old": "扣非 lags 归母 (−9.97% vs −6.05%); the 非经常性损益 table's 本期金额 column is a Q1 flow whose 合计 (25,529,496.96, p3) reconciles 归母 minus 扣非.",
+              "new": "扣非行、非经常性本期金额列头及合计互补AND；只表名不能证明精确扣非/非经常总额。",
+              "reason": "扣非行、非经常性本期金额列头及合计互补AND；只表名不能证明精确扣非/非经常总额。"
+            }
+          ]
+        },
+        {
+          "fact_id": "operating-cash-flow-collapse",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "经营活动产生的现金流量\n净额\n106,971,167.62\n675,490,380.59\n-84.16",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "经营活动产生的现金流量净\n额\n106,971,167.62\n675,490,380.59",
+                    "page": 11,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "单位：元\n币种：人民币",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "经营活动产生的现金流量\n净额\n106,971,167.62\n675,490,380.59\n-84.16",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+            },
+            {
+              "field": "reason",
+              "old": "Cash flow is POSITIVE but down 84.16% while profit fell only ~6% — direction/period swaps here are high-impact; 675M is the PRIOR-year quarter.",
+              "new": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。",
+              "reason": "精确财务数若输出须同时有一季度、元、本期/上年同期及带符号完整数值；不同精度/缺同比行不是充分替代。保留重要性与错误数字反例。"
+            }
+          ]
+        },
+        {
+          "fact_id": "cash-flow-drop-driver",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "主要系收回货款减少以及支付的\n推广费增加。",
+                    "page": 3,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "项目名称\n变动比例（%）\n主要原因\n经营活动产生的现金流\n量净额\n-84.16",
+                    "page": 3,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "2026 年第一季度报告",
+                    "page": 3,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "项目名称\n变动比例（%）\n主要原因\n经营活动产生的现金流\n量净额\n-84.16\n主要系收回货款减少以及支付的\n推广费增加。",
+                    "page": 3,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "经营解释本体包含下降对象/幅度与双原因，非原因标题OR。保留required_business和normal重要性，不要求三张主表全选。"
+            },
+            {
+              "field": "reason",
+              "old": "The only genuine business narrative in the filing; its cause direction (less collections + more promo spend) is easy to invert.",
+              "new": "经营解释本体包含下降对象/幅度与双原因，非原因标题OR。保留required_business和normal重要性，不要求三张主表全选。",
+              "reason": "经营解释本体包含下降对象/幅度与双原因，非原因标题OR。保留required_business和normal重要性，不要求三张主表全选。"
+            }
+          ]
+        },
+        {
+          "fact_id": "eps-basic-diluted-unit",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "基本每股收益（元/股）\n0.93\n0.99\n-6.06",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "稀释每股收益（元/股）\n0.93\n0.99\n-6.06",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "珀莱雅化妆品股份有限公司2026 年第一季度报告",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本报告期\n上年同期\n本报告期比上年\n同期增减变动幅\n度(%)",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "基本每股收益（元/股）\n0.93\n0.99\n-6.06",
+                    "page": 2,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "稀释每股收益（元/股）\n0.93\n0.99\n-6.06",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "基本与稀释相等这一合取事实须两行共同支持；只一行不能证明另一行。季度和每股单位仍绑定。"
+            },
+            {
+              "field": "reason",
+              "old": "Unit is 元/股, value is per-quarter; basic equals diluted (no dilution effect in Q1). Note ROE 5.78% vs 6.97% is '减少1.19 个百分点', not −1.19%.",
+              "new": "基本与稀释相等这一合取事实须两行共同支持；只一行不能证明另一行。季度和每股单位仍绑定。",
+              "reason": "基本与稀释相等这一合取事实须两行共同支持；只一行不能证明另一行。季度和每股单位仍绑定。"
+            }
+          ]
+        },
+        {
+          "fact_id": "total-assets-point-in-time",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "总资产\n8,912,125,388.70\n8,487,416,240.25\n5.00",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "本报告期末\n上年度末\n本报告期末比上\n年度末增减变动\n幅度(%)",
+                    "page": 2,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "单位：元\n币种：人民币",
+                    "page": 1,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本报告期末\n上年度末\n本报告期末比上\n年度末增减变动\n幅度(%)",
+                    "page": 2,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "总资产\n8,912,125,388.70\n8,487,416,240.25\n5.00",
+                    "page": 2,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "项目\n2026 年3 月31 日\n2025 年12 月31 日",
+                    "page": 6,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "存量金额行、期末/上年末标签及两日期联合；不能把缺数表头当作完整资产支持。"
+            },
+            {
+              "field": "reason",
+              "old": "The period-mixing flagship: stock block compares 2026-03-31 with 2025-12-31 (year-start), never with 上年同期; it is a balance, not a flow.",
+              "new": "存量金额行、期末/上年末标签及两日期联合；不能把缺数表头当作完整资产支持。",
+              "reason": "存量金额行、期末/上年末标签及两日期联合；不能把缺数表头当作完整资产支持。"
+            }
+          ]
+        },
+        {
+          "fact_id": "share-capital-and-buyback-holdings",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "实收资本（或股本）\n395,976,008.00\n395,975,998.00",
+                    "page": 8,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "公司回购专用证券账户中持有公司股份3,757,848 股，占公司总股本的0.95%",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "实收资本（或股本）\n395,976,008.00\n395,975,998.00",
+                    "page": 8,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "合并资产负债表\n2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元",
+                    "page": 6,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "项目\n2026 年3 月31 日\n2025 年12 月31 日",
+                    "page": 6,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "截至本报告期末，公司回购专用证券账户中持有公司股份3,757,848 股，占公司总股本的0.95%",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "股本货币额与回购持股数是两个量纲，联合而非OR。原件未给面值/发行因果，不能把股本10元差额推成10股或激励发行。"
+            },
+            {
+              "field": "quantity_basis",
+              "old": "count",
+              "new": "unknown",
+              "reason": "股本货币额与回购持股数是两个量纲，联合而非OR。原件未给面值/发行因果，不能把股本10元差额推成10股或激励发行。"
+            },
+            {
+              "field": "reason",
+              "old": "股本 is a 2026-03-31 stock vs 2025-12-31 stock differing by only 10 shares (equity-incentive effect), easily misread as a new issuance; buyback % is 0.95%.",
+              "new": "股本货币额与回购持股数是两个量纲，联合而非OR。原件未给面值/发行因果，不能把股本10元差额推成10股或激励发行。",
+              "reason": "股本货币额与回购持股数是两个量纲，联合而非OR。原件未给面值/发行因果，不能把股本10元差额推成10股或激励发行。"
+            }
+          ]
+        }
+      ],
+      "record_revisions": [
+        {
+          "field": "notes",
+          "old": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。珀莱雅 a_share_quarterly_sparse。prior_use=fresh：none found in .planning, docs/plans, docs/implementation (searched 2026-10-15)。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：期间/单位表（本报告期 vs 本报告期末 vs 上年度末；元 vs 元/股 vs 个百分点）。（版本2，2026-10-15 C节点独审更正：仅负例字符串/一处 modality 标签，锚点与重要性、分母未动；旧值见 gold_corrections.json.content_corrections。）（版本3，2026-10-16 ROOT独审更正：原金额2305344625.43元的23亿元及2305344625.4元是正常舍入，移出错误表述清单；保留方向与期间错置负例，原锚点/重要性/目标种类/事实分母未改。v2旧值与字节身份见gold_corrections。）",
+          "new": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "scope",
+          "old": "holdout",
+          "new": "development",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_digest",
+          "old": "6b56cccf2555b4be4a076aa49ae007dc23d5e1f4bed9c903f9874484830e9509",
+          "new": "3f692742fc79327b14b5b4b5e8611684cbe5b4b0eed3306887a740e8d5fd58c3",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_digest_at_freeze",
+          "old": "73f0e369e0548d0baf3fc47afd0f0767ffeb1bf239b2a9b446f1d8a8fc70d229",
+          "new": null,
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_frozen_before_output",
+          "old": true,
+          "new": false,
+          "reason": "Development contamination truth and source-authored revision lineage."
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "old_gold_sha256": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5",
+      "new_gold_path": "gold/du5-hk-kingsoft-interim.json",
+      "new_gold_sha256": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604",
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "support_set_digest": "6f533d0afe77c78cc951994a6c80a4898f10135214f02a663c9d451fea2e94a0",
+      "original_fact_count": 13,
+      "revised_fact_count": 16,
+      "original_importances_preserved": true,
+      "fact_revisions": [
+        {
+          "fact_id": "total-revenue-h1-2025",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "收入\n3,667,464\n4,319,204\n17.8%",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "人民幣千元",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "總收入達到人民幣4,319.2百萬元（602.9百萬美元）",
+                    "page": 9,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "截至六月三十日止六個月\n同比變動\n二零二四年\n二零二五年\n人民幣千元\n人民幣千元\n%",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "收入\n3,667,464\n4,319,204\n17.8%",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "精确财报总额属correctness_if_emitted，与CN季报普通财务数同责；保留critical与全部单位/负方向反例。圆整百万元文字不是精确千元表的充分OR。"
+            },
+            {
+              "field": "reason",
+              "old": "Total revenue RMB4,319,204 THOUSAND (prose: 4,319.2 millions) +17.8% YoY. Trap: table in thousands vs MD&A in millions; direction must be increase.",
+              "new": "精确财报总额属correctness_if_emitted，与CN季报普通财务数同责；保留critical与全部单位/负方向反例。圆整百万元文字不是精确千元表的充分OR。",
+              "reason": "精确财报总额属correctness_if_emitted，与CN季报普通财务数同责；保留critical与全部单位/负方向反例。圆整百万元文字不是精确千元表的充分OR。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "correctness_if_emitted",
+              "reason": "精确财报总额属correctness_if_emitted，与CN季报普通财务数同责；保留critical与全部单位/负方向反例。圆整百万元文字不是精确千元表的充分OR。"
+            }
+          ]
+        },
+        {
+          "fact_id": "segment-revenue-split",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "公有雲服務\n2,421,912\n2,978,788\n415,823",
+                    "page": 12,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+                    "page": 12,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），",
+                    "page": 9,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+                    "page": 9,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "（除股數和每股數據外，所有金額以千計）\n截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+                    "page": 12,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "公有雲服務\n2,421,912\n2,978,788\n415,823",
+                    "page": 12,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+                    "page": 12,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "本项仅精确分业务金额，条件输出与CN财务金额同责；两行+三币种/年度列头联合。业务分类/驱动另有required检查，不因降精度假称整业务缺失。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "2,978,788",
+                "1,340,416",
+                "公有雲服務",
+                "行業雲服務",
+                "千元"
+              ],
+              "new": [
+                "2,978,788",
+                "1,340,416",
+                "公有雲服務",
+                "行業雲服務",
+                "千計"
+              ],
+              "reason": "本项仅精确分业务金额，条件输出与CN财务金额同责；两行+三币种/年度列头联合。业务分类/驱动另有required检查，不因降精度假称整业务缺失。"
+            },
+            {
+              "field": "reason",
+              "old": "Public cloud RMB2,978,788k vs industry cloud RMB1,340,416k (public is larger, +23.0%; industry +7.6%). Trap: thousands-vs-millions and segment swap/growth-rate confusion.",
+              "new": "本项仅精确分业务金额，条件输出与CN财务金额同责；两行+三币种/年度列头联合。业务分类/驱动另有required检查，不因降精度假称整业务缺失。",
+              "reason": "本项仅精确分业务金额，条件输出与CN财务金额同责；两行+三币种/年度列头联合。业务分类/驱动另有required检查，不因降精度假称整业务缺失。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "correctness_if_emitted",
+              "reason": "本项仅精确分业务金额，条件输出与CN财务金额同责；两行+三币种/年度列头联合。业务分类/驱动另有required检查，不因降精度假称整业务缺失。"
+            }
+          ]
+        },
+        {
+          "fact_id": "net-loss-us-gaap-widened",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "淨虧損\n(717,334)\n(772,973)\n(107,901)",
+                    "page": 12,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "7.8%",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "淨虧損為人民幣773.0百萬元（107.9百萬美元），較二零二四年同期的淨虧損人民幣717.3百萬元有所增加。",
+                    "page": 14,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "截至六月三十日止六個月\n同比變動\n二零二四年\n二零二五年\n人民幣千元\n人民幣千元\n%",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "淨虧損\n(717,334)\n(772,973)\n7.8%",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "亏损精确数为条件输出，critical/数字反例不降级；金额符号、同比、会计基础、期间与币种同包，经营亏损不能替代净亏损。"
+            },
+            {
+              "field": "reason",
+              "old": "Net loss RMB772,973k WIDENED 7.8% from RMB717,334k (US GAAP). Traps: sign/direction flip, unit swap, treating the 7.8% 'change' as improvement.",
+              "new": "亏损精确数为条件输出，critical/数字反例不降级；金额符号、同比、会计基础、期间与币种同包，经营亏损不能替代净亏损。",
+              "reason": "亏损精确数为条件输出，critical/数字反例不降级；金额符号、同比、会计基础、期间与币种同包，经营亏损不能替代净亏损。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "correctness_if_emitted",
+              "reason": "亏损精确数为条件输出，critical/数字反例不降级；金额符号、同比、会计基础、期间与币种同包，经营亏损不能替代净亏损。"
+            }
+          ]
+        },
+        {
+          "fact_id": "us-gaap-basis-not-ifrs",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "未經審計中期簡明財務報表乃根據美國公認會計準則編製，在若干方面有別於《國際財務報告準則》",
+                    "page": 67,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "未經審計中期簡明財務報表乃根據美國公認會計準則編製，在若干方面有別於《國際財務報告準則》",
+                    "page": 67,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "会计框架/审计状态为document_meta disposition_context，保留critical；IFRS对账句自身同时支持USGAAP与差异，不以仅USGAAP一句代替完整差异命题。"
+            },
+            {
+              "field": "reason",
+              "old": "The filing is US GAAP with an IFRS reconciliation (note 16). Asserting IFRS-basis reporting is a benchmark-worthy framework error; statements are unaudited.",
+              "new": "会计框架/审计状态为document_meta disposition_context，保留critical；IFRS对账句自身同时支持USGAAP与差异，不以仅USGAAP一句代替完整差异命题。",
+              "reason": "会计框架/审计状态为document_meta disposition_context，保留critical；IFRS对账句自身同时支持USGAAP与差异，不以仅USGAAP一句代替完整差异命题。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "disposition_context",
+              "reason": "会计框架/审计状态为document_meta disposition_context，保留critical；IFRS对账句自身同时支持USGAAP与差异，不以仅USGAAP一句代替完整差异命题。"
+            }
+          ]
+        },
+        {
+          "fact_id": "unit-and-fx-convention",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "（除股數和每股數據外，所有金額以千計）",
+                    "page": 12,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "以人民幣7.1636元兌1.00美元的中午買入匯率換算",
+                    "page": 45,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "（除股數和每股數據外，所有金額以千計）\n截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+                    "page": 12,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+                    "page": 45,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "美元金額乃為方便讀者而呈列，並於二零二五年六月三十日在紐約市就經紐約聯邦儲備銀行海關核證的\n人民幣電匯轉賬以人民幣7.1636元兌1.00美元的中午買入匯率換算。概不表示人民幣金額可以或可能\n按該匯率兌換為美元。",
+                    "page": 45,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "千元列头、股数例外与便捷美元换算/不可当实际兑换须联合，属于数值消费的元数据责任，critical不变。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "千計",
+                "7.1636",
+                "人民幣千元",
+                "美元"
+              ],
+              "new": [
+                "千計",
+                "7.1636",
+                "人民幣千元",
+                "美元",
+                "概不表示"
+              ],
+              "reason": "千元列头、股数例外与便捷美元换算/不可当实际兑换须联合，属于数值消费的元数据责任，critical不变。"
+            },
+            {
+              "field": "reason",
+              "old": "Tables are RMB/USD thousands except share & per-share data; USD is convenience translation at 7.1636. Any fact restating table numbers as millions (or prose millions as thousands) is wrong.",
+              "new": "千元列头、股数例外与便捷美元换算/不可当实际兑换须联合，属于数值消费的元数据责任，critical不变。",
+              "reason": "千元列头、股数例外与便捷美元换算/不可当实际兑换须联合，属于数值消费的元数据责任，critical不变。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "disposition_context",
+              "reason": "千元列头、股数例外与便捷美元换算/不可当实际兑换须联合，属于数值消费的元数据责任，critical不变。"
+            }
+          ]
+        },
+        {
+          "fact_id": "gross-margin-decline",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "毛利率為15.2%，而二零二四年同期則為16.7%。",
+                    "page": 9,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "毛利\n611,600\n657,163\n7.4%",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。",
+                    "page": 13,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+                    "page": 13,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "15.2%",
+                "16.7%",
+                "657,163",
+                "毛利"
+              ],
+              "new": [
+                "毛利",
+                "15.2%",
+                "16.7%",
+                "服務器成本增加",
+                "前期成本"
+              ],
+              "reason": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。"
+            },
+            {
+              "field": "reason",
+              "old": "Gross profit ROSE 7.4% to RMB657,163k but gross margin FELL 16.7%→15.2% (AI server costs). Traps: direction flip between level and ratio; cause reversal.",
+              "new": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。",
+              "reason": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。"
+            }
+          ]
+        },
+        {
+          "fact_id": "adjusted-ebitda-nongaap",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "非公認會計準則EBITDA為人民幣724.6百萬元（101.1百萬美元）",
+                    "page": 14,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "非公認會計準則EBITDA為人民幣724.6百萬元（101.1百萬美元），較二零二四年同期的人民幣93.8百萬元增\n加672.6%。",
+                    "page": 14,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "普通非GAAP财务金额为correctness_if_emitted，若输出仍需非GAAP/币种/规模/期间，不强制叙述引入财务盈利指标。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "非公認會計準則",
+                "724.6",
+                "101.1"
+              ],
+              "new": [
+                "非公認會計準則",
+                "724.6",
+                "101.1",
+                "百萬元"
+              ],
+              "reason": "普通非GAAP财务金额为correctness_if_emitted，若输出仍需非GAAP/币种/规模/期间，不强制叙述引入财务盈利指标。"
+            },
+            {
+              "field": "reason",
+              "old": "Non-GAAP adjusted EBITDA RMB724.6m is positive while GAAP operating result is a loss RMB561.2m; must stay labelled non-GAAP and in millions in prose.",
+              "new": "普通非GAAP财务金额为correctness_if_emitted，若输出仍需非GAAP/币种/规模/期间，不强制叙述引入财务盈利指标。",
+              "reason": "普通非GAAP财务金额为correctness_if_emitted，若输出仍需非GAAP/币种/规模/期间，不强制叙述引入财务盈利指标。"
+            },
+            {
+              "field": "target_kind",
+              "old": "disposition_context",
+              "new": "correctness_if_emitted",
+              "reason": "普通非GAAP财务金额为correctness_if_emitted，若输出仍需非GAAP/币种/规模/期间，不强制叙述引入财务盈利指标。"
+            }
+          ]
+        },
+        {
+          "fact_id": "capex-vs-revenue",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "購買物業及設備及預付款項\n(1,866,298)\n(1,483,742)\n(207,123)",
+                    "page": 41,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "折舊及攤銷成本由人民幣449.5百萬元增加",
+                    "page": 13,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二四年及二零二五年六月三十日止六個月\n未經審計中期簡明合併現金流量表\n（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+                    "page": 41,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+                    "page": 41,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "投資活動產生的現金流量\n購買物業及設備及預付款項\n(1,866,298)\n(1,483,742)\n(207,123)",
+                    "page": 41,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "现金购置支出只有投资现金流原行及完整列头支持；删除折旧摊销替代，不把cash capex与费用/收入互证。critical与全部错误数字反例保留，条件输出与其他财务数同责。"
+            },
+            {
+              "field": "reason",
+              "old": "H1-2025 investing outflow for PP&E+prepayments RMB1,483,742k vs prior-year RMB1,866,298k — an INVESTMENT outflow, not revenue (revenue is 4,319,204k). Traps: unit swap, direction (it is an outflow), investment-vs-revenue confusion.",
+              "new": "现金购置支出只有投资现金流原行及完整列头支持；删除折旧摊销替代，不把cash capex与费用/收入互证。critical与全部错误数字反例保留，条件输出与其他财务数同责。",
+              "reason": "现金购置支出只有投资现金流原行及完整列头支持；删除折旧摊销替代，不把cash capex与费用/收入互证。critical与全部错误数字反例保留，条件输出与其他财务数同责。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "correctness_if_emitted",
+              "reason": "现金购置支出只有投资现金流原行及完整列头支持；删除折旧摊销替代，不把cash capex与费用/收入互证。critical与全部错误数字反例保留，条件输出与其他财务数同责。"
+            }
+          ]
+        },
+        {
+          "fact_id": "no-material-investments-or-capex-plans",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "本集團並無任何未來重大投資\n及資本資產計劃。",
+                    "page": 15,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截",
+                    "page": 15,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+                    "page": 15,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "现有重大投资阈值与未来重大计划两否定须同包，不以不完整前半句替代；不将普通AI购置活动与公告重大投资计划混同。"
+            },
+            {
+              "field": "reason",
+              "old": "Explicit negation: no investments ≥5% of total assets and NO future major investment/capex plans as of 2025-06-30 — despite ongoing AI infrastructure spending. Traps: negation dropped, mistaking regular capex for announced major investment plans.",
+              "new": "现有重大投资阈值与未来重大计划两否定须同包，不以不完整前半句替代；不将普通AI购置活动与公告重大投资计划混同。",
+              "reason": "现有重大投资阈值与未来重大计划两否定须同包，不以不完整前半句替代；不将普通AI购置活动与公告重大投资计划混同。"
+            }
+          ]
+        },
+        {
+          "fact_id": "h2-2025-business-outlook",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發",
+                    "page": 11,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。",
+                    "page": 11,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。"
+            },
+            {
+              "field": "reason",
+              "old": "Forward-looking plan (modality=plan, safe-harbour covered): H2-2025 strategy, continued R&D investment, AI capability build-out — not actual achieved results.",
+              "new": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。",
+              "reason": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。"
+            },
+            {
+              "field": "target_kind",
+              "old": "disposition_context",
+              "new": "required_business",
+              "reason": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。"
+            }
+          ]
+        },
+        {
+          "fact_id": "single-operating-segment",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。",
+                    "page": 50,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "本集團的大部分收入來自中國內地，且本集團的大部分長期資產位於中國內地，因此並無呈列地區分",
+                    "page": 50,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。",
+                    "page": 50,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "本集團的大部分收入來自中國內地，且本集團的大部分長期資產位於中國內地，因此並無呈列地區分\n部。",
+                    "page": 50,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "一個經營分部",
+                "並無呈列地區分部"
+              ],
+              "new": [
+                "一個經營分部",
+                "並無呈列地區分"
+              ],
+              "reason": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+            },
+            {
+              "field": "reason",
+              "old": "Public cloud / industry cloud are revenue CATEGORIES, not reportable segments; group has ONE operating segment and no geographic segment. Trap: mislabelling revenue disaggregation as segment reporting.",
+              "new": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。",
+              "reason": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+            },
+            {
+              "field": "target_kind",
+              "old": "correctness_if_emitted",
+              "new": "required_business",
+              "reason": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+            }
+          ]
+        },
+        {
+          "fact_id": "related-party-revenue",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "向小米集團提供公有雲服務\n490,133\n772,761\n107,873",
+                    "page": 64,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "702,381\n1,125,458\n157,109",
+                    "page": 64,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+                    "page": 64,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+                    "page": 64,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "收益：\n 向小米集團提供公有雲服務\n490,133\n772,761\n107,873\n 向金山軟件集團提供公有雲服務\n136,596\n173,094\n24,163\n 向其他關聯方提供公有雲服務\n232\n336\n47\n 向小米集團提供行業雲服務\n67,117\n171,315\n23,915\n 向金山軟件集團提供行業雲服務\n7,996\n7,855\n1,097\n 向其他關聯方提供行業雲服務\n16\n–\n–\n 向其他關聯方提供其他服務\n291\n97\n14\n702,381\n1,125,458\n157,109",
+                    "page": 64,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "条件财务金额：小米公有云772761与全部关联方收入1125458分母不同；完整科目/列头联合，不把总关联收入说成小米收入。"
+            },
+            {
+              "field": "reason",
+              "old": "H1-2025 related-party revenue RMB1,125,458k (vs 702,381k), of which Xiaomi public cloud RMB772,761k — traps: unit swap, related-party/segment line swap, direction.",
+              "new": "条件财务金额：小米公有云772761与全部关联方收入1125458分母不同；完整科目/列头联合，不把总关联收入说成小米收入。",
+              "reason": "条件财务金额：小米公有云772761与全部关联方收入1125458分母不同；完整科目/列头联合，不把总关联收入说成小米收入。"
+            }
+          ]
+        },
+        {
+          "fact_id": "interim-period-meta",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "合同最低採購承諾，總金額為人民幣630,000元（87,945美元）",
+                    "page": 66,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                    "page": 5,
+                    "location_kind": "page"
+                  },
+                  {
+                    "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+                    "page": 5,
+                    "location_kind": "page"
+                  }
+                ]
+              ],
+              "reason": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。"
+            },
+            {
+              "field": "must_not_assert",
+              "old": [
+                "報告期為截至二零二五年六月三十日止十二個月",
+                "數據為全年數據",
+                "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+              ],
+              "new": [
+                "報告期為截至二零二五年六月三十日止十二個月",
+                "數據為全年數據"
+              ],
+              "reason": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "截至二零二五年六月三十日止六個月",
+                "未經審計",
+                "630,000"
+              ],
+              "new": [
+                "截至二零二五年六月三十日止六個月",
+                "未經審計"
+              ],
+              "reason": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。"
+            },
+            {
+              "field": "reason",
+              "old": "Period is the six months ended 2025-06-30 (unaudited interim). Even amounts written '人民幣…元' in notes follow the RMB-thousands basis (630,000 → USD 87,945 confirms thousands) — a residual unit trap.",
+              "new": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。",
+              "reason": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。"
+            },
+            {
+              "field": "target_kind",
+              "old": "correctness_if_emitted",
+              "new": "disposition_context",
+              "reason": "期间元数据只约束六个月/未审计，剔除无关采购承诺630000的错误OR与must。该采购业务事实及单位反例迁移至独立合同阶段，未遗失来源责任。"
+            }
+          ]
+        },
+        {
+          "fact_id": "cloud-revenue-operating-drivers",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "fact",
+              "old": null,
+              "new": {
+                "id": "cloud-revenue-operating-drivers",
+                "importance": "critical",
+                "target_kind": "required_business",
+                "quantity_basis": "unknown",
+                "modality": "actual",
+                "role": "company_filing",
+                "fact_scope": "narrative",
+                "any_support_sets": [
+                  [
+                    {
+                      "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                      "page": 5,
+                      "location_kind": "page"
+                    },
+                    {
+                      "exact_quote": "該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。",
+                      "page": 9,
+                      "location_kind": "page"
+                    }
+                  ]
+                ],
+                "must_preserve": [
+                  "AI",
+                  "行業雲項目",
+                  "主動縮減",
+                  "CDN",
+                  "抵銷"
+                ],
+                "must_not_assert": [
+                  "金山雲所有業務增長均來自AI且沒有抵銷因素",
+                  "CDN服務擴張是收入增長的主要原因"
+                ],
+                "reason": "源侧新增关键经营因果：AI客户与行业云扩张、主动缩减CDN的抵销必须同时保留；补正金融数责任拆分，不以降分母取绿。"
+              },
+              "reason": "源侧新增关键经营因果：AI客户与行业云扩张、主动缩减CDN的抵销必须同时保留；补正金融数责任拆分，不以降分母取绿。"
+            }
+          ]
+        },
+        {
+          "fact_id": "cloud-service-growth-causal-split",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "fact",
+              "old": null,
+              "new": {
+                "id": "cloud-service-growth-causal-split",
+                "importance": "critical",
+                "target_kind": "required_business",
+                "quantity_basis": "unknown",
+                "modality": "actual",
+                "role": "company_filing",
+                "fact_scope": "narrative",
+                "any_support_sets": [
+                  [
+                    {
+                      "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                      "page": 5,
+                      "location_kind": "page"
+                    },
+                    {
+                      "exact_quote": "來自公有雲服務的收入由二零二四年同期的人民幣2,421.9百萬元增加23.0%至人民幣2,978.8百萬元\n（415.8百萬美元）。該同比增加主要是由於AI相關服務增長。",
+                      "page": 13,
+                      "location_kind": "page"
+                    },
+                    {
+                      "exact_quote": "來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4\n百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+                      "page": 13,
+                      "location_kind": "page"
+                    }
+                  ]
+                ],
+                "must_preserve": [
+                  "公有雲服務",
+                  "AI相關服務增長",
+                  "行業雲服務",
+                  "IT需求",
+                  "垂直行業客戶"
+                ],
+                "must_not_assert": [
+                  "行業雲收入增長23.0%",
+                  "公有雲增長全部因垂直行業方案複製且與AI無關"
+                ],
+                "reason": "按真实业务主体分开增长驱动，避免兄弟业务归因串线；数字在源包中保留但不要求把全表精度塞进叙述。"
+              },
+              "reason": "按真实业务主体分开增长驱动，避免兄弟业务归因串线；数字在源包中保留但不要求把全表精度塞进叙述。"
+            }
+          ]
+        },
+        {
+          "fact_id": "idc-purchase-commitment-stage",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "fact",
+              "old": null,
+              "new": {
+                "id": "idc-purchase-commitment-stage",
+                "importance": "normal",
+                "target_kind": "required_business",
+                "quantity_basis": "unknown",
+                "modality": "actual",
+                "role": "company_filing",
+                "fact_scope": "narrative",
+                "any_support_sets": [
+                  [
+                    {
+                      "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+                      "page": 66,
+                      "location_kind": "page"
+                    },
+                    {
+                      "exact_quote": "於二零二五年六月一日，本集團簽訂一份不可取消一年期互聯網數據中心服務協議，據此，本集團作出\n合同最低採購承諾，總金額為人民幣630,000元（87,945美元）。截至二零二五年六月三十日，剩餘採\n購承諾金額為人民幣576,101元（80,421美元）。",
+                      "page": 66,
+                      "location_kind": "page"
+                    }
+                  ]
+                ],
+                "must_preserve": [
+                  "二零二五年六月一日",
+                  "不可取消一年期",
+                  "服務協議",
+                  "630,000",
+                  "576,101",
+                  "人民幣千元"
+                ],
+                "must_not_assert": [
+                  "一年期IDC採購承諾已成為公司收入",
+                  "金山雲已完成全部IDC服務採購履約",
+                  "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+                ],
+                "reason": "保留原period-meta错误OR曾引用的采购责任为独立业务合同阶段，完整金额原话与全节千元说明联合，迁移原错误单位反例；不凭正文元字抹去全节单位，也不自造已履约/收入。"
+              },
+              "reason": "保留原period-meta错误OR曾引用的采购责任为独立业务合同阶段，完整金额原话与全节千元说明联合，迁移原错误单位反例；不凭正文元字抹去全节单位，也不自造已履约/收入。"
+            }
+          ]
+        }
+      ],
+      "record_revisions": [
+        {
+          "field": "notes",
+          "old": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。金山雲 hk_interim。prior_use=contaminated：du-bench 选样时探测过金山雲原件的文字层（.planning/du-bench/progress.md:269 '壁仞科技 and 金山雲 extract cleanly, so 壁仞 was used'），portfolio-reuse-fix 的 filing-fetch 复用机制也处理过其年报文件；本中期报告内容未用于任何规则或金标调参。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：千元表vs百萬元叙述、US GAAP 非 IFRS、收入类别非报告分部、投资vs收入。",
+          "new": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "scope",
+          "old": "holdout",
+          "new": "development",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_digest",
+          "old": "9b80d50400588236b3ed0a5db7bc3bfa9cab190b9017017a2759a1c0f8a011e1",
+          "new": "6f533d0afe77c78cc951994a6c80a4898f10135214f02a663c9d451fea2e94a0",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_frozen_before_output",
+          "old": true,
+          "new": false,
+          "reason": "Development contamination truth and source-authored revision lineage."
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "old_gold_sha256": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d",
+      "new_gold_path": "gold/du5-cn-gbits-call.json",
+      "new_gold_sha256": "831299c7393e4978f77b8811f31005df74310b27191d84192d6a332b7a4bb14a",
+      "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "support_set_digest": "438cde47e7e8480128137d7aa37cc40d0f967ba6af4b52d7b31b33541ed5bdbb",
+      "original_fact_count": 12,
+      "revised_fact_count": 13,
+      "original_importances_preserved": true,
+      "fact_revisions": [
+        {
+          "fact_id": "yy-flow-decline-premise",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "就是5月和6月分别上线了一些比较火的休闲类产品，或者就是一些新品，像寻道包括凡人修仙传这一类的。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人1 00:00",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "说话人1/分析师提问",
+                "流水是否还有一定的回升的空间",
+                "如果…趋缓"
+              ],
+              "new": [
+                "说话人1",
+                "流水是否还有一定的回升的空间",
+                "如果相对趋缓"
+              ],
+              "reason": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。"
+            },
+            {
+              "field": "reason",
+              "old": "Analyst's premise (visible decline + competitor easing) and its question must stay attributed to 说话人1; restating the premise or the hoped-for rebound as company fact is the trap. '一念' transcribed as 一念/一面/迎面.",
+              "new": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。",
+              "reason": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。"
+            },
+            {
+              "field": "role",
+              "old": "analyst_question",
+              "new": "unknown",
+              "reason": "匿名说话人1提出条件性问题，不确认其分析师身份；speaker/问题/条件须同scope，斜线角色注释与省略号不是原文must。保留旧公司确认反例。"
+            }
+          ]
+        },
+        {
+          "fact_id": "steam-activity-premise",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "我们一直是有这样过万的一个活跃，从绝对值可能不太准确，但是趋势是相对稳定的。",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "不没有，因为就初期的大量的负面评价，然后我们用户的活跃出现明显滑坡",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人1 08:18",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "然后我看现在每天的活跃人次，根据就steam时代上面的监测的话，我们一直是有这样过万的一个活跃，从绝对值可能不太准确，但是趋势是相对稳定的。",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "不没有，因为就初期的大量的负面评价，然后我们用户的活跃出现明显滑坡",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "说话人1/分析师监测",
+                "steam时代(≈SteamDB)监测",
+                "从绝对值可能不太准确"
+              ],
+              "new": [
+                "说话人1",
+                "steam时代",
+                "从绝对值可能不太准确",
+                "过万"
+              ],
+              "reason": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。"
+            },
+            {
+              "field": "reason",
+              "old": "Third-party Steam-monitoring estimate ('steam时代'≈SteamDB) and analyst's premise about an activity slump; company never confirmed either. ASR '不没有' kept verbatim.",
+              "new": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。",
+              "reason": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。"
+            },
+            {
+              "field": "role",
+              "old": "analyst_question",
+              "new": "unknown",
+              "reason": "匿名说话人1外部监测/追问的两片互补，不将steam时代强修成SteamDB；ASR不没有保留，不认公司披露用户指标。"
+            }
+          ]
+        },
+        {
+          "fact_id": "lei-ting-profit-analyst-inference",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "我看了一下我们雷霆这边就是q三的利润是1.17亿，然后q4的话是1.8亿",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "但是我们从少数股东这边推出来，可以看到它三季度到四季度环比来看",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人1 19:03",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "我看了一下我们雷霆这边就是q三的利润是1.17亿，然后q4的话是1.8亿",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "因为他是不没有单季度的，只有半年度的，但是我们从少数股东这边推出来",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "说话人1推算",
+                "q三1.17亿/q4 1.8亿",
+                "从少数股东这边推出来"
+              ],
+              "new": [
+                "说话人1",
+                "1.17亿",
+                "1.8亿",
+                "从少数股东这边推出来"
+              ],
+              "reason": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。"
+            },
+            {
+              "field": "reason",
+              "old": "Quarterly profits are the analyst's back-solve from minority interests (雷霆 only reports half-yearly); numbers must not be attributed to company disclosure.",
+              "new": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。",
+              "reason": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。"
+            },
+            {
+              "field": "role",
+              "old": "analyst_question",
+              "new": "unknown",
+              "reason": "匿名说话人1的推算与数值必须联合，不能拿只数字片段当公司季报披露。角色字段unknown避免未经来源核身份。"
+            }
+          ]
+        },
+        {
+          "fact_id": "yy-roi-decline-actual",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "但是去年上半年观察到 Oa明显的有比较大的下降",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "从二三年下半年我们是主动买了买量的一个支出",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 00:39",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "但是去年上半年观察到 Oa明显的有比较大的下降",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "相当于是从二三年下半年我们是主动买了买量的一个支出",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "新增的这一块的话会采用一些创新的营销方式，但是买量这块比较大幅度的减少了。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "去年上半年",
+                "Oa(≈ROI)下降",
+                "二三年下半年主动…买量支出(ASR≈减了)"
+              ],
+              "new": [
+                "说话人2",
+                "去年上半年",
+                "Oa",
+                "二三年下半年",
+                "买量这块比较大幅度的减少了"
+              ],
+              "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+            },
+            {
+              "field": "quantity_basis",
+              "old": "ratio",
+              "new": "unknown",
+              "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+            },
+            {
+              "field": "reason",
+              "old": "Core business state: ROI ('Oa') fell in H1 last year and buydown was actively cut from H2 2023; ASR '买了'≈'减了' must not be flipped into a spend increase.",
+              "new": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。",
+              "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "下降/时间与清楚的买量减少句联合；保留Oa/买了原ASR，不声称已验证为ROI或将买了强修成减了。仅匿名说话人2陈述。"
+            }
+          ]
+        },
+        {
+          "fact_id": "buydown-cut-and-stock-operation-plan",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 00:39",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "往后/会",
+                "尽量的去减少对买量的一个依赖",
+                "更多的去存量运营"
+              ],
+              "new": [
+                "说话人2",
+                "往后的话",
+                "更多的去存量运营"
+              ],
+              "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+            },
+            {
+              "field": "quantity_basis",
+              "old": "investment",
+              "new": "unknown",
+              "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+            },
+            {
+              "field": "reason",
+              "old": "Forward strategy (希望/会尽量), not accomplished fact; rephrasing as achieved traffic exit overstates execution.",
+              "new": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。",
+              "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "本ID只跟随同一匿名说话人2回合的未来存量运营意向；另一26:44回合减少依赖改独立事实，不能把不同话题远距离拼成同task。无定量资本投资值，quantity_basis unknown。"
+            }
+          ]
+        },
+        {
+          "fact_id": "buydown-no-return-negation",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "但整体来看的话，买量会不会再走到原来的水平了。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 00:39",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "那版本有一些新版本推出来的时候，会配合一些短期的买量，但整体来看的话，买量会不会再走到原来的水平了。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "modality",
+              "old": "negation",
+              "new": "unknown",
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "must_not_assert",
+              "old": [
+                "买量会回到原来的水平",
+                "买量水平会随版本回升到历史高位",
+                "公司未对买量水平表态"
+              ],
+              "new": [
+                "买量会回到原来的水平",
+                "买量水平会随版本回升到历史高位",
+                "公司未对买量水平表态",
+                "公司明确承诺买量不会再回到原有水平",
+                "公司明确承诺买量一定回到原有水平"
+              ],
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "买量",
+                "不会(再)",
+                "原来的水平"
+              ],
+              "new": [
+                "说话人2",
+                "短期的买量",
+                "买量会不会再走到原来的水平了"
+              ],
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "quantity_basis",
+              "old": "investment",
+              "new": "unknown",
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "reason",
+              "old": "Explicit negation that buydown will NOT return to prior levels; ASR renders it '会不会再' — dropping or re-reading it as a possibility/rebound is the trap.",
+              "new": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。",
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "保留原ID作修订追踪，但ASR会不会是歧义，不标确定否定或确定回升；无音频不能强修。unknown不是取消检查，仍禁止两向编造承诺。无定量资本投资值。"
+            }
+          ]
+        },
+        {
+          "fact_id": "yy-stabilize-target-uncertain",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "所以后期的话我们希望能够在一个新的水平去稳住这款产品",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 00:39",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "所以后期的话我们希望能够在一个新的水平去稳住这款产品，但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "希望",
+                "目前也不太好判断",
+                "再观察一段时间"
+              ],
+              "new": [
+                "说话人2",
+                "希望",
+                "目前也不太好判断",
+                "再观察一段时间"
+              ],
+              "reason": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。"
+            },
+            {
+              "field": "reason",
+              "old": "Plan (希望) explicitly paired with '目前也不太好判断' uncertainty; removing the hedge converts an open question into guidance.",
+              "new": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。",
+              "reason": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "意愿与明确不确定性同段AND，不把只含希望的短片作充分替代；匿名说话人2，不给企稳时间承诺。"
+            }
+          ]
+        },
+        {
+          "fact_id": "outpost-update-plan-uncommitted",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "我们也会跟着这些节点再去集中推出一些更新迭代的版本",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 04:37",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "我们也会跟着这些节点再去集中推出一些更新迭代的版本，希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "希望",
+                "具体的计划还没有",
+                "可能还会有所变化"
+              ],
+              "new": [
+                "说话人2",
+                "希望",
+                "具体的计划还没有",
+                "可能还会有所变化"
+              ],
+              "reason": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。"
+            },
+            {
+              "field": "reason",
+              "old": "Explicitly uncommitted plan; presenting it as a set roadmap ignores the stated '计划还没有…可能还会有所变化'.",
+              "new": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。",
+              "reason": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "更新意向+未落地+可能变化必须同片，拒绝只意向的OR；保留匿名说话人2回合，不把路线图说已锁定。"
+            }
+          ]
+        },
+        {
+          "fact_id": "outpost-buyout-revenue-recognition",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "他是当即确认收入，但是会做一个利息负债什么类似的处理",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "其他的消耗型道具一样，还要做一个递延。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 09:24这款的话会卖出卖出，然后会根据就看退货率的一个情况，会去做一个他是当即确认收入，但是会做一个利息负债什么类似的处理，",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "说话人1 09:41它不像",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "说话人2 09:42其他的消耗型道具一样，还要做一个递延。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "must_not_assert",
+              "old": [
+                "重装前哨收入按道具消耗递延确认",
+                "买断收入全额即时确认且无退货准备",
+                "公司披露了递延收入金额"
+              ],
+              "new": [
+                "重装前哨收入按道具消耗递延确认",
+                "买断收入全额即时确认且无退货准备",
+                "公司披露了递延收入金额",
+                "公司明确披露了名为退款负债的金额",
+                "原文已经确认利息负债就是预计负债"
+              ],
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "当即确认收入",
+                "利息负债(≈预计负债/退货)",
+                "道具…递延(对照)"
+              ],
+              "new": [
+                "说话人2",
+                "当即确认收入",
+                "利息负债什么类似的处理",
+                "它不像",
+                "消耗型道具",
+                "递延"
+              ],
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "reason",
+              "old": "Accounting distinction (buyout sale vs consumable-item deferral) with ASR '利息负债'≈refund/return liability; misstating recognition basis corrupts any revenue timing reading.",
+              "new": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。",
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": false,
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "09:24/09:41/09:42三个匿名短回合AND：说话人1的它不像是消耗型道具递延比较的否定连接，不能删去导致关系反转。role unknown且不伪造同回合；利息负债ASR不扩充成预计负债或退款负债，不能推出精确金额或无准备。"
+            }
+          ]
+        },
+        {
+          "fact_id": "outpost-stage-problems-resolved",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "现在大部分的情况是可以解决了，还有一些少数的我们也会持续的去跟进跟调整。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 04:37",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "现在大部分的情况是可以解决了，还有一些少数的我们也会持续的去跟进跟调整。",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "大部分的情况…可以解决",
+                "少数…持续跟进"
+              ],
+              "new": [
+                "说话人2",
+                "大部分的情况是可以解决了",
+                "少数",
+                "持续的去跟进跟调整"
+              ],
+              "reason": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。"
+            },
+            {
+              "field": "reason",
+              "old": "Product-stage statement of partial (not full) recovery after launch issues; '大部分/少数' gradation must survive.",
+              "new": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。",
+              "reason": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "分级现状与残余跟进同片，去除省略号编辑token；不扩成全部修复，匿名speaker2身份未验证。"
+            }
+          ]
+        },
+        {
+          "fact_id": "strategy-category-unchanged-negation",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "品类上来看的话，目前没有一个很大的变化",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 30:51",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "品类上来看的话，目前没有一个很大的变化",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "品类上",
+                "没有一个很大的变化"
+              ],
+              "new": [
+                "说话人2",
+                "品类上",
+                "没有一个很大的变化"
+              ],
+              "reason": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。"
+            },
+            {
+              "field": "reason",
+              "old": "Explicit negation answering the analyst's strategy-pivot question; dropping '没有' invents a strategic shift that management denied.",
+              "new": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。",
+              "reason": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "局限品类没有很大变化，不能扩成所有战略毫无变化；匿名speaker2不作姓名/职务推断。"
+            }
+          ]
+        },
+        {
+          "fact_id": "yy-user-base-scale",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "最开始我们现在整个大盘子有2000多用户，然后有一些流失再回来的",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "说话人2 03:16",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "最开始我们现在整个大盘子有2000多用户，然后有一些流失再回来的",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            },
+            {
+              "field": "modality",
+              "old": "actual",
+              "new": "unknown",
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "整个大盘子",
+                "2000多用户",
+                "流失再回来"
+              ],
+              "new": [
+                "说话人2",
+                "整个大盘子",
+                "2000多用户",
+                "流失再回来"
+              ],
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            },
+            {
+              "field": "quantity_basis",
+              "old": "count",
+              "new": "unknown",
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            },
+            {
+              "field": "reason",
+              "old": "User-scale statement with dropped unit ('2000多[万]用户' ASR-ambiguous); the number must not be promoted to a precise disclosed metric.",
+              "new": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。",
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            },
+            {
+              "field": "require_same_scope",
+              "old": null,
+              "new": true,
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            },
+            {
+              "field": "role",
+              "old": "management_answer",
+              "new": "unknown",
+              "reason": "2000多用户存在ASR单位/指标含义歧义；quantity_basis/modality unknown，不填万、不解释成MAU/注册或精确人数。数值原话与匿名speaker2同scope。"
+            }
+          ]
+        },
+        {
+          "fact_id": "buydown-dependence-reduction-intent",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "fact",
+              "old": null,
+              "new": {
+                "id": "buydown-dependence-reduction-intent",
+                "importance": "critical",
+                "target_kind": "required_business",
+                "quantity_basis": "unknown",
+                "modality": "plan",
+                "role": "unknown",
+                "fact_scope": "narrative",
+                "require_same_scope": true,
+                "any_support_sets": [
+                  [
+                    {
+                      "exact_quote": "说话人2 26:44",
+                      "location_kind": "document"
+                    },
+                    {
+                      "exact_quote": "因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+                      "location_kind": "document"
+                    }
+                  ]
+                ],
+                "must_preserve": [
+                  "说话人2",
+                  "希望",
+                  "尽量的去减少对买量的一个依赖"
+                ],
+                "must_not_assert": [
+                  "公司已消除买量依赖",
+                  "说话人2称已经停止广告投放"
+                ],
+                "reason": "从旧复合买量计划单独保留另一回合的减少依赖意向，仍critical，不因纠正OR漏掉责任；不将愿望写成完成。"
+              },
+              "reason": "从旧复合买量计划单独保留另一回合的减少依赖意向，仍critical，不因纠正OR漏掉责任；不将愿望写成完成。"
+            }
+          ]
+        }
+      ],
+      "record_revisions": [
+        {
+          "field": "notes",
+          "old": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。吉比特 earnings_call_transcript。prior_use=fresh：n5 raw-duplicate-audit 列过吉比特年报路径元数据；本电话会转写原件与内容在本次任务前从未被读取，也未进入任何 benchmark gold/findings/调参讨论。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：否定/计划/问答角色（分析师前提≠公司事实、计划≠已实现、否定不得丢失、ASR 噪声保留）。（版本2，2026-10-15 C节点独审更正：仅负例字符串/一处 modality 标签，锚点与重要性、分母未动；旧值见 gold_corrections.json.content_corrections。）",
+          "new": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "scope",
+          "old": "holdout",
+          "new": "development",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_digest",
+          "old": "2571c60ee96c3c887e6ec5db50cf05018da77d41c4deed27bc9b27c04114cb93",
+          "new": "438cde47e7e8480128137d7aa37cc40d0f967ba6af4b52d7b31b33541ed5bdbb",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_digest_at_freeze",
+          "old": "6677d96044ca503c89a503db13a624c143d30252a163c11424299fcc75cbb909",
+          "new": null,
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_frozen_before_output",
+          "old": true,
+          "new": false,
+          "reason": "Development contamination truth and source-authored revision lineage."
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "old_gold_sha256": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5",
+      "new_gold_path": "gold/du5-us-msft-ex991.json",
+      "new_gold_sha256": "abc0f51255a55f1da13cf07e8d627e8606468e7cd677d30744679ab191718231",
+      "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "support_set_digest": "cfa99e5691b769118d87f7e728ace42f9d51480d411ab21b4f8bdf6b818a3b8e",
+      "original_fact_count": 12,
+      "revised_fact_count": 12,
+      "original_importances_preserved": true,
+      "fact_revisions": [
+        {
+          "fact_id": "fy27-two-reporting-segments",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Beginning with FY27, we will transition",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "to two segments: Agents and Infra and Devices and Consumer",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "transition from our current three reporting segments",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "Beginning with FY27, we will transition from our current three reporting segments, Productivity and Business Processes, Intelligent Cloud, and More Personal Computing, to two segments: Agents and Infra and Devices and Consumer.",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "完整will transition/FY27/旧三段/新两段同句，不用只旧三段短语当充分OR；保留前瞻而非已完成。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "two reporting segments",
+                "Agents and Infra",
+                "Devices and Consumer",
+                "FY27"
+              ],
+              "new": [
+                "two segments",
+                "Agents and Infra",
+                "Devices and Consumer",
+                "FY27"
+              ],
+              "reason": "完整will transition/FY27/旧三段/新两段同句，不用只旧三段短语当充分OR；保留前瞻而非已完成。"
+            },
+            {
+              "field": "reason",
+              "old": "Segment count/names are the headline fact; trap is confusing reportable segments with product lines (Azure, M365) or geography, and restating a 'will transition' plan as accomplished.",
+              "new": "完整will transition/FY27/旧三段/新两段同句，不用只旧三段短语当充分OR；保留前瞻而非已完成。",
+              "reason": "完整will transition/FY27/旧三段/新两段同句，不用只旧三段短语当充分OR；保留前瞻而非已完成。"
+            }
+          ]
+        },
+        {
+          "fact_id": "prior-three-segments-retired",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Productivity and Business Processes, Intelligent Cloud, and More Personal Computing",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "Beginning with FY27, we will transition from our current three reporting segments, Productivity and Business Processes, Intelligent Cloud, and More Personal Computing, to two segments: Agents and Infra and Devices and Consumer.",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "来源为FY27将转换，旧三段名字必须与transition语境同在，不能表述为已经完成全部更改。"
+            },
+            {
+              "field": "modality",
+              "old": "actual",
+              "new": "plan",
+              "reason": "来源为FY27将转换，旧三段名字必须与transition语境同在，不能表述为已经完成全部更改。"
+            },
+            {
+              "field": "reason",
+              "old": "Names the superseded FY26 structure; trap is carrying old segment names into FY27 or vice versa.",
+              "new": "来源为FY27将转换，旧三段名字必须与transition语境同在，不能表述为已经完成全部更改。",
+              "reason": "来源为FY27将转换，旧三段名字必须与transition语境同在，不能表述为已经完成全部更改。"
+            }
+          ]
+        },
+        {
+          "fact_id": "commercial-bookings-definition",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "commercial products and cloud services, sum of revenue growth",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "change in balance of unearned revenue plus the change in contracted not billed balance",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "sum of revenue growth, plus change in balance of unearned revenue",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Investor Metric Definitions",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Commercial bookings growth: for\ncommercial products and cloud services, sum of revenue growth, plus change in balance of unearned revenue plus the change in contracted not billed balance",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "sum of revenue growth",
+                "unearned revenue",
+                "contracted not billed",
+                "commercial"
+              ],
+              "new": [
+                "sum of revenue growth",
+                "unearned revenue",
+                "contracted not billed",
+                "commercial",
+                "FY27"
+              ],
+              "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+            },
+            {
+              "field": "reason",
+              "old": "Bookings is a derived composite metric (revenue growth + unearned-revenue change + contracted-not-billed change), not signed bookings; trap is treating it as a measured contract total.",
+              "new": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。",
+              "reason": "FY27定义版本标题与商业范围/三项复合计算完整同句联合；删缺contracted-not-billed的OR，不将bookings当新签合同绝对额，也不无时点套用另一版本指标。"
+            }
+          ]
+        },
+        {
+          "fact_id": "commercial-rpo-definition",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Commercial remaining performance obligation: commercial portion of revenue allocated to",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "amounts that will be invoiced and recognized as revenue in future periods",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Investor Metric Definitions",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Commercial remaining performance obligation: commercial portion of revenue allocated to\nremaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "commercial portion",
+                "remaining performance obligations",
+                "unearned revenue",
+                "future periods"
+              ],
+              "new": [
+                "commercial portion",
+                "remaining performance obligations",
+                "unearned revenue",
+                "future periods",
+                "FY27"
+              ],
+              "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+            },
+            {
+              "field": "reason",
+              "old": "RPO is a backlog balance (unearned + to-be-invoiced future revenue), commercial only; trap is asserting it as a measured revenue total.",
+              "new": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。",
+              "reason": "FY27版本标题与商业范围、未实现/未来开票及未来确认联合，不能只选名字/末半句或从不明时点指标反套本定义。"
+            }
+          ]
+        },
+        {
+          "fact_id": "seat-growth-includes-github",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "seat growth metric definition has been updated to include paid GitHub seats",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "the number of Microsoft 365 Commercial seats and GitHub Cloud seats at end of period",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Metric Updates",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Microsoft 365 commercial seat growth metric definition has been updated to include paid GitHub seats",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Microsoft 365 commercial seat growth: the number of Microsoft 365 Commercial seats and GitHub Cloud seats at end of period where seats are paid users\ncovered by a Microsoft 365 Commercial subscription or GitHub subscription",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "GitHub seats",
+                "paid",
+                "end of period",
+                "Microsoft 365 Commercial seats"
+              ],
+              "new": [
+                "paid GitHub seats",
+                "paid users",
+                "end of period",
+                "Microsoft 365 Commercial seats",
+                "FY27"
+              ],
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            },
+            {
+              "field": "reason",
+              "old": "Redefinition adds paid GitHub seats to the seat metric and measures point-in-time seats; trap is old-definition comparability.",
+              "new": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。",
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            },
+            {
+              "field": "target_kind",
+              "old": "correctness_if_emitted",
+              "new": "required_business",
+              "reason": "FY27版本标题、定义变化与付费/期末用户范围联合；业务机制定义改required_business，normal保留，不把座席定义当真实座席增量，也不将新范围用于旧已报增长率。"
+            }
+          ]
+        },
+        {
+          "fact_id": "fy27q1-outlook-mechanical-only",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "指引期次+旧指引机械改列联合；不能作为9月新上调/下调指引。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "mechanical adjustments only",
+                "outlook",
+                "July 29, 2026"
+              ],
+              "new": [
+                "FY27 Q1",
+                "mechanical adjustments only",
+                "outlook",
+                "July 29, 2026"
+              ],
+              "reason": "指引期次+旧指引机械改列联合；不能作为9月新上调/下调指引。"
+            },
+            {
+              "field": "reason",
+              "old": "Adjusted figures are a mechanical recast of the July 29, 2026 outlook for segment-definition changes, not fresh guidance; trap is presenting it as a guidance revision (plan, not actual).",
+              "new": "指引期次+旧指引机械改列联合；不能作为9月新上调/下调指引。",
+              "reason": "指引期次+旧指引机械改列联合；不能作为9月新上调/下调指引。"
+            }
+          ]
+        },
+        {
+          "fact_id": "azure-fy27q1-growth-outlook",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Azure revenue Growth of 44% to 45% in constant currency",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud. Healthcare and Life Sciences cloud will move to the new Industry\nsolutions cloud metric.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Adjusted Outlook Agents and Infra",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Azure revenue Growth of 44% to 45% in constant currency, with FX expected to decrease revenue by less than 1 point",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "Azure",
+                "44% to 45%",
+                "constant currency",
+                "Growth"
+              ],
+              "new": [
+                "Azure",
+                "44% to 45%",
+                "constant currency",
+                "Growth",
+                "FY27 Q1",
+                "Adjusted Outlook",
+                "Healthcare and Life Sciences cloud",
+                "Industry solutions cloud"
+              ],
+              "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+            },
+            {
+              "field": "reason",
+              "old": "Outlook (plan) for FY27 Q1 only, constant-currency basis on the NEW Azure definition (ex GitHub/Security Copilot); trap is restating as actual or GAAP growth.",
+              "new": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。",
+              "reason": "新Azure定义包含GitHub/developer/Security Copilot移到M365及Healthcare/LifeSciences移到Industry solutions，完整范围与FY27Q1、机械调整旧指引、Adjusted/恒汇率/FX作用联合；不能仅保留一类剔除项再混用旧口径。"
+            }
+          ]
+        },
+        {
+          "fact_id": "total-company-fy27q1-revenue-outlook",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Total Company Revenue of $89.85 to $90.95 billion",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Q1 Outlook",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026, for the changes discussed in this presentation.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Total Company Revenue of $89.85 to $90.95 billion",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Adjusted Outlook Foreign currency impact Decrease to total\nrevenue growth by less than 1 point, with roughly 1 point in Agents and Infra, and no meaningful impact in Devices and Consumer No meaningful impact to COGS or operating expense growth Total Company No change to outlook",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "$89.85 to $90.95 billion",
+                "Total Company",
+                "Revenue"
+              ],
+              "new": [
+                "$89.85 to $90.95 billion",
+                "Total Company",
+                "Revenue",
+                "FY27 Q1",
+                "mechanical adjustments only",
+                "No change to outlook"
+              ],
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            },
+            {
+              "field": "reason",
+              "old": "Quarter (FY27 Q1) outlook range as provided July 29, 2026 — plan, period-bound; trap is full-year or actual restatement.",
+              "new": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。",
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            },
+            {
+              "field": "target_kind",
+              "old": "disposition_context",
+              "new": "required_business",
+              "reason": "旧July29总公司区间必须与Adjusted Outlook中Total Company No change联合，不能仅用通用机械调整语句推出总额不变。收入展望仍required_business/normal，季度与新旧范围明确。"
+            }
+          ]
+        },
+        {
+          "fact_id": "restated-segment-fy26-revenue",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "Revenue $61,672 $64,441 $67,438 $74,576 $268,127",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "Revenue $16,001 $16,832 $15,448 $15,431 $63,712",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "Restated Historical Financials",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "($ in millions) 2026 2025 Agents\nand Infra Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2 Q3 Q4 Fiscal Year Revenue $61,672 $64,441 $67,438 $74,576 $268,127",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Devices and Consumer Q1 Q2 Q3 Q4 Fiscal Year Q1 Q2\nQ3 Q4 Fiscal Year Revenue $16,001 $16,832 $15,448 $15,431 $63,712",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "精确历史财务表为correctness_if_emitted，critical与错误年份/单位反例不变；两分部金额+FY26/FY25列头+inmillions+重述背景联合，不能一分部OR替代两者。"
+            },
+            {
+              "field": "must_preserve",
+              "old": [
+                "$268,127",
+                "$63,712",
+                "in millions",
+                "Fiscal Year"
+              ],
+              "new": [
+                "$268,127",
+                "$63,712",
+                "in millions",
+                "Fiscal Year",
+                "2026",
+                "Restated"
+              ],
+              "reason": "精确历史财务表为correctness_if_emitted，critical与错误年份/单位反例不变；两分部金额+FY26/FY25列头+inmillions+重述背景联合，不能一分部OR替代两者。"
+            },
+            {
+              "field": "reason",
+              "old": "FY26 (fiscal 2026) quarterly and full-year revenue under the NEW restated segments, $ in millions; trap is calendar-2026 reading, FY27 attribution, or mixing with as-reported bases.",
+              "new": "精确历史财务表为correctness_if_emitted，critical与错误年份/单位反例不变；两分部金额+FY26/FY25列头+inmillions+重述背景联合，不能一分部OR替代两者。",
+              "reason": "精确历史财务表为correctness_if_emitted，critical与错误年份/单位反例不变；两分部金额+FY26/FY25列头+inmillions+重述背景联合，不能一分部OR替代两者。"
+            },
+            {
+              "field": "target_kind",
+              "old": "required_business",
+              "new": "correctness_if_emitted",
+              "reason": "精确历史财务表为correctness_if_emitted，critical与错误年份/单位反例不变；两分部金额+FY26/FY25列头+inmillions+重述背景联合，不能一分部OR替代两者。"
+            }
+          ]
+        },
+        {
+          "fact_id": "forward-looking-caveat",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "forward-looking statements, which are any predictions, projections",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "We do not undertake any duty to update",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "materially differ because of factors discussed in the Risk Factors section",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "forward-looking statements, which are any predictions, projections, or other statements about future events.",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Actual results could\nmaterially differ because of factors discussed in the Risk Factors section",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "We do not undertake any duty to update\nforward-looking statements.",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "风险不确定/预测属性/不负更新义务三者AND，只有风险一句不能替代不更新条款；仍critical document_meta。"
+            },
+            {
+              "field": "reason",
+              "old": "The exhibit's own FLS caveat marks all outlook/restructuring statements as plan subject to risk; trap is restating projections as actual or as obligations.",
+              "new": "风险不确定/预测属性/不负更新义务三者AND，只有风险一句不能替代不更新条款；仍critical document_meta。",
+              "reason": "风险不确定/预测属性/不负更新义务三者AND，只有风险一句不能替代不更新条款；仍critical document_meta。"
+            }
+          ]
+        },
+        {
+          "fact_id": "exhibit-identity-fy27-segments-metrics",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "FY27 Segments and Investor Metrics",
+                    "location_kind": "document"
+                  }
+                ],
+                [
+                  {
+                    "exact_quote": "September 2026 Exhibit 99.1",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "FY27 Segments and Investor Metrics\nSeptember 2026 Exhibit 99.1",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "标题+月年+exhibit同封面，不能只标题或只月年OR，也不能从文件名回填封面具体9月2日。"
+            },
+            {
+              "field": "reason",
+              "old": "Identity/lineage: an investor presentation exhibit, not a periodic report; cover carries month/year only (parent 8-K event date 2026-09-02).",
+              "new": "标题+月年+exhibit同封面，不能只标题或只月年OR，也不能从文件名回填封面具体9月2日。",
+              "reason": "标题+月年+exhibit同封面，不能只标题或只月年OR，也不能从文件名回填封面具体9月2日。"
+            }
+          ]
+        },
+        {
+          "fact_id": "growth-comparison-fiscal-basis",
+          "source_semantics_reviewed": true,
+          "changes": [
+            {
+              "field": "any_support_sets",
+              "old": [
+                [
+                  {
+                    "exact_quote": "relate to the corresponding period of last fiscal year unless otherwise noted",
+                    "location_kind": "document"
+                  },
+                  {
+                    "exact_quote": "Numbers may not foot due to rounding.",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "new": [
+                [
+                  {
+                    "exact_quote": "All growth comparisons in this\npresentation relate to the corresponding period of last fiscal year unless otherwise noted. Numbers may not foot due to rounding.",
+                    "location_kind": "document"
+                  }
+                ]
+              ],
+              "reason": "同比财年/除非另说明及舍入限制联合；不得推成季度环比、日历年或强制每表精确加总。"
+            },
+            {
+              "field": "reason",
+              "old": "Fiscal-period trap: y/y means prior fiscal-year quarter and 'unless otherwise noted' is conditional; rounding note means footing differences are expected, not errors.",
+              "new": "同比财年/除非另说明及舍入限制联合；不得推成季度环比、日历年或强制每表精确加总。",
+              "reason": "同比财年/除非另说明及舍入限制联合；不得推成季度环比、日历年或强制每表精确加总。"
+            }
+          ]
+        }
+      ],
+      "record_revisions": [
+        {
+          "field": "notes",
+          "old": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。MICROSOFT CORP sec_exhibit。prior_use=contaminated：company already in benchmark gold/findings via us-10k / us-txt / us-release; this exhibit file itself was never read before this card。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：计划vs实际（outlook）、指标定义（bookings/RPO/席位）、财年vs日历年、重述vs原口径。",
+          "new": "M1 source-checkpoints revision 2026-10-24. All samples already diagnosed; development only, not fresh or frozen before prior output. Every original fact id/importance and error counterexample retained; full source-side joint evidence, anonymous/ASR ambiguity and explicit responsibility separation. Author QA is not independent acceptance. See ../revision_manifest.json.",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "scope",
+          "old": "holdout",
+          "new": "development",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_digest",
+          "old": "f70fb8f00649cc7e24d8ec2169e5ea1c3d326356ca0a57bd68cef9e158e954c8",
+          "new": "cfa99e5691b769118d87f7e728ace42f9d51480d411ab21b4f8bdf6b818a3b8e",
+          "reason": "Development contamination truth and source-authored revision lineage."
+        },
+        {
+          "field": "support_set_frozen_before_output",
+          "old": true,
+          "new": false,
+          "reason": "Development contamination truth and source-authored revision lineage."
+        }
+      ]
+    }
+  ]
+}

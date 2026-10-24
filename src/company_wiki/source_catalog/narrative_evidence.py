@@ -547,12 +547,6 @@ _TRANSCRIPT_END = re.compile(
     r"^(?:forward-looking statements|disclaimer|copyright(?:\s|$)|about the motley fool)",
     re.IGNORECASE,
 )
-_SPEAKER_LINE = re.compile(
-    r"^(?P<name>[A-Z][A-Za-z0-9.'’ -]{1,78}?)(?:\s*--\s*(?P<title>[^:]{1,80}))?:\s*(?P<body>.*)$"
-)
-_SPEAKER_LABEL = re.compile(
-    r"^(?P<name>[A-Z][A-Za-z0-9.'’ -]{1,78})\s*--\s*(?P<title>[^:]{1,80})\s*$"
-)
 _EDITORIAL = re.compile(
     r"full conference call transcript|call participants|glossary|editorial|"
     r"forward-looking statements|copyright|motley fool",
@@ -1819,17 +1813,8 @@ class _TranscriptParseState:
 def _transcript_speaker_fields(
     stripped: str,
 ) -> tuple[str | None, str | None, str | None]:
-    label = _SPEAKER_LABEL.match(stripped)
-    if label:
-        return label.group("name").strip(), label.group("title").strip(), ""
-    inline = _SPEAKER_LINE.match(stripped)
-    if inline:
-        return (
-            inline.group("name").strip(),
-            (inline.group("title") or "").strip(),
-            inline.group("body").strip(),
-        )
-    return None, None, None
+    from .transcript_layout import legacy_speaker_fields
+    return legacy_speaker_fields(stripped)
 
 
 def _transcript_answer_group(
@@ -1854,8 +1839,9 @@ def _begin_transcript_speaker(
     body: str,
     *,
     stable_qa: bool = False,
+    native_turn: Mapping[str, str] | None = None,
 ) -> None:
-    role = _speaker_role(
+    role = "unknown" if native_turn is not None else _speaker_role(
         name,
         title,
         qa_mode=state.qa_mode,
@@ -1886,6 +1872,9 @@ def _begin_transcript_speaker(
         "lines": [body] if body else [],
     }
     state.blocks.append(state.active)
+    if native_turn is not None:
+        state.active["native_speaker_turn"] = dict(native_turn)
+        state.active["native_lines"] = [(line_number, body)]
 
 
 def _consume_transcript_line(
@@ -1959,6 +1948,8 @@ def _append_transcript_unattributed(
         }
         state.blocks.append(state.active)
     state.active["lines"].append(line)
+    if "native_lines" in state.active:
+        state.active["native_lines"].append((line_number, line))
     state.active["line_end"] = line_number
     return True
 
@@ -2043,6 +2034,18 @@ def _transcript_piece_units(
 def _transcript_block_units(
     block: Mapping[str, Any], source_id: str, parser_version: str, language: str
 ) -> list[NarrativeUnit]:
+    if "native_speaker_turn" in block:
+        return [
+            _make_unit(
+                source_id=source_id, parser_version=parser_version,
+                coordinates=EvidenceCoordinates(paragraph_index=line - 1, char_start=start, char_end=end),
+                raw_text=value, unit_kind="transcript_speaker_block", source_role="unknown", language=language,
+                metadata={"line_start": line, "line_end": line,
+                          "native_speaker_turn": block["native_speaker_turn"]},
+            )
+            for line, raw in block["native_lines"]
+            for start, end, value in (_trimmed_range(raw, 0, len(raw)),) if value
+        ]
     body = "\n".join(block["lines"]).strip()
     if not body:
         return []
@@ -2076,11 +2079,13 @@ def parse_transcript_text(
         raise TypeError("transcript text must be a string")
     contract = transcript_parser_contract(parser_version)
     raw_lines = text.splitlines()
+    native_layout = contract.layout == "natural_native_turns"
     legacy = contract.layout == "legacy"
-    stable_boundaries = contract.layout == "natural_affiliation_boundary"
+    stable_boundaries = contract.layout in {"natural_affiliation_boundary", "natural_native_turns"}
     affiliation = contract.layout in {
         "natural_affiliation",
         "natural_affiliation_boundary",
+        "natural_native_turns",
     }
     if legacy:
         heading = next(
@@ -2101,6 +2106,7 @@ def parse_transcript_text(
             _transcript_speaker_fields,
             allow_affiliation=affiliation,
             prefer_explicit=stable_boundaries,
+            allow_native=native_layout,
         )
         start_index = None if found is None else found[0]
         explicit_heading = False if found is None else found[1]
@@ -2114,6 +2120,8 @@ def parse_transcript_text(
             errors=("transcript_start_missing",),
         )
     state = _TranscriptParseState()
+    from .transcript_layout import AnonymousTurnObserver
+    native_observer = AnonymousTurnObserver()
     finished = False
     index = start_index
     while index < len(raw_lines):
@@ -2137,6 +2145,7 @@ def parse_transcript_text(
                 index,
                 _transcript_speaker_fields,
                 allow_affiliation=affiliation,
+                allow_native=native_layout,
             )
             if name:
                 _begin_transcript_speaker(
@@ -2146,6 +2155,8 @@ def parse_transcript_text(
                     title or "",
                     body or "",
                     stable_qa=affiliation,
+                    native_turn=(native_observer.observe(line, source_id=source_id, locator=f"line:{index + 1}")
+                                 if native_layout else None),
                 )
                 if label_count > 1 and state.active is not None:
                     state.active["line_end"] = index + label_count

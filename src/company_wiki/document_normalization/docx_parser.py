@@ -15,6 +15,7 @@ from typing import Any
 from lxml import etree
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
 from company_wiki.source_catalog.narrative_document import DocumentStructure
+from company_wiki.source_catalog.transcript_layout import AnonymousTurnObserver
 from .document import NormalizedDocument
 from .errors import NormalizationLimitError, UnsupportedFormatError
 from .limits import MAX_ZIP_MEMBERS
@@ -301,12 +302,23 @@ class _DocxBody:
         self.tables = 0
         self.qa_counter = 0
         self.active_qa = None
+        self.native_turns = AnonymousTurnObserver()
 
     def emit(self, node, *, coordinates, locator, kind, metadata=None):
         self.limits.check_deadline("docx:emit")
+        if kind != "docx_paragraph":
+            self.native_turns.clear()
         text = normalize_text(_visible_text(node, self.diagnostics))
         if not text:
             return
+        native_turn = None
+        if self.parser_version == DOCX_PARSER_VERSION:
+            if kind == "docx_paragraph":
+                native_turn = self.native_turns.observe(
+                    text, source_id=self.source_id, locator=locator
+                )
+            else:
+                self.native_turns.clear()
         markers = list(_QA_MARKER.finditer(text))
         starts = sorted({0, *(m.start("label") for m in markers)})
         for start, end in zip(starts, (*starts[1:], len(text)), strict=True):
@@ -322,7 +334,11 @@ class _DocxBody:
             self.limits.require_within("max_text_output_bytes", self.text_bytes)
             role = "company_filing"
             meta = dict(metadata or {})
-            if _QUESTION.search(piece):
+            if native_turn is not None:
+                role = "unknown"
+                self.active_qa = None
+                meta["native_speaker_turn"] = native_turn
+            elif _QUESTION.search(piece):
                 self.qa_counter += 1
                 self.active_qa = "docx-qa-" + str(self.qa_counter)
                 role = "analyst"
@@ -354,6 +370,7 @@ class _DocxBody:
             )
 
     def table(self, table):
+        self.native_turns.clear()
         index = self.tables
         self.tables += 1
         rows = table.findall(W + "tr")

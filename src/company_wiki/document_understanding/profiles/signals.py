@@ -1280,8 +1280,21 @@ def _detect_qa_and_call(
                     and ref['char_end'] <= len(probed[ref['unit_id']].text)
                     and (probed[ref['unit_id']].parent_id or observation.source_id) == turn['parent_id']}
         speaker_units = [unit for unit in observation.probes if unit.unit_id in turn_ids]
+    native_actors: dict[str, set[str]] = {}
+    if observation.native_source_signals is not None:
+        for turn in observation.native_source_signals.get('turn_evidence', ()):
+            speaker = turn.get('speaker')
+            if speaker and any(ref['unit_id'] in turn_ids for ref in turn['body_refs']):
+                native_actors.setdefault(turn['parent_id'], set()).add(normalize(speaker).replace(' ', ''))
+    speaker_proof = (len(speaker_units) >= 2 if observation.native_source_signals is None
+                     else any(len(actors) >= 2 for actors in native_actors.values()))
     if transcript_hits or (
-        len(speaker_units) >= 2 and matches_any(body_text, ("earnings", "call", "quarter"))
+        speaker_proof and matches_any(body_text, ("earnings", "call", "quarter"))
+    ) or (
+        observation.native_source_signals is not None
+        and speaker_proof
+        and matches_any(title_text + ' ' + cover_text,
+                        ("财报交流会", "財報交流會", "业绩交流会", "業績交流會", "业绩电话会", "業績電話會"))
     ):
         ids = tuple(
             dict.fromkeys(

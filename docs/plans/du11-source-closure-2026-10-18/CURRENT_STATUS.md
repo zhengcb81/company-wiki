@@ -1,5 +1,7 @@
 # 当前项目状态与接手入口
 
+**最新执行补记（2026-10-24，优先于下方历史快照）：** M1四份源侧development gold已独立实读验收：51事实/139源锚点，102测试通过，旧版及错误历史保留；不是生产准确率通过。M2共享匿名轮次、定性经营计划及同轮计划限定正在集中复审，已有DOCX/TXT实际select→序列化→model-input/5→原文卡片正反检查。新DOCX1.2的批处理版本能力接线也在TDD修复，尚未发布。真实Gbits的19→23条选材是阶段性冻结观察，原件未改，旧gold仍FAIL；不能当正式摘要/cache/RF验收。唯一下一步：完成M2独审和正常发布，再处理M3/M4/M5；见[M2实施](review/market-family-upgrade-20261024/M2_IMPLEMENTATION.md)及[M1独审](review/market-family-upgrade-20261024/m1-independent/report.md)。
+
 **主线ACTIVE；最新：跨市场/文种真实样本升级，五family策略组件独审通过并正常推送；真实内容共因修复继续。** 原来源材料/request根修已正常推送`3b4110a3`，完整8199P/24既有skip、另146契约P，精确[CI40087657562](https://github.com/zhengcb81/company-wiki/actions/runs/40087657562) completed/success；首次失败与最终补审收据保留。
 
 **发布补记：** 本地策略提交912f6fbd首次正常push被唯一旧几何指纹基线阻止（8215P/1F/24skip，另146契约P），没有发布。原测试明确允许经过审查的policy upgrade；保持原测试/产品/旧case不改，只更新五份已审策略对应的四个legacy预期SHA，另11不变。独立Git反事实、未授权语义突变与geometry-only反控112P通过，见[补审](review/market-family-upgrade-20261024/independent-final/baseline-followup.md)。跟进c990e389已正常推送，完整8216P/24既有skip（318.17s）、另146契约P（36.29s）。精确[CI40090199646](https://github.com/zhengcb81/company-wiki/actions/runs/40090199646)：completed/success，不沿用旧CI。

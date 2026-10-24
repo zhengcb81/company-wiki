@@ -8,14 +8,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-TRANSCRIPT_PARSER_VERSION = "0.3.1"
-TranscriptLayout = Literal["legacy", "natural", "natural_affiliation", "natural_affiliation_boundary"]
+TRANSCRIPT_PARSER_VERSION = "0.4.0"
+TranscriptLayout = Literal["legacy", "natural", "natural_affiliation", "natural_affiliation_boundary", "natural_native_turns"]
 _TRANSCRIPT_PARSER_LAYOUTS: dict[str, TranscriptLayout] = {
     "0.1.0": "legacy",
     "0.1.1": "legacy",
     "0.2.0": "natural",
     "0.3.0": "natural_affiliation",
     "0.3.1": "natural_affiliation_boundary",
+    "0.4.0": "natural_native_turns",
 }
 
 

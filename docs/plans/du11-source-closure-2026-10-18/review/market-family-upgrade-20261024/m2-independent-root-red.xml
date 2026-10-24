@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="43" time="6.856" timestamp="2026-10-24T13:04:11.990445+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_observes_anonymous_turns_and_continuation_without_assigning_company_role" time="0.719" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_heading_stops_anonymous_continuation" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 99:99 \u8ba8\u8bba\u6536\u5165]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 00:000 \u8ba8\u8bba\u6536\u5165]" time="0.007" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u6587\u7ae0\u63d0\u5230\u8bf4\u8bdd\u4eba1 00:00 \u8ba8\u8bba\u6536\u5165]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8bf4\u8bdd\u4eba1 \u6536\u5165\u589e\u957f]" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_non_native_timestamp_shapes_do_not_create_speakers[\u8425\u4e1a\u6536\u5165 00:39 \u4eba\u6c11\u5e01100\u4e07\u5143]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_labels_generalize_across_languages[\u8aaa\u8a71\u4eba 3 01:02:03 \u8ba1\u5212\u5c1a\u672a\u786e\u5b9a\u3002-\u8aaa\u8a71\u4eba 3]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_labels_generalize_across_languages[Speaker 7 03:14 The launch has not been approved.-Speaker 7]" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_native_docx_turns_reach_pipeline_and_support_chinese_call_route" time="0.338" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines0-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.007" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines1-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.011" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines2-\u67d0\u516c\u53f8\u8d22\u62a5\u4ea4\u6d41\u4f1a]" time="0.010" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_title_or_unrelated_interview_does_not_prove_earnings_call[lines3-\u8bbf\u8c08\u8bb0\u5f55]" time="0.012" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_saved_docx_11_keeps_old_units_without_new_turn_metadata" time="0.007" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_txt_and_docx_share_native_anonymous_identity_without_role_guessing" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_txt_respects_explicit_body_and_inline_end_control" time="0.002" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_anonymous_txt_whitespace_keeps_exact_trimmed_source_offsets" time="0.002" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_table_stops_turn_even_when_table_has_no_visible_cells" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_docx_explicit_end_does_not_attach_footer_to_a_speaker" time="0.005"><failure message="assert False&#10; +  where False = all(&lt;generator object test_docx_explicit_end_does_not_attach_footer_to_a_speaker.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000024857F29FF0&gt;)">def test_docx_explicit_end_does_not_attach_footer_to_a_speaker():
+        lines=[*LINES,'End of transcript','Website Editor: invented business.']
+        _,document=normalized(lines)
+        assert [unit.raw_text for unit in document.units] == lines
+&gt;       assert all('native_speaker_turn' not in unit.metadata for unit in document.units[-2:])
+E       assert False
+E        +  where False = all(&lt;generator object test_docx_explicit_end_does_not_attach_footer_to_a_speaker.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000024857F29FF0&gt;)
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:293: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_txt_formatting_differences_do_not_manufacture_a_second_actor" time="0.006"><failure message="AssertionError: assert not (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:24d19a201721ccc9dcf48ac644868f5cb96ebfc446909aa33d31d3e...'timestamp': '01:00', 'turn_id': 'native-speaker:7d06f1dd81d7049e3d66d8701008446526445f4886cf76a8cc6e6e190d18e4bd'}})))&#10; +  where (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:24d19a201721ccc9dcf48ac644868f5cb96ebfc446909aa33d31d3e...'timestamp': '01:00', 'turn_id': 'native-speaker:7d06f1dd81d7049e3d66d8701008446526445f4886cf76a8cc6e6e190d18e4bd'}}))) = DocumentStructure(source_id='urn:company-wiki:source:sha256:fd483718cd30074b2fdcce4c6779d44c679269738e87bcec0519c1e4f8...ages=(), deferred_table_pages=(), line_count=3, errors=(), mime_type=None, layout_coverage=None, layout_diagnostics=()).units">def test_txt_formatting_differences_do_not_manufacture_a_second_actor():
+        text='说话人1 00:00 业务进展。\n说话人 1 01:00 研发计划。\nEnd of transcript'
+        digest=sha256(text.encode()).hexdigest()
+        parsed=parse_transcript_text(text,source_id='urn:company-wiki:source:sha256:'+digest,
+                                     source_sha256=digest,language='zh')
+&gt;       assert not parsed.units
+E       AssertionError: assert not (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:24d19a201721ccc9dcf48ac644868f5cb96ebfc446909aa33d31d3e...'timestamp': '01:00', 'turn_id': 'native-speaker:7d06f1dd81d7049e3d66d8701008446526445f4886cf76a8cc6e6e190d18e4bd'}})))
+E        +  where (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:24d19a201721ccc9dcf48ac644868f5cb96ebfc446909aa33d31d3e...'timestamp': '01:00', 'turn_id': 'native-speaker:7d06f1dd81d7049e3d66d8701008446526445f4886cf76a8cc6e6e190d18e4bd'}}))) = DocumentStructure(source_id='urn:company-wiki:source:sha256:fd483718cd30074b2fdcce4c6779d44c679269738e87bcec0519c1e4f8...ages=(), deferred_table_pages=(), line_count=3, errors=(), mime_type=None, layout_coverage=None, layout_diagnostics=()).units
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:301: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_native_anonymous_turns" name="test_mixed_native_and_named_txt_speakers_keep_their_own_turns" time="0.005"><failure message="AssertionError: assert ((NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:b4574a37227b5646fac4e41d17ae3f54162301cb013839bfafbc933...stamp': '00:39', 'turn_id': 'native-speaker:654d7f60972420bb8098e339d217959b246d1ac0e719e6ab4d6a3ac7e7de011a'}})), ...) and not True)&#10; +  where (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:b4574a37227b5646fac4e41d17ae3f54162301cb013839bfafbc933...stamp': '00:39', 'turn_id': 'native-speaker:654d7f60972420bb8098e339d217959b246d1ac0e719e6ab4d6a3ac7e7de011a'}})), ...) = DocumentStructure(source_id='urn:company-wiki:source:sha256:0bf5b12280833ab4e8b1be52d5d01abb9d99bc79f652356862ba67083b...ges=(), deferred_table_pages=(), line_count=11, errors=(), mime_type=None, layout_coverage=None, layout_diagnostics=()).units&#10; +  and   True = any(&lt;generator object test_mixed_native_and_named_txt_speakers_keep_their_own_turns.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000024857F91560&gt;)">def test_mixed_native_and_named_txt_speakers_keep_their_own_turns():
+        text=('Speaker 8 00:00 Editorial roster.\nSpeaker 9 00:10 Roster response.\n'
+              'Earnings Call Transcript\nCEO: We launched a new product.\n'+
+              '\n'.join(LINES)+'\nCFO: Our subscriptions are billed monthly.\nEnd of transcript')
+        digest=sha256(text.encode()).hexdigest()
+        parsed=parse_transcript_text(text,source_id='urn:company-wiki:source:sha256:'+digest,
+                                     source_sha256=digest,language='zh')
+&gt;       assert parsed.units and not any('roster' in unit.raw_text.casefold() for unit in parsed.units)
+E       AssertionError: assert ((NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:b4574a37227b5646fac4e41d17ae3f54162301cb013839bfafbc933...stamp': '00:39', 'turn_id': 'native-speaker:654d7f60972420bb8098e339d217959b246d1ac0e719e6ab4d6a3ac7e7de011a'}})), ...) and not True)
+E        +  where (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:b4574a37227b5646fac4e41d17ae3f54162301cb013839bfafbc933...stamp': '00:39', 'turn_id': 'native-speaker:654d7f60972420bb8098e339d217959b246d1ac0e719e6ab4d6a3ac7e7de011a'}})), ...) = DocumentStructure(source_id='urn:company-wiki:source:sha256:0bf5b12280833ab4e8b1be52d5d01abb9d99bc79f652356862ba67083b...ges=(), deferred_table_pages=(), line_count=11, errors=(), mime_type=None, layout_coverage=None, layout_diagnostics=()).units
+E        +  and   True = any(&lt;generator object test_mixed_native_and_named_txt_speakers_keep_their_own_turns.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000024857F91560&gt;)
+
+tests\unit\document_understanding_root\test_native_anonymous_turns.py:311: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[\u5f80\u540e\u6574\u4e2a\u4ea7\u54c1\u7684\u601d\u8def\u8fd8\u662f\u4f1a\u5ef6\u7eed\uff0c\u66f4\u591a\u5730\u91c7\u7528\u5b58\u91cf\u8fd0\u8425\u7684\u65b9\u5f0f\u3002]" time="0.007" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[\u540e\u671f\u6211\u4eec\u5e0c\u671b\u80fd\u591f\u5728\u65b0\u7684\u6c34\u5e73\u53bb\u7a33\u4f4f\u8fd9\u6b3e\u4ea7\u54c1\uff0c\u4f46\u76ee\u524d\u4e0d\u597d\u5224\u65ad\u3002]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[\u6211\u4eec\u4f1a\u8ddf\u968f\u8fd9\u4e9b\u8282\u70b9\u96c6\u4e2d\u63a8\u51fa\u66f4\u65b0\u8fed\u4ee3\u7684\u7248\u672c\uff0c\u4f46\u5177\u4f53\u8ba1\u5212\u5c1a\u672a\u786e\u5b9a\u3002]" time="0.006" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[\u516c\u53f8\u8ba1\u5212\u51cf\u5c11\u5bf9\u5e7f\u544a\u6295\u653e\u7684\u4f9d\u8d56\uff0c\u66f4\u591a\u91c7\u7528\u7528\u6237\u7559\u5b58\u8fd0\u8425\u3002]" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[Our company plans to update the product, but the timing remains uncertain.]" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[We hope to stabilize customer retention, but no schedule has been set.]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[The group intends to reduce reliance on paid customer acquisition.]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[\u516c\u53f8\u8ba1\u5212\u66f4\u65b0\u4ea7\u54c1\u3002]" time="0.004"><failure message="AssertionError: assert False&#10; +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible">text = '公司计划更新产品。'
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "往后整个产品的思路还是会延续，更多地采用存量运营的方式。",
+            "后期我们希望能够在新的水平去稳住这款产品，但目前不好判断。",
+            "我们会跟随这些节点集中推出更新迭代的版本，但具体计划尚未确定。",
+            "公司计划减少对广告投放的依赖，更多采用用户留存运营。",
+            "Our company plans to update the product, but the timing remains uncertain.",
+            "We hope to stabilize customer retention, but no schedule has been set.",
+            "The group intends to reduce reliance on paid customer acquisition.",
+        "公司计划更新产品。",
+        "We plan to continue customer support.",
+        ],
+    )
+    def test_specific_qualitative_operating_intent_is_useful_source_material(text):
+        fact = detect_reading_business_fact(text)
+&gt;       assert fact.eligible
+E       AssertionError: assert False
+E        +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+
+tests\unit\document_understanding_root\test_qualitative_operating_intent.py:28: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_specific_qualitative_operating_intent_is_useful_source_material[We plan to continue customer support.]" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible">text = 'We plan to continue customer support.'
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "往后整个产品的思路还是会延续，更多地采用存量运营的方式。",
+            "后期我们希望能够在新的水平去稳住这款产品，但目前不好判断。",
+            "我们会跟随这些节点集中推出更新迭代的版本，但具体计划尚未确定。",
+            "公司计划减少对广告投放的依赖，更多采用用户留存运营。",
+            "Our company plans to update the product, but the timing remains uncertain.",
+            "We hope to stabilize customer retention, but no schedule has been set.",
+            "The group intends to reduce reliance on paid customer acquisition.",
+        "公司计划更新产品。",
+        "We plan to continue customer support.",
+        ],
+    )
+    def test_specific_qualitative_operating_intent_is_useful_source_material(text):
+        fact = detect_reading_business_fact(text)
+&gt;       assert fact.eligible
+E       AssertionError: assert False
+E        +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').eligible
+
+tests\unit\document_understanding_root\test_qualitative_operating_intent.py:28: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[\u516c\u53f8\u5e0c\u671b\u672a\u6765\u8d8a\u6765\u8d8a\u597d\u3002]" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[\u516c\u53f8\u5c06\u63d0\u5347\u7efc\u5408\u7ba1\u7406\u6c34\u5e73\u3002]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[\u8ba1\u5212\u66f4\u65b0\u5458\u5de5\u57f9\u8bad\u6750\u6599\u3002\u4ea7\u54c1\u6536\u5165\u589e\u957f\u3002]" time="0.002" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[\u516c\u53f8\u5e0c\u671b\u73b0\u91d1\u4f59\u989d\u589e\u52a0\uff0c\u4ea7\u54c1\u76ee\u5f55\u5df2\u6709\u4ecb\u7ecd\u3002]" time="0.002" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[\u8bf7\u95ee\u516c\u53f8\u4f1a\u4e0d\u4f1a\u63a8\u51fa\u66f4\u65b0\u8fed\u4ee3\u7684\u7248\u672c\uff1f]" time="0.002" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[Our products are excellent. We plan to update employee benefits.]" time="0.006" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[The company hopes cash balances increase, while customers receive training.]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[Our products will update employee benefits.]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[\u6211\u4eec\u7684\u4ea7\u54c1\u4f1a\u66f4\u65b0\u5458\u5de5\u57f9\u8bad\u6587\u4ef6\u3002]" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[The company plans to update business expense records.]" time="0.004"><failure message="AssertionError: assert 'operating_plan' not in ('operating_plan',)&#10; +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons&#10; +    where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = detect_reading_business_fact('The company plans to update business expense records.')">text = 'The company plans to update business expense records.'
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "公司希望未来越来越好。",
+            "公司将提升综合管理水平。",
+            "计划更新员工培训材料。产品收入增长。",
+            "公司希望现金余额增加，产品目录已有介绍。",
+            "请问公司会不会推出更新迭代的版本？",
+            "Our products are excellent. We plan to update employee benefits.",
+            "The company hopes cash balances increase, while customers receive training.",
+            "Our products will update employee benefits.",
+            "我们的产品会更新员工培训文件。",
+        "The company plans to update business expense records.",
+        "We plan to update customer acquisition training records.",
+        "We plan to launch product training manuals for employees.",
+        ],
+    )
+    def test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan(text):
+&gt;       assert "operating_plan" not in detect_reading_business_fact(text).reasons
+E       AssertionError: assert 'operating_plan' not in ('operating_plan',)
+E        +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +    where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = detect_reading_business_fact('The company plans to update business expense records.')
+
+tests\unit\document_understanding_root\test_qualitative_operating_intent.py:52: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[We plan to update customer acquisition training records.]" time="0.006"><failure message="AssertionError: assert 'operating_plan' not in ('operating_plan',)&#10; +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons&#10; +    where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = detect_reading_business_fact('We plan to update customer acquisition training records.')">text = 'We plan to update customer acquisition training records.'
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "公司希望未来越来越好。",
+            "公司将提升综合管理水平。",
+            "计划更新员工培训材料。产品收入增长。",
+            "公司希望现金余额增加，产品目录已有介绍。",
+            "请问公司会不会推出更新迭代的版本？",
+            "Our products are excellent. We plan to update employee benefits.",
+            "The company hopes cash balances increase, while customers receive training.",
+            "Our products will update employee benefits.",
+            "我们的产品会更新员工培训文件。",
+        "The company plans to update business expense records.",
+        "We plan to update customer acquisition training records.",
+        "We plan to launch product training manuals for employees.",
+        ],
+    )
+    def test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan(text):
+&gt;       assert "operating_plan" not in detect_reading_business_fact(text).reasons
+E       AssertionError: assert 'operating_plan' not in ('operating_plan',)
+E        +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +    where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = detect_reading_business_fact('We plan to update customer acquisition training records.')
+
+tests\unit\document_understanding_root\test_qualitative_operating_intent.py:52: AssertionError</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_qualitative_operating_intent" name="test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan[We plan to launch product training manuals for employees.]" time="0.006"><failure message="AssertionError: assert 'operating_plan' not in ('specific_business_event', 'operating_plan', 'operating_activity')&#10; +  where ('specific_business_event', 'operating_plan', 'operating_activity') = OperatingFact(eligible=True, topics=('core_business', 'operating_plan', 'business_progress'), reasons=('specific_business_event', 'operating_plan', 'operating_activity'), score=3, financial_exempt=True, purpose='operating').reasons&#10; +    where OperatingFact(eligible=True, topics=('core_business', 'operating_plan', 'business_progress'), reasons=('specific_business_event', 'operating_plan', 'operating_activity'), score=3, financial_exempt=True, purpose='operating') = detect_reading_business_fact('We plan to launch product training manuals for employees.')">text = 'We plan to launch product training manuals for employees.'
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "公司希望未来越来越好。",
+            "公司将提升综合管理水平。",
+            "计划更新员工培训材料。产品收入增长。",
+            "公司希望现金余额增加，产品目录已有介绍。",
+            "请问公司会不会推出更新迭代的版本？",
+            "Our products are excellent. We plan to update employee benefits.",
+            "The company hopes cash balances increase, while customers receive training.",
+            "Our products will update employee benefits.",
+            "我们的产品会更新员工培训文件。",
+        "The company plans to update business expense records.",
+        "We plan to update customer acquisition training records.",
+        "We plan to launch product training manuals for employees.",
+        ],
+    )
+    def test_intent_does_not_borrow_an_unrelated_noun_or_turn_a_question_into_a_plan(text):
+&gt;       assert "operating_plan" not in detect_reading_business_fact(text).reasons
+E       AssertionError: assert 'operating_plan' not in ('specific_business_event', 'operating_plan', 'operating_activity')
+E        +  where ('specific_business_event', 'operating_plan', 'operating_activity') = OperatingFact(eligible=True, topics=('core_business', 'operating_plan', 'business_progress'), reasons=('specific_business_event', 'operating_plan', 'operating_activity'), score=3, financial_exempt=True, purpose='operating').reasons
+E        +    where OperatingFact(eligible=True, topics=('core_business', 'operating_plan', 'business_progress'), reasons=('specific_business_event', 'operating_plan', 'operating_activity'), score=3, financial_exempt=True, purpose='operating') = detect_reading_business_fact('We plan to launch product training manuals for employees.')
+
+tests\unit\document_understanding_root\test_qualitative_operating_intent.py:52: AssertionError</failure></testcase></testsuite></testsuites>

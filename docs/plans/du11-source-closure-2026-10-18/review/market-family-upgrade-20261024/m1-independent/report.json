@@ -1,0 +1,127 @@
+{
+  "schema_version": "m1-independent-review/1",
+  "reviewer": "/root/w08_reporting_rule_review",
+  "date": "2026-10-24T12:04:59.682706+00:00",
+  "verdict": "PASS",
+  "scope": "author revision2 four source-side gold packages; not production accuracy, summary, cache or RF acceptance",
+  "root_head": "a83863894fe5db5ad8a2afa39a7a994eb1f35b10",
+  "author_revision": 2,
+  "author_files_sha256": {
+    "author-compatibility.json": "b81564f529e49f04c05d59f36c71463aead46a6764ec7fb576e200cc034167ef",
+    "author-final-bindings.json": "afe732188eeb2abb4827089741fd7edbf4dec802f9116b118c9e593f25e09526",
+    "author-notes.md": "9216b136931347ddc32293e4818f994073aea6f3ac0b8f43d390a0b2363bc1a0",
+    "author-report.json": "3d7b50b8bedf850e6612a9bd7c73a8ef86d5f707cee9ebb5ef1044116aff9cf9",
+    "author-report.md": "ca2aa6cf5c82444817bd5434b84ee3304e33e6f9048c97f178778d3abc22e1df",
+    "author-revision-2.json": "38e92acba98cbd4a982a95ceef74c1571fde2d8cc40b3ffd97c65251a68e477d",
+    "build_author_package.py": "0dc55b20e478f3a7d43fcba186aeb4292d028f5183d08e1e7b2ad951a2dede5e",
+    "gold/du5-cn-gbits-call.json": "831299c7393e4978f77b8811f31005df74310b27191d84192d6a332b7a4bb14a",
+    "gold/du5-cn-proya-q1.json": "e2aeaf5c9344f82e7be802e612e1b7eed5f369c647dec4c0acc95788f75cc7b8",
+    "gold/du5-hk-kingsoft-interim.json": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604",
+    "gold/du5-us-msft-ex991.json": "abc0f51255a55f1da13cf07e8d627e8606468e7cd677d30744679ab191718231",
+    "revision_manifest.json": "d68b55bf8da6eed73eeb8c9e5bbb1b24dd3a54b8f31a0dec92b6a0413babad08",
+    "revisions/author-v1/du5-cn-gbits-call.json": "94bb507097a4d10da2407ec3318fbc2770c4891ad6d9ce67ebb1d7bd3d288895",
+    "revisions/author-v1/du5-us-msft-ex991.json": "43d826fb46a8f58c3361e5e894eaa80bcebbaec6d839a0654398a732e0bb6f25",
+    "source-bindings.json": "afb250b2aacb9648375d33c6e20526159bd21394c5daf5fc61c12878f0b69cbd",
+    "verify_author_package.py": "212fa3d1126ffb928a998b0324f03205c7233208652ce7362f86b0e983f2e91d"
+  },
+  "same_author_bytes_before_and_after": true,
+  "same_validators_before_and_after": true,
+  "sources": [
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "source_bytes": 155557,
+      "old_gold_sha256": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12"
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "source_bytes": 3396644,
+      "old_gold_sha256": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5"
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "source_bytes": 17222,
+      "old_gold_sha256": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d"
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "source_bytes": 34288,
+      "old_gold_sha256": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5"
+    }
+  ],
+  "source_fact_count": 51,
+  "source_anchor_count": 139,
+  "old_fact_ids_preserved": 47,
+  "all_importances_and_old_errors_preserved": true,
+  "or_support_sets": 0,
+  "semantic_ledger": "fact-semantic-ledger.json",
+  "test_file": "test_semantic_review.py",
+  "actual_test_result": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "102",
+    "time": "2.989",
+    "timestamp": "2026-10-24T13:01:57.403920+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "test_command": "PYTHONPATH=<repo>; PYTHONDONTWRITEBYTECODE=1; python -m pytest <thisdir>/test_semantic_review.py -p no:cacheprovider --override-ini addopts='' --junitxml=<thisdir>/independent-tests.xml -q",
+  "resolved_findings": [
+    {
+      "id": "M1-I01",
+      "issue": "Missing anonymous intervening 09:41 negative comparison connector",
+      "status": "FIXED_V2",
+      "before_receipt": "v1-sufficiency-red.json"
+    },
+    {
+      "id": "M1-I02",
+      "issue": "Azure scope change omitted Healthcare/LifeSciences move to Industry solutions",
+      "status": "FIXED_V2",
+      "before_receipt": "v1-sufficiency-red.json"
+    },
+    {
+      "id": "M1-I03",
+      "issue": "Old total outlook lacked explicit current adjusted no-change bridge",
+      "status": "FIXED_V2",
+      "before_receipt": "v1-sufficiency-red.json"
+    }
+  ],
+  "open_findings": [],
+  "old_new_replay": "frozen-replay.json",
+  "fixture_correction": "Initial 1F88P was reviewer raw-JSON replay vs load_gold derived/default values; corrected only reviewer code to compare raw JSON. Initial receipt kept, no author assertion relaxed.",
+  "hk_denominator": {
+    "old_required": 8,
+    "new_required": 7,
+    "old_critical_required": 6,
+    "new_critical_required": 2,
+    "semantic_responsibility": "exact financial amounts conditional; accounting/units metadata; business drivers/structure/outlook/commitment required; do not compare recall percentages without reporting this migration"
+  },
+  "cleanup": {
+    "temporary_renderings_remaining": 0,
+    "own_pycache_remaining": 0,
+    "original_copies": 0,
+    "product_writes": 0,
+    "downloads": 0,
+    "external_model_calls": 0
+  },
+  "limits": [
+    "Previously diagnosed development samples, never fresh holdout",
+    "No audio available to resolve anonymous ASR or identity",
+    "Literal evaluator mutation checks are not automated semantic entailment",
+    "No production selector, paid summary, cache recovery or RF full run was reviewed",
+    "Not a claim that 51 facts exhaust all business information in four originals"
+  ],
+  "report_md_sha256": "f9f930909f523e63423be4aa33c8b50713423dbb33b57f9fd9d01439273b16c9",
+  "independent_receipt_sha256": {
+    "test_semantic_review.py": "8c3d0fac539bfcd3950eaf11d4a9808a1fb31b7a13a31b222667a998a09b7143",
+    "independent-tests.xml": "ea4ad7a489d02cbb73d292b34f08724bf4e687cb4e39551cf420c698a84ebc56",
+    "fact-semantic-ledger.json": "c30aafe72499fb2fe217aa55211f407d5ed9e60ba7f96312bc7c7f81107f5e2e",
+    "v1-sufficiency-red.json": "a986f19362309ba6fc36bf1fe1f5919698aeef1cc9ae6011634f2e5e73380504",
+    "frozen-replay.json": "e8b286069a6bfe86699db274c1a82e065e64cccc9d0f689e37b3b077eeb78ddb",
+    "final-bindings-and-cleanup.json": "99af67789026f5bae6bc8c73d9bca5651bb7181dee9b94d880a81f0c0646cf29"
+  }
+}

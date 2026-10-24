@@ -7,7 +7,10 @@ import json
 import math
 from pathlib import Path
 from company_wiki import document_normalization as dn
-from company_wiki.document_normalization.units import require_parser_version
+from company_wiki.document_normalization.units import (
+    require_parser_version,
+    supported_parser_versions,
+)
 from company_wiki.document_normalization.isolated_ocr import IsolatedOCRAdapter
 
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
@@ -27,13 +30,14 @@ class NarrativeNormalization:
             or not math.isfinite(deadline)
         ):
             raise ValueError("normalization deadline must be finite")
+        supported_versions = supported_parser_versions()
         if parser_versions is not None and (
             not isinstance(parser_versions, dict)
             or any(
                 not isinstance(k, str)
                 or not k
                 or not isinstance(v, str)
-                or v not in {"1.0.0", "1.1.0", "2.0.0"}
+                or v not in supported_versions
                 for k, v in parser_versions.items()
             )
         ):

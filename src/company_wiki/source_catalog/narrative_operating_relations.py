@@ -18,6 +18,7 @@ from company_wiki.document_understanding.operating_states.product_reference impo
 from company_wiki.document_understanding.operating_states.text_view import strip_connector
 
 from .n6_candidate_operating_facts import OperatingFact
+from .narrative_business_disclosures import is_backward_plan_qualification
 from .narrative_revenue_guidance import (
     is_explicit_backward_revenue_guidance_premise,
     revenue_guidance_premise,
@@ -271,6 +272,32 @@ class SourceOperatingSession:
                     and marker["char_start"] < ref["char_end"])
 
         try:
+            # Native parsers already own turn identity and reset it at headings,
+            # tables and speaker changes. Only neighbouring original units may
+            # use that proof; no full-turn merge or inferred affiliation.
+            previous = None
+            for original_id, unit in (self.originals or self.units).items():
+                self.work_budget.charge()
+                turn = unit.metadata.get("native_speaker_turn")
+                if previous is not None and isinstance(turn, Mapping) and turn.get("turn_id"):
+                    prev_id, prev_unit, prev_turn = previous
+                    if (isinstance(prev_turn, Mapping) and prev_turn == turn
+                            and prev_unit.source_id == unit.source_id
+                            and prev_unit.parser_name == unit.parser_name
+                            and prev_unit.parser_version == unit.parser_version
+                            and prev_unit.source_role == unit.source_role):
+                        left = origins.get(prev_id, prev_id)
+                        right = origins.get(original_id, original_id)
+                        if left != right and left in self.units and right in self.units:
+                            left_scope = self._source_material_range(prev_id, left)
+                            right_scope = self._source_material_range(original_id, right)
+                            if left_scope is not None and right_scope is not None:
+                                self.work_budget.charge(2 * len(right_scope[0]))
+                                if (is_backward_plan_qualification(right_scope[0])
+                                        and "operating_plan" in self.fact(left).reasons):
+                                    dependencies[left] = tuple(dict.fromkeys(
+                                        (*dependencies.get(left, ()), right)))
+                previous = (original_id, unit, turn)
             self.work_budget.charge(1 + len(edges))
             for edge in edges:
                 if edge.get("basis") != "source_body_adjacency":
