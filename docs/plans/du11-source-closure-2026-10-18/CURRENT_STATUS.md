@@ -1,6 +1,6 @@
 # 当前项目状态与接手入口
 
-**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续修W08真实选材/context。W09研究及W11离线来源工程已并线、推送并获各自精确CI成功；用户2026-10-24再次确认W11-CWP-SOURCES的A/B/C全流程已交付并推送。当前W08逐目标诊断公开合同本地验证通过，待本轮正常发布。新摘要/矩阵/W12仍待完成，原暂停快照仅保留历史。
+**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续W08真实选材/context。W09研究及W11来源工程已并线、推送并获各自精确CI成功；用户2026-10-24确认W11-CWP-SOURCES的A/B/C全流程已交付并推送。W08逐目标诊断合同及本轮回归修复已提交`87a14a86`、正常推送，精确CI `40060222913`成功。正常pre-push为受影响单元测试8072通过/24既有跳过，另146契约测试通过。正式摘要/缓存矩阵/W12和真实annual14内容质量仍待完成，原暂停快照仅保留历史。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
@@ -12,11 +12,11 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码f2b8f2bf已合线推送、精确CI成功；本轮公开trace/诊断合同修复本地171项相关测试+13项端到端全绿，独立只读复审无blocker，待提交推送/精确CI | 真实annual14仍3pass/9partial/2missing；正式摘要/cache/矩阵/W12 OPEN。见[发布](review/r1-w08-crosspage-20261024/publication-final.md)和[本轮发现](findings.md) |
+| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码f2b8f2bf已合线推送、精确CI成功；公开trace/诊断合同及回归根修提交`87a14a86`已正常推送，精确CI成功；本轮正常pre-push为8072单测通过/24既有跳过和146契约测试通过 | 真实annual14仍3pass/9partial/2missing；正式摘要/cache/矩阵/W12 OPEN。工程绿不代表业务内容通过。见[发布](review/r1-w08-crosspage-20261024/publication-final.md)和[本轮发现](findings.md) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：提交并推送本轮W08公开诊断合同修复和PWF，核精确CI；随后按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批。** 逐目标offer/defer trace已落地并由171项相关测试、13项本地端到端测试和独立复审验证。大节点完成后集中复核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
+**当前唯一第一步：按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批。** 逐目标offer/defer trace及合同修复已由171项相关测试、13项本地端到端测试、独立复审、正常pre-push和精确远端CI验证并发布。大节点完成后集中复核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

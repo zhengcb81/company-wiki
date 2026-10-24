@@ -663,6 +663,14 @@ W08正常合7b1c015b为b0344200，15源/test按review原始字节恢复（11仅L
 
 先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
+## 2026-10-24T04:01:01Z W08回归根因修复正常推送并精确CI通过
+
+提交`87a14a8608f5bcce17e7496f43c71b43baf56ea5`已正常推送。正常pre-push通过受影响单元测试8072项、24项既有跳过，独立CI契约烟测146项；Ruff、mypy、host assumption guard、diff check均通过。精确[GitHub CI 40060222913](https://github.com/zhengcb81/company-wiki/actions/runs/40060222913) completed/success（Fast checks，4m19s）。
+
+修复针对两个不同根因：官方JSON真实回放没有去掉三项合法的selection-only标注，误报`LOCATOR_REPLAY_FAILED`；Windows宿主不可写TEMP/TMP令大型W04 SQLite WAL回归无法建立临时存储。前者新增真实selection注释回归并通过官方JSON loopback；后者令pytest子进程统一使用hook每次调用拥有、结束自动清理的临时根，65-parent回归通过实际gate路径。Cache迁移loopback测试在受限沙箱失败是宿主网络隔离；通过常规门禁环境复测通过，没有改产品网络逻辑。
+
+GitHub CI有一条非阻断运行时警告和一条Ubuntu 26迁移提示，记录为后续工作流维护项，不混入本轮缺陷。W11-CWP-SOURCES A/B/C交付和推送仍依用户确认及现有收据记录；真实IR正文/source recovery仍OPEN。W08 annual14仍3pass/9partial/2missing，下一步继续源层级、事件时间与指引前提闭包、定额选材/分批，测试绿不代签内容质量。
+
 ## 2026-10-24 W08公开诊断合同复核与回归
 
 按生产链新增并验证逐目标selection trace/diagnostic公开合同。TDD先暴露`max_chars=0`诊断无法越过DTO和selected trace计数未受证据/原始单元约束；修复后又由独立只读复审补出无证据正计数、admission样本与聚合不一致、路径样式locator及诊断detail文本边界。现有owner内完成修复，trace保持有界、哈希化且不进入模型提示；不引入第二内容库或新的许可/审查门。

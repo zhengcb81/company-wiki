@@ -8,17 +8,17 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+  "last_code_commit": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
   "code_ci": {
-    "id": 40050949303,
+    "id": 40060222913,
     "name": "CI",
-    "head_sha": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+    "head_sha": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40050949303",
-    "updated_at": "2026-10-24T01:44:42Z",
-    "created_at": "2026-10-24T01:41:41Z",
-    "observed_at": "2026-10-24T01:45:51.712039+00:00"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40060222913",
+    "updated_at": "2026-10-24T03:59:00Z",
+    "created_at": "2026-10-24T03:54:00Z",
+    "observed_at": "2026-10-24T03:59:21Z"
   },
   "completed": {
     "b2": {
@@ -192,15 +192,15 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40050949303,
+    "id": 40060222913,
     "name": "CI",
-    "head_sha": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+    "head_sha": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40050949303",
-    "updated_at": "2026-10-24T01:44:42Z",
-    "created_at": "2026-10-24T01:41:41Z",
-    "observed_at": "2026-10-24T01:45:51.712039+00:00"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40060222913",
+    "updated_at": "2026-10-24T03:59:00Z",
+    "created_at": "2026-10-24T03:54:00Z",
+    "observed_at": "2026-10-24T03:59:21Z"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -211,7 +211,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T01:46:21.401335+00:00",
+  "last_updated_at": "2026-10-24T04:01:01Z",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -347,14 +347,16 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "逐目标offer/defer诊断公开合同已本地验证（171相关测试+13端到端测试，独立只读复审无blocker）；先正常提交、推送并核精确CI。随后按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；大节点集中测试/独审并核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+    "W08_pending_work": "逐目标offer/defer诊断公开合同和本轮回归修复已由171相关测试、13端到端测试、独立复审、正常pre-push及精确CI 40060222913验证发布；按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；大节点集中测试/独审并核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
     "W08_selection_trace_contract": {
-      "status": "LOCAL_ENGINEERING_GREEN_PENDING_NORMAL_PUBLICATION",
+      "status": "PUBLISHED_EXACT_CI_SUCCESS",
       "related_tests_passed": 171,
       "end_to_end_tests_passed": 13,
       "independent_review": "NO_BLOCKER_NONBLOCKING_CANONICAL_COORDINATE_HARDENING_DEFERRED",
       "external_api_or_paid_calls": false,
-      "summary": "Public selection trace and per-target diagnostics retain bounded, hashed source-unit evidence; validates zero character budget, source/span count bounds, admission aggregate consistency, locator path rejection, fixed safe detail, and model prompt exclusion."
+      "summary": "Public selection trace and per-target diagnostics retain bounded, hashed source-unit evidence; validates zero character budget, source/span count bounds, admission aggregate consistency, locator path rejection, fixed safe detail, and model prompt exclusion.",
+      "code_commit": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
+      "ci_run": 40060222913
     },
     "W11_root_repair_commit": "664d3a1db575d64bd4f11658478593a508d03f9b",
     "W11_merge_commit_prefix": "44b722ec",
@@ -471,6 +473,30 @@
         "passed": 2,
         "worktree_ref": "resume/cross-page-public-red-20261024/freeze.json"
       }
+    },
+    "r1_current_ci_root_cause_repair": {
+      "status": "COMMITTED_PUSHED_EXACT_CI_SUCCESS",
+      "code_commit": "87a14a8608f5bcce17e7496f43c71b43baf56ea5",
+      "ci_run": 40060222913,
+      "local_pre_push": {
+        "affected_unit_passed": 8072,
+        "existing_skipped": 24,
+        "ci_contract_smoke_passed": 146,
+        "ruff": "PASS",
+        "mypy": "PASS",
+        "host_assumption_guard": "PASS",
+        "diff_check": "PASS"
+      },
+      "root_causes": [
+        "Official JSON replay did not remove three valid selection-only annotations before comparing source-view identity.",
+        "Pytest children inherited an inaccessible Windows TEMP/TMP; the large SQLite WAL test then failed while creating temporary storage.",
+        "Restricted sandbox blocked owned localhost integration workers; the same cache-migration test passed through the normal elevated gate without product networking changes."
+      ],
+      "ci_advisories": [
+        "Nonblocking runner warning: actions/checkout@v4 and actions/setup-python@v5 were forced to Node 24.",
+        "Nonblocking runner notice: ubuntu-latest migration to Ubuntu 26."
+      ],
+      "business_content_acceptance": "UNCHANGED_OPEN"
     }
   },
   "budget_regime": {

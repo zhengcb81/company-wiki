@@ -514,3 +514,10 @@ TDD暴露并修复的合同根因：① `max_chars=0`是合法硬上限，但`ch
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 
 先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
+
+## 2026-10-24：W08发布回归的根因分层
+
+- **产品合同缺陷**：官方JSON transport的replay identity核验把来源身份字段和selector附加字段混在一起；selection层生成的`reading_priority`、`reading_score`、`reading_value_band`应从用于来源身份比较的span投影中剥离。修复后仍保留真实来源字段篡改负例，官方JSON loopback及回归通过。
+- **Windows测试宿主临时目录**：pytest `--basetemp`单独设置还不足以控制SQLite/Python所读的TEMP/TMP。访问受限时SQLite大型WAL写入出现`unable to open database file`。修复放在统一pytest gate：每次运行分配checkout内的owned scratch，并把TEMP/TMP/TMPDIR/SQLITE_TMPDIR一致指向它，退出统一清理。不能修改业务存储层来绕过宿主ACL。
+- **沙箱网络边界**：cache迁移测试生成本地worker并经loopback访问；受限执行环境拒绝此环回连接。该失败不是产品网络错误；在正常pre-push允许的测试环境通过同一生产代码和完整测试。不可通过删测试或替换产品网络路径消除。
+- **验收证据**：本地正常pre-push 8072 passed/24既有skip及146 contract passed；精确远端CI `87a14a8608f5bcce17e7496f43c71b43baf56ea5`（run 40060222913）success。CI对Node 20强制Node 24和Ubuntu 26迁移提示为独立非阻断维护项。
