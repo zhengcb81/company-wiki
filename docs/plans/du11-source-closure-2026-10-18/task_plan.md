@@ -537,3 +537,9 @@ RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，
 ## 最新协调状态（2026-10-24 20:28 UTC）
 
 主线 producer/consumer 修复已由提交 ae45b49adff21a3f79bec38512b225609051b434 推送到 origin/master。对应精确 CI run 40129398346 仍在运行；本地pre-push仅完成154项contract smoke，358个影响目标留给CI。先记录CI最终结论，再进行微软FY2025 10-K零费用预检；已有原件不重下。三张READY旁线卡见 harness_lanes/20261024-independent/README.md，三仓隔离且不阻塞上述先后顺序。
+
+## 2026-10-24 CI 40129398346 根因与测试合同修复
+
+- 精确HEAD ae45b49adff21a3f79bec38512b225609051b434 的远端CI于 Unit tests 失败；公开annotations只给部分失败且JUnit unavailable，失败步骤之后的focused contract、CLI、secret scan跳过。
+- 从producer diff和本地重放定位共享根因：financial-report route 有意把annual/semiannual/quarterly的默认selection_limit由96提到112；三个annual_report单测helper仍硬编码96，所有这些用例在内容断言前即被合同值断言挡住。它们是过期测试期待，并非提取结果错误。CI hook快门仅跑154项smoke，受影响unit目标转远端CI，所以pre-commit/本地push门没执行这些用例；远端CI及时抓到错配。
+- 按生产route合同改三个测试helper引用FINANCIAL_REPORT_SELECTION_LIMIT，没有回退112产品上限、没有删除测试。3个受影响单测文件加routing architecture tests共143 passed/9.32s，Ruff通过；测试修复仍待正常commit/push并验证新HEAD CI。

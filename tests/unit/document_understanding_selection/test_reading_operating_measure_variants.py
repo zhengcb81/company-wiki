@@ -12,6 +12,7 @@ import pytest
 from company_wiki.resource_budget import WorkBudget
 from company_wiki.source_catalog import narrative_business_policy as policy
 from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_catalog.narrative_routing import FINANCIAL_REPORT_SELECTION_LIMIT
 from company_wiki.source_catalog.narrative_document import DocumentStructure
 from company_wiki.source_catalog.narrative_evidence import _make_unit
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
@@ -132,7 +133,8 @@ def select_original(text, expected_reason, literal):
     assert not {"amount", "currency", "unit", "period", "growthRate"}.intersection(span.structured_value)
     assert tuple((u.unit_id, u.raw_text, u.coordinates, repr(u.metadata)) for u in parsed.units) == before
     assert not budget.exhausted and 0 < budget.used <= 16_000_000
-    assert result.selection_limit == 96 and reading.MAX_READING_CHARS == 48_000
+    assert result.selection_limit == FINANCIAL_REPORT_SELECTION_LIMIT
+    assert reading.MAX_READING_CHARS == 48_000
     return span
 
 

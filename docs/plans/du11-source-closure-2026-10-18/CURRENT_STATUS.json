@@ -13,12 +13,13 @@
     "id": 40129398346,
     "check_id": 120977676826,
     "head_sha": "ae45b49adff21a3f79bec38512b225609051b434",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40129398346",
     "failed_test_count": null,
-    "junit_report": "pending",
-    "updated_at": "2026-10-24T20:21:21Z"
+    "junit_report": "unavailable",
+    "failure_summary": "Unit tests failed on stale annual-report selection_limit=96 helper assertions after the financial-report default changed to 112; focused contract/CLI/secret scan steps skipped.",
+    "updated_at": "2026-10-24T20:25:58Z"
   },
   "completed": {
     "b2": {
@@ -176,7 +177,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W13/W14/W15均已ROOT接收。CN H1正式摘要RF真实只读消费v6通过；RF修复commit c48f86bd0d56f0a2be67a71348cf05d8544b6cdd已推送。CWP代码commit ae45b49adff21a3f79bec38512b225609051b434已推送，精确CI run 40129398346 in_progress；pre-push运行bounded contract smoke 154P/133.76s，358个目标留给CI。下一步等精确CI结论，然后对本地已存在微软FY2025 10-K（8,158,067 bytes，SHA 99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe）做零费用预算/输出容量预检，再按配置决定正式摘要、恢复/cache及RF消费；不得重新下载原件。旁线施工包总入口为harness_lanes/20261024-independent/README.md，不阻塞主线。",
+  "next_step_now": "W13/W14/W15均ROOT接收。CN H1正式摘要RF真实只读消费v6通过；CWP ae45b49adff21a3f79bec38512b225609051b434已推送，但精确CI 40129398346在Unit tests失败、后续contract/CLI/secret检查跳过。根因为财报默认selection_limit改112后有三个旧annual_report测试helper仍硬编码96。三个测试helper已改用FINANCIAL_REPORT_SELECTION_LIMIT；相关143 tests PASS，Ruff PASS，修复/PWF待提交推送并核精确CI。之后对本地已有MSFT FY2025 10-K原件先做零费用预算/输出容量预检，不重下；合格后继续摘要/cache/RF。旁线卡总入口harness_lanes/20261024-independent/README.md。",
   "parallel_work_packages": [
     {"id": "IR-REPORT-GENERATION", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md", "review_before_handoff": true},
     {"id": "QA-RAG-SAFE-REBUILD", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md", "review_before_handoff": true},

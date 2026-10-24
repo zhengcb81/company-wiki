@@ -21,7 +21,7 @@ from company_wiki.source_catalog import narrative_reading as reading
 from company_wiki.source_catalog.narrative_document import DocumentStructure
 from company_wiki.source_catalog.narrative_evidence import _make_unit
 from company_wiki.source_catalog.narrative_native_ranges import build_native_page_view
-from company_wiki.source_catalog.narrative_routing import DEFAULT_SELECTION_LIMIT
+from company_wiki.source_catalog.narrative_routing import FINANCIAL_REPORT_SELECTION_LIMIT
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
 SHA = "6" * 64
@@ -90,7 +90,7 @@ def _select(parsed):
     selected = reading.select_reading_evidence(
         parsed, title="Annual report", existing_kind="annual_report", work_budget=budget,
     )
-    assert selected.selection_limit == DEFAULT_SELECTION_LIMIT == 96
+    assert selected.selection_limit == FINANCIAL_REPORT_SELECTION_LIMIT
     assert reading.MAX_READING_CHARS == 48_000
     assert budget.max_work_units == DEFAULT_DOCUMENT_WORK_LIMIT == 16_000_000
     assert not budget.exhausted

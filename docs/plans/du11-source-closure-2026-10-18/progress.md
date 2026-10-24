@@ -899,3 +899,9 @@ CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110
 - CWP commit ae45b49adff21a3f79bec38512b225609051b434 已正常推送。pre-push 根据宽影响范围只运行合同烟测 154 passed in 133.76s；358 个受影响目标交给远端 CI。精确 GitHub Actions run 40129398346 / check 120977676826 对应本 SHA，记录时仍 in_progress，不先行宣称通过。
 - 准备三张互不重叠的外仓卡，见 harness_lanes/20261024-independent/README.md：industry-research 报告生成边界、QAbyLLM RAG 重建失败保护、MeetingConverter 三文件输出完整性。开始 SHA 与派卡时状态已冻结；MeetingConverter 既有 .coverage 修改列为保护项。
 - 三卡均使用合成数据/临时根，无真实公司资料、模型/API、网络或下载。必须由未参与实现的独立 agent 审完整 diff、独立运行验收测试并添加反例；所有发现修复和复审最终 SHA PASS 后才允许交接。三卡不改变当前 company-wiki 主线，也未新建外仓 worktree 或写外仓代码。
+
+## 2026-10-24 CI 40129398346 根因与测试合同修复
+
+- 精确HEAD ae45b49adff21a3f79bec38512b225609051b434 的远端CI于 Unit tests 失败；公开annotations只给部分失败且JUnit unavailable，失败步骤之后的focused contract、CLI、secret scan跳过。
+- 从producer diff和本地重放定位共享根因：financial-report route 有意把annual/semiannual/quarterly的默认selection_limit由96提到112；三个annual_report单测helper仍硬编码96，所有这些用例在内容断言前即被合同值断言挡住。它们是过期测试期待，并非提取结果错误。CI hook快门仅跑154项smoke，受影响unit目标转远端CI，所以pre-commit/本地push门没执行这些用例；远端CI及时抓到错配。
+- 按生产route合同改三个测试helper引用FINANCIAL_REPORT_SELECTION_LIMIT，没有回退112产品上限、没有删除测试。3个受影响单测文件加routing architecture tests共143 passed/9.32s，Ruff通过；测试修复仍待正常commit/push并验证新HEAD CI。

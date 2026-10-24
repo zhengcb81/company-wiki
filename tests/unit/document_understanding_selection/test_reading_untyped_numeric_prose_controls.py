@@ -6,6 +6,7 @@ import pytest
 from company_wiki.document_normalization import table_shapes
 from company_wiki.resource_budget import WorkBudget
 from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_catalog.narrative_routing import FINANCIAL_REPORT_SELECTION_LIMIT
 from unit.document_understanding_selection.test_reading_untyped_numeric_quality import (
     FLAG, _assert_quality_reaches_citation_and_model, _document,
     _native_carrier_document, _snapshot,
@@ -26,7 +27,7 @@ def select(parsed):
         parsed, title="Annual report", existing_kind="annual_report", work_budget=budget,
     )
     assert not budget.exhausted and 0 < budget.used <= 16_000_000
-    assert result.selection_limit == 96
+    assert result.selection_limit == FINANCIAL_REPORT_SELECTION_LIMIT
     assert sum(len(span.raw_text) for span in result.evidence_spans) <= 48_000
     assert _snapshot(parsed) == original
     return result
