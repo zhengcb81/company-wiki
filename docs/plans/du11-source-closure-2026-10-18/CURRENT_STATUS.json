@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_SHARED_SOURCE_MAIN_PUBLISHED_NEXT_REAL_CONTENT_QUALITY",
+  "overall_status": "ACTIVE_W08_V5_ANNUAL14_PARTIAL_ROOT_FIX_PENDING_PUBLICATION",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -125,7 +125,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_PUBLISHED_CONTENT_SELECTION_BATCHING_W10_MATRIX_W12_OPEN",
+      "status": "ACTIVE_W08_V5_7_PASS_5_PARTIAL_2_MISSING_ROOTFIX_PUBLISH_PENDING_W10_MATRIX_W12_OPEN",
       "mainline": true
     },
     {
@@ -154,7 +154,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+  "next_step_now": "按V5的14项目标逐项诊断source candidate、来源职责、semantic dependency、offer/admit/withhold及task/model闭包；优先分清A03/A04精确财务值应由现有API/SourceRef提供，和A01/A02/A05/A09/A13叙述业务关系缺口。按共用根因TDD修复，不抬96/48000/16M与8/4/2048限额，不用aggregate budget_full推断单目标原因。修复后仅对同一真实249页来源回放一个新版本并独立复核同一冻结14项；通过后进入正式摘要、cache恢复、W09/W10实际采用矩阵和W12四审。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -211,7 +211,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T04:01:01Z",
+  "last_updated_at": "2026-10-24T05:38:43Z",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -330,7 +330,7 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "SHARED_SOURCE_MAIN_PUBLISHED_EXACT_CI_SUCCESS_ANNUAL14_CONTENT_OPEN",
+    "W08": "V5_ROOTFIX_INDEPENDENT_REVIEW_NO_ENGINEERING_BLOCKER_ANNUAL14_CONTENT_7_PASS_5_PARTIAL_2_MISSING",
     "W08_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
     "W08_ref": "review/r1-w08-crosspage-20261024/root-acceptance.json",
     "W09": "MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
@@ -347,7 +347,7 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "逐目标offer/defer诊断公开合同和本轮回归修复已由171相关测试、13端到端测试、独立复审、正常pre-push及精确CI 40060222913验证发布；按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；大节点集中测试/独审并核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+    "W08_pending_work": "V5 control-noun classification P2 is root-fixed, focused119P/natural2155P11skip/Ruff/mypy and independent review pass; exact same 249-page annual14 selection remains 7P5partial2missing. Diagnose per target through candidate/source-role/dependency/offer-admit/task closure, close shared roots, publish exact code+PWF, then one same-source V6 and independent 14-target review before formal summary/cache recovery, W09/W10 adoption matrix and W12. No model call, download or raw copy in V5.",
     "W08_selection_trace_contract": {
       "status": "PUBLISHED_EXACT_CI_SUCCESS",
       "related_tests_passed": 171,
@@ -394,7 +394,7 @@
       "observed_at": "2026-10-24T01:45:51.712039+00:00"
     },
     "W08_current_root_fix": "review/r1-w08-crosspage-20261024/prepush-rootfix/reception.json",
-    "W11_user_delivery_confirmed": "2026-10-24 W11-CWP-SOURCES A/B/C delivered and pushed",
+    "W11_user_delivery_confirmed": "2026-10-24 W11-CWP-SOURCES A/B/C completed and pushed; user reconfirmed",
     "W11_actual_source_recovery": "INDEX_REGISTERED_REPLAYABLE_BUSINESS_MATERIAL_GAP_STILL_OPEN",
     "W11_actual_source_ref": "review/r1-w11-actual-recovery-20261024.json",
     "W08_mainline_source_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
@@ -415,12 +415,40 @@
     "W08_source_ancestor": "ef49ae3e8ca8f25388971afb58982612070e5b5b",
     "W08_current_acceptance": "review/r1-w08-crosspage-20261024/root-acceptance.json",
     "W08_annual14_current_diagnostic": {
-      "pass": 3,
-      "partial": 9,
+      "pass": 7,
+      "partial": 5,
       "missing": 2,
       "unknown": 0,
-      "binds": "V2 actual replay only, not later V3",
-      "review": "review/r1-w08-crosspage-20261024/annual14/review.json"
+      "binds": "V5 actual selection and independent 14-target review; distinct from two-checkpoint oracle",
+      "selection": "review/r1-w08-crosspage-20261024/annual14-v5/selection.json",
+      "freeze": "review/r1-w08-crosspage-20261024/annual14-v5/freeze.json",
+      "review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json",
+      "selection_sha256": "5602c4fe205128459af3079972e05f4a024603534c83c001c40e099ad4b5e9df",
+      "freeze_sha256": "c9a4e3ca54d4677f3db29c2080302849ca7cd78997534191814ac601250f7fef",
+      "checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+      "metrics": {
+        "pages": 249,
+        "candidates": 1533,
+        "selected": 96,
+        "selected_chars": 7767,
+        "work_used": 8845814,
+        "work_limit": 16000000,
+        "work_exhausted": false
+      },
+      "natural_suite": {
+        "passed": 2155,
+        "skipped": 11,
+        "failed": 0,
+        "seconds": 54.08
+      },
+      "focused_regression_passed": 119,
+      "task_contexts_checked": 55,
+      "sibling_business_leakage": false,
+      "external_model_calls": 0,
+      "downloads": 0,
+      "raw_copies": 0,
+      "source_fix_independent_review": "NO_ENGINEERING_BLOCKER",
+      "content_status": "PARTIAL"
     },
     "W08_main_publication_attempt": {
       "head": "e09e44e109d1273ba34f9e33dcbb73b1abf6ba13",
@@ -497,7 +525,16 @@
         "Nonblocking runner notice: ubuntu-latest migration to Ubuntu 26."
       ],
       "business_content_acceptance": "UNCHANGED_OPEN"
-    }
+    },
+    "W08_annual14_v2_historical": {
+      "pass": 3,
+      "partial": 9,
+      "missing": 2,
+      "unknown": 0,
+      "binds": "V2 actual replay only, not later V3",
+      "review": "review/r1-w08-crosspage-20261024/annual14/review.json"
+    },
+    "W08_current_v5_review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json"
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",
@@ -529,5 +566,47 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。"
+  "next_step_after_publication": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+  "w08_current_review": {
+    "selection_path": "review/r1-w08-crosspage-20261024/annual14-v2/selection.json",
+    "review_path": "review/r1-w08-crosspage-20261024/annual14-v2/review.json",
+    "selection_sha256": "79abb23d8e5ad60f7d03d366706c4c150602c7bfc719bce41578458bbb5546a0",
+    "status": "6_PASS_7_PARTIAL_1_MISSING",
+    "metrics": {
+      "pages": 249,
+      "units": 5660,
+      "candidates": 1532,
+      "selected": 96,
+      "selected_chars": 7171,
+      "work_used": 8613643,
+      "work_limit": 16000000,
+      "work_exhausted": false
+    },
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "relevant_natural_tests": "1546 passed in 34.48s",
+    "ruff": "PASS",
+    "mypy": "0 errors in 3 changed source files",
+    "independent_signoff": "NOT_CLAIMED",
+    "remaining": {
+      "partial": [
+        "ST-A01",
+        "ST-A02",
+        "ST-A03",
+        "ST-A04",
+        "ST-A05",
+        "ST-A09",
+        "ST-A12"
+      ],
+      "missing": [
+        "ST-A13"
+      ]
+    },
+    "next_action": "target-bound candidate/dependency/budget trace for remaining business context; keep all current caps; fix root cause and run one new annual14 selection"
+  },
+  "next_steps": [
+    "Close target-bound annual14 gaps (especially A12 premise, A13 revenue-recognition policy, A01/A05 hierarchy, A09 capacity/date relation) without raising selection/work caps; reselect once after root fixes.",
+    "Then perform production-configured summary/cache recovery, W09/W10 real adoption matrix, and W12 four-review loop as specified in the canonical plan."
+  ]
 }

@@ -18,8 +18,13 @@ from company_wiki.document_understanding.operating_states.product_reference impo
 from company_wiki.document_understanding.operating_states.text_view import strip_connector
 
 from .n6_candidate_operating_facts import OperatingFact
-from .narrative_revenue_guidance import revenue_guidance_premise
+from .narrative_revenue_guidance import (
+    is_explicit_backward_revenue_guidance_premise,
+    revenue_guidance_premise,
+)
 from .narrative_business_policy import assess_reading_business_fact, project_reading_business_fact
+
+_MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS = 1
 
 
 class _ObservedUnits(Mapping):
@@ -68,7 +73,7 @@ class SourceOperatingSession:
         self.financial: dict[str, bool | None] = {}
         self.references: dict[str, dict[str, Any]] = {}
         self.complete = True
-        self.qualifications: dict[tuple[int, int], tuple[Any, Any, dict[str, tuple[str, ...]]]] = {}
+        self.qualifications: dict[tuple[int, int, int], tuple[Any, Any, dict[str, tuple[str, ...]]]] = {}
 
     def owner_for(self, uid: str) -> str:
         return self.owners.get(uid, uid)
@@ -242,7 +247,7 @@ class SourceOperatingSession:
                                       "char_end": len(original.raw_text)}
         return None
 
-    def local_qualification_dependencies(self, edges, *, origins=None) -> dict[str, tuple[str, ...]]:
+    def local_qualification_dependencies(self, edges, *, origins=None, section_ids=None) -> dict[str, tuple[str, ...]]:
         """Explicit restrictions on original neighbours, projected to material.
 
         Geometry owns original IDs, relation extraction owns state and object
@@ -250,7 +255,7 @@ class SourceOperatingSession:
         cannot erase source-unit dependencies or invent one shared pronoun.
         Reading still counts the whole transitive original envelope.
         """
-        key = (id(edges), id(origins))
+        key = (id(edges), id(origins), id(section_ids))
         cached = self.qualifications.get(key)
         if cached is not None:
             return cached[2]
@@ -352,6 +357,74 @@ class SourceOperatingSession:
                 # identity. Only the published material graph suppresses self.
                 if left != right:
                     dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
+            # An explicit source-authored outlook reference may point past one
+            # same-page paragraph. It still needs the same source, role, and
+            # uniquely known section, plus exact paragraph coordinates. This
+            # is a semantic reference edge, never a physical adjacency proof.
+            if section_ids:
+                source_units = self.originals or self.units
+                by_position: dict[tuple[str, int, str, int], list[str]] = {}
+                self.work_budget.charge(len(source_units))
+                for original_id, unit in source_units.items():
+                    coordinates = getattr(unit, "coordinates", None)
+                    section_id = section_ids.get(original_id)
+                    page = getattr(coordinates, "page_number", None)
+                    paragraph = getattr(coordinates, "paragraph_index", None)
+                    if (not isinstance(section_id, str) or not section_id
+                            or type(page) is not int or type(paragraph) is not int
+                            or getattr(coordinates, "table_index", None) is not None):
+                        continue
+                    by_position.setdefault((unit.source_id, page, section_id, paragraph), []).append(original_id)
+                self.work_budget.charge(len(source_units))
+                for premise_id, premise in source_units.items():
+                    coordinates = getattr(premise, "coordinates", None)
+                    section_id = section_ids.get(premise_id)
+                    page = getattr(coordinates, "page_number", None)
+                    paragraph = getattr(coordinates, "paragraph_index", None)
+                    if (not isinstance(section_id, str) or not section_id
+                            or type(page) is not int or type(paragraph) is not int
+                            or getattr(coordinates, "table_index", None) is not None
+                            or premise.source_role not in {"company_filing", "management", "management_discussion"}):
+                        continue
+                    self.work_budget.charge(1 + len(premise.raw_text))
+                    if not is_explicit_backward_revenue_guidance_premise(premise.raw_text):
+                        continue
+                    # Include the immediate predecessor to detect ambiguity,
+                    # but only a single explicit reference across one skipped
+                    # paragraph may use this semantic path.
+                    matches: set[tuple[str, str, int]] = set()
+                    for gap in range(1, _MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS + 2):
+                        forecast_paragraph = paragraph - gap
+                        intervening_paragraph = paragraph - 1
+                        if forecast_paragraph < 0:
+                            continue
+                        forecast_ids = by_position.get(
+                            (premise.source_id, page, section_id, forecast_paragraph), ()
+                        )
+                        if gap == _MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS + 1 and not by_position.get(
+                            (premise.source_id, page, section_id, intervening_paragraph), ()
+                        ):
+                            continue
+                        for forecast_id in forecast_ids:
+                            forecast = source_units[forecast_id]
+                            if (forecast.source_role != premise.source_role
+                                    or forecast.source_role not in {"company_filing", "management", "management_discussion"}):
+                                continue
+                            left = origins.get(forecast_id, forecast_id)
+                            right = origins.get(premise_id, premise_id)
+                            if left == right or left not in self.units or right not in self.units:
+                                continue
+                            left_scope = self._source_material_range(forecast_id, left)
+                            right_scope = self._source_material_range(premise_id, right)
+                            if left_scope is None or right_scope is None:
+                                continue
+                            forecast_text, premise_text = left_scope[0], right_scope[0]
+                            self.work_budget.charge(2 * (len(forecast_text) + len(premise_text)))
+                            if revenue_guidance_premise(forecast_text, premise_text, follows=True):
+                                matches.add((left, right, gap))
+                    if len(matches) == 1 and next(iter(matches))[2] > 1:
+                        left, right, _ = next(iter(matches))
+                        dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
         except WorkBudgetExceeded:
             self.complete = False
         self.qualifications[key] = (edges, origins, dependencies)

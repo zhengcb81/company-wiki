@@ -1,6 +1,6 @@
 # 当前项目状态与接手入口
 
-**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续W08真实选材/context。W09研究及W11来源工程已并线、推送并获各自精确CI成功；用户2026-10-24确认W11-CWP-SOURCES的A/B/C全流程已交付并推送。W08逐目标诊断合同及本轮回归修复已提交`87a14a86`、正常推送，精确CI `40060222913`成功。正常pre-push为受影响单元测试8072通过/24既有跳过，另146契约测试通过。正式摘要/缓存矩阵/W12和真实annual14内容质量仍待完成，原暂停快照仅保留历史。
+**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续W08真实选材/context。W09研究及W11来源工程已并线、推送并获各自精确CI成功；用户2026-10-24再次确认W11-CWP-SOURCES的A/B/C全流程已完成并推送。W08逐目标诊断合同及回归修复`87a14a86`已正常推送，精确CI `40060222913`成功。本地W08源层修复V5通过集中自然测试`2155 passed / 11 skipped`（54.08秒）、119项聚焦回归、Ruff及mypy；V5独立复核关闭“纯名词误分类会计政策”P2，但14项内容可见性仍为7 pass / 5 partial / 2 missing。相关源码与PWF正在整理为一次发布，正式摘要、缓存恢复、实际采用矩阵及W12仍待完成；原暂停快照仅保留历史。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
@@ -12,19 +12,19 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码f2b8f2bf已合线推送、精确CI成功；公开trace/诊断合同及回归根修提交`87a14a86`已正常推送，精确CI成功；本轮正常pre-push为8072单测通过/24既有跳过和146契约测试通过 | 真实annual14仍3pass/9partial/2missing；正式摘要/cache/矩阵/W12 OPEN。工程绿不代表业务内容通过。见[发布](review/r1-w08-crosspage-20261024/publication-final.md)和[本轮发现](findings.md) |
+| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码`f2b8f2bf`已合线推送、精确CI成功；公开trace/诊断合同及回归根修`87a14a86`已正常推送、精确CI成功。当前未发布源层修复完成119项聚焦回归、自然测试2155P/11既有skip（54.08秒）、Ruff及mypy；同一真实249页源V5选材96/7,767字符，工作8,845,814/16M不耗尽。V5冻结和独立审查均绑定当前工作树源码/测试 | 控制权名词误分类P2已根修并关闭；annual14为7pass/5partial/2missing，A03/A04 missing，A01/A02/A05/A09/A13 partial，故内容仍OPEN。完整14项不是V5两项checkpoint oracle；V5仅证明选中证据与模型任务的可见性，不代表正式摘要/内容通过。正式摘要/cache/矩阵/W12仍OPEN。见[V5冻结](review/r1-w08-crosspage-20261024/annual14-v5/freeze.json)、[V5复核](review/r1-w08-crosspage-20261024/annual14-v5/review.md)、[V2–V4历史](review/r1-w08-crosspage-20261024/annual14-v2/) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：按真实annual14缺口修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批。** 逐目标offer/defer trace及合同修复已由171项相关测试、13项本地端到端测试、独立复审、正常pre-push和精确远端CI验证并发布。大节点完成后集中复核同一实际输出，再做正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
+**当前唯一第一步：按V5的14项结果，针对仍未闭合的目标修共用来源/任务关系根因。** V5相对V4没有改变选材清单，完成的是纯名词会计政策分类根修；A12已在`t31`同时看到指引及前提，A13的政策已可见但两笔金额与业务时段分类仍缺。当前优先调查A03/A04是否应由现有财务API或明确源文本提供精确值，以及A01/A02/A05/A09/A13的业务父级、口径、日期/容量和确认时间是否因source candidate、dependency还是task closure未形成；用有界逐目标证据区分这些原因，不整份重解析、不把`budget_full`当单目标因果。保持96/48,000/16M与8/4/2048上限，不把财务表格强塞入叙述切片。下一次正式版本只在共因修复后执行，并用冻结14项同一清单审查；随后进入正式摘要/cache恢复、W09/W10实际采用矩阵和W12四审，再原公司复验、药明合联、Snowflake。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 
 共享producer一次观察、sections唯一结构父级、reading逐target语义闭包和结构见证职责已工程发布。默认0.8、96/48000/16M和真实语义材料8/4/2048保持；没有新增身份、人工许可或逐card几何门。
 
-真实249页V2一次回放96/8518、工作8630449/16M，完整14独审3pass/9partial/2missing。业务父级、容量日期、集团新客户、指引前提等仍丢失，不能以全局另一个task、裸数字或原文fallback冒充采用。财务数表可按需SourceRef/API，未调用的不说已获取，不强迫全文财务切片。[内容审查](review/r1-w08-crosspage-20261024/annual14/review.md)与[具体下一阶段](review/r1-w08-crosspage-20261024/next-source-quality.md)保持OPEN。
+V5仍使用真实249页原文，输出96/7,767字符、工作8,845,814/16M，14项独立复核7pass/5partial/2missing。A06/A07/A08/A10/A11/A12/A14 pass；A01/A02/A05/A09/A13 partial；A03/A04 missing。A12指引与完整前提同在`t31`；A13政策片段进入`t50–t53/t16`，但确认金额/业务期间仍缺。A09日期与产能仍跨任务。全部55个任务context经独立复核，未见Testing/Biology兄弟业务串入。选中材料可见性不代表摘要响应、业务正确性或实际采用。[V5冻结](review/r1-w08-crosspage-20261024/annual14-v5/freeze.json)、[V5独立复核](review/r1-w08-crosspage-20261024/annual14-v5/review.md)、[V2原始基线](review/r1-w08-crosspage-20261024/annual14-v2/review.md)保留各版本边界。财务数表可以由现有SourceRef/API补充，但未实际调用不能称已获取；不强迫全文财务切片。
 
-W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11-CWP-SOURCES A/B/C已由用户确认全流程交付并推送。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、真实业务材料external_limit仍OPEN。旧封存和费用unknown保留。
+W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11-CWP-SOURCES A/B/C已由用户再次确认全流程交付并推送；ROOT仍需完成真实来源/业务材料验收，工程卡交付不代签内容完整性。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、真实业务材料external_limit仍OPEN。旧封存和费用unknown保留。
 
 随后按已接收W08–W12计划在新摘要上采用已发布W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
@@ -59,7 +59,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08跨页工程13P/2121P已接收，真实14为3P9partial2missing、选材/分批仍OPEN；W09/W11已修复并线推送、精确CI成功；W10组件通过但实际矩阵OPEN；W12未开始 | 先完成本页唯一下一步，再真实摘要、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
+| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08跨页工程已发布，V5真实annual14选中证据为7pass/5partial/2missing，V5源层修复已集中测试并独审、代码发布待完成；W09/W11已发布且精确CI成功，W11-CWP-SOURCES A/B/C已由用户确认完成；W10组件通过但实际矩阵OPEN；W12未开始 | 继续补齐V5明确的内容缺口并完成根因修复/发布，再做正式摘要、cache恢复、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |

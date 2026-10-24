@@ -1,0 +1,61 @@
+{
+  "schema_version": "w08-annual14-v4-freeze/1",
+  "head": "f404026e6921bdab973bddd15f96d8f57a45ea94",
+  "modified_file_sha256": {
+    "src/company_wiki/document_understanding/structure/sections.py": "f020e0f6aedcdf37b6e6c74979ea659a51f3cad84fc1b24f22f10fcb1b72a441",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "c9110d6c9254a765cff417dd31eb77e368bc8f4c3fd32678c6147c9846c66c48",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "5d8927cc5cd7269ff9e7b699d2af373e82d32991f8efffa68538f0c8008e0fc5",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "2a515e7054301b30e157e22b6a85711de1c0a1f840e5005d5da48abd472ae745",
+    "src/company_wiki/source_catalog/narrative_reading.py": "654da79db56c4f0d15dc6ca3f01772502c19fb1a47b29725d12409d2e543bb6c",
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "f895322ef6b6b5f189b35fdb4bd4b8b4f2482cc78564b141ea6c743826cb7e44",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "82f4e78f737b4a794f0b2f426ace61e7cc41058ac3ea0c876bcf80168be6ea14",
+    "tests/unit/document_understanding_selection/test_reading_budget_coverage.py": "fbb8ce339cbd04575148551defcee1f8a16f3d14998255bb548efd8e17688efe",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "f1f6ab3bff1549a1fd38bb4975635dd3ace682202f00b42aa613be3f3f12f0db",
+    "tests/unit/document_understanding_selection/test_reading_local_qualification.py": "196c051ec731b80be41d5e22a81bda5daeee46b9254dcce25371eb97e30636f6",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "78880b6e207e26c2a7cc5ec484c8aa7bbbda8b51c051ee591dad63e811265532",
+    "tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py": "dc18ae0b1c8474441af46e28425e4b6af6fddc8f5c8bb993fbeca146d9ff3f26",
+    "tests/unit/document_understanding_selection/test_reading_structured_qa.py": "4a1543a6d2f50cf933affe4604c3f06d87d0f3d9fa8287e9410cb813690ff4eb",
+    "tests/unit/test_n6_candidate_recall.py": "80c01f42cbf7bd0676fc4350e36e42845bcdb91c12e69c2f0a5e393502abaffd"
+  },
+  "selection_sha256": "96a2b35aaa63db3ebd9ce8c1790afa3df3eec2fd041ffb98e4ab56c2f2891c9b",
+  "trace_sha256": "ce512e83057ad10fc5904a3344b082253bb33cf92b20e7e2db4ec0301990a14e",
+  "model_view_sha256": "5ef83c33d563aaf8f41a73da0daaf28487cda28e1ff5bce6e6ec0ecf758a57d9",
+  "natural_receipt_sha256": "5fd5845fa2fc669ad4d1e200c33cbdf719805a3396353e107c77979cdb69bef7",
+  "oracle_sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+  "selection_bound_by_trace": true,
+  "selection_bound_by_view": true,
+  "natural_tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "11",
+    "tests": "2164",
+    "time": "60.381",
+    "timestamp": "2026-10-24T06:26:35.755913+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "natural_suite_exit": 0,
+  "source_stable": true,
+  "temp_removed": true,
+  "physical_pages": 249,
+  "candidate_count": 1533,
+  "selected_count": 96,
+  "selected_chars": 7767,
+  "work_budget": {
+    "used": 8845814,
+    "limit": 16000000,
+    "exhausted": false,
+    "same_instance_for_parse_and_select": true
+  },
+  "checkpoint_pass": true,
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "compiled_tasks": 55,
+  "a12_forecast_task_keys": [
+    "t31"
+  ],
+  "a12_closure": true,
+  "a13_policy_span_count": 5,
+  "a13_exact_amounts": false
+}

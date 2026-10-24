@@ -37,6 +37,76 @@ def test_neutral_revenue_word_order_and_units_reach_true_source_closure(guidance
     assert detect_reading_business_fact(guidance).purpose == "operating_guidance"
 
 
+def test_referenced_full_year_performance_outlook_closes_its_explicit_premise():
+    guidance = "本集团预计2030年服务收入达到60亿元。"
+    premise = (
+        "上述提及的2030年全年经营业绩展望以目前订单为基础预测，并以行业发展平稳、"
+        "贸易与监管环境稳定为前提；不构成管理层对年度业绩的实质承诺，存在较大不确定性。"
+    )
+    source = _source([HEADING, guidance, premise])
+    selected = _select(source)
+    _assert_premise_closed(selected, source.units[1], source.units[2])
+
+
+def test_forecast_marker_before_year_and_issuer_closes_referenced_premise():
+    guidance = "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。"
+    premise = (
+        "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行业发展平稳、"
+        "国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管理层对2026年度全年经营业绩的盈利预测，"
+        "不构成公司对投资者的实质承诺，能否实现取决于内外部环境变化等多种因素影响，存在较大的不确定性。"
+    )
+    assert grammar.revenue_guidance(guidance, issuer_only=True)
+    source = _source([HEADING, guidance, premise])
+    _assert_premise_closed(_select(source), source.units[1], source.units[2])
+
+
+def test_explicit_reference_year_must_match_the_nearby_revenue_outlook():
+    forecast = "预计2027年公司整体收入达到500亿元。"
+    premise = "上述提及的2026年全年经营业绩展望以在手订单为基础预测。"
+    assert not grammar.revenue_guidance_premise(forecast, premise, follows=True)
+
+
+def test_explicit_reference_year_matches_the_nearby_revenue_outlook():
+    forecast = "预计2026年公司整体收入达到500亿元。"
+    premise = "上述提及的2026年全年经营业绩展望以在手订单为基础预测。"
+    assert grammar.revenue_guidance_premise(forecast, premise, follows=True)
+
+
+def test_backward_guidance_premise_prefilter_keeps_only_explicit_references():
+    assert grammar.is_explicit_backward_revenue_guidance_premise(
+        "上述提及的2026年全年经营业绩展望以公司目前在手订单为基础预测。"
+    )
+    assert not grammar.is_explicit_backward_revenue_guidance_premise(
+        "下述2026年全年经营业绩展望假设订单按期交付。"
+    )
+    assert not grammar.is_explicit_backward_revenue_guidance_premise(
+        "公司目前在手订单充足。"
+    )
+
+
+def test_another_company_after_forecast_marker_is_not_the_local_issuer():
+    assert not grammar.revenue_guidance(
+        "预计2026年合作伙伴公司整体收入达到500亿元。", issuer_only=True
+    )
+
+
+@pytest.mark.parametrize("text", (
+    "分析师预计2026年公司整体收入达到500亿元。",
+    "市场预计2026年公司整体收入达到500亿元。",
+    "外部顾问预计2026年本集团收入达到500亿元。",
+))
+def test_external_forecaster_cannot_lend_issuer_identity_after_its_forecast_cue(text):
+    assert not grammar.revenue_guidance(text, issuer_only=True)
+
+
+@pytest.mark.parametrize("text", (
+    "预计2026年公司整体收入达到500亿元。",
+    "2026年预计公司整体收入达到500亿元。",
+))
+def test_year_before_forecast_cue_does_not_count_as_another_actor(text):
+    assert grammar.revenue_guidance(text, issuer_only=True)
+
+
 @pytest.mark.parametrize("guidance,premise", (
     ("We expect online services revenue of USD 265 million in fiscal 2029.",
      "The following online services revenue outlook assumes customer orders are accepted before year end."),

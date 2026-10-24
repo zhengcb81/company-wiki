@@ -7,12 +7,14 @@ from company_wiki.source_catalog import narrative_budget as budget
 from company_wiki.source_catalog.narrative_semantic_coverage import coverage_signature
 
 
-def item(uid, order, *, priority=2, topics=(), required=(), group=None, signature=None):
+def item(uid, order, *, priority=2, topics=(), required=(), group=None, signature=None,
+         value_band="meaningful_fact"):
     return budget.BudgetItem(
         item_id=uid, group_id=group, page_key=("page", 1), locator=f"loc:{uid}",
         order_key=(1, order), reasons=(), score=10, is_heading=False, payload=uid,
         evidence_chars=len(uid), reading_priority=priority, reading_topics=topics,
         required_item_ids=required, coverage_signature=signature,
+        value_band=value_band,
     )
 
 
@@ -35,6 +37,17 @@ def test_value_dependency_already_emitted_counts_towards_real_coverage(with_topi
     )
     selected = budget.select_budget_items(items, limit=3, policy=budget.READING_BUDGET_POLICY)
     assert {row.item_id for row in selected} == {"a", "b", "novel"}
+
+
+def test_distinct_business_facet_survives_a_tight_count_cap_without_raising_it():
+    repeated = tuple(item(f"business-{index}", index, topics=("core_business",))
+                     for index in range(40))
+    distinct = item("customer-acquisition", 41, topics=("customer_acquisition",))
+    selected = budget.select_budget_items(
+        (*repeated, distinct), limit=8, policy=budget.READING_BUDGET_POLICY,
+    )
+    assert len(selected) == 8
+    assert distinct in selected
 
 
 @pytest.mark.parametrize(("field", "value"), (

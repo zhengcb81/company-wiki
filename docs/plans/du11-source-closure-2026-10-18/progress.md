@@ -1,3 +1,11 @@
+## 2026-10-24 W08 annual14 V2 选材复核与相关测试包恢复
+
+在不修改冻结的首轮annual14 review/gold前提下，使用新目录`review/r1-w08-crosspage-20261024/annual14-v2/`保存第二轮实际选择和复核。SourceRef原始字节SHA复验一致；一次249页回放，5,660 units/1,532 candidates，保留96 spans/7,171字符，工作8,613,643/16M且未耗尽；编译52个scoped task view，0 provider调用、0下载、0 raw副本。14项ROOT链路复核为6 pass/7 partial/1 missing，首轮3/9/2提升；A07的42万新化合物与310个R→D转换已在`t23`，A11新客和新分子收入占比分别在`t29`/`t15`且对象清楚，A14集中度、需求、监管、竞争、项目延误及汇率风险均有局部可读任务。A01/A02/A03/A04/A05/A09/A12仍partial，A13仍missing；不将fallback原文算selected或将aggregate `budget_full`猜成目标原因。
+
+验证：相关自然包1,546 passed/34.48s；Ruff变更文件全绿；三个源码文件mypy 0错误。整包先在83%卡于既有`test_real_official_export_adapter_keeps_two_actual_parents_and_native_fields`：它使用系统默认`TemporaryDirectory`，fixture再于其内创建嵌套临时目录，本机受限Windows临时区的`mkdir`挂起。测试改用pytest `tmp_path`隔离后，单测2.35s通过，整包完整34.48s通过；生产代码和fixture事实断言未改。回执明确标明ROOT复核、不是独立签收、没有真实模型响应或摘要验收。W11-CWP-SOURCES按用户确认已A/B/C完成并推送，作为完成项不重开。
+
+下一步：只针对仍未闭合的真实目标查候选/依赖/预算项级证据，优先A12、A13及A01/A05父级、A09跨任务关系；保持96/48,000/16M与8/4/2048不变。根修后再用一次同条件新版本选材检查14项，然后才推进摘要/cache和W12。
+
 ## 2026-10-23 预算制度根因改造与W09接收
 
 用户明确授权累计10Mtokens/USD20，公司150k/USD1改软目标。ROOT单一config/resource_budget.yaml接入真实mother_totals，旧metadata/usage/unknown全不变，余额8,438,648tokens/19,368,041microUSD；追加新effective scope而不重写旧材料。初始独立56F/7P及母账2F留证；维度套件两次夹具错误另列，第三次才是3个真实RED。独审再查出partial耗尽漏报和缓存错误复用2F，已从共享owner修复并固化普通内存PDF回归。最终独审99P/47P，ROOT loopback恢复12P/210.70s、动态工作计量回归2P，全src类型/发布另附收据；不重复付费、不混加测试计数。
@@ -680,3 +688,11 @@ GitHub CI有一条非阻断运行时警告和一条Ubuntu 26迁移提示，记�
 ## 2026-10-24T01:49:23.487623+00:00 发布交接最终补正
 
 独立文档复核发现CURRENT_STATUS正文和MAINLINE_LOOP_GOAL当前起点各一段旧prototype未发布描述，均改为f2b8f2bf/CI40050949303；其余当前字段、17P、annual14的3/9/2和无新增门禁一致。仅文档补正，不改源码、旧审查或预算。
+
+## 2026-10-24T05:38:43Z W08 V5根因修复与14项目标独立复核
+
+V4独审发现纯名词“收入确认、履约义务、客户控制”会把会计政策误判为经营事件。新增中英文负例先RED，修改共享source-purpose关系判断后119项聚焦回归通过；真实业务正例、确认时段及预收转收入关系保持。相关自然测试2,155 passed/11既有skip/0失败（54.08秒），Ruff与mypy通过；V5独立源安全复核没有新增blocker。
+
+以同一真实249页来源回放V5：1,533候选、96 selected spans/7,767字符、8,845,814/16,000,000工作量；2项运行checkpoint通过，零模型调用/下载/raw copy。与checkpoint oracle分开的冻结14项清单独审7pass/5partial/2missing；55个编译任务context未见Testing/Biology兄弟业务串入。A03/A04仍missing，A01/A02/A05/A09/A13仍partial；A12前提已同任务可见，A13具体确认金额/业务期间仍缺。详细逐项状态、代码/测试哈希及准确结论见`review/r1-w08-crosspage-20261024/annual14-v5/review.md/json`；正式摘要与模型结果仍未验收。
+
+本轮无外部模型费用、无业务文档下载、无raw copy。用户再次确认W11-CWP-SOURCES A/B/C全流程完成并推送；该交付进入PWF记录，ROOT真实IR业务材料检查仍按其独立收据状态OPEN。

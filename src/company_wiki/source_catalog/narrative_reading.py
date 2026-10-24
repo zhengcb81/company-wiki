@@ -522,8 +522,14 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             work_budget=work_budget, _native_contexts=_native_contexts)
         withheld.extend(continuity.get("native_dependency_diagnostics", ()))
         sections = pipeline.get("structure", {}).get("sections", ())
-        work_budget.charge(sum(1 + len(section.get("heading_unit_ids", ())) for section in sections))
+        work_budget.charge(sum(1 + len(section.get("heading_unit_ids", ()))
+                               + len(section.get("body_unit_ids", ())) for section in sections))
         headings = {uid for section in sections for uid in section.get("heading_unit_ids", ())}
+        section_memberships: dict[str, set[str | None]] = {}
+        for section in sections:
+            section_id = section.get("section_id")
+            for uid in section.get("body_unit_ids", ()):
+                section_memberships.setdefault(uid, set()).add(section_id)
     except WorkBudgetExceeded:
         if _session_state is not None:
             _session_state["admission_trace"] = admission_trace
@@ -676,6 +682,12 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         for index, view in enumerate(package.get("native_analysis_views", ())):
             if len(view) > 1:
                 analysis_groups["analysis:" + package["package_id"] + ":" + str(index)] = tuple(view)
+    explicit_reference_sections: dict[str, str] = {}
+    for uid, memberships in section_memberships.items():
+        if len(memberships) == 1:
+            section_id = next(iter(memberships))
+            if isinstance(section_id, str) and section_id:
+                explicit_reference_sections[uid] = section_id
     session = SourceOperatingSession(units, work_budget=work_budget, contexts={},
         groups=analysis_groups, antecedents=antecedents, originals=original_units)
     # Readiness precedes both the graph and any fact/cache work: a product
@@ -720,7 +732,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     # another. Native adjacency is only physical proof; the same operating
     # session proves object identity and restrictive state before adding edges.
     local_dependencies = session.local_qualification_dependencies(
-        continuity.get("adjacency_edges", ()), origins=origins)
+        continuity.get("adjacency_edges", ()), origins=origins,
+        section_ids=explicit_reference_sections)
     local_context: dict[str, set[str]] = {}
     for anchor, qualifiers in local_dependencies.items():
         for qualifier in qualifiers:

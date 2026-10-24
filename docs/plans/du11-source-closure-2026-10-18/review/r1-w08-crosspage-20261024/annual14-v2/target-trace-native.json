@@ -1,0 +1,2158 @@
+{
+  "schema_version": "w08-annual14-target-selector-trace/1",
+  "instrumentation": "Records original function outputs only; selector return values are unchanged.",
+  "targets": [
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "target": [
+        "ST-A12"
+      ],
+      "text_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 14,
+        "paragraph_index": 32,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "target": [
+        "ST-A12"
+      ],
+      "text_excerpt": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 14,
+        "paragraph_index": 34,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "(1). 按照业务类型披露收入确认和计量所采用的会计政策",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 119,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:56f1f79787a5278940f9bb2d3318e57d946579e13b1963e02b7b66c68846df2c",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 119,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 119,
+        "paragraph_index": 11,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 120,
+        "paragraph_index": 5,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "同一合同下的合同资产和合同负债以净额列示。",
+      "text_truncated": false,
+      "coordinates": {
+        "page_number": 120,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "kind": "pdf_text_block",
+      "role": "company_filing"
+    }
+  ],
+  "selection_output_path": ".planning\\r1-w08-target-trace-20261024\\selection-native.json",
+  "target_profiles": {
+    "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "operating_metrics",
+      "priority": 2
+    },
+    "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "operating_metrics",
+      "priority": 2
+    },
+    "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "financial_notes",
+      "priority": 2
+    },
+    "urn:company-wiki:narrative-unit:sha256:56f1f79787a5278940f9bb2d3318e57d946579e13b1963e02b7b66c68846df2c": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "financial_notes",
+      "priority": 2
+    },
+    "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "financial_notes",
+      "priority": 2
+    },
+    "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "financial_notes",
+      "priority": 2
+    },
+    "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2": {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "form_type": "unknown",
+      "section_role": "financial_notes",
+      "priority": 2
+    }
+  },
+  "target_sections": [
+    {
+      "section_id": "s52",
+      "parent_id": "s40",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "high",
+      "basis": [
+        "reading_order",
+        "heading_level",
+        "spans_pages",
+        "role_inherited"
+      ],
+      "target_body_ids": [
+        "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+      ],
+      "body_count": 30
+    },
+    {
+      "section_id": "s397",
+      "parent_id": "s291",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "section_role": "financial_notes",
+      "language": "zh",
+      "confidence": "high",
+      "basis": [
+        "reading_order",
+        "heading_level",
+        "spans_pages"
+      ],
+      "target_body_ids": [
+        "urn:company-wiki:narrative-unit:sha256:56f1f79787a5278940f9bb2d3318e57d946579e13b1963e02b7b66c68846df2c",
+        "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2",
+        "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd",
+        "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481"
+      ],
+      "body_count": 36
+    }
+  ],
+  "parsed_unit_count": 5647,
+  "page14_native_diagnostics": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 321,
+      "wire_paragraph": null,
+      "paragraph_index": 28,
+      "text": "-\n通过药物发现体内、外业务联动、跨区域合作和热点领域的一体化服务，高效赋能全球\n客户。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 0,
+      "block_char_end": 44,
+      "block_sha256": "80dfd91e90365606ea7b2bb52ce7c1ad511ddfb2f090bc54d471dd2c52583296",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s55",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 321,
+        "paragraph": 28,
+        "block": 16,
+        "bbox": [
+          110.87999725341797,
+          514.2963256835938,
+          531.4735107421875,
+          539.9603271484375
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 322,
+      "wire_paragraph": null,
+      "paragraph_index": 29,
+      "text": "-\n体外综合筛选平台技术加速突破，体内药理学能力持续提升，驱动收入快速增长。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 0,
+      "block_char_end": 38,
+      "block_sha256": "de89d9243fe7838ed699bc9242f34c44b80a5b22c4ad56fc520ae15b3c6ac587",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s55",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 322,
+        "paragraph": 29,
+        "block": 17,
+        "bbox": [
+          110.87999725341797,
+          547.5372924804688,
+          531.4735107421875,
+          573.079345703125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 323,
+      "wire_paragraph": null,
+      "paragraph_index": 30,
+      "text": "非肿\n瘤业务保持竞争优势，为业务增长贡献重要力量。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 38,
+      "block_char_end": 63,
+      "block_sha256": "de89d9243fe7838ed699bc9242f34c44b80a5b22c4ad56fc520ae15b3c6ac587",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s55",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 323,
+        "paragraph": 30,
+        "block": 17,
+        "bbox": [
+          110.87999725341797,
+          547.5372924804688,
+          531.4735107421875,
+          573.079345703125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 324,
+      "wire_paragraph": null,
+      "paragraph_index": 31,
+      "text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 0,
+      "block_char_end": 60,
+      "block_sha256": "e7f855f44d2cf9210e0e2c52ca15adc26c41c75e98e24f8a5f1791a09b8b17ff",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s55",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 324,
+        "paragraph": 31,
+        "block": 18,
+        "bbox": [
+          110.87999725341797,
+          580.7772827148438,
+          536.6500244140625,
+          606.3203125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 325,
+      "wire_paragraph": null,
+      "paragraph_index": 32,
+      "text": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 0,
+      "block_char_end": 45,
+      "block_sha256": "0ed01a870c2bb934dda8a83d89f3c2cc49669325bc7444004052a1d5db31f91f",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s52",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 325,
+        "paragraph": 32,
+        "block": 19,
+        "bbox": [
+          89.87999725341797,
+          632.1373291015625,
+          531.3690795898438,
+          659.4066772460938
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 326,
+      "wire_paragraph": null,
+      "paragraph_index": 33,
+      "text": "公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 45,
+      "block_char_end": 89,
+      "block_sha256": "0ed01a870c2bb934dda8a83d89f3c2cc49669325bc7444004052a1d5db31f91f",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s52",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 326,
+        "paragraph": 33,
+        "block": 19,
+        "bbox": [
+          89.87999725341797,
+          632.1373291015625,
+          531.3690795898438,
+          659.4066772460938
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "kind": "paragraph",
+      "page": 14,
+      "ordinal": 327,
+      "wire_paragraph": null,
+      "paragraph_index": 34,
+      "text": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+      "role": "company_filing",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "source_id_provenance": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "observed_kind": "paragraph",
+      "block_index": null,
+      "block_char_start": 0,
+      "block_char_end": 155,
+      "block_sha256": "9b229e8c8e78915633215d59b51430e8da538d714ff0dd3b0a2d646df7739057",
+      "bbox": null,
+      "coordinate_frame": null,
+      "font_size": null,
+      "font_weight": null,
+      "section": "s52",
+      "left_closed": true,
+      "native": {
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "page": 14,
+        "ordinal": 327,
+        "paragraph": 34,
+        "block": 20,
+        "bbox": [
+          89.87999725341797,
+          677.3773193359375,
+          530.77001953125,
+          730.1603393554688
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "left_closed": true
+      }
+    }
+  ],
+  "page14_edge_attempts": [
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+      "left_text": "积极拓展全球业\n务，为公司CRDMO 业务模式高效引流，持续为公司带来超过20%的新客户。",
+      "right_text": "-\n通过药物发现体内、外业务联动、跨区域合作和热点领域的一体化服务，高效赋能全球\n客户。",
+      "left": {
+        "ordinal": 320,
+        "paragraph": 27,
+        "block": 15,
+        "bbox": [
+          110.87999725341797,
+          481.0563049316406,
+          531.4735107421875,
+          508.44769287109375
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 321,
+        "paragraph": 28,
+        "block": 16,
+        "bbox": [
+          110.87999725341797,
+          514.2963256835938,
+          531.4735107421875,
+          539.9603271484375
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": {
+        "left": "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5",
+        "right": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+        "basis": "native_wrapped_line",
+        "x0_delta": 0.0,
+        "vertical_gap": 5.8486328125,
+        "measured_font_size": 10.449999809265137,
+        "font_weight": "regular",
+        "coordinate_frame": "dict"
+      }
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+      "left_text": "-\n通过药物发现体内、外业务联动、跨区域合作和热点领域的一体化服务，高效赋能全球\n客户。",
+      "right_text": "-\n体外综合筛选平台技术加速突破，体内药理学能力持续提升，驱动收入快速增长。",
+      "left": {
+        "ordinal": 321,
+        "paragraph": 28,
+        "block": 16,
+        "bbox": [
+          110.87999725341797,
+          514.2963256835938,
+          531.4735107421875,
+          539.9603271484375
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 322,
+        "paragraph": 29,
+        "block": 17,
+        "bbox": [
+          110.87999725341797,
+          547.5372924804688,
+          531.4735107421875,
+          573.079345703125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": {
+        "left": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+        "right": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+        "basis": "native_wrapped_line",
+        "x0_delta": 0.0,
+        "vertical_gap": 7.57696533203125,
+        "measured_font_size": 10.449999809265137,
+        "font_weight": "regular",
+        "coordinate_frame": "dict"
+      }
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+      "left_text": "-\n体外综合筛选平台技术加速突破，体内药理学能力持续提升，驱动收入快速增长。",
+      "right_text": "非肿\n瘤业务保持竞争优势，为业务增长贡献重要力量。",
+      "left": {
+        "ordinal": 322,
+        "paragraph": 29,
+        "block": 17,
+        "bbox": [
+          110.87999725341797,
+          547.5372924804688,
+          531.4735107421875,
+          573.079345703125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 323,
+        "paragraph": 30,
+        "block": 17,
+        "bbox": [
+          110.87999725341797,
+          547.5372924804688,
+          531.4735107421875,
+          573.079345703125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": {
+        "left": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+        "right": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+        "basis": "native_block_character_ranges"
+      }
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+      "left_text": "非肿\n瘤业务保持竞争优势，为业务增长贡献重要力量。",
+      "right_text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+      "left": {
+        "ordinal": 323,
+        "paragraph": 30,
+        "block": 17,
+        "bbox": [
+          110.87999725341797,
+          547.5372924804688,
+          531.4735107421875,
+          573.079345703125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 324,
+        "paragraph": 31,
+        "block": 18,
+        "bbox": [
+          110.87999725341797,
+          580.7772827148438,
+          536.6500244140625,
+          606.3203125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": {
+        "left": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+        "right": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+        "basis": "native_wrapped_line",
+        "x0_delta": 0.0,
+        "vertical_gap": 7.69793701171875,
+        "measured_font_size": 10.449999809265137,
+        "font_weight": "regular",
+        "coordinate_frame": "dict"
+      }
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "left_text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+      "right_text": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。",
+      "left": {
+        "ordinal": 324,
+        "paragraph": 31,
+        "block": 18,
+        "bbox": [
+          110.87999725341797,
+          580.7772827148438,
+          536.6500244140625,
+          606.3203125
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s55",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 325,
+        "paragraph": 32,
+        "block": 19,
+        "bbox": [
+          89.87999725341797,
+          632.1373291015625,
+          531.3690795898438,
+          659.4066772460938
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": null
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+      "left_text": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。",
+      "right_text": "公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "left": {
+        "ordinal": 325,
+        "paragraph": 32,
+        "block": 19,
+        "bbox": [
+          89.87999725341797,
+          632.1373291015625,
+          531.3690795898438,
+          659.4066772460938
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 326,
+        "paragraph": 33,
+        "block": 19,
+        "bbox": [
+          89.87999725341797,
+          632.1373291015625,
+          531.3690795898438,
+          659.4066772460938
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": {
+        "left": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "right": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+        "basis": "native_block_character_ranges"
+      }
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "left_text": "公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "right_text": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+      "left": {
+        "ordinal": 326,
+        "paragraph": 33,
+        "block": 19,
+        "bbox": [
+          89.87999725341797,
+          632.1373291015625,
+          531.3690795898438,
+          659.4066772460938
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "right": {
+        "ordinal": 327,
+        "paragraph": 34,
+        "block": 20,
+        "bbox": [
+          89.87999725341797,
+          677.3773193359375,
+          530.77001953125,
+          730.1603393554688
+        ],
+        "frame": [
+          "dict",
+          0,
+          595.2999877929688,
+          841.9000244140625
+        ],
+        "column": null,
+        "font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "scope": [
+          "s52",
+          null,
+          "operating_metrics"
+        ],
+        "source": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+        "role": "company_filing"
+      },
+      "basis": null
+    }
+  ],
+  "target_adjacency_edges": [
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+      "left_target": [
+        "ST-A12"
+      ],
+      "right_target": [
+        "ST-A12"
+      ],
+      "left_page": 14,
+      "right_page": 14,
+      "left_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "right_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:56f1f79787a5278940f9bb2d3318e57d946579e13b1963e02b7b66c68846df2c",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:61ff82faa66339d77797a512cf568c1b340ba123f500e72a1c67bfc334b87aa6",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+      "right_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:61ff82faa66339d77797a512cf568c1b340ba123f500e72a1c67bfc334b87aa6",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+      "right_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:65e31dbceb69460412d785a7fd5641cba370e48fab6c05e0328f20a63580c676",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "right_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:65e31dbceb69460412d785a7fd5641cba370e48fab6c05e0328f20a63580c676",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:13473b33a8f936289b73a10b4fb7f1cdc24e0768c1a947ed3f34a392b85b546d",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "right_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:13473b33a8f936289b73a10b4fb7f1cdc24e0768c1a947ed3f34a392b85b546d",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:ae6859c4e50b7a2ae8864f1c3d2346b385462cf25a2d1d4f2f7e0cab6f9dcc5e",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "right_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:ae6859c4e50b7a2ae8864f1c3d2346b385462cf25a2d1d4f2f7e0cab6f9dcc5e",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:d749a4bedc5f5f6543521b5e52b6169c8c3181c6fd7d3bc49d8cf394669abb0a",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "right_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:d749a4bedc5f5f6543521b5e52b6169c8c3181c6fd7d3bc49d8cf394669abb0a",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:66269dfedf40c78aabd8caaa52b4ea64eff9bb90cb6bf70c488879e518ba69d9",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [],
+      "left_page": 119,
+      "right_page": 119,
+      "left_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "right_excerpt": "本集团采用产出法确定部分履约进度，即根据已转移给客户的商品或服务对于客户的价值确\n定履约进度。本集团采用投入法确定其他履约进度，即根据本集团为履行履约义务的投入确定履\n约进度。当履约进度不能合理确定时，已经发生的成本预计能够得到补偿的，本集团按照已经发\n生的成本金额确认收入，直到履约进度能够合理确定为止。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:93ce3d41f99253bcbd715d5d24b32c1b241f9f261ab0deb82f51cb7131e161b2",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd",
+      "left_target": [],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 120,
+      "right_page": 120,
+      "left_excerpt": "本集团根据在向客户转让商品或服务前是否拥有对该商品或服务的控制权，来判断从事交易\n时本集团的身份是主要责任人还是代理人。本集团在向客户转让商品或服务前能够控制该商品或\n服务的，本集团为主要责任人，按照已收或应收对价总额确认收入；否则，本集团为代理人，按\n照预期有权收取的佣金或手续费的金额确认收入，该金额按照已收或应收对价总额扣除应支付给\n其他相关方的价款后的净额，或者按照既定的佣金金额或比例等确定。",
+      "right_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:1b43371dc4674278a3646832bf4373ef0a5d4b81d0a927419408b595b30f8c7a",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 120,
+      "right_page": 120,
+      "left_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "right_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:1b43371dc4674278a3646832bf4373ef0a5d4b81d0a927419408b595b30f8c7a",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:35e68e6f6f40233ddbaed75c82f9c8722819248a0fae526e52173a79cb0ebf16",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 120,
+      "right_page": 120,
+      "left_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "right_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:35e68e6f6f40233ddbaed75c82f9c8722819248a0fae526e52173a79cb0ebf16",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [
+        "ST-A13"
+      ],
+      "left_page": 120,
+      "right_page": 120,
+      "left_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "right_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:9945a3890b5e86cb4f312cf26dc6ffbe345deb26a4c2420a3376e0cd19a70907",
+      "left_target": [
+        "ST-A13"
+      ],
+      "right_target": [],
+      "left_page": 120,
+      "right_page": 120,
+      "left_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "right_excerpt": "在合同开始（或接近合同开始）日向客户收取的无需退回的初始费（如项目研发前期费用等）\n计入交易价格。该初始费与向客户转让已承诺的商品或服务相关，且该商品或服务构成单项履约\n义务的，本集团在转让该商品或服务时，按照分摊至该商品或服务的交易价格确认收入；该初始\n费与向客户转让已承诺的商品或服务相关，但该商品或服务不构成单项履约义务的，本集团在包\n含该商品或服务的单项履约义务履行时，按照分摊至该单项履约义务的交易价格确认收入；该初\n始费与向客户转让已承诺的商品或服务不相关的，该初始费作为未来将转让商品或服务的预收款，\n在未来转让该商品或服务时确认为收入。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    }
+  ],
+  "admission": [
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+        "target": [
+          "ST-A12"
+        ],
+        "text_excerpt": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 14,
+          "paragraph_index": 34,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "kind": "pdf_text_block",
+        "role": "company_filing"
+      },
+      "kind": "risk",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business"
+        ],
+        "reasons": [
+          "operating_state_unknown"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "admitted": true
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+        "target": [
+          "ST-A12"
+        ],
+        "text_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 14,
+          "paragraph_index": 32,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 1168,
+          "char_end": 1257
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "kind": "native_continuity",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "source_revenue_guidance",
+          "operating_metric_change",
+          "core_business"
+        ],
+        "reasons": [
+          "source_revenue_guidance",
+          "operating_metric_change",
+          "operating_current_state"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating_metric"
+      },
+      "admitted": true
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:4905abec89d97280ddad2676746faa8b100305941982dea283dfd094c7db00ce",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 119,
+          "paragraph_index": 9,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 476,
+          "char_end": 565
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "kind": "native_continuity",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "business_revenue_recognition"
+        ],
+        "reasons": [
+          "business_revenue_recognition"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "admitted": true
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:8d16edd5922be403f6ed616159a0147d2b4270efc9f3dbc190f4507eadd91f60",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 119,
+          "paragraph_index": 11,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 566,
+          "char_end": 833
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "kind": "native_continuity",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "business_revenue_recognition"
+        ],
+        "reasons": [
+          "business_revenue_recognition"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "admitted": true
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:56a459af871b5edc8e5c4d1cc4742aa75e179fb324123674989d339c6cf9fa01",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 120,
+          "paragraph_index": 5,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 239,
+          "char_end": 445
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "kind": "native_continuity",
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "business_revenue_recognition"
+        ],
+        "reasons": [
+          "business_revenue_recognition"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "admitted": true
+    }
+  ],
+  "candidate_targets": [
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+        "target": [
+          "ST-A12"
+        ],
+        "text_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 14,
+          "paragraph_index": 32,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 1168,
+          "char_end": 1257
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "source_revenue_guidance",
+        "operating_metric_change",
+        "operating_current_state"
+      ],
+      "topics": [
+        "source_revenue_guidance",
+        "operating_metric_change",
+        "core_business"
+      ],
+      "reading": "{'priority': 2, 'topics': ('source_revenue_guidance', 'operating_metric_change', 'core_business'), 'context_only': False, 'value_band': 'meaningful_fact', 'required': ('urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f', 'urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697'), 'fact_purpose': 'operating_metric', 'fact_reasons': ('source_revenue_guidance', 'operating_metric_change', 'operating_current_state'), 'package_ids': ('native-continuity:6dda3755b44947c23a9372664057483ed3c39bbbf6a929991e33d9bbe5b6fb41',)}"
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+        "target": [
+          "ST-A12"
+        ],
+        "text_excerpt": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 14,
+          "paragraph_index": 34,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "kind": "pdf_text_block",
+        "role": "company_filing"
+      },
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ],
+      "reading": "{'priority': 2, 'topics': ('core_business',), 'context_only': False, 'value_band': 'meaningful_fact', 'required': ('urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f', 'urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697'), 'fact_purpose': 'operating', 'fact_reasons': ('operating_state_unknown',), 'package_ids': ('m164:urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854',)}"
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "(1). 按照业务类型披露收入确认和计量所采用的会计政策",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 119,
+          "paragraph_index": 3,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "kind": "pdf_text_block",
+        "role": "company_filing"
+      },
+      "score": 0,
+      "reasons": [
+        "reading_context"
+      ],
+      "topics": [],
+      "reading": "{'priority': 2, 'topics': (), 'context_only': True, 'required': ()}"
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:4905abec89d97280ddad2676746faa8b100305941982dea283dfd094c7db00ce",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 119,
+          "paragraph_index": 9,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 476,
+          "char_end": 565
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "reading": "{'priority': 2, 'topics': ('business_revenue_recognition',), 'context_only': False, 'value_band': 'meaningful_fact', 'required': ('urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e', 'urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc'), 'fact_purpose': 'operating', 'fact_reasons': ('business_revenue_recognition',), 'package_ids': ('native-continuity:ff2ed89c91e74157d93d458d7c966db701a0954ef09de4dbe3d4762af60a42ed',)}"
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:8d16edd5922be403f6ed616159a0147d2b4270efc9f3dbc190f4507eadd91f60",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 119,
+          "paragraph_index": 11,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 566,
+          "char_end": 833
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "reading": "{'priority': 2, 'topics': ('business_revenue_recognition',), 'context_only': False, 'value_band': 'meaningful_fact', 'required': ('urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e', 'urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc'), 'fact_purpose': 'operating', 'fact_reasons': ('business_revenue_recognition',), 'package_ids': ('native-continuity:33a2af708a907f8f6b547bd8a25b071c81e1900733042729d432eec1e65c3b0c',)}"
+    },
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:56a459af871b5edc8e5c4d1cc4742aa75e179fb324123674989d339c6cf9fa01",
+        "target": [
+          "ST-A13"
+        ],
+        "text_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 120,
+          "paragraph_index": 5,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 239,
+          "char_end": 445
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "reading": "{'priority': 2, 'topics': ('business_revenue_recognition',), 'context_only': False, 'value_band': 'meaningful_fact', 'required': ('urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e', 'urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc'), 'fact_purpose': 'operating', 'fact_reasons': ('business_revenue_recognition',), 'package_ids': ('native-continuity:cd9961c6a63132df22bf58dfd6790046b0dec042229f662d638f24a352581042',)}"
+    }
+  ],
+  "eligible_targets": [
+    {
+      "package_id": "m164:urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "kind": "risk",
+      "section_ids": [
+        "s52"
+      ],
+      "section_role": "operating_metrics",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+      ],
+      "completeness": "complete",
+      "priority": 2,
+      "reading_family": "annual",
+      "reading_profile_id": "cn_annual",
+      "reading_profile_version": "cn_annual/v2+b72594f55d084442",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 报告期主营业务构成、主要产品与收入机制 相比上一报告期发生了哪些经营变化及其原因 新产品/第二曲线所处阶段与证据（开发→送样→验证→小批量→量产→规模化） 产能、订单、利用率、出货等经营指标及其口径 海外/新市场的实际进入程度与主体归属 公司下一阶段计划、附带条件与不确定性 风险因素中已发生事实与一般性提示的区分",
+      "first_ordinal": 327,
+      "diagnostics": [],
+      "truncated": false
+    },
+    {
+      "package_id": "native-continuity:6dda3755b44947c23a9372664057483ed3c39bbbf6a929991e33d9bbe5b6fb41",
+      "kind": "native_continuity",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+      ]
+    },
+    {
+      "package_id": "native-continuity:ff2ed89c91e74157d93d458d7c966db701a0954ef09de4dbe3d4762af60a42ed",
+      "kind": "native_continuity",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:56f1f79787a5278940f9bb2d3318e57d946579e13b1963e02b7b66c68846df2c",
+        "urn:company-wiki:narrative-unit:sha256:61ff82faa66339d77797a512cf568c1b340ba123f500e72a1c67bfc334b87aa6"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:56f1f79787a5278940f9bb2d3318e57d946579e13b1963e02b7b66c68846df2c",
+        "urn:company-wiki:narrative-unit:sha256:61ff82faa66339d77797a512cf568c1b340ba123f500e72a1c67bfc334b87aa6"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ]
+    },
+    {
+      "package_id": "native-continuity:33a2af708a907f8f6b547bd8a25b071c81e1900733042729d432eec1e65c3b0c",
+      "kind": "native_continuity",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481",
+        "urn:company-wiki:narrative-unit:sha256:65e31dbceb69460412d785a7fd5641cba370e48fab6c05e0328f20a63580c676",
+        "urn:company-wiki:narrative-unit:sha256:13473b33a8f936289b73a10b4fb7f1cdc24e0768c1a947ed3f34a392b85b546d",
+        "urn:company-wiki:narrative-unit:sha256:ae6859c4e50b7a2ae8864f1c3d2346b385462cf25a2d1d4f2f7e0cab6f9dcc5e",
+        "urn:company-wiki:narrative-unit:sha256:d749a4bedc5f5f6543521b5e52b6169c8c3181c6fd7d3bc49d8cf394669abb0a"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:d217594fd233c5d5f7acc7b42c9d639bf9624f1ec68c08fa854ec93bafa33481",
+        "urn:company-wiki:narrative-unit:sha256:65e31dbceb69460412d785a7fd5641cba370e48fab6c05e0328f20a63580c676",
+        "urn:company-wiki:narrative-unit:sha256:13473b33a8f936289b73a10b4fb7f1cdc24e0768c1a947ed3f34a392b85b546d",
+        "urn:company-wiki:narrative-unit:sha256:ae6859c4e50b7a2ae8864f1c3d2346b385462cf25a2d1d4f2f7e0cab6f9dcc5e",
+        "urn:company-wiki:narrative-unit:sha256:d749a4bedc5f5f6543521b5e52b6169c8c3181c6fd7d3bc49d8cf394669abb0a"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ]
+    },
+    {
+      "package_id": "native-continuity:cd9961c6a63132df22bf58dfd6790046b0dec042229f662d638f24a352581042",
+      "kind": "native_continuity",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd",
+        "urn:company-wiki:narrative-unit:sha256:1b43371dc4674278a3646832bf4373ef0a5d4b81d0a927419408b595b30f8c7a",
+        "urn:company-wiki:narrative-unit:sha256:35e68e6f6f40233ddbaed75c82f9c8722819248a0fae526e52173a79cb0ebf16",
+        "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:c132257152d2d3ba816b7a2100a337e2cd8178424131a0543a3a341ad0903ffd",
+        "urn:company-wiki:narrative-unit:sha256:1b43371dc4674278a3646832bf4373ef0a5d4b81d0a927419408b595b30f8c7a",
+        "urn:company-wiki:narrative-unit:sha256:35e68e6f6f40233ddbaed75c82f9c8722819248a0fae526e52173a79cb0ebf16",
+        "urn:company-wiki:narrative-unit:sha256:6679aa44544948a23cf1c926bafba4e6fb3ae17fcf3d1a26558e11daed719eb2"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ]
+    }
+  ],
+  "withheld_targets": [],
+  "candidate_count": 496,
+  "budget_target_items": [
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+      "target": [
+        "ST-A12"
+      ],
+      "text_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "page": [
+        "page",
+        14
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "source_revenue_guidance",
+        "operating_metric_change",
+        "operating_current_state"
+      ],
+      "priority": 2,
+      "topics": [
+        "source_revenue_guidance",
+        "operating_metric_change",
+        "core_business"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 89
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "target": [
+        "ST-A12"
+      ],
+      "text_excerpt": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+      "page": [
+        "page",
+        14
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "priority": 2,
+      "topics": [
+        "core_business"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 155
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "(1). 按照业务类型披露收入确认和计量所采用的会计政策",
+      "page": [
+        "page",
+        119
+      ],
+      "score": 0,
+      "reasons": [
+        "reading_context"
+      ],
+      "priority": 2,
+      "topics": [],
+      "required": [],
+      "context_only": true,
+      "value_band": "description",
+      "chars": 28
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:4905abec89d97280ddad2676746faa8b100305941982dea283dfd094c7db00ce",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+      "page": [
+        "page",
+        119
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "priority": 2,
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 89
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:8d16edd5922be403f6ed616159a0147d2b4270efc9f3dbc190f4507eadd91f60",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "page": [
+        "page",
+        119
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "priority": 2,
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 267
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:56a459af871b5edc8e5c4d1cc4742aa75e179fb324123674989d339c6cf9fa01",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "page": [
+        "page",
+        120
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "priority": 2,
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 206
+    }
+  ],
+  "budget_target_decisions": [
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:11087e1bf9d1f6fd4d4de56e67e95c522cd4a01727ab65bfc33c55cd2e6faf7e",
+      "target": [
+        "ST-A12"
+      ],
+      "text_excerpt": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "page": [
+        "page",
+        14
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "source_revenue_guidance",
+        "operating_metric_change",
+        "operating_current_state"
+      ],
+      "priority": 2,
+      "topics": [
+        "source_revenue_guidance",
+        "operating_metric_change",
+        "core_business"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 89,
+      "selected": true
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "target": [
+        "ST-A12"
+      ],
+      "text_excerpt": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+      "page": [
+        "page",
+        14
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "priority": 2,
+      "topics": [
+        "core_business"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 155,
+      "selected": false
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "(1). 按照业务类型披露收入确认和计量所采用的会计政策",
+      "page": [
+        "page",
+        119
+      ],
+      "score": 0,
+      "reasons": [
+        "reading_context"
+      ],
+      "priority": 2,
+      "topics": [],
+      "required": [],
+      "context_only": true,
+      "value_band": "description",
+      "chars": 28,
+      "selected": true
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:4905abec89d97280ddad2676746faa8b100305941982dea283dfd094c7db00ce",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。",
+      "page": [
+        "page",
+        119
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "priority": 2,
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 89,
+      "selected": true
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:8d16edd5922be403f6ed616159a0147d2b4270efc9f3dbc190f4507eadd91f60",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。",
+      "page": [
+        "page",
+        119
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "priority": 2,
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 267,
+      "selected": true
+    },
+    {
+      "id": "urn:company-wiki:narrative-unit:sha256:56a459af871b5edc8e5c4d1cc4742aa75e179fb324123674989d339c6cf9fa01",
+      "target": [
+        "ST-A13"
+      ],
+      "text_excerpt": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。",
+      "page": [
+        "page",
+        120
+      ],
+      "score": 3,
+      "reasons": [
+        "reading_plan",
+        "business_revenue_recognition"
+      ],
+      "priority": 2,
+      "topics": [
+        "business_revenue_recognition"
+      ],
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:4832a5459e1fe6dbd72c5db8e4495c0fef2409c22265809ff421e958e23e646e",
+        "urn:company-wiki:narrative-unit:sha256:7a8c51487dc7028187da23f76a305b5bfc8839d7c4fcf1d8fd7d2c8a07ae6dbc"
+      ],
+      "context_only": false,
+      "value_band": "meaningful_fact",
+      "chars": 206,
+      "selected": true
+    }
+  ],
+  "budget_target_diagnostics": [
+    {
+      "item_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "group_id": null,
+      "category": "reading",
+      "item_count": 1,
+      "item_ids": [
+        "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+      ],
+      "locator": "loc:v1/page:14/paragraph:34",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96,
+      "closure_size": 3
+    }
+  ],
+  "selected_tasks_with_target_terms": [],
+  "selection_receipt_sha256": "5227c19d1fd5c792d2b9d5f17c8b60b318147ffd6d51c803a0335b90fc84e765",
+  "selection_stats": {
+    "physical_pages": 249,
+    "units": 5647,
+    "candidate_count": 1534,
+    "selected_count": 96,
+    "selected_chars": 7909,
+    "work_budget": {
+      "used": 8630449,
+      "limit": 16000000,
+      "exhausted": false,
+      "same_instance_for_parse_and_select": true
+    }
+  }
+}

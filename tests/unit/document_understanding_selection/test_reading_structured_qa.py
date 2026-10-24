@@ -7,9 +7,6 @@ provided by the source adapter, not inferred from keyword similarity or order.
 from __future__ import annotations
 
 from copy import deepcopy
-from pathlib import Path
-from tempfile import TemporaryDirectory
-
 import pytest
 
 from company_wiki.document_understanding.observation_adapter import build_observation
@@ -213,14 +210,13 @@ def test_two_unbound_marker_turns_on_one_parent_remain_separate():
     assert exchanges[1]["member_unit_ids"] == [second_q.unit_id, second_a.unit_id]
 
 
-def test_real_official_export_adapter_keeps_two_actual_parents_and_native_fields():
+def test_real_official_export_adapter_keeps_two_actual_parents_and_native_fields(tmp_path):
     from company_wiki.automation.narrative_official_json import (
         open_verified_projection, select_verified_projection,
     )
     from support.official_json_batch_fixture import official_batch_state
 
-    with TemporaryDirectory(prefix="qa-real-") as directory, \
-            official_batch_state(Path(directory)) as state:
+    with official_batch_state(tmp_path) as state:
         for subject in state.subjects:
             view = open_verified_projection(
                 state.catalog, projection_id=subject.item_key,

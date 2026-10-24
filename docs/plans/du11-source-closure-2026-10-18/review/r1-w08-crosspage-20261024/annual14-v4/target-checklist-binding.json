@@ -1,0 +1,31 @@
+{
+  "schema_version": "w08-annual14-v4-checklist-binding/1",
+  "target_checklist_path": "../annual14/review.json",
+  "target_checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+  "target_ids": [
+    "ST-A01",
+    "ST-A02",
+    "ST-A03",
+    "ST-A04",
+    "ST-A05",
+    "ST-A06",
+    "ST-A07",
+    "ST-A08",
+    "ST-A09",
+    "ST-A10",
+    "ST-A11",
+    "ST-A12",
+    "ST-A13",
+    "ST-A14"
+  ],
+  "target_row_count": 14,
+  "original_source_targets_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-01\\storage-source-inventory\\source-targets.json",
+  "original_source_targets_sha256": "dae0f0b81edc2df430ce4707c4ad9ea15126ab2998aaa6c0f4f7dff66022b9c8",
+  "gold_sha256_recorded_by_frozen_review": "dae0f0b81edc2df430ce4707c4ad9ea15126ab2998aaa6c0f4f7dff66022b9c8",
+  "gold_matches_source_targets_sha256": true,
+  "source_ref_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "v4_selector_oracle_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\oracle.json",
+  "v4_selector_oracle_sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+  "v4_selector_oracle_fact_count": 2,
+  "scope_note": "Two bounded selector checkpoint facts and the 14-target selected-source review are separate acceptance scopes; the two-fact oracle does not represent all 14 targets."
+}

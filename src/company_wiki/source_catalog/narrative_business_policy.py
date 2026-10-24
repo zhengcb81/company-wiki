@@ -12,7 +12,11 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 
 from .n6_candidate_operating_facts import OperatingFact
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
-from .narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
+from .narrative_source_purpose import (
+    NON_OPERATING_PURPOSES,
+    revenue_recognition_mechanism,
+    source_purpose,
+)
 from .narrative_revenue_guidance import revenue_guidance
 from .narrative_predicate_state import observe_metric_predicate, predicate_scope
 
@@ -637,6 +641,8 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             reasons.append("business_coverage_relation")
         if revenue_guidance(clause):
             reasons.append("source_revenue_guidance")
+        if revenue_recognition_mechanism(clause):
+            reasons.append("business_revenue_recognition")
         measures = _source_metric_relations(clause)
         if any(kind == "quantity" for kind, _start, _end in measures):
             reasons.append("operating_quantity")

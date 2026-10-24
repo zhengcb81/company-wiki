@@ -34,6 +34,87 @@ def case(texts, mutate=None, *, budget=None, limits=None):
     return parsed, result, session
 
 
+GUIDANCE = "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。"
+STRATEGY = "公司将更加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。"
+GUIDANCE_PREMISE = (
+    "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行业发展平稳、"
+    "国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管理层对2026年度全年"
+    "经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内外部环境变化等多种因素影响，"
+    "存在较大的不确定性。"
+)
+
+
+def explicit_guidance_case(texts, *, section_ids=None, mutate=None):
+    parsed, result, session = case(texts, mutate)
+    if section_ids is None:
+        section_ids = {unit.unit_id: "s1" for unit in parsed.units}
+    dependencies = session.local_qualification_dependencies(
+        result["adjacency_edges"], section_ids=section_ids
+    )
+    return parsed, result, dependencies
+
+
+def test_explicit_guidance_reference_closes_over_one_same_section_paragraph_gap():
+    parsed, result, dependencies = explicit_guidance_case([GUIDANCE, STRATEGY, GUIDANCE_PREMISE])
+    ids = [unit.unit_id for unit in parsed.units]
+    assert (ids[0], ids[2]) not in {(edge["left"], edge["right"])
+                                    for edge in result["adjacency_edges"]}
+    assert dependencies == {ids[0]: (ids[2],)}
+
+
+def test_explicit_guidance_reference_cannot_close_over_a_different_year():
+    forecast = "预计2027年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。"
+    parsed, _, dependencies = explicit_guidance_case([forecast, STRATEGY, GUIDANCE_PREMISE])
+    assert dependencies == {}
+
+
+def test_explicit_guidance_reference_needs_one_unambiguous_nearby_issuer_forecast():
+    parsed, _, dependencies = explicit_guidance_case([GUIDANCE, GUIDANCE, GUIDANCE_PREMISE])
+    ids = [unit.unit_id for unit in parsed.units]
+    assert dependencies == {ids[1]: (ids[2],)}
+    assert explicit_guidance_case(
+        ["合作伙伴预计2026年全年收入达到513-530亿元。", STRATEGY, GUIDANCE_PREMISE]
+    )[2] == {}
+
+
+def test_explicit_guidance_reference_requires_same_nonempty_section():
+    parsed, result, session = case([GUIDANCE, STRATEGY, GUIDANCE_PREMISE])
+    ids = [unit.unit_id for unit in parsed.units]
+    sections = {ids[0]: "s1", ids[1]: "s1", ids[2]: "s2"}
+    assert session.local_qualification_dependencies(
+        result["adjacency_edges"], section_ids=sections
+    ) == {}
+
+
+def test_explicit_guidance_reference_requires_known_same_page_source_coordinates():
+    parsed, result, _ = case([GUIDANCE, STRATEGY, GUIDANCE_PREMISE])
+    ids = [unit.unit_id for unit in parsed.units]
+    units = {unit.unit_id: unit for unit in parsed.units}
+    original = units[ids[2]]
+    units[ids[2]] = replace(
+        original,
+        coordinates=replace(original.coordinates, page_number=original.coordinates.page_number + 1),
+    )
+    session = SourceOperatingSession(units, work_budget=WorkBudget(100000))
+    sections = {unit_id: "s1" for unit_id in ids}
+    assert session.local_qualification_dependencies(
+        result["adjacency_edges"], section_ids=sections
+    ) == {}
+
+
+def test_explicit_guidance_reference_does_not_run_without_section_evidence():
+    _, _, session = case([GUIDANCE, STRATEGY, GUIDANCE_PREMISE])
+    assert session.local_qualification_dependencies([], section_ids={}) == {}
+
+
+def test_explicit_guidance_reference_does_not_attach_beyond_one_intervening_paragraph():
+    parsed, _, session = case([GUIDANCE, STRATEGY, STRATEGY, GUIDANCE_PREMISE])
+    sections = {unit.unit_id: "s1" for unit in parsed.units}
+    assert session.local_qualification_dependencies(
+        [], section_ids=sections
+    ) == {}
+
+
 def test_adjacent_complete_source_bodies_are_proven_without_merging_statements():
     parsed, result, _ = case([LEFT, NEGATIVE])
     assert result["windows"] == []

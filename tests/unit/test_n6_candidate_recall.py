@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from company_wiki.source_catalog import narrative_candidates, narrative_evidence
 from company_wiki.source_catalog.narrative_candidates import assess_unit
 from company_wiki.source_catalog.narrative_evidence import _candidate_rules, _make_unit
@@ -164,6 +166,45 @@ def test_operating_facts_are_selected_with_reusable_reasons() -> None:
                 f"{name}: missing {reason} in {candidate.reasons}"
             )
         assert "business_narrative_signal" in candidate.reasons, name
+
+
+def test_high_information_operating_facets_are_distinguished_for_fair_selection():
+    from company_wiki.source_catalog.n6_candidate_operating_facts import detect_operating_fact
+
+    cases = (
+        ("research_pipeline", "研究团队筛选出420000种新化合物，并推动310个候选分子从发现阶段进入开发。",
+         "research_pipeline"),
+        ("customer_acquisition", "通过拓展全球客户，公司持续带来超过20%的新增客户。",
+         "customer_acquisition"),
+        ("customer_acquisition_english", "The company acquired 120 new customers during the year.",
+         "customer_acquisition"),
+        ("dated_completion", "2025年9月公司提前完成新生产基地建设。", "capacity_projects"),
+        ("currency_exposure", "美元兑本币汇率波动可能造成汇兑损失并影响经营结果。",
+         "currency_risk"),
+        ("competitive_pressure", "行业竞争持续加剧，竞品价格下降可能压缩产品利润空间。",
+         "competition_risk"),
+    )
+    for name, text, topic in cases:
+        fact = detect_operating_fact(text)
+        assert fact.eligible, name
+        assert topic in fact.topics, (name, fact)
+
+
+@pytest.mark.parametrize("text", (
+    "公司计划拓展更多客户，但未披露新客户数量或占比。",
+    "The company acquired a 20% stake in a new plant.",
+    "公司研发费用同比增长10%，并运营多个研发中心。",
+    "公司持有大量外币资产，汇率保持稳定且无重大影响。",
+    "公司持续提升产品竞争优势和客户满意度。",
+))
+def test_operating_facet_topics_require_their_source_owned_signal(text):
+    from company_wiki.source_catalog.n6_candidate_operating_facts import detect_operating_fact
+
+    fact = detect_operating_fact(text)
+    assert "customer_acquisition" not in fact.topics
+    assert "research_pipeline" not in fact.topics
+    assert "currency_risk" not in fact.topics
+    assert "competition_risk" not in fact.topics
 
 
 def test_operating_fact_topics_never_relabel_domestic_revenue_as_overseas() -> None:

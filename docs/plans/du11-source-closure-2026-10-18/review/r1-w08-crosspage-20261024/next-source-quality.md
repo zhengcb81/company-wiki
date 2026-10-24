@@ -4,7 +4,17 @@
 
 ## 已证事实与验收口径
 
-本次V2单次回放249页/5647units，1512候选、96spans/8518字符、同16M账用8630449；字符额度未满、工作未耗尽，aggregate budget_full不能证明每一项遗漏都因96限额。独立内容3pass/9partial/2missing。原14 gold不改，selected/citation/model真正采用与按SourceRef实读的fallback分开记录；不强求财务报表全文切片。V3有限工程绿不签全14、收费摘要或RF公司通过。
+**当前版本为V5；以下旧V2/V3/V4收据保留为迭代历史，不能覆盖V5结论。** V5真实来源249页、1,533候选、96 selected spans/7,767字符、工作8,845,814/16M；14项独立复核7pass/5partial/2missing。冻结输入为`annual14-v5/freeze.json`，逐项目标及55个任务context复核为`annual14-v5/review.md/json`。V5两项checkpoint oracle不是冻结14项业务清单。原gold不改，selected/citation/model task与按SourceRef实读fallback分开记录；没有provider请求或正式summary。aggregate `budget_full`不能证明单目标因96限额遗漏，不强求财务报表全文切片。
+
+V2历史：249页/5,660 units、1,532候选、96 spans/7,171字符、工作8,613,643/16M，ROOT复核6pass/7partial/1missing，见`annual14-v2/review.md/json`。首轮V2及V3、V4完整原始收据同样保留，不重签为当前版本结果。
+
+## 当前节点状态（2026-10-24，V5）
+
+V5已修复V4独立审查发现的P2根因：中英文纯名词“收入确认/履约义务/客户控制”不再足以把会计政策归为经营事件；客户实际取得控制、控制转移或向客户交付等关系仍作为必要证据。两个纯名词反例先RED后GREEN，原正例、时段履行与预收转收入关系保留。自然测试2,155 passed/11 skipped（54.08秒），聚焦回归119 passed，Ruff/mypy通过；V5独立源码安全复核没有新blocker。
+
+V5在同一真实原文上的选材结果仍是7pass/5partial/2missing，而不是完整通过。A06/A07/A08/A10/A11/A12/A14 pass；A01/A02/A05/A09/A13 partial；A03/A04 missing。A12指引和完整前提已同在`t31`；A13收入确认政策已可见，但具体金额/业务时段分类缺失。55任务context复核未发现Testing/Biology兄弟业务串入。V5选择、源码/测试及自然测试回执绑定见`annual14-v5/freeze.json`；独立报告见`annual14-v5/review.md/json`。
+
+下一步不重复解析全PDF：针对A03/A04和五个partial目标，利用既有bounded per-target trace核对source candidate、来源类型/职责、semantic dependency、offer/admit/withhold、task/引用闭包的具体状态。判断A03/A04精确财务值是否应由现有API/SourceRef提供；判断A01/A02/A05/A09/A13缺口是否来自业务scope、数值口径、Chemistry父子关系、日期/容量跨任务或收入确认期间关系。保留unknown，不从aggregate `budget_full`倒推单目标原因，不改14项gold，不抬限额。按共用根因做TDD修复后，才用一次同一真实来源新版本回放并独立复核同一14项目标。
 
 ## 实施顺序（两大节点）
 

@@ -1,3 +1,11 @@
+## 2026-10-24 W08真实选材复核结果和剩余根因
+
+annual14 V2在同一冻结SourceRef上使用当前结构、候选事实和指引依赖代码完成一次真实选择，限额未上调。结果从首轮3 pass/9 partial/2 missing变为6/7/1：A07两类药物发现指标现同在`t23`，A11 Biology收入、新客和新分子占比的对象/指标分别在`t14`/`t29`/`t15`中，A14客户集中度及六类风险各有可读任务。新增research-pipeline、customer-acquisition、dated-project、concentration、FX、competition信号对这些通用事实有实际召回，不是仅靠单测推断。
+
+仍未闭合的目标不能归为一个原因：A01 business taxonomy存在page11 paragraph 5的精确`budget_full`项目样本，但全体业务/Other scope并未进任务；A02/A03/A04含精确金融数表或客户地域，缺口可能应由结构表/按需金融API完成，不得声称已取；A05化学父级与D&M/TIDES子项跨task；A09日期、项目、容量分属`t19`/`t26`/`t27`；A12只选到`t30`的指导值，业务前提、贸易监管条件和不确定性未入任务；A13收入确认时段/时点和合同负债转收入解释完全未入selected/model view。对A12/A13现阶段没有完整item-level cause trace，必须保持unknown；不能把259条aggregate budget_full诊断代替目标归因。V2编译task视图不等同于provider request或summary使用。
+
+另一个可复现的本地测试停滞与source代码无关：一个集成测试把pytest `tmp_path`绕开，写系统默认Temp，再在其下创建第二层Temp。本机受限Windows临时位置挂起于`os.mkdir`。改回pytest仓库内短路径隔离后，单项2.35秒、相关1,546项自然套件34.48秒全部通过，事实断言保持原样。此前按原方法重复长等无法发现这个边界，后续本仓测试优先使用显式pytest tmp_path。
+
 ## 2026-10-22 当前主线目标与方案接收
 
 当前原生目标active且正文为MAINLINE_LOOP_GOAL.md。内置create_goal不能替换未完旧目标、update_goal不能resume；用户显式请求由官方app-server thread/goal/set完成并回读，不操作SQLite。stdio短客户端关闭；实际保留旧应用计数，外部预算不变。
@@ -521,3 +529,9 @@ TDD暴露并修复的合同根因：① `max_chars=0`是合法硬上限，但`ch
 - **Windows测试宿主临时目录**：pytest `--basetemp`单独设置还不足以控制SQLite/Python所读的TEMP/TMP。访问受限时SQLite大型WAL写入出现`unable to open database file`。修复放在统一pytest gate：每次运行分配checkout内的owned scratch，并把TEMP/TMP/TMPDIR/SQLITE_TMPDIR一致指向它，退出统一清理。不能修改业务存储层来绕过宿主ACL。
 - **沙箱网络边界**：cache迁移测试生成本地worker并经loopback访问；受限执行环境拒绝此环回连接。该失败不是产品网络错误；在正常pre-push允许的测试环境通过同一生产代码和完整测试。不可通过删测试或替换产品网络路径消除。
 - **验收证据**：本地正常pre-push 8072 passed/24既有skip及146 contract passed；精确远端CI `87a14a8608f5bcce17e7496f43c71b43baf56ea5`（run 40060222913）success。CI对Node 20强制Node 24和Ubuntu 26迁移提示为独立非阻断维护项。
+
+## 2026-10-24 W08 V5会计政策分类根因与实际内容边界
+
+V4独立复核把“收入确认 + 履约义务 + 客户控制”纯名词触发经营事件判定列为P2。根因在共享source-purpose owner的客户控制关系规则只查词共现，没有要求实际取得/转移控制或交付关系。先写中英文纯会计政策反例并观测RED，再要求客户取得/获得控制、控制转移或向客户交付/提供等真实关系；旧业务正例及履行期间、预收转收入规则仍保留。119项聚焦测试、2155项自然测试/11既有skip、Ruff、mypy通过；V5独立复核确认该根因已关闭且无新工程blocker。
+
+同一真实249页原件V5仍选96 spans/7,767字符，工作8,845,814/16M未耗尽，14项目标为7pass/5partial/2missing。独审展开55个task context，未发现Testing/Biology兄弟业务串入。A12指引和完整前提进入`t31`；A13政策入选但确认金额及业务期间分类仍缺。A03/A04缺精确业务/财务数据；A01/A02/A05/A09/A13仍有部分范围、口径或跨任务关系缺口。V5的两项checkpoint oracle不是冻结14项目标清单；该结果只说明选中证据可见性，不是summary/model/business PASS。对每个未闭目标下一步由有界诊断定位candidate/source role/dependency/offer-admit/task closure；必要的精确财务值再从现有API/SourceRef取得，叙述引擎负责业务关系。V5回执绑定见`review/r1-w08-crosspage-20261024/annual14-v5/`。本轮无收费模型调用、下载或原文复制。

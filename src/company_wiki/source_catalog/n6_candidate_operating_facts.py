@@ -135,6 +135,58 @@ _PROJECT_TIMELINE = re.compile(
     re.IGNORECASE,
 )
 
+_RESEARCH_PIPELINE = re.compile(
+    r"(?:研究|研发|药物发现|筛选|合成)[^。；]{0,48}\d[\d,.]*[^。；]{0,20}"
+    r"(?:新化合物|候选分子|候选药物|分子进入开发)"
+    r"|\d[\d,.]*\s*(?:万|千)?\s*(?:种|个)?[^。；]{0,12}(?:新化合物|候选化合物)"
+    r"|(?:R\s*(?:到|至|&|and)\s*D|研究至开发|发现阶段.{0,8}开发阶段)"
+    r"[^。；]{0,36}\d[\d,.]*[^。；]{0,12}(?:分子|候选物|候选药物)"
+    r"|(?:research|discovery|development)[^.!?;]{0,48}\d[\d,.]*[^.!?;]{0,20}"
+    r"(?:compounds?|molecules?|candidates?)",
+    re.IGNORECASE,
+)
+_CUSTOMER_ACQUISITION = re.compile(
+    r"(?:带来|获得|拓展|吸引|获取|新增)[^。；]{0,28}"
+    r"(?:超过|超|逾|约|近)?\s*\d[\d,.]*\s*(?:%|％|个|家)?[^。；]{0,12}(?:新客户|新增客户|新客戶|新增客戶)"
+    r"|(?:win|acquire|attract|add|bring in)[^.!?;]{0,32}"
+    r"(?:more than\s+)?\d[\d,.]*\s*(?:new\s+customers?|"
+    r"(?:%|percent)\s+of\s+new\s+customers?)",
+    re.IGNORECASE,
+)
+_DATED_PROJECT_MILESTONE = re.compile(
+    r"(?:19|20)\d{2}\s*年(?:\s*\d{1,2}\s*月)?[^。！？;；.!?]{0,70}"
+    r"(?:提前|正式|顺利|已|已经|如期)?\s*(?:完成|建成|投产|竣工|投入使用)"
+    r"[^。！？;；.!?]{0,40}(?:项目|产能|基地|产线|生产线|建设|装置|设施)"
+    r"|(?:in\s+)?(?:19|20)\d{2}[^.!?;。！？;；]{0,70}"
+    r"(?:completed|commissioned|opened|entered operation)[^.!?;。！？;；]{0,40}"
+    r"(?:project|capacity|site|line|plant|facility)",
+    re.IGNORECASE,
+)
+_CUSTOMER_CONCENTRATION = re.compile(
+    r"(?:前\s*五大客户|前五名客户|前五位客户|客户集中度|客戶集中度|"
+    r"top\s+(?:five|5)\s+customers?|customer\s+concentration)"
+    r"[^。！？;；.!?]{0,60}(?:占|佔|占比|占总收入|占總收入|account for|represent|contribute)"
+    r"[^。！？;；.!?]{0,16}\d[\d,.]*\s*(?:%|％|percent)"
+    r"|\d[\d,.]*\s*(?:%|％|percent)[^。！？;；.!?]{0,40}"
+    r"(?:前\s*五大客户|前五名客户|客户集中度|top\s+(?:five|5)\s+customers?|customer\s+concentration)",
+    re.IGNORECASE,
+)
+_CURRENCY_EXPOSURE = re.compile(
+    r"(?=[^。！？;；.!?]{0,120}(?:汇率|匯率|外汇|外匯|外币|外幣|美元|FX|"
+    r"exchange\s+rate|foreign\s+currency|currency\s+exposure))"
+    r"(?=[^。！？;；.!?]{0,120}(?:波动|波動|升值|贬值|貶值|汇兑损失|匯兌損失|"
+    r"风险|風險|不利|loss|volatile|volatility|depreciat\w*|appreciat\w*|adverse))",
+    re.IGNORECASE,
+)
+_COMPETITIVE_PRESSURE = re.compile(
+    r"(?:竞争|競爭|竞品|競品|竞争对手|競爭對手|competition|competitive\s+pressure)"
+    r"[^。！？;；.!?]{0,70}(?:加剧|加劇|激烈|压缩|壓縮|下降|侵蚀|侵蝕|风险|風險|"
+    r"pressure|intensif\w*|declin\w*|erod\w*|threat\w*)"
+    r"|(?:加剧|加劇|激烈|压缩|壓縮|下降|侵蚀|侵蝕)[^。！？;；.!?]{0,60}"
+    r"(?:竞争|競爭|竞品|競品|竞争对手|競爭對手|competition|competitive\s+pressure)",
+    re.IGNORECASE,
+)
+
 _ADOPTION_MILESTONE = re.compile(
     rf"{_OBJECT}[^。；]{{0,32}}(?:已|已经)[^。；]{{0,12}}"
     r"(?:应用于|应用在|批量销售|投入使用|交付使用|稳定运行)"
@@ -215,6 +267,12 @@ _SUPPLY_DELIVERY_RISK = re.compile(
 _DETECTOR_SIGNALS: tuple[
     tuple[re.Pattern[str], tuple[str, ...], tuple[str, ...], int], ...
 ] = (
+    (_RESEARCH_PIPELINE, ("research_pipeline",), ("quantified_research_pipeline",), 3),
+    (_CUSTOMER_ACQUISITION, ("customer_acquisition",), ("quantified_customer_acquisition",), 3),
+    (_DATED_PROJECT_MILESTONE, ("capacity_projects",), ("project_execution_timeline",), 3),
+    (_CUSTOMER_CONCENTRATION, ("customer_concentration_risk",), ("business_risk_or_constraint",), 3),
+    (_CURRENCY_EXPOSURE, ("currency_risk",), ("business_risk_or_constraint",), 3),
+    (_COMPETITIVE_PRESSURE, ("competition_risk",), ("business_risk_or_constraint",), 3),
     (_PROJECT_TIMELINE, ("capacity_projects",), ("project_execution_timeline", "project_plan_or_status"), 4),
     (_ADOPTION_MILESTONE, ("core_business",), ("applied_operating_milestone",), 3),
     # Classification only: one adoption action must not gain duplicate score.

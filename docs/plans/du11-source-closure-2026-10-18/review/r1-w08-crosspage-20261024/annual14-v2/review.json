@@ -1,0 +1,70 @@
+{
+  "schema_version": "w08-annual14-selected-source-review/2",
+  "reviewer": "ROOT evidence review; not independent signoff",
+  "created_at": "2026-10-24",
+  "scope": "unchanged annual14 source-selection targets; compiled task visibility only; no model response, summary, or RF signoff",
+  "selection_path": "annual14-v2/selection.json",
+  "selection_sha256": "79abb23d8e5ad60f7d03d366706c4c150602c7bfc719bce41578458bbb5546a0",
+  "frozen_prior_review_path": "annual14/review.json",
+  "frozen_prior_review_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+  "gold_sha256": "dae0f0b81edc2df430ce4707c4ad9ea15126ab2998aaa6c0f4f7dff66022b9c8",
+  "source_ref": {
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "byte_size": 1608226,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_sha_verified": true
+  },
+  "selection": {
+    "physical_pages": 249,
+    "units": 5660,
+    "candidate_count": 1532,
+    "selected_count": 96,
+    "selection_limit": 96,
+    "selected_chars": 7171,
+    "work_used": 8613643,
+    "work_limit": 16000000,
+    "work_exhausted": false,
+    "status": "partial",
+    "coverage_complete": false,
+    "checkpoint_pass": true,
+    "whole_content_pass": false,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "actual_model_task_count": 52,
+    "model_responses_reviewed": false
+  },
+  "source_code_sha256": {
+    "src/company_wiki/document_understanding/structure/sections.py": "f020e0f6aedcdf37b6e6c74979ea659a51f3cad84fc1b24f22f10fcb1b72a441",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "029388920d77b93f04d83baebf0ecaf365807bfd8c43d469847785d8c8a84f53",
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "003767c162e55807abe8e645a7ad3b940c5a0f0914540d941f5aeb78929ba3fb"
+  },
+  "verdict": "PARTIAL_6_PASS_7_PARTIAL_1_MISSING",
+  "prior_verdict": "PARTIAL_3_PASS_9_PARTIAL_2_MISSING_ACTUAL_SELECTED_CHAIN",
+  "improved_targets": ["ST-A07", "ST-A11", "ST-A14"],
+  "rows": [
+    {"target_id": "ST-A01", "status": "partial", "task_refs": ["t10", "t23"], "reason": "business taxonomy including Others and full Chemistry scope absent from task-local selected context"},
+    {"target_id": "ST-A02", "status": "partial", "task_refs": ["t31", "t34"], "reason": "exact continued/discontinued revenue values and restatement context incomplete; structured financial source remains available separately"},
+    {"target_id": "ST-A03", "status": "partial", "task_refs": [], "reason": "customer-region amounts and customer-parent location/comparison-period definition absent"},
+    {"target_id": "ST-A04", "status": "partial", "task_refs": [], "reason": "year-end order value and remaining-performance-obligation schedule absent"},
+    {"target_id": "ST-A05", "status": "partial", "task_refs": ["t10", "t24", "t25"], "reason": "Chemistry, D&M and TIDES figures selected, but their parent/no-double-count context is not task-local"},
+    {"target_id": "ST-A06", "status": "pass", "task_refs": ["t24"], "reason": "new molecule flow, ending pipeline, stage counts and commercial/Phase III increase locally visible"},
+    {"target_id": "ST-A07", "status": "pass", "task_refs": ["t23"], "reason": ">42 ten-thousand new compounds and 310 R-to-D conversions locally visible as distinct measures"},
+    {"target_id": "ST-A08", "status": "pass", "task_refs": ["t11", "t25"], "reason": "TIDES order, customer and molecule-count changes locally named with separate measures"},
+    {"target_id": "ST-A09", "status": "partial", "task_refs": ["t19", "t26", "t27"], "reason": "API capacity, dated Taixing completion and peptide reactor volume selected, but completion-to-capacity relation is split across tasks"},
+    {"target_id": "ST-A10", "status": "pass", "task_refs": ["t12", "t13", "t28", "t33"], "reason": "Testing revenue, safety-assessment growth, new-molecule share and margin/price explanation locally represented"},
+    {"target_id": "ST-A11", "status": "pass", "task_refs": ["t14", "t15", "t29"], "reason": "Biology revenue/growth, company new-customer contribution and new-molecule revenue share separately named"},
+    {"target_id": "ST-A12", "status": "partial", "task_refs": ["t30"], "reason": "2026 guidance values selected; order, industry, trade, regulatory premises and non-commitment uncertainty absent"},
+    {"target_id": "ST-A13", "status": "missing", "task_refs": [], "reason": "recognition timing policy and contract-liability-to-revenue explanation absent from selected task views"},
+    {"target_id": "ST-A14", "status": "pass", "task_refs": ["t35", "t41", "t42", "t43", "t44", "t46", "t47"], "reason": "concentration, demand, regulation, competition, project-delay and FX risks each have selected local task evidence"}
+  ],
+  "limitations": [
+    "Selection status partial and aggregate budget_full do not establish target-specific deferral causality.",
+    "Compiled model tasks were inspected locally; no provider request/response or summary was run.",
+    "The frozen original review and gold were not modified.",
+    "No independent reviewer signoff is claimed."
+  ]
+}

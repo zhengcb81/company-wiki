@@ -1,0 +1,150 @@
+{
+  "schema_version": "w08-annual14-v4-independent-review/1",
+  "reviewer": "independent source selection content reviewer; no RF four-review signature",
+  "verdict": "BLOCKED_BY_P2_CONTROL_NOUN_CLASSIFICATION",
+  "binding": {
+    "head": "f404026e6921bdab973bddd15f96d8f57a45ea94",
+    "freeze_sha256": "edc962fda30c22c493ad00080569293b54575f9decd9c506de2e4e4896a55441",
+    "file_hashes": {
+      "freeze.json": "edc962fda30c22c493ad00080569293b54575f9decd9c506de2e4e4896a55441",
+      "selection.json": "96a2b35aaa63db3ebd9ce8c1790afa3df3eec2fd041ffb98e4ab56c2f2891c9b",
+      "target-trace.json": "ce512e83057ad10fc5904a3344b082253bb33cf92b20e7e2db4ec0301990a14e",
+      "model-view.json": "5ef83c33d563aaf8f41a73da0daaf28487cda28e1ff5bce6e6ec0ecf758a57d9",
+      "natural-receipt.json": "5fd5845fa2fc669ad4d1e200c33cbdf719805a3396353e107c77979cdb69bef7",
+      "target-checklist-binding.json": "08851bb399c6424dbc9f8ed937d792e96476be9388ac455ac31ab5e0ec6ff78a"
+    },
+    "source_and_test_raw_hashes_match_freeze": true,
+    "selector_oracle_sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+    "source_targets_gold_sha256": "dae0f0b81edc2df430ce4707c4ad9ea15126ab2998aaa6c0f4f7dff66022b9c8",
+    "target_checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+    "target_checklist_binding_sha256": "08851bb399c6424dbc9f8ed937d792e96476be9388ac455ac31ab5e0ec6ff78a"
+  },
+  "scope": "V4 selected-source/model-task visibility for the frozen ST-A01..ST-A14 checklist; no model response or final business correctness review. The two-item selector oracle is a separate scope.",
+  "counts": {
+    "pass": 7,
+    "partial": 5,
+    "missing": 2
+  },
+  "rows": [
+    {
+      "target_id": "ST-A01",
+      "status": "partial",
+      "task_refs": [
+        "t19"
+      ],
+      "reason": "Service scope restored; Others and full parent/child scope remain missing."
+    },
+    {
+      "target_id": "ST-A02",
+      "status": "partial",
+      "task_refs": [
+        "t34"
+      ],
+      "reason": "15.84% growth is retained; the three actual revenue definitions and restatement remain missing."
+    },
+    {
+      "target_id": "ST-A03",
+      "status": "missing",
+      "task_refs": [],
+      "reason": "Regional amounts, growth and measurement definition are missing."
+    },
+    {
+      "target_id": "ST-A04",
+      "status": "missing",
+      "task_refs": [],
+      "reason": "Group orders, RPO and recognition schedule are missing."
+    },
+    {
+      "target_id": "ST-A05",
+      "status": "partial",
+      "task_refs": [],
+      "reason": "Amounts exist but Chemistry parent/child scope is not closed."
+    },
+    {
+      "target_id": "ST-A06",
+      "status": "pass",
+      "task_refs": [
+        "t25"
+      ],
+      "reason": "Stage project count is complete."
+    },
+    {
+      "target_id": "ST-A07",
+      "status": "pass",
+      "task_refs": [
+        "t24"
+      ],
+      "reason": "42万 and 310 are both present."
+    },
+    {
+      "target_id": "ST-A08",
+      "status": "pass",
+      "task_refs": [
+        "t11",
+        "t26"
+      ],
+      "reason": "Three indicator types are explicitly distinguished."
+    },
+    {
+      "target_id": "ST-A09",
+      "status": "partial",
+      "task_refs": [],
+      "reason": "Capacity and dated timing remain split across tasks."
+    },
+    {
+      "target_id": "ST-A10",
+      "status": "pass",
+      "task_refs": [],
+      "reason": "Testing target material is complete."
+    },
+    {
+      "target_id": "ST-A11",
+      "status": "pass",
+      "task_refs": [],
+      "reason": "Biology and group new-customer object are explicit."
+    },
+    {
+      "target_id": "ST-A12",
+      "status": "pass",
+      "task_refs": [
+        "t31"
+      ],
+      "reason": "Full outlook and premise are together in the task."
+    },
+    {
+      "target_id": "ST-A13",
+      "status": "partial",
+      "task_refs": [],
+      "reason": "Policy enters task; exact timing classification and two amounts remain missing."
+    },
+    {
+      "target_id": "ST-A14",
+      "status": "pass",
+      "task_refs": [],
+      "reason": "Risk target material is complete."
+    }
+  ],
+  "cross_business_scope": "Testing and Biology new-molecule tasks each retain their own parent; no cross-business leakage observed.",
+  "blockers": [
+    {
+      "severity": "P2",
+      "file": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "issue": "Control-transfer predicate accepts noun co-occurrence only. Chinese “本集团的收入确认会计政策涵盖履约义务及客户控制权。” and English equivalent are classified as operating despite no obtain/transfer/performance relation.",
+      "required_fix": "Require a customer obtains/gains control or an explicit transfer/delivery relation; keep policy nouns on the accounting-policy path."
+    }
+  ],
+  "natural_suite": {
+    "tests": 2164,
+    "passed": 2153,
+    "skipped": 11,
+    "failed": 0,
+    "seconds": 60.42,
+    "source_stable": true,
+    "temp_removed": true
+  },
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "test_runs_by_reviewer": 0,
+  "product_edits_by_reviewer": 0
+}

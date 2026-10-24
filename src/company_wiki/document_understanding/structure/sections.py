@@ -175,6 +175,7 @@ class _NativeListScope:
 _LIST_CHILD = re.compile(
     r"^\s*(?:[-•●▪]|(?=[ivxlcdm]+[.)])m{0,3}(?:cm|cd|d?c{0,3})"
     r"(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})[.)])\s+\S", re.IGNORECASE)
+_INTERNAL_SENTENCE_BOUNDARY = re.compile(r"[。！？;；!?]\s*\S|(?<![\dA-Z])\.\s+\S")
 
 
 def _native_numbered_list_scopes(ordering: layout_mod.Ordering,
@@ -200,19 +201,52 @@ def _native_numbered_list_scopes(ordering: layout_mod.Ordering,
             continue
         heads = [opener]
         cursor = index + 1
+        direct_child_list = False
         if not opener.text.rstrip().endswith(("：", ":")):
             intro = ordered[cursor]
-            if (intro.unit_id in excluded or intro.table_id or intro.is_table_furniture
-                    or intro.is_footnote or intro.dom_path is not None
-                    or (intro.source_id, intro.page, intro.column, intro.bbox)
-                    != (opener.source_id, opener.page, opener.column, opener.bbox)
-                    or not intro.text.rstrip().endswith(("：", ":"))):
-                index += 1
-                continue
-            heads.append(intro)
-            cursor += 1
+            same_box_intro = (
+                intro.unit_id not in excluded and not intro.table_id
+                and not intro.is_table_furniture and not intro.is_footnote
+                and intro.dom_path is None
+                and (intro.source_id, intro.page, intro.column, intro.bbox)
+                == (opener.source_id, opener.page, opener.column, opener.bbox)
+                and intro.text.rstrip().endswith(("：", ":"))
+            )
+            if same_box_intro:
+                heads.append(intro)
+                cursor += 1
+            else:
+                # Some numbered list parents are complete factual statements,
+                # not colon-ended introductions. Keep their source text as the
+                # local parent when the next item is a physically nested native
+                # bullet/roman child. A cross-page first child still needs an
+                # independent page-neighbour proof below.
+                overlap = layout_mod.visual_overlap(opener, intro)
+                same_page = intro.page == opener.page and intro.page is not None
+                adjacent_page = (
+                    intro.page is not None and opener.page is not None
+                    and 0 < intro.page - opener.page < MAX_CONTINUATION_PAGES
+                    and native_context is not None
+                )
+                nested_child = (
+                    intro.unit_id not in excluded and not intro.table_id
+                    and not intro.is_table_furniture and not intro.is_footnote
+                    and intro.bbox is not None and intro.dom_path is None
+                    and intro.source_id == opener.source_id and intro.role == opener.role
+                    and intro.page is not None and intro.column == opener.column
+                    and intro.kind not in {"heading", "html_heading"}
+                    and intro.heading_level is None and overlap is not None and overlap > 0
+                    and intro.bbox[0] > opener.bbox[0]
+                    and not _INTERNAL_SENTENCE_BOUNDARY.search(opener.text)
+                    and _LIST_CHILD.match(intro.text) is not None
+                    and ((same_page and intro.bbox[1] >= opener.bbox[3]) or adjacent_page)
+                )
+                if not nested_child:
+                    index += 1
+                    continue
+                direct_child_list = True
         members = list(heads)
-        previous = None
+        previous = opener if direct_child_list else None
         pages = {opener.page}
         context_by_unit: dict[str, tuple[str, ...]] = {}
         source_by_unit: dict[str, tuple[str, ...]] = {}

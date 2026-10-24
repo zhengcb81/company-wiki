@@ -108,6 +108,36 @@ def _list_source(mode):
                     "second": at(second), "sibling": at(sibling), "sibling_body": at(sibling_body)}
 
 
+def _factual_list_source(mode):
+    """A numbered parent can itself carry a fact before its indented sub-items."""
+    cross_page = mode.startswith("cross_page")
+    parent = "(1) 检测业务实现收入12亿元。"
+    first = "- 新产品收入占比超过30%。"
+    second = "ii. 客户订单同比增长20%。"
+    sibling = "(2) 技术服务实现收入9亿元。"
+    if cross_page:
+        child_page = 3 if mode == "cross_page_gap" else 2
+        rows = [(1, "一、经营情况", 0, (90, 100, 550, 112)),
+                (1, parent, 1, (90, 640, 550, 672)),
+                (1, first, 2, (110, 720, 550, 732)),
+                (child_page, second, 0, (110, 70, 550, 82)),
+                (child_page, sibling, 1, (90, 130, 550, 162))]
+    else:
+        first_left = 90 if mode == "same_level" else 110
+        rows = [(1, "一、经营情况", 0, (90, 100, 550, 112)),
+                (1, parent, 1, (90, 200, 550, 232)),
+                (1, first, 2, (first_left, 260, 550, 272)),
+                (1, second, 3, (110, 290, 550, 302)),
+                (1, sibling, 4, (90, 340, 550, 372))]
+    parsed = _source(rows)
+
+    def at(text):
+        return next(unit for unit in parsed.units if unit.raw_text == text)
+
+    return parsed, {"parent": at(parent), "first": at(first), "second": at(second),
+                    "sibling": at(sibling)}
+
+
 def _run_public(parsed):
     original = [(u.unit_id, u.source_id, u.raw_text, u.coordinates, repr(u.metadata), u.quality_flags)
                 for u in parsed.units]
@@ -204,6 +234,47 @@ def test_native_list_child_keeps_own_source_ancestry_through_public_selection_an
                    "structure": pipeline["structure"]["sections"], "children": [first, second, sibling]}
     _OBSERVATIONS.append(observation)
     assert not any(child["failures"] for child in observation["children"]), observation
+
+
+@pytest.mark.parametrize("mode", ("same_page", "cross_page"))
+def test_factual_numbered_item_is_required_context_for_its_indented_subitems(mode):
+    parsed, units = _factual_list_source(mode)
+    pipeline, selected, _used = _run_public(parsed)
+    children = [
+        _own_context(parsed, pipeline, selected, units[name], (units["parent"],), units["sibling"])
+        for name in ("first", "second")
+    ]
+    observation = {"mode": mode, "children": children,
+                   "sections": pipeline["structure"]["sections"]}
+    _OBSERVATIONS.append(observation)
+    assert not any(child["failures"] for child in children), observation
+
+
+def test_factual_numbered_item_does_not_cross_an_unproven_page_gap():
+    parsed, units = _factual_list_source("cross_page_gap")
+    pipeline, selected, _used = _run_public(parsed)
+    target = units["second"]
+    target_spans = {span.span_id for span in _spans_for(selected, target)}
+    parent_spans = {span.span_id for span in _spans_for(selected, units["parent"])}
+    citations = [citation for group in selected.reading_context["groups"]
+                 for citation in group["citation_views"]
+                 if target_spans.intersection(citation["support_evidence_ids"])]
+    assert not parent_spans.intersection(
+        span_id for citation in citations for span_id in citation["context_evidence_ids"]
+    )
+
+
+def test_factual_numbered_item_does_not_capture_a_same_level_bullet():
+    parsed, units = _factual_list_source("same_level")
+    _pipeline, selected, _used = _run_public(parsed)
+    target_spans = {span.span_id for span in _spans_for(selected, units["first"])}
+    parent_spans = {span.span_id for span in _spans_for(selected, units["parent"])}
+    citations = [citation for group in selected.reading_context["groups"]
+                 for citation in group["citation_views"]
+                 if target_spans.intersection(citation["support_evidence_ids"])]
+    assert not parent_spans.intersection(
+        span_id for citation in citations for span_id in citation["context_evidence_ids"]
+    )
 
 
 def _flow_source(mode):

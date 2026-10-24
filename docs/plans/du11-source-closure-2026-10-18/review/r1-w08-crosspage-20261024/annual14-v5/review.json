@@ -1,0 +1,73 @@
+{
+  "schema_version": "w08-annual14-independent-review/1",
+  "reviewer": "/root/w08_crosspage_final_review",
+  "reviewer_subreview": "/root/w08_crosspage_final_review/a12a13_receipt_check",
+  "verdict": "NO_ENGINEERING_BLOCKER_CONTENT_VISIBILITY_PARTIAL",
+  "head": "f404026e6921bdab973bddd15f96d8f57a45ea94",
+  "freeze_path": "freeze.json",
+  "freeze_sha256": "c9a4e3ca54d4677f3db29c2080302849ca7cd78997534191814ac601250f7fef",
+  "selection_sha256": "5602c4fe205128459af3079972e05f4a024603534c83c001c40e099ad4b5e9df",
+  "checklist_path": "../annual14/review.json",
+  "checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+  "checkpoint_oracle_sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+  "checkpoint_oracle_is_checklist": false,
+  "counts": {
+    "pass": 7,
+    "partial": 5,
+    "missing": 2,
+    "targets": 14
+  },
+  "targets": [
+    {"id": "ST-A01", "status": "partial", "evidence": ["t19"], "gap": "Others, full Chemistry scope and TIDES parent-child relation"},
+    {"id": "ST-A02", "status": "partial", "evidence": ["t34"], "gap": "Actual revenue definitions, 21.40% and restatement"},
+    {"id": "ST-A03", "status": "missing", "gap": "Customer-region amounts/growth and parent-company measurement definition"},
+    {"id": "ST-A04", "status": "missing", "gap": "Group orders, RPO and 2026 recognition amount/schedule"},
+    {"id": "ST-A05", "status": "partial", "evidence": ["t10", "t25", "t26"], "gap": "Chemistry internal parent-child relation within task"},
+    {"id": "ST-A06", "status": "pass", "evidence": ["t25"]},
+    {"id": "ST-A07", "status": "pass", "evidence": ["t24"]},
+    {"id": "ST-A08", "status": "pass", "evidence": ["t11", "t26"]},
+    {"id": "ST-A09", "status": "partial", "evidence": ["t20", "t21", "t22", "t27", "t28"], "gap": "Capacity and dated timing relation remains across tasks"},
+    {"id": "ST-A10", "status": "pass", "evidence": ["t12", "t13", "t29", "t33"]},
+    {"id": "ST-A11", "status": "pass", "evidence": ["t14", "t17", "t30"]},
+    {"id": "ST-A12", "status": "pass", "evidence": ["t31"], "guidance_span": "14f5…", "premise_span": "b127…"},
+    {"id": "ST-A13", "status": "partial", "evidence": ["t16", "t50", "t51", "t52", "t53"], "gap": "Exact amounts and Testing/Biology period classification"},
+    {"id": "ST-A14", "status": "pass", "evidence": ["t35", "t40", "t41", "t42", "t43", "t44", "t45", "t46"]}
+  ],
+  "task_context_audit": {
+    "compiled_tasks": 55,
+    "testing_tasks": ["t13", "t29"],
+    "biology_tasks": ["t17", "t30"],
+    "sibling_business_leakage": false,
+    "result": "PASS"
+  },
+  "root_cause": {
+    "v4_p2": "Pure policy nouns were sufficient for customer-control operating-purpose classification.",
+    "v5_fix": "Require a concrete obtain/control-transfer/delivery relationship; retain timing and performance-obligation context.",
+    "counterexamples": ["Chinese policy-only statement", "English policy-only statement"],
+    "independent_source_safety_review": "PASS_NO_NEW_BLOCKER"
+  },
+  "tests": {
+    "focused_passed": 119,
+    "natural_passed": 2155,
+    "natural_skipped": 11,
+    "natural_failed": 0,
+    "natural_seconds": 54.08,
+    "source_stable": true,
+    "owned_temp_removed": true
+  },
+  "real_replay": {
+    "physical_pages": 249,
+    "candidate_count": 1533,
+    "selected_count": 96,
+    "selected_chars": 7767,
+    "work_used": 8845814,
+    "work_limit": 16000000,
+    "checkpoint_pass": true,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0
+  },
+  "meaning_boundary": "Selected evidence/task visibility only; not a model response, summary, business-correctness, or adoption pass.",
+  "review_writes": false,
+  "review_execution": "Read-only; no product code, tests or compilation run."
+}

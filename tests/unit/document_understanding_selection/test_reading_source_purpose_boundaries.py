@@ -98,6 +98,53 @@ def test_public_selector_retains_real_business_and_drops_separate_policy(policy)
     assert policy not in sent
 
 
+@pytest.mark.parametrize("text", (
+    "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该项履约义务的交易价格确认收入。",
+    "本集团在合同开始日对合同进行评估，识别各单项履约义务是在某一时段内履行，还是在某一时点履行。",
+    "本集团向客户预收销售商品或服务款项的，首先确认为负债，待履行了相关履约义务时再转为收入。",
+    "Revenue is recognized when the customer obtains control of the promised goods or services under a performance obligation.",
+    "Performance obligations are satisfied either over time or at a point in time based on the transfer of control to the customer.",
+))
+def test_revenue_recognition_and_customer_delivery_terms_are_business_mechanisms(text):
+    fact = detect_reading_business_fact(text)
+    assert source_purpose(text) not in NON_OPERATING_PURPOSES
+    assert fact.eligible
+    assert "business_revenue_recognition" in fact.reasons
+    assert _admitted(unit(text), {"section_role": "unknown"}, "background", fact=fact)[0]
+
+
+@pytest.mark.parametrize("text", (
+    "本集团对履约义务与合同负债采用上述会计政策。",
+    "收入确认政策涉及履约义务和合同负债。",
+    "Performance obligations and contract liabilities are described in the accounting policy.",
+    "本集团的收入确认会计政策涵盖履约义务及客户控制权。",
+    "Accounting policy for revenue recognition, performance obligations and customer control.",
+))
+def test_revenue_recognition_nouns_without_a_customer_delivery_rule_remain_policy(text):
+    fact = detect_reading_business_fact(text)
+    assert source_purpose(text) == "accounting_policy"
+    assert not fact.eligible
+    assert "business_revenue_recognition" not in fact.reasons
+
+
+def test_revenue_recognition_mechanism_reaches_public_selector_without_admitting_general_policy():
+    mechanism = "本集团在履行合同中的履约义务、客户取得商品或服务控制权时确认收入。"
+    timing = "符合条件的履约义务在某一时段内按履约进度确认收入，否则在某一时点确认收入。"
+    prepayment = "本集团向客户预收服务款确认为负债，待履行相关履约义务后转为收入。"
+    policy = POLICIES[0]
+    units = tuple(unit(text, index) for index, text in enumerate((mechanism, timing, prepayment, policy)))
+    digest = sha256(b"revenue-recognition-mechanism").hexdigest()
+    parsed = DocumentStructure(source_id_for_sha256(digest), digest, "zh", units,
+        page_count=1, pages_read=1, mime_type="text/plain")
+    result = select_narrative_evidence(parsed, title="Annual report", existing_kind="annual_report",
+        selector_version="0.9.0")
+    sent = [span.raw_text for span in result.evidence_spans]
+    assert mechanism in sent
+    assert timing in sent
+    assert prepayment in sent
+    assert policy not in sent
+
+
 _INDEPENDENT_CASES = json.loads((Path(__file__).resolve().parents[2] /
     "fixtures/narrative_source_purpose_cases.json").read_text(encoding="utf-8"))["cases"]
 

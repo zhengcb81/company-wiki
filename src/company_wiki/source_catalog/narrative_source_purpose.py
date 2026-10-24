@@ -27,6 +27,7 @@ _ACCOUNTING = re.compile(
     r"金融工具.{0,160}信用风险.{0,160}初始确认|"
     r"终止经营.{0,12}(?:是指|认定标准|列报方法)|"
     r"终止经营损益.{0,50}利润表.{0,30}(?:列示|列报)|"
+    r"收入确认政策|收入确认及计量|会计政策|会计估计|"
     r"\bcontrols?\b.{0,100}\binvest(?:or|ee)\b.{0,160}\bvariable returns\b|"
     r"\b(?:financial assets?|regular.way (?:purchases?|sales?))\b.{0,160}\btrade date\b|"
     r"(?=[^。;!?]{0,240}(?:信用风险|\bcredit risk\b))"
@@ -87,6 +88,35 @@ _ALLOCATED_FINANCIAL = re.compile(
     r"\b(?:revenue|income|sales)\b.{0,60}\b(?:allocated|attribut(?:ed|able)|relat(?:ed|ing))\b"
     r".{0,30}\b(?:RPO|remaining performance obligations?)\b|"
     r"收入.{0,30}(?:分摊|分配|计入).{0,30}(?:剩余履约义务|未履约订单)", re.I)
+_REVENUE_RECOGNITION_RULE = re.compile(
+    r"收入[\s\S]{0,32}(?:确认|計量|计量)|(?:确认|計量|计量)[\s\S]{0,32}收入|"
+    r"\b(?:revenue recognition|recognition of revenue|"
+    r"revenue[\s\S]{0,24}recogniz\w*|revenue[\s\S]{0,24}recognis\w*|"
+    r"recogniz\w*[\s\S]{0,24}revenue|recognis\w*[\s\S]{0,24}revenue)\b", re.I)
+_PERFORMANCE_OBLIGATION = re.compile(r"履约义务|履約義務|\bperformance obligations?\b", re.I)
+_CUSTOMER_CONTROL_TRANSFER = re.compile(
+    r"客户[\s\S]{0,60}(?:取得|获得)[\s\S]{0,40}控制权|"
+    r"客户控制权[\s\S]{0,20}(?:转移|转让|移交)|"
+    r"向客户转让[\s\S]{0,40}(?:商品|服务)|"
+    r"(?:转让|交付|提供)[\s\S]{0,40}(?:商品|服务)[\s\S]{0,30}给客户|"
+    r"\bcustomers?[\s\S]{0,40}\b(?:obtain(?:s|ed)?|gain(?:s|ed)?|receive(?:s|d))"
+    r"[\s\S]{0,30}\bcontrol\b|"
+    r"\btransfer(?:ring)? control to customers?\b|"
+    r"\bcontrol\b.{0,30}\b(?:transfer|transfers|transferred)\b.{0,30}\bto customers?\b|"
+    r"\b(?:transfer(?:ring|red)?|deliver\w*|provid\w*|sell\w*)\b.{0,40}"
+    r"\b(?:goods|services)\b.{0,50}\bto customers?\b", re.I)
+_RECOGNITION_TIMING = re.compile(
+    r"履约义务[\s\S]{0,45}(?:在)?某一(?:时段|时间段|时点)(?:内)?履行|"
+    r"某一(?:时段|时间段|时点)(?:内)?履行的?履约义务|"
+    r"履约进度[\s\S]{0,80}(?:确认|計量|计量)收入|"
+    r"(?:按照|根据|按)[\s\S]{0,60}履约进度[\s\S]{0,60}(?:确认|計量|计量)收入|"
+    r"预收[\s\S]{0,100}(?:确认为|确认为负债|作为负债)[\s\S]{0,100}"
+    r"(?:履行|履约)[\s\S]{0,60}(?:转为|轉為|确认)收入|"
+    r"\bperformance obligations?\b.{0,60}\b(?:satisfied|fulfilled)\b.{0,45}"
+    r"\b(?:over time|at a point in time|point in time)\b|"
+    r"\b(?:contract liabilities?|deferred revenue|unearned revenue)\b"
+    r".{0,100}\b(?:recognized|recognised|transferred|released)\b"
+    r".{0,35}\brevenue\b.{0,80}\bperformance obligations?\b", re.I)
 _AUDIT_SPEECH = re.compile(
     r"\bwe (?:evaluated|tested|assessed|obtained)\b.{0,180}"
     r"\b(?:internal controls?|impairment|management(?:['’]s)? assumptions|audit|"
@@ -111,6 +141,8 @@ def _clause_purpose(value: str) -> str:
         return "operating"
     if _AUDIT.search(value):
         return "audit_procedure"
+    if revenue_recognition_mechanism(value):
+        return "operating"
     if _ALLOCATED_FINANCIAL.search(value):
         return "accounting_policy"
     stock = _CONTRACT_STOCK.search(value)
@@ -125,6 +157,22 @@ def _clause_purpose(value: str) -> str:
     if describes_business(value):
         return "operating"
     return "unknown"
+
+
+def revenue_recognition_mechanism(text: str) -> bool:
+    """Recognize customer delivery and collection mechanics in revenue policy.
+
+    A revenue/accounting noun alone is not enough. The bounded source material
+    must name a performance obligation and either its timing/contract-liability
+    treatment or its customer control-transfer rule.
+    """
+    value = matching_reading_text(text)
+    if not _PERFORMANCE_OBLIGATION.search(value):
+        return False
+    if _RECOGNITION_TIMING.search(value):
+        return True
+    return bool(_REVENUE_RECOGNITION_RULE.search(value)
+                and _CUSTOMER_CONTROL_TRANSFER.search(value))
 
 
 def source_purpose(text: str) -> str:
