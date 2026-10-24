@@ -1,0 +1,41 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\future-frame-red-temp", "requested_basetemp_len": 148, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220908-eb1d47f0", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 69 items
+
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py . [  1%]
+.....................................FFF............................     [100%]
+
+================================== FAILURES ===================================
+_ test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[cn-future-frame] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:173: in test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure
+    assert not ACTUAL_MEASURE_REASONS.intersection(fact.reasons)
+E   AssertionError: assert not {'operating_metric_change'}
+E    +  where {'operating_metric_change'} = <built-in method intersection of set object at 0x0000019855E26CE0>(('operating_metric_change',))
+E    +    where <built-in method intersection of set object at 0x0000019855E26CE0> = {'business_revenue_measure', 'operating_causal_driver', 'operating_metric_change', 'operating_quantity', 'product_operating_driver'}.intersection
+E    +    and   ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+_ test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[trad-future-frame] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:173: in test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure
+    assert not ACTUAL_MEASURE_REASONS.intersection(fact.reasons)
+E   AssertionError: assert not {'operating_metric_change'}
+E    +  where {'operating_metric_change'} = <built-in method intersection of set object at 0x0000019855E26CE0>(('operating_metric_change',))
+E    +    where <built-in method intersection of set object at 0x0000019855E26CE0> = {'business_revenue_measure', 'operating_causal_driver', 'operating_metric_change', 'operating_quantity', 'product_operating_driver'}.intersection
+E    +    and   ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+_ test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[en-future-frame] _
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py:173: in test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure
+    assert not ACTUAL_MEASURE_REASONS.intersection(fact.reasons)
+E   AssertionError: assert not {'operating_metric_change'}
+E    +  where {'operating_metric_change'} = <built-in method intersection of set object at 0x0000019855E26CE0>(('operating_metric_change',))
+E    +    where <built-in method intersection of set object at 0x0000019855E26CE0> = {'business_revenue_measure', 'operating_causal_driver', 'operating_metric_change', 'operating_quantity', 'product_operating_driver'}.intersection
+E    +    and   ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\measure-variants\future-frame-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[cn-future-frame]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[trad-future-frame]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py::test_identity_financial_total_and_unrealized_scope_do_not_assert_actual_measure[en-future-frame]
+======================== 3 failed, 66 passed in 5.58s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220908-eb1d47f0", "existed": true, "removed": true}

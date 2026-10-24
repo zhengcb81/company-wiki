@@ -1,0 +1,287 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\project-body-independent\\pytest-red-temp", "requested_basetemp_len": 150, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210222-4d094115", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 9 items
+
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py F [ 11%]
+FFFFFFFF                                                                 [100%]
+
+================================== FAILURES ===================================
+_ test_generic_project_heading_does_not_hide_independent_source_facts[\u4e00\u3001\u9879\u76ee\u57fa\u672c\u60c5\u51b5] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:76: in test_generic_project_heading_does_not_hide_independent_source_facts
+    result = public_selection(parsed)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_generic_project_heading_does_not_hide_independent_source_facts[\u4e8c\u3001\u7269\u6d41\u4e2d\u5fc3\u5efa\u8bbe\u9879\u76ee] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:76: in test_generic_project_heading_does_not_hide_independent_source_facts
+    result = public_selection(parsed)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_generic_project_heading_does_not_hide_independent_source_facts[\u4e09\u3001\u8bbe\u5907\u751f\u4ea7\u7ebf\u6269\u5efa\u9879\u76ee] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:76: in test_generic_project_heading_does_not_hide_independent_source_facts
+    result = public_selection(parsed)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots[\u4e00\u3001\u9879\u76ee\u57fa\u672c\u60c5\u51b5] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:83: in test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots
+    result = public_selection(parsed, max_selected=3)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots[\u4e00\u3001\u8bbe\u5907\u751f\u4ea7\u7ebf\u6269\u5efa\u9879\u76ee] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:83: in test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots
+    result = public_selection(parsed, max_selected=3)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_one_complete_body_fact_is_usable_under_two_slots_without_entire_project_cost _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:90: in test_one_complete_body_fact_is_usable_under_two_slots_without_entire_project_cost
+    result = public_selection(parsed, max_selected=2)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_local_device_qualification_stays_with_fact_but_generic_future_does_not[\u8be5\u8bbe\u5907\u5c1a\u672a\u5b8c\u6210\u91cf\u4ea7\u8ba4\u8bc1\uff0c\u4e0d\u4ee3\u8868\u5df2\u7ecf\u5f62\u6210\u6279\u91cf\u9500\u552e\u3002] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:104: in test_local_device_qualification_stays_with_fact_but_generic_future_does_not
+    full = public_selection(parsed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_local_device_qualification_stays_with_fact_but_generic_future_does_not[\u8be5\u8bbe\u5907\u4ecd\u9700\u5ba2\u6237\u5b8c\u6210\u8ba4\u8bc1\uff0c\u9884\u8ba1\u4e0b\u4e00\u671f\u624d\u80fd\u8fdb\u5165\u91cf\u4ea7\u3002] _
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:104: in test_local_device_qualification_stays_with_fact_but_generic_future_does_not
+    full = public_selection(parsed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_project_repair_obeys_actual_character_budget_without_rewriting_source __
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:120: in test_project_repair_obeys_actual_character_budget_without_rewriting_source
+    result = public_selection(parsed, max_chars=len(one_fact.raw_text) - 1)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:35: in public_selection
+    original = deepcopy([(u.unit_id, u.raw_text, u.coordinates, dict(u.metadata)) for u in parsed.units])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:177: in _deepcopy_list
+    append(deepcopy(a, memo))
+           ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:182: in _deepcopy_tuple
+    y = [deepcopy(a, memo) for a in x]
+         ^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\project-body-independent\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_generic_project_heading_does_not_hide_independent_source_facts[\u4e00\u3001\u9879\u76ee\u57fa\u672c\u60c5\u51b5]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_generic_project_heading_does_not_hide_independent_source_facts[\u4e8c\u3001\u7269\u6d41\u4e2d\u5fc3\u5efa\u8bbe\u9879\u76ee]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_generic_project_heading_does_not_hide_independent_source_facts[\u4e09\u3001\u8bbe\u5907\u751f\u4ea7\u7ebf\u6269\u5efa\u9879\u76ee]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots[\u4e00\u3001\u9879\u76ee\u57fa\u672c\u60c5\u51b5]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots[\u4e00\u3001\u8bbe\u5907\u751f\u4ea7\u7ebf\u6269\u5efa\u9879\u76ee]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_one_complete_body_fact_is_usable_under_two_slots_without_entire_project_cost
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_local_device_qualification_stays_with_fact_but_generic_future_does_not[\u8be5\u8bbe\u5907\u5c1a\u672a\u5b8c\u6210\u91cf\u4ea7\u8ba4\u8bc1\uff0c\u4e0d\u4ee3\u8868\u5df2\u7ecf\u5f62\u6210\u6279\u91cf\u9500\u552e\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_local_device_qualification_stays_with_fact_but_generic_future_does_not[\u8be5\u8bbe\u5907\u4ecd\u9700\u5ba2\u6237\u5b8c\u6210\u8ba4\u8bc1\uff0c\u9884\u8ba1\u4e0b\u4e00\u671f\u624d\u80fd\u8fdb\u5165\u91cf\u4ea7\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_project_body_admission.py::test_project_repair_obeys_actual_character_budget_without_rewriting_source
+============================== 9 failed in 1.63s ==============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210222-4d094115", "existed": true, "removed": true}

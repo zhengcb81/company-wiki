@@ -113,8 +113,8 @@ COMMERCIALIZATION_EN = re.compile(
 )
 
 QUALIFICATION_PENDING = re.compile(
-    rf"(?P<qual>{_ABSENCE})(?:取得|获得|获取|拿到|获|obtained?)?"
-    rf"(?:客户|customer\s+)?(?:对其|对其)?"
+    rf"(?P<qual>{_ABSENCE}|仍需|尚需|还需|有待|尚待)(?:取得|获得|获取|拿到|获|obtained?)?"
+    rf"(?:客户|customer\s+)?(?:对其|对其)?(?:完成|通过|取得|获得)?"
     rf"(?P<obj>{_CJK_OBJ_SHORT}?)?的?(?P<pred>认证|認證|qualification|validation)"
     rf"{_NOT_COMPOUND}"
 )
@@ -440,3 +440,15 @@ CUE_THIRD = re.compile(
     r"消息|方面|，|。|、|；|;|\s|$)",
     re.IGNORECASE,
 )
+
+
+# Nominalised/reported propositions are mentions of an assertion, not direct
+# issuer assertions. The relation owner applies this only to the same observed
+# clause after its predicate; it never scans a later sentence for negation.
+REPORTED_PROPOSITION_TAIL = re.compile(
+    r"的(?:说法|传闻|报道|指控|观点|表述)|"
+    r"(?:是|属于)[^，。；;!?]{0,24}?(?:的)?(?:说法|传闻|报道|指控|观点|表述)|"
+    r"\b(?:claim|allegation|rumou?r|assertion)\s+(?:is|was|remains)\b",
+    re.IGNORECASE,
+)
+POSSESSIVE_LINK = re.compile(r"^\s*(?:的|之|['’]s\b)", re.IGNORECASE)

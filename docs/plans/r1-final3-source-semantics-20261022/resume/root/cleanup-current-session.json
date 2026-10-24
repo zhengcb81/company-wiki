@@ -1,0 +1,23 @@
+{
+  "scope": "Only ROOT current-session default pytest-1/2 and explicit mypy-cache; historical pytest-0 preserved",
+  "targets": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\pytest-of-郑曾波\\pytest-1",
+      "existed": true,
+      "bytes": 62889.0,
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\pytest-of-郑曾波\\pytest-2",
+      "existed": true,
+      "bytes": 82502.0,
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\root\\mypy-cache",
+      "existed": true,
+      "bytes": 29080921.0,
+      "removed": true
+    }
+  ]
+}

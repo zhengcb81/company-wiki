@@ -1,0 +1,3470 @@
+{
+  "initial_files_count": 506,
+  "all_initial_file_bytes_unchanged": true,
+  "initial_files": [
+    {
+      "path": "config/resource_budget.yaml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/resource_budget.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/test_budget_policy_totals.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/test_phase_c_extractive.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/du11_production/test_document_work_policy.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/du11_production/test_pdf_production.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/test_budget_dimension_diagnostics.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/test_resource_budget_policy.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/cache.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/commit.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/connected.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/initial.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/mypy-e03.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/mypy-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/mypy-priority.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/priority.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/priority.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/push.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": ".planning/w08-prose-untyped-root/structural-controls.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/before.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/diff-check-code.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/diff-check-full.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/merge-tree.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/preservation-after.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/run_bounded.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/strategy.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-regime-audit/diagnosis.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-regime-audit/observation.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-regime-audit/observe.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/content-independent/annual14-intermediate-content-review-20261023.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/content-independent/annual14-intermediate-content-review-20261023.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/cache-green-1.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/cache-green-1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/green-parent.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/green-parent.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/red-unsplit.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/context/red-unsplit.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/design.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/design.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/probes.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/causal-red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/causal-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final-2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final-2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/green.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/mypy.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-green.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-mypy.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/review-2-ruff.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/ruff.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/semantic-green.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/semantic-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/subject-red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/facts/subject-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/diagnosis.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/diagnosis.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/port-probes.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/probe_ports.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/run_red.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/write_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/before.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/carrier-diagnosis.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/carrier-physical-diagnosis.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/cleanup.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/controls-pre-font-fixture-correction.py.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/diff-check.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/fixture-corrections.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/mypy.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/plan.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/ruff.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/run_bounded.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-reverse-red.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-v1.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-v2.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/basetemp-v3.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/cleanup-final.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/cleanup-v1.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v2.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v3.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/core-v3.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/execution-v1.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/execution-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/execution-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v2.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v3.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/exploratory-v3.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/real-context-v1.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/real-context-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v2.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v3.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/repository-v3.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/reverse-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/reverse-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v1.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v1.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/review-v2.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/run_review.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/run_review_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/run_review_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/test_heading_independent.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/test_heading_word_prefix_reverse.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-independent-receipt.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-independent.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-independent.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-runner-initial-temp-error.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-runner-system-temp-error.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/cache-temp-decisions.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/context_probe.before-root-fix.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/context_probe.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/context_probe.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/facts_probe.before-facts-fix.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/facts_probe.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/facts_probe.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-final.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-final.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-interim.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/review-interim.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/independent/run_public_cache.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/architecture-v3-harness-error.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/architecture-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/architecture-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/build_final_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/build_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/charge-order.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/cleanup-final.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/cleanup.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/observe_charge_order.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-final.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/original-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/probe-final.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/probe_final.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/report-build.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/report.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/report.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/budget-regression/review-final-build.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/build_report-v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/build_report-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/build_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/cleanup-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/cleanup-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/cleanup.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/execution-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/execution-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/holdouts-review-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-holdouts-review-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-review-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v1.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v1.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/integration-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/ledger.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_architecture-v3-harness-error.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_architecture-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_holdouts-review-v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_holdouts-review-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-holdouts-review-v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-holdouts-review-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-review-v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-review-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration-v1-harness-error.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_integration.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_measure-review-v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_measure-review-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probe_measure.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-review-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-v1.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/probes-v1.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/report-build-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/report-build-v3.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/report-build.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review-v2.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/review.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/run_review_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/augment_trace.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/build_six_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/cleanup.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/observe_trace-v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/observe_trace.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/six-omissions-report.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more-v2.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-independent/trace-more/trace-more.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/RED_AND_DESIGN.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/RED_FROZEN.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/cleanup-final.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red-binding.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/frozen-initial-test.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-binding.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-v2.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-v2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/green-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/green-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red-binding.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/mypy-runtime312.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/mypy.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/pre-local-comparison-controls.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/related-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/related-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-1.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-final.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/green-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/receipt.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red-boundaries.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red-boundaries.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-fix-receipt.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-green.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-red.stdout.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure/review-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/cleanup.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/diff-check.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/freeze.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/handoff.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/handoff.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/inputs.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/mypy-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/mypy.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/plan.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1-basetemp.jsonl",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1-execution.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/ruff-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/ruff.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/run_bounded.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/extend_original_envelope_tests.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/freeze_carrier_test.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/prepare_final_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/prepare_final_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/probe_chains.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/probe_qualifications.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/probe_unit_envelope.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_envelope_bound.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_final_review.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_final_review_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_final_review_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/run_independent.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/write_checkpoint.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/write_review_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/project-qualification-independent/write_review_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ab-counterfactual.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ab-counterfactual.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ab_counterfactual.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/ledger.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report_v3_final.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/make_report_v3_interim.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.asdict-error.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.initial-error.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-details-v2.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v2.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3-final.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3-final.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe-v3.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-probe.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-trace-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public-trace-v2.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_details_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_probe_v3_final.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/public_trace_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v2.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe-v3.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.initial.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.initial.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose-probe.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose_probe.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose_probe_v2.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/purpose_probe_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-fail.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-fail.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v2.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v2.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v3.interim.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/review-v3.interim.md",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/root-26.junit.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/root-26.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3-final.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3-final.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure-fingerprint-v3.log",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure_fingerprint_v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose-independent/structure_fingerprint_v3_final.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-1.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-1.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-shared-owner.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/green-shared-owner.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red-initialized.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red-initialized.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/shared-independent-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/purpose/shared-independent-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/cache-region-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/cache-region-final.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/column-page-cache-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/column-page-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/column-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-assets-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-assets-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-red.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/heading-row-red.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/mypy-owner.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/mypy-region-final.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/ruff-owner.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/runtime-assets-replay.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/runtime-assets-replay.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-all-layers-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-all-layers-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-import-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-import-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-fixed-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-fixed-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-native-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-scope-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/shared-owner-scope-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/table-region-green.txt",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/root/table-region-green.xml",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/finalize_report.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/probe_carrier.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/probe_untyped.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/run_formal.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/run_red.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-independent/test_untyped_red.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/prior-prose-controls-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/prior-untyped-probe-v3.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/test_untyped_probe.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "pytest-of-郑曾波/pytest-0/test_old_sections_cache_misses0/public-cache-result.json",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_predicate_state.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_revenue_guidance.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py",
+      "exists": true,
+      "sha_unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py",
+      "exists": true,
+      "sha_unchanged": true
+    }
+  ],
+  "native_receipts_committed_byte_identical": [
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/before.json",
+      "sha256": "a5d6d409422890fd6c7b49b01657a375918680172f4268a23949c901578445e0",
+      "bytes": 124695
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded-basetemp.jsonl",
+      "sha256": "8e94db7cd7ee264311690c2be5394affd6d3a70fc15310937789e63c5cea076c",
+      "bytes": 769
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded-execution.json",
+      "sha256": "c646af1f25c2ff09b6506b91ff814889deb5810d4b68a4d85b464ccb4405a4dc",
+      "bytes": 1611
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded.txt",
+      "sha256": "cfc73fa05f4d40c9136b2d679404aef568a33843aaf3626df625bd3860ef6bff",
+      "bytes": 1237
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/bounded.xml",
+      "sha256": "866ead7782ddb6cbd2b23e5ff80e14f47908520f9639396734d6421d31b13a69",
+      "bytes": 62582
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/diff-check-code.txt",
+      "sha256": "2095d5302e465922147e220c0389f7a923ea0c1509a23097f04b3c220798aef8",
+      "bytes": 8
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/diff-check-full.txt",
+      "sha256": "eb4766bee69d8659bb140148d478bbde4365d27e7c21d1bf148331de87c75f08",
+      "bytes": 212
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance-basetemp.jsonl",
+      "sha256": "55bdc53bea622bd9742ac11acaca2fd29514d5d72e83882c8622b7bb3d3a3b42",
+      "bytes": 770
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance-execution.json",
+      "sha256": "bf9e9ff643e47ef72e8ba62f53a050b456881c0604b931d85f8a87852f37a019",
+      "bytes": 1100
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance.txt",
+      "sha256": "8b82b5ce0518eb9bab7e54dcaf63335c7237929feae2c7ba31336b15ef6fe4de",
+      "bytes": 8058
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/guidance.xml",
+      "sha256": "e179eea65af223e12c83dc882a3a217cd84c870b2ebec33816f4cc4f5c0fc5af",
+      "bytes": 12357
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/handoff.json",
+      "sha256": "440dce0fad4e1ce60ea74d004857ba2d97cb4c81e716fedb2586d6c6da8246c1",
+      "bytes": 15216
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/handoff.md",
+      "sha256": "13e35303517e8f9ef318401c002ba61e5fed31e5a343a5cb404027ec30d4491d",
+      "bytes": 2325
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/merge-tree.txt",
+      "sha256": "07d3cb68925f0301e653f04071896c284f084518757704df4e7eda4c1ffa9bfe",
+      "bytes": 627
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/preservation-after.json",
+      "sha256": "070c1173e0000f02c92656babb9a32c90fa5a10a3a81ebcc6bed1a207d2fee26",
+      "bytes": 103581
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/run_bounded.py.txt",
+      "sha256": "267cf4ab3fb32a986a96feb21d3bfe1eff6ad6c50eccbfffbddf40177f8a59cf",
+      "bytes": 2812
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/strategy.md",
+      "sha256": "8c3f399deff26c8786eb851ad8b9bd94fa40f031e8c9b71f11e71330f30745aa",
+      "bytes": 1145
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/diagnosis.json",
+      "sha256": "e9f2be0628606783c0c3b01abccdf872e52ccbb45b3a71638839ca557325f4a9",
+      "bytes": 8325
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/diagnosis.md",
+      "sha256": "ebe524d82de0b6607f3e272f9e149fc48e89f58f4a01963347f6c0fab7f6cba0",
+      "bytes": 3117
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/port-probes.json",
+      "sha256": "2059cf777002faf81a272e035ee910a3483f927114e10af2fa3488a1819e2750",
+      "bytes": 42146
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/probe_ports.py.txt",
+      "sha256": "07af81363e0a0d71c91490c36fc38a513654816fe1c82225b4214e3acb84bddd",
+      "bytes": 2923
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.json",
+      "sha256": "e43d8a1a3f6c77df9f2ebb33313f526d0c31b6402a573a82b793caae107a2eb2",
+      "bytes": 5167
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.txt",
+      "sha256": "336ddc726b1553b46757e251917048012477fe2632765ac6aee33d623e4fd0d8",
+      "bytes": 8853
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/red.xml",
+      "sha256": "299c78a6b84e2d470362017e721f8d27356a0884f00af2aaa0499d78704e25b1",
+      "bytes": 12357
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/run_red.py.txt",
+      "sha256": "907b1837738b8ff9345a54aa6b65a6d582f6d96873bbcb5f6ab76ad2f06b7a07",
+      "bytes": 2670
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-condition-independent/write_report.py.txt",
+      "sha256": "84fbaba42eaca6c091516fb88ea4b07b4751ef3f2f4e72104d89595c3eded26c",
+      "bytes": 9215
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/before.json",
+      "sha256": "f474186a0608a8ad7c02a255215eca20822eddcf6aea6caffa1e11358af06cd4",
+      "bytes": 1446
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/carrier-diagnosis.json",
+      "sha256": "20ab11cedd3aa86df833b88c99239607edc7bcf282dbfdae131cb8fcb038a068",
+      "bytes": 29071
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/carrier-physical-diagnosis.json",
+      "sha256": "7ce13177cfc0869db2dea16b252a5f962ea111b4f1fb22f14de4dc74c0371a64",
+      "bytes": 11071
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/cleanup.json",
+      "sha256": "f53447972c8d239e3e7cc8c87165a9c5cccea3047b29f73e88296e946f100088",
+      "bytes": 6218
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/controls-pre-font-fixture-correction.py.txt",
+      "sha256": "7f2a74b8a7cd4db7dc877e238aa394c109b86c202be2d8f6da302fba63964bab",
+      "bytes": 7287
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/diff-check.txt",
+      "sha256": "9f07159376f80e8939de66e9dac10914d48e4970c9900a1866fff85c6adfc9ae",
+      "bytes": 475
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/fixture-corrections.md",
+      "sha256": "20d375558197968d1b4932cb0c733f665b79c98e64cc03da8bf7354c05e77e99",
+      "bytes": 1281
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red-basetemp.jsonl",
+      "sha256": "d03b9ebb1567c1a5598c503b898a78cade66788666676fa5168c0d0638187916",
+      "bytes": 776
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red-execution.json",
+      "sha256": "4201a7adebf23499898a6e1ed2f413e6ac73e1b06c17436869aec4d810146915",
+      "bytes": 1213
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red.txt",
+      "sha256": "12ac81e2990ccb919abcd1934b69331f325d24e8fda2b6b894d102868a1fc021",
+      "bytes": 6656
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-red.xml",
+      "sha256": "988813cb0492e810538edea87ca0dbb7c0d46e544364d20105a84fc66e7961af",
+      "bytes": 16274
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2-basetemp.jsonl",
+      "sha256": "d26ec45d312459fcf54bdd1222f148cf092f4bc8d494f15106e82e698fc36850",
+      "bytes": 775
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2-execution.json",
+      "sha256": "a980e32fcbd18b2bdcb75e08ae1a0c8b337163e7bb81d00b2c1380fc4cfa30a8",
+      "bytes": 1212
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2.txt",
+      "sha256": "a4b7018de65eeb7a942311879a057c20247c88cdbfd5e68229eb258f6ae43268",
+      "bytes": 1957
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v2.xml",
+      "sha256": "d6115b3132b63410b854f345809fb0f52ad6692a2fddd95f93118ddb6216b7f3",
+      "bytes": 12685
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3-basetemp.jsonl",
+      "sha256": "b8b1a868ad6b5babed1ad3804caa176b2953a7947c5618bd0539c992612aeddd",
+      "bytes": 775
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3-execution.json",
+      "sha256": "fb33bc3f4f3d1eaf2d13ab08f40b2586b4736f300120b85f670b5284d8d99559",
+      "bytes": 1212
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3.txt",
+      "sha256": "33616e9aee239bf49de59889bc377dd0683511351c3645f29e80abab0c280d31",
+      "bytes": 917
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-controls-v3.xml",
+      "sha256": "99a2a2119acd3f6331a3507b033c3043188e245e0b50f89b56c6a7189c3571fc",
+      "bytes": 11940
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final-basetemp.jsonl",
+      "sha256": "0bc73b62f05fdac91d6290085f34cb11a9131db921a856fd26bc7dd64a4afbfd",
+      "bytes": 779
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final-execution.json",
+      "sha256": "f96b14ebc92a57afeb196146735cd7abb74f18beb667dbdcf437e5ec7b52b4e1",
+      "bytes": 1220
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final.txt",
+      "sha256": "db84215a8f4f591a630ad82a0b55afbc104e731509dda50d9194377aa22042ed",
+      "bytes": 921
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-final.xml",
+      "sha256": "5556370d2c7feaf0744ba3a9e259ddfabec017668ea263fc5347b34ab11235c4",
+      "bytes": 13283
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red-basetemp.jsonl",
+      "sha256": "3f78cb59ee3a642205662c7e112b3a85a33c1c50bb62783b01de9a0446f3b9f3",
+      "bytes": 777
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red-execution.json",
+      "sha256": "eb8b36f310822954151ee2372358a2d915c317968b9fde23e8a0ce805c97b159",
+      "bytes": 1216
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red.txt",
+      "sha256": "1dbef4407b6a89134c053d6350039826981890ae543b5ac34cac21a6cac4c73f",
+      "bytes": 4807
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-predicate-red.xml",
+      "sha256": "70adcdb4e7fa744867106485a7333fc54d4e388ffda9f5da30210a509254e997",
+      "bytes": 16321
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound-basetemp.jsonl",
+      "sha256": "e60f74e97b11d4dd77bdfc6c2c702b92b98f13e61930ef41fc80656179a292f2",
+      "bytes": 776
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound-execution.json",
+      "sha256": "f24113bc5fc87057886d0066073bf029a5cbd16413cc4b723bf5e34f20eceaf2",
+      "bytes": 3371
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound.txt",
+      "sha256": "9744795ad26f8f473d0aa1a968cc1bb4947680c767f970b710aac71392ecd498",
+      "bytes": 918
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-source-bound.xml",
+      "sha256": "f5b70ea02d992798b6564593feeb5ae644862056d102dd587b822a867febd5ed",
+      "bytes": 13283
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1-basetemp.jsonl",
+      "sha256": "f3125739264824190088366e9c27f21a4ca676492311a81f778b0f6af12186f1",
+      "bytes": 766
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1-execution.json",
+      "sha256": "2d830cc320a61838288e0102acf64abecb4f821bd29841182634c1aabe274e0e",
+      "bytes": 1101
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1.txt",
+      "sha256": "a6a6af0545654007e56966d1bb6dd9c0cac5c540634ec3f89acd504931f7e684",
+      "bytes": 908
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/guidance-v1.xml",
+      "sha256": "b94617c51c01f3b40557072dd6eea681df245e3e89d3bfeddc2ab32a2a36010d",
+      "bytes": 4874
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/handoff.json",
+      "sha256": "63bf12b3c6ecf3881a7a306f911c1770198fa0ce197bcf4e6fbef590a7198540",
+      "bytes": 4401
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/handoff.md",
+      "sha256": "f5e9c51c8a681b10cb81b72e6e5a58a32984cefdc7c6c11a5d1b8ec351c0a73e",
+      "bytes": 3430
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/mypy.txt",
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76",
+      "bytes": 44
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/plan.md",
+      "sha256": "acc7708322a8a8ab2e23e843a66e57330cf1b389b8f379a3d5d4bf83e4bad091",
+      "bytes": 1426
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final-basetemp.jsonl",
+      "sha256": "dfe0d965ab824f9a39d68a54f5bb2549030a49dc8b3c06371b1eed907950e3c7",
+      "bytes": 768
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final-execution.json",
+      "sha256": "e0a574e50e7c72002d012fa1b144d28efb13bb470d4b4a37824fc6b2f2cc4675",
+      "bytes": 2528
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final.txt",
+      "sha256": "98f5b8be66fe5f228771b168fd236e52ea1e96b489ee84238935b526dbfed421",
+      "bytes": 1560
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/related-final.xml",
+      "sha256": "a22989090e25984db73723bbec457f0fd40a2268e49ad3ce44ab3372b66574cb",
+      "bytes": 132941
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/guidance-root-20261023/run_bounded.py.txt",
+      "sha256": "1ae8f7a72b45dd0274bd09b3e9cf9a50115f1ed7638679d91b528319c72e8314",
+      "bytes": 4561
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/RED_AND_DESIGN.md",
+      "sha256": "e50c5ef3df43337fb44a6c0335748022938398a95e26f41a23f7db613f40cea6",
+      "bytes": 3002
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/RED_FROZEN.json",
+      "sha256": "77107fde4dc83e64c2bbd1a261a3f746837fc5794a7dcf2486638ecacfe72c6a",
+      "bytes": 5440
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/cleanup-final.json",
+      "sha256": "c3d80ae78ddf1c8d9aef3725020c18d1eb6021dda90fc092c378c702b039b454",
+      "bytes": 4989
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red-binding.json",
+      "sha256": "3a52d12d7c8601ffea4f13b09494cc678e963ec21c32ccd2bb7d7378e3e03ac1",
+      "bytes": 388
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red.txt",
+      "sha256": "399f9346ceaf884e1bc3f504857a30e1a05f0e46c89ad92c5942ee4dca4d1708",
+      "bytes": 10578
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/comparison-red.xml",
+      "sha256": "ce27a71da3c0fe4727200b2906688141853cad1040f37444d167e826a169c5c8",
+      "bytes": 33438
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection-execution.json",
+      "sha256": "840b279b91cec1dd2ebd6ace64fa65954ebe57b7f0c0fa24448b62b0ec01be4e",
+      "bytes": 3144
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection.txt",
+      "sha256": "3885aa3ae235fded4682818c65d3a70efcdb33661919b247408cc9645ddf9208",
+      "bytes": 7989
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/final-selection.xml",
+      "sha256": "78b7b8a1b2b20e7908a1672e0abc20ddcd3ecf74d4aee210bed41e15fe87958f",
+      "bytes": 266713
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/frozen-initial-test.py.txt",
+      "sha256": "a1f873d52b683dbd98237f68825c3c49049aae7848166bf1ad130b2358c7d249",
+      "bytes": 9217
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection-execution.json",
+      "sha256": "0e9927fe7dc61cebdbcca4dbf53cf7e869df9af9b8f5f9c8e7ec795849a3bd8e",
+      "bytes": 2861
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection.txt",
+      "sha256": "bddaba974d79c499124b7239439b59c11c1977086fc7763252929c662a75e6b8",
+      "bytes": 21093
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/full-selection.xml",
+      "sha256": "68f518b360d8f99580ca92fa062637e52c6d80c6926e447dbe9729dc4f347b5f",
+      "bytes": 285871
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-binding.json",
+      "sha256": "7b7124a572c0584100002f64c72fec866642a7d72bd387cbba0076923469f65f",
+      "bytes": 534
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-v2.txt",
+      "sha256": "fa88d894920de1b79e31ad9d9bb9531c0991f2809193b99cc9f4bf432ac8645c",
+      "bytes": 7828
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red-v2.xml",
+      "sha256": "e36ebb82fabc7c1e9d0848f046e47e8bd0602abe6374943bfba91e7a2b6a689a",
+      "bytes": 23733
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red.txt",
+      "sha256": "2340f199fd5c114c41ead4bc90c4aca6bbf89c5cc5ab291f8da6afcef2ec561f",
+      "bytes": 5456
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/future-frame-red.xml",
+      "sha256": "0a576042d48785fe94b69fd62f25efd1eeb9772340a07c827dbedc4aea853163",
+      "bytes": 20132
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/green-v1.txt",
+      "sha256": "c6720475509467299cf001710bfd8a28001455842b6f2306d3632b4d66af60ed",
+      "bytes": 2195
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/green-v1.xml",
+      "sha256": "a120770dfc70f479e2df2d78a7eaa99652e264759088e07228ae5e2fa53f7351",
+      "bytes": 63871
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/handoff.json",
+      "sha256": "61876a6e95aee2f6f04db19625e0660b754fdbd4e4ec7bc67891bea29936c925",
+      "bytes": 8397
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/handoff.md",
+      "sha256": "914621cdb002715e7e18845ddf0b53f3aa1df419f6daa18072ab6062eea96ea6",
+      "bytes": 3307
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red-binding.json",
+      "sha256": "fac5de0e9bfcacf141cdac36bd77e0d582ae35326aed1d725d849ff1337aed75",
+      "bytes": 603
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red.txt",
+      "sha256": "77470ab7bd8fa2c914adb64b479fd7274ad58aa024a92304b97d8771a35824a0",
+      "bytes": 7274
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/local-comparison-red.xml",
+      "sha256": "7dd13aba2f71239ed13574f8adcb6b077bb70349020d5ebbb0e1848c3fee5d6e",
+      "bytes": 23209
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/mypy-runtime312.txt",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+      "bytes": 43
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/mypy.txt",
+      "sha256": "5bb3c48f1f00e73c40c303b2917944aa796230f80e9b01a9e2c1c6d4c111384c",
+      "bytes": 228
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/pre-local-comparison-controls.py.txt",
+      "sha256": "7e8432e82e05f3c96bd5eef5fdc130d956555f96ac30f353d5c5ac4a878f407e",
+      "bytes": 11020
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red-execution.json",
+      "sha256": "7a90036c986a09dbf1d51a3329e535c01287a8f81d8fe9fe18d1954b445c8cd6",
+      "bytes": 2809
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red.txt",
+      "sha256": "454b56adc364ea666db7ed2663ea53d8ea25e39d3c80ebb1edafb907c0731485",
+      "bytes": 20492
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/red.xml",
+      "sha256": "c113d8010d60b02fd0562b13c59a7254482ca69ab4219013f1f66d39789ba218",
+      "bytes": 29654
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/related-final.txt",
+      "sha256": "5e5e5660908391e804df6f0a9e51626138841add62f990e3208a0d33dc3178fb",
+      "bytes": 2627
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/measure-variants/related-final.xml",
+      "sha256": "1a5a6b4e8f5b762e6ad1977b112b1a92622d4a7edccc5643d634bafe3bedc328",
+      "bytes": 91098
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/README.md",
+      "sha256": "cdde4012ec8f75bb8831c2e486a46a1f01467b61e5e2ecb9af58e5c67dc057de",
+      "bytes": 1382
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/before.json",
+      "sha256": "aee9813cd7c95fc190314d69bc73c9aa25c9b714eec1d75e48fdfe9b1ecb104d",
+      "bytes": 140869
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/diagnostic-archive-map.json",
+      "sha256": "9919b0de010b09ea199ac7a019dd5fd4a1ac8790746340272d9ec45182e0a342",
+      "bytes": 3412
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/findings.md",
+      "sha256": "cddac07ac3a3cef3f5b455438d581dfe3b7884ac3a12d2ffecb45893a21b9af8",
+      "bytes": 1070
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-after.json",
+      "sha256": "1ba8944e540264ab5b81b61fc5b5e6e6da1919f23a890aee65c4be93061b3da3",
+      "bytes": 2555
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-artifact-freeze.json",
+      "sha256": "301fa681872682a10d40d2ddfe393a564c7ef5805a521a6b8a05c4e1fbc2ad7e",
+      "bytes": 1739
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-before.json",
+      "sha256": "1ba8944e540264ab5b81b61fc5b5e6e6da1919f23a890aee65c4be93061b3da3",
+      "bytes": 2555
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-cleanup.json",
+      "sha256": "65dfefabab210e9f53d9668f1b77fcbb6c75f0bd766a940c653aba5f685a65eb",
+      "bytes": 603
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-execution.json",
+      "sha256": "12645c3f170128cb2bf18667dac5275d5ac812b88e0df40a1849fdd4a251d52b",
+      "bytes": 563
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-review.json",
+      "sha256": "02a9d828ac2edf16a18f00b9a4e8ca3e454d32c98b2678860586ebb58a2ebbad",
+      "bytes": 9659
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-review.md",
+      "sha256": "4e57a0445c171e8ff126fe343279db274a1d0deab57b94faeeceb1120512e439",
+      "bytes": 2871
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-semantic-probes.json",
+      "sha256": "848afcd540d8f2edaecb1dc7cb1ad27c262fab064a22e5a20e88dfec90d36f61",
+      "bytes": 13828
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-semantic_probe.py.txt",
+      "sha256": "739b0c328e663821e2db87edb457bc49e25f84119d3445139a5ac65b602c7bf9",
+      "bytes": 6499
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-test_semantics.py.txt",
+      "sha256": "696a6370522891a64e5138a5f6b3d94e952aef39594ee26a9fd1397731327134",
+      "bytes": 1433
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-tests.txt",
+      "sha256": "57edb62af81e8d636f7eeffada918ff606743952630965c092a986e6f88da049",
+      "bytes": 2585
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/final-tests.xml",
+      "sha256": "1cbc200bf35dfadd79e098e13de81bc1941b6cfa4cdc37774a58327004f0a9e4",
+      "bytes": 4545
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/independent-red.txt",
+      "sha256": "3691d10d71d3e491bfc4aaf08548c45829a5c7d1b7b6b13ad708b5bdff7fb771",
+      "bytes": 10004
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/independent-red.xml",
+      "sha256": "eb211c2203dd0c76327d5112c03063e219fefd5af541aa899ab67a7ac1e4c220",
+      "bytes": 12809
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/initial-review.json",
+      "sha256": "ce7477f0010f23997ad21d44c7912ee81337bb601ce9b7f2fc636223df12614c",
+      "bytes": 10968
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/initial-review.md",
+      "sha256": "cf28a25c5895bc0df5031be049ab3e72f94c7bcff3db3991c33a7c7a44996d47",
+      "bytes": 3510
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/independent-final/semantic-probes-red.json",
+      "sha256": "6825b08eb767c62002405543568336d987c7c7f1e5882c22cf4352f5c7445750",
+      "bytes": 14636
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/packaging-readonly-review.json",
+      "sha256": "4bc46332d7df523a3d55608164a7c5d27e36faf419b4aba00cd8d140bbd97efc",
+      "bytes": 2956
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/plan.md",
+      "sha256": "18a407c9fc032083665ec60856e1dbbb81554739191ed58862a668f0fa3ac130",
+      "bytes": 873
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/progress.md",
+      "sha256": "0a261e20f0c955ff61acebb492e7dcec3971933dd0b1123c8b8b71ad4ec67a39",
+      "bytes": 422
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/stage-allowlist.json",
+      "sha256": "7f5f903acb3806beed8b3ff1f7ab5ca21db2cbd8cf915dd7aa3856b4eb530c9e",
+      "bytes": 31087
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/task_plan.md",
+      "sha256": "94138d2bec0b69ea975bb6103c47cc787477d26a08d640c3a4f77be84c52f77a",
+      "bytes": 930
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/cleanup.json",
+      "sha256": "f4f35cd36d86ee34582da83068b9c5227b137cd0c7311210ff1cae1e290ef2e4",
+      "bytes": 8710
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/diff-check.txt",
+      "sha256": "9f07159376f80e8939de66e9dac10914d48e4970c9900a1866fff85c6adfc9ae",
+      "bytes": 475
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/freeze.json",
+      "sha256": "cc787988ab0fc0334d2926aad8663b0132d8f74e024ffc43288d2a3b3eafb131",
+      "bytes": 1999
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/handoff.json",
+      "sha256": "4a90bbb82a0f36942dec9d3b9f79b1cd83274040f90521596c8e3e8329238988",
+      "bytes": 4179
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/handoff.md",
+      "sha256": "b84f26fb27d5b8a4afe7282d55c2c6bfa27b07c278c6e2a634ce41b93b7fc29e",
+      "bytes": 3533
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red-basetemp.jsonl",
+      "sha256": "e360ea827357a3e7a6f81c2d981bdaa6583eeed97b9af0dbe8c82b9dc7e69648",
+      "bytes": 779
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red-execution.json",
+      "sha256": "f468eaef6081985a339d274570f5b94f2211262cccfb0aa7c0b0668d0d436011",
+      "bytes": 3273
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red.txt",
+      "sha256": "c0e336d1e088dc1d9c29ed88021db9680e8e7616ece78608fca0471216e98b2b",
+      "bytes": 9104
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-red.xml",
+      "sha256": "678d7b73b596e927ae052183a7c85ed8a338d8bb1ea1c678c7ab71f02f72ad34",
+      "bytes": 14152
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1-basetemp.jsonl",
+      "sha256": "85454ce3099ae7a35d097028946ccdb1c53a106ccdd8e83b5ac56595282a2b90",
+      "bytes": 778
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1-execution.json",
+      "sha256": "5866c17fb588f6fa6c78ae751285577d4c0cf61716c4fbb43c7cdbf2eea7ac67",
+      "bytes": 3862
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1.txt",
+      "sha256": "28466d3f7a2d8dcde9f141d5712175d3103afbbcf740570706bb9d4ffc406c60",
+      "bytes": 920
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/independent17-v1.xml",
+      "sha256": "71e2fd2a388e866e8611d3728b9db6aeb11b4ff7ef608e504101a54ba7b1892b",
+      "bytes": 3726
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/inputs.json",
+      "sha256": "c7361378dd17d824e2430a8c69ea7db1bff5e208c705446f7b5fbd5a4ab0508d",
+      "bytes": 667
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/mypy-final.txt",
+      "sha256": "718df785efbbd4b57e63b5f64aff2c5b5592e433447681f759b307f97a3ec96a",
+      "bytes": 44
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/mypy.txt",
+      "sha256": "718df785efbbd4b57e63b5f64aff2c5b5592e433447681f759b307f97a3ec96a",
+      "bytes": 44
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/plan.md",
+      "sha256": "7944f66bc7498babcaed3c93029a906858602420328b3d8d8f80954af1db9f63",
+      "bytes": 1138
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final-basetemp.jsonl",
+      "sha256": "098933119b1ff76b5d4384ae398b6c4b17dd6f4665d1a1c1c8e53f687303a506",
+      "bytes": 793
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final-execution.json",
+      "sha256": "49547f7fcb3c060023635f374ce83c76e34a19613da5b9b575f292c95876d938",
+      "bytes": 4307
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final.txt",
+      "sha256": "99a14f15af761b176f65116a47327f709e35701f9a850dffd629c672da2cbd54",
+      "bytes": 935
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-final.xml",
+      "sha256": "8f16fd23f42eb41ea264dc657cd78bb337385101b0c93c2e4bff621525ef5a9e",
+      "bytes": 10458
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red-basetemp.jsonl",
+      "sha256": "cbaece45801e0279a8fedc07d01aac694e4e82562c88f8151f5a5fe7389976ef",
+      "bytes": 791
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red-execution.json",
+      "sha256": "1deb7487f8c1baa286728efde8fe546fc1e723d5fc331e45c825764cf1c36f55",
+      "bytes": 4303
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red.txt",
+      "sha256": "859e4fa9422eeada6ffee1844448f6a5f55617f5ec5effd6f7321d64dc810a3c",
+      "bytes": 2112
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-inline-red.xml",
+      "sha256": "e32f57d35691836aefc140871accdd1dfc9f8550cc214c62818fc5f49d176dcd",
+      "bytes": 11350
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red-basetemp.jsonl",
+      "sha256": "4b324cf89e0b438054e64c5e30eac288d57b30b08521a2399e64959158a722f6",
+      "bytes": 796
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red-execution.json",
+      "sha256": "078a4090158a305f34ce0e002c7772c8985dbeb2b1a69e733e806a8422fb19e1",
+      "bytes": 4313
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red.txt",
+      "sha256": "e4969a58ed40376f18f66d55591b735bc3975f3c4777189bb27fd2d2b3a862f0",
+      "bytes": 4304
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-outer-actor-red.xml",
+      "sha256": "c18900d71c2c32f1eb1ddc9cb6625a51489d32213cf801defba1b42a4a9ec5d2",
+      "bytes": 15952
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final-basetemp.jsonl",
+      "sha256": "46de549345c682b68d451bf0e9d06816e7a6d9e931ed6c1e01f9f8ea9afd7617",
+      "bytes": 800
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final-execution.json",
+      "sha256": "dfb3dd313f39d946b8d215401119263546609c313b6bf8439efcaff0f7fae8c4",
+      "bytes": 4321
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final.txt",
+      "sha256": "25fbf786d9522a945d9f378ba464f842a8cb773f13f3243081b520832ad79262",
+      "bytes": 942
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-final.xml",
+      "sha256": "7a421d10a1b981ead3770e881abdefafcf59ad6fcc6575d013f842487b705602",
+      "bytes": 12179
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red-basetemp.jsonl",
+      "sha256": "3fce81863fe649cd563f057bad8b296158cbbb85b353d963bd8e1d9de7d2b19b",
+      "bytes": 798
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red-execution.json",
+      "sha256": "96a0f6ae0b4f602cba239974e86f05f33979d27ad0983a4bac3853bc33f3aa98",
+      "bytes": 4317
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red.txt",
+      "sha256": "abbafd106aa54e84d31697cd2f5539a3f05f1e4bb0cf6d90de48e106270319f8",
+      "bytes": 6120
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-public-recall-red.xml",
+      "sha256": "1312559e107ffa9b96da668114a71a397371ba2cfa85f681fcea029d5bc5e255",
+      "bytes": 15947
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1-basetemp.jsonl",
+      "sha256": "d24789de92d6931a0b7b7c3253ede839c33666dd2d3c788d7c1f6a5707b96d17",
+      "bytes": 783
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1-execution.json",
+      "sha256": "45f185a014edea33f03eeb23a8b621a770535864b2ba94959497c2444c4fc6e8",
+      "bytes": 4287
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1.txt",
+      "sha256": "3e5effa054e7bfa39f439985a10564ecdfc0e2e5d95b582914c4e747768fd382",
+      "bytes": 2614
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/predicate-controls-v1.xml",
+      "sha256": "041a6aea6560265eb3739970927a898d09921172507d09a08e16c38166cac55d",
+      "bytes": 11054
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-basetemp.jsonl",
+      "sha256": "6789f45c8f03e81017e337a0f55f88b0b6f7ddf49d79d3229e60dc19ff8bb92e",
+      "bytes": 775
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-execution.json",
+      "sha256": "4b502ca463dcbb74b56197014568f17d519a08820c13ae39bb7b9cf50feeb314",
+      "bytes": 5786
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2-basetemp.jsonl",
+      "sha256": "735bba8c5bf82f4bf024c5dad242e17fcbe11f3a477cccd4c483c748572614f7",
+      "bytes": 778
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2-execution.json",
+      "sha256": "3c62d3c21db4029aa68b1aff5c602a29c448d9972d9fdf5df1f04ffe7efcfadf",
+      "bytes": 5792
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2.txt",
+      "sha256": "ff1214f1d7a47317925f257f8f64608512b34a419ea0929e744b41db3e26b70c",
+      "bytes": 1651
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final-v2.xml",
+      "sha256": "ea4ac8f1175a479925547f331c56ed5b2888df7a7f23a45a6ba3234665f9507f",
+      "bytes": 145667
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final.txt",
+      "sha256": "7a84449e67140c8705e321c26a8e2f65ac1780e630cacc908c919970a2c17acb",
+      "bytes": 3506
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-final.xml",
+      "sha256": "c6a5cd03a2bcf2be77b75d6813d634b1cef691ae5c5dc63690af93de183f5dab",
+      "bytes": 146437
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1-basetemp.jsonl",
+      "sha256": "0732f9714c62968529e536d40807df5def559d4f601adf55e2eda45c00a5b27f",
+      "bytes": 772
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1-execution.json",
+      "sha256": "f55042b97e0795fba9e0f07e0ba56e40fd1254c77b9378973f655eeb0798bf86",
+      "bytes": 5781
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1.txt",
+      "sha256": "e8d5107b88d1e9749ec3af324b6577889a34eadabf6b759b5ff026d246efa2b2",
+      "bytes": 1645
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/related-v1.xml",
+      "sha256": "363fcf8f7ab1cf174936419422a395c9943522c5c3b776edce5bef97115fed3f",
+      "bytes": 141779
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/ruff-final.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/run_bounded.py.txt",
+      "sha256": "a1333b615b58a2c16a05d1c5af8efc233e9dbf629249915c86e927439af9c2be",
+      "bytes": 5393
+    }
+  ],
+  "all15_reviewed_source_test_raw_hashes_stable_after_hooks": true,
+  "merge_head_cleared": true
+}

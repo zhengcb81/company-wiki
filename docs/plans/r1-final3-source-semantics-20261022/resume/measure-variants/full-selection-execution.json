@@ -1,0 +1,41 @@
+{
+  "baseline": "1712ed10",
+  "before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "9cfcb4ba54ce05a321ce932dc634817cb0a5044584326ea96263012541814bd6",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+    "src/company_wiki/source_catalog/narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "73501386cadd03a9de4169bba7a3e7f79ea49eddd02aea389a3838842a30d755"
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "9cfcb4ba54ce05a321ce932dc634817cb0a5044584326ea96263012541814bd6",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23",
+    "src/company_wiki/source_catalog/narrative_reading.py": "e03e20ab0d7bf320102c9245ceb8df37e96da3c9c3dd96ce3b61e6451fdeb575",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "73501386cadd03a9de4169bba7a3e7f79ea49eddd02aea389a3838842a30d755"
+  },
+  "exit_code": 1,
+  "process_seconds": 38.869342699996196,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection",
+    "-q",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\full-selection-temp",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\full-selection.xml"
+  ],
+  "production_edits": [
+    "src/company_wiki/source_catalog/narrative_business_policy.py"
+  ],
+  "original_reads": 0,
+  "model_calls": 0,
+  "network_calls": 0
+}

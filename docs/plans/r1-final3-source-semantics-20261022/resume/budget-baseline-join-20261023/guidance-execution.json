@@ -1,0 +1,27 @@
+{
+  "suite": "guidance",
+  "exit_code": 1,
+  "elapsed_seconds": 2.72388599999249,
+  "arguments": [
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py"
+  ],
+  "imports": {
+    "budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py",
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+  },
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-225446-bbcf7aaf",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-225446-bbcf7aaf",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\budget-baseline-join-20261023\\guidance-temp",
+      "absent": true
+    }
+  ],
+  "no_external_calls": true
+}

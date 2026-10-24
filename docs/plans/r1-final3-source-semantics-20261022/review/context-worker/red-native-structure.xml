@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.920" timestamp="2026-10-22T23:25:00.577106+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_selection.test_reading_native_continuity" name="test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[False]" time="0.428"><failure message="AssertionError: assert {'urn:company...e01f1a86ef49'} == {'urn:company...9a2de067da33'}&#10;  &#10;  Extra items in the left set:&#10;  'urn:company-wiki:narrative-unit:sha256:da2d915eb28c5bf3e39c8de950bfb1c7f6569c5672efef22248ce01f1a86ef49'&#10;  Extra items in the right set:&#10;  'urn:company-wiki:narrative-unit:sha256:b553fff396c1f9c19ff54c50802bce0ec525d892fee8f36a621e9a2de067da33'&#10;  'urn:company-wiki:narrative-unit:sha256:b18fb28f31622246468e5532c8e62e025433641a9a322472f66e3bbdcfda8605'&#10;  Use -v to get more diff">tests\unit\document_understanding_selection\test_reading_native_continuity.py:792: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    assert set(heads) == {parsed.units[parent].unit_id, parsed.units[intro].unit_id}
+E   AssertionError: assert {'urn:company...e01f1a86ef49'} == {'urn:company...9a2de067da33'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:da2d915eb28c5bf3e39c8de950bfb1c7f6569c5672efef22248ce01f1a86ef49'
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:b553fff396c1f9c19ff54c50802bce0ec525d892fee8f36a621e9a2de067da33'
+E     'urn:company-wiki:narrative-unit:sha256:b18fb28f31622246468e5532c8e62e025433641a9a322472f66e3bbdcfda8605'
+E     Use -v to get more diff</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_native_continuity" name="test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[True]" time="0.009"><failure message="AssertionError: assert {'urn:company...e01f1a86ef49'} == {'urn:company...9a2de067da33'}&#10;  &#10;  Extra items in the left set:&#10;  'urn:company-wiki:narrative-unit:sha256:da2d915eb28c5bf3e39c8de950bfb1c7f6569c5672efef22248ce01f1a86ef49'&#10;  Extra items in the right set:&#10;  'urn:company-wiki:narrative-unit:sha256:b553fff396c1f9c19ff54c50802bce0ec525d892fee8f36a621e9a2de067da33'&#10;  'urn:company-wiki:narrative-unit:sha256:64cc62588e634916d1c1844f178b4d5d4d5f6687218f7f330fe1cbad5be21718'&#10;  Use -v to get more diff">tests\unit\document_understanding_selection\test_reading_native_continuity.py:792: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    assert set(heads) == {parsed.units[parent].unit_id, parsed.units[intro].unit_id}
+E   AssertionError: assert {'urn:company...e01f1a86ef49'} == {'urn:company...9a2de067da33'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:da2d915eb28c5bf3e39c8de950bfb1c7f6569c5672efef22248ce01f1a86ef49'
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:b553fff396c1f9c19ff54c50802bce0ec525d892fee8f36a621e9a2de067da33'
+E     'urn:company-wiki:narrative-unit:sha256:64cc62588e634916d1c1844f178b4d5d4d5f6687218f7f330fe1cbad5be21718'
+E     Use -v to get more diff</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_native_continuity" name="test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope" time="0.013" /></testsuite></testsuites>

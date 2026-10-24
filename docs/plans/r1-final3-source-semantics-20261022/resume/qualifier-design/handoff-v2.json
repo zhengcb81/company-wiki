@@ -1,0 +1,171 @@
+{
+  "schema": "w08-local-qualification-handoff/2",
+  "at_utc": "2026-10-23T21:25:17.745529+00:00",
+  "status": "SUPERSEDED_AFTER_INDEPENDENT_FINDINGS",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "6138aba40e7af23a630ab5a17b8feb26a13a548074a1217db1750fb4b7a517db"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "sha256": "d13fa02d745814f8a264493f5214bdb9b038ce2adbd3768561cbe1e1ef919b08"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "4241b8d8d0f6e9b279a97a42794a5fc9ff87da09457b2ae8850ae45a8e1ef839"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "50a82af49be2fe10a56359a265ba59a0e35da27e4d7de557770fdab6d573f3c2"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/text_view.py",
+      "sha256": "eba28e54cd339b0db9104439e059eb752beb24e89a5e82f349b3e5c8abc754a3"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_local_qualification.py",
+      "sha256": "33e5e876874cdc1c7924f2f9bef6c7d1854bb34b831673a5497bc15a0b5701a3"
+    }
+  ],
+  "tests": {
+    "initial_red": {
+      "failed": 2,
+      "why": [
+        "no adjacency_edges",
+        "pending certification misread current"
+      ]
+    },
+    "independent_v1_red": {
+      "failed": 4,
+      "passed": 12,
+      "not_edited_by_author": true
+    },
+    "final_affected": {
+      "passed": 362,
+      "seconds": 9.79,
+      "dedicated_local": 40,
+      "independent_scope": 19
+    },
+    "mypy": {
+      "checked_source_files": 6,
+      "errors": 0
+    },
+    "ruff": "PASS"
+  },
+  "interface": {
+    "adjacency_edges": "original left/right IDs, source_id, basis=source_body_adjacency, physical_basis original geometry; no change to old windows terminal rules",
+    "method": "SourceOperatingSession.local_qualification_dependencies(edges, *, origins=None) -> dict[material_id, tuple[material_id,...]]",
+    "direction": "earlier fact -> following explicit qualifier; chain only from a proved issuer object",
+    "root_responsibility": "reciprocal context and entire transitive original closure plus headings must satisfy within_reference_envelope8/4/2048 and existing graph selection"
+  },
+  "review_repairs": [
+    "Shared source binder remembers actual prior object separately from actor for truly elided predicate continuation; Chinese contrast connector handled in existing text-view grammar.",
+    "A product owned by an explicit third-party possessive is attributed other; it cannot become an issuer-device qualifier.",
+    "A predicate embedded in a reported/nominalised proposition remains unknown/uncertain within its own clause, retaining exact refs; no cross-sentence denial scanner.",
+    "Every qualifying restriction binds through actual object_refs, never broad assertion overlap.",
+    "Following same-object restrictions can continue a proved issuer chain; unknown does not establish the first identity.",
+    "No activity-name whitelist: shared actual/conditional negative/restricted states cover shipment too; unrelated future plans remain excluded."
+  ],
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211139-a488900e",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211259-c09f4248",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211340-c5becfc0",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211449-55244bd2",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211541-fa9076db",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211635-f0a62364",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211825-c3702991",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212157-a0bb6fed",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212253-7fc7f3a2",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-212355-87177cea",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\red-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\green-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\regression-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\reverse-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\state-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\final-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\frozen-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\review-repair-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\review-v2-temp",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\final-v2-temp",
+      "absent": true
+    }
+  ],
+  "side_effects": {
+    "raw_documents_read": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "git_mutations": 0,
+    "root_narrative_reading_edits": 0,
+    "external_author_tree_edits": 0
+  },
+  "remaining": [
+    "Independent agent current-byte final review",
+    "ROOT transitive-envelope and public selector integration checkpoint",
+    "ROOT actual annual read/summary/cache/RF/mainline acceptance"
+  ],
+  "status_at_recording": "FROZEN_BOUNDED_CHECKS_GREEN_PENDING_INDEPENDENT_FINAL_REVIEW",
+  "current_handoff": "handoff-v3.json"
+}

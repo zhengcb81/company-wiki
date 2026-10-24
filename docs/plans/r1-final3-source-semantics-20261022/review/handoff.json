@@ -1,0 +1,428 @@
+{
+  "schema_version": "w08-paused-candidate-handoff/1",
+  "status": "PAUSED_CANDIDATE_INCOMPLETE_NOT_CONTENT_ACCEPTED",
+  "created_utc": "2026-10-22T22:48:17.625974+00:00",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+  "branch": "codex/r1-final3-source-semantics",
+  "baseline_commit": "908ec2c408aad75d1c73a92709577a7d3e7a47d3",
+  "candidate_commit": null,
+  "source_and_test_files": [
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "bytes": 25319,
+      "sha256": "e007af6d57606bf658c10c28a8a4e72bcf2c9401cdc37a7e790746f77cf9d920",
+      "baseline_sha256": "b724870bc30103e66538e598ac83f676c5570a982b38597749b588f47d75593d"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/sections.py",
+      "bytes": 22293,
+      "sha256": "976e90865d690916a04d91840fcc941359e99ae5626abf67dd5fa38f51dbed96",
+      "baseline_sha256": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 47488,
+      "sha256": "688e93acae88c6cf72e482ae2a1599ad0bc7689b093ca4a87fd5b420ebcfa92d",
+      "baseline_sha256": "cbcd24178ee8da4d5be7c3ac5bf13d8f3d2a9b88d6bcd1897351501b3fb12d48"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 63203,
+      "sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+      "baseline_sha256": "58556ea6ce5308d6664bb01b06c27705b933f8c51db57bb6c417a2646260ff21"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "bytes": 7128,
+      "sha256": "593440a36eedfc78f1d62eef486f461c93519022468219a68352d464d7b69b41",
+      "baseline_sha256": "62064817fa85223d593ce0392a5531276837be478da3d87c1fd0e9452d3d8d8a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+      "bytes": 20915,
+      "sha256": "aace0c9eec7e0e260edc063c3d5d1c29bc83a52fa8dd251b72b3e4d15ee7bf68",
+      "baseline_sha256": "0b92b043139867c5cb7cbca0795b9af3d24b730f67908550f4ad848c50ad637e"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_hk_mechanisms.py",
+      "bytes": 14743,
+      "sha256": "9d3ae5476b47cb12a7e8c81c77b4545278485f612be2f49b7852844ffe2d77c2",
+      "baseline_sha256": "9c3d17c71703882acba2f9a41cb0594f06ee3e0b918c3908f70ac37058c9d73c"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+      "bytes": 11571,
+      "sha256": "511b4240ecd303de285dbdc0e3416d8f0533628c257840c46400be652c01d05b",
+      "baseline_sha256": "4bb43e086cf131b9e1700d73fca88c797425d314996ae6d5b4a573b14638d88e"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "bytes": 31953,
+      "sha256": "48e5a30a8f8ffccaf56a853556f1c20024554a7c382757dfbb9508ca408391c6",
+      "baseline_sha256": "46075527ff7101096ce4c6c21f1803dfd58a93ac77dfe53a6f1df7f720448b67"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_semantic_value.py",
+      "bytes": 17981,
+      "sha256": "c603e13f64b84e5afed970e8ca565f3514f8c4aee9cf128da103424ffc31fa2c",
+      "baseline_sha256": "bad5f8950cf877398d5a07519efe356eacf5fb41deadd2a07bf013c6e956fa08"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_table_admission.py",
+      "bytes": 16468,
+      "sha256": "6613841374673a54a7dbb28ed4de17f5768e4798a7006c33256d1de9bb96ab3a",
+      "baseline_sha256": "5c2786d6aba95c1b1d0b85f242e422170e0dec8ed7a99852d9d780346ff03a39"
+    }
+  ],
+  "versions": {
+    "business_policy": "reading-business-policy/10",
+    "decision_inventory": "1.9.0",
+    "selector_explicit": "0.9.0",
+    "default_selector": "0.8 unchanged",
+    "mechanism": "existing business_algorithms hashes actual source bytes, now includes sections.py"
+  },
+  "tests": {
+    "main_old_code_red": {
+      "failed": 7,
+      "passed": 7,
+      "deselected": 19,
+      "stdout": "main-red.stdout.txt",
+      "junit": "main-red.xml"
+    },
+    "cache_old_closure_red": {
+      "failed": 1,
+      "passed": 3,
+      "deselected": 23,
+      "stdout": "cache-red.stdout.txt",
+      "junit": "cache-red.xml"
+    },
+    "context_old_code_red": {
+      "explicit_ancestor_and_background_table": {
+        "failed": 4,
+        "stdout": "context-worker/red.stdout.txt",
+        "junit": "context-worker/red.xml"
+      },
+      "native_structure": {
+        "failed": 2,
+        "passed": 1,
+        "stdout": "context-worker/red-native-structure.stdout.txt",
+        "junit": "context-worker/red-native-structure.xml"
+      }
+    },
+    "main_semantic_green": {
+      "passed": 33,
+      "stdout": "main-green-1.stdout.txt",
+      "junit": "main-green-1.xml"
+    },
+    "first_combined": {
+      "passed": 845,
+      "failed": 5,
+      "stdout": "combined.stdout.txt",
+      "junit": "combined.xml",
+      "causes": "2 anonymous-section regressions fixed preserving assertions; 3 compiler spec inputs moved to owned tmp fixtures preserving ValueError assertions"
+    },
+    "combined_green": {
+      "passed": 850,
+      "failed": 0,
+      "seconds": 33.74,
+      "stdout": "combined-final.stdout.txt",
+      "junit": "combined-final.xml",
+      "source_timing": "Before final equivalent bbox/collection typing changes; not a post-typing full-suite run"
+    },
+    "post_typing_context_green": {
+      "passed": 185,
+      "failed": 0,
+      "seconds": 3.26,
+      "stdout": "context-worker/types-fix-pytest.stdout.txt",
+      "junit": "context-worker/types-fix-pytest.xml"
+    },
+    "full_src_mypy": {
+      "status": "PASS",
+      "source_files": 366,
+      "stdout": "context-worker/types-fix-mypy.stdout.txt",
+      "prior_failure": "mypy.stdout.txt:12 errors in2 context-owner files, fixed with tuple bbox access and concrete annotations"
+    },
+    "ruff": {
+      "status": "PASS",
+      "all_11_changed_paths": "ruff.stdout.txt",
+      "post_typing_2_sources": "context-worker/types-fix-ruff.stdout.txt"
+    },
+    "git_diff_check": "PASS at freeze"
+  },
+  "public_cache": {
+    "status": "OPEN_FAILED",
+    "regression_file": "test_w08_public_cache.py",
+    "reproduce_powershell": "reproduce-public-cache.ps1",
+    "command_archive": "executed-commands.json",
+    "fixture": "Generated neutral PDF in owned isolated lake; no original company content or production edits",
+    "historical_scope": "Exact baseline sections.py only, remaining modules current; not a byte-exact full old release",
+    "baseline_sections_snapshot": "legacy-sections-908ec2c4.py.txt",
+    "proved_before_failure": [
+      "old-component producer public generation completes",
+      "second same-old producer run reuses generation with zero extra model tokens",
+      "current producer creates different public generation and actual business_algorithms dependency hash; second loopback response"
+    ],
+    "not_proved": [
+      "old normalized/structure cache rebuilt with native parents through public entry",
+      "new public two-target own-parent contexts",
+      "same-new-version cache restores those parents",
+      "old exact public bundle unchanged after successful new cache phase"
+    ],
+    "attempts": [
+      {
+        "stdout": "public-cache.stdout.txt",
+        "junit": "public-cache.xml",
+        "failure": "review-local collection missing hermetic_runtime fixture"
+      },
+      {
+        "stdout": "public-cache-2.stdout.txt",
+        "junit": "public-cache-2.xml",
+        "failure": "conftest name collision; exact-file import guard corrected"
+      },
+      {
+        "stdout": "public-cache-3.stdout.txt",
+        "junit": "public-cache-3.xml",
+        "failed": 1,
+        "seconds": 22.35,
+        "new_target_count": 0,
+        "assertion": "len(new_context)==2;actual0",
+        "fixture": "original two - New product revenue exceeds30% bullets; original spacing/text restored in final regression"
+      },
+      {
+        "stdout": "public-cache-4.stdout.txt",
+        "junit": "public-cache-4.xml",
+        "failed": 1,
+        "seconds": 26.16,
+        "new_target_count": 2,
+        "assertion": "own in joined and sibling not in joined; context only I. Management discussion",
+        "fixture": "experimental delivery prefix saved in public-cache-4-experimental-fixture.py.txt; not original GREEN"
+      }
+    ],
+    "frozen_reproducer_note": "Original bullets restored with a diagnostic print retained; not rerun after ROOT freeze. All assertions retained.",
+    "regression_sha256": "5d7ab519c29ecc19f10a4d7dedb4ceb26bff31d5f3079163f4abf031b87003a9",
+    "external_provider_calls": 0,
+    "successful_loopback_fixture_posts_attempts_3_and_4": 4
+  },
+  "real_source": {
+    "source_ref": {
+      "byte_size": 1608226,
+      "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "baseline_artifact": "context-worker/native-baseline.json",
+    "after_artifact": "context-worker/native-after-final.json",
+    "scope_before": "All p14 business material was body under s52 major operations; no Testing/Biology child scope.",
+    "scope_after": "Native s54 Testing and s55 Biology exist. Each 30% original has its own numbered revenue sentence and colon intro plus existing ancestors as required context; no sibling borrowing.",
+    "selection": {
+      "max_selected": 96,
+      "max_chars": 48000,
+      "candidate_count": 1459,
+      "selected_count": 96,
+      "selected_chars": 8433,
+      "status": "partial",
+      "coverage_complete": false,
+      "selection_diagnostics": [
+        {
+          "code": "budget_full",
+          "count": 206
+        }
+      ],
+      "context_deferred_count": 263
+    },
+    "target_selected": [
+      false,
+      false
+    ],
+    "target_bands": [
+      "description",
+      "meaningful_fact"
+    ],
+    "real_p13_table_admission": "Neither the p13 native header+first row block nor the typed first revenue row entered a candidate package in this bounded diagnostic. This task does not assert actual real-table route PASS.",
+    "read_only_hashes": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+    },
+    "scope_limit": "table_pages=[13,14], all coarse pages read, fine capture partial; source structural diagnostic and public planner only, not sealed generation replay or all-page table/semantic acceptance."
+  },
+  "open_findings": [
+    {
+      "id": "W08-PUBLIC-CACHE-PARENT",
+      "status": "OPEN",
+      "detail": "Public failure remains; normalized/structure-to-selection rebuilding and same-new-version parent restoration require root repair"
+    },
+    {
+      "id": "W08-QUANTITY-IDENTIFIER",
+      "status": "OPEN_UNFIXED_OBSERVATION",
+      "detail": "Project1 introduction and Customer2 account balance wrongly promoted as operating_quantity meaningful_fact/financial_exempt. Exact8-case commands/input/raw output in context-worker/readonly-review-probe.json; incomplete independent review"
+    },
+    {
+      "id": "W08-REVENUE-CLAUSE",
+      "status": "OPEN_UNFIXED_OBSERVATION",
+      "detail": "Same probe:services revenue increased to USD26.5million ineligible versus revenue was USD26.5million eligible; no followup under freeze"
+    },
+    {
+      "id": "W08-REAL-CONTENT",
+      "status": "PARTIAL",
+      "detail": "1459 candidates/96 selected,coveragefalse,both real30%targets unselected,one description band; actual p13 numeric table package missing. No budget/quota increase"
+    },
+    {
+      "id": "W08-INDEPENDENT-REVIEW",
+      "status": "NOT_DONE",
+      "detail": "ROOT stopped new review/content work for pause. Non-author diff reading and one8-case memory probe only; no formal independent large-node review"
+    }
+  ],
+  "cleanup": {
+    "status": "EXACT_OWNED_TARGETS_REMOVED",
+    "receipt": "cleanup-final.json",
+    "targets": [
+      {
+        "target": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-222921-af3d0f48",
+        "containment_checked": true,
+        "existed": true,
+        "entries_before": 6,
+        "removed": true,
+        "method": "PowerShell Remove-Item -LiteralPath -Recurse -Force"
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-223921-8c8782c8",
+        "containment_checked": true,
+        "existed": true,
+        "entries_before": 6,
+        "removed": true,
+        "method": "PowerShell Remove-Item -LiteralPath -Recurse -Force"
+      },
+      {
+        "target": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\mypy-cache",
+        "containment_checked": true,
+        "existed": true,
+        "entries_before": 1169,
+        "removed": true,
+        "method": "PowerShell Remove-Item -LiteralPath -Recurse -Force"
+      }
+    ],
+    "initial_test_logs_retained_removed_false": true,
+    "cw_pytest_basetemp_remaining_entries": 0,
+    "child_verbose_output_disposition": {
+      "error": "Follow-up diagnostic accidentally printed whole deferred pipeline; not used as content acceptance. Owner-authorized exact self-created stdout removal after saving digest, size and bounded summary.",
+      "removed_exact_path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\context-worker\\native-after-budget.stdout.txt",
+      "byte_size": 14152230,
+      "sha256": "ee0474dbb90f3d2b4e48ab4180eab23c0be22b92d73c21ddea87104a6fa4752c",
+      "disposition": "exact_self_created_verbose_stdout_removed_after_digest_and_bounded_summary",
+      "bounded_summary": [
+        {
+          "pipeline_without_public_budget": {
+            "analysis_status": "deferred",
+            "diagnostic_counts": {
+              "WORK_BUDGET_EXCEEDED": 1
+            },
+            "budget_diagnostics": [
+              {
+                "code": "WORK_BUDGET_EXCEEDED",
+                "detail": "enhancement deferred; unexamined material is unknown, not absent"
+              }
+            ]
+          }
+        },
+        {
+          "public_default_budget": {
+            "status": "partial",
+            "candidate_count": 1459,
+            "selected_count": 96,
+            "coverage_complete": false,
+            "selection_diagnostics": [
+              {
+                "code": "budget_full",
+                "count": 206
+              }
+            ],
+            "group_count": 50
+          }
+        },
+        {
+          "pipeline_with_public_document_budget": {
+            "analysis_status": "complete",
+            "keys": [
+              "schema_version",
+              "feature_version",
+              "analysis_status",
+              "work",
+              "source_ref",
+              "observation",
+              "route",
+              "profile",
+              "child_profiles",
+              "structure",
+              "packages",
+              "reading_plan",
+              "layout_hints",
+              "source_signals",
+              "table_bindings",
+              "non_selectable_unit_ids",
+              "plan",
+              "diagnostics",
+              "native_layout_frontend"
+            ],
+            "diagnostic_counts": {
+              "ROUTE_LOW_CONFIDENCE": 1,
+              "DEFERRED_PAGE": 247,
+              "NATIVE_SCAN_INCOMPLETE": 1,
+              "REPEATED_RUNNING_HEADER": 1,
+              "SECTION_OVERSIZED": 5,
+              "TABLE_BODY_NOT_READ": 337,
+              "TOC_ENTRIES_DETECTED": 1,
+              "NEEDS_UPSTREAM_GRANULARITY": 106,
+              "WORK_UNITS": 2
+            },
+            "budget_diagnostics": [
+              {
+                "code": "WORK_UNITS",
+                "detail": "from structure lane"
+              },
+              {
+                "code": "WORK_UNITS",
+                "detail": "730005"
+              }
+            ]
+          }
+        },
+        {
+          "config_db_unchanged_from_native_baseline": true,
+          "hashes": {
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+          }
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "interpreter": "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "flags": [
+      "-B"
+    ],
+    "PYTHONPATH": "worktree/src,plus worktree/tests for review-local integration helpers",
+    "module_file_guards": "before and after main/combined/cache pytest in raw stdout",
+    "network": "Only hermetic loopback fixture HTTP in cache attempts; no external provider/download/paid calls",
+    "production_changes": "No raw/config/catalog/source-index writes; child config+DB start/end hashes retained"
+  },
+  "not_examined_or_not_accepted": [
+    "Full sealed generation replay",
+    "All-page real-table route and all contents",
+    "Cross-format public production E2E beyond focused existing regression suite",
+    "Complete old release cache migration",
+    "Formal independent quality review",
+    "Publish/install/default selector switch"
+  ],
+  "actions_taken": {
+    "commit": false,
+    "checkout": false,
+    "merge": false,
+    "push": false,
+    "install": false,
+    "new_business_loop_after_freeze": false
+  },
+  "root_next_step": "Preserve candidate in isolated branch if desired; pause. On explicit resume, root-repair OPEN causes and rerun exact failed regression, then independent review before integration/release."
+}

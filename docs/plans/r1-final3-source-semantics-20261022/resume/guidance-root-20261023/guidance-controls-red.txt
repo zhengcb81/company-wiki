@@ -1,0 +1,48 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-controls-red-temp", "requested_basetemp_len": 159, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230324-6e0c150e", "effective_basetemp_len": 99}
+...............................FF.FF..FF                                 [100%]
+================================== FAILURES ===================================
+_ test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer[Our supplier expects subscription revenue of USD 525 million in fiscal 2029.-This revenue guidance assumes customer orders are accepted before year end.] _
+tests\unit\document_understanding_selection\test_reading_guidance_source_controls.py:72: in test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer
+    assert all(not unrelated.intersection(task.member_ids) for task in view.plan.tasks
+E   assert False
+E    +  where False = all(<generator object test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer.<locals>.<genexpr> at 0x000001D51A47DE40>)
+_ test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer[\u672c\u516c\u53f8\u7684\u5ba2\u6237\u9884\u8ba12029\u5e74\u7269\u6d41\u670d\u52a1\u6536\u5165\u4e3a18\u4ebf\u5143\u3002-\u4e0a\u8ff0\u6536\u5165\u5c55\u671b\u4ee5\u65b0\u5ba2\u6237\u6309\u671f\u9a8c\u6536\u4e3a\u524d\u63d0\u3002] _
+tests\unit\document_understanding_selection\test_reading_guidance_source_controls.py:72: in test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer
+    assert all(not unrelated.intersection(task.member_ids) for task in view.plan.tasks
+E   assert False
+E    +  where False = all(<generator object test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer.<locals>.<genexpr> at 0x000001D51A541E40>)
+_ test_source_forecast_reason_cannot_be_borrowed_by_an_actual_value_or_identifier[Our revenue was USD 182 million in fiscal 2028, below the revenue guidance of USD 190 million.] _
+tests\unit\document_understanding_selection\test_reading_guidance_source_controls.py:83: in test_source_forecast_reason_cannot_be_borrowed_by_an_actual_value_or_identifier
+    assert not grammar.revenue_guidance(text)
+E   AssertionError: assert not True
+E    +  where True = <function revenue_guidance at 0x000001D517EF4670>('Our revenue was USD 182 million in fiscal 2028, below the revenue guidance of USD 190 million.')
+E    +    where <function revenue_guidance at 0x000001D517EF4670> = grammar.revenue_guidance
+_ test_source_forecast_reason_cannot_be_borrowed_by_an_actual_value_or_identifier[We expect customer retention to improve and our revenue was USD 182 million in fiscal 2028.] _
+tests\unit\document_understanding_selection\test_reading_guidance_source_controls.py:83: in test_source_forecast_reason_cannot_be_borrowed_by_an_actual_value_or_identifier
+    assert not grammar.revenue_guidance(text)
+E   AssertionError: assert not True
+E    +  where True = <function revenue_guidance at 0x000001D517EF4670>('We expect customer retention to improve and our revenue was USD 182 million in fiscal 2028.')
+E    +    where <function revenue_guidance at 0x000001D517EF4670> = grammar.revenue_guidance
+_ test_wrapped_guidance_native_carrier_uses_its_complete_source_body_for_external_premise _
+tests\unit\document_understanding_selection\test_reading_guidance_source_controls.py:94: in test_wrapped_guidance_native_carrier_uses_its_complete_source_body_for_external_premise
+    _assert_premise_closed(selected, fragment, source.units[3])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:94: in _assert_premise_closed
+    assert support, "A source-authored future revenue outlook is useful narrative, not a historical total."
+E   AssertionError: A source-authored future revenue outlook is useful narrative, not a historical total.
+E   assert []
+_ test_actual_guidance_module_bytes_invalidate_the_real_complete_cache_and_restore _
+tests\unit\document_understanding_selection\test_reading_guidance_source_controls.py:103: in test_actual_guidance_module_bytes_invalidate_the_real_complete_cache_and_restore
+    assert selected.reading_dependencies["status"] == "complete"
+E   AssertionError: assert 'partial' == 'complete'
+E     
+E     - complete
+E     + partial
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer[Our supplier expects subscription revenue of USD 525 million in fiscal 2029.-This revenue guidance assumes customer orders are accepted before year end.]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_reference_direction_scope_and_other_actor_cannot_borrow_the_local_issuer[\u672c\u516c\u53f8\u7684\u5ba2\u6237\u9884\u8ba12029\u5e74\u7269\u6d41\u670d\u52a1\u6536\u5165\u4e3a18\u4ebf\u5143\u3002-\u4e0a\u8ff0\u6536\u5165\u5c55\u671b\u4ee5\u65b0\u5ba2\u6237\u6309\u671f\u9a8c\u6536\u4e3a\u524d\u63d0\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_source_forecast_reason_cannot_be_borrowed_by_an_actual_value_or_identifier[Our revenue was USD 182 million in fiscal 2028, below the revenue guidance of USD 190 million.]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_source_forecast_reason_cannot_be_borrowed_by_an_actual_value_or_identifier[We expect customer retention to improve and our revenue was USD 182 million in fiscal 2028.]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_wrapped_guidance_native_carrier_uses_its_complete_source_body_for_external_premise
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_actual_guidance_module_bytes_invalidate_the_real_complete_cache_and_restore
+6 failed, 34 passed in 1.62s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230324-6e0c150e", "existed": true, "removed": true}

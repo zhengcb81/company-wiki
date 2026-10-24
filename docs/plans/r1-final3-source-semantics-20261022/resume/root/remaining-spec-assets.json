@@ -1,0 +1,247 @@
+{
+  "schema_version": "w08-test-runtime-input-restoration/2",
+  "full_prepush": {
+    "passed": 7446,
+    "failed": 6,
+    "skipped": 24,
+    "pytest_seconds": 357.65
+  },
+  "five_failures": "missing tracked runtime test assets in sparse checkout",
+  "one_real_regression": "metadata budget fanout enumerated body twice before complete cross-product reservation; independent diagnosis pending, no assertion removed",
+  "restored_files": 46,
+  "bytes": 313162,
+  "rows": [
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/README.md",
+      "git_blob": "120afb07d633dd9a67ced21e0cc2b45f4ce6b3d7",
+      "bytes": 6523
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/acquisition_requests.json",
+      "git_blob": "b466cf66da51da1d5342f01bfd9035a0fe870f7b",
+      "bytes": 5649
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/c_verification/real_excerpt_checks.json",
+      "git_blob": "8ea5de7d84bb9dee794ea105242a4f7e5aeecae2",
+      "bytes": 21830
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_cn_convertible_capacity_funding.json",
+      "git_blob": "4d3328f76b8f4fc46b82db90c891b7e89d8ac92d",
+      "bytes": 10498
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_cn_equity_capacity_phasing.json",
+      "git_blob": "744d7bd26db29f03ab76b3ad4128e2c510c48b62",
+      "bytes": 12057
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_cn_ir_premise_denial.json",
+      "git_blob": "f00a6ed3a7ca43a18f860c80d78e13e6e3dc63b0",
+      "bytes": 16194
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_hk_annual_store_network.json",
+      "git_blob": "688fda40565c3751b66aa1cc650cffc0c3f0dbfd",
+      "bytes": 12555
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_us_call_roles.json",
+      "git_blob": "c91ca9c99d3f92061e75678b71c98f80afdbca07",
+      "bytes": 8350
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_us_release_subscription.json",
+      "git_blob": "bc579786dd76c205dac9fa0719cc1f921783fa0b",
+      "bytes": 8975
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_capacity_project.json",
+      "git_blob": "fae8034ed6d1761935dc67c8d7b03b62fcab6765",
+      "bytes": 6999
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_exit_low_information.json",
+      "git_blob": "b81d30302fea9ba0c06cbc2f192134a60416b2b8",
+      "bytes": 2484
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_exit_no_answer.json",
+      "git_blob": "7969bcc6ef6f5da67fc788085f8f0453a99e8d94",
+      "bytes": 3336
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_exit_no_business.json",
+      "git_blob": "dbd98953aace504510cd0fbcbfb8f29909bcfa96",
+      "bytes": 1752
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_financial_numbers.json",
+      "git_blob": "baf87c9f52a324125991b0eeec0567a136f8d484",
+      "bytes": 2775
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_negation_scope.json",
+      "git_blob": "4c5053a62b6965a2c8aaa1fe1f1ed465625c4b55",
+      "bytes": 5570
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_qualitative_cooperation.json",
+      "git_blob": "533da9307bd30953b5fdfe299ce232b2354a58d0",
+      "bytes": 2668
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_qualitative_funding.json",
+      "git_blob": "37891f8faf40119b5736f58e842fe4691738c73c",
+      "bytes": 2741
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_quantity_slots.json",
+      "git_blob": "8e80bdc2d0376ca4e8da31342e2c79d3d4f9cb55",
+      "bytes": 6546
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_stage_ladder.json",
+      "git_blob": "a8402df2330335e29160e113e9943ad930742e87",
+      "bytes": 7289
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/coverage_matrix.md",
+      "git_blob": "fff84eaa36c77f31febd2c793d242adc4998ee79",
+      "bytes": 7456
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/index.json",
+      "git_blob": "496a84eb0afb8c5df29290bd018f282b6da392a0",
+      "bytes": 7542
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_capacity_projects.json",
+      "git_blob": "1785a030919163ac6ef604ec5af1d659539a9bdb",
+      "bytes": 7455
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_core_business.json",
+      "git_blob": "178551424d9a911235fce13c54a2204fd44e7ed9",
+      "bytes": 6028
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_customer_orders.json",
+      "git_blob": "0b152089719853562992fbf73c3d0018aa0880a4",
+      "bytes": 6650
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_industry_competition.json",
+      "git_blob": "fd0443e39a4614a513a6a58f1ef4e4afcce3ff0d",
+      "bytes": 4915
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_new_business.json",
+      "git_blob": "8e283b506af2a639afa6119a4124452ff53e6cbb",
+      "bytes": 5214
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_operating_metrics.json",
+      "git_blob": "0602198679042c4cae64ec305f47681f13eafa10",
+      "bytes": 6544
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_overseas.json",
+      "git_blob": "be39dbce4d02911a271f5a9816780354eae88513",
+      "bytes": 5331
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_risk_denial.json",
+      "git_blob": "52d51413f2ed0ebb5c51504d74d7674771336ee6",
+      "bytes": 6559
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_biopharma_cdmo.json",
+      "git_blob": "c9fb21f1b3349c88290d9b9240e999d8b4020cbb",
+      "bytes": 6803
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_manufacturing.json",
+      "git_blob": "5c184b21089183900a2b336f6e6090db81136b00",
+      "bytes": 5657
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_store_network.json",
+      "git_blob": "8ec50b5e7504781025d6e9a4fd068cfb09093489",
+      "bytes": 6001
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_subscription_consumption.json",
+      "git_blob": "5ce4b418623860d8525c095d27f919b8dc8b9ff3",
+      "bytes": 6365
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/semantic_capacity_project.json",
+      "git_blob": "471524ba127539127863f2701e87234b2f3fe324",
+      "bytes": 10640
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/semantic_stage_progression.json",
+      "git_blob": "ccbed2533a0254b4a0682677cd226a676d716ffe",
+      "bytes": 9788
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/helpers.py",
+      "git_blob": "d03910200c85f8f201f954a9d4161be3cae11bf8",
+      "bytes": 6778
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_cases_structure.py",
+      "git_blob": "5f637ad5174ed1a57c0910fd26c7133ac36beada",
+      "bytes": 7993
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_cross_references.py",
+      "git_blob": "c0c7ed0de233231c8bdfcaca864e97fe2c30a41f",
+      "bytes": 6292
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_legal_exits.py",
+      "git_blob": "99056b69b831a73c423dbcef318039927c8382b2",
+      "bytes": 2881
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_mechanism_composition.py",
+      "git_blob": "249c48e18c2d290955de4218ba3a2789b2069dde",
+      "bytes": 3697
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_quote_budget_and_portability.py",
+      "git_blob": "2f437bba711144464093b060ca0d7e40f90c077a",
+      "bytes": 3477
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_reception_invariants.py",
+      "git_blob": "0560ef361cd0a6e299069a1476c08c112106395c",
+      "bytes": 4613
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_records_schema.py",
+      "git_blob": "a049722a3cc10e4ef1c8949bec73aee5ef3af0c8",
+      "bytes": 6819
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_required_context.py",
+      "git_blob": "d8a58176b9fc718f8c4300349aa5f2766e79b138",
+      "bytes": 6373
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests/test_semantic_counterexamples.py",
+      "git_blob": "94271127fe02903e71bbf0edfd325c852cb09f9f",
+      "bytes": 3272
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tools/verify_real_quotes.py",
+      "git_blob": "cf2592bed86a146e6f8f0a75929b5042725fa2c6",
+      "bytes": 7228
+    }
+  ],
+  "originals_added": 0,
+  "gate_bypassed": false
+}

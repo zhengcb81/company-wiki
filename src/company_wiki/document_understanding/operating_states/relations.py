@@ -114,7 +114,7 @@ _ACTIVITY_BY_CONSTRUCTION = {
     "double_negation": "production",
 }
 _NOT_YET = re.compile(
-    r"尚未|还未|暂未|仍未|not\s+yet|remains?\s+pending|remain\s+pending|is\s+pending",
+    r"尚未|还未|暂未|仍未|仍需|尚需|还需|有待|尚待|not\s+yet|remains?\s+pending|remain\s+pending|is\s+pending",
     re.IGNORECASE,
 )
 _NEGATIVE_QUAL = re.compile(
@@ -421,7 +421,13 @@ def _classify_np(view: MatchingView, span: tuple[int, int],
     text = view.text[span[0]:span[1]].strip()
     if not text:
         return "none", "unknown"
-    if p.PRODUCT_SUFFIX.search(text):
+    product = p.PRODUCT_SUFFIX.search(text)
+    if product:
+        prefix = text[:product.start()]
+        for marker, attribution in ((p.THIRD_PARTY, "other"), (p.RELATED_PARTY, "quoted_related_party")):
+            party = marker.search(prefix)
+            if party and p.POSSESSIVE_LINK.match(prefix[party.end():]):
+                return "object", attribution
         return "object", "unknown"
     if p.RELATED_PARTY.search(text):
         return "actor", "quoted_related_party"
@@ -466,6 +472,8 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
         role, actor_class = _classify_np(view, span, scan.name_classes)
         if role == "object":
             obj_spans.append(span)
+            if attribution == "unknown" and actor_class != "unknown":
+                attribution = actor_class
         elif role == "actor":
             actor_spans.append(span)
             if attribution == "unknown" and actor_class != "unknown":
@@ -482,9 +490,19 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
                     attribution = actor_class
             elif role == "object" and not obj_spans:
                 obj_spans.append(span)
+    # An elided continuation may inherit the already bound object, separately
+    # from its issuer actor. A new explicit subject blocks that inheritance.
+    if not spans and not obj_spans and scan.last_topic is not None:
+        role, _actor = _classify_np(view, scan.last_topic, scan.name_classes)
+        if role == "object":
+            obj_spans.append(scan.last_topic)
     event.actor_spans = actor_spans
     event.obj_spans = list(dict.fromkeys([*obj_spans, *event.obj_spans]))
     event.attribution = attribution
+    if event.obj_spans:
+        scan.last_topic = event.obj_spans[0]
+    elif spans:
+        scan.last_topic = None
     if actor_spans:
         scan.last_actors = actor_spans
 
@@ -710,6 +728,16 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             for span in event.obj_spans
         ):
             continue  # risk/issue language is not an operating assertion
+        # A predicate embedded in a nominalised/reported proposition is not
+        # an asserted operating state. Keep exact source refs and honest unknown
+        # fields, rather than inverting its internal negation into event truth.
+        tail = view.text[pred_end:clause[1]]
+        budget.charge(len(tail))
+        reported = p.REPORTED_PROPOSITION_TAIL.search(tail)
+        if reported is not None:
+            event.polarity = event.stage = "unknown"
+            event.modality = "uncertain"
+            event.qual_spans.append((pred_end + reported.start(), pred_end + reported.end()))
         events.append(event)
     return events
 

@@ -1,0 +1,17 @@
+[
+  {
+    "absent_after_cleanup": true,
+    "existed_before_cleanup": true,
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-mg-final-20261024"
+  },
+  {
+    "absent_after_cleanup": true,
+    "existed_before_cleanup": true,
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-234345-0ca323eb"
+  },
+  {
+    "absent_after_cleanup": true,
+    "existed_before_cleanup": false,
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-234345-504a708a"
+  }
+]

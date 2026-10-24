@@ -1,0 +1,28 @@
+READING_MODULE=C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\src\company_wiki\source_catalog\narrative_reading.py
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 135 items
+
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py . [  0%]
+.............................................                            [ 34%]
+tests\unit\document_understanding_selection\test_reading_table_admission.py . [ 34%]
+.............................F..                                         [ 58%]
+tests\unit\document_understanding_selection\test_reading_native_continuity.py . [ 59%]
+.............................................                            [ 92%]
+tests\unit\document_understanding_selection\test_reading_native_carriers.py . [ 93%]
+.........                                                                [100%]
+
+================================== FAILURES ===================================
+_ test_background_table_with_unproven_native_context_is_not_a_complete_numeric_fact[missing-header] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:365: in test_background_table_with_unproven_native_context_is_not_a_complete_numeric_fact
+    assert result[4] and not result[3]
+E   AssertionError: assert ([{'package_id': 'actual-table', 'reason': 'INCOMPLETE_OR_NONSELECTABLE_CONTEXT', 'known_unit_ids': ['urn:company-wiki:...421ddc92', 'urn:company-wiki:narrative-unit:sha256:9a5b3e9bc6dcb42e5e8a6c7f1b5fb457d216e30b7b970e9429896cdef1f585c1']}] and not True)
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\review\context-worker\green-related.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_background_table_with_unproven_native_context_is_not_a_complete_numeric_fact[missing-header]
+======================== 1 failed, 134 passed in 2.05s ========================

@@ -1,0 +1,96 @@
+{
+  "schema_version": "w08-budget-regression-final-independent-probe/1",
+  "status": "PASS",
+  "current_sha256": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+  "reconstructed_old_module_sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+  "old_function_in_memory_only": true,
+  "low_budgets": [
+    {
+      "limit": 0,
+      "pass": true,
+      "body_visits": 0,
+      "context_visits": 0,
+      "used": 0,
+      "exhausted": true,
+      "source_units_unchanged": true
+    },
+    {
+      "limit": 1,
+      "pass": true,
+      "body_visits": 0,
+      "context_visits": 0,
+      "used": 0,
+      "exhausted": true,
+      "source_units_unchanged": true
+    },
+    {
+      "limit": 1000,
+      "pass": true,
+      "body_visits": 32,
+      "context_visits": 64,
+      "used": 708,
+      "exhausted": true,
+      "source_units_unchanged": true
+    }
+  ],
+  "checks": {
+    "original_budget_guards_all_pass": true,
+    "1000_exact_body32_context64": true,
+    "default_output_equals_exact_old": true,
+    "sufficient_explicit_output_equals_exact_old": true,
+    "sufficient_total_charge_unchanged": true,
+    "default_equals_explicit_sufficient_output": true,
+    "sufficient_positive_scope": true,
+    "actual_product_unchanged": true
+  },
+  "default_new": {
+    "candidate_count": 96,
+    "eligible_count": 32,
+    "complete": true,
+    "withheld_count": 0,
+    "source_units_unchanged": true,
+    "body_visits": 128,
+    "context_visits": 64,
+    "used": null,
+    "exhausted": null
+  },
+  "default_old": {
+    "candidate_count": 96,
+    "eligible_count": 32,
+    "complete": true,
+    "withheld_count": 0,
+    "source_units_unchanged": true,
+    "body_visits": 128,
+    "context_visits": 64,
+    "used": null,
+    "exhausted": null
+  },
+  "explicit_new": {
+    "candidate_count": 96,
+    "eligible_count": 32,
+    "complete": true,
+    "withheld_count": 0,
+    "source_units_unchanged": true,
+    "body_visits": 128,
+    "context_visits": 64,
+    "used": 43882,
+    "exhausted": false
+  },
+  "explicit_old": {
+    "candidate_count": 96,
+    "eligible_count": 32,
+    "complete": true,
+    "withheld_count": 0,
+    "source_units_unchanged": true,
+    "body_visits": 128,
+    "context_visits": 64,
+    "used": 43882,
+    "exhausted": false
+  },
+  "product_edits": 0,
+  "test_edits": 0,
+  "external_harness_edits": 0,
+  "original_reads": 0,
+  "external_calls": 0,
+  "git_operations": 0
+}

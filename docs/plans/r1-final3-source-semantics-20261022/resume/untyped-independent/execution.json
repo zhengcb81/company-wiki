@@ -1,0 +1,110 @@
+{
+  "schema": "untyped-independent-red-execution/1",
+  "utc": "2026-10-23T21:03:02.536756+00:00",
+  "exit_code": 1,
+  "command": [
+    "C:/Users/郑曾波/Projects/company-wiki/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\test_untyped_red.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\pytest-temp",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\red.xml"
+  ],
+  "owner": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+  "before": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+      "bytes": 63203
+    },
+    "src/company_wiki/document_normalization/table_shapes.py": {
+      "sha256": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+      "bytes": 1528
+    },
+    "src/company_wiki/document_understanding/structure/table_purpose.py": {
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    "src/company_wiki/document_understanding/structure/tables.py": {
+      "sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "bytes": 11047
+    },
+    "src/company_wiki/document_understanding/native_table_bridge.py": {
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+      "bytes": 11888
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "sha256": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "bytes": 26322
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "bytes": 25839
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    }
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+      "bytes": 63203
+    },
+    "src/company_wiki/document_normalization/table_shapes.py": {
+      "sha256": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+      "bytes": 1528
+    },
+    "src/company_wiki/document_understanding/structure/table_purpose.py": {
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    "src/company_wiki/document_understanding/structure/tables.py": {
+      "sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "bytes": 11047
+    },
+    "src/company_wiki/document_understanding/native_table_bridge.py": {
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+      "bytes": 11888
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "sha256": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "bytes": 26322
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "bytes": 25839
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    }
+  },
+  "source_bytes_stable": true,
+  "cleanup": {
+    "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\pytest-temp",
+    "existed_after": false,
+    "initial_absent": true,
+    "absent_after_cleanup": true,
+    "actual": {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210259-226f866d",
+      "existed": true,
+      "removed": true
+    },
+    "actual_absent_verified": true
+  },
+  "source_reads": 0,
+  "parser_calls": 0,
+  "network_calls": 0,
+  "llm_calls": 0,
+  "production_edits": 0,
+  "limitations": "This is a source-shaped synthetic public-selector RED, not an annual original re-read or full-content acceptance."
+}

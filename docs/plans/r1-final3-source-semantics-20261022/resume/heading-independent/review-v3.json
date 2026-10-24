@@ -1,0 +1,74 @@
+{
+  "schema_version": "w08-heading-independent-review/3",
+  "status": "PASS_BOUNDED_HEADING_NODE",
+  "reviewer": "w08_heading_row_review",
+  "checked_at": "2026-10-23T20:25:44.416970+00:00",
+  "scope": "Single shared literal value-cell guard; observation adapter, font heading hints and structure heading owner; actual table-region negative-evidence transfer; existing cache dependency closure.",
+  "whole_content_pass": false,
+  "summary_acceptance": false,
+  "execution": "execution-v3.json",
+  "cleanup": "cleanup-final.json",
+  "actual_context": "real-context-v3.json",
+  "results": {
+    "independent_core_plus_reverse": {
+      "passed": 55,
+      "failed": 0
+    },
+    "original_five_formats": {
+      "passed": 5,
+      "failed": 0
+    },
+    "focused_repository_regressions": {
+      "passed": 92,
+      "failed": 0
+    },
+    "total_passed": 152
+  },
+  "closed_findings": [
+    {
+      "id": "H01",
+      "resolution": "Actual observation_adapter.py source bytes now participate in business_algorithms; all six tested owning modules change and restore the existing inventory as expected."
+    },
+    {
+      "id": "H02",
+      "resolution": "The same literal numeric-cell owner recognizes currency glyphs, source numeric separators and footnote suffixes; all five unchanged numeric-format cases pass."
+    },
+    {
+      "id": "H03",
+      "resolution": "Removed unsupported arbitrary three-letter prefix stripping, without a currency-word allowlist; the four unchanged AGE/NEW/DAY/TOP reverse controls pass."
+    }
+  ],
+  "architecture_checks": [
+    "One shared imported function object in all three heading inference owners.",
+    "Only actual layout in_table_region is carried as optional strict-True evidence; no table ID, header or row is invented.",
+    "Actual native/HTML and legacy explicit headings are retained; layout/numbering inference cannot override observed table-region evidence.",
+    "Text, original locator and caller input are unchanged through the real layout overlay.",
+    "No company name, source page or financial row label is used as a repair rule.",
+    "Existing decision inventory, not a second cache or state store, binds all newly affected owners."
+  ],
+  "source_sha256": {
+    "src/company_wiki/document_normalization/table_shapes.py": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+    "src/company_wiki/document_understanding/observation_adapter.py": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+    "src/company_wiki/document_understanding/layout_hints/headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+    "src/company_wiki/document_understanding/structure/layout.py": "db6df3eea9fa6af1b20398e7a7339a52b8dc5dfdb626871331af26af58234c74",
+    "src/company_wiki/document_understanding/structure/contract.py": "ca693bed1cba4423d8c9b3a2dc0d204b48ab467d395eef91890f501407754a3a",
+    "src/company_wiki/document_understanding/layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+    "src/company_wiki/document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+    "src/company_wiki/document_understanding/structure/sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+    "tests/unit/document_understanding_root/test_inferred_heading_data_rows.py": "6821148c85ad93b458f0f3e99ae8c8beb3e40d7b84ed1457dfda2f47ad0acb89",
+    "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/test_heading_word_prefix_reverse.py": "167eb610e4ed35ebd83363ea3e998cf43cc9e8eb96e439f6a67b9c7b0a033396",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": "a7e28f6c0157750cb2eb389c70239d5f01d9fff40b278583a8862cb6939cc976",
+    "tests/integration/test_reading_parent_cache_migration.py": "b4c2c1b1cb91d084cdb33ced814e14257a4e80b90743ce1954ecd78950d6dae8",
+    "docs/plans/r1-final3-source-semantics-20261022/resume/heading-independent/test_heading_independent.py": "b7e1319e0d3725f256e3795fdf4cd62e9caa17ccd392374ea0520b1b4bf0f329"
+  },
+  "bound_file_count": 13,
+  "source_bytes_stable_during_all_runs": true,
+  "actual_final_source_context_verified": true,
+  "actual_14_module_bytes_match_final_source": true,
+  "prior_assertions": "No change to original semantic value and public cache migration assertions versus saved ROOT181200bc checkpoint; all earlier failures retained.",
+  "known_boundary": "Other annual omissions, table units/headers, business ancestry, actual paid summary, cache/recovery and full RF consumer acceptance remain ROOT work. This PASS cannot close them.",
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "production_or_repository_tests_modified_by_reviewer": false
+}

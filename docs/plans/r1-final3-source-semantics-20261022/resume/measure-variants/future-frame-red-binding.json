@@ -1,0 +1,8 @@
+{
+  "known_written_policy_sha256": "9ae75814900330f78e206425ab902d2a9b4f9bbf57d9a23d0c82b9004645beee",
+  "observed_after_red_policy_sha256": "9ae75814900330f78e206425ab902d2a9b4f9bbf57d9a23d0c82b9004645beee",
+  "test_sha256": "73501386cadd03a9de4169bba7a3e7f79ea49eddd02aea389a3838842a30d755",
+  "first_extra_red": "3 FAIL / 66 PASS; future-frame-red.txt",
+  "expanded_extra_red": "5 FAIL / 66 PASS; future-frame-red-v2.txt",
+  "reason": "bare future time frame before comma lost when checking only metric-local comma part"
+}

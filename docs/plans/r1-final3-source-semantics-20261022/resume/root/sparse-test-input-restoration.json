@@ -1,0 +1,82 @@
+{
+  "schema_version": "w08-sparse-test-input-restoration/1",
+  "reason": "Normal prepush full suite:24 failures due missing tracked test assets;7378P/24skip and146smokeP. No gate bypass.",
+  "restored_files": 9,
+  "restored_bytes": 242299,
+  "tracked_assets": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "git_blob": "eb5ccf3a83a736667a6ece61a5aa6224aab2e3dd",
+      "bytes": 3955,
+      "present_before": false,
+      "working_sha256": "f2fec1e5e2815f649812e57302a027e690afe36c8c181a7f031cba9245ac3f80",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-form-2026-10-15/fixtures/adapter-identity-observation.json",
+      "git_blob": "1f01b783100a36044f7e64d478b54bf327050cb9",
+      "bytes": 2157,
+      "present_before": false,
+      "working_sha256": "2c0e7e81acd5635918a87fa4fd7244c8a24cfb4f3b084dffce81c54faefb747e",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-form-2026-10-15/fixtures/manifest.json",
+      "git_blob": "95215c24a13956a1c2b304c8377c85054eda5741",
+      "bytes": 951,
+      "present_before": false,
+      "working_sha256": "2c51ee3bf1725e0d106f70e8fc8be13dc79fd3a116c111a7db2779c4149efc3e",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-form-2026-10-15/fixtures/us-10q-observation.json",
+      "git_blob": "2eae1e09a7fa78b76bf876ff6a791e0a2c4b0f86",
+      "bytes": 6725,
+      "present_before": false,
+      "working_sha256": "89568476732326dd4c7dd2ed146800547f8c3ea480ab4c50bf11dd95a8e50cbf",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-state-2026-10-15/fixtures/cn-ir-observation.json",
+      "git_blob": "bca6d05beea96cde57138158862f13596b085a4c",
+      "bytes": 153356,
+      "present_before": false,
+      "working_sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-state-2026-10-15/fixtures/manifest.json",
+      "git_blob": "459fb7f8e1bcdfb915c4ec48bbbe51971fb5bd32",
+      "bytes": 428,
+      "present_before": false,
+      "working_sha256": "6ed4a3e995802053aca4c6f28f47e57a050ff53e24bfaffec47f5fff92eed83c",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-table-2026-10-15/fixtures/hk-table-observation.json.gz",
+      "git_blob": "ec1c89583df2823d07385eef96d2510478d389f3",
+      "bytes": 13157,
+      "present_before": false,
+      "working_sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-table-2026-10-15/fixtures/manifest.json",
+      "git_blob": "10c3602e5c319fa1da5713ba58b57c5397656319",
+      "bytes": 489,
+      "present_before": false,
+      "working_sha256": "37bb3ef397cf9063dbb3b3056cd2973631d4b753207dd9dc5e86aafc33776195",
+      "git_clean": true
+    },
+    {
+      "path": "docs/plans/du4-table-2026-10-15/results/real-packet-bindings-report.json",
+      "git_blob": "d83e1d5708dd1e2b332c19257b8a923f0fc34b2b",
+      "bytes": 61081,
+      "present_before": false,
+      "working_sha256": "d60d5ec16ca9ccebb726ca77e4d709f965487d5890587c72920f246fd6834898",
+      "git_clean": true
+    }
+  ],
+  "new_originals": 0,
+  "external_worktrees_changed": false
+}

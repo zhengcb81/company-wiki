@@ -1,0 +1,37 @@
+{
+  "at_utc": "2026-10-23T22:59:56.071498+00:00",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 48973,
+      "sha256": "24eca71e12270f19f742cf09faae481e9969a32469d1c493098aca18c3edf8dc"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "bytes": 21580,
+      "sha256": "7aba0bc8bbba53b50e2a039ea9b3f922f72a5e0ffb5fa76d77f2a8a74298dc23"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 71832,
+      "sha256": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "bytes": 25927,
+      "sha256": "b03166f0a577b6c2297b632e2b5faceba7b8d11715cf3b27fc19603b9876a05a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "bytes": 11327,
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+      "bytes": 11035,
+      "sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+    }
+  ],
+  "guidance_baseline": "7FAIL13PASS, exact old20test preserved",
+  "merge_head": "ab95027b, never recommit or reset"
+}

@@ -1,0 +1,179 @@
+{
+  "description": "Independent scope counterexamples; no company-specific answers.",
+  "cases": [
+    {
+      "id": "v2_en_actual_quantity",
+      "text": "We have 577 customers.",
+      "expected_measure_kinds": [
+        "quantity"
+      ],
+      "expected_reason": "operating_quantity"
+    },
+    {
+      "id": "v2_en_actual_and_plan",
+      "text": "We have 577 customers, and we plan to add an export team.",
+      "expected_measure_kinds": [
+        "quantity"
+      ],
+      "expected_reason": "operating_quantity"
+    },
+    {
+      "id": "v2_zh_actual_and_plan",
+      "text": "本期拥有577家客户，计划下一年开拓海外市场。",
+      "expected_measure_kinds": [
+        "quantity"
+      ],
+      "expected_reason": "operating_quantity"
+    },
+    {
+      "id": "v2_en_thousands",
+      "text": "Our customer count reached 1,577 customers.",
+      "expected_measure_kinds": [
+        "quantity"
+      ],
+      "expected_reason": "operating_quantity"
+    },
+    {
+      "id": "v2_zh_thousands",
+      "text": "客户数量达到1,577家。",
+      "expected_measure_kinds": [
+        "quantity"
+      ],
+      "expected_reason": "operating_quantity"
+    },
+    {
+      "id": "v2_en_direction_current_plan",
+      "text": "Our user count steadily declined, but we plan to enter a new market.",
+      "expected_measure_kinds": [
+        "direction"
+      ],
+      "expected_reason": "operating_metric_change"
+    },
+    {
+      "id": "v2_en_rev_current_plan",
+      "text": "Our platform revenue reached USD 4.6 million, and we plan to add capacity.",
+      "expected_measure_kinds": [
+        "revenue"
+      ],
+      "expected_reason": "business_revenue_measure"
+    },
+    {
+      "id": "v2_zh_rev_current_plan",
+      "text": "软件业务收入达到4.6亿元，计划加强客户服务。",
+      "expected_measure_kinds": [
+        "revenue"
+      ],
+      "expected_reason": "business_revenue_measure"
+    },
+    {
+      "id": "v2_en_component_positive",
+      "text": "Our service revenue grew due to higher sales of storage software.",
+      "expected_measure_kinds": [
+        "direction"
+      ],
+      "expected_reason": "operating_causal_driver"
+    },
+    {
+      "id": "v2_en_if_outer_driver",
+      "text": "If our service revenue grew due to higher customer counts, profit would improve.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_assuming_outer_driver",
+      "text": "Assuming our service revenue grew due to higher customer counts, profit would improve.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_zh_if_outer_driver",
+      "text": "如果平台服务收入增长主要由于用户数量增加，公司将受益。",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_zh_assume_outer_driver",
+      "text": "假设平台服务收入增长主要由于用户数量增加，公司将受益。",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_negated_outer_driver",
+      "text": "Our service revenue did not increase due to higher customer counts.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_zh_negated_outer_driver",
+      "text": "平台服务收入并未增长主要由于用户数量增加。",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_if_outer_component",
+      "text": "If our service revenue grew due to higher sales of storage software, margins would improve.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_qual_financial_component",
+      "text": "Our service revenue grew due to higher sales of the financial assets.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_own_financial_component",
+      "text": "Our service revenue grew due to higher sales of our securities.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_future_stock",
+      "text": "We will have 577 customers next year.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_expect_stock",
+      "text": "We expect to have 577 customers next year.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_expect_comma_stock",
+      "text": "We expect further expansion, we have 577 customers next year.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_conditional_consequence",
+      "text": "If pricing improves, we have 577 customers next year.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_zh_conditional_consequence",
+      "text": "如果定价改善，客户数量达到577家。",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_negated_count",
+      "text": "We cannot have 577 customers.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_en_unknown_count",
+      "text": "Whether we have 577 customers remains unclear.",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    },
+    {
+      "id": "v2_zh_unknown_count",
+      "text": "客户数量是否达到577家尚不明确。",
+      "expected_measure_kinds": [],
+      "expected_reason": null
+    }
+  ]
+}

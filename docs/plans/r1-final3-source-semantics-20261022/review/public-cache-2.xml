@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.875" timestamp="2026-10-22T23:38:05.158871+01:00" hostname="DESKTOP-156V213"><testcase classname="" name="docs.plans.r1-final3-source-semantics-20261022.review.test_w08_public_cache" time="0.000"><error message="collection failure">docs\plans\r1-final3-source-semantics-20261022\review\test_w08_public_cache.py:15: in &lt;module&gt;
+    assert Path(owned_test_conftest.__file__).resolve() == Path(__file__).resolve().parents[4] / 'tests/conftest.py'
+E   AssertionError: assert WindowsPath('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/conftest.py') == (WindowsPath('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation') / 'tests/conftest.py')
+E    +  where WindowsPath('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/conftest.py') = resolve()
+E    +    where resolve = WindowsPath('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/conftest.py').resolve
+E    +      where WindowsPath('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation/conftest.py') = &lt;class 'pathlib.Path'&gt;('C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\conftest.py')
+E    +        where 'C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\conftest.py' = &lt;module 'conftest' from 'C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\conftest.py'&gt;.__file__</error></testcase></testsuite></testsuites>

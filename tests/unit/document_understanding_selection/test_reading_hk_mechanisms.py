@@ -149,17 +149,30 @@ def test_table_scan_flag_is_boolean_configuration_not_truthy_permission(flag, mo
 
 
 @pytest.mark.parametrize("flag", ["true", 1, None])
-def test_catalog_compiler_rejects_the_same_invalid_table_scan_types(flag, monkeypatch):
+def test_catalog_compiler_rejects_the_same_invalid_table_scan_types(flag, monkeypatch, tmp_path):
     from importlib.util import module_from_spec, spec_from_file_location
 
     spec = spec_from_file_location("owned_reading_compiler", ROOT / "tools/import_reading_policies.py")
     assert spec and spec.loader
     compiler = module_from_spec(spec)
     spec.loader.exec_module(compiler)
+    # Compiler inputs are owned fixtures; a clean worktree need not contain
+    # untracked historical design deliverables.
+    import json
+    for package, schema in (("families", "du2-family-spec/1"), ("facets", "du2-facet-spec/1")):
+        folder = tmp_path / package
+        folder.mkdir()
+        names = []
+        for index, row in enumerate(deepcopy(registry._CATALOG[package])):
+            row["schema_version"] = schema
+            name = f"record-{index}.json"
+            (folder / name).write_text(json.dumps(row), encoding="utf-8")
+            names.append(name)
+        (folder / "index.json").write_text(json.dumps({"records": names, "coverage": []}), encoding="utf-8")
     original = compiler._records
 
     def records(package, schema):
-        rows, coverage = original(package, schema)
+        rows, coverage = original(tmp_path / package.name, schema)
         if schema == "du2-facet-spec/1":
             rows[0]["positive_evidence"][0]["table_scan"] = flag
         return rows, coverage

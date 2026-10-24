@@ -1,0 +1,13 @@
+{
+  "pytest_returncode": 0,
+  "before_after_equal": true,
+  "freeze_matches": true,
+  "scratch_started_absent": true,
+  "assertion_change": "Only observation output filename changed from semantic-probes-latest.json to final-semantic-probes.json; all inputs/oracles/assertions preserved.",
+  "requested_cases": {
+    "archived_independent": 17,
+    "public_target_recall": 6,
+    "actual_source_cache_identity": 1
+  },
+  "network": "socket connect/create_connection blocked; secret env removed in subprocess; no network/model/download/real raw input"
+}

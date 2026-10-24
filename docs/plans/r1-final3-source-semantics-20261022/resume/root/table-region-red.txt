@@ -1,0 +1,43 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 26 items / 19 deselected / 7 selected
+
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py F [ 14%]
+FFF...                                                                   [100%]
+
+================================== FAILURES ===================================
+____ test_actual_table_region_overrides_fallback_not_native_heading[None] _____
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:76: in test_actual_table_region_overrides_fallback_not_native_heading
+    assert not is_heading(ObservationUnit(payload, 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000015DAE01C5E0>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000015DAE01C5E0> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '2. Capital reserve\n(or share capital)\n-\n-\n-', ...}, 0)
+__ test_actual_table_region_overrides_fallback_not_native_heading[numbering] __
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:76: in test_actual_table_region_overrides_fallback_not_native_heading
+    assert not is_heading(ObservationUnit(payload, 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000015DAE0906D0>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000015DAE0906D0> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '2. Capital reserve\n(or share capital)\n-\n-\n-', ...}, 0)
+___ test_actual_table_region_overrides_fallback_not_native_heading[layout] ____
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:76: in test_actual_table_region_overrides_fallback_not_native_heading
+    assert not is_heading(ObservationUnit(payload, 0))
+E   AssertionError: assert not True
+E    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000015DAE0915D0>)
+E    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000015DAE0915D0> = ObservationUnit({'unit_id': 'value-row', 'ordinal': 0, 'locator': 'original-row', 'text': '2. Capital reserve\n(or share capital)\n-\n-\n-', ...}, 0)
+_ test_layout_negative_table_evidence_survives_bridge_without_inventing_table _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:93: in test_layout_negative_table_evidence_survives_bridge_without_inventing_table
+    assert actual["hints"]["table_region"] is True
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'table_region'
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\root\table-region-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_actual_table_region_overrides_fallback_not_native_heading[None]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_actual_table_region_overrides_fallback_not_native_heading[numbering]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_actual_table_region_overrides_fallback_not_native_heading[layout]
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_layout_negative_table_evidence_survives_bridge_without_inventing_table
+================= 4 failed, 3 passed, 19 deselected in 1.22s ==================

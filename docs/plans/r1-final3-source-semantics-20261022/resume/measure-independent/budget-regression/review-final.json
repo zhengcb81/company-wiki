@@ -1,0 +1,193 @@
+{
+  "schema_version": "w08-budget-regression-final-independent-review/1",
+  "status": "PASS_BOUNDED_BUDGET_FIX",
+  "source_sha256": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+  "original_regressed_source_sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+  "actual_original_test": {
+    "parameters": [
+      0,
+      1,
+      1000
+    ],
+    "passed": 3,
+    "failed": 0,
+    "exit_code": 0,
+    "stdout": "original-final.stdout.txt",
+    "junit": "original-final.xml"
+  },
+  "independent_probe": {
+    "exit_code": 0,
+    "json": "probe-final.json",
+    "stdout": "probe-final.stdout.txt",
+    "checks": {
+      "original_budget_guards_all_pass": true,
+      "1000_exact_body32_context64": true,
+      "default_output_equals_exact_old": true,
+      "sufficient_explicit_output_equals_exact_old": true,
+      "sufficient_total_charge_unchanged": true,
+      "default_equals_explicit_sufficient_output": true,
+      "sufficient_positive_scope": true,
+      "actual_product_unchanged": true
+    },
+    "low_budgets": [
+      {
+        "limit": 0,
+        "pass": true,
+        "body_visits": 0,
+        "context_visits": 0,
+        "used": 0,
+        "exhausted": true,
+        "source_units_unchanged": true
+      },
+      {
+        "limit": 1,
+        "pass": true,
+        "body_visits": 0,
+        "context_visits": 0,
+        "used": 0,
+        "exhausted": true,
+        "source_units_unchanged": true
+      },
+      {
+        "limit": 1000,
+        "pass": true,
+        "body_visits": 32,
+        "context_visits": 64,
+        "used": 708,
+        "exhausted": true,
+        "source_units_unchanged": true
+      }
+    ],
+    "default_old": {
+      "candidate_count": 96,
+      "eligible_count": 32,
+      "complete": true,
+      "withheld_count": 0,
+      "source_units_unchanged": true,
+      "body_visits": 128,
+      "context_visits": 64,
+      "used": null,
+      "exhausted": null
+    },
+    "default_new": {
+      "candidate_count": 96,
+      "eligible_count": 32,
+      "complete": true,
+      "withheld_count": 0,
+      "source_units_unchanged": true,
+      "body_visits": 128,
+      "context_visits": 64,
+      "used": null,
+      "exhausted": null
+    },
+    "explicit_old": {
+      "candidate_count": 96,
+      "eligible_count": 32,
+      "complete": true,
+      "withheld_count": 0,
+      "source_units_unchanged": true,
+      "body_visits": 128,
+      "context_visits": 64,
+      "used": 43882,
+      "exhausted": false
+    },
+    "explicit_new": {
+      "candidate_count": 96,
+      "eligible_count": 32,
+      "complete": true,
+      "withheld_count": 0,
+      "source_units_unchanged": true,
+      "body_visits": 128,
+      "context_visits": 64,
+      "used": 43882,
+      "exhausted": false
+    }
+  },
+  "exact_change_proof": "Reverse-moving the identical existing3-line charge/comment block in memory reconstructs exact regressed module SHA5bb37...; no production rollback or source copy was written. Only old function AST was compiled in an isolated namespace.",
+  "scope": "Only diagnosed fanout preflight regression and one sufficient-budget same-scope source-unit control. No PDF/model/full-source expansion.",
+  "root_gates": {
+    "ruff_mypy": "Not independently run here; ROOT native gate evidence is separate",
+    "root_formal239": "Concurrent ROOT evidence, not counted in this review"
+  },
+  "limitations": [
+    "Finite fanout fixture does not establish whole-source content quality.",
+    "Broader typed-table and production suite evidence belongs to ROOT gates.",
+    "Later source edits are not automatically accepted by this SHA-bound report."
+  ],
+  "product_edits": 0,
+  "test_edits": 0,
+  "external_harness_edits": 0,
+  "original_reads": 0,
+  "external_calls": 0,
+  "git_operations": 0,
+  "artifacts": {
+    "build_final_report.py": {
+      "sha256": "a1ecc7517752e28cc754dafd7a8d846cfdecd18a9a50ac0e798ea38f7d5fcc81",
+      "bytes": 5814
+    },
+    "build_report.py": {
+      "sha256": "d7242b1f9a1ba40219473418f975a2f8cb66d82ee34bc239a0011f759168009f",
+      "bytes": 6476
+    },
+    "charge-order.json": {
+      "sha256": "f0b3c4d6836acb25e9d3ed1d86e6f9f84ab3e43036541f7d7103838c29183e31",
+      "bytes": 2593
+    },
+    "charge-order.stdout.txt": {
+      "sha256": "d2622708844cf8638fc43ff8413d11cfe6c889a60fbc437d760904500458799e",
+      "bytes": 2595
+    },
+    "cleanup.json": {
+      "sha256": "9a2f71fe115ca841ad2839a48029bde8b570a229e1b2bcd60f8a88cfc831f778",
+      "bytes": 895
+    },
+    "observe_charge_order.py": {
+      "sha256": "ff7433940f4cc6b4fb802bec6ee6eccdf360aba54b8001683a5605e80937b7a2",
+      "bytes": 2932
+    },
+    "original-final.stdout.txt": {
+      "sha256": "04479b6bcb2a2a48b891c746108e75cd67c2b9e4e5dfc393d80a1de1757db298",
+      "bytes": 1665
+    },
+    "original-final.xml": {
+      "sha256": "5dc33426df1a5174c86215ebfe68eeb692ce8079de81b7cdfe80593cfcaa1d0a",
+      "bytes": 752
+    },
+    "original-red.stdout.txt": {
+      "sha256": "20e8da43a8a66fffbfc2c078e01a74b0a3cefd6eb95f6f83c7cf9d150628b35f",
+      "bytes": 2812
+    },
+    "original-red.xml": {
+      "sha256": "2b7d86bfcdcc7d9a033e3efc03ee3143b425e660db5350890902a480cab3a275",
+      "bytes": 1810
+    },
+    "probe-final.json": {
+      "sha256": "0fa3e8f03d6914b2349dce058d4c243017e3acdb4cb8d71d96bed0ac84153ddd",
+      "bytes": 2525
+    },
+    "probe-final.stdout.txt": {
+      "sha256": "d64fc12126a91e75d8ed6c0782d1d37c0d8f09d5ddf0cc2c1d176884c3572cb7",
+      "bytes": 2527
+    },
+    "probe_final.py": {
+      "sha256": "a8bc0ec193863f93546cb070087744eb7b7d97e2d18d48912a7b5b43bcc6f52b",
+      "bytes": 5351
+    },
+    "report-build.stdout.txt": {
+      "sha256": "951e60c89bfb311abc2b7b1fe805cd9dfde8d7e9b95e394789d3cf64db132b2f",
+      "bytes": 397
+    },
+    "report.json": {
+      "sha256": "3888cf2f887f0bab4eee901fc3d956d078a6499ad56ccefbe9f3e53a848a81d2",
+      "bytes": 6887
+    },
+    "report.md": {
+      "sha256": "44cdb9866df8f1f93102e2cdaca779d66de7abf0c23e188b85bb99abb6710d1c",
+      "bytes": 2326
+    },
+    "review-final-build.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  }
+}

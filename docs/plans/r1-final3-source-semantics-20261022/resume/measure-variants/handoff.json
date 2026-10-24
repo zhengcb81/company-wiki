@@ -1,0 +1,185 @@
+{
+  "schema": "w08-operating-measure-handoff/1",
+  "status": "ENGINEERING_GREEN_READY_FOR_ROOT_INDEPENDENT_REVIEW",
+  "code_owner_released_to_ROOT": true,
+  "modified_production": [
+    "src/company_wiki/source_catalog/narrative_business_policy.py"
+  ],
+  "new_test": "tests\\unit\\document_understanding_selection\\test_reading_operating_measure_variants.py",
+  "policy_version": "reading-business-policy/14",
+  "policy_sha256": "24eca71e12270f19f742cf09faae481e9969a32469d1c493098aca18c3edf8dc",
+  "test_sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+  "frozen_initial_test_sha256": "a1f873d52b683dbd98237f68825c3c49049aae7848166bf1ad130b2358c7d249",
+  "initial_red": {
+    "failed": 24,
+    "passed": 34,
+    "errors": 0
+  },
+  "additional_reds": [
+    "future-frame-red-v2.txt:5F/66P",
+    "comparison-red.txt:5F/88P",
+    "local-comparison-red.txt:5F/72P (includes one added fixture missing explicit comparator, later source fixture corrected transparently)"
+  ],
+  "final_measure_cases": 77,
+  "final_selection": {
+    "passed": 1110,
+    "failed": 0,
+    "pytest_seconds": 72.93,
+    "exit_code": 0,
+    "scope_excluded": {
+      "file": "test_reading_guidance_condition_scope.py",
+      "responsible": "ROOT next guidance implementation",
+      "known_initial_cases": 20,
+      "known_initial_failures": 7,
+      "not_claimed_pass": true
+    }
+  },
+  "related_5files": {
+    "passed": 349,
+    "failed": 0,
+    "pytest_seconds": 11.91
+  },
+  "type_check": {
+    "scope": "single policy module; follow-imports silent",
+    "CI_runtime_target": "3.12",
+    "result": "PASS:1source file",
+    "initial_default_target_failure": "pyproject target3.11 conflicts with mother venv installed NumPy stub requiring3.12; retained mypy.txt; no repo config changes",
+    "receipt": "mypy-runtime312.txt"
+  },
+  "ruff": "PASS; final command also recorded separately by ROOT if needed",
+  "all_selection_source_bindings_stable": true,
+  "schema_scope": "No ObservedMeasure wire introduced. Public existing quantity/direction/revenue reasons and original EvidenceSpan refs only. No numeric conversion or new normalized value fields.",
+  "changes": [
+    "体积/體積 and explicit to-level quantities share existing quantity owner; m³/m3/cubic unit spellings only evidence not conversions",
+    "Revenue amount/share and comparison rate share local business owner and state gate; rate projects existing direction",
+    "Rate requires source-local disclosed comparison basis, not an unrelated financial predicate or vague growth total",
+    "Bare preceding future period frame cannot become actual; independent later plan cannot erase current observed measure"
+  ],
+  "not_implemented": [
+    "guidance/forecast roles and inter-paragraph condition dependency",
+    "real annual14 full-source acceptance",
+    "formal summary/cache/RF native end-to-end",
+    "new quantitative measurement schema"
+  ],
+  "independent_review": "Required at ROOT node; this author does not self-sign implementation quality",
+  "production_originals_network_model": 0,
+  "git_mutations": 0,
+  "cleanup": {
+    "actual": [
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220135-a8791639",
+        "existed": true,
+        "removed": true,
+        "log": "red.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220625-2da51c7a",
+        "existed": true,
+        "removed": true,
+        "log": "green-v1.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220908-eb1d47f0",
+        "existed": true,
+        "removed": true,
+        "log": "future-frame-red.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221019-4cf44b9f",
+        "existed": true,
+        "removed": true,
+        "log": "future-frame-red-v2.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221118-29fa5c27",
+        "existed": true,
+        "removed": true,
+        "log": "full-selection.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221315-067bb3eb",
+        "existed": true,
+        "removed": true,
+        "log": "comparison-red.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221523-f792d598",
+        "existed": true,
+        "removed": true,
+        "log": "local-comparison-red.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221707-7e3aec4b",
+        "existed": true,
+        "removed": true,
+        "log": "related-final.txt",
+        "verified_absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221803-0676335b",
+        "existed": true,
+        "removed": true,
+        "log": "final-selection.txt",
+        "verified_absent_after": true
+      }
+    ],
+    "requested": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\red-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\green-v1-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\future-frame-red-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\future-frame-red-v2-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\full-selection-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\comparison-red-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\local-comparison-red-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\related-final-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\final-selection-temp",
+        "verified_absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\mypy-cache",
+        "verified_absent_after": true
+      }
+    ]
+  }
+}

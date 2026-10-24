@@ -1,0 +1,831 @@
+{
+  "schema": "untyped-independent-red/1",
+  "import_owner": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+  "cases": [
+    {
+      "label": "zh-newline",
+      "text": "客户数量\n273\n198\n增加来自新渠道",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:384c1403c241f51c156575e1f19b569f7259ff7f61be3889f704d2e2740e748d",
+          "kind": "background",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060",
+            "urn:company-wiki:evidence-span:sha256:1656a972c66e406511c2a058b416d1792b60284ab1905a654bc3ad13eb9f2436"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:1656a972c66e406511c2a058b416d1792b60284ab1905a654bc3ad13eb9f2436"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:0694cecf1b8be5c96f9238f4389f6f026022c5f2bc82fdb42f7bb50fa2c1952c"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:0694cecf1b8be5c96f9238f4389f6f026022c5f2bc82fdb42f7bb50fa2c1952c"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:0694cecf1b8be5c96f9238f4389f6f026022c5f2bc82fdb42f7bb50fa2c1952c"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "zh-tab",
+      "text": "客户数量\t273\t198\t增加来自新渠道",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:864dfd5af55ab065e2d2e09585e1bff5ea05875eaba87ff109aac92f8c4d7b3e",
+          "kind": "background",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060",
+            "urn:company-wiki:evidence-span:sha256:0eccc3ed3089b54d0607e42974a4ae939bc173dffe031bc7fbadeb80aa9269d9"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:0eccc3ed3089b54d0607e42974a4ae939bc173dffe031bc7fbadeb80aa9269d9"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a3e8914f25cf96069480f80b8a151caeb90ea1c5522f37d874b1460eb817aa1b"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a3e8914f25cf96069480f80b8a151caeb90ea1c5522f37d874b1460eb817aa1b"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a3e8914f25cf96069480f80b8a151caeb90ea1c5522f37d874b1460eb817aa1b"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "zh-pipe",
+      "text": "客户数量 | 273 | 198 | 增加来自新渠道",
+      "selected": false,
+      "quality_flags": [],
+      "has_numeric_constraint": false,
+      "groups": [],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4c511bda399982a111a936e650c1d567a14e6a6bb8a663013ca69b4989f47291"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4c511bda399982a111a936e650c1d567a14e6a6bb8a663013ca69b4989f47291"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4c511bda399982a111a936e650c1d567a14e6a6bb8a663013ca69b4989f47291"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "trad-newline",
+      "text": "客戶數量\n164\n127\n增加源自海外渠道",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:468ed5376b728c7a513a8e37e6523bc6de201131a0803772975d9e073f7697dc",
+          "kind": "background",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:ef712f1648befc927603c7bee78ffd2ddb89aca3b6444fd985227ffb37c35bf5",
+            "urn:company-wiki:evidence-span:sha256:d1ba94971cd24cb693628f9c73ec2532e9acd1094f1fdad5e178c77bce49ff26"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:d1ba94971cd24cb693628f9c73ec2532e9acd1094f1fdad5e178c77bce49ff26"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:ef712f1648befc927603c7bee78ffd2ddb89aca3b6444fd985227ffb37c35bf5"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a2fb613d056d11b6849162a2cebbb23918d07a088da19f75dfd3afea20386366"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a2fb613d056d11b6849162a2cebbb23918d07a088da19f75dfd3afea20386366"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a2fb613d056d11b6849162a2cebbb23918d07a088da19f75dfd3afea20386366"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "en-newline",
+      "text": "Active customers\n735\n626\nIncrease from new distribution channels",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:42b14a1c36cbc523ed705a594a7a23724011c9b3a1ef6af98aad130e7383c34b",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8",
+            "urn:company-wiki:evidence-span:sha256:92353a2ef24b37042dd5ac689ef7374cb3191aec0246e98302243111488accca"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:92353a2ef24b37042dd5ac689ef7374cb3191aec0246e98302243111488accca"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "management_discussion",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:3ed209e79f8797f6de740907c24b0ff0d91d001e929452a4aa470661f6bf3743"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:3ed209e79f8797f6de740907c24b0ff0d91d001e929452a4aa470661f6bf3743"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:3ed209e79f8797f6de740907c24b0ff0d91d001e929452a4aa470661f6bf3743"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "en-tab",
+      "text": "Active customers\t735\t626\tIncrease from new distribution channels",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:88216ef3d1fd401620c5dcdee70f8fb212635cca15ab1d8cc98041d43dedcfee",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8",
+            "urn:company-wiki:evidence-span:sha256:9862b2e6345df54f33de38c7c1767d40d5e0dea8f89d894d5d17046fd40556a9"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:9862b2e6345df54f33de38c7c1767d40d5e0dea8f89d894d5d17046fd40556a9"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "management_discussion",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:894c5d4afd77bc2a768f60623ae62d2a26805579cba260832fad00dfeea70a59"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:894c5d4afd77bc2a768f60623ae62d2a26805579cba260832fad00dfeea70a59"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:894c5d4afd77bc2a768f60623ae62d2a26805579cba260832fad00dfeea70a59"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "en-pipe",
+      "text": "Active customers | 735 | 626 | Increase from new distribution channels",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:346f5aaad8dd9e9056bef406063fedab0d6b3b41352fcf9a6bf09659376ceb53",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8",
+            "urn:company-wiki:evidence-span:sha256:7aadefe282f65ad2c0479dfd40814b1b9cab330c6b6c54c7e298587c27bcbfdf"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:7aadefe282f65ad2c0479dfd40814b1b9cab330c6b6c54c7e298587c27bcbfdf"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "management_discussion",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:c484b0b79b9e2059bb7f9b0b29d9f43b9b892f63ab849d098d40fe0426b52c6e"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:c484b0b79b9e2059bb7f9b0b29d9f43b9b892f63ab849d098d40fe0426b52c6e"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:c484b0b79b9e2059bb7f9b0b29d9f43b9b892f63ab849d098d40fe0426b52c6e"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "label-numeric",
+      "text": "客户数量\n273",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:0be806ffae6312614de37164d3bebe5ad583f6e6fb3b30a4232e0ffd0e1a1fe7",
+          "kind": "background",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060",
+            "urn:company-wiki:evidence-span:sha256:696bba45558be6eb9cccace8d390615c6b131b608e54e06f657f82dce18a73df"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:696bba45558be6eb9cccace8d390615c6b131b608e54e06f657f82dce18a73df"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:66a381d92489dc3ec548a707df79e5d01c9d38cde6256f4447ee3fc44a102d2c"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:66a381d92489dc3ec548a707df79e5d01c9d38cde6256f4447ee3fc44a102d2c"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:66a381d92489dc3ec548a707df79e5d01c9d38cde6256f4447ee3fc44a102d2c"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "single-year-heading",
+      "text": "International business development\n2024",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:b67c437e93f3e8ff5d6c8415138ad3b9f2f9ef86c02902a2281989b32ba535f5",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8",
+            "urn:company-wiki:evidence-span:sha256:04b1f60636a5d0b15561fc1f2c880ff368e20d3557d8a738ab1f8795b4dad8f9"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:04b1f60636a5d0b15561fc1f2c880ff368e20d3557d8a738ab1f8795b4dad8f9"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "management_discussion",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:01c8d28ffd56e13ba25e4de1b0f1e5994403c9c61b347b4cce5d50e281a1e83c"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:01c8d28ffd56e13ba25e4de1b0f1e5994403c9c61b347b4cce5d50e281a1e83c"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:01c8d28ffd56e13ba25e4de1b0f1e5994403c9c61b347b4cce5d50e281a1e83c"
+          ],
+          "completeness": "unknown",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "prose-quantities",
+      "text": "公司客户达到273家，新增客户75家，均已完成验证。",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:2c1e9a29cba345e9ea669b024f09aec338906f0f7fb503800b1e7bad789c6792",
+          "kind": "paragraph_event",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060",
+            "urn:company-wiki:evidence-span:sha256:24fc209a55e6270e8013c625349685db2b01f7e999a7b37fed79437b792ba5f9"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:24fc209a55e6270e8013c625349685db2b01f7e999a7b37fed79437b792ba5f9"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "paragraph_event",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:85b690b5930f74cbdcd124aff2c19dc1b87810aa0b3b4e98a5114311848ff8f5"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:85b690b5930f74cbdcd124aff2c19dc1b87810aa0b3b4e98a5114311848ff8f5"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:85b690b5930f74cbdcd124aff2c19dc1b87810aa0b3b4e98a5114311848ff8f5"
+          ],
+          "completeness": "complete",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "prose-multiline",
+      "text": "公司客户达到273家，\n新增客户75家，均已完成验证。",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:8446bd074b83a90aab153b331a60426a57390d7a43dcd4837248f0d9390bcad1",
+          "kind": "paragraph_event",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060",
+            "urn:company-wiki:evidence-span:sha256:ccfa89e56958401174faaa2d310efdfdb7739bc4b8151e183c36741c333a1418"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:ccfa89e56958401174faaa2d310efdfdb7739bc4b8151e183c36741c333a1418"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:c520eba900eeb0eadc897271670642b1b2394ffb64382ed1cb73b6c212fff060"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "paragraph_event",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "unknown",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:c0652a29c74f08b406d13025f0bed8e0c39b84397cfabf8d6d20407f94f27da6"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:c0652a29c74f08b406d13025f0bed8e0c39b84397cfabf8d6d20407f94f27da6"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:c0652a29c74f08b406d13025f0bed8e0c39b84397cfabf8d6d20407f94f27da6"
+          ],
+          "completeness": "complete",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "prose-en",
+      "text": "The company served 735 customers, including 109 new customers.",
+      "selected": true,
+      "quality_flags": [
+        []
+      ],
+      "has_numeric_constraint": false,
+      "groups": [
+        {
+          "group_id": "urn:company-wiki:reading-group:sha256:ee13d7b14d45ec350962cb51b26d674ed49544e9e639a1fbc1f0a75532d2ee32",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8",
+            "urn:company-wiki:evidence-span:sha256:9d30e099e291e855e121bb06dd4e0ee3ff8f442eb648445f0d81371205a4dc97"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:9d30e099e291e855e121bb06dd4e0ee3ff8f442eb648445f0d81371205a4dc97"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:d916eaeefab5a11ec398f3bdbab1ba49c70bcc915926f93e77a46b5e2a586bc8"
+              ]
+            }
+          ]
+        }
+      ],
+      "source_packages": [
+        {
+          "package_id": "m1",
+          "kind": "background",
+          "section_ids": [
+            "s1"
+          ],
+          "section_role": "management_discussion",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8c39245739a71743ea2db380b4cbb1fe11c6e7a8c71211789dde451c3df6ddec"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8c39245739a71743ea2db380b4cbb1fe11c6e7a8c71211789dde451c3df6ddec"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8c39245739a71743ea2db380b4cbb1fe11c6e7a8c71211789dde451c3df6ddec"
+          ],
+          "completeness": "complete",
+          "priority": 2,
+          "reading_family": "unknown",
+          "reading_profile_id": "generic",
+          "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+          "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+          "first_ordinal": 1,
+          "diagnostics": [],
+          "truncated": false
+        }
+      ],
+      "source_unchanged": true
+    }
+  ],
+  "bound_positive": {
+    "label": "fully-bound-native-table",
+    "numeric": [
+      {
+        "text": "47",
+        "flags": []
+      }
+    ],
+    "binding": {
+      "status": "complete",
+      "tables": [
+        {
+          "schema_version": "du4-table-bindings/1",
+          "scope": {
+            "parent_id": "urn:company-wiki:source:sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "table_id": "html:t0",
+            "page": 1
+          },
+          "status": "complete",
+          "columns": [
+            {
+              "column_id": "col-0",
+              "native_column": 0,
+              "header_refs": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:83378cfa36f1206c147abba9af311fe86f4fc28931e4921cd3e9372b378c14ac",
+                  "char_start": 0,
+                  "char_end": 16
+                }
+              ],
+              "period": {
+                "kind": "unspecified",
+                "raw_label_refs": [
+                  {
+                    "unit_id": "urn:company-wiki:narrative-unit:sha256:83378cfa36f1206c147abba9af311fe86f4fc28931e4921cd3e9372b378c14ac",
+                    "char_start": 0,
+                    "char_end": 16
+                  }
+                ],
+                "start": null,
+                "end": null,
+                "duration_months": null,
+                "fiscal_label": null
+              },
+              "status": "bound"
+            },
+            {
+              "column_id": "col-1",
+              "native_column": 1,
+              "header_refs": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:5b4dafe4d5443c93618516ae4f6db0488f0d6d8bcb7518783038a6880c6e56aa",
+                  "char_start": 0,
+                  "char_end": 23
+                }
+              ],
+              "period": {
+                "kind": "as_of",
+                "raw_label_refs": [
+                  {
+                    "unit_id": "urn:company-wiki:narrative-unit:sha256:5b4dafe4d5443c93618516ae4f6db0488f0d6d8bcb7518783038a6880c6e56aa",
+                    "char_start": 0,
+                    "char_end": 23
+                  }
+                ],
+                "start": null,
+                "end": "2024-12-31",
+                "duration_months": null,
+                "fiscal_label": null
+              },
+              "status": "bound"
+            }
+          ],
+          "measurements": [
+            {
+              "value_ref": {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:a3560621ee099a65af3c8fdddac4213062cb7eb0a226780af121595299d4133c",
+                "char_start": 0,
+                "char_end": 2
+              },
+              "row_label_refs": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:8bbe8c4dee3f81e03b8e2ebecfac6469e9bfa948943a1480b37251246f7780cb",
+                  "char_start": 0,
+                  "char_end": 15
+                }
+              ],
+              "column_id": "col-1",
+              "period": {
+                "kind": "as_of",
+                "raw_label_refs": [
+                  {
+                    "unit_id": "urn:company-wiki:narrative-unit:sha256:5b4dafe4d5443c93618516ae4f6db0488f0d6d8bcb7518783038a6880c6e56aa",
+                    "char_start": 0,
+                    "char_end": 23
+                  }
+                ],
+                "start": null,
+                "end": "2024-12-31",
+                "duration_months": null,
+                "fiscal_label": null
+              },
+              "unit_refs": [],
+              "scope_refs": [
+                {
+                  "unit_id": "urn:company-wiki:narrative-unit:sha256:8bbe8c4dee3f81e03b8e2ebecfac6469e9bfa948943a1480b37251246f7780cb",
+                  "char_start": 0,
+                  "char_end": 15
+                }
+              ],
+              "qualifier_refs": [],
+              "binding_status": "bound"
+            }
+          ],
+          "unbound_value_refs": [],
+          "diagnostics": [
+            {
+              "code": "period_not_disclosed",
+              "native_column": 0
+            }
+          ],
+          "work_used": 151
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "TABLE_ROW_SLOTS_UNAVAILABLE",
+          "rows": [
+            0,
+            1
+          ]
+        },
+        {
+          "code": "TABLE_CELLS_UNAVAILABLE"
+        }
+      ],
+      "work_used": 222
+    }
+  }
+}

@@ -1,0 +1,361 @@
+{
+  "sha_before": {
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "44fb64818412f9b90541c3528f22c1102c49b98cad5d363dcb1b685714bca30e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+    "src/company_wiki/resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+    "src/company_wiki/source_catalog/narrative_reading.py": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+  },
+  "modules": {
+    "company_wiki.source_catalog.narrative_revenue_guidance": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_revenue_guidance.py",
+    "company_wiki.source_catalog.narrative_business_policy": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.source_catalog.narrative_operating_relations": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+    "company_wiki.resource_budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py"
+  },
+  "cases": [
+    {
+      "kind": "measure",
+      "name": "actual-en",
+      "text": "Our reactor volume reached 143 kL during the reporting period.",
+      "expected_actual": true,
+      "actual": true,
+      "reasons": [
+        "operating_quantity"
+      ],
+      "purpose": "operating_metric",
+      "pass": true
+    },
+    {
+      "kind": "measure",
+      "name": "anticipate-en",
+      "text": "We anticipate our reactor volume of 143 kL.",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "project-en",
+      "text": "We project our reactor volume of 143 kL.",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "hope-cn",
+      "text": "公司有望将反应器总体积增加至143kL。",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "strive-cn",
+      "text": "公司力争反应器总体积增加至143kL。",
+      "expected_actual": false,
+      "actual": true,
+      "reasons": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "purpose": "operating_metric",
+      "pass": false
+    },
+    {
+      "kind": "measure",
+      "name": "actual-trad",
+      "text": "本公司反應器總體積已增加至143kL。",
+      "expected_actual": true,
+      "actual": true,
+      "reasons": [
+        "operating_quantity"
+      ],
+      "purpose": "operating_metric",
+      "pass": true
+    },
+    {
+      "kind": "guidance",
+      "name": "future-en",
+      "text": "We expect subscription revenue of USD 143 million in fiscal 2030.",
+      "expected_guidance": true,
+      "actual": true,
+      "pass": true,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "We expect subscription revenue of USD 143 million in fiscal 2030.",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "future-trad",
+      "text": "本集團預計2030年維修服務營收達到14億港元。",
+      "expected_guidance": true,
+      "actual": true,
+      "pass": true,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "本集團預計2030年維修服務營收達到14億港元。",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "actual-present-after-independent-expectation",
+      "text": "We expect customer renewals to improve and our subscription revenue is USD 143 million.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "operating_mechanism",
+        "source_revenue_guidance",
+        "operating_activity"
+      ],
+      "spans": [
+        {
+          "text": "We expect customer renewals to improve and our subscription revenue is USD 143 million.",
+          "reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "source_revenue_guidance",
+            "operating_description_unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "actual-reached-after-independent-expectation",
+      "text": "We expect customer renewals to improve while subscription revenue has reached USD 143 million.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "operating_mechanism",
+        "source_revenue_guidance",
+        "operating_activity"
+      ],
+      "spans": [
+        {
+          "text": "We expect customer renewals to improve while subscription revenue has reached USD 143 million.",
+          "reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "source_revenue_guidance",
+            "operating_description_unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "past-completed-quantity",
+      "text": "We expect subscription revenue to have grown by 14% last quarter.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "We expect subscription revenue to have grown by 14% last quarter.",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "past-future-disclosure",
+      "text": "We will announce that subscription revenue increased by 14% last quarter.",
+      "expected_guidance": false,
+      "actual": true,
+      "pass": false,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "We will announce that subscription revenue increased by 14% last quarter.",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guidance",
+      "name": "positive-passive",
+      "text": "Our software licensing revenue is expected to reach USD 143 million in fiscal 2030.",
+      "expected_guidance": true,
+      "actual": true,
+      "pass": true,
+      "fact_reasons": [
+        "source_revenue_guidance"
+      ],
+      "spans": [
+        {
+          "text": "Our software licensing revenue is expected to reach USD 143 million in fiscal 2030.",
+          "reasons": [
+            "reading_plan",
+            "source_revenue_guidance"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "closure",
+      "name": "own-en",
+      "forecast": "We expect subscription revenue of USD 143 million in fiscal 2030.",
+      "premise": "This revenue outlook assumes customers renew their subscriptions on time.",
+      "expected_closed": true,
+      "actual": true,
+      "pass": true,
+      "source_guidance": true,
+      "model_tasks": [
+        {
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:523ae6d01ae16ce7d353ef6400dfd94593a195a6fef80d9491c80f8d4948c2db"
+          ],
+          "members": [
+            "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+            "urn:company-wiki:evidence-span:sha256:523ae6d01ae16ce7d353ef6400dfd94593a195a6fef80d9491c80f8d4948c2db",
+            "urn:company-wiki:evidence-span:sha256:6ba635b2a2c5e40bc037fbefda7193281325710b75ee0908f829cfd263a5b915"
+          ],
+          "texts": [
+            "三、未来经营展望",
+            "We expect subscription revenue of USD 143 million in fiscal 2030.",
+            "This revenue outlook assumes customers renew their subscriptions on time."
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "closure",
+      "name": "third-actor-en",
+      "forecast": "Our supplier expects subscription revenue of USD 143 million in fiscal 2030.",
+      "premise": "This revenue outlook assumes customers renew their subscriptions on time.",
+      "expected_closed": false,
+      "actual": false,
+      "pass": true,
+      "source_guidance": false,
+      "model_tasks": [
+        {
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:29fa2ccf328e4d40f91a2ff90fe720258c7a7001cc19a39b5e3e19c9911e16fb"
+          ],
+          "members": [
+            "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+            "urn:company-wiki:evidence-span:sha256:29fa2ccf328e4d40f91a2ff90fe720258c7a7001cc19a39b5e3e19c9911e16fb"
+          ],
+          "texts": [
+            "三、未来经营展望",
+            "Our supplier expects subscription revenue of USD 143 million in fiscal 2030."
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "closure",
+      "name": "different-scope-en",
+      "forecast": "We expect subscription revenue of USD 143 million in fiscal 2030.",
+      "premise": "This equipment rental revenue outlook assumes customers accept new equipment on time.",
+      "expected_closed": false,
+      "actual": false,
+      "pass": true,
+      "source_guidance": true,
+      "model_tasks": [
+        {
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:523ae6d01ae16ce7d353ef6400dfd94593a195a6fef80d9491c80f8d4948c2db"
+          ],
+          "members": [
+            "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+            "urn:company-wiki:evidence-span:sha256:523ae6d01ae16ce7d353ef6400dfd94593a195a6fef80d9491c80f8d4948c2db"
+          ],
+          "texts": [
+            "三、未来经营展望",
+            "We expect subscription revenue of USD 143 million in fiscal 2030."
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "closure",
+      "name": "forward-en",
+      "forecast": "We expect subscription revenue of USD 143 million in fiscal 2030.",
+      "premise": "The following revenue outlook assumes customers renew their subscriptions on time.",
+      "expected_closed": false,
+      "actual": false,
+      "pass": true,
+      "source_guidance": true,
+      "model_tasks": [
+        {
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:523ae6d01ae16ce7d353ef6400dfd94593a195a6fef80d9491c80f8d4948c2db"
+          ],
+          "members": [
+            "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+            "urn:company-wiki:evidence-span:sha256:523ae6d01ae16ce7d353ef6400dfd94593a195a6fef80d9491c80f8d4948c2db"
+          ],
+          "texts": [
+            "三、未来经营展望",
+            "We expect subscription revenue of USD 143 million in fiscal 2030."
+          ]
+        }
+      ]
+    }
+  ],
+  "sha_after": {
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "44fb64818412f9b90541c3528f22c1102c49b98cad5d363dcb1b685714bca30e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52",
+    "src/company_wiki/resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+    "src/company_wiki/source_catalog/narrative_reading.py": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "1da9c69714ca7e63649a177c8276ddde9630b6cdcc6cd5995a2d2ae593ce22ed",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+  },
+  "source_stable": true
+}

@@ -1,0 +1,385 @@
+{
+  "schema_version": "w08-context-worker/1",
+  "status": "FROZEN_HANDOFF_TYPES_GREEN_REAL_CONTENT_PARTIAL_OPEN_OBSERVATIONS",
+  "owned_source": [
+    "src/company_wiki/source_catalog/narrative_reading.py",
+    "src/company_wiki/document_understanding/structure/sections.py"
+  ],
+  "red": {
+    "explicit_ancestor_and_background_table": {
+      "failed": 4,
+      "stdout": "context-worker/red.stdout.txt",
+      "junit": "context-worker/red.xml"
+    },
+    "native_structure": {
+      "failed": 2,
+      "passed": 1,
+      "stdout": "context-worker/red-native-structure.stdout.txt",
+      "junit": "context-worker/red-native-structure.xml"
+    }
+  },
+  "green": {
+    "passed": 185,
+    "stdout": "context-worker/green-compatible.stdout.txt",
+    "junit": "context-worker/green-compatible.xml"
+  },
+  "diagnostic_errors": [
+    {
+      "error": "Initial native fixture attempted deepcopy of native mappingproxy; corrected fixture before actual structure RED. Initial failure record retained as red-native stdout/XML."
+    },
+    {
+      "error": "First full-document diagnostic called private _understand without public WorkBudget and then assumed reading_plan, causing KeyError. Public select default succeeds with existing configured document budget."
+    },
+    {
+      "error": "Follow-up diagnostic accidentally printed whole deferred pipeline; not used as content acceptance. Owner-authorized exact self-created stdout removal after saving digest, size and bounded summary.",
+      "removed_exact_path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\context-worker\\native-after-budget.stdout.txt",
+      "byte_size": 14152230,
+      "sha256": "ee0474dbb90f3d2b4e48ab4180eab23c0be22b92d73c21ddea87104a6fa4752c",
+      "disposition": "exact_self_created_verbose_stdout_removed_after_digest_and_bounded_summary",
+      "bounded_summary": [
+        {
+          "pipeline_without_public_budget": {
+            "analysis_status": "deferred",
+            "diagnostic_counts": {
+              "WORK_BUDGET_EXCEEDED": 1
+            },
+            "budget_diagnostics": [
+              {
+                "code": "WORK_BUDGET_EXCEEDED",
+                "detail": "enhancement deferred; unexamined material is unknown, not absent"
+              }
+            ]
+          }
+        },
+        {
+          "public_default_budget": {
+            "status": "partial",
+            "candidate_count": 1459,
+            "selected_count": 96,
+            "coverage_complete": false,
+            "selection_diagnostics": [
+              {
+                "code": "budget_full",
+                "count": 206
+              }
+            ],
+            "group_count": 50
+          }
+        },
+        {
+          "pipeline_with_public_document_budget": {
+            "analysis_status": "complete",
+            "keys": [
+              "schema_version",
+              "feature_version",
+              "analysis_status",
+              "work",
+              "source_ref",
+              "observation",
+              "route",
+              "profile",
+              "child_profiles",
+              "structure",
+              "packages",
+              "reading_plan",
+              "layout_hints",
+              "source_signals",
+              "table_bindings",
+              "non_selectable_unit_ids",
+              "plan",
+              "diagnostics",
+              "native_layout_frontend"
+            ],
+            "diagnostic_counts": {
+              "ROUTE_LOW_CONFIDENCE": 1,
+              "DEFERRED_PAGE": 247,
+              "NATIVE_SCAN_INCOMPLETE": 1,
+              "REPEATED_RUNNING_HEADER": 1,
+              "SECTION_OVERSIZED": 5,
+              "TABLE_BODY_NOT_READ": 337,
+              "TOC_ENTRIES_DETECTED": 1,
+              "NEEDS_UPSTREAM_GRANULARITY": 106,
+              "WORK_UNITS": 2
+            },
+            "budget_diagnostics": [
+              {
+                "code": "WORK_UNITS",
+                "detail": "from structure lane"
+              },
+              {
+                "code": "WORK_UNITS",
+                "detail": "730005"
+              }
+            ]
+          }
+        },
+        {
+          "config_db_unchanged_from_native_baseline": true,
+          "hashes": {
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No complete sealed generation replay or all-page table capture. Existing SHA verified via SourceVersionReader preview; no raw PDF copy.",
+    "No network/model/production writes; config and isolated DB hashes unchanged across native probes.",
+    "Original max_selected=96/max_chars=48000 and existing WorkBudget retained."
+  ],
+  "baseline_commit": "908ec2c408aad75d1c73a92709577a7d3e7a47d3",
+  "branch": "codex/r1-final3-source-semantics",
+  "owned_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "baseline_sha256": "58556ea6ce5308d6664bb01b06c27705b933f8c51db57bb6c417a2646260ff21",
+      "current_sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/sections.py",
+      "baseline_sha256": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0",
+      "current_sha256": "976e90865d690916a04d91840fcc941359e99ae5626abf67dd5fa38f51dbed96"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+      "baseline_sha256": "4bb43e086cf131b9e1700d73fca88c797425d314996ae6d5b4a573b14638d88e",
+      "current_sha256": "511b4240ecd303de285dbdc0e3416d8f0533628c257840c46400be652c01d05b"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_table_admission.py",
+      "baseline_sha256": "5c2786d6aba95c1b1d0b85f242e422170e0dec8ed7a99852d9d780346ff03a39",
+      "current_sha256": "6613841374673a54a7dbb28ed4de17f5768e4798a7006c33256d1de9bb96ab3a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "baseline_sha256": "46075527ff7101096ce4c6c21f1803dfd58a93ac77dfe53a6f1df7f720448b67",
+      "current_sha256": "48e5a30a8f8ffccaf56a853556f1c20024554a7c382757dfbb9508ca408391c6"
+    }
+  ],
+  "runtime": {
+    "interpreter": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "flags": [
+      "-B"
+    ],
+    "PYTHONPATH": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src",
+    "module_file_verified_before_and_after_first_RED": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "network_calls": 0,
+    "paid_calls": 0,
+    "install_or_git_mutations": 0
+  },
+  "implementation": [
+    "Use only declared section parent_id edges to retain each body own original ancestor headings; missing/cyclic/duplicate/cross-source trees defer instead of using nearest text. Preserve anonymous local sections without inventing ancestor identity.",
+    "Preserve original typed-table package anchors and header/unit/period/note edges even with prose/background kind. Reused local table ID across pages/parents is not continuity proof. No kind/value promotion from labels.",
+    "At the confirmed structure owner, a source numeric-parenthesis opener plus a same-box colon introduction and indented bullet blocks establishes a bounded original-ID scope. Inline enumeration, absent indentation, tables, footnotes and DOM heading structure are not reinterpreted. Same-page only and existing MAX_CONTINUATION_UNITS=24 bound; return to original parent stack on outdent/non-bullet block.",
+    "Public groups retain support/context roles and distinct span IDs for identical text from separate original locators."
+  ],
+  "verification": {
+    "old_code_true_RED": {
+      "dependency_tests_failed": 4,
+      "native_structure_failed": 2,
+      "native_negative_passed": 1
+    },
+    "latest_required_GREEN": {
+      "passed": 185,
+      "failed": 0,
+      "junit": "context-worker/green-compatible.xml",
+      "stdout": "context-worker/green-compatible.stdout.txt"
+    },
+    "git_diff_check": "pass; read-only exact 5 owned paths",
+    "parent_broader_regression_caught": "Two old valid anonymous-section fixtures were fixed without changing their assertions; included latest 185P."
+  },
+  "real_source_check": {
+    "source_ref": {
+      "byte_size": 1608226,
+      "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "baseline_artifact": "context-worker/native-baseline.json",
+    "after_artifact": "context-worker/native-after-final.json",
+    "scope_before": "All p14 business material was body under s52 major operations; no Testing/Biology child scope.",
+    "scope_after": "Native s54 Testing and s55 Biology exist. Each 30% original has its own numbered revenue sentence and colon intro plus existing ancestors as required context; no sibling borrowing.",
+    "selection": {
+      "max_selected": 96,
+      "max_chars": 48000,
+      "candidate_count": 1459,
+      "selected_count": 96,
+      "selected_chars": 8433,
+      "status": "partial",
+      "coverage_complete": false,
+      "selection_diagnostics": [
+        {
+          "code": "budget_full",
+          "count": 206
+        }
+      ],
+      "context_deferred_count": 263
+    },
+    "target_selected": [
+      false,
+      false
+    ],
+    "target_bands": [
+      "description",
+      "meaningful_fact"
+    ],
+    "real_p13_table_admission": "Neither the p13 native header+first row block nor the typed first revenue row entered a candidate package in this bounded diagnostic. This task does not assert actual real-table route PASS.",
+    "read_only_hashes": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+    },
+    "scope_limit": "table_pages=[13,14], all coarse pages read, fine capture partial; source structural diagnostic and public planner only, not sealed generation replay or all-page table/semantic acceptance."
+  },
+  "retained_artifacts": [
+    {
+      "path": "context-worker\\green-compatible.stdout.txt",
+      "byte_size": 1885,
+      "sha256": "e1fd32dfce62dfa4d218d638e9d906d1ee703e468df92d443c6c134558528ac6"
+    },
+    {
+      "path": "context-worker\\green-compatible.xml",
+      "byte_size": 41426,
+      "sha256": "d0ad3c59758add5633922ec67945cdd90f34c91eef222ec112a7a9aa512ae708"
+    },
+    {
+      "path": "context-worker\\green-focused.stdout.txt",
+      "byte_size": 1579,
+      "sha256": "9a03adb3ffcbfb09488b9cbd2fc7b3f84ce87105b08693254470bca1369e41a0"
+    },
+    {
+      "path": "context-worker\\green-focused.xml",
+      "byte_size": 1650,
+      "sha256": "4a26aa44aa6b335817d4c59265212ca6d8678df1a4aa924b615b048d7b593821"
+    },
+    {
+      "path": "context-worker\\green-related-final.stdout.txt",
+      "byte_size": 1722,
+      "sha256": "f8112b494a96d7a046538d6c383574134dd59d10a7a504e59ebb04a376453f42"
+    },
+    {
+      "path": "context-worker\\green-related-final.xml",
+      "byte_size": 32378,
+      "sha256": "5c5fd7d0caaad00b8890de56baebd91f5becb02f09ab29691caed951e28b4f68"
+    },
+    {
+      "path": "context-worker\\green-related.stdout.txt",
+      "byte_size": 2655,
+      "sha256": "358aa8d2b24ed404bfe1522ca1e7188a1ead5bd7ccd7b4be6dfdf7ba57c8e48f"
+    },
+    {
+      "path": "context-worker\\green-related.xml",
+      "byte_size": 32984,
+      "sha256": "a1f4f69bf34fc54f51d149bf645370e97e34eb248a0ddcd2153d4062975e29ac"
+    },
+    {
+      "path": "context-worker\\native-after-final.json",
+      "byte_size": 8558,
+      "sha256": "a38adb6d62b583d9c9c3e908c9d64e3379835e6676d89842746092a006a5dc6d"
+    },
+    {
+      "path": "context-worker\\native-after-final.stdout.txt",
+      "byte_size": 7220,
+      "sha256": "272ae6e15e4cdb4d9470194d754123521318f0512db63b9f54b7aa33dce47a2a"
+    },
+    {
+      "path": "context-worker\\native-after.stdout.txt",
+      "byte_size": 438,
+      "sha256": "9c5f2ba72c77c2cc3ef2c972e373f0a580df166b72991d60b5791f2ecb7e6d8a"
+    },
+    {
+      "path": "context-worker\\native-baseline.json",
+      "byte_size": 37332,
+      "sha256": "c670a3073e607e15010adf36d6289244e173c93c185c81c44a9ce4ad6f73cef5"
+    },
+    {
+      "path": "context-worker\\native-baseline.stdout.txt",
+      "byte_size": 13438,
+      "sha256": "70c9722f8f7dbd3fecbdcf35bef4a0393745d221f7dae1df8267f552d587ed93"
+    },
+    {
+      "path": "context-worker\\readonly-review-probe.json",
+      "byte_size": 9113,
+      "sha256": "f2eafb6394321a3dc079566ad38e7134d02202c09f109e40afd2b29486b2cbd8"
+    },
+    {
+      "path": "context-worker\\red-native-structure.stdout.txt",
+      "byte_size": 3496,
+      "sha256": "21cbd86da89241e5a1a01c63f5c74b9c0262fd7b5588c4f4b942d267283ce38f"
+    },
+    {
+      "path": "context-worker\\red-native-structure.xml",
+      "byte_size": 3566,
+      "sha256": "7ccbceb41134a3f53cc61a2f92805a5e1dd9b082a689695203227fe498c86a0d"
+    },
+    {
+      "path": "context-worker\\red-native.stdout.txt",
+      "byte_size": 5226,
+      "sha256": "bc7f87d63cd112ba4be28844859c4dbb985e97e84445ee6deca9edd1e0dee829"
+    },
+    {
+      "path": "context-worker\\red-native.xml",
+      "byte_size": 4169,
+      "sha256": "153f3780f290ed4957ea28ca271220e4b3c979edc3b2135442f173f4cc9a134b"
+    },
+    {
+      "path": "context-worker\\red.stdout.txt",
+      "byte_size": 5166,
+      "sha256": "056c6f9fd0d370108d766cbf0e465567fb58fc24b40386662a6d3f165db1e1d6"
+    },
+    {
+      "path": "context-worker\\red.xml",
+      "byte_size": 5079,
+      "sha256": "f5cfd23c7f4754fd8804c098a59b4373eb97534b2d8d0a2e127cae603739ba30"
+    },
+    {
+      "path": "context-worker\\types-fix-mypy.stdout.txt",
+      "byte_size": 46,
+      "sha256": "435a96adb1511d2ad62c452be9d967a288353e7c12f32caef696f41408aed2ec"
+    },
+    {
+      "path": "context-worker\\types-fix-pytest.stdout.txt",
+      "byte_size": 1885,
+      "sha256": "ccb201bb9ec94c561590c5d3a85e20b918c17d6795d1ca8f9de132e3be1919d6"
+    },
+    {
+      "path": "context-worker\\types-fix-pytest.xml",
+      "byte_size": 41426,
+      "sha256": "b1c94151c02d5fc0eb6bdba4dfa87858b43346d01fa573420e692b38d3951f29"
+    },
+    {
+      "path": "context-worker\\types-fix-ruff.stdout.txt",
+      "byte_size": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    }
+  ],
+  "retained_artifact_bytes": 262457,
+  "types_fix": {
+    "scope": "Only replace proven nonnull bbox property comparisons with equivalent tuple access; concrete set[str], list[SectionDraft] and dict[str, tuple[frozenset[str], bool]] annotations. No behavioral changes.",
+    "pytest": {
+      "passed": 185,
+      "junit": "context-worker/types-fix-pytest.xml"
+    },
+    "mypy": {
+      "status": "pass",
+      "source_files": 366,
+      "stdout": "context-worker/types-fix-mypy.stdout.txt"
+    },
+    "ruff": {
+      "status": "pass",
+      "paths": [
+        "src/company_wiki/document_understanding/structure/sections.py",
+        "src/company_wiki/source_catalog/narrative_reading.py"
+      ],
+      "stdout": "context-worker/types-fix-ruff.stdout.txt"
+    }
+  },
+  "non_author_review": {
+    "status": "STOPPED_INCOMPLETE_AT_ROOT_FREEZE",
+    "receipt": "context-worker/readonly-review-probe.json",
+    "open_observations": "Two adjacent numeric identifier false positives are OPEN and unfixed. No review PASS or completed non-author review claim.",
+    "further_execution": "None after freeze except recording existing output and this handoff."
+  }
+}

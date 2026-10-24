@@ -1,0 +1,2 @@
+docs/plans/du11-source-closure-2026-10-18/review/w08-red-design-20261022.json:468: new blank line at EOF.
+docs/plans/du11-source-closure-2026-10-18/review/w08-red-design-20261022.md:216: new blank line at EOF.

@@ -1,0 +1,41 @@
+READING_MODULE=C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\src\company_wiki\source_catalog\narrative_reading.py
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 46 items / 43 deselected / 3 selected
+
+tests\unit\document_understanding_selection\test_reading_native_continuity.py F [ 33%]
+F.                                                                       [100%]
+
+================================== FAILURES ===================================
+_ test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[False] _
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:792: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    assert set(heads) == {parsed.units[parent].unit_id, parsed.units[intro].unit_id}
+E   AssertionError: assert {'urn:company...e01f1a86ef49'} == {'urn:company...9a2de067da33'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:da2d915eb28c5bf3e39c8de950bfb1c7f6569c5672efef22248ce01f1a86ef49'
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:b553fff396c1f9c19ff54c50802bce0ec525d892fee8f36a621e9a2de067da33'
+E     'urn:company-wiki:narrative-unit:sha256:b18fb28f31622246468e5532c8e62e025433641a9a322472f66e3bbdcfda8605'
+E     Use -v to get more diff
+_ test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[True] _
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:792: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    assert set(heads) == {parsed.units[parent].unit_id, parsed.units[intro].unit_id}
+E   AssertionError: assert {'urn:company...e01f1a86ef49'} == {'urn:company...9a2de067da33'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:da2d915eb28c5bf3e39c8de950bfb1c7f6569c5672efef22248ce01f1a86ef49'
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:b553fff396c1f9c19ff54c50802bce0ec525d892fee8f36a621e9a2de067da33'
+E     'urn:company-wiki:narrative-unit:sha256:64cc62588e634916d1c1844f178b4d5d4d5f6687218f7f330fe1cbad5be21718'
+E     Use -v to get more diff
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\review\context-worker\red-native-structure.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[False]
+FAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[True]
+================= 2 failed, 1 passed, 43 deselected in 0.98s ==================

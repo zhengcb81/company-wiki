@@ -1,0 +1,60 @@
+READING_MODULE=C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\src\company_wiki\source_catalog\narrative_reading.py
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 71 items / 67 deselected / 4 selected
+
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py F [ 25%]
+F                                                                        [ 50%]
+tests\unit\document_understanding_selection\test_reading_table_admission.py F [ 75%]
+F                                                                        [100%]
+
+================================== FAILURES ===================================
+__ test_explicit_business_ancestors_follow_their_own_original_branch[False] ___
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py:130: in test_explicit_business_ancestors_follow_their_own_original_branch
+    assert set(metadata[ids[anchor]]["required"]) == {ids[0], ids[parent]}
+E   AssertionError: assert set() == {'urn:company...0bab66a5021c'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:dfb01cd668ea6625faecc5f7a527d6848fd407bb75ead6057afc0bab66a5021c'
+E     'urn:company-wiki:narrative-unit:sha256:4012b92a9667d7b4b692591e9028fe49619d192270724b3d6c375ce508edd9e2'
+E     Use -v to get more diff
+___ test_explicit_business_ancestors_follow_their_own_original_branch[True] ___
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py:130: in test_explicit_business_ancestors_follow_their_own_original_branch
+    assert set(metadata[ids[anchor]]["required"]) == {ids[0], ids[parent]}
+E   AssertionError: assert set() == {'urn:company...9198fd9c94c2'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:4012b92a9667d7b4b692591e9028fe49619d192270724b3d6c375ce508edd9e2'
+E     'urn:company-wiki:narrative-unit:sha256:ea4dc8114d9d14893c1d48d7235dbf16b2a29594c6efe55d4ec99198fd9c94c2'
+E     Use -v to get more diff
+_ test_background_table_route_keeps_declared_original_header_unit_period_and_note[\u5957] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:322: in test_background_table_route_keeps_declared_original_header_unit_period_and_note
+    assert set(metadata[row.unit_id]["required"]) == {header.unit_id, note.unit_id}
+E   AssertionError: assert set() == {'urn:company...b979ce6a3c38'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:35dac44828ab13bcefc21320d5891a9ac45f82d507c7783681b64f0bb2b60a97'
+E     'urn:company-wiki:narrative-unit:sha256:67ca30a0c8f6647809c44f2613fb751e0b7fd8a2ace950e18047b979ce6a3c38'
+E     Use -v to get more diff
+_ test_background_table_route_keeps_declared_original_header_unit_period_and_note[USD million] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:322: in test_background_table_route_keeps_declared_original_header_unit_period_and_note
+    assert set(metadata[row.unit_id]["required"]) == {header.unit_id, note.unit_id}
+E   AssertionError: assert set() == {'urn:company...b979ce6a3c38'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:64735d4a6d82f2a869499e90e00f989ed89e744913a5a7d14b21e09db224576e'
+E     'urn:company-wiki:narrative-unit:sha256:67ca30a0c8f6647809c44f2613fb751e0b7fd8a2ace950e18047b979ce6a3c38'
+E     Use -v to get more diff
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\review\context-worker\red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_named_segment_scope.py::test_explicit_business_ancestors_follow_their_own_original_branch[False]
+FAILED tests/unit/document_understanding_selection/test_reading_named_segment_scope.py::test_explicit_business_ancestors_follow_their_own_original_branch[True]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_background_table_route_keeps_declared_original_header_unit_period_and_note[\u5957]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_background_table_route_keeps_declared_original_header_unit_period_and_note[USD million]
+====================== 4 failed, 67 deselected in 1.28s =======================
+READING_MODULE_AFTER=C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\src\company_wiki\source_catalog\narrative_reading.py

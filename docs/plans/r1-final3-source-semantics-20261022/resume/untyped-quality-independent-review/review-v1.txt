@@ -1,0 +1,33 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\probe-temp", "requested_basetemp_len": 155, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211202-2fd24876", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 26 items
+
+tests\unit\document_understanding_selection\test_reading_untyped_numeric_quality.py . [  3%]
+..............                                                           [ 57%]
+docs\plans\r1-final3-source-semantics-20261022\resume\untyped-quality-independent-review\test_untyped_probe.py . [ 61%]
+.....FF...                                                               [100%]
+
+================================== FAILURES ===================================
+____ test_proven_native_wrapping_of_complete_prose_is_not_a_table[parts0] _____
+docs\plans\r1-final3-source-semantics-20261022\resume\untyped-quality-independent-review\test_untyped_probe.py:58: in test_proven_native_wrapping_of_complete_prose_is_not_a_table
+    assert FLAG not in spans[0].quality_flags, "bare wrapped quantity tokens do not prove source cells"
+E   AssertionError: bare wrapped quantity tokens do not prove source cells
+E   assert 'table_structure_ambiguous' not in ('table_structure_ambiguous',)
+E    +  where ('table_structure_ambiguous',) = EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:f4713cecabe76fd0cb80b87df9b884f35f...b74e28b2b27cf0abd13fd463c6', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=('table_structure_ambiguous',)).quality_flags
+____ test_proven_native_wrapping_of_complete_prose_is_not_a_table[parts1] _____
+docs\plans\r1-final3-source-semantics-20261022\resume\untyped-quality-independent-review\test_untyped_probe.py:58: in test_proven_native_wrapping_of_complete_prose_is_not_a_table
+    assert FLAG not in spans[0].quality_flags, "bare wrapped quantity tokens do not prove source cells"
+E   AssertionError: bare wrapped quantity tokens do not prove source cells
+E   assert 'table_structure_ambiguous' not in ('table_structure_ambiguous',)
+E    +  where ('table_structure_ambiguous',) = EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:58e63a9a6b929f9ee4692d1483632699a1...e22933ffb6332ee9a40f579f10', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=('table_structure_ambiguous',)).quality_flags
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\untyped-quality-independent-review\review-v1.xml -
+=========================== short test summary info ===========================
+FAILED docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/test_untyped_probe.py::test_proven_native_wrapping_of_complete_prose_is_not_a_table[parts0]
+FAILED docs/plans/r1-final3-source-semantics-20261022/resume/untyped-quality-independent-review/test_untyped_probe.py::test_proven_native_wrapping_of_complete_prose_is_not_a_table[parts1]
+======================== 2 failed, 24 passed in 7.53s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211202-2fd24876", "existed": true, "removed": true}

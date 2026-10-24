@@ -1,0 +1,381 @@
+{
+  "schema_version": "w08-context-actual-target-structure/1",
+  "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "source_bytes_read_this_replay": 1608226,
+  "source_open_calls_diagnosis_total": 3,
+  "source_bytes_read_diagnosis_total": 4824678,
+  "source_sha_verified": true,
+  "read_at": "2026-10-23T20:12:02.223594+00:00",
+  "policy_sha256": "29699ad14bdba52e0f8ccef8ef956856e32ece018e817eaf40ef81eff076f31e",
+  "source_read_policy_sha256": "98772f0fae54e00ae954ec38916ce54d2eb6c0ad795c9a700f6192d2efb64c4b",
+  "first_two_harness_failures": [
+    "asdict hit mappingproxy after public build; no artifact saved",
+    "full nested metadata made output908431B;64KiB guard refused write; no artifact saved"
+  ],
+  "root_authorized_third_and_last": true,
+  "offline_whitelist_gate": {
+    "passed": true,
+    "synthetic_bytes": 1725,
+    "huge_metadata_not_emitted": true,
+    "whitelist_scalar_fields": [
+      "font_size",
+      "heading_level",
+      "heading_level_source",
+      "kind",
+      "layout_basis",
+      "layout_confidence",
+      "layout_heading_level",
+      "observation_kind",
+      "page",
+      "paragraph",
+      "table_id",
+      "text",
+      "unit_id"
+    ]
+  },
+  "raw_copies": 0,
+  "model_calls": 0,
+  "downloads": 0,
+  "protected_unchanged": true,
+  "protected_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3": "78de0a688caa73000b0268be9fd4db763dc2ab6956ee5e2cfba9b3c60e3beb6c"
+  },
+  "code_unchanged": true,
+  "code_sha256": {
+    "source_catalog/narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+    "source_catalog/narrative_reading.py": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+    "document_understanding/structure/sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+    "document_understanding/structure/layout.py": "0e1506f22be701c66caf3bfba1b720b598ad612bafc5e1e8f461a1cde70c626a",
+    "document_understanding/layout_hints/headings.py": "261581a1578e5189e877f8084ae07433cd5344d1f877fe86ad0866bcdd73f122",
+    "document_understanding/structure/tables.py": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+    "document_understanding/structure/table_purpose.py": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+    "document_understanding/pipeline.py": "97c4cdd57fca617e1313446283c6a8121b074d3666ffbb2356a6a4591b52e029",
+    "document_understanding/observation_adapter.py": "dd5091c4e0f4a32cd2eb329c0891f27be4ef8185c8c63cc58e3dbcaaf60b4ddb"
+  },
+  "physical_pages": 249,
+  "parsed_unit_count": 5647,
+  "budget_used": 3699183,
+  "budget_limit": 16000000,
+  "target_records": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f1792f9a341c3aa352957312fb77af3219d4afdc8fcf624443aaae88e7724113",
+      "kind": "pdf_text_block",
+      "page": 16,
+      "paragraph": 2,
+      "text": "持续经营业务小计\n4,342,082.37\n2,218,493.11\n48.91\n21.40\n12.01\n增加4.28\n个百分点",
+      "font_size": 10.449999809265137,
+      "observation_kind": "paragraph",
+      "heading_level": null,
+      "heading_level_source": null,
+      "table_id": null,
+      "layout_heading_level": null,
+      "layout_confidence": "unknown",
+      "layout_basis": "no_heading_evidence;no_lane_split",
+      "section_paths": [
+        {
+          "role": "body",
+          "ancestors": [
+            {
+              "id": "s59",
+              "parent": "s40",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:638900d620c22d605cf354972afa441068ed7b13eb005948d03f7fa19bcb8a1e"
+              ],
+              "heading_text": [
+                "(1). 分行业、分产品、分地区、分销售模式情况"
+              ],
+              "heading_count": 1,
+              "body_count": 45,
+              "basis": "reading_order;heading_level;spans_pages",
+              "confidence": "high"
+            },
+            {
+              "id": "s40",
+              "parent": "s1",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "heading_text": [
+                "第三节\n管理层讨论与分析"
+              ],
+              "heading_count": 1,
+              "body_count": 0,
+              "basis": "reading_order;heading_level",
+              "confidence": "high"
+            },
+            {
+              "id": "s1",
+              "parent": null,
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [],
+              "heading_text": [],
+              "heading_count": 0,
+              "body_count": 1,
+              "basis": "reading_order;no_preceding_heading",
+              "confidence": "low"
+            }
+          ],
+          "limited": false
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:02ad67596bb525120cd9a83b8c7848420442acc540156f34df4dd30a6b626a65",
+      "kind": "pdf_text_block",
+      "page": 16,
+      "paragraph": 3,
+      "text": "终止经营业务\n203,534.20\n161,650.35\n20.58\n-41.42\n-48.82\n增加11.47",
+      "font_size": 10.449999809265137,
+      "observation_kind": "paragraph",
+      "heading_level": null,
+      "heading_level_source": null,
+      "table_id": null,
+      "layout_heading_level": null,
+      "layout_confidence": "unknown",
+      "layout_basis": "no_heading_evidence;no_lane_split",
+      "section_paths": [
+        {
+          "role": "body",
+          "ancestors": [
+            {
+              "id": "s59",
+              "parent": "s40",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:638900d620c22d605cf354972afa441068ed7b13eb005948d03f7fa19bcb8a1e"
+              ],
+              "heading_text": [
+                "(1). 分行业、分产品、分地区、分销售模式情况"
+              ],
+              "heading_count": 1,
+              "body_count": 45,
+              "basis": "reading_order;heading_level;spans_pages",
+              "confidence": "high"
+            },
+            {
+              "id": "s40",
+              "parent": "s1",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+              ],
+              "heading_text": [
+                "第三节\n管理层讨论与分析"
+              ],
+              "heading_count": 1,
+              "body_count": 0,
+              "basis": "reading_order;heading_level",
+              "confidence": "high"
+            },
+            {
+              "id": "s1",
+              "parent": null,
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [],
+              "heading_text": [],
+              "heading_count": 0,
+              "body_count": 1,
+              "basis": "reading_order;no_preceding_heading",
+              "confidence": "low"
+            }
+          ],
+          "limited": false
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c",
+      "kind": "pdf_text_block",
+      "page": 160,
+      "paragraph": 19,
+      "text": "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43",
+      "font_size": 10.449999809265137,
+      "observation_kind": "paragraph",
+      "heading_level": null,
+      "heading_level_source": null,
+      "table_id": null,
+      "layout_heading_level": null,
+      "layout_confidence": "low",
+      "layout_basis": "in_table_region",
+      "section_paths": [
+        {
+          "role": "heading",
+          "ancestors": [
+            {
+              "id": "s567",
+              "parent": "s1",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c"
+              ],
+              "heading_text": [
+                "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43"
+              ],
+              "heading_count": 1,
+              "body_count": 0,
+              "basis": "reading_order;heading_numbering",
+              "confidence": "medium"
+            },
+            {
+              "id": "s1",
+              "parent": null,
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [],
+              "heading_text": [],
+              "heading_count": 0,
+              "body_count": 1,
+              "basis": "reading_order;no_preceding_heading",
+              "confidence": "low"
+            }
+          ],
+          "limited": false
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:851ec64a9e52ae74f586dcaa2692d2885b499be9edc1f6281dd78b882525b1be",
+      "kind": "pdf_text_block",
+      "page": 183,
+      "paragraph": 7,
+      "text": "(2).营业收入、营业成本的分解信息",
+      "font_size": 10.449999809265137,
+      "observation_kind": "heading",
+      "heading_level": 2,
+      "heading_level_source": "numbering",
+      "table_id": null,
+      "layout_heading_level": 2,
+      "layout_confidence": "medium",
+      "layout_basis": "numbered_heading;conservative_horizontal_clearance;isolated;short_text",
+      "section_paths": [
+        {
+          "role": "heading",
+          "ancestors": [
+            {
+              "id": "s649",
+              "parent": "s567",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:851ec64a9e52ae74f586dcaa2692d2885b499be9edc1f6281dd78b882525b1be"
+              ],
+              "heading_text": [
+                "(2).营业收入、营业成本的分解信息"
+              ],
+              "heading_count": 1,
+              "body_count": 15,
+              "basis": "reading_order;heading_level;spans_pages",
+              "confidence": "high"
+            },
+            {
+              "id": "s567",
+              "parent": "s1",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c"
+              ],
+              "heading_text": [
+                "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43"
+              ],
+              "heading_count": 1,
+              "body_count": 0,
+              "basis": "reading_order;heading_numbering",
+              "confidence": "medium"
+            },
+            {
+              "id": "s1",
+              "parent": null,
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [],
+              "heading_text": [],
+              "heading_count": 0,
+              "body_count": 1,
+              "basis": "reading_order;no_preceding_heading",
+              "confidence": "low"
+            }
+          ],
+          "limited": false
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f909c596b3686412cd635a7e7e237d11129fa8257eb48cde72140b1dd2c14742",
+      "kind": "pdf_text_block",
+      "page": 184,
+      "paragraph": 4,
+      "text": "注：依据企业会计准则规定，公司将本年或对比年度内已签署股权出售协议、完成出售或正处于终止阶段的相关业务，划分为终止经营业务，相应重述\n了可比期间的数据。",
+      "font_size": 10.449999809265137,
+      "observation_kind": "footnote",
+      "heading_level": null,
+      "heading_level_source": null,
+      "table_id": null,
+      "layout_heading_level": null,
+      "layout_confidence": "low",
+      "layout_basis": "sentence_like_text;no_lane_split",
+      "section_paths": [
+        {
+          "role": "body",
+          "ancestors": [
+            {
+              "id": "s649",
+              "parent": "s567",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:851ec64a9e52ae74f586dcaa2692d2885b499be9edc1f6281dd78b882525b1be"
+              ],
+              "heading_text": [
+                "(2).营业收入、营业成本的分解信息"
+              ],
+              "heading_count": 1,
+              "body_count": 15,
+              "basis": "reading_order;heading_level;spans_pages",
+              "confidence": "high"
+            },
+            {
+              "id": "s567",
+              "parent": "s1",
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [
+                "urn:company-wiki:narrative-unit:sha256:3c302c0c1a6bf5bc3549fad803a36381e948cb310aaf82e853ad9d6a5189406c"
+              ],
+              "heading_text": [
+                "5.期末余额\n-\n-\n1,960,837.10\n-\n102,373,490.33\n104,334,327.43"
+              ],
+              "heading_count": 1,
+              "body_count": 0,
+              "basis": "reading_order;heading_numbering",
+              "confidence": "medium"
+            },
+            {
+              "id": "s1",
+              "parent": null,
+              "depth": null,
+              "wire_has_depth": false,
+              "heading_ids": [],
+              "heading_text": [],
+              "heading_count": 0,
+              "body_count": 1,
+              "basis": "reading_order;no_preceding_heading",
+              "confidence": "low"
+            }
+          ],
+          "limited": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "source_before": {
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "04f236f643ffc9dc20ea2b386aea62a3f666895079a08286e215303dc16ad993",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "388e6d9d56e4bf21506431e1ea41df6ec70295bd98337891f8b4465420b01fea",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "f120f588fc2684d5ca7e0b8328e6323f9bd6916c64074680170f77ec14df013c",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+  },
+  "source_after": {
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "04f236f643ffc9dc20ea2b386aea62a3f666895079a08286e215303dc16ad993",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "388e6d9d56e4bf21506431e1ea41df6ec70295bd98337891f8b4465420b01fea",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "f120f588fc2684d5ca7e0b8328e6323f9bd6916c64074680170f77ec14df013c",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+  },
+  "source_stable": true,
+  "suite": "predicate-controls-public-recall-final",
+  "exit_code": 0,
+  "elapsed_seconds": 1.8861260000267066,
+  "arguments": [
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py"
+  ],
+  "imports": {
+    "budget": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\resource_budget.py",
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+  },
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233432-e4fd8ab2",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233432-e4fd8ab2",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\predicate-controls-public-recall-final-temp",
+      "absent": true
+    }
+  ],
+  "no_external_calls": true
+}

@@ -303,3 +303,82 @@ def test_legacy_selector_does_not_call_new_table_qualification(monkeypatch):
     )
     assert replay == original
     assert parsed == replace(parsed)
+
+
+
+@pytest.mark.parametrize("unit", ["套", "USD million"])
+def test_background_table_route_keeps_declared_original_header_unit_period_and_note(unit):
+    parsed, pipeline = fixture(
+        "在手订单数量 | 截至2026年6月末 | " + unit,
+        ["设备甲 | 45"], note="注：统计不包含尚未交付的试用订单。",
+    )
+    pipeline["packages"]["packages"][0]["kind"] = "background"
+    for profile in pipeline["reading_plan"]["unit_profiles"].values():
+        profile["section_role"] = "business"
+    before = deepcopy(pipeline)
+    candidates, metadata, packages, complete, withheld = reading._candidates(parsed, pipeline)
+    row, header, note = parsed.units[1], parsed.units[0], parsed.units[2]
+    assert row.unit_id in metadata and not metadata[row.unit_id]["context_only"]
+    assert set(metadata[row.unit_id]["required"]) == {header.unit_id, note.unit_id}
+    assert metadata[header.unit_id]["context_only"] and metadata[note.unit_id]["context_only"]
+    assert complete and not withheld
+    assert pipeline == before
+    assert {candidate.unit.unit_id for candidate in candidates} == {unit.unit_id for unit in parsed.units}
+
+
+
+def test_two_background_tables_keep_their_own_original_context_when_package_order_changes():
+    parsed, pipeline = fixture("在手订单数量 | 2026 | 套", ["设备甲 | 45"], note="注：不含试用订单。")
+    other, other_pipeline = fixture("门店数量 | 2025 | 家", ["直营网点 | 12"], note="注：不含临时网点。", table=1)
+    parsed = replace(parsed, units=(*parsed.units, *other.units))
+    pipeline["packages"]["packages"].extend(other_pipeline["packages"]["packages"])
+    pipeline["reading_plan"]["unit_profiles"].update(other_pipeline["reading_plan"]["unit_profiles"])
+    for package in pipeline["packages"]["packages"]:
+        package["kind"] = "background"
+    for profile in pipeline["reading_plan"]["unit_profiles"].values():
+        profile["section_role"] = "business"
+    for reverse in (False, True):
+        if reverse:
+            pipeline["packages"]["packages"].reverse()
+        _, metadata, _, complete, withheld = reading._candidates(parsed, pipeline)
+        assert complete and not withheld
+        for start in (0, 3):
+            assert set(metadata[parsed.units[start+1].unit_id]["required"]) == {
+                parsed.units[start].unit_id, parsed.units[start+2].unit_id,
+            }
+
+
+@pytest.mark.parametrize("broken", ["missing-header", "reused-next-page-table-id"])
+def test_background_table_with_unproven_native_context_is_not_a_complete_numeric_fact(broken):
+    parsed, pipeline = fixture("在手订单数量 | 2026 | 套", ["设备甲 | 45"], note="注：不含试用订单。")
+    pipeline["packages"]["packages"][0]["kind"] = "background"
+    for profile in pipeline["reading_plan"]["unit_profiles"].values():
+        profile["section_role"] = "business"
+    row = parsed.units[1].unit_id
+    if broken == "missing-header":
+        parsed = replace(parsed, units=parsed.units[1:])
+    else:
+        changed = replace(parsed.units[1], coordinates=replace(parsed.units[1].coordinates, page_number=2))
+        parsed = replace(parsed, units=(parsed.units[0], changed, parsed.units[2]), page_count=2, pages_read=2)
+    result = reading._candidates(parsed, pipeline)
+    assert row not in anchors(result)
+    assert result[4], "unread original header must remain explicitly deferred"
+
+
+def test_background_original_context_reaches_public_citation_views_with_support_roles(monkeypatch):
+    parsed, supplied = fixture("在手订单数量 | 2026 | 套", ["设备甲 | 45"], note="注：不含试用订单。")
+    actual = reading._understand(parsed, title="年度报告", kind="annual_report", mime_type="application/pdf")
+    supplied["packages"]["packages"][0]["kind"] = "background"
+    for profile in supplied["reading_plan"]["unit_profiles"].values():
+        profile["section_role"] = "business"
+    actual["packages"] = supplied["packages"]
+    actual["reading_plan"]["unit_profiles"] = supplied["reading_plan"]["unit_profiles"]
+    monkeypatch.setattr(reading, "_understand", lambda *a, **k: actual)
+    selected = reading.select_reading_evidence(parsed, title="年度报告", existing_kind="annual_report", max_selected=3)
+    by_text = {span.raw_text: span.span_id for span in selected.evidence_spans}
+    row = by_text[parsed.units[1].raw_text]
+    expected = {by_text[parsed.units[0].raw_text], by_text[parsed.units[2].raw_text]}
+    views = [view for group in selected.reading_context["groups"] for view in group["citation_views"]]
+    row_views = [view for view in views if view["support_evidence_ids"] == [row]]
+    assert row_views and all(set(view["context_evidence_ids"]) == expected for view in row_views)
+    assert all(not expected.intersection(view["support_evidence_ids"]) for view in views)

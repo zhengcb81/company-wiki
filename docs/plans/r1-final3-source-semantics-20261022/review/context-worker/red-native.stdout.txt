@@ -1,0 +1,71 @@
+READING_MODULE=C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\src\company_wiki\source_catalog\narrative_reading.py
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 46 items / 43 deselected / 3 selected
+
+tests\unit\document_understanding_selection\test_reading_native_continuity.py F [ 33%]
+FF                                                                       [100%]
+
+================================== FAILURES ===================================
+_ test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[False] _
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:784: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    parsed = _native_numbered_scope_case(reverse=reverse)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:773: in _native_numbered_scope_case
+    metadata=deepcopy(dict(unit.metadata))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[True] _
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:784: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    parsed = _native_numbered_scope_case(reverse=reverse)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:773: in _native_numbered_scope_case
+    metadata=deepcopy(dict(unit.metadata))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+_ test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope _
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:807: in test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope
+    parsed = _native_numbered_scope_case(indented=False)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:773: in _native_numbered_scope_case
+    metadata=deepcopy(dict(unit.metadata))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\review\context-worker\red-native.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[False]
+FAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[True]
+FAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope
+====================== 3 failed, 43 deselected in 0.64s =======================

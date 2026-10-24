@@ -1,0 +1,542 @@
+{
+  "schema_version": "w08-test-runtime-input-restoration/2",
+  "full_prepush": {
+    "passed": 7446,
+    "failed": 6,
+    "skipped": 24,
+    "pytest_seconds": 357.65
+  },
+  "five_failures": "missing tracked runtime test assets in sparse checkout",
+  "one_real_regression": "metadata budget fanout enumerated body twice before complete cross-product reservation; independent diagnosis pending, no assertion removed",
+  "restored_files": 105,
+  "bytes": 851064,
+  "rows": [
+    {
+      "path": "benchmarks/cross_market_rf/.gitattributes",
+      "git_blob": "ccb694d4512ed40d9e3a6a90c29234f91e11c08c",
+      "bytes": 89
+    },
+    {
+      "path": "benchmarks/cross_market_rf/README.md",
+      "git_blob": "c0f4ee7a404dd42c3ee1152386a9341bcd27ff91",
+      "bytes": 8442
+    },
+    {
+      "path": "benchmarks/cross_market_rf/baseline_live_core.json",
+      "git_blob": "a08ea36a18aec37385d4b86202f4e2238b7e29cc",
+      "bytes": 80235
+    },
+    {
+      "path": "benchmarks/cross_market_rf/baseline_live_core.md",
+      "git_blob": "389cfd0b8cfec0708e2ce9e970ba4e2574af0831",
+      "bytes": 7399
+    },
+    {
+      "path": "benchmarks/cross_market_rf/baseline_replay.json",
+      "git_blob": "5fde45b2d6e3aa0da404c97aca391c67ff310187",
+      "bytes": 90539
+    },
+    {
+      "path": "benchmarks/cross_market_rf/baseline_replay.md",
+      "git_blob": "1b6935af19f3ef13d3cb8d972018f08c3a1c5da1",
+      "bytes": 8952
+    },
+    {
+      "path": "benchmarks/cross_market_rf/cases.json",
+      "git_blob": "267b6fe6f08a6c6a9b21d185b8bcfcafb7867ae4",
+      "bytes": 37886
+    },
+    {
+      "path": "benchmarks/cross_market_rf/checkpoints.json",
+      "git_blob": "1b6809e428a73455764e5fa5e0c7b1ec655176bf",
+      "bytes": 2901
+    },
+    {
+      "path": "benchmarks/cross_market_rf/identity_cn.json",
+      "git_blob": "7bd44635a0447c58477ee430203422cd6b98f4f7",
+      "bytes": 751
+    },
+    {
+      "path": "benchmarks/cross_market_rf/identity_hk.json",
+      "git_blob": "3d3e4c6162072324a85c4f2584df38d648c821f2",
+      "bytes": 1154
+    },
+    {
+      "path": "benchmarks/cross_market_rf/identity_us.json",
+      "git_blob": "f9fa2ffedd7e278b2c664fba65158bd4e404f6c5",
+      "bytes": 928
+    },
+    {
+      "path": "benchmarks/cross_market_rf/portable_replay.json",
+      "git_blob": "ccb33d7c7ff1afe2700d027b370c17ffee4a72a8",
+      "bytes": 79496
+    },
+    {
+      "path": "benchmarks/cross_market_rf/portable_replay.md",
+      "git_blob": "1b6935af19f3ef13d3cb8d972018f08c3a1c5da1",
+      "bytes": 8952
+    },
+    {
+      "path": "benchmarks/cross_market_rf/repro_comparison.json",
+      "git_blob": "b72ee4012891ae0c1782023cdc11c4fde7c5845e",
+      "bytes": 12428
+    },
+    {
+      "path": "benchmarks/cross_market_rf/run_transcript_budget_contract.py",
+      "git_blob": "00c8a7478d8aaa2a9fc82f9b3ba69019784c7f7b",
+      "bytes": 12641
+    },
+    {
+      "path": "benchmarks/cross_market_rf/validation_cleanup.json",
+      "git_blob": "a33c9ac825daf66ec723becf834dd34f4b5c668a",
+      "bytes": 643
+    },
+    {
+      "path": "control/README.md",
+      "git_blob": "2186e252cf99d0d62172923b6724f6d5770c180e",
+      "bytes": 2018
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/HANDOFF.md",
+      "git_blob": "1e360402c38a316d94fb4425b374db5c5e05681b",
+      "bytes": 4475
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/LIVE_FAILURE.md",
+      "git_blob": "6fdef5d9f5144374415cd5aa1b5b299a1ac2005d",
+      "bytes": 1672
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/findings.md",
+      "git_blob": "994661f1b54ee63ecef9833cc317b82e7f295ee1",
+      "bytes": 2356
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/focused-green.txt",
+      "git_blob": "7196041f14771695378df98b887f98932bc14494",
+      "bytes": 1743
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/green-01.txt",
+      "git_blob": "773532c063148532a0a73389a007ac8e1fc951df",
+      "bytes": 2209
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/green-02.txt",
+      "git_blob": "490281afb3625627f8bae461985d8ec6b51e3e2f",
+      "bytes": 1182
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/handoff.json",
+      "git_blob": "87b41ef90d987783409d12205f3715a07ef174cf",
+      "bytes": 6721
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/lint.txt",
+      "git_blob": "1f5f344d054fae10f39140fb7199c99321d9190a",
+      "bytes": 19
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/page7_real_receipt.json",
+      "git_blob": "aec3bef76453b74575b9de057b637c20727f1909",
+      "bytes": 9391
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/page7_sample_closure.json",
+      "git_blob": "69e33e08dda7c7df28276980a0700f6a519ec974",
+      "bytes": 1361
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/progress.md",
+      "git_blob": "d195a5739b343ebeb0ac7a6f1bfbe0bab5b4e64d",
+      "bytes": 3370
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/red.txt",
+      "git_blob": "d8430417a61684b1f0bb7331ba35b69efe439a89",
+      "bytes": 18578
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/sample_page7.py",
+      "git_blob": "813e1677ce933c3f038e9c5661784e4de3512f19",
+      "bytes": 12469
+    },
+    {
+      "path": "docs/implementation/main-ocr-selection/task_plan.md",
+      "git_blob": "47e536c00345cbfed0aab523a80f0e44739f7901",
+      "bytes": 1222
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/README.md",
+      "git_blob": "cf26962ee654b268db8dff5853a161741fe6987d",
+      "bytes": 8877
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/acquisition_requests.json",
+      "git_blob": "9250c6536175261754919565da5ef5e088e8683b",
+      "bytes": 6340
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-admin-scan-empty-01.json",
+      "git_blob": "60b804d72df35ea30f75c85dc2c3c96bf393e042",
+      "bytes": 3402
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-annual-business-model-01.json",
+      "git_blob": "aa3d618f2af85441ae5c075d42ee799ea70f5e56",
+      "bytes": 6162
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-annual-metrics-02.json",
+      "git_blob": "33ec9788a16a455bad9ea082ac5b30e6dac66226",
+      "bytes": 5523
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-annual-outlook-03.json",
+      "git_blob": "373e99da1f66eaaf8183170236fb30bb8c520026",
+      "bytes": 5137
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-convertible-forecast-02.json",
+      "git_blob": "56065618503ea0afc3b61d195f7e1a5be9c74845",
+      "bytes": 4348
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-convertible-projects-01.json",
+      "git_blob": "afada17108153ba5b4a0b347c9f768e3c4d0fe6a",
+      "bytes": 3309
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-equity-forecast-disclaimer-02.json",
+      "git_blob": "59dba583b368a634c450f41cabc99a8fb9d6743b",
+      "bytes": 4013
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-equity-project-phases-01.json",
+      "git_blob": "38cb4cd0a5dab8cefc7b4bb0b126c7cfaa483253",
+      "bytes": 4988
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-interim-stage-01.json",
+      "git_blob": "4a7ee35c42394324584abe0d32456cb31c55a29d",
+      "bytes": 5767
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ipo-offering-facts-01.json",
+      "git_blob": "68a77bf8027309e71bbfab6b4d49f9066928dd50",
+      "bytes": 3578
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ipo-proceeds-02.json",
+      "git_blob": "000ebcedbeb244a25f2d8e8d0a7b48a69deb6afd",
+      "bytes": 4656
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ir-qa-binding-01.json",
+      "git_blob": "0fbb297df1edd6708f909f41632baf3d427b565a",
+      "bytes": 6126
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ir-title-mislead-02.json",
+      "git_blob": "78e9496f618734a43b992c17fdf8d2c40486a78d",
+      "bytes": 6225
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-quarterly-business-01.json",
+      "git_blob": "1cc7c7b5e4ff726e54dc21b7bd426bcdaf960167",
+      "bytes": 4399
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-quarterly-sparse-02.json",
+      "git_blob": "b99c541837280c6e07747a97333a32dbd853c820",
+      "bytes": 4378
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-01.json",
+      "git_blob": "00983d9455759a743a6389f07994335154aaf1b2",
+      "bytes": 7311
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-annual-postperiod-03.json",
+      "git_blob": "4310759fcac3bff87096152624ae52e307c41c9d",
+      "bytes": 4374
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-annual-samestore-footnote-02.json",
+      "git_blob": "33f3f9a865bb17903377783a8ea0dd3edeab7963",
+      "bytes": 3849
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-annual-stores-01.json",
+      "git_blob": "bf7ecbba2ea4fa0af9e7af197c08c7a0e32049cd",
+      "bytes": 5793
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-deck-chart-01.json",
+      "git_blob": "f7554f3bd70006ae15f76925b65ef0bcaf5b5f85",
+      "bytes": 4568
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-interim-postperiod-01.json",
+      "git_blob": "02e4d57a63c2c7d488713f7711d617e18bfd124e",
+      "bytes": 5039
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-ipo-chapters-01.json",
+      "git_blob": "43a956638005dfce442e4f9e49a610c10f6f4b06",
+      "bytes": 4438
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-ipo-stores-02.json",
+      "git_blob": "fcc072c7a27f773a5ba359497c889e631bd4a812",
+      "bytes": 4510
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-release-segment-02.json",
+      "git_blob": "65758d4f520a384ca916b5fedb81368a3cd43701",
+      "bytes": 5237
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10k-rpo-02.json",
+      "git_blob": "a3f00286dfc4bc7eaae9cf1481c8a35ad089f602",
+      "bytes": 3282
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10k-segments-01.json",
+      "git_blob": "264a94c2791834cd803b44785cc488796ab863e2",
+      "bytes": 4607
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10k-toc-vs-body-03.json",
+      "git_blob": "071dc5d22b339760cfd4cdfdb32c75ea6842b805",
+      "bytes": 3240
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10q-parts-01.json",
+      "git_blob": "60ffbc9133e2df514c475c14300831360f8af57c",
+      "bytes": 3186
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10q-revenue-mechanism-02.json",
+      "git_blob": "81aae09838057ba2f28c9efa3ebdd86bcb3f5273",
+      "bytes": 3420
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-20f-item-map-01.json",
+      "git_blob": "abc68dcf911aab12283c8f3ac130837350c825da",
+      "bytes": 4333
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-admin-notice-01.json",
+      "git_blob": "58495eb123c221c2779aef0825b94eb157960b3f",
+      "bytes": 3424
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-container-8k-01.json",
+      "git_blob": "9754d718e3e39d28c6e3cbe3e4db1945bc7d6c7b",
+      "bytes": 4463
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-event-response-01.json",
+      "git_blob": "3e955fbcda0195a435c74d5a092adc31dda11831",
+      "bytes": 3385
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-feasibility-01.json",
+      "git_blob": "d3dc5a39a559ea23e3a40cdacd273f7a4c6b6a2c",
+      "bytes": 3605
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-project-change-01.json",
+      "git_blob": "2014662d77527084c219656ea29b310d0d49f329",
+      "bytes": 4137
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-revision-pair-01.json",
+      "git_blob": "e67d77ae008183105bf1bae20de08c6a22d14d1b",
+      "bytes": 3241
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-secondary-01.json",
+      "git_blob": "d079383f32bb476e2c11c9ee3af8cc7c75453424",
+      "bytes": 3284
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-us-registration-01.json",
+      "git_blob": "af51dbaa29f8e266a9efc67f7f78b7604d452848",
+      "bytes": 4310
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-us-release-highlights-01.json",
+      "git_blob": "06ecb73cb00704f1ea692f70a5c8166b91e9705b",
+      "bytes": 4545
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/coverage_matrix.md",
+      "git_blob": "c5d9059d100f0cab9e9d1ee9dfa0e1949711fe68",
+      "bytes": 7246
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/index.json",
+      "git_blob": "b713f917697675fd4eb8554063c00b39d4420e76",
+      "bytes": 10542
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/administrative_document.json",
+      "git_blob": "3f00e960491fd2397d193ea48dca76b130855e64",
+      "bytes": 5048
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_annual_report.json",
+      "git_blob": "b0227e6fc792e53d489b525a52132b7e3e5e3a46",
+      "bytes": 10955
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_interim_report.json",
+      "git_blob": "a58d86ef133af12309296666fe110b1596eb61c7",
+      "bytes": 7836
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_quarterly_report.json",
+      "git_blob": "1f212ef37910f2bb5b14a12058003151a5f9bc4d",
+      "bytes": 5957
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/container_attachment.json",
+      "git_blob": "f49cbb4b24dfe31f4eab734cf9f888e9d1df4de1",
+      "bytes": 6069
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/earnings_call_transcript.json",
+      "git_blob": "fb04ffb1a58b2a6feb6d80298dd7a46c0b5d77af",
+      "bytes": 7449
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/event_response.json",
+      "git_blob": "bbbf3821430b86cf6458073285b8ea0ac214f20b",
+      "bytes": 6827
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_annual_report.json",
+      "git_blob": "5730621198c4fa6d6804e006cb7a6a4eb4c10e66",
+      "bytes": 10714
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_interim_report.json",
+      "git_blob": "f0f3764ad0326e39d984b05b862bf755e0b71cf1",
+      "bytes": 7954
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_presentation.json",
+      "git_blob": "3b5a8a7461f3cc2f84252f89d155ac09dc90b9d3",
+      "bytes": 6315
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_qa_record.json",
+      "git_blob": "5178d430bf1fc3b6415ba2e1201d5bda2330ff9b",
+      "bytes": 7332
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/lifecycle_revision_overlay.json",
+      "git_blob": "cfefa4e35eefea4cd2dd8f2c84f6057531c4d9ee",
+      "bytes": 5223
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_convertible.json",
+      "git_blob": "27f09da2b71b21c56a677fde98c3a3ca8c919a34",
+      "bytes": 8991
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_equity.json",
+      "git_blob": "9acceeac380dc5087cd248724f7ddb16004ddf67",
+      "bytes": 8656
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_feasibility.json",
+      "git_blob": "ddbba7184b669b662af42e6498fe03e0b09c6549",
+      "bytes": 6689
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/project_change_notice.json",
+      "git_blob": "ead25415e840dbc5cb2aa9cc97e4c70b1914bc9d",
+      "bytes": 6870
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_cn.json",
+      "git_blob": "673127ecce4e1125738b4c04a4055157841b3323",
+      "bytes": 9317
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_hk.json",
+      "git_blob": "24cbe855cb85e9a1b0fe2e504e2e75ff49f686db",
+      "bytes": 8783
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_us.json",
+      "git_blob": "ae7f3973253d3334c5376c448925a3652689364c",
+      "bytes": 8497
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/results_release.json",
+      "git_blob": "d16a854cd48ac31bd141decfe88dc1e2f061fc1d",
+      "bytes": 7559
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10k.json",
+      "git_blob": "29868dacb5d1f5366f77d78e35ee7ef447bc7fdb",
+      "bytes": 9466
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10q.json",
+      "git_blob": "fd91c18104aeba2f00438fe48bc181f41b489853",
+      "bytes": 8829
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_20f.json",
+      "git_blob": "f8996d9c98d7a27facfaadee9ee62f385a4ea94b",
+      "bytes": 7799
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/secondary_research.json",
+      "git_blob": "b0778fb3850d969e029d74287e468d2f5ddb37f0",
+      "bytes": 6643
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/_support.py",
+      "git_blob": "d68e5c0c8bfaf56dff2a50ae81a0e5b1094ebc35",
+      "bytes": 4518
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/c_node_quote_check.py",
+      "git_blob": "da9b2754616101781d2ae256c22386c2c3ccb38c",
+      "bytes": 4706
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/test_cases.py",
+      "git_blob": "fd382c7a410e95c661186ed05f476a9f528791ba",
+      "bytes": 6499
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/test_cross_market_counterexamples.py",
+      "git_blob": "a81ba15e24e9c3cb3b1be164ffaf0039dc3f670d",
+      "bytes": 4448
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/test_du2_family_reception_integrity.py",
+      "git_blob": "198b2a5fbb02fb92b270f9e9f0d11c6e374360ae",
+      "bytes": 4376
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/test_family_specs.py",
+      "git_blob": "dec8d8ff0f86299c81164f85c84d10ae7f498da6",
+      "bytes": 8546
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/test_index_coverage.py",
+      "git_blob": "0f62dd2b80b6af831f29075c6b61cae8bc32b00d",
+      "bytes": 3374
+    }
+  ],
+  "originals_added": 0,
+  "gate_bypassed": false
+}

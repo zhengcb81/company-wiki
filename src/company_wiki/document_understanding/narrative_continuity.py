@@ -20,7 +20,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/4"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/5"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -112,6 +112,7 @@ class _Analysis:
         self.deferred: list[str] = []
         self.deferred_ranges: list[dict[str, Any]] = []
         self.windows: list[dict[str, Any]] = []
+        self.adjacency_edges: list[dict[str, Any]] = []
         self.standalone_units = 0
         self.source_page_flow = source_page_flow
 
@@ -358,7 +359,8 @@ class _Analysis:
 
     def edge(self, left: _Native, right: _Native, *,
              column_witnesses: Sequence[_Native] = (),
-             furniture: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any] | None:
+             furniture: Sequence[Mapping[str, Any]] = (),
+             allow_complete_boundary: bool = False) -> dict[str, Any] | None:
         if not self.charge():
             return None
         if left.page != right.page:
@@ -398,7 +400,7 @@ class _Analysis:
                 "right": right.unit["unit_id"],
                 "basis": "native_block_character_ranges",
             }
-        if _terminal(left.unit["text"]) or right.block != left.block + 1:
+        if (not allow_complete_boundary and _terminal(left.unit["text"])) or right.block != left.block + 1:
             return None
         a, b = left.bbox, right.bbox
         size = left.font[0]
@@ -641,8 +643,24 @@ def build_native_continuity(
                 if witness is None or state.stopped:
                     break
                 column_witnesses.append(witness)
-        edge = state.edge(run[-1], current, column_witnesses=column_witnesses,
-                          furniture=furniture) if run and current is not None else None
+        # A positively measured body neighbour is not necessarily a wrapped
+        # sentence. Preserve the statement boundary while making its physical
+        # proof available to the source-owned explicit-qualifier closure.
+        adjacent = state.edge(run[-1], current, column_witnesses=column_witnesses,
+                              furniture=furniture, allow_complete_boundary=True
+                              ) if run and current is not None else None
+        edge = adjacent
+        if adjacent is not None and run and current is not None:
+            left = run[-1]
+            if (2 <= state.limits["max_window_units"]
+                    and len({(left.source, left.page, left.block),
+                             (current.source, current.page, current.block)}) <= state.limits["max_window_blocks"]
+                    and len(left.unit["text"]) + len(current.unit["text"]) <= state.limits["max_window_chars"]
+                    and state.charge()):
+                state.adjacency_edges.append({**adjacent, "source_id": left.source,
+                    "basis": "source_body_adjacency", "physical_basis": adjacent["basis"]})
+            if left.page == current.page and left.block != current.block and _terminal(left.unit["text"]):
+                edge = None
         if (run and current is not None and edge is None and source_page_flow is not None
                 and current.page == run[-1].page + 1
                 and current.bbox[1] > 0.2 * current.frame[3]
@@ -675,6 +693,7 @@ def build_native_continuity(
     return {
         "feature_version": NARRATIVE_CONTINUITY_FEATURE_VERSION,
         "windows": state.windows,
+        "adjacency_edges": state.adjacency_edges,
         "work_units": state.work,
         "observed_unit_count": seen,
         "standalone_unit_count": state.standalone_units,

@@ -1,0 +1,192 @@
+{
+  "schema_version": "w08-independent-measure-review/3",
+  "status": "PASS_BOUNDED_ENGINEERING",
+  "scope": "Only previously identified measure scope/object/consumer defects and shared-meaning extraction; no new semantic expansion",
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+    "src/company_wiki/document_understanding/decision_inventory.py": "44aa51750047a46ddc31dece234debbea86d5cb19f83acf8974ebbea489f3e9a",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": "a7e28f6c0157750cb2eb389c70239d5f01d9fff40b278583a8862cb6939cc976",
+    "tests/unit/document_understanding_selection/test_reading_measure_scope.py": "1c0ee3269665edd8edb4a63769c9942c064d0530b383d50ac81fb1ce1678c29b"
+  },
+  "policy_version": "reading-business-policy/13",
+  "runs": [
+    {
+      "script": "probe_measure-review-v3.py",
+      "result": "probes-review-v3.json",
+      "stdout": "probes-review-v3.stdout.txt",
+      "exit_code": 0,
+      "tests": 51,
+      "passed": 51,
+      "failed": 0
+    },
+    {
+      "script": "probe_integration-review-v3.py",
+      "result": "integration-review-v3.json",
+      "stdout": "integration-review-v3.stdout.txt",
+      "exit_code": 0,
+      "tests": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    {
+      "script": "probe_holdouts-review-v3.py",
+      "result": "holdouts-review-v3.json",
+      "stdout": "holdouts-review-v3.stdout.txt",
+      "exit_code": 0,
+      "tests": 26,
+      "passed": 26,
+      "failed": 0
+    },
+    {
+      "script": "probe_integration-holdouts-review-v3.py",
+      "result": "integration-holdouts-review-v3.json",
+      "stdout": "integration-holdouts-review-v3.stdout.txt",
+      "exit_code": 0,
+      "tests": 16,
+      "passed": 16,
+      "failed": 0
+    }
+  ],
+  "checks": {
+    "policy_meaning_imports_same_objects": true,
+    "no_duplicate_policy_meaning_definitions": true,
+    "purpose_reuses_same_meaning_functions": true,
+    "meaning_has_no_policy_purpose_cycle": true,
+    "meaning_has_no_io_imports": true,
+    "meaning_source_listed_in_inventory": true,
+    "meaning_byte_change_changes_business_fingerprint": true,
+    "meaning_byte_change_keeps_budget_policy": true,
+    "current_reading_policy_version": true,
+    "actual_product_bytes_unchanged": true
+  },
+  "architecture_exit_code": 0,
+  "findings": [],
+  "resolved_findings": [
+    "W08-MEASURE-IR01",
+    "W08-MEASURE-IR02",
+    "W08-MEASURE-IR03",
+    "W08-MEASURE-IR04"
+  ],
+  "implementation_review": {
+    "causal_consumer": "Uses full original clause and relation offsets >= causal-link end; no substring reclassification",
+    "financial_component": "Normalizes grammatical articles/possessives before financial subject filter",
+    "future_modality": "Quantity/direction/revenue share observed-source gate including tested will/expect/next-year variants",
+    "shared_meaning": "Policy/purpose reuse exact objects from one pure module; no duplicate definitions or reverse purpose/policy dependency",
+    "cache_identity": "New meaning source bytes are in actual business_algorithms hash closure; in-memory marker changes hash while actual bytes remain untouched"
+  },
+  "architecture_equivalence_limit": "Same-object ownership and fixed regression controls verified. No claim of exhaustive equivalence over all possible source text.",
+  "limits_unchanged_observed": {
+    "budget_policy": "reading_plan/3",
+    "max_reading_chars": 48000
+  },
+  "harness_errors": [
+    {
+      "file": "architecture-v3-harness-error.stdout.txt",
+      "cause": "Own reader used invalid encoding alias utf8-sig; corrected to utf-8-sig before valid architecture run",
+      "product_failure": false
+    }
+  ],
+  "external_calls": 0,
+  "product_writes": 0,
+  "original_writes": 0,
+  "git_operations": 0,
+  "artifacts": {
+    "architecture-v3-harness-error.stdout.txt": {
+      "sha256": "77736fff710430ad702662be53210e81ad0b3a78f502d9ede25e59428233474b",
+      "bytes": 1140
+    },
+    "architecture-v3.json": {
+      "sha256": "da56fc4456ddc574023aafe7bb782dead0cd3c0aacb834a4ab028089d9319843",
+      "bytes": 2078
+    },
+    "architecture-v3.stdout.txt": {
+      "sha256": "ed049503515090f74506c680c7a4585ab6b48ea8af8eb58801fd91a40a539f18",
+      "bytes": 2080
+    },
+    "build_report-v3.py": {
+      "sha256": "e4e5c9d2274870a4c0c6a0c7a407892edb64154dbe6912f0439abd95e20a8544",
+      "bytes": 7500
+    },
+    "execution-v3.json": {
+      "sha256": "d82c03862d060c5c6cf23942846a14b0ccf5da720b676511a8918797a1d1214c",
+      "bytes": 2976
+    },
+    "execution-v3.stdout.txt": {
+      "sha256": "3d3ca2732bd3db9536b17f94f3af627a4c7c8901ca734e88e70ed156ebb125b7",
+      "bytes": 2978
+    },
+    "holdouts-review-v3.json": {
+      "sha256": "ac645c597d1178af965933d787efe36d48259511ac64ec2068a9b8ad2ff71a18",
+      "bytes": 29537
+    },
+    "holdouts-review-v3.stdout.txt": {
+      "sha256": "b0aec0b49c38326e36dac88ed21c310a01d693df5e8a0f9d46123b52b548abc8",
+      "bytes": 1189
+    },
+    "integration-holdouts-review-v3.json": {
+      "sha256": "e309ae83474a15cc72e2293efb39b1765e87eff456ff0758a0afb23d9bb16939",
+      "bytes": 15655
+    },
+    "integration-holdouts-review-v3.stdout.txt": {
+      "sha256": "8f86df1263cb95e6b4c3baddac29babf44d9a148f3ad2b4d9d44b401e287c8ad",
+      "bytes": 492
+    },
+    "integration-review-v3.json": {
+      "sha256": "1020a9556fda215120420fe194a9bd86925c0d78c9918079dbd9b4c69a92c6ea",
+      "bytes": 12720
+    },
+    "integration-review-v3.stdout.txt": {
+      "sha256": "0c6b43b4435d7a55755b7cfafd9a8b1950c52284cc32649f291d9c6a4e6780ac",
+      "bytes": 492
+    },
+    "probes-review-v3.json": {
+      "sha256": "1a9372af9ebeecba98ba71f793efcc1e5b35b130bb6a734d35a0aaa0a1952fb2",
+      "bytes": 52301
+    },
+    "probes-review-v3.stdout.txt": {
+      "sha256": "1704715b50b59e37b99bea9b25506244ad63917a3b1bd8b40b588407f03d2a69",
+      "bytes": 1189
+    },
+    "probe_architecture-v3-harness-error.py": {
+      "sha256": "6981f55dc7237ed36244e8b08d872b8c38d51597c8ea869bb8fa21bcf1a7fbb3",
+      "bytes": 4350
+    },
+    "probe_architecture-v3.py": {
+      "sha256": "550e7720f9d518fa8ffedaa4292925d2cf122ef2e82d24c6993d2fddd9d31b68",
+      "bytes": 4355
+    },
+    "probe_holdouts-review-v3.py": {
+      "sha256": "be93a505f7ab41b694c2388b95a291ac1280ee1bed9a9beefa9d7be66ce699e2",
+      "bytes": 11526
+    },
+    "probe_integration-holdouts-review-v3.py": {
+      "sha256": "6219f56a2f95136ab630db4e10736cdc9653489d1cace6f3a481ac614c2c7ab0",
+      "bytes": 5416
+    },
+    "probe_integration-review-v3.py": {
+      "sha256": "b8edcb3cde6ea185c1f973b02f4972fda18821ba8768980fc63a8340650e75e5",
+      "bytes": 5373
+    },
+    "probe_measure-review-v3.py": {
+      "sha256": "1bb74fc61c036cb2fde3ae660db1042d71cc02eb4befbb25ededc6b1d4638e88",
+      "bytes": 8580
+    },
+    "report-build-v3.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "run_review_v3.py": {
+      "sha256": "6854d28e657a740e5a46d3195db9b55210e90fd3d71b8e9e44d98f15b4c2f4b1",
+      "bytes": 2927
+    }
+  },
+  "cleanup": "cleanup-v3.json",
+  "limitations": [
+    "77 fixed unique relation/projection cases plus 30 integration cases are finite engineering acceptance, not a whole-source quality conclusion.",
+    "Real 249-page two-oracle acceptance is ROOT-owned and not rerun by this reviewer.",
+    "Author broad suite/Ruff/mypy are ROOT gates; this review did not rerun them.",
+    "This report binds recorded hashes and does not automatically approve later product changes."
+  ]
+}

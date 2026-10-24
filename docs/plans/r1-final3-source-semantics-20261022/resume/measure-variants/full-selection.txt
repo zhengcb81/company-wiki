@@ -1,0 +1,170 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\full-selection-temp", "requested_basetemp_len": 146, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221118-29fa5c27", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1124 items
+
+tests\unit\document_understanding_selection\test_attributed_context_quote_oracle.py . [  0%]
+..                                                                       [  0%]
+tests\unit\document_understanding_selection\test_closed_group_support.py . [  0%]
+.........                                                                [  1%]
+tests\unit\document_understanding_selection\test_reading_balanced_coverage.py . [  1%]
+..............                                                           [  2%]
+tests\unit\document_understanding_selection\test_reading_budget_coverage.py . [  2%]
+...............                                                          [  3%]
+tests\unit\document_understanding_selection\test_reading_budget_plan.py . [  4%]
+....................                                                     [  5%]
+tests\unit\document_understanding_selection\test_reading_budget_scale.py . [  5%]
+........                                                                 [  6%]
+tests\unit\document_understanding_selection\test_reading_child_route_identity.py . [  6%]
+......                                                                   [  7%]
+tests\unit\document_understanding_selection\test_reading_cross_script_relations.py . [  7%]
+...................                                                      [  8%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [  9%]
+............................                                             [ 11%]
+tests\unit\document_understanding_selection\test_reading_display_adapter.py . [ 11%]
+....................................                                     [ 14%]
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py . [ 14%]
+.F.FFFFF....F......                                                      [ 16%]
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py . [ 16%]
+..........................................................               [ 21%]
+tests\unit\document_understanding_selection\test_reading_local_qualification.py . [ 21%]
+.......................................                                  [ 25%]
+tests\unit\document_understanding_selection\test_reading_measure_scope.py . [ 25%]
+.........................                                                [ 27%]
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py . [ 27%]
+.........................FF...                                           [ 30%]
+tests\unit\document_understanding_selection\test_reading_multiline_tables.py . [ 30%]
+.................                                                        [ 32%]
+tests\unit\document_understanding_selection\test_reading_named_portfolio_drivers.py . [ 32%]
+..................................                                       [ 35%]
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py . [ 35%]
+.................................F............                           [ 39%]
+tests\unit\document_understanding_selection\test_reading_native_carriers.py . [ 39%]
+.........                                                                [ 40%]
+tests\unit\document_understanding_selection\test_reading_native_continuity.py . [ 40%]
+...........................................................              [ 45%]
+tests\unit\document_understanding_selection\test_reading_native_material_mapping.py . [ 45%]
+......                                                                   [ 46%]
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py . [ 46%]
+......................................................................   [ 52%]
+tests\unit\document_understanding_selection\test_reading_portfolio_disclosure.py . [ 52%]
+.........................                                                [ 54%]
+tests\unit\document_understanding_selection\test_reading_priority_coverage.py . [ 54%]
+.....................                                                    [ 56%]
+tests\unit\document_understanding_selection\test_reading_production_selection.py . [ 56%]
+....................                                                     [ 58%]
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py . [ 58%]
+........                                                                 [ 59%]
+tests\unit\document_understanding_selection\test_reading_qualification_scope_controls.py . [ 59%]
+...................                                                      [ 61%]
+tests\unit\document_understanding_selection\test_reading_root_policy_binding.py . [ 61%]
+......................                                                   [ 63%]
+tests\unit\document_understanding_selection\test_reading_semantic_value.py . [ 63%]
+........................................................................ [ 69%]
+........................................................................ [ 76%]
+.......................                                                  [ 78%]
+tests\unit\document_understanding_selection\test_reading_source_boundaries.py . [ 78%]
+                                                                         [ 78%]
+tests\unit\document_understanding_selection\test_reading_source_purpose_boundaries.py . [ 78%]
+........................................................................ [ 84%]
+.......................                                                  [ 86%]
+tests\unit\document_understanding_selection\test_reading_structured_qa.py . [ 87%]
+...............                                                          [ 88%]
+tests\unit\document_understanding_selection\test_reading_table_admission.py . [ 88%]
+................................                                         [ 91%]
+tests\unit\document_understanding_selection\test_reading_table_rows.py . [ 91%]
+.........................                                                [ 93%]
+tests\unit\document_understanding_selection\test_reading_untyped_numeric_prose_controls.py . [ 93%]
+.......                                                                  [ 94%]
+tests\unit\document_understanding_selection\test_reading_untyped_numeric_quality.py . [ 94%]
+..............                                                           [ 95%]
+tests\unit\document_understanding_selection\test_reading_value_coverage.py . [ 95%]
+................................................                         [100%]
+
+================================== FAILURES ===================================
+_ test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels[en-subscription] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:117: in test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels
+    assert spans, "Do not drop future segment guidance as a financial historical-number row."
+E   AssertionError: Do not drop future segment guidance as a financial historical-number row.
+E   assert []
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-equipment] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x000001FE9C292C50>)
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[trad-logistics] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x000001FE9C293F10>)
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[en-subscription] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:94: in _assert_premise_closed
+    assert support, "A source-authored future revenue outlook is useful narrative, not a historical total."
+E   AssertionError: A source-authored future revenue outlook is useful narrative, not a historical total.
+E   assert []
+_ test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-materials] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:128: in test_explicit_local_guidance_premise_reaches_public_citation_and_model_task
+    _assert_premise_closed(selected, parsed.units[1], parsed.units[2])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x000001FE9C349C60>)
+_ test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:139: in test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise
+    _assert_premise_closed(_select(parsed), parsed.units[2], parsed.units[1])
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:102: in _assert_premise_closed
+    assert groups and all(premise_ids.intersection([*v["support_evidence_ids"], *v["context_evidence_ids"]])
+E   AssertionError: Citation closure, not merely separate selection, must retain the premise.
+E   assert ([{'support_evidence_ids': ['urn:company-wiki:evidence-span:sha256:796ce7ecc4ee856e02950444ece6ac81a47f8e10047178629f53...ence_ids': ['urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd']}] and False)
+E    +  where False = all(<generator object _assert_premise_closed.<locals>.<genexpr> at 0x000001FE9C34AE30>)
+_ test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten[en-subscription] _
+tests\unit\document_understanding_selection\test_reading_guidance_condition_scope.py:155: in test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten
+    assert spans and all(body in span.raw_text for span in spans)
+E   assert ([])
+_ test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[Our service revenue grew 15% driven by happy customers and a great product philosophy.] _
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py:177: in test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance
+    assert not _select(_document(text)).evidence_spans
+E   AssertionError: assert not (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:5da91cda2bda0a060b81b63e9c1e63563...1892f967e7c1bdf97a8ae7fc584ef191559255d41196dc9fe814', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),)
+E    +  where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:5da91cda2bda0a060b81b63e9c1e63563...1892f967e7c1bdf97a8ae7fc584ef191559255d41196dc9fe814', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '950c4521e4f6eeb9fd0d9d0294c9bfdfb528a78a11fb09fcd09d519f61dbef10'}).evidence_spans
+E    +    where NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '950c4521e4f6eeb9fd0d9d0294c9bfdfb528a78a11fb09fcd09d519f61dbef10'}) = _select(DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()))
+E    +      where DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()) = _document('Our service revenue grew 15% driven by happy customers and a great product philosophy.')
+_ test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[\u516c\u53f8\u8f6f\u4ef6\u6536\u5165\u589e\u957f20%\uff0c\u4e3b\u8981\u7531\u4e8e\u5ba2\u6237\u6ee1\u610f\u548c\u521b\u65b0\u7406\u5ff5\u3002] _
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py:177: in test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance
+    assert not _select(_document(text)).evidence_spans
+E   AssertionError: assert not (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:48d315ea43c26d409ec6d392d0b389a12...f4270885e9e747dc698c1b95d03b5065a10910a540dc78065b01', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),)
+E    +  where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:48d315ea43c26d409ec6d392d0b389a12...f4270885e9e747dc698c1b95d03b5065a10910a540dc78065b01', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '7776be70be54f3301f88980bddeb7dd33ed4a20ead7b6a6e74e0dd2b10771bbb'}).evidence_spans
+E    +    where NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee...purpose/5'}, 'diagnostics': [], 'decision_digest': '7776be70be54f3301f88980bddeb7dd33ed4a20ead7b6a6e74e0dd2b10771bbb'}) = _select(DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()))
+E    +      where DocumentStructure(source_id='urn:company-wiki:source:sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee..., deferred_table_pages=(), line_count=1, errors=(), mime_type='text/html', layout_coverage=None, layout_diagnostics=()) = _document('公司软件收入增长20%，主要由于客户满意和创新理念。')
+_ test_financial_totals_are_not_business_composition[\u516c\u53f8\u667a\u80fd\u670d\u52a1\u5206\u90e8\u6536\u5165\u589e\u957f20%\uff0c\u5206\u90e8\u5229\u6da6\u4e3a3\u4ebf\u5143\u3002] _
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py:81: in test_financial_totals_are_not_business_composition
+    assert "business_reporting_scope" not in fact.reasons and not fact.financial_exempt
+E   AssertionError: assert ('business_reporting_scope' not in ('operating_metric_change',) and not True)
+E    +  where ('operating_metric_change',) = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').reasons
+E    +  and   True = OperatingFact(eligible=True, topics=('operating_metric_change',), reasons=('operating_metric_change',), score=3, financial_exempt=True, purpose='operating_metric').financial_exempt
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\measure-variants\full-selection.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_future_revenue_range_and_growth_are_preserved_without_current_achievement_labels[en-subscription]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-equipment]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[trad-logistics]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[en-subscription]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_local_guidance_premise_reaches_public_citation_and_model_task[cn-materials]
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_explicit_following_outlook_reference_can_bind_its_preceding_local_premise
+FAILED tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py::test_condition_already_in_original_guidance_body_is_not_removed_or_rewritten[en-subscription]
+FAILED tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py::test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[Our service revenue grew 15% driven by happy customers and a great product philosophy.]
+FAILED tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py::test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[\u516c\u53f8\u8f6f\u4ef6\u6536\u5165\u589e\u957f20%\uff0c\u4e3b\u8981\u7531\u4e8e\u5ba2\u6237\u6ee1\u610f\u548c\u521b\u65b0\u7406\u5ff5\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_named_segment_scope.py::test_financial_totals_are_not_business_composition[\u516c\u53f8\u667a\u80fd\u670d\u52a1\u5206\u90e8\u6536\u5165\u589e\u957f20%\uff0c\u5206\u90e8\u5229\u6da6\u4e3a3\u4ebf\u5143\u3002]
+====================== 10 failed, 1114 passed in 37.30s =======================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221118-29fa5c27", "existed": true, "removed": true}

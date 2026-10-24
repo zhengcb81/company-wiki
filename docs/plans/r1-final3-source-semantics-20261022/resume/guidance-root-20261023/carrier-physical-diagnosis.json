@@ -1,0 +1,328 @@
+{
+  "observed": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3aecb34a6a5ebaee0e41de592319a0a5a40f7273354bbdc8f6938b8bc54fa93e",
+      "ordinal": 0,
+      "locator": "loc:v1/page:1/paragraph:0",
+      "page": 1,
+      "text": "三、未来经营展望",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {
+        "bbox": [
+          90,
+          100,
+          550,
+          112
+        ],
+        "page_width": 600,
+        "page_height": 800,
+        "coordinate_frame": "dict",
+        "rotation": 0
+      },
+      "hints": {
+        "font_runs": [
+          {
+            "char_start": 0,
+            "char_end": 8,
+            "font_size": 12,
+            "font_weight": "regular",
+            "coordinate_frame": "dict",
+            "source": "pdf_native_single_textpage",
+            "char_alignment": "exact"
+          }
+        ],
+        "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "heading_level": 2,
+        "heading_level_source": "numbering"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f",
+      "ordinal": 1,
+      "locator": "loc:v1/page:1/paragraph:1",
+      "page": 1,
+      "text": "We expect subscription revenue of USD",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {
+        "bbox": [
+          90,
+          120,
+          550,
+          132
+        ],
+        "page_width": 600,
+        "page_height": 800,
+        "coordinate_frame": "dict",
+        "rotation": 0
+      },
+      "hints": {
+        "font_runs": [
+          {
+            "char_start": 0,
+            "char_end": 38,
+            "font_size": 12,
+            "font_weight": "regular",
+            "coordinate_frame": "dict",
+            "source": "pdf_native_single_textpage",
+            "char_alignment": "exact"
+          }
+        ],
+        "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b",
+      "ordinal": 2,
+      "locator": "loc:v1/page:1/paragraph:2",
+      "page": 1,
+      "text": "610 to 650 million in fiscal 2029.",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {
+        "bbox": [
+          90,
+          120,
+          550,
+          132
+        ],
+        "page_width": 600,
+        "page_height": 800,
+        "coordinate_frame": "dict",
+        "rotation": 0
+      },
+      "hints": {
+        "font_runs": [
+          {
+            "char_start": 0,
+            "char_end": 34,
+            "font_size": 12,
+            "font_weight": "regular",
+            "coordinate_frame": "dict",
+            "source": "pdf_native_single_textpage",
+            "char_alignment": "exact"
+          }
+        ],
+        "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:23df004106b67bb74c379dff75f1fd9dac39edc927279f26cb7975a75a476bcd",
+      "ordinal": 3,
+      "locator": "loc:v1/page:1/paragraph:3",
+      "page": 1,
+      "text": "This revenue outlook assumes customers renew their subscriptions before the year end.",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {
+        "bbox": [
+          90,
+          140,
+          550,
+          152
+        ],
+        "page_width": 600,
+        "page_height": 800,
+        "coordinate_frame": "dict",
+        "rotation": 0
+      },
+      "hints": {
+        "font_runs": [
+          {
+            "char_start": 0,
+            "char_end": 85,
+            "font_size": 12,
+            "font_weight": "regular",
+            "coordinate_frame": "dict",
+            "source": "pdf_native_single_textpage",
+            "char_alignment": "exact"
+          }
+        ],
+        "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    }
+  ],
+  "structure": {
+    "schema_version": "du-structure/1",
+    "source_ref": {
+      "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "sections": [
+      {
+        "section_id": "s1",
+        "parent_id": null,
+        "heading_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:3aecb34a6a5ebaee0e41de592319a0a5a40f7273354bbdc8f6938b8bc54fa93e"
+        ],
+        "body_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f",
+          "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b",
+          "urn:company-wiki:narrative-unit:sha256:23df004106b67bb74c379dff75f1fd9dac39edc927279f26cb7975a75a476bcd"
+        ],
+        "section_role": "outlook",
+        "language": "zh",
+        "confidence": "high",
+        "basis": [
+          "reading_order",
+          "heading_level"
+        ]
+      }
+    ],
+    "semantic_units": [
+      {
+        "semantic_id": "m1",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m2",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b",
+          "urn:company-wiki:narrative-unit:sha256:23df004106b67bb74c379dff75f1fd9dac39edc927279f26cb7975a75a476bcd"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      }
+    ],
+    "relations": [
+      {
+        "from_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b"
+        ],
+        "to_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:23df004106b67bb74c379dff75f1fd9dac39edc927279f26cb7975a75a476bcd"
+        ],
+        "kind": "continuation",
+        "confidence": "high"
+      }
+    ],
+    "coverage": {
+      "native_scan": "complete",
+      "structured_unit_count": 2,
+      "unassigned_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:3aecb34a6a5ebaee0e41de592319a0a5a40f7273354bbdc8f6938b8bc54fa93e"
+      ],
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "excluded_furniture_unit_ids": [],
+      "complete": false,
+      "limits": {
+        "max_units": 50000,
+        "max_relations": 100000,
+        "max_group_members": 64,
+        "max_work_units": 2000000
+      },
+      "layout_feature_version": "1.2.0"
+    },
+    "diagnostics": [
+      {
+        "code": "NO_RECOGNIZED_DISCOURSE",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f",
+          "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b"
+        ],
+        "detail": "no paragraph matched an event, risk, or background signal"
+      },
+      {
+        "code": "FINE_FONT_COVERAGE_PARTIAL",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f"
+        ],
+        "detail": "font range/size is not exact original evidence"
+      },
+      {
+        "code": "FINE_FONT_COVERAGE_PARTIAL",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:66644da57347a65dc9aff38a9ec8ea6402bc843a74db6a616d61937e31a86e6f"
+        ],
+        "detail": "font ranges do not fully and uniquely cover original nonwhitespace characters"
+      },
+      {
+        "code": "WORK_UNITS",
+        "unit_ids": [],
+        "detail": "339"
+      }
+    ]
+  },
+  "continuity": {
+    "feature_version": "native-narrative-continuity/5",
+    "windows": [],
+    "adjacency_edges": [
+      {
+        "left": "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b",
+        "right": "urn:company-wiki:narrative-unit:sha256:23df004106b67bb74c379dff75f1fd9dac39edc927279f26cb7975a75a476bcd",
+        "basis": "source_body_adjacency",
+        "x0_delta": 0.0,
+        "vertical_gap": 8.0,
+        "measured_font_size": 12.0,
+        "font_weight": "regular",
+        "coordinate_frame": "dict",
+        "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "physical_basis": "native_wrapped_line"
+      }
+    ],
+    "work_units": 15,
+    "observed_unit_count": 4,
+    "standalone_unit_count": 1,
+    "semantic_status": "not_evaluated",
+    "source_page_flow": {
+      "enabled": true,
+      "coarse_complete": true,
+      "unproven_page_count": 0
+    },
+    "complete": false,
+    "deferred_unit_count": 1,
+    "deferred_unit_ids": [
+      "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b"
+    ],
+    "deferred_limited": false,
+    "deferred_unit_ranges": [
+      {
+        "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "page": 1,
+        "first_ordinal": 2,
+        "last_ordinal": 2
+      }
+    ],
+    "unexamined_from_index": null,
+    "diagnostics": [
+      {
+        "code": "CONTINUITY_OPEN_START",
+        "count": 1
+      }
+    ]
+  },
+  "blocked": [
+    "urn:company-wiki:narrative-unit:sha256:af51fd7ba9e03348c76cdf95554156e0f5014ce5813da5d813112c2ac8a5cc6b"
+  ]
+}

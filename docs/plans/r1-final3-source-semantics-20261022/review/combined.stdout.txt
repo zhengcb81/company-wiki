@@ -1,0 +1,180 @@
+{"phase": "before_pytest", "module_files": ["C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\sections.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py"]}
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\combined-temp", "requested_basetemp_len": 123, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-222921-af3d0f48", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 850 items
+
+tests\unit\document_understanding_selection\test_attributed_context_quote_oracle.py . [  0%]
+..                                                                       [  0%]
+tests\unit\document_understanding_selection\test_closed_group_support.py . [  0%]
+.........                                                                [  1%]
+tests\unit\document_understanding_selection\test_reading_balanced_coverage.py . [  1%]
+..............                                                           [  3%]
+tests\unit\document_understanding_selection\test_reading_budget_coverage.py . [  3%]
+...............                                                          [  5%]
+tests\unit\document_understanding_selection\test_reading_budget_plan.py . [  5%]
+....................                                                     [  7%]
+tests\unit\document_understanding_selection\test_reading_budget_scale.py . [  7%]
+........                                                                 [  8%]
+tests\unit\document_understanding_selection\test_reading_child_route_identity.py . [  8%]
+......                                                                   [  9%]
+tests\unit\document_understanding_selection\test_reading_cross_script_relations.py . [  9%]
+...................                                                      [ 11%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [ 12%]
+..........................                                               [ 15%]
+tests\unit\document_understanding_selection\test_reading_display_adapter.py . [ 15%]
+....................................                                     [ 19%]
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py . [ 19%]
+............................................FFF...........               [ 26%]
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py . [ 26%]
+..............................                                           [ 30%]
+tests\unit\document_understanding_selection\test_reading_multiline_tables.py . [ 30%]
+.................                                                        [ 32%]
+tests\unit\document_understanding_selection\test_reading_named_portfolio_drivers.py . [ 32%]
+..................................                                       [ 36%]
+tests\unit\document_understanding_selection\test_reading_named_segment_scope.py . [ 36%]
+..............................................                           [ 41%]
+tests\unit\document_understanding_selection\test_reading_native_carriers.py . [ 41%]
+.........                                                                [ 42%]
+tests\unit\document_understanding_selection\test_reading_native_continuity.py . [ 43%]
+.............................................                            [ 48%]
+tests\unit\document_understanding_selection\test_reading_native_material_mapping.py . [ 48%]
+......                                                                   [ 49%]
+tests\unit\document_understanding_selection\test_reading_portfolio_disclosure.py . [ 49%]
+.........................                                                [ 52%]
+tests\unit\document_understanding_selection\test_reading_priority_coverage.py . [ 52%]
+.....................                                                    [ 54%]
+tests\unit\document_understanding_selection\test_reading_production_selection.py . [ 54%]
+....................                                                     [ 57%]
+tests\unit\document_understanding_selection\test_reading_root_policy_binding.py . [ 57%]
+......................                                                   [ 60%]
+tests\unit\document_understanding_selection\test_reading_semantic_value.py . [ 60%]
+................................                                         [ 63%]
+tests\unit\document_understanding_selection\test_reading_source_boundaries.py . [ 64%]
+                                                                         [ 64%]
+tests\unit\document_understanding_selection\test_reading_structured_qa.py . [ 64%]
+...............                                                          [ 65%]
+tests\unit\document_understanding_selection\test_reading_table_admission.py . [ 66%]
+................................                                         [ 69%]
+tests\unit\document_understanding_selection\test_reading_table_rows.py . [ 69%]
+.........................                                                [ 72%]
+tests\unit\document_understanding_selection\test_reading_value_coverage.py . [ 72%]
+...................................FF...........                         [ 78%]
+tests\unit\test_narrative_reading_projection_generation.py .......       [ 79%]
+tests\unit\test_narrative_reading_transport.py ......................... [ 82%]
+.....                                                                    [ 82%]
+tests\unit\test_narrative_reading_generation_store.py .................. [ 85%]
+                                                                         [ 85%]
+tests\unit\test_narrative_reading_model_projection.py ...........        [ 86%]
+tests\unit\test_narrative_citation_unit_model_boundary.py .............. [ 88%]
+.......................                                                  [ 90%]
+tests\unit\test_narrative_english_operations.py .......................  [ 93%]
+tests\unit\test_narrative_business_recall.py ........................... [ 96%]
+.............................                                            [100%]
+
+================================== FAILURES ===================================
+____ test_catalog_compiler_rejects_the_same_invalid_table_scan_types[true] ____
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py:169: in test_catalog_compiler_rejects_the_same_invalid_table_scan_types
+    compiler.compile_catalog(ROOT)
+tools\import_reading_policies.py:49: in compile_catalog
+    families, family_coverage = _records(data / "families", "du2-family-spec/1")
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py:162: in records
+    rows, coverage = original(package, schema)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\import_reading_policies.py:24: in _records
+    index = _json(package / "index.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\import_reading_policies.py:17: in _json
+    value = json.loads(path.read_text(encoding="utf-8"))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\document-understanding-2026-10-13\\review\\deliverables\\families\\index.json'
+_____ test_catalog_compiler_rejects_the_same_invalid_table_scan_types[1] ______
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py:169: in test_catalog_compiler_rejects_the_same_invalid_table_scan_types
+    compiler.compile_catalog(ROOT)
+tools\import_reading_policies.py:49: in compile_catalog
+    families, family_coverage = _records(data / "families", "du2-family-spec/1")
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py:162: in records
+    rows, coverage = original(package, schema)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\import_reading_policies.py:24: in _records
+    index = _json(package / "index.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\import_reading_policies.py:17: in _json
+    value = json.loads(path.read_text(encoding="utf-8"))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\document-understanding-2026-10-13\\review\\deliverables\\families\\index.json'
+____ test_catalog_compiler_rejects_the_same_invalid_table_scan_types[None] ____
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py:169: in test_catalog_compiler_rejects_the_same_invalid_table_scan_types
+    compiler.compile_catalog(ROOT)
+tools\import_reading_policies.py:49: in compile_catalog
+    families, family_coverage = _records(data / "families", "du2-family-spec/1")
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_hk_mechanisms.py:162: in records
+    rows, coverage = original(package, schema)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\import_reading_policies.py:24: in _records
+    index = _json(package / "index.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\import_reading_policies.py:17: in _json
+    value = json.loads(path.read_text(encoding="utf-8"))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\document-understanding-2026-10-13\\review\\deliverables\\families\\index.json'
+__________ test_observed_heading_alone_is_context_not_a_value_anchor __________
+tests\unit\document_understanding_selection\test_reading_value_coverage.py:206: in test_observed_heading_alone_is_context_not_a_value_anchor
+    units, result = source_candidates(["A General Product Group", "Our software comes in several editions."], headings=(0,))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_value_coverage.py:202: in source_candidates
+    return units, reading._candidates(parsed, pipeline)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_reading.py:428: in _candidates
+    packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline,
+src\company_wiki\source_catalog\narrative_reading.py:190: in _prose_reading_packages
+    actual_heads, valid = inherited[sid]
+                          ^^^^^^^^^^^^^^
+E   KeyError: None
+_ test_actual_operating_fact_and_scope_only_description_receive_different_bands _
+tests\unit\document_understanding_selection\test_reading_value_coverage.py:213: in test_actual_operating_fact_and_scope_only_description_receive_different_bands
+    units, result = source_candidates(["Our service charges depend on actual resources consumed.",
+tests\unit\document_understanding_selection\test_reading_value_coverage.py:202: in source_candidates
+    return units, reading._candidates(parsed, pipeline)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_reading.py:428: in _candidates
+    packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline,
+src\company_wiki\source_catalog\narrative_reading.py:190: in _prose_reading_packages
+    actual_heads, valid = inherited[sid]
+                          ^^^^^^^^^^^^^^
+E   KeyError: None
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\review\combined.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_hk_mechanisms.py::test_catalog_compiler_rejects_the_same_invalid_table_scan_types[true]
+FAILED tests/unit/document_understanding_selection/test_reading_hk_mechanisms.py::test_catalog_compiler_rejects_the_same_invalid_table_scan_types[1]
+FAILED tests/unit/document_understanding_selection/test_reading_hk_mechanisms.py::test_catalog_compiler_rejects_the_same_invalid_table_scan_types[None]
+FAILED tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_observed_heading_alone_is_context_not_a_value_anchor
+FAILED tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_actual_operating_fact_and_scope_only_description_receive_different_bands
+======================= 5 failed, 845 passed in 36.74s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261022-222921-af3d0f48", "existed": true, "removed": false}
+{"phase": "after_pytest", "module_files": ["C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\sections.py", "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py"], "pytest_exit": 1}

@@ -1,0 +1,126 @@
+{
+  "groups": [
+    [
+      0
+    ],
+    [
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6
+    ],
+    [
+      7,
+      8,
+      9
+    ],
+    [
+      10
+    ]
+  ],
+  "source_blocks": 4,
+  "component_source_units": 10,
+  "chars": 122,
+  "selected": [
+    {
+      "text": "一、设备生产线扩建项目",
+      "kind": "pdf_text_block",
+      "source_ids": "()"
+    },
+    {
+      "text": "报告期内，公司已交付27台专用设备至客户进行生产验证。\n该设备尚未完成客户认证。\n该设备尚未开始量产。",
+      "kind": "pdf_native_range",
+      "source_ids": "('urn:company-wiki:narrative-unit:sha256:42a341363ada2ad510b5557efdc8ccb6af9cc0e1d470dd2c456a16342bab482d', 'urn:company-wiki:narrative-unit:sha256:5d2b3bf088a51f063e86f1bbdcac28efc3478fb3dfd45ae78f5ab325b04e7353', 'urn:company-wiki:narrative-unit:sha256:23f26a1ade21d80d3f3d0f57fbcab4591092bdf1d70ca6c788483a7c51f15973')"
+    },
+    {
+      "text": "该设备尚未商业化。\n该设备尚未完成客户认证。\n该设备尚未开始量产。",
+      "kind": "pdf_native_range",
+      "source_ids": "('urn:company-wiki:narrative-unit:sha256:137e12c4628aecf1b2427c043c18dc13b5274a858f9460a4a0d5e1315caeb7de', 'urn:company-wiki:narrative-unit:sha256:150c94d782ad1a049234789150aa1d06c868b2e403fe94695f65dbd22e411ac1', 'urn:company-wiki:narrative-unit:sha256:ab97e924d663837e4954d277da8b1677cba38ffab98a83cf692fe5d3df8f83b6')"
+    },
+    {
+      "text": "该设备尚未商业化。\n该设备尚未完成客户认证。\n该设备尚未开始量产。",
+      "kind": "pdf_native_range",
+      "source_ids": "('urn:company-wiki:narrative-unit:sha256:20d1caaa1ec178ebc50d62afd97775e9e583ec7a671545daea881f815f62c028', 'urn:company-wiki:narrative-unit:sha256:3d364dc222b2c9085cc3202ced3724f0c1a75fef31439384cef87cc12650d75e', 'urn:company-wiki:narrative-unit:sha256:6f883dbf4d2c87579438b495d6443257cb189f1c3dbfd1dc5619bb64e58a6ab6')"
+    }
+  ],
+  "deferred": [],
+  "citation": [
+    {
+      "group_id": "urn:company-wiki:reading-group:sha256:2b78d7239551739833f360f22dedea1aba4b0ab9b5074b61183c4a218044b1b5",
+      "kind": "project",
+      "section_role": "unknown",
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f"
+      ],
+      "citation_views": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f"
+          ],
+          "context_evidence_ids": []
+        }
+      ]
+    },
+    {
+      "group_id": "urn:company-wiki:reading-group:sha256:30b5e5be887adf63ec86a892c302e8b90705faca213a3d8bc0473e025530fcce",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f",
+        "urn:company-wiki:evidence-span:sha256:2bace99fa5ff2d69b903f83f29eddb58da9819afc2172a5982cc2bb83a58a30d"
+      ],
+      "citation_views": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:2bace99fa5ff2d69b903f83f29eddb58da9819afc2172a5982cc2bb83a58a30d"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f"
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "urn:company-wiki:reading-group:sha256:3643e08d4252bf94ab1747f0f0b70e286f0d16159b29f975aa65882e2c6c29b6",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f",
+        "urn:company-wiki:evidence-span:sha256:38c81a66bc68315a89cc1781adcd4393da717bf99f4f05ba2ad954c614b73e7c"
+      ],
+      "citation_views": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:38c81a66bc68315a89cc1781adcd4393da717bf99f4f05ba2ad954c614b73e7c"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f"
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "urn:company-wiki:reading-group:sha256:7d819f57a5a9cbde1937b6aa0f803e46f498eb4ebe1b85fc0f81e554c11308e1",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f",
+        "urn:company-wiki:evidence-span:sha256:ef7196391515feec2ec181f299870e8f90dd359ddf95a12c154c9a60ddd67062"
+      ],
+      "citation_views": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:ef7196391515feec2ec181f299870e8f90dd359ddf95a12c154c9a60ddd67062"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:9a6ca26603fb379e5b3d731f647fa2195559a468c3ffe23c38e441455eb1013f"
+          ]
+        }
+      ]
+    }
+  ]
+}

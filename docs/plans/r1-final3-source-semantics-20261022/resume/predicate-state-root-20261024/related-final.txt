@@ -1,0 +1,42 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\predicate-state-root-20261024\\related-final-temp", "requested_basetemp_len": 158, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233505-862d7636", "effective_basetemp_len": 99}
+........................................................................ [ 10%]
+........................................................................ [ 21%]
+........................................................................ [ 32%]
+........................................................................ [ 42%]
+........................................................................ [ 53%]
+.....................................FFF................................ [ 64%]
+........................................................................ [ 74%]
+........................................................................ [ 85%]
+........................................................................ [ 96%]
+...........................                                              [100%]
+================================== FAILURES ===================================
+_________ test_observed_measure_and_causal_scope[v2_en_future_stock] __________
+tests\unit\document_understanding_selection\test_reading_measure_scope.py:19: in test_observed_measure_and_causal_scope
+    assert kinds == set(case["expected_measure_kinds"])
+E   AssertionError: assert {'planned_quantity'} == set()
+E     
+E     Extra items in the left set:
+E     'planned_quantity'
+E     Use -v to get more diff
+_________ test_observed_measure_and_causal_scope[v2_en_expect_stock] __________
+tests\unit\document_understanding_selection\test_reading_measure_scope.py:19: in test_observed_measure_and_causal_scope
+    assert kinds == set(case["expected_measure_kinds"])
+E   AssertionError: assert {'planned_quantity'} == set()
+E     
+E     Extra items in the left set:
+E     'planned_quantity'
+E     Use -v to get more diff
+______ test_observed_measure_and_causal_scope[v2_en_expect_comma_stock] _______
+tests\unit\document_understanding_selection\test_reading_measure_scope.py:19: in test_observed_measure_and_causal_scope
+    assert kinds == set(case["expected_measure_kinds"])
+E   AssertionError: assert {'planned_quantity'} == set()
+E     
+E     Extra items in the left set:
+E     'planned_quantity'
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_measure_scope.py::test_observed_measure_and_causal_scope[v2_en_future_stock]
+FAILED tests/unit/document_understanding_selection/test_reading_measure_scope.py::test_observed_measure_and_causal_scope[v2_en_expect_stock]
+FAILED tests/unit/document_understanding_selection/test_reading_measure_scope.py::test_observed_measure_and_causal_scope[v2_en_expect_comma_stock]
+3 failed, 672 passed in 16.79s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-233505-862d7636", "existed": true, "removed": true}

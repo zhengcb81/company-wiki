@@ -1,0 +1,6 @@
+{
+  "policy_sha256": "9cfcb4ba54ce05a321ce932dc634817cb0a5044584326ea96263012541814bd6",
+  "test_sha256": "7c5d395cfdee649926be3bf972b71cd4c22743d1857235c88f1d3c1cd1196ddd",
+  "observed_red": "comparison-red.txt/xml, 5 FAIL / 88 PASS",
+  "root_reason": "No explicit growth comparator yet a bare business-labelled financial percentage promoted actual metric and financial_exempt."
+}

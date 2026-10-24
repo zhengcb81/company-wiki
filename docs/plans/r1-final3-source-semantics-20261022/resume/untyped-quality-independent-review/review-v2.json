@@ -1,0 +1,91 @@
+{
+  "status": "PARTIAL_BUDGET_ATTRIBUTION_MUST_FIX",
+  "scope": "only untyped numeric quality detector/output/cache; not project body, full annual coverage, summary or production acceptance",
+  "detector_recheck": {
+    "formal": 15,
+    "permanent_reverse": 7,
+    "independent": 11,
+    "total_pass": 33,
+    "fail": 0,
+    "pytest_seconds": 5.75,
+    "all_before_after_bindings_equal": true,
+    "binding": {
+      "src/company_wiki/document_normalization/table_shapes.py": "7c46c4ff6664701511e7e19a5514fbd005d7491c89b93a73dbe4100ad45483df",
+      "src/company_wiki/source_catalog/narrative_reading.py": "159f301c109a31542c603f9f72bc5e762eeebdd848f870e21539691b6e0ca835",
+      "src/company_wiki/document_understanding/decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py": "bc9b93b1a1869369b12a403d13a67f2eee8793fc992b3d42aacf293a1c6286bf",
+      "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py": "ab73da2cedc910ea095d1eaa941b22f29113c73309e4a3d14c19155be21ac53c",
+      "quality_section": "c79ccc89db434637c56a16caa248dd2a4cdd3036c93f909bb42cb17ef93be5c2",
+      "shape_function": "9531e2ec8e4b23249e49b3e7d78ad376fb77545b19253fa370b6e4e0698000b3"
+    }
+  },
+  "findings": [
+    {
+      "id": "UQ-01",
+      "status": "FIXED_RETESTED",
+      "issue": "bare native prose numeric tokens separated by sentence fragments were falsely table ambiguity",
+      "root_fix": "shared table shape requires consecutive value-cell run; no global carrier exemption or business/unit dictionaries",
+      "old_receipt": "review-v1.txt",
+      "permanent_test": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "first_permanent_run": "7 PASS after ROOT already wrote fix; filename reverse-red.txt is historical requested name, not a RED claim"
+    },
+    {
+      "id": "UQ-02",
+      "status": "OPEN",
+      "issue": "refused quality scan assigns observed table ambiguity to all unbound spans including numeric-free prose and heading; work budget reason absent",
+      "evidence": "budget-risk.json",
+      "severity": "P2",
+      "recommendation": "return existing work_budget_exhausted deferred result, or preserve only proven fully closed bound groups; never represent unexamined quality as table-shape evidence"
+    }
+  ],
+  "no_unit_period_currency_inference": true,
+  "cross_parent_isolation": true,
+  "fully_bound_positive": true,
+  "cache_quality_byte_dependency_public_probe_changed_then_restored": true,
+  "cleanup": {
+    "actual": [
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211202-2fd24876",
+        "existed": true,
+        "removed": true,
+        "log": "review-v1.txt",
+        "absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211331-5f42d310",
+        "existed": true,
+        "removed": true,
+        "log": "reverse-red.txt",
+        "absent_after": true
+      },
+      {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211409-256c63b9",
+        "existed": true,
+        "removed": true,
+        "log": "review-v2.txt",
+        "absent_after": true
+      }
+    ],
+    "requested": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\probe-temp",
+        "absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\reverse-red-temp",
+        "absent_after": true
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-quality-independent-review\\v2-temp",
+        "absent_after": true
+      }
+    ]
+  },
+  "production_writes": 0,
+  "raw_original_reads": 0,
+  "network_calls": 0,
+  "model_calls": 0
+}

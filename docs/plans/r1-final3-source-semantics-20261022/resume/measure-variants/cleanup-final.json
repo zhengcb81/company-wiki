@@ -1,0 +1,118 @@
+{
+  "actual": [
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220135-a8791639",
+      "existed": true,
+      "removed": true,
+      "log": "red.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220625-2da51c7a",
+      "existed": true,
+      "removed": true,
+      "log": "green-v1.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-220908-eb1d47f0",
+      "existed": true,
+      "removed": true,
+      "log": "future-frame-red.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221019-4cf44b9f",
+      "existed": true,
+      "removed": true,
+      "log": "future-frame-red-v2.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221118-29fa5c27",
+      "existed": true,
+      "removed": true,
+      "log": "full-selection.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221315-067bb3eb",
+      "existed": true,
+      "removed": true,
+      "log": "comparison-red.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221523-f792d598",
+      "existed": true,
+      "removed": true,
+      "log": "local-comparison-red.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221707-7e3aec4b",
+      "existed": true,
+      "removed": true,
+      "log": "related-final.txt",
+      "verified_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-221803-0676335b",
+      "existed": true,
+      "removed": true,
+      "log": "final-selection.txt",
+      "verified_absent_after": true
+    }
+  ],
+  "requested": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\red-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\green-v1-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\future-frame-red-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\future-frame-red-v2-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\full-selection-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\comparison-red-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\local-comparison-red-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\related-final-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\final-selection-temp",
+      "verified_absent_after": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-variants\\mypy-cache",
+      "verified_absent_after": true
+    }
+  ]
+}

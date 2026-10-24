@@ -1,0 +1,115 @@
+{
+  "at_utc": "2026-10-23T23:13:21.874149+00:00",
+  "status": "FINITE_ENGINEERING_GREEN_READY_FOR_INDEPENDENT_ROOT_REVIEW",
+  "production_changed": [
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py",
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py",
+    "src/company_wiki/document_understanding/decision_inventory.py"
+  ],
+  "new_formal_test": "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+  "sources": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_revenue_guidance.py",
+      "bytes": 5722,
+      "sha256": "9d65dc1f7294b6d12f916a258d122766ac4a8e1e558fc9e5c6c70c3c3d027d80"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 48418,
+      "sha256": "44fb64818412f9b90541c3528f22c1102c49b98cad5d363dcb1b685714bca30e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "bytes": 21911,
+      "sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "bytes": 25993,
+      "sha256": "e1c81224e45246899ab7df3b372b90d56f9021cf43549007b803807911a16a52"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "bytes": 11327,
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+      "bytes": 8094,
+      "sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+      "bytes": 11035,
+      "sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb"
+    }
+  ],
+  "tests": {
+    "guidance-v1": {
+      "cases": 20,
+      "passed": 20,
+      "failed": 0,
+      "errors": 0
+    },
+    "guidance-controls-red": {
+      "cases": 40,
+      "passed": 34,
+      "failed": 6,
+      "errors": 0
+    },
+    "guidance-controls-v2": {
+      "cases": 40,
+      "passed": 39,
+      "failed": 1,
+      "errors": 0
+    },
+    "guidance-controls-v3": {
+      "cases": 40,
+      "passed": 40,
+      "failed": 0,
+      "errors": 0
+    },
+    "guidance-predicate-red": {
+      "cases": 44,
+      "passed": 41,
+      "failed": 3,
+      "errors": 0
+    },
+    "guidance-predicate-final": {
+      "cases": 44,
+      "passed": 44,
+      "failed": 0,
+      "errors": 0
+    },
+    "related-final": {
+      "cases": 626,
+      "passed": 626,
+      "failed": 0,
+      "errors": 0
+    },
+    "guidance-source-bound": {
+      "cases": 44,
+      "passed": 44,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "related_scope": "626 cases includes all budget70, unchanged measure77, unchanged original guidance20, new controls24, existing source qualification/citation/model ports; overlapping runs are not added",
+  "mypy": "PASS:4sourcefiles, actual CI target3.12, follow_imports=silent",
+  "ruff": "PASS",
+  "original20_and_measure77_test_bytes_unchanged": true,
+  "merge_head_preserved": "ab95027b5b1452c4403db482362b59a9f8976286",
+  "committed": false,
+  "pushed": false,
+  "external_calls": 0,
+  "source_identity": "Actual new guidance module is in existing decision inventory business_algorithms byte closure; complete source decision changes when its bytes change and restores when bytes restore. Fee/company-soft changes remain semantic no-ops in actual PDF regression.",
+  "cleanup_receipt": "cleanup.json",
+  "limitations": [
+    "Independent code/quality review required before ROOT commit",
+    "Not full annual14 source acceptance or new paid summary/cache/RF business acceptance",
+    "Cross-page ancestry, fixed-budget diversity and actual final3 review remain ROOT stages"
+  ],
+  "schema_version": "w08-guidance-root-handoff/1",
+  "schema_scope": "No new source/task/persisted state or numeric normalization. Existing selection reason source_revenue_guidance and purpose operating_guidance only. Original raw forecast wording remains model material."
+}

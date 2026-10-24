@@ -11,6 +11,8 @@ import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
 
+from .narrative_business_meaning import concrete_operating_event, describes_business
+
 
 NON_OPERATING_PURPOSES = frozenset({
     "accounting_policy", "audit_procedure", "treasury_policy", "template_no_event", "navigation",
@@ -18,6 +20,26 @@ NON_OPERATING_PURPOSES = frozenset({
 
 _ACCOUNTING = re.compile(
     r"期权定价|股份支付|股票期权|使用权资产|租赁负债|账面价值|计入损益|"
+    # Definitions and recognition/presentation rules have a financial object
+    # and a policy predicate. A generic control/customer/risk word is not enough.
+    r"控制.{0,12}(?:是指|的判断标准).{0,160}被投资方.{0,160}可变回报|"
+    r"金融资产.{0,160}交易日.{0,40}(?:确认|终止确认)|"
+    r"金融工具.{0,160}信用风险.{0,160}初始确认|"
+    r"终止经营.{0,12}(?:是指|认定标准|列报方法)|"
+    r"终止经营损益.{0,50}利润表.{0,30}(?:列示|列报)|"
+    r"\bcontrols?\b.{0,100}\binvest(?:or|ee)\b.{0,160}\bvariable returns\b|"
+    r"\b(?:financial assets?|regular.way (?:purchases?|sales?))\b.{0,160}\btrade date\b|"
+    r"(?=[^。;!?]{0,240}(?:信用风险|\bcredit risk\b))"
+    r"(?=[^。;!?]{0,240}(?:金融工具|\bfinancial instruments?\b))"
+    r"(?=[^。;!?]{0,240}(?:初始确认|\binitial recognition\b))[^。;!?]{1,240}|"
+    r"\bdiscontinued operations?\b.{0,35}\b(?:is a component|are components|represents? a component)\b|"
+    r"\b(?:profit or loss|income or loss)\b.{0,60}\bdiscontinued operations?\b"
+    r".{0,80}\bpresented separately\b.{0,60}\bincome statement\b|"
+    r"\bincome statement\b.{0,160}\bdiscontinued operations?\b.{0,80}\bpresented separately\b|"
+    r"利润表.{0,80}(?:列示|列报).{0,100}终止经营损益|"
+    r"金融负债.{0,120}终止确认|终止确认.{0,120}金融负债|"
+    r"\bfinancial liabilit(?:y|ies)\b.{0,160}\bderecogni[sz]\w*\b|"
+    r"\bderecogni[sz]\w*\b.{0,160}\bfinancial liabilit(?:y|ies)\b|"
     r"\b(?:employee share options?|share.based (?:payments?|compensation)|"
     r"option.pricing|right.of.use assets?|lease liabilities|carrying (?:value|amount)|"
     r"accounting estimates?|accounting polic(?:y|ies)|consolidated financial statements|"
@@ -37,11 +59,20 @@ _TREASURY = re.compile(
     r"\b(?:board|treasury)\b.{0,100}\b(?:approved|authorized|invest)\b"
     r".{0,100}\b(?:wealth management|cash management|financial products)\b", re.I)
 _NAVIGATION = re.compile(
-    r"^\s*(?:(?:see|refer to)\s+(?:note|item|section)\s*\d+|"
-    r"(?:详见|参见|请参阅).{0,30}(?:附注|章节|第.{0,6}节))", re.I)
+    r"^\s*(?:(?:for (?:further |more )?details[,:]?\s+)?(?:see|refer to)\s+"
+    r"(?:the\s+)?(?:note|item|section)(?:\s*\d+|\s+on\b)|"
+    r"(?:具体)?(?:详见|参见|请参阅).{0,30}(?:附注|章节|第.{0,6}节)|"
+    r"^[^。！？；;.!?]{1,80}?(?:情况|详情|说明|信息)(?:请)?(?:详见|参见|参阅).{0,30}第.{0,6}节)", re.I)
 _TEMPLATE = re.compile(r"^[\s□☑☐√✓✔×✗适用不\.、/():：（）\-]+$")
 _LABELLED_NO_EVENT = re.compile(
-    r"^[^。！？；;.!?]{0,160}?[□☐]\s*适用\s*[√✓✔☑]\s*不适用\s*$")
+    r"^(?:(?:[A-Za-z0-9]{1,8}|[(（][A-Za-z0-9一二三四五六七八九十]{1,8}[)）])\s*[.、)]?\s*)?"
+    r"(?:[^。！？；;.!?]|(?<=\d)\.(?=\d))*?[□☐]\s*适用\s*[√✓✔☑]\s*不适用\s*$")
+# A new explicit actor starts an independent assertion even after a comma.
+# Subordinate audit test descriptions do not manufacture a company event.
+_ASSERTION_ACTOR = re.compile(
+    r"[,，]\s*(?:(?:and|but)\s+)?(?=(?:公司|本公司|集团|本集团|我们|"
+    r"the company\b|the group\b|our company\b|we\b))", re.I)
+
 # This stock is an operating contract measure, not a financial total inferred
 # from an arbitrary currency amount. Period/conversion interpretation stays in
 # the original source; this classifier never computes a dated metric.
@@ -56,15 +87,6 @@ _ALLOCATED_FINANCIAL = re.compile(
     r"\b(?:revenue|income|sales)\b.{0,60}\b(?:allocated|attribut(?:ed|able)|relat(?:ed|ing))\b"
     r".{0,30}\b(?:RPO|remaining performance obligations?)\b|"
     r"收入.{0,30}(?:分摊|分配|计入).{0,30}(?:剩余履约义务|未履约订单)", re.I)
-_OPERATING_OBJECT = re.compile(
-    r"(?:新工厂|新产线|生产线|客户|设备|产品|晶圆|平台|软件|研发|海外|用户)|"
-    r"\b(?:customers?|clients?|platforms?|production lines?|factories|reactors?|"
-    r"overseas|software|engineers?)\b", re.I)
-_OPERATING_EVENT = re.compile(
-    r"(?:推出|投产|量产|交付|客户认证|客户验证|重复订单|收购|并购|招聘|聘用)|"
-    r"租赁.{0,25}(?:新工厂|新产线)|"
-    r"\b(?:launched|deployed|commissioned|delivered|repeat orders?|acquired|"
-    r"hired|customer certification)\b", re.I)
 _AUDIT_SPEECH = re.compile(
     r"\bwe (?:evaluated|tested|assessed|obtained)\b.{0,180}"
     r"\b(?:internal controls?|impairment|management(?:['’]s)? assumptions|audit|"
@@ -81,9 +103,11 @@ def _clause_purpose(value: str) -> str:
     # Source clauses separated by real terminators are assessed independently.
     if _LABELLED_NO_EVENT.fullmatch(value):
         return "template_no_event"
+    if _NAVIGATION.search(value):
+        return "navigation"
     if _AUDIT_SPEECH.search(value) or _AUDIT_OWNER.search(value):
         return "audit_procedure"
-    if _OPERATING_OBJECT.search(value) and _OPERATING_EVENT.search(value):
+    if concrete_operating_event(value):
         return "operating"
     if _AUDIT.search(value):
         return "audit_procedure"
@@ -98,8 +122,8 @@ def _clause_purpose(value: str) -> str:
         return "treasury_policy"
     if _TEMPLATE.fullmatch(value) and any(character in value for character in "□☑☐√✓适用"):
         return "template_no_event"
-    if _NAVIGATION.search(value):
-        return "navigation"
+    if describes_business(value):
+        return "operating"
     return "unknown"
 
 
@@ -111,11 +135,14 @@ def source_purpose(text: str) -> str:
     accounting/audit/treasury purpose by themselves.
     """
     value = matching_reading_text(text)
+    if _LABELLED_NO_EVENT.fullmatch(value):
+        return "template_no_event"
     # No noun in another sentence may lend an operating object to a policy
     # verb. Conversely a genuine independent business sentence is retained
     # inside an acquisition/lease note rather than blacklisting that chapter.
-    purposes = tuple(_clause_purpose(clause.strip()) for clause in
-        re.split(r"[。！？；;]|(?<=[.!?])\s+", value) if clause.strip())
+    sentences = re.split(r"[。！？；;]|(?<=[.!?])\s+", value)
+    clauses = (part for sentence in sentences for part in _ASSERTION_ACTOR.split(sentence))
+    purposes = tuple(_clause_purpose(clause.strip()) for clause in clauses if clause.strip())
     for purpose in ("operating_contract_stock", "operating"):
         if purpose in purposes:
             return purpose

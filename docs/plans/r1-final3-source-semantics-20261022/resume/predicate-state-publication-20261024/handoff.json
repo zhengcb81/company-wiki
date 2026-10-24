@@ -1,0 +1,60 @@
+{
+  "schema_version": "w08-predicate-state-publication/1",
+  "status": "FINITE_ACCEPTED_CODE_PUBLISHED_WITH_NORMAL_MERGE; DOCS_CLOSEOUT_NEXT",
+  "code_merge_commit": "1896d9fb35afa7421433f12ade47010596a297e9",
+  "code_merge_parents": [
+    "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
+    "ab95027b5b1452c4403db482362b59a9f8976286"
+  ],
+  "branch": "codex/r1-final3-source-semantics",
+  "published_to_remote": false,
+  "commit_paths": "committed-paths.json",
+  "source_hashes": "source-byte-map.json",
+  "material_preservation": "preservation-after-merge.json",
+  "remaining_files": "remaining-files-before-docs.json",
+  "cleanup": "cleanup.json",
+  "normal_commit": "normal-commit-01.json",
+  "normal_commit_log": "normal-commit-01.txt",
+  "normal_hooks": {
+    "ruff": "PASS",
+    "mypy_full_src": "PASS",
+    "host_assumption_guard": "PASS",
+    "dependency": "NO_FILES per merge hook",
+    "config_doctor": "NO_FILES per merge hook",
+    "merge_scope": "checking merge-conflict files only",
+    "elapsed_seconds": 48.696,
+    "no_skip_or_hook_change": true
+  },
+  "tests": {
+    "engineering_related": {
+      "passed": 677,
+      "seconds": 13.06
+    },
+    "independent_finite": {
+      "passed": 24,
+      "seconds": 2.569
+    },
+    "original77_20_24_17_assertions_unchanged": true,
+    "overlap": "do not add these overlapping test totals"
+  },
+  "independent_final_review_sha256": "02a9d828ac2edf16a18f00b9a4e8ca3e454d32c98b2678860586ebb58a2ebbad",
+  "independent_final_freeze_sha256": "301fa681872682a10d40d2ddfe393a564c7ef5805a521a6b8a05c4e1fbc2ad7e",
+  "scope": {
+    "initial_incoming_staged_paths": 88,
+    "merge_committed_paths": 284,
+    "all506_initial_file_bytes_preserved": true,
+    "frozen15_source_test_raw_stable": true,
+    "native_receipts_committed_byte_exact": 186,
+    "diagnostic_scripts_only_py_txt_in_git": 8,
+    "gitattributes": "six narrow resume receipt directories preserve native bytes; source/tests normal Git text policy unchanged"
+  },
+  "not_certified": [
+    "crosspage ancestry",
+    "annual14 diversity",
+    "paid formal summary/cache",
+    "full RF loop",
+    "all linguistic variants"
+  ],
+  "root_next": "Merge final branch HEAD from docs closeout, preserve latest mother entry a8372412 or newer, run one normal main pre-push. Do not push this branch separately.",
+  "future_tdd": "test_reading_native_list_ancestry.py and resume/cross-page-public-red-20261024 owned by concurrent ROOT next node are intentionally excluded."
+}

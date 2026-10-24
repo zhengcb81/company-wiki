@@ -1,0 +1,51 @@
+{
+  "schema_version": "review-artifact-freeze/1",
+  "files": {
+    "final-after.json": {
+      "sha256": "1ba8944e540264ab5b81b61fc5b5e6e6da1919f23a890aee65c4be93061b3da3",
+      "bytes": 2555
+    },
+    "final-before.json": {
+      "sha256": "1ba8944e540264ab5b81b61fc5b5e6e6da1919f23a890aee65c4be93061b3da3",
+      "bytes": 2555
+    },
+    "final-cleanup.json": {
+      "sha256": "65dfefabab210e9f53d9668f1b77fcbb6c75f0bd766a940c653aba5f685a65eb",
+      "bytes": 603
+    },
+    "final-execution.json": {
+      "sha256": "12645c3f170128cb2bf18667dac5275d5ac812b88e0df40a1849fdd4a251d52b",
+      "bytes": 563
+    },
+    "final-review.json": {
+      "sha256": "02a9d828ac2edf16a18f00b9a4e8ca3e454d32c98b2678860586ebb58a2ebbad",
+      "bytes": 9659
+    },
+    "final-review.md": {
+      "sha256": "4e57a0445c171e8ff126fe343279db274a1d0deab57b94faeeceb1120512e439",
+      "bytes": 2871
+    },
+    "final-semantic-probes.json": {
+      "sha256": "848afcd540d8f2edaecb1dc7cb1ad27c262fab064a22e5a20e88dfec90d36f61",
+      "bytes": 13828
+    },
+    "final-semantic_probe.py.txt": {
+      "sha256": "739b0c328e663821e2db87edb457bc49e25f84119d3445139a5ac65b602c7bf9",
+      "bytes": 6499
+    },
+    "final-test_semantics.py.txt": {
+      "sha256": "696a6370522891a64e5138a5f6b3d94e952aef39594ee26a9fd1397731327134",
+      "bytes": 1433
+    },
+    "final-tests.txt": {
+      "sha256": "57edb62af81e8d636f7eeffada918ff606743952630965c092a986e6f88da049",
+      "bytes": 2585
+    },
+    "final-tests.xml": {
+      "sha256": "1cbc200bf35dfadd79e098e13de81bc1941b6cfa4cdc37774a58327004f0a9e4",
+      "bytes": 4545
+    }
+  },
+  "product_stop_writes": true,
+  "review_stop_writes_after_this_freeze": true
+}

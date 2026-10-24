@@ -143,6 +143,7 @@ class ObservationUnit:
         "heading_level",
         "heading_level_source",
         "table_id",
+        "table_region",
         "row",
         "column_index",
         "speaker",
@@ -183,6 +184,7 @@ class ObservationUnit:
         self.heading_level = _optional_int(hints.get("heading_level"))
         self.heading_level_source = _optional_str(hints.get("heading_level_source"))
         self.table_id = _optional_str(hints.get("table_id"))
+        self.table_region = hints.get("table_region") is True
         self.row = _optional_int(hints.get("row"))
         self.column_index = _optional_int(hints.get("column"))
         self.speaker = _optional_str(hints.get("speaker"))

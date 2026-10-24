@@ -1,0 +1,55 @@
+[
+  {
+    "parts": [
+      "Active customers\n735\n626",
+      "Increase from new distribution channels."
+    ],
+    "direct_native_range": true,
+    "evidence": [],
+    "groups": []
+  },
+  {
+    "parts": [
+      "Active customers",
+      "735",
+      "626",
+      "Increase from new distribution channels."
+    ],
+    "direct_native_range": true,
+    "evidence": [],
+    "groups": []
+  },
+  {
+    "parts": [
+      "The company expanded its customer network.",
+      "Active customers\n735\n626\nIncrease from new distribution channels."
+    ],
+    "direct_native_range": true,
+    "evidence": [
+      {
+        "text": "The company expanded its customer network.\nActive customers\n735\n626\nIncrease from new distribution channels.",
+        "kind": "pdf_native_range",
+        "flags": [],
+        "native_range": "{'schema_version': 'native-pdf-range/1', 'base_parser_version': '0.1.1', 'coordinate_space': 'native_page_view', 'page_view_sha256': 'd4f6386307ac7cd29423faafaa11b6fc57544efaa644b0dc0e268aadc2a5f7a2', 'source_unit_ids': ('urn:company-wiki:narrative-unit:sha256:b147f1a5a21f2db1f7da7b4030e0a09ef413faac557cbf9593b533fa3e88b400', 'urn:company-wiki:narrative-unit:sha256:13ee31180bb0d9694df58c4df747cd729857fe16b2496986d78be6469103cdad'), 'members': (mappingproxy({'unit_id': 'urn:company-wiki:narrative-unit:sha256:b147f1a5a21f2db1f7da7b4030e0a09ef413faac557cbf9593b533fa3e88b400', 'locator': 'loc:v1/page:1/paragraph:1', 'text_sha256': 'e9dc4e8ae85fcbc5c7c6e29c866c31a959fef069be6d943a939689048ee2e7f9', 'pdf_block': 0, 'block_sha256': 'd4f6386307ac7cd29423faafaa11b6fc57544efaa644b0dc0e268aadc2a5f7a2', 'block_char_start': 0, 'block_char_end': 42, 'view_char_start': 0, 'view_char_end': 42}), mappingproxy({'unit_id': 'urn:company-wiki:narrative-unit:sha256:13ee31180bb0d9694df58c4df747cd729857fe16b2496986d78be6469103cdad', 'locator': 'loc:v1/page:1/paragraph:2', 'text_sha256': '72c5cf411d77157fc733c9d8f783fc5cec4f3f12be5d054a75a035cfa0a475ed', 'pdf_block': 0, 'block_sha256': 'd4f6386307ac7cd29423faafaa11b6fc57544efaa644b0dc0e268aadc2a5f7a2', 'block_char_start': 43, 'block_char_end': 108, 'view_char_start': 43, 'view_char_end': 108}))}"
+      }
+    ],
+    "groups": [
+      {
+        "group_id": "urn:company-wiki:reading-group:sha256:d4e18976417d613d64731852310f70c3e9b179924a32cf99778641429ed07fc1",
+        "kind": "native_continuity",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:5cc7b61ab0da2bcb9bdcd9f232852bc41652aa589caceb8087a7d8be7282ecf8"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:5cc7b61ab0da2bcb9bdcd9f232852bc41652aa589caceb8087a7d8be7282ecf8"
+            ],
+            "context_evidence_ids": []
+          }
+        ]
+      }
+    ]
+  }
+]

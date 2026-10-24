@@ -1,0 +1,116 @@
+{
+  "schema_version": "w08-predicate-owner-root-handoff/1",
+  "status": "FINITE_ENGINEERING_GREEN_AWAIT_SAME_INDEPENDENT_REVIEWER",
+  "freeze": "freeze.json",
+  "implementation": [
+    "narrative_predicate_state.PredicateObservation is single transient assertion/modal/time owner",
+    "measure unrealized vocabulary and guidance expectation/current/past vocabulary removed; both projections call observe_metric_predicate",
+    "source metric relation owner preserves actual-only compatibility view and projects genuine planned quantities via existing operating_plan",
+    "explicit conditional outlook stays forward and raw condition remains; bare if metric stays nonactual/nonforecast",
+    "same owner keeps outer expect/有望 actor through inner will/将; project noun cannot manufacture future",
+    "new owner actual bytes included in existing causal business_algorithms identity"
+  ],
+  "production_delta": [
+    "src/company_wiki/source_catalog/narrative_predicate_state.py",
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py",
+    "src/company_wiki/document_understanding/decision_inventory.py"
+  ],
+  "formal_new_tests": [
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py"
+  ],
+  "tests": {
+    "independent17-red": {
+      "cases": 17,
+      "passed": 9,
+      "failed": 8,
+      "errors": 0
+    },
+    "independent17-v1": {
+      "cases": 17,
+      "passed": 17,
+      "failed": 0,
+      "errors": 0
+    },
+    "predicate-controls-inline-final": {
+      "cases": 43,
+      "passed": 43,
+      "failed": 0,
+      "errors": 0
+    },
+    "predicate-controls-inline-red": {
+      "cases": 43,
+      "passed": 42,
+      "failed": 1,
+      "errors": 0
+    },
+    "predicate-controls-outer-actor-red": {
+      "cases": 51,
+      "passed": 49,
+      "failed": 2,
+      "errors": 0
+    },
+    "predicate-controls-public-recall-final": {
+      "cases": 49,
+      "passed": 49,
+      "failed": 0,
+      "errors": 0
+    },
+    "predicate-controls-public-recall-red": {
+      "cases": 49,
+      "passed": 43,
+      "failed": 6,
+      "errors": 0
+    },
+    "predicate-controls-v1": {
+      "cases": 39,
+      "passed": 38,
+      "failed": 1,
+      "errors": 0
+    },
+    "related-final-v2": {
+      "cases": 677,
+      "passed": 677,
+      "failed": 0,
+      "errors": 0
+    },
+    "related-final": {
+      "cases": 675,
+      "passed": 672,
+      "failed": 3,
+      "errors": 0
+    },
+    "related-v1": {
+      "cases": 665,
+      "passed": 665,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "final_tests": {
+    "cases": 677,
+    "passed": 677,
+    "failed": 0,
+    "errors": 0
+  },
+  "test_duration_seconds": 13.06,
+  "overlap_note": "677 includes original77, original20, old24guidancecontrols, promoted frozen17, new34predicate-generalization; do not add overlapping runs",
+  "type_check": "PASS:5sources, Python3.12/follow-imports=silent; narrow not fullsrc",
+  "ruff": "PASS",
+  "actual_recall": "6neutral future capacity/business quantity targets first6F then original bytes available in actual selector/citation/model with operating_plan and no actual/current tags",
+  "intermediate_failures": "original17 8F; newgeneralization1F quantity perfect aux; inlinecondition1F; publicrecall6F; oldobserved-only compatibility3F; outeractor2F — all real logs retained, no original expectations changed",
+  "constraints": {
+    "max_spans": 96,
+    "max_characters": 48000,
+    "document_work": 16000000,
+    "source_envelope": "8units/4blocks/2048chars unchanged",
+    "network_model_download_calls": 0,
+    "commits": 0,
+    "pushes": 0,
+    "mother_pwf_writes": 0,
+    "author_worktree_writes": 0
+  },
+  "cleanup": "cleanup.json",
+  "independent_recheck": "ROOT reuses same independent17 reviewer on exact freeze.json. This author stops product edits/testing after report. Not whole annual14, formal summary/cache/RF business acceptance."
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "w08-budget-order-followup/1",
+  "created_at": "2026-10-23T20:46:13.545283+00:00",
+  "status": "ROOT_239_PASS_INDEPENDENT_BUDGET_PASS_COMPLETE_PUSH_STILL_PENDING",
+  "fix": "Move unchanged fanout charge before typed table member traversal; no limits/assertions changed.",
+  "root_focused_tests": {
+    "passed": 239,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 23.06
+  },
+  "independent_review": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\measure-independent\\budget-regression\\review-final.json",
+  "reports": {
+    "resume/measure-independent/budget-regression/review-final.md": {
+      "sha256": "a3ca85e9a528a09e77f140b35b5b50c09adad6e424a0c0c0aa7053ce163cb18e",
+      "bytes": 1820
+    },
+    "resume/measure-independent/budget-regression/review-final.json": {
+      "sha256": "e1124869bcb02e13d7be9ac96675efb486a0de3a59fdc373f2143be648259b8b",
+      "bytes": 6363
+    },
+    "resume/measure-independent/budget-regression/probe-final.json": {
+      "sha256": "0fa3e8f03d6914b2349dce058d4c243017e3acdb4cb8d71d96bed0ac84153ddd",
+      "bytes": 2525
+    },
+    "resume/measure-independent/budget-regression/charge-order.json": {
+      "sha256": "f0b3c4d6836acb25e9d3ed1d86e6f9f84ab3e43036541f7d7103838c29183e31",
+      "bytes": 2593
+    },
+    "resume/root/remaining-runtime-assets.json": {
+      "sha256": "9522baaa6ee13e6b61cc17e2f1021f82960bc51bcd5bdc6e487732d84922c5f0",
+      "bytes": 22350
+    },
+    "resume/root/remaining-spec-assets.json": {
+      "sha256": "f6f54b272200e7fc3388c4f2711be8f838293797f1e205f0c79630457e39f693",
+      "bytes": 10770
+    },
+    "resume/root/runtime-all-final.txt": {
+      "sha256": "bbbd241ac485b3be0e2f5050fafb592610d81e4a15439e1d958a1e10fb599f6a",
+      "bytes": 2493
+    },
+    "resume/root/runtime-all-final.xml": {
+      "sha256": "9c3d1504d82f46aeb0ca2e2bb03d876e266080b9647a8cee845eb40974814932",
+      "bytes": 43968
+    }
+  },
+  "actual_source_selection": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-real-20261023\\candidate-budget-order-final.json",
+    "sha256": "43d436f3b853118201eaf3657765f8b4755dd67894b5d7823b08bdb5992a040d",
+    "bytes": 546548,
+    "physical_pages": 249,
+    "units": 5647,
+    "selected": 96,
+    "chars": 8137,
+    "work_budget": {
+      "used": 7298096,
+      "limit": 16000000,
+      "exhausted": false,
+      "same_instance_for_parse_and_select": true
+    },
+    "code_sha256": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_evidence.py": "02daa57cd105c5d24feab85d7404f31934705767d66c49987fa8ff15a537ed71",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_policy.py": "2b76f3920546f7ca5060c56d5723c60663f88aa98dd16a073c290559349499f3",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "e19fb73bc96c88d5c32930f747d27475841ee6f97478072fef41a9a0c57658e4",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\decision_inventory.py": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\observation_adapter.py": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\layout.py": "db6df3eea9fa6af1b20398e7a7339a52b8dc5dfdb626871331af26af58234c74",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\layout_hints\\headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_normalization\\form_fields.py": "68e3472e7b62c9ee4c13abd1efc9a5f797fc23dd8355c71395ee29626c154a1d",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_normalization\\table_shapes.py": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\document_understanding\\structure\\contract.py": "ca693bed1cba4423d8c9b3a2dc0d204b48ab467d395eef91890f501407754a3a"
+    },
+    "selected_evidence_identical_to_reviewed_v3": true,
+    "reading_context_identical_to_reviewed_v3": true,
+    "two_scopes_pass": true,
+    "whole_content_pass": false
+  },
+  "permanent_regression_tests_added": 12,
+  "new_model_calls": 0,
+  "new_downloads": 0,
+  "new_raw_copies": 0
+}

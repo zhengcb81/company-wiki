@@ -1,0 +1,7 @@
+{
+  "status": "SUPERSEDED_BY_V5",
+  "historical_pass": 35,
+  "bound_source": "0da06520e646c6905cefed02b98cf4a8b791411dd6399d249964975e591959a3",
+  "reason": "finite quality/20k green did not cover original mutable pipeline purity; final v5 tests and current-call state owner supersede",
+  "current_review": "review-v5.json"
+}

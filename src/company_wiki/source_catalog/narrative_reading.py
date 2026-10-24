@@ -14,6 +14,7 @@ import json
 import re
 from typing import Any
 
+from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
 from company_wiki.document_understanding.pipeline import understand_units
 from company_wiki.document_understanding.narrative_continuity import (
     SourcePageFlow, build_native_continuity, native_section_key,
@@ -118,11 +119,16 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     packages = pipeline["packages"]["packages"]
     # Package semantics cannot exempt original prose from physical continuity.
     # Tables and attributed Q&A retain their separate structural owners.
-    prose_kinds = {"background", "paragraph_event", "risk"}
-    audited_kinds = prose_kinds | {"project"}
+    prose_kinds = {"background", "paragraph_event", "risk", "project"}
+    audited_kinds = prose_kinds
     owners: dict[str, list[Mapping[str, Any]]] = {}
     owner_external_context = {}
+    table_owners: set[int] = set()
+    atomic_projects: set[int] = set()
+    context_blocked: set[str] = set()
     other_members: set[str] = set()
+    table_furniture = {unit["unit_id"] for unit in observation
+                       if unit.get("kind") in {"table_row", "table_header", "table_caption"}}
     for package in packages:
         members = package.get("member_unit_ids", ())
         required = package.get("required_context_unit_ids", ())
@@ -132,8 +138,27 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         # Each source member can consume this external dependency only once.
         # Reserve actual edges before expanding, not only container count.
         work_budget.charge(len(members) * len(external))
+        # A prose label does not erase a source-declared typed table. Preserve
+        # its original header/note edges and anchors as one package. Local table
+        # indices on another page/parent cannot certify the same table.
+        table_members = [units[uid] for uid in members if uid in units
+                         and units[uid].coordinates.table_index is not None]
+        work_budget.charge(len(table_members))
+        if package["kind"] in audited_kinds and table_members:
+            table_keys = {(unit.source_id, unit.coordinates.page_number,
+                           unit.coordinates.table_index) for unit in table_members}
+            if len(table_keys) == 1:
+                table_owners.add(id(package))
+            else:
+                context_blocked.update(members)
+        # Project row/header/note dependencies are affirmative structural
+        # proof. A plain project heading with prose has no such required IDs;
+        # it must not become the sole eligibility gate for all its body.
+        if package["kind"] == "project" and (required or any(uid in table_furniture for uid in members)):
+            atomic_projects.add(id(package))
         owner_external_context[id(package)] = external
-        if package["kind"] in audited_kinds and not package.get("truncated"):
+        if (package["kind"] in audited_kinds and id(package) not in table_owners
+                and not package.get("truncated")):
             for uid in members:
                 owners.setdefault(uid, []).append(package)
         else:
@@ -142,13 +167,55 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     headings: dict[str, set[str]] = {}
     section_for_unit = {}
     sections = pipeline.get("structure", {}).get("sections", ())
+    section_index = {}
+    duplicate_sections = set()
     for section in sections:
+        sid = section.get("section_id")
+        work_budget.charge(1 + len(section.get("heading_unit_ids", ())))
+        # Older callers may declare one local section without an ID. Its
+        # explicit headings are usable locally; it cannot become a named
+        # ancestor or collide with a different anonymous section.
+        if sid is not None:
+            if sid in section_index:
+                duplicate_sections.add(sid)
+            section_index[sid] = section
+    inherited: dict[str, tuple[frozenset[str], bool]] = {}
+    for section in sections:
+        sid = section.get("section_id")
+        path, visiting = [], set()
+        cursor = sid if sid is not None else section.get("parent_id")
+        while cursor is not None and cursor not in inherited:
+            work_budget.charge()
+            if cursor in visiting or cursor not in section_index or cursor in duplicate_sections:
+                inherited[cursor] = (frozenset(), False)
+                break
+            visiting.add(cursor)
+            path.append(cursor)
+            cursor = section_index[cursor].get("parent_id")
+        actual_heads, valid = inherited.get(cursor, (frozenset(), True))
+        for parent in reversed(path):
+            own_heads = section_index[parent].get("heading_unit_ids", ())
+            # Debit each real inherited edge before materialising its closure;
+            # missing/cyclic parents cannot become a smaller complete context.
+            work_budget.charge(len(actual_heads) + len(own_heads) + 1)
+            actual_heads = actual_heads.union(own_heads)
+            inherited[parent] = (actual_heads, valid)
+        if sid is not None:
+            actual_heads, valid = inherited[sid]
+        else:
+            own_heads = section.get("heading_unit_ids", ())
+            work_budget.charge(len(actual_heads) + len(own_heads) + 1)
+            actual_heads = actual_heads.union(own_heads)
         heads, body = section.get("heading_unit_ids", ()), section.get("body_unit_ids", ())
-        work_budget.charge(1 + 2 * len(heads) + 2 * len(body) + len(heads) * len(body))
-        actual_heads = set(section.get("heading_unit_ids", ()))
-        for uid in (*section.get("heading_unit_ids", ()), *section.get("body_unit_ids", ())):
-            section_for_unit[uid] = section.get("section_id")
-        for uid in section.get("body_unit_ids", ()):
+        work_budget.charge(1 + len(heads) + len(body) * (len(actual_heads) + 1))
+        for uid in (*heads, *body):
+            section_for_unit[uid] = sid
+        for uid in body:
+            if (not valid or uid not in units or any(
+                    head not in units or units[head].source_id != units[uid].source_id
+                    for head in actual_heads)):
+                context_blocked.add(uid)
+                continue
             headings.setdefault(uid, set()).update(actual_heads)
 
     def context(member_ids):
@@ -163,7 +230,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         work_budget.charge(len(result) * max(1, len(result).bit_length()))
         return sorted(result - set(member_ids))
 
-    exclusions = other_members | excluded
+    exclusions = other_members | excluded | context_blocked
     views = []
     for unit in observation:
         uid = unit["unit_id"]
@@ -202,7 +269,9 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             (entry["first_ordinal"], entry["last_ordinal"]))
     ranges = {key: sorted(values) for key, values in ranges.items()}
     starts = {key: [a for a, _b in values] for key, values in ranges.items()}
-    blocked: set[str] = set()
+    blocked: set[str] = set(context_blocked)
+    if context_blocked:
+        continuity = {**continuity, "complete": False}
     for index, wire in enumerate(observation):
         key = (wire.get("hints", {}).get("source_id"), wire.get("page"))
         intervals = ranges.get(key, ())
@@ -280,10 +349,9 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         members = window["member_unit_ids"]
         if not set(members) <= units.keys() or set(members) & blocked:
             continue
-        # A structured project's row, qualification note and original context
-        # remain one semantic package. Physical prose audit must not flatten
-        # that package into independently selectable rows or drop its notes.
-        if any(owner["kind"] == "project" for uid in members for owner in owners.get(uid, ())):
+        # Actual row/header/note projects retain their existing atomic
+        # source semantics; plain project prose uses independent statements.
+        if any(id(owner) in atomic_projects for uid in members for owner in owners.get(uid, ())):
             continue
         pieces = statement_members(members)
         for piece in pieces:
@@ -309,7 +377,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     window_for_member = {uid: window for window in continuity["windows"]
                          for uid in window["member_unit_ids"]}
     for package in packages:
-        if package["kind"] == "project":
+        if id(package) in atomic_projects:
             members = set(package.get("member_unit_ids", ()))
             anchors = package.get("anchor_unit_ids", ())
             window_ids = set()
@@ -333,7 +401,8 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             expanded.append({**package, **({"citation_support_views": [ordered_support],
                 "native_analysis_views": windows} if windows and support <= members else {})})
             continue
-        if package["kind"] not in prose_kinds or package.get("truncated"):
+        if (package["kind"] not in prose_kinds or package.get("truncated")
+                or id(package) in table_owners):
             expanded.append(package)
             continue
         for uid in package.get("member_unit_ids", ()):
@@ -372,6 +441,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     metadata: dict[str, dict[str, Any]] = {}
     eligible_packages = []
     withheld = []
+    quality_checked: set[str] = set()
+    numeric_shape_uncertain: set[str] = set()
     try:
         packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline,
             work_budget=work_budget)
@@ -566,6 +637,91 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             continue
         original_extra[index] = needed_originals
         extra_context[index] = {origins.get(entry, entry) for entry in needed_originals}
+    # Separate complete source statements can still explicitly qualify one
+    # another. Native adjacency is only physical proof; the same operating
+    # session proves object identity and restrictive state before adding edges.
+    local_dependencies = session.local_qualification_dependencies(
+        continuity.get("adjacency_edges", ()), origins=origins)
+    local_context: dict[str, set[str]] = {}
+    for anchor, qualifiers in local_dependencies.items():
+        for qualifier in qualifiers:
+            local_context.setdefault(anchor, set()).add(qualifier)
+            # A bare restrictive deictic also needs its actual source subject.
+            local_context.setdefault(qualifier, set()).add(anchor)
+    # A chain of positively identified restrictions has one bounded source
+    # closure, not several cheap pairs. Share component sets across owners;
+    # never materialise a quadratic per-member copy of a project or chapter.
+    local_components: dict[str, set[str]] = {}
+    local_unexamined: set[str] = set()
+    try:
+        for start in local_context:
+            if start in local_components:
+                continue
+            component = {start}
+            pending = [start]
+            while pending:
+                member = pending.pop()
+                neighbours = local_context[member]
+                work_budget.charge(1 + len(neighbours))
+                for neighbour in neighbours:
+                    if neighbour not in component:
+                        component.add(neighbour)
+                        pending.append(neighbour)
+            work_budget.charge(2 * len(component))
+            for member in component:
+                local_components[member] = component
+    except WorkBudgetExceeded:
+        session.complete = False
+        local_unexamined.update(local_context)
+    for index, package in enumerate(budget_packages):
+        if index in deferred_packages:
+            continue
+        if work_budget.exhausted or any(uid in local_unexamined for uid in package.get("member_unit_ids", ())):
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "OPERATING_WORK_BUDGET",
+                             "known_unit_ids": list(package.get("member_unit_ids", ()))})
+            continue
+        try:
+            work_budget.charge(len(package.get("member_unit_ids", ())) + sum(
+                len(local_components.get(member, ())) for member in package.get("member_unit_ids", ())))
+        except WorkBudgetExceeded:
+            session.complete = False
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "OPERATING_WORK_BUDGET",
+                             "known_unit_ids": list(package.get("member_unit_ids", ()))})
+            continue
+        needed_material = {uid for member in package.get("member_unit_ids", ())
+                           for uid in local_components.get(member, ()) if uid != member}
+        if not needed_material:
+            continue
+        try:
+            work_budget.charge(1 + sum(len(original_members(uid)) for uid in needed_material)
+                               + len(package.get("member_unit_ids", ()))
+                               + len(package.get("required_context_unit_ids", ())))
+        except WorkBudgetExceeded:
+            session.complete = False
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "OPERATING_WORK_BUDGET",
+                             "known_unit_ids": list(package.get("member_unit_ids", ()))})
+            continue
+        needed_originals = {member for uid in needed_material for member in original_members(uid)}
+        target_originals = [member for uid in package.get("member_unit_ids", ())
+                            for member in original_members(uid)]
+        context_originals = [member for uid in package.get("required_context_unit_ids", ())
+                             for member in original_members(uid)]
+        needed_originals.update(original_extra.get(index, ()))
+        if not within_reference_envelope(target_originals, context_originals,
+                                         sorted(needed_originals), original_units,
+                                         expand=original_members):
+            deferred_packages.add(index)
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "REFERENCE_ENVELOPE", "known_unit_ids": sorted(needed_originals)})
+            continue
+        extra_context.setdefault(index, set()).update(needed_material)
+        original_extra.setdefault(index, set()).update(needed_originals)
     if extra_context:
         budget_packages = [{**package, "required_context_unit_ids": sorted(
             set(package.get("required_context_unit_ids", ())) | extra_context.get(index, set()))}
@@ -618,6 +774,22 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
                              "known_unit_ids": sorted(required & units.keys())})
             continue
+        # Assess literal numeric quality once, in the same source-priority
+        # order as meaning. A later low-priority budget stop cannot invalidate
+        # already checked important facts by charging them again at export.
+        unexamined_quality = required - quality_checked
+        if unexamined_quality:
+            try:
+                work_budget.charge(len(unexamined_quality))
+                work_budget.charge(4 * sum(len(units[uid].raw_text) for uid in unexamined_quality))
+            except WorkBudgetExceeded:
+                session.complete = False
+                withheld.append({"package_id": str(package["package_id"]),
+                                 "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(required)})
+                continue
+            numeric_shape_uncertain.update(uid for uid in unexamined_quality
+                                           if has_unbound_numeric_cells(units[uid].raw_text))
+            quality_checked.update(unexamined_quality)
         table_qualified = package["kind"] == "operating_table"
         declared_anchors = list(package.get("anchor_unit_ids", ()))
         if package["kind"] == "qa_exchange":
@@ -688,6 +860,10 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             if uid not in candidates:
                 candidates[uid] = EvidenceCandidate(units[uid], (), ("reading_context",), 0)
                 metadata[uid] = {"priority": 2, "topics": (), "context_only": True, "required": ()}
+    if _session_state is not None:
+        _session_state["numeric_shape_uncertain_ids"] = {
+            unit.unit_id for unit in parsed.units
+            if origins.get(unit.unit_id, unit.unit_id) in numeric_shape_uncertain}
     # Stable source order, never text-only identity deduplication.
     ordered = tuple(candidates[unit.unit_id] for unit in material_units if unit.unit_id in candidates)
     source_order = {package["package_id"]: index for index, package in enumerate(packages)}
@@ -968,6 +1144,14 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                  if entry["kind"] == "operating_table" and entry.get("table_binding_status") != "complete"
                  for uid in set(entry["member_unit_ids"]) - set(entry.get("required_context_unit_ids", ()))
                  if uid in pipeline["selected_span_ids"]}
+    # Only project observed quality. Fully bound tables keep the structure
+    # owner's positive proof; no second scan, inference or late resource bill.
+    bound = {pipeline["selected_span_ids"][uid]
+             for entry in eligible if entry.get("table_binding_status") == "complete"
+             for uid in (*entry["member_unit_ids"], *entry.get("required_context_unit_ids", ()))
+             if uid in pipeline["selected_span_ids"]}
+    uncertain.update(span_id for uid, span_id in pipeline["selected_span_ids"].items()
+                     if uid in session_state.get("numeric_shape_uncertain_ids", ()) and span_id not in bound)
     if uncertain:
         result = replace(result, evidence_spans=tuple(
             replace(span, quality_flags=tuple(dict.fromkeys((*span.quality_flags, "table_structure_ambiguous"))))

@@ -1,0 +1,159 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\project-qualification-independent\\final-v2-temp", "requested_basetemp_len": 157, "cwd_len": 55, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213459-406b244c", "effective_basetemp_len": 99}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 165 items
+
+tests\unit\document_understanding_selection\test_reading_qualification_scope_controls.py . [  0%]
+...................                                                      [ 12%]
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py . [ 12%]
+........                                                                 [ 17%]
+tests\unit\document_understanding_selection\test_reading_local_qualification.py . [ 18%]
+.......................................                                  [ 41%]
+tests\unit\document_understanding_selection\test_reading_table_admission.py F [ 42%]
+FFFFFF....................FF....                                         [ 61%]
+tests\unit\document_understanding_selection\test_reading_table_rows.py . [ 62%]
+......FFFF...............                                                [ 77%]
+tests\unit\document_understanding_selection\test_reading_multiline_tables.py . [ 78%]
+.................                                                        [ 88%]
+tests\unit\du11_source_closure\test_antecedent_wiring.py ............... [ 97%]
+....                                                                     [100%]
+
+================================== FAILURES ===================================
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u8d44\u672c\u516c\u79ef | 2026 | \u7559\u5b58\u6536\u76ca-rows0] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...beb'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u9879\u76ee | \u5f53\u671f\u8f6c\u5165\u7559\u5b58\u6536\u76ca | \u7a0e\u540e\u5f52\u5c5e\u4e8e\u6bcd\u516c\u53f8-rows1] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...13f'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[Retained earnings | Year ended 2026 | USD million-rows2] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...6e9'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[Retained\nearnings | 2026 | USD million-rows3] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...92a'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u9805\u76ee | \u672c\u671f\u8f49\u5165\u7559\u5b58\u6536\u76ca | \u6240\u6709\u8005\u6b0a\u76ca-rows4] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...929'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u8d39\u7528\u660e\u7ec6 | 2026 | \u4e07\u5143-rows5] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...37d'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u4f30\u503c\u5173\u952e\u53c2\u6570 | 2026-rows6] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:119: in test_actual_read_financial_tables_are_not_business_facts_merely_from_kind
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...58b'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_background_table_route_keeps_declared_original_header_unit_period_and_note[\u5957] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:325: in test_background_table_route_keeps_declared_original_header_unit_period_and_note
+    assert pipeline == before
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...c92'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_background_table_route_keeps_declared_original_header_unit_period_and_note[USD million] _
+tests\unit\document_understanding_selection\test_reading_table_admission.py:325: in test_background_table_route_keeps_declared_original_header_unit_period_and_note
+    assert pipeline == before
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...c92'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_source_filters_financial_rows_before_graph_cost_and_sent_context[Number of stores | Lease liabilities | 2026-rows0-indices0] _
+tests\unit\document_understanding_selection\test_reading_table_rows.py:89: in test_source_filters_financial_rows_before_graph_cost_and_sent_context
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...4e6'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_source_filters_financial_rows_before_graph_cost_and_sent_context[\u9580\u5e97\u6578\u91cf | \u4f7f\u7528\u6b0a\u8cc7\u7522 | 2026-rows1-indices1] _
+tests\unit\document_understanding_selection\test_reading_table_rows.py:89: in test_source_filters_financial_rows_before_graph_cost_and_sent_context
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...620'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_source_filters_financial_rows_before_graph_cost_and_sent_context[\u9879\u76ee | \u672c\u671f\u6570 | 2026-rows2-indices2] _
+tests\unit\document_understanding_selection\test_reading_table_rows.py:89: in test_source_filters_financial_rows_before_graph_cost_and_sent_context
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...ea6'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+_ test_source_filters_financial_rows_before_graph_cost_and_sent_context[\u9879\u76ee\u540d\u79f0 | \u5efa\u8bbe\u5468\u671f | \u9884\u8ba1\u6295\u4ea7 | \u8d26\u9762\u4f59\u989d-rows3-indices3] _
+tests\unit\document_understanding_selection\test_reading_table_rows.py:89: in test_source_filters_financial_rows_before_graph_cost_and_sent_context
+    assert pipeline == original
+E   AssertionError: assert {'reading_pla...n_ids': set()} == {'reading_pla...24d'], ...}]}}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'_numeric_shape_uncertain_ids': set()}
+E     Use -v to get more diff
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\project-qualification-independent\final-review-v2.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u8d44\u672c\u516c\u79ef | 2026 | \u7559\u5b58\u6536\u76ca-rows0]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u9879\u76ee | \u5f53\u671f\u8f6c\u5165\u7559\u5b58\u6536\u76ca | \u7a0e\u540e\u5f52\u5c5e\u4e8e\u6bcd\u516c\u53f8-rows1]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[Retained earnings | Year ended 2026 | USD million-rows2]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[Retained\nearnings | 2026 | USD million-rows3]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u9805\u76ee | \u672c\u671f\u8f49\u5165\u7559\u5b58\u6536\u76ca | \u6240\u6709\u8005\u6b0a\u76ca-rows4]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u8d39\u7528\u660e\u7ec6 | 2026 | \u4e07\u5143-rows5]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_actual_read_financial_tables_are_not_business_facts_merely_from_kind[\u4f30\u503c\u5173\u952e\u53c2\u6570 | 2026-rows6]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_background_table_route_keeps_declared_original_header_unit_period_and_note[\u5957]
+FAILED tests/unit/document_understanding_selection/test_reading_table_admission.py::test_background_table_route_keeps_declared_original_header_unit_period_and_note[USD million]
+FAILED tests/unit/document_understanding_selection/test_reading_table_rows.py::test_source_filters_financial_rows_before_graph_cost_and_sent_context[Number of stores | Lease liabilities | 2026-rows0-indices0]
+FAILED tests/unit/document_understanding_selection/test_reading_table_rows.py::test_source_filters_financial_rows_before_graph_cost_and_sent_context[\u9580\u5e97\u6578\u91cf | \u4f7f\u7528\u6b0a\u8cc7\u7522 | 2026-rows1-indices1]
+FAILED tests/unit/document_understanding_selection/test_reading_table_rows.py::test_source_filters_financial_rows_before_graph_cost_and_sent_context[\u9879\u76ee | \u672c\u671f\u6570 | 2026-rows2-indices2]
+FAILED tests/unit/document_understanding_selection/test_reading_table_rows.py::test_source_filters_financial_rows_before_graph_cost_and_sent_context[\u9879\u76ee\u540d\u79f0 | \u5efa\u8bbe\u5468\u671f | \u9884\u8ba1\u6295\u4ea7 | \u8d26\u9762\u4f59\u989d-rows3-indices3]
+======================= 13 failed, 152 passed in 16.12s =======================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-213459-406b244c", "existed": true, "removed": true}

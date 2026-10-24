@@ -1,0 +1,110 @@
+{
+  "schema": "untyped-independent-diagnosis/1",
+  "status": "REPRODUCED_SHARED_ROOT_CAUSE",
+  "checks": {
+    "public_selector_red_failed": 6,
+    "reverse_and_bound_positive_passed": 7,
+    "inside_pytest_import_guard": true,
+    "bound_originals_unchanged": true
+  },
+  "root_cause": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "owner": "_candidates scoped_packages",
+      "observation": "Only operating_table kind consumes shared table purpose. Untyped paragraph/background remains descriptive business admission."
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "owner": "select_reading_evidence final quality output",
+      "observation": "uncertain selects only operating_table bodies with incomplete table_binding_status. Selected untyped numeric source rows can therefore have empty flags and no numeric-unknown constraint."
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "owner": "has_tabular_value_tail/_is_value_cell",
+      "observation": "Existing source-only numeric cell grammar is reusable. Existing all-tail-numeric heading guard must retain its narrower role."
+    }
+  ],
+  "recommended_change": [
+    "Add a separate pure unknown-shape observer in table_shapes using the existing numeric-cell grammar. Require at least two independently delimited original value cells; allow remaining label/explanation cells. This is evidence of ambiguous numeric attribution, not proof of a table.",
+    "At the existing final selection quality owner, map selected original unit IDs through selected_span_ids (including exact carrier origins) and add existing table_structure_ambiguous to original unbound numeric-shape material. Preserve bytes, locators, source IDs and package scope.",
+    "Honor genuine complete native table bindings; never add a permanent parser-level ambiguity flag that a later complete binder cannot discharge.",
+    "Reuse existing _context numeric-unknown constraint and scoped model compiler flag propagation. Do not manufacture table IDs, cells, periods, headers or a new schema/gate."
+  ],
+  "red_scope": {
+    "names": [
+      "zh-newline",
+      "zh-tab",
+      "trad-newline",
+      "en-newline",
+      "en-tab",
+      "en-pipe"
+    ],
+    "expected": "Readable business description and source citation survive; numeric columns/period/unit remain unknown in span flags, reading constraints and model input.",
+    "already_unselected_case_not_claimed_red": "zh-pipe"
+  },
+  "controls": [
+    "label plus one numeric cell",
+    "single year following a textual heading",
+    "complete unit-bearing multi-quantity Chinese prose",
+    "wrapped unit-bearing Chinese prose",
+    "complete English multi-quantity prose",
+    "fully native-bound in-memory table with exact row label/unit/period and value47"
+  ],
+  "exact_code_bindings": {
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "a70436b70fa66c0934b4dfb794ead63564d78e0aae89f69efe91a291c0a72780",
+      "bytes": 63203
+    },
+    "src/company_wiki/document_normalization/table_shapes.py": {
+      "sha256": "2f9682a001349d5e93d920ed01dc75ee5e048ada634cb659ad0e44be744d6c75",
+      "bytes": 1528
+    },
+    "src/company_wiki/document_understanding/structure/table_purpose.py": {
+      "sha256": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+      "bytes": 18347
+    },
+    "src/company_wiki/document_understanding/structure/tables.py": {
+      "sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "bytes": 11047
+    },
+    "src/company_wiki/document_understanding/native_table_bridge.py": {
+      "sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+      "bytes": 11888
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "sha256": "a747fc4f5c8a6f2311df259bb99aa476467738ca87b0a00a8d9d0fb2331c8f02",
+      "bytes": 26322
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "3a7627f35c9ef0501e317fdccef986c3efbf4bdc428c5a92f45a156f6a0f6fb3",
+      "bytes": 25839
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "sha256": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+      "bytes": 22861
+    }
+  },
+  "execution": "execution.json",
+  "test": "test_untyped_red.py",
+  "probe": "probe_untyped.py",
+  "observations": "public-red-observations.json",
+  "logs": [
+    "red.txt",
+    "red.xml"
+  ],
+  "cleanup": {
+    "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\untyped-independent\\pytest-temp",
+    "existed_after": false,
+    "initial_absent": true,
+    "absent_after_cleanup": true,
+    "actual": {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210259-226f866d",
+      "existed": true,
+      "removed": true
+    },
+    "actual_absent_verified": true
+  },
+  "write_scope": "Only this resume/untyped-independent directory. No production, ROOT tests, config, raw, Git/index or other harness changes.",
+  "boundary": "No original read, parser, model, network or download call; this proves a neutral synthetic public-selector/model-interface gap and does not claim full original annual acceptance."
+}

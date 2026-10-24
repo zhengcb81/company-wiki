@@ -1,0 +1,12 @@
+{
+  "frozen_probe": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-measure-guidance-independent-20261024\\semantic_probe_frozen.py.txt",
+  "frozen_probe_sha256": "adda3576c11f0f435328084c70212a0e0fea7dc8ccf6ee3b44ba8bab1f04b526",
+  "promoted_test": "tests\\unit\\document_understanding_selection\\test_reading_predicate_state_owner.py",
+  "promoted_test_sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+  "case_arrays_sha256": "bd8e869970bdf7771ff66b55b200031814671173ed9fa4577d2ac7310c257813",
+  "counts": {
+    "MEASURE": 6,
+    "GUIDANCE": 7,
+    "PAIRS": 4
+  }
+}

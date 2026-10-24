@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="9" time="1.783" timestamp="2026-10-23T22:02:42.931826+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_generic_project_heading_does_not_hide_independent_source_facts[\u4e00\u3001\u9879\u76ee\u57fa\u672c\u60c5\u51b5]" time="0.297"><failure message="AssertionError: the original complete operating fact must survive its generic project title&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:76: in test_generic_project_heading_does_not_hide_independent_source_facts
+    assert_unrelated_future_is_not_required(result, parsed.units[1:3], parsed.units[-1])
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:63: in assert_unrelated_future_is_not_required
+    for view in views_for(result, fact):
+                ^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:52: in views_for
+    assert len(spans) == 1, "the original complete operating fact must survive its generic project title"
+E   AssertionError: the original complete operating fact must survive its generic project title
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_generic_project_heading_does_not_hide_independent_source_facts[\u4e8c\u3001\u7269\u6d41\u4e2d\u5fc3\u5efa\u8bbe\u9879\u76ee]" time="0.014"><failure message="AssertionError: the original complete operating fact must survive its generic project title&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:76: in test_generic_project_heading_does_not_hide_independent_source_facts
+    assert_unrelated_future_is_not_required(result, parsed.units[1:3], parsed.units[-1])
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:63: in assert_unrelated_future_is_not_required
+    for view in views_for(result, fact):
+                ^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:52: in views_for
+    assert len(spans) == 1, "the original complete operating fact must survive its generic project title"
+E   AssertionError: the original complete operating fact must survive its generic project title
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_generic_project_heading_does_not_hide_independent_source_facts[\u4e09\u3001\u8bbe\u5907\u751f\u4ea7\u7ebf\u6269\u5efa\u9879\u76ee]" time="0.016"><failure message="AssertionError: an independently complete source fact must be support, not only heading context&#10;assert []">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:76: in test_generic_project_heading_does_not_hide_independent_source_facts
+    assert_unrelated_future_is_not_required(result, parsed.units[1:3], parsed.units[-1])
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:63: in assert_unrelated_future_is_not_required
+    for view in views_for(result, fact):
+                ^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:56: in views_for
+    assert views, "an independently complete source fact must be support, not only heading context"
+E   AssertionError: an independently complete source fact must be support, not only heading context
+E   assert []</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots[\u4e00\u3001\u9879\u76ee\u57fa\u672c\u60c5\u51b5]" time="0.013"><failure message="AssertionError: the original complete operating fact must survive its generic project title&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:83: in test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots
+    assert_unrelated_future_is_not_required(result, parsed.units[1:3], parsed.units[-1])
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:63: in assert_unrelated_future_is_not_required
+    for view in views_for(result, fact):
+                ^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:52: in views_for
+    assert len(spans) == 1, "the original complete operating fact must survive its generic project title"
+E   AssertionError: the original complete operating fact must survive its generic project title
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots[\u4e00\u3001\u8bbe\u5907\u751f\u4ea7\u7ebf\u6269\u5efa\u9879\u76ee]" time="0.016"><failure message="AssertionError: the original complete operating fact must survive its generic project title&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:83: in test_two_complete_body_facts_and_one_shared_heading_fit_three_source_slots
+    assert_unrelated_future_is_not_required(result, parsed.units[1:3], parsed.units[-1])
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:63: in assert_unrelated_future_is_not_required
+    for view in views_for(result, fact):
+                ^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:52: in views_for
+    assert len(spans) == 1, "the original complete operating fact must survive its generic project title"
+E   AssertionError: the original complete operating fact must survive its generic project title
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_one_complete_body_fact_is_usable_under_two_slots_without_entire_project_cost" time="0.014"><failure message="AssertionError: one independent source fact plus its real heading fits; the whole project is not atomic&#10;assert []">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:92: in test_one_complete_body_fact_is_usable_under_two_slots_without_entire_project_cost
+    assert facts, "one independent source fact plus its real heading fits; the whole project is not atomic"
+E   AssertionError: one independent source fact plus its real heading fits; the whole project is not atomic
+E   assert []</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_local_device_qualification_stays_with_fact_but_generic_future_does_not[\u8be5\u8bbe\u5907\u5c1a\u672a\u5b8c\u6210\u91cf\u4ea7\u8ba4\u8bc1\uff0c\u4e0d\u4ee3\u8868\u5df2\u7ecf\u5f62\u6210\u6279\u91cf\u9500\u552e\u3002]" time="0.012"><failure message="AssertionError: the original complete operating fact must survive its generic project title&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:104: in test_local_device_qualification_stays_with_fact_but_generic_future_does_not
+    facts = views_for(full, parsed.units[1])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:52: in views_for
+    assert len(spans) == 1, "the original complete operating fact must survive its generic project title"
+E   AssertionError: the original complete operating fact must survive its generic project title
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_local_device_qualification_stays_with_fact_but_generic_future_does_not[\u8be5\u8bbe\u5907\u4ecd\u9700\u5ba2\u6237\u5b8c\u6210\u8ba4\u8bc1\uff0c\u9884\u8ba1\u4e0b\u4e00\u671f\u624d\u80fd\u8fdb\u5165\u91cf\u4ea7\u3002]" time="0.015"><failure message="AssertionError: the original complete operating fact must survive its generic project title&#10;assert 0 == 1&#10; +  where 0 = len([])">tests\unit\document_understanding_selection\test_reading_project_body_admission.py:104: in test_local_device_qualification_stays_with_fact_but_generic_future_does_not
+    facts = views_for(full, parsed.units[1])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_project_body_admission.py:52: in views_for
+    assert len(spans) == 1, "the original complete operating fact must survive its generic project title"
+E   AssertionError: the original complete operating fact must survive its generic project title
+E   assert 0 == 1
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_project_body_admission" name="test_project_repair_obeys_actual_character_budget_without_rewriting_source" time="0.015" /></testsuite></testsuites>

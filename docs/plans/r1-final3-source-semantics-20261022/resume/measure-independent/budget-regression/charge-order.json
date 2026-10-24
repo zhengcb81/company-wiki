@@ -1,0 +1,106 @@
+{
+  "schema_version": "w08-budget-fanout-observation/1",
+  "source_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+  "source_sha256": "5bb37ff8672fc2c54bc805310c252187043cd24f5660666bfe5e356a052726ce",
+  "source_unchanged": true,
+  "budget_limit": 1000,
+  "budget_used": 708,
+  "budget_exhausted": true,
+  "body_visits": 64,
+  "body_length": 32,
+  "context_visits": 64,
+  "context_length": 64,
+  "events": [
+    {
+      "event": "charge",
+      "amount": 193,
+      "used_before": 0,
+      "caller": "_candidates",
+      "line": 425,
+      "used_after": 193,
+      "exhausted": false
+    },
+    {
+      "event": "charge",
+      "amount": 289,
+      "used_before": 193,
+      "caller": "_prose_reading_packages",
+      "line": 114,
+      "used_after": 482,
+      "exhausted": false
+    },
+    {
+      "event": "charge",
+      "amount": 226,
+      "used_before": 482,
+      "caller": "_prose_reading_packages",
+      "line": 131,
+      "used_after": 708,
+      "exhausted": false
+    },
+    {
+      "event": "iterate",
+      "container": "context",
+      "length": 64,
+      "visits_before": 0,
+      "budget_used": 708,
+      "caller": "_prose_reading_packages",
+      "line": 133,
+      "visits_after": 64
+    },
+    {
+      "event": "iterate",
+      "container": "body",
+      "length": 32,
+      "visits_before": 0,
+      "budget_used": 708,
+      "caller": "_prose_reading_packages",
+      "line": 133,
+      "visits_after": 32
+    },
+    {
+      "event": "iterate",
+      "container": "body",
+      "length": 32,
+      "visits_before": 32,
+      "budget_used": 708,
+      "caller": "_prose_reading_packages",
+      "line": 137,
+      "visits_after": 64
+    },
+    {
+      "event": "charge",
+      "amount": 0,
+      "used_before": 708,
+      "caller": "_prose_reading_packages",
+      "line": 139,
+      "used_after": 708,
+      "exhausted": false
+    },
+    {
+      "event": "charge",
+      "amount": 2048,
+      "used_before": 708,
+      "caller": "_prose_reading_packages",
+      "line": 149,
+      "used_after": 708,
+      "exhausted": true
+    }
+  ],
+  "candidates": 0,
+  "metadata": 0,
+  "eligible": 0,
+  "complete": false,
+  "withheld": [
+    {
+      "package_id": "source-closure",
+      "reason": "OPERATING_WORK_BUDGET",
+      "known_unit_ids": [],
+      "unexamined_from_index": 0
+    }
+  ],
+  "product_edits": 0,
+  "test_edits": 0,
+  "original_reads": 0,
+  "external_calls": 0
+}

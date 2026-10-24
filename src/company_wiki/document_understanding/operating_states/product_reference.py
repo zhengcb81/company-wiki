@@ -180,6 +180,19 @@ def head_class(head: str) -> str:
     return _HEAD_CLASS_BY_TOKEN.get(head, _HEAD_CLASS_BY_TOKEN.get(lowered, "product"))
 
 
+def product_head_spans(text: str) -> tuple[tuple[int, int, str], ...]:
+    """Observed product-head spans from the existing shared vocabulary.
+
+    This identifies an object's head only, never its identity or attribution.
+    English substrings inside unrelated words cannot donate a device/product.
+    """
+    return tuple((match.start(), match.end(), head_class(match.group()))
+                 for match in _HEAD_ONLY.finditer(text)
+                 if not (match.group().isascii()
+                         and ((match.start() and text[match.start()-1].isalpha())
+                              or (match.end() < len(text) and text[match.end()].isalpha()))))
+
+
 def supports_head(head: str) -> bool:
     """True when a deictic head can be resolved by a recognised declaration."""
     return head in _FAMILY_MARKERS or head.casefold() in {

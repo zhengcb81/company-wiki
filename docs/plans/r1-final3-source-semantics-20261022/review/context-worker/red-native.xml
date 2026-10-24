@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.590" timestamp="2026-10-22T23:24:43.470040+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_selection.test_reading_native_continuity" name="test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[False]" time="0.110"><failure message="TypeError: cannot pickle 'mappingproxy' object">tests\unit\document_understanding_selection\test_reading_native_continuity.py:784: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    parsed = _native_numbered_scope_case(reverse=reverse)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:773: in _native_numbered_scope_case
+    metadata=deepcopy(dict(unit.metadata))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_native_continuity" name="test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope[True]" time="0.001"><failure message="TypeError: cannot pickle 'mappingproxy' object">tests\unit\document_understanding_selection\test_reading_native_continuity.py:784: in test_native_numbered_intro_and_indented_bullets_declare_own_bounded_scope
+    parsed = _native_numbered_scope_case(reverse=reverse)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:773: in _native_numbered_scope_case
+    metadata=deepcopy(dict(unit.metadata))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_native_continuity" name="test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope" time="0.001"><failure message="TypeError: cannot pickle 'mappingproxy' object">tests\unit\document_understanding_selection\test_reading_native_continuity.py:807: in test_parenthetical_inline_enumeration_and_unindented_body_do_not_declare_scope
+    parsed = _native_numbered_scope_case(indented=False)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_selection\test_reading_native_continuity.py:773: in _native_numbered_scope_case
+    metadata=deepcopy(dict(unit.metadata))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:131: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:202: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\copy.py:146: in deepcopy
+    rv = reductor(4)
+         ^^^^^^^^^^^
+E   TypeError: cannot pickle 'mappingproxy' object</failure></testcase></testsuite></testsuites>

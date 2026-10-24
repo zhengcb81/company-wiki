@@ -1,0 +1,16 @@
+src\company_wiki\document_understanding\structure\sections.py:185: error: Unsupported operand types for <= ("float" and "None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:185: error: Unsupported operand types for >= ("float" and "None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:185: error: Unsupported left operand type for <= ("None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:185: note: Both left and right operands are unions
+src\company_wiki\document_understanding\structure\sections.py:186: error: Unsupported operand types for < ("float" and "None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:186: error: Unsupported operand types for > ("float" and "None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:186: error: Unsupported left operand type for < ("None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:186: note: Both left and right operands are unions
+src\company_wiki\document_understanding\structure\sections.py:198: error: Unsupported operand types for <= ("float" and "None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:198: error: Unsupported operand types for >= ("float" and "None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:198: error: Unsupported left operand type for <= ("None")  [operator]
+src\company_wiki\document_understanding\structure\sections.py:198: note: Both left and right operands are unions
+src\company_wiki\document_understanding\structure\sections.py:249: error: Need type annotation for "native_scope_members" (hint: "native_scope_members: set[<type>] = ...")  [var-annotated]
+src\company_wiki\document_understanding\structure\sections.py:250: error: Need type annotation for "native_parent_stack" (hint: "native_parent_stack: list[<type>] = ...")  [var-annotated]
+src\company_wiki\source_catalog\narrative_reading.py:173: error: Need type annotation for "inherited" (hint: "inherited: dict[<type>, <type>] = ...")  [var-annotated]
+Found 12 errors in 2 files (checked 366 source files)

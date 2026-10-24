@@ -1,0 +1,131 @@
+{
+  "mypy_cache": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\mypy-cache",
+    "removed_bytes": 66591413,
+    "absent": true
+  },
+  "test_directories": [
+    {
+      "receipt": "guidance-controls-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230324-6e0c150e",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230324-6e0c150e",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-controls-red-temp",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-v2-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230538-e0b3f28b",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-v2-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230538-e0b3f28b",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-v2-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-controls-v2-temp",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-v3-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230715-5fa82f87",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-v3-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230715-5fa82f87",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-controls-v3-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-controls-v3-temp",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-predicate-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230847-b42590a0",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-predicate-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230847-b42590a0",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-predicate-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-predicate-final-temp",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-predicate-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230824-4db699e0",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-predicate-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230824-4db699e0",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-predicate-red-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-predicate-red-temp",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-source-bound-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-231207-2e9d203f",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-source-bound-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-231207-2e9d203f",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-source-bound-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-source-bound-temp",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230059-a46b372a",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230059-a46b372a",
+      "absent": true
+    },
+    {
+      "receipt": "guidance-v1-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\guidance-v1-temp",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230944-cd2a4df6",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-230944-cd2a4df6",
+      "absent": true
+    },
+    {
+      "receipt": "related-final-execution.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\guidance-root-20261023\\related-final-temp",
+      "absent": true
+    }
+  ],
+  "historical_directories_removed": 0,
+  "original_files_copied_or_changed": 0
+}

@@ -147,6 +147,11 @@ def _apply_layout(result, *, limits, work_budget):
             continue
         unit.setdefault("hints", {})
         unit.setdefault("layout", {})
+        # Preserve an actual layout exclusion too. A missing heading level by
+        # itself is unknown; the explicit table-region basis is positive source
+        # evidence that later numbering fallback must not erase.
+        if "in_table_region" in hint["basis"]:
+            unit["hints"]["table_region"] = True
         # Source DOM/explicit numbering wins over a missing geometry hint.
         if (
             unit["hints"].get("heading_level") is None

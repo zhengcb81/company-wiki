@@ -1,0 +1,6 @@
+# New controls fixture errors, preserved transparently
+
+The first new controls run6F34P contained four genuine actor/predicate-scope failures and two fixture failures. Original20/77measure files remain unchanged.
+
+1. Native carrier first segment ended in an ASCII space. _make_unit canonically strips it, but this synthetic source_fixture kept font char_end38 for resulting37-char unit. Native continuity correctly refused this false exact-font proof (CONTINUITY_OPEN_START). The new test now passes a segment without the trailing space, so its raw NarrativeUnit characters stay the same while metadata honestly describes37chars. This is a fixture correction, not a continuity grammar/product fix. The pre-correction source and carrier-physical-diagnosis.json are retained. No production parser/adapter/font policy was loosened.
+2. The synthetic PDF helper lacks the actual frontend identity required for a complete causal inventory; statuspartial was correct. The new cache test uses existing _real_interim_pipeline actual frontend-independent text/HTML observation and freezes its complete decision through normal APIs. It changes only the newguidance module's actual byte read to verify mismatch then restores it; no PDF-completeness assertion was weakened in production.

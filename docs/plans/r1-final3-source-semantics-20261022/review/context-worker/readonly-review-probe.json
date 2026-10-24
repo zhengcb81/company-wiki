@@ -1,0 +1,161 @@
+{
+  "schema_version": "w08-unfinished-readonly-peer-probe/1",
+  "status": "READ_ONLY_REVIEW_STOPPED_OPEN_OBSERVATIONS_NOT_FIXED",
+  "execution_note": "This records the single already-executed eight-case in-memory probe captured in tool stdout before ROOT freeze arrived. The probe is not re-executed by this record-writing command. Raw output text is retained in the same JSON line format from the captured tool response.",
+  "command": {
+    "executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "argv": [
+      "-B",
+      "-"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+    "environment": {
+      "PYTHONPATH": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src;C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\tests",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHON_DOTENV_DISABLED": "1",
+      "PYTHONIOENCODING": "utf-8"
+    },
+    "stdin_python": "import json\nfrom pathlib import Path\nfrom company_wiki.source_catalog import narrative_reading as reading\nfrom unit.document_understanding_selection.test_reading_native_carriers import source_fixture\ncases=['技术服务业务本期实现收入人民币26.5亿元，同比增长16.2%。', '技术服务业务本期实现营业收入人民币26.5亿元，同比增长16.2%。', 'Our Diagnostics services revenue was USD 26.5 million during the year.', 'Our Diagnostics services revenue increased to USD 26.5 million during the year.', '项目1在本节作介绍，具体内容另述。', '客户2号账户的余额为172万元。', 'Our software services revenue was 26.5% of group revenue during the year.', '公司的新产品收入占比提升至超30%。']\nfor text in cases:\n f=reading.detect_reading_business_fact(text);p,q=source_fixture([(text,)])\n c,m,_,complete,w=reading._candidates(p,q)\n print(json.dumps({'text':text,'eligible':f.eligible,'exempt':f.financial_exempt,'purpose':f.purpose,'reasons':f.reasons,'candidates':len(c),'bands':[v.get('value_band') for v in m.values() if not v.get('context_only')],'complete':complete,'withheld':[r['reason'] for r in w]},ensure_ascii=True))\n"
+  },
+  "inputs": [
+    "技术服务业务本期实现收入人民币26.5亿元，同比增长16.2%。",
+    "技术服务业务本期实现营业收入人民币26.5亿元，同比增长16.2%。",
+    "Our Diagnostics services revenue was USD 26.5 million during the year.",
+    "Our Diagnostics services revenue increased to USD 26.5 million during the year.",
+    "项目1在本节作介绍，具体内容另述。",
+    "客户2号账户的余额为172万元。",
+    "Our software services revenue was 26.5% of group revenue during the year.",
+    "公司的新产品收入占比提升至超30%。"
+  ],
+  "captured_stdout": "{\"text\": \"\\u6280\\u672f\\u670d\\u52a1\\u4e1a\\u52a1\\u672c\\u671f\\u5b9e\\u73b0\\u6536\\u5165\\u4eba\\u6c11\\u5e0126.5\\u4ebf\\u5143\\uff0c\\u540c\\u6bd4\\u589e\\u957f16.2%\\u3002\", \"eligible\": true, \"exempt\": false, \"purpose\": \"operating_metric\", \"reasons\": [\"business_revenue_measure\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"\\u6280\\u672f\\u670d\\u52a1\\u4e1a\\u52a1\\u672c\\u671f\\u5b9e\\u73b0\\u8425\\u4e1a\\u6536\\u5165\\u4eba\\u6c11\\u5e0126.5\\u4ebf\\u5143\\uff0c\\u540c\\u6bd4\\u589e\\u957f16.2%\\u3002\", \"eligible\": true, \"exempt\": false, \"purpose\": \"operating_metric\", \"reasons\": [\"business_revenue_measure\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"Our Diagnostics services revenue was USD 26.5 million during the year.\", \"eligible\": true, \"exempt\": false, \"purpose\": \"operating_metric\", \"reasons\": [\"business_revenue_measure\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"Our Diagnostics services revenue increased to USD 26.5 million during the year.\", \"eligible\": false, \"exempt\": false, \"purpose\": \"unknown\", \"reasons\": [], \"candidates\": 0, \"bands\": [], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"\\u9879\\u76ee1\\u5728\\u672c\\u8282\\u4f5c\\u4ecb\\u7ecd\\uff0c\\u5177\\u4f53\\u5185\\u5bb9\\u53e6\\u8ff0\\u3002\", \"eligible\": true, \"exempt\": true, \"purpose\": \"operating_metric\", \"reasons\": [\"operating_quantity\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"\\u5ba2\\u62372\\u53f7\\u8d26\\u6237\\u7684\\u4f59\\u989d\\u4e3a172\\u4e07\\u5143\\u3002\", \"eligible\": true, \"exempt\": true, \"purpose\": \"operating_metric\", \"reasons\": [\"operating_quantity\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"Our software services revenue was 26.5% of group revenue during the year.\", \"eligible\": true, \"exempt\": false, \"purpose\": \"operating_metric\", \"reasons\": [\"business_revenue_measure\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n{\"text\": \"\\u516c\\u53f8\\u7684\\u65b0\\u4ea7\\u54c1\\u6536\\u5165\\u5360\\u6bd4\\u63d0\\u5347\\u81f3\\u8d8530%\\u3002\", \"eligible\": true, \"exempt\": true, \"purpose\": \"unknown\", \"reasons\": [\"quantified_operating_status\"], \"candidates\": 1, \"bands\": [\"meaningful_fact\"], \"complete\": true, \"withheld\": []}\r\n",
+  "captured_exit_code": 0,
+  "observations": [
+    {
+      "text": "技术服务业务本期实现收入人民币26.5亿元，同比增长16.2%。",
+      "eligible": true,
+      "exempt": false,
+      "purpose": "operating_metric",
+      "reasons": [
+        "business_revenue_measure"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "技术服务业务本期实现营业收入人民币26.5亿元，同比增长16.2%。",
+      "eligible": true,
+      "exempt": false,
+      "purpose": "operating_metric",
+      "reasons": [
+        "business_revenue_measure"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "Our Diagnostics services revenue was USD 26.5 million during the year.",
+      "eligible": true,
+      "exempt": false,
+      "purpose": "operating_metric",
+      "reasons": [
+        "business_revenue_measure"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "Our Diagnostics services revenue increased to USD 26.5 million during the year.",
+      "eligible": false,
+      "exempt": false,
+      "purpose": "unknown",
+      "reasons": [],
+      "candidates": 0,
+      "bands": [],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "项目1在本节作介绍，具体内容另述。",
+      "eligible": true,
+      "exempt": true,
+      "purpose": "operating_metric",
+      "reasons": [
+        "operating_quantity"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "客户2号账户的余额为172万元。",
+      "eligible": true,
+      "exempt": true,
+      "purpose": "operating_metric",
+      "reasons": [
+        "operating_quantity"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "Our software services revenue was 26.5% of group revenue during the year.",
+      "eligible": true,
+      "exempt": false,
+      "purpose": "operating_metric",
+      "reasons": [
+        "business_revenue_measure"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    },
+    {
+      "text": "公司的新产品收入占比提升至超30%。",
+      "eligible": true,
+      "exempt": true,
+      "purpose": "unknown",
+      "reasons": [
+        "quantified_operating_status"
+      ],
+      "candidates": 1,
+      "bands": [
+        "meaningful_fact"
+      ],
+      "complete": true,
+      "withheld": []
+    }
+  ],
+  "open_findings": [
+    {
+      "status": "OPEN_UNFIXED",
+      "input_indices": [
+        4,
+        5
+      ],
+      "finding": "New operating_quantity treats an adjacent project/account identifier as an operating count. Both source candidates are meaningful_fact and financially exempt; these two observations need later independent review and were not fixed under the freeze."
+    }
+  ],
+  "review_limit": "Non-author review was not completed. Only source diff reading and this single eight-case pure-memory probe occurred; no new tests authored, no parent files changed, and no follow-up probe/content run after the freeze."
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "w08-local-qualification-handoff/1",
+  "at_utc": "2026-10-23T21:19:22.391650+00:00",
+  "status": "SUPERSEDED_AFTER_INDEPENDENT_FINDINGS",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "sha256": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "e1011305b12e2569a58c807f747f7ddfb291f31ab6b15b53a0c1799a5b2a9485"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "sha256": "d13fa02d745814f8a264493f5214bdb9b038ce2adbd3768561cbe1e1ef919b08"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "fa7ae0539a5b12463c8b801750f22ab6ff06fb20ada253fb0da09d212922f7f0"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "56fd4c3933f931b1173a2ad8f3c17d5304c97cf87ceb05400ed04e2ea4ab7a80"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_local_qualification.py",
+      "sha256": "b1d8f2de9585773fdd5c22c4e64c3e48e1384736c279492bc05ee9c162b9818d"
+    }
+  ],
+  "tests": {
+    "initial_red": {
+      "failed": 2,
+      "why": [
+        "no adjacency_edges",
+        "pending certification misread current"
+      ]
+    },
+    "final_affected": {
+      "passed": 334,
+      "seconds": 11.2,
+      "dedicated_local": 31
+    },
+    "mypy": {
+      "checked_source_files": 5,
+      "errors": 0
+    },
+    "ruff": "PASS"
+  },
+  "interface": {
+    "adjacency_edges": "original left/right IDs, source_id, basis=source_body_adjacency, physical_basis preserved; old windows and terminal rules unchanged",
+    "method": "SourceOperatingSession.local_qualification_dependencies(edges, *, origins=None) -> dict[material_id, tuple[material_id,...]]",
+    "direction": "earlier source fact -> following explicit source qualifier; ROOT supplies reverse context and original envelope validation"
+  },
+  "cleanup": [
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\red-temp",
+      "absent": true
+    },
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\green-temp",
+      "absent": true
+    },
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\regression-temp",
+      "absent": true
+    },
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\reverse-temp",
+      "absent": true
+    },
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\state-temp",
+      "absent": true
+    },
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\final-temp",
+      "absent": true
+    },
+    {
+      "requested": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\qualifier-design\\frozen-temp",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211139-a488900e",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211259-c09f4248",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211340-c5becfc0",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211449-55244bd2",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211541-fa9076db",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211635-f0a62364",
+      "absent": true
+    },
+    {
+      "actual": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-211825-c3702991",
+      "absent": true
+    }
+  ],
+  "no_raw_read": true,
+  "no_paid_calls": true,
+  "no_network": true,
+  "no_git_mutation": true,
+  "remaining_root_tasks": [
+    "Independent review against these exact source bytes",
+    "ROOT graph/envelope integration and public source-selector checks",
+    "Real corpus major acceptance, summary/cache/RF and mainline release remain open"
+  ],
+  "known_boundaries": [
+    "Only observed same-source geometric adjacency is supplied; absence of proof is not fabricated adjacency.",
+    "Local dependencies require explicit product deictic, restriction with exact matching object_refs, and unique compatible issuer object; whole assertion overlap is insufficient.",
+    "Shared named-family reference readiness is unchanged.",
+    "This helper returns positive proved dependencies; general ambiguity/unassessed handling stays with existing source readiness."
+  ],
+  "status_at_recording": "IMPLEMENTED_BOUNDED_TESTS_PASS_PENDING_ROOT_INDEPENDENT_REVIEW",
+  "current_handoff": "handoff-v3.json"
+}

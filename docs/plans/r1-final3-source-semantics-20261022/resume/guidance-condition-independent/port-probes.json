@@ -1,0 +1,1108 @@
+[
+  {
+    "label": "cn-equipment",
+    "guidance": "公司预计2027年设备服务业务收入为24至27亿元，同比增长12%至18%。",
+    "condition": "上述收入指引以新增客户按期完成验收为前提。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "relations": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8e15ffe2c91af436394a4d723a7f25c2950b1e69a2359784f8fa83c1c6b8b863",
+      "relations": [],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 77
+    },
+    "selected": [
+      {
+        "text": "三、未来经营展望",
+        "structured": {
+          "pdf_block": 0,
+          "block_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "block_char_start": 0,
+          "block_char_end": 8,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "topics": [],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "公司预计2027年设备服务业务收入为24至27亿元，同比增长12%至18%。",
+        "structured": {
+          "pdf_block": 1,
+          "block_sha256": "773135052220b249d9d4a24d3824cea4f331f8014843b4f056fc9f68b51f9ef8",
+          "block_char_start": 0,
+          "block_char_end": 38,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "773135052220b249d9d4a24d3824cea4f331f8014843b4f056fc9f68b51f9ef8",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "上述收入指引以新增客户按期完成验收为前提。",
+        "structured": {
+          "pdf_block": 2,
+          "block_sha256": "2c1c5ddc7032b0e9641aba6f061898a231130f014830acaaae2cf6a7ec094365",
+          "block_char_start": 0,
+          "block_char_end": 21,
+          "reading_priority": 2,
+          "reading_value_band": "meaningful_fact",
+          "reading_score": 3,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan",
+            "operating_description_unknown"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "2c1c5ddc7032b0e9641aba6f061898a231130f014830acaaae2cf6a7ec094365",
+          "topics": [
+            "core_business"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "未来公司计划改善内部管理。",
+        "structured": {
+          "pdf_block": 3,
+          "block_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "block_char_start": 0,
+          "block_char_end": 13,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      }
+    ],
+    "contexts": [
+      {
+        "kind": "paragraph_event",
+        "section_role": "outlook",
+        "support": [
+          "公司预计2027年设备服务业务收入为24至27亿元，同比增长12%至18%。"
+        ],
+        "context": [
+          "三、未来经营展望"
+        ]
+      }
+    ],
+    "model": {
+      "schema_version": "source-scoped-model-view/1",
+      "scope": "selected_source_tasks_only",
+      "max_claims": 20,
+      "available_task_count": 3,
+      "fragment_defaults": {
+        "source_role": "company_filing",
+        "quality_flags": []
+      },
+      "task_defaults": {
+        "kind": "paragraph_event",
+        "section_role": "outlook",
+        "topics": [
+          "outlook"
+        ],
+        "support_parts": "all_parts",
+        "context_parts": []
+      },
+      "shared_fragments": [
+        {
+          "source_key": "s1",
+          "text": "三、未来经营展望"
+        }
+      ],
+      "tasks": [
+        {
+          "key": "t1",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s2",
+              "text": "公司预计2027年设备服务业务收入为24至27亿元，同比增长12%至18%。"
+            }
+          ]
+        },
+        {
+          "key": "t2",
+          "topics": [
+            "core_business"
+          ],
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s3",
+              "text": "上述收入指引以新增客户按期完成验收为前提。"
+            }
+          ]
+        },
+        {
+          "key": "t3",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s4",
+              "text": "未来公司计划改善内部管理。"
+            }
+          ]
+        }
+      ]
+    },
+    "binding": {
+      "schema_version": "source-scoped-model-view/1",
+      "source_plan": {
+        "schema_version": "source-summary-task-plan/1",
+        "evidence_order": [
+          "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a9d19b8e5b128",
+          "urn:company-wiki:evidence-span:sha256:d5ede18d800be2424301371c97b8ae8cd3ced42468950aee4ecdd0e86bc782fc",
+          "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        ],
+        "max_claims": 20,
+        "tasks": [
+          {
+            "key": "t1",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:bbd563ef1ea8544a6e234d65e46097a71e5c04a13f8cc70e49279859230b4d68",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a9d19b8e5b128"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a9d19b8e5b128"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "paragraph_event",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          },
+          {
+            "key": "t2",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:dd38bb05478914a0fa55490544305c53bda0835dbeba3208371d933bab8899e0",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:d5ede18d800be2424301371c97b8ae8cd3ced42468950aee4ecdd0e86bc782fc"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:d5ede18d800be2424301371c97b8ae8cd3ced42468950aee4ecdd0e86bc782fc"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "paragraph_event",
+            "section_role": "outlook",
+            "topics": [
+              "core_business"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_description_unknown"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          },
+          {
+            "key": "t3",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:3f6f1f666ef9f92fcb391c50b08e89739f8cc8feae13c9713b1ba951a684184b",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "paragraph_event",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          }
+        ]
+      },
+      "source_keys": {
+        "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd": "s1",
+        "urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a9d19b8e5b128": "s2",
+        "urn:company-wiki:evidence-span:sha256:d5ede18d800be2424301371c97b8ae8cd3ced42468950aee4ecdd0e86bc782fc": "s3",
+        "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804": "s4"
+      },
+      "task_parts": {
+        "t1": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:ec2dd2dd63ed8b0143c780bfd6a2cb8f0dad7f564543da017e8a9d19b8e5b128"
+        },
+        "t2": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:d5ede18d800be2424301371c97b8ae8cd3ced42468950aee4ecdd0e86bc782fc"
+        },
+        "t3": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        }
+      }
+    }
+  },
+  {
+    "label": "trad-logistics",
+    "guidance": "公司預計2028年度物流服務收入介於65億至72億港元，同比增長9%至14%。",
+    "condition": "上述收入指引以兩名海外客戶的訂單按期完成驗收為前提。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "relations": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:743293a5a39b814351819b0027e7d6d430ca404d873f6abeaf0fe71d84ce6f76",
+      "relations": [],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 79
+    },
+    "selected": [
+      {
+        "text": "三、未来经营展望",
+        "structured": {
+          "pdf_block": 0,
+          "block_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "block_char_start": 0,
+          "block_char_end": 8,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "topics": [],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "公司預計2028年度物流服務收入介於65億至72億港元，同比增長9%至14%。",
+        "structured": {
+          "pdf_block": 1,
+          "block_sha256": "d60a311b9f181b4a2c6f30a1e01d12fd34c57c20d93fbd1d6d74dd22e15ac940",
+          "block_char_start": 0,
+          "block_char_end": 39,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "d60a311b9f181b4a2c6f30a1e01d12fd34c57c20d93fbd1d6d74dd22e15ac940",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "上述收入指引以兩名海外客戶的訂單按期完成驗收為前提。",
+        "structured": {
+          "pdf_block": 2,
+          "block_sha256": "ec0013b6bb69a0478245a8b67e82e5e21a2b48bf97c444311c11c4ad34142a2e",
+          "block_char_start": 0,
+          "block_char_end": 26,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "ec0013b6bb69a0478245a8b67e82e5e21a2b48bf97c444311c11c4ad34142a2e",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "未来公司计划改善内部管理。",
+        "structured": {
+          "pdf_block": 3,
+          "block_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "block_char_start": 0,
+          "block_char_end": 13,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      }
+    ],
+    "contexts": [
+      {
+        "kind": "paragraph_event",
+        "section_role": "outlook",
+        "support": [
+          "公司預計2028年度物流服務收入介於65億至72億港元，同比增長9%至14%。"
+        ],
+        "context": [
+          "三、未来经营展望"
+        ]
+      }
+    ],
+    "model": {
+      "schema_version": "source-scoped-model-view/1",
+      "scope": "selected_source_tasks_only",
+      "max_claims": 20,
+      "available_task_count": 3,
+      "fragment_defaults": {
+        "source_role": "company_filing",
+        "quality_flags": []
+      },
+      "task_defaults": {
+        "kind": "paragraph_event",
+        "section_role": "outlook",
+        "topics": [
+          "outlook"
+        ],
+        "support_parts": "all_parts",
+        "context_parts": []
+      },
+      "shared_fragments": [
+        {
+          "source_key": "s1",
+          "text": "三、未来经营展望"
+        }
+      ],
+      "tasks": [
+        {
+          "key": "t1",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s2",
+              "text": "公司預計2028年度物流服務收入介於65億至72億港元，同比增長9%至14%。"
+            }
+          ]
+        },
+        {
+          "key": "t2",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s3",
+              "text": "上述收入指引以兩名海外客戶的訂單按期完成驗收為前提。"
+            }
+          ]
+        },
+        {
+          "key": "t3",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s4",
+              "text": "未来公司计划改善内部管理。"
+            }
+          ]
+        }
+      ]
+    },
+    "binding": {
+      "schema_version": "source-scoped-model-view/1",
+      "source_plan": {
+        "schema_version": "source-summary-task-plan/1",
+        "evidence_order": [
+          "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8a5cbd02d1542",
+          "urn:company-wiki:evidence-span:sha256:e6365faa458bc846bfd47211fb5f9e9878c5d1470143f08d039dec35f39fd6f8",
+          "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        ],
+        "max_claims": 20,
+        "tasks": [
+          {
+            "key": "t1",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:1e09a945904656d552c3b20f8ba3303bc1ef8ae62f0b63a52aec6756bf007573",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8a5cbd02d1542"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8a5cbd02d1542"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "paragraph_event",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          },
+          {
+            "key": "t2",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:dbae217f434e11f87611251a85115f0dc41fc2a0cfa4d62590f7601f5319a5ae",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:e6365faa458bc846bfd47211fb5f9e9878c5d1470143f08d039dec35f39fd6f8"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:e6365faa458bc846bfd47211fb5f9e9878c5d1470143f08d039dec35f39fd6f8"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "paragraph_event",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          },
+          {
+            "key": "t3",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:3f6f1f666ef9f92fcb391c50b08e89739f8cc8feae13c9713b1ba951a684184b",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "paragraph_event",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          }
+        ]
+      },
+      "source_keys": {
+        "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd": "s1",
+        "urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8a5cbd02d1542": "s2",
+        "urn:company-wiki:evidence-span:sha256:e6365faa458bc846bfd47211fb5f9e9878c5d1470143f08d039dec35f39fd6f8": "s3",
+        "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804": "s4"
+      },
+      "task_parts": {
+        "t1": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:ecfb80de466a087cd818076201666a963b7e86166299481112b8a5cbd02d1542"
+        },
+        "t2": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:e6365faa458bc846bfd47211fb5f9e9878c5d1470143f08d039dec35f39fd6f8"
+        },
+        "t3": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        }
+      }
+    }
+  },
+  {
+    "label": "en-subscription",
+    "guidance": "We expect subscription revenue of USD 410 to 435 million in fiscal 2027, representing growth of 13% to 19%.",
+    "condition": "This revenue outlook assumes the overseas customers complete acceptance of their orders before year end.",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "relations": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c5863a608cfbfa8ca3c230eaf9ccb7b368c2a04d83fed157df6bf1d120275739",
+      "relations": [],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 215
+    },
+    "selected": [
+      {
+        "text": "三、未来经营展望",
+        "structured": {
+          "pdf_block": 0,
+          "block_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "block_char_start": 0,
+          "block_char_end": 8,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "topics": [],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "未来公司计划改善内部管理。",
+        "structured": {
+          "pdf_block": 3,
+          "block_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "block_char_start": 0,
+          "block_char_end": 13,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      }
+    ],
+    "contexts": [],
+    "model": {
+      "schema_version": "source-scoped-model-view/1",
+      "scope": "selected_source_tasks_only",
+      "max_claims": 20,
+      "available_task_count": 1,
+      "fragment_defaults": {
+        "source_role": "company_filing",
+        "quality_flags": []
+      },
+      "task_defaults": {
+        "kind": "background",
+        "section_role": "outlook",
+        "topics": [
+          "outlook"
+        ],
+        "support_parts": "all_parts",
+        "context_parts": []
+      },
+      "shared_fragments": [],
+      "tasks": [
+        {
+          "key": "t1",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "source_key": "s1",
+              "text": "三、未来经营展望"
+            },
+            {
+              "key": "p2",
+              "source_key": "s2",
+              "text": "未来公司计划改善内部管理。"
+            }
+          ]
+        }
+      ]
+    },
+    "binding": {
+      "schema_version": "source-scoped-model-view/1",
+      "source_plan": {
+        "schema_version": "source-summary-task-plan/1",
+        "evidence_order": [
+          "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        ],
+        "max_claims": 20,
+        "tasks": [
+          {
+            "key": "t1",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:3f6f1f666ef9f92fcb391c50b08e89739f8cc8feae13c9713b1ba951a684184b",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "background",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          }
+        ]
+      },
+      "source_keys": {
+        "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd": "s1",
+        "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804": "s2"
+      },
+      "task_parts": {
+        "t1": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        }
+      }
+    }
+  },
+  {
+    "label": "cn-new-unit",
+    "guidance": "公司预计2027年新材料业务收入达到18至21亿元。",
+    "condition": "上述收入指引以海外工厂按期取得经营许可为前提。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "relations": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:32da451bd57ab7db5c75d39c6411c5871241dbb64d4a3848f5ab9e632b7c4274",
+      "relations": [],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 53
+    },
+    "selected": [
+      {
+        "text": "三、未来经营展望",
+        "structured": {
+          "pdf_block": 0,
+          "block_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "block_char_start": 0,
+          "block_char_end": 8,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "d843bebc1deb65e97a319c9030362625aa32a39e5ad3e7a6e5b03f612ffccdbd",
+          "topics": [],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "公司预计2027年新材料业务收入达到18至21亿元。",
+        "structured": {
+          "pdf_block": 1,
+          "block_sha256": "07fe0ac7e9638bccad49bad3ee67809600152025b06f8b6695d0f2694febb115",
+          "block_char_start": 0,
+          "block_char_end": 26,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "07fe0ac7e9638bccad49bad3ee67809600152025b06f8b6695d0f2694febb115",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "上述收入指引以海外工厂按期取得经营许可为前提。",
+        "structured": {
+          "pdf_block": 2,
+          "block_sha256": "3d3ebb633785a41190b7778a61caf5517c658b3533d1c12f796df6225fd15715",
+          "block_char_start": 0,
+          "block_char_end": 23,
+          "reading_priority": 2,
+          "reading_value_band": "meaningful_fact",
+          "reading_score": 3,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan",
+            "operating_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "3d3ebb633785a41190b7778a61caf5517c658b3533d1c12f796df6225fd15715",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      },
+      {
+        "text": "未来公司计划改善内部管理。",
+        "structured": {
+          "pdf_block": 3,
+          "block_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "block_char_start": 0,
+          "block_char_end": 13,
+          "reading_priority": 2,
+          "reading_value_band": "description",
+          "reading_score": 0,
+          "language": "zh",
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "76528ef7ab38fc95ee83ee1cba9d50cc90f20e8bb1421e91858f0432b193ab8f",
+          "topics": [
+            "outlook"
+          ],
+          "unit_kind": "pdf_text_block"
+        }
+      }
+    ],
+    "contexts": [
+      {
+        "kind": "background",
+        "section_role": "outlook",
+        "support": [
+          "公司预计2027年新材料业务收入达到18至21亿元。"
+        ],
+        "context": [
+          "三、未来经营展望"
+        ]
+      }
+    ],
+    "model": {
+      "schema_version": "source-scoped-model-view/1",
+      "scope": "selected_source_tasks_only",
+      "max_claims": 20,
+      "available_task_count": 3,
+      "fragment_defaults": {
+        "source_role": "company_filing",
+        "quality_flags": []
+      },
+      "task_defaults": {
+        "kind": "background",
+        "section_role": "outlook",
+        "topics": [
+          "outlook"
+        ],
+        "support_parts": "all_parts",
+        "context_parts": []
+      },
+      "shared_fragments": [
+        {
+          "source_key": "s1",
+          "text": "三、未来经营展望"
+        }
+      ],
+      "tasks": [
+        {
+          "key": "t1",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s2",
+              "text": "公司预计2027年新材料业务收入达到18至21亿元。"
+            }
+          ]
+        },
+        {
+          "key": "t2",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s3",
+              "text": "上述收入指引以海外工厂按期取得经营许可为前提。"
+            }
+          ]
+        },
+        {
+          "key": "t3",
+          "support_parts": [
+            "p2"
+          ],
+          "context_parts": [
+            "p1"
+          ],
+          "parts": [
+            {
+              "key": "p1",
+              "shared_ref": "s1"
+            },
+            {
+              "key": "p2",
+              "source_key": "s4",
+              "text": "未来公司计划改善内部管理。"
+            }
+          ]
+        }
+      ]
+    },
+    "binding": {
+      "schema_version": "source-scoped-model-view/1",
+      "source_plan": {
+        "schema_version": "source-summary-task-plan/1",
+        "evidence_order": [
+          "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887d1f4fde50812",
+          "urn:company-wiki:evidence-span:sha256:5389201d184443a1da3980406f518ee6290747e8488be58d17dd2311a270597b",
+          "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        ],
+        "max_claims": 20,
+        "tasks": [
+          {
+            "key": "t1",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:ee504b52b0803834d137793a2b3ba8b80a3cbf4cbe1b2e043da66d33c0c9b18b",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887d1f4fde50812"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887d1f4fde50812"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "background",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          },
+          {
+            "key": "t2",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:236351b6f6af84de6a9ee92d978b6a28d540b62b66f7fcc10ec05b6752a43793",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:5389201d184443a1da3980406f518ee6290747e8488be58d17dd2311a270597b"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:5389201d184443a1da3980406f518ee6290747e8488be58d17dd2311a270597b"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "background",
+            "section_role": "outlook",
+            "topics": [
+              "core_business",
+              "new_business"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          },
+          {
+            "key": "t3",
+            "source_id": "urn:company-wiki:source:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "origin_group_id": "urn:company-wiki:reading-group:sha256:3f6f1f666ef9f92fcb391c50b08e89739f8cc8feae13c9713b1ba951a684184b",
+            "member_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "support_ids": [
+              "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+            ],
+            "context_ids": [
+              "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd"
+            ],
+            "kind": "background",
+            "section_role": "outlook",
+            "topics": [
+              "outlook"
+            ],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "support_roles": [
+              "company_filing"
+            ]
+          }
+        ]
+      },
+      "source_keys": {
+        "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd": "s1",
+        "urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887d1f4fde50812": "s2",
+        "urn:company-wiki:evidence-span:sha256:5389201d184443a1da3980406f518ee6290747e8488be58d17dd2311a270597b": "s3",
+        "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804": "s4"
+      },
+      "task_parts": {
+        "t1": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:80ebb8bdd6d3f067947f2198e230eb193530cc4d24146b59e887d1f4fde50812"
+        },
+        "t2": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:5389201d184443a1da3980406f518ee6290747e8488be58d17dd2311a270597b"
+        },
+        "t3": {
+          "p1": "urn:company-wiki:evidence-span:sha256:b8b1fc12253a384bad0682601d3f3437b32b35771871503633cced89c0667bbd",
+          "p2": "urn:company-wiki:evidence-span:sha256:6b0c61e08c76f74bcb6988242325ba9148e65707e036c251a053580b7d3b8804"
+        }
+      }
+    }
+  }
+]

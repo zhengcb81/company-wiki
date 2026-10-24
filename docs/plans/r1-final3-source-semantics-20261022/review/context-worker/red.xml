@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="1.219" timestamp="2026-10-22T23:19:51.209085+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_selection.test_reading_named_segment_scope" name="test_explicit_business_ancestors_follow_their_own_original_branch[False]" time="0.087"><failure message="AssertionError: assert set() == {'urn:company...0bab66a5021c'}&#10;  &#10;  Extra items in the right set:&#10;  'urn:company-wiki:narrative-unit:sha256:dfb01cd668ea6625faecc5f7a527d6848fd407bb75ead6057afc0bab66a5021c'&#10;  'urn:company-wiki:narrative-unit:sha256:4012b92a9667d7b4b692591e9028fe49619d192270724b3d6c375ce508edd9e2'&#10;  Use -v to get more diff">tests\unit\document_understanding_selection\test_reading_named_segment_scope.py:130: in test_explicit_business_ancestors_follow_their_own_original_branch
+    assert set(metadata[ids[anchor]]["required"]) == {ids[0], ids[parent]}
+E   AssertionError: assert set() == {'urn:company...0bab66a5021c'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:dfb01cd668ea6625faecc5f7a527d6848fd407bb75ead6057afc0bab66a5021c'
+E     'urn:company-wiki:narrative-unit:sha256:4012b92a9667d7b4b692591e9028fe49619d192270724b3d6c375ce508edd9e2'
+E     Use -v to get more diff</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_named_segment_scope" name="test_explicit_business_ancestors_follow_their_own_original_branch[True]" time="0.002"><failure message="AssertionError: assert set() == {'urn:company...9198fd9c94c2'}&#10;  &#10;  Extra items in the right set:&#10;  'urn:company-wiki:narrative-unit:sha256:4012b92a9667d7b4b692591e9028fe49619d192270724b3d6c375ce508edd9e2'&#10;  'urn:company-wiki:narrative-unit:sha256:ea4dc8114d9d14893c1d48d7235dbf16b2a29594c6efe55d4ec99198fd9c94c2'&#10;  Use -v to get more diff">tests\unit\document_understanding_selection\test_reading_named_segment_scope.py:130: in test_explicit_business_ancestors_follow_their_own_original_branch
+    assert set(metadata[ids[anchor]]["required"]) == {ids[0], ids[parent]}
+E   AssertionError: assert set() == {'urn:company...9198fd9c94c2'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:4012b92a9667d7b4b692591e9028fe49619d192270724b3d6c375ce508edd9e2'
+E     'urn:company-wiki:narrative-unit:sha256:ea4dc8114d9d14893c1d48d7235dbf16b2a29594c6efe55d4ec99198fd9c94c2'
+E     Use -v to get more diff</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_table_admission" name="test_background_table_route_keeps_declared_original_header_unit_period_and_note[\u5957]" time="0.003"><failure message="AssertionError: assert set() == {'urn:company...b979ce6a3c38'}&#10;  &#10;  Extra items in the right set:&#10;  'urn:company-wiki:narrative-unit:sha256:35dac44828ab13bcefc21320d5891a9ac45f82d507c7783681b64f0bb2b60a97'&#10;  'urn:company-wiki:narrative-unit:sha256:67ca30a0c8f6647809c44f2613fb751e0b7fd8a2ace950e18047b979ce6a3c38'&#10;  Use -v to get more diff">tests\unit\document_understanding_selection\test_reading_table_admission.py:322: in test_background_table_route_keeps_declared_original_header_unit_period_and_note
+    assert set(metadata[row.unit_id]["required"]) == {header.unit_id, note.unit_id}
+E   AssertionError: assert set() == {'urn:company...b979ce6a3c38'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:35dac44828ab13bcefc21320d5891a9ac45f82d507c7783681b64f0bb2b60a97'
+E     'urn:company-wiki:narrative-unit:sha256:67ca30a0c8f6647809c44f2613fb751e0b7fd8a2ace950e18047b979ce6a3c38'
+E     Use -v to get more diff</failure></testcase><testcase classname="tests.unit.document_understanding_selection.test_reading_table_admission" name="test_background_table_route_keeps_declared_original_header_unit_period_and_note[USD million]" time="0.002"><failure message="AssertionError: assert set() == {'urn:company...b979ce6a3c38'}&#10;  &#10;  Extra items in the right set:&#10;  'urn:company-wiki:narrative-unit:sha256:64735d4a6d82f2a869499e90e00f989ed89e744913a5a7d14b21e09db224576e'&#10;  'urn:company-wiki:narrative-unit:sha256:67ca30a0c8f6647809c44f2613fb751e0b7fd8a2ace950e18047b979ce6a3c38'&#10;  Use -v to get more diff">tests\unit\document_understanding_selection\test_reading_table_admission.py:322: in test_background_table_route_keeps_declared_original_header_unit_period_and_note
+    assert set(metadata[row.unit_id]["required"]) == {header.unit_id, note.unit_id}
+E   AssertionError: assert set() == {'urn:company...b979ce6a3c38'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:64735d4a6d82f2a869499e90e00f989ed89e744913a5a7d14b21e09db224576e'
+E     'urn:company-wiki:narrative-unit:sha256:67ca30a0c8f6647809c44f2613fb751e0b7fd8a2ace950e18047b979ce6a3c38'
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

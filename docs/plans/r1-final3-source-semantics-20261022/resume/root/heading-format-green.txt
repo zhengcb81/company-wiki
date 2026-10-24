@@ -1,0 +1,19 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 157 items
+
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py . [  0%]
+.............................................                            [ 29%]
+tests\unit\document_understanding_root\test_du2_layout_bridge.py ....... [ 33%]
+........                                                                 [ 38%]
+tests\unit\document_understanding_selection\test_reading_source_purpose_boundaries.py . [ 39%]
+........................................................................ [ 85%]
+.......................                                                  [100%]
+
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki-r1-local-observation\docs\plans\r1-final3-source-semantics-20261022\resume\root\heading-format-green.xml -
+============================= 157 passed in 3.10s =============================

@@ -1,0 +1,31 @@
+# ROOT remaining W08 implementation
+
+## Current accepted node and remaining scope
+
+Code48a8c86d fixes lost table-region negative evidence, source numeric-row title inference and actual byte cache dependencies. Independent152P and final real snapshot confirm p184/4 only has p83/2 and p183/7 parents. Full annual14 remains PARTIAL: p16/2,3,16 lack numeric headers/unit flags; D&M/TIDES lack Chemistry ancestry; six operating fact groups remain absent. The six-omissions report is historical actual trace on its bound snapshot; do not relabel its ranks/defer reasons as final code observations.
+
+External W09-RF-RESEARCH and W11-CWP-SOURCES own their dispatched directories and interfaces. This note changes neither card nor authority; ROOT continues only W08/new paid summary/central matrix/merge.
+
+## Current follow-up node (2026-10-23)
+
+Steps1–2 below are now bounded engineering PASS on e03 reading source, independent44P and165P; all original RED and full-run failures preserved. Quality belongs to the source-priority required-source admission pass, observed once under the same WorkBudget and projected through existing call-local session_state; no late re-scan or mutation of caller pipeline. Real249-page/5647-unit replay:96spans8156chars, work8210077/16M, both30% own-business scopes PASS, p16 two selected numeric rows honest unknown. Whole14 stillPARTIAL. See resume/root/prose-quality-final/checkpoint.json. Next starts step3; no new paid summary yet.
+
+## Implementation order: tests then shared owner
+
+1. **Untyped numeric evidence.** Freeze neutral PDF text rows with several number cells and a descriptive change cell, plus a fully bound table positive. An unbound numeric row must not appear as a trusted amount or silently bypass table purpose because package.kind=background. Preserve raw/source IDs. Reuse the structure/table-purpose and quality vocabulary: either obtain genuine header/unit/period edges from the source or expose table_structure_ambiguous/unknown and constrain numeric interpretation. No nearest header guessed across pages, fake typed table, source name rule, or blanket financial-chapter exclusion. Keep genuine business-event prose in notes. First test the public selection output and citation view, not just a helper.
+
+2. **Project/body selection.** Freeze a generic project heading followed by two independently complete operating facts and an unrelated future paragraph. Current project-first-anchor flow can drop all body when the heading is not itself a fact. Audit actual body units through the same shared SourceOperatingSession/continuity owner; select complete source facts or their proved native group, with actual dependencies only. Heading-only parents may supply context but cannot be the sole admission gate. Keep original IDs and physical8units/4blocks/2048chars and same WorkBudget; do not split around the cost ceiling or append unrelated future context.
+
+3. **Operating measures and forecast roles.** Use different industries/numbers for source volume (体积/體積 with original units) and a named business's year-over-year revenue growth. Distinguish growth rate from amount/share; retain whole-clause assumption/negative/future scope proven in measure tests. ID/date/company financial totals and financial-asset sales stay negative controls. Local next-year revenue range/growth is guidance/forecast, not actual/current. An explicitly linked local condition must become a genuine required source dependency; neighbouring generic risks must not attach. No numeric constants/company names in grammar or reserved oracle seats.
+
+4. **Cross-page native ancestry.** Freeze positive numbered introduction + continuing indented bullet list over adjacent pages and sibling/other-source/disjoint-column/large-gap negatives. Extend existing SourcePageFlow/section evidence only when actual source/list/geometry continuity proves ancestry. Preserve bounded page/unit windows and explicit sibling closure; no nearest-business carry or arbitrary page cap increase. A fact with unknown ancestry stays locally usable only with honest scope, never borrowed from a sibling view.
+
+5. **Selection quality under fixed limits.** After eligibility and dependency roots, examine actual newly generated offers and marginal costs. Preserve distinct operating dimensions/scopes already proved by the existing semantic owner. Test generic descriptions competing with independent customer/capacity/guidance facts under the same96/48k/16M. Do not sort for the company/oracle/known numbers, guarantee all financial totals, or equate candidate_count with actual planner offers. Financial APIs/direct original reads can serve exact totals downstream; material operating descriptions need actual source-consumption evidence.
+
+## One major acceptance node after these shared fixes
+
+Run affected unit/integration, unchanged public cache migration assertions and full src typing; independent agent checks the final code and neutral reverse controls, fixes all findings, then rechecks. Reuse the unchanged14 source targets and original source hash for one final complete parse/select trace with full citation context. Whole-source acceptance is separate from finite helper green. Then one configured formal summary and current/other-run cache + public RF consumption; use the existing cumulative ledger2Mtokens/USD20, no new budget/store/authorization chain. W09 native research and W11 actual recovery are integrated by ROOT before final matrix/W12 four reviews. Old source snapshots/sealed FAIL remain immutable. No model calls while selected content still has known critical numeric/scope errors.
+
+## Testing and cleanup
+
+Use isolated owned TemporaryDirectory or explicit basetemp, assert imported module __file__ points to this checkout inside pytest, and remove actual as well as requested relocated paths. Preserve existing independent tests and old RED receipts. Sparse worktree's required9tracked assets were restored from its ownHEAD (242299B), not downloaded originals. Do not run Git hooks with a partial runtime fixture tree, bypass failed checks, copy full production data, or recursively clean historical .planning.

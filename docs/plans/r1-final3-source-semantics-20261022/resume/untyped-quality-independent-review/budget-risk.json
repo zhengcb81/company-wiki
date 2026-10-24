@@ -1,0 +1,52 @@
+{
+  "quality_charge": {
+    "before": 4833,
+    "requested": 358,
+    "limit": 5190,
+    "used_after": 4833,
+    "exhausted": true
+  },
+  "baseline": {
+    "status": "selected",
+    "spans": [
+      {
+        "raw_text": "Business review",
+        "flags": []
+      },
+      {
+        "raw_text": "The company delivered industrial equipment to customers for qualification.",
+        "flags": []
+      }
+    ]
+  },
+  "limited": {
+    "status": "partial",
+    "coverage_complete": false,
+    "spans": [
+      {
+        "raw_text": "Business review",
+        "flags": [
+          "table_structure_ambiguous"
+        ]
+      },
+      {
+        "raw_text": "The company delivered industrial equipment to customers for qualification.",
+        "flags": [
+          "table_structure_ambiguous"
+        ]
+      }
+    ],
+    "selection_diagnostics": [],
+    "constraints": [
+      "只使用下面给出的原文单元，不补充任何未出现的数字、主体或时间。",
+      "保留原语言，不翻译、不改写单位与币种。",
+      "每个事实必须能回指到给出的 locator；无法回指的内容不要输出。",
+      "区分已发生事实、公司计划与预测；保留否定与限定条件。",
+      "未读到的内容标注为未读到，不要写成“没有”。",
+      "不输出评级、目标价、仓位或估值结论。",
+      "业务关注项只是阅读提示，不代表原文已经证明对应事实；定性陈述不强制补出数字。",
+      "Fragments flagged table_structure_ambiguous do not prove column, period, row-label or unit attribution. Use independently supported business prose; leave unproven numeric interpretations unknown."
+    ]
+  },
+  "module_path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+}

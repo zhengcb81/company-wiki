@@ -1,0 +1,24 @@
+{
+  "actual_cleanup_events": [
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210222-4d094115",
+      "existed": true,
+      "removed": true,
+      "observed_absent_after": true
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\cw-pytest-basetemp\\20261023-210242-e4f81d11",
+      "existed": true,
+      "removed": true,
+      "observed_absent_after": true
+    }
+  ],
+  "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\project-body-independent\\pytest-red-temp",
+  "requested_absent_after": true,
+  "network_calls": 0,
+  "model_calls": 0,
+  "downloaded_originals": 0,
+  "raw_copies": 0
+}
