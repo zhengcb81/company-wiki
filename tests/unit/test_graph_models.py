@@ -387,16 +387,15 @@ class TestGraphQueries:
 
 
 @pytest.mark.unit
-def test_graph_facade():
+def test_graph_facade(tmp_path):
     """测试 Graph facade"""
     from graph import Graph
     
     # 创建临时 graph.yaml
-    import tempfile
     import yaml
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
-        yaml.dump({
+
+    temp_path = tmp_path / "graph.yaml"
+    temp_path.write_text(yaml.safe_dump({
             "nodes": {
                 "半导体设备": {"type": "sector", "description": "半导体制造设备", "tier": 5},
             },
@@ -414,44 +413,40 @@ def test_graph_facade():
                 {"from": "半导体设备", "to": "半导体代工", "type": "upstream_of"},
             ],
             "questions": {"半导体设备": ["各环节设备国产化率？"]},
-        }, f)
-        temp_path = f.name
-    
-    try:
-        # 测试加载
-        g = Graph(temp_path)
-        
-        # 测试公司查询
-        companies = g.get_all_companies()
-        assert len(companies) == 1
-        assert companies[0]["name"] == "中微公司"
-        
-        company = g.get_company("中微公司")
-        assert company is not None
-        assert company["ticker"] == "688012"
-        
-        # 测试行业查询
-        sectors = g.get_all_sectors()
-        assert len(sectors) == 1
-        assert sectors[0] == "半导体设备"
-        
-        sector = g.get_sector("半导体设备")
-        assert sector is not None
-        assert sector["tier"] == 5
-        
-        # 测试图遍历
-        downstream = g.downstream_of("半导体设备")
-        assert "半导体代工" in downstream
-        
-        # 测试相关性匹配
-        related = g.find_related_entities("中微公司发布新设备")
-        assert len(related) > 0
-        
-        print("✓ Graph facade 测试通过")
-        
-    finally:
-        import os
-        os.unlink(temp_path)
+        }, allow_unicode=True, sort_keys=False), encoding="utf-8")
+
+    # Keep the fixture in its own directory. Graph intentionally merges
+    # adjacent companies.yaml and sectors.yaml files; a shared system TEMP
+    # directory can contain another test's files and change this test's data.
+    g = Graph(temp_path)
+
+    # 测试公司查询
+    companies = g.get_all_companies()
+    assert len(companies) == 1
+    assert companies[0]["name"] == "中微公司"
+
+    company = g.get_company("中微公司")
+    assert company is not None
+    assert company["ticker"] == "688012"
+
+    # 测试行业查询
+    sectors = g.get_all_sectors()
+    assert len(sectors) == 1
+    assert sectors[0] == "半导体设备"
+
+    sector = g.get_sector("半导体设备")
+    assert sector is not None
+    assert sector["tier"] == 5
+
+    # 测试图遍历
+    downstream = g.downstream_of("半导体设备")
+    assert "半导体代工" in downstream
+
+    # 测试相关性匹配
+    related = g.find_related_entities("中微公司发布新设备")
+    assert len(related) > 0
+
+    print("✓ Graph facade 测试通过")
 
 
 if __name__ == "__main__":

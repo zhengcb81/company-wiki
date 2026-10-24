@@ -24,19 +24,27 @@ def test_deep_checkout_does_not_reject_checks_or_keep_scratch(tmp_path, monkeypa
     original.write_text("original", encoding="utf-8")
     monkeypatch.setattr(gate, "PROJECT_ROOT", checkout)
     allocated = []
+    child_envs = []
     original_run = gate._run
     def recording_run(cmd, label, **kwargs):
         allocated.append(Path(cmd[cmd.index("--basetemp") + 1]))
+        child_envs.append(kwargs["env_extra"])
         return original_run(cmd, label, **kwargs)
     monkeypatch.setattr(gate, "_run", recording_run)
-    probe = ("import json,pathlib,sys; "
+    probe = ("import json,os,pathlib,sys; "
              "p=pathlib.Path(sys.argv[sys.argv.index('--basetemp')+1]); "
+             "assert pathlib.Path(os.environ['TEMP']).resolve()==p.resolve(); "
+             "assert pathlib.Path(os.environ['TMP']).resolve()==p.resolve(); "
+             "assert pathlib.Path(os.environ['SQLITE_TMPDIR']).resolve()==p.resolve(); "
              "(p/'owned.txt').write_text('temporary',encoding='utf-8'); "
              "print('OWNED_TEMP '+json.dumps(str(p))); "
              f"sys.exit({exit_code})")
     result = gate._run_pytest_gate([sys.executable, "-c", probe], "owned child check")
     assert result == exit_code
     assert len(allocated) == 1
+    assert child_envs[0]["TEMP"] == str(allocated[0].resolve())
+    assert child_envs[0]["TMP"] == str(allocated[0].resolve())
+    assert child_envs[0]["SQLITE_TMPDIR"] == str(allocated[0].resolve())
     assert not allocated[0].exists()
     assert list(checkout.iterdir()) == [original]
     assert original.read_text(encoding="utf-8") == "original"

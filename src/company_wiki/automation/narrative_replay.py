@@ -177,7 +177,16 @@ def replay_narrative_evidence(
 
 
 _SELECTION_ANNOTATIONS = frozenset(
-    {"topics", "selection_reasons", "selection_group_id", "unit_kind", "text_sha256"}
+    {
+        "topics",
+        "selection_reasons",
+        "selection_group_id",
+        "reading_priority",
+        "reading_score",
+        "reading_value_band",
+        "unit_kind",
+        "text_sha256",
+    }
 )
 
 

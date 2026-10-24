@@ -104,7 +104,7 @@ def test_registry_unknown_job_type_raises():
             {
                 "handler_version": "1.1.0",
                 "input_schema": "source-revision-event/2.0",
-                "result_schema": "narrative-select-result/2.0",
+                "result_schema": "narrative-select-result/2.1",
                 "effect_class": "artifact_only",
                 "network": False,
                 "llm": False,

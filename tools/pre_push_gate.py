@@ -164,11 +164,24 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
         # workers instead of one serial process under the identical deadline.
         # Narrow changed-file and contract gates avoid this startup overhead.
         cmd = [*cmd, "-n", "2", "--dist=loadfile", "-vv", "--durations=15"]
-    with tempfile.TemporaryDirectory(prefix="cwpp-") as basetemp:
+    # Windows SQLite and tempfile consult TEMP/TMP independently of pytest's
+    # --basetemp. Keep all three roots inside this invocation's owned scratch:
+    # the host TEMP may be inaccessible to the Git hook's restricted process,
+    # which otherwise turns a large WAL write into SQLITE_CANTOPEN mid-test.
+    with tempfile.TemporaryDirectory(prefix="cwpp-", dir=PROJECT_ROOT) as basetemp:
+        owned_temp = str(Path(basetemp).resolve())
         return _run(
             [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],
             label,
-            env_extra={"PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1"},
+            env_extra={
+                "PYTHONIOENCODING": "utf-8",
+                "PYTHONUTF8": "1",
+                "PYTHONDONTWRITEBYTECODE": "1",
+                "TEMP": owned_temp,
+                "TMP": owned_temp,
+                "TMPDIR": owned_temp,
+                "SQLITE_TMPDIR": owned_temp,
+            },
         )
 
 

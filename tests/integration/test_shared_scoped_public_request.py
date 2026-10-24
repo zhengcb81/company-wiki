@@ -131,7 +131,9 @@ def test_tracked_phase_c_full_loopback_needs_no_planning_history_and_removes_lak
     repo = Path(__file__).parents[2]
     output = (tmp_path / "phase-c-receipt").resolve()
     deployed = (tmp_path / "clean-source-deployment").resolve()
+    scratch = (tmp_path / "phase-c-scratch").resolve()
     before = sorted(tmp_path.iterdir())
+    scratch.mkdir()
     # Deploy only current code/resources, never originals, config, .git or paid
     # history. .planning is physically absent in the executing project tree.
     for package in ("src", "scripts"):
@@ -164,10 +166,15 @@ from tools.document_understanding_benchmark.phase_c_runner import main
 raise SystemExit(main())
 """
     try:
+        env = {**fixtures.subprocess_env(), "PYTHONPATH": str(deployed / "src")}
+        # The clean runner creates and removes an owned lake via tempfile.
+        # Keep that filesystem work inside this test's owned scratch root; the
+        # host TEMP can be denied by Windows sandbox ACLs or fall back to cwd.
+        env.update(TEMP=str(scratch), TMP=str(scratch))
         process = subprocess.run(
             [sys.executable, "-B", "-c", script, "--mode", "loopback", "--output", str(output),
              "--reading-model-projection", V4], cwd=deployed,
-            env={**fixtures.subprocess_env(), "PYTHONPATH": str(deployed / "src")},
+            env=env,
             capture_output=True, timeout=240,
         )
         assert process.returncode == 0, (process.stdout.decode(errors="replace"), process.stderr.decode(errors="replace"))
@@ -179,12 +186,16 @@ raise SystemExit(main())
         assert receipt["paid_transport_invalid_summary_negative"]["status"] == "PASS"
         assert not (deployed / ".planning").exists()
     finally:
+        leaked_scratch = tuple(scratch.iterdir()) if scratch.exists() else ()
+        if scratch.exists():
+            shutil.rmtree(scratch)
         assert output.parent == tmp_path.resolve() and output.name == "phase-c-receipt"
         if output.exists():
             shutil.rmtree(output)
         assert deployed.parent == tmp_path.resolve() and deployed.name == "clean-source-deployment"
         if deployed.exists():
             shutil.rmtree(deployed)
+        assert not leaked_scratch, f"Phase C left owned temp files: {leaked_scratch!r}"
         assert sorted(tmp_path.iterdir()) == before
 
 

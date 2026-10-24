@@ -177,8 +177,28 @@ def test_reference2_parser_requires_exact_subject_generation_and_keeps_old_parse
 def test_projected_replay_accepts_only_selector_annotations():
     view = view_fixture()
     package = select_verified_projection(view, title="Business development Q&A")
+    selected_spans = []
+    for span in package.evidence_spans:
+        metadata = dict(span.structured_value)
+        metadata.update(
+            reading_priority=2,
+            reading_score=3,
+            reading_value_band="meaningful_fact",
+        )
+        selected_spans.append(
+            EvidenceSpan.create(
+                source_id=span.source_id,
+                coordinates=span.coordinates,
+                raw_text=span.raw_text,
+                structured_value=metadata,
+                parser_name=span.parser_name,
+                parser_version=span.parser_version,
+                parse_status=span.parse_status,
+                quality_flags=span.quality_flags,
+            )
+        )
     selected = SimpleNamespace(
-        subject=view.subject, evidence_spans=package.evidence_spans
+        subject=view.subject, evidence_spans=tuple(selected_spans)
     )
     assert replay.replay_verified_projection(view, selected) == len(
         package.evidence_spans
