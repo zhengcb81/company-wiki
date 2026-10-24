@@ -1,0 +1,23 @@
+{
+  "schema_version": "w08-node-cleanup/1",
+  "removed_owned_test_roots": [
+    {
+      "path": ".tmp-w08-cache-red",
+      "files": 0,
+      "exists_after": false
+    },
+    {
+      "path": ".tmp-w08-cache-red2",
+      "files": 1,
+      "exists_after": false
+    },
+    {
+      "path": ".tmp-w08-cache-green",
+      "files": 11,
+      "exists_after": false
+    }
+  ],
+  "unrelated_untracked_paths_untouched": true,
+  "raw_files_untouched": true,
+  "natural_root_removed_by_runner": true
+}

@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_V5_CONTENT_PARTIAL_NEXT_SOURCE_QUALITY",
+  "overall_status": "ACTIVE_W08_REPORTING_RULES_REVIEWED_CONTENT_7P_5PARTIAL_2M_BUDGET_ROOT_NEXT",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -125,7 +125,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_V5_7_PASS_5_PARTIAL_2_MISSING_ROOT_FIX_PUSHED_EXACT_CI_SUCCESS_W10_MATRIX_W12_OPEN",
+      "status": "ACTIVE_W08_REPORTING_CLASSIFICATION_FIXED_CONTENT_PARTIAL_SHARED_BUDGET_ROOT_NEXT_W10_W12_OPEN",
       "mainline": true
     },
     {
@@ -154,7 +154,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W08 DTO/cache根修baa77ab6与clean Phase C修复aade6b93正常推送且精确CI40076059766 completed/success。pre-push 8126 passed/24 existing skipped、CI合同smoke146 passed、聚焦E2E/回归170 passed、Ruff和mypy src 372文件通过。继续annual14冻结14项目标的有界逐项诊断，分开定位candidate/admission/dependency/offer-defer/task-context及应由金融API/SourceRef提供的精确数值；W11-CWP-SOURCES A/B/C按用户确认已完成推送并关闭，不重开。",
+  "next_step_now": "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -605,50 +605,46 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
+  "next_step_after_publication": "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。",
   "w08_current_review": {
-    "selection_path": "review/r1-w08-crosspage-20261024/annual14-v2/selection.json",
-    "review_path": "review/r1-w08-crosspage-20261024/annual14-v2/review.json",
-    "selection_sha256": "79abb23d8e5ad60f7d03d366706c4c150602c7bfc719bce41578458bbb5546a0",
-    "status": "6_PASS_7_PARTIAL_1_MISSING",
+    "selection_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-selection.json",
+    "review_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.json",
+    "selection_sha256": "590a29316461af4be056b3988313cb8557e410758f94dfa30f10ad546488c289",
+    "status": "7_PASS_5_PARTIAL_2_MISSING_NO_NET_CONTENT_GAIN",
     "metrics": {
       "pages": 249,
-      "units": 5660,
-      "candidates": 1532,
+      "candidates": 1526,
       "selected": 96,
-      "selected_chars": 7171,
-      "work_used": 8613643,
+      "selected_chars": 7689,
+      "work_used": 8845814,
       "work_limit": 16000000,
-      "work_exhausted": false
+      "compiled_tasks": 55
     },
     "external_model_calls": 0,
     "downloads": 0,
     "raw_copies": 0,
-    "relevant_natural_tests": "1546 passed in 34.48s",
-    "ruff": "PASS",
-    "mypy": "0 errors in 3 changed source files",
-    "independent_signoff": "NOT_CLAIMED",
+    "independent_signoff": "INDEPENDENT_CONTENT_PARTIAL_ENGINEERING_SEPARATE",
     "remaining": {
       "partial": [
         "ST-A01",
         "ST-A02",
-        "ST-A03",
-        "ST-A04",
         "ST-A05",
         "ST-A09",
-        "ST-A12"
+        "ST-A13"
       ],
       "missing": [
-        "ST-A13"
+        "ST-A03",
+        "ST-A04"
       ]
     },
-    "next_action": "target-bound candidate/dependency/budget trace for remaining business context; keep all current caps; fix root cause and run one new annual14 selection"
+    "next_action": "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。",
+    "selection_precedes_dependency_registration_only": false,
+    "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
   },
   "next_steps": [
-    "Close target-bound annual14 gaps (especially A12 premise, A13 revenue-recognition policy, A01/A05 hierarchy, A09 capacity/date relation) without raising selection/work caps; reselect once after root fixes.",
-    "Then perform production-configured summary/cache recovery, W09/W10 real adoption matrix, and W12 four-review loop as specified in the canonical plan."
+    "基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。"
   ],
-  "last_updated_utc": "2026-10-24 08:25:44Z",
+  "last_updated_utc": "2026-10-24T09:09:31.023977+00:00",
   "latest_publish_validation": {
     "local_pre_push_unit_passed": 8126,
     "local_pre_push_unit_skipped_existing": 24,
@@ -686,5 +682,26 @@
     "root_exclusive": "annual14 source/context; formal summary/cache; actual adoption matrix and W12; no editing the delegated gate/tool/test scopes",
     "independent_final_implementation_review_required": true,
     "new_paid_calls": 0
+  },
+  "w08_reporting_rules_20261024": {
+    "status": "REVIEWED_PENDING_PUBLICATION",
+    "review": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/report.json",
+    "independent_passed": 320,
+    "natural_passed": 2302,
+    "natural_existing_skipped": 11,
+    "natural_seconds": 51.32,
+    "cache_followup_passed": 58,
+    "cache_followup_seconds": 13.94,
+    "cache_followup": "new reporting rules module registered in existing business_algorithms byte closure; no new gate",
+    "natural_precedes_cache_registration": true,
+    "mypy_src_files": 373,
+    "ruff": "PASS",
+    "content_status": "7_PASS_5_PARTIAL_2_MISSING",
+    "new_model_calls": 0,
+    "new_downloads": 0,
+    "independent_seconds": 5.19,
+    "natural_precedes_cache_registration_and_final_structure_guard": true,
+    "final_source_recheck": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json",
+    "final_source_content_equivalence": true
   }
 }

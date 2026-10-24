@@ -729,3 +729,24 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 独立agent全面审卡后发现5项具体歧义（共享smoke会影响远端、缺runner假绿、RF生产冻结/污染反控、TXT实际消费、便携清单/退出码），全部已修并独立复审通过。每包C节点仍必须独立审实现并修完内部问题，当前卡片审查不能代替未来产品验收。
 
 新worktree实测分别175.82/51.52/6.80MiB；W14约806MiB旧tracked.planning副本在新工区用sparse省略，原RF及Git对象不变。没有新模型/下载/生产写入。首次沙箱内git status无法读共享worktree元数据（not a work tree），按现有授权在非沙箱只读核查成功；未reset或清理旧WIP。所有bootstrap提交仅文档，未运行/声称产品测试。
+
+
+## 2026-10-24 主线继续：annual14未闭目标诊断
+
+上一goal turn完成三包/独立卡审查/独占工区/文档发布bc184b57，属于已改变权威状态的progress。本轮回到ROOT annual14七个未闭目标，W13/W14/W15写范围保留给外包。已实读最新PWF、V5 freeze/review、旧trace/编译脚本：旧trace只涵盖A12/A13，V5 selection已有public selection_trace、逐budget targets和55任务关系，应先用这些冻结材料与既有8页原文摘录诊断，避免重解析整份PDF或重复收费。当前未调用模型/下载，未声称内容缺口关闭。
+
+## 2026-10-24 ROOT继续：修复独审剩余的判据/断言边界
+
+上一轮仅复核并再次提供已就绪W13–W15卡，未改变产品状态，按主线no-progress处理。当前已重读PWF与源码；独审17例中2例仍失败：信用风险规则内“是否推出/能否交付”被宽动作词误认为已发生事件。下一步补入通用问句与实际事件的正反例，用共用事件断言边界修复，不对公司、页码、金额做特判；然后集中自然回归和一次真实同源选材。W13–W15委派文件不改。预算按最新已授权10M/$20，历史2M仅是旧原生目标文字。
+
+真实SourceRef已只读重放一次：249页、1526候选、96选中/7689字符，8,845,814/16M，两个原checkpoint通过，原件/配置/DB未变。但旧trace helper采用缩进JSON，完整14项观察生成562377B超512KiB上限，诊断命令非零，不能作为完整trace验收；有效selection保留为selection.observer-overflow.json。修工程observer仅移除JSON格式空白（不删观察、不抬上限），最终源码冻结后需再读一次以取得完整目标链。新增独审发现在whether共享列表之后，明确but转折的simple-past事件不能继承question；已按语法转折重置，非公司/数据特判，待终审。
+
+## 2026-10-24 W08 当前节点验证与真实复核
+
+最终语序/列表/转折边界经314项独立测试通过，2302自然通过/11既有skip/51.32s，Ruff/mypy src373通过。真实14目标链成功输出468115B（原512KiB上限未提高），72个目标单元/14标签，249页1526候选、96/7689字符、8845814/16M；55编译任务，A12前提仍在同task。独立内容复审仍7P/5partial/2missing，模板位置被治理/通用战略等补上，不能把规则修复当完整内容改善。下一共因应修语义包价值/边际闭包竞争，再修父子/日期局部关系。
+
+发布前cache依赖检查另发现新reporting_rules不在现有business_algorithms列表。新测试先因fixture缺mime得到partial（已设置实际HTML carrier），随后真实RED same!=changed，补一行现有依赖后58项库存/cache通过。该补丁在真实selection和2302自然包之后；原始SHA收据不重写冒称包含后补丁，最终正常pre-push另行验全。自有scratch精确清理；去重初版XML/重复selection后节点必要证据约1.85MiB。无原件/生产配置修改、无收费调用/下载、无外包文件写入。
+
+### 最终字节补审与同源等价复核
+
+最后发现纯会计方法“consists of”可触发新公开structure helper而绕过报告规则；原_business_fact本已有_OBJECT外层条件。两条英文负例先2F31P，helper补原条件后161项聚焦通过；最终独立320P/0F/0skip/5.19s，绑定4源/2作者测试。cache独立历史34P/6.64s及沙箱fixture ERROR均另存，不拿旧SHA代签。最终源码再次只读原SourceRef7.60s，全部96 EvidenceSpan/原文、task-local groups和55任务成员逐项等于内容独审材料，metadata差异保留；final-source-receipt绑定最终源摘要，内容仍7/5/2，零付费/下载/raw copy。

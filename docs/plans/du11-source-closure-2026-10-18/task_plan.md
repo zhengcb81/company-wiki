@@ -4,9 +4,9 @@
 
 ## Next Step
 
-V5已用同一真实249页来源完成一次新选材：96/7,767字符、工作8,845,814/16M；14项独立复核为7pass/5partial/2missing。纯名词会计政策误分类及旧selector兼容/当前分组语义已分别根修。最新DTO/cache根修`baa77ab6`与clean Phase C测试修复`aade6b93`已正常推送；完整pre-push 8126 passed / 24既有skip（389.84秒），独立合同smoke146 passed（42.09秒），聚焦回归与端到端170 passed，Ruff与`mypy src`372文件通过。精确CI `40076059766` completed/success（4分38秒）。测试根因：干净部署漏拷无密钥`models.yaml`与`resource_budget.yaml`，而旧独立oracle不识别已验证生产context `/3`；现通过白名单资源部署和仅按校验后成员关系投影修复。沙箱的子进程loopback收到Windows 10013，非沙箱真实本地HTTP回环测试通过。完整失败及修复记录见CURRENT_STATUS与最新progress/findings。
+本轮来源用途/事件断言共因已独审320P，最终相关自然2302P/11既有skip/51.32s；真实14项仍7P/5partial/2missing，未净改善。新规则cache字节依赖补漏先RED、58项GREEN；待完成正常发布与精确CI观察。完整证据见CURRENT_STATUS及本轮根因记录。
 
-**下一步：** W11-CWP-SOURCES已A/B/C完成并推送，施工卡关闭。按annual14冻结14项目标逐项扩展有界trace，分别读取candidate、admission、dependency、offer/defer、target task/model可见性和金融字段来源，避免将aggregate `budget_full`推断为单目标原因。共因修复后做一次同条件选材并复核同一冻结14项；再进入正式摘要/cache恢复、W09/W10实际采用矩阵和W12四审，原公司复验后药明合联→Snowflake。不得提高96/48,000/16M与8/4/2048上限来掩盖遗漏；分清由财务API/SourceRef提供的精确财数与叙述切片承载的业务关系。
+**下一步：** 基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。
 
 **W11状态：** W11-CWP-SOURCES A/B/C全流程已由用户确认完成并推送，卡片关闭；ROOT的真实IR原件与内容覆盖验收仍按单独业务证据处理，不重开作者施工卡。
 

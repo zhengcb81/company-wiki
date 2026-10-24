@@ -1,0 +1,94 @@
+{
+  "reviewer": "/root/w08_reporting_rule_review",
+  "observed_at": "2026-10-24T09:14:49.919171+00:00",
+  "head": "bc184b57a76d63f077f7078dd78fb558848d9da7",
+  "binding": "Final reviewed worktree byte hashes below, not merely Git HEAD.",
+  "verdict": "PASS",
+  "scope": "Financial reporting-object treatment versus real customer operating events in purpose/fact classification; finite-slot public selection and pinned legacy behavior covered by named tests. Includes restored operating-object precondition and rule-module cache hash closure.",
+  "source_and_author_test_sha256": {
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+    "src/company_wiki/document_understanding/decision_inventory.py": "192a4196ee3a3639e3c92936686945c1dcb51c7e757f86dd93a73eac88a3c1d1",
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": "9f1bd5e872d1a5fa87b408d35ca23be14f1aba23b41c48385f9a22be2923b547",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "0863bbd5178d39ab52387189eff2bd5b39ebe046f6690e84cc964a8542af1342"
+  },
+  "independent_tests_sha256": {
+    "test_reporting_rule_independent.py": "35164fb8a6e9b5c3fb68c190e2c50c1b160001a223142d126ff6f71d94f30811",
+    "test_reporting_rules_cache_addendum.py": "998841567e39558f41346f85d8c050752991cd1f6d8995a4334408df7c868d9d"
+  },
+  "actual_imported_modules": {
+    "company_wiki.source_catalog.narrative_business_meaning": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_meaning.py",
+    "company_wiki.source_catalog.narrative_reporting_rules": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reporting_rules.py",
+    "company_wiki.source_catalog.narrative_source_purpose": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py"
+  },
+  "test_command": "PYTHONPATH=src python -m pytest docs/plans/du11-source-closure-2026-10-18/review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/test_reporting_rule_independent.py docs/plans/du11-source-closure-2026-10-18/review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/test_reporting_rules_cache_addendum.py tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py tests/unit/document_understanding_selection/test_reading_table_admission.py tests/unit/test_n6_candidate_recall.py tests/unit/test_w04_narrative_semantics.py -q -p no:cacheprovider --override-ini addopts=''",
+  "test_result": {
+    "passed": 320,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 5.19,
+    "exit_code": 0,
+    "components": {
+      "independent_semantic_boundaries": 21,
+      "author_reporting_rule_boundaries_and_public_selection": 33,
+      "preexisting_source_purpose": 107,
+      "legacy_native_selector_compatibility": 155,
+      "independent_cache_counterfactuals": 4
+    }
+  },
+  "findings": [
+    {
+      "id": "IR-01",
+      "root": "Matched-span erasure swallowed a genuine embedded customer launch/delivery.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "IR-02",
+      "root": "Dependent generic risk-reduction purpose wrongly supplied a second operating assertion.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "IR-03",
+      "root": "Question criteria and independent observed events required scoped distinction including postnominal questions, comma-list inheritance and contrast assertion reset.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "ROOT-STRUCTURE-OBJECT-GUARD",
+      "root": "New direct helper use must preserve the old business-fact outer operating-object precondition; bare accounting composition is not a business structure.",
+      "status": "CLOSED"
+    }
+  ],
+  "scope_limits": [
+    "No paid model, download, production raw write, external API or full annual14 content rerun.",
+    "Synthetic English/simplified/traditional controls are not a complete multilingual or financial-sector corpus benchmark.",
+    "Formal-summary quality, actual annual14 content visibility, cache recovery and final publication remain ROOT responsibility.",
+    "ROOT earlier wider-suite 2297-pass result was a different source version and is not used to claim final-byte wider-suite passage."
+  ],
+  "history": [
+    {
+      "path": "report.content-before-structure-guard.json",
+      "sha256": "8a9032d46dd7843d91ce9f469968a208514769ce6bd331b144292b8313ea627f",
+      "historical_result": "314 passed before final guard; not final-byte evidence."
+    },
+    {
+      "path": "report.cache-addendum.json",
+      "sha256": "3166a8f882639b3ad1f52076263fdb25f461613b9efd81c3ec7911ed01f4a7ed",
+      "historical_result": "34 passed before final structure guard; earlier sandbox fixture errors retained therein."
+    }
+  ],
+  "final_guard_review": "describes_business_structure now requires existing _OBJECT and existing structure/composition; _business_fact already enforced _OBJECT before calling it, preserving the old fact behavior.",
+  "cleanup": {
+    "all_owned_short_scratch_absent": true,
+    "pending": false
+  },
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+    "src/company_wiki/document_understanding/decision_inventory.py": "192a4196ee3a3639e3c92936686945c1dcb51c7e757f86dd93a73eac88a3c1d1",
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": "9f1bd5e872d1a5fa87b408d35ca23be14f1aba23b41c48385f9a22be2923b547",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "0863bbd5178d39ab52387189eff2bd5b39ebe046f6690e84cc964a8542af1342"
+  }
+}

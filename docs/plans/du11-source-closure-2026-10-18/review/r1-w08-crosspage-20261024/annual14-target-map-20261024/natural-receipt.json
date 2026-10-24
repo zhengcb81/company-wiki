@@ -1,0 +1,51 @@
+{
+  "schema_version": "w08-natural-suite-receipt/1",
+  "at_utc": "2026-10-24T09:01:20.988551+00:00",
+  "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "args": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection",
+    "tests/unit/document_understanding_structure",
+    "tests/unit/document_understanding_root",
+    "tests/unit/du11_production/test_native_prose_continuity.py",
+    "tests/unit/test_s7_operating_fact_semantics.py",
+    "tests/unit/test_shared_reading_cache_precheck.py",
+    "tests/unit/test_narrative_selection_architecture.py",
+    "tests/unit/test_reading_batch_version.py",
+    "tests/unit/du4_operating_states",
+    "tests/unit/du11_source_closure",
+    "tests/unit/du11_reference_readiness",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-w08n-20261024\\requested-basetemp",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\natural.xml"
+  ],
+  "exit_code": 0,
+  "junit": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "11",
+    "tests": "2313",
+    "time": "51.306",
+    "timestamp": "2026-10-24T10:00:28.753029+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "source_count": 373,
+  "source_digest_before": "ca83379be0af045c6e3e2c4cc396314510bc2ceed278a4570480059c87396081",
+  "source_digest_after": "ca83379be0af045c6e3e2c4cc396314510bc2ceed278a4570480059c87396081",
+  "source_stable": true,
+  "temp_cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-w08n-20261024",
+    "created_for_this_run": true,
+    "existed_after": false,
+    "entries_removed_count": 1
+  },
+  "external_calls": 0,
+  "paid_model_calls": 0,
+  "original_downloads": 0
+}

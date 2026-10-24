@@ -1,0 +1,752 @@
+{
+  "schema_version": "w08-frozen-target-map/1",
+  "scope": "Frozen V5 only; exact containment is an observation, never complete target coverage or a new quality score.",
+  "input_sha256": {
+    "annual14\\review.json": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+    "annual14-v5\\selection.json": "5602c4fe205128459af3079972e05f4a024603534c83c001c40e099ad4b5e9df",
+    "annual14-v5\\model-view.json": "681be348c3886de2aeb5325135b0967913fbe2c0d3b4c060439efda4111c62b7",
+    "annual14\\audit-original-eight-pages.json": "3a08eb00f8ca3909248effd5b6ca8b1e701401ec7dc9553fc0139335f8d9eb6f"
+  },
+  "source_ref": {
+    "byte_size": 1608226,
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+  },
+  "targets": [
+    {
+      "target_id": "ST-A01",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=11&page_text_chars=497-624",
+          "pdf_page": 11,
+          "quote_sha256": "1f4def11e22c620044ee3f8bc13afbad7adc94d8126d67582a5412edf1b5a478",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=119&page_text_chars=99-240",
+          "pdf_page": 119,
+          "quote_sha256": "170c8972fb74e4433f48f74257315b90f9d6d07af431b89330bfb4d8bef61bc3",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=13&page_text_chars=1171-1361",
+          "pdf_page": 13,
+          "quote_sha256": "6d5728e9f5fbd5c4af617dcba9bff4becde71336eb299f431d8cb1fe1c527708",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+              "locator": "loc:v1/page:13/paragraph:21",
+              "task_keys": [
+                "t10",
+                "t24"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99",
+              "locator": "loc:v1/page:13/paragraph:23/chars:1211-1300",
+              "task_keys": [
+                "t24"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=38-422",
+          "pdf_page": 14,
+          "quote_sha256": "737446803701efd19a91446ffc363f7d44ea2022276b99335b7f8a0491beb51e",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+              "locator": "loc:v1/page:14/paragraph:3/chars:99-301",
+              "task_keys": [
+                "t25"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+        "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+      ],
+      "observed_task_keys": [
+        "t10",
+        "t24",
+        "t25"
+      ],
+      "exact_target_budget_deferrals": [
+        {
+          "code": "budget_full",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ecba8b045d29fcf35cb431cd1c601b1e7d93e44c8a5da7702e79adac692ea149",
+          "locator": "loc:v1/page:11/paragraph:13/chars:497-624",
+          "used": 96,
+          "requested": 2,
+          "limit": 96,
+          "closure_size": 3,
+          "source_quote_sha256": "1f4def11e22c620044ee3f8bc13afbad7adc94d8126d67582a5412edf1b5a478"
+        }
+      ],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A02",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=183&page_text_chars=74-367",
+          "pdf_page": 183,
+          "quote_sha256": "01e9ff75c3f8ea90f85b6c87477d9b641c04943bade776302fc85d9b665eeac9",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=13&page_text_chars=894-1009",
+          "pdf_page": 13,
+          "quote_sha256": "b9b71cb829dd4ba93fdbf2b642e255e31f0f8569470336a740085cde53b857be",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=13&page_text_chars=1010-1087",
+          "pdf_page": 13,
+          "quote_sha256": "e2922ad68a2a5b87b036e7f045df341d35bc003e08659f9a7acf7257cdf5f2b1",
+          "selected_exact_containment_matches": []
+        }
+      ],
+      "selected_span_ids": [],
+      "observed_task_keys": [],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A03",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=11&page_text_chars=1090-1238",
+          "pdf_page": 11,
+          "quote_sha256": "8a82e9b2d1f71139b15a47f3a326c383902ad1694ff256ca6d69d99f9d3a1aa4",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=16&page_text_chars=591-641",
+          "pdf_page": 16,
+          "quote_sha256": "7bf83f04685364d56256d313451562458aca471ef48162f6510d2284bb5c766c",
+          "selected_exact_containment_matches": []
+        }
+      ],
+      "selected_span_ids": [],
+      "observed_task_keys": [],
+      "exact_target_budget_deferrals": [
+        {
+          "code": "budget_full",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:00c69d332396897bbc98815fad7d46db601339a0124c9a3dde44a86a8e0d1bfb",
+          "locator": "loc:v1/page:11/paragraph:22/chars:1023-1238",
+          "used": 96,
+          "requested": 2,
+          "limit": 96,
+          "closure_size": 3,
+          "source_quote_sha256": "8027c0446e08e8fc0d092056b7549458233e20be8229c6af70bf89adc5cd9d9a"
+        }
+      ],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A04",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=11&page_text_chars=1041-1090",
+          "pdf_page": 11,
+          "quote_sha256": "e10f14b23ada3a4daa2e99ef6a203e62125c24bba2b9ea00112a7441bc1de66e",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=184&page_text_chars=547-673",
+          "pdf_page": 184,
+          "quote_sha256": "4932a08763e15945c34a5be26fb2210cd09fb3f0b0a42465f0724142f268a4aa",
+          "selected_exact_containment_matches": []
+        }
+      ],
+      "selected_span_ids": [],
+      "observed_task_keys": [],
+      "exact_target_budget_deferrals": [
+        {
+          "code": "budget_full",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:00c69d332396897bbc98815fad7d46db601339a0124c9a3dde44a86a8e0d1bfb",
+          "locator": "loc:v1/page:11/paragraph:22/chars:1023-1238",
+          "used": 96,
+          "requested": 2,
+          "limit": 96,
+          "closure_size": 3,
+          "source_quote_sha256": "8027c0446e08e8fc0d092056b7549458233e20be8229c6af70bf89adc5cd9d9a"
+        }
+      ],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A05",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=13&page_text_chars=1171-1210",
+          "pdf_page": 13,
+          "quote_sha256": "1c3cd0da4198c4062c171cd3c6f3db53da95e3772c3f3cfc600de3dfa935d716",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+              "locator": "loc:v1/page:13/paragraph:21",
+              "task_keys": [
+                "t10",
+                "t24"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=38-301",
+          "pdf_page": 14,
+          "quote_sha256": "98b412ed74ddce379fc58dcfd7cd5ea5f03954d6a121f01478d726dfa6dc895e",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+              "locator": "loc:v1/page:14/paragraph:3/chars:99-301",
+              "task_keys": [
+                "t25"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=398-482",
+          "pdf_page": 14,
+          "quote_sha256": "4e62d0e30d1ec3fb3cf954df2e7f80b110759c54e2e25c4ddc31687ae899fafa",
+          "selected_exact_containment_matches": []
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+      ],
+      "observed_task_keys": [
+        "t10",
+        "t24",
+        "t25"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A06",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=154-301",
+          "pdf_page": 14,
+          "quote_sha256": "2fcfc814cd59aebdddcade51fce4da4066d1999b2713720ee6085b0559c6c975",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+              "locator": "loc:v1/page:14/paragraph:3/chars:99-301",
+              "task_keys": [
+                "t25"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+      ],
+      "observed_task_keys": [
+        "t25"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A07",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=13&page_text_chars=1213-1361",
+          "pdf_page": 13,
+          "quote_sha256": "413c0f85fde49b16895335dc609e194b3137d30a209f7366cea5a13589c660f5",
+          "selected_exact_containment_matches": []
+        }
+      ],
+      "selected_span_ids": [],
+      "observed_task_keys": [],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A08",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=482-554",
+          "pdf_page": 14,
+          "quote_sha256": "30047642594808986d6dfa68f12f24ed935302b51888d50e78a70a0bdc88c97f",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381",
+              "locator": "loc:v1/page:14/paragraph:14",
+              "task_keys": [
+                "t11"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+      ],
+      "observed_task_keys": [
+        "t11"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A09",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=12&page_text_chars=1339-1478",
+          "pdf_page": 12,
+          "quote_sha256": "131de42f13827a679b012a0561ec0bb589e190b178f80a0d886b1dac7ef2ac89",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b",
+              "locator": "loc:v1/page:12/paragraph:26/chars:1339-1425",
+              "task_keys": [
+                "t20"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98",
+              "locator": "loc:v1/page:12/paragraph:29/chars:1425-1450",
+              "task_keys": [
+                "t21"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0",
+              "locator": "loc:v1/page:12/paragraph:30/chars:1450-1478",
+              "task_keys": [
+                "t22"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=560-612",
+          "pdf_page": 14,
+          "quote_sha256": "d0fa7f46d8dcb2540a52807d71e3e3a3b8f97323c2bf55dbf8632446fe8bef8c",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d",
+              "locator": "loc:v1/page:14/paragraph:16/chars:583-612",
+              "task_keys": [
+                "t28"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98",
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0",
+        "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b",
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      ],
+      "observed_task_keys": [
+        "t20",
+        "t21",
+        "t22",
+        "t28"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A10",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=613-742",
+          "pdf_page": 14,
+          "quote_sha256": "c588459be49400c75b3bd00271b4f763e7ae198036cd80b9c1dcc067c045aa50",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+              "locator": "loc:v1/page:14/paragraph:17",
+              "task_keys": [
+                "t12",
+                "t13",
+                "t29"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+              "locator": "loc:v1/page:14/paragraph:19",
+              "task_keys": [
+                "t13"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=16&page_text_chars=803-893",
+          "pdf_page": 16,
+          "quote_sha256": "8a7c02394e05201704153b345a6f579027ed72c50dbfa2a6991a346527f5bc49",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24",
+              "locator": "loc:v1/page:16/paragraph:22/chars:666-974",
+              "task_keys": [
+                "t33"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+      ],
+      "observed_task_keys": [
+        "t12",
+        "t13",
+        "t29",
+        "t33"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A11",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=877-997",
+          "pdf_page": 14,
+          "quote_sha256": "70bc4434550840f28edbe031b0e15639930d2bc7b2c1976e3bbab2ecd91056ab",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+              "locator": "loc:v1/page:14/paragraph:24",
+              "task_keys": [
+                "t14",
+                "t17",
+                "t30"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b",
+              "locator": "loc:v1/page:14/paragraph:26/chars:919-997",
+              "task_keys": [
+                "t30"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=1109-1167",
+          "pdf_page": 14,
+          "quote_sha256": "ac6d0582a8297b56c2206f0f1bdd6c40902f9c3e2c4ac33178ce4858c9cba1e7",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f",
+              "locator": "loc:v1/page:14/paragraph:31",
+              "task_keys": [
+                "t17"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b",
+        "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+      ],
+      "observed_task_keys": [
+        "t14",
+        "t17",
+        "t30"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A12",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=14&page_text_chars=1168-1413",
+          "pdf_page": 14,
+          "quote_sha256": "33840dbd41e204a8f05a61b9f99e6defb9977598f1f5e6660799caca52ff4cc4",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+              "locator": "loc:v1/page:14/paragraph:32/chars:1168-1257",
+              "task_keys": [
+                "t4",
+                "t31"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87",
+              "locator": "loc:v1/page:14/paragraph:34",
+              "task_keys": [
+                "t4",
+                "t31"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+      ],
+      "observed_task_keys": [
+        "t31",
+        "t4"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A13",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=183&page_text_chars=442-758",
+          "pdf_page": 183,
+          "quote_sha256": "3b373a2f9d3319e4001d3a08856b54b03959d073b135a7bade5b229147442f9e",
+          "selected_exact_containment_matches": []
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=184&page_text_chars=233-546",
+          "pdf_page": 184,
+          "quote_sha256": "18043cec29717a6fef63c0e3f6a403dc9c281f14b5e769b7ca6363a06ee265d7",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c0236306f5f5adf45d6b61edbf8b2dca64b45b71b87793fd09991d5863a351a2",
+              "locator": "loc:v1/page:184/paragraph:12",
+              "task_keys": [
+                "t16"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=120&page_text_chars=239-288",
+          "pdf_page": 120,
+          "quote_sha256": "859910266b84be225b90c77831a896c61991f5139990a02dcc10a66ca8fd240a",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e",
+              "locator": "loc:v1/page:120/paragraph:5/chars:239-445",
+              "task_keys": [
+                "t52"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e",
+        "urn:company-wiki:evidence-span:sha256:c0236306f5f5adf45d6b61edbf8b2dca64b45b71b87793fd09991d5863a351a2"
+      ],
+      "observed_task_keys": [
+        "t16",
+        "t52"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    },
+    {
+      "target_id": "ST-A14",
+      "source_supported_by_prior_independent_review": true,
+      "source_fragments": [
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=17&page_text_chars=527-600",
+          "pdf_page": 17,
+          "quote_sha256": "d23bb8e2e0fd0f178b39c64fc720423a0f2eb9ad14d665e3d4eeeb1fe00fa01e",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb",
+              "locator": "loc:v1/page:17/paragraph:13/chars:500-600",
+              "task_keys": [
+                "t35"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=31&page_text_chars=276-516",
+          "pdf_page": 31,
+          "quote_sha256": "a59ca77df67f216e3d1119ed34141417ba71dcfea63b08748b25602ab2cad9a0",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+              "locator": "loc:v1/page:31/paragraph:8",
+              "task_keys": [
+                "t40"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8",
+              "locator": "loc:v1/page:31/paragraph:9/chars:296-516",
+              "task_keys": [
+                "t40"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=31&page_text_chars=803-1078",
+          "pdf_page": 31,
+          "quote_sha256": "67878f5c6b3e733c983fa0cd1350a05dac7a4958057b5107f0aad4087cca7bdc",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+              "locator": "loc:v1/page:31/paragraph:18",
+              "task_keys": [
+                "t42",
+                "t43"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af",
+              "locator": "loc:v1/page:31/paragraph:19/chars:823-944",
+              "task_keys": [
+                "t42"
+              ]
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f",
+              "locator": "loc:v1/page:31/paragraph:21/chars:945-1078",
+              "task_keys": [
+                "t43"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=32&page_text_chars=534-629",
+          "pdf_page": 32,
+          "quote_sha256": "92fac3c04a322253c4dbeb247141b895a20906615059475fab4c89d32f31cb97",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4",
+              "locator": "loc:v1/page:32/paragraph:12/chars:543-629",
+              "task_keys": [
+                "t46"
+              ]
+            }
+          ]
+        },
+        {
+          "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_page=32&page_text_chars=466-533",
+          "pdf_page": 32,
+          "quote_sha256": "a461a5156455d7f4df1c58cde55b9ebcf9ef2e012091233929e2ee0f5c61e5e6",
+          "selected_exact_containment_matches": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1",
+              "locator": "loc:v1/page:32/paragraph:8/chars:380-533",
+              "task_keys": [
+                "t45"
+              ]
+            }
+          ]
+        }
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+        "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+        "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af",
+        "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4",
+        "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb",
+        "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1",
+        "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8",
+        "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f"
+      ],
+      "observed_task_keys": [
+        "t35",
+        "t40",
+        "t42",
+        "t43",
+        "t45",
+        "t46"
+      ],
+      "exact_target_budget_deferrals": [],
+      "candidate_and_admission": "not_observed_for_this_target_in_bounded_frozen_trace",
+      "request_sent_and_response_used": "not_executed",
+      "quality_status": "not_regraded"
+    }
+  ],
+  "source_offset_crosschecks": {
+    "count": 19,
+    "all_byte_text_equal": true
+  },
+  "bounded_public_trace": {
+    "admission": {
+      "count": 2713,
+      "limited": true
+    },
+    "eligible_packages": {
+      "count": 313,
+      "limited": true
+    },
+    "withheld": {
+      "count": 62,
+      "limited": true
+    },
+    "selected": {
+      "count": 166,
+      "limited": true
+    }
+  },
+  "selected_spans": 96,
+  "compiled_tasks": 55,
+  "spans_shorter_than_40_chars": 52,
+  "raw_reparse": 0,
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0
+}

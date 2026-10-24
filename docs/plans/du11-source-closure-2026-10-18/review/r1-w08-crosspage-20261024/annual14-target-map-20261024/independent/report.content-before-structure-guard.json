@@ -1,0 +1,100 @@
+{
+  "reviewer": "/root/w08_reporting_rule_review",
+  "observed_at": "2026-10-24T09:01:30.898385+00:00",
+  "head": "bc184b57a76d63f077f7078dd78fb558848d9da7",
+  "binding": "Uncommitted reviewed source bytes are authoritative; HEAD alone does not bind this review.",
+  "verdict": "PASS",
+  "scope": "Financial reporting-object treatment versus real customer operating events in purpose/fact classification; finite-slot public selection and pinned legacy behavior covered by named tests.",
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "5b7cd257dddd64481f1948c407c135c1e851ae72fce4a7ae127558fb97e4fed6",
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": "3900b406cd168e5538fa6c6c4fcbe2006e2a04f82116399e0d8d9150d3b97c29"
+  },
+  "independent_test_sha256": "35164fb8a6e9b5c3fb68c190e2c50c1b160001a223142d126ff6f71d94f30811",
+  "actual_imported_modules": {
+    "company_wiki.source_catalog.narrative_reporting_rules": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reporting_rules.py",
+    "company_wiki.source_catalog.narrative_source_purpose": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_purpose.py",
+    "company_wiki.source_catalog.narrative_business_meaning": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_meaning.py"
+  },
+  "test_command": "PYTHONPATH=src python -m pytest docs/plans/du11-source-closure-2026-10-18/review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/test_reporting_rule_independent.py tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py tests/unit/document_understanding_selection/test_reading_table_admission.py tests/unit/test_n6_candidate_recall.py tests/unit/test_w04_narrative_semantics.py -q -p no:cacheprovider --override-ini addopts=''",
+  "test_result": {
+    "passed": 314,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 4.19,
+    "components": {
+      "independent_semantic_boundaries": 21,
+      "author_reporting_rule_boundaries_and_public_selection": 31,
+      "preexisting_source_purpose": 107,
+      "legacy_native_selector_compatibility": 155
+    }
+  },
+  "review_iterations": [
+    {
+      "stage": "initial range erasure",
+      "independent_passed": 5,
+      "independent_failed": 8,
+      "receipt": "report.initial.json"
+    },
+    {
+      "stage": "full clause event/structure exception",
+      "independent_passed": 15,
+      "independent_failed": 2
+    },
+    {
+      "stage": "question-prefix scope",
+      "additional_probe_failures": 3,
+      "observation": "Postnominal questions and inherited whether enumeration still admitted."
+    },
+    {
+      "stage": "inherited question with observation reset",
+      "independent_passed": 20,
+      "independent_failed": 1
+    },
+    {
+      "stage": "contrast assertion reset and explicit question retained",
+      "independent_passed": 21,
+      "independent_failed": 0
+    }
+  ],
+  "findings": [
+    {
+      "id": "IR-01",
+      "root": "Matched-span erasure swallowed a genuine embedded customer launch/delivery.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "IR-02",
+      "root": "Dependent generic risk-reduction purpose wrongly supplied a second operating assertion.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "IR-03",
+      "root": "Question criteria and independent observed events required scoped distinction including postnominal questions, comma-list inheritance and contrast assertion reset.",
+      "status": "CLOSED"
+    }
+  ],
+  "scope_limits": [
+    "No paid model, download, production raw write, external API or full annual14 content rerun.",
+    "Synthetic English/simplified/traditional controls are not a complete multilingual or financial-sector corpus benchmark.",
+    "Formal-summary quality, actual annual14 content visibility, cache recovery and final publication remain ROOT responsibility.",
+    "ROOT earlier wider-suite 2297-pass result was a different source version and is not used to claim final-byte wider-suite passage."
+  ],
+  "cleanup": {
+    "owned_scratch_removed": [
+      ".tmp-w08-policy-review-cases",
+      ".tmp-w08-policy-review-extra",
+      ".tmp-w08-policy-review-final"
+    ],
+    "pending": false
+  },
+  "addenda": [
+    {
+      "path": "report.cache-addendum.json",
+      "sha256": "3166a8f882639b3ad1f52076263fdb25f461613b9efd81c3ec7911ed01f4a7ed",
+      "verdict": "PASS",
+      "reason": "Additional decision inventory rule-module byte-hash dependency closure."
+    }
+  ]
+}

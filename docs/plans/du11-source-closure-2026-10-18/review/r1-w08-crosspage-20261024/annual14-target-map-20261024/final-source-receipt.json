@@ -1,0 +1,54 @@
+{
+  "schema_version": "w08-final-source-content-equivalence/1",
+  "argv": [
+    "--scope",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-02/coordinator-effective-scope-budget-20261023.json",
+    "--source-index",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-01/phase_b/research/source_refs_index.json",
+    "--oracle",
+    "C:/Users/郑曾波/Projects/company-wiki/.planning/r1-w08-real-20261023/oracle.json",
+    "--output",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14-target-map-20261024\\final-source-selection.json",
+    "--code-root",
+    "C:/Users/郑曾波/Projects/company-wiki"
+  ],
+  "source_stable": true,
+  "source_count": 373,
+  "source_digest": "0c7fd449a9ac720110435b55cf5e7db9ac5e537083130f2cd86ebcbe537b1bee",
+  "changed_source_sha256": {
+    "src/company_wiki/document_understanding/decision_inventory.py": "192a4196ee3a3639e3c92936686945c1dcb51c7e757f86dd93a73eac88a3c1d1",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf"
+  },
+  "final_selection_sha256": "590a29316461af4be056b3988313cb8557e410758f94dfa30f10ad546488c289",
+  "prior_selection_sha256": "8da5b6cc809c71f169f4095c0ae15be0957e9f233d3c832abaab60b9ea02aa46",
+  "prior_content_review_sha256": "3281ce00b65315bdce3827ffd00f744479da73c3ee6597cbded297044f480791",
+  "source_and_task_equalities": {
+    "source_ref": true,
+    "selected_spans": true,
+    "selected_evidence": true,
+    "task_local_groups": true,
+    "compiled_tasks": true
+  },
+  "content_review_reusable": true,
+  "compiled_task_count": 55,
+  "model_binding_sha256": "9841c76f36392ecda280baca81333894310a5da1fe5e9d3d0c3590ee067689bf",
+  "metrics": {
+    "physical_pages": 249,
+    "candidate_count": 1526,
+    "selected_count": 96,
+    "selected_chars": 7689,
+    "work_budget": {
+      "used": 8845814,
+      "limit": 16000000,
+      "exhausted": false,
+      "same_instance_for_parse_and_select": true
+    },
+    "checkpoint_pass": true
+  },
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "protected_unchanged": true
+}

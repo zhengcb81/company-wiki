@@ -167,7 +167,7 @@ def _business_fact(text: str) -> OperatingFact:
             reasons.append("specific_business_event")
         if _MECHANISM.search(clause):
             reasons.append("operating_mechanism")
-        if _STRUCTURE.search(clause) or _component_structure(clause):
+        if describes_business_structure(clause):
             reasons.append("business_structure")
         if _CONSTRAINT.search(clause):
             reasons.append("business_risk_or_constraint")
@@ -236,13 +236,43 @@ _SOURCE_DIRECT_EVENT = re.compile(_EVENT.pattern +
     r"|投产|量产|交付|客户认证|客户验证|重复订单|收购|并购|招聘|聘用|"
     r"租赁.{0,25}(?:新工厂|新产线)|"
     r"\b(?:delivered|repeat orders?|acquired|hired|customer certification)\b", re.I)
+_ASSERTION_BOUNDARY = re.compile(r"[,，。；;!?]|(?<=[.])\s+")
+_EVENT_QUESTION = re.compile(r"是否|能否|有无|有沒有|有没有|\b(?:whether|if)\b", re.I)
+_POST_EVENT_QUESTION = re.compile(
+    r"^\s*(?:的?(?:进度|情况|工作|结果|时间|计划|能力))?(?:是否|能否|有无)")
+_OBSERVED_EVENT = re.compile(r"已经|已|本期|本年|报告期内|報告期內|"
+    r"\b(?:actually|has|have|had|was|were)\b", re.I)
+_CONTRAST_ASSERTION = re.compile(r"^\s*(?:but\b|however\b|nevertheless\b|yet\b|但是|但|然而|不过)", re.I)
 
 
 def concrete_operating_event(clause: str) -> bool:
-    """One bounded source clause has an actual event and operating object."""
-    return bool(_SOURCE_EVENT_OBJECT.search(clause) and _SOURCE_DIRECT_EVENT.search(clause))
+    """An event is asserted, rather than asked about in a reporting criterion.
+
+    A question can precede or follow its event and can govern an enumerated
+    list across commas. An explicit observation in the next clause starts a
+    new assertion; a question about another object after a real launch does
+    not erase the launch. Source text is never removed or rewritten.
+    """
+    if not _SOURCE_EVENT_OBJECT.search(clause):
+        return False
+    inherited_question = False
+    for assertion in _ASSERTION_BOUNDARY.split(clause):
+        for event in _SOURCE_DIRECT_EVENT.finditer(assertion):
+            prefix, suffix = assertion[:event.start()], assertion[event.end():]
+            questioned = bool(_EVENT_QUESTION.search(prefix) or _POST_EVENT_QUESTION.search(suffix))
+            if not questioned and (not inherited_question or _OBSERVED_EVENT.search(prefix)
+                                   or _CONTRAST_ASSERTION.search(prefix)):
+                return True
+        inherited_question = inherited_question or bool(_EVENT_QUESTION.search(assertion))
+    return False
 
 
 def describes_business(clause: str) -> bool:
     """Retain independently meaningful descriptions, not only dynamic events."""
     return _business_fact(clause).eligible
+
+
+def describes_business_structure(clause: str) -> bool:
+    """An explicit product use, channel or composition, not a generic benefit."""
+    return bool(_OBJECT.search(clause)
+                and (_STRUCTURE.search(clause) or _component_structure(clause)))

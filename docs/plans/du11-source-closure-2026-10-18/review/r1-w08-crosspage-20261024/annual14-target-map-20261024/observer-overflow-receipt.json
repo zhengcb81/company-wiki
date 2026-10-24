@@ -1,0 +1,10 @@
+{
+  "status": "OBSERVER_OVERFLOW_SELECTION_VALID_TRACE_NOT_ACCEPTED",
+  "selection_sha256": "7a4ed97021f2d576d0495a53614eb52052be3e8594aa4af23c23f9e5c3a6b974",
+  "observed_trace_bytes": 562377,
+  "trace_limit_bytes": 524288,
+  "selected_count": 96,
+  "selected_chars": 7689,
+  "same_business_selection_as_final": true,
+  "recovery": "Removed JSON whitespace only; retraced once at unchanged bound. No model/download/raw copy."
+}

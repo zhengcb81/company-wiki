@@ -1,0 +1,66 @@
+{
+  "reviewer": "/root/w08_reporting_rule_review",
+  "observed_at": "2026-10-24T09:11:24.056652+00:00",
+  "verdict": "PASS",
+  "scope": "One-line registration of reporting-rule source bytes in existing decision cache dependencies.",
+  "source_and_author_test_sha256": {
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "5b7cd257dddd64481f1948c407c135c1e851ae72fce4a7ae127558fb97e4fed6",
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": "3900b406cd168e5538fa6c6c4fcbe2006e2a04f82116399e0d8d9150d3b97c29",
+    "src/company_wiki/document_understanding/decision_inventory.py": "192a4196ee3a3639e3c92936686945c1dcb51c7e757f86dd93a73eac88a3c1d1",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "0863bbd5178d39ab52387189eff2bd5b39ebe046f6690e84cc964a8542af1342"
+  },
+  "independent_test_sha256": "998841567e39558f41346f85d8c050752991cd1f6d8995a4334408df7c868d9d",
+  "actual_imports": {
+    "inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+    "rules": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reporting_rules.py"
+  },
+  "original_content_review_files_unchanged": true,
+  "test_command": "PYTHONPATH=src python -m pytest docs/plans/du11-source-closure-2026-10-18/review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/test_reporting_rules_cache_addendum.py tests/unit/document_understanding_selection/test_reading_decision_inventory.py -q -p no:cacheprovider --override-ini addopts='' --basetemp=.tmp-w08-policy-review-cache",
+  "final_execution": {
+    "sandbox": false,
+    "passed": 34,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 6.64,
+    "exit_code": 0,
+    "components": {
+      "independent_counterfactuals": 4,
+      "inventory_regressions": 30
+    }
+  },
+  "failed_execution_history": [
+    {
+      "sandbox": true,
+      "passed": 29,
+      "errors": 5,
+      "duration_seconds": 9.65,
+      "reason": "Default sandbox TEMP cannot create pytest numbered fixture directory."
+    },
+    {
+      "sandbox": true,
+      "passed": 29,
+      "errors": 5,
+      "duration_seconds": 9.25,
+      "reason": "Repository conftest relocated explicit 63-character basetemp into unwritable/overlong sandbox TEMP."
+    }
+  ],
+  "counterfactuals": [
+    "In-memory prior _versions removes exactly the added rule-module registration; no product file changed.",
+    "Patch only Path.read_bytes for actual rules source: old version closure stays equal; current business_algorithms changes while every other version field stays equal, PDF and non-PDF.",
+    "Complete real normalized-HTML/understand_units manifest stays same under omitted registration; fixed closure becomes changed; restoration returns same."
+  ],
+  "permission_gate_effect": "None: cache identity dependency registration only; no manual authorization, review receipt, canary or resource-limit modification.",
+  "limits": [
+    "The original 314 content/legacy tests were not rerun after this additional dependency-only registration.",
+    "ROOT owns final wider natural suite, deployment, real content freeze and cache-restore end-to-end acceptance."
+  ],
+  "cleanup": {
+    "requested_scratch_present": false,
+    "effective_relocated_directory": "C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261024-091003-8923eb48",
+    "pytest_cleanup_receipt_removed": true,
+    "owned_sandbox_relocated_directory_observed_absent": true
+  }
+}

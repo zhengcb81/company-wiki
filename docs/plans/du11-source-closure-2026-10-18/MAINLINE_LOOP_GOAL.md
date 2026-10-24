@@ -47,3 +47,7 @@
 W08 DTO/cache根修`baa77ab6`与清洁Phase C测试修复`aade6b93`已正常推送；精确CI [40076059766](https://github.com/zhengcb81/company-wiki/actions/runs/40076059766) 对应 HEAD `aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`，completed/success。全量pre-push 8126 passed/24既有skipped，146项契约smoke、170项聚焦/集成E2E、Ruff及全源mypy均通过。测试根因和Windows沙箱loopback限制见CURRENT_STATUS；没有调用真实模型或付费API。
 
 用户确认W11-CWP-SOURCES A/B/C均已完成并推送，施工卡关闭。真实来源内容验收仍按独立业务证据状态处理。整体目标继续ACTIVE：先处理annual14的5项partial和2项missing，再进入正式摘要/cache恢复、实际采用矩阵与W12四审。全量pre-push约6分30秒的成本已记录，后续按计划评估测试分层，不跳过现有门禁或把未运行测试记作通过。
+
+## 2026-10-24 当前追加：报告规则/断言修复及完整14目标链
+
+本轮共用source-purpose工程314项独审PASS，自然2302P/11skip，Ruff/mypy373通过；cache新规则字节依赖另58P。真实年报1526候选、96/7689字符、8845814/16M、55任务，独立内容仍7P/5partial/2missing，无净改善。上一V5不再是唯一最新内容记录，最新链接见CURRENT_STATUS。基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。 此次没有模型/下载/新许可或额度提高；原件、旧历史和预算账保留。

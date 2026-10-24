@@ -1,0 +1,1953 @@
+{
+  "schema_version": "w08-annual14-independent-content-review/1",
+  "created_at": "2026-10-24T09:06:30.453713+00:00",
+  "reviewer": "/root/w08_reporting_selection_content",
+  "verdict": "CONTENT_PARTIAL_UNCHANGED_7_PASS_5_PARTIAL_2_MISSING",
+  "scope": "Frozen 14-target source selection and per-task content visibility only; no summary/RF adoption signoff.",
+  "binding": {
+    "selection_sha256": "8da5b6cc809c71f169f4095c0ae15be0957e9f233d3c832abaab60b9ea02aa46",
+    "model_view_sha256": "a830a3a7e68568496fc5c2dca6dd8fe473c1ff74522eac94dd359db0c1243c39",
+    "replay_receipt_sha256": "171ac8bb2a0ea2ca91f4e3d0d3477274cb93036e631dd4d53b169a5a4f626b54",
+    "trace_sha256": "3efc8fd988b698f2e5c03fa738db03dc796722a5ed4d37f5ceb1a843194437bc",
+    "checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+    "original_eight_pages_sha256": "3a08eb00f8ca3909248effd5b6ca8b1e701401ec7dc9553fc0139335f8d9eb6f",
+    "source_ref": {
+      "byte_size": 1608226,
+      "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "producer_source_digest": "4268468c049311e84e908d22e8a941dc0e10b61d721fbee1593b4a824899be6d",
+    "producer_changed_source_sha256": {
+      "src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "5b7cd257dddd64481f1948c407c135c1e851ae72fce4a7ae127558fb97e4fed6",
+      "src\\company_wiki\\source_catalog\\narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+      "src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf"
+    }
+  },
+  "verification": {
+    "all_receipt_hashes_match": true,
+    "all_task_members_exist": true,
+    "all_eight_page_text_hashes_match": true,
+    "exact_selected_page_offset_matches": 19,
+    "unavailable_page_offsets_not_claimed_verified": true,
+    "all_96_selected_spans_and_55_task_member_sets_read": true
+  },
+  "counts": {
+    "partial": 5,
+    "missing": 2,
+    "pass": 7,
+    "targets": 14
+  },
+  "observed": {
+    "pages": 249,
+    "candidates": 1526,
+    "spans": 96,
+    "chars": 7689,
+    "tasks": 55,
+    "work_budget": {
+      "used": 8845814,
+      "limit": 16000000,
+      "exhausted": false,
+      "same_instance_for_parse_and_select": true
+    },
+    "trace_last_callback_candidate_count": 470,
+    "trace_last_callback_count_is_total": false
+  },
+  "targets": [
+    {
+      "target_id": "ST-A01",
+      "status": "partial",
+      "original_gold": {
+        "proposition": "报告业务分为WuXi Chemistry、WuXi Testing、WuXi Biology、Others；Chemistry从发现研究至商业化生产，覆盖小分子、寡核苷酸、多肽及相关化学偶联物和制剂。TIDES属于Chemistry叙述内业务，不能与Chemistry全额再相加。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团持续经营 > Chemistry > 小分子R、小分子D&M、TIDES",
+        "stage": "集团持续经营 > Chemistry > 小分子R、小分子D&M、TIDES",
+        "period": "FY2025",
+        "unit": "业务范围",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=11,119"
+      },
+      "task_keys": [
+        "t21",
+        "t10",
+        "t13",
+        "t18"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+        "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+        "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+      ],
+      "local_support": "已选主要业务概览及 Chemistry、Testing、Biology 的具名业务/收入片段。",
+      "remaining_gap_or_scope": "完整四类业务划分（含 Others）未选；Chemistry 发现至商业化、寡核苷酸/多肽/偶联物/制剂完整范围未选。TIDES 子 task 无 Chemistry 父范围，不能借另一 task 的总额补出父子关系。",
+      "tasks": [
+        {
+          "task_key": "t21",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+            "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+              "locator": "loc:v1/page:11/paragraph:4",
+              "quote": "（一）\n主要业务"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96",
+              "locator": "loc:v1/page:11/paragraph:6/chars:128-220",
+              "quote": "公司通过独特的“CRDMO”业务模式，不断降低研发门槛，助力客\n户提升研发效率，为患者带来更多突破性的治疗方案，服务范围涵盖化学药研发和生产、生物学\n研究、临床前测试和临床研发等领域。"
+            }
+          ]
+        },
+        {
+          "task_key": "t10",
+          "kind": "paragraph_event",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+          ],
+          "context_span_ids": [],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+              "locator": "loc:v1/page:13/paragraph:21",
+              "quote": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+            }
+          ]
+        },
+        {
+          "task_key": "t13",
+          "kind": "paragraph_event",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+            "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+              "locator": "loc:v1/page:14/paragraph:17",
+              "quote": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+              "locator": "loc:v1/page:14/paragraph:18",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+              "locator": "loc:v1/page:14/paragraph:19",
+              "quote": "-\n药物安全性评价业务收入同比增长4.6%，持续保持亚太行业领先地位。"
+            }
+          ]
+        },
+        {
+          "task_key": "t18",
+          "kind": "background",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+            "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+              "locator": "loc:v1/page:14/paragraph:24",
+              "quote": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+              "locator": "loc:v1/page:14/paragraph:25",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f",
+              "locator": "loc:v1/page:14/paragraph:31",
+              "quote": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A02",
+      "status": "partial",
+      "original_gold": {
+        "proposition": "FY2025营业收入45,456,165,774.18元；持续经营43,420,823,738.83元，终止经营2,035,342,035.35元。持续经营同比21.40%，合计同比15.84%；终止经营对比期重述。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团 > 持续/终止经营",
+        "stage": "集团 > 持续/终止经营",
+        "period": "FY2025",
+        "unit": "CNY元；%",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=7,13,183"
+      },
+      "task_keys": [
+        "t36",
+        "t19"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+        "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0",
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640",
+        "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+      ],
+      "local_support": "t36 的成本解释直接提到收入增速15.84%；t19 仅有一般处置组政策的一部分。",
+      "remaining_gap_or_scope": "无实际合计/持续/终止经营收入精确值、持续经营21.40%及本期处置导致对比期间重述的实际注释。一般处置规则不能充当本期处置事实。",
+      "tasks": [
+        {
+          "task_key": "t36",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+            "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+              "locator": "loc:v1/page:16/paragraph:31",
+              "quote": "(4). 成本分析表"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0",
+              "locator": "loc:v1/page:17/paragraph:5/chars:274-404",
+              "quote": "成本分析其他情况说明\n营业成本包括直接人工、原材料成本及间接费用。报告期内，营业成本同比增长3.64%，增\n速低于收入增速15.84%，主要受益于公司独特的CRDMO 一体化业务模式带来的临床后期和商业\n化项目占比增加，进一步提升了产能利用率、人员及运营效率。"
+            }
+          ]
+        },
+        {
+          "task_key": "t19",
+          "kind": "background",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640",
+            "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+              "locator": "loc:v1/page:83/paragraph:2",
+              "quote": "第八节\n财务报告"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640",
+              "locator": "loc:v1/page:111/paragraph:19",
+              "quote": "19、持有待售的非流动资产或处置组"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9",
+              "locator": "loc:v1/page:112/paragraph:11",
+              "quote": "-\n该组成部分是拟对一项独立的主要业务或一个单独的主要经营地区进行处置的一项相关\n联计划的一部分；"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A03",
+      "status": "missing",
+      "original_gold": {
+        "proposition": "FY2025持续经营客户地区收入：美国312.5亿元、欧洲48.2亿元、中国54.7亿元、其他18.8亿元；同比+34.3%、-4.0%、-3.5%、+4.1%。地区统计按客户母公司所在地，不能改成生产基地所在地。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团持续经营 > 客户地域",
+        "stage": "集团持续经营 > 客户地域",
+        "period": "FY2025",
+        "unit": "CNY亿元；%",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=11,16"
+      },
+      "task_keys": [],
+      "selected_span_ids": [],
+      "local_support": "未找到目标客户地区收入金额/增长及客户母公司所在地统计定义的已选支持。",
+      "remaining_gap_or_scope": "t2 境内外毛利率不同和 t38/其他生产基地材料均不能替代客户地区收入，更不能补出客户母公司所在地定义。",
+      "tasks": [],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A04",
+      "status": "missing",
+      "original_gold": {
+        "proposition": "2025年末持续经营在手订单580.0亿元、同比+28.8%；附注精确RPO为5,800,478.75万元，其中4,220,706.46万元预计2026年度确认。两者为同一持续经营范围，不能将全额视为当年收入或新增订单流量。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团持续经营 > 已签未履行或未履行完RPO",
+        "stage": "集团持续经营 > 已签未履行或未履行完RPO",
+        "period": "2025-12-31存量；2026确认预计",
+        "unit": "CNY亿元/万元",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=11,184"
+      },
+      "task_keys": [],
+      "selected_span_ids": [],
+      "local_support": "未选持续经营集团580.0亿元订单、28.8%、精确RPO及2026确认金额。",
+      "remaining_gap_or_scope": "TIDES订单20.2%是子业务增长，不能替代集团订单存量。一般履约义务政策不是本期RPO余额/确认计划。",
+      "tasks": [],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A05",
+      "status": "partial",
+      "original_gold": {
+        "proposition": "FY2025化学收入364.7亿元；小分子D&M收入199.2亿元、同比+11.4%；TIDES收入113.7亿元、同比+96.0%。两项为化学内部业务，不能把化学剩余额无依据命名为纯R收入。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "Chemistry > 小分子D&M/TIDES",
+        "stage": "Chemistry > 小分子D&M/TIDES",
+        "period": "FY2025",
+        "unit": "CNY亿元；%",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=13,14"
+      },
+      "task_keys": [
+        "t10",
+        "t27",
+        "t28"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+        "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+      ],
+      "local_support": "Chemistry364.7亿元/25.5%、D&M199.2亿元/11.4%、TIDES113.7亿元/96.0%均在具名业务片段中。",
+      "remaining_gap_or_scope": "各子 task 只有管理层讨论/主要经营情况等宽标题，没有 Chemistry 父业务范围或完整子项结构。不能跨 task 将三项并列数字自动解释为父子，亦不能把差额命名纯R。",
+      "tasks": [
+        {
+          "task_key": "t10",
+          "kind": "paragraph_event",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+          ],
+          "context_span_ids": [],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+              "locator": "loc:v1/page:13/paragraph:21",
+              "quote": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+            }
+          ]
+        },
+        {
+          "task_key": "t27",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+              "locator": "loc:v1/page:14/paragraph:3/chars:99-301",
+              "quote": "i.\n小分子CDMO 管线持续扩张。2025 年小分子D&M 业务收入199.2 亿元，同比增长\n11.4%。2025 年，小分子D&M 管线累计新增839 个分子。截至2025 年末，小分子\nD&M 管线总数达到3,452 个，包括83 个商业化项目, 91 个临床III 期项目，377 个\n临床II 期项目, 2,901 个临床前和临床I 期项目。商业化和临床III 期阶段项目全年\n增加22 个。"
+            }
+          ]
+        },
+        {
+          "task_key": "t28",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be",
+              "locator": "loc:v1/page:14/paragraph:12/chars:423-512",
+              "quote": "i.\n随着2024 年新增产能逐季度爬坡，2025 年TIDES 业务收入达到113.7 亿元，同比\n增长96.0%。截至2025 年末，TIDES 在手订单同比增长20.2%。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A06",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "FY2025小分子D&M新增839分子；年末管线3,452个：商业化83、III期91、II期377、临床前/I期2,901；商业化+III期项目全年增加22。新增分子流量与期末项目存量不同。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "Chemistry > 小分子D&M管线",
+        "stage": "Chemistry > 小分子D&M管线",
+        "period": "FY2025流量及2025-12-31存量",
+        "unit": "分子/项目个数",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=14"
+      },
+      "task_keys": [
+        "t27"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+      ],
+      "local_support": "同一片段保留2025新增839、年末3452以及83/91/377/2901和全年增加22；小分子D&M主体、年度流量与年末存量明确。",
+      "remaining_gap_or_scope": "内容可见性通过；尚未发生模型摘要或RF实际采用，不能据此证明模型不会混用分母。",
+      "tasks": [
+        {
+          "task_key": "t27",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+              "locator": "loc:v1/page:14/paragraph:3/chars:99-301",
+              "quote": "i.\n小分子CDMO 管线持续扩张。2025 年小分子D&M 业务收入199.2 亿元，同比增长\n11.4%。2025 年，小分子D&M 管线累计新增839 个分子。截至2025 年末，小分子\nD&M 管线总数达到3,452 个，包括83 个商业化项目, 91 个临床III 期项目，377 个\n临床II 期项目, 2,901 个临床前和临床I 期项目。商业化和临床III 期阶段项目全年\n增加22 个。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A07",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "FY2025药物发现R合成并交付超过42万个新化合物，R到D转化310个分子；两指标不是同一分母或收入。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "Chemistry > 小分子R到D引流",
+        "stage": "Chemistry > 小分子R到D引流",
+        "period": "FY2025",
+        "unit": "化合物/分子个数",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=13"
+      },
+      "task_keys": [
+        "t26"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+        "urn:company-wiki:evidence-span:sha256:9b7e1d5e1a8e019df316097745fd9853d4ee9ec0ff3cfef88310a9c3d2af4938",
+        "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99"
+      ],
+      "local_support": "同一R发现片段保留2025交付超过42万个新化合物、R到D转化310个分子，主体、单位及不同指标均完整。",
+      "remaining_gap_or_scope": "内容可见性通过；尚未审实际摘要/预测。",
+      "tasks": [
+        {
+          "task_key": "t26",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+            "urn:company-wiki:evidence-span:sha256:9b7e1d5e1a8e019df316097745fd9853d4ee9ec0ff3cfef88310a9c3d2af4938",
+            "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+            "urn:company-wiki:evidence-span:sha256:9b7e1d5e1a8e019df316097745fd9853d4ee9ec0ff3cfef88310a9c3d2af4938"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+              "locator": "loc:v1/page:13/paragraph:21",
+              "quote": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9b7e1d5e1a8e019df316097745fd9853d4ee9ec0ff3cfef88310a9c3d2af4938",
+              "locator": "loc:v1/page:13/paragraph:22",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99",
+              "locator": "loc:v1/page:13/paragraph:23/chars:1211-1300",
+              "quote": "-\n小分子药物发现（“R”，Research）业务为下游持续引流。2025 年，公司为客户成功合成\n并交付超过42 万个新化合物。同时，2025 年R 到D 转化分子310 个。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A08",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "2025年末TIDES在手订单同比+20.2%；TIDES D&M客户数同比+25%、服务分子数量+45%。45%指分子数量，不能换成已实现收入增长。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "Chemistry > TIDES > D&M",
+        "stage": "Chemistry > TIDES > D&M",
+        "period": "FY2025/2025-12-31",
+        "unit": "%无币种；客户/分子数量",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=14"
+      },
+      "task_keys": [
+        "t11",
+        "t28"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381",
+        "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+      ],
+      "local_support": "t28独立明确TIDES2025年末在手订单增长20.2%；t11独立明确TIDES D&M客户25%及分子数量45%。每个子事实的业务与分母在自身片段内，不靠另一task补主体。",
+      "remaining_gap_or_scope": "各子事实内容通过，不证明后续模型采用正确；不得把45%改成收入增长。",
+      "tasks": [
+        {
+          "task_key": "t11",
+          "kind": "paragraph_event",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381",
+              "locator": "loc:v1/page:14/paragraph:14",
+              "quote": "ii.\nTIDES D&M 服务客户数同比提升25%，服务分子数量同比提升45%。"
+            }
+          ]
+        },
+        {
+          "task_key": "t28",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be",
+              "locator": "loc:v1/page:14/paragraph:12/chars:423-512",
+              "quote": "i.\n随着2024 年新增产能逐季度爬坡，2025 年TIDES 业务收入达到113.7 亿元，同比\n增长96.0%。截至2025 年末，TIDES 在手订单同比增长20.2%。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A09",
+      "status": "partial",
+      "original_gold": {
+        "proposition": "2025年底小分子API反应釜总体积超过4,000kL；2025年9月提前完成泰兴多肽产能建设，多肽固相合成反应釜总体积超过100,000L。容量是物理体积，缺单位产出/利用率/价格不能直接成为收入。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "Chemistry > 小分子产能/多肽产能",
+        "stage": "Chemistry > 小分子产能/多肽产能",
+        "period": "2025年底/2025-09",
+        "unit": "kL；L",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=12,14"
+      },
+      "task_keys": [
+        "t22",
+        "t23",
+        "t24",
+        "t29",
+        "t30"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b",
+        "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98",
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c",
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      ],
+      "local_support": "t22独立保留2025年底小分子反应釜超过4000kL。2025年9月泰兴多肽完成建设与超过100000L两项均已选。",
+      "remaining_gap_or_scope": "多肽完成日期在t23/t29，体积在t24/t30；每个体积task成员均缺完成日期，每个日期task均缺体积，不能拼接为同一有日期的产能状态。物理容量仍不得自动换算收入。",
+      "tasks": [
+        {
+          "task_key": "t22",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+              "locator": "loc:v1/page:12/paragraph:2",
+              "quote": "四、报告期内核心竞争力分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+              "locator": "loc:v1/page:12/paragraph:22",
+              "quote": "（三）基于对行业的深入理解及对客户需求的深入挖掘，通过加强能力和规模建设，完善赋\n能平台"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b",
+              "locator": "loc:v1/page:12/paragraph:26/chars:1339-1425",
+              "quote": "公司持续推进小分子产能建设。2025 年，常州、泰兴及金山原料药基地均以零\n缺陷成功通过FDA 现场检查。2025 年底，小分子原料药反应釜总体积已提升至超4,000kL。"
+            }
+          ]
+        },
+        {
+          "task_key": "t23",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+              "locator": "loc:v1/page:12/paragraph:2",
+              "quote": "四、报告期内核心竞争力分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+              "locator": "loc:v1/page:12/paragraph:22",
+              "quote": "（三）基于对行业的深入理解及对客户需求的深入挖掘，通过加强能力和规模建设，完善赋\n能平台"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98",
+              "locator": "loc:v1/page:12/paragraph:29/chars:1425-1450",
+              "quote": "2025\n年9 月，公司提前完成泰兴多肽产能建设；"
+            }
+          ]
+        },
+        {
+          "task_key": "t24",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+              "locator": "loc:v1/page:12/paragraph:2",
+              "quote": "四、报告期内核心竞争力分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+              "locator": "loc:v1/page:12/paragraph:22",
+              "quote": "（三）基于对行业的深入理解及对客户需求的深入挖掘，通过加强能力和规模建设，完善赋\n能平台"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0",
+              "locator": "loc:v1/page:12/paragraph:30/chars:1450-1478",
+              "quote": "公司多肽固相合成反应釜总体积已提升至超100,000L。"
+            }
+          ]
+        },
+        {
+          "task_key": "t29",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c",
+              "locator": "loc:v1/page:14/paragraph:15/chars:555-583",
+              "quote": "iii.\n2025 年9 月，提前完成泰兴多肽产能建设。"
+            }
+          ]
+        },
+        {
+          "task_key": "t30",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d",
+              "locator": "loc:v1/page:14/paragraph:16/chars:583-612",
+              "quote": "公司多肽固相合成反应釜总体积已提升\n至超100,000L。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A10",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "FY2025Testing收入40.4亿元、同比+4.7%；药物安全性评价收入+4.6%；新分子业务占Testing收入超30%。Testing毛利率同比下降6.32个百分点，原文归因为市场影响、价格因素随订单转化体现。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "WuXi Testing",
+        "stage": "WuXi Testing",
+        "period": "FY2025",
+        "unit": "CNY亿元；%；百分点",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=14,16"
+      },
+      "task_keys": [
+        "t13",
+        "t31",
+        "t35"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+        "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+      ],
+      "local_support": "t13含Testing40.4亿元/4.7%及安全评价4.6%；t31本地Testing父收入明确新分子超30%；t35自身明示Testing毛利率下降6.32个百分点及价格因素随订单转化。",
+      "remaining_gap_or_scope": "这些子事实分别局部完整，不借其他task补业务主体。通过仅限来源内容，非毛利率正式研究验收。",
+      "tasks": [
+        {
+          "task_key": "t13",
+          "kind": "paragraph_event",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+            "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+              "locator": "loc:v1/page:14/paragraph:17",
+              "quote": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+              "locator": "loc:v1/page:14/paragraph:18",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+              "locator": "loc:v1/page:14/paragraph:19",
+              "quote": "-\n药物安全性评价业务收入同比增长4.6%，持续保持亚太行业领先地位。"
+            }
+          ]
+        },
+        {
+          "task_key": "t31",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+            "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+              "locator": "loc:v1/page:14/paragraph:17",
+              "quote": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+              "locator": "loc:v1/page:14/paragraph:18",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4",
+              "locator": "loc:v1/page:14/paragraph:20/chars:690-773",
+              "quote": "-\n公司积极助力客户开展全球授权许可合作。新分子业务持续发力，2025 年收入占比进一\n步提升至超30%，在核酸类、偶联类、多特异性抗体类、多肽类等领域保持领先地位。"
+            }
+          ]
+        },
+        {
+          "task_key": "t35",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+            "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+              "locator": "loc:v1/page:15/paragraph:12",
+              "quote": "(1). 分行业、分产品、分地区、分销售模式情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24",
+              "locator": "loc:v1/page:16/paragraph:22/chars:666-974",
+              "quote": "分行业、分产品、分地区、分销售模式情况的说明\n（1）化学业务（WuXi Chemistry）报告期内，实现毛利人民币1,892,331.11 万元，毛利率较去年\n同期上升5.50 个百分点，主要得益于生产工艺持续优化，以及临床后期和商业化项目增长带来的\n产能效率不断提升。\n（2）测试业务（WuXi Testing）报告期内，实现毛利人民币118,244.24 万元，毛利率较去年同期\n下降6.32 个百分点，主要受市场影响，价格因素随订单转化逐渐体现。\n（3）生物学业务（WuXi Biology）报告期内，实现毛利人民币92,784.88 万元，毛利率较去年同\n期下降3.04 个百分点，主要受市场价格因素影响。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A11",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "FY2025Biology收入26.8亿元、同比+5.2%；持续带来集团超20%新客户；新分子业务收入占比超30%。新客户占比和新分子收入占比的分母不同。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "WuXi Biology > 集团引流/本业务新分子",
+        "stage": "WuXi Biology > 集团引流/本业务新分子",
+        "period": "FY2025",
+        "unit": "CNY亿元；%；客户数量比例",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=14"
+      },
+      "task_keys": [
+        "t18",
+        "t32"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+        "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f",
+        "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b"
+      ],
+      "local_support": "t18本地Biology收入26.8亿元/5.2%标题限定新分子收入超30%；t32本地同一Biology父标题限定集团新客户超过20%，两个分母明确分开。",
+      "remaining_gap_or_scope": "内容可见性通过；后续采用不能混淆新客户与新分子收入分母。",
+      "tasks": [
+        {
+          "task_key": "t18",
+          "kind": "background",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+            "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+              "locator": "loc:v1/page:14/paragraph:24",
+              "quote": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+              "locator": "loc:v1/page:14/paragraph:25",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f",
+              "locator": "loc:v1/page:14/paragraph:31",
+              "quote": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。"
+            }
+          ]
+        },
+        {
+          "task_key": "t32",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+            "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+              "locator": "loc:v1/page:14/paragraph:24",
+              "quote": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+              "locator": "loc:v1/page:14/paragraph:25",
+              "quote": "报告期内："
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b",
+              "locator": "loc:v1/page:14/paragraph:26/chars:919-997",
+              "quote": "-\n生物学业务秉持科学驱动理念，前瞻布局药物发现热点及差异化能力；积极拓展全球业\n务，为公司CRDMO 业务模式高效引流，持续为公司带来超过20%的新客户。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A12",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "年报时预计2026总收入513–530亿元、持续经营收入增速18%–22%，以在手订单、行业平稳及贸易/监管环境稳定等前提预测；属于早期前瞻指引。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团持续经营/总收入",
+        "stage": "集团持续经营/总收入",
+        "period": "FY2026早期指引",
+        "unit": "CNY亿元；%",
+        "modality": "conditional",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=14"
+      },
+      "task_keys": [
+        "t33"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+      ],
+      "local_support": "同一t33含2026总收入513–530亿元、持续经营增长18%–22%及在手订单/行业/国际贸易/监管稳定前提、非承诺和不确定性。",
+      "remaining_gap_or_scope": "仅年报时点前瞻指引可见性通过，不是后续更新指引或真实预测已通过。",
+      "tasks": [
+        {
+          "task_key": "t33",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+            "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+              "locator": "loc:v1/page:13/paragraph:10",
+              "quote": "五、报告期内主要经营情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+              "locator": "loc:v1/page:14/paragraph:32/chars:1168-1257",
+              "quote": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87",
+              "locator": "loc:v1/page:14/paragraph:34",
+              "quote": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A13",
+      "status": "partial",
+      "original_gold": {
+        "proposition": "FY2025持续经营收入按时段确认12,125,518,838.35元、按时点确认31,295,304,900.48元；Testing/Biology为时段，部分Chemistry为时点。预收款先列负债，在履约后转收入。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团持续经营 > 收入确认",
+        "stage": "集团持续经营 > 收入确认",
+        "period": "FY2025",
+        "unit": "CNY元",
+        "modality": "actual",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=119,120,183,184"
+      },
+      "task_keys": [
+        "t17",
+        "t51",
+        "t52",
+        "t53"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5",
+        "urn:company-wiki:evidence-span:sha256:c0236306f5f5adf45d6b61edbf8b2dca64b45b71b87793fd09991d5863a351a2",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+        "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862",
+        "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5",
+        "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e"
+      ],
+      "local_support": "t17含部分Chemistry及其他业务按时点确认；t51/52保留一般控制权、时段/时点标准；t53完整保留预收款先负债、履约转收入。",
+      "remaining_gap_or_scope": "无本期12,125,518,838.35及31,295,304,900.48元数额，也无Testing/Biology明确按时段分类。一般标准不能替代公司业务适用归属。",
+      "tasks": [
+        {
+          "task_key": "t17",
+          "kind": "background",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5",
+            "urn:company-wiki:evidence-span:sha256:c0236306f5f5adf45d6b61edbf8b2dca64b45b71b87793fd09991d5863a351a2"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:c0236306f5f5adf45d6b61edbf8b2dca64b45b71b87793fd09991d5863a351a2"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+              "locator": "loc:v1/page:83/paragraph:2",
+              "quote": "第八节\n财务报告"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5",
+              "locator": "loc:v1/page:184/paragraph:11",
+              "quote": "2、在某一时点履行的履约义务"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c0236306f5f5adf45d6b61edbf8b2dca64b45b71b87793fd09991d5863a351a2",
+              "locator": "loc:v1/page:184/paragraph:12",
+              "quote": "本集团的部分化学业务和部分其他业务属于在某一时点履行的履约义务，此类业务在客户取得相关商品或服务控制权时确认收入。"
+            }
+          ]
+        },
+        {
+          "task_key": "t51",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+            "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+              "locator": "loc:v1/page:83/paragraph:2",
+              "quote": "第八节\n财务报告"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+              "locator": "loc:v1/page:119/paragraph:3",
+              "quote": "(1). 按照业务类型披露收入确认和计量所采用的会计政策"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862",
+              "locator": "loc:v1/page:119/paragraph:9/chars:476-565",
+              "quote": "本集团在履行了合同中的履约义务，即在客户取得相关商品或服务控制权时，按照分摊至该\n项履约义务的交易价格确认收入。履约义务，是指合同中本集团向客户转让可明确区分商品或服\n务的承诺。"
+            }
+          ]
+        },
+        {
+          "task_key": "t52",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+            "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+              "locator": "loc:v1/page:83/paragraph:2",
+              "quote": "第八节\n财务报告"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+              "locator": "loc:v1/page:119/paragraph:3",
+              "quote": "(1). 按照业务类型披露收入确认和计量所采用的会计政策"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5",
+              "locator": "loc:v1/page:119/paragraph:11/chars:566-833",
+              "quote": "本集团在合同开始日对合同进行评估，识别该合同所包含的各单项履约义务，并确定各单项\n履约义务是在某一时段内履行的履约义务，还是在某一时点履行的履约义务。满足下列条件之一\n的，属于在某一时间段内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客\n户在本集团履约的同时即取得并消耗所带来的经济利益；(2)客户能够控制本集团履约过程中在建\n的商品；(3)本集团履约过程中所产出的商品具有不可替代用途，且本集团在整个合同期间内有权\n就累计至今已完成的履约部分收取款项。否则，本集团在客户取得相关商品或服务控制权的时点\n确认收入。"
+            }
+          ]
+        },
+        {
+          "task_key": "t53",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+            "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+              "locator": "loc:v1/page:83/paragraph:2",
+              "quote": "第八节\n财务报告"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+              "locator": "loc:v1/page:119/paragraph:3",
+              "quote": "(1). 按照业务类型披露收入确认和计量所采用的会计政策"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e",
+              "locator": "loc:v1/page:120/paragraph:5/chars:239-445",
+              "quote": "本集团向客户预收销售商品或服务款项的，首先将该款项确认为负债，待履行了相关履约义\n务时再转为收入。当本集团预收款项无需退回，且客户可能会放弃其全部或部分合同权利时，本\n集团预期将有权获得与客户所放弃的合同权利相关的金额的，按照客户行使合同权利的模式按比\n例将上述金额确认为收入；否则，本集团只有在客户要求履行剩余履约义务的可能性极低时，才\n将上述负债的相关余额转为收入。同一合同下的合同资产和合同负债以净额列示。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    },
+    {
+      "target_id": "ST-A14",
+      "status": "pass",
+      "original_gold": {
+        "proposition": "FY2025前五名客户销售占年度销售48.11%；公司收入以美元结算为主，人民币升值可能减少折算人民币收入。需求依赖客户研发支出和外包比例，亦受竞争、监管及新产能建设延误风险影响。",
+        "subject": "无锡药明康德新药开发股份有限公司及子公司",
+        "object": "集团 > 集中度/FX/需求与产能风险",
+        "stage": "集团 > 集中度/FX/需求与产能风险",
+        "period": "FY2025/持续风险",
+        "unit": "%；定性",
+        "modality": "conditional",
+        "source_locator": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2#pdf_pages=17,31,32"
+      },
+      "task_keys": [
+        "t37",
+        "t43",
+        "t44",
+        "t45",
+        "t46",
+        "t47",
+        "t48",
+        "t49"
+      ],
+      "selected_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0a9a743ee8ee21880d1b0cc16ea433b7f89d0b3c658c1a31a3671830715be416",
+        "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb",
+        "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+        "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8",
+        "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+        "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d",
+        "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+        "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af",
+        "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f",
+        "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+        "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946",
+        "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+        "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1",
+        "urn:company-wiki:evidence-span:sha256:3b9bb0e3a38cd1348b055668020ee06ee65c8acfe656258449491bba6094b8e2",
+        "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4"
+      ],
+      "local_support": "48.11%前五客户年度销售、美元结算/人民币升值使折算收入减少、客户研发支出和外包比例、监管/竞争及建设延误风险均有本地完整已选片段。",
+      "remaining_gap_or_scope": "各独立风险事实自身具备主体与条件，不将其拼成已实现结果；全文绑定FY2025年报，尚无实际摘要/预测审查。",
+      "tasks": [
+        {
+          "task_key": "t37",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:0a9a743ee8ee21880d1b0cc16ea433b7f89d0b3c658c1a31a3671830715be416",
+            "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:0a9a743ee8ee21880d1b0cc16ea433b7f89d0b3c658c1a31a3671830715be416"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0a9a743ee8ee21880d1b0cc16ea433b7f89d0b3c658c1a31a3671830715be416",
+              "locator": "loc:v1/page:17/paragraph:12",
+              "quote": "(7). 主要销售客户及主要供应商情况"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb",
+              "locator": "loc:v1/page:17/paragraph:13/chars:500-600",
+              "quote": "A.公司主要销售客户及主要供应商情况\n√适用□不适用\n前五名客户销售额人民币2,186,830.20万元，占年度销售总额48.11%；其中前五名客户销售额中关\n联方销售额0万元，占年度销售总额0% 。"
+            }
+          ]
+        },
+        {
+          "task_key": "t43",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+            "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+              "locator": "loc:v1/page:31/paragraph:8",
+              "quote": "(1) 医药研发服务市场需求下降的风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8",
+              "locator": "loc:v1/page:31/paragraph:9/chars:296-516",
+              "quote": "公司的业务依赖于客户（包括跨国制药企业、生命科学公司、初创公司以及学者和非营利研\n究机构等）在药品的发现、分析测试、开发、生产等外包服务方面的支出和需求。过去，受益于\n全球医药市场不断增长、客户研发预算增加以及客户外包比例提升，客户对公司的服务需求持续\n上升。如果未来行业发展趋势放缓，或者外包比例下降，可能对公司业务造成不利影响。此外，\n医药行业的兼并整合及研发预算调整，也可能会影响客户的研发支出和外包需求，并对公司业务\n造成不利影响。"
+            }
+          ]
+        },
+        {
+          "task_key": "t44",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+            "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+              "locator": "loc:v1/page:31/paragraph:13",
+              "quote": "(2) 行业监管政策变化的风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d",
+              "locator": "loc:v1/page:31/paragraph:14/chars:533-802",
+              "quote": "医药研发服务行业是一个受监管程度较高的行业，其监管部门包括公司业务开展所在国家或\n地区的药品监督管理机构等，该等监管部门一般通过制订相关的政策法规对医药研发服务行业实\n施监管，监管范围可涵盖技术指标和跨境外包服务及生产的标准和要求等多个方面。境外发达国\n家医药研发服务行业的产业政策、行业法规已经形成较为成熟的体系；在中国，国家药监局等主\n管机构亦不断根据市场发展情况逐步制订并不断完善各项相关法规。若公司不能及时调整自身经\n营战略来应对相关国家或地区医药研发服务行业的产业政策和行业法规的变化，将可能会对公司\n的经营产生潜在的不利影响。"
+            }
+          ]
+        },
+        {
+          "task_key": "t45",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+            "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+              "locator": "loc:v1/page:31/paragraph:18",
+              "quote": "(3) 医药研发服务行业竞争加剧的风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af",
+              "locator": "loc:v1/page:31/paragraph:19/chars:823-944",
+              "quote": "目前，全球制药研发服务市场竞争日趋激烈。公司在特定的服务领域面临的竞争对手主要包\n括各类专业CRO/CDMO 机构或大型药企自身的研发部门，其中多数为国际化大型药企或研发机\n构，这些企业或机构相比公司可能具备更强的财力、技术能力、客户覆盖度。"
+            }
+          ]
+        },
+        {
+          "task_key": "t46",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+            "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+              "locator": "loc:v1/page:31/paragraph:18",
+              "quote": "(3) 医药研发服务行业竞争加剧的风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f",
+              "locator": "loc:v1/page:31/paragraph:21/chars:945-1078",
+              "quote": "除了上述成熟的竞争对手以外，公司还面临来自市场新入者的竞争，他们或拥有更雄厚的资\n金实力，或拥有更有效的商业渠道，或在细分领域拥有更强的研究实力。公司如不能继续强化自\n身综合研发技术优势及各项商业竞争优势，或将面临医药市场竞争加剧、自身竞争优势弱化导致\n的相关风险。"
+            }
+          ]
+        },
+        {
+          "task_key": "t47",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+            "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+              "locator": "loc:v1/page:31/paragraph:23",
+              "quote": "(4) 业务合规风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946",
+              "locator": "loc:v1/page:31/paragraph:24/chars:1090-1342",
+              "quote": "公司一贯重视合规经营，已逐步建立了相对完善的内部控制制度，要求公司业务人员遵守国\n家相关法律法规，依法开展业务活动。尽管公司已经制定了完善的内控体系及业务合规审批制度\n并制定了标准操作流程以确保日常业务的合法、合规运营，但由于公司控股子企业数量较多，若\n实践中母公司及高级管理层对各控股子企业或各部门的监管有效性不足，导致公司未能持续取得\n日常研发、检测分析、生产业务所必需的资质、或者未完成必要的审批及备案流程、或者未能及\n时应对相关主管部门提出的或新增的监管要求，公司的经营将面临一定程度的不利影响。"
+            }
+          ]
+        },
+        {
+          "task_key": "t48",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+            "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+              "locator": "loc:v1/page:32/paragraph:7",
+              "quote": "(7) 业务拓展失败的风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1",
+              "locator": "loc:v1/page:32/paragraph:8/chars:380-533",
+              "quote": "公司预计客户对医药研发、商业化生产及临床开发的外包需求将不断增长。为了不断满足市\n场需求并把握发展机遇，公司需要投入大量的资本和资源，在全球范围持续推进能力和规模的建\n设。公司新建业务如果因建设和监管等问题遭受不可预见的延误，或者公司未能实现预期增长，\n可能对公司的业务、财务、经营业绩及前景产生不利影响。"
+            }
+          ]
+        },
+        {
+          "task_key": "t49",
+          "kind": "native_continuity",
+          "member_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3b9bb0e3a38cd1348b055668020ee06ee65c8acfe656258449491bba6094b8e2",
+            "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4"
+          ],
+          "support_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4"
+          ],
+          "context_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3b9bb0e3a38cd1348b055668020ee06ee65c8acfe656258449491bba6094b8e2"
+          ],
+          "local_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+              "locator": "loc:v1/page:11/paragraph:2",
+              "quote": "第三节\n管理层讨论与分析"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3b9bb0e3a38cd1348b055668020ee06ee65c8acfe656258449491bba6094b8e2",
+              "locator": "loc:v1/page:32/paragraph:11",
+              "quote": "(8) 汇率风险"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4",
+              "locator": "loc:v1/page:32/paragraph:12/chars:543-629",
+              "quote": "公司营业收入以美元结算为主，若人民币未来大幅升值，可能导致折算后的人民币收入相应\n减少；同时本公司所持美元资产兑换为人民币时可能产生汇兑损失，进而直接影响公司的盈利水\n平。"
+            }
+          ]
+        }
+      ],
+      "fallback_counted_as_selected": false
+    }
+  ],
+  "selection_delta_from_v5": {
+    "removed": [
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:0ec7f166ebb522b14465aee857f6e29b33ae766b7cdcf67734620c640dad3850",
+        "locator": "loc:v1/page:106/paragraph:24",
+        "quote": "12.2.1 信用风险显著增加"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:27726efaa25dd0ab2e6d5d5736bfaccc02c35131bd95c34929cf3efc9d62b8c0",
+        "locator": "loc:v1/page:107/paragraph:3/chars:66-204",
+        "quote": "(3) 同一金融工具或具有相同预计存续期的类似金融工具的信用风险的外部市场指标是否发\n生显著变化。这些指标包括：信用利差、针对借款人的信用违约互换价格、金融资产的公允价值\n小于其摊余成本的时间长短和程度、与借款人相关的其他市场信息（如借款人的债务工具或权益\n工具的价格变动）；"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:45e430a0274058f8ba79d022e1628b76a58b30f99a868dafed7861d8525197de",
+        "locator": "loc:v1/page:105/paragraph:7",
+        "quote": "12、金融工具"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:46c976dbe92fd4a137edf288e2ad0f881d9087acab31c64f062642368d5e5239",
+        "locator": "loc:v1/page:104/paragraph:14",
+        "quote": "11、外币业务和外币报表折算"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:4eb7a0dbf02ec4e9c7f6d5f0082d0d1edbdfc0d8a638e04b3e8105b877be207f",
+        "locator": "loc:v1/page:124/paragraph:16/chars:446-510",
+        "quote": "为管理外汇风险引起的风险敞口，本集团指定某些金融工具作为套期工具进行套期。满足规\n定条件的套期，本集团采用套期会计方法进行处理。"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:793bbe1fb5bc9a60b2a45f17429ce0f9e657a9c050433f83011f788a71279b2e",
+        "locator": "loc:v1/page:104/paragraph:16",
+        "quote": "11.1 外币业务"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:e54efaf559e4609994e835fbdaedc86328ae394c1e59e4de987ab8cfd6c5102c",
+        "locator": "loc:v1/page:104/paragraph:18/chars:618-841",
+        "quote": "于资产负债表日，外币货币性项目采用该日即期汇率折算为人民币，因该日的即期汇率与初\n始确认时或者前一资产负债表日即期汇率不同而产生的汇兑差额，除：(1)符合资本化条件的外币\n专门借款的汇兑差额在资本化期间予以资本化计入相关资产的成本；(2)为了规避外汇风险进行套\n期的套期工具的汇兑差额按套期会计方法处理；(3)分类为以公允价值计量且其变动计入其他综合\n收益的项目除摊余成本之外的其他账面余额变动产生的汇兑差额计入其他综合收益外，均计入当\n期损益。"
+      }
+    ],
+    "added": [
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:170af9bc4bf6a7bb9f060c0538a0a17e91603bc4f350426a6432d25c56e3618a",
+        "locator": "loc:v1/page:126/paragraph:2",
+        "quote": "对于在某一时点履行的履约义务，本集团管理层判断集团在向客户交付递交物并且被客户验\n收后拥有现时收款权力，因此集团管理层认为相关履约义务在该时点完成。"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762",
+        "locator": "loc:v1/page:34/paragraph:23",
+        "quote": "3、完善内控与回避制度：公司建立了严格的内部控制体系，若涉及实际控制人与公司的关联\n交易时，严格执行关联董事及关联股东回避表决制度，确保交易公允，防止利益输送。"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+        "locator": "loc:v1/page:33/paragraph:2",
+        "quote": "第四节\n公司治理、环境和社会"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+        "locator": "loc:v1/page:33/paragraph:19",
+        "quote": "二、公司控股股东、实际控制人在保证公司资产、人员、财务、机构、业务等方面独立性的具体"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+        "locator": "loc:v1/page:29/paragraph:14",
+        "quote": "(二)公司发展战略"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5",
+        "locator": "loc:v1/page:34/paragraph:14",
+        "quote": "（六）公司实际控制人同时担任上市公司董事长和总经理的合理性及保持上市公司独立性措\n施"
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13",
+        "locator": "loc:v1/page:29/paragraph:17/chars:755-886",
+        "quote": "公司为全球医药及生命科学行业提供全方\n位、一体化的新药研发和生产服务，致力于推动新药研发进程，为患者带来突破性的治疗方案。\n本着以客户为中心的宗旨，公司通过高质量、高效率和极具成本效益的研发服务，助力客户提升\n研发效率，让更多的新药、好药早日问世，造福全球病患。"
+      }
+    ],
+    "interpretation": "Seven template/context spans removed and seven other spans admitted, including governance/generic strategy; no frozen target count improves. No inference that every short context span is waste."
+  },
+  "exact_target_budget_deferrals": [
+    {
+      "locator": "loc:v1/page:11/paragraph:13/chars:497-624",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 2,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:11/paragraph:22/chars:1023-1238",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 2,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:119/paragraph:4/chars:72-240",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:13/paragraph:17",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:13/paragraph:18",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:13/paragraph:26/chars:1300-1361",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:14/paragraph:11",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:14/paragraph:8/chars:302-395",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 1,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:183/paragraph:6",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 2,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:184/paragraph:14/chars:564-673",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 2,
+      "limit": 96
+    },
+    {
+      "locator": "loc:v1/page:184/paragraph:8/chars:269-473",
+      "reason": "budget_full",
+      "used": 96,
+      "requested": 2,
+      "limit": 96
+    }
+  ],
+  "next_shared_root_recommendations": [
+    "Audit budget allocation by local semantic bundle value and actual marginal closure cost, not section blacklist or company gold labels. Scope/owner/current-state/qualification bundles should compete coherently with generic policy/governance and repeated wide headings within unchanged limits.",
+    "Preserve explicit business parent-child ownership and adjacent dated state relationships in the task-local dependency closure. Regression cases should use unknown companies/alternate formatting; do not increase all context globally or insert Chemistry/TIDES literals into ranking.",
+    "For exact reporting amounts use a scoped SourceRef/API retrieval obligation with identity/period/unit/definition and actual-use proof. Keep narrative business recognition and comparable-scope/restatement definitions. Do not demand entire financial-table slicing or count unexecuted fallback/API calls as success.",
+    "Use the unchanged fourteen targets and seven positive controls after the common fix; classify missing local links separately from missing originals, selection deferral and model failures."
+  ],
+  "limitations": [
+    "No LLM request or response was produced or judged.",
+    "No PDF was reparsed or original bytes newly downloaded by reviewer.",
+    "Frozen source quotes are known originals, not selected/model-used evidence.",
+    "Reporting classifier independent tests are separate engineering evidence, not content pass.",
+    "Trace last-callback count470 is not the1526 total; unobserved stages remain unknown."
+  ],
+  "writes": "Only this content-review directory.",
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0
+}

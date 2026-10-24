@@ -1,12 +1,14 @@
 # 当前项目状态与接手入口
 
-**已按用户2026-10-23“继续”恢复实施。** 原生目标active；ROOT继续W08真实选材/context。W09已发布；用户2026-10-24再次确认W11-CWP-SOURCES A/B/C全流程交付并推送，按完成项记录，不重开。W08源层V5已独立复核（年度14项7 pass / 5 partial / 2 missing），旧selector兼容和0.8跨页分组两项回归根修已发布。最近提交`baa77ab6`修复公开DTO/context投影与cache身份绑定，`aade6b93`修复干净部署端到端测试；正常推送到`origin/master`，本地与远端HEAD一致。pre-push完整单测8126 passed / 24既有skipped（389.84秒），独立CI契约烟测146 passed（42.09秒）；聚焦及清洁部署E2E共170 passed，Ruff和`mypy src`（372文件）通过。精确CI `40076059766` completed/success（4分38秒）。端到端根因是测试部署漏带无密钥的`models.yaml`与`resource_budget.yaml`；并将只识别`du-production-reading/1–2`的旧独立oracle在测试侧投影适配到生产`/3`，只消费已校验的分组成员。沙箱的Windows `10013`回环网络拒绝另经最小复现确认，在非沙箱下真实loopback E2E通过；没有绕过网络/模型测试。正式摘要、缓存恢复、实际采用矩阵及W12仍未完成；原暂停快照仅作历史。
+**主线ACTIVE；2026-10-24 ROOT继续W08内容根因。** 本轮已修报告规则误入经营材料，以及评估条件“是否/能否/whether”冒充事件的共用判断；保留真实客户业务，不改原文。320项独立工程审查通过，相关自然包2302通过/11既有skip，Ruff与mypy src 373文件通过；发布前另发现新规则模块未进入cache算法依赖闭包，新增回归先RED后58项GREEN，只补入现有依赖列表。本轮源码与必要PWF正在按正常hook提交/推送，尚不借上一节点CI代签。
+
+同一真实249页年报新选材：1526候选、96片段/7689字符、8845814/16M，编译55任务；[本轮独立内容复核](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.md)仍为**7通过/5部分/2缺失**，没有净gold改善。下一根因已收敛到共享语义包排序和边际闭包竞争，随后是父子业务与日期关系。正式摘要/cache、真实采用矩阵、W12和新公司循环仍OPEN。W09/W11作者交付已关闭；W13–W15独占工区READY，ROOT不改委派文件。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
 ## 当前执行状态与唯一下一步
 
-**最新源码发布状态（2026-10-24 08:00 UTC）：** W08阅读/context根修`baa77ab6`与clean Phase C测试修复`aade6b93`已正常推送；远端 `master`=`aade6b933a065fae71a14b8baf2a3b16fcbb9bb9`。完整pre-push为8126 passed / 24既有 skipped / 0 failed（389.84秒），独立契约烟测146 passed（42.09秒）；聚焦E2E与W08回归170 passed，Ruff及`mypy src` 372文件通过。精确CI [40076059766](https://github.com/zhengcb81/company-wiki/actions/runs/40076059766) 已completed/success（4分38秒）。下一步按V5年度14项逐目标定位candidate/admission/dependency/offer/defer/task-context断点。
+**本轮工程节点：** [根因、测试及真实结果](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/README.md)。规则对象分类与事件断言已独审通过；逐14项真实内容仍未通过。相关自然包在cache依赖注册和业务结构guard补漏之前运行；后续58项库存/cache与最终320项独审单独留证，正常发布全量hook另验证最终版本。最终源码已再次实读原SourceRef，完整96个EvidenceSpan、task-local groups与55任务成员均与已独审材料相同，见本节点final-source-receipt.json，不改写旧绑定。最近已成功的代码CI仍是历史`aade6b93`/40076059766，当前新源码发布及CI状态由后续发布收据确认。
 
 **2026-10-23预算制度升级已提交、推送并安装：** 用户已明确授权累计10M tokens/USD20，公司150k/USD1仅软目标；唯一运行配置为`config/resource_budget.yaml`，旧账/metadata和全部unknown原样保留。实读母账仍1,561,352tokens/631,959microUSD，新剩余8,438,648tokens/USD19.368041。本地计算量可配置、费用/片段/字符/计算分维度诊断已实现；Audit的low误停已改提醒、18项独审通过；两份技能副本39/39一致。CWP正常push7165P/24既有skip，另146契约P；精确CI40034980056已实查completed/success（源码ab95027b）。实施与边界见[预算制度实施单](budget-regime-20261023.md)。W08业务语义、跨页与分批选材未因此验收通过，W09/W11独占工区不改。
 
@@ -18,7 +20,7 @@
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：按V5的14项结果，针对仍未闭合的目标修共用来源/任务关系根因。** V5相对V4没有改变选材清单，完成的是纯名词会计政策分类根修；A12已在`t31`同时看到指引及前提，A13的政策已可见但两笔金额与业务时段分类仍缺。当前优先调查A03/A04是否应由现有财务API或明确源文本提供精确值，以及A01/A02/A05/A09/A13的业务父级、口径、日期/容量和确认时间是否因source candidate、dependency还是task closure未形成；用有界逐目标证据区分这些原因，不整份重解析、不把`budget_full`当单目标因果。保持96/48,000/16M与8/4/2048上限，不把财务表格强塞入叙述切片。下一次正式版本只在共因修复后执行，并用冻结14项同一清单审查；随后进入正式摘要/cache恢复、W09/W10实际采用矩阵和W12四审，再原公司复验、药明合联、Snowflake。
+**当前唯一第一步：** 基于已冻结完整14项目标链，先TDD修共享语义包排序与边际闭包竞争，保留96/48000/16M与8/4/2048；随后修业务父子和容量日期的局部依赖，合并共因后再做一次真实新选材及同14项复核。内容闭合后再正式摘要/cache、W09/W10真实采用矩阵、W12四审与新公司泛化。 本轮完整trace已观察14项目标的72个原始单元；`trace.candidate_count=470`仅为最后一个candidate回调，整份package为1526，不能混用。A01业务分类、A03客户地域、A04集团订单等已有具体budget_full证据，删少数模板未解决排序共因。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

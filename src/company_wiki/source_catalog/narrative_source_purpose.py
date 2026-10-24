@@ -12,6 +12,7 @@ import re
 from company_wiki.document_normalization.text_matching import matching_reading_text
 
 from .narrative_business_meaning import concrete_operating_event, describes_business
+from .narrative_reporting_rules import reporting_rule_without_operating_event
 
 
 NON_OPERATING_PURPOSES = frozenset({
@@ -137,6 +138,8 @@ def _clause_purpose(value: str) -> str:
         return "navigation"
     if _AUDIT_SPEECH.search(value) or _AUDIT_OWNER.search(value):
         return "audit_procedure"
+    if reporting_rule_without_operating_event(value):
+        return "accounting_policy"
     if concrete_operating_event(value):
         return "operating"
     if _AUDIT.search(value):

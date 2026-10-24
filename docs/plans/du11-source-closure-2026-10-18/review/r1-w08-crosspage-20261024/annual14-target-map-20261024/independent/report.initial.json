@@ -1,0 +1,48 @@
+{
+  "reviewer": "/root/w08_reporting_rule_review",
+  "observed_at": "2026-10-24T08:47:13.793205+00:00",
+  "head": "bc184b57a76d63f077f7078dd78fb558848d9da7",
+  "verdict": "CHANGES_REQUIRED",
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "c01d570d280448b96f19d872f854d0b7917594f7e55550098ed6a4ed6f724809",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": "96c84601a5198f40f83969a98901cb93952986a3828261ad05fbf1fdef3241a5"
+  },
+  "test_command": "PYTHONPATH=src python -m pytest docs/plans/du11-source-closure-2026-10-18/review/r1-w08-crosspage-20261024/annual14-target-map-20261024/independent/test_reporting_rule_independent.py -q -p no:cacheprovider --override-ini addopts=",
+  "test_result": {
+    "passed": 5,
+    "failed": 8,
+    "duration_seconds": 1.84
+  },
+  "findings": [
+    {
+      "id": "IR-01",
+      "priority": 1,
+      "root": "Object-treatment regex removes a real customer-business relationship embedded inside its match range.",
+      "cases": [
+        "Company launched financial-credit-risk platform case in independent test",
+        "Bank designated customer-launched/delivered financial instruments case in independent test"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "IR-02",
+      "priority": 2,
+      "root": "An attached generic purpose/complement remaining after range removal supplies object+reduce-risk business vocabulary and wrongly overrides the reporting relationship.",
+      "cases": [
+        "The group applies hedge accounting to reduce customer risk.",
+        "CN financial instrument hedge designation to lower product price risk"
+      ],
+      "status": "OPEN"
+    }
+  ],
+  "scope_limits": [
+    "Synthetic independent semantic boundaries; not a financial industry filing corpus coverage claim.",
+    "No paid model, download, production raw change, external API or full annual14 rerun.",
+    "Public selector integration already has author-owned test; this independent run tests source_purpose/fact projection."
+  ],
+  "cleanup": {
+    "scratch": ".tmp-w08-policy-review-cases",
+    "pending": true
+  }
+}

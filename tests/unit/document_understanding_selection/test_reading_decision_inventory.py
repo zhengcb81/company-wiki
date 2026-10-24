@@ -123,6 +123,25 @@ def test_reading_business_admission_version_is_an_actual_cache_dependency(monkey
     }
 
 
+def test_reporting_rule_only_change_invalidates_the_actual_decision_cache(tmp_path, monkeypatch):
+    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.document_understanding.decision_dependencies import (
+        freeze_decision_dependencies, compare_decision_dependencies,
+    )
+    from company_wiki.source_catalog import narrative_reporting_rules as rules
+
+    observed = _real_interim_pipeline()
+    observed["observation"]["metadata"]["mime_type"] = "text/html"
+    trace = inventory.build_decision_trace(observed)
+    frozen = freeze_decision_dependencies(trace)
+    assert frozen["status"] == "complete"
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(trace))["status"] == "same"
+    changed = tmp_path / "reporting_rules.py"
+    changed.write_bytes(Path(rules.__file__).read_bytes() + b"\n# changed reporting treatment rule\n")
+    monkeypatch.setattr(rules, "__file__", str(changed))
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(trace))["status"] == "changed"
+
+
 def test_changed_continuity_algorithm_invalidates_a_real_complete_manifest(monkeypatch):
     from company_wiki.document_understanding import decision_inventory, narrative_continuity
     from company_wiki.document_understanding.decision_dependencies import (

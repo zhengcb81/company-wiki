@@ -1,0 +1,66 @@
+{
+  "schema_version": "w08-final-source-independent-content-delta/1",
+  "created_at": "2026-10-24T09:16:56.716138+00:00",
+  "reviewer": "/root/w08_reporting_selection_content",
+  "verdict": "FULL_CONTENT_EQUIVALENCE_REVIEW_REUSABLE_7_PASS_5_PARTIAL_2_MISSING",
+  "binding": {
+    "final_selection_sha256": "590a29316461af4be056b3988313cb8557e410758f94dfa30f10ad546488c289",
+    "final_source_receipt_sha256": "d06bb549bb643ad2e213330ef1172921659d6fe3962caaee8fbe7d37c2ac4235",
+    "prior_selection_sha256": "8da5b6cc809c71f169f4095c0ae15be0957e9f233d3c832abaab60b9ea02aa46",
+    "prior_model_view_sha256": "a830a3a7e68568496fc5c2dca6dd8fe473c1ff74522eac94dd359db0c1243c39",
+    "prior_content_review_sha256": "3281ce00b65315bdce3827ffd00f744479da73c3ee6597cbded297044f480791",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "final_four_source_files": {
+      "src/company_wiki/document_understanding/decision_inventory.py": {
+        "expected_sha256": "192a4196ee3a3639e3c92936686945c1dcb51c7e757f86dd93a73eac88a3c1d1",
+        "current_sha256": "192a4196ee3a3639e3c92936686945c1dcb51c7e757f86dd93a73eac88a3c1d1"
+      },
+      "src/company_wiki/source_catalog/narrative_business_meaning.py": {
+        "expected_sha256": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+        "current_sha256": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28"
+      },
+      "src/company_wiki/source_catalog/narrative_reporting_rules.py": {
+        "expected_sha256": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+        "current_sha256": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22"
+      },
+      "src/company_wiki/source_catalog/narrative_source_purpose.py": {
+        "expected_sha256": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf",
+        "current_sha256": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf"
+      }
+    }
+  },
+  "independent_checks": {
+    "source_ref": true,
+    "selected_spans": true,
+    "selected_evidence": true,
+    "all_task_local_groups": true,
+    "all_55_compiled_tasks": true,
+    "model_binding": true,
+    "full_model_payload": true,
+    "all_final_four_source_hashes": true
+  },
+  "counts": {
+    "partial": 5,
+    "missing": 2,
+    "pass": 7,
+    "targets": 14
+  },
+  "selected_spans": 96,
+  "selected_evidence": 96,
+  "compiled_tasks": 55,
+  "model_binding_sha256": "9841c76f36392ecda280baca81333894310a5da1fe5e9d3d0c3590ee067689bf",
+  "model_payload_sha256": "ba4ce94e777edc98e83c10a906d24df7ffcfba2b6757af7cb3c13a026e642350",
+  "method": "Independent JSON full-object comparisons and direct current production compiler invocation; no ROOT audit runner executed.",
+  "review_reusable": true,
+  "limitations": [
+    "Only source-selection content equivalence; original five partial and two missing remain unresolved.",
+    "No formal summary/model response or RF actual use was executed or accepted.",
+    "Full repository source_digest is recorded by producer, not independently recomputed here; all four changed source files independently byte-hashed.",
+    "Initial inline verification attempt had a Python reserved-keyword syntax error before execution; corrected dictionary literal and full verification then passed."
+  ],
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "pdf_parses": 0,
+  "product_writes": 0
+}

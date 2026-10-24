@@ -569,3 +569,12 @@ V4独立复核把“收入确认 + 履约义务 + 客户控制”纯名词触发
 W13提速应改变本地/远端的执行责任，不能从共享FAST_CONTRACT_CASES删成员导致CI覆盖变少；保留原集合约45秒快反馈和完整mode/CI。缺runner退出0是真实hook漏报，应由该独占调度包修。W14旧E2E的生产PDF/security_master依赖、四个过期源码pin、退役人工审查期望及先删已有work-root属于同一可复现性问题；要改现有runner，三仓生产源码从Git对象冻结部署，记录实际加载路径，并消费TXT而非只登记。W15只做普通工程目录导出和现有join回放，不引入第二采用语义；原生失败和unknown应保持，工程可搬迁不等于公司内容通过。三包独审5项发现全部关闭，路径/接口/最终实现独审约束见本批文档。
 
 RF当前tracked.planning约806MiB，普通worktree会再检出副本；本批仅新W14工区启用sparse省略旧.planning，保留主工区和Git对象。这是避免复制历史膨胀，不是删除原件或历史记录。CWP测试调度相关文件实际名通过CodeGraph定位，最初猜测test_changed_unit_tests.py不存在，已改用实际test_ci_push_selection/test_changed_resource_scope/test_changed_test_module_scope，不将不存在路径写入施工卡。
+
+
+## 2026-10-24 ROOT恢复调查的证据边界
+
+annual14 V5选材/模型编译可见性仍7pass/5partial/2missing；A03地区/计量口径、A04订单/RPO排程、A02持续终止/重述、A13确认时段及精确金额须区分业务描述与财务API/SourceRef精确补充。不能以所有财表全切片为修复目标，也不能把尚未读取API写成已补。V5 frozen selection的selection_diagnostics是列表而非dict（初次探索脚本按dict读取已纠正，不影响产品），旧trace仅A12/A13；将扩展有界目标链并保留未知原因，不以aggregate budget_full倒推。当前公开diagnostic已在先前代码发布，先复用再决定是否需要新的parser观察。
+
+## 2026-10-24 W08 reporting-rule根因与独审反控
+
+冻结V5的target-map从实际budget target行证明A01、A03/A04对应业务原文被96片段预算延期；不是aggregate推断。与此同时外币折算、套期会计及信用风险评估规则被业务广词误入。新对象+会计处理分类明确排除规则，保留完整clause中的真实客户事件/既有业务结构，不能擦掉匹配文本再判断。独审先发现8项误杀/泛benefit误纳，修完整clause后再发现“是否/能否”及后置question、whether共享列表同一断言共因；当前新增事件断言scope，明确已完成观察与问题/评估条件分开，不改旧_business_fact语义。独审最终补审进行中。第一版自然包2297P/11既有skip/56.87s，后续语序修订聚焦156P；尚不能把先前自然包作为最终版本通过。
