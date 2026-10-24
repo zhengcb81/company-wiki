@@ -536,17 +536,33 @@
     },
     "W08_current_v5_review": "review/r1-w08-crosspage-20261024/annual14-v5/review.json",
     "W08_legacy_selector_compatibility": {
-      "status": "SECOND_PREPUSH_ROOT_CAUSE_FIXED_INDEPENDENT_REVIEW_PASSED_PUBLICATION_PENDING",
+      "status": "COMMITTED_PUSHED_EXACT_CI_IN_PROGRESS",
       "failed_push_commit": "808fca1484b01a5f86768f79a119f28764fe143a",
-      "failure": "affected units: 6655 passed, 11 skipped, 3 failed; three legacy selector output fingerprints changed",
-      "root_cause": "Six newly added N6 operating-fact detectors were added to a shared detector consumed by explicit selector versions 0.6.0/0.7.0/0.7.1; legacy output semantics were therefore not version-isolated.",
-      "fix": "Freeze the pre-W08 legacy signal tuple explicitly; compose current signals as the six new facets plus that immutable tuple. Route 0.6/0.7 through legacy detector, business detector, finance rejection and legacy join.",
-      "focused_tests": "478 passed across eleven related test files; Ruff PASS; mypy src 372 files/0 errors; legacy fingerprint and six-facet boundary review rerun: 9 passed",
-      "independent_review_ref": "review/r1-w08-crosspage-20261024/legacy-selector-fix/independent-review.json",
+      "published_commit": "584c1101ec21141bca14c87cbaa3bca2769ddca6",
+      "exact_ci": {
+        "id": 40069847315,
+        "head_sha": "584c1101ec21141bca14c87cbaa3bca2769ddca6",
+        "status": "in_progress",
+        "conclusion": null,
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40069847315",
+        "observed_at": "2026-10-24T06:22:26Z"
+      },
+      "normal_pre_push": {
+        "passed": 6664,
+        "skipped": 11,
+        "failed": 0,
+        "seconds": 270.68
+      },
+      "focused_tests": "478 passed across eleven related test files",
       "ruff": "PASS",
       "mypy_src": "372 files; 0 errors",
+      "independent_review": "PASS; fixed fingerprints and six-facet selector boundaries: 9 passed",
       "fingerprint_assertions_changed": false,
-      "hook_bypassed": false
+      "hook_bypassed": false,
+      "root_causes_and_fixes": [
+        "W08 six new operating-fact facets leaked into explicit 0.6/0.7 selector versions; old signal tuple is now explicitly frozen.",
+        "Legacy compatibility detector was routed into current 0.8 group rules; current version now uses its original detect_operating_fact while 0.6/0.7 use the frozen detector."
+      ]
     }
   },
   "budget_regime": {
@@ -621,5 +637,6 @@
   "next_steps": [
     "Close target-bound annual14 gaps (especially A12 premise, A13 revenue-recognition policy, A01/A05 hierarchy, A09 capacity/date relation) without raising selection/work caps; reselect once after root fixes.",
     "Then perform production-configured summary/cache recovery, W09/W10 real adoption matrix, and W12 four-review loop as specified in the canonical plan."
-  ]
+  ],
+  "last_updated_utc": "2026-10-24T06:22:26Z"
 }

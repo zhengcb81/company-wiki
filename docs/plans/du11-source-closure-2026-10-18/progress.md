@@ -702,3 +702,8 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 首次正常push被pre-push拦下：受影响unit测试6669项，6655通过、11既有skip、3失败。失败都来自`test_stage_classifier_explicit_legacy_native_fingerprint_unchanged`的0.6.0/0.7.0/0.7.1参数，期望`54c4bd…`、实际`d220d0…`。逐源反事实验证证明：仅将新增N6候选源码恢复提交父版本，三个指纹立即恢复；分别只恢复其余每个改动源码文件，指纹仍失败。根因是W08六个新N6信号被接入全版本共用detector。
 
 生产修复明确拆开旧版检测器、旧business fact/finance-only路径和旧group join；0.6/0.7继续旧规则，0.8保留新信号。独立复审发现由“新tuple排除已知六项”生成旧集合存在未来漏隔离风险；改成显式冻结历史tuple，并以新增六facet + 历史tuple组成当前检测器。六个facet分别验证0.6.0/0.7.0/0.7.1不变、0.8启用；固定指纹及边界独立复核9P。最终9个相关测试文件357P、Ruff PASS、`mypy src` 372文件0错。未修改原金标断言、未绕过pre-push。失败提交`808fca1484b01a5f86768f79a119f28764fe143a`仍未推送；下一步提交当前修复后重跑原hook。第二次pre-push的两项失败均由当前版分组误用了旧兼容detector引起。修复后相关测试478P、Ruff PASS、mypy src 372文件0错；独立复审覆盖固定指纹及六facet边界9P。此事件不改变V5年度14目标的7P/5partial/2missing业务结论。下一步提交修正和PWF，正常重跑hook、push并查看精确CI。
+
+
+## 2026-10-24T06:22:26Z W08 selector 兼容修复已推送
+
+提交 `584c1101ec21141bca14c87cbaa3bca2769ddca6` 已正常推送。正常 pre-push：6664 passed / 11 existing skipped / 0 failed，270.68s；相关11文件478P，Ruff PASS，mypy src 372文件0错误；独立复审确认固定指纹与六facet版本边界9P。GitHub 精确 CI [40069847315](https://github.com/zhengcb81/company-wiki/actions/runs/40069847315) 已建立，观察时仍运行中，未记成功。根因分别为旧选择器共享detector污染和当前0.8 group误用兼容detector；没有修改原指纹断言或绕过hook。继续按唯一入口对annual14未闭合目标做候选/依赖/admit链诊断。
