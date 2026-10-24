@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-10-24T13:05:40.940062+00:00",
+  "source_commit": "65cd8f58",
+  "status": "LOCAL_PUSH_TIMEOUT_NOT_PUBLISHED",
+  "collected_unit_tests": 8315,
+  "observed_progress_percent": 84,
+  "assertion_failure_seen_in_log": false,
+  "full_suite_completed": false,
+  "contract_smoke_passed": 146,
+  "contract_seconds": 110.81,
+  "reason": "dynamic execution changed led to full affected suite; total 600s deadline",
+  "next": "independently review existing W13 bounded daily-push implementation before integration; do not bypass hook or repeat identical full push blindly",
+  "w13_observed_head": "a8045416",
+  "w13_author_handoff": "INCOMPLETE_EXTERNAL_BLOCKER",
+  "w13_final_independent_review": "OPEN_ROOT_REVIEW_IN_PROGRESS"
+}

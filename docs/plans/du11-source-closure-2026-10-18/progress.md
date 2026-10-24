@@ -828,3 +828,12 @@ ROOT阶段530P/11既有skip、374源文件mypy零错；其他中间RED/GREEN及�
 最终独审386P/31.14s（47独立反控），全374源码及真实Gbits首尾SHA一致，未修内部发现0。ROOT最终Ruff通过/mypy374源文件0错。真实DOCX public-history完整CLI/worker：旧1.0正式生产、历史resume不改DB/原artifact/预算，新1.2独立generation、当前cache复用0新增调用通过（1P/43.58s，合成本机HTTP）。sandbox内旧1.0阶段unknown reservation同一测试失败保留；在标准本机loopback权限下同测试通过，具体transport异常未单独保留，不宣称费用不足/产品预算修复。此前只签factory58P的边界已补，仍不代签正式配置真实公司摘要/cache。
 
 原生结束状态、NP head与限定事实support的最终修复已纳入此冻结版；四真实A电话会/稀疏季报、HK中报、US附件回放与独审源码文件逐SHA核对一致。原件未改，源选择oldgold状态FAIL/PARTIAL/FAIL/FAIL保留。自有三临时目录已恢复absent，详见m2-root-receipt.json。正常commit/push待执行，尚未宣称远端CI通过。
+
+
+## 2026-10-24 M2正常发布被全量push总时限拦截
+
+源码/测试/PWF正常commit65cd8f58成功。第一次正常push因动态执行变更触发全8315 Unit，跑至84%未见断言失败但600s总超时，146契约/110.81s通过；未发布，不虚构远端CI。候选源码/测试/PWF whitespace检查通过，历史失败XML保留原始输出空白，未为git diff空白提示改写已绑定证据；正常pre-commit全过。
+
+未盲重跑同次全量。只读查W13工区HEAD=a8045416，已实现但handoff=INCOMPLETE_EXTERNAL_BLOCKER（作者未做最终独审），故母表READY_NOT_DISPATCHED已过期。ROOT另派未参与实现者从冻结Git对象隔离审查，不改作者工区/索引，不自动把草稿签PASS。通过后接收已有bounded fast push并保留full_validation_pending/完整模式/远端CI，不绕hook。M3继续只读定义/口径共因调查，产品源码暂不改动。
+
+用M1新development gold评同一final选择另留development-gold-evaluation.json；Gbits/Proya/HK出现0值同时含quote跨fragment/缺line/scope观察信息，不能拿这些未拆解数字宣称M2退步或召回率通过；完整源侧锚点检查和真实卡片仍需对应locator/作用域复核，旧gold/旧观察不改。该诊断文件不是新验收。

@@ -152,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "M2独审386P、真实DOCX旧版本/当前worker/历史恢复/cache1P已通过，先正常提交推送，再推进M3/M4/M5与原annual14剩余，正式配置摘要/cache、RF四审及新公司循环仍OPEN。",
+  "next_step_now": "M2已独审且commit65cd8f58，正常push600s总时限失败、未发布；先完成已有W13独审与安全并线，再正常推送。M3只读调查并行，M3/M4/M5及正式摘要/cache/RF循环仍OPEN。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -835,7 +835,7 @@
     },
     "current_work": {
       "M1": "PASS_SOURCE_DEVELOPMENT_GOLD_ONLY",
-      "M2": "INDEPENDENT_PASS_PUBLIC_HISTORY_PASS_PENDING_PUBLICATION",
+      "M2": "REVIEW_PASS_COMMITTED_LOCAL_PUSH_TIMEOUT_NOT_PUBLISHED",
       "implementation": "review/market-family-upgrade-20261024/M2_IMPLEMENTATION.md",
       "formal_summary_pass": false,
       "M1_review": "review/market-family-upgrade-20261024/m1-independent/report.json",
@@ -862,7 +862,11 @@
       "M2_review": "review/market-family-upgrade-20261024/m2-independent/report.json",
       "M2_independent_passed": 386,
       "M2_actual_public_history_passed": 1,
-      "M2_receipt": "review/market-family-upgrade-20261024/m2-root-receipt.json"
+      "M2_receipt": "review/market-family-upgrade-20261024/m2-root-receipt.json",
+      "M2_local_source_commit": "65cd8f58",
+      "M2_first_push": "review/market-family-upgrade-20261024/m2-first-push-timeout.json",
+      "W13": "IMPLEMENTATION_OBSERVED_AUTHOR_INDEPENDENT_REVIEW_PENDING_ROOT_REVIEW_STARTED",
+      "M3": "READ_ONLY_ROOT_CAUSE_DISCOVERY_IN_PROGRESS"
     }
   }
 }
