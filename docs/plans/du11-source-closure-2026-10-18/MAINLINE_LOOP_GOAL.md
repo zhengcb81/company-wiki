@@ -11,7 +11,7 @@
 - W03/W07 的共享引擎公开接线、一次真实摘要、激活前故障恢复、缓存及RF消费已有工程验收，不重复收费重做。
 - 药明康德 final3 的四份报告均已完成，14个问题出现项归并到10个根因、W08–W12五张卡。旧报告、639件初始封存及501件final3封存均保留。
 - 共因方案位于 `C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-final3-review-20261022/`，诊断与交接位于同run的 `diagnosis/r1-final3-review-20261022/`。
-- ROOT新attempt保留。W08有限来源/谓词节点已并线推送4e3e0231，7857P/24skip+146smokeP、精确CI40044921473成功；下一跨页/订单/逐target依赖prototype只在ROOT工区，待最终组合冻结/自然包与独审，再真实249页14项、选材/分批及正式摘要。W09已发布RF599d17b8并安装103文件匹配/CI成功；W11已并线来源发现且新索引SourceRef回放成功，业务IR材料仍external_limit。W10真实矩阵和W12未完成，作者工区只读、旧封存/账不改；具体状态以唯一CURRENT_STATUS为准。
+- ROOT新attempt保留。W08共享原生观察/跨页/订单/逐target依赖已真实合线推送`f2b8f2bf`，独审17P、正常8056P/24skip+146smokeP，精确CI40050949303成功；旧4e3e0231有限节点保持历史。下一步按真实249页14项3pass/9partial/2missing修选材/上下文与分批，再正式摘要/cache和RF实际采用。W09已发布RF599d17b8并安装103文件匹配/CI成功；W11已并线来源发现且新索引SourceRef回放成功，业务IR材料仍external_limit。W10真实矩阵和W12未完成，作者工区只读、旧封存/账不改；具体状态以唯一CURRENT_STATUS为准。
 - W08负责CWP来源语义/结构，W09负责RF研究输入与方法，W10负责audit逐文档结果投影；目录不重叠部分可并行，共享接口和技能卡由ROOT串行整合。W11有界恢复实际来源缺口；W12整合、原公司复验、泛化和质量/检测收尾。
 
 ## 每轮的八步
