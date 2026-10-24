@@ -2,6 +2,8 @@
 
 **最新状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** 微软 FY2025 10-K formal-v4 的生产链路按界限完成：恰好一次 POST 得到 HTTP 200，token/成本估算 17,666 / $0.007102；原件和 gold SHA 未变，未下载、未翻译，缓存/启动恢复及 FF 原文复用通过，临时湖清理。MiniMax 返回的精确 schema 元数据此前被 decoder 拒绝，窄范围修复和独审已通过，捕获响应离线重放为 50/50 排序项。**工程链路 PASS 不等于内容 PASS：**本次只选 112/484 单元、314 deferred、layout incomplete；43 条摘要 claim 被代码默认标为 uncertain/needs_review，50个任务中还含5条 deferred和2条unsupported，RF 标记 not_consumed/needs_review。下一步分别验证排名重放、source-card完整性、claim质量映射及未分配单元含义，再设计可恢复的分批覆盖和有出处摘要；不只是提高上限，也不放宽质量门槛来制造消费。不能重跑本次付费请求来掩盖覆盖问题。详见[formal-v4与三卡ROOT验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)。
 
+**发布状态：** 根因修复与上述验收记录已提交为 `73ba5aa2352ac90bf57d1156a204b0445c83a473`（Ruff、mypy、config doctor、host-assumption guard 均通过）；正在准备推送，当前提交的远端 CI 尚未启动，不能沿用上一提交的 CI 成功结论。
+
 **前一节点快照（formal-v4之前）：** 微软 FY2025 10-K formal-v3 只发出一次 HTTP POST，收到 HTTP 400（`MODEL_HTTP_CLIENT_ERROR`）后作为 terminal dead-letter 停止；没有保存响应正文、付费响应凭据或正式摘要，未重试。原件 SHA `99d693f6…01d0bbe`、gold SHA `4dd0875a…7e28a2a8`未变，未下载、未翻译，临时数据湖清理。93,648 tokens / $0.041379 的保守 hold 已计入母账，不等于供应商确认账单。
 
 **失败根因和修复：** 生产配置曾对 `MiniMax-M3.1-Flash` 使用 `thinking=disabled`；MiniMax 官方文档说明该模型不支持禁用 thinking。配置已改为 `reasoning_effort=low`，并增加精确 provider/model 的请求前防错。111 项聚焦测试、Ruff、diff-check通过，独立审查PASS。新配置绑定的零请求v6预检也通过：同一原件和gold、112 spans/40,491字符、8/8必需业务事实有支持、0 POST、母账前后相同（1,765,712 tokens / $0.717734）、临时数据清理成功。详细见[根因收据](review/market-family-upgrade-20261024/us-10k-formal-v3-root-cause-20261025.json)、[独立复核](review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md)和[formal-v4零请求预检](review/market-family-upgrade-20261024/us-10k-formal-v4-preflight-20261025.json)。

@@ -8,18 +8,25 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "808623377905520ec0c28c7330fe14243e4c6c04",
+  "last_code_commit": "73ba5aa2352ac90bf57d1156a204b0445c83a473",
   "code_ci": {
-    "id": 40131924884,
-    "check_id": 120985257266,
-    "head_sha": "808623377905520ec0c28c7330fe14243e4c6c04",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40131924884",
-    "failed_test_count": 0,
-    "junit_report": "available_from_ci_success",
+    "id": null,
+    "check_id": null,
+    "head_sha": "73ba5aa2352ac90bf57d1156a204b0445c83a473",
+    "status": "push_pending",
+    "conclusion": null,
+    "html_url": null,
+    "failed_test_count": null,
+    "junit_report": null,
     "failure_summary": null,
-    "updated_at": "2026-10-24T20:55:13Z"
+    "updated_at": "2026-10-24T23:37:11Z",
+    "previous_successful_ci": {
+      "id": 40131924884,
+      "head_sha": "808623377905520ec0c28c7330fe14243e4c6c04",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40131924884",
+      "updated_at": "2026-10-24T20:55:13Z"
+    }
   },
   "completed": {
     "b2": {
