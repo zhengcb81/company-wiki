@@ -76,6 +76,7 @@
     }
   ],
   "target": "daily push usually <= 60s: docs 44.5s, unknown 46.6s, real push 42.2s meet it; narrow 66.8s is smoke-dominated (46.5s of it is the shared smoke set); wide is an explicit non-goal for the fast layer",
+  "measurement_caveat": "wall times are load-sensitive on this shared host, not a threshold: an independent reviewer's re-run of the same docs scope took 130.3s for the pytest child. The numbers record this host at measurement time; no wall-clock approval gate exists in product code and none may be added (G09).",
   "full_local_mode_once": {
     "command": "python tools/pre_push_gate.py",
     "stages": [

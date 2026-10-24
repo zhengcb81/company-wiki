@@ -194,15 +194,18 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
     dynamic, configuration or unknown scopes. That recommendation stays with
     CI: silently starting all unit tests on every push is the regression this
     policy exists to prevent. The push itself always runs the shared fast
-    contract set once, deduplicated against whole-file selections, and a small
-    explainable affected set keeps running its complete files.
+    contract set once, deduplicated against the selected files (a selected
+    whole file covers every node in it), and a small explainable affected set
+    keeps running its complete files.
     """
     if "tests/unit" in selected:
         return list(FAST_CONTRACT_CASES), "full unit suite recommendation deferred to CI"
+    whole_files = {path for path in selected if "::" not in path}
     targets = list(selected)
+    # A selected whole file already runs every node in it; a selected node ID
+    # covers only itself, so sibling fast cases in the same file still run.
     targets.extend(case for case in FAST_CONTRACT_CASES
-                   if not any(case.split("::")[0] == path or case.startswith(path + "/")
-                              for path in selected))
+                   if case.split("::")[0] not in whole_files and case not in selected)
     return targets, f"tests/unit outside the {len(targets)} ran targets deferred to CI"
 
 
@@ -277,7 +280,8 @@ def main(argv: list[str] | None = None) -> int:
               f"full_validation_pending: {deferred}.")
         code = _dispatch_gate(
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *targets],
-            "daily push fast feedback: affected units and CI contract smoke")
+            "daily push fast feedback: affected units and CI contract smoke"
+            if selected else "daily push fast feedback: CI contract smoke (no affected unit files)")
         if code:
             print("\nPUSH CHECKS RED — fix the failing phase; do not bypass.")
         else:
