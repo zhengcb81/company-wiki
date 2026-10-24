@@ -1,0 +1,5 @@
+# 独立baseline审查笔记
+
+先验不把三份FAIL视为产品失败。当前research observer把route取自reading_context.route，但实际metadata没有该key，因此null不能证明生产未路由。现观测没有claims和semantic_units，不能据basis/entailment未评估证明摘要错误。
+
+电话会原文ASR“买量会不会再走到原来的水平了”被gold直接解释为明确否定，需原文上下文审查；不得悄悄把歧义材料修成确定管理层事实。

@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_interim_report",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -200,14 +200,18 @@
         "展望",
         "Outlook",
         "業務展望",
-        "期後的近期發展"
+        "期後的近期發展",
+        "RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD",
+        "RECENT DEVELOPMENT AFTER THE REPORTING PERIOD"
       ],
       "heading_path": [
         [
           "業務回顧及展望",
           "展望",
           "Outlook",
-          "期後的近期發展"
+          "期後的近期發展",
+          "RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD",
+          "RECENT DEVELOPMENT AFTER THE REPORTING PERIOD"
         ]
       ],
       "priority": 1,
@@ -243,6 +247,30 @@
         "discover": "context_only",
         "fine": "explicit_only",
         "demand_class": "context"
+      }
+    },
+    {
+      "role": "business",
+      "aliases": [
+        "業務回顧",
+        "业务回顾",
+        "Business Review"
+      ],
+      "heading_path": [
+        [
+          "業務回顧",
+          "业务回顾",
+          "Business Review"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "本期（六个月）业务变化与新进展"
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
       }
     }
   ],

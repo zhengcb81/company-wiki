@@ -1,0 +1,124 @@
+{
+  "reviewer": "/root/w08_reporting_rule_review",
+  "observed_at": "2026-10-24T11:11:44.148258+00:00",
+  "verdict": "PASS_OFFLINE_COMPONENT_SCOPE",
+  "reviewed_sha256": {
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "205237fd335befc850bcb602787c34ad0a8e544dd396e8972727f34cadd38c42",
+    "src/company_wiki/document_understanding/profiles/registry.py": "1168fff7249e53076c1f6c89993bc907f026df0aff97ee97453982acb5287c68",
+    "src/company_wiki/document_understanding/strategy_binding.py": "63678a70251781e530875e670b80d1bed3055dc31fc7a6e11faff39917ea92b2",
+    "src/company_wiki/automation/narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+    "tools/import_reading_policies.py": "e7da4551bf5403e54bb3ef7df165eb61eab6c15395df6dfebadca1f80b4a35fc",
+    "tests/unit/document_understanding_root/test_market_family_strategy_paths.py": "b23a71949cafb116614b9e21a67fbd9b9fc113241143d2783b06405e2af6cbd5",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/index.json": "47c02dbcb84cb622c69b9af3cfc8e78905099dcfacfc77bdfbb035f3b303af51",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-01.json": "bea301fb4f828576867223e8f3707143c72f8e277175e2326b02816add82a884",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-02.json": "6fab722e894be13f9d2e3abb9e19a6863cc6e64cd1621c5c6fed77da92ad6c5c",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/case-revision.json": "d501f34927804a084cf380471a61ec8221a83a353fc755a364a48e2fb17a2edc",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_20f.json": "598b56b291be469a7697f306089cc28863982e0f704cf9bcc13d936f463e8bea",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_interim_report.json": "aad3c76533fe0323cac24e622fc8fa75fa72c6e24fe27c70cabe0ce3171564af",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/earnings_call_transcript.json": "0fcf7d96d0649614477a9ae46ecd16cdb285aefb04c1435d17d8467f08658e3e",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_hk.json": "acc3cd3db14c8cd9f9aaedff53a3fa633916d9176d6572f2c2cd3dace1d0738c",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_cn.json": "f34e0c1afae69753637dfa97e179ab37af8ed169cfe1c2c2031c861ec2e3cc2f",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/independent-final/test_final_components.py": "fa3243303286aee1bc9eff2f2738e83bc043b457e07082304836b53668ab4da2"
+  },
+  "sha_before_and_after_test_identical": true,
+  "five_family_versions": {
+    "sec_20f": "1.0.3",
+    "hk_interim_report": "1.0.4",
+    "earnings_call_transcript": "1.0.3",
+    "prospectus_hk": "1.0.3",
+    "prospectus_cn": "1.0.3"
+  },
+  "final_execution": {
+    "command": "CW_SHORT_BASETEMP_DISABLE=1 PYTHONPATH=src python -m pytest docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/independent-final/test_final_components.py tests/unit/document_understanding_root/test_market_family_strategy_paths.py tests/unit/document_understanding_root/test_du2_policy_registry.py -q -p no:cacheprovider --override-ini addopts='' --basetemp=docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/independent-final/.tmp --junitxml=docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/independent-final/final.xml",
+    "sandbox": false,
+    "exit_code": 0,
+    "passed": 61,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_seconds": 3.71,
+    "junit_seconds": 3.706,
+    "components": {
+      "independent": 20,
+      "author_permanent": 17,
+      "existing_registry": 24
+    }
+  },
+  "compiler_check": {
+    "command": "python tools/import_reading_policies.py --check",
+    "exit_code": 0,
+    "families": 24,
+    "facets": 14,
+    "in_test_full_parity_verified": true
+  },
+  "closed_findings": [
+    {
+      "id": "MP-01",
+      "verified": "20-F actual nested risk path matches; Item30, contrary Item3 title, Item6 and organizational structure counterexamples do not gain risk/industry role."
+    },
+    {
+      "id": "MP-02",
+      "verified": "Old case original bytes retained against prior independent snapshot and revision receipt; active case02 quotes raw130/132, requires both, current policy reaches actual request without rewriting source; adopted content-only change alters request input hash."
+    },
+    {
+      "id": "MP-03",
+      "verified": "HK interim English/Chinese postperiod aliases and independent business-review body bind through author actual pipeline tests."
+    },
+    {
+      "id": "IPO-PATHS",
+      "verified": "HK market/proceeds/business and CN business root variants recognized; cross-market counterexample and actual shared native-unit pipeline binding pass."
+    },
+    {
+      "id": "POLICY-CACHE",
+      "verified": "Adopted HK interim question content changes complete manifest; unrelated US/HK/CN IPO edits preserve it; same declared version used."
+    }
+  ],
+  "historical_runs": [
+    {
+      "stage": "pre-IPO sandbox",
+      "passed": 47,
+      "errors": 1,
+      "seconds": 7.7,
+      "reason": "sandbox TEMP cannot create numbered tmp_path fixture"
+    },
+    {
+      "stage": "inflight ROOT IPO tests",
+      "passed": 48,
+      "failed": 4,
+      "seconds": 4.85,
+      "reason": "New author tests still referred to nonexistent hk_prospectus/cn_prospectus fixture IDs; ROOT corrected to existing prospectus interface."
+    },
+    {
+      "stage": "review native-unit IPO fixture",
+      "passed": 59,
+      "failed": 2,
+      "seconds": 5.23,
+      "reason": "Independent fixture lacked prospectus cover evidence; router correctly stayed unknown. Added actual form-cover signals, retained assertions and product code."
+    },
+    {
+      "stage": "corrected independent native-unit pair",
+      "passed": 2,
+      "deselected": 18,
+      "seconds": 2.18
+    }
+  ],
+  "permission_gate_effect": "No new permission, manual receipt, router, registry, identity gate or provider authorization introduced; five data policies plus corrected active case and compiled catalog only.",
+  "limits": [
+    "Not a 22-document recall/summary corpus acceptance.",
+    "No paid model, network call, download or production raw mutation.",
+    "Actual request boundary uses legitimate selected DTO fixture and current resolved policy; it is not a full real-transcript selector-to-paid-summary execution.",
+    "IPO pipeline tests start from normalized native units, not full PDF extraction.",
+    "ROOT owns business target freezing, real selection/summary/cache restore, cross-repo adoption and complete RF audit loop."
+  ],
+  "cleanup": {
+    "owned_basetemp_absent": true,
+    "owned_pycache_absent": true,
+    "writes_only_assigned_independent_directory": true,
+    "temporary_derived_fulltext_copies": 0
+  },
+  "artifacts": {
+    "junit_sha256": "179b14eb05d323430a633f91b741529bab224f680c4a93d308805d4c161ddaa3",
+    "preflight_sha256": "3580236260b0ae5d148ad10e566273c83114c9306c4a792b5f41c36eceebe2f1",
+    "report_md_sha256": "52fccf18a87775d1bc2e3c6997f00e9133704fe11aaf9966e93f1829a1ad9a4d"
+  }
+}

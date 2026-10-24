@@ -32,192 +32,326 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-annual-business-model-01", "case-cn-annual-metrics-02", "case-cn-annual-outlook-03"],
-      "gaps": ["样本行业集中于半导体设备", "扫描件/OCR 路径未测", "摘要忠实度未测（模型语义留 ROOT/大节点）"]
+      "case_ids": [
+        "case-cn-annual-business-model-01",
+        "case-cn-annual-metrics-02",
+        "case-cn-annual-outlook-03"
+      ],
+      "gaps": [
+        "样本行业集中于半导体设备",
+        "扫描件/OCR 路径未测",
+        "摘要忠实度未测（模型语义留 ROOT/大节点）"
+      ]
     },
     {
       "shape": "cn_interim_report",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-interim-stage-01"],
-      "gaps": ["缺“无预期变化”型半年报样本", "半年报摘要件版本对缺失"]
+      "case_ids": [
+        "case-cn-interim-stage-01"
+      ],
+      "gaps": [
+        "缺“无预期变化”型半年报样本",
+        "半年报摘要件版本对缺失"
+      ]
     },
     {
       "shape": "cn_quarterly_report",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-quarterly-business-01", "case-cn-quarterly-sparse-02"],
-      "gaps": ["缺含重大经营事件的更多行业季报", "跨页断句恢复归 ROOT 依赖闭包"]
+      "case_ids": [
+        "case-cn-quarterly-business-01",
+        "case-cn-quarterly-sparse-02"
+      ],
+      "gaps": [
+        "缺含重大经营事件的更多行业季报",
+        "跨页断句恢复归 ROOT 依赖闭包"
+      ]
     },
     {
       "shape": "hk_annual_report",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-hk-annual-stores-01", "case-hk-annual-samestore-footnote-02", "case-hk-annual-postperiod-03"],
-      "gaps": ["双栏阅读顺序恢复归 LAYOUT/ROOT", "金融/地产行业形态未覆盖"]
+      "case_ids": [
+        "case-hk-annual-stores-01",
+        "case-hk-annual-samestore-footnote-02",
+        "case-hk-annual-postperiod-03"
+      ],
+      "gaps": [
+        "双栏阅读顺序恢复归 LAYOUT/ROOT",
+        "金融/地产行业形态未覆盖"
+      ]
     },
     {
       "shape": "hk_interim_report",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-hk-interim-postperiod-01"],
-      "gaps": ["中期报告摘要/更正版本对缺失"]
+      "case_ids": [
+        "case-hk-interim-postperiod-01"
+      ],
+      "gaps": [
+        "中期报告摘要/更正版本对缺失"
+      ]
     },
     {
       "shape": "sec_10k",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-sec-10k-segments-01", "case-sec-10k-rpo-02", "case-sec-10k-toc-vs-body-03"],
-      "gaps": ["Item 8 附注金标未建", "10-K/A 修订版本对缺失"]
+      "case_ids": [
+        "case-sec-10k-segments-01",
+        "case-sec-10k-rpo-02",
+        "case-sec-10k-toc-vs-body-03"
+      ],
+      "gaps": [
+        "Item 8 附注金标未建",
+        "10-K/A 修订版本对缺失"
+      ]
     },
     {
       "shape": "sec_10q",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-sec-10q-parts-01", "case-sec-10q-revenue-mechanism-02"],
-      "gaps": ["10-Q/A 修订版本对缺失", "银行/保险类附注形态未覆盖"]
+      "case_ids": [
+        "case-sec-10q-parts-01",
+        "case-sec-10q-revenue-mechanism-02"
+      ],
+      "gaps": [
+        "10-Q/A 修订版本对缺失",
+        "银行/保险类附注形态未覆盖"
+      ]
     },
     {
       "shape": "sec_20f",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-sec-20f-item-map-01"],
-      "gaps": ["20-F 业务章节金标未建", "20-F/A 修订版本对缺失"]
+      "case_ids": [
+        "case-sec-20f-item-map-01"
+      ],
+      "gaps": [
+        "20-F 业务章节金标未建",
+        "20-F/A 修订版本对缺失"
+      ]
     },
     {
       "shape": "prospectus_cn",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-ipo-offering-facts-01", "case-cn-ipo-proceeds-02"],
-      "gaps": ["注册稿/正式稿版本对缺失", "业务与技术章节逐节金标未建"]
+      "case_ids": [
+        "case-cn-ipo-offering-facts-01",
+        "case-cn-ipo-proceeds-02"
+      ],
+      "gaps": [
+        "注册稿/正式稿版本对缺失",
+        "业务与技术章节逐节金标未建"
+      ]
     },
     {
       "shape": "prospectus_hk",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-hk-ipo-chapters-01", "case-hk-ipo-stores-02"],
-      "gaps": ["繁/英版本逐段对照未做", "聆讯后资料集/申请版本形态未测"]
+      "case_ids": [
+        "case-hk-ipo-chapters-01",
+        "case-hk-ipo-stores-02"
+      ],
+      "gaps": [
+        "繁/英版本逐段对照未做",
+        "聆讯后资料集/申请版本形态未测"
+      ]
     },
     {
       "shape": "prospectus_us",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-us-registration-01"],
-      "gaps": ["本地缺 S-1/F-1/424B4 原件（acquisition_requests AR-01）", "仅官方表单/正文结构研究，无真实引文"]
+      "case_ids": [
+        "case-synth-us-registration-01"
+      ],
+      "gaps": [
+        "本地缺 S-1/F-1/424B4 原件（acquisition_requests AR-01）",
+        "仅官方表单/正文结构研究，无真实引文"
+      ]
     },
     {
       "shape": "offering_cn_equity",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-equity-project-phases-01", "case-cn-equity-forecast-disclaimer-02"],
-      "gaps": ["发行结果公告与募投进展公告版本对缺失", "配售（placing）形态未测"]
+      "case_ids": [
+        "case-cn-equity-project-phases-01",
+        "case-cn-equity-forecast-disclaimer-02"
+      ],
+      "gaps": [
+        "发行结果公告与募投进展公告版本对缺失",
+        "配售（placing）形态未测"
+      ]
     },
     {
       "shape": "offering_cn_convertible",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-convertible-projects-01", "case-cn-convertible-forecast-02"],
-      "gaps": ["募投变更/进展公告与募集说明书版本对缺失", "赎回/回售影响项目的实例缺失"]
+      "case_ids": [
+        "case-cn-convertible-projects-01",
+        "case-cn-convertible-forecast-02"
+      ],
+      "gaps": [
+        "募投变更/进展公告与募集说明书版本对缺失",
+        "赎回/回售影响项目的实例缺失"
+      ]
     },
     {
       "shape": "offering_feasibility",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-feasibility-01"],
-      "gaps": ["独立可研原件缺失（AR-03）；仅见募集说明书内引用可研结论"]
+      "case_ids": [
+        "case-synth-feasibility-01"
+      ],
+      "gaps": [
+        "独立可研原件缺失（AR-03）；仅见募集说明书内引用可研结论"
+      ]
     },
     {
       "shape": "project_change_notice",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-project-change-01"],
-      "gaps": ["募投变更/延期/终止/进展公告真实样本缺失（AR-04）", "delta 需旧版，未真实验证"]
+      "case_ids": [
+        "case-synth-project-change-01"
+      ],
+      "gaps": [
+        "募投变更/延期/终止/进展公告真实样本缺失（AR-04）",
+        "delta 需旧版，未真实验证"
+      ]
     },
     {
       "shape": "investor_qa_record",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-cn-ir-qa-binding-01", "case-cn-ir-title-mislead-02"],
-      "gaps": ["业绩说明会直播/文字稿形态缺失", "港股 analyst meeting 记录缺失"]
+      "case_ids": [
+        "case-cn-ir-qa-binding-01",
+        "case-cn-ir-title-mislead-02"
+      ],
+      "gaps": [
+        "业绩说明会直播/文字稿形态缺失",
+        "港股 analyst meeting 记录缺失"
+      ]
     },
     {
       "shape": "earnings_call_transcript",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-earnings-call-roles-01"],
-      "gaps": ["当前样本为聚合平台抓取件，缺公司原始发布版", "问答跨轮依赖未逐条核对"]
+      "case_ids": [
+        "case-earnings-call-roles-02"
+      ],
+      "gaps": [
+        "当前样本为聚合平台抓取件，缺公司原始发布版",
+        "问答跨轮依赖未逐条核对"
+      ]
     },
     {
       "shape": "results_release",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-us-release-highlights-01", "case-hk-release-segment-02"],
-      "gaps": ["股东信形态缺失", "同一事件 release/deck/call 重复事实对照未做"]
+      "case_ids": [
+        "case-us-release-highlights-01",
+        "case-hk-release-segment-02"
+      ],
+      "gaps": [
+        "股东信形态缺失",
+        "同一事件 release/deck/call 重复事实对照未做"
+      ]
     },
     {
       "shape": "investor_presentation",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-hk-deck-chart-01"],
-      "gaps": ["PPTX/图片载体原件缺失", "图表 OCR 完整性不在本包范围"]
+      "case_ids": [
+        "case-hk-deck-chart-01"
+      ],
+      "gaps": [
+        "PPTX/图片载体原件缺失",
+        "图表 OCR 完整性不在本包范围"
+      ]
     },
     {
       "shape": "container_attachment",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-container-8k-01"],
-      "gaps": ["本地缺 8-K/6-K 容器+附件原件（AR-02）；结构依据官方公开目录核对", "child_routes 编排归 ROOT"]
+      "case_ids": [
+        "case-synth-container-8k-01"
+      ],
+      "gaps": [
+        "本地缺 8-K/6-K 容器+附件原件（AR-02）；结构依据官方公开目录核对",
+        "child_routes 编排归 ROOT"
+      ]
     },
     {
       "shape": "lifecycle_revision_overlay",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-revision-pair-01"],
-      "gaps": ["真实原件+修订/摘要版本对缺失（AR-05）", "extent/revision 路由轴未在现有 router 落地（归 ROOT）"]
+      "case_ids": [
+        "case-synth-revision-pair-01"
+      ],
+      "gaps": [
+        "真实原件+修订/摘要版本对缺失（AR-05）",
+        "extent/revision 路由轴未在现有 router 落地（归 ROOT）"
+      ]
     },
     {
       "shape": "administrative_document",
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["case-admin-scan-empty-01", "case-synth-admin-notice-01"],
-      "gaps": ["真正制度/会议通知负例原件缺失（AR-06；cn-ir-policy 不能作负例）", "扫描件有限 OCR 路径未验证"]
+      "case_ids": [
+        "case-admin-scan-empty-01",
+        "case-synth-admin-notice-01"
+      ],
+      "gaps": [
+        "真正制度/会议通知负例原件缺失（AR-06；cn-ir-policy 不能作负例）",
+        "扫描件有限 OCR 路径未验证"
+      ]
     },
     {
       "shape": "event_response",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-event-response-01"],
-      "gaps": ["问询回复/重组收购/重大合同真实样本缺失（AR-07）", "多期问询-回复链未验证"]
+      "case_ids": [
+        "case-synth-event-response-01"
+      ],
+      "gaps": [
+        "问询回复/重组收购/重大合同真实样本缺失（AR-07）",
+        "多期问询-回复链未验证"
+      ]
     },
     {
       "shape": "secondary_research",
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["case-synth-secondary-01"],
-      "gaps": ["研报/新闻/政策/ESG 不在母计划样本（AR-08）", "第三方转引回链未验证"]
+      "case_ids": [
+        "case-synth-secondary-01"
+      ],
+      "gaps": [
+        "研报/新闻/政策/ESG 不在母计划样本（AR-08）",
+        "第三方转引回链未验证"
+      ]
     },
     {
       "shape": "shareholder_letter",
@@ -225,7 +359,10 @@
       "evidence_status": "missing",
       "integration_status": "not_integrated",
       "case_ids": [],
-      "gaps": ["股东信/致股东信原件缺失（AR-09）", "暂并入 results_release 策略，未单独立规格"]
+      "gaps": [
+        "股东信/致股东信原件缺失（AR-09）",
+        "暂并入 results_release 策略，未单独立规格"
+      ]
     },
     {
       "shape": "hk_placing_or_rights_announcement",
@@ -233,7 +370,10 @@
       "evidence_status": "missing",
       "integration_status": "not_integrated",
       "case_ids": [],
-      "gaps": ["港股配售/供股公告原件缺失（AR-10）", "与招股章程/定增的口径差异需真实样本确认"]
+      "gaps": [
+        "港股配售/供股公告原件缺失（AR-10）",
+        "与招股章程/定增的口径差异需真实样本确认"
+      ]
     },
     {
       "shape": "cn_report_summary_digest",
@@ -241,7 +381,10 @@
       "evidence_status": "missing",
       "integration_status": "not_integrated",
       "case_ids": [],
-      "gaps": ["年报/半年报摘要件原件缺失（AR-11）", "正交修饰见 lifecycle_revision_overlay；缺版本对"]
+      "gaps": [
+        "年报/半年报摘要件原件缺失（AR-11）",
+        "正交修饰见 lifecycle_revision_overlay；缺版本对"
+      ]
     },
     {
       "shape": "sec_40f_or_6k_body",
@@ -249,7 +392,10 @@
       "evidence_status": "missing",
       "integration_status": "not_integrated",
       "case_ids": [],
-      "gaps": ["40-F/6-K 正文原件缺失（AR-12）", "6-K 容器部分见 container_attachment；正文策略未独立"]
+      "gaps": [
+        "40-F/6-K 正文原件缺失（AR-12）",
+        "6-K 容器部分见 container_attachment；正文策略未独立"
+      ]
     }
   ]
 }

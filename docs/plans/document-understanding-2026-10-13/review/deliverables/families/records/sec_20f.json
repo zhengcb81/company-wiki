@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "sec_20f",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "sec"
@@ -226,6 +226,30 @@
         "fine": "on_candidate",
         "demand_class": "mixed"
       }
+    },
+    {
+      "role": "risk",
+      "aliases": [
+        "D. Risk Factors"
+      ],
+      "heading_path": [
+        [
+          "Item 3. Key Information",
+          "Item 3 Key Information"
+        ],
+        [
+          "D. Risk Factors"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "具体风险（含监管、结构、业务）与一般套话的区分"
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     }
   ],
   "reading_questions": [
@@ -233,7 +257,8 @@
     "经营回顾中的业务驱动",
     "监管约束对业务的事实影响及归因",
     "具体风险与一般风险的区分",
-    "币种、会计准则与报告期口径"
+    "币种、会计准则与报告期口径",
+    "区分真实Item 3 Key Information下D Risk Factors正文与目录/see Item交叉引用；Item 7股东交易不套10-K的MD&A。"
   ],
   "context_requirements": [
     {

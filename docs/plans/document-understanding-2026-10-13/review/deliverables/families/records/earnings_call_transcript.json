@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "earnings_call_transcript",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "sec",
@@ -80,7 +80,8 @@
       "分析师问题中的数字与假设是提问者内容，须绑定问句与发言人",
       "网站抓取件的来源是聚合平台（如 transcript 站点），原始披露是公司新闻稿/8-K，来源角色要分开",
       "constant currency 等全局限定语随局部事实一起保留",
-      "Operator/主持人串词不含业务事实"
+      "Operator/主持人串词不含业务事实",
+      "当reported与constant-currency增长率不同，两数及对应口径各自保留；when available/where same不代表全部数字采用CC。"
     ]
   },
   "sections": [
@@ -231,7 +232,8 @@
     "编辑摘要/术语表与真实发言的分离",
     "分析师问题内容不等于公司披露",
     "管理层修正、补充与明确否定",
-    "全局限定语（constant currency、non-GAAP）随局部事实保留"
+    "全局限定语（constant currency、non-GAAP）随局部事实保留",
+    "按原声明的范围保留reported/constant currency：同比默认、CC在可得时另报、两者相同时只报一数，不把全部增速重标CC或GAAP。"
   ],
   "context_requirements": [
     {
@@ -293,7 +295,7 @@
   "evidence_status": {
     "design": "verified",
     "real_samples": [
-      "case-earnings-call-roles-01"
+      "case-earnings-call-roles-02"
     ],
     "missing_shapes": [
       "公司原始发布版实录（当前样本为聚合平台 TXT）",
@@ -301,6 +303,6 @@
     ]
   },
   "case_ids": [
-    "case-earnings-call-roles-01"
+    "case-earnings-call-roles-02"
   ]
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="17" time="5.617" timestamp="2026-10-24T12:04:18.829322+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_20f_real_nested_risk[Item 3. Key Information]" time="0.568" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_20f_real_nested_risk[Item 3 Key Information]" time="0.007" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_20f_cannot_borrow_10k_mda_number" time="0.003" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_hk_interim_postperiod_is_local_outlook[RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD]" time="0.047" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_hk_interim_postperiod_is_local_outlook[RECENT DEVELOPMENT AFTER THE REPORTING PERIOD]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_hk_interim_postperiod_is_local_outlook[\u5831\u544a\u671f\u5f8c\u7684\u8fd1\u671f\u767c\u5c55]" time="0.007" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_20f_notes_business_mechanism_uses_its_actual_part[Item 18. Financial Statements]" time="0.004" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_20f_risk_subsection_d_does_not_escape_parent_scope" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_interim_declared_business_review_can_be_root_heading" time="0.005" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_hk_prospectus_second_listing_uses_source_chapter_titles[\u6211\u5011\u7684\u5e02\u5834\u6a5f\u6703-industry]" time="0.002"><failure message="KeyError: &quot;unknown profile_id: 'hk_prospectus'&quot;">tests\unit\document_understanding_root\test_market_family_strategy_paths.py:54: in test_hk_prospectus_second_listing_uses_source_chapter_titles
+    assert matched(profile('hk_prospectus','prospectus','hkex'),heading)==role
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_root\test_market_family_strategy_paths.py:12: in profile
+    return resolve_reading_profile(get_profile(pid),original,{'family':family,'regime':regime,'form_type':form})
+                                   ^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\__init__.py:74: in get_profile
+    return profile_wire(profile_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:131: in profile_wire
+    return profile_by_id(profile_id).to_wire()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:118: in profile_by_id
+    binding = _binding(profile_id)
+              ^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:63: in _binding
+    raise KeyError(f"unknown profile_id: {profile_id!r}")
+E   KeyError: "unknown profile_id: 'hk_prospectus'"</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_hk_prospectus_second_listing_uses_source_chapter_titles[\u52df\u96c6\u8cc7\u91d1\u7528\u9014-fundraising]" time="0.002"><failure message="KeyError: &quot;unknown profile_id: 'hk_prospectus'&quot;">tests\unit\document_understanding_root\test_market_family_strategy_paths.py:54: in test_hk_prospectus_second_listing_uses_source_chapter_titles
+    assert matched(profile('hk_prospectus','prospectus','hkex'),heading)==role
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_root\test_market_family_strategy_paths.py:12: in profile
+    return resolve_reading_profile(get_profile(pid),original,{'family':family,'regime':regime,'form_type':form})
+                                   ^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\__init__.py:74: in get_profile
+    return profile_wire(profile_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:131: in profile_wire
+    return profile_by_id(profile_id).to_wire()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:118: in profile_by_id
+    binding = _binding(profile_id)
+              ^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:63: in _binding
+    raise KeyError(f"unknown profile_id: {profile_id!r}")
+E   KeyError: "unknown profile_id: 'hk_prospectus'"</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_hk_prospectus_second_listing_uses_source_chapter_titles[\u6211\u5011\u7684\u696d\u52d9-business]" time="0.002"><failure message="KeyError: &quot;unknown profile_id: 'hk_prospectus'&quot;">tests\unit\document_understanding_root\test_market_family_strategy_paths.py:54: in test_hk_prospectus_second_listing_uses_source_chapter_titles
+    assert matched(profile('hk_prospectus','prospectus','hkex'),heading)==role
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_root\test_market_family_strategy_paths.py:12: in profile
+    return resolve_reading_profile(get_profile(pid),original,{'family':family,'regime':regime,'form_type':form})
+                                   ^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\__init__.py:74: in get_profile
+    return profile_wire(profile_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:131: in profile_wire
+    return profile_by_id(profile_id).to_wire()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:118: in profile_by_id
+    binding = _binding(profile_id)
+              ^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:63: in _binding
+    raise KeyError(f"unknown profile_id: {profile_id!r}")
+E   KeyError: "unknown profile_id: 'hk_prospectus'"</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_cn_prospectus_business_chapter_does_not_require_itself_twice" time="0.002"><failure message="KeyError: &quot;unknown profile_id: 'cn_prospectus'&quot;">tests\unit\document_understanding_root\test_market_family_strategy_paths.py:58: in test_cn_prospectus_business_chapter_does_not_require_itself_twice
+    assert matched(profile('cn_prospectus','prospectus','cn_exchange'),'第六节 业务与技术')=='business'
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\document_understanding_root\test_market_family_strategy_paths.py:12: in profile
+    return resolve_reading_profile(get_profile(pid),original,{'family':family,'regime':regime,'form_type':form})
+                                   ^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\__init__.py:74: in get_profile
+    return profile_wire(profile_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:131: in profile_wire
+    return profile_by_id(profile_id).to_wire()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:118: in profile_by_id
+    binding = _binding(profile_id)
+              ^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\profiles\registry.py:63: in _binding
+    raise KeyError(f"unknown profile_id: {profile_id!r}")
+E   KeyError: "unknown profile_id: 'cn_prospectus'"</failure></testcase><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_actual_native_headings_bind_the_body_policy[20-F-FORM 20-F-heads0-risk]" time="0.546" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_actual_native_headings_bind_the_body_policy[None-\u4e2d\u671f\u5831\u544a INTERIM REPORT-heads1-outlook]" time="0.012" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_actual_native_headings_bind_the_body_policy[None-\u4e2d\u671f\u5831\u544a INTERIM REPORT-heads2-business]" time="0.009" /><testcase classname="tests.unit.document_understanding_root.test_market_family_strategy_paths" name="test_conditional_currency_policy_reaches_actual_model_request" time="0.211" /></testsuite></testsuites>

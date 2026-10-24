@@ -1,0 +1,317 @@
+[
+  {
+    "sample_id": "du5-cn-proya-q1",
+    "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+    "status": "PARTIAL",
+    "metrics": {
+      "critical_fact_recall": null,
+      "critical_fact_recall_denominator": 0,
+      "critical_fact_recall_denominator_declared": 0,
+      "critical_fact_unavailable": 0,
+      "critical_fact_not_evaluated": 0,
+      "optional_correctness_facts": 7,
+      "critical_fact_coverage": null,
+      "narrative_fact_recall": 1.0,
+      "narrative_facts_passed": 1,
+      "narrative_facts_total": 1,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "fact_recall": 1.0,
+      "fact_recall_denominator": 1,
+      "fact_recall_denominator_declared": 1,
+      "route_accuracy": null,
+      "evidence_validity": 1.0,
+      "basis_pass_rate": 1.0,
+      "context_completeness": null,
+      "selected_span_count": 30,
+      "claim_count": 0,
+      "semantic_unit_count": 0,
+      "review_supplied": false,
+      "reviewed_claims": 0,
+      "selected_spans": 30,
+      "selected_text_bytes": 2051
+    },
+    "route": null,
+    "selected_count": 30,
+    "reading_policies": [
+      {
+        "profile_id": "cn_quarterly",
+        "profile_version": "cn_quarterly/v2+29db62e597685110",
+        "family": "quarterly",
+        "family_policy": {
+          "id": "cn_quarterly_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "缺含重大经营事件的更多行业季报",
+            "跨页断句恢复归 ROOT 依赖闭包"
+          ]
+        }
+      },
+      {
+        "profile_id": "cn_quarterly",
+        "profile_version": "cn_quarterly/v2+29db62e597685110",
+        "family": "quarterly",
+        "family_policy": {
+          "id": "cn_quarterly_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "缺含重大经营事件的更多行业季报",
+            "跨页断句恢复归 ROOT 依赖闭包"
+          ]
+        }
+      },
+      {
+        "profile_id": "cn_quarterly",
+        "profile_version": "cn_quarterly/v2+29db62e597685110",
+        "family": "quarterly",
+        "family_policy": {
+          "id": "cn_quarterly_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "缺含重大经营事件的更多行业季报",
+            "跨页断句恢复归 ROOT 依赖闭包"
+          ]
+        }
+      }
+    ],
+    "mapped_source_count": 30,
+    "producer_tree_sha256": "d428de4204b6dcfad953643b0ea2aafca7ffdc40fbda4b882ce57a4a98dd0510",
+    "parser_entry": "parse_pdf_bytes",
+    "original_unchanged": true,
+    "external_calls": 0,
+    "seconds": 1.839
+  },
+  {
+    "sample_id": "du5-hk-kingsoft-interim",
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "status": "FAIL",
+    "metrics": {
+      "critical_fact_recall": 0.16666666666666666,
+      "critical_fact_recall_denominator": 6,
+      "critical_fact_recall_denominator_declared": 6,
+      "critical_fact_unavailable": 0,
+      "critical_fact_not_evaluated": 0,
+      "optional_correctness_facts": 3,
+      "critical_fact_coverage": 1.0,
+      "narrative_fact_recall": 0.16666666666666666,
+      "narrative_facts_passed": 1,
+      "narrative_facts_total": 6,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "fact_recall": 0.125,
+      "fact_recall_denominator": 8,
+      "fact_recall_denominator_declared": 8,
+      "route_accuracy": null,
+      "evidence_validity": 1.0,
+      "basis_pass_rate": 0.0,
+      "context_completeness": null,
+      "selected_span_count": 96,
+      "claim_count": 0,
+      "semantic_unit_count": 0,
+      "review_supplied": false,
+      "reviewed_claims": 0,
+      "selected_spans": 96,
+      "selected_text_bytes": 7780
+    },
+    "route": null,
+    "selected_count": 96,
+    "reading_policies": [
+      {
+        "profile_id": "hk_periodic",
+        "profile_version": "hk_periodic/v2+901fadeb175bf571",
+        "family": "interim",
+        "family_policy": {
+          "id": "hk_interim_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "中期报告摘要/更正版本对缺失"
+          ]
+        }
+      },
+      {
+        "profile_id": "hk_periodic",
+        "profile_version": "hk_periodic/v2+901fadeb175bf571",
+        "family": "interim",
+        "family_policy": {
+          "id": "hk_interim_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "中期报告摘要/更正版本对缺失"
+          ]
+        }
+      },
+      {
+        "profile_id": "hk_periodic",
+        "profile_version": "hk_periodic/v2+901fadeb175bf571",
+        "family": "interim",
+        "family_policy": {
+          "id": "hk_interim_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "中期报告摘要/更正版本对缺失"
+          ]
+        }
+      },
+      {
+        "profile_id": "hk_periodic",
+        "profile_version": "hk_periodic/v2+901fadeb175bf571",
+        "family": "interim",
+        "family_policy": {
+          "id": "hk_interim_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "中期报告摘要/更正版本对缺失"
+          ]
+        }
+      }
+    ],
+    "mapped_source_count": 96,
+    "producer_tree_sha256": "d428de4204b6dcfad953643b0ea2aafca7ffdc40fbda4b882ce57a4a98dd0510",
+    "parser_entry": "parse_pdf_bytes",
+    "original_unchanged": true,
+    "external_calls": 0,
+    "seconds": 4.052
+  },
+  {
+    "sample_id": "du5-cn-gbits-call",
+    "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+    "status": "FAIL",
+    "metrics": {
+      "critical_fact_recall": 0.2,
+      "critical_fact_recall_denominator": 5,
+      "critical_fact_recall_denominator_declared": 5,
+      "critical_fact_unavailable": 0,
+      "critical_fact_not_evaluated": 0,
+      "optional_correctness_facts": 0,
+      "critical_fact_coverage": 1.0,
+      "narrative_fact_recall": 0.3333333333333333,
+      "narrative_facts_passed": 3,
+      "narrative_facts_total": 9,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "fact_recall": 0.3333333333333333,
+      "fact_recall_denominator": 9,
+      "fact_recall_denominator_declared": 9,
+      "route_accuracy": null,
+      "evidence_validity": 1.0,
+      "basis_pass_rate": 0.0,
+      "context_completeness": null,
+      "selected_span_count": 19,
+      "claim_count": 0,
+      "semantic_unit_count": 0,
+      "review_supplied": false,
+      "reviewed_claims": 0,
+      "selected_spans": 19,
+      "selected_text_bytes": 6988
+    },
+    "route": null,
+    "selected_count": 19,
+    "reading_policies": [
+      {
+        "profile_id": "generic",
+        "profile_version": "generic/v2+11967df8c0fa83d9",
+        "family": "unknown",
+        "family_policy": {
+          "id": null,
+          "design_status": "proposed",
+          "spec_status": "proposed",
+          "evidence_status": "missing",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "Current purpose not resolved by bounded original evidence."
+          ]
+        }
+      }
+    ],
+    "mapped_source_count": 19,
+    "producer_tree_sha256": "d428de4204b6dcfad953643b0ea2aafca7ffdc40fbda4b882ce57a4a98dd0510",
+    "parser_entry": "normalize_document",
+    "original_unchanged": true,
+    "external_calls": 0,
+    "seconds": 0.565
+  },
+  {
+    "sample_id": "du5-us-msft-ex991",
+    "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+    "status": "FAIL",
+    "metrics": {
+      "critical_fact_recall": 0.16666666666666666,
+      "critical_fact_recall_denominator": 6,
+      "critical_fact_recall_denominator_declared": 6,
+      "critical_fact_unavailable": 0,
+      "critical_fact_not_evaluated": 0,
+      "optional_correctness_facts": 3,
+      "critical_fact_coverage": 1.0,
+      "narrative_fact_recall": 0.16666666666666666,
+      "narrative_facts_passed": 1,
+      "narrative_facts_total": 6,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "fact_recall": 0.16666666666666666,
+      "fact_recall_denominator": 6,
+      "fact_recall_denominator_declared": 6,
+      "route_accuracy": null,
+      "evidence_validity": 1.0,
+      "basis_pass_rate": 1.0,
+      "context_completeness": null,
+      "selected_span_count": 7,
+      "claim_count": 0,
+      "semantic_unit_count": 0,
+      "review_supplied": false,
+      "reviewed_claims": 0,
+      "selected_spans": 7,
+      "selected_text_bytes": 10518
+    },
+    "route": null,
+    "selected_count": 7,
+    "reading_policies": [
+      {
+        "profile_id": "presentation",
+        "profile_version": "presentation/v2+bd6c36bbdbcf4e33",
+        "family": "presentation",
+        "family_policy": {
+          "id": "investor_presentation",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "PPTX/图片载体原件缺失",
+            "图表 OCR 完整性不在本包范围"
+          ]
+        }
+      }
+    ],
+    "mapped_source_count": 7,
+    "producer_tree_sha256": "d428de4204b6dcfad953643b0ea2aafca7ffdc40fbda4b882ce57a4a98dd0510",
+    "parser_entry": "normalize_document",
+    "original_unchanged": true,
+    "external_calls": 0,
+    "seconds": 0.962
+  }
+]

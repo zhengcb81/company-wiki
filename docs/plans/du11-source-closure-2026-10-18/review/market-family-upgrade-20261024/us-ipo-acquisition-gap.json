@@ -1,0 +1,21 @@
+{
+  "schema_version": "market-sample-acquisition-gap/1",
+  "observed_at": "2026-10-24T11:08:25Z",
+  "sample_intent": "Snowflake 2020 S-1",
+  "entry": "installed filing-fetch scripts/fetch_filing.py schema 2.0",
+  "filing_intent": "fetch_if_missing",
+  "request_limits": {"max_bytes": 10000000, "timeout_seconds": 60, "max_cost_usd": "0.00"},
+  "status": "upstream_error",
+  "code": "budget_exceeded",
+  "provider_started": false,
+  "http_exchanges": 0,
+  "wire_body_bytes": 0,
+  "downloads": 0,
+  "fee_observed": null,
+  "retry_scope": "none",
+  "journal_attempt_id": "urn:company-wiki:acquisition-attempt:sha256:8213332550133a48d12918aa5106cb66c2f82033efbd3471fd57bf92281f6972",
+  "local_preparation_branch": "acquisition.select returns local blocks_download with its reason; journal outcome missing and no candidate/adapter/error",
+  "precise_triggered_bound": "NOT_YET_OBSERVED",
+  "financial_budget_exhaustion_proven": false,
+  "next_action": "Diagnose the bounded local-preparation result and expose exact phase/limit/counters through the existing FF upstream-cause boundary; do not rerun identical acquisition, increase ceilings blindly, bypass local-reuse checks or report IPO material acquired."
+}

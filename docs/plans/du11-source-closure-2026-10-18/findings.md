@@ -603,3 +603,10 @@ ROOT只读实测6个中性source-text观测：英文two businesses结构eligible
 ## 2026-10-24 真实样本规律与请求数值规范化根因
 
 最新状态以CURRENT_STATUS.md/json为准。13真实原件抽读与46页、2页视觉检查已留证于review/market-family-upgrade-20261024/，继续扩大不同公司/缺样并冻结源侧检查点，再按现24family单registry实测、TDD修复，不增第二router/逐材料许可。首次push三项失败已根修；最终458来源语义与30真实请求恢复分批独审通过，正常提交推送待完成。最新annual14为96/8146字符、55任务、8P/6partial/0missing，15.84%支持恢复；正式summary/cache/RF仍OPEN。未下载、未付费调用、未改原件。
+
+
+## 2026-10-24 跨市场/文种样本进一步升级
+
+首13+DU5九+补三共25真实原件SHA核验，有界页/段落/HTML研究窗口，无raw副本/模型/下载；USIPO正规FF试取0HTTP/0provider因budget_exceeded，精确限额待诊断。五family在单catalog内升级：20F层级、HK中报期后/业务root、CN/HK招股root/行业/募资、电话会条件CC；旧错误case01字节保留，新02及active引用修正。首5F/4P及IPO真4F/13P→75相关P，最终独立61P/3.71s、16被审文件SHA前后一致。中途sandbox Temp故障、ROOT错误profileid夹具、审查者漏封面夹具等失败均保留，不计产品根因。
+
+三FAIL不是全假警报：真实漏DOCX后续计划/不确定性和EX99.1指标/指引；也有oldgold ASR/精确财务值职责/替代support错误。四份本次来源映射0遗漏；最终同样本无内容得分提升，不能说五policy匹配绿等于内容验收通过。见review/market-family-upgrade-20261024/的三份独审、strategy_upgrade_design与remaining_root_causes。旧公司formal summary/cache/RF循环仍OPEN。原source/request根修正常推送3b4110a3：8199P/24skip+146契约，精确CI40087657562 success；本轮策略组件正常发布待收。

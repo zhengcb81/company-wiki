@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_hk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -118,12 +118,16 @@
       "aliases": [
         "行業概覽",
         "行业概览",
-        "INDUSTRY OVERVIEW"
+        "INDUSTRY OVERVIEW",
+        "我們的市場機會",
+        "Our Market Opportunity"
       ],
       "heading_path": [
         [
           "行業概覽",
-          "INDUSTRY OVERVIEW"
+          "INDUSTRY OVERVIEW",
+          "我們的市場機會",
+          "Our Market Opportunity"
         ]
       ],
       "priority": 1,
@@ -274,6 +278,53 @@
         "fine": "on_candidate",
         "demand_class": "mixed"
       }
+    },
+    {
+      "role": "business",
+      "aliases": [
+        "我們的業務",
+        "Our Business",
+        "業務",
+        "BUSINESS"
+      ],
+      "heading_path": [
+        [
+          "我們的業務",
+          "Our Business",
+          "業務",
+          "BUSINESS"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "品牌/产品/渠道与商业模式",
+        "收入与加盟/合伙人机制"
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
+    },
+    {
+      "role": "fundraising",
+      "aliases": [
+        "募集資金用途"
+      ],
+      "heading_path": [
+        [
+          "募集資金用途"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "募资净额用途、包销与老股安排的区别"
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     }
   ],
   "reading_questions": [
@@ -282,7 +333,8 @@
     "门店/经营指标的模式与地域口径",
     "未來計劃及所得款項用途与项目条件",
     "客户/供应商依赖与集中度",
-    "繁简英语言版本的别名合并与去重"
+    "繁简英语言版本的别名合并与去重",
+    "招股/二次上市文件的市場機會統計保留第三方作者與資料日期，GMV/消費規模目標不等於公司收入；募集資金用途按發售時點及條件讀取。"
   ],
   "context_requirements": [
     {

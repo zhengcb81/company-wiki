@@ -1,0 +1,22 @@
+[
+  {
+    "Name": ".tmp-market-policy",
+    "Absent": true
+  },
+  {
+    "Name": ".tmp-market-policy2",
+    "Absent": true
+  },
+  {
+    "Name": ".tmp-market-policy3",
+    "Absent": true
+  },
+  {
+    "Name": ".tmp-market-ipo-red",
+    "Absent": true
+  },
+  {
+    "Name": ".tmp-market-ipo-red2",
+    "Absent": true
+  }
+]

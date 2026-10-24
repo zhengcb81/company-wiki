@@ -1,0 +1,1251 @@
+{
+  "schema_version": "market-family-independent-baseline-review/1",
+  "created_at": "2026-10-24T10:57:38.099558+00:00",
+  "reviewer": "/root/w08_reporting_selection_content",
+  "verdict": "REAL_SELECTION_GAPS_AND_MEASUREMENT_GOLD_ISSUES_MIXED_NOT_BLANKET_PRODUCT_FAIL",
+  "binding": {
+    "replay_script_sha256": "49c189b5288e231136ee5d73bb12470344941e5518cda2482cb241b1aa2abf58",
+    "observer_sha256": "5554e69372cc5364ad351216ca9a02b70fb4614885ddd4862415a25be74cfd3c",
+    "evaluate_sha256": "ecc0281f48e189574840bfcc4bcefa6266a2bb508d13e18f8031474cf47cc3eb",
+    "checkers_sha256": "d8792217a137fd55f1443d974c234a951945c006e9c26c62ff2e04f49d57c212"
+  },
+  "samples": [
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "binding": {
+        "original_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+        "original_byte_size": 17222,
+        "baseline_gzip_sha256": "a9491dd918c2b18445f0b7aa8c2059b30e6be5994bda3d0ad53eb2ee89827a27",
+        "gold_sha256": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d"
+      },
+      "source_verification": {
+        "original_unchanged": true,
+        "reader": "docx_paragraphs",
+        "read_blocks": 116
+      },
+      "observer_status": "FAIL",
+      "observer_metrics": {
+        "critical_fact_recall": 0.2,
+        "critical_fact_recall_denominator": 5,
+        "critical_fact_recall_denominator_declared": 5,
+        "optional_correctness_facts": 0,
+        "narrative_fact_recall": 0.3333333333333333,
+        "document_meta_fact_recall": null,
+        "fact_recall": 0.3333333333333333,
+        "fact_recall_denominator": 9,
+        "fact_recall_denominator_declared": 9
+      },
+      "selected_locator_count": 19,
+      "mapped_source_row_count": 19,
+      "unmapped_selected_locators": [],
+      "selected_profiles": [
+        {
+          "profile_id": "generic",
+          "family": "unknown"
+        }
+      ],
+      "critical_facts": [
+        {
+          "fact_id": "yy-flow-decline-premise",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "analyst_question",
+          "gold_modality": "question",
+          "independent_status": "visible_role_literal_present",
+          "assessment": "loc:v1/paragraph:1自带说话人1、条件如果和问号；source文本没有抹掉分析师归属。basis失败中的斜线标签/省略号不是原文字符串。typed speaker/task归属仍未评估。",
+          "must_preserve": [
+            "说话人1/分析师提问",
+            "流水是否还有一定的回升的空间",
+            "如果…趋缓"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/paragraph:1",
+                  "page": null,
+                  "excerpt": "说话人1 00:00 下滑的算是比较明显。然后考虑到市场竞争的情况，就是5月和6月分别上线了一些比较火的休闲类产品，或者就是一些新品，像寻道包括凡人修仙传这一类的。然后目前市场的竞争环境观察下来是否的这种类型游戏有一定趋缓。然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？想请教一下你，",
+                  "source_role": "company_filing"
+                }
+              ]
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "就是5月和6月分别上线了一些比较火的休闲类产品，或者就是一些新品，像寻道包括凡人修仙传这一类的。",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/paragraph:1",
+                  "page": null,
+                  "excerpt": "说话人1 00:00 下滑的算是比较明显。然后考虑到市场竞争的情况，就是5月和6月分别上线了一些比较火的休闲类产品，或者就是一些新品，像寻道包括凡人修仙传这一类的。然后目前市场的竞争环境观察下来是否的这种类型游戏有一定趋缓。然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？想请教一下你，",
+                  "source_role": "company_filing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "fact_id": "buydown-cut-and-stock-operation-plan",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "management_answer",
+          "gold_modality": "plan",
+          "independent_status": "missing_selected_future_plan",
+          "assessment": "原文后续存量运营/希望减少买量依赖未选；已选此前ROI及存量经营解释不能补齐往后策略。",
+          "must_preserve": [
+            "往后/会",
+            "尽量的去减少对买量的一个依赖",
+            "更多的去存量运营"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "buydown-no-return-negation",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "management_answer",
+          "gold_modality": "negation",
+          "independent_status": "missing_selected_and_gold_polarity_ambiguous",
+          "assessment": "原文ASR为“买量会不会再走到原来的水平了”，上下文有已减少/短期投放，但音频未核，不能给确定“不会再”的自动gold强断言。",
+          "must_preserve": [
+            "买量",
+            "不会(再)",
+            "原来的水平"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "但整体来看的话，买量会不会再走到原来的水平了。",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "yy-stabilize-target-uncertain",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "management_answer",
+          "gold_modality": "plan",
+          "independent_status": "missing_selected_uncertainty",
+          "assessment": "原文同段希望在新水平稳住与目前不好判断/再观察均未选；真实限定缺失。",
+          "must_preserve": [
+            "希望",
+            "目前也不太好判断",
+            "再观察一段时间"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "所以后期的话我们希望能够在一个新的水平去稳住这款产品",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "outpost-update-plan-uncommitted",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "management_answer",
+          "gold_modality": "plan",
+          "independent_status": "missing_selected_uncommitted_plan",
+          "assessment": "原文Steam等节点更新意向及“具体的计划还没有/可能变化”未选；真实计划与否定限定缺失。",
+          "must_preserve": [
+            "希望",
+            "具体的计划还没有",
+            "可能还会有所变化"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "我们也会跟着这些节点再去集中推出一些更新迭代的版本",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "binding": {
+        "original_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+        "original_byte_size": 155557,
+        "baseline_gzip_sha256": "93a2ec6e56da98c04f9fa4963ba4b8c7ed24fcca12dc28dbaf3f867c673cb9e7",
+        "gold_sha256": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12"
+      },
+      "source_verification": {
+        "original_unchanged": true,
+        "reader": "pdf_targeted_pages",
+        "read_blocks": [
+          1,
+          2,
+          5,
+          6,
+          8,
+          10,
+          11,
+          12
+        ]
+      },
+      "observer_status": "PARTIAL",
+      "observer_metrics": {
+        "critical_fact_recall": null,
+        "critical_fact_recall_denominator": 0,
+        "critical_fact_recall_denominator_declared": 0,
+        "optional_correctness_facts": 7,
+        "narrative_fact_recall": 1.0,
+        "document_meta_fact_recall": null,
+        "fact_recall": 1.0,
+        "fact_recall_denominator": 1,
+        "fact_recall_denominator_declared": 1
+      },
+      "selected_locator_count": 30,
+      "mapped_source_row_count": 30,
+      "unmapped_selected_locators": [],
+      "selected_profiles": [
+        {
+          "profile_id": "cn_quarterly",
+          "family": "quarterly"
+        }
+      ],
+      "critical_facts": [
+        {
+          "fact_id": "report-period-unaudited-identity",
+          "importance": "critical",
+          "target_kind": "disposition_context",
+          "fact_scope": "document_meta",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "document_meta_partially_visible_not_measured",
+          "assessment": "已选第一季度报告短标题，但完整公司/1–3月/发布日未选；benchmark没有context_evidence，属于元数据通道未观测，不能算主要业务recall失败。",
+          "must_preserve": [
+            "2026 年第一季度报告",
+            "2026 年1—3 月",
+            "珀莱雅化妆品股份有限公司",
+            "2026 年4 月20 日"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "珀莱雅化妆品股份有限公司\n2026 年第一季度报告",
+              "page": 1,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "合并利润表\n2026 年1—3 月",
+              "page": 8,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "特此公告\n珀莱雅化妆品股份有限公司董事会\n2026 年4 月20 日",
+              "page": 12,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "statements-unaudited-no-new-standards",
+          "importance": "critical",
+          "target_kind": "disposition_context",
+          "fact_scope": "document_meta",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "document_meta_missing_from_selected_not_measured",
+          "assessment": "原件未审计勾选/未经审计与日期均明确，已选文本未载；front-end/context未观测。",
+          "must_preserve": [
+            "□是√否",
+            "未经审计",
+            "2026 年3 月31 日"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "第一季度财务报表是否经审计\n□是√否",
+              "page": 1,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "(一)审计意见类型\n□适用√不适用",
+              "page": 5,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元\n币种:人民币\n审计类型：未经审计",
+              "page": 6,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "q1-revenue-yoy-decline",
+          "importance": "critical",
+          "target_kind": "correctness_if_emitted",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "optional_financial_not_emitted",
+          "assessment": "required_business分母之外；原文收入/-2.29完整，不在selected；无claims所以不构成数字错误证据。",
+          "must_preserve": [
+            "2,305,344,625.43",
+            "2,359,334,894.91",
+            "-2.29",
+            "本报告期",
+            "元"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "营业收入\n2,305,344,625.43\n2,359,334,894.91\n-2.29",
+              "page": 1,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "一、营业总收入\n2,305,344,625.43\n2,359,334,894.91",
+              "page": 8,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "attributable-net-profit-q1",
+          "importance": "critical",
+          "target_kind": "correctness_if_emitted",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "optional_financial_not_emitted",
+          "assessment": "原文归母与少数/合并净利可区分；未选目标归母值，无claims不构成归属幻觉。",
+          "must_preserve": [
+            "366,686,734.14",
+            "390,281,697.93",
+            "-6.05",
+            "归属于"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "归属于上市公司股东的净\n利润\n366,686,734.14\n390,281,697.93\n-6.05",
+              "page": 1,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "1.归属于母公司股东的净利润（净\n亏损以“-”号填列）\n366,686,734.14\n390,281,697.93",
+              "page": 10,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "deducted-net-profit-and-nonrecurring-total",
+          "importance": "critical",
+          "target_kind": "correctness_if_emitted",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "optional_financial_not_emitted",
+          "assessment": "未选精确扣非数据；替代support只“非经常性损益表”标题无法独立支撑扣非总额，gold语义包需复核。",
+          "must_preserve": [
+            "341,157,237.18",
+            "378,934,039.06",
+            "-9.97",
+            "扣除非经常性损益",
+            "本期金额"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "归属于上市公司股东的扣\n除非经常性损益的净利润\n341,157,237.18\n378,934,039.06\n-9.97",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "(二)非经常性损益项目和金额\n√适用□不适用\n单位:元币种:人民币",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "operating-cash-flow-collapse",
+          "importance": "critical",
+          "target_kind": "correctness_if_emitted",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "optional_values_visible_qualifiers_not_proved",
+          "assessment": "loc:v1/page:11/paragraph:31保留两期净现金流数；page3/paragraph23保留-84.16及货款/推广费原因。未据单独裸数证明币种/期次任务局部完整。",
+          "must_preserve": [
+            "106,971,167.62",
+            "675,490,380.59",
+            "-84.16",
+            "本报告期"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "经营活动产生的现金流量\n净额\n106,971,167.62\n675,490,380.59\n-84.16",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "经营活动产生的现金流量净\n额\n106,971,167.62\n675,490,380.59",
+              "page": 11,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/page:11/paragraph:31",
+                  "page": 11,
+                  "excerpt": "经营活动产生的现金流量净\n额\n106,971,167.62\n675,490,380.59",
+                  "source_role": "company_filing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "fact_id": "eps-basic-diluted-unit",
+          "importance": "critical",
+          "target_kind": "correctness_if_emitted",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "optional_financial_not_emitted",
+          "assessment": "未选EPS，原件清楚元/股与-6.06；不要求为了benchmark把全表切片。",
+          "must_preserve": [
+            "0.93",
+            "0.99",
+            "元/股",
+            "-6.06",
+            "基本",
+            "稀释"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "基本每股收益（元/股）\n0.93\n0.99\n-6.06",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "稀释每股收益（元/股）\n0.93\n0.99\n-6.06",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "total-assets-point-in-time",
+          "importance": "critical",
+          "target_kind": "correctness_if_emitted",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "optional_financial_not_emitted",
+          "assessment": "资产时点/基期数未选，无claims不能说存量/流量错。",
+          "must_preserve": [
+            "8,912,125,388.70",
+            "8,487,416,240.25",
+            "5.00",
+            "本报告期末",
+            "上年度末"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "总资产\n8,912,125,388.70\n8,487,416,240.25\n5.00",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "本报告期末\n上年度末\n本报告期末比上\n年度末增减变动\n幅度(%)",
+              "page": 2,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "binding": {
+        "original_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "original_byte_size": 3396644,
+        "baseline_gzip_sha256": "35a7eb40490824e2fa3b7ed01bb38cbd93cacdfb9e322dc29a87a895940af02b",
+        "gold_sha256": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5"
+      },
+      "source_verification": {
+        "original_unchanged": true,
+        "reader": "pdf_targeted_pages",
+        "read_blocks": [
+          5,
+          9,
+          12,
+          13,
+          14,
+          41,
+          45,
+          67
+        ]
+      },
+      "observer_status": "FAIL",
+      "observer_metrics": {
+        "critical_fact_recall": 0.16666666666666666,
+        "critical_fact_recall_denominator": 6,
+        "critical_fact_recall_denominator_declared": 6,
+        "optional_correctness_facts": 3,
+        "narrative_fact_recall": 0.16666666666666666,
+        "document_meta_fact_recall": null,
+        "fact_recall": 0.125,
+        "fact_recall_denominator": 8,
+        "fact_recall_denominator_declared": 8
+      },
+      "selected_locator_count": 96,
+      "mapped_source_row_count": 96,
+      "unmapped_selected_locators": [],
+      "selected_profiles": [
+        {
+          "profile_id": "hk_periodic",
+          "family": "interim"
+        }
+      ],
+      "critical_facts": [
+        {
+          "fact_id": "total-revenue-h1-2025",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_material",
+          "assessment": "总收入/17.8%未选，原文第5/9页清楚；真实已知未选，但是否强制进入叙述分母应与SourceRef/API财务责任拆开。",
+          "must_preserve": [
+            "4,319,204",
+            "人民幣千元",
+            "17.8%",
+            "3,667,464"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "收入\n3,667,464\n4,319,204\n17.8%",
+              "page": 5,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "人民幣千元",
+              "page": 5,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "總收入達到人民幣4,319.2百萬元（602.9百萬美元）",
+              "page": 9,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "segment-revenue-split",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "visible_rounded_values_local_qualifiers_incomplete",
+          "assessment": "第9页两个selected段明确公有云2978.8及行业云1340.4百万元与美元数，不能因不含精确千元值误说分部收入完全没选。六个月/基期定义的任务局部完整未证明。",
+          "must_preserve": [
+            "2,978,788",
+            "1,340,416",
+            "公有雲服務",
+            "行業雲服務",
+            "千元"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "公有雲服務\n2,421,912\n2,978,788\n415,823",
+              "page": 12,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+              "page": 12,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），",
+              "page": 9,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/page:9/paragraph:10",
+                  "page": 9,
+                  "excerpt": "公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），",
+                  "source_role": "company_filing"
+                }
+              ]
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 1,
+              "gold_quote": "行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+              "page": 9,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/page:9/paragraph:11",
+                  "page": 9,
+                  "excerpt": "行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+                  "source_role": "company_filing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "fact_id": "net-loss-us-gaap-widened",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_financial_material",
+          "assessment": "选中的是经营亏损561.2百万元及利息原因，不是净亏损773百万元，不能互换。原文净亏损可读取，但强制叙述分母含利润需重新对齐职责。",
+          "must_preserve": [
+            "(772,973)",
+            "717,334",
+            "淨虧損",
+            "7.8%",
+            "千元"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "淨虧損\n(717,334)\n(772,973)\n(107,901)",
+              "page": 12,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "7.8%",
+              "page": 5,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "淨虧損為人民幣773.0百萬元（107.9百萬美元），較二零二四年同期的淨虧損人民幣717.3百萬元有所增加。",
+              "page": 14,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "us-gaap-basis-not-ifrs",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "document_meta",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "partial_selected_basis_fragment",
+          "assessment": "选中第7页/13段含按美国公认会计准则比较的截断句、其他标题含未经审计；没有完整报表编制基础及与IFRS区别。不能认全缺，也不能据碎片宣称基准完整。",
+          "must_preserve": [
+            "美國公認會計準則",
+            "《國際財務報告準則》",
+            "未經審計"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "未經審計中期簡明財務報表乃根據美國公認會計準則編製，在若干方面有別於《國際財務報告準則》",
+              "page": 67,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+              "page": 5,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "unit-and-fx-convention",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "document_meta",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_reporting_definition",
+          "assessment": "原文千计、RMB/USD及7.1636汇率存在但未选；已选分部句有百万元币种，不能把整份文档的所有数默认为千元。定义是按需数字上下文责任。",
+          "must_preserve": [
+            "千計",
+            "7.1636",
+            "人民幣千元",
+            "美元"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "（除股數和每股數據外，所有金額以千計）",
+              "page": 12,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "以人民幣7.1636元兌1.00美元的中午買入匯率換算",
+              "page": 45,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "capex-vs-revenue",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_and_gold_alternative_not_entailing",
+          "assessment": "真实购置物业设备/预付款数未选。gold替代句“折旧摊销成本449.5百万元增加”不是现金capex原始购置数的充分支持，不能用其召回来证明capex。",
+          "must_preserve": [
+            "1,483,742",
+            "1,866,298",
+            "千元",
+            "購買物業及設備"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "購買物業及設備及預付款項\n(1,866,298)\n(1,483,742)\n(207,123)",
+              "page": 41,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "折舊及攤銷成本由人民幣449.5百萬元增加",
+              "page": 13,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "binding": {
+        "original_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+        "original_byte_size": 34288,
+        "baseline_gzip_sha256": "3c20588b7520315963e1be0f0384db4da874b78447cb11d255641e9216276bdb",
+        "gold_sha256": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5"
+      },
+      "source_verification": {
+        "original_unchanged": true,
+        "reader": "html_text_no_external_assets",
+        "read_blocks": 1
+      },
+      "observer_status": "FAIL",
+      "observer_metrics": {
+        "critical_fact_recall": 0.16666666666666666,
+        "critical_fact_recall_denominator": 6,
+        "critical_fact_recall_denominator_declared": 6,
+        "optional_correctness_facts": 3,
+        "narrative_fact_recall": 0.16666666666666666,
+        "document_meta_fact_recall": null,
+        "fact_recall": 0.16666666666666666,
+        "fact_recall_denominator": 6,
+        "fact_recall_denominator_declared": 6
+      },
+      "selected_locator_count": 7,
+      "mapped_source_row_count": 7,
+      "unmapped_selected_locators": [],
+      "selected_profiles": [
+        {
+          "profile_id": "presentation",
+          "family": "presentation"
+        }
+      ],
+      "critical_facts": [
+        {
+          "fact_id": "fy27-two-reporting-segments",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "plan",
+          "independent_status": "visible_future_segment_structure",
+          "assessment": "原selected段明确FY27 will transition，两个segment名字/旧三段与productlines分开；无摘要/claim尚不能代签实际采用。",
+          "must_preserve": [
+            "two reporting segments",
+            "Agents and Infra",
+            "Devices and Consumer",
+            "FY27"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "Beginning with FY27, we will transition",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/paragraph:3",
+                  "page": null,
+                  "excerpt": "Our updated segment reporting Satya Nadella, Chairman and Chief Executive Officer of Microsoft There’s no question AI represents a profound shift in both technology and business. It is changing what we build and how we operate, and it is blurring the boundaries between our products and reshaping our business models. To reflect this and provide increased transparency to investors, we are updating our financial reporti",
+                  "source_role": "company_filing"
+                }
+              ]
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "to two segments: Agents and Infra and Devices and Consumer",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/paragraph:3",
+                  "page": null,
+                  "excerpt": "Our updated segment reporting Satya Nadella, Chairman and Chief Executive Officer of Microsoft There’s no question AI represents a profound shift in both technology and business. It is changing what we build and how we operate, and it is blurring the boundaries between our products and reshaping our business models. To reflect this and provide increased transparency to investors, we are updating our financial reporti",
+                  "source_role": "company_filing"
+                }
+              ]
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "transition from our current three reporting segments",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": true,
+              "selected_source_hits": [
+                {
+                  "locator": "loc:v1/paragraph:3",
+                  "page": null,
+                  "excerpt": "Our updated segment reporting Satya Nadella, Chairman and Chief Executive Officer of Microsoft There’s no question AI represents a profound shift in both technology and business. It is changing what we build and how we operate, and it is blurring the boundaries between our products and reshaping our business models. To reflect this and provide increased transparency to investors, we are updating our financial reporti",
+                  "source_role": "company_filing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "fact_id": "commercial-bookings-definition",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_business_definition",
+          "assessment": "选到bookings指标名字不等于选到revenuegrowth+unearnedchange+contracted-not-billed变化的定义，原HTML Slide13可读取。",
+          "must_preserve": [
+            "sum of revenue growth",
+            "unearned revenue",
+            "contracted not billed",
+            "commercial"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "commercial products and cloud services, sum of revenue growth",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "change in balance of unearned revenue plus the change in contracted not billed balance",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "sum of revenue growth, plus change in balance of unearned revenue",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "commercial-rpo-definition",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_business_definition",
+          "assessment": "指标名已选但商业范围/未实现递延及未来开票确认的定义未选；原HTML有完整定义。",
+          "must_preserve": [
+            "commercial portion",
+            "remaining performance obligations",
+            "unearned revenue",
+            "future periods"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "Commercial remaining performance obligation: commercial portion of revenue allocated to",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "amounts that will be invoiced and recognized as revenue in future periods",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "fy27q1-outlook-mechanical-only",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_statement",
+          "gold_modality": "plan",
+          "independent_status": "missing_selected_mechanical_qualification",
+          "assessment": "原HTML Slide20/21明确机械调整7月29日旧指引，不是新guidance，selected未包含；真实重大限定遗漏。",
+          "must_preserve": [
+            "mechanical adjustments only",
+            "outlook",
+            "July 29, 2026"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "we have provided mechanical adjustments only to our outlook as provided on July 29, 2026",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "azure-fy27q1-growth-outlook",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_statement",
+          "gold_modality": "plan",
+          "independent_status": "missing_selected_growth_and_basis",
+          "assessment": "原HTML调整后FY27Q1 Azure44%–45% constant currency及FX作用可读，selected没有；不得拿已选FY26历史42%替代。",
+          "must_preserve": [
+            "Azure",
+            "44% to 45%",
+            "constant currency",
+            "Growth"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "Azure revenue Growth of 44% to 45% in constant currency",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "restated-segment-fy26-revenue",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "fact_scope": "narrative",
+          "gold_role": "company_filing",
+          "gold_modality": "actual",
+          "independent_status": "missing_selected_historical_restatement",
+          "assessment": "原HTML Slide15有FY26/25、inmillions及两段年度268127/63712，未选。精确表可SourceRef按需取，重述/财年定义仍需完整。",
+          "must_preserve": [
+            "$268,127",
+            "$63,712",
+            "in millions",
+            "Fiscal Year"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "Revenue $61,672 $64,441 $67,438 $74,576 $268,127",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "Revenue $16,001 $16,832 $15,448 $15,431 $63,712",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        },
+        {
+          "fact_id": "forward-looking-caveat",
+          "importance": "critical",
+          "target_kind": "disposition_context",
+          "fact_scope": "document_meta",
+          "gold_role": "company_statement",
+          "gold_modality": "plan",
+          "independent_status": "document_meta_missing_not_measured",
+          "assessment": "原HTML风险/无更新义务可读取，selected未选且context_evidence未观测；不是主要业务recall分母项。",
+          "must_preserve": [
+            "forward-looking statements",
+            "predictions, projections",
+            "not undertake any duty to update",
+            "materially differ"
+          ],
+          "anchors": [
+            {
+              "support_set": 0,
+              "anchor_index": 0,
+              "gold_quote": "forward-looking statements, which are any predictions, projections",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 0,
+              "anchor_index": 1,
+              "gold_quote": "We do not undertake any duty to update",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            },
+            {
+              "support_set": 1,
+              "anchor_index": 0,
+              "gold_quote": "materially differ because of factors discussed in the Risk Factors section",
+              "page": null,
+              "verified_original": true,
+              "in_selected_flat_text": false,
+              "selected_source_hits": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "conclusions": [
+    "All four source SHA and after-read SHA match; all selected locators mapped to source evidence in these exact observations. Exact-locator helper is generically incomplete for native ranges but not the cause of these three FAILs.",
+    "Route null is observer surface mismatch: actual reading policies show CNquarterly/HKinterim/USpresentation; Gbits generic/unknown is a real unresolved family observation. Do not infer no routing from null.",
+    "There are real known-source selected-content omissions in Gbits forward plan/uncertainty, MSFT metrics/mechanical-outlook qualifiers, HK reporting basis/numbers; not merely observer mapping.",
+    "Role/basis false FAILs arise from nonliteral must_preserve editorial strings; no generated claims exist, so no attribution/numeric hallucination was proven.",
+    "Financial exact-number responsibilities and document metadata are split by target_kind. Proya required critical denominator0 is deliberate scope, not a free100% verdict; HK required loss/capex vs Proya optional finance is cross-sample responsibility inconsistency to review without rewriting old gold.",
+    "Gold has an ASR polarity uncertainty and alternative-support entailment risks; do not force product to satisfy unsupported certainty or select all tables just to green score."
+  ],
+  "common_root_candidates": [
+    "Adapter must expose real route/profile, selected-span raw+coordinates, task-local context and source verification separately; no fabricated claims or zeroed coverage gaps.",
+    "Use shared semantic continuity for unlabelled speaker continuation, plan+conditions+uncertainty and metric-definition/reporting-basis units; policy configurations alone have not guaranteed these actual selections.",
+    "Choose source narrative vs exact financial-on-demand vs document_meta obligations explicitly by task; retain typed unit/period/accounting definitions wherever numbers are consumed.",
+    "Separate original anchor presence, selected content availability, task-local completeness, summary fidelity and downstream adoption; counts cannot replace semantic audit."
+  ],
+  "limitations": [
+    "No new selector/model execution or paid API.",
+    "Original targeted text reading is not an image/OCR/layout audit.",
+    "Only these four locally bound sources reviewed; not a performance population estimate.",
+    "Raw selected spans and policy metadata available, but no compiled model tasks or claims frozen in these baseline payloads; task-local and output fidelity remain unverified.",
+    "No platform provider availability, complete remote filing coverage or financial API fallback tested.",
+    "Research baseline payloads do not freeze full producer source-tree or parser code SHA; reviewer binds current observer/replay files and existing artifacts, not proof of original executed code identity.",
+    "These former DU5 holdouts have now been read for diagnosis; future same-source reruns are development regressions, not unseen-company holdout evidence."
+  ],
+  "external_calls": 0,
+  "downloads": 0,
+  "product_writes": 0
+}

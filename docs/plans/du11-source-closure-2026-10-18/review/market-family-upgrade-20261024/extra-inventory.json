@@ -1,0 +1,35 @@
+[
+  {
+    "sample_id": "hk-ipo-alibaba-2019",
+    "source_sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+    "bytes": 8045606,
+    "physical_pages": 666,
+    "role": "company_filing",
+    "source_unchanged": true,
+    "full_document_read": false,
+    "gold_frozen": false,
+    "production_selection_observed": false
+  },
+  {
+    "sample_id": "hk-call-tencent-secondary",
+    "source_sha256": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680",
+    "bytes": 580652,
+    "physical_pages": 11,
+    "role": "secondary_notes_unverified_speaker_attribution",
+    "source_unchanged": true,
+    "full_document_read": false,
+    "gold_frozen": false,
+    "production_selection_observed": false
+  },
+  {
+    "sample_id": "us-h1-vrsk-2025",
+    "source_sha256": "92bde7be303774a2f672a8fac7af50efe747df544afc9418ac7834ece42bc64e",
+    "bytes": 2062592,
+    "physical_pages": null,
+    "role": "company_filing",
+    "source_unchanged": true,
+    "full_document_read": false,
+    "gold_frozen": false,
+    "production_selection_observed": false
+  }
+]

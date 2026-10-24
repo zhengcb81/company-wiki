@@ -1,0 +1,97 @@
+{
+  "reviewer": "/root/w08_reporting_rule_review",
+  "observed_at": "2026-10-24T10:50:14.182662+00:00",
+  "verdict": "ACTIONABLE_FINDINGS_NOT_PRODUCTION_ACCEPTANCE",
+  "source_snapshot_sha256": {
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "fe5d64401860f4a2205fff061c5befc43824cecf727ffc471d4a6f1f144759e5",
+    "src/company_wiki/document_understanding/profiles/registry.py": "1168fff7249e53076c1f6c89993bc907f026df0aff97ee97453982acb5287c68",
+    "src/company_wiki/document_understanding/strategy_binding.py": "63678a70251781e530875e670b80d1bed3055dc31fc7a6e11faff39917ea92b2",
+    "src/company_wiki/automation/narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+    "src/company_wiki/automation/narrative_model.py": "971df3140d77774cb64d735bc4579e72404f1dc6f0c25c49bd3001fc311fb374",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/findings.md": "1b554cd0aec4a135283a3b93b1d62a3733d339dd9b9827b6902823d6510e394d",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/sample_matrix.md": "079d4ba86ffd42b5193c4ac57790fb682304b950a16495c804489b1754b5905a",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/task_scope.md": "9ce104820cfa5ab2d0a8ad44abc614c6cbc9c194c1a4dfc85df21e6f19997f17",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/targeted-reading.json.gz": "7ed956a249d980f3198da877d04840c0ba43ddbcec2aae8a01d782d4fd9e0a5e",
+    "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/business-reading-supplement.json": "e4115d5d3589c79c408f39ef00964c339cebb5f802e7ee16c649b0d9f23f5a79",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-01.json": "bea301fb4f828576867223e8f3707143c72f8e277175e2326b02816add82a884"
+  },
+  "architecture": "Existing shared engine, single 24-family/14-facet catalog and scoped model reading_strategy wiring are present; retain these owners.",
+  "findings": [
+    {
+      "id": "MP-01",
+      "status": "VERIFIED_PROFILE_MATCH_GAP",
+      "priority": 2,
+      "evidence": "Original TAL DOM has Item 3. Key Information / D. Risk Factors; current production _match_rule returns no rule; Item4/B control passes.",
+      "owner": "sec_20f profile hierarchy declaration; shared DOM/selector behavior must be verified after correction.",
+      "claim_limit": "Not proof that all risk paragraphs are missing from final production selection."
+    },
+    {
+      "id": "MP-02",
+      "status": "VERIFIED_GOLD_SEMANTIC_ERROR",
+      "priority": 1,
+      "evidence": "Old transcript u3 note and f2.must_preserve apply CC to all later growth rates; original lines130/132 state default YoY, additional CC when available, and one number only when the two equal.",
+      "owner": "Benchmark expectation/source qualifier scope, shared source context and summary behavior.",
+      "claim_limit": "Not evidence that a current paid summary already produced that hallucination."
+    },
+    {
+      "id": "MP-03",
+      "status": "VERIFIED_PROFILE_LANGUAGE_ASYMMETRY",
+      "priority": 2,
+      "evidence": "Actual hk-interim p19 Recent Developments After the Reporting Period heading receives no direct matcher rule in English; Chinese matched outlook/priority1.",
+      "owner": "HK interim heading aliases plus shared postperiod versus forecast period/modality.",
+      "claim_limit": "Parent business role inheritance may retain material; direct mismatch is not complete recall failure."
+    }
+  ],
+  "minimal_behavior_packages": [
+    "T01 actual 20-F/10-K body, heading hierarchy, TOC and cross-reference controls",
+    "T02 HK bilingual metric equivalence/differences, modes, date axes, actual postperiod event versus future plan",
+    "T03 IPO consultant forecast attribution and proceeds/project cross-page conditions",
+    "T04 IR complete cross-page Q+A, question units/premises/denials, stage and related-party scope",
+    "T05 transcript continuation speaker turns, editor/operator tails and conditional reported/CC basis",
+    "T06 A annual/interim product-generation-stage and period/plan scope"
+  ],
+  "coverage_gaps": [
+    "No real US S-1/F-1/424B4 binding in current matrix",
+    "No genuine H1/6-K half-year source; a single quarter 10-Q is insufficient",
+    "HK call/IR and financial/real-estate layouts lack current verified original samples",
+    "Existing samples used for tuning are regression, not new holdout"
+  ],
+  "executed": {
+    "command": "PYTHONPATH=src python docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/independent-policy-review/policy_probes.py",
+    "exit_code": 0,
+    "production_section_matcher_observations": 8,
+    "originals_independently_rehashed": [
+      "us-20f",
+      "us-txt"
+    ],
+    "originals_unchanged": true,
+    "paid_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "product_writes": 0,
+    "mother_pwf_writes": 0
+  },
+  "errors": [
+    {
+      "scope": "review-owned probe script",
+      "error": "First probe used incorrect fixed ancestor offset; failed before any raw access/output.",
+      "resolution": "Locate existing pyproject ancestor; rerun succeeded.",
+      "product_affected": false
+    }
+  ],
+  "artifacts": {
+    "probe_script_sha256": "d0d6440d9279e2a7e11c058805fb50dedd247f4f40532c7ae0467a133c395fe0",
+    "probe_results_sha256": "66bddf7f11508589eed5ff8cbddddc19c74fe813a0222c74bef9d58ae98b7b02",
+    "report_markdown_sha256": "c15a75359e954920b5a496ed5079c92c8bdcf4c97a15c6af2c3150be27229df9"
+  },
+  "limits": [
+    "No full selector/LLM summary/paid model/RF audit/cache-restore end-to-end run by this reviewer.",
+    "Other 11 original samples were inspected through ROOT bounded verified excerpts, not independently rehashed or fully reread.",
+    "Item17 notes form is an unverified shape gap; current TAL evidence does not justify broad financial-note parsing.",
+    "Reading questions and policy hashes are not proof that actual model claims obey the policy."
+  ],
+  "cleanup": {
+    "scratch_created": false,
+    "copied_fulltext": false
+  }
+}

@@ -1373,7 +1373,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "earnings_call_transcript",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "applies_to": {
         "regimes": [
           "sec",
@@ -1452,7 +1452,8 @@
           "分析师问题中的数字与假设是提问者内容，须绑定问句与发言人",
           "网站抓取件的来源是聚合平台（如 transcript 站点），原始披露是公司新闻稿/8-K，来源角色要分开",
           "constant currency 等全局限定语随局部事实一起保留",
-          "Operator/主持人串词不含业务事实"
+          "Operator/主持人串词不含业务事实",
+          "当reported与constant-currency增长率不同，两数及对应口径各自保留；when available/where same不代表全部数字采用CC。"
         ]
       },
       "sections": [
@@ -1603,7 +1604,8 @@
         "编辑摘要/术语表与真实发言的分离",
         "分析师问题内容不等于公司披露",
         "管理层修正、补充与明确否定",
-        "全局限定语（constant currency、non-GAAP）随局部事实保留"
+        "全局限定语（constant currency、non-GAAP）随局部事实保留",
+        "按原声明的范围保留reported/constant currency：同比默认、CC在可得时另报、两者相同时只报一数，不把全部增速重标CC或GAAP。"
       ],
       "context_requirements": [
         {
@@ -1665,7 +1667,7 @@
       "evidence_status": {
         "design": "verified",
         "real_samples": [
-          "case-earnings-call-roles-01"
+          "case-earnings-call-roles-02"
         ],
         "missing_shapes": [
           "公司原始发布版实录（当前样本为聚合平台 TXT）",
@@ -1673,7 +1675,7 @@
         ]
       },
       "case_ids": [
-        "case-earnings-call-roles-01"
+        "case-earnings-call-roles-02"
       ]
     },
     {
@@ -2373,7 +2375,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "hk_interim_report",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "applies_to": {
         "regimes": [
           "hkex"
@@ -2572,14 +2574,18 @@
             "展望",
             "Outlook",
             "業務展望",
-            "期後的近期發展"
+            "期後的近期發展",
+            "RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD",
+            "RECENT DEVELOPMENT AFTER THE REPORTING PERIOD"
           ],
           "heading_path": [
             [
               "業務回顧及展望",
               "展望",
               "Outlook",
-              "期後的近期發展"
+              "期後的近期發展",
+              "RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD",
+              "RECENT DEVELOPMENT AFTER THE REPORTING PERIOD"
             ]
           ],
           "priority": 1,
@@ -2615,6 +2621,30 @@
             "discover": "context_only",
             "fine": "explicit_only",
             "demand_class": "context"
+          }
+        },
+        {
+          "role": "business",
+          "aliases": [
+            "業務回顧",
+            "业务回顾",
+            "Business Review"
+          ],
+          "heading_path": [
+            [
+              "業務回顧",
+              "业务回顾",
+              "Business Review"
+            ]
+          ],
+          "priority": 1,
+          "questions": [
+            "本期（六个月）业务变化与新进展"
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
           }
         }
       ],
@@ -4688,7 +4718,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "prospectus_cn",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -4969,6 +4999,29 @@
             "fine": "on_candidate",
             "demand_class": "mixed"
           }
+        },
+        {
+          "role": "business",
+          "aliases": [
+            "业务与技术",
+            "发行人主营业务经营情况"
+          ],
+          "heading_path": [
+            [
+              "业务与技术",
+              "发行人主营业务经营情况"
+            ]
+          ],
+          "priority": 1,
+          "questions": [
+            "产品/服务与收入机制",
+            "技术与产品线的商业化阶段"
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         }
       ],
       "reading_questions": [
@@ -5055,7 +5108,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "prospectus_hk",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "applies_to": {
         "regimes": [
           "hkex"
@@ -5172,12 +5225,16 @@
           "aliases": [
             "行業概覽",
             "行业概览",
-            "INDUSTRY OVERVIEW"
+            "INDUSTRY OVERVIEW",
+            "我們的市場機會",
+            "Our Market Opportunity"
           ],
           "heading_path": [
             [
               "行業概覽",
-              "INDUSTRY OVERVIEW"
+              "INDUSTRY OVERVIEW",
+              "我們的市場機會",
+              "Our Market Opportunity"
             ]
           ],
           "priority": 1,
@@ -5328,6 +5385,53 @@
             "fine": "on_candidate",
             "demand_class": "mixed"
           }
+        },
+        {
+          "role": "business",
+          "aliases": [
+            "我們的業務",
+            "Our Business",
+            "業務",
+            "BUSINESS"
+          ],
+          "heading_path": [
+            [
+              "我們的業務",
+              "Our Business",
+              "業務",
+              "BUSINESS"
+            ]
+          ],
+          "priority": 1,
+          "questions": [
+            "品牌/产品/渠道与商业模式",
+            "收入与加盟/合伙人机制"
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
+        },
+        {
+          "role": "fundraising",
+          "aliases": [
+            "募集資金用途"
+          ],
+          "heading_path": [
+            [
+              "募集資金用途"
+            ]
+          ],
+          "priority": 1,
+          "questions": [
+            "募资净额用途、包销与老股安排的区别"
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         }
       ],
       "reading_questions": [
@@ -5336,7 +5440,8 @@
         "门店/经营指标的模式与地域口径",
         "未來計劃及所得款項用途与项目条件",
         "客户/供应商依赖与集中度",
-        "繁简英语言版本的别名合并与去重"
+        "繁简英语言版本的别名合并与去重",
+        "招股/二次上市文件的市場機會統計保留第三方作者與資料日期，GMV/消費規模目標不等於公司收入；募集資金用途按發售時點及條件讀取。"
       ],
       "context_requirements": [
         {
@@ -6784,7 +6889,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "sec_20f",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "applies_to": {
         "regimes": [
           "sec"
@@ -7009,6 +7114,30 @@
             "fine": "on_candidate",
             "demand_class": "mixed"
           }
+        },
+        {
+          "role": "risk",
+          "aliases": [
+            "D. Risk Factors"
+          ],
+          "heading_path": [
+            [
+              "Item 3. Key Information",
+              "Item 3 Key Information"
+            ],
+            [
+              "D. Risk Factors"
+            ]
+          ],
+          "priority": 1,
+          "questions": [
+            "具体风险（含监管、结构、业务）与一般套话的区分"
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         }
       ],
       "reading_questions": [
@@ -7016,7 +7145,8 @@
         "经营回顾中的业务驱动",
         "监管约束对业务的事实影响及归因",
         "具体风险与一般风险的区分",
-        "币种、会计准则与报告期口径"
+        "币种、会计准则与报告期口径",
+        "区分真实Item 3 Key Information下D Risk Factors正文与目录/see Item交叉引用；Item 7股东交易不套10-K的MD&A。"
       ],
       "context_requirements": [
         {
@@ -10231,7 +10361,7 @@
       "evidence_status": "real",
       "integration_status": "not_integrated",
       "case_ids": [
-        "case-earnings-call-roles-01"
+        "case-earnings-call-roles-02"
       ],
       "gaps": [
         "当前样本为聚合平台抓取件，缺公司原始发布版",

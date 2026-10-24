@@ -1,0 +1,9 @@
+{
+  "old_case_id": "case-earnings-call-roles-01",
+  "active_case_id": "case-earnings-call-roles-02",
+  "old_case_sha256": "bea301fb4f828576867223e8f3707143c72f8e277175e2326b02816add82a884",
+  "new_case_sha256": "6fab722e894be13f9d2e3abb9e19a6863cc6e64cd1621c5c6fed77da92ad6c5c",
+  "old_bytes_preserved": true,
+  "not_a_model_semantic_execution": true,
+  "reason": "Fix evaluation meaning without forcing source or model to reproduce an incorrect universal CC assertion."
+}

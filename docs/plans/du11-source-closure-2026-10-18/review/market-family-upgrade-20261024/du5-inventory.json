@@ -1,0 +1,113 @@
+{
+  "samples": [
+    {
+      "sample_id": "du5-cn-iflytek-h1",
+      "source_sha256": "8381e3ef16329666c170255a74c39e8614eb96073cf26556b1cb5439e32b9d31",
+      "gold_sha256": "36e36b6f0add5d681dc687bb463357ffcd2f5ebd796fec4d41bbbd0c7e0b37e4",
+      "market": "CN",
+      "shape": "a_share_interim",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 10
+    },
+    {
+      "sample_id": "du5-cn-fangbang-q1",
+      "source_sha256": "da2b66bfc7a8f781aa55ebe7d7faec60d65f6531ca8fc181bafccd1a3aa3e300",
+      "gold_sha256": "ebc1d3fecf0a58dd7f8eaaec40a8c0ef3d0c3df61643ccbbf6fbcb2aacd7d81d",
+      "market": "CN",
+      "shape": "a_share_quarterly_business",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 6
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+      "gold_sha256": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12",
+      "market": "CN",
+      "shape": "a_share_quarterly_sparse",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 9
+    },
+    {
+      "sample_id": "du5-cn-zhongmi-offering",
+      "source_sha256": "d3105354bff42054ffcd9a07fb82bfef7f73058fac43b47c9f94315dd03100ad",
+      "gold_sha256": "a5e8596abb96f534f31d47c0d1c67e9818e3998d018f2e89cdf2b3a1a5c877f1",
+      "market": "CN",
+      "shape": "equity_offering",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 10
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-interim",
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "gold_sha256": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5",
+      "market": "HK",
+      "shape": "hk_interim",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 10
+    },
+    {
+      "sample_id": "du5-hk-kingsoft-q1",
+      "source_sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+      "gold_sha256": "8eaf4a18e759e25464d3eaa6eb0b6d7b2d99b0be5746b654f2c9bd2d750dbbda",
+      "market": "HK",
+      "shape": "hk_quarterly",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 6
+    },
+    {
+      "sample_id": "du5-us-msft-8k",
+      "source_sha256": "a3d0bbf6411bb2b2db0bc9deee1541ea44639399e26e1f08adf8df3037ab0878",
+      "gold_sha256": "5693dc530bc0b24764ab900b949409f84c41d37dc1af3c1b175bc126f7386875",
+      "market": "US",
+      "shape": "sec_8k_container",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 10
+    },
+    {
+      "sample_id": "du5-us-msft-ex991",
+      "source_sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987",
+      "gold_sha256": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5",
+      "market": "US",
+      "shape": "sec_exhibit",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 10
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+      "gold_sha256": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d",
+      "market": "CN",
+      "shape": "earnings_call_transcript",
+      "production_selection_observed": false,
+      "summary_reviewed": false,
+      "fresh_blind_validation": false,
+      "original_unchanged": true,
+      "window_count": 80
+    }
+  ],
+  "uncompressed_evidence_bytes": 171468
+}

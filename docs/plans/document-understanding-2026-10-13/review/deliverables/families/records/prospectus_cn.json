@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_cn",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -281,6 +281,29 @@
         "discover": "on_tabular_evidence",
         "fine": "on_candidate",
         "demand_class": "mixed"
+      }
+    },
+    {
+      "role": "business",
+      "aliases": [
+        "业务与技术",
+        "发行人主营业务经营情况"
+      ],
+      "heading_path": [
+        [
+          "业务与技术",
+          "发行人主营业务经营情况"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "产品/服务与收入机制",
+        "技术与产品线的商业化阶段"
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
       }
     }
   ],

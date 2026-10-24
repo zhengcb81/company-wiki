@@ -1,0 +1,223 @@
+{
+  "schema_version": "market-business-reading-supplement/1",
+  "source_interpretation_not_fact_verification": true,
+  "us_20f": {
+    "source_sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
+    "extractor": "bs4.get_text(space,strip=True)",
+    "windows": [
+      {
+        "start": 348089,
+        "text": "B. Business Overview TAL Education Group is a smart learning solutions provider in China. The acronym “TAL” stands for “Tomorrow Advancing Life,” which reflects our vision to promote top learning opportunities for learners through both high-quality teaching and content, as well as leading edge application of technology in the learning experience. Since our inception in 2005, we have witnessed tremendous developments in China’s learning industry and continued to upgrade our business strategies to capture the new opportunities brought by technology advancement and evolving learning needs. Our widely trusted brand through word-of-mouth referrals and proven capabilities forge us valuable fortune to compete in the evolving learning industry. Our businesses started in 2005 by launching tutoring services mainly for the K-12 age groups in China, and began to explore online learning services afterwards, with the mission to provide engaging and effective learning experiences regardless of the learners’ geographic location or socio-economic background. We further expanded our offerings by introducing enrichment learning products, launching enterprise product suites and entering overseas markets in recent years. In compliance with regulatory policies promulgated in 2021, we ceased offering the K-9 Academic AST Services in the mainland of China at the end of 2021. We have since realigned our business focus towards (i) learning services and others, and (ii) learning content solutions to capture evolving customer needs. We have continued to integrate technology with learning, promote industry innovation, and lead industry development since our inception. We are always full of passion for empowering learners, teachers and learning institutions and keeping a keen prospective for the evolving and developing industry. Our Offerings Powered by our technology capabilities, we are committed to maximizing a learner’s potential by providing access to an engaging learning experience with efficacy and convenience, regardless of his or her geographic location or socio-economic background. We have crafted a wide variety of learning solutions and services to address learners’ evolving needs and help them become well-rounded individuals and excel in a global environment. We also offer learning content solutions empowering teachers and learning institutions. Learning Services and Others Historically, we offered K-9 Academic AST Services in the mainland of China, which was ceased at the end of 2021 in compliance with regulatory policies promulgated by the PRC government in 2021. In the fiscal year ended February 28, 2022, the revenues from offering K-9 Academic AST Services in the mainland of China accounted for a substantial majority of our total net revenues prior to the cessation of such services. We are currently offering, and evaluating, a broad range of learning programs that are aligned with our mission, core competencies, and learner demand. We deliver our learning services primarily through small classes, personalized premium services and online course offerings. 67 Table of Contents Equipped with robust content development and technology capabilities, in recent years we launched a series of enrichment learning programs, including Science and Creativity , Coding and Programing , and Humanities and Aesthetics , to create immersive, engaging and holistic learning experiences for our learners. We have designed and implemented such enrichment learning programs by levels and tailored them to learners of different ages and varying interests. We do not currently offer K-9 Academic AST Services in the mainland of China. To the extent in accordance with local laws and regulations, we offer Academic AST Services for select age groups in select countries and regions (except the K-9 age group in the mainland of China). Based on our insights and technology capabilities, we develop new technology solutions and upgrade existing ones to fulfill the customers’ underserved digitalization needs. We also provide SaaS technology solutions to a wide array of institutional customers, including other learning institutions of different types and scale, and other technology service providers. Learning Content Solutions We are a leading content developer and distributor with a rich library of diverse learning content in both paper and digital formats. Equipped with robust content development capabilities and actionable insights into the learning needs of young learners, we have been continually developing and launching learning content solutions in different categories. The content materials are either created in-house leveraging the broad content library we accumulated over the course of the company history, or acquired or licensed from domestic and global partners. These digitally integrated, highly interactive learning content meets our learners’ needs for both self-study and general reading. Our primary learning content solutions currently include print books, smart books, mobile apps, and AI-driven learning devices. Technology, Research and Development Our Technology Capabilities Our technology capabilities have been a great contributor to the success of our business. Specifically, our intelligent classroom capabilities deliver an engaging and effective learning experience featuring personalized in-class interactions, automatically generated feedback and tailor-made recommendations for further improvement; our content development capabilities generate well-received consumer-facing learning content solutions embedded with intelligent functionalities empowering self-directed learning; and our AI-based management capabilities provide for high teaching quality and superior learning performance and support our operating at scale at affordable costs. Our Technology Infrastructure We facilitate online live instruction through our proprietary learning management system that users can access through PC or our applications. Therefore, building a reliable, scalable and secure technology infrastructure is crucial to our ability to support our live streaming classes and online community. We have established an online platform that enables users to simultaneously log onto and participate in activities online. Our servers and routers, including backup servers, are currently hosted at our facilities or by third-party service providers in multiple cities in China. We regularly back up our databases. We regularly monitor the performance of our websites and infrastructure to enable us to respond quickly to potential problems. We are dedicated to diversifying and enhancing the interactive functionalities of our proprietary platform through which we deliver live streaming classes. Research and Development We have a dedicated in-house team who are engaged in the research and development of our foundational technologies, the application of such technologies and the research, development and design of learning services, and learning content solutions that we offer. In collaboration with several technology companies and academic institutions, we are leading the development of a nationwide open innovative platform for promoting smart education with AI technologies, which encompasses algorithms, applications, software and hardware capabilities. We continued to improve our large language model in terms of its response speed and accuracy, and to explore the application of AI technology in specific use cases. 68 Table of Contents Competition The learning solutions market in China is rapidly evolving, highly fragmented and competitive. We face competition in each type of products and services we offer and each geographic market in which we operate. For example, we mainly face competition from other existing major players in the learning solutions market who also provide learning services and learning content solutions. There may be new"
+      },
+      {
+        "start": 508076,
+        "text": "Item 5.  Operating and Financial Review and Prospects You should read the following discussion and analysis of our financial condition and results of operations in conjunction with the consolidated financial statements and the related notes included elsewhere in this annual report. This discussion contains forward-looking statements that involve risks and uncertainties. Our actual results and the timing of selected events could differ materially from those anticipated in these forward-looking statements as a result of various factors, including those set forth under “Item 3. Key Information—D. Risk Factors” and elsewhere in this annual report. 99 Table of Contents A. Operating Results Overview TAL Education Group is a smart learning solutions provider in China. The acronym “TAL” stands for “Tomorrow Advancing Life,” which empowers people’s life-long growth. Since our inception in 2005, we have been providing learning services and others for learners to achieve well-rounded development and for teachers and learning institutions to enhance classroom quality and operating efficiency, as well as learning content solutions for learners and their parents to enrich their learning experience. We have witnessed tremendous developments in China’s learning industry and continued to upgrade our business strategies to capture the new opportunities brought by technology advancement and evolving learning needs. Our widely trusted brand, passionate team, technology capabilities and broad learning content are the foundations of our success in this ever-evolving industry. Our businesses started in 2005 by launching tutoring services mainly for the K-12 age groups in China, and began to explore online learning services afterwards, aiming to empower life-long growth with love and technology. We further expanded our offerings by introducing enrichment learning services and learning content solutions and entering markets outside China in the recent years. In response to developments in market and regulatory environments, we ceased offering the K-9 Academic AST Services in the mainland of China at the end of 2021. We have since realigned our business focus toward (i) learning services and others, and (ii) learning content solutions to capture evolving customer needs. We have continued integrating technology with learning, promote innovation and lead industry development since our inception. We are always full of the passion for empowering learners, teachers and learning institutions and keeping a keen prospective for the evolving and developing industry. General Factors Affecting Our Results of Operations Our results of operations are affected by various general factors affecting the learning solution market in China, which include changes in population growth, disposable income per capita and level of urbanization, changes in demand from individual learners or learning institutions for learning solutions, changes in regulatory, legal and public policy landscape, changes in technology development, and general economic and business conditions in China and globally. Adverse changes in any of these factors could materially and negatively affect demand for our products and services and our results of operations. Specific Factors Affecting Our Results of Operations We believe that our results of operations are more directly affected by specific factors relating to our business, which are primarily as follows: Our ability to deliver high-quality products and services in our current business and attract and retain learners Historically, our success largely depends on our deep understanding of, and close relationship with, our learners and customers in the learning solutions market. We seek to continue to maintain our competitive advantages in our current business. Learning services and others. Specifically, the results of operations of our learning services and others depend on, am"
+      }
+    ]
+  },
+  "us_txt": {
+    "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "lines": [
+      {
+        "line": 96,
+        "text": "ARPU: Average Revenue Per User measures the revenue generated per subscriber or seat."
+      },
+      {
+        "line": 98,
+        "text": "TAC: Traffic Acquisition Costs are payments made to search partners for directed traffic."
+      },
+      {
+        "line": 100,
+        "text": "GPU: Graphics Processing Unit, a specialized processor used for parallel computing and AI workloads."
+      },
+      {
+        "line": 102,
+        "text": "CPU: Central Processing Unit, the primary processor of a computer or server."
+      },
+      {
+        "line": 104,
+        "text": "GAAP: Generally Accepted Accounting Principles are the standard framework of guidelines for financial accounting."
+      },
+      {
+        "line": 106,
+        "text": "SKU: Stock Keeping Unit is a distinct type of item for sale, such as a specific software license tier."
+      },
+      {
+        "line": 108,
+        "text": "Maia 200: Microsoft's custom-designed AI accelerator silicon."
+      },
+      {
+        "line": 110,
+        "text": "Fabric: An end-to-end, unified analytics platform that brings together data and analytics tools."
+      },
+      {
+        "line": 112,
+        "text": "Foundry: An AI app and agent stack for building and managing intelligent agents."
+      },
+      {
+        "line": 114,
+        "text": "Agent 365: A control plane for governing, managing, and securing AI agents."
+      },
+      {
+        "line": 116,
+        "text": "PostgreSQL: An open-source relational database used for storing and retrieving AI context."
+      },
+      {
+        "line": 118,
+        "text": "Constant Currency: A financial calculation that eliminates the effects of foreign exchange rate fluctuations."
+      },
+      {
+        "line": 120,
+        "text": "E7: A premium Microsoft 365 licensing suite that includes advanced security and AI management tools."
+      },
+      {
+        "line": 122,
+        "text": "MAI: A family of proprietary AI models developed by Microsoft, including versions optimized for code and security."
+      },
+      {
+        "line": 124,
+        "text": "Full Conference Call Transcript"
+      },
+      {
+        "line": 242,
+        "text": "When the harness will ensure that your memory, your context, all of that is external. That means any given model at any given time is swappable. You should and you can use frontier models. There's no reason not to. But you also can use multiple of them, right? So if you look at some of the stats I gave. It's a great example of how to use the frontier models for what they deliver, how to use low-cost models for what they deliver, and in fact, train your own model when you don't want to use any external model itself because after all, you have all the output, you have all the traces, you have all the context."
+      },
+      {
+        "line": 244,
+        "text": "That's really the enterprise design architecture that we are going to evangelize. We ourselves are using it. Copilot is built that way. GitHub Copilot is built that way. Our Security Copilot is built that way. And we want to democratize that design pattern so that every enterprise can use it. And within there, there will be a mix of open weights, closed weights. And by the way, one of the things that's least talked about is, remember, right, if you look even at the Hugging Face incident, the biggest thing that you should take away from that is you can't sort of depend on any one model."
+      },
+      {
+        "line": 246,
+        "text": "You will maybe need multiple models to even remediate some challenges that get caused by one model, right? That's the way to think about it, right, which is you can't be subject to the refusal of one model. So there's a lot more design space here. We talk about the frontier as if it's one thing. The frontier is about every firm having a frontier and the choice, the cost control, and the capability that they need in order to be able to control their destiny."
+      },
+      {
+        "line": 248,
+        "text": "Amy Hood:And I think maybe, Karl, just to add a little bit to the end of your question, which is that it's why it's important that the platform is built, and I think Satya mentioned this in his comments, to be able to deliver the right model for the right job on the architecture called Azure. And so given that we continue to see growing demand, no matter what model is chosen or what model family or whether it's run a model of your own, the Azure platform is quite efficient at delivering that. So think about that infrastructure as being pretty fungible."
+      },
+      {
+        "line": 250,
+        "text": "Operator:The next question comes from the line of Brent Thill with Jefferies."
+      },
+      {
+        "line": 252,
+        "text": "Brent Thill:Amy, impressive acceleration in Azure up to 43% going to mid-40s. I guess the questions around the underlying drivers, what you and Satya are seeing in terms of just what's driving this and mainly the question is around capacity constraints. Are we just still in the same environment? Or is this Microsoft just executing better given the constraints we're all seeing?"
+      },
+      {
+        "line": 254,
+        "text": "Amy Hood:Thanks, Brent. First, there are still constraints in the system. I think we've continued to say, I think, now for a number of quarters that demand continues to exceed available supply. And that certainly remains true. You can even see it, I think, in some of the pricing that's occurring in the spot market for assets. So when you think about being able to deliver better, the first thing we focus on, and I tried to talk a little bit about it in my prepared remarks is efficiency. Being able to get more out of everything that we've got in the fleet. That applies to efficiency gains in the CPU fleet."
+      },
+      {
+        "line": 256,
+        "text": "It's going to be efficiency gains in the GPU fleet. We saw a good work this quarter in particular from our engineering teams to make as much of that available as we could. And because of the supply-demand imbalance, we've been talking about, when we can make efficiency gains, they are quickly monetized in quarter. And I think that dynamic certainly impacted the quarter positively. I would also say some of the process improvements we've made to make sure both CPUs and GPUs just the lead time from how quickly we can get things to simplify it tremendously plugged in, was also improved over the past 90 days."
+      },
+      {
+        "line": 258,
+        "text": "And so those improvements, again, are very quickly monetized and we're able to do that. And at the scale that we're operating in terms of across the entire hyperscale fleet, making efficiency improvements that can be quickly monetized as a result and acceleration in the quarter, it's part of also what we expect to see and talk about with the Q1."
+      },
+      {
+        "line": 260,
+        "text": "Operator:The next question comes from the line of Mark Moerdler with Bernstein Research."
+      },
+      {
+        "line": 262,
+        "text": "Mark Moerdler:Congratulations on the solid -- really great quarter. Satya, Amy, sentiment around AI remains incredibly volatile with concerns about oversupply coming as well as concerns about component pricing increasing impacting margins. Amy, 2 related questions. How does Microsoft protect itself if there really is overcapacity and overbuilding of data centers or overbuilding of chips, et cetera? And on the flip side of that, how do you manage through the hardware price increases that we're seeing, the component prices and that it doesn't just drive you to either massively drive up the price of your offerings or negatively impact your margins?"
+      },
+      {
+        "line": 264,
+        "text": "Amy Hood:Thanks, Mark. The questions are a little bit related, but I'll start with maybe the first. Currently, the situation is obviously that demand exceeds available supply in a sort of relatively extreme moment. But when you start to think about over the duration, I try to remind people, a lot of the expense, especially you see it in CapEx, you've seen our CapEx really pivot toward what I would call and do call short-lived assets, which really, right, that's CPUs and GPUs that have relatively shorter lead times. And so if the demand environment changes, you just slow down what is, in fact, the largest component, right, and the driver of COGS."
+      },
+      {
+        "line": 266,
+        "text": "The investment into land and data center builds is actually quite flexible, right? It's a smaller percentage of the overall cost structure. And it can be -- timing can be changed on much of that, especially on the build, or you can stagger the timing of the build-out of, as I was saying, some of the GPUs and CPUs that you plan to put in. And so when you think about being able to manage through that, hyperscalers have been doing that for quite a long time in terms of having the flexibility and the understanding of manage those changes in demand."
+      },
+      {
+        "line": 268,
+        "text": "And the other thing is -- that's important, Mark, is you just have an incredibly diverse book of business by geo, by segment, by industry. And I feel like when you look even at our backlog or what we added in RPO this quarter, it is from the breadth of really the Microsoft product portfolio as well as our customer portfolio. So when you have the ability to late bind some of the more expensive components in the short term, you have a big book of business that's flexible."
+      },
+      {
+        "line": 270,
+        "text": "You have a big first-party app business that also uses the capacity that you're building out in addition to your Azure platform, it does allow us to have a lot more flexibility to manage through those. When it comes to the pricing question, I think that's really impacting everybody equivalently in so many ways. What we've been trying to do, of course, at this point is to just make sure that we're doing the best efficiency work we can so we can continue to give customers great value. We're reminding people that, frankly, the cloud offers tremendous benefits versus having to make these purchases as servers on-prem yourself, or the price increases are even more hard for customers."
+      },
+      {
+        "line": 272,
+        "text": "So the cloud still provides a great ROI in those types of situations. And we're adding this capacity, to your point, but a lot of this, obviously, is also being sold in newer contracts, and we're able to have the pricing reflect it, but keep value where we -- listen, for the long term, you want to have pricing work for customers and for you. And so we're trying to stay focused on that as well."
+      },
+      {
+        "line": 274,
+        "text": "Satya Nadella:And if I just add to Amy's comments. I thought Amy captured it well. All of us are reading this 1873 as the book to be read. And so in my mind, I think you've got to get the product shape right. That's sort of a lot of what we are focused on. You have to get the portfolio right, Amy talked about how -- what we're doing, whether it's in Copilot or the super app, bringing all the form factors or all the way to Azure and the agent-first sort of primitives in Azure, you kind of have to really get that portfolio to all come together. The mix of customers is super important."
+      },
+      {
+        "line": 276,
+        "text": "You have to recognize the breadth, the geo mix, the segment mix, the workload mix and you got to really think about all of those when you're even building capacity. And then you've got to run an efficient railroad. At the end of the day, you do need to -- Amy talked a little bit about even in the last quarter, how we've improved on the efficiency front. It's not something that will just show up at the end. You have to sort of monotonically work at it. And so we are very focused on all of those. And then we know that there will be ups and downs of what is the cycle here."
+      },
+      {
+        "line": 278,
+        "text": "But the secular shift is clear, and we're very bullish about us coming with the right sort of mix of business and the right margin structure and most importantly, with the right value for our customers."
+      },
+      {
+        "line": 280,
+        "text": "Operator:The next question comes from the line of Adam Wood with Morgan Stanley."
+      },
+      {
+        "line": 282,
+        "text": "Adam Wood:Also congrats on a very strong end of the year. I wanted to maybe just ask about M365 Copilot. Obviously, very strong quarter there with over 30 million paid seats and a strong acceleration. Could you just talk a little bit about how you're seeing customers move from pilots to broader deployments there? Is this still a pilot-driven motion or are we seeing a lot more broader deployments? And then when we think about the monetization of the product in terms of additional seats, migration to higher-value SKUs like E7, and then consumption, what do you see as the main monetization or the main driver of monetization from here, please?"
+      },
+      {
+        "line": 284,
+        "text": "Satya Nadella:No, thank you, Adam, for that question. So let me start, and then Amy can add. I think, yes, it starts with, again, that product shape. As you can see, even within the quarter, the product shape has changed pretty dramatically, right? So we now have chat, Cowork, Autopilot, Code, all coming to essentially what is going to become this flagship super app that various roles can use it. And if you think about even the usage side, that's a place where, again, lots of interesting data there, right, which is time to usage has drastically come down. What used to be months is days, right? So from when a license is bought to usage."
+      },
+      {
+        "line": 286,
+        "text": "The usage intensity itself has gone up significantly. I mean we are talking about usage intensity that's sort of at the same level of what is an everyday communication tool like Outlook or Teams. The second thing I would say is the overall enterprise wiring of this, right? So it's not like a tool that's isolated somewhere, but it's wired in, whether it is you brought up E7, right? So it's wired into the governance pieces with Agent 365, so then you have your IT ops, SecOps, FinOps, all wired in as well as it's all the business processes. So for example, your CRM system, your ERP system, all of them are just skills and plug-ins that go into Cowork."
+      },
+      {
+        "line": 288,
+        "text": "So you're able to take that enterprise-wide workflow and wire it into the super app, right? That increases usage. So it all compounds. And then the other one is the business model. So we now have this per seat business model, and so we also now have the usage business model, so it's seat plus usage. So we're already seeing the ARPU growth that comes from things like E7. But really, as we deliver more value to customer and customer outcomes at the enterprise level, in fact, if I think about historically Office compared to what Copilot is, is much more narrow."
+      },
+      {
+        "line": 290,
+        "text": "This is the first time where you really have an enterprise-wide tool which has a both per seat and usage-based pricing. So the TAM is much more expansive. We're going to be very, very focused on driving customer value and then expanding with it."
+      },
+      {
+        "line": 292,
+        "text": "Amy Hood:Yes, Adam, and I think, I talked a little bit about it in my prepared remarks, but I do think what we've been seeing is, over the course of this year, some of the growth in ARPU was from E5 plus the Copilot license that Satya is talking about. We'll see a little bit more from E7 really has a lot of interesting value in the Agent 365 component, in particular, where Satya is talking about, I mean, having SecOps and FinOps think about, in general, everyone is going to need both observability of token spend and the manageability of token spend for all business processes. And that is what E7 brings."
+      },
+      {
+        "line": 294,
+        "text": "And so I think that is it was only in market for a part of the quarter, and I think we were quite encouraged by the value customers saw in that SKU. I think we'll continue to focus on that through the year. And then finally, what Satya is talking about is this building TAM that grows through the year. And as I think about that expensive, expanding TAM, that's really where we're talking about this usage and consumption growth. And so as more of those experiences get wired in and as IT gets more involved in that process, it will be quite, I think, changing in terms of what people think of the M365 capabilities."
+      },
+      {
+        "line": 296,
+        "text": "Satya Nadella:And it would be fun for you, Adam. I think one of your colleagues put out an ROIC document. So I took that document to Copilot, which is a PDF. And I said, \"Build me a new sort of Power BI dashboard, essentially.\" But here is the thing. It built a rich semantic model that went into my Fabric with OneLake that brought all the data in from the external sources, in fact, was current with all the SEC filings of all the MAG7. And then on top of that, the repo itself is in GitHub. But the artifact is sitting in my Copilot as a site. That, to me, is a classic example of an enterprise-wide workflow."
+      },
+      {
+        "line": 298,
+        "text": "I, as a knowledge worker, could go create a dashboard, the data engineer can go to Fabric and find the artifact. The professional developer can go to the repo and find it in GitHub. And by the way, it's all registered with Agent 365, right? That's a little bit of what Amy is describing as the coming together of a new way to work even while at the same time, bringing IT, security, and manageability of it."
+      },
+      {
+        "line": 300,
+        "text": "Operator:The next question comes from the line of Brad Zelnick with Deutsche Bank."
+      },
+      {
+        "line": 302,
+        "text": "Brad Zelnick:Satya, appreciating cybersecurity is so core to everything Microsoft does. The playing field shifted recently with the latest frontier model releases. And this week, you introduced Project Perception. Can you expand on what this moment means for your cyber business explicitly? And also what it means for trust in Microsoft more broadly?"
+      },
+      {
+        "line": 304,
+        "text": "Satya Nadella:Yes. Thank you for that question. I think you're right about saying that the entire, I would say, the overall physics of how both what is needed in terms of the cyber product and even the cyber operations because at the end of the day, you kind of have to sort of transform yourself on both the products, but also how you operate as a company to protect yourself have changed pretty dramatically. So what we are focused on is, first, again, take the same approach we have taken for knowledge work or coding, which is you've got to start with an intelligence-first, model-forward approach."
+      },
+      {
+        "line": 306,
+        "text": "And so what we launched with Perception is essentially saying, let's sort of really make sure that you have the red team agents that know how to find -- constantly are red teaming and finding the vulnerabilities. Then you have the blue team agent that is constantly going and making sure that you're triaging, and the green team that fix this. So you kind of create your own agentic system that's continuously operating to create the cyber defense you need."
+      },
+      {
+        "line": 308,
+        "text": "It definitely feeds off of all the signals, right, whether it's the defenders -- identity Entra signal, the defender signal, the network signal, the app security signal, all that's sort of helping really do the context so that you can then truly create the protection. The other thing they also said is, especially in cyber, it becomes critical to have that multimodel approach to sort of the first question that was asked. Not just for cost. In fact, we proved with the MDASH data in CyberGym that essentially, you can have Mythos level performance with 50% less cost because of this MAI Cyber Flash 1 (sic) [ MAI-Cyber-1-Flash ]."
+      },
+      {
+        "line": 310,
+        "text": "And the reason is because 90% of the tasks are done by the Cyber-1-Flash model, and 10% of the tasks, you still go to the frontier, right? So this is sort of that mixing of the right model for the right task in what is essentially a pipeline job is a super important characteristic. And so to us, I think this is an important piece. And the other thing I'd say is from a resilience perspective, right, for whatever reason, if a given model goes away, then you kind of can't be left high and dry. You need to be able to still continue your cyber operations. And that's the other piece."
+      }
+    ]
+  }
+}

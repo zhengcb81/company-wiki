@@ -1,0 +1,309 @@
+{
+  "scope": "Direct current production section matcher using installed family rules; not a full selector or summary evaluation.",
+  "catalog_sha256": "fe5d64401860f4a2205fff061c5befc43824cecf727ffc471d4a6f1f144759e5",
+  "matcher_cases": [
+    {
+      "case": "20f_risk_key_information",
+      "family": "sec_20f",
+      "headings": [
+        "Item 3. Key Information",
+        "D. Risk Factors"
+      ],
+      "matched_role": null,
+      "matched_priority": null,
+      "diagnostics": []
+    },
+    {
+      "case": "20f_business_actual",
+      "family": "sec_20f",
+      "headings": [
+        "Item 4. Information on the Company",
+        "B. Business Overview"
+      ],
+      "matched_role": "business",
+      "matched_priority": 1,
+      "diagnostics": []
+    },
+    {
+      "case": "20f_notes17_variant",
+      "family": "sec_20f",
+      "headings": [
+        "Item 17. Financial Statements",
+        "Notes to Financial Statements"
+      ],
+      "matched_role": null,
+      "matched_priority": null,
+      "diagnostics": []
+    },
+    {
+      "case": "20f_notes18_control",
+      "family": "sec_20f",
+      "headings": [
+        "Item 18. Financial Statements",
+        "Notes to Financial Statements"
+      ],
+      "matched_role": "financial_notes",
+      "matched_priority": 3,
+      "diagnostics": []
+    },
+    {
+      "case": "20f_item7_not_mda",
+      "family": "sec_20f",
+      "headings": [
+        "Item 7. Major Shareholders and Related Party Transactions"
+      ],
+      "matched_role": null,
+      "matched_priority": null,
+      "diagnostics": []
+    },
+    {
+      "case": "10k_item7_mda",
+      "family": "sec_10k",
+      "headings": [
+        "Item 7. Management's Discussion and Analysis"
+      ],
+      "matched_role": "management_discussion",
+      "matched_priority": 1,
+      "diagnostics": []
+    },
+    {
+      "case": "hk_postperiod_english",
+      "family": "hk_interim_report",
+      "headings": [
+        "RECENT DEVELOPMENTS AFTER THE REPORTING PERIOD"
+      ],
+      "matched_role": null,
+      "matched_priority": null,
+      "diagnostics": []
+    },
+    {
+      "case": "hk_postperiod_chinese",
+      "family": "hk_interim_report",
+      "headings": [
+        "報告期後的近期發展"
+      ],
+      "matched_role": "outlook",
+      "matched_priority": 1,
+      "diagnostics": []
+    }
+  ],
+  "source_reads": [
+    {
+      "sample_id": "us-20f",
+      "sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
+      "bytes": 4425147,
+      "read_scope": "bounded original heading/turn checks",
+      "short_native_headings": [
+        "Item 3.",
+        "Item 4.",
+        "Item 5.",
+        "Item 7.",
+        "Item 8.",
+        "Item 3. Key Information",
+        "D. Risk Factors",
+        "Item 4. Information on the Company",
+        "B. Business Overview",
+        "C. Organizational Structure",
+        "Item 5. Operating and Financial Review and Prospects",
+        "Item 7. Major Shareholders and Related Party Transactions",
+        "Item 8. Financial Information"
+      ],
+      "original_unchanged": true
+    },
+    {
+      "sample_id": "us-txt",
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "bytes": 66324,
+      "read_scope": "bounded original heading/turn checks",
+      "opening_lines": [
+        {
+          "line": 1,
+          "text": "======================================================================"
+        },
+        {
+          "line": 2,
+          "text": "Earnings Call Transcript"
+        },
+        {
+          "line": 3,
+          "text": "Company: Microsoft (微软)"
+        },
+        {
+          "line": 4,
+          "text": "Ticker: MSFT"
+        },
+        {
+          "line": 5,
+          "text": "Quarter: Q4 2026"
+        },
+        {
+          "line": 6,
+          "text": "Source: motley_fool"
+        },
+        {
+          "line": 7,
+          "text": "URL: https://www.fool.com/earnings/call-transcripts/2026/08/07/microsoft-msft-q4-2026-earnings-call-transcript/"
+        },
+        {
+          "line": 8,
+          "text": "Scraped: 2026-09-03T22:44:45.464617"
+        },
+        {
+          "line": 9,
+          "text": "Characters: 65572"
+        },
+        {
+          "line": 10,
+          "text": "======================================================================"
+        },
+        {
+          "line": 12,
+          "text": "Wednesday, July 29, 2026 at 5:30 p.m. ET"
+        },
+        {
+          "line": 14,
+          "text": "CALL PARTICIPANTS"
+        },
+        {
+          "line": 16,
+          "text": "Chairman and Chief Executive Officer - Satya Nadella"
+        },
+        {
+          "line": 18,
+          "text": "Chief Financial Officer - Amy Hood"
+        },
+        {
+          "line": 20,
+          "text": "Chief Accounting Officer - Alice Jolla"
+        },
+        {
+          "line": 22,
+          "text": "Deputy General Counsel and Corporate Secretary - Brian DeFoe"
+        },
+        {
+          "line": 24,
+          "text": "Vice President of Investor Relations - Jonathan Neilson"
+        },
+        {
+          "line": 26,
+          "text": "Revenue-- $90.0 billion in the fourth quarter, an 18% increase driven by strong demand across the Azure platform and first-party AI applications."
+        },
+        {
+          "line": 28,
+          "text": "Non-GAAP EPS-- $4.74, a 23% increase when adjusted for the impact of investments in OpenAI."
+        },
+        {
+          "line": 30,
+          "text": "Azure and Other Cloud Services Revenue-- Grew 43% year over year, with customer demand continuing to exceed available capacity."
+        },
+        {
+          "line": 32,
+          "text": "Microsoft Cloud Revenue-- $59.3 billion for the quarter, growing 27% and surpassing $214 billion for the full fiscal year."
+        },
+        {
+          "line": 34,
+          "text": "Commercial Remaining Performance Obligation (RPO)-- $678 billion, representing 84% year-over-year growth reflecting long-term customer commitments."
+        },
+        {
+          "line": 36,
+          "text": "Microsoft 365 Copilot Seats-- Over 30 million paid seats, with net seat adds more than doubling sequentially."
+        },
+        {
+          "line": 38,
+          "text": "GitHub Copilot Revenue-- Accelerated over 60% quarter over quarter following a business model shift to usage-based pricing in June."
+        },
+        {
+          "line": 40,
+          "text": "Fabric and Foundry Adoption-- Paid Fabric customers reached 40,000, while Foundry customers grew to 100,000 with revenue more than doubling year over year."
+        },
+        {
+          "line": 42,
+          "text": "Agent 365 Scale-- Nearly 40 million agents registered across tens of thousands of companies within two months of launch."
+        },
+        {
+          "line": 44,
+          "text": "Capital Expenditures-- $41 billion in the fourth quarter, reflecting investments in AI infrastructure and data center sites."
+        }
+      ],
+      "qualification_excerpt": [
+        {
+          "line": 128,
+          "text": "Jonathan Neilson:Good afternoon, and thank you for joining us today. On the call with me are Satya Nadella, Chairman and Chief Executive Officer; Amy Hood, Chief Financial Officer; Alice Jolla, Chief Accounting Officer; and Brian DeFoe, Deputy General Counsel and Corporate Secretary. On the Microsoft Investor Relations website, you can find our earnings press release and financial summary slide deck, which is intended to supplement our prepared remarks during today's call and provides the reconciliation of differences between GAAP and non-GAAP financial measures. More detailed outlook slides will be available on the Microsoft Investor Relations website where we provide outlook commentary on today's call. On this call, we will discuss certain non-GAAP items."
+        },
+        {
+          "line": 130,
+          "text": "The non-GAAP financial measures provided should not be considered as a substitute for or superior to the measures of financial performance prepared in accordance with GAAP. They are included as additional clarifying items to aid investors in further understanding the company's fourth quarter performance in addition to the impact these items and events have on the financial results. All growth comparisons we make on the call today relate to the corresponding period of last year, unless otherwise noted. We will also provide growth rates in constant currency, when available, as a framework for assessing how our underlying businesses performed, excluding the effect of foreign currency rate fluctuations."
+        },
+        {
+          "line": 132,
+          "text": "Where growth rates are the same in constant currency, we will refer to the growth rate only. We will post our prepared remarks to our website immediately following the call until the complete transcript is available. Today's call is being webcast live and recorded. If you ask a question, it will be included in our live transmission, in the transcript, and in any future use of the recording. You can replay the call and view the transcript on the Microsoft Investor Relations website. During this call, we will be making forward-looking statements, which are predictions, projections, or other statements about future events. These statements are based on current expectations and assumptions that are subject to risks and uncertainties."
+        },
+        {
+          "line": 134,
+          "text": "Actual results could materially differ because of factors discussed in today's earnings press release, in the comments made during this conference call, and in the risk factor section of our Form 10-K, Form 10-Q, and other reports and filings with the Securities and Exchange Commission. We do not undertake any duty to update any forward-looking statement. And with that, I'll turn the call over to Satya."
+        }
+      ],
+      "qa_excerpt": [
+        {
+          "line": 234,
+          "text": "Operator:And our first question comes from the line of Karl Keirstead with UBS."
+        },
+        {
+          "line": 236,
+          "text": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments about model choice and the protection of corporate IP. Maybe I could ask this in 2 parts. First, how material do you think traction could be for open and custom models over the next year or 2, knowing that many enterprises might be initially reticent to use open models? And secondly, how exactly does Microsoft benefit from this shift knowing that you've also got fairly large frontier lab exposure?"
+        },
+        {
+          "line": 238,
+          "text": "Satya Nadella:Thank you, Karl. So the way we are coming at this is, at the end of the day, the goal is to have the firm be in control of their own destiny in terms of what I describe as building their human capital and their token capital, right? So at the end of the day, if a firm is a learning machine, they need their own learning machine. And that's sort of really the goal. And the models are an input not some extraction of the knowledge of the enterprise."
+        },
+        {
+          "line": 240,
+          "text": "But in some sense, you have to really -- at the end of the day, every firm is going to evaluate who are the providers who are helping them with their outcomes and their knowledge creation. I think that, that is now fairly clear, and it's going to become clearer by the day. This is not going to be about come in and take all my knowledge and benefit yourself, whereas I am not getting anything out of it. So given that direction of travel, we are very, very clear about the architectural sort of design of the platform, which is you've got to keep your harness separate from the model."
+        },
+        {
+          "line": 242,
+          "text": "When the harness will ensure that your memory, your context, all of that is external. That means any given model at any given time is swappable. You should and you can use frontier models. There's no reason not to. But you also can use multiple of them, right? So if you look at some of the stats I gave. It's a great example of how to use the frontier models for what they deliver, how to use low-cost models for what they deliver, and in fact, train your own model when you don't want to use any external model itself because after all, you have all the output, you have all the traces, you have al"
+        },
+        {
+          "line": 244,
+          "text": "That's really the enterprise design architecture that we are going to evangelize. We ourselves are using it. Copilot is built that way. GitHub Copilot is built that way. Our Security Copilot is built that way. And we want to democratize that design pattern so that every enterprise can use it. And within there, there will be a mix of open weights, closed weights. And by the way, one of the things that's least talked about is, remember, right, if you look even at the Hugging Face incident, the biggest thing that you should take away from that is you can't sort of depend on any one model."
+        }
+      ],
+      "tail_roles": [
+        {
+          "line": 326,
+          "text": "Jonathan Neilson:Thanks, Gabriela. That wraps up the Q&A portion of today's earnings call. Thank you for joining us today, and we look forward to speaking with all of you soon."
+        },
+        {
+          "line": 328,
+          "text": "Satya Nadella:Thank you very much."
+        },
+        {
+          "line": 330,
+          "text": "Amy Hood:Thank you."
+        },
+        {
+          "line": 332,
+          "text": "Operator:Ladies and gentlemen, this does conclude today's conference. You may disconnect your lines at this time, and enjoy the rest of your day."
+        },
+        {
+          "line": 334,
+          "text": "This article is a transcript of this conference call produced for The Motley Fool. While we strive for our Foolish Best, there may be errors, omissions, or inaccuracies in this transcript.Parts of this article were created using Large Language Models (LLMs) based on The Motley Fool's insights and investing approach. It has been reviewed by our AI quality control systems. Since LLMs cannot (currently) own stocks, it has no positions in any of the stocks mentioned.As with all our articles, The Motley Fool does not assume any responsibility for your use of this content, and we strongly encourage you to do your own research, including listening to the call yourself and reading the company's SEC filings. Please see ourTerms and Conditionsfor additional details, including our Obligatory Capitali"
+        },
+        {
+          "line": 336,
+          "text": "The Motley Fool has positions in and recommends Microsoft. The Motley Fool has adisclosure policy."
+        },
+        {
+          "line": 338,
+          "text": "Stocks Mentioned"
+        },
+        {
+          "line": 340,
+          "text": "*Average returns of all recommendations since inception. Cost basis and return based on previous market day close."
+        }
+      ],
+      "original_unchanged": true
+    }
+  ]
+}

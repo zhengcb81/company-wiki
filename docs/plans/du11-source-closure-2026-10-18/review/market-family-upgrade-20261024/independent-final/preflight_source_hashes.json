@@ -1,0 +1,18 @@
+{
+  "src/company_wiki/document_understanding/profiles/reading_catalog.json": "205237fd335befc850bcb602787c34ad0a8e544dd396e8972727f34cadd38c42",
+  "src/company_wiki/document_understanding/profiles/registry.py": "1168fff7249e53076c1f6c89993bc907f026df0aff97ee97453982acb5287c68",
+  "src/company_wiki/document_understanding/strategy_binding.py": "63678a70251781e530875e670b80d1bed3055dc31fc7a6e11faff39917ea92b2",
+  "src/company_wiki/automation/narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+  "tools/import_reading_policies.py": "e7da4551bf5403e54bb3ef7df165eb61eab6c15395df6dfebadca1f80b4a35fc",
+  "tests/unit/document_understanding_root/test_market_family_strategy_paths.py": "b23a71949cafb116614b9e21a67fbd9b9fc113241143d2783b06405e2af6cbd5",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/index.json": "47c02dbcb84cb622c69b9af3cfc8e78905099dcfacfc77bdfbb035f3b303af51",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-01.json": "bea301fb4f828576867223e8f3707143c72f8e277175e2326b02816add82a884",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-02.json": "6fab722e894be13f9d2e3abb9e19a6863cc6e64cd1621c5c6fed77da92ad6c5c",
+  "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/case-revision.json": "d501f34927804a084cf380471a61ec8221a83a353fc755a364a48e2fb17a2edc",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_20f.json": "598b56b291be469a7697f306089cc28863982e0f704cf9bcc13d936f463e8bea",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_interim_report.json": "aad3c76533fe0323cac24e622fc8fa75fa72c6e24fe27c70cabe0ce3171564af",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/earnings_call_transcript.json": "0fcf7d96d0649614477a9ae46ecd16cdb285aefb04c1435d17d8467f08658e3e",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_hk.json": "acc3cd3db14c8cd9f9aaedff53a3fa633916d9176d6572f2c2cd3dace1d0738c",
+  "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_cn.json": "f34e0c1afae69753637dfa97e179ab37af8ed169cfe1c2c2031c861ec2e3cc2f",
+  "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/independent-final/test_final_components.py": "fa3243303286aee1bc9eff2f2738e83bc043b457e07082304836b53668ab4da2"
+}
