@@ -1,5 +1,7 @@
 # 真实样本初步规律与下一轮重点
 
+**更新：本文件主体保留初读发现，不再代表最新调查数量。** 后续已核DU5九份及额外三份，累计25原件；已补TAL真实业务正文/经营回顾和微软问答。首批五family规则、条件CC修订case已完成TDD/独审；实际4样本内容回放仍未全部通过。[当前样本矩阵](sample_matrix.md)、[剩余共因](remaining_root_causes.md)和母CURRENT_STATUS优先于早期“待核/缺样”记录。
+
 ## 已做与边界
 
 已重新SHA验证并对13份既有真实原件抽读关键页/段落：A股中微年报、半年报、IPO，万润IR，金禾可转债、恒锋增发；港股名创年报、中报、IPO；US微软10-K/电话会、VRSK10-Q、TAL20-F。13份原文SHA均与旧manifest一致、前后不变；这不是13份全文人工通读或召回验收。文本窗口见targeted-reading.json.gz。港股年报physical12与IPOphysical401已真实渲染目视，PNG临时目录已清理，只留SHA/观察。
@@ -22,6 +24,6 @@
 
 ## 样本缺口与泛化
 
-旧20样本中3条旧Temp路径失效，不能把它们列可复验。DU5另9份七公司已确认本地binding存在，但尚未本轮核SHA/重读，不能冒称新样本通过；复用既有gold并在用于调规则后记regression。新增一轮应补另一行业/公司，特别US S-1/F-1、真正US半年累计或6-K中报、港股电话会/IR，以及同模板低信息负例。
+旧20样本中3条旧Temp路径失效，不能把它们列可复验。DU5另9份七公司现已核原件/原gold SHA并抽取源侧窗口，4份真实selection及26critical另经独审，不能把核SHA说成全部内容通过；这些诊断样本后续记regression。又补阿里2019港股二次上市招股书、VRSK半年累计10-Q及腾讯第三方业绩会纪要；US S-1/F-1正规补采在provider开始前受本地budget_exceeded阻止，0HTTP/0下载、精确限额待诊断。港股公司正式IR/逐字实录仍缺，不以secondary notes代签。
 
 每个可用market×family格争取2例，确无样本写明缺口。先来源端冻结业务目标/反例，再运行现DU-BENCH原生入口，分别记录routing/selection/context/summary与资源。缺陷归source/structure/normalization/配置各责任层，必须测实际请求和输出，不只加标题关键词或阅读问题。最终用另一家公司/格式作泛化，不提高片段限额，不增加手工签收。

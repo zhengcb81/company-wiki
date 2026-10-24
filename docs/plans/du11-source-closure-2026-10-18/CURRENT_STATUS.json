@@ -8,15 +8,15 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "3b4110a3bc228c546e9f48487a08aafaa475e480",
+  "last_code_commit": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
   "code_ci": {
-    "id": 40087657562,
-    "head_sha": "3b4110a3bc228c546e9f48487a08aafaa475e480",
+    "id": 40090199646,
+    "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40087657562",
-    "created_at": "2026-10-24T10:52:50Z",
-    "updated_at": "2026-10-24T10:57:22Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
+    "created_at": "2026-10-24T11:30:47Z",
+    "updated_at": "2026-10-24T11:34:03Z"
   },
   "completed": {
     "b2": {
@@ -123,7 +123,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_REPORTING_CLASSIFICATION_FIXED_CONTENT_PARTIAL_SHARED_BUDGET_ROOT_NEXT_W10_W12_OPEN",
+      "status": "ACTIVE_MARKET_CONTENT_M1_M5_AND_ANNUAL14_PARTIAL_BEFORE_SUMMARY_RF_FOUR_REVIEWS",
       "mainline": true
     },
     {
@@ -152,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "最终独审通过后发布本轮source材料价值/对象绑定/线性扫描；继续六项partial的业务父子、容量日期、地域口径局部依赖，再正式摘要/cache、W09/W10实际采用矩阵、W12四审及新公司。",
+  "next_step_now": "按market_family_upgrade.remaining_root_causes先修源侧语义检查点，再统一处理匿名电话会载体/指标定义与父子时间依赖/稀疏降噪；正式摘要/cache、RF实际采用与四审、新公司循环仍OPEN。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -190,14 +190,13 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40081962182,
-    "head_sha": "f73afb89be1f4caf610432211281e07a14e58c77",
+    "id": 40090199646,
+    "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40081962182",
-    "created_at": "2026-10-24T09:26:32Z",
-    "updated_at": "2026-10-24T09:31:07Z",
-    "observed_at": "2026-10-24T09:31:41.496766+00:00"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
+    "created_at": "2026-10-24T11:30:47Z",
+    "updated_at": "2026-10-24T11:34:03Z"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -208,7 +207,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T08:25:44Z",
+  "last_updated_at": "2026-10-24T11:35:45.375613+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -778,16 +777,15 @@
     "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
   },
   "market_family_upgrade": {
-    "status": "COMPONENT_AND_APPROVED_BASELINE_REVIEW_PASS_AWAIT_NORMAL_PUSH",
+    "status": "PUBLISHED_COMPONENT_REVIEW_PASS_REAL_CONTENT_GAPS_OPEN",
     "entry": "review/market-family-upgrade-20261024/task_scope.md",
-    "samples_sha_verified_targeted_read": 13,
     "pdf_pages_targeted_read": 46,
     "visual_pages_inspected": 2,
     "new_paid_calls": 0,
     "raw_copies": 0,
     "existing_family_policies": 24,
     "existing_facets": 14,
-    "remaining": "Expand different-company corpus, freeze source-side checkpoints, baseline production routing/selection, TDD shared-owner/profile fixes, independent review and new-company validation; then original summary/cache/RF duties.",
+    "remaining": "M1准确源侧语义金标；M2匿名电话会跨载体；M3定义/旧新基数/局部依赖；M4稀疏降噪；M5本地准备超限诊断；再真实摘要/cache/RF四审及未用于调规则的新公司。",
     "samples_sha_verified": 25,
     "source_sample_count_note": "13 initial + 9 DU5 + 3 supplemental; bounded targeted reading, not full 25-document acceptance",
     "independent_review": "review/market-family-upgrade-20261024/independent-final/report.json",
@@ -819,6 +817,21 @@
     "first_push_unit_skipped_existing": 24,
     "compatibility_followup_independent_passed": 112,
     "compatibility_followup_review": "review/market-family-upgrade-20261024/independent-final/baseline-followup.json",
-    "behavior_checkpoints": "review/market-family-upgrade-20261024/behavior-checkpoints.json"
+    "behavior_checkpoints": "review/market-family-upgrade-20261024/behavior-checkpoints.json",
+    "published_head": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+    "publication_receipt": "review/market-family-upgrade-20261024/publication.json",
+    "final_push_unit_passed": 8216,
+    "final_push_unit_seconds": 318.17,
+    "final_push_contract_passed": 146,
+    "final_push_contract_seconds": 36.29,
+    "ci": {
+      "id": 40090199646,
+      "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
+      "created_at": "2026-10-24T11:30:47Z",
+      "updated_at": "2026-10-24T11:34:03Z"
+    }
   }
 }

@@ -1,12 +1,12 @@
 # 当前项目状态与接手入口
 
-**主线ACTIVE；最新：跨市场/文种真实样本升级，五family策略组件独审通过，正常发布待完成。** 原来源材料/request根修已正常推送`3b4110a3`，完整8199P/24既有skip、另146契约P，精确[CI40087657562](https://github.com/zhengcb81/company-wiki/actions/runs/40087657562) completed/success；首次失败与最终补审收据保留。
+**主线ACTIVE；最新：跨市场/文种真实样本升级，五family策略组件独审通过并正常推送；真实内容共因修复继续。** 原来源材料/request根修已正常推送`3b4110a3`，完整8199P/24既有skip、另146契约P，精确[CI40087657562](https://github.com/zhengcb81/company-wiki/actions/runs/40087657562) completed/success；首次失败与最终补审收据保留。
 
-**发布补记：** 本地策略提交912f6fbd首次正常push被唯一旧几何指纹基线阻止（8215P/1F/24skip，另146契约P），没有发布。原测试明确允许经过审查的policy upgrade；保持原测试/产品/旧case不改，只更新五份已审策略对应的四个legacy预期SHA，另11不变。独立Git反事实、未授权语义突变与geometry-only反控112P通过，见[补审](review/market-family-upgrade-20261024/independent-final/baseline-followup.md)。正常重推待完成，不能沿用旧CI。
+**发布补记：** 本地策略提交912f6fbd首次正常push被唯一旧几何指纹基线阻止（8215P/1F/24skip，另146契约P），没有发布。原测试明确允许经过审查的policy upgrade；保持原测试/产品/旧case不改，只更新五份已审策略对应的四个legacy预期SHA，另11不变。独立Git反事实、未授权语义突变与geometry-only反控112P通过，见[补审](review/market-family-upgrade-20261024/independent-final/baseline-followup.md)。跟进c990e389已正常推送，完整8216P/24既有skip（318.17s）、另146契约P（36.29s）。精确[CI40090199646](https://github.com/zhengcb81/company-wiki/actions/runs/40090199646)：completed/success，不沿用旧CI。
 
 本轮共25份真实原件SHA核验与有界定向阅读资料：A/H/US年报、中报/半年累计10-Q、IR/电话会、IPO/增发/转债，以及稀疏季报/8-K附件反控。首批46个PDF页、另DU5 51个PDF页窗口/80个DOCX段落及HTML窗口不等于全文读完；已补TAL真实业务正文与微软完整多轮片段。新增阿里2019二次上市招股书、VRSK真正半年累计和腾讯第三方业绩会纪要；第三方不能冒充正式逐字稿。[样本矩阵](review/market-family-upgrade-20261024/sample_matrix.md)。
 
-五family已修真实章节/口径问题：20-F风险父子路径；HK中报英文期后与独立业务章；A/H招股业务根标题、市场机会/募集资金标题；电话会条件CC新case替代错误旧解释（旧case原字节保留）。保持单24family/14facet registry，无新router/权限门。TDD首组5F/4P、IPO真4F/13P → 75相关P；最终独审61P（20独立+17永久+24registry），编译/实际pipeline/请求/局部cache反控均过。见[独审](review/market-family-upgrade-20261024/independent-final/report.md)。该组件尚未发布，不能借前一CI签绿。
+五family已修真实章节/口径问题：20-F风险父子路径；HK中报英文期后与独立业务章；A/H招股业务根标题、市场机会/募集资金标题；电话会条件CC新case替代错误旧解释（旧case原字节保留）。保持单24family/14facet registry，无新router/权限门。TDD首组5F/4P、IPO真4F/13P → 75相关P；最终独审61P（20独立+17永久+24registry），编译/实际pipeline/请求/局部cache反控均过。见[独审](review/market-family-upgrade-20261024/independent-final/report.md)。该组件已随912f6fbd/c990e389发布；内容与正式摘要质量仍单独验收。
 
 真实4样本回放及26项critical独审也发现仍需共因修复：匿名DOCX电话会generic/后段计划遗漏、EX99.1指标定义与指引限定遗漏、稀疏财报噪声；同时旧金标ASR强否定/财务职责/替代support及观察字段有错误。最终同样本回放没有改善这些内容分数，如实保持OPEN，不因匹配测试绿称准确率已提升到某数字。USIPO正规FF补采在provider启动前budget_exceeded、0HTTP/0下载，未证实费用耗尽，精确本地计量待诊断。[后续共因与顺序](review/market-family-upgrade-20261024/remaining_root_causes.md)、[详细实施](review/market-family-upgrade-20261024/strategy_upgrade_design.md)。
 
@@ -24,11 +24,11 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 最新source材料价值/对象绑定/线性扫描已实现；最终聚焦128P，Ruff/mypy src374通过，最终独审410P/31.85秒通过，正常发布待收。上一源码1e5e6c1a/CI40081962182成功保留历史。 | 真实249页96/8109字符、55任务，内容独审8P/6partial/0missing；最终SourceRef全部证据和任务等价。正式摘要/cache、真实矩阵/W12仍OPEN。见[本轮根因与收据](review/r1-w08-material-value-20261024/README.md) |
+| W08 来源选材、业务父级、缓存依赖 | 最新source材料价值/对象绑定/线性扫描已实现；最终聚焦128P，Ruff/mypy src374通过，最终独审410P/31.85秒通过，已随3b4110a3正常发布、精确CI成功。上一源码1e5e6c1a/CI40081962182成功保留历史。 | 真实249页96/8146字符、55任务，内容独审8P/6partial/0missing；最终SourceRef全部证据和任务等价。正式摘要/cache、真实矩阵/W12仍OPEN。见[本轮根因与收据](review/r1-w08-material-value-20261024/README.md) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：** 正常提交推送已独审五family组件与真实调查/PWF；随后按remaining_root_causes先冻结准确的源侧检查点，统一处理匿名电话会、指标定义、跨页/父子/时间依赖及降噪，再正式摘要/cache和RF公司四审。下文旧“待发布410P”等记录均为历史。
+**当前唯一第一步：** 五family组件已正常推送；按remaining_root_causes先冻结准确的源侧检查点，统一处理匿名电话会、指标定义、跨页/父子/时间依赖及降噪，再正式摘要/cache和RF公司四审。下文旧“待发布410P”等记录均为历史。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

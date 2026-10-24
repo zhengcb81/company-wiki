@@ -1,0 +1,33 @@
+{
+  "schema_version": "market-family-publication/1",
+  "observed_at": "2026-10-24T11:35:45.375613+00:00",
+  "source_commit": "912f6fbd",
+  "published_head": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+  "normal_push_exit_code": 0,
+  "unit": {
+    "passed": 8216,
+    "skipped_existing": 24,
+    "seconds": 318.17
+  },
+  "contract_smoke": {
+    "passed": 146,
+    "seconds": 36.29
+  },
+  "hooks_bypassed": false,
+  "first_failed_push_preserved": "policy-baseline-upgrade.json",
+  "component_independent_passed": 61,
+  "compatibility_followup_independent_passed": 112,
+  "ci": {
+    "id": 40090199646,
+    "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
+    "created_at": "2026-10-24T11:30:47Z",
+    "updated_at": "2026-10-24T11:34:03Z"
+  },
+  "real_four_source_content": "3 FAIL / 1 PARTIAL; unchanged scores",
+  "formal_summary_cache_rf_acceptance": false,
+  "new_model_calls": 0,
+  "new_provider_downloads": 0
+}

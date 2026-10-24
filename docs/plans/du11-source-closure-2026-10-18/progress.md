@@ -791,3 +791,8 @@ source-value首批25个中性测试实际18F/7P（2.90s）后实现25P（2.18s�
 ## 2026-10-24 策略正常发布前兼容基线补审
 
 策略提交912f6fbd的第一次正常push在本地拦下旧geometry policy全profile SHA：8215P/1F/24既有skip（279.15s），另146契约P。测试名/注释明确“only change with explicit policy upgrade”，因此未删断言或改产品，按五份已独审授权策略更新四legacy预期SHA，另11不变；old/new保留于policy-baseline-upgrade.json。ROOT109相关P；独立112P/2.57s，含Git旧catalog+旧fixture全部15反事实、当前15对齐、未授权语义仍失败与geometry-only仍通过。原16被审文件/原测试/旧case不改，自有临时目录清理。正常跟进commit/push待完成，不将一次失败push说成远端CI失败。新behavior-checkpoints.json冻结10条跨市场源侧语义检查点，明确已用于诊断不属blind holdout；其端到端检查仍OPEN。
+
+
+## 2026-10-24 五family正常发布完成
+
+源码912f6fbd及已独审兼容基线c990e389正常推送成功，未绕hook。完整8216P/24既有skip（318.17s），契约146P（36.29s）；精确CI40090199646：completed/success。见review/market-family-upgrade-20261024/publication.json。25原件有界阅读/五family组件61独审/兼容112补审的scope分别保留；四样本真实内容仍3FAIL/1PARTIAL、正式摘要/cache/RF未通过，不将工程绿当准确率提升。当前按M1–M5继续，既有raw/旧gold/旧case不改，0新模型调用/0provider下载。
