@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-systemic-implementation/1",
-  "updated_at": "2026-10-23T19:15:10.339548+00:00",
-  "status": "ACTIVE_W08_REAL_CONTENT_ROOT_REPAIR_W09_W11_DISPATCH_READY",
+  "updated_at": "2026-10-24T01:46:21.401335+00:00",
+  "status": "ACTIVE_W08_SHARED_SOURCE_PUBLISHED_ANNUAL14_CONTENT_OPEN",
   "design": "remediation/task_plan.md",
   "design_seal": "diagnosis/expert_handoff.json",
   "initial_manifest_sha256": "ee08753799d7d2a849dd3fd9c811e7c0e83d20d7538f978218245fdf98dca458",
@@ -97,7 +97,7 @@
     "issues": 14,
     "roots": 10,
     "packages": {
-      "W08": "CROSSPAGE_ENGINEERING_ACCEPTED_MERGED_PENDING_NORMAL_PUBLICATION_REAL_CONTENT_STILL_PARTIAL",
+      "W08": "SHARED_SOURCE_ENGINEERING_PUBLISHED_EXACT_CI_SUCCESS_ANNUAL14_CONTENT_PARTIAL",
       "W09": "ROOT_REPAIRED_MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
       "W10": "ENGINEERING_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
       "W11": "ROOT_REPAIRED_MERGED_PUSHED_EXACT_CI_SUCCESS_REAL_IR_RECOVERY_OPEN",
@@ -107,7 +107,7 @@
     "current_checkpoint_ref": "../CURRENT_STATUS.json",
     "parallel_dispatch_ref": "../harness_lanes/20261023/dispatch.json",
     "W11_actual_ref": "../review/r1-w11-actual-recovery-20261024.json",
-    "W08_publication": "../review/r1-w08-prepush-rootfix-20261024/publication-final.json",
+    "W08_publication": "../review/r1-w08-crosspage-20261024/publication-final.json",
     "W08_acceptance": "../review/r1-w08-crosspage-20261024/root-acceptance.json"
   }
 }

@@ -4,9 +4,9 @@
 
 ## Next Step
 
-两处prepush共因已修，原4边界及同13原oracle独立补审17P；现在正常提交和推送，跑既有完整prepush并观察精确代码CI。发布完成后进入next_step_after_publication，不重复2132或为纯兼容修复重解析PDF。
+先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。
 
-后续质量任务见唯一CURRENT_STATUS及next-source-quality。
+源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

@@ -1,0 +1,55 @@
+{
+  "status": "MERGED_PUSHED_EXACT_CODE_CI_SUCCESS",
+  "observed_at": "2026-10-24T01:46:21.401335+00:00",
+  "source_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+  "actual_merge_commit": "e09e44e109d1273ba34f9e33dcbb73b1abf6ba13",
+  "source_ancestor": "ef49ae3e8ca8f25388971afb58982612070e5b5b",
+  "independent": {
+    "passed": 17,
+    "failed": 0,
+    "report": "prepush-rootfix/independent/report-main-supplement.json"
+  },
+  "normal_pre_push": {
+    "unit_passed": 8056,
+    "unit_skipped": 24,
+    "unit_seconds": 221.02,
+    "contract_smoke_passed": 146,
+    "contract_smoke_seconds": 30.52,
+    "normal_hooks": true,
+    "hooks_bypassed": false,
+    "local_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-publication-20261024\\normal-main-push-retry1.txt",
+    "local_log_bytes": 3552,
+    "local_log_sha256": "ff69393fb6ad0e83c2b84cd3d37dfd1fdd245d9bbbaf13fde52aba762cc9ef50"
+  },
+  "exact_ci": {
+    "observed_at": "2026-10-24T01:45:51.712039+00:00",
+    "head_sha": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+    "runs": [
+      {
+        "id": 40050949303,
+        "name": "CI",
+        "head_sha": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40050949303",
+        "updated_at": "2026-10-24T01:44:42Z",
+        "created_at": "2026-10-24T01:41:41Z"
+      }
+    ],
+    "api_requests": 1,
+    "credentials_read": false
+  },
+  "initial_failed_push_preserved": "prepush-rootfix/first-normal-prepush-red.json",
+  "actual_annual14": {
+    "pass": 3,
+    "partial": 9,
+    "missing": 2,
+    "version": "V2 diagnostic; not final-main whole content acceptance"
+  },
+  "business_pass": false,
+  "not_certified": [
+    "formal new summary/cache",
+    "real12 document adoption matrix",
+    "RF/W12 company audit"
+  ]
+}

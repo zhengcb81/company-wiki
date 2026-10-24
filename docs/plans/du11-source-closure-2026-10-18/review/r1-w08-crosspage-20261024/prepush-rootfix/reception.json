@@ -1,5 +1,5 @@
 {
-  "status": "ROOT_FIX_ACCEPTED_PENDING_NORMAL_PUSH_CI",
+  "status": "ROOT_FIX_ACCEPTED_NORMAL_PUSH_EXACT_CI_SUCCESS",
   "at_utc": "2026-10-24T01:37:02.500157+00:00",
   "copied_files": [
     "main-actual-freeze.json",
@@ -25,5 +25,7 @@
     "passed": 17,
     "failed": 0
   },
-  "business_pass": false
+  "business_pass": false,
+  "final_publication": "../publication-final.json",
+  "final_source_commit": "f2b8f2bf4618d75c68ae0c3c30acb4728557f929"
 }

@@ -12,21 +12,19 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 新跨页/逐target/共享词法节点13独审P、2121P/11skip；源码ef49ae3e已真实合母线，待本次正常发布/CI。真实年报3pass/9partial/2missing | [接收](review/r1-w08-crosspage-20261024/root-acceptance.md)与[内容](review/r1-w08-crosspage-20261024/annual14/review.md)分开；正式摘要/cache/RF矩阵/W12仍OPEN |
+| W08 来源选材、业务父级、缓存依赖 | 共享原生观察/结构/逐target闭包源码f2b8f2bf已合线推送、精确CI成功；独审17P，完整8056P/24skip+146smokeP | 真实annual14仍3pass/9partial/2missing；正式摘要/cache/矩阵/W12 OPEN。见[发布](review/r1-w08-crosspage-20261024/publication-final.md) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：两处prepush共因已修，原4边界及同13原oracle独立补审17P；现在正常提交和推送，跑既有完整prepush并观察精确代码CI。发布完成后进入next_step_after_publication，不重复2132或为纯兼容修复重解析PDF。**
+**当前唯一第一步：先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。**
 
-首次e09e44e1推送被普通prepush拦住：4F/8052P/24skip183.29s，远端仍3aa0aafc，未引发远端CI失败。原13和2121相关绿只绑定先前有限版本，不能覆盖新暴露长英文名/旧header-footer边界；两owner共因已修，最终194相关P、母仓独立17P，原断言保留；现在待正常发布/精确CI。
+源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 
-W08共享物理/结构/每target闭包、订单和共享产品词法节点已独立13/13、集中2121P/11既有skip通过，正常源码ef49ae3e真实合入母仓，正做本次正常发布和精确CI。前述4e3e0231是上一已发布绿点，不能替代这次CI。[接收收据](review/r1-w08-crosspage-20261024/root-acceptance.md)。
+共享producer一次观察、sections唯一结构父级、reading逐target语义闭包和结构见证职责已工程发布。默认0.8、96/48000/16M和真实语义材料8/4/2048保持；没有新增身份、人工许可或逐card几何门。
 
-本次原自然63F由三共因解决：新增generic输入属性要求42、空diagnostic污染调用输入19、稀疏工区缺Git跟踪规格2。独审英文复数产品原12P1F，复用共用产品词法/谓语边界修后同13P，原9/77/20/24等及失败不改。共享物理producer一次、sections唯一父级、reading唯一真实语义材料闭包，结构见证按用途留痕；不新造权限链或逐card几何重验。默认0.8、96/48000/16M和8/4/2048保持。
+真实249页V2一次回放96/8518、工作8630449/16M，完整14独审3pass/9partial/2missing。业务父级、容量日期、集团新客户、指引前提等仍丢失，不能以全局另一个task、裸数字或原文fallback冒充采用。财务数表可按需SourceRef/API，未调用的不说已获取，不强迫全文财务切片。[内容审查](review/r1-w08-crosspage-20261024/annual14/review.md)与[具体下一阶段](review/r1-w08-crosspage-20261024/next-source-quality.md)保持OPEN。
 
-真实249页V2一次回放96/8518、工作8630449/16M，两个30%归属检查通过；独立完整14为3pass/9partial/2missing。业务父级、容量日期、集团新客户、指引前提等仍丢失，不能以完整原文fallback或另一个task可见冒充采用。财务数表可按需SourceRef/API，未调用的API不说已获取，不强迫全文财务切片。[内容审查](review/r1-w08-crosspage-20261024/annual14/review.md)及[具体下一阶段](review/r1-w08-crosspage-20261024/next-source-quality.md)。V3英文词法修复未重复解析PDF，也不借V2签新版本全内容。
-
-W09/RF599d17b8和W11/1be42a76此前已发布、精确CI成功。W11新官方索引486901B已按SourceRef正规保存/回放，当前页无业务下载锚，0业务文件下载、材料external_limit仍OPEN。原件/旧封存保留，原费用unknown不改，本节点0模型/0业务下载。
+W09/RF599d17b8、W11/1be42a76已发布且精确CI成功。W11官方索引486901B经正规SourceRef保存/回放，当前页无业务下载锚，0业务文件下载、材料external_limit仍OPEN。旧封存和费用unknown保留。
 
 随后按已接收W08–W12计划在新摘要上采用已发布W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
@@ -76,7 +74,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 - CWP W01 `a7da184e`；W04 已从独审作者提交转为主线 `e1cc1621`/`5a267d37`，交接 `2f632193`。W01 155 项独审绑定旧物理字节；后续仅 LF 归一和 CLI 局部变量改名，独立[补审](review/r1-w01-source-review-postprocess-20261022.md)证明文本/行为等价，并复跑 7 项 CLI。全 `mypy src` 366 文件 0 错误。W04合线后Optional pin类型漏检已于 `ae7b15d6`/`20a7fb0c`修复；单一完整src检查热缓存9.1秒，CI删除重复步骤。独立[最终反控](review/r1-ci-owner-final-review-20261022.md)证明旧版真RED、修复真GREEN，不靠单文件Any或无效移动HEAD探测代签。
 - RF W02 产品 `768b6dd3`、W05 产品 `36433047` 已并入 main；`92b69682` 仅将两份必要回归纳入现有 smoke、让既有小型 mypy 在传递依赖修改时也触发。FF 最终主线和三仓推送/安装/新 CI 见[本轮收尾收据](r1-holdout-20261021/engineering-closeout-20261022.json)，不从历史 pin 推断实时状态。
-- 当前已成功CWP代码CI：[40044921473](https://github.com/zhengcb81/company-wiki/actions/runs/40044921473)，精确HEAD `4e3e0231` completed/SUCCESS。W11 `1be42a76`/40040509874、预算`ab95027b`/40034980056及此前绿点保留为历史，不代签下一跨页prototype。RF主线`599d17b8`/40040969386精确SUCCESS；FF保留`7f6a9268`节点。
+- 当前已成功CWP代码CI：[40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303)，精确HEAD `f2b8f2bf` completed/SUCCESS。旧4e3e0231/40044921473、W11 1be42a76/40040509874和预算ab95027b保持历史；RF599d17b8/40040969386精确SUCCESS，FF保留7f6a9268节点。
 - 历史 `.planning` 材料及 RF 原有三份 assurance WIP 保留，本轮不是全仓清理。原始财报/key/生产配置/Dayu/IQS/旧campaign未修改；新增一份官方索引486901B已单列，不是业务财报下载。文档提交不递归刷新跨仓 pin，也不强求不会触发的新 CI。
 
 ## 模型与预算

@@ -8,7 +8,7 @@
   ],
   "current_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
   "current_attempt": "r1-remediation-02",
-  "status": "ACTIVE_W08_CROSSPAGE_ACCEPTED_MERGED_PENDING_PUBLICATION_ANNUAL14_PARTIAL",
+  "status": "ACTIVE_W08_SHARED_SOURCE_PUBLISHED_ANNUAL14_CONTENT_OPEN",
   "source_writes_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
   "old_campaign_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\company-pool-cycle-2026-10-09\\campaign.json",
   "old_nvda_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pool-20261009-001-us-nvda",
@@ -43,7 +43,7 @@
     "continuation": "normal bounded owner register/scan initialization permitted, retain first failure and new capture; no direct database edit",
     "paid_model_calls_before_this_observation": 0
   },
-  "updated_at": "2026-10-23T19:15:10.339548+00:00",
+  "updated_at": "2026-10-24T01:46:21.401335+00:00",
   "execution_seal_ref": "initial-execution-seal.json",
   "execution_outcome": "partial",
   "artifact_completeness": "partial",
@@ -65,8 +65,8 @@
   "four_review_ref": "initial-audit/four-review-observation.json",
   "expert_agent": "/root/r1_root_cause_expert",
   "r5_integration_ref": "r5-integration.json",
-  "current_stage": "W08 real-source two-fact oracle repair; W09/W11 independent packets prepared",
-  "resume_stage": "ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。",
+  "current_stage": "W08 source quality trace/context/selection; component published; W09/W11 already received",
+  "resume_stage": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
   "initial_attempt_status": "SEALED_PARTIAL_FOUR_REVIEWS_FAIL",
   "implementation_ref": "implementation-progress.json",
   "resume_handoff": "../HANDOFF-2026-10-22.md",
@@ -77,8 +77,14 @@
   "current_company_paid_operations_scope": "Historical initial count retained; current cumulative fees use native budget observation, not this old count",
   "latest_four_review_ref": "../review/r1-phase-b-four-review-index-20261022.json",
   "current_checkpoint_owner": "../CURRENT_STATUS.json",
-  "active_workers_after_closeout": "ROOT owns W08; two external lanes READY, not yet reported started",
+  "active_workers_after_closeout": "ROOT owns next W08 content-quality implementation; external W09/W11 delivery accepted/published, no pending author work",
   "historical_initial_fields_note": "publication, first_native_observation, execution_outcome, artifact_completeness and four_review retain the original initial attempt observations; final3 review and new preparation are explicitly referenced separately.",
   "current_next_action": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
-  "current_checkpoint_ref": "../CURRENT_STATUS.json"
+  "current_checkpoint_ref": "../CURRENT_STATUS.json",
+  "historical_before_shared_source_publication": {
+    "current_stage": "W08 real-source two-fact oracle repair; W09/W11 independent packets prepared",
+    "resume_stage": "ROOT继续定位W08真实249页年报两条业务30%事实的候选资格/排序/父级保留根因，原96/48000/16M上限不变；两份外包卡W09-RF-RESEARCH与W11-CWP-SOURCES已准备，可现在并行启动，不等W08。ROOT不再同时施工其独占写集。",
+    "active_workers_after_closeout": "ROOT owns W08; two external lanes READY, not yet reported started"
+  },
+  "W08_current_publication": "../review/r1-w08-crosspage-20261024/publication-final.json"
 }
