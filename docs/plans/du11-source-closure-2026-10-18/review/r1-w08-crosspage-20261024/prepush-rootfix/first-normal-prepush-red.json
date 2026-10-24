@@ -1,0 +1,18 @@
+{
+  "status": "BLOCKED_BEFORE_PUSH",
+  "main_local_merge": "e09e44e109d1273ba34f9e33dcbb73b1abf6ba13",
+  "remote_master_remained": "3aa0aafc8d2990affb71064190723de6f3bb259d",
+  "passed": 8052,
+  "failed": 4,
+  "skipped": 24,
+  "seconds": 183.29,
+  "root_causes": [
+    "Latin product head boundary was bypassed in declaration scanning",
+    "Positive native header/footer proof was narrowed to paragraph/heading"
+  ],
+  "log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-publication-20261024\\normal-main-push.txt",
+  "log_bytes": 2505735,
+  "log_sha256": "8c5bc7323832edfc53e1aac4ea93ac11069c021b03ebd7d543c754a0a2fb7c40",
+  "remote_ci_failure_caused": false,
+  "original_assertions_preserved": true
+}

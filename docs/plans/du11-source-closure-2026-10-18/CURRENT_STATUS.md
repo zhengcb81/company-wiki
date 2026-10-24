@@ -16,7 +16,9 @@
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：先完成当前已验收merge的正常提交、推送与精确CI观察；通过后按本节及next-source-quality实施下一质量节点。**
+**当前唯一第一步：两处prepush共因已修，原4边界及同13原oracle独立补审17P；现在正常提交和推送，跑既有完整prepush并观察精确代码CI。发布完成后进入next_step_after_publication，不重复2132或为纯兼容修复重解析PDF。**
+
+首次e09e44e1推送被普通prepush拦住：4F/8052P/24skip183.29s，远端仍3aa0aafc，未引发远端CI失败。原13和2121相关绿只绑定先前有限版本，不能覆盖新暴露长英文名/旧header-footer边界；两owner共因已修，最终194相关P、母仓独立17P，原断言保留；现在待正常发布/精确CI。
 
 W08共享物理/结构/每target闭包、订单和共享产品词法节点已独立13/13、集中2121P/11既有skip通过，正常源码ef49ae3e真实合入母仓，正做本次正常发布和精确CI。前述4e3e0231是上一已发布绿点，不能替代这次CI。[接收收据](review/r1-w08-crosspage-20261024/root-acceptance.md)。
 

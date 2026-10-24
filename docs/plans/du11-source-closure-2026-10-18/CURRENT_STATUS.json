@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_CROSSPAGE_ACCEPTED_MERGED_PENDING_PUBLICATION_ANNUAL14_PARTIAL",
+  "overall_status": "ACTIVE_W08_MAIN_ROOTFIX_17P_READY_NORMAL_PUBLICATION",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -152,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "先完成当前已验收merge的正常提交、推送与精确CI观察；通过后才按next_step_after_publication开始下一质量节点。",
+  "next_step_now": "两处prepush共因已修，原4边界及同13原oracle独立补审17P；现在正常提交和推送，跑既有完整prepush并观察精确代码CI。发布完成后进入next_step_after_publication，不重复2132或为纯兼容修复重解析PDF。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -207,7 +207,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T01:19:05.721991+00:00",
+  "last_updated_at": "2026-10-24T01:37:02.500157+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -408,6 +408,29 @@
       "unknown": 0,
       "binds": "V2 actual replay only, not later V3",
       "review": "review/r1-w08-crosspage-20261024/annual14/review.json"
+    },
+    "W08_main_publication_attempt": {
+      "head": "e09e44e109d1273ba34f9e33dcbb73b1abf6ba13",
+      "pushed": false,
+      "normal_pre_push": {
+        "failed": 4,
+        "passed": 8052,
+        "skipped": 24,
+        "seconds": 183.29
+      },
+      "existing_origin_master": "3aa0aafc8d2990affb71064190723de6f3bb259d",
+      "rootfix_owners": "product_reference.py and narrative_continuity.py only; existing tests unchanged",
+      "remote_ci_failure_caused": false,
+      "two_root_fixes": {
+        "status": "REPAIRED_INDEPENDENT_17_PASS_PENDING_NORMAL_PUBLICATION",
+        "report": "review/r1-w08-crosspage-20261024/prepush-rootfix/independent/report-main-supplement.json",
+        "physical_finite": "194P/0F/4.885s",
+        "source_files": {
+          "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+          "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19"
+        },
+        "original_four_assertions_changed": false
+      }
     }
   },
   "budget_regime": {

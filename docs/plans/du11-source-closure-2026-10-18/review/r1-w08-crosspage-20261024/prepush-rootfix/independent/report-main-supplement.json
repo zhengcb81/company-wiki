@@ -1,0 +1,92 @@
+{
+  "status": "PASS_MAIN_FINITE_SUPPLEMENT_PENDING_NORMAL_PREPUSH",
+  "at_utc": "2026-10-24T01:33:12.045734+00:00",
+  "main_base_head": "e09e44e1",
+  "freeze_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\main-actual-freeze.json",
+  "freeze_sha256": "8f698f3e5ebbb875e73933ee02f358bdc53554f5e04bfadea406a86b029dbcda",
+  "bindings": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aa018a12ec8e86c7af1133ec3c37a0f3ed44d86ec00fccf066548e21dd4e60bc",
+    "src/company_wiki/document_understanding/pipeline.py": "a7cd2b2151a516ecd628d480651c3a983a123014fdeaf1ae722bcb51a2b289b7",
+    "src/company_wiki/document_understanding/structure/__init__.py": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+    "src/company_wiki/document_understanding/structure/sections.py": "3a25aa53a96c28b67ab26b080189d244a40a6116017aeb1cd73928a7395e0ffc",
+    "src/company_wiki/document_understanding/structure/contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src/company_wiki/document_understanding/decision_inventory.py": "9344ab2b84b1169d7dcc08712bb5e108c8a1583f5d16c0cd6c63afe65818ff31",
+    "src/company_wiki/source_catalog/narrative_reading.py": "3c77311df57c1b22b697f5f2d13293274ac3be34b22f5e4ba2e9475f7bc40a9f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "1c7722176ade696d7b1179f55dc8c1b51ec3ac522de76b736ac758da50868ac1",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "3c0d97ac11ae37e232e9e1e48e0527a1e53d60c5691d96d5e03301a5e1fae657",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "4d930f4a78fe6f65035c0c3194beb37a6b6ea426739c76dc884ffe636f0d5d43"
+  },
+  "source_unchanged": true,
+  "independent_cases": {
+    "same_13_original_oracles": 13,
+    "original_four_boundaries": 4,
+    "passed": 17,
+    "failed": 0
+  },
+  "original_four_function_ast_unchanged": true,
+  "path_adaptation": {
+    "original_script_sha256": "8484f3b815a9b4a0c678f486117e5c22b41ff10ef418211160ea2980ebcab239",
+    "adapted_script": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-independent-20261024\\prepush-supplement\\main_root_minimal_cases_freeze.py.txt",
+    "adapted_script_sha256": "44db4fcf271af51292867a4f65b4575f914ba58aeeb139c2098450dc54204d1b",
+    "harness_only_differences": [
+      {
+        "from": "WORKTREE = Path('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation')",
+        "to": "WORKTREE = Path('C:/Users/郑曾波/Projects/company-wiki')"
+      },
+      {
+        "from": "files['tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py'] = '709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff'",
+        "to": "files.setdefault('tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py', '709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff')"
+      }
+    ],
+    "all_nonmain_function_ast_unchanged": true,
+    "main_ast_unchanged_after_excluding_one_freeze_setup_statement": true,
+    "all_assertion_ast_unchanged": true,
+    "case_count": 13,
+    "product_calls_and_case_oracles_unchanged": true,
+    "original_four_baseline_receipt": "path-adaptation-and-old-oracles.json",
+    "reason": "Main actual freeze is authoritative for CRLF raw SHA; preserve existing freeze value instead of overriding with old LF-only constant."
+  },
+  "actual_import_paths": {
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "physical": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+    "source_fixture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_native_list_ancestry.py",
+    "model_fixture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_guidance_condition_scope.py",
+    "span_fixture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_guidance_condition_scope.py"
+  },
+  "root_causes": {
+    "product": "Case-insensitive _HEAD_ONLY was used without the existing Latin head boundary in declaration scan. _has_head_boundaries now serves both scan and span exits; original long names remain one declaration.",
+    "physical": "Shared native furniture role predicate excluded established positive header/footer observations. Those physical roles now remain eligible under the same producer ID proof; footnote/table exclusions and original order/coverage/body checks remain."
+  },
+  "previous_evidence_preserved": {
+    "v3_report": "../report.md",
+    "v2_independent": "../independent-execution-v2.json",
+    "v3_independent": "../independent-execution-v3.json",
+    "first_full_prepush": "C:/Users/郑曾波/Projects/company-wiki/.planning/r1-w08-crosspage-publication-20261024/normal-main-push.txt",
+    "first_full_prepush_result": "4F/8052P/24skip, push blocked; not relabeled green"
+  },
+  "not_certified": [
+    "normal complete prepush still to run by ROOT",
+    "publication/push/CI",
+    "annual14 whole-content coverage",
+    "new paid summary or RF lifecycle"
+  ],
+  "cleanup": "cleanup-main-supplement.json",
+  "open_blocking_findings_in_this_finite_review": []
+}

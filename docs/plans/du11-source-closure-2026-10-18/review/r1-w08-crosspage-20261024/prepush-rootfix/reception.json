@@ -1,0 +1,29 @@
+{
+  "status": "ROOT_FIX_ACCEPTED_PENDING_NORMAL_PUSH_CI",
+  "at_utc": "2026-10-24T01:37:02.500157+00:00",
+  "copied_files": [
+    "main-actual-freeze.json",
+    "product/handoff.md",
+    "product/handoff.json",
+    "product/cleanup.json",
+    "physical/handoff.md",
+    "physical/handoff.json",
+    "physical/physical-finite-real-green.json",
+    "independent/report-main-supplement.md",
+    "independent/report-main-supplement.json",
+    "independent/cleanup-main-supplement.json",
+    "independent/independent-execution-main-final.json",
+    "independent/original-four-execution.json",
+    "independent/main-path-and-freeze-adaptation.json",
+    "independent/main_root_minimal_cases_freeze.py.txt",
+    "independent/original_four_boundaries.py.txt",
+    "independent/actual-import-paths.json"
+  ],
+  "independent_cases": {
+    "same_13_original_oracles": 13,
+    "original_four_boundaries": 4,
+    "passed": 17,
+    "failed": 0
+  },
+  "business_pass": false
+}

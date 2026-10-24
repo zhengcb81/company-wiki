@@ -1,0 +1,129 @@
+{
+  "status": "FROZEN_PHYSICAL_OWNER_REPAIRED_PENDING_ROOT_INDEPENDENT_ACCEPTANCE_AND_NORMAL_PUSH",
+  "at_utc": "2026-10-24T01:29:57.926307+00:00",
+  "owned_changed_source": "src/company_wiki/document_understanding/narrative_continuity.py",
+  "source_before_sha256": "14850f48a777270780ffb16a07f07913de3b9b4f7bc6c60d71840d69aafadb01",
+  "final_bindings": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "raw_sha256": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+      "lf_sha256": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+      "bytes": 38381
+    },
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": {
+      "raw_sha256": "dfeca495777e21ef533d668bb066c39c4c988e9465bb47708116694384314f88",
+      "lf_sha256": "a76e74029f69eb52b7a2c30c311a0c3a0d2062a07a1cd192aca75fd7db3fb2e3",
+      "bytes": 9076
+    },
+    "tests/unit/du11_reference_readiness/test_native_page_local_positions.py": {
+      "raw_sha256": "2e020e4fccba607eb88b030775b0888e949dfe67a3cf4dffa432d01ffd8756b3",
+      "lf_sha256": "5275ae7110b109cddcb27bde8e644c39b6fb2710358b2c0b37a4251165f3b409",
+      "bytes": 3487
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": {
+      "raw_sha256": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+      "lf_sha256": "2412b19e4dd3c85f30fb99a21a0046bd5a85aea0ab245dc680660593606c3d62",
+      "bytes": 16542
+    },
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": {
+      "raw_sha256": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+      "lf_sha256": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2",
+      "bytes": 21075
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": {
+      "raw_sha256": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+      "lf_sha256": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3",
+      "bytes": 11885
+    }
+  },
+  "root_cause": "The new shared page-neighbour kind check silently narrowed the established SourcePageFlow positive running-furniture contract to paragraph/heading. Original native sources use explicit header/footer. Both old page-local-order fixtures failed at that new kind barrier before any page order issue.",
+  "fix": "Accept paragraph/heading/header/footer only among already positively identified furniture. Global ordinal, source, local paragraph sequence within a page, actual frame/font/body-lane/coverage and unknown-proof behavior are unchanged. Semantic footnotes/table cannot be skipped. No list24/font/source-id requirement added to old sentence clients.",
+  "old_assertions_changed": false,
+  "test_fixture_changes": 0,
+  "source_diff_scope": "One source physical role predicate plus explanatory comment. No operating lexicon, native dependency helper, reading, pipeline or old worktree changes.",
+  "original_red": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "2",
+    "skipped": "0",
+    "tests": "2",
+    "time": "1.700",
+    "timestamp": "2026-10-24T02:26:17.666652+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "bounded_real_green": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "194",
+    "time": "4.885",
+    "timestamp": "2026-10-24T02:28:21.006759+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "bounded_green_receipt": "physical-finite-real-green.json",
+  "static": "static.json",
+  "cache_identity": "Existing continuity_algorithms actual source-byte digest covers narrative_continuity; existing seven-module source-byte mutation/cache tests included in194P. No new version-signoff gate.",
+  "environment_errors": "First RED tests completed2F, sandbox blocked deletion of its created empty requested Temp; exact target subsequently removed with existing authorization. First finite sandbox run184P/0F/10E caused solely by sandbox numbered Temp creation; normal-permission replay of same194 produced194P. Wrapper GBK stdout errors did not lose TXT/XML/JSON. All evidence retained.",
+  "cleanup": [
+    {
+      "suite": "original-two-red",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{f8517102-a6f0-4678-b2c7-5210c09fb760}\\AC\\Temp\\cw-pytest-basetemp\\20261024-012617-c576522b",
+      "restored_absent": true,
+      "conftest_receipt": {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{f8517102-a6f0-4678-b2c7-5210c09fb760}\\AC\\Temp\\cw-pytest-basetemp\\20261024-012617-c576522b",
+        "existed": true,
+        "removed": true
+      }
+    },
+    {
+      "suite": "physical-finite-green",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{0ef77390-c9bb-4577-a691-6d44e4e87fe9}\\AC\\Temp\\cw-pytest-basetemp\\20261024-012737-a198e19a",
+      "restored_absent": true,
+      "conftest_receipt": {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{0ef77390-c9bb-4577-a691-6d44e4e87fe9}\\AC\\Temp\\cw-pytest-basetemp\\20261024-012737-a198e19a",
+        "existed": true,
+        "removed": false
+      }
+    },
+    {
+      "suite": "physical-finite-real-green",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261024-012820-28694f9c",
+      "restored_absent": true,
+      "conftest_receipt": {
+        "event": "cleanup",
+        "dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261024-012820-28694f9c",
+        "existed": true,
+        "removed": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\physical\\physical-finite-green-requested-temp",
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\physical\\physical-finite-real-green-requested-temp",
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\physical\\mypy-cache",
+      "files": 1336,
+      "bytes": 56624418,
+      "restored_absent": true
+    },
+    {
+      "absolute_target": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{f8517102-a6f0-4678-b2c7-5210c09fb760}\\AC\\Temp\\cw-w08-finalphysical-42x5iecq",
+      "checked_parent": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{f8517102-a6f0-4678-b2c7-5210c09fb760}\\AC\\Temp",
+      "was_present": false,
+      "restored_absent": true,
+      "permission_retry": "User/ROOT authorised exact own test Temp cleanup; no originals/data"
+    }
+  ],
+  "git_operations": 0,
+  "network_calls": 0,
+  "models": 0,
+  "downloads": 0,
+  "source_writes_stopped": true,
+  "next": "ROOT source_closure/readiness + original13 adapter independent acceptance; normal commit/push via existing hooks. No new8k/2132 suite performed here."
+}

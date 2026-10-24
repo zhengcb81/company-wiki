@@ -224,7 +224,12 @@ def native_page_neighbour(
     previous_page, previous_paragraph = left.page, left.paragraph
     for offset, item in enumerate(furniture, 1):
         page, paragraph = item.get("page"), item.get("paragraph_index")
-        if (item.get("kind") not in {"paragraph", "heading"}
+        # Both normalized paragraphs/headings and native header/footer roles
+        # can be positively proved running furniture by the source producer.
+        # Sentence callers predate the normalized list view; narrowing their
+        # observed roles here would add a new format requirement. Semantic
+        # footnotes and table content still cannot be skipped as furniture.
+        if (item.get("kind") not in {"paragraph", "heading", "header", "footer"}
                 or item.get("ordinal") != left.ordinal + offset or type(paragraph) is not int
                 or type(page) is not int or page not in (left.page, right.page)
                 or page < previous_page

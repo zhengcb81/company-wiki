@@ -1,0 +1,116 @@
+{
+  "status": "PRODUCT_LEXICAL_ROOT_FIX_FROZEN_FOR_ROOT_COMBINED_REVIEW",
+  "utc": "2026-10-24T01:28:19.069900+00:00",
+  "checkout": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "changed_production_files": [
+    {
+      "path": "src\\company_wiki\\document_understanding\\operating_states\\product_reference.py",
+      "sha256": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+      "bytes": 22576
+    }
+  ],
+  "preserved_sources_and_tests": [
+    {
+      "path": "src\\company_wiki\\document_understanding\\operating_states\\relations.py",
+      "sha256": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+      "bytes": 50488
+    },
+    {
+      "path": "src\\company_wiki\\document_understanding\\operating_states\\patterns.py",
+      "sha256": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+      "bytes": 21684
+    },
+    {
+      "path": "tests\\unit\\du11_source_closure\\test_reference_closure.py",
+      "sha256": "a66c9946cbdc70efc1079c0c21d59811317932b253a28b8f67efd42bd7f08005",
+      "bytes": 15216
+    },
+    {
+      "path": "tests\\unit\\document_understanding_selection\\test_reading_product_plural_classification.py",
+      "sha256": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+      "bytes": 7931
+    }
+  ],
+  "before": {
+    "path": "src\\company_wiki\\document_understanding\\operating_states\\product_reference.py",
+    "sha256": "7e5d0ccb0b85342081578a9c37e927835ccab6b21bb2aacebddeafe53ebd43d7",
+    "bytes": 22321
+  },
+  "exact_old_two_tests_unchanged": true,
+  "red": {
+    "log": "red.json",
+    "suite": [
+      {
+        "tests": "2",
+        "failures": "2",
+        "errors": "0",
+        "skipped": "0",
+        "time": "1.488"
+      }
+    ]
+  },
+  "verified": {
+    "log": "verified.json",
+    "suite": [
+      {
+        "tests": "391",
+        "failures": "1",
+        "errors": "0",
+        "skipped": "0",
+        "time": "5.229"
+      }
+    ],
+    "original_long_name_tests": [
+      {
+        "name": "test_long_latin_name_is_never_truncated_by_the_lookbehind",
+        "passed": true
+      },
+      {
+        "name": "test_long_latin_name_after_prose_is_extended_not_truncated",
+        "passed": true
+      }
+    ],
+    "remaining_failure": "test_only_actual_running_furniture_can_be_skipped_at_the_page_boundary[True] is the separate physical owner issue; this worker did not modify it."
+  },
+  "root_cause": "Case-insensitive _HEAD_ONLY exposed substring Product inside capitalised long names. Span classifier already guarded Latin head boundaries, declaration scanner bypassed it. Both exits now share _has_head_boundaries; no name or length special cases.",
+  "preserved": [
+    "Case-insensitive finite plural vocabulary",
+    "Original offsets and existing 64/256/1024/4096 bounded lookbehind/clipped semantics",
+    "Analysis/mixed-subject fixes in untouched patterns.py/relations.py",
+    "All old assertions and new38 tests exact bytes",
+    "No PDF/download/model/key/network/Git"
+  ],
+  "static": {
+    "ruff": {
+      "command": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py"
+      ],
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    "mypy": {
+      "command": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "--no-incremental",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\product\\type-cache",
+        "--follow-imports=skip",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py"
+      ],
+      "exit_code": 0,
+      "output": "Success: no issues found in 1 source file\n"
+    }
+  },
+  "environment_attempts": [
+    "green.json and green-elevated.json retained: C:/tmp mkdir denied for 10 fixtures; not production failures. Workspace-local short tmp removed those errors in verified.json."
+  ],
+  "cleanup": "cleanup.json",
+  "scope": "390P/1 separate physical failure across 391; not a whole-suite PASS; ROOT owns combined final review and normal pre-push."
+}

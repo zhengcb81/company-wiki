@@ -1,0 +1,308 @@
+"""Independent finite W08 review. Original observations; no injected parents/model calls."""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from copy import deepcopy
+from dataclasses import replace
+from hashlib import sha256
+from importlib import import_module
+import json
+from pathlib import Path
+import sys
+import time
+import traceback
+from unittest.mock import patch
+
+WORKTREE = Path('C:/Users/郑曾波/Projects/company-wiki')
+OUT = Path(__file__).resolve().parent
+FREEZE = WORKTREE / 'docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-root-20261024/final-source-freeze.json'
+sys.path[:0] = [str(WORKTREE / 'src'), str(WORKTREE / 'tests')]
+sys.dont_write_bytecode = True
+
+from company_wiki.document_understanding import narrative_continuity as physical
+from company_wiki.document_understanding.decision_inventory import _versions
+from company_wiki.document_understanding.operating_states.text_view import strip_connector
+from company_wiki.resource_budget import WorkBudget
+from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_catalog.narrative_business_policy import detect_reading_business_fact
+from company_wiki.source_catalog.narrative_native_dependencies import collect_native_dependencies
+from unit.document_understanding_selection.test_reading_native_list_ancestry import _source
+from unit.document_understanding_selection.test_reading_guidance_condition_scope import _model, _spans_for
+
+
+def digest(path):
+    return sha256(path.read_bytes()).hexdigest()
+
+
+def snapshot(parsed):
+    return [(u.unit_id, u.source_id, u.raw_text, u.coordinates.to_dict(), repr(u.metadata), u.quality_flags)
+            for u in parsed.units]
+
+
+def source_case(*, furniture=True, known_column=True, language='metric', parent_chars=None):
+    parent = '(7) Specialty service revenue reached USD 31 million.'
+    intro = 'During the reporting period:'
+    left = '• Customer orders increased 23% year over year.'
+    right = 'II) Customer orders declined 9% year over year.'
+    if language == 'en-restriction':
+        left = '• The company has shipped ZX-17 products.'
+        right = 'II) These products have not obtained customer qualification.'
+    elif language == 'trad-restriction':
+        left = '• 本公司已交付43台專用設備至客戶進行生產驗證。'
+        right = 'II) 該設備尚未完成量產認證，不代表已經形成批量銷售。'
+    elif language == 'other-subject':
+        left = '• The company has shipped ZX-17 products.'
+        right = 'II) The supplier says these products have not obtained customer qualification.'
+    if parent_chars is not None:
+        parent += '原' * (parent_chars - len(parent))
+    rows = [(1, '一、经营情况', 0, (90, 100, 550, 112)),
+            (1, parent, 1, (90, 640, 550, 672)),
+            (1, intro, 1, (90, 640, 550, 672)),
+            (1, left, 2, (110, 720, 550, 732))]
+    if furniture:
+        rows += [(1, 'Independent Annual Report', 3, (90, 780, 550, 792)),
+                 (2, 'Independent Annual Report', 0, (90, 12, 550, 24))]
+    block = 1 if furniture else 0
+    rows += [(2, right, block, (110, 70, 550, 82)),
+             (2, '(8) Another service revenue reached USD 11 million.', block + 1, (90, 130, 550, 162)),
+             (2, intro, block + 1, (90, 130, 550, 162)),
+             (2, '- Customer numbers increased 16%.', block + 2, (110, 190, 550, 202))]
+    parsed = _source(rows, known_column=known_column)
+    return parsed, {'parent': parsed.units[1], 'intro': parsed.units[2], 'left': parsed.units[3],
+                    'right': next(u for u in parsed.units if u.raw_text == right),
+                    'sibling': next(u for u in parsed.units if u.raw_text.startswith('(8)'))}
+
+
+def public(parsed, *, observe_counts=False, limit=16_000_000):
+    before = snapshot(parsed)
+    account = WorkBudget(limit)
+    contexts = {}
+    pipeline = reading._understand(parsed, title='Neutral annual report', kind='annual_report',
+        mime_type='application/pdf', work_budget=account, _native_contexts=contexts)
+    json.dumps(pipeline)
+    assert all(context.work_budget is account for context in contexts.values())
+    counts = Counter()
+    observer = physical.observe_native_source_unit
+    def traced(unit, provenance, charge):
+        counts[unit['unit_id']] += 1
+        return observer(unit, provenance, charge)
+    with patch.object(physical, 'observe_native_source_unit', traced):
+        selected = reading.select_reading_evidence(parsed, title='Neutral annual report',
+            existing_kind='annual_report', max_selected=96, max_chars=48000, work_budget=account)
+    assert snapshot(parsed) == before
+    assert 0 < account.used <= limit and not account.exhausted
+    assert len(selected.evidence_spans) <= 96
+    assert sum(len(s.raw_text or '') for s in selected.evidence_spans) <= 48000
+    if observe_counts:
+        assert counts and max(counts.values()) == 1, dict(counts)
+    return pipeline, selected, account.used, dict(counts)
+
+
+def target_views(selected, unit):
+    support = {s.span_id for s in _spans_for(selected, unit)}
+    citations = [c for g in selected.reading_context['groups'] for c in g['citation_views']
+                 if support.intersection(c['support_evidence_ids'])]
+    view, texts = _model(selected)
+    tasks = [t for t in view.plan.tasks if support.intersection(t.support_ids)]
+    return support, citations, tasks, texts
+
+
+def require_complete_envelopes(parsed, selected):
+    by_span = {s.span_id: {u.unit_id for u in parsed.units if s in _spans_for(selected, u)}
+               for s in selected.evidence_spans}
+    original = {u.unit_id: u for u in parsed.units}
+    for g in selected.reading_context['groups']:
+        for c in g['citation_views']:
+            ids = {uid for sid in [*c['support_evidence_ids'], *c['context_evidence_ids']] for uid in by_span[sid]}
+            assert len(ids) <= 8
+            assert len({(original[x].source_id, original[x].coordinates.page_number, original[x].metadata['pdf_block']) for x in ids}) <= 4
+            assert sum(len(original[x].raw_text) for x in ids) <= 2048
+
+
+def metric_public():
+    parsed, u = source_case()
+    pipeline, selected, used, counts = public(parsed, observe_counts=True)
+    support, citations, tasks, texts = target_views(selected, u['right'])
+    assert support and citations and tasks
+    section = next(s for s in pipeline['structure']['sections'] if u['right'].unit_id in s['body_unit_ids'])
+    assert {u['parent'].unit_id, u['intro'].unit_id} <= set(section['heading_unit_ids'])
+    assert u['sibling'].unit_id not in section['heading_unit_ids']
+    for key in ('parent', 'intro'):
+        ids = {s.span_id for s in _spans_for(selected, u[key])}
+        assert ids and all(ids.intersection(c['context_evidence_ids']) for c in citations)
+        assert all(ids.intersection(t.member_ids) for t in tasks)
+    assert all(not any(u['left'].raw_text in text for text in texts[t.key]) for t in tasks)
+    groups = [g for g in selected.reading_context['groups'] if any(support.intersection(c['support_evidence_ids']) for c in g['citation_views'])]
+    assert groups and all(u['left'].unit_id in g['source_proof_unit_ids'] for g in groups)
+    assert all(len(g['source_proofs'][0]['furniture_unit_ids']) == 2 for g in groups)
+    assert all(not any('Independent Annual Report' in text for text in texts[t.key]) for t in tasks)
+    require_complete_envelopes(parsed, selected)
+    return {'work_used': used, 'physical_observations': counts, 'proof_groups': groups}
+
+
+def restriction_public(language):
+    parsed, u = source_case(language=language)
+    _, selected, used, _ = public(parsed)
+    left, citations, tasks, texts = target_views(selected, u['left'])
+    right = {s.span_id for s in _spans_for(selected, u['right'])}
+    assert left and right and citations and tasks
+    assert all(right.intersection(c['context_evidence_ids']) for c in citations), citations
+    assert all(right.intersection(t.member_ids) for t in tasks)
+    assert all(any(u['right'].raw_text in text for text in texts[t.key]) for t in tasks)
+    require_complete_envelopes(parsed, selected)
+    return {'work_used': used, 'left': u['left'].raw_text, 'restriction': u['right'].raw_text}
+
+
+def negative_other_subject():
+    parsed, u = source_case(language='other-subject')
+    _, selected, _, _ = public(parsed)
+    support, citations, tasks, texts = target_views(selected, u['left'])
+    assert support and citations and tasks
+    assert all(not any(u['right'].raw_text in text for text in texts[t.key]) for t in tasks)
+    return {'left_preserved': True, 'supplier_statement_not_attached': True}
+
+
+def negative_unknown_column():
+    parsed, u = source_case(known_column=False)
+    pipeline, selected, _, _ = public(parsed)
+    section = next(s for s in pipeline['structure']['sections'] if u['right'].unit_id in s['body_unit_ids'])
+    assert u['parent'].unit_id not in section['heading_unit_ids']
+    return {'no_cross_page_parent': True, 'selected_count': len(selected.evidence_spans)}
+
+
+def negative_envelope():
+    parsed, u = source_case(parent_chars=2040)
+    _, selected, _, _ = public(parsed)
+    assert not _spans_for(selected, u['right'])
+    assert any(d['reason'] == 'REFERENCE_ENVELOPE' for d in selected.reading_context['deferred'])
+    return {'actual_oversize_deferred': True}
+
+
+def negative_zero_work():
+    parsed, _ = source_case()
+    account = WorkBudget(0)
+    selected = reading.select_reading_evidence(parsed, title='Neutral annual report', existing_kind='annual_report', work_budget=account)
+    assert not selected.evidence_spans and not selected.coverage_complete
+    assert any(d['code'] == 'work_budget_exhausted' for d in selected.selection_diagnostics)
+    return {'budget_used': account.used, 'no_evidence': True}
+
+
+def proof_negative(kind):
+    parsed, u = source_case()
+    pipeline, _, _, _ = public(parsed)
+    semantics = deepcopy(pipeline['structure']['semantic_units'])
+    target = u['right'].unit_id
+    semantic = next(s for s in semantics if target in s.get('native_source_proofs_by_unit_id', {}))
+    furniture = frozenset(uid for d in pipeline['structure']['diagnostics'] if d['code'] == 'REPEATED_RUNNING_HEADER' for uid in d['unit_ids'])
+    original = {x.unit_id: x for x in parsed.units}
+    if kind == 'missing':
+        semantic['required_source_unit_ids_by_unit_id'][target].pop()
+    elif kind == 'foreign':
+        original[u['left'].unit_id] = replace(u['left'], source_id='foreign-original')
+    else:
+        semantic['native_source_proofs_by_unit_id'][target][0]['right_page'] = 7
+    result = collect_native_dependencies(semantics, originals=original, furniture_ids=furniture, work_budget=WorkBudget(100000))
+    assert target in result.blocked and result.diagnostics
+    return {'diagnostics': result.diagnostics}
+
+
+def cache_sources():
+    baseline = _versions(mime_type='application/pdf')
+    modules = ('company_wiki.document_understanding.pipeline',
+               'company_wiki.document_understanding.structure',
+               'company_wiki.document_understanding.structure.sections',
+               'company_wiki.source_catalog.narrative_native_dependencies',
+               'company_wiki.document_understanding.operating_states.text_view')
+    original = Path.read_bytes
+    changed = []
+    for name in modules:
+        target = Path(import_module(name).__file__).resolve()
+        def read(path):
+            data = original(path)
+            return data + b'\n# independent dependency perturbation\n' if path.resolve() == target else data
+        with patch.object(Path, 'read_bytes', read):
+            observed = _versions(mime_type='application/pdf')
+        assert observed['business_algorithms'] != baseline['business_algorithms'], name
+        changed.append(name)
+    assert _versions(mime_type='application/pdf') == baseline
+    return {'changed_identity_for': changed, 'source_files_written': 0}
+
+
+def marker_offsets():
+    for marker in ('• ', 'IV. ', 'VI) ', '（7） ', '(8) '):
+        text = marker + 'however these products remain pending'
+        rest, offset = strip_connector(text)
+        assert rest == 'these products remain pending' and text[offset:] == rest
+    for text in ('-23 orders', 'IV.product', 'civil. product', '(7)product', '0.2 products'):
+        assert strip_connector(text) == (text, 0)
+    return {'positive_markers': 5, 'negative_delimiters': 5}
+
+
+def metric_languages():
+    rows = []
+    for text, actual, planned in (
+        ('本公司订单同比增长23%。', True, False), ('本公司訂單同比增長23%。', True, False),
+        ('Our orders increased 23% year over year.', True, False),
+        ('预计明年订单同比增长14%。', False, True), ('預計明年訂單同比增長14%。', False, True),
+        ('We expect our order counts to increase 14% next year.', False, True),
+        ('Order counts to increase 14%.', False, False),
+        ('We do not expect orders to increase 14% next year.', False, False),
+        ('Order balances increased 23%.', False, False),
+    ):
+        fact = detect_reading_business_fact(text)
+        assert ('operating_metric_change' in fact.reasons) is actual
+        assert ('operating_plan' in fact.reasons) is planned
+        if not actual:
+            assert not {'operating_quantity', 'operating_metric_change', 'business_revenue_measure', 'operating_causal_driver', 'product_operating_driver'}.intersection(fact.reasons)
+        rows.append({'text': text, 'reasons': fact.reasons})
+    return rows
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--freeze-sha', required=True)
+    parser.add_argument('--freeze-path', type=Path, default=FREEZE)
+    parser.add_argument('--label', default='v2')
+    args = parser.parse_args()
+    assert digest(args.freeze_path) == args.freeze_sha
+    freeze = json.loads(args.freeze_path.read_text(encoding='utf-8'))
+    files = {p: row['sha256_raw'] for group in ('owned_files', 'root_owned_composition_bindings', 'immutable_test_bindings') for p, row in freeze[group].items()}
+    files.setdefault('tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py', '709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff')
+    before = {p: digest(WORKTREE / p) for p in files}
+    assert before == files, {p: (files[p], before[p]) for p in files if before[p] != files[p]}
+    started = time.time()
+    cases = [('public_metric_furniture_roman_shared_observation', metric_public),
+             ('public_english_same_object_restriction', lambda: restriction_public('en-restriction')),
+             ('public_traditional_same_object_restriction', lambda: restriction_public('trad-restriction')),
+             ('public_other_subject_negative', negative_other_subject),
+             ('public_unknown_column_negative', negative_unknown_column),
+             ('public_original_envelope_negative', negative_envelope),
+             ('public_zero_work_negative', negative_zero_work),
+             ('typed_proof_missing_negative', lambda: proof_negative('missing')),
+             ('typed_proof_foreign_negative', lambda: proof_negative('foreign')),
+             ('typed_proof_wrong_page_negative', lambda: proof_negative('page')),
+             ('actual_source_byte_cache_dependencies', cache_sources),
+             ('marker_offset_and_delimiter_controls', marker_offsets),
+             ('order_language_actual_and_future_controls', metric_languages)]
+    rows = []
+    for name, fn in cases:
+        try:
+            detail = fn()
+            rows.append({'case': name, 'status': 'PASS', 'detail': detail})
+        except Exception as error:
+            rows.append({'case': name, 'status': 'FAIL', 'error': repr(error), 'traceback': traceback.format_exc()})
+        print(name + ': ' + rows[-1]['status'], flush=True)
+    after = {p: digest(WORKTREE / p) for p in files}
+    receipt = {'freeze_sha256': args.freeze_sha, 'source_sha256': before, 'source_after_sha256': after,
+               'source_unchanged': before == after, 'cases': rows, 'passed': sum(r['status'] == 'PASS' for r in rows),
+               'failed': sum(r['status'] == 'FAIL' for r in rows), 'elapsed_seconds': time.time() - started,
+               'python': sys.version, 'import_source': reading.__file__, 'network_calls': 0, 'model_calls': 0,
+               'source_test_git_writes': 0, 'temporary_paths_created': []}
+    (OUT / ('independent-execution-' + args.label + '.json')).write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding='utf-8')
+    assert before == after
+    return 1 if receipt['failed'] else 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

@@ -1,0 +1,12 @@
+{
+  "actual_paths": {
+    "reading": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "physical": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+    "source_fixture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_native_list_ancestry.py",
+    "model_fixture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_guidance_condition_scope.py",
+    "span_fixture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_guidance_condition_scope.py"
+  },
+  "script": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-independent-20261024\\prepush-supplement\\main_root_minimal_cases_freeze.py.txt",
+  "script_sha256": "44db4fcf271af51292867a4f65b4575f914ba58aeeb139c2098450dc54204d1b",
+  "product_tests_reexecuted": 0
+}

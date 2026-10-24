@@ -1,0 +1,48 @@
+{
+  "args": [
+    "C:/Miniconda/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/du11_reference_readiness",
+    "tests/unit/du11_source_closure",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\physical\\physical-finite-real-green-requested-temp",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\physical\\physical-finite-real-green.xml"
+  ],
+  "source_before": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "dfeca495777e21ef533d668bb066c39c4c988e9465bb47708116694384314f88",
+    "tests/unit/du11_reference_readiness/test_native_page_local_positions.py": "2e020e4fccba607eb88b030775b0888e949dfe67a3cf4dffa432d01ffd8756b3"
+  },
+  "source_after": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "tests/unit/du11_source_closure/test_cross_page_reference_plan.py": "dfeca495777e21ef533d668bb066c39c4c988e9465bb47708116694384314f88",
+    "tests/unit/du11_reference_readiness/test_native_page_local_positions.py": "2e020e4fccba607eb88b030775b0888e949dfe67a3cf4dffa432d01ffd8756b3"
+  },
+  "source_stable": true,
+  "junit": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "194",
+    "time": "4.885",
+    "timestamp": "2026-10-24T02:28:21.006759+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 7.803500499983784,
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\physical\\physical-finite-real-green-requested-temp",
+    "restored_absent": true
+  },
+  "external_calls": 0,
+  "git_writes": 0
+}

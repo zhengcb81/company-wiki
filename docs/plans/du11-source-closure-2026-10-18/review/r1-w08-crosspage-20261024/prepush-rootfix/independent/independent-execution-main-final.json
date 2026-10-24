@@ -1,0 +1,306 @@
+{
+  "freeze_sha256": "8f698f3e5ebbb875e73933ee02f358bdc53554f5e04bfadea406a86b029dbcda",
+  "source_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aa018a12ec8e86c7af1133ec3c37a0f3ed44d86ec00fccf066548e21dd4e60bc",
+    "src/company_wiki/document_understanding/pipeline.py": "a7cd2b2151a516ecd628d480651c3a983a123014fdeaf1ae722bcb51a2b289b7",
+    "src/company_wiki/document_understanding/structure/__init__.py": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+    "src/company_wiki/document_understanding/structure/sections.py": "3a25aa53a96c28b67ab26b080189d244a40a6116017aeb1cd73928a7395e0ffc",
+    "src/company_wiki/document_understanding/structure/contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src/company_wiki/document_understanding/decision_inventory.py": "9344ab2b84b1169d7dcc08712bb5e108c8a1583f5d16c0cd6c63afe65818ff31",
+    "src/company_wiki/source_catalog/narrative_reading.py": "3c77311df57c1b22b697f5f2d13293274ac3be34b22f5e4ba2e9475f7bc40a9f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "1c7722176ade696d7b1179f55dc8c1b51ec3ac522de76b736ac758da50868ac1",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "3c0d97ac11ae37e232e9e1e48e0527a1e53d60c5691d96d5e03301a5e1fae657",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "4d930f4a78fe6f65035c0c3194beb37a6b6ea426739c76dc884ffe636f0d5d43"
+  },
+  "source_after_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aa018a12ec8e86c7af1133ec3c37a0f3ed44d86ec00fccf066548e21dd4e60bc",
+    "src/company_wiki/document_understanding/pipeline.py": "a7cd2b2151a516ecd628d480651c3a983a123014fdeaf1ae722bcb51a2b289b7",
+    "src/company_wiki/document_understanding/structure/__init__.py": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+    "src/company_wiki/document_understanding/structure/sections.py": "3a25aa53a96c28b67ab26b080189d244a40a6116017aeb1cd73928a7395e0ffc",
+    "src/company_wiki/document_understanding/structure/contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src/company_wiki/document_understanding/decision_inventory.py": "9344ab2b84b1169d7dcc08712bb5e108c8a1583f5d16c0cd6c63afe65818ff31",
+    "src/company_wiki/source_catalog/narrative_reading.py": "3c77311df57c1b22b697f5f2d13293274ac3be34b22f5e4ba2e9475f7bc40a9f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "1c7722176ade696d7b1179f55dc8c1b51ec3ac522de76b736ac758da50868ac1",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "3c0d97ac11ae37e232e9e1e48e0527a1e53d60c5691d96d5e03301a5e1fae657",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "4d930f4a78fe6f65035c0c3194beb37a6b6ea426739c76dc884ffe636f0d5d43"
+  },
+  "source_unchanged": true,
+  "cases": [
+    {
+      "case": "public_metric_furniture_roman_shared_observation",
+      "status": "PASS",
+      "detail": {
+        "work_used": 10755,
+        "physical_observations": {
+          "urn:company-wiki:narrative-unit:sha256:a83f59e5de860de352cb47664261dcae73967e8b47119e06a11db52221bd0ea1": 1,
+          "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17": 1,
+          "urn:company-wiki:narrative-unit:sha256:683de2098a00949a1cb1a3cc3b794eb59203bb4cda608d326b94e5bcbfcfaefe": 1
+        },
+        "proof_groups": [
+          {
+            "group_id": "urn:company-wiki:reading-group:sha256:b496420d406a925c57ccd24e506c69c79fefc75f4d345b6ec769978b716a26e5",
+            "kind": "background",
+            "section_role": "unknown",
+            "evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:dbddaeadd565ddab35955a611e04877b5a3633b5464992f8ed0423dbadbcded3",
+              "urn:company-wiki:evidence-span:sha256:6a501c6b51784da9e004abf4f503916405ebb247432f52ae6dc2dffa611fbf33",
+              "urn:company-wiki:evidence-span:sha256:c34752a6de0b4e7959fb668b040c4615a1384a6f5b1a0af96cdb1ce730106f75",
+              "urn:company-wiki:evidence-span:sha256:13efd262067010dfe49a676cada624e5afa415164928aec11de52e2e9847160b"
+            ],
+            "citation_views": [
+              {
+                "support_evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:13efd262067010dfe49a676cada624e5afa415164928aec11de52e2e9847160b"
+                ],
+                "context_evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:dbddaeadd565ddab35955a611e04877b5a3633b5464992f8ed0423dbadbcded3",
+                  "urn:company-wiki:evidence-span:sha256:6a501c6b51784da9e004abf4f503916405ebb247432f52ae6dc2dffa611fbf33",
+                  "urn:company-wiki:evidence-span:sha256:c34752a6de0b4e7959fb668b040c4615a1384a6f5b1a0af96cdb1ce730106f75"
+                ]
+              }
+            ],
+            "source_proof_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a11357ff7e494bee5c5bbe63ca52da08dd02333b6fd71b1f60c6daa8d5fad024",
+              "urn:company-wiki:narrative-unit:sha256:a83f59e5de860de352cb47664261dcae73967e8b47119e06a11db52221bd0ea1",
+              "urn:company-wiki:narrative-unit:sha256:b1ff813575f2348c40e85c31375c15b23516749ca32aef5a657cd6814860ab6a"
+            ],
+            "source_proofs": [
+              {
+                "basis": "observed_adjacent_page_flow",
+                "left": "urn:company-wiki:narrative-unit:sha256:a83f59e5de860de352cb47664261dcae73967e8b47119e06a11db52221bd0ea1",
+                "right": "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+                "left_page": 1,
+                "right_page": 2,
+                "left_ordinal": 3,
+                "right_ordinal": 6,
+                "column": 0,
+                "coordinate_frame": "dict",
+                "furniture_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:b1ff813575f2348c40e85c31375c15b23516749ca32aef5a657cd6814860ab6a",
+                  "urn:company-wiki:narrative-unit:sha256:a11357ff7e494bee5c5bbe63ca52da08dd02333b6fd71b1f60c6daa8d5fad024"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "public_english_same_object_restriction",
+      "status": "PASS",
+      "detail": {
+        "work_used": 15505,
+        "left": "• The company has shipped ZX-17 products.",
+        "restriction": "II) These products have not obtained customer qualification."
+      }
+    },
+    {
+      "case": "public_traditional_same_object_restriction",
+      "status": "PASS",
+      "detail": {
+        "work_used": 12391,
+        "left": "• 本公司已交付43台專用設備至客戶進行生產驗證。",
+        "restriction": "II) 該設備尚未完成量產認證，不代表已經形成批量銷售。"
+      }
+    },
+    {
+      "case": "public_other_subject_negative",
+      "status": "PASS",
+      "detail": {
+        "left_preserved": true,
+        "supplier_statement_not_attached": true
+      }
+    },
+    {
+      "case": "public_unknown_column_negative",
+      "status": "PASS",
+      "detail": {
+        "no_cross_page_parent": true,
+        "selected_count": 8
+      }
+    },
+    {
+      "case": "public_original_envelope_negative",
+      "status": "PASS",
+      "detail": {
+        "actual_oversize_deferred": true
+      }
+    },
+    {
+      "case": "public_zero_work_negative",
+      "status": "PASS",
+      "detail": {
+        "budget_used": 0,
+        "no_evidence": true
+      }
+    },
+    {
+      "case": "typed_proof_missing_negative",
+      "status": "PASS",
+      "detail": {
+        "diagnostics": [
+          {
+            "package_id": "native-proof:urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+            "reason": "REFERENCE_UNRESOLVED",
+            "status": "native_dependency_incomplete_proof",
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "typed_proof_foreign_negative",
+      "status": "PASS",
+      "detail": {
+        "diagnostics": [
+          {
+            "package_id": "native-proof:urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+            "reason": "REFERENCE_UNRESOLVED",
+            "status": "native_dependency_foreign",
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "typed_proof_wrong_page_negative",
+      "status": "PASS",
+      "detail": {
+        "diagnostics": [
+          {
+            "package_id": "native-proof:urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+            "reason": "REFERENCE_UNRESOLVED",
+            "status": "native_dependency_proof_shape",
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "actual_source_byte_cache_dependencies",
+      "status": "PASS",
+      "detail": {
+        "changed_identity_for": [
+          "company_wiki.document_understanding.pipeline",
+          "company_wiki.document_understanding.structure",
+          "company_wiki.document_understanding.structure.sections",
+          "company_wiki.source_catalog.narrative_native_dependencies",
+          "company_wiki.document_understanding.operating_states.text_view"
+        ],
+        "source_files_written": 0
+      }
+    },
+    {
+      "case": "marker_offset_and_delimiter_controls",
+      "status": "PASS",
+      "detail": {
+        "positive_markers": 5,
+        "negative_delimiters": 5
+      }
+    },
+    {
+      "case": "order_language_actual_and_future_controls",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "本公司订单同比增长23%。",
+          "reasons": [
+            "operating_metric_change"
+          ]
+        },
+        {
+          "text": "本公司訂單同比增長23%。",
+          "reasons": [
+            "operating_metric_change"
+          ]
+        },
+        {
+          "text": "Our orders increased 23% year over year.",
+          "reasons": [
+            "quantified_operating_status",
+            "operating_metric_change"
+          ]
+        },
+        {
+          "text": "预计明年订单同比增长14%。",
+          "reasons": [
+            "operating_plan"
+          ]
+        },
+        {
+          "text": "預計明年訂單同比增長14%。",
+          "reasons": [
+            "operating_plan"
+          ]
+        },
+        {
+          "text": "We expect our order counts to increase 14% next year.",
+          "reasons": [
+            "operating_plan"
+          ]
+        },
+        {
+          "text": "Order counts to increase 14%.",
+          "reasons": []
+        },
+        {
+          "text": "We do not expect orders to increase 14% next year.",
+          "reasons": []
+        },
+        {
+          "text": "Order balances increased 23%.",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "passed": 13,
+  "failed": 0,
+  "elapsed_seconds": 0.6938526630401611,
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "import_source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+  "network_calls": 0,
+  "model_calls": 0,
+  "source_test_git_writes": 0,
+  "temporary_paths_created": []
+}

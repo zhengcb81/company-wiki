@@ -1,0 +1,39 @@
+{
+  "utc": "2026-10-24T01:28:18.7935225Z",
+  "no_originals_or_git": true,
+  "paths": [
+    {
+      "was_present": true,
+      "initially_absent": true,
+      "absent_after_cleanup": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-hp-verified"
+    },
+    {
+      "was_present": true,
+      "initially_absent": true,
+      "absent_after_cleanup": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-final-rootfix-20261024\\product\\type-cache"
+    },
+    {
+      "initially_absent": true,
+      "absent_after_cleanup": true,
+      "note": "C:/tmp fixture creation denied, did not use directory",
+      "path": "C:/tmp/cw-head-red-20261024",
+      "created_by_test": false
+    },
+    {
+      "initially_absent": true,
+      "absent_after_cleanup": true,
+      "note": "C:/tmp fixture creation denied, did not use directory",
+      "path": "C:/tmp/cw-head-green-20261024",
+      "created_by_test": false
+    },
+    {
+      "initially_absent": true,
+      "absent_after_cleanup": true,
+      "note": "C:/tmp fixture creation denied, did not use directory",
+      "path": "C:/tmp/cw-head-green-elevated-20261024",
+      "created_by_test": false
+    }
+  ]
+}

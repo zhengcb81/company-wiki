@@ -1,0 +1,95 @@
+{
+  "freeze_sha256": "8f698f3e5ebbb875e73933ee02f358bdc53554f5e04bfadea406a86b029dbcda",
+  "cases": [
+    {
+      "case": "long_latin_name",
+      "status": "PASS"
+    },
+    {
+      "case": "long_latin_name_after_prose",
+      "status": "PASS"
+    },
+    {
+      "case": "proven_original_furniture",
+      "status": "PASS"
+    },
+    {
+      "case": "native_page_local_paragraph_order",
+      "status": "PASS"
+    }
+  ],
+  "passed": 4,
+  "failed": 0,
+  "original_function_ast_unchanged": true,
+  "actual_import_paths": {
+    "unit.du11_source_closure.test_reference_closure": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\du11_source_closure\\test_reference_closure.py",
+    "unit.du11_source_closure.test_cross_page_reference_plan": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\du11_source_closure\\test_cross_page_reference_plan.py",
+    "unit.du11_reference_readiness.test_native_page_local_positions": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\du11_reference_readiness\\test_native_page_local_positions.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.document_understanding.narrative_continuity": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\narrative_continuity.py",
+    "company_wiki.document_understanding.operating_states.product_reference": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\operating_states\\product_reference.py"
+  },
+  "source_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aa018a12ec8e86c7af1133ec3c37a0f3ed44d86ec00fccf066548e21dd4e60bc",
+    "src/company_wiki/document_understanding/pipeline.py": "a7cd2b2151a516ecd628d480651c3a983a123014fdeaf1ae722bcb51a2b289b7",
+    "src/company_wiki/document_understanding/structure/__init__.py": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+    "src/company_wiki/document_understanding/structure/sections.py": "3a25aa53a96c28b67ab26b080189d244a40a6116017aeb1cd73928a7395e0ffc",
+    "src/company_wiki/document_understanding/structure/contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src/company_wiki/document_understanding/decision_inventory.py": "9344ab2b84b1169d7dcc08712bb5e108c8a1583f5d16c0cd6c63afe65818ff31",
+    "src/company_wiki/source_catalog/narrative_reading.py": "3c77311df57c1b22b697f5f2d13293274ac3be34b22f5e4ba2e9475f7bc40a9f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "1c7722176ade696d7b1179f55dc8c1b51ec3ac522de76b736ac758da50868ac1",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "3c0d97ac11ae37e232e9e1e48e0527a1e53d60c5691d96d5e03301a5e1fae657",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "4d930f4a78fe6f65035c0c3194beb37a6b6ea426739c76dc884ffe636f0d5d43"
+  },
+  "source_after_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "b6d305d034ff386652174509bfcc7578bf21f438ece8940816879338127fc0b0",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aa018a12ec8e86c7af1133ec3c37a0f3ed44d86ec00fccf066548e21dd4e60bc",
+    "src/company_wiki/document_understanding/pipeline.py": "a7cd2b2151a516ecd628d480651c3a983a123014fdeaf1ae722bcb51a2b289b7",
+    "src/company_wiki/document_understanding/structure/__init__.py": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+    "src/company_wiki/document_understanding/structure/sections.py": "3a25aa53a96c28b67ab26b080189d244a40a6116017aeb1cd73928a7395e0ffc",
+    "src/company_wiki/document_understanding/structure/contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src/company_wiki/document_understanding/decision_inventory.py": "9344ab2b84b1169d7dcc08712bb5e108c8a1583f5d16c0cd6c63afe65818ff31",
+    "src/company_wiki/source_catalog/narrative_reading.py": "3c77311df57c1b22b697f5f2d13293274ac3be34b22f5e4ba2e9475f7bc40a9f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "1c7722176ade696d7b1179f55dc8c1b51ec3ac522de76b736ac758da50868ac1",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "3c0d97ac11ae37e232e9e1e48e0527a1e53d60c5691d96d5e03301a5e1fae657",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "4d930f4a78fe6f65035c0c3194beb37a6b6ea426739c76dc884ffe636f0d5d43"
+  },
+  "source_unchanged": true,
+  "source_test_git_writes": 0,
+  "network_calls": 0,
+  "model_calls": 0,
+  "temporary_paths_created": []
+}

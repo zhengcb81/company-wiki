@@ -180,6 +180,13 @@ def head_class(head: str) -> str:
     return _HEAD_CLASS_BY_TOKEN.get(head, _HEAD_CLASS_BY_TOKEN.get(lowered, "product"))
 
 
+def _has_head_boundaries(text: str, match: re.Match[str]) -> bool:
+    """A Latin head is a word, not a substring inside a source-authored name."""
+    return not (match.group().isascii()
+                and ((match.start() and text[match.start()-1].isalpha())
+                     or (match.end() < len(text) and text[match.end()].isalpha())))
+
+
 def product_head_spans(text: str) -> tuple[tuple[int, int, str], ...]:
     """Observed product-head spans from the existing shared vocabulary.
 
@@ -188,9 +195,7 @@ def product_head_spans(text: str) -> tuple[tuple[int, int, str], ...]:
     """
     return tuple((match.start(), match.end(), head_class(match.group()))
                  for match in _HEAD_ONLY.finditer(text)
-                 if not (match.group().isascii()
-                         and ((match.start() and text[match.start()-1].isalpha())
-                              or (match.end() < len(text) and text[match.end()].isalpha()))))
+                 if _has_head_boundaries(text, match))
 
 
 def product_head_suffix(text: str) -> tuple[int, int, str] | None:
@@ -399,6 +404,8 @@ def scan_product_declarations(text: str) -> DeclarationScan:
     seen: set[tuple[int, int, str]] = set()
     clipped = False
     for match in _HEAD_ONLY.finditer(text):
+        if not _has_head_boundaries(text, match):
+            continue
         head = match.group()
         # Bounded look-behind: a whole-document prefix costs O(document) per
         # head and turns a long filing into minutes of repeated regex work.

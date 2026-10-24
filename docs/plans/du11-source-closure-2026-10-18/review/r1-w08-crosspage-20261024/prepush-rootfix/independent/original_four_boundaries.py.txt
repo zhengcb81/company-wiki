@@ -1,0 +1,67 @@
+"""Execute the four original failed boundaries against frozen main, without editing tests."""
+from pathlib import Path
+from hashlib import sha256
+from importlib import import_module
+import argparse
+import ast
+import json
+import sys
+import traceback
+
+MAIN = Path('C:/Users/郑曾波/Projects/company-wiki')
+OUT = Path(__file__).resolve().parent
+sys.dont_write_bytecode = True
+sys.path[:0] = [str(MAIN / 'src'), str(MAIN / 'tests')]
+
+def digest(path):
+    return sha256(path.read_bytes()).hexdigest()
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--freeze', required=True, type=Path)
+    parser.add_argument('--freeze-sha', required=True)
+    args = parser.parse_args()
+    assert digest(args.freeze) == args.freeze_sha
+    freeze = json.loads(args.freeze.read_text(encoding='utf-8'))
+    files = {p:r['sha256_raw'] for group in ('owned_files','root_owned_composition_bindings','immutable_test_bindings') for p,r in freeze[group].items()}
+    before = {p:digest(MAIN/p) for p in files}
+    assert before == files
+    old = json.loads((OUT/'path-adaptation-and-old-oracles.json').read_text(encoding='utf-8'))['old_four_function_bindings']
+    for name, row in old.items():
+        tree = ast.parse((MAIN/row['path']).read_text(encoding='utf-8'))
+        node = next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name == name)
+        assert sha256(ast.dump(node,include_attributes=False).encode()).hexdigest() == row['function_ast_sha256'], name
+    declarations = import_module('unit.du11_source_closure.test_reference_closure')
+    page = import_module('unit.du11_source_closure.test_cross_page_reference_plan')
+    local = import_module('unit.du11_reference_readiness.test_native_page_local_positions')
+    reading = import_module('company_wiki.source_catalog.narrative_reading')
+    physical = import_module('company_wiki.document_understanding.narrative_continuity')
+    grammar = import_module('company_wiki.document_understanding.operating_states.product_reference')
+    imports = {m.__name__:str(Path(m.__file__).resolve()) for m in (declarations,page,local,reading,physical,grammar)}
+    assert all(Path(m.__file__).resolve().is_relative_to(MAIN/'tests') for m in (declarations,page,local))
+    assert all(Path(m.__file__).resolve().is_relative_to(MAIN/'src') for m in (reading,physical,grammar))
+    calls = [
+        ('long_latin_name', declarations.test_long_latin_name_is_never_truncated_by_the_lookbehind, ()),
+        ('long_latin_name_after_prose', declarations.test_long_latin_name_after_prose_is_extended_not_truncated, ()),
+        ('proven_original_furniture', page.test_only_actual_running_furniture_can_be_skipped_at_the_page_boundary, (True,)),
+        ('native_page_local_paragraph_order', local.test_proven_next_page_prefix_uses_local_paragraph_order_not_previous_page_numbers, ()),
+    ]
+    rows = []
+    for name, fn, params in calls:
+        try:
+            fn(*params)
+            rows.append({'case':name,'status':'PASS'})
+        except Exception as error:
+            rows.append({'case':name,'status':'FAIL','error':repr(error),'traceback':traceback.format_exc()})
+        print(name+': '+rows[-1]['status'],flush=True)
+    after = {p:digest(MAIN/p) for p in files}
+    assert before == after
+    result = {'freeze_sha256':args.freeze_sha,'cases':rows,'passed':sum(r['status']=='PASS' for r in rows),
+              'failed':sum(r['status']=='FAIL' for r in rows),'original_function_ast_unchanged':True,
+              'actual_import_paths':imports,'source_sha256':before,'source_after_sha256':after,'source_unchanged':True,
+              'source_test_git_writes':0,'network_calls':0,'model_calls':0,'temporary_paths_created':[]}
+    (OUT/'original-four-execution.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+    return 1 if result['failed'] else 0
+
+if __name__ == '__main__':
+    raise SystemExit(main())

@@ -1,0 +1,22 @@
+{
+  "original_script_sha256": "8484f3b815a9b4a0c678f486117e5c22b41ff10ef418211160ea2980ebcab239",
+  "adapted_script": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-independent-20261024\\prepush-supplement\\main_root_minimal_cases_freeze.py.txt",
+  "adapted_script_sha256": "44db4fcf271af51292867a4f65b4575f914ba58aeeb139c2098450dc54204d1b",
+  "harness_only_differences": [
+    {
+      "from": "WORKTREE = Path('C:/Users/郑曾波/Projects/company-wiki-r1-local-observation')",
+      "to": "WORKTREE = Path('C:/Users/郑曾波/Projects/company-wiki')"
+    },
+    {
+      "from": "files['tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py'] = '709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff'",
+      "to": "files.setdefault('tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py', '709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff')"
+    }
+  ],
+  "all_nonmain_function_ast_unchanged": true,
+  "main_ast_unchanged_after_excluding_one_freeze_setup_statement": true,
+  "all_assertion_ast_unchanged": true,
+  "case_count": 13,
+  "product_calls_and_case_oracles_unchanged": true,
+  "original_four_baseline_receipt": "path-adaptation-and-old-oracles.json",
+  "reason": "Main actual freeze is authoritative for CRLF raw SHA; preserve existing freeze value instead of overriding with old LF-only constant."
+}
