@@ -16,5 +16,5 @@
 - wide（`narrative_business_meaning.py`→333受影响文件+smoke=357 targets）628.6s 到达既有 600s 子进程上限 → exit 124 超时红；该路径与改造前完全相同（同 -n 2、同 600s、同 --timeout=180），按 G09 不拉长超时，如实记录。
 - 完整本地模式一次：ruff/compileall/host guard 绿；config_doctor 红（worktree 无 `.source_catalog`，基线同现，环境限制）；units 8126 passed/24 skip/19 xdist tmp-file 抖动（串行 58/58 绿）；focused contracts 221 passed/3 失败（基线已红的 b10 ratchet，src 与基线字节一致）。详见 findings 与 scope-report.json。
 - 真实 `git push -u origin codex/w13-cwp-gates-20261024`：42.2s，真实 hook，unknown range → defer → GREEN(local_fast_pass + full_validation_pending)，分支已上 origin。
-- 待办：独审 G01–G09 + 修复 + 交接。
+- handoff 草稿就绪（`delivery/w13/handoff.md/json`，状态 INCOMPLETE_EXTERNAL_BLOCKER）：独审派发撞平台5小时用量上限（19:04 触顶，23:28:49 重置）；已登记一次性定时任务在重置后自动派独审→修复→补审→翻状态→push。工程与证据不依赖该步骤，均已提交。
 
