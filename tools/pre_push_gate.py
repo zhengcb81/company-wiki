@@ -207,10 +207,13 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
         return list(FAST_CONTRACT_CASES), "unbounded test directory recommendation deferred to CI"
     if len(selected) > DAILY_PUSH_MAX_AFFECTED_TARGETS:
         return list(FAST_CONTRACT_CASES), f"wide affected set ({len(selected)} targets) deferred to CI"
+    whole_files = {path for path in selected if "::" not in path}
     targets = list(selected)
+    # A whole-file target covers every fast node in that file. A node-id
+    # target covers only itself, so keep sibling fast nodes and remove only
+    # exact duplicate node IDs.
     targets.extend(case for case in FAST_CONTRACT_CASES
-                   if not any(case.split("::")[0] == path or case.startswith(path + "/")
-                              for path in selected))
+                   if case.split("::")[0] not in whole_files and case not in targets)
     return targets, f"tests/unit outside the {len(targets)} ran targets deferred to CI"
 
 
@@ -284,9 +287,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Push scope: {reason}; planned {len(targets)} target(s); "
               f"full_validation_pending: {deferred}.")
         print("Planned test targets:", *targets, sep="\n  ")
+        label = (
+            "daily push fast feedback: affected unit tests and CI contract smoke"
+            if any(target not in FAST_CONTRACT_CASES for target in targets)
+            else "daily push fast feedback: CI contract smoke (no affected unit files)"
+        )
         code = _dispatch_gate(
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *targets],
-            "daily push fast feedback: affected units and CI contract smoke")
+            label)
         if code:
             print("\nPUSH CHECKS RED — fix the failing phase; do not bypass.")
         else:

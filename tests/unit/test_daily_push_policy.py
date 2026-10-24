@@ -128,6 +128,43 @@ def test_fast_contract_members_stay_shared_and_deduplicated(monkeypatch):
     assert len(targets) == len(set(targets))
 
 
+def test_wide_explainable_scope_is_deferred_without_truncating_to_a_false_complete_set():
+    selected = [f"tests/unit/test_changed_{index}.py" for index in range(
+        gate.DAILY_PUSH_MAX_AFFECTED_TARGETS + 1
+    )]
+
+    targets, reason = gate._push_targets(selected)
+
+    assert targets == list(gate.FAST_CONTRACT_CASES)
+    assert "wide affected set" in reason
+    assert not any(target in selected for target in targets)
+
+
+def test_node_id_selection_deduplicates_exact_smoke_member_and_keeps_siblings():
+    files = {case.split("::", 1)[0] for case in gate.FAST_CONTRACT_CASES}
+    selected_file = next(path for path in files if sum(
+        case.split("::", 1)[0] == path for case in gate.FAST_CONTRACT_CASES
+    ) > 1)
+    selected = next(case for case in gate.FAST_CONTRACT_CASES
+                    if case.startswith(selected_file + "::"))
+    targets, _reason = gate._push_targets([selected])
+
+    assert targets.count(selected) == 1
+    siblings = [case for case in gate.FAST_CONTRACT_CASES
+                if case.startswith(selected_file + "::") and case != selected]
+    assert siblings
+    assert all(case in targets for case in siblings)
+
+
+def test_smoke_only_push_label_does_not_claim_affected_tests_ran(monkeypatch, capsys):
+    _push_gate(monkeypatch, [], "no behavior changes")
+    observed = _capture_gates(monkeypatch)
+
+    assert gate.main(["--push-checks"]) == 0
+
+    assert "CI contract smoke (no affected unit files)" in observed[0][1]
+
+
 def test_a_real_failure_in_the_ran_scope_blocks_the_push(monkeypatch, capsys):
     _push_gate(monkeypatch, ["tests/unit/test_reader.py"], "affected unit tests")
     observed = []
