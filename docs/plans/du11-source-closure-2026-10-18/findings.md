@@ -590,3 +590,16 @@ ROOT只读实测6个中性source-text观测：英文two businesses结构eligible
 ## 2026-10-24 source-value对象绑定与效率根因
 
 独立关系反控13F已修；同head协调/数量关系补齐，泛comprises不再当稀缺事实，保留真实渠道机制和有source关系但state unknown的业务验证材料（不声称已完成）。一次自然包2330P/11skip/1F揭露误降待验证产品，未删旧断言。随后独立确认_CONVERSION_LINK重复金额正则有指数回溯：12位0.007s、20位2.145s、28位4s不返回；ROOT只终止了已核PID25872/parent17636的自有pytest，原runner写失败并清理tmp。改为贪婪逐token扫描，无重复正则切分；不抬timeout/work限额。新长数字公开detector反控覆盖12/28/64/128位。已有真实14同源selection已产生改善，最终独立内容报告待收；新语义与其等价仍需最后字节复验，不能用工程404P冒称效率通过。
+
+## 2026-10-24 新增跨市场/文档策略提升要求
+
+沿现共享引擎、reading_catalog.json的24families/14facets和DU-BENCH继续，不新建24套技能/第二路由器。旧20份survey manifest的17份真实原件仍存在、3条旧Temp指向已失效；DU5另有9份/7公司金标，实际原件可读/已选/摘要已审仍须分轴核对。A股年/半年/IPO/IR、港股年/中期/IPO、美股10-K/10-Q/20-F/TXT已确认路径可用（目前仅文件存在性，尚未SHA/重读确认），接下来原文抽样再冻结类型与市场矩阵，补美股IPO和港股电话会/IR等真实缺口。不能把已有synthetic或已用于调规则的样本称新holdout。
+
+## 正常push三失败的根因（2026-10-24）
+
+1. 新合同period重复了不完整的相对时间语法，丢next twelve months；恢复原合法数字词月份表达在唯一合同用途owner，不恢复整句关键词fallback。2. 将operating_description_unknown（有具体业务动作但source状态未能证实）误当纯套话，导致真实launched产品降权；材料价值与完成状态分离，保留有业务动作的未知状态材料，不升级为actual里程碑。3. historical-v3恢复测试在全量+W13独立full并行时31.92s超_request夹具30s，结果planned/无错误；完全未改源码的隔离同测18.11s完成（20.46s总耗时），证实负载期限而非恢复损坏。该功能测试的独立请求wall budget改90s，保留5s HTTP、费用、一次POST、缓存0新POST、DB/原文不变全部断言；不改生产预算/禁时测试，也不扩大pytest180s。正常push重新验证最终代码。
+
+
+## 2026-10-24 真实样本规律与请求数值规范化根因
+
+最新状态以CURRENT_STATUS.md/json为准。13真实原件抽读与46页、2页视觉检查已留证于review/market-family-upgrade-20261024/，继续扩大不同公司/缺样并冻结源侧检查点，再按现24family单registry实测、TDD修复，不增第二router/逐材料许可。首次push三项失败已根修；最终458来源语义与30真实请求恢复分批独审通过，正常提交推送待完成。最新annual14为96/8146字符、55任务、8P/6partial/0missing，15.84%支持恢复；正式summary/cache/RF仍OPEN。未下载、未付费调用、未改原件。

@@ -1,0 +1,59 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.tmp-mv-pub-final", "requested_basetemp_len": 52, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 460 items
+
+docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\independent\test_material_binding_independent.py . [  0%]
+.................................                                        [  7%]
+tests\unit\document_understanding_selection\test_reading_material_value.py . [  7%]
+...............................                                          [ 14%]
+tests\unit\document_understanding_selection\test_reading_source_purpose_boundaries.py . [ 14%]
+........................................................................ [ 30%]
+..................................                                       [ 37%]
+tests\unit\document_understanding_selection\test_reading_mechanism_coverage.py . [ 37%]
+..............................                                           [ 44%]
+tests\unit\document_understanding_selection\test_reading_native_continuity.py . [ 44%]
+...........................................................              [ 57%]
+tests\unit\document_understanding_selection\test_reading_operating_measure_variants.py . [ 57%]
+........................................................................ [ 73%]
+....                                                                     [ 74%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [ 74%]
+..............................                                           [ 80%]
+tests\unit\document_understanding_selection\test_reading_budget_coverage.py . [ 81%]
+................                                                         [ 84%]
+tests\unit\document_understanding_selection\test_reading_budget_plan.py . [ 84%]
+....................                                                     [ 89%]
+docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\independent\publication-fix\test_publication_semantics_independent.py . [ 89%]
+.......                                                                  [ 90%]
+tests\unit\du11_source_quality\test_business_admission.py .............. [ 93%]
+...................                                                      [ 98%]
+tests\unit\du11_source_quality\test_material_readiness.py .......        [ 99%]
+tests\unit\test_narrative_scoped_runtime_recovery.py FF                  [100%]
+
+================================== FAILURES ===================================
+_ test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery _
+tests\unit\test_narrative_scoped_runtime_recovery.py:64: in test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+    assert first['status']=='completed', (first,diagnostics)
+E   AssertionError: ({'schema_version': 'narrative-batch-result/1', 'run_id': 'legacy-effort-1', 'status': 'failed', 'documents': [{'docum...', error_code='MODEL_RESPONSE_INVALID', error_detail='metered model attempt did not complete', runtime_generation=2)"])
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed
+_ test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade _
+tests\unit\test_narrative_scoped_runtime_recovery.py:109: in test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+    assert first['status']=='completed', first
+E   AssertionError: {'schema_version': 'narrative-batch-result/1', 'run_id': 'legacy-effort-1', 'status': 'failed', 'documents': [{'docume...f8', 'status': 'dead_letter', 'artifact_ref': None, 'errors': ['MODEL_RESPONSE_INVALID', 'DEPENDENCY_TERMINAL']}], ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\independent\publication-fix\final.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+FAILED tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+================== 2 failed, 458 passed in 62.92s (0:01:02) ===================

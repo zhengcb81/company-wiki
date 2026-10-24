@@ -1,0 +1,107 @@
+{
+  "schema_version": "w08-publication-final-source-independent-content-delta/1",
+  "reviewer": "/root/w08_reporting_selection_content",
+  "binding": {
+    "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
+    "trace_sha256": "bb65f12f9e0f1874705918008546bce5ebcf440c0fa1ea54362697d783903d84",
+    "model_view_sha256": "d3162d46df94020a2e2c94449cd37c0e54c41bc650a606740a89e49b7586dbe6",
+    "replay_receipt_sha256": "6baa95d02b236c61ff4246b2940b90b740c191541a384d04973c22029d9f8a47",
+    "original_checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+    "eight_original_pages_sha256": "3a08eb00f8ca3909248effd5b6ca8b1e701401ec7dc9553fc0139335f8d9eb6f",
+    "previous_review_sha256": "4b68ac829e0c53e2416cac5558fb3f3ed48d6fdb5ec0c02421f6a2d74b673926",
+    "previous_selection_sha256": "cfad8c9fa3e6c78dd43f0e84000756ad4c78218d264c0255e64902d45c8946f1",
+    "source_ref": {
+      "byte_size": 1608226,
+      "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "producer_source_digest": "9d09609ddbbf9417ae0fe9b86440ddf9a00fe70f0e8fc4ff0e908f4ecc4e66dc",
+    "producer_changed_source_sha256": {
+      "src\\company_wiki\\document_understanding\\decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+      "src\\company_wiki\\source_catalog\\narrative_business_disclosures.py": "b5693681a2634bd26949ad09414529e68980e5dfe6d537dca33c1d5cc05bd6d1",
+      "src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+      "src\\company_wiki\\source_catalog\\narrative_business_policy.py": "ac2e9dd7b9ce44ee3629964a2a988fae6e10a28d4dcd68aa1479d1a38c1f1d9f",
+      "src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+      "src\\company_wiki\\source_catalog\\narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+      "src\\company_wiki\\source_catalog\\narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+      "src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf"
+    }
+  },
+  "report_sha256": "063d66bc682f368a2ea08c2afb33131d8e2d7cf2b01c5f35517335ff458d4f26",
+  "previous_counts": {
+    "pass": 8,
+    "partial": 6,
+    "missing": 0,
+    "targets": 14
+  },
+  "current_counts": {
+    "pass": 8,
+    "partial": 6,
+    "missing": 0,
+    "targets": 14
+  },
+  "status_changes": [],
+  "all_previous8_passes_retained": true,
+  "subfact_changes": [
+    {
+      "target_id": "ST-A02",
+      "change": "Previously lost15.84% aggregate revenue growth explicitly restored in t35.",
+      "status": "resolved_subfact_regression"
+    },
+    {
+      "target_id": "ST-A01",
+      "change": "Generic CRDMO overview removed; complete four-business operating classification remains in t19.",
+      "status": "no_target_status_regression"
+    }
+  ],
+  "removed": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96",
+      "locator": "loc:v1/page:11/paragraph:6/chars:128-220",
+      "quote": "公司通过独特的“CRDMO”业务模式，不断降低研发门槛，助力客\n户提升研发效率，为患者带来更多突破性的治疗方案，服务范围涵盖化学药研发和生产、生物学\n研究、临床前测试和临床研发等领域。"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+      "locator": "loc:v1/page:29/paragraph:14",
+      "quote": "(二)公司发展战略"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13",
+      "locator": "loc:v1/page:29/paragraph:17/chars:755-886",
+      "quote": "公司为全球医药及生命科学行业提供全方\n位、一体化的新药研发和生产服务，致力于推动新药研发进程，为患者带来突破性的治疗方案。\n本着以客户为中心的宗旨，公司通过高质量、高效率和极具成本效益的研发服务，助力客户提升\n研发效率，让更多的新药、好药早日问世，造福全球病患。"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+      "locator": "loc:v1/page:11/paragraph:4",
+      "quote": "（一）\n主要业务"
+    }
+  ],
+  "added": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0",
+      "locator": "loc:v1/page:17/paragraph:5/chars:274-404",
+      "quote": "成本分析其他情况说明\n营业成本包括直接人工、原材料成本及间接费用。报告期内，营业成本同比增长3.64%，增\n速低于收入增速15.84%，主要受益于公司独特的CRDMO 一体化业务模式带来的临床后期和商业\n化项目占比增加，进一步提升了产能利用率、人员及运营效率。"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+      "locator": "loc:v1/page:16/paragraph:31",
+      "quote": "(4). 成本分析表"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217",
+      "locator": "loc:v1/page:15/paragraph:10/chars:971-1099",
+      "quote": "报告期内，公司实现毛利人民币2,165,473.12 万元，同比上升33.04%；毛利率47.64%，同比\n上升6.16 个百分点，主要受益于公司独特的CRDMO 一体化业务模式带来的临床后期和商业化项\n目占比增加，进一步提升了产能利用率、人员及运营效率。"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+      "locator": "loc:v1/page:15/paragraph:6",
+      "quote": "2、收入和成本分析"
+    }
+  ],
+  "model_binding_sha256": "5c2a2b37185cc6fbbae1714ae54f9f7329f83455c3422e1ebc6356a025dce9a8",
+  "model_payload_sha256": "123dd4e786863d6fa78bafc9b8f92ec1ee66a2761bf4593db9f8ca055b8a7848",
+  "interpretation": "Four out/four in; re-read actual altered task sets and independently recompiled. Target counts retained but full content equality is false. Prior revenue-growth subfact regression resolved."
+}

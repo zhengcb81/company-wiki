@@ -63,7 +63,7 @@ _PERIOD = re.compile(
     r"\d{4}(?:年(?:度)?|(?:会计|财务)年度)|(?:会计|财务)年度\s*\d{4}|"
     r"(?:下一|未来)(?:会计|财务)?年(?:度)?|未来|之后期间|以后期间|\bFY\s*\d{4}\b|"
     r"\b(?:fiscal|calendar)\s+year\s+\d{4}\b|\b(?:future periods?|thereafter|"
-    r"over the next|within the next|next\s+(?:year|quarter|\d+\s+months?))\b", re.I)
+    r"over the next|within the next|next\s+(?:year|quarter|(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|eighteen|twenty(?:[- ]four)?|thirty(?:[- ]six)?)\s+(?:months?|quarters?|years?)))\b", re.I)
 # Finite links connect a contract head/part to a conversion predicate. Only
 # grammatical carriers, quantities and time frames may intervene; another
 # actor/object cannot borrow this contract's relation, even after "of which".
@@ -149,7 +149,7 @@ def _customer_geography(clause: str) -> bool:
 # state and generic benefit/vision remain retrievable descriptions. Independently
 # observed quantities, scope, mechanisms, plans or constraints retain their value.
 _DESCRIPTION_REASONS = frozenset({"operating_mechanism", "business_strategy",
-                                "operating_description_unknown", "business_structure"})
+                                "business_structure"})
 
 
 def disclosure_relations(clause: str) -> tuple[str, ...]:

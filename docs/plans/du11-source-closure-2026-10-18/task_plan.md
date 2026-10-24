@@ -509,3 +509,8 @@ FF当前manifest的future/invalid/None不再继承旧query资格，使用已有d
 RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，不重复接收/发布这两卡。下一工程节点：按最终接口先TDD写有界先行词（非event描述同样检查）与original/analysis namespace、原始联合限额及不重复扫描反例，再在现唯一owner接线。保留原文fallback只读视图，先readiness/context后单一graph与fact；未知/多义/超过原4blocks/8units/2048chars仅该卡defer，不编公司特例/raise上限/克隆16M余额。真实三源仅在完整节点完成后回放一次并独立内容检查，随后正式三供应商摘要及收费/activation/同跨run缓存/FF-RF C；holdout/RF循环仍OPEN。
 
 </details>
+
+
+## 2026-10-24 跨市场/文种升级与发布根修
+
+最新状态以CURRENT_STATUS.md/json为准。13真实原件抽读与46页、2页视觉检查已留证于review/market-family-upgrade-20261024/，继续扩大不同公司/缺样并冻结源侧检查点，再按现24family单registry实测、TDD修复，不增第二router/逐材料许可。首次push三项失败已根修；最终458来源语义与30真实请求恢复分批独审通过，正常提交推送待完成。最新annual14为96/8146字符、55任务、8P/6partial/0missing，15.84%支持恢复；正式summary/cache/RF仍OPEN。未下载、未付费调用、未改原件。

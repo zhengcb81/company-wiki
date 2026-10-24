@@ -1,0 +1,18 @@
+[
+  {
+    "provided_type": "int",
+    "request_seconds_type": "int",
+    "replay_seconds_type": "float",
+    "request_hash": "d5b953c924b56021d736596f398dd09ee4b38d2ff93626c8fe86ca4d08777a0c",
+    "replay_hash": "0ebaf8eb46b31e39487af9063a0f6a3fc72fe5d956528796571dd847666a5629",
+    "equal_intent_hash": false
+  },
+  {
+    "provided_type": "float",
+    "request_seconds_type": "float",
+    "replay_seconds_type": "float",
+    "request_hash": "0ebaf8eb46b31e39487af9063a0f6a3fc72fe5d956528796571dd847666a5629",
+    "replay_hash": "0ebaf8eb46b31e39487af9063a0f6a3fc72fe5d956528796571dd847666a5629",
+    "equal_intent_hash": true
+  }
+]

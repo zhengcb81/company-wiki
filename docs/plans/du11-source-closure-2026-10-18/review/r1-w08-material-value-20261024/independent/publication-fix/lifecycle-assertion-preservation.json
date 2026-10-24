@@ -1,0 +1,7 @@
+{
+  "assertions_unchanged": true,
+  "count": 25,
+  "assertion_ast_sha256": "d57066676150e73d7254d99dce8e9b6ba022640dbc8a43fa497ad719a66edafe",
+  "current_test_sha256": "13e0a2bc0fa97950ccb68cdfa540e3fa2b53644251117bb25e199ee811475bff",
+  "fixture_diff": "Only two replace(request,...) calls add max_seconds=90; source helper HTTP timeout5 and existing CLI timeout45 retained. No pytest/production budget change."
+}

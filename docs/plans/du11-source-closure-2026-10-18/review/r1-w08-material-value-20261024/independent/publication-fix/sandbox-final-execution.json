@@ -1,0 +1,74 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-mv-pub-final",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\independent\\publication-fix\\final.xml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\independent\\test_material_binding_independent.py",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py",
+    "tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py",
+    "tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_selection/test_reading_budget_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_budget_plan.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\independent\\publication-fix\\test_publication_semantics_independent.py",
+    "tests/unit/du11_source_quality",
+    "tests/unit/test_narrative_scoped_runtime_recovery.py"
+  ],
+  "elapsed_seconds": 70.64,
+  "returncode": 1,
+  "actual_imports": {
+    "company_wiki.source_catalog.narrative_business_disclosures": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_disclosures.py",
+    "company_wiki.source_catalog.narrative_business_policy": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.source_catalog.narrative_operating_relations": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py"
+  },
+  "source_sha_before": {
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "b5693681a2634bd26949ad09414529e68980e5dfe6d537dca33c1d5cc05bd6d1",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "ac2e9dd7b9ce44ee3629964a2a988fae6e10a28d4dcd68aa1479d1a38c1f1d9f",
+    "src/company_wiki/source_catalog/narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": "672e7610b16bdabc680fd09dd1f41a95b049328316a18e204f5c18d7f6aea6c1",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "a258e95863c5e91af4e377c95079b1ae9ab669832a171afe3e092fb2ad8438e2",
+    "tests/unit/test_narrative_scoped_runtime_recovery.py": "13e0a2bc0fa97950ccb68cdfa540e3fa2b53644251117bb25e199ee811475bff",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/test_material_binding_independent.py": "ca90893dba5a69876f4a71c5acab1bf91e823fd9ca2880543b42ccf4d7e58a63",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/publication-fix/test_publication_semantics_independent.py": "8703dfc3137c5a061b2816737db33b9727f836d3d1a2e9c218cb10d4e3270902"
+  },
+  "source_sha_after": {
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "b5693681a2634bd26949ad09414529e68980e5dfe6d537dca33c1d5cc05bd6d1",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "ac2e9dd7b9ce44ee3629964a2a988fae6e10a28d4dcd68aa1479d1a38c1f1d9f",
+    "src/company_wiki/source_catalog/narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": "672e7610b16bdabc680fd09dd1f41a95b049328316a18e204f5c18d7f6aea6c1",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "a258e95863c5e91af4e377c95079b1ae9ab669832a171afe3e092fb2ad8438e2",
+    "tests/unit/test_narrative_scoped_runtime_recovery.py": "13e0a2bc0fa97950ccb68cdfa540e3fa2b53644251117bb25e199ee811475bff",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/test_material_binding_independent.py": "ca90893dba5a69876f4a71c5acab1bf91e823fd9ca2880543b42ccf4d7e58a63",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/publication-fix/test_publication_semantics_independent.py": "8703dfc3137c5a061b2816737db33b9727f836d3d1a2e9c218cb10d4e3270902"
+  },
+  "source_tree_before": {
+    "count": 374,
+    "digest": "3a58506d7f0568c7050ed7006df160e888ba417e10a6b07e50537fcf65245765"
+  },
+  "source_tree_after": {
+    "count": 374,
+    "digest": "3a58506d7f0568c7050ed7006df160e888ba417e10a6b07e50537fcf65245765"
+  },
+  "cleanup": {
+    "scratch_absent_before": true,
+    "scratch_absent_after": true
+  },
+  "scope_limit": "Source material engineering review only. Not real annual14 coverage, formal summary or company RF audit PASS. No raw/network/model/keys access."
+}

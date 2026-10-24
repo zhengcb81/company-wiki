@@ -48,7 +48,9 @@ def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_rec
         state=prepare_source_catalog(root,one_source=True,include_policy=False)
         try:
             request,_wire=_request(state,loopback_model_server.endpoint,'1')
-            request=replace(request,selector_version='0.9.0')
+            # Lifecycle correctness is not a 30-second host-speed benchmark.
+            # Keep HTTP timeout/fee/recovery assertions; allow concurrent CI startup.
+            request=replace(request,selector_version='0.9.0',max_seconds=90)
             original=batch.generation_manifest
             def explicit_v4(*args,**kwargs):
                 return original(*args,**{**kwargs,'reading_model_projection':'reading-model-input/4'})
@@ -92,7 +94,9 @@ def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_u
         state = prepare_source_catalog(root, one_source=True, include_policy=False)
         try:
             request, wire = _request(state, loopback_model_server.endpoint, '1')
-            request = replace(request, selector_version='0.9.0')
+            # Source/worker startup shares CPU with other CI workers. This test
+            # verifies historical recovery, not a production throughput deadline.
+            request = replace(request, selector_version='0.9.0', max_seconds=90)
             wire = request.to_dict()
             original = batch.generation_manifest
             def explicit_v3(*args, **kwargs):

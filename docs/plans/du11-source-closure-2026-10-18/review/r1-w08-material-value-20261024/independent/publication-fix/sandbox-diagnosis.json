@@ -1,0 +1,12 @@
+{
+  "status": "ENVIRONMENT_LIMITATION",
+  "semantic_tests_passed": 458,
+  "loopback_tests_failed": 2,
+  "isolated_reproduction": "isolated-lifecycle.txt",
+  "observed_server_requests": 0,
+  "observed_server_errors": 0,
+  "observed_time_seconds": 10.52,
+  "wall_budget_seconds": 90,
+  "explanation": "Requests do not reach isolated loopback server. ROOT has prior minimal TCP Windows sandbox child-loopback10013 proof. Repeat same frozen bytes using authorized require_escalated environment, without changingHTTP5s or any assertion.",
+  "own_isolated_scratch_absent_after": true
+}

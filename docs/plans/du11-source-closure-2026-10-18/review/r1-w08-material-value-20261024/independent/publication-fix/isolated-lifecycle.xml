@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="10.518" timestamp="2026-10-24T11:31:06.016683+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.test_narrative_scoped_runtime_recovery" name="test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery" time="7.885"><failure message="AssertionError: ({'schema_version': 'narrative-batch-result/1', 'run_id': 'legacy-effort-1', 'status': 'failed', 'documents': [{'docum...', error_code='MODEL_RESPONSE_INVALID', error_detail='metered model attempt did not complete', runtime_generation=2)&quot;])&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">tmp_path_factory = TempPathFactory(_given_basetemp=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp-mv-pub-isolated'), _trace=&lt;pluggy...mp=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp-mv-pub-isolated'), _retention_count=3, _retention_policy='all')
+loopback_model_server = namespace(requests=[], errors=[], response_status=200, error_body=b'', response_body=None, response_usage=None, endpoint='http://127.0.0.1:60886/v1/chat/completions')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000022CCB352060&gt;
+
+    def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery(
+        tmp_path_factory, loopback_model_server, monkeypatch,
+    ):
+        """One real v4 HTTP POST through unchanged caller and one published result.
+    
+        Fixture prose is copied from the selected source; this tests transport and
+        lifecycle, not paraphrase quality or coverage of a complete real filing.
+        """
+        def scoped_reply(data):
+            assert data['schema_version']=='narrative-model-request/5'
+            material=data['material']
+            task=material['tasks'][0]
+            support=task.get('support_parts',material['task_defaults']['support_parts'])
+            key=task['parts'][0]['key'] if support=='all_parts' else support[0]
+            part=next(part for part in task['parts'] if part['key']==key)
+            if 'shared_ref' in part:
+                part=next(row for row in material['shared_fragments']
+                          if row['source_key']==part['shared_ref'])
+            return {'drafts_by_task':{task['key']:[{
+                'text':part['text'][:200],'basis_parts':[key],'modality':'uncertain'}]}}
+        monkeypatch.setattr(batch_fixtures,'response_draft',scoped_reply)
+        with isolated_batch_directory(tmp_path_factory) as root:
+            state=prepare_source_catalog(root,one_source=True,include_policy=False)
+            try:
+                request,_wire=_request(state,loopback_model_server.endpoint,'1')
+                # Lifecycle correctness is not a 30-second host-speed benchmark.
+                # Keep HTTP timeout/fee/recovery assertions; allow concurrent CI startup.
+                request=replace(request,selector_version='0.9.0',max_seconds=90)
+                original=batch.generation_manifest
+                def explicit_v4(*args,**kwargs):
+                    return original(*args,**{**kwargs,'reading_model_projection':'reading-model-input/4'})
+                with monkeypatch.context() as patch:
+                    patch.setattr(batch,'generation_manifest',explicit_v4)
+                    first=batch.run_batch(request,project_root=root,
+                        catalog_config_path=state.config_path,db_path=root/'automation.db',work_dir=root/'work')
+                observed=AutomationStore(root/'automation.db')
+                diagnostics=[str(attempt)[:6000] for job in observed.list_jobs()
+                             for attempt in observed.list_attempts(job.job_id)]
+&gt;               assert first['status']=='completed', (first,diagnostics)
+E               AssertionError: ({'schema_version': 'narrative-batch-result/1', 'run_id': 'legacy-effort-1', 'status': 'failed', 'documents': [{'docum...', error_code='MODEL_RESPONSE_INVALID', error_detail='metered model attempt did not complete', runtime_generation=2)"])
+E               assert 'failed' == 'completed'
+E                 
+E                 - completed
+E                 + failed
+
+_wire      = {'schema_version': 'narrative-batch-request/1', 'run_id': 'legacy-effort-1', 'profile': 'P2', 'max_seconds': 30, ...}
+diagnostics = ["Attempt(attempt_id='52349a435d234e26b7f24e68a3f40fe9', job_id='129d73c8bbb52771', attempt_no=1, worker_id='compute-1...}', error_code='MODEL_RESPONSE_INVALID', error_detail='metered model attempt did not complete', runtime_generation=2)"]
+explicit_v4 = &lt;function test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery.&lt;locals&gt;.explicit_v4 at 0x0000022CCB3C1580&gt;
+first      = {'schema_version': 'narrative-batch-result/1', 'run_id': 'legacy-effort-1', 'status': 'failed', 'documents': [{'docume...f8', 'status': 'dead_letter', 'artifact_ref': None, 'errors': ['DEPENDENCY_TERMINAL', 'MODEL_RESPONSE_INVALID']}], ...}
+loopback_model_server = namespace(requests=[], errors=[], response_status=200, error_body=b'', response_body=None, response_usage=None, endpoint='http://127.0.0.1:60886/v1/chat/completions')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000022CCB352060&gt;
+observed   = &lt;company_wiki.automation.store.AutomationStore object at 0x0000022CCB4782D0&gt;
+original   = &lt;function generation_manifest at 0x0000022CCB2A9620&gt;
+patch      = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000022CCB353230&gt;
+request    = NarrativeBatchRequest(run_id='legacy-effort-1', sources=(SourceRefValue(schema_version='2.0', document_id='urn:company...h=False, items=(), schema_version='narrative-batch-request/1', selector_version='0.9.0', reading_model_projection=None)
+root       = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp-mv-pub-isolated/nb0/run')
+scoped_reply = &lt;function test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery.&lt;locals&gt;.scoped_reply at 0x0000022CCB3C14E0&gt;
+state      = namespace(root=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp-mv-pub-isolated/nb0/run'), config_path=WindowsPath...曾波/Projects/company-wiki/.tmp-mv-pub-isolated/nb0/run/companies/Acme/raw/investor_relations/transcripts/call-en.txt')})
+tmp_path_factory = TempPathFactory(_given_basetemp=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp-mv-pub-isolated'), _trace=&lt;pluggy...mp=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp-mv-pub-isolated'), _retention_count=3, _retention_policy='all')
+
+tests\unit\test_narrative_scoped_runtime_recovery.py:64: AssertionError</failure></testcase></testsuite></testsuites>

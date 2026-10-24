@@ -317,7 +317,9 @@ class NarrativeBatchRequest:
                 else {"sources": [ref.to_dict() for ref in self.sources]}
             ),
             "profile": self.profile,
-            "max_seconds": self.max_seconds,
+            # Programmatic callers may pass int for this float-valued duration.
+            # Match from_dict normalization so JSON/CLI replay preserves intent.
+            "max_seconds": float(self.max_seconds),
             "max_tokens": self.max_tokens,
             "max_cost_usd": format(Decimal(self.max_micro_usd) / 1_000_000, "f"),
             "model": self.model_options,

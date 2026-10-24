@@ -1,0 +1,21 @@
+{
+  "method": "Actual PyMuPDF page render inspected with view_image, research-only",
+  "pages": [
+    {
+      "render_file": "hk-annual-12.png",
+      "sha256": "c0b7c3c4cf81d3291c1f9c8803ecfd83f15e25a039138820d1a6c1b714308b0c",
+      "bytes": 101803
+    },
+    {
+      "render_file": "hk-ipo-401.png",
+      "sha256": "6770a6f6a555ab3e3a785ba5732455624c7e876da4162c0a66be61fa8c7dbcf3",
+      "bytes": 110795
+    }
+  ],
+  "observations": [
+    "HK annual physical12: bilingual English/Chinese columns around one shared2023/2024 store-mode table; language repetition is not two independent facts, column-year/mode must remain attached.",
+    "HK IPO physical401/printed393: conditional planned yearly new stores are tied to Notes1/2 below table; TOP TOY uncertainty and COVID assumption cannot be dropped or treated actual expansion."
+  ],
+  "pngs_are_temporary": true,
+  "source_originals_changed": false
+}

@@ -1,8 +1,10 @@
 # 当前项目状态与接手入口
 
-**主线ACTIVE；2026-10-24最新节点：W08来源材料价值与对象绑定，正在最终复审。** 已将source admission与稀缺材料value分开，细分业务scope、客户地域和合同stock/确认转换用途，复用现有planner、不抬额度。独审发现整句借金额/地区/动作及正则指数回溯，已按对象断言及线性token消费共因修复；最终裸obligations已收敛为客户/履约合同对象，128项最终聚焦通过，最终独审410P/31.85秒，374源树SHA稳定，等待正常发布。当前修改尚未commit/push，不能沿用上一发布CI当本轮绿。
+**主线ACTIVE；2026-10-24最新节点：来源选材及请求恢复根修已独审通过，正常发布待完成；跨市场/文种真实样本升级正在调查。** 本地提交c6182bc4的首次正常push被3项真实失败阻止，未发布到远端。已修复数字词期间与具体动作的材料价值回退；生命周期测试在并发负载下的有限预算由30秒改90秒，保留25条原断言、HTTP5秒与CLI45秒；发现合法90/90.0经JSON往返产生不同请求身份，从唯一request owner统一数值序列化，保留真实限额变更检测。最终独立来源语义458P与请求/真实恢复30P分批通过，Ruff/mypy374通过。[最终工程补审](review/r1-w08-material-value-20261024/independent/publication-fix/final-report.md)。
 
-同一249页真实年报1526候选、96片段/8109字符、9540035/16M，55任务；[本轮独立内容复核](review/r1-w08-material-value-20261024/content-review/report.md)为**8通过/6部分/0缺失**（原7/5/2），A04订单/RPO确认计划通过，A03地区收入部分；原7条pass保留，A02一项旧子事实支持回退如实记录。最终线性版重新实读原SourceRef，全部证据/局部groups/编译tasks与内容独审输入一致。正式摘要/cache、真实采用矩阵、W12和公司循环仍OPEN。上一已发布源码1e5e6c1a、CI40081962182成功属于历史有效节点。W13–W15独占范围ROOT不改。
+同一249页年报实际最新96片段/8146字符、9540035/16M、55任务，[最新独立内容复核](review/r1-w08-material-value-20261024/publication/final-source/content-review/report.md)仍为8通过/6部分/0缺失，A02旧15.84%增长支持已恢复，六项partial明确保留。正式摘要/cache、实际采用矩阵与四审仍OPEN，不用工程绿代签。远端上一已确认节点仍89540df4，CI40081962182是历史有效结果。
+
+用户新增跨市场/文种提升归入同一PWF：[实施范围](review/market-family-upgrade-20261024/task_scope.md)、[真实样本矩阵](review/market-family-upgrade-20261024/sample_matrix.md)、[观察与下一轮检查点](review/market-family-upgrade-20261024/findings.md)。已SHA复验/抽读13份真实原件、46个PDF页及HTML/TXT片段，并目视2页；不是13全文通读、召回率或策略升级验收。复用现24family/14facet与DU-BENCH，扩大不同公司样本后先冻结源侧目标再改production；US IPO、港股电话会/IR、真正US半年报告缺样如实标注。W13–W15独占范围ROOT不改。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
@@ -20,7 +22,7 @@
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：** 最终独审410P已通过，正常提交推送本轮source材料价值/对象绑定/线性扫描；继续六项partial的业务父子、容量日期、地域口径局部依赖，再正式摘要/cache、W09/W10实际采用矩阵、W12四审及新公司。 当前证据见[本节点](review/r1-w08-material-value-20261024/)；后续旧7/5/2与“先写RED”段落为上一节点历史，不覆盖上述最新状态。
+**当前唯一第一步：** 正常提交推送最终补审通过的来源/request根修，随后按跨市场文种样本计划冻结检查点、测现链、修共用依赖及策略；再正式摘要/cache与RF公司四审。上述最新状态优先于下文历史记录。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

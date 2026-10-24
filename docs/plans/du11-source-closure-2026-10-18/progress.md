@@ -770,3 +770,12 @@ source-value首批25个中性测试实际18F/7P（2.90s）后实现25P（2.18s�
 真实内容独审已完成：原7P/5partial/2missing改善为8P/6partial/0missing，A04订单/RPO/确认计划missing→pass，A03地区收入missing→partial，旧7pass保留。A02原增长子事实的选中支持回退已记录，不用缺表头数字冒充命名数据。最终线性版重新实读SourceRef，全部96 EvidenceSpan、task-local groups与55tasks逐项等于独审输入，8/6/0可沿用；工作9540035/16M，8109chars，0收费/下载/原件副本。Ruff通过、mypy src374文件0错；独审线性版406P，仍发现裸remaining obligations不属于客户合同的对象类型问题，需收敛词义后最终复验。自然包同一句柄仍运行，未重启或冒称通过。
 
 最终独立工程410P/31.85s（34独立/32作者含效率与类型控制），374份源码树执行前后SHA一致，全部内部发现修完PASS。最后bare-obligations收敛后128聚焦/27.85s、Ruff和mypy374通过；真实原SourceRef又复核，全部96 EvidenceSpan、局部groups及55tasks仍等于8/6/0内容独审材料，未以旧源摘要代签。独占test scratch已恢复；ROOT只删除本轮重复的中间selection，留SHA/字节与全证据等价收据，不触碰原件。准备明确路径正常commit/push，无hook绕过。
+
+正常commit完成c6182bc4；push被本地完整门拦住，8190P/24skip/3F，515.07秒；独立contracts146P/87.57秒。不是远端CI失败，未推送、未绕hook。失败为英文next twelve months RPO时间表达、新发布业务的source-description降权、一个真实paid-v3离线恢复首批partial。先诊断共因修复并重新验收，不能沿410绿冒称完整发布。用户新要求跨类型/市场真实样本提升已开始盘点：现单catalog24families，旧20样本17原件仍存在；将复用DU-BENCH/策略目录，补实际读取/选材/摘要不同轴，不重造路由器。
+
+跨文种/市场初始实读完成：13份旧原件全部SHA匹配并前后不变，46个PDF指定页及HTML/TXT定向窗口（非全文召回），港股双语门店表与IPO条件/脚注两页已真实渲染目视，PNG恢复为空。类型矩阵/具体经验/缺样/后续实施写review/market-family-upgrade-20261024；现策略已实际进入reading_strategy，不能误称未接线。另9个DU5绑定均存在但尚未本轮核SHA/读，明确不算已验证，US-IPO/HK-call/US半年实样仍缺。
+
+
+## 2026-10-24 最新真实样本调查及发布补审
+
+最新状态以CURRENT_STATUS.md/json为准。13真实原件抽读与46页、2页视觉检查已留证于review/market-family-upgrade-20261024/，继续扩大不同公司/缺样并冻结源侧检查点，再按现24family单registry实测、TDD修复，不增第二router/逐材料许可。首次push三项失败已根修；最终458来源语义与30真实请求恢复分批独审通过，正常提交推送待完成。最新annual14为96/8146字符、55任务、8P/6partial/0missing，15.84%支持恢复；正式summary/cache/RF仍OPEN。未下载、未付费调用、未改原件。

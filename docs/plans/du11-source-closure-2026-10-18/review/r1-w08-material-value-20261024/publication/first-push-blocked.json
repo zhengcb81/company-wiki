@@ -1,0 +1,17 @@
+{
+  "source_commit": "c6182bc4cea27e2270820ac9f3afe0a701ba72b6",
+  "first_push": "BLOCKED_BY_TESTS_NOT_REMOTE_CI",
+  "unit_passed": 8190,
+  "unit_failed": 3,
+  "unit_skipped": 24,
+  "unit_seconds": 515.07,
+  "contracts_passed": 146,
+  "contracts_seconds": 87.57,
+  "failures": [
+    "tests/unit/du11_source_quality/test_business_admission.py::test_actual_operating_activity_survives_financial_vocabulary[RPO next twelve months]",
+    "tests/unit/du11_source_quality/test_material_readiness.py::test_production_keeps_heading_as_context_and_carries_source_priority",
+    "tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade"
+  ],
+  "hook_bypassed": false,
+  "remote_changed": false
+}

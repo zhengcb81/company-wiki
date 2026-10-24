@@ -85,3 +85,19 @@ def test_normalized_request_can_be_serialized_and_resumed_without_hash_drift():
     resumed = _parse(request.to_dict())
     assert resumed.input_hash == request.input_hash
     assert resumed.max_micro_usd == request.max_micro_usd
+
+
+@pytest.mark.parametrize("schema", ("1", "2"))
+@pytest.mark.parametrize("seconds", (90, 90.0, 90.25))
+def test_programmatic_finite_duration_roundtrip_preserves_normalized_intent(schema, seconds):
+    from dataclasses import replace
+    import json
+    raw = _request()
+    if schema == "2":
+        raw["schema_version"] = "narrative-batch-request/2"
+        raw["items"] = [{"kind": "raw", "source_ref": ref} for ref in raw.pop("sources")]
+    request = replace(_parse(raw), max_seconds=seconds)
+    resumed = _parse(json.loads(json.dumps(request.to_dict())))
+    assert resumed.request_sha256 == request.request_sha256
+    assert resumed.input_hash == request.input_hash
+    assert _parse({**request.to_dict(), "max_seconds": seconds + 1}).request_sha256 != request.request_sha256

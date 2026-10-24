@@ -1,0 +1,150 @@
+{
+  "schema_version": "market-family-inventory/1",
+  "samples": [
+    {
+      "sample_id": "cn-h1",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "bytes": 3149962,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 210,
+      "family_hint": "semi_annual_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "cn-annual",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "bytes": 9165875,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 259,
+      "family_hint": "annual_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "cn-ipo",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "bytes": 11211796,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 429,
+      "family_hint": "prospectus",
+      "prior_used": true
+    },
+    {
+      "sample_id": "cn-convertible",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "bytes": 7062482,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 283,
+      "family_hint": "convertible_bond_prospectus",
+      "prior_used": true
+    },
+    {
+      "sample_id": "cn-equity",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "bytes": 3812541,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 96,
+      "family_hint": "equity_offering_prospectus",
+      "prior_used": true
+    },
+    {
+      "sample_id": "cn-ir",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "bytes": 153851,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 6,
+      "family_hint": "investor_relations",
+      "prior_used": true
+    },
+    {
+      "sample_id": "hk-annual",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "bytes": 2230253,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 246,
+      "family_hint": "annual_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "hk-interim",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+      "bytes": 2715618,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 110,
+      "family_hint": "semi_annual_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "hk-ipo",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "33460fa3e02e115e7bd09e1c4c857e71afe54c332a22373d28a0d2e86c70b6d4",
+      "bytes": 9730088,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "physical_pages": 675,
+      "family_hint": "prospectus",
+      "prior_used": true
+    },
+    {
+      "sample_id": "us-10k",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "bytes": 8158067,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "family_hint": "annual_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "us-10q",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+      "bytes": 1387702,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "family_hint": "quarterly_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "us-20f",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
+      "bytes": 4425147,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "family_hint": "annual_report",
+      "prior_used": true
+    },
+    {
+      "sample_id": "us-txt",
+      "state": "READ_TARGETED_PAGES",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "bytes": 66324,
+      "manifest_sha_matches": true,
+      "source_unchanged": true,
+      "line_count": 340,
+      "family_hint": "investor_call_transcript",
+      "prior_used": true
+    }
+  ],
+  "reading_artifact": "targeted-reading.json.gz",
+  "reading_sha256": "828d868119b865ac7dca015f02f0d283e8f4ddb3ec26d28ead26370fcf49724f",
+  "uncompressed_bytes": 123074,
+  "all_read_samples_sha_match": true,
+  "not_full_content_evaluation": true
+}

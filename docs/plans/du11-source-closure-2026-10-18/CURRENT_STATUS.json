@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_MATERIAL_VALUE_REVIEWED_8P_6PARTIAL_0M_AWAIT_PUBLICATION",
+  "overall_status": "ACTIVE_PUBLICATION_FIX_REVIEWED_MARKET_FAMILY_STUDY_IN_PROGRESS",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -605,17 +605,17 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "最终独审通过后发布本轮source材料价值/对象绑定/线性扫描；继续六项partial的业务父子、容量日期、地域口径局部依赖，再正式摘要/cache、W09/W10实际采用矩阵、W12四审及新公司。",
+  "next_step_after_publication": "按跨市场文种真实样本矩阵冻结源侧目标、测现生产链，修共享依赖与具体策略",
   "w08_current_review": {
-    "selection_path": "review/r1-w08-material-value-20261024/final-source-selection.json",
-    "selection_sha256": "70365ba05804ed2f3cc4555e903bcff457f963a48755420f26785df94c737096",
-    "review_path": "review/r1-w08-material-value-20261024/content-review/report.json",
+    "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
+    "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
+    "review_path": "review/r1-w08-material-value-20261024/publication/final-source/content-review/report.json",
     "status": "8_PASS_6_PARTIAL_0_MISSING_REAL_CONTENT_GAIN",
     "metrics": {
       "pages": 249,
       "candidates": 1526,
       "selected": 96,
-      "selected_chars": 8109,
+      "selected_chars": 8146,
       "work_used": 9540035,
       "work_limit": 16000000,
       "compiled_tasks": 55
@@ -636,15 +636,15 @@
     "rf_adoption_pass": false,
     "external_model_calls": 0,
     "downloads": 0,
-    "raw_copies": 0
+    "raw_copies": 0,
+    "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "发布当前source材料价值与对象绑定根修（独审/回归绿）",
-    "六项partial按来源父子/日期/口径共因闭合，不以财务全切片为目标",
-    "正式摘要/cache和RF实际采用矩阵/W12四审",
-    "原公司复验、药明合联→Snowflake及完整清单循环"
+    "正常提交并推送已独审的source/request共因修复；本轮尚未远端发布",
+    "按跨市场文种真实样本矩阵冻结源侧目标、测现生产链，修共享依赖与具体策略",
+    "正式摘要/cache和RF实际采用矩阵、四审及新公司循环"
   ],
-  "last_updated_utc": "2026-10-24T09:32:43.393530+00:00",
+  "last_updated_utc": "2026-10-24T10:43:15.219617+00:00",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -724,7 +724,7 @@
     "final_source_content_equal": true,
     "formal_summary_pass": false,
     "rf_adoption_pass": false,
-    "publication": "READY_TO_COMMIT_PUSH",
+    "publication": "LOCAL_C6182BC4_FIRST_PUSH_BLOCKED_FOLLOWUP_REVIEWED",
     "known_remaining_internal_issue": null,
     "natural_suite": "2336P_11_EXISTING_SKIP_BEFORE_LAST_OBJECT_TYPE_FIX",
     "source_unchanged": true,
@@ -733,7 +733,13 @@
     "mypy_src_files": 374,
     "independent_passed": 410,
     "independent_seconds": 31.85,
-    "independent_source_tree_stable": true
+    "independent_source_tree_stable": true,
+    "independent_source_semantics_passed": 458,
+    "independent_final_request_recovery_passed": 30,
+    "independent_final_request_recovery_seconds": 20.77,
+    "final_publication_review": "review/r1-w08-material-value-20261024/independent/publication-fix/final-report.json",
+    "first_push_failures": 3,
+    "first_push_published": false
   },
   "w08_previous_reporting_review": {
     "selection_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-selection.json",
@@ -769,5 +775,22 @@
     "next_action": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
     "selection_precedes_dependency_registration_only": false,
     "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
+  },
+  "market_family_upgrade": {
+    "status": "SAMPLE_STUDY_IN_PROGRESS_NOT_PRODUCTION_ACCEPTANCE",
+    "entry": "review/market-family-upgrade-20261024/task_scope.md",
+    "samples_sha_verified_targeted_read": 13,
+    "pdf_pages_targeted_read": 46,
+    "visual_pages_inspected": 2,
+    "new_paid_calls": 0,
+    "raw_copies": 0,
+    "existing_family_policies": 24,
+    "existing_facets": 14,
+    "uncovered_real_sample_shapes": [
+      "us_s1_f1",
+      "hk_call_ir_reproducible_original",
+      "us_six_month_report"
+    ],
+    "remaining": "Expand different-company corpus, freeze source-side checkpoints, baseline production routing/selection, TDD shared-owner/profile fixes, independent review and new-company validation; then original summary/cache/RF duties."
   }
 }

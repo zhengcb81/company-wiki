@@ -1,0 +1,98 @@
+{
+  "schema_version": "w08-next-dependency-evidence/1",
+  "trace_sha256": "a7278edab5f0568c80c874f9dca6e57d195f3a5ba75a57ff3f4310fe431f1022",
+  "actual_geo_note_admission": [
+    {
+      "unit": {
+        "id": "urn:company-wiki:narrative-unit:sha256:bfa1e6af26b2ab45472c6ac96c4f9b6e9951a5d2d662e28c4fb827506db86747",
+        "target": [
+          "ST-A03"
+        ],
+        "text_excerpt": "合计\n4,545,616.58\n2,380,143.46\n47.64\n15.84\n3.64\n增加6.16\n个百分点\n注1：境内外部分的营业收入和营业成本根据客户母公司所在地的国家或地区统计，对比期间数\n据已相应调整；",
+        "text_truncated": false,
+        "coordinates": {
+          "page_number": 16,
+          "paragraph_index": 19,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": 533,
+          "char_end": 641
+        },
+        "kind": "pdf_native_range",
+        "role": "company_filing"
+      },
+      "kind": "native_continuity",
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "admitted": false
+    }
+  ],
+  "actual_metric_adjacency": [
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:2b9de9773232bed3c6f626d654b2a29c7fd5e0a2e8f04bdc7f2eaa83e72568f9",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:aff8b75dd468831800b6d0b73971d2b8fccef368bd4622b16ab9e2e8fc16fd85",
+      "left_target": [
+        "ST-A09"
+      ],
+      "right_target": [
+        "ST-A09"
+      ],
+      "left_page": 12,
+      "right_page": 12,
+      "left_excerpt": "公司持续推进小分子产能建设。2025 年，常州、泰兴及金山原料药基地均以零\n缺陷成功通过FDA 现场检查。2025 年底，小分子原料药反应釜总体积已提升至超4,000kL。",
+      "right_excerpt": "公司持续推进小分子产能建设。2025 年，常州、泰兴及金山原料药基地均以零\n缺陷成功通过FDA 现场检查。2025 年底，小分子原料药反应釜总体积已提升至超4,000kL。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:aff8b75dd468831800b6d0b73971d2b8fccef368bd4622b16ab9e2e8fc16fd85",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:a8a520f9865d28d4ec5bc2b860a9b458a222134e9e1a5e438ea525774fe79363",
+      "left_target": [
+        "ST-A09"
+      ],
+      "right_target": [
+        "ST-A09"
+      ],
+      "left_page": 12,
+      "right_page": 12,
+      "left_excerpt": "公司持续推进小分子产能建设。2025 年，常州、泰兴及金山原料药基地均以零\n缺陷成功通过FDA 现场检查。2025 年底，小分子原料药反应釜总体积已提升至超4,000kL。",
+      "right_excerpt": "公司持续推进小分子产能建设。2025 年，常州、泰兴及金山原料药基地均以零\n缺陷成功通过FDA 现场检查。2025 年底，小分子原料药反应釜总体积已提升至超4,000kL。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    },
+    {
+      "left_id": "urn:company-wiki:narrative-unit:sha256:bf3f94ca91d696343a5f70f496a04cc2e6d54b86dfb2fdf9c4cfcab8fbeced15",
+      "right_id": "urn:company-wiki:narrative-unit:sha256:e4c8148629b609f97632bc69b4ea680f19d058bb7020e0ba3540c3711860645f",
+      "left_target": [
+        "ST-A09"
+      ],
+      "right_target": [
+        "ST-A09"
+      ],
+      "left_page": 12,
+      "right_page": 12,
+      "left_excerpt": "2025\n年9 月，公司提前完成泰兴多肽产能建设；",
+      "right_excerpt": "公司多肽固相合成反应釜总体积已提升至超100,000L。",
+      "forward_guidance_premise_match": false,
+      "reverse_guidance_premise_match": false,
+      "dependency_added": false
+    }
+  ],
+  "source_product_changed": false,
+  "raw_or_models_read": false,
+  "interpretation": {
+    "geo": "Actual definition has coordinated subject revenue AND cost before one allocation predicate. Current grammar only accepts allocation immediately after revenue, hence admitted=false. Must bind shared predicate to coordinated measurement subjects; not insert company-specific phrase.",
+    "temporal": "Both original dated construction and physical quantity are selected and source adjacency exists, but no qualification dependency is added. Existing local_qualification_dependencies only handles guidance premise or negative deictic restrictions. Need source-owned statement context without asserting that the aggregate volume belongs to that completion date.",
+    "business_parent": "Chemistry numbered revenue block exists as a candidate, but D&M carrier references general mgmt section rather than that numbered business parent. Investigate producer section/list ownership before changing budget/task compiler.",
+    "financial": "A02/A13 exact numeric totals may be obtained by actual scoped SourceRef/structured provider reads at RF stage. Preserve original14 targets and require actual use; do not turn all financial tables into narrative slices or assume API has supplied them."
+  }
+}
