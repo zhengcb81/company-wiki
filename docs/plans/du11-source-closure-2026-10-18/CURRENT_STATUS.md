@@ -1,8 +1,8 @@
 # 当前项目状态与接手入口
 
-**主线ACTIVE；2026-10-24 ROOT继续W08内容根因。** 本轮已修报告规则误入经营材料，以及评估条件“是否/能否/whether”冒充事件的共用判断；保留真实客户业务，不改原文。320项独立工程审查通过，相关自然包2302通过/11既有skip，Ruff与mypy src 373文件通过；发布前另发现新规则模块未进入cache算法依赖闭包，新增回归先RED后58项GREEN，只补入现有依赖列表。本轮源码`1e5e6c1a`及PWF已正常推送，精确远端推送HEAD=`f73afb89`。正常pre-push完整8160通过/24既有skip（409.50秒），另146契约smoke通过（32.46秒）；精确CI40081962182已completed/success（4分35秒），绑定推送HEAD f73afb89。
+**主线ACTIVE；2026-10-24最新节点：W08来源材料价值与对象绑定，正在最终复审。** 已将source admission与稀缺材料value分开，细分业务scope、客户地域和合同stock/确认转换用途，复用现有planner、不抬额度。独审发现整句借金额/地区/动作及正则指数回溯，已按对象断言及线性token消费共因修复；最终裸obligations已收敛为客户/履约合同对象，128项最终聚焦通过，最终独审410P/31.85秒，374源树SHA稳定，等待正常发布。当前修改尚未commit/push，不能沿用上一发布CI当本轮绿。
 
-同一真实249页年报新选材：1526候选、96片段/7689字符、8845814/16M，编译55任务；[本轮独立内容复核](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.md)仍为**7通过/5部分/2缺失**，没有净gold改善。下一根因已收敛到共享语义包排序和边际闭包竞争，随后是父子业务与日期关系。正式摘要/cache、真实采用矩阵、W12和新公司循环仍OPEN。W09/W11作者交付已关闭；W13–W15独占工区READY，ROOT不改委派文件。
+同一249页真实年报1526候选、96片段/8109字符、9540035/16M，55任务；[本轮独立内容复核](review/r1-w08-material-value-20261024/content-review/report.md)为**8通过/6部分/0缺失**（原7/5/2），A04订单/RPO确认计划通过，A03地区收入部分；原7条pass保留，A02一项旧子事实支持回退如实记录。最终线性版重新实读原SourceRef，全部证据/局部groups/编译tasks与内容独审输入一致。正式摘要/cache、真实采用矩阵、W12和公司循环仍OPEN。上一已发布源码1e5e6c1a、CI40081962182成功属于历史有效节点。W13–W15独占范围ROOT不改。
 
 更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
@@ -16,11 +16,11 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 原共享引擎/context、trace、DTO/cache及兼容修复均已发布；本轮报告规则/事件断言及新规则cache依赖根修源码`1e5e6c1a`随`f73afb89`推送，精确CI40081962182成功。最终独审320P、完整unit8160P/24既有skip、146契约、Ruff/mypy373通过。 | 同一249页原文1526候选、96/7689字符，55任务。最终SourceRef、全部选中证据和局部任务与独审材料相同，内容仍7pass/5partial/2missing；正式摘要/cache、真实矩阵/W12仍OPEN。见[本轮根因](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/README.md)、[内容增量独审](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/delta.md)、[发布收据](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/publication.json) |
+| W08 来源选材、业务父级、缓存依赖 | 最新source材料价值/对象绑定/线性扫描已实现；最终聚焦128P，Ruff/mypy src374通过，最终独审410P/31.85秒通过，正常发布待收。上一源码1e5e6c1a/CI40081962182成功保留历史。 | 真实249页96/8109字符、55任务，内容独审8P/6partial/0missing；最终SourceRef全部证据和任务等价。正式摘要/cache、真实矩阵/W12仍OPEN。见[本轮根因与收据](review/r1-w08-material-value-20261024/README.md) |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：** 先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。 只读共因设计已确认planner现有边际闭包计费正确，没有本轮重复扣费证据；问题在source-owned材料价值和覆盖用途粗化。详见[证据与TDD方案](review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md)。完整trace含14标签/72原单元，最后candidate回调470不能当全package1526。
+**当前唯一第一步：** 最终独审410P已通过，正常提交推送本轮source材料价值/对象绑定/线性扫描；继续六项partial的业务父子、容量日期、地域口径局部依赖，再正式摘要/cache、W09/W10实际采用矩阵、W12四审及新公司。 当前证据见[本节点](review/r1-w08-material-value-20261024/)；后续旧7/5/2与“先写RED”段落为上一节点历史，不覆盖上述最新状态。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

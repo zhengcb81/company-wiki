@@ -1,0 +1,154 @@
+{
+  "schema_version": "w08-material-value-independent-content-delta/1",
+  "reviewer": "/root/w08_reporting_selection_content",
+  "binding": {
+    "selection_sha256": "cfad8c9fa3e6c78dd43f0e84000756ad4c78218d264c0255e64902d45c8946f1",
+    "trace_sha256": "a7278edab5f0568c80c874f9dca6e57d195f3a5ba75a57ff3f4310fe431f1022",
+    "replay_receipt_sha256": "fe3da3036ebe225787ad4cb0d0d0e588ff6db6552325f3d28296564c50c90b45",
+    "model_view_sha256": "ae87139b70d979341ecfab7c7f10810f0bc11b018237be452a56388dc0e6b79c",
+    "checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+    "eight_original_pages_sha256": "3a08eb00f8ca3909248effd5b6ca8b1e701401ec7dc9553fc0139335f8d9eb6f",
+    "previous_review_sha256": "3281ce00b65315bdce3827ffd00f744479da73c3ee6597cbded297044f480791",
+    "previous_final_selection_sha256": "590a29316461af4be056b3988313cb8557e410758f94dfa30f10ad546488c289",
+    "source_ref": {
+      "byte_size": 1608226,
+      "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+    },
+    "producer_source_digest": "4e1424ff6ad49421af304bfdfa4674b27e516dcfde56877daa5d424efcdb8b57",
+    "producer_changed_source_sha256": {
+      "src\\company_wiki\\document_understanding\\decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+      "src\\company_wiki\\source_catalog\\narrative_business_disclosures.py": "1eb410492f64a66a9817fba63045e9c5a84ff5b6346b477f9461bb10afa7da9e",
+      "src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+      "src\\company_wiki\\source_catalog\\narrative_business_policy.py": "b1f1354ab0cc9bed5310621f3bdf3967e050e7810481537a0c73b7990fb698c5",
+      "src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+      "src\\company_wiki\\source_catalog\\narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+      "src\\company_wiki\\source_catalog\\narrative_reporting_rules.py": "5e5a37a603ad026943d11f302bec0e50560d6f091161339ed5b4252d53344c22",
+      "src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "3cdd3daa17e165b50c88b745f2c4ca322bd1e8728043dae84da40f096a8d49cf"
+    }
+  },
+  "report_sha256": "4b68ac829e0c53e2416cac5558fb3f3ed48d6fdb5ec0c02421f6a2d74b673926",
+  "previous_counts": {
+    "partial": 5,
+    "missing": 2,
+    "pass": 7,
+    "targets": 14
+  },
+  "current_counts": {
+    "pass": 8,
+    "partial": 6,
+    "missing": 0,
+    "targets": 14
+  },
+  "status_changes": [
+    {
+      "target_id": "ST-A03",
+      "before": "missing",
+      "after": "partial"
+    },
+    {
+      "target_id": "ST-A04",
+      "before": "missing",
+      "after": "pass"
+    }
+  ],
+  "old_passes_retained": true,
+  "subfact_regressions": [
+    {
+      "target_id": "ST-A02",
+      "old_span_id": "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0",
+      "locator": "loc:v1/page:17/paragraph:5/chars:274-404",
+      "fact": "15.84% actual aggregate revenue growth was previously explicit in cost explanation and is no longer selected.",
+      "effect": "partial remains partial; t21 adds rounded continuing revenue, so not a whole-target regression."
+    }
+  ],
+  "removed": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0",
+      "locator": "loc:v1/page:17/paragraph:5/chars:274-404"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:170af9bc4bf6a7bb9f060c0538a0a17e91603bc4f350426a6432d25c56e3618a",
+      "locator": "loc:v1/page:126/paragraph:2"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1f569b89f5a356628492832afb96cd53c491e55a94029b75108df65c09d6719a",
+      "locator": "loc:v1/page:30/paragraph:2/chars:36-172"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762",
+      "locator": "loc:v1/page:34/paragraph:23"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+      "locator": "loc:v1/page:16/paragraph:31"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217",
+      "locator": "loc:v1/page:15/paragraph:10/chars:971-1099"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+      "locator": "loc:v1/page:33/paragraph:2"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+      "locator": "loc:v1/page:15/paragraph:6"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+      "locator": "loc:v1/page:33/paragraph:19"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5",
+      "locator": "loc:v1/page:34/paragraph:14"
+    }
+  ],
+  "added": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0f0490413de7b4c10c3cf177acfe4c98919f10ced32d725e0a5f759b8d24ede7",
+      "locator": "loc:v1/page:11/paragraph:22/chars:1023-1238"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+      "locator": "loc:v1/page:235/paragraph:2"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5fa8a661e5544558aded7b105b8c9c9b8ba74fadef01940fbf28ef69b6669cf7",
+      "locator": "loc:v1/page:184/paragraph:13"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:770c9175d50b69e97590c1c832c02b22328fe87075e36d4ded687389fb2c1c08",
+      "locator": "loc:v1/page:184/paragraph:14/chars:564-673"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+      "locator": "loc:v1/page:234/paragraph:2"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b7e63dd3230702dee0939e548e2d0900578df07e8ee70e823466b5d0a39a6598",
+      "locator": "loc:v1/page:30/paragraph:2/chars:36-172"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c52aa84e6eacd5e7baf5b8890b2c9da88a9122a6f279f5aff2131b7d2b1d82d4",
+      "locator": "loc:v1/page:11/paragraph:13/chars:497-624"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ca145c84b207a5208cde9504321f7f73d497d8c5e08e987ca6e7a9971088ee4d",
+      "locator": "loc:v1/page:11/paragraph:12"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e13ed3a92087dcb79dd8d09f89102a0a002ff8e3953d9103850757de7d1892a3",
+      "locator": "loc:v1/page:235/paragraph:8/chars:119-566"
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554",
+      "locator": "loc:v1/page:11/paragraph:21"
+    }
+  ],
+  "review_reusable_as_full_pass": false,
+  "interpretation": "Actual source content improves, but six incomplete targets and a local revenue-growth support regression remain. No model/RF adoption verdict."
+}

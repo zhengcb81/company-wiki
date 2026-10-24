@@ -1,0 +1,25 @@
+{
+  "schema_version": "w08-material-value-tdd/1",
+  "baseline_head": "89540df4d34d9470216ec3ec6f0c849a5d40dd6a",
+  "test_file": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+  "test_sha256": "5e3e14dd7ba90ce6fd6c08b6d063105b0d034fecfd53ac456e79a8516a1441f8",
+  "red": {
+    "failed": 18,
+    "passed": 7,
+    "seconds": 2.9,
+    "exit_code": 1,
+    "evidence": "Actual pytest tool execution before product edits; no persisted full log claimed."
+  },
+  "initial_green": {
+    "passed": 25,
+    "failed": 0,
+    "seconds": 2.18,
+    "exit_code": 0
+  },
+  "scope": "Neutral CN/HK/US-style wording, pure source observations and real 12-span public selection; no company-gold fixture.",
+  "legacy_fact_dataclass_changed": false,
+  "planner_changed": false,
+  "limits_raised": false,
+  "llm_calls": 0,
+  "downloads": 0
+}

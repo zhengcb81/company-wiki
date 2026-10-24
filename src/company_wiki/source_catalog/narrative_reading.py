@@ -26,7 +26,7 @@ from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 
 from .narrative_antecedent import build_antecedent_windows, within_reference_envelope
 from .narrative_budget import READING_BUDGET_POLICY
-from .narrative_business_policy import detect_reading_business_fact, reading_financial_only
+from .narrative_business_policy import detect_reading_business_fact, reading_financial_only, reading_material_value
 from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
@@ -945,7 +945,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             if not admitted:
                 continue
             anchors.append(uid)
-            meaningful = fact.eligible or package["kind"] == "operating_table"
+            meaningful = reading_material_value(fact) == "meaningful_fact" or package["kind"] == "operating_table"
             role = view.get("section_role")
             scope_topics = (role,) if not meaningful and role in _BUSINESS_ROLES else ()
             topics = tuple(dict.fromkeys((*fact.topics, *scope_topics)))

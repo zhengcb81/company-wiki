@@ -1,0 +1,20 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "tests": {
+    "failed": 13,
+    "passed": 8,
+    "xml": "initial.xml"
+  },
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "f6ffe88e6d6fedf02243d792003c92e9f6b3478834da87f3ff51ee877a3e3ae5",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "8af0b572c2379fd1f40b961f853ba639c2d99a470d6b74ed382164b4965174b1",
+    "src/company_wiki/source_catalog/narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722"
+  },
+  "cleanup": {
+    "own_scratch_removed": false,
+    "exists_after": false
+  },
+  "limits": "No raw, network, LLM, keys, third-party worktrees or production writes. Not a 14-item content PASS."
+}

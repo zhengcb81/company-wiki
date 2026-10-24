@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-mv-review-final",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\independent\\final.xml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\independent\\test_material_binding_independent.py",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py",
+    "tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py",
+    "tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_selection/test_reading_budget_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_budget_plan.py"
+  ],
+  "elapsed_seconds": 69.928,
+  "returncode": 0,
+  "actual_imports": {
+    "company_wiki.source_catalog.narrative_business_disclosures": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_disclosures.py",
+    "company_wiki.source_catalog.narrative_business_policy": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.source_catalog.narrative_operating_relations": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py"
+  },
+  "source_sha_before": {
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "4263f31bedbacfbc7538c3edf9d798f8015edfc8eacaca05e0788d0cc6c57a05",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "ac2e9dd7b9ce44ee3629964a2a988fae6e10a28d4dcd68aa1479d1a38c1f1d9f",
+    "src/company_wiki/source_catalog/narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": "d115954bb534b6cf2d720a93489e044f58b96c369f04ea88d6783c2b5949472a",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "a258e95863c5e91af4e377c95079b1ae9ab669832a171afe3e092fb2ad8438e2",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/test_material_binding_independent.py": "689be77c20b23256b6f1905a1947f1c0434bcf2017f4c5d05f42c110228e3976"
+  },
+  "source_sha_after": {
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "4263f31bedbacfbc7538c3edf9d798f8015edfc8eacaca05e0788d0cc6c57a05",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "ac2e9dd7b9ce44ee3629964a2a988fae6e10a28d4dcd68aa1479d1a38c1f1d9f",
+    "src/company_wiki/source_catalog/narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": "d115954bb534b6cf2d720a93489e044f58b96c369f04ea88d6783c2b5949472a",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "a258e95863c5e91af4e377c95079b1ae9ab669832a171afe3e092fb2ad8438e2",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/test_material_binding_independent.py": "689be77c20b23256b6f1905a1947f1c0434bcf2017f4c5d05f42c110228e3976"
+  },
+  "source_tree_before": {
+    "count": 374,
+    "digest": "e9b0dbab2c2ac4124e4c3357735860d63afd4c8e20eb673f72a9c748515277df"
+  },
+  "source_tree_after": {
+    "count": 374,
+    "digest": "e9b0dbab2c2ac4124e4c3357735860d63afd4c8e20eb673f72a9c748515277df"
+  },
+  "cleanup": {
+    "scratch_absent_before": true,
+    "scratch_absent_after": true
+  },
+  "scope_limit": "Source material engineering review only. Not real annual14 coverage, formal summary or company RF audit PASS. No raw/network/model/keys access."
+}

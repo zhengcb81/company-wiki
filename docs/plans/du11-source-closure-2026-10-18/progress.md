@@ -756,3 +756,17 @@ V4独审发现纯名词“收入确认、履约义务、客户控制”会把会
 正常push完成，远端精确master=f73afb89be1f4caf610432211281e07a14e58c77。最终全量pre-push8160 passed/24既有skip/409.50s，另独立146契约32.46s，无hook绕过。GitHub精确CI40081962182已确认in_progress，仍待终态，不写成成功。下一共因已留下6个中英文/繁体中性纯函数实际观察，未假称生产source session或选择测试通过。
 
 精确GitHub CI40081962182已实查completed/success，绑定f73afb89be1f4caf610432211281e07a14e58c77（创建09:26:32、结束09:31:07）。当前机器/人读PWF、主线Next Step及发布收据已同步为已发布/CI成功；下一步是source价值和覆盖TDD，不继续等待旧CI。整体目标仍ACTIVE，正式摘要/缓存/真实矩阵与公司循环未代签完成。
+
+## 2026-10-24 ROOT继续source材料价值与覆盖TDD
+
+上一轮是用户状态解释，只读复核/重述不改变主线，按no-progress处理；前一实施节点源码1e5e6c1a、PWF89540df4已发布，精确CI40081962182成功。当前按现有预算共因设计开始实际TDD，保留legacy fact DTO/指纹，source owner输出既有value_band/topics，预算不读原文、不新建planner、不抬限额。先以中英文/繁体业务scope、客户地区定义、订单stock/FY转换与泛效益竞争冻结正反例。预算仍采用最新授权10M tokens/$20，旧原生目标2M文字为历史；本节点初始不调用外部模型。
+
+source-value首批25个中性测试实际18F/7P（2.90s）后实现25P（2.18s）：业务scope、客户收入地理口径、订单stock/绝对FY转换分成固定覆盖用途；来源value不再直接等于eligible。复用原planner和value_band/topics，不改OperatingFact DTO/旧指纹。新增3组有限source关系扫描在现有session中按9×text而非旧6×text预留work，仍沿用16M限额；新模块加入既有算法cache闭包。下一步集中相关回归/独立反控后真实年报验证，不提前说14项改善。
+
+## 2026-10-24 继续：独立反控要求关系绑定根修
+
+上一轮为状态解释，无产品进展。最新相关回归338P/17.68s；独立21例13F/8P，生产公开selector亦复现：整句拼接让订单借员工/现金数，地域收入借差旅费地点，转换借供应商动作；普通英文地域收入漏选。当前按共享predicate_scope和对象后的直接谓词限定关系，移除reading内重复合同转换fallback；不改预算、不抬限额，不把338绿代签内容。
+
+真实内容独审已完成：原7P/5partial/2missing改善为8P/6partial/0missing，A04订单/RPO/确认计划missing→pass，A03地区收入missing→partial，旧7pass保留。A02原增长子事实的选中支持回退已记录，不用缺表头数字冒充命名数据。最终线性版重新实读SourceRef，全部96 EvidenceSpan、task-local groups与55tasks逐项等于独审输入，8/6/0可沿用；工作9540035/16M，8109chars，0收费/下载/原件副本。Ruff通过、mypy src374文件0错；独审线性版406P，仍发现裸remaining obligations不属于客户合同的对象类型问题，需收敛词义后最终复验。自然包同一句柄仍运行，未重启或冒称通过。
+
+最终独立工程410P/31.85s（34独立/32作者含效率与类型控制），374份源码树执行前后SHA一致，全部内部发现修完PASS。最后bare-obligations收敛后128聚焦/27.85s、Ruff和mypy374通过；真实原SourceRef又复核，全部96 EvidenceSpan、局部groups及55tasks仍等于8/6/0内容独审材料，未以旧源摘要代签。独占test scratch已恢复；ROOT只删除本轮重复的中间selection，留SHA/字节与全证据等价收据，不触碰原件。准备明确路径正常commit/push，无hook绕过。

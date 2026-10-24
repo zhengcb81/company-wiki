@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "review_scope": "Source-owned material value and finite disclosure coverage engineering node, baseline89540df4; not company/annual14 content closure",
+  "tests": {
+    "total_passed": 410,
+    "independent_cases": 34,
+    "author_material_cases": 32,
+    "mechanism_cases": 31,
+    "pytest_seconds": 31.85,
+    "execution_receipt": "final-execution.json",
+    "junit": "final.xml"
+  },
+  "source_tree": {
+    "count": 374,
+    "digest": "788a7213c4e9a371e171c7b9eb7ee8316c0cfb599fdd8248cc9cbe2b24dff114"
+  },
+  "changed_source_and_test_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "2c85b1314a7a95b9b6f08c650e29f539a85ee09539b678bc0c3b2acfe9046238",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "ac2e9dd7b9ce44ee3629964a2a988fae6e10a28d4dcd68aa1479d1a38c1f1d9f",
+    "src/company_wiki/source_catalog/narrative_reading.py": "930dc1a92f63c6635a3c61d17dfa85d4df85c802d067e140bb3280bb526df762",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ec707640d1b97c72c2450e9d79d570da5c9084d70d01d09165f71fa49cb74205",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": "672e7610b16bdabc680fd09dd1f41a95b049328316a18e204f5c18d7f6aea6c1",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "a258e95863c5e91af4e377c95079b1ae9ab669832a171afe3e092fb2ad8438e2",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/independent/test_material_binding_independent.py": "ca90893dba5a69876f4a71c5acab1bf91e823fd9ca2880543b42ccf4d7e58a63"
+  },
+  "actual_imports": {
+    "company_wiki.source_catalog.narrative_business_disclosures": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_disclosures.py",
+    "company_wiki.source_catalog.narrative_business_policy": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "company_wiki.source_catalog.narrative_reading": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+    "company_wiki.source_catalog.narrative_operating_relations": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+    "company_wiki.document_understanding.decision_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py"
+  },
+  "cleanup": {
+    "scratch_absent_before": true,
+    "scratch_absent_after": true
+  },
+  "resolved_findings": [
+    "Local assertion/object-bound stock amounts prevent employee/cash lending.",
+    "Revenue allocation bound to same revenue assertion, not payroll/customer addresses.",
+    "Stock head quantity/coordination/partitive conversion does not borrow other actors or contracts.",
+    "Ordinary English customer-region revenue relations are covered.",
+    "Generic composition is background; named scope and concrete channel/product mechanisms retain value.",
+    "One-pass carrier token consumption removes exponential numeric suffix backtracking.",
+    "Bare remaining obligations do not become customer contract stock; RPO/customer contract meaning remains required.",
+    "Actual new module bytes invalidate reading inventory; old selector DTO unchanged."
+  ],
+  "unresolved_internal_findings": [],
+  "coverage_limits": [
+    "Explicit geographic proper names without market/region grammar are not claimed fully supported.",
+    "This proves engineering behavior on neutral controls and related cases, not the frozen14 real annual report content targets.",
+    "Formal summary, cache recovery, RF company audit and fresh-company generalization remain ROOT responsibility."
+  ],
+  "mutations": "Only assigned independent evidence/test files; no product code, mother PWF, raw originals, config, external repo, network, model or keys changed."
+}

@@ -19,6 +19,11 @@ from .narrative_source_purpose import (
 )
 from .narrative_revenue_guidance import revenue_guidance
 from .narrative_predicate_state import observe_metric_predicate, predicate_scope
+from .narrative_business_disclosures import (
+    READING_DISCLOSURE_SCAN_PASSES,
+    disclosure_relations,
+    reading_material_value as reading_material_value,
+)
 
 from .narrative_business_meaning import (
     _CLAUSES,
@@ -43,18 +48,21 @@ _ACTIVITY = re.compile(
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
 READING_BUSINESS_POLICY_VERSION = "reading-business-policy/17"
+READING_BUSINESS_SCAN_PASSES = 6 + READING_DISCLOSURE_SCAN_PASSES
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
 _BILLING_BASIS = re.compile(
     r"\b(?:consumption[- ]based|usage[- ]based|metered|per[- ](?:seat|user)|"
     r"(?:paid|licensed|active)\s+(?:seats?|users?)|average revenue per user|"
-    r"storage consumed|computation used)\b|"
+    r"storage consumed|computation used|"
+    r"(?:metered|actual)\s+(?:[a-z-]+\s+){0,3}(?:consumption|usage|consumed))\b|"
     r"按(?:量|使用量|用量|席位|用户|用戶|交易).{0,8}(?:计费|計費|收费|收費)|"
     r"(?:客户|客戶|用户|用戶)(?:实际|實際)?(?:使用量|用量)|按席位|按量计费|按量計費", re.I)
 _BILLING_RELATION = re.compile(
     r"\b(?:charges?|charging|billed|billing|pricing)\b[^。.!?;]{0,100}\b(?:based on|per|for|by)\b|"
     r"\brevenue\b[^。.!?;]{0,100}\b(?:affected|depends? on|from|based on|driven by)\b|"
+    r"\b(?:charges?|fees?|services?|billing)\b[^。.!?;]{0,70}\bdepends? on\b|"
     r"\b(?:billing|pricing|business)\s+(?:basis|model)\b|"
     r"(?:收入|收费|收費|计费|計費|定价|定價).{0,45}(?:取决于|取決於|根据|根據|采用|採用|按照|按)|"
     r"(?:采用|採用).{0,35}(?:计费|計費|收费|收費)", re.I)
@@ -123,18 +131,6 @@ _REVENUE_VALUE = re.compile(
     r"(?:提升至|增至|减至|減至|为|為|达到|達到|达|達|超过|超過|超|逾))?\s*"
     r"(?:(?:over|more than|nearly|approximately|about)\s+|超过|超過|超|逾|约|約)?\s*"
     r"(?:(?:人民币|人民幣|港币|港幣|美元|USD|RMB|CNY|HKD)\s*)?[$¥€£]?\s*\d[\d,.]*", re.I)
-_CONTRACT_OBJECT = re.compile(
-    r"\b(?:remaining (?:performance )?obligations?|contract(?:ed)? backlog|order backlog|"
-    r"unfulfilled customer contracts?)\b|剩余履约义务|剩餘履約義務|合同负债|合同負債|在手订单|在手訂單|未履行客户合同|未履行客戶合同", re.I)
-_CONTRACT_CONVERSION = re.compile(
-    r"\b(?:recogniz\w*|recognis\w*|invoic\w*|ship\w*|deliver\w*|convert\w*)\b|"
-    r"确认|確認|开票|開票|交付|转化|轉化", re.I)
-_FORWARD_PERIOD = re.compile(
-    r"\b(?:future periods?|thereafter|over the next|within the next|next\s+"
-    r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|eighteen|twenty(?:[- ]four)?|thirty(?:[- ]six)?)"
-    r"\s+(?:months?|quarters?|years?))\b|"
-    r"未来|未來|之后期间|之後期間|以后期间|以後期間", re.I)
-
 # Only the opt-in reader interprets these retail/network relations. A count is
 # a source stock statement, not an inferred opening/net-addition calculation.
 _STORE_OBJECT = re.compile(r"\b(?:stores?|outlets?|shops?|branches?|retail locations?)\b|"
@@ -622,10 +618,11 @@ def _business_coverage_relation(clause: str) -> bool:
 
 def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
     """Specific source relationships, not a bag of nouns across sentences."""
-    reasons = []
+    reasons: list[str] = []
     for clause in clauses:
         if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
             continue
+        reasons.extend(disclosure_relations(clause))
         if _brand_portfolio(clause)[1]:
             reasons.append("brand_portfolio_structure")
         if _ownership_scope(clause):
@@ -661,9 +658,6 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             subject = clause[:growth.start()]
             if _PRODUCT_SUBJECT.search(subject) and _measured_driver(clause, after=link.end()):
                 reasons.append("product_operating_driver")
-        if (_CONTRACT_OBJECT.search(clause) and _CONTRACT_CONVERSION.search(clause)
-                and _FORWARD_PERIOD.search(clause)):
-            reasons.append("contract_revenue_conversion")
         if _STORE_OBJECT.search(clause):
             if any(not _STORE_FINANCIAL_GAP.search(match.group()) for match in _STORE_STOCK.finditer(clause)):
                 reasons.append("store_network_stock")

@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "before_sha256": "4263f31bedbacfbc7538c3edf9d798f8015edfc8eacaca05e0788d0cc6c57a05",
+  "after_sha256": "4263f31bedbacfbc7538c3edf9d798f8015edfc8eacaca05e0788d0cc6c57a05",
+  "actual_import": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_disclosures.py",
+  "rows": [
+    {
+      "digits": 12,
+      "carrier_result": false,
+      "carrier_seconds": 4.460001946426928e-05,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.00022509999689646065
+    },
+    {
+      "digits": 20,
+      "carrier_result": false,
+      "carrier_seconds": 7.399998139590025e-06,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.00016280001727864146
+    },
+    {
+      "digits": 28,
+      "carrier_result": false,
+      "carrier_seconds": 5.699985194951296e-06,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.00016920000780373812
+    },
+    {
+      "digits": 48,
+      "carrier_result": false,
+      "carrier_seconds": 6.699992809444666e-06,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.0005520000122487545
+    },
+    {
+      "digits": 128,
+      "carrier_result": false,
+      "carrier_seconds": 8.300004992634058e-06,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.00024170000688172877
+    },
+    {
+      "digits": 512,
+      "carrier_result": false,
+      "carrier_seconds": 1.1199997970834374e-05,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.0005609999934677035
+    },
+    {
+      "digits": 2048,
+      "carrier_result": false,
+      "carrier_seconds": 2.680000034160912e-05,
+      "disclosure_uses": [
+        "operating_contract_stock"
+      ],
+      "disclosure_seconds": 0.001701800007140264
+    }
+  ],
+  "limit": "Finite neutral source text only; no raw/network/model. Measurements exclude import startup."
+}

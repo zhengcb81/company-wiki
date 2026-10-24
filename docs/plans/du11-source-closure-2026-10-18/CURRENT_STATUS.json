@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_REPORTING_RULES_REVIEWED_CONTENT_7P_5PARTIAL_2M_BUDGET_ROOT_NEXT",
+  "overall_status": "ACTIVE_W08_MATERIAL_VALUE_REVIEWED_8P_6PARTIAL_0M_AWAIT_PUBLICATION",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -153,8 +153,8 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
-  "next_step_after_user_resumes": "Already resumed on2026-10-23",
+  "next_step_now": "最终独审通过后发布本轮source材料价值/对象绑定/线性扫描；继续六项partial的业务父子、容量日期、地域口径局部依赖，再正式摘要/cache、W09/W10实际采用矩阵、W12四审及新公司。",
+  "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
     "observation_ref": "r1-holdout-20261021/budget-observation.json",
@@ -605,44 +605,44 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
+  "next_step_after_publication": "最终独审通过后发布本轮source材料价值/对象绑定/线性扫描；继续六项partial的业务父子、容量日期、地域口径局部依赖，再正式摘要/cache、W09/W10实际采用矩阵、W12四审及新公司。",
   "w08_current_review": {
-    "selection_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-selection.json",
-    "review_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.json",
-    "selection_sha256": "590a29316461af4be056b3988313cb8557e410758f94dfa30f10ad546488c289",
-    "status": "7_PASS_5_PARTIAL_2_MISSING_NO_NET_CONTENT_GAIN",
+    "selection_path": "review/r1-w08-material-value-20261024/final-source-selection.json",
+    "selection_sha256": "70365ba05804ed2f3cc4555e903bcff457f963a48755420f26785df94c737096",
+    "review_path": "review/r1-w08-material-value-20261024/content-review/report.json",
+    "status": "8_PASS_6_PARTIAL_0_MISSING_REAL_CONTENT_GAIN",
     "metrics": {
       "pages": 249,
       "candidates": 1526,
       "selected": 96,
-      "selected_chars": 7689,
-      "work_used": 8845814,
+      "selected_chars": 8109,
+      "work_used": 9540035,
       "work_limit": 16000000,
       "compiled_tasks": 55
     },
-    "external_model_calls": 0,
-    "downloads": 0,
-    "raw_copies": 0,
-    "independent_signoff": "INDEPENDENT_CONTENT_PARTIAL_ENGINEERING_SEPARATE",
     "remaining": {
       "partial": [
         "ST-A01",
         "ST-A02",
+        "ST-A03",
         "ST-A05",
         "ST-A09",
         "ST-A13"
       ],
-      "missing": [
-        "ST-A03",
-        "ST-A04"
-      ]
+      "missing": []
     },
-    "next_action": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
-    "selection_precedes_dependency_registration_only": false,
-    "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
+    "content_equivalence_ref": "review/r1-w08-material-value-20261024/final-source-receipt.json",
+    "formal_summary_pass": false,
+    "rf_adoption_pass": false,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0
   },
   "next_steps": [
-    "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。"
+    "发布当前source材料价值与对象绑定根修（独审/回归绿）",
+    "六项partial按来源父子/日期/口径共因闭合，不以财务全切片为目标",
+    "正式摘要/cache和RF实际采用矩阵/W12四审",
+    "原公司复验、药明合联→Snowflake及完整清单循环"
   ],
   "last_updated_utc": "2026-10-24T09:32:43.393530+00:00",
   "latest_publish_validation": {
@@ -712,5 +712,62 @@
     "publish_head": "f73afb89be1f4caf610432211281e07a14e58c77",
     "publication_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/publication.json"
   },
-  "w08_next_root_design": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md"
+  "w08_next_root_design": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md",
+  "w08_material_value_20261024": {
+    "status": "INDEPENDENT_ENGINEERING_PASS_CONTENT_PARTIAL",
+    "evidence": "review/r1-w08-material-value-20261024/",
+    "source_review_counts": {
+      "pass": 8,
+      "partial": 6,
+      "missing": 0
+    },
+    "final_source_content_equal": true,
+    "formal_summary_pass": false,
+    "rf_adoption_pass": false,
+    "publication": "READY_TO_COMMIT_PUSH",
+    "known_remaining_internal_issue": null,
+    "natural_suite": "2336P_11_EXISTING_SKIP_BEFORE_LAST_OBJECT_TYPE_FIX",
+    "source_unchanged": true,
+    "paid_calls": 0,
+    "final_focused_passed": 128,
+    "mypy_src_files": 374,
+    "independent_passed": 410,
+    "independent_seconds": 31.85,
+    "independent_source_tree_stable": true
+  },
+  "w08_previous_reporting_review": {
+    "selection_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-selection.json",
+    "review_path": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/content-review/report.json",
+    "selection_sha256": "590a29316461af4be056b3988313cb8557e410758f94dfa30f10ad546488c289",
+    "status": "7_PASS_5_PARTIAL_2_MISSING_NO_NET_CONTENT_GAIN",
+    "metrics": {
+      "pages": 249,
+      "candidates": 1526,
+      "selected": 96,
+      "selected_chars": 7689,
+      "work_used": 8845814,
+      "work_limit": 16000000,
+      "compiled_tasks": 55
+    },
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "independent_signoff": "INDEPENDENT_CONTENT_PARTIAL_ENGINEERING_SEPARATE",
+    "remaining": {
+      "partial": [
+        "ST-A01",
+        "ST-A02",
+        "ST-A05",
+        "ST-A09",
+        "ST-A13"
+      ],
+      "missing": [
+        "ST-A03",
+        "ST-A04"
+      ]
+    },
+    "next_action": "先按budget-next/analysis.md写中性RED：来源admission不等于稀缺材料value，业务scope、客户地域、合同stock与确认转换用途不能压成core_business；在source owner内细化现有value_band/topics并复用reading_plan/3，不先改planner权重或提高限额。接着修地域口径、父子业务与容量日期局部依赖；共因完成后一次真实14项复核，再正式摘要/cache、W09/W10实际采用矩阵和W12四审。",
+    "selection_precedes_dependency_registration_only": false,
+    "content_equivalence_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/final-source-receipt.json"
+  }
 }

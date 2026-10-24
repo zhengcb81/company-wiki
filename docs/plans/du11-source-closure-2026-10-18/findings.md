@@ -586,3 +586,7 @@ annual14 V5选材/模型编译可见性仍7pass/5partial/2missing；A03地区/�
 ROOT只读实测6个中性source-text观测：英文two businesses结构eligible=false，繁体客户母公司地区定义eligible=false；中文业务构成仅core_business/capacity_projects；绝对FY2028 RPO有stock而无conversion主题；泛“提升客户效率”却eligible=true/core_business。见budget-next/baseline-source-observations.json，仅兼容detector观测，尚未测试真实source-session/value或预算选择，不扩大成整链已证。最终正常pre-push8160P/24skip证明本节点最终4源/2测试版本全量unit通过。
 
 当前完整pre-push真实耗时409.50s，远端CI约275s；没有重启或跳过执行。这再次证明W13日常push分层包有实际价值，ROOT未修改其独占gate文件。GitHub公开API可读，全部CI观察不需Git凭证转换；本次gh CLI不存在，仅是工具环境事实，并非测试/产品失败。
+
+## 2026-10-24 source-value对象绑定与效率根因
+
+独立关系反控13F已修；同head协调/数量关系补齐，泛comprises不再当稀缺事实，保留真实渠道机制和有source关系但state unknown的业务验证材料（不声称已完成）。一次自然包2330P/11skip/1F揭露误降待验证产品，未删旧断言。随后独立确认_CONVERSION_LINK重复金额正则有指数回溯：12位0.007s、20位2.145s、28位4s不返回；ROOT只终止了已核PID25872/parent17636的自有pytest，原runner写失败并清理tmp。改为贪婪逐token扫描，无重复正则切分；不抬timeout/work限额。新长数字公开detector反控覆盖12/28/64/128位。已有真实14同源selection已产生改善，最终独立内容报告待收；新语义与其等价仍需最后字节复验，不能用工程404P冒称效率通过。

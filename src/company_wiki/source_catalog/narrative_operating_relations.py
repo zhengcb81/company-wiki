@@ -22,7 +22,9 @@ from .narrative_revenue_guidance import (
     is_explicit_backward_revenue_guidance_premise,
     revenue_guidance_premise,
 )
-from .narrative_business_policy import assess_reading_business_fact, project_reading_business_fact
+from .narrative_business_policy import (
+    READING_BUSINESS_SCAN_PASSES, assess_reading_business_fact, project_reading_business_fact,
+)
 
 _MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS = 1
 
@@ -466,7 +468,7 @@ class SourceOperatingSession:
         try:
             if result["status"] == "partial" and self.work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
-            self.work_budget.charge(6 * len(text))
+            self.work_budget.charge(READING_BUSINESS_SCAN_PASSES * len(text))
             fact, financial = assess_reading_business_fact(text, result, ref_text=ref_text)
         except WorkBudgetExceeded:
             self.complete = False

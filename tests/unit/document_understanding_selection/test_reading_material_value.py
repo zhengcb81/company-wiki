@@ -1,0 +1,165 @@
+"""Source meaning/value reaches the existing finite planner without issuer rules."""
+from __future__ import annotations
+
+from hashlib import sha256
+
+import pytest
+
+from company_wiki.source_catalog import narrative_business_policy as policy
+from company_wiki.source_catalog.narrative_document import DocumentStructure
+from company_wiki.source_catalog.narrative_evidence import _make_unit, select_narrative_evidence
+from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
+
+
+SCOPES = (
+    "本公司业务可以分为检测仪器、检测试剂和设备维护服务。",
+    "本集團業務主要由工業設備、診斷軟件以及維修服務構成。",
+    "Our company operates through two businesses: workflow subscriptions and device support.",
+    "Our business consists of measurement instruments, control software and equipment maintenance services.",
+    "本集团的收入主要来源于如下业务类型：精密仪器业务提供从产品设计、样机开发到批量制造的一体化服务，"
+    "涵盖测量设备、控制软件以及配套维修服务。",
+)
+GEOGRAPHIES = (
+    "本公司营业收入按客户母公司所在地的国家或地区统计，对比期间数据已相应调整。",
+    "收入按客戶母公司所在地分區。",
+    "Revenue is attributed to geographic markets based on the country of each customer's headquarters.",
+)
+CONTRACTS = (
+    "本公司期末未交付订单余额为人民币80亿元，其中25亿元将在2028会计年度确认收入。",
+    "Our remaining performance obligations were $2.8 billion, of which 40% is expected to be recognized in FY2028.",
+    "本報告期末已簽訂合同但尚未履行的履約義務對應收入為人民幣9億元，其中人民幣4億元預計於2029年度確認收入。",
+)
+
+
+def value(fact):
+    # This is a new source-owned interpretation, separate from eligibility.
+    # The old implementation has only eligibility; it must fail this contract.
+    observe = getattr(policy, "reading_material_value", None)
+    assert callable(observe), "Source owner must express material value independently of admission"
+    return observe(fact)
+
+
+@pytest.mark.parametrize("text", SCOPES)
+def test_named_business_scope_has_its_own_coverage_use_without_numeric_requirements(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert fact.eligible
+    assert "business_scope" in fact.topics
+    assert value(fact) == "meaningful_fact"
+
+
+@pytest.mark.parametrize("text", GEOGRAPHIES)
+def test_customer_revenue_geography_includes_definition_not_only_amounts(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert fact.eligible
+    assert "customer_revenue_geography" in fact.topics
+    assert value(fact) == "meaningful_fact"
+
+
+@pytest.mark.parametrize("text", CONTRACTS)
+def test_contract_balance_and_absolute_fiscal_year_conversion_have_distinct_uses(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert fact.eligible
+    assert "operating_contract_stock" in fact.topics
+    assert "contract_revenue_conversion" in fact.topics
+    assert value(fact) == "meaningful_fact"
+
+
+@pytest.mark.parametrize("text", (
+    "公司业务包括研发、生产和销售。",
+    "Our income consists of interest, dividends and taxes.",
+    "We strive to serve our customers with better products and services.",
+    "Our factories are located in three geographic markets.",
+    "Our cash balances are attributed to the countries of the group's banks.",
+    "公司计划明年争取人民币80亿元新增订单。",
+    "The auditors assessed the remaining performance obligations and tested management estimates.",
+))
+def test_generic_financial_aspirational_and_non_customer_locations_do_not_get_new_coverage(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert not {"business_scope", "customer_revenue_geography", "operating_contract_stock",
+                "contract_revenue_conversion"}.intersection(fact.topics)
+
+
+@pytest.mark.parametrize("text", (
+    "公司坚持以客户为中心，通过高质量服务提升客户研发效率。",
+    "Our service platform aims to improve customer efficiency and reduce customer costs.",
+))
+def test_readable_generic_benefits_are_background_not_scarce_fact_material(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert fact.eligible, "Keep source recall; lower material value rather than blacklisting its words"
+    assert value(fact) == "description"
+
+
+@pytest.mark.parametrize("text", (
+    "Our managed data platform charges customers based on storage consumed and computation used.",
+    "公司新设备已交付海外客户，产线产能利用率达到85%。",
+    "Customer certification is required before the new equipment can enter commercial production.",
+))
+def test_specific_operating_mechanics_observations_and_constraints_remain_valuable(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert fact.eligible
+    assert value(fact) == "meaningful_fact"
+
+
+def document(texts, language):
+    digest = sha256(b"neutral-reading-value-and-coverage").hexdigest()
+    units = tuple(_make_unit(source_id=source_id_for_sha256(digest), parser_version="1.0.0",
+        coordinates=EvidenceCoordinates(paragraph_index=i), raw_text=text,
+        unit_kind="html_paragraph", source_role="company_filing", language=language,
+        metadata={"source_locator": f"cwp-html-dom/1|n=0.{i}"})
+        for i, text in enumerate(texts))
+    return DocumentStructure(source_id_for_sha256(digest), digest, language, units,
+                             line_count=len(units), mime_type="text/html")
+
+
+@pytest.mark.parametrize("language", ("zh", "en"))
+def test_real_source_selection_retains_distinct_business_information_in_twelve_spans(language):
+    if language == "zh":
+        noise = [f"本公司坚持以客户为中心，通过高质量服务提升客户研发效率，服务宗旨第{i}项。" for i in range(24)]
+        facts = (SCOPES[0], GEOGRAPHIES[0], CONTRACTS[0],
+                 "本公司新设备已交付海外客户，产线产能利用率达到85%。")
+    else:
+        noise = [f"Our service platform aims to improve customer efficiency and reduce customer costs, principle {i}."
+                 for i in range(24)]
+        facts = (SCOPES[2], GEOGRAPHIES[2], CONTRACTS[1],
+                 "Our managed data platform charges customers based on storage consumed and computation used.")
+    result = select_narrative_evidence(document((*noise, *facts), language), title="Annual report",
+        existing_kind="annual_report", selector_version="0.9.0", max_selected=12)
+    selected = {span.raw_text for span in result.evidence_spans}
+    assert set(facts) <= selected
+    assert len(result.evidence_spans) <= 12
+    assert sum(len(span.raw_text or "") for span in result.evidence_spans) <= 48000
+
+
+@pytest.mark.parametrize("text", (
+    "Our core values comprise customer service and research excellence.",
+    "Our business consists of research, development and manufacturing.",
+))
+def test_generic_composition_is_background_even_when_legacy_readability_admits_it(text):
+    fact = policy.detect_reading_business_fact(text)
+    assert fact.eligible
+    assert value(fact) == "description"
+
+
+@pytest.mark.parametrize("text", (
+    "Our products are supplied through distributors serving industrial customers.",
+    "Our products consist of pressure sensors and motor controllers.",
+))
+def test_concrete_product_structure_and_distribution_remain_valuable(text):
+    assert value(policy.detect_reading_business_fact(text)) == "meaningful_fact"
+
+
+@pytest.mark.timeout(5)
+def test_numeric_contract_prefixes_cannot_explode_on_unrelated_conversion_subject():
+    for width in (12, 28, 64, 128):
+        text = ("Our order backlog was $80 million, of which " + "1" * width +
+                " unrelated contracts where the customer will deliver a machine in FY2028.")
+        fact = policy.detect_reading_business_fact(text)
+        assert "contract_revenue_conversion" not in fact.topics
+
+
+@pytest.mark.parametrize("text", (
+    "Our remaining obligations were USD 17 million for restoration costs.",
+    "Our remaining obligations were $17 million for future employee payments.",
+))
+def test_remaining_financial_obligations_are_not_customer_contract_stock(text):
+    assert "operating_contract_stock" not in policy.detect_reading_business_fact(text).topics
