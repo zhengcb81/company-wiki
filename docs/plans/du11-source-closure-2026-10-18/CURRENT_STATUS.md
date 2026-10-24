@@ -1,18 +1,18 @@
 # 当前项目状态与接手入口
 
-**最新状态（2026-10-24，覆盖以下旧段）：** M5 找到并修复了 CWP→FF→RF 观测链的共同根因：CWP 在 `blocks_download` 时丢掉本地读取预算快照；FF 又未把 owner 诊断映射到既有 `filing-local-preparation-observation/1`。新回归证明 `local_read_budget/1` 的精确 phase/bound/counters 穿过现有层级，provider 未启动、网络/下载/模型调用均为零。独立历史期次回归还发现 source-group 二次发现遗漏 historical scope/已登记 metadata；已按原职责层补传，canonical scope 22 项通过。CWP源码提交 `0f64289e` 与PWF提交 `0acae348` 已正常推送；同一最终HEAD的合同、历史scope、跨仓E2E组合46项通过，Ruff、定向mypy、host-assumption guard及diff-check通过。FF commit `e0d96426445e4b93bc6cc7a6e6014996ad0a777d` 的远端CI [40115441655](https://github.com/zhengcb81/filing-fetch/actions/runs/40115441655) 成功（933 passed、7 skipped、78 subtests）；CWP精确CI [40116401110](https://github.com/zhengcb81/company-wiki/actions/runs/40116401110) 对应HEAD `0acae348484d661278faa62641ad426f2c8cf485`，completed/success。
+**最新状态（2026-10-24 20:10 UTC；唯一当前入口）：** W13/W14/W15均已ROOT接收；W13精确CI 40120507146对HEAD 83e49a6b completed/success。中微2026H1正式摘要已经通过RF离线真实消费v6：来源与artifact SHA精确匹配，112个EvidenceSpan、69个group/69个citation view闭合，0下载、0外部调用、隔离catalog清理成功。RF接口独审PASS，修复commit `c48f86bd` 已推送到main；RF focused 85P、pre-push 595P/1skip/36subtests、CWP narrative transport 54P。内容质量仍需审查：68条claim全为uncertain/needs_review。reading_context 195,794/196,608 bytes，仅余814 bytes（约0.4%），不扩大通用上限。完整收据见[CN-H1正式摘要与缓存恢复](review/market-family-upgrade-20261024/cn-h1-real-summary-recovery-20261024/report.md)。
 
-**当前唯一下一步：** M5发布与精确CI已完成，不重跑8k全量。按共享引擎和现有24-family/14-facet策略，从本地已有真实原件冻结跨市场/文种样本及SHA，再用配置中的provider完成正式原语言摘要、引用/限定审查、同源缓存复用及进程中断后的恢复；之后验证RF按原artifact/hash读取并完成四路审查，继续annual14和未用于调规则的新公司holdout循环。当前lake没有Snowflake公司原件，未重放原始S-1请求，所以旧事件触发哪一项本地bound仍OPEN；该边界不阻止对已有样本继续实施。
+**当前唯一下一步：** 完成本轮CWP代码与PWF提交/推送并查精确CI；随后用已存在微软FY2025 10-K原件（US年报，8,158,067 bytes，SHA `99d693f6…01d0bbe`）先做零费用预算/结果容量预检，再根据配置执行正式摘要、引用/限定、缓存恢复和RF消费。原件不得重下。业务内容审查、不同文种/市场总体验证、W12四审与holdout公司循环仍OPEN；不跑8k全量，不重复已完成的付费调用。
 
 **M3 验收范围：** 596 个受影响测试通过（30.43 秒），Ruff 与 `git diff --check` 通过；R5 独审绑定六份源码 SHA 和五份真实原件，11 项断言通过。MSFT指标定义/解释性从句不会冒充实际增长；真实增长和机械指引仍可读。五份回放范围、partial 状态和未验收项见 [M3 R5 报告](review/market-family-upgrade-20261024/m3-implementation-20261024/m3-independent-final/r5/report.md)。珀莱雅2026Q1原件共12页，视觉核对的第1、3、11页与逐页文本确认：这份季报基本是财务表、股东信息和附表；第3页确有经营现金流变动原因，未发现另有经营回顾/新品/渠道/出海段落。因此该文种应保留这条实质解释，其余常规财务数据继续由结构化API覆盖，不能把这一例推广成所有季报都可跳读。
 
 **跨市场策略进度：** M3的真实指标定义/解释性从句修复已通过R5独审；此前596项相关测试和Ruff通过，五份真实来源回放保持原件SHA。M4现以珀莱雅2026Q1为负控、中微公司2026Q1为正控完成真实离线回放：中微的8300+、300+、Angnova 140:1、Domingo 700:1及薄膜设备224.23%事实进入来源卡；珀莱雅仅保留现金流变动原因，法定补助模板没有变成业务卡。正控覆盖仍为partial，未闭合句和不明页边界继续暂缓。
 
-**本轮下一步：** M5已在 `0f64289e` 实施、`0acae348` 记录并推送，精确CI `40116401110` 对应最终HEAD成功。46项合同/历史scope/跨仓离线E2E已验收；原Snowflake S-1精确历史bound未重放（当前无该公司原件），不把机制验证误报为原事故已确诊。转入真实原件的正式摘要、引用/限定、缓存复用/恢复及RF消费与四审。M5本身没有模型调用、provider请求、下载或原件修改。
+**此前状态快照（已被上方真实摘要结果取代）：** M5发布/精确CI已完成，Snowflake原件缺失使旧S-1历史bound仍OPEN；当时正式摘要/cache/RF尚未开始。本轮已推进到中微H1单样本技术PASS，但内容审查、RF实际读取和跨市场/文种总体质量仍OPEN。
 
 ---
 
-**最新状态（2026-10-24）：** W13/W14/W15三卡已逐项完成ROOT接收，边界和证据见[三卡接收总记录](review/package-reception-w13-w15-20261024/README.md)。W13作者冻结版有缺陷；ROOT保留“受影响文件数≤32才运行，否则转CI”的快反馈边界，并提交精准标签、去重修复`67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c`，154项定向测试、18项独立探针、5项真实Git推送检查通过，尚待本次文档一并正常推送后观察精确CI。W14已进入RF主线`aa19b653da18566e582e802269f5908471c456db`，离线全门禁595通过；不代表真实公司分析/下载已验收。W15已进入Audit本地主线`37e12e6ff4674fa1989b2616cff3c31faa4d8cb0`，28项测试和真实移位回放通过；接收中另修复Windows换行差异导致的fixture SHA错误，该仓无remote。正式摘要、缓存中断恢复、RF实际读取和真实样本业务覆盖仍是主线待办。
+**最新状态（2026-10-24）：** W13/W14/W15三卡已逐项完成ROOT接收，边界和证据见[三卡接收总记录](review/package-reception-w13-w15-20261024/README.md)。W13作者冻结版有缺陷；ROOT保留“受影响文件数≤32才运行，否则转CI”的快反馈边界，并提交精准标签、去重修复`67439d0ac13ddf3e3b4fa4f8ef20cf1a4e87999c`，154项定向测试、18项独立探针、5项真实Git推送检查通过，本入口最新状态已记录W13精确CI 40120507146 completed/success。W14已进入RF主线`aa19b653da18566e582e802269f5908471c456db`，离线全门禁595通过；不代表真实公司分析/下载已验收。W15已进入Audit本地主线`37e12e6ff4674fa1989b2616cff3c31faa4d8cb0`，28项测试和真实移位回放通过；接收中另修复Windows换行差异导致的fixture SHA错误，该仓无remote。正式摘要、缓存中断恢复、RF实际读取和真实样本业务覆盖仍是主线待办。
 
 此前 M2 源码提交 `65cd8f58` 的首次 push 因 8315 项全量单测运行至 84% 后触发 600 秒总时限、146 项契约通过而未发布，这是历史失败记录。W13 已修复每次日常 push 隐式重跑全量的问题；当前实现让≤32目标走本地受影响测试，宽/动态/未知范围转CI。W13新的根提交和本状态文档推送后只检查绑定精确HEAD的CI，不重跑8千全量。M3真实样本只读调查发现指标定义/定义版本/机械重列指引、港股中报限定和scope观测真实或测量缺口；按共享owner根修已在M3/M4/M5推进，接下来转真实正式摘要/cache/RF，见[M3调查](review/market-family-upgrade-20261024/study/m3-discovery/report.md)。
 

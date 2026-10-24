@@ -811,6 +811,8 @@ def _selection_diagnostic_target(value: object, *, code: str) -> Mapping[str, An
     limit = _integer(item["limit"], "selection_diagnostic.target.limit",
                      positive=code != "character_budget")
     closure_size = _integer(item["closure_size"], "selection_diagnostic.target.closure_size", positive=True)
+    if used > limit:
+        raise NarrativeContractError("selection_diagnostic target used exceeds its limit")
     if used + requested <= limit:
         raise NarrativeContractError("selection_diagnostic target does not exceed its limit")
     if code == "group_exceeds_limit" and closure_size <= limit:

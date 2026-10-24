@@ -56,6 +56,96 @@ def read_rows(path: Path) -> list[dict]:
     )
 
 
+def pre_reservation_refusal(
+    *,
+    code,
+    receipt,
+    native_usage,
+    observer_path,
+    observer_env_path,
+    events_path,
+    mode,
+    source_sha256,
+    run_id,
+):
+    """Return a named no-payment refusal only when no paid path began."""
+    if code == 0 or receipt is None or native_usage or receipt.get("status") != "failed":
+        return None
+    try:
+        observed_path = Path(observer_path).resolve(strict=True)
+        configured_path = Path(observer_env_path).resolve(strict=True)
+        event_path = Path(events_path).resolve(strict=True)
+        observed = json.loads(observed_path.read_text(encoding="utf-8"))
+        if (
+            configured_path != observed_path
+            or observed.get("schema_version") != "phase-c-observer/1"
+            or observed.get("mode") != mode
+            or observed.get("source_sha256") != source_sha256
+            or Path(observed.get("events", "")).resolve() != event_path
+        ):
+            return None
+        events = read_rows(event_path)
+    except (OSError, TypeError, ValueError):
+        return None
+    budget = receipt.get("budget")
+    if not isinstance(budget, dict) or any(
+        isinstance(budget.get(field), bool)
+        or not isinstance(budget.get(field), int)
+        or budget.get(field) != 0
+        for field in (
+            "estimated_micro_usd",
+            "tokens",
+            "unknown_reservations",
+            "unsettled_reservations",
+        )
+    ):
+        return None
+    refusals = [
+        row for row in events
+        if row.get("event") == "pre_reservation_refused"
+        and row.get("run_id") == run_id
+        and row.get("reserved") is False
+        and isinstance(row.get("code"), str)
+    ]
+    posts = [
+        row for row in events
+        if row.get("event") == "http_post_attempt" and row.get("run_id") == run_id
+    ]
+    if len(refusals) != 1 or posts:
+        return None
+    refusal_code = refusals[0]["code"]
+    document_errors = {
+        error
+        for document in receipt.get("documents", ())
+        if isinstance(document, dict)
+        for error in document.get("errors", ())
+    }
+    if refusal_code not in document_errors:
+        return None
+    return {
+        "status": "PRE_RESERVATION_BLOCKED",
+        "code": refusal_code,
+        "reserved": False,
+        "post_attempts": 0,
+        "native_usage_rows": 0,
+    }
+
+
+def public_span_limits() -> dict[str, int]:
+    """Expose the exact limits used by the production document router."""
+    from company_wiki.source_catalog.narrative_routing import (
+        DEFAULT_SELECTION_LIMIT,
+        FINANCIAL_REPORT_SELECTION_LIMIT,
+        PROSPECTUS_SELECTION_LIMIT,
+    )
+
+    return {
+        "default": DEFAULT_SELECTION_LIMIT,
+        "financial_reports": FINANCIAL_REPORT_SELECTION_LIMIT,
+        "prospectus": PROSPECTUS_SELECTION_LIMIT,
+    }
+
+
 def mother_totals(metadata_path: str | Path, usage_path: str | Path, *,
                   budget_policy_path: str | Path | None = None) -> dict:
     from company_wiki.resource_budget import load_budget_policy
@@ -850,7 +940,7 @@ def run_pair(
             "0.8.0": "No internal 48000-char cap",
             "0.9.0": 48000,
         },
-        "public_span_cap": 96,
+        "public_span_limits": public_span_limits(),
         "activation_recovery_requested": activation_recovery,
         "model_settings": options,
         "capture_origin": "existing local bytes; descriptor URL does not prove remote or historical download SHA",
@@ -1043,6 +1133,22 @@ def run_pair(
                     state["actual_groups_separate_with_all_anchors_present"] = True
                 state["expected_refusal_zero_reservation_zero_POST"] = True
                 break
+            refusal = pre_reservation_refusal(
+                code=code,
+                receipt=receipt,
+                native_usage=native,
+                observer_path=observer,
+                observer_env_path=env.get("CWP_PHASE_C_OBSERVER"),
+                events_path=events,
+                mode=mode,
+                source_sha256=sha,
+                run_id=current_run,
+            )
+            if activation_recovery and refusal is not None:
+                state["activation_recovery"] = refusal
+                state["expected_refusal_zero_reservation_zero_POST"] = True
+                outcome["status"] = "PRE_RESERVATION_BLOCKED"
+                break
             if activation_recovery:
                 assert code == 2 and receipt is not None
                 assert receipt["documents"][0]["status"] == "activation_pending"
@@ -1165,7 +1271,7 @@ def run_pair(
             state.update(same_run_zero_POST=True, cross_run_zero_POST=True)
             observer_config["forbid_post"] = False
             write_json(observer, observer_config)
-        if not (missing_gold or split_groups):
+        if outcome.get("status") != "PRE_RESERVATION_BLOCKED" and not (missing_gold or split_groups):
             # Paired mode leaves the older baseline LATEST. Single mode keeps
             # the current Ref LATEST. Both consumers pin the exact saved 0.9 Ref.
             state, exact_request, previous_bundle = pinned_read
@@ -1243,7 +1349,8 @@ def run_pair(
                 for item in state["consumers"]:
                     if item.pop("historical_exact_ref_full_context_verified", False):
                         item["current_exact_ref_full_context_verified"] = True
-        outcome["status"] = "PASS"
+        if outcome.get("status") != "PRE_RESERVATION_BLOCKED":
+            outcome["status"] = "PASS"
     except Exception as exc:
         from tools.document_understanding_benchmark.phase_c_readonly_source import ReadonlySourceGap
 

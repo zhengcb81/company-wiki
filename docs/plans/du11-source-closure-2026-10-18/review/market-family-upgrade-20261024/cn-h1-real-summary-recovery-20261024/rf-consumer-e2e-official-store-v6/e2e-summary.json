@@ -1,0 +1,63 @@
+{
+  "schema_version": "cn-h1-offline-consumer-e2e/1",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "artifact_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+  "artifact_bytes": 532224,
+  "bundle_sha256": "843d1436a90861c35667c1463f8d7a943c47ffa61ecd530ff2aef639050c74c8",
+  "official_store_rehydration": {
+    "original_artifact_version_id": "narrative-d31b7e3096954b018fed351a92764be7",
+    "prepared_artifact_version_id": "narrative-da05377c101a4f5e8256664ef49a43f9",
+    "visible_artifact_version_id": "narrative-da05377c101a4f5e8256664ef49a43f9",
+    "artifact_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+    "byte_size": 532224,
+    "status": "visible"
+  },
+  "artifact_payload_exact_match": true,
+  "identity_snapshot": "byte_exact_existing_official_security_snapshot_no_refresh",
+  "mounted_source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "offline_network_disabled": true,
+  "provider_calls": 0,
+  "downloads": 0,
+  "reading_context_schema": "du-production-reading/3",
+  "reading_context_bytes": 195794,
+  "citation_attribution": "source_owned_views",
+  "citation_group_count": 69,
+  "citation_view_count": 69,
+  "exact_reading_context_match": true,
+  "consumers": [
+    {
+      "consumer": "filing-fetch",
+      "exit": 0,
+      "status": "source_candidate",
+      "downloads": 0,
+      "narrative_ref_matches_exact_artifact": null,
+      "source_ref_matches_exact_source": true,
+      "evidence_span_count": 0,
+      "summary_status": null,
+      "replay_status": null
+    },
+    {
+      "consumer": "RF-source+narrative",
+      "exit": 0,
+      "status": null,
+      "downloads": null,
+      "narrative_ref_matches_exact_artifact": true,
+      "source_ref_matches_exact_source": true,
+      "evidence_span_count": 0,
+      "summary_status": null,
+      "replay_status": null
+    },
+    {
+      "consumer": "RF-narrative",
+      "exit": 0,
+      "status": null,
+      "downloads": null,
+      "narrative_ref_matches_exact_artifact": true,
+      "source_ref_matches_exact_source": true,
+      "evidence_span_count": 112,
+      "summary_status": "completed",
+      "replay_status": "verified"
+    }
+  ],
+  "temporary_catalog_removed": true
+}

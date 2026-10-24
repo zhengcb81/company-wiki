@@ -884,3 +884,12 @@ CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110
 - W15：Audit本地main接收至ROOT修复提交`37e12e6ff4674fa1989b2616cff3c31faa4d8cb0`。集成回放发现固定SHA受到Windows CRLF/LF变化影响；`.gitattributes -text`和canonical SHA修复后28项通过，adoption replay complete、8 counterexamples、cleanup_verified；14个fixture SHA均匹配。Audit无remote，因此只记录本地提交，不称已推送；不相关预算脚本未动。
 
 三包本轮没有改原件、下载或调用外部模型。CWP W13仍需正常push并读精确CI；随后恢复正式摘要、缓存复用/中断恢复、RF实际读取、跨市场/文种真实内容与四路审查。工程施工包全部接收并未关闭整体PWF目标。
+
+
+## 2026-10-24 CN H1 RF接口联调、根修与W13-W15接收更新
+
+- W13/W14/W15均完成ROOT接收；W13精确CI `40120507146` 对HEAD `83e49a6b3a83a78726de9c7a40e4bdbc6baf52fc` success。
+- 中微2026H1冻结原件与artifact在官方store隔离catalog重建，RF v3上下文真实读取、citation adapter `source_owned_views`、69/69 groups/views、112 EvidenceSpan通过；v6 0下载/0 provider调用/临时catalog删除。沙箱曾拒绝`os.link`，相同测试改在本机权限运行后通过。
+- Independent review发现的v3裸诊断白名单、target used超限和schema非字符串根因在RF/CWP两端统一修复。RF commit `c48f86bd0d56f0a2be67a71348cf05d8544b6cdd`已推送并与`origin/main`一致；最终只读接口独审PASS。RF聚焦测试85P，Ruff/mypy/host guard通过，pre-push 595P/1skip/36subtests；CWP `test_narrative_reading_transport.py` 54P。
+- CN H1内容仍partial/needs_review，68 claims均uncertain/needs_review。context 195,794/196,608 bytes，只余814 bytes。下一候选微软FY2025 10-K原件SHA `99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe`、8,158,067 bytes，原件已在本地，下一步只做零费用预算/结果边界预检，不下载。
+- 本轮尚需提交/推送CWP producer检查、112财报选择上限、Phase C拒绝分类和PWF更新；整体W12内容质量审查与holdout循环保持OPEN。

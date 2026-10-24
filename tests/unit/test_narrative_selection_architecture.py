@@ -41,9 +41,9 @@ from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha2
 @pytest.mark.parametrize(
     ("title", "existing_kind", "expected_kind", "expected_limit", "expected_skip"),
     (
-        ("2025年度报告.pdf", "unknown", "annual_report", 96, False),
-        ("2026年半年度报告.pdf", "unknown", "semi_annual_report", 96, False),
-        ("2026年第一季度报告.pdf", "unknown", "quarterly_report", 96, False),
+        ("2025年度报告.pdf", "unknown", "annual_report", 112, False),
+        ("2026年半年度报告.pdf", "unknown", "semi_annual_report", 112, False),
+        ("2026年第一季度报告.pdf", "unknown", "quarterly_report", 112, False),
         ("首次公开发行招股说明书.pdf", "unknown", "prospectus", 160, False),
         (
             "向特定对象发行股票募集说明书.pdf",

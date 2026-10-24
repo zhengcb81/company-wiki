@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_FORMAL_SUMMARY_CACHE_RECOVERY_AND_RF_ACCEPTANCE",
+  "overall_status": "ACTIVE_NEXT_CROSS_MARKET_REAL_SAMPLE_AFTER_CN_H1_RF_INTERFACE_PASS",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -147,7 +147,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_M4_SPARSE_REPORT_NOISE_THEN_M5_US_IPO_PREACQUISITION_DIAGNOSTIC_AND_FORMAL_SUMMARY_CACHE_RF_FOUR_REVIEWS",
+      "status": "ACTIVE_NEXT_US_10K_SAMPLE; CN_H1_TECHNICAL_AND_RF_CONSUMER_PASS; CONTENT_QUALITY_AND_W12_HOLDOUT_LOOP_OPEN",
       "mainline": true
     },
     {
@@ -176,7 +176,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "M5本地预算观察从CWP owner→existing ensure contract→FF local preparation observation→RF已由离线跨仓E2E验收；同一最终CWP HEAD的三模块46P、Ruff、三文件mypy、host-assumption guard、diff-check通过。CWP源码0f64289e与PWF 0acae348已推送；CWP精确CI 40116401110对HEAD 0acae348484d661278faa62641ad426f2c8cf485 completed/success。FF commit e0d96426445e4b93bc6cc7a6e6014996ad0a777d已推送，精确CI 40115441655 success。旧Snowflake原件当前不在本地，历史触发bound未重放，仍OPEN；当前转入以本地已有真实原件为样本的正式摘要/引用/限定、缓存复用与进程中断恢复，再验RF消费与四路审查。",
+  "next_step_now": "W13/W14/W15均已ROOT接收；W13精确CI 40120507146 对HEAD 83e49a6b3a83a78726de9c7a40e4bdbc6baf52fc completed/success。中微CN H1正式摘要的RF真实只读消费v6通过；RF修复commit c48f86bd0d56f0a2be67a71348cf05d8544b6cdd已推送且与origin/main一致，RF focused 85P、pre-push 595P/1skip/36subtests；CWP narrative transport 54P。接口独审PASS，业务内容审查仍pending。下一步冻结现存微软FY2025 10-K（US年报，已有HTML原件8,158,067 bytes，SHA 99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe），先做零费用预算/输出容量预检，再按配置决定是否正式摘要、恢复/cache及RF消费；不得重新下载原件。",
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -231,7 +231,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T11:35:45.375613+00:00",
+  "last_updated_at": "2026-10-24T20:10:22+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -627,7 +627,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "按共享引擎对已冻结SHA的跨市场/文种真实原件做正式原语言摘要，验证引用/限定、相同来源缓存复用与进程中断恢复，然后验RF按原artifact/hash实际采用并完成四路审查",
+  "next_step_after_publication": "微软FY2025 10-K零费用预检先确认原件SHA、预算与1MiB正式结果边界；通过后用项目配置中的provider做一次正式原语言摘要，再验证source/artifact引用、业务gold、缓存复用与中断恢复、RF直接消费。内容未通过则从共用选择/上下文/提示根因修复，不靠放大通用上限。之后再扩展其他市场与文种，并完成内容审查、W12四审与holdout公司循环。",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -662,11 +662,12 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "正常提交推送五family策略组件及真实调查/独审；不将其代签全部业务召回",
-    "按remaining_root_causes.md先冻结语义正确的跨市场检查点，修匿名电话会/指标定义/局部依赖与降噪；USIPO本地准备计量精确诊断",
-    "正式摘要/cache与RF实际采用矩阵、四审、新公司循环"
+    "先完成本次CN H1接口收尾、PWF与主线提交/推送，并核对绑定提交的精确CI；W13/W14/W15接收已完成。",
+    "以微软FY2025 10-K既有原件（SHA 99d693f6…01d0bbe）作为US年报holdout候选，先做不调用provider的预算/容量预检；原件不下载。",
+    "预检通过后验证US年报的业务选择、摘要质量、引用限定、缓存恢复和RF消费；小样本不替代其他文种/市场。",
+    "完成跨市场/文种真实样本、内容审查、W12四审及目标公司循环；本样本技术通过不关闭整体目标。"
   ],
-  "last_updated_utc": "2026-10-24T13:28:42Z",
+  "last_updated_utc": "2026-10-24T20:10:22Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -984,11 +985,23 @@
     "status": "ROOT_ACCEPTED_ALL_THREE",
     "receipt": "review/package-reception-w13-w15-20261024/receipt.json",
     "report": "review/package-reception-w13-w15-20261024/README.md",
-    "W13": "ROOT_BOUNDED_ADAPTATION_COMMITTED_PENDING_PUSH_CI_67439d0a",
-    "W14": "FAST_FORWARD_PUSHED_REVENUE_FORECAST_MAIN_AA19B653",
+    "W13": "ROOT_BOUNDED_ADAPTATION_PUBLISHED_EXACT_CI_SUCCESS_67439D0A",
+    "W14": "RF_MAIN_PUSHED_AA19B653; LATER_SHARED_READING_INTERFACE_FIX_C48F86BD_PUSHED",
     "W15": "ROOT_LINE_ENDING_PORTABILITY_FIX_COMMITTED_LOCAL_NO_REMOTE_37E12E6F",
     "formal_summary_cache_recovery_and_real_company_rf_acceptance_complete": false,
     "downloads": 0,
-    "external_model_calls": 0
+    "external_model_calls": 0,
+    "W13_exact_ci": {
+      "id": 40120507146,
+      "head_sha": "83e49a6b3a83a78726de9c7a40e4bdbc6baf52fc",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40120507146"
+    },
+    "W14_followup_commit": "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd",
+    "W14_followup_push_head": "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd",
+    "cn_h1_rf_interface_e2e": "PASS_OFFLINE_V6",
+    "cn_h1_rf_interface_review": "PASS",
+    "cn_h1_business_content_review": "PENDING"
   }
 }

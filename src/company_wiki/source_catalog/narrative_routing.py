@@ -7,7 +7,11 @@ import re
 
 
 DEFAULT_SELECTION_LIMIT = 96
+FINANCIAL_REPORT_SELECTION_LIMIT = 112
 PROSPECTUS_SELECTION_LIMIT = 160
+_FINANCIAL_REPORT_KINDS = frozenset(
+    {"annual_report", "semi_annual_report", "quarterly_report"}
+)
 
 _DOCUMENT_KIND_PATTERNS = (
     (r"可转换公司债券|可转债", "convertible_bond_prospectus"),
@@ -62,6 +66,8 @@ def route_document(
         selection_limit = (
             PROSPECTUS_SELECTION_LIMIT
             if document_kind in _PROSPECTUS_KINDS
+            else FINANCIAL_REPORT_SELECTION_LIMIT
+            if document_kind in _FINANCIAL_REPORT_KINDS
             else DEFAULT_SELECTION_LIMIT
         )
     if selection_limit < 1:
@@ -76,6 +82,7 @@ def route_document(
 __all__ = [
     "DEFAULT_SELECTION_LIMIT",
     "DocumentRoute",
+    "FINANCIAL_REPORT_SELECTION_LIMIT",
     "PROSPECTUS_SELECTION_LIMIT",
     "classify_document_kind",
     "route_document",

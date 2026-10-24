@@ -1,0 +1,172 @@
+{
+  "schema_version": "cn-h1-real-summary-recovery/1",
+  "observed_at_utc": "2026-10-24T20:12:21Z",
+  "technical_status": "PASS",
+  "content_status": "NEEDS_INDEPENDENT_REVIEW",
+  "sample": {
+    "company": "中微公司",
+    "market": "CN",
+    "document_kind": "semi_annual_report",
+    "fiscal_year": 2026,
+    "period": "H1",
+    "language": "zh-CN",
+    "provider": "cninfo",
+    "source_ref_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "source_bytes": 3149962,
+    "gold_sha256": "10d1dc12e251e57354599c58abd55d5ee3d010259a8bf04415a73fb55cb2a335",
+    "reader_status": "active_source_opened_and_sha_verified",
+    "source_downloads": 0,
+    "source_original_unchanged": true
+  },
+  "selection": {
+    "default_span_limit": 96,
+    "financial_report_span_limit": 112,
+    "prospectus_span_limit": 160,
+    "attempted_limit_128": {
+      "result": "RESULT_TOO_LARGE",
+      "contract_limit_bytes": 1048576,
+      "provider_posts": 0,
+      "new_reservations": 0,
+      "reason": "selected production result exceeded existing one-megabyte result contract"
+    },
+    "accepted_limit_112": {
+      "selected_spans": 112,
+      "selected_characters": 8203,
+      "candidate_count": 1836,
+      "omitted_candidate_count": 1724,
+      "coverage_complete": false,
+      "required_gold_facts": 10,
+      "supported_gold_facts": 10,
+      "unsupported_ids": [],
+      "material_sha256": "22a4342f750b3e471c60f82ce1a48b7ef837abbd9af1af86382c5f0da287358f"
+    }
+  },
+  "summary": {
+    "provider_model": "mimo-v2.6-flash",
+    "requests": 1,
+    "run_id": "phaseC-090-908ca55cdfe8",
+    "attempt_id": "5ab6edea07ba42308e73dd6630898eb5",
+    "request_body_bytes": 69206,
+    "request_body_sha256": "a8b53c50e9d08629d0d877f86084059ee59feab3efd6ab9340206383b399ec3c",
+    "response_bytes": 4057,
+    "response_sha256": "95e5032256c38b0010eb102d160fe3643e9f75052d4d904614e8c442ba18126c",
+    "input_tokens": 16031,
+    "output_tokens": 1033,
+    "charged_tokens": 17064,
+    "estimated_micro_usd": 3017,
+    "reserved_micro_usd": 14287,
+    "cost_kind": "configured conservative budget proxy, not an invoice",
+    "summary_status": "completed",
+    "selection_status": "partial",
+    "quality_status": "needs_review",
+    "claim_count": 68,
+    "uncertain_claim_count": 68,
+    "claims_marked_needs_review": 68,
+    "artifact_version_id": "narrative-d31b7e3096954b018fed351a92764be7",
+    "artifact_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+    "artifact_bytes": 532224,
+    "compressed_replay_bundle_bytes": 116397,
+    "locator_count": 112,
+    "public_replay_status": "verified"
+  },
+  "recovery": {
+    "status": "PASS",
+    "held_status": "activation_pending",
+    "same_run_id": "phaseC-090-908ca55cdfe8",
+    "native_attempts_before_after": [
+      1,
+      1
+    ],
+    "charged_tokens_before_after": [
+      17064,
+      17064
+    ],
+    "charged_micro_usd_before_after": [
+      3017,
+      3017
+    ],
+    "post_attempts_before_after": [
+      1,
+      1
+    ],
+    "same_run_restart_zero_post": true,
+    "cross_run_cache_zero_post": true,
+    "cross_run_cache_tokens": 0
+  },
+  "safety_and_cleanup": {
+    "preflight_provider_posts": 0,
+    "preflight_budget_unchanged": true,
+    "final_protected_inputs_unchanged": true,
+    "temporary_lake_removed": true,
+    "mother_budget_before": {
+      "charged_tokens": 1561352,
+      "charged_micro_usd": 631959,
+      "new_unknown_count": 4,
+      "prior_unknown_hold_count": 7
+    },
+    "mother_budget_after": {
+      "charged_tokens": 1578416,
+      "charged_micro_usd": 634976,
+      "new_unknown_count": 4,
+      "prior_unknown_hold_count": 7
+    },
+    "remaining_tokens": 8421584,
+    "remaining_micro_usd": 19365024,
+    "rf_consumer_run": "PASS_OFFLINE_E2E_V6",
+    "independent_review": "CONTENT_REVIEW_PENDING",
+    "interface_independent_review": "PASS"
+  },
+  "focused_validation": {
+    "selection_and_refusal_tests": "44 passed",
+    "loopback_activation_recovery": "2 passed in 97.20s",
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "full_suite": "not run",
+    "RF_shared_reading_contract_and_citation_tests": "85 passed",
+    "CWP_narrative_reading_transport_tests": "54 passed",
+    "RF_pre_push": "ruff+mypy+host_guard passed; 595 passed, 1 skipped, 36 subtests passed"
+  },
+  "local_evidence": {
+    "preflight": ".planning/shared-reading-production/du11/live-cn-h1-mimo-v6-preflight-112-root-20261024/",
+    "result_too_large_probe": ".planning/shared-reading-production/du11/live-cn-h1-mimo-v6-root-20261024/",
+    "live_run": ".planning/shared-reading-production/du11/live-cn-h1-mimo-v7-root-20261024/",
+    "preflight_script": ".planning/shared-reading-production/du11/preflight_cn_h1_112.py",
+    "rf_consumer_e2e": "review/market-family-upgrade-20261024/cn-h1-real-summary-recovery-20261024/rf-consumer-e2e-official-store-v6/e2e-summary.json"
+  },
+  "limitations": [
+    "One CN H1 sample does not validate other markets or document kinds.",
+    "Gold support in the selected package does not establish that every gold fact appears accurately in the generated summary.",
+    "68 claims are extractive and marked uncertain/needs_review; content acceptance awaits independent review.",
+    "The artifact storage footprint is 532224 bytes for this source; corpus-wide space effects remain unmeasured.",
+    "The RF E2E proves source/artifact interface and citation transport, not analyst-level business-summary correctness; content review remains pending.",
+    "The real reading_context is 195,794 of 196,608 bytes, leaving 814 bytes (about 0.4%); larger valid artifacts may hit the existing bound.",
+    "CN H1 is currently the only real proof-bearing/schema-v3 sample; proof structure also has synthetic contract coverage."
+  ],
+  "rf_consumer": {
+    "status": "PASS_OFFLINE_E2E",
+    "summary_path": "rf-consumer-e2e-official-store-v6/e2e-summary.json",
+    "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "artifact_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+    "reading_context_schema": "du-production-reading/3",
+    "reading_context_bytes": 195794,
+    "reading_context_limit_bytes": 196608,
+    "remaining_bytes": 814,
+    "evidence_span_count": 112,
+    "citation_group_count": 69,
+    "citation_view_count": 69,
+    "attribution": "source_owned_views",
+    "filing_fetch_downloads": 0,
+    "rf_downloads": 0,
+    "provider_calls": 0,
+    "summary_status": "completed",
+    "replay_status": "verified",
+    "temporary_catalog_removed": true,
+    "exact_reading_context_match": true
+  },
+  "interface_independent_review": {
+    "status": "PASS",
+    "review": "rf-interface-independent-review-20261024.md",
+    "reviewed_rf_commit": "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd",
+    "business_content_review": "PENDING"
+  }
+}

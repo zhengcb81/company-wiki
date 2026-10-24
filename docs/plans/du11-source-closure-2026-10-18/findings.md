@@ -691,3 +691,10 @@ M4定向连续性和几何136P，当前M3/M4组合346P；Ruff、diff-check通过
 另一项旧期次回归来自_discover_source_groups二次发现重新判定period scope，却未传同一个HistoricalCaptureScopes也未带已登记metadata_json。可信的历史commit记录因此被当成未知来源，导致会打开旧原件。现在二次发现复用请求journal并恢复已登记metadata，保护旧期排除。完整合同/历史scope/CWP→FF→RF离线E2E 46项通过；Ruff、3源文件mypy、host guard（68既有/0新增）、diff-check通过。源码commit 0f64289e已正常提交。
 
 FF第一轮push gate的6个失败后来确认为夹具把请求总预算3秒用在身份识别后还期待ensure启动，另把Windows进程probe自身启动放入1秒预算。只调大相应合成测试预算，没有改生产deadline行为；8个独立失败用例通过、完整pre-push 933 passed/7 skipped/78 subtests，FF精确CI 40115441655 success。无真实provider请求、下载、模型调用、Dayu代码改动。当前公司池无Snowflake原件，故旧S-1历史事件的具体触发bound仍OPEN，不能宣称已重放/确诊；观测链修复本身已验证。详见review/market-family-upgrade-20261024/m5-local-budget-observation-20261024/report.md。
+
+
+## 2026-10-24 CN H1 RF真实消费接口根因
+
+CWP生产导出的正式上下文已升至`du-production-reading/3`并带selection trace与组证明，而RF消费校验器只支持v1/v2；因此即使来源与产物SHA正确，真实RF reader仍拒绝接口。RF扩大兼容后，validator还允许未知v3裸诊断码和`target.used > target.limit`的伪诊断；生产端target构造保证used不超限，但两端契约没有都表达此不变量。修复已在RF commit `c48f86bd0d56f0a2be67a71348cf05d8544b6cdd`和当前CWP工作树中补齐，两端都验证限额关系，v3裸码采用CWP allowlist，非字符串schema安全拒绝。
+
+真实E2E v6证明FF复用与RF source+narrative/direct reader消费通过，provider 0、download 0、exact hashes、引用闭合。context 195,794/196,608 bytes仅余814 bytes，需持续观察；不要为单样本扩大通用1MiB结果或192KiB上下文合同。真实v3样本目前仅CN H1，业务质量及其他文种/市场尚未验收。

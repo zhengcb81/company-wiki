@@ -859,6 +859,25 @@ def test_select_result_rejects_diagnostics_split_across_two_public_fields():
         NarrativeSelectResult.from_dict(wire)
 
 
+@pytest.mark.parametrize(("code", "limit", "closure_size"), [
+    ("budget_full", 112, 1),
+    ("character_budget", 105, 1),
+    ("group_exceeds_limit", 112, 113),
+])
+def test_selection_diagnostic_target_rejects_used_above_limit(code, limit, closure_size):
+    from company_wiki.automation.narrative_contracts import _selection_diagnostic_target
+
+    target = {
+        "item_id": "urn:company-wiki:narrative-unit:sha256:" + "a" * 64,
+        "item_ids": [], "item_count": 1, "item_ids_limited": True,
+        "group_id": None, "locator": "loc:v1/page:1",
+        "used": limit + 1, "requested": 1, "limit": limit,
+        "closure_size": closure_size,
+    }
+    with pytest.raises(NarrativeContractError, match="used exceeds its limit"):
+        _selection_diagnostic_target(target, code=code)
+
+
 def test_select_result_reader_keeps_previous_minor_schema_compatible():
     wire = selection(3).to_dict()
     assert wire["schema_version"] == "narrative-select-result/2.0"
