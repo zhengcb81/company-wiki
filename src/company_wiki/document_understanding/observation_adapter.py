@@ -27,9 +27,9 @@ from company_wiki.document_normalization.table_shapes import has_tabular_value_t
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/4"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/5"
 
-_READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "page_width", "page_height", "coordinate_frame", "rotation",
+_READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "column", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
 _FINE_LAYOUT_FIELDS = frozenset({"text", "bbox", "native_index", "char_start", "char_end", "char_start_supplied", "char_end_supplied",
                                "char_alignment", "page", "coordinate_frame", "row", "column", "table_id", "font_size", "font_weight", "font",

@@ -17,6 +17,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from ..layout_hints.contract import WorkBudget, WorkBudgetExceeded
+from ..narrative_continuity import NativeSourceContext
 from ._work import WorkPlan, reserve
 
 from .contract import (
@@ -51,10 +52,11 @@ def build_structure(
     *,
     limits: Mapping[str, Any] | None = None,
     work_budget: WorkBudget | None = None,
+    native_context: NativeSourceContext | None = None,
 ) -> dict:
     """Return the ``du-structure/1`` view of one ``du-input/1`` observation."""
     if work_budget is None:
-        return _build_structure(observation, limits=limits)
+        return _build_structure(observation, limits=limits, native_context=native_context)
     # Limits remain the old positive input contract, independent of remaining
     # shared work. Validate only this constant-size envelope before charging.
     resolve_limits(limits)
@@ -83,7 +85,8 @@ def build_structure(
     try:
         work_budget.charge()
         return _build_structure(
-            observation, limits=limits, work_budget=work_budget, state=state
+            observation, limits=limits, work_budget=work_budget, state=state,
+            native_context=native_context
         )
     except WorkBudgetExceeded:
         return _partial_structure(observation, state, work_budget)
@@ -137,7 +140,7 @@ def _partial_structure(observation, state, budget):
     }
 
 
-def _build_structure(observation, *, limits=None, work_budget=None, state=None):
+def _build_structure(observation, *, limits=None, work_budget=None, state=None, native_context=None):
     resolved = resolve_limits(limits)
     work = WorkPlan(work_budget) if work_budget is not None else None
     envelope, units = parse_observation(observation, work=work)
@@ -193,7 +196,7 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None):
 
     if work is not None:
         work.stage(passes=4, sorts=1)  # section membership, roles and layout checks
-    section_build = build_sections(units, ordering, limits=resolved)
+    section_build = build_sections(units, ordering, limits=resolved, native_context=native_context)
     if state is not None:
         state["sections"] = [
             _section_wire(section) for section in section_build.sections
@@ -357,6 +360,32 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None):
     )
 
     diagnostics.extend(_coverage_diagnostics(envelope, coverage, units))
+
+    for semantic in semantic_units:
+        members = semantic.get("member_unit_ids", ())
+        reserve(work_budget, 1 + len(members))
+        context_by_unit: dict[str, list[str]] = {}
+        source_by_unit: dict[str, list[str]] = {}
+        proofs_by_unit: dict[str, list[dict[str, Any]]] = {}
+        for uid in members:
+            required = section_build.required_context_by_unit_id.get(uid, ())
+            source_required = section_build.required_source_by_unit_id.get(uid, ())
+            proofs = section_build.source_proofs_by_unit_id.get(uid, ())
+            reserve(work_budget, len(required) + len(source_required)
+                    + sum(1 + len(proof) + len(proof["furniture_unit_ids"]) for proof in proofs))
+            if required:
+                context_by_unit[uid] = list(required)
+            if source_required:
+                source_by_unit[uid] = list(source_required)
+            if proofs:
+                proofs_by_unit[uid] = [dict(proof, furniture_unit_ids=list(proof["furniture_unit_ids"]))
+                                      for proof in proofs]
+        if context_by_unit:
+            semantic["required_context_by_unit_id"] = context_by_unit
+        if source_by_unit:
+            semantic["required_source_unit_ids_by_unit_id"] = source_by_unit
+        if proofs_by_unit:
+            semantic["native_source_proofs_by_unit_id"] = proofs_by_unit
 
     return {
         "schema_version": SCHEMA_VERSION,

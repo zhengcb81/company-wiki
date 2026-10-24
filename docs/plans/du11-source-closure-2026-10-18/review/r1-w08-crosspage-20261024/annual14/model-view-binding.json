@@ -1,0 +1,2326 @@
+{
+  "schema_version": "w08-offline-actual-model-view-binding/1",
+  "created_at": "2026-10-24T01:03:10.617187+00:00",
+  "selection_sha256": "17c1f79ac72208fc74975c4488aaf14cd14e17b66999b219ae9045d01cec5fb9",
+  "execution_sha256": "69a13ee56af0bac68a2aca65d9c355a44cfcd5f84a4c32c8f8cc371a1f05763d",
+  "compile_sources": {
+    "src/company_wiki/source_contract/evidence_span.py": "8ee05d0aa195f1365d035d38e8b3f7dd4406d7578c402062de4ebf5332565239",
+    "src/company_wiki/document_understanding/summary_tasks.py": "8434c701b0cdf248efe59423811c1bfad0e1c192c57bab2986d54443f51a53c5",
+    "src/company_wiki/automation/narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+    "src/company_wiki/automation/models.py": "1b572cecca521c02ff39c896ba879a4445a961220263523b2cafd07bcbf42588"
+  },
+  "compile_sources_match_execution": true,
+  "model_view_binding_sha256": "2e13fff5b10576138a00a4f942b0c0a17c60f06f1f1a1805d25233560577d81a",
+  "binding": {
+    "schema_version": "source-scoped-model-view/1",
+    "source_plan": {
+      "schema_version": "source-summary-task-plan/1",
+      "evidence_order": [
+        "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+        "urn:company-wiki:evidence-span:sha256:e5718678e67665c40151cb02bf2803bb303f695b49035f35da575f6fc2fa2a41",
+        "urn:company-wiki:evidence-span:sha256:37e17ea94a890d835e07fc97f4dadf4f0716ff25945d8caac574d8f80ae6de19",
+        "urn:company-wiki:evidence-span:sha256:fd82a0195c2311b5ae123ac63d3b4ffc25a9e45a4202fe5a907074825e564d06",
+        "urn:company-wiki:evidence-span:sha256:d3064eb392012a6512ff824316df16eb9190fe9f846787ec9f0dbdd55641e70d",
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+        "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96",
+        "urn:company-wiki:evidence-span:sha256:7bdcc7fc57e76cb536e015c6b11d9c60dac1a1864b2f7115b8495435f3d76fe8",
+        "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782",
+        "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8",
+        "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554",
+        "urn:company-wiki:evidence-span:sha256:ef2ab7d11dd618daddc72c261d1be24323b531905ef0371ac83083c1a6f89c76",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414",
+        "urn:company-wiki:evidence-span:sha256:4ce1e53d0c504068c8dddf682947c44f88c1480af11e218a7dae9da4ea1ad014",
+        "urn:company-wiki:evidence-span:sha256:c967954f015faabf3de1c3b93cb9c4c0167ff6383347d557330fcafad95ddcd0",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:78afc2efb6d8a41ef418395fdbc985c9512cb40f0d3f4a40039981cc02da2e25",
+        "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b",
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0",
+        "urn:company-wiki:evidence-span:sha256:f4da2f0aa20d6078e97d680d155e8f314a048d90abd77aaca43e430d07c68c0e",
+        "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc",
+        "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:3a0f549d1c25fc9a48e6eca3521e0972f95b3a52c9f9ee22ee01534ea1fd1851",
+        "urn:company-wiki:evidence-span:sha256:8540aaeba8c5a8b6644440f7892b296698d1ba2b8efebd9fa793d113a5457f35",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10",
+        "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be",
+        "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381",
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4",
+        "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+        "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f",
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+        "urn:company-wiki:evidence-span:sha256:72b79a4244bd935c1dec46a01b51aa09b8e48022b13f16c64611a4ec244b6b16",
+        "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "urn:company-wiki:evidence-span:sha256:ba6f559cf5bad0a23ee74d6d1d59cfde2738d704931468627ad0bb944184890c",
+        "urn:company-wiki:evidence-span:sha256:adde61ab924471b64ae128a97a0da9d65c7e13a67458134605dbd6807a622699",
+        "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24",
+        "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6",
+        "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+        "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0",
+        "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0",
+        "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108",
+        "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+        "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59",
+        "urn:company-wiki:evidence-span:sha256:79f92e24c106e9336f9be4ab27f4095bddb0b5a994019baa625adadc377c8e66",
+        "urn:company-wiki:evidence-span:sha256:88323458a67450d325d35790ed115b3401437b3abb9e10c63e127cf446c5ddb0",
+        "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+        "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7",
+        "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699",
+        "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+        "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13",
+        "urn:company-wiki:evidence-span:sha256:e48ca10f12ff1d24593de41b6f1e8dc9203302a75862a84380dfffc37306fa27",
+        "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2",
+        "urn:company-wiki:evidence-span:sha256:a81e0e315a76d738c0a0e87bb3105adcfff45544107a873304de675f37fc966f",
+        "urn:company-wiki:evidence-span:sha256:333225249dceb12b811a91c7d96c5812863f6fc8374482b17496a4397f86bfa1",
+        "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb",
+        "urn:company-wiki:evidence-span:sha256:1f569b89f5a356628492832afb96cd53c491e55a94029b75108df65c09d6719a",
+        "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f",
+        "urn:company-wiki:evidence-span:sha256:5aa3f84ef41faa607dbec373979c380631c99137432199139c2c23f9d45530a5",
+        "urn:company-wiki:evidence-span:sha256:6836afdbfe8942182ac344cc0fe11c083711ea80270f74792ff7fc33032b457c",
+        "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+        "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8",
+        "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+        "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d",
+        "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+        "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946",
+        "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+        "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1",
+        "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+        "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+        "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5",
+        "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762",
+        "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d",
+        "urn:company-wiki:evidence-span:sha256:98c35d0bb49a86cae4110ca85b945e3e506039496883bc8648e57b68e250315e",
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:45e430a0274058f8ba79d022e1628b76a58b30f99a868dafed7861d8525197de",
+        "urn:company-wiki:evidence-span:sha256:0ec7f166ebb522b14465aee857f6e29b33ae766b7cdcf67734620c640dad3850",
+        "urn:company-wiki:evidence-span:sha256:27726efaa25dd0ab2e6d5d5736bfaccc02c35131bd95c34929cf3efc9d62b8c0",
+        "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640",
+        "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9",
+        "urn:company-wiki:evidence-span:sha256:b44cd2a69650dc8b29468ccd5a1fcbcf64b651e6ad302d574b5d55af9187ba39",
+        "urn:company-wiki:evidence-span:sha256:4e2ee2a0582ce22a81e33f450e2052796f152fc303ebc24b69c6ee24842976b5",
+        "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+        "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+        "urn:company-wiki:evidence-span:sha256:e51779fe3ce75f1fb8d2d5f68ec68f8137f1726c676cae62dc0a442347927432",
+        "urn:company-wiki:evidence-span:sha256:bcc3dcf91cdfc363cac2164ca627a2122350cef2d9729dae53a7c82df1f16958"
+      ],
+      "max_claims": 20,
+      "tasks": [
+        {
+          "key": "t1",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:85a310b81751f68ab40abe7a7f6ea3ef9e85472303d72853112f5f131e88eefb",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+            "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "management_discussion",
+          "topics": [
+            "operating_causal_driver",
+            "operating_metric_change",
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_causal_driver",
+            "operating_metric_change",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t2",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:666024fdbc97639df7b71d39baa85ad0f606942e216f9e71646b0931f4b0c7e8",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+            "urn:company-wiki:evidence-span:sha256:ba6f559cf5bad0a23ee74d6d1d59cfde2738d704931468627ad0bb944184890c"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:ba6f559cf5bad0a23ee74d6d1d59cfde2738d704931468627ad0bb944184890c"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t3",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:e7bf93785b9992222af0039ebbb76143ab83f5abdcc87df576437879e41a177b",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+            "urn:company-wiki:evidence-span:sha256:adde61ab924471b64ae128a97a0da9d65c7e13a67458134605dbd6807a622699"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:adde61ab924471b64ae128a97a0da9d65c7e13a67458134605dbd6807a622699"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t4",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:9c3d019fd94608bcaea53898d2ebba477259519379e88dbbad3cc076050d7868",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+            "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59",
+            "urn:company-wiki:evidence-span:sha256:79f92e24c106e9336f9be4ab27f4095bddb0b5a994019baa625adadc377c8e66"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:79f92e24c106e9336f9be4ab27f4095bddb0b5a994019baa625adadc377c8e66"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+            "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "operating_metric_change",
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t5",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:2ed375e484062c65b3ca0a5c88e1ad82f710a28df4cfc9f8b26dcad4b070ca74",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2",
+            "urn:company-wiki:evidence-span:sha256:333225249dceb12b811a91c7d96c5812863f6fc8374482b17496a4397f86bfa1"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:333225249dceb12b811a91c7d96c5812863f6fc8374482b17496a4397f86bfa1"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t6",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:3f2e8d5a2a5f492095236052e4a80445233086e7e9961f99e9504783d6c2ef3d",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f",
+            "urn:company-wiki:evidence-span:sha256:5aa3f84ef41faa607dbec373979c380631c99137432199139c2c23f9d45530a5"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:5aa3f84ef41faa607dbec373979c380631c99137432199139c2c23f9d45530a5"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "core_business",
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t7",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:e1ea66b5d78aaf166518092979aa886e91c85960ec6fa0eb37f81d8b29e731dd",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f",
+            "urn:company-wiki:evidence-span:sha256:6836afdbfe8942182ac344cc0fe11c083711ea80270f74792ff7fc33032b457c"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:6836afdbfe8942182ac344cc0fe11c083711ea80270f74792ff7fc33032b457c"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f"
+          ],
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t8",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:56e7cbb68e07c06a86f01ad6ee032c76490c9f13284d5e040ca733d27e704d96",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+            "urn:company-wiki:evidence-span:sha256:fd82a0195c2311b5ae123ac63d3b4ffc25a9e45a4202fe5a907074825e564d06",
+            "urn:company-wiki:evidence-span:sha256:d3064eb392012a6512ff824316df16eb9190fe9f846787ec9f0dbdd55641e70d"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:d3064eb392012a6512ff824316df16eb9190fe9f846787ec9f0dbdd55641e70d"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+            "urn:company-wiki:evidence-span:sha256:fd82a0195c2311b5ae123ac63d3b4ffc25a9e45a4202fe5a907074825e564d06"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "unknown",
+          "topics": [
+            "operating_metric_change",
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t9",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:80cc28f34cd42e05b2da27aecb938a99456505193739fdcecfdb36a37a95329a",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782",
+            "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "industry",
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "current_industry_context"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t10",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:9513e032d0e75c207a2f94ea221fac09be0844b5c671ae3c071b4aa26cf50f81",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:3a0f549d1c25fc9a48e6eca3521e0972f95b3a52c9f9ee22ee01534ea1fd1851"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:3a0f549d1c25fc9a48e6eca3521e0972f95b3a52c9f9ee22ee01534ea1fd1851"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown",
+            "operating_restriction",
+            "operating_current_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t11",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:697415e2d43533a39708b611cd6a875fed233a5bd260956273e555b78074216c",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:8540aaeba8c5a8b6644440f7892b296698d1ba2b8efebd9fa793d113a5457f35"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:8540aaeba8c5a8b6644440f7892b296698d1ba2b8efebd9fa793d113a5457f35"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "operating_metric_change",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t12",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:b19d77dbf4007e2a42a83f35a7a2842542e9e62117d2194ac9141e2c96a9b0c9",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+          ],
+          "context_ids": [],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_revenue_measure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t13",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:00e483ba4078b2beb4e446c32613bdf3f8b1120740e112bfae8e0cbe19aeeee1",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t14",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:cfd72aa1f95acbbbeb1d00af193a4e65faa1fe028def04b028ed038773b28eb5",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06"
+          ],
+          "context_ids": [],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_revenue_measure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t15",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:b294b28ade1d5485a2a4e7990e34ed50b0cff8cff930aba8aad999c01b96e40d",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+            "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+          ],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t16",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:2e81fe2e60da2515ed930ba0279a3899be32168a550aa1ef3538a6bbb8c17b88",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80"
+          ],
+          "context_ids": [],
+          "kind": "paragraph_event",
+          "section_role": "operating_metrics",
+          "topics": [
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_revenue_measure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t17",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:e54e3d68b7344f486954b4a6af105143f19a4552220131bbf718a2e48f4bdb5f",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+            "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+            "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec"
+          ],
+          "kind": "background",
+          "section_role": "operating_metrics",
+          "topics": [
+            "core_business",
+            "operating_metric_change",
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "quantified_operating_status",
+            "operating_metric_change",
+            "business_revenue_measure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t18",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:6d876aafd04c9b8c0c29b8d77abefe5bd55e8eae79793b5952ccd294ad695c8d",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640",
+            "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640"
+          ],
+          "kind": "background",
+          "section_role": "financial_notes",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_plan"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t19",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:84c2eedc80b8284442418213042214070ef5fb81245ca769069bbb45cc56b88c",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b44cd2a69650dc8b29468ccd5a1fcbcf64b651e6ad302d574b5d55af9187ba39",
+            "urn:company-wiki:evidence-span:sha256:4e2ee2a0582ce22a81e33f450e2052796f152fc303ebc24b69c6ee24842976b5"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:4e2ee2a0582ce22a81e33f450e2052796f152fc303ebc24b69c6ee24842976b5"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:b44cd2a69650dc8b29468ccd5a1fcbcf64b651e6ad302d574b5d55af9187ba39"
+          ],
+          "kind": "background",
+          "section_role": "financial_notes",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown",
+            "operating_restriction",
+            "operating_current_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t20",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:79df7545ff30b23d56a99550fb1f32e153b329d79517a5560aaafbcf763ecfb5",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+            "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+            "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5",
+            "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+            "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+            "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5"
+          ],
+          "kind": "background",
+          "section_role": "administrative",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_plan"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t21",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:678a078a6f4499cf71b7cd22129187ad522a3fa6960a4d88705b8d5f5d771d0e",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+            "urn:company-wiki:evidence-span:sha256:e5718678e67665c40151cb02bf2803bb303f695b49035f35da575f6fc2fa2a41",
+            "urn:company-wiki:evidence-span:sha256:37e17ea94a890d835e07fc97f4dadf4f0716ff25945d8caac574d8f80ae6de19"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:37e17ea94a890d835e07fc97f4dadf4f0716ff25945d8caac574d8f80ae6de19"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+            "urn:company-wiki:evidence-span:sha256:e5718678e67665c40151cb02bf2803bb303f695b49035f35da575f6fc2fa2a41"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_metric_change",
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t22",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:7adcb60d3806185259a501bbb21426092da0ead9052dee9bfac056d11f6bb65e",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+            "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t23",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:d03dcc0c7c1d65eb225f18678b4f91fc6fda61607c5642a81189e155c744b674",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+            "urn:company-wiki:evidence-span:sha256:7bdcc7fc57e76cb536e015c6b11d9c60dac1a1864b2f7115b8495435f3d76fe8"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:7bdcc7fc57e76cb536e015c6b11d9c60dac1a1864b2f7115b8495435f3d76fe8"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t24",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:16f54d002454b350a0a384ee04b5e40b04bd34ff6819cf783fead534b66bc684",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554",
+            "urn:company-wiki:evidence-span:sha256:ef2ab7d11dd618daddc72c261d1be24323b531905ef0371ac83083c1a6f89c76"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:ef2ab7d11dd618daddc72c261d1be24323b531905ef0371ac83083c1a6f89c76"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "quantified_operating_status",
+            "business_revenue_measure",
+            "operating_current_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t25",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:bbcfb6e44400cb6b4a4d9f71e1a2c33455de58b81b31225895e620eaf15b3f0a",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414",
+            "urn:company-wiki:evidence-span:sha256:4ce1e53d0c504068c8dddf682947c44f88c1480af11e218a7dae9da4ea1ad014"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:4ce1e53d0c504068c8dddf682947c44f88c1480af11e218a7dae9da4ea1ad014"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t26",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:cadd903ad20c3969f8577a035a25009a60fe79f7e99db80c873b224cbbc47a1b",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414",
+            "urn:company-wiki:evidence-span:sha256:c967954f015faabf3de1c3b93cb9c4c0167ff6383347d557330fcafad95ddcd0"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:c967954f015faabf3de1c3b93cb9c4c0167ff6383347d557330fcafad95ddcd0"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_metric_change",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t27",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:7eb0e997571430f76d54bcb3055080a55be3ec1fdb9f16f2192938012a92009d",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:78afc2efb6d8a41ef418395fdbc985c9512cb40f0d3f4a40039981cc02da2e25"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:78afc2efb6d8a41ef418395fdbc985c9512cb40f0d3f4a40039981cc02da2e25"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t28",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:2e9df33bd9d6e57c999c83d6ec7ceec0cd1f449bd683d6217d032317c06de39a",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_quantity"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_quantity"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t29",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:50a2f2cc59e06871f1f3e2df2a9199680f53a7bd59d0e5f78345b785aae3f245",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_quantity"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_quantity"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t30",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:6498a1dbc126d97cf5866f8f2fd70a02ae969d7b014817d8e728b7c706e0828a",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+            "urn:company-wiki:evidence-span:sha256:f4da2f0aa20d6078e97d680d155e8f314a048d90abd77aaca43e430d07c68c0e"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:f4da2f0aa20d6078e97d680d155e8f314a048d90abd77aaca43e430d07c68c0e"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t31",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:07a6673431e596964d51cf724009459c063e200bd226937d7693c7f51370805e",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc",
+            "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+            "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "business_coverage_relation"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_coverage_relation"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t32",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:63df927aec61821ceec0d0525b584b25ae6b1902de3bf198bfb7867cbf87e644",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_revenue_measure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t33",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:abc48c85bc4fb8584c3d9fb8bbd9bd4c773db3956a572c0cd053d3df1c17055b",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "business_revenue_measure",
+            "operating_metric_change",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "quantified_operating_status",
+            "business_revenue_measure",
+            "operating_metric_change",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t34",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:b6e1a11260ac76f4e4a234b5a0f00529539b354f82dd41d206113fdaf6be0b0b",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_quantity"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_quantity"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t35",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:d4c8c0b8d635742c9f01c7fca34e8e7ccf6b0d3413f2d3a87a33f7a0e8e5a752",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+            "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+            "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "business_revenue_measure"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_revenue_measure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t36",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:16a2d482d27e460e4b0f0e1ee4c783f1efbb5548ef024c72595743725f4389a0",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+            "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "source_revenue_guidance",
+            "operating_metric_change",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "source_revenue_guidance",
+            "operating_metric_change",
+            "operating_current_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t37",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:64af8570e51336f61049af081ace1213f7fb9d0a29d317525b4fd75295c2e426",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+            "urn:company-wiki:evidence-span:sha256:72b79a4244bd935c1dec46a01b51aa09b8e48022b13f16c64611a4ec244b6b16"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:72b79a4244bd935c1dec46a01b51aa09b8e48022b13f16c64611a4ec244b6b16"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "business_revenue_measure",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_revenue_measure",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t38",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:e491138375ec6867b5a9a79786f7e37b0fa19444cb64d3da084155dea7552a86",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+            "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t39",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:68e8064e748ec9c76ccefcfa48d6695aadc1466085a71406296269a6a8932e53",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+            "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_causal_driver",
+            "operating_metric_change",
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_causal_driver",
+            "operating_metric_change",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t40",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:f82eb7ecdc4baa7276c27ba739a31d13ac59be7fee64190cd065d66acc926cab",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+            "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t41",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:bf6f9d2e11c56761266fa92c2c06d4baf8a96cc61a15aaac64373acda3a0db48",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0",
+            "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t42",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:850074ceffcd39481be321d84d92a4b38e75dd316206276c51bb285007fd93c0",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+            "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59",
+            "urn:company-wiki:evidence-span:sha256:88323458a67450d325d35790ed115b3401437b3abb9e10c63e127cf446c5ddb0"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:88323458a67450d325d35790ed115b3401437b3abb9e10c63e127cf446c5ddb0"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+            "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t43",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:7b36199deaab5bc31f000c09b26e2d779e9ef1913cce4b901a41773867de4578",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+            "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7",
+            "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+            "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "industry_dynamics",
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "current_industry_context",
+            "operating_mechanism",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t44",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:ab186a61ec26fd775164be10ad30c20b1493c65706972f712894b4ab4b8317c5",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+            "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+            "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+            "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t45",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:8d88b67cbe251fcc57d5ebb9333feb7a4fbad5c6638eb50a8681222b4895f4ab",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+            "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+            "urn:company-wiki:evidence-span:sha256:e48ca10f12ff1d24593de41b6f1e8dc9203302a75862a84380dfffc37306fa27"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:e48ca10f12ff1d24593de41b6f1e8dc9203302a75862a84380dfffc37306fa27"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+            "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t46",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:9c4edc185e599d69363cf0403c9a613f9c32f48ec269c8b813bdda1dd5f3ec67",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2",
+            "urn:company-wiki:evidence-span:sha256:a81e0e315a76d738c0a0e87bb3105adcfff45544107a873304de675f37fc966f"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:a81e0e315a76d738c0a0e87bb3105adcfff45544107a873304de675f37fc966f"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t47",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:5e7f374053a8acbd71d06d44f0713d636980050ba9ffcc8f0b949789e4bc37c6",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb",
+            "urn:company-wiki:evidence-span:sha256:1f569b89f5a356628492832afb96cd53c491e55a94029b75108df65c09d6719a"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:1f569b89f5a356628492832afb96cd53c491e55a94029b75108df65c09d6719a"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "business_structure",
+            "business_strategy",
+            "operating_state_unknown"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t48",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:4afc4efac5751ec38f9b4317e383a2d4e3aee69f8280ff5bbab1bc2f54d1e24e",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+            "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "current_industry_context"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t49",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:7ebd83948229c6763364012ff2e45e17199d2089349d1cccb245bbe81946e4e2",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+            "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_plan"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t50",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:b42c69e58d2cb0b2c5f51431c50048142898cc0c667e3aef0c3a756118d87e85",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+            "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "new_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_current_state",
+            "operating_state_unknown",
+            "operating_plan"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t51",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:e3e244545b9f9b3a57adf63a2c1f0c2494f2117f00922ba0ec3b128a07cf90a6",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+            "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+            "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "current_industry_context",
+            "operating_current_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t52",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:b3d04b475a2c8738edc2b5c9f629fcb71d6163df7e46138ab0fbd4e6fff1cafe",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d",
+            "urn:company-wiki:evidence-span:sha256:98c35d0bb49a86cae4110ca85b945e3e506039496883bc8648e57b68e250315e"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:98c35d0bb49a86cae4110ca85b945e3e506039496883bc8648e57b68e250315e"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "new_business",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "corporate_development",
+            "project_plan_or_status",
+            "operating_state_unknown",
+            "operating_other_party_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t53",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:245f15e919339e5a17d9cc47902e2bef1c9be6b35e4992960beb570d5fb79631",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:45e430a0274058f8ba79d022e1628b76a58b30f99a868dafed7861d8525197de",
+            "urn:company-wiki:evidence-span:sha256:0ec7f166ebb522b14465aee857f6e29b33ae766b7cdcf67734620c640dad3850",
+            "urn:company-wiki:evidence-span:sha256:27726efaa25dd0ab2e6d5d5736bfaccc02c35131bd95c34929cf3efc9d62b8c0"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:27726efaa25dd0ab2e6d5d5736bfaccc02c35131bd95c34929cf3efc9d62b8c0"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+            "urn:company-wiki:evidence-span:sha256:45e430a0274058f8ba79d022e1628b76a58b30f99a868dafed7861d8525197de",
+            "urn:company-wiki:evidence-span:sha256:0ec7f166ebb522b14465aee857f6e29b33ae766b7cdcf67734620c640dad3850"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t54",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:d525e461e66a1e3fff2c11591ec457792c715117d7ccb98151380141790d1614",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+            "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+            "urn:company-wiki:evidence-span:sha256:e51779fe3ce75f1fb8d2d5f68ec68f8137f1726c676cae62dc0a442347927432"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:e51779fe3ce75f1fb8d2d5f68ec68f8137f1726c676cae62dc0a442347927432"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+            "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "business_structure"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t55",
+          "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:e055898ce6a405bde9c96590e66aaee31e56d1c0817c11002328202bb9bbf4ce",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+            "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+            "urn:company-wiki:evidence-span:sha256:bcc3dcf91cdfc363cac2164ca627a2122350cef2d9729dae53a7c82df1f16958"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:bcc3dcf91cdfc363cac2164ca627a2122350cef2d9729dae53a7c82df1f16958"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+            "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb"
+          ],
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "core_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_state_unknown",
+            "operating_restriction",
+            "operating_current_state"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        }
+      ]
+    },
+    "source_keys": {
+      "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11": "s1",
+      "urn:company-wiki:evidence-span:sha256:e5718678e67665c40151cb02bf2803bb303f695b49035f35da575f6fc2fa2a41": "s2",
+      "urn:company-wiki:evidence-span:sha256:37e17ea94a890d835e07fc97f4dadf4f0716ff25945d8caac574d8f80ae6de19": "s3",
+      "urn:company-wiki:evidence-span:sha256:fd82a0195c2311b5ae123ac63d3b4ffc25a9e45a4202fe5a907074825e564d06": "s4",
+      "urn:company-wiki:evidence-span:sha256:d3064eb392012a6512ff824316df16eb9190fe9f846787ec9f0dbdd55641e70d": "s5",
+      "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2": "s6",
+      "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60": "s7",
+      "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96": "s8",
+      "urn:company-wiki:evidence-span:sha256:7bdcc7fc57e76cb536e015c6b11d9c60dac1a1864b2f7115b8495435f3d76fe8": "s9",
+      "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782": "s10",
+      "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8": "s11",
+      "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554": "s12",
+      "urn:company-wiki:evidence-span:sha256:ef2ab7d11dd618daddc72c261d1be24323b531905ef0371ac83083c1a6f89c76": "s13",
+      "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08": "s14",
+      "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414": "s15",
+      "urn:company-wiki:evidence-span:sha256:4ce1e53d0c504068c8dddf682947c44f88c1480af11e218a7dae9da4ea1ad014": "s16",
+      "urn:company-wiki:evidence-span:sha256:c967954f015faabf3de1c3b93cb9c4c0167ff6383347d557330fcafad95ddcd0": "s17",
+      "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3": "s18",
+      "urn:company-wiki:evidence-span:sha256:78afc2efb6d8a41ef418395fdbc985c9512cb40f0d3f4a40039981cc02da2e25": "s19",
+      "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b": "s20",
+      "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0": "s21",
+      "urn:company-wiki:evidence-span:sha256:f4da2f0aa20d6078e97d680d155e8f314a048d90abd77aaca43e430d07c68c0e": "s22",
+      "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc": "s23",
+      "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea": "s24",
+      "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10": "s25",
+      "urn:company-wiki:evidence-span:sha256:3a0f549d1c25fc9a48e6eca3521e0972f95b3a52c9f9ee22ee01534ea1fd1851": "s26",
+      "urn:company-wiki:evidence-span:sha256:8540aaeba8c5a8b6644440f7892b296698d1ba2b8efebd9fa793d113a5457f35": "s27",
+      "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4": "s28",
+      "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10": "s29",
+      "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be": "s30",
+      "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381": "s31",
+      "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d": "s32",
+      "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06": "s33",
+      "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577": "s34",
+      "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4": "s35",
+      "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4": "s36",
+      "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80": "s37",
+      "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec": "s38",
+      "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f": "s39",
+      "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408": "s40",
+      "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de": "s41",
+      "urn:company-wiki:evidence-span:sha256:72b79a4244bd935c1dec46a01b51aa09b8e48022b13f16c64611a4ec244b6b16": "s42",
+      "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217": "s43",
+      "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039": "s44",
+      "urn:company-wiki:evidence-span:sha256:ba6f559cf5bad0a23ee74d6d1d59cfde2738d704931468627ad0bb944184890c": "s45",
+      "urn:company-wiki:evidence-span:sha256:adde61ab924471b64ae128a97a0da9d65c7e13a67458134605dbd6807a622699": "s46",
+      "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24": "s47",
+      "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6": "s48",
+      "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e": "s49",
+      "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0": "s50",
+      "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0": "s51",
+      "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108": "s52",
+      "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52": "s53",
+      "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59": "s54",
+      "urn:company-wiki:evidence-span:sha256:79f92e24c106e9336f9be4ab27f4095bddb0b5a994019baa625adadc377c8e66": "s55",
+      "urn:company-wiki:evidence-span:sha256:88323458a67450d325d35790ed115b3401437b3abb9e10c63e127cf446c5ddb0": "s56",
+      "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4": "s57",
+      "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7": "s58",
+      "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699": "s59",
+      "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54": "s60",
+      "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13": "s61",
+      "urn:company-wiki:evidence-span:sha256:e48ca10f12ff1d24593de41b6f1e8dc9203302a75862a84380dfffc37306fa27": "s62",
+      "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2": "s63",
+      "urn:company-wiki:evidence-span:sha256:a81e0e315a76d738c0a0e87bb3105adcfff45544107a873304de675f37fc966f": "s64",
+      "urn:company-wiki:evidence-span:sha256:333225249dceb12b811a91c7d96c5812863f6fc8374482b17496a4397f86bfa1": "s65",
+      "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb": "s66",
+      "urn:company-wiki:evidence-span:sha256:1f569b89f5a356628492832afb96cd53c491e55a94029b75108df65c09d6719a": "s67",
+      "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f": "s68",
+      "urn:company-wiki:evidence-span:sha256:5aa3f84ef41faa607dbec373979c380631c99137432199139c2c23f9d45530a5": "s69",
+      "urn:company-wiki:evidence-span:sha256:6836afdbfe8942182ac344cc0fe11c083711ea80270f74792ff7fc33032b457c": "s70",
+      "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071": "s71",
+      "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8": "s72",
+      "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e": "s73",
+      "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d": "s74",
+      "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d": "s75",
+      "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946": "s76",
+      "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4": "s77",
+      "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1": "s78",
+      "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3": "s79",
+      "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b": "s80",
+      "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5": "s81",
+      "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762": "s82",
+      "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d": "s83",
+      "urn:company-wiki:evidence-span:sha256:98c35d0bb49a86cae4110ca85b945e3e506039496883bc8648e57b68e250315e": "s84",
+      "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1": "s85",
+      "urn:company-wiki:evidence-span:sha256:45e430a0274058f8ba79d022e1628b76a58b30f99a868dafed7861d8525197de": "s86",
+      "urn:company-wiki:evidence-span:sha256:0ec7f166ebb522b14465aee857f6e29b33ae766b7cdcf67734620c640dad3850": "s87",
+      "urn:company-wiki:evidence-span:sha256:27726efaa25dd0ab2e6d5d5736bfaccc02c35131bd95c34929cf3efc9d62b8c0": "s88",
+      "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640": "s89",
+      "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9": "s90",
+      "urn:company-wiki:evidence-span:sha256:b44cd2a69650dc8b29468ccd5a1fcbcf64b651e6ad302d574b5d55af9187ba39": "s91",
+      "urn:company-wiki:evidence-span:sha256:4e2ee2a0582ce22a81e33f450e2052796f152fc303ebc24b69c6ee24842976b5": "s92",
+      "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2": "s93",
+      "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb": "s94",
+      "urn:company-wiki:evidence-span:sha256:e51779fe3ce75f1fb8d2d5f68ec68f8137f1726c676cae62dc0a442347927432": "s95",
+      "urn:company-wiki:evidence-span:sha256:bcc3dcf91cdfc363cac2164ca627a2122350cef2d9729dae53a7c82df1f16958": "s96"
+    },
+    "task_parts": {
+      "t1": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "p3": "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6"
+      },
+      "t2": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "p3": "urn:company-wiki:evidence-span:sha256:ba6f559cf5bad0a23ee74d6d1d59cfde2738d704931468627ad0bb944184890c"
+      },
+      "t3": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "p3": "urn:company-wiki:evidence-span:sha256:adde61ab924471b64ae128a97a0da9d65c7e13a67458134605dbd6807a622699"
+      },
+      "t4": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+        "p3": "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59",
+        "p4": "urn:company-wiki:evidence-span:sha256:79f92e24c106e9336f9be4ab27f4095bddb0b5a994019baa625adadc377c8e66"
+      },
+      "t5": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2",
+        "p3": "urn:company-wiki:evidence-span:sha256:333225249dceb12b811a91c7d96c5812863f6fc8374482b17496a4397f86bfa1"
+      },
+      "t6": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f",
+        "p3": "urn:company-wiki:evidence-span:sha256:5aa3f84ef41faa607dbec373979c380631c99137432199139c2c23f9d45530a5"
+      },
+      "t7": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:bb434ed08aebd3a25e09db6300b87abf30645c2568b27d97369120098c24313f",
+        "p3": "urn:company-wiki:evidence-span:sha256:6836afdbfe8942182ac344cc0fe11c083711ea80270f74792ff7fc33032b457c"
+      },
+      "t8": {
+        "p1": "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+        "p2": "urn:company-wiki:evidence-span:sha256:fd82a0195c2311b5ae123ac63d3b4ffc25a9e45a4202fe5a907074825e564d06",
+        "p3": "urn:company-wiki:evidence-span:sha256:d3064eb392012a6512ff824316df16eb9190fe9f846787ec9f0dbdd55641e70d"
+      },
+      "t9": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782",
+        "p3": "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8"
+      },
+      "t10": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:3a0f549d1c25fc9a48e6eca3521e0972f95b3a52c9f9ee22ee01534ea1fd1851"
+      },
+      "t11": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:8540aaeba8c5a8b6644440f7892b296698d1ba2b8efebd9fa793d113a5457f35"
+      },
+      "t12": {
+        "p1": "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+      },
+      "t13": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+      },
+      "t14": {
+        "p1": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06"
+      },
+      "t15": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "p4": "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "p5": "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+      },
+      "t16": {
+        "p1": "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80"
+      },
+      "t17": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "p4": "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+        "p5": "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+      },
+      "t18": {
+        "p1": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "p2": "urn:company-wiki:evidence-span:sha256:d8d45583c1e798f3c9bcea12513db618eb752c4bb6a2c1ed95975fa0dfff7640",
+        "p3": "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+      },
+      "t19": {
+        "p1": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "p2": "urn:company-wiki:evidence-span:sha256:b44cd2a69650dc8b29468ccd5a1fcbcf64b651e6ad302d574b5d55af9187ba39",
+        "p3": "urn:company-wiki:evidence-span:sha256:4e2ee2a0582ce22a81e33f450e2052796f152fc303ebc24b69c6ee24842976b5"
+      },
+      "t20": {
+        "p1": "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+        "p2": "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+        "p3": "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5",
+        "p4": "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762"
+      },
+      "t21": {
+        "p1": "urn:company-wiki:evidence-span:sha256:016249b47a5ed54f6fe3c7d63808c9f9a228dd96e2940626b5148bccf3678b11",
+        "p2": "urn:company-wiki:evidence-span:sha256:e5718678e67665c40151cb02bf2803bb303f695b49035f35da575f6fc2fa2a41",
+        "p3": "urn:company-wiki:evidence-span:sha256:37e17ea94a890d835e07fc97f4dadf4f0716ff25945d8caac574d8f80ae6de19"
+      },
+      "t22": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+        "p3": "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+      },
+      "t23": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+        "p3": "urn:company-wiki:evidence-span:sha256:7bdcc7fc57e76cb536e015c6b11d9c60dac1a1864b2f7115b8495435f3d76fe8"
+      },
+      "t24": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554",
+        "p3": "urn:company-wiki:evidence-span:sha256:ef2ab7d11dd618daddc72c261d1be24323b531905ef0371ac83083c1a6f89c76"
+      },
+      "t25": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414",
+        "p4": "urn:company-wiki:evidence-span:sha256:4ce1e53d0c504068c8dddf682947c44f88c1480af11e218a7dae9da4ea1ad014"
+      },
+      "t26": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:2142fb645eb511bd17cdc1c7b6c547a7c265f71c375c3762317dba6cf03ca414",
+        "p4": "urn:company-wiki:evidence-span:sha256:c967954f015faabf3de1c3b93cb9c4c0167ff6383347d557330fcafad95ddcd0"
+      },
+      "t27": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "p4": "urn:company-wiki:evidence-span:sha256:78afc2efb6d8a41ef418395fdbc985c9512cb40f0d3f4a40039981cc02da2e25"
+      },
+      "t28": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "p4": "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+      },
+      "t29": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "p4": "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+      },
+      "t30": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "p4": "urn:company-wiki:evidence-span:sha256:f4da2f0aa20d6078e97d680d155e8f314a048d90abd77aaca43e430d07c68c0e"
+      },
+      "t31": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "p3": "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc",
+        "p4": "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea"
+      },
+      "t32": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+      },
+      "t33": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+      },
+      "t34": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      },
+      "t35": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "p4": "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "p5": "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+      },
+      "t36": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "p3": "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408"
+      },
+      "t37": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+        "p3": "urn:company-wiki:evidence-span:sha256:72b79a4244bd935c1dec46a01b51aa09b8e48022b13f16c64611a4ec244b6b16"
+      },
+      "t38": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+        "p3": "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217"
+      },
+      "t39": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "p3": "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+      },
+      "t40": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+        "p3": "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+      },
+      "t41": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0",
+        "p3": "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108"
+      },
+      "t42": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:e0914697d9f8b1f4df6279859013a51a349b33610867c69cdb466e8ee7b01b52",
+        "p3": "urn:company-wiki:evidence-span:sha256:92a34fbe52856c3c49facafcf3331dca749bd095370e4b72ddc8539348528a59",
+        "p4": "urn:company-wiki:evidence-span:sha256:88323458a67450d325d35790ed115b3401437b3abb9e10c63e127cf446c5ddb0"
+      },
+      "t43": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+        "p3": "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7",
+        "p4": "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699"
+      },
+      "t44": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+        "p3": "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+        "p4": "urn:company-wiki:evidence-span:sha256:f1b99cebd77a061c7834b8a75bf3146a98d546263d8932a8a1e84b6f0fc8da13"
+      },
+      "t45": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+        "p3": "urn:company-wiki:evidence-span:sha256:c0fe11ee2c629e6c440b44a507023e52fe562e1028dfa368b8596413706b8c54",
+        "p4": "urn:company-wiki:evidence-span:sha256:e48ca10f12ff1d24593de41b6f1e8dc9203302a75862a84380dfffc37306fa27"
+      },
+      "t46": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:412b49a82092fffa7bb4796868bc24537cd11a06d4abde23d8e24492d52134f2",
+        "p3": "urn:company-wiki:evidence-span:sha256:a81e0e315a76d738c0a0e87bb3105adcfff45544107a873304de675f37fc966f"
+      },
+      "t47": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb",
+        "p3": "urn:company-wiki:evidence-span:sha256:1f569b89f5a356628492832afb96cd53c491e55a94029b75108df65c09d6719a"
+      },
+      "t48": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+        "p3": "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+      },
+      "t49": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+        "p3": "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+      },
+      "t50": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+        "p3": "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+      },
+      "t51": {
+        "p1": "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "p2": "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+        "p3": "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+      },
+      "t52": {
+        "p1": "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d",
+        "p2": "urn:company-wiki:evidence-span:sha256:98c35d0bb49a86cae4110ca85b945e3e506039496883bc8648e57b68e250315e"
+      },
+      "t53": {
+        "p1": "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "p2": "urn:company-wiki:evidence-span:sha256:45e430a0274058f8ba79d022e1628b76a58b30f99a868dafed7861d8525197de",
+        "p3": "urn:company-wiki:evidence-span:sha256:0ec7f166ebb522b14465aee857f6e29b33ae766b7cdcf67734620c640dad3850",
+        "p4": "urn:company-wiki:evidence-span:sha256:27726efaa25dd0ab2e6d5d5736bfaccc02c35131bd95c34929cf3efc9d62b8c0"
+      },
+      "t54": {
+        "p1": "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+        "p2": "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+        "p3": "urn:company-wiki:evidence-span:sha256:e51779fe3ce75f1fb8d2d5f68ec68f8137f1726c676cae62dc0a442347927432"
+      },
+      "t55": {
+        "p1": "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+        "p2": "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+        "p3": "urn:company-wiki:evidence-span:sha256:bcc3dcf91cdfc363cac2164ca627a2122350cef2d9729dae53a7c82df1f16958"
+      }
+    }
+  },
+  "model_view_fragment_text_sha256": {
+    "s1": "9f980eee20e672ce418b6cd587edfaa98f0ebea620c655ac2796534aa5f2d554",
+    "s6": "e3fe5b1c0f22336367078252de0a7aa350637a13d7a00c05b38cd3883b4ba03a",
+    "s7": "99fdbeccb2fb473777459211c6170f2823d668b4e1b93dc20824e74413340bc6",
+    "s14": "44597c6b9bb89673a9662c9260bfb72a8b31d14202590221a0c4d7fe6bd6efce",
+    "s15": "7fcbd13b02d0444c15583ab0cc63ad9d86f407e46b3b355bf80af35a0e1a14da",
+    "s18": "7dd268aa384f0d6d2753f56749f9c6dce4bc9c30e413c729d6a97bbf4e282d59",
+    "s25": "0dabeab78ce6e29a7d3c16810ea51be0f37db753a457451e35b04d7e0f87b9bd",
+    "s33": "684167915b80e3d7ef8e6deafafd5885db93a849f5e7bde47eae4049e9d5db53",
+    "s34": "2d3e1ccda7b5b2d21525d171a06592b9d935be003517954be160428c924816ef",
+    "s37": "d9e5170aef0cfc8df0e522dde2bebfb3d8b1ec84a1ad9cbfdf897982fb9cf1c5",
+    "s41": "c03e30055a590bf5642bc1a7d34207b81264f9a6ee1cfdf13ac5bdeb07b65cc1",
+    "s44": "ef548703eac02454d0d8bb73c2c74ab14f3e05d7be9d6cd033e0267931c0ca25",
+    "s53": "e26117a094f1e58219cf40e3e66b7849a8cf900be58199907587a9400322f82c",
+    "s54": "746189d6d12403e3b02436233c87470c099a359a45e496b238d42eaf0aac4f8b",
+    "s57": "d170ccc83c5915be8d81cdea5a2b27095da4f175228f81c81a25df887814545e",
+    "s60": "5b5d92cf2423e8838f84c4205f72fe98fd5732fb4a3514b05951a4cc416ec66a",
+    "s63": "5c19cf6e01344ef9423fb2bdce4d66a614ed5c6190b3767f32007e9dbbb6e523",
+    "s68": "19aae04b14760c6acc2c18095259e9f3c25ac680b1548780340568ad8ca34a36",
+    "s85": "ca3d444d0f193dd85698db21a5a27b7408dff9125d8acc305e9006b40aadcb89",
+    "s93": "145f0672df06170c24cf120dbd45a5589c906a172e62dcb95d84cc4347967ab0",
+    "s94": "a9202677bb83a8a3aeccec6aa4846d9dda61ff61752ea0a0f44ce2f645c83d55",
+    "s48": "ff7259a72dae19287eca62e1e99db8877057a0f62737b4db43ff506a3f0b2c34",
+    "s45": "5f6ed5d82d123dc6f4566357e95988522067cfb8d8fb62cad410682e91b5845e",
+    "s46": "c68fc5ff540e5d762c36c9aea8592235516de53f19927b0ca62c3ab1f7dfbf52",
+    "s55": "830bd489cc6e31f60258a0f4ca50435591c195ce59b175dded054d8764d38c31",
+    "s65": "69a2834dcd2039a6a0b1665153540edd6d73aaba5c432e087bbaabd3b549572d",
+    "s69": "79a8e4f170c0f1083c468c38213aef457eeb27202ff76d042ac7e054c737d181",
+    "s70": "e8312d80b735ac4debcfe2ea2af463433f3991a2fef7c73a10fd2fb52a98baf8",
+    "s4": "8a31ce3334e3103bdd470a26eb08d8234afcfd9656caf00a5388f384b6f27141",
+    "s5": "81c780ae7c5867b901a5bf85452c652b5cbaa15cdca97b7b1add0610bbe33112",
+    "s10": "916ce01c48939265878d87ed94b5c6028499773e6af02933898bdffcec788887",
+    "s11": "b320f1616b799f89893262c9082fee2d2a8b59162aa5c86ae75dac3919b148fa",
+    "s26": "e2922ad68a2a5b87b036e7f045df341d35bc003e08659f9a7acf7257cdf5f2b1",
+    "s27": "fca35558761fe31d0fc6d151bda49e03947d4a4c5aae9188995bcefb224d33b2",
+    "s28": "3c74405895921f6af44843084d46f88e89204887bbd3f8f58fd96db26c05b261",
+    "s31": "6a38d3febcd11848aa4a5737492d38713f098e9fdff2766ad1392fbf53c92ef6",
+    "s35": "f9bb43c0cc298ae17333d22d2706b5c7585db91fec0296071a2fcef60775f549",
+    "s38": "2d3e1ccda7b5b2d21525d171a06592b9d935be003517954be160428c924816ef",
+    "s39": "e7f855f44d2cf9210e0e2c52ca15adc26c41c75e98e24f8a5f1791a09b8b17ff",
+    "s89": "2d9f33fb1a0039aafb002fab13975ddb078138f6ed74faae671c4edff6423f1e",
+    "s90": "50fdc8e187fd85d474c634bb97a8e19dc07a71f6a6381368e811149331b25595",
+    "s91": "e2401b37a4b0c65aafdb9418b3e1828549c5b7620bfa7dd126dd318da3846815",
+    "s92": "bd3645ff8ae5e8ba7578d02a2ebd6d0e01b03f574926ea6de71670e67143b33c",
+    "s79": "8631f28f2de3f278e013f7ffe6f6830395f3e90d051332ff8a8b190f5a3db09e",
+    "s80": "06c5d7c3ae35303ad2963b3d725b32fb01278dddbc82ee9daa90e6fb38e4a01a",
+    "s81": "2448f18752c32df114ec8d65fb0029e1163609b6670dad8f85486726602067f2",
+    "s82": "04ff7e88415d9d62eb6b6276f361a8d0a679b6f2f7de04b0713ecc74307ab775",
+    "s2": "d7cb8a06f51278628c213edb671d97e42f23875f5bf15d1e753231f22f8f56b5",
+    "s3": "0a47c227900e1b5ae5027b30c8b658457b96f83e5303b3bb3ae91e0b1d6a53c2",
+    "s8": "e6f6bb59436d5f16e466f26e6930a6e2cafd8bba5b34c5f34cd298f70318e8fb",
+    "s9": "91b613f3dd41165a5ae49e782c9a05e928419cb90a635ad27ab5c5212292b10c",
+    "s12": "40352a9fd6a940fd95951ca90df37269dd5cd62203f99d8893ba15acff5e1225",
+    "s13": "8027c0446e08e8fc0d092056b7549458233e20be8229c6af70bf89adc5cd9d9a",
+    "s16": "63e6b90ae000aa15d3b59468a766d6d6c5dbcc68eaf3c780f433d2064e166021",
+    "s17": "0ab4d803f7efcc34f20d3b920e186e215e2045da71cafeaad1764de8818b75e3",
+    "s19": "efc770f6176c22435b21f8e22869af9da1d7c1e828854ec6334146bd2b95f58d",
+    "s20": "4fc5992f29d89f96c43b6af602b3678278b8e9c787b92b73e3410dd3e8eefde7",
+    "s21": "a968fb6227eb9f0066189cb720d0b1e9203bc847cb5525eb9ca61078016cd4d0",
+    "s22": "2bec9dc2d5a3726c0027ce3111a5c5acd0b1b511855c1ad378e30180191f64f2",
+    "s23": "c240f808a473a1c637e22d21dc5a0616a941ecdb0f5a40b7a4115c383e3cd6dd",
+    "s24": "9d2c7f6c18278a99a90412f93f35502cc8ee6b759a6f8d2287842ea9eabedb97",
+    "s29": "150c3fcaaca518a98b92ec1046da0b5038e8ee5ab5b3de628ae842e67b444660",
+    "s30": "22bc68821dbdbfaf87e60377662d2008604dc0e2459a0b989cefb1af1db2665f",
+    "s32": "c62c53ce4531e8234261cf2e6ae81cfd90c7dd1591dee3da24feccd2b53a2941",
+    "s36": "c4ead7467242ec115431dc798f01a0de5d15a16909ae2497397c9530d571bb8e",
+    "s40": "0ed01a870c2bb934dda8a83d89f3c2cc49669325bc7444004052a1d5db31f91f",
+    "s42": "8e665407241cd7f9e5eb8b98e80594901ef514cba623321f3e25e449e86550fb",
+    "s43": "e2be23756e1f3b85d05297720cfc2477fbc07147ab5524749514642424c0e6ec",
+    "s47": "078ba534b88ca9847f7a0260bdc9b2700968d8d0fbb9b328d4481a3d48aa8809",
+    "s49": "6fb4c209cd891cf14ba5d40ec1efa62c4b7d77b5a146e81e405d06dde73fd2ac",
+    "s50": "b4ce496f127945e9ecb0a84491fb73340a4f00f4d18267da0b81c823529b3bd6",
+    "s51": "0b1550f89b2da03d2861bcc8650f981e9d6d706920a331c67bf339b082bb0a88",
+    "s52": "87762e11d1e0cd299955f35016643e5a053ceea7786339abee490eca0700021b",
+    "s56": "b6058134e37c3c6b0b8c721e11411f41184c6109ca3ff7bb6a97130c84b60c99",
+    "s58": "d56991dc367fea93c4e7f59b9b8dcb1cb9ab22fdf3ecf1c87e348f969a4ff0f1",
+    "s59": "7a607546fd2bb9cd8d567f99964448399369e0fe32c04cc2926f641eb49a6949",
+    "s61": "a74f202d3485bed9a1a80b123986053ef9b13e55b06ce0a29920e7b527646216",
+    "s62": "23e96ec5d12067cd7b23385700523e1b427ad0afd5eb2a7a6f6e65f39d160d2b",
+    "s64": "15cf68477005b43a85af62813559777f7691e360e34dc3010e43da1ad835a767",
+    "s66": "3753cf10eb6e5ac83f7a43f301320d10ed3ffdf64f81851cda7c8364c8da7c6e",
+    "s67": "0d5a8bfbce237e552d221402687865b9613052b697750893907a468df0bbf22c",
+    "s71": "19e0c31691a016f5becc9f575b28ab220406b3fdf1e777084daaaf90dacc8782",
+    "s72": "3eba60b5b34c884d0efb9cb40e4fd33aded2b9ce2c90bc18f394c619e04cabbe",
+    "s73": "8c778beebeeea13d070be92fd0ede70baa037d1297137e3fffa1b00b7d2feef7",
+    "s74": "3475f12fdc4b1b6fbf120947325abbe969d5761101814cca396100e84355e6d8",
+    "s75": "ed8cd5f44ac5be8a88f5a77e26786032f5af00b2971c5d155f5f44b588027333",
+    "s76": "237816461b3d665be075849e86f1ad080753a0beec6a69c22dccd0bcc30fb3b2",
+    "s77": "ef7622e5d2e76e584de0327de1cdfc98a9dafdd5a03b566dc933da1c1c6fd723",
+    "s78": "4c062fa6dc6151b8360d842f104663c059c504f742016ab6a4c992a58573d47e",
+    "s83": "43094463cd2d230fcd3aefd1b9f10f1e8e0fdd739c2803f2e693182b8e63cfa1",
+    "s84": "5503f05640122fd727c2fafeb8ccb520e28a83afd5c1d776c41351faea09fed4",
+    "s86": "e398496b2ac1731c0513dcf41c22fcb136a64627d745c0956f8bdacb33dfb211",
+    "s87": "86449514de796e41d14cd2da54194c39cceda9e5697e67875c67730f26a858d5",
+    "s88": "8178a5da2f181d52769a62332a9aeb26e3f1523713fb7f84f32a6241bcf26275",
+    "s95": "a6b3d7cc1f12aeae2e8ea9654cf655f5b88c0c5f3b4de4bfb2b72f0693c02c16",
+    "s96": "8445ff7047b986765a18516530b092da842a522521a098f543ac9a4881480300"
+  },
+  "observed": {
+    "selected_spans": 96,
+    "model_visible_fragments": 96,
+    "tasks": 55,
+    "support_ids": 55,
+    "all_selected_fragments_visible": true,
+    "external_model_calls": 0,
+    "pdf_parsing_calls": 0
+  },
+  "limitation": "Actual offline compiler projection of pinned selection, all tasks visible. No model request sent or summary response reviewed; context-only parts cannot serve as independent factual basis."
+}

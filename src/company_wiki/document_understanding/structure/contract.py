@@ -8,12 +8,47 @@ configuration, never calls a model, and never imports the profiles package.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from typing import Any
+from typing import Any, TypedDict
 
 from ._work import WorkPlan
 
 SCHEMA_VERSION = "du-structure/1"
 INPUT_SCHEMA_VERSION = "du-input/1"
+
+
+class NativePageProof(TypedDict):
+    """Source-owned physical edge references, with no business or permission state."""
+    basis: str
+    left: str
+    right: str
+    left_page: int
+    right_page: int
+    left_ordinal: int
+    right_ordinal: int
+    column: int | str
+    coordinate_frame: str
+    furniture_unit_ids: list[str]
+
+
+class NativeSourceDependencies(TypedDict, total=False):
+    """Optional reference fields on existing du-structure/1 semantic units.
+
+    Keys are ORIGINAL targets in member_unit_ids. Values are same-source original
+    references. Sections/parent_id remain the only business-parent owner.
+    Readable parent/introduction/meaning dependencies join the existing semantic
+    citation envelope. A source unit used ONLY as a list-edge endpoint/furniture
+    is structural proof, regardless of whether its text describes another business
+    fact: it pays physical work and scope2-page/24-unit bounds, not model material.
+    Such refs cannot delete/override a real deictic, restriction or footnote dependency.
+    native_source_proofs_by_unit_id carries the physical producer's existing edge,
+    so consumers bind its refs rather than re-observing geometry or signing access.
+    Consumers apply these fields PER TARGET, never as package-wide atomic prose.
+    Omission preserves old callers and introduces no new permission or state store.
+    """
+    required_context_by_unit_id: dict[str, list[str]]
+    required_source_unit_ids_by_unit_id: dict[str, list[str]]
+    native_source_proofs_by_unit_id: dict[str, list[NativePageProof]]
+
 
 SECTION_ROLES = (
     "business",

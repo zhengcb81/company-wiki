@@ -1,0 +1,289 @@
+{
+  "schema_version": "w08-crosspage-root-acceptance/1",
+  "at_utc": "2026-10-24T01:19:05.721991+00:00",
+  "status": "ACCEPTED_MERGED_PENDING_NORMAL_COMMIT_PUSH_AND_EXACT_CI",
+  "source_ancestor": "ef49ae3e8ca8f25388971afb58982612070e5b5b",
+  "normal_source_hooks": true,
+  "independent": {
+    "passed": 13,
+    "failed": 0,
+    "report": "independent/report.json"
+  },
+  "natural": {
+    "passed": 2121,
+    "skipped": 11,
+    "failures": 0,
+    "seconds": 39.36,
+    "receipt": "natural-final.json"
+  },
+  "lf_equivalent_merged_paths": [
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "worktree_raw": "85630848914f0487020ea3f41d395a9dff2ffb9d37cfd6b382fb045a3f260676",
+      "mother_raw": "9344ab2b84b1169d7dcc08712bb5e108c8a1583f5d16c0cd6c63afe65818ff31",
+      "lf_sha256": "85630848914f0487020ea3f41d395a9dff2ffb9d37cfd6b382fb045a3f260676"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "worktree_raw": "3ed9d08ba8c8d7cdfe0bbb5dbed1817803b395e41531e69660e659004150dd46",
+      "mother_raw": "14850f48a777270780ffb16a07f07913de3b9b4f7bc6c60d71840d69aafadb01",
+      "lf_sha256": "3ed9d08ba8c8d7cdfe0bbb5dbed1817803b395e41531e69660e659004150dd46"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/observation_adapter.py",
+      "worktree_raw": "66bd55c80e6d07f0a752ab3787f9fdbb04270b16491da36ef4a3b9d21564c8e4",
+      "mother_raw": "aa018a12ec8e86c7af1133ec3c37a0f3ed44d86ec00fccf066548e21dd4e60bc",
+      "lf_sha256": "66bd55c80e6d07f0a752ab3787f9fdbb04270b16491da36ef4a3b9d21564c8e4"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "worktree_raw": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+      "mother_raw": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+      "lf_sha256": "fd5ef669091fcd8b6092c2ced666c2fc9d3106f74d3c168f6266bf184df90cd3"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "worktree_raw": "7e5d0ccb0b85342081578a9c37e927835ccab6b21bb2aacebddeafe53ebd43d7",
+      "mother_raw": "7e5d0ccb0b85342081578a9c37e927835ccab6b21bb2aacebddeafe53ebd43d7",
+      "lf_sha256": "7e567afc614bbb1c7ca794e049e2d566dd23e8ab559b7970616c2a77c1462051"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "worktree_raw": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+      "mother_raw": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+      "lf_sha256": "7583cc49d13fb220aaf23953ca234ff57b82d93ae5bdd8679a636ccb8b693c09"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/text_view.py",
+      "worktree_raw": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+      "mother_raw": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+      "lf_sha256": "42d4a709aae0ef0a0f8c818b2629a31d82734d2240299e340452a9685d744534"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/pipeline.py",
+      "worktree_raw": "46d3cbd934bbada230eb384d6122230f1efb00bda8120707bad4796175207020",
+      "mother_raw": "a7cd2b2151a516ecd628d480651c3a983a123014fdeaf1ae722bcb51a2b289b7",
+      "lf_sha256": "46d3cbd934bbada230eb384d6122230f1efb00bda8120707bad4796175207020"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/__init__.py",
+      "worktree_raw": "166b9215ce5d5e9a40916a0ee7a6171ff7e51152051d4b1caa5a28e891254bbf",
+      "mother_raw": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+      "lf_sha256": "166b9215ce5d5e9a40916a0ee7a6171ff7e51152051d4b1caa5a28e891254bbf"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/contract.py",
+      "worktree_raw": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+      "mother_raw": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+      "lf_sha256": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/sections.py",
+      "worktree_raw": "dacb853d631ee328b4c3d518b638428c01068d32852dbdf0dea435fbc77faf16",
+      "mother_raw": "3a25aa53a96c28b67ab26b080189d244a40a6116017aeb1cd73928a7395e0ffc",
+      "lf_sha256": "dacb853d631ee328b4c3d518b638428c01068d32852dbdf0dea435fbc77faf16"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "worktree_raw": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b",
+      "mother_raw": "3c0d97ac11ae37e232e9e1e48e0527a1e53d60c5691d96d5e03301a5e1fae657",
+      "lf_sha256": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "worktree_raw": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+      "mother_raw": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+      "lf_sha256": "dac3dc67cee89a56219313cf4739e4c5c92e6fa79d7a4288800a96aabfae1879"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_predicate_state.py",
+      "worktree_raw": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+      "mother_raw": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+      "lf_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "worktree_raw": "be21d48f7970861ebb1f9403b3f259d935cbea82a3f2b194979f23be1ccf163f",
+      "mother_raw": "3c77311df57c1b22b697f5f2d13293274ac3be34b22f5e4ba2e9475f7bc40a9f",
+      "lf_sha256": "be21d48f7970861ebb1f9403b3f259d935cbea82a3f2b194979f23be1ccf163f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+      "worktree_raw": "07f063af239325c54af6928d3448bd1f76775d1b16a4abcbad10ad67d62cf76c",
+      "mother_raw": "1c7722176ade696d7b1179f55dc8c1b51ec3ac522de76b736ac758da50868ac1",
+      "lf_sha256": "07f063af239325c54af6928d3448bd1f76775d1b16a4abcbad10ad67d62cf76c"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_native_list_physical_observer.py",
+      "worktree_raw": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2",
+      "mother_raw": "d8c58b4c9f52927f7677e23f335bbc6912abd84dc29c0105345e8b249aead80d",
+      "lf_sha256": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py",
+      "worktree_raw": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+      "mother_raw": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+      "lf_sha256": "04b1ba9044d784c1d67adc76608785783765da46e15d2a1b38335fb595ca7c18"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+      "worktree_raw": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3",
+      "mother_raw": "c924a6d7bcb3498abe9429cffc9a3a83fee72b0b5193566d0c570fd4547e2ac7",
+      "lf_sha256": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py",
+      "worktree_raw": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+      "mother_raw": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+      "lf_sha256": "2412b19e4dd3c85f30fb99a21a0046bd5a85aea0ab245dc680660593606c3d62"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py",
+      "worktree_raw": "709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff",
+      "mother_raw": "4d930f4a78fe6f65035c0c3194beb37a6b6ea426739c76dc884ffe636f0d5d43",
+      "lf_sha256": "709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py",
+      "worktree_raw": "fe23cdedb235a0c42976893174b1d16aea0025527a0e21685ccb6f4622c5d084",
+      "mother_raw": "fe23cdedb235a0c42976893174b1d16aea0025527a0e21685ccb6f4622c5d084",
+      "lf_sha256": "fe23cdedb235a0c42976893174b1d16aea0025527a0e21685ccb6f4622c5d084"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py",
+      "worktree_raw": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334",
+      "mother_raw": "1cf543ac48a4a62cf27b2cb6ff42c408a557153c971d56b09c3afbbde96f8714",
+      "lf_sha256": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334"
+    }
+  ],
+  "annual14": {
+    "status": "V2_DIAGNOSTIC_3PASS_9PARTIAL_2MISSING_NOT_CURRENT_V3_ACCEPTANCE",
+    "report": "annual14/review.json",
+    "pdf_parses": 1,
+    "extra_audit_text_pages": 8,
+    "extra_audit_text_chars": 10888
+  },
+  "not_certified": [
+    "annual14 business completeness",
+    "formal new summaries",
+    "cache/recovery",
+    "actual RF12-material matrix",
+    "W12 four company reviews"
+  ],
+  "external_model_calls": 0,
+  "business_downloads": 0,
+  "new_originals": 0,
+  "all_originals_and_sealed_history_preserved": true,
+  "copied_evidence": [
+    {
+      "path": "independent/report.md",
+      "bytes": 6371,
+      "sha256": "7555132fbdda73b5125381948ca296041eabe1493f4e9b21a5796b4299319d11"
+    },
+    {
+      "path": "independent/report.json",
+      "bytes": 8456,
+      "sha256": "a19f7c05df5812e10cf1850ba5a75ca5bc14a5708af9df528452c62c4e85770e"
+    },
+    {
+      "path": "independent/cleanup.json",
+      "bytes": 8706,
+      "sha256": "a94070923431194bcb5dc03d66cb47049dbebfbf0850ab83da0574a1d79ab60c"
+    },
+    {
+      "path": "independent/independent-execution-v2.json",
+      "bytes": 16915,
+      "sha256": "92bcce2f50dce93f703b9561d6c4dd31c2e753e1ec5e2c40f8eb6f861605a411"
+    },
+    {
+      "path": "independent/independent-execution-v3.json",
+      "bytes": 17427,
+      "sha256": "8e1e9a178c8256e190b82b80ba88e53823ed6031d5644cc6ed1787a3084958cf"
+    },
+    {
+      "path": "independent/english-restriction-diagnosis-v2.json",
+      "bytes": 48364,
+      "sha256": "67f6601cce4c019beb7846224717cc29c83e451f2087492d29cc779c0bd33118"
+    },
+    {
+      "path": "independent/independent_minimal_cases.py.txt",
+      "bytes": 16725,
+      "sha256": "8484f3b815a9b4a0c678f486117e5c22b41ff10ef418211160ea2980ebcab239"
+    },
+    {
+      "path": "annual14/review.md",
+      "bytes": 6991,
+      "sha256": "dfa3e0c2d35e31249963230a5e2dda5132cc8130495870671e90686a83b63d4d"
+    },
+    {
+      "path": "annual14/review.json",
+      "bytes": 190536,
+      "sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258"
+    },
+    {
+      "path": "annual14/audit-original-eight-pages.json",
+      "bytes": 37004,
+      "sha256": "3a08eb00f8ca3909248effd5b6ca8b1e701401ec7dc9553fc0139335f8d9eb6f"
+    },
+    {
+      "path": "annual14/model-view-binding.json",
+      "bytes": 142779,
+      "sha256": "e3c396e321df0a9c509bf05574f4a3f0e5bfa6b9e57a802854311aa63a5e08d4"
+    },
+    {
+      "path": "annual14/selection.json",
+      "bytes": 561980,
+      "sha256": "17c1f79ac72208fc74975c4488aaf14cd14e17b66999b219ae9045d01cec5fb9"
+    },
+    {
+      "path": "annual14/execution.json",
+      "bytes": 100154,
+      "sha256": "69a13ee56af0bac68a2aca65d9c355a44cfcd5f84a4c32c8f8cc371a1f05763d"
+    },
+    {
+      "path": "source-freeze.json",
+      "bytes": 13250,
+      "sha256": "a5d822e7a0cc4677563cc3cf5dbeb604683e5d7deb008e8fcc1fad4c0892fb40"
+    },
+    {
+      "path": "order-handoff.md",
+      "bytes": 4070,
+      "sha256": "3710b740e1c2430f4de26003299bc98e15a7b9d0f48ad42d1db0e14af29c831f"
+    },
+    {
+      "path": "order-handoff.json",
+      "bytes": 9538,
+      "sha256": "82a8477385a1a3fc9ae20d5c65e36021cfcf68a375f904077718f23c80a431f9"
+    },
+    {
+      "path": "marker-handoff.md",
+      "bytes": 1237,
+      "sha256": "445c36d9923f1b1546b0a7d24c89c513eecc3cb34d5d7943249d3c823271e668"
+    },
+    {
+      "path": "marker-handoff.json",
+      "bytes": 3646,
+      "sha256": "f2a4702cbb2e842896e6a185aaa7d672d727fdb4f909136087d683b457d59584"
+    },
+    {
+      "path": "product-grammar-handoff.md",
+      "bytes": 2841,
+      "sha256": "7ab1bca889455d5a5e22665082d640ac8fde43ec06a7a02c2264f909ab322d50"
+    },
+    {
+      "path": "product-grammar-handoff.json",
+      "bytes": 5873,
+      "sha256": "45fb0bc867250fc4ff64d6b55ea00e15773a1a456256d2902583b137cebc25f1"
+    },
+    {
+      "path": "r1-w08-missing-design-specs-20261024.json",
+      "bytes": 30839,
+      "sha256": "e505fa36eda0e0495a08235daac9f8aacdbae67bc8f38cc27391c5b0c763f825"
+    },
+    {
+      "path": "r1-w08-missing-du4-fixtures-20261024.json",
+      "bytes": 813,
+      "sha256": "aeea2dc2827272c82551a83f4b06f77c18d1e045d6e42a65c9a1e773b1dcfefc"
+    }
+  ]
+}

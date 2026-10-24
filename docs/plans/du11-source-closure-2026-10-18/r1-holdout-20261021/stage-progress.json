@@ -8,7 +8,7 @@
   ],
   "current_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec",
   "current_attempt": "r1-remediation-02",
-  "status": "ACTIVE_W08_FINITE_MAIN_PUBLISHED_CI_SUCCESS_NEXT_CROSSPAGE_COMBINATION",
+  "status": "ACTIVE_W08_CROSSPAGE_ACCEPTED_MERGED_PENDING_PUBLICATION_ANNUAL14_PARTIAL",
   "source_writes_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
   "old_campaign_ref": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\plans\\company-pool-cycle-2026-10-09\\campaign.json",
   "old_nvda_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pool-20261009-001-us-nvda",
@@ -79,6 +79,6 @@
   "current_checkpoint_owner": "../CURRENT_STATUS.json",
   "active_workers_after_closeout": "ROOT owns W08; two external lanes READY, not yet reported started",
   "historical_initial_fields_note": "publication, first_native_observation, execution_outcome, artifact_completeness and four_review retain the original initial attempt observations; final3 review and new preparation are explicitly referenced separately.",
-  "current_next_action": "完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。",
+  "current_next_action": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
   "current_checkpoint_ref": "../CURRENT_STATUS.json"
 }

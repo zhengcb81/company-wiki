@@ -1,0 +1,1047 @@
+{
+  "left": {
+    "id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+    "text": "• The company has shipped ZX-17 products.",
+    "policy": {
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    },
+    "selected_support": [
+      "urn:company-wiki:evidence-span:sha256:a5db8bc66af6797c3820ab76ff542be63066dda581aa53253eff71abcaa0e444"
+    ],
+    "citations": [
+      {
+        "support_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:a5db8bc66af6797c3820ab76ff542be63066dda581aa53253eff71abcaa0e444"
+        ],
+        "context_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:6f4fc99f487e31bc6d4539bf14673bae3c8ea4f78570a0d17654946d9aa28998",
+          "urn:company-wiki:evidence-span:sha256:4797092de67f971886e640d57e200986a182f23b653b7ed7834f818d92aabd5c",
+          "urn:company-wiki:evidence-span:sha256:0cac1ab96f0bba1cc84f31f33eb6a06ffcafdaa3dba50f992a970d1cc07f20a3"
+        ]
+      }
+    ],
+    "tasks": [
+      {
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:a5db8bc66af6797c3820ab76ff542be63066dda581aa53253eff71abcaa0e444"
+        ],
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:6f4fc99f487e31bc6d4539bf14673bae3c8ea4f78570a0d17654946d9aa28998",
+          "urn:company-wiki:evidence-span:sha256:4797092de67f971886e640d57e200986a182f23b653b7ed7834f818d92aabd5c",
+          "urn:company-wiki:evidence-span:sha256:0cac1ab96f0bba1cc84f31f33eb6a06ffcafdaa3dba50f992a970d1cc07f20a3",
+          "urn:company-wiki:evidence-span:sha256:a5db8bc66af6797c3820ab76ff542be63066dda581aa53253eff71abcaa0e444"
+        ],
+        "texts": [
+          "一、经营情况",
+          "(7) Specialty service revenue reached USD 31 million.",
+          "During the reporting period:",
+          "• The company has shipped ZX-17 products."
+        ]
+      }
+    ],
+    "relations": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "char_start": 0,
+              "char_end": 40
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "char_start": 2,
+              "char_end": 13
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "char_start": 26,
+              "char_end": 40
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "char_start": 18,
+              "char_end": 25
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "char_start": 14,
+              "char_end": 17
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "char_start": 18,
+              "char_end": 25
+            }
+          ],
+          "activity": "shipment",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 2236
+    },
+    "fact": {
+      "eligible": true,
+      "topics": [
+        "core_business",
+        "business_progress"
+      ],
+      "reasons": [
+        "operating_milestone"
+      ],
+      "score": 3,
+      "financial_exempt": true,
+      "purpose": "unknown"
+    }
+  },
+  "right": {
+    "id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+    "text": "II) These products have not obtained customer qualification.",
+    "policy": {
+      "eligible": true,
+      "topics": [
+        "business_progress"
+      ],
+      "reasons": [
+        "operating_activity"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    },
+    "selected_support": [],
+    "citations": [],
+    "tasks": [],
+    "relations": {
+      "schema_version": "du4-operating-relations/1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+              "char_start": 0,
+              "char_end": 59
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+              "char_start": 4,
+              "char_end": 18
+            }
+          ],
+          "object_refs": [],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+              "char_start": 46,
+              "char_end": 59
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+              "char_start": 24,
+              "char_end": 27
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+              "char_start": 19,
+              "char_end": 27
+            }
+          ],
+          "activity": "qualification",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "diagnostics": [],
+      "status": "complete",
+      "work_used": 2773
+    },
+    "fact": {
+      "eligible": true,
+      "topics": [
+        "core_business"
+      ],
+      "reasons": [
+        "operating_restriction"
+      ],
+      "score": 3,
+      "financial_exempt": true,
+      "purpose": "unknown"
+    }
+  },
+  "structure": {
+    "schema_version": "du-structure/1",
+    "source_ref": {
+      "source_id": "urn:company-wiki:source:sha256:c79c920cf703e615e70fee603d7e6f557a41b05c85ceb18704ae622ed591e9cb",
+      "source_sha256": "c79c920cf703e615e70fee603d7e6f557a41b05c85ceb18704ae622ed591e9cb"
+    },
+    "sections": [
+      {
+        "section_id": "s1",
+        "parent_id": null,
+        "heading_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+        ],
+        "body_unit_ids": [],
+        "section_role": "unknown",
+        "language": "zh",
+        "confidence": "low",
+        "basis": [
+          "reading_order",
+          "heading_level",
+          "layout_column",
+          "layout_inconsistent"
+        ]
+      },
+      {
+        "section_id": "s2",
+        "parent_id": "s1",
+        "heading_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72",
+          "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+        ],
+        "body_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+        ],
+        "section_role": "unknown",
+        "language": "zh",
+        "confidence": "low",
+        "basis": [
+          "reading_order",
+          "heading_numbering",
+          "layout_column",
+          "single_row_display_heading",
+          "native_numbered_list",
+          "layout_inconsistent",
+          "spans_pages"
+        ]
+      },
+      {
+        "section_id": "s3",
+        "parent_id": "s1",
+        "heading_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5",
+          "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+        ],
+        "body_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de"
+        ],
+        "section_role": "unknown",
+        "language": "zh",
+        "confidence": "low",
+        "basis": [
+          "reading_order",
+          "heading_numbering",
+          "layout_column",
+          "single_row_display_heading",
+          "native_numbered_list",
+          "layout_inconsistent"
+        ]
+      }
+    ],
+    "semantic_units": [
+      {
+        "semantic_id": "m1",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m2",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m3",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b"
+        ],
+        "completeness": "complete",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m4",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2": [
+            "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72",
+            "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+          ]
+        },
+        "required_source_unit_ids_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2": [
+            "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+            "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+            "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+          ]
+        },
+        "native_source_proofs_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2": [
+            {
+              "basis": "observed_adjacent_page_flow",
+              "left": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+              "right": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+              "left_page": 1,
+              "right_page": 2,
+              "left_ordinal": 3,
+              "right_ordinal": 6,
+              "column": 0,
+              "coordinate_frame": "dict",
+              "furniture_unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+                "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "semantic_id": "m5",
+        "kind": "background",
+        "section_ids": [
+          "s3"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m6",
+        "kind": "background",
+        "section_ids": [
+          "s3"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m7",
+        "kind": "paragraph_event",
+        "section_ids": [
+          "s3"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de"
+        ],
+        "completeness": "complete",
+        "diagnostics": []
+      }
+    ],
+    "relations": [],
+    "coverage": {
+      "native_scan": "complete",
+      "structured_unit_count": 7,
+      "unassigned_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+        "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0",
+        "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+      ],
+      "deferred_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+        "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+      ],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "excluded_furniture_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+        "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+      ],
+      "complete": true,
+      "limits": {
+        "max_units": 50000,
+        "max_relations": 100000,
+        "max_group_members": 64,
+        "max_work_units": 2000000
+      },
+      "layout_feature_version": "1.2.0"
+    },
+    "diagnostics": [
+      {
+        "code": "LAYOUT_INCONSISTENT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72",
+          "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+        ],
+        "detail": "declared layout contradicts itself for urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72, urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+      },
+      {
+        "code": "LAYOUT_INCONSISTENT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5",
+          "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+        ],
+        "detail": "declared layout contradicts itself for urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5, urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+      },
+      {
+        "code": "LAYOUT_INCONSISTENT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+        ],
+        "detail": "declared layout contradicts itself for urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+      },
+      {
+        "code": "REPEATED_RUNNING_HEADER",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+          "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+        ],
+        "detail": "text repeating at a page edge is page furniture, not body"
+      },
+      {
+        "code": "TABLE_BODY_NOT_READ",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72"
+        ],
+        "detail": "table purpose is unknown; original rows remain unread or unqualified"
+      },
+      {
+        "code": "TABLE_BODY_NOT_READ",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5"
+        ],
+        "detail": "table purpose is unknown; original rows remain unread or unqualified"
+      },
+      {
+        "code": "WORK_UNITS",
+        "unit_ids": [],
+        "detail": "800"
+      }
+    ]
+  },
+  "continuity": {
+    "feature_version": "native-narrative-continuity/6",
+    "windows": [],
+    "adjacency_edges": [],
+    "work_units": 30,
+    "observed_unit_count": 10,
+    "standalone_unit_count": 3,
+    "semantic_status": "not_evaluated",
+    "source_page_flow": {
+      "enabled": true,
+      "coarse_complete": true,
+      "unproven_page_count": 0
+    },
+    "complete": true,
+    "deferred_unit_count": 0,
+    "deferred_unit_ids": [],
+    "deferred_limited": false,
+    "deferred_unit_ranges": [],
+    "unexamined_from_index": null,
+    "diagnostics": []
+  },
+  "packages": [
+    {
+      "package_id": "m7:urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de",
+      "kind": "paragraph_event",
+      "section_ids": [
+        "s3"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:8341a90d536e50304fff2821c36bef084a630e7399cdd5e5f52663fa38f825de"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5",
+        "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3",
+        "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+      ],
+      "completeness": "complete",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 9,
+      "diagnostics": [],
+      "truncated": false
+    },
+    {
+      "package_id": "m3:urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+      "kind": "background",
+      "section_ids": [
+        "s2"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd",
+        "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72",
+        "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+      ],
+      "completeness": "complete",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 3,
+      "diagnostics": [],
+      "truncated": false
+    },
+    {
+      "package_id": "m1:urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72",
+      "kind": "background",
+      "section_ids": [
+        "s2"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72"
+      ],
+      "required_context_unit_ids": [],
+      "completeness": "unknown",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 1,
+      "diagnostics": [],
+      "truncated": false
+    },
+    {
+      "package_id": "m2:urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd",
+      "kind": "background",
+      "section_ids": [
+        "s2"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd"
+      ],
+      "required_context_unit_ids": [],
+      "completeness": "unknown",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 2,
+      "diagnostics": [],
+      "truncated": false
+    },
+    {
+      "package_id": "m4:urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+      "kind": "background",
+      "section_ids": [
+        "s2"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+      ],
+      "required_context_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:443df4736ecf2ef4392f8ff675f4300570c43d981a27ca2b8ba73400b4ec9acd",
+        "urn:company-wiki:narrative-unit:sha256:9880836d5fd4acdbdbe3fb6ad99da1926a480602a126a77473424e08bc6d0c72",
+        "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+      ],
+      "completeness": "unknown",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 6,
+      "diagnostics": [],
+      "truncated": false,
+      "_native_source_original_ids": [
+        "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+        "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+        "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+      ],
+      "_native_dependency_targets": [
+        "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+      ],
+      "_native_source_proofs": [
+        {
+          "basis": "observed_adjacent_page_flow",
+          "left": "urn:company-wiki:narrative-unit:sha256:23bf21d959538b2c5e6a4b3d72854191baf5a11f66237d1d1d0b347e0ae2e28b",
+          "right": "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+          "left_page": 1,
+          "right_page": 2,
+          "left_ordinal": 3,
+          "right_ordinal": 6,
+          "column": 0,
+          "coordinate_frame": "dict",
+          "furniture_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+            "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+          ]
+        }
+      ]
+    },
+    {
+      "package_id": "m5:urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5",
+      "kind": "background",
+      "section_ids": [
+        "s3"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:99d0d9a2ee8819183e1ea95246188b1c835b250623d0d6f33244aec2210eb7d5"
+      ],
+      "required_context_unit_ids": [],
+      "completeness": "unknown",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 7,
+      "diagnostics": [],
+      "truncated": false
+    },
+    {
+      "package_id": "m6:urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3",
+      "kind": "background",
+      "section_ids": [
+        "s3"
+      ],
+      "section_role": "unknown",
+      "member_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+      ],
+      "anchor_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:a5f8a3e607cd0e3ecd405d30358d73ffbb65785499357728f7be19119521ffc3"
+      ],
+      "required_context_unit_ids": [],
+      "completeness": "unknown",
+      "priority": 2,
+      "reading_family": "unknown",
+      "reading_profile_id": "generic",
+      "reading_profile_version": "generic/v2+11967df8c0fa83d9",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+      "first_ordinal": 8,
+      "diagnostics": [],
+      "truncated": false
+    }
+  ],
+  "blocked": [],
+  "withheld": [
+    {
+      "package_id": "m4:urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+      "reason": "REFERENCE_UNRESOLVED",
+      "status": "ambiguous",
+      "known_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2"
+      ]
+    }
+  ],
+  "selected_context": {
+    "schema_version": "du-production-reading/2",
+    "reading_policy_version": "du-sent-policy/1+18f04bd1a73ca464b8bca2b9f7428b137e17e9704238e3c497befddba7f32370",
+    "reading_policies": [
+      {
+        "profile_id": "generic",
+        "profile_version": "generic/v2+11967df8c0fa83d9",
+        "family": "unknown",
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+        "policy_components": [
+          {
+            "kind": "fallback",
+            "id": "generic_source_reading",
+            "version": "1.0.1",
+            "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d"
+          }
+        ],
+        "reading_questions": [
+          "类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。"
+        ],
+        "context_requirements": [],
+        "family_policy": {
+          "id": null,
+          "design_status": "proposed",
+          "spec_status": "proposed",
+          "evidence_status": "missing",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "Current purpose not resolved by bounded original evidence."
+          ]
+        },
+        "negative_hints": [
+          "目录页与正文标题同名时以正文为准",
+          "重复页眉/页脚不构成新章节",
+          "签章、确认意见、封面落款不承载业务事实",
+          "三张主表与常规账龄表按财务口径处理",
+          "站点导航与页脚样板文字不是披露内容",
+          "交叉引用中提到的表单名称不构成本文档类型"
+        ],
+        "semantic_units": [
+          "paragraph_event",
+          "background"
+        ],
+        "section_priorities": [
+          {
+            "section_role": "unknown",
+            "priority": 2
+          }
+        ]
+      }
+    ],
+    "business_facets": [
+      {
+        "id": "facet_core_business",
+        "version": "1.1.0",
+        "content_digest": "8a08f4f432a74d2b67672edddc4af28236c47442b6d675d483a0d856667d5b04",
+        "selection_basis": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4",
+            "matched_signals": [
+              "经营情况"
+            ]
+          }
+        ],
+        "business_questions": [
+          "公司向谁卖什么、如何收费与交付（订阅、按量消费、产品销售、门店零售、服务外包）",
+          "本期主业有何进展或变化，证据出自哪个章节/发言",
+          "收入确认与履约义务的描述揭示了什么商业机制",
+          "哪些经营指标是商业机制的直接结果（GMV、RPO、订单、用户、门店），它们与收入的关系如何"
+        ],
+        "summary_focus": [
+          "公司卖什么、向谁卖、怎么收钱、怎么交付？",
+          "本期主业有何关键进展或变化，证据在哪里？",
+          "收入确认与履约义务描述揭示了什么商业机制？",
+          "机制类指标（GMV/RPO/订单/用户/门店）的口径是什么，与收入是什么关系？"
+        ],
+        "required_context": [
+          {
+            "assertion": "断言『公司通过X方式向Y类客户收费/交付』时保留主体、产品或服务、角色（卖方/买方/平台）与期间",
+            "slots": [
+              "subject",
+              "product",
+              "role",
+              "period"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "partial",
+            "reason": "商业机制由主体+对象+收费方式共同定义；缺任一项都会把机制说反（如把平台GMV当自营收入）"
+          },
+          {
+            "assertion": "断言机制相关数量（用户数、订阅数、门店数、订单额、GMV）时保留数量、单位与分母/口径",
+            "slots": [
+              "quantity",
+              "unit",
+              "denominator",
+              "period"
+            ],
+            "required_when": "quantity_emitted",
+            "missing_behavior": "unknown",
+            "reason": "只有输出数量才要求单位/分母；指标口径不明时不得补造（用户≠付费客户、存量≠净增）"
+          },
+          {
+            "assertion": "断言GMV、RPO、订单额、合同额等机制指标时必须保留指标口径与『非当期收入』限定",
+            "slots": [
+              "quantity",
+              "unit",
+              "condition",
+              "modality"
+            ],
+            "required_when": "quantity_emitted",
+            "missing_behavior": "partial",
+            "reason": "GMV/RPO/订单是机制中间量，直接换算成收入是最常见的机制误读"
+          }
+        ],
+        "absence_rules": [
+          "未披露商业模式细节时标 unknown（未披露），不按行业通行模式补写收费方式",
+          "管理层未回答商业模式问题时记『未回答』，不把问句中的模式设想当公司事实",
+          "公司明确否认某业务/模式（如『目前未涉及』）按否定作用域保存，不得改写为在研或潜在",
+          "未读取到业务章节或正文不可读时标读取缺口（unread/deferred），不得当成无业务叙述",
+          "纯财务季报/摘要可以合法不作业务摘要（0切片、0 LLM），0业务事实是可接受结果",
+          "文档确属无经营内容的程序性文件时走 eligible_skip_after_read，只留来源与诊断"
+        ],
+        "confusion_checks": [
+          {
+            "risk": "GMV是平台成交总额，与公司确认收入的口径不同",
+            "required_context_slots": [
+              "quantity",
+              "unit",
+              "condition"
+            ]
+          },
+          {
+            "risk": "RPO是未来履约义务余额，按履约进度分期确认，不是当期收入",
+            "required_context_slots": [
+              "quantity",
+              "unit",
+              "modality"
+            ]
+          },
+          {
+            "risk": "订单可取消、可延期，履约期与收入确认规则决定实际确认节奏",
+            "required_context_slots": [
+              "quantity",
+              "unit",
+              "condition",
+              "modality"
+            ]
+          },
+          {
+            "risk": "用户口径未披露付费/注册/活跃之分，不得默认等同付费客户",
+            "required_context_slots": [
+              "quantity",
+              "unit",
+              "denominator",
+              "period"
+            ]
+          }
+        ],
+        "applicable_mechanisms": [
+          "generic",
+          "subscription",
+          "consumption",
+          "store_network",
+          "manufacturing",
+          "biopharma",
+          "cdmo"
+        ]
+      }
+    ],
+    "constraints": [
+      "只使用下面给出的原文单元，不补充任何未出现的数字、主体或时间。",
+      "保留原语言，不翻译、不改写单位与币种。",
+      "每个事实必须能回指到给出的 locator；无法回指的内容不要输出。",
+      "区分已发生事实、公司计划与预测；保留否定与限定条件。",
+      "未读到的内容标注为未读到，不要写成“没有”。",
+      "不输出评级、目标价、仓位或估值结论。",
+      "业务关注项只是阅读提示，不代表原文已经证明对应事实；定性陈述不强制补出数字。"
+    ],
+    "groups": [
+      {
+        "group_id": "urn:company-wiki:reading-group:sha256:2bc57f40acf5300634bf05164281373d6ea1bcd0b9ff6feef9b40128fcdec760",
+        "kind": "paragraph_event",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:6f4fc99f487e31bc6d4539bf14673bae3c8ea4f78570a0d17654946d9aa28998",
+          "urn:company-wiki:evidence-span:sha256:8ab38f4f8c3ed5a658ecdbb3d7f32b1823d7406085b99386833e85149c3cb005",
+          "urn:company-wiki:evidence-span:sha256:9519f441b5340aa19878854906da99c0b714a0abdad9f99d6e88d9360403e281",
+          "urn:company-wiki:evidence-span:sha256:bf12379a9dba7e2bee8e674a96743ece653b7f961b987f2dd05468497fa55b8d"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:bf12379a9dba7e2bee8e674a96743ece653b7f961b987f2dd05468497fa55b8d"
+            ],
+            "context_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:6f4fc99f487e31bc6d4539bf14673bae3c8ea4f78570a0d17654946d9aa28998",
+              "urn:company-wiki:evidence-span:sha256:8ab38f4f8c3ed5a658ecdbb3d7f32b1823d7406085b99386833e85149c3cb005",
+              "urn:company-wiki:evidence-span:sha256:9519f441b5340aa19878854906da99c0b714a0abdad9f99d6e88d9360403e281"
+            ]
+          }
+        ]
+      },
+      {
+        "group_id": "urn:company-wiki:reading-group:sha256:505cd5136c52495cf2f963bd8054c93cea8df22cd1c474e4e86cdaf84dfa8ee1",
+        "kind": "background",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:6f4fc99f487e31bc6d4539bf14673bae3c8ea4f78570a0d17654946d9aa28998",
+          "urn:company-wiki:evidence-span:sha256:4797092de67f971886e640d57e200986a182f23b653b7ed7834f818d92aabd5c",
+          "urn:company-wiki:evidence-span:sha256:0cac1ab96f0bba1cc84f31f33eb6a06ffcafdaa3dba50f992a970d1cc07f20a3",
+          "urn:company-wiki:evidence-span:sha256:a5db8bc66af6797c3820ab76ff542be63066dda581aa53253eff71abcaa0e444"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:a5db8bc66af6797c3820ab76ff542be63066dda581aa53253eff71abcaa0e444"
+            ],
+            "context_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:6f4fc99f487e31bc6d4539bf14673bae3c8ea4f78570a0d17654946d9aa28998",
+              "urn:company-wiki:evidence-span:sha256:4797092de67f971886e640d57e200986a182f23b653b7ed7834f818d92aabd5c",
+              "urn:company-wiki:evidence-span:sha256:0cac1ab96f0bba1cc84f31f33eb6a06ffcafdaa3dba50f992a970d1cc07f20a3"
+            ]
+          }
+        ]
+      },
+      {
+        "group_id": "urn:company-wiki:reading-group:sha256:561ab12efd6ecf5e83d8c6e5c2107df6c230c5ca9af58598a46eab930b7d9c9c",
+        "kind": "background",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:4797092de67f971886e640d57e200986a182f23b653b7ed7834f818d92aabd5c"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:4797092de67f971886e640d57e200986a182f23b653b7ed7834f818d92aabd5c"
+            ],
+            "context_evidence_ids": []
+          }
+        ]
+      },
+      {
+        "group_id": "urn:company-wiki:reading-group:sha256:66ab7749146f08f0b1ab661300e1660ad86242d79c04174764d6a140ed686a23",
+        "kind": "background",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:8ab38f4f8c3ed5a658ecdbb3d7f32b1823d7406085b99386833e85149c3cb005"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:8ab38f4f8c3ed5a658ecdbb3d7f32b1823d7406085b99386833e85149c3cb005"
+            ],
+            "context_evidence_ids": []
+          }
+        ]
+      }
+    ],
+    "unread": {
+      "native_scan": "complete",
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "deferred_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+        "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0"
+      ],
+      "unassigned_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:25d1fe320d7712a73dbfabd81496794b2827e7b6c8924812762ce8da7013522e",
+        "urn:company-wiki:narrative-unit:sha256:6b32d86067df1edf84c794636e43d1b89eac106d65e7a50d994fe3e29b76a4e0",
+        "urn:company-wiki:narrative-unit:sha256:e30882ba80ca1b2982b4735af064221931d5c443da35711f5fe56e7e9f34dce4"
+      ],
+      "structure_complete": true,
+      "counts": {
+        "opaque_pages": 0,
+        "deferred_pages": 0,
+        "deferred_unit_ids": 2,
+        "unassigned_unit_ids": 3
+      },
+      "limited": false
+    },
+    "deferred": [
+      {
+        "package_id": "m4:urn:company-wiki:narrative-unit:sha256:2a17a35df935bc04f721bb398b5a8e71aec89a6400b5371900e00b28470abab2",
+        "reason": "REFERENCE_UNRESOLVED"
+      }
+    ],
+    "layout_coverage": {
+      "processed_unit_count": 10,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+    },
+    "deferred_count": 1,
+    "deferred_limited": false,
+    "selection_diagnostics": []
+  },
+  "work_used": 15465
+}

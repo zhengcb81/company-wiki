@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W08_FINITE_MAIN_PUBLISHED_CI_SUCCESS_NEXT_CROSSPAGE_COMBINATION",
+  "overall_status": "ACTIVE_W08_CROSSPAGE_ACCEPTED_MERGED_PENDING_PUBLICATION_ANNUAL14_PARTIAL",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -123,7 +123,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ACTIVE_W08_NEXT_CROSSPAGE_COMBINATION_ANNUAL14_PARTIAL_W09_W11_PUBLISHED",
+      "status": "ACTIVE_W08_ENGINEERING_ACCEPTED_CONTENT_SELECTION_BATCHING_W10_MATRIX_W12_OPEN",
       "mainline": true
     },
     {
@@ -152,7 +152,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。",
+  "next_step_now": "先完成当前已验收merge的正常提交、推送与精确CI观察；通过后才按next_step_after_publication开始下一质量节点。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -207,7 +207,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-24T00:40:12.983252+00:00",
+  "last_updated_at": "2026-10-24T01:19:05.721991+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -326,7 +326,7 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "FINITE_MAINLINE_MERGED_PUSHED_EXACT_CI_SUCCESS_NEXT_CROSSPAGE_OPEN",
+    "W08": "CROSSPAGE_ENGINEERING_ACCEPTED_MERGED_PENDING_NORMAL_PUBLICATION_REAL_CONTENT_STILL_PARTIAL",
     "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
     "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
     "W09": "MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
@@ -343,7 +343,7 @@
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。",
+    "W08_pending_work": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。",
     "W11_root_repair_commit": "664d3a1db575d64bd4f11658478593a508d03f9b",
     "W11_merge_commit_prefix": "44b722ec",
     "W08_current_independent_review": "review/r1-w08-prepush-rootfix-20261024/independent/final-review.json",
@@ -390,19 +390,25 @@
     "W08_current_publication": "review/r1-w08-prepush-rootfix-20261024/publication-final.json",
     "W08_next_prototype": {
       "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
-      "head": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
-      "working_changes_expected": true,
-      "merged_or_published": false,
-      "next_reading_policy_version": "reading-business-policy/17",
-      "next_independent_initial_red": "resume/cross-page-public-red-20261024/",
-      "physical_structure_owner_report": "resume/cross-page-root-20261024/owned-current-state.json",
-      "order_owner_report": "resume/order-metric-language-20261024/",
-      "predicate_sync": "resume/cross-page-root-20261024/root-predicate-sync.json",
-      "current_finite_observations": "physical47P; order49+77+20+24=170P; first reading public19P; not one stable combined acceptance",
-      "not_done": "freeze all, full natural package, independent architecture/quality review, actual annual replay"
+      "source_commit": "ef49ae3e8ca8f25388971afb58982612070e5b5b",
+      "code_committed": true,
+      "merged_into_mother": true,
+      "pushed": false,
+      "default_selector": "0.8",
+      "next_quality_plan": "review/r1-w08-crosspage-20261024/next-source-quality.md"
     },
     "W08_proof_budget_responsibility": "Actual target facts plus required parent, intro, qualifier, footnote, declaration and deictic closure retain the joint original 8 units / 4 blocks / 2048 raw chars; expand carriers. Required meaning is never removed by a structural-proof label. Dependency role determines accounting. A preceding independently complete business bullet may witness only list marker, indent, lane or page continuity; its unrelated numbers need not become model context. Preserve real source IDs, locators, producer edge endpoints, skipped witnesses and charged parser work.",
-    "W08_dependency_role_decision": "review/r1-w08-prepush-rootfix-20261024/dependency-role-decision.json"
+    "W08_dependency_role_decision": "review/r1-w08-prepush-rootfix-20261024/dependency-role-decision.json",
+    "W08_source_ancestor": "ef49ae3e8ca8f25388971afb58982612070e5b5b",
+    "W08_current_acceptance": "review/r1-w08-crosspage-20261024/root-acceptance.json",
+    "W08_annual14_current_diagnostic": {
+      "pass": 3,
+      "partial": 9,
+      "missing": 2,
+      "unknown": 0,
+      "binds": "V2 actual replay only, not later V3",
+      "review": "review/r1-w08-crosspage-20261024/annual14/review.json"
+    }
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",
@@ -433,5 +439,6 @@
       "updated_at": "2026-10-23T22:42:48Z"
     },
     "publication_docs_commit": "fa667547"
-  }
+  },
+  "next_step_after_publication": "先按本轮真实annual14断链冻结下一批共因反例与逐目标offer/defer诊断，再一起修源层级、事件时间/指引前提闭包、低信息财务孤片与定额选材/分批；在大节点完成后集中测试/独审，再用同一实际输出核内容。随后正式新摘要、cache恢复、W09/W10实际采用矩阵和W12四审；原公司复验后药明合联→Snowflake。"
 }

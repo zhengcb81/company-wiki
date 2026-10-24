@@ -20,7 +20,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/5"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/6"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -75,7 +75,7 @@ class SourcePageFlow:
 
 
 @dataclass(frozen=True)
-class _Native:
+class NativePhysicalObservation:
     unit: Mapping[str, Any]
     provenance: Mapping[str, Any]
     source: str
@@ -85,15 +85,250 @@ class _Native:
     block: int
     bbox: tuple[float, ...]
     frame: tuple[Any, ...]
-    scope: tuple[Any, ...]
     column: Any
     font: tuple[float, str]
+
+
+@dataclass(frozen=True)
+class _Native(NativePhysicalObservation):
+    scope: tuple[Any, ...]
     left_closed: bool
+
+
+def _observe_native_font(unit: Mapping[str, Any], frame: str, charge: Callable[[int], bool]) -> tuple[float, str] | None:
+    runs = unit.get("hints", {}).get("font_runs", ())
+    if (
+        not isinstance(runs, (tuple, list))
+        or not runs
+        or not charge(len(runs))
+    ):
+        return None
+    measured: Counter[tuple[float, str]] = Counter()
+    previous = 0
+    for run in runs:
+        if not isinstance(run, Mapping):
+            return None
+        start, end = _integer(run.get("char_start")), _integer(run.get("char_end"))
+        size, weight = _number(run.get("font_size")), run.get("font_weight")
+        if (
+            start is None
+            or end is None
+            or not previous <= start < end <= len(unit["text"])
+            or size is None
+            or size <= 0
+            or weight not in {"regular", "bold"}
+            or run.get("source") not in _NATIVE_FONTS
+            or run.get("coordinate_frame") != frame
+            or run.get("char_alignment") != "exact"
+        ):
+            return None
+        measured[(size, weight)] += end - start
+        previous = end
+    covered = sum(measured.values())
+    if covered < len(unit["text"]) * 0.9:
+        return None
+    style, weight = measured.most_common(1)[0]
+    return style if 2 * weight >= covered else None
+
+
+def observe_native_source_unit(
+    unit: Mapping[str, Any], provenance: Mapping[str, Any],
+    charge: Callable[[int], bool],
+) -> NativePhysicalObservation | None:
+    """Observe actual source geometry/font/provenance without sentence or section policy."""
+    if not charge(1):
+        return None
+    uid = unit.get("unit_id")
+    if (
+        not isinstance(uid, str)
+        or unit.get("kind") != "paragraph"
+        or unit.get("role") not in {"company_filing", "management", "unknown"}
+        or not isinstance(unit.get("text"), str)
+        or not unit["text"]
+    ):
+        return None
+    hints, layout = unit.get("hints", {}), unit.get("layout", {})
+    if (
+        not isinstance(hints, Mapping)
+        or not isinstance(layout, Mapping)
+        or hints.get("table_id") is not None
+        or hints.get("heading_level")
+    ):
+        return None
+    source = hints.get("source_id")
+    page, ordinal = _integer(unit.get("page")), _integer(unit.get("ordinal"))
+    paragraph, block = (
+        _integer(provenance.get("paragraph_index")),
+        _integer(provenance.get("pdf_block")),
+    )
+    frame, rotation = (
+        layout.get("coordinate_frame"),
+        _integer(layout.get("rotation")),
+    )
+    width, height = (
+        _number(layout.get("page_width")),
+        _number(layout.get("page_height")),
+    )
+    if (
+        not isinstance(source, str)
+        or not source
+        or source != provenance.get("source_id")
+        or page is None
+        or ordinal is None
+        or paragraph is None
+        or block is None
+        or frame not in _FRAMES
+        or rotation not in {0, 90, 180, 270}
+        or width is None
+        or height is None
+        or width <= 0
+        or height <= 0
+    ):
+        return None
+    value = layout.get("bbox")
+    if not isinstance(value, (list, tuple)) or len(value) != 4:
+        return None
+    box = tuple(_number(item) for item in value)
+    if any(item is None for item in box):
+        return None
+    actual = tuple(float(item) for item in box if item is not None)
+    if (
+        not 0 <= actual[0] < actual[2] <= width
+        or not 0 <= actual[1] < actual[3] <= height
+    ):
+        return None
+    font = _observe_native_font(unit, frame, charge)
+    if font is None:
+        return None
+    return NativePhysicalObservation(unit, provenance, source, page, ordinal, paragraph,
+                                     block, actual, (frame, rotation, width, height),
+                                     layout.get("column"), font)
+
+
+def _native_page_candidate(left: NativePhysicalObservation, right: NativePhysicalObservation) -> bool:
+    return bool(right.page == left.page + 1 and left.source == right.source
+        and left.frame == right.frame and left.font == right.font
+        and left.unit.get("role") == right.unit.get("role")
+        and left.bbox[3] >= 0.8 * left.frame[3]
+        and right.bbox[1] <= 0.2 * right.frame[3])
+
+
+def native_page_neighbour(
+    left: NativePhysicalObservation, right: NativePhysicalObservation, *,
+    furniture: Sequence[Mapping[str, Any]], coarse_complete: bool,
+    unproven_pages: frozenset[int],
+) -> tuple[dict[str, Any] | None, str | None]:
+    """One pure physical proof. Completion, parent identity and business syntax are clients."""
+    if not _native_page_candidate(left, right):
+        return None, None
+    previous_page, previous_paragraph = left.page, left.paragraph
+    for offset, item in enumerate(furniture, 1):
+        page, paragraph = item.get("page"), item.get("paragraph_index")
+        if (item.get("kind") not in {"paragraph", "heading"}
+                or item.get("ordinal") != left.ordinal + offset or type(paragraph) is not int
+                or type(page) is not int or page not in (left.page, right.page)
+                or page < previous_page
+                or (page == previous_page and paragraph != previous_paragraph + 1)):
+            return None, "CONTINUITY_PAGE_ORDER_UNPROVEN"
+        previous_page, previous_paragraph = page, paragraph
+    if (right.ordinal != left.ordinal + 1 + len(furniture)
+            or (furniture and furniture[-1]["page"] == right.page
+                and right.paragraph != furniture[-1]["paragraph_index"] + 1)):
+        return None, "CONTINUITY_PAGE_ORDER_UNPROVEN"
+    if not coarse_complete or left.page in unproven_pages or right.page in unproven_pages:
+        return None, "CONTINUITY_PAGE_COVERAGE_UNPROVEN"
+    column = left.column
+    valid = ((type(column) is int and column >= 0)
+             or (isinstance(column, str) and 0 < len(column.strip()) <= 128))
+    if not valid or type(column) is not type(right.column) or column != right.column:
+        return None, "CONTINUITY_PAGE_COLUMN_UNPROVEN"
+    a, b, size = left.bbox, right.bbox, left.font[0]
+    overlap = min(a[2], b[2]) - max(a[0], b[0])
+    if (abs(a[0] - b[0]) > 2.1 * size or overlap <= 0
+            or overlap < 0.8 * min(a[2] - a[0], b[2] - b[0])):
+        return None, "CONTINUITY_PAGE_LANE_UNPROVEN"
+    return {"basis": "observed_adjacent_page_flow", "left": left.unit["unit_id"],
+            "right": right.unit["unit_id"], "left_page": left.page, "right_page": right.page,
+            "left_ordinal": left.ordinal, "right_ordinal": right.ordinal,
+            "column": column, "coordinate_frame": left.frame[0],
+            "furniture_unit_ids": [unit["unit_id"] for unit in furniture]}, None
+
+
+class NativeSourceContext:
+    """Borrowed, call-local source observation; one precharged index, no source-state schema."""
+    def __init__(self, units: Sequence[Mapping[str, Any]], *,
+                 provenance: Mapping[str, Mapping[str, Any]], coverage: Mapping[str, Any],
+                 work_budget: WorkBudget):
+        # No field read, copying or indexing may precede this reservation.
+        work_budget.charge(1 + 3 * len(units) + len(provenance))
+        self.work_budget = work_budget
+        self.provenance = provenance
+        self.units = {unit["unit_id"]: unit for unit in units}
+        self.ordinals = {unit.get("ordinal"): unit for unit in units}
+        self.unique = len(self.units) == len(units) == len(self.ordinals)
+        opaque, deferred = coverage.get("opaque_pages"), coverage.get("deferred_pages")
+        self.unproven_pages: frozenset[int] = frozenset()
+        if isinstance(opaque, (tuple, list)) and isinstance(deferred, (tuple, list)):
+            work_budget.charge(1 + len(opaque) + len(deferred))
+            known = all(type(page) is int and page >= 0 for page in chain(opaque, deferred))
+            if known:
+                self.unproven_pages = frozenset(chain(opaque, deferred))
+        else:
+            work_budget.charge()
+            known = False
+        self.coverage_complete = coverage.get("native_scan") == "complete" and known
+        self.observations: dict[str, NativePhysicalObservation | None] = {}
+        self.diagnostics: Counter[str] = Counter()
+
+    def _charge(self, amount: int = 1) -> bool:
+        self.work_budget.charge(amount)
+        return True
+
+    def observe(self, uid: str, *, charge: Callable[[int], bool] | None = None
+                ) -> NativePhysicalObservation | None:
+        debit = self._charge if charge is None else charge
+        if uid not in self.observations:
+            if not debit(1):
+                return None
+            unit = self.units.get(uid)
+            self.observations[uid] = (observe_native_source_unit(
+                unit, self.provenance.get(uid, {}), debit) if unit else None)
+        return self.observations[uid]
+
+    def page_neighbour(self, left_id: str, right_id: str, *,
+                       furniture_unit_ids: frozenset[str]) -> dict[str, Any] | None:
+        self._charge()
+        left, right = self.observe(left_id), self.observe(right_id)
+        if not self.unique or left is None or right is None:
+            return None
+        gap = right.ordinal - left.ordinal - 1
+        if gap < 0 or gap > len(self.units):
+            return None
+        self._charge(1 + gap)
+        furniture = []
+        for ordinal in range(left.ordinal + 1, right.ordinal):
+            unit = self.ordinals.get(ordinal)
+            if not unit or unit["unit_id"] not in furniture_unit_ids:
+                return None
+            uid = unit["unit_id"]
+            meta = self.provenance.get(uid, {})
+            if (meta.get("source_id") != left.source
+                    or unit.get("hints", {}).get("source_id") != left.source):
+                return None
+            furniture.append({"unit_id": uid, "page": unit.get("page"), "ordinal": ordinal,
+                              "kind": unit.get("kind"), "paragraph_index": meta.get("paragraph_index")})
+        proof, diagnostic = native_page_neighbour(left, right, furniture=furniture,
+            coarse_complete=self.coverage_complete, unproven_pages=self.unproven_pages)
+        if diagnostic:
+            self.diagnostics[diagnostic] += 1
+        return proof
 
 
 class _Analysis:
     def __init__(self, limits: Mapping[str, Any] | None, work_budget: WorkBudget | None = None,
-                 source_page_flow: SourcePageFlow | None = None):
+                 source_page_flow: SourcePageFlow | None = None,
+                 source_contexts: Mapping[str, NativeSourceContext] | None = None):
+        self.source_contexts = source_contexts
         self.limits = dict(_LIMITS)
         if limits is not None:
             if not isinstance(limits, Mapping):
@@ -128,132 +363,35 @@ class _Analysis:
         self.work = self.account.used
         return True
 
-    def font(self, unit: Mapping[str, Any], frame: str) -> tuple[float, str] | None:
-        runs = unit.get("hints", {}).get("font_runs", ())
-        if (
-            not isinstance(runs, (tuple, list))
-            or not runs
-            or not self.charge(len(runs))
-        ):
-            return None
-        measured: Counter[tuple[float, str]] = Counter()
-        previous = 0
-        for run in runs:
-            if not isinstance(run, Mapping):
-                return None
-            start, end = _integer(run.get("char_start")), _integer(run.get("char_end"))
-            size, weight = _number(run.get("font_size")), run.get("font_weight")
-            if (
-                start is None
-                or end is None
-                or not previous <= start < end <= len(unit["text"])
-                or size is None
-                or size <= 0
-                or weight not in {"regular", "bold"}
-                or run.get("source") not in _NATIVE_FONTS
-                or run.get("coordinate_frame") != frame
-                or run.get("char_alignment") != "exact"
-            ):
-                return None
-            measured[(size, weight)] += end - start
-            previous = end
-        covered = sum(measured.values())
-        if covered < len(unit["text"]) * 0.9:
-            return None
-        style, weight = measured.most_common(1)[0]
-        return style if 2 * weight >= covered else None
-
     def native(
-        self,
-        unit: Mapping[str, Any],
-        provenance: Mapping[str, Any],
-        profile: Mapping[str, Any],
-        section: Any,
-        headings: set[str],
-        left_closed: bool,
+        self, unit: Mapping[str, Any], provenance: Mapping[str, Any],
+        profile: Mapping[str, Any], section: Any, headings: set[str], left_closed: bool,
     ) -> _Native | None:
-        if not self.charge():
+        if unit.get("unit_id") in headings:
+            self.charge()
             return None
-        uid = unit.get("unit_id")
-        if (
-            not isinstance(uid, str)
-            or uid in headings
-            or unit.get("kind") != "paragraph"
-            or unit.get("role") not in {"company_filing", "management", "unknown"}
-            or not isinstance(unit.get("text"), str)
-            or not unit["text"]
-        ):
+        # A semantic view may veto a paragraph or add scope, but its already
+        # observed source geometry/font still has one call-local producer.
+        if unit.get("kind") != "paragraph":
+            self.charge()
             return None
-        hints, layout = unit.get("hints", {}), unit.get("layout", {})
-        if (
-            not isinstance(hints, Mapping)
-            or not isinstance(layout, Mapping)
-            or hints.get("table_id") is not None
-            or hints.get("heading_level")
-        ):
+        source_id = provenance.get("source_id")
+        context = ((self.source_contexts or {}).get(source_id)
+                   if isinstance(source_id, str) else None)
+        if context is None:
+            actual = observe_native_source_unit(unit, provenance, self.charge)
+        else:
+            if not self.charge():
+                return None
+            actual = context.observe(str(unit.get("unit_id") or ""), charge=self.charge)
+        if actual is None:
             return None
-        source = hints.get("source_id")
-        page, ordinal = _integer(unit.get("page")), _integer(unit.get("ordinal"))
-        paragraph, block = (
-            _integer(provenance.get("paragraph_index")),
-            _integer(provenance.get("pdf_block")),
-        )
-        frame, rotation = (
-            layout.get("coordinate_frame"),
-            _integer(layout.get("rotation")),
-        )
-        width, height = (
-            _number(layout.get("page_width")),
-            _number(layout.get("page_height")),
-        )
-        if (
-            not isinstance(source, str)
-            or not source
-            or source != provenance.get("source_id")
-            or page is None
-            or ordinal is None
-            or paragraph is None
-            or block is None
-            or frame not in _FRAMES
-            or rotation not in {0, 90, 180, 270}
-            or width is None
-            or height is None
-            or width <= 0
-            or height <= 0
-        ):
-            return None
-        value = layout.get("bbox")
-        if not isinstance(value, (list, tuple)) or len(value) != 4:
-            return None
-        box = tuple(_number(item) for item in value)
-        if any(item is None for item in box):
-            return None
-        actual = tuple(float(item) for item in box if item is not None)
-        if (
-            not 0 <= actual[0] < actual[2] <= width
-            or not 0 <= actual[1] < actual[3] <= height
-        ):
-            return None
-        font = self.font(unit, frame)
-        if font is None:
-            return None
-        key = native_section_key(hints, section)
-        scope = (key, profile.get("reading_profile_key"), profile.get("section_role"))
-        return _Native(
-            unit,
-            provenance,
-            source,
-            page,
-            ordinal,
-            paragraph,
-            block,
-            actual,
-            (frame, rotation, width, height),
-            scope,
-            layout.get("column"),
-            font,
-            left_closed,
-        )
+        key = native_section_key(unit.get("hints", {}), section)
+        return _Native(unit, actual.provenance, actual.source, actual.page,
+                       actual.ordinal, actual.paragraph, actual.block, actual.bbox,
+                       actual.frame, actual.column, actual.font,
+                       (key, profile.get("reading_profile_key"), profile.get("section_role")),
+                       left_closed)
 
     def tail_column_proof(self, left: _Native, right: _Native,
                           witnesses: Sequence[_Native]) -> dict[str, Any] | None:
@@ -308,13 +446,8 @@ class _Analysis:
 
     def pending_page_transition(self, left: _Native, right: _Native) -> bool:
         flow = self.source_page_flow
-        if (flow is None or right.page != left.page + 1
-                or left.source != right.source or left.scope != right.scope
-                or left.frame != right.frame or left.font != right.font
-                or left.unit.get("role") != right.unit.get("role")
-                or _terminal(left.unit["text"])
-                or left.bbox[3] < 0.8 * left.frame[3]
-                or right.bbox[1] > 0.2 * right.frame[3]):
+        if (flow is None or not _native_page_candidate(left, right)
+                or left.scope != right.scope or _terminal(left.unit["text"])):
             return False
         if not self.charge(8 * len(right.unit["text"])):
             return False
@@ -324,38 +457,14 @@ class _Analysis:
                   furniture: Sequence[Mapping[str, Any]]) -> dict[str, Any] | None:
         if not self.pending_page_transition(left, right):
             return None
-        # Ordinal is source-global; paragraph_index is a page-local locator.
-        # Comparing the latter across pages confuses identity with flow order.
-        if (right.ordinal != left.ordinal + 1 + len(furniture)
-                or (furniture and furniture[-1]["page"] == right.page
-                    and right.paragraph != furniture[-1]["paragraph_index"] + 1)):
-            self.diagnostics["CONTINUITY_PAGE_ORDER_UNPROVEN"] += 1
-            self.defer([left, right])
-            return None
         flow = self.source_page_flow
-        if flow is not None and (not flow.coarse_complete
-                or left.page in flow.unproven_pages or right.page in flow.unproven_pages):
-            self.diagnostics["CONTINUITY_PAGE_COVERAGE_UNPROVEN"] += 1
+        proof, diagnostic = native_page_neighbour(left, right, furniture=furniture,
+            coarse_complete=flow.coarse_complete if flow is not None else False,
+            unproven_pages=flow.unproven_pages if flow is not None else frozenset())
+        if diagnostic:
+            self.diagnostics[diagnostic] += 1
             self.defer([left, right])
-            return None
-        column = left.column
-        valid_column = ((type(column) is int and column >= 0)
-                        or (isinstance(column, str) and 0 < len(column.strip()) <= 128))
-        if not valid_column or type(column) is not type(right.column) or column != right.column:
-            self.diagnostics["CONTINUITY_PAGE_COLUMN_UNPROVEN"] += 1
-            self.defer([left, right])
-            return None
-        a, b, size = left.bbox, right.bbox, left.font[0]
-        overlap = min(a[2], b[2]) - max(a[0], b[0])
-        if (abs(a[0] - b[0]) > 2.1 * size or overlap <= 0
-                or overlap < 0.8 * min(a[2] - a[0], b[2] - b[0])):
-            self.diagnostics["CONTINUITY_PAGE_LANE_UNPROVEN"] += 1
-            self.defer([left, right])
-            return None
-        return {"basis": "observed_adjacent_page_flow", "left": left.unit["unit_id"],
-                "right": right.unit["unit_id"], "left_page": left.page, "right_page": right.page,
-                "column": column, "coordinate_frame": left.frame[0],
-                "furniture_unit_ids": [unit["unit_id"] for unit in furniture]}
+        return proof
 
     def edge(self, left: _Native, right: _Native, *,
              column_witnesses: Sequence[_Native] = (),
@@ -544,9 +653,10 @@ def build_native_continuity(
     limits: Mapping[str, Any] | None = None,
     work_budget: WorkBudget | None = None,
     source_page_flow: SourcePageFlow | None = None,
+    source_contexts: Mapping[str, NativeSourceContext] | None = None,
 ) -> dict[str, Any]:
-    """Return only bounded original-ID context whose native continuity is proven."""
-    state = _Analysis(limits, work_budget, source_page_flow)
+    """Return bounded original-ID context, reusing a supplied call-local physical owner."""
+    state = _Analysis(limits, work_budget, source_page_flow, source_contexts)
     profiles = unit_profiles or {}
     headings: set[str] = set()
     unit_section = {}
@@ -589,6 +699,7 @@ def build_native_continuity(
                 unexamined = seen - 1
                 break
             furniture.append({"unit_id": uid, "page": unit["page"], "ordinal": unit["ordinal"],
+                              "kind": meta.get("observed_kind", unit.get("kind")),
                               "paragraph_index": meta["paragraph_index"]})
             continue
         left_closed = type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0

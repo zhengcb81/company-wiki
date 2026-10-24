@@ -12,19 +12,19 @@
 
 | 切面 | 当前结果 | 发布/边界 |
 |---|---|---|
-| W08 来源选材、业务父级、缓存依赖 | 前有限来源/用途/项目/谓词节点已真实合线：b0344200并支线7b1c015b，旧5回归与独审8反例根修4e3e0231；独审42P、正常7857P/24skip+146smokeP，精确CI40044921473成功。真实249页14项仍PARTIAL | 新跨页/订单/逐target引用在ROOT原工区有意保留working changes，尚未并线/发布/完整独审。47P/170P/19P是不同有限观察，不相加代签。见[发布](review/r1-w08-prepush-rootfix-20261024/publication-final.md) |
+| W08 来源选材、业务父级、缓存依赖 | 新跨页/逐target/共享词法节点13独审P、2121P/11skip；源码ef49ae3e已真实合母线，待本次正常发布/CI。真实年报3pass/9partial/2missing | [接收](review/r1-w08-crosspage-20261024/root-acceptance.md)与[内容](review/r1-w08-crosspage-20261024/annual14/review.md)分开；正式摘要/cache/RF矩阵/W12仍OPEN |
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：完成ROOT工区下一跨页节点的组合验收：共享物理/早期结构、per-target可读依赖及物理proof、订单语言/未来方向已在不重叠写集实现；先完成语义材料与物理证明预算分层的反控，冻结全部源码，一次跑自然selection包和受影响structure/continuity，再由未实现该增量的agent集中审查、根修。随后真实249页14项回放、固定容量选材/分批、正式新摘要/cache/RF矩阵/W12；原公司复验后药明合联→Snowflake。**
+**当前唯一第一步：先完成当前已验收merge的正常提交、推送与精确CI观察；通过后按本节及next-source-quality实施下一质量节点。**
 
-W08有限节点已真实并线推送，源码4e3e0231的精确CI成功；W09/RF599d17b8和W11/1be42a76此前发布亦保持。所有原5失败、独审8失败及旧断言保留，普通prepush有效拦截后根修，未引发远端失败。10个旧文件只换行/stat缓存状态已逐份LF/blob核实、正常刷新，Git树不变、母仓tracked干净。
+W08共享物理/结构/每target闭包、订单和共享产品词法节点已独立13/13、集中2121P/11既有skip通过，正常源码ef49ae3e真实合入母仓，正做本次正常发布和精确CI。前述4e3e0231是上一已发布绿点，不能替代这次CI。[接收收据](review/r1-w08-crosspage-20261024/root-acceptance.md)。
 
-下一节点仍在ROOT W08独占工区（HEAD7b1c015b，working changes属于当前施工，不能清理回主线）。物理/结构47项、订单170项以及初版引用接线含原9的19项各有有限绿，尚未全部冻结/集中独审，不能写完成。publisher已把母谓词2ed1433e和22回归定点同步，旧node freeze保留历史。默认0.8、96/48000/16M及语义材料8/4/2048不变。
+本次原自然63F由三共因解决：新增generic输入属性要求42、空diagnostic污染调用输入19、稀疏工区缺Git跟踪规格2。独审英文复数产品原12P1F，复用共用产品词法/谓语边界修后同13P，原9/77/20/24等及失败不改。共享物理producer一次、sections唯一父级、reading唯一真实语义材料闭包，结构见证按用途留痕；不新造权限链或逐card几何重验。默认0.8、96/48000/16M和8/4/2048保持。
 
-已查出并撤回一项本轮拟新增门槛：不能把用于排版连续性的页眉/页脚物理proof也算成模型材料。源7units/6blocks不等于模型语义材料5units/4blocks；后者仍受原限额，前者按实际解析工作、真实页序、coverage和原client窗口留痕。业务父级、脚注、限制和指代真正语义依赖仍完整联合计费，不能冒充physical-only。用途决定计量：独立完整业务条目若仅作列表/版面见证，其无关数字也不自动进模型；若同时有语义责任仍必须保留。共享producer只观察一次，消费者不逐card重算几何。见[职责决策](review/r1-w08-prepush-rootfix-20261024/dependency-role-decision.md)。[独立职责复核](review/r1-w08-prepush-rootfix-20261024/fixture-budget-responsibility.md)保留最初误判及撤回原因；原9断言未改。
+真实249页V2一次回放96/8518、工作8630449/16M，两个30%归属检查通过；独立完整14为3pass/9partial/2missing。业务父级、容量日期、集团新客户、指引前提等仍丢失，不能以完整原文fallback或另一个task可见冒充采用。财务数表可按需SourceRef/API，未调用的API不说已获取，不强迫全文财务切片。[内容审查](review/r1-w08-crosspage-20261024/annual14/review.md)及[具体下一阶段](review/r1-w08-crosspage-20261024/next-source-quality.md)。V3英文词法修复未重复解析PDF，也不借V2签新版本全内容。
 
-W11官方索引已单次有界正规保存486901B并按SourceRef回放，新快照不充旧486789B正文。有H1/Q1/JPM文字但无业务下载锚，0业务文件下载，材料external_limit继续OPEN；临时body已删、原件保留。[实际来源收据](review/r1-w11-actual-recovery-20261024.md)。
+W09/RF599d17b8和W11/1be42a76此前已发布、精确CI成功。W11新官方索引486901B已按SourceRef正规保存/回放，当前页无业务下载锚，0业务文件下载、材料external_limit仍OPEN。原件/旧封存保留，原费用unknown不改，本节点0模型/0业务下载。
 
 随后按已接收W08–W12计划在新摘要上采用已发布W09精确摘录/事实角色/最大驱动经营桥，采用已安装W10从实际native子结果与prepared/read/use引用重建最终矩阵，W11处理真实来源缺口，W12原公司独立四审；再药明合联→Snowflake及后续清单。专家方案14个finding出现项归并10根因，不是14个独立根因；方案接收与工程组件通过都不等于公司PASS。见[根因方案接收](review/r1-final3-plan-root-reception-20261022.json)。
 
@@ -59,7 +59,7 @@ W03/W07真实0.9/v5一次摘要、paid replay、激活前故障恢复/cache和�
 
 | ID | 任务与当前状态 | 后续实施要求 |
 |---|---|---|
-| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08有限主线4e3e0231/CI成功、下一跨页组合尚未验收、真实14目标仍PARTIAL；W09/W11已修复并线推送、精确CI成功；W10组件通过但实际矩阵OPEN；W12未开始 | 先完成本页唯一下一步，再真实摘要、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
+| R1 主线 | W01–W07既有工程和真实生命周期完成；旧final3四审FAIL；W08跨页工程13P/2121P已接收，真实14为3P9partial2missing、选材/分批仍OPEN；W09/W11已修复并线推送、精确CI成功；W10组件通过但实际矩阵OPEN；W12未开始 | 先完成本页唯一下一步，再真实摘要、RF全流程与四审；药明康德新attempt复验后依次药明合联→Snowflake及后续清单。不覆盖旧FAIL，不以提高额度掩盖代码缺陷，不把派发当交付 |
 | R2 实验性补写 | W04已退役新增付费补写；有证明的历史final owner激活/费用结算和旧partial读取工程修复通过 | 保留旧partial/merged DTO、原文及全部费用，不改immutable output0、不新建multi-operation框架。普通单次真实付费后激活前恢复已在W07实测且独审通过；内容质量仍须W06，不能用cache代签 |
 | R3 证据可复现性 | 核心 C 摘要、HK 报告、B2 回放已在 Git；完整 live 响应/consumer/recovery 子收据仍为本机材料 | R1 准备时核对复现所需材料和代码绑定，补足必要索引/可移植证据；不宣称 fresh clone 已可复验全过程，不提交密钥或整棵临时湖 |
 | R4 工程改进候选 | 复杂度基线 C901=292、PLR0912=173、PLR0915=111；lint扩面、大模块、配置解析去重、异常卫生、覆盖率基线未完成 | 详见[专项交接第7节](HANDOFF-2026-10-21.md#7-未完成--下一步路线按性价比)。计数是既有审计基线；按实测收益安排，不自动新增覆盖率阈值或一批阻断门禁，不抢占R1 |

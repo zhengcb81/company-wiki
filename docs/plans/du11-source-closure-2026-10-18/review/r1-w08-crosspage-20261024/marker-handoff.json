@@ -1,0 +1,54 @@
+{
+  "status": "FINITE_OWNER_GREEN_PENDING_COMBINED_INDEPENDENT_ACCEPTANCE",
+  "root_cause": "Caller stripped the whitespace delimiter before the shared connector owner could distinguish an observed list prefix; the prefix then looked like an intervening subject and silently lost a true restriction dependency.",
+  "implementation": "Shared lexical prefix handling preserves original offsets and requires a real delimiter; the qualifier caller retains that delimiter. No reading/product/company special case and no new identity/permission gate.",
+  "before_bindings": {
+    "src\\company_wiki\\document_understanding\\operating_states\\text_view.py": "eba28e54cd339b0db9104439e059eb752beb24e89a5e82f349b3e5c8abc754a3",
+    "src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+    "tests\\unit\\document_understanding_selection\\test_reading_declaration_marker_qualification.py": "f738184ccc65dcbad77014cc721071e061e81fecd115077ca4ebfe063fba5209"
+  },
+  "final_bindings": {
+    "src\\company_wiki\\document_understanding\\operating_states\\text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "tests\\unit\\document_understanding_selection\\test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5"
+  },
+  "red": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "16",
+    "skipped": "0",
+    "tests": "28",
+    "time": "1.691",
+    "timestamp": "2026-10-24T01:45:33.418841+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "green": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "88",
+    "time": "2.666",
+    "timestamp": "2026-10-24T01:45:59.806934+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "test_bytes_unchanged_since_red": true,
+  "ruff": "PASS",
+  "test_temp": "Tests use only in-memory source fixtures. No tmp_path, production catalog, download or model; pytest cache disabled and PYTHONDONTWRITEBYTECODE=1. No recursive cleanup necessary.",
+  "wrapper_error": "RED pytest finished and saved TXT/XML, then console GBK could not print a bullet. No lost test output; wrapper stdout corrected to UTF8 before implementation. RED receipt derived from actual original XML without rerunning RED.",
+  "external_calls": 0,
+  "git_writes": 0,
+  "not_certified": "Cross-page reading/package/real annual content/summary/RF audit.",
+  "preceding_28_case_owner_freeze": {
+    "src\\company_wiki\\document_understanding\\operating_states\\text_view.py": "cb9fc04c4729aea9c08a1ca562261e656692bc5521900355c44e4cbb65c71863",
+    "src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "tests\\unit\\document_understanding_selection\\test_reading_declaration_marker_qualification.py": "f738184ccc65dcbad77014cc721071e061e81fecd115077ca4ebfe063fba5209"
+  },
+  "roman_followup": {
+    "reason": "Independent review raised the same Roman grammar uppercase boundary; four appended controls first4F28P, then32P after re.IGNORECASE. Original28 bytes retained exactly as prefix; original9/77/20/24 untouched.",
+    "red": "roman-red.json",
+    "green": "roman-green.json",
+    "preparation": "roman-preparation.json",
+    "ruff_final": "PASS --no-cache; the earlier regular cache write was denied by sandbox, not a product error."
+  }
+}

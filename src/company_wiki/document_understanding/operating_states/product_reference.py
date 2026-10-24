@@ -111,7 +111,7 @@ _ISSUER_PREFIX = re.compile(
 
 # A product name starts with a capitalised proper token; generic sentence
 # openers ("The Company launched ...") therefore cannot swallow the name.
-_HEAD_ONLY = re.compile(_HEAD_ALT)
+_HEAD_ONLY = re.compile(_HEAD_ALT, re.IGNORECASE)
 _FAMILY_SUFFIX = re.compile(r"(系列|产品线|產線)$")
 _LATIN_TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9&./+-]*$")
 _CJK_TAIL = re.compile(r"[\u3400-\u9fff]{2,10}$")
@@ -191,6 +191,15 @@ def product_head_spans(text: str) -> tuple[tuple[int, int, str], ...]:
                  if not (match.group().isascii()
                          and ((match.start() and text[match.start()-1].isalpha())
                               or (match.end() < len(text) and text[match.end()].isalpha()))))
+
+
+def product_head_suffix(text: str) -> tuple[int, int, str] | None:
+    """One trailing observed head, not proof of product identity or issuer.
+
+    NP classification and independent-subject boundaries share the declaration
+    vocabulary and its Latin word boundaries; no arbitrary trailing-s stemming.
+    """
+    return next((head for head in product_head_spans(text) if head[1] == len(text)), None)
 
 
 def supports_head(head: str) -> bool:

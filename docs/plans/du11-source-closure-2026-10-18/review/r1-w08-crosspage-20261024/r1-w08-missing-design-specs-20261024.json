@@ -1,0 +1,599 @@
+{
+  "status": "POST_HOC_RECONSTRUCTED_MISSING_JSON_RESTORE_RECEIPT",
+  "ref": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
+  "restored": [
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/acquisition_requests.json",
+      "blob": "b466cf66da51da1d5342f01bfd9035a0fe870f7b",
+      "bytes": 5649,
+      "sha256": "0f29e5d22247a9774183f88fb88a8bfc04cdb6c4e7641b999f98fe428cb92436"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/c_verification/real_excerpt_checks.json",
+      "blob": "8ea5de7d84bb9dee794ea105242a4f7e5aeecae2",
+      "bytes": 21830,
+      "sha256": "f92e2324ac685805cb7f240f9f57f523bc20f2a20999700fe84b7c13eab1958b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_cn_convertible_capacity_funding.json",
+      "blob": "4d3328f76b8f4fc46b82db90c891b7e89d8ac92d",
+      "bytes": 10498,
+      "sha256": "871c78c7b52bdd240740e55a5da92183f900d54e64c5b5c1394d522954e95aa9"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_cn_equity_capacity_phasing.json",
+      "blob": "744d7bd26db29f03ab76b3ad4128e2c510c48b62",
+      "bytes": 12057,
+      "sha256": "e12dcee5187222a3aaef3910d49d78be4d1b925df894c3f9d5db0581b0d3fbe0"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_cn_ir_premise_denial.json",
+      "blob": "f00a6ed3a7ca43a18f860c80d78e13e6e3dc63b0",
+      "bytes": 16194,
+      "sha256": "8e0d5f50f4b01cdc10af6912c42b6e786a36776d50f1d10609944e580cdabffa"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_hk_annual_store_network.json",
+      "blob": "688fda40565c3751b66aa1cc650cffc0c3f0dbfd",
+      "bytes": 12555,
+      "sha256": "6e90a82524088a3556a103da6cc9be909f36cc18c84354bee280fd8b445b8456"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_us_call_roles.json",
+      "blob": "c91ca9c99d3f92061e75678b71c98f80afdbca07",
+      "bytes": 8350,
+      "sha256": "d68066041a2f44ee0dfff9ebd129eba9f488bbd8a7b133d4e9d6bd1688eb2fb4"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/real_us_release_subscription.json",
+      "blob": "bc579786dd76c205dac9fa0719cc1f921783fa0b",
+      "bytes": 8975,
+      "sha256": "40eadc4400ad946c61be670e819e1b65ef740392c8f45afb76d6228f7b3b6636"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_capacity_project.json",
+      "blob": "fae8034ed6d1761935dc67c8d7b03b62fcab6765",
+      "bytes": 6999,
+      "sha256": "b2f1344e70279623f0ef4f5e3eef58030a965ac8c2752040343f7eb707e0bd88"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_exit_low_information.json",
+      "blob": "b81d30302fea9ba0c06cbc2f192134a60416b2b8",
+      "bytes": 2484,
+      "sha256": "84823ee89321e42d0a800f2e224d0646fe742f20b9d3b14e83d97b9ba3ebcb9e"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_exit_no_answer.json",
+      "blob": "7969bcc6ef6f5da67fc788085f8f0453a99e8d94",
+      "bytes": 3336,
+      "sha256": "e9dd1bcdceb6fa5c0e3a03c0b43b2f88f26ee9514a20c04748dacc25ba9281ed"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_exit_no_business.json",
+      "blob": "dbd98953aace504510cd0fbcbfb8f29909bcfa96",
+      "bytes": 1752,
+      "sha256": "f85942c2c5abb25c9b0ed3a782a3c10196c8aa1e7a29d1c5c09fa1ca826eb845"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_financial_numbers.json",
+      "blob": "baf87c9f52a324125991b0eeec0567a136f8d484",
+      "bytes": 2775,
+      "sha256": "3e12fb93c75b25cae265443eb6074e655c7326aec474c270ba0c17a54e28af77"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_negation_scope.json",
+      "blob": "4c5053a62b6965a2c8aaa1fe1f1ed465625c4b55",
+      "bytes": 5570,
+      "sha256": "75809ce413372a10ec1553e6eb923bc6afdc484cd184bd9fefb374e4b9facaef"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_qualitative_cooperation.json",
+      "blob": "533da9307bd30953b5fdfe299ce232b2354a58d0",
+      "bytes": 2668,
+      "sha256": "ea6aa337780d7ca162ce4e093715cd00ffba606bda0647c43714e2b3310aeb7d"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_qualitative_funding.json",
+      "blob": "37891f8faf40119b5736f58e842fe4691738c73c",
+      "bytes": 2741,
+      "sha256": "9ddd34fa2048cee4dc96c085249defd2fd95552539416e3646ef6fed47594d88"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_quantity_slots.json",
+      "blob": "8e80bdc2d0376ca4e8da31342e2c79d3d4f9cb55",
+      "bytes": 6546,
+      "sha256": "e10cc3836cd37d0b4349fe4e4543f5699f639f00beed0be864b12ae24aa7de3f"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/cases/syn_stage_ladder.json",
+      "blob": "a8402df2330335e29160e113e9943ad930742e87",
+      "bytes": 7289,
+      "sha256": "1e4f61d9170204d1698f0fa3533e0b9357e61f241ad7f659def641f8080d0655"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/index.json",
+      "blob": "496a84eb0afb8c5df29290bd018f282b6da392a0",
+      "bytes": 7542,
+      "sha256": "247a64c9d535b52c07b18ed2dbd02f1d261a9a8a1e1fb8e2d6ff4b799f13f137"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_capacity_projects.json",
+      "blob": "1785a030919163ac6ef604ec5af1d659539a9bdb",
+      "bytes": 7455,
+      "sha256": "0c329957c479267fe5ff47fe8c5d6a348454b5f9dd91befb1394a5812fe28e99"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_core_business.json",
+      "blob": "178551424d9a911235fce13c54a2204fd44e7ed9",
+      "bytes": 6028,
+      "sha256": "daaedd60b2773559c784ce6e6a60a32ce9c61d6b19b67f48c35e452c31fe6e0c"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_customer_orders.json",
+      "blob": "0b152089719853562992fbf73c3d0018aa0880a4",
+      "bytes": 6650,
+      "sha256": "d204332ced680caadc66f611883a40be72895e609e20001e6d75df4e54825d7d"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_industry_competition.json",
+      "blob": "fd0443e39a4614a513a6a58f1ef4e4afcce3ff0d",
+      "bytes": 4915,
+      "sha256": "543b50e72538bab9eb7b0937dca88a8f0f0702fa6a0c9ba67e0bcaace870ab70"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_new_business.json",
+      "blob": "8e283b506af2a639afa6119a4124452ff53e6cbb",
+      "bytes": 5214,
+      "sha256": "f9135b49dc2c17c9aceb9d131ab67373a2bdd640f12d4288ee4a181013f21af8"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_operating_metrics.json",
+      "blob": "0602198679042c4cae64ec305f47681f13eafa10",
+      "bytes": 6544,
+      "sha256": "1cf67bb4ce9c7c5ebb763e5be0b9e82f7a6ebf33ad40ad9cc8d07b89e529008b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_overseas.json",
+      "blob": "be39dbce4d02911a271f5a9816780354eae88513",
+      "bytes": 5331,
+      "sha256": "e1ccd1dd100b4f84f4a7d23bb5f69e2837d346ac762c4307af4c9dd7d7e7409b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/facet_risk_denial.json",
+      "blob": "52d51413f2ed0ebb5c51504d74d7674771336ee6",
+      "bytes": 6559,
+      "sha256": "02b82f9ee3457db2f3b3a4b2d25a07244f21c2807f3a90806ec53d54fe6e4c7d"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_biopharma_cdmo.json",
+      "blob": "c9fb21f1b3349c88290d9b9240e999d8b4020cbb",
+      "bytes": 6803,
+      "sha256": "7847d18938da29a6617dbc0c4019c79de6c576600083bf97c5c7490b8929246a"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_manufacturing.json",
+      "blob": "5c184b21089183900a2b336f6e6090db81136b00",
+      "bytes": 5657,
+      "sha256": "7938f9b74b3e5fa92e787ed0acad1b5de8030c2f18a6fd9f0bb0853e97465a35"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_store_network.json",
+      "blob": "8ec50b5e7504781025d6e9a4fd068cfb09093489",
+      "bytes": 6001,
+      "sha256": "8281fd6eb7dc79f86f00026b64ac820eb861c1597ed605f016b8a38e8126aaff"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/mechanism_subscription_consumption.json",
+      "blob": "5ce4b418623860d8525c095d27f919b8dc8b9ff3",
+      "bytes": 6365,
+      "sha256": "a0a174735b6f5870aab5f7c672680d34b36857b219ae4fe6ac1d555d1c3571ca"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/semantic_capacity_project.json",
+      "blob": "471524ba127539127863f2701e87234b2f3fe324",
+      "bytes": 10640,
+      "sha256": "dc3c17cc9e10794677627f951d9a0fd170496ac89cdf7d2968d2504e18b2758c"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/records/semantic_stage_progression.json",
+      "blob": "ccbed2533a0254b4a0682677cd226a676d716ffe",
+      "bytes": 9788,
+      "sha256": "06f144114ab290536d1369c3cc0388eeb54959b74ac0cb18a4549eeec6cb8147"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/acquisition_requests.json",
+      "blob": "9250c6536175261754919565da5ef5e088e8683b",
+      "bytes": 6340,
+      "sha256": "162457a27da87b87e3ec2254b6a4e22b1c73239ba3c79f6ac919cd5f571f3b59"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-admin-scan-empty-01.json",
+      "blob": "60b804d72df35ea30f75c85dc2c3c96bf393e042",
+      "bytes": 3402,
+      "sha256": "a96d38fbfafdcf70b5245e68f01d156eff9348244b34544adb1edf4accddc5d8"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-annual-business-model-01.json",
+      "blob": "aa3d618f2af85441ae5c075d42ee799ea70f5e56",
+      "bytes": 6162,
+      "sha256": "051842e15d5ddcc033623e1d5c8a529b29be24aab4ab279dcf6fb188c9f3825b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-annual-metrics-02.json",
+      "blob": "33ec9788a16a455bad9ea082ac5b30e6dac66226",
+      "bytes": 5523,
+      "sha256": "43c8fe88df72d83edaf14e9432b4873b44b0ccabb0194dd3c94faf9e687dc8aa"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-annual-outlook-03.json",
+      "blob": "373e99da1f66eaaf8183170236fb30bb8c520026",
+      "bytes": 5137,
+      "sha256": "32d0a83a3d170a1fbb2417519fd8da9203724444b9baa44e8134e38d191d3f64"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-convertible-forecast-02.json",
+      "blob": "56065618503ea0afc3b61d195f7e1a5be9c74845",
+      "bytes": 4348,
+      "sha256": "576e695fbbd3b28164c45621074c85217823334db0740e9c708c2f567f70e414"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-convertible-projects-01.json",
+      "blob": "afada17108153ba5b4a0b347c9f768e3c4d0fe6a",
+      "bytes": 3309,
+      "sha256": "997625cc176c4e1faab980ef95f55913bfeb339990cafc9a765ea0ad13a186e9"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-equity-forecast-disclaimer-02.json",
+      "blob": "59dba583b368a634c450f41cabc99a8fb9d6743b",
+      "bytes": 4013,
+      "sha256": "c5b5da4c7b2b47cf1ebb52d6f8c5eb4df1dd831c7d06371467ca78cfc3ad8bf2"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-equity-project-phases-01.json",
+      "blob": "38cb4cd0a5dab8cefc7b4bb0b126c7cfaa483253",
+      "bytes": 4988,
+      "sha256": "b1d883f2e19dd085d5ced00901cc1233b0d2563a6d04c9c5bbfd12b98b392c83"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-interim-stage-01.json",
+      "blob": "4a7ee35c42394324584abe0d32456cb31c55a29d",
+      "bytes": 5767,
+      "sha256": "4f8112e993fb44a3e12a745709a9fa0fc36b89d662a246f62998be52d5e1baba"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ipo-offering-facts-01.json",
+      "blob": "68a77bf8027309e71bbfab6b4d49f9066928dd50",
+      "bytes": 3578,
+      "sha256": "53d43a71c8a28f8c4682b52a256f6a7124a856a2c1405347b48bc565367e5f40"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ipo-proceeds-02.json",
+      "blob": "000ebcedbeb244a25f2d8e8d0a7b48a69deb6afd",
+      "bytes": 4656,
+      "sha256": "68e8f56c30ad2cd4c3b654a9618c999d0ea0ef494489abe7b880bdfbf4eb02d9"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ir-qa-binding-01.json",
+      "blob": "0fbb297df1edd6708f909f41632baf3d427b565a",
+      "bytes": 6126,
+      "sha256": "d4567c19fa98dc75989fb70a4570bf7d9fb2673faa3396fde30469c545271298"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-ir-title-mislead-02.json",
+      "blob": "78e9496f618734a43b992c17fdf8d2c40486a78d",
+      "bytes": 6225,
+      "sha256": "675aa813e6f44fdb20d1ac0baafac09d27272d5ebfc830cecd14914cfad06b16"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-quarterly-business-01.json",
+      "blob": "1cc7c7b5e4ff726e54dc21b7bd426bcdaf960167",
+      "bytes": 4399,
+      "sha256": "8a87c134976c11b52b18be16213d7eba9d92452fb46de83a38cb03f4b7204b6c"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-cn-quarterly-sparse-02.json",
+      "blob": "b99c541837280c6e07747a97333a32dbd853c820",
+      "bytes": 4378,
+      "sha256": "4191ae1901c4cabb2e7f7140e52e99bd5cae8e42bd7a0d0db25ab17924d89a68"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-earnings-call-roles-01.json",
+      "blob": "00983d9455759a743a6389f07994335154aaf1b2",
+      "bytes": 7311,
+      "sha256": "539489fa68813fbebc07b4c02be7d13d061c703e2ebb1a8d58e88f6d936356db"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-annual-postperiod-03.json",
+      "blob": "4310759fcac3bff87096152624ae52e307c41c9d",
+      "bytes": 4374,
+      "sha256": "42f1581093b9572ffb67aa2ba50708cc697cf11b5e9c27661ac4d26d289fb7c1"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-annual-samestore-footnote-02.json",
+      "blob": "33f3f9a865bb17903377783a8ea0dd3edeab7963",
+      "bytes": 3849,
+      "sha256": "f6afac9448cc51e6494d13d6805ddd4aec9271ecc5240c9a200208802df1a0b1"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-annual-stores-01.json",
+      "blob": "bf7ecbba2ea4fa0af9e7af197c08c7a0e32049cd",
+      "bytes": 5793,
+      "sha256": "50e389d823d742f96de2e1ca515009e3876690332c3fcaf01e468e0805117d12"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-deck-chart-01.json",
+      "blob": "f7554f3bd70006ae15f76925b65ef0bcaf5b5f85",
+      "bytes": 4568,
+      "sha256": "0983c892a79d59fe75b9c9fe7fa403b8a0afe740ca71538f844f1e8d137293bc"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-interim-postperiod-01.json",
+      "blob": "02e4d57a63c2c7d488713f7711d617e18bfd124e",
+      "bytes": 5039,
+      "sha256": "06726ef440e2ebc6e86be72f9494f7ca0aff72da1b8214ae160ca205d79f95ad"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-ipo-chapters-01.json",
+      "blob": "43a956638005dfce442e4f9e49a610c10f6f4b06",
+      "bytes": 4438,
+      "sha256": "97e72e794f5ed1bd9cacb3a7ce299d8d269dcdb435622454cdf798d9705b24f9"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-ipo-stores-02.json",
+      "blob": "fcc072c7a27f773a5ba359497c889e631bd4a812",
+      "bytes": 4510,
+      "sha256": "b44e5433907ebab3e995f71ee3c68c109295ffcc91b9e03cf1b5bf68cc67de3d"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-hk-release-segment-02.json",
+      "blob": "65758d4f520a384ca916b5fedb81368a3cd43701",
+      "bytes": 5237,
+      "sha256": "31868a932c25b6f08fe10f65015f1f4ea83f98ee3098c0194c57f26c05bb2d04"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10k-rpo-02.json",
+      "blob": "a3f00286dfc4bc7eaae9cf1481c8a35ad089f602",
+      "bytes": 3282,
+      "sha256": "c4b498a6aefcc7451c2f96f27889e506b44092eb960b60310968d4d4593d066b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10k-segments-01.json",
+      "blob": "264a94c2791834cd803b44785cc488796ab863e2",
+      "bytes": 4607,
+      "sha256": "429276ccad0de36de3725ee1de1f5084f723ba194c2291affda12396bb34384a"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10k-toc-vs-body-03.json",
+      "blob": "071dc5d22b339760cfd4cdfdb32c75ea6842b805",
+      "bytes": 3240,
+      "sha256": "cf34338811bbb09d67fb85077a0624324a4c3b52e9bc551d96b059c1930d202b"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10q-parts-01.json",
+      "blob": "60ffbc9133e2df514c475c14300831360f8af57c",
+      "bytes": 3186,
+      "sha256": "f888ddcb67ed914bb06adb519400f1bc771929453560588ced25dbfff01fe8d0"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-10q-revenue-mechanism-02.json",
+      "blob": "81aae09838057ba2f28c9efa3ebdd86bcb3f5273",
+      "bytes": 3420,
+      "sha256": "c7545171bb602f1cc294a989ad178b605fda36565a4364ac7df4c9d339a3b908"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-sec-20f-item-map-01.json",
+      "blob": "abc68dcf911aab12283c8f3ac130837350c825da",
+      "bytes": 4333,
+      "sha256": "d5c0a9233e138aa51ab2b5ae88fb2ea14bfb69d45db46e79ff2111c73040969d"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-admin-notice-01.json",
+      "blob": "58495eb123c221c2779aef0825b94eb157960b3f",
+      "bytes": 3424,
+      "sha256": "fe0987acabf819f2761f4743e432a0294860f8c23f89e797bac3c415f18afcba"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-container-8k-01.json",
+      "blob": "9754d718e3e39d28c6e3cbe3e4db1945bc7d6c7b",
+      "bytes": 4463,
+      "sha256": "dddddf2c27a924eff28bba639cd58828302d9d7f92b1a1b229bf5df0e6cb8cac"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-event-response-01.json",
+      "blob": "3e955fbcda0195a435c74d5a092adc31dda11831",
+      "bytes": 3385,
+      "sha256": "2fbc85f360e77d3cf4e62a6b12807c94cc8a94faf17d229b5124854fe0996406"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-feasibility-01.json",
+      "blob": "d3dc5a39a559ea23e3a40cdacd273f7a4c6b6a2c",
+      "bytes": 3605,
+      "sha256": "870a6aab0e87b265dda806f297197c1e420dc746aa0e5790f4fdafa067f76e08"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-project-change-01.json",
+      "blob": "2014662d77527084c219656ea29b310d0d49f329",
+      "bytes": 4137,
+      "sha256": "5d62192ed2ab0626cf28bca142bc693dbbcd37b5f2af84a2e60cb93095b9a596"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-revision-pair-01.json",
+      "blob": "e67d77ae008183105bf1bae20de08c6a22d14d1b",
+      "bytes": 3241,
+      "sha256": "efbde76834de51e00c8e6db56fe98ca8d136d5bb557fb8a10f12e22f1454527f"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-secondary-01.json",
+      "blob": "d079383f32bb476e2c11c9ee3af8cc7c75453424",
+      "bytes": 3284,
+      "sha256": "895cb34427189a92ac3d792ae7ff3951b123f04ff64716e62f99a17f1e35bcba"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-synth-us-registration-01.json",
+      "blob": "af51dbaa29f8e266a9efc67f7f78b7604d452848",
+      "bytes": 4310,
+      "sha256": "e223c19054c404db1d31ed9ccf07758430a7d1b1a91be35cf158c4a45d3d8ed6"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/cases/case-us-release-highlights-01.json",
+      "blob": "06ecb73cb00704f1ea692f70a5c8166b91e9705b",
+      "bytes": 4545,
+      "sha256": "c4e11096e693b5928fc25196a715b691c4323e465f93bfcb10d31707c338e509"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/index.json",
+      "blob": "b713f917697675fd4eb8554063c00b39d4420e76",
+      "bytes": 10542,
+      "sha256": "1109d8ef491d08605fe9590ec708083c559837fc51bcacff2e6de5cad0870ac7"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/administrative_document.json",
+      "blob": "3f00e960491fd2397d193ea48dca76b130855e64",
+      "bytes": 5048,
+      "sha256": "069c01532557ac5f57fade3a1a09add4beac565987aca2701f614076e5145dd1"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_annual_report.json",
+      "blob": "b0227e6fc792e53d489b525a52132b7e3e5e3a46",
+      "bytes": 10955,
+      "sha256": "f6f28a4d8d63f0562a92a0b5f4c28f58992c4bda207fbbe0ad5d6b618e0cd7b2"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_interim_report.json",
+      "blob": "a58d86ef133af12309296666fe110b1596eb61c7",
+      "bytes": 7836,
+      "sha256": "6617c004d34a3676637a8c9045e6d8758aa9127f2481e79960615fd95d7090e8"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_quarterly_report.json",
+      "blob": "1f212ef37910f2bb5b14a12058003151a5f9bc4d",
+      "bytes": 5957,
+      "sha256": "0b4c1a42d67f8578972b0b597c08802f4368dab3e840c08904c945bc391e89a7"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/container_attachment.json",
+      "blob": "f49cbb4b24dfe31f4eab734cf9f888e9d1df4de1",
+      "bytes": 6069,
+      "sha256": "7b33cb50c5457b8cb12ad7305c6d89e53c3c26d7981f0e726a97eb2493738311"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/earnings_call_transcript.json",
+      "blob": "fb04ffb1a58b2a6feb6d80298dd7a46c0b5d77af",
+      "bytes": 7449,
+      "sha256": "91e206a4d0e62e45e1c4b5152564fb86802e691bd687b38043bbbb464dcb4e14"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/event_response.json",
+      "blob": "bbbf3821430b86cf6458073285b8ea0ac214f20b",
+      "bytes": 6827,
+      "sha256": "4caabdf53623ed7ac2fecaaee5a15d9d1b602ff85612859f6b68e9df09fe0210"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_annual_report.json",
+      "blob": "5730621198c4fa6d6804e006cb7a6a4eb4c10e66",
+      "bytes": 10714,
+      "sha256": "1d8389231b2be48f3ec248f15c8b711877f28ed7ee57f3873604bb10b0b6fff7"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_interim_report.json",
+      "blob": "f0f3764ad0326e39d984b05b862bf755e0b71cf1",
+      "bytes": 7954,
+      "sha256": "b9a79495089597092d5fe0d00334b860246a125184ec4d1690dad06960bb6430"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_presentation.json",
+      "blob": "3b5a8a7461f3cc2f84252f89d155ac09dc90b9d3",
+      "bytes": 6315,
+      "sha256": "8fbccb9632d606a45f08be0f59f15e2c173227142f21cdd6473558a15a7cfeed"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_qa_record.json",
+      "blob": "5178d430bf1fc3b6415ba2e1201d5bda2330ff9b",
+      "bytes": 7332,
+      "sha256": "0555f5c606e86a3b877030a9e32e9ec3b648cd179e65c91a8b6336381d609176"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/lifecycle_revision_overlay.json",
+      "blob": "cfefa4e35eefea4cd2dd8f2c84f6057531c4d9ee",
+      "bytes": 5223,
+      "sha256": "de4e4e7a813f6fb840e2aa5c2bf5fe17e9e8a9832f6f80b3d567922e401f6f84"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_convertible.json",
+      "blob": "27f09da2b71b21c56a677fde98c3a3ca8c919a34",
+      "bytes": 8991,
+      "sha256": "8fee6cdc344cb71b219b4b7e1418e559d923f4ffc7f8980337d80d188191e0e6"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_equity.json",
+      "blob": "9acceeac380dc5087cd248724f7ddb16004ddf67",
+      "bytes": 8656,
+      "sha256": "1bd4a8d80f04794b44be3ef83f4f48afa42d30c40b31963da26f3076e7fa63b4"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_feasibility.json",
+      "blob": "ddbba7184b669b662af42e6498fe03e0b09c6549",
+      "bytes": 6689,
+      "sha256": "e29dfe7e31fe2fdcd1f3b122a6a17fcd78155b9584c5a962132e2571cd871931"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/project_change_notice.json",
+      "blob": "ead25415e840dbc5cb2aa9cc97e4c70b1914bc9d",
+      "bytes": 6870,
+      "sha256": "9c1866989e2c1837525e5ea950969171f8b29409707f4b5d33c246b1531909e0"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_cn.json",
+      "blob": "673127ecce4e1125738b4c04a4055157841b3323",
+      "bytes": 9317,
+      "sha256": "115df0890b4a5319baa0df878932bd685796986e2194f83ac9b82afff336c464"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_hk.json",
+      "blob": "24cbe855cb85e9a1b0fe2e504e2e75ff49f686db",
+      "bytes": 8783,
+      "sha256": "941d22f9ea07ab41741e19fdcdf15bf453a4629579090f21c2e79bf72f60ff93"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_us.json",
+      "blob": "ae7f3973253d3334c5376c448925a3652689364c",
+      "bytes": 8497,
+      "sha256": "2f31f2de8ce3e47271886a24928cba2f8dfdc45ded4976b3661e9462afb6bbb7"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/results_release.json",
+      "blob": "d16a854cd48ac31bd141decfe88dc1e2f061fc1d",
+      "bytes": 7559,
+      "sha256": "43eaa35e0b47249012567e4fc2eb1f4cb69d9d74bda13dea2be0d835934feea9"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10k.json",
+      "blob": "29868dacb5d1f5366f77d78e35ee7ef447bc7fdb",
+      "bytes": 9466,
+      "sha256": "20d659176234ffa1f8b238f2c220495cc71954d7d053da89bb75a9978f0a9a52"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10q.json",
+      "blob": "fd91c18104aeba2f00438fe48bc181f41b489853",
+      "bytes": 8829,
+      "sha256": "764cc73d56b9aeae5f2d2006dc27f3ca1c9c3493112a336ac9505492a75981b3"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_20f.json",
+      "blob": "f8996d9c98d7a27facfaadee9ee62f385a4ea94b",
+      "bytes": 7799,
+      "sha256": "011cd756fc6cc62af478e1650e1084ba6bc90ab09cbab0d6fe5a14c20069ac74"
+    },
+    {
+      "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/secondary_research.json",
+      "blob": "b0778fb3850d969e029d74287e468d2f5ddb37f0",
+      "bytes": 6643,
+      "sha256": "21f0b8d69af78f6cd990802b9caa0bae6303e6ab6e8df75922d59bb359c73fb0"
+    }
+  ],
+  "bytes": 616012,
+  "restored_count_at_actual_execution": 98,
+  "index_or_refs_written": false,
+  "source_test_or_original_overwritten": false,
+  "receipt_reconstruction_note": "The second DU4 restore succeeded with2JSON153784B but a local helper variable shadow wrote its receipt to the first receipt pathname. The actual second receipt is preserved under its correct name. The original98JSON616012B first-run stdout remains in the tool history; its per-file receipt is reconstructed from unchanged Git blobs and exact current read-back, not claimed as the original missing JSON. No restore/test was rerun, no product or original changed."
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ENGINEERING_FREEZE_FOR_ROOT_INDEPENDENT_REVIEW",
+  "frozen_utc": "2026-10-24T01:11:19.503710+00:00",
+  "checkout": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+      "bytes": 50488
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+      "bytes": 21684
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/product_reference.py",
+      "sha256": "7e5d0ccb0b85342081578a9c37e927835ccab6b21bb2aacebddeafe53ebd43d7",
+      "bytes": 22321
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py",
+      "sha256": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334",
+      "bytes": 7780
+    }
+  ],
+  "red": {
+    "log": "red-final.json",
+    "counts": [
+      {
+        "tests": "38",
+        "failures": "17",
+        "errors": "0",
+        "skipped": "0",
+        "time": "1.082"
+      }
+    ],
+    "test_sha256": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334"
+  },
+  "green": {
+    "log": "green-confirmed.json",
+    "counts": [
+      {
+        "tests": "274",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "2.017"
+      }
+    ],
+    "test_sha256": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334"
+  },
+  "static": {
+    "ruff": {
+      "command": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "src/company_wiki/document_understanding/operating_states/patterns.py",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py",
+        "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py"
+      ],
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    "mypy": {
+      "command": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "--no-incremental",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\product-plural-classification-20261024\\type-cache",
+        "--follow-imports=skip",
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "src/company_wiki/document_understanding/operating_states/patterns.py",
+        "src/company_wiki/document_understanding/operating_states/product_reference.py"
+      ],
+      "exit_code": 0,
+      "output": "Success: no issues found in 3 source files\n"
+    }
+  },
+  "root_causes": [
+    "Three consumers disagreed on finite singular/plural product heads; NP classification and independent statement now use product_reference.product_head_suffix over existing vocabulary and Latin boundaries.",
+    "Shared SUBJECT_TAIL lacked an English letter boundary and truncated Analysis at is; boundary fixed without adding words.",
+    "NP extraction treated and as a predicate boundary and erased customer conjuncts; same first real predicate helper reuses existing nonpredicate boundary set."
+  ],
+  "preserved": [
+    "Raw strings, exact original refs/locators and old CN product/customer ref semantics",
+    "Unknown actors/stages and uncertain unproved completion; no new issuer/company identity",
+    "Mixed third-party attribution and independent subject barriers",
+    "8units/4blocks/2048chars;96spans/48000chars;16M work limits and schemas unchanged",
+    "No old test/original independent13 edits; no reading/policy/predicate/structure/continuity edits by this subagent",
+    "No Git/index, external model, downloads, PDF/original material reads"
+  ],
+  "failed_attempts": [
+    {
+      "log": "red.json",
+      "meaning": "Draft new test had incorrect ok status; production complete is real contract. No source had changed."
+    },
+    {
+      "log": "red-v2.json",
+      "meaning": "Draft CN and positive control expectations corrected to exact preexisting refs/uncertain semantics, baseline recorded before source edits."
+    },
+    {
+      "log": "red-frozen.json",
+      "meaning": "Premature draft freeze positive completion expectation was too strong; retained, corrected against pre-change positive-baseline.json before final test freeze."
+    },
+    {
+      "log": "green.json",
+      "meaning": "37P/1F genuine mixed-subject truncation; same owner root-fixed, original final38 assertions retained."
+    },
+    {
+      "log": "green-final.json",
+      "meaning": "274P/7 FileNotFound only: sparse checkout omitted tracked DU4 JSON test assets. ROOT later restored both exact HEAD assets; this subagent did not modify fixtures or mark them semantic failures."
+    }
+  ],
+  "boundaries": [
+    "No standalone company identity is inferred from a head such as Systems/Materials; attribution remains unknown, no local reference attachment without deictic evidence.",
+    "A bare positive obtained qualification is still uncertain under existing modifier grammar; this task deliberately preserves that observed contract.",
+    "Full natural package, original public independent13 and actual wholeannual version are ROOT responsibility; no wholeannual PASS claimed."
+  ],
+  "cleanup": "cleanup.json",
+  "independent_review": "ROOT pending; not self-signed"
+}

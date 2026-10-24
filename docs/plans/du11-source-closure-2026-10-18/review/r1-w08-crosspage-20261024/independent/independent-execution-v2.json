@@ -1,0 +1,295 @@
+{
+  "freeze_sha256": "165f6a6e156b70df276ac8adc4ad7b4fcb425c404b6220081c927bf11dffced5",
+  "source_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "3ed9d08ba8c8d7cdfe0bbb5dbed1817803b395e41531e69660e659004150dd46",
+    "src/company_wiki/document_understanding/observation_adapter.py": "66bd55c80e6d07f0a752ab3787f9fdbb04270b16491da36ef4a3b9d21564c8e4",
+    "src/company_wiki/document_understanding/pipeline.py": "46d3cbd934bbada230eb384d6122230f1efb00bda8120707bad4796175207020",
+    "src/company_wiki/document_understanding/structure/__init__.py": "166b9215ce5d5e9a40916a0ee7a6171ff7e51152051d4b1caa5a28e891254bbf",
+    "src/company_wiki/document_understanding/structure/sections.py": "dacb853d631ee328b4c3d518b638428c01068d32852dbdf0dea435fbc77faf16",
+    "src/company_wiki/document_understanding/structure/contract.py": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+    "src/company_wiki/document_understanding/decision_inventory.py": "85630848914f0487020ea3f41d395a9dff2ffb9d37cfd6b382fb045a3f260676",
+    "src/company_wiki/source_catalog/narrative_reading.py": "be21d48f7970861ebb1f9403b3f259d935cbea82a3f2b194979f23be1ccf163f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "07f063af239325c54af6928d3448bd1f76775d1b16a4abcbad10ad67d62cf76c",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff"
+  },
+  "source_after_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "3ed9d08ba8c8d7cdfe0bbb5dbed1817803b395e41531e69660e659004150dd46",
+    "src/company_wiki/document_understanding/observation_adapter.py": "66bd55c80e6d07f0a752ab3787f9fdbb04270b16491da36ef4a3b9d21564c8e4",
+    "src/company_wiki/document_understanding/pipeline.py": "46d3cbd934bbada230eb384d6122230f1efb00bda8120707bad4796175207020",
+    "src/company_wiki/document_understanding/structure/__init__.py": "166b9215ce5d5e9a40916a0ee7a6171ff7e51152051d4b1caa5a28e891254bbf",
+    "src/company_wiki/document_understanding/structure/sections.py": "dacb853d631ee328b4c3d518b638428c01068d32852dbdf0dea435fbc77faf16",
+    "src/company_wiki/document_understanding/structure/contract.py": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+    "src/company_wiki/document_understanding/decision_inventory.py": "85630848914f0487020ea3f41d395a9dff2ffb9d37cfd6b382fb045a3f260676",
+    "src/company_wiki/source_catalog/narrative_reading.py": "be21d48f7970861ebb1f9403b3f259d935cbea82a3f2b194979f23be1ccf163f",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "07f063af239325c54af6928d3448bd1f76775d1b16a4abcbad10ad67d62cf76c",
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py": "709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff"
+  },
+  "source_unchanged": true,
+  "cases": [
+    {
+      "case": "public_metric_furniture_roman_shared_observation",
+      "status": "PASS",
+      "detail": {
+        "work_used": 10755,
+        "physical_observations": {
+          "urn:company-wiki:narrative-unit:sha256:a83f59e5de860de352cb47664261dcae73967e8b47119e06a11db52221bd0ea1": 1,
+          "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17": 1,
+          "urn:company-wiki:narrative-unit:sha256:683de2098a00949a1cb1a3cc3b794eb59203bb4cda608d326b94e5bcbfcfaefe": 1
+        },
+        "proof_groups": [
+          {
+            "group_id": "urn:company-wiki:reading-group:sha256:b496420d406a925c57ccd24e506c69c79fefc75f4d345b6ec769978b716a26e5",
+            "kind": "background",
+            "section_role": "unknown",
+            "evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:dbddaeadd565ddab35955a611e04877b5a3633b5464992f8ed0423dbadbcded3",
+              "urn:company-wiki:evidence-span:sha256:6a501c6b51784da9e004abf4f503916405ebb247432f52ae6dc2dffa611fbf33",
+              "urn:company-wiki:evidence-span:sha256:c34752a6de0b4e7959fb668b040c4615a1384a6f5b1a0af96cdb1ce730106f75",
+              "urn:company-wiki:evidence-span:sha256:13efd262067010dfe49a676cada624e5afa415164928aec11de52e2e9847160b"
+            ],
+            "citation_views": [
+              {
+                "support_evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:13efd262067010dfe49a676cada624e5afa415164928aec11de52e2e9847160b"
+                ],
+                "context_evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:dbddaeadd565ddab35955a611e04877b5a3633b5464992f8ed0423dbadbcded3",
+                  "urn:company-wiki:evidence-span:sha256:6a501c6b51784da9e004abf4f503916405ebb247432f52ae6dc2dffa611fbf33",
+                  "urn:company-wiki:evidence-span:sha256:c34752a6de0b4e7959fb668b040c4615a1384a6f5b1a0af96cdb1ce730106f75"
+                ]
+              }
+            ],
+            "source_proof_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a11357ff7e494bee5c5bbe63ca52da08dd02333b6fd71b1f60c6daa8d5fad024",
+              "urn:company-wiki:narrative-unit:sha256:a83f59e5de860de352cb47664261dcae73967e8b47119e06a11db52221bd0ea1",
+              "urn:company-wiki:narrative-unit:sha256:b1ff813575f2348c40e85c31375c15b23516749ca32aef5a657cd6814860ab6a"
+            ],
+            "source_proofs": [
+              {
+                "basis": "observed_adjacent_page_flow",
+                "left": "urn:company-wiki:narrative-unit:sha256:a83f59e5de860de352cb47664261dcae73967e8b47119e06a11db52221bd0ea1",
+                "right": "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+                "left_page": 1,
+                "right_page": 2,
+                "left_ordinal": 3,
+                "right_ordinal": 6,
+                "column": 0,
+                "coordinate_frame": "dict",
+                "furniture_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:b1ff813575f2348c40e85c31375c15b23516749ca32aef5a657cd6814860ab6a",
+                  "urn:company-wiki:narrative-unit:sha256:a11357ff7e494bee5c5bbe63ca52da08dd02333b6fd71b1f60c6daa8d5fad024"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "public_english_same_object_restriction",
+      "status": "FAIL",
+      "error": "AssertionError()",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-independent-20261024\\independent_minimal_cases.py.txt\", line 291, in main\n    detail = fn()\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-independent-20261024\\independent_minimal_cases.py.txt\", line 276, in <lambda>\n    ('public_english_same_object_restriction', lambda: restriction_public('en-restriction')),\n                                                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-crosspage-independent-20261024\\independent_minimal_cases.py.txt\", line 149, in restriction_public\n    assert left and right and citations and tasks\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "case": "public_traditional_same_object_restriction",
+      "status": "PASS",
+      "detail": {
+        "work_used": 12391,
+        "left": "• 本公司已交付43台專用設備至客戶進行生產驗證。",
+        "restriction": "II) 該設備尚未完成量產認證，不代表已經形成批量銷售。"
+      }
+    },
+    {
+      "case": "public_other_subject_negative",
+      "status": "PASS",
+      "detail": {
+        "left_preserved": true,
+        "supplier_statement_not_attached": true
+      }
+    },
+    {
+      "case": "public_unknown_column_negative",
+      "status": "PASS",
+      "detail": {
+        "no_cross_page_parent": true,
+        "selected_count": 8
+      }
+    },
+    {
+      "case": "public_original_envelope_negative",
+      "status": "PASS",
+      "detail": {
+        "actual_oversize_deferred": true
+      }
+    },
+    {
+      "case": "public_zero_work_negative",
+      "status": "PASS",
+      "detail": {
+        "budget_used": 0,
+        "no_evidence": true
+      }
+    },
+    {
+      "case": "typed_proof_missing_negative",
+      "status": "PASS",
+      "detail": {
+        "diagnostics": [
+          {
+            "package_id": "native-proof:urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+            "reason": "REFERENCE_UNRESOLVED",
+            "status": "native_dependency_incomplete_proof",
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "typed_proof_foreign_negative",
+      "status": "PASS",
+      "detail": {
+        "diagnostics": [
+          {
+            "package_id": "native-proof:urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+            "reason": "REFERENCE_UNRESOLVED",
+            "status": "native_dependency_foreign",
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "typed_proof_wrong_page_negative",
+      "status": "PASS",
+      "detail": {
+        "diagnostics": [
+          {
+            "package_id": "native-proof:urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17",
+            "reason": "REFERENCE_UNRESOLVED",
+            "status": "native_dependency_proof_shape",
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8c81f99b340a24cc8701270dfa41223f563418e2d7744c018b8238ee8eaeba17"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "actual_source_byte_cache_dependencies",
+      "status": "PASS",
+      "detail": {
+        "changed_identity_for": [
+          "company_wiki.document_understanding.pipeline",
+          "company_wiki.document_understanding.structure",
+          "company_wiki.document_understanding.structure.sections",
+          "company_wiki.source_catalog.narrative_native_dependencies",
+          "company_wiki.document_understanding.operating_states.text_view"
+        ],
+        "source_files_written": 0
+      }
+    },
+    {
+      "case": "marker_offset_and_delimiter_controls",
+      "status": "PASS",
+      "detail": {
+        "positive_markers": 5,
+        "negative_delimiters": 5
+      }
+    },
+    {
+      "case": "order_language_actual_and_future_controls",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "本公司订单同比增长23%。",
+          "reasons": [
+            "operating_metric_change"
+          ]
+        },
+        {
+          "text": "本公司訂單同比增長23%。",
+          "reasons": [
+            "operating_metric_change"
+          ]
+        },
+        {
+          "text": "Our orders increased 23% year over year.",
+          "reasons": [
+            "quantified_operating_status",
+            "operating_metric_change"
+          ]
+        },
+        {
+          "text": "预计明年订单同比增长14%。",
+          "reasons": [
+            "operating_plan"
+          ]
+        },
+        {
+          "text": "預計明年訂單同比增長14%。",
+          "reasons": [
+            "operating_plan"
+          ]
+        },
+        {
+          "text": "We expect our order counts to increase 14% next year.",
+          "reasons": [
+            "operating_plan"
+          ]
+        },
+        {
+          "text": "Order counts to increase 14%.",
+          "reasons": []
+        },
+        {
+          "text": "We do not expect orders to increase 14% next year.",
+          "reasons": []
+        },
+        {
+          "text": "Order balances increased 23%.",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "passed": 12,
+  "failed": 1,
+  "elapsed_seconds": 0.6250138282775879,
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "import_source": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+  "network_calls": 0,
+  "model_calls": 0,
+  "source_test_git_writes": 0,
+  "temporary_paths_created": []
+}

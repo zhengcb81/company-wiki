@@ -1,0 +1,23 @@
+{
+  "status": "ONLY_ABSENT_TRACKED_JSON_RESTORED",
+  "ref": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
+  "restored": [
+    {
+      "path": "docs/plans/du4-state-2026-10-15/fixtures/cn-ir-observation.json",
+      "blob": "bca6d05beea96cde57138158862f13596b085a4c",
+      "bytes": 153356,
+      "sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a"
+    },
+    {
+      "path": "docs/plans/du4-state-2026-10-15/fixtures/manifest.json",
+      "blob": "459fb7f8e1bcdfb915c4ec48bbbe51971fb5bd32",
+      "bytes": 428,
+      "sha256": "6ed4a3e995802053aca4c6f28f47e57a050ff53e24bfaffec47f5fff92eed83c"
+    }
+  ],
+  "skipped_existing": [],
+  "bytes": 153784,
+  "one_json_smoke_cleaned": true,
+  "index_or_refs_written": false,
+  "source_test_or_original_overwritten": false
+}

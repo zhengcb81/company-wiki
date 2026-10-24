@@ -13,7 +13,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from copy import copy
 import re
-from typing import cast
+from typing import Any, cast
+from ..narrative_continuity import NativeSourceContext
 from ..observation_adapter import _is_item_label, _is_item_heading, _part_heading_level
 
 from . import layout as layout_mod
@@ -99,6 +100,9 @@ class SectionBuild:
     sections: tuple[SectionDraft, ...]
     diagnostics: tuple[dict, ...]
     unit_section: dict[str, str]
+    required_context_by_unit_id: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    required_source_by_unit_id: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    source_proofs_by_unit_id: dict[str, tuple[dict[str, Any], ...]] = field(default_factory=dict)
 
 
 def _role_for_heading(text: str, fallback: str) -> str:
@@ -159,26 +163,39 @@ def _display_heading_groups(units, excluded):
 
 
 
-def _native_numbered_list_scopes(ordering: layout_mod.Ordering):
-    """Bound a numbered introduction by its own indented native list.
+@dataclass(frozen=True)
+class _NativeListScope:
+    heads: tuple[ObservationUnit, ...]
+    members: tuple[ObservationUnit, ...]
+    context_by_unit: dict[str, tuple[str, ...]]
+    source_by_unit: dict[str, tuple[str, ...]]
+    proofs_by_unit: dict[str, tuple[dict[str, Any], ...]]
 
-    Source parsers may retain the introduction as one multiline block or split
-    it at a sentence boundary into units sharing one original box. Both are
-    source evidence; neither the number alone nor the nearest prose heading is
-    enough to declare a business parent. Stop before a sibling/unindented block.
+
+_LIST_CHILD = re.compile(
+    r"^\s*(?:[-•●▪]|(?=[ivxlcdm]+[.)])m{0,3}(?:cm|cd|d?c{0,3})"
+    r"(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})[.)])\s+\S", re.IGNORECASE)
+
+
+def _native_numbered_list_scopes(ordering: layout_mod.Ordering,
+                                 native_context: NativeSourceContext | None = None):
+    """Discover one existing native list, with an independent physical page proof.
+
+    The numbered introduction supplies syntax, structure owns its parent ID,
+    and the shared physical observer supplies only original boundary witnesses.
+    Missing context retains the former same-page capability.
     """
     scopes = {}
     ordered = ordering.ordered
     marker = re.compile(r"^(?:\(\d{1,2}\)|（\d{1,2}）)\s+\S")
-    bullet = re.compile(r"^\s*[-•●▪]\s+\S")
     excluded = ordering.toc_ids | ordering.running_header_ids
     index = 0
     while index + 1 < len(ordered):
         opener = ordered[index]
         if (opener.unit_id in excluded or not marker.match(opener.text)
                 or opener.source_id is None or opener.page is None or opener.bbox is None
-                or opener.dom_path is not None
-                or opener.table_id or opener.is_table_furniture or opener.is_footnote):
+                or opener.dom_path is not None or opener.table_id
+                or opener.is_table_furniture or opener.is_footnote):
             index += 1
             continue
         heads = [opener]
@@ -195,29 +212,73 @@ def _native_numbered_list_scopes(ordering: layout_mod.Ordering):
             heads.append(intro)
             cursor += 1
         members = list(heads)
-        previous_box = None
+        previous = None
+        pages = {opener.page}
+        context_by_unit: dict[str, tuple[str, ...]] = {}
+        source_by_unit: dict[str, tuple[str, ...]] = {}
+        physical_proofs: tuple[dict[str, Any], ...] = ()
+        proofs_by_unit: dict[str, tuple[dict[str, Any], ...]] = {}
+        skipped_count = 0
+        over_limit = False
         while cursor < len(ordered):
+            if native_context is not None:
+                native_context.work_budget.charge()
             unit = ordered[cursor]
-            # Missing column ids do not prove a shared lane. Require positive
-            # horizontal overlap even when an explicit id claims the same lane;
-            # contradictory geometry cannot establish this local list scope.
+            # A positively identified header is skipped before semantic closure;
+            # its source positions are still verified by the physical owner.
+            if (unit.unit_id in ordering.running_header_ids
+                    and unit.source_id == opener.source_id and unit.page is not None
+                    and 0 <= unit.page - opener.page < MAX_CONTINUATION_PAGES):
+                skipped_count += 1
+                if len(members) + skipped_count > MAX_CONTINUATION_UNITS:
+                    over_limit = True
+                    break
+                cursor += 1
+                continue
             horizontal_overlap = layout_mod.visual_overlap(opener, unit)
             if (unit.unit_id in excluded or unit.table_id or unit.is_table_furniture
                     or unit.is_footnote or unit.bbox is None or unit.dom_path is not None
-                    or (unit.source_id, unit.page, unit.column)
-                    != (opener.source_id, opener.page, opener.column)
+                    or unit.source_id != opener.source_id or unit.role != opener.role
+                    or unit.page is None or unit.column != opener.column
+                    or unit.kind in {"heading", "html_heading"} or unit.heading_level is not None
                     or horizontal_overlap is None or horizontal_overlap <= 0
                     or unit.bbox[0] <= opener.bbox[0]
-                    or unit.bbox[1] < opener.bbox[3]
-                    or not (bullet.match(unit.text) or unit.bbox == previous_box)):
+                    or not (_LIST_CHILD.match(unit.text)
+                            or previous is not None and unit.bbox == previous.bbox)):
                 break
+            if unit.page == opener.page:
+                if unit.bbox[1] < opener.bbox[3]:
+                    break
+            elif previous is None or native_context is None:
+                break
+            if previous is not None and unit.page != previous.page:
+                if len(pages | {unit.page}) > MAX_CONTINUATION_PAGES:
+                    break
+                proof = native_context.page_neighbour(previous.unit_id, unit.unit_id,
+                    furniture_unit_ids=frozenset(ordering.running_header_ids)) if native_context else None
+                if proof is None:
+                    break
+                physical_proofs = (*physical_proofs, proof)
+            if physical_proofs:
+                if native_context is not None:
+                    native_context.work_budget.charge(1 + len(heads) + sum(
+                        2 + len(edge["furniture_unit_ids"]) for edge in physical_proofs))
+                context_by_unit[unit.unit_id] = tuple(head.unit_id for head in heads)
+                source_by_unit[unit.unit_id] = tuple(dict.fromkeys(uid
+                    for edge in physical_proofs
+                    for uid in (edge["left"], edge["right"], *edge["furniture_unit_ids"])
+                    if uid != unit.unit_id))
+                proofs_by_unit[unit.unit_id] = physical_proofs
             members.append(unit)
-            previous_box = unit.bbox
+            previous = unit
+            pages.add(unit.page)
             cursor += 1
-            if len(members) > MAX_CONTINUATION_UNITS:
+            if len(members) + skipped_count > MAX_CONTINUATION_UNITS:
+                over_limit = True
                 break
-        if len(heads) < len(members) <= MAX_CONTINUATION_UNITS:
-            scopes[opener.unit_id] = (tuple(heads), tuple(members))
+        if not over_limit and len(heads) < len(members) <= MAX_CONTINUATION_UNITS:
+            scopes[opener.unit_id] = _NativeListScope(tuple(heads), tuple(members),
+                                                     context_by_unit, source_by_unit, proofs_by_unit)
         index = max(index + 1, cursor)
     return scopes
 
@@ -227,6 +288,7 @@ def build_sections(
     ordering: layout_mod.Ordering,
     *,
     limits: dict[str, int],
+    native_context: NativeSourceContext | None = None,
 ) -> SectionBuild:
     """Build the logical section tree over the ordered units.
 
@@ -258,7 +320,10 @@ def build_sections(
     active_item = None
     previous_source: str | None = None
     source_seen = False
-    numbered_scopes = _native_numbered_list_scopes(ordering)
+    numbered_scopes = _native_numbered_list_scopes(ordering, native_context)
+    required_context_by_unit: dict[str, tuple[str, ...]] = {}
+    required_source_by_unit: dict[str, tuple[str, ...]] = {}
+    source_proofs_by_unit: dict[str, tuple[dict[str, Any], ...]] = {}
     native_scope_members: set[str] = set()
     native_parent_stack: list[SectionDraft] = []
     native_intro_ids: set[str] = set()
@@ -318,9 +383,6 @@ def build_sections(
         return draft
 
     for unit in ordering.ordered:
-        if native_scope_members and unit.unit_id not in native_scope_members:
-            stack[:] = native_parent_stack
-            native_scope_members = set()
         if source_seen and unit.source_id != previous_source:
             # Attribution changes are real boundaries even on a pageless
             # projection. A prior parent's heading cannot classify this body.
@@ -336,11 +398,17 @@ def build_sections(
         if (unit.unit_id in furniture or unit.unit_id in display_title_ids
                 or unit.unit_id in native_intro_ids):
             continue
+        if native_scope_members and unit.unit_id not in native_scope_members:
+            stack[:] = native_parent_stack
+            native_scope_members = set()
         native_scope = numbered_scopes.get(unit.unit_id)
         if native_scope is not None:
             native_parent_stack = list(stack)
             parent_depth = stack[-1].depth if stack else 0
-            scope_heads, scope_members = native_scope
+            scope_heads, scope_members = native_scope.heads, native_scope.members
+            required_context_by_unit.update(native_scope.context_by_unit)
+            required_source_by_unit.update(native_scope.source_by_unit)
+            source_proofs_by_unit.update(native_scope.proofs_by_unit)
             current = open_section(unit, heading_units=list(scope_heads),
                 depth_override=(parent_depth or 0) + 1, contextual_outline=True)
             current.basis.append("native_numbered_list")
@@ -517,6 +585,9 @@ def build_sections(
         sections=tuple(sections),
         diagnostics=tuple(diagnostics),
         unit_section=unit_section,
+        required_context_by_unit_id=required_context_by_unit,
+        required_source_by_unit_id=required_source_by_unit,
+        source_proofs_by_unit_id=source_proofs_by_unit,
     )
 
 

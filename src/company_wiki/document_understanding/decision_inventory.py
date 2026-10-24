@@ -74,8 +74,13 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.source_catalog.narrative_source_purpose",
         "company_wiki.source_catalog.narrative_operating_relations",
         "company_wiki.source_catalog.narrative_reading",
+        "company_wiki.source_catalog.narrative_native_dependencies",
         "company_wiki.source_catalog.narrative_finalize",
         # Native outline declarations change each statement's own source scope.
+        # Early composition transfers native proof into each target dependency.
+        # Actual byte changes in either owner invalidate complete cached reads.
+        "company_wiki.document_understanding.pipeline",
+        "company_wiki.document_understanding.structure",
         "company_wiki.document_understanding.structure.sections",
         "company_wiki.document_understanding.structure.layout",
         "company_wiki.document_understanding.structure.contract",

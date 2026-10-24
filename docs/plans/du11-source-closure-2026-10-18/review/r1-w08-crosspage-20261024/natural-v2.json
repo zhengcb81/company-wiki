@@ -1,0 +1,46 @@
+{
+  "at_utc": "2026-10-24T00:58:11.804067+00:00",
+  "args": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_selection",
+    "tests/unit/document_understanding_structure",
+    "tests/unit/document_understanding_root",
+    "tests/unit/du11_production/test_native_prose_continuity.py",
+    "tests/unit/test_s7_operating_fact_semantics.py",
+    "tests/unit/test_shared_reading_cache_precheck.py",
+    "tests/unit/test_narrative_selection_architecture.py",
+    "tests/unit/test_reading_batch_version.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-w08-natural-qx0xpnd7",
+    "--junitxml=C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\cross-page-combined-20261024-final2\\natural.xml"
+  ],
+  "exit_code": 0,
+  "junit": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "11",
+    "tests": "1982",
+    "time": "38.637",
+    "timestamp": "2026-10-24T01:57:32.476137+01:00",
+    "hostname": "DESKTOP-156V213"
+  },
+  "source_stable": true,
+  "temp_cleanup": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-w08-natural-qx0xpnd7",
+    "created_for_this_run": true,
+    "exists_after": false,
+    "existed_before_cleanup": true
+  },
+  "external_calls": 0,
+  "paid_model_calls": 0,
+  "original_downloads": 0,
+  "local_full_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\cross-page-combined-20261024-final2\\receipt.json",
+  "local_full_receipt_sha256": "22fdb3b88f81fd4db8eee7387af20b2ea950f52475c886dfbb1ed87de07d8567",
+  "actual_log_sha256": "841607d36d0367123708a7ad999f70262d93564a718719252ea765b36b772f12"
+}

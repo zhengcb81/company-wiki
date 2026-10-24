@@ -1,0 +1,175 @@
+{
+  "schema_version": "w08-order-language-handoff/1",
+  "at_utc": "2026-10-24T00:34:28.052525+00:00",
+  "status": "FINITE_IMPLEMENTATION_FROZEN_FOR_ROOT_COMBINATION_REVIEW",
+  "scope": [
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py",
+    "own selected-plan resume/order-metric-language-20261024"
+  ],
+  "bindings": {
+    "policy_raw_sha256": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b",
+    "test_raw_sha256": "709d20d5881198a6ae38298468879c3cbeb868a03815b8d326b3eb31f5a52eff",
+    "initial40_test_sha256": "bc040b8663c93d3d083d43741c7748e86c9e855c6bc25b51bdfdd77308e51a42",
+    "original40_assertions_exact_prefix_unchanged": true,
+    "inverse_only_approved_policy_edits_matches_original_sha": true,
+    "legacy_module_and_six_output_vectors_unchanged": true,
+    "legacy_sha256": "3cef483033d1b54e4fe6aa908cfd129fc3d370bdd5b89f915eac12cb47fc92cb",
+    "predicate_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "final_predicate_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "results": {
+      "first_red": "15failed/25passed",
+      "alias_only": "1failed/39passed",
+      "infinitive_red": "5failed/44passed",
+      "final": "170passed/2.29s (49new+77+20+24)",
+      "ruff": "PASS",
+      "mypy": "1source/0errors"
+    },
+    "version": "reading-business-policy/17"
+  },
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\red.txt",
+      "sha256": "6dd520b2626b679621549585726d7abc76ee8036298b1ac344de32f57d9cc71e",
+      "bytes": 13026
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\red.xml",
+      "sha256": "87d5311cc0097dac1aff6124d1f21e5efab653a126071b309a1b080abbd09c08",
+      "bytes": 19584
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\red.json",
+      "sha256": "1b4fa40b343b319e4d91f48a7853f75274316996326c7e6e90909d4b8394e21e",
+      "bytes": 2613
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\alias.txt",
+      "sha256": "1060749da164239879e5d6b21ae7b727eb7b570fcdd8d9b214a0e3f7318f2310",
+      "bytes": 2300
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\alias.xml",
+      "sha256": "c79d49b49ed76584cb5ee710caab37a0a1ede3ba9ddb2422c2d210c7d8f7b90d",
+      "bytes": 11089
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\alias.json",
+      "sha256": "be65d5c5b201fd124735adf58db560f70b71e500246e85cf7c156b912775e469",
+      "bytes": 2620
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\infinitive_red.txt",
+      "sha256": "2b0516e9b76ac752dbf9b2921666211cd5bd061d9c15a78ac6cec25a75109149",
+      "bytes": 5310
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\infinitive_red.xml",
+      "sha256": "f833a2a489aaa9d0adb4d76aa800bec2f24f49c639fb47058253cc70d3f11352",
+      "bytes": 15829
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\infinitive_red.json",
+      "sha256": "3fd2875eece6f8e4d09a3bbab6ab323ccc3c0d67f00322522d0441055a1b1280",
+      "bytes": 2657
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\green.txt",
+      "sha256": "bd4c325e72d988316a266de2ed0c364a7e9e2518b4f1995881b56e280388ae08",
+      "bytes": 2040
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\green.xml",
+      "sha256": "882fcfc551baf46d18420107ff90f54a11ea5bbe223d5d09acca1516cabbd447",
+      "bytes": 42643
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\green.json",
+      "sha256": "a90fbe3f3d90887a1e3f01e884314f6f047e284620b7880edcd2b4217437c7f1",
+      "bytes": 2901
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\lint.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\lint.json",
+      "sha256": "208bb78f1743ce85a97a3b6c410ed6642a4f77df39851b90f2a6750863c785b9",
+      "bytes": 2414
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\types.txt",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+      "bytes": 43
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\types.json",
+      "sha256": "bc67ea0b31c44b07067f09d0de2b196499635cb4cc4783bd2f82c60d007628bf",
+      "bytes": 2466
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\legacy-red.json",
+      "sha256": "99430572eaa33a887e6e92d015db09999af84e7654d335e38500c885ae5af9b1",
+      "bytes": 1659
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\legacy-green.json",
+      "sha256": "99430572eaa33a887e6e92d015db09999af84e7654d335e38500c885ae5af9b1",
+      "bytes": 1659
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\cleanup.json",
+      "sha256": "26344011dd0a67b515c73eeefe0c23f80d0f5da700961d0d1411019440c2a262",
+      "bytes": 1868
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\version-bindings.json",
+      "sha256": "6c47948e8c289c4aa2dc64235a0b22707a357937371b5d6d35adc59f29273311",
+      "bytes": 1032
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\handoff.md",
+      "sha256": "3710b740e1c2430f4de26003299bc98e15a7b9d0f48ad42d1db0e14af29c831f",
+      "bytes": 4070
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\task_plan.md",
+      "sha256": "84681c36d3d463d311ac064b587d76af6d8fe24ffeab9e104947923248f00d0c",
+      "bytes": 639
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\findings.md",
+      "sha256": "3710b740e1c2430f4de26003299bc98e15a7b9d0f48ad42d1db0e14af29c831f",
+      "bytes": 4070
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation\\docs\\plans\\r1-final3-source-semantics-20261022\\resume\\order-metric-language-20261024\\progress.md",
+      "sha256": "5ded9d651ee8ca0e96b98e2440f79ac0df22b180367b754887674f377bdde6e9",
+      "bytes": 800
+    }
+  ],
+  "legacy_0_8_and_predicate_unchanged": true,
+  "no_new_metric_schema_or_modal_vocabulary": true,
+  "original_40_assertions_unchanged": true,
+  "limits_unchanged": [
+    8,
+    4,
+    2048,
+    96,
+    48000,
+    16000000
+  ],
+  "cleanup_complete": true,
+  "unexecuted": [
+    "Full natural9/whole continuity/real PDF/LLM replay, ROOT concentrated responsibility"
+  ],
+  "side_effects": {
+    "git_or_index_mutations": 0,
+    "mother_pwf_edits": 0,
+    "other_owner_writes": 0,
+    "original_reads": 0,
+    "network_model_api_calls": 0,
+    "fee_or_config_changes": 0
+  }
+}

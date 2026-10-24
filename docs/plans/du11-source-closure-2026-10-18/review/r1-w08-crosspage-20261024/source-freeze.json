@@ -1,0 +1,286 @@
+{
+  "status": "ROOT_COMPOSED_V3_FROZEN_AWAIT_SAME13_AND_FULL_NATURAL_SUITE",
+  "at_utc": "2026-10-24T01:12:10.184586+00:00",
+  "owned_files": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "sha256_raw": "3ed9d08ba8c8d7cdfe0bbb5dbed1817803b395e41531e69660e659004150dd46",
+      "sha256_lf": "3ed9d08ba8c8d7cdfe0bbb5dbed1817803b395e41531e69660e659004150dd46",
+      "bytes": 37979
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "sha256_raw": "66bd55c80e6d07f0a752ab3787f9fdbb04270b16491da36ef4a3b9d21564c8e4",
+      "sha256_lf": "66bd55c80e6d07f0a752ab3787f9fdbb04270b16491da36ef4a3b9d21564c8e4",
+      "bytes": 25713
+    },
+    "src/company_wiki/document_understanding/pipeline.py": {
+      "sha256_raw": "46d3cbd934bbada230eb384d6122230f1efb00bda8120707bad4796175207020",
+      "sha256_lf": "46d3cbd934bbada230eb384d6122230f1efb00bda8120707bad4796175207020",
+      "bytes": 19379
+    },
+    "src/company_wiki/document_understanding/structure/__init__.py": {
+      "sha256_raw": "166b9215ce5d5e9a40916a0ee7a6171ff7e51152051d4b1caa5a28e891254bbf",
+      "sha256_lf": "166b9215ce5d5e9a40916a0ee7a6171ff7e51152051d4b1caa5a28e891254bbf",
+      "bytes": 22597
+    },
+    "src/company_wiki/document_understanding/structure/sections.py": {
+      "sha256_raw": "dacb853d631ee328b4c3d518b638428c01068d32852dbdf0dea435fbc77faf16",
+      "sha256_lf": "dacb853d631ee328b4c3d518b638428c01068d32852dbdf0dea435fbc77faf16",
+      "bytes": 26310
+    },
+    "src/company_wiki/document_understanding/structure/contract.py": {
+      "sha256_raw": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+      "sha256_lf": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+      "bytes": 13626
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256_raw": "85630848914f0487020ea3f41d395a9dff2ffb9d37cfd6b382fb045a3f260676",
+      "sha256_lf": "85630848914f0487020ea3f41d395a9dff2ffb9d37cfd6b382fb045a3f260676",
+      "bytes": 26400
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256_raw": "be21d48f7970861ebb1f9403b3f259d935cbea82a3f2b194979f23be1ccf163f",
+      "sha256_lf": "be21d48f7970861ebb1f9403b3f259d935cbea82a3f2b194979f23be1ccf163f",
+      "bytes": 74422
+    },
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": {
+      "sha256_raw": "07f063af239325c54af6928d3448bd1f76775d1b16a4abcbad10ad67d62cf76c",
+      "sha256_lf": "07f063af239325c54af6928d3448bd1f76775d1b16a4abcbad10ad67d62cf76c",
+      "bytes": 11642
+    },
+    "tests/unit/document_understanding_selection/test_native_list_physical_observer.py": {
+      "sha256_raw": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2",
+      "sha256_lf": "c31aa040b35bfbf7be18015794f85c365596cb82cb93de247807fda3abeb71d2",
+      "bytes": 20481
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": {
+      "sha256_raw": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3",
+      "sha256_lf": "b50cafe1367148d4e938945d6b56c0919c6e44deed95e068574cb282069cbff3",
+      "bytes": 11561
+    }
+  },
+  "root_owned_composition_bindings": {
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": {
+      "sha256_raw": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+      "sha256_lf": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+      "bytes": 9871
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256_raw": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b",
+      "sha256_lf": "1efe57913a98b92803c33c0349c656bd495ce171645c698c43f6eb214743007b",
+      "bytes": 48147
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256_raw": "c98cd4cc4371b43d314e6ffbcca2b61947b146128cb569bfd226dc3f3da2b142",
+      "sha256_lf": "dac3dc67cee89a56219313cf4739e4c5c92e6fa79d7a4288800a96aabfae1879",
+      "bytes": 22315
+    },
+    "src/company_wiki/document_understanding/operating_states/text_view.py": {
+      "sha256_raw": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+      "sha256_lf": "42d4a709aae0ef0a0f8c818b2629a31d82734d2240299e340452a9685d744534",
+      "bytes": 5563
+    },
+    "tests/unit/document_understanding_selection/test_reading_declaration_marker_qualification.py": {
+      "sha256_raw": "430c41fd12b58920a2b05e852821eb61e0eab257177abcdff90c104f26fa7ef5",
+      "sha256_lf": "04b1ba9044d784c1d67adc76608785783765da46e15d2a1b38335fb595ca7c18",
+      "bytes": 2975
+    },
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "sha256_raw": "ae047f44521fccc7f640e6b80fbfe945af41002181c8749f6596dae5a36e188d",
+      "sha256_lf": "7583cc49d13fb220aaf23953ca234ff57b82d93ae5bdd8679a636ccb8b693c09",
+      "bytes": 50488
+    },
+    "src/company_wiki/document_understanding/operating_states/patterns.py": {
+      "sha256_raw": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+      "sha256_lf": "fd5ef669091fcd8b6092c2ced666c2fc9d3106f74d3c168f6266bf184df90cd3",
+      "bytes": 21684
+    },
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": {
+      "sha256_raw": "7e5d0ccb0b85342081578a9c37e927835ccab6b21bb2aacebddeafe53ebd43d7",
+      "sha256_lf": "7e567afc614bbb1c7ca794e049e2d566dd23e8ab559b7970616c2a77c1462051",
+      "bytes": 22321
+    },
+    "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py": {
+      "sha256_raw": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334",
+      "sha256_lf": "4ee0a55e6bb02636c6512f609de36ccdb4bf59b82c88aa529cb862f85c4eb334",
+      "bytes": 7780
+    }
+  },
+  "immutable_test_bindings": {
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "sha256_raw": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "sha256_lf": "1ffe7147d74cf667672ab857f01a85074ef63eebbfac223816852c60a095f7de",
+      "bytes": 11327
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": {
+      "sha256_raw": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "sha256_lf": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "bytes": 8094
+    },
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": {
+      "sha256_raw": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "sha256_lf": "e5bd00e89e3bebf0902d6bf764dc70cc27d6bcf71c8259a8cfd547811dcceb1e",
+      "bytes": 11035
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": {
+      "sha256_raw": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "sha256_lf": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "bytes": 8229
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": {
+      "sha256_raw": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "sha256_lf": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "bytes": 4273
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": {
+      "sha256_raw": "b8878d3c5734aa73f0dc61553d8fb7feb40e152ad51d6efc71a6a12b80d3b6e0",
+      "sha256_lf": "2412b19e4dd3c85f30fb99a21a0046bd5a85aea0ab245dc680660593606c3d62",
+      "bytes": 16542
+    }
+  },
+  "historical_independent17_24_bindings": {
+    "independent_semantics_executed_red.py.txt": {
+      "sha256_raw": "eb7a929a6e9f1ed692f7d58a05a9e61ad993fe7958466c3faf492a6a30cc70e2",
+      "sha256_lf": "25fca497b2beb267f81ea066f0d2464fd34f6fdb41cada4719215a35e495e149",
+      "bytes": 1430
+    },
+    "final-test_semantics.py.txt": {
+      "sha256_raw": "696a6370522891a64e5138a5f6b3d94e952aef39594ee26a9fd1397731327134",
+      "sha256_lf": "e4b3ea32610d1ec8a32353cda3bfad8cc1644a36a18ff445d25559eac435220c",
+      "bytes": 1433
+    },
+    "final-artifact-freeze.json": {
+      "sha256_raw": "301fa681872682a10d40d2ddfe393a564c7ef5805a521a6b8a05c4e1fbc2ad7e",
+      "sha256_lf": "ee9023cfa5261e9a3b65386cd3baa253051731c001c4b07ec772f8149426278f",
+      "bytes": 1739
+    }
+  },
+  "historical_review_artifacts_unchanged": true,
+  "source_writes_stopped": true,
+  "git_writes": 0,
+  "external_calls": 0,
+  "mother_writes": 0,
+  "limits_unchanged": {
+    "selected": 96,
+    "chars": 48000,
+    "document_work": 16000000,
+    "list_scope_pages": 2,
+    "list_scope_source_units_including_skips": 24,
+    "semantic_original_units": 8,
+    "semantic_blocks": 4,
+    "semantic_chars": 2048
+  },
+  "semantic_material_rule": "Actual parent/intro/deictic/restriction/footnote meaning joins one original reference envelope; independent list endpoints and positive furniture are structural witnesses, not automatic model text/cost. Source-only cannot subtract meaning.",
+  "physical_observation_owner": "A single call-scoped NativeSourceContext is retained in a private sink and passed to both sections and reading continuity; raw observation cached once per original ID, no object enters JSON/export. Compatibility callers without a supplied context retain normal local observation.",
+  "budget_role_correction": "ROOT explicitly withdrew new source-only-as-model-cost and mandatory independent-boundary-as-readable rules; previous6-block statements are historical and superseded. Old sentence constraints are not replaced by the list24-unit scope.",
+  "tests": {
+    "public-original-red": {
+      "tests": "9",
+      "failures": "7",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.846"
+    },
+    "physical-owner-red": {
+      "tests": "19",
+      "failures": "19",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.506"
+    },
+    "dependency-port-red": {
+      "tests": "10",
+      "failures": "10",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.678"
+    },
+    "purpose-contract-v2": {
+      "tests": "73",
+      "failures": "3",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.386"
+    },
+    "physical-reuse-red": {
+      "tests": "4",
+      "failures": "4",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.599"
+    },
+    "native-parent-ordinal-red": {
+      "tests": "1",
+      "failures": "1",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.541"
+    },
+    "uppercase-roman-targeted-red": {
+      "tests": "2",
+      "failures": "2",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.581"
+    },
+    "purpose-reuse-final": {
+      "tests": "80",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.316"
+    },
+    "physical-reuse-final-typed": {
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.397"
+    },
+    "original-natural-owner-regressions": {
+      "tests": "444",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.826"
+    }
+  },
+  "static_receipt": "static.json",
+  "final_guard_verification": "Final exact source passed444 original failing-family/new-public controls and Ruff/mypy two modified sources. Other9-file checks remain historical. Not a substitute for ROOT original1982 natural suite.",
+  "cache_dependency_owners": [
+    "pipeline",
+    "structure",
+    "structure.sections",
+    "structure.contract",
+    "observation_adapter",
+    "narrative_continuity version/digest",
+    "narrative_reading",
+    "narrative_native_dependencies",
+    "operating_states.text_view",
+    "narrative_operating_relations"
+  ],
+  "next_owner": "ROOT: one complete natural related suite, then different agent final independent review, normal selected-range commit/main integration/push.",
+  "not_certified": [
+    "real annual14 recall",
+    "paid summary",
+    "cache recovery live run",
+    "RF audit loop",
+    "project completion"
+  ],
+  "supersedes": {
+    "path": "../final-source-freeze.json",
+    "sha256": "2b5576fcdb82b639f1e9c960f6aa9b3ec7b755c1659277b5677b0cc8a48345d7",
+    "reason": "ROOT natural1982 exposed42 generic-input protocol regressions and19 input-mutation regressions; these two shared-owner defects repaired without changing any original assertions."
+  },
+  "changed_after_previous_freeze": [
+    "src/company_wiki/document_understanding/pipeline.py",
+    "src/company_wiki/source_catalog/narrative_reading.py"
+  ],
+  "natural_full_status": "PENDING_ROOT_UNCHANGED1982_ASSERTION_REPLAY_AFTER_ASSET_REPAIR",
+  "old63_failure_classes": {
+    "mutated_input_empty_diagnostic": 19,
+    "missing_du2_asset": 2,
+    "added_input_identity_attribute": 42
+  },
+  "previous_frozen_report": "post-natural-root-fix/source-freeze.json",
+  "previous_frozen_report_sha256": "165f6a6e156b70df276ac8adc4ad7b4fcb425c404b6220081c927bf11dffced5"
+}
