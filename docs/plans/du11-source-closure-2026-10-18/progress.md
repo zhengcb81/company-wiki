@@ -893,3 +893,9 @@ CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110
 - Independent review发现的v3裸诊断白名单、target used超限和schema非字符串根因在RF/CWP两端统一修复。RF commit `c48f86bd0d56f0a2be67a71348cf05d8544b6cdd`已推送并与`origin/main`一致；最终只读接口独审PASS。RF聚焦测试85P，Ruff/mypy/host guard通过，pre-push 595P/1skip/36subtests；CWP `test_narrative_reading_transport.py` 54P。
 - CN H1内容仍partial/needs_review，68 claims均uncertain/needs_review。context 195,794/196,608 bytes，只余814 bytes。下一候选微软FY2025 10-K原件SHA `99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe`、8,158,067 bytes，原件已在本地，下一步只做零费用预算/结果边界预检，不下载。
 - 本轮尚需提交/推送CWP producer检查、112财报选择上限、Phase C拒绝分类和PWF更新；整体W12内容质量审查与holdout循环保持OPEN。
+
+## 2026-10-24 CN H1发布收口与三条独立旁线施工卡
+
+- CWP commit ae45b49adff21a3f79bec38512b225609051b434 已正常推送。pre-push 根据宽影响范围只运行合同烟测 154 passed in 133.76s；358 个受影响目标交给远端 CI。精确 GitHub Actions run 40129398346 / check 120977676826 对应本 SHA，记录时仍 in_progress，不先行宣称通过。
+- 准备三张互不重叠的外仓卡，见 harness_lanes/20261024-independent/README.md：industry-research 报告生成边界、QAbyLLM RAG 重建失败保护、MeetingConverter 三文件输出完整性。开始 SHA 与派卡时状态已冻结；MeetingConverter 既有 .coverage 修改列为保护项。
+- 三卡均使用合成数据/临时根，无真实公司资料、模型/API、网络或下载。必须由未参与实现的独立 agent 审完整 diff、独立运行验收测试并添加反例；所有发现修复和复审最终 SHA PASS 后才允许交接。三卡不改变当前 company-wiki 主线，也未新建外仓 worktree 或写外仓代码。

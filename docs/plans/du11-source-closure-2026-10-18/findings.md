@@ -698,3 +698,7 @@ FF第一轮push gate的6个失败后来确认为夹具把请求总预算3秒用�
 CWP生产导出的正式上下文已升至`du-production-reading/3`并带selection trace与组证明，而RF消费校验器只支持v1/v2；因此即使来源与产物SHA正确，真实RF reader仍拒绝接口。RF扩大兼容后，validator还允许未知v3裸诊断码和`target.used > target.limit`的伪诊断；生产端target构造保证used不超限，但两端契约没有都表达此不变量。修复已在RF commit `c48f86bd0d56f0a2be67a71348cf05d8544b6cdd`和当前CWP工作树中补齐，两端都验证限额关系，v3裸码采用CWP allowlist，非字符串schema安全拒绝。
 
 真实E2E v6证明FF复用与RF source+narrative/direct reader消费通过，provider 0、download 0、exact hashes、引用闭合。context 195,794/196,608 bytes仅余814 bytes，需持续观察；不要为单样本扩大通用1MiB结果或192KiB上下文合同。真实v3样本目前仅CN H1，业务质量及其他文种/市场尚未验收。
+
+## 最新协调状态（2026-10-24 20:28 UTC）
+
+主线 producer/consumer 修复已由提交 ae45b49adff21a3f79bec38512b225609051b434 推送到 origin/master。对应精确 CI run 40129398346 仍在运行；本地pre-push仅完成154项contract smoke，358个影响目标留给CI。先记录CI最终结论，再进行微软FY2025 10-K零费用预检；已有原件不重下。三张READY旁线卡见 harness_lanes/20261024-independent/README.md，三仓隔离且不阻塞上述先后顺序。

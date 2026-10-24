@@ -8,17 +8,17 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "0f64289e",
+  "last_code_commit": "ae45b49adff21a3f79bec38512b225609051b434",
   "code_ci": {
-    "id": 40116401110,
-    "check_id": 120938472665,
-    "head_sha": "0acae348484d661278faa62641ad426f2c8cf485",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40116401110",
-    "failed_test_count": 0,
-    "junit_report": "not_needed_for_successful_run",
-    "updated_at": "2026-10-24"
+    "id": 40129398346,
+    "check_id": 120977676826,
+    "head_sha": "ae45b49adff21a3f79bec38512b225609051b434",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40129398346",
+    "failed_test_count": null,
+    "junit_report": "pending",
+    "updated_at": "2026-10-24T20:21:21Z"
   },
   "completed": {
     "b2": {
@@ -176,7 +176,12 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W13/W14/W15均已ROOT接收；W13精确CI 40120507146 对HEAD 83e49a6b3a83a78726de9c7a40e4bdbc6baf52fc completed/success。中微CN H1正式摘要的RF真实只读消费v6通过；RF修复commit c48f86bd0d56f0a2be67a71348cf05d8544b6cdd已推送且与origin/main一致，RF focused 85P、pre-push 595P/1skip/36subtests；CWP narrative transport 54P。接口独审PASS，业务内容审查仍pending。下一步冻结现存微软FY2025 10-K（US年报，已有HTML原件8,158,067 bytes，SHA 99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe），先做零费用预算/输出容量预检，再按配置决定是否正式摘要、恢复/cache及RF消费；不得重新下载原件。",
+  "next_step_now": "W13/W14/W15均已ROOT接收。CN H1正式摘要RF真实只读消费v6通过；RF修复commit c48f86bd0d56f0a2be67a71348cf05d8544b6cdd已推送。CWP代码commit ae45b49adff21a3f79bec38512b225609051b434已推送，精确CI run 40129398346 in_progress；pre-push运行bounded contract smoke 154P/133.76s，358个目标留给CI。下一步等精确CI结论，然后对本地已存在微软FY2025 10-K（8,158,067 bytes，SHA 99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe）做零费用预算/输出容量预检，再按配置决定正式摘要、恢复/cache及RF消费；不得重新下载原件。旁线施工包总入口为harness_lanes/20261024-independent/README.md，不阻塞主线。",
+  "parallel_work_packages": [
+    {"id": "IR-REPORT-GENERATION", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md", "review_before_handoff": true},
+    {"id": "QA-RAG-SAFE-REBUILD", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md", "review_before_handoff": true},
+    {"id": "MC-OUTPUT-INTEGRITY", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/MC-OUTPUT-INTEGRITY.md", "review_before_handoff": true}
+  ],
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
     "observed_on": "2026-10-22",

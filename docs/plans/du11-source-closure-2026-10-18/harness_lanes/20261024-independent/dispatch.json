@@ -1,0 +1,51 @@
+{
+  "schema_version": "company-wiki-independent-project-dispatch/1",
+  "created_at": "2026-10-24",
+  "parent_plan_id": "du11-source-closure-2026-10-18",
+  "parent_plan_root": "docs/plans",
+  "mainline_blocked": false,
+  "cards": [
+    {
+      "card_id": "IR-REPORT-GENERATION",
+      "card_path": "IR-REPORT-GENERATION.md",
+      "repository": "C:/Users/郑曾波/Projects/industry-research",
+      "workdir": "C:/Users/郑曾波/Projects/industry-research-report-generation",
+      "branch": "codex/ir-report-generation-20261024",
+      "start_head": "4a80f9988f9325fb0a348c8acd9e41d615005c5f",
+      "owned_paths": ["tools/report_generator.py", "tests/test_report_generator.py", "tests/fixtures/report_generator/**"],
+      "status": "READY_NOT_STARTED",
+      "review_before_handoff": true
+    },
+    {
+      "card_id": "QA-RAG-SAFE-REBUILD",
+      "card_path": "QA-RAG-SAFE-REBUILD.md",
+      "repository": "C:/Users/郑曾波/Projects/QAbyLLM",
+      "workdir": "C:/Users/郑曾波/Projects/QAbyLLM-rag-safe-rebuild",
+      "branch": "codex/qa-rag-safe-rebuild-20261024",
+      "start_head": "ad389f84cd15e54207fc6fcfe4881f86edac63f1",
+      "owned_paths": ["rag_system.py", "tests/unit/test_rag_safe_rebuild.py", "tests/integration/test_rag_rebuild_lifecycle.py", "tests/fixtures/rag_safe_rebuild/**"],
+      "status": "READY_NOT_STARTED",
+      "review_before_handoff": true
+    },
+    {
+      "card_id": "MC-OUTPUT-INTEGRITY",
+      "card_path": "MC-OUTPUT-INTEGRITY.md",
+      "repository": "C:/Users/郑曾波/Projects/MeetingConverter",
+      "workdir": "C:/Users/郑曾波/Projects/MeetingConverter-output-integrity",
+      "branch": "codex/meetingconverter-output-integrity-20261024",
+      "start_head": "8a33a7f96292af8e6574d98b959703c6d11919eb",
+      "preserved_preexisting_path": ".coverage",
+      "owned_paths": ["core/output.py", "tests/test_output.py"],
+      "status": "READY_NOT_STARTED",
+      "review_before_handoff": true
+    }
+  ],
+  "isolation": {
+    "repository_overlap": false,
+    "production_data_writes": false,
+    "model_provider_calls": 0,
+    "downloads": 0,
+    "company_wiki_mainline_dependency": false
+  },
+  "handoff_rule": "A card is not complete until an independent non-implementer agent returns PASS on the exact final commit, all findings are fixed and rechecked, acceptance tests pass, and test-owned storage is restored."
+}
