@@ -10,6 +10,7 @@ from company_wiki.source_catalog.narrative_candidates import EvidenceCandidate
 from company_wiki.source_catalog.narrative_evidence import _make_unit, _minimal_matching_unit_windows
 from company_wiki.source_catalog.narrative_group_candidates import GroupCandidateRules, enrich_context_groups
 from company_wiki.source_catalog.narrative_neighbors import NeighborRules, enrich_neighbor_context
+from company_wiki.source_catalog.narrative_routing import FINANCIAL_REPORT_SELECTION_LIMIT
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
 
@@ -134,7 +135,7 @@ def test_customer_validation_milestone_survives_a_dense_generic_event_document()
                                   units=(milestone, *other), page_count=111, pages_read=111)
     result = select_narrative_evidence(parsed, title='2026年年度报告', existing_kind='annual_report')
     assert any(span.raw_text == milestone.raw_text for span in result.evidence_spans)
-    assert len(result.evidence_spans) <= 96
+    assert len(result.evidence_spans) <= FINANCIAL_REPORT_SELECTION_LIMIT
 
 
 def test_completion_reasons_do_not_leak_from_an_unrelated_sentence_on_the_page():

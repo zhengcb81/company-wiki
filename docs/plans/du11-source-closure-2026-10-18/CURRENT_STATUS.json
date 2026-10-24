@@ -8,18 +8,18 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "ae45b49adff21a3f79bec38512b225609051b434",
+  "last_code_commit": "61ecfc2b9ae33e87691e4765c36c82481959db6c",
   "code_ci": {
-    "id": 40129398346,
-    "check_id": 120977676826,
-    "head_sha": "ae45b49adff21a3f79bec38512b225609051b434",
+    "id": 40130559322,
+    "check_id": 120981176883,
+    "head_sha": "61ecfc2b9ae33e87691e4765c36c82481959db6c",
     "status": "completed",
     "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40129398346",
-    "failed_test_count": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40130559322",
+    "failed_test_count": 2,
     "junit_report": "unavailable",
-    "failure_summary": "Unit tests failed on stale annual-report selection_limit=96 helper assertions after the financial-report default changed to 112; focused contract/CLI/secret scan steps skipped.",
-    "updated_at": "2026-10-24T20:25:58Z"
+    "failure_summary": "Two stale selection_limit=96 expectations remained after the first test migration: N6 maximum bound and production selection helper default. Both reproduce as 112 vs 96; product routing is unchanged.",
+    "updated_at": "2026-10-24T20:40:17Z"
   },
   "completed": {
     "b2": {
@@ -177,11 +177,26 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W13/W14/W15均ROOT接收。CN H1正式摘要RF真实只读消费v6通过；CWP ae45b49adff21a3f79bec38512b225609051b434已推送，但精确CI 40129398346在Unit tests失败、后续contract/CLI/secret检查跳过。根因为财报默认selection_limit改112后有三个旧annual_report测试helper仍硬编码96。三个测试helper已改用FINANCIAL_REPORT_SELECTION_LIMIT；相关143 tests PASS，Ruff PASS，修复/PWF待提交推送并核精确CI。之后对本地已有MSFT FY2025 10-K原件先做零费用预算/输出容量预检，不重下；合格后继续摘要/cache/RF。旁线卡总入口harness_lanes/20261024-independent/README.md。",
+  "next_step_now": "Commit and push the two remaining stale-96 contract fixes with PWF, then verify exact new-head CI. If green, continue the already-local MSFT FY2025 10-K zero-cost budget and output-capacity preflight; do not redownload the original.",
   "parallel_work_packages": [
-    {"id": "IR-REPORT-GENERATION", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md", "review_before_handoff": true},
-    {"id": "QA-RAG-SAFE-REBUILD", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md", "review_before_handoff": true},
-    {"id": "MC-OUTPUT-INTEGRITY", "status": "READY_NOT_STARTED", "path": "harness_lanes/20261024-independent/MC-OUTPUT-INTEGRITY.md", "review_before_handoff": true}
+    {
+      "id": "IR-REPORT-GENERATION",
+      "status": "READY_NOT_STARTED",
+      "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md",
+      "review_before_handoff": true
+    },
+    {
+      "id": "QA-RAG-SAFE-REBUILD",
+      "status": "READY_NOT_STARTED",
+      "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md",
+      "review_before_handoff": true
+    },
+    {
+      "id": "MC-OUTPUT-INTEGRITY",
+      "status": "READY_NOT_STARTED",
+      "path": "harness_lanes/20261024-independent/MC-OUTPUT-INTEGRITY.md",
+      "review_before_handoff": true
+    }
   ],
   "next_step_after_user_resumes": "Already active; no new permission or resume required.",
   "budget_snapshot": {
@@ -1009,5 +1024,21 @@
     "cn_h1_rf_interface_e2e": "PASS_OFFLINE_V6",
     "cn_h1_rf_interface_review": "PASS",
     "cn_h1_business_content_review": "PENDING"
+  },
+  "latest_local_validation": {
+    "status": "PASS_FOCUSED_AFTER_CI_ROOT_CAUSE_FIX",
+    "tests": 181,
+    "seconds": 36.88,
+    "scope": [
+      "test_n6_candidate_main_boundaries.py",
+      "test_reading_production_selection.py",
+      "test_reading_operating_measure_variants.py",
+      "test_reading_untyped_numeric_prose_controls.py",
+      "test_reading_untyped_numeric_quality.py",
+      "test_narrative_selection_architecture.py"
+    ],
+    "ruff": "PASS",
+    "diff_check": "PASS",
+    "pytest_temp": "one sandbox temp setup error on first run; same case passed with isolated workspace basetemp, which was removed"
   }
 }

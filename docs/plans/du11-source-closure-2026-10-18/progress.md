@@ -905,3 +905,9 @@ CWP源码`0f64289e`和M5 PWF收据`0acae348`均已推送；精确CI `40116401110
 - 精确HEAD ae45b49adff21a3f79bec38512b225609051b434 的远端CI于 Unit tests 失败；公开annotations只给部分失败且JUnit unavailable，失败步骤之后的focused contract、CLI、secret scan跳过。
 - 从producer diff和本地重放定位共享根因：financial-report route 有意把annual/semiannual/quarterly的默认selection_limit由96提到112；三个annual_report单测helper仍硬编码96，所有这些用例在内容断言前即被合同值断言挡住。它们是过期测试期待，并非提取结果错误。CI hook快门仅跑154项smoke，受影响unit目标转远端CI，所以pre-commit/本地push门没执行这些用例；远端CI及时抓到错配。
 - 按生产route合同改三个测试helper引用FINANCIAL_REPORT_SELECTION_LIMIT，没有回退112产品上限、没有删除测试。3个受影响单测文件加routing architecture tests共143 passed/9.32s，Ruff通过；测试修复仍待正常commit/push并验证新HEAD CI。
+
+## 2026-10-24 CI 二次失败后的测试合同补漏
+
+CI run `40130559322` 精确绑定commit `61ecfc2b9ae33e87691e4765c36c82481959db6c`，在`Unit tests`失败。公开check-run注解定位N6的`<=96`断言和production-selection `_select` 默认仍显式传96。两者由第一轮修复未枚举全部财报默认限制假设造成；不是112路由产品逻辑错误。将前者绑定`FINANCIAL_REPORT_SELECTION_LIMIT`，后者helper改为`limit=None`，让正式路由决定默认值，显式budget测试仍显式传参。
+
+五个相关测试文件与routing architecture测试共181 passed/36.88s；Ruff与diff-check通过。一次无basetemp的同套运行为180 passed/1环境setup error（Windows沙箱系统temp无法再创建pytest numbered directory）；该唯一用例显式使用仓库内隔离basetemp后通过，临时目录清理完成。接下来正常提交并push，等待新精确CI；通过后继续MSFT 10-K零费预检。旁线三卡已推送，卡片要求各自实现者提交后由非实现agent独立审查最终SHA并修复所有发现再交接。

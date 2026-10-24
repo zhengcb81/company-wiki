@@ -81,7 +81,7 @@ def _document(*units, opaque=(), language="en"):
     )
 
 
-def _select(parsed, *, limit=96, title="Annual report", existing_kind="annual_report", version=NEW_VERSION):
+def _select(parsed, *, limit=None, title="Annual report", existing_kind="annual_report", version=NEW_VERSION):
     return selector.select_narrative_evidence(
         parsed,
         title=title,

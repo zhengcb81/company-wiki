@@ -708,3 +708,7 @@ CWP生产导出的正式上下文已升至`du-production-reading/3`并带selecti
 - 精确HEAD ae45b49adff21a3f79bec38512b225609051b434 的远端CI于 Unit tests 失败；公开annotations只给部分失败且JUnit unavailable，失败步骤之后的focused contract、CLI、secret scan跳过。
 - 从producer diff和本地重放定位共享根因：financial-report route 有意把annual/semiannual/quarterly的默认selection_limit由96提到112；三个annual_report单测helper仍硬编码96，所有这些用例在内容断言前即被合同值断言挡住。它们是过期测试期待，并非提取结果错误。CI hook快门仅跑154项smoke，受影响unit目标转远端CI，所以pre-commit/本地push门没执行这些用例；远端CI及时抓到错配。
 - 按生产route合同改三个测试helper引用FINANCIAL_REPORT_SELECTION_LIMIT，没有回退112产品上限、没有删除测试。3个受影响单测文件加routing architecture tests共143 passed/9.32s，Ruff通过；测试修复仍待正常commit/push并验证新HEAD CI。
+
+## 2026-10-24 CI 40130559322 二次漏项
+
+第二次CI对`61ecfc2b9ae33e87691e4765c36c82481959db6c`仍在Unit tests失败，check-run `120981176883`指出N6密集事件回归断言`<=96`及production-selection `_select()`默认预算仍为96。两项本机逐例重放都呈现实际112与旧96冲突。它们不是新的产品回归，而是同一次政策升级后的测试合同迁移不完整：前次只按出现的helper改值，未枚举所有默认预算假设。保留显式小预算与transcript通用96测试；N6断言引用路由常量，production测试helper默认`limit=None`表达“不覆盖生产默认”。六个受影响测试文件181 passed；第一次181项运行仅一项因本机系统temp创建权限失败，使用仓库内隔离basetemp复跑通过并删除临时根。修复待正常提交推送及精确新HEAD CI。
