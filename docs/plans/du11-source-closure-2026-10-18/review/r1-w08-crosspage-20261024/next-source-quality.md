@@ -14,14 +14,14 @@ V5已修复V4独立审查发现的P2根因：中英文纯名词“收入确认/�
 
 V5在同一真实原文上的选材结果仍是7pass/5partial/2missing，而不是完整通过。A06/A07/A08/A10/A11/A12/A14 pass；A01/A02/A05/A09/A13 partial；A03/A04 missing。A12指引和完整前提已同在`t31`；A13收入确认政策已可见，但具体金额/业务时段分类缺失。55任务context复核未发现Testing/Biology兄弟业务串入。V5选择、源码/测试及自然测试回执绑定见`annual14-v5/freeze.json`；独立报告见`annual14-v5/review.md/json`。
 
-下一步不重复解析全PDF：针对A03/A04和五个partial目标，利用既有bounded per-target trace核对source candidate、来源类型/职责、semantic dependency、offer/admit/withhold、task/引用闭包的具体状态。判断A03/A04精确财务值是否应由现有API/SourceRef提供；判断A01/A02/A05/A09/A13缺口是否来自业务scope、数值口径、Chemistry父子关系、日期/容量跨任务或收入确认期间关系。保留unknown，不从aggregate `budget_full`倒推单目标原因，不改14项gold，不抬限额。按共用根因做TDD修复后，才用一次同一真实来源新版本回放并独立复核同一14项目标。
+下一步不重复解析全PDF：针对A03/A04和五个partial目标，先扩充有界逐目标trace，再核对source candidate、来源类型/职责、semantic dependency、offer/admit/withhold、task/引用闭包的具体状态。当前可复用的`annual14-v2/trace_targets.py`仅覆盖A12/A13，不覆盖V5其余开放目标；不能把它写成已有的通用trace能力。为A03/A04、A01/A02/A05/A09/A13补充统一、受界限约束的目标链记录，优先从已冻结选材、当前公开诊断和task上下文生成，不重读原件；只有已有记录不足以区分根因时才按原SourceRef做局部读取。判断A03/A04精确财务值是否应由现有API/SourceRef提供；判断其余缺口是否来自业务scope、数值口径、Chemistry父子关系、日期/容量跨任务或收入确认期间关系。保留unknown，不从aggregate `budget_full`倒推单目标原因，不改14项gold，不抬限额。按共用根因做TDD修复后，才用一次同一真实来源新版本回放并独立复核同一14项目标。
 
 ## 实施顺序（两大节点）
 
 ### 节点一：同一引擎内修上下文与选材
 
 1. 从annual14/review.json固定真实反例：跨页Chemistry→D&M/TIDES、容量值与建设日期分离、集团新客户分母、收入指引及行业/贸易/监管前提；同时保留A01完整四业务分类及Others、A02持续/终止经营与重述口径、A14竞争风险；另保留研发引流与客户地域/比较期脚注/结算和集中度事实。用原ID/locator及真实几何/文字构造有界回归；可用中性名称验证同构，不在实现内写公司名、特定数字或页码。
-2. 在现有selection/reading_context diagnostics保留已计算的逐项信息，补足有界逐目标trace；decision_inventory仍只负责family/facet策略与缓存依赖，不扩成原文内容库。逐项链为：候选形成→事实归类→语义/结构依赖→offer→admit/withhold→citation/model。记录原ID和具体原因，不保存整份PDF/MD、全部中间副本或第二状态库。缺证标unknown，不用aggregate budget_full猜根因。
+2. 在现有selection/reading_context diagnostics保留已计算的逐项信息，补足覆盖七个开放目标的有界trace；当前旧脚本仅记录A12/A13，不能充作其余目标的证据。decision_inventory仍只负责family/facet策略与缓存依赖，不扩成原文内容库。逐项链为：候选形成→事实归类→语义/结构依赖→offer→admit/withhold→citation/model。记录原ID和具体原因，不保存整份PDF/MD、全部中间副本或第二状态库。缺证标unknown，不用aggregate budget_full猜根因。
 3. 层级只由结构owner依据源本身编号/缩进/版面确定；DOM/原生结构/电话会沿用各自已有关系，不把PDF几何设为所有来源的前置条件；真实业务父级和局部定义/分母不能只在全局另一个task可见。时间、限制、指引条件复用既有事件/模态/经营关系owner，使完整含义进入相应task；跨主体、不同事件、独立新段落反控必须保留。
 4. 无表头/单位/对象的裸财务数字不得仅因含数字成为可直接陈述的factual task。明确非业务财务表优先走按需原文/API；收入确认、RPO排程等对业务机制有用的描述仍可检索/作为具体预测的精确来源。不能把“可获取”写成“已读取/已采用”，也不能改14 gold掩盖缺口。
 5. 根据实际trace改定额选择/原生carrier或既有batch安排；检查A09容量重复占位、A11集团新客户20%回退，原3pass不得因增加召回而丢失。先保留96/48000/16M与8/4/2048，按完整语义材料选取，不拆文规避限额、不简单抬上限。若真实任务无法容纳，使用现有有界batch/Worker及同一AUTO预算/lease/outbox恢复，不重建队列或重付unknown调用。

@@ -1,0 +1,25 @@
+{
+  "schema_version": "w08-annual14-v5-public-contract-replay/1",
+  "selection_sha256": "5602c4fe205128459af3079972e05f4a024603534c83c001c40e099ad4b5e9df",
+  "selected_spans": 96,
+  "reading_context_groups": 55,
+  "unique_group_ids": 55,
+  "reading_context_bytes": 185587,
+  "unread_sample_limit": 32,
+  "unread_counts_preserved": {
+    "opaque_pages": 0,
+    "deferred_pages": 140,
+    "deferred_unit_ids": 282,
+    "unassigned_unit_ids": 1286
+  },
+  "deferred_count": 320,
+  "deferred_sample_count": 32,
+  "model_task_count": 55,
+  "model_payload_bytes": 107834,
+  "contract": "PASS",
+  "external_model_calls": 0,
+  "source_reparse": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "note": "Frozen selected evidence reused; only bounded reading-context projection and public DTO/model-task contracts were replayed."
+}

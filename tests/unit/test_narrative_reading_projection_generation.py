@@ -21,6 +21,10 @@ def test_new_reading_generation_changes_but_legacy_omission_and_old_eight_stay_f
     original = payload(request)
     versions = batch._execution_versions(request)
     current = generation.generation_manifest(request, original, execution_versions=versions)
+    legacy_renderer = dict(current)
+    legacy_renderer.pop("reading_context_projection_version")
+    assert generation.generation_sha256(current) != generation.generation_sha256(legacy_renderer)
+    assert current["reading_context_projection_version"] == "reading-context-projection/1"
     legacy = generation.generation_manifest(request, original, execution_versions=versions, reading_model_projection=None)
     assert current["reading_model_projection"] == "reading-model-input/5"
     prior = generation.generation_manifest(request, original, execution_versions=versions,

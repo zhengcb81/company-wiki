@@ -39,6 +39,7 @@ _BUSINESS_ROLES = frozenset({"business", "management_discussion", "operating_met
                              "fundraising", "industry", "outlook"})
 _CONTEXT_ROLES = frozenset({"operator", "analyst", "investor_question", "qa_text_shadow"})
 _NEVER_HEADING = re.compile(r"(?!x)x")
+_READING_DIAGNOSTIC_SAMPLE_LIMIT = 32
 # Kinds whose anchors are prose statements that may carry a product deictic.
 # Tables and attributed Q&A retain their separate structural owners.
 _REFERENCE_KINDS = frozenset({"background", "paragraph_event", "risk", "project",
@@ -280,6 +281,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
         physical: set[str] = set()
         affected = []
         proof_rows = {}
+        proof_targets: set[str] = set()
         for uid in member_ids:
             references = native_dependencies.source_for(uid)
             work_budget.charge(1 + len(references))
@@ -287,10 +289,14 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             proofs = native_dependencies.proofs_for(uid)
             work_budget.charge(len(proofs))
             proof_rows.update({(row["left"], row["right"]): row for row in proofs})
+            nested_proof_targets = native_dependencies.proof_targets_for(uid)
+            work_budget.charge(len(nested_proof_targets))
+            proof_targets.update(nested_proof_targets)
             if references or native_dependencies.context_for(uid):
                 affected.append(uid)
         return {"_native_source_original_ids": sorted(physical),
                 "_native_dependency_targets": affected,
+                "_native_source_proof_targets": sorted(proof_targets),
                 "_native_source_proofs": tuple(proof_rows.values())} if affected else {}
 
     exclusions = other_members | excluded | context_blocked
@@ -1053,6 +1059,7 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
     entries = [{"members": list(selected.values())}]
     policies, facets, version = _sent_policies(pipeline, entries)
     groups = []
+    group_ids: set[str] = set()
     deferred = []
     for entry in eligible:
         required = set(entry["member_unit_ids"]) | set(entry.get("required_context_unit_ids", ()))
@@ -1061,7 +1068,6 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
             continue
         ids = list(dict.fromkeys(pipeline["selected_span_ids"][uid]
                                  for uid in original if uid in required))
-        digest = sha256(json.dumps(ids, separators=(",", ":")).encode()).hexdigest()
         citation_views = []
         seen_support = set()
         native_views = entry.get("citation_support_views")
@@ -1091,22 +1097,33 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
             seen_support.add(support_key)
             citation_views.append({"support_evidence_ids": support,
                 "context_evidence_ids": [sid for sid in ids if sid not in support_set]})
-        groups.append({"group_id": "urn:company-wiki:reading-group:sha256:" + digest,
-                       "kind": str(entry["kind"]), "section_role": str(entry.get("section_role") or "unknown"),
-                       "evidence_ids": ids, "citation_views": citation_views,
-                       **({"source_proof_unit_ids": list(entry["_native_source_original_ids"])}
-                          if entry.get("_native_source_original_ids") else {}),
-                       **({"source_proofs": list(entry["_native_source_proofs"])}
-                          if entry.get("_native_source_proofs") else {})})
+        proof_rows = tuple(entry.get("_native_source_proofs", ()))
+        physical_proof_ids = set(entry.get("_native_source_original_ids", ()))
+        proof_endpoints = {str(uid) for proof in proof_rows for uid in (proof["left"], proof["right"])}
+        required_proof_targets = sorted(
+            proof_endpoints & set(entry.get("_native_source_proof_targets", ())) - physical_proof_ids
+        )
+        group = {"kind": str(entry["kind"]), "section_role": str(entry.get("section_role") or "unknown"),
+                 "evidence_ids": ids, "citation_views": citation_views,
+                 **({"source_proof_unit_ids": sorted(physical_proof_ids),
+                    "source_proof_target_unit_ids": required_proof_targets,
+                    "source_proofs": list(proof_rows)} if proof_rows else {})}
+        group_id = _reading_group_id(group)
+        group["group_id"] = group_id
+        if group_id not in group_ids:
+            groups.append(group)
+            group_ids.add(group_id)
     unread = _unread(pipeline["structure"], observation)
     # Coverage lists are diagnostic examples, not a second all-unit inventory.
     # Preserve full counts and mark truncation rather than persisting huge IDs.
     list_keys = ("opaque_pages", "deferred_pages", "deferred_unit_ids", "unassigned_unit_ids")
     unread["counts"] = {key: len(unread[key]) for key in list_keys}
-    unread["limited"] = any(unread["counts"][key] > 128 for key in list_keys)
+    unread["limited"] = any(
+        unread["counts"][key] > _READING_DIAGNOSTIC_SAMPLE_LIMIT for key in list_keys
+    )
     for key in list_keys:
-        if len(unread[key]) > 128:
-            unread[key] = unread[key][:128]
+        if len(unread[key]) > _READING_DIAGNOSTIC_SAMPLE_LIMIT:
+            unread[key] = unread[key][:_READING_DIAGNOSTIC_SAMPLE_LIMIT]
     layout_coverage = dict(pipeline.get("layout_hints", {}).get("coverage", {}))
     if pipeline.get("native_layout_frontend") is not None:
         layout_coverage["native_frontend"] = pipeline["native_layout_frontend"]
@@ -1120,6 +1137,45 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
             "constraints": constraints,
             "groups": groups, "unread": unread,
             "deferred": deferred, "layout_coverage": layout_coverage}
+
+
+def _reading_group_id(group: Mapping[str, Any]) -> str:
+    """Bind identity to the complete semantic/citation row, not evidence membership alone."""
+    identity = json.dumps(group, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    digest = sha256(identity.encode("utf-8")).hexdigest()
+    return "urn:company-wiki:reading-group:sha256:" + digest
+
+
+def _sample_deferred(reference_entries: Sequence[Mapping[str, Any]],
+                     selector_entries: Sequence[Mapping[str, Any]],
+                     other_entries: Sequence[Mapping[str, Any]]) -> tuple[list[dict[str, str]], int, bool]:
+    groups = (reference_entries, selector_entries, other_entries)
+    count = sum(len(rows) for rows in groups)
+    selected: list[tuple[int, int, Mapping[str, Any]]] = []
+    selected_positions: set[tuple[int, int]] = set()
+    seen_reasons: set[object] = set()
+    # Keep one early example of each reason before filling by the established
+    # reference, selector, then other priority. Store only bounded row refs.
+    for group_index, rows in enumerate(groups):
+        for row_index, row in enumerate(rows):
+            reason = row.get("reason")
+            position = (group_index, row_index)
+            if reason not in seen_reasons and len(selected) < _READING_DIAGNOSTIC_SAMPLE_LIMIT:
+                selected.append((group_index, row_index, row))
+                selected_positions.add(position)
+                seen_reasons.add(reason)
+    if len(selected) < _READING_DIAGNOSTIC_SAMPLE_LIMIT:
+        for group_index, rows in enumerate(groups):
+            for row_index, row in enumerate(rows):
+                position = (group_index, row_index)
+                if position in selected_positions:
+                    continue
+                selected.append((group_index, row_index, row))
+                if len(selected) == _READING_DIAGNOSTIC_SAMPLE_LIMIT:
+                    break
+            if len(selected) == _READING_DIAGNOSTIC_SAMPLE_LIMIT:
+                break
+    return ([dict(row) for _, _, row in selected], count, count > len(selected))
 
 
 def _trace_ref(value: object, namespace: str) -> str:
@@ -1387,10 +1443,9 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     other_entries = [{"package_id": item["package_id"], "reason": item["reason"]}
                      for item in withheld
                      if item.get("reason") not in _REFERENCE_DEFERRAL_REASONS]
-    context["deferred"] = reference_entries + context["deferred"] + other_entries
-    context["deferred_count"] = len(context["deferred"])
-    context["deferred_limited"] = context["deferred_count"] > 128
-    context["deferred"] = context["deferred"][:128]
+    context["deferred"], context["deferred_count"], context["deferred_limited"] = _sample_deferred(
+        reference_entries, context["deferred"], other_entries
+    )
     context["selection_diagnostics"] = list(result.selection_diagnostics)
     context["selection_trace"] = _selection_trace(
         source_unit_count=len(parsed.units), admission=session_state.get("admission_trace", {}),

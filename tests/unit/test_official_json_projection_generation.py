@@ -127,6 +127,16 @@ def test_exact_subject_and_model_have_stable_canonical_identity():
     assert one["source_adapter"] == _binding()["adapter"]
 
 
+def test_shared_reading_context_renderer_version_is_bound_for_selector_09_projection():
+    versions = {**_versions(), "selector": "0.9.0"}
+    current = _manifest(versions=versions)
+    historical = dict(current)
+    historical.pop("reading_context_projection_version")
+
+    assert current["reading_context_projection_version"] == "reading-context-projection/1"
+    assert generation.generation_sha256(current) != generation.generation_sha256(historical)
+
+
 @pytest.mark.parametrize(
     "mutation",
     [

@@ -134,6 +134,218 @@ def test_reading_context_roundtrips_and_is_detached_from_mutable_input_and_outpu
     assert selected.to_dict()["reading_context"] == expected
 
 
+def test_reading_context_group_identity_preserves_semantics_and_deduplicates_exact_rows(monkeypatch):
+    from company_wiki.source_catalog import narrative_reading
+
+    base = selection(3)
+    unit_ids = [
+        f"urn:company-wiki:narrative-unit:sha256:{index:064x}"
+        for index in range(1, len(base.evidence_spans) + 1)
+    ]
+    selected_span_ids = {
+        unit_id: span.span_id
+        for unit_id, span in zip(unit_ids, base.evidence_spans, strict=True)
+    }
+    monkeypatch.setattr(
+        narrative_reading,
+        "_sent_policies",
+        lambda pipeline, entries: ([], [], "du-sent-policy/1+" + "f" * 64),
+    )
+    monkeypatch.setattr(
+        narrative_reading,
+        "_unread",
+        lambda structure, observation: {
+            "native_scan": "complete",
+            "opaque_pages": [],
+            "deferred_pages": [],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": [],
+            "structure_complete": True,
+        },
+    )
+    pipeline = {
+        "observation": {"units": [{"unit_id": uid, "role": "management"} for uid in unit_ids]},
+        "selected_span_ids": selected_span_ids,
+        "structure": {},
+        "layout_hints": {},
+    }
+    shared = {
+        "member_unit_ids": unit_ids,
+        "required_context_unit_ids": [],
+        "truncated": False,
+    }
+    eligible = [
+        {"package_id": "risk-1", "kind": "risk", "section_role": "operating_metrics",
+         **shared, "anchor_unit_ids": [unit_ids[0]],
+         "citation_support_views": [[unit_ids[0]]]},
+        {"package_id": "native-1", "kind": "native_continuity", "section_role": "unknown",
+         **shared, "anchor_unit_ids": [unit_ids[1]],
+         "citation_support_views": [[unit_ids[1]]]},
+        {"package_id": "risk-duplicate", "kind": "risk", "section_role": "operating_metrics",
+         **shared, "anchor_unit_ids": [unit_ids[0]],
+         "citation_support_views": [[unit_ids[0]]]},
+        {"package_id": "risk-other-role", "kind": "risk", "section_role": "business",
+         **shared, "anchor_unit_ids": [unit_ids[0]],
+         "citation_support_views": [[unit_ids[0]]]},
+        {"package_id": "risk-other-view", "kind": "risk", "section_role": "operating_metrics",
+         **shared, "anchor_unit_ids": [unit_ids[0]],
+         "citation_support_views": [[unit_ids[0], unit_ids[1]]]},
+    ]
+
+    context = narrative_reading._context(
+        pipeline, SimpleNamespace(evidence_spans=base.evidence_spans), eligible
+    )
+    groups = context["groups"]
+    assert len(groups) == 4
+    assert len({group["group_id"] for group in groups}) == 4
+    assert {group["kind"] for group in groups} == {"risk", "native_continuity"}
+
+    wire = base.to_dict()
+    full_context = reading_context(base)
+    full_context["schema_version"] = "du-production-reading/2"
+    full_context["groups"] = groups
+    wire["reading_context"] = full_context
+    selected = NarrativeSelectResult.from_dict(wire)
+    request = NarrativeModelRequest.from_selection(selected)
+    assert len(json.loads(request.data_json)["evidence_groups"]) == 4
+
+
+def test_public_reading_transport_preserves_bounded_native_page_proofs_without_sending_them_to_model():
+    base = selection(3)
+    wire = base.to_dict()
+    context = reading_context(base)
+    context["schema_version"] = "du-production-reading/2"
+    ids = [span.span_id for span in base.evidence_spans]
+    proof_units = [
+        f"urn:company-wiki:narrative-unit:sha256:{index:064x}"
+        for index in (101, 102, 103)
+    ]
+    context["groups"] = [{
+        "group_id": "urn:company-wiki:reading-group:sha256:" + "a" * 64,
+        "kind": "native_continuity",
+        "section_role": "business",
+        "evidence_ids": ids[:2],
+        "citation_views": [{"support_evidence_ids": ids[:1], "context_evidence_ids": ids[1:2]}],
+        "source_proof_unit_ids": [proof_units[0], proof_units[2]],
+        "source_proof_target_unit_ids": [proof_units[1]],
+        "source_proofs": [{
+            "basis": "observed_adjacent_page_flow",
+            "left": proof_units[0], "right": proof_units[1],
+            "left_page": 1, "right_page": 2,
+            "left_ordinal": 1, "right_ordinal": 2,
+            "column": 0, "coordinate_frame": "pdf_page",
+            "furniture_unit_ids": [proof_units[2]],
+        }],
+    }]
+    wire["reading_context"] = context
+
+    selected = NarrativeSelectResult.from_dict(wire)
+    request = NarrativeModelRequest.from_selection(selected)
+
+    assert selected.to_dict()["reading_context"]["groups"][0]["source_proofs"] == context["groups"][0]["source_proofs"]
+    assert "source_proofs" not in request.data_json
+    assert "source_proof_unit_ids" not in request.data_json
+    assert "source_proof_target_unit_ids" not in request.data_json
+
+
+def test_public_reading_transport_rejects_native_proof_with_an_unbound_endpoint():
+    base = selection(3)
+    wire = base.to_dict()
+    context = reading_context(base)
+    context["schema_version"] = "du-production-reading/2"
+    ids = [span.span_id for span in base.evidence_spans]
+    left = f"urn:company-wiki:narrative-unit:sha256:{201:064x}"
+    right = f"urn:company-wiki:narrative-unit:sha256:{202:064x}"
+    target = f"urn:company-wiki:narrative-unit:sha256:{203:064x}"
+    context["groups"] = [{
+        "group_id": "urn:company-wiki:reading-group:sha256:" + "b" * 64,
+        "kind": "native_continuity",
+        "section_role": "business",
+        "evidence_ids": ids[:2],
+        "citation_views": [{"support_evidence_ids": ids[:1], "context_evidence_ids": ids[1:2]}],
+        "source_proof_unit_ids": [left],
+        "source_proof_target_unit_ids": [target],
+        "source_proofs": [{
+            "basis": "observed_adjacent_page_flow",
+            "left": left, "right": right,
+            "left_page": 1, "right_page": 2,
+            "left_ordinal": 1, "right_ordinal": 2,
+            "column": 0, "coordinate_frame": "pdf_page",
+            "furniture_unit_ids": [],
+        }],
+    }]
+    wire["reading_context"] = context
+
+    with pytest.raises(NarrativeContractError, match="proof endpoints are invalid"):
+        NarrativeSelectResult.from_dict(wire)
+
+
+def test_reading_context_unread_samples_are_bounded_and_keep_full_counts(monkeypatch):
+    from company_wiki.source_catalog import narrative_reading
+
+    base = selection(3)
+    unit_ids = [
+        f"urn:company-wiki:narrative-unit:sha256:{index:064x}"
+        for index in range(1, len(base.evidence_spans) + 1)
+    ]
+    unread = {
+        "native_scan": "partial",
+        "opaque_pages": list(range(1, 141)),
+        "deferred_pages": list(range(1, 141)),
+        "deferred_unit_ids": unit_ids * 47,
+        "unassigned_unit_ids": unit_ids * 47,
+        "structure_complete": False,
+    }
+    monkeypatch.setattr(
+        narrative_reading,
+        "_sent_policies",
+        lambda pipeline, entries: ([], [], "du-sent-policy/1+" + "f" * 64),
+    )
+    monkeypatch.setattr(narrative_reading, "_unread", lambda structure, observation: unread)
+    pipeline = {
+        "observation": {"units": [{"unit_id": uid, "role": "management"} for uid in unit_ids]},
+        "selected_span_ids": {
+            uid: span.span_id for uid, span in zip(unit_ids, base.evidence_spans, strict=True)
+        },
+        "structure": {},
+        "layout_hints": {},
+    }
+
+    context = narrative_reading._context(
+        pipeline, SimpleNamespace(evidence_spans=base.evidence_spans), []
+    )
+    assert len(context["unread"]["opaque_pages"]) == 32
+    assert len(context["unread"]["deferred_pages"]) == 32
+    assert len(context["unread"]["deferred_unit_ids"]) == 32
+    assert len(context["unread"]["unassigned_unit_ids"]) == 32
+    assert context["unread"]["counts"] == {
+        "opaque_pages": 140,
+        "deferred_pages": 140,
+        "deferred_unit_ids": len(unit_ids) * 47,
+        "unassigned_unit_ids": len(unit_ids) * 47,
+    }
+    assert context["unread"]["limited"] is True
+
+
+def test_deferred_diagnostics_keep_reference_rows_first_and_bound_samples():
+    from company_wiki.source_catalog.narrative_reading import _sample_deferred
+
+    references = [{"package_id": f"reference-{index}", "reason": "REFERENCE_UNRESOLVED"}
+                  for index in range(40)]
+    selected = [{"package_id": f"selector-{index}", "reason": "SELECTION_BUDGET"}
+                for index in range(30)]
+    other = [{"package_id": f"other-{index}", "reason": "OTHER"} for index in range(30)]
+
+    sample, count, limited = _sample_deferred(references, selected, other)
+
+    assert count == 100
+    assert limited is True
+    assert sample[0] == references[0]
+    assert any(row["reason"] == "SELECTION_BUDGET" for row in sample)
+    assert any(row["reason"] == "OTHER" for row in sample)
+    assert len(sample) == 32
+
+
 @pytest.mark.parametrize("change", ["extra", "short_hash", "empty_ref", "unknown_ref", "duplicate_ref",
                                     "duplicate_group", "raw_text", "synthetic_example", "path", "oversized",
                                     "nested_too_deep", "invalid_unread", "invalid_finite"])

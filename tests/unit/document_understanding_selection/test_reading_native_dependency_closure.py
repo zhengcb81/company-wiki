@@ -3,11 +3,20 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from types import SimpleNamespace
 
 import pytest
 
+from company_wiki.automation.narrative_contracts import (
+    NarrativeSelectResult,
+    PromptReviewValue,
+    SourceRevisionEventPayload,
+)
+from company_wiki.automation.narrative_model import NarrativeModelRequest
+from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_contract import source_id_for_sha256
 from unit.document_understanding_selection.test_reading_guidance_condition_scope import (
     _model,
     _spans_for,
@@ -15,6 +24,7 @@ from unit.document_understanding_selection.test_reading_guidance_condition_scope
 from unit.document_understanding_selection.test_reading_native_list_ancestry import (
     _source,
 )
+from support.narrative_model_request_fixture import selection as select_result_fixture
 
 
 def _case(*, parent_chars=None, furniture=False):
@@ -158,6 +168,43 @@ def test_native_per_target_map_preserves_within_owner_dependencies_without_owner
     assert not result.blocked
 
 
+def test_nested_native_proof_closure_preserves_target_ids_separate_from_physical_refs():
+    parsed, units = _case(furniture=True)
+    target = units["target"].unit_id
+    parent = units["parent"].unit_id
+    left = units["boundary"].unit_id
+    furniture = [unit.unit_id for unit in parsed.units
+                  if unit.raw_text == "Neutral annual report"]
+    ordinals = {unit.unit_id: index for index, unit in enumerate(parsed.units)}
+    proof = {
+        "basis": "observed_adjacent_page_flow",
+        "left": left,
+        "right": target,
+        "left_page": units["boundary"].coordinates.page_number,
+        "right_page": units["target"].coordinates.page_number,
+        "left_ordinal": ordinals[left],
+        "right_ordinal": ordinals[target],
+        "column": 0,
+        "coordinate_frame": "pdf_page",
+        "furniture_unit_ids": furniture,
+    }
+    semantics = [
+        {"member_unit_ids": [target],
+         "required_source_unit_ids_by_unit_id": {target: [left, *furniture]},
+         "native_source_proofs_by_unit_id": {target: [proof]}},
+        {"member_unit_ids": [parent],
+         "required_context_by_unit_id": {parent: [target]}},
+    ]
+
+    result = _collect(parsed, semantics, furniture=furniture)
+
+    assert not result.blocked
+    assert target in result.proof_targets_for(parent)
+    assert target not in result.source_for(parent)
+    assert result.source_for(parent) == frozenset((left, *furniture))
+    assert result.proofs_for(parent) == (proof,)
+
+
 @pytest.mark.parametrize(
     "fault",
     ("missing", "foreign", "cycle", "nonmember_target", "bad_shape", "fake_furniture"),
@@ -256,6 +303,82 @@ def test_running_furniture_binds_physical_refs_without_becoming_model_material()
         not any("Neutral annual report" in text for text in texts[task.key])
         for task in tasks
     )
+
+
+def test_native_page_proofs_survive_public_select_transport_and_stay_out_of_model_input(monkeypatch):
+    parsed, source_units = _case(furniture=True)
+    target_id = source_units["target"].unit_id
+    nested_parent = next(unit for unit in parsed.units
+                         if unit.raw_text == "(2) 其他业务实现收入9亿元。")
+    parent_id = nested_parent.unit_id
+    understand = reading._understand
+
+    def add_nested_context(parsed_source, **kwargs):
+        pipeline = understand(parsed_source, **kwargs)
+        semantics = list(pipeline["structure"]["semantic_units"])
+        semantics.append({
+            "member_unit_ids": [parent_id, target_id],
+            "required_context_by_unit_id": {parent_id: [target_id]},
+        })
+        pipeline["structure"] = {**pipeline["structure"], "semantic_units": semantics}
+        return pipeline
+
+    monkeypatch.setattr(reading, "_understand", add_nested_context)
+    package = _select(parsed)
+    assert any(group.get("source_proofs") for group in package.reading_context["groups"])
+
+    selected_wire = select_result_fixture(4).to_dict()
+    selected_wire["source_ref"]["content_sha256"] = package.source_sha256
+    selected_wire["source_ref"]["source_id"] = source_id_for_sha256(package.source_sha256)
+    event = SourceRevisionEventPayload.from_dict({
+        "schema_version": "source-revision-event/2.0",
+        "source_ref": selected_wire["source_ref"],
+        "expected_read_policy_sha256": selected_wire["expected_read_policy_sha256"],
+        "source_metadata": selected_wire["source_metadata"],
+    })
+    parsed_result = SimpleNamespace(
+        page_count=parsed.page_count,
+        pages_read=parsed.pages_read,
+        line_count=0,
+        table_scan_pages=(),
+        deferred_table_pages=(),
+    )
+    parser_identity = (
+        package.evidence_spans[0].parser_name,
+        package.evidence_spans[0].parser_version,
+    )
+    work = SimpleNamespace(parsed=parsed_result, package=package, material=None,
+                           parser_identity=parser_identity)
+    raw = NarrativeSelectHandler._result_dict(
+        event, PromptReviewValue.from_dict(selected_wire["prompt_review"]), work,
+        selector_version="0.9.0",
+    )
+
+    public = NarrativeSelectResult.from_dict(raw)
+    public_proofs = [proof for group in public.reading_context["groups"]
+                     for proof in group.get("source_proofs", ())]
+    assert public_proofs
+    target_endpoint_bound = False
+    for group in public.reading_context["groups"]:
+        if group.get("source_proofs"):
+            proof_ids = set(group["source_proof_unit_ids"])
+            target_ids = set(group["source_proof_target_unit_ids"])
+            for proof in group["source_proofs"]:
+                endpoints = {proof["left"], proof["right"]}
+                assert endpoints <= proof_ids | target_ids
+                target_endpoint_bound |= bool(endpoints & target_ids)
+                assert set(proof["furniture_unit_ids"]) <= proof_ids | target_ids
+    assert target_endpoint_bound
+    parent_span_ids = {span.span_id for span in _spans_for(package, nested_parent)}
+    nested_groups = [group for group in public.reading_context["groups"]
+                     if parent_span_ids & set(group["evidence_ids"])
+                     and group.get("source_proofs")]
+    assert nested_groups
+    assert any(target_id in group["source_proof_target_unit_ids"] for group in nested_groups)
+    request = NarrativeModelRequest.from_selection(public)
+    assert "source_proofs" not in request.data_json
+    assert "source_proof_unit_ids" not in request.data_json
+    assert "source_proof_target_unit_ids" not in request.data_json
 
 
 @pytest.mark.parametrize("fault", ("missing_one", "missing_map", "note_as_furniture"))

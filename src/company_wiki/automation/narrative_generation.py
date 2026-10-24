@@ -28,6 +28,13 @@ from .narrative_verify import BUNDLE_PRODUCER_VERSION
 from .narrative_selection_generation import reading_material_sha256, validate_selection_generation
 
 READING_PROJECTION_UNSET = object()
+READING_CONTEXT_PROJECTION_VERSION = "reading-context-projection/1"
+
+
+def _bind_reading_context_projection(manifest, versions):
+    """Invalidate pre-renderer cache entries after public reading-context changes."""
+    if versions.get("selector") == "0.9.0":
+        manifest["reading_context_projection_version"] = READING_CONTEXT_PROJECTION_VERSION
 
 
 def with_frozen_model_identity(current, recorded):
@@ -142,6 +149,7 @@ def generation_manifest(
         "profile": request.profile,
         "model": effective_model,
     }
+    _bind_reading_context_projection(result, versions)
     if payload.source_metadata.source_class == "transcript":
         result["material_extractor"] = (
             TRANSCRIPT_JSON_EXTRACTOR
@@ -371,6 +379,7 @@ def projection_generation_manifest(
         "profile": profile,
         "model": _projection_effective_model(request.model_options),
     }
+    _bind_reading_context_projection(result, versions)
     if source_metadata is not None:
         from .narrative_contracts import SourceMetadataValue
 

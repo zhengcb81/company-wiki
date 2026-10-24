@@ -21,6 +21,7 @@ class NativeDependencies:
     blocked: frozenset[str]
     diagnostics: tuple[dict[str, Any], ...]
     proofs: Mapping[str, tuple[Mapping[str, Any], ...]] = field(default_factory=dict)
+    proof_targets: Mapping[str, frozenset[str]] = field(default_factory=dict)
 
     def context_for(self, target: str) -> frozenset[str]:
         return self.readable.get(target, frozenset())
@@ -30,6 +31,9 @@ class NativeDependencies:
 
     def proofs_for(self, target: str) -> tuple[Mapping[str, Any], ...]:
         return self.proofs.get(target, ())
+
+    def proof_targets_for(self, target: str) -> frozenset[str]:
+        return self.proof_targets.get(target, frozenset())
 
 
 def collect_native_dependencies(
@@ -171,6 +175,7 @@ def collect_native_dependencies(
     closed_readable: dict[str, frozenset[str]] = {}
     closed_physical: dict[str, frozenset[str]] = {}
     closed_proofs: dict[str, tuple[Mapping[str, Any], ...]] = {}
+    closed_proof_targets: dict[str, frozenset[str]] = {}
     colors: dict[str, int] = {}
     for root in roots:
         stack = [(root, False)]
@@ -199,6 +204,7 @@ def collect_native_dependencies(
             work_budget.charge(1 + len(own_context) + len(own_source))
             context, source_refs = set(own_context), set(own_source)
             proof_rows = dict(direct_proofs.get(target, {}))
+            proof_target_ids = {target} if proof_rows else set()
             for uid in own_context:
                 if uid in blocked:
                     reject((target,), "native_dependency_incomplete")
@@ -208,15 +214,20 @@ def collect_native_dependencies(
                 context.update(nested_context)
                 source_refs.update(nested_source)
                 nested_proofs = closed_proofs.get(uid, ())
-                work_budget.charge(len(nested_proofs))
+                nested_proof_targets = closed_proof_targets.get(uid, frozenset())
+                work_budget.charge(len(nested_proofs) + len(nested_proof_targets))
                 proof_rows.update({(row["left"], row["right"]): row for row in nested_proofs})
+                proof_target_ids.update(nested_proof_targets)
             work_budget.charge(1 + len(context) + len(source_refs))
+            work_budget.charge(len(proof_target_ids))
             closed_readable[target] = frozenset(context)
             closed_physical[target] = frozenset(source_refs)
             closed_proofs[target] = tuple(proof_rows.values())
+            closed_proof_targets[target] = frozenset(proof_target_ids)
             colors[target] = 2
     work_budget.charge(len(blocked) * (1 + len(blocked).bit_length()))
     diagnostics = tuple({"package_id": "native-proof:" + target,
         "reason": "REFERENCE_UNRESOLVED", "status": reasons.get(target, "native_dependency_incomplete"),
         "known_unit_ids": [target]} for target in sorted(blocked))
-    return NativeDependencies(closed_readable, closed_physical, frozenset(blocked), diagnostics, closed_proofs)
+    return NativeDependencies(closed_readable, closed_physical, frozenset(blocked), diagnostics,
+                              closed_proofs, closed_proof_targets)

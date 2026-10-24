@@ -1159,8 +1159,13 @@ def _reading_context(
     if len(groups) > 512:
         raise NarrativeContractError("reading_context group bound exceeded")
     for row in groups:
+        proof_fields = {"source_proof_unit_ids", "source_proof_target_unit_ids", "source_proofs"}
+        supplied_proof_fields = set(row) & proof_fields if isinstance(row, Mapping) else set()
+        if supplied_proof_fields and (not attributed or supplied_proof_fields != proof_fields):
+            raise NarrativeContractError("reading_group native source proof fields must be paired and attributed")
         group = _exact(row, {"group_id", "kind", "section_role", "evidence_ids"}
-                       | ({"citation_views"} if attributed else set()), "reading_group")
+                       | ({"citation_views"} if attributed else set()) | supplied_proof_fields,
+                       "reading_group")
         group_id = _text(group["group_id"], "reading_group.group_id")
         if group_id in group_ids:
             raise NarrativeContractError("duplicate reading_context group ids")
@@ -1188,6 +1193,67 @@ def _reading_context(
                 if identity in seen_support:
                     raise NarrativeContractError("duplicate reading_group citation views")
                 seen_support.add(identity)
+        if supplied_proof_fields:
+            proof_ids = _reading_texts(
+                group["source_proof_unit_ids"], "reading_group.source_proof_unit_ids", limit=128,
+            )
+            target_ids = _reading_texts(
+                group["source_proof_target_unit_ids"],
+                "reading_group.source_proof_target_unit_ids", limit=256,
+            )
+            if (not proof_ids or len(proof_ids) != len(set(proof_ids))
+                    or len(target_ids) != len(set(target_ids))
+                    or any(not _NARRATIVE_UNIT_ID.fullmatch(unit_id)
+                           for unit_id in (*proof_ids, *target_ids))):
+                raise NarrativeContractError("reading_group native source proof IDs are invalid")
+            # The producer excludes a dependency's target from its physical
+            # refs, so validate closure over both explicitly separated sets.
+            proof_id_set = set(proof_ids) | set(target_ids)
+            proof_rows = _array(group["source_proofs"], "reading_group.source_proofs")
+            if not proof_rows or len(proof_rows) > 128:
+                raise NarrativeContractError("reading_group native source proofs are outside their bound")
+            seen_edges: set[tuple[str, str]] = set()
+            for raw_proof in proof_rows:
+                proof = _exact(raw_proof, {
+                    "basis", "left", "right", "left_page", "right_page", "left_ordinal",
+                    "right_ordinal", "column", "coordinate_frame", "furniture_unit_ids",
+                }, "reading_group.source_proof")
+                if _text(proof["basis"], "source_proof.basis") != "observed_adjacent_page_flow":
+                    raise NarrativeContractError("reading_group source proof basis is unsupported")
+                left = _text(proof["left"], "source_proof.left")
+                right = _text(proof["right"], "source_proof.right")
+                if (not _NARRATIVE_UNIT_ID.fullmatch(left) or not _NARRATIVE_UNIT_ID.fullmatch(right)
+                        or left == right or not {left, right} <= proof_id_set):
+                    raise NarrativeContractError("reading_group source proof endpoints are invalid")
+                edge = (left, right)
+                if edge in seen_edges:
+                    raise NarrativeContractError("duplicate reading_group source proof edge")
+                seen_edges.add(edge)
+                left_page = _integer(proof["left_page"], "source_proof.left_page", positive=True)
+                right_page = _integer(proof["right_page"], "source_proof.right_page", positive=True)
+                if right_page != left_page + 1:
+                    raise NarrativeContractError("reading_group source proof pages are not adjacent")
+                left_ordinal = _integer(proof["left_ordinal"], "source_proof.left_ordinal")
+                right_ordinal = _integer(proof["right_ordinal"], "source_proof.right_ordinal")
+                if right_ordinal <= left_ordinal:
+                    raise NarrativeContractError("reading_group source proof ordinals are not ordered")
+                column = proof["column"]
+                if type(column) is not int and not isinstance(column, str):
+                    raise NarrativeContractError("reading_group source proof column is invalid")
+                if isinstance(column, str):
+                    _text(column, "source_proof.column")
+                    if len(column) > 256:
+                        raise NarrativeContractError("reading_group source proof column is too long")
+                frame = _text(proof["coordinate_frame"], "source_proof.coordinate_frame")
+                if len(frame) > 256:
+                    raise NarrativeContractError("reading_group source proof coordinate frame is too long")
+                furniture = _reading_texts(
+                    proof["furniture_unit_ids"], "source_proof.furniture_unit_ids", limit=24,
+                )
+                if (len(furniture) != len(set(furniture))
+                        or any(not _NARRATIVE_UNIT_ID.fullmatch(unit_id) for unit_id in furniture)
+                        or not set(furniture) <= proof_id_set):
+                    raise NarrativeContractError("reading_group source proof furniture IDs are invalid")
     unread_keys = {
         "native_scan", "opaque_pages", "deferred_pages", "deferred_unit_ids",
         "unassigned_unit_ids", "structure_complete",
