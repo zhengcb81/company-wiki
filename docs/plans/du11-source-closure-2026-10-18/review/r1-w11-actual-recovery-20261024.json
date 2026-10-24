@@ -1,0 +1,283 @@
+{
+  "schema_version": "w11-actual-index-recovery/1",
+  "status": "INDEX_REGISTERED_REPLAYABLE_BUSINESS_MATERIAL_GAP_STILL_OPEN",
+  "recorded_at": "2026-10-24T00:06:50.643474+00:00",
+  "attempt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024",
+  "one_bounded_step_completed": true,
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:5f9455a50d1853692211ecfa0b0a057fc30191af9247fd8bbecab8c24d158006",
+    "source_id": "urn:company-wiki:source:sha256:5f9455a50d1853692211ecfa0b0a057fc30191af9247fd8bbecab8c24d158006",
+    "content_sha256": "5f9455a50d1853692211ecfa0b0a057fc30191af9247fd8bbecab8c24d158006",
+    "byte_size": 486901,
+    "mime_type": "text/html",
+    "schema_version": "2.0"
+  },
+  "actual_html_title": "财务报告和演示材料｜药明康德",
+  "canonical_title_is_request_description": "药明康德投资者关系材料索引（恢复请求描述）",
+  "source_dates_and_period": {
+    "published_date": null,
+    "fiscal_year": null,
+    "fiscal_period": null,
+    "period_end": null,
+    "retrieved_at": "2026-10-24T00:00:37Z"
+  },
+  "research_window": {
+    "start_date": "2026-01-01",
+    "as_of_date": "2026-10-21"
+  },
+  "capture": {
+    "tool_call_id": "http-2f57cd22186646a6aa3aa4ceac1abea1",
+    "http_requests": 1,
+    "started_at": "2026-10-24T00:00:35.396122+00:00",
+    "captured_at": "2026-10-24T00:00:37.938228+00:00",
+    "http_status": 200,
+    "effective_url": "https://www.wuxiapptec.cn/investors/announcement/ir-material",
+    "response_mime_type": "text/html",
+    "response_bytes": 486901,
+    "http_wire_bytes": 486901,
+    "http_wire_usage_complete": true,
+    "usage_complete": true,
+    "acquisition_usage": {
+      "schema_version": "1.0",
+      "response_bytes": 486901,
+      "cost_usd": "0"
+    }
+  },
+  "index_downloads": 1,
+  "business_file_downloads": 0,
+  "old486789_body_replayed": false,
+  "old_body_sha_receipt_only": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+  "new_capture_is_different_version": true,
+  "binary_read_verified": {
+    "bytes": 486901,
+    "sha256": "5f9455a50d1853692211ecfa0b0a057fc30191af9247fd8bbecab8c24d158006",
+    "original_matches_old_receipt": false
+  },
+  "local_discovery_verbatim": {
+    "schema_version": "official-discovery-result/1",
+    "coverage_status": "checked_index_only",
+    "candidates": [],
+    "excluded": [],
+    "limitations": [],
+    "receipt": {
+      "entity": "药明康德",
+      "start_date": "2026-01-01",
+      "as_of_date": "2026-10-21",
+      "event_ids": [
+        "http-2f57cd22186646a6aa3aa4ceac1abea1"
+      ],
+      "response_bytes": 486901,
+      "max_items": 30,
+      "max_bytes": 1048576,
+      "event_sha256": "7ac707e5cf8c933da8357e22724b22cea400b2facd5906bd49f6cfababb24a6c"
+    },
+    "no_documents_claimed": false,
+    "fetch_receipts": []
+  },
+  "local_inspection_summary": {
+    "extra_gets": 0,
+    "additional_public_reads": 1,
+    "bytes": 486901,
+    "sha256": "5f9455a50d1853692211ecfa0b0a057fc30191af9247fd8bbecab8c24d158006",
+    "main_text_chars": 417,
+    "actual_business_labels_observed": [
+      "2026/08/03 2026年中期业绩 演示材料/财务报告/财务报告摘要",
+      "2026/04/27 2026年第一季度业绩 演示材料/财务报告",
+      "2026/01/14 第44届摩根大通医疗健康年会 演示材料"
+    ],
+    "anchor_count": 34,
+    "document_suffix_anchors": [
+      {
+        "title": "隐私声明",
+        "href": "https://officialsite-static.wuxiapptec.com/upload/CN_20250912_315745c95e.pdf",
+        "document_suffix": true,
+        "chrome": false
+      },
+      {
+        "title": "使用条款",
+        "href": "https://officialsite-static.wuxiapptec.com/upload/terms_of_use_zh_3199a05fec.pdf",
+        "document_suffix": true,
+        "chrome": true
+      },
+      {
+        "title": "|  隐私声明",
+        "href": "https://officialsite-static.wuxiapptec.com/upload/Wu_Xi_App_Tec_Privacy_Policy_CN_2023_67982492ef.pdf",
+        "document_suffix": true,
+        "chrome": true
+      },
+      {
+        "title": "使用条款",
+        "href": "https://officialsite-static.wuxiapptec.com/upload/terms_of_use_zh_3199a05fec.pdf",
+        "document_suffix": true,
+        "chrome": true
+      },
+      {
+        "title": "|   隐私声明",
+        "href": "https://officialsite-static.wuxiapptec.com/upload/Wu_Xi_App_Tec_Privacy_Policy_CN_2023_67982492ef.pdf",
+        "document_suffix": true,
+        "chrome": true
+      }
+    ],
+    "jsonld_types": [
+      "Corporation",
+      "ContactPoint",
+      "BreadcrumbList",
+      "ListItem"
+    ],
+    "nuxt_application_json": {
+      "id": "__NUXT_DATA__",
+      "utf8_bytes": 29663,
+      "root_array_items": 548,
+      "observed_nodes": 2193,
+      "literal_pdf_urls_observed": "terms/privacy only",
+      "attachments_are_index_references_not_verified_material_urls": true
+    },
+    "script_mime_counts": {
+      "unspecified": 5,
+      "application/ld+json": 2,
+      "module": 1,
+      "application/json": 1
+    },
+    "explanation": "Business labels exist in readable body, but no material a[href] observed. All5 document anchors are3 unique privacy/terms URLs; discovery correctly excludes these navigation/legal links. This observation does not prove all underlying client state or interaction targets are absent."
+  },
+  "workflow_external_limit": {
+    "business_originals_obtained": false,
+    "deck_QA_IR_coverage_closed": false,
+    "specific_limit": "Current one-response static anchor discovery supplies no business URL; client/interaction state was not executed or decoded into guessed links.",
+    "possible_next_configured_capability": "ROOT can use existing browser tool capability in a later bounded DOM/interaction inspection to observe real targets, then existing CWP capture. No new provider or automatic follow-up was started.",
+    "do_not_conflate": "checked_index_only stays verbatim; it is not all-material completeness or no-documents confirmation"
+  },
+  "actual_version_binding": {
+    "official_owner_sha256": {
+      "official_discovery.py": "6869349b5d6f4861e9c78cdc8748aaa7f547d2866cf278fc5f721418a137b123",
+      "official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+      "official_source_flow.py": "3c4640201f9a1f70b4ce41a51d752f3f8fb5d048eb28f1296658298d2cf714c9",
+      "html_parser.py": "e0dce2f1b8b933ecdf14de3983a2a505ae47ef6c5ea827e40f247c91257350d8"
+    },
+    "head_start_from_readonly_reflog": "b0344200a3efe15ef18cb551c5d6a276b1d7fe28",
+    "head_end_from_readonly_reflog": "b0344200a3efe15ef18cb551c5d6a276b1d7fe28",
+    "execution_dirty_not_presampled": true,
+    "whole_tree_mixed_W08_work_disclosed": true,
+    "full_observation_in": "receipts/runtime-observation.json"
+  },
+  "budget_accounting": {
+    "max_bytes": 1048576,
+    "max_seconds": 20,
+    "max_cost_usd": "0.00",
+    "automatic_retries": 0,
+    "actual_http_requests": 1,
+    "actual_response_bytes": 486901,
+    "actual_wire_bytes": 486901,
+    "wire_usage_complete": true,
+    "acquisition_cost_usd": "0",
+    "model_calls": 0,
+    "additional_tokens": 0,
+    "additional_model_fee_usd": "0",
+    "mother_usage_and_metadata_hashes_unchanged": true
+  },
+  "calls": [
+    {
+      "operation": "capture",
+      "request_sha256": "81e558914dd1e18f69f10e52c077ac0aaa535bf820ed8654a087def578f78fa7",
+      "exit_code": 0
+    },
+    {
+      "operation": "read",
+      "request_sha256": "a974cfd7d83bd35665a463ce50a363925c9a73cb3c56d135a040320bf12f3ba7",
+      "exit_code": 0
+    },
+    {
+      "operation": "discover",
+      "request_sha256": "55c15be84407830e8f4648d682ca06c9c594edad407dbd2f03722f29b137c924",
+      "exit_code": 0
+    }
+  ],
+  "additional_local_inspection_call": {
+    "exit_code": 0,
+    "request_sha256": "a974cfd7d83bd35665a463ce50a363925c9a73cb3c56d135a040320bf12f3ba7",
+    "stdout_bytes": 486901,
+    "stdout_sha256": "5f9455a50d1853692211ecfa0b0a057fc30191af9247fd8bbecab8c24d158006",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preservation": {
+    "protected_unchanged": true,
+    "fee_token_ledgers_unchanged": true,
+    "source_versions_unchanged": true,
+    "all_preexisting_raw_metadata_unchanged": true
+  },
+  "storage_new_files_metadata": {
+    "formal_html_bytes": 486901,
+    "source_sidecar_bytes": 3260,
+    "only_two_new_storage_files": true,
+    "details_in": "receipts/after.json"
+  },
+  "cleanup": {
+    "removed_only_verified_duplicate": true,
+    "working_body_and_work_dir_absent": true,
+    "formal_raw_removed": false,
+    "recreate_via": "requests/read-index.json public read with binary stdout",
+    "details_in": "receipts/cleanup.json"
+  },
+  "new_attempt_bytes_before_final_manifest": 68491,
+  "receipts": [
+    {
+      "file": "operation.json",
+      "bytes": 11115,
+      "sha256": "a43ab3d45fc9bf3f0ad055ceef798c69c81c8a4224ea8b7255e08211a2bce8d2"
+    },
+    {
+      "file": "run_capture.py",
+      "bytes": 10512,
+      "sha256": "011cd2bae1e652898a7cfbe4be89ca8e324734f02d23db24a4add8d8c6089739"
+    },
+    {
+      "file": "receipts\\before.json",
+      "bytes": 7379,
+      "sha256": "66ab5a9d5de81b87628d94f6be42bbee9bdcf6d8d35f812abec64759e60c3dea"
+    },
+    {
+      "file": "receipts\\after.json",
+      "bytes": 8353,
+      "sha256": "cdb7765e7d9d870ce9d44debf95eb08ddf140d287bff892125c43543da38c088"
+    },
+    {
+      "file": "receipts\\index-capture.json",
+      "bytes": 2478,
+      "sha256": "b1b2db34572a11284e73b37c68d7f08f27597af2df02d3ee0b3b280bab4f110e"
+    },
+    {
+      "file": "receipts\\index-discovery.json",
+      "bytes": 468,
+      "sha256": "d2443417d9e1bd2fe400077411e7b084266923707ffddc0da003126201f3e92e"
+    },
+    {
+      "file": "receipts\\local-inspection.json",
+      "bytes": 15889,
+      "sha256": "6906e6843008efeded59d02395ce4785380fa6591c48298e5724401a9d57f073"
+    },
+    {
+      "file": "receipts\\runtime-observation.json",
+      "bytes": 6790,
+      "sha256": "2bf509c03f1eddaab702f04f90931f076c17a9e3b064f73563c011e067e7c1c1"
+    },
+    {
+      "file": "receipts\\cleanup.json",
+      "bytes": 537,
+      "sha256": "9dcf3b9291fdc68b73ae3dc51c896d9c3201f152d1009e869fc609022ec4baa1"
+    },
+    {
+      "file": "receipts\\final-validation.json",
+      "bytes": 4991,
+      "sha256": "d07191363d76c2900f52d8fa49f60eeb9aabf8459be86a5539da0e25fbbdfbde"
+    }
+  ],
+  "not_done": [
+    "No business original downloaded",
+    "No second HTTP GET",
+    "No model/API key access or LLM call",
+    "No RF/code/config/PWF/Git/install changes by this worker",
+    "No initial639/final3/author mutation",
+    "No original bytes deleted"
+  ]
+}

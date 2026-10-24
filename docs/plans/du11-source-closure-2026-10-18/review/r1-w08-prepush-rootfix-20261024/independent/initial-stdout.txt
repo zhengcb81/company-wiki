@@ -1,0 +1,76 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 42 items
+
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py FFFFF..... [ 23%]
+..FFF.....                                                               [ 47%]
+tests\unit\document_understanding_selection\test_reading_semantic_value.py . [ 50%]
+....                                                                     [ 59%]
+tests\unit\document_understanding_selection\test_reading_predicate_state_owner.py . [ 61%]
+................                                                         [100%]
+
+================================== FAILURES ===================================
+_ test_project_noun_has_no_forecast_predicate[Projects reached 384 during the reporting period.-Projects] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:21: in test_project_noun_has_no_forecast_predicate
+    assert result.observed,(result,fact.reasons)
+E   AssertionError: (PredicateObservation(scope_start=0, scope_end=49, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))
+E   assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=49, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False).observed
+_ test_project_noun_has_no_forecast_predicate[Projects stood at 384 at year end.-Projects] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:21: in test_project_noun_has_no_forecast_predicate
+    assert result.observed,(result,fact.reasons)
+E   AssertionError: (PredicateObservation(scope_start=0, scope_end=34, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))
+E   assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=34, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False).observed
+_ test_project_noun_has_no_forecast_predicate[Our completed projects reached 384 this year.-projects] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:21: in test_project_noun_has_no_forecast_predicate
+    assert result.observed,(result,fact.reasons)
+E   AssertionError: (PredicateObservation(scope_start=0, scope_end=45, modality='expected', period='current', cue_start=14, cue_end=22, has_condition=False), ('operating_plan',))
+E   assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=45, modality='expected', period='current', cue_start=14, cue_end=22, has_condition=False).observed
+_ test_project_noun_has_no_forecast_predicate[Projects have increased from 212 to 384 this year.-Projects] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:21: in test_project_noun_has_no_forecast_predicate
+    assert result.observed,(result,fact.reasons)
+E   AssertionError: (PredicateObservation(scope_start=0, scope_end=50, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))
+E   assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=50, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False).observed
+_ test_project_noun_has_no_forecast_predicate[Projects were 384 at year end.-Projects] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:21: in test_project_noun_has_no_forecast_predicate
+    assert result.observed,(result,fact.reasons)
+E   AssertionError: (PredicateObservation(scope_start=0, scope_end=30, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))
+E   assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=30, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False).observed
+_ test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[In this scenario, under the assumption that renewals remain stable, customers total 384.-customers] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:44: in test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct
+    assert not result.observed and result.has_condition,result
+E   AssertionError: PredicateObservation(scope_start=67, scope_end=88, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False)
+E   assert (not True)
+E    +  where True = PredicateObservation(scope_start=67, scope_end=88, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+_ test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[For this projection, on the assumption of stable renewals, customers total 384.-customers] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:44: in test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct
+    assert not result.observed and result.has_condition,result
+E   AssertionError: PredicateObservation(scope_start=58, scope_end=79, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False)
+E   assert (not True)
+E    +  where True = PredicateObservation(scope_start=58, scope_end=79, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+_ test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[For planning, based on the assumption that renewals remain stable, customers total 384.-customers] _
+.planning\r1-w08-prepush-independent-20261024\test_neutral.py:44: in test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct
+    assert not result.observed and result.has_condition,result
+E   AssertionError: PredicateObservation(scope_start=66, scope_end=87, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False)
+E   assert (not True)
+E    +  where True = PredicateObservation(scope_start=66, scope_end=87, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-prepush-rootfix-20261024\independent\initial-junit.xml -
+=========================== short test summary info ===========================
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_project_noun_has_no_forecast_predicate[Projects reached 384 during the reporting period.-Projects]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_project_noun_has_no_forecast_predicate[Projects stood at 384 at year end.-Projects]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_project_noun_has_no_forecast_predicate[Our completed projects reached 384 this year.-projects]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_project_noun_has_no_forecast_predicate[Projects have increased from 212 to 384 this year.-Projects]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_project_noun_has_no_forecast_predicate[Projects were 384 at year end.-Projects]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[In this scenario, under the assumption that renewals remain stable, customers total 384.-customers]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[For this projection, on the assumption of stable renewals, customers total 384.-customers]
+FAILED .planning/r1-w08-prepush-independent-20261024/test_neutral.py::test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[For planning, based on the assumption that renewals remain stable, customers total 384.-customers]
+======================== 8 failed, 34 passed in 3.23s =========================

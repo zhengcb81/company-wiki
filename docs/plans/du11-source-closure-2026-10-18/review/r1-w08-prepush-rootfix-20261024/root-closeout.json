@@ -1,0 +1,31 @@
+{
+  "schema_version": "w08-normal-publication-root-fix/1",
+  "observed_at": "2026-10-24T00:21:08.821046+00:00",
+  "status": "LOCAL_ANCESTRY_MERGED_SHARED_ROOT_FIXED_INDEPENDENT42_PASS_NORMAL_PUBLICATION_NEXT",
+  "mother_merge_commit": "b0344200",
+  "incoming_final_head": "7b1c015b03edaf72f86fbf6527e44450ab5f7088",
+  "normal_first_push": "normal-prepush-red.json",
+  "shared_owner": "src\\company_wiki\\source_catalog\\narrative_predicate_state.py",
+  "owner_raw_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+  "new_grammar_tests": 22,
+  "original_tests_or_assertions_weakened": 0,
+  "root_related": {
+    "passed": 362,
+    "seconds": 4.64
+  },
+  "independent_same_cases": 42,
+  "independent_initial": {
+    "passed": 34,
+    "failed": 8
+  },
+  "independent_final": "independent/final-review.json",
+  "independent_final_sha256": "5136bac3acacb26febefc9a4c4ca905478a70eb222fb656ecc943f1e78f6e3c2",
+  "test_selection_learning": "677 related omitted existing semantic_value tests. For next shared-owner node use its natural whole selection package, not another hand-picked subset; retain existing normal full prepush, add no new gate.",
+  "next_phase_red": "ROOT worktree resume/cross-page-public-red-20261024:9cases7F2P; excluded from this finite source publication.",
+  "not_certified": [
+    "cross-page ancestry",
+    "whole annual14",
+    "formal new summaries/cache",
+    "RF/W12 business audit"
+  ]
+}

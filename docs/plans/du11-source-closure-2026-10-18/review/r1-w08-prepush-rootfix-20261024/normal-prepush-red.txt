@@ -1,0 +1,69 @@
+================================== FAILURES ===================================
+_ test_w08_true_quantity_driver_and_stock_share_measurement_semantics[Our services revenue increased due to projects totaling 560 at year end.] _
+[gw0] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:397: in test_w08_true_quantity_driver_and_stock_share_measurement_semantics
+    assert {"operating_quantity", "operating_causal_driver", "product_operating_driver"} & set(fact.reasons)
+E   AssertionError: assert ({'operating_quantity', 'product_operating_driver', 'operating_causal_driver'} & {'operating_plan'})
+E    +  where {'operating_plan'} = set(('operating_plan',))
+E    +    where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+_ test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project count stood at 240 during the year.] _
+[gw0] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:423: in test_w08_count_labels_and_stock_predicates_are_one_quantity_relation
+    assert "operating_quantity" in fact.reasons
+E   AssertionError: assert 'operating_quantity' in ('operating_plan',)
+E    +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+_ test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project number stood at 240 during the year.] _
+[gw0] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:423: in test_w08_count_labels_and_stock_predicates_are_one_quantity_relation
+    assert "operating_quantity" in fact.reasons
+E   AssertionError: assert 'operating_quantity' in ('operating_plan',)
+E    +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+_ test_w08_quantity_and_directional_causal_consumers_require_their_own_relations[Our services revenue increased due to projects totaling 560 at year end.] _
+[gw0] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:442: in test_w08_quantity_and_directional_causal_consumers_require_their_own_relations
+    assert {"operating_causal_driver", "product_operating_driver"} <= set(fact.reasons)
+E   AssertionError: assert {'product_operating_driver', 'operating_causal_driver'} <= {'operating_plan'}
+E     
+E     Extra items in the left set:
+E     'product_operating_driver'
+E     'operating_causal_driver'
+_ test_w08_unknown_quantity_and_unbound_nested_growth_cannot_bypass_measure_owner[Our service revenue grew due to an assumption that we have 619 customers.] _
+[gw0] win32 -- Python 3.13.9 C:\Miniconda\python.exe
+tests\unit\document_understanding_selection\test_reading_semantic_value.py:568: in test_w08_unknown_quantity_and_unbound_nested_growth_cannot_bypass_measure_owner
+    assert not policy._source_measure_relations(clause)
+E   AssertionError: assert not (('quantity', 63, 72),)
+E    +  where (('quantity', 63, 72),) = <function _source_measure_relations at 0x0000015AE2A30FE0>('Our service revenue grew due to an assumption that we have 619 customers')
+E    +    where <function _source_measure_relations at 0x0000015AE2A30FE0> = <module 'company_wiki.source_catalog.narrative_business_policy' from 'C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py'>._source_measure_relations
+============================ slowest 15 durations =============================
+10.39s call     tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee
+9.86s call     tests/unit/test_w04_source_transport.py::test_compact_65_parent_wire_stays_small_without_truncating_body
+7.87s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade
+7.39s call     tests/unit/document_understanding_selection/test_reading_production_selection.py::test_large_actual_candidate_pool_keeps_all_three_important_late_scopes
+6.27s call     tests/unit/document_understanding_layout_hints/test_b_integrity_and_budget.py::test_work_units_grow_about_linearly
+5.93s call     tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+5.62s call     tests/unit/test_narrative_output_failure_finalization.py::test_explicit_failed_summary_public_cli_settles_output_and_resumes_with_zero_extra_post
+5.30s call     tests/unit/test_narrative_scoped_runtime_recovery.py::test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_recovery
+5.12s call     tests/unit/test_narrative_extractive_production.py::test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse
+4.16s call     tests/unit/test_narrative_extractive_production.py::test_real_default_policy_document_skips_model_and_does_not_require_fictional_execution
+3.52s call     tests/unit/test_acquisition_usage_recovery.py::test_hard_timeout_stops_owned_grandchild_and_late_writes
+2.47s call     tests/unit/test_latest_local_source_discovery.py::test_latest_bounded_retries_advance_beyond_twenty_old_originals
+2.45s call     tests/unit/test_shared_reading_cache_precheck.py::test_one_hundred_base_bindings_keep_shared_settings_without_original_or_decision_copies
+2.44s call     tests/unit/document_understanding_decision_dependencies/test_b_engineering.py::test_decision_digest_is_stable_across_processes
+2.32s call     tests/unit/test_narrative_worker_factory.py::test_spawned_production_factory_reads_original_source_with_zero_network
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_true_quantity_driver_and_stock_share_measurement_semantics[Our services revenue increased due to projects totaling 560 at year end.] - AssertionError: assert ({'operating_quantity', 'product_operating_driver', 'operating_causal_driver'} & {'operating_plan'})
+ +  where {'operating_plan'} = set(('operating_plan',))
+ +    where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project count stood at 240 during the year.] - AssertionError: assert 'operating_quantity' in ('operating_plan',)
+ +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project number stood at 240 during the year.] - AssertionError: assert 'operating_quantity' in ('operating_plan',)
+ +  where ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_quantity_and_directional_causal_consumers_require_their_own_relations[Our services revenue increased due to projects totaling 560 at year end.] - AssertionError: assert {'product_operating_driver', 'operating_causal_driver'} <= {'operating_plan'}
+  
+  Extra items in the left set:
+  'product_operating_driver'
+  'operating_causal_driver'
+FAILED tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_unknown_quantity_and_unbound_nested_growth_cannot_bypass_measure_owner[Our service revenue grew due to an assumption that we have 619 customers.] - AssertionError: assert not (('quantity', 63, 72),)
+ +  where (('quantity', 63, 72),) = <function _source_measure_relations at 0x0000015AE2A30FE0>('Our service revenue grew due to an assumption that we have 619 customers')
+ +    where <function _source_measure_relations at 0x0000015AE2A30FE0> = <module 'company_wiki.source_catalog.narrative_business_policy' from 'C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py'>._source_measure_relations
+=========== 5 failed, 7830 passed, 24 skipped in 201.29s (0:03:21) ============

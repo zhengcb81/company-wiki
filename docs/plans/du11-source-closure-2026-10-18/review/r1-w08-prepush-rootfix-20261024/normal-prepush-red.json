@@ -1,0 +1,16 @@
+{
+  "source_merge_commit": "b0344200",
+  "normal_push_succeeded": false,
+  "full_unit": {
+    "failed": 5,
+    "passed": 7830,
+    "skipped": 24,
+    "seconds": 201.29
+  },
+  "remote_unchanged_from": "a8372412242858c5af12a4f2d606b8b856e53b65",
+  "local_full_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-main-integration-20261024\\normal-push.txt",
+  "local_full_log_sha256": "43a22d68ec143d1f1a88db7e2e54e4c34405246c7ba46d4127aad4a54dd9a9ad",
+  "compact_failure": "normal-prepush-red.txt",
+  "no_hook_bypass": true,
+  "shared_root": "Predicate grammar confused metric project noun and its forecasting verb; missed explicit assumption nominal scope."
+}

@@ -484,3 +484,7 @@ W09四项内容问题通过共享投影owner修复，作者真实ancestry merge9
 W08独审17项原8F/9P暴露actual/future与收入指引重复状态根因，重构不可变PredicateObservation供二者共用。有限相关677P，独审原17不变+6真实selector/citation/model未来目标召回+1源码cache身份共24P；原77/20/24断言不改，预算独审版本保持，暂未保存merge/并母线或安装。跨页、annual14、正式摘要/缓存/RF矩阵/W12仍OPEN。
 
 母PWF/两级Next Step/机器checkpoint/施工包总入口统一。错误读了不存在的旧dispatch路径已纠正到harness_lanes/20261023/dispatch.json；沙箱普通Git读外部linked worktree报must be run in a work tree，按既有授权使用escalated正常Git，未重置或改索引规避。0新增模型/原件下载/费用；10M/$20总额、旧unknown和原始文档/封存均保留。
+
+## 2026-10-24 共享owner验证选取与真实来源边界
+
+有限677相关验证漏旧semantic_value回归，正常全量prepush有效拦下5项；今后大节点按owner自然完整包验证，不叠加小门禁。谓词语义应绑定真实目标/词性和相邻条件从句，不以有限前后词硬编码覆盖。独立中性20项又发现8项同根因，原组复审关闭。物理连续性直接探针通过不等于公共适配链通过：原column被adapter漏投影、中文订单缺英文同概念别名、跨页列表parent丢失分别负责，9RED保持。物理furniture证据预算不可漏算。官方index正文已保存不代表业务IR文档取得；仅privacy/terms链接时不能猜Nuxt引用或冒称业务覆盖。

@@ -1,0 +1,96 @@
+{
+  "status": "FAIL_PENDING_SHARED_OWNER_REPAIR",
+  "owner_version": {
+    "sha256": "cf38419cb9514bd42ab51aa96f6a02d8aeb5e8ce5949d1bf54119f06f72c6ca9",
+    "lf_sha256": "cf38419cb9514bd42ab51aa96f6a02d8aeb5e8ce5949d1bf54119f06f72c6ca9"
+  },
+  "results": {
+    "tests": 42,
+    "passed": 34,
+    "failed": 8,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 3.23,
+    "original5_passed": 5,
+    "original17_passed": 17,
+    "new20_passed": 12
+  },
+  "findings": [
+    {
+      "id": "I08-01",
+      "priority": "P2",
+      "failed_cases": 5,
+      "root": "Project noun recognition remains incomplete in shared predicate owner"
+    },
+    {
+      "id": "I08-02",
+      "priority": "P2",
+      "failed_cases": 3,
+      "root": "Leading assumption anchored to sentence beginning loses an immediately preceding conditional clause after an adjunct"
+    }
+  ],
+  "failures": [
+    {
+      "name": "test_project_noun_has_no_forecast_predicate[Projects reached 384 during the reporting period.-Projects]",
+      "failure": "AssertionError: (PredicateObservation(scope_start=0, scope_end=49, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))\nassert False\n +  where False = PredicateObservation(scope_start=0, scope_end=49, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False).observed"
+    },
+    {
+      "name": "test_project_noun_has_no_forecast_predicate[Projects stood at 384 at year end.-Projects]",
+      "failure": "AssertionError: (PredicateObservation(scope_start=0, scope_end=34, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))\nassert False\n +  where False = PredicateObservation(scope_start=0, scope_end=34, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False).observed"
+    },
+    {
+      "name": "test_project_noun_has_no_forecast_predicate[Our completed projects reached 384 this year.-projects]",
+      "failure": "AssertionError: (PredicateObservation(scope_start=0, scope_end=45, modality='expected', period='current', cue_start=14, cue_end=22, has_condition=False), ('operating_plan',))\nassert False\n +  where False = PredicateObservation(scope_start=0, scope_end=45, modality='expected', period='current', cue_start=14, cue_end=22, has_condition=False).observed"
+    },
+    {
+      "name": "test_project_noun_has_no_forecast_predicate[Projects have increased from 212 to 384 this year.-Projects]",
+      "failure": "AssertionError: (PredicateObservation(scope_start=0, scope_end=50, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))\nassert False\n +  where False = PredicateObservation(scope_start=0, scope_end=50, modality='expected', period='current', cue_start=0, cue_end=8, has_condition=False).observed"
+    },
+    {
+      "name": "test_project_noun_has_no_forecast_predicate[Projects were 384 at year end.-Projects]",
+      "failure": "AssertionError: (PredicateObservation(scope_start=0, scope_end=30, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False), ('operating_plan',))\nassert False\n +  where False = PredicateObservation(scope_start=0, scope_end=30, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False).observed"
+    },
+    {
+      "name": "test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[In this scenario, under the assumption that renewals remain stable, customers total 384.-customers]",
+      "failure": "AssertionError: PredicateObservation(scope_start=67, scope_end=88, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False)\nassert (not True)\n +  where True = PredicateObservation(scope_start=67, scope_end=88, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed"
+    },
+    {
+      "name": "test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[For this projection, on the assumption of stable renewals, customers total 384.-customers]",
+      "failure": "AssertionError: PredicateObservation(scope_start=58, scope_end=79, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False)\nassert (not True)\n +  where True = PredicateObservation(scope_start=58, scope_end=79, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed"
+    },
+    {
+      "name": "test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct[For planning, based on the assumption that renewals remain stable, customers total 384.-customers]",
+      "failure": "AssertionError: PredicateObservation(scope_start=66, scope_end=87, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False)\nassert (not True)\n +  where True = PredicateObservation(scope_start=66, scope_end=87, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed"
+    }
+  ],
+  "original11_lf_equal_HEAD_blob": true,
+  "all13_source_tests_unchanged": true,
+  "scratch_finally_absent": true,
+  "network_original_model_calls": 0,
+  "artifacts": {
+    "reproducible.py.txt": {
+      "bytes": 8153,
+      "sha256": "c0929ca123061c720f3240701a1930b846d918e6a8c1c475dfee616b11c5de2b"
+    },
+    "initial-junit.xml": {
+      "bytes": 16888,
+      "sha256": "bcbe2db6709f6c54633c70b4b2e59f39dae0c1ba7811bd6b21ef727a5af1e31a"
+    },
+    "initial-stdout.txt": {
+      "bytes": 8564,
+      "sha256": "ecdfc136d723033de920047ec6199a653bc1f49ef5df48b4cc506e5d0e529021"
+    },
+    "initial-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "initial-receipt.json": {
+      "bytes": 14466,
+      "sha256": "e73a2d9f66ff8234afdd6c4574c502a449d14554eb81bc136d615a876182817e"
+    },
+    "initial-review.md": {
+      "bytes": 3790,
+      "sha256": "4967a5f0947725b5c43df86ee362b8528e9ffa9af2a008a86fa5f271e44c89e0"
+    }
+  }
+}

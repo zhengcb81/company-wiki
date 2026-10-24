@@ -1,0 +1,65 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 18 items
+
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py F [  5%]
+FFFF......F.FF...                                                        [100%]
+
+================================== FAILURES ===================================
+_ test_measured_project_noun_does_not_make_its_predicate_a_forecast[Our services revenue increased due to projects totaling 560 at year end.-projects] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:29: in test_measured_project_noun_does_not_make_its_predicate_a_forecast
+    assert state.observed
+E   AssertionError: assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=72, modality='expected', period='unspecified', cue_start=38, cue_end=46, has_condition=False).observed
+_ test_measured_project_noun_does_not_make_its_predicate_a_forecast[Our total project count stood at 240 during the year.-project] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:29: in test_measured_project_noun_does_not_make_its_predicate_a_forecast
+    assert state.observed
+E   AssertionError: assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=53, modality='expected', period='unspecified', cue_start=10, cue_end=17, has_condition=False).observed
+_ test_measured_project_noun_does_not_make_its_predicate_a_forecast[Our total project number stood at 240 during the year.-project] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:29: in test_measured_project_noun_does_not_make_its_predicate_a_forecast
+    assert state.observed
+E   AssertionError: assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=54, modality='expected', period='unspecified', cue_start=10, cue_end=17, has_condition=False).observed
+_ test_measured_project_noun_does_not_make_its_predicate_a_forecast[We served 240 projects during the year.-projects] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:29: in test_measured_project_noun_does_not_make_its_predicate_a_forecast
+    assert state.observed
+E   AssertionError: assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=39, modality='expected', period='unspecified', cue_start=14, cue_end=22, has_condition=False).observed
+_ test_measured_project_noun_does_not_make_its_predicate_a_forecast[Projects grew from 12 to 18 during the year.-Projects] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:29: in test_measured_project_noun_does_not_make_its_predicate_a_forecast
+    assert state.observed
+E   AssertionError: assert False
+E    +  where False = PredicateObservation(scope_start=0, scope_end=44, modality='expected', period='unspecified', cue_start=0, cue_end=8, has_condition=False).observed
+_ test_explicit_hypothesis_is_not_an_observed_customer_stock[Our service revenue grew due to an assumption that we have 619 customers.-customers] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:55: in test_explicit_hypothesis_is_not_an_observed_customer_stock
+    assert not state.observed
+E   AssertionError: assert not True
+E    +  where True = PredicateObservation(scope_start=0, scope_end=73, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+_ test_explicit_hypothesis_is_not_an_observed_customer_stock[On the assumption that customers total 619, our service revenue would grow.-customers] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:55: in test_explicit_hypothesis_is_not_an_observed_customer_stock
+    assert not state.observed
+E   AssertionError: assert not True
+E    +  where True = PredicateObservation(scope_start=0, scope_end=42, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+_ test_explicit_hypothesis_is_not_an_observed_customer_stock[This scenario uses an assumption of 619 customers.-customers] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:55: in test_explicit_hypothesis_is_not_an_observed_customer_stock
+    assert not state.observed
+E   AssertionError: assert not True
+E    +  where True = PredicateObservation(scope_start=0, scope_end=50, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+- generated xml file: C:\Users\֣����\Projects\company-wiki\.planning\r1-w08-predicate-publication-fix-20261024\grammar-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_measured_project_noun_does_not_make_its_predicate_a_forecast[Our services revenue increased due to projects totaling 560 at year end.-projects]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_measured_project_noun_does_not_make_its_predicate_a_forecast[Our total project count stood at 240 during the year.-project]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_measured_project_noun_does_not_make_its_predicate_a_forecast[Our total project number stood at 240 during the year.-project]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_measured_project_noun_does_not_make_its_predicate_a_forecast[We served 240 projects during the year.-projects]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_measured_project_noun_does_not_make_its_predicate_a_forecast[Projects grew from 12 to 18 during the year.-Projects]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_explicit_hypothesis_is_not_an_observed_customer_stock[Our service revenue grew due to an assumption that we have 619 customers.-customers]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_explicit_hypothesis_is_not_an_observed_customer_stock[On the assumption that customers total 619, our service revenue would grow.-customers]
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_explicit_hypothesis_is_not_an_observed_customer_stock[This scenario uses an assumption of 619 customers.-customers]
+======================== 8 failed, 10 passed in 1.67s =========================

@@ -1,0 +1,209 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-independent-20261024\\test_neutral.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py::test_w08_true_quantity_driver_and_stock_share_measurement_semantics[Our services revenue increased due to projects totaling 560 at year end.]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py::test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project count stood at 240 during the year.]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py::test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project number stood at 240 during the year.]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py::test_w08_quantity_and_directional_causal_consumers_require_their_own_relations[Our services revenue increased due to projects totaling 560 at year end.]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py::test_w08_unknown_quantity_and_unbound_nested_growth_cannot_bypass_measure_owner[Our service revenue grew due to an assumption that we have 619 customers.]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_selection\\test_reading_predicate_state_owner.py",
+    "--confcutdir",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-independent-20261024",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r1-w08-prepush-independent-20261024\\pytest",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-prepush-rootfix-20261024\\independent\\initial-junit.xml"
+  ],
+  "exit_code": 1,
+  "before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8",
+      "lf_sha256": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8"
+    },
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": {
+      "sha256": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+      "lf_sha256": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548"
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+      "lf_sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f"
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+      "lf_sha256": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1"
+    },
+    "src/company_wiki/resource_budget.py": {
+      "sha256": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+      "lf_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7"
+    },
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": {
+      "sha256": "585370b95db180d3c49d594d4710ae0dfab55aa114888e3caf620d394904732b",
+      "lf_sha256": "a7e28f6c0157750cb2eb389c70239d5f01d9fff40b278583a8862cb6939cc976"
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": {
+      "sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "lf_sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e"
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": {
+      "sha256": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "lf_sha256": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6"
+    },
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": {
+      "sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "lf_sha256": "e5bd00e89e3bebf0902d6bf764dc70cc27d6bcf71c8259a8cfd547811dcceb1e"
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "lf_sha256": "1ffe7147d74cf667672ab857f01a85074ef63eebbfac223816852c60a095f7de"
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": {
+      "sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "lf_sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+    },
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": {
+      "sha256": "cf38419cb9514bd42ab51aa96f6a02d8aeb5e8ce5949d1bf54119f06f72c6ca9",
+      "lf_sha256": "cf38419cb9514bd42ab51aa96f6a02d8aeb5e8ce5949d1bf54119f06f72c6ca9"
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py": {
+      "sha256": "a20290be6df31fe854cd3e150b797057be8826ecf22dc3ba79303157d905b9b7",
+      "lf_sha256": "a20290be6df31fe854cd3e150b797057be8826ecf22dc3ba79303157d905b9b7"
+    }
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8",
+      "lf_sha256": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8"
+    },
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": {
+      "sha256": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+      "lf_sha256": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548"
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+      "lf_sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f"
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "sha256": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+      "lf_sha256": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1"
+    },
+    "src/company_wiki/resource_budget.py": {
+      "sha256": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+      "lf_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7"
+    },
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": {
+      "sha256": "585370b95db180d3c49d594d4710ae0dfab55aa114888e3caf620d394904732b",
+      "lf_sha256": "a7e28f6c0157750cb2eb389c70239d5f01d9fff40b278583a8862cb6939cc976"
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": {
+      "sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "lf_sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e"
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": {
+      "sha256": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "lf_sha256": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6"
+    },
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": {
+      "sha256": "45782533d012d1a0d8fc3c9bb728bbac255e2a6462b6cc611b5eb7cc98716adb",
+      "lf_sha256": "e5bd00e89e3bebf0902d6bf764dc70cc27d6bcf71c8259a8cfd547811dcceb1e"
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "sha256": "ec05917b67039116b1673ed9792a093d1ad7293666d178e90b3cc6e11aeb7d35",
+      "lf_sha256": "1ffe7147d74cf667672ab857f01a85074ef63eebbfac223816852c60a095f7de"
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": {
+      "sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "lf_sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b"
+    },
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": {
+      "sha256": "cf38419cb9514bd42ab51aa96f6a02d8aeb5e8ce5949d1bf54119f06f72c6ca9",
+      "lf_sha256": "cf38419cb9514bd42ab51aa96f6a02d8aeb5e8ce5949d1bf54119f06f72c6ca9"
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py": {
+      "sha256": "a20290be6df31fe854cd3e150b797057be8826ecf22dc3ba79303157d905b9b7",
+      "lf_sha256": "a20290be6df31fe854cd3e150b797057be8826ecf22dc3ba79303157d905b9b7"
+    }
+  },
+  "old11_HEAD_blob_equivalence": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "git_blob_sha256": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8",
+      "lf_sha256": "35252c4ec2baa367d5b88aab668d9295543e7adfd9544d3839009956aac28cf8",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": {
+      "git_blob_sha256": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+      "lf_sha256": "a2548c75ef31d18fabf3c9d1c0dd0f3c1b5347a2646d8e6c0130a4967e5f8548",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+      "git_blob_sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+      "lf_sha256": "b988ce56ced53c4976d353d80fd77c48141b956cddb06b52b854ba95157b6e1f",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "git_blob_sha256": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+      "lf_sha256": "b1760f439a8f6f5d8840b0aa588d38d8799c772cdccc3d600b7ddde6917ee4c1",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "src/company_wiki/resource_budget.py": {
+      "git_blob_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+      "lf_sha256": "1c0dbc5a1134e573682fe6eb358f6fefdf52b6287d2bb0dee7b81898ecdcbfb7",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": {
+      "git_blob_sha256": "a7e28f6c0157750cb2eb389c70239d5f01d9fff40b278583a8862cb6939cc976",
+      "lf_sha256": "a7e28f6c0157750cb2eb389c70239d5f01d9fff40b278583a8862cb6939cc976",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": {
+      "git_blob_sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "lf_sha256": "7aa54e89b8fa859ce2bab7e9c6a96e4fd6b2943132cd4f11b9b089dcee5f743e",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": {
+      "git_blob_sha256": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "lf_sha256": "1cf6b735119db2d58b04540b61bdfbb623f725f3a3c741fc89780d730f3e97a6",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": {
+      "git_blob_sha256": "e5bd00e89e3bebf0902d6bf764dc70cc27d6bcf71c8259a8cfd547811dcceb1e",
+      "lf_sha256": "e5bd00e89e3bebf0902d6bf764dc70cc27d6bcf71c8259a8cfd547811dcceb1e",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": {
+      "git_blob_sha256": "1ffe7147d74cf667672ab857f01a85074ef63eebbfac223816852c60a095f7de",
+      "lf_sha256": "1ffe7147d74cf667672ab857f01a85074ef63eebbfac223816852c60a095f7de",
+      "lf_equal_to_HEAD_blob": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": {
+      "git_blob_sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "lf_sha256": "382a1b68ff5bc71cd2f7f17078c2551aa84eeca68ea7c6508dd0e036e6b2746b",
+      "lf_equal_to_HEAD_blob": true
+    }
+  },
+  "old5_exact_nodeids": [
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_true_quantity_driver_and_stock_share_measurement_semantics[Our services revenue increased due to projects totaling 560 at year end.]",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project count stood at 240 during the year.]",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_count_labels_and_stock_predicates_are_one_quantity_relation[Our total project number stood at 240 during the year.]",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_quantity_and_directional_causal_consumers_require_their_own_relations[Our services revenue increased due to projects totaling 560 at year end.]",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py::test_w08_unknown_quantity_and_unbound_nested_growth_cannot_bypass_measure_owner[Our service revenue grew due to an assumption that we have 619 customers.]"
+  ],
+  "original17_file": "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py",
+  "actual_imports": {
+    "company_wiki.source_catalog.narrative_predicate_state": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_predicate_state.py",
+    "company_wiki.source_catalog.narrative_business_policy": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "company_wiki.source_catalog.narrative_revenue_guidance": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_revenue_guidance.py"
+  },
+  "scratch_initially_absent": true,
+  "network_original_model_calls": 0,
+  "scratch_finally_absent": true
+}

@@ -1,0 +1,118 @@
+"""Finite independent predicate review; Conda, same old5+old17, no network."""
+from pathlib import Path
+import hashlib,json,os,re,shutil,subprocess,sys
+
+REPORT=Path(__file__).resolve().parent
+ROOT=REPORT.parents[5]
+SCRATCH=ROOT/'.planning/r1-w08-prepush-independent-20261024'
+OWNER=ROOT/'src/company_wiki/source_catalog/narrative_predicate_state.py'
+TESTS='''from pathlib import Path
+import pytest
+from company_wiki.source_catalog.narrative_predicate_state import observe_metric_predicate
+from company_wiki.source_catalog import narrative_business_policy as policy
+
+def state(text,target):
+ start=text.rindex(target)
+ return observe_metric_predicate(text,start,start+len(target))
+
+@pytest.mark.parametrize("text,target",[
+ ("Projects reached 384 during the reporting period.","Projects"),
+ ("Projects stood at 384 at year end.","Projects"),
+ ("Our completed projects reached 384 this year.","projects"),
+ ("Projects have increased from 212 to 384 this year.","Projects"),
+ ("Projects were 384 at year end.","Projects"),
+ ("Completed projects totaled 384 this year.","projects"),
+ ("Our 384 projects served customers this year.","projects"),
+])
+def test_project_noun_has_no_forecast_predicate(text,target):
+ result=state(text,target);fact=policy.detect_reading_business_fact(text)
+ assert result.observed,(result,fact.reasons)
+ assert not result.forward_outlook,(result,fact.reasons)
+
+@pytest.mark.parametrize("text,target",[
+ ("We project 384 customers next year.","customers"),
+ ("Analysts project customer counts will reach 384 next year.","customer"),
+ ("Management projects 384 new projects next year.","projects"),
+ ("Our company is projecting 384 projects next year.","projects"),
+])
+def test_actual_project_forecast_verb_remains_forward(text,target):
+ result=state(text,target)
+ assert not result.observed and result.forward_outlook,result
+ assert not policy._source_measure_relations(text)
+
+@pytest.mark.parametrize("text,target",[
+ ("Under the assumption that renewals remain stable, customers total 384.","customers"),
+ ("In this scenario, under the assumption that renewals remain stable, customers total 384.","customers"),
+ ("For this projection, on the assumption of stable renewals, customers total 384.","customers"),
+ ("For planning, based on the assumption that renewals remain stable, customers total 384.","customers"),
+ ("Our estimate uses the assumption of 384 customers.","customers"),
+])
+def test_explicit_hypothesis_does_not_turn_into_actual_after_an_adjunct(text,target):
+ result=state(text,target)
+ assert not result.observed and result.has_condition,result
+ assert not policy._source_measure_relations(text)
+
+@pytest.mark.parametrize("text,target",[
+ ("We rejected the assumption that orders would fall, customers reached 384.","customers"),
+ ("The report lists assumptions. Customers reached 384.","Customers"),
+ ("We considered an assumption of stable orders; customers reached 384.","customers"),
+])
+def test_rejected_or_independent_assumption_does_not_leak(text,target):
+ result=state(text,target)
+ assert result.observed and not result.has_condition,result
+
+def test_real_leading_condition_keeps_an_explicit_future_forecast():
+ text="If projects succeed, customers will reach 384 next year."
+ result=state(text,"customers")
+ assert not result.observed and result.forward_outlook and result.has_condition,result
+'''
+
+def hashes(paths):
+ return {p:{'sha256':hashlib.sha256((ROOT/p).read_bytes()).hexdigest(),'lf_sha256':hashlib.sha256((ROOT/p).read_bytes().replace(b'\r\n',b'\n')).hexdigest()} for p in paths}
+
+def main():
+ assert ROOT==Path('C:/Users/郑曾波/Projects/company-wiki')
+ assert not SCRATCH.exists()
+ assert hashlib.sha256(OWNER.read_bytes()).hexdigest()=='2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460'
+ originals=['src/company_wiki/source_catalog/narrative_business_policy.py','src/company_wiki/source_catalog/narrative_revenue_guidance.py','src/company_wiki/source_catalog/narrative_operating_relations.py','src/company_wiki/document_understanding/decision_inventory.py','src/company_wiki/resource_budget.py','tests/unit/document_understanding_selection/test_reading_semantic_value.py','tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py','tests/unit/document_understanding_selection/test_reading_predicate_generalization.py','tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py','tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py','tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py']
+ protected=originals+['src/company_wiki/source_catalog/narrative_predicate_state.py','tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py']
+ before=hashes(protected)
+ blob_equivalence={}
+ for p in originals:
+  blob=subprocess.check_output(['git','--no-optional-locks','show','HEAD:'+p],cwd=ROOT)
+  blob_equivalence[p]={'git_blob_sha256':hashlib.sha256(blob).hexdigest(),'lf_sha256':before[p]['lf_sha256'],'lf_equal_to_HEAD_blob':blob.replace(b'\r\n',b'\n')==(ROOT/p).read_bytes().replace(b'\r\n',b'\n')}
+ assert all(v['lf_equal_to_HEAD_blob'] for v in blob_equivalence.values())
+ log=(ROOT/'.planning/r1-w08-main-integration-20261024/normal-push.txt').read_text(encoding='utf-8',errors='replace')
+ old5=[m.group(1) for line in log.splitlines() if (m:=re.match(r'FAILED (tests/[^\r\n]+?) - ',line))]
+ assert len(old5)==5,old5
+ SCRATCH.mkdir();guard=SCRATCH/'guard';guard.mkdir()
+ (guard/'sitecustomize.py').write_text('''import atexit,json,os,pathlib,socket,sys
+def blocked(*a,**k):raise RuntimeError("Independent W08 network blocked")
+socket.socket.connect=blocked
+socket.socket.connect_ex=blocked
+socket.create_connection=blocked
+socket.getaddrinfo=blocked
+def done():
+ names=["company_wiki.source_catalog.narrative_predicate_state","company_wiki.source_catalog.narrative_business_policy","company_wiki.source_catalog.narrative_revenue_guidance"]
+ modules={n:str(pathlib.Path(sys.modules[n].__file__).resolve()) for n in names if n in sys.modules}
+ pathlib.Path(os.environ["W08_IMPORT_RECEIPT"]).write_text(json.dumps(modules),encoding="utf-8")
+atexit.register(done)
+''',encoding='utf-8')
+ (SCRATCH/'test_neutral.py').write_text(TESTS,encoding='utf-8')
+ env={k:v for k,v in os.environ.items() if not any(t in k.upper() for t in ['API_KEY','ACCESS_TOKEN','SECRET_KEY'])}
+ env.update(PYTHONPATH=os.pathsep.join([str(guard),str(ROOT/'src'),str(ROOT/'tests')]),PYTHON_DOTENV_DISABLED='1',COMPANY_WIKI_NETWORK='blocked',COMPANY_WIKI_REAL_LLM='0',PYTHONDONTWRITEBYTECODE='1',W08_IMPORT_RECEIPT=str(SCRATCH/'imports.json'))
+ cmd=[sys.executable,'-X','utf8','-B','-m','pytest',str(SCRATCH/'test_neutral.py'),*[str(ROOT/x) for x in old5],str(ROOT/'tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py'),'--confcutdir',str(SCRATCH),'-q','--tb=short','-p','no:cacheprovider','--basetemp',str(SCRATCH/'pytest'),'--junitxml',str(REPORT/'final-junit.xml')]
+ try:
+  run=subprocess.run(cmd,cwd=ROOT,env=env,capture_output=True,text=True,encoding='utf-8',timeout=60)
+  (REPORT/'final-stdout.txt').write_text(run.stdout,encoding='utf-8');(REPORT/'final-stderr.txt').write_text(run.stderr,encoding='utf-8')
+  receipt={'command':cmd,'exit_code':run.returncode,'before':before,'after':hashes(protected),'old11_HEAD_blob_equivalence':blob_equivalence,'old5_exact_nodeids':old5,'original17_file':'tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py','actual_imports':json.loads((SCRATCH/'imports.json').read_text(encoding='utf-8')),'scratch_initially_absent':True,'network_original_model_calls':0}
+  assert receipt['before']==receipt['after']
+ finally:
+  assert SCRATCH.resolve().parent==(ROOT/'.planning').resolve()
+  shutil.rmtree(SCRATCH)
+ receipt['scratch_finally_absent']=not SCRATCH.exists()
+ (REPORT/'final-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding='utf-8')
+ print(run.stdout);print(json.dumps({'exit_code':run.returncode,'scratch_absent':not SCRATCH.exists()}))
+ return run.returncode
+
+if __name__=='__main__':raise SystemExit(main())

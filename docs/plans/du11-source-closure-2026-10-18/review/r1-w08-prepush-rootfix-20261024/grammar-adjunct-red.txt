@@ -1,0 +1,23 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py . [  4%]
+....................F                                                    [100%]
+
+================================== FAILURES ===================================
+_ test_hypothesis_scope_cannot_leak_between_independent_assertions[In this scenario, under the assumption that orders stay stable, customers total 619.] _
+tests\unit\document_understanding_selection\test_reading_predicate_grammar_controls.py:75: in test_hypothesis_scope_cannot_leak_between_independent_assertions
+    assert not state.observed and state.has_condition
+E   AssertionError: assert (not True)
+E    +  where True = PredicateObservation(scope_start=63, scope_end=84, modality='actual', period='unspecified', cue_start=None, cue_end=None, has_condition=False).observed
+- generated xml file: C:\Users\֣����\Projects\company-wiki\.planning\r1-w08-predicate-publication-fix-20261024\grammar-adjunct-red.xml -
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py::test_hypothesis_scope_cannot_leak_between_independent_assertions[In this scenario, under the assumption that orders stay stable, customers total 619.]
+======================== 1 failed, 21 passed in 1.51s =========================

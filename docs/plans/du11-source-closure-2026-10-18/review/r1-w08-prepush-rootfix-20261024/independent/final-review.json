@@ -1,0 +1,73 @@
+{
+  "status": "PASS_LIMITED_SHARED_PREDICATE_FIX_REVIEW",
+  "owner_version": {
+    "sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460",
+    "lf_sha256": "2ed1433ec5b227528bd5fad4083a7df642ca87bdb86a524d9ab092b6648e7460"
+  },
+  "grammar_test_version": {
+    "sha256": "fe23cdedb235a0c42976893174b1d16aea0025527a0e21685ccb6f4622c5d084",
+    "lf_sha256": "fe23cdedb235a0c42976893174b1d16aea0025527a0e21685ccb6f4622c5d084"
+  },
+  "results": {
+    "tests": 42,
+    "passed": 42,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 2.0,
+    "same_original5": 5,
+    "same_original17": 17,
+    "same_new20": 20
+  },
+  "closed_findings": [
+    "I08-01",
+    "I08-02"
+  ],
+  "same20_assertion_text": true,
+  "initialFAIL_artifacts_unchanged": true,
+  "old11_lf_same_as_initial": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": true,
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": true,
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": true,
+    "src/company_wiki/document_understanding/decision_inventory.py": true,
+    "src/company_wiki/resource_budget.py": true,
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py": true,
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py": true,
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py": true,
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py": true,
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py": true,
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py": true
+  },
+  "old11_lf_equal_HEAD_blob": true,
+  "source_tests13_unchanged_during_run": true,
+  "scratch_finally_absent": true,
+  "network_original_model_calls": 0,
+  "full_prepush_or362_suite_rerun": false,
+  "real249pages_or_w08_complete_claimed": false,
+  "artifacts": {
+    "final-reproducible.py.txt": {
+      "bytes": 8263,
+      "sha256": "af1d56242910f97a7bcc8118a6ac3058f15ace8f69ccf33d6aa304f281be654a"
+    },
+    "final-junit.xml": {
+      "bytes": 9404,
+      "sha256": "dfea9ec9b03e8bd761b7b9bc4f0543d797e2185e076d28e62ce63c9234c1182a"
+    },
+    "final-stdout.txt": {
+      "bytes": 1499,
+      "sha256": "7350d0405ff635f9ff92737964b9db7a489c7481183a40d7dc0f88d5829e484f"
+    },
+    "final-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "final-receipt.json": {
+      "bytes": 14464,
+      "sha256": "d3cea874df71021f6e2401a4c39d543f1dd002da60cad4686d0249d66e32614a"
+    },
+    "final-review.md": {
+      "bytes": 3257,
+      "sha256": "4ebbf455e97a00f14c721bc1c04ef9271a790c4296a099cd5f8a54a7fba10a44"
+    }
+  }
+}

@@ -640,3 +640,7 @@ W09四项内容问题通过共享投影owner修复，作者真实ancestry merge9
 W08独审17项原8F/9P暴露actual/future与收入指引重复状态根因，重构不可变PredicateObservation供二者共用。有限相关677P，独审原17不变+6真实selector/citation/model未来目标召回+1源码cache身份共24P；原77/20/24断言不改，预算独审版本保持，暂未保存merge/并母线或安装。跨页、annual14、正式摘要/缓存/RF矩阵/W12仍OPEN。
 
 母PWF/两级Next Step/机器checkpoint/施工包总入口统一。错误读了不存在的旧dispatch路径已纠正到harness_lanes/20261023/dispatch.json；沙箱普通Git读外部linked worktree报must be run in a work tree，按既有授权使用escalated正常Git，未重置或改索引规避。0新增模型/原件下载/费用；10M/$20总额、旧unknown和原始文档/封存均保留。
+
+## 2026-10-24 W08真实并线、发布失败根修和W11索引保存
+
+W08正常合7b1c015b为b0344200，15源/test按review原始字节恢复（11仅LF等价），W11源和母入口不变。第一次正常prepush5F/7830P/24skip201.29s挡住；ROOT统一project词性/假设条件，正式新22例和旧套件362P4.64s，独审首轮42=34P8F保留、最终原42全P2.00s。等待正常发布，不借旧CI。跨页下一公共RED9=7F2P，结构47有限P，per-target原文依赖出口与预算fixture澄清未完。W11单次GET已正规保存486901B新索引，binary read/source SHA校验、同字节本地发现；0业务文件。临时body恢复不存在、原件/封存/配置/母模型账不变。业务材料external_limit仍开，无LLM调用。

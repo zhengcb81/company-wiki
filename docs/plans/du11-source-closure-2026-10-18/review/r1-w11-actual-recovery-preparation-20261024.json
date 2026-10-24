@@ -1,0 +1,224 @@
+{
+  "status": "READONLY_PREPARATION_ONLY_NO_ACQUISITION",
+  "date": "2026-10-24",
+  "original_url": "https://www.wuxiapptec.cn/investors/announcement/ir-material",
+  "known_entity": {
+    "name": "药明康德",
+    "market": "CN",
+    "security_id": "603259",
+    "exchange": "SSE",
+    "org_id": "9900035584",
+    "identity_receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\identity.json"
+  },
+  "research_window": {
+    "start_date": "2026-01-01",
+    "as_of_date": "2026-10-21",
+    "index_publication_and_fiscal_period": "unknown/nonperiodic",
+    "recapture_is_new_version_not_historical_replay": true
+  },
+  "old_fetch_receipt": {
+    "event_id": "official-index-6eed999bdccb40c595c01c5c4b76f16c",
+    "url": "https://www.wuxiapptec.cn/investors/announcement/ir-material",
+    "started_at": "2026-10-22T19:39:09.041249+00:00",
+    "status": "opened",
+    "http_status": 200,
+    "effective_url": "https://www.wuxiapptec.cn/investors/announcement/ir-material",
+    "response_body_bytes": 486789,
+    "content_sha256": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+    "completed_at": "2026-10-22T19:39:16.413958+00:00",
+    "cumulative_response_bytes": 486789,
+    "usage_complete": true,
+    "cost_usd": "0"
+  },
+  "old_actual_retained_command_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\input-0001-9c235138bbbf.json",
+      "bytes": 250,
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\consume-0001-9c235138bbbf.json",
+      "bytes": 250,
+      "sha256": "9c235138bbbf066125fc40629578fe5c7f8840031b932b1130d2371cf6de5f4c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-01\\roles\\executor\\commands\\faa5bf2650964e9480566759c565ce11\\stdout.txt",
+      "bytes": 2839,
+      "sha256": "1c33f18b24354c5a30e1d71258cf09c89ad23baec43bc42111082bc2fe7e7f52"
+    }
+  ],
+  "old_body": {
+    "available": false,
+    "basis": "Prior bounded evidence_inventory, not a new whole-disk absence audit",
+    "known_sha_receipt_only": "f1e822a8067c0b8eb7fc6376d8e1491acfa1ae3b60ce605db90c06326603396e",
+    "author_inventory": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-source-recovery\\delivery\\w11\\evidence_inventory.json",
+    "must_not_pin_old_sha_for_new_current_version": true
+  },
+  "current_isolated_roots": {
+    "wiki": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
+    "catalog": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog",
+    "catalog_database": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\.source_catalog\\catalog.sqlite3",
+    "catalog_database_exists": true,
+    "wal_present": true,
+    "download_companies": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\companies",
+    "config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+    "consumer_connection": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json",
+    "new_receipt_attempt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024",
+    "new_attempt_exists": false,
+    "not_second_store": "Use existing isolated catalog/store; only new attempt receipts are separate"
+  },
+  "verified_metadata": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_discovery.py",
+      "bytes": 29818,
+      "sha256": "6869349b5d6f4861e9c78cdc8748aaa7f547d2866cf278fc5f721418a137b123"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py",
+      "bytes": 13362,
+      "sha256": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_flow.py",
+      "bytes": 49519,
+      "sha256": "3c4640201f9a1f70b4ce41a51d752f3f8fb5d048eb28f1296658298d2cf714c9"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution\\identity.json",
+      "bytes": 1744,
+      "sha256": "c3f191a7ba0502225f053369382f552687d8ca50c4c7f275a33f946b2d8640c5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\coordinator-effective-scope-budget-20261023.json",
+      "bytes": 10713,
+      "sha256": "77c6af8cccfbd7feb3cbc1291d8434444530ba4f5772548947b39a7fa4915233"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+      "bytes": 1481,
+      "sha256": "482ee2f6c863b14d41665abeafdd7198bab87892c2f4ba0aeff5861bed546af1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\company_wiki.json",
+      "bytes": 306,
+      "sha256": "b32bc38b0bb125f2ed65703b1910df7cbd4ee0a0a9a75e628b61ea6237b1fda5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\resource_budget.yaml",
+      "bytes": 353,
+      "sha256": "fe8ae99816e5158855c0874d77c00c619e2bf0029a92be5bf3f49c38374625d7"
+    }
+  ],
+  "w11_inputs11_match_frozen": true,
+  "recommended_capture_request": {
+    "schema_version": "official-source-capture-request/1",
+    "request_id": "w11-ir-index-20261024",
+    "source": {
+      "entity": "药明康德",
+      "document_kind": "investor_relations",
+      "title": "药明康德投资者关系材料索引（恢复请求描述）",
+      "publisher": "药明康德",
+      "source_url": "https://www.wuxiapptec.cn/investors/announcement/ir-material",
+      "market": "CN",
+      "security_id": "603259",
+      "provider": "official",
+      "published_date": null,
+      "filing_date": null,
+      "period_end": null,
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "language": "unknown"
+    },
+    "mime_type": "text/html",
+    "max_bytes": 1048576,
+    "max_seconds": 20,
+    "max_cost_usd": "0.00"
+  },
+  "recommended_capture_argv": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "company_wiki.source_catalog.official_source_cli",
+    "--config",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\config\\source_catalog.yaml",
+    "--project-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki",
+    "--operation",
+    "capture",
+    "--request",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\requests\\capture-index.json"
+  ],
+  "recommended_env": {
+    "PYTHONPATH": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "planned_receipts": {
+    "capture_request": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\requests\\capture-index.json",
+    "capture_stdout": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\receipts\\index-capture.json",
+    "capture_stderr": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\receipts\\index-capture.stderr.txt",
+    "read_request": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\requests\\read-index.json",
+    "verified_html_working_copy": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\work\\ir-index.html",
+    "discover_request": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\requests\\discover-pages.json",
+    "discover_stdout": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\receipts\\index-discovery.json",
+    "material_imports": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\receipts\\material-captures.jsonl",
+    "rf_preparation": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-02\\w11-actual-20261024\\receipts\\rf-prepared-sources.jsonl"
+  },
+  "remaining_steps": [
+    "Capture one current HTML response through existing bounded HTTP capture and canonical writer; do not run discover urls first",
+    "Use actual returned SourceRef in official-source-read-request/1 and public read with binary stdout; check exact SHA/size against capture",
+    "Discover pages on that same verified working copy, keeping window2026-01-01..2026-10-21/items30/maxbytes1048576; no further network",
+    "For real business leads only, capture/import originals with actual issuer/date/period facts and same explicit bounded intent; ignore privacy/terms; unknown remains unknown",
+    "Periodic filings: RF source_preparation.py reuse_only -> FF -> same catalog verified SourceRef; nonfinancial registered originals: source_preparation.prepare_registered_source_result, no fictitious fiscal year",
+    "Material-level FF/RF verified read, native summary/public narrative and W12 follow under current configuration/budget; index metadata does not satisfy material/Q&A coverage"
+  ],
+  "limitations": [
+    "discover urls alone does not persist body; receipt hash is not a saved original",
+    "New site bytes may differ from old SHA: record new immutable version, do not reconstruct old486789B",
+    "Dynamic or unsupported embedded material structure remains partial; no JS/browser/new provider introduced by this preparation",
+    "Direct HTML import currently validates UTF8; refusal retains capture_id for diagnosis/recover, never transcode original to force acceptance",
+    "Current isolated catalog has WAL; this preparation did not open/mutate DB or repeat prior deep scans"
+  ],
+  "current_limits": {
+    "bounded_recovery_request": {
+      "one_url": true,
+      "max_bytes": 1048576,
+      "max_seconds": 20,
+      "max_cost_usd": "0.00",
+      "max_redirects": 5,
+      "automatic_retries": 0
+    },
+    "coordinator_acquisition_outer": {
+      "max_bytes": 52428800,
+      "timeout_seconds": 180,
+      "max_cost_usd": "0.00"
+    },
+    "discovery_hard_caps": {
+      "max_pages": 6,
+      "max_items": 30,
+      "max_bytes": 8388608,
+      "max_seconds": 120
+    },
+    "capture_hard_caps": {
+      "max_bytes": 134217728,
+      "max_seconds": 300
+    },
+    "configured_cumulative_budget": {
+      "tokens": 10000000,
+      "micro_usd": 20000000,
+      "company_allocation": "soft150k/USD1; preserve oldunknown"
+    }
+  },
+  "this_review_operations": {
+    "network": 0,
+    "downloads": 0,
+    "provider_or_llm": 0,
+    "raw_original_reads": 0,
+    "db_open_or_writes": 0,
+    "author_or_production_scripts_executed": 0,
+    "git_operations": 0,
+    "new_scratch_created": 0,
+    "writes": "Only this MD/JSON pair"
+  }
+}

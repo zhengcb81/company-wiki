@@ -1,0 +1,17 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy runtime source (same command as CI)..........................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[codex/r1-final3-source-semantics 7b1c015b] docs: close out reviewed W08 predicate publication
+ 12 files changed, 6627 insertions(+), 7 deletions(-)
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/cleanup-before.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/cleanup.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/committed-paths.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/handoff.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/handoff.md
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/normal-commit-01.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/normal-commit-01.txt
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/preservation-after-merge.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/remaining-files-before-docs.json
+ create mode 100644 docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/source-byte-map.json

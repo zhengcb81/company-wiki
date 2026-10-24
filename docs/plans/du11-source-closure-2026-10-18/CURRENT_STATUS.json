@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-24",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W09_W11_MERGED_CI_SUCCESS_W08_FINITE_REVIEW_PASS_INTEGRATION_NEXT",
+  "overall_status": "ACTIVE_W08_MERGED_LOCAL_PREPUSH_ROOT_FIXED_REVIEW42_PASS_REPUBLISH_PENDING",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -151,7 +151,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "W09与W11已完成真实作者支线并入、推送及精确代码CI成功；RF安装103个owned运行文件全匹配。W08共用谓词/模态/期间owner重构已获同组独审24P（原17+6真实目标召回+1源码cache身份），ROOT先正常保存现有预算merge和该有限节点、并入母线；再完成可信跨页父级、固定容量选材/分批、真实249页14项回放，然后正式摘要/缓存/RF逐文档矩阵/W12。原件、旧FAIL、unknown及原测试不变。",
+  "next_step_now": "正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。",
   "next_step_after_user_resumes": "Already resumed on2026-10-23",
   "budget_snapshot": {
     "observed_on": "2026-10-22",
@@ -205,7 +205,7 @@
   "resume_handoff": "HANDOFF-2026-10-22.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-23T23:48:21.361050+00:00",
+  "last_updated_at": "2026-10-24T00:21:08.821046+00:00",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -324,7 +324,7 @@
     "pause_request_superseded": true
   },
   "r1_final3_current_checkpoint": {
-    "W08": "PREDICATE_MEASURE_GUIDANCE_FINITE_INDEPENDENT24_PASS_SAVE_MERGE_NEXT_ANNUAL_PARTIAL",
+    "W08": "LOCAL_ANCESTRY_MERGED_PREPUSH_ROOT_FIXED_INDEPENDENT42_PASS_REPUBLISH_PENDING",
     "W08_commit": "1712ed10ea1e32b3177ce435e2d8b852270fd6ca",
     "W08_ref": "review/r1-w08-resume-20261023/engineering-v4.json",
     "W09": "MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
@@ -336,15 +336,15 @@
     "W12": "NOT_STARTED",
     "business_pass": false,
     "parallel_dispatch_ref": "harness_lanes/20261023/dispatch.json",
-    "W08_mainline_integrated": false,
+    "W08_mainline_integrated": true,
     "W08_branch_head_prefix": "1712ed10",
     "W08_branch_published": true,
     "W08_prior_published_commit": "b6395b6c4746f2df748795a4edd69dddfed122e1",
     "W11_ref": "review/r1-w11-reception-20261023/root-acceptance.json",
-    "W08_pending_work": "Save existing normal ab95027b budget merge with reviewed measure/guidance/predicate delta; then integrate mother, cross-page ancestry and fixed-capacity selection/batching, real annual14, formal summary/cache/RF matrix/W12.",
+    "W08_pending_work": "正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。",
     "W11_root_repair_commit": "664d3a1db575d64bd4f11658478593a508d03f9b",
     "W11_merge_commit_prefix": "44b722ec",
-    "W08_current_independent_review": "review/r1-w08-measure-guidance-independent-20261024/final-review.json",
+    "W08_current_independent_review": "review/r1-w08-prepush-rootfix-20261024/independent/final-review.json",
     "W08_independent_cases": 24,
     "W09_main_head": "599d17b89d8baee42ce203747496731ace2d0148",
     "W09_merge_commit": "9dcce3049c23e974790b66d24455c1c08378447b",
@@ -363,7 +363,19 @@
       "conclusion": "success",
       "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40040509874",
       "updated_at": "2026-10-23T23:39:37Z"
-    }
+    },
+    "W08_mainline_merge_commit_prefix": "b0344200",
+    "W08_mainline_pushed": false,
+    "W08_mainline_exact_ci": "NOT_RUN_YET",
+    "W08_current_root_fix": "review/r1-w08-prepush-rootfix-20261024/root-closeout.json",
+    "W08_next_public_red": {
+      "tests": 9,
+      "failed": 7,
+      "passed": 2,
+      "worktree_ref": "resume/cross-page-public-red-20261024/freeze.json"
+    },
+    "W11_actual_source_recovery": "INDEX_REGISTERED_REPLAYABLE_BUSINESS_MATERIAL_GAP_STILL_OPEN",
+    "W11_actual_source_ref": "review/r1-w11-actual-recovery-20261024.json"
   },
   "budget_regime": {
     "status": "PASS_COMMITTED_PUSHED_INSTALLED",

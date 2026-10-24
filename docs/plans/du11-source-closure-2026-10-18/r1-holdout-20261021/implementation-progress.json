@@ -82,7 +82,7 @@
     "new_downloaded_original_files": 9,
     "new_downloaded_original_bytes": 10342094
   },
-  "next_action": "W09与W11已完成真实作者支线并入、推送及精确代码CI成功；RF安装103个owned运行文件全匹配。W08共用谓词/模态/期间owner重构已获同组独审24P（原17+6真实目标召回+1源码cache身份），ROOT先正常保存现有预算merge和该有限节点、并入母线；再完成可信跨页父级、固定容量选材/分批、真实249页14项回放，然后正式摘要/缓存/RF逐文档矩阵/W12。原件、旧FAIL、unknown及原测试不变。",
+  "next_action": "正常发布已合入母线的W08有限来源/谓词节点：首次完整prepush5个旧回归已共因修复，原同独审42P、相关362P；保留原RED并正常推送、观察精确CI。随后完成跨页结构的per-target引用接线、原始依赖联合计费和订单语言覆盖，解决独立公共9例7F2P，再做真实249页14项、选材/分批、正式摘要/cache/RF矩阵/W12。",
   "engineering_closeout_ref": "engineering-closeout-20261022.json",
   "w03_integration_ref": "../review/r1-w03-integration-20261022.json",
   "local_budget_observation_followup": {
@@ -97,7 +97,7 @@
     "issues": 14,
     "roots": 10,
     "packages": {
-      "W08": "PREDICATE_NODE_REVIEW24_PASS_SAVE_MERGE_NEXT_ANNUAL14_PARTIAL",
+      "W08": "LOCAL_ANCESTRY_MERGED_PREPUSH_ROOT_FIXED_INDEPENDENT42_PASS_REPUBLISH_PENDING",
       "W09": "ROOT_REPAIRED_MERGED_PUSHED_INSTALLED_EXACT_CI_SUCCESS_FINITE_CONTENT_ONLY",
       "W10": "ENGINEERING_REVIEWED_COMMITTED_INSTALLED_REAL_MATRIX_OPEN",
       "W11": "ROOT_REPAIRED_MERGED_PUSHED_EXACT_CI_SUCCESS_REAL_IR_RECOVERY_OPEN",
@@ -105,6 +105,7 @@
     },
     "business_pass": false,
     "current_checkpoint_ref": "../CURRENT_STATUS.json",
-    "parallel_dispatch_ref": "../harness_lanes/20261023/dispatch.json"
+    "parallel_dispatch_ref": "../harness_lanes/20261023/dispatch.json",
+    "W11_actual_ref": "../review/r1-w11-actual-recovery-20261024.json"
   }
 }

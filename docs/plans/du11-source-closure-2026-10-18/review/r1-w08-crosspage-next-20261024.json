@@ -1,0 +1,47 @@
+{
+  "schema_version": "w08-crosspage-next-readonly/1",
+  "status": "DESIGN_REVIEW_ONLY_NO_IMPLEMENTATION_OR_TEST_EXECUTION",
+  "project_root": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation",
+  "stale_pointer": "docs/plans/r1-final3-source-semantics-20261022/NEXT_IMPLEMENTATION.md is absent at supplied worktree and mother path; ROOT confirmed obsolete and will update PWF",
+  "usable_design": "docs/plans/r1-final3-source-semantics-20261022/resume/cross-page-ancestry-design/design.md",
+  "design_sha256": "d51c2dd722e5eccec7e9085f4042145abff98e3f721a6194f4f0e7ff0464467c",
+  "design_json_sha256": "74af7b41b98db96c01c5b718a29bd286860742cfc30cd8bc098369071c5fb998",
+  "probes_sha256": "9d42077d50412b7ec4cdf3b0dc31e934a44571872a05ae26abe465d32948dd8d",
+  "structural_lookup": "CodeGraph context/node/callers first; opened only identified source/test owners and selected design resources",
+  "source_sha256": {
+    "src/company_wiki/document_understanding/structure/sections.py": "d4b8aed45739ff7c470a66af1456c683d56422f3f36fe2796c960d5fdb98629c",
+    "src/company_wiki/document_understanding/structure/__init__.py": "1f3624fe61572e99228425f3c60d9b7a0af7ef56d106c1ac9d74b6237e99d8a5",
+    "src/company_wiki/document_understanding/structure/contract.py": "ca693bed1cba4423d8c9b3a2dc0d204b48ab467d395eef91890f501407754a3a",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f69e8f2fd98877a0caf6d6186c8e9c27e9381fe4fd0baa11a6d58ad2f40b3432",
+    "src/company_wiki/document_understanding/pipeline.py": "97c4cdd57fca617e1313446283c6a8121b074d3666ffbb2356a6a4591b52e029",
+    "src/company_wiki/source_catalog/narrative_reading.py": "9eac52bdadb103855cb5cb808a2ba9b4e48d60441168faef294a1c04fa2b11fc"
+  },
+  "single_direction": "pipeline original observation -> shared physical native context -> structure/sections -> reading_plan/packages -> existing sentence-continuity and per-citation original closure",
+  "minimal_interfaces": [
+    "Source-owned call-local optional immutable original provenance/coverage context; absent context retains same-page behavior",
+    "One pure native physical observation/neighbour proof, with original IDs/frame/font/lane/order/positive furniture, no section/profile/semantic callback",
+    "Existing sentence client keeps scope/terminal/independent-start guards; numbered-list client requires actual open introduction+indent/marker grammar",
+    "Existing section IDs remain authoritative; required ancestor/intro/boundary original refs reach actual citation dependency costing, no basis-only closure claim"
+  ],
+  "probe_next": [
+    {"probe": 1, "kind": "samepage own-list and sibling", "role": "existing positive control"},
+    {"probe": 2, "kind": "adjacent-page complete bullet", "role": "public structure+selector RED first"},
+    {"probe": 3, "kind": "adjacent-page complete bullet with positive furniture", "role": "public structure+selector RED first"},
+    {"probe": 4, "kind": "adjacent-page Roman child", "role": "public RED plus separate same-page Roman grammar RED"},
+    {"probe": 5, "kind": "unfinished sentence source-global order/page-local reset", "role": "preserve original positive control"},
+    {"probe": 6, "kind": "unfinished sentence with2 proven furniture", "role": "preserve original positive control"},
+    {"probe": 7, "kind": "complete sentence boundary", "role": "preserve original sentence negative; list association is not sentence merge"},
+    {"probe": 8, "kind": "unknown columns", "role": "preserve negative and diagnostic"}
+  ],
+  "limits_unchanged": {"citation_original_units": 8, "citation_original_blocks": 4, "citation_original_chars": 2048, "selection_spans": 96, "selection_chars": 48000, "work_units": 16000000, "existing_section_pages": 2, "existing_section_units": 24},
+  "stages": ["A: freeze public RED and isolate shared physical observer while preserving sentence semantics", "B: early context/list ancestry wiring and actual citation dependency transport, no patched pipeline", "C: one concentrated envelope/resource regression and independent current-byte review, then planned real replay only"],
+  "integration_risks": [
+    "Do not feed late continuity back into sections or require final scope in the shared physical proof",
+    "Required original proof witnesses must be charged jointly; excluded furniture is not business support and cannot hide dependency cost",
+    "Do not reset section/page/unit ceilings per edge into an unlimited rolling ancestry chain",
+    "Actual D&M5originals+2 broad ancestors+Chemistry already8; extra proof may cause honest deferral",
+    "Existing downstream fixtures that inject sections prove propagation only, not discovery",
+    "Current narrative_reading differs from original design historical hash; old8 probes are not current-version test acceptance"
+  ],
+  "side_effects": {"production_or_test_edits": 0, "worktree_writes": 0, "mother_pwf_edits": 0, "project_script_or_test_runs": 0, "original_document_reads": 0, "network_model_or_paid_calls": 0, "temporary_source_copies": 0, "git_mutations": 0, "report_files_only": 2}
+}
