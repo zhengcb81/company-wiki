@@ -16,6 +16,39 @@ INSTALLED = False
 _pending: dict | None = None
 
 
+def _oracle_reading_context(context):
+    """Project typed production context to the oracle's membership-only schema.
+
+    The v3 selection contract already validates semantic group identities,
+    citation partitions and source proofs. The older independent support
+    oracle consumes only ordered evidence membership and group kind, so give
+    it local IDs derived from membership instead of teaching the oracle a
+    second copy of the production v3 identity algorithm.
+    """
+    if context is None:
+        return None
+    schema = context.get("schema_version")
+    if schema in {"du-production-reading/1", "du-production-reading/2"}:
+        return context
+    if schema != "du-production-reading/3":
+        raise ValueError("observer requires a validated production reading context")
+    groups = []
+    for row in context.get("groups", ()):
+        evidence_ids = list(row.get("evidence_ids", ()))
+        if not evidence_ids or any(not isinstance(value, str) for value in evidence_ids):
+            raise ValueError("observer requires nonempty validated reading groups")
+        digest = hashlib.sha256(
+            json.dumps(evidence_ids, separators=(",", ":")).encode()
+        ).hexdigest()
+        groups.append({
+            "group_id": "urn:company-wiki:reading-group:sha256:" + digest,
+            "evidence_ids": evidence_ids,
+            "kind": row["kind"],
+            "section_role": row["section_role"],
+        })
+    return {"schema_version": "du-production-reading/2", "groups": groups}
+
+
 def _append(path: str, value: dict) -> None:
     with Path(path).open("a", encoding="utf8") as stream:
         stream.write(json.dumps(value, ensure_ascii=False, sort_keys=True) + "\n")
@@ -93,7 +126,7 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
             assert all(len(row[1]) == len(set(row[1])) and set(row[1]) <= set(aliases) for row in groups)
             assert groups == [[alias, [alias_by_span[sid] for sid in members]]
                 for alias, (_, members) in actual_groups.items()]
-    context = selected.reading_context
+    context = _oracle_reading_context(selected.reading_context)
     required = [fact for fact in gold["facts"] if fact.get("target_kind") == "required_business"]
     scored = score_facts(required, evidence_spans=selected.evidence_spans,
         reading_context=context, source_id=selected.source_ref.source_id)

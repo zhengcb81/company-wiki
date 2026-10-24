@@ -72,6 +72,40 @@ def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_m
         gold_observation(gold, source, changed)
 
 
+def test_observer_adapts_v3_context_membership_for_the_independent_oracle():
+    from tools.document_understanding_benchmark.phase_c_observer import _oracle_reading_context
+
+    context = {
+        "schema_version": "du-production-reading/3",
+        "groups": [{
+            "group_id": "urn:company-wiki:reading-group:sha256:" + "a" * 64,
+            "kind": "native_continuity",
+            "section_role": "business",
+            "evidence_ids": ["span-a", "span-b"],
+            "citation_views": [{
+                "support_evidence_ids": ["span-a"],
+                "context_evidence_ids": ["span-b"],
+            }],
+            "source_proof_unit_ids": ["unit-a"],
+            "source_proof_target_unit_ids": ["unit-b"],
+            "source_proofs": [{"basis": "observed_adjacent_page_flow"}],
+        }],
+    }
+
+    projected = _oracle_reading_context(context)
+
+    assert projected == {
+        "schema_version": "du-production-reading/2",
+        "groups": [{
+            "group_id": "urn:company-wiki:reading-group:sha256:"
+            + hashlib.sha256(b'["span-a","span-b"]').hexdigest(),
+            "evidence_ids": ["span-a", "span-b"],
+            "kind": "native_continuity",
+            "section_role": "business",
+        }],
+    }
+
+
 def test_identity_snapshot_uses_explicit_data_catalog_not_code_checkout(tmp_path, monkeypatch):
     """A worktree without production data reads the supplied catalog snapshot."""
     from company_wiki.source_catalog.security_identity import SecurityMasterStore

@@ -142,6 +142,14 @@ def test_tracked_phase_c_full_loopback_needs_no_planning_history_and_removes_lak
                 target = deployed / source.relative_to(repo)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, target)
+    # These public runtime tables are required even when the loopback config
+    # supplies a fixture model and source catalog. Neither file contains keys.
+    for name in ("models.yaml", "resource_budget.yaml"):
+        runtime_config = repo / "config" / name
+        assert runtime_config.is_file()
+        deployed_config = deployed / "config" / name
+        deployed_config.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(runtime_config, deployed_config)
     benchmark = Path("tools/document_understanding_benchmark")
     # Deploy the actual bounded tool package, not a manually maintained module
     # list that becomes incomplete whenever the runner extracts a helper.
@@ -177,7 +185,16 @@ raise SystemExit(main())
             env=env,
             capture_output=True, timeout=240,
         )
-        assert process.returncode == 0, (process.stdout.decode(errors="replace"), process.stderr.decode(errors="replace"))
+        if process.returncode != 0:
+            failure_receipt = output / "overall.json"
+            receipt_detail = (failure_receipt.read_text(encoding="utf-8")
+                              if failure_receipt.is_file() else "<overall receipt missing>")
+            pytest.fail(
+                "clean Phase C loopback failed: "
+                + process.stdout.decode(errors="replace")
+                + process.stderr.decode(errors="replace")
+                + receipt_detail
+            )
         receipt = json.loads((output / "overall.json").read_bytes())
         assert receipt["status"] == "PASS" and receipt["external_POSTs"] == 0
         assert receipt["loopback_POSTs"] == 2 and receipt["mother_ledger_changed"] is False
