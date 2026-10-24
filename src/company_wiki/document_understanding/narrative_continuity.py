@@ -350,6 +350,7 @@ class _Analysis:
         self.stopped = False
         self.diagnostics: Counter[str] = Counter()
         self.deferred: list[str] = []
+        self.deferred_ids: set[str] = set()
         self.deferred_ranges: list[dict[str, Any]] = []
         self.windows: list[dict[str, Any]] = []
         self.adjacency_edges: list[dict[str, Any]] = []
@@ -583,30 +584,39 @@ class _Analysis:
     def defer(self, run: list[_Native]) -> None:
         if not run:
             return
-        self.deferred.extend(item.unit["unit_id"] for item in run)
-        for (source, page), sequence in groupby(run, key=lambda item: (item.source, item.page)):
+        pending = [item for item in run if item.unit["unit_id"] not in self.deferred_ids]
+        if not pending:
+            return
+        self.deferred.extend(item.unit["unit_id"] for item in pending)
+        self.deferred_ids.update(item.unit["unit_id"] for item in pending)
+        for (source, page), sequence in groupby(pending, key=lambda item: (item.source, item.page)):
             members = list(sequence)
             self.deferred_ranges.append({"source_id": source, "page": page,
                 "first_ordinal": members[0].ordinal, "last_ordinal": members[-1].ordinal})
 
-    def finish(self, run: list[_Native], proof: list[dict[str, Any]]) -> None:
+    def finish(self, run: list[_Native], proof: list[dict[str, Any]]) -> list[_Native]:
         """Cut only at an observed complete statement, never a resource prefix.
 
         Multiple sentence fragments can occupy the same original block. If a
         measured run exceeds a window, the last actual terminator inside the
         bound closes the preceding statement. An unclosed long statement is
         deferred in full; its unsupported tail must not become a new fact.
+
+        Return only the unresolved suffix, so a later unproved page boundary
+        can retain the pending left fragment without reclassifying a closed
+        prefix as uncertain.
         """
         start = 0
         if run and not run[0].left_closed:
             self.diagnostics["CONTINUITY_OPEN_START"] += 1
             self.defer(run)
-            return
+            return run
         while start < len(run):
             if len(run) - start < 2:
                 if start > 0 and not _terminal(run[start].unit["text"]):
                     self.diagnostics["CONTINUITY_OPEN_END"] += 1
                     self.defer(run[start:])
+                    return run[start:]
                 elif start == 0:
                     # No measured edge exists for a singleton. A physical
                     # block can contain headings, list introductions or several
@@ -614,7 +624,7 @@ class _Analysis:
                     # that all its original business material is incomplete.
                     # It remains unassessed, never a fabricated closed window.
                     self.standalone_units += 1
-                return
+                return []
             blocks: set[tuple[str, int, int]] = set()
             chars = 0
             end = start
@@ -622,7 +632,7 @@ class _Analysis:
             for index in range(start, len(run)):
                 if not self.charge():
                     self.defer(run[start:])
-                    return
+                    return run[start:]
                 item = run[index]
                 blocks.add((item.source, item.page, item.block))
                 chars += len(item.unit["text"])
@@ -640,7 +650,7 @@ class _Analysis:
                     "CONTINUITY_WINDOW_LIMIT" if limited else "CONTINUITY_OPEN_END"
                 ] += 1
                 self.defer(run[start:])
-                return
+                return run[start:]
             if not limited and end != len(run):
                 # A trailing open continuation cannot make a prior closed
                 # statement incomplete. Keep only the closed prefix; the
@@ -653,13 +663,14 @@ class _Analysis:
                     self.standalone_units += 1
                 elif not self.emit(prefix, proof[start : end - 1]):
                     self.defer(run[start:])
-                    return
+                    return run[start:]
                 self.defer(run[end:])
-                return
+                return run[end:]
             if not self.emit(run[start:end], proof[start : end - 1]):
                 self.defer(run[start:])
-                return
+                return run[start:]
             start = end
+        return []
 
 
 def build_native_continuity(
@@ -740,22 +751,25 @@ def build_native_continuity(
             headings,
             left_closed,
         )
+        page_tail_candidate = bool(
+            current is None and run and source_page_flow is not None
+            and not _terminal(run[-1].unit["text"])
+            and run[-1].bbox[3] >= 0.8 * run[-1].frame[3]
+        )
         if current is not None and unresolved_page_tail:
             if state.pending_page_transition(unresolved_page_tail[-1], current):
                 # Unproved headers/footers cannot be silently filtered into a
                 # positive edge, nor can their gap certify the right fragment.
-                # The left run has already passed through finish(); defer only
-                # the current page fragment here. Re-deferring the whole run
-                # would overlap a previously emitted closed statement prefix.
+                # finish() supplies only the unresolved left suffix. Preserve
+                # it with the right fragment; defer() removes any duplicates
+                # and the closed prefix can never be reclassified as pending.
                 state.diagnostics["CONTINUITY_PAGE_BOUNDARY_UNPROVEN"] += 1
-                state.defer([current])
+                state.defer([*unresolved_page_tail, current])
                 unresolved_page_tail = []
             elif not (current.page == unresolved_page_tail[-1].page + 1
                       and current.bbox[1] > 0.2 * current.frame[3]):
                 unresolved_page_tail = []
-        elif (current is None and run and source_page_flow is not None
-                and not _terminal(run[-1].unit["text"])
-                and run[-1].bbox[3] >= 0.8 * run[-1].frame[3]):
+        elif page_tail_candidate:
             unresolved_page_tail = list(run)
         previous_observed = unit
         if state.stopped:
@@ -814,7 +828,26 @@ def build_native_continuity(
             run.append(current)  # type: ignore[arg-type]
             proof.append(edge)
         else:
-            state.finish(run, proof)
+            unfinished_tail = state.finish(run, proof)
+            if page_tail_candidate:
+                # A nonterminal singleton is intentionally left unassessed by
+                # finish(), but at a page edge it may continue behind an
+                # excluded header/footer. Retain it until that boundary has
+                # positive furniture proof or the transition is explicitly
+                # deferred. A closed prefix before an open suffix is already
+                # removed by finish() and is never revived here.
+                unresolved_page_tail = unfinished_tail or (
+                    run if run and not _terminal(run[-1].unit["text"]) else []
+                )
+            elif unresolved_page_tail and unfinished_tail:
+                # The run may contain an already emitted closed prefix followed
+                # by a still-open tail. Keep only finish()'s actual unresolved
+                # suffix when the later page-boundary decision is made.
+                tail_ids = {item.unit["unit_id"] for item in unresolved_page_tail}
+                if any(item.unit["unit_id"] in tail_ids for item in run):
+                    unresolved_page_tail = [
+                        item for item in unfinished_tail if item.unit["unit_id"] in tail_ids
+                    ]
             run, proof = ([current] if current is not None else []), []
     if not state.stopped and unexamined is None:
         state.finish(run, proof)

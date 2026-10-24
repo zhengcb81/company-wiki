@@ -49,6 +49,11 @@ _ACTIVITY = re.compile(
 # legacy selectors keep detect_business_fact and its historical predicates.
 READING_BUSINESS_POLICY_VERSION = "reading-business-policy/18"
 READING_BUSINESS_SCAN_PASSES = 6 + READING_DISCLOSURE_SCAN_PASSES
+_FINANCIAL_BUSINESS_RELATIONS = frozenset({
+    "business_billing_basis", "business_reporting_scope",
+    "business_coverage_relation", "business_revenue_recognition", "source_revenue_guidance",
+    "operating_causal_driver", "product_operating_driver", "operating_quantity",
+})
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -713,10 +718,13 @@ def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
     topics = tuple(dict.fromkeys((*fact.topics, *relations,
         *(("business_progress",) if activity else ()),
         *(("capacity_projects",) if activity and "production" in families else ()))))
+    # A bare change in a financial result is not an operating basis. Only a
+    # source-bound business relationship can exempt that text from the normal
+    # finance-only filter; the generic direction predicate alone cannot.
     return OperatingFact(True, topics, tuple(dict.fromkeys((*fact.reasons, *relations,
                          *(("operating_activity",) if activity else ())))),
                          max(fact.score, 3), fact.financial_exempt or
-                         any(reason != "business_revenue_measure" for reason in relations))
+                         bool(_FINANCIAL_BUSINESS_RELATIONS.intersection(relations)))
 
 
 def detect_reading_business_fact(text: str) -> OperatingFact:

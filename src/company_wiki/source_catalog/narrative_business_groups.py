@@ -13,7 +13,9 @@ from types import MappingProxyType
 
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW, MAX_COMPLETION_UNITS, ends_sentence
 from .narrative_business_policy import business_objects, business_qualification
-from .narrative_business_policy import detect_business_fact, detect_reading_business_fact
+from .narrative_business_policy import (
+    detect_business_fact, detect_reading_business_fact, reading_financial_only,
+)
 from .narrative_stage_assertions import commercialization_milestone
 
 from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
@@ -348,6 +350,8 @@ def _operating_fact(text: str, rules: CandidateRules | None = None) -> Operating
     # suppress valid reporting, M&A or platform metrics before evaluating them.
     old = detect_business_fact(text)
     reading = detect_reading_business_fact(text)
+    if reading_financial_only(text, reading):
+        reading = OperatingFact()
     reasons = [reason for reason in old.reasons
         if reason != "new_product_commercialization_milestone"]
     reasons.extend(reason for reason in reading.reasons if reason not in reasons)

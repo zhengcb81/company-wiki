@@ -18,6 +18,7 @@ from .narrative_reporting_rules import reporting_rule_without_operating_event
 
 NON_OPERATING_PURPOSES = frozenset({
     "accounting_policy", "audit_procedure", "treasury_policy", "template_no_event", "navigation",
+    "governance_training",
 })
 
 _ACCOUNTING = re.compile(
@@ -66,6 +67,11 @@ _NAVIGATION = re.compile(
     r"(?:the\s+)?(?:note|item|section)(?:\s*\d+|\s+on\b)|"
     r"(?:具体)?(?:详见|参见|请参阅).{0,30}(?:附注|章节|第.{0,6}节)|"
     r"^[^。！？；;.!?]{1,80}?(?:情况|详情|说明|信息)(?:请)?(?:详见|参见|参阅).{0,30}第.{0,6}节)", re.I)
+_GOVERNANCE_TRAINING = re.compile(
+    r"(?=[^。！？；;.!?]{0,180}(?:training|awareness|培训|教育|意识))"
+    r"(?=[^。！？；;.!?]{0,180}(?:anti[- ]?fraud|anti[- ]?bribery|compliance|internal control|"
+    r"governance|ethics|董事会|反舞弊|反腐败|合规|内部控制|公司治理|道德))"
+    r"[^。！？；;.!?]{1,180}", re.I)
 _TEMPLATE = re.compile(r"^[\s□☑☐√✓✔×✗适用不\.、/():：（）\-]+$")
 _LABELLED_NO_EVENT = re.compile(
     r"^(?:(?:[A-Za-z0-9]{1,8}|[(（][A-Za-z0-9一二三四五六七八九十]{1,8}[)）])\s*[.、)]?\s*)?"
@@ -137,6 +143,8 @@ def _clause_purpose(value: str) -> str:
         return "template_no_event"
     if _NAVIGATION.search(value):
         return "navigation"
+    if _GOVERNANCE_TRAINING.search(value):
+        return "governance_training"
     basis = reporting_basis_relations(value)
     if "reporting_outlook_recast" in basis:
         return "operating_guidance"
