@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from typing import Any, Protocol
-from company_wiki.resource_budget import WorkBudget
+from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from company_wiki.source_catalog.narrative_document import (
     NarrativeEvidencePackage,
@@ -499,6 +499,12 @@ class NarrativeSelectHandler:
                 language=payload.source_metadata.language,
                 full_table_scan=full_table_scan,
             )
+        except WorkBudgetExceeded as exc:
+            # The shared parse/select limit is a deterministic stop. Keep
+            # its resource diagnostic instead of calling the PDF corrupt.
+            raise _SelectFailure(
+                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE, str(exc)
+            ) from exc
         except (RuntimeError, ValueError) as exc:
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",

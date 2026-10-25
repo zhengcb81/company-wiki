@@ -163,6 +163,25 @@ def test_compiler_check_matches_single_asset_and_detects_drift(tmp_path):
     assert altered.read_text(encoding="utf-8") == '{}'
 
 
+def test_navigation_context_policy_has_one_maintained_defaults_owner():
+    from tools.import_reading_policies import compile_catalog
+    from company_wiki.document_understanding.profiles import registry
+    defaults = json.loads((ROOT / "src/company_wiki/document_understanding/profiles/reading_defaults.json").read_text(encoding="utf-8"))
+    assert defaults.get("context_policy") == registry._CATALOG["context_policy"]
+    assert compile_catalog(ROOT)["context_policy"] == defaults["context_policy"]
+
+
+def test_context_policy_default_change_is_preserved_by_compiler(tmp_path):
+    from tools.import_reading_policies import compile_catalog
+    defaults = json.loads((ROOT / "src/company_wiki/document_understanding/profiles/reading_defaults.json").read_text(encoding="utf-8"))
+    policy = {"schema_version": "reading-context-policy/1", "version": "test-change",
+              "generic_navigation_titles": ["Neutral business navigation"]}
+    defaults["context_policy"] = policy
+    path = tmp_path / "defaults.json"
+    path.write_text(json.dumps(defaults), encoding="utf-8")
+    assert compile_catalog(ROOT, path)["context_policy"] == policy
+
+
 def test_shared_adopted_instructions_are_part_of_local_profile_version(monkeypatch):
     from company_wiki.document_understanding.profiles import registry
     obs = observation(["FORM 10-Q"], regime="sec", form_type="10-Q")

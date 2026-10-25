@@ -1,0 +1,25 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/document_understanding_root/test_du2_policy_registry.py::test_navigation_context_policy_has_one_maintained_defaults_owner",
+    "tests/unit/document_understanding_root/test_du2_policy_registry.py::test_context_policy_default_change_is_preserved_by_compiler",
+    "tests/unit/du11_production/test_pdf_production.py::test_source_work_limit_has_a_specific_terminal_production_diagnostic"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-jeh_25u8",
+  "exit_code": 1,
+  "elapsed_seconds": 5.2,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-jeh_25u8\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

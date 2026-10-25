@@ -1,10 +1,10 @@
 # 当前项目状态与接手入口
 
-## 当前行动：局部原文流独审已通过，提交推送（2026-10-25）
+## 当前行动：来源输入12/2，修复精确CI六项后发布（2026-10-25）
 
-**整体目标未完成。** 当前主线仍是“来源处理→正式摘要→缓存恢复→RF实际采用→四路审查→新公司泛化”。已发布共享引擎v4摘要和恢复工程；真实摘要内容、当前RF消费和完整公司循环仍待验收。最新产品代码为`8a258b93404f351ae92cd3449198b42141ef4169`，已推送master，精确[CI40185824736](https://github.com/zhengcb81/company-wiki/actions/runs/40185824736) completed/success。正常pre-commit通过，pre-push154项通过（108.09秒）；六个被审源码/测试与Git中的LF字节一致。见[发布收据](review/st-a05-parent-investigation-20261025/publication.json)。
+**整体目标未完成。** 当前主线仍是“来源处理→正式摘要→缓存恢复→RF实际采用→四路审查→新公司泛化”。已发布共享引擎v4摘要和恢复工程；真实摘要内容、当前RF消费和完整公司循环仍待验收。最新产品代码为`06c1a5839302f4e297d70a13267a8aa490eef719`，已推送master，[精确CI40190090649](https://github.com/zhengcb81/company-wiki/actions/runs/40190090649)已完成/failure：六项在本地同四文件精确复现。ROOT跟进已218项通过（16.45秒）、compiler --check与Ruff通过，独立终审已PASS，待新提交推送及精确CI；不改写06c历史CI为绿。正常pre-commit Ruff/全src mypy/host guard通过，pre-push154通过（52.28秒）；17被审源码/测试与Git的LF字节一致。见[发布收据](review/st-a05-local-flow-20261025/publication.json)。此前8a258b93分页/多层列表组件CI40185824736成功。
 
-**最新独立来源/输入复核为10 PASS、4 PARTIAL、0 MISSING。** 这是[2026-10-25来源与模型输入复审](review/annual14-current-source-review-20261025/independent/report.md)，不是模型响应或预测验收。原8/6/0报告保留为历史，不能混成同一轮分数。A03地域定义与A09日期/容量局部上下文已补齐输入；A01/A05仍缺跨页Chemistry父级，A02/A13精确财务口径仍需完整来源和当前消费证明。所有响应语义NOT_REVIEWED、当前RF采用OPEN。
+**最新独立来源/输入复核为12 PASS、2 PARTIAL、0 MISSING。** [新14项独立复评](review/annual14-local-flow-regrade-20261025/report.md)绑定06c及attempt05实际62任务输入；A01/A05跨页Chemistry父级已在各自任务补齐，旧10PASS保持。A02/A13精确持续/终止经营金额、货币单位、重述及时段/时点口径仍需完整来源/金融读取和RF实际采用；不要求全表叙述切片。189个原文member offset与32条原金标引句已逐一验真，原件SHA不变。旧10/4及8/6报告保留为历史；模型响应语义NOT_REVIEWED、当前RF OPEN。来源输入通过不代签工程CI或完整公司循环。
 
 **ST-A13工程验收通过：** 中性测试复现“具名业务与一般政策共用coverage”及“分号条件拆断范围”的共因，新增共享来源阅读用途，不改选材cap。独审进一步发现归属误绑、helper未进缓存实现SHA、反复尾文扫描超计费三项P2；均已补RED并修在原责任层；独审增量还发现合法条件漏读、逗号/whereas串主体和0.8兼容泄漏，亦全部修复。I1–I6终审PASS、范围内零未解。最终真实attempt06：原件249页、112片段/9,088字符、63个实际摘要任务、工作量12,879,238/16M未耗尽，具体Testing/Biology按时段确认的204字正文和本地标题已补回；精确时段/时点金额仍不在叙述输入，A13整项继续PARTIAL。没有新模型调用、下载或原件副本。见[本轮证据目录](review/st-a13-recognition-scope-20261025/)。
 
@@ -16,9 +16,9 @@
 
 **A01/A05工程与真实数据边界：** 变化分页计数和三层native frames已实现；独审误页码、跨边带/格式歧义、实际章节位置问题均先RED再在共享owner修复，同一物理边只观察一次。最终206项15.44秒、Ruff、Conda mypy3源码通过，[独立终审](review/st-a05-parent-investigation-20261025/independent/final-review.md)确认工程子节点通过、范围内零未解；已发布8a258b93并通过精确CI。旧10PASS及A13七span均在实际重编payload保持，未重评模型响应。真实attempt02：249页、112span/9030字符/63任务、work12,978,295/16M；原件/配置/目录库与回放中的375源码稳定，0下载/模型/原件副本。真实页码识别已好，但Chemistry跨页父级仍缺，A01/A05保持OPEN：全局partial来自deferred_table_pages字段（249页已读、errors/opaque均空；该字段由geometry_session.deferred赋值，具体延期用途下一节点核对），两端column为None尚未进入下一校验。不得把206绿代签此目标。当前来源评分仍为上一独审10/4/0，正式响应NOT_REVIEWED/RF OPEN。
 
-**本轮局部流已通过最终独立审查，待正常发布：** 文字/几何覆盖分维度、单栏正证、最小必需上下文及缓存闭包均已修在原owner。attempt05仍112span/9060字符/62任务，work13,450,656/16M；D&M和TIDES自己的task已含Chemistry父级与期间，旧10PASS/A13七span保持，原件/config/catalog稳定，0新费用。独审发现的预算吞异常、错位栏位、弱caption与显式context误裁剪等均先RED再修。集中339通过/6既有skip，最后导航/缓存补58通过（有重叠），Ruff/12源码mypy通过。全局partial仍在，14项未重评、正式响应NOT_REVIEWED、当前RF OPEN。见[本轮完整证据](review/st-a05-local-flow-20261025/README.md)。
+**本轮局部流已通过最终独立审查并推送：** 文字/几何覆盖分维度、单栏正证、最小必需上下文及缓存闭包均已修在原owner。attempt05仍112span/9060字符/62任务，work13,450,656/16M；D&M和TIDES自己的task已含Chemistry父级与期间，旧10PASS/A13七span保持，原件/config/catalog稳定，0新费用。独审发现的预算吞异常、错位栏位、弱caption与显式context误裁剪等均先RED再修。集中339通过/6既有skip，最后导航/缓存补58通过（有重叠），Ruff/12源码mypy通过。全局partial仍在；随后独立14项重评为12/2/0，正式响应NOT_REVIEWED、当前RF OPEN。见[本轮完整证据](review/st-a05-local-flow-20261025/README.md)。
 
-**下一步唯一行动：** 本节点最终独立审查已PASS，正常提交推送、观察精确CI；随后集中复评14项来源输入并用其他市场/文种真实资料验证，再按配置运行新正式摘要、缓存零重复计费恢复和RF实际采用，继续W12四审/公司holdout。既有付费收据不改写，外包W16/W17/W18路径不写。
+**下一步唯一行动：** 完成CI跟进独立终审、正常提交推送并核对新精确HEAD CI。六项来自预算新旧契约、generated catalog维护链、缺字段伪engine及固定导航块数；没有回退止读预算或扩cap，见[CI共因与验收](review/st-a05-local-flow-20261025/ci-followup.md)。之后用其他市场/文种真实资料验证，再按配置运行新正式摘要、缓存零重复计费恢复和RF实际采用，继续W12四审/公司holdout。既有付费收据不改写，外包W16/W17/W18路径不写。
 
 累计预算仍按用户授权10M tokens/$20，母账1,783,378 tokens/$0.724836，unknown保留。本轮0新增费用。相关目录首次1606通过/11临时目录setup错误；这11项在正常主机同断言重跑全通过。最终108项定向测试、Ruff/mypy通过；不合并成“一次全绿1617项”，[独立最终复审](review/st-a13-recognition-scope-20261025/independent/final-review.md)已通过，范围仅限工程与来源输入。
 

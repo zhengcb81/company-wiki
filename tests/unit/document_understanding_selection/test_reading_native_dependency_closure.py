@@ -544,21 +544,20 @@ def test_running_furniture_binds_physical_refs_without_becoming_model_material()
                 )
             }
             materials = [by_span[sid] for sid in actual]
-            assert (
-                len(
-                    {
-                        (unit.coordinates.page_number, unit.metadata["pdf_block"])
-                        for unit in materials
-                    }
-                )
-                == 3
-            )
+            assert {unit.unit_id for unit in materials} == {
+                u['parent'].unit_id, u['intro'].unit_id, u['target'].unit_id,
+            }
+            assert {(unit.coordinates.page_number, unit.metadata['pdf_block'])
+                    for unit in materials} == {(1, 1), (2, 1)}
     view, texts = _model(selected)
     tasks = [task for task in view.plan.tasks if support.intersection(task.support_ids)]
     assert tasks and all(
         not any("Neutral annual report" in text for text in texts[task.key])
         for task in tasks
     )
+    assert all(not any('一、经营情况' in text for text in texts[task.key]) for task in tasks)
+    assert all(all(any(unit.raw_text in text for text in texts[task.key])
+                   for unit in (u['parent'], u['intro'], u['target'])) for task in tasks)
 
 
 def test_native_page_proofs_survive_public_select_transport_and_stay_out_of_model_input(monkeypatch):

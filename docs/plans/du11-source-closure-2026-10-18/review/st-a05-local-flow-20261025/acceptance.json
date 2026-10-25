@@ -7,5 +7,8 @@
   "all_17_hashes_match": true,
   "formal_summary": "NOT_REVIEWED",
   "current_RF": "OPEN",
-  "publication": "PENDING_NORMAL_COMMIT_PUSH"
+  "publication": "06c_CI_FAILED6; FOLLOWUP218_PASS_INDEPENDENT_PASS_PENDING_PUBLISH",
+  "commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+  "ci_followup_review": "independent/ci-followup-review.json",
+  "source_input_grade": "12PASS2PARTIAL"
 }

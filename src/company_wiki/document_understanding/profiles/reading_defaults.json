@@ -759,5 +759,26 @@
       "交叉引用中提到的表单名称不构成本文档类型"
     ]
   },
-  "shared_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。"
+  "shared_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。",
+  "context_policy": {
+    "version": "1.0.0",
+    "purpose": "Only exact generic navigation titles may be omitted from model prose when source-native semantic ancestry is present. Keep source structure and all subject/region/period/unit/qualification headings.",
+    "generic_navigation_titles": [
+      "管理层讨论与分析",
+      "管理层讨论及分析",
+      "经营情况讨论与分析",
+      "报告期内主要经营情况",
+      "主要经营情况",
+      "经营情况",
+      "业务回顾",
+      "董事会报告",
+      "Management discussion and analysis",
+      "Management's discussion and analysis",
+      "Management discussion and analysis of financial condition and results of operations",
+      "Management's discussion and analysis of financial condition and results of operations",
+      "Business review",
+      "Operating review",
+      "Directors' report"
+    ]
+  }
 }

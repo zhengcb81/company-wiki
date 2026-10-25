@@ -1,0 +1,38 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-jeh_25u8\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 3 items
+
+tests\unit\document_understanding_root\test_du2_policy_registry.py FF    [ 66%]
+tests\unit\du11_production\test_pdf_production.py F                      [100%]
+
+================================== FAILURES ===================================
+______ test_navigation_context_policy_has_one_maintained_defaults_owner _______
+tests\unit\document_understanding_root\test_du2_policy_registry.py:170: in test_navigation_context_policy_has_one_maintained_defaults_owner
+    assert defaults.get("context_policy") == registry._CATALOG["context_policy"]
+E   AssertionError: assert None == {'version': '1.0.0', 'purpose': 'Only exact generic navigation titles may be omitted from model prose when source-nati...on headings.', 'generic_navigation_titles': ['管理层讨论与分析', '管理层讨论及分析', '经营情况讨论与分析', '报告期内主要经营情况', '主要经营情况', '经营情况', ...]}
+E    +  where None = <built-in method get of dict object at 0x0000023083FF63C0>('context_policy')
+E    +    where <built-in method get of dict object at 0x0000023083FF63C0> = {'schema_version': 'du-reading-defaults/1', 'legacy_bindings': [{'profile_id': 'cn_annual', 'family': 'annual', 'regim...务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。'}.get
+_________ test_context_policy_default_change_is_preserved_by_compiler _________
+tests\unit\document_understanding_root\test_du2_policy_registry.py:182: in test_context_policy_default_change_is_preserved_by_compiler
+    assert compile_catalog(ROOT, path)["context_policy"] == policy
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'context_policy'
+____ test_source_work_limit_has_a_specific_terminal_production_diagnostic _____
+tests\unit\du11_production\test_pdf_production.py:130: in test_source_work_limit_has_a_specific_terminal_production_diagnostic
+    assert 'document_work limit reached' in failure.value.detail
+E   AssertionError: assert 'document_work limit reached' in 'verified PDF cannot be parsed completely'
+E    +  where 'verified PDF cannot be parsed completely' = _SelectFailure(code='PARSER_INCOMPLETE', outcome=<HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>, detail='verified PDF cannot be parsed completely').detail
+E    +    where _SelectFailure(code='PARSER_INCOMPLETE', outcome=<HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>, detail='verified PDF cannot be parsed completely') = <ExceptionInfo _SelectFailure(code='PARSER_INCOMPLETE', outcome=<HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>, detail='verified PDF cannot be parsed completely') tblen=3>.value
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_root/test_du2_policy_registry.py::test_navigation_context_policy_has_one_maintained_defaults_owner
+FAILED tests/unit/document_understanding_root/test_du2_policy_registry.py::test_context_policy_default_change_is_preserved_by_compiler
+FAILED tests/unit/du11_production/test_pdf_production.py::test_source_work_limit_has_a_specific_terminal_production_diagnostic
+============================== 3 failed in 3.14s ==============================

@@ -89,7 +89,9 @@ def test_layout_negative_table_evidence_survives_bridge_without_inventing_table(
                 "metadata": {}, "coverage": {}, "units": [payload]}
     before = deepcopy(original)
     def layout_engine(*args, **kwargs):
-        return {"unit_hints": [{"unit_id": "value-row", "heading_level": None,
+        return {"schema_version": "du2-layout-hints/1", "source_ref": original["source_ref"],
+                "groups": [], "relations": [], "reading_order": [],
+                "unit_hints": [{"unit_id": "value-row", "heading_level": None,
                   "text_column": None, "basis": ["in_table_region"]}],
                 "coverage": {"complete": True}, "diagnostics": []}
     monkeypatch.setattr(layout_bridge, "derive_layout_hints", layout_engine)

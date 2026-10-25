@@ -76,7 +76,8 @@ def compile_catalog(source_root: Path, defaults_path: Path | None = None) -> dic
     return {"schema_version": SCHEMA, "families": families, "facets": facets,
             "family_coverage": family_coverage, "facet_coverage": facet_coverage,
             "legacy_bindings": bindings, "fallback": defaults["fallback"],
-            "shared_focus": defaults["shared_focus"]}
+            "shared_focus": defaults["shared_focus"],
+            "context_policy": defaults["context_policy"]}
 
 
 def main() -> int:

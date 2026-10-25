@@ -7,7 +7,7 @@ import pytest
 
 from company_wiki.automation import narrative_select as execution
 from company_wiki.automation import narrative_selector_binding as binding
-from company_wiki.document_understanding.layout_hints.contract import WorkBudget
+from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_catalog import narrative_evidence as source
 from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeEvidencePackage
 
@@ -104,16 +104,38 @@ def test_actual_default_demand_reaches_deep_operating_pages_without_prefix_scan(
         (u.unit_id, u.raw_text, u.coordinates) for u in legacy.units]
 
 
-def test_zero_shared_work_keeps_base_text_but_never_requests_native_tables(monkeypatch):
+def test_zero_shared_work_stops_before_native_text_or_tables(monkeypatch):
     calls = []
+    monkeypatch.setattr(source, '_pdf_text_blocks',
+        lambda *args, **kw: calls.append('native_text'))
     monkeypatch.setattr(fitz.Page, 'find_tables',
         lambda page, **kw: calls.append(page.number) or SimpleNamespace(tables=[]))
     data = synthetic_pdf()
-    parsed = source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
-        selector_version='0.9.0', work_budget=WorkBudget(0))
-    assert parsed.pages_read == 80 and parsed.units
+    budget = WorkBudget(0)
+    with pytest.raises(WorkBudgetExceeded) as failure:
+        source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
+            selector_version='0.9.0', work_budget=budget)
     assert calls == []
-    assert parsed.layout_coverage['planning']['complete'] is False
+    assert budget.used == 0 and budget.exhausted
+    assert failure.value.dimension == 'document_work' and failure.value.limit == 0
+
+
+def test_source_work_limit_has_a_specific_terminal_production_diagnostic(monkeypatch):
+    from company_wiki import resource_budget
+    observed = []
+    monkeypatch.setattr(resource_budget, 'new_document_work_budget', lambda: WorkBudget(0))
+    monkeypatch.setattr(source, '_pdf_text_blocks', lambda *args, **kw: observed.append('read'))
+    handler = execution.NarrativeSelectHandler(reader=object(), selector_version='0.9.0')
+    monkeypatch.setattr(handler, '_run_selector', lambda *args, **kw: observed.append('select'))
+    data = synthetic_pdf()
+    original = payload()
+    original.source_ref.content_sha256 = hashlib.sha256(data).hexdigest()
+    with pytest.raises(execution._SelectFailure) as failure:
+        handler._select_pdf(original, data, SimpleNamespace(checkpoint=lambda: None))
+    assert failure.value.code == 'PARSER_INCOMPLETE'
+    assert failure.value.outcome == execution.HandlerOutcome.TERMINAL_FAILURE
+    assert 'document_work limit reached' in failure.value.detail
+    assert observed == []
 
 
 def test_resource_exhausted_during_capture_cannot_execute_a_reserved_finder(monkeypatch):
@@ -158,13 +180,17 @@ def test_budget_rechecked_after_text_emission_at_the_actual_finder(monkeypatch):
 @pytest.mark.parametrize('options', [{'full_table_scan': True}, {'table_pages': (75,)}])
 def test_explicit_geometry_request_cannot_bypass_the_same_zero_budget(monkeypatch, options):
     calls = []
+    monkeypatch.setattr(source, '_pdf_text_blocks',
+        lambda *args, **kw: calls.append('native_text'))
     monkeypatch.setattr(fitz.Page, 'find_tables',
         lambda page, **kw: calls.append(page.number + 1) or SimpleNamespace(tables=[]))
     data = synthetic_pdf()
-    parsed = source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
-        selector_version='0.9.0', work_budget=WorkBudget(0), **options)
-    assert parsed.pages_read == 80 and parsed.units
-    assert not calls and not parsed.table_scan_pages
+    budget = WorkBudget(0)
+    with pytest.raises(WorkBudgetExceeded) as failure:
+        source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
+            selector_version='0.9.0', work_budget=budget, **options)
+    assert not calls and budget.used == 0 and budget.exhausted
+    assert failure.value.dimension == 'document_work' and failure.value.limit == 0
 
 
 @pytest.mark.parametrize('heading,expected', [('XYZ_unmatched_heading', True), ('风险因素', False)])

@@ -1,0 +1,112 @@
+{
+  "schema_version": "local-native-flow-publication/1",
+  "commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+  "pre_commit": "PASS: Ruff, full mypy src, host assumption guard; no bypass",
+  "pre_push": "154 PASS /52.28s; no bypass; full validation delegated to CI",
+  "reviewed_bindings": {
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "reviewed_physical_sha256": "e2c568258d6857f6e0702a8ba725bd7cf635bbb85cdd944ae8961dcfb2fdbeef",
+      "git_lf_sha256": "0ac8c7b9d18a13faee545581d6ff4c436d67f5ef7dceed11d6d3bdca4d847610",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/layout_bridge.py": {
+      "reviewed_physical_sha256": "ea6eb10c2ed687319f01f918b96b14bf4ff87dcee85cca5352e3251f413f38a5",
+      "git_lf_sha256": "db8814ba5f0313102cb8a11a72c3f597815177e3316bf1e8f084120662c764a1",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/layout_hints/__init__.py": {
+      "reviewed_physical_sha256": "997b295d388604f23503958c1e4e9de2fb69a3a1be1910086a4da8fd9ed0ec9d",
+      "git_lf_sha256": "ba8543176e1dda2b54e86b257b0e7f82f843b03a0265af0f033cbaac8de6bc79",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/layout_hints/columns.py": {
+      "reviewed_physical_sha256": "e19dfedb9e86a4edbb189558a3cf75074571f6e378c1ec44cf77c091e1665a5c",
+      "git_lf_sha256": "9f9e8b8d21092dbeac39d09d074ecd6cbc2444bc7e09112bc2b322af6f464eb2",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/narrative_continuity.py": {
+      "reviewed_physical_sha256": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4",
+      "git_lf_sha256": "9e5c130debfc1a18261bd143a38625f151f95eed7f09750d2efeaca9327dec6e",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/observation_adapter.py": {
+      "reviewed_physical_sha256": "aaf39f3e4a6413014e2f56a07f99bbf76cec591133bbdfab28acabe445843e1d",
+      "git_lf_sha256": "357e67be76f06960aec1585b6401fea24a08016d58933c27af0a7cccf7cc2259",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/pipeline.py": {
+      "reviewed_physical_sha256": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056",
+      "git_lf_sha256": "bb7511212c03eadfa38cf3d2eadcf4badfbb28d481b421dc942ebe1813e141b2",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": {
+      "reviewed_physical_sha256": "6da5b087eaae8126e75e0075af5e248309c747abc99457c5c6292e48f3f7d909",
+      "git_lf_sha256": "3ecce7673a0ee37972bf35188a2612884292fabe2b34843bc6ec05476416842f",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/profiles/registry.py": {
+      "reviewed_physical_sha256": "1b0649063b880d5fc84506c31d973c9c2b5c58def99010370798b47875683b4b",
+      "git_lf_sha256": "022a8e537fe77bb90269fb68457d870ece01119fa3b19f3858725de53cee6474",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/source_catalog/narrative_document.py": {
+      "reviewed_physical_sha256": "889df37ad7325325a05d79e5a15cf45a5b395d5a273f856c0a2ee2662527d7c9",
+      "git_lf_sha256": "d02b1895ac2fe2af8b526a965a9996650cf4dd2714dc801f23caaf0edcbd0efb",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/source_catalog/narrative_evidence.py": {
+      "reviewed_physical_sha256": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337",
+      "git_lf_sha256": "b39a92f3d8561b495cfdd2ee9f07f6017de9aedd45516aa3924b3283047f4012",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": {
+      "reviewed_physical_sha256": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050",
+      "git_lf_sha256": "4d7924c450e92a6cf2ee7da2f23f1fa2b85cc51639b380a0bff798c2b71650be",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "reviewed_physical_sha256": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+      "git_lf_sha256": "5a29f674fe93254e4997bba4671888cdbea91b003f9df4049f7e8cb0ffa96043",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": {
+      "reviewed_physical_sha256": "8bcb61367e11d30647cb86b697cb3eb3a2cefea0437194c6ef30a459243ded7a",
+      "git_lf_sha256": "1b45c7909634fa5f670e78b0c29e0796560ddcc8cd49eb55234baef78c91e761",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py": {
+      "reviewed_physical_sha256": "93654e6bc32f31a0bef33a45c0f4ba0ed8afb6831f2b73e3935c97b07bbf2b78",
+      "git_lf_sha256": "93654e6bc32f31a0bef33a45c0f4ba0ed8afb6831f2b73e3935c97b07bbf2b78",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_navigation_context.py": {
+      "reviewed_physical_sha256": "e870b9e24fe43b2dfc26fa8a672b81c8145101e9870ea6f8d6eea0f63c05d8ce",
+      "git_lf_sha256": "fbcb0efb0fe4277c5c1a24720a613806877d41e1cac7142740b089a5c9dc5276",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_layout_hints/test_single_body_lane.py": {
+      "reviewed_physical_sha256": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105",
+      "git_lf_sha256": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105",
+      "lf_equivalent": true
+    }
+  },
+  "independent_review_sha256": "8a81a9c425d0e158b997ffb6c36e6320bc17d4ca30e25e38d8def8e47fceec74",
+  "scope": "SOURCE_CONTEXT_ENGINEERING_ONLY",
+  "formal_summary": "NOT_REVIEWED",
+  "RF": "OPEN",
+  "ci": [
+    {
+      "id": 40190090649,
+      "head_sha": "06c1a5839302f4e297d70a13267a8aa490eef719",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40190090649",
+      "created_at": "2026-10-25T11:43:55Z",
+      "updated_at": "2026-10-25T11:48:21Z"
+    }
+  ],
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "pushed_to": "origin/master"
+}

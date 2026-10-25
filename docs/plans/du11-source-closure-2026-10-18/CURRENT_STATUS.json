@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "LOCAL_NATIVE_FLOW_INDEPENDENT_PASS_PUBLICATION_NEXT; FORMAL_SUMMARY_RF_OPEN",
+  "overall_status": "SOURCE_INPUT12_PASS2_PARTIAL; CI06c_SIX_FAILURES_REPRODUCED_FOLLOWUP218_PASS_INDEPENDENT_PASS_READY_TO_PUBLISH; FORMAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
@@ -19,22 +19,22 @@
     "root_scope": "CWP production source path and final real summary/cache/RF content acceptance; do not write delegated RF/Audit paths or W18 new replay/test paths during author work",
     "new_model_calls": 0,
     "new_downloads": 0,
-    "annual14_grade_unchanged": "Historical report8/6/0 preserved; separate current source/input review10/4/0; model semantics not reviewed"
+    "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
+  "last_code_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
   "code_ci": {
-    "id": 40185824736,
-    "head_sha": "8a258b93404f351ae92cd3449198b42141ef4169",
+    "id": 40190090649,
+    "head_sha": "06c1a5839302f4e297d70a13267a8aa490eef719",
     "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40185824736",
-    "created_at": "2026-10-25T10:41:44Z",
-    "updated_at": "2026-10-25T10:46:55Z"
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40190090649",
+    "created_at": "2026-10-25T11:43:55Z",
+    "updated_at": "2026-10-25T11:48:21Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -306,7 +306,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "FORMAL_V4_LIFECYCLE_AND_FF_REUSE_PASS; OLD_V5_RF_NOT_CONSUMED; MICROSOFT_V4_PREFLIGHT_SUPPORTS_8_OF_8_REQUIRED_FACTS; WUXI_ANNUAL14_CONTENT_8_PASS_6_PARTIAL; ST_A02_TABLE_CONTEXT_DIAGNOSED_STRUCTURED_VALUE_AND_RF_USE_OPEN; TRACE_OTHER_PARTIAL_ROOT_CAUSES",
+      "status": "CURRENT_SOURCE_INPUT12_PASS2_PARTIAL; LOCAL_FLOW06c_SOURCE_PASS_CI_FAILURE_FOLLOWUP218_PASS_REVIEWING; FORMAL_RESPONSES_NOT_REVIEWED; CURRENT_RF_OPEN; W16_W17_W18_ISOLATED",
       "mainline": true
     },
     {
@@ -335,7 +335,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Normal commit/push of independently accepted local-native-flow source/tests/PWF and observe exact CI. Then bounded source/input regrade and other-market/document checks, configured real summary, cache restart with no duplicate spend and actual RF use. Do not touch W16/W17/W18 author paths.",
+  "next_step_now": "Normal commit/push of independently passed CI followup and exactHEAD CI observation. Source/input14 regrade12PASS2PARTIAL complete; independent cross-market/document source preflight active. Then configured formal summary/cache recovery/actual RF complete-financial-source adoption. W16/W17/W18 author paths stay isolated.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -842,7 +842,7 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Normal commit/push of independently accepted local-native-flow source/tests/PWF and observe exact CI. Then bounded source/input regrade and other-market/document checks, configured real summary, cache restart with no duplicate spend and actual RF use. Do not touch W16/W17/W18 author paths.",
+    "Observe exact06c1a583 CI while independent reviewer regrades frozen14 source/input targets against attempt05. Then other-market/document real checks and configured formal summary/cache recovery/actual RF adoption. W16/W17/W18 author paths stay isolated.",
     "Bounded14-target source/input regrade and other-market/document real checks; then configured formal summary/cache recovery/RF actual adoption; keep historical paid receipts immutable and content/RF status open until tested.",
     "Receive independent W16 RF basis/W17 Audit coverage/W18 holdout deliveries and integrate after review; do not write author worktrees while active.",
     "Continue W12 four-review and company holdout loop; independent engineering success is not complete company quality acceptance."
@@ -1866,19 +1866,29 @@
   },
   "annual14_current_source_input_review_20261025": {
     "status": "SOURCE_INPUT_ONLY_REVIEWED",
-    "passed": 10,
-    "partial": 4,
+    "passed": 12,
+    "partial": 2,
     "missing": 0,
     "partial_targets": [
-      "ST-A01",
       "ST-A02",
-      "ST-A05",
       "ST-A13"
     ],
-    "review": "review/annual14-current-source-review-20261025/independent/report.json",
+    "newly_passed": [
+      "ST-A01",
+      "ST-A05"
+    ],
+    "review": "review/annual14-local-flow-regrade-20261025/report.json",
+    "source_product_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+    "actual_model_payload_sha256": "33559128b81e172df78d87917b5f8191b11a7e387404c687da610e2f92afb817",
+    "raw_original_sha_verified": true,
+    "source_member_offsets_verified": 189,
+    "original_gold_quotes_verified": 32,
+    "previous_10_4_0_report_preserved": "review/annual14-current-source-review-20261025/independent/report.json",
     "historical_report_8_6_0_preserved": true,
     "model_response_semantics": "NOT_REVIEWED",
-    "current_rf_adoption": "OPEN"
+    "current_rf_adoption": "OPEN",
+    "remaining_financial_path": "Existing complete source/financial reader must actually bind exact amounts/basis in RF; do not expand all financial tables into narrative slices",
+    "ci_boundary": "06c exact CI has6 failures, ROOT218-pass followup under independent review; this source grade is not engineering green"
   },
   "annual14_st_a13_recognition_scope_20261025": {
     "status": "PUBLISHED_EXACT_CI_SUCCESS",
@@ -1945,9 +1955,9 @@
     "engineering_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
     "publication": "review/st-a05-parent-investigation-20261025/publication.json"
   },
-  "last_source_product_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
+  "last_source_product_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
   "a01_a05_local_flow_20261025": {
-    "status": "INDEPENDENT_PASS_PENDING_NORMAL_PUBLICATION",
+    "status": "SOURCE_INPUT_INDEPENDENT_PASS12_2; EXACT06c_CI_FAILED6; ROOT_FOLLOWUP218_PASS_INDEPENDENT_PASS_READY_TO_PUBLISH",
     "evidence": "review/st-a05-local-flow-20261025/README.md",
     "verification": "review/st-a05-local-flow-20261025/verification.json",
     "source_pages": 249,
@@ -1971,6 +1981,27 @@
     "new_paid_calls": 0,
     "downloads": 0,
     "raw_copies": 0,
-    "independent": "review/st-a05-local-flow-20261025/independent/final-review.json"
+    "independent": "review/st-a05-local-flow-20261025/independent/final-review.json",
+    "commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+    "publication": "review/st-a05-local-flow-20261025/publication.json"
+  },
+  "a01_a05_ci_followup_20261025": {
+    "status": "218_PASS_INDEPENDENT_PASS_READY_TO_PUBLISH",
+    "evidence": "review/st-a05-local-flow-20261025/ci-followup.md",
+    "initial_reproduction": "6 failed122 passed in same4 files",
+    "actual_root_red": "defaults/compiler2fail; valid-hash handler diagnostic1fail; earlier invalid-hash fixture attempts retained separately",
+    "final_tests": "218PASS /16.45s; isolated temp restored",
+    "catalog_check": "PASS",
+    "root_causes": [
+      "generated policy not in defaults/compiler ownership chain",
+      "zero-work tests assumed unaccounted full base scan",
+      "layout fake omitted required groups",
+      "block-count assertion encoded removable generic navigation"
+    ],
+    "no_precharge_rollback": true,
+    "no_runtime_catalog_change": true,
+    "new_model_calls": 0,
+    "new_downloads": 0,
+    "independent_review": "review/st-a05-local-flow-20261025/independent/ci-followup-review.json"
   }
 }

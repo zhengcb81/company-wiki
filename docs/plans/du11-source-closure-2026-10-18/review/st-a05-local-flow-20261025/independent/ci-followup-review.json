@@ -1,0 +1,74 @@
+{
+  "schema_version": "independent-ci-followup-review/1",
+  "status": "PASS_SCOPED_CI_REGRESSION_FIX",
+  "head": "06c1a5839302f4e297d70a13267a8aa490eef719",
+  "review_report": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/independent/ci-followup-review.md",
+    "sha256": "62247a8b579eaa15dd73f33afe725a6e8b349494d8709a717262b0809f22550b"
+  },
+  "changed_file_sha256": {
+    "src/company_wiki/automation/narrative_select.py": "62cf8c8df200a82d34dc0a1df387a615f379050b0234b94f9099784ff9135f12",
+    "src/company_wiki/document_understanding/profiles/reading_defaults.json": "8cf8210e3a85f7941cba21db3469461982d3f4e613237ba351055997f46592af",
+    "tools/import_reading_policies.py": "f25a955cd1e903cbc86573211946635f2972d13bb46f24dac7ae8ab6832b4bc6",
+    "tests/unit/du11_production/test_pdf_production.py": "3d9e454a7c26efd3b9e3e359b00d945327aebffd7db75c70a0081fc1287f27b3",
+    "tests/unit/document_understanding_root/test_du2_policy_registry.py": "31a65508e447d4d92f481dcb67d983d9bc7a928071220e20dbee7470f67deb97",
+    "tests/unit/document_understanding_root/test_inferred_heading_data_rows.py": "778a156318a9f8ac19dca75acea6078e5606521470161a91dd19d73d688fd453",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "41c7315f5fc8840f3d084ba2cc7d1dc233028a7fe5df216b17a99783108ae2af"
+  },
+  "prior_review_integrity": {
+    "report": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/independent/final-review.json",
+    "report_sha256": "8a81a9c425d0e158b997ffb6c36e6320bc17d4ca30e25e38d8def8e47fceec74",
+    "previously_reviewed_product_test_files_unchanged": "17/17",
+    "previously_reviewed_attempt05_evidence_files_unchanged": "9/9",
+    "verification_method": "Recomputed SHA-256 for every path in the prior final-review.json manifests against current workspace files."
+  },
+  "root_cause_closure": [
+    {
+      "finding": "Three zero-work-budget tests expected base PDF text scans to proceed for free.",
+      "resolution": "Tests now assert WorkBudgetExceeded before any page read or table-finder call; the production handler preserves a terminal PARSER_INCOMPLETE result with the budget reason.",
+      "status": "PASS"
+    },
+    {
+      "finding": "The layout bridge test double omitted the required groups field from the production layout contract.",
+      "resolution": "The test stub now mirrors the complete production shape; no permissive product fallback was added.",
+      "status": "PASS"
+    },
+    {
+      "finding": "context_policy was present in the generated runtime catalog but absent from its maintained defaults source and compiler path.",
+      "resolution": "reading_defaults.json is the source of truth and the catalog compiler carries the policy into the generated catalog; tests and compiler check verify parity.",
+      "status": "PASS"
+    },
+    {
+      "finding": "A running-furniture assertion treated an incidental three-block model payload as the correctness criterion.",
+      "resolution": "The test checks exact parent, period, target facts, physical proof blocks, and absence of generic navigation from model input.",
+      "status": "PASS"
+    }
+  ],
+  "test_evidence": {
+    "initial_regression_red": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/review-ci-regression-red/red.log",
+      "sha256": "0c200701c62fd63e591f8503fd663f4ec65d0043d3e924560cc54c9f2dc308c6",
+      "result": "6 failed, 122 passed"
+    },
+    "valid_handler_red": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/review-ci-handler-valid-red/red.log",
+      "sha256": "75a43488ae2cb693e9c3105e9d5168aa356f1217b3e1acf9476c119574839f18",
+      "result": "Valid source SHA reproduces lost budget diagnostic before the targeted handler fix."
+    },
+    "final_green": {
+      "log_path": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/review-ci-final2-green/final.log",
+      "log_sha256": "81f0c8f10a48aefd60fff281a63ca90699b5fdd8919ccf89e72b806da0022c31",
+      "receipt_path": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/review-ci-final2-green/final-receipt.json",
+      "receipt_sha256": "a5cb928f519332b962364cc9085ff3ab4922ca8653add561b6b0a85501de94d7",
+      "passed": 218,
+      "failed": 0,
+      "elapsed_seconds": 16.45,
+      "runner_elapsed_seconds": 17.88,
+      "owned_test_root_restored_to_absent": true
+    },
+    "policy_compiler_check": "PASS: catalog verified: 24 families, 14 facets",
+    "git_diff_check": "PASS"
+  },
+  "unresolved_findings": [],
+  "scope_limit": "This review covers the six scoped CI failures and their 218-test regression suite only. It does not approve model-response quality, RF adoption, or whole-project/A05 closure. The parser contract for budget exhaustion is explicit failure, not resumable partial parsing."
+}

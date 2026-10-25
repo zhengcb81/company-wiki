@@ -1121,3 +1121,10 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 见review/st-a05-local-flow-20261025/README.md与verification.json。物理proof、最小model上下文与来源数据验收分开：attempt01/02真回归保留，最后attempt05的三条DM/TIDES各自task含Chemistry/报告期，旧10PASS/A13七span保持。112/9060/62task，13,450,656/16M，0费用/下载/原件副本。独审预算、lane错位/正常缩进、弱caption、显式owner context、英语smart apostrophe均新增RED后在owner修复；最后339P/6既有skip及补58P（重叠），Ruff/12源码mypy通过。仅压缩已有业务语义native head下的完整generic navigation标题，结构层路径不删，其他语义/独立依赖不动，唯一catalog/缓存闭包跟随。最终独审和发布尚待完成，正式摘要/RF/14项重评OPEN。首轮误填不存在测试路径exit4/0tests已保留，更正后有界检查通过，未反复跑全量。
 
 2026-10-25收尾补记：局部流最终独立终审PASS（17产品/测试SHA、9真实/测试证据SHA全匹配），范围内零未解；冻结verification.json保持被审前字节，不改旧pending快照，最终状态见acceptance.json与independent/final-review.json。准备正常提交推送；整个正式摘要/RF/公司循环不签收。
+
+2026-10-25发布补记：06c1a5839302f4e297d70a13267a8aa490eef719已正常提交/推送，pre-commit Ruff+全src mypy+host guard通过；pre-push154P/52.28秒，精确CI40190090649进行中，17被审文件与Git LF字节相同。保留最终完整attempt05和失败日志，中间四次重复全量投影/三份过期几何观察汇总为SHA+大小+判决，已只清理本轮自有JSON，减少5,191,068字节；发布证据约1.51MB，不含PDF副本。独立14项来源/输入重评已启动，模型响应/RF仍OPEN。
+
+
+## 2026-10-25 14项来源复评及CI共因跟进
+
+新独立报告12PASS/2PARTIAL/0MISSING；189 member offsets和32原金标引句验真，62任务payload与attempt05相同。A02/A13精确金融口径不以扩大叙述切片解决，RF须实际完整来源绑定。06c远端CI失败6项已本地6FAIL122PASS复现：defaults/compiler单源遗漏、零共享预算旧免费扫描契约、layout伪engine漏groups、generic导航固定block数。新增defaults/compiler两项真RED；handler新测试初版hash夹具错误，两次217PASS1FAIL如实保留，修为原件真实SHA并撤销新catch后再次真RED，随后正确owner捕获预算原因，最终218PASS/16.45s，临时目录恢复、compiler --check/Ruff通过。budget预付不回退、runtime catalog字节未改、不增加门禁。最终独审/新推送CI待完成，0新API/下载/原件副本。

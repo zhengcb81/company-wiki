@@ -1,0 +1,23 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/du11_production/test_pdf_production.py::test_source_work_limit_has_a_specific_terminal_production_diagnostic"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-r61aj6sg",
+  "exit_code": 1,
+  "elapsed_seconds": 3.86,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-r61aj6sg\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

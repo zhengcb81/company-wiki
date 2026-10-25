@@ -1,0 +1,88 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-4vmfnfbd\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 128 items
+
+tests\unit\du11_production\test_pdf_production.py ....F..FF..            [  8%]
+tests\unit\document_understanding_root\test_du2_policy_registry.py ..... [ 12%]
+...............F...                                                      [ 27%]
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py . [ 28%]
+.........................................F...................            [ 75%]
+tests\unit\document_understanding_selection\test_reading_native_dependency_closure.py . [ 76%]
+........................F.....                                           [100%]
+
+================================== FAILURES ===================================
+___ test_zero_shared_work_keeps_base_text_but_never_requests_native_tables ____
+tests\unit\du11_production\test_pdf_production.py:112: in test_zero_shared_work_keeps_base_text_but_never_requests_native_tables
+    parsed = source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
+src\company_wiki\source_catalog\narrative_evidence.py:1747: in parse_pdf_bytes
+    return _parse_pdf_document(
+src\company_wiki\source_catalog\narrative_evidence.py:1618: in _parse_pdf_document
+    scan_planned_pages(state, document, reading_context=reading_context, work_budget=source_budget)
+src\company_wiki\source_catalog\narrative_pdf_intent.py:158: in scan_planned_pages
+    budget.charge()
+src\company_wiki\resource_budget.py:113: in charge
+    raise WorkBudgetExceeded(
+E   company_wiki.resource_budget.WorkBudgetExceeded: document_work limit reached: phase=document, used=0, requested=1, limit=0
+_ test_explicit_geometry_request_cannot_bypass_the_same_zero_budget[options0] _
+tests\unit\du11_production\test_pdf_production.py:164: in test_explicit_geometry_request_cannot_bypass_the_same_zero_budget
+    parsed = source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
+src\company_wiki\source_catalog\narrative_evidence.py:1747: in parse_pdf_bytes
+    return _parse_pdf_document(
+src\company_wiki\source_catalog\narrative_evidence.py:1620: in _parse_pdf_document
+    _scan_and_emit_pdf_pages(state, document, full_table_scan=full_table_scan,
+src\company_wiki\source_catalog\narrative_evidence.py:1262: in _scan_and_emit_pdf_pages
+    state.prose_work_budget.charge()
+src\company_wiki\resource_budget.py:113: in charge
+    raise WorkBudgetExceeded(
+E   company_wiki.resource_budget.WorkBudgetExceeded: document_work limit reached: phase=document, used=0, requested=1, limit=0
+_ test_explicit_geometry_request_cannot_bypass_the_same_zero_budget[options1] _
+tests\unit\du11_production\test_pdf_production.py:164: in test_explicit_geometry_request_cannot_bypass_the_same_zero_budget
+    parsed = source.parse_pdf_bytes(data, source_id='source', source_sha256=hashlib.sha256(data).hexdigest(),
+src\company_wiki\source_catalog\narrative_evidence.py:1747: in parse_pdf_bytes
+    return _parse_pdf_document(
+src\company_wiki\source_catalog\narrative_evidence.py:1620: in _parse_pdf_document
+    _scan_and_emit_pdf_pages(state, document, full_table_scan=full_table_scan,
+src\company_wiki\source_catalog\narrative_evidence.py:1262: in _scan_and_emit_pdf_pages
+    state.prose_work_budget.charge()
+src\company_wiki\resource_budget.py:113: in charge
+    raise WorkBudgetExceeded(
+E   company_wiki.resource_budget.WorkBudgetExceeded: document_work limit reached: phase=document, used=0, requested=1, limit=0
+_________ test_compiler_check_matches_single_asset_and_detects_drift __________
+tests\unit\document_understanding_root\test_du2_policy_registry.py:158: in test_compiler_check_matches_single_asset_and_detects_drift
+    assert result.returncode == 0, result.stdout + result.stderr
+E   AssertionError: reading catalog drift; run tools/import_reading_policies.py
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-B', 'C:\\Users\\郑曾波\\Pr...icies.py', '--check'], returncode=1, stdout='', stderr='reading catalog drift; run tools/import_reading_policies.py\n').returncode
+_ test_layout_negative_table_evidence_survives_bridge_without_inventing_table _
+tests\unit\document_understanding_root\test_inferred_heading_data_rows.py:96: in test_layout_negative_table_evidence_survives_bridge_without_inventing_table
+    enhanced, _ = layout_bridge.apply_layout_hints(original)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\layout_bridge.py:57: in apply_layout_hints
+    return _apply_layout(result, limits=limits, work_budget=work_budget)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_understanding\layout_bridge.py:143: in _apply_layout
+    for group in layout["groups"]:
+                 ^^^^^^^^^^^^^^^^
+E   KeyError: 'groups'
+_ test_running_furniture_binds_physical_refs_without_becoming_model_material __
+tests\unit\document_understanding_selection\test_reading_native_dependency_closure.py:547: in test_running_furniture_binds_physical_refs_without_becoming_model_material
+    assert (
+E   assert 2 == 3
+E    +  where 2 = len({(1, 1), (2, 1)})
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_production/test_pdf_production.py::test_zero_shared_work_keeps_base_text_but_never_requests_native_tables
+FAILED tests/unit/du11_production/test_pdf_production.py::test_explicit_geometry_request_cannot_bypass_the_same_zero_budget[options0]
+FAILED tests/unit/du11_production/test_pdf_production.py::test_explicit_geometry_request_cannot_bypass_the_same_zero_budget[options1]
+FAILED tests/unit/document_understanding_root/test_du2_policy_registry.py::test_compiler_check_matches_single_asset_and_detects_drift
+FAILED tests/unit/document_understanding_root/test_inferred_heading_data_rows.py::test_layout_negative_table_evidence_survives_bridge_without_inventing_table
+FAILED tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py::test_running_furniture_binds_physical_refs_without_becoming_model_material
+======================= 6 failed, 122 passed in 10.84s ========================

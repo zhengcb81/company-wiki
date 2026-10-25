@@ -1,0 +1,20 @@
+{
+  "schema_version": "ci-followup-verification/1",
+  "ci_failed_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+  "changed_files": {
+    "src/company_wiki/automation/narrative_select.py": "62cf8c8df200a82d34dc0a1df387a615f379050b0234b94f9099784ff9135f12",
+    "src/company_wiki/document_understanding/profiles/reading_defaults.json": "8cf8210e3a85f7941cba21db3469461982d3f4e613237ba351055997f46592af",
+    "tools/import_reading_policies.py": "f25a955cd1e903cbc86573211946635f2972d13bb46f24dac7ae8ab6832b4bc6",
+    "tests/unit/du11_production/test_pdf_production.py": "3d9e454a7c26efd3b9e3e359b00d945327aebffd7db75c70a0081fc1287f27b3",
+    "tests/unit/document_understanding_root/test_du2_policy_registry.py": "31a65508e447d4d92f481dcb67d983d9bc7a928071220e20dbee7470f67deb97",
+    "tests/unit/document_understanding_root/test_inferred_heading_data_rows.py": "778a156318a9f8ac19dca75acea6078e5606521470161a91dd19d73d688fd453",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "41c7315f5fc8840f3d084ba2cc7d1dc233028a7fe5df216b17a99783108ae2af"
+  },
+  "final_tests": "review-ci-final2-green",
+  "passed": 218,
+  "seconds": 16.45,
+  "runtime_reading_catalog_unchanged": true,
+  "independent_review": "PENDING",
+  "new_paid_calls": 0,
+  "downloads": 0
+}
