@@ -1,0 +1,839 @@
+{
+  "status": "FROZEN_BEFORE_HTML_PARSER_CHANGE_NOT_NEW_FEATURE_ACCEPTANCE",
+  "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+  "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+  "mime_type": "text/html",
+  "parser_version": "1.0.0",
+  "runtime": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "beautifulsoup4": "4.14.3"
+  },
+  "units": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c808c6bf66837c2cc0448eeec4adbd59c962cf6e7f9ce5cde7feadeeb66ee71f",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Business overview",
+      "unit_kind": "html_heading",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.0",
+        "backend": "html.parser",
+        "tag_name": "h1",
+        "heading_level": 1,
+        "native_source_view": {
+          "tables": [
+            {
+              "scope": {
+                "parent_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+                "table_id": "html:t0",
+                "page": null
+              },
+              "cells": [
+                {
+                  "cell_id": "html:t0:r0:c0",
+                  "row": 0,
+                  "column": 0,
+                  "row_span": 1,
+                  "column_span": 1,
+                  "presence": "present",
+                  "text_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:7885eb7d15fa61a14811aed825ea6c5e0ea7b2beeffd95ee1e2da9f22b04f75f",
+                      "char_start": 0,
+                      "char_end": 7
+                    }
+                  ],
+                  "fragment_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:7885eb7d15fa61a14811aed825ea6c5e0ea7b2beeffd95ee1e2da9f22b04f75f",
+                      "char_start": 0,
+                      "char_end": 7
+                    }
+                  ],
+                  "is_header": true,
+                  "header_scope": null,
+                  "html_id": null,
+                  "headers": [],
+                  "row_group": 0
+                },
+                {
+                  "cell_id": "html:t0:r0:c1",
+                  "row": 0,
+                  "column": 1,
+                  "row_span": 1,
+                  "column_span": 1,
+                  "presence": "present",
+                  "text_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:959990444687311856e923fe7bb20b8e9e851e3f0da83bc80219a99008070c0b",
+                      "char_start": 0,
+                      "char_end": 4
+                    }
+                  ],
+                  "fragment_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:959990444687311856e923fe7bb20b8e9e851e3f0da83bc80219a99008070c0b",
+                      "char_start": 0,
+                      "char_end": 4
+                    }
+                  ],
+                  "is_header": true,
+                  "header_scope": null,
+                  "html_id": null,
+                  "headers": [],
+                  "row_group": 0
+                },
+                {
+                  "cell_id": "html:t0:r1:c0",
+                  "row": 1,
+                  "column": 0,
+                  "row_span": 1,
+                  "column_span": 1,
+                  "presence": "present",
+                  "text_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:740c6281121f2468203ebcc576e75f5008130f78245325d678bdb730cf6431e0",
+                      "char_start": 0,
+                      "char_end": 8
+                    }
+                  ],
+                  "fragment_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:740c6281121f2468203ebcc576e75f5008130f78245325d678bdb730cf6431e0",
+                      "char_start": 0,
+                      "char_end": 8
+                    }
+                  ],
+                  "is_header": false,
+                  "header_scope": null,
+                  "html_id": null,
+                  "headers": [],
+                  "row_group": 0
+                },
+                {
+                  "cell_id": "html:t0:r1:c1",
+                  "row": 1,
+                  "column": 1,
+                  "row_span": 1,
+                  "column_span": 1,
+                  "presence": "present",
+                  "text_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:7b11679edacbf91664ce0517cd6c1eaa251989200c0818057f84479bb341851e",
+                      "char_start": 0,
+                      "char_end": 3
+                    }
+                  ],
+                  "fragment_refs": [
+                    {
+                      "unit_id": "urn:company-wiki:narrative-unit:sha256:7b11679edacbf91664ce0517cd6c1eaa251989200c0818057f84479bb341851e",
+                      "char_start": 0,
+                      "char_end": 3
+                    }
+                  ],
+                  "is_header": false,
+                  "header_scope": null,
+                  "html_id": null,
+                  "headers": [],
+                  "row_group": 0
+                }
+              ],
+              "header_rows": [
+                0
+              ],
+              "context_refs": [],
+              "position_complete": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2c89246f9aa5d73eb6517600f893937578aee5506bc977a4fa64437cd40c4176",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Alpha Services",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.1.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.1.0",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:691c073d5d2e22a2fc21bcea6ba14fad4d779240f76b6932345c2be762255ef4",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Alpha Services primarily comprises:",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.1.1",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.1.1",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:24f364850c045677ddfa7cc312b36a46f803f02d6dd24f341f35d29c6d47255d",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Industrial platforms supply subscription software and support services.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.1.2.1.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.1.2.1.0",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e5cb44e350a23403a15467e7d5b1d456f6edb11969f15f582cf04b5c6519d0c6",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 4,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "•",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.1.2",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.1.2",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:10f288c8afb1c6fd3abf39a4282a542080900a96c0be62535522ea787e8841fd",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 5,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Field services include equipment installation and customer training.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.1.3.1.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.1.3.1.0",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:67aed3576142a1f9e5d91c833c6d7bd3beb0455e345f1dbabc32b89740ea8fe0",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 6,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "•",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.1.3",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.1.3",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:835eba34a1898fe68e58ec765b8e3628eaf13e9d09a4001e4574065c4e2d8707",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 7,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Industrial platforms",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.2.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.2.0",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:318ea1b539d937e5dbdb313e4af17d4a30b5b33e1e582b13fcf10ae1af4df80e",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Platform customers pay according to their measured usage.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.2.1",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.2.1",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:95a19fcea12bf7375a8b0d00e3a38163a0c7b0be59058e94a8ee6ca9476cf501",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Beta Services",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.3",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.3",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b42d11ed3a637142eee008a1b401e22e6f738ca29ba26e69b81db18871be9200",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 10,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Beta Services includes:",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.4",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.4",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d9ccae8862783245bee87ec2a02219a4d7bdc1a374fc723b6d6414226c797af1",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 11,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Accessories support the hardware.",
+      "unit_kind": "html_list_item",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.5.0.0.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.5.0.0.0",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0b8a7723dfc3829b191ec2f6e68b5c31bb6df70845175f24489b340a93384860",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 12,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Consumer products include hardware.",
+      "unit_kind": "html_list_item",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.5.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.5.0",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:de55991f04c4319c4338e8acccf3b588371fa43f6637a14f07c2ff94d6c71859",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 13,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Retail support includes local repairs.",
+      "unit_kind": "html_list_item",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.5.1",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.5.1",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:35eecbfa65858b8c45ff313bc3aee3d15727074ca103fe45bfcb83e73c852eeb",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 14,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Revenue increased sharply during the year.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.6",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.6",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a53c4da1d6e8d8e39b4b89a363bd7623e0e722946ff3186879a9a9bf6e234edf",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 15,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "The products have strong demand in several regions.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.7",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.7",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:7885eb7d15fa61a14811aed825ea6c5e0ea7b2beeffd95ee1e2da9f22b04f75f",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": 0,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Revenue",
+      "unit_kind": "html_table_cell",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.8.0.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.8.0.0",
+        "backend": "html.parser",
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": 0,
+        "table_class": "financial",
+        "table_class_basis": [
+          "revenue"
+        ]
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:959990444687311856e923fe7bb20b8e9e851e3f0da83bc80219a99008070c0b",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": 1,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "2025",
+      "unit_kind": "html_table_cell",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.8.0.1",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.8.0.1",
+        "backend": "html.parser",
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": 1,
+        "table_class": "financial",
+        "table_class_basis": [
+          "revenue"
+        ]
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:740c6281121f2468203ebcc576e75f5008130f78245325d678bdb730cf6431e0",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": 0,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Hardware",
+      "unit_kind": "html_table_cell",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.8.1.0",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.8.1.0",
+        "backend": "html.parser",
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": 0,
+        "table_class": "financial",
+        "table_class_basis": [
+          "revenue"
+        ]
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:7b11679edacbf91664ce0517cd6c1eaa251989200c0818057f84479bb341851e",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": 1,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "120",
+      "unit_kind": "html_table_cell",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.8.1.1",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.8.1.1",
+        "backend": "html.parser",
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": 1,
+        "table_class": "financial",
+        "table_class_basis": [
+          "revenue"
+        ]
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b853b58e253b8d2115a542a47b26dc4a31adb9e8b0a5d605a0b19d7717e4f7ee",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 20,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Visible normal reset",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.9",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.9",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c445ae2753b7e2179ce42bcf6e86eedeb64c87effe96a1df53fc9d285e4184c1",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 21,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "A flex container alone does not establish a list.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.10.1",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.10.1",
+        "backend": "html.parser"
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:60b8564ee0ae9012ca65f2646498f1b18a0be0316b45df1f8f623fe731a56213",
+      "source_id": "urn:company-wiki:source:sha256:352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "coordinates": {
+        "page_number": null,
+        "paragraph_index": 22,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "In prose the symbol • is only punctuation.",
+      "unit_kind": "html_paragraph",
+      "source_role": "company_filing",
+      "language": "und",
+      "quality_flags": [],
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "html",
+        "source_sha256": "352ab7a0dcbd26f7b000d36e9caa03b4d15f461f3e6c62cde8fe4af5f16e2166",
+        "source_locator": "cwp-html-dom/1|n=0.0.11",
+        "transform": "html_visible_text_v1",
+        "dom_path": "0.0.11",
+        "backend": "html.parser"
+      }
+    }
+  ],
+  "unit_count": 23,
+  "old_text_order_coordinates_complete_metadata_bound": true,
+  "next_test": "Public explicit legacy normalization and replay must exactly match every field; do not regenerate this expected file to pass a changed parser."
+}

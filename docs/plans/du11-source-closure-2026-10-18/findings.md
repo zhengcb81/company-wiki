@@ -977,3 +977,6 @@ W16最终独审0 OPEN，18次实际CLI/快照/回测10断言、60独立测试通
 CF3第一效率节点独审PASS：共享关系负例剪枝、结构算法cache闭包和缺页诊断单次索引。真实中微429页/14025units，同16M/112上限从0span变112span，understand工作11473800→6334220；仍exhausted/partial、无IPO gold NOT_GRADED。0新付费/下载。CF1/CF2及CF3候选优化、正式摘要/cache/RF循环仍OPEN。
 
 原5.43M reserve不能靠旧直接扣账frame逆推关系循环，本轮固定深度调用者诊断实际证明结构coverage diagnostic全页×全unit占约5.15M。索引消除真实扫描后才降低对应计费。WorkPlan.stage保留3208304，未假删阶段收费。既有partial保全有效：释放前置开销后从0变112；仍耗尽说明候选/事实后缀工作仍待改进。
+
+
+CF2新原页证据：cf2-source-boundaries.json。p13/paragraph9残句停1,245.4、p13/paragraph10为百萬元增加7.6%、11/12为原因及句尾；原生bbox首行含bullet x99，后续正文x121，悬挂缩进。下一TDD应保留实际原生正文/marker边界，不全局扩大缩进容差或按发行人补词。新旧PDF backend1.28.2/1.26.7产生14006/14025units；后续真实回放必须记录backend版本并核缓存依赖是否绑定真实解析依赖，未验证前不直接声称缓存缺陷。

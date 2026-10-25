@@ -1,0 +1,3 @@
+# This node binds physical source/test/receipt bytes by SHA. Preserve them
+# through staging and checkout; prose and JSON remain diffable.
+** -text -eol whitespace=cr-at-eol

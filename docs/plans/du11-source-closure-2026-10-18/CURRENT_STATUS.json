@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "CF3_STAGE1_INDEPENDENT_PASS_LOCAL_PUBLICATION_PENDING; IPO_PARTIAL112_WITHIN_UNCHANGED16M; CF1_CF2_CF3_TAIL_CF4_FORMAL_SUMMARY_RF_OPEN",
+  "overall_status": "CF3_STAGE1_PUBLISHED_CI_SUCCESS; IPO_PARTIAL112_WITHIN_UNCHANGED16M; CF1_CF2_CF3_TAIL_CF4_FORMAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_ROOT_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "243993d2c9e12c2a9cb6e2b728e547928607abff",
+  "last_code_commit": "1cddb0bd3e8e929a5e5fa9059ac7d06d0ef931f1",
   "code_ci": {
-    "id": 40195639414,
-    "head_sha": "243993d2c9e12c2a9cb6e2b728e547928607abff",
+    "id": 40213361663,
+    "head_sha": "1cddb0bd3e8e929a5e5fa9059ac7d06d0ef931f1",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40213361663"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2052,7 +2052,7 @@
     "independent_review": "harness_lanes/20261025/W19-packet-review.json"
   },
   "cf_source_20261025": {
-    "status": "ENGINEERING_STAGE1_INDEPENDENT_PASS_PUBLICATION_PENDING",
+    "status": "ENGINEERING_STAGE1_PUBLISHED_CI_SUCCESS",
     "entry": "review/cf-source-20261025/README.md",
     "independent_review": "review/cf-source-20261025/cf3-independent-review.json",
     "true_red": [
@@ -2085,6 +2085,16 @@
       "CF3 existing fact/candidate owner efficiency; do not add second cache",
       "CF4 stricter independent source context gold",
       "Formal v4 summary/cache no duplicate cost/RF adoption and company loop"
-    ]
+    ],
+    "publication": "review/cf-source-20261025/publication.json",
+    "cf2_native_boundary_observation": "5page SourceRef observation and page13 visual proof complete; dangling unit/percentage/causal fragments are native units, not lost source; implementation OPEN",
+    "cf1_next_node": "Read-only architecture/design complete; native list/intro first, typography second; legacy neutral HTML23units frozen before parser change; implementation OPEN"
+  },
+  "previous_code_ci_before_cf3": {
+    "id": 40195639414,
+    "head_sha": "243993d2c9e12c2a9cb6e2b728e547928607abff",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
   }
 }

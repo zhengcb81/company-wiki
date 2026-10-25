@@ -1186,3 +1186,6 @@ CF3第一效率节点独审PASS：共享关系负例剪枝、结构算法cache�
 先冻结中性RED，再修共享责任层。真实reserve caller发现5.15M来自缺页诊断反复全源扫描，单次页索引保留诊断原值；关系剪枝及跨source/kind边界一并修复，owned结构包版本自动失效旧cache。最终独审74 tests、750关系差分/250跨source、500诊断/24完整结构对照通过。147相关PASS、之前198PASS有重叠，mypy src375和Ruff绿。旧12参数缓存测试只换真实字节注入点，same/changed断言未改。
 
 首次venv/PyMuPDF1.28.2得14006units，保留为非同backend诊断；随后Conda1.26.7恰与冻结parse counts一致得14025units，仍partial，不宣称CPU性能比例或IPO内容通过。独审核真实收据SHA/计量/原文config/catalog均稳定。下一步正常发布，再CF1/CF2与候选热点。
+
+
+CF3已正常发布1cddb0bd，pre-commit Ruff/mypy/host guard通过，pre-push154PASS/76.51秒（运行scope非全量），精确CI40213361663 success。最终独审源码/测试SHA全部匹配；旧hook模式WIP保留。CF2已SourceRef实读5关键页并看原页13，确认悬挂bullet首块含marker造成x99/正文x121边界差，单位/百分比/原因原文及parsed units都在，选材只取首块。PNG已恢复不存在；两次有界诊断writer首次属性误用已记录，不计CF2已修。

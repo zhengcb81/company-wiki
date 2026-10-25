@@ -1,0 +1,74 @@
+{
+  "status": "READ_ONLY_DESIGN_COMPLETE",
+  "acceptance": "DESIGN_ONLY_NOT_IMPLEMENTED_NOT_SOURCE_GRADED",
+  "markdown": "docs/plans/du11-source-closure-2026-10-18/review/cf-source-20261025/cf1-design.md",
+  "markdown_sha256": "d68abedbbca3f5d04b887f37d1333f4cd371ab3247a866e3db198b86fa063ddf",
+  "actual_source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "observation_file": "cf1-dom-source-observation.json",
+  "observation_sha256": "59f73cb0fa005a0bd5c2f0697843183c45fac24e5c71289c711128adc676ae15",
+  "observation_parse_units": 5215,
+  "key_findings": [
+    {
+      "id": "CF1-DESIGN-01",
+      "finding": "Exact normalized replay binds full metadata; same-version added DOM metadata breaks legacy HTML replay.",
+      "recommendation": "Format-specific HTML current 1.1 plus explicit legacy 1.0 using one scan and version-gated observation attachment."
+    },
+    {
+      "id": "CF1-DESIGN-02",
+      "finding": "DOM native list intro is readable meaning context; existing dependency closure admits this without physical page proof.",
+      "recommendation": "Reuse sections scope/frame and required_context_by_unit_id; no fabricated PDF proof or new public union needed for minimal node."
+    },
+    {
+      "id": "CF1-DESIGN-03",
+      "finding": "Bold and bold-italic equal-size labels in separate page wrappers do not prove native parent/child depth.",
+      "recommendation": "Observe actual full-owner formatting, accept only supported inferred hierarchy with distinct basis/confidence; ambiguous depth remains unknown."
+    },
+    {
+      "id": "CF1-DESIGN-04",
+      "finding": "Raw owner ordering places custom bullet marker after body; native membership is not ordinal adjacency.",
+      "recommendation": "Record same-source DOM paths and original unit refs once; resolve list scope by explicit group membership without changing text/order/locator."
+    }
+  ],
+  "implementation_nodes": [
+    {
+      "id": "A",
+      "scope": "Versioned native HTML observation plus frozen legacy/current exact replay",
+      "tests": "Neutral parser positive/negative visibility/format/list/limit cases"
+    },
+    {
+      "id": "B",
+      "scope": "Unique sections DOM scope and existing readable dependency closure to actual compiled model input",
+      "tests": "Nested/sibling/source/ambiguous style controls plus existing PDF list/proof regressions and work metering"
+    },
+    {
+      "id": "C",
+      "scope": "One independent major-node review then existing real HTML zero-cost new-attempt replay",
+      "tests": "Frozen list definition and business-parent assertions; keep partial if hierarchy unresolved"
+    }
+  ],
+  "not_recommended": [
+    "Issuer-specific class/name router",
+    "All-bold-means-heading",
+    "DOM depth equals business depth",
+    "Fabricated page geometry or NativePageProof",
+    "Second cache, graph, reader, identity or approval mechanism",
+    "Whole-source all-pair relationship expansion",
+    "New paid summary before source structure acceptance"
+  ],
+  "product_paths_changed": [],
+  "originals_changed": false,
+  "config_changed": false,
+  "database_changed": false,
+  "tests_run": 0,
+  "network_requests": 0,
+  "paid_calls": 0,
+  "downloads": 0,
+  "errors": [
+    "Exploratory nonexistent structure/semantic.py read; corrected to structure/__init__.py.",
+    "PowerShell explicit rg wildcard path arguments did not expand; corrected to explicit file paths."
+  ],
+  "authoring_boundary": [
+    "cf1-design.md",
+    "cf1-design.json"
+  ]
+}

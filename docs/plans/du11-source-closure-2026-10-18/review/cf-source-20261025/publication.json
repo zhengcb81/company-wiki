@@ -1,0 +1,38 @@
+{
+  "schema_version": "cf3-publication/1",
+  "head": "1cddb0bd3e8e929a5e5fa9059ac7d06d0ef931f1",
+  "branch": "master",
+  "local_and_origin_master_equal": true,
+  "normal_hooks_used": true,
+  "pre_commit": {
+    "ruff": "PASS",
+    "mypy_src": "PASS",
+    "host_assumption_guard": "PASS"
+  },
+  "pre_push": {
+    "status": "local_fast_pass",
+    "passed": 154,
+    "seconds": 76.51,
+    "scope": "Existing dynamic-scope29 targets/CI contract smoke, full suite deferred to CI; not all-unit local proof"
+  },
+  "exact_ci": {
+    "id": 40213361663,
+    "head_sha": "1cddb0bd3e8e929a5e5fa9059ac7d06d0ef931f1",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40213361663"
+  },
+  "final_review_sha256": "75cea20974da9ae8201e809099f482bd7e4ea41965524df41c4aa3149fbcab74",
+  "final_review_product_test_hashes_match": true,
+  "preserved_wip": [
+    ".githooks/pre-push mode-only100755→100644; not staged",
+    "historical untracked artifacts; not bulk staged/deleted"
+  ],
+  "calls": {
+    "model": 0,
+    "api": 0,
+    "download": 0,
+    "raw_copy": 0
+  },
+  "remaining": "CF1/CF2/CF3 candidate tail/CF4 source validation and formal summary/cache/RF loop remain OPEN"
+}

@@ -2,7 +2,7 @@
 
 ## 当前结果与验收边界
 
-CF3共享效率第一节点已实现、独审PASS，待本次正常提交发布；**CF1–CF4整体未完成**。原件、生产config/catalog、16M同一账户和112片段上限不变，0模型/API/下载/原件副本。没有新增权限、身份验证、签收或预算库。
+CF3共享效率第一节点已实现、独审PASS，已随1cddb0bd正常推送master，精确CI40213361663 success；**CF1–CF4整体未完成**。原件、生产config/catalog、16M同一账户和112片段上限不变，0模型/API/下载/原件副本。没有新增权限、身份验证、签收或预算库。
 
 | 根因 | 实施和证据 | 当前判决 |
 |---|---|---|
@@ -27,7 +27,7 @@ CF3共享效率第一节点已实现、独审PASS，待本次正常提交发布�
 
 ### 唯一下一步
 
-正常commit/push本节点，记录精确CI；然后继续CF1真实HTML业务标题/原生列表依赖、CF2港股中报未闭句及单位/限定条件；CF3下一节点按实际候选热点优化已有owner内重复事实/声明观察，不加第二cache或公司特判。三市场新attempt来源独审合格后，再正式v4摘要→缓存恢复零重复费用→RF实际采用→四路公司审查。W18/W19作者路径、Dayu/IQS不写。
+本节点发布已完成（publication.json）；继续CF1真实HTML业务标题/原生列表依赖、CF2港股中报未闭句及单位/限定条件；CF3下一节点按实际候选热点优化已有owner内重复事实/声明观察，不加第二cache或公司特判。三市场新attempt来源独审合格后，再正式v4摘要→缓存恢复零重复费用→RF实际采用→四路公司审查。W18/W19作者路径、Dayu/IQS不写。
 
 ## 实施开始时的调查快照（以下Next Step已被上方取代）
 
@@ -40,3 +40,17 @@ CF3共享效率第一节点已实现、独审PASS，待本次正常提交发布�
 ## Next Step
 
 读绑定原件的DOM证据与CF3计量；将已证实共因固化为中性RED，决定最小共享实施。W18/W19作者路径及storage/schema不写，Dayu/IQS不动。
+
+## CF2原页调查补充（实现仍OPEN）
+
+cf2-source-boundaries.json记录SourceRef实读的5个关键页及现有parser结果。已视觉检查PDF page13（纸面页12）：行業雲bullet是连续三行的同一悬挂缩进段。原生第一块及最终已选span均停在1,245.4，下一unit为百萬元增加7.6%，再后两个unit给IT需求/复制方案原因及的能力。不是原文丢失；原生块分割和现有连续性/包准入没有保留完整句。第一块bbox含左侧bullet x99，而下一文本块x121，不能靠放宽所有邻接/缩进阈值拼接。下一轮先给中性数字/单位断行和bullet正文边界RED，复用现有native producer/continuity/collector闭包；没有正证则保留未闭合状态，不把残句当完整事实。
+
+原始页临时PNG已看图并删除，恢复不存在。诊断首次因writer误用不存在的NarrativeUnit.locator属性失败（产品解析成功），改用既有coordinates后一次有界重跑完成；总两次诊断，不隐去失败。无API/费用/下载/Store写入。CF1设计调查单独记录，并非实现验收。
+
+## CF1下一节点交接已冻结
+
+独立设计调查cf1-design.md/json完成，只是施工设计，不是CF1修复。先CF1a原生列表到介绍段，复用sections/readable context，无须伪造PDF proof；再CF1b区分原生h与有依据的格式推断标题。全metadata参与旧replay校验，因此新增DOM观察采用显式HTML1.1，并保留1.0原样回放。
+
+已在改HTML源码之前冻结中性Alpha/Beta源及23个legacy units的完整text/order/locator/coordinates/metadata/ID，见frozen-legacy-html/expected-1.0.json；未来先复制到合适测试fixture并逐字段/公开replay验旧行为，不从新实现重生expected。冻结script和数据SHA见diagnostics/index.json。原版本fixture不是新功能通过证明。
+
+本节点.gitattributes只保留这些SHA证据的原始字节（包括CR/LF），不新增任何运行许可或人工门；JSON/正文仍可diff。发布时须核Git blob与物理收据一致，避免Windows自动换行使本地hash与远端证据矛盾。

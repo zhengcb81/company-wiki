@@ -50,6 +50,16 @@
       "original": ".planning/cf-source-20261025/reviewer/coverage_probe.py",
       "frozen_copy": "diagnostics/coverage_probe.py",
       "sha256": "50968ded1af90bb8e8164e0a6628706cb4fd56a484eaceefc5258797245f819b"
+    },
+    {
+      "original": ".planning/cf-source-20261025/inspect_hk.py",
+      "frozen_copy": "diagnostics/inspect_hk.py",
+      "sha256": "a86624c925a7bbef398da8eb5bdbf5e7191a39a5dd12ecf8a779e599402c56e0"
+    },
+    {
+      "original": ".planning/cf-source-20261025/freeze_html_legacy.py",
+      "frozen_copy": "diagnostics/freeze_html_legacy.py",
+      "sha256": "98fbf46bdf65dd2862367fad4e436da97d0712670422737658906a245f38aff7"
     }
   ]
 }
