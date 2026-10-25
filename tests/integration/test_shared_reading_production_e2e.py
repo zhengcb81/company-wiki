@@ -112,9 +112,9 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert metadata["generation_manifest"] == final, "publication retained an obsolete base generation"
     assert metadata["generation_sha256"] == canonical_json_hash(final)
     strategy = data["reading_strategy"]
-    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/5"
-    assert data["schema_version"] == "narrative-model-request/6"
-    assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/5").prompt_version
+    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/4"
+    assert data["schema_version"] == "narrative-model-request/5"
+    assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/4").prompt_version
     assert final["reading_model_boundary"]["prompt_version"] == final["execution_versions"]["prompt"]
     assert final["summary_validation"]["language_observer"]["py3langid"]["model"]["status"] == "available"
     assert context["schema_version"] == "du-production-reading/3"

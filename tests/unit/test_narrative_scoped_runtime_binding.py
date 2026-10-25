@@ -64,7 +64,7 @@ def test_explicit_manifest_reaches_factory_validation_and_new_default_does_not_o
     assert manifests('reading-model-input/3')['execution_versions']['model_request_schema']=='narrative-model-request/4'
     from unit.test_narrative_generation import manifest as normal_manifest
     from unit.test_narrative_batch import _request
-    assert normal_manifest(replace(_request(),selector_version='0.9.0'))['reading_model_projection']=='reading-model-input/5'
+    assert normal_manifest(replace(_request(),selector_version='0.9.0'))['reading_model_projection']=='reading-model-input/4'
     assert 'reading_model_projection' not in normal_manifest(replace(_request(),selector_version='0.8.0'))
 
 

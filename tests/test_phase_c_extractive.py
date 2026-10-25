@@ -145,8 +145,8 @@ def test_missing_selected_identity_never_falls_back_to_another_checkout(tmp_path
         runner.seed_identity(tmp_path / "owned", "live", {"market": "US"}, source_catalog_config=config)
 
 
-def test_default_projection_uses_v5_and_explicit_v4_and_legacy_stay_separate():
-    assert runner.reading_projection_for("0.9.0", None) == VERSION
+def test_default_projection_uses_v4_and_explicit_v5_and_legacy_stay_separate():
+    assert runner.reading_projection_for("0.9.0", None) == "reading-model-input/4"
     assert (
         runner.reading_projection_for("0.9.0", "reading-model-input/4")
         == "reading-model-input/4"
@@ -323,11 +323,11 @@ def test_v4_success_does_not_invent_an_extractive_report(tmp_path):
     assert result["source_card_execution"] is None
 
 
-def test_real_cli_parser_selects_v5_default_and_v4_compatibility_without_io(tmp_path):
+def test_real_cli_parser_selects_v4_default_and_v5_compatibility_without_io(tmp_path):
     parser = runner.argument_parser()
     output = tmp_path / "not-created"
     base = ["--output", str(output)]
-    assert parser.parse_args(base).reading_model_projection == VERSION
+    assert parser.parse_args(base).reading_model_projection == "reading-model-input/4"
     for mode in [VERSION, "reading-model-input/4"]:
         assert (
             parser.parse_args(

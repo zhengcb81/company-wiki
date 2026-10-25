@@ -1,4 +1,4 @@
-"""New default execution is source-extractive; historical explicit modes remain."""
+"""Scoped-summary is the default; explicit ranking and historical modes remain."""
 from dataclasses import replace
 from contextlib import closing
 from types import SimpleNamespace
@@ -27,12 +27,15 @@ def new_request():
     return source, replace(request, selector_version='0.9.0')
 
 
-def test_new_reading_generation_default_selects_extractive_protocol_without_manual_flag():
+def test_new_reading_generation_default_selects_task_summary_protocol_without_manual_flag():
+    from company_wiki.automation.narrative_model_scoped import (
+        SCOPED_MODEL_PROJECTION_VERSION, SCOPED_PROMPT_VERSION,
+    )
     source, request = new_request()
     manifest = generation_manifest(request, _context(source).source_revision,
                                    execution_versions=request.execution_versions)
-    assert manifest['reading_model_projection'] == 'reading-model-input/5'
-    assert manifest['execution_versions']['prompt'] == 'reading-source-extractive/5.0.0'
+    assert manifest['reading_model_projection'] == SCOPED_MODEL_PROJECTION_VERSION
+    assert manifest['execution_versions']['prompt'] == SCOPED_PROMPT_VERSION
 
 
 def test_explicit_v5_request_roundtrip_and_explicit_v4_retains_its_original_protocol():
@@ -55,7 +58,7 @@ def test_legacy_nonreading_default_does_not_silently_opt_in():
     assert 'reading_model_projection' not in manifest
 
 
-def test_real_default_worker_preserves_paid_response_and_audit_after_compaction_and_reuse(
+def test_explicit_v5_worker_preserves_paid_response_and_audit_after_compaction_and_reuse(
     tmp_path_factory, loopback_model_server, monkeypatch,
 ):
     from company_wiki.automation import narrative_batch as batch
@@ -72,7 +75,8 @@ def test_real_default_worker_preserves_paid_response_and_audit_after_compaction_
         state = prepare_source_catalog(root, one_source=True, include_policy=False)
         try:
             request, _wire = _request(state, loopback_model_server.endpoint, '1')
-            request = replace(request, selector_version='0.9.0', max_seconds=60)
+            request = replace(request, selector_version='0.9.0',
+                              reading_model_projection='reading-model-input/5', max_seconds=60)
             kwargs = dict(project_root=root, catalog_config_path=state.config_path,
                           db_path=root/'automation.db', work_dir=root/'work')
             first = batch.run_batch(request, **kwargs)
@@ -115,21 +119,24 @@ def test_real_default_worker_preserves_paid_response_and_audit_after_compaction_
             state.catalog.close()
 
 
-def test_failed_batch_recovery_candidates_are_only_exact_frozen_v5_paid_operations():
+@pytest.mark.parametrize('projection,prompt', [
+    ('reading-model-input/4', 'reading-source-scoped/4.0.6'),
+    ('reading-model-input/5', 'reading-source-extractive/5.0.0'),
+])
+def test_failed_batch_recovery_candidates_require_exact_frozen_paid_protocol(projection, prompt):
     from company_wiki.automation.narrative_batch import _paid_summary_recovery_candidates
     from company_wiki.automation.narrative_paid_response import PaidResponsePin
     from company_wiki.automation.models import JobStatus
-    from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_PROMPT_VERSION
     pin = PaidResponsePin(request_sha256='a'*64, body_sha256='b'*64,
         object_key='objects/sha256/bb/'+'b'*64+'.json', byte_size=2,
-        model_id='configured', adapter_id='offline', prompt_version=EXTRACTIVE_PROMPT_VERSION,
+        model_id='configured', adapter_id='offline', prompt_version=prompt,
         http_status=200, duration_ms=0)
     record = SimpleNamespace(job_id='job', request_sha256='a'*64, paid_response_json=pin.to_json(),
                              output_bytes=0, output_sha256=None)
     run = SimpleNamespace(run_id='run', blocked=False, model_id='configured')
     job = SimpleNamespace(job_id='job', subject_id='doc', job_type='source.narrative_summarize',
                           status=JobStatus.DEAD_LETTER)
-    binding = SimpleNamespace(generation_manifests={'doc': {'reading_model_projection':'reading-model-input/5'}})
+    binding = SimpleNamespace(generation_manifests={'doc': {'reading_model_projection':projection}})
     runs = SimpleNamespace(reservations_for_run=lambda _run: (record,))
     assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == (('job', 'a'*64),)
     for field, value in [('paid_response_json', None), ('output_bytes', 1), ('request_sha256', 'c'*64)]:
@@ -137,11 +144,56 @@ def test_failed_batch_recovery_candidates_are_only_exact_frozen_v5_paid_operatio
         setattr(record, field, value)
         assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == ()
         setattr(record, field, original)
-    binding.generation_manifests['doc']['reading_model_projection'] = 'reading-model-input/4'
+    binding.generation_manifests['doc']['reading_model_projection'] = (
+        'reading-model-input/5' if projection == 'reading-model-input/4' else 'reading-model-input/4'
+    )
     assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == ()
-    binding.generation_manifests['doc']['reading_model_projection'] = 'reading-model-input/5'
+    binding.generation_manifests['doc']['reading_model_projection'] = projection
     run.blocked = True
     assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == ()
+
+
+@pytest.mark.parametrize('projection', [None, 'reading-model-input/4', 'reading-model-input/5'])
+def test_preflight_reserves_paid_response_capacity_for_each_current_summary_protocol(projection):
+    from company_wiki.automation.narrative_batch import _preflight_storage
+    from company_wiki.automation.narrative_contracts import (
+        BUNDLE_MAX_BYTES, SELECT_RESULT_MAX_BYTES, SUMMARY_RESULT_MAX_BYTES,
+    )
+    from company_wiki.automation.narrative_model_extractive import EXECUTION_MAX_BYTES
+    from company_wiki.automation.supervisor import profile_slots
+
+    response_bytes = 4096
+    final_bytes = 1024
+    base_reserve = (SELECT_RESULT_MAX_BYTES + SUMMARY_RESULT_MAX_BYTES
+        + 2 * BUNDLE_MAX_BYTES + 1024**2 + 8 * 1024**2
+        + len(profile_slots('P1')) * 262144)
+    response_reserve = base_reserve + response_bytes + 4096
+    request = SimpleNamespace(
+        execution_versions={'selector': '0.9.0'},
+        reading_model_projection=projection,
+        model_options={'max_response_bytes': response_bytes},
+        profile='P1', work_items=(object(),), max_final_bytes=final_bytes,
+        max_persistent_bytes=response_reserve,
+        max_scratch_bytes=final_bytes + response_bytes,
+    )
+    if projection == 'reading-model-input/5':
+        with pytest.raises(ValueError, match='PERSISTENT_BYTES_EXCEEDED'):
+            _preflight_storage(request)
+        request.max_persistent_bytes = response_reserve + EXECUTION_MAX_BYTES
+        _preflight_storage(request)
+        request.max_persistent_bytes -= 1
+        with pytest.raises(ValueError, match='PERSISTENT_BYTES_EXCEEDED'):
+            _preflight_storage(request)
+    else:
+        _preflight_storage(request)
+        request.max_persistent_bytes = response_reserve - 1
+        with pytest.raises(ValueError, match='PERSISTENT_BYTES_EXCEEDED'):
+            _preflight_storage(request)
+
+    # The legacy 0.8 path has no new response pin and stays outside this reserve.
+    request.execution_versions = {'selector': '0.8.0'}
+    request.max_persistent_bytes = base_reserve + 1
+    _preflight_storage(request)
 
 
 def test_coordinator_merges_committed_response_writer_observation_into_scratch_lower_bound():

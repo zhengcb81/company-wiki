@@ -51,13 +51,8 @@ def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_rec
             # Lifecycle correctness is not a 30-second host-speed benchmark.
             # Keep HTTP timeout/fee/recovery assertions; allow concurrent CI startup.
             request=replace(request,selector_version='0.9.0',max_seconds=90)
-            original=batch.generation_manifest
-            def explicit_v4(*args,**kwargs):
-                return original(*args,**{**kwargs,'reading_model_projection':'reading-model-input/4'})
-            with monkeypatch.context() as patch:
-                patch.setattr(batch,'generation_manifest',explicit_v4)
-                first=batch.run_batch(request,project_root=root,
-                    catalog_config_path=state.config_path,db_path=root/'automation.db',work_dir=root/'work')
+            first=batch.run_batch(request,project_root=root,
+                catalog_config_path=state.config_path,db_path=root/'automation.db',work_dir=root/'work')
             observed=AutomationStore(root/'automation.db')
             diagnostics=[str(attempt)[:6000] for job in observed.list_jobs()
                          for attempt in observed.list_attempts(job.job_id)]

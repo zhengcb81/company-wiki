@@ -6,7 +6,6 @@ from pathlib import Path
 import pytest
 
 from tools.document_understanding_benchmark.holdout_acceptance import run_controller
-from support import narrative_batch_fixtures as fixtures
 from support.narrative_batch_fixtures import (
     KEY, isolated_batch_directory, prepare_source_catalog,
     loopback_model_server as _loopback_model_server,
@@ -17,11 +16,6 @@ loopback_model_server = _loopback_model_server
 
 @pytest.fixture
 def prepared(tmp_path_factory, loopback_model_server, monkeypatch):
-    def ranking(data):
-        assert data['schema_version'] == 'narrative-model-request/6'
-        return {'decisions': [{'task': task['key'], 'priority': 'high', 'disposition': 'consider'}
-                              for task in data['material']['tasks']]}
-    monkeypatch.setattr(fixtures, 'response_draft', ranking)
     monkeypatch.setenv('DEEPSEEK_API_KEY', KEY)
     monkeypatch.setenv('PYTHON_DOTENV_DISABLED', '1')
     with isolated_batch_directory(tmp_path_factory) as root:
@@ -35,7 +29,7 @@ def prepared(tmp_path_factory, loopback_model_server, monkeypatch):
                 'generation_policy': {'deepseek': {'narrative': {'thinking': 'disabled'}}}}}), encoding='utf-8')
             ref = next(iter(state.indexed.values()))[0]
             spec = {'schema_version': 'holdout-acceptance-request/1', 'company': 'Example Holdings',
-                'audit_run_id': 'offline-audit', 'audit_attempt_id': 'attempt-one', 'batch_run_id': 'offline-v5',
+                'audit_run_id': 'offline-audit', 'audit_attempt_id': 'attempt-one', 'batch_run_id': 'offline-v4',
                 'project_root': str(root), 'catalog_config': str(state.config_path),
                 'automation_db': str(root/'AUTO.sqlite'), 'work_root': str(root/'work'),
                 'receipt_dir': str(root/'receipts'), 'llm_config': str(config), 'llm_provider': 'deepseek',
@@ -63,7 +57,7 @@ def test_controller_requires_real_configured_paid_replay_activation_and_cache(pr
     assert result['cross_run_cache']['new_tokens'] == 0
     assert result['rf_consumption']['status'] == 'not_consumed'
     assert result['native']['reservations'][0]['paid_response_pin']
-    assert result['native']['generations'][spec['source_ref']['document_id']]['reading_model_projection'] == 'reading-model-input/5'
+    assert result['native']['generations'][spec['source_ref']['document_id']]['reading_model_projection'] == 'reading-model-input/4'
     print('HOLDOUT_LIFECYCLE_PROOF ' + json.dumps({
         'source_ref': spec['source_ref'], 'model_post_count': result['model_post_count'],
         'paid_operation': result['native']['reservations'][0],

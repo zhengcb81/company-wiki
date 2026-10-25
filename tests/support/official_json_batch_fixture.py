@@ -52,6 +52,9 @@ def model_draft(data):
     if data['schema_version'] == 'narrative-model-request/6':
         return {'decisions': [{'task': task['key'], 'priority': 'normal', 'disposition': 'consider'}
                               for task in data['material']['tasks']]}
+    if data['schema_version'] == 'narrative-model-request/5':
+        from support.scoped_model_response import source_grounded_scoped_reply
+        return source_grounded_scoped_reply(data)
     unit_citations = data["schema_version"] == "narrative-model-request/4"
     source_owned = unit_citations or data["schema_version"] == "narrative-model-request/3"
     projected = "subject" in data

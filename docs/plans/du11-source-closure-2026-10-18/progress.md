@@ -981,3 +981,18 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 检查既有scoped摘要协议时，受限沙箱内针对92例中的85个非loopback用例通过；两个production用例报`MODEL_HTTP_TRANSPORT`。在本机loopback可用环境完整重跑其7例文件，7/7通过，原因是受限运行环境屏蔽本地测试socket，不是删除或修低断言。精确基线temp由测试hook迁移并自动清理。
 - 结构审查进一步区分真正摘要与ranking：selector `0.9.0`在`narrative_generation._bind_reading_projection`默认到`reading-model-input/5`。该协议写明只返回decision排序；`compile_extractive_plan`把整段source-card原文当claim，并将非问题型claim标为`uncertain/needs_review`，`decode_extractive_result`只写排序结果。因此一次成功API不能生成自然语言摘要；这是RF not-consumed之外更上游的架构根因。
 - 已有`reading-model-input/4`是任务局部摘要协议，显式生成原语言短句、同源support/context引用和modality，decoder有claim数、引用、translation和quality检查。不能只切换版本：112/484选材与308预算延期等覆盖问题仍在；下一步按`task_plan.md`先写production绑定和数据边界红测，再设计可恢复批次。未作付费重试、未改原文/配置。
+
+## 2026-10-25 v4 scoped-summary 默认与恢复接线
+
+- 把 selector `0.9.0` 的本地默认切到 task-scoped `reading-model-input/4`，v5 ranking 保留为显式兼容；Phase C runner、CLI默认、测试和使用说明一并切到 v4。
+- 独立初审找到并促使修正三处一致性根因：worker factory 原来只为v5保存完整付费响应；省略协议/显式v4的容量预检不一致；holdout observer 仍拒绝实际v4 request schema，阻止loopback POST。
+- 新增统一协议能力列表，让v4/v5都做付费响应pin和精确请求绑定的本地恢复；省略projection在selector 0.9下按v4预留响应持久化/临时空间。v4 holdout真实进程E2E验证一次POST后恢复，不产生第二次POST；固定请求/响应SHA、母账与缓存状态测试通过。
+- 验证：协议/Phase C聚焦组46 passed/0 failed/113.20s；共享摘要、缓存恢复、生成组14 passed/0 failed/195.49s；Ruff PASS，`mypy src` 374文件零错，`git diff --check` PASS。没有外部provider调用。持久测试夹具删除自有run目录并核对基线文件；`.tmp-rsm`不存在。
+- 独立复核对“live README示例误显式调用v5”与“v4/省略模式多预留v5执行报告空间”两项P2修复完成follow-up，未发现P0–P2问题；之后按最终工作树再次复核，精确绑定收据已写入`review/scoped-v4-default-recovery-final-review-20261025.md`。
+- 下一步：只提交相关源码/测试/PWF，正常推送并验精确CI；随后单独处理selection/分批覆盖和真实source gold，不将工程E2E说成内容通过。
+
+## 2026-10-25 v4 默认与缓存恢复复验补记
+
+- 对 v4/v5 预检边界先复现红：默认/显式v4在只容纳响应正文和pin的空间里被误拒；修复后3种模式均通过。显式v5还单独验证恰好预留`EXECUTION_MAX_BYTES`可通过、少1字节即拒绝。
+- 最新集中回归：协议/Phase C 46 passed/139.79s；摘要/缓存/生成 14 passed/195.58s；预算边界3例通过；Ruff、`mypy src` 374文件零错、JSON解析和diff-check通过。独立终审绑定最终源码差异并PASS（无P0–P2），收据为`review/scoped-v4-default-recovery-final-review-20261025.md`。
+- 默认沙箱首次重跑时OS temp目录无法创建编号目录，且本地loopback被隔离；使用隔离pytest根在本机loopback环境重跑，同样两组全部通过。项目内本轮`.tmp-du11-v4-followup`及`.tmp-du11-unit`已核验并删除，runner自动删除了重定位的系统临时根；无外部provider/model调用。

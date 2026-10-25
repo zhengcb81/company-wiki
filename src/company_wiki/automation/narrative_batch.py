@@ -1248,13 +1248,26 @@ def _preflight_storage(request, *, source_count=None):
         + 2 * BUNDLE_MAX_BYTES
         + 1024**2
     )
-    from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION, EXECUTION_MAX_BYTES
+    from .narrative_model_extractive import (
+        EXECUTION_MAX_BYTES, EXTRACTIVE_MODEL_PROJECTION_VERSION,
+    )
+    from .narrative_model_runtime import supports_durable_paid_response
+    requested_projection = request.reading_model_projection
+    # An omitted projection resolves to the selector's current scoped-summary
+    # default during generation binding. Reserve the paid pin before workers start.
     durable_response = (request.execution_versions.get('selector') == '0.9.0'
-                        and request.reading_model_projection in (None, EXTRACTIVE_MODEL_PROJECTION_VERSION))
+                        and (requested_projection is None
+                             or supports_durable_paid_response(requested_projection)))
     if durable_response:
-        # Existing finite source reserve includes its raw paid body, bounded pin
-        # and retained execution report. No second output/fee ledger is opened.
-        per_source += request.model_options['max_response_bytes'] + 4096 + EXECUTION_MAX_BYTES
+        # All current summary protocols retain the paid body and bounded pin.
+        # Only the explicit v5 extractive compatibility protocol stores its
+        # additional execution report; omitted requests resolve to v4.
+        execution_reserve = (
+            EXECUTION_MAX_BYTES
+            if requested_projection == EXTRACTIVE_MODEL_PROJECTION_VERSION
+            else 0
+        )
+        per_source += request.model_options['max_response_bytes'] + 4096 + execution_reserve
     reserve = (
         (len(request.work_items) if source_count is None else source_count) * per_source
         + len(profile_slots(request.profile)) * 262144
@@ -1411,17 +1424,24 @@ def _paid_summary_recovery_candidates(binding, run, jobs, runs):
     existing caller checks those bytes and exact request binding before use;
     any mismatch stays failed without acquiring another provider allowance.
     """
+    from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION, SCOPED_PROMPT_VERSION
     from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION, EXTRACTIVE_PROMPT_VERSION
     from .narrative_paid_response import PaidResponsePin, PaidResponseError
+    recoverable_protocols = {
+        SCOPED_MODEL_PROJECTION_VERSION: SCOPED_PROMPT_VERSION,
+        EXTRACTIVE_MODEL_PROJECTION_VERSION: EXTRACTIVE_PROMPT_VERSION,
+    }
     if run is None or run.blocked:
         return ()
     records = runs.reservations_for_run(run.run_id)
     candidates = []
     for job in jobs:
         manifest = binding.generation_manifests.get(job.subject_id, {})
+        projection = manifest.get('reading_model_projection')
+        expected_prompt = recoverable_protocols.get(projection)
         if (job.job_type != 'source.narrative_summarize'
                 or job.status not in {JobStatus.DEAD_LETTER, JobStatus.RETRY_WAIT}
-                or manifest.get('reading_model_projection') != EXTRACTIVE_MODEL_PROJECTION_VERSION):
+                or expected_prompt is None):
             continue
         paid = [record for record in records if record.job_id == job.job_id and record.paid_response_json]
         if len(paid) != 1:
@@ -1434,7 +1454,7 @@ def _paid_summary_recovery_candidates(binding, run, jobs, runs):
         except PaidResponseError:
             continue
         if (pin.request_sha256 == record.request_sha256 and pin.model_id == run.model_id
-                and pin.prompt_version == EXTRACTIVE_PROMPT_VERSION):
+                and pin.prompt_version == expected_prompt):
             candidates.append((job.job_id, record.request_sha256))
     return tuple(candidates)
 

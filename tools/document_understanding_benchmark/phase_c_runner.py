@@ -724,13 +724,13 @@ def selector_versions(value: str | None) -> tuple[str, ...]:
 
 
 def reading_projection_for(selector_version: str, requested: str | None) -> str | None:
-    """One runner boundary: v5 production path; explicit v4 and old selector remain."""
+    """One runner boundary: v4 scoped-summary production path; explicit v5 remains."""
     from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
     from company_wiki.automation.narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
 
     if requested not in {None, SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION}:
         raise ValueError("unsupported phase C reading model projection")
-    return (requested or EXTRACTIVE_MODEL_PROJECTION_VERSION) if selector_version == "0.9.0" else None
+    return (requested or SCOPED_MODEL_PROJECTION_VERSION) if selector_version == "0.9.0" else None
 
 
 def successful_model_observation(receipt, native, events, materials: Path, run_id: str, *, reading_model_projection):
@@ -1605,8 +1605,8 @@ def argument_parser() -> argparse.ArgumentParser:
     parser.add_argument("--consumer-projects", type=Path,
                         help="Explicit sibling FF/RF checkout root; omission records consumers NOT_RUN.")
     parser.add_argument("--reading-model-projection", choices=("reading-model-input/4", "reading-model-input/5"),
-                        default="reading-model-input/5",
-                        help="Selector 0.9 uses v5 source cards by default; explicit v4 preserves the old prose protocol.")
+                        default="reading-model-input/4",
+                        help="Selector 0.9 uses v4 task-scoped summaries by default; v5 is explicit ranking compatibility.")
     parser.add_argument("--source-mode", choices=("isolated-copy", "registered_readonly"), default="isolated-copy",
                         help="Keep the historical local import, or register existing roots without copying raw bytes.")
     parser.add_argument("--source-catalog-config", type=Path,

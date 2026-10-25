@@ -275,18 +275,18 @@ def test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exac
         assert reused["budget"]["tokens"] == 0 and len(server.requests) == 1
         assert not store.reservations_for_run("public-v4-cache")
 
-        # Omission adopts the current source-extractive default, with a different
-        # generation. An exact prior v4 reference still resolves after LATEST changes.
-        wire.pop("reading_model_projection")
+        # The historical extractive/ranking protocol remains explicitly
+        # executable after the production default moves to scoped summaries.
+        wire["reading_model_projection"] = "reading-model-input/5"
         wire["run_id"] = "public-v5"
         path.write_bytes(fixtures.encoded(wire))
-        legacy_process, legacy = run("public-v5")
-        assert legacy_process.returncode == 0 and legacy["status"] == "completed", legacy
+        extractive_process, extractive = run("public-v5")
+        assert extractive_process.returncode == 0 and extractive["status"] == "completed", extractive
         assert len(server.requests) == 2 and server.errors == []
         assert server.requests[1]["schema_version"] == "narrative-model-request/6"
-        legacy_manifest = next(iter(store.final_generations("public-v5").values()))
-        assert legacy_manifest["reading_model_projection"] == "reading-model-input/5"
-        assert legacy_manifest != manifest
+        extractive_manifest = next(iter(store.final_generations("public-v5").values()))
+        assert extractive_manifest["reading_model_projection"] == "reading-model-input/5"
+        assert extractive_manifest != manifest
         pinned, _ = fixtures.invoke_read(state, reference)
         assert pinned == bundle
 

@@ -11,6 +11,9 @@ def response_draft(data):
     if data['schema_version'] == 'narrative-model-request/6':
         return {'decisions': [{'task': task['key'], 'priority': 'normal', 'disposition': 'consider'}
                               for task in data['material']['tasks']]}
+    if data['schema_version'] == 'narrative-model-request/5':
+        from support.scoped_model_response import source_grounded_scoped_reply
+        return source_grounded_scoped_reply(data)
     row = data["evidence"][0]
     role = row[2] if len(row) > 2 else data["default_source_role"]
     flags = row[3] if len(row) > 3 else data["default_quality_flags"]

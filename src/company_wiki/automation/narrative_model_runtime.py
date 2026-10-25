@@ -6,6 +6,18 @@ from . import narrative_model_scoped as scoped
 from . import narrative_model_extractive as extractive
 
 
+# Protocols that may use paid model tokens must preserve the complete provider
+# response so restart recovery can replay it locally without another POST.
+DURABLE_PAID_RESPONSE_PROJECTIONS = frozenset({
+    scoped.SCOPED_MODEL_PROJECTION_VERSION,
+    extractive.EXTRACTIVE_MODEL_PROJECTION_VERSION,
+})
+
+
+def supports_durable_paid_response(version):
+    return version in DURABLE_PAID_RESPONSE_PROJECTIONS
+
+
 def resolve_model_boundary(version, *, projected=False):
     if version == extractive.EXTRACTIVE_MODEL_PROJECTION_VERSION:
         if type(projected) is not bool:

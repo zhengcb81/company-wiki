@@ -1,20 +1,22 @@
 # 当前项目状态与接手入口
 
-**最新状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** 微软 FY2025 10-K formal-v4 的生产链路按界限完成：恰好一次 POST 得到 HTTP 200，token/成本估算 17,666 / $0.007102；原件和 gold SHA 未变，未下载、未翻译，缓存/启动恢复及 FF 原文复用通过，临时湖清理。MiniMax 返回的精确 schema 元数据此前被 decoder 拒绝，窄范围修复和独审已通过，捕获响应离线重放为 50/50 排序项。**工程链路 PASS 不等于内容 PASS：**本次只选 112/484 单元、314 deferred、layout incomplete；43 条摘要 claim 被代码默认标为 uncertain/needs_review，50个任务中还含5条 deferred和2条unsupported，RF 标记 not_consumed/needs_review。下一步分别验证排名重放、source-card完整性、claim质量映射及未分配单元含义，再设计可恢复的分批覆盖和有出处摘要；不只是提高上限，也不放宽质量门槛来制造消费。不能重跑本次付费请求来掩盖覆盖问题。详见[formal-v4与三卡ROOT验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)。
+**最新状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** 生产默认协议已在本地改为 selector 0.9.0 → `reading-model-input/4` 任务摘要；v5 排名协议保留为显式兼容路径。独立初审发现 v4 没有接付费响应固定/崩溃恢复，且预算预留与省略协议不一致；现已统一付费响应持久化和恢复，并由预检按协议精确预留：省略/v4有响应正文与pin，显式v5另加执行报告空间。holdout旧schema断言、Phase C默认和README示例也已改正。最新46项协议/Phase C测试、14项摘要/缓存/生成测试及预算边界红绿测试通过；Ruff、`mypy src`（374文件）、diff-check通过，零真实模型调用。独立终审通过，未发现P0–P2问题，按最终源码差异SHA绑定的收据见[审查记录](review/scoped-v4-default-recovery-final-review-20261025.md)。代码尚未提交/推送，当前CI仍只绑定前一个已发布HEAD。详细见`findings.md`与当前行动计划。
 
-**选择与结构根因（零费用精确复现）：** 同一微软原件 SHA 重放得 5,215 个HTML单元、1,120个进入语义结构、4,087个未映射到语义分区（不能直接等同“未读”）。年报路由的 112-span硬上限选入112/484，产生308个`budget_full`诊断；358个合格业务包中314个延期（308个受选择预算影响、6个引用未闭合）。结构侧另有24个超长section、3个continuation limit、2个表格正文未读。HTML没有bbox，于是5,215个单元都记为缺几何、layout不完整，但DOM文字仍可读；这应与内容是否读全分开验证。摘要代码又将所有非问题型原文卡固定设为`uncertain/needs_review`，当前模型请求只做排序，不生成自然语言摘要。不会仅提高cap或把needs_review改成通过。
+**业务验收仍未通过：** 微软 FY2025 10-K formal-v4 的既有生产运行只选 112/484 单元、314 deferred、layout incomplete；43 条 claim 被旧排名实现标为 uncertain/needs_review，50个任务中还含5条 deferred和2条unsupported，RF 标记 not_consumed/needs_review。不得把新协议的离线fixture通过当作真实摘要质量通过，也不能重跑既有付费请求。下一步先独立审查并发布协议/恢复修复，再针对选材覆盖、可恢复分批和真实source gold做离线根因工作。
 
-**发布/CI状态：** MiniMax测试契约修复 `275c8295f2924939695fdbfd2d19a6cc603f1111` 与本页状态提交 `ecdb2fd60acec040b37188659ac75be2572f639b` 已推送。pre-push定向快门30个目标、167项通过；精确远端 CI [40144505969](https://github.com/zhengcb81/company-wiki/actions/runs/40144505969) 绑定`ecdb2fd6`并已 completed/success，Ruff、全src mypy、Unit、focused contracts、CLI和secret scan均通过。其前一失败`40143579006`是测试仍要求MiniMax用旧`thinking=disabled`，而正确配置已改为`reasoning_effort=low`；未删测试，provider-specific契约已修复。失败与精确根因均保留在`CURRENT_STATUS.json`。
+**formal-v4 原始结构观察（零费用精确复现，协议切换前）：** 同一微软原件 SHA 重放得 5,215 个HTML单元、1,120个进入语义结构、4,087个未映射到语义分区（不能直接等同“未读”）。年报路由的 112-span硬上限选入112/484，产生308个`budget_full`诊断；358个合格业务包中314个延期（308个受选择预算影响、6个引用未闭合）。结构侧另有24个超长section、3个continuation limit、2个表格正文未读。HTML没有bbox，于是5,215个单元都记为缺几何、layout不完整，但DOM文字仍可读；这应与内容是否读全分开验证。当时v5排名代码将非问题型原文卡固定设为`uncertain/needs_review`；当前本地默认已切到v4，但上述selection/layout与真实gold覆盖问题仍未解决。不会仅提高cap或把needs_review改成通过。
 
-**真正摘要的生产根因（结构审查）：** selector `0.9.0` 的默认生成协议是 `reading-model-input/5`（extractive），API响应只做任务排序；`compile_extractive_plan`把原文卡原样复制成claim，并把非问题型claim固定为`uncertain/needs_review`。因此即使provider成功，当前链路也不可能产出自然语言业务摘要或可被RF消费的claim。这不同于单纯的decoder失败。已有`reading-model-input/4`支持按任务生成短摘要、来源局部引用和显式modality；但切换默认前必须用TDD证明source scope/引用/质量约束、112选择上限与分批覆盖、恢复与缓存身份，不能直接开生产付费调用。详细代码边界与下一步写入当前行动计划和`findings.md`。
+**发布/CI状态：** 最近已发布的 MiniMax 测试修复 `275c8295f2924939695fdbfd2d19a6cc603f1111` 与 PWF 提交 `ecdb2fd60acec040b37188659ac75be2572f639b` 已推送；精确远端 CI [40144505969](https://github.com/zhengcb81/company-wiki/actions/runs/40144505969) completed/success。它不覆盖本次尚未提交的 v4 默认/恢复改动；需先终审、正常提交推送，再验证新HEAD CI。
+
+**生产摘要根因与本地修复：** 历史生产默认是`reading-model-input/5`，API只返回任务排序，导致原文卡被伪装成uncertain claim。已有`reading-model-input/4`支持任务摘要、来源局部引用和modality。本次已把它接为 selector 0.9 的新默认，并把 v4/v5 都接入付费响应固定/零POST恢复；预算预检为省略/v4预留响应正文与pin，只给显式v5额外预留执行报告。完整端到端重启恢复已验证。这个修复只让生产路径能够生成和恢复摘要，不证明摘要覆盖、语义准确或RF消费质量。独立审查及修复见`findings.md`与后续版本绑定收据。
 
 **前一节点快照（formal-v4之前）：** 微软 FY2025 10-K formal-v3 只发出一次 HTTP POST，收到 HTTP 400（`MODEL_HTTP_CLIENT_ERROR`）后作为 terminal dead-letter 停止；没有保存响应正文、付费响应凭据或正式摘要，未重试。原件 SHA `99d693f6…01d0bbe`、gold SHA `4dd0875a…7e28a2a8`未变，未下载、未翻译，临时数据湖清理。93,648 tokens / $0.041379 的保守 hold 已计入母账，不等于供应商确认账单。
 
 **失败根因和修复：** 生产配置曾对 `MiniMax-M3.1-Flash` 使用 `thinking=disabled`；MiniMax 官方文档说明该模型不支持禁用 thinking。配置已改为 `reasoning_effort=low`，并增加精确 provider/model 的请求前防错。111 项聚焦测试、Ruff、diff-check通过，独立审查PASS。新配置绑定的零请求v6预检也通过：同一原件和gold、112 spans/40,491字符、8/8必需业务事实有支持、0 POST、母账前后相同（1,765,712 tokens / $0.717734）、临时数据清理成功。详细见[根因收据](review/market-family-upgrade-20261024/us-10k-formal-v3-root-cause-20261025.json)、[独立复核](review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md)和[formal-v4零请求预检](review/market-family-upgrade-20261024/us-10k-formal-v4-preflight-20261025.json)。
 
-**formal-v4 后的唯一下一步：** 先解决“112-span选择上限 + 4,087个未分配单元 + 314 deferred → selection/layout partial → 43条claim needs_review → RF not_consumed”的共因。优先做零费用重放、选择器单元/集成测试和缓存内既有响应回放；设计能让高价值描述性内容分批覆盖而不把财务表整体切片的策略。新策略通过独立审查、原件/gold指纹核验和费用预检后，再决定是否做新的有界真实摘要；本轮不得重放或覆盖 formal-v4 收据。
+**下一步：** 只提交相关源码/测试/PWF并正常推送，随后核验新HEAD的精确CI；然后处理“112-span上限 + 4,087个未映射单元 + 314 deferred → coverage/layout partial → RF not_consumed”的共因。先以冻结source gold做零费用分批/缓存设计与回放；不把4,087未映射直接算作未读，不提高cap代替诊断，也不重放或覆盖formal-v4收据。只有内容覆盖与质量边界经大节点审查通过后，才考虑一笔新预检、有界的真实摘要调用。
 
-**主线状态：** formal-v4 正式摘要、激活恢复、cache 重用、FF 原文复用和真实 RF 只读读取均已跑通；RF 实际消费和内容质量仍未通过。跨市场/文种真实样本、W12四审及公司循环仍开放。IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 三卡均已按交接/独审/测试/版本绑定完成 ROOT 接收；作者仓仍各自独立，未替作者合并或推送。
+**主线状态：** formal-v4 原运行的激活恢复、cache重用、FF原文复用与RF只读检查均有工程记录；RF实际消费和内容质量仍未通过。当前代码本地切换为v4默认并补齐付费响应恢复，尚待独审/发布/CI。跨市场文种真实样本、W12四审及公司循环仍开放。IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY三卡均按交接/独审/测试/版本绑定完成ROOT接收；作者仓仍各自独立，未替作者合并或推送。
 
 ---
 

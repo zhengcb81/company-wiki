@@ -125,7 +125,7 @@ def _request(spec, run_id):
     limits = spec['limits']
     return {'schema_version': 'narrative-batch-request/1', 'run_id': run_id,
         'sources': [spec['source_ref']], 'selector_version': '0.9.0',
-        'reading_model_projection': 'reading-model-input/5', 'profile': 'P1',
+        'reading_model_projection': 'reading-model-input/4', 'profile': 'P1',
         **{key: limits[key] for key in ('max_seconds', 'max_tokens', 'max_cost_usd',
               'max_final_bytes', 'max_persistent_bytes', 'max_scratch_bytes')},
         'model': {}, 'pricing': spec['pricing']}
@@ -241,9 +241,9 @@ def run_controller(spec, *, stop_after=None):
                 'native_attempt_id': native_attempt.attempt_id, 'native_outcome': native_attempt.outcome.value,
                 'native_error_code': native_attempt.error_code}
 
-            require(all(value.get('reading_model_projection') == 'reading-model-input/5'
+            require(all(value.get('reading_model_projection') == 'reading-model-input/4'
                         for value in paid['generations'].values()) and paid['generations'],
-                    'HOLDOUT_NO_FROZEN_V5_GENERATION')
+                    'HOLDOUT_NO_FROZEN_V4_GENERATION')
             if stop_after == 'after_paid':
                 result['status'] = 'paused_for_test'
             else:

@@ -58,7 +58,7 @@ def install() -> None:
                 os.fsync(stream.fileno())
             envelope = json.loads(body)
             material = json.loads(envelope['messages'][1]['content'])
-            if material['schema_version'] != 'narrative-model-request/6':
+            if material['schema_version'] != 'narrative-model-request/5':
                 raise RuntimeError('HOLDOUT_MODEL_SCHEMA_MISMATCH')
             event('http_post', body_sha256=hashlib.sha256(body).hexdigest(),
                   body_bytes=len(body), request_schema=material['schema_version'],

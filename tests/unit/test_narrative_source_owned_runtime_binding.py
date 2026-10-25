@@ -40,9 +40,9 @@ def test_new_reading_generation_uses_source_owned_boundary_only_for_new_reading_
 
     reading = manifest(replace(_request(), selector_version="0.9.0"))
     legacy = manifest(replace(_request(), selector_version="0.8.0"))
-    assert reading["reading_model_projection"] == "reading-model-input/5"
-    assert reading["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/5").prompt_version
-    assert reading["execution_versions"]["model_request_schema"] == "narrative-model-request/6"
+    assert reading["reading_model_projection"] == "reading-model-input/4"
+    assert reading["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/4").prompt_version
+    assert reading["execution_versions"]["model_request_schema"] == "narrative-model-request/5"
     assert "reading_model_boundary" in reading
     assert "reading_model_projection" not in legacy
     assert "reading_model_boundary" not in legacy

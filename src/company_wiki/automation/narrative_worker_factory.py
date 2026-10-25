@@ -351,8 +351,9 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from None
         _verify_effective_model(model, snapshot.frozen_models)
         paid_responses = None
-        from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
-        if EXTRACTIVE_MODEL_PROJECTION_VERSION in reading_projections.values():
+        from .narrative_model_runtime import supports_durable_paid_response
+        if any(supports_durable_paid_response(version)
+               for version in reading_projections.values()):
             from .narrative_batch import BatchStorageBudget, _BudgetedObjects
             from .narrative_paid_response import PaidResponseArtifacts
             storage = options.get('response_storage')

@@ -59,8 +59,8 @@ def with_frozen_model_identity(current, recorded):
 
 def _bind_reading_projection(manifest, versions, reading_model_projection):
     if reading_model_projection is READING_PROJECTION_UNSET:
-        from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
-        reading_model_projection = (EXTRACTIVE_MODEL_PROJECTION_VERSION
+        from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
+        reading_model_projection = (SCOPED_MODEL_PROJECTION_VERSION
                                     if versions.get("selector") == "0.9.0" else None)
     if reading_model_projection is not None:
         # Historical identities can retain a future/retired software version.

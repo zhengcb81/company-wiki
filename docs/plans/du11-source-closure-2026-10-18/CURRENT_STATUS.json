@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_FORMAL_V4_PIPELINE_PASS_CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "ACTIVE_V4_SCOPED_SUMMARY_DEFAULT_LOCAL_TESTS_PASS_CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -79,13 +79,20 @@
       "default_projection": "reading-model-input/5",
       "request_protocol": "narrative-model-request/6; decisions only; advisory ranking_only",
       "draft_behavior": "copies complete raw source-card text into claims; non-question claims are forced uncertain and needs_review",
-      "result": "a successful provider call can rank source tasks but cannot emit a natural-language business summary or RF-consumable claims",
-      "existing_summary_protocol": "reading-model-input/4 provides task-scoped prose clauses, source-local citations and explicit modality, but its default binding, coverage, bounded-batch and recovery behavior must be validated before production selection",
+      "result": "At the observation point, a successful provider call could rank source tasks but could not emit natural-language business summaries. The local default now uses v4; content quality and coverage remain unaccepted.",
+      "existing_summary_protocol": "reading-model-input/4 provides task-scoped clauses, source-local citations and explicit modality; it is now the local default with paid-response persistence and recovery, but still requires real-source coverage and semantic quality validation.",
       "next_tests": [
-        "TDD the production projection choice against generated summary protocol, not ranking-only output",
-        "prove task citation, modality, scope, source-quality flags and claim budgets remain enforced",
-        "evaluate selection omissions and resumable batch coverage against frozen source gold before any paid call"
-      ]
+        "Against frozen source gold, resolve the 112-span cap, 308 budget-deferred items, 24 oversized sections, 3 continuation limits and 2 table-body omissions without counting unassigned units as automatically unread.",
+        "Validate bounded resumable batches, source/context closure, aggregate coverage, response-cache identity and no duplicate spend across restart.",
+        "Evaluate actual summary recall, faithfulness, language and modality on held-out real documents; deterministic source-copy loopback is protocol/lifecycle evidence only.",
+        "Verify the downstream RF consumer actually uses the accepted source-bound summaries and preserves partial/needs_review status when evidence is missing."
+      ],
+      "observation_time": "2026-10-25, before the local scoped-summary default migration",
+      "current_default_projection": "reading-model-input/4 (implemented locally; publication pending)",
+      "migration_status": "selector 0.9.0 now binds v4 by default; v5 remains explicit compatibility",
+      "claim_quality_root": "The v5 compatibility pathway copies source-card text into claims and fixes non-question modality to uncertain/needs_review; that historical behavior is no longer the selector 0.9 default.",
+      "interpretation": "The original parser/geometry counts remain historical evidence. Unassigned means not mapped to semantic sections, not automatically unread. HTML bbox absence is a geometry limitation while DOM text can remain readable. Current code locally defaults to v4; content coverage and semantic quality are still open.",
+      "next": "Finish independent review and exact-head publication of the local v4 default/recovery change. Then use frozen source gold for coverage and recoverable-batch design; do not make a new paid request until that major gate passes."
     },
     "interpretation": "The HTML parser completed the native scan. Unassigned means not mapped into semantic sections, not automatically unread. Missing bbox is a geometry limitation and layout_bridge explicitly says DOM/text remains readable. Candidate cap, oversized/continued sections and table omissions need separate source-grounded checks.",
     "next": "Inspect unassigned/oversized/continued/table units against source and gold; define resumable value-ranked batches with total coverage and cache semantics; test assertive-vs-uncertain source claim quality without lowering review safeguards; no new paid request until offline tests and independent review pass."
@@ -315,7 +322,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Formal-v4 pipeline passed, but content/RF acceptance did not: selection was 112/484 with 314 deferred and incomplete layout; all 43 claims remain uncertain/needs_review and RF status is not_consumed. Diagnose the shared selector allocation, unassigned-unit and batching/continuation root cause using offline replay and targeted tests first. Preserve the formal-v4 paid receipt; do not retry it. Consider a new bounded live summary only after the revised selection/batch path passes independent review, protected fingerprints and budget preflight.",
+  "next_step_now": "The 0.9 production selector and Phase C runner now default locally to task-scoped v4 summaries; v4/v5 paid-response pinning and exact zero-POST restart recovery are covered. 46 focused tests and 14 summary/cache/generation tests pass; Ruff, mypy src (374 files), and diff-check pass. No provider call was made. Obtain final independent review of the complete diff, resolve findings, then publish and verify exact-head CI. Content/coverage/RF acceptance remains open: first design and test bounded resumable coverage against frozen source gold; do not call offline fixture success semantic-quality acceptance or retry formal-v4.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -822,14 +829,14 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Offline-replay the exact captured ranking response against its original 50-task request and persisted selection bundle; verify the decoder repair without a provider call, while keeping the original formal run immutable.",
-    "Trace the source-card plan: 43 admitted, 5 deferred by draft-byte budget, 2 unsupported. Determine how this and the 112-span/314-deferred selection affects coverage and whether 4,087 unassigned units are business omissions or non-narrative structure diagnostics.",
-    "Root-design a bounded resumable batching path that preserves source/group/context dependencies, deduplicates evidence, tracks aggregate coverage and native receipts/cache, and spends budget only on descriptive business content; do not merely raise the per-document cap.",
-    "Replace the current ranking-only output for acceptance with source-grounded concise claims that preserve actual/plan/conditional/uncertain modality; keep quality review for genuinely ambiguous/unsupported evidence. Add RED tests for claim quality and RF consumption before implementation.",
-    "Run focused offline and integration tests, independent review on final code/test SHA, then only if the major gate is green consider a newly preflighted bounded live summary and real RF consumption. Keep content acceptance open until company-level review passes.",
-    "The three independent project cards are ROOT-accepted as deliveries; their external repository branches remain unmerged/unpushed by this project."
+    "Finish the independent read-only review of the exact v4-default, v4/v5 durable response, budget preflight, Phase C, and test/documentation diff; fix any findings and save a SHA-bound receipt.",
+    "Commit and push only the reviewed implementation/tests/PWF; verify the exact published HEAD and its CI before describing the change as deployed.",
+    "Keep the formal-v4 Microsoft request immutable. Offline-replay its captured response and source gold, then inspect 112/484 selection, 314 deferred tasks, oversized/continued sections, table omissions and unassigned units.",
+    "Design a bounded, recoverable, value-ranked batch plan with aggregate coverage, source/context closure, cache identity and no duplicate spend. Test the plan against frozen multi-market source gold before any new paid summary.",
+    "After the coverage gate and independent review pass, make one newly preflighted configured summary attempt, then verify content quality and actual RF consumption; retain partial/needs_review where evidence is incomplete.",
+    "Continue cross-market/document-type validation, W12 four-review audit and company holdout loop only after the core coverage and RF path are accepted."
   ],
-  "last_updated_utc": "2026-10-24T23:29:57Z",
+  "last_updated_utc": "2026-10-25T00:27:46Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1168,18 +1175,41 @@
     "cn_h1_business_content_review": "PENDING"
   },
   "latest_local_validation": {
-    "status": "PASS_DECODER_BOUNDARY_AND_PHASE_C_RECOVERY",
-    "tests": 24,
-    "seconds": 28.36,
-    "test_files": [
-      "tests/unit/test_narrative_extractive_runtime.py",
-      "tests/test_phase_c_activation_recovery.py"
-    ],
-    "temporary_test_root": ".tmp-phasec-focused",
-    "temporary_test_root_removed": true,
-    "independent_review": "PASS",
-    "independent_review_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
-    "provider_calls_in_validation": 0
+    "status": "PASS_V4_SCOPED_SUMMARY_DEFAULT_RECOVERY_CACHE_AND_PHASE_C",
+    "provider_calls": 0,
+    "focused_protocol_and_phase_c": {
+      "passed": 46,
+      "failed": 0,
+      "seconds": 139.79,
+      "test_files": [
+        "tests/unit/test_narrative_extractive_production.py",
+        "tests/integration/test_holdout_acceptance_controller_e2e.py",
+        "tests/test_phase_c_extractive.py"
+      ],
+      "assertions": "v4 default, explicit v5 compatibility, paid-response pin/restart replay with one POST, cache reuse, response-space reservation for omitted/v4/v5, Phase C default/compatibility"
+    },
+    "summary_cache_and_generation": {
+      "passed": 14,
+      "failed": 0,
+        "seconds": 195.58,
+      "test_files": [
+        "tests/unit/test_narrative_scoped_runtime_recovery.py",
+        "tests/integration/test_shared_reading_production_e2e.py",
+        "tests/integration/test_reading_projection_generation_e2e.py"
+      ]
+    },
+    "ruff": "PASS",
+    "mypy_src_files": 374,
+    "mypy_errors": 0,
+    "git_diff_check": "PASS",
+    "temporary_workspace_root": ".tmp-du11-v4-followup plus runner-relocated system temp; final boundary unit used .tmp-du11-unit",
+    "temporary_workspace_root_absent_after_tests": true,
+    "fixture_owned_run_directories_removed_and_baseline_files_verified": true,
+    "independent_review": "PASS_NO_P0_P2",
+    "independent_review_ref": "review/scoped-v4-default-recovery-final-review-20261025.md",
+    "reviewed_head": "023252eaf3c9f8a7672d42b5e944e967e5ec49b2",
+    "reviewed_diff_sha256": "06a7970f4e4bad875ae0f2dd6d72e476687e901dbe16490496d1662a62ff884d",
+    "untracked_fixture_sha256": "ce1642e89fc08b127dc4deeb6303ce617db84351b5f4459736687ecef53a033f"
   },
   "previous_code_ci_failure": {
     "id": 40130559322,
@@ -1421,5 +1451,51 @@
       "report": "review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md",
       "reviewer_scope": "config scope, model-specific fail-fast, serialized request shape, no secret/API use"
     }
+  },
+  "previous_local_validation_20261025_pre_scoped_default": {
+    "status": "PASS_DECODER_BOUNDARY_AND_PHASE_C_RECOVERY",
+    "tests": 24,
+    "seconds": 28.36,
+    "test_files": [
+      "tests/unit/test_narrative_extractive_runtime.py",
+      "tests/test_phase_c_activation_recovery.py"
+    ],
+    "temporary_test_root": ".tmp-phasec-focused",
+    "temporary_test_root_removed": true,
+    "independent_review": "PASS",
+    "independent_review_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
+    "provider_calls_in_validation": 0
+  },
+  "scoped_summary_default_migration_20261025": {
+    "status": "IMPLEMENTED_LOCALLY_NOT_COMMITTED",
+    "selector_version": "0.9.0",
+    "new_default_projection": "reading-model-input/4",
+    "compatibility_projection": "reading-model-input/5 remains explicit",
+    "paid_response_capture_and_recovery": [
+      "reading-model-input/4",
+      "reading-model-input/5"
+    ],
+    "omitted_projection_preflight": "reserves response storage because the current 0.9 default binds to v4",
+    "phase_c_runner_default": "reading-model-input/4",
+    "phase_c_v5": "explicit ranking compatibility mode",
+    "independent_review_initial_findings": [
+      "worker factory only pinned paid response for v5, so v4 could not recover without another POST",
+      "storage preflight did not consistently reserve v4 response bytes",
+      "holdout observer still asserted request schema v6 and prevented the local request from reaching its server",
+      "Phase C entry point and documentation still defaulted to v5",
+      "offline source-copy fixtures prove protocol/lifecycle only, not semantic summary quality"
+    ],
+    "root_fixes": [
+      "centralized supported durable paid-response projection versions and wired worker factory for v4/v5",
+      "aligned preflight reserve for omitted/v4/v5 projection under selector 0.9.0",
+      "aligned holdout observer with the v4 request schema and verified one POST plus zero-POST restart replay",
+      "aligned Phase C runner, CLI defaults, tests, and documentation to v4; explicit v5 remains tested",
+      "retained content quality and RF acceptance as open gates; made no paid provider call"
+    ],
+    "final_independent_review": "PASS_NO_P0_P2",
+    "final_independent_review_ref": "review/scoped-v4-default-recovery-final-review-20261025.md",
+    "reviewed_head": "023252eaf3c9f8a7672d42b5e944e967e5ec49b2",
+    "reviewed_diff_sha256": "06a7970f4e4bad875ae0f2dd6d72e476687e901dbe16490496d1662a62ff884d",
+    "untracked_fixture_sha256": "ce1642e89fc08b127dc4deeb6303ce617db84351b5f4459736687ecef53a033f"
   }
 }
