@@ -1,0 +1,169 @@
+{
+  "schema_version": "pdf-c2-paragraph-real-replay/1",
+  "mode": "frozen",
+  "checkpoints": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "phase": "native",
+      "pass": false,
+      "tasks": []
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t12"
+      ]
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t13"
+      ]
+    },
+    {
+      "id": "hk-industry-cloud-closure",
+      "phase": "enhanced",
+      "pass": false,
+      "tasks": []
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t12"
+      ]
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t13"
+      ]
+    },
+    {
+      "id": "ipo-business-scope",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t10"
+      ]
+    },
+    {
+      "id": "ipo-operating-technology",
+      "phase": "native",
+      "pass": false,
+      "tasks": []
+    },
+    {
+      "id": "ipo-fact-v2-etch-application",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t12"
+      ]
+    },
+    {
+      "id": "ipo-fact-v2-mocvd-production",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t13"
+      ]
+    },
+    {
+      "id": "ipo-business-scope",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t10"
+      ]
+    },
+    {
+      "id": "ipo-operating-technology",
+      "phase": "enhanced",
+      "pass": false,
+      "tasks": []
+    },
+    {
+      "id": "ipo-fact-v2-etch-application",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t12"
+      ]
+    },
+    {
+      "id": "ipo-fact-v2-mocvd-production",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t13"
+      ]
+    },
+    {
+      "id": "annual-semiconductor-scope",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t3"
+      ]
+    },
+    {
+      "id": "annual-industry-data-unit",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t7"
+      ]
+    },
+    {
+      "id": "annual-equipment-scope",
+      "phase": "native",
+      "pass": true,
+      "tasks": [
+        "t11"
+      ]
+    },
+    {
+      "id": "annual-semiconductor-scope",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t3"
+      ]
+    },
+    {
+      "id": "annual-industry-data-unit",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t7"
+      ]
+    },
+    {
+      "id": "annual-equipment-scope",
+      "phase": "enhanced",
+      "pass": true,
+      "tasks": [
+        "t11"
+      ]
+    }
+  ],
+  "protected_sha256": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    ".source_catalog\\catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5",
+    "config\\resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+  },
+  "protected_unchanged": true,
+  "seconds": 31.38,
+  "downloads": 0,
+  "paid_calls": 0,
+  "raw_copies": 0,
+  "scope": "Exposed finite five-page regression; tasks/citations only; not LLM semantics or fresh holdout"
+}

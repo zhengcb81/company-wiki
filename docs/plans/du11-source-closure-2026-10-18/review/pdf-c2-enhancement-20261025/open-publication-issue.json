@@ -1,0 +1,12 @@
+{
+  "source_commit": "f13de801cd3a276f3906bfe9c9b66905ce182599",
+  "status": "OPEN_PAUSED",
+  "file": "src/company_wiki/source_catalog/_paragraph_worker.py",
+  "line": 51,
+  "command": "python -m mypy --platform linux src/company_wiki/source_catalog/_paragraph_worker.py src/company_wiki/_process_tree.py",
+  "observed": "Module has no attribute WinDLL [attr-defined]",
+  "proposed_not_applied": "cast(Any, ctypes).WinDLL",
+  "windows_full_src_mypy": "PASS",
+  "remote_ci": "NOT_CLAIMED_GREEN",
+  "changes_after_pause": false
+}

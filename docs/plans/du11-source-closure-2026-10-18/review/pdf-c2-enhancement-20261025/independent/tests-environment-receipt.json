@@ -1,0 +1,22 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_pdf_paragraph_runtime.py::test_transitive_backend_or_preprocessor_version_changes_frozen_environment",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\c2fit-3679mhgb\\p"
+  ],
+  "exit_code": 0,
+  "seconds": 11.7,
+  "temporary_root_restored_absent": true,
+  "real_model_calls": 0,
+  "downloads": 0
+}

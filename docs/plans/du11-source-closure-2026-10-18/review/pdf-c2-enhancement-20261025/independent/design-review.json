@@ -1,0 +1,112 @@
+{
+  "schema_version": "pdf-c2-independent-design-review/1",
+  "status": "DESIGN_ISSUES_OPEN_NOT_IMPLEMENTATION_ACCEPTANCE",
+  "source_commit": "8669e0cd989a3441cd316f8870d03b224fb883b8",
+  "code_lf_sha256": {
+    "src/company_wiki/source_catalog/narrative_pdf_reading.py": "35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d",
+    "src/company_wiki/document_understanding/observation_adapter.py": "357e67be76f06960aec1585b6401fea24a08016d58933c27af0a7cccf7cc2259",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "9e5c130debfc1a18261bd143a38625f151f95eed7f09750d2efeaca9327dec6e",
+    "src/company_wiki/source_catalog/narrative_reading.py": "5a29f674fe93254e4997bba4671888cdbea91b003f9df4049f7e8cb0ffa96043"
+  },
+  "frozen_artifacts": [
+    {
+      "path": "business-pages-source.json.gz",
+      "stored_sha_ok": true,
+      "decoded_sha_ok": true
+    },
+    {
+      "path": "business-comparison-v2-raw.json.gz",
+      "stored_sha_ok": true,
+      "decoded_sha_ok": true
+    },
+    {
+      "path": "current-reading-bounded-baseline.json.gz",
+      "stored_sha_ok": true,
+      "decoded_sha_ok": true
+    },
+    {
+      "path": "paragraph-alignment-observation.json.gz",
+      "stored_sha_ok": true,
+      "decoded_sha_ok": true
+    }
+  ],
+  "no_model_calls": true,
+  "no_source_config_author_edits": true,
+  "findings": [
+    {
+      "id": "C2-D1",
+      "priority": "P1",
+      "problem": "A paragraph hint attached only at edge cannot admit units rejected first for native font absence; equal-font and upstream semantic scope remain blocking. Do not fabricate font evidence.",
+      "recommendation": "Separate source-native geometry/text validity from optional typography. A validated paragraph-membership proof may supply physical grouping only after source/page/order/role/table/header/column/source section and project counterevidence is checked; unknown font may be diagnostic for this alternate proof, while native geometry proof still requires observed font. Test absent and mixed fonts explicitly.",
+      "status": "POTENTIAL_COUNTEREXAMPLE_ONLY_NOT_PRESENT_IN_TWO_REAL_TARGETS"
+    },
+    {
+      "id": "C2-D2",
+      "priority": "P1",
+      "problem": "The original ipo-operating-technology same_group gold combines distinct etch and MOCVD statements and spans six physical blocks, incompatible with unchanged four-block limit and independent-fact splitting.",
+      "recommendation": "Preserve historical6/8 metric. Add versioned source-complete per-fact task/citation checks, or explicitly disclose broader task packaging separately from atomic grouping. Never raise limits or merge unrelated operating facts to get8/8."
+    },
+    {
+      "id": "C2-D3",
+      "priority": "P2",
+      "problem": "A physical paragraph is not an investment/fact atomicity proof; adapter-only metadata is ignored by downstream native continuity and may collapse to a new native range ID.",
+      "recommendation": "An explicit generic transient membership hint and validated physical edge must reach actual summary_task membership. External-only grouped windows retain native IDs and locators, no carrier text rewrite."
+    }
+  ],
+  "verified_groups": [
+    {
+      "case_id": "hk-interim-p13",
+      "ref": "#/texts/4",
+      "members": 4,
+      "blocks": [
+        7,
+        8,
+        8,
+        9
+      ],
+      "fits_existing_limits": true
+    },
+    {
+      "case_id": "cn-ipo-p114",
+      "ref": "#/texts/6",
+      "members": 8,
+      "blocks": [
+        10,
+        11,
+        12,
+        12,
+        13,
+        14,
+        14,
+        15
+      ],
+      "fits_existing_limits": false,
+      "closed_substatements": [
+        [
+          10,
+          11,
+          12
+        ],
+        [
+          13,
+          14,
+          15
+        ],
+        [
+          16,
+          17
+        ]
+      ]
+    }
+  ],
+  "remaining_review": "Final implementation, actual task membership, recipe/replay/resource/failure boundaries and real source evidence are not yet reviewed.",
+  "real_native_followup": {
+    "receipt": "native-diagnostic.json",
+    "no_font_scope_barrier_in_targets": true,
+    "hk_root_gap": "Paragraph9 first bullet line and paragraph10 body have22.68pt left margin delta, over2.1*9pt current physical native edge; remaining10–12 join.",
+    "ipo_oracle_conflict_confirmed": "Frozen baseline already has complete separate source ranges for etch and MOCVD facts; missing combined group is not content loss.",
+    "originals_unchanged": true,
+    "docling_calls": 0,
+    "llm_calls": 0
+  }
+}

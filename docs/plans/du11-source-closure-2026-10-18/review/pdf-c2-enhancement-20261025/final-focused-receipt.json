@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_pdf_paragraph_alignment.py",
+    "tests/unit/test_pdf_paragraph_runtime.py",
+    "tests/unit/test_pdf_paragraph_reading_integration.py",
+    "tests/unit/test_pdf_reading_boundary.py",
+    "tests/unit/du11_production",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+    "tests/unit/test_bounded_process.py",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-hiw1lnj2\\p"
+  ],
+  "exit_code": 0,
+  "seconds": 31.757,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

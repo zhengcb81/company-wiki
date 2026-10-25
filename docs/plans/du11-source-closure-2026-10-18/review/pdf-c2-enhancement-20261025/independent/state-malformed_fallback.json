@@ -1,0 +1,986 @@
+{
+  "reading_context": {
+    "schema_version": "du-production-reading/3",
+    "reading_policy_version": "du-sent-policy/1+9e4e136362b2154562c16b4e91d8531ed6b2f1be2d03836d202622ceaf3cf3d8",
+    "reading_policies": [
+      {
+        "profile_id": "cn_annual",
+        "profile_version": "cn_annual/v2+b72594f55d084442",
+        "family": "annual",
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 报告期主营业务构成、主要产品与收入机制 相比上一报告期发生了哪些经营变化及其原因 新产品/第二曲线所处阶段与证据（开发→送样→验证→小批量→量产→规模化） 产能、订单、利用率、出货等经营指标及其口径 海外/新市场的实际进入程度与主体归属 公司下一阶段计划、附带条件与不确定性 风险因素中已发生事实与一般性提示的区分",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "cn_annual_report",
+            "version": "1.0.2",
+            "content_digest": "dc852a96ed7ab9615c7c19dda64cf277aeabcad0e879b9233972d2205a083219"
+          }
+        ],
+        "reading_questions": [
+          "报告期主营业务构成、主要产品与收入机制",
+          "相比上一报告期发生了哪些经营变化及其原因",
+          "新产品/第二曲线所处阶段与证据（开发→送样→验证→小批量→量产→规模化）",
+          "产能、订单、利用率、出货等经营指标及其口径",
+          "海外/新市场的实际进入程度与主体归属",
+          "公司下一阶段计划、附带条件与不确定性",
+          "风险因素中已发生事实与一般性提示的区分"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "年报所有经营与财务叙述都是报告期口径，断言必须绑定披露主体与报告期"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "geography"
+            ],
+            "missing_behavior": "partial",
+            "reason": "收入拆分、产销量等数值必须保留单位、期间与地域/合并范围，缺任一不得单独引用"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "产能/募投/研发项目断言必须保留项目主体、建设或验证阶段与实现条件，计划不等于承诺"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "前瞻性陈述、计划与测算自带限定语，限定语必须随局部事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "cn_annual_report",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "样本行业集中于半导体设备",
+            "扫描件/OCR 路径未测",
+            "摘要忠实度未测（模型语义留 ROOT/大节点）"
+          ]
+        },
+        "negative_hints": [
+          "合并财务报表、常规三表、账龄与税费明细等纯财务表；例外：其中包含经营驱动解释、业务相关附注或经营指标",
+          "董监高任职与薪酬、股东大会程序、公司治理常规披露；例外：其中包含重大经营事项、股权变动或对经营的实际约束",
+          "目录、页眉页脚、备查文件与签字盖章页；例外：用于确认文档版本、完整性与真实来源"
+        ],
+        "semantic_units": [
+          "paragraph_event",
+          "project",
+          "operating_table",
+          "risk",
+          "background"
+        ],
+        "section_priorities": [
+          {
+            "section_role": "unknown",
+            "priority": 2
+          }
+        ]
+      }
+    ],
+    "business_facets": [
+      {
+        "id": "semantic_stage_progression",
+        "version": "1.3.0",
+        "content_digest": "8613175346b8f684e24b6293d7fbcd858fc37f09ce65e8835f2f2e7d3af8eb5f",
+        "selection_basis": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+            "matched_signals": [
+              "验证"
+            ]
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7",
+            "matched_signals": [
+              "量产",
+              "尚未"
+            ]
+          }
+        ],
+        "business_questions": [
+          "新产品/新业务当前处在哪个商业化阶段（开发/立项、送样、客户验证、小批量、量产、规模化），证据是什么",
+          "该阶段是实际达成、在推进中、还是管理层的计划或目标；披露时点是何时",
+          "阶段陈述属于哪个法人主体（上市公司自身、子公司、参股公司、控股股东）和哪个具体产品",
+          "进入下一阶段的条件（客户认证通过、审批、订单落地、良率达标）是否披露，当前完成度如何",
+          "阶段相关的数量（送样量、验证批次、小批量出货量、阶段客户数）以什么单位和口径披露"
+        ],
+        "summary_focus": [
+          "新产品/新业务当前处在哪个商业化阶段，证据是什么？",
+          "阶段属于哪个主体和产品，披露时点与语态（实际/在推进/计划/目标）是什么？",
+          "进入下一阶段需要什么条件，当前完成度如何？",
+          "阶段相关数量的单位与口径是什么（如披露）？",
+          "管理层对阶段是否有明确否定或未回答，问句前提与答复如何分开？"
+        ],
+        "required_context": [
+          {
+            "assertion": "断言『产品X处于阶段S』时必须同时保留主体、产品、阶段、语态（实际/在推进/计划/目标）与披露时间",
+            "slots": [
+              "subject",
+              "product",
+              "stage",
+              "modality",
+              "period"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "partial",
+            "reason": "阶段是相对披露时点的进展状态；丢语态会把计划当实际、把验证当量产，丢主体会把子公司的成果当上市公司的"
+          },
+          {
+            "assertion": "断言阶段相关数量（送样量、验证批次数、小批量出货量、阶段客户数）时必须保留数量、单位与口径（期间/累计/单月）",
+            "slots": [
+              "quantity",
+              "unit",
+              "period"
+            ],
+            "required_when": "quantity_emitted",
+            "missing_behavior": "unknown",
+            "reason": "只有输出数量才要求单位/分母；描述定性进度时不强制补数字，禁止为凑数而推断；普通计数保留范围口径，不强制数学分母。"
+          },
+          {
+            "assertion": "断言『进入下一阶段的条件』时必须保留条件原文（客户认证通过、审批获批、订单落地、良率达标等）",
+            "slots": [
+              "condition",
+              "stage"
+            ],
+            "required_when": "explicit_condition_present",
+            "missing_behavior": "partial",
+            "reason": "条件决定该表述是门槛、正在进行的动作还是已达成状态；删条件会把依赖关系说成既成事实"
+          },
+          {
+            "assertion": "断言某客户/某产品的阶段进展时保留客户范围与披露口径（匿名客户不得猜名字，前五大客户不得推成唯一客户）",
+            "slots": [
+              "subject",
+              "product",
+              "geography"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "unknown",
+            "reason": "客户身份保密是常见披露口径，范围不明时补具体客户名是编造公司事实"
+          },
+          {
+            "assertion": "断言任何进展或经营量时保留并分开表述五类语态：强事实（已发生）、推测或测算、管理层指导目标、计划（预计/规划）、假设性风险（可能/或将）",
+            "slots": [
+              "modality",
+              "period"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "partial",
+            "reason": "五类语态证据强度不同；强事实、推测、指导目标、计划、假设风险不得合并，管理层展望/目标不得升级成确定收入"
+          },
+          {
+            "assertion": "断言药物/疗法所处研发阶段时保留阶段细分、适应症/用途与监管语态（已获批/申报中/未获批）",
+            "slots": [
+              "subject",
+              "product",
+              "stage",
+              "modality",
+              "condition"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "unknown",
+            "reason": "生物医药阶段阶梯（临床前/临床/申报/获批/商业化）跨级即失真；无原文阶段依据时必须 unknown"
+          }
+        ],
+        "absence_rules": [
+          "未披露阶段或阶段证据时标 unknown（未披露），不按模板或行业惯例补阶段",
+          "管理层未回答/回避阶段问题时记『未回答』，既不推断阶段成立也不推断阶段失败",
+          "管理层明确否定（如『目前未涉及某业务』）按否定作用域和时点保存，不得改写为在研、储备或潜在布局",
+          "未读取到相关章节/页时标读取缺口（unread/deferred），不得当成『无业务』或『未披露』",
+          "原文只有『开发中/在研』粒度时按原文粒度保存，不细分成送样、验证、小批量",
+          "低信息或纯程序性文件可合法退出（eligible_skip_after_read），0 业务事实是可接受结果，不反向逼引擎膨胀",
+          "明确否定产品当前生产或业务存在的事实，无须补造商业化阶段，stage可标不适用。"
+        ],
+        "confusion_checks": [
+          {
+            "risk": "验证与送样是量产之前的阶段，原文未披露批量订单与规模出货",
+            "required_context_slots": [
+              "stage",
+              "modality"
+            ]
+          },
+          {
+            "risk": "达产是建成并爬坡后的计划状态，附带达产条件与计划语态，不是当前实际产能",
+            "required_context_slots": [
+              "stage",
+              "modality",
+              "quantity",
+              "unit",
+              "condition"
+            ]
+          },
+          {
+            "risk": "未来时点的计划被当成已发生的实际；时间与语态同时丢失",
+            "required_context_slots": [
+              "period",
+              "modality"
+            ]
+          },
+          {
+            "risk": "主体不同：成果归属、并表范围与资本市场进程都属于被问的那家公司",
+            "required_context_slots": [
+              "subject",
+              "role"
+            ]
+          },
+          {
+            "risk": "指导目标与展望是意图语态，不是承诺、不是推测值、更不是已实现结果",
+            "required_context_slots": [
+              "modality",
+              "period"
+            ]
+          },
+          {
+            "risk": "未回答既不是肯定也不是否定；问句里的前提（已开始放量）不是公司事实",
+            "required_context_slots": [
+              "modality",
+              "role",
+              "stage"
+            ]
+          }
+        ],
+        "applicable_mechanisms": [
+          "generic",
+          "subscription",
+          "consumption",
+          "store_network",
+          "manufacturing",
+          "biopharma",
+          "cdmo"
+        ]
+      },
+      {
+        "id": "facet_customer_orders",
+        "version": "1.3.0",
+        "content_digest": "d93b61446b2466f2d27a94008806b5efbaa38ecdaafc9f170c0ebea6e929f662",
+        "selection_basis": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+            "matched_signals": [
+              "客户"
+            ]
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7",
+            "matched_signals": [
+              "订单"
+            ]
+          }
+        ],
+        "business_questions": [
+          "订单/合同是什么性质：正式订单、框架协议、意向、里程碑合同还是带量采购",
+          "可取消性、履约期、金额口径与收入确认的关系如何",
+          "客户身份披露到什么程度（实名、匿名、前五大、集中度），保密口径如何",
+          "本期客户/订单/需求转化发生了什么变化，证据何在"
+        ],
+        "summary_focus": [
+          "订单/合同的性质、金额口径与履约条件是什么？",
+          "客户身份披露到什么程度，集中度如何？",
+          "本期客户/订单/需求发生了什么变化，证据是什么？",
+          "股东/集团层面关系与上市公司客户关系的边界在哪里？"
+        ],
+        "required_context": [
+          {
+            "assertion": "断言定性获得订单/客户合作进展时保留客户口径（实名/匿名/范围）、合同性质、生效条件与履约期间；没有输出金额就不要求金额或单位",
+            "slots": [
+              "subject",
+              "condition",
+              "period"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "partial",
+            "reason": "订单质量由性质与条件决定；框架协议与正式订单、意向与执行不可互换"
+          },
+          {
+            "assertion": "断言订单金额时保留数量、单位、期间与口径（合同总额/年度金额/含税）",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "condition"
+            ],
+            "required_when": "quantity_emitted",
+            "missing_behavior": "unknown",
+            "reason": "只有输出数量才要求单位/口径；合同额不是收入，金额口径不明不得输出"
+          },
+          {
+            "assertion": "断言客户身份或客户关系时保留主体与角色（上市公司/控股股东/子公司/被问公司）",
+            "slots": [
+              "subject",
+              "role"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "unknown",
+            "reason": "股东或集团层面的联系不是上市公司的客户关系；主体错位是订单面的高危误读"
+          },
+          {
+            "assertion": "断言订单收入转化的定性条件时保留履约、验收、可取消性与语态；没有输出金额时不要求数量或单位",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "required_when": "explicit_condition_present",
+            "missing_behavior": "deferred",
+            "reason": "意向订单转未来收入必须带条件；条件缺失时宁可 deferred"
+          }
+        ],
+        "absence_rules": [
+          "未披露订单金额或客户名称时标 unknown（未披露），匿名客户不猜名字",
+          "管理层未回答订单问题时记『未回答』，不把问句中的订单设想当事实",
+          "公司明确否认某订单/客户关系（如『现无生产该产品』『不构成重大影响』）按否定作用域保存",
+          "未读取到合同/订单披露或附注时标读取缺口（unread/deferred），不得当成无订单",
+          "合同额与收入严格分开：合同额属 correctness_if_emitted，不要求选，选了必须带口径",
+          "低信息/纯程序性文件允许合法退出",
+          "定性客户合作、资金安排或条件性自筹未披露金额时保存主体、项目、性质与条件；数量/单位不适用，不为模板补数。"
+        ],
+        "confusion_checks": [
+          {
+            "risk": "框架协议不锁定数量与金额，履约条款未定",
+            "required_context_slots": [
+              "modality",
+              "condition"
+            ]
+          },
+          {
+            "risk": "股东层面的关系不是上市公司的客户关系或合同",
+            "required_context_slots": [
+              "subject",
+              "role"
+            ]
+          },
+          {
+            "risk": "问句设想不是公司事实；若未被正面回答须记未回答",
+            "required_context_slots": [
+              "role",
+              "modality"
+            ]
+          },
+          {
+            "risk": "认证是供货资格，不是订单；批量订单需另行证据",
+            "required_context_slots": [
+              "stage",
+              "modality"
+            ]
+          }
+        ],
+        "applicable_mechanisms": [
+          "generic",
+          "manufacturing",
+          "biopharma",
+          "cdmo"
+        ]
+      },
+      {
+        "id": "facet_new_business",
+        "version": "1.1.0",
+        "content_digest": "b214743decfe41040ac06093abe5a863a4e0f8f221d7a1b1f95d33b99c08aacd",
+        "selection_basis": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+            "matched_signals": [
+              "验证"
+            ]
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7",
+            "matched_signals": [
+              "订单"
+            ]
+          }
+        ],
+        "business_questions": [
+          "新产品/新业务处在哪个商业化阶段，证据何在（与 semantic_stage_progression 同用）",
+          "与主业的关系是什么（延伸、替换、独立第二曲线），主体归属是谁",
+          "客户验证、订单与收入贡献是否已出现，口径如何",
+          "管理层目标、计划与实际进展是否分开表述"
+        ],
+        "summary_focus": [
+          "新产品/新业务处在哪个商业化阶段，证据是什么？",
+          "与主业是什么关系，主体归属是谁？",
+          "客户验证、订单、收入贡献是否已经出现？",
+          "管理层目标/计划与实际进展的分界在哪里？"
+        ],
+        "required_context": [
+          {
+            "assertion": "断言『新业务X取得进展』时保留主体、产品/业务线、阶段、语态与披露时间",
+            "slots": [
+              "subject",
+              "product",
+              "stage",
+              "modality",
+              "period"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "partial",
+            "reason": "『进展』本身不是状态；缺阶段与语态就会把验证当量产、把目标当成果"
+          },
+          {
+            "assertion": "断言新业务的数量（收入、占比、出货、产能）时保留数量、单位、分母与期间",
+            "slots": [
+              "quantity",
+              "unit",
+              "denominator",
+              "period"
+            ],
+            "required_when": "quantity_emitted",
+            "missing_behavior": "unknown",
+            "reason": "只有输出数量才要求单位/分母；收入占比必须带分母口径"
+          },
+          {
+            "assertion": "断言新业务实现条件（认证通过、获批、放量前提）时保留条件原文",
+            "slots": [
+              "condition",
+              "stage"
+            ],
+            "required_when": "explicit_condition_present",
+            "missing_behavior": "partial",
+            "reason": "条件是阶段含义的一部分，删条件会把门槛说成已达成"
+          }
+        ],
+        "absence_rules": [
+          "未披露新产品/新业务时标 unknown（未披露），不因行业热点补写公司布局",
+          "管理层未回答新业务进展时记『未回答』，不推断进展好坏",
+          "管理层明确否认某新业务（如『目前未涉及、亦无相关计划』）按否定作用域与时点保存",
+          "未读取到业务/研发章节时标读取缺口（unread/deferred），不得当成无新业务",
+          "只有战略意向词（培育、布局）无阶段证据时按原文粒度保存，不细分成阶段阶梯",
+          "低信息文档允许合法退出，0新业务事实是可接受结果"
+        ],
+        "confusion_checks": [
+          {
+            "risk": "长期验证是过程描述，既不是近期收入承诺也不是失败结论",
+            "required_context_slots": [
+              "stage",
+              "modality"
+            ]
+          },
+          {
+            "risk": "研发与布局不等于商业化收入；收入占比需单独披露",
+            "required_context_slots": [
+              "quantity",
+              "unit",
+              "denominator",
+              "stage"
+            ]
+          },
+          {
+            "risk": "目标市场是行业口径，公司获取份额需要公司自身的客户与订单证据",
+            "required_context_slots": [
+              "subject",
+              "modality"
+            ]
+          }
+        ],
+        "applicable_mechanisms": [
+          "generic",
+          "manufacturing",
+          "subscription",
+          "consumption",
+          "biopharma",
+          "cdmo"
+        ]
+      },
+      {
+        "id": "mechanism_manufacturing",
+        "version": "1.2.0",
+        "content_digest": "2a724d14b15520b3761b458fdb230dbc717f47c62a2f163c3e566fb934b94d3e",
+        "selection_basis": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+            "matched_signals": [
+              "验证"
+            ]
+          }
+        ],
+        "business_questions": [
+          "客户认证/验证处于什么状态，认证与批量订单的边界在哪里",
+          "产能口径（设计产能、实际产量、有效产能）与利用率的分母是什么",
+          "产线处于建设、试产、爬坡、达产哪个阶段，良率与批次进展如何",
+          "产能与订单的匹配关系（排产、交付、库存）如何表述"
+        ],
+        "summary_focus": [
+          "认证/验证处于什么阶段，与批量订单的边界在哪里？",
+          "产能口径与利用率分母是什么？",
+          "产线处于试产、爬坡还是达产状态，语态如何？",
+          "产能与订单/排产如何匹配？"
+        ],
+        "required_context": [
+          {
+            "assertion": "断言认证/验证状态时保留客户口径、阶段、语态与时间",
+            "slots": [
+              "subject",
+              "stage",
+              "modality",
+              "period"
+            ],
+            "required_when": "always_for_assertion",
+            "missing_behavior": "partial",
+            "reason": "认证是供货资格不是订单；阶段与语态缺失会把验证当批量供货"
+          },
+          {
+            "assertion": "断言产能/产量/利用率数字时保留数量、单位与分母（设计产能口径）",
+            "slots": [
+              "quantity",
+              "unit",
+              "denominator",
+              "period"
+            ],
+            "required_when": "quantity_emitted",
+            "missing_behavior": "unknown",
+            "reason": "只有输出数量才要求单位/分母；利用率无分母不可解释，设计产能≠实际产量"
+          },
+          {
+            "assertion": "断言产线状态（试产/爬坡/达产）时保留项目、阶段与计划/实际语态",
+            "slots": [
+              "project",
+              "stage",
+              "modality"
+            ],
+            "required_when": "project_emitted",
+            "missing_behavior": "partial",
+            "reason": "建成、试产、达产是不同状态；项目属性错位会张冠李戴"
+          }
+        ],
+        "absence_rules": [
+          "未披露认证阶段或利用率口径时标 unknown（未披露），不按行业通行水平补写",
+          "管理层未回答认证/排产问题时记『未回答』，不推断通过或失败",
+          "公司明确否认某认证/订单状态时按否定作用域保存",
+          "未读取到产能表或经营表表头/脚注时标读取缺口（unread/deferred），表格格子不足以证明列归属时不虚构",
+          "产能/产量数字属 correctness_if_emitted：不要求选，选了必须带项目、单位、期间",
+          "无制造内容的文档允许合法退出"
+        ],
+        "confusion_checks": [
+          {
+            "risk": "建成后还有调试与爬坡，达产是另一个状态",
+            "required_context_slots": [
+              "stage",
+              "modality"
+            ]
+          },
+          {
+            "risk": "认证解决供货资格，订单与出货需另行证据",
+            "required_context_slots": [
+              "stage",
+              "modality",
+              "condition"
+            ]
+          },
+          {
+            "risk": "比率必须带分母口径与期间，跨期外推会失真",
+            "required_context_slots": [
+              "denominator",
+              "period",
+              "quantity",
+              "unit"
+            ]
+          },
+          {
+            "risk": "替换/改造口径与新增口径不同",
+            "required_context_slots": [
+              "condition",
+              "quantity",
+              "unit"
+            ]
+          }
+        ],
+        "applicable_mechanisms": [
+          "manufacturing"
+        ]
+      }
+    ],
+    "constraints": [
+      "只使用下面给出的原文单元，不补充任何未出现的数字、主体或时间。",
+      "保留原语言，不翻译、不改写单位与币种。",
+      "每个事实必须能回指到给出的 locator；无法回指的内容不要输出。",
+      "区分已发生事实、公司计划与预测；保留否定与限定条件。",
+      "未读到的内容标注为未读到，不要写成“没有”。",
+      "不输出评级、目标价、仓位或估值结论。",
+      "业务关注项只是阅读提示，不代表原文已经证明对应事实；定性陈述不强制补出数字。"
+    ],
+    "groups": [
+      {
+        "kind": "paragraph_event",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:9a509392ed37e4f74750e815071e4444b0ea782c27ac2ecfffd4391d38fe3e1a"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:9a509392ed37e4f74750e815071e4444b0ea782c27ac2ecfffd4391d38fe3e1a"
+            ],
+            "context_evidence_ids": []
+          }
+        ],
+        "group_id": "urn:company-wiki:reading-group:sha256:74b612cb0aa478d3b5377af7a4a0bd97eb13128882024c83bfdf12a301a6d20a"
+      },
+      {
+        "kind": "paragraph_event",
+        "section_role": "unknown",
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:f52bfc29cbb9c9f80834350dfef9a1e03ee97dcc66c4deaae30d92aca3a13069"
+        ],
+        "citation_views": [
+          {
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:f52bfc29cbb9c9f80834350dfef9a1e03ee97dcc66c4deaae30d92aca3a13069"
+            ],
+            "context_evidence_ids": []
+          }
+        ],
+        "group_id": "urn:company-wiki:reading-group:sha256:91f905cf72b2518b3bd8e45bddb3ca3e03a9afe97f876ee7ea60c7cfcecc8eb4"
+      }
+    ],
+    "unread": {
+      "native_scan": "complete",
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "deferred_unit_ids": [],
+      "unassigned_unit_ids": [],
+      "structure_complete": false,
+      "counts": {
+        "opaque_pages": 0,
+        "deferred_pages": 0,
+        "deferred_unit_ids": 0,
+        "unassigned_unit_ids": 0
+      },
+      "limited": false
+    },
+    "deferred": [],
+    "layout_coverage": {
+      "processed_unit_count": 2,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": false,
+      "native_frontend": {
+        "feature_version": "pdf-reading-layout/2",
+        "complete": false,
+        "processed_unit_count": 0,
+        "processed_page_count": 0,
+        "deferred_unit_count": 2,
+        "fine_element_count": 0,
+        "work_units": 1,
+        "reading_execution": {
+          "schema_version": "pdf-reading-execution/1",
+          "scope": "paragraph_boundary_proposals",
+          "status": "native_fallback",
+          "pages": [
+            1
+          ],
+          "accepted_groups": 0,
+          "seconds": 0.0079,
+          "reason": "ValueError",
+          "temporary_root_restored_absent": true
+        },
+        "native_ranges": {
+          "feature_version": "native-pdf-page-view/1",
+          "complete": true,
+          "captured_chars": 59,
+          "deferred_page_count": 0,
+          "deferred_pages": []
+        },
+        "capture": {
+          "schema_version": "pdf-layout-capture/1",
+          "strategy": "requested-pages/1",
+          "mode": "reading-policy",
+          "request_sha256": "c871a0ed4bc259f6a42edbc632019f744fc263918f16daaa11ce00747c13a8c1",
+          "complete": true,
+          "not_requested_page_count": 1,
+          "requested_pages": [],
+          "requested_page_count": 0,
+          "requested_pages_limited": false,
+          "captured_pages": [],
+          "captured_page_count": 0,
+          "captured_pages_limited": false,
+          "projected_pages": [],
+          "projected_page_count": 0,
+          "projected_pages_limited": false,
+          "deferred_pages": [],
+          "deferred_page_count": 0,
+          "deferred_pages_limited": false
+        },
+        "planning": {
+          "feature_version": "pdf-reading-execution/1",
+          "request_digest": "651a07f9aa6417572a70c9f2242ef8bb9015faa19437545160a806439c1434e2",
+          "policy_digest": "94a4ed7f9930b13ab4716359040c7d15cc8610d141fe09940c8400ad4d3410a0",
+          "plan_digest": "73a6442dbe1a8b99e53d66c41ce0ac169344ae0cd06f2b24a96073edd24fce9b",
+          "profile_id": "cn_annual",
+          "profile_scope": {
+            "profile_id": "cn_annual",
+            "family": "annual",
+            "regime": "cn_exchange",
+            "form_type": "unknown"
+          },
+          "complete": false,
+          "navigation_missing": true,
+          "window_count": 0,
+          "deferred_page_count": 0,
+          "unresolved_navigation_count": 0,
+          "reason_counts": {
+            "not_requested_by_intent": 1
+          },
+          "deferred_pages": [],
+          "exploration_pages": [],
+          "spent": {
+            "pages": 0,
+            "requests": 0
+          }
+        },
+        "deferred_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+          "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7"
+        ],
+        "deferred_limited": false,
+        "diagnostics": [
+          {
+            "code": "NAVIGATION_MISSING",
+            "count": 1,
+            "unit_count": 0
+          },
+          {
+            "code": "PDF_PARAGRAPH_ENHANCEMENT",
+            "count": 1,
+            "unit_count": 0
+          }
+        ]
+      }
+    },
+    "deferred_count": 0,
+    "deferred_limited": false,
+    "selection_diagnostics": [],
+    "selection_trace": {
+      "schema_version": "selection-trace/1",
+      "source_unit_count": 2,
+      "admission": {
+        "count": 2,
+        "admitted_count": 2,
+        "rejected_count": 0,
+        "limited": false,
+        "rejection_counts": {},
+        "samples": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+            "package_ref": "urn:company-wiki:reading-package:sha256:a073ba69c04ec143183d42769938fe284c150f34b913a0584505aaadbd681f93",
+            "status": "admitted",
+            "reason": null,
+            "fact_purpose": "unknown",
+            "fact_reasons": [
+              "operating_state_unknown"
+            ],
+            "fact_reason_count": 1,
+            "fact_reasons_limited": false,
+            "required_unit_ids": [],
+            "required_unit_count": 0,
+            "required_unit_ids_limited": false,
+            "priority": 2,
+            "selected_span_id": "urn:company-wiki:evidence-span:sha256:9a509392ed37e4f74750e815071e4444b0ea782c27ac2ecfffd4391d38fe3e1a"
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7",
+            "package_ref": "urn:company-wiki:reading-package:sha256:6ef3f11251461e28a6d242afb8b8671405cc2f509633149b78874eab5d3230f8",
+            "status": "admitted",
+            "reason": null,
+            "fact_purpose": "operating",
+            "fact_reasons": [
+              "operating_description_unknown"
+            ],
+            "fact_reason_count": 1,
+            "fact_reasons_limited": false,
+            "required_unit_ids": [],
+            "required_unit_count": 0,
+            "required_unit_ids_limited": false,
+            "priority": 2,
+            "selected_span_id": "urn:company-wiki:evidence-span:sha256:f52bfc29cbb9c9f80834350dfef9a1e03ee97dcc66c4deaae30d92aca3a13069"
+          }
+        ]
+      },
+      "eligible_packages": {
+        "count": 2,
+        "limited": false,
+        "samples": [
+          {
+            "package_ref": "urn:company-wiki:reading-package:sha256:a073ba69c04ec143183d42769938fe284c150f34b913a0584505aaadbd681f93",
+            "kind": "paragraph_event",
+            "member_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225"
+            ],
+            "member_count": 1,
+            "member_limited": false,
+            "anchor_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225"
+            ],
+            "anchor_count": 1,
+            "anchor_limited": false,
+            "required_unit_ids": [],
+            "required_count": 0,
+            "required_limited": false
+          },
+          {
+            "package_ref": "urn:company-wiki:reading-package:sha256:6ef3f11251461e28a6d242afb8b8671405cc2f509633149b78874eab5d3230f8",
+            "kind": "paragraph_event",
+            "member_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7"
+            ],
+            "member_count": 1,
+            "member_limited": false,
+            "anchor_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7"
+            ],
+            "anchor_count": 1,
+            "anchor_limited": false,
+            "required_unit_ids": [],
+            "required_count": 0,
+            "required_limited": false
+          }
+        ]
+      },
+      "withheld": {
+        "count": 0,
+        "limited": false,
+        "samples": []
+      },
+      "selected": {
+        "count": 2,
+        "limited": false,
+        "samples": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:6bcc1b305be6160e201c8ffde0d350144eda69c76a82e8deabdf5df35ce79fd7",
+            "span_id": "urn:company-wiki:evidence-span:sha256:f52bfc29cbb9c9f80834350dfef9a1e03ee97dcc66c4deaae30d92aca3a13069"
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca78f198b6ad90b37e810fcde89e5e99ca136dc0914f61a7a4e321bbc789c225",
+            "span_id": "urn:company-wiki:evidence-span:sha256:9a509392ed37e4f74750e815071e4444b0ea782c27ac2ecfffd4391d38fe3e1a"
+          }
+        ]
+      }
+    }
+  },
+  "spans": [
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:9a509392ed37e4f74750e815071e4444b0ea782c27ac2ecfffd4391d38fe3e1a",
+      "source_id": "urn:company-wiki:source:sha256:397511c36557501b4016a008a2af003fe8b9e96e3f8081ec97e18937da368c40",
+      "locator": "loc:v1/page:1/paragraph:0",
+      "coordinates": {
+        "page_number": 1,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "报告期内，公司自主研发的新型光刻设备已在多家客户的实际生产线完成工艺验证，并获得",
+      "structured_value": {
+        "bbox": [
+          60.0,
+          91.0,
+          420.0,
+          101.80000305175781
+        ],
+        "block_char_end": 40,
+        "block_char_start": 0,
+        "block_sha256": "c237d597ac5b29322c1e33fbcfabc36adee76de1ed196751ad1553c8119d9d3b",
+        "pdf_block": 0,
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "page_width": 600.0,
+        "page_height": 800.0,
+        "font_size": 9.0,
+        "font_weight": "regular",
+        "reading_priority": 2,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3,
+        "language": "zh",
+        "selection_reasons": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "c237d597ac5b29322c1e33fbcfabc36adee76de1ed196751ad1553c8119d9d3b",
+        "topics": [
+          "core_business"
+        ],
+        "unit_kind": "pdf_text_block"
+      },
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "output_sha256": "19f0a8af336d140cc1fde916d680156b072537f3537ba759d50845ba976ae137",
+      "parse_status": "parsed",
+      "quality_flags": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:f52bfc29cbb9c9f80834350dfef9a1e03ee97dcc66c4deaae30d92aca3a13069",
+      "source_id": "urn:company-wiki:source:sha256:397511c36557501b4016a008a2af003fe8b9e96e3f8081ec97e18937da368c40",
+      "locator": "loc:v1/page:1/paragraph:1",
+      "coordinates": {
+        "page_number": 1,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "新的生产订单，但尚未实现大规模量产。",
+      "structured_value": {
+        "bbox": [
+          83.0,
+          105.0,
+          245.0,
+          115.80000305175781
+        ],
+        "block_char_end": 18,
+        "block_char_start": 0,
+        "block_sha256": "56444a21b8c10217dbab071a74147305586144f9d7aab613f6096572f78a531d",
+        "pdf_block": 1,
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "page_width": 600.0,
+        "page_height": 800.0,
+        "font_size": 9.0,
+        "font_weight": "regular",
+        "reading_priority": 2,
+        "reading_value_band": "meaningful_fact",
+        "reading_score": 3,
+        "language": "zh",
+        "selection_reasons": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "56444a21b8c10217dbab071a74147305586144f9d7aab613f6096572f78a531d",
+        "topics": [
+          "core_business"
+        ],
+        "unit_kind": "pdf_text_block"
+      },
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "output_sha256": "9c3b608c71f6b5cb1da1fc8e939843c4b6cd991ac78c09fbd1ed6146e38de52f",
+      "parse_status": "parsed",
+      "quality_flags": []
+    }
+  ]
+}

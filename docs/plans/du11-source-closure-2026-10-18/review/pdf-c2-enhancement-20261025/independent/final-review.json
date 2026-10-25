@@ -1,0 +1,138 @@
+{
+  "schema_version": "pdf-c2-independent-final-review/2",
+  "status": "PASS",
+  "open_count": 0,
+  "base_commit": "8669e0cd",
+  "scope": "PDF-C2 source-exact optional paragraph enhancement quality; no release/CI authorization",
+  "code_test_lf_sha256": {
+    "pyproject.toml": "37fec49124a9b3663e68c9ea91548e4d047eb2f9a3a913f6743911f8d0f01aad",
+    "src/company_wiki/_process_tree.py": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f70ea4e157a7423f31caebbc8794fa0a21aa8762b890e1fb379cd7de358c17e3",
+    "src/company_wiki/document_understanding/observation_adapter.py": "bcd4ebad0a7f6ce38c942099cafb9cb96b5ff444a475295540f6a77d3f2e7dd1",
+    "src/company_wiki/source_catalog/narrative_pdf_reading.py": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+    "src/company_wiki/source_catalog/narrative_reading.py": "833b7e04366cd9ae8398232370302a2e6f7f9ff2a4a6021e8b3333fc8e145a2f",
+    "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py": "46d3cfeac4dbfb43d8857340488e3935fa5b63a026ece4d333a22c08375de083",
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py": "07ed552b29588add5647bdd7a13ac431f8499bad0129a46f82f347764f01f9f4",
+    "src/company_wiki/source_catalog/_paragraph_worker.py": "570d658be0b3cf6b948b972d668851ae2542964854b49f85ab8a0e86c2bda97c",
+    "tests/unit/test_pdf_paragraph_alignment.py": "8ecd0a4fa4017ca4df77bc8a1232d71a187c83bc67b7ec46e81b0842a01cc5a5",
+    "tests/unit/test_pdf_paragraph_runtime.py": "eadefc9b584871bc4fdfb182c899570bca82d9f4cae2e754803da19406a64beb",
+    "tests/unit/test_pdf_paragraph_reading_integration.py": "82831f54be24a9306a16d4d036e87e4d34401c5d084636c41e8162781b7dd46c"
+  },
+  "evidence_byte_sha256": {
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/README.md": "8d45766c0bd6384c8cb66021ba9e8a6f043238f126aec48690e5431be1f6727d",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-frozen-v4.json": "1a870e8d42ae5af3f5ffdf7528b032ea438d27cbd60c1d49c4bced30b5d78a14",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-frozen-v4.json.gz": "f89d7efebab2d161da1a5098c320e5979a88a957ff3c11bdaaea687beb127365",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/live-hk-calibration-v5.json": "9194b2d0c68b7cbaf7430551586b1649d4e2957e5de063e767b2c9a9d59851f9",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/live-hk-calibration-v5.json.gz": "6d14b7ba6ad99bb2aa40316ef070fb44cef26e736847eddb1075e22add4cbf19",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-focused-receipt.json": "071495bd9a3104dd8a3de1861e541821817ff6f8f7417ac0108b6bbcad1c794b",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-focused.log": "d6080cbb4063a5e017301d832ebf3f5de2c81944e2d2151bec11d1354ef9baea",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/runtime-calibrated-receipt.json": "17fd0570e3f339d87915e72a1c04bf49c9a30bacd77a97a10853aa4024bfa87f",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/runtime-calibrated.log": "e7ce0ccb403faaed9d2deb69c17d46773bfa2a5c449c48449f78e05d59f7daec",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-execution-recovery-receipt.json": "3e529287ab915cab2e7a3cdd054ba6e1912d860045135b5df9312ad0faa8b7f1",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-execution-recovery.log": "f8f8efaf0a469a72b33e6934aa5b2044487b09354993f40b370f32a21fe46ea3",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-environment-binding-receipt.json": "3f943604b97a46cd270b40afbd4a02551ca25d4489b9ecf902b4ed86623b4004",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/final-environment-binding.log": "a64605e35ffd654ea7322b4d0d22139179e0127c44798763e065485ba4248f12",
+    ".planning/pdf-c2-enhancement-20261025/independent/final-review.json": "02e2489314821ff22626dbee5213b61fa5c70b6a15212c2070b50aaa8619b34a",
+    ".planning/pdf-c2-enhancement-20261025/independent/probe-final-results-v2.json": "f0af6e394a7104e5b78deb00e0e0426454b82b195d6a516e004e2a6141e68ac9",
+    ".planning/pdf-c2-enhancement-20261025/independent/full-source-triage-v2.json": "807b065b231e4c5797331bcecb13716c769153894599fd6122bd88c49de716d8",
+    ".planning/pdf-c2-enhancement-20261025/independent/final-source-replay.json": "1e8f7c67cafba5a1102f9ec30219ef6897c4fb31facb7271952b6b0f791ddfde",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/probe.py": "8e73c885a252e85473a39e2c3b2c214d748b2d7f20ca9835ede799225c197646",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/probe-result.json": "bcca69c59571a87adbd5a9adf6b220d467b63244d62cc6ecda472cb650d9b794",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/run_tests.py": "29f6ed48862fc2d3473479c60ea623272d531ac7a111612f370b3929ce1ad1f4",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/tests-receipt.json": "f26b64fbfb668ffc14d9eda410c94ab29e63c0e33d0f9c13d04596e8d5a4d50a",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/tests.log": "993db540c3c1e59e88ee318208caa9d31b74e01d1e805c1f8e4efe25876d0ee0",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/tests-environment-receipt.json": "4f864eec0123e23e949dbf2a24e337a6446f3b750f5374e6bcac336ed5e113e4",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/tests-environment.log": "5bddc0a1c3f6aeff598326188ab301a5c4c04ce884708282a1436aba58cc732e",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/runtime-drift.json": "00bb3dd72325c2cda979179e8514a8953228d2256fb6c96bf2e5e4174a44820f",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/state-enhanced.json": "527594ec4cec34db64c26b577b05ea91e047a651e6c4aeb13871891dc60ceeb2",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/state-not_needed.json": "886ce6729df40c012c846da127a95ac7f1cc852acb6585ca0563257fa0a5c3e9",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/state-native_fallback.json": "0320962bb0f60206bb72b2e510643d16aa269fd61710c98ecd4145389a9635d4",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/state-malformed_fallback.json": "dff9cdec11d904f227ecd813d0ee5b1783f8f9820b0de6c1f25690923b5f5817",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/supplement-type-narrowing.json": "79b85b174b2333be4c9794c836f0264ded13940becd2961b7eb9a30c3c53e81c",
+    ".planning/pdf-c2-enhancement-20261025/final-independent/supplement-type-narrowing.py": "78a54a5e3e8c706f8f1965aeb47272d0754eab3587d13023da3c99b71a2f2ac6"
+  },
+  "findings": [
+    {
+      "id": "C2-F1",
+      "status": "CLOSED",
+      "root_cause": "Center-point selection was mistaken for complete geometric coverage.",
+      "resolution": "Whole native bbox coverage with bounded 2–3pt quarter-em padding; exact normalized characters, unique continuous original members, source/page/frame/order constraints. Thin stripe counterexample rejected."
+    },
+    {
+      "id": "C2-F2",
+      "status": "CLOSED",
+      "root_cause": "Malformed nested DTO shapes escaped the native fallback boundary.",
+      "resolution": "Response, item, provenance and bbox Mapping validation; bounded errors become explicit native_fallback. Private failure payload is absent from persisted state."
+    },
+    {
+      "id": "C2-F3",
+      "status": "CLOSED",
+      "root_cause": "Independent triage lexicon selected already closed lines before the actual physical gap.",
+      "resolution": "Reuse native continuity adjacency and exclude proven edges; rank unresolved numerical/dependent tails. Whole HK natural pages12/13/17 include the real gap. IPO existing per-fact completeness is not rewritten as an improvement."
+    },
+    {
+      "id": "C2-F4",
+      "status": "CLOSED",
+      "root_cause": "Recipe omitted behavior-affecting runtime composition and initially omitted transitive backend/preprocessor packages.",
+      "resolution": "Bind model/config SHA, Python/direct runtime versions, worker/orchestration/alignment source SHA and a sorted normalized installed-distribution environment SHA. Worker verifies before importing SDK and response binds it. New docling-parse/transformers drift counterexample passes. Environment binding is conservative and may invalidate on unrelated optional-environment package changes."
+    },
+    {
+      "id": "C2-F5",
+      "status": "CLOSED",
+      "root_cause": "Recipe possibilities and transient diagnostics alone did not preserve actual execution state through durable reading context.",
+      "resolution": "A compact whitelist in layout_coverage.reading_execution passes through native_frontend. Enhanced, not_needed, timeout fallback and malformed fallback were generated by production reading, saved to disk, restored through strict _reading_context, and compared exactly; replay starts no model."
+    }
+  ],
+  "independent_verification": {
+    "focused_existing_cases": 33,
+    "focused_after_environment_change": 1,
+    "execution_roundtrip_modes": [
+      "enhanced",
+      "not_needed",
+      "native_fallback",
+      "malformed_fallback"
+    ],
+    "matching_runtime": {
+      "python": "3.13.9",
+      "pymupdf": "1.26.7"
+    },
+    "frozen_verified_spans": [
+      29,
+      19,
+      15
+    ],
+    "live_hk_verified_spans": 29,
+    "all_task_text_support_locator_bindings_exact": true,
+    "real_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "production_source_edits": 0,
+    "config_edits": 0,
+    "pwf_edits": 0,
+    "protected_sha256": {
+      "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "config/resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+      ".source_catalog/catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5"
+    },
+    "protected_unchanged": true,
+    "owned_temporary_roots_restored_absent": true
+  },
+  "evidence_lineage": [
+    "ROOT receipts229/33/36 and independent33 overlap; counts must not be summed.",
+    "Independent33 preceded environment fingerprint addition; final stable probe and new1 test cover its changed identity/response/state paths. ROOT final-environment-binding34 receipt is separately bound.",
+    "Livev5 proves actual bounded Docling on naturally demanded whole-original HK pages. It predates final state persistence/environment identity/Python3.10 hash-loop compatibility edits. No claim of another final-SHA model execution; those narrow edits are covered by source review and neutral tests.",
+    "Initial exact replay under PyMuPDF1.28.2 rejected12 of29 older HK spans; all pass with the receipt runtime1.26.7. Native runtime identity differs and must invalidate old generation reuse.",
+    "Final paragraph alignment SHA includes only a behavior-preserving first_paragraph int narrowing after the stable probe. Exact reverse patch reconstructs the prior reviewed SHA; other11 code/test/pyproject files are unchanged. No model or broad suite rerun by reviewer."
+  ],
+  "scope_limits": [
+    "Exposed frozen five-page regression is not a fresh blind holdout or general recall estimate.",
+    "Historical eight checks remain6→7 of8; IPO cross-independent-fact group remainsfalse. Versioned per-fact checks8→9 of9 are disclosed separately.",
+    "Default is pure native. Optional explicit config is required; no global rollout claim.",
+    "One child/converter reuses selected pages during a single read; no cross-document warm pool.",
+    "Formal LLM semantic validation, C3/cache restart/RF consumer and publication exact CI remain outside this review.",
+    "No claim of bit-identical parser output across PyMuPDF runtime versions."
+  ],
+  "supplements": [
+    ".planning/pdf-c2-enhancement-20261025/final-independent/supplement-type-narrowing.json"
+  ]
+}

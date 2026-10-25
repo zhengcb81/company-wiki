@@ -1,0 +1,122 @@
+[
+  {
+    "case": "center_only_tiny_box",
+    "accepted_groups": 0,
+    "box": [
+      279,
+      107,
+      281,
+      128
+    ],
+    "native_boxes": [
+      [
+        60,
+        100,
+        500,
+        115
+      ],
+      [
+        60,
+        120,
+        500,
+        135
+      ]
+    ]
+  },
+  {
+    "case": "response_list",
+    "outcome": "fallback",
+    "diagnostic": {
+      "code": "PDF_PARAGRAPH_ENHANCEMENT",
+      "pages": [
+        1
+      ],
+      "gap_signals": [
+        {
+          "page": 1,
+          "reason": "amount_or_dependent_tail",
+          "priority": 3,
+          "left": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "right": "urn:company-wiki:narrative-unit:sha256:6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        }
+      ],
+      "status": "native_fallback",
+      "accepted_groups": 0,
+      "temporary_root_restored_absent": true,
+      "reason": "ValueError",
+      "seconds": 0.0186
+    }
+  },
+  {
+    "case": "items_scalar",
+    "outcome": "fallback",
+    "diagnostic": {
+      "code": "PDF_PARAGRAPH_ENHANCEMENT",
+      "pages": [
+        1
+      ],
+      "gap_signals": [
+        {
+          "page": 1,
+          "reason": "amount_or_dependent_tail",
+          "priority": 3,
+          "left": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "right": "urn:company-wiki:narrative-unit:sha256:6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        }
+      ],
+      "status": "native_fallback",
+      "accepted_groups": 0,
+      "temporary_root_restored_absent": true,
+      "reason": "ValueError",
+      "seconds": 0.0089
+    }
+  },
+  {
+    "case": "provenance_scalar",
+    "outcome": "fallback",
+    "diagnostic": {
+      "code": "PDF_PARAGRAPH_ENHANCEMENT",
+      "pages": [
+        1
+      ],
+      "gap_signals": [
+        {
+          "page": 1,
+          "reason": "amount_or_dependent_tail",
+          "priority": 3,
+          "left": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "right": "urn:company-wiki:narrative-unit:sha256:6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        }
+      ],
+      "status": "native_fallback",
+      "accepted_groups": 0,
+      "temporary_root_restored_absent": true,
+      "reason": "ValueError",
+      "seconds": 0.0127
+    }
+  },
+  {
+    "case": "bbox_scalar",
+    "outcome": "fallback",
+    "diagnostic": {
+      "code": "PDF_PARAGRAPH_ENHANCEMENT",
+      "pages": [
+        1
+      ],
+      "gap_signals": [
+        {
+          "page": 1,
+          "reason": "amount_or_dependent_tail",
+          "priority": 3,
+          "left": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "right": "urn:company-wiki:narrative-unit:sha256:6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        }
+      ],
+      "status": "native_fallback",
+      "accepted_groups": 0,
+      "temporary_root_restored_absent": true,
+      "reason": "ValueError",
+      "seconds": 0.0125
+    }
+  }
+]

@@ -1,0 +1,216 @@
+{
+  "schema_version": "pdf-c2-final-independent-probe/1",
+  "status": "PASS",
+  "runtime": {
+    "python": "3.13.9",
+    "pymupdf": "1.26.7"
+  },
+  "execution_cases": [
+    {
+      "mode": "enhanced",
+      "execution": {
+        "schema_version": "pdf-reading-execution/1",
+        "scope": "paragraph_boundary_proposals",
+        "status": "enhanced",
+        "pages": [
+          1
+        ],
+        "accepted_groups": 1,
+        "rejected_groups": 0,
+        "actual_engine": "docling",
+        "engine_version": "2.96.0",
+        "model_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "converter_instances": 1,
+        "peak_job_commit_bytes": null,
+        "seconds": 0.0115,
+        "temporary_root_restored_absent": true
+      },
+      "persisted_file": "state-enhanced.json",
+      "roundtrip_exact": true,
+      "replay_verified_spans": 2,
+      "replay_runner_calls": 0,
+      "real_model_calls": 0
+    },
+    {
+      "mode": "not_needed",
+      "execution": {
+        "schema_version": "pdf-reading-execution/1",
+        "scope": "paragraph_boundary_proposals",
+        "status": "not_needed",
+        "pages": [],
+        "accepted_groups": 0
+      },
+      "persisted_file": "state-not_needed.json",
+      "roundtrip_exact": true,
+      "replay_verified_spans": 2,
+      "replay_runner_calls": 0,
+      "real_model_calls": 0
+    },
+    {
+      "mode": "native_fallback",
+      "execution": {
+        "schema_version": "pdf-reading-execution/1",
+        "scope": "paragraph_boundary_proposals",
+        "status": "native_fallback",
+        "pages": [
+          1
+        ],
+        "accepted_groups": 0,
+        "seconds": 0.0325,
+        "reason": "ChildTimeout"
+      },
+      "persisted_file": "state-native_fallback.json",
+      "roundtrip_exact": true,
+      "replay_verified_spans": 2,
+      "replay_runner_calls": 0,
+      "real_model_calls": 0
+    },
+    {
+      "mode": "malformed_fallback",
+      "execution": {
+        "schema_version": "pdf-reading-execution/1",
+        "scope": "paragraph_boundary_proposals",
+        "status": "native_fallback",
+        "pages": [
+          1
+        ],
+        "accepted_groups": 0,
+        "seconds": 0.0079,
+        "reason": "ValueError",
+        "temporary_root_restored_absent": true
+      },
+      "persisted_file": "state-malformed_fallback.json",
+      "roundtrip_exact": true,
+      "replay_verified_spans": 2,
+      "replay_runner_calls": 0,
+      "real_model_calls": 0
+    }
+  ],
+  "real_replay": [
+    {
+      "receipt": "final-frozen-v4.json.gz",
+      "cases": [
+        "hk-interim-p11",
+        "hk-interim-p13"
+      ],
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "verified_spans": 29,
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "stored_diagnostics": null,
+      "run_keys": [
+        "cases",
+        "source_ref",
+        "analysis_pages",
+        "native_full_parse_pages",
+        "partial_analysis",
+        "native",
+        "enhancement",
+        "enhancement_input",
+        "enhancement_transport",
+        "enhanced",
+        "shared_work_limit"
+      ]
+    },
+    {
+      "receipt": "final-frozen-v4.json.gz",
+      "cases": [
+        "cn-ipo-p114",
+        "cn-ipo-p115"
+      ],
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "verified_spans": 19,
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "stored_diagnostics": null,
+      "run_keys": [
+        "cases",
+        "source_ref",
+        "analysis_pages",
+        "native_full_parse_pages",
+        "partial_analysis",
+        "native",
+        "enhancement",
+        "enhancement_input",
+        "enhancement_transport",
+        "enhanced",
+        "shared_work_limit"
+      ]
+    },
+    {
+      "receipt": "final-frozen-v4.json.gz",
+      "cases": [
+        "cn-annual-p14"
+      ],
+      "source_sha256": "af09ac4951073e650f8d4f428a7eaea6977e18a162cfb042000408a3fc49d50f",
+      "verified_spans": 15,
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "stored_diagnostics": null,
+      "run_keys": [
+        "cases",
+        "source_ref",
+        "analysis_pages",
+        "native_full_parse_pages",
+        "partial_analysis",
+        "native",
+        "enhancement",
+        "enhancement_input",
+        "enhancement_transport",
+        "enhanced",
+        "shared_work_limit"
+      ]
+    },
+    {
+      "receipt": "live-hk-calibration-v5.json.gz",
+      "cases": [
+        "hk-interim-p11",
+        "hk-interim-p13"
+      ],
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "verified_spans": 29,
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "stored_diagnostics": null,
+      "run_keys": [
+        "cases",
+        "source_ref",
+        "analysis_pages",
+        "native_full_parse_pages",
+        "partial_analysis",
+        "native",
+        "enhancement",
+        "enhancement_input",
+        "enhancement_transport",
+        "enhanced",
+        "shared_work_limit"
+      ]
+    }
+  ],
+  "code_test_lf_sha256": {
+    "pyproject.toml": "37fec49124a9b3663e68c9ea91548e4d047eb2f9a3a913f6743911f8d0f01aad",
+    "src/company_wiki/_process_tree.py": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "f70ea4e157a7423f31caebbc8794fa0a21aa8762b890e1fb379cd7de358c17e3",
+    "src/company_wiki/document_understanding/observation_adapter.py": "bcd4ebad0a7f6ce38c942099cafb9cb96b5ff444a475295540f6a77d3f2e7dd1",
+    "src/company_wiki/source_catalog/narrative_pdf_reading.py": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+    "src/company_wiki/source_catalog/narrative_reading.py": "833b7e04366cd9ae8398232370302a2e6f7f9ff2a4a6021e8b3333fc8e145a2f",
+    "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py": "73148c5bbb6f122b350dee011a2ee7e560973e23fe253220d9789622081015aa",
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py": "07ed552b29588add5647bdd7a13ac431f8499bad0129a46f82f347764f01f9f4",
+    "src/company_wiki/source_catalog/_paragraph_worker.py": "570d658be0b3cf6b948b972d668851ae2542964854b49f85ab8a0e86c2bda97c",
+    "tests/unit/test_pdf_paragraph_alignment.py": "8ecd0a4fa4017ca4df77bc8a1232d71a187c83bc67b7ec46e81b0842a01cc5a5",
+    "tests/unit/test_pdf_paragraph_runtime.py": "eadefc9b584871bc4fdfb182c899570bca82d9f4cae2e754803da19406a64beb",
+    "tests/unit/test_pdf_paragraph_reading_integration.py": "82831f54be24a9306a16d4d036e87e4d34401c5d084636c41e8162781b7dd46c"
+  },
+  "protected_sha256": {
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config/resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+    ".source_catalog/catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5"
+  },
+  "protected_unchanged": true,
+  "optional_model_imported": false,
+  "real_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "seconds": 21.229,
+  "temporary_root_restored_absent": true
+}

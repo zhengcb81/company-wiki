@@ -1,0 +1,62 @@
+{
+  "schema_version": "pdf-c2-independent-source-replay/1",
+  "status": "PASS",
+  "rows": [
+    {
+      "receipt": "live-hk-calibration-v5.json.gz",
+      "cases": [
+        "hk-interim-p11",
+        "hk-interim-p13"
+      ],
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "verified_spans": 29,
+      "failures": [],
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "optional_model_imported": false
+    },
+    {
+      "receipt": "frozen-v3.json.gz",
+      "cases": [
+        "hk-interim-p11",
+        "hk-interim-p13"
+      ],
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "verified_spans": 29,
+      "failures": [],
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "optional_model_imported": false
+    },
+    {
+      "receipt": "frozen-v3.json.gz",
+      "cases": [
+        "cn-ipo-p114",
+        "cn-ipo-p115"
+      ],
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "verified_spans": 19,
+      "failures": [],
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "optional_model_imported": false
+    },
+    {
+      "receipt": "frozen-v3.json.gz",
+      "cases": [
+        "cn-annual-p14"
+      ],
+      "source_sha256": "af09ac4951073e650f8d4f428a7eaea6977e18a162cfb042000408a3fc49d50f",
+      "verified_spans": 15,
+      "failures": [],
+      "exact_task_binding": true,
+      "transient_hint_absent": true,
+      "optional_model_imported": false
+    }
+  ],
+  "protected_unchanged": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "seconds": 9.612
+}

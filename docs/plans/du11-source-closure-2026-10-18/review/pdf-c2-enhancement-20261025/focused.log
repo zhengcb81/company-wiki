@@ -1,0 +1,28 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-6mp_qjim\\p", "requested_basetemp_len": 48, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 149 items
+
+tests\unit\test_pdf_paragraph_alignment.py ..............                [  9%]
+tests\unit\test_pdf_paragraph_runtime.py .....                           [ 12%]
+tests\unit\test_pdf_reading_boundary.py ...............                  [ 22%]
+tests\unit\du11_production\test_business_coverage_relations.py ......... [ 28%]
+...................................                                      [ 52%]
+tests\unit\du11_production\test_cache_identity.py ...                    [ 54%]
+tests\unit\du11_production\test_convertible_policy_scope.py .            [ 55%]
+tests\unit\du11_production\test_document_work_policy.py ..               [ 56%]
+tests\unit\du11_production\test_exploration_fairness.py ..               [ 57%]
+tests\unit\du11_production\test_native_prose_continuity.py ..........    [ 64%]
+tests\unit\du11_production\test_native_table_projection.py ...           [ 66%]
+tests\unit\du11_production\test_pdf_candidates.py ...................... [ 81%]
+........                                                                 [ 86%]
+tests\unit\du11_production\test_pdf_production.py ............           [ 94%]
+tests\unit\du11_production\test_project_table_scope.py ..                [ 95%]
+tests\unit\du11_production\test_shared_work_budget.py ..                 [ 97%]
+tests\unit\test_bounded_process.py ....                                  [100%]
+
+============================ 149 passed in 33.47s =============================

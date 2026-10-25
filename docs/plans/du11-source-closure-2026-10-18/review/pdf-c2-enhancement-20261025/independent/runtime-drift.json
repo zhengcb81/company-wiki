@@ -1,0 +1,23 @@
+{
+  "schema_version": "pdf-c2-independent-runtime-drift/1",
+  "initial_attempt": {
+    "python": "3.14.2",
+    "pymupdf": "1.28.2",
+    "receipt": "final-frozen-v4.json.gz",
+    "case": "hk-interim-p11 + hk-interim-p13",
+    "verified_spans": 17,
+    "failed_spans": 12,
+    "interpretation": "Unsupported cross-runtime exact replay; parser semver alone does not guarantee equivalent fragments. Native recipe includes PyMuPDF runtime identity. This is not a new PDF-C2 defect."
+  },
+  "matching_runtime_recheck": {
+    "python": "3.13.9",
+    "pymupdf": "1.26.7",
+    "verified_frozen_spans": [29, 19, 15],
+    "verified_live_hk_spans": 29,
+    "failures": 0,
+    "receipt": "probe-result.json"
+  },
+  "model_calls": 0,
+  "downloads": 0,
+  "production_edits": 0
+}

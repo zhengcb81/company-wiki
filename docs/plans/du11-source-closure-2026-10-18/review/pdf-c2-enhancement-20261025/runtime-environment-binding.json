@@ -1,0 +1,21 @@
+{
+  "schema_version": "pdf-c2-environment-binding/1",
+  "environment_sha256": "61d948cd6c8692121db02a61e5c247d6c7e71ce07b84a7c2095bc735cee410a9",
+  "worker_lf_sha256": "570d658be0b3cf6b948b972d668851ae2542964854b49f85ab8a0e86c2bda97c",
+  "configured_versions": {
+    "docling-core": "2.78.0",
+    "docling-ibm-models": "3.13.2",
+    "torch": "2.12.0",
+    "pymupdf": "1.26.7",
+    "pypdfium2": "4.30.0",
+    "python": "3.13.9"
+  },
+  "pins_all_installed_distribution_versions": true,
+  "pre_sdk_guard_matches_current_interpreter": true,
+  "imported_docling": false,
+  "new_paid_calls": 0,
+  "new_model_calls": 0,
+  "new_downloads": 0,
+  "live_v5_effective_options_unchanged": true,
+  "scope": "Post-live dependency identity guard verified separately; no repeated cold conversion"
+}

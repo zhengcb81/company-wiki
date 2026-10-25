@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_pdf_paragraph_alignment.py",
+    "tests/unit/test_pdf_paragraph_runtime.py",
+    "tests/unit/test_pdf_paragraph_reading_integration.py",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\c2fit-9b8a4g0m\\p"
+  ],
+  "exit_code": 0,
+  "seconds": 27.413,
+  "temporary_root_restored_absent": true,
+  "real_model_calls": 0,
+  "downloads": 0
+}

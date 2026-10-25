@@ -1,0 +1,15 @@
+{
+  "schema_version": "pdf-c2-independent-type-narrowing-supplement/1",
+  "status": "PASS",
+  "open_count": 0,
+  "file": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+  "prior_lf_sha256": "73148c5bbb6f122b350dee011a2ee7e560973e23fe253220d9789622081015aa",
+  "final_lf_sha256": "46d3cfeac4dbfb43d8857340488e3935fa5b63a026ece4d333a22c08375de083",
+  "other_11_bound_files_unchanged": true,
+  "exact_reverse_patch_matches_prior_reviewed_sha": true,
+  "assessment": "Behavior-preserving static type narrowing: the previous any(type(paragraph_index) is not int) already rejected first None/bool/non-int before range via short-circuit. The new local guard rejects the same set before range; remaining member checks are unchanged. len(members)>=2 is already enforced.",
+  "tests_rerun_by_reviewer": 0,
+  "model_calls": 0,
+  "downloads": 0,
+  "scope": "Only this exact difference; prior runtime, evidence and scope limitations remain."
+}

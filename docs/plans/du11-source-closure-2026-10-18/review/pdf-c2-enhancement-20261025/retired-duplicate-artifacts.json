@@ -1,0 +1,32 @@
+[
+  {
+    "reason": "duplicate failed selection material; JSON failure receipt retained; no original bytes",
+    "sha256": "f435e042d61f761dec30a54e313a8abb6e61f4854d4b791e6aacdaabac393420",
+    "path": "frozen-v2.json.gz",
+    "bytes": 80808
+  },
+  {
+    "reason": "duplicate failed selection material; JSON failure receipt retained; no original bytes",
+    "sha256": "07c38ff0484de5227c93f2942ce25de5c7c2f2ed202313aea9fc2b6fd3b2d07b",
+    "path": "live-v1.json.gz",
+    "bytes": 78949
+  },
+  {
+    "reason": "duplicate failed selection material; JSON failure receipt retained; no original bytes",
+    "sha256": "82c1e34cf01a596c1394286809bb48f497466bd9db8314511b9f35d6ac79fb79",
+    "path": "live-v2.json.gz",
+    "bytes": 80974
+  },
+  {
+    "reason": "duplicate failed selection material; JSON failure receipt retained; no original bytes",
+    "sha256": "8979f3fea93633b8cd6e667392ed15ea78953375db182b751e0135e8a5b62599",
+    "path": "live-hk-diagnostic-v3.json.gz",
+    "bytes": 36907
+  },
+  {
+    "reason": "duplicate failed selection material; JSON failure receipt retained; no original bytes",
+    "sha256": "6f94dda8ffdd3adca6c0e9932df9f93721f1340d01ab590c95661821ccdc4cce",
+    "path": "live-hk-cause-v4.json.gz",
+    "bytes": 36940
+  }
+]

@@ -1276,3 +1276,14 @@ PDF-C2前置根修独审PASS_ROOTFIX_ENGINEERING_ONLY，68P/9.19秒与4反例通
 66dcb725根修已正常推送，pre-push154P/89.28秒，独审7文件Git字节一致。仅两源同120秒cap真实回归：H1 56.2秒/55任务，DOCX6.6秒/55任务，两者actual观察/compile均.9；分别112/112和55/55选中span已观察。2原件/3配置SHA不变，15.65MB自有工区恢复absent，attempt压至65,461B。两项兼容故障通过，内容oracle仍FAIL、语义NOT_REVIEWED；等待真实收据终审和精确CI，不代签C2增强。
 
 来源根修发布节点关闭：66dcb725精确CI40235085531于21:26:09Z success，真实两源收据独审PASS/0 OPEN。H1同120秒cap内56.2秒、DOCX6.6秒，各55任务；原件/配置未变、自有tmp恢复。内容oracle仍FAIL，不代签C2增强/C3。唯一状态/task Next Step回到通用缺口/严格段落对齐TDD，完成后正常文档提交推送；无新增源码WIP。
+
+
+## 2026-10-25 用户明确暂停（本段为唯一当前状态）
+
+已停止代码实施。PDF-C2主体代码`f13de801`已正常提交并推送master；正常pre-commit及pre-push154项通过。段落分诊、严格成员对齐、按需增强及actual观察持久化已实现，真实HK缺口已改善。最终源码/测试独审F1–F5 PASS/0 OPEN；**随后ROOT补查发现新的Linux类型检查问题尚未修复，发布不能记完成或CI全绿。**
+
+未完成项：`_paragraph_worker.py:51`使用`ctypes.WinDLL`，本机`mypy --platform linux`报告attr-defined；Windows完整检查通过，说明是平台类型接口差异，不是财报内容错误。拟按现有`cast(Any, ctypes).WinDLL`惯例修复一行；用户暂停后没有改源码、没有继续测试或重跑模型。下一次先修这里、核精确CI，再进入C3。详见[暂停交接](review/pdf-c2-enhancement-20261025/PAUSED.md)。
+
+真实三源五页旧同组口径6/8→7/8；独立事实v2为8/9→9/9，不能合并两个口径。整份HK自然12/13/17页实际81.10秒，120秒cap内通过，单converter三页；提交内存峰值约3.10GiB，已根修误把RSS作为Job提交限额的配置依据。229集中、最后34新短测、36观察恢复检查及源回放已绿（重叠不相加）；原件/config/catalog不变，临时根恢复，0付费/下载/原件副本。
+
+**恢复后唯一下一步：** 修Linux类型接口窄接缝→Linux完整mypy与正常hooks→独审补充绑定→提交推送/精确CI→正式摘要/语义/cache/RF。默认原生、增强显式配置；跨文档热池、新US PDF/扫描件盲测、typed经营表及C3没有代签。下方旧“当前/下一步”是历史快照，不能覆盖本暂停。无关hook模式WIP、W19/作者工区、RF WIP、Dayu/IQS和原件保持。
