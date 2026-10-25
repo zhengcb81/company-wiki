@@ -1008,3 +1008,11 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 
 - 将 `CURRENT_STATUS.json` 中 IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 的过期 `DISPATCHED_BY_USER_STATUS_UNVERIFIED` 改为 `ROOT_ACCEPTED_DELIVERY_NOT_MERGED`，与 ROOT 验收记录、dispatch 和 `CURRENT_STATUS.md` 一致。QA-RAG 的验收绑定代码 SHA `c762e4de96feff3ac0f2b3d3bd3bfe9d72398f99`，最终作者 tip `5e5f22b2d7d652738e54bbfaced1982117616c7a` 仅含交接/审查/PWF/测试日志；R2 为 `PASS-with-findings`，仅留 O1/O2 信息项，28 项专项和 97 项仓库测试通过，原 `vector_db` SHA 未变。
 - 修复 `parallel_packages_20261024` 将 W13/W14/W15 错写成三张外部卡待 ROOT 验收的串卡状态；其验收与各仓库发布边界继续以 `review/package-reception-w13-w15-20261024/README.md` 和 `receipt.json` 为准。历史日志保留当时的状态，不回写伪造。
+
+## 2026-10-25 覆盖维度语义与QA-RAG交付对账
+
+- QA-RAG-SAFE-REBUILD已在既有ROOT验收记录中接收：冻结代码SHA、最终作者tip、R2独审、28项专项/97项仓库测试和vector_db未变证据已绑定；这张卡属于外部独立仓，本项目不代做合并或推送。
+- 为避免把“原文扫描完成”与“候选是否全选”混为一个状态，在NarrativeEvidencePackage增加只读source_scan_complete与candidate_selection_complete属性，保留既有字段和SelectionValue wire schema。四种组合（扫描/选材各自完整或不完整）新增TDD覆盖；完整选择模块47/47 passed，Ruff及diff-check通过。
+- 冻结Microsoft FY2025 10-K的v4预检112个入选span支持8/8必需业务事实，说明314项deferred不是必须全部发送模型的证据。药明康德年度14项最新来源复核为8 pass/6 partial/0 missing；下一个根因点是具体父级/表头/地域定义/日期依赖与时段金额，不先扩大批次或上限。
+- 独立预算授权以用户2026-10-23后续明确升级到累计10M tokens/$20为准，覆盖较早目标文本里的2M；生产配置与预算PWF一致。当前母账1,783,378 tokens/$0.724836，剩余8,216,622 tokens/$19.275164，unknown保留；本次无真实模型/供应商调用。
+- 下一步先完成离线证据归因与中性RED；仅在真实目标证明额外批次能补必需事实时实现可恢复续批。不要重放旧formal-v4，不降低gold断言，不把几何缺失等同未扫描。

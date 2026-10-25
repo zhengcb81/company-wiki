@@ -12,6 +12,7 @@ from company_wiki.source_catalog.narrative_budget import (
 )
 from company_wiki.source_catalog.narrative_candidates import (
     CandidateRules,
+    EvidenceCandidate,
     assess_unit,
 )
 from company_wiki.source_catalog.narrative_context import (
@@ -585,6 +586,85 @@ def test_finalize_deduplicates_pdf_views_and_prefers_table_locator() -> None:
 
     assert len(package.evidence_spans) == 1
     assert package.evidence_spans[0].structured_value["unit_kind"] == "pdf_table_row"
+
+
+@pytest.mark.parametrize(
+    (
+        "selection_limit",
+        "pages_read",
+        "expected_source_scan_complete",
+        "expected_candidate_selection_complete",
+    ),
+    (
+        (1, 2, True, False),
+        (2, 2, True, True),
+        (1, 1, False, False),
+        (2, 1, False, True),
+    ),
+)
+def test_source_scan_coverage_is_distinct_from_candidate_selection_coverage(
+    selection_limit: int,
+    pages_read: int,
+    expected_source_scan_complete: bool,
+    expected_candidate_selection_complete: bool,
+) -> None:
+    digest = "2" * 64
+    source_id = source_id_for_sha256(digest)
+    units = tuple(
+        _make_unit(
+            source_id=source_id,
+            parser_version="0.1.0",
+            coordinates=EvidenceCoordinates(page_number=1, paragraph_index=index),
+            raw_text=text,
+            unit_kind="html_paragraph",
+            source_role="company_filing",
+            language="en",
+            metadata={},
+        )
+        for index, text in enumerate(
+            (
+                "A new product completed customer validation and entered volume delivery.",
+                "The overseas business established a local sales channel.",
+            )
+        )
+    )
+    structure = DocumentStructure(
+        source_id=source_id,
+        source_sha256=digest,
+        language="en",
+        units=units,
+        page_count=2,
+        pages_read=pages_read,
+        line_count=len(units),
+    )
+    candidates = tuple(
+        EvidenceCandidate(
+            unit=unit,
+            topics=(f"business_{index}",),
+            reasons=("specific_business_event",),
+            score=10,
+        )
+        for index, unit in enumerate(units)
+    )
+
+    package = finalize_selection(
+        structure,
+        route_document("2025 annual report.html", max_selected=selection_limit),
+        candidates,
+        group_ids={},
+        heading_pattern=re.compile(r"a^"),
+        dropped_financial_count=0,
+    )
+
+    assert package.coverage_complete is expected_source_scan_complete
+    assert package.source_scan_complete is expected_source_scan_complete
+    assert package.candidate_selection_complete is expected_candidate_selection_complete
+    assert package.omitted_candidate_count == 2 - selection_limit
+    assert package.status == (
+        "selected"
+        if expected_source_scan_complete and expected_candidate_selection_complete
+        else "partial"
+    )
 
 
 @pytest.mark.parametrize(

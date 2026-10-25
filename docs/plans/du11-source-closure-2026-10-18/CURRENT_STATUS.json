@@ -90,14 +90,30 @@
         "Verify the downstream RF consumer actually uses the accepted source-bound summaries and preserves partial/needs_review status when evidence is missing."
       ],
       "observation_time": "2026-10-25, before the local scoped-summary default migration",
-      "current_default_projection": "reading-model-input/4 (implemented locally; publication pending)",
+      "current_default_projection": "reading-model-input/4 (published with selector 0.9.0; v5 explicit compatibility)",
       "migration_status": "selector 0.9.0 now binds v4 by default; v5 remains explicit compatibility",
       "claim_quality_root": "The v5 compatibility pathway copies source-card text into claims and fixes non-question modality to uncertain/needs_review; that historical behavior is no longer the selector 0.9 default.",
       "interpretation": "The original parser/geometry counts remain historical evidence. Unassigned means not mapped to semantic sections, not automatically unread. HTML bbox absence is a geometry limitation while DOM text can remain readable. Current code locally defaults to v4; content coverage and semantic quality are still open.",
-      "next": "Finish independent review and exact-head publication of the local v4 default/recovery change. Then use frozen source gold for coverage and recoverable-batch design; do not make a new paid request until that major gate passes."
+      "next": "The v4 default and recovery path are published and exact-CI green. Continue offline source-gold diagnosis; do not treat old v5 paid claims as current v4 quality or replay the immutable receipt."
     },
     "interpretation": "The HTML parser completed the native scan. Unassigned means not mapped into semantic sections, not automatically unread. Missing bbox is a geometry limitation and layout_bridge explicitly says DOM/text remains readable. Candidate cap, oversized/continued sections and table omissions need separate source-grounded checks.",
-    "next": "Inspect unassigned/oversized/continued/table units against source and gold; define resumable value-ranked batches with total coverage and cache semantics; test assertive-vs-uncertain source claim quality without lowering review safeguards; no new paid request until offline tests and independent review pass."
+    "next": "Inspect unassigned/oversized/continued/table units against source and gold; define resumable value-ranked batches with total coverage and cache semantics; test assertive-vs-uncertain source claim quality without lowering review safeguards; no new paid request until offline tests and independent review pass.",
+    "business_gold_fact_support": {
+      "supported": 8,
+      "required": 8,
+      "preflight_external_posts": 0,
+      "receipt": "review/market-family-upgrade-20261024/us-10k-formal-v4-preflight-20261025.json"
+    },
+    "coverage_dimensions": {
+      "source_scan_complete": true,
+      "candidate_selection_complete": false,
+      "candidate_count": 484,
+      "selected_count": 112,
+      "omitted_count": 372,
+      "layout_geometry_available": false,
+      "required_business_gold_supported": "8/8",
+      "interpretation": "Candidate omission and missing bbox do not by themselves establish a required business-fact omission."
+    }
   },
   "completed": {
     "b2": {
@@ -295,7 +311,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "FORMAL_V4_PIPELINE_PASS_AFTER_ONE_HTTP_200; CACHE_ACTIVATION_RECOVERY_AND_FF_REUSE_PASS; RF_NOT_CONSUMED_NEEDS_REVIEW; PARTIAL_SELECTION_AND_CONTENT_QUALITY_OPEN; NEXT_DIAGNOSE_BATCHED_COVERAGE_ROOT_CAUSE",
+      "status": "FORMAL_V4_LIFECYCLE_AND_FF_REUSE_PASS; OLD_V5_RF_NOT_CONSUMED; MICROSOFT_V4_PREFLIGHT_SUPPORTS_8_OF_8_REQUIRED_FACTS; WUXI_ANNUAL14_SOURCE_REVIEW_8_PASS_6_PARTIAL; NEXT_TRACE_SOURCE_AND_TASK_CLOSURE_ROOT_CAUSES",
       "mainline": true
     },
     {
@@ -324,7 +340,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Selector 0.9 and Phase C v4 default/recovery were independently reviewed and pushed as bc6cebf920d57d0c9c0d5221236a9cf7639dafef. Exact CI 40147867691 exposed a stale test-only v5 request schema/ranking fixture; it was replaced by shared source_grounded_scoped_reply. The exact regression test is green (1/1, 10.06s, no provider call), the narrow independent review passed with no P0-P2 findings, and correction commit 3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81 passed exact CI 40148571611, including the full unit suite, in 4m21s. Continue bounded resumable coverage analysis against frozen source gold; content/coverage/RF acceptance remains open. Do not retry formal-v4 or treat fixture success as semantic acceptance.",
+  "next_step_now": "The selector 0.9 v4 summary default and paid-response recovery are published; exact CI 40148571611 is green. QA-RAG-SAFE-REBUILD, IR-REPORT-GENERATION, and MC-OUTPUT-INTEGRITY are accepted deliveries on independent repositories. Offline evidence: Microsoft FY2025 10-K v4 preflight supports 8/8 frozen required business facts from 112 selected candidates; Wuxi annual14 source review is 8 pass, 6 partial, 0 missing. Continue tracing concrete source, table, parent-scope, geography, date/volume, and amount gaps. Add no source batches unless evidence shows they recover required facts. The in-memory coverage aliases and four-combination unit test are local only; wire schema unchanged. Do not replay the old paid formal-v4 receipt.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -797,7 +813,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Implement and offline-validate the root fix for partial document selection/layout and batch continuation; then independently review the exact source and test SHA before any new bounded live summary.",
+  "next_step_after_publication": "Continue offline diagnosis of the six concrete annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. Implement new batches only when a frozen required-fact gap proves they add value; then run one major independent review before any new paid summary.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -832,12 +848,11 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Finish the independent read-only review of the exact v4-default, v4/v5 durable response, budget preflight, Phase C, and test/documentation diff; fix any findings and save a SHA-bound receipt.",
-    "Commit and push only the reviewed implementation/tests/PWF; verify the exact published HEAD and its CI before describing the change as deployed.",
-    "Keep the formal-v4 Microsoft request immutable. Offline-replay its captured response and source gold, then inspect 112/484 selection, 314 deferred tasks, oversized/continued sections, table omissions and unassigned units.",
-    "Design a bounded, recoverable, value-ranked batch plan with aggregate coverage, source/context closure, cache identity and no duplicate spend. Test the plan against frozen multi-market source gold before any new paid summary.",
-    "After the coverage gate and independent review pass, make one newly preflighted configured summary attempt, then verify content quality and actual RF consumption; retain partial/needs_review where evidence is incomplete.",
-    "Continue cross-market/document-type validation, W12 four-review audit and company holdout loop only after the core coverage and RF path are accepted."
+    "Run offline source-level attribution for the six Wuxi annual14 partial targets, distinguishing missing source text, source projection, local context/dependency, and downstream summary/RF use.",
+    "Keep Microsoft source scan, candidate omission, layout geometry, and required-fact recall as separate dimensions; its v4 preflight supports all 8 required business facts. Do not equate 4,087 unassigned units or deferred candidates with unread mandatory facts.",
+    "Write neutral failing tests for any proven shared root cause; use existing source owners and local dependency contracts. Implement resumable bounded batches only if a frozen gold gap is shown to be recoverable by additional candidates, with source identity, closure, aggregate coverage, cache identity, crash resume, and no duplicate spend tested.",
+    "At a major gate, independently review exact source/test/evidence SHAs, then replay the unchanged real-source gold across affected markets and document types. Keep old paid receipts immutable and preserve all review/partial states.",
+    "Only after the offline coverage and quality gate passes, make a newly configured bounded summary attempt; verify summary quality, cache recovery, and actual RF use. Continue W12 four-review and the company holdout loop afterward."
   ],
   "last_updated_utc": "2026-10-25T00:27:46Z",
   "latest_publish_validation": {
@@ -909,7 +924,7 @@
     "publish_head": "f73afb89be1f4caf610432211281e07a14e58c77",
     "publication_ref": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/publication.json"
   },
-  "w08_next_root_design": "review/r1-w08-crosspage-20261024/annual14-target-map-20261024/budget-next/analysis.md",
+  "w08_next_root_design": "review/r1-w08-material-value-20261024/next-dependency-plan.md",
   "w08_material_value_20261024": {
     "status": "INDEPENDENT_ENGINEERING_PASS_CONTENT_PARTIAL",
     "evidence": "review/r1-w08-material-value-20261024/",
@@ -1531,5 +1546,37 @@
       "ci_conclusion": "success",
       "ci_duration": "4m21s"
     }
+  },
+  "coverage_semantics_20261025": {
+    "status": "LOCAL_TDD_PASS_NOT_YET_PUBLISHED",
+    "domain_properties": [
+      "source_scan_complete mirrors existing package coverage_complete from DocumentStructure scan state",
+      "candidate_selection_complete means omitted_candidate_count is zero"
+    ],
+    "selection_value_wire_schema_changed": false,
+    "unit_test": "tests/unit/test_narrative_selection_architecture.py::test_source_scan_coverage_is_distinct_from_candidate_selection_coverage (4 passed)",
+    "module_test": "tests/unit/test_narrative_selection_architecture.py (47 passed)",
+    "ruff": "PASS",
+    "diff_check": "PASS",
+    "source_content_review": {
+      "sample": "Wuxi AppTec annual report FY2025",
+      "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+      "status_counts": {
+        "pass": 8,
+        "partial": 6,
+        "missing": 0
+      },
+      "partial_targets": [
+        "ST-A01",
+        "ST-A02",
+        "ST-A03",
+        "ST-A05",
+        "ST-A09",
+        "ST-A13"
+      ],
+      "report": "review/r1-w08-material-value-20261024/content-review/report.md",
+      "dependency_plan": "review/r1-w08-material-value-20261024/next-dependency-plan.md"
+    },
+    "budget_authority": "The later 2026-10-23 user authorization and config/resource_budget.yaml set 10,000,000 tokens and USD 20; prior 2,000,000 goal wording is stale. Current mother usage 1,783,378 tokens / USD 0.724836, retained unknown holds included."
   }
 }

@@ -4,16 +4,16 @@
 
 ## Next Step
 
-最新状态（2026-10-25）：MiniMax-M3.1-Flash配置根因已修为`reasoning_effort=low`。formal-v4恰好一次HTTP 200（17,666 tokens/$0.007102），生命周期与FF复用通过；母账累计1,783,378 tokens/$0.724836。decoder/provider-specific修复的精确CI `40144505969`（HEAD `ecdb2fd6`）全绿；QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收。selector `0.9.0`默认v4任务摘要，v5显式兼容；v4/v5付费响应持久化/零POST恢复及分协议容量预检已独审通过并推送为`bc6cebf9`。CI `40147867691` 暴露的旧测试fixture已替换为共享v4 fixture，精确修复提交`3dc04a8e`已推送，CI `40148571611`全绿（含完整单测，4分21秒）；窄幅独审无P0–P2。其余46项协议/Phase C、14项摘要/缓存/生成测试、Ruff、`mypy src`（374文件）与diff-check均通过，零真实模型调用。
+最新状态（2026-10-25）：selector 0.9 默认v4摘要、付费响应持久化/零POST恢复已推送；修复提交3dc04a8的精确CI 40148571611全绿。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，作者仓未替其并线。Microsoft 10-K v4零费用预检的112个入选片段支持8/8必需业务事实；药明康德年度14项来源复核为8通过、6部分、0缺失。累计预算以用户2026-10-23明确授权的10M tokens/$20和生产配置为准，母账1,783,378 tokens/$0.724836，历史unknown保留。
 
-**内容仍未验收：** formal-v4旧运行只选112/484候选、314 deferred、layout incomplete；43条claim是旧排名路径生成的`uncertain/needs_review`，5项deferred、2项unsupported，RF not-consumed。既有付费收据保持不可变。离线协议测试不证明真实摘要质量；不得为了补历史状态重放formal-v4。
+**内容仍未验收：** 旧formal-v4付费结果走v5排名路径，43条claim全部uncertain/needs_review，RF未消费；不能把它当成当前v4摘要质量。微软v4预检8/8必需业务事实有支持，候选省略和4,087个未分配单元都不能单独证明必需事实漏读。年度14项仍8通过、6部分；按具体SourceRef/上下文追查，不重放旧付费请求。
 
 ### 当前下一步（TDD顺序）
 
-1. **v4默认与恢复已独审、推送且精确CI通过：** 默认路径绑定v4、v5显式兼容；v4/v5都固定完整付费HTTP响应并支持精确恢复；省略/v4只预留响应与pin，显式v5另预留执行报告；Phase C和README默认v4。46+14聚焦回归、容量边界3例和独立终审通过。精确CI `40147867691` 发现既有付费恢复单测fixture仍写死 `/6` + v5 ranking；已替换为共享v4摘要fixture，红绿复现后1/1通过，窄幅独立复审无P0–P2。修复提交`3dc04a8e`的精确CI `40148571611`成功，含完整`tests/unit`；继续覆盖根因。
-2. **覆盖仍开放：** 冻结formal-v4真实selection、50-task结果、原件和gold；以真实source gold核对112上限、308预算延期、24超长section、3 continuation、2未读表体。设计稳定可恢复、预算不重复计算的value-ranked batches，分别报告总覆盖与单批覆盖；任何漏项继续partial/deferred。不得把4,087个unassigned直接算作未读，也不得以全量上限规避问题。
-3. **协议/质量边界：** v4测试要持续验证原语言短摘要、同源support/context、合同modality、未知/跨task/跨source引用拒绝、质量flag保留和cache/recovery身份。确定性loopback仅证明协议和生命周期；另以冻结真实样本评估摘要概括、关键事实召回及事实保真，不能据fixture通过判定内容质量。
-4. **真实摘要与RF消费：** 只有覆盖策略、缓存/恢复、source identity与原始字节不变证据经过独立大节点复核后，才考虑一次新的配置内有界正式摘要。随后验证RF实际读取并使用证据、cache复用/崩溃恢复、跨市场文种和W12四审，再进入公司holdout循环；按已有母账/限额，不新开预算。
+1. **发布已完成的v4默认/恢复修复：** 精确CI 40148571611已通过；当前工作树增加只读source_scan_complete/candidate_selection_complete命名属性及单测，保持SelectionValue wire schema不变。先完成本次集中检查和PWF发布。
+2. **用真实金标拆覆盖维度：** 10-K分别核源扫描、候选选择、布局几何和8项必需事实；年度14项核8 pass/6 partial的具体来源片段、表头、业务父级、客户地域注释、日期/容量依赖及精确时段数额。明确缺失发生在哪个责任层，不能从候选总量直接推导分批需求。
+3. **按根因写中性RED并修复：** 优先修source projection与现有局部依赖闭包；财务精确金额交给已验证SourceRef/结构化API，模型只处理业务叙述。只有真实金标证明追加批次能补回必需事实，才设计稳定有界的continuation，并测试源/任务身份、上下文闭包、汇总覆盖、缓存恢复与不重复计费。
+4. **大节点集中验收：** 同一冻结样本回放和同一年度14项复核保持原断言，跨市场/文种再用未用于修复的样本做泛化；独立复核绑定最终代码/证据SHA。未通过前不调用新付费摘要。通过后才用配置内有界请求验证正式摘要、缓存恢复和RF实际消费，之后继续W12四审及公司holdout循环。
 
 已验证：非loopback的85项针对性测试通过；两项worker测试在受限沙箱报`MODEL_HTTP_TRANSPORT`。同一production文件在可用loopback的本机环境7/7通过，证实该两项是沙箱socket限制；远端精确CI整体success。不得把沙箱失败记成代码缺陷或删除这些测试。
 2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13根修、W14离线链和W15可移位回放现已ROOT接收；W13精确CI 40120507146 completed/success，W14主线离线gate 595通过，W15无remote。三卡不代表正式摘要/cache/真实公司预测验收。M3/M4/M5及CN H1摘要/RF接口已完成；内容质量、下一个US样本、W12四审与公司循环仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。

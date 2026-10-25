@@ -130,6 +130,16 @@ class NarrativeEvidencePackage:
     reading_dependencies: Mapping[str, Any] | None = None
 
     @property
+    def source_scan_complete(self) -> bool:
+        """Whether parsing covered the source, independent of selection limits."""
+        return self.coverage_complete
+
+    @property
+    def candidate_selection_complete(self) -> bool:
+        """Whether every emitted candidate survived selection and budgeting."""
+        return self.omitted_candidate_count == 0
+
+    @property
     def selected_text_bytes(self) -> int:
         return sum(
             len((span.raw_text or "").encode("utf-8"))
