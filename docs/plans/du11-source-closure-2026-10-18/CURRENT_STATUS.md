@@ -8,6 +8,8 @@
 
 回放仍为`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`。第119页来源片段重新入选只证明选材层修复，不能改写年度14项内容复核的8通过/6部分/0缺失状态；ST-A01内容和其余partial仍待集中重评。提交`2942355c726bc0c95ae07a854eb3bfcaec8aaa37`已推送，精确HEAD CI `40171504716`成功；本地pre-push的154项契约smoke通过（199.59秒）。随后继续其他partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，作者仓保持独立。
 
+**摘要输入离线核验：** 使用生产`compile_scoped_model_view`重新编译选材结果，没有发模型请求。第119页 Chemistry 业务范围片段（`business_scope`）的全文出现在摘要任务`t55`的support中；编译得到64个任务，payload SHA与保存视图一致。该核验关闭了“选中片段是否进入模型输入”这一段链路，但未检查模型响应，也没有生成新摘要；内容仍未重评。收据为[task-model-view-receipt.json](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/task-model-view-receipt.json)，模型视图及编译/验证脚本在同目录。
+
 ## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 
 药明康德2025年报第14页的 TIDES 破折号父项此前没有进入其罗马数字子项上下文；现已在原生列表结构 owner 修复。四个相关测试文件155项通过（5.14秒），Ruff及diff-check通过。零费用真实原件回放使用生产112片段限额，选中112片段/8,915字符，TIDES父项作为ST-A08/ST-A09的上下文；扩产日期与`>100,000L`容量保持分开，没有推断因果。原件SHA及收据见[本节点证据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/README.md)。首轮独审PASS。第二轮发现验证器`assert`在Python优化模式下会失效，已改为显式检查和独占创建；`python -O`及`PYTHONOPTIMIZE=1`均实测拒绝覆盖，`optimized-overwrite-rejection-final.log`记录两次尝试前后的v3收据SHA完全相同。最终Ruff和diff-check退出码为0，见同目录`verification-final.log`；修复后复核无阻断，最终SHA对照留证已确认，详见[独立复核](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md)。源码和证据已由`64570b9a66738410a5299ec5d98438e5160a04ee`提交并推送；精确HEAD CI [40166148355](https://github.com/zhengcb81/company-wiki/actions/runs/40166148355) 于2026-10-25 completed/success。内容评价没有重做，仍为8 pass/6 partial/0 missing。对ST-A09的追踪确认第12页扩产日期与容量各自出现在选中片段中，物理邻接被记录但没有添加语义依赖；下一步先判清剩余问题属于证据成员闭包还是摘要/内容判断，再处理其他partial根因。

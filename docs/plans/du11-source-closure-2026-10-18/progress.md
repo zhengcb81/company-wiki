@@ -1055,3 +1055,8 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - **验证：** 五个相关测试文件141项通过；最新复跑64.05秒（前轮77.55秒），Ruff、mypy和diff-check通过，完整pytest输出保存在 `business-scope-line-replay-20261025/focused-regression.log`。独立只读复审PASS，绑定上述源码/测试SHA；复审未重跑测试，测试由ROOT独立执行。报告说明英文目前覆盖明确的“收入主要来自以下业务线”表达，其他措辞仍留待不同市场/文种样本检验。
 - **真实原件回放：** 使用未改变的药明康德原件SHA `7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`，原112-span限制内选入第119页业务范围；112片段、9,113字符、11,027,878/16,000,000工作量，预算未耗尽，ST-A01/ST-A11既有检查点通过。0下载、0原文复制、0模型调用，coverage/whole-content仍不完整，内容质量未重评。回放收据、selection、trace和复审报告在 `review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/`。
 - **边界及发布：** 这证明来源识别与选材修复，不改变年度14项8通过/6部分/0缺失，也不宣称正式摘要已修好。源码、测试、证据和PWF已由`2942355c726bc0c95ae07a854eb3bfcaec8aaa37`提交并推送；本地pre-push 154项契约smoke通过（199.59秒），精确HEAD CI `40171504716`成功。下一步继续其他partial根因。三张外部卡QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY已分别ROOT接收且作者仓保持独立，不与此代码节点合并。
+
+## 2026-10-25 ST-A01 摘要输入离线核验
+
+- 使用当前生产`compile_scoped_model_view`针对ST-A01回放结果离线编译模型视图，并以同一生产序列化器重新生成payload核对持久化SHA。药明康德FY2025年报第119页Chemistry业务范围片段完整出现在任务`t55`的support中，主题含`business_scope`；共64个任务。核验状态`PASS_PAYLOAD_VISIBLE_NO_MODEL_REQUEST`，payload SHA=`068f565928250d5eb52669942776423d25e82899841f6ea60936ea3de66797c1`，模型视图SHA=`de2057a4df8d5186f79e6d77547495e7788a5b200e76e0439fab8664d38dd34e`，收据SHA=`d7f42b41273c428cf18abecadf99f0a8c9de0014705fee54bdcaee43e831d269`。
+- 这是从选择结果到模型请求输入的闭环证据；`request_sent=false`、`response_reviewed=false`，未生成或评价新摘要，也未增加API费用。因此年报内容仍为8通过/6部分/0缺失，ST-A01摘要结论仍待响应级内容复核。完整收据、保存视图、编译与校验脚本在`review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/`。

@@ -1729,7 +1729,7 @@
     "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
     "root_cause": "A single named business line with a long, wrapped lifecycle and modality scope did not meet the old early multi-member-list grammar; it retained only generic core_business and lost business_scope.",
     "implementation": "Bounded Chinese and English named-line detail rules require an explicit revenue/business anchor, named line, operating verb and scope detail; no issuer/page exception. WorkBudget scan pass factor 4->6; limits unchanged.",
-    "current_head": "f7492b68fc12003a22c89e4c82a75bbe890ae383",
+    "current_head": "2942355c726bc0c95ae07a854eb3bfcaec8aaa37",
     "source_code_sha256": "6a40e4771e7622c688a8361274b2edadd328b645db2520c41db6d0d397a31eb7",
     "test_code_sha256": "5dc47f1ff137457e8f9087aae1274123af9d35cfe6915ab733ea5530f116cd5f",
     "focused_tests": {
@@ -1785,6 +1785,32 @@
     "exact_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/40171504716",
     "exact_ci_run_id": 40171504716,
     "exact_ci_job_id": 121103105137,
-    "exact_ci_conclusion": "success"
+    "exact_ci_conclusion": "success",
+    "scoped_payload_verification": {
+      "status": "PASS_PAYLOAD_VISIBLE_NO_MODEL_REQUEST",
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/task-model-view-receipt.json",
+      "receipt_sha256": "d7f42b41273c428cf18abecadf99f0a8c9de0014705fee54bdcaee43e831d269",
+      "model_view_path": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/model-view.json",
+      "model_view_sha256": "de2057a4df8d5186f79e6d77547495e7788a5b200e76e0439fab8664d38dd34e",
+      "model_payload_sha256": "068f565928250d5eb52669942776423d25e82899841f6ea60936ea3de66797c1",
+      "compiler_source_sha256": {
+        "src/company_wiki/automation/narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+        "src/company_wiki/document_understanding/summary_tasks.py": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2"
+      },
+      "target": {
+        "locator": "loc:v1/page:119/paragraph:4/chars:72-240",
+        "topics": ["business_scope", "capacity_projects", "core_business"],
+        "task_key": "t55",
+        "task_kind": "native_continuity",
+        "task_section_role": "unknown",
+        "support_visible": true,
+        "full_scope_text_visible": true
+      },
+      "task_count": 64,
+      "request_sent": false,
+      "response_reviewed": false,
+      "raw_text_stored_in_receipt": false,
+      "content_grade_change": "NONE; retain 8 pass / 6 partial / 0 missing"
+    }
   }
 }
