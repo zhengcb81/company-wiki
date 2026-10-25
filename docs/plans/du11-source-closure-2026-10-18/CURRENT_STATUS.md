@@ -1,11 +1,12 @@
 # 当前项目状态与接手入口
 
-## 2026-10-25 当前：PDF-C2前置来源根修集中验收
+## 2026-10-25 当前：两项来源根因已关闭，进入PDF-C2结构增强
 
-已实证DOCX失败来自“可靠正文被页眉/页脚覆盖警告误挡”，半年报超时来自回放先跑隐式旧0.8再跑生产0.9；当前0.9单源读取/选择剖析约21秒，未提高cap。中性TDD已修默认/配置Normalization分歧、显式观察版本及合法native-range漏记；153项集中工程通过，独审中。[本轮唯一节点](review/pdf-c2-20261025/README.md)。
+已正常提交推送`66dcb725`，精确[CI40235085531](https://github.com/zhengcb81/company-wiki/actions/runs/40235085531) completed/success。DOCX统一可靠正文语言判定与配置Normalization端口，保留页眉页脚partial；回放显式使用请求selector，避免旧0.8诊断先耗尽总时间，并由阅读owner验证合法native-range后导出观察。153项集中工程、独审68P及4反例通过，源码/测试7 Git blob绑定。[本轮验收](review/pdf-c2-20261025/README.md)。
 
-**当前下一步：** 独审修净后正常提交冻结，只定点重放H1和DOCX，不重复整批；之后继续PDF-C2严格成员对齐/按需运行时。W18组件已并线，C2增强主体和C3正式摘要/cache/RF仍OPEN。
+只定点重放两源，原120秒cap不变：H1 56.2秒/55任务，DOCX6.6秒/55任务；actual观察/compile均0.9，原件2份/配置3份SHA不变，约15.65MB临时工区恢复不存在，只留65KB压缩attempt。独立真实收据复核通过，0POST/下载/原件复制。**两项兼容故障关闭，内容oracle仍H1 8FAIL/DOCX10FAIL、语义NOT_REVIEWED；不是全部产品通过。**
 
+**下一步唯一动作：** 按既有PDF-C2细则先写通用段落缺口分诊/严格native成员对齐RED，经现有continuity到实际summary task，再实现有界按需热运行时。C1和本次两项根修不重做，不再重复旧超时整批；C2增强主体、C3正式摘要/cache/RF仍OPEN。W19、作者工区、原件和既有WIP不动。
 
 ## 2026-10-25 最新：W18工具/oracle已接收并线，产品缺口保留
 

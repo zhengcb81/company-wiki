@@ -1,0 +1,19 @@
+{
+  "schema_version": "pdf-c2-source-publication/1",
+  "code_commit": "66dcb7250f807e65e6abac7ed39b8890a4f15117",
+  "review_bound_git_blobs": {
+    "src/company_wiki/source_catalog/narrative_language.py": true,
+    "src/company_wiki/automation/narrative_batch.py": true,
+    "tools/document_understanding_benchmark/holdout_acceptance_contracts.py": true,
+    "tools/document_understanding_benchmark/observer.py": true,
+    "tools/holdout_replay/worker.py": true,
+    "tests/unit/test_narrative_language.py": true,
+    "tests/unit/test_holdout_observation_version.py": true
+  },
+  "normal_precommit": "passed; full src mypy376/Ruff/host guard",
+  "preserved_wip": ".githooks/pre-push mode only",
+  "new_paid_calls": 0,
+  "downloads": 0,
+  "normal_prepush": "154 passed in89.28s; normal push to origin/master",
+  "real_replay": "2 sources within unchanged120s cap; H1 56.2s / DOCX6.6s; compiled55 each"
+}

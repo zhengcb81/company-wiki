@@ -8,29 +8,40 @@
       "observed": "IPO compiler parser_incomplete while direct legacy observation returns spans",
       "root_cause": "NOT_PROVEN: parser/select generations and routes differ",
       "next": "Source-owner trace actual PdfReading compile path, checkpoint/budget/partial reasons; compare same recipe, not legacy direct output alone.",
-      "plan_owner": "PDF-C2 / CF3, ROOT source layer"
+      "plan_owner": "PDF-C2 / CF3, ROOT source layer",
+      "status": "OPEN_PRODUCT_SCOPE"
     },
     {
       "id": "W18-P2",
       "observed": "Hikvision DOCX compile fails language/transcript extraction while native normalization can read content",
-      "root_cause": "NOT_PROVEN: catalog document kind and manifest kind differ; direct observer is normalized DOCX, not proof it used parse_transcript_text.",
+      "root_cause": "Reliable DOCX body language was rejected because fallback treated docx_header_footer_not_parsed coverage diagnostic as whole-body failure; composed/default normalization paths differed.",
       "next": "Neutral DOCX+catalog route reproduction; fix shared document-kind/normalization owner without company-specific paths.",
-      "plan_owner": "ROOT shared source-routing owner"
+      "plan_owner": "ROOT shared source-routing owner",
+      "status": "RESOLVED_SOURCE_LANGUAGE_COMPATIBILITY_20261025",
+      "resolution": "66dcb725 unified normalization, forwarded configured owner; same DOCX compiles55 tasks in6.6s at unchanged120s cap. Body/source coverage remains partial; content recall not accepted.",
+      "resolution_receipt": "../pdf-c2-20261025/candidate-receipt.json"
     },
     {
       "id": "W18-P3",
       "observed": "Many business gold anchors are not visible in selected evidence or compiled tasks",
       "root_cause": "Per-target diagnosis pending; mechanical matching is not semantic fact judgment",
       "next": "Use required_business targets with same selector/recipe and unchanged gold version, identify context/selection/budget cause; optional statement numbers never force full PDF table extraction.",
-      "plan_owner": "CF1-CF4 / PDF-C2/C3"
+      "plan_owner": "CF1-CF4 / PDF-C2/C3",
+      "status": "OPEN_PRODUCT_SCOPE"
     },
     {
       "id": "W18-P4",
       "observed": "23 disposition_context targets currently not evaluated by DU semantic result",
       "root_cause": "Observer/grading coverage gap, not proof all statements were wrongly emitted",
       "next": "Maintain not_reviewed until real summaries exist; assess attribution, plans, conditions and third-party context at formal summary node.",
-      "plan_owner": "PDF-C3 / final RF audit"
+      "plan_owner": "PDF-C3 / final RF audit",
+      "status": "OPEN_PRODUCT_SCOPE"
     }
   ],
-  "scope": "Product findings do not invalidate correctly frozen replay observation; none are closed by W18 tool acceptance."
+  "scope": "Product findings do not invalidate correctly frozen replay observation; none are closed by W18 tool acceptance.",
+  "root_source_followup_20261025": {
+    "receipt": "../pdf-c2-20261025/README.md",
+    "h1_timeout": "resolved current observation path; legacy diagnostic no longer implicitly runs first; same cap56.2s",
+    "content_status": "OPEN; H1 8 deterministic FAIL / DOCX10 deterministic FAIL; semantics NOT_REVIEWED"
+  }
 }

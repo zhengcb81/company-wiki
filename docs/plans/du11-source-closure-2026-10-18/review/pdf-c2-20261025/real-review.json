@@ -1,0 +1,124 @@
+{
+  "schema_version": "pdf-c2-real-receipt-independent-review/1",
+  "reviewer": "/root/c2_source_root_review",
+  "date": "2026-10-25",
+  "status": "PASS_TWO_SOURCE_COMPATIBILITY_RECEIPT",
+  "open_receipt_findings": [],
+  "producer_commit": "66dcb7250f807e65e6abac7ed39b8890a4f15117",
+  "reviewed_git_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_language.py",
+      "sha256_lf": "2513e8f87a4d292adbe9e2d38d3ef1ee85d884bf93bf5597d7c8800285deea20",
+      "matches_frozen_commit": true
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "sha256_lf": "47e074cf8d203c81e3aa06a643fdad90cf63b51e85a82126231aef4081be00cf",
+      "matches_frozen_commit": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/holdout_acceptance_contracts.py",
+      "sha256_lf": "11c04ae413aa29e1de3c55976c4cf69aa680d3763b8a7bab6bc6412aacc8b816",
+      "matches_frozen_commit": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/observer.py",
+      "sha256_lf": "831ff778c9b0d299b8414513cae7cb94a8f8b863350416017b82e3f2fa5bbbcc",
+      "matches_frozen_commit": true
+    },
+    {
+      "path": "tools/holdout_replay/worker.py",
+      "sha256_lf": "9692d9d8e80545fdc6a4ae55edebdb4fdfcab9384f9e68dcbe6f2e77bbc9fc0b",
+      "matches_frozen_commit": true
+    },
+    {
+      "path": "tests/unit/test_narrative_language.py",
+      "sha256_lf": "681fbe6db9d4974eff6748cf6e8ed1175507d69d561ee6a865116e396ad41118",
+      "matches_frozen_commit": true
+    },
+    {
+      "path": "tests/unit/test_holdout_observation_version.py",
+      "sha256_lf": "2257104a6c98ebb5602144ef218cd441cb6d3a2ac46ca7448209abe52377a229",
+      "matches_frozen_commit": true
+    }
+  ],
+  "archive_verified": {
+    "file": "candidate-attempt.json.gz",
+    "sha256": "ce9c48556e7296b59ad5127307c03e640d159fc397b61bb81dd69663746e0a67",
+    "uncompressed_sha256": "d930bb611d69b7c39086a237e082f3475ce249fbcad91d663c2d7284cb6839e5",
+    "bytes": 65461,
+    "uncompressed_bytes": 270191
+  },
+  "samples": [
+    {
+      "sample_id": "w18-cn-beigene-h1-2024",
+      "seconds": 56.2,
+      "phase_seconds": {
+        "source_observation": 32.692,
+        "model_view_compile": 21.432
+      },
+      "original_sha256": "5ffb8c9225efa6e84c7c901c7a2eb6b1c80c5aedc893c53428def3abba587ac3",
+      "imports_under_frozen_root": true,
+      "selected_count": 112,
+      "task_count": 55,
+      "coverage_complete": false,
+      "oracle_status": "FAIL",
+      "oracle_counts": {
+        "PASS": 11,
+        "FAIL": 8,
+        "PARTIAL": 3,
+        "NOT_EVALUATED": 17
+      }
+    },
+    {
+      "sample_id": "w18-cn-hikvision-call-2024h1",
+      "seconds": 6.6,
+      "phase_seconds": {
+        "source_observation": 2.278,
+        "model_view_compile": 2.148
+      },
+      "original_sha256": "65305c5c67625f2d19020d59e748b45a4503ee179088b0113580bfbe23fdfcbc",
+      "imports_under_frozen_root": true,
+      "selected_count": 55,
+      "task_count": 55,
+      "coverage_complete": false,
+      "oracle_status": "FAIL",
+      "oracle_counts": {
+        "PASS": 14,
+        "FAIL": 10,
+        "PARTIAL": 2,
+        "NOT_EVALUATED": 15
+      }
+    }
+  ],
+  "source_and_config_sha_verified_current": true,
+  "temporary_root_absent_verified": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-98b1wboi",
+  "temporary_peak_bytes_recorded": 15647014,
+  "zero_network_basis": "no network primitive exists in the replay path; the compile stage serializes the configured wire body (request_bytes) without opening a connection, so these zeros are guarantees, not measurements",
+  "ci_receipt": {
+    "schema_version": "pdf-c2-source-public-ci-observation/1",
+    "head_sha": "66dcb7250f807e65e6abac7ed39b8890a4f15117",
+    "observed_at": "2026-10-25T21:24:19.822292+00:00",
+    "runs": [
+      {
+        "id": 40235085531,
+        "head_sha": "66dcb7250f807e65e6abac7ed39b8890a4f15117",
+        "name": "CI",
+        "status": "in_progress",
+        "conclusion": null,
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40235085531",
+        "created_at": "2026-10-25T21:21:09Z",
+        "updated_at": "2026-10-25T21:21:13Z"
+      }
+    ],
+    "authentication": "none;public API only"
+  },
+  "does_not_sign": [
+    "PDF-C2 structure enhancement",
+    "gold content oracle still FAIL for both samples",
+    "formal semantic summary NOT_REVIEWED",
+    "cache recovery",
+    "RF adoption",
+    "new blind holdout"
+  ]
+}

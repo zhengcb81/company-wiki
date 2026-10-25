@@ -1,0 +1,26 @@
+{
+  "schema_version": "pdf-c2-source-acceptance/1",
+  "status": "ACCEPTED_SOURCE_COMPATIBILITY_ONLY",
+  "code_commit": "66dcb7250f807e65e6abac7ed39b8890a4f15117",
+  "ci": {
+    "id": 40235085531,
+    "head_sha": "66dcb7250f807e65e6abac7ed39b8890a4f15117",
+    "name": "CI",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40235085531",
+    "created_at": "2026-10-25T21:21:09Z",
+    "updated_at": "2026-10-25T21:26:09Z"
+  },
+  "independent_engineering": "PASS_ROOTFIX_ENGINEERING_ONLY_0_OPEN",
+  "independent_real": "PASS_TWO_SOURCE_COMPATIBILITY_RECEIPT_0_OPEN",
+  "real_cap_seconds_unchanged": 120,
+  "real_seconds": {
+    "H1": 56.2,
+    "DOCX": 6.6
+  },
+  "content_oracle": "FAIL; summary semantics NOT_REVIEWED",
+  "c2_enhancement": "OPEN",
+  "summary_cache_rf": "OPEN",
+  "next": "PDF-C2: generic paragraph-gap triage and strict native-member alignment RED, then bounded on-demand enhancement inside reading owner. Source timeout/DOCX compatibility roots are fixed; content oracle and C3 summary/cache/RF remain OPEN."
+}

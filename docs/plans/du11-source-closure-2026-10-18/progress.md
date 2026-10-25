@@ -1272,3 +1272,7 @@ W18最终真实收据独审通过（产品兼容不全绿），精确CI402321517
 PDF-C2前置根因已定位/TDD：DOCX可靠正文因header/footer覆盖警告被旧默认语言入口拒绝，统一Normalization并恢复公共准备的配置owner；H1当前.9读3.639s/选16.935s，旧.8诊断95秒停在n²窗口枚举，W18误先跑legacy再生产是总上限根因。改显式观察版本、实际/请求/回退及阶段耗时，原跨度owner验真后投影。153P集中包与最新端口32P通过，独审进行中；C2结构增强仍OPEN。
 
 PDF-C2前置根修独审PASS_ROOTFIX_ENGINEERING_ONLY，68P/9.19秒与4反例通过，7文件LF SHA绑定，0 OPEN。全src mypy376/Ruff绿；准备正常提交冻结后只跑两源真实回归，不提高120秒上限，不重复旧legacy整批。
+
+66dcb725根修已正常推送，pre-push154P/89.28秒，独审7文件Git字节一致。仅两源同120秒cap真实回归：H1 56.2秒/55任务，DOCX6.6秒/55任务，两者actual观察/compile均.9；分别112/112和55/55选中span已观察。2原件/3配置SHA不变，15.65MB自有工区恢复absent，attempt压至65,461B。两项兼容故障通过，内容oracle仍FAIL、语义NOT_REVIEWED；等待真实收据终审和精确CI，不代签C2增强。
+
+来源根修发布节点关闭：66dcb725精确CI40235085531于21:26:09Z success，真实两源收据独审PASS/0 OPEN。H1同120秒cap内56.2秒、DOCX6.6秒，各55任务；原件/配置未变、自有tmp恢复。内容oracle仍FAIL，不代签C2增强/C3。唯一状态/task Next Step回到通用缺口/严格段落对齐TDD，完成后正常文档提交推送；无新增源码WIP。

@@ -1,0 +1,18 @@
+{
+ "overall": "ok",
+ "attempt_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-98b1wboi\\runs\\attempts\\66dcb7250f80\\20261025T212145Z-1",
+ "samples": [
+  {
+   "sample_id": "w18-cn-beigene-h1-2024",
+   "status": "ok",
+   "reason": null,
+   "elapsed_seconds": 56.2
+  },
+  {
+   "sample_id": "w18-cn-hikvision-call-2024h1",
+   "status": "ok",
+   "reason": null,
+   "elapsed_seconds": 6.6
+  }
+ ]
+}

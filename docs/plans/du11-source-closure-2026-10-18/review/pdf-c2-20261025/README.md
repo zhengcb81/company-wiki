@@ -1,6 +1,6 @@
 # PDF-C2：来源路由、慢路径与按需结构增强
 
-状态：IN_PROGRESS。基线6c83cb43；沿用已有PDF-C2实施细则，不重做C1，不写W19/作者工区、Dayu/IQS或RF运行WIP。
+状态：ROOTFIX_ACCEPTED_PUBLISHED；PDF-C2结构增强仍OPEN。基线6c83cb43；沿用已有PDF-C2实施细则，不重做C1，不写W19/作者工区、Dayu/IQS或RF运行WIP。
 
 ## 本轮顺序与验收
 
@@ -31,6 +31,25 @@ DOCX不再有两套默认/显式解析错误策略；build_batch_events增加可
 
 TDD：语言2真RED→30P；观察3真RED（前一轮2个沙箱tmp ERROR不计真RED，短自有根纠正后3FAIL）；配置owner端口1真RED→32P/4.59s。全W18＋du11_production153P/51.96s；range/replay58P/8.20s、首48P/2.15s有重叠，不相加。Ruff绿。旧95秒legacy剖析只跑一次，日志父进程str/bytes故障留证，未反复整批。
 
-当前等待本节点独审，随后正常提交冻结、只对H1和DOCX各做一次120秒同cap真实回归。这是C2前置来源根修，不宣称Docling按需增强/实际任务完整闭包已交付；C2主体与C3仍OPEN。
+当时进入独审、冻结和两源回归，最终通过见下方收据；这是C2前置来源根修，不宣称Docling按需增强/实际任务完整闭包已交付；C2主体与C3仍OPEN。
 
 根修独立终审PASS_ROOTFIX_ENGINEERING_ONLY，0 OPEN：68P/9.19秒，额外默认版本/owner材料拒绝/零预算/TypeError不重试四反例通过，7份源码测试LF SHA绑定。首次独审stdout GBK解码失败（原测试退出0），显式UTF8后保留有效收据，不记作产品失败。全src mypy376与Ruff绿。正常提交后再执行两源真实回归；C2增强仍OPEN。
+
+## 冻结版本真实定点回归
+
+源码`66dcb7250f807e65e6abac7ed39b8890a4f15117`已正常提交推送，独审7文件与Git逐blob一致，pre-push154P/89.28秒；原有hook mode WIP保留。没有改旧W18基线。
+
+| 两份失败原件 | 本轮同120秒cap实际结果 | 实际阶段 |
+|---|---|---|
+| 百济2024H1 PDF | 56.2秒，scoped v4编译55任务，112选中span | 观察32.692秒（parse/selection合计30.933秒），compile21.432秒；work15,260,630/16M |
+| 海康2024H1电话会DOCX | 6.6秒，scoped v4编译55任务，55选中span | 观察2.278秒（parse/selection1.75秒），compile2.148秒；work823,795/16M |
+
+actual观察和compile均0.9.0，生产默认常量0.8.0只是历史元数据，没有执行legacy兜底；DOCX页眉页脚覆盖缺口仍保留。两源的**工具运行/兼容故障通过，但内容oracle evaluation仍FAIL、正式摘要语义NOT_REVIEWED**，不得拿tool_overall=ok或任务数代签业务信息召回和摘要质量。两条路径仍分别计时，不冒称整个管线只读取一次或新PDF引擎提速几倍。
+
+本次只重放这两份，未跑四源/八源整批；0模型POST/费用/下载/原件复制。2原件+3配置前后SHA不变，冻结源码干净；15,647,014B临时工区正常移除且恢复absent，只留270,191B attempt的65,461B无损gzip及紧凑收据。当前显式观察输出112/112与55/55已选span均可见，没有再因单locator投影漏掉合法native_range。
+
+下一步仍按原PDF-C2细则做通用缺口分诊、严格段落成员对齐→实际summary task、有界按需热运行时。可直接复用此前冻结五页的native blocks/段落观察及其SourceRef，不重复研究选型或重跑Docling冷启比较；模型/产物缺口仍真实开放，C3摘要/cache/RF不代签。
+
+真实收据独审PASS_TWO_SOURCE_COMPATIBILITY_RECEIPT，0 receipt OPEN；7 Git blob、gzip展开SHA/长度、actual/compile .9、stage时长、当前2原件/3配置及工区移除均复核。内容oracle仍H1 8FAIL/DOCX10FAIL（确定性观察，不是正式摘要语义评分），不能表述为全产品通过。见real-review.md/json；没有额外运行测试或批次。
+
+发布节点关闭：66dcb725精确CI40235085531 completed/success（2026-10-25T21:26:09Z）；唯一状态/Next Step已同步为PDF-C2段落分诊/严格成员对齐。两项兼容根修不重开，内容召回与C2/C3仍开放。
