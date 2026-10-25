@@ -1,0 +1,396 @@
+{
+  "schema_version": "docling-local-pilot/1",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "byte_size": 3396644,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "page_range": [
+    13,
+    13
+  ],
+  "runtime": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "packages": {
+      "docling": "2.96.0",
+      "docling-core": "2.78.0",
+      "docling-ibm-models": "3.13.2",
+      "torch": "2.12.0",
+      "pymupdf": "1.26.7"
+    }
+  },
+  "config": {
+    "ocr": false,
+    "table_structure": false,
+    "remote_services": false,
+    "page_images": false,
+    "device": "cpu",
+    "threads": 4,
+    "document_timeout_seconds": 90,
+    "model_revision": "8f39ad3c0b4c58e9c2d2c84a38465abf757272d8"
+  },
+  "runs": [
+    {
+      "phase": "cold",
+      "seconds": 11.448,
+      "status": "ConversionStatus.SUCCESS",
+      "pages": [
+        13
+      ],
+      "items": [
+        {
+          "ref": "#/texts/1",
+          "label": "section_header",
+          "level": 1,
+          "text": "管理層討論與分析",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 416.6536,
+                "t": 710.4353234375,
+                "r": 538.6012999999998,
+                "b": 698.6978974777194,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                8
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/2",
+          "label": "text",
+          "level": 1,
+          "text": "總收入 達到人民幣 4,319.2 百萬元（ 602.9 百萬美元） ，較⼆零⼆四年同期的人民幣 3,667.5 百萬元增加 17.8% 。該增加主要是由於 AI 相關客戶的強勁收入增長、我們的行業雲項目擴張，並部分被我們主動縮減向 內容分發網絡 （ 「 CDN 」 ） 客戶提供的服務抵銷。",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.1946,
+                "t": 636.2562234375,
+                "r": 538.5655999999999,
+                "b": 600.29861542907,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                146
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/3",
+          "label": "list_item",
+          "level": 2,
+          "text": "來自公有雲服務的收入由⼆零⼆四年同期的人民幣 2,421.9 百萬元增加 23.0% 至人民幣 2,978.8 百萬元 （ 415.8 百萬美元） 。該同比增加主要是由於 AI 相關服務增長。",
+          "parent": "#/groups/0",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.1946,
+                "t": 580.2492234375,
+                "r": 538.5557000000001,
+                "b": 558.2956154290699,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                98
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/4",
+          "label": "list_item",
+          "level": 2,
+          "text": "來自行業雲服務的收入為人民幣 1,340.4 百萬元 （ 187.1 百萬美元） ，較⼆零⼆四年同期的人民幣 1,245.4 百萬元增加 7.6% 。該同比增加主要是由於不斷增長的 IT 需求及我們向垂直行業客戶複製行業解決方案 的能⼒。",
+          "parent": "#/groups/0",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.19460000000007,
+                "t": 538.2462234374999,
+                "r": 538.5656000000004,
+                "b": 502.89619154683925,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                121
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/5",
+          "label": "list_item",
+          "level": 2,
+          "text": "其他收入為零，而⼆零⼆四年同期為人民幣 0.2 百萬元。",
+          "parent": "#/groups/0",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.18560000000011,
+                "t": 482.2392234374998,
+                "r": 348.35060000000016,
+                "b": 474.2896154290699,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                30
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/6",
+          "label": "text",
+          "level": 1,
+          "text": "營業成本 為人民幣 3,662.0 百萬元（ 511.2 百萬美元） ，較⼆零⼆四年同期的人民幣 3,055.9 百萬元增加 19.8% 。我們繼續加強成本控制措施。⼆零⼆五年上半年，互聯網數據中心成本由人民幣 1,496.8 百萬元同比 增加 1.9% 至人民幣 1,525.9 百萬元 （ 213.0 百萬美元） 。該增加主要是由於基礎設施需求日益增加 （這與我們的 AI 業務擴張相⼀致） 及 AI 帶來的基本雲增長。⼆零⼆五年上半年，折舊及攤銷成本由人民幣 449.5 百萬元增加 107.0% 至人民幣 930.5 百萬元（ 129.9 百萬美元） 。該增加主要是由於採購新服務器以⽀持 AI 相關服務。⼆零 ⼆五年上半年，解決方案開發及服務成本由人民幣 937.1 百萬元增加 14.1% 至人民幣 1,069.0 百萬元 （ 149.2 百 萬美元） 。⼆零⼆五年上半年，履約成本及其他成本分別為人民幣 28.9 百萬元（ 4.0 百萬美元）及人民幣 107.7 百萬元 （ 15.1 百萬美元） 。",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.14960000000025,
+                "t": 454.24022343749976,
+                "r": 538.5476000000003,
+                "b": 348.26261542906974,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                457
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/7",
+          "label": "text",
+          "level": 1,
+          "text": "毛利 為人民幣 657.2 百萬元（ 91.7 百萬美元） ，較⼆零⼆四年同期的人民幣 611.6 百萬元增加 7.4% 。該改善主 要是由於我們的收入規模擴張較快及收入組合優化。 毛利率 為 15.2% ，而⼆零⼆四年同期則為 16.7% 。該減 少主要是由於隨著 AI 業務擴張，服務器成本增加，以及若干客戶的進⼀步營收活動所產生的前期成本。 ⾮公 認會計準則毛利 為人民幣 678.2 百萬元 （ 94.7 百萬美元） ，而⼆零⼆四年同期則為人民幣 622.5 百萬元。 ⾮公認 會計準則毛利率 為 15.7% ，而⼆零⼆四年同期則為 17.0% 。",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.14960000000023,
+                "t": 328.2132234374996,
+                "r": 538.5296000000004,
+                "b": 264.2476154290696,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                278
+              ]
+            }
+          ]
+        }
+      ],
+      "errors": []
+    },
+    {
+      "phase": "warm",
+      "seconds": 3.6483,
+      "status": "ConversionStatus.SUCCESS",
+      "pages": [
+        13
+      ],
+      "items": [
+        {
+          "ref": "#/texts/1",
+          "label": "section_header",
+          "level": 1,
+          "text": "管理層討論與分析",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 416.6536,
+                "t": 710.4353234375,
+                "r": 538.6012999999998,
+                "b": 698.6978974777194,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                8
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/2",
+          "label": "text",
+          "level": 1,
+          "text": "總收入 達到人民幣 4,319.2 百萬元（ 602.9 百萬美元） ，較⼆零⼆四年同期的人民幣 3,667.5 百萬元增加 17.8% 。該增加主要是由於 AI 相關客戶的強勁收入增長、我們的行業雲項目擴張，並部分被我們主動縮減向 內容分發網絡 （ 「 CDN 」 ） 客戶提供的服務抵銷。",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.1946,
+                "t": 636.2562234375,
+                "r": 538.5655999999999,
+                "b": 600.29861542907,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                146
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/3",
+          "label": "list_item",
+          "level": 2,
+          "text": "來自公有雲服務的收入由⼆零⼆四年同期的人民幣 2,421.9 百萬元增加 23.0% 至人民幣 2,978.8 百萬元 （ 415.8 百萬美元） 。該同比增加主要是由於 AI 相關服務增長。",
+          "parent": "#/groups/0",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.1946,
+                "t": 580.2492234375,
+                "r": 538.5557000000001,
+                "b": 558.2956154290699,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                98
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/4",
+          "label": "list_item",
+          "level": 2,
+          "text": "來自行業雲服務的收入為人民幣 1,340.4 百萬元 （ 187.1 百萬美元） ，較⼆零⼆四年同期的人民幣 1,245.4 百萬元增加 7.6% 。該同比增加主要是由於不斷增長的 IT 需求及我們向垂直行業客戶複製行業解決方案 的能⼒。",
+          "parent": "#/groups/0",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.19460000000007,
+                "t": 538.2462234374999,
+                "r": 538.5656000000004,
+                "b": 502.89619154683925,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                121
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/5",
+          "label": "list_item",
+          "level": 2,
+          "text": "其他收入為零，而⼆零⼆四年同期為人民幣 0.2 百萬元。",
+          "parent": "#/groups/0",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.18560000000011,
+                "t": 482.2392234374998,
+                "r": 348.35060000000016,
+                "b": 474.2896154290699,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                30
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/6",
+          "label": "text",
+          "level": 1,
+          "text": "營業成本 為人民幣 3,662.0 百萬元（ 511.2 百萬美元） ，較⼆零⼆四年同期的人民幣 3,055.9 百萬元增加 19.8% 。我們繼續加強成本控制措施。⼆零⼆五年上半年，互聯網數據中心成本由人民幣 1,496.8 百萬元同比 增加 1.9% 至人民幣 1,525.9 百萬元 （ 213.0 百萬美元） 。該增加主要是由於基礎設施需求日益增加 （這與我們的 AI 業務擴張相⼀致） 及 AI 帶來的基本雲增長。⼆零⼆五年上半年，折舊及攤銷成本由人民幣 449.5 百萬元增加 107.0% 至人民幣 930.5 百萬元（ 129.9 百萬美元） 。該增加主要是由於採購新服務器以⽀持 AI 相關服務。⼆零 ⼆五年上半年，解決方案開發及服務成本由人民幣 937.1 百萬元增加 14.1% 至人民幣 1,069.0 百萬元 （ 149.2 百 萬美元） 。⼆零⼆五年上半年，履約成本及其他成本分別為人民幣 28.9 百萬元（ 4.0 百萬美元）及人民幣 107.7 百萬元 （ 15.1 百萬美元） 。",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.14960000000025,
+                "t": 454.24022343749976,
+                "r": 538.5476000000003,
+                "b": 348.26261542906974,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                457
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "#/texts/7",
+          "label": "text",
+          "level": 1,
+          "text": "毛利 為人民幣 657.2 百萬元（ 91.7 百萬美元） ，較⼆零⼆四年同期的人民幣 611.6 百萬元增加 7.4% 。該改善主 要是由於我們的收入規模擴張較快及收入組合優化。 毛利率 為 15.2% ，而⼆零⼆四年同期則為 16.7% 。該減 少主要是由於隨著 AI 業務擴張，服務器成本增加，以及若干客戶的進⼀步營收活動所產生的前期成本。 ⾮公 認會計準則毛利 為人民幣 678.2 百萬元 （ 94.7 百萬美元） ，而⼆零⼆四年同期則為人民幣 622.5 百萬元。 ⾮公認 會計準則毛利率 為 15.7% ，而⼆零⼆四年同期則為 17.0% 。",
+          "parent": "#/body",
+          "provenance": [
+            {
+              "page_no": 13,
+              "bbox": {
+                "l": 99.14960000000023,
+                "t": 328.2132234374996,
+                "r": 538.5296000000004,
+                "b": 264.2476154290696,
+                "coord_origin": "BOTTOMLEFT"
+              },
+              "charspan": [
+                0,
+                278
+              ]
+            }
+          ]
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_seconds": 123.9158,
+  "protected_sha256": {
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    ".source_catalog/catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5",
+    "config/resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+  },
+  "protected_unchanged": true,
+  "write_store_constructed": false,
+  "calls": {
+    "remote_model": 0,
+    "api": 0,
+    "download": 0,
+    "raw_copy": 0
+  },
+  "not_claimed": "Production integration, source semantics or full-company acceptance"
+}

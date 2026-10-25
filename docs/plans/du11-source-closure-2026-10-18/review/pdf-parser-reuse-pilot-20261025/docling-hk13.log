@@ -1,0 +1,7 @@
+STEP import configured local SDK
+STEP imports complete 107.051
+STEP convert cold
+STEP converted cold 11.448 ConversionStatus.SUCCESS 7
+STEP convert warm
+STEP converted warm 3.6483 ConversionStatus.SUCCESS 7
+RESULT {"output": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-parser-reuse-pilot-20261025\\docling-hk13.json", "total_seconds": 123.9158}

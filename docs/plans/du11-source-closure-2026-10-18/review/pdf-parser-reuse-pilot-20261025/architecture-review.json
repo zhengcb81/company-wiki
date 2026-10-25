@@ -1,0 +1,104 @@
+{
+  "schema_version": "pdf-parser-reuse-architecture-review/1",
+  "review_date": "2026-10-25",
+  "source_commit": "a00c5f99146a3d6747283a09d91af4645b28ec51",
+  "status": "SOURCE_REVIEW_COMPLETE_RUNTIME_NOT_TESTED",
+  "owner": "pdf_reuse_contract_explore",
+  "scope": {
+    "source_review_only": true,
+    "real_pdf_runs": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "product_changes": false,
+    "config_changes": false,
+    "original_changes": false,
+    "database_writes": false,
+    "author_worktree_changes": false,
+    "shared_pwf_changes": false,
+    "documents_written": ["architecture-review.md", "architecture-review.json"]
+  },
+  "latest_user_scope": {
+    "ashare_historical_statements_owner": "Sina API / W19 structured interface",
+    "pdf_three_statement_reconstruction": false,
+    "pilot_do_ocr": false,
+    "pilot_do_table_structure": false,
+    "pilot_focus": ["business narrative", "operating information", "amount and unit", "period", "growth rate", "reason and qualification"],
+    "operating_metric_table_is_distinct_from_financial_statements": true,
+    "w19_interfaces_and_author_worktrees_read_only": true
+  },
+  "verified_architecture": [
+    {
+      "fact": "PDF source boundary returns DocumentStructure/NarrativeParseResult, not NormalizedDocument",
+      "paths": ["src/company_wiki/source_catalog/narrative_evidence.py", "src/company_wiki/source_catalog/narrative_document.py", "src/company_wiki/document_normalization/document.py", "src/company_wiki/document_normalization/__init__.py"]
+    },
+    {
+      "fact": "Shared observation adapter projects existing units without reparsing or rewriting locators",
+      "paths": ["src/company_wiki/document_understanding/observation_adapter.py"]
+    },
+    {
+      "fact": "Existing native range view is based on named DICT blocks and exact block text offsets, not PDF byte offsets",
+      "paths": ["src/company_wiki/source_catalog/narrative_native_ranges.py", "src/company_wiki/document_understanding/narrative_continuity.py"]
+    },
+    {
+      "fact": "Existing PDF span replay invokes current PDF parser and compares locator text role kind and parser identity",
+      "paths": ["src/company_wiki/source_catalog/narrative_replay.py", "src/company_wiki/source_catalog/narrative_evidence.py"]
+    },
+    {
+      "fact": "Current production parser_component falls back to fixed PDF narrative identity; backend changes need explicit common identity/replay composition",
+      "paths": ["src/company_wiki/automation/narrative_formats.py", "src/company_wiki/automation/narrative_select.py"]
+    },
+    {
+      "fact": "Document work scopes debit the same parent ledger; inference wall time and memory are different measures",
+      "paths": ["src/company_wiki/resource_budget.py", "src/company_wiki/source_catalog/narrative_pdf_layout.py"]
+    }
+  ],
+  "recommended_adapter_seam": "Verified source bytes -> explicit external parser adapter -> DocumentStructure/NarrativeUnit -> existing observation and shared reading engine",
+  "production_options_requiring_runtime_evidence": [
+    "Reliable external structural observations mapped to existing source units with proven correspondence",
+    "Explicit new PDF frontend producing new source units and bound to matching replay/parser/cache identities"
+  ],
+  "must_not_do": [
+    "Pass pdf into existing NormalizedDocument as if supported",
+    "Treat Docling charspan as PDF bytes or current native DICT block offsets",
+    "Reuse old parser identity or unit ID for changed text boundaries",
+    "Mark a selected page range as full-document complete",
+    "Infer missing geometry or unit alignment silently",
+    "Duplicate full-text ownership across native and external parsers",
+    "Add a second cache store task queue document library or authorization gate",
+    "Reconstruct A-share historical three financial statements from PDF",
+    "Write W19 structured interfaces or author worktrees"
+  ],
+  "cache_checks_recommended": [
+    "Same source same backend options and actual model identity reuses",
+    "Changed engine model options adapter invalidates",
+    "Changed physical storage or model-cache path alone does not invalidate",
+    "Partial failure cannot certify complete coverage",
+    "Old spans retain their old replay backend"
+  ],
+  "deletion_candidates_only_after_runtime_acceptance": [
+    "Redundant current-version native block/font capture replaced by external producer",
+    "Redundant paragraph/list stitching proven unnecessary on neutral positive and negative controls",
+    "Duplicated current-version fine geometry capture where external output validates at equal or better quality"
+  ],
+  "retain": [
+    "Minimal old parser replay compatibility",
+    "SourceRef original hash and virtual storage ownership",
+    "Existing shared layout projector and family strategy engine",
+    "Business semantics financial-source separation and Q&A attribution",
+    "CF3 shared engine complexity fixes",
+    "Existing resource ledger artifact store and recovery"
+  ],
+  "not_verified": [
+    "Docling real accuracy or speed",
+    "Model cache completeness and offline run",
+    "Installed SDK page_range origin",
+    "Actual bbox origins rotation and charspan semantics on selected sources",
+    "External parser production replay and cache recovery",
+    "Full three-market source semantic acceptance"
+  ],
+  "navigation_notes": [
+    "CodeGraph parse_pdf_bytes callers returned empty despite explicit calls observed in already opened source; not interpreted as no production usage",
+    "Initial guessed projector.py and two source identity file names did not exist; corrected to actual layout_snapshots/projection.py and owned source modules, no product test failure"
+  ],
+  "next_action": "ROOT performs limited real-source Docling offline comparison with OCR/table structure disabled, then chooses adapter mode from observed benefit and reviews matching replay/cache/partial constraints"
+}

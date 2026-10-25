@@ -987,3 +987,10 @@ CF2新原页证据：cf2-source-boundaries.json。p13/paragraph9残句停1,245.4
 用户要求搜索现成PDF技能。已查看Docling/MinerU/PaddleOCR官方skill、Anthropic通用PDF和社区pdf-parser原始脚本/许可证，结论与一手链接见[review/pdf-skills-reuse-20261025.md](review/pdf-skills-reuse-20261025.md)。优先候选为Docling SDK、MinerU作对照；页面分诊、结构JSON、标题证据优先次序值得复用。尚未跑真实A/B，不能宣称修好CF1/CF2。
 
 本机默认Conda已装Docling2.96.0/core2.78.0、MinerU3.0.4和torch，有两个Docling模型缓存目录（未验完整性）；CWP venv只有core2.102.0，无完整Docling。实读旧版Docling没有新文档heading_hierarchy_options，新MinerU skill要求4.x，所以不能直接照抄新示例或隐式升级。建议在继续通用版面自研前，先以既有隔离大节点做少量关键页的复用对照；CWP存储/预算/业务策略仍为唯一责任层，不加第二文档库或人审许可。
+
+
+## 2026-10-25 三表API与PDF阅读明确分工，复用首例观察
+
+用户再次明确新浪API可供应A股历史三表，主线据此排除PDF三表批量恢复；W19仍负责新浪接口/FF调用/CWP专门数表，尚未实现。PDF保留业务/经营/招股募投/风险叙述及其中数字与限定。原始PDF不删，API缺口如实记录；币种/单位/合并口径/期间/修订和PIT由结构化责任层统一校验，不新增逐材料许可。
+
+已有缓存Docling离线p13首例，两次转换SUCCESS，行业云收入→增幅→原因合成一个列表项；CJK兼容部首及定位仍待验证，不声称精确引用或生产通过。冷import107.051秒、cold11.448秒、warm3.6483秒、进程树采样RSS峰值1,058,410,496B、总127.965秒；原件/config/catalog不变、0新付费/API/下载/原件副本、tmp恢复。有限页样本不代表整份扫描。试点证据及独立架构调查在review/pdf-parser-reuse-pilot-20261025；下一步冻结招股业务114–115页原文再对照，不盲升默认。唯一入口/机器状态/Next Step已同步；历史已关闭发布和W16/W17不重做。
