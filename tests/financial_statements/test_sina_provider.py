@@ -82,7 +82,7 @@ def _fetch(handler, **kwargs):
 class TestUrlConstruction:
     def test_fixed_endpoint_and_params_no_user_urls(self):
         recorder = _Recorder(_zhongwei_lrb_pages())
-        result = _fetch(recorder)
+        _fetch(recorder)
         assert all(
             url.startswith(sina_provider.SINA_ENDPOINT + "?") for url in recorder.requests
         )

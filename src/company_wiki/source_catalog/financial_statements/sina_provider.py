@@ -9,7 +9,7 @@ arbitrary URLs. Every termination is named; no hidden retries exist.
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from decimal import Decimal
 from typing import Any, Callable, Sequence
 

@@ -11,8 +11,6 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from decimal import Decimal
-from pathlib import Path
 from typing import Any
 
 from ..canonical_writer import (
@@ -27,6 +25,7 @@ from ..security_identity import (
     SecurityMasterStore,
     load_identity_master,
 )
+from ...source_contract.source_manifest import SOURCE_ID_PREFIX
 from ..service import SourceCatalog
 from . import normalize
 from .contracts import (
@@ -492,7 +491,7 @@ def _report_payload(version: dict[str, Any], request: StatementsRequest) -> dict
         for row in version["rows"]
     ]
     source_id = version["source_id"]
-    prefix = "urn:company-wiki:source:"
+    prefix = SOURCE_ID_PREFIX
     content_sha = source_id[len(prefix):] if source_id.startswith(prefix) else None
     return {
         "statement_version_id": version["statement_version_id"],

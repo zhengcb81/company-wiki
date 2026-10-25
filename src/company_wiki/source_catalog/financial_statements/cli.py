@@ -27,7 +27,6 @@ from .contracts import (
     RequestValidationError,
     StatementsRequest,
 )
-from .repository import query_financial_statements_readonly
 from .service import FinancialStatementsService
 from .sina_provider import SinaStatementsProvider
 
