@@ -1003,3 +1003,8 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 根因是该历史付费恢复测试的本地reply fixture仍断言`narrative-model-request/6`并返回v5 `decisions`，而v4默认正确发出schema `/5`，服务在登记请求前即断言中断。不是生产恢复路径失败。
 - 将fixture改为共用的`source_grounded_scoped_reply`后，移除故障marker可重用同一付费body完成解析；精确测试红→绿，1/1 passed/10.06s。无真实provider/API调用；本轮两个pytest temp根均已清理。
 - 独立窄幅复审已通过、无P0–P2；绑定收据`review/scoped-v4-ci-fixture-followup-20261025.md`。修复和PWF提交为`3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81`并已推送；精确CI `40148571611`全绿，Fast checks（包括完整单测）4分21秒。本地pre-push 155项/32.45秒通过。测试fixture事故已关闭；内容覆盖、正式摘要质量和RF消费仍OPEN。
+
+## 2026-10-25 独立施工卡状态 JSON 对账
+
+- 将 `CURRENT_STATUS.json` 中 IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 的过期 `DISPATCHED_BY_USER_STATUS_UNVERIFIED` 改为 `ROOT_ACCEPTED_DELIVERY_NOT_MERGED`，与 ROOT 验收记录、dispatch 和 `CURRENT_STATUS.md` 一致。QA-RAG 的验收绑定代码 SHA `c762e4de96feff3ac0f2b3d3bd3bfe9d72398f99`，最终作者 tip `5e5f22b2d7d652738e54bbfaced1982117616c7a` 仅含交接/审查/PWF/测试日志；R2 为 `PASS-with-findings`，仅留 O1/O2 信息项，28 项专项和 97 项仓库测试通过，原 `vector_db` SHA 未变。
+- 修复 `parallel_packages_20261024` 将 W13/W14/W15 错写成三张外部卡待 ROOT 验收的串卡状态；其验收与各仓库发布边界继续以 `review/package-reception-w13-w15-20261024/README.md` 和 `receipt.json` 为准。历史日志保留当时的状态，不回写伪造。

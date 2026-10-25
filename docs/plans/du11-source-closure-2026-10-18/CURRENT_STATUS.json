@@ -328,19 +328,19 @@
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
-      "status": "DISPATCHED_BY_USER_STATUS_UNVERIFIED",
+      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
       "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md",
       "review_before_handoff": true
     },
     {
       "id": "QA-RAG-SAFE-REBUILD",
-      "status": "DISPATCHED_BY_USER_STATUS_UNVERIFIED",
+      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
       "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md",
       "review_before_handoff": true
     },
     {
       "id": "MC-OUTPUT-INTEGRITY",
-      "status": "DISPATCHED_BY_USER_STATUS_UNVERIFIED",
+      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
       "path": "harness_lanes/20261024-independent/MC-OUTPUT-INTEGRITY.md",
       "review_before_handoff": true
     }
@@ -868,7 +868,7 @@
     }
   },
   "parallel_packages_20261024": {
-    "status": "AUTHOR_REPORTED_ALL_THREE_DELIVERED_ROOT_RECEPTION_PENDING",
+    "status": "ROOT_ACCEPTED_ALL_THREE_DELIVERIES_REPO_PUBLICATION_STATE_IN_RECEIPT",
     "entry": "harness_lanes/20261024/README.md",
     "dispatch": "harness_lanes/20261024/dispatch.json",
     "independent_packet_review": "harness_lanes/20261024/packet-review.json",
@@ -882,7 +882,7 @@
     "independent_final_implementation_review_required": true,
     "new_paid_calls": 0,
     "root_acceptance": "review/package-reception-w13-w15-20261024/receipt.json",
-    "handoff_status": "User reports IR-REPORT-GENERATION, QA-RAG-SAFE-REBUILD, and MC-OUTPUT-INTEGRITY completed; ROOT must inspect handoff, independent review, scope and exact tests before acceptance. Their worktrees remain isolated and untouched."
+    "handoff_status": "W13-CWP-GATES, W14-RF-CLEAN-CHAIN, and W15-AUDIT-PORTABLE are ROOT accepted. Repo-specific merge/push and CI state is recorded in review/package-reception-w13-w15-20261024/README.md and receipt.json; this is not awaiting initial handoff reception."
   },
   "w08_reporting_rules_20261024": {
     "status": "PUBLISHED_EXACT_CI_SUCCESS",
