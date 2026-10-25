@@ -217,10 +217,12 @@ def build_batch_events(
     now: str,
     deadline: float | None = None,
     projection_catalog=None,
+    normalization=None,
 ) -> BatchEvents:
     """Bind current source facts and execution settings before materializing jobs."""
     payloads, facts = _current_sources(
-        request, reader, deadline=deadline, projection_catalog=projection_catalog
+        request, reader, deadline=deadline, projection_catalog=projection_catalog,
+        normalization=normalization
     )
     return _events_from_sources(request, payloads, facts, now=now)
 

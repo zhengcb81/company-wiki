@@ -1,5 +1,9 @@
 # 当前行动计划（2026-10-25更新）
 
+## 当前实施：PDF-C2前置来源根修
+
+见[本轮节点](review/pdf-c2-20261025/README.md)。DOCX语言owner/配置端口、半年报回放版本漂移及native-range观测已TDD修复，153P集中包通过，当前独审。下一步提交冻结后只跑H1与DOCX单源真实回归，再继续C2通用缺口/严格对齐/有界runtime；不重做C1，不重跑旧超时整批。C2主体/C3仍OPEN。
+
 ## 最新完成节点：W18 ROOT组件接收并线
 
 W18已在f23ba2b7正常合并推送，6类工具/oracle问题修复并独审0 OPEN；28P及19份Git字节绑定成立。当前真实4源仅2份compile成功；H1 timeout与DOCX编译失败、旧四类产品发现仍OPEN。[接收/后续明细](review/package-reception-w18-20261025/README.md)。不重跑超时整批，不把工程接收说成内容全绿。

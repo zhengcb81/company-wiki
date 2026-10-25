@@ -336,7 +336,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "PDF-C2: first neutral RED for generic paragraph-gap triage and strict native-member alignment, then bounded on-demand enhancement behind the single reading owner; preserve original native spans, budget/context/deadline and recipe. C1 is published and exact-CI green; do not repeat C1.",
+  "next_step_now": "Finish independent review of C2 source-root fixes, freeze commit, replay H1+DOCX once at existing120s cap, then continue C2 paragraph triage/alignment and bounded runtime.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -2195,5 +2195,13 @@
       "updated_at": "2026-10-25T20:49:11Z"
     },
     "real_receipt_review": "PASS_RECEIPT_INTEGRITY_PRODUCT_COMPATIBILITY_NOT_ALL_GREEN"
+  },
+  "pdf_c2_source_root_fix": {
+    "status": "IMPLEMENTED_ENGINEERING_GREEN_INDEPENDENT_REVIEW_IN_PROGRESS",
+    "entry": "review/pdf-c2-20261025/README.md",
+    "h1_root": "legacy observation before production compile; explicit selector port needed",
+    "docx_root": "partial normalization warning mistaken for whole-body extraction failure",
+    "c2_structure_enhancement": "OPEN",
+    "real_replay": "PENDING frozen commit; only H1 and DOCX; no whole batch"
   }
 }

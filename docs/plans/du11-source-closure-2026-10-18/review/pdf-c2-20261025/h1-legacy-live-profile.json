@@ -1,0 +1,66 @@
+{
+  "phase": "reading_select",
+  "seconds": 92.32,
+  "top_stacks": [
+    [
+      "_minimal_matching_unit_windows@narrative_evidence.py:2519 > _add_operating_fact_windows@narrative_group_candidates.py:528 > _special_ids@narrative_group_candidates.py:884 > _enrich_group@narrative_group_candidates.py:820 > enrich_context_groups@narrative_group_candidates.py:1048",
+      853
+    ],
+    [
+      "_emit_pdf_tables@narrative_evidence.py:1529 > _emit_pdf_page@narrative_evidence.py:1553 > _parse_pdf_document@narrative_evidence.py:1627 > parse_pdf_bytes@narrative_evidence.py:1747 > read@narrative_pdf_reading.py:109",
+      89
+    ],
+    [
+      "<genexpr>@narrative_evidence.py:2335 > <genexpr>@narrative_evidence.py:2335 > _topics@narrative_evidence.py:2332 > assess_unit@narrative_candidates.py:265 > _base_candidates@narrative_evidence.py:2484",
+      17
+    ],
+    [
+      "_detect_operating_fact@n6_candidate_operating_facts.py:339 > detect_operating_fact@n6_candidate_operating_facts.py:370 > _detect_business_fact@narrative_business_meaning.py:196 > detect_business_fact@narrative_business_meaning.py:209 > _detect_reading_business_fact@narrative_business_policy.py:708",
+      14
+    ],
+    [
+      "_pdf_text_blocks@narrative_evidence.py:977 > _scan_pdf_pages@narrative_evidence.py:1208 > _parse_pdf_document@narrative_evidence.py:1623 > parse_pdf_bytes@narrative_evidence.py:1747 > read@narrative_pdf_reading.py:109",
+      11
+    ],
+    [
+      "_detect_operating_fact@n6_candidate_operating_facts.py:339 > detect_operating_fact@n6_candidate_operating_facts.py:370 > _detect_business_fact@narrative_business_meaning.py:196 > detect_business_fact@narrative_business_meaning.py:209 > _operating_fact@narrative_business_groups.py:351",
+      10
+    ],
+    [
+      "_detect_operating_fact@n6_candidate_operating_facts.py:339 > detect_operating_fact@n6_candidate_operating_facts.py:370 > _enrich_group@narrative_group_candidates.py:816 > enrich_context_groups@narrative_group_candidates.py:1048 > select_narrative_evidence@narrative_evidence.py:2580",
+      9
+    ],
+    [
+      "<genexpr>@narrative_evidence.py:2335 > <genexpr>@narrative_evidence.py:2335 > _topics@narrative_evidence.py:2332 > _enrich_group@narrative_group_candidates.py:814 > enrich_context_groups@narrative_group_candidates.py:1048",
+      7
+    ],
+    [
+      "_clause_purpose@narrative_source_purpose.py:172 > <genexpr>@narrative_source_purpose.py:214 > source_purpose@narrative_source_purpose.py:214 > detect_reading_business_fact@narrative_business_policy.py:739 > _operating_fact@narrative_business_groups.py:352",
+      5
+    ],
+    [
+      "_clause_purpose@narrative_source_purpose.py:146 > <genexpr>@narrative_source_purpose.py:214 > source_purpose@narrative_source_purpose.py:214 > detect_reading_business_fact@narrative_business_policy.py:739 > _operating_fact@narrative_business_groups.py:352",
+      5
+    ],
+    [
+      "<genexpr>@narrative_evidence.py:2335 > <genexpr>@narrative_evidence.py:2335 > _topics@narrative_evidence.py:2332 > _table_scan_signal@narrative_evidence.py:2354 > _pdf_table_scan_pages@narrative_evidence.py:1325",
+      4
+    ],
+    [
+      "matching_script_text@text_matching.py:26 > matching_reading_text@text_matching.py:31 > _reading_text@narrative_business_policy.py:192 > _detect_reading_business_fact@narrative_business_policy.py:700 > detect_reading_business_fact@narrative_business_policy.py:739",
+      3
+    ],
+    [
+      "reporting_basis_relations@narrative_business_disclosures.py:455 > _clause_purpose@narrative_source_purpose.py:148 > <genexpr>@narrative_source_purpose.py:214 > source_purpose@narrative_source_purpose.py:214 > detect_reading_business_fact@narrative_business_policy.py:739",
+      3
+    ],
+    [
+      "scope_change_reasons@n6_scope_changes.py:63 > _detect_operating_fact@n6_candidate_operating_facts.py:349 > detect_operating_fact@n6_candidate_operating_facts.py:370 > _enrich_group@narrative_group_candidates.py:816 > enrich_context_groups@narrative_group_candidates.py:1048",
+      3
+    ],
+    [
+      "_detect_operating_fact@n6_candidate_operating_facts.py:339 > detect_operating_fact@n6_candidate_operating_facts.py:370 > _invalid_group@narrative_group_candidates.py:604 > _expand_general@narrative_group_candidates.py:899 > _enrich_group@narrative_group_candidates.py:824",
+      3
+    ]
+  ]
+}

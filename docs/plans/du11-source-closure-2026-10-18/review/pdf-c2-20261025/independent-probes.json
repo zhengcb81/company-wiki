@@ -1,0 +1,8 @@
+{
+  "omitted_version_preserves_default": true,
+  "unverified_material_cannot_export": true,
+  "zero_budget_stops_before_backend": true,
+  "typeerror_not_hidden_by_compat_retry": true,
+  "original_sha_unchanged": true,
+  "scratch_restored_absent": true
+}

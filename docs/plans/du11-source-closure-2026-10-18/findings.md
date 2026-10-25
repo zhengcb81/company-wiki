@@ -1047,3 +1047,8 @@ PDF-C1发布节点关闭：87d39bbc产品和6d7eb858测试观察器根修均正�
 W18初审不能直接签收：原子目录分配与整个attempt不可变是同一所有权边界；worker退出0不代表源绑定正确；配置校验应在任何写入之前。七个纯表目标改为correctness_if_emitted并保留数值陷阱；临床/FDA锚点必须属于同药物。机械可见性和旧默认selector不是生产摘要质量；产品解析/路由/覆盖发现继续OPEN。详见review/package-reception-w18-20261025/README.md。
 
 W18当前候选实证不全绿：HK原生扫描partial也可编译76个任务；US HTML完整扫描编译75任务，这些都非摘要质量。DOCX仍SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED，需要中性来源类型/规范化路径查因。H1本次120秒deadline低于部分旧运行170.7/120.7秒，不能推断回归；ROOT应先读取逐attempt运行时间再设置抽样资源，后续分阶段观测，不反复加timeout整批跑。原件、配置和预算边界未变；工程/oracle接收与产品缺口责任分开记录。
+
+
+## PDF-C2前置来源根修（2026-10-25）
+
+不能把H1超时归咎于PDF转文字或当前生产选择：单源同cap阶段剖析显示当前.9约21秒含profiler；旧.8诊断重复窗口搜索占据95秒。修薄回放的版本意图/观测路径，比按公司或调timeout补丁合理。DOCX的coverage缺口不是语言抽取失败，默认与配置owner需一致；源partial不得消失。观察器另有native_range单locator漏记，必须先阅读owner精确重放再导出，不另造字符串匹配证据。

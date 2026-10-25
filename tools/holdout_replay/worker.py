@@ -15,6 +15,8 @@ No model POST, no network, no writes outside the attempt directory.
 from __future__ import annotations
 
 import hashlib
+import inspect
+import time
 import json
 import re
 import sys
@@ -118,14 +120,22 @@ def _anchor_visibility(gold: dict[str, Any], observed: dict[str, Any],
     return rows
 
 
-def _native_observation(path: Path, sample: dict[str, Any]) -> dict[str, Any]:
+def _native_observation(path: Path, sample: dict[str, Any], *,
+                        selector_version: str = "0.9.0") -> dict[str, Any]:
     from tools.document_understanding_benchmark.observer import observe_native
-    return observe_native(
-        Path(path),
-        sha256=sample["source_ref"]["content_sha256"],
-        sample_id=sample["sample_id"],
-        existing_kind=sample.get("document_kind", "unknown"),
+    ports = inspect.signature(observe_native).parameters
+    supports_selector = "selector_version" in ports
+    result = observe_native(
+        Path(path), sha256=sample["source_ref"]["content_sha256"],
+        sample_id=sample["sample_id"], existing_kind=sample.get("document_kind", "unknown"),
+        **({"selector_version": selector_version} if supports_selector else {}),
+        **({"language": sample.get("language", "zh")} if "language" in ports else {}),
     )
+    execution = result.setdefault("execution", {})
+    execution["requested_selector_version"] = selector_version
+    if not supports_selector:
+        execution["compatibility_reason"] = "producer_observer_has_no_selector_port"
+    return result
 
 
 def _compile_model_view(spec: dict[str, Any], sample: dict[str, Any],
@@ -155,10 +165,10 @@ def _compile_model_view(spec: dict[str, Any], sample: dict[str, Any],
 def _selector_versions(compile_selector_version: str) -> dict[str, Any]:
     """Record which selector generation each replay path actually uses.
 
-    The direct observation path follows the production default; the compile
-    path pins the selector passed for this job (the v4 scoped projection
-    requires 0.9.0). Both are stamped per artifact so the two visibility
-    layers are never conflated.
+    The producer default is historical configuration, not execution proof.
+    run_job stamps observe_path_actual from the observed execution receipt;
+    compatible old producers explicitly retain their historical entry point.
+    The compile path pins the requested scoped projection selector.
     """
     from company_wiki.source_catalog import narrative_evidence
     return {
@@ -183,15 +193,21 @@ def run_job(job: dict[str, Any]) -> dict[str, Any]:
         "import_roots": roots,
         "original_before_sha256": job["original_sha256"],
     }
-    observed = _native_observation(path, sample)
+    phase_start = time.monotonic()
+    observed = _native_observation(path, sample,
+        selector_version=job.get("compile_selector_version", "0.9.0"))
+    result["phase_seconds"] = {"source_observation": round(time.monotonic() - phase_start, 3)}
     result["native_observed"] = observed
     result["selector_versions"] = _selector_versions(
         job.get("compile_selector_version", "0.9.0"))
+
+    result["selector_versions"]["observe_path_actual"] = observed.get("execution", {}).get("selector_version")
 
     compile_spec = job.get("compile_spec")
     tasks: dict[str, str] | None = None
     model_view: dict[str, Any] = {"status": "not_attempted"}
     if compile_spec:
+        phase_start = time.monotonic()
         try:
             body, facts = _compile_model_view(
                 compile_spec, sample, job.get("run_id", sample["sample_id"]),
@@ -203,6 +219,7 @@ def run_job(job: dict[str, Any]) -> dict[str, Any]:
                           **report}
         except Exception as exc:  # noqa: BLE001 - record the raw failure reason
             model_view = {"status": "failed", "reason": f"{type(exc).__name__}: {exc}"[:500]}
+        result["phase_seconds"]["model_view_compile"] = round(time.monotonic() - phase_start, 3)
     result["model_view"] = model_view
 
     result["targets"] = _anchor_visibility(gold, observed, tasks)

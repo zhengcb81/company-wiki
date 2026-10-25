@@ -1,5 +1,12 @@
 # 当前项目状态与接手入口
 
+## 2026-10-25 当前：PDF-C2前置来源根修集中验收
+
+已实证DOCX失败来自“可靠正文被页眉/页脚覆盖警告误挡”，半年报超时来自回放先跑隐式旧0.8再跑生产0.9；当前0.9单源读取/选择剖析约21秒，未提高cap。中性TDD已修默认/配置Normalization分歧、显式观察版本及合法native-range漏记；153项集中工程通过，独审中。[本轮唯一节点](review/pdf-c2-20261025/README.md)。
+
+**当前下一步：** 独审修净后正常提交冻结，只定点重放H1和DOCX，不重复整批；之后继续PDF-C2严格成员对齐/按需运行时。W18组件已并线，C2增强主体和C3正式摘要/cache/RF仍OPEN。
+
+
 ## 2026-10-25 最新：W18工具/oracle已接收并线，产品缺口保留
 
 W18作者交付已由ROOT完成6类根修、28P、独审0 OPEN并正常合并推送`f23ba2b7`；19份最终文件与独审SHA一致；精确[CI40232151718](https://github.com/zhengcb81/company-wiki/actions/runs/40232151718) completed/success。金标v4保留96目标（64业务必需/9输出时正确性/23语境），不强制从PDF提取历史财务全表，旧baseline不改。[接收记录](review/package-reception-w18-20261025/README.md)。

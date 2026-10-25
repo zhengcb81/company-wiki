@@ -77,7 +77,7 @@ def configured_preview(spec: dict, raw_request: dict) -> tuple[bytes, dict]:
     try:
         reader = SourceVersionReader(catalog)
         now = datetime.now(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')
-        binding = build_batch_events(request, reader, now=now, deadline=deadline)
+        binding = build_batch_events(request, reader, now=now, deadline=deadline, normalization=normalization)
         if len(binding.events) != 1:
             raise ValueError('HOLDOUT_PREFLIGHT_EXPECTS_ONE_SOURCE')
         event = binding.events[0]

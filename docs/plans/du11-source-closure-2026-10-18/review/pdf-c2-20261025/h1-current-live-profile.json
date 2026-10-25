@@ -1,0 +1,66 @@
+{
+  "phase": "reading_select",
+  "seconds": 19.96,
+  "top_stacks": [
+    [
+      "_detect_operating_fact@n6_candidate_operating_facts.py:339 > detect_operating_fact@n6_candidate_operating_facts.py:370 > _detect_business_fact@narrative_business_meaning.py:196 > detect_business_fact@narrative_business_meaning.py:209 > recognize@narrative_business_policy.py:786",
+      11
+    ],
+    [
+      "matching_script_text@text_matching.py:26 > prepare_matching_text@text_view.py:74 > matching_text@relations.py:810 > _detect_operating_relations@relations.py:1008 > detect@relations.py:816",
+      9
+    ],
+    [
+      "_fitz_module@narrative_evidence.py:1569 > parse_pdf_bytes@narrative_evidence.py:1746 > read@narrative_pdf_reading.py:109 > _read@narrative_pdf_reading.py:185 > read@narrative_pdf_reading.py:171",
+      5
+    ],
+    [
+      "_read_pending_snapshot@narrative_pdf_layout.py:182 > read_snapshot@narrative_pdf_layout.py:141 > _pdf_text_blocks@narrative_evidence.py:975 > scan_planned_pages@narrative_pdf_intent.py:193 > _parse_pdf_document@narrative_evidence.py:1618",
+      5
+    ],
+    [
+      "_clause_purpose@narrative_source_purpose.py:146 > <genexpr>@narrative_source_purpose.py:214 > source_purpose@narrative_source_purpose.py:214 > assess_reading_business_fact@narrative_business_policy.py:788 > fact@narrative_operating_relations.py:613",
+      5
+    ],
+    [
+      "_read_pending_snapshot@narrative_pdf_layout.py:185 > read_snapshot@narrative_pdf_layout.py:141 > _pdf_text_blocks@narrative_evidence.py:975 > scan_planned_pages@narrative_pdf_intent.py:193 > _parse_pdf_document@narrative_evidence.py:1618",
+      4
+    ],
+    [
+      "matching_script_text@text_matching.py:26 > prepare_matching_text@text_view.py:74 > independent_statement_start@relations.py:144 > statement_members@narrative_reading.py:446 > _prose_reading_packages@narrative_reading.py:484",
+      4
+    ],
+    [
+      "matching_script_text@text_matching.py:26 > matching_reading_text@text_matching.py:31 > _reading_text@narrative_business_policy.py:192 > project_reading_business_fact@narrative_business_policy.py:808 > assess_reading_business_fact@narrative_business_policy.py:789",
+      4
+    ],
+    [
+      "_clause_purpose@narrative_source_purpose.py:142 > <genexpr>@narrative_source_purpose.py:214 > source_purpose@narrative_source_purpose.py:214 > assess_reading_business_fact@narrative_business_policy.py:788 > fact@narrative_operating_relations.py:613",
+      3
+    ],
+    [
+      "scope_change_reasons@n6_scope_changes.py:59 > reporting_basis_relations@narrative_business_disclosures.py:463 > _clause_purpose@narrative_source_purpose.py:148 > <genexpr>@narrative_source_purpose.py:214 > source_purpose@narrative_source_purpose.py:214",
+      3
+    ],
+    [
+      "prepare_matching_text@text_view.py:75 > matching_text@relations.py:810 > _detect_operating_relations@relations.py:1008 > detect@relations.py:816 > relations@narrative_operating_relations.py:193",
+      3
+    ],
+    [
+      "_source_metric_relations@narrative_business_policy.py:383 > _reading_relations@narrative_business_policy.py:664 > _detect_reading_business_fact@narrative_business_policy.py:712 > assess_reading_business_fact@narrative_business_policy.py:788 > fact@narrative_operating_relations.py:613",
+      3
+    ],
+    [
+      "_project_native_prose@narrative_evidence.py:1135 > _emit_pdf_page@narrative_evidence.py:1549 > emit@narrative_pdf_intent.py:187 > scan_planned_pages@narrative_pdf_intent.py:217 > _parse_pdf_document@narrative_evidence.py:1618",
+      2
+    ],
+    [
+      "build_native_page_view@narrative_native_ranges.py:105 > _record_pdf_native_view@narrative_evidence.py:1192 > scan_planned_pages@narrative_pdf_intent.py:196 > _parse_pdf_document@narrative_evidence.py:1618 > parse_pdf_bytes@narrative_evidence.py:1747",
+      2
+    ],
+    [
+      "_record_pdf_native_view@narrative_evidence.py:1189 > scan_planned_pages@narrative_pdf_intent.py:196 > _parse_pdf_document@narrative_evidence.py:1618 > parse_pdf_bytes@narrative_evidence.py:1747 > read@narrative_pdf_reading.py:109",
+      2
+    ]
+  ]
+}

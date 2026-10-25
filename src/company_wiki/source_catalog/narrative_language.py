@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from collections import Counter
-import hashlib
 import re
 import unicodedata
 
@@ -84,16 +83,17 @@ def _decode_sample(data: bytes) -> str:
 def _text_for_mime(data: bytes, mime_type: str, *, normalization=None) -> str:
     if mime_type in {"application/vnd.openxmlformats-officedocument.presentationml.presentation",
                      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}:
-        if normalization is not None:
-            return normalization.sample_text(data, mime_type)
-        from company_wiki.document_normalization import normalize_document
+        # Classification needs a reliable body sample, not complete document
+        # coverage. The normalization owner preserves missing-header/image
+        # diagnostics separately; duplicating its parser/error policy here
+        # made default and composed calls disagree on the exact same bytes.
+        if normalization is None:
+            from .narrative_normalization import NarrativeNormalization
+            normalization = NarrativeNormalization()
         try:
-            digest = hashlib.sha256(data).hexdigest()
-            document = normalize_document(data, source_id="urn:company-wiki:source:sha256:" + digest,
-                                          source_sha256=digest, mime_type=mime_type)
-            if document.structure.errors:
-                raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED")
-            return "\n".join(unit.raw_text for unit in document.units)[:_MAX_SAMPLE_CHARS]
+            return normalization.sample_text(data, mime_type)
+        except NarrativeLanguageError:
+            raise
         except (RuntimeError, ValueError) as exc:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED") from exc
     if mime_type == "application/pdf":

@@ -1265,3 +1265,10 @@ W18 ROOT集中终审通过：独立完整28P/49.53秒，额外before SHA/unchang
 W18并线f23ba2b7正常推送，pre-push154P/56.77秒，review19文件Git字节一致。ROOT候选4源234.286秒：HK76任务、US75任务编译；CN H1 120.1秒timeout，DOCX观察ok但编译提取失败。整体has_failures不改绿；4原件/3配置SHA不变、0POST/下载/复制；15,973,829B临时工区恢复absent，424,247B收据压至94,749B。作者HEAD干净且旧baseline字节不变。返回PDF-C2，CF/C3产品缺口保持OPEN；精确CI仍观察中。
 
 W18最终真实收据独审通过（产品兼容不全绿），精确CI40232151718对f23ba2b7于20:49:11Z completed/success。JSON中原next_step_now/next_steps仍滞留C1/作者pending已纠正，统一下一步PDF-C2，C3/路由/耗时缺口开放。最后正常文档提交推送，不再重复工程测试。
+
+
+## PDF-C2前置来源根修（2026-10-25）
+
+PDF-C2前置根因已定位/TDD：DOCX可靠正文因header/footer覆盖警告被旧默认语言入口拒绝，统一Normalization并恢复公共准备的配置owner；H1当前.9读3.639s/选16.935s，旧.8诊断95秒停在n²窗口枚举，W18误先跑legacy再生产是总上限根因。改显式观察版本、实际/请求/回退及阶段耗时，原跨度owner验真后投影。153P集中包与最新端口32P通过，独审进行中；C2结构增强仍OPEN。
+
+PDF-C2前置根修独审PASS_ROOTFIX_ENGINEERING_ONLY，68P/9.19秒与4反例通过，7文件LF SHA绑定，0 OPEN。全src mypy376/Ruff绿；准备正常提交冻结后只跑两源真实回归，不提高120秒上限，不重复旧legacy整批。

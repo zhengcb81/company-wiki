@@ -1,0 +1,57 @@
+{
+  "schema_version": "pdf-c2-rootfix-independent-review/1",
+  "reviewer": "/root/c2_source_root_review",
+  "date": "2026-10-25",
+  "base_commit": "6c83cb438984bcedeb255a06debd056f9fe2701d",
+  "status": "PASS_ROOTFIX_ENGINEERING_ONLY",
+  "open_findings": [],
+  "reviewed_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_language.py",
+      "sha256_lf": "2513e8f87a4d292adbe9e2d38d3ef1ee85d884bf93bf5597d7c8800285deea20"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "sha256_lf": "47e074cf8d203c81e3aa06a643fdad90cf63b51e85a82126231aef4081be00cf"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/holdout_acceptance_contracts.py",
+      "sha256_lf": "11c04ae413aa29e1de3c55976c4cf69aa680d3763b8a7bab6bc6412aacc8b816"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/observer.py",
+      "sha256_lf": "831ff778c9b0d299b8414513cae7cb94a8f8b863350416017b82e3f2fa5bbbcc"
+    },
+    {
+      "path": "tools/holdout_replay/worker.py",
+      "sha256_lf": "9692d9d8e80545fdc6a4ae55edebdb4fdfcab9384f9e68dcbe6f2e77bbc9fc0b"
+    },
+    {
+      "path": "tests/unit/test_narrative_language.py",
+      "sha256_lf": "681fbe6db9d4974eff6748cf6e8ed1175507d69d561ee6a865116e396ad41118"
+    },
+    {
+      "path": "tests/unit/test_holdout_observation_version.py",
+      "sha256_lf": "2257104a6c98ebb5602144ef218cd441cb6d3a2ac46ca7448209abe52377a229"
+    }
+  ],
+  "tests": {
+    "independent_package": "68 passed in 9.19s",
+    "wall_seconds": 12.019,
+    "receipt": "independent-test-result.json",
+    "counterexamples": "independent-probes.json",
+    "scratch_restored_absent": true
+  },
+  "scope_exclusions": [
+    "PDF-C2 structure enhancer not implemented by this delta",
+    "formal summary and cache/RF E2E remain OPEN",
+    "real H1/DOCX replay after frozen commit still pending",
+    "old baseline attempts remain immutable"
+  ],
+  "notes": [
+    "DOCX usable body language is distinct from whole-document coverage; current partial warning preserved.",
+    "Version selection explicit; omitted observer version remains legacy default and old producer compatibility recorded.",
+    "Current PDF owner verifies native-range material before source_evidence export.",
+    "A first reviewer run passed but stdout decoding failed in the review harness; the harness encoding was corrected and a bounded repeat yielded the attached 68-pass receipt. No product failure or repeated timeout batch occurred."
+  ]
+}

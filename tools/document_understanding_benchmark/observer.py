@@ -110,14 +110,32 @@ def _unit_locator(unit: Any) -> str:
     return ""
 
 
-def _source_evidence(spans: Sequence[Any], units: Sequence[Any]) -> list[dict[str, Any]]:
+def _source_evidence(spans: Sequence[Any], units: Sequence[Any], *,
+                     material_verified: bool = False) -> list[dict[str, Any]]:
     indexed = {_unit_locator(unit): unit for unit in units}
     rows = []
     seen = set()
     for span in spans:
         locator = _span_locator(span)
         unit = indexed.get(locator)
-        if unit is None or locator in seen:
+        if locator in seen:
+            continue
+        if unit is None or getattr(span, "raw_text", None) != getattr(unit, "raw_text", None):
+            if material_verified:
+                # The source owner already replayed this carrier against the
+                # exact native members; a single-locator lookup cannot represent
+                # native_range spans. Export the actual verified span, not a
+                # fabricated parent unit or a string-search proof.
+                metadata = getattr(span, "structured_value", {}) or {}
+                coordinate = getattr(span, "coordinates", None)
+                rows.append({"locator": locator, "text": span.raw_text,
+                             "page": getattr(coordinate, "page_number", None),
+                             "line": metadata.get("line_start"), "line_end": metadata.get("line_end"),
+                             "unit_id": None, "source_role": metadata.get("source_role"),
+                             "language": metadata.get("language"),
+                             "scope_id": metadata.get("selection_group_id"),
+                             "period": metadata.get("period"), "material_proof": "reading_owner_replay"})
+                seen.add(locator)
             continue
         # Public selector may output only original parser text. An adapter which
         # changes it cannot silently certify generated output as original evidence.
@@ -143,6 +161,9 @@ def observe_native(
     sha256: str,
     sample_id: str,
     existing_kind: str = "unknown",
+    selector_version: str | None = None,
+    language: str = "zh",
+    deadline: float | None = None,
 ) -> dict[str, Any]:
     """Observe one original with the existing public parser and selector.
 
@@ -151,6 +172,7 @@ def observe_native(
     """
 
     module = _import_evidence()
+    effective_version = module.resolve_narrative_selector_version(selector_version)
     target = Path(path)
 
     started = time.monotonic()
@@ -187,7 +209,20 @@ def observe_native(
 
     source_id = f"urn:company-wiki:source:sha256:{sha256}"
     started = time.monotonic()
-    parsed, parse_entry = _parse(module, target, source_id, sha256)
+    budget = None
+    reading = None
+    if selector_version is not None and effective_version == "0.9.0":
+        from company_wiki.resource_budget import new_document_work_budget
+        budget = new_document_work_budget()
+    if budget is not None and _suffix(target) == ".pdf":
+        from company_wiki.source_catalog.narrative_pdf_reading import PdfReading, PdfReadingRequest
+        reading = PdfReading(deadline=deadline)
+        parsed = reading.read(target.read_bytes(),
+            PdfReadingRequest(source_id, sha256, language, target.name, existing_kind),
+            selector_version=effective_version, work_budget=budget)
+        parse_entry = "PdfReading.read"
+    else:
+        parsed, parse_entry = _parse(module, target, source_id, sha256)
     parse_seconds = time.monotonic() - started
 
     started = time.monotonic()
@@ -195,9 +230,12 @@ def observe_native(
         parsed,
         title=target.name,
         existing_kind=existing_kind,
-        selector_version=module.NARRATIVE_SELECTOR_VERSION,
+        selector_version=effective_version,
+        **({"work_budget": budget} if budget is not None else {}),
     )
     select_seconds = time.monotonic() - started
+    if reading is not None:
+        reading.verify_material(parsed, package.evidence_spans)
 
     spans: Sequence[Any] = tuple(package.evidence_spans)
     selected_locators = [_span_locator(span) for span in spans]
@@ -246,7 +284,7 @@ def observe_native(
         "route": route,
         "selected_locators": selected_locators,
         "selected_text": selected_text,
-        "selected_evidence": _source_evidence(spans, units),
+        "selected_evidence": _source_evidence(spans, units, material_verified=reading is not None),
         "semantic_units": [],
         "claims": [],
         "coverage": {
@@ -283,7 +321,8 @@ def observe_native(
             "parse_entry": parse_entry,
             "parser_version": (next((unit.parser_version for unit in units), None)
                                or getattr(module, "NARRATIVE_PARSER_VERSION", None)),
-            "selector_version": getattr(module, "NARRATIVE_SELECTOR_VERSION", None),
+            "selector_version": effective_version,
+            **({"work_used": budget.used, "work_limit": budget.max_work_units} if budget is not None else {}),
             "calls": 0,
             "elapsed_seconds": round(parse_seconds + select_seconds, 3),
             "mode": "native",
