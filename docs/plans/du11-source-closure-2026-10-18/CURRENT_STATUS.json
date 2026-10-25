@@ -2,50 +2,22 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "V4_AND_ST_A03_PUBLISHED; ANNUAL14_BULLET_PARENT_SOURCE_FIX_INDEPENDENTLY_REVIEWED_READY_TO_PUBLISH; CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "V4_AND_ST_A03_PUBLISHED; ANNUAL14_ST_A09_CONTEXT_ROOTFIX_REVIEWED_PENDING_PUBLICATION; CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "81c9d97c8b551de285a385050caa600eea9106ca",
+  "last_code_commit": "64570b9a66738410a5299ec5d98438e5160a04ee",
   "code_ci": {
-    "id": 40163967926,
-    "job_id": 121081108478,
-    "check_id": null,
-    "head_sha": "81c9d97c8b551de285a385050caa600eea9106ca",
+    "id": 40166148355,
+    "head_sha": "64570b9a66738410a5299ec5d98438e5160a04ee",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40163967926",
-    "failed_test_count": 0,
-    "junit_report": null,
-    "failure_summary": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40166148355",
     "observed_at": "2026-10-25T05:06:25Z",
-    "annotations": [
-      "Node.js 20 deprecation warning for actions/checkout@v4 and actions/setup-python@v5; GitHub forces Node.js 24.",
-      "ubuntu-latest migration notice to Ubuntu 26 beginning 2026-10-19."
-    ],
     "run_scope": "Fast checks job including full tests/unit suite",
-    "duration": "4m29s",
-    "previous_successful_ci": {
-      "id": 40162702684,
-      "head_sha": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
-      "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40162702684"
-    },
-    "previous_failed_ci": {
-      "id": 40143579006,
-      "head_sha": "12768fdeecbbaad5f6a38a4e4ebacfc42236bb80",
-      "status": "completed",
-      "conclusion": "failure",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40143579006",
-      "failed_test": "tests.unit.test_narrative_purpose_policy::test_canonical_narrative_only_policy_reaches_wire_and_keeps_loaded_profile[minimax]",
-      "root_cause": "The test still expected thinking=disabled for every provider after the valid MiniMax-specific change to reasoning_effort=low.",
-      "repair_commit": "275c8295f2924939695fdbfd2d19a6cc603f1111",
-      "repair_validation": "64 focused tests passed; Ruff passed; diff-check passed"
-    },
-    "prior_ci_run_scope": "Fast checks job including full tests/unit suite",
-    "prior_ci_duration": "4m21s"
+    "duration": "4m29s"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -317,7 +289,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "FORMAL_V4_LIFECYCLE_AND_FF_REUSE_PASS; OLD_V5_RF_NOT_CONSUMED; MICROSOFT_V4_PREFLIGHT_SUPPORTS_8_OF_8_REQUIRED_FACTS; WUXI_ANNUAL14_SOURCE_REVIEW_8_PASS_6_PARTIAL; NEXT_TRACE_SOURCE_AND_TASK_CLOSURE_ROOT_CAUSES",
+      "status": "FORMAL_V4_LIFECYCLE_AND_FF_REUSE_PASS; OLD_V5_RF_NOT_CONSUMED; MICROSOFT_V4_PREFLIGHT_SUPPORTS_8_OF_8_REQUIRED_FACTS; WUXI_ANNUAL14_CONTENT_8_PASS_6_PARTIAL; ST_A09_CONTEXT_CLOSURE_FIXED_LOCAL_REVIEWED_PENDING_CI; TRACE_OTHER_PARTIAL_ROOT_CAUSES",
       "mainline": true
     },
     {
@@ -346,7 +318,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Independent review of the optimization-safe verifier and the final overwrite-rejection SHA log is PASS with no blockers. Next, commit and push only the bullet-parent source/test/evidence and PWF files, verify CI for the exact new HEAD, and continue the remaining annual14 partial-target root-cause work. This is source-context evidence only; content remains 8 pass / 6 partial / 0 missing.",
+  "next_step_now": "ST-A09 source-context root fix is implemented locally and independently reviewed. It filters complete generic phase phrases before bigrams, keeps project context one-hop outside transitive qualification closure, and charges six text-length passes. Related 67 tests, Ruff, mypy, diff-check, and a zero-cost real annual14 replay pass; the 112-span coverage remains incomplete and content is not regraded. Publish only this node and verify exact-head CI, then continue the other annual14 partial root causes.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -405,14 +377,14 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40148571611,
-    "check_id": 121035094340,
-    "head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
+    "id": 40166148355,
+    "head_sha": "64570b9a66738410a5299ec5d98438e5160a04ee",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40148571611",
-    "observed_at": "2026-10-25T01:04:41Z",
-    "duration": "4m21s"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40166148355",
+    "observed_at": "2026-10-25T05:06:25Z",
+    "run_scope": "Fast checks job including full tests/unit suite",
+    "duration": "4m29s"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -854,13 +826,13 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Continue source-level diagnosis of the five remaining annual14 partial targets; keep ST-A03 content status unchanged until the source replay receives a bounded independent content regrade.",
+    "Publish and verify the independently reviewed ST-A09 local-context root fix; then continue source-level diagnosis of the five other annual14 partial targets. Do not update content scores before a bounded independent content regrade.",
     "Keep Microsoft source scan, candidate omission, layout geometry, and required-fact recall as separate dimensions; its v4 preflight supports all 8 required business facts. Do not equate 4,087 unassigned units or deferred candidates with unread mandatory facts.",
     "Write neutral failing tests for any proven shared root cause; use existing source owners and local dependency contracts. Implement resumable bounded batches only if a frozen gold gap is shown to be recoverable by additional candidates, with source identity, closure, aggregate coverage, cache identity, crash resume, and no duplicate spend tested.",
     "At a major gate, independently review exact source/test/evidence SHAs, then replay the unchanged real-source gold across affected markets and document types. Keep old paid receipts immutable and preserve all review/partial states.",
     "Only after the offline coverage and quality gate passes, make a newly configured bounded summary attempt; verify summary quality, cache recovery, and actual RF use. Continue W12 four-review and the company holdout loop afterward."
   ],
-  "last_updated_utc": "2026-10-25T04:49:00Z",
+  "last_updated_utc": "2026-10-25T06:14:20Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1710,5 +1682,41 @@
     "no_overwrite_review": "PASS; before/after result SHA recorded and independently confirmed",
     "independent_review": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md",
     "independent_review_json": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.json"
+  },
+  "annual14_st_a09_context_closure_20261025": {
+    "status": "LOCAL_IMPLEMENTATION_INDEPENDENT_REVIEW_PASS_PENDING_PUBLICATION_CONTENT_NOT_REGRADED",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "page_count": 249,
+    "selected_count": 112,
+    "selected_limit": 112,
+    "selected_chars": 8915,
+    "work_used": 10565038,
+    "work_limit": 16000000,
+    "work_exhausted": false,
+    "date_locator": "loc:v1/page:12/paragraph:29/chars:1425-1450",
+    "capacity_locator": "loc:v1/page:12/paragraph:30/chars:1450-1478",
+    "mutual_context": true,
+    "context_not_support": true,
+    "coverage_complete": false,
+    "whole_content_pass": false,
+    "content_quality": "not_regraded",
+    "downloads": 0,
+    "raw_copies": 0,
+    "external_model_calls": 0,
+    "tests": "Initial: 67 passed in 4.04s; final publication rerun across the same three files: 94 passed in 3.60s",
+    "ruff": "PASS",
+    "mypy": "PASS for narrative_operating_relations.py and narrative_reading.py",
+    "diff_check": "PASS",
+    "review": "PASS; bound to source/test SHA and replay receipt",
+    "source_sha256_files": {
+      "src/company_wiki/source_catalog/narrative_operating_relations.py": "ee77cd8cf295a5748d762b41e1fd75819b475632d44852ea81abd4c8114d16b4",
+      "src/company_wiki/source_catalog/narrative_reading.py": "65ef7a2b2d1a0faf40c899cd2501f28b317e761555032b66ebd270bdda3953ce",
+      "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": "06823e76b8ab82222b1ffcb895488505b9e14c2ca50aadcbf34f0a79dd12641c"
+    },
+    "replay_receipt": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/replay-receipt.json",
+    "replay_receipt_sha256": "20c4d26e7a8f9ba050eea9e6ccb6eee0aa3c3c29785b524cb6115e58a80b304f",
+    "independent_review": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md",
+    "independent_review_sha256": "384aa9bae72d4de3ebc331ca93d8491ebe39b107931e347c1c81a9ee3ccefd2d",
+    "next_action": "Commit/push only this rootfix, tests, replay evidence, and PWF; verify exact new-head CI; then continue remaining annual14 partial root-cause work without changing content grades."
   }
 }

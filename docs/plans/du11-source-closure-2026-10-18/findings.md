@@ -848,3 +848,13 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - 冻结的药明康德annual14 trace把第12页的“2025年9月提前完成泰兴多肽产能建设”与“多肽固相合成反应釜总体积已提升至超100,000L”记录为相邻段落；两段都出现在当前112片段选择结果中。trace有物理邻接边，但`dependency_added=false`；第14页TIDES破折号父项已被本次修复作为子项上下文。
 - 因此，本例尚不能简化为“selector漏掉容量或日期”，也不能直接将两事实连成因果结论。内容复核对ST-A09的partial判据是日期、状态和容量未在同一局部成员集完整呈现。还需核对`eligible package -> selected span -> model view/content-review member`之间的映射，分清局部证据闭包不足、分段后的证据表达、还是review对“完整同现”的要求过严。
 - 修复前须新增一个中性反例/正例：同一明确项目实体、日期状态句与后续能力数字应能形成可追溯的局部上下文；不同项目、仅同页邻接或无实体重合的数值不得被联结。上下文仅供解释，不能据此推断项目投产导致总产能变化。
+
+### 2026-10-25 ST-A09 根因修复（更新上面的调查判断）
+
+- **根因一：** 局部项目匹配在生成CJK bigram后才过滤阶段词；`第一期`拆成`第一`和`一期`，留下通用的`第一`，可能把多肽建设与抗体产线容量误连。只过滤已知bigram还会留下跨通用短语产生的碎片。
+- **根因二：** 把项目context边加入无向qualification图再取连通分量，会让A经由B拿到不相邻的C。项目关系只为直接邻居增加解释context，不能进入传递闭包，也不能扩展citation support。
+- **根因三：** 新过滤和词项处理的实际扫描成本超过旧3倍字符计费。
+- **修复：** 在既有source owner内先用一次合并扫描移除完整阶段词和通用CJK短语，再生成bigram；qualification关系保留原有有界闭包，project context独立取一跳直接邻居；citation support只由qualification组件生成。扫描成本按两侧文本长度6倍计入同一`WorkBudget`，不足时将session标记不完整并defer；没有增加预算上限、schema或因果语义。
+- **TDD/验证：** 新增“第一期”异对象/数量反例、通用短语不产生关联词、A-B/B-C仅让A获得B，以及同项目正例互入context但不互入support。原有source/page/section/role/edge basis/预算耗尽边界继续覆盖。初始三文件相关测试67/67通过（4.04秒）；发布前同三测试文件最终复测94/94通过（3.60秒），Ruff、两源文件mypy和diff-check通过。
+- **真实年报回放：** 药明康德FY2025原件SHA `7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`，249页、112片段/8,915字符、工作量10,565,038/16,000,000且未耗尽。第12页paragraph 29日期span与paragraph 30容量span互相进入context，不进入对方support。源码树稳定，0模型调用、0下载、0原文副本。`coverage_complete=false`、`whole_content_pass=false`，因此只证明来源context闭包，不代表摘要质量验收。
+- **独审/边界：** [独立复审报告](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md)，完整回放收据、selection和trace见同目录。独审PASS；本节点仍待精确提交、推送及新HEAD CI，内容评分保持8通过/6部分/0缺失。

@@ -1,11 +1,19 @@
 # 当前项目状态与接手入口
 
-## 最新行动：annual14 bullet-parent 来源闭合（2026-10-25）
+## 当前行动：annual14 ST-A09 局部上下文根修（2026-10-25）
+
+药明康德2025年报第12页的扩产日期与多肽反应釜容量已分别入选，但此前没有进入同一局部模型视图。根因不是缺少span：局部上下文匹配把“第一期”切出“第一”造成不同项目误连；即使每条邻接边正确，纳入传递连通闭包也会把A-B-C扩散；同时旧扫描计费系数低估了新匹配成本。现已在共享source owner内修复：先删除完整阶段词和通用短语再生成bigram；项目里程碑/数量只允许一跳直接上下文，不进入qualification传递闭包；按6倍文本长度计费并在耗尽时defer。
+
+最终独立复审PASS，绑定源码/测试SHA：`narrative_operating_relations.py`=`ee77cd8c…14d16b4`，`narrative_reading.py`=`65ef7a2b…3953ce`，回归测试=`06823e76…12641c`。初始定向测试67项通过（4.04秒）；发布前对同三测试文件复测94项通过（3.60秒）。Ruff、mypy和diff-check通过。药明康德真实原件SHA=`7f1431d6…2d6a2`的零费用离线回放选中112片段/8,915字符，工作量10,565,038/16,000,000，未耗尽；日期与容量各自作为对方的context，但没有并入对方support。0模型调用、0下载、0原文复制，原件稳定。回放边界仍是`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`；内容评分继续为8通过/6部分/0缺失，不能把来源闭包修复视为内容验收。
+
+代码与证据现已满足本节点本地发布条件，下一步只提交本节点源码、测试、回放/独审证据和PWF，推送后核对精确HEAD CI，再继续其余partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY仍是已ROOT接收、作者仓独立保留的外包交付，不代替主线内容验收。
+
+## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 
 药明康德2025年报第14页的 TIDES 破折号父项此前没有进入其罗马数字子项上下文；现已在原生列表结构 owner 修复。四个相关测试文件155项通过（5.14秒），Ruff及diff-check通过。零费用真实原件回放使用生产112片段限额，选中112片段/8,915字符，TIDES父项作为ST-A08/ST-A09的上下文；扩产日期与`>100,000L`容量保持分开，没有推断因果。原件SHA及收据见[本节点证据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/README.md)。首轮独审PASS。第二轮发现验证器`assert`在Python优化模式下会失效，已改为显式检查和独占创建；`python -O`及`PYTHONOPTIMIZE=1`均实测拒绝覆盖，`optimized-overwrite-rejection-final.log`记录两次尝试前后的v3收据SHA完全相同。最终Ruff和diff-check退出码为0，见同目录`verification-final.log`；修复后复核无阻断，最终SHA对照留证已确认，详见[独立复核](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md)。源码和证据已由`64570b9a66738410a5299ec5d98438e5160a04ee`提交并推送；精确HEAD CI [40166148355](https://github.com/zhengcb81/company-wiki/actions/runs/40166148355) 于2026-10-25 completed/success。内容评价没有重做，仍为8 pass/6 partial/0 missing。对ST-A09的追踪确认第12页扩产日期与容量各自出现在选中片段中，物理邻接被记录但没有添加语义依赖；下一步先判清剩余问题属于证据成员闭包还是摘要/内容判断，再处理其他partial根因。
 
 
-**最新状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** selector 0.9.0 的 v4 任务摘要默认、v4/v5付费响应恢复与分协议容量预检已通过独立终审并推送。旧恢复夹具已按 v4 契约修复；提交`3dc04a8e`的精确CI `40148571611`全绿，本地pre-push的155项也通过（32.45秒）。覆盖维度属性与四组合测试已随`fc7cfa6d`推送，精确CI `40162702684`全绿（Fast checks含完整`tests/unit`，4分31秒）。ST-A03并列“收入+成本”地域定义根因修复由首轮独审定位P2、RED复现快捷路径绕过后，经共享收入主体规则修复并通过最终独立复核；定向模块39/39，Ruff和diff-check通过。提交`81c9d97c`已推送，精确CI `40163967926`全绿（Fast checks含完整`tests/unit`，4分29秒）；本地pre-push也通过（29个受影响目标，154项契约smoke）。冻结的药明康德annual14零费用/零下载回放证明ST-A03地域定义由未准入转为准入且已入选；38条共同来源准入记录中只有该目标发生变化。最终代码后的离线回放仍观察到14个gold标签、72个目标单元，原件SHA经验证、源码树稳定且scratch已清理。完整绑定、输入/输出SHA与收据见[annual14来源回放](review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json)及[独立复核](review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json)。内容审查未重做，旧8通过/6部分/0缺失状态不变。没有新增真实模型调用或下载。测试通过不代表生产业务摘要质量通过；根因和证据见`findings.md`。
+**已发布主线状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** selector 0.9.0 的 v4 任务摘要默认、v4/v5付费响应恢复与分协议容量预检已通过独立终审并推送。旧恢复夹具已按 v4 契约修复；提交`3dc04a8e`的精确CI `40148571611`全绿，本地pre-push的155项也通过（32.45秒）。覆盖维度属性与四组合测试已随`fc7cfa6d`推送，精确CI `40162702684`全绿（Fast checks含完整`tests/unit`，4分31秒）。ST-A03并列“收入+成本”地域定义根因修复由首轮独审定位P2、RED复现快捷路径绕过后，经共享收入主体规则修复并通过最终独立复核；定向模块39/39，Ruff和diff-check通过。提交`81c9d97c`已推送，精确CI `40163967926`全绿（Fast checks含完整`tests/unit`，4分29秒）；本地pre-push也通过（29个受影响目标，154项契约smoke）。冻结的药明康德annual14零费用/零下载回放证明ST-A03地域定义由未准入转为准入且已入选；38条共同来源准入记录中只有该目标发生变化。最终代码后的离线回放仍观察到14个gold标签、72个目标单元，原件SHA经验证、源码树稳定且scratch已清理。完整绑定、输入/输出SHA与收据见[annual14来源回放](review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json)及[独立复核](review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json)。内容审查未重做，旧8通过/6部分/0缺失状态不变。没有新增真实模型调用或下载。测试通过不代表生产业务摘要质量通过；根因和证据见`findings.md`。
 
 **业务验收仍未通过：** Microsoft FY2025 10-K 的正式运行只选112/484候选、314项deferred、layout不完整；43条claim来自旧v5排名路径，均为`uncertain/needs_review`，RF标记`not_consumed/needs_review`。另一个零费用v4预检的112个入选片段支持冻结的8/8必需业务事实，因此“候选有省略”本身还不能证明必需事实漏读。更近期的药明康德年度14项目标复核为8通过、6部分、0缺失；六项部分集中在Chemistry父级范围、财务表头/持续与终止口径、客户母公司所在地定义、多肽日期与容量的局部关联、时段金额等。不得重跑既有付费请求，也不得仅凭候选数量扩批；先追踪这些真实缺口对应的来源片段和依赖闭包。
 

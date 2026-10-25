@@ -1038,3 +1038,11 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 对ST-A09检查冻结trace和选择结果：第12页“2025年9月提前完成泰兴多肽产能建设”与“多肽固相合成反应釜总体积已提升至超100,000L”各自作为span出现在选择结果，trace记录同页物理邻接，但`dependency_added=false`。第14页TIDES列表父项已成为相关子项的上下文。由于内容复核仍认为日期-状态局部成员未完整闭合，尚不能把“两个span都入选”当作目标通过；下一步核对局部成员/消费者视图及review判据，确认根因究竟在选材闭包、证据表达还是摘要/评分。
 - 未重做内容评分，仍为8通过、6部分、0缺失；本节点没有新增下载、原文副本或模型调用。QA-RAG-SAFE-REBUILD此次完成通知与既有ROOT验收记录一致：代码SHA、作者tip、R2复核、28项专项/97项仓库测试及原`vector_db` SHA均已绑定；该外部仓仍保持独立，本项目不代替其合并。
 - **下一步：** 对ST-A09和另外五项partial做来源到候选、任务成员、选择结果、模型视图的单项证据追踪；只对能复现的共同根因写RED并修复，之后集中独审和跨样本验证。
+
+## 2026-10-25 ST-A09 局部项目上下文根修
+
+- **根因与实现：** 新增本地上下文关系后，独立复审发现“第一期”在bigram过滤后残留“第一”会误连不同业务项目；项目上下文边进入qualification无向连通闭包会出现A-B-C传递扩散；扫描计费仍为3倍不能覆盖新增算法。已先过滤完整阶段词和通用CJK短语再生成bigram；项目context与qualification闭包隔离，按每个原package成员只读取直接邻居，不延伸到第三条事实；统一WorkBudget按文本总长6倍计费并在耗尽时defer。
+- **大节点测试：** 新增阶段前缀异对象/经营数量负例、generic phrase词项负例、A-B/B-C桥接限制，以及同项目里程碑/容量正例和support/context隔离。初始三个测试文件67/67通过（4.04秒）；发布前同三文件最终复测94/94通过（3.60秒），Ruff、两个源文件mypy、diff-check通过。最终独立复审PASS，报告绑定源码SHA `ee77cd8c…14d16b4`、`65ef7a2b…3953ce`和测试SHA `06823e76…12641c`。
+- **真实资料验收：** 重放本地药明康德FY2025原件，SHA `7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`；249页、112片段/8,915字符、工作量10,565,038/16,000,000，未耗尽。第12页paragraph 29扩产日期与paragraph 30容量在各自span中互相成为context，但support集合保持分离；0模型调用/下载/原文复制，原件和374个生产Python文件稳定。`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`，年度14评分仍8 pass/6 partial/0 missing。
+- **收据：** [独立复审](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md)、[回放收据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/replay-receipt.json)、selection及trace在同目录。QA-RAG-SAFE-REBUILD仍按既有ROOT验收记录标记外部卡已接收，未跨仓合并。
+- **下一步：** 定点暂存本次两份源码、测试、上述证据和PWF，提交/推送并核精确HEAD CI；随后查annual14其他partial的真实共同根因，不重复全量长测。

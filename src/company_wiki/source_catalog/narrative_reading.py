@@ -6,7 +6,7 @@ selection, not IO, research conclusions, model calls or another task store.
 from __future__ import annotations
 
 from bisect import bisect_right
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import replace
 from hashlib import sha256
 from importlib import import_module
@@ -764,34 +764,44 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         continuity.get("adjacency_edges", ()), origins=origins,
         section_ids=explicit_reference_sections)
     local_context: dict[str, set[str]] = {}
+    support_context: dict[str, set[str]] = {}
     for anchor, qualifiers in local_dependencies.items():
         for qualifier in qualifiers:
             local_context.setdefault(anchor, set()).add(qualifier)
+            support_context.setdefault(anchor, set()).add(qualifier)
             # A bare restrictive deictic also needs its actual source subject.
             local_context.setdefault(qualifier, set()).add(anchor)
-    # A chain of positively identified restrictions has one bounded source
-    # closure, not several cheap pairs. Share component sets across owners;
-    # never materialise a quadratic per-member copy of a project or chapter.
+            support_context.setdefault(qualifier, set()).add(anchor)
+    project_context = session.local_operating_context_dependencies(
+        continuity.get("adjacency_edges", ()), origins=origins,
+        section_ids=explicit_reference_sections)
+    # Qualification edges may use bounded closure; project context is direct
+    # only and must not spread to an unrelated third fact.
     local_components: dict[str, set[str]] = {}
+    support_components: dict[str, set[str]] = {}
     intrinsic_support: dict[int, set[str]] = {}
     local_unexamined: set[str] = set()
     try:
-        for start in local_context:
-            if start in local_components:
-                continue
-            component = {start}
-            pending = [start]
-            while pending:
-                member = pending.pop()
-                neighbours = local_context[member]
-                work_budget.charge(1 + len(neighbours))
-                for neighbour in neighbours:
-                    if neighbour not in component:
-                        component.add(neighbour)
-                        pending.append(neighbour)
-            work_budget.charge(2 * len(component))
-            for member in component:
-                local_components[member] = component
+        def collect_components(adjacency, target):
+            for start in adjacency:
+                if start in target:
+                    continue
+                component = {start}
+                pending = [start]
+                while pending:
+                    member = pending.pop()
+                    neighbours = adjacency[member]
+                    work_budget.charge(1 + len(neighbours))
+                    for neighbour in neighbours:
+                        if neighbour not in component:
+                            component.add(neighbour)
+                            pending.append(neighbour)
+                work_budget.charge(2 * len(component))
+                for member in component:
+                    target[member] = component
+
+        collect_components(local_context, local_components)
+        collect_components(support_context, support_components)
     except WorkBudgetExceeded:
         session.complete = False
         local_unexamined.update(local_context)
@@ -805,8 +815,10 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "known_unit_ids": list(package.get("member_unit_ids", ()))})
             continue
         try:
-            work_budget.charge(len(package.get("member_unit_ids", ())) + sum(
-                len(local_components.get(member, ())) for member in package.get("member_unit_ids", ())))
+            member_ids = package.get("member_unit_ids", ())
+            work_budget.charge(len(member_ids) + sum(
+                len(local_components.get(member, ())) + len(project_context.get(member, ()))
+                for member in member_ids))
         except WorkBudgetExceeded:
             session.complete = False
             deferred_packages.add(index)
@@ -814,8 +826,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "reason": "OPERATING_WORK_BUDGET",
                              "known_unit_ids": list(package.get("member_unit_ids", ()))})
             continue
-        needed_material = {uid for member in package.get("member_unit_ids", ())
-                           for uid in local_components.get(member, ()) if uid != member}
+        needed_material = _package_local_context_members(
+            package.get("member_unit_ids", ()), local_components, project_context)
         if not needed_material:
             continue
         try:
@@ -830,7 +842,11 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "known_unit_ids": list(package.get("member_unit_ids", ()))})
             continue
         needed_originals = {member for uid in needed_material for member in original_members(uid)}
-        intrinsic_support[index] = set(needed_originals)
+        support_material = {uid for member in package.get("member_unit_ids", ())
+                            for uid in support_components.get(member, ()) if uid != member}
+        support_originals = {member for uid in support_material for member in original_members(uid)}
+        if support_originals:
+            intrinsic_support[index] = support_originals
         needed_originals.update(original_extra.get(index, ()))
         extra_context.setdefault(index, set()).update(needed_material)
         original_extra.setdefault(index, set()).update(needed_originals)
@@ -1388,6 +1404,26 @@ def _selected_unit_spans(parsed: DocumentStructure, result: NarrativeEvidencePac
         raise ValueError("native material origin binding is incomplete")
     return {uid: selected[target] for uid in original
             if (target := origins.get(uid, uid)) in selected}
+
+
+def _package_local_context_members(
+    member_ids: Iterable[str],
+    local_components: Mapping[str, set[str]],
+    direct_project_context: Mapping[str, Sequence[str]],
+) -> set[str]:
+    """Return qualification closure plus one-hop project context only."""
+    members = tuple(member_ids)
+    return {
+        uid
+        for member in members
+        for uid in local_components.get(member, ())
+        if uid != member
+    } | {
+        related
+        for member in members
+        for related in direct_project_context.get(member, ())
+        if related != member
+    }
 
 
 def select_reading_evidence(parsed: DocumentStructure, *, title: str,

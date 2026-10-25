@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import replace
 from types import SimpleNamespace
 
 import pytest
@@ -16,6 +17,10 @@ from company_wiki.automation.narrative_model import NarrativeModelRequest
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_catalog.narrative_operating_relations import (
+    SourceOperatingSession,
+    _specific_context_terms,
+)
 from company_wiki.source_contract import source_id_for_sha256
 from unit.document_understanding_selection.test_reading_guidance_condition_scope import (
     _model,
@@ -81,6 +86,257 @@ def _select(parsed):
         and sum(len(s.raw_text or "") for s in result.evidence_spans) <= 48000
     )
     return result
+
+
+def _views_for_unit(selected, unit):
+    span_ids = {span.span_id for span in _spans_for(selected, unit)}
+    return [
+        view
+        for group in selected.reading_context["groups"]
+        for view in group["citation_views"]
+        if span_ids.intersection(view["support_evidence_ids"])
+    ]
+
+
+def test_adjacent_project_milestone_and_matching_capacity_are_mutual_context():
+    rows = [
+        (1, "一、经营情况", 0, (90, 100, 550, 112)),
+        (1, "2025 年9 月，公司提前完成泰兴多肽产能建设；", 1, (90, 140, 550, 172)),
+        (1, "公司多肽固相合成反应釜总体积已提升至超100,000L。", 1, (90, 140, 550, 172)),
+    ]
+    parsed = _source(rows)
+    milestone = next(unit for unit in parsed.units if "提前完成泰兴多肽产能建设" in unit.raw_text)
+    capacity = next(unit for unit in parsed.units if "反应釜总体积" in unit.raw_text)
+    selected = _select(parsed)
+    milestone_ids = {span.span_id for span in _spans_for(selected, milestone)}
+    capacity_ids = {span.span_id for span in _spans_for(selected, capacity)}
+    assert milestone_ids and capacity_ids
+    milestone_views = _views_for_unit(selected, milestone)
+    capacity_views = _views_for_unit(selected, capacity)
+    assert milestone_views and capacity_views
+    assert all(
+        capacity_ids <= set(view["context_evidence_ids"])
+        for view in milestone_views
+    )
+    assert all(
+        not capacity_ids.intersection(view["support_evidence_ids"])
+        for view in milestone_views
+    )
+    assert all(
+        milestone_ids <= set(view["context_evidence_ids"])
+        for view in capacity_views
+    )
+    assert all(
+        not milestone_ids.intersection(view["support_evidence_ids"])
+        for view in capacity_views
+    )
+
+    model_view, task_texts = _model(selected)
+    milestone_tasks = [
+        task for task in model_view.plan.tasks
+        if milestone_ids.intersection(task.support_ids)
+    ]
+    capacity_tasks = [
+        task for task in model_view.plan.tasks
+        if capacity_ids.intersection(task.support_ids)
+    ]
+    assert milestone_tasks and capacity_tasks
+    assert all(
+        any(capacity.raw_text in text for text in task_texts[task.key])
+        for task in milestone_tasks
+    )
+    assert all(
+        any(milestone.raw_text in text for text in task_texts[task.key])
+        for task in capacity_tasks
+    )
+    assert all(
+        not capacity_ids.intersection(task.support_ids)
+        for task in milestone_tasks
+    )
+    assert all(
+        not milestone_ids.intersection(task.support_ids)
+        for task in capacity_tasks
+    )
+
+
+def test_adjacent_project_facts_for_different_objects_stay_separate():
+    rows = [
+        (1, "一、经营情况", 0, (90, 100, 550, 112)),
+        (1, "2025 年9 月，公司提前完成泰兴多肽产能建设；", 1, (90, 140, 550, 172)),
+        (1, "公司抗体药物产线新增年产能10,000批。", 1, (90, 140, 550, 172)),
+    ]
+    parsed = _source(rows)
+    milestone = next(unit for unit in parsed.units if "提前完成泰兴多肽产能建设" in unit.raw_text)
+    capacity = next(unit for unit in parsed.units if "抗体药物产线" in unit.raw_text)
+    selected = _select(parsed)
+    milestone_ids = {span.span_id for span in _spans_for(selected, milestone)}
+    capacity_ids = {span.span_id for span in _spans_for(selected, capacity)}
+    assert milestone_ids and capacity_ids
+    milestone_views = _views_for_unit(selected, milestone)
+    capacity_views = _views_for_unit(selected, capacity)
+    assert milestone_views and capacity_views
+    assert all(
+        not capacity_ids.intersection(view["context_evidence_ids"])
+        for view in milestone_views
+    )
+    assert all(
+        not milestone_ids.intersection(view["context_evidence_ids"])
+        for view in capacity_views
+    )
+
+
+def test_adjacent_project_facts_do_not_match_only_on_generic_phase_number():
+    rows = [
+        (1, "一、经营情况", 0, (90, 100, 550, 112)),
+        (1, "2025 年9 月，公司提前完成一期多肽产能建设；", 1, (90, 140, 550, 172)),
+        (1, "公司一期抗体药物产线新增年产能10,000批。", 1, (90, 140, 550, 172)),
+    ]
+    parsed = _source(rows)
+    milestone = next(unit for unit in parsed.units if "提前完成一期多肽产能建设" in unit.raw_text)
+    capacity = next(unit for unit in parsed.units if "一期抗体药物产线" in unit.raw_text)
+    selected = _select(parsed)
+    milestone_ids = {span.span_id for span in _spans_for(selected, milestone)}
+    capacity_ids = {span.span_id for span in _spans_for(selected, capacity)}
+    milestone_views = _views_for_unit(selected, milestone)
+    capacity_views = _views_for_unit(selected, capacity)
+    assert milestone_ids and capacity_ids and milestone_views and capacity_views
+    assert all(
+        not capacity_ids.intersection(view["context_evidence_ids"])
+        for view in milestone_views
+    )
+    assert all(
+        not milestone_ids.intersection(view["context_evidence_ids"])
+        for view in capacity_views
+    )
+
+
+def test_adjacent_project_facts_do_not_match_on_phase_prefix_or_generic_construction_terms():
+    rows = [
+        (1, "一、经营情况", 0, (90, 100, 550, 112)),
+        (1, "2025 年9 月，公司提前完成第一期泰兴多肽产能建设；", 1, (90, 140, 550, 172)),
+        (1, "第一期公司抗体药物产线新增年产能10,000批。", 1, (90, 140, 550, 172)),
+    ]
+    parsed = _source(rows)
+    first = next(unit for unit in parsed.units if "完成第一期泰兴多肽产能建设" in unit.raw_text)
+    second = next(unit for unit in parsed.units if "第一期公司抗体药物产线" in unit.raw_text)
+    selected = _select(parsed)
+    first_ids = {span.span_id for span in _spans_for(selected, first)}
+    second_ids = {span.span_id for span in _spans_for(selected, second)}
+    first_views = _views_for_unit(selected, first)
+    second_views = _views_for_unit(selected, second)
+    assert first_ids and second_ids and first_views and second_views
+    assert all(
+        not second_ids.intersection(view["context_evidence_ids"])
+        for view in first_views
+    )
+    assert all(
+        not first_ids.intersection(view["context_evidence_ids"])
+        for view in second_views
+    )
+
+
+def test_specific_context_terms_remove_generic_phrases_before_cjk_bigrams():
+    milestone = "公司完成第一期项目建设；"
+    capacity = "第一期另一条产线完成建设。"
+
+    assert "第一" not in _specific_context_terms(milestone)
+    assert "一期" not in _specific_context_terms(milestone)
+    assert not (_specific_context_terms(milestone) & _specific_context_terms(capacity))
+
+
+def test_adjacent_project_context_does_not_spread_transitively_through_middle_fact():
+    rows = [
+        (1, "一、经营情况", 0, (90, 100, 550, 112)),
+        (1, "2025 年9 月，公司完成泰兴多肽产能建设；", 1, (90, 140, 550, 172)),
+        (1, "公司多肽抗体项目总体产能提升至10,000批。", 1, (90, 140, 550, 172)),
+        (1, "2025 年10 月，公司完成苏州抗体产线建设。", 1, (90, 140, 550, 172)),
+    ]
+    parsed = _source(rows)
+    first = next(unit for unit in parsed.units if "完成泰兴多肽产能建设" in unit.raw_text)
+    middle = next(unit for unit in parsed.units if "多肽抗体项目总体产能" in unit.raw_text)
+    last = next(unit for unit in parsed.units if "完成苏州抗体产线建设" in unit.raw_text)
+    fact_session = SourceOperatingSession(
+        {unit.unit_id: unit for unit in parsed.units}, work_budget=WorkBudget(16_000_000)
+    )
+    assert "project_execution_timeline" in fact_session.fact(first.unit_id).reasons
+    assert "operating_quantity" in fact_session.fact(middle.unit_id).reasons
+    assert "project_execution_timeline" in fact_session.fact(last.unit_id).reasons
+    assert _specific_context_terms(first.raw_text) & _specific_context_terms(middle.raw_text)
+    assert _specific_context_terms(middle.raw_text) & _specific_context_terms(last.raw_text)
+    adjacency = [
+        {"left": left.unit_id, "right": right.unit_id, "source_id": parsed.source_id,
+         "basis": "source_body_adjacency", "left_page": 1, "right_page": 1}
+        for left, right in ((first, middle), (middle, last))
+    ]
+    dependencies = fact_session.local_operating_context_dependencies(
+        adjacency, section_ids={unit.unit_id: "operations" for unit in (first, middle, last)}
+    )
+    assert middle.unit_id in dependencies[first.unit_id]
+    assert last.unit_id in dependencies[middle.unit_id]
+    identity_components = {unit.unit_id: {unit.unit_id} for unit in (first, middle, last)}
+    assert reading._package_local_context_members(
+        (first.unit_id,), identity_components, dependencies
+    ) == {middle.unit_id}
+    selected = _select(parsed)
+    first_ids = {span.span_id for span in _spans_for(selected, first)}
+    middle_ids = {span.span_id for span in _spans_for(selected, middle)}
+    last_ids = {span.span_id for span in _spans_for(selected, last)}
+    first_views = _views_for_unit(selected, first)
+    last_views = _views_for_unit(selected, last)
+    assert first_ids and middle_ids and last_ids and first_views and last_views
+    assert any(middle_ids.intersection(view["context_evidence_ids"]) for view in first_views)
+    assert all(not last_ids.intersection(view["context_evidence_ids"]) for view in first_views)
+
+
+@pytest.mark.parametrize(
+    "boundary",
+    ("missing_edge", "non_native_edge", "source_mismatch", "different_source",
+     "different_page", "different_section", "different_role", "budget_exhausted"),
+)
+def test_project_context_requires_native_same_source_page_section_and_role(boundary):
+    rows = [
+        (1, "一、经营情况", 0, (90, 100, 550, 112)),
+        (1, "2025 年9 月，公司提前完成泰兴多肽产能建设；", 1, (90, 140, 550, 172)),
+        (1, "公司多肽固相合成反应釜总体积已提升至超100,000L。", 1, (90, 140, 550, 172)),
+    ]
+    parsed = _source(rows)
+    milestone = next(unit for unit in parsed.units if "提前完成泰兴多肽产能建设" in unit.raw_text)
+    capacity = next(unit for unit in parsed.units if "反应釜总体积" in unit.raw_text)
+    units = {unit.unit_id: unit for unit in parsed.units}
+    sections = {milestone.unit_id: "operations", capacity.unit_id: "operations"}
+    edge = {
+        "basis": "source_body_adjacency",
+        "left": milestone.unit_id,
+        "right": capacity.unit_id,
+        "source_id": parsed.source_id,
+        "left_page": 1,
+        "right_page": 1,
+    }
+    edges = [edge]
+    if boundary == "missing_edge":
+        edges = []
+    elif boundary == "non_native_edge":
+        edge["basis"] = "semantic_similarity"
+    elif boundary == "source_mismatch":
+        edge["source_id"] = "urn:company-wiki:source:other"
+    elif boundary == "different_source":
+        units[capacity.unit_id] = replace(capacity, source_id="urn:company-wiki:source:other")
+    elif boundary == "different_page":
+        units[capacity.unit_id] = replace(
+            capacity, coordinates=replace(capacity.coordinates, page_number=2)
+        )
+        edge["right_page"] = 2
+    elif boundary == "different_section":
+        sections[capacity.unit_id] = "other_operations"
+    elif boundary == "different_role":
+        units[capacity.unit_id] = replace(capacity, source_role="news_article")
+    budget = WorkBudget(0 if boundary == "budget_exhausted" else 100_000)
+
+    session = SourceOperatingSession(units, work_budget=budget)
+    assert session.local_operating_context_dependencies(
+        edges, section_ids=sections
+    ) == {}
+    assert session.complete is (boundary != "budget_exhausted")
 
 
 def test_independent_native_boundary_is_proof_not_other_target_model_material():

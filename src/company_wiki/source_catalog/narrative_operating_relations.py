@@ -3,7 +3,7 @@
 No parsing, IO, registry or extra work balance. The source owner fixes native
 carriers and structural context first; consumers share the resulting facts.
 """
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import replace
 from bisect import bisect_right
 from itertools import chain
@@ -28,6 +28,54 @@ from .narrative_business_policy import (
 )
 
 _MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS = 1
+_CJK_CONTEXT_RUN = re.compile(r"[\u3400-\u9fff]{2,}")
+_LATIN_CONTEXT_TERM = re.compile(r"\b[a-z][a-z0-9-]{2,}\b", re.IGNORECASE)
+_GENERIC_PHASE_CONTEXT_TERM = re.compile(
+    r"(?:第)?[一二三四五六七八九十百千万\d]+(?:期|阶段)"
+)
+# Covers the combined stop-phrase pass, CJK and Latin scans, bigram creation,
+# and bounded set materialization with headroom for regex/match bookkeeping.
+_LOCAL_CONTEXT_TERM_SCAN_PASSES = 6
+_GENERIC_CONTEXT_TERMS = frozenset({
+    "公司", "本公司", "集团", "本集团", "企业", "业务", "项目", "建设", "产能", "产线",
+    "生产", "制造", "产品", "服务", "技术", "设备", "反应", "反应釜", "总体", "体积",
+    "完成", "提前", "提升", "新增", "扩大", "运营", "数量", "同比", "增长", "收入",
+    "客户", "市场", "计划", "预计", "未来", "目前", "达到", "超过", "报告", "期间",
+    "capacity", "project", "build", "building", "construction", "complete", "completed",
+    "company", "business", "production", "manufacturing", "product", "service", "technology",
+    "equipment", "reactor", "volume", "increase", "increased", "growth", "revenue", "customer",
+    "market", "plan", "planned", "expected", "current", "report", "period", "total", "units",
+})
+_CJK_GENERIC_CONTEXT_TERMS = tuple(sorted(
+    (term for term in _GENERIC_CONTEXT_TERMS if _CJK_CONTEXT_RUN.fullmatch(term)),
+    key=len,
+    reverse=True,
+))
+_CJK_GENERIC_CONTEXT_PATTERN = re.compile(
+    "|".join(re.escape(term) for term in _CJK_GENERIC_CONTEXT_TERMS)
+)
+_IGNORED_CONTEXT_PATTERN = re.compile(
+    f"(?:{_GENERIC_PHASE_CONTEXT_TERM.pattern})|(?:{_CJK_GENERIC_CONTEXT_PATTERN.pattern})"
+)
+
+
+def _specific_context_terms(text: str) -> frozenset[str]:
+    """Return bounded content terms for local context matching, not entity identity."""
+    # Remove complete ordinal phases and known generic phrases before generating
+    # overlapping bigrams. Filtering bigrams afterward leaves fragments such as
+    # ``第一`` from ``第一期`` and artifacts such as ``线建`` across generic words.
+    context_text = _IGNORED_CONTEXT_PATTERN.sub(" ", text)
+    terms = {
+        run[index:index + 2]
+        for match in _CJK_CONTEXT_RUN.finditer(context_text)
+        for run in (match.group(),)
+        for index in range(len(run) - 1)
+    }
+    terms.update(token.casefold() for token in _LATIN_CONTEXT_TERM.findall(text))
+    return frozenset(
+        term for term in terms
+        if term not in _GENERIC_CONTEXT_TERMS
+    )
 
 
 class _ObservedUnits(Mapping):
@@ -458,6 +506,72 @@ class SourceOperatingSession:
             self.complete = False
         self.qualifications[key] = (edges, origins, dependencies)
         return dependencies
+
+    def local_operating_context_dependencies(
+        self, edges: Iterable[Mapping[str, Any]], *, origins: Mapping[str, str] | None = None,
+        section_ids: Mapping[str, str] | None = None,
+    ) -> dict[str, tuple[str, ...]]:
+        """Pair adjacent milestone/quantity facts as context without asserting causality.
+
+        This is deliberately separate from qualification dependencies: both
+        facts keep their own citation support, while the other statement is
+        available as local context only when the source, role, page, section,
+        physical adjacency, semantic types and a specific shared term agree.
+        """
+        origins = origins if origins is not None else {}
+        section_ids = section_ids if section_ids is not None else {}
+        contexts: dict[str, list[str]] = {}
+        try:
+            for edge in edges:
+                self.work_budget.charge()
+                if edge.get("basis") != "source_body_adjacency":
+                    continue
+                left_original, right_original = edge.get("left"), edge.get("right")
+                if (not isinstance(left_original, str) or not isinstance(right_original, str)
+                        or left_original == right_original):
+                    continue
+                left, right = origins.get(left_original, left_original), origins.get(right_original, right_original)
+                if left == right or left not in self.units or right not in self.units:
+                    continue
+                a, b = self.units[left], self.units[right]
+                if (a.source_id != b.source_id or edge.get("source_id") != a.source_id
+                        or a.source_role != b.source_role
+                        or a.source_role not in {"company_filing", "management", "management_discussion"}):
+                    continue
+                left_page = getattr(getattr(a, "coordinates", None), "page_number", None)
+                right_page = getattr(getattr(b, "coordinates", None), "page_number", None)
+                if (type(left_page) is not int or left_page != right_page
+                        or edge.get("left_page", left_page) != left_page
+                        or edge.get("right_page", right_page) != right_page):
+                    continue
+                left_section, right_section = section_ids.get(left_original), section_ids.get(right_original)
+                if not isinstance(left_section, str) or not left_section or left_section != right_section:
+                    continue
+                left_scope = self._source_material_range(left_original, left)
+                right_scope = self._source_material_range(right_original, right)
+                if left_scope is None or right_scope is None:
+                    continue
+                left_text, right_text = left_scope[0], right_scope[0]
+                self.work_budget.charge(
+                    _LOCAL_CONTEXT_TERM_SCAN_PASSES * (len(left_text) + len(right_text))
+                )
+                if not (_specific_context_terms(left_text) & _specific_context_terms(right_text)):
+                    continue
+                left_fact, right_fact = self.fact(left), self.fact(right)
+                milestone_quantity_pair = (
+                    "project_execution_timeline" in left_fact.reasons
+                    and "operating_quantity" in right_fact.reasons
+                ) or (
+                    "operating_quantity" in left_fact.reasons
+                    and "project_execution_timeline" in right_fact.reasons
+                )
+                if not milestone_quantity_pair:
+                    continue
+                contexts.setdefault(left, []).append(right)
+                contexts.setdefault(right, []).append(left)
+        except WorkBudgetExceeded:
+            self.complete = False
+        return {owner: tuple(dict.fromkeys(neighbours)) for owner, neighbours in contexts.items()}
 
     def _validate_original_refs(self, refs) -> list[dict[str, Any]] | None:
         projected: list[dict[str, Any]] = []
