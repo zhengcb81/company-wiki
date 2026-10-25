@@ -1,105 +1,141 @@
 {
  "schema_version": "w18-gold-corrections/1",
  "created": "2026-10-25",
- "policy": "H10: gold corrections require a new version with itemized source-side reasons; the v1 oracle stays byte-identical under gold/archive-v1/ and in git history; all baseline attempts against v1 remain replayable.",
+ "policy": "H10: gold corrections require a new version with itemized source-side reasons; the v1 oracle stays content-identical under gold/archive-v1/ (working-tree copies; byte-exact v1 is the frozen commit 5e4488bb git blob) and in git history; all baseline attempts against v1 remain replayable. gold_sha256 pins bind committed (LF-normalized) bytes so CRLF/LF checkouts agree.",
  "v1_location": "gold/archive-v1/",
  "v1_freeze_commit": "5e4488bb",
  "v2_created_by": "independent review findings F1/F2/F3/F5/F6 (agent 1) and F4 (prior_use enumeration)",
  "v3_note": "gold v3 = v2 + re-review findings N1 (corrections log completeness) and N2 (5 remaining parenthetical true-value contrasts moved to reason); no anchor changes",
  "corrections": [
   {
-   "sample": "w18-cn-beigene-ipo", "fact": "ipo-approval-pathway-dates", "severity": "P2",
+   "sample": "w18-cn-beigene-ipo",
+   "fact": "ipo-approval-pathway-dates",
+   "severity": "P2",
    "field": "must_not_assert",
-   "old": ["加速批准=完全批准", "附条件批准=完全批准", "百泽安先于百悦泽在中国销售"],
-   "new": ["加速批准=完全批准", "附条件批准=完全批准", "百悦泽先于百泽安在中国开始商业化销售"],
+   "old": [
+    "加速批准=完全批准",
+    "附条件批准=完全批准",
+    "百泽安先于百悦泽在中国销售"
+   ],
+   "new": [
+    "加速批准=完全批准",
+    "附条件批准=完全批准",
+    "百悦泽先于百泽安在中国开始商业化销售"
+   ],
    "source_side_reason": "锚句原文'分别于2020年6月和2020年3月在中国开始商业化销售'映射百悦泽=2020年6月、百泽安=2020年3月，'百泽安先于百悦泽在中国销售'为真命题，不得作为禁令；禁令方向反转为假命题'百悦泽先于百泽安'。获批时序表述因锚句不含获批日期而不增设任何禁令。"
   },
   {
-   "sample": "w18-us-alphabet-fy2025", "fact": "goog-tax-law-driver", "severity": "P3",
+   "sample": "w18-us-alphabet-fy2025",
+   "fact": "goog-tax-law-driver",
+   "severity": "P3",
    "field": "exact_quote",
    "old_head": "…for immediate expensing of domestic resea",
    "new_head": "…for immediate expensing of domestic research and experimentation costs",
    "source_side_reason": "原引句在research词中截断；补全为完整从句，仍逐字来自10-K同一行。"
   },
   {
-   "sample": "w18-us-alphabet-fy2025", "fact": "goog-other-bets-loss-composition", "severity": "P3",
+   "sample": "w18-us-alphabet-fy2025",
+   "fact": "goog-other-bets-loss-composition",
+   "severity": "P3",
    "field": "must_preserve",
    "old": "其中含$2.1B员工薪酬相关一次性费用",
    "new": "其中含$2.1B员工薪酬相关费用（a $2.1 billion employee compensation charge）",
    "source_side_reason": "原文未使用'一次性'定性；改为原文措辞，避免摘要被迫采用超出原文的解释性限定。"
   },
   {
-   "sample": "w18-cn-hikvision-call-2024h1", "fact": "hik-fx-direction", "severity": "P3",
+   "sample": "w18-cn-hikvision-call-2024h1",
+   "fact": "hik-fx-direction",
+   "severity": "P3",
    "field": "must_preserve",
    "old": "去年同期为汇兑收益约2.85亿元",
    "new": "去年同期产生的汇兑损益约为2.85亿元（原文措辞，'损益'未定方向；与本期损失形成账面差异）",
    "source_side_reason": "转写原文为'汇兑损益'未定方向；保留原文措辞，禁止摘要给上年强加收益/损失定性。"
   },
   {
-   "sample": "w18-cn-hikvision-call-2024h1", "fact": "hik-overseas-28pct-sanction", "severity": "P3",
+   "sample": "w18-cn-hikvision-call-2024h1",
+   "fact": "hik-overseas-28pct-sanction",
+   "severity": "P3",
    "field": "any_support_sets[0][0].exact_quote",
    "old_end": "海外主业收入占公司业务比重约28%",
    "new_end": "海外收入占比是34.41%",
    "source_side_reason": "must_preserve中的34.41%口径此前无锚句覆盖；扩展锚句跨度使其与34.41%原文句连续（同一段落相邻句）。"
   },
   {
-   "sample": "w18-cn-beigene-h1-2024", "fact": "h1-nrdl-5of6", "severity": "P3",
+   "sample": "w18-cn-beigene-h1-2024",
+   "fact": "h1-nrdl-5of6",
+   "severity": "P3",
    "field": "must_preserve",
    "old": "一项未纳入（附条件批准类）",
    "new": "一项未纳入",
    "source_side_reason": "未纳入者的'附条件批准类'分类非页内明示，删除推测性分类。"
   },
   {
-   "sample": "w18-cn-beigene-h1-2024", "fact": "h1-loss-narrowed", "severity": "P3",
+   "sample": "w18-cn-beigene-h1-2024",
+   "fact": "h1-loss-narrowed",
+   "severity": "P3",
    "field": "any_support_sets",
    "old": "单锚句止于-2,877,389",
    "new": "锚句扩展覆盖上年同期-5,218,922，并新增经营现金流-3,102,466同伴锚点",
    "source_side_reason": "must_preserve中的上年同期值与经营现金流值此前无锚句覆盖；两数字均在第9页同一表格区。"
   },
   {
-   "sample": "w18-cn-beigene-ir-202206", "fact": "ir-hfcaa-expectation", "severity": "P3",
+   "sample": "w18-cn-beigene-ir-202206",
+   "fact": "ir-hfcaa-expectation",
+   "severity": "P3",
    "field": "any_support_sets",
    "old": "单锚句（预期遵守）",
    "new": "新增E&Y聘任句同伴锚点（公司自2022年3月23日起聘任Ernst & Young LLP…）",
    "source_side_reason": "must_preserve中的E&Y审计机构事实此前无锚句覆盖；原文第4页同段。"
   },
   {
-   "sample": "w18-hk-beigene-fy2022", "fact": "hk-cash-position-decline", "severity": "P3",
+   "sample": "w18-hk-beigene-fy2022",
+   "fact": "hk-cash-position-decline",
+   "severity": "P3",
    "field": "any_support_sets",
    "old": "单锚句（现金及受限制现金行）",
    "new": "新增短期投資行同伴锚点（短期投資…665,251）",
    "source_side_reason": "must_preserve中的短期投资两年值此前无锚句覆盖；第152页同表。"
   },
   {
-   "sample": "w18-cn-zijin-fy2025", "fact": "zj-balance-ratio-down", "severity": "P3",
+   "sample": "w18-cn-zijin-fy2025",
+   "fact": "zj-balance-ratio-down",
+   "severity": "P3",
    "field": "any_support_sets[0].exact_quote",
    "old": "资产负债率下降至51.56%",
    "new": "资产总额5,120亿元、归母净资产1,855亿元…资产负债率下降至51.56%",
    "source_side_reason": "must_preserve中的资产总额/净资产及其增幅此前无锚句覆盖；第34页同一句。"
   },
   {
-   "sample": "w18-cn-zijin-fy2025", "fact": "zj-2025-production / zj-gold-price-context / zj-icsg-copper-supply / zj-forbes-ranking / zj-zijin-gold-ipo", "severity": "P3",
+   "sample": "w18-cn-zijin-fy2025",
+   "fact": "zj-2025-production / zj-gold-price-context / zj-icsg-copper-supply / zj-forbes-ranking / zj-zijin-gold-ipo",
+   "severity": "P3",
    "field": "must_not_assert",
    "old": "禁令串内含真值对照括注（如'（2026E为120万吨）''（均价3,439）''（财富排名为第365位）'等）",
    "new": "禁令仅保留假命题本体；真值对照移至reason",
    "source_side_reason": "防止对must_not_assert做朴素子串/数字匹配时把候选摘要中的正确对照陈述误判为违规；对照事实全部保留在reason供人工复核。"
   },
   {
-   "sample": "w18-hk-beigene-fy2022", "fact": "hk-product-vs-collab-revenue / hk-research-team-and-payments", "severity": "P3",
+   "sample": "w18-hk-beigene-fy2022",
+   "fact": "hk-product-vs-collab-revenue / hk-research-team-and-payments",
+   "severity": "P3",
    "field": "must_not_assert",
    "old": "禁令串内含真值对照括注（2021年合作收入$542,296千等）",
    "new": "禁令仅保留假命题本体；真值对照移至reason",
    "source_side_reason": "同上；数值仍在锚句/reason可复核。"
   },
   {
-   "sample": "w18-cn-zijin-fy2025", "fact": "zj-serbia-europe-second", "severity": "P3（复审N1补登）",
+   "sample": "w18-cn-zijin-fy2025",
+   "fact": "zj-serbia-europe-second",
+   "severity": "P3（复审N1补登）",
    "field": "must_not_assert",
    "old": "45万吨改扩建已建成",
    "new": "年总产铜45万吨改扩建工程已建成",
    "source_side_reason": "措辞精确化：原文为'正在加快推进年总产铜45万吨改扩建工程'，禁令仍为假命题。"
   },
   {
-   "sample": "w18-cn-beigene-h1-2024", "fact": "h1-nrdl-5of6", "severity": "P3（复审N1补登）",
+   "sample": "w18-cn-beigene-h1-2024",
+   "fact": "h1-nrdl-5of6",
+   "severity": "P3（复审N1补登）",
    "field": "must_preserve[0]",
    "old": "百悦泽中国六项获批适应症中五项已纳入医保目录",
    "new": "百悦泽获批的六项适应症中符合纳入条件的五项已纳入医保目录",
@@ -115,7 +151,9 @@
    "source_side_reason": "与F6同法：防止朴素子串/数字匹配把候选摘要中的正确对照陈述误判为违规。"
   },
   {
-   "sample": "w18-cn-beigene-h1-2024", "fact": "h1-bgb16673-300", "severity": "P3（终审残留补清）",
+   "sample": "w18-cn-beigene-h1-2024",
+   "fact": "h1-bgb16673-300",
+   "severity": "P3（终审残留补清）",
    "field": "must_not_assert",
    "old": "三期已入组（预计2024Q4或2025Q1首例）",
    "new": "BGB-16673三期临床试验已开始入组",

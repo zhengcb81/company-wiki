@@ -55,8 +55,9 @@ must_not_assert 误禁真命题"百泽安先于百悦泽在中国销售"——�
 与 6 项 P3；独立重放验证 PASS（重放确定性逐字节成立、失败/清理/不覆盖链
 完整、否定/条件与期间单位错配双反例确认词匹配不代签业务通过）。
 
-按 H10 版本化流程处置：v1 oracle 逐字节归档于 tools/holdout_replay/gold/
-archive-v1/（冻结提交 5e4488bb 仍可重放），v2 修正逐项源侧理由记录于
+按 H10 版本化流程处置：v1 oracle 内容归档于 tools/holdout_replay/gold/
+archive-v1/（工作树拷贝与冻结提交内容一致；字节级 v1 以冻结提交 5e4488bb
+的 git blob 为准，仍可重放），v2 修正逐项源侧理由记录于
 tools/holdout_replay/gold_corrections.json（F1 禁令方向反转、F2 引句补全、
 F3 为未覆盖数值补锚/扩跨、F5 恢复原文措辞、F6 真值对照移出禁令串；
 96 目标/116 锚点全部重新独立验证）。工程 P3 修复：D1 选择器版本双盖章
