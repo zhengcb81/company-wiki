@@ -1,0 +1,56 @@
+{
+  "schema_version": "native-outline-engineering-publication/1",
+  "commit": "8a258b93404f351ae92cd3449198b42141ef4169",
+  "pushed_to": "origin/master",
+  "pre_commit": "PASS:ruff/mypy src/host guard; no bypass; prior hook mode retained",
+  "pre_push": "154 PASS /108.09s; dynamic scope delegated full validation to CI",
+  "ci": [
+    {
+      "id": 40185824736,
+      "head_sha": "8a258b93404f351ae92cd3449198b42141ef4169",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40185824736",
+      "created_at": "2026-10-25T10:41:44Z",
+      "updated_at": "2026-10-25T10:46:55Z"
+    }
+  ],
+  "reviewed_source_bindings": {
+    "src/company_wiki/document_understanding/structure/__init__.py": {
+      "reviewed_physical_sha256": "db3b2cc328a8253de22cea4902a97da1ba9352b1042e11be1fcfff2d080a29bc",
+      "git_blob_lf_sha256": "77b4fa95f2535c7f5bee9b014e6677026c5d999513ca9518a5d17c15a98745c5",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/structure/layout.py": {
+      "reviewed_physical_sha256": "b365e55b6f0ad4b2a84f3fa3f7195c628b4fe401633bb487208b3edd77fa9072",
+      "git_blob_lf_sha256": "59d6600669321705a8b72b2996a285e36ebed3d2bd745d17848b233c66b93220",
+      "lf_equivalent": true
+    },
+    "src/company_wiki/document_understanding/structure/sections.py": {
+      "reviewed_physical_sha256": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+      "git_blob_lf_sha256": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py": {
+      "reviewed_physical_sha256": "5b7af5bd601b01c2ba014cf1f08fe8cdead5dc868deb6b6e2d4c07b590f0cdb6",
+      "git_blob_lf_sha256": "5b7af5bd601b01c2ba014cf1f08fe8cdead5dc868deb6b6e2d4c07b590f0cdb6",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py": {
+      "reviewed_physical_sha256": "ec54418ca75cef6016bf86cc92f00f38f57d357514e2754706ae4ed1714aa675",
+      "git_blob_lf_sha256": "ec54418ca75cef6016bf86cc92f00f38f57d357514e2754706ae4ed1714aa675",
+      "lf_equivalent": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": {
+      "reviewed_physical_sha256": "ed3c44551a1bcf9ddc14b9de6453c05e0784f0c34deca77eead93f0ece6b5926",
+      "git_blob_lf_sha256": "4f74332153f6a46b71404343536b62ace5a825905819d32ab06929b65afbfe7d",
+      "lf_equivalent": true
+    }
+  },
+  "independent_review_sha256": "f62e97e78216f30f7c83cd643d3db8cc643d92e5f50fd5d453f5eb79e004d97b",
+  "real_a01_a05": "OPEN; component publication is not source content acceptance",
+  "next_plan": "native_local_flow_followup.md",
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0
+}

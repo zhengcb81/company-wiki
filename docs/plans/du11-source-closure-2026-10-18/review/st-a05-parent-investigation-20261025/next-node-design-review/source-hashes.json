@@ -1,0 +1,33 @@
+{
+  "schema_version": "a05-local-flow-design-review/1",
+  "review_kind": "read_only_architecture_design",
+  "product_head": "8a258b93404f351ae92cd3449198b42141ef4169",
+  "source_original_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "implementation_status": "not_implemented",
+  "tests_run": [],
+  "external_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": "002fc2908149d3e5da1def7a789eec6478dbe07ec28f4a5bf29edd1e68f02318",
+    "src/company_wiki/source_catalog/narrative_document.py": "be6de605677b729212319fa1acb99abae96134c38ab0952378108f35988d7dbb",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "b5beb57b44879d4f404cbf2538216a6b597fccb876a626d9a625dbcf9daa182d",
+    "src/company_wiki/source_catalog/narrative_pdf_layout.py": "8e366ef82bbed4ca8fbd3c45564f2b9f4031355a029800eb4ab1b2804473e12e",
+    "src/company_wiki/source_catalog/narrative_native_ranges.py": "b42aeb4b09896de059b0130957040e16baaf04415aa0d3e98093fb0662343dda",
+    "src/company_wiki/source_catalog/narrative_reading.py": "65ef7a2b2d1a0faf40c899cd2501f28b317e761555032b66ebd270bdda3953ce",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "6b7452c1b4f26326c858df75d079d82be3fb3a1a1126c63111d8c0c377d1c387",
+    "src/company_wiki/document_understanding/pipeline.py": "a61068bcfba03c36985b556cc2542f9f0e17291500070cbbef66aeb02abdb0cc",
+    "src/company_wiki/document_understanding/observation_adapter.py": "bd46c2e4ecd8ebe5b65fb00d9cf6c39cfa9ec02f1baecaf4ff98b74c5ee202af",
+    "src/company_wiki/document_understanding/layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+    "src/company_wiki/document_understanding/layout_hints/__init__.py": "4f96106b186ca125eb1b9eb58cd1ad5f45f49cd72ee4da9876426a736b62974b",
+    "src/company_wiki/document_understanding/layout_hints/columns.py": "afac92e6af75706b37e040e731b389b959f2f4c381f1b944eb0e1778f6d093b7",
+    "src/company_wiki/document_understanding/decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e"
+  },
+  "codegraph_used": true,
+  "notes": [
+    "Read native_local_flow_followup.md and parser-dimensions-next-node.json.",
+    "Inspected source and existing replay summaries only; did not open the protected original PDF or run parser/tests.",
+    "Observed layout_coverage.native_ranges.complete=true and capture was requested only on the selected geometry page; these remain distinct from whole-document geometry planning completeness.",
+    "The geometry-session deferred set is routed through the legacy deferred_table_pages field, although its reasons include non-table planning/candidate/resource outcomes."
+  ]
+}

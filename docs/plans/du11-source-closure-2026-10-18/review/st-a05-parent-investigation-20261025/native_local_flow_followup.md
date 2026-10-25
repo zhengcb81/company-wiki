@@ -10,7 +10,7 @@
 
 同时两个真实端点的column均为None。当前物理校验在coverage拒绝后才检查column，因此**尚未实际观察到第二项拒绝**，只能写潜在下一约束。不得提前断言仅修coverage就可通过，也不能将None硬填0。当前完整模型输入仍缺Chemistry父级，A05保持OPEN。
 
-**解析维度已进一步实读冻结：** `parser-dimensions-next-node.json`由相同SourceVersionReader原件生成：page_count=pages_read=249、errors=[]、opaque_pages=[]，但overall_coverage_complete=false，存在deferred_table_pages；第13/14页共62原始unit的column全None。该回放只parse一次，work569,544/16M，配置/目录库前后稳定。现在已能确认本例global partial来自表增强，而不是原生文本未读；仍不能据此给所有其他失败类型放行或宣称lane已知。
+**解析维度已进一步实读冻结：** `parser-dimensions-next-node.json`由相同SourceVersionReader原件生成：page_count=pages_read=249、errors=[]、opaque_pages=[]，但overall_coverage_complete=false，存在deferred_table_pages；第13/14页共62原始unit的column全None。该回放只parse一次，work569,544/16M，配置/目录库前后稳定。现在已能确认本例global partial由deferred_table_pages字段触发，而不是原生文本未读。进一步代码调查发现该字段直接取自geometry_session.deferred，名称未必准确描述全部延期用途，必须核对实际意图；不能提前宣称仅金融表增强，也不能据此给其他失败类型放行或宣称lane已知。
 
 ## 分层职责与实现边界
 
@@ -45,3 +45,7 @@
 ## 完成定义
 
 本followup结束需同时有：所有负例仍有效；真实A01/A05任务父级闭合；source/table/layout三维不再相互冒充；旧通过项保持；缓存身份正确；独审完成；正常提交推送与精确CI。若真实lane仍无正证，保持OPEN并具体记录缺什么源观察，不改成“等待人工批准”。
+
+## 独立架构设计核对
+
+[下一节点设计独审](next-node-design-review/README.md)绑定8a258b93的13源码SHA，仅设计审查、未实施产品代码。它确认原生文字覆盖与几何请求延期须分维度，现有多栏接线已存在，单栏尚缺正证。缓存闭包已含reading/pipeline/adapter/layout_bridge；本次若改narrative_document或layout_hints的入口/columns，需要加入实际源码哈希，而非重复已有owner或只加版本号。见同目录source-hashes.json。

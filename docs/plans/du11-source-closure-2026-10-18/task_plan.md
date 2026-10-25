@@ -15,7 +15,7 @@ ROOT继续下方ST-A02的CWP来源/真实数据调查与其余partial，不并�
 ### 当前下一步（TDD顺序）
 
 0. **已发布关闭：纯PWF推送快路径。** 1171aa6f正常提交推送，pre-push154项48.16秒通过、精确CI40184030458成功。3项首轮RED、分类器14项RED；独审定位并修旧漏分类，129主跑+1环境复跑，独立PASS。明确文档/归档不启动pytest，unknown/config/mixed及CI/full保持检查。见[发布收据](review/docs-only-push-20261025/publication.json)。
-1. **当前活动项：A01/A05工程子节点终审/发布，然后局部原文流共因。** 变化页码及三层native tree实现206定向通过，最终attempt02仍112span/9030字符/63task、work12,978,295/16M、0费用。真实页码已识别且物理边调用一次，仍被全局coverage拒绝；两端column为None尚未检查，不能宣称A05修好。按[局部流细则](review/st-a05-parent-investigation-20261025/native_local_flow_followup.md)区分native文字扫描、别页金融表增强和局部几何正证，先RED后接共享context，不盲删保护或把未知column填0。ST-A13新具体正文与旧10PASS须在实际输入保持。W16负责RF口径代码，W17负责Audit观察，W18负责新holdout工具测试，ROOT不写作者路径。
+1. **当前活动项：A01/A05局部原文流共因TDD。** 工程组件已正常发布8a258b93，精确CI40185824736成功； 变化页码及三层native tree实现206定向通过，最终attempt02仍112span/9030字符/63task、work12,978,295/16M、0费用。真实页码已识别且物理边调用一次，仍被全局coverage拒绝；两端column为None尚未检查，不能宣称A05修好。按[局部流细则](review/st-a05-parent-investigation-20261025/native_local_flow_followup.md)区分native文字扫描、几何请求延期和局部几何正证，先RED后接共享context，不盲删保护或把未知column填0。ST-A13新具体正文与旧10PASS须在实际输入保持。W16负责RF口径代码，W17负责Audit观察，W18负责新holdout工具测试，ROOT不写作者路径。
 2. **集中内容重评前完成剩余partial根因追查：** ST-A01当前仅已确认新范围进入`t55`模型输入，尚未验证响应；把它与ST-A03客户母公司所在地定义、ST-A05业务层级、ST-A09日期/容量局部关系、ST-A13时段/时点总额及业务分类一起评。使用冻结SourceRef和已选证据；精确财务值优先由结构化API/来源表取得，不把它们扩成全文切片。
 3. **按已证实根因TDD修复：** 为跨文种的真实结构/语义规则写中性RED，再改共享责任层；保留既有通过项、来源身份、预算与wire schema，不引入发行人特例或无证因果边。只有真实金标证明新增批次能补回必需事实，才设计稳定有界continuation，并覆盖源/任务身份、上下文闭包、汇总覆盖、缓存恢复和不重复计费。
 4. **大节点集中验收：** 同一冻结样本回放并复核原14项断言，再用未参与修复的其他市场/文种样本做泛化；独立复核绑定最终代码和证据SHA。验收前不调用新付费摘要。离线证据通过后，才用配置内有界请求验证正式摘要、缓存恢复和RF实际消费，之后继续W12四审及公司holdout循环。

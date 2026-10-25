@@ -1105,5 +1105,9 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 
 - 纯文档push根修1171aa6f已正常推送master，pre-push154PASS48.16s；精确CI40184030458成功。第一次MSYS命名对象启动失败后仅正常主机重试，hooks全部保留，无旁路。
 - A01/A05结构组件最终206PASS15.44s/Ruff/Conda mypy3源码通过；独审各误页码/同页跨边带格式歧义均先RED再修。最终独立工程PASS，旧10PASS与A13七span在真实编译payload保持。attempt02:249页/112span/9030char/63task/work12,978,295÷16M，0收费/下载/原件副本。
-- 实际A05仍OPEN：页码识别后调用物理边一次，被global partial拒绝。进一步SourceRef parse证实249页全读、errors=[]/opaque=[]，整体partial来自deferred财表；两端column均None，未检查下一约束。没有去掉该来源保护或把未知填0。已按单owner分层/TDD/真实反例写native_local_flow_followup，工程绿不代签整体或RF。
+- 实际A05仍OPEN：页码识别后调用物理边一次，被global partial拒绝。进一步SourceRef parse证实249页全读、errors=[]/opaque=[]，整体partial由deferred_table_pages字段触发（实际取geometry_session.deferred，具体用途须继续核对）；两端column均None，未检查下一约束。没有去掉该来源保护或把未知填0。已按单owner分层/TDD/真实反例写native_local_flow_followup，工程绿不代签整体或RF。
 - 本节点证据约3.4MB，不复制PDF；所有独占tmp恢复不存在，历史未跟踪物与hook mode未清理。W16/W17/W18作者目录未写。
+
+## 2026-10-25 发布关闭与下一主线节点
+
+8a258b93404f351ae92cd3449198b42141ef4169 已正常提交推送；pre-commit通过，pre-push154通过/108.09秒，精确CI40185824736 completed/success。工程终审与六文件实际字节绑定见st-a05目录publication.json；206绿不关闭A01/A05真实父级目标。下一节点按native_local_flow_followup.md先写中性RED：deferred_table_pages实际来自geometry_session.deferred，不能全称为金融表延期；原生文字读取/发出是否成功须由解析owner正面记录，局部lane另需几何正证。整体partial、物理负例、旧10PASS/A13输入和原预算保持。无新API、下载、费用或原件副本；外包三工区不写。

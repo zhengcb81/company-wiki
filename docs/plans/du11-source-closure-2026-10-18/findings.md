@@ -904,4 +904,8 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 
 - 页码识别必须按同源/实际页序/每页全格式全边带唯一/相邻页局部位置稳定；整份249页全局bbox交集会被不同章节布局污染，单edge分组又会误认重复候选。TDD已统一修，非issuer补丁。
 - 多层native frames与逐target refs复用一份物理边proof，source预算/cache闭包206定向通过、独审工程PASS；真实输入旧10PASS保持。
-- 真实页边当前仍拒绝：_understand用整体coverage_complete作为native_scan，其混有金融table增强延期。实读249页、errors/opaque均空，定位到职责维度混合；不是下载/身份权限、不能靠新增人工许可解决。实际column仍未知，严禁默认0。下一实施见native_local_flow_followup；A01/A05整体继续OPEN。
+- 真实页边当前仍拒绝：_understand用整体coverage_complete作为native_scan，其混有名为deferred_table_pages的增强延期（该字段实际取geometry_session.deferred，具体请求用途待核）。实读249页、errors/opaque均空，定位到职责维度混合；不是下载/身份权限、不能靠新增人工许可解决。实际column仍未知，严禁默认0。下一实施见native_local_flow_followup；A01/A05整体继续OPEN。
+
+## 2026-10-25 覆盖维度责任层澄清
+
+8a258b93404f351ae92cd3449198b42141ef4169 已正常提交推送；pre-commit通过，pre-push154通过/108.09秒，精确CI40185824736 completed/success。工程终审与六文件实际字节绑定见st-a05目录publication.json；206绿不关闭A01/A05真实父级目标。下一节点按native_local_flow_followup.md先写中性RED：deferred_table_pages实际来自geometry_session.deferred，不能全称为金融表延期；原生文字读取/发出是否成功须由解析owner正面记录，局部lane另需几何正证。整体partial、物理负例、旧10PASS/A13输入和原预算保持。无新API、下载、费用或原件副本；外包三工区不写。

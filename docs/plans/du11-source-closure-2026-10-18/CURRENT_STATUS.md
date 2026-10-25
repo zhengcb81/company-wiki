@@ -1,8 +1,8 @@
 # 当前项目状态与接手入口
 
-## 当前行动：发布A01/A05工程组件，后续修局部原文流共因（2026-10-25）
+## 当前行动：A01/A05工程组件已发布，实施局部原文流共因修复（2026-10-25）
 
-**整体目标未完成。** 当前主线仍是“来源处理→正式摘要→缓存恢复→RF实际采用→四路审查→新公司泛化”。已发布共享引擎v4摘要和恢复工程；真实摘要内容、当前RF消费和完整公司循环仍待验收。最近已发布产品代码为`26e981e1f75d8e67274679749f6ef213d7490012`，精确[CI40180784583](https://github.com/zhengcb81/company-wiki/actions/runs/40180784583) completed/success。正常pre-commit通过，pre-push154项通过（31.74秒）；被审源码未被hook改变。
+**整体目标未完成。** 当前主线仍是“来源处理→正式摘要→缓存恢复→RF实际采用→四路审查→新公司泛化”。已发布共享引擎v4摘要和恢复工程；真实摘要内容、当前RF消费和完整公司循环仍待验收。最新产品代码为`8a258b93404f351ae92cd3449198b42141ef4169`，已推送master，精确[CI40185824736](https://github.com/zhengcb81/company-wiki/actions/runs/40185824736) completed/success。正常pre-commit通过，pre-push154项通过（108.09秒）；六个被审源码/测试与Git中的LF字节一致。见[发布收据](review/st-a05-parent-investigation-20261025/publication.json)。
 
 **最新独立来源/输入复核为10 PASS、4 PARTIAL、0 MISSING。** 这是[2026-10-25来源与模型输入复审](review/annual14-current-source-review-20261025/independent/report.md)，不是模型响应或预测验收。原8/6/0报告保留为历史，不能混成同一轮分数。A03地域定义与A09日期/容量局部上下文已补齐输入；A01/A05仍缺跨页Chemistry父级，A02/A13精确财务口径仍需完整来源和当前消费证明。所有响应语义NOT_REVIEWED、当前RF采用OPEN。
 
@@ -14,9 +14,9 @@
 
 **本轮已发布效率根修：** 纯PWF更新不再固定跑154项；独审定位旧分类器把根配置/未知脚本当文档，也已修在唯一owner。最终129主跑+唯一MSYS启动环境失败原断言定点1通过，独审PASS，1171aa6f正常提交推送；pre-push154项48.16秒通过，[精确CI40184030458](https://github.com/zhengcb81/company-wiki/actions/runs/40184030458)成功。CI/full保持原模式。见[发布收据](review/docs-only-push-20261025/publication.json)。
 
-**A01/A05工程与真实数据边界：** 变化分页计数和三层native frames已实现；独审误页码、跨边带/格式歧义、实际章节位置问题均先RED再在共享owner修复，同一物理边只观察一次。最终206项15.44秒、Ruff、Conda mypy3源码通过，[独立终审](review/st-a05-parent-investigation-20261025/independent/final-review.md)确认工程子节点可发布、范围内零未解。旧10PASS及A13七span均在实际重编payload保持，未重评模型响应。真实attempt02：249页、112span/9030字符/63任务、work12,978,295/16M；原件/配置/目录库与回放中的375源码稳定，0下载/模型/原件副本。真实页码识别已好，但Chemistry跨页父级仍缺，A01/A05保持OPEN：全局partial实际来自表增强（249页已读、errors/opaque均空），两端column为None尚未进入下一校验。不得把206绿代签此目标。当前来源评分仍为上一独审10/4/0，正式响应NOT_REVIEWED/RF OPEN。
+**A01/A05工程与真实数据边界：** 变化分页计数和三层native frames已实现；独审误页码、跨边带/格式歧义、实际章节位置问题均先RED再在共享owner修复，同一物理边只观察一次。最终206项15.44秒、Ruff、Conda mypy3源码通过，[独立终审](review/st-a05-parent-investigation-20261025/independent/final-review.md)确认工程子节点通过、范围内零未解；已发布8a258b93并通过精确CI。旧10PASS及A13七span均在实际重编payload保持，未重评模型响应。真实attempt02：249页、112span/9030字符/63任务、work12,978,295/16M；原件/配置/目录库与回放中的375源码稳定，0下载/模型/原件副本。真实页码识别已好，但Chemistry跨页父级仍缺，A01/A05保持OPEN：全局partial来自deferred_table_pages字段（249页已读、errors/opaque均空；该字段由geometry_session.deferred赋值，具体延期用途下一节点核对），两端column为None尚未进入下一校验。不得把206绿代签此目标。当前来源评分仍为上一独审10/4/0，正式响应NOT_REVIEWED/RF OPEN。
 
-**下一步唯一行动：** 正常发布本组件后，按[局部原文流实施细则](review/st-a05-parent-investigation-20261025/native_local_flow_followup.md)先TDD区分原生文字读取、别页金融表增强、局部页面可用性与实测lane；来源owner给正证、context借一次、sections只消费。不能把partial改complete或None填0。先让真实Chemistry→D&M/TIDES citation/model父级通过并保留旧通过项，再运行配置内新正式摘要、零重复计费恢复和RF/W12，不重发旧付费请求。
+**下一步唯一行动：** 按[局部原文流实施细则](review/st-a05-parent-investigation-20261025/native_local_flow_followup.md)先TDD区分原生文字读取、几何请求延期、局部页面可用性与实测lane；来源owner给正证、context借一次、sections只消费。不能把partial改complete或None填0。先让真实Chemistry→D&M/TIDES citation/model父级通过并保留旧通过项，再运行配置内新正式摘要、零重复计费恢复和RF/W12，不重发旧付费请求。
 
 累计预算仍按用户授权10M tokens/$20，母账1,783,378 tokens/$0.724836，unknown保留。本轮0新增费用。相关目录首次1606通过/11临时目录setup错误；这11项在正常主机同断言重跑全通过。最终108项定向测试、Ruff/mypy通过；不合并成“一次全绿1617项”，[独立最终复审](review/st-a13-recognition-scope-20261025/independent/final-review.md)已通过，范围仅限工程与来源输入。
 
