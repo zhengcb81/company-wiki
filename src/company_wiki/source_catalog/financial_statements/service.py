@@ -407,9 +407,13 @@ class FinancialStatementsService:
             # itself was unbounded older (fetched_from NULL).
             if want_from is not None and fetched_from is not None and want_from < fetched_from:
                 return True
+            if want_to is None:
+                # An unbounded-newer request is only covered by an exhausted
+                # envelope that was itself fetched without an upper bound
+                # (W19-R15); otherwise the provider may have newer data.
+                return fetched_to is not None
             if (
-                want_to is not None
-                and last_period_end
+                last_period_end
                 and want_to > last_period_end
                 and (fetched_to is None or want_to > fetched_to)
             ):
@@ -423,7 +427,9 @@ class FinancialStatementsService:
                 return True
             if want_from is None or want_from < fetched_from:
                 return True
-            if want_to is not None and want_to > last_period_end and (
+            if want_to is None:
+                return True
+            if want_to > last_period_end and (
                 fetched_to is None or want_to > fetched_to
             ):
                 return True

@@ -377,3 +377,57 @@ class TestContinuationContract:
         # the token's statement pages; the others are served whole, not blanked
         assert len(by_type["balance_sheet"]["reports"]) == 33
         assert len(by_type["cash_flow"]["reports"]) == 36
+
+
+class TestR15UnboundedToDirection:
+    """W19-R15: a request without period_end_to wants the newest data."""
+
+    def test_omitted_to_refetches_newer_provider_period(self, statements_catalog):
+        import httpx
+
+        from company_wiki.source_catalog.financial_statements import contracts
+
+        with_to = _request_payload()
+        _service(statements_catalog, _recorder(_zhongwei_lrb())).handle_request(
+            contracts.StatementsRequest.from_payload(with_to)
+        )
+        # provider gains 2026-09-30; request omits period_end_to
+        mutated = json.loads(_zhongwei_lrb()[1].decode("utf-8"))
+        del mutated
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            pages = _zhongwei_lrb()
+            page = int(request.url.params.get("page", "1"))
+            if page == 1:
+                enriched = json.loads(pages[1].decode("utf-8"))
+                report_list = enriched["result"]["data"]["report_list"]
+                entry = json.loads(
+                    json.dumps(report_list["20260630"], ensure_ascii=False)
+                )
+                report_list["20260930"] = entry
+                enriched["result"]["data"]["report_count"] = str(
+                    int(enriched["result"]["data"]["report_count"]) + 1
+                )
+                return httpx.Response(
+                    200,
+                    content=json.dumps(enriched, ensure_ascii=False).encode("utf-8"),
+                )
+            if page in pages:
+                return httpx.Response(200, content=pages[page])
+            return httpx.Response(200, content=NULL_PAGE_BYTES)
+
+        no_to = _request_payload()
+        no_to.pop("period_end_to")
+        second = _service(statements_catalog, handler).handle_request(
+            contracts.StatementsRequest.from_payload(no_to)
+        )
+        assert second["statements"][0]["usage"]["http_requests"] > 0
+        assert second["statements"][0]["coverage"]["last_period_end"] == "2026-09-30"
+        # repeated identical unbounded-to request: exhausted unbounded envelope
+        quiet = FinancialStatementsService(
+            catalog=statements_catalog,
+            writer=CanonicalSourceWriter(statements_catalog),
+            provider=None,
+        ).handle_request(contracts.StatementsRequest.from_payload(no_to))
+        assert quiet["statements"][0]["usage"]["http_requests"] == 0
+        assert quiet["statements"][0]["coverage"]["observed_periods"] == 37
