@@ -6,7 +6,7 @@
 
 相关141项单测最新复跑通过（64.05秒；前轮77.55秒），Ruff和mypy通过。药明康德原件SHA=`7f1431d6…2d6a2`的零费用真实回放在原112片段上限内选入第119页，112片段/9,113字符、工作量11,027,878/16,000,000未耗尽；既有ST-A01/ST-A11检查点通过。0模型调用、0下载、0原文复制，原件和374个生产Python文件稳定。独立复审PASS，绑定来源规则SHA=`6a40e477…a31eb7`、测试SHA=`5dc47f1f…116cd5f`，见[复审报告](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/independent-review.md)。
 
-回放仍为`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`。第119页来源片段重新入选只证明选材层修复，不能改写年度14项内容复核的8通过/6部分/0缺失状态；ST-A01内容和其余partial仍待集中重评。当前改动待提交/推送及精确HEAD CI；随后继续其他partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，作者仓保持独立。
+回放仍为`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`。第119页来源片段重新入选只证明选材层修复，不能改写年度14项内容复核的8通过/6部分/0缺失状态；ST-A01内容和其余partial仍待集中重评。提交`2942355c726bc0c95ae07a854eb3bfcaec8aaa37`已推送，精确HEAD CI `40171504716`成功；本地pre-push的154项契约smoke通过（199.59秒）。随后继续其他partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，作者仓保持独立。
 
 ## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 
