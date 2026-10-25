@@ -1066,3 +1066,11 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 原件年报SHA=`7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`的第235页在视觉上具有完整终止经营表格、7列表头和“元/人民币”上下文。production `parse_pdf` selector 0.9 的单页表格回放得到4条结构化行和共享7列表头；单位币种仍作为单独文字块存在，尚未绑定到这些表格行。只读回放收据保存在`review/st-a02-table-source-20261025/replay-receipt.json`，没有金融金额、模型调用、下载或原文复制。
 - 冻结内容报告中的`t55`是从普通PDF文字块选出的局部片段，表头被版面切块，且片段开头仅余末列标题残尾；系统已将其标记`table_structure_ambiguous`并在model view中传播约束。现有`test_reading_untyped_numeric_quality.py`共15项通过，确认未绑定数字不会被摘要/引用/view当成确定事实。这是有效的防误读保护。
 - **处置判断：** 该partial不是“叙述模型还要猜表格”，也不需要扩大叙述切片或改CWP选择规则。精确收入、单位、期间及重述应从结构化金融API或补齐单位币种绑定的完整表格来源读取，随后验证RF实际采用；故ST-A02仍OPEN，未作代码改动。临时视觉渲染目录已删除。
+
+
+## 2026-10-25 新三卡准备与独立审查
+
+- 新增harness_lanes/20261025三份独立施工卡、COMMON、固定JSON交接模板与dispatch；全部可同时开工，不依赖彼此新代码或ROOT新摘要。
+- 已创建并提交各自8份PWF seed：W16 RF 97e7e149d434d5ce36c147531efa4405a88fcb1c；W17 Audit 02ee879ccf8e4aed67342bcc7c8c7e20de2401c9；W18 CWP 9051bbb7a69347f52d79e5cce37a6b8c40b7912f。固定代码base及实际体积/seed SHA见dispatch。未启动产品实现或测试，READY_NOT_DISPATCHED。
+- 未参与编写的agent完成任务完整度/并行接口/实际seed审查；两个建议已修正，最终PASS。原RF三份assurance WIP、CWP pre-push mode及历史未跟踪物保留；Dayu/IQS未改，0模型/API/下载，无原件复制。
+- ROOT继续ST-A02来源与annual14其余partial；分包生产路径归作者，收包后统一集成及真实内容验收。更新CURRENT_STATUS.md/json、task_plan与MAINLINE_LOOP_GOAL，不改变8/6/0或目标完成状态。

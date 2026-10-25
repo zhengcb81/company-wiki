@@ -1,0 +1,150 @@
+{
+  "schema_version": "r1-harness-dispatch/1",
+  "as_of_date": "2026-10-25",
+  "status": "READY_ALL_THREE_NOT_DISPATCHED",
+  "parent_plan_id": "du11-source-closure-2026-10-18",
+  "plan_root": "docs/plans",
+  "package_count": 3,
+  "root_owner": "company-wiki production source selection, structured-source investigation, real summary/cache and RF adoption acceptance",
+  "root_reserved_paths": [
+    "src/**",
+    "config/**",
+    "docs/plans/du11-source-closure-2026-10-18/**"
+  ],
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "packages": [
+    {
+      "package_id": "W16-RF-BASIS",
+      "card": "W16-RF-BASIS.md",
+      "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-w16-basis",
+      "branch": "codex/w16-rf-basis-20261025",
+      "base_code_commit": "094d55ad884e4a886b1537c0e76f3a0bede16ca2",
+      "plan_id": "w16-rf-basis-2026-10-25",
+      "plan_root": "docs/plans",
+      "start_here": "docs/plans/w16-rf-basis-2026-10-25/START_HERE.md",
+      "delivery": "delivery/w16/handoff.json",
+      "dependencies": [],
+      "sparse_omitted_paths": [
+        ".planning/"
+      ],
+      "primary_wip_preserve": [
+        "assurance/runs/daily_alert.jsonl",
+        "assurance/runs/weekly_alert.jsonl",
+        "assurance/runs/weekly_manifest.json"
+      ],
+      "independent_review_required": true,
+      "product_implementation_started": false,
+      "status": "READY_NOT_DISPATCHED",
+      "start_head": "97e7e149d434d5ce36c147531efa4405a88fcb1c",
+      "tracked_worktree_clean": true,
+      "start_documents_committed": true,
+      "seed_file_sha256": {
+        "COMMON.md": "de0126a8274c585621a574f9da3a602f3e808b76e307143b3bd16927d2f053af",
+        "construction_card.md": "4674c8d57d9112250c19f4b340543fc13bfa5ed8d7c27cfe64df8abe0a55ca49",
+        "findings.md": "2484029c7e3d7897e4623aa70c2dcad6b4d083414f5f78b8a488c723733af96b",
+        "handoff.template.json": "32588d5d7ec2e4f432d286def41c79e48fe9c6f2925c7517de8def36e3b5d96f",
+        "INPUTS.json": "403687421a25eaa2328cc379277058a5d6c38e980d2971ab1a83bdd6b03e4204",
+        "progress.md": "6bf7b1eb2e963fc53238caf6b18350ef3370ff2e481289d32fb712288cf13329",
+        "START_HERE.md": "cc392ca8a46c3e24413351de81b794f92f247d38de91b2ae1bbf41fa8f4fad58",
+        "task_plan.md": "931b63a8e6c8769ffa189741f37d0b0cf5783139e8c3b3706a18601611b5226b"
+      },
+      "worktree_bytes": 55152114,
+      "worktree_file_count": 3147
+    },
+    {
+      "package_id": "W17-AUDIT-COVERAGE",
+      "card": "W17-AUDIT-COVERAGE.md",
+      "repo": "C:/Users/郑曾波/Projects/revenue-forecast-audit",
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w17-coverage",
+      "branch": "codex/w17-audit-coverage-20261025",
+      "base_code_commit": "bb41d9beda94fead3aba4bc65ed8c6dce4314e97",
+      "plan_id": "w17-audit-coverage-2026-10-25",
+      "plan_root": "docs/plans",
+      "start_here": "docs/plans/w17-audit-coverage-2026-10-25/START_HERE.md",
+      "delivery": "delivery/w17/handoff.json",
+      "dependencies": [],
+      "sparse_omitted_paths": [
+        ".planning/"
+      ],
+      "primary_wip_preserve": [],
+      "remote": null,
+      "independent_review_required": true,
+      "product_implementation_started": false,
+      "status": "READY_NOT_DISPATCHED",
+      "start_head": "02ee879ccf8e4aed67342bcc7c8c7e20de2401c9",
+      "tracked_worktree_clean": true,
+      "start_documents_committed": true,
+      "seed_file_sha256": {
+        "COMMON.md": "de0126a8274c585621a574f9da3a602f3e808b76e307143b3bd16927d2f053af",
+        "construction_card.md": "02b88ae3be8c0fbe10aa5b8ca55e12b7bcab347769bedc6b26b5f74741e678e4",
+        "findings.md": "3a26934ded1cca6638b093477dc40001299313f32ac3daa655751c22eb62d524",
+        "handoff.template.json": "32588d5d7ec2e4f432d286def41c79e48fe9c6f2925c7517de8def36e3b5d96f",
+        "INPUTS.json": "95d1f1f1dce1c4bc075d0a8888acf8a556bc1533a98c2557c26f3e590119a143",
+        "progress.md": "e1a58160fb149163afb609aab831eac04879c467bd6686ecc27b00b239a38a6f",
+        "START_HERE.md": "3d1c4876eac43d13d8bc3e0ef50e71f926471c13746e48eb2bb95ce951f23d89",
+        "task_plan.md": "52f13ba3a48cca80a06d6f87821510071a3cbd6b64fa65b75993aa9eb9718144"
+      },
+      "worktree_bytes": 6018266,
+      "worktree_file_count": 487
+    },
+    {
+      "package_id": "W18-CWP-HOLDOUT",
+      "card": "W18-CWP-HOLDOUT.md",
+      "repo": "C:/Users/郑曾波/Projects/company-wiki",
+      "workdir": "C:/Users/郑曾波/Projects/company-wiki-w18-holdout",
+      "branch": "codex/w18-cwp-holdout-20261025",
+      "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
+      "plan_id": "w18-cwp-holdout-2026-10-25",
+      "plan_root": "docs/plans",
+      "start_here": "docs/plans/w18-cwp-holdout-2026-10-25/START_HERE.md",
+      "delivery": "delivery/w18/handoff.json",
+      "dependencies": [],
+      "sparse_omitted_paths": [
+        ".planning/",
+        "companies/",
+        "sectors/",
+        "themes/"
+      ],
+      "primary_wip_preserve": [
+        ".githooks/pre-push mode only; original bytes unchanged",
+        "historical untracked run artifacts"
+      ],
+      "worktree_local_platform_setting": "core.filemode=false, core.longpaths=true; pre-push blob equals HEAD; primary settings untouched",
+      "independent_review_required": true,
+      "product_implementation_started": false,
+      "status": "READY_NOT_DISPATCHED",
+      "start_head": "9051bbb7a69347f52d79e5cce37a6b8c40b7912f",
+      "tracked_worktree_clean": true,
+      "start_documents_committed": true,
+      "seed_file_sha256": {
+        "COMMON.md": "de0126a8274c585621a574f9da3a602f3e808b76e307143b3bd16927d2f053af",
+        "construction_card.md": "3f27a5ae5cd4ad858cd05d35c8456b5930e113c363c5669324a34e86cd02379f",
+        "findings.md": "4fee279e1c91d7e029ece1b16ad548b35e9e2701a2f19a22afb86de81747e53e",
+        "handoff.template.json": "32588d5d7ec2e4f432d286def41c79e48fe9c6f2925c7517de8def36e3b5d96f",
+        "INPUTS.json": "cd39fdef80cc1a26769370c998512a3375deed9deb05574ef6113aab1a5cafac",
+        "progress.md": "6dc06a17726d1039172fac26633b4de961db41dea58f534b34f6d5d6c3acee22",
+        "START_HERE.md": "b070a1e24e2e78ffa48b9164469e09e6f59a85a929c0ff8a3e130b67afdef710",
+        "task_plan.md": "a720fc682d9168c90e64c1285075546cf2dc1987dfe912fd91188083324429c3"
+      },
+      "worktree_bytes": 27560807,
+      "worktree_file_count": 1856,
+      "sparse_mode": "cone",
+      "sparse_included_directories": [
+        "src",
+        "scripts",
+        "tools",
+        "tests",
+        "config",
+        "docs/plans/w18-cwp-holdout-2026-10-25",
+        ".githooks",
+        ".github"
+      ]
+    }
+  ],
+  "seed_product_changes": 0,
+  "independent_packet_review": "PASS",
+  "independent_packet_review_md": "packet-review.md",
+  "independent_packet_review_json": "packet-review.json"
+}

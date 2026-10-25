@@ -873,3 +873,11 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - **为何叙述任务仍标歧义：** 冻结内容复核使用的`t55`证据是`pdf_text_block`，定位`page:235/paragraph:8/chars:119-566`；该版面文字块以末列标题残尾“损)利润”开头并带行值。它没有原生表格行的标题绑定，质量旗标`table_structure_ambiguous`正确阻止其证明列、期间和收入含义。原报告的`table_structure_ambiguous`不应被抹掉，也不能靠模型阅读裸数字解决。
 - **根因与处置：** 这里缺的不是源文件信息，也不是提高叙述切片预算能解决的问题，而是把财务表文字块误用作叙述任务的精确数字来源。结构化表格行虽保留列名，单位币种仍需绑定；精确值走配置内金融API，或走完整行/表头/单位币种绑定的结构化表观察，并确认RF采用。根据当前证据不改CWP代码、不扩大叙述预算；ST-A02保持partial直至下游来源和实际采用闭环。
 - **回归证据：** `python -m pytest -q tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py`通过15项（14.68秒），覆盖未知数值归属在摘要/引用/model view中的保留、完整表格的正面绑定及模糊原数值不能被旁路洗成确定值。只读页回放0下载、0模型请求、0原文副本。
+
+
+## 2026-10-25 W16/W17/W18独立施工包设计
+
+- 主线真实验收剩余任务可拆为RF历史收入可比口径、Audit覆盖/响应/消费分维度观察、新公司源侧gold与冻结回放。三卡不重开已交DU5货币转换/W10文档join/W15可移位执行；不为了分包再扩FF provider。
+- W16在RF现有quantity/source/claim之上处理可选持续/终止、原表/重述与基数采用，缺新元数据不阻断全部旧输入。W17复用现有import/join，仅做报告观察，不把源扫描/选材/layout/源侧支持/摘要审查/RF采用混成PASS。W18复用已有benchmark/gold/recovery，只做薄编排，冻结源侧预期后再跑候选，禁止改生产源码。
+- 独立agent初审指出README基线SHA错及W18需明确避免复制第二套评测框架；均已修复。最终实读三分支/HEAD/父基线、24份seed SHA及副本一致，独审PASS。三卡要求最终独立agent完整审查、逐finding全部修复/复测/复审，未完成不得COMPLETE；仅A/B/C大节点，无小节点签收。
+- 三工区只提交文档seed；RF 55,152,114 B，Audit 6,018,266 B，CWP 27,560,807 B，未复制原始库。W18初次体积统计遇Windows深层历史路径，已将新工区收窄到代码/测试/本卡PWF；专属worktree设置忽略执行位/支持长路径，原主工区未改。新工区tracked clean。

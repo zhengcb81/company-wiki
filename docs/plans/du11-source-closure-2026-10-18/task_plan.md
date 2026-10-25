@@ -8,6 +8,12 @@
 
 **内容仍未验收：** 旧formal-v4付费结果走v5排名路径，43条claim全部uncertain/needs_review，RF未消费；不能把它当成当前v4摘要质量。微软v4预检8/8必需业务事实有支持，候选省略和4,087个未分配单元都不能单独证明必需事实漏读。年度14项仍8通过、6部分；按具体SourceRef/上下文追查，不重放旧付费请求。
 
+### 本批并行安排（2026-10-25，READY_NOT_DISPATCHED）
+
+三张新卡与各自开工目录见[harness_lanes/20261025/README.md](harness_lanes/20261025/README.md)，机器清单见同目录dispatch.json；与已关闭W13/W14/W15及IR/QA/MC三卡不同。W16独占RF收入口径责任层，W17独占Audit覆盖观察责任层，W18独占CWP新holdout工具/测试/PWF且禁止改生产源码。三工区PWF seed已分别提交、tracked clean，ROOT未启动产品实施。独立agent对卡片、基线、24份seed与接口审查PASS；三卡均要求作者在完成前独立agent全面审查、全部修复并复审后才交接。
+
+ROOT继续下方ST-A02的CWP来源/真实数据调查与其余partial，不并发改W16/W17的产品路径或W18新增目录；对既有冻结RF的只读验证可继续。W16不替ROOT拿真实金融数据，W17不代签语义质量，W18不跑付费摘要或真实RF。收包后ROOT统一集成，不用分包工程绿关闭内容或公司循环。
+
 ### 当前下一步（TDD顺序）
 
 1. **当前活动项：关闭ST-A02的下游结构化数据证据链。** 页235原表可由production parser重建为4行/7列表头；叙述文字块拆开表头，且被`table_structure_ambiguous`保护。15项数值归属回归通过。无需改叙述模型或放宽质量标记；下一步确认配置内结构化金融API或完整表格来源提供ST-A02所需精确值、单位、期间/重述，并核对RF实际消费。未证明采用前ST-A02保持partial。

@@ -6,7 +6,13 @@
 
 以 company-wiki/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md/json 和 MAINLINE_LOOP_GOAL.md 为唯一主线入口，持续完成新版 revenue-forecast-audit 八步循环。先接收药明康德 final3 四路复审共因PWF，按W08–W12先写根因测试再修来源选材/上下文、研究证据/经营桥、逐文档投影和实际外部来源缺口；原公司新attempt复验后，依次药明合联、Snowflake做新公司泛化。每轮真实执行RF、四路独立审查、共因方案与实施、再验收、代码/模块化/泛化及买方收入研究质量改善、基于新问题提升检测并验证正反例和实际采用。承接旧PWF/NVDA及阿里巴巴、小米集团、药明生物、药明康德、药明合联、微软、Snowflake、MongoDB清单的未完责任；固定清单和责任包闭环后，同一有效版本连续三家不同公司无主要问题才完成。重大外部阻塞不算通过。保留原文与封存历史，遵守配置及最新累计10M tokens/$20（含unknown，公司软目标）；不修改Dayu/IQS他人施工，不加人工许可/小节点门禁，不以特判或删断言换绿。独立大节点审查、隔离测试恢复，及时提交推送并更新PWF。
 
-## 当前起点与下一步（2026-10-25）
+## 2026-10-25 当前并行安排
+
+主目标继续active；当前行动以CURRENT_STATUS及task_plan为准：ST-A01/03/09共享规则已发布，ST-A01已确认进入摘要输入，ST-A02原表与歧义片段边界已查明，精确结构化数据及RF实际消费仍OPEN；annual14保持8通过/6部分/0缺失。下文旧“覆盖维度待发布”等是早先节点，不覆盖当前入口。
+
+新的[W16/W17/W18三卡](harness_lanes/20261025/README.md)已准备独立工区与各自PWF seed并经独立agent复核，可由用户分别启动；目前READY_NOT_DISPATCHED、产品实现未开始。ROOT负责CWP生产路径及最终真实摘要/cache/公司四审；W16负责RF历史基数口径、W17负责Audit覆盖观察、W18只负责新源侧gold/冻结测试，不并发修改ROOT生产源码。所有分包交付后仍须ROOT集成和实际公司内容验收，完成条件和预算不变。
+
+## 当前起点与下一步（2026-10-25；以下早先节点由CURRENT_STATUS覆盖）
 
 - W03/W07共享引擎接线、真实摘要链、激活恢复、缓存与RF只读消费工程验收已完成；它们不代签当前内容质量。
 - 药明康德 final3 四路复审已形成W08–W12共因计划。W08最新来源复核为8通过、6部分、0缺失；明确未完成项是Chemistry父级范围、表格表头及持续/终止口径、客户母公司所在地定义、多肽日期与容量局部关联、时段金额与业务归属。报告见review/r1-w08-material-value-20261024/content-review/report.md，依赖根因见review/r1-w08-material-value-20261024/next-dependency-plan.md。

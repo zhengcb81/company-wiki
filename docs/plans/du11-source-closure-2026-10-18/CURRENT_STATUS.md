@@ -10,6 +10,8 @@
 
 **其他状态：** ST-A03地域定义和ST-A09局部上下文已有共享规则修复；ST-A01来源输入已修但未重评响应。ST-A05业务层级、ST-A13时段/时点金额分类及其他partial仍待逐项追根。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY施工卡已ROOT接收，作者仓继续独立管理。
 
+**新并行施工包（READY，尚未派工）：** [20261025三卡入口](harness_lanes/20261025/README.md)为W16-RF-BASIS（历史收入/持续经营/重述可比口径）、W17-AUDIT-COVERAGE（覆盖和实际采用六维观察）、W18-CWP-HOLDOUT（三市场新来源金标/冻结回放）。三个独立工作树已提交各自8份PWF seed，产品实现未开始；施工卡经独立agent完整度/接口/seed复核PASS。ROOT继续CWP生产选材、ST-A02真实来源与正式摘要/cache/RF验收，冻结W16/W17允许的产品路径及W18新工具/测试路径以免冲突。三卡可同时启动，不互相等待，不改当前annual14 8/6/0或公司验收状态。
+
 ## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 
 药明康德2025年报第14页的 TIDES 破折号父项此前没有进入其罗马数字子项上下文；现已在原生列表结构 owner 修复。四个相关测试文件155项通过（5.14秒），Ruff及diff-check通过。零费用真实原件回放使用生产112片段限额，选中112片段/8,915字符，TIDES父项作为ST-A08/ST-A09的上下文；扩产日期与`>100,000L`容量保持分开，没有推断因果。原件SHA及收据见[本节点证据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/README.md)。首轮独审PASS。第二轮发现验证器`assert`在Python优化模式下会失效，已改为显式检查和独占创建；`python -O`及`PYTHONOPTIMIZE=1`均实测拒绝覆盖，`optimized-overwrite-rejection-final.log`记录两次尝试前后的v3收据SHA完全相同。最终Ruff和diff-check退出码为0，见同目录`verification-final.log`；修复后复核无阻断，最终SHA对照留证已确认，详见[独立复核](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md)。源码和证据已由`64570b9a66738410a5299ec5d98438e5160a04ee`提交并推送；精确HEAD CI [40166148355](https://github.com/zhengcb81/company-wiki/actions/runs/40166148355) 于2026-10-25 completed/success。内容评价没有重做，仍为8 pass/6 partial/0 missing。对ST-A09的追踪确认第12页扩产日期与容量各自出现在选中片段中，物理邻接被记录但没有添加语义依赖；下一步先判清剩余问题属于证据成员闭包还是摘要/内容判断，再处理其他partial根因。
