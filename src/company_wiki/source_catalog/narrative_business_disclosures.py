@@ -15,7 +15,7 @@ from .narrative_predicate_state import predicate_scope
 from .n6_scope_changes import scope_change_reasons
 
 
-READING_DISCLOSURE_SCAN_PASSES = 4
+READING_DISCLOSURE_SCAN_PASSES = 6
 _CN_SCOPE = re.compile(
     r"(?:业务(?:类型|范围)?|服务范围)(?:可以|主要|现有|目前|分别|可)?"
     r"(?:分为|包括|包含|由)(?P<parts>[^。；;!?]{1,240})|"
@@ -26,6 +26,20 @@ _EN_SCOPE = re.compile(
     r"\b(?:we|our company|the company|the group)\s+operates?\s+"
     r"(?:through|in|via)\s+(?:(?:\d+|one|two|three|four|five|several)\s+)?"
     r"(?:businesses|divisions|segments)\s*[:：]?\s*(?P<businesses>[^。;!?]{1,240})", re.I)
+_CN_NAMED_LINE_DETAIL = re.compile(
+    r"[\u3400-\u9fffA-Za-z0-9][\u3400-\u9fffA-Za-z0-9（）()·&/\- ]{0,36}?"
+    r"(?:业务|服务|产品线|分部|板块)"
+    r"(?:（[^）\n]{1,48}）|\([^\)\n]{1,48}\))?\s*"
+    r"(?:提供|涵盖|覆盖|经营|从事|开展|专注于)"
+    r"[\s\S]{0,180}?(?:从[\s\S]{1,80}?(?:到|至)|包括|涵盖|覆盖)")
+_EN_REVENUE_LINE_DETAIL = re.compile(
+    r"\b(?:revenues?|sales)\s+(?:(?:is|are|was|were)\s+)?(?:primarily|mainly)\s+"
+    r"(?:generated|derived|earned)\s+(?:from|by)\s+(?:the\s+)?following\s+"
+    r"(?:(?:business|service|operating)\s+)?(?:line|segment)\s*[:\-]\s*"
+    r"[A-Za-z][A-Za-z0-9&/'\-]*(?:\s+[A-Za-z][A-Za-z0-9&/'\-]*){0,3}\s+"
+    r"(?:provides?|covers?|offers?|delivers?|spans?)\b"
+    r"[^.;!?]{0,180}\b(?:from\b[^.;!?]{1,100}\b(?:through|to)\b|"
+    r"including\b|covering\b|spanning\b|across\b)", re.I)
 _EN_MEMBERS = re.compile(r",|\band\b|\bor\b", re.I)
 _GENERIC_MEMBER = re.compile(
     r"(?:the\s+)?(?:products?|services?|solutions?|research|development|manufacturing|"
@@ -469,7 +483,8 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
     relations = []
     for match in _CN_SCOPE.finditer(clause):
         parts = match.group("parts") or match.group("types")
-        if _component_structure("业务包括" + parts):
+        if (_component_structure("业务包括" + parts)
+                or _CN_NAMED_LINE_DETAIL.search(parts)):
             relations.append("business_scope")
             break
     for match in _EN_SCOPE.finditer(clause):
@@ -478,6 +493,8 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
         if len(parts) >= 2 and any(not _GENERIC_MEMBER.fullmatch(part) for part in parts):
             relations.append("business_scope")
             break
+    if _EN_REVENUE_LINE_DETAIL.search(clause):
+        relations.append("business_scope")
     # The legacy structure label also matches bare "comprises/consists".
     # Named scope above and concrete use/channel mechanics below supply the
     # reader's material interpretation; legacy DTO recognition stays intact.

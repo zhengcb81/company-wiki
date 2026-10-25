@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "V4_AND_ST_A03_PUBLISHED; ANNUAL14_ST_A09_CONTEXT_ROOTFIX_PUBLISHED_EXACT_CI_PASS; CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "ANNUAL14_ST_A01_ROOTFIX_VALIDATED_PENDING_PUBLICATION; CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -323,7 +323,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ST-A09 source-context root fix is committed and pushed at 861b7b3360753baf845f186a2cb7043b4de14690; exact-head GitHub CI 40168702115 succeeded in 3m09s. It filters complete generic phase phrases before bigrams, keeps project context one-hop outside transitive qualification closure, and charges six text-length passes. Final publication rerun: 94 tests across the same three related files, Ruff, mypy, diff-check, local 154 contract smoke, and zero-cost real annual14 replay pass. The 112-span coverage remains incomplete and content is not regraded. Continue the other annual14 partial root causes.",
+  "next_step_now": "Publish the ST-A01 named business-line scope root fix at the current reviewed HEAD, then verify CI for that exact commit. TDD, 141 focused tests, Ruff, mypy, independent review and zero-cost real annual14 replay pass. The page-119 scope is selected under the existing 112-span cap; annual14 content remains 8 pass / 6 partial / 0 missing and is not regraded. Continue diagnosing remaining partials after publication.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -796,7 +796,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Continue offline diagnosis of the other five annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. At the next major source-content gate, independently review exact source, test and replay receipt SHAs, then regrade the unchanged real-source gold. Add source batches only if a frozen required-fact gap proves they add value; any new paid summary remains after that review.",
+  "next_step_after_publication": "Continue offline diagnosis of the remaining annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. At the next major source-content gate, independently review exact source, test and replay receipt SHAs, then regrade the unchanged real-source gold. Add source batches only if a frozen required-fact gap proves they add value; any new paid summary remains after that review.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -831,13 +831,13 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Publish and verify the independently reviewed ST-A09 local-context root fix; then continue source-level diagnosis of the five other annual14 partial targets. Do not update content scores before a bounded independent content regrade.",
+    "Publish and verify the independently reviewed ST-A01 named business-line scope fix; then continue source-level diagnosis of the remaining annual14 partial targets. Do not update content scores before a bounded independent content regrade.",
     "Keep Microsoft source scan, candidate omission, layout geometry, and required-fact recall as separate dimensions; its v4 preflight supports all 8 required business facts. Do not equate 4,087 unassigned units or deferred candidates with unread mandatory facts.",
     "Write neutral failing tests for any proven shared root cause; use existing source owners and local dependency contracts. Implement resumable bounded batches only if a frozen gold gap is shown to be recoverable by additional candidates, with source identity, closure, aggregate coverage, cache identity, crash resume, and no duplicate spend tested.",
     "At a major gate, independently review exact source/test/evidence SHAs, then replay the unchanged real-source gold across affected markets and document types. Keep old paid receipts immutable and preserve all review/partial states.",
     "Only after the offline coverage and quality gate passes, make a newly configured bounded summary attempt; verify summary quality, cache recovery, and actual RF use. Continue W12 four-review and the company holdout loop afterward."
   ],
-  "last_updated_utc": "2026-10-25T06:23:36Z",
+  "last_updated_utc": "2026-10-25T06:56:55Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1725,5 +1725,58 @@
     "published_commit": "861b7b3360753baf845f186a2cb7043b4de14690",
     "exact_head_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/40168702115",
     "next_action": "Continue remaining annual14 partial root-cause work without changing content grades."
+  },
+  "annual14_st_a01_business_scope_fix_20261025": {
+    "status": "ROOTFIX_VALIDATED_PENDING_PUBLICATION_AND_EXACT_HEAD_CI",
+    "sample": "Wuxi AppTec FY2025 annual report, annual14 target ST-A01",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "root_cause": "A single named business line with a long, wrapped lifecycle and modality scope did not meet the old early multi-member-list grammar; it retained only generic core_business and lost business_scope.",
+    "implementation": "Bounded Chinese and English named-line detail rules require an explicit revenue/business anchor, named line, operating verb and scope detail; no issuer/page exception. WorkBudget scan pass factor 4->6; limits unchanged.",
+    "current_head": "f7492b68fc12003a22c89e4c82a75bbe890ae383",
+    "source_code_sha256": "6a40e4771e7622c688a8361274b2edadd328b645db2520c41db6d0d397a31eb7",
+    "test_code_sha256": "5dc47f1ff137457e8f9087aae1274123af9d35cfe6915ab733ea5530f116cd5f",
+    "focused_tests": {
+      "passed": 141,
+      "failed": 0,
+      "seconds": 64.05,
+      "files": [
+        "tests/unit/document_understanding_selection/test_reading_material_value.py",
+        "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+        "tests/unit/document_understanding_selection/test_reading_budget_scale.py",
+        "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+        "tests/unit/document_understanding_selection/test_reading_budget_plan.py"
+      ],
+      "log": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/focused-regression.log",
+      "log_sha256": "57f568664752942b22737d6900e127cc52ebda5995d6de8ba86878fe812e0e76"
+    },
+    "ruff": "PASS",
+    "mypy": "PASS: Success: no issues found in 2 source files",
+    "diff_check": "PASS",
+    "independent_review": "PASS; read-only review, did not rerun tests",
+    "independent_review_path": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/independent-review.md",
+    "independent_review_sha256": "35ed9c210a12f6ed4528a493d545c783a5d83e8262d5b99f96e1d2a16b2e6044",
+    "replay": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/replay-receipt.json",
+      "receipt_sha256": "0f36c386bb404a15e59d384acd741d92cd382f15935373e1c860a865cb653e51",
+      "selection_sha256": "6fb97953c61ed7eb76c47e0c10d852ff1a5201926991862f2a43d08166c2fe3a",
+      "trace_sha256": "638710d062e1f46811865f6638172a5b325fae780054da1710fc40aa7ae8e39a",
+      "selected_spans": 112,
+      "selected_chars": 9113,
+      "candidate_count": 1439,
+      "physical_pages": 249,
+      "work_used": 11027878,
+      "work_limit": 16000000,
+      "work_exhausted": false,
+      "page_119_named_chemistry_scope_selected": true,
+      "existing_checkpoints": "ST-A01 and ST-A11 pass",
+      "coverage_complete": false,
+      "whole_content_pass": false,
+      "content_quality": "not_regraded"
+    },
+    "downloads": 0,
+    "raw_copies": 0,
+    "external_model_calls": 0,
+    "annual14_content_review": "NOT_REGRADED; retain 8 pass / 6 partial / 0 missing",
+    "publication": "PENDING"
   }
 }

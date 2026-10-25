@@ -858,3 +858,10 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - **TDD/验证：** 新增“第一期”异对象/数量反例、通用短语不产生关联词、A-B/B-C仅让A获得B，以及同项目正例互入context但不互入support。原有source/page/section/role/edge basis/预算耗尽边界继续覆盖。初始三文件相关测试67/67通过（4.04秒）；发布前同三测试文件最终复测94/94通过（3.60秒），Ruff、两源文件mypy和diff-check通过。
 - **真实年报回放：** 药明康德FY2025原件SHA `7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`，249页、112片段/8,915字符、工作量10,565,038/16,000,000且未耗尽。第12页paragraph 29日期span与paragraph 30容量span互相进入context，不进入对方support。源码树稳定，0模型调用、0下载、0原文副本。`coverage_complete=false`、`whole_content_pass=false`，因此只证明来源context闭包，不代表摘要质量验收。
 - **独审/边界：** [独立复审报告](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md)，完整回放收据、selection和trace见同目录。独审PASS；提交`861b7b3360753baf845f186a2cb7043b4de14690`已推送，精确HEAD CI `40168702115`成功，内容评分保持8通过/6部分/0缺失。
+
+## 2026-10-25 ST-A01 具名业务线范围识别根因
+
+- 冻结的药明康德FY2025 annual14样本中，第119页“收入主要来源于如下业务类型”后单独列出化学业务线，并跨多行描述从发现、临床前/临床到商业化生产的服务范围；具体分子形态列举位于较长服务生命周期描述之后。原分类器对 `business_scope` 的中文主路径依赖早期出现的多成员枚举，英语路径也要求 `operates through multiple segments` 形式。因此有价值的单一具名业务范围没有命中，虽然基础业务信息仍因通用规则作为 `core_business` 候选存在。
+- 共享根因是语法假设“范围一定由多个并列成员组成且紧跟锚点”，忽略“一个明确业务线 + 经营动作 + 长生命周期/范围展开”的披露方式。用中英跨行的中性测试复现后，两例在修复前均失败；同一入口下增加有界规则，必须同时具有明确收入来源锚点、具名业务线、经营动词及范围表达。再加入“高质量综合解决方案”等泛化套话负控，避免把普通企业宣传标成详细业务范围。
+- 新规则增加扫描工作，故沿用统一WorkBudget显式提高固定扫描pass计费因子（4→6），而没有放宽既有16M工作量上限或112-span选择上限。真实回放显示工作量11,027,878/16,000,000且未耗尽，支持该成本模型在本例可执行。
+- 零费用回放证明第119页 Chemistry 范围片段在原112-span上限下得到 `business_scope` 并重新入选；这不是摘要内容验收。维持 `coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`，annual14仍为8 pass/6 partial/0 missing。不要从一次真实正例推断其他表述、市场或文种都覆盖；下一大节点需用不重叠的真实文种/市场样本复核泛化，并集中重评内容事实。

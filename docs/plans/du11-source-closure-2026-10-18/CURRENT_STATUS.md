@@ -1,12 +1,12 @@
 # 当前项目状态与接手入口
 
-## 当前行动：annual14 ST-A09 局部上下文根修（2026-10-25）
+## 当前行动：annual14 ST-A01 具名业务线范围选材修复（2026-10-25）
 
-药明康德2025年报第12页的扩产日期与多肽反应釜容量已分别入选，但此前没有进入同一局部模型视图。根因不是缺少span：局部上下文匹配把“第一期”切出“第一”造成不同项目误连；即使每条邻接边正确，纳入传递连通闭包也会把A-B-C扩散；同时旧扫描计费系数低估了新匹配成本。现已在共享source owner内修复：先删除完整阶段词和通用短语再生成bigram；项目里程碑/数量只允许一跳直接上下文，不进入qualification传递闭包；按6倍文本长度计费并在耗尽时defer。
+真实药明康德2025年报第119页把收入来源业务类型、化学业务线及其服务范围分行呈现。旧分类器在第一个逗号前100字内寻找多项清单，因服务流程先出现、药物类别清单靠后，漏掉了明确的单业务范围；候选只落入通用`core_business`。现已在共享来源层增加中英文有界识别：必须有收入/业务类型锚点、具名业务线、经营动词及范围描述，不使用发行人或页码规则；扫描计数从4调整到6，预算上限未变。
 
-最终独立复审PASS，绑定源码/测试SHA：`narrative_operating_relations.py`=`ee77cd8c…14d16b4`，`narrative_reading.py`=`65ef7a2b…3953ce`，回归测试=`06823e76…12641c`。初始定向测试67项通过（4.04秒）；发布前对同三测试文件复测94项通过（3.60秒）。Ruff、mypy和diff-check通过。药明康德真实原件SHA=`7f1431d6…2d6a2`的零费用离线回放选中112片段/8,915字符，工作量10,565,038/16,000,000，未耗尽；日期与容量各自作为对方的context，但没有并入对方support。0模型调用、0下载、0原文复制，原件稳定。回放边界仍是`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`；内容评分继续为8通过/6部分/0缺失，不能把来源闭包修复视为内容验收。
+相关141项单测最新复跑通过（64.05秒；前轮77.55秒），Ruff和mypy通过。药明康德原件SHA=`7f1431d6…2d6a2`的零费用真实回放在原112片段上限内选入第119页，112片段/9,113字符、工作量11,027,878/16,000,000未耗尽；既有ST-A01/ST-A11检查点通过。0模型调用、0下载、0原文复制，原件和374个生产Python文件稳定。独立复审PASS，绑定来源规则SHA=`6a40e477…a31eb7`、测试SHA=`5dc47f1f…116cd5f`，见[复审报告](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/independent-review.md)。
 
-本节点已提交并推送：`861b7b3360753baf845f186a2cb7043b4de14690`；精确HEAD GitHub CI `40168702115`成功（Fast checks 3分09秒）。本地pre-push的154项契约smoke、发布前94项相关单测、Ruff、mypy和独审均通过。下一步继续追踪annual14其余partial根因；QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY仍是已ROOT接收、作者仓独立保留的外包交付，不代替主线内容验收。
+回放仍为`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`。第119页来源片段重新入选只证明选材层修复，不能改写年度14项内容复核的8通过/6部分/0缺失状态；ST-A01内容和其余partial仍待集中重评。当前改动待提交/推送及精确HEAD CI；随后继续其他partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，作者仓保持独立。
 
 ## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 
@@ -15,7 +15,7 @@
 
 **已发布主线状态（2026-10-25；本页及 CURRENT_STATUS.json 是唯一当前入口）：** selector 0.9.0 的 v4 任务摘要默认、v4/v5付费响应恢复与分协议容量预检已通过独立终审并推送。旧恢复夹具已按 v4 契约修复；提交`3dc04a8e`的精确CI `40148571611`全绿，本地pre-push的155项也通过（32.45秒）。覆盖维度属性与四组合测试已随`fc7cfa6d`推送，精确CI `40162702684`全绿（Fast checks含完整`tests/unit`，4分31秒）。ST-A03并列“收入+成本”地域定义根因修复由首轮独审定位P2、RED复现快捷路径绕过后，经共享收入主体规则修复并通过最终独立复核；定向模块39/39，Ruff和diff-check通过。提交`81c9d97c`已推送，精确CI `40163967926`全绿（Fast checks含完整`tests/unit`，4分29秒）；本地pre-push也通过（29个受影响目标，154项契约smoke）。冻结的药明康德annual14零费用/零下载回放证明ST-A03地域定义由未准入转为准入且已入选；38条共同来源准入记录中只有该目标发生变化。最终代码后的离线回放仍观察到14个gold标签、72个目标单元，原件SHA经验证、源码树稳定且scratch已清理。完整绑定、输入/输出SHA与收据见[annual14来源回放](review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json)及[独立复核](review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json)。内容审查未重做，旧8通过/6部分/0缺失状态不变。没有新增真实模型调用或下载。测试通过不代表生产业务摘要质量通过；根因和证据见`findings.md`。
 
-**业务验收仍未通过：** Microsoft FY2025 10-K 的正式运行只选112/484候选、314项deferred、layout不完整；43条claim来自旧v5排名路径，均为`uncertain/needs_review`，RF标记`not_consumed/needs_review`。另一个零费用v4预检的112个入选片段支持冻结的8/8必需业务事实，因此“候选有省略”本身还不能证明必需事实漏读。更近期的药明康德年度14项目标复核为8通过、6部分、0缺失；六项部分集中在Chemistry父级范围、财务表头/持续与终止口径、客户母公司所在地定义、多肽日期与容量的局部关联、时段金额等。不得重跑既有付费请求，也不得仅凭候选数量扩批；先追踪这些真实缺口对应的来源片段和依赖闭包。
+**业务验收仍未通过：** Microsoft FY2025 10-K 的正式运行只选112/484候选、314项deferred、layout不完整；43条claim来自旧v5排名路径，均为`uncertain/needs_review`，RF标记`not_consumed/needs_review`。另一个零费用v4预检的112个入选片段支持冻结的8/8必需业务事实，因此“候选有省略”本身还不能证明必需事实漏读。药明康德annual14最新内容复核仍为8通过、6部分、0缺失；ST-A01第119页业务范围现已在来源回放中入选，但尚未重评摘要内容；其他部分项还涉及财务表头/持续与终止口径、客户母公司所在地定义、多肽日期与容量的局部关联、时段金额等。不得重跑既有付费请求，也不得仅凭候选数量扩批。
 
 **formal-v4 原始结构观察（零费用精确复现，协议切换前）：** 同一微软原件 SHA 重放得 5,215 个HTML单元、1,120个进入语义结构、4,087个未映射到语义分区（不能直接等同“未读”）。年报路由的112-span上限选入112/484，产生308个`budget_full`诊断；358个合格业务包中314个延期（308个受选择预算影响、6个引用未闭合）。另有24个超长section、3个continuation limit、2个表格正文未读。HTML没有bbox，所以布局几何不可用，但DOM文字仍可扫描。零费用v4预检的112个入选片段支持冻结的8/8必需业务事实；这不能代签摘要质量或RF消费，也说明不能从省略计数单独推断需要把所有候选分批送入模型。`coverage_complete`描述源扫描；候选是否全选、layout可用性和必需事实召回分别判断。旧付费v5的43条claim仍保持`uncertain/needs_review`，不得改写为通过。
 
@@ -27,7 +27,7 @@
 
 **失败根因和修复：** 生产配置曾对 `MiniMax-M3.1-Flash` 使用 `thinking=disabled`；MiniMax 官方文档说明该模型不支持禁用 thinking。配置已改为 `reasoning_effort=low`，并增加精确 provider/model 的请求前防错。111 项聚焦测试、Ruff、diff-check通过，独立审查PASS。新配置绑定的零请求v6预检也通过：同一原件和gold、112 spans/40,491字符、8/8必需业务事实有支持、0 POST、母账前后相同（1,765,712 tokens / $0.717734）、临时数据清理成功。详细见[根因收据](review/market-family-upgrade-20261024/us-10k-formal-v3-root-cause-20261025.json)、[独立复核](review/market-family-upgrade-20261024/us-10k-formal-v3-config-independent-review-20261025.md)和[formal-v4零请求预检](review/market-family-upgrade-20261024/us-10k-formal-v4-preflight-20261025.json)。
 
-**下一步：** 继续追查药明康德annual14其余五个partial目标的原文、source projection、task closure和下游消费缺口；ST-A03已通过来源准入回放，但内容质量需在大节点独审时再评，不提前改8/6状态。Microsoft 10-K扫描完整、候选省略、表格/父级依赖和摘要质量仍分别判断。只有证据证明额外批次能补上必需业务事实，并且绑定身份、闭包、预算和恢复测试，才设计分批；不把4,087个未映射单元直接算作未读，不提高cap代替诊断，也不重放或覆盖formal-v4收据。覆盖与质量边界经一个大节点独审通过后，再考虑新的配置内有界真实摘要和RF消费验收。
+**下一步：** 发布并核精确HEAD CI后，继续追查annual14其余partial的原文、source projection、task closure和下游消费缺口；ST-A01及ST-A03虽有来源准入回放，仍需内容质量重评，不提前改8/6状态。Microsoft 10-K扫描完整、候选省略、表格/父级依赖和摘要质量仍分别判断。只有证据证明额外批次能补上必需业务事实，并且绑定身份、闭包、预算和恢复测试，才设计分批；不把4,087个未映射单元直接算作未读，不提高cap代替诊断，也不重放或覆盖formal-v4收据。覆盖与质量边界经一个大节点独审通过后，再考虑新的配置内有界真实摘要和RF消费验收。
 
 **主线状态：** formal-v4 生命周期、cache恢复与FF原文复用工程验收通过；真实内容摘要质量和RF消费仍未通过。Microsoft 10-K预检8/8必需业务事实有支持；药明康德最新年度14项来源复核为8通过、6部分、0缺失。下一步离线拆解六项具体缺口，并验证源扫描、候选选择、layout、任务依赖和模型消费的边界；分批只在证明能补足必需事实后实施。跨市场文种真实样本、W12四审及公司循环仍开放。IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY三卡均按交接/独审/测试/版本绑定完成ROOT接收；作者仓仍各自独立，未替作者合并或推送。
 

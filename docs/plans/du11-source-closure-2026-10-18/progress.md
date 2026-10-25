@@ -1047,3 +1047,11 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - **收据：** [独立复审](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md)、[回放收据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/replay-receipt.json)、selection及trace在同目录。QA-RAG-SAFE-REBUILD仍按既有ROOT验收记录标记外部卡已接收，未跨仓合并。
 - **发布完成：** 提交`861b7b3360753baf845f186a2cb7043b4de14690`推送至`master`；本地pre-push 154项契约smoke通过，GitHub精确HEAD CI `40168702115`成功（3分09秒）。
 - **下一步：** 继续查annual14其他partial的真实共同根因，不重跑无关的长时全量检查；在内容重评之前维持8通过/6部分/0缺失。
+
+## 2026-10-25 ST-A01 具名业务线范围识别
+
+- **根因：** 药明康德FY2025年报第119页在收入来源锚点后分行写出 Chemistry 具名业务线和服务生命周期；具体药物形态范围出现在较长流程描述之后。旧规则只在早期分隔符前寻找多成员清单，导致该单一业务线只得到通用 `core_business`，没有 `business_scope`。这不是需要提高112片段上限的问题：同一候选已在上限内，只是范围事实没有专属主题而竞争不过其他业务材料。
+- **TDD及实现：** 先把真实换行、业务线名、经营动词、后置范围表达缩成中性中英测试；旧规则两例均RED。新增共享来源层的有界中文/英文具名业务线范围识别及泛化套话反例，保留现有收入/业务锚点，不加入公司名、页码或issuer例外。新增扫描成本在同一预算计量里显式计入，扫描系数由4调至6；预算上限不变。最终当前源码/测试SHA分别为 `6a40e4771e7622c688a8361274b2edadd328b645db2520c41db6d0d397a31eb7`、`5dc47f1ff137457e8f9087aae1274123af9d35cfe6915ab733ea5530f116cd5f`。
+- **验证：** 五个相关测试文件141项通过；最新复跑64.05秒（前轮77.55秒），Ruff、mypy和diff-check通过，完整pytest输出保存在 `business-scope-line-replay-20261025/focused-regression.log`。独立只读复审PASS，绑定上述源码/测试SHA；复审未重跑测试，测试由ROOT独立执行。报告说明英文目前覆盖明确的“收入主要来自以下业务线”表达，其他措辞仍留待不同市场/文种样本检验。
+- **真实原件回放：** 使用未改变的药明康德原件SHA `7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`，原112-span限制内选入第119页业务范围；112片段、9,113字符、11,027,878/16,000,000工作量，预算未耗尽，ST-A01/ST-A11既有检查点通过。0下载、0原文复制、0模型调用，coverage/whole-content仍不完整，内容质量未重评。回放收据、selection、trace和复审报告在 `review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/`。
+- **边界及发布：** 这证明来源识别与选材修复，不改变年度14项8通过/6部分/0缺失，也不宣称正式摘要已修好。源码、测试和证据已准备发布；下一步提交、推送并检查绑定精确HEAD的CI，再继续其他partial根因。三张外部卡QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY已分别ROOT接收且作者仓保持独立，不与此代码节点合并。
