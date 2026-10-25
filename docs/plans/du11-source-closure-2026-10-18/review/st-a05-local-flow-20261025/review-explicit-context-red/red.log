@@ -1,0 +1,23 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-u0yei09p\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 9 items / 8 deselected / 1 selected
+
+tests\unit\document_understanding_selection\test_reading_navigation_context.py F [100%]
+
+================================== FAILURES ===================================
+__ test_independently_required_owner_context_cannot_be_removed_as_navigation __
+tests\unit\document_understanding_selection\test_reading_navigation_context.py:94: in test_independently_required_owner_context_cannot_be_removed_as_navigation
+    assert results and all(explicit in p["required_context_unit_ids"] for p in results)
+E   AssertionError: assert ([{'package_id': 'm6:urn:company-wiki:narrative-unit:sha256:1b8cae6d57708540c56b4de21718799228dd1addd24778fb181b4d669d5c6878', 'kind': 'paragraph_event', 'section_ids': ['s5'], 'section_role': 'business', ...}] and False)
+E    +  where False = all(<generator object test_independently_required_owner_context_cannot_be_removed_as_navigation.<locals>.<genexpr> at 0x0000023DF3114820>)
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_navigation_context.py::test_independently_required_owner_context_cannot_be_removed_as_navigation
+======================= 1 failed, 8 deselected in 6.58s =======================

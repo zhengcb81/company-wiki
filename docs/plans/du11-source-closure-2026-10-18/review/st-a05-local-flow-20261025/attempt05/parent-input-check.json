@@ -1,0 +1,51 @@
+{
+  "status": "PASS_SOURCE_CONTEXT_ENGINEERING_ONLY",
+  "attempt": "attempt05",
+  "previous_pass_targets_retained": [
+    "ST-A03",
+    "ST-A04",
+    "ST-A06",
+    "ST-A07",
+    "ST-A08",
+    "ST-A09",
+    "ST-A10",
+    "ST-A11",
+    "ST-A12",
+    "ST-A14"
+  ],
+  "chemistry_descendants": [
+    {
+      "fact_locator": "loc:v1/page:14/paragraph:3/chars:99-301",
+      "task_keys": [
+        "t28"
+      ],
+      "chemistry_and_period_in_own_context": true,
+      "sibling_leak": false
+    },
+    {
+      "fact_locator": "loc:v1/page:14/paragraph:12/chars:423-512",
+      "task_keys": [
+        "t29"
+      ],
+      "chemistry_and_period_in_own_context": true,
+      "sibling_leak": false
+    },
+    {
+      "fact_locator": "loc:v1/page:14/paragraph:14",
+      "task_keys": [
+        "t13"
+      ],
+      "chemistry_and_period_in_own_context": true,
+      "sibling_leak": false
+    }
+  ],
+  "a13_seven_inputs_retained": true,
+  "global_partial_retained": true,
+  "formal_summary": "NOT_REVIEWED",
+  "RF_adoption": "OPEN",
+  "artifact_sha256": {
+    "selection.json": "6dc68a98841f8a39af19eb58e902bd037c50cc5d5551031f1221d8638ffa0673",
+    "model-view.json": "297826a5f9f125438a913972907fe50c5ab2f0731344ff7f224755d1b098644d",
+    "replay-receipt.json": "1ed2f191001e5b50f6196b3d3070b4644e8a14d2b2809b7f2d3cefde86b3dff3"
+  }
+}

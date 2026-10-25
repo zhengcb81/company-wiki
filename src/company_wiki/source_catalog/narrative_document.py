@@ -97,6 +97,9 @@ class DocumentStructure:
     mime_type: str | None = None
     layout_coverage: Mapping[str, Any] | None = None
     layout_diagnostics: tuple[Mapping[str, Any], ...] = ()
+    # Transient source observation: base text read + emission, independent of
+    # optional table/geometry planning. Never stored as a second source record.
+    native_text_coverage: Mapping[str, Any] | None = None
 
     @property
     def coverage_complete(self) -> bool:

@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "NATIVE_OUTLINE_ENGINEERING_PUBLISHED_CI_SUCCESS; A01_A05_LOCAL_FLOW_IMPLEMENTATION_ACTIVE; REAL_SUMMARY_RF_OPEN",
+  "overall_status": "LOCAL_NATIVE_FLOW_INDEPENDENT_PASS_PUBLICATION_NEXT; FORMAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
@@ -335,7 +335,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "TDD native_local_flow_followup.md: positively observe per-page native text at the existing parser/emission owner, separate geometry-request deferral, pass local proof to NativeSourceContext, then prove actual source lanes. Preserve global partial, physical negatives and one budget; real source/citation/model parent acceptance before new summary/cache/RF.",
+  "next_step_now": "Normal commit/push of independently accepted local-native-flow source/tests/PWF and observe exact CI. Then bounded source/input regrade and other-market/document checks, configured real summary, cache restart with no duplicate spend and actual RF use. Do not touch W16/W17/W18 author paths.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -807,7 +807,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "TDD native_local_flow_followup.md: positively observe per-page native text at the existing parser/emission owner, separate geometry-request deferral, pass local proof to NativeSourceContext, then prove actual source lanes. Preserve global partial, physical negatives and one budget; real source/citation/model parent acceptance before new summary/cache/RF.",
+  "next_step_after_publication": "Bounded14-target source/input regrade and other-market/document real checks; then configured formal summary/cache recovery/RF actual adoption; keep historical paid receipts immutable and content/RF status open until tested.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -842,10 +842,10 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "TDD native_local_flow_followup.md: positively observe per-page native text at the existing parser/emission owner, separate geometry-request deferral, pass local proof to NativeSourceContext, then prove actual source lanes. Preserve global partial, physical negatives and one budget; real source/citation/model parent acceptance before new summary/cache/RF.",
-    "Independently review the exact source, focused tests and unchanged real-source replay; retain current10/4/0 source-input grade until regraded.",
-    "After source acceptance, run configured bounded formal summary, cached-response restart and actual RF use. W16 owns RF basis; W17 Audit coverage; W18 new holdout tools/tests; do not write their active author paths.",
-    "Continue W12 four reviews and company holdout loop; engineering success never signs content quality."
+    "Normal commit/push of independently accepted local-native-flow source/tests/PWF and observe exact CI. Then bounded source/input regrade and other-market/document checks, configured real summary, cache restart with no duplicate spend and actual RF use. Do not touch W16/W17/W18 author paths.",
+    "Bounded14-target source/input regrade and other-market/document real checks; then configured formal summary/cache recovery/RF actual adoption; keep historical paid receipts immutable and content/RF status open until tested.",
+    "Receive independent W16 RF basis/W17 Audit coverage/W18 holdout deliveries and integrate after review; do not write author worktrees while active.",
+    "Continue W12 four-review and company holdout loop; independent engineering success is not complete company quality acceptance."
   ],
   "last_updated_utc": "2026-10-25T10:46:55Z",
   "latest_publish_validation": {
@@ -1945,5 +1945,32 @@
     "engineering_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
     "publication": "review/st-a05-parent-investigation-20261025/publication.json"
   },
-  "last_source_product_commit": "8a258b93404f351ae92cd3449198b42141ef4169"
+  "last_source_product_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
+  "a01_a05_local_flow_20261025": {
+    "status": "INDEPENDENT_PASS_PENDING_NORMAL_PUBLICATION",
+    "evidence": "review/st-a05-local-flow-20261025/README.md",
+    "verification": "review/st-a05-local-flow-20261025/verification.json",
+    "source_pages": 249,
+    "selected_spans": 112,
+    "selected_characters": 9060,
+    "tasks": 62,
+    "work_used": 13450656,
+    "work_limit": 16000000,
+    "old_10_pass_retained": true,
+    "a13_seven_inputs_retained": true,
+    "chemistry_parent_in_own_tasks": [
+      "p14/3 D&M",
+      "p14/12 TIDES revenue/orders",
+      "p14/14 TIDES customers/molecules"
+    ],
+    "physical_page_observations": 1,
+    "actual_input_check": "review/st-a05-local-flow-20261025/attempt05/parent-input-check.json",
+    "tests": "339PASS/6 existing skip; supplemental58PASS overlapping",
+    "formal_response": "NOT_REVIEWED",
+    "RF": "OPEN",
+    "new_paid_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "independent": "review/st-a05-local-flow-20261025/independent/final-review.json"
+  }
 }

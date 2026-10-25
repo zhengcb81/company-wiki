@@ -1,0 +1,32 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-dl49i5f3\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 106 items
+
+tests\unit\document_understanding_layout_hints\test_a_contract_and_shapes.py . [  0%]
+..........                                                               [ 10%]
+tests\unit\document_understanding_layout_hints\test_b_integrity_and_budget.py . [ 11%]
+......                                                                   [ 16%]
+tests\unit\document_understanding_layout_hints\test_b_recovery_and_readonly.py . [ 17%]
+.s                                                                       [ 19%]
+tests\unit\document_understanding_layout_hints\test_b_tables_and_relations.py . [ 20%]
+...........                                                              [ 31%]
+tests\unit\document_understanding_layout_hints\test_c_real_samples.py .. [ 33%]
+sssss                                                                    [ 37%]
+tests\unit\document_understanding_layout_hints\test_production_fine_geometry.py . [ 38%]
+.........................                                                [ 62%]
+tests\unit\document_understanding_layout_hints\test_reception_common_roots.py . [ 63%]
+.......                                                                  [ 69%]
+tests\unit\document_understanding_layout_hints\test_single_body_lane.py . [ 70%]
+........                                                                 [ 78%]
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py . [ 79%]
+......................                                                   [100%]
+
+======================= 100 passed, 6 skipped in 16.49s =======================

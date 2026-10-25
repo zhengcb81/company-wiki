@@ -27,7 +27,7 @@ from company_wiki.document_normalization.table_shapes import has_tabular_value_t
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/6"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/7"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "column", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
@@ -377,6 +377,7 @@ def build_observation(
     native_scan: str = "complete",
     opaque_pages: Sequence[int] = (),
     deferred_pages: Sequence[int] = (),
+    native_text_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Project existing narrative units onto the frozen ``du-input/1`` wire.
 
@@ -562,6 +563,7 @@ def build_observation(
             "native_scan": native_scan,
             "opaque_pages": [int(page) for page in opaque_pages],
             "deferred_pages": [int(page) for page in deferred_pages],
+            **({"native_text": native_text_coverage} if native_text_coverage is not None else {}),
         },
         "units": emitted,
     }

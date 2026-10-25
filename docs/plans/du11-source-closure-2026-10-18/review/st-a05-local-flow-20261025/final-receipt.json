@@ -1,0 +1,33 @@
+{
+  "phase": "final",
+  "targets": [
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_navigation_context.py",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py",
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_layout_hints",
+    "tests/unit/test_narrative_evidence.py",
+    "tests/unit/test_narrative_pdf_intent.py",
+    "tests/unit/du11_production/test_cache_identity.py"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-vnshwl7d",
+  "exit_code": 4,
+  "elapsed_seconds": 1.56,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-vnshwl7d\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

@@ -1,0 +1,32 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-cjstkmmf\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 19 items / 17 deselected / 2 selected
+
+tests\unit\document_understanding_layout_hints\test_single_body_lane.py F [ 50%]
+                                                                         [ 50%]
+tests\unit\document_understanding_selection\test_reading_navigation_context.py F [100%]
+
+================================== FAILURES ===================================
+_______ test_separated_numeric_table_row_is_not_a_body_alignment_anchor _______
+tests\unit\document_understanding_layout_hints\test_single_body_lane.py:50: in test_separated_numeric_table_row_is_not_a_body_alignment_anchor
+    assert len(_single_groups(layout)) == 2
+E   AssertionError: assert 1 == 2
+E    +  where 1 = len([{'group_id': 'g1', 'kind': 'column_lane', 'parent_table_id': None, 'member_unit_ids': ['urn:company-wiki:narrative-un...d3f', 'urn:company-wiki:narrative-unit:sha256:0ed493d9ae69b09269e0eec6190981e61013597a174820e59c56305be31a30b9'], ...}])
+E    +    where [{'group_id': 'g1', 'kind': 'column_lane', 'parent_table_id': None, 'member_unit_ids': ['urn:company-wiki:narrative-un...d3f', 'urn:company-wiki:narrative-unit:sha256:0ed493d9ae69b09269e0eec6190981e61013597a174820e59c56305be31a30b9'], ...}] = _single_groups({'schema_version': 'du2-layout-hints/1', 'feature_version': '1.3.0', 'source_ref': {'source_id': 'urn:company-wiki:sou...448eaa0adca2f23692dd6d12b1ef032966a', 'heading_level': None, 'text_column': None, 'confidence': 'low', ...}, ...], ...})
+___ test_weak_native_caption_does_not_replace_the_outer_navigation_context ____
+tests\unit\document_understanding_selection\test_reading_navigation_context.py:76: in test_weak_native_caption_does_not_replace_the_outer_navigation_context
+    assert tasks and all(any("主要经营情况" in item for item in model_text[t.key]) for t in tasks)
+E   AssertionError: assert ([SourceSummaryTask(key='t1', source_id='urn:company-wiki:source:sha256:7b10df9ecd05c71bc0bf45c420805fcf2ac9f7e8d22957f...revenue_measure',), selection_reasons=('reading_plan', 'business_revenue_measure'), support_roles=('company_filing',))] and False)
+E    +  where False = all(<generator object test_weak_native_caption_does_not_replace_the_outer_navigation_context.<locals>.<genexpr> at 0x000001BAEB237F10>)
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_layout_hints/test_single_body_lane.py::test_separated_numeric_table_row_is_not_a_body_alignment_anchor
+FAILED tests/unit/document_understanding_selection/test_reading_navigation_context.py::test_weak_native_caption_does_not_replace_the_outer_navigation_context
+====================== 2 failed, 17 deselected in 8.66s =======================

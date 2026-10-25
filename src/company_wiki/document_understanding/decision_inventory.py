@@ -77,6 +77,10 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.source_catalog.narrative_business_disclosures",
         "company_wiki.source_catalog.narrative_operating_relations",
         "company_wiki.source_catalog.narrative_reading",
+        "company_wiki.source_catalog.narrative_document",
+        "company_wiki.document_understanding.profiles.registry",
+        "company_wiki.document_understanding.layout_hints",
+        "company_wiki.document_understanding.layout_hints.columns",
         "company_wiki.source_catalog.narrative_native_dependencies",
         "company_wiki.source_catalog.narrative_finalize",
         # Native outline declarations change each statement's own source scope.
@@ -108,7 +112,8 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             raise RuntimeError(f"module {name} has no file")
         return Path(path)
 
-    versions = {"inventory": "1.9.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    versions = {"inventory": "1.10.0",
+            "context_policy": _digest(registry._CATALOG.get("context_policy", {})), "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "document_work_limit": str(load_budget_policy().document_work_limit),
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(

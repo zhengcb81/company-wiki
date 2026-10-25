@@ -1,0 +1,130 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-x0earanw\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 60 items / 26 deselected / 34 selected
+
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py F [  2%]
+FFFFF........FFFFFFFFF                                                   [ 67%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [ 70%]
+....FFF...                                                               [100%]
+
+================================== FAILURES ===================================
+_ test_local_positive_text_is_independent_of_geometry_deferral[deferred0-opaque0] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:42: in test_local_positive_text_is_independent_of_geometry_deferral
+    assert proof is not None
+E   assert None is not None
+_ test_local_positive_text_is_independent_of_geometry_deferral[deferred1-opaque1] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:42: in test_local_positive_text_is_independent_of_geometry_deferral
+    assert proof is not None
+E   assert None is not None
+_ test_local_positive_text_is_independent_of_geometry_deferral[deferred2-opaque2] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:42: in test_local_positive_text_is_independent_of_geometry_deferral
+    assert proof is not None
+E   assert None is not None
+_ test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge[statuses0] __
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:53: in test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge
+    assert proof is None
+E   AssertionError: assert {'basis': 'observed_adjacent_page_flow', 'left': 'source-a:0', 'right': 'source-a:1', 'left_page': 1, ...} is None
+_ test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge[statuses1] __
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:53: in test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge
+    assert proof is None
+E   AssertionError: assert {'basis': 'observed_adjacent_page_flow', 'left': 'source-a:0', 'right': 'source-a:1', 'left_page': 1, ...} is None
+_ test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge[statuses2] __
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:53: in test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge
+    assert proof is None
+E   AssertionError: assert {'basis': 'observed_adjacent_page_flow', 'left': 'source-a:0', 'right': 'source-a:1', 'left_page': 1, ...} is None
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[None-legacy] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+---------------------------- Captured stdout call -----------------------------
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[None-explicit] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[None-planned] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[read-legacy] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[read-explicit] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[read-planned] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[emission-legacy] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[emission-explicit] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_parser_records_text_and_emission_in_existing_single_page_walk[emission-planned] _
+tests\unit\document_understanding_selection\test_native_text_page_coverage.py:110: in test_parser_records_text_and_emission_in_existing_single_page_walk
+    coverage = parsed.native_text_coverage
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'DocumentStructure' object has no attribute 'native_text_coverage'
+_ test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_document] _
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py:377: in test_w08_changed_source_implementation_invalidates_the_real_complete_decision
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+E   AssertionError: assert 'same' == 'changed'
+E     
+E     - changed
+E     + same
+_ test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.layout_hints] _
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py:377: in test_w08_changed_source_implementation_invalidates_the_real_complete_decision
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+E   AssertionError: assert 'same' == 'changed'
+E     
+E     - changed
+E     + same
+_ test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.layout_hints.columns] _
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py:377: in test_w08_changed_source_implementation_invalidates_the_real_complete_decision
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+E   AssertionError: assert 'same' == 'changed'
+E     
+E     - changed
+E     + same
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_local_positive_text_is_independent_of_geometry_deferral[deferred0-opaque0]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_local_positive_text_is_independent_of_geometry_deferral[deferred1-opaque1]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_local_positive_text_is_independent_of_geometry_deferral[deferred2-opaque2]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge[statuses0]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge[statuses1]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_unread_or_unemitted_endpoint_never_becomes_a_positive_edge[statuses2]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[None-legacy]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[None-explicit]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[None-planned]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[read-legacy]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[read-explicit]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[read-planned]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[emission-legacy]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[emission-explicit]
+FAILED tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[emission-planned]
+FAILED tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_document]
+FAILED tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.layout_hints]
+FAILED tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.layout_hints.columns]
+================ 18 failed, 16 passed, 26 deselected in 10.07s ================

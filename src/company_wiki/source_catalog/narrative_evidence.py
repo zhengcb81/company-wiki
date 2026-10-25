@@ -19,6 +19,7 @@ from typing import Any, Literal, cast
 import unicodedata
 
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
+from company_wiki.resource_budget import WorkBudgetExceeded
 
 from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
 from .n6_candidate_operating_facts import (
@@ -955,6 +956,7 @@ class _PdfParseState:
     prepared_text_units: dict[int, tuple[NarrativeUnit, ...]] = field(default_factory=dict)
     geometry_session: Any | None = None
     prose_work_budget: Any | None = None
+    native_text_status: dict[int, str] = field(default_factory=dict)
 
 
 def _pdf_text_blocks(
@@ -1180,6 +1182,7 @@ def _pdf_geometry_metadata(
 
 def _record_pdf_native_view(state: _PdfParseState, page_number: int, blocks: Sequence) -> None:
     """One existing native-range owner for both legacy and streamed page scans."""
+    state.native_text_status[page_number] = "read" if blocks else "empty"
     if state.native_view_limits is None or not blocks:
         return
     from .narrative_native_ranges import build_native_page_view
@@ -1198,6 +1201,8 @@ def _record_pdf_native_view(state: _PdfParseState, page_number: int, blocks: Seq
 
 def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
     for page_number, page in enumerate(document, start=1):
+        if state.prose_work_budget is not None:
+            state.prose_work_budget.charge()
         try:
             geometry: dict[str, Any] = {}
             blocks = _pdf_text_blocks(
@@ -1210,8 +1215,11 @@ def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
             if not blocks:
                 state.empty_pages.add(page_number)
             state.pages_read += 1
+        except WorkBudgetExceeded:
+            raise
         except Exception as exc:
             state.errors.append(f"page_text:{page_number}:{type(exc).__name__}")
+            state.native_text_status[page_number] = "read_failed"
             state.page_blocks.append((page_number, []))
             state.empty_pages.add(page_number)
 
@@ -1250,6 +1258,8 @@ def _scan_and_emit_pdf_pages(
 
     try:
         for number, page in enumerate(document, start=1):
+            if state.prose_work_budget is not None:
+                state.prose_work_budget.charge()
             try:
                 geometry: dict[str, Any] = {}
                 blocks = _pdf_text_blocks(page, geometry_out=geometry,
@@ -1260,8 +1270,11 @@ def _scan_and_emit_pdf_pages(
                 if not blocks:
                     state.empty_pages.add(number)
                 state.pages_read += 1
+            except WorkBudgetExceeded:
+                raise
             except Exception as exc:
                 state.errors.append(f"page_text:{number}:{type(exc).__name__}")
+                state.native_text_status[number] = "read_failed"
                 state.page_blocks.append((number, []))
                 state.empty_pages.add(number)
                 blocks = []
@@ -1527,7 +1540,12 @@ def _emit_pdf_page(
     blocks: Sequence[tuple[int, tuple[float, ...], str]],
 ) -> None:
     page_unit_count = len(state.units)
+    if state.prose_work_budget is not None:
+        state.prose_work_budget.charge()
     qa_page = _emit_pdf_text_units(state, page_number, blocks)
+    if state.native_text_status.get(page_number) == "read":
+        state.native_text_status[page_number] = (
+            "observed" if len(state.units) > page_unit_count else "emission_failed")
     state.units[page_unit_count:] = _project_native_prose(
         state, page_number, state.units[page_unit_count:])
     if page_number in state.table_scan_pages:
@@ -1635,6 +1653,17 @@ def _parse_pdf_document(
         layout_diagnostics = (*layout_diagnostics, *({
             "code": "NATIVE_RANGE_VIEW_BUDGET", "page": page, "unit_ids": []}
             for page in state.native_view_deferred[:128]))
+    native_text_coverage = None
+    from company_wiki.resource_budget import WorkBudgetExceeded
+    try:
+        if state.prose_work_budget is not None:
+            state.prose_work_budget.charge(1 + state.page_count)
+        native_text_coverage = {"schema_version": "native-text-coverage/1",
+            "source_id": source_id, "page_count": state.page_count,
+            "page_statuses": tuple(state.native_text_status.get(page, "unknown")
+                                   for page in range(1, state.page_count + 1))}
+    except WorkBudgetExceeded:
+        pass  # retain honest partial source; no positive status on an exhausted account
     return NarrativeParseResult(
         source_id=source_id,
         source_sha256=source_sha256,
@@ -1651,6 +1680,7 @@ def _parse_pdf_document(
         mime_type="application/pdf",
         layout_coverage=layout_coverage,
         layout_diagnostics=layout_diagnostics,
+        native_text_coverage=native_text_coverage,
     )
 
 

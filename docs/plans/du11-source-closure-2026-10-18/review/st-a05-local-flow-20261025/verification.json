@@ -1,0 +1,47 @@
+{
+  "schema_version": "local-native-flow-verification/1",
+  "status": "PENDING_FINAL_INDEPENDENT_REVIEW",
+  "code_test_sha256": {
+    "src/company_wiki/document_understanding/decision_inventory.py": "e2c568258d6857f6e0702a8ba725bd7cf635bbb85cdd944ae8961dcfb2fdbeef",
+    "src/company_wiki/document_understanding/layout_bridge.py": "ea6eb10c2ed687319f01f918b96b14bf4ff87dcee85cca5352e3251f413f38a5",
+    "src/company_wiki/document_understanding/layout_hints/__init__.py": "997b295d388604f23503958c1e4e9de2fb69a3a1be1910086a4da8fd9ed0ec9d",
+    "src/company_wiki/document_understanding/layout_hints/columns.py": "e19dfedb9e86a4edbb189558a3cf75074571f6e378c1ec44cf77c091e1665a5c",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aaf39f3e4a6413014e2f56a07f99bbf76cec591133bbdfab28acabe445843e1d",
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056",
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "6da5b087eaae8126e75e0075af5e248309c747abc99457c5c6292e48f3f7d909",
+    "src/company_wiki/document_understanding/profiles/registry.py": "1b0649063b880d5fc84506c31d973c9c2b5c58def99010370798b47875683b4b",
+    "src/company_wiki/source_catalog/narrative_document.py": "889df37ad7325325a05d79e5a15cf45a5b395d5a273f856c0a2ee2662527d7c9",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050",
+    "src/company_wiki/source_catalog/narrative_reading.py": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "8bcb61367e11d30647cb86b697cb3eb3a2cefea0437194c6ef30a459243ded7a",
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py": "93654e6bc32f31a0bef33a45c0f4ba0ed8afb6831f2b73e3935c97b07bbf2b78",
+    "tests/unit/document_understanding_selection/test_reading_navigation_context.py": "e870b9e24fe43b2dfc26fa8a672b81c8145101e9870ea6f8d6eea0f63c05d8ce",
+    "tests/unit/document_understanding_layout_hints/test_single_body_lane.py": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105"
+  },
+  "final_tests": {
+    "passed": 339,
+    "existing_skipped": 6,
+    "seconds": 17.79,
+    "receipt": "review-final3-green/final-receipt.json"
+  },
+  "ruff": "PASS",
+  "mypy": "PASS:12 changed source files; Conda follow-imports=silent",
+  "real_attempt": "attempt05",
+  "actual_input_check": "attempt05/parent-input-check.json",
+  "physical_proof": "finalproof.json",
+  "model_response": "NOT_REVIEWED",
+  "RF": "OPEN",
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "raw_copies": 0,
+  "budget_tokens": 1783378,
+  "budget_micro_usd": 724836,
+  "final_typographic_and_cache": {
+    "passed": 58,
+    "seconds": 8.97,
+    "receipt": "review-typographic-green/final-receipt.json",
+    "overlap_with_339": true
+  }
+}

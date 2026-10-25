@@ -18,7 +18,7 @@ from .contract import SCHEMA_IN, SCHEMA_OUT, WorkBudget, WorkBudgetExceeded, par
 from .geometry import assign_cell_columns, native_cell_identity
 from .fine_geometry import consume_fine_geometry
 
-LAYOUT_HINTS_VERSION = "1.2.0"
+LAYOUT_HINTS_VERSION = "1.3.0"
 
 __all__ = ["derive_layout_hints", "SCHEMA_IN", "SCHEMA_OUT", "LAYOUT_HINTS_VERSION"]
 
@@ -466,6 +466,9 @@ def _derive(doc) -> dict:
 
     # ---- column lane groups --------------------------------------------------
     for page_bands, lane_layout in zip(page_bands_list, lane_layouts):
+        if lane_layout.single_body:
+            add_group("column_lane", [unit.unit_id for unit in lane_layout.single_body],
+                      [], [], None, "high", lane_layout.single_body_basis)
         for lane in lane_layout.lanes:
             add_group(
                 "column_lane",

@@ -1,0 +1,24 @@
+{
+  "phase": "final",
+  "targets": [
+    "tests/unit/document_understanding_layout_hints",
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-dl49i5f3",
+  "exit_code": 0,
+  "elapsed_seconds": 19.12,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-dl49i5f3\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

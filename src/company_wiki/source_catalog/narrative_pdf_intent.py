@@ -157,6 +157,8 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
         try:
             budget.charge()
             outline = document.get_toc(simple=True)
+        except WorkBudgetExceeded:
+            raise
         except (AttributeError, RuntimeError, ValueError):
             outline = []
 
@@ -185,6 +187,7 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
             _emit_pdf_page(state, document, number, blocks)
 
         for number, page in enumerate(document, start=1):
+            budget.charge()
             try:
                 geometry: dict[str, Any] = {}
                 blocks = _pdf_text_blocks(page, geometry_out=geometry,
@@ -194,8 +197,11 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
                 state.pages_read += 1
                 if not blocks:
                     state.empty_pages.add(number)
+            except WorkBudgetExceeded:
+                raise
             except Exception as exc:
                 state.errors.append(f'page_text:{number}:{type(exc).__name__}')
+                state.native_text_status[number] = 'read_failed'
                 state.empty_pages.add(number)
                 blocks = []
             if session is None:

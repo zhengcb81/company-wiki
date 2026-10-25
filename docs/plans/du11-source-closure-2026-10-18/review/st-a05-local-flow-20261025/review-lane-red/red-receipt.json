@@ -1,0 +1,23 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/document_understanding_layout_hints/test_single_body_lane.py"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-e2sj6crb",
+  "exit_code": 1,
+  "elapsed_seconds": 7.66,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-e2sj6crb\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

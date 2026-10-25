@@ -1,0 +1,238 @@
+{
+  "schema_version": "local-flow-intermediate-replay-summary/1",
+  "retention": "Final attempt05 and finalproof kept complete; failed test logs and reference-envelope counterexample kept. Superseded duplicate full projections reduced to hashes and decisions before publication. Originals are not among these files.",
+  "snapshots": [
+    {
+      "path": "attempt01",
+      "artifact_manifest": [
+        {
+          "path": "attempt01/model-view.json",
+          "bytes": 62553,
+          "sha256": "5bff41e741432aeea9c381070455ea1271ec1c32986afbeca3acb080126d34bd"
+        },
+        {
+          "path": "attempt01/replay-receipt.json",
+          "bytes": 4370,
+          "sha256": "ffd6806dcaf9189ad341fa7046c9fbf3c9a9dd1474132e344eaee2b463d442c3"
+        },
+        {
+          "path": "attempt01/selection.json",
+          "bytes": 671639,
+          "sha256": "ab7e4abc42f8faf4e9e27e9d708a67190c795fc4897167b87acce4bf059e94b6"
+        },
+        {
+          "path": "attempt01/trace.json",
+          "bytes": 437445,
+          "sha256": "413d61f0ddb7c7649256132cd66bca1c32bfb9884706bdfb6588c26da358189d"
+        }
+      ],
+      "summary": {
+        "physical_pages": 249,
+        "selected_count": 112,
+        "selected_chars": 9031,
+        "work_budget": {
+          "used": 13044266,
+          "limit": 16000000,
+          "exhausted": false,
+          "same_instance_for_parse_and_select": true
+        },
+        "coverage_complete": false,
+        "protected_unchanged": true,
+        "external_model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      },
+      "outcome": "FAIL: D&M/TIDES dropped by combined redundant-navigation envelope"
+    },
+    {
+      "path": "attempt02",
+      "artifact_manifest": [
+        {
+          "path": "attempt02/model-view.json",
+          "bytes": 62553,
+          "sha256": "347d1f3503439258ee9bce103f64f0dc6fe4aaba5b49f5980ace549c1b61e661"
+        },
+        {
+          "path": "attempt02/replay-receipt.json",
+          "bytes": 4370,
+          "sha256": "75fad63fe5a65dfe85238bdf7855b58723da9bcd14cf45bbe89751fb0f1d2c73"
+        },
+        {
+          "path": "attempt02/selection.json",
+          "bytes": 671640,
+          "sha256": "b25323e48cebc9a2d058a89bd92dd87860667e672f805a4affbccdec77331374"
+        },
+        {
+          "path": "attempt02/trace.json",
+          "bytes": 437445,
+          "sha256": "8b2ba3c6168c23b97dd81a3efb71c917e9fd8e0deaf268cb5ab9568ba86477d7"
+        }
+      ],
+      "summary": {
+        "physical_pages": 249,
+        "selected_count": 112,
+        "selected_chars": 9031,
+        "work_budget": {
+          "used": 13044515,
+          "limit": 16000000,
+          "exhausted": false,
+          "same_instance_for_parse_and_select": true
+        },
+        "coverage_complete": false,
+        "protected_unchanged": true,
+        "external_model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      },
+      "outcome": "FAIL: exact same source-level drop, reference envelope observed"
+    },
+    {
+      "path": "attempt03",
+      "artifact_manifest": [
+        {
+          "path": "attempt03/model-view.json",
+          "bytes": 61166,
+          "sha256": "918ab27f199e7b92c2b6a79fc52339320b16a60f296c05f102d1f70cc0160496"
+        },
+        {
+          "path": "attempt03/replay-receipt.json",
+          "bytes": 4370,
+          "sha256": "4f137b871f05693f543837ae9f70c0b554eb0af15babeb3a858db029c2a5d343"
+        },
+        {
+          "path": "attempt03/selection.json",
+          "bytes": 677209,
+          "sha256": "c58f1e3c228cfd325c4875e10e743002df60ee3268f0ffe34259da4c367da208"
+        },
+        {
+          "path": "attempt03/trace.json",
+          "bytes": 451357,
+          "sha256": "264178d2fca40bb0d604cb00ec38637fd48886c3411953be7b38cdd3520dc8a5"
+        }
+      ],
+      "summary": {
+        "physical_pages": 249,
+        "selected_count": 112,
+        "selected_chars": 9060,
+        "work_budget": {
+          "used": 13206655,
+          "limit": 16000000,
+          "exhausted": false,
+          "same_instance_for_parse_and_select": true
+        },
+        "coverage_complete": false,
+        "protected_unchanged": true,
+        "external_model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      },
+      "outcome": "NOT_ACCEPTED: facts restored but Chemistry absent from descendant contexts"
+    },
+    {
+      "path": "attempt04",
+      "artifact_manifest": [
+        {
+          "path": "attempt04/model-view.json",
+          "bytes": 63466,
+          "sha256": "9552f7cbaa1a2674aa83beb5c1bc01e3dbe5be844a933e6f345bdcff2ee348df"
+        },
+        {
+          "path": "attempt04/parent-input-check.json",
+          "bytes": 1376,
+          "sha256": "1c8a1bee18da5988fbbcb73bba87bf882bc1ec4f4f0913f2455874e99457daba"
+        },
+        {
+          "path": "attempt04/replay-receipt.json",
+          "bytes": 4370,
+          "sha256": "a2a19347edb3a93bbd28086d4e0aadeebe120272e2dd392647462418cd807d79"
+        },
+        {
+          "path": "attempt04/selection.json",
+          "bytes": 686738,
+          "sha256": "84e0e1074200ddbd107ff7a6a2185f49720ad16fb0e6b9a7fe350904424f826c"
+        },
+        {
+          "path": "attempt04/trace.json",
+          "bytes": 464217,
+          "sha256": "69083d56619253f1501fcf40da5885af077e07e1cd76e3bd19c40c918ad7fbb6"
+        }
+      ],
+      "summary": {
+        "physical_pages": 249,
+        "selected_count": 112,
+        "selected_chars": 9060,
+        "work_budget": {
+          "used": 13450656,
+          "limit": 16000000,
+          "exhausted": false,
+          "same_instance_for_parse_and_select": true
+        },
+        "coverage_complete": false,
+        "protected_unchanged": true,
+        "external_model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      },
+      "outcome": "PASS: actual parent/period and old checkpoints; superseded by final typographic implementation identity"
+    },
+    {
+      "path": "beforelane.json",
+      "artifact_manifest": [
+        {
+          "path": "beforelane.json",
+          "bytes": 140378,
+          "sha256": "65924beb02673870f9bbf71f65e5da008de5d9b919466c1193d9ec061d780df0"
+        }
+      ],
+      "summary": {
+        "context_diagnostics": {
+          "CONTINUITY_PAGE_COLUMN_UNPROVEN": 1
+        },
+        "work_used": 3825284,
+        "work_limit": 16000000,
+        "model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      }
+    },
+    {
+      "path": "afterlane.json",
+      "artifact_manifest": [
+        {
+          "path": "afterlane.json",
+          "bytes": 143068,
+          "sha256": "abc5063880eeac228d73e41e8b94a0ca2f4c5e8fe2251543a8738bcc5465e286"
+        }
+      ],
+      "summary": {
+        "context_diagnostics": {},
+        "work_used": 3887091,
+        "work_limit": 16000000,
+        "model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      }
+    },
+    {
+      "path": "finallane.json",
+      "artifact_manifest": [
+        {
+          "path": "finallane.json",
+          "bytes": 141338,
+          "sha256": "ac46382d6bdfe63752920b8d65488c25aa8559ba4552a1df08b480c51969abc3"
+        }
+      ],
+      "summary": {
+        "context_diagnostics": {
+          "CONTINUITY_PAGE_COLUMN_UNPROVEN": 1
+        },
+        "work_used": 4096143,
+        "work_limit": 16000000,
+        "model_calls": 0,
+        "downloads": 0,
+        "raw_copies": 0
+      }
+    }
+  ],
+  "generated_duplicate_bytes": 5191068
+}

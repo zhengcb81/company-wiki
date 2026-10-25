@@ -1,0 +1,629 @@
+[
+  {
+    "accepted": true,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [
+      "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb"
+    ],
+    "original_count": 5,
+    "block_count": 4,
+    "character_count": 268,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+        "page": 14,
+        "paragraph": 34,
+        "block": 20,
+        "text": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "page": 14,
+        "paragraph": 32,
+        "block": 19,
+        "text": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+        "page": 14,
+        "paragraph": 33,
+        "block": 19,
+        "text": "公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": false,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:fab527b2a106856de24cca3529dd4ccd6b35f79308e8346be56239b79647b580"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [],
+    "original_count": 6,
+    "block_count": 5,
+    "character_count": 130,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fab527b2a106856de24cca3529dd4ccd6b35f79308e8346be56239b79647b580",
+        "page": 14,
+        "paragraph": 14,
+        "block": 7,
+        "text": "ii.\nTIDES D&M 服务客户数同比提升25%，服务分子数量同比提升45%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+        "page": 14,
+        "paragraph": 11,
+        "block": 5,
+        "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": true,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40"
+    ],
+    "declaration_ids": [],
+    "original_count": 3,
+    "block_count": 2,
+    "character_count": 101,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+        "page": 14,
+        "paragraph": 2,
+        "block": 2,
+        "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      }
+    ]
+  },
+  {
+    "accepted": true,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40"
+    ],
+    "declaration_ids": [],
+    "original_count": 3,
+    "block_count": 2,
+    "character_count": 65,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+        "page": 14,
+        "paragraph": 11,
+        "block": 5,
+        "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      }
+    ]
+  },
+  {
+    "accepted": false,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:a8b69af7d0c996da51717926efa8bcbb052dbfa39cfde4bd0179f1b01fb86ac1",
+      "urn:company-wiki:narrative-unit:sha256:7e2fa8a2d699e74d8f84d9387f165fdef25e4fae43a814bb8ed3b9a7885d6f52",
+      "urn:company-wiki:narrative-unit:sha256:8df09fa473c50f5f1902984b1bdb94e0760b6210d867b6bfa285a66f4f192ef8",
+      "urn:company-wiki:narrative-unit:sha256:1f1c2586a9ee33c61dd332ccde368082cbdac29fa89a6d1edd892cd9be9fede2",
+      "urn:company-wiki:narrative-unit:sha256:12f76a1611dd72e1fa227686f2c61dea15606a3bcac7c5693ceb29c7bb8f44bc"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [],
+    "original_count": 10,
+    "block_count": 5,
+    "character_count": 327,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a8b69af7d0c996da51717926efa8bcbb052dbfa39cfde4bd0179f1b01fb86ac1",
+        "page": 14,
+        "paragraph": 3,
+        "block": 3,
+        "text": "i.\n小分子CDMO 管线持续扩张。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:7e2fa8a2d699e74d8f84d9387f165fdef25e4fae43a814bb8ed3b9a7885d6f52",
+        "page": 14,
+        "paragraph": 4,
+        "block": 3,
+        "text": "2025 年小分子D&M 业务收入199.2 亿元，同比增长\n11.4%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:8df09fa473c50f5f1902984b1bdb94e0760b6210d867b6bfa285a66f4f192ef8",
+        "page": 14,
+        "paragraph": 5,
+        "block": 3,
+        "text": "2025 年，小分子D&M 管线累计新增839 个分子。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:1f1c2586a9ee33c61dd332ccde368082cbdac29fa89a6d1edd892cd9be9fede2",
+        "page": 14,
+        "paragraph": 6,
+        "block": 3,
+        "text": "截至2025 年末，小分子\nD&M 管线总数达到3,452 个，包括83 个商业化项目, 91 个临床III 期项目，377 个\n临床II 期项目, 2,901 个临床前和临床I 期项目。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:12f76a1611dd72e1fa227686f2c61dea15606a3bcac7c5693ceb29c7bb8f44bc",
+        "page": 14,
+        "paragraph": 7,
+        "block": 3,
+        "text": "商业化和临床III 期阶段项目全年\n增加22 个。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+        "page": 14,
+        "paragraph": 2,
+        "block": 2,
+        "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": false,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:edc814fc72a985e95b36f8331f2e1cd244e98312ae01a11c46b90aba1b1b3021",
+      "urn:company-wiki:narrative-unit:sha256:f0622f88b4a53c0ef553ffd3b418c53587aa5ae38b9906fe1fb7c7ed0487e9c9",
+      "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [],
+    "original_count": 8,
+    "block_count": 5,
+    "character_count": 218,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:edc814fc72a985e95b36f8331f2e1cd244e98312ae01a11c46b90aba1b1b3021",
+        "page": 14,
+        "paragraph": 8,
+        "block": 4,
+        "text": "ii.\n公司持续推进小分子产能建设。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:f0622f88b4a53c0ef553ffd3b418c53587aa5ae38b9906fe1fb7c7ed0487e9c9",
+        "page": 14,
+        "paragraph": 9,
+        "block": 4,
+        "text": "2025 年，常州、泰兴及金山原料药基地均以零缺陷\n成功通过FDA 现场检查。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5",
+        "page": 14,
+        "paragraph": 10,
+        "block": 4,
+        "text": "截至2025 年末，小分子原料药反应釜总体积已提升至超\n4,000kL。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+        "page": 14,
+        "paragraph": 2,
+        "block": 2,
+        "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": false,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:4d7b45685c47478c11d05455eb8f4742a20fa5e61fb4ef4f03383c56eef82970",
+      "urn:company-wiki:narrative-unit:sha256:efe6e01aa622f86b5b07fd987175646552247faaa58f8071a4d69bb07bbd5194"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [],
+    "original_count": 7,
+    "block_count": 5,
+    "character_count": 178,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:4d7b45685c47478c11d05455eb8f4742a20fa5e61fb4ef4f03383c56eef82970",
+        "page": 14,
+        "paragraph": 12,
+        "block": 6,
+        "text": "i.\n随着2024 年新增产能逐季度爬坡，2025 年TIDES 业务收入达到113.7 亿元，同比\n增长96.0%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:efe6e01aa622f86b5b07fd987175646552247faaa58f8071a4d69bb07bbd5194",
+        "page": 14,
+        "paragraph": 13,
+        "block": 6,
+        "text": "截至2025 年末，TIDES 在手订单同比增长20.2%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+        "page": 14,
+        "paragraph": 11,
+        "block": 5,
+        "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": false,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119",
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [
+      "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119"
+    ],
+    "original_count": 7,
+    "block_count": 5,
+    "character_count": 146,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269",
+        "page": 14,
+        "paragraph": 15,
+        "block": 8,
+        "text": "iii.\n2025 年9 月，提前完成泰兴多肽产能建设。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+        "page": 14,
+        "paragraph": 11,
+        "block": 5,
+        "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119",
+        "page": 14,
+        "paragraph": 16,
+        "block": 8,
+        "text": "公司多肽固相合成反应釜总体积已提升\n至超100,000L。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": false,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [
+      "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269"
+    ],
+    "original_count": 7,
+    "block_count": 5,
+    "character_count": 146,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119",
+        "page": 14,
+        "paragraph": 16,
+        "block": 8,
+        "text": "公司多肽固相合成反应釜总体积已提升\n至超100,000L。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+        "page": 14,
+        "paragraph": 11,
+        "block": 5,
+        "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+        "page": 13,
+        "paragraph": 22,
+        "block": 16,
+        "text": "报告期内："
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "paragraph": 21,
+        "block": 16,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269",
+        "page": 14,
+        "paragraph": 15,
+        "block": 8,
+        "text": "iii.\n2025 年9 月，提前完成泰兴多肽产能建设。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  },
+  {
+    "accepted": true,
+    "target_ids": [
+      "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb"
+    ],
+    "context_ids": [
+      "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697"
+    ],
+    "declaration_ids": [
+      "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854"
+    ],
+    "original_count": 5,
+    "block_count": 4,
+    "character_count": 268,
+    "originals": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "page": 14,
+        "paragraph": 32,
+        "block": 19,
+        "text": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+        "page": 14,
+        "paragraph": 33,
+        "block": 19,
+        "text": "公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+        "page": 13,
+        "paragraph": 10,
+        "block": 6,
+        "text": "五、报告期内主要经营情况"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+        "page": 14,
+        "paragraph": 34,
+        "block": 20,
+        "text": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。"
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:fa43554a66f056d60898d31c27e3fb28d4552be0e7116ffebc3d91487deb7697",
+        "page": 11,
+        "paragraph": 2,
+        "block": 2,
+        "text": "第三节\n管理层讨论与分析"
+      }
+    ]
+  }
+]

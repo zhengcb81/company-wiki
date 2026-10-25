@@ -20,7 +20,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/7"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/8"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -282,8 +282,34 @@ class NativeSourceContext:
             work_budget.charge()
             known = False
         self.coverage_complete = coverage.get("native_scan") == "complete" and known
+        self.native_text_source: str | None = None
+        self.native_text_pages: frozenset[int] = frozenset()
+        self.native_text_supplied = "native_text" in coverage
+        text = coverage.get("native_text")
+        if isinstance(text, Mapping):
+            statuses, count = text.get("page_statuses"), text.get("page_count")
+            if isinstance(statuses, (tuple, list)):
+                work_budget.charge(1 + 2 * len(statuses))
+                if (text.get("schema_version") == "native-text-coverage/1"
+                        and isinstance(text.get("source_id"), str) and text["source_id"]
+                        and type(count) is int and count > 0 and count == len(statuses)
+                        and all(isinstance(status, str) and status in {
+                            "observed", "empty", "read_failed", "emission_failed"}
+                            for status in statuses)):
+                    self.native_text_source = text["source_id"]
+                    self.native_text_pages = frozenset(page for page, status in enumerate(statuses, 1)
+                                                       if status == "observed")
         self.observations: dict[str, NativePhysicalObservation | None] = {}
         self.diagnostics: Counter[str] = Counter()
+
+    def page_coverage(self, left: NativePhysicalObservation, right: NativePhysicalObservation
+                      ) -> tuple[bool, frozenset[int]]:
+        """Use positive base-text facts without promoting whole-source completeness."""
+        if self.native_text_supplied:
+            return (left.source == right.source == self.native_text_source
+                    and left.page in self.native_text_pages and right.page in self.native_text_pages,
+                    frozenset())
+        return self.coverage_complete, self.unproven_pages
 
     def _charge(self, amount: int = 1) -> bool:
         self.work_budget.charge(amount)
@@ -322,8 +348,9 @@ class NativeSourceContext:
                 return None
             furniture.append({"unit_id": uid, "page": unit.get("page"), "ordinal": ordinal,
                               "kind": unit.get("kind"), "paragraph_index": meta.get("paragraph_index")})
+        complete, unproven = self.page_coverage(left, right)
         proof, diagnostic = native_page_neighbour(left, right, furniture=furniture,
-            coarse_complete=self.coverage_complete, unproven_pages=self.unproven_pages)
+            coarse_complete=complete, unproven_pages=unproven)
         if diagnostic:
             self.diagnostics[diagnostic] += 1
         return proof
@@ -464,9 +491,12 @@ class _Analysis:
         if not self.pending_page_transition(left, right):
             return None
         flow = self.source_page_flow
+        context = (self.source_contexts or {}).get(left.source)
+        complete, unproven = (context.page_coverage(left, right) if context is not None else (
+            flow.coarse_complete if flow is not None else False,
+            flow.unproven_pages if flow is not None else frozenset()))
         proof, diagnostic = native_page_neighbour(left, right, furniture=furniture,
-            coarse_complete=flow.coarse_complete if flow is not None else False,
-            unproven_pages=flow.unproven_pages if flow is not None else frozenset())
+            coarse_complete=complete, unproven_pages=unproven)
         if diagnostic:
             self.diagnostics[diagnostic] += 1
             self.defer([left, right])

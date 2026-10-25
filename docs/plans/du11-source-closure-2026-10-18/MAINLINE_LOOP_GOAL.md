@@ -8,7 +8,7 @@
 
 ## 2026-10-25 当前并行安排
 
-主目标继续active；唯一当前行动见CURRENT_STATUS及task_plan。ST-A13/01/03/09来源工程已发布；独立来源/实际模型输入最新10PASS/4PARTIAL/0MISSING，旧8/6/0单独保留。纯文档push效率根修1171aa6f已推送且精确CI成功。A01/A05列表/页码组件206项工程通过、真实跨页目标仍因全局coverage/局部lane正证问题OPEN；按native_local_flow_followup先解决共用根因，再正式摘要/cache/RF/W12。下方早先节点不能覆盖CURRENT_STATUS。
+主目标继续active；唯一当前行动见CURRENT_STATUS及task_plan。ST-A13/01/03/09来源工程已发布；独立来源/实际模型输入最新10PASS/4PARTIAL/0MISSING，旧8/6/0单独保留。纯文档push效率根修1171aa6f已推送且精确CI成功。A01/A05列表/页码组件206项已发布；后续局部流、lane正证、上下文与预算共因已完成，集中339P/6既有skip、补58P（重叠），最终独审PASS。真实attempt05的DM/TIDES各自实际task已含Chemistry父级/报告期，旧10PASS/A13保持，112span/9060字符/62task/13.45M of16M；整体partial不改，正式响应和当前RF仍OPEN。准备发布本节点后复评来源输入，再正式摘要/cache/RF/W12。下方早先节点不能覆盖CURRENT_STATUS。
 
 新的[W16/W17/W18三卡](harness_lanes/20261025/README.md)由用户确认全部发出，等待作者交接；不是READY_NOT_DISPATCHED，不臆测作者实现已完成。ROOT负责CWP生产路径及最终真实摘要/cache/公司四审；W16负责RF历史基数口径、W17负责Audit覆盖观察、W18只负责新源侧gold/冻结测试，不并发修改ROOT生产源码。所有分包交付后仍须ROOT集成和实际公司内容验收，完成条件和预算不变。
 

@@ -10,9 +10,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from bisect import bisect_right
+from hashlib import sha256
+import json
 from typing import Any
 
 from .contract import Page, Unit, require_bbox
+from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
 
 
 @dataclass
@@ -22,6 +25,70 @@ class LaneLayout:
     confidence: str = "unknown"
     basis: list = field(default_factory=list)
     cuts: list[float] = field(default_factory=list)
+    single_body: list[Unit] = field(default_factory=list)
+    single_body_basis: list[str] = field(default_factory=list)
+
+
+def observe_single_body_lane(page: Page, eligible_ids: set[str], budget
+                             ) -> tuple[list[Unit], list[str]]:
+    """Positive page-wide body-band evidence; absence of a gutter is insufficient.
+
+    Use original block geometry, never sentence/word multiplicity. Unknown or
+    overlapping source geometry cannot certify a single reading lane. This is
+    a separate observation, leaving the frozen numeric text_column wire intact.
+    """
+    if not page.width or not page.height:
+        return [], []
+    members, boxes, frames, sizes = [], set(), set(), []
+    for unit in page.units:
+        budget.charge()
+        if unit.kind not in {"paragraph", "heading"}:
+            continue
+        if unit.deferred or unit.bbox is None:
+            return [], []
+        if _in_edge_zone(unit):
+            continue
+        frame = unit.geometry_frame
+        coordinate, rotation = frame.get("coordinate_frame"), frame.get("rotation")
+        if (coordinate not in {"dict", "rawdict", "text", "words", "span"}
+                or type(rotation) is not int or rotation not in {0, 90, 180, 270}):
+            return [], []
+        frames.add((coordinate, rotation))
+        budget.charge(1 + len(unit.text))
+        if unit.unit_id not in eligible_ids or has_unbound_numeric_cells(unit.text):
+            continue
+        members.append(unit)
+        boxes.add(require_bbox(unit))
+        if unit.font_size:
+            sizes.append(unit.font_size)
+    if len(frames) != 1 or len(boxes) < 4 or not sizes:
+        return [], []
+    budget.charge(1 + len(boxes) * max(1, len(boxes).bit_length()) + len(sizes))
+    ordered = sorted(boxes, key=lambda box: (box[1], box[0], box[3], box[2]))
+    wide = [box for box in ordered if box[2] - box[0] >= page.width * 0.5]
+    if len(wide) < 4 or wide[-1][3] - wide[0][1] < page.height * 0.4:
+        return [], []
+    size = sorted(sizes)[len(sizes) // 2]
+    left, right = min(box[0] for box in wide), max(box[2] for box in wide)
+    # A min/max union always contains its own boxes and proves nothing about a
+    # lane. Require a substantial common body band; native nested indentation
+    # and ragged right edges need not have identical left/right margins.
+    if (min(box[2] for box in wide) - max(box[0] for box in wide)
+            < 0.8 * min(box[2] - box[0] for box in wide)):
+        return [], []
+    bottom = -1.0
+    for box in ordered:
+        budget.charge()
+        if (box[1] < bottom - size * 0.25 or box[0] < left - size
+                or box[2] > right + size):
+            return [], []
+        bottom = max(bottom, box[3])
+    budget.charge(1 + 16 * len(ordered))
+    digest = sha256(json.dumps({"frame": sorted(frames), "width": page.width,
+        "height": page.height, "boxes": ordered}, sort_keys=True).encode()).hexdigest()
+    return members, ["observed_single_body_lane", "four_wide_body_blocks",
+                     "stable_horizontal_body_band", "nonoverlapping_vertical_body_band",
+                     "page_geometry_sha256:" + digest]
 
 
 def _in_edge_zone(unit: Unit) -> bool:
@@ -85,6 +152,9 @@ def detect_document_lanes(
             layout.basis = [
                 "no_column_gap" if len(candidates) >= 4 else "insufficient_geometry"
             ]
+            budget.charge(1 + len(candidates))
+            layout.single_body, layout.single_body_basis = observe_single_body_lane(
+                page, {unit.unit_id for unit in candidates}, budget)
             layouts.append(layout)
             continue
         for unit in candidates:

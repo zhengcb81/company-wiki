@@ -350,6 +350,10 @@ def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complet
     "company_wiki.source_catalog.narrative_source_purpose",
     "company_wiki.source_catalog.narrative_business_disclosures",
     "company_wiki.source_catalog.narrative_reading",
+    "company_wiki.source_catalog.narrative_document",
+    "company_wiki.document_understanding.profiles.registry",
+    "company_wiki.document_understanding.layout_hints",
+    "company_wiki.document_understanding.layout_hints.columns",
     "company_wiki.document_understanding.structure",
     "company_wiki.document_understanding.structure.layout",
     "company_wiki.document_understanding.structure.sections",
@@ -391,3 +395,14 @@ def test_product_identity_source_bytes_are_part_of_the_actual_current_decision(m
         assert changed["business_algorithms"] != before["business_algorithms"]
         assert changed["budget"] == before["budget"]
     assert decision_inventory._versions(pdf_frontend=pdf) == before
+
+
+def test_navigation_context_policy_content_changes_current_decision(monkeypatch):
+    from company_wiki.document_understanding import decision_inventory as inventory
+    before = inventory._versions(pdf_frontend=False)
+    changed = deepcopy(registry._CATALOG)
+    changed["context_policy"]["generic_navigation_titles"].append("Additional generic navigation")
+    monkeypatch.setattr(registry, "_CATALOG", changed)
+    after = inventory._versions(pdf_frontend=False)
+    assert after["context_policy"] != before["context_policy"]
+    assert after["budget"] == before["budget"]

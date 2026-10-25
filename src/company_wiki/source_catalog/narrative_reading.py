@@ -261,18 +261,47 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
                 continue
             headings.setdefault(uid, set()).update(actual_heads)
 
+    # Retain the entire source hierarchy, but distinguish generic navigation
+    # from mandatory semantic prose. Source-native list heads (business/period/
+    # service) positively establish their own ancestry; only policy-exact outer
+    # navigation titles can be omitted. Specific regions/units/qualifiers and
+    # independent table/deictic/qualification edges are never removed here.
+    from company_wiki.document_understanding.profiles.registry import is_generic_navigation_heading
+    work_budget.charge(1 + len(sections))
+    native_heads, navigation_heads = set(), set()
+    for section in sections:
+        ids = section.get("heading_unit_ids", ())
+        work_budget.charge(1 + len(ids))
+        if "native_numbered_list" in section.get("basis", ()):
+            from .narrative_business_policy import detect_reading_business_fact, READING_BUSINESS_SCAN_PASSES
+            # Structural numbering alone does not supply a subject. Observe
+            # each native head once, never once per descendant or candidate.
+            for uid in ids:
+                if uid in units:
+                    work_budget.charge(1 + READING_BUSINESS_SCAN_PASSES * len(units[uid].raw_text))
+                    if detect_reading_business_fact(units[uid].raw_text).eligible:
+                        native_heads.add(uid)
+        else:
+            for uid in ids:
+                if uid in units:
+                    work_budget.charge(8 * len(units[uid].raw_text) + 64)
+                    if is_generic_navigation_heading(units[uid].raw_text):
+                        navigation_heads.add(uid)
+
     def context(member_ids):
         result: set[str] = set()
         for uid in member_ids:
-            result.update(headings.get(uid, ()))
+            own_heads = headings.get(uid, set())
             native_context_ids = native_dependencies.context_for(uid)
-            work_budget.charge(len(native_context_ids))
-            result.update(native_context_ids)
+            work_budget.charge(1 + len(own_heads) + len(native_context_ids))
+            if own_heads.intersection(native_heads):
+                own_heads = own_heads - navigation_heads
+            own = set(own_heads) | set(native_context_ids)
             for owner in owners.get(uid, ()):
-                # ParagraphDraft's first anchor is also marked required. This
-                # is container bookkeeping, not a dependency on every later
-                # fact. Preserve actual external headings/context only.
-                result.update(owner_external_context[id(owner)])
+                # ParagraphDraft's first anchor is container bookkeeping,
+                # not a dependency on every later fact.
+                own.update(owner_external_context[id(owner)])
+            result.update(own)
         work_budget.charge(len(result) * max(1, len(result).bit_length()))
         return sorted(result - set(member_ids))
 
@@ -1358,6 +1387,7 @@ def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: 
             mime_type=mime_type, language=parsed.language,
             native_scan="complete" if parsed.coverage_complete else "partial",
             opaque_pages=parsed.opaque_pages, deferred_pages=parsed.deferred_table_pages,
+            native_text_coverage=parsed.native_text_coverage,
             work_budget=budget, _native_contexts=_native_contexts)
         if part.get("analysis_status") == "deferred":
             return part

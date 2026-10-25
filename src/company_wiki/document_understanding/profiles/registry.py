@@ -52,6 +52,24 @@ def _fold_signal(phrase: str) -> str:
     return _cached_signal_fold(phrase) if len(phrase) <= 256 else _fold(phrase)
 
 
+def is_generic_navigation_heading(text: str) -> bool:
+    """Exact policy title, after only an explicit outline prefix is removed.
+
+    A title with a company, business, region, unit, period or qualification does
+    not match. Structure retains every heading; callers may omit only redundant
+    navigation prose when a source-owned semantic ancestry is already present.
+    """
+    folded = _fold(text).replace("’", "'")
+    folded = re.sub(
+        r"^(?:第[一二三四五六七八九十百零\d]+[节章编篇]\s*|"
+        r"[一二三四五六七八九十百零]+[、．.]\s*|"
+        r"(?:part|item)\s+[ivxlcdm\d]+[a-z]?[.)]?\s*|"
+        r"\(?\d+(?:\.\d+)*[)．.、]\s*|[ivxlcdm]+[.)]\s*)",
+        "", folded, count=1).lstrip(" :：—–-.")
+    titles = _CATALOG.get("context_policy", {}).get("generic_navigation_titles", ())
+    return any(folded == _fold_signal(title).replace("’", "'") for title in titles)
+
+
 def _binding(profile_id: str) -> dict:
     if not isinstance(profile_id, str):
         raise TypeError("profile_id must be a string")

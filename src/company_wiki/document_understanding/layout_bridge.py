@@ -139,6 +139,13 @@ def _apply_layout(result, *, limits, work_budget):
         layout["coverage"]["complete"] = False
         layout["diagnostics"].extend(diagnostics)
     by_id = {hint["unit_id"]: hint for hint in layout["unit_hints"]}
+    single_lane_ids = set()
+    for group in layout["groups"]:
+        if work_budget is not None:
+            work_budget.charge(1 + len(group["member_unit_ids"]))
+        if (group["kind"] == "column_lane" and group["confidence"] == "high"
+                and "observed_single_body_lane" in group["basis"]):
+            single_lane_ids.update(group["member_unit_ids"])
     for unit in result.get("units", ()):
         if work_budget is not None:
             work_budget.charge()
@@ -164,6 +171,9 @@ def _apply_layout(result, *, limits, work_budget):
         if hint["text_column"] is not None and unit["layout"].get("bbox") is not None:
             unit["layout"]["column"] = hint["text_column"]
             unit["hints"]["column_lane"] = hint["text_column"]
+        elif unit["unit_id"] in single_lane_ids and unit["layout"].get("column") is None:
+            unit["layout"]["column"] = "observed_single_body_lane"
+            unit["hints"]["column_lane"] = "observed_single_body_lane"
     result.setdefault("metadata", {})["layout_feature_version"] = LAYOUT_HINTS_VERSION
     return result, layout
 

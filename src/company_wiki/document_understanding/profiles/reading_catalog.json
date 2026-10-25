@@ -1,5 +1,26 @@
 {
   "schema_version": "du-reading-catalog/1",
+  "context_policy": {
+    "version": "1.0.0",
+    "purpose": "Only exact generic navigation titles may be omitted from model prose when source-native semantic ancestry is present. Keep source structure and all subject/region/period/unit/qualification headings.",
+    "generic_navigation_titles": [
+      "管理层讨论与分析",
+      "管理层讨论及分析",
+      "经营情况讨论与分析",
+      "报告期内主要经营情况",
+      "主要经营情况",
+      "经营情况",
+      "业务回顾",
+      "董事会报告",
+      "Management discussion and analysis",
+      "Management's discussion and analysis",
+      "Management discussion and analysis of financial condition and results of operations",
+      "Management's discussion and analysis of financial condition and results of operations",
+      "Business review",
+      "Operating review",
+      "Directors' report"
+    ]
+  },
   "families": [
     {
       "schema_version": "du2-family-spec/1",

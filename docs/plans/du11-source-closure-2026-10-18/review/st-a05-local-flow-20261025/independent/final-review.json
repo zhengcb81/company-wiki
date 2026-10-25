@@ -1,0 +1,84 @@
+{
+  "schema_version": "independent-local-flow-review/1",
+  "status": "PASS_ENGINEERING_SUBNODE_ONLY",
+  "head": "a8269bd22b9377411cfc569a3eb01df1c84542ba",
+  "verification_manifest": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/st-a05-local-flow-20261025/verification.json",
+    "sha256": "e222c702eaedbd2146816a97c3962b54b45993803b12161c5d39cbceebc5fa20"
+  },
+  "product_test_sha256": {
+    "src/company_wiki/document_understanding/decision_inventory.py": "e2c568258d6857f6e0702a8ba725bd7cf635bbb85cdd944ae8961dcfb2fdbeef",
+    "src/company_wiki/document_understanding/layout_bridge.py": "ea6eb10c2ed687319f01f918b96b14bf4ff87dcee85cca5352e3251f413f38a5",
+    "src/company_wiki/document_understanding/layout_hints/__init__.py": "997b295d388604f23503958c1e4e9de2fb69a3a1be1910086a4da8fd9ed0ec9d",
+    "src/company_wiki/document_understanding/layout_hints/columns.py": "e19dfedb9e86a4edbb189558a3cf75074571f6e378c1ec44cf77c091e1665a5c",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aaf39f3e4a6413014e2f56a07f99bbf76cec591133bbdfab28acabe445843e1d",
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056",
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "6da5b087eaae8126e75e0075af5e248309c747abc99457c5c6292e48f3f7d909",
+    "src/company_wiki/document_understanding/profiles/registry.py": "1b0649063b880d5fc84506c31d973c9c2b5c58def99010370798b47875683b4b",
+    "src/company_wiki/source_catalog/narrative_document.py": "889df37ad7325325a05d79e5a15cf45a5b395d5a273f856c0a2ee2662527d7c9",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050",
+    "src/company_wiki/source_catalog/narrative_reading.py": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "8bcb61367e11d30647cb86b697cb3eb3a2cefea0437194c6ef30a459243ded7a",
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py": "93654e6bc32f31a0bef33a45c0f4ba0ed8afb6831f2b73e3935c97b07bbf2b78",
+    "tests/unit/document_understanding_selection/test_reading_navigation_context.py": "e870b9e24fe43b2dfc26fa8a672b81c8145101e9870ea6f8d6eea0f63c05d8ce",
+    "tests/unit/document_understanding_layout_hints/test_single_body_lane.py": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105"
+  },
+  "evidence_sha256": {
+    "attempt05/selection.json": "6dc68a98841f8a39af19eb58e902bd037c50cc5d5551031f1221d8638ffa0673",
+    "attempt05/model-view.json": "297826a5f9f125438a913972907fe50c5ab2f0731344ff7f224755d1b098644d",
+    "attempt05/replay-receipt.json": "1ed2f191001e5b50f6196b3d3070b4644e8a14d2b2809b7f2d3cefde86b3dff3",
+    "attempt05/parent-input-check.json": "f278e4d5f50882a8a4b4bcd35a8c2a73c2770d762a58ee2267e75ab42bae3048",
+    "finalproof.json": "f991701acf0ac44cd60279b60fa06fcc6d91be5f93d11e14d1b79623c32bc8de",
+    "review-final3-green/final.log": "33c3148a4ca85fd5bbc2769a5deae9c573c2df4c03979a1a5b7a74d0478ff9e5",
+    "review-final3-green/final-receipt.json": "9dfb977cb8329176b5a41807d54261bef5f024c0521fb4683e557ce160f05381",
+    "review-typographic-green/final.log": "aba0838a5df810fa0a10293e050839fc4cefe340430480b7410ec66a320c2a70",
+    "review-typographic-green/final-receipt.json": "37a97563486d6e318912ee529bce39f32c107b49291f8f9a1eb767ec87778867"
+  },
+  "checks": {
+    "product_test_hashes_match_frozen_manifest": "17/17",
+    "final_pytest": "339 passed, 6 existing skipped, 17.79s",
+    "typographic_and_cache_pytest": "58 passed, 8.97s; overlapping suite",
+    "ruff": "PASS",
+    "mypy": "PASS: 12 changed sources using Conda follow-imports=silent",
+    "actual_replay": {
+      "attempt": "attempt05",
+      "selected_spans": 112,
+      "selected_chars": 9060,
+      "compiled_tasks": 62,
+      "work": 13450656,
+      "work_limit": 16000000,
+      "budget_exhausted": false,
+      "source_stable": true,
+      "model_calls": 0,
+      "downloads": 0,
+      "original_copies": 0
+    },
+    "source_checkpoint_retention": {
+      "prior_pass_targets": ["ST-A03", "ST-A04", "ST-A06", "ST-A07", "ST-A08", "ST-A09", "ST-A10", "ST-A11", "ST-A12", "ST-A14"],
+      "a13_seven_inputs_retained": true,
+      "whole_source_remains_partial": true,
+      "chemistry_actual_child_tasks": 3,
+      "sibling_leak": false
+    },
+    "local_physical_proof": {
+      "native_text_pages_observed": 249,
+      "geometry_deferred_pages": 140,
+      "global_coverage_complete": false,
+      "actual_13_to_14_proof_calls": 1,
+      "context_diagnostics": {}
+    },
+    "model_response_reviewed": false,
+    "rf_adoption": "OPEN"
+  },
+  "reviewer_findings": [
+    {"finding": "WorkBudgetExceeded swallowed by broad catches and repeated page append", "status": "FIXED_AND_TESTED"},
+    {"finding": "No-gap/min-max envelope falsely certifies a single lane", "status": "FIXED_AND_TESTED"},
+    {"finding": "Weak numbered caption could cause required outer context to be pruned", "status": "FIXED_AND_TESTED"},
+    {"finding": "Unrelated owner context could be removed with navigation context", "status": "FIXED_AND_TESTED"},
+    {"finding": "Smart-apostrophe MD&A heading was not recognized", "status": "FIXED_AND_TESTED"}
+  ],
+  "unresolved_findings_in_scoped_engineering_node": [],
+  "scope_limit": "This PASS does not approve model-response quality, RF adoption, or full A05 closure. Geometry remains partial by design/evidence."
+}

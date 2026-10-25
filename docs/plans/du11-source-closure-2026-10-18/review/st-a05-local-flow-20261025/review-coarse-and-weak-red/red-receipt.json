@@ -1,0 +1,26 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/document_understanding_layout_hints/test_single_body_lane.py",
+    "tests/unit/document_understanding_selection/test_reading_navigation_context.py",
+    "-k",
+    "separated_numeric or weak_native"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-cjstkmmf",
+  "exit_code": 1,
+  "elapsed_seconds": 14.05,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-cjstkmmf\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

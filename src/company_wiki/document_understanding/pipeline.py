@@ -43,7 +43,7 @@ if TYPE_CHECKING:
     from .narrative_continuity import NativeSourceContext
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.14.0"
+PIPELINE_FEATURE_VERSION = "1.15.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -76,6 +76,7 @@ def understand_units(
     native_scan: str = "complete",
     opaque_pages: Sequence[int] = (),
     deferred_pages: Sequence[int] = (),
+    native_text_coverage: Mapping[str, Any] | None = None,
     limits: Mapping[str, Any] | None = None,
     max_packages: int | None = None,
     work_budget: WorkBudget | None = None,
@@ -116,6 +117,7 @@ def understand_units(
         native_scan=native_scan,
         opaque_pages=opaque_pages,
         deferred_pages=deferred_pages,
+        native_text_coverage=native_text_coverage,
     )
 
     try:

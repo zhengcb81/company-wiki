@@ -909,3 +909,13 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 ## 2026-10-25 覆盖维度责任层澄清
 
 8a258b93404f351ae92cd3449198b42141ef4169 已正常提交推送；pre-commit通过，pre-push154通过/108.09秒，精确CI40185824736 completed/success。工程终审与六文件实际字节绑定见st-a05目录publication.json；206绿不关闭A01/A05真实父级目标。下一节点按native_local_flow_followup.md先写中性RED：deferred_table_pages实际来自geometry_session.deferred，不能全称为金融表延期；原生文字读取/发出是否成功须由解析owner正面记录，局部lane另需几何正证。整体partial、物理负例、旧10PASS/A13输入和原预算保持。无新API、下载、费用或原件副本；外包三工区不写。
+
+## 2026-10-25 局部文字、几何与引用包分层
+
+新的原生文字正证可独立于geometry_session.deferred。单栏必须有4个独立宽正文block、足够纵向覆盖、无纵向/并行冲突、实测frame/rotation等源几何；保持数值text_column契约，显式single-body group由布局owner给出。真实物理边可证后仍不能保证选材：新增必需父级使原引用envelope拒绝旧D&M/TIDES事实，须查required context为何过大，不能丢上下文/扩cap假通过。独审另查出WorkBudgetExceeded被宽except吞，三路径提前预付与显式传播已用中性RED/绿修复；尚待最终独审。
+
+## 2026-10-25 必需语义上下文与导航路径分开
+
+见review/st-a05-local-flow-20261025/README.md与verification.json。物理proof、最小model上下文与来源数据验收分开：attempt01/02真回归保留，最后attempt05的三条DM/TIDES各自task含Chemistry/报告期，旧10PASS/A13七span保持。112/9060/62task，13,450,656/16M，0费用/下载/原件副本。独审预算、lane错位/正常缩进、弱caption、显式owner context、英语smart apostrophe均新增RED后在owner修复；最后339P/6既有skip及补58P（重叠），Ruff/12源码mypy通过。仅压缩已有业务语义native head下的完整generic navigation标题，结构层路径不删，其他语义/独立依赖不动，唯一catalog/缓存闭包跟随。最终独审和发布尚待完成，正式摘要/RF/14项重评OPEN。首轮误填不存在测试路径exit4/0tests已保留，更正后有界检查通过，未反复跑全量。
+
+2026-10-25收尾补记：局部流最终独立终审PASS（17产品/测试SHA、9真实/测试证据SHA全匹配），范围内零未解；冻结verification.json保持被审前字节，不改旧pending快照，最终状态见acceptance.json与independent/final-review.json。准备正常提交推送；整个正式摘要/RF/公司循环不签收。

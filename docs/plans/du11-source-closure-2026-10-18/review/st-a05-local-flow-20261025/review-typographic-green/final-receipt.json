@@ -1,0 +1,24 @@
+{
+  "phase": "final",
+  "targets": [
+    "tests/unit/document_understanding_selection/test_reading_navigation_context.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ndwzukrz",
+  "exit_code": 0,
+  "elapsed_seconds": 11.25,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ndwzukrz\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}
