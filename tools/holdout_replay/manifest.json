@@ -5,7 +5,7 @@
  "created": "2026-10-25",
  "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
  "frozen_before_candidate_output": true,
- "gold_version": 2,
+ "gold_version": 3,
  "gold_v1_freeze_commit": "5e4488bb",
  "gold_v1_archive": "gold/archive-v1/",
  "corrections_file": "gold_corrections.json",
@@ -69,7 +69,7 @@
   {
    "sample_id": "w18-cn-beigene-h1-2024",
    "gold_file": "gold/w18-cn-beigene-h1-2024.json",
-   "gold_sha256": "ec0dbb8598daad20b37e46c005fbae778e0e702bcd81d3647abe0237218289af",
+   "gold_sha256": "20a0f79c59337803b0a7526e326579e498dfb5bb7c1f4f1ce2461065dff40b2c",
    "document_kind": "semi_annual_report",
    "market": "CN",
    "language": "zh",
@@ -135,7 +135,7 @@
   {
    "sample_id": "w18-cn-beigene-ipo",
    "gold_file": "gold/w18-cn-beigene-ipo.json",
-   "gold_sha256": "92b0097ae8950ad633288d32bf1ee818c61aaef6c1d71496b369cd61239c465e",
+   "gold_sha256": "542082387361571d625ad9326b882687f4e3e8c404a12cbed4c14d2bd64184ce",
    "document_kind": "prospectus",
    "market": "CN",
    "language": "zh",
@@ -271,7 +271,7 @@
   {
    "sample_id": "w18-cn-sugondata-charter",
    "gold_file": "gold/w18-cn-sugondata-charter.json",
-   "gold_sha256": "430206ed9d4459c3f13b36bb74312d3dad7c7d9380a78e1821f5dbbb4a85fd75",
+   "gold_sha256": "90ff0e3ff2a6357f6d49c4e7efee007219d65e1bbd4da1d4532d1e51429523d5",
    "document_kind": "ir_policy",
    "market": "CN",
    "language": "zh",

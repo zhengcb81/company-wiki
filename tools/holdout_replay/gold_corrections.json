@@ -5,6 +5,7 @@
  "v1_location": "gold/archive-v1/",
  "v1_freeze_commit": "5e4488bb",
  "v2_created_by": "independent review findings F1/F2/F3/F5/F6 (agent 1) and F4 (prior_use enumeration)",
+ "v3_note": "gold v3 = v2 + re-review findings N1 (corrections log completeness) and N2 (5 remaining parenthetical true-value contrasts moved to reason); no anchor changes",
  "corrections": [
   {
    "sample": "w18-cn-beigene-ipo", "fact": "ipo-approval-pathway-dates", "severity": "P2",
@@ -89,10 +90,33 @@
    "old": "禁令串内含真值对照括注（2021年合作收入$542,296千等）",
    "new": "禁令仅保留假命题本体；真值对照移至reason",
    "source_side_reason": "同上；数值仍在锚句/reason可复核。"
+  },
+  {
+   "sample": "w18-cn-zijin-fy2025", "fact": "zj-serbia-europe-second", "severity": "P3（复审N1补登）",
+   "field": "must_not_assert",
+   "old": "45万吨改扩建已建成",
+   "new": "年总产铜45万吨改扩建工程已建成",
+   "source_side_reason": "措辞精确化：原文为'正在加快推进年总产铜45万吨改扩建工程'，禁令仍为假命题。"
+  },
+  {
+   "sample": "w18-cn-beigene-h1-2024", "fact": "h1-nrdl-5of6", "severity": "P3（复审N1补登）",
+   "field": "must_preserve[0]",
+   "old": "百悦泽中国六项获批适应症中五项已纳入医保目录",
+   "new": "百悦泽获批的六项适应症中符合纳入条件的五项已纳入医保目录",
+   "source_side_reason": "恢复原文'符合纳入条件的'限定词，避免摘要省略资格条件。"
+  },
+  {
+   "sample": "w18-cn-beigene-h1-2024 / w18-cn-beigene-ipo / w18-cn-sugondata-charter",
+   "fact": "h1-clinical-decro / h1-bgb16673-300 / ipo-three-commercial-drugs / ipo-48-pipeline-count / charter-document-identity",
+   "severity": "P3（复审N2：F6同型残留清理）",
+   "field": "must_not_assert",
+   "old": "5处禁令串仍含真值对照括注（如'（关键性超40项）''（自研仅3款）'等）",
+   "new": "禁令仅保留假命题本体；真值对照移至reason",
+   "source_side_reason": "与F6同法：防止朴素子串/数字匹配把候选摘要中的正确对照陈述误判为违规。"
   }
  ],
  "manifest_changes": [
-  "所有8个gold_sha256更新为v2值",
+  "7个gold_sha256更新为v2值；w18-cn-sugondata-charter未修改保持v1值",
   "prior_use_exclusion_check不变",
   "新增 gold_version: 2 与 corrections_file 引用",
   "紫金样本prior_use补充FC-504 canary_registry_2026-08-10.json元数据sighting，n5去重审计项改注为临时输出不可仓内复核（F4）"

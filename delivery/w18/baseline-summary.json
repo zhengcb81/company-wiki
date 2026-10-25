@@ -7,7 +7,7 @@
   "root": "C:\\Users\\郑曾波\\Projects\\w18-producer-ba8f8543",
   "deploy": "detached sparse worktree created by this card; production trees verified clean at the frozen commit"
  },
- "gold_version": 2,
+ "gold_version": 3,
  "gold_v1_freeze_commit": "5e4488bb",
  "gold_corrections_file": "tools/holdout_replay/gold_corrections.json",
  "manifest_sha256": "3b1dc5d99dcf27e9323277f6d690d2b07975b2fdb478195d45afb1319abfb56d",
@@ -1163,5 +1163,7 @@
   "NOT_EVALUATED": 25
  },
  "network_calls": 0,
- "model_posts": 0
+ "model_posts": 0,
+ "gold_v3_note": "gold v3 (post re-review N1/N2): corrections-log completeness + 5 remaining parenthetical true-value contrasts moved from must_not_assert to reason; wording-only, no anchor or fact-count change, no effect on any measured dimension (anchors 116/116 re-verified). The pinned attempt v2_observe_compile_primary ran against gold v2; its own attempt.json records the v2 manifest sha.",
+ "manifest_sha256_final": "fa5471662bc62bc583c1dd90cbbad5999d13d8b7e87670f6413bfa8d06c81b05"
 }

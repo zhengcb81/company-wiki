@@ -1,0 +1,69 @@
+{
+ "schema_version": "w18-cleanup-receipts/1",
+ "created": "2026-10-25",
+ "policy": "cleanup touches only directories this card created; frozen deploy worktree and scratch evidence are retained for ROOT acceptance/review; originals in the primary repo were never written",
+ "owned_roots": {
+  "w18-holdout-scratch": {
+   "exists": true,
+   "files": 1601,
+   "bytes": 22871725
+  },
+  "w18-producer-ba8f8543 (frozen deploy worktree, kept for ROOT reruns)": {
+   "exists": true,
+   "files": 778,
+   "bytes": 14581931
+  },
+  "w18-review-scratch-gold (reviewer 1, independent)": {
+   "exists": true,
+   "files": 17,
+   "bytes": 758744
+  },
+  "w18-review-scratch-replay (reviewer 3, independent)": {
+   "exists": true,
+   "files": 29,
+   "bytes": 270681
+  }
+ },
+ "scratch_breakdown": {
+  "baseline": {
+   "exists": true,
+   "files": 59,
+   "bytes": 5493389
+  },
+  "lake": {
+   "exists": true,
+   "files": 6,
+   "bytes": 374605
+  },
+  "dualroot": {
+   "exists": true,
+   "files": 1512,
+   "bytes": 12339671
+  },
+  "compile-probe": {
+   "exists": true,
+   "files": 5,
+   "bytes": 98715
+  }
+ },
+ "scratch_builder_files": [
+  "build_gold_beigene_ir.py",
+  "build_gold_hikvision.py",
+  "build_gold_lib.py",
+  "build_gold_part2.py",
+  "build_gold_part3.py",
+  "build_gold_beigene_ir.py",
+  "build_gold_hikvision.py",
+  "build_gold_lib.py",
+  "build_gold_part2.py",
+  "build_gold_part3.py",
+  "build_manifest.py",
+  "patch_d125.py",
+  "summarize_baseline.py",
+  "verify_anchors.py"
+ ],
+ "bindings_local": "machine-local, uncommitted by design (originals paths only)",
+ "primary_repo_writes": 0,
+ "producer_worktree_writes": "catalog/read-only replay only; .git untouched after checkout; worktree clean",
+ "originals_before_after_sha": "identical for all 8 samples in every attempt (original_unchanged=true)"
+}
