@@ -2,7 +2,7 @@
 
 ## Next Step
 
-A：核对冻结版本和写范围，读取construction_card.md全部需求，复用既有owner与测试，冻结实际缺口、输入与正反例。随后直接进入B/C；不等ROOT额外签收。
+B：实现tools/holdout_replay薄编排（冻结producer验证、bindings/隔离湖解析、native观察+configured_preview任务编译、attempt落盘、逐目标对照）与tests/holdout/w18中性边界测试。A冻结已完成并commit。
 
 ## 目标
 
@@ -10,7 +10,7 @@ A：核对冻结版本和写范围，读取construction_card.md全部需求，�
 
 ## 大节点
 
-- [ ] A 真实边界/既有PWF与代码调查；先冻结独立预期和接口。
+- [x] A 完成：8原件/5公司/CN+HK+US全类型样本、96目标/113锚点全部独立重提取验证、manifest+gold先于任何候选输出冻结提交。
 - [ ] B 根因TDD、共享owner实现或薄编排；兼容与实际入口接线。
 - [ ] C 集中相关单元/集成/CLI端到端，独立agent完整审查，全部修复/复测/复审。
 - [ ] 提交代码与独立审查证据，handoff.md/json、恢复/空间收据齐全。

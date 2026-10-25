@@ -1,0 +1,362 @@
+{
+ "sample_id": "w18-us-alphabet-fy2025",
+ "market": "US",
+ "company": "Alphabet",
+ "language": "en",
+ "source_sha256": "c2f6301004f35411a20611c14ff01d80a85c0bcbab6053c80d8cc7f6fc747161",
+ "expected_route_families": [
+  "sec_10k",
+  "annual"
+ ],
+ "facts": [
+  {
+   "id": "goog-consolidated-revenue",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Consolidated revenues$350,018 $402,836 $52,818 15 %"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "Revenues were $402.8 billion, an increase of 15% year over year"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "FY2025收入$402,836M（$402.8B）",
+    "同比+15%（FY2024 $350,018M）",
+    "主要驱动力为Google Services增长"
+   ],
+   "must_not_assert": [
+    "收入增长15%系Google Cloud单一驱动",
+    "FY2024收入$402.8B"
+   ],
+   "reason": "10-K管理层概览的合并收入与同比，注意财年=日历年（截至12月31日）。"
+  },
+  {
+   "id": "goog-operating-margin-flat",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Operating margin32 %32 %0 %"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "FY2025营业利润率32%与FY2024持平（0个百分点变化）"
+   ],
+   "must_not_assert": [
+    "营业利润率同比上升或下降"
+   ],
+   "reason": "利润率方向：持平（0pp），非升降。"
+  },
+  {
+   "id": "goog-net-income-eps",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Net income$100,118 $132,170 $32,052 32 %"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "$8.04 $10.81 $2.77 34 %"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "FY2025净利润$132,170M同比+32%",
+    "摊薄EPS $10.81同比+34%"
+   ],
+   "must_not_assert": [
+    "净利润增长32%全为经营性（OI&E含大额投资收益）"
+   ],
+   "reason": "净利润高增长的一部分来自非经营项（见OI&E目标），不能整体归因经营改善。"
+  },
+  {
+   "id": "goog-oie-investment-gains",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "OI&E of $29.8 billion for the year ended December 31, 2025 included net gains on equity securities of $24.1 billion"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "OI&E $29.8B中含$24.1B股权证券净收益",
+    "该收益属非经营项目"
+   ],
+   "must_not_assert": [
+    "$24.1B计入营业收入或营业利润",
+    "投资收益为核心业务经营成果"
+   ],
+   "reason": "非经营投资收益与经营利润的边界；混入经营口径即高估经营性。"
+  },
+  {
+   "id": "goog-wiz-pending-acquisition",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "investment",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "In 2025, we entered into definitive agreements to acquire Wiz, a leading cloud security platform, for $32.0 billion"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "已签署最终协议收购Wiz，交易对价$32.0B",
+    "签署协议≠交割完成"
+   ],
+   "must_not_assert": [
+    "收购已完成/已并表",
+    "Wiz收入已计入Alphabet收入"
+   ],
+   "reason": "计划vs完成：definitive agreements签署时点，交割未完成。"
+  },
+  {
+   "id": "goog-debt-issuance",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "we issued senior unsecured notes for net proceeds of $37.3 billion, to be used for general corporate purpose"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2025年发行高级无担保票据净募资$37.3B",
+    "用途为一般公司用途"
+   ],
+   "must_not_assert": [
+    "该$37.3B为经营现金流",
+    "票据为股权融资"
+   ],
+   "reason": "融资事件：债务工具与用途限定。"
+  },
+  {
+   "id": "goog-other-bets-loss-composition",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Other Bets operating loss of $7.5 billion for the year ended December 31, 2025 included a $2.1 billion employee compensation charge"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "Other Bets FY2025经营亏损$7.5B",
+    "其中含$2.1B员工薪酬相关一次性费用"
+   ],
+   "must_not_assert": [
+    "Other Bets亏损全部为经常性经营亏损",
+    "剔除该费用后仍亏损$7.5B"
+   ],
+   "reason": "分部亏损构成：一次性成分必须从总亏损中分离表达。"
+  },
+  {
+   "id": "goog-repurchases-class-split",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Repurchases of Class A and Class C shares were $6.5 billion and $38.9 billion, respectively, totaling $45.4 billion"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "A类回购$6.5B、C类$38.9B、合计$45.4B",
+    "两类股份金额分开"
+   ],
+   "must_not_assert": [
+    "A类回购$38.9B",
+    "合计$45.4B全部为单一类别"
+   ],
+   "reason": "多类别股本结构的回购拆分，类别金额不得互换。"
+  },
+  {
+   "id": "goog-capex-infrastructure",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "investment",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Capital expenditures, which primarily reflected investments in technical infrastructure, were $91.4 billion for the year ended December 31, 2025"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "FY2025资本开支$91.4B",
+    "主要投向技术基础设施"
+   ],
+   "must_not_assert": [
+    "$91.4B计入当期费用（capex≠费用）",
+    "资本开支同比增速（原文此句未给）"
+   ],
+   "reason": "投资额与费用化支出的口径区分。"
+  },
+  {
+   "id": "goog-employees",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "As of December 31, 2025, Alphabet had 190,820 employees"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2025-12-31员工190,820人"
+   ],
+   "must_not_assert": [
+    "190,820为期间平均人数",
+    "员工数同比增幅（该句未给）"
+   ],
+   "reason": "时点人数：as-of 2025-12-31，非平均、无同比。"
+  },
+  {
+   "id": "goog-segment-structure",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Alphabet is a collection of businesses — the largest of which is Google. We report Google in two segments, Google Services and Google Cloud"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "Other Bets operate as independent companies and some of them have their own boards"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "Google分两部分报告：Google Services与Google Cloud",
+    "Other Bets作为独立公司运营"
+   ],
+   "must_not_assert": [
+    "Other Bets是一个单一经营分部实体",
+    "Alphabet仅报告Google一个分部"
+   ],
+   "reason": "报告结构定义：分部划分与Other Bets独立性。"
+  },
+  {
+   "id": "goog-tax-law-driver",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Changes to U.S. tax law enacted on July 4, 2025, allow, among other things, for immediate expensing of domestic resea"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2025-07-04生效的美国税法修改允许国内研发支出一次性费用化等",
+    "属法规环境变化"
+   ],
+   "must_not_assert": [
+    "税法修改由公司发起",
+    "一次性费用化已全部体现在FY2025税率"
+   ],
+   "reason": "外部法规驱动因素，归属为环境而非公司行为。"
+  },
+  {
+   "id": "goog-operating-cash-flow",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "Operating cash flow was $164.7 billion for the year ended December 31, 2025"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "FY2025经营现金流$164.7B"
+   ],
+   "must_not_assert": [
+    "经营现金流$164.7B包含发债募资$37.3B"
+   ],
+   "reason": "现金流与融资额不得相加。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。Alphabet FY2025 10-K（财年截至2025-12-31，SEC HTML原件）。有界阅读：Item 1正文、Trends/Monetization、Executive Overview等段落窗口后冻结support set，未查看任何候选输出。prior_use=fresh：Alphabet公司名曾出现在cross-market-rf-e2e评审命令stdout的公司清单、fresh-source-facts公司绑定说明与n6 footprint扫描（均为元数据）；本10-K原件SHA（2026-02-05归档）未进入任何既有gold/清单（既有fresh-us-apple-10k为Apple不同公司）。指定陷阱：Wiz签署协议vs交割、OI&E投资收益vs经营利润、Other Bets亏损一次性成分、A/C类回购拆分、capex vs 费用、财年=日历年。"
+}
