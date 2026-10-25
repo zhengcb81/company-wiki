@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_pdf_reading_boundary.py",
+    "tests/unit/test_narrative_batch.py",
+    "tests/unit/test_narrative_versioned_resume.py",
+    "tests/unit/test_narrative_frozen_software_responsibility.py",
+    "tests/unit/du11_production/test_pdf_production.py",
+    "tests/unit/test_shared_reading_pdf_layout.py",
+    "tests/unit/test_narrative_pdf_language_replay.py"
+  ],
+  "exit_code": 1,
+  "seconds": 52.152,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

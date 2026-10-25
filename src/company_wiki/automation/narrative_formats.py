@@ -10,7 +10,12 @@ NORMALIZED_MIME_TYPES = frozenset({
 })
 
 
-def parser_component(mime_type: str, source_class: str = "filing", *, normalization=None, parser_version=None) -> tuple[str, str]:
+def parser_component(mime_type: str, source_class: str = "filing", *, normalization=None, parser_version=None, pdf_reading=None) -> tuple[str, str]:
+    if source_class == "filing" and mime_type == "application/pdf":
+        if pdf_reading is None:
+            from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
+            pdf_reading = PdfReading()
+        return pdf_reading.parser_identity()
     if source_class == "filing" and mime_type in NORMALIZED_MIME_TYPES:
         if normalization is None:
             from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization

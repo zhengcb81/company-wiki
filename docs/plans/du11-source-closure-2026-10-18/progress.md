@@ -1231,3 +1231,20 @@ PDF选型细则终审发现并修正文档时序根因：原生读后才能决�
 
 
 PDF研究/选型/单层实施细则最终独审PASS_0_OPEN_DOCUMENT_SCOPE_ONLY：decision.md与implementation.md绑定物理SHA分别13d1b268、57a04dae；recipe/actual时序、typedrow口径及归档等价已闭合。只关闭研究和方案节点，不代签生产接线/正式摘要/cache/RF。下一步仍PDF-C1中性RED。
+
+
+PDF-C1已进入实施：中性RED真实复现换parser失共用账户及PDF generation忽略runtime指纹（首次第二项夹具默认TXT已纠正后真RED）；统一PDF阅读owner已收拢read/select旧兼容重读/identity/material验证/replay，AUTO组合根向select/verify共用同一实例。首14P，Ruff/全src mypy376通过；扩展87项85P1F1环境ERROR：新真实PDF夹具source_id非canonical需纠正，沙箱tmp编号目录创建失败改用自有tmp恢复runner，不删断言。源码尚未独审/发布，不启用Docling。
+
+
+## PDF-C1单层实现与集中验收（2026-10-25）
+
+统一PdfReading owner已收拢PDF read/select/fullscan兼容策略、producer/recipe、material核对、replay；AUTO组成根向select/verify共用实例，替换实现保持同一WorkBudget/PdfReadingContext/绝对deadline。PDF generation绑定实际PyMuPDF版本与阅读实现SHA；纯native不读已安装Docling版本，不对非PDF提前探测可选PDF依赖。
+
+独审R1–R5（非PDF依赖污染、deadline缺失、descriptor秘密/物理路径、旧PDF已完成历史恢复、混源unit）逐项真RED后修在各责任owner，最终独审0OPEN。153项定向回归/25.86秒、104历史/usability版本回归/37.31秒（含重叠），独立15项/2.69秒与7历史变体通过，Ruff/全src mypy376/diff-check绿。测试夹具三次修正（bytes需str、缺transcript起始头、_make_unit缺metadata）原始日志保留，不计有效根因RED；两次文件名/参数拼接错误无测试执行，也未冒充通过。
+
+真实三源原件native完整读、仅冻结五页的显式partial选择，与同1.26.7基线59span逐dict一致且59/59同owner原文回放通过；config/catalog/预算配置SHA不变、0费用/下载/原件副本。第一次错误用venv1.28.2对Conda1.26.7基线，发现结构metadata/spanhash变化，不能说解析封装退化；改用相同依赖严格比较，不抹平字段。最终真实receipt绑定当前owner LF SHA35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d。
+
+两项隔离E2E首轮1P/1F不是PDF读失败：诊断得到LocalNarrativeObjectStore.put的os.link目标路径>260、FileNotFoundError，线程返回retry_scheduled故ACK事件未触发。测试runner将TEMP放深层PWF后未提供显式basetemp，违反原短路径约定；按现有约定使用C:/tmp独占目录/显式basetemp原断言重跑，不延长超时、不改生产storage。此项收据与正常发布完成前不称C1发布关闭。C2、C3仍OPEN。
+
+
+PDF-C1最后集成已查清并通过：长根主机FileNotFoundError来自Windows路径>260；短根沙箱WinError5来自禁止硬链接。48字符显式basetemp、同原断言同超时的主机运行2/2通过（5.83秒），自有tmp恢复不存在；不把两份失败日志改绿、不扩大超时、不改production storage。最终Ruff/全src mypy376/diff-check继续绿；C1进入正常发布，C2/C3仍OPEN。

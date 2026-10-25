@@ -55,7 +55,6 @@ def test_production_passes_one_budget_from_source_to_builtin_selector(monkeypatc
         assert observed['selector'].used == 17
         observed['selector'].charge(11)
         return package(parsed)
-    monkeypatch.setattr(execution, 'parse_pdf_bytes', parser)
     monkeypatch.setattr(binding, 'select_narrative_evidence', selector)
     handler = execution.NarrativeSelectHandler(reader=object(), pdf_parser=parser, selector_version='0.9.0')
     handler._select_pdf(payload(), b'fixture', SimpleNamespace(checkpoint=lambda: None))

@@ -1,0 +1,28 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 128 items
+
+tests\unit\test_pdf_reading_boundary.py ............F                    [ 10%]
+tests\unit\test_narrative_source_usability_dependencies.py ............. [ 20%]
+.........................                                                [ 39%]
+tests\unit\test_narrative_select_handler.py ............................ [ 61%]
+                                                                         [ 61%]
+tests\unit\test_narrative_verify_handler.py ....................         [ 77%]
+tests\unit\test_narrative_worker_factory.py .................            [ 90%]
+tests\unit\test_narrative_generation.py ............                     [100%]
+
+================================== FAILURES ===================================
+____ test_transcript_material_validation_never_opens_optional_pdf_runtime _____
+tests\unit\test_pdf_reading_boundary.py:258: in test_transcript_material_validation_never_opens_optional_pdf_runtime
+    parsed = parse_transcript_text(raw, source_id="urn:company-wiki:source:sha256:" + sha,
+src\company_wiki\source_catalog\narrative_evidence.py:2109: in parse_transcript_text
+    raise TypeError("transcript text must be a string")
+E   TypeError: transcript text must be a string
+=========================== short test summary info ===========================
+FAILED tests/unit/test_pdf_reading_boundary.py::test_transcript_material_validation_never_opens_optional_pdf_runtime
+======================= 1 failed, 127 passed in 20.43s ========================

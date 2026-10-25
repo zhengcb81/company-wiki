@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_pdf_reading_boundary.py",
+    "tests/unit/test_narrative_source_usability_dependencies.py",
+    "tests/unit/test_narrative_select.py",
+    "tests/unit/test_narrative_verify.py",
+    "tests/unit/test_narrative_worker_factory.py",
+    "tests/unit/test_narrative_generation.py"
+  ],
+  "exit_code": 4,
+  "seconds": 2.101,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

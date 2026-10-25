@@ -33,6 +33,7 @@ from .models import (
 )
 from .narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 from .narrative_contracts import (
     BUNDLE_SCHEMA,
     PROJECTED_BUNDLE_SCHEMA,
@@ -145,6 +146,7 @@ def _validate_dependency_identity(
     normalization=None,
     *, selector_version: str,
     reading_projection_version: str | None = None,
+    pdf_reading: PdfReading | None = None,
 ) -> None:
     if (
         selected.subject != payload.subject
@@ -162,6 +164,7 @@ def _validate_dependency_identity(
         parser_name, parser_version = parser_component(
             selected.source_ref.mime_type, selected.source_metadata.source_class,
             normalization=normalization, parser_version=selected.parser.version,
+            pdf_reading=pdf_reading,
         )
         parser_current = selected.parser.name == parser_name and selected.parser.version == parser_version
     from .narrative_model_runtime import resolve_model_boundary
@@ -186,6 +189,7 @@ class NarrativeVerifyHandler:
         *,
         reader: NarrativeSourceReader,
         pdf_replayer: PdfEvidenceReplayer | None = None,
+        pdf_reading: PdfReading | None = None,
         normalization: NarrativeNormalization | None = None,
         projection_catalog: Any | None = None,
         generation_sha256: Callable[[NarrativeSubject], str] | None = None,
@@ -194,7 +198,9 @@ class NarrativeVerifyHandler:
     ) -> None:
         self._selector_version = resolve_narrative_selector_version(selector_version)
         self._reader = reader
-        self._pdf_replayer = pdf_replayer
+        if pdf_replayer is not None and pdf_reading is not None:
+            raise ValueError("provide one complete PDF reading implementation")
+        self._pdf_reading = pdf_reading or PdfReading(replayer=pdf_replayer)
         self._normalization = normalization or NarrativeNormalization()
         self._projection_catalog = projection_catalog
         self._generation_sha256 = generation_sha256
@@ -234,6 +240,7 @@ class NarrativeVerifyHandler:
         selected, summary = _dependencies(context)
         _validate_dependency_identity(payload, selected, summary, self._normalization,
             selector_version=self._selector_version,
+            pdf_reading=self._pdf_reading,
             reading_projection_version=self._reading_model_projection(selected.subject)
                 if self._reading_model_projection is not None else None)
         if payload.subject.kind == "official_json":
@@ -348,7 +355,7 @@ class NarrativeVerifyHandler:
 
     def _replay(self, data: bytes, selected: NarrativeSelectResult) -> None:
         try:
-            replay_narrative_evidence(data, selected, pdf_replayer=self._pdf_replayer, normalization=self._normalization)
+            replay_narrative_evidence(data, selected, pdf_reading=self._pdf_reading, normalization=self._normalization)
         except NarrativeReplayError as exc:
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",

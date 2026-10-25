@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/integration/test_narrative_runtime_e2e.py",
+    "-k",
+    "runtime_e2e_three_sources_are_idempotent or runtime_e2e_dispatches_and_recovers_pathless_bundle_versions"
+  ],
+  "exit_code": 1,
+  "seconds": 20.235,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

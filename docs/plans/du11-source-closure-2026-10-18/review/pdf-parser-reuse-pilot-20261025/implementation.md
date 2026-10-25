@@ -1,6 +1,6 @@
 # 选型后的单层实施细则
 
-状态：**待实施，非验收收据。** 研究决定见decision.md；实际分层泄漏L1–L8与源码定位见layer-boundary-review.md。此节点不碰W18/W19作者工区，不改Dayu/IQS、RF运行WIP或原件。A股三表仍由新浪W19提供。
+状态：**PDF-C1源码已实施并独立终审0OPEN，发布收尾；PDF-C2/C3仍待实施验收。** 真实收据见[c1-acceptance](c1-acceptance.md)，以下保留施工细则，不是全计划验收收据。 研究决定见decision.md；实际分层泄漏L1–L8与源码定位见layer-boundary-review.md。此节点不碰W18/W19作者工区，不改Dayu/IQS、RF运行WIP或原件。A股三表仍由新浪W19提供。
 
 ## 一、唯一职责层与对外契约
 
@@ -47,7 +47,7 @@ PDF-C1集中验收：上述RED转绿＋既有PDF选择/格式/verify/generation/
 
 ## 当前下一步（唯一）
 
-PDF-C1先写backend替换不丢预算/context、producer与replay一致、PDF生成依赖真实入cache的中性RED，再改统一阅读owner。此细则尚未实施，不能用A/B研究或工程绿代签生产摘要/cache/RF完成。
+完成PDF-C1正常提交推送与精确CI（短路径主机集成2/2已通过）；随后PDF-C2按需结构增强。C1源码/真实接缝独审已通过，C2/C3仍OPEN，不用A/B研究或工程绿代签正式摘要/cache/RF完成。
 
 
 ## 最终独审补正：冻结配方与实际执行分开（2026-10-25）

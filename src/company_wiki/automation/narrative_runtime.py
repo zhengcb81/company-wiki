@@ -10,6 +10,7 @@ from company_wiki.narrative_subject import NarrativeSubject
 
 from .execution_context import JobExecutionContext
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 from .models import HandlerResult
 from .narrative_model import NarrativeModel
 from .narrative_model_caller import NarrativeModelCaller
@@ -38,6 +39,7 @@ class NarrativeRuntimeDependencies:
     model: NarrativeModel | None
     model_caller: NarrativeModelCaller | None = None
     normalization: NarrativeNormalization | None = None
+    pdf_reading: PdfReading | None = None
     projection_catalog: Any | None = None
     generation_sha256: Callable[[NarrativeSubject], str] | None = None
     selector_version: str | None = None
@@ -52,9 +54,11 @@ def register_narrative_handlers(
     """Register the select, summarize and verify handlers as one unit."""
 
     selector_version = resolve_narrative_selector_version(dependencies.selector_version)
+    pdf_reading = dependencies.pdf_reading or PdfReading()
     registrar.register(
         "source.narrative_select",
         NarrativeSelectHandler(reader=dependencies.reader, normalization=dependencies.normalization,
+            pdf_reading=pdf_reading,
             projection_catalog=dependencies.projection_catalog, selector_version=selector_version),
     )
     registrar.register(
@@ -66,6 +70,7 @@ def register_narrative_handlers(
     registrar.register(
         "source.narrative_verify",
         NarrativeVerifyHandler(reader=dependencies.reader, normalization=dependencies.normalization,
+            pdf_reading=pdf_reading,
             projection_catalog=dependencies.projection_catalog, generation_sha256=dependencies.generation_sha256,
             selector_version=selector_version, reading_model_projection=dependencies.reading_model_projection),
     )

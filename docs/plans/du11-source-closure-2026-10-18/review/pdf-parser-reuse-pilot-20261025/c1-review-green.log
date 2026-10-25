@@ -1,0 +1,57 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 67 items
+
+tests\unit\test_pdf_reading_boundary.py ............                     [ 17%]
+tests\unit\test_narrative_source_usability_dependencies.py FFFFFFFF..... [ 37%]
+.........................                                                [ 74%]
+tests\unit\test_narrative_worker_factory.py .................            [100%]
+
+================================== FAILURES ===================================
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[False-text/plain] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[False-application/json] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[False-text/html] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[False-application/xhtml+xml] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[True-text/plain] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[True-application/json] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[True-text/html] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+_ test_transcript_selected_material_uses_actual_non_normalized_matcher[True-application/xhtml+xml] _
+tests\unit\test_narrative_source_usability_dependencies.py:75: in test_transcript_selected_material_uses_actual_non_normalized_matcher
+    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+E   AttributeError: <module 'company_wiki.automation.narrative_select' from 'C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py'> has no attribute 'parse_pdf_bytes'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[False-text/plain]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[False-application/json]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[False-text/html]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[False-application/xhtml+xml]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[True-text/plain]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[True-application/json]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[True-text/html]
+FAILED tests/unit/test_narrative_source_usability_dependencies.py::test_transcript_selected_material_uses_actual_non_normalized_matcher[True-application/xhtml+xml]
+======================== 8 failed, 59 passed in 45.51s ========================

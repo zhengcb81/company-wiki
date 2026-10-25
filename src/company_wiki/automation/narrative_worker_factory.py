@@ -381,11 +381,21 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024),
             paid_responses=paid_responses,
         )
+    from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
+    # The existing field is the batch's absolute execution deadline. Its
+    # historical name is retained in the worker wire; it also bounds PDF work.
+    pdf_reading = PdfReading(deadline=options.get("normalization_deadline"))
+    for manifest in snapshot.frozen_generations.values():
+        if (manifest.get("source_ref", {}).get("mime_type") == "application/pdf"
+                and manifest.get("source_metadata", {}).get("source_class") == "filing"
+                and manifest.get("parser_components") is not None):
+            pdf_reading.validate_frozen_recipe(manifest["parser_components"])
     registry = create_default_registry()
     executor = HandlerExecutor()
     register_narrative_handlers(
         executor,
         NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
+            pdf_reading=pdf_reading,
             projection_catalog=catalog, selector_version=selector_version,
             reading_model_projection=(lambda subject: reading_projections[subject.item_key])
                 if reading_projections else None,

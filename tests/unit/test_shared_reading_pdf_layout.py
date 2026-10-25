@@ -437,7 +437,7 @@ def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_it
     assert default._parse_pdf(payload, raw).layout_coverage is not None
     calls = []
 
-    def custom(data, *, source_id, source_sha256, language, full_table_scan=False):
+    def custom(data, *, source_id, source_sha256, language, full_table_scan=False, **reading_options):
         calls.append(True)
         return pdf.parse_pdf_bytes(
             data,
@@ -445,6 +445,7 @@ def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_it
             source_sha256=source_sha256,
             language=language,
             full_table_scan=full_table_scan,
+            **reading_options,
         )
 
     compatible = NarrativeSelectHandler(
@@ -452,7 +453,7 @@ def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_it
     )
     parsed = compatible._parse_pdf(payload, raw)
     assert calls == [True]
-    assert parsed.layout_coverage is None
+    assert parsed.layout_coverage is not None
 
 
 def _native_page(text, words, *, spans=None, image_before=False, crop=True):

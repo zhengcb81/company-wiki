@@ -1,0 +1,126 @@
+{
+  "schema_version": "pdf-c1-real-owner/1",
+  "status": "PASS_C1_SEAM_ONLY",
+  "runs": [
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "byte_size": 3396644,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "analysis_pages": [
+        11,
+        13
+      ],
+      "native_pages": 75,
+      "native_units": 2330,
+      "selected_spans": 25,
+      "unchanged_selection_bytes": true,
+      "old_selection_sha256": "da325b1c6dc6129706b5607b2f8e116b67fc70cec81505cef5f76fcb59c25d86",
+      "selection_sha256": "da325b1c6dc6129706b5607b2f8e116b67fc70cec81505cef5f76fcb59c25d86",
+      "replayed": 25,
+      "replay_failures": [],
+      "total_work": 408064,
+      "limit": 16000000,
+      "exhausted": false,
+      "seconds": 3.0475,
+      "recipe": {
+        "format": "pdf",
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.1",
+        "reader_recipe": "native-pdf/1",
+        "runtime": {
+          "pymupdf": "1.26.7"
+        },
+        "reader_implementation_sha256": "35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d"
+      },
+      "different_fields": []
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "analysis_pages": [
+        114,
+        115
+      ],
+      "native_pages": 429,
+      "native_units": 14025,
+      "selected_spans": 19,
+      "unchanged_selection_bytes": true,
+      "old_selection_sha256": "d52321aa6f08bd5062c9a53725f6d8b4ce613f7021cf53d439ed5177a1a512b2",
+      "selection_sha256": "d52321aa6f08bd5062c9a53725f6d8b4ce613f7021cf53d439ed5177a1a512b2",
+      "replayed": 19,
+      "replay_failures": [],
+      "total_work": 518209,
+      "limit": 16000000,
+      "exhausted": false,
+      "seconds": 10.034,
+      "recipe": {
+        "format": "pdf",
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.1",
+        "reader_recipe": "native-pdf/1",
+        "runtime": {
+          "pymupdf": "1.26.7"
+        },
+        "reader_implementation_sha256": "35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d"
+      },
+      "different_fields": []
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:af09ac4951073e650f8d4f428a7eaea6977e18a162cfb042000408a3fc49d50f",
+        "source_id": "urn:company-wiki:source:sha256:af09ac4951073e650f8d4f428a7eaea6977e18a162cfb042000408a3fc49d50f",
+        "content_sha256": "af09ac4951073e650f8d4f428a7eaea6977e18a162cfb042000408a3fc49d50f",
+        "byte_size": 1858616,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "analysis_pages": [
+        14
+      ],
+      "native_pages": 233,
+      "native_units": 10320,
+      "selected_spans": 15,
+      "unchanged_selection_bytes": true,
+      "old_selection_sha256": "0e76dc1790c5a36cc03197d77ad100ee79060316fe7965e5b785196ae40b495f",
+      "selection_sha256": "0e76dc1790c5a36cc03197d77ad100ee79060316fe7965e5b785196ae40b495f",
+      "replayed": 15,
+      "replay_failures": [],
+      "total_work": 793373,
+      "limit": 16000000,
+      "exhausted": false,
+      "seconds": 4.7943,
+      "recipe": {
+        "format": "pdf",
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.1",
+        "reader_recipe": "native-pdf/1",
+        "runtime": {
+          "pymupdf": "1.26.7"
+        },
+        "reader_implementation_sha256": "35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d"
+      },
+      "different_fields": []
+    }
+  ],
+  "protected_unchanged": true,
+  "protected_sha256": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    ".source_catalog\\catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5",
+    "config\\resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+  },
+  "paid_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "scope": "Full-source native read; explicitly partial frozen-page selection. Not C2 enhancement, final summary or RF acceptance."
+}

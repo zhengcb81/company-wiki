@@ -1,0 +1,184 @@
+{
+  "schema_version": "pdf-c1-independent-review/1",
+  "date": "2026-10-25",
+  "status": "FINAL_SOURCE_REVIEW_PASS_0_OPEN_C1_ONLY",
+  "open_count": 0,
+  "findings": [
+    {
+      "id": "C1-R1",
+      "priority": 1,
+      "status": "RESOLVED",
+      "issue": "Optional PDF dependency polluted non-PDF composition",
+      "resolution": "Lazy recipe resolution;concrete PDF dependency error only on actual PDF description/read;TXT material uses explicit input MIME",
+      "verification": "Focused tests optional-dependency composition and transcript material path passed"
+    },
+    {
+      "id": "C1-R2",
+      "priority": 2,
+      "status": "RESOLVED",
+      "issue": "Complete reading contract lacked absolute deadline",
+      "resolution": "Owner keeps constructor/per-call min deadline;passes same absolute deadline to complete backend;pre/post native read check;native capture only receives remaining bounded allowance",
+      "verification": "Focused deadline propagation/expired-before-IO passed;worker factory supplies existing absolute normalization_deadline"
+    },
+    {
+      "id": "C1-R3",
+      "priority": 2,
+      "status": "RESOLVED",
+      "issue": "Recipe owner accepted secret/path fields",
+      "resolution": "Recursive private-key/physical-location validation;finite compact8192B descriptor;detached frozen snapshot and drift rejection",
+      "verification": "Focused nested key/path rejection and detached/drift tests passed"
+    },
+    {
+      "id": "C1-R4",
+      "priority": 1,
+      "status": "RESOLVED",
+      "issue": "Old completed PDF history without parser_components rejected by new recipe auto-fill",
+      "resolution": "Comparison-only omission scoped to settled gen1 filing/PDF;original manifest untouched;pending and other drift refused;caller additionally proves terminal/delivered/visible state",
+      "verification": "Independent7-case history check passed;new completed/pending/version/recorded-recipe mutation regression passed"
+    },
+    {
+      "id": "C1-R5",
+      "priority": 2,
+      "status": "RESOLVED",
+      "issue": "Owner accepted foreign-source units inside correctly identified DocumentStructure",
+      "resolution": "Existing source/producer guard also checks every unit.source_id against requested source",
+      "verification": "Independent pre-fix read accepted mixed source;new rejection regression passed in final focused15"
+    }
+  ],
+  "source_bindings": {
+    "src/company_wiki/source_catalog/narrative_pdf_reading.py": {
+      "bytes": 13172,
+      "sha256": "0cca6da98f1eacd151880ffcdbded4b29b529b25c89508ca4f8635b826ff5ce1",
+      "lf_sha256": "35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d"
+    },
+    "src/company_wiki/automation/narrative_select.py": {
+      "bytes": 28367,
+      "sha256": "2d94047d0c0ef25f7fdd5ac2609f7ff5f049812431121596cc6ca73819da958e",
+      "lf_sha256": "d061f3da73b86fff38718021d6be7578b27eb0eb0de1376fbd96117fcb7b8bd3"
+    },
+    "src/company_wiki/automation/narrative_formats.py": {
+      "bytes": 2174,
+      "sha256": "867112ca0727b70606090e220e70094e920458ac72918ff7e2271817a4e8ed23",
+      "lf_sha256": "343ed1a234462d74fbf8adad77371561efadc20591f9faee5504be7406cbd5bb"
+    },
+    "src/company_wiki/automation/narrative_replay.py": {
+      "bytes": 10113,
+      "sha256": "cc04b5fd590a6d4869e561e6a2392070d261fe4f0b6697d9774816207e0f6188",
+      "lf_sha256": "860a20a2b972493c382e99634734fc5ec5229100bdc316034566e9bdabc2fcd5"
+    },
+    "src/company_wiki/automation/narrative_verify.py": {
+      "bytes": 20261,
+      "sha256": "40b567cbb82fc0c45dc2fb6613cf9832ee93848e43c0f3fca4ac7cae2498fc72",
+      "lf_sha256": "8261e6612cb2f09c0d3897dbb23b1f7e4cc47716ab786760eeb36b18ff50a282"
+    },
+    "src/company_wiki/automation/narrative_runtime.py": {
+      "bytes": 3443,
+      "sha256": "3e57cad260b4380c1ba0d1e3e1e6a7b07c4c8f607a8c2d80c80da99061e80241",
+      "lf_sha256": "10a83e5c1abadd4f99548a037222e2df097e080bb027e4a6217e70109bc514a1"
+    },
+    "src/company_wiki/automation/narrative_generation.py": {
+      "bytes": 26531,
+      "sha256": "814da224b82a042bf6b387116ac47b87831ee07a8cce6b26a152021786e5d466",
+      "lf_sha256": "7f094cd1603b7f71032d54c08f97cd3e40d329bf0cdd1530a1f175c16f2133a1"
+    },
+    "src/company_wiki/automation/narrative_batch.py": {
+      "bytes": 104457,
+      "sha256": "773ccb3e3b0f3b6139ab79ed2fefaddf5fe1eda85eaa50cb325029f17918e7af",
+      "lf_sha256": "97d319c20a4658bdc2edd4d12c22381e6b5791a311727d7ba3d1167ec72998d4"
+    },
+    "src/company_wiki/automation/narrative_worker_factory.py": {
+      "bytes": 20913,
+      "sha256": "4681407f24674f78c4f5af0740cc05b06c5636652adcb7979fc80b9ea2885b7d",
+      "lf_sha256": "af27f2b2cd12fc8e73987d935ac609eb392b0063ffe58786f4338f36487e6b50"
+    },
+    "tests/unit/test_pdf_reading_boundary.py": {
+      "bytes": 15537,
+      "sha256": "486fa592456095dc61fd6ba88d25b25acb4dc41e672218befb2e56902d888a54",
+      "lf_sha256": "8c619e9ba6fcd634a53742cd4db8f2311272f2a212967c1abee8c52a28605d26"
+    },
+    "tests/unit/du11_production/test_pdf_production.py": {
+      "bytes": 11501,
+      "sha256": "98d8a42d40b1de2ecaf3670ae213053dde353734ef3c38347449661c143f739e",
+      "lf_sha256": "ea0dae614692273fd88318ef0833ddfe4968cd4dcb08603b55691065ac7e355f"
+    },
+    "tests/unit/test_shared_reading_pdf_layout.py": {
+      "bytes": 31872,
+      "sha256": "16ae4d21649fe2b5f1acda8139bc6c8805b7c5b09d823012f603bdf5f4c8e717",
+      "lf_sha256": "a7035a5ed5faddcd02064b5f70924c380b5c4181738d0c0040583ffc9a2dbe61"
+    }
+  },
+  "independent_tests": {
+    "initial_boundary_tests": {
+      "passed": 9,
+      "pytest_seconds": 8.06,
+      "outer_wall_seconds": 14.492
+    },
+    "final_boundary_tests": {
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider --basetemp <owned-scratch>/pytest tests/unit/test_pdf_reading_boundary.py",
+      "passed": 15,
+      "pytest_seconds": 2.69,
+      "outer_wall_seconds": 4.845,
+      "outer_timeout_seconds": 90,
+      "source_hashes_stable_during_test": true,
+      "temporary_root_restored_absent": true,
+      "pytest_relocated_temp_removed": true
+    },
+    "independent_history_cases": {
+      "passed": 7,
+      "original_manifest_mutated": false
+    }
+  },
+  "boundaries_confirmed": [
+    "Single PDF owner for recipe/read/selection policy/material validation/replay",
+    "AUTO no parser callable identity special-case or backend-specific fallback",
+    "Modern native-compatible callback gets full declared reading options;no signature probing/TypeError retry",
+    "Same existing WorkBudget;absolute deadline from worker composition",
+    "PDF recipe stored opaque in generation;current recipe drift rejected instead of trusting recorded snapshot",
+    "Native-only recipe ignores unrelated installed SDKs",
+    "Canonical old replay preserved;completed legacy omission not current capability",
+    "Source bytes/units producer identity consistency",
+    "No additional material permission/state store/heavy SDK default"
+  ],
+  "runtime_receipt_scope": "ROOT final C1 native finite-view59span receipt reviewed and final owner-bound;larger ROOT test suites/CI are separate",
+  "network_paid_heavy_model_calls": 0,
+  "production_or_author_changes": false,
+  "not_claimed": [
+    "C2 routing/Docling production",
+    "Fresh-company holdout",
+    "Formal real summary",
+    "Restart cache0POST E2E",
+    "RF consumption",
+    "ExactHEAD CI acceptance"
+  ],
+  "root_real_receipt_review": {
+    "path": "c1-real-owner-final-receipt.json",
+    "sha256": "228157f768f9b4f72ea106bb2797dd21c3a08d127cdb04944b7d80f1ebb0f35b",
+    "final_owner_lf_sha_matches": true,
+    "frozen_baseline_selection_hashes_independently_recomputed": true,
+    "selected_and_replayed_spans": 59,
+    "scope": "C1 finite-view native reading/material/replay;not C2/summary/cache/RF",
+    "no_original_or_sdk_rerun_by_reviewer": true
+  },
+  "fixture_portability_followup": {
+    "status": "PASS_0_OPEN",
+    "only_test_fixture_changed": true,
+    "test": "tests/unit/test_pdf_reading_boundary.py",
+    "old_binding": {
+      "bytes": 15524,
+      "sha256": "126746e9ae6dbcd060dd4bd0c30de4f250f848d0bb5a2a24417de7ef8aedeedf",
+      "lf_sha256": "09c6e32d647905bcc21c37b6fd26ed55407388303b4772be3baacebc1813113d"
+    },
+    "new_binding": {
+      "bytes": 15537,
+      "sha256": "486fa592456095dc61fd6ba88d25b25acb4dc41e672218befb2e56902d888a54",
+      "lf_sha256": "8c619e9ba6fcd634a53742cd4db8f2311272f2a212967c1abee8c52a28605d26"
+    },
+    "change": "Use pytest tmp_path/model instead of host-specific C:/example/cache;original raises assertion unchanged",
+    "all_product_bindings_unchanged": true,
+    "root_reported_host_neutral_tests": {
+      "passed": 15,
+      "seconds": 3.08
+    },
+    "independent_full_suite_rerun": false
+  }
+}

@@ -72,7 +72,8 @@ def test_transcript_selected_material_uses_actual_non_normalized_matcher(monkeyp
     monkeypatch.setattr(select, "verify_replayed_pdf_spans", counted_matcher)
     monkeypatch.setattr(select, "verify_parsed_evidence_spans", no_parse_or_normalized_matcher)
     monkeypatch.setattr(select, "parse_transcript_text", no_parse_or_normalized_matcher)
-    monkeypatch.setattr(select, "parse_pdf_bytes", no_parse_or_normalized_matcher)
+    from company_wiki.source_catalog import narrative_evidence as native_pdf
+    monkeypatch.setattr(native_pdf, "parse_pdf_bytes", no_parse_or_normalized_matcher)
     if forged_parser:
         with pytest.raises(select._SelectFailure) as rejected:
             select.NarrativeSelectHandler._verify_selected_material(parsed, package)

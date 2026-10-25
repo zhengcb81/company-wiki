@@ -416,6 +416,13 @@ def _validate_normalization_binding(manifests, snapshot):
             if manifest.get("schema_version") == "narrative-generation/2":
                 continue
             mime = manifest["source_ref"]["mime_type"]
+            if (mime == "application/pdf"
+                    and manifest["source_metadata"]["source_class"] == "filing"):
+                from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
+                recipe = manifest.get("parser_components")
+                if recipe is not None:
+                    PdfReading().validate_frozen_recipe(recipe)
+                continue
             if (
                 mime not in NORMALIZED_MIME_TYPES
                 or manifest["source_metadata"]["source_class"] != "filing"
@@ -438,12 +445,21 @@ def _validate_normalization_binding(manifests, snapshot):
 
 
 def _completed_history_generation_matches(expected, manifest, *, completed_history):
-    """Compare an old gen1 omission without changing its signed generation.
+    """Compare historical omissions without changing the signed generation.
 
     Historical producers omitted an explicit HTTP reasoning effort. Only a
     fully settled read may keep that unknown value absent; new generations and
-    every other field retain exact equality.
+    every other field retain exact equality. Old settled PDFs also predate the
+    reading recipe: its absence is unknown history, never current capability.
+    Callers must additionally prove settled work and visible publications.
     """
+    if (completed_history
+            and expected.get("schema_version") == manifest.get("schema_version") == "narrative-generation/1"
+            and manifest.get("source_ref", {}).get("mime_type") == "application/pdf"
+            and manifest.get("source_metadata", {}).get("source_class") == "filing"
+            and "parser_components" not in manifest
+            and isinstance(expected.get("parser_components"), dict)):
+        expected = {key: value for key, value in expected.items() if key != "parser_components"}
     if expected == manifest:
         return True
     if (

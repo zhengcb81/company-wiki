@@ -1,5 +1,15 @@
 # 当前行动计划（2026-10-25更新）
 
+## 2026-10-25 当前行动：PDF-C1单层阅读边界已独审，收尾发布中
+
+真实比较已选定“原生canonical文字/locator＋按需Docling结构提示”。PDF-C1产品代码已实施：统一`PdfReading`负责read/select、后端身份/配方、材料核对和replay；AUTO只传逻辑任务、统一账户/deadline，select与verify使用同一实例。换兼容实现不再因函数identity丢预算/context，PDF配方和PyMuPDF实际版本进入generation。非PDF不加载可选PDF运行时，旧已完成PDF历史不补签当前配方。[本节点](review/pdf-parser-reuse-pilot-20261025/c1-acceptance.md)。
+
+153项定向回归通过，历史/usability/版本恢复104项通过（含重叠）；独立15项与7历史变体通过，终审C1范围0OPEN。三源五页59条证据在同PyMuPDF1.26.7下与冻结基线逐dict一致，59/59原文replay通过。错误混用1.28.2对1.26.7基线会改变结构metadata/hash，已记录，不称作封装退化。首两项集成1P/1F来自测试根过深、Windows硬链接路径>260；仓内48字符短basetemp沙箱仍WinError5（硬链接禁止），同一主机环境原断言2/2通过（5.83秒），临时根恢复不存在。不扩大超时、不删断言、不改生产原件/config/catalog。
+
+**下一步唯一动作：** 完成PDF-C1正常发布、核精确CI；然后按[PDF-C2细则](review/pdf-parser-reuse-pilot-20261025/implementation.md)实施通用缺口分诊、严格native成员对齐与有界热运行时。C2与C3正式摘要/缓存恢复/RF/新公司验收仍OPEN。当前生产仍原生后端；不能把边界重构当Docling已接线或准确率提升。A股三表由W19新浪供给；W18/W19作者目录、RF运行WIP、Dayu/IQS不写。
+
+以下较早“当前/下一步”是历史快照，由本段与CURRENT_STATUS.json统领，不重做已关闭研究、W16/W17或CF3发布。
+
 ## 2026-10-25 当前行动：PDF真实比较完成，进入单层阅读owner改造
 
 三份原件五页、冻结检查点与独立源侧复核完成。[选型](review/pdf-parser-reuse-pilot-20261025/decision.md)：保留原生canonical文字/locator，按需借Docling段落结构，不全量替换。当前共享流程八项同组叙述6/8通过，Docling段落8/8；两个局部缺组内容均已存在整体selection。经营应用关系同组保留，但当前无typed rows；不混同原生按页表格发现能力。冷启/约1.06GB内存和字符差异均阻止直接启重模型默认。
@@ -19,7 +29,7 @@
 
 ## Next Step
 
-按[PDF单层实施细则](review/pdf-parser-reuse-pilot-20261025/implementation.md)的PDF-C1先写backend替换/统一账户/context/成套identity-replay/generation-cache的中性RED，再改统一阅读owner；研究及五页对照已独审完成，不无变化重跑。A股三表由W19新浪供给，不恢复PDF三表任务。
+完成PDF-C1正常提交推送/精确CI（隔离集成2/2已通过）；随后PDF-C2按需结构增强。C1源码终审与三源59/59接缝回放已通过，不重复五页重模型研究。C2/C3及正式摘要/cache/RF保持OPEN。
 
 ### 本批并行安排（2026-10-25，用户已发出三卡）
 

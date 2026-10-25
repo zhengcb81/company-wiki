@@ -108,21 +108,26 @@ def generation_manifest(
 ):
     """Bind only this source's causal inputs; component fingerprints are pathless.
 
-    Normalization owners can provide their actual runtime/model/preprocess
-    fingerprint through parser_components. Other carriers ignore that component.
+    Reading owners provide a frozen recipe through parser_components. It is
+    a causal plan, not proof that every optional component actually executed.
     """
     versions = dict(execution_versions)
     normalized = (
         payload.source_ref.mime_type in NORMALIZED_MIME_TYPES
         and payload.source_metadata.source_class == "filing"
     )
+    pdf = (payload.source_ref.mime_type == "application/pdf"
+           and payload.source_metadata.source_class == "filing")
+    if pdf and parser_components is None:
+        from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
+        parser_components = PdfReading().describe_recipe()
     versions.pop("document_normalization", None)
     if normalized:
         versions.pop("parser", None)
     parser_name, parser_version = parser_component(
         payload.source_ref.mime_type, payload.source_metadata.source_class
     )
-    if normalized and parser_components is not None:
+    if (normalized or pdf) and parser_components is not None:
         parser_name = parser_components["parser_name"]
         parser_version = parser_components["parser_version"]
     model = request.model_options
@@ -156,7 +161,7 @@ def generation_manifest(
             if payload.source_ref.mime_type == "application/json"
             else TRANSCRIPT_MATERIAL_EXTRACTOR
         )
-    if normalized and parser_components is not None:
+    if (normalized or pdf) and parser_components is not None:
         # Caller supplies the actual producer fingerprint, never guessed config.
         from .narrative_contracts import assert_no_physical_paths
 

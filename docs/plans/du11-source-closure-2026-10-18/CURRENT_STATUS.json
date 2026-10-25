@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "PDF_REUSE_B_RESEARCH_INDEPENDENT_REVIEWED_TARGET_SELECTED; PDF_C1_READING_OWNER_TDD_NEXT; PRODUCTION_ENHANCEMENT_SUMMARY_CACHE_RF_OPEN",
+  "overall_status": "PDF_C1_IMPLEMENTED_INDEPENDENT_REVIEW_PASS_PUBLICATION_IN_PROGRESS; C2_ENHANCEMENT_C3_SUMMARY_CACHE_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_ROOT_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
     "entry": "harness_lanes/20261025/README.md",
@@ -2098,7 +2098,7 @@
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
   },
   "pdf_parser_reuse_20261025": {
-    "status": "A_B_FINITE_RESEARCH_REVIEWED_TARGET_SELECTED_PRODUCTION_NOT_CHANGED",
+    "status": "C1_SOURCE_REVIEW_PASS_0_OPEN_PUBLICATION_IN_PROGRESS",
     "entry": "review/pdf-parser-reuse-pilot-20261025/README.md",
     "production_default_changed": false,
     "calls_paid": 0,
@@ -2119,6 +2119,19 @@
     "compressed_evidence_bytes": 152636,
     "original_evidence_bytes": 850969,
     "new_paid_calls": 0,
-    "independent_review": "PASS_0_OPEN_DOCUMENT_SCOPE_ONLY; comparison-independent-review.md/json"
+    "independent_review": "PASS_0_OPEN_DOCUMENT_SCOPE_ONLY; comparison-independent-review.md/json",
+    "c1_acceptance": "review/pdf-parser-reuse-pilot-20261025/c1-acceptance.md",
+    "c1_independent": "review/pdf-parser-reuse-pilot-20261025/c1-independent-review.json",
+    "c1_real": "review/pdf-parser-reuse-pilot-20261025/c1-real-owner-final-receipt.json",
+    "production_backend": "native; Docling production not enabled",
+    "next_action": "C1 normal publication/exact CI, then C2 demand/alignment/finite runtime; C3 formal summary/cache/RF/new company remains open.",
+    "c1_integration": {
+      "status": "PASS_HOST_SHORT_BASETEMP",
+      "passed": 2,
+      "pytest_seconds": 5.83,
+      "temporary_root_restored_absent": true,
+      "receipt": "review/pdf-parser-reuse-pilot-20261025/c1-integration-short-host-receipt.json",
+      "prior_failures_preserved": "deep host Win32 path limit; short sandbox hardlink denied"
+    }
   }
 }

@@ -7,7 +7,6 @@ import hashlib
 from typing import Protocol
 
 from company_wiki.source_catalog.narrative_evidence import (
-    verify_pdf_evidence_spans_bytes,
     verify_transcript_evidence_spans,
 )
 from company_wiki.source_catalog.transcript_text_extract import (
@@ -16,6 +15,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
 )
 from company_wiki.source_contract import EvidenceSpan
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 
 from .narrative_contracts import (
     NarrativeBundle,
@@ -147,6 +147,7 @@ def replay_narrative_evidence(
     *,
     pdf_replayer: PdfEvidenceReplayer | None = None,
     normalization: NarrativeNormalization | None = None,
+    pdf_reading: PdfReading | None = None,
 ) -> int:
     """Replay all selected locators; quality diagnostics remain unchanged."""
     source = selected.source_ref
@@ -160,8 +161,10 @@ def replay_narrative_evidence(
             if source.mime_type in NORMALIZED_MIME_TYPES:
                 _replay_normalized(data, selected, normalization)
                 return len(selected.evidence_spans)
-            replayer = pdf_replayer or verify_pdf_evidence_spans_bytes
-            verified, failed = replayer(
+            if pdf_replayer is not None and pdf_reading is not None:
+                raise ValueError("provide one complete PDF reading implementation")
+            reading = pdf_reading or PdfReading(replayer=pdf_replayer)
+            verified, failed = reading.replay(
                 data,
                 source_id=source.source_id,
                 source_sha256=source.content_sha256,

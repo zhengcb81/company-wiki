@@ -1,6 +1,6 @@
 # 已批准：成熟PDF解析器复用试点
 
-2026-10-25用户“按照你的建议做”，并明确新浪API供应A股历史三张表。沿用du11唯一PWF，不建第二主线。当前状态：A/B有限真实比较与独审完成，选定原生canonical＋按需Docling段落结构增强方向；PDF-C1单一阅读owner重构待实施，生产默认未切换。
+2026-10-25用户“按照你的建议做”，并明确新浪API供应A股历史三张表。沿用du11唯一PWF，不建第二主线。当前状态：A/B有限真实比较与独审完成，选定原生canonical＋按需Docling段落结构增强方向；PDF-C1单一阅读owner已实施、独立终审0OPEN、三源59/59回放通过，正常发布收尾中；生产默认仍原生，PDF-C2/C3未验收。
 
 ## 责任与样本边界
 
@@ -38,7 +38,7 @@
 
 ## 下一步
 
-按[选型决定](decision.md)和[单层实施细则](implementation.md)，先写PDF-C1后端替换不丢预算/context、producer/replay与generation/cache一致的中性RED，再改统一阅读owner；之后按需增强与真实摘要/cache/新公司验证。不要再次重复已完成的五页重模型比较。
+按[选型决定](decision.md)和[单层实施细则](implementation.md)，PDF-C1已先RED后实施并独审，见[c1-acceptance](c1-acceptance.md)；完成正常发布后进入PDF-C2按需增强，再C3真实摘要/cache/新公司验证。不要再次重复已完成的五页重模型比较。
 
 
 ## B首例实际观察（非生产验收）

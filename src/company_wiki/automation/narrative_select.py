@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from dataclasses import dataclass, replace
 from typing import Any, Protocol
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
@@ -12,10 +12,11 @@ from company_wiki.source_catalog.narrative_document import (
     NarrativeParseResult,
 )
 from company_wiki.source_catalog.narrative_evidence import (
-    NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
-    parse_pdf_bytes,
     parse_transcript_text,
+)
+from company_wiki.source_catalog.narrative_pdf_reading import (
+    PdfBytesParser, PdfReading, PdfReadingError, PdfReadingRequest,
 )
 from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
 from company_wiki.source_catalog.official_json_projection import ProjectionError
@@ -70,23 +71,6 @@ from .narrative_source_guard import (
     validate_opened_identity,
     validate_source_metadata,
 )
-
-
-class PdfBytesParser(Protocol):
-    def __call__(
-        self,
-        data: bytes,
-        *,
-        source_id: str,
-        source_sha256: str,
-        parser_version: str = NARRATIVE_PARSER_VERSION,
-        language: str = "zh",
-        full_table_scan: bool = False,
-        table_pages: Sequence[int] | None = None,
-        selector_version: str | None = None,
-        layout_limits: Mapping[str, Any] | None = None,
-        layout_max_seconds: float = 15,
-    ) -> NarrativeParseResult: ...
 
 
 class NarrativeSelector(Protocol):
@@ -213,14 +197,17 @@ class NarrativeSelectHandler:
         self,
         *,
         reader: NarrativeSourceReader,
-        pdf_parser: PdfBytesParser = parse_pdf_bytes,
+        pdf_parser: PdfBytesParser | None = None,
+        pdf_reading: PdfReading | None = None,
         selector: NarrativeSelector | None = None,
         selector_version: str | None = None,
         normalization: NarrativeNormalization | None = None,
         projection_catalog: Any | None = None,
     ) -> None:
         self._reader = reader
-        self._pdf_parser = pdf_parser
+        if pdf_parser is not None and pdf_reading is not None:
+            raise ValueError("provide one complete PDF reading implementation")
+        self._pdf_reading = pdf_reading or PdfReading(parser=pdf_parser)
         self._selector = bind_narrative_selector(selector, selector_version=selector_version)
         self._normalization = normalization or NarrativeNormalization()
         self._projection_catalog = projection_catalog
@@ -295,7 +282,8 @@ class NarrativeSelectHandler:
         work = self._select(payload, opened.data, context)
         raw = self._result_dict(payload, review, work, selector_version=self._selector.selector_version)
         result = NarrativeSelectResult.from_dict(raw)
-        self._verify_selected_material(work.parsed, work.package)
+        self._verify_selected_material(work.parsed, work.package,
+            mime_type=payload.source_ref.mime_type, pdf_reading=self._pdf_reading)
         context.checkpoint()
         return HandlerResult(
             outcome=HandlerOutcome.SUCCEEDED,
@@ -459,58 +447,39 @@ class NarrativeSelectHandler:
                 "filing source is not a PDF",
             )
         from company_wiki.resource_budget import new_document_work_budget
-        work_budget = new_document_work_budget() if self._selector.selector_version == "0.9.0" else None
-        parsed = self._parse_pdf(payload, data, work_budget=work_budget)
-        context.checkpoint()
-        package = self._run_selector(payload, parsed, work_budget=work_budget)
-        if self._selector.selector_version != "0.9.0" and not package.evidence_spans and parsed.deferred_table_pages:
-            parsed = self._parse_pdf(payload, data, full_table_scan=True)
-            context.checkpoint()
-            package = self._run_selector(payload, parsed)
-        package = self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, None)
-
-    def _parse_pdf(
-        self,
-        payload: SourceRevisionEventPayload,
-        data: bytes,
-        *,
-        full_table_scan: bool = False,
-        work_budget: WorkBudget | None = None,
-    ) -> NarrativeParseResult:
+        work_budget = new_document_work_budget()
         try:
-            if self._pdf_parser is parse_pdf_bytes and self._selector.selector_version == "0.9.0":
-                from company_wiki.document_understanding.geometry_intent.reading import PdfReadingContext
-                return parse_pdf_bytes(
-                    data,
-                    source_id=payload.source_ref.source_id,
-                    source_sha256=payload.source_ref.content_sha256,
-                    language=payload.source_metadata.language,
-                    full_table_scan=full_table_scan,
-                    selector_version="0.9.0",
-                    work_budget=work_budget,
-                    reading_context=PdfReadingContext(payload.source_metadata.title or "",
-                        payload.source_metadata.document_kind, payload.source_metadata.language),
-                )
-            return self._pdf_parser(
-                data,
-                source_id=payload.source_ref.source_id,
-                source_sha256=payload.source_ref.content_sha256,
-                language=payload.source_metadata.language,
-                full_table_scan=full_table_scan,
+            parsed, package = self._pdf_reading.select(
+                data, self._pdf_request(payload), selector=self._selector,
+                work_budget=work_budget, checkpoint=context.checkpoint,
             )
-        except WorkBudgetExceeded as exc:
-            # The shared parse/select limit is a deterministic stop. Keep
-            # its resource diagnostic instead of calling the PDF corrupt.
+        except (WorkBudgetExceeded, PdfReadingError) as exc:
             raise _SelectFailure(
                 "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE, str(exc)
             ) from exc
         except (RuntimeError, ValueError) as exc:
             raise _SelectFailure(
-                "PARSER_INCOMPLETE",
-                HandlerOutcome.TERMINAL_FAILURE,
+                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
                 "verified PDF cannot be parsed completely",
             ) from exc
+        package = self._require_usable_selection(parsed, package)
+        return _SelectionWork(parsed, package, None, self._pdf_reading.parser_identity())
+
+    @staticmethod
+    def _pdf_request(payload: SourceRevisionEventPayload) -> PdfReadingRequest:
+        return PdfReadingRequest(
+            source_id=payload.source_ref.source_id,
+            source_sha256=payload.source_ref.content_sha256,
+            language=payload.source_metadata.language,
+            title=payload.source_metadata.title or "",
+            document_kind=payload.source_metadata.document_kind,
+        )
+
+    def _parse_pdf(self, payload: SourceRevisionEventPayload, data: bytes, *,
+                   work_budget: WorkBudget | None = None) -> NarrativeParseResult:
+        """Compatibility read port; all PDF policy remains in the reading owner."""
+        return self._pdf_reading.read(data, self._pdf_request(payload),
+            selector_version=self._selector.selector_version, work_budget=work_budget)
 
     def _select_transcript(
         self,
@@ -588,7 +557,9 @@ class NarrativeSelectHandler:
         return package
 
     @staticmethod
-    def _verify_selected_material(parsed: NarrativeParseResult, package: NarrativeEvidencePackage) -> None:
+    def _verify_selected_material(parsed: NarrativeParseResult, package: NarrativeEvidencePackage,
+                                  *, mime_type: str | None = None,
+                                  pdf_reading: PdfReading | None = None) -> None:
         """Match bounded canonical evidence to this parse before any model call.
 
         Canonical shape/path/size checks run once in the result constructor
@@ -604,7 +575,9 @@ class NarrativeSelectHandler:
                 raise _SelectFailure("PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
                                      "selected material is not reliable parsed source evidence")
             try:
-                if parsed.units and all(unit.parser_name == NORMALIZATION_PARSER_NAME for unit in parsed.units):
+                if (mime_type or parsed.mime_type) == "application/pdf":
+                    (pdf_reading or PdfReading()).verify_material(parsed, spans)
+                elif parsed.units and all(unit.parser_name == NORMALIZATION_PARSER_NAME for unit in parsed.units):
                     verify_parsed_evidence_spans(parsed.units, source_id=parsed.source_id, evidence_spans=spans)
                 else:
                     verified, failed = verify_replayed_pdf_spans(spans, parsed.units)

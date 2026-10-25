@@ -1,0 +1,45 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 12 items / 9 deselected / 3 selected
+
+tests\unit\test_pdf_reading_boundary.py FFF                              [100%]
+
+================================== FAILURES ===================================
+______ test_optional_pdf_dependency_does_not_affect_non_pdf_composition _______
+tests\unit\test_pdf_reading_boundary.py:206: in test_optional_pdf_dependency_does_not_affect_non_pdf_composition
+    execution.NarrativeSelectHandler(reader=object())
+src\company_wiki\automation\narrative_select.py:210: in __init__
+    self._pdf_reading = pdf_reading or PdfReading(parser=pdf_parser)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_pdf_reading.py:118: in __init__
+    self._recipe = self._descriptor()
+                   ^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_pdf_reading.py:121: in _descriptor
+    descriptor = json.loads(json.dumps(dict(self._backend.describe_recipe()), allow_nan=False))
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_pdf_reading.py:70: in describe_recipe
+    "runtime": {"pymupdf": version("pymupdf")},
+                           ^^^^^^^^^^^^^^^^^^
+tests\unit\test_pdf_reading_boundary.py:204: in missing
+    raise PackageNotFoundError(name)
+E   importlib.metadata.PackageNotFoundError: No package metadata was found for pymupdf
+___ test_backend_receives_the_same_absolute_deadline_and_expiry_prevents_io ___
+tests\unit\test_pdf_reading_boundary.py:225: in test_backend_receives_the_same_absolute_deadline_and_expiry_prevents_io
+    reading = PdfReading(Backend(), deadline=deadline)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: PdfReading.__init__() got an unexpected keyword argument 'deadline'
+________ test_owner_rejects_secret_and_physical_location_recipe_fields ________
+tests\unit\test_pdf_reading_boundary.py:244: in test_owner_rejects_secret_and_physical_location_recipe_fields
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_pdf_reading_boundary.py::test_optional_pdf_dependency_does_not_affect_non_pdf_composition
+FAILED tests/unit/test_pdf_reading_boundary.py::test_backend_receives_the_same_absolute_deadline_and_expiry_prevents_io
+FAILED tests/unit/test_pdf_reading_boundary.py::test_owner_rejects_secret_and_physical_location_recipe_fields
+======================= 3 failed, 9 deselected in 4.33s =======================
