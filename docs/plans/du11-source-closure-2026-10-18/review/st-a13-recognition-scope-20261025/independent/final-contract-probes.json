@@ -1,0 +1,264 @@
+{
+  "schema_version": "recognition-scope-independent-final-contracts/1",
+  "additional_positive_negative_controls": [
+    {
+      "name": "unknown-owner",
+      "text": "客户的仪器维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "other-owner-conditional",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；或供应商履约过程中形成在建商品，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "other-owner-payment",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；且供应商有权就已完成履约部分收款，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "other-owner-client",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；或客户在供应商履约时控制在建商品，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "cross-sentence",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益。上述服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "owned-payment-reference",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益；且本集团在整个合同期间内有权就累计至今已完成的履约部分收取款项，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "helper_actual": true,
+      "production_tag_actual": true,
+      "pass": true
+    },
+    {
+      "name": "owned-construction-condition",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益；或者客户能够控制在建商品，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "helper_actual": true,
+      "production_tag_actual": true,
+      "pass": true
+    },
+    {
+      "name": "no-rule",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    }
+  ],
+  "additional_pass": 8,
+  "additional_total": 8,
+  "linear_scan_controls": [
+    {
+      "repetitions": 10,
+      "scope": "其他业务",
+      "input_chars": 283,
+      "regex_scanned_chars": 1491,
+      "declared_helper_scan_work": 2264,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 283,
+        "scope._CONDITIONS": 282,
+        "predicate._BOUNDARY": 272,
+        "scope._CN_SCOPE": 272,
+        "scope._CN_MEMBER": 44,
+        "scope._CN_GENERIC_PREFIX": 44,
+        "scope._CN_KIND": 22,
+        "scope._EN_SCOPE": 272
+      }
+    },
+    {
+      "repetitions": 10,
+      "scope": "仪器维护服务",
+      "input_chars": 303,
+      "regex_scanned_chars": 2241,
+      "declared_helper_scan_work": 2424,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 303,
+        "scope._CONDITIONS": 302,
+        "predicate._BOUNDARY": 292,
+        "scope._CN_SCOPE": 292,
+        "scope._CN_MEMBER": 64,
+        "scope._CN_GENERIC_PREFIX": 64,
+        "scope._CN_KIND": 62,
+        "scope._CN_GENERIC_NAME": 40,
+        "scope._EN_SCOPE": 292,
+        "scope._CN_CONTINUATION": 265,
+        "scope._CN_RULE_REFERENCE": 265
+      }
+    },
+    {
+      "repetitions": 20,
+      "scope": "其他业务",
+      "input_chars": 543,
+      "regex_scanned_chars": 2861,
+      "declared_helper_scan_work": 4344,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 543,
+        "scope._CONDITIONS": 542,
+        "predicate._BOUNDARY": 522,
+        "scope._CN_SCOPE": 522,
+        "scope._CN_MEMBER": 84,
+        "scope._CN_GENERIC_PREFIX": 84,
+        "scope._CN_KIND": 42,
+        "scope._EN_SCOPE": 522
+      }
+    },
+    {
+      "repetitions": 20,
+      "scope": "仪器维护服务",
+      "input_chars": 583,
+      "regex_scanned_chars": 4371,
+      "declared_helper_scan_work": 4664,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 583,
+        "scope._CONDITIONS": 582,
+        "predicate._BOUNDARY": 562,
+        "scope._CN_SCOPE": 562,
+        "scope._CN_MEMBER": 124,
+        "scope._CN_GENERIC_PREFIX": 124,
+        "scope._CN_KIND": 122,
+        "scope._CN_GENERIC_NAME": 80,
+        "scope._EN_SCOPE": 562,
+        "scope._CN_CONTINUATION": 535,
+        "scope._CN_RULE_REFERENCE": 535
+      }
+    },
+    {
+      "repetitions": 40,
+      "scope": "其他业务",
+      "input_chars": 1063,
+      "regex_scanned_chars": 5601,
+      "declared_helper_scan_work": 8504,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 1063,
+        "scope._CONDITIONS": 1062,
+        "predicate._BOUNDARY": 1022,
+        "scope._CN_SCOPE": 1022,
+        "scope._CN_MEMBER": 164,
+        "scope._CN_GENERIC_PREFIX": 164,
+        "scope._CN_KIND": 82,
+        "scope._EN_SCOPE": 1022
+      }
+    },
+    {
+      "repetitions": 40,
+      "scope": "仪器维护服务",
+      "input_chars": 1143,
+      "regex_scanned_chars": 8631,
+      "declared_helper_scan_work": 9144,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 1143,
+        "scope._CONDITIONS": 1142,
+        "predicate._BOUNDARY": 1102,
+        "scope._CN_SCOPE": 1102,
+        "scope._CN_MEMBER": 244,
+        "scope._CN_GENERIC_PREFIX": 244,
+        "scope._CN_KIND": 242,
+        "scope._CN_GENERIC_NAME": 160,
+        "scope._EN_SCOPE": 1102,
+        "scope._CN_CONTINUATION": 1075,
+        "scope._CN_RULE_REFERENCE": 1075
+      }
+    },
+    {
+      "repetitions": 80,
+      "scope": "其他业务",
+      "input_chars": 2103,
+      "regex_scanned_chars": 11081,
+      "declared_helper_scan_work": 16824,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 2103,
+        "scope._CONDITIONS": 2102,
+        "predicate._BOUNDARY": 2022,
+        "scope._CN_SCOPE": 2022,
+        "scope._CN_MEMBER": 324,
+        "scope._CN_GENERIC_PREFIX": 324,
+        "scope._CN_KIND": 162,
+        "scope._EN_SCOPE": 2022
+      }
+    },
+    {
+      "repetitions": 80,
+      "scope": "仪器维护服务",
+      "input_chars": 2263,
+      "regex_scanned_chars": 17151,
+      "declared_helper_scan_work": 18104,
+      "pass": true,
+      "per_pattern": {
+        "scope._SENTENCES": 2263,
+        "scope._CONDITIONS": 2262,
+        "predicate._BOUNDARY": 2182,
+        "scope._CN_SCOPE": 2182,
+        "scope._CN_MEMBER": 484,
+        "scope._CN_GENERIC_PREFIX": 484,
+        "scope._CN_KIND": 482,
+        "scope._CN_GENERIC_NAME": 320,
+        "scope._EN_SCOPE": 2182,
+        "scope._CN_CONTINUATION": 2155,
+        "scope._CN_RULE_REFERENCE": 2155
+      }
+    }
+  ],
+  "scan_accounting_scope": "All regex inputs in new helper plus shared assertion _BOUNDARY; sub/subn count their actual input argument. Existing shared mechanism/matching work remains in prior policy scan accounting; this measures the changed local scan envelope, not CPU cycles.",
+  "legacy_selector_isolation": [
+    {
+      "selector_version": "0.6.0",
+      "new_helper_calls": 0,
+      "selected_count": 0,
+      "pass": true
+    },
+    {
+      "selector_version": "0.7.0",
+      "new_helper_calls": 0,
+      "selected_count": 0,
+      "pass": true
+    },
+    {
+      "selector_version": "0.7.1",
+      "new_helper_calls": 0,
+      "selected_count": 0,
+      "pass": true
+    },
+    {
+      "selector_version": "0.8.0",
+      "new_helper_calls": 2,
+      "selected_count": 1,
+      "pass": false
+    },
+    {
+      "selector_version": "0.9.0",
+      "new_helper_calls": 1,
+      "selected_count": 1,
+      "pass": true
+    }
+  ],
+  "external_calls": 0,
+  "downloads": 0
+}

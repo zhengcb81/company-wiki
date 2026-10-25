@@ -1,0 +1,47 @@
+{
+  "schema_version": "recognition-scope-independent-final-attempt06-binding/1",
+  "checks": {
+    "selection_sha_matches_expected": true,
+    "receipt_sha_matches_expected": true,
+    "selection_matches_its_receipt": true,
+    "model_view_matches_its_receipt": true,
+    "original_sha_matches": true,
+    "selected_evidence_exactly_same_as_fully_verified_attempt05": true,
+    "current_payload_matches_frozen_model_view": true,
+    "current_payload_same_as_verified_attempt05": true,
+    "all_old10_pass_contexts_reused_with_identical_payload": true,
+    "full375_source_digest_matches_final_producer": true,
+    "policy_version19": true,
+    "current_business_algorithm_sha_matches_selected_dependencies": true,
+    "new_helper_sha_in_receipt_is_actual": true,
+    "same_selection_cap112": true,
+    "same_work_cap16M": true,
+    "no_new_calls_downloads_copies": true,
+    "source_stable_during_final_binding": true
+  },
+  "pass": true,
+  "selection_sha256": "7603eec8da8db637b0bd2d810b59d9c78dbb7343fbd37a0d72a74b9de799b3b5",
+  "model_view_sha256": "840feb38581928741b2fc62e10b26b5d31f2fcec208dc907a0ff7f05fb91e003",
+  "replay_receipt_sha256": "deb4de6d37bd09f6ff419a8859d3b3b01f01e8d0529f657bdf4b393b60a399fa",
+  "trace_sha256": "d83219ba3ae06a4db21bf85d38cd65186472bdb34d4505accb2db5ac1743ba04",
+  "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "current_producer_source_digest": "4079da358ef72a02891e67e36a6dd556a4d1f742d25ad20bc12585b44d5d3171",
+  "source_file_count": 375,
+  "actual_model_payload_sha256": "8c8aff82e78adda8040def163eb1bcb1eb824310358cd86ce637d1087ec833d8",
+  "reused_input_review_sha256": "dc4e3cfeb78270806fa982776e3783b740a8d4a2c8440b10c4a6f2ec0b369973",
+  "selection_material_canonical_sha256": "35d5aeaad9301b877dc0bed44455e810529c03dbbe39626213979bd2a603dd96",
+  "counts": {
+    "spans": 112,
+    "tasks": 63,
+    "chars": 9088
+  },
+  "work_budget": {
+    "used": 12879238,
+    "limit": 16000000,
+    "exhausted": false,
+    "same_instance_for_parse_and_select": true
+  },
+  "model_response_semantics": "NOT_REVIEWED",
+  "current_rf_consumption": "OPEN",
+  "reuse_basis": "Final selected EvidenceSpan dicts byte-equivalent to already-original-verified attempt05; actual current payload is canonically identical. No duplicate raw parse or broad test needed."
+}

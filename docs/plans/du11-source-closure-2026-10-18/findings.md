@@ -881,3 +881,11 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - W16在RF现有quantity/source/claim之上处理可选持续/终止、原表/重述与基数采用，缺新元数据不阻断全部旧输入。W17复用现有import/join，仅做报告观察，不把源扫描/选材/layout/源侧支持/摘要审查/RF采用混成PASS。W18复用已有benchmark/gold/recovery，只做薄编排，冻结源侧预期后再跑候选，禁止改生产源码。
 - 独立agent初审指出README基线SHA错及W18需明确避免复制第二套评测框架；均已修复。最终实读三分支/HEAD/父基线、24份seed SHA及副本一致，独审PASS。三卡要求最终独立agent完整审查、逐finding全部修复/复测/复审，未完成不得COMPLETE；仅A/B/C大节点，无小节点签收。
 - 三工区只提交文档seed；RF 55,152,114 B，Audit 6,018,266 B，CWP 27,560,807 B，未复制原始库。W18初次体积统计遇Windows深层历史路径，已将新工区收窄到代码/测试/本卡PWF；专属worktree设置忽略执行位/支持长路径，原主工区未改。新工区tracked clean。
+
+## 2026-10-25 ST-A13具名确认范围与独审根因
+
+- 既有business_revenue_recognition把通用规则与具名业务绑定都算同coverage，有限选材丢了具体Testing/Biology按时段确认段。新用途business_recognition_scope在来源语义owner表达；不改planner/cap/原文/支持关系。
+- 中文多条件规则在分号后才写“因此上述业务属于…履约义务”，按分号断句会丢名称与结论关系。最终按不重叠条件段单向解析，仅明确“或本集团履约…”延续和回指保留pending owner；换主体/独立句重置，不扫描每个match的整个尾文。
+- 独审P2：二次possessive（客户/供应商的业务）归属误绑、主营/核心等泛称假具名；新helper未进入实际business_algorithms源码SHA；反复tail扫描在2103字/80scope上实收85360字，超过预收16824。新增独立反例先真RED（7失败/21通过），再修所有权、通用名过滤、单向条件状态机及既有cache依赖集合；不加另一cache、许可或预算。
+- 修复后61项相关定向、Ruff、mypy3文件通过；真实attempt04仍112span/9088char、63task，12,879,238/16M，源和配置未变，0外部调用/下载/原件复制。独立最终复审待回；A13精确时段/时点金额仍缺，整项PARTIAL。
+- 另外，最新source/input复核10PASS/4PARTIAL不是旧8/6/0的改写，更不是响应语义通过；A01/A05父级、A02/A13精确来源及当前RF采用继续开放。

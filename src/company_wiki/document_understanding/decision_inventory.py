@@ -68,6 +68,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
 
     business_modules = (
         "company_wiki.source_catalog.narrative_business_policy",
+        "company_wiki.source_catalog.narrative_recognition_scope",
         "company_wiki.source_catalog.narrative_revenue_guidance",
         "company_wiki.source_catalog.narrative_predicate_state",
         "company_wiki.source_catalog.narrative_business_meaning",

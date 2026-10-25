@@ -1,0 +1,41 @@
+{
+  "schema_version": "recognition-scope-independent-initial-findings/1",
+  "at": "2026-10-25T08:57:16.238992+00:00",
+  "status": "CHANGES_REQUESTED",
+  "findings": [
+    {
+      "id": "I1-owner-binding",
+      "severity": "P2",
+      "example": "本集团客户的设备维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "observed": true,
+      "effect": "business_recognition_scope + meaningful_fact for customer-owned/supplier-owned service"
+    },
+    {
+      "id": "I2-cache-owner",
+      "severity": "P2",
+      "expected": "helper-only bytes change invalidates business_algorithms",
+      "observed": "_versions() entirely unchanged under Path.read_bytes simulated helper change",
+      "writes_to_source": false
+    },
+    {
+      "id": "I3-bounded-work",
+      "severity": "P2",
+      "example": "本集团的其他业务的客户在本集团履约时取得并消耗利益； repeated80 then generic timing rule",
+      "input_chars": 2103,
+      "reference_scan_calls": 80,
+      "sum_reference_scan_input_chars": 85360,
+      "declared_helper_scan_work": 16824,
+      "observation": "repeated full suffix scans grow quadratically; linear precharge does not cover it"
+    }
+  ],
+  "external_model_calls": 0,
+  "downloads": 0,
+  "scope": "initial code review and independent minimal probes; final version requires re-review",
+  "initial_source_sha256": {
+    "src/company_wiki/source_catalog/narrative_recognition_scope.py": "81b61b330d4f400d625ccb7f7cf17125c02d92ae51cb6c8f2e63747129974fcc",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "7df218aac185f83ccb6cf1cfc777fd4e2ee1241b3ed0a38543f2e29343b63945",
+    "src/company_wiki/document_understanding/decision_inventory.py": "03cba26ca68eac3c6b5a72f3d05ab5b1cb558a2879334c6d112f9c256dbd8722",
+    "tests/unit/document_understanding_selection/test_reading_recognition_scope.py": "9d0e876e514d5581f192400bca3269b7e998d8c19d480b2d0a6ef7232a005b13"
+  }
+}

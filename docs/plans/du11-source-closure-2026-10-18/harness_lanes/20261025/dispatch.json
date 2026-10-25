@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-harness-dispatch/1",
   "as_of_date": "2026-10-25",
-  "status": "READY_ALL_THREE_NOT_DISPATCHED",
+  "status": "ALL_THREE_DISPATCHED_BY_USER",
   "parent_plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "package_count": 3,
@@ -35,8 +35,8 @@
         "assurance/runs/weekly_manifest.json"
       ],
       "independent_review_required": true,
-      "product_implementation_started": false,
-      "status": "READY_NOT_DISPATCHED",
+      "product_implementation_started": "not_observed_by_ROOT",
+      "status": "DISPATCHED_AWAITING_AUTHOR_HANDOFF",
       "start_head": "97e7e149d434d5ce36c147531efa4405a88fcb1c",
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
@@ -71,8 +71,8 @@
       "primary_wip_preserve": [],
       "remote": null,
       "independent_review_required": true,
-      "product_implementation_started": false,
-      "status": "READY_NOT_DISPATCHED",
+      "product_implementation_started": "not_observed_by_ROOT",
+      "status": "DISPATCHED_AWAITING_AUTHOR_HANDOFF",
       "start_head": "02ee879ccf8e4aed67342bcc7c8c7e20de2401c9",
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
@@ -113,8 +113,8 @@
       ],
       "worktree_local_platform_setting": "core.filemode=false, core.longpaths=true; pre-push blob equals HEAD; primary settings untouched",
       "independent_review_required": true,
-      "product_implementation_started": false,
-      "status": "READY_NOT_DISPATCHED",
+      "product_implementation_started": "not_observed_by_ROOT",
+      "status": "DISPATCHED_AWAITING_AUTHOR_HANDOFF",
       "start_head": "9051bbb7a69347f52d79e5cce37a6b8c40b7912f",
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
@@ -146,5 +146,7 @@
   "seed_product_changes": 0,
   "independent_packet_review": "PASS",
   "independent_packet_review_md": "packet-review.md",
-  "independent_packet_review_json": "packet-review.json"
+  "independent_packet_review_json": "packet-review.json",
+  "dispatch_authority": "User: 3张卡发出去了，你继续工作。",
+  "packet_review_scope_note": "packet-review binds prepared cards and seed; dispatch lifecycle updated after user dispatch, no card/seed change"
 }

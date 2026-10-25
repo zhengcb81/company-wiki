@@ -1,0 +1,1165 @@
+{
+  "schema_version": "w08-annual14-v5-model-view-audit/1",
+  "selection_path": "selection.json",
+  "selection_sha256": "d62f957a102488f72405c84d58ff5a553e96c1365b5a7a3f6b6fc4e2dfa2bff4",
+  "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "oracle_sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+  "max_claims": 40,
+  "compiled_task_count": 63,
+  "model_binding_sha256": "4f5cbc52fc3e659c038013e330dc7addb55c1b8d0029c246bfb954ed5dd2c63d",
+  "model_payload_sha256": "8c8aff82e78adda8040def163eb1bcb1eb824310358cd86ce637d1087ec833d8",
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "a12": {
+    "forecast_span_ids": [
+      "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408"
+    ],
+    "premise_span_ids": [
+      "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+    ],
+    "forecast_task_keys": [
+      "t4",
+      "t35"
+    ],
+    "explicit_premise_in_every_forecast_task": true
+  },
+  "a13": {
+    "policy_span_ids": [
+      "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862",
+      "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5",
+      "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e",
+      "urn:company-wiki:evidence-span:sha256:ea5600d3096f31fc79f61e3e3583db7bb2e381ce8d087c67c55397a90c27dee1",
+      "urn:company-wiki:evidence-span:sha256:2cfad6b15877a439f3982a932cafc4646f2611dcfd885bf5ceac3037012e2c9d",
+      "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5",
+      "urn:company-wiki:evidence-span:sha256:d03b337801774e019cabcd81961a7d5089cad4c375a62e5886453af2df2c0b63"
+    ],
+    "policy_locators": [
+      "loc:v1/page:119/paragraph:9/chars:476-565",
+      "loc:v1/page:119/paragraph:11/chars:566-833",
+      "loc:v1/page:120/paragraph:5/chars:239-445",
+      "loc:v1/page:184/paragraph:7",
+      "loc:v1/page:184/paragraph:8/chars:269-473",
+      "loc:v1/page:184/paragraph:11",
+      "loc:v1/page:184/paragraph:12"
+    ],
+    "exact_segment_revenue_amounts_selected": false
+  },
+  "tasks": [
+    {
+      "task_key": "t1",
+      "kind": "risk",
+      "section_role": "management_discussion",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e5d51e33160a8805215328ca185e8c6e1cc08c3400e3838612e80f9c0f99d174"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0938744400886756c5dc6839ecaf483e4f3e445260095df36e7e8ec6d603e83a"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0938744400886756c5dc6839ecaf483e4f3e445260095df36e7e8ec6d603e83a",
+        "urn:company-wiki:evidence-span:sha256:e5d51e33160a8805215328ca185e8c6e1cc08c3400e3838612e80f9c0f99d174"
+      ]
+    },
+    {
+      "task_key": "t2",
+      "kind": "paragraph_event",
+      "section_role": "management_discussion",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "urn:company-wiki:evidence-span:sha256:f37d75d84918e9d1e95f5bc6c98d8321c7031e8297e7f1b6d1648bd5dea4edb6"
+      ]
+    },
+    {
+      "task_key": "t3",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:4d1a6bf2de4dbb6b20a0778e8aca73f7c4a14be7bd07382fe4c696e160606da6"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:1832905cbad9a7d1a467101832529d9babdc65d337cd7a985deb4f7bcab46819"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:1832905cbad9a7d1a467101832529d9babdc65d337cd7a985deb4f7bcab46819",
+        "urn:company-wiki:evidence-span:sha256:4d1a6bf2de4dbb6b20a0778e8aca73f7c4a14be7bd07382fe4c696e160606da6"
+      ]
+    },
+    {
+      "task_key": "t4",
+      "kind": "risk",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+      ]
+    },
+    {
+      "task_key": "t5",
+      "kind": "risk",
+      "section_role": "risk",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:5231addc8f2d6f6b18b2b53aa6dd19eddb11391b892fe943c2479e5783db88c2"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:613e4ff4c025d8163ee2a16bf303263bc44cbc8b2177f937e003eba1a40ede44",
+        "urn:company-wiki:evidence-span:sha256:19c568df42cb95f6df75c1f9a6cc5a67f570f9d66257de6be072cc4dfa662ac1"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:613e4ff4c025d8163ee2a16bf303263bc44cbc8b2177f937e003eba1a40ede44",
+        "urn:company-wiki:evidence-span:sha256:19c568df42cb95f6df75c1f9a6cc5a67f570f9d66257de6be072cc4dfa662ac1",
+        "urn:company-wiki:evidence-span:sha256:5231addc8f2d6f6b18b2b53aa6dd19eddb11391b892fe943c2479e5783db88c2"
+      ]
+    },
+    {
+      "task_key": "t6",
+      "kind": "risk",
+      "section_role": "risk",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:328ca99ab44ba25f8d88554729c971cf5a4984d2a3b319909bd62b935ae1b9a2"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:70df82314974cc845f33ddad8acbd712f6f7d35ef67bd0b82d5106850cf5f544"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:70df82314974cc845f33ddad8acbd712f6f7d35ef67bd0b82d5106850cf5f544",
+        "urn:company-wiki:evidence-span:sha256:328ca99ab44ba25f8d88554729c971cf5a4984d2a3b319909bd62b935ae1b9a2"
+      ]
+    },
+    {
+      "task_key": "t7",
+      "kind": "risk",
+      "section_role": "risk",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:77403b0b100a2cdd178ad74fdafffadf4fd6c3dc5c2fa1a0d7b791faa7e49a45"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:70df82314974cc845f33ddad8acbd712f6f7d35ef67bd0b82d5106850cf5f544"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:70df82314974cc845f33ddad8acbd712f6f7d35ef67bd0b82d5106850cf5f544",
+        "urn:company-wiki:evidence-span:sha256:77403b0b100a2cdd178ad74fdafffadf4fd6c3dc5c2fa1a0d7b791faa7e49a45"
+      ]
+    },
+    {
+      "task_key": "t8",
+      "kind": "risk",
+      "section_role": "risk",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:68855e99159591dba03df30724330f6faa9c9fb708efa02647ddf405403491f6"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:70df82314974cc845f33ddad8acbd712f6f7d35ef67bd0b82d5106850cf5f544"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:70df82314974cc845f33ddad8acbd712f6f7d35ef67bd0b82d5106850cf5f544",
+        "urn:company-wiki:evidence-span:sha256:68855e99159591dba03df30724330f6faa9c9fb708efa02647ddf405403491f6"
+      ]
+    },
+    {
+      "task_key": "t9",
+      "kind": "risk",
+      "section_role": "risk",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:10f1f58ec0e585f6ac90b6e27f34dd3a0d6f6e71eddba92797ff7c6b59eff701"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:17462f33a4975cae3bf65af611bfa65f9e1516ea930c281dc279139f4af9f638"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:17462f33a4975cae3bf65af611bfa65f9e1516ea930c281dc279139f4af9f638",
+        "urn:company-wiki:evidence-span:sha256:10f1f58ec0e585f6ac90b6e27f34dd3a0d6f6e71eddba92797ff7c6b59eff701"
+      ]
+    },
+    {
+      "task_key": "t10",
+      "kind": "paragraph_event",
+      "section_role": "industry",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:a148d5cf64066dbaf90ece97f117777d4e3d403a14ecdb30a40e77843306f782",
+        "urn:company-wiki:evidence-span:sha256:6ab4137c834eed183b88cd63f5c37e0cab6a04d476ade798bdeac16386e499a8"
+      ]
+    },
+    {
+      "task_key": "t11",
+      "kind": "paragraph_event",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+      ],
+      "context_span_ids": [],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4"
+      ]
+    },
+    {
+      "task_key": "t12",
+      "kind": "paragraph_event",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904",
+        "urn:company-wiki:evidence-span:sha256:8cf24a738a09ed283b71f0600c858934ceca1da5c7ec734ad94fb7fa1f827381"
+      ]
+    },
+    {
+      "task_key": "t13",
+      "kind": "paragraph_event",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06"
+      ],
+      "context_span_ids": [],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06"
+      ]
+    },
+    {
+      "task_key": "t14",
+      "kind": "paragraph_event",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "urn:company-wiki:evidence-span:sha256:991980dfda8642a8af259ebef96fa0a6e923bb4612ac2ec97678fd97426506a4"
+      ]
+    },
+    {
+      "task_key": "t15",
+      "kind": "paragraph_event",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80"
+      ],
+      "context_span_ids": [],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80"
+      ]
+    },
+    {
+      "task_key": "t16",
+      "kind": "background",
+      "section_role": "financial_notes",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c9eee9ca7d17f414772cf6e6f0ea57cc74053aca6220b629ef3806db1f7c38f9"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:3f804069213ebf18cf07d0145c61207e374be0b92915c07ac1d6b4662ffb14c4",
+        "urn:company-wiki:evidence-span:sha256:c3a6ef6f9c003b483a01e79dc7553c46f265a131dd6bf1516d17060fb6482959"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:3f804069213ebf18cf07d0145c61207e374be0b92915c07ac1d6b4662ffb14c4",
+        "urn:company-wiki:evidence-span:sha256:c3a6ef6f9c003b483a01e79dc7553c46f265a131dd6bf1516d17060fb6482959",
+        "urn:company-wiki:evidence-span:sha256:c9eee9ca7d17f414772cf6e6f0ea57cc74053aca6220b629ef3806db1f7c38f9"
+      ]
+    },
+    {
+      "task_key": "t17",
+      "kind": "background",
+      "section_role": "financial_notes",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:d03b337801774e019cabcd81961a7d5089cad4c375a62e5886453af2df2c0b63"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:06c7309218693c7dbfe3e1253eb580c1de0fc80a40f3628f86fd14afe6b7f1f5",
+        "urn:company-wiki:evidence-span:sha256:d03b337801774e019cabcd81961a7d5089cad4c375a62e5886453af2df2c0b63"
+      ]
+    },
+    {
+      "task_key": "t18",
+      "kind": "background",
+      "section_role": "operating_metrics",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+        "urn:company-wiki:evidence-span:sha256:c421eab650fc9a298dad8fe910ded7af25c5548c02f92b9cbd4fb8d4a6bd482f"
+      ]
+    },
+    {
+      "task_key": "t19",
+      "kind": "background",
+      "section_role": "financial_notes",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+      ],
+      "context_span_ids": [],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:41d04ccd71b8873afa08adc4bec45e2e18f88abb6c483612fe7b38619f0596f9"
+      ]
+    },
+    {
+      "task_key": "t20",
+      "kind": "background",
+      "section_role": "administrative",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+        "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+        "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:89192cfabc3e05433d232a839490357b6906eb6ac5a60425f475636d419d51f3",
+        "urn:company-wiki:evidence-span:sha256:ae3caf033fa845bd380582872a9258d3e994dce63206a4bca8b9d99a1b24429b",
+        "urn:company-wiki:evidence-span:sha256:dcc260710f189ccf0529286c6e30f4d2f432171809bdf8cf4cd5e5d8f5d7e9c5",
+        "urn:company-wiki:evidence-span:sha256:44ffd9b224310c4163c3180f653105c3d77f25259307e7639841ccde3d6f2762"
+      ]
+    },
+    {
+      "task_key": "t21",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:f76087b3333c68d71356e0a6dec107e267eb9d9a890b2d82691c7d4ffdf3fe60",
+        "urn:company-wiki:evidence-span:sha256:3833763da931f9bcdecba95ef6d609513f798583132376ee49c49b3ba4950d96"
+      ]
+    },
+    {
+      "task_key": "t22",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c52aa84e6eacd5e7baf5b8890b2c9da88a9122a6f279f5aff2131b7d2b1d82d4"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:ca145c84b207a5208cde9504321f7f73d497d8c5e08e987ca6e7a9971088ee4d"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:ca145c84b207a5208cde9504321f7f73d497d8c5e08e987ca6e7a9971088ee4d",
+        "urn:company-wiki:evidence-span:sha256:c52aa84e6eacd5e7baf5b8890b2c9da88a9122a6f279f5aff2131b7d2b1d82d4"
+      ]
+    },
+    {
+      "task_key": "t23",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:0f0490413de7b4c10c3cf177acfe4c98919f10ced32d725e0a5f759b8d24ede7"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:ec957ddb950c677321479cb6424ec2ceeb451fa3d96efdbdf600e97908185554",
+        "urn:company-wiki:evidence-span:sha256:0f0490413de7b4c10c3cf177acfe4c98919f10ced32d725e0a5f759b8d24ede7"
+      ]
+    },
+    {
+      "task_key": "t24",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:7814b1ab10bf1bd2d96721406053858759b5429ccbb02158a62b531020e7fe9b"
+      ]
+    },
+    {
+      "task_key": "t25",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98",
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+      ]
+    },
+    {
+      "task_key": "t26",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:654e21b7750eda13132b7e5bf098c28f1877ca148eda2d20fb004c1e0e54f2c3",
+        "urn:company-wiki:evidence-span:sha256:2f2da4025d3f2ace78f7316e3864ffc0d0accf83348e684192445b05c56e3e98",
+        "urn:company-wiki:evidence-span:sha256:3507f06f74bc7bffbfe34b36015eacc475c328a4120d460d0b41e963f58e76b0"
+      ]
+    },
+    {
+      "task_key": "t27",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9cb0ea29d09c54ff38eb61c5b2e6cea93e53eea315464a42612359ce41dfab08",
+        "urn:company-wiki:evidence-span:sha256:a293ad23bcf3b2067bbd36cbf0deb91cab677d95f5f9fe542eba97fc5e5255dc",
+        "urn:company-wiki:evidence-span:sha256:b61e2e39e494bc071873d95c5051a51e4168019f7cdbae2b2a846835a21144ea"
+      ]
+    },
+    {
+      "task_key": "t28",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+        "urn:company-wiki:evidence-span:sha256:9b7e1d5e1a8e019df316097745fd9853d4ee9ec0ff3cfef88310a9c3d2af4938"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:aac26c502e17773ff8c6784c4acdc58849627e510188713e37b52aaad94956e4",
+        "urn:company-wiki:evidence-span:sha256:9b7e1d5e1a8e019df316097745fd9853d4ee9ec0ff3cfef88310a9c3d2af4938",
+        "urn:company-wiki:evidence-span:sha256:a31b1e1cd17b187fd2b6cd458b654610abb674dff96cbc29cdf88aca6c607b99"
+      ]
+    },
+    {
+      "task_key": "t29",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:90b6d58d2e115f9056ec2cdc2173f2b9fdb4c9884f9dfcb7ff3a2ac57a36ea6a"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:90b6d58d2e115f9056ec2cdc2173f2b9fdb4c9884f9dfcb7ff3a2ac57a36ea6a",
+        "urn:company-wiki:evidence-span:sha256:0dc2f440f59ed16099e150050a20852a01cc7abc09185921cdb0f9592e79ec10"
+      ]
+    },
+    {
+      "task_key": "t30",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904",
+        "urn:company-wiki:evidence-span:sha256:412959727c312f057c94b08818625c5d596a64c168965d35609fb7d4cfa8b4be"
+      ]
+    },
+    {
+      "task_key": "t31",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904",
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904",
+        "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c",
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      ]
+    },
+    {
+      "task_key": "t32",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904",
+        "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:fdea6d84410e8a72f91d2e5b0dd75360d0f1d981b2a2dc3e59051a8d22ab3904",
+        "urn:company-wiki:evidence-span:sha256:72b762c24fba9a32fc2547be3ee626c51defd409cb9e22855306a5ee3e18f87c",
+        "urn:company-wiki:evidence-span:sha256:f2ad29db63d6795a2a7236b328d421095d2c15d2d585487973421d936150af7d"
+      ]
+    },
+    {
+      "task_key": "t33",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:bd7a9bb4c25e0ccc54f6fea757228c94fc5f6a81a650020d34b6c37c73da7b06",
+        "urn:company-wiki:evidence-span:sha256:05a7d557e8e328d40e71dc55eb02401891fe7de5c1b9a086ad045a49d79d5577",
+        "urn:company-wiki:evidence-span:sha256:2262cb82274b1ad00e9293d67817e8ca4335d729d6775b3bc4151d8109dec7b4"
+      ]
+    },
+    {
+      "task_key": "t34",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:264f5e66852393ffe23e35550940c4bb54e467c0b212453e9956425d8c26ce80",
+        "urn:company-wiki:evidence-span:sha256:8596b8906aa1fe11a9e98671fb31f5f2f4b23950585d54ebd6cf1f06e3ec96ec",
+        "urn:company-wiki:evidence-span:sha256:a7cd59ed8c97fe10b1d155b01971623c30c4ec7b106ee16eeba0bd4d574d560b"
+      ]
+    },
+    {
+      "task_key": "t35",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:e41b5ce5b7ddc5135ba44c0e109ad784fcdbe56a4f0367973f94064b82043e10",
+        "urn:company-wiki:evidence-span:sha256:14f5b0aefac868e8735074a0276e79e83eeb0d705f3585177c12c99ea0384408",
+        "urn:company-wiki:evidence-span:sha256:b127634feef0525c9196b833b679ca755a2d94a4628ad042ff1562ffc06d9e87"
+      ]
+    },
+    {
+      "task_key": "t36",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:91183144a77cbfc579953f724e5e7724616ff9ca4787f77733fce9bc118fc9de",
+        "urn:company-wiki:evidence-span:sha256:7ce4e9166ad17f4b5a65e0bcef45995e881f51a7a41da7329aafeeee3641d217"
+      ]
+    },
+    {
+      "task_key": "t37",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:1005a061093c0e0c122eeef980f71f09239fe7c24104a7f453f80fc04601516b"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "urn:company-wiki:evidence-span:sha256:1005a061093c0e0c122eeef980f71f09239fe7c24104a7f453f80fc04601516b"
+      ]
+    },
+    {
+      "task_key": "t38",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:32b3b5e4e2ed8280b92f2a78cd77878c55f30547cd033e7d6bd43c9cd7e26039",
+        "urn:company-wiki:evidence-span:sha256:d091f20df9447b8e02460d99a3f79c42eaa85ad2e9cf9cd085f43a7fb342ef24"
+      ]
+    },
+    {
+      "task_key": "t39",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:551b7e687991e0bc7872c9d6363dfad5f8238fd85edc5aa16c74974c2c59967e",
+        "urn:company-wiki:evidence-span:sha256:0ea8d24c65a967a0695f31fff8a056fda98c0ccb7373479d7af5698b46528ba0"
+      ]
+    },
+    {
+      "task_key": "t40",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0a9a743ee8ee21880d1b0cc16ea433b7f89d0b3c658c1a31a3671830715be416"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0a9a743ee8ee21880d1b0cc16ea433b7f89d0b3c658c1a31a3671830715be416",
+        "urn:company-wiki:evidence-span:sha256:acfb01c5154f1125b680bf3483a3f479edd8a2d94b830a9fc656ddb09d29d2bb"
+      ]
+    },
+    {
+      "task_key": "t41",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:906913d7a7d27713780a6c9b3b67fb5825d5189361a262dca13494129499f9c0",
+        "urn:company-wiki:evidence-span:sha256:e211cb854a4d124be2263c12855c6633a506b8e0527664e459f9978d167a5108"
+      ]
+    },
+    {
+      "task_key": "t42",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:f2f7c8226eef2e6811c78dbe5c12214677c733516db15088d70470954813e868"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0938744400886756c5dc6839ecaf483e4f3e445260095df36e7e8ec6d603e83a"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:0938744400886756c5dc6839ecaf483e4f3e445260095df36e7e8ec6d603e83a",
+        "urn:company-wiki:evidence-span:sha256:f2f7c8226eef2e6811c78dbe5c12214677c733516db15088d70470954813e868"
+      ]
+    },
+    {
+      "task_key": "t43",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+        "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:b1757a18bcf19f529dc424d7bb2ae134b1b6e3ecea783ed21adbf4fddb11d9b4",
+        "urn:company-wiki:evidence-span:sha256:4133a6314d09372ea3186226062f5103091d33f6d645adf0cbb706f623f59ab7",
+        "urn:company-wiki:evidence-span:sha256:c5739251ecde4946e27c0512c626a57f3d62b9b888a0b41a9cac169c7d6d1699"
+      ]
+    },
+    {
+      "task_key": "t44",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:b7e63dd3230702dee0939e548e2d0900578df07e8ee70e823466b5d0a39a6598"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3c3d2a8796229108cc85ed69b674d51e9481952202be9606de4c9c6570befbeb",
+        "urn:company-wiki:evidence-span:sha256:b7e63dd3230702dee0939e548e2d0900578df07e8ee70e823466b5d0a39a6598"
+      ]
+    },
+    {
+      "task_key": "t45",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:2a341ab7b7f5e05df9024f5230fc97c296b6d82e7bb4e18bc6362e78c816e071",
+        "urn:company-wiki:evidence-span:sha256:eae6b18f45e9ed80c744209e787385ce8e6bc576c07591f1a3f22b8353dd6ef8"
+      ]
+    },
+    {
+      "task_key": "t46",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:f2b3474613916523d504a67a9e712eaa338f59aa1a415b526ca4b951d6ceba8e",
+        "urn:company-wiki:evidence-span:sha256:657f71fea1f1e031bc297e9118d5657cbd1d4314b459462db8d6ca6058f2bf1d"
+      ]
+    },
+    {
+      "task_key": "t47",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+        "urn:company-wiki:evidence-span:sha256:4911f000aa8dedcd558b53b57b22c6071d3118d14f4d31ed4c27308fba83e6af"
+      ]
+    },
+    {
+      "task_key": "t48",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3f7b9d37cef6ed24877e18f343dc631fa95be2f769fbb9386715d1cf030347db",
+        "urn:company-wiki:evidence-span:sha256:fbc80589c878be1d101bfd797cbdeb28c48ed52d1df92c595c1e05a07a7e2e9f"
+      ]
+    },
+    {
+      "task_key": "t49",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:9829471064b2791ce80c71eaa74847645290479e0a49f22e95ab825c2590f87d",
+        "urn:company-wiki:evidence-span:sha256:5c88c5d05f919d1912bff7fb68cb4f27af5c616a085e04577bc4ed60b3880946"
+      ]
+    },
+    {
+      "task_key": "t50",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:21f2fa2840cd2b087825a6cfe313607ae9f929936a288bc2c2c914eb26c7a3a4",
+        "urn:company-wiki:evidence-span:sha256:c6baa69597718e568187cfe19a951965453b34e85230ef8645a71b38a42dced1"
+      ]
+    },
+    {
+      "task_key": "t51",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3b9bb0e3a38cd1348b055668020ee06ee65c8acfe656258449491bba6094b8e2"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e807d2cf8ccda40e2e8dca4b4e546848d1705146daf29d908e549fe9369e64c2",
+        "urn:company-wiki:evidence-span:sha256:3b9bb0e3a38cd1348b055668020ee06ee65c8acfe656258449491bba6094b8e2",
+        "urn:company-wiki:evidence-span:sha256:58bd0a98ce5bcab021608f6d7d02e682816c5e383bc64dddd662e30f9fc483d4"
+      ]
+    },
+    {
+      "task_key": "t52",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:b83981a84b267cbf5e11a6d8d0b4f1686ab866d9f507e6f782c7c30cd3661470"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:3b61697f63cd95f81fb231b9c40d477804252a2bf3d9cf2d2111948138b6df0d",
+        "urn:company-wiki:evidence-span:sha256:b83981a84b267cbf5e11a6d8d0b4f1686ab866d9f507e6f782c7c30cd3661470"
+      ]
+    },
+    {
+      "task_key": "t53",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:790d9f29d20dc72dcacab0ade7323195b3e3f30c083dfc40701db178b50c9ace"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+        "urn:company-wiki:evidence-span:sha256:790d9f29d20dc72dcacab0ade7323195b3e3f30c083dfc40701db178b50c9ace"
+      ]
+    },
+    {
+      "task_key": "t54",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+        "urn:company-wiki:evidence-span:sha256:912fb8ddbb7fb88cb8006a0da13f524cfd7dcc3a6ee6cbcd58c4c496ca33b862"
+      ]
+    },
+    {
+      "task_key": "t55",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+        "urn:company-wiki:evidence-span:sha256:537cddb3edfd353faba4c4d4de48b26ea87ec973b4b6a655bb9e70a44c887fc5"
+      ]
+    },
+    {
+      "task_key": "t56",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+        "urn:company-wiki:evidence-span:sha256:bda6e3617ec4eb85c80aef04560f86e5fc03cbf8766ad7f6863da3407a875a1e"
+      ]
+    },
+    {
+      "task_key": "t57",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:8e220a9f7322645ca69b1f751ac78ebc5816c61ed54895f4d37c0101bf3c946e"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:b62022f8e10274614e6ec0eda3e3254b88ff606b4cf2520793e80e55a4a8891b",
+        "urn:company-wiki:evidence-span:sha256:8e220a9f7322645ca69b1f751ac78ebc5816c61ed54895f4d37c0101bf3c946e"
+      ]
+    },
+    {
+      "task_key": "t58",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:439ec2a756eabf3a74388cb35569d1d8e1c64dd6884d46163cba5aa8f97ad9f8"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:3f804069213ebf18cf07d0145c61207e374be0b92915c07ac1d6b4662ffb14c4",
+        "urn:company-wiki:evidence-span:sha256:06793c9585d2fad1279bb40686e6324354802fcceda9a0e5deb4c1b50fb7a602"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:3f804069213ebf18cf07d0145c61207e374be0b92915c07ac1d6b4662ffb14c4",
+        "urn:company-wiki:evidence-span:sha256:06793c9585d2fad1279bb40686e6324354802fcceda9a0e5deb4c1b50fb7a602",
+        "urn:company-wiki:evidence-span:sha256:439ec2a756eabf3a74388cb35569d1d8e1c64dd6884d46163cba5aa8f97ad9f8"
+      ]
+    },
+    {
+      "task_key": "t59",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:2cfad6b15877a439f3982a932cafc4646f2611dcfd885bf5ceac3037012e2c9d"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:ea5600d3096f31fc79f61e3e3583db7bb2e381ce8d087c67c55397a90c27dee1"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:ea5600d3096f31fc79f61e3e3583db7bb2e381ce8d087c67c55397a90c27dee1",
+        "urn:company-wiki:evidence-span:sha256:2cfad6b15877a439f3982a932cafc4646f2611dcfd885bf5ceac3037012e2c9d"
+      ]
+    },
+    {
+      "task_key": "t60",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:770c9175d50b69e97590c1c832c02b22328fe87075e36d4ded687389fb2c1c08"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:5fa8a661e5544558aded7b105b8c9c9b8ba74fadef01940fbf28ef69b6669cf7"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:eeeb03da69e5ee47ce5b050548675cc380c8c10aaca64f45f7356c4d379cdee1",
+        "urn:company-wiki:evidence-span:sha256:5fa8a661e5544558aded7b105b8c9c9b8ba74fadef01940fbf28ef69b6669cf7",
+        "urn:company-wiki:evidence-span:sha256:770c9175d50b69e97590c1c832c02b22328fe87075e36d4ded687389fb2c1c08"
+      ]
+    },
+    {
+      "task_key": "t61",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e5286ccfeafda515d3f2c09677213e83fb1b9cb5cbeff3edc864b20cf6f7dc4c"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:613e4ff4c025d8163ee2a16bf303263bc44cbc8b2177f937e003eba1a40ede44",
+        "urn:company-wiki:evidence-span:sha256:19c568df42cb95f6df75c1f9a6cc5a67f570f9d66257de6be072cc4dfa662ac1"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:613e4ff4c025d8163ee2a16bf303263bc44cbc8b2177f937e003eba1a40ede44",
+        "urn:company-wiki:evidence-span:sha256:19c568df42cb95f6df75c1f9a6cc5a67f570f9d66257de6be072cc4dfa662ac1",
+        "urn:company-wiki:evidence-span:sha256:e5286ccfeafda515d3f2c09677213e83fb1b9cb5cbeff3edc864b20cf6f7dc4c"
+      ]
+    },
+    {
+      "task_key": "t62",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:b07e238c8ad9f7861ff220ea4ca6e412d30427051dd82df758f7ba955681fdfe"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:613e4ff4c025d8163ee2a16bf303263bc44cbc8b2177f937e003eba1a40ede44",
+        "urn:company-wiki:evidence-span:sha256:19c568df42cb95f6df75c1f9a6cc5a67f570f9d66257de6be072cc4dfa662ac1"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:26d991c4dd4d2f8071d515ecb44de4abb896aa4811c6b75dadd5da8868a55f2a",
+        "urn:company-wiki:evidence-span:sha256:613e4ff4c025d8163ee2a16bf303263bc44cbc8b2177f937e003eba1a40ede44",
+        "urn:company-wiki:evidence-span:sha256:19c568df42cb95f6df75c1f9a6cc5a67f570f9d66257de6be072cc4dfa662ac1",
+        "urn:company-wiki:evidence-span:sha256:b07e238c8ad9f7861ff220ea4ca6e412d30427051dd82df758f7ba955681fdfe"
+      ]
+    },
+    {
+      "task_key": "t63",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:e13ed3a92087dcb79dd8d09f89102a0a002ff8e3953d9103850757de7d1892a3"
+      ],
+      "context_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+        "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb"
+      ],
+      "member_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:ace5659a5e6dc11b7b0f6e5d093d695d5636af83f5c392cca3bf9ea3320bb6f2",
+        "urn:company-wiki:evidence-span:sha256:1cd2576214f193e84847b5bc00eeaac080949cc1c7680fe2b180c53a9ed7b8cb",
+        "urn:company-wiki:evidence-span:sha256:e13ed3a92087dcb79dd8d09f89102a0a002ff8e3953d9103850757de7d1892a3"
+      ]
+    }
+  ],
+  "span_locator_count": 112
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "recognition-scope-incremental-review-findings/1",
+  "status": "CHANGES_REQUESTED",
+  "source_helper_sha256": "bae7d1eded004ca189fb43289f2588c0b028cc00e19266946f9f8db5fb71be37",
+  "previous_three_findings_status": {
+    "second_possessive_and_generic": "PASS",
+    "helper_cache_identity": "PASS",
+    "repeated_tail_scan": "PASS"
+  },
+  "remaining_findings": [
+    {
+      "id": "I4-valid-alternative-recall",
+      "severity": "P2",
+      "text": "本公司的设备维护服务的客户在本公司履约时取得并消耗利益；或者客户控制履约形成的资产，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "helper_observed": false,
+      "production_tag_observed": false,
+      "cause": "Only 或(本集团)履约 continuation is recognized; explicit customer-control construction alternative is lost."
+    },
+    {
+      "id": "I5-same-condition-owner-borrowing",
+      "severity": "P2",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，而供应商的检测业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_observed": true,
+      "production_tag_observed": true,
+      "english_example": "Our instrument services are performance obligations, whereas the supplier's testing services are performance obligations satisfied over time.",
+      "cause": "Named scope and any recognition mechanism within entire comma condition are combined without owner/predicate binding."
+    }
+  ],
+  "limits": "No model, new selection, network, downloads or product writes. Requires new frozen source re-review."
+}

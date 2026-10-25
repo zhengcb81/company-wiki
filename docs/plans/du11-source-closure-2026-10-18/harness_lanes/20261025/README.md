@@ -1,6 +1,6 @@
 # 2026-10-25 三张独立施工卡
 
-状态：READY_NOT_DISPATCHED。本批是新任务，不重开已接收的W13/W14/W15或IR/QA/MC卡。用户将三卡分别交给三个harness；ROOT不代替作者启动产品实施。
+状态：DISPATCHED_AWAITING_AUTHOR_HANDOFF。用户已确认三卡发出，ROOT保持作者工区只读并继续自己的主线。本批是新任务，不重开已接收的W13/W14/W15或IR/QA/MC卡。用户将三卡分别交给三个harness；ROOT不代替作者启动产品实施。
 
 | 卡 | 负责的仓库 | 独占工作目录 | 固定代码基线 |
 |---|---|---|---|

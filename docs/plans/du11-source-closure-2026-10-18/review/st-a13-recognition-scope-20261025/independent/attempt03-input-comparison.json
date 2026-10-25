@@ -1,0 +1,99 @@
+{
+  "schema_version": "recognition-scope-independent-attempt03-input-comparison/1",
+  "selection_sha256": "d62f957a102488f72405c84d58ff5a553e96c1365b5a7a3f6b6fc4e2dfa2bff4",
+  "previous_report_sha256": "2ef77e8954cbdbe10a2ad8f0e6eb61b3cafc7e833796dbc4a9f2e5709dd1a6ae",
+  "old_pass_targets_preserved": true,
+  "targets": [
+    {
+      "target_id": "ST-A01",
+      "previous_source_input_status": "PARTIAL",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": null
+    },
+    {
+      "target_id": "ST-A02",
+      "previous_source_input_status": "PARTIAL",
+      "old_full_quotes_no_longer_selected": [
+        "loc:v1/page:15/paragraph:7/chars:800-970"
+      ],
+      "old_pass_target_quotes_preserved": null
+    },
+    {
+      "target_id": "ST-A03",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A04",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A05",
+      "previous_source_input_status": "PARTIAL",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": null
+    },
+    {
+      "target_id": "ST-A06",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A07",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A08",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A09",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A10",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A11",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A12",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    },
+    {
+      "target_id": "ST-A13",
+      "previous_source_input_status": "PARTIAL",
+      "old_full_quotes_no_longer_selected": [
+        "loc:v1/page:126/paragraph:2"
+      ],
+      "old_pass_target_quotes_preserved": null
+    },
+    {
+      "target_id": "ST-A14",
+      "previous_source_input_status": "PASS",
+      "old_full_quotes_no_longer_selected": [],
+      "old_pass_target_quotes_preserved": true
+    }
+  ],
+  "model_response_semantics": "NOT_REVIEWED",
+  "current_rf_consumption": "OPEN",
+  "limit": "pre-final-review; current ROOT code fixes may require fresh replay"
+}

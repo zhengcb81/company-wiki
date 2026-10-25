@@ -1,0 +1,286 @@
+{
+  "schema_version": "st-a13-recognition-scope-independent-final-review/1",
+  "created_at": "2026-10-25T09:23:09.840018+00:00",
+  "reviewer": "/root/annual14_current_source_review",
+  "verdict": "PASS_SCOPED_ENGINEERING_AND_SOURCE_INPUT; SUMMARY_NOT_REVIEWED; CURRENT_RF_OPEN",
+  "review_scope": "ROOT ST-A13 common source rule, attribution/conditional assertion boundaries, cache owner identity, bounded work and explicit legacy isolation; final real selection/task payload with original annual14 denominator retained",
+  "head_observed": "245f2d7ae443bc4abd2b72e28a5b1107835795d3",
+  "final_product_and_tests_sha256": {
+    "src/company_wiki/source_catalog/narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed",
+    "src/company_wiki/document_understanding/decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e",
+    "tests/unit/document_understanding_selection/test_reading_recognition_scope.py": "45c5c79e769720ea80537ea638dca6466c8114ae419623e6513443e66d7d9a04",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "cdd7fdfbc6d4eaab8af8d155a99c6b213fe5fc52cec2382550816a940a453096"
+  },
+  "artifact_sha256": {
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/initial-findings.json": "8bf11b213af108a430756a7e51b4be06c4459bc0debe77e93040c2c8a6487cb3",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/initial-findings.md": "5e77ab4a18e087fd99502f7ee08a39b589b05d43b0818d3d13198052df03ee59",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/incremental-findings01.json": "450d0b55f1b8930cb8872ac2545c5e5e12794359df799325be0f5875f17745ce",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/incremental-findings02.json": "fd39393136aa26c1509da03d05bc3b2306e1f32966192688ca8640b9a02a931a",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/final-probe01.json": "c21370eaa76e7ede729a1d796f107b78ecd919aa679cb109c5d7ed0478684684",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/final-probe02.json": "1b8b422067188adbf7783fd71076029dae924af239b463f4ca18686c26a53b32",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/final-contract-probes.json": "00a56f1b33621482f79af1ac967ff940a4b01aaf977cbed823e1063b4126a5f8",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/critical-chain-final01.json": "16dad8435edb14f7400f7b0fb549d05c388abdb66c973c5df9c99b6e599c9bef",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/critical-chain-final01.log": "3ea72ff5337fbe730ac69b868ff3e709eada1954a02ae0c6e2f733e1fd0954c0",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/attempt05-input-review.json": "dc4e3cfeb78270806fa982776e3783b740a8d4a2c8440b10c4a6f2ec0b369973",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/final-attempt06-binding.json": "51cde3abd72317c946b03a2125da5a5d82edd324562027373e7f4a530766fca7",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/legacy-final01.json": "b6c0ba4bdb3f02a660c9ff74d2e8e90c1400fe604f5b784102f22b671282a2cc",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/final09-owner-binding.json": "85d530af8297e9bfa5c5730f5eb60aad94c236950d32f916d2c4baf692e124bc",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/independent_probe.py": "bb4daff0ebefabf50077e501195612cfc8c9f3ba5098f642b674c277ae3a5455",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/independent_probe_v2.py": "eb1840205165e3fc546250924b9886bff76d4c61883951fbd8f69c264e548ffb",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/legacy_isolation_probe.py": "477a9096f7853deef0a6ce3c918e84b0a63f024e24e0079280d5dbd89b6d7e8c",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/independent/check_replay_input.py": "6d875438db1881c1926abd55dffa7d392e4c9828832dcb7f179b1e7c9cdfbc68",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/attempt06/selection.json": "7603eec8da8db637b0bd2d810b59d9c78dbb7343fbd37a0d72a74b9de799b3b5",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/attempt06/model-view.json": "840feb38581928741b2fc62e10b26b5d31f2fcec208dc907a0ff7f05fb91e003",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/attempt06/trace.json": "d83219ba3ae06a4db21bf85d38cd65186472bdb34d4505accb2db5ac1743ba04",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a13-recognition-scope-20261025/attempt06/replay-receipt.json": "deb4de6d37bd09f6ff419a8859d3b3b01f01e8d0529f657bdf4b393b60a399fa",
+    "docs/plans/du11-source-closure-2026-10-18/review/annual14-current-source-review-20261025/independent/report.json": "2ef77e8954cbdbe10a2ad8f0e6eb61b3cafc7e833796dbc4a9f2e5709dd1a6ae",
+    "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/content-review/report.json": "4b68ac829e0c53e2416cac5558fb3f3ed48d6fdb5ec0c02421f6a2d74b673926"
+  },
+  "source_ref_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "final_producer_source_digest": "4079da358ef72a02891e67e36a6dd556a4d1f742d25ad20bc12585b44d5d3171",
+  "producer_source_file_count": 375,
+  "actual_scoped_payload_sha256": "8c8aff82e78adda8040def163eb1bcb1eb824310358cd86ce637d1087ec833d8",
+  "requirements": [
+    {
+      "requirement": "Named owner/predicate and explicit conditional references",
+      "status": "PASS",
+      "proof": "27 actual0.9 positive/negative controls; helper unchanged from reviewed version"
+    },
+    {
+      "requirement": "Other owner/generic/unrelated sentence do not donate timing",
+      "status": "PASS",
+      "proof": "final09-owner-binding.json; initial failures retained"
+    },
+    {
+      "requirement": "Bounded scan accounting and original caps",
+      "status": "PASS",
+      "proof": "8 measured local regex controls; final112span/48000char/16M cap unchanged; work not exhausted"
+    },
+    {
+      "requirement": "Explicit legacy selectors unaffected",
+      "status": "PASS",
+      "proof": "0.6/0.7/0.7.1/0.8 real source selection artifact dicts identical to baseline"
+    },
+    {
+      "requirement": "Policy/cache implementation version isolation",
+      "status": "PASS",
+      "proof": "policy/19; live helper/predicate/policy in existing business_algorithms; actual current digest matches final selection"
+    },
+    {
+      "requirement": "Final real selected source and scoped payload",
+      "status": "PASS",
+      "proof": "attempt06 EvidenceSpan dicts identical to fully-source-verified attempt05; independent final compiler payload hash identical"
+    },
+    {
+      "requirement": "Old ten PASS targets retained",
+      "status": "PASS",
+      "proof": "same complete actual payload plus verified old support/task local context preservation"
+    },
+    {
+      "requirement": "Tests and fixture restoration",
+      "status": "PASS",
+      "proof": "previous independent35 chain source-bound; final narrow0.9 owner27 + legacy real-entry checks; owned test root restored absent"
+    },
+    {
+      "requirement": "Formal summary response semantics",
+      "status": "NOT_REVIEWED",
+      "proof": "No model request/response in this review"
+    },
+    {
+      "requirement": "Current RF actual forecast consumption",
+      "status": "OPEN",
+      "proof": "Not performed or delegated to this source-rule review"
+    }
+  ],
+  "issue_closure": [
+    {
+      "id": "I1",
+      "problem": "Owned scope incorrectly included customer/supplier-owned services and generic core/primary nouns",
+      "status": "CLOSED",
+      "fix_owner": "narrative_recognition_scope._named_cn_scope + generic filters",
+      "evidence": "final09-owner-binding.json: supplier/customer second possession and core/主营/核心 controls all retain false; actual 0.9 owner verified"
+    },
+    {
+      "id": "I2",
+      "problem": "New helper implementation missing from existing semantic cache digest closure",
+      "status": "CLOSED",
+      "fix_owner": "decision_inventory._versions business_modules",
+      "evidence": "final-probe02.json helper-only simulated source mutation invalidated business_algorithms; inventory/helper unchanged since that pass; final-attempt06-binding matches actual current business_algorithms to selected dependencies"
+    },
+    {
+      "id": "I3",
+      "problem": "Quadratic remaining-tail reference scans exceeded linear work precharge",
+      "status": "CLOSED",
+      "fix_owner": "disjoint assertions/conditional state + unified READING_BUSINESS_SCAN_PASSES",
+      "evidence": "final-contract-probes.json: 8 increasing-size controls include new helper regex and shared predicate boundary, sub counts actual input; max7.5789N<8N; source helper/predicate unchanged; actual final work12879238/16000000"
+    },
+    {
+      "id": "I4",
+      "problem": "Legitimate explicit customer-control construction alternative rejected",
+      "status": "CLOSED",
+      "fix_owner": "bounded continuation grammar for same-owned customer conditions",
+      "evidence": "final09-owner-binding.json: explicit-conditional-reference and owned-construction-condition positive in actual 0.9 owner"
+    },
+    {
+      "id": "I5",
+      "problem": "Comma/whereas assertion could donate another owner recognition rule",
+      "status": "CLOSED",
+      "fix_owner": "shared narrative_predicate_state.split_predicate_assertions + scoped state reset",
+      "evidence": "final09-owner-binding.json: comma/whereas/unknown-owner/cross-sentence/other-owner payment controls all false"
+    },
+    {
+      "id": "I6",
+      "problem": "New scope topic leaked to explicit 0.8 selector, changing historical EvidenceSpan identity",
+      "status": "CLOSED",
+      "fix_owner": "project_reading_business_fact(include_description=True) only; compatibility detector restored",
+      "evidence": "legacy-final01.json: four legacy real selectors byte-equivalent to new-helper-disabled baseline; 0.8 span restored c12a3520...; actual0.9 selection still exposes new scope and 27 semantic controls pass"
+    }
+  ],
+  "unresolved_in_review_scope": [],
+  "review_evidence": {
+    "initial_reviewed_helper_sha256": "81b61b330d4f400d625ccb7f7cf17125c02d92ae51cb6c8f2e63747129974fcc",
+    "final27_actual09_controls": {
+      "passed": 27,
+      "total": 27,
+      "entrypoint": "assess_reading_business_fact -> project_reading_business_fact(include_description=True)"
+    },
+    "final_legacy_public_selectors": [
+      {
+        "selector_version": "0.6.0",
+        "actual_span_ids": [],
+        "baseline_span_ids": [],
+        "actual_topics": [],
+        "byte_equivalent_artifact_dict": true,
+        "pass": true
+      },
+      {
+        "selector_version": "0.7.0",
+        "actual_span_ids": [],
+        "baseline_span_ids": [],
+        "actual_topics": [],
+        "byte_equivalent_artifact_dict": true,
+        "pass": true
+      },
+      {
+        "selector_version": "0.7.1",
+        "actual_span_ids": [],
+        "baseline_span_ids": [],
+        "actual_topics": [],
+        "byte_equivalent_artifact_dict": true,
+        "pass": true
+      },
+      {
+        "selector_version": "0.8.0",
+        "actual_span_ids": [
+          "urn:company-wiki:evidence-span:sha256:c12a3520dc6685d472e9fb03dbec86d7ac2f7533f4f53a71d5df13f974833378"
+        ],
+        "baseline_span_ids": [
+          "urn:company-wiki:evidence-span:sha256:c12a3520dc6685d472e9fb03dbec86d7ac2f7533f4f53a71d5df13f974833378"
+        ],
+        "actual_topics": [
+          [
+            "business_revenue_recognition"
+          ]
+        ],
+        "byte_equivalent_artifact_dict": true,
+        "pass": true
+      },
+      {
+        "selector_version": "0.9.0",
+        "actual_span_ids": [
+          "urn:company-wiki:evidence-span:sha256:58641b09ba47d1d085e88450eb4335749657feda240fcb7e662adaa21ea6231c"
+        ],
+        "baseline_span_ids": [
+          "urn:company-wiki:evidence-span:sha256:bebcdb9543e2add31ed543db7a31981bf05e79e17c946d377889bec7b9d1e931"
+        ],
+        "actual_topics": [
+          [
+            "business_revenue_recognition",
+            "business_recognition_scope"
+          ]
+        ],
+        "byte_equivalent_artifact_dict": false,
+        "pass": true
+      }
+    ],
+    "reused_linear_controls": {
+      "count": 8,
+      "all_pass": true,
+      "max_local_regex_input_work_ratio": 7.578877596111357,
+      "accounting_scope": "All regex inputs in new helper plus shared assertion _BOUNDARY; sub/subn count their actual input argument. Existing shared mechanism/matching work remains in prior policy scan accounting; this measures the changed local scan envelope, not CPU cycles.",
+      "source_helper_and_boundary_unchanged": true
+    },
+    "previous_independent_pytest_chain": {
+      "passed": 35,
+      "seconds_reported_by_pytest": 3.86,
+      "source_and_test_sha256": {
+        "src/company_wiki/source_catalog/narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+        "src/company_wiki/source_catalog/narrative_business_policy.py": "7df218aac185f83ccb6cf1cfc777fd4e2ee1241b3ed0a38543f2e29343b63945",
+        "src/company_wiki/source_catalog/narrative_predicate_state.py": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+        "src/company_wiki/document_understanding/decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e",
+        "tests/unit/document_understanding_selection/test_reading_recognition_scope.py": "ab0dfce9585fe4e6aa4535e899528d3c3f9e01968bcc3b61cdee409aaf8142ed",
+        "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "cdd7fdfbc6d4eaab8af8d155a99c6b213fe5fc52cec2382550816a940a453096"
+      },
+      "source_stable": true,
+      "owned_test_root_restored_absent": true,
+      "qualification": "This35 chain ran before final I6 policy/test move; not presented as a35 test run on final policy. Final I6 receives real-entry legacy/0.9 incremental checks instead."
+    },
+    "final_actual_source_input": {
+      "selected_spans": 112,
+      "chars": 9088,
+      "tasks": 63,
+      "original_checks_reused": {
+        "selection_receipt_match": true,
+        "model_view_receipt_match": true,
+        "exact_current_payload_match": true,
+        "source_hash_match": true,
+        "all_112_original_spans_exact": true,
+        "all_10_prior_passes_content_and_context_retained": true
+      },
+      "original_block_member_checks": 190,
+      "same_material_and_payload_proven": true,
+      "work_budget": {
+        "used": 12879238,
+        "limit": 16000000,
+        "exhausted": false,
+        "same_instance_for_parse_and_select": true
+      }
+    },
+    "author_reported_final_suite": {
+      "count": 108,
+      "status": "PASS_REPORTED_BY_ROOT",
+      "independently_rerun": false,
+      "qualification": "Independent acceptance relies on own narrow evidence above; author suite count is not added to independent counts."
+    }
+  },
+  "annual14": {
+    "source_input_counts": {
+      "PASS": 10,
+      "PARTIAL": 4,
+      "MISSING": 0
+    },
+    "partial_target_ids": [
+      "ST-A01",
+      "ST-A02",
+      "ST-A05",
+      "ST-A13"
+    ],
+    "a13_improvement": "Testing/Biology and partial Chemistry over-time mechanism now support in t59 with exact local heading. Exact over-time/point-in-time amounts still require structured source evidence and current RF use.",
+    "old_8_6_0_report_untouched": true,
+    "original_target_count": 14,
+    "model_response_semantics": "NOT_REVIEWED",
+    "current_rf_consumption": "OPEN"
+  },
+  "release_boundary": [
+    "ROOT may integrate/publish only these reviewed source-rule/cache/legacy changes with normal repository checks.",
+    "This review does not certify paid summary accuracy, cache lifecycle beyond the semantic implementation identity, current RF model consumption, full company analysis or overall mainline goal.",
+    "Preserve original documents, all old and failed review artifacts,14 original targets and partial financial responsibilities.",
+    "No further scope issue discovered in the reviewed final version; any later code or material change requires corresponding binding/review."
+  ],
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "product_writes": 0
+}

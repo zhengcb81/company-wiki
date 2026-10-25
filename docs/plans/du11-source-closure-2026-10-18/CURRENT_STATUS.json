@@ -2,20 +2,24 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ANNUAL14_ST_A02_SOURCE_DIAGNOSED; STRUCTURED_VALUE_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "ST_A13_ENGINEERING_INDEPENDENT_PASS_PUBLICATION_PENDING; A01_A05_PARENT_NEXT; REAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
-    "status": "READY_ALL_THREE_NOT_DISPATCHED",
+    "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
     "dispatch": "harness_lanes/20261025/dispatch.json",
-    "package_ids": ["W16-RF-BASIS", "W17-AUDIT-COVERAGE", "W18-CWP-HOLDOUT"],
+    "package_ids": [
+      "W16-RF-BASIS",
+      "W17-AUDIT-COVERAGE",
+      "W18-CWP-HOLDOUT"
+    ],
     "separate_worktrees_and_local_pwf_seeds": true,
-    "product_implementation_started": false,
+    "product_implementation_started": "not_observed_by_ROOT",
     "independent_packet_review": "PASS",
     "review": "harness_lanes/20261025/packet-review.md",
     "root_scope": "CWP production source path and final real summary/cache/RF content acceptance; do not write delegated RF/Audit paths or W18 new replay/test paths during author work",
     "new_model_calls": 0,
     "new_downloads": 0,
-    "annual14_grade_unchanged": "8 pass / 6 partial / 0 missing"
+    "annual14_grade_unchanged": "Historical report8/6/0 preserved; separate current source/input review10/4/0; model semantics not reviewed"
   },
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
@@ -333,7 +337,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ST-A02 diagnosis found the complete p235 termination table in the production structured parser (4 rows, 7 headers), but page unit/currency context is separate; the narrative text fragment is correctly flagged table_structure_ambiguous. The 15-case numeric-attribution regression passes. Next verify whether the configured financial API or a fully bound structured table can supply exact values, unit, period and restatement basis, then verify RF consumption. Keep ST-A02 partial and annual14 at 8 pass / 6 partial / 0 missing until evidence and bounded content regrade support a change.",
+  "next_step_now": "Publish independent-pass ST-A13 source/projection/cache node, then A01/A05 three-tier native hierarchy TDD from frozen neutral/real evidence; no delegated writes; formal summary/cache/RF audit remains open.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -354,7 +358,7 @@
       "review_before_handoff": true
     }
   ],
-  "next_step_after_user_resumes": "Already active; no new permission or resume required.",
+  "next_step_after_user_resumes": "Historical pause superseded: goal is ACTIVE. Follow next_step_now.",
   "budget_snapshot": {
     "observed_on": "2026-10-25",
     "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
@@ -1768,7 +1772,9 @@
     "decision": "No CWP narrative-selection change is supported. Keep ambiguous text flagged; verify exact values via configured financial API or a structured table with unit/currency binding, then verify RF consumption.",
     "annual14_content_review": "RETAIN 8 pass / 6 partial / 0 missing; ST-A02 remains partial",
     "raw_copies": 0,
-    "external_model_calls": 0
+    "external_model_calls": 0,
+    "source_route_receipt": "review/st-a02-table-source-20261025/source-route-receipt.json",
+    "source_route_status": "OBSERVED_OLD_RF_ONLY_CURRENT_ATTEMPT_STILL_OPEN"
   },
   "annual14_st_a01_business_scope_fix_20261025": {
     "status": "PUSHED_EXACT_HEAD_CI_SUCCESS_CONTENT_NOT_REGRADED",
@@ -1846,7 +1852,11 @@
       },
       "target": {
         "locator": "loc:v1/page:119/paragraph:4/chars:72-240",
-        "topics": ["business_scope", "capacity_projects", "core_business"],
+        "topics": [
+          "business_scope",
+          "capacity_projects",
+          "core_business"
+        ],
         "task_key": "t55",
         "task_kind": "native_continuity",
         "task_section_role": "unknown",
@@ -1859,5 +1869,43 @@
       "raw_text_stored_in_receipt": false,
       "content_grade_change": "NONE; retain 8 pass / 6 partial / 0 missing"
     }
-  }
+  },
+  "annual14_current_source_input_review_20261025": {
+    "status": "SOURCE_INPUT_ONLY_REVIEWED",
+    "passed": 10,
+    "partial": 4,
+    "missing": 0,
+    "partial_targets": [
+      "ST-A01",
+      "ST-A02",
+      "ST-A05",
+      "ST-A13"
+    ],
+    "review": "review/annual14-current-source-review-20261025/independent/report.json",
+    "historical_report_8_6_0_preserved": true,
+    "model_response_semantics": "NOT_REVIEWED",
+    "current_rf_adoption": "OPEN"
+  },
+  "annual14_st_a13_recognition_scope_20261025": {
+    "status": "INDEPENDENT_PASS_PUBLICATION_PENDING",
+    "review_root": "review/st-a13-recognition-scope-20261025",
+    "attempt": "attempt06",
+    "selected_spans": 112,
+    "selected_chars": 9088,
+    "compiled_tasks": 63,
+    "work_used": 12879238,
+    "work_limit": 16000000,
+    "specific_business_recognition_source_restored": true,
+    "exact_timing_revenue_values": "NOT_IN_NARRATIVE_INPUT",
+    "whole_target": "PARTIAL",
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "scope": "Source/input improvement, not model response or RF quality acceptance",
+    "targeted_tests_passed": 108,
+    "independent_review": "review/st-a13-recognition-scope-20261025/independent/final-review.json",
+    "unresolved_in_review_scope": 0,
+    "legacy_explicit_selector_isolation": "0.6/0.7/0.7.1/0.8 span dicts unchanged;0.9 new scope retained"
+  },
+  "a01_a05_investigation": "review/st-a05-parent-investigation-20261025/README.md"
 }

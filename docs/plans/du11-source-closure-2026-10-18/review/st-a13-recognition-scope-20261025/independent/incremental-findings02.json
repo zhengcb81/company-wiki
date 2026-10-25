@@ -1,0 +1,33 @@
+{
+  "schema_version": "recognition-scope-incremental-review-findings/1",
+  "status": "CHANGES_REQUESTED",
+  "id": "I6-explicit-legacy-08-leak",
+  "severity": "P2",
+  "helper_sha256": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+  "text": "本公司的仪器维护服务属于在某一时段内履行的履约义务。",
+  "fixture_digest_input": "independent-legacy-isolation",
+  "selector_version": "0.8.0",
+  "new_helper_call_count": 2,
+  "baseline_only_new_scope_disabled": {
+    "span_id": "urn:company-wiki:evidence-span:sha256:c12a3520dc6685d472e9fb03dbec86d7ac2f7533f4f53a71d5df13f974833378",
+    "topics": [
+      "business_revenue_recognition"
+    ]
+  },
+  "actual": {
+    "span_id": "urn:company-wiki:evidence-span:sha256:17f66ee8e0e7f92c6e69a7fcbd69198bd4e1a45e175341278a4fb806546d5121",
+    "topics": [
+      "business_revenue_recognition",
+      "business_recognition_scope"
+    ]
+  },
+  "root_cause": "0.8 consumer shares detect_reading_business_fact; a ReadingPlan-only new semantic relation escaped to actual legacy source selection.",
+  "other_current_checks": {
+    "independent_cases19": "PASS",
+    "extra_conditions8": "PASS",
+    "bounded_regex_controls8": "PASS",
+    "critical_pytest_chain35": "PASS",
+    "attempt05_current_input_and_old10pass": "PASS"
+  },
+  "scope": "Only source/input reviewed; no model/RF content approval."
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": "recognition-scope-independent-probes/1",
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "7df218aac185f83ccb6cf1cfc777fd4e2ee1241b3ed0a38543f2e29343b63945",
+    "src/company_wiki/document_understanding/decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ee77cd8cf295a5748d762b41e1fd75819b475632d44852ea81abd4c8114d16b4",
+    "tests/unit/document_understanding_selection/test_reading_recognition_scope.py": "ab0dfce9585fe4e6aa4535e899528d3c3f9e01968bcc3b61cdee409aaf8142ed"
+  },
+  "source_stable": true,
+  "cases": [
+    {
+      "name": "comma-other-owner-cn",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，而供应商的检测业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "comma-other-owner-cn-without-conjunction",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，供应商的检测业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "comma-other-owner-en",
+      "text": "Our instrument services are performance obligations, whereas the supplier's testing services are performance obligations satisfied over time.",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "same-owner-explicit-comma-reference",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "helper_actual": true,
+      "production_tag_actual": true,
+      "pass": true
+    },
+    {
+      "name": "named-cn",
+      "text": "本公司的检测服务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "helper_actual": true,
+      "production_tag_actual": true,
+      "pass": true
+    },
+    {
+      "name": "named-en",
+      "text": "Our instrument maintenance services are performance obligations satisfied over time because customers consume the benefits.",
+      "expected": true,
+      "helper_actual": true,
+      "production_tag_actual": true,
+      "pass": true
+    },
+    {
+      "name": "explicit-conditional-reference",
+      "text": "本公司的设备维护服务的客户在本公司履约时取得并消耗利益；或者客户控制履约形成的资产，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "helper_actual": true,
+      "production_tag_actual": true,
+      "pass": true
+    },
+    {
+      "name": "customer-owned",
+      "text": "本集团客户的设备维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "supplier-owned",
+      "text": "本集团供应商的设备维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "customer-owned-explicit-possession",
+      "text": "本公司的客户的仪器校准服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "different-owner-before-back-reference",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；供应商的检测业务适用另一合同安排，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "different-business-before-back-reference",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；本集团其他业务单独履约，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "generic-primary-cn",
+      "text": "本集团的主营业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "generic-core-cn",
+      "text": "本集团的核心业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "generic-core-en",
+      "text": "Our core services are performance obligations satisfied over time.",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "generic-other-cn",
+      "text": "本集团的其他业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "supplier-direct",
+      "text": "供应商的仪器维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "separate-sentence",
+      "text": "本集团的设备维护服务正在增长。其他业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    },
+    {
+      "name": "negative-rule",
+      "text": "本集团的设备维护服务不属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "helper_actual": false,
+      "production_tag_actual": false,
+      "pass": true
+    }
+  ],
+  "case_pass_count": 19,
+  "case_total": 19,
+  "helper_only_byte_change_invalidates_cache": true,
+  "scan_probe": [
+    {
+      "count": 10,
+      "input_chars": 283,
+      "result": false,
+      "reference_regex_present": true,
+      "reference_calls": 0,
+      "reference_scan_chars": 0,
+      "declared_helper_work": 2264,
+      "seconds_observed_not_gate": 0.00012630003038793802
+    },
+    {
+      "count": 20,
+      "input_chars": 543,
+      "result": false,
+      "reference_regex_present": true,
+      "reference_calls": 0,
+      "reference_scan_chars": 0,
+      "declared_helper_work": 4344,
+      "seconds_observed_not_gate": 0.00015360000543296337
+    },
+    {
+      "count": 40,
+      "input_chars": 1063,
+      "result": false,
+      "reference_regex_present": true,
+      "reference_calls": 0,
+      "reference_scan_chars": 0,
+      "declared_helper_work": 8504,
+      "seconds_observed_not_gate": 0.0003060000017285347
+    },
+    {
+      "count": 80,
+      "input_chars": 2103,
+      "result": false,
+      "reference_regex_present": true,
+      "reference_calls": 0,
+      "reference_scan_chars": 0,
+      "declared_helper_work": 16824,
+      "seconds_observed_not_gate": 0.0005907000158913434
+    }
+  ],
+  "external_calls": 0,
+  "downloads": 0
+}

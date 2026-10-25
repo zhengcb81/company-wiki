@@ -1,0 +1,73 @@
+{
+  "schema_version": "recognition-scope-independent-real-legacy-isolation/1",
+  "rows": [
+    {
+      "selector_version": "0.6.0",
+      "actual_span_ids": [],
+      "baseline_span_ids": [],
+      "actual_topics": [],
+      "byte_equivalent_artifact_dict": true,
+      "pass": true
+    },
+    {
+      "selector_version": "0.7.0",
+      "actual_span_ids": [],
+      "baseline_span_ids": [],
+      "actual_topics": [],
+      "byte_equivalent_artifact_dict": true,
+      "pass": true
+    },
+    {
+      "selector_version": "0.7.1",
+      "actual_span_ids": [],
+      "baseline_span_ids": [],
+      "actual_topics": [],
+      "byte_equivalent_artifact_dict": true,
+      "pass": true
+    },
+    {
+      "selector_version": "0.8.0",
+      "actual_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c12a3520dc6685d472e9fb03dbec86d7ac2f7533f4f53a71d5df13f974833378"
+      ],
+      "baseline_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:c12a3520dc6685d472e9fb03dbec86d7ac2f7533f4f53a71d5df13f974833378"
+      ],
+      "actual_topics": [
+        [
+          "business_revenue_recognition"
+        ]
+      ],
+      "byte_equivalent_artifact_dict": true,
+      "pass": true
+    },
+    {
+      "selector_version": "0.9.0",
+      "actual_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:58641b09ba47d1d085e88450eb4335749657feda240fcb7e662adaa21ea6231c"
+      ],
+      "baseline_span_ids": [
+        "urn:company-wiki:evidence-span:sha256:bebcdb9543e2add31ed543db7a31981bf05e79e17c946d377889bec7b9d1e931"
+      ],
+      "actual_topics": [
+        [
+          "business_revenue_recognition",
+          "business_recognition_scope"
+        ]
+      ],
+      "byte_equivalent_artifact_dict": false,
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "neutral_fixture_text": "本公司的仪器维护服务属于在某一时段内履行的履约义务。",
+  "baseline": "Only the new scope detector is disabled in memory; source, old classifiers, and file bytes stay identical.",
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed",
+    "src/company_wiki/source_catalog/narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "002fc2908149d3e5da1def7a789eec6478dbe07ec28f4a5bf29edd1e68f02318",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28"
+  },
+  "external_calls": 0,
+  "downloads": 0
+}

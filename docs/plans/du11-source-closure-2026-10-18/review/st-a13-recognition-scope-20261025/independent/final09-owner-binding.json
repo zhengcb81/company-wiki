@@ -1,0 +1,302 @@
+{
+  "schema_version": "recognition-scope-independent-final09-owner-binding/1",
+  "source_entry": "assess_reading_business_fact -> project_reading_business_fact(include_description=True)",
+  "cases": [
+    {
+      "name": "comma-other-owner-cn",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，而供应商的检测业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "comma-other-owner-cn-without-conjunction",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，供应商的检测业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "comma-other-owner-en",
+      "text": "Our instrument services are performance obligations, whereas the supplier's testing services are performance obligations satisfied over time.",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "same-owner-explicit-comma-reference",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "actual_09_source_projection_tag": true,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition",
+        "business_recognition_scope"
+      ]
+    },
+    {
+      "name": "named-cn",
+      "text": "本公司的检测服务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "actual_09_source_projection_tag": true,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition",
+        "business_recognition_scope"
+      ]
+    },
+    {
+      "name": "named-en",
+      "text": "Our instrument maintenance services are performance obligations satisfied over time because customers consume the benefits.",
+      "expected": true,
+      "actual_09_source_projection_tag": true,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition",
+        "business_recognition_scope"
+      ]
+    },
+    {
+      "name": "explicit-conditional-reference",
+      "text": "本公司的设备维护服务的客户在本公司履约时取得并消耗利益；或者客户控制履约形成的资产，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "actual_09_source_projection_tag": true,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition",
+        "business_recognition_scope"
+      ]
+    },
+    {
+      "name": "customer-owned",
+      "text": "本集团客户的设备维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "supplier-owned",
+      "text": "本集团供应商的设备维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "customer-owned-explicit-possession",
+      "text": "本公司的客户的仪器校准服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "different-owner-before-back-reference",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；供应商的检测业务适用另一合同安排，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "different-business-before-back-reference",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；本集团其他业务单独履约，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "generic-primary-cn",
+      "text": "本集团的主营业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "generic-core-cn",
+      "text": "本集团的核心业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "generic-core-en",
+      "text": "Our core services are performance obligations satisfied over time.",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "generic-other-cn",
+      "text": "本集团的其他业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "supplier-direct",
+      "text": "供应商的仪器维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "separate-sentence",
+      "text": "本集团的设备维护服务正在增长。其他业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "negative-rule",
+      "text": "本集团的设备维护服务不属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "unknown-owner",
+      "text": "客户的仪器维护服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "other-owner-conditional",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；或供应商履约过程中形成在建商品，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "other-owner-payment",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；且供应商有权就已完成履约部分收款，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "other-owner-client",
+      "text": "本集团的设备维护服务的客户在本集团履约时取得并消耗利益；或客户在供应商履约时控制在建商品，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "cross-sentence",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益。上述服务属于在某一时段内履行的履约义务。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": [
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "name": "owned-payment-reference",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益；且本集团在整个合同期间内有权就累计至今已完成的履约部分收取款项，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "actual_09_source_projection_tag": true,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "business_revenue_recognition",
+        "business_recognition_scope"
+      ]
+    },
+    {
+      "name": "owned-construction-condition",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益；或者客户能够控制在建商品，因此上述业务属于在某一时段内履行的履约义务。",
+      "expected": true,
+      "actual_09_source_projection_tag": true,
+      "pass": true,
+      "topics": [
+        "core_business",
+        "business_revenue_recognition",
+        "business_recognition_scope"
+      ]
+    },
+    {
+      "name": "no-rule",
+      "text": "本集团的仪器维护服务的客户在本集团履约时取得并消耗利益。",
+      "expected": false,
+      "actual_09_source_projection_tag": false,
+      "pass": true,
+      "topics": []
+    }
+  ],
+  "pass": true,
+  "policy_sha256": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed",
+  "helper_source_unchanged_from_final_probe02": true,
+  "note": "19 previous cases plus 8 extra conditions are re-bound to actual 0.9 production owner after legacy compatibility restoration; helper/linear semantics evidence reused.",
+  "external_calls": 0,
+  "downloads": 0
+}

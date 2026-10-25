@@ -346,6 +346,7 @@ def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complet
 
 @pytest.mark.parametrize("module_name", [
     "company_wiki.source_catalog.narrative_business_policy",
+    "company_wiki.source_catalog.narrative_recognition_scope",
     "company_wiki.source_catalog.narrative_source_purpose",
     "company_wiki.source_catalog.narrative_business_disclosures",
     "company_wiki.source_catalog.narrative_reading",

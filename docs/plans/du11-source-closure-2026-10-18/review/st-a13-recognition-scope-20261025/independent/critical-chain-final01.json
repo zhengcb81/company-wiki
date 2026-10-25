@@ -1,0 +1,36 @@
+{
+  "schema_version": "recognition-scope-independent-critical-chain/1",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\st-a13-recognition-scope-20261025\\independent\\test-tmp-final01\\pytest",
+    "tests/unit/document_understanding_selection/test_reading_recognition_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_recognition_scope]",
+    "tests/unit/document_understanding_selection/test_reading_mechanism_coverage.py::test_new_meaning_version_preserves_the_explicit_legacy_fact_detector"
+  ],
+  "environment": {
+    "CW_SHORT_BASETEMP_DISABLE": "1 (documented A/B option; short units only, no launcher paths)",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "seconds": 12.089546700008214,
+  "log_sha256": "3ea72ff5337fbe730ac69b868ff3e709eada1954a02ae0c6e2f733e1fd0954c0",
+  "source_and_test_sha256": {
+    "src/company_wiki/source_catalog/narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "7df218aac185f83ccb6cf1cfc777fd4e2ee1241b3ed0a38543f2e29343b63945",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+    "src/company_wiki/document_understanding/decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e",
+    "tests/unit/document_understanding_selection/test_reading_recognition_scope.py": "ab0dfce9585fe4e6aa4535e899528d3c3f9e01968bcc3b61cdee409aaf8142ed",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "cdd7fdfbc6d4eaab8af8d155a99c6b213fe5fc52cec2382550816a940a453096"
+  },
+  "source_stable": true,
+  "owned_test_root_restored_absent": true,
+  "external_model_calls": 0,
+  "downloads": 0
+}

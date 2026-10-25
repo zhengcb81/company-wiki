@@ -6,6 +6,7 @@ text is classification input only; callers keep original bytes and locators.
 """
 from __future__ import annotations
 
+from dataclasses import replace
 import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text, matching_script_text
@@ -17,6 +18,10 @@ from .narrative_source_purpose import (
     source_purpose,
 )
 from .narrative_revenue_guidance import revenue_guidance
+from .narrative_recognition_scope import (
+    READING_RECOGNITION_SCOPE_SCAN_PASSES,
+    named_recognition_scope,
+)
 from .narrative_predicate_state import observe_metric_predicate, predicate_scope
 from .narrative_business_disclosures import (
     READING_DISCLOSURE_SCAN_PASSES,
@@ -47,8 +52,10 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/18"
-READING_BUSINESS_SCAN_PASSES = 6 + READING_DISCLOSURE_SCAN_PASSES
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/19"
+READING_BUSINESS_SCAN_PASSES = (
+    6 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
+)
 _FINANCIAL_BUSINESS_RELATIONS = frozenset({
     "business_billing_basis", "business_reporting_scope",
     "business_coverage_relation", "business_revenue_recognition", "source_revenue_guidance",
@@ -796,6 +803,12 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     fact = (description if description is not None else detect_reading_business_fact(text)) if include_description else OperatingFact()
     if fact.purpose in NON_OPERATING_PURPOSES:
         return fact
+    # Only the source-owned 0.9 projection consumes the new reading use. The
+    # text-only recognizer remains the real 0.8 compatibility entry point.
+    if include_description and named_recognition_scope(_reading_text(text)):
+        fact = replace(fact,
+            topics=tuple(dict.fromkeys((*fact.topics, "business_recognition_scope"))),
+            reasons=tuple(dict.fromkeys((*fact.reasons, "business_recognition_scope"))))
     dynamic_reasons = {"operating_activity", "specific_business_event",
                        "applied_operating_milestone", "customer_adoption_milestone"}
     independent = tuple(reason for reason in fact.reasons if reason not in dynamic_reasons)

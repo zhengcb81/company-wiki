@@ -1,0 +1,38 @@
+{
+  "schema_version": "st-a13-environment-rerun/1",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\st-a13-tests-eb0afu7l\\pytest",
+    "tests\\unit\\document_understanding_selection\\test_reading_decision_inventory.py::test_reporting_rule_only_change_invalidates_the_actual_decision_cache",
+    "tests\\unit\\document_understanding_selection\\test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_business_policy]",
+    "tests\\unit\\document_understanding_selection\\test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_source_purpose]",
+    "tests\\unit\\document_understanding_selection\\test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_business_disclosures]",
+    "tests\\unit\\document_understanding_selection\\test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_reading]",
+    "tests\\unit\\document_understanding_selection\\test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure.sections]",
+    "tests\\unit\\document_understanding_selection\\test_reading_hk_mechanisms.py::test_catalog_compiler_rejects_the_same_invalid_table_scan_types[true]",
+    "tests\\unit\\document_understanding_selection\\test_reading_hk_mechanisms.py::test_catalog_compiler_rejects_the_same_invalid_table_scan_types[1]",
+    "tests\\unit\\document_understanding_selection\\test_reading_hk_mechanisms.py::test_catalog_compiler_rejects_the_same_invalid_table_scan_types[None]",
+    "tests\\unit\\document_understanding_selection\\test_reading_priority_coverage.py::test_transient_pdf_layout_reaches_the_existing_shared_engine_without_changing_source",
+    "tests\\unit\\document_understanding_selection\\test_reading_structured_qa.py::test_real_official_export_adapter_keeps_two_actual_parents_and_native_fields"
+  ],
+  "exit_code": 1,
+  "seconds": 20.88,
+  "first_run": {
+    "passed": 1606,
+    "setup_errors": 11,
+    "root_cause": "pytest sandbox default TEMP numbered directory creation OSError; no assertion failures"
+  },
+  "rerun_scope": "Only the 11 setup-error cases; not the 1606 passed cases",
+  "test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\st-a13-tests-eb0afu7l",
+  "created_by_this_process": true,
+  "generated_file_count": 0,
+  "generated_relative_files": [],
+  "test_root_restored_absent": true,
+  "log_sha256": "ee06f229a99820655748ae7596b0e83e28067fd5bd24972b8a670085fd0584c3",
+  "model_calls": 0,
+  "downloads": 0
+}

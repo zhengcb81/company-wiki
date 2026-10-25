@@ -1,0 +1,1390 @@
+{
+  "schema_version": "source-route-investigation/1",
+  "status": "OBSERVED_OLD_RF_ONLY_CURRENT_ATTEMPT_STILL_OPEN",
+  "selection_sha256": "6fb97953c61ed7eb76c47e0c10d852ff1a5201926991862f2a43d08166c2fe3a",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "byte_size": 1608226,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "source_description": {
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "byte_size": 1608226,
+    "mime_type": "application/pdf",
+    "title": "无锡药明康德新药开发股份有限公司2025年年度报告",
+    "document_kind": "annual_report",
+    "published_date": "2026-03-24",
+    "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-24/1225025225.PDF",
+    "retrieved_at": null,
+    "collector_name": null,
+    "collector_version": null,
+    "canonical_entity_id": null,
+    "display_name": "药明康德",
+    "market": "CN",
+    "security_id": "603259",
+    "fiscal_year": 2025,
+    "fiscal_period": "FY",
+    "period_end": "2025-12-31",
+    "form_type": "annual_report",
+    "provider": null,
+    "provider_document_id": null,
+    "language": "zh"
+  },
+  "verified_source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "pages": [
+    7,
+    13,
+    183,
+    184,
+    235
+  ],
+  "structured_table_rows": [
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "",
+        "签字会计师姓名",
+        "李佳麗"
+      ],
+      "row_cells": [
+        "",
+        "签字会计师姓名",
+        "李佳麗"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "营业收入",
+        "45,456,165,774.18",
+        "39,241,431,359.88",
+        "15.84",
+        "40,340,806,877.04"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "利润总额",
+        "23,906,151,246.45",
+        "11,539,811,639.08",
+        "107.16",
+        "11,831,990,991.15"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "归属于上市公司\n股东的净利润",
+        "19,150,582,400.69",
+        "9,450,308,427.78",
+        "102.65",
+        "9,606,749,135.07"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 4,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "归属于上市公司\n股东的扣除非经\n常性损益的净利\n润",
+        "13,240,556,954.42",
+        "9,988,102,785.24",
+        "32.56",
+        "9,747,587,804.59"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 5,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "经营活动产生的\n现金流量净额",
+        "17,203,161,622.00",
+        "12,406,514,834.59",
+        "38.66",
+        "13,386,911,778.77"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 6,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "",
+        "2025年末",
+        "2024年末",
+        "本期末比上年\n同期末增减\n（%）",
+        "2023年末"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 7,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "归属于上市公司\n股东的净资产",
+        "79,712,290,246.44",
+        "58,632,715,174.37",
+        "35.95",
+        "55,122,453,910.73"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 8,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要会计数据",
+        "2025年",
+        "2024年",
+        "本期比上年同\n期增减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "总资产",
+        "103,120,968,579.11",
+        "80,325,824,408.75",
+        "28.38",
+        "73,669,349,307.12"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "基本每股收益（元／股）",
+        "6.70",
+        "3.28",
+        "104.27",
+        "3.27"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "稀释每股收益（元／股）",
+        "6.61",
+        "3.26",
+        "102.76",
+        "3.24"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "扣除非经常性损益后的基本每股\n收益（元／股）",
+        "4.63",
+        "3.46",
+        "33.82",
+        "3.32"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 4,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "加权平均净资产收益率（%）",
+        "28.56",
+        "16.78",
+        "增加11.78个百分点",
+        "18.99"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 5,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "主要财务指标",
+        "2025年",
+        "2024年",
+        "本期比上年同期增\n减(%)",
+        "2023年"
+      ],
+      "row_cells": [
+        "扣除非经常性损益后的加权平均\n净资产收益率（%）",
+        "19.74",
+        "17.73",
+        "增加2.01个百分点",
+        "19.26"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "化学业务\n（WuXi Chemistry）",
+        "3,646,584.69",
+        "2,905,240.91",
+        "25.52"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "测试业务\n（WuXi Testing）",
+        "404,170.10",
+        "386,064.65",
+        "4.69"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "生物学业务\n（WuXi Biology）",
+        "267,717.50",
+        "254,392.63",
+        "5.24"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 4,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "其他业务\n（Others）",
+        "23,610.08",
+        "30,976.37",
+        "-23.78"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 5,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "持续经营业务小计",
+        "4,342,082.37",
+        "3,576,674.56",
+        "21.40"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 6,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "终止经营业务（注1）",
+        "203,534.20",
+        "347,468.57",
+        "-41.42"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 7,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "报告分部",
+        "本期数",
+        "上年同期数",
+        "变动比例（%）"
+      ],
+      "row_cells": [
+        "合计",
+        "4,545,616.58",
+        "3,924,143.14",
+        "15.84"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "本期发生额",
+        "",
+        "上期发生额（已重述，注）",
+        ""
+      ],
+      "row_cells": [
+        "项目",
+        "本期发生额",
+        "",
+        "上期发生额（已重述，注）",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "本期发生额",
+        "",
+        "上期发生额（已重述，注）",
+        ""
+      ],
+      "row_cells": [
+        "",
+        "收入",
+        "成本",
+        "收入",
+        "成本"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "本期发生额",
+        "",
+        "上期发生额（已重述，注）",
+        ""
+      ],
+      "row_cells": [
+        "持续经营业务",
+        "43,420,823,738.83",
+        "22,184,931,058.87",
+        "35,766,745,614.84",
+        "19,806,231,709.38"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "本期发生额",
+        "",
+        "上期发生额（已重述，注）",
+        ""
+      ],
+      "row_cells": [
+        "终止经营业务",
+        "2,035,342,035.35",
+        "1,616,503,499.07",
+        "3,474,685,745.04",
+        "3,158,283,751.24"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 4,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "本期发生额",
+        "",
+        "上期发生额（已重述，注）",
+        ""
+      ],
+      "row_cells": [
+        "合计",
+        "45,456,165,774.18",
+        "23,801,434,557.94",
+        "39,241,431,359.88",
+        "22,964,515,460.62"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "",
+        "持续经营业务",
+        "",
+        "",
+        "",
+        "",
+        "终止经营业务(注)",
+        "合计"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "",
+        "化学业务",
+        "测试业务",
+        "生物学业务",
+        "其他业务",
+        "小计",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "按商品转让的时间分类",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 4,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "按照履约进度，在\n一段时间内确认收入",
+        "5,181,014,954.30",
+        "4,041,701,030.67",
+        "2,677,175,030.51",
+        "225,627,822.87",
+        "12,125,518,838.35",
+        "2,035,342,035.35",
+        "45,456,165,774.18"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 5,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "按照客户取得相\n关商品或服务控制权\n的时点确认收入",
+        "31,284,831,928.67",
+        "-",
+        "-",
+        "10,472,971.81",
+        "31,295,304,900.48",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 1,
+        "row_index": 6,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "合计",
+        "36,465,846,882.97",
+        "4,041,701,030.67",
+        "2,677,175,030.51",
+        "236,100,794.68",
+        "43,420,823,738.83",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "",
+        "持续经营业务",
+        "",
+        "",
+        "",
+        "",
+        "终止经营业务(注)",
+        "合计"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "",
+        "化学业务",
+        "测试业务",
+        "生物学业务",
+        "其他业务",
+        "小计",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "按商品转让的时间分类",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 4,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "按照履约进度，在\n一段时间内确认收入",
+        "3,338,729,510.56",
+        "2,859,258,619.77",
+        "1,749,326,228.58",
+        "33,631,675.05",
+        "7,980,946,033.96",
+        "1,616,503,499.07",
+        "23,801,434,557.94"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 183,
+        "paragraph_index": null,
+        "table_index": 2,
+        "row_index": 5,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "合同分类",
+        "营业成本",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "按照客户取得相",
+        "14,203,806,270.98",
+        "-",
+        "-",
+        "178,753.93",
+        "14,203,985,024.91",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 184,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "关商品或服务控制权\n的时点确认收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "关商品或服务控制权\n的时点确认收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 184,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "关商品或服务控制权\n的时点确认收入",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "row_cells": [
+        "合计",
+        "17,542,535,781.54",
+        "2,859,258,619.77",
+        "1,749,326,228.58",
+        "33,810,428.98",
+        "22,184,931,058.87",
+        "",
+        ""
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 235,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 0,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "收入",
+        "费用及其他损益",
+        "(亏损)利润总额",
+        "所得税费用",
+        "净(亏损)利润",
+        "归属于母公司所有\n者的终止经营(亏\n损)利润"
+      ],
+      "row_cells": [
+        "项目",
+        "收入",
+        "费用及其他损益",
+        "(亏损)利润总额",
+        "所得税费用",
+        "净(亏损)利润",
+        "归属于母公司所有\n者的终止经营(亏\n损)利润"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 235,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 1,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "收入",
+        "费用及其他损益",
+        "(亏损)利润总额",
+        "所得税费用",
+        "净(亏损)利润",
+        "归属于母公司所有\n者的终止经营(亏\n损)利润"
+      ],
+      "row_cells": [
+        "WuXi ATU 业务",
+        "338,274,914.78",
+        "-867,720,727.00",
+        "-529,445,812.22",
+        "-1,239,791.30",
+        "-530,685,603.52",
+        "-530,685,603.52"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 235,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 2,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "收入",
+        "费用及其他损益",
+        "(亏损)利润总额",
+        "所得税费用",
+        "净(亏损)利润",
+        "归属于母公司所有\n者的终止经营(亏\n损)利润"
+      ],
+      "row_cells": [
+        "WuXi Testing 部分业务",
+        "1,697,067,120.57",
+        "876,546,854.38",
+        "2,573,613,974.95",
+        "-687,531,806.40",
+        "1,886,082,168.55",
+        "1,878,834,014.69"
+      ]
+    },
+    {
+      "coordinates": {
+        "page_number": 235,
+        "paragraph_index": null,
+        "table_index": 0,
+        "row_index": 3,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "table_headers": [
+        "项目",
+        "收入",
+        "费用及其他损益",
+        "(亏损)利润总额",
+        "所得税费用",
+        "净(亏损)利润",
+        "归属于母公司所有\n者的终止经营(亏\n损)利润"
+      ],
+      "row_cells": [
+        "合计",
+        "2,035,342,035.35",
+        "8,826,127.38",
+        "2,044,168,162.73",
+        "-688,771,597.70",
+        "1,355,396,565.03",
+        "1,348,148,411.17"
+      ]
+    }
+  ],
+  "page_context": {
+    "7": "无锡药明康德新药开发股份有限公司2025 年年度报告\n7 / 249\n签字会计师姓名\n李佳麗\n七、近三年主要会计数据和财务指标\n(一) 主要会计数据\n单位：元\n币种：人民币\n主要会计数据\n2025年\n2024年\n本期比上年同\n期增减(%)\n2023年\n营业收入\n45,456,165,774.18\n39,241,431,359.88\n15.84\n40,340,806,877.04\n利润总额\n23,906,151,246.45\n11,539,811,639.08\n107.16\n11,831,990,991.15\n归属于上市公司\n股东的净利润\n19,150,582,400.69\n9,450,308,427.78\n102.65\n9,606,749,135.07\n归属于上市公司\n股东的扣除非经\n常性损益的净利\n润\n13,240,556,954.42\n9,988,102,785.24\n32.56\n9,747,587,804.59\n经营活动产生的\n现金流量净额\n17,203,161,622.00\n12,406,514,834.59\n38.66\n13,386,911,778.77\n2025年末\n2024年末\n本期末比上年\n同期末增减\n（%）\n2023年末\n归属于上市公司\n股东的净资产\n79,712,290,246.44\n58,632,715,174.37\n35.95\n55,122,453,910.73\n总资产\n103,120,968,579.11\n80,325,824,408.75\n28.38\n73,669,349,307.12\n(二) 主要财务指标\n主要财务指标\n2025年\n2024年\n本期比上年同期增\n减(%)\n2023年\n基本每股收益（元／股）\n6.70\n3.28\n104.27\n3.27\n稀释每股收益（元／股）\n6.61\n3.26\n102.76\n3.24\n扣除非经常性损益后的基本每股\n收益（元／股）\n4.63\n3.46\n33.82\n3.32\n加权平均净资产收益率（%）\n28.56\n16.78\n增加11.78个百分点\n18.99\n扣除非经常性损益后的加权平均\n净资产收益率（%）\n19.74\n17.73\n增加2.01个百分点\n19.26\n报告期末公司前三年主要会计数据和财务指标的说明\n√适用□不适用\n1、利润总额、归属于上市公司股东的净利润\n本报告期内，利润总额同比增长107.16%，归属于上市公司股东的净利润同比增长102.65%，\n主要系公司持续聚焦及加强CRDMO 业务模式，营业收入持续增长，同时持续优化生产工艺和经\n营效率，以及临床后期和商业化项目增长带来的产能效率不断提升，提高了整体的盈利能力；同\n时，公司出售联营企业WuXi XDC Cayman Inc.部分股权以及剥离部分业务的收益进一步提升了公\n司的利润。\n2、归属于上市公司股东的扣除非经常性损益的净利润\n",
+    "13": "无锡药明康德新药开发股份有限公司2025 年年度报告\n13 / 249\n过程中，公司持续驱动新知识、新技术的发展，提高研发效率、降低研发成本，平台创新赋能的\n能力不断增强，并形成一个良性循环的生态圈。\n报告期内，公司举办药明康德全球论坛和多场创新日系列活动，与行业顶尖意见领袖一起聚\n焦行业未来的重大挑战和机遇，探讨全球创新合作，分享行业最新的突破性进展，线下总参会人\n数超4,300 人。报告期内，公司还通过“药明直播间”及第三方直播平台，面向全球客户开展专\n业技术类直播交流，内容涵盖新药研发的前沿技术，尤其是新分子类型相关的药物研发，听众覆\n盖超过100 个国家和地区。\n（五）管理层团队经验丰富，富有远见和抱负\n公司拥有具备全球视野及产业战略眼光的卓越管理团队。由李革博士领导的公司管理层团队\n拥有丰富的医药行业从业经历，具备极强的执行力及多年医药行业投资经验、管理经验及国际化\n视野，并在全球医药及生命科学领域有较高知名度。经验丰富、视野广阔的管理团队使公司得以\n在全球经济运行周期及医药行业整体发展趋势方面有独到而敏锐的认知。在公司管理层的带领下，\n公司有能力深入理解市场及行业发展趋势、政策变化动向及其对客户需求的影响，迅速调整经营\n模式、提高决策速度和灵活性以匹配客户需求，带动公司各板块业务快速发展，并成为全球医药\n健康生态圈的主要创新赋能者和行业贡献者。\n五、报告期内主要经营情况\n报告期内，公司发挥全球布局、全产业链覆盖的优势，各个地区联动，并抓住新的业务机遇，\n持续为客户赋能。公司各业务板块营业收入情况如下：\n单位：万元\n币种：人民币\n报告分部\n本期数\n上年同期数\n变动比例（%）\n化学业务\n（WuXi Chemistry）\n3,646,584.69\n2,905,240.91\n25.52\n测试业务\n（WuXi Testing）\n404,170.10\n386,064.65\n4.69\n生物学业务\n（WuXi Biology）\n267,717.50\n254,392.63\n5.24\n其他业务\n（Others）\n23,610.08\n30,976.37\n-23.78\n持续经营业务小计\n4,342,082.37\n3,576,674.56\n21.40\n终止经营业务（注1）\n203,534.20\n347,468.57\n-41.42\n合计\n4,545,616.58\n3,924,143.14\n15.84\n注1：依据企业会计准则规定，公司将本年或对比年度内已签署股权出售协议、完成出售或\n正处于终止阶段的相关业务，划分为终止经营业务，相应重述了可比期间的数据。\n注2：上表中单项之和与合计不等为四舍五入造成。\n公司2025 年实现营业收入人民币454.6 亿元，同比增长15.8%，持续经营业务收入同比增长\n21.4%，其中：\n(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。报告期内：\n-\n小分子药物发现（“R”，Research）业务为下游持续引流。2025 年，公司为客户成功合成\n并交付超过42 万个新化合物。同时，2025 年R 到D 转化分子310 个。公司贯彻“跟随\n客户”和“跟随分子”战略，与全球客户建立了值得信赖的合作关系，为公司CRDMO\n业务持续增长奠定坚实基础。\n",
+    "183": "无锡药明康德新药开发股份有限公司2025 年年度报告\n183 / 249\n61、营业收入和营业成本\n(1).营业收入和营业成本情况\n√适用□不适用\n单位：元\n币种：人民币\n项目\n本期发生额\n上期发生额（已重述，注）\n收入\n成本\n收入\n成本\n持续经营业务\n43,420,823,738.83\n22,184,931,058.87\n35,766,745,614.84\n19,806,231,709.38\n终止经营业务\n2,035,342,035.35\n1,616,503,499.07\n3,474,685,745.04\n3,158,283,751.24\n合计\n45,456,165,774.18\n23,801,434,557.94\n39,241,431,359.88\n22,964,515,460.62\n(2).营业收入、营业成本的分解信息\n√适用□不适用\n单位：元\n币种：人民币\n合同分类\n营业收入\n持续经营业务\n终止经营业务(注)\n合计\n化学业务\n测试业务\n生物学业务\n其他业务\n小计\n按商品转让的时间分类\n按照履约进度，在\n一段时间内确认收入\n5,181,014,954.30\n4,041,701,030.67\n2,677,175,030.51\n225,627,822.87\n12,125,518,838.35\n2,035,342,035.35\n45,456,165,774.18\n按照客户取得相\n关商品或服务控制权\n的时点确认收入\n31,284,831,928.67\n-\n-\n10,472,971.81\n31,295,304,900.48\n合计\n36,465,846,882.97\n4,041,701,030.67\n2,677,175,030.51\n236,100,794.68\n43,420,823,738.83\n合同分类\n营业成本\n持续经营业务\n终止经营业务(注)\n合计\n化学业务\n测试业务\n生物学业务\n其他业务\n小计\n按商品转让的时间分类\n按照履约进度，在\n一段时间内确认收入\n3,338,729,510.56\n2,859,258,619.77\n1,749,326,228.58\n33,631,675.05\n7,980,946,033.96\n1,616,503,499.07\n23,801,434,557.94\n按照客户取得相\n14,203,806,270.98\n-\n-\n178,753.93\n14,203,985,024.91\n",
+    "184": "无锡药明康德新药开发股份有限公司2025 年年度报告\n184 / 249\n关商品或服务控制权\n的时点确认收入\n合计\n17,542,535,781.54\n2,859,258,619.77\n1,749,326,228.58\n33,810,428.98\n22,184,931,058.87\n其他说明：\n√适用□不适用\n注：依据企业会计准则规定，公司将本年或对比年度内已签署股权出售协议、完成出售或正处于终止阶段的相关业务，划分为终止经营业务，相应重述\n了可比期间的数据。\n(3).履约义务的说明\n√适用□不适用\n1、在某一时段内履行的履约义务\n本集团的部分化学业务、测试业务、生物学业务和部分其他业务的客户在本集团履约的同时即取得并消耗所带来的经济利益；或本集团履约过程中所产\n出的商品具有不可替代用途，且本集团在整个合同期间内有权就累计至今已完成的履约部分收取款项，因此上述业务属于在某一时段内履行的履约义务。\n本集团部分业务采用产出法，即根据交付给客户的商品或服务来确定履约进度，还有部分业务采用投入法，即根据履行履约义务投入的成本确定履约进\n度。\n2、在某一时点履行的履约义务\n本集团的部分化学业务和部分其他业务属于在某一时点履行的履约义务，此类业务在客户取得相关商品或服务控制权时确认收入。\n(4).分摊至剩余履约义务的说明\n√适用□不适用\n本报告期末，持续经营业务中已签订合同、但尚未履行或尚未履行完毕的履约义务所对应的收入金额为人民币5,800,478.75 万元，其中：\n人民币4,220,706.46 万元预计将于2026年度确认收入。\n",
+    "235": "无锡药明康德新药开发股份有限公司2025 年年度报告\n235 / 249\n5、终止经营\n√适用□不适用\n单位：元\n币种：人民币\n项目\n收入\n费用及其他损益\n(亏损)利润总额\n所得税费用\n净(亏损)利润\n归属于母公司所有\n者的终止经营(亏\n损)利润\nWuXi ATU 业务\n338,274,914.78\n-867,720,727.00\n-529,445,812.22\n-1,239,791.30\n-530,685,603.52\n-530,685,603.52\nWuXi Testing 部分业务\n1,697,067,120.57\n876,546,854.38\n2,573,613,974.95\n-687,531,806.40\n1,886,082,168.55\n1,878,834,014.69\n合计\n2,035,342,035.35\n8,826,127.38\n2,044,168,162.73\n-688,771,597.70\n1,355,396,565.03\n1,348,148,411.17\n注：\nWuXi ATU 业务包括WuXi ATU 美国与英国业务和WuXi ATU 中国业务。\nWuXi Testing 部分业务包括医疗器械检测美国业务、临床数据统计美国业务、药物质量研究及生产放行解决方案业务，以及临床研究服务中国业务。\n其他说明：\n依据企业会计准则规定，公司将本年或对比年度内已签署股权出售协议、完成出售或正处于终止阶段的相关业务，划分为终止经营业务，相应重述了可\n比期间的数据。\n"
+  },
+  "old_input_file_sha256": "dde8dce38b0c0b203eb4a0a9facaaa981debeea61559a9cab3e7be8285526150",
+  "old_result_file_sha256": "21ac4e6c9a409b90a1b43fc03d13dd0b9341ba04e0bdedfd9486f72abcf31c96",
+  "old_input_canonical_sha256": "6c0be3c2a57329260f5b01c6250ae5f3b03980f61b15b8ab123a1090079a4941",
+  "old_result_input_sha256": "6c0be3c2a57329260f5b01c6250ae5f3b03980f61b15b8ab123a1090079a4941",
+  "old_result_input_binding_matches": true,
+  "old_history_output_matches_input": true,
+  "old_base_revenue": 45456.16577418,
+  "old_claim_observations": [
+    {
+      "claim_id": "claim_reported_total",
+      "source_id_matches": true,
+      "snapshot_sha_matches": true,
+      "excerpt_sha_matches": true,
+      "complete_excerpt_found_on_verified_pages": [
+        7
+      ],
+      "declared_locator": "PDF printed page 7 / 249; annual-pages.json:selected_pages[page=7]",
+      "declared_extracted_value": 45456.16577418
+    },
+    {
+      "claim_id": "claim_discontinued_base",
+      "source_id_matches": true,
+      "snapshot_sha_matches": true,
+      "excerpt_sha_matches": true,
+      "complete_excerpt_found_on_verified_pages": [
+        13
+      ],
+      "declared_locator": "PDF printed page 13 / 249; annual-pages.json:selected_pages[page=13]",
+      "declared_extracted_value": 2035.342
+    },
+    {
+      "claim_id": "claim_history_2024",
+      "source_id_matches": true,
+      "snapshot_sha_matches": true,
+      "excerpt_sha_matches": true,
+      "complete_excerpt_found_on_verified_pages": [
+        7
+      ],
+      "declared_locator": "PDF printed page 7 / 249; annual-pages.json:selected_pages[page=7]",
+      "declared_extracted_value": 39241.43135988
+    }
+  ],
+  "config_catalog_unchanged": true,
+  "catalog_writer_constructed": false,
+  "new_model_requests": 0,
+  "new_downloads": 0,
+  "new_financial_api_requests": 0,
+  "current_rf_attempt_validated": false,
+  "summary_response_reviewed": false
+}

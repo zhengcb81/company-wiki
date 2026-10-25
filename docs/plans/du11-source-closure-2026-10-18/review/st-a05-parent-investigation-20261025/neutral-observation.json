@@ -1,0 +1,199 @@
+{
+  "schema_version": "st-a05-neutral-three-tier-observation/1",
+  "kind": "NEUTRAL_FIXTURE_NOT_REAL_SOURCE_ACCEPTANCE",
+  "expected": "Each roman business fact keeps numbered business parent, intro and its own bullet; never the numbered sibling",
+  "work_used": 14276,
+  "checks": [
+    {
+      "target": "urn:company-wiki:narrative-unit:sha256:fd1e1c354338eee9c7541047967ad7f6bc3cc8cb92809693203fd9217dcb88a0",
+      "target_locator": {
+        "page_number": 1,
+        "paragraph_index": 4,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "own_heading_ids": [
+        "urn:company-wiki:narrative-unit:sha256:b28b94c72d1667e066da36fe6c40f97b67168c1a1f9a579587af88692c4406ae",
+        "urn:company-wiki:narrative-unit:sha256:d5b72528c9ee3eb5430b7b48167b4c67f13c415b4298badf3c52975a666c9308"
+      ],
+      "expected_own": [
+        "urn:company-wiki:narrative-unit:sha256:d5b72528c9ee3eb5430b7b48167b4c67f13c415b4298badf3c52975a666c9308",
+        "urn:company-wiki:narrative-unit:sha256:e4ad626f4d87b9e2c419a08eebcfbf1f70b78c4cf642c6d8840daa3f06b283a0",
+        "urn:company-wiki:narrative-unit:sha256:2cb1264b830f0a0426df77bc05812a6d48bceeb71cf3779d25d24dcf4dfcf726"
+      ],
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:4f49588f9ce82e9b87e0fbaa24c618a2e9bc1cae1c39ada10d9af370e7f59e2d"
+      ],
+      "citations": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:4f49588f9ce82e9b87e0fbaa24c618a2e9bc1cae1c39ada10d9af370e7f59e2d"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:af44889d749ca8cb11a0322508b7f85aaaa3a4d3998eed5d187e519e517d8ae3",
+            "urn:company-wiki:evidence-span:sha256:5078c2705a8cbea59cff4573223122aa8957d6f2fcfba8311bddf18399c92d53",
+            "urn:company-wiki:evidence-span:sha256:397285958d690521d3911319f81e1f0a9085262c466ba62f8afc6d57aadbc145"
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:4f49588f9ce82e9b87e0fbaa24c618a2e9bc1cae1c39ada10d9af370e7f59e2d"
+          ],
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:af44889d749ca8cb11a0322508b7f85aaaa3a4d3998eed5d187e519e517d8ae3",
+            "urn:company-wiki:evidence-span:sha256:5078c2705a8cbea59cff4573223122aa8957d6f2fcfba8311bddf18399c92d53",
+            "urn:company-wiki:evidence-span:sha256:397285958d690521d3911319f81e1f0a9085262c466ba62f8afc6d57aadbc145",
+            "urn:company-wiki:evidence-span:sha256:4f49588f9ce82e9b87e0fbaa24c618a2e9bc1cae1c39ada10d9af370e7f59e2d"
+          ],
+          "texts": [
+            "一、经营情况",
+            "(1) 仪器业务实现收入12亿元。",
+            "报告期内：",
+            "i. 服务客户数量增长15%。"
+          ]
+        }
+      ],
+      "failures": [
+        "actual structure lost own parent/intro or borrowed sibling",
+        "parent/intro missing from own target citation context",
+        "parent/intro missing from actual model task",
+        "model lost exact own parent/intro text"
+      ]
+    },
+    {
+      "target": "urn:company-wiki:narrative-unit:sha256:8cd439eeb06634a7b4421bcd75b0f32e7719f89d0e7a33facd9e74e1703393f0",
+      "target_locator": {
+        "page_number": 2,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "own_heading_ids": [
+        "urn:company-wiki:narrative-unit:sha256:b28b94c72d1667e066da36fe6c40f97b67168c1a1f9a579587af88692c4406ae",
+        "urn:company-wiki:narrative-unit:sha256:d5b72528c9ee3eb5430b7b48167b4c67f13c415b4298badf3c52975a666c9308"
+      ],
+      "expected_own": [
+        "urn:company-wiki:narrative-unit:sha256:d5b72528c9ee3eb5430b7b48167b4c67f13c415b4298badf3c52975a666c9308",
+        "urn:company-wiki:narrative-unit:sha256:e4ad626f4d87b9e2c419a08eebcfbf1f70b78c4cf642c6d8840daa3f06b283a0",
+        "urn:company-wiki:narrative-unit:sha256:f917919603abba90c31748dc7b9ac7c88f4c8fa3c15a571a353360a6cd4054d5"
+      ],
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:f73591eebe86760c72f6d54714761638ae88d3a0317f3d792622f2e8a82ac125"
+      ],
+      "citations": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:f73591eebe86760c72f6d54714761638ae88d3a0317f3d792622f2e8a82ac125"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:af44889d749ca8cb11a0322508b7f85aaaa3a4d3998eed5d187e519e517d8ae3",
+            "urn:company-wiki:evidence-span:sha256:5078c2705a8cbea59cff4573223122aa8957d6f2fcfba8311bddf18399c92d53",
+            "urn:company-wiki:evidence-span:sha256:397285958d690521d3911319f81e1f0a9085262c466ba62f8afc6d57aadbc145"
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:f73591eebe86760c72f6d54714761638ae88d3a0317f3d792622f2e8a82ac125"
+          ],
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:af44889d749ca8cb11a0322508b7f85aaaa3a4d3998eed5d187e519e517d8ae3",
+            "urn:company-wiki:evidence-span:sha256:5078c2705a8cbea59cff4573223122aa8957d6f2fcfba8311bddf18399c92d53",
+            "urn:company-wiki:evidence-span:sha256:397285958d690521d3911319f81e1f0a9085262c466ba62f8afc6d57aadbc145",
+            "urn:company-wiki:evidence-span:sha256:f73591eebe86760c72f6d54714761638ae88d3a0317f3d792622f2e8a82ac125"
+          ],
+          "texts": [
+            "一、经营情况",
+            "(1) 仪器业务实现收入12亿元。",
+            "报告期内：",
+            "i. 服务收入达到8亿元，同比增长18%。"
+          ]
+        }
+      ],
+      "failures": [
+        "actual structure lost own parent/intro or borrowed sibling",
+        "parent/intro missing from own target citation context",
+        "parent/intro missing from actual model task",
+        "model lost exact own parent/intro text"
+      ]
+    },
+    {
+      "target": "urn:company-wiki:narrative-unit:sha256:ac8ba9fb125ec163e127b6219be333c74b4c923eef4b3652d14cf77d75166632",
+      "target_locator": {
+        "page_number": 2,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "own_heading_ids": [
+        "urn:company-wiki:narrative-unit:sha256:b28b94c72d1667e066da36fe6c40f97b67168c1a1f9a579587af88692c4406ae",
+        "urn:company-wiki:narrative-unit:sha256:d5b72528c9ee3eb5430b7b48167b4c67f13c415b4298badf3c52975a666c9308"
+      ],
+      "expected_own": [
+        "urn:company-wiki:narrative-unit:sha256:d5b72528c9ee3eb5430b7b48167b4c67f13c415b4298badf3c52975a666c9308",
+        "urn:company-wiki:narrative-unit:sha256:e4ad626f4d87b9e2c419a08eebcfbf1f70b78c4cf642c6d8840daa3f06b283a0",
+        "urn:company-wiki:narrative-unit:sha256:3d4a8b54809e94e3cd1b929c3daa67fc75a986661f106eb65e666874a9b9b7a7"
+      ],
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:85e377aaf6d3c413651971a78bad6180d1702a18d81cc34ef1c1310bafa4e831"
+      ],
+      "citations": [
+        {
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:85e377aaf6d3c413651971a78bad6180d1702a18d81cc34ef1c1310bafa4e831"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:af44889d749ca8cb11a0322508b7f85aaaa3a4d3998eed5d187e519e517d8ae3",
+            "urn:company-wiki:evidence-span:sha256:5078c2705a8cbea59cff4573223122aa8957d6f2fcfba8311bddf18399c92d53",
+            "urn:company-wiki:evidence-span:sha256:397285958d690521d3911319f81e1f0a9085262c466ba62f8afc6d57aadbc145"
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:85e377aaf6d3c413651971a78bad6180d1702a18d81cc34ef1c1310bafa4e831"
+          ],
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:af44889d749ca8cb11a0322508b7f85aaaa3a4d3998eed5d187e519e517d8ae3",
+            "urn:company-wiki:evidence-span:sha256:5078c2705a8cbea59cff4573223122aa8957d6f2fcfba8311bddf18399c92d53",
+            "urn:company-wiki:evidence-span:sha256:397285958d690521d3911319f81e1f0a9085262c466ba62f8afc6d57aadbc145",
+            "urn:company-wiki:evidence-span:sha256:85e377aaf6d3c413651971a78bad6180d1702a18d81cc34ef1c1310bafa4e831"
+          ],
+          "texts": [
+            "一、经营情况",
+            "(1) 仪器业务实现收入12亿元。",
+            "报告期内：",
+            "i. 客户订单增长20%。"
+          ]
+        }
+      ],
+      "failures": [
+        "actual structure lost own parent/intro or borrowed sibling",
+        "parent/intro missing from own target citation context",
+        "parent/intro missing from actual model task",
+        "model lost exact own parent/intro text"
+      ]
+    }
+  ],
+  "failed_checks": 3,
+  "source_sha256": {
+    "src\\company_wiki\\document_understanding\\structure\\sections.py": "61e018c4c9877826a21c69dfad241c53a35c5a6177f696951903f53745c0cbfb",
+    "src\\company_wiki\\source_catalog\\narrative_native_dependencies.py": "e0ee41a8a732a9fa8df358ec4fb9ace436d3ac24b63f352caa5778f75c3e8117"
+  },
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0
+}

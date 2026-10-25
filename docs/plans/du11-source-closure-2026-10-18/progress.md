@@ -1074,3 +1074,21 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 已创建并提交各自8份PWF seed：W16 RF 97e7e149d434d5ce36c147531efa4405a88fcb1c；W17 Audit 02ee879ccf8e4aed67342bcc7c8c7e20de2401c9；W18 CWP 9051bbb7a69347f52d79e5cce37a6b8c40b7912f。固定代码base及实际体积/seed SHA见dispatch。未启动产品实现或测试，READY_NOT_DISPATCHED。
 - 未参与编写的agent完成任务完整度/并行接口/实际seed审查；两个建议已修正，最终PASS。原RF三份assurance WIP、CWP pre-push mode及历史未跟踪物保留；Dayu/IQS未改，0模型/API/下载，无原件复制。
 - ROOT继续ST-A02来源与annual14其余partial；分包生产路径归作者，收包后统一集成及真实内容验收。更新CURRENT_STATUS.md/json、task_plan与MAINLINE_LOOP_GOAL，不改变8/6/0或目标完成状态。
+
+## 2026-10-25 三卡发出与ST-A13 RED
+
+- 用户确认W16/W17/W18三卡已发出；中央dispatch改为等待作者交接，不再改卡/seed或作者产品路径。准备阶段独审绑定保留，生命周期更新不冒充产品验收。
+- 已有ST-A13中性TDD实跑15项：5失败、10通过（7.83秒）。4个中英具名业务规则没有独立阅读用途，英文有界选材被6条通用政策挤出；中文有界正例已通过，不伪称两种语言均漏。新增语义只作用于0.9阅读策略，预算上限不变。
+
+## 2026-10-25 ST-A13来源根修与独立复审
+
+- 真实attempt01仍漏目标，说明仅增加具名topic不足以跨分号绑定；新增中性分号条件例RED后修共享语义。attempt02/03补回正文+本地时段标题；原112cap不变。
+- 相关目录集中跑1617项：1606PASS/11ERROR（62.26s），错误均为沙箱TEMP编号目录创建失败，不是业务断言。独占basetemp被原conftest重定位到沙箱TEMP仍11ERROR；主机同11项6.29s全部PASS，独占目录及自动重定位目录cleanup=true；保留environment-rerun与host-rerun收据，不重跑1606绿项。
+- 独审首轮发现3项P2，报告/反例已保存。先真跑新增归属/generic/cache反例7FAIL/21PASS，再用单向条件状态机、所有权约束及既有cache实现SHA修复；新重复条件的扫描工作上界回归也进入测试。
+- 修复后61项定向11.54s通过、Ruff通过、mypy3源码0错误；最终attempt04原件249页/112span/9088char/63task/work12,879,238÷16M，原件、配置、375源码前后稳定。没有模型POST/下载/原文副本，尚待独立最终复审，不提前签PASS。
+- 当前继续收到复审后修复、提交推送；再A01/A05跨页父级和正式摘要/cache/RF验收。W16/W17/W18作者施工路径未写入。
+
+- **独审增量与最终候选：** probe01的合法客户控制条件漏读、同一条件内逗号/whereas换主体借义已用4个新例真RED(4FAIL/29PASS)。未继续堆标点黑名单，而在现有predicate_state公开单次断言分段，scope状态只跨明确条件与回指。最终四文件104PASS/11.51s、Ruff PASS、mypy4源码0错误；attempt05仍112span/9088char/63tasks，375源码稳定，最终复审待回。
+
+- **终审完成：** I6显式0.8入口泄漏先RED（1FAIL/3PASS），移新语义到0.9 source projection后108PASS/9.22s、Ruff PASS、mypy4源码0错误。独立实际0.9 27控制、四legacy产物身份、线性计费、最终attempt06与原件/payload/旧10PASS上下文检查全部通过，I1–I6范围内零未解。初审失败不覆写，早前35项独立测试不冒充最终policy重跑。当前准备正常发布。
+- **下一节点已调查：** A01/A05三层原生列表中性实验的3个实际citation/model成员集都缺中间破折号业务，原件跨页则缺上级Chemistry。触发条件不同，不能拿中性例替代真实根因；细则已写`review/st-a05-parent-investigation-20261025/README.md`，尚未改其产品代码。

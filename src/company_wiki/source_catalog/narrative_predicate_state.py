@@ -101,6 +101,16 @@ def predicate_scope(text: str, start: int, end: int) -> tuple[int, int]:
     return left, right
 
 
+def split_predicate_assertions(text: str) -> tuple[str, ...]:
+    """Reuse assertion grammar without rescanning a paragraph per predicate.
+
+    The caller owns sentence/conditional state. Numeric commas and coordinated
+    noun phrases stay intact; an explicit new assertion cannot donate its rule
+    to the preceding actor. These are transient views, never source rewrites.
+    """
+    return tuple(part for part in _BOUNDARY.split(text) if part.strip())
+
+
 def observe_metric_predicate(text: str, start: int, end: int) -> PredicateObservation:
     """Describe this metric's predicate and period in one bounded source view."""
     if not 0 <= start < end <= len(text):
