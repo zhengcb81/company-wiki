@@ -865,3 +865,11 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - 共享根因是语法假设“范围一定由多个并列成员组成且紧跟锚点”，忽略“一个明确业务线 + 经营动作 + 长生命周期/范围展开”的披露方式。用中英跨行的中性测试复现后，两例在修复前均失败；同一入口下增加有界规则，必须同时具有明确收入来源锚点、具名业务线、经营动词及范围表达。再加入“高质量综合解决方案”等泛化套话负控，避免把普通企业宣传标成详细业务范围。
 - 新规则增加扫描工作，故沿用统一WorkBudget显式提高固定扫描pass计费因子（4→6），而没有放宽既有16M工作量上限或112-span选择上限。真实回放显示工作量11,027,878/16,000,000且未耗尽，支持该成本模型在本例可执行。
 - 零费用回放证明第119页 Chemistry 范围片段在原112-span上限下得到 `business_scope` 并重新入选；这不是摘要内容验收。维持 `coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`，annual14仍为8 pass/6 partial/0 missing。不要从一次真实正例推断其他表述、市场或文种都覆盖；下一大节点需用不重叠的真实文种/市场样本复核泛化，并集中重评内容事实。
+
+## 2026-10-25 ST-A02 终止经营表格的来源边界
+
+- **原件事实：** 未变的药明康德2025年报SHA=`7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`。视觉检查第235页可见完整终止经营表格、7列表头以及页顶的“单位：元 / 币种：人民币”。不在测试目录复制原件；检查后删除临时渲染图。
+- **生产解析事实：** 用正式`parse_pdf`、selector `0.9.0`和显式`table_pages=[235]`只读回放原件，返回4条`pdf_table_row`、相同的7列表头和项目/WuXi ATU/WuXi Testing/合计行；页面单位币种以单独的`pdf_text_block`存在，没有并入表格行元数据。可复现脚本及不含金融金额的收据见`review/st-a02-table-source-20261025/`。
+- **为何叙述任务仍标歧义：** 冻结内容复核使用的`t55`证据是`pdf_text_block`，定位`page:235/paragraph:8/chars:119-566`；该版面文字块以末列标题残尾“损)利润”开头并带行值。它没有原生表格行的标题绑定，质量旗标`table_structure_ambiguous`正确阻止其证明列、期间和收入含义。原报告的`table_structure_ambiguous`不应被抹掉，也不能靠模型阅读裸数字解决。
+- **根因与处置：** 这里缺的不是源文件信息，也不是提高叙述切片预算能解决的问题，而是把财务表文字块误用作叙述任务的精确数字来源。结构化表格行虽保留列名，单位币种仍需绑定；精确值走配置内金融API，或走完整行/表头/单位币种绑定的结构化表观察，并确认RF采用。根据当前证据不改CWP代码、不扩大叙述预算；ST-A02保持partial直至下游来源和实际采用闭环。
+- **回归证据：** `python -m pytest -q tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py`通过15项（14.68秒），覆盖未知数值归属在摘要/引用/model view中的保留、完整表格的正面绑定及模糊原数值不能被旁路洗成确定值。只读页回放0下载、0模型请求、0原文副本。

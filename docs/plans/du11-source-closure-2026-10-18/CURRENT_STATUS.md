@@ -1,14 +1,14 @@
 # 当前项目状态与接手入口
 
-## 当前行动：annual14 ST-A01 具名业务线范围选材修复（2026-10-25）
+## 当前行动：annual14 ST-A02 财务表与叙述数据边界核实（2026-10-25）
 
-真实药明康德2025年报第119页把收入来源业务类型、化学业务线及其服务范围分行呈现。旧分类器在第一个逗号前100字内寻找多项清单，因服务流程先出现、药物类别清单靠后，漏掉了明确的单业务范围；候选只落入通用`core_business`。现已在共享来源层增加中英文有界识别：必须有收入/业务类型锚点、具名业务线、经营动词及范围描述，不使用发行人或页码规则；扫描计数从4调整到6，预算上限未变。
+**大目标进度：** 共享阅读引擎已接入v4任务摘要、付费响应保存和零POST恢复；来源分类、上下文闭合等工程修复已多次通过定向测试、独立复核和精确HEAD CI。当前尚未通过的是业务验收：真实摘要是否准确、缺口是否有可靠来源补足、revenue-forecast是否实际采用带来源的结果。药明康德annual14仍为8项通过、6项部分、0项缺失；不能把工程测试通过当成内容通过。
 
-相关141项单测最新复跑通过（64.05秒；前轮77.55秒），Ruff和mypy通过。药明康德原件SHA=`7f1431d6…2d6a2`的零费用真实回放在原112片段上限内选入第119页，112片段/9,113字符、工作量11,027,878/16,000,000未耗尽；既有ST-A01/ST-A11检查点通过。0模型调用、0下载、0原文复制，原件和374个生产Python文件稳定。独立复审PASS，绑定来源规则SHA=`6a40e477…a31eb7`、测试SHA=`5dc47f1f…116cd5f`，见[复审报告](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/independent-review.md)。
+**已发布的最近代码节点：** ST-A01共享来源规则修复已由`2942355c726bc0c95ae07a854eb3bfcaec8aaa37`推送，精确HEAD CI `40171504716`成功。真实零费用回放在既有112片段上限内重新选入第119页的Chemistry业务范围；离线编译确认片段全文进入`t55`摘要输入。没有新模型调用、下载或原件复制。它证明选材和输入链路恢复，不证明模型响应质量；内容等级仍保持8/6/0。详情见[来源修复复审](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/independent-review.md)和[摘要输入收据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/task-model-view-receipt.json)。
 
-回放仍为`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`。第119页来源片段重新入选只证明选材层修复，不能改写年度14项内容复核的8通过/6部分/0缺失状态；ST-A01内容和其余partial仍待集中重评。提交`2942355c726bc0c95ae07a854eb3bfcaec8aaa37`已推送，精确HEAD CI `40171504716`成功；本地pre-push的154项契约smoke通过（199.59秒）。随后继续其他partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，作者仓保持独立。
+**当前ST-A02调查结论：** 药明康德2025年报第235页原文包含完整终止经营表格，生产解析器可重建4行、7列表头；“元/人民币”上下文仍是分开的页文字，没有绑定到表格行。叙述输入拿到的是表头被拆开的文字块，且已有`table_structure_ambiguous`标记。15项数值归属测试通过。因此不能让叙述模型猜精确金额，也没有证据要求修改CWP切片逻辑。当前下一步是核对配置内结构化金融API或完整表格来源是否能给出所需金额、单位、期间和重述口径，再确认RF实际消费。ST-A02仍未关闭；本次调查未发模型请求、未下载原件，回放见[收据](review/st-a02-table-source-20261025/replay-receipt.json)。
 
-**摘要输入离线核验：** 使用生产`compile_scoped_model_view`重新编译选材结果，没有发模型请求。第119页 Chemistry 业务范围片段（`business_scope`）的全文出现在摘要任务`t55`的support中；编译得到64个任务，payload SHA与保存视图一致。该核验关闭了“选中片段是否进入模型输入”这一段链路，但未检查模型响应，也没有生成新摘要；内容仍未重评。收据为[task-model-view-receipt.json](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/task-model-view-receipt.json)，模型视图及编译/验证脚本在同目录。
+**其他状态：** ST-A03地域定义和ST-A09局部上下文已有共享规则修复；ST-A01来源输入已修但未重评响应。ST-A05业务层级、ST-A13时段/时点金额分类及其他partial仍待逐项追根。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY施工卡已ROOT接收，作者仓继续独立管理。
 
 ## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 
@@ -62,7 +62,7 @@
 
 原annual14最新为8通过/6部分/0缺失，正式摘要/cache、RF采用与四审、公司循环未完成。W14/W15独占范围不改，Dayu/IQS代码不改；本次无模型调用/下载，原件不改。
 
-更新日期：2026-10-24（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
+更新日期：2026-10-25（本节点证据时间采用UTC）。**这是本项目PWF当前状态、剩余任务和下一步唯一入口。** 总计划`document-understanding-2026-10-13`，子计划`du11-source-closure-2026-10-18`，根`docs/plans`。机器状态见[CURRENT_STATUS.json](CURRENT_STATUS.json)；[交接](HANDOFF-2026-10-22.md)的暂停边界已被本次继续指令取代，其失败复现和责任分工仍适用。
 
 ## 当前执行状态与唯一下一步
 
@@ -78,7 +78,7 @@
 | W10 逐文档原生结果投影 | 两轮独审发现的六项缺陷已共因修复；最终独审41/41，完整658项656P/2skip、另17边界P | 本地提交`71c7762`/收尾`ae13ef7`，`.claude/.agents`各39文件一致；审计技能仓**无remote**。真实12材料矩阵仍OPEN，不代签公司/预测质量。见[工程收尾](review/r1-w10-engineering-closeout-20261022.json) |
 | W09 研究准备 / W11 来源发现 | W09内容四项问题已共因修复，独审16P、126年度格Decimal同值；真实合线9dcce304、主线599d17b8、正常595P/1skip/36subtests，精确CI40040969386成功，安装103文件全匹配。W11最近条目/覆盖/确定性解码共因修复后独审37P，正常7202P/24skip+146契约P，母线1be42a76精确CI40040509874成功 | 作者工区保持只读、实际作者ancestry保留。见[W09发布](review/r1-w09-reception-20261023/publication/publication-final.md)、[W11验收](review/r1-w11-reception-20261023/root-acceptance.md)。真实IR原件恢复、W08新摘要采用与W12公司审查仍OPEN；RF保留约24MB作者交付及原WIP/output，未冒称重复材料已清理 |
 
-**当前唯一第一步：** 五family组件已正常推送；按remaining_root_causes先冻结准确的源侧检查点，统一处理匿名电话会、指标定义、跨页/父子/时间依赖及降噪，再正式摘要/cache和RF公司四审。下文旧“待发布410P”等记录均为历史。
+**当前唯一第一步：** 关闭ST-A02下游结构化数据证据链：检查配置内金融API或带单位、币种、期间绑定的完整表格来源能否提供目标值，再验证RF实际消费。随后集中复核annual14剩余partial；只有冻结金标证明必需业务事实确实缺失时才考虑增加有界批次。离线质量和独立复核通过后，才做新的正式摘要/cache恢复/RF验收。下文旧“待发布410P”等记录均为历史。
 
 源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
 

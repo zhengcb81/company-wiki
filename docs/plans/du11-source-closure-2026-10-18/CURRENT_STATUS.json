@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ANNUAL14_ST_A01_PUBLISHED_EXACT_CI_SUCCESS; CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "ANNUAL14_ST_A02_SOURCE_DIAGNOSED; STRUCTURED_VALUE_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -290,7 +290,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "FORMAL_V4_LIFECYCLE_AND_FF_REUSE_PASS; OLD_V5_RF_NOT_CONSUMED; MICROSOFT_V4_PREFLIGHT_SUPPORTS_8_OF_8_REQUIRED_FACTS; WUXI_ANNUAL14_CONTENT_8_PASS_6_PARTIAL; ST_A09_CONTEXT_CLOSURE_FIXED_LOCAL_REVIEWED_PENDING_CI; TRACE_OTHER_PARTIAL_ROOT_CAUSES",
+      "status": "FORMAL_V4_LIFECYCLE_AND_FF_REUSE_PASS; OLD_V5_RF_NOT_CONSUMED; MICROSOFT_V4_PREFLIGHT_SUPPORTS_8_OF_8_REQUIRED_FACTS; WUXI_ANNUAL14_CONTENT_8_PASS_6_PARTIAL; ST_A02_TABLE_CONTEXT_DIAGNOSED_STRUCTURED_VALUE_AND_RF_USE_OPEN; TRACE_OTHER_PARTIAL_ROOT_CAUSES",
       "mainline": true
     },
     {
@@ -319,7 +319,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ST-A01 named business-line scope root fix is committed and pushed at 2942355c726bc0c95ae07a854eb3bfcaec8aaa37; exact-head CI 40171504716 succeeded. Local pre-push ran the 154-case contract smoke set and passed in 199.59s because the affected scope was wide; it deferred the 343 affected targets to CI. Continue root-cause diagnosis of remaining annual14 partials. Keep the 8 pass / 6 partial / 0 missing content grade unchanged until a bounded content regrade.",
+  "next_step_now": "ST-A02 diagnosis found the complete p235 termination table in the production structured parser (4 rows, 7 headers), but page unit/currency context is separate; the narrative text fragment is correctly flagged table_structure_ambiguous. The 15-case numeric-attribution regression passes. Next verify whether the configured financial API or a fully bound structured table can supply exact values, unit, period and restatement basis, then verify RF consumption. Keep ST-A02 partial and annual14 at 8 pass / 6 partial / 0 missing until evidence and bounded content regrade support a change.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -793,7 +793,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Continue offline diagnosis of the remaining annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. At the next major source-content gate, independently review exact source, test and replay receipt SHAs, then regrade the unchanged real-source gold. Add source batches only if a frozen required-fact gap proves they add value; any new paid summary remains after that review.",
+  "next_step_after_publication": "First close the ST-A02 structured-value and RF-consumption evidence chain. Then continue offline diagnosis of remaining annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. At the next major source-content gate, independently review exact source, test and replay receipt SHAs, then regrade the unchanged real-source gold. Add source batches only if a frozen required-fact gap proves they add value; any new paid summary remains after that review.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -828,7 +828,8 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Publish and verify the independently reviewed ST-A01 named business-line scope fix; then continue source-level diagnosis of the remaining annual14 partial targets. Do not update content scores before a bounded independent content regrade.",
+    "Close ST-A02 through configured structured financial data or a complete table bound to unit, currency, period and restatement basis; verify revenue-forecast actually consumes the source-backed values. Keep it partial until then.",
+    "Continue source-level diagnosis and a bounded content regrade of remaining annual14 partial targets. Do not update content scores before an independent review of the exact source, test, output and receipt versions.",
     "Keep Microsoft source scan, candidate omission, layout geometry, and required-fact recall as separate dimensions; its v4 preflight supports all 8 required business facts. Do not equate 4,087 unassigned units or deferred candidates with unread mandatory facts.",
     "Write neutral failing tests for any proven shared root cause; use existing source owners and local dependency contracts. Implement resumable bounded batches only if a frozen gold gap is shown to be recoverable by additional candidates, with source identity, closure, aggregate coverage, cache identity, crash resume, and no duplicate spend tested.",
     "At a major gate, independently review exact source/test/evidence SHAs, then replay the unchanged real-source gold across affected markets and document types. Keep old paid receipts immutable and preserve all review/partial states.",
@@ -1722,6 +1723,38 @@
     "published_commit": "861b7b3360753baf845f186a2cb7043b4de14690",
     "exact_head_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/40168702115",
     "next_action": "Continue remaining annual14 partial root-cause work without changing content grades."
+  },
+  "annual14_st_a02_table_source_diagnosis_20261025": {
+    "status": "DIAGNOSED_ROUTE_TO_STRUCTURED_DATA; RF_VALIDATION_OPEN",
+    "sample": "Wuxi AppTec FY2025 annual report, annual14 target ST-A02",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "physical_page": 235,
+    "selected_narrative_span": {
+      "task_key": "t55",
+      "locator": "loc:v1/page:235/paragraph:8/chars:119-566",
+      "quality_flag": "table_structure_ambiguous",
+      "selection_sha256": "cfad8c9fa3e6c78dd43f0e84000756ad4c78218d264c0255e64902d45c8946f1"
+    },
+    "production_table_replay": {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/st-a02-table-source-20261025/replay-receipt.json",
+      "table_rows": 4,
+      "header_columns": 7,
+      "page_unit_currency_context_visible": true,
+      "unit_currency_bound_to_table_row_metadata": false,
+      "raw_financial_values_stored_in_receipt": false,
+      "model_request_sent": false,
+      "download_performed": false
+    },
+    "quality_regression": {
+      "command": "python -m pytest -q tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "passed": 15,
+      "failed": 0,
+      "seconds": 14.68
+    },
+    "decision": "No CWP narrative-selection change is supported. Keep ambiguous text flagged; verify exact values via configured financial API or a structured table with unit/currency binding, then verify RF consumption.",
+    "annual14_content_review": "RETAIN 8 pass / 6 partial / 0 missing; ST-A02 remains partial",
+    "raw_copies": 0,
+    "external_model_calls": 0
   },
   "annual14_st_a01_business_scope_fix_20261025": {
     "status": "PUSHED_EXACT_HEAD_CI_SUCCESS_CONTENT_NOT_REGRADED",

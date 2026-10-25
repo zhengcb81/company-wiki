@@ -1,0 +1,19 @@
+{
+  "schema_version": "st-a02-pdf-table-source-check/1",
+  "status": "PASS_STRUCTURED_TABLE_AVAILABLE_CONTEXT_SEPARATE",
+  "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "physical_page": 235,
+  "table_rows": 4,
+  "header_columns": 7,
+  "row_labels": [
+    "项目",
+    "WuXi ATU 业务",
+    "WuXi Testing 部分业务",
+    "合计"
+  ],
+  "page_unit_currency_context_visible": true,
+  "unit_currency_bound_to_table_row_metadata": false,
+  "raw_financial_values_stored_in_receipt": false,
+  "model_request_sent": false,
+  "download_performed": false
+}

@@ -1060,3 +1060,9 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 
 - 使用当前生产`compile_scoped_model_view`针对ST-A01回放结果离线编译模型视图，并以同一生产序列化器重新生成payload核对持久化SHA。药明康德FY2025年报第119页Chemistry业务范围片段完整出现在任务`t55`的support中，主题含`business_scope`；共64个任务。核验状态`PASS_PAYLOAD_VISIBLE_NO_MODEL_REQUEST`，payload SHA=`068f565928250d5eb52669942776423d25e82899841f6ea60936ea3de66797c1`，模型视图SHA=`de2057a4df8d5186f79e6d77547495e7788a5b200e76e0439fab8664d38dd34e`，收据SHA=`d7f42b41273c428cf18abecadf99f0a8c9de0014705fee54bdcaee43e831d269`。
 - 这是从选择结果到模型请求输入的闭环证据；`request_sent=false`、`response_reviewed=false`，未生成或评价新摘要，也未增加API费用。因此年报内容仍为8通过/6部分/0缺失，ST-A01摘要结论仍待响应级内容复核。完整收据、保存视图、编译与校验脚本在`review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/`。
+
+## 2026-10-25 ST-A02 表格来源边界调查
+
+- 原件年报SHA=`7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`的第235页在视觉上具有完整终止经营表格、7列表头和“元/人民币”上下文。production `parse_pdf` selector 0.9 的单页表格回放得到4条结构化行和共享7列表头；单位币种仍作为单独文字块存在，尚未绑定到这些表格行。只读回放收据保存在`review/st-a02-table-source-20261025/replay-receipt.json`，没有金融金额、模型调用、下载或原文复制。
+- 冻结内容报告中的`t55`是从普通PDF文字块选出的局部片段，表头被版面切块，且片段开头仅余末列标题残尾；系统已将其标记`table_structure_ambiguous`并在model view中传播约束。现有`test_reading_untyped_numeric_quality.py`共15项通过，确认未绑定数字不会被摘要/引用/view当成确定事实。这是有效的防误读保护。
+- **处置判断：** 该partial不是“叙述模型还要猜表格”，也不需要扩大叙述切片或改CWP选择规则。精确收入、单位、期间及重述应从结构化金融API或补齐单位币种绑定的完整表格来源读取，随后验证RF实际采用；故ST-A02仍OPEN，未作代码改动。临时视觉渲染目录已删除。
