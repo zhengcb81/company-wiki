@@ -1031,3 +1031,10 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - **真实资料证据：** 用本地原件 `companies/药明康德/raw/financial_reports/药明康德：2025年年度报告.pdf` 做零费用真实selector回放，SHA-256=`7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`。生产选择器实际报告上限112（没有传入上限覆盖），选中112片段/8,915字符，工作9,864,579/16,000,000。TIDES父项只作为context进入ST-A08和ST-A09的必需上下文；“2025年9月提前完成”与`>100,000L`容量仍是分开的证据，trace观察到邻接但没有增加因果依赖。零下载、零原文副本、零模型调用；原件及生产配置未改。收据与完整选择/trace位于 `review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/`。
 - **独立复核与边界：** 首轮独立代码/来源复核为PASS、无阻断问题；它明确只接受来源结构和任务上下文，不接受内容评分变化。复核发现验证器用`assert`会在Python优化模式失效，可能绕过校验并覆盖结果。v3改为显式异常检查，并以独占创建方式写结果；正常运行生成`parent-context-check-v3.json`。`python -O`与`PYTHONOPTIMIZE=1`重复运行都按预期拒绝覆盖，逐次记录尝试前后v3 SHA完全相同，见`optimized-overwrite-rejection-final.log`；全部374个生产Python文件摘要与原回放收据一致。最终Ruff和diff-check退出码均为0，见`verification-final.log`；初始diff日志缺退出码的P3留证问题也已补齐。修复后独立复核无阻断；最后一条SHA对照留证已由独立复核确认。最终报告：[independent-review.md](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md)。当前内容评分仍为8 pass/6 partial/0 missing，未重评、未改写。
 - **下一步：** 完成更新后验证器独立窄复核；随后只暂存本节点源码、测试、证据目录和PWF，提交/推送并核精确HEAD CI。发布后继续逐项追查其余annual14 partial的原文与任务闭包；测试绿和父项入选均不等于内容质量通过。
+
+## 2026-10-25 bullet-parent 修复发布与 ST-A09 追踪
+
+- 源码、测试、复核证据及PWF已由提交`64570b9a66738410a5299ec5d98438e5160a04ee`推送到`origin/master`。精确GitHub Actions运行`40166148355`（head SHA一致）于2026-10-25 completed/success；此前本地pre-push的29个受影响目标与154项契约smoke也通过。当前HEAD与`origin/master`一致。
+- 对ST-A09检查冻结trace和选择结果：第12页“2025年9月提前完成泰兴多肽产能建设”与“多肽固相合成反应釜总体积已提升至超100,000L”各自作为span出现在选择结果，trace记录同页物理邻接，但`dependency_added=false`。第14页TIDES列表父项已成为相关子项的上下文。由于内容复核仍认为日期-状态局部成员未完整闭合，尚不能把“两个span都入选”当作目标通过；下一步核对局部成员/消费者视图及review判据，确认根因究竟在选材闭包、证据表达还是摘要/评分。
+- 未重做内容评分，仍为8通过、6部分、0缺失；本节点没有新增下载、原文副本或模型调用。QA-RAG-SAFE-REBUILD此次完成通知与既有ROOT验收记录一致：代码SHA、作者tip、R2复核、28项专项/97项仓库测试及原`vector_db` SHA均已绑定；该外部仓仍保持独立，本项目不代替其合并。
+- **下一步：** 对ST-A09和另外五项partial做来源到候选、任务成员、选择结果、模型视图的单项证据追踪；只对能复现的共同根因写RED并修复，之后集中独审和跨样本验证。

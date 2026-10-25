@@ -1664,7 +1664,7 @@
     }
   },
   "annual14_bullet_parent_fix_20261025": {
-    "status": "LOCAL_SOURCE_FIX_AND_REAL_REPLAY_PASS_CONTENT_NOT_REGRADED",
+    "status": "PUSHED_EXACT_CI_SUCCESS_CONTENT_NOT_REGRADED",
     "source": "companies/药明康德/raw/financial_reports/药明康德：2025年年度报告.pdf",
     "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
     "selected": 112,
@@ -1688,7 +1688,12 @@
     "updated_verifier_review": "PASS_NO_BLOCKER",
     "evidence": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/README.md",
     "content_review": "NOT_REGRADED; retain 8 pass / 6 partial / 0 missing",
-    "publication": "READY_FOR_COMMIT_PUSH",
+    "publication": "PUSHED",
+    "published_commit": "64570b9a66738410a5299ec5d98438e5160a04ee",
+    "remote": "origin/master",
+    "exact_ci_run_id": 40166148355,
+    "exact_ci_conclusion": "success",
+    "exact_ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40166148355",
     "verifier_version": "3; explicit checks and exclusive output creation",
     "optimized_mode_no_overwrite": "PASS for python -O and PYTHONOPTIMIZE=1; receipt SHA unchanged",
     "verification_log": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/verification-final.log",
