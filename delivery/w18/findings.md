@@ -46,6 +46,25 @@ DU-BENCH 对 disposition_context 维度读取 `context_evidence` 层；基线观
 23 个该类目标如实报 NOT_EVALUATED（另有 2 个 document_meta 目标 basis 检查
 NOT_EVALUATED）。这是观察层缺口，不是样本问题。
 
+## 独立审查与 gold v2 修正（2026-10-25）
+
+三个未参与实现的独立审查 agent 完成审查（原报告在 delivery/w18/review/）：
+源侧 gold 审查 113/113 锚点全部逐字验证通过，发现 1 项 P2（招股书样本一条
+must_not_assert 误禁真命题"百泽安先于百悦泽在中国销售"——原文"分别于2020年
+6月和2020年3月"映射百泽安更早）与 5 项 P3；工程审查确认 H01-H11 全部 PASS
+与 6 项 P3；独立重放验证 PASS（重放确定性逐字节成立、失败/清理/不覆盖链
+完整、否定/条件与期间单位错配双反例确认词匹配不代签业务通过）。
+
+按 H10 版本化流程处置：v1 oracle 逐字节归档于 tools/holdout_replay/gold/
+archive-v1/（冻结提交 5e4488bb 仍可重放），v2 修正逐项源侧理由记录于
+tools/holdout_replay/gold_corrections.json（F1 禁令方向反转、F2 引句补全、
+F3 为未覆盖数值补锚/扩跨、F5 恢复原文措辞、F6 真值对照移出禁令串；
+96 目标/116 锚点全部重新独立验证）。工程 P3 修复：D1 选择器版本双盖章
+（observe 路径跟随生产默认、compile 路径钉 0.9.0，逐工件记录
+selector_versions）、D2 零网络字段注明 by-construction、D3 manifest 拒绝
+跨样本重复原件 SHA、D4 bootstrap-lake 越界路径 JSON refused、D5 worker 结果
+损坏按原始错误记录不崩收据、D6 DU-BENCH 模块 import 根入档。
+
 ## 观察口径说明（H08）
 
 - 机械可见性 = 锚点引句出现在选中 span 文本或编译任务材料文本中；词匹配
@@ -60,3 +79,7 @@ NOT_EVALUATED）。这是观察层缺口，不是样本问题。
   可见性 vs DU 维度评估）都原样保留，不互改。
 - 11 个目标仅在模型输入任务材料中出现（含任务上下文），不在选中 span 行中；
   已逐项标注 model_input_support=true/selected_support=false。
+- 选择器代际披露（D1）：直连观察路径用生产默认选择器，compile 路径按 v4
+  scoped projection 要求钉 0.9.0；两条可见性口径实际测的是不同 selector 代，
+  两个版本号已逐工件盖章（result.selector_versions），F1/F2 的路径差异分析
+  不得忽略该因素。attempt-3（gold v2）起该披露生效。

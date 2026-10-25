@@ -74,6 +74,11 @@ def record_import_roots(producer_root: Path) -> dict[str, str]:
         roots["company_wiki.source_catalog"] = str(Path(source_catalog.__file__).resolve())
     except ImportError:  # pragma: no cover - defensive
         roots["company_wiki.source_catalog"] = ""
+    try:
+        import tools.document_understanding_benchmark as dub  # noqa: F401
+        roots["tools.document_understanding_benchmark"] = str(Path(dub.__file__).resolve())
+    except ImportError:  # pragma: no cover - defensive
+        roots["tools.document_understanding_benchmark"] = ""
     return roots
 
 

@@ -260,6 +260,10 @@ def test_real_chain_runs_and_proves_import_origin(real_chain_env):
                 producer_root.replace("\\", "/") + "/"), module
         assert payload["original_unchanged"] is True
         assert payload["model_view"]["status"] == "not_attempted"
+        # D1: both selector generations are stamped so the two visibility
+        # layers (observe default vs compile-pinned) are never conflated
+        versions = payload["selector_versions"]
+        assert versions["observe_path_default"] and versions["compile_path_pinned"]
         assert payload["targets"], "per-target rows must exist"
         assert payload["evaluation"] is not None
 

@@ -5,6 +5,10 @@
  "created": "2026-10-25",
  "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
  "frozen_before_candidate_output": true,
+ "gold_version": 2,
+ "gold_v1_freeze_commit": "5e4488bb",
+ "gold_v1_archive": "gold/archive-v1/",
+ "corrections_file": "gold_corrections.json",
  "freeze_note": "Manifest and source-side gold were frozen and committed before any candidate selection, layout or model-view output was produced for these samples. Physical original locations are machine-local bindings (never committed); identity comes from provider receipts or scan sidecars plus document-internal identity pages, never from directory names.",
  "prior_use_exclusion_check": {
   "excluded_companies": [
@@ -28,7 +32,7 @@
   {
    "sample_id": "w18-cn-zijin-fy2025",
    "gold_file": "gold/w18-cn-zijin-fy2025.json",
-   "gold_sha256": "3c5278cded6fe8a462495bf9697e65a0d0fc144f020587492001f9dd2aa7b729",
+   "gold_sha256": "6a2cdb2c7379f5c4982feffc88b5a87dbe50aeebbf99d38c0c7bfacccf812713",
    "document_kind": "annual_report",
    "market": "CN",
    "language": "zh",
@@ -53,7 +57,7 @@
    },
    "prior_use": {
     "status": "local-unseen",
-    "known_prior_sightings": "SHA appears in g2_steady_production_migration_2026-10-07.json retained_sources, r2_canary_retirement_preflight_2026-10-07.json and n5-raw-duplicate-audit reports (catalog migration retention / dedup byte verification - metadata only, no content read, no gold, no tuning)"
+    "known_prior_sightings": "SHA appears (metadata only - no content read, no gold, no tuning) in: g2_steady_production_migration_2026-10-07.json retained_sources, r2_canary_retirement_preflight_2026-10-07.json, assurance/fc/FC-504/canary_registry_2026-08-10.json, and the ephemeral n5-raw-duplicate-audit dedup verification outputs (written to exclusive temp files, not verifiable in-repo)"
    },
    "reading_scope": {
     "fully_read_pages": "10, 11, 34, 37 (physical)",
@@ -65,7 +69,7 @@
   {
    "sample_id": "w18-cn-beigene-h1-2024",
    "gold_file": "gold/w18-cn-beigene-h1-2024.json",
-   "gold_sha256": "3bca89007d208f196d909cdd0ee1c706035e0b58c57d758588cb1ada9ab2f3a3",
+   "gold_sha256": "ec0dbb8598daad20b37e46c005fbae778e0e702bcd81d3647abe0237218289af",
    "document_kind": "semi_annual_report",
    "market": "CN",
    "language": "zh",
@@ -98,7 +102,7 @@
   {
    "sample_id": "w18-cn-beigene-ir-202206",
    "gold_file": "gold/w18-cn-beigene-ir-202206.json",
-   "gold_sha256": "03c63ee316a0fa776284d9d6b96ec3993f9d326d8a5505732e390b903e46f9a3",
+   "gold_sha256": "b18ee5c723edbf4c3a6e1fcfdb21365b240827429af9d2993eddecd407fdbda6",
    "document_kind": "investor_relations",
    "market": "CN",
    "language": "zh",
@@ -131,7 +135,7 @@
   {
    "sample_id": "w18-cn-beigene-ipo",
    "gold_file": "gold/w18-cn-beigene-ipo.json",
-   "gold_sha256": "b7e6e5bab5c5e5042464ca7acfa21e8f8fd9aeac419aa9b43b9edfb245fecec4",
+   "gold_sha256": "92b0097ae8950ad633288d32bf1ee818c61aaef6c1d71496b369cd61239c465e",
    "document_kind": "prospectus",
    "market": "CN",
    "language": "zh",
@@ -164,7 +168,7 @@
   {
    "sample_id": "w18-hk-beigene-fy2022",
    "gold_file": "gold/w18-hk-beigene-fy2022.json",
-   "gold_sha256": "2a6fbb957b93eb4600e4efad72e698fff293abb7385790930c67726d010faf57",
+   "gold_sha256": "d7bbaab1cd12d1c59d9e189af13684e3820caf858ee1d42a7d957f0236d07647",
    "document_kind": "annual_report",
    "market": "HK",
    "language": "zh-Hant",
@@ -197,7 +201,7 @@
   {
    "sample_id": "w18-us-alphabet-fy2025",
    "gold_file": "gold/w18-us-alphabet-fy2025.json",
-   "gold_sha256": "47b77d51195bba5125a9ad44e35513bca140783264a87a72b26bd73cd1476a9e",
+   "gold_sha256": "8b678e5829f6d5d4df07b41089c1a9ae3775fef5e5b1f1ed0338cb75d58b9591",
    "document_kind": "annual_report",
    "market": "US",
    "language": "en",
@@ -234,7 +238,7 @@
   {
    "sample_id": "w18-cn-hikvision-call-2024h1",
    "gold_file": "gold/w18-cn-hikvision-call-2024h1.json",
-   "gold_sha256": "0c2136c2247db02ebe68e206fd875ae12145d10e10f999053f04ea805e073a5f",
+   "gold_sha256": "2ba0985cd571116cb5c145853b409bec835da92b387c89c3a01b23303e476dc6",
    "document_kind": "investor_call_transcript",
    "market": "CN",
    "language": "zh",

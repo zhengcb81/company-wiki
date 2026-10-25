@@ -189,7 +189,7 @@
    ],
    "must_preserve": [
     "Other Bets FY2025经营亏损$7.5B",
-    "其中含$2.1B员工薪酬相关一次性费用"
+    "其中含$2.1B员工薪酬相关费用（a $2.1 billion employee compensation charge）"
    ],
    "must_not_assert": [
     "Other Bets亏损全部为经常性经营亏损",
@@ -316,7 +316,7 @@
     [
      {
       "location_kind": "document",
-      "exact_quote": "Changes to U.S. tax law enacted on July 4, 2025, allow, among other things, for immediate expensing of domestic resea"
+      "exact_quote": "Changes to U.S. tax law enacted on July 4, 2025, allow, among other things, for immediate expensing of domestic research and experimentation costs"
      }
     ]
    ],

@@ -86,17 +86,22 @@ def cmd_bootstrap_lake(args: argparse.Namespace) -> int:
                    + [str(ORCHESTRATOR_ROOT)]),
                PYTHONDONTWRITEBYTECODE="1")
     relative = []
-    for sample in manifest["samples"]:
-        path = Path(bindings[sample["sample_id"]]).resolve()
-        rel = path.relative_to(source_root.resolve()).as_posix()
-        expected = sample["source_ref"]["content_sha256"]
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        if actual != expected:
-            print(json.dumps({"status": "refused",
-                              "reason": f"{sample['sample_id']}: sha mismatch {actual[:12]}"}
-                             , ensure_ascii=False))
-            return 2
-        relative.append(rel)
+    try:
+        for sample in manifest["samples"]:
+            path = Path(bindings[sample["sample_id"]]).resolve()
+            rel = path.relative_to(source_root.resolve()).as_posix()
+            expected = sample["source_ref"]["content_sha256"]
+            actual = hashlib.sha256(path.read_bytes()).hexdigest()
+            if actual != expected:
+                print(json.dumps({"status": "refused",
+                                  "reason": f"{sample['sample_id']}: sha mismatch {actual[:12]}"},
+                                 ensure_ascii=False))
+                return 2
+            relative.append(rel)
+    except ValueError as exc:
+        print(json.dumps({"status": "refused",
+                          "reason": f"binding outside --source-root: {exc}"}, ensure_ascii=False))
+        return 2
     command = [sys.executable, "-B", "-X", "utf8", "-m", "company_wiki.source_catalog.cli",
                "--config", str(config_path), "register", "--root-id", "w18_lake"]
     for rel in relative:
@@ -135,6 +140,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         per_sample_timeout=args.per_sample_timeout,
         external_cwd=args.external_cwd,
         extra_pythonpath=args.extra_pythonpath,
+        compile_selector_version=args.compile_selector_version,
     )
     summary = {
         "overall": receipt["overall"],
@@ -194,6 +200,8 @@ def build_parser() -> argparse.ArgumentParser:
                      help="cwd for the worker subprocess (default: user home, never the repo)")
     run.add_argument("--extra-pythonpath", type=Path, action="append", default=None,
                      help="paths prepended to worker PYTHONPATH (pollution test hook)")
+    run.add_argument("--compile-selector-version", default="0.9.0",
+                     help="selector pinned for the compile stage (v4 scoped projection requires 0.9.0)")
     run.set_defaults(fn=cmd_run)
     return parser
 

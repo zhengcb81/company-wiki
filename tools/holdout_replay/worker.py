@@ -129,7 +129,7 @@ def _native_observation(path: Path, sample: dict[str, Any]) -> dict[str, Any]:
 
 
 def _compile_model_view(spec: dict[str, Any], sample: dict[str, Any],
-                        run_id: str) -> tuple[bytes, dict[str, Any]]:
+                        run_id: str, selector_version: str = "0.9.0") -> tuple[bytes, dict[str, Any]]:
     from tools.document_understanding_benchmark.holdout_acceptance_contracts import (
         configured_preview,
     )
@@ -146,10 +146,24 @@ def _compile_model_view(spec: dict[str, Any], sample: dict[str, Any],
         "pricing": {"version": "w18-zero-post-preview/1",
                     "input_micro_usd_per_million_tokens": 0,
                     "output_micro_usd_per_million_tokens": 0},
-        "selector_version": "0.9.0",
+        "selector_version": selector_version,
         "reading_model_projection": "reading-model-input/4",
     }
     return configured_preview(spec, raw_request)
+
+
+def _selector_versions() -> dict[str, Any]:
+    """Record which selector generation each replay path actually uses.
+
+    The direct observation path follows the production default; the compile
+    path pins the selector required by the v4 scoped projection. Both are
+    stamped per artifact so the two visibility layers are never conflated.
+    """
+    from company_wiki.source_catalog import narrative_evidence
+    return {
+        "observe_path_default": getattr(narrative_evidence, "NARRATIVE_SELECTOR_VERSION", None),
+        "compile_path_pinned": "0.9.0",
+    }
 
 
 def run_job(job: dict[str, Any]) -> dict[str, Any]:
@@ -170,13 +184,16 @@ def run_job(job: dict[str, Any]) -> dict[str, Any]:
     }
     observed = _native_observation(path, sample)
     result["native_observed"] = observed
+    result["selector_versions"] = _selector_versions()
 
     compile_spec = job.get("compile_spec")
     tasks: dict[str, str] | None = None
     model_view: dict[str, Any] = {"status": "not_attempted"}
     if compile_spec:
         try:
-            body, facts = _compile_model_view(compile_spec, sample, job.get("run_id", sample["sample_id"]))
+            body, facts = _compile_model_view(
+                compile_spec, sample, job.get("run_id", sample["sample_id"]),
+                selector_version=job.get("compile_selector_version", "0.9.0"))
             report = _model_view_report(body)
             tasks = report.pop("tasks")
             report.update(facts)

@@ -40,6 +40,19 @@ def test_manifest_not_marked_frozen_refuses(tmp_path):
         load_manifest(broken)
 
 
+def test_duplicate_original_sha_refuses(tmp_path):
+    # one material cannot impersonate two independent originals (review D3)
+    record = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    twin = json.loads(json.dumps(record["samples"][0]))
+    twin["sample_id"] = "w18-duplicate-original"
+    twin["gold_file"] = record["samples"][0]["gold_file"]
+    record["samples"] = [record["samples"][0], twin]
+    broken = tmp_path / "manifest.json"
+    broken.write_text(json.dumps(record), encoding="utf-8")
+    with pytest.raises(ManifestError):
+        load_manifest(broken)
+
+
 def test_h01_three_markets_and_minimum_counts(manifest):
     samples = manifest["samples"]
     assert len(samples) >= 6

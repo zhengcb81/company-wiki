@@ -73,6 +73,7 @@ def run_replay(
     per_sample_timeout: float = 900.0,
     external_cwd: Path | None = None,
     extra_pythonpath: list[Path] | None = None,
+    compile_selector_version: str = "0.9.0",
 ) -> dict[str, Any]:
     manifest_path = Path(manifest_path)
     out_dir = Path(out_dir)
@@ -146,9 +147,14 @@ def run_replay(
         "env_pythonpath": env["PYTHONPATH"],
         "worker_cwd": str(cwd),
         "per_sample_timeout_seconds": per_sample_timeout,
+        "compile_selector_version": compile_selector_version,
         "samples": [],
         "network_calls": 0,
         "model_posts": 0,
+        "zero_network_by_construction": (
+            "no network primitive exists in the replay path; the compile stage "
+            "serializes the configured wire body (request_bytes) without opening "
+            "a connection, so these zeros are guarantees, not measurements"),
     }
 
     overall_ok = True
@@ -173,6 +179,7 @@ def run_replay(
             "original_path": str(path),
             "original_sha256": actual_sha,
             "compile_spec": compile_spec,
+            "compile_selector_version": compile_selector_version,
         }
         job_path = attempt_dir / f"{sample_id}.job.json"
         result_path = attempt_dir / f"{sample_id}.result.json"
@@ -192,7 +199,14 @@ def run_replay(
             row["worker_exit"] = completed.returncode
             row["worker_stderr_tail"] = completed.stderr[-800:] if completed.stderr else ""
             if completed.returncode == 0 and result_path.exists():
-                payload = json.loads(result_path.read_text(encoding="utf-8"))
+                try:
+                    payload = json.loads(result_path.read_text(encoding="utf-8"))
+                except (UnicodeError, json.JSONDecodeError) as exc:
+                    row.update(status="failed",
+                               reason=f"WORKER_RESULT_UNREADABLE: {type(exc).__name__}: {exc}"[:400])
+                    overall_ok = False
+                    receipt["samples"].append(row)
+                    continue
                 if payload.get("model_view", {}).get("request_sent"):
                     row.update(status="invalid", reason="WORKER_REPORTS_REQUEST_SENT")
                     overall_ok = False

@@ -1,5 +1,5 @@
 {
- "schema_version": "w18-baseline-summary/1",
+ "schema_version": "w18-baseline-summary/2",
  "card": "W18-CWP-HOLDOUT",
  "created": "2026-10-25",
  "producer": {
@@ -7,23 +7,32 @@
   "root": "C:\\Users\\郑曾波\\Projects\\w18-producer-ba8f8543",
   "deploy": "detached sparse worktree created by this card; production trees verified clean at the frozen commit"
  },
- "manifest_frozen_commit": "5e4488bb",
- "manifest_sha256": "c25d241f11618d96dadafc5b0014b51f8818c0a862cb0fc7a053cd4e2b6a98d4",
+ "gold_version": 2,
+ "gold_v1_freeze_commit": "5e4488bb",
+ "gold_corrections_file": "tools/holdout_replay/gold_corrections.json",
+ "manifest_sha256": "3b1dc5d99dcf27e9323277f6d690d2b07975b2fdb478195d45afb1319abfb56d",
  "attempts": {
-  "observe_only": {
+  "v1_observe_only": {
    "dir": "baseline\\attempts\\ba8f8543c035\\20261025T113758Z-1",
    "attempt_sha256": "51ee8da204898524a18dedcbbe717d4acd9fd5ccfe95cd21213a45a4cc42d0b9",
    "overall": "ok"
   },
-  "observe_plus_compile": {
+  "v1_observe_compile": {
    "dir": "baseline\\attempts\\ba8f8543c035\\20261025T144804Z-1",
    "attempt_sha256": "9ca60cdcb550791e6c9505836c850b546f726ec7592269e1a5e3e20896eadd47",
    "target_summary_sha256": "cb1c973275da2d16dc208f105309375e431d48e0d5c24b9dcc3dc94e29e26efb",
+   "overall": "ok"
+  },
+  "v2_observe_compile_primary": {
+   "dir": "baseline\\attempts\\ba8f8543c035\\20261025T171031Z-1",
+   "attempt_sha256": "3d78d8a626ebc4f5fd2de1dda06c4e2ae8f6532427d67899e6cc8a3b4ff7ce81",
+   "target_summary_sha256": "2633e155457ba72067c66ef5d24d6cfd0fb60c24be41cd15dbde254dfcd68367",
    "overall": "ok",
    "llm_config_sha256": "b63d6bced845e0dc2ae60ee0f1bc87b9d57cf4065133ac8ed28f29df37280865",
-   "lake_bootstrap": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\lake\\bootstrap.json"
+   "lake_bootstrap": "C:/Users/郑曾波/Projects/w18-holdout-scratch/lake/bootstrap.json"
   }
  },
+ "v1_vs_v2_consistency": "gold v2 corrections changed no mechanical visibility or DUB evaluation outcome (identical totals and per-sample statuses); the corrections fixed oracle hygiene (must_not_assert truth, quote completeness, preserve-number anchor coverage, original wording)",
  "replay_command": "python -X utf8 -m tools.holdout_replay run --producer-repo <frozen worktree> --producer-commit ba8f8543c0351f6857e1ce24e943ad9da1b664ef --bindings <local bindings> --out-dir <out> [--lake-config lake/source_catalog.yaml --llm-config config.yaml --llm-provider minimax]",
  "samples": [
   {
@@ -1154,6 +1163,5 @@
   "NOT_EVALUATED": 25
  },
  "network_calls": 0,
- "model_posts": 0,
- "downloads": 0
+ "model_posts": 0
 }

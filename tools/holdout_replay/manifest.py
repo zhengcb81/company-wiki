@@ -36,6 +36,7 @@ def load_manifest(path: Path) -> dict[str, Any]:
     if not isinstance(samples, list) or not samples:
         raise ManifestError("manifest.samples must be a non-empty list")
     seen: set[str] = set()
+    seen_shas: set[str] = set()
     for index, sample in enumerate(samples):
         where = f"manifest.samples[{index}]"
         if not isinstance(sample, Mapping) or not set(_REQUIRED_SAMPLE_FIELDS) <= sample.keys():
@@ -43,10 +44,16 @@ def load_manifest(path: Path) -> dict[str, Any]:
         if sample["sample_id"] in seen:
             raise ManifestError(f"duplicate sample_id {sample['sample_id']!r}")
         seen.add(sample["sample_id"])
+        sha = sample["source_ref"]["content_sha256"]
+        if sha in seen_shas:
+            raise ManifestError(
+                f"two samples bind the same original content sha {sha[:12]} "
+                "(one material cannot impersonate two independent originals)"
+            )
+        seen_shas.add(sha)
         ref = sample["source_ref"]
         if not isinstance(ref, Mapping) or not set(_REQUIRED_SOURCE_REF_FIELDS) <= ref.keys():
             raise ManifestError(f"{where}.source_ref is missing required fields")
-        sha = ref["content_sha256"]
         if not isinstance(sha, str) or len(sha) != 64 or sha != sha.lower():
             raise ManifestError(f"{where}.source_ref.content_sha256 must be a lowercase sha256")
         for key in ("document_id", "source_id"):
