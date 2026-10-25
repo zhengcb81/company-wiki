@@ -1,10 +1,12 @@
 # 当前项目状态与接手入口
 
-## 2026-10-25 最新：W18交付接收中
+## 2026-10-25 最新：W18工具/oracle已接收并线，产品缺口保留
 
-W18作者COMPLETE，ROOT已只读核对并无冲突接入索引；独审发现工具所有权/结果绑定及gold范围问题，9项中性RED已实证，正在集中修复验收。[唯一接收记录](review/package-reception-w18-20261025/README.md)。暂不称ROOT通过；不改作者历史baseline。
+W18作者交付已由ROOT完成6类根修、28P、独审0 OPEN并正常合并推送`f23ba2b7`；19份最终文件与独审SHA一致；精确[CI40232151718](https://github.com/zhengcb81/company-wiki/actions/runs/40232151718) completed/success。金标v4保留96目标（64业务必需/9输出时正确性/23语境），不强制从PDF提取历史财务全表，旧baseline不改。[接收记录](review/package-reception-w18-20261025/README.md)。
 
-**当前唯一动作：** 完成W18修复后独审、正常并线发布及冻结版本真实回放，然后回到下方PDF-C2/C3；不重做已发布C1、不触及W19/作者工区。
+真实4源候选不是全绿：HK PDF、US HTML分别编译76/75任务；CN H1在本次120秒上限timeout，DOCX电话会编译仍提取失败。0POST/下载/原件复制；4原件/3配置SHA不变，约16MB临时工区恢复不存在，只留约95KB压缩attempt及紧凑记录。旧基线H1曾116–171秒，不能据本次更短上限宣称退化，不重跑整批。组件通过不等于正式摘要/RF通过；[产品后续](review/package-reception-w18-20261025/product-findings.json)继续OPEN。
+
+**下一步唯一动作：** 回到下方PDF-C2已有细则，先写通用缺口分诊/严格段落成员对齐RED，再在单层owner内实现有界按需增强。C3之前补同owner耗时诊断和DOCX共享路由根修，保持真实失败；不重做已发布C1，不写W19/作者工区。W18已暴露，不能当下一次全新盲测。
 
 ## 2026-10-25 当前行动：PDF-C1发布验收完成，进入PDF-C2
 

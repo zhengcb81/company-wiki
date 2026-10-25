@@ -1,0 +1,80 @@
+{
+  "schema_version": "root-real-replay-independent-review/1",
+  "package": "W18-CWP-HOLDOUT",
+  "verdict": "PASS_RECEIPT_INTEGRITY_PRODUCT_COMPATIBILITY_NOT_ALL_GREEN",
+  "producer_commit": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+  "reviewed_evidence_sha256": {
+    "candidate-receipt.json": "09eb036e1b89b7e1b389af50318449bda1ab1913dc2ed2b6b11be6e0e9e714cf",
+    "candidate-attempt.json.gz": "f065632acf2f970960ba367367550fdef43e823d526c2ea61c3a476f4a54bcde",
+    "publication.json": "923e11c17c450a2cd76e896564065044aa9a697cd91b623492be72ce45f08d86"
+  },
+  "checks": {
+    "compressed_and_decoded_sha_and_lengths_match": true,
+    "summary_matches_all_four_raw_attempt_rows": true,
+    "published_git_blobs_match_all_19_review_lf_hashes": true,
+    "actual_import_roots_belong_to_frozen_deploy": true,
+    "config_before_after_identical_3": true,
+    "originals_before_after_identical_4_in_receipt": true,
+    "three_completed_workers_confirm_original_sha": true,
+    "attempt_and_deploy_paths_now_absent": true,
+    "targets_remain_not_reviewed": true
+  },
+  "results": [
+    {
+      "sample_id": "w18-cn-beigene-h1-2024",
+      "status": "timeout",
+      "seconds": 120.1,
+      "model_status": null,
+      "task_count": null,
+      "native_scan": null
+    },
+    {
+      "sample_id": "w18-hk-beigene-fy2022",
+      "status": "ok",
+      "seconds": 68.2,
+      "model_status": "compiled",
+      "task_count": 76,
+      "native_scan": "partial"
+    },
+    {
+      "sample_id": "w18-us-alphabet-fy2025",
+      "status": "ok",
+      "seconds": 32.2,
+      "model_status": "compiled",
+      "task_count": 75,
+      "native_scan": "complete"
+    },
+    {
+      "sample_id": "w18-cn-hikvision-call-2024h1",
+      "status": "ok",
+      "seconds": 4.2,
+      "model_status": "failed",
+      "task_count": null,
+      "native_scan": "partial"
+    }
+  ],
+  "interpretation": [
+    "Engineering/oracle reception is accepted. Four-source product compatibility is not all green.",
+    "H1 timeout after 120s preserves the failure; historical author timings straddle/exceed that cap, so this experiment does not establish a code regression or success. No repeat batch is warranted.",
+    "HK PDF compiles 76 scoped tasks, but the default-observer source scan remains partial. Compilation does not imply semantic coverage.",
+    "US HTML compiles 75 scoped tasks with complete reported source scan; summary and RF were not executed.",
+    "DOCX observation is ok, while production configured compile remains SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED; product issue stays open.",
+    "Default observe selector 0.8.0 and compile selector 0.9.0 are different generations.",
+    "Only receipt review and byte/hash reads were performed here; no further batch, test, download or model call."
+  ],
+  "open_product_items": [
+    "H1 timeout/resource design limitation",
+    "DOCX configured language/routing compile failure",
+    "HK and DOCX partial observed coverage",
+    "Semantic summary/cache/RF acceptance remains outside this replay"
+  ],
+  "ci": {
+    "run_id": "40232151718",
+    "status": "not independently polled in this receipt review; last ROOT report in progress"
+  },
+  "review_only": true,
+  "paid_calls": 0,
+  "downloads": 0,
+  "new_batches_or_tests": 0,
+  "open_receipt_integrity_findings": []
+}

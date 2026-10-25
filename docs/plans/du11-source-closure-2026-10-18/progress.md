@@ -1261,3 +1261,7 @@ PDF-C1发布节点关闭：87d39bbc产品和6d7eb858测试观察器根修均正�
 W18接收：作者45新增路径已无冲突进入merge索引；ROOT独立中性probe确认6项工具/金标问题。新增9项RED全部失败（26.78秒，临时根已恢复），已在原薄工具修复原子目录、既有湖不写穿和结果绑定，PDF夹具进入实际链，完整W18正在跑。gold v4在ROOT候选前源侧修订；先一次UTF-8输出失败无原件写入，改-X utf8实读9/25/26页成功。旧baseline/作者工区/WIP保留。
 
 W18 ROOT集中终审通过：独立完整28P/49.53秒，额外before SHA/unchanged非bool/request_sent三突变拒绝，正例通过，19文件最终LF绑定，0 OPEN工具/oracle范围。下一步正常merge commit冻结v4后，新独占候选工区实际回放；未代签产品缺口。
+
+W18并线f23ba2b7正常推送，pre-push154P/56.77秒，review19文件Git字节一致。ROOT候选4源234.286秒：HK76任务、US75任务编译；CN H1 120.1秒timeout，DOCX观察ok但编译提取失败。整体has_failures不改绿；4原件/3配置SHA不变、0POST/下载/复制；15,973,829B临时工区恢复absent，424,247B收据压至94,749B。作者HEAD干净且旧baseline字节不变。返回PDF-C2，CF/C3产品缺口保持OPEN；精确CI仍观察中。
+
+W18最终真实收据独审通过（产品兼容不全绿），精确CI40232151718对f23ba2b7于20:49:11Z completed/success。JSON中原next_step_now/next_steps仍滞留C1/作者pending已纠正，统一下一步PDF-C2，C3/路由/耗时缺口开放。最后正常文档提交推送，不再重复工程测试。

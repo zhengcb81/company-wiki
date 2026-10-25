@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-harness-dispatch/1",
   "as_of_date": "2026-10-25",
-  "status": "W16_W17_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
+  "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
   "parent_plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "package_count": 3,
@@ -124,7 +124,7 @@
       "worktree_local_platform_setting": "core.filemode=false, core.longpaths=true; pre-push blob equals HEAD; primary settings untouched",
       "independent_review_required": true,
       "product_implementation_started": "not_observed_by_ROOT",
-      "status": "DISPATCHED_AWAITING_AUTHOR_HANDOFF",
+      "status": "ROOT_ACCEPTED_TOOL_ORACLE_MERGED_PRODUCT_FINDINGS_OPEN",
       "start_head": "9051bbb7a69347f52d79e5cce37a6b8c40b7912f",
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
@@ -150,7 +150,13 @@
         "docs/plans/w18-cwp-holdout-2026-10-25",
         ".githooks",
         ".github"
-      ]
+      ],
+      "author_final_head": "b697bcf9b84de52b9d47c811554043e10ef2b551",
+      "main_head": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+      "root_reception": "../../review/package-reception-w18-20261025/README.md",
+      "root_independent_review": "PASS_ENGINEERING_AND_ORACLE_SCOPE_0_OPEN",
+      "real_candidate": "2 compiled / 1 timeout / 1 DOCX compilation failure; semantic not_reviewed",
+      "gold_version": 4
     }
   ],
   "seed_product_changes": 0,

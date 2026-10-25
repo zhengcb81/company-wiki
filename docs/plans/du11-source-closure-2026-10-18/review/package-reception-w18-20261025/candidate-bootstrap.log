@@ -1,0 +1,19 @@
+{
+ "status": "ok",
+ "producer_commit": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+ "lake_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-xnxspb85\\lake\\source_catalog.yaml",
+ "source_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies",
+ "registered_relative_paths": [
+  "紫金矿业/raw/financial_reports/annual/2026-03-20_cninfo_1225023658_紫金矿业集团股份有限公司2025年年度报告.pdf",
+  "百济神州/raw/financial_reports/百济神州：百济神州有限公司2024年半年度报告.pdf",
+  "百济神州/raw/research/百济神州：投资者关系活动记录表（2022年6月）.pdf",
+  "百济神州/raw/prospectus/百济神州：百济神州首次公开发行股票并在科创板上市招股说明书.pdf",
+  "百济神州/raw/financial_reports/百济神州：港股公告：2022年度报告.pdf",
+  "Alphabet Inc/raw/financial_reports/annual/2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm",
+  "海康威视/raw/research/海康威视（002415）2024年半年度业绩说明电话会议0817转写结果.docx",
+  "曙光数创/raw/research/曙光数创：公司章程（2026年4月）.pdf"
+ ],
+ "register_exit": 0,
+ "register_stdout_tail": "{\"dry_run\": false, \"error_details\": [], \"errors\": 0, \"files_excluded\": 0, \"files_hashed\": 16, \"files_reused\": 0, \"files_seen\": 16, \"known_quarantined\": 0, \"locations_active\": 16, \"locations_missing\": 0, \"new_errors\": 0, \"policy_excluded\": 0, \"run_id\": \"scan-d4032962b1c84012beaf78630de964b7\", \"strategy\": {\"w18_lake\": \"legacy\"}}\n",
+ "register_stderr_tail": ""
+}

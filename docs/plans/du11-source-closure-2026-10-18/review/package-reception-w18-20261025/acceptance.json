@@ -1,0 +1,21 @@
+{
+  "status": "ROOT_ACCEPTED_TOOL_ORACLE_PRODUCT_OPEN",
+  "code_commit": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+  "author_worktree_head": "b697bcf9b84de52b9d47c811554043e10ef2b551",
+  "author_worktree_clean": true,
+  "old_baseline_preserved": true,
+  "originals_and_configs_unchanged": true,
+  "temporary_worktree_removed": true,
+  "candidate_archive_bytes": 94749,
+  "ci": {
+    "id": 40232151718,
+    "head_sha": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+    "name": "CI",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40232151718",
+    "created_at": "2026-10-25T20:44:03Z",
+    "updated_at": "2026-10-25T20:49:11Z"
+  },
+  "next": "PDF-C2: first neutral RED for generic paragraph-gap triage and strict native-member alignment, then bounded on-demand enhancement behind the single reading owner; preserve original native spans, budget/context/deadline and recipe. C1 is published and exact-CI green; do not repeat C1."
+}

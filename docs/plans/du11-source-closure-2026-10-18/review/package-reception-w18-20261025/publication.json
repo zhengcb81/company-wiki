@@ -1,0 +1,36 @@
+{
+  "schema_version": "w18-publication/1",
+  "merge_commit": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+  "parents": [
+    "b57a716c18c209144744d86fafc35eae87e1546f",
+    "b697bcf9b84de52b9d47c811554043e10ef2b551"
+  ],
+  "remote_master": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+  "review_bound_committed_files": {
+    "tests/holdout/w18/test_manifest_freeze.py": true,
+    "tests/holdout/w18/test_runner_boundaries.py": true,
+    "tools/holdout_replay/__init__.py": true,
+    "tools/holdout_replay/__main__.py": true,
+    "tools/holdout_replay/gold/w18-cn-beigene-h1-2024.json": true,
+    "tools/holdout_replay/gold/w18-cn-beigene-ipo.json": true,
+    "tools/holdout_replay/gold/w18-cn-beigene-ir-202206.json": true,
+    "tools/holdout_replay/gold/w18-cn-hikvision-call-2024h1.json": true,
+    "tools/holdout_replay/gold/w18-cn-sugondata-charter.json": true,
+    "tools/holdout_replay/gold/w18-cn-zijin-fy2025.json": true,
+    "tools/holdout_replay/gold/w18-hk-beigene-fy2022.json": true,
+    "tools/holdout_replay/gold/w18-us-alphabet-fy2025.json": true,
+    "tools/holdout_replay/gold_corrections.json": true,
+    "tools/holdout_replay/manifest.json": true,
+    "tools/holdout_replay/manifest.py": true,
+    "tools/holdout_replay/producer.py": true,
+    "tools/holdout_replay/resolve.py": true,
+    "tools/holdout_replay/runner.py": true,
+    "tools/holdout_replay/worker.py": true
+  },
+  "normal_precommit": "passed; merge hook checks conflict scope; manual W18 Ruff also passed",
+  "normal_prepush": "154 passed in 56.77s; full validation deferred to exact CI",
+  "paid_calls": 0,
+  "downloads": 0,
+  "preserved_existing_wip": ".githooks/pre-push mode100755->100644; not staged; historical untracked unchanged",
+  "code_scope": "new holdout tool/tests/gold only; no src/config production edits"
+}

@@ -1,0 +1,30 @@
+{
+ "overall": "has_failures",
+ "attempt_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-xnxspb85\\runs\\attempts\\f23ba2b7c955\\20261025T204417Z-1",
+ "samples": [
+  {
+   "sample_id": "w18-cn-beigene-h1-2024",
+   "status": "timeout",
+   "reason": "WORKER_TIMEOUT_AFTER_120.0s",
+   "elapsed_seconds": 120.1
+  },
+  {
+   "sample_id": "w18-hk-beigene-fy2022",
+   "status": "ok",
+   "reason": null,
+   "elapsed_seconds": 68.2
+  },
+  {
+   "sample_id": "w18-us-alphabet-fy2025",
+   "status": "ok",
+   "reason": null,
+   "elapsed_seconds": 32.2
+  },
+  {
+   "sample_id": "w18-cn-hikvision-call-2024h1",
+   "status": "ok",
+   "reason": null,
+   "elapsed_seconds": 4.2
+  }
+ ]
+}
