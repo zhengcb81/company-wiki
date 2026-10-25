@@ -1,6 +1,6 @@
 # PDF-C1：单一阅读边界实施与验收
 
-2026-10-25。状态：**产品与源码独审通过；发布/精确CI收尾中**。本页只签C1，不关闭C2结构增强或C3正式摘要、缓存恢复、RF与holdout。
+2026-10-25。状态：**产品/独审/正常发布与精确CI均已通过**。本页只签C1，不关闭C2结构增强或C3正式摘要、缓存恢复、RF与holdout。
 
 ## 已实施
 
@@ -37,3 +37,8 @@
 ## 下一步
 
 正常提交推送与精确CI，随后实施[PDF-C2](implementation.md)：通用缺口分诊、严格native成员对齐、受界隔离热运行时。维持原生默认，不能把Docling字符直接覆盖canonical或将charspan冒充DICT坐标；A股历史三表由W19新浪API负责。
+
+
+## 发布关闭
+
+源代码87d39bbc、测试根修6d7eb858正常推送；新精确[CI40230230567](https://github.com/zhengcb81/company-wiki/actions/runs/40230230567) completed/success。旧CI失败保留，未改写。见[c1-publication.json](c1-publication.json)。C1关闭，C2/C3仍OPEN。

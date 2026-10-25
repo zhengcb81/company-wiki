@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "PDF_C1_SOURCE_REVIEW_PASS_PUBLISHED_CI_FIX_PENDING; C2_ENHANCEMENT_C3_SUMMARY_CACHE_RF_OPEN",
+  "overall_status": "PDF_C1_ACCEPTED_PUBLISHED_EXACT_CI_SUCCESS; PDF_C2_ENHANCEMENT_C3_SUMMARY_CACHE_RF_HOLDOUT_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_ROOT_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,16 +26,16 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+  "last_code_commit": "6d7eb85807b578db1e50382df6f7849ee8e22652",
   "code_ci": {
-    "id": 40229110372,
-    "head_sha": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+    "id": 40230230567,
+    "head_sha": "6d7eb85807b578db1e50382df6f7849ee8e22652",
     "name": "CI",
     "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40229110372",
-    "created_at": "2026-10-25T20:05:23Z",
-    "updated_at": "2026-10-25T20:08:47Z"
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40230230567",
+    "created_at": "2026-10-25T20:19:35Z",
+    "updated_at": "2026-10-25T20:24:34Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2101,7 +2101,7 @@
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
   },
   "pdf_parser_reuse_20261025": {
-    "status": "C1_SOURCE_REVIEW_PASS_PUBLISHED_87D39BBC_CI_2_TEST_FIX_PENDING",
+    "status": "C1_ACCEPTED_PUBLISHED_EXACT_CI_SUCCESS; C2_C3_OPEN",
     "entry": "review/pdf-parser-reuse-pilot-20261025/README.md",
     "production_default_changed": false,
     "calls_paid": 0,
@@ -2127,7 +2127,7 @@
     "c1_independent": "review/pdf-parser-reuse-pilot-20261025/c1-independent-review.json",
     "c1_real": "review/pdf-parser-reuse-pilot-20261025/c1-real-owner-final-receipt.json",
     "production_backend": "native; Docling production not enabled",
-    "next_action": "Normal publish of obsolete test-observer migration and exact CI; then C2 enhanced reading. No default Docling enabled.",
+    "next_action": "PDF-C2 neutral RED for source-aligned paragraph hints and one-pass demand routing, then bounded lazy runtime; no default whole-PDF heavy engine.",
     "c1_integration": {
       "status": "PASS_HOST_SHORT_BASETEMP",
       "passed": 2,
@@ -2145,7 +2145,9 @@
       "seconds": 18.15,
       "overlaps_previous_counts": true,
       "receipt": "review/pdf-parser-reuse-pilot-20261025/c1-ci-root-green-receipt.json"
-    }
+    },
+    "ci_fix_commit": "6d7eb85807b578db1e50382df6f7849ee8e22652",
+    "publication": "review/pdf-parser-reuse-pilot-20261025/c1-publication.json"
   },
   "previous_code_ci_before_pdf_c1": {
     "id": 40213361663,
@@ -2153,5 +2155,15 @@
     "status": "completed",
     "conclusion": "success",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40213361663"
+  },
+  "pdf_c1_initial_failed_code_ci": {
+    "id": 40229110372,
+    "head_sha": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+    "name": "CI",
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40229110372",
+    "created_at": "2026-10-25T20:05:23Z",
+    "updated_at": "2026-10-25T20:08:47Z"
   }
 }

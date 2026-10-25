@@ -1,16 +1,14 @@
 # 当前项目状态与接手入口
 
-## 2026-10-25 当前行动：PDF-C1已推送，完整CI两项测试迁移修复中
+## 2026-10-25 当前行动：PDF-C1发布验收完成，进入PDF-C2
 
-87d39bbc已正常推送；精确CI40229110372两项旧测试钩子KeyError，本地原样复现后仅迁移观察器，完整生产包及边界164P。产品源码不变，修复独审/正常发布/新精确CI收尾中；不将旧CI记绿。[根因与方法补全](review/pdf-parser-reuse-pilot-20261025/c1-ci-followup.md)。
+**研究比较与单层阅读边界已完成；整个PDF升级和公司循环尚未完成。** 选定原生canonical文字/locator＋按需Docling段落结构方向。统一`PdfReading`已在生产路径收拢read/select、内部重读兼容、配方/producer、material验证和replay；AUTO只传逻辑任务、统一账户/deadline，select/verify同一owner，不挑SDK/options，摘要继续共享阅读协议。
 
-真实比较已选定“原生canonical文字/locator＋按需Docling结构提示”。PDF-C1产品代码已实施：统一`PdfReading`负责read/select、后端身份/配方、材料核对和replay；AUTO只传逻辑任务、统一账户/deadline，select与verify使用同一实例。换兼容实现不再因函数identity丢预算/context，PDF配方和PyMuPDF实际版本进入generation。非PDF不加载可选PDF运行时，旧已完成PDF历史不补签当前配方。[本节点](review/pdf-parser-reuse-pilot-20261025/c1-acceptance.md)。
+产品提交87d39bbc、旧测试观测点根修6d7eb858均已正常推送。87d39的精确CI40229110372失败2项已保留；新精确[CI40230230567](https://github.com/zhengcb81/company-wiki/actions/runs/40230230567)对6d7eb858 **completed/success**。完整生产阅读包+boundary/usability164P、主机集成2P、独审0OPEN；相关包计数有重叠，不相加。三源五页59条选中证据与同1.26.7基线逐dict一致，59/59原文回放通过。原件/config/catalog在运行收据内不变，0付费/下载/原件副本；既有hook模式改动和历史未跟踪产物保持原样。[本节点与发布收据](review/pdf-parser-reuse-pilot-20261025/c1-acceptance.md)。
 
-153项定向回归通过，历史/usability/版本恢复104项通过（含重叠）；独立15项与7历史变体通过，终审C1范围0OPEN。三源五页59条证据在同PyMuPDF1.26.7下与冻结基线逐dict一致，59/59原文replay通过。错误混用1.28.2对1.26.7基线会改变结构metadata/hash，已记录，不称作封装退化。首两项集成1P/1F来自测试根过深、Windows硬链接路径>260；仓内48字符短basetemp沙箱仍WinError5（硬链接禁止），同一主机环境原断言2/2通过（5.83秒），临时根恢复不存在。不扩大超时、不删断言、不改生产原件/config/catalog。
+**下一步唯一动作：** 按[PDF-C2细则及真实接缝](review/pdf-parser-reuse-pilot-20261025/implementation.md)写通用缺口分诊/严格段落成员对齐的中性RED，经adapter→现有continuity→实际summary任务接线，再实现有界懒加载热运行时。不能只把metadata/structure分组数量做绿；外部提示窗口保留原member spans，不伪造native字体/坐标或强合兄弟事实。当前仍原生默认，C2尚未生产启用；C3正式摘要、cache恢复、RF消费与新公司/US PDF/扫描件泛化仍OPEN，不用工程绿代签内容质量。A股三表由W19新浪供给，不做PDF三表批量恢复。
 
-**下一步唯一动作：** 完成PDF-C1正常发布、核精确CI；然后按[PDF-C2细则](review/pdf-parser-reuse-pilot-20261025/implementation.md)实施通用缺口分诊、严格native成员对齐与有界热运行时。C2与C3正式摘要/缓存恢复/RF/新公司验收仍OPEN。当前生产仍原生后端；不能把边界重构当Docling已接线或准确率提升。A股三表由W19新浪供给；W18/W19作者目录、RF运行WIP、Dayu/IQS不写。
-
-以下较早“当前/下一步”是历史快照，由本段与CURRENT_STATUS.json统领，不重做已关闭研究、W16/W17或CF3发布。
+W18/W19作者工区、RF运行WIP、Dayu/IQS未写。以下旧“当前/下一步”为历史快照，由本段和CURRENT_STATUS.json统领，不重做已关闭的研究或C1。
 
 ## 2026-10-25 当前行动：PDF真实比较完成，进入单层阅读owner改造
 

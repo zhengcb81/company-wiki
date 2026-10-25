@@ -1,0 +1,40 @@
+{
+  "schema_version": "pdf-c1-publication/1",
+  "status": "PUBLISHED_EXACT_CI_SUCCESS_C1_ONLY",
+  "source_commit": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+  "ci_fix_commit": "6d7eb85807b578db1e50382df6f7849ee8e22652",
+  "remote": "origin/master",
+  "ci": {
+    "id": 40230230567,
+    "head_sha": "6d7eb85807b578db1e50382df6f7849ee8e22652",
+    "name": "CI",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40230230567",
+    "created_at": "2026-10-25T20:19:35Z",
+    "updated_at": "2026-10-25T20:24:34Z"
+  },
+  "prior_failed_ci": 40229110372,
+  "normal_pre_commit": "PASS; initial fixed-path fixture caught and corrected; no bypass",
+  "normal_pre_push": [
+    {
+      "commit": "87d39bbc",
+      "passed": 154,
+      "pytest_seconds": 61.23
+    },
+    {
+      "commit": "6d7eb858",
+      "passed": 156,
+      "pytest_seconds": 72.73
+    }
+  ],
+  "independent_open": 0,
+  "real_selected_and_replayed": 59,
+  "owner_lf_sha256": "35c1685105d3196fbc16c6a53300d97eaa77e6e663d883785b7b3b132ff5ad9d",
+  "paid_calls": 0,
+  "downloads": 0,
+  "original_pdf_copies": 0,
+  "C2_production_enhancement": "OPEN",
+  "C3_real_summary_cache_RF_holdout": "OPEN",
+  "existing_hook_mode_change_preserved": true
+}

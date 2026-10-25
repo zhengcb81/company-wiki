@@ -22,4 +22,4 @@ pre-commit负责Ruff、mypy和host假设等便宜静态检查，本轮确实拦�
 
 本次改进是**主线大节点测试包补全**：阅读owner/handler职责迁移时，完整跑既有`tests/unit/du11_production`，并按CodeGraph调用者/覆写者检查所有迁移接缝，再加对应carrier/runtime/generation回归；不能只挑同名PDF文件。此补充已写入C1/C2验收细则。不增加每次commit全量测试、不增加人工许可，不扩大CI复杂度。CI仍以完整unit suite发现未覆盖回归。
 
-此文件发布时新提交/精确CI仍待观察；不能把旧失败改成success。后续通过收据由`c1-publication-ci.json`与CURRENT_STATUS记录精确新SHA。
+最终独审0OPEN；修复6d7eb858正常提交推送，精确CI40230230567 completed/success。旧失败仍保留，新通过收据见c1-publication.json与CURRENT_STATUS。

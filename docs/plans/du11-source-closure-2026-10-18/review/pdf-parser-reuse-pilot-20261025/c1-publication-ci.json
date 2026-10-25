@@ -1,17 +1,17 @@
 {
   "schema_version": "pdf-c1-public-ci-observation/1",
-  "head_sha": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
-  "observed_at": "2026-10-25T20:10:14.980185+00:00",
+  "head_sha": "6d7eb85807b578db1e50382df6f7849ee8e22652",
+  "observed_at": "2026-10-25T20:24:45.851290+00:00",
   "runs": [
     {
-      "id": 40229110372,
-      "head_sha": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+      "id": 40230230567,
+      "head_sha": "6d7eb85807b578db1e50382df6f7849ee8e22652",
       "name": "CI",
       "status": "completed",
-      "conclusion": "failure",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40229110372",
-      "created_at": "2026-10-25T20:05:23Z",
-      "updated_at": "2026-10-25T20:08:47Z"
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40230230567",
+      "created_at": "2026-10-25T20:19:35Z",
+      "updated_at": "2026-10-25T20:24:34Z"
     }
   ],
   "authentication": "none;public API only"

@@ -1251,3 +1251,6 @@ PDF-C1最后集成已查清并通过：长根主机FileNotFoundError来自Window
 
 
 PDF-C1已正常提交推送87d39bbc；pre-commit真实捕获固定Windows测试夹具路径，改tmp_path且原断言不变后正常通过，未绕hook；pre-push154项61.23秒通过并明确其余350受影响单测延期CI。精确CI40229110372两项失败，公开annotations与本地原样2FAIL均已取得，不提取凭证。根因旧work-policy夹具观察handler私有_parse_pdf/_run_selector，职责迁移后字典为空KeyError。仅观察器迁到PdfReading.read/真实delegate selector，两个test函数AST原断言不变；完整du11_production＋boundary/usability164P/18.15秒、tmp恢复，生产源码SHA未变。C1原定向包漏同包work-policy与独审未追完旧hook使用者属验收范围遗漏，已补进大节点方法，不给每次commit加全量。修复需独审、正常推送和新精确CI，旧failure不改绿；C2实际接线调查补充进入implementation.md，仍未实施。
+
+
+PDF-C1发布节点关闭：87d39bbc产品和6d7eb858测试观察器根修均正常推送，新精确CI40230230567对6d7eb858 completed/success，旧40229110372失败不改写。产品source SHA与独审/三源59回放绑定一致；164P、主机集成2P、独立15及历史7、CI跟进独立2P等计数有重叠。正常pre-commit全过，pre-push前后154P/61.23秒、156P/72.73秒，无绕hook。唯一状态和Next Step进入C2中性RED/真实接缝，C3正式摘要/cache/RF/新公司仍OPEN。0费用/下载/原件副本，原hook模式和历史未跟踪文件不动。
