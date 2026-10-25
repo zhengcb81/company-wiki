@@ -1189,3 +1189,10 @@ CF3第一效率节点独审PASS：共享关系负例剪枝、结构算法cache�
 
 
 CF3已正常发布1cddb0bd，pre-commit Ruff/mypy/host guard通过，pre-push154PASS/76.51秒（运行scope非全量），精确CI40213361663 success。最终独审源码/测试SHA全部匹配；旧hook模式WIP保留。CF2已SourceRef实读5关键页并看原页13，确认悬挂bullet首块含marker造成x99/正文x121边界差，单位/百分比/原因原文及parsed units都在，选材只取首块。PNG已恢复不存在；两次有界诊断writer首次属性误用已记录，不计CF2已修。
+
+
+## 2026-10-25 PDF skill生态与本机能力只读调查
+
+已按find-skills先查看目录再核官方技能/SDK/许可证/作者缺陷记录，并只读核两套Python发行包及当前Docling源码。调查完成，报告[review/pdf-skills-reuse-20261025.md](review/pdf-skills-reuse-20261025.md)。未安装skill、升级依赖、初始化模型、启动服务、调用解析器/收费API或发送原始材料；无新增运行数据/模型下载。未把技能热度、广告准确率或上游bug报告当本机真实验收。
+
+主线仍CF1/CF2/CF3尾部→三源验收→正式摘要/cache/RF；报告建议优先安排现成解析器关键页对照，实施方案以实际效果决定。不改当前生产配置/解析代码，不碰外包作者目录。

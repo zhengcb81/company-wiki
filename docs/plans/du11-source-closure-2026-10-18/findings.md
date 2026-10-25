@@ -980,3 +980,10 @@ CF3第一效率节点独审PASS：共享关系负例剪枝、结构算法cache�
 
 
 CF2新原页证据：cf2-source-boundaries.json。p13/paragraph9残句停1,245.4、p13/paragraph10为百萬元增加7.6%、11/12为原因及句尾；原生bbox首行含bullet x99，后续正文x121，悬挂缩进。下一TDD应保留实际原生正文/marker边界，不全局扩大缩进容差或按发行人补词。新旧PDF backend1.28.2/1.26.7产生14006/14025units；后续真实回放必须记录backend版本并核缓存依赖是否绑定真实解析依赖，未验证前不直接声称缓存缺陷。
+
+
+## 2026-10-25 外部PDF skills复用调查
+
+用户要求搜索现成PDF技能。已查看Docling/MinerU/PaddleOCR官方skill、Anthropic通用PDF和社区pdf-parser原始脚本/许可证，结论与一手链接见[review/pdf-skills-reuse-20261025.md](review/pdf-skills-reuse-20261025.md)。优先候选为Docling SDK、MinerU作对照；页面分诊、结构JSON、标题证据优先次序值得复用。尚未跑真实A/B，不能宣称修好CF1/CF2。
+
+本机默认Conda已装Docling2.96.0/core2.78.0、MinerU3.0.4和torch，有两个Docling模型缓存目录（未验完整性）；CWP venv只有core2.102.0，无完整Docling。实读旧版Docling没有新文档heading_hierarchy_options，新MinerU skill要求4.x，所以不能直接照抄新示例或隐式升级。建议在继续通用版面自研前，先以既有隔离大节点做少量关键页的复用对照；CWP存储/预算/业务策略仍为唯一责任层，不加第二文档库或人审许可。
