@@ -889,3 +889,9 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - 独审P2：二次possessive（客户/供应商的业务）归属误绑、主营/核心等泛称假具名；新helper未进入实际business_algorithms源码SHA；反复tail扫描在2103字/80scope上实收85360字，超过预收16824。新增独立反例先真RED（7失败/21通过），再修所有权、通用名过滤、单向条件状态机及既有cache依赖集合；不加另一cache、许可或预算。
 - 修复后61项相关定向、Ruff、mypy3文件通过；真实attempt04仍112span/9088char、63task，12,879,238/16M，源和配置未变，0外部调用/下载/原件复制。独立最终复审待回；A13精确时段/时点金额仍缺，整项PARTIAL。
 - 另外，最新source/input复核10PASS/4PARTIAL不是旧8/6/0的改写，更不是响应语义通过；A01/A05父级、A02/A13精确来源及当前RF采用继续开放。
+
+## 2026-10-25 A01/A05下一节点：真实截断与多层表示分开证明
+
+- 真原件有p13编号Chemistry父级、p14缩进D&M/TIDES及其Roman子项；同级Testing重回原缩进。`probe_real_structure.py`直接观察未修改的生产outline/physical输出：Chemistry scope只到p13 R段末，下一单元是`13 / 249`，再是p14重复标题与D&M；跨页物理调用计数为0。
+- 源码layout._running_furniture按精确同文字分组；_PAGE_NUMBER只认裸数字，因此变化n/total页码没有正证成为furniture，outline先停止，尚未请求邻页proof。下一步应在物理/版面owner证明“与物理页一致的跨页计数模板+页边位置”，保留分母、坐标、原ID；不能把任意数字或body比率都当页脚。
+- 中性三层的root父项尚在，但破折号中间业务不在citation/model；真实例相反本地破折号在、root父级缺。单层scope扫描跳过已消费成员、单active native scope是共同表示缺口线索；仍需typed多层栈的正反TDD及真实物理证明。不要直接index+1补丁导致重复扫描，也不能放宽邻页、lane、材料预算约束。

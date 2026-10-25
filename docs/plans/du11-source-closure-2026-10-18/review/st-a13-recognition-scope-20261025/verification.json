@@ -1,6 +1,6 @@
 {
   "schema_version": "st-a13-root-verification/1",
-  "status": "INDEPENDENT_REVIEW_PASS_PUBLICATION_PENDING",
+  "status": "PUBLISHED_EXACT_CI_SUCCESS",
   "evidence_kind": "Tool-observed summaries, not fabricated raw console logs",
   "tdd_red": [
     {
@@ -69,5 +69,6 @@
   "downloads": 0,
   "raw_copies": 0,
   "final_independent_review": "independent/final-review.json",
-  "final_independent_review_sha256": "39ec0e6124e8672ff0425e52e50bdc91332205cec250ebe880532d46be39defe"
+  "final_independent_review_sha256": "39ec0e6124e8672ff0425e52e50bdc91332205cec250ebe880532d46be39defe",
+  "publication": "publication.json"
 }

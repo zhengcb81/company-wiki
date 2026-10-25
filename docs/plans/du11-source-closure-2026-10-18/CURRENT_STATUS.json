@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ST_A13_ENGINEERING_INDEPENDENT_PASS_PUBLICATION_PENDING; A01_A05_PARENT_NEXT; REAL_SUMMARY_RF_OPEN",
+  "overall_status": "ST_A13_PUBLISHED_EXACT_CI_SUCCESS; A01_A05_NATIVE_OUTLINE_TDD_NEXT; REAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,17 +26,17 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "2942355c726bc0c95ae07a854eb3bfcaec8aaa37",
+  "last_code_commit": "26e981e1f75d8e67274679749f6ef213d7490012",
   "code_ci": {
-    "id": 40171504716,
-    "job_id": 121103105137,
-    "head_sha": "2942355c726bc0c95ae07a854eb3bfcaec8aaa37",
+    "id": 40180784583,
+    "head_sha": "26e981e1f75d8e67274679749f6ef213d7490012",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40171504716",
-    "observed_at": "2026-10-25T07:11:46Z",
-    "run_scope": "Fast checks (Python 3.12), including Ruff, strict mypy, compile/config checks, full tests/unit, focused contracts, CLI smoke and secret scan",
-    "duration": "4m49s"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40180784583",
+    "created_at": "2026-10-25T09:28:29Z",
+    "updated_at": "2026-10-25T09:33:26Z",
+    "observed_at": "2026-10-25T09:36:28.476315+00:00",
+    "run_scope": "Normal configured GitHub CI; exact product commit, no skipped hooks"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -337,7 +337,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Publish independent-pass ST-A13 source/projection/cache node, then A01/A05 three-tier native hierarchy TDD from frozen neutral/real evidence; no delegated writes; formal summary/cache/RF audit remains open.",
+  "next_step_now": "A01/A05 native hierarchy TDD: source-confirmed changing page counter stops cross-page scope before physical call, and flat scope discovery loses nested business levels; shared owner fix with positive/negative tests, real replay and independent major review; final summary/cache/RF audit follows.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -1887,7 +1887,7 @@
     "current_rf_adoption": "OPEN"
   },
   "annual14_st_a13_recognition_scope_20261025": {
-    "status": "INDEPENDENT_PASS_PUBLICATION_PENDING",
+    "status": "PUBLISHED_EXACT_CI_SUCCESS",
     "review_root": "review/st-a13-recognition-scope-20261025",
     "attempt": "attempt06",
     "selected_spans": 112,
@@ -1905,7 +1905,9 @@
     "targeted_tests_passed": 108,
     "independent_review": "review/st-a13-recognition-scope-20261025/independent/final-review.json",
     "unresolved_in_review_scope": 0,
-    "legacy_explicit_selector_isolation": "0.6/0.7/0.7.1/0.8 span dicts unchanged;0.9 new scope retained"
+    "legacy_explicit_selector_isolation": "0.6/0.7/0.7.1/0.8 span dicts unchanged;0.9 new scope retained",
+    "code_commit": "26e981e1f75d8e67274679749f6ef213d7490012",
+    "publication": "review/st-a13-recognition-scope-20261025/publication.json"
   },
   "a01_a05_investigation": "review/st-a05-parent-investigation-20261025/README.md"
 }

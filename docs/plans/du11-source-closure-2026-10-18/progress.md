@@ -1092,3 +1092,6 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 
 - **终审完成：** I6显式0.8入口泄漏先RED（1FAIL/3PASS），移新语义到0.9 source projection后108PASS/9.22s、Ruff PASS、mypy4源码0错误。独立实际0.9 27控制、四legacy产物身份、线性计费、最终attempt06与原件/payload/旧10PASS上下文检查全部通过，I1–I6范围内零未解。初审失败不覆写，早前35项独立测试不冒充最终policy重跑。当前准备正常发布。
 - **下一节点已调查：** A01/A05三层原生列表中性实验的3个实际citation/model成员集都缺中间破折号业务，原件跨页则缺上级Chemistry。触发条件不同，不能拿中性例替代真实根因；细则已写`review/st-a05-parent-investigation-20261025/README.md`，尚未改其产品代码。
+
+- **ST-A13发布完成：** 26e981e1正常提交推送master；pre-commit各项通过、pre-push154契约31.74秒通过。GitHub精确HEAD CI40180784583 completed/success（09:28:29–09:33:26 UTC），产品/测试物理SHA仍与独审相同；publication.json另记录Git blob/LF等价，未改旧收据。
+- **A01/A05真实结构调查：** 同一SourceRef只读parse/understand观察证明Chemistry scope只到p13，随后`13 / 249`分页计数未被家具识别；跨13→14物理校验调用为0，不能归咎物理校验拒绝。当前layout只按相同文字跨页重复、裸数字page pattern识别，变化n/total缺通用正证；中性三层例另证明平面scope漏中层。保留实际116935字节收据，0模型/下载/原件副本、配置/目录库未改。初版调查脚本误用oracle.kind导致一次KeyError，核对现有runner后改为document_kind；是调查脚本键名错误，不是产品失败。

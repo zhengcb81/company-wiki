@@ -1,6 +1,6 @@
 # ST-A13 具名业务收入确认：共享语义根修
 
-当前：108项定向测试、Ruff/mypy及独立最终复审PASS，I1–I6全闭环；待正常提交推送。不是正式摘要或当前RF验收。
+当前：108项定向测试、Ruff/mypy及独立最终复审PASS，I1–I6全闭环；已正常提交推送`26e981e1`，精确CI`40180784583`成功。不是正式摘要或当前RF验收。
 
 ## 根因与实现
 
@@ -27,3 +27,5 @@ A13具体Testing/Biology确认范围已进实际task输入；精确时段/时点
 独审I6发现新scope泄漏到0.8实际入口，已先用四个legacy真实选择器测试复现（0.8失败），再将新语义从共用description移到0.9 source projection。旧0.8完整span字典及身份恢复，0.9仍补回新段；fallback include_description=False不重扫。新语义正负例使用实际assess/project入口，不用legacy text detector冒充生产。最终108项定向9.22秒、Ruff/mypy4源码通过。独立27控制、legacy真实入口及原件/payload/旧10PASS上下文增量验收PASS；早前35项独立测试绑定前一版本，未冒充当前重跑。
 
 最终[独立终审](independent/final-review.md)及JSON绑定6份产品/测试SHA、375源码指纹和attempt06。attempt05保留为前一候选，attempt06是最终发布候选；两者完整选中span字典与实际payload相同，按证据复用原件核真，不反复跑大检查。A13仍PARTIAL，响应NOT_REVIEWED/currentRF OPEN。
+
+发布明细及Git LF/CRLF字节绑定见`publication.json`。历史attempt与独审报告不重签；当前节点完成，下一节点为A01/A05原生多层列表与页边家具调查。

@@ -1,0 +1,68 @@
+{
+  "schema_version": "st-a13-publication/1",
+  "code_commit": "26e981e1f75d8e67274679749f6ef213d7490012",
+  "branch": "master",
+  "remote": "origin/master",
+  "push_completed": true,
+  "pre_commit": "normal hooks all passed; reviewed source unchanged",
+  "pre_push": {
+    "contract_smoke_passed": 154,
+    "seconds": 31.74,
+    "full_validation_pending_at_push": true
+  },
+  "exact_remote_ci": {
+    "id": 40180784583,
+    "head_sha": "26e981e1f75d8e67274679749f6ef213d7490012",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40180784583",
+    "created_at": "2026-10-25T09:28:29Z",
+    "updated_at": "2026-10-25T09:33:26Z",
+    "observed_at": "2026-10-25T09:36:28.476315+00:00",
+    "run_scope": "Normal configured GitHub CI; exact product commit, no skipped hooks"
+  },
+  "reviewed_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_recognition_scope.py",
+      "reviewed_worktree_sha256": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+      "git_blob_sha256": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+      "worktree_normalized_lf_equals_git": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_predicate_state.py",
+      "reviewed_worktree_sha256": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+      "git_blob_sha256": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+      "worktree_normalized_lf_equals_git": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "reviewed_worktree_sha256": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed",
+      "git_blob_sha256": "2ef38c8330f912b16ada948bcdca812f001277d78d05abdda8aa7afd51d456e7",
+      "worktree_normalized_lf_equals_git": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "reviewed_worktree_sha256": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e",
+      "git_blob_sha256": "7604c66b131c33dcc4f7d8908ce179046083e3598df054989e8b91adaf680af2",
+      "worktree_normalized_lf_equals_git": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_recognition_scope.py",
+      "reviewed_worktree_sha256": "45c5c79e769720ea80537ea638dca6466c8114ae419623e6513443e66d7d9a04",
+      "git_blob_sha256": "45c5c79e769720ea80537ea638dca6466c8114ae419623e6513443e66d7d9a04",
+      "worktree_normalized_lf_equals_git": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+      "reviewed_worktree_sha256": "cdd7fdfbc6d4eaab8af8d155a99c6b213fe5fc52cec2382550816a940a453096",
+      "git_blob_sha256": "768aef5c63acfc30b012116b7b7bdd25d7144a6778da74ecd5de0afb3b5300c6",
+      "worktree_normalized_lf_equals_git": true
+    }
+  ],
+  "binding_note": "Independent review records physical observed worktree bytes; canonical Git blob hashes added here for LF/CRLF portability, without rewriting old evidence. This is not a fresh-clone full E2E claim.",
+  "new_model_calls": 0,
+  "downloads": 0,
+  "fees_added_usd": 0,
+  "protected_originals": "unchanged",
+  "historical_pre_push_mode_wip": "preserved unstaged"
+}

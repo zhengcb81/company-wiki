@@ -1,0 +1,2196 @@
+{
+  "scopes": [
+    {
+      "head": {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "page": 13,
+        "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。",
+        "bbox": [
+          89.87999725341797,
+          683.017333984375,
+          418.3283386230469,
+          696.7277221679688
+        ],
+        "column": null,
+        "kind": "paragraph",
+        "heading_level": null
+      },
+      "heads": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+          "page": 13,
+          "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。",
+          "bbox": [
+            89.87999725341797,
+            683.017333984375,
+            418.3283386230469,
+            696.7277221679688
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+          "page": 13,
+          "text": "报告期内：",
+          "bbox": [
+            89.87999725341797,
+            683.017333984375,
+            418.3283386230469,
+            696.7277221679688
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "members": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+          "page": 13,
+          "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。",
+          "bbox": [
+            89.87999725341797,
+            683.017333984375,
+            418.3283386230469,
+            696.7277221679688
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+          "page": 13,
+          "text": "报告期内：",
+          "bbox": [
+            89.87999725341797,
+            683.017333984375,
+            418.3283386230469,
+            696.7277221679688
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:b1e52cfa5ea242b819b48fef90f86244cd164ffc0a4579686a2733f6eb771e89",
+          "page": 13,
+          "text": "-\n小分子药物发现（“R”，Research）业务为下游持续引流。",
+          "bbox": [
+            110.87999725341797,
+            702.5773315429688,
+            531.4869995117188,
+            755.4793090820312
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:42a92ef22478939ecba4add5727dd600f6c19c13bb6596daf20257e84eb6d805",
+          "page": 13,
+          "text": "2025 年，公司为客户成功合成\n并交付超过42 万个新化合物。",
+          "bbox": [
+            110.87999725341797,
+            702.5773315429688,
+            531.4869995117188,
+            755.4793090820312
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:162f851a1c78a5595f3b2b425866ac200efe263aa3f62ba5c79b7860591f0bb4",
+          "page": 13,
+          "text": "同时，2025 年R 到D 转化分子310 个。",
+          "bbox": [
+            110.87999725341797,
+            702.5773315429688,
+            531.4869995117188,
+            755.4793090820312
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a2e49d2a1d6639e900cc567d24bde956bc87bd72873cf790ccd6991d5552fbff",
+          "page": 13,
+          "text": "公司贯彻“跟随\n客户”和“跟随分子”战略，与全球客户建立了值得信赖的合作关系，为公司CRDMO\n业务持续增长奠定坚实基础。",
+          "bbox": [
+            110.87999725341797,
+            702.5773315429688,
+            531.4869995117188,
+            755.4793090820312
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "context_by_unit": {},
+      "source_proofs": {}
+    },
+    {
+      "head": {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+        "page": 14,
+        "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。",
+        "bbox": [
+          110.87999725341797,
+          76.29629516601562,
+          531.4879150390625,
+          101.8403549194336
+        ],
+        "column": null,
+        "kind": "paragraph",
+        "heading_level": null
+      },
+      "heads": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+          "page": 14,
+          "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。",
+          "bbox": [
+            110.87999725341797,
+            76.29629516601562,
+            531.4879150390625,
+            101.8403549194336
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "members": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+          "page": 14,
+          "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。",
+          "bbox": [
+            110.87999725341797,
+            76.29629516601562,
+            531.4879150390625,
+            101.8403549194336
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a8b69af7d0c996da51717926efa8bcbb052dbfa39cfde4bd0179f1b01fb86ac1",
+          "page": 14,
+          "text": "i.\n小分子CDMO 管线持续扩张。",
+          "bbox": [
+            126.35900115966797,
+            109.53730010986328,
+            531.489990234375,
+            177.72769165039062
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:7e2fa8a2d699e74d8f84d9387f165fdef25e4fae43a814bb8ed3b9a7885d6f52",
+          "page": 14,
+          "text": "2025 年小分子D&M 业务收入199.2 亿元，同比增长\n11.4%。",
+          "bbox": [
+            126.35900115966797,
+            109.53730010986328,
+            531.489990234375,
+            177.72769165039062
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8df09fa473c50f5f1902984b1bdb94e0760b6210d867b6bfa285a66f4f192ef8",
+          "page": 14,
+          "text": "2025 年，小分子D&M 管线累计新增839 个分子。",
+          "bbox": [
+            126.35900115966797,
+            109.53730010986328,
+            531.489990234375,
+            177.72769165039062
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1f1c2586a9ee33c61dd332ccde368082cbdac29fa89a6d1edd892cd9be9fede2",
+          "page": 14,
+          "text": "截至2025 年末，小分子\nD&M 管线总数达到3,452 个，包括83 个商业化项目, 91 个临床III 期项目，377 个\n临床II 期项目, 2,901 个临床前和临床I 期项目。",
+          "bbox": [
+            126.35900115966797,
+            109.53730010986328,
+            531.489990234375,
+            177.72769165039062
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:12f76a1611dd72e1fa227686f2c61dea15606a3bcac7c5693ceb29c7bb8f44bc",
+          "page": 14,
+          "text": "商业化和临床III 期阶段项目全年\n增加22 个。",
+          "bbox": [
+            126.35900115966797,
+            109.53730010986328,
+            531.489990234375,
+            177.72769165039062
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:edc814fc72a985e95b36f8331f2e1cd244e98312ae01a11c46b90aba1b1b3021",
+          "page": 14,
+          "text": "ii.\n公司持续推进小分子产能建设。",
+          "bbox": [
+            126.23999786376953,
+            183.57730102539062,
+            531.489990234375,
+            224.52769470214844
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f0622f88b4a53c0ef553ffd3b418c53587aa5ae38b9906fe1fb7c7ed0487e9c9",
+          "page": 14,
+          "text": "2025 年，常州、泰兴及金山原料药基地均以零缺陷\n成功通过FDA 现场检查。",
+          "bbox": [
+            126.23999786376953,
+            183.57730102539062,
+            531.489990234375,
+            224.52769470214844
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5",
+          "page": 14,
+          "text": "截至2025 年末，小分子原料药反应釜总体积已提升至超\n4,000kL。",
+          "bbox": [
+            126.23999786376953,
+            183.57730102539062,
+            531.489990234375,
+            224.52769470214844
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "context_by_unit": {},
+      "source_proofs": {}
+    },
+    {
+      "head": {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+        "page": 14,
+        "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。",
+        "bbox": [
+          110.87999725341797,
+          230.37730407714844,
+          353.0428161621094,
+          244.0876922607422
+        ],
+        "column": null,
+        "kind": "paragraph",
+        "heading_level": null
+      },
+      "heads": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+          "page": 14,
+          "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。",
+          "bbox": [
+            110.87999725341797,
+            230.37730407714844,
+            353.0428161621094,
+            244.0876922607422
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "members": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+          "page": 14,
+          "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。",
+          "bbox": [
+            110.87999725341797,
+            230.37730407714844,
+            353.0428161621094,
+            244.0876922607422
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4d7b45685c47478c11d05455eb8f4742a20fa5e61fb4ef4f03383c56eef82970",
+          "page": 14,
+          "text": "i.\n随着2024 年新增产能逐季度爬坡，2025 年TIDES 业务收入达到113.7 亿元，同比\n增长96.0%。",
+          "bbox": [
+            126.35900115966797,
+            250.05630493164062,
+            531.3675537109375,
+            277.44769287109375
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:efe6e01aa622f86b5b07fd987175646552247faaa58f8071a4d69bb07bbd5194",
+          "page": 14,
+          "text": "截至2025 年末，TIDES 在手订单同比增长20.2%。",
+          "bbox": [
+            126.35900115966797,
+            250.05630493164062,
+            531.3675537109375,
+            277.44769287109375
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:fab527b2a106856de24cca3529dd4ccd6b35f79308e8346be56239b79647b580",
+          "page": 14,
+          "text": "ii.\nTIDES D&M 服务客户数同比提升25%，服务分子数量同比提升45%。",
+          "bbox": [
+            125.5199966430664,
+            283.2962951660156,
+            478.09002685546875,
+            297.0066833496094
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269",
+          "page": 14,
+          "text": "iii.\n2025 年9 月，提前完成泰兴多肽产能建设。",
+          "bbox": [
+            125.4000015258789,
+            302.8572998046875,
+            531.4839477539062,
+            330.2476806640625
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119",
+          "page": 14,
+          "text": "公司多肽固相合成反应釜总体积已提升\n至超100,000L。",
+          "bbox": [
+            125.4000015258789,
+            302.8572998046875,
+            531.4839477539062,
+            330.2476806640625
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "context_by_unit": {},
+      "source_proofs": {}
+    },
+    {
+      "head": {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+        "page": 14,
+        "text": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。",
+        "bbox": [
+          89.87999725341797,
+          336.0963134765625,
+          439.3283386230469,
+          349.80670166015625
+        ],
+        "column": null,
+        "kind": "paragraph",
+        "heading_level": null
+      },
+      "heads": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+          "page": 14,
+          "text": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。",
+          "bbox": [
+            89.87999725341797,
+            336.0963134765625,
+            439.3283386230469,
+            349.80670166015625
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+          "page": 14,
+          "text": "报告期内：",
+          "bbox": [
+            89.87999725341797,
+            336.0963134765625,
+            439.3283386230469,
+            349.80670166015625
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "members": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+          "page": 14,
+          "text": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。",
+          "bbox": [
+            89.87999725341797,
+            336.0963134765625,
+            439.3283386230469,
+            349.80670166015625
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+          "page": 14,
+          "text": "报告期内：",
+          "bbox": [
+            89.87999725341797,
+            336.0963134765625,
+            439.3283386230469,
+            349.80670166015625
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+          "page": 14,
+          "text": "-\n药物安全性评价业务收入同比增长4.6%，持续保持亚太行业领先地位。",
+          "bbox": [
+            110.87999725341797,
+            355.7773132324219,
+            460.6852722167969,
+            369.4877014160156
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:31ae7f36bb787d9bd7f4b7c696de669f8ff488ddbd6da6b997acd7c8dcc5e49c",
+          "page": 14,
+          "text": "-\n公司积极助力客户开展全球授权许可合作。",
+          "bbox": [
+            110.87999725341797,
+            375.3373107910156,
+            531.6090087890625,
+            402.7276916503906
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:56f7fc0136ea7469e97ee4fdeeb0df9a021c4370b915474cb5ebd62f74310d65",
+          "page": 14,
+          "text": "新分子业务持续发力，2025 年收入占比进一\n步提升至超30%，在核酸类、偶联类、多特异性抗体类、多肽类等领域保持领先地位。",
+          "bbox": [
+            110.87999725341797,
+            375.3373107910156,
+            531.6090087890625,
+            402.7276916503906
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:2bf824ce9458f4be9acecdd8776493def74f5714be724da2e7a19d09aa7e7de0",
+          "page": 14,
+          "text": "-\n公司持续推进自动化，药性评价业务自主开发一站式化合物鉴定软件，助力客户核酸类\n和多肽类代谢产物鉴定，解谱效率提升83%。",
+          "bbox": [
+            110.87999725341797,
+            408.5773010253906,
+            531.4735107421875,
+            435.9676818847656
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bb0405af01818cd799d7cf0ed3705a4eb7da2488e41b6f1b8203bde5ba4bcf19",
+          "page": 14,
+          "text": "-\n苏州、上海设施连续多次顺利通过FDA、OECD、NMPA、PMDA 检查。",
+          "bbox": [
+            110.87999725341797,
+            441.8172912597656,
+            466.8082580566406,
+            455.5276794433594
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "context_by_unit": {},
+      "source_proofs": {}
+    },
+    {
+      "head": {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+        "page": 14,
+        "text": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。",
+        "bbox": [
+          89.87999725341797,
+          461.3773193359375,
+          449.8883361816406,
+          475.08770751953125
+        ],
+        "column": null,
+        "kind": "paragraph",
+        "heading_level": null
+      },
+      "heads": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+          "page": 14,
+          "text": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。",
+          "bbox": [
+            89.87999725341797,
+            461.3773193359375,
+            449.8883361816406,
+            475.08770751953125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+          "page": 14,
+          "text": "报告期内：",
+          "bbox": [
+            89.87999725341797,
+            461.3773193359375,
+            449.8883361816406,
+            475.08770751953125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "members": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+          "page": 14,
+          "text": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。",
+          "bbox": [
+            89.87999725341797,
+            461.3773193359375,
+            449.8883361816406,
+            475.08770751953125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+          "page": 14,
+          "text": "报告期内：",
+          "bbox": [
+            89.87999725341797,
+            461.3773193359375,
+            449.8883361816406,
+            475.08770751953125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5301f72f83990c4394c8881e5264cc5c8e4fbf75db8cdb5d2c81f2709a75faec",
+          "page": 14,
+          "text": "-\n生物学业务秉持科学驱动理念，前瞻布局药物发现热点及差异化能力；",
+          "bbox": [
+            110.87999725341797,
+            481.0563049316406,
+            531.4735107421875,
+            508.44769287109375
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5",
+          "page": 14,
+          "text": "积极拓展全球业\n务，为公司CRDMO 业务模式高效引流，持续为公司带来超过20%的新客户。",
+          "bbox": [
+            110.87999725341797,
+            481.0563049316406,
+            531.4735107421875,
+            508.44769287109375
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+          "page": 14,
+          "text": "-\n通过药物发现体内、外业务联动、跨区域合作和热点领域的一体化服务，高效赋能全球\n客户。",
+          "bbox": [
+            110.87999725341797,
+            514.2963256835938,
+            531.4735107421875,
+            539.9603271484375
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+          "page": 14,
+          "text": "-\n体外综合筛选平台技术加速突破，体内药理学能力持续提升，驱动收入快速增长。",
+          "bbox": [
+            110.87999725341797,
+            547.5372924804688,
+            531.4735107421875,
+            573.079345703125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+          "page": 14,
+          "text": "非肿\n瘤业务保持竞争优势，为业务增长贡献重要力量。",
+          "bbox": [
+            110.87999725341797,
+            547.5372924804688,
+            531.4735107421875,
+            573.079345703125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+          "page": 14,
+          "text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+          "bbox": [
+            110.87999725341797,
+            580.7772827148438,
+            536.6500244140625,
+            606.3203125
+          ],
+          "column": null,
+          "kind": "paragraph",
+          "heading_level": null
+        }
+      ],
+      "context_by_unit": {},
+      "source_proofs": {}
+    }
+  ],
+  "physical_calls": [],
+  "ordered_units": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:27f2664d102c486449b29afaffba35602ead9c308501924ef6fb1eb99c7df0d4",
+      "page": 13,
+      "text": "无锡药明康德新药开发股份有限公司2025 年年度报告",
+      "bbox": [
+        205.44000244140625,
+        42.65599822998047,
+        414.8399963378906,
+        54.697998046875
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:191f4f3e7898d7338ae85241fcff8ddcf852303144cfca126395d67ad6cc242c",
+      "page": 13,
+      "text": "过程中，公司持续驱动新知识、新技术的发展，提高研发效率、降低研发成本，平台创新赋能的\n能力不断增强，并形成一个良性循环的生态圈。",
+      "bbox": [
+        89.87999725341797,
+        77.82935333251953,
+        531.4719848632812,
+        101.8403549194336
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f2bd3470c3b451dc8d1088ac22557ef17894609cad7e6c9e376c169b3e976136",
+      "page": 13,
+      "text": "报告期内，公司举办药明康德全球论坛和多场创新日系列活动，与行业顶尖意见领袖一起聚\n焦行业未来的重大挑战和机遇，探讨全球创新合作，分享行业最新的突破性进展，线下总参会人\n数超4,300 人。",
+      "bbox": [
+        89.87999725341797,
+        111.07035827636719,
+        531.4727172851562,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2fa7a5e8593ea9a596b04cc1e9d64d5bb860c1471c09dc3b5c241b67981c2c2e",
+      "page": 13,
+      "text": "报告期内，公司还通过“药明直播间”及第三方直播平台，面向全球客户开展专\n业技术类直播交流，内容涵盖新药研发的前沿技术，尤其是新分子类型相关的药物研发，听众覆\n盖超过100 个国家和地区。",
+      "bbox": [
+        89.87999725341797,
+        111.07035827636719,
+        531.4727172851562,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:92eb0ad5f72b945cd64ca8ad0148c283932bd52595f42422f46d14e4ec4b100a",
+      "page": 13,
+      "text": "（五）管理层团队经验丰富，富有远见和抱负",
+      "bbox": [
+        110.87999725341797,
+        185.1103515625,
+        320.7630920410156,
+        195.5603485107422
+      ],
+      "column": null,
+      "kind": "heading",
+      "heading_level": 3
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a69985def555632d55d7c980ee71028a2f2c0b928e15d8588d8cb9a6dea05b6b",
+      "page": 13,
+      "text": "公司拥有具备全球视野及产业战略眼光的卓越管理团队。",
+      "bbox": [
+        89.87999725341797,
+        204.67034912109375,
+        536.6500244140625,
+        296.84033203125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:61d2a3960713fbd346f6b8f13187b5d1adbd34d43359c25c64eb63f42c0059d2",
+      "page": 13,
+      "text": "由李革博士领导的公司管理层团队\n拥有丰富的医药行业从业经历，具备极强的执行力及多年医药行业投资经验、管理经验及国际化\n视野，并在全球医药及生命科学领域有较高知名度。",
+      "bbox": [
+        89.87999725341797,
+        204.67034912109375,
+        536.6500244140625,
+        296.84033203125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d5bd570ca28a4300a9286959e1385bbb4861dea4e91f11e759765056c0aebbff",
+      "page": 13,
+      "text": "经验丰富、视野广阔的管理团队使公司得以\n在全球经济运行周期及医药行业整体发展趋势方面有独到而敏锐的认知。",
+      "bbox": [
+        89.87999725341797,
+        204.67034912109375,
+        536.6500244140625,
+        296.84033203125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:21952d690ab045c47be0bbae121c60e2bf6f765abadd341c304601b2cd1adfc9",
+      "page": 13,
+      "text": "在公司管理层的带领下，\n公司有能力深入理解市场及行业发展趋势、政策变化动向及其对客户需求的影响，迅速调整经营\n模式、提高决策速度和灵活性以匹配客户需求，带动公司各板块业务快速发展，并成为全球医药\n健康生态圈的主要创新赋能者和行业贡献者。",
+      "bbox": [
+        89.87999725341797,
+        204.67034912109375,
+        536.6500244140625,
+        296.84033203125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f",
+      "page": 13,
+      "text": "五、报告期内主要经营情况",
+      "bbox": [
+        89.87999725341797,
+        321.0703430175781,
+        216.24505615234375,
+        331.52032470703125
+      ],
+      "column": null,
+      "kind": "heading",
+      "heading_level": 2
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e6cb624c8c160a385d6c3a9662027458f19f4d4a2af9d8d32d47fc946df9b952",
+      "page": 13,
+      "text": "报告期内，公司发挥全球布局、全产业链覆盖的优势，各个地区联动，并抓住新的业务机遇，\n持续为客户赋能。",
+      "bbox": [
+        89.87999725341797,
+        347.58935546875,
+        536.6500244140625,
+        371.600341796875
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c2b753c1af3a38f05ac9f159c13b28c869dcf8992a77386e764b8a660bf05a2c",
+      "page": 13,
+      "text": "公司各业务板块营业收入情况如下：",
+      "bbox": [
+        89.87999725341797,
+        347.58935546875,
+        536.6500244140625,
+        371.600341796875
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4532060d28d071ee472b8387808145e2f0e234ba8e11b1f62a4e8acb7651e5d5",
+      "page": 13,
+      "text": "单位：万元\n币种：人民币\n报告分部\n本期数\n上年同期数\n变动比例（%）\n化学业务\n（WuXi Chemistry）\n3,646,584.69\n2,905,240.91\n25.52",
+      "bbox": [
+        114.12000274658203,
+        380.7103576660156,
+        531.4236450195312,
+        434.7666931152344
+      ],
+      "column": null,
+      "kind": "table_caption",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:05211d7affca7e09e422dd7b134217fa24f669b96c826ff617f8bcd4e8d2df23",
+      "page": 13,
+      "text": "测试业务\n（WuXi Testing）\n404,170.10\n386,064.65\n4.69",
+      "bbox": [
+        120.23999786376953,
+        436.7503662109375,
+        531.4239501953125,
+        462.4877014160156
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6abc725fe5a25f07eaecf92a8ed6123afd1db3b237a02da6349273aa843807ea",
+      "page": 13,
+      "text": "生物学业务\n（WuXi Biology）\n267,717.50\n254,392.63\n5.24",
+      "bbox": [
+        119.04000091552734,
+        464.4703674316406,
+        531.4239501953125,
+        490.2066955566406
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:34b14ae93c2222ce1b25ca63503bf8179daca5820fe01e92e94d2a55c34151d5",
+      "page": 13,
+      "text": "其他业务\n（Others）\n23,610.08\n30,976.37\n-23.78",
+      "bbox": [
+        136.1999969482422,
+        492.1893615722656,
+        531.42236328125,
+        518.0476684570312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c76b224295fc2a8a9594799d57c5a46e9dd020202f07a23dc72bf81fb0dab061",
+      "page": 13,
+      "text": "持续经营业务小计\n4,342,082.37\n3,576,674.56\n21.40\n终止经营业务（注1）\n203,534.20\n347,468.57\n-41.42\n合计\n4,545,616.58\n3,924,143.14\n15.84",
+      "bbox": [
+        109.44000244140625,
+        518.3773193359375,
+        531.4236450195312,
+        560.2877197265625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:fff7edf1c14cac7145136bb3e0db41e4495506aa0405689e40209e673e9cc3f5",
+      "page": 13,
+      "text": "注1：依据企业会计准则规定，公司将本年或对比年度内已签署股权出售协议、完成出售或\n正处于终止阶段的相关业务，划分为终止经营业务，相应重述了可比期间的数据。",
+      "bbox": [
+        89.87999725341797,
+        578.8572998046875,
+        531.3690185546875,
+        604.5203247070312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:ab62db1e4d67df14a78b96d4413e525a6a3461afcb48ab9ad6cf3ae2493e3c60",
+      "page": 13,
+      "text": "注2：上表中单项之和与合计不等为四舍五入造成。",
+      "bbox": [
+        110.87999725341797,
+        612.0963134765625,
+        349.6824645996094,
+        625.8067016601562
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:15a959c4206e8cc29733078fbea8c68ce7c0fd43535303f1bb2b40a30d2e73d8",
+      "page": 13,
+      "text": "公司2025 年实现营业收入人民币454.6 亿元，同比增长15.8%，持续经营业务收入同比增长\n21.4%，其中：",
+      "bbox": [
+        89.87999725341797,
+        649.7772827148438,
+        531.489990234375,
+        677.0476684570312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+      "page": 13,
+      "text": "(1) 化学业务实现收入人民币364.7 亿元，同比增长25.5%。",
+      "bbox": [
+        89.87999725341797,
+        683.017333984375,
+        418.3283386230469,
+        696.7277221679688
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320",
+      "page": 13,
+      "text": "报告期内：",
+      "bbox": [
+        89.87999725341797,
+        683.017333984375,
+        418.3283386230469,
+        696.7277221679688
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b1e52cfa5ea242b819b48fef90f86244cd164ffc0a4579686a2733f6eb771e89",
+      "page": 13,
+      "text": "-\n小分子药物发现（“R”，Research）业务为下游持续引流。",
+      "bbox": [
+        110.87999725341797,
+        702.5773315429688,
+        531.4869995117188,
+        755.4793090820312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42a92ef22478939ecba4add5727dd600f6c19c13bb6596daf20257e84eb6d805",
+      "page": 13,
+      "text": "2025 年，公司为客户成功合成\n并交付超过42 万个新化合物。",
+      "bbox": [
+        110.87999725341797,
+        702.5773315429688,
+        531.4869995117188,
+        755.4793090820312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:162f851a1c78a5595f3b2b425866ac200efe263aa3f62ba5c79b7860591f0bb4",
+      "page": 13,
+      "text": "同时，2025 年R 到D 转化分子310 个。",
+      "bbox": [
+        110.87999725341797,
+        702.5773315429688,
+        531.4869995117188,
+        755.4793090820312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a2e49d2a1d6639e900cc567d24bde956bc87bd72873cf790ccd6991d5552fbff",
+      "page": 13,
+      "text": "公司贯彻“跟随\n客户”和“跟随分子”战略，与全球客户建立了值得信赖的合作关系，为公司CRDMO\n业务持续增长奠定坚实基础。",
+      "bbox": [
+        110.87999725341797,
+        702.5773315429688,
+        531.4869995117188,
+        755.4793090820312
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:85a20530c348148438f356bb4c57604e306485b83d5dba024f2b36640dfa63d1",
+      "page": 13,
+      "text": "13 / 249",
+      "bbox": [
+        295.44000244140625,
+        769.615966796875,
+        325.7927551269531,
+        781.7769775390625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1e9198c15988a4eabaf37a9f45246c5a769d56ca9c8e811b20551291041a7c7f",
+      "page": 14,
+      "text": "无锡药明康德新药开发股份有限公司2025 年年度报告",
+      "bbox": [
+        205.44000244140625,
+        42.65599822998047,
+        414.8399963378906,
+        54.697998046875
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466",
+      "page": 14,
+      "text": "-\n小分子工艺研发和生产(“D”和“M”，Development and Manufacturing) 业务保持强劲\n增长。",
+      "bbox": [
+        110.87999725341797,
+        76.29629516601562,
+        531.4879150390625,
+        101.8403549194336
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a8b69af7d0c996da51717926efa8bcbb052dbfa39cfde4bd0179f1b01fb86ac1",
+      "page": 14,
+      "text": "i.\n小分子CDMO 管线持续扩张。",
+      "bbox": [
+        126.35900115966797,
+        109.53730010986328,
+        531.489990234375,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:7e2fa8a2d699e74d8f84d9387f165fdef25e4fae43a814bb8ed3b9a7885d6f52",
+      "page": 14,
+      "text": "2025 年小分子D&M 业务收入199.2 亿元，同比增长\n11.4%。",
+      "bbox": [
+        126.35900115966797,
+        109.53730010986328,
+        531.489990234375,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8df09fa473c50f5f1902984b1bdb94e0760b6210d867b6bfa285a66f4f192ef8",
+      "page": 14,
+      "text": "2025 年，小分子D&M 管线累计新增839 个分子。",
+      "bbox": [
+        126.35900115966797,
+        109.53730010986328,
+        531.489990234375,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1f1c2586a9ee33c61dd332ccde368082cbdac29fa89a6d1edd892cd9be9fede2",
+      "page": 14,
+      "text": "截至2025 年末，小分子\nD&M 管线总数达到3,452 个，包括83 个商业化项目, 91 个临床III 期项目，377 个\n临床II 期项目, 2,901 个临床前和临床I 期项目。",
+      "bbox": [
+        126.35900115966797,
+        109.53730010986328,
+        531.489990234375,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:12f76a1611dd72e1fa227686f2c61dea15606a3bcac7c5693ceb29c7bb8f44bc",
+      "page": 14,
+      "text": "商业化和临床III 期阶段项目全年\n增加22 个。",
+      "bbox": [
+        126.35900115966797,
+        109.53730010986328,
+        531.489990234375,
+        177.72769165039062
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:edc814fc72a985e95b36f8331f2e1cd244e98312ae01a11c46b90aba1b1b3021",
+      "page": 14,
+      "text": "ii.\n公司持续推进小分子产能建设。",
+      "bbox": [
+        126.23999786376953,
+        183.57730102539062,
+        531.489990234375,
+        224.52769470214844
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f0622f88b4a53c0ef553ffd3b418c53587aa5ae38b9906fe1fb7c7ed0487e9c9",
+      "page": 14,
+      "text": "2025 年，常州、泰兴及金山原料药基地均以零缺陷\n成功通过FDA 现场检查。",
+      "bbox": [
+        126.23999786376953,
+        183.57730102539062,
+        531.489990234375,
+        224.52769470214844
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5",
+      "page": 14,
+      "text": "截至2025 年末，小分子原料药反应釜总体积已提升至超\n4,000kL。",
+      "bbox": [
+        126.23999786376953,
+        183.57730102539062,
+        531.489990234375,
+        224.52769470214844
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+      "page": 14,
+      "text": "-\nTIDES 业务（寡核苷酸和多肽）保持高速增长。",
+      "bbox": [
+        110.87999725341797,
+        230.37730407714844,
+        353.0428161621094,
+        244.0876922607422
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4d7b45685c47478c11d05455eb8f4742a20fa5e61fb4ef4f03383c56eef82970",
+      "page": 14,
+      "text": "i.\n随着2024 年新增产能逐季度爬坡，2025 年TIDES 业务收入达到113.7 亿元，同比\n增长96.0%。",
+      "bbox": [
+        126.35900115966797,
+        250.05630493164062,
+        531.3675537109375,
+        277.44769287109375
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:efe6e01aa622f86b5b07fd987175646552247faaa58f8071a4d69bb07bbd5194",
+      "page": 14,
+      "text": "截至2025 年末，TIDES 在手订单同比增长20.2%。",
+      "bbox": [
+        126.35900115966797,
+        250.05630493164062,
+        531.3675537109375,
+        277.44769287109375
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:fab527b2a106856de24cca3529dd4ccd6b35f79308e8346be56239b79647b580",
+      "page": 14,
+      "text": "ii.\nTIDES D&M 服务客户数同比提升25%，服务分子数量同比提升45%。",
+      "bbox": [
+        125.5199966430664,
+        283.2962951660156,
+        478.09002685546875,
+        297.0066833496094
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269",
+      "page": 14,
+      "text": "iii.\n2025 年9 月，提前完成泰兴多肽产能建设。",
+      "bbox": [
+        125.4000015258789,
+        302.8572998046875,
+        531.4839477539062,
+        330.2476806640625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119",
+      "page": 14,
+      "text": "公司多肽固相合成反应釜总体积已提升\n至超100,000L。",
+      "bbox": [
+        125.4000015258789,
+        302.8572998046875,
+        531.4839477539062,
+        330.2476806640625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+      "page": 14,
+      "text": "(2) 测试业务实现收入人民币40.4 亿元，同比恢复正增长4.7%。",
+      "bbox": [
+        89.87999725341797,
+        336.0963134765625,
+        439.3283386230469,
+        349.80670166015625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747",
+      "page": 14,
+      "text": "报告期内：",
+      "bbox": [
+        89.87999725341797,
+        336.0963134765625,
+        439.3283386230469,
+        349.80670166015625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+      "page": 14,
+      "text": "-\n药物安全性评价业务收入同比增长4.6%，持续保持亚太行业领先地位。",
+      "bbox": [
+        110.87999725341797,
+        355.7773132324219,
+        460.6852722167969,
+        369.4877014160156
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:31ae7f36bb787d9bd7f4b7c696de669f8ff488ddbd6da6b997acd7c8dcc5e49c",
+      "page": 14,
+      "text": "-\n公司积极助力客户开展全球授权许可合作。",
+      "bbox": [
+        110.87999725341797,
+        375.3373107910156,
+        531.6090087890625,
+        402.7276916503906
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:56f7fc0136ea7469e97ee4fdeeb0df9a021c4370b915474cb5ebd62f74310d65",
+      "page": 14,
+      "text": "新分子业务持续发力，2025 年收入占比进一\n步提升至超30%，在核酸类、偶联类、多特异性抗体类、多肽类等领域保持领先地位。",
+      "bbox": [
+        110.87999725341797,
+        375.3373107910156,
+        531.6090087890625,
+        402.7276916503906
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2bf824ce9458f4be9acecdd8776493def74f5714be724da2e7a19d09aa7e7de0",
+      "page": 14,
+      "text": "-\n公司持续推进自动化，药性评价业务自主开发一站式化合物鉴定软件，助力客户核酸类\n和多肽类代谢产物鉴定，解谱效率提升83%。",
+      "bbox": [
+        110.87999725341797,
+        408.5773010253906,
+        531.4735107421875,
+        435.9676818847656
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bb0405af01818cd799d7cf0ed3705a4eb7da2488e41b6f1b8203bde5ba4bcf19",
+      "page": 14,
+      "text": "-\n苏州、上海设施连续多次顺利通过FDA、OECD、NMPA、PMDA 检查。",
+      "bbox": [
+        110.87999725341797,
+        441.8172912597656,
+        466.8082580566406,
+        455.5276794433594
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+      "page": 14,
+      "text": "(3) 生物学业务实现收入人民币26.8 亿元，同比恢复正增长5.2%。",
+      "bbox": [
+        89.87999725341797,
+        461.3773193359375,
+        449.8883361816406,
+        475.08770751953125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056",
+      "page": 14,
+      "text": "报告期内：",
+      "bbox": [
+        89.87999725341797,
+        461.3773193359375,
+        449.8883361816406,
+        475.08770751953125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5301f72f83990c4394c8881e5264cc5c8e4fbf75db8cdb5d2c81f2709a75faec",
+      "page": 14,
+      "text": "-\n生物学业务秉持科学驱动理念，前瞻布局药物发现热点及差异化能力；",
+      "bbox": [
+        110.87999725341797,
+        481.0563049316406,
+        531.4735107421875,
+        508.44769287109375
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5",
+      "page": 14,
+      "text": "积极拓展全球业\n务，为公司CRDMO 业务模式高效引流，持续为公司带来超过20%的新客户。",
+      "bbox": [
+        110.87999725341797,
+        481.0563049316406,
+        531.4735107421875,
+        508.44769287109375
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+      "page": 14,
+      "text": "-\n通过药物发现体内、外业务联动、跨区域合作和热点领域的一体化服务，高效赋能全球\n客户。",
+      "bbox": [
+        110.87999725341797,
+        514.2963256835938,
+        531.4735107421875,
+        539.9603271484375
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+      "page": 14,
+      "text": "-\n体外综合筛选平台技术加速突破，体内药理学能力持续提升，驱动收入快速增长。",
+      "bbox": [
+        110.87999725341797,
+        547.5372924804688,
+        531.4735107421875,
+        573.079345703125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+      "page": 14,
+      "text": "非肿\n瘤业务保持竞争优势，为业务增长贡献重要力量。",
+      "bbox": [
+        110.87999725341797,
+        547.5372924804688,
+        531.4735107421875,
+        573.079345703125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27",
+      "page": 14,
+      "text": "-\n新分子业务持续贡献增长，2025 年收入占比进一步提升至超30%，核酸类、偶联抗体类、\n多肽类等领域新客户快速增长。",
+      "bbox": [
+        110.87999725341797,
+        580.7772827148438,
+        536.6500244140625,
+        606.3203125
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+      "page": 14,
+      "text": "预计2026年公司整体收入达到513-530亿元，持续经营业务收入同比增长18%-22%。",
+      "bbox": [
+        89.87999725341797,
+        632.1373291015625,
+        531.3690795898438,
+        659.4066772460938
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+      "page": 14,
+      "text": "公司将更\n加聚焦CRDMO核心战略，加速全球化能力建设和产能投放，持续提高生产经营效率。",
+      "bbox": [
+        89.87999725341797,
+        632.1373291015625,
+        531.3690795898438,
+        659.4066772460938
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+      "page": 14,
+      "text": "上述提及的2026年全年经营业绩展望以公司目前在手订单情况为基础预测，并以全球医药行\n业发展平稳、国际贸易环境和主要运营所在地国家监管环境稳定等为前提基础，并不代表公司管\n理层对2026年度全年经营业绩的盈利预测，不构成公司对投资者的实质承诺，能否实现取决于内\n外部环境变化等多种因素影响，存在较大的不确定性。",
+      "bbox": [
+        89.87999725341797,
+        677.3773193359375,
+        530.77001953125,
+        730.1603393554688
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b7a0c229cf81b63d07f8309d454dac6fd25082a1103eae63168af9e490f41c12",
+      "page": 14,
+      "text": "14 / 249",
+      "bbox": [
+        295.44000244140625,
+        769.615966796875,
+        325.7927551269531,
+        781.7769775390625
+      ],
+      "column": null,
+      "kind": "paragraph",
+      "heading_level": null
+    }
+  ],
+  "sections": [
+    {
+      "section_id": "s50",
+      "parent_id": "s46",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:8159ccbc884a1ba7b12f2c2085ce0233dfc74566fc67a31d61487fd7ac060b42"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:bc344a1c70f65f1d74a76b966e5fde2a0702a66e168f67aab6abd9a4779a25dc",
+        "urn:company-wiki:narrative-unit:sha256:668a43fb57e203f9c2e3d482cf45739a6b318a274af606e817b901ec1f708038",
+        "urn:company-wiki:narrative-unit:sha256:fd909838d1e6a0ba0765ac87a20c2df64597ec5e1e55b988197483e300b767d2",
+        "urn:company-wiki:narrative-unit:sha256:543b96ce4c45eb35501e4b359ec1e67741d2f6c5e3085f7b0e7b02fdcc7f50be",
+        "urn:company-wiki:narrative-unit:sha256:191f4f3e7898d7338ae85241fcff8ddcf852303144cfca126395d67ad6cc242c",
+        "urn:company-wiki:narrative-unit:sha256:f2bd3470c3b451dc8d1088ac22557ef17894609cad7e6c9e376c169b3e976136",
+        "urn:company-wiki:narrative-unit:sha256:2fa7a5e8593ea9a596b04cc1e9d64d5bb860c1471c09dc3b5c241b67981c2c2e"
+      ],
+      "section_role": "business",
+      "language": "zh",
+      "confidence": "high",
+      "basis": [
+        "reading_order",
+        "heading_level",
+        "spans_pages"
+      ]
+    },
+    {
+      "section_id": "s51",
+      "parent_id": "s46",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:92eb0ad5f72b945cd64ca8ad0148c283932bd52595f42422f46d14e4ec4b100a"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:a69985def555632d55d7c980ee71028a2f2c0b928e15d8588d8cb9a6dea05b6b",
+        "urn:company-wiki:narrative-unit:sha256:61d2a3960713fbd346f6b8f13187b5d1adbd34d43359c25c64eb63f42c0059d2",
+        "urn:company-wiki:narrative-unit:sha256:d5bd570ca28a4300a9286959e1385bbb4861dea4e91f11e759765056c0aebbff",
+        "urn:company-wiki:narrative-unit:sha256:21952d690ab045c47be0bbae121c60e2bf6f765abadd341c304601b2cd1adfc9"
+      ],
+      "section_role": "business",
+      "language": "zh",
+      "confidence": "high",
+      "basis": [
+        "reading_order",
+        "heading_level",
+        "role_inherited"
+      ]
+    },
+    {
+      "section_id": "s52",
+      "parent_id": "s40",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:6f6021d2a111566fb20e28fc30698648ec1c62f5a099f9c4285d8e007189934f"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:e6cb624c8c160a385d6c3a9662027458f19f4d4a2af9d8d32d47fc946df9b952",
+        "urn:company-wiki:narrative-unit:sha256:c2b753c1af3a38f05ac9f159c13b28c869dcf8992a77386e764b8a660bf05a2c",
+        "urn:company-wiki:narrative-unit:sha256:4532060d28d071ee472b8387808145e2f0e234ba8e11b1f62a4e8acb7651e5d5",
+        "urn:company-wiki:narrative-unit:sha256:05211d7affca7e09e422dd7b134217fa24f669b96c826ff617f8bcd4e8d2df23",
+        "urn:company-wiki:narrative-unit:sha256:6abc725fe5a25f07eaecf92a8ed6123afd1db3b237a02da6349273aa843807ea",
+        "urn:company-wiki:narrative-unit:sha256:34b14ae93c2222ce1b25ca63503bf8179daca5820fe01e92e94d2a55c34151d5",
+        "urn:company-wiki:narrative-unit:sha256:c76b224295fc2a8a9594799d57c5a46e9dd020202f07a23dc72bf81fb0dab061",
+        "urn:company-wiki:narrative-unit:sha256:fff7edf1c14cac7145136bb3e0db41e4495506aa0405689e40209e673e9cc3f5",
+        "urn:company-wiki:narrative-unit:sha256:ab62db1e4d67df14a78b96d4413e525a6a3461afcb48ab9ad6cf3ae2493e3c60",
+        "urn:company-wiki:narrative-unit:sha256:15a959c4206e8cc29733078fbea8c68ce7c0fd43535303f1bb2b40a30d2e73d8",
+        "urn:company-wiki:narrative-unit:sha256:85a20530c348148438f356bb4c57604e306485b83d5dba024f2b36640dfa63d1",
+        "urn:company-wiki:narrative-unit:sha256:5b6d78eb4450d4e834074d7b288490a42fa65251deccccf14b11720b2d893262",
+        "urn:company-wiki:narrative-unit:sha256:85faeed87b6a012c865761f08f44485bf401176c33e76edf48ff0715d44e6bbb",
+        "urn:company-wiki:narrative-unit:sha256:9ead8ee31ed47a93bb3ef05d2cd766315052cbc8e2a043e32a2e05e56d47f854",
+        "urn:company-wiki:narrative-unit:sha256:b7a0c229cf81b63d07f8309d454dac6fd25082a1103eae63168af9e490f41c12"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "high",
+      "basis": [
+        "reading_order",
+        "heading_level",
+        "spans_pages",
+        "role_inherited"
+      ]
+    },
+    {
+      "section_id": "s53",
+      "parent_id": "s52",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:e0db24bc1466166c4596c9d2d12cb3c229add1a49813d0fe951a5829c9237d40",
+        "urn:company-wiki:narrative-unit:sha256:a9193426ba35c9ec17afe159e8abec8bcd6870c79144901401db1e3af173d320"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:b1e52cfa5ea242b819b48fef90f86244cd164ffc0a4579686a2733f6eb771e89",
+        "urn:company-wiki:narrative-unit:sha256:42a92ef22478939ecba4add5727dd600f6c19c13bb6596daf20257e84eb6d805",
+        "urn:company-wiki:narrative-unit:sha256:162f851a1c78a5595f3b2b425866ac200efe263aa3f62ba5c79b7860591f0bb4",
+        "urn:company-wiki:narrative-unit:sha256:a2e49d2a1d6639e900cc567d24bde956bc87bd72873cf790ccd6991d5552fbff"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "medium",
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "single_row_display_heading",
+        "native_numbered_list"
+      ]
+    },
+    {
+      "section_id": "s54",
+      "parent_id": "s52",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:d693286447afb16ac5551fc95e9aabadae05ab9f0d91e92d0aa49ebbd81a9466"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:a8b69af7d0c996da51717926efa8bcbb052dbfa39cfde4bd0179f1b01fb86ac1",
+        "urn:company-wiki:narrative-unit:sha256:7e2fa8a2d699e74d8f84d9387f165fdef25e4fae43a814bb8ed3b9a7885d6f52",
+        "urn:company-wiki:narrative-unit:sha256:8df09fa473c50f5f1902984b1bdb94e0760b6210d867b6bfa285a66f4f192ef8",
+        "urn:company-wiki:narrative-unit:sha256:1f1c2586a9ee33c61dd332ccde368082cbdac29fa89a6d1edd892cd9be9fede2",
+        "urn:company-wiki:narrative-unit:sha256:12f76a1611dd72e1fa227686f2c61dea15606a3bcac7c5693ceb29c7bb8f44bc",
+        "urn:company-wiki:narrative-unit:sha256:edc814fc72a985e95b36f8331f2e1cd244e98312ae01a11c46b90aba1b1b3021",
+        "urn:company-wiki:narrative-unit:sha256:f0622f88b4a53c0ef553ffd3b418c53587aa5ae38b9906fe1fb7c7ed0487e9c9",
+        "urn:company-wiki:narrative-unit:sha256:4f58aa8ce6dd99e4ae6b2f60296bc571be2c915597b4d70c045921b9230453b5"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "medium",
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "native_numbered_list"
+      ]
+    },
+    {
+      "section_id": "s55",
+      "parent_id": "s52",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4d7b45685c47478c11d05455eb8f4742a20fa5e61fb4ef4f03383c56eef82970",
+        "urn:company-wiki:narrative-unit:sha256:efe6e01aa622f86b5b07fd987175646552247faaa58f8071a4d69bb07bbd5194",
+        "urn:company-wiki:narrative-unit:sha256:fab527b2a106856de24cca3529dd4ccd6b35f79308e8346be56239b79647b580",
+        "urn:company-wiki:narrative-unit:sha256:f9cbc4f987add5457215500b5f720deca1967ab33079ba2673d0c79ad127f269",
+        "urn:company-wiki:narrative-unit:sha256:9a9ba8e1b4a66b18cabc9340e4ba3a67f8fb100143bf37d6a122d62c9bfed119"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "medium",
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "native_numbered_list"
+      ]
+    },
+    {
+      "section_id": "s56",
+      "parent_id": "s52",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:d454da0634b309fda786477e4c268bc36a4671290e29655317499a419416f1ea",
+        "urn:company-wiki:narrative-unit:sha256:f90922c7ebcca06dc173180664ad9a44f6f0a0bf4b411ac59d25917e4584c747"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4b61a8df99a23c75f3a7358c60c206c0595ed49e9e1f7ce4f71b87a7f9b19877",
+        "urn:company-wiki:narrative-unit:sha256:31ae7f36bb787d9bd7f4b7c696de669f8ff488ddbd6da6b997acd7c8dcc5e49c",
+        "urn:company-wiki:narrative-unit:sha256:56f7fc0136ea7469e97ee4fdeeb0df9a021c4370b915474cb5ebd62f74310d65",
+        "urn:company-wiki:narrative-unit:sha256:2bf824ce9458f4be9acecdd8776493def74f5714be724da2e7a19d09aa7e7de0",
+        "urn:company-wiki:narrative-unit:sha256:bb0405af01818cd799d7cf0ed3705a4eb7da2488e41b6f1b8203bde5ba4bcf19"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "medium",
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "single_row_display_heading",
+        "native_numbered_list"
+      ]
+    },
+    {
+      "section_id": "s57",
+      "parent_id": "s52",
+      "heading_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:0e9c7d9fb435e11cf34d85b67241a720ae65bd14730f3bc04f72bd0afef41a80",
+        "urn:company-wiki:narrative-unit:sha256:813f0d10aa1e3d9462a04e5e7b0d19f0aa54b497e05b6b6ba8afd55d24579056"
+      ],
+      "body_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:5301f72f83990c4394c8881e5264cc5c8e4fbf75db8cdb5d2c81f2709a75faec",
+        "urn:company-wiki:narrative-unit:sha256:8785094a3f14a900d29b87f2b5075953954b4058f6ef6df253fbba48c4536ee5",
+        "urn:company-wiki:narrative-unit:sha256:aa0f2accbda45cf4119bb6a62c27c246d27b2dabdefca70976b0add609e13892",
+        "urn:company-wiki:narrative-unit:sha256:dae2c2395c339889f13c2f1420ef40e80209ccf92d5110e61cf12584752019da",
+        "urn:company-wiki:narrative-unit:sha256:6294d3763012951922b767b622dd60729b7b21dace7b5935cb18d840b4b747ef",
+        "urn:company-wiki:narrative-unit:sha256:a93fea801431ea61e3eb4b49bcc76d3fb98170998376275c21a087af4c300f27"
+      ],
+      "section_role": "operating_metrics",
+      "language": "zh",
+      "confidence": "medium",
+      "basis": [
+        "reading_order",
+        "heading_numbering",
+        "single_row_display_heading",
+        "native_numbered_list"
+      ]
+    }
+  ],
+  "schema_version": "st-a05-real-structure-observation/1",
+  "source_ref": {
+    "byte_size": 1608226,
+    "content_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "document_id": "urn:company-wiki:document:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2"
+  },
+  "selection_sha256": "7603eec8da8db637b0bd2d810b59d9c78dbb7343fbd37a0d72a74b9de799b3b5",
+  "source_sha256": {
+    "src\\company_wiki\\canonical_ingest.py": "e2fa4ec013e26e8e6a68663107e2f090acd68bf897b17c4d1b1b1fc7aa7cab52",
+    "src\\company_wiki\\config.py": "655d67bfe1512dbc0003077f2d4d44d5ca767193d64de4c3b0bbb77aecceef49",
+    "src\\company_wiki\\deployment.py": "fe20585e798188bab9df7b6ffd6c613f84dc978a8cfcc52bfcdb711e01d7ec56",
+    "src\\company_wiki\\domain.py": "001549c830705e76dc42bf4641ec205115bb0800b89c195112c11d1b46f236c3",
+    "src\\company_wiki\\graph_adapter.py": "3d6d281923725c02ccb79aa97d09d5004bb9410d62b92f3f7c9bc163da35b3dd",
+    "src\\company_wiki\\ingest.py": "7e08f7f205a39ba522f717d9518c1eb7e43ad3d10dd749aa299f36b71c8462a0",
+    "src\\company_wiki\\legacy_research_ingest.py": "e979c4e100189d9e50c0b169143124735b72c4fac7576e29d3b2369421dbfdbe",
+    "src\\company_wiki\\migration.py": "05d14b5955ed0e709787b01545d1be454eb213dd2df1c3f38e1d6f82d49263ba",
+    "src\\company_wiki\\model_config.py": "848c93379da45097c2636195cc0030b662485dde67541dcd0b3b8d23b1f671f9",
+    "src\\company_wiki\\narrative_subject.py": "d87194b4f7a0b4d9eaccca7135133308fbd051dc7ef8c1a98d63d3b5473f60c0",
+    "src\\company_wiki\\proposal.py": "f24bed92e250d6738f2fdbd14d997d4906ebf0d8709f27973b3f8b86f4fe0a82",
+    "src\\company_wiki\\quality.py": "0979ce6eb275eaee503d7121d5fcd276e6cc7a4375dae3545b8545efcfad9e48",
+    "src\\company_wiki\\question_model.py": "04a9a81731082dac61c645eff5e5adb51e8e44409920a5856c488d712c02c573",
+    "src\\company_wiki\\question_registry.py": "85dcce2813ff79ae2c7ab7dc81d01e0aef3df9e514c3c7dd9ce841f7e5d4e499",
+    "src\\company_wiki\\resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+    "src\\company_wiki\\routing.py": "171fbc90b4ba1b23df2c5502e7ce841a71e137917d26d32a211f56912dead5f9",
+    "src\\company_wiki\\run_store.py": "55db6db0b88edb2655fe041f326cca9dc60a15dbbf6dad9242fc75297c4a68fd",
+    "src\\company_wiki\\scheduler.py": "8b190ae1c6e4a2be6400844e3509e2c6e7ed05db931a93bef303d3a9f7469ec7",
+    "src\\company_wiki\\source_registry.py": "92e06fa9cbc56c827f80e34654dbb356980b446f378db2abdbcb703ccb70c32f",
+    "src\\company_wiki\\wiki_repository.py": "9c1e0478b44c4c89da46bbecb064c0e02e47b50b1f27ddc15a130e5da58c585d",
+    "src\\company_wiki\\_atomic_file.py": "0fdba54d92df8a07c14bbd268b972610b3f685fc38ac41e860142624337e83fc",
+    "src\\company_wiki\\_bounded_process.py": "4bdc93b67362ce86ee22ab135211c15e788a58def4e11bf9eb18a9bd47f4c5ad",
+    "src\\company_wiki\\_file_mutex.py": "ab98d37fd0c8214e4a6f1605eda64364280bd326076ca48d3a28096f80bfcbf5",
+    "src\\company_wiki\\_id_scope.py": "1b70f9cd678cb2d2ee01dc430dc6b140ec5ae6bfe6041f898a906a2559baabe5",
+    "src\\company_wiki\\_process_tree.py": "d883732a4dab3f2a62ef272d5931228ee64d47ba63ffb1fea502cc1b5d8db144",
+    "src\\company_wiki\\__init__.py": "39921253e7b65e89c49eca2f8904b24c39b2425af79fb8f1ab8edc61e4c69ad2",
+    "src\\company_wiki\\automation\\cli.py": "bc8fba688f81d32745664860dd8ea6e7f72a45b56fdce8451a47e63f2a63ca91",
+    "src\\company_wiki\\automation\\controller.py": "a97684678d48df90c82602a8c1f90f9f5a12839910c8162cfee3ebdacd4a574f",
+    "src\\company_wiki\\automation\\dag_persistence.py": "3979087e1c0581b5325d425c1a5323239e102320b5e30725ca2c4ffc61de1d9b",
+    "src\\company_wiki\\automation\\event_sources.py": "ec5d9464a355eb94ea894d1fce046ce3f6f3ce78c8f0660a7b429a7156b09617",
+    "src\\company_wiki\\automation\\execution_context.py": "fd28cb1070d7c734544723f35eb954222f3eda7142b7efc890f7085002b5fc63",
+    "src\\company_wiki\\automation\\execution_snapshot.py": "1c2fb91e6959afefa8f9709acceaadbe37b537f865f7e7169972eb5c1fafaeac",
+    "src\\company_wiki\\automation\\heartbeat.py": "3f9232d90cff1a66cd718ccdb20de935742dfb3ac18dfcda5db9d98c1d2d9fca",
+    "src\\company_wiki\\automation\\migrations.py": "5f6c74024a9dd836e3c01b608468fb54e673afd1567641af9d16bc392fb34bb9",
+    "src\\company_wiki\\automation\\models.py": "1b572cecca521c02ff39c896ba879a4445a961220263523b2cafd07bcbf42588",
+    "src\\company_wiki\\automation\\narrative_batch.py": "e30c382487139681dfeb8250067f94f03919891332cbee39013580df6fc63ac6",
+    "src\\company_wiki\\automation\\narrative_batch_cli.py": "268c047d8c5d6b72716ecf6e77a74165c38afc268cd72b8b94590b3ea85b3d0d",
+    "src\\company_wiki\\automation\\narrative_batch_request.py": "1d6ddeb3e112bc49f8b4bf63e7d727e9b1b666461398e54f7f0ff84ae9e804ee",
+    "src\\company_wiki\\automation\\narrative_contracts.py": "918d9fe2b92c24c00d8e532889c6107c69200cf4cbe22a3ba073449bd437b497",
+    "src\\company_wiki\\automation\\narrative_evidence_view.py": "840c6e22fc75297b0c28a8b82301add67d1796c0402d3511e45ee5f08162153d",
+    "src\\company_wiki\\automation\\narrative_failed_final.py": "d8075d58fa7268090fa7df02e2d1d04ba670670f2492bac73be9bcd843bbff62",
+    "src\\company_wiki\\automation\\narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src\\company_wiki\\automation\\narrative_generation.py": "e4d581eb7a96a40b47049f6a73d458e55f79742dc214ed57fe3880f0faa9cba8",
+    "src\\company_wiki\\automation\\narrative_http_model.py": "4087f9345ccf84a0c660c0c5143f5c3e6d7ee03a0ea83e9a8e93366c406c9ed0",
+    "src\\company_wiki\\automation\\narrative_model.py": "971df3140d77774cb64d735bc4579e72404f1dc6f0c25c49bd3001fc311fb374",
+    "src\\company_wiki\\automation\\narrative_model_caller.py": "4eacaee1476a073eba2f948b461278ff3c473ca6572418e488344d310b165b4f",
+    "src\\company_wiki\\automation\\narrative_model_citations.py": "f6bdb80c4e789504311f044ccc69a6c3266d508b31d17b1c88ce23eb93d69d7e",
+    "src\\company_wiki\\automation\\narrative_model_extractive.py": "f93b4925b72162d352d5a17d62782207b8409c2683372a319a0dea31be270af3",
+    "src\\company_wiki\\automation\\narrative_model_runtime.py": "ef92950ab398408b7bcbc4381a5c9249a6d858b8a9422e099a34457f60bd1a7b",
+    "src\\company_wiki\\automation\\narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+    "src\\company_wiki\\automation\\narrative_official_json.py": "7ada26406ad53a7c11699c4d0f57edb8f083d27b247ff855321fd1ba267bc826",
+    "src\\company_wiki\\automation\\narrative_output_language.py": "91cc43343b2c191048136875973d0ad44e3b5b17c854991e237bab9489b671e4",
+    "src\\company_wiki\\automation\\narrative_paid_response.py": "8fc0bf0fe6885d04a40013738ddefbab267f4608476ebfa76db75c7d7d85205b",
+    "src\\company_wiki\\automation\\narrative_projection.py": "0164080a2e6db980f3e5eccaebde3b380d94ea488d152fb65d479ba0b6bbfc45",
+    "src\\company_wiki\\automation\\narrative_replay.py": "efb30e4790618b754f2d4ef3db2f68437d5abd7372f1ce2326452983d9db679a",
+    "src\\company_wiki\\automation\\narrative_runtime.py": "56a59d334c6dcbcf017d0dbdbe926bbb97da1f47f7a8e98d443c8054a65ba5f3",
+    "src\\company_wiki\\automation\\narrative_run_store.py": "88e5452057d043d9b31594cd1cc6d2b243e704ae58160ef09b8b9b1fb993b75a",
+    "src\\company_wiki\\automation\\narrative_select.py": "7ec07955405d9303fd70523947dfa88a63767a4885bcfe8a8035da1ab59c3294",
+    "src\\company_wiki\\automation\\narrative_selection_generation.py": "5b67dc9d9b0a44de020e2a4e79c97dd21315a97854610b4f9df2b9286c46466e",
+    "src\\company_wiki\\automation\\narrative_selector_binding.py": "b32834cec079a873e0c6f7cfd0562a15bccc2a1d02a6df892ffdea283cf0411c",
+    "src\\company_wiki\\automation\\narrative_source_guard.py": "4d199c3732231c229694ab6801a9c109514efe7f8811d04bc386e407abc4c256",
+    "src\\company_wiki\\automation\\narrative_summarize.py": "7507ff0107291eddff0bf1b387ccc3e71307a9c7e5af41192d0e59133109f6b5",
+    "src\\company_wiki\\automation\\narrative_summary_execution.py": "7b4ab588b7fbaa14168bc6465b05ef369afdcfcfb14fc6eab751f4072c82002e",
+    "src\\company_wiki\\automation\\narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "src\\company_wiki\\automation\\narrative_transport_contracts.py": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+    "src\\company_wiki\\automation\\narrative_verify.py": "da491f44da72a74434aece9e0649627e4b53045a5b5c70d222a5c855c187e92c",
+    "src\\company_wiki\\automation\\narrative_worker_factory.py": "1acc2e35ef093227f5a5c8037c0c4e89660a67c03fc8da008befdfcf6a291d01",
+    "src\\company_wiki\\automation\\outbox.py": "f8ec1dce9f4ef6c4485b478c79aaefe5835e9bd52fd751f4f7f3251cf1e704b1",
+    "src\\company_wiki\\automation\\planner.py": "dbbaefe6e4f09972abdc8126cf8f6c143a99ad7fe70d53642e120530f6757104",
+    "src\\company_wiki\\automation\\policy.py": "67584de1bf2eee8f21c565c4422df634f2414c5fb3f2e251e989a89bd69df41c",
+    "src\\company_wiki\\automation\\registry.py": "b744c250a5be5e272bad43ac8c627ea84f7fd9bf02668841de1626af1eaf6286",
+    "src\\company_wiki\\automation\\retry.py": "6a09f8d037f368533672bb00e41844fa35c309077d163edde18bbfc29b223a63",
+    "src\\company_wiki\\automation\\runtime_control.py": "978ce7e43252ef9d5650c72e157709a090e58c604f126ea54529ba70662e2cd0",
+    "src\\company_wiki\\automation\\scheduler.py": "9b7f77a6599222d5803cd829f5b9fb79cbbdcf696508287363926b8a082a026d",
+    "src\\company_wiki\\automation\\store.py": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624",
+    "src\\company_wiki\\automation\\supervisor.py": "a856d31b20db03a576fb7dd664eae48cdf6c5e22d6d773fe78a28c9c111c3aa8",
+    "src\\company_wiki\\automation\\terminal_receipts.py": "8b03189848d6618a617c48f1f1b1a65b57280642a7311c05b0db516dc5e3080e",
+    "src\\company_wiki\\automation\\terminal_receipt_contracts.py": "4113dda30f530f6fdf217c0280a1cddc5efdd8f1507964359e5b1154b85671df",
+    "src\\company_wiki\\automation\\worker.py": "02d995f259b7c35b353317f3dd450b1627c04c367350877aee0bd4b754b33b02",
+    "src\\company_wiki\\automation\\worker_process.py": "e01239498fb02ef86be517a85f57993f3aeed1e5abdf6944ac2c6958052afdf9",
+    "src\\company_wiki\\automation\\_clock.py": "2a256f7f82eb13d4e569b6033a320b27bc2a9d45b0f7f2a4cf6685d0764ecb71",
+    "src\\company_wiki\\automation\\__init__.py": "d3aa609e3668e3334cb18a86a5b7564fe2ac8c39ea645a335b73bcb106394199",
+    "src\\company_wiki\\document_normalization\\assets.py": "5014efbe1786d8faf3ea9a2efa400008031ecade5c0dad4e3e2e52c49a83705a",
+    "src\\company_wiki\\document_normalization\\document.py": "e53a49dc941ef0cca17cdde1a249abbb91390bf9cef9380c28433c651d459b15",
+    "src\\company_wiki\\document_normalization\\docx_parser.py": "5eaf43d938334ab106db66aef5a0cc4ef7acd7e57c6d96f61b77d09179ff303d",
+    "src\\company_wiki\\document_normalization\\errors.py": "f379eb226a7b84a1e3f2223ee497216372f9759355aa483654fedbae5ad91d37",
+    "src\\company_wiki\\document_normalization\\form_fields.py": "f2765734ccd6ebfbc596583598c457b5a7343f2617c69e968eb6162fb9d49144",
+    "src\\company_wiki\\document_normalization\\html_parser.py": "e0dce2f1b8b933ecdf14de3983a2a505ae47ef6c5ea827e40f247c91257350d8",
+    "src\\company_wiki\\document_normalization\\isolated_ocr.py": "dab20aea4e97ea955cfe931b77905f7d3035bdba86be2765621b635ff8bdf6e2",
+    "src\\company_wiki\\document_normalization\\limits.py": "f9c16b1e9dabdf7d7626fc95e54ab6d56aae7e06ef1bdb4f48a4f0951df70241",
+    "src\\company_wiki\\document_normalization\\local_ocr.py": "2f66b6fa486f6af41f529c69786ed9381455ed755c54c48383d3025f5bb0d561",
+    "src\\company_wiki\\document_normalization\\ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src\\company_wiki\\document_normalization\\ocr_page_text.py": "29d0690a9459b5165534519343c95d45fe4f1e2ce724f6dfa6960128c85ab389",
+    "src\\company_wiki\\document_normalization\\ocr_region_recovery.py": "45d2305c035cd8fce8d37aa7b9170b240cf96241b1fcb1bd6ef23edf6a7774dc",
+    "src\\company_wiki\\document_normalization\\office_table_structure.py": "f5fe14a4563462df803dc5474ba38adacd905af15091d47190ee943600136c94",
+    "src\\company_wiki\\document_normalization\\pptx_parser.py": "45af59e6f0e92fc2ef76d6a554445f296b085b980c4fdca2912a4395882ee8ec",
+    "src\\company_wiki\\document_normalization\\replay.py": "7bf63177865218ba34d414cffdb4d66572e310e0cf3d682c86ae5bf32fc8cad4",
+    "src\\company_wiki\\document_normalization\\table_shapes.py": "de7730c837273a19254a7e1ba5eafd72fd9c9655ecc2eab2c169858566a58e08",
+    "src\\company_wiki\\document_normalization\\text.py": "f145c9148cef1868161a474463b62f6a7532d3db6c171baa112e5847baba3158",
+    "src\\company_wiki\\document_normalization\\text_matching.py": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+    "src\\company_wiki\\document_normalization\\units.py": "a65813c07427c50c4a8d618e58bbf16d400519e7f8c4d190946815f94b9162c5",
+    "src\\company_wiki\\document_normalization\\__init__.py": "4b4d2112e01a3779d2eaa1e7df9ffa077e05c49b451efb95c92a1c807b80bb06",
+    "src\\company_wiki\\document_understanding\\decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e",
+    "src\\company_wiki\\document_understanding\\indented_tail_geometry.py": "dc970d64b228be3d18d25f8c64238b86a27d10ae7f35efc4546416f6bb27ecfd",
+    "src\\company_wiki\\document_understanding\\layout_bridge.py": "eac92e389c6901fafce28d3927cb034c3ae06318a2cfcafd0fd69f8e538c4974",
+    "src\\company_wiki\\document_understanding\\narrative_continuity.py": "6b7452c1b4f26326c858df75d079d82be3fb3a1a1126c63111d8c0c377d1c387",
+    "src\\company_wiki\\document_understanding\\native_signal_bridge.py": "4a9cebce8aed14129dee1e70a50c98b2e5dac01285c1a42386a920d69d0ba2c2",
+    "src\\company_wiki\\document_understanding\\native_table_bridge.py": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+    "src\\company_wiki\\document_understanding\\observation_adapter.py": "bd46c2e4ecd8ebe5b65fb00d9cf6c39cfa9ec02f1baecaf4ff98b74c5ee202af",
+    "src\\company_wiki\\document_understanding\\orchestration.py": "64a929fa743a23078f621fe1f706bc036c414597e601def1368f3454b5165987",
+    "src\\company_wiki\\document_understanding\\pipeline.py": "a61068bcfba03c36985b556cc2542f9f0e17291500070cbbef66aeb02abdb0cc",
+    "src\\company_wiki\\document_understanding\\selection_bridge.py": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8",
+    "src\\company_wiki\\document_understanding\\source_cards.py": "17a831002d74e69b906dea029b5f19f51ffd9d61cea98a63a8c8cc6ee5725eb5",
+    "src\\company_wiki\\document_understanding\\strategy_binding.py": "63678a70251781e530875e670b80d1bed3055dc31fc7a6e11faff39917ea92b2",
+    "src\\company_wiki\\document_understanding\\summary_input.py": "6570fd29be6467500d20e387a3d15b8b77b3044242c3fc31b7fcd9002f35a56a",
+    "src\\company_wiki\\document_understanding\\summary_tasks.py": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2",
+    "src\\company_wiki\\document_understanding\\__init__.py": "68e79aab7d1e1749d5d5d912a8c7262d2fbe8e7cc8dd5a300098368ea72eb22f",
+    "src\\company_wiki\\parser_adapters\\pdf_extract_v3.py": "31f2a8614fbcb7e8b2412f377fba7a11b1f138d5bbac26f9acd86eb16c335495",
+    "src\\company_wiki\\parser_adapters\\pdf_ocr_page_adapter.py": "02712372c3da28450d12c11bb4e351fcca5ed29630ad98f9266a1c900f5bedab",
+    "src\\company_wiki\\parser_adapters\\pdf_page_aware.py": "d4391ab5f236aee4b7080be924313e0d78e8ee9a3879b09e2e6319801dcd3089",
+    "src\\company_wiki\\parser_adapters\\__init__.py": "62d4cce47810674a49014b6fcf14c8a0756dea0896a454c0c2700f7ea0d3cf8e",
+    "src\\company_wiki\\source_catalog\\acquisition.py": "d4ff52aec2d007610936a5bdb10a545e3d55c8c5fba216d946acab9aeef6192b",
+    "src\\company_wiki\\source_catalog\\acquisition_config.py": "39ff26a07f12d439808ebb0c5036c59afe338c35196b2b2774f3c1f8b1e0e4f3",
+    "src\\company_wiki\\source_catalog\\acquisition_failure.py": "b509eeb73464b13d1771e50888d2ff4e2e90dab4ca126c7483f25f64f1ae49fe",
+    "src\\company_wiki\\source_catalog\\acquisition_journal.py": "1f575ed12917dd868c1a7d7a4a5cef9090bf83b54a8a6e1e0b404a38635b4d55",
+    "src\\company_wiki\\source_catalog\\acquisition_observation.py": "3076bf0586a2004b5d46ff31200781d79729ef840852b616f0cc5c120a2020b1",
+    "src\\company_wiki\\source_catalog\\acquisition_service.py": "4fcf81804b80d379391d34024714a1684565b7caca582d77b0c36c600372d3b3",
+    "src\\company_wiki\\source_catalog\\acquisition_validation.py": "9cb48d4b36aab91277328d868e21b0c26e4082a2eb0febafd38f0c7e8767b00c",
+    "src\\company_wiki\\source_catalog\\activation.py": "3a4c8f8318ff7eab2a0e9ed697e0a54074b91bbeb892e61bf8a0bc0bed897ec7",
+    "src\\company_wiki\\source_catalog\\adapter_dispatch.py": "ab1d8a90d16f69dd16d6766af34c14ae9c8d32831594f769ee66115ffaa57d71",
+    "src\\company_wiki\\source_catalog\\adapter_process.py": "1fef76f7e2c44257481c0cd222c15e2b34e156343aef231597a94ed19ce9ed44",
+    "src\\company_wiki\\source_catalog\\admission.py": "d177821c1216d92d9f4a9a277b5ed682e7b05c7f38a863e4d3631b2f8e74f22c",
+    "src\\company_wiki\\source_catalog\\architecture_gate.py": "7fe30a9f611851d19d8942e8f431fac426220d553dd6b7af4f160c096fe63818",
+    "src\\company_wiki\\source_catalog\\archive_retired_evidence.py": "52e8488dd7597232adc4b1c7a685749d2a5b54e26c178463aa0942e2b4b600e0",
+    "src\\company_wiki\\source_catalog\\artifact_backfill.py": "6766b1f4d0a42f700193cbc0706f8289e6f444a912ae2fbce7805062b2cd6947",
+    "src\\company_wiki\\source_catalog\\artifact_dag.py": "0c8b1d6d1a28c94f27ea8ffe52a98d67b84f0a49653931b9c9317e27da6c20d1",
+    "src\\company_wiki\\source_catalog\\artifact_handle.py": "3cc8fbf4f65380d17e2f0140390ef346f7cc17504854ff04b3ddf46498317b99",
+    "src\\company_wiki\\source_catalog\\artifact_read_model.py": "ee2792312947bc694084b059384d7a30376a29293a57e3f69534a4d37bc55711",
+    "src\\company_wiki\\source_catalog\\assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+    "src\\company_wiki\\source_catalog\\attribution.py": "1925b3ef1595640a9459e66dff638c24ad2fdb9c33c2afd6ae7c57ef2fe9d12c",
+    "src\\company_wiki\\source_catalog\\authorization.py": "73e76c35edec6313374f9352fc517719407b7865ce28671f34381aa38ace9c98",
+    "src\\company_wiki\\source_catalog\\backfill_v2.py": "edfad4e79d7b4044066ba589ccc9ad2fcf837eb4030d3c3c8d07066fcb939f62",
+    "src\\company_wiki\\source_catalog\\bounded_content_encoding.py": "1b093ca0dabcc3ee628f30f506cd337107eff31f657aa8998dfef8733072ebc4",
+    "src\\company_wiki\\source_catalog\\bounded_http.py": "a63b63faffbd11ae669c31bd3772130af36258f66151a004c6b73526259597d5",
+    "src\\company_wiki\\source_catalog\\canary_registry.py": "5e7ea3f4ae667bde349bb48f27574dc7a8b2f68ffd47d4f355ebc938dcacd9f9",
+    "src\\company_wiki\\source_catalog\\canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+    "src\\company_wiki\\source_catalog\\canonical_writer.py": "cee23be7c5e549e2d55cc47fc2157466544ba041c66ed3c2b19effdb6bc528fc",
+    "src\\company_wiki\\source_catalog\\catalog_size_report.py": "07b3fd04021d147301f67311ebd4d0c85848550189bd62c4b6b7c3f906a9a4c4",
+    "src\\company_wiki\\source_catalog\\cli.py": "1eeec29a081121bb496d93b24c028d0f524dc8d372ad409732768dbb53c25ef6",
+    "src\\company_wiki\\source_catalog\\close_gap.py": "66aa14a11d9c4bc371995032972459be728aedc9c830a80df4395c32bc004d6b",
+    "src\\company_wiki\\source_catalog\\code_identity.py": "322f6ac4ef1e82554e405d4d66609920770e992a56c596e119e1622c32d6bbfd",
+    "src\\company_wiki\\source_catalog\\config.py": "47a029ded115f6fc7364a98db2f83a772e7f6f293ca53dd4030f456d6c470d04",
+    "src\\company_wiki\\source_catalog\\control.py": "4d71129d779dec639e423ba8518f0288871bf3adbfb961b629557e26b6aa770d",
+    "src\\company_wiki\\source_catalog\\dayu_cli_adapter.py": "496d12ccbc55662c1e23e878ec5e14df0281aeff83ad29163f6da8c3e753b807",
+    "src\\company_wiki\\source_catalog\\dayu_fiscal_metadata.py": "04249d337bbf506fae6ee89df57158f8d27ab46a73906ab4b9d6fadfb43ba27e",
+    "src\\company_wiki\\source_catalog\\dayu_sdk_bridge.py": "429e26d8e2e9a8fa3e8dc57b9d97a4fd213976f4d497ebfa3d1ed91c0371ff70",
+    "src\\company_wiki\\source_catalog\\dayu_sdk_cli.py": "abd44602a0e40bd9384da6db01dc6e828f28cecd73a78b1971def1b776049ad6",
+    "src\\company_wiki\\source_catalog\\document_kinds.py": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+    "src\\company_wiki\\source_catalog\\download_budget.py": "7b82ee5a365f0a50045489be3835472166413b9b47572c19be1f5a55062b91aa",
+    "src\\company_wiki\\source_catalog\\dropbox_governance.py": "4d601c1705557d7dcf3978baf2f3a51d4a27ea6313a8c703fd0c3e5e57180c04",
+    "src\\company_wiki\\source_catalog\\duplicate_cleanup.py": "9a942b23b3c78c41deaf13c159ecb1448e3f50d5447ea6000e7cea9126c0e7ef",
+    "src\\company_wiki\\source_catalog\\entity_detection.py": "a65ce1423d7b8f373545ca4d42a66a467cf218b158d1ee0156eddde5e440465e",
+    "src\\company_wiki\\source_catalog\\error_taxonomy.py": "5e0635455e70dfd5bd72938b31f7b26d37bba8b7d0877880c6f7ee51ad543f4d",
+    "src\\company_wiki\\source_catalog\\evidence_query.py": "99450d60b93cd3e6824b39d93cc3c78425aa51e716cf4d254eeb574528f9fe5a",
+    "src\\company_wiki\\source_catalog\\extraction_quality.py": "e8bb592d732a26db02a738f04257d3a355d5608474b77fc696e29daf6f4fee68",
+    "src\\company_wiki\\source_catalog\\flags.py": "78abc6b5dfd8f86566e1903612bc99ab02661108287e3e5e8beca983fc37b06a",
+    "src\\company_wiki\\source_catalog\\focus_cleanup.py": "9b1453452bbc31e5a0b714bfb068bd2e83b84808cf965913ea34bf0628f14504",
+    "src\\company_wiki\\source_catalog\\gap_plan.py": "9d6ad1db49850fef94bce79a108608d29a238a7357c07e213c4e600c3346a6d8",
+    "src\\company_wiki\\source_catalog\\homepage_identity.py": "685cef38772c69c71226eb5cc40f168826d3486d23cd4a7e21b5990896426739",
+    "src\\company_wiki\\source_catalog\\html_capture.py": "0a3455bbf497824b388e986e1e0a2e48426cf48eee58b1d04803cd26646d688c",
+    "src\\company_wiki\\source_catalog\\identity_cli.py": "989cf4181f7c8b2084663058fcd84a526c5d03a577cc668983a49dd87d1572a2",
+    "src\\company_wiki\\source_catalog\\legacy_close_gate.py": "6b8668ae417fc1e2bf4f80bf575ccb37166173c63263161c20c9b075a69ec0aa",
+    "src\\company_wiki\\source_catalog\\llm_failure_policy.py": "6b71af022d871c96b8c40e2c1960a993ad820165c50d8ecc632c1960798441e9",
+    "src\\company_wiki\\source_catalog\\local_inventory.py": "59c8a70d2acc46cdbe77d1dd87e0fca30f9ce9108c683bbc2b6a7b0901d6276b",
+    "src\\company_wiki\\source_catalog\\local_prepare_cli.py": "2a65e18133c2f3c57dd0129dbdf648f9ae9f1576e74d9a82b81a4feecc4665cc",
+    "src\\company_wiki\\source_catalog\\local_reconcile.py": "2c0cecfb23e2a61645576ed89ce9309d61e90f643b432810e8720019e64e0963",
+    "src\\company_wiki\\source_catalog\\lock.py": "5f0d33d657949a2ba53affbe41a2c873e1ccb2008de3d72507e062c7c1f354f6",
+    "src\\company_wiki\\source_catalog\\maintenance_retirement.py": "a4119734be4c51dff0a208b6d86b2374b81e6c3a25225b900e3ddcb08b16a60b",
+    "src\\company_wiki\\source_catalog\\metadata_observation.py": "371d357533e975084e8c468762a3b6d76de6b6d0284483122c292fbbbbc8cac3",
+    "src\\company_wiki\\source_catalog\\migration.py": "fcff4fc82fb13e301beaac4f4f497220c79c4713df59d48bf935cd23ef0f6298",
+    "src\\company_wiki\\source_catalog\\migration_ledger.py": "e33fb416a4d2076fa17f17d3d57317004e33c7a14825720c6530c9010889d883",
+    "src\\company_wiki\\source_catalog\\models.py": "67dd90d355f3e9b75c6df95e375c932a38171076a46a6a9b382507677906766e",
+    "src\\company_wiki\\source_catalog\\n6_budget_dedup.py": "992ea8dfce2808aac33827e921bfb4997e3605052eee18822c23e5b5ebda85a7",
+    "src\\company_wiki\\source_catalog\\n6_candidate_completion.py": "6e42c29ae05a8bd904598aba9d5944ec2f90ea01585ede8b21839081cf19ee40",
+    "src\\company_wiki\\source_catalog\\n6_candidate_operating_facts.py": "206752f12bfaa463384e308383bcbf49f846b34969aa911d4a39214a8b7d5832",
+    "src\\company_wiki\\source_catalog\\n6_scope_changes.py": "818e711a1931c09cca106b6dd84079db4c1df8feb3c5e117211e98d5352fa396",
+    "src\\company_wiki\\source_catalog\\narrative_antecedent.py": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237",
+    "src\\company_wiki\\source_catalog\\narrative_artifact_store.py": "0ef88398dc53877bde1ce251324232c890514a7e15d9e46d159a4ed64298c7cb",
+    "src\\company_wiki\\source_catalog\\narrative_budget.py": "508688f14b98c862926adb8a6b22435f6f1bb087925b04f81f41892266987586",
+    "src\\company_wiki\\source_catalog\\narrative_business_disclosures.py": "6a40e4771e7622c688a8361274b2edadd328b645db2520c41db6d0d397a31eb7",
+    "src\\company_wiki\\source_catalog\\narrative_business_groups.py": "93d2f5f9f16804bd6dc7059bb28f5e1032fdf8999976ae529232290ff1b0125d",
+    "src\\company_wiki\\source_catalog\\narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+    "src\\company_wiki\\source_catalog\\narrative_business_policy.py": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed",
+    "src\\company_wiki\\source_catalog\\narrative_candidates.py": "65d3fe798b9d8ae86805472d475ce4f0d189af9f2c2d38a06f31da66e05a4904",
+    "src\\company_wiki\\source_catalog\\narrative_context.py": "4f4749cd3df6c6a16d31e9ea5327beb5cee9d0895c6e25ef2df19404fde69e4e",
+    "src\\company_wiki\\source_catalog\\narrative_document.py": "be6de605677b729212319fa1acb99abae96134c38ab0952378108f35988d7dbb",
+    "src\\company_wiki\\source_catalog\\narrative_evidence.py": "002fc2908149d3e5da1def7a789eec6478dbe07ec28f4a5bf29edd1e68f02318",
+    "src\\company_wiki\\source_catalog\\narrative_finalize.py": "b7190eda70265140b3195ddb7a2b068273065303d3de76dc70e158a862c3ac33",
+    "src\\company_wiki\\source_catalog\\narrative_group_candidates.py": "2939de5e85af77c4fe387c1ebcc97328283ff134311aac4d0a47b64dc5488617",
+    "src\\company_wiki\\source_catalog\\narrative_language.py": "e649b2ae01ebf966438d3db91abb7588032ef5ad2ca8af06b8a0d9b6ef66d85f",
+    "src\\company_wiki\\source_catalog\\narrative_matching.py": "1ce34bb2de6a68bbe590b9f571ad0289d9dbbe95654e50f0f96c7a8f70495454",
+    "src\\company_wiki\\source_catalog\\narrative_native_dependencies.py": "e0ee41a8a732a9fa8df358ec4fb9ace436d3ac24b63f352caa5778f75c3e8117",
+    "src\\company_wiki\\source_catalog\\narrative_native_ranges.py": "b42aeb4b09896de059b0130957040e16baaf04415aa0d3e98093fb0662343dda",
+    "src\\company_wiki\\source_catalog\\narrative_neighbors.py": "44fca7fd68a1c1365dbbc6c9700883a979f85bbfe4789236f19048fffcd6d09c",
+    "src\\company_wiki\\source_catalog\\narrative_normalization.py": "97eca82a8472c167b7b1cd065eae154dca2e7019b77649ccc748e8fadfbb627a",
+    "src\\company_wiki\\source_catalog\\narrative_ocr_groups.py": "705dd4a67c020efffaaea74d0076b981ec8ae9fe8a297ff15f3e1f1e0f08ae57",
+    "src\\company_wiki\\source_catalog\\narrative_operating_relations.py": "ee77cd8cf295a5748d762b41e1fd75819b475632d44852ea81abd4c8114d16b4",
+    "src\\company_wiki\\source_catalog\\narrative_parent_composition.py": "35333e8af811736424f13a9d00337fa3f54093c80bc33a9906f29746d59f04e2",
+    "src\\company_wiki\\source_catalog\\narrative_pdf_candidates.py": "3d999423bf61ca6e77ddb83c27c5083b74723deaea9ecc902fd5cf7819d65044",
+    "src\\company_wiki\\source_catalog\\narrative_pdf_groups.py": "f67b9409cd1158219caa23120e04cd6aa1e7bb7cd8e27b2dcecd8f2f42333ff3",
+    "src\\company_wiki\\source_catalog\\narrative_pdf_intent.py": "b5beb57b44879d4f404cbf2538216a6b597fccb876a626d9a625dbcf9daa182d",
+    "src\\company_wiki\\source_catalog\\narrative_pdf_layout.py": "8e366ef82bbed4ca8fbd3c45564f2b9f4031355a029800eb4ab1b2804473e12e",
+    "src\\company_wiki\\source_catalog\\narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+    "src\\company_wiki\\source_catalog\\narrative_predicate_state.py": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+    "src\\company_wiki\\source_catalog\\narrative_project_context.py": "918bc36a7a5de03c9163855eff2a216cb15099a9896d78d60f5af22a5422f65e",
+    "src\\company_wiki\\source_catalog\\narrative_reading.py": "65ef7a2b2d1a0faf40c899cd2501f28b317e761555032b66ebd270bdda3953ce",
+    "src\\company_wiki\\source_catalog\\narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+    "src\\company_wiki\\source_catalog\\narrative_replay.py": "bd28988c1be17f2d545e61b6efefbdc06c63036491a5d008386dab0c9518f644",
+    "src\\company_wiki\\source_catalog\\narrative_reporting_rules.py": "2830f09deb00ad8e98fee636454b523b471898b7d9045cd24433459c1e77e3e1",
+    "src\\company_wiki\\source_catalog\\narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src\\company_wiki\\source_catalog\\narrative_revenue_guidance.py": "f895322ef6b6b5f189b35fdb4bd4b8b4f2482cc78564b141ea6c743826cb7e44",
+    "src\\company_wiki\\source_catalog\\narrative_routing.py": "b61c3d4c4650a66c53fa072207fa98773821b3cad5ded571b36c2a334ce0257f",
+    "src\\company_wiki\\source_catalog\\narrative_semantic_coverage.py": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+    "src\\company_wiki\\source_catalog\\narrative_source_purpose.py": "f31122bf5452b42864edbde61490e4408f41b5fb7a6f990fa431cbdf7dc1771d",
+    "src\\company_wiki\\source_catalog\\narrative_stage_assertions.py": "fbb75ccd07016bcc70993f24bb38a1e2919c4398ba9ec79656f54013c8c3ec24",
+    "src\\company_wiki\\source_catalog\\narrative_transport_cli.py": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+    "src\\company_wiki\\source_catalog\\narrative_visual_units.py": "25c16a3cb89348d4cd472dccc84fee0c943444ef3867ad37bf665a57c86fbc7e",
+    "src\\company_wiki\\source_catalog\\normalized_meta.py": "1bf09a97a53a459fdb223ebaeace20824bd462c9bc847b076792ad4f472576b2",
+    "src\\company_wiki\\source_catalog\\normalizer.py": "08b7fa4eafc37e119ccb59f94a969244e82a854694beab4d5b11bb306f40b40e",
+    "src\\company_wiki\\source_catalog\\observability.py": "6e87b02c932810a32688dad58d488f1d4453d7de94650a40a25262ee93ad8ca8",
+    "src\\company_wiki\\source_catalog\\official_discovery.py": "6869349b5d6f4861e9c78cdc8748aaa7f547d2866cf278fc5f721418a137b123",
+    "src\\company_wiki\\source_catalog\\official_json_import.py": "4c0e9fe062b49ad88044abf5431070885cdc8c1ae497b271cc585e2549b2f22b",
+    "src\\company_wiki\\source_catalog\\official_json_layout.py": "d18850b6724a35348c6e0edbd9154c3774e486cac90c46e55f2a891ebd474f59",
+    "src\\company_wiki\\source_catalog\\official_json_projection.py": "6f6e462b039a54387768293510af121759f1584ae9237b82dd0b929da7915892",
+    "src\\company_wiki\\source_catalog\\official_json_structure.py": "cd44f56e0baa05e60866f7a70d5d0eb58a15582fcffd17e7348d3b2fc1717a68",
+    "src\\company_wiki\\source_catalog\\official_json_subject.py": "287c5d25687c9f420c80de7bea9193566479d66f81b95767e822424a390655ae",
+    "src\\company_wiki\\source_catalog\\official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+    "src\\company_wiki\\source_catalog\\official_source_flow.py": "3c4640201f9a1f70b4ce41a51d752f3f8fb5d048eb28f1296658298d2cf714c9",
+    "src\\company_wiki\\source_catalog\\operation_actor.py": "036c692fd806a76b2155e597cd611794f340677a6d1acc91496a1cc5f042da96",
+    "src\\company_wiki\\source_catalog\\operation_contract.py": "4b5f0ca35073d1eb51dc59e808641679c30c372cede736833a85803364928398",
+    "src\\company_wiki\\source_catalog\\operation_projection.py": "f046ae241db4f3b0680f055ea0c3f783d431bd8c40918dcab1f9aef7bf8911a0",
+    "src\\company_wiki\\source_catalog\\policy.py": "78320c429e4b7bc92e257c87bbee3dd97b1a384111cb1bd059828713b54763df",
+    "src\\company_wiki\\source_catalog\\policy_2x.py": "50795556585892adef734e50a00c82f72168ee445f444599cb30a07039f424c3",
+    "src\\company_wiki\\source_catalog\\policy_3x.py": "3e3023506e08121aa0a1cec728b9de760e05756f09fb34cc02fdb36f798b06d8",
+    "src\\company_wiki\\source_catalog\\portfolio_promoter.py": "9b7c0ef82826da674f36a1609b8eafef4384fd1978fa75a560ce7f7be40e85d1",
+    "src\\company_wiki\\source_catalog\\processing_demand.py": "90f232edb7804f78a16c6b4e865255cd607a1d0dc30384fc1cd6faa1833ac88b",
+    "src\\company_wiki\\source_catalog\\producer_events.py": "8e0f18fbd17c1a2bb0e50947831889fdaef2f7ae318ad3c93a5333cfe6aac874",
+    "src\\company_wiki\\source_catalog\\producer_journal.py": "d32767d9b44cbff26054b606c1ae13c0d65510ba18ae4505df295c8b2965202e",
+    "src\\company_wiki\\source_catalog\\prompt_injection.py": "2ba4ca6398c5e7400535d2385c4ad55ef04ee8001d1995bcc8c430cbdda14bdc",
+    "src\\company_wiki\\source_catalog\\prompt_injection_guard.py": "9790a0c28122b0f8e71514fb3b1aaa6ee231eca6cf98e12101c22beda7ad67b5",
+    "src\\company_wiki\\source_catalog\\prune_retired_evidence.py": "54e92897a1952b9bda2af39eaaa7df744c950fe9d7b8921489617560b5a47f61",
+    "src\\company_wiki\\source_catalog\\qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+    "src\\company_wiki\\source_catalog\\reader.py": "10995cbaa2854844a359a12f4b6544186bfec49647923566ebfc057bb9a1b8d6",
+    "src\\company_wiki\\source_catalog\\read_chain.py": "ed4d53c6bedf2c28cdfeb08fdc0d8bd2cd442dfca1e4618c1b59e6bffc5df3c2",
+    "src\\company_wiki\\source_catalog\\reconcile_retire_state.py": "26a5c1aa9b6388d896a0671e48a223a666465c166ad33f066e54e9215c215789",
+    "src\\company_wiki\\source_catalog\\reconciliation.py": "1de2764d6f1397b315dfa85b005805513c3b9377bca6249ef05fe29ea02a4795",
+    "src\\company_wiki\\source_catalog\\registration_scope.py": "85f6c0b324c13181e7bfa8d1e9f0efa406b6149817d35e0a6cbc79c20f81146f",
+    "src\\company_wiki\\source_catalog\\remediation.py": "fe5d334726e61e87be64bb777fee1624bc8449655384e2c61ad952ecbb6fce09",
+    "src\\company_wiki\\source_catalog\\resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+    "src\\company_wiki\\source_catalog\\restore.py": "1c1bbbc35f810bd83c58fbf484602d0d94697d15cc21294013bfb1f550ea37df",
+    "src\\company_wiki\\source_catalog\\runtime_policy.py": "71971edfe180469ae431f129afec3789cd481404c5624a6f72b23da1d49ab7b7",
+    "src\\company_wiki\\source_catalog\\scanner.py": "897f641afd5ada10d570310fb72debf0fe5df05d7b0781297e2f5d30ebf65601",
+    "src\\company_wiki\\source_catalog\\scheduler.py": "a4bf0fa032d6011c8fdf47cc51df2e851e1bb8db5f91d0f549b63eed3c8183e3",
+    "src\\company_wiki\\source_catalog\\section_chunk_fact.py": "1103398600952c099aa29ad8ae4cc06d0e881da5051e8943625094c50b1b8ded",
+    "src\\company_wiki\\source_catalog\\section_query.py": "a40d54a36fe14fd0e76b322477885777ad2b3fa8b5263a2d8e726a2c63214f49",
+    "src\\company_wiki\\source_catalog\\security_code.py": "e723575171bd364521dae2ebbd97b8d1acb807d667c7b8448ee96edafad12195",
+    "src\\company_wiki\\source_catalog\\security_identity.py": "79a5cdb123ca2cbabe83b091aff9bb48503a55e6f6ba882b5310a8645996d052",
+    "src\\company_wiki\\source_catalog\\service.py": "3d88bd7d7b81d55b1ae566d860adb0b5527cb47842bcd3c9a3c48fcc47b26fb6",
+    "src\\company_wiki\\source_catalog\\shadow_parity.py": "dd175bf1634334787d0330de55751a791dc7e1168a10bf2d896b227b13f8b892",
+    "src\\company_wiki\\source_catalog\\source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de",
+    "src\\company_wiki\\source_catalog\\source_bundle.py": "fe64912172d3004b137ebf415a01b8b3e75eb41ea785edf254644258f0c2261c",
+    "src\\company_wiki\\source_catalog\\source_export_v2_cli.py": "b9ff7cf3c8521e6e63c46f47bd7b708ec11ffb650e53c060861f69db0164e17e",
+    "src\\company_wiki\\source_catalog\\source_group_scope.py": "167e068ca0ebcbf677d4f64e4eed5e0134ff73f08055f7ab54f2a5e862f9a27a",
+    "src\\company_wiki\\source_catalog\\source_location.py": "1b521cd1f6133335e4e934adb3e8e8220ce27409612a195cd62ece0f9c3c3676",
+    "src\\company_wiki\\source_catalog\\source_operation.py": "ffcdbd035547a9cbc42c65efe04a0731d8ad55eef60d8b925eeb303bd722d5b3",
+    "src\\company_wiki\\source_catalog\\source_query_cli.py": "fca1d028725e3f22f569875a2774562bc57cef4fa3511bcf50ea4dfa101949df",
+    "src\\company_wiki\\source_catalog\\source_reader.py": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+    "src\\company_wiki\\source_catalog\\source_reader_cli.py": "f6ff7dcc14ebd6ffeba99dc597b150d4f2d5bc9f42d1a6850bf1d439e5b5c715",
+    "src\\company_wiki\\source_catalog\\source_read_policy.py": "7313355fa9cd36e19d1b984dbbc5a63d1ebf99c5395843c6722e47b9868758ff",
+    "src\\company_wiki\\source_catalog\\startup.py": "b6dabe59543f6a1c5c4af7982f97aa2167f7ac264f17eca53166c4b9e320ed8b",
+    "src\\company_wiki\\source_catalog\\store.py": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+    "src\\company_wiki\\source_catalog\\trace_parity.py": "d40ef902dca7d81d3d44be49b0a40ac8757ebcbff9189d93f3701142a5833298",
+    "src\\company_wiki\\source_catalog\\transcript_fmp_contract.py": "bf8d6d82c239741c66b9cfb63641276b6e29532fcd5ceb13e5479b087b8dd2d3",
+    "src\\company_wiki\\source_catalog\\transcript_import.py": "a954fc19037f35814950faf21624a4634745cf75675fee519937025a3b384b98",
+    "src\\company_wiki\\source_catalog\\transcript_import_cli.py": "f0ecee57e98508fc31b2fdb90a3a6251c71f5147de34e6f58bb859fed939cbc0",
+    "src\\company_wiki\\source_catalog\\transcript_json_extract.py": "85433d1745929cb16851461a42c55f0e70905740831d384893f1aef7b24e918e",
+    "src\\company_wiki\\source_catalog\\transcript_layout.py": "b3e0eb04d68f0195d7726f03a0ab1daba04ec10a90874f4b2201f56382b9f34c",
+    "src\\company_wiki\\source_catalog\\transcript_lineage.py": "e7e3856f71d7a9df90a3f427fcedbe7cc4220dc728c89e68ba2f661a0c0d2482",
+    "src\\company_wiki\\source_catalog\\transcript_material.py": "aeb815ec218f8adc254d69884b44f9e671e3cb07742ab6e8ac126a36061de69c",
+    "src\\company_wiki\\source_catalog\\transcript_text_extract.py": "c9c64a6260706ddce4b0a2c7fa387bf4c3e2f0e033ae647692fb97d0577dd2bf",
+    "src\\company_wiki\\source_catalog\\transcript_tool_contract.py": "cfc6d17ad4789e1f39587053d593ab9787e4b176fbf86e81149e9d08aa97dffe",
+    "src\\company_wiki\\source_catalog\\transcript_tool_errors.py": "cf0bfa2d7eb1a346bf1999e3d96cd28224c17ec306cdfff065b5b5224f798c64",
+    "src\\company_wiki\\source_catalog\\transcript_versions.py": "868e931fc2d077cb4dab2707f4533a202ab0289b6f4b422c4b8eaf9784da45cd",
+    "src\\company_wiki\\source_catalog\\url_binding.py": "d8468aeabdf0adda063c755cf603feae78eea75aa7f3189c7f0cc5146f9f49e7",
+    "src\\company_wiki\\source_catalog\\visibility_bridge.py": "3fb393f9540f5f4c791aef3f29467d41bae6d6ece03c1fb1ed5e96e336bf6815",
+    "src\\company_wiki\\source_catalog\\__init__.py": "4c3328c0f9bef8af1000e284a92592a7045734fc82bda3dd02a048e18c6b2af0",
+    "src\\company_wiki\\source_contract\\announcement_cli.py": "b96b41e99c7ada43dfc380c559e9c9670c065a378f1e8d5fe1d201d964973b88",
+    "src\\company_wiki\\source_contract\\announcement_collector.py": "65b4a7673e3dd04a662d6a04e57bb36d9f50c69e5f599244ae360f82854b0ff6",
+    "src\\company_wiki\\source_contract\\cli.py": "ad808941b993a3811c37ddb789fddb95d8b7b5039fe32cbac1950a98c1d4348d",
+    "src\\company_wiki\\source_contract\\compatibility.py": "c39a8148d64346c030102d023bc17b0431846789e78682b89d3fe58f95f4d415",
+    "src\\company_wiki\\source_contract\\evidence_span.py": "8ee05d0aa195f1365d035d38e8b3f7dd4406d7578c402062de4ebf5332565239",
+    "src\\company_wiki\\source_contract\\schema.py": "4ed344929a93544b19c17be5c26679567b95c07489d48fa03dde718401903526",
+    "src\\company_wiki\\source_contract\\source_export.py": "a9812b56a4c66c2c16f02c946d2c3165cff94e0ed1f96b48b677b2fd92afbe63",
+    "src\\company_wiki\\source_contract\\source_export_v2.py": "9cd518d87381941025721336a74975b3770bdae5bb36344780eaf715dac8becc",
+    "src\\company_wiki\\source_contract\\source_manifest.py": "46efb68e48035cf638b067cbe007f4a336920a847522303d03de386ba4066f62",
+    "src\\company_wiki\\source_contract\\__init__.py": "bc0b9fd3a5de53a36c9dcf399590bb90a0fc41a02b89654090f0b35062eb0414",
+    "src\\company_wiki\\source_contract\\schemas\\__init__.py": "f1bd84dd9c013fd8ada353164b0b0a0d44e34033e1ab971d2d935a555ce1a532",
+    "src\\company_wiki\\source_catalog\\adapters\\common.py": "d2f62b08ddd1c33b56e28c94291b54f4731cfa8eaac10f937cbc3b051e165ac5",
+    "src\\company_wiki\\source_catalog\\adapters\\company_raw.py": "d1b6011cb56e95dc9c49de44897d4e5a1006bf65fe811df6bb93a574adf3d9ed",
+    "src\\company_wiki\\source_catalog\\adapters\\conformance.py": "d99bdf79be4a055500b25a5846bc59c85e88c45c005ac8ee70e4438b31ecfd99",
+    "src\\company_wiki\\source_catalog\\adapters\\dayu.py": "cc65a7d12ad7d692a488d5f866719da55689225a896adb55c8ccdb988884b72a",
+    "src\\company_wiki\\source_catalog\\adapters\\interface.py": "6c92dc1eca85d14f3ee927f6cf0cdd4e194f629324e817ed64f139c8a764a436",
+    "src\\company_wiki\\source_catalog\\adapters\\parity.py": "367fdb27602c13f911d872901216358dc8871a48ca8734d1ab64453b82f24af5",
+    "src\\company_wiki\\source_catalog\\adapters\\registry.py": "33524affc460a65af9d7d500d8e90f58b0b9d6f54c0686ba7a4d1e7dc6d07a79",
+    "src\\company_wiki\\source_catalog\\adapters\\sidecar.py": "a99ab8043ae08cd60dd70371911b38b5ee50f72923f038bc98e89b4f39346c91",
+    "src\\company_wiki\\document_understanding\\decision_dependencies\\compare.py": "e36ff94655ded12180775080e2dc6116643bd99d22b9f4ca2828a2dac46bbe5e",
+    "src\\company_wiki\\document_understanding\\decision_dependencies\\contract.py": "4f51076fa7666f008aec2580e7815bfb113de1bae755399dc836c934bafd0475",
+    "src\\company_wiki\\document_understanding\\decision_dependencies\\freeze.py": "57ab1d200a297ded4f862479731e25d308e8fa48c060fa64c7774406db097bf4",
+    "src\\company_wiki\\document_understanding\\decision_dependencies\\trace.py": "1629c4d0a45e471ec2aa50174541014dcfa64d032c05e7802f1ab812e207163b",
+    "src\\company_wiki\\document_understanding\\decision_dependencies\\__init__.py": "07a08aa1c034356f4ff42f76d2a66d2f1feba605a404371a713ecf8e3b6df72a",
+    "src\\company_wiki\\document_understanding\\geometry_intent\\contracts.py": "dbc88ad3a075ddf2ea4a875a29564bf4be9ec450ac1cbb21aabb18d8a7c01ea2",
+    "src\\company_wiki\\document_understanding\\geometry_intent\\planner.py": "be0e6762b5a13df40285bed03a88cb6b65be8f823fa09f5df14ef99826299aa4",
+    "src\\company_wiki\\document_understanding\\geometry_intent\\reading.py": "6669f465d23f8f1d84a156bbc5d9f3cd4d33e8671af526d386df9c4707c8716a",
+    "src\\company_wiki\\document_understanding\\geometry_intent\\__init__.py": "a2f0304fa36e3bec687206859a0a14be682a9a6492c63f0ed7930f5a1b274ce6",
+    "src\\company_wiki\\document_understanding\\layout_hints\\columns.py": "afac92e6af75706b37e040e731b389b959f2f4c381f1b944eb0e1778f6d093b7",
+    "src\\company_wiki\\document_understanding\\layout_hints\\contract.py": "2aa658add3a6783a20debea338b799ae840153baab683b1279d05cfe409c1047",
+    "src\\company_wiki\\document_understanding\\layout_hints\\fine_geometry.py": "5fe649d430a518e8d407976d40a3a7bb5656c734ccd7c95badca5e2d6297f784",
+    "src\\company_wiki\\document_understanding\\layout_hints\\geometry.py": "fa41da1cd15ea12e94a7077583978e2f8f34fa9510ea83f02a982ff35f38bcfc",
+    "src\\company_wiki\\document_understanding\\layout_hints\\headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+    "src\\company_wiki\\document_understanding\\layout_hints\\neighbours.py": "610632d5e238deefb7b398965c0794cef038a3a5a8bc8aa05c448e1bd91a7d98",
+    "src\\company_wiki\\document_understanding\\layout_hints\\ordering.py": "6d8eda6b3d5504e56d3242a027968aab57d3a72ef53c9fd59569c63afd5e9ec4",
+    "src\\company_wiki\\document_understanding\\layout_hints\\relations.py": "744881cb8ab3ac8b7bac5e8d4733a27178bc918e7bab3639aed65ecd4fb43fd4",
+    "src\\company_wiki\\document_understanding\\layout_hints\\tables.py": "5b70a25c7a0e3abf0e62045795330a94faed5c796f6fc95df58b1bddd97beb31",
+    "src\\company_wiki\\document_understanding\\layout_hints\\text_evidence.py": "710aa35e4bc1c39ee08a3f227062e429225b32e7d41e573dc5ba94aabbccdbcb",
+    "src\\company_wiki\\document_understanding\\layout_hints\\__init__.py": "4f96106b186ca125eb1b9eb58cd1ad5f45f49cd72ee4da9876426a736b62974b",
+    "src\\company_wiki\\document_understanding\\operating_states\\patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src\\company_wiki\\document_understanding\\operating_states\\product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "src\\company_wiki\\document_understanding\\operating_states\\relations.py": "0b65b713bedca344d09bd2fe00ae52941433b91aaaf2ecdc6be137abf8c2386e",
+    "src\\company_wiki\\document_understanding\\operating_states\\text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "src\\company_wiki\\document_understanding\\operating_states\\__init__.py": "4e79edc05e6b67db3448a4c0a6f356a7f24eef1a800295f30ab7c28dc9c71c65",
+    "src\\company_wiki\\document_understanding\\profiles\\child_ranges.py": "53a7c391cba4546193bf322dcf9410fc37be07b4f871cf3caf30832774f14a5c",
+    "src\\company_wiki\\document_understanding\\profiles\\decision.py": "e1da5af230dff4b98ba269253113b4b1d8266ffb4e29c598c0faf4297362bfbd",
+    "src\\company_wiki\\document_understanding\\profiles\\geometry_policy.py": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344",
+    "src\\company_wiki\\document_understanding\\profiles\\lifecycle.py": "5a43b850eab54b11d44642f447cb2d146afb60db3813cdef9fdb244cdc8aabfa",
+    "src\\company_wiki\\document_understanding\\profiles\\model.py": "022191ab135b0c0844d7698cddc679eaa7103bc3c8153b39c600bc37ffeae2ce",
+    "src\\company_wiki\\document_understanding\\profiles\\observation.py": "5d5f7aa0b99ffbce7085be6b6d522f70afae1b469f4e31b0a679cc6a2b0642ea",
+    "src\\company_wiki\\document_understanding\\profiles\\registry.py": "1168fff7249e53076c1f6c89993bc907f026df0aff97ee97453982acb5287c68",
+    "src\\company_wiki\\document_understanding\\profiles\\signals.py": "e55a6bd92ef0bd5a42f248668e3a01a71ff8478a55f945bfbd6cea2ad5a178b0",
+    "src\\company_wiki\\document_understanding\\profiles\\vocabulary.py": "e24f0d4536199d26f64742b40708d16428e3585ddff5e40d6d712da7ba543340",
+    "src\\company_wiki\\document_understanding\\profiles\\__init__.py": "8b7706444f4b9222576b86bf5c098f0619cd925747152a9de3d80676f3791c23",
+    "src\\company_wiki\\document_understanding\\source_signals\\contract.py": "d84d93b798e1e06cf58b551a71195e98f0726eaa501c4b70eab036e356052f39",
+    "src\\company_wiki\\document_understanding\\source_signals\\__init__.py": "8e8aef3c031bcf14366d2bbf3c7758a6ea5424584c2282c8297c6f2f2913d4c7",
+    "src\\company_wiki\\document_understanding\\structure\\contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src\\company_wiki\\document_understanding\\structure\\layout.py": "db6df3eea9fa6af1b20398e7a7339a52b8dc5dfdb626871331af26af58234c74",
+    "src\\company_wiki\\document_understanding\\structure\\paragraphs.py": "93af3606fae496ea548f69d6c5ae9930d5f4489abad2cc273777b396ea0ccfa5",
+    "src\\company_wiki\\document_understanding\\structure\\projects.py": "2d7f1994b130c8a1948491b506f5af6ce59c5ed598a40fbfb215f4274984902e",
+    "src\\company_wiki\\document_understanding\\structure\\qa.py": "c024685d21b71b91cd61e4c549af11489a1462b8e7410af4b3eb52549b8b4434",
+    "src\\company_wiki\\document_understanding\\structure\\relations.py": "249faba3f8f62a3d63bb6eced8f5c52f37f62e864a2fca1ceb84102f460c2d37",
+    "src\\company_wiki\\document_understanding\\structure\\sections.py": "61e018c4c9877826a21c69dfad241c53a35c5a6177f696951903f53745c0cbfb",
+    "src\\company_wiki\\document_understanding\\structure\\tables.py": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+    "src\\company_wiki\\document_understanding\\structure\\table_purpose.py": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+    "src\\company_wiki\\document_understanding\\structure\\_work.py": "6cc3b330a4fee0a06bd3e79fbce7ffd85b20cb69238482ef78ca29200edcd469",
+    "src\\company_wiki\\document_understanding\\structure\\__init__.py": "48c5594d4a06379ca8ec10f3beb357b164b75ee19fc6dd23ef22bf11fa3fce2e",
+    "src\\company_wiki\\document_understanding\\table_measurements\\bindings.py": "01a88a0b1ec14d70b95df584a9b8b62b8842c7d9c87e738803a754e7c2295925",
+    "src\\company_wiki\\document_understanding\\table_measurements\\_labels.py": "229687a5b73f0ae088f4d21755a161b5e21df62da3d23e7cce30ae44fc10ee78",
+    "src\\company_wiki\\document_understanding\\table_measurements\\_periods.py": "12a63d328cce74b4e7f532bfedf83d81e88fd8d238aef8b64dcd8dffd1b387c9",
+    "src\\company_wiki\\document_understanding\\table_measurements\\__init__.py": "0e70cabe032244817ae363f6938fa6156fe6efaa4d17a981308db457b78cce21",
+    "src\\company_wiki\\document_normalization\\layout_snapshots\\contract.py": "360e19c8518861abff3d8ef2504a49e7dc008c3cf5d400baa0868ab9ec0ecd17",
+    "src\\company_wiki\\document_normalization\\layout_snapshots\\identity.py": "2b0fa1f61176e9a69da9dd6b33a9295ed4f3b8e8e8b47204538a9363ac7a32da",
+    "src\\company_wiki\\document_normalization\\layout_snapshots\\projection.py": "998fb43282470beff27a8b96d64700018937f221c05db4a01efd15808fb001d2",
+    "src\\company_wiki\\document_normalization\\layout_snapshots\\unit_binding.py": "443baf7cd68621071437f4d0763d4ced37f79567e1de52f4fc2cd44bdf8eb21e",
+    "src\\company_wiki\\document_normalization\\layout_snapshots\\__init__.py": "11a6e988ad8f3cf1b188034f99739215dbfce7780794a01a527878431d649ff1",
+    "src\\company_wiki\\document_normalization\\pdf_table_observations\\adapter.py": "7d87851bcccbdcc264485997da75bcc105957b8cb25f8e0b2cd1f518acfb52ed",
+    "src\\company_wiki\\document_normalization\\pdf_table_observations\\__init__.py": "4945546c639e9ee5a7e048c98d10b00d05adb1091883d8366d091bc373eef439",
+    "src\\company_wiki\\automation\\handlers\\__init__.py": "c3b278499f6ea2a7cc46b154eeebcf166ccdaa8c0dff1f89dbb838d45538761d"
+  },
+  "protected_unchanged": true,
+  "producer_unchanged": true,
+  "work_used": 3747222,
+  "work_limit": 16000000,
+  "work_exhausted": false,
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "summary_semantics": "NOT_REVIEWED"
+}

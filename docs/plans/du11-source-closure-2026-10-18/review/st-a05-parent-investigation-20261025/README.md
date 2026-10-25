@@ -18,3 +18,13 @@
 4. 保持每citation 8原始单元/4block/2048原文字符、16M work和生产112span不变；预算不足如实defer，不裁掉父级冒充完整。验证cache实现身份和恢复不复用旧缺项版本。
 5. 真实SourceRef原件只读回放；A01/A05逐项复核，并确认当前10个已通过目标和新A13具体归属不受挤压。大节点独审后再发布。
 6. 然后正式新attempt原语言摘要、缓存恢复/RF实际采用及W12四审。W16/W17/W18施工路径继续保持独占。
+
+## 真实结构观察（已执行，尚未改产品）
+
+`probe_real_structure.py`只包装原函数输出，SourceVersionReader验原件SHA，生产parse/understand共享16M work；实际用3,747,222。375份源码、config/catalog SHA前后不变，0模型/下载/原件副本，116935字节收据在`real-structure-observation.json`。
+
+Chemistry scope成员止于p13最后R段；紧邻下一unit为`13 / 249`，之后p14重复标题和D&M。跨13→14的physical page_neighbour调用为0，所以当前截断发生在outline，不是物理校验已经拒绝。layout家具按同文字重复识别，page-number正则只认裸数字，变化n/total页码未被正证识别。
+
+下一TDD要覆盖页边n/total、Page n of total、中文第n页/共N页及裸页号；必须实际页序一致、模板/位置在多页稳定。body比率、页号不匹配、总数冲突、单页孤立数字不能变furniture。之后再查邻页proof对未知column等真正约束；不能提前把未调用当成已证明可穿越。
+
+ST-A13已正常发布26e981e1，精确CI40180784583成功；现在才进入本节点。首版probe误用oracle.kind一次KeyError，核对旧runner真实schema后使用document_kind，未更动产品或原始资料。
