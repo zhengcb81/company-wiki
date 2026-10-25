@@ -1,0 +1,42 @@
+{
+  "schema_version": "root-package-reception/1",
+  "package": "W16-RF-BASIS",
+  "verdict": "PASS_ENGINEERING_COMPONENT_SCOPE",
+  "author_head": "611b1d62b2eb3228df037c95145a1d8d8d1f01d8",
+  "review_sha256": "b49da5d43805972c58cfb838fd67ec932256c7297cad52ce23b47994df386ab1",
+  "reviewed_file_sha256": {
+    "SKILL.md": "2fc6389279398051d50bb0d26285c2708a53e97060c2a909915e64824243455b",
+    "references/revenue-basis.md": "bad86ce1051b387307b7506b0faf90b6484d2079b3f60fffd0493193ee3b7b75",
+    "scripts/revenue_backtest.py": "7b585a86a8aae32d48c0ce1aa2f1e82398b48951788ccfea6e843512f13d47b7",
+    "tests/test_w16_root_basis_integrity.py": "7059685bd3f25f8c023a1dea965b9e1f341846e2bbafd3caa49f1684230c95bb",
+    "scripts/research/revenue_basis.py": "fa8636d857b0d924d3d3f97c485bba4e51179fb09147936a7a207e1928d162ef",
+    "scripts/research/input_quantities.py": "b4160bbd73d539b79f5edf00bedef6f1a3bd9071a3475bef06ee6342bb9406c1",
+    "scripts/contracts/document.py": "d72c030de07163181c43799d5189d293ac67d5b168efba06113fc0ce55deee81",
+    "scripts/revenue_report.py": "cc5574491e18241336333b71492f6f8ef6e1e34ca629fbbf9bc70b78b7f9d19f",
+    "scripts/lint_input.py": "2814b157faad471dda24e363f03da38c84933f651f7c3f72b82206829e4f25f1",
+    "scripts/generate_input_template.py": "8ce445490509d2f4dc65ccd06a3aaf591b2d06c1c8ab397414049a69c8732687",
+    "tests/test_w16_revenue_basis.py": "7303c61369f221a6e8a87467b5f1e4929d763fcac3fdc43cc8789585fe8556cd",
+    "tests/test_w16_revenue_basis_cli.py": "6765312b6ac70699dfabb54e43d0902731730ab851c0ce20692c4d1a6d465cc1",
+    "tests/test_backtest.py": "d0972e238066f40e4c52d25806683749ddfa2c84e7f6652f38ff44f3b7efc16e",
+    "tests/test_data_contract.py": "3d30b0fc90649f0fa640aeeffa4207c1cc7c9791bd99a8c1af50200ff5582166"
+  },
+  "tests": {
+    "focused": 50,
+    "related_including_focused": 157,
+    "independent": 60
+  },
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "scope": "engineering component; no source truth or company forecast approval",
+  "commit": "695dc7493cd5a1d3e10f7d9d1d5436f5447a3861",
+  "main_head": "695dc7493cd5a1d3e10f7d9d1d5436f5447a3861",
+  "author_ancestry_preserved": true,
+  "preserved_wip_sha256": {
+    "assurance/runs/daily_alert.jsonl": "fb1f25c0598241ea7bdecc562ad9129f27ed1a1f92b81a8cd75f033bee537b82",
+    "assurance/runs/weekly_alert.jsonl": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+    "assurance/runs/weekly_manifest.json": "44e46cd57e5373803fbdaa5dff5e93041840b8e8cc671e710e0346a133c4df97"
+  },
+  "main_tracked_status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json",
+  "push_status": "SUCCESS",
+  "origin_main": "695dc7493cd5a1d3e10f7d9d1d5436f5447a3861"
+}

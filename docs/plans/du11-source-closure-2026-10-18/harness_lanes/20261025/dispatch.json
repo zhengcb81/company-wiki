@@ -1,7 +1,7 @@
 {
   "schema_version": "r1-harness-dispatch/1",
   "as_of_date": "2026-10-25",
-  "status": "ALL_THREE_DISPATCHED_BY_USER",
+  "status": "W16_W17_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
   "parent_plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "package_count": 3,
@@ -35,8 +35,8 @@
         "assurance/runs/weekly_manifest.json"
       ],
       "independent_review_required": true,
-      "product_implementation_started": "not_observed_by_ROOT",
-      "status": "DISPATCHED_AWAITING_AUTHOR_HANDOFF",
+      "product_implementation_started": true,
+      "status": "ROOT_ACCEPTED_MERGED_INSTALLED",
       "start_head": "97e7e149d434d5ce36c147531efa4405a88fcb1c",
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
@@ -51,7 +51,12 @@
         "task_plan.md": "931b63a8e6c8769ffa189741f37d0b0cf5783139e8c3b3706a18601611b5226b"
       },
       "worktree_bytes": 55152114,
-      "worktree_file_count": 3147
+      "worktree_file_count": 3147,
+      "author_final_head": "611b1d62b2eb3228df037c95145a1d8d8d1f01d8",
+      "main_head": "695dc7493cd5a1d3e10f7d9d1d5436f5447a3861",
+      "root_reception": "../../review/package-reception-w16-w17-20261025/README.md",
+      "root_independent_review": "PASS_ENGINEERING_COMPONENT_SCOPE",
+      "installed_runtime_drift": 0
     },
     {
       "package_id": "W17-AUDIT-COVERAGE",
@@ -71,8 +76,8 @@
       "primary_wip_preserve": [],
       "remote": null,
       "independent_review_required": true,
-      "product_implementation_started": "not_observed_by_ROOT",
-      "status": "DISPATCHED_AWAITING_AUTHOR_HANDOFF",
+      "product_implementation_started": true,
+      "status": "ROOT_ACCEPTED_MERGED_INSTALLED",
       "start_head": "02ee879ccf8e4aed67342bcc7c8c7e20de2401c9",
       "tracked_worktree_clean": true,
       "start_documents_committed": true,
@@ -87,7 +92,12 @@
         "task_plan.md": "52f13ba3a48cca80a06d6f87821510071a3cbd6b64fa65b75993aa9eb9718144"
       },
       "worktree_bytes": 6018266,
-      "worktree_file_count": 487
+      "worktree_file_count": 487,
+      "author_final_head": "7c71c8111f14a3aae6a1df274eeffb81c01939b7",
+      "main_head": "33200f8c947f35be75a77de38040982724e033a7",
+      "root_reception": "../../review/package-reception-w16-w17-20261025/README.md",
+      "root_independent_review": "PASS_ENGINEERING_COMPONENT_SCOPE",
+      "installed_runtime_drift": 0
     },
     {
       "package_id": "W18-CWP-HOLDOUT",

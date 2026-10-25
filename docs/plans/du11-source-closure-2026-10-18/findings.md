@@ -954,3 +954,19 @@ ROOT已核真实HTML：加粗业务标题、含bullet的flex list在原DOM存在
 用户提出新浪A股三表；已核官方页面实际JS数据入口，冻结18份API原始响应175785B，20次研究请求2634389B，三表分别36/33/36期、9729源行。publish_date存在后期修订/口径风险，当前快照不冒充过去PIT；未作官方逐值正确性验收、未写生产库、0付费。完整调查和W19独立卡分别在review/sina-statements-research-20261025与harness_lanes/20261025；CWP/FF两个独立工区已创建并准备文档seed，最终独审进行中，未启动产品实现。原三卡不受影响，ROOT继续文档阅读/摘要owner。
 
 W19交接就绪：施工设计独审PASS，18份API夹具逐份SHA/长度核对一致；CWP seed a3083502、FF seed c8b0e40已正常commit，两个工区tracked clean、源码实际存在且只新增本卡PWF。状态READY_NOT_DISPATCHED，尚无产品实现。初始化空index/只读全局hook cache失败已解决，详情W19-setup.json及各工区progress；hooks未绕过。
+
+2026-10-25用户交付W16/W17：ROOT已只读核作者最终611b1d62/7c71c811及全部有效SHA，源/测试无漂移，文档后置不重开产品审查。两仓main分别094d55ad/bb41d9b，未并线；RF三WIP不动、Audit无remote。开始各一独立ROOT审查和隔离定向验收；不重新跑作者全量。详见review/package-reception-w16-w17-20261025。
+
+
+## 2026-10-25 W16/W17 ROOT根因验收进行中
+
+独立审查复现标签冒充可比、组件冲突被忽略、回测历史基准误用及审查carrier串用。两个ROOT候选隔离TDD修复，W16当前50/相关157通过，W17当前59通过，最终独审与并线尚待完成；详见[本节点唯一记录](review/package-reception-w16-w17-20261025/README.md)。作者工区不写，RF三运行WIP已冻结SHA，0新收费/下载/原件副本。旧未交付状态仅作历史，不冒充验收完成。
+
+
+## 2026-10-25 W16/W17接收并线、安装及CI关闭
+
+W16最终独审0 OPEN，18次实际CLI/快照/回测10断言、60独立测试通过；ROOT157相关（含50）通过，原pre-commit及pre-push595P/1既有skip/36subtests通过。695dc749已正常推RF main，精确CI40209029594 success。W17最终独审0 OPEN，14命令及真实载体回放通过，ROOT176P/16subtests（含59）通过；33200f8已本地ff-main，无remote不公开新仓。作者祖先保留，原RF三份运行WIP逐SHA未变；原件/config/catalog不动。
+
+两技能安装运行闭包均与主线全匹配；RF九项定点同步后发现另两项旧Git版本残留，经溯源及85项阅读接口测试补齐；四次安装版RF CLI通过。Audit venv同步两次errno13，改用本机默认Conda同一原同步器后正常完成，未改ACL/许可；旧blocked收据保留为历史，最终installation-final.json覆盖当前判决。提交初次MSYS命名对象失败，随后venv缺pre_commit，使用既有Conda完整原钩子通过，不改钩子或降测试。UTF-8结构校验两技能valid。
+
+本节点只关闭两包工程/部署，不关闭来源语义、annual14精确金融、正式摘要/cache、真实RF与公司循环。下一步按CF1–CF4中性RED→共享owner修复→三市场真实样本，再正式摘要/零重复费用缓存/RF采用。W18仍待交付，W19 READY；各自作者工区不写。0新付费/下载/原件副本。详见[接收总记录](review/package-reception-w16-w17-20261025/README.md)。

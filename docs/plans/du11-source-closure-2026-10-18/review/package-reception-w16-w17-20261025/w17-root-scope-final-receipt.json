@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_w17_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast-audit-w17-root-acceptance",
+  "exit_code": 0,
+  "seconds": 1.891,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "temporary_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\w17-root-scope-final-v6mvcak_",
+  "temporary_root_restored_absent": true
+}

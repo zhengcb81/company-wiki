@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_backtest.py",
+    "tests/test_zr708_backtest_reverify.py",
+    "tests/test_zr713_rolling_backtest.py",
+    "tests/test_input_quantity_conversion.py",
+    "tests/test_data_contract.py",
+    "tests/test_recognition_bridge.py",
+    "tests/test_w16_revenue_basis.py",
+    "tests/test_w16_revenue_basis_cli.py",
+    "tests/test_w16_root_basis_integrity.py"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast-w16-root-acceptance",
+  "exit_code": 0,
+  "seconds": 16.935,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "temporary_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\w16-related-consumers-etyieian",
+  "temporary_root_restored_absent": true
+}

@@ -1,0 +1,126 @@
+test_comparison_declaration_requires_real_policy_claim_not_numeric_claim (test_w16_root_basis_integrity.RootBasisIntegrity.test_comparison_declaration_requires_real_policy_claim_not_numeric_claim) ... FAIL
+test_continuing_base_can_match_reported_parameter_continuing_basis (test_w16_root_basis_integrity.RootBasisIntegrity.test_continuing_base_can_match_reported_parameter_continuing_basis) ... ERROR
+test_different_business_boundary_remains_incomparable (test_w16_root_basis_integrity.RootBasisIntegrity.test_different_business_boundary_remains_incomparable) ... FAIL
+test_equal_as_reported_labels_do_not_prove_business_boundary (test_w16_root_basis_integrity.RootBasisIntegrity.test_equal_as_reported_labels_do_not_prove_business_boundary) ... FAIL
+test_equal_restated_labels_do_not_prove_comparability (test_w16_root_basis_integrity.RootBasisIntegrity.test_equal_restated_labels_do_not_prove_comparability) ... FAIL
+test_explicit_component_boundary_conflict_is_rejected (test_w16_root_basis_integrity.RootBasisIntegrity.test_explicit_component_boundary_conflict_is_rejected) ... ok
+test_explicit_component_status_conflict_is_rejected (test_w16_root_basis_integrity.RootBasisIntegrity.test_explicit_component_status_conflict_is_rejected) ... FAIL
+test_incomparable_history_cannot_feed_cagr_or_scaled_backtest (test_w16_root_basis_integrity.RootBasisIntegrity.test_incomparable_history_cannot_feed_cagr_or_scaled_backtest) ... FAIL
+test_source_linked_comparison_group_and_boundary_allow_comparison (test_w16_root_basis_integrity.RootBasisIntegrity.test_source_linked_comparison_group_and_boundary_allow_comparison) ... ERROR
+
+======================================================================
+ERROR: test_continuing_base_can_match_reported_parameter_continuing_basis (test_w16_root_basis_integrity.RootBasisIntegrity.test_continuing_base_can_match_reported_parameter_continuing_basis)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 82, in test_continuing_base_can_match_reported_parameter_continuing_basis
+    validate_document(data)
+    ~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\contracts\document.py", line 1119, in validate_document
+    validate_historical_revenue(data, source_index, parameter_index, claim_index)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\contracts\document.py", line 220, in validate_historical_revenue
+    basis = parse_revenue_basis(record)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\research\revenue_basis.py", line 102, in parse_revenue_basis
+    require(
+    ~~~~~~~^
+        not unknown,
+        ^^^^^^^^^^^^
+        f"{field} has unsupported keys: {', '.join(unknown)}",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\contracts\evidence.py", line 98, in require
+    raise ForecastInputError(message)
+contracts.evidence.ForecastInputError: historical_revenue[2025].revenue_basis has unsupported keys: basis_claim_ids, business_boundary_id, comparison_group_id
+
+======================================================================
+ERROR: test_source_linked_comparison_group_and_boundary_allow_comparison (test_w16_root_basis_integrity.RootBasisIntegrity.test_source_linked_comparison_group_and_boundary_allow_comparison)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 34, in test_source_linked_comparison_group_and_boundary_allow_comparison
+    validate_document(data)
+    ~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\contracts\document.py", line 1119, in validate_document
+    validate_historical_revenue(data, source_index, parameter_index, claim_index)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\contracts\document.py", line 220, in validate_historical_revenue
+    basis = parse_revenue_basis(record)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\research\revenue_basis.py", line 102, in parse_revenue_basis
+    require(
+    ~~~~~~~^
+        not unknown,
+        ^^^^^^^^^^^^
+        f"{field} has unsupported keys: {', '.join(unknown)}",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\scripts\contracts\evidence.py", line 98, in require
+    raise ForecastInputError(message)
+contracts.evidence.ForecastInputError: historical_revenue[2024].revenue_basis has unsupported keys: basis_claim_ids, business_boundary_id, comparison_group_id
+
+======================================================================
+FAIL: test_comparison_declaration_requires_real_policy_claim_not_numeric_claim (test_w16_root_basis_integrity.RootBasisIntegrity.test_comparison_declaration_requires_real_policy_claim_not_numeric_claim)
+----------------------------------------------------------------------
+contracts.evidence.ForecastInputError: historical_revenue[2024].revenue_basis has unsupported keys: basis_claim_ids, business_boundary_id, comparison_group_id
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 48, in test_comparison_declaration_requires_real_policy_claim_not_numeric_claim
+    with self.assertRaisesRegex(ForecastInputError, "policy_support"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "policy_support" does not match "historical_revenue[2024].revenue_basis has unsupported keys: basis_claim_ids, business_boundary_id, comparison_group_id"
+
+======================================================================
+FAIL: test_different_business_boundary_remains_incomparable (test_w16_root_basis_integrity.RootBasisIntegrity.test_different_business_boundary_remains_incomparable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 41, in test_different_business_boundary_remains_incomparable
+    self.assertEqual(basis_comparable(left, right)[0], "not_comparable")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'comparable' != 'not_comparable'
+- comparable
++ not_comparable
+? ++++
+
+
+======================================================================
+FAIL: test_equal_as_reported_labels_do_not_prove_business_boundary (test_w16_root_basis_integrity.RootBasisIntegrity.test_equal_as_reported_labels_do_not_prove_business_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 29, in test_equal_as_reported_labels_do_not_prove_business_boundary
+    self.assertNotEqual(basis_comparable(_basis(), _basis())[0], "comparable")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'comparable' == 'comparable'
+
+======================================================================
+FAIL: test_equal_restated_labels_do_not_prove_comparability (test_w16_root_basis_integrity.RootBasisIntegrity.test_equal_restated_labels_do_not_prove_comparability)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 26, in test_equal_restated_labels_do_not_prove_comparability
+    self.assertNotEqual(basis_comparable(_basis(statement_status="restated"), _basis(statement_status="restated"))[0], "comparable")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'comparable' == 'comparable'
+
+======================================================================
+FAIL: test_explicit_component_status_conflict_is_rejected (test_w16_root_basis_integrity.RootBasisIntegrity.test_explicit_component_status_conflict_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 57, in test_explicit_component_status_conflict_is_rejected
+    with self.assertRaisesRegex(ForecastInputError, "statement_status"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ForecastInputError not raised
+
+======================================================================
+FAIL: test_incomparable_history_cannot_feed_cagr_or_scaled_backtest (test_w16_root_basis_integrity.RootBasisIntegrity.test_incomparable_history_cannot_feed_cagr_or_scaled_backtest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-w16-root-acceptance\tests\test_w16_root_basis_integrity.py", line 89, in test_incomparable_history_cannot_feed_cagr_or_scaled_backtest
+    self.assertIsNone(diagnostics["mase"])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.4 is not None
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.021s
+
+FAILED (failures=6, errors=2)

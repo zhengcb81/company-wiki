@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_shared_reading_narrative_contract.py",
+    "tests/test_du11_narrative_citation_context.py"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "exit_code": 0,
+  "seconds": 5.569,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "temporary_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\rf-reading-v3-main-eu1k_5b0",
+  "temporary_root_restored_absent": true
+}

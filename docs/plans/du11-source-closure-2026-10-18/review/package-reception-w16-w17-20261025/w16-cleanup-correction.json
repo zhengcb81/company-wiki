@@ -1,0 +1,7 @@
+{
+  "first_focus_tests": "50 PASS / 4.963s",
+  "initial_run": "50 tests, 4 outdated positive fixtures failed, 9 ROOT tests pass",
+  "cleanup_initially_failed": "Windows readonly publication registry entries, resolved by restoring write attribute only inside owned test root",
+  "restored_absent": true,
+  "production_changed": false
+}

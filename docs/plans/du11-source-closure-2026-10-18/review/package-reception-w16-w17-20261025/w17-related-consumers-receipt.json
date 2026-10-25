@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_w17_coverage_observations.py",
+    "tests/test_w17_import_wiring.py",
+    "tests/test_w17_root_scope_integrity.py",
+    "tests/test_du6_summary_review_import.py",
+    "tests/test_du6_root_import_observation.py",
+    "tests/test_du5_summary_review_packet.py",
+    "tests/test_du5_root_summary_boundaries.py",
+    "tests/test_document_status_join.py"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast-audit-w17-root-acceptance",
+  "exit_code": 0,
+  "seconds": 22.528,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "temporary_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\w17-related-consumers-t1pqaybt",
+  "temporary_root_restored_absent": true
+}

@@ -1,4 +1,6 @@
 # 当前行动计划（2026-10-25更新）
+
+> 2026-10-25最新：W16/W17已完成ROOT根因修复、最终独审、主线并线与安装同步。RF主线/远端695dc749，精确CI40209029594 success；Audit本地主线33200f8（无remote）。RF原三份运行WIP逐SHA保持。当前回到CF1–CF4来源共因修复，整体公司审查循环未完成。[本节点唯一记录](review/package-reception-w16-w17-20261025/README.md)。下方旧“待作者/待ROOT”仅是当时快照。
 ## 2026-10-25 当前增量：来源复评与CI跟进
 
 最新独立来源/实际输入评分12PASS/2PARTIAL/0MISSING，绑定06c及attempt05，见[报告](review/annual14-local-flow-regrade-20261025/report.md)。A01/A05已补齐，A02/A13精确财务仍由完整来源/金融层及RF实际采用承担。06c精确CI40190090649六项失败已原样复现；共因修复后218项通过/16.45秒、生成链check/Ruff通过，最终独审已PASS，483cb2a5已正常提交推送，精确CI40191425654于12:07:16 UTC completed/success，旧CI不能记绿。下一步唯一动作是完成这一发布节点，再用其他市场/文种真实样本验证及运行配置内正式摘要/cache/RF。三外包工区不写；模型响应NOT_REVIEWED、RF OPEN。

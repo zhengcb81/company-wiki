@@ -1,0 +1,612 @@
+{
+  "schema_version": "root-w17-final-independent-review/1",
+  "verdict": "APPROVE",
+  "review_type": "engineering component reception only",
+  "reviewer_independent_of_product_changes": true,
+  "created_at": "2026-10-25T15:42:54.136085+00:00",
+  "candidate_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance",
+  "branch": "codex/root-w17-acceptance-20261025",
+  "base_head": "7c71c8111f14a3aae6a1df274eeffb81c01939b7",
+  "reviewed_code_commit": null,
+  "snapshot_note": "ROOT product changes are uncommitted above base_head; approval binds the actual file SHA snapshot below. A normal later commit with identical bytes does not need another code review.",
+  "reviewed_file_sha256": {
+    "skills/revenue-forecast-audit/scripts/coverage_observations.py": "7914c0da7166e4397e8b2219b29cedde0360413616ea1f17c64f0e3db5e93998",
+    "skills/revenue-forecast-audit/scripts/summary_review_import.py": "860af26a38bdfa03bc2a11932624c35c4cc822498763775dd12d48a4f6ff8aee",
+    "skills/revenue-forecast-audit/references/coverage-observations.md": "64dd4e8748b726d37f115c4521a4051577c1e274217a1c366a42e8ce63a347ca",
+    "skills/revenue-forecast-audit/SKILL.md": "5124273299b4310431a885eadb5a9d834d3aa82b6848be413b0f17c308e5ad21",
+    "tests/test_w17_coverage_observations.py": "15ea23c6db516b6118debdf5e2f8f70947b614c2e3853c303882105d06a37fd7",
+    "tests/test_w17_import_wiring.py": "b6158983f185fcd929d4f876bc357e0b1e00b17f3f7567c1a3db428a92766ae3",
+    "tests/test_w17_root_scope_integrity.py": "b53986af424d0620d728cd6d61c86c7020f9f107c4d9133630744fc7076dc707"
+  },
+  "fixture_file_sha256": {
+    "tests\\fixtures\\w17_coverage\\bundle_count_conflicts.json": "220e0a4a12e42ae00bf4c4d60ac91e9701d5a5926e71819bb5f64e0735717b9f",
+    "tests\\fixtures\\w17_coverage\\bundle_html_no_bbox.json": "89547da7ad259b41885608c3dac9239a774b804d2fd33ddb6078992229fa332d",
+    "tests\\fixtures\\w17_coverage\\bundle_missing_fields.json": "6885a27745dc0ea9523173d2120028aba3d89f3fc5076926b3c128cc51b60558",
+    "tests\\fixtures\\w17_coverage\\bundle_scan_complete_sel_partial.json": "9380d815afbf04c663907625faf9290e5016ca7e38f90f7788a47917f6f1c1af",
+    "tests\\fixtures\\w17_coverage\\manifest.json": "5c3fdb2b377d85b999a9806e37995d5e974eaa0f13497b81a9ceac5ab300a8f5",
+    "tests\\fixtures\\w17_coverage\\model_view_not_sent.json": "983e21000aa6a6e404cef73cea8fcd577c9b40bbd5d2391e390d68bf995a0892",
+    "tests\\fixtures\\w17_coverage\\selection_check_partial.json": "bb211282b042834d41964ecf057d28ddd99899119cfc657fb7437cc16bc8328a",
+    "tests\\fixtures\\w17_coverage\\source_review_du5_report.json": "aed368e564f3e61bd6401775c78ad93d5ef36205c04c823a1367759f1d078ede",
+    "tests\\fixtures\\w17_coverage\\source_review_gold8.json": "e916e9b99e0b0a8f7d774e6053a8e4c3dd6585eca39c2a8269d5711da56a00dd",
+    "tests\\fixtures\\w17_coverage\\status_index_mixed.json": "9f8fdf2994f3c19a72f8fbf97ad814699c7eb0b8cc75dcc49ed8c32cce9d6318",
+    "tests\\fixtures\\w17_coverage\\status_index_old_attempt.json": "480d95c8450995fd2fc7816500cc945084043d11c5f69e3846c0ed89e84ffbde",
+    "tests\\fixtures\\w17_coverage\\status_index_same_source_two_docs.json": "953025cc3e89dfbdbb99b98100de5054ce62be3737393a048242ec75e4315b47"
+  },
+  "initial_reports_preserved_sha256": {
+    "w17-independent-review.md": "53fa73270999467db65d37b1b15bc0c4d03040b9b6ba3511a550d786c92b003a",
+    "w17-independent-review.json": "09031512a8f0b9c7d47334a679f5b0b7b443be317a39ea42a990ae365b1d7afe"
+  },
+  "findings": [
+    {
+      "id": "ROOT-W17-F1",
+      "status": "FIXED",
+      "evidence": [
+        "cross-run-real-artifacts (earlier replays + final real replay)",
+        "review-references-unassociated-selection",
+        "nested-reviewed-scope-foreign-attempt",
+        "contradictory-nested-run-scope",
+        "matching-review-and-selection-positive",
+        "same-run-multi-document-positive"
+      ],
+      "resolution": "共同scope提取保留各carrier自身身份，显式foreign/矛盾及未关联selection引用为unknown/unrelated；RF run+attempt联合比较，保留每doc原状态。"
+    },
+    {
+      "id": "ROOT-W17-F2",
+      "status": "FIXED",
+      "evidence": [
+        "unknown-selection-schema",
+        "model-schema-array",
+        "selection-schema-object"
+      ],
+      "resolution": "未知或非string schema不参与已知selection语义；报告保留scope_binding与诊断，不拒整import。"
+    },
+    {
+      "id": "ROOT-W17-F3",
+      "status": "FIXED",
+      "evidence": [
+        "explicit-empty-selection",
+        "omitted-over-candidate"
+      ],
+      "resolution": "显式空列表为观测0，声明与观测不一致及omitted超过candidate均给conflict，raw不修。"
+    },
+    {
+      "id": "ROOT-W17-F4",
+      "status": "FIXED",
+      "evidence": [
+        "null-bbox-with-readable-text",
+        "ROOT null/invalid geometry test"
+      ],
+      "resolution": "几何锚要求实际有效值，bbox:null不再available，文字可读性独立。"
+    },
+    {
+      "id": "ROOT-W17-F5",
+      "status": "FIXED",
+      "evidence": [
+        "malformed-model-json-array",
+        "model-schema-array",
+        "selection-schema-object"
+      ],
+      "resolution": "可选非object/非法schema形态安全归一化并报告unknown；其余维度继续导入。"
+    },
+    {
+      "id": "ROOT-W17-R1-selectionSHA",
+      "status": "FIXED",
+      "evidence": [
+        "same-source-old-review-selection",
+        "matching-review-and-selection-positive"
+      ],
+      "resolution": "selectionSHA仅代表实读selection文件SHA，与producer selection_sha256分开；无对应文件unknown、冲突unrelated，精确正例仍observed。"
+    },
+    {
+      "id": "ROOT-W17-R2-transitive-scope",
+      "status": "FIXED",
+      "evidence": [
+        "review-references-unassociated-selection"
+      ],
+      "resolution": "SHA相等不能覆盖所引用selection的foreign来源；继承已算出的关联结果。"
+    },
+    {
+      "id": "ROOT-W17-R2-nested-scope",
+      "status": "FIXED",
+      "evidence": [
+        "nested-reviewed-scope-foreign-attempt",
+        "contradictory-nested-run-scope"
+      ],
+      "resolution": "已知容器中的run/attempt统一提取；嵌套旧scope和矛盾scope不会被当前CLI覆盖。"
+    }
+  ],
+  "unresolved_in_scope_findings": [],
+  "unresolved_in_scope_count": 0,
+  "requirements": [
+    {
+      "id": "O01",
+      "result": "PASS",
+      "evidence": "公开字段及版本解释受schema识别约束；未知/非string schema与缺失字段不会制造current观察，新增selectionSHA与producer selection_sha256语义区分。"
+    },
+    {
+      "id": "O02",
+      "result": "PASS",
+      "evidence": "单一owner、六维、raw/status/指针/SHA与载体自身scope；未关联selection不合并，review/model外部声明不冒充当前bundle。"
+    },
+    {
+      "id": "O03",
+      "result": "PASS",
+      "evidence": "legacy原值保留且解释unknown；原类型/负数/超界诊断保留，ROOT新增空列表和omitted超分母反例变conflict，未作事实遗漏减法。"
+    },
+    {
+      "id": "O04",
+      "result": "PASS",
+      "evidence": "null bbox不算几何可用；文字独立；源侧金标不升级摘要，v5 task不折算自然语言claim，附审前claims not_reviewed。"
+    },
+    {
+      "id": "O05",
+      "result": "PASS",
+      "evidence": "run+attempt联合比较；same-run多doc索引作为自身逐doc状态可观察，foreign run unknown；prepared/read/use verbatim不升级，不声称当前bundle采用。"
+    },
+    {
+      "id": "O06",
+      "result": "PASS",
+      "evidence": "可选shape/schema冲突均报告型；有效bundle继续，quality_status not_evaluated、无overall/许可/新库；复用有界读取和既有hash。"
+    },
+    {
+      "id": "O07",
+      "result": "PASS",
+      "evidence": "最终59 W17测试ROOT收据；reviewer最终9个定向反例/正例及5步真CLI链全exit0并独立断言，另最终1条冻结真实回放；旧DU5链仍通。"
+    },
+    {
+      "id": "O08",
+      "result": "PASS",
+      "evidence": "最终代码真实公开载体只读回放，7项输入SHA复核不变。HTML stub、annual14 selection/review、W15 example各自scope区分，不能绑定的维度unknown，claims not_reviewed。"
+    }
+  ],
+  "independent_execution": {
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\receipt.json",
+    "receipt_sha256": "8ba6a4f535eb27794231bb65441de3add8842d6316d97df8ce06660773ca9948",
+    "executed_commands": 14,
+    "all_exit_zero": true,
+    "all_independent_assertions_passed": true,
+    "code_hashes_stable_before_after": true,
+    "no_total_score": true,
+    "pre_attachment_claim_statuses": [
+      "not_reviewed",
+      "not_reviewed"
+    ],
+    "command_receipts": [
+      {
+        "case": "review-references-unassociated-selection",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-fixed-d27ef94e\\review-references-unassociated-selection\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\review-references-unassociated-selection-out",
+          "--selection-check",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-fixed-d27ef94e\\review-references-unassociated-selection\\selection.json",
+          "--source-review",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-fixed-d27ef94e\\review-references-unassociated-selection\\review.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "nested-reviewed-scope-foreign-attempt",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-fixed-d27ef94e\\review-references-unassociated-selection\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\nested-reviewed-scope-foreign-attempt-out",
+          "--source-review",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-fixed-d27ef94e\\review-references-unassociated-selection\\du5-review.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "model-schema-array",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-reception-27af14ca6e\\model-schema-array\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\model-schema-array-out",
+          "--model-view",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-reception-27af14ca6e\\model-schema-array\\model-view.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "selection-schema-object",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-reception-27af14ca6e\\selection-schema-object\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\selection-schema-object-out",
+          "--selection-check",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\final-reception-27af14ca6e\\selection-schema-object\\selection-check.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "matching-review-and-selection-positive",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\matching-review-and-selection-positive\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\matching-review-and-selection-positive\\out",
+          "--selection-check",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\matching-review-and-selection-positive\\selection-check.json",
+          "--source-review",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\matching-review-and-selection-positive\\source-review.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "contradictory-nested-run-scope",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\contradictory-nested-run-scope\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\contradictory-nested-run-scope\\out",
+          "--source-review",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\contradictory-nested-run-scope\\source-review.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "same-source-model-without-request-association",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\same-source-model-without-request-association\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\same-source-model-without-request-association\\out",
+          "--model-view",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\same-source-model-without-request-association\\model-view.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "same-run-multi-document-positive",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\same-run-multi-document-positive\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\same-run-multi-document-positive\\out",
+          "--status-index",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\same-run-multi-document-positive\\status-index.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "other-run-index-remains-unknown",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\other-run-index-remains-unknown\\bundle.json",
+          "--run-id",
+          "root-w17-review",
+          "--attempt-id",
+          "root-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\other-run-index-remains-unknown\\out",
+          "--status-index",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\other-run-index-remains-unknown\\status-index.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "chain-import",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+          "--bundle",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\tests\\fixtures\\w17_coverage\\bundle_scan_complete_sel_partial.json",
+          "--run-id",
+          "final-chain",
+          "--attempt-id",
+          "final-attempt",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "chain-source",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_packet.py",
+          "prepare",
+          "--map",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain\\20261025T153922Z-fe64f2cf\\map.json",
+          "--stage",
+          "source",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "chain-output",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_packet.py",
+          "prepare",
+          "--map",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain\\20261025T153922Z-fe64f2cf\\map.json",
+          "--stage",
+          "output",
+          "--targets",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\targets.json",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "chain-attach",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_packet.py",
+          "attach-review",
+          "--map",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain\\20261025T153922Z-fe64f2cf\\map.json",
+          "--packet",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain\\20261025T153922Z-ef84ac65\\packet.json",
+          "--review",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\review.json",
+          "--kind",
+          "claims",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain"
+        ],
+        "exit_code": 0
+      },
+      {
+        "case": "chain-compare",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_packet.py",
+          "compare",
+          "--map",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain\\20261025T153922Z-fe64f2cf\\map.json",
+          "--targets",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\targets.json",
+          "--attachment",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain\\20261025T153922Z-fe228902\\attachment.json",
+          "--out-root",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\chain"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "final_real_replay": {
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\frozen-real-replay-receipt.json",
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+      "--bundle",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/implementation/pool-w03-official-flow/html-bundle.json",
+      "--run-id",
+      "root-w17-review",
+      "--attempt-id",
+      "attempt-1",
+      "--out-root",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\frozen-real-replay-out",
+      "--selection-check",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/selection.json",
+      "--model-view",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/business-scope-line-replay-20261025/model-view.json",
+      "--source-review",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/r1-w08-crosspage-20261024/annual14/review.json",
+      "--status-index",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w17_replay\\join\\20261025T093159Z-fe2eee3c\\status_index.json"
+    ],
+    "exit_code": 0,
+    "assertions_passed": true,
+    "native_scan_status": "unknown",
+    "source_review_status": "unknown",
+    "rf_adoption_status": "unknown",
+    "claims_state": "not_reviewed",
+    "frozen_inputs": [
+      {
+        "key": "bundle",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\implementation\\pool-w03-official-flow\\html-bundle.json",
+        "sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+        "matches_original_receipt": true
+      },
+      {
+        "key": "read_receipt",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\implementation\\pool-w03-official-flow\\html-read-receipt.json",
+        "sha256": "f000a61fb3fdb5f0f33e551e213b89de4b8e829a5026efb039a39ddc5e4de815",
+        "matches_original_receipt": true
+      },
+      {
+        "key": "selection_check",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\bullet-parent-fix-20261025\\business-scope-line-replay-20261025\\selection.json",
+        "sha256": "6fb97953c61ed7eb76c47e0c10d852ff1a5201926991862f2a43d08166c2fe3a",
+        "matches_original_receipt": true
+      },
+      {
+        "key": "model_view",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-material-value-20261024\\bullet-parent-fix-20261025\\business-scope-line-replay-20261025\\model-view.json",
+        "sha256": "de2057a4df8d5186f79e6d77547495e7788a5b200e76e0439fab8664d38dd34e",
+        "matches_original_receipt": true
+      },
+      {
+        "key": "source_review",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\r1-w08-crosspage-20261024\\annual14\\review.json",
+        "sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+        "matches_original_receipt": true
+      },
+      {
+        "key": "status_index_input",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-coverage\\delivery\\w15\\example\\export\\original\\join-input.json",
+        "sha256": "059029d8abd7e4990786443d92f0105d4ff87265c19cf441cdee33f689bef741",
+        "matches_original_receipt": true
+      },
+      {
+        "key": "status_index_join_output",
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w17_replay\\join\\20261025T093159Z-fe2eee3c\\status_index.json",
+        "sha256": "770081fe316e143ae73006fbfac5b127a705d62ab89325b633003d8bacb8f51b",
+        "matches_original_receipt": true
+      }
+    ]
+  },
+  "root_focused_tests": {
+    "log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\package-reception-w16-w17-20261025\\w17-root-scope-final.log",
+    "log_sha256": "70c5eb572af0009a1b2f79c99931143c3399e543057a7af8977619f786f23d64",
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\package-reception-w16-w17-20261025\\w17-root-scope-final-receipt.json",
+    "receipt_sha256": "119c512d2c68e5bd2f36d4b36e5c8ee83d2b5fb282a08d9eb74e3e75cc0f3a57",
+    "command": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_w17_*.py",
+      "-v"
+    ],
+    "executor": "ROOT, receipt read by independent reviewer",
+    "count": 59,
+    "exit_code": 0,
+    "full_737_repeated_by_reviewer": false
+  },
+  "rf_scope_judgment": {
+    "sufficient": true,
+    "reason": "A current run/attempt audit-status-index is a multi-document observation. Own applies_to and explicit document_id/source_id rows with their separate prepared/read/use states are sufficient for reporting that index; the observation does not assert this imported bundle was consumed. No extra identity ledger, bundle-source filter or release gate is required.",
+    "same_run_positive_case": "same-run-multi-document-positive",
+    "foreign_run_counterexample": "other-run-index-remains-unknown"
+  },
+  "review_history": [
+    {
+      "stage": "initial ROOT reception",
+      "verdict": "REQUEST_CHANGES",
+      "reports": [
+        "w17-independent-review.md",
+        "w17-independent-review.json"
+      ],
+      "receipt": "C:/Users/郑曾波/Projects/company-wiki/.planning/w16-w17-root-acceptance/review-w17/reception-b504f94dcc/receipt.json"
+    },
+    {
+      "stage": "intermediate final review, additional malformed schema/selection binding defects",
+      "verdict": "REQUEST_CHANGES",
+      "receipt": "C:/Users/郑曾波/Projects/company-wiki/.planning/w16-w17-root-acceptance/review-w17/final-reception-27af14ca6e/receipt.json"
+    },
+    {
+      "stage": "intermediate binding propagation/nested scope defects",
+      "verdict": "REQUEST_CHANGES",
+      "receipt": "C:/Users/郑曾波/Projects/company-wiki/.planning/w16-w17-root-acceptance/review-w17/final-fixed-d27ef94e/receipt.json"
+    },
+    {
+      "stage": "final frozen snapshot",
+      "verdict": "APPROVE",
+      "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w17\\approved-final-5e720801\\receipt.json"
+    }
+  ],
+  "boundaries": {
+    "source_truth_signed": false,
+    "summary_semantics_signed": false,
+    "company_rf_signed": false,
+    "author_or_main_edits_by_reviewer": false,
+    "candidate_product_edits_by_reviewer": false,
+    "checkouts_or_installations": 0,
+    "new_index_or_identity_ledger": false,
+    "new_manual_permission_gate": false,
+    "downloads": 0,
+    "model_calls": 0,
+    "external_network_calls": 0
+  },
+  "final_snapshot_sha_stable": true
+}

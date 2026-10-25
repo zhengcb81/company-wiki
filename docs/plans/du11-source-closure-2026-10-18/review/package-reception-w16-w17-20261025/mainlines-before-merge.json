@@ -1,0 +1,19 @@
+{
+  "revenue-forecast": {
+    "head": "094d55ad884e4a886b1537c0e76f3a0bede16ca2",
+    "branch": "main",
+    "tracked_dirty": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json",
+    "remotes": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)",
+    "preserved_sha256": {
+      "assurance/runs/daily_alert.jsonl": "fb1f25c0598241ea7bdecc562ad9129f27ed1a1f92b81a8cd75f033bee537b82",
+      "assurance/runs/weekly_alert.jsonl": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+      "assurance/runs/weekly_manifest.json": "44e46cd57e5373803fbdaa5dff5e93041840b8e8cc671e710e0346a133c4df97"
+    }
+  },
+  "revenue-forecast-audit": {
+    "head": "bb41d9beda94fead3aba4bc65ed8c6dce4314e97",
+    "branch": "main",
+    "tracked_dirty": "",
+    "remotes": ""
+  }
+}

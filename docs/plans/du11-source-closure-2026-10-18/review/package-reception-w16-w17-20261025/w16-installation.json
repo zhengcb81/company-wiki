@@ -1,0 +1,22 @@
+{
+  "status": "SUCCESS",
+  "exit_code": 0,
+  "preserved": [
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "preserved_unselected_drift": {
+        "scripts/company_wiki_narrative_contracts.py": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+        "scripts/narrative_citation_context.py": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5"
+      }
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "preserved_unselected_drift": {
+        "scripts/company_wiki_narrative_contracts.py": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+        "scripts/narrative_citation_context.py": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5"
+      }
+    }
+  ],
+  "selected_runtime_matches_main": true,
+  "claude_aliases_agents": true
+}

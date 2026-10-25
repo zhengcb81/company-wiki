@@ -1,0 +1,16 @@
+{
+  "scripts/company_wiki_narrative_contracts.py": {
+    "installed_lf_sha256": "89259c7fc552f1e5787b1fa865af10847bcdc6b098855edbdfdcac7e4a78b204",
+    "matching_prior_git_versions": [
+      "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd^",
+      "2de4b9d3ad3c032c89a1987a3b2141610ac91233"
+    ]
+  },
+  "scripts/narrative_citation_context.py": {
+    "installed_lf_sha256": "3699df45774a9db0a1ad1b8440db00a3a09efa3f6db8d40bc7bad38120d018f5",
+    "matching_prior_git_versions": [
+      "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd^",
+      "f1f7d0683726098c9f5b5614ca26f4beb64898aa"
+    ]
+  }
+}

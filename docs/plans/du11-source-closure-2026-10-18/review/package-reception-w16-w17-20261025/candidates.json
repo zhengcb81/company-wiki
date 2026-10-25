@@ -1,0 +1,14 @@
+[
+  {
+    "repo": "revenue-forecast",
+    "candidate": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w16-root-acceptance",
+    "branch": "codex/root-w16-acceptance-20261025",
+    "base": "611b1d62b2eb3228df037c95145a1d8d8d1f01d8"
+  },
+  {
+    "repo": "revenue-forecast-audit",
+    "candidate": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance",
+    "branch": "codex/root-w17-acceptance-20261025",
+    "base": "7c71c8111f14a3aae6a1df274eeffb81c01939b7"
+  }
+]

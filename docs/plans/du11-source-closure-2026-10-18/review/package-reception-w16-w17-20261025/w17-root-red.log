@@ -1,0 +1,102 @@
+test_explicit_empty_spans_are_observed_zero_and_conflict_with_five (test_w17_root_scope_integrity.RootScopeIntegrity.test_explicit_empty_spans_are_observed_zero_and_conflict_with_five) ... FAIL
+test_foreign_selection_does_not_merge_into_current_bundle (test_w17_root_scope_integrity.RootScopeIntegrity.test_foreign_selection_does_not_merge_into_current_bundle) ... FAIL
+test_null_or_invalid_coordinate_values_do_not_become_available (test_w17_root_scope_integrity.RootScopeIntegrity.test_null_or_invalid_coordinate_values_do_not_become_available) ... FAIL
+test_omitted_count_cannot_exceed_its_own_universe (test_w17_root_scope_integrity.RootScopeIntegrity.test_omitted_count_cannot_exceed_its_own_universe) ... FAIL
+test_optional_nonobject_model_view_does_not_abort_import (test_w17_root_scope_integrity.RootScopeIntegrity.test_optional_nonobject_model_view_does_not_abort_import) ... ERROR
+test_same_attempt_label_in_another_run_is_not_current_adoption (test_w17_root_scope_integrity.RootScopeIntegrity.test_same_attempt_label_in_another_run_is_not_current_adoption) ... FAIL
+test_source_review_keeps_own_source_and_cannot_claim_import_scope (test_w17_root_scope_integrity.RootScopeIntegrity.test_source_review_keeps_own_source_and_cannot_claim_import_scope) ... FAIL
+test_unknown_selection_schema_cannot_supply_current_facets (test_w17_root_scope_integrity.RootScopeIntegrity.test_unknown_selection_schema_cannot_supply_current_facets) ... FAIL
+
+======================================================================
+ERROR: test_optional_nonobject_model_view_does_not_abort_import (test_w17_root_scope_integrity.RootScopeIntegrity.test_optional_nonobject_model_view_does_not_abort_import)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 67, in test_optional_nonobject_model_view_does_not_abort_import
+    result = observe(deepcopy(load(BUNDLE_SCAN)), model_view=([], META))
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_coverage_observations.py", line 52, in observe
+    return cov.observe_coverage(bundle, **kw)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\skills\revenue-forecast-audit\scripts\coverage_observations.py", line 939, in observe_coverage
+    "summary_response_semantics": _summary_response(
+                                  ~~~~~~~~~~~~~~~~~^
+        bundle, model_view, run_id, attempt_id, schema, versions, bundle_evidence),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\skills\revenue-forecast-audit\scripts\coverage_observations.py", line 753, in _summary_response
+    "request_sent": document.get("request_sent"),
+                    ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+======================================================================
+FAIL: test_explicit_empty_spans_are_observed_zero_and_conflict_with_five (test_w17_root_scope_integrity.RootScopeIntegrity.test_explicit_empty_spans_are_observed_zero_and_conflict_with_five)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 49, in test_explicit_empty_spans_are_observed_zero_and_conflict_with_five
+    self.assertIn("selected_count_vs_observed_conflict", codes(dim))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'selected_count_vs_observed_conflict' not found in []
+
+======================================================================
+FAIL: test_foreign_selection_does_not_merge_into_current_bundle (test_w17_root_scope_integrity.RootScopeIntegrity.test_foreign_selection_does_not_merge_into_current_bundle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 15, in test_foreign_selection_does_not_merge_into_current_bundle
+    self.assertNotIn("selection_check", dim["raw"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'selection_check' unexpectedly found in {'bundle': {'native_scan': 'complete', 'structure_complete': True, 'opaque_pages': {'count': 0, 'items': []}, 'deferred_pages': {'count': 0, 'items': []}, 'pages_total': 30, 'pages_read': 30, 'coverage_complete': False}, 'selection_check': {'native_scan': 'partial', 'structure_complete': False, 'opaque_pages': {'count': 0, 'items': []}, 'deferred_pages': {'count': 2, 'items': [11, 32]}, 'pages_total': None, 'pages_read': None, 'coverage_complete': False}}
+
+======================================================================
+FAIL: test_null_or_invalid_coordinate_values_do_not_become_available (test_w17_root_scope_integrity.RootScopeIntegrity.test_null_or_invalid_coordinate_values_do_not_become_available)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 64, in test_null_or_invalid_coordinate_values_do_not_become_available
+    self.assertEqual(dim["facets"]["geometry_availability"]["value"], "unavailable")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'available' != 'unavailable'
+- available
++ unavailable
+? ++
+
+
+======================================================================
+FAIL: test_omitted_count_cannot_exceed_its_own_universe (test_w17_root_scope_integrity.RootScopeIntegrity.test_omitted_count_cannot_exceed_its_own_universe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 56, in test_omitted_count_cannot_exceed_its_own_universe
+    self.assertIn("selection_count_out_of_range", codes(dim))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'selection_count_out_of_range' not found in []
+
+======================================================================
+FAIL: test_same_attempt_label_in_another_run_is_not_current_adoption (test_w17_root_scope_integrity.RootScopeIntegrity.test_same_attempt_label_in_another_run_is_not_current_adoption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 41, in test_same_attempt_label_in_another_run_is_not_current_adoption
+    self.assertNotEqual(dim["facets"]["status_index_binding"]["value"]["binding"], "current")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'current' == 'current'
+
+======================================================================
+FAIL: test_source_review_keeps_own_source_and_cannot_claim_import_scope (test_w17_root_scope_integrity.RootScopeIntegrity.test_source_review_keeps_own_source_and_cannot_claim_import_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 31, in test_source_review_keeps_own_source_and_cannot_claim_import_scope
+    self.assertEqual(dim["status"], "unknown")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'observed' != 'unknown'
+- observed
++ unknown
+
+
+======================================================================
+FAIL: test_unknown_selection_schema_cannot_supply_current_facets (test_w17_root_scope_integrity.RootScopeIntegrity.test_unknown_selection_schema_cannot_supply_current_facets)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 23, in test_unknown_selection_schema_cannot_supply_current_facets
+    self.assertNotIn("selection_check", result["dimensions"]["source_scan"]["raw"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'selection_check' unexpectedly found in {'bundle': {'native_scan': 'complete', 'structure_complete': True, 'opaque_pages': {'count': 0, 'items': []}, 'deferred_pages': {'count': 0, 'items': []}, 'pages_total': 30, 'pages_read': 30, 'coverage_complete': False}, 'selection_check': {'native_scan': 'partial', 'structure_complete': False, 'opaque_pages': {'count': 0, 'items': []}, 'deferred_pages': {'count': 2, 'items': [11, 32]}, 'pages_total': None, 'pages_read': None, 'coverage_complete': False}}
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.013s
+
+FAILED (failures=7, errors=1)

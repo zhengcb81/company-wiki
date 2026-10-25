@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_w16_root_basis_integrity.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast-w16-root-acceptance",
+  "exit_code": 1,
+  "seconds": 1.264,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "temporary_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\w16-root-red-j6aux9wp",
+  "temporary_root_restored_absent": true
+}

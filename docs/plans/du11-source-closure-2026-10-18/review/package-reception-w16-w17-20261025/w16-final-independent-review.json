@@ -1,0 +1,122 @@
+{
+  "schema_version": "root-package-final-independent-review/1",
+  "package_id": "W16-RF-BASIS",
+  "date": "2026-10-25",
+  "verdict": "PASS_ENGINEERING_COMPONENT_SCOPE",
+  "reviewed_head": "611b1d62b2eb3228df037c95145a1d8d8d1f01d8",
+  "reviewed_working_tree": "uncommitted ROOT changes, exact file bytes bound below",
+  "candidate": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w16-root-acceptance",
+  "author_main_candidate_modified_by_reviewer": false,
+  "previous_report_preserved": "w16-independent-review.md/json",
+  "root_changed_paths": [
+    "SKILL.md",
+    "references/revenue-basis.md",
+    "scripts/contracts/document.py",
+    "scripts/generate_input_template.py",
+    "scripts/research/revenue_basis.py",
+    "scripts/revenue_backtest.py",
+    "scripts/revenue_report.py",
+    "tests/test_w16_revenue_basis.py",
+    "tests/test_w16_revenue_basis_cli.py",
+    "tests/test_w16_root_basis_integrity.py"
+  ],
+  "reviewed_file_sha256": {
+    "SKILL.md": "2fc6389279398051d50bb0d26285c2708a53e97060c2a909915e64824243455b",
+    "references/revenue-basis.md": "bad86ce1051b387307b7506b0faf90b6484d2079b3f60fffd0493193ee3b7b75",
+    "scripts/revenue_backtest.py": "7b585a86a8aae32d48c0ce1aa2f1e82398b48951788ccfea6e843512f13d47b7",
+    "tests/test_w16_root_basis_integrity.py": "7059685bd3f25f8c023a1dea965b9e1f341846e2bbafd3caa49f1684230c95bb",
+    "scripts/research/revenue_basis.py": "fa8636d857b0d924d3d3f97c485bba4e51179fb09147936a7a207e1928d162ef",
+    "scripts/research/input_quantities.py": "b4160bbd73d539b79f5edf00bedef6f1a3bd9071a3475bef06ee6342bb9406c1",
+    "scripts/contracts/document.py": "d72c030de07163181c43799d5189d293ac67d5b168efba06113fc0ce55deee81",
+    "scripts/revenue_report.py": "cc5574491e18241336333b71492f6f8ef6e1e34ca629fbbf9bc70b78b7f9d19f",
+    "scripts/lint_input.py": "2814b157faad471dda24e363f03da38c84933f651f7c3f72b82206829e4f25f1",
+    "scripts/generate_input_template.py": "8ce445490509d2f4dc65ccd06a3aaf591b2d06c1c8ab397414049a69c8732687",
+    "tests/test_w16_revenue_basis.py": "7303c61369f221a6e8a87467b5f1e4929d763fcac3fdc43cc8789585fe8556cd",
+    "tests/test_w16_revenue_basis_cli.py": "6765312b6ac70699dfabb54e43d0902731730ab851c0ce20692c4d1a6d465cc1",
+    "tests/test_backtest.py": "d0972e238066f40e4c52d25806683749ddfa2c84e7f6652f38ff44f3b7efc16e",
+    "tests/test_data_contract.py": "3d30b0fc90649f0fa640aeeffa4207c1cc7c9791bd99a8c1af50200ff5582166"
+  },
+  "source_matches_executed_chain": true,
+  "finding_resolutions": [
+    {
+      "id": "F1",
+      "status": "CLOSED",
+      "basis": "labels-only not_declared; source-linked same group positive and different group negative public CLI/backtest checked"
+    },
+    {
+      "id": "F2",
+      "status": "CLOSED_STRUCTURAL_NUMERIC_SCOPE",
+      "basis": "explicit component metadata conflicts/unsupported keys rejected; component claim-source membership enforced; excerpt relationship semantics remains source audit responsibility"
+    },
+    {
+      "id": "F3",
+      "status": "CLOSED",
+      "basis": "real public create/evaluate suppresses historical CAGR, MASE/RMSSE for mixed or insufficient declarations and reports reasons; flat-base remains"
+    },
+    {
+      "id": "F4",
+      "status": "CLOSED",
+      "basis": "same-owner declared continuing parameter anchor adopted in real CLI; wrong target policy claim rejected; undeclared parameter total compatibility retained"
+    }
+  ],
+  "unresolved_in_scope_count": 0,
+  "requirements": {
+    "B01": "PASS",
+    "B02": "PASS",
+    "B03": "PASS_ENGINEERING_CONTRACT",
+    "B04": "PASS_STRUCTURAL_NUMERIC_SCOPE_NOT_SOURCE_SEMANTIC_APPROVAL",
+    "B05": "PASS_PUBLIC_CONSUMPTION",
+    "B06": "PASS_COMPONENT_MATRIX",
+    "B07": "AUTHOR_EVIDENCE_RETAINED_NOT_SOURCE_REAUDITED",
+    "B08": "PASS"
+  },
+  "independent_execution": {
+    "cli_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w16\\counterexamples-a5fc49e493\\receipt.json",
+    "cli_receipt_sha256": "544c6db5d043c83a3011630a625729f21ef4f5a70f2ca649b064010e94cc401b",
+    "cli_calls": 18,
+    "cli_child_seconds": 44.846,
+    "case_count": 9,
+    "checks": {
+      "labels_alone_not_comparable": true,
+      "mixed_history_cagr_and_scales_disabled": true,
+      "mixed_history_reason": true,
+      "explicit_component_conflicts_rejected": true,
+      "declared_continuing_parameter_accepted": true,
+      "supported_group_enables_cagr": true,
+      "legacy_numeric_unchanged_labelled": true,
+      "source_linked_continuing_anchor": true,
+      "parameter_policy_target_enforced": true,
+      "different_group_disables_cagr": true
+    },
+    "all_checks_pass": true,
+    "source_unchanged": true,
+    "artifact_count_excluding_receipt": 36,
+    "artifact_bytes_excluding_receipt": 1622583,
+    "test_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w16-w17-root-acceptance\\review-w16\\final-tests-e783aa05c7\\receipt.json",
+    "test_receipt_sha256": "0c85305fae442863e33726926fd52f4eadd5fbbf39ef009010962ac658ff1923",
+    "test_command": [
+      "C:\\Miniconda\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_w16_root_basis_integrity.py",
+      "tests/test_backtest.py",
+      "tests/test_data_contract.py"
+    ],
+    "test_exit": 0,
+    "test_count": 60,
+    "pytest_reported_seconds": 8.6,
+    "test_harness_seconds": 23.64,
+    "full_gate_rerun": false
+  },
+  "source_content_semantics_approved": false,
+  "real_company_rf_approved": false,
+  "ST_A02_closed": false,
+  "usage": {
+    "model_calls": 0,
+    "downloads": 0
+  },
+  "next_step": "ROOT commit/merge the same reviewed bytes; actual source/company RF quality remains separate; changed code bytes require delta review"
+}

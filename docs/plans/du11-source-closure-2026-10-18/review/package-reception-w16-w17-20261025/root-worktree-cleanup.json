@@ -1,0 +1,16 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w16-root-acceptance",
+    "head_preserved_on_main": "695dc7493cd5a1d3e10f7d9d1d5436f5447a3861",
+    "approx_logical_bytes_removed": 55312388,
+    "removed": true,
+    "author_worktree_modified": false
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w17-root-acceptance",
+    "head_preserved_on_main": "33200f8c947f35be75a77de38040982724e033a7",
+    "approx_logical_bytes_removed": 6296076,
+    "removed": true,
+    "author_worktree_modified": false
+  }
+]

@@ -1,0 +1,41 @@
+test_explicit_empty_spans_are_observed_zero_and_conflict_with_five (test_w17_root_scope_integrity.RootScopeIntegrity.test_explicit_empty_spans_are_observed_zero_and_conflict_with_five) ... ok
+test_foreign_selection_does_not_merge_into_current_bundle (test_w17_root_scope_integrity.RootScopeIntegrity.test_foreign_selection_does_not_merge_into_current_bundle) ... ok
+test_matching_selection_bytes_do_not_override_foreign_selection_source (test_w17_root_scope_integrity.RootScopeIntegrity.test_matching_selection_bytes_do_not_override_foreign_selection_source) ... FAIL
+test_nested_review_scope_operation_must_not_be_overwritten_by_import (test_w17_root_scope_integrity.RootScopeIntegrity.test_nested_review_scope_operation_must_not_be_overwritten_by_import) ... FAIL
+test_null_or_invalid_coordinate_values_do_not_become_available (test_w17_root_scope_integrity.RootScopeIntegrity.test_null_or_invalid_coordinate_values_do_not_become_available) ... ok
+test_omitted_count_cannot_exceed_its_own_universe (test_w17_root_scope_integrity.RootScopeIntegrity.test_omitted_count_cannot_exceed_its_own_universe) ... ok
+test_optional_nonobject_model_view_does_not_abort_import (test_w17_root_scope_integrity.RootScopeIntegrity.test_optional_nonobject_model_view_does_not_abort_import) ... ok
+test_same_attempt_label_in_another_run_is_not_current_adoption (test_w17_root_scope_integrity.RootScopeIntegrity.test_same_attempt_label_in_another_run_is_not_current_adoption) ... ok
+test_source_review_actual_selection_artifact_hash_cannot_be_ignored (test_w17_root_scope_integrity.RootScopeIntegrity.test_source_review_actual_selection_artifact_hash_cannot_be_ignored) ... ok
+test_source_review_keeps_own_source_and_cannot_claim_import_scope (test_w17_root_scope_integrity.RootScopeIntegrity.test_source_review_keeps_own_source_and_cannot_claim_import_scope) ... ok
+test_unhashable_optional_schema_is_diagnostic_not_exception (test_w17_root_scope_integrity.RootScopeIntegrity.test_unhashable_optional_schema_is_diagnostic_not_exception) ... ok
+test_unknown_selection_schema_cannot_supply_current_facets (test_w17_root_scope_integrity.RootScopeIntegrity.test_unknown_selection_schema_cannot_supply_current_facets) ... ok
+
+======================================================================
+FAIL: test_matching_selection_bytes_do_not_override_foreign_selection_source (test_w17_root_scope_integrity.RootScopeIntegrity.test_matching_selection_bytes_do_not_override_foreign_selection_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 89, in test_matching_selection_bytes_do_not_override_foreign_selection_source
+    self.assertEqual(result["carriers"]["source_review"]["scope_binding"]["status"], "unrelated")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'matched' != 'unrelated'
+- matched
++ unrelated
+
+
+======================================================================
+FAIL: test_nested_review_scope_operation_must_not_be_overwritten_by_import (test_w17_root_scope_integrity.RootScopeIntegrity.test_nested_review_scope_operation_must_not_be_overwritten_by_import)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w17-root-acceptance\tests\test_w17_root_scope_integrity.py", line 97, in test_nested_review_scope_operation_must_not_be_overwritten_by_import
+    self.assertEqual(dim["status"], "unknown")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'observed' != 'unknown'
+- observed
++ unknown
+
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.013s
+
+FAILED (failures=2)

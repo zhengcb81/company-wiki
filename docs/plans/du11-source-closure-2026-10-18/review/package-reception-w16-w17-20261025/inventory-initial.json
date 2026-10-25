@@ -1,0 +1,64 @@
+[
+  {
+    "repo": "revenue-forecast",
+    "head": "094d55ad884e4a886b1537c0e76f3a0bede16ca2",
+    "branch": "main",
+    "status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json",
+    "remotes": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)",
+    "recent": "094d55ad docs: finalize handoff verdict and receipt hygiene\nc48f86bd fix: validate shared reading v3 diagnostics\ncafcfa42 docs: record W14 root acceptance\naa19b653 w14: handoff — review APPROVE, dual receipts, full delivery set\n3bc0508e w14: close re-review companion obligations"
+  },
+  {
+    "repo": "revenue-forecast-w16-basis",
+    "head": "611b1d62b2eb3228df037c95145a1d8d8d1f01d8",
+    "branch": "codex/w16-rf-basis-20261025",
+    "status": "",
+    "remotes": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)",
+    "recent": "611b1d62 w16: record pushed branch and final head in handoff.json\n24c0ca0c w16: delivery — split independent review (S1-S6) closed, handoff COMPLETE\n95c25c4b w16: state the linter's basis scope honestly (S3-1)\ncb60bd21 w16: review fixes — shared unit resolution, non-negative components, safe claim compare\n84e2152f w16: optional revenue basis metadata for historical observations",
+    "declared_final_head": "24c0ca0c",
+    "actual_matches": {
+      "scripts/research/revenue_basis.py": "9c4d0f3d7ed9da924fc9d4a92b5ca0c3c3eaaba58cf2ebe33127d8b111f92bd0",
+      "scripts/research/input_quantities.py": "b4160bbd73d539b79f5edf00bedef6f1a3bd9071a3475bef06ee6342bb9406c1",
+      "scripts/contracts/document.py": "5264ca96c3b435f2b7c6c5aea2d1a55ec4b967b7259c7f90ab5a1f141974d1f3",
+      "scripts/revenue_report.py": "56f59db1decc0f1e30059abbc5d3e1b731039f377fc1d0f0ea9e3f8810c5e95c",
+      "scripts/lint_input.py": "2814b157faad471dda24e363f03da38c84933f651f7c3f72b82206829e4f25f1",
+      "scripts/generate_input_template.py": "e8070d73b192da242ca155d2a326d49c92c5914dcb41868f2d15110542720270",
+      "tests/test_w16_revenue_basis.py": "9e257d2cb83b28888eaf0c1594b7c8bd0d15dba4820998c8a953699a75365904",
+      "tests/test_w16_revenue_basis_cli.py": "733763ff3631ce15a0ee891341514ecd75949f839c199cd57d1fa7a58854b6c2",
+      "delivery/w16/review_s1.md": "8d8aea8350192222ff22b5484003a16470380fde0eb3b71090417e3ae3fedb56",
+      "delivery/w16/review_s2.md": "486765f9567f772cfd2242f2c21348ce830e4b6da31ceac94d8f34d7cb0a46e6",
+      "delivery/w16/review_s3.md": "685b3fd8fc0240cbe3b5ce58194958304503a9b473f922fa5f64c3362f3f44a7",
+      "delivery/w16/review_s4.md": "a3c2446b0f6c3dd6fce63fa1db25a79910f988530674b3c8f133a48cbc9e1fa1",
+      "delivery/w16/review_s5.md": "92c5d01283551c2f28c6c02ed0e13a3bc2c0f445bceea63d07e8ffaf6b924e6e",
+      "delivery/w16/review_s6_exec.md": "1611657a755ef4afee7b1f823bd81a779a05b8bec3ed1a33581a95963237631a"
+    },
+    "mismatches": {},
+    "diff_stat": "delivery/w16/handoff.json                          | 239 +++++++++\n delivery/w16/handoff.md                            |  64 +++\n delivery/w16/independent_review.md                 |  36 ++\n delivery/w16/review.json                           |  29 ++\n delivery/w16/review.md                             |  28 ++\n delivery/w16/review_s1.md                          |  61 +++\n delivery/w16/review_s2.md                          |  62 +++\n delivery/w16/review_s3.md                          |  72 +++\n delivery/w16/review_s4.md                          |  47 ++\n delivery/w16/review_s5.md                          |  28 ++\n delivery/w16/review_s6_exec.md                     | 153 ++++++\n docs/plans/w16-rf-basis-2026-10-25/COMMON.md       |  53 ++\n docs/plans/w16-rf-basis-2026-10-25/INPUTS.json     |  14 +\n docs/plans/w16-rf-basis-2026-10-25/START_HERE.md   |  21 +\n .../w16-rf-basis-2026-10-25/construction_card.md   |  47 ++\n docs/plans/w16-rf-basis-2026-10-25/findings.md     |  55 ++\n .../w16-rf-basis-2026-10-25/handoff.template.json  |  50 ++\n docs/plans/w16-rf-basis-2026-10-25/progress.md     |  38 ++\n docs/plans/w16-rf-basis-2026-10-25/task_plan.md    |  18 +\n scripts/contracts/document.py                      |  44 +-\n scripts/generate_input_template.py                 |  12 +\n scripts/lint_input.py                              |  18 +\n scripts/research/input_quantities.py               |  34 ++\n scripts/research/revenue_basis.py                  | 554 +++++++++++++++++++++\n scripts/revenue_report.py                          | 130 ++++-\n tests/test_w16_revenue_basis.py                    | 465 +++++++++++++++++\n tests/test_w16_revenue_basis_cli.py                | 279 +++++++++++\n 27 files changed, 2627 insertions(+), 24 deletions(-)"
+  },
+  {
+    "repo": "revenue-forecast-audit",
+    "head": "bb41d9beda94fead3aba4bc65ed8c6dce4314e97",
+    "branch": "main",
+    "status": "",
+    "remotes": "",
+    "recent": "bb41d9b docs: record W15 root acceptance\n37e12e6 fix: preserve W15 fixture bytes across line endings\n9bc2248 w15: handoff COMPLETE with independent follow-up APPROVE\n77d1264 w15: fix review findings F1-F4, N1-N3 with regressions\n3e67a38 w15: add adoption evidence export/replay tools, fixtures and tests"
+  },
+  {
+    "repo": "revenue-forecast-audit-w17-coverage",
+    "head": "7c71c8111f14a3aae6a1df274eeffb81c01939b7",
+    "branch": "codex/w17-audit-coverage-20261025",
+    "status": "",
+    "remotes": "",
+    "recent": "7c71c81 w17: close PWF milestones; handoff next step is ROOT reception\n62dbcb1 w17: record final handoff head\n034a0a2 w17: handoff COMPLETE with dual independent-review records\nfaa1f3e w17: fix independent-review findings F1-F5 with regressions\n3296b96 w17 C: full suite green, real read-only replay receipts, skill validation record",
+    "declared_final_head": "034a0a2",
+    "actual_matches": {
+      "skills/revenue-forecast-audit/scripts/coverage_observations.py": "3e85eb7578468453ca2a26de67d77cf9a4208baf405e1bad3c98c55d36a51859",
+      "skills/revenue-forecast-audit/scripts/summary_review_import.py": "860af26a38bdfa03bc2a11932624c35c4cc822498763775dd12d48a4f6ff8aee",
+      "skills/revenue-forecast-audit/references/coverage-observations.md": "19ad010581374b542c005b7e3427e560ceb58936f477b889db38ad0781f5c2bc",
+      "skills/revenue-forecast-audit/SKILL.md": "5124273299b4310431a885eadb5a9d834d3aa82b6848be413b0f17c308e5ad21",
+      "tests/test_w17_coverage_observations.py": "ab8320f9eae4c2ac707a5ee18945848841216b2033d2aa83a8eabe60682f5ca9",
+      "tests/test_w17_import_wiring.py": "6a961945ae791b331842f54dbe27d48bf714e4de45331a09d5bf2618d8d64e0a"
+    },
+    "mismatches": {},
+    "diff_stat": "delivery/w17/handoff.json                          | 217 +++++\n delivery/w17/handoff.md                            | 128 +++\n delivery/w17/independent-review-final.json         |  80 ++\n delivery/w17/independent-review-final.md           |  63 ++\n delivery/w17/independent-review-initial.json       | 252 ++++++\n delivery/w17/independent-review-initial.md         | 102 +++\n delivery/w17/real-replay-import-report.json        | 894 +++++++++++++++++++\n delivery/w17/real-replay-receipt.json              | 102 +++\n delivery/w17/review.json                           |  31 +\n delivery/w17/review.md                             |  28 +\n delivery/w17/skill-validation-receipt.json         |  22 +\n docs/plans/w17-audit-coverage-2026-10-25/COMMON.md |  53 ++\n .../w17-audit-coverage-2026-10-25/INPUTS.json      |  14 +\n .../w17-audit-coverage-2026-10-25/START_HERE.md    |  21 +\n .../construction_card.md                           |  48 +\n .../w17-audit-coverage-2026-10-25/findings.md      |  56 ++\n .../handoff.template.json                          |  50 ++\n .../w17-audit-coverage-2026-10-25/progress.md      |  45 +\n .../w17-audit-coverage-2026-10-25/task_plan.md     |  18 +\n skills/revenue-forecast-audit/SKILL.md             |   7 +\n .../references/coverage-observations.md            |  56 ++\n .../scripts/coverage_observations.py               | 973 +++++++++++++++++++++\n .../scripts/summary_review_import.py               |  37 +-\n .../w17_coverage/bundle_count_conflicts.json       |  84 ++\n .../fixtures/w17_coverage/bundle_html_no_bbox.json |  98 +++\n .../w17_coverage/bundle_missing_fields.json        |  50 ++\n .../bundle_scan_complete_sel_partial.json          | 145 +++\n tests/fixtures/w17_coverage/manifest.json          |  56 ++\n .../fixtures/w17_coverage/model_view_not_sent.json |  22 +\n .../w17_coverage/selection_check_partial.json      |  45 +\n .../w17_coverage/source_review_du5_report.json     |  11 +\n .../fixtures/w17_coverage/source_review_gold8.json |  18 +\n .../fixtures/w17_coverage/status_index_mixed.json  |  60 ++\n .../w17_coverage/status_index_old_attempt.json     |  28 +\n .../status_index_same_source_two_docs.json         |  44 +\n tests/test_w17_coverage_observations.py            | 451 ++++++++++\n tests/test_w17_import_wiring.py                    | 213 +++++\n 37 files changed, 4620 insertions(+), 2 deletions(-)"
+  }
+]

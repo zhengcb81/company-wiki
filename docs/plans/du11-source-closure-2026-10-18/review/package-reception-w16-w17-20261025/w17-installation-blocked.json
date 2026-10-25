@@ -1,0 +1,60 @@
+{
+  "status": "BLOCKED_OS_WRITE",
+  "attempts": 2,
+  "error": "PermissionError errno13 creating .SKILL.md.<uuid> at .claude/skills/revenue-forecast-audit, including require_escalated standard project synchronizer",
+  "approval_rejected": false,
+  "existing_files_replaced": 0,
+  "acl_changed": false,
+  "destinations": [
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "runtime": {
+        "SKILL.md": {
+          "exists": true,
+          "sha256": "5cef343ebbf0b9a1386b9f0c276f3a87248c241f82374186503ceb9719b51252",
+          "matches_main": false
+        },
+        "scripts/coverage_observations.py": {
+          "exists": false,
+          "sha256": null,
+          "matches_main": false
+        },
+        "scripts/summary_review_import.py": {
+          "exists": true,
+          "sha256": "688729fd10645ae81658f3343f7948e19ee09d0766723ea11952037511978100",
+          "matches_main": false
+        },
+        "references/coverage-observations.md": {
+          "exists": false,
+          "sha256": null,
+          "matches_main": false
+        }
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "runtime": {
+        "SKILL.md": {
+          "exists": true,
+          "sha256": "5cef343ebbf0b9a1386b9f0c276f3a87248c241f82374186503ceb9719b51252",
+          "matches_main": false
+        },
+        "scripts/coverage_observations.py": {
+          "exists": false,
+          "sha256": null,
+          "matches_main": false
+        },
+        "scripts/summary_review_import.py": {
+          "exists": true,
+          "sha256": "688729fd10645ae81658f3343f7948e19ee09d0766723ea11952037511978100",
+          "matches_main": false
+        },
+        "references/coverage-observations.md": {
+          "exists": false,
+          "sha256": null,
+          "matches_main": false
+        }
+      }
+    }
+  ]
+}

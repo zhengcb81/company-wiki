@@ -1,0 +1,84 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    "SKILL.md",
+    "references/revenue-basis.md",
+    "scripts/contracts/document.py",
+    "scripts/generate_input_template.py",
+    "scripts/lint_input.py",
+    "scripts/research/input_quantities.py",
+    "scripts/research/revenue_basis.py",
+    "scripts/revenue_backtest.py",
+    "scripts/revenue_report.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 2,
+      "selected": [
+        "SKILL.md",
+        "references/revenue-basis.md",
+        "scripts/contracts/document.py",
+        "scripts/generate_input_template.py",
+        "scripts/lint_input.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/revenue_basis.py",
+        "scripts/revenue_backtest.py",
+        "scripts/revenue_report.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "SKILL.md",
+        "references/revenue-basis.md",
+        "scripts/contracts/document.py",
+        "scripts/generate_input_template.py",
+        "scripts/lint_input.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/revenue_basis.py",
+        "scripts/revenue_backtest.py",
+        "scripts/revenue_report.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 2,
+      "selected": [
+        "SKILL.md",
+        "references/revenue-basis.md",
+        "scripts/contracts/document.py",
+        "scripts/generate_input_template.py",
+        "scripts/lint_input.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/revenue_basis.py",
+        "scripts/revenue_backtest.py",
+        "scripts/revenue_report.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "SKILL.md",
+        "references/revenue-basis.md",
+        "scripts/contracts/document.py",
+        "scripts/generate_input_template.py",
+        "scripts/lint_input.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/revenue_basis.py",
+        "scripts/revenue_backtest.py",
+        "scripts/revenue_report.py"
+      ]
+    }
+  ]
+}

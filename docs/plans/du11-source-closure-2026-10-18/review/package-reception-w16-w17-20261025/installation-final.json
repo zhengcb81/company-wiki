@@ -1,0 +1,61 @@
+{
+  "schema_version": "root-install-verification/1",
+  "rf": [
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "owned_runtime_drift": 0,
+      "cli_cases": [
+        {
+          "name": "legacy",
+          "exit_code": 0,
+          "history_preserved": true,
+          "comparison_assertion": true
+        },
+        {
+          "name": "source-linked-comparison",
+          "exit_code": 0,
+          "history_preserved": true,
+          "comparison_assertion": true
+        }
+      ]
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "owned_runtime_drift": 0,
+      "cli_cases": [
+        {
+          "name": "legacy",
+          "exit_code": 0,
+          "history_preserved": true,
+          "comparison_assertion": true
+        },
+        {
+          "name": "source-linked-comparison",
+          "exit_code": 0,
+          "history_preserved": true,
+          "comparison_assertion": true
+        }
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 41,
+      "changed": [],
+      "mismatches": [],
+      "status": "MATCH"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 41,
+      "changed": [],
+      "mismatches": [],
+      "status": "MATCH"
+    }
+  ],
+  "new_paid_calls": 0,
+  "temporary_test_root_restored_absent": true,
+  "audit_write_block_resolved": "Same existing synchronizer completed using configured default C:/Miniconda/python.exe; no ACL or approval controls changed",
+  "rf_prior_reading_drift_resolved": "Two exact old Git versions replaced from already-published main after 85 focused reading tests; all owned runtime now matches"
+}
