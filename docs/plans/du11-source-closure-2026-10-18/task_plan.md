@@ -4,13 +4,13 @@
 
 ## Next Step
 
-最新状态（2026-10-25）：MiniMax-M3.1-Flash配置根因已修为`reasoning_effort=low`。formal-v4恰好一次HTTP 200（17,666 tokens/$0.007102），生命周期与FF复用通过；母账累计1,783,378 tokens/$0.724836。decoder/provider-specific修复的精确CI `40144505969`（HEAD `ecdb2fd6`）全绿；QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收。**本轮生产协议切换已在本地实现但尚未提交：** selector `0.9.0`默认v4任务摘要，v5作为显式兼容；付费响应持久化/零POST恢复已覆盖v4/v5，预检按需预留响应与v5专用执行报告空间；Phase C与README同步默认v4。最新46项协议/Phase C测试、14项摘要/缓存/生成测试、预算边界红绿测试通过，Ruff、`mypy src`（374文件）与diff-check通过，零真实模型调用。独立终审通过，无P0–P2发现，精确绑定见[复核收据](review/scoped-v4-default-recovery-final-review-20261025.md)。本次改动尚无新的CI，因此不能称为已发布。
+最新状态（2026-10-25）：MiniMax-M3.1-Flash配置根因已修为`reasoning_effort=low`。formal-v4恰好一次HTTP 200（17,666 tokens/$0.007102），生命周期与FF复用通过；母账累计1,783,378 tokens/$0.724836。decoder/provider-specific修复的精确CI `40144505969`（HEAD `ecdb2fd6`）全绿；QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收。selector `0.9.0`默认v4任务摘要，v5显式兼容；v4/v5付费响应持久化/零POST恢复及分协议容量预检已独审通过并推送为`bc6cebf9`。精确CI `40147867691` 的Unit tests因一份旧恢复测试仍假定默认request `/6`而失败；根因已复现为测试fixture滞后，修复后该用例本机1/1通过，独立窄幅复审无P0–P2；重推送/新CI待完成。其余46项协议/Phase C、14项摘要/缓存/生成测试、Ruff、`mypy src`（374文件）与diff-check均通过，零真实模型调用。
 
 **内容仍未验收：** formal-v4旧运行只选112/484候选、314 deferred、layout incomplete；43条claim是旧排名路径生成的`uncertain/needs_review`，5项deferred、2项unsupported，RF not-consumed。既有付费收据保持不可变。离线协议测试不证明真实摘要质量；不得为了补历史状态重放formal-v4。
 
 ### 当前下一步（TDD顺序）
 
-1. **实现、集中回归和独审已通过，待发布：** 默认路径绑定v4、v5显式兼容；v4/v5都固定完整付费HTTP响应并支持精确恢复；省略/v4只预留响应与pin，显式v5另预留执行报告；Phase C和README默认v4。红测曾暴露Phase C/holdout旧v5假设、v4缺少付费响应pin和v4预检被v5报告空间误拒，修复后46+14聚焦回归通过，容量边界3例通过。独立终审无P0–P2发现，见绑定收据；只提交相关源码/测试/PWF，推送并核验精确HEAD CI。
+1. **v4默认与恢复已独审/推送；CI中的旧测试契约已根修并复审：** 默认路径绑定v4、v5显式兼容；v4/v5都固定完整付费HTTP响应并支持精确恢复；省略/v4只预留响应与pin，显式v5另预留执行报告；Phase C和README默认v4。46+14聚焦回归、容量边界3例和独立终审通过。精确CI `40147867691` 发现既有付费恢复单测fixture仍写死 `/6` + v5 ranking；已替换为共享v4摘要fixture，红绿复现后1/1通过，窄幅独立复审无P0–P2。仅提交该测试/PWF修复、推送并核新SHA精确CI，再继续覆盖根因。
 2. **覆盖仍开放：** 冻结formal-v4真实selection、50-task结果、原件和gold；以真实source gold核对112上限、308预算延期、24超长section、3 continuation、2未读表体。设计稳定可恢复、预算不重复计算的value-ranked batches，分别报告总覆盖与单批覆盖；任何漏项继续partial/deferred。不得把4,087个unassigned直接算作未读，也不得以全量上限规避问题。
 3. **协议/质量边界：** v4测试要持续验证原语言短摘要、同源support/context、合同modality、未知/跨task/跨source引用拒绝、质量flag保留和cache/recovery身份。确定性loopback仅证明协议和生命周期；另以冻结真实样本评估摘要概括、关键事实召回及事实保真，不能据fixture通过判定内容质量。
 4. **真实摘要与RF消费：** 只有覆盖策略、缓存/恢复、source identity与原始字节不变证据经过独立大节点复核后，才考虑一次新的配置内有界正式摘要。随后验证RF实际读取并使用证据、cache复用/崩溃恢复、跨市场文种和W12四审，再进入公司holdout循环；按已有母账/限额，不新开预算。

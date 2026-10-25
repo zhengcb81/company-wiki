@@ -11,6 +11,7 @@ from company_wiki.automation.store import AutomationStore
 from company_wiki.automation.supervisor import AutomationSupervisor
 from integration.test_narrative_legacy_effort_history import _request, _database_dump
 from support import narrative_batch_fixtures as fixtures
+from support.scoped_model_response import source_grounded_scoped_reply
 from support.narrative_batch_fixtures import (
     isolated_batch_directory,
     prepare_source_catalog,
@@ -48,11 +49,7 @@ def test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee(
     loopback_model_server,
     monkeypatch,
 ):
-    def rank_reply(data):
-        assert data["schema_version"] == "narrative-model-request/6"
-        return {"decisions": []}
-
-    monkeypatch.setattr(fixtures, "response_draft", rank_reply)
+    monkeypatch.setattr(fixtures, "response_draft", source_grounded_scoped_reply)
     monkeypatch.setattr(batch, "AutomationSupervisor", Du11FaultSupervisor)
     expected_owner = (
         Path(__file__).resolve().parents[3]

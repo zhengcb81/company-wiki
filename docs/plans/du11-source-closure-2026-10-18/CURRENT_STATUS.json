@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_V4_SCOPED_SUMMARY_DEFAULT_LOCAL_TESTS_PASS_CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "V4_DEFAULT_AND_RECOVERY_PUSHED_CI_STALE_FIXTURE_CORRECTED_AND_INDEPENDENTLY_REVIEWED_PENDING_COMMIT_AND_EXACT_CI_CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -322,7 +322,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "The 0.9 production selector and Phase C runner now default locally to task-scoped v4 summaries; v4/v5 paid-response pinning and exact zero-POST restart recovery are covered. 46 focused tests and 14 summary/cache/generation tests pass; Ruff, mypy src (374 files), and diff-check pass. No provider call was made. Obtain final independent review of the complete diff, resolve findings, then publish and verify exact-head CI. Content/coverage/RF acceptance remains open: first design and test bounded resumable coverage against frozen source gold; do not call offline fixture success semantic-quality acceptance or retry formal-v4.",
+  "next_step_now": "Selector 0.9 and Phase C v4 default/recovery were independently reviewed and pushed as bc6cebf920d57d0c9c0d5221236a9cf7639dafef. Exact CI 40147867691 failed one Unit test because test_batch_recovery.py still hardcoded the retired v5 request schema/ranking fixture; no production regression was shown. Replaced it with the shared v4 source-grounded fixture and reproduced the exact case green (1/1, 10.06s, no provider call). Independent review passed with no P0-P2 findings, bound to bc6cebf920d57d0c9c0d5221236a9cf7639dafef and diff SHA256 dab37e06abcd501dcfe978812a483bbadf0a5bdc2ce2876bbc174517f23a0d9f. Commit and push only the test/PWF correction, verify its exact-SHA CI. Then continue bounded resumable coverage against frozen source gold; content/coverage/RF acceptance remains open, and do not retry formal-v4 or treat fixture success as semantic acceptance.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -1205,7 +1205,7 @@
     "temporary_workspace_root": ".tmp-du11-v4-followup plus runner-relocated system temp; final boundary unit used .tmp-du11-unit",
     "temporary_workspace_root_absent_after_tests": true,
     "fixture_owned_run_directories_removed_and_baseline_files_verified": true,
-    "independent_review": "PASS_NO_P0_P2",
+    "independent_review": "PASS_NO_P0_P2_FOR_V4_SOURCE_FIX_AND_NARROW_CI_FIXTURE",
     "independent_review_ref": "review/scoped-v4-default-recovery-final-review-20261025.md",
     "reviewed_head": "023252eaf3c9f8a7672d42b5e944e967e5ec49b2",
     "reviewed_diff_sha256": "06a7970f4e4bad875ae0f2dd6d72e476687e901dbe16490496d1662a62ff884d",
@@ -1467,7 +1467,7 @@
     "provider_calls_in_validation": 0
   },
   "scoped_summary_default_migration_20261025": {
-    "status": "IMPLEMENTED_LOCALLY_NOT_COMMITTED",
+    "status": "V4_DEFAULT_RECOVERY_PUSHED; STALE_CI_FIXTURE_CORRECTED_AND_INDEPENDENTLY_REVIEWED_PENDING_COMMIT_AND_NEW_CI",
     "selector_version": "0.9.0",
     "new_default_projection": "reading-model-input/4",
     "compatibility_projection": "reading-model-input/5 remains explicit",
@@ -1496,6 +1496,31 @@
     "final_independent_review_ref": "review/scoped-v4-default-recovery-final-review-20261025.md",
     "reviewed_head": "023252eaf3c9f8a7672d42b5e944e967e5ec49b2",
     "reviewed_diff_sha256": "06a7970f4e4bad875ae0f2dd6d72e476687e901dbe16490496d1662a62ff884d",
-    "untracked_fixture_sha256": "ce1642e89fc08b127dc4deeb6303ce617db84351b5f4459736687ecef53a033f"
+    "untracked_fixture_sha256": "ce1642e89fc08b127dc4deeb6303ce617db84351b5f4459736687ecef53a033f",
+    "code_commit": "bc6cebf920d57d0c9c0d5221236a9cf7639dafef",
+    "code_pushed": true,
+    "code_ci": {
+      "run_id": 40147867691,
+      "head_sha": "bc6cebf920d57d0c9c0d5221236a9cf7639dafef",
+      "status": "completed",
+      "conclusion": "failure",
+      "failed_step": "Unit tests",
+      "failed_test": "tests/unit/du11_paid_response/test_batch_recovery.py::test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee",
+      "root_cause": "test fixture hardcoded narrative-model-request/6 and v5 ranking response after selector 0.9 default moved to v4; the loopback handler failed before recording a request",
+      "annotations_ref": "https://api.github.com/repos/zhengcb81/company-wiki/check-runs/121032990382/annotations"
+    },
+    "fixture_correction": {
+      "path": "tests/unit/du11_paid_response/test_batch_recovery.py",
+      "change": "use shared source_grounded_scoped_reply fixture for v4 request/response",
+      "tests_passed": 1,
+      "seconds": 10.06,
+      "provider_calls": 0,
+      "temporary_roots_removed": true,
+      "independent_review": "PASS_NO_P0_P2",
+      "review_ref": "review/scoped-v4-ci-fixture-followup-20261025.md",
+      "reviewed_head": "bc6cebf920d57d0c9c0d5221236a9cf7639dafef",
+      "reviewed_diff_sha256": "dab37e06abcd501dcfe978812a483bbadf0a5bdc2ce2876bbc174517f23a0d9f",
+      "next_ci": "PENDING_NEW_COMMIT"
+    }
   }
 }
