@@ -1002,4 +1002,4 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - `bc6cebf9` 已推送；精确CI `40147867691` 的Ruff/mypy/compileall/config doctor成功，Unit tests失败，其余步骤被跳过。GitHub注解精确指向`test_real_batch_recovers_paid_response_without_key_resend_or_duplicate_fee`。
 - 根因是该历史付费恢复测试的本地reply fixture仍断言`narrative-model-request/6`并返回v5 `decisions`，而v4默认正确发出schema `/5`，服务在登记请求前即断言中断。不是生产恢复路径失败。
 - 将fixture改为共用的`source_grounded_scoped_reply`后，移除故障marker可重用同一付费body完成解析；精确测试红→绿，1/1 passed/10.06s。无真实provider/API调用；本轮两个pytest temp根均已清理。
-- 独立窄幅复审已通过、无P0–P2；绑定收据`review/scoped-v4-ci-fixture-followup-20261025.md`。仅该测试修复和PWF待提交/推送，新精确CI待跑。内容覆盖、正式摘要质量和RF消费仍OPEN。
+- 独立窄幅复审已通过、无P0–P2；绑定收据`review/scoped-v4-ci-fixture-followup-20261025.md`。修复和PWF提交为`3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81`并已推送；精确CI `40148571611`全绿，Fast checks（包括完整单测）4分21秒。本地pre-push 155项/32.45秒通过。测试fixture事故已关闭；内容覆盖、正式摘要质量和RF消费仍OPEN。

@@ -799,3 +799,8 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - Replaced the obsolete fixture with the already shared `source_grounded_scoped_reply`, which asserts the v4 request contract and returns a valid task-local source-grounded response after the deliberate one-shot decoder fault is removed. The exact case reproduced red before the change and passes 1/1 after it in 10.06s. No provider was called; temporary pytest roots from both runs were removed.
 - An independent read-only review of the narrow fixture/PWF correction found no P0–P2 issue; exact binding is `review/scoped-v4-ci-fixture-followup-20261025.md`.
 - Next: commit/push the test/PWF correction and check the new exact-SHA CI before continuing the source-coverage root cause.
+
+### Exact CI closure for the fixture correction
+
+- Commit `3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81` passed exact GitHub CI run `40148571611`; the Fast checks job, including the full `tests/unit` suite, completed successfully in 4m21s. The local push gate also passed 155 selected tests in 32.45s; its output explicitly leaves the full suite to CI.
+- This closes the stale test-contract failure only. Production content coverage, formal summary quality and RF consumption remain open; proceed to offline, bounded coverage/root-cause work against the frozen source gold.

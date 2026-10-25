@@ -2,24 +2,24 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "V4_DEFAULT_AND_RECOVERY_PUSHED_CI_STALE_FIXTURE_CORRECTED_AND_INDEPENDENTLY_REVIEWED_PENDING_COMMIT_AND_EXACT_CI_CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "V4_DEFAULT_AND_RECOVERY_PUSHED_EXACT_CI_GREEN_CONTENT_COVERAGE_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "275c8295f2924939695fdbfd2d19a6cc603f1111",
+  "last_code_commit": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
   "code_ci": {
-    "id": 40144505969,
-    "check_id": 108809797717,
-    "head_sha": "ecdb2fd60acec040b37188659ac75be2572f639b",
+    "id": 40148571611,
+    "check_id": 121035094340,
+    "head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40144505969",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40148571611",
     "failed_test_count": 0,
     "junit_report": null,
     "failure_summary": null,
-    "updated_at": "2026-10-24T23:57:46Z",
+    "updated_at": "2026-10-25T01:04:41Z",
     "previous_successful_ci": {
       "id": 40131924884,
       "head_sha": "808623377905520ec0c28c7330fe14243e4c6c04",
@@ -37,7 +37,9 @@
       "root_cause": "The test still expected thinking=disabled for every provider after the valid MiniMax-specific change to reasoning_effort=low.",
       "repair_commit": "275c8295f2924939695fdbfd2d19a6cc603f1111",
       "repair_validation": "64 focused tests passed; Ruff passed; diff-check passed"
-    }
+    },
+    "run_scope": "Fast checks job including full tests/unit suite",
+    "duration": "4m21s"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -322,7 +324,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Selector 0.9 and Phase C v4 default/recovery were independently reviewed and pushed as bc6cebf920d57d0c9c0d5221236a9cf7639dafef. Exact CI 40147867691 failed one Unit test because test_batch_recovery.py still hardcoded the retired v5 request schema/ranking fixture; no production regression was shown. Replaced it with the shared v4 source-grounded fixture and reproduced the exact case green (1/1, 10.06s, no provider call). Independent review passed with no P0-P2 findings, bound to bc6cebf920d57d0c9c0d5221236a9cf7639dafef and diff SHA256 dab37e06abcd501dcfe978812a483bbadf0a5bdc2ce2876bbc174517f23a0d9f. Commit and push only the test/PWF correction, verify its exact-SHA CI. Then continue bounded resumable coverage against frozen source gold; content/coverage/RF acceptance remains open, and do not retry formal-v4 or treat fixture success as semantic acceptance.",
+  "next_step_now": "Selector 0.9 and Phase C v4 default/recovery were independently reviewed and pushed as bc6cebf920d57d0c9c0d5221236a9cf7639dafef. Exact CI 40147867691 exposed a stale test-only v5 request schema/ranking fixture; it was replaced by shared source_grounded_scoped_reply. The exact regression test is green (1/1, 10.06s, no provider call), the narrow independent review passed with no P0-P2 findings, and correction commit 3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81 passed exact CI 40148571611, including the full unit suite, in 4m21s. Continue bounded resumable coverage analysis against frozen source gold; content/coverage/RF acceptance remains open. Do not retry formal-v4 or treat fixture success as semantic acceptance.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -381,13 +383,14 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40144505969,
-    "head_sha": "ecdb2fd60acec040b37188659ac75be2572f639b",
+    "id": 40148571611,
+    "check_id": 121035094340,
+    "head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40144505969",
-    "created_at": "2026-10-24T23:52:51Z",
-    "updated_at": "2026-10-24T23:57:46Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40148571611",
+    "observed_at": "2026-10-25T01:04:41Z",
+    "duration": "4m21s"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -1191,7 +1194,7 @@
     "summary_cache_and_generation": {
       "passed": 14,
       "failed": 0,
-        "seconds": 195.58,
+      "seconds": 195.58,
       "test_files": [
         "tests/unit/test_narrative_scoped_runtime_recovery.py",
         "tests/integration/test_shared_reading_production_e2e.py",
@@ -1467,7 +1470,7 @@
     "provider_calls_in_validation": 0
   },
   "scoped_summary_default_migration_20261025": {
-    "status": "V4_DEFAULT_RECOVERY_PUSHED; STALE_CI_FIXTURE_CORRECTED_AND_INDEPENDENTLY_REVIEWED_PENDING_COMMIT_AND_NEW_CI",
+    "status": "V4_DEFAULT_RECOVERY_PUSHED; STALE_CI_FIXTURE_FIXED_AND_EXACT_CI_GREEN; CONTENT_AND_RF_ACCEPTANCE_OPEN",
     "selector_version": "0.9.0",
     "new_default_projection": "reading-model-input/4",
     "compatibility_projection": "reading-model-input/5 remains explicit",
@@ -1520,7 +1523,13 @@
       "review_ref": "review/scoped-v4-ci-fixture-followup-20261025.md",
       "reviewed_head": "bc6cebf920d57d0c9c0d5221236a9cf7639dafef",
       "reviewed_diff_sha256": "dab37e06abcd501dcfe978812a483bbadf0a5bdc2ce2876bbc174517f23a0d9f",
-      "next_ci": "PENDING_NEW_COMMIT"
+      "next_ci": "COMPLETE_EXACT_SHA_SUCCESS",
+      "commit": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
+      "ci_run_id": 40148571611,
+      "ci_head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
+      "ci_status": "completed",
+      "ci_conclusion": "success",
+      "ci_duration": "4m21s"
     }
   }
 }
