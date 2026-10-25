@@ -19,6 +19,8 @@ from pathlib import Path
 import sys
 from typing import Any, Sequence
 
+import httpx
+
 from ..config import CatalogConfigError, load_catalog_config
 from ..service import SourceCatalog
 from ..canonical_writer import CanonicalSourceWriter
@@ -50,7 +52,31 @@ def _parser() -> argparse.ArgumentParser:
         default=None,
         help="offline replay root (manifest.json + *.json.gz fixtures); no network",
     )
+    parser.add_argument(
+        "--replay-source",
+        default=None,
+        metavar="SOURCE_ID",
+        help=(
+            "re-normalize one already-committed provider page from its "
+            "company-wiki source id, with zero network; reads the same "
+            "request JSON on stdin for identity"
+        ),
+    )
     return parser
+
+
+class _LazyFixtureStream(httpx.SyncByteStream):
+    """Lazy byte stream so BudgetedHTTPTransport meters the replay bytes.
+
+    Without this the MockTransport short-circuits and offline receipts show
+    zero response bytes (W19-R9).
+    """
+
+    def __init__(self, payload: bytes):
+        self._payload = payload
+
+    def __iter__(self):
+        yield self._payload
 
 
 class FixtureFileTransport:
@@ -69,8 +95,6 @@ class FixtureFileTransport:
             self.by_url[url] = payload
 
     def __call__(self, request):  # httpx handler protocol
-        import httpx
-
         url = str(request.url)
         if url not in self.by_url:
             return httpx.Response(
@@ -78,7 +102,7 @@ class FixtureFileTransport:
             )
         return httpx.Response(
             200,
-            content=self.by_url[url],
+            stream=_LazyFixtureStream(self.by_url[url]),
             headers={"content-type": "application/json; charset=utf-8"},
         )
 
@@ -168,6 +192,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         writer=CanonicalSourceWriter(catalog),
         provider=provider,
     )
+    if args.replay_source is not None:
+        # W19-R8: normalization recovery from a committed SourceRef, offline.
+        try:
+            replayed = service.replay_source(
+                request=request, source_id=args.replay_source
+            )
+        except (ValueError, KeyError) as exc:
+            json.dump(
+                _error_envelope("request_error", f"replay refused: {exc}"),
+                sys.stdout,
+            )
+            sys.stdout.write("\n")
+            return 2
+        replayed["schema_version"] = STATEMENTS_RESPONSE_SCHEMA_VERSION
+        replayed["request"] = request.to_public_dict()
+        json.dump(replayed, sys.stdout, ensure_ascii=False, indent=1)
+        sys.stdout.write("\n")
+        return 0
     try:
         response = service.handle_request(request)
     except Exception as exc:  # noqa: BLE001 - surfaced as an honest envelope

@@ -108,6 +108,8 @@ class StatementsRequest:
     as_of_date: str | None = None
     intent: str = "fetch_if_missing"
     acquisition_limits: AcquisitionLimits | None = None
+    fields: tuple[str, ...] | None = None
+    continuation: str | None = None
     schema_version: str = STATEMENTS_REQUEST_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
@@ -151,6 +153,7 @@ class StatementsRequest:
             "schema_version", "company_query", "market", "statements",
             "report_types", "period_end_from", "period_end_to", "all_history",
             "knowledge_mode", "as_of_date", "intent", "acquisition_limits",
+            "fields", "continuation",
         }
         unknown = set(payload) - allowed
         if unknown:
@@ -186,6 +189,18 @@ class StatementsRequest:
             if limits_payload is not None
             else None
         )
+        fields_payload = payload.get("fields")
+        fields: tuple[str, ...] | None = None
+        if fields_payload is not None:
+            if not isinstance(fields_payload, list) or not fields_payload:
+                raise RequestValidationError("fields must be a non-empty list")
+            if not all(isinstance(item, str) and item.strip() for item in fields_payload):
+                raise RequestValidationError("fields items must be non-empty text")
+            fields = tuple(fields_payload)
+        continuation_payload = payload.get("continuation")
+        continuation: str | None = None
+        if continuation_payload is not None:
+            continuation = _text(continuation_payload, "continuation")
         return cls(
             company_query=company_query,
             market=market,
@@ -198,6 +213,8 @@ class StatementsRequest:
             as_of_date=as_of,
             intent=intent,
             acquisition_limits=limits,
+            fields=fields,
+            continuation=continuation,
         )
 
     def to_public_dict(self) -> dict[str, Any]:
@@ -222,6 +239,8 @@ class StatementsRequest:
                 if self.acquisition_limits
                 else None
             ),
+            "fields": list(self.fields) if self.fields is not None else None,
+            "continuation": self.continuation,
         }
 
 

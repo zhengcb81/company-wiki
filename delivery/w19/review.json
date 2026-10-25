@@ -1,0 +1,147 @@
+{
+  "schema_version": "w19-independent-review/1",
+  "reviewer": "zcode-independent-final-reviewer:mimo-v2.6-flash (W19-SINA-STATEMENTS, not an implementer)",
+  "review_date": "2026-10-25",
+  "reviewed_code_commits": {
+    "company-wiki": "e583904d",
+    "filing-fetch": "a211d3a"
+  },
+  "baselines": {
+    "company-wiki": "243993d2",
+    "filing-fetch": "e0d9642"
+  },
+  "verdict": "PASS_WITH_FIXES",
+  "blocking_findings": ["W19-R1", "W19-R5"],
+  "findings": [
+    {
+      "id": "W19-R1",
+      "severity": "major",
+      "blocking": true,
+      "title": "fetch_if_missing reports complete for a range wider than previously fetched coverage (range-widening honesty bug)",
+      "evidence": "service.py:334-352 (_never compares requested range with stored coverage_), service.py:268-269 (elif selected: status=complete), repository.py:360-406 (coverage observation stores no requested range/boundary). Reproduced by reviewer: fresh root, request A from=2025-01-01 -> complete with 6 periods (terminal=period_boundary); request B from=2016-01-01 -> status=complete, http=0, only 10 of 36 periods (2024-03-31..2026-06-30) served while advertised_report_count=36.",
+      "recommendation": "Persist the fetched range/boundary (e.g. fetched_from) in financial_statement_coverage; in _needs_fetch treat requests extending beyond the stored boundary as missing (refetch) or return partial with a named gap (range_not_covered); add a narrow-then-wide regression test."
+    },
+    {
+      "id": "W19-R2",
+      "severity": "medium",
+      "blocking": false,
+      "title": "Row-bound truncation is silent: continuation/truncated dropped and fields filter not exposed in the request contract",
+      "evidence": "service.py:279-290 calls query_statement_rows(max_rows=20000) but never reads query['continuation']/['truncated'] computed at repository.py:321-331; contracts.py:150-157 allowed request fields contain no fields/continuation/max_rows; repository.py:456-561 readonly query returns continuation:null only. Latent for CN A-shares (max ~6k rows/table << 20000) but truncation would stay status=complete with no resume token.",
+      "recommendation": "Pass continuation/truncated through the response (force partial when truncated), or add fields/continuation to financial-statements-request/1; document the default row/byte bound."
+    },
+    {
+      "id": "W19-R3",
+      "severity": "minor",
+      "blocking": false,
+      "title": "FF mislabels CWP request_error as upstream_error with retryable=true",
+      "evidence": "ff/scripts/ff_financial_statements.py:143-148 maps any nonzero child exit to code=upstream_error and discards the child's stdout error envelope. Reviewer run: fetch_statements.py with period_end_from>period_end_to -> exit 2 (correct) but envelope status=upstream_error, retryable=true, producer_exit_code=2 while CWP itself printed status=request_error.",
+      "recommendation": "On exit 2 parse the child stdout envelope and propagate status=request_error/config_error with retryable=false (keep producer_exit_code), or validate period ordering on the FF side first."
+    },
+    {
+      "id": "W19-R4",
+      "severity": "minor",
+      "blocking": false,
+      "title": "Top-level status 'unavailable' is unreachable; total provider failure reported as partial",
+      "evidence": "service.py:169-177 _overall_status only yields complete/not_found/partial. Reviewer run: fresh root + broken fixture root -> all three statements unavailable(provider_unavailable/http_error) yet response.status=partial.",
+      "recommendation": "Return top-level unavailable when every statement is unavailable; add a test."
+    },
+    {
+      "id": "W19-R5",
+      "severity": "medium",
+      "blocking": true,
+      "title": "Uncommitted code changes sit on top of the reviewed commit in the CWP workspace",
+      "evidence": "git status in company-wiki-w19-sina-statements: M src/company_wiki/source_catalog/financial_statements/service.py, M tests/financial_statements/test_service_contracts.py (adds _apply_identity_gap / ambiguous-identity candidates + 1 test, not part of e583904d). Reviewer overlay run of e583904d + these two files: 92 passed.",
+      "recommendation": "Before handoff either commit the change and submit the diff for supplemental independent review (updating the bound SHA) or revert it; record the final reviewed commit in handoff.json per COMMON section 4."
+    },
+    {
+      "id": "W19-R6",
+      "severity": "low",
+      "blocking": false,
+      "title": "Per-report field is captured_at while the card's frozen per-report list says retrieved_at",
+      "evidence": "Card section 3.2 per-report field list includes retrieved_at; service.py:468-511 emits captured_at per report (response-level retrieved_at exists at service.py:111).",
+      "recommendation": "Add a retrieved_at alias per report or document the naming deviation in the handoff interface section (captured_at better matches card section 5 capture-time semantics)."
+    },
+    {
+      "id": "W19-R7",
+      "severity": "low",
+      "blocking": false,
+      "title": "balance_sheet instant semantics are not machine-readable",
+      "evidence": "schema.py:25-27 period_kind CHECK allows only annual/semi_annual/q1/q3; no 'instant' anywhere in the package; test_normalize.py::test_balance_sheet_period_kind_and_statement_semantics asserts period_kind=='semi_annual' and relies on statement_type to convey instant semantics; period_start is always null.",
+      "recommendation": "Document the encoding contract in the handoff or add an explicit value_basis=instant|duration field without breaking the existing CHECK."
+    },
+    {
+      "id": "W19-R8",
+      "severity": "low",
+      "blocking": false,
+      "title": "No replay-from-committed-SourceRef path after a normalization failure",
+      "evidence": "service.py:435 normalizes only after the original is committed; a NormalizeProtocolError propagates to cli.py:171-176 (fatal exit 1) with no coverage observation recorded, so the next fetch_if_missing re-networks (bytes dedup, HTTP repeats). Only --fixture-root replay exists (cli.py:56-84), which replays the fixture root, not catalog originals.",
+      "recommendation": "Add an entry that re-normalizes/publishes from an already committed source_id with zero network, plus a test for 'bad payload committed then replayed offline'."
+    },
+    {
+      "id": "W19-R9",
+      "severity": "low",
+      "blocking": false,
+      "title": "Fixture replay mode reports response_bytes=0, so offline receipts cannot evidence byte accounting or the max_bytes budget",
+      "evidence": "Reviewer runs: usage.response_bytes=0 with http_requests=15. Minimal repro: BudgetedHTTPTransport(MockTransport(handler)) + response.content -> budget.response_bytes_used=0 because httpx short-circuits read() for content= responses (bytes never traverse the metering stream). Production path (real HTTPTransport streaming) meters correctly.",
+      "recommendation": "Meter bytes inside the replay transport or explicitly document that offline runs do not account bytes; never cite offline response_bytes as real byte evidence in handoff."
+    }
+  ],
+  "observations": [
+    "PIT same-day as_of: captured_at 'YYYY-MM-DDThh:mmZ' > as_of_date 'YYYY-MM-DD' lexicographically, so a capture on as_of_date itself is judged later -> pit_verified=false; conservative direction (never over-claims), acceptable with a comment.",
+    "Mid-pagination provider_error/count_changed discards already-fetched pages of that statement (service.py:231-243); conservative and honestly statused, costs a re-fetch; the count_changed page itself is never appended (sina_provider.py:246-253).",
+    "coverage response exposes advertised + selected only; the stored 'observed' total is not echoed when it differs from selected (card asks advertised/observed/selected).",
+    "Card says 18 gzip fixtures; capture/ actually holds 19 (175,846B vs documented 175,785B, one extra 61B terminator); all decompressed SHAs verified against observations.json (19/19)."
+  ],
+  "independent_behaviors": [
+    "Built fixture root from capture/*.json.gz myself (url->file manifest, 21 entries incl. two byte-exact 44-byte null terminators from sh999999); verified 19/19 decompressed SHA-256 against observations.json",
+    "Built a fresh wiki root myself (own config/source_catalog.yaml, SecurityMasterStore.write_market CN 中微公司/SSE/688012, SourceCatalog.scan) under %TEMP%",
+    "Ran the real CLI subprocess once end-to-end: python -m company_wiki.source_catalog.financial_statements.cli --wiki-root <tmp> --fixture-root <tmp> -> complete, 36/33/36 periods, 9,729 value rows, 15 HTTP, 0 cost, schema 1.3.0, no physical paths in the response",
+    "Second identical request with fixture manifest removed -> 0 HTTP, zero growth of originals/versions/value rows/documents/sources, identical statement_version_id and rows",
+    "Resolved all 9,729 json_pointer rows against the committed originals via source_ref.content_sha256 (9729/9729 exact)",
+    "Authored a negative the author never provided: narrow-then-wide range widening -> dishonest status=complete with 10/36 periods (W19-R1)",
+    "CLI illegal inputs: period_end_from>period_end_to -> exit 2 request_error; all_history+period_end_from -> exit 2 request_error",
+    "One-table failure isolation: fixtures without llb -> income+balance complete and persisted, cash unavailable, overall partial; second run refetches only cash (0 HTTP for the others)",
+    "All-statements-unavailable run -> top-level partial (W19-R4)",
+    "PIT honesty: point_in_time with as_of=2020-01-01 -> historical_asof_unverifiable, pit_verified=false on every report, 0 HTTP",
+    "Refresh intent: 15 HTTP refetch with zero new versions/values/originals; last_checked_at updated, first_seen_at unchanged (update_time outside business hash)",
+    "reuse_only against a DB-less root -> named gap catalog_database_missing, 0 HTTP, no catalog.sqlite3 created",
+    "FF thin client real round trip: scripts/fetch_statements.py --config <json> with PYTHONPATH=CWP/src driving a real CWP child -> exit 0, financial-statements-response/1, complete, 0 HTTP; bad request -> exit 2 (upstream_error envelope, W19-R3)",
+    "Ran test suites on git-archive exports of the bound commits: CWP tests/financial_statements 91 passed; FF tests/financial_statements 13 passed; old consumers tests/contract/test_source_catalog_schema_migration.py + test_source_catalog_canonical_writer.py 20 passed; migration drills 26 passed; architecture gate 5 passed; FF seam tests/test_p5_process_transport.py + test_ff_v2_contract.py 24 passed; overlay of uncommitted working-tree changes 92 passed",
+    "Space: catalog dir 4,726,785B + lake 2,484,737B = 6.88 MiB (<= 16 MiB target)",
+    "Hardcode sweep: grep 中微/688012/000333/600036/601318/430017/999999/2016-12-31/2026-06-30 over financial_statements src and FF scripts -> zero hits outside tests/fixtures/SKILL examples",
+    "No network, no production-directory writes, no commits, no source edits; everything ran on %TEMP% exports"
+  ],
+  "commands_run": [
+    {"command": "git -C company-wiki-w19-sina-statements diff 243993d2..e583904d --stat && git status --short", "result": "55 files changed, 11420 insertions; working tree additionally has 2 uncommitted modified files (service.py, test_service_contracts.py) -> W19-R5"},
+    {"command": "git -C filing-fetch-w19-sina-statements diff e0d9642..a211d3a --stat && git status --short", "result": "15 files (SKILL.md + scripts/fetch_statements.py + scripts/ff_financial_statements.py + 2 tests + PWF docs); working tree clean; no shared ff_* module modified"},
+    {"command": "git archive e583904d src tests scripts docs/plans/w19-sina-statements-2026-10-25 conftest.py pytest.ini ... | tar -x -C %TEMP%/w19-indep-review/cwp (and git archive a211d3a -> ff/)", "result": "read-only exports of both bound commits (21M + 9M)"},
+    {"command": "python setup_roots.py", "result": "fixture root 21 entries, SHA-verified 19/19 vs observations.json; wiki root config+security_master created"},
+    {"command": "python -m company_wiki.source_catalog.financial_statements.cli --wiki-root roots/wiki --fixture-root roots/fixtures < request_full.json", "result": "exit 0; status=complete; 36/33/36 periods, 9729 value rows, 15 HTTP, 0.00 cost, no path leaks, schema 1.3.0, 12 originals"},
+    {"command": "same CLI again after moving manifest.json away", "result": "exit 0; http_requests=0; versions/values/sources/documents/originals unchanged; version ids and rows byte-identical"},
+    {"command": "python pointer-resolution + space script over out/first.json", "result": "9729/9729 json_pointer rows resolve to raw_value in committed originals; 6.88 MiB total new storage"},
+    {"command": "cli on roots/wikiB: req_narrow (from=2025-01-01) then req_wide (from=2016-01-01)", "result": "narrow: complete/6 periods/period_boundary; wide: status=complete with only 10 of 36 periods and http=0 -> W19-R1 reproduced"},
+    {"command": "cli with period_end_from>period_end_to", "result": "exit 2, status=request_error, 'period_end_from must not exceed period_end_to'"},
+    {"command": "cli with all_history=true plus period_end_from", "result": "exit 2, status=request_error, mutual-exclusion message"},
+    {"command": "cli on roots/wikiC with llb fixtures removed (twice)", "result": "overall partial; income+balance complete and persisted (69 versions, 8 originals); cash unavailable(http_error); second run 0/0/1 HTTP"},
+    {"command": "cli on roots/wikiD with empty fixture manifest", "result": "all three statements unavailable; top-level status=partial -> W19-R4"},
+    {"command": "cli reuse_only point_in_time as_of=2020-01-01 and as_of=2026-10-25", "result": "both: historical_asof_unverifiable, pit_verified=false, 0 HTTP"},
+    {"command": "cli intent=refresh on fully populated root", "result": "15 HTTP; versions=105, values=9729, originals=12 unchanged; last_checked_at updated, first_seen_at fixed"},
+    {"command": "cli reuse_only on roots/wikiE (config+security master, no DB)", "result": "exit 0; gap_reason=catalog_database_missing for all statements; no catalog.sqlite3 created"},
+    {"command": "python ff/scripts/fetch_statements.py --config out/company_wiki.json < request_full.json (PYTHONPATH=cwp/src)", "result": "exit 0; financial-statements-response/1; status=complete; 36/33/36 reports; 0 HTTP; no path leaks"},
+    {"command": "python ff/scripts/fetch_statements.py < req_badrange.json", "result": "exit 2; envelope status=upstream_error, retryable=true, producer_exit_code=2 -> W19-R3"},
+    {"command": "python -m pytest tests/financial_statements/ -q (CWP export @ e583904d)", "result": "91 passed in 49.90s, exit 0"},
+    {"command": "python -m pytest tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_canonical_writer.py -q", "result": "20 passed in 7.92s, exit 0"},
+    {"command": "python -m pytest tests/contract/test_disaster_drill_fc405.py tests/contract/test_migration_drill.py tests/contract/test_migration_tool.py tests/contract/test_migration_engine_fc401.py -q", "result": "26 passed in 5.98s, exit 0"},
+    {"command": "python -m pytest tests/contract/test_architecture_gate.py -q", "result": "5 passed in 2.99s, exit 0"},
+    {"command": "python -m pytest tests/financial_statements/ -q (FF export @ a211d3a)", "result": "13 passed in 3.60s, exit 0"},
+    {"command": "python -m pytest tests/test_p5_process_transport.py tests/test_ff_v2_contract.py -q (FF)", "result": "24 passed in 7.49s, exit 0"},
+    {"command": "python -m pytest tests/financial_statements/ -q (e583904d + overlay of the 2 uncommitted files)", "result": "92 passed in 40.32s, exit 0"}
+  ],
+  "artifacts": {
+    "report_md": "delivery/w19/review.md",
+    "temp_workspace": "%TEMP%/w19-indep-review (cwp/, cwp_dirty/, ff/, roots/, out/, setup_roots.py, setup_wiki.py, check.py)",
+    "network_calls": 0,
+    "commits_created": 0,
+    "production_dir_writes": 0
+  }
+}

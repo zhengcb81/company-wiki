@@ -44,6 +44,30 @@ from .sina_provider import (
     StatementFetchResult,
 )
 
+_STATEMENT_BY_PROVIDER_SOURCE = {
+    "lrb": "income_statement",
+    "fzb": "balance_sheet",
+    "llb": "cash_flow",
+}
+
+
+def _detect_statement_source(raw: bytes) -> str | None:
+    """Read the provider's own ``item_source`` marker from committed bytes."""
+    import json as _json
+
+    try:
+        payload = _json.loads(raw.decode("utf-8"))
+        data = payload["result"]["data"]
+        for entry in (data.get("report_list") or {}).values():
+            for row in entry.get("data") or []:
+                value = row.get("item_source")
+                if isinstance(value, str) and value in _STATEMENT_BY_PROVIDER_SOURCE:
+                    return value
+    except (ValueError, KeyError, TypeError, AttributeError):
+        return None
+    return None
+
+
 DEFAULT_MAX_PAGES = 64
 DEFAULT_PAGE_SIZE = 10
 #: response row/byte bounds so one bounded stdout cannot be flooded by a
@@ -83,14 +107,16 @@ class FinancialStatementsService:
 
     # -- identity ----------------------------------------------------------
 
-    def _identify(self, request: StatementsRequest) -> dict[str, Any] | None:
+    def _identify(
+        self, request: StatementsRequest
+    ) -> tuple[dict[str, Any] | None, Any]:
         store = SecurityMasterStore(self.catalog.config.catalog_dir / "security_master")
         master = load_identity_master(store, market="CN")
         result = SecurityIdentityResolver(master).identify(
             request.company_query, market="CN"
         )
         if result.status is not IdentityStatus.RESOLVED or result.resolved is None:
-            return None
+            return None, result
         resolved = result.resolved
         return {
             "canonical_name": resolved.canonical_name,
@@ -99,7 +125,7 @@ class FinancialStatementsService:
             "security_id": resolved.security_id,
             "code": resolved.ticker,
             "match_basis": resolved.match_basis,
-        }
+        }, result
 
     # -- request entry -----------------------------------------------------
 
@@ -114,10 +140,10 @@ class FinancialStatementsService:
             "statements": [],
             "usage": {"http_requests": 0, "response_bytes": 0, "cost_usd": "0.00"},
         }
-        identity = self._identify(request)
+        identity, identity_result = self._identify(request)
         if identity is None:
             response["status"] = "not_found"
-            response["reason"] = "company_identity_not_resolved"
+            _apply_identity_gap(response, identity_result)
             return response
         response["company_identity"] = {
             key: identity[key]
@@ -172,6 +198,8 @@ class FinancialStatementsService:
             return "complete"
         if all(status == "not_found" for status in statuses):
             return "not_found"
+        if all(status == "unavailable" for status in statuses):
+            return "unavailable"
         return "partial"
 
     # -- one statement ----------------------------------------------------
@@ -279,7 +307,9 @@ class FinancialStatementsService:
             statement_type=statement_type,
             period_end_from=period_from,
             period_end_to=period_to,
+            fields=request.fields,
             max_rows=DEFAULT_MAX_ROWS,
+            continuation=request.continuation,
         )
         reports = [
             _report_payload(version, request)
@@ -302,6 +332,8 @@ class FinancialStatementsService:
             "coverage": coverage,
             "usage": usage,
             "reports": reports,
+            "continuation": query.get("continuation"),
+            "truncated": bool(query.get("truncated")),
         }
         if error_code:
             payload["error_code"] = error_code
@@ -341,15 +373,29 @@ class FinancialStatementsService:
             return False
         if request.intent == "refresh":
             return True
-        # fetch_if_missing: a full local hit serves without any HTTP.
         if observation is None or not selected:
             return True
         stored_periods = len(local["period_ends"])
         if observation.get("observed_periods") != stored_periods:
             return True
-        if observation.get("terminal_reason") not in _TERMINAL_EXHAUSTED:
-            return True
-        return False
+        terminal = observation.get("terminal_reason")
+        if terminal == "end_of_data":
+            # The provider history is exhausted in both directions and the
+            # stored span covers everything it serves; a wider requested
+            # range cannot produce older/newer data (refresh handles updates).
+            return False
+        if terminal == "period_boundary":
+            # The previous fetch stopped at an explicit boundary; re-fetch
+            # only when the new request reaches older than the stored first
+            # period (W19-R1: a widened range must not claim completeness).
+            first_stored = observation.get("first_period_end")
+            period_from = request.effective_period_from
+            if period_from and first_stored and period_from < first_stored:
+                return True
+            return False
+        # budget_stopped / max_pages / count_changed / duplicate_page /
+        # no_progress mean the span is incomplete — fetch again.
+        return True
 
     def _fetch_statement(
         self,
@@ -379,6 +425,76 @@ class FinancialStatementsService:
         except SinaProviderError:
             return None
 
+    def _commit_and_publish_page(
+        self,
+        *,
+        security: StatementSecurity,
+        statement_type: str,
+        raw_bytes: bytes,
+        sha256: str,
+        page_number: int,
+        url: str | None,
+        paper_code: str,
+        source_key: str,
+        retrieved_at: str,
+    ):
+        """One page: commit original bytes once, then publish its reports.
+
+        Shared by the fetch path and the offline replay path (W19-R8), so a
+        normalization failure can be replayed from the committed SourceRef
+        without any network access.
+        """
+        staged = self.writer.staging_root / (
+            f"{security.security_id}-{statement_type}-page{page_number}.json"
+        )
+        staged.parent.mkdir(parents=True, exist_ok=True)
+        staged.write_bytes(raw_bytes)
+        original = ThirdPartyDatasetOriginal(
+            entity=security.entity,
+            market=security.market,
+            security_id=security.security_id,
+            title=f"Sina {source_key} {paper_code} page {page_number}",
+            source_url=url,
+            document_kind="financial_statement_dataset",
+            publisher="新浪财经",
+            provider=SINA_PROVIDER_ID,
+            provider_document_id=(
+                f"sina:{paper_code}:{source_key}:page{page_number}"
+            ),
+        )
+        result = self.writer.import_third_party_dataset_staged(
+            request_id=f"{security.security_id}-{statement_type}-{page_number}",
+            original=original,
+            staged_path=staged,
+            content_sha256=sha256,
+            byte_size=len(raw_bytes),
+            mime_type="application/json",
+            retrieved_at=retrieved_at,
+            capture_receipt={
+                "http_status": 200 if url else None,
+                "url": url,
+                "statement_type": statement_type,
+                "page_number": page_number,
+                "replayed": url is None,
+            },
+        )
+        normalized = normalize.normalize_page(
+            raw_bytes, statement_type=statement_type, page_number=page_number
+        )
+        publish = self.repository.publish_reports(
+            security=security,
+            source=StatementSource(
+                source_id=result.source_id,
+                document_id=result.source_ref.document_id,
+                content_sha256=result.content_sha256,
+                page_number=page_number,
+                url=url or "",
+            ),
+            reports=normalized.reports,
+            retrieved_at=retrieved_at,
+        )
+        return result, publish
+
     def _persist_statement(
         self,
         *,
@@ -389,60 +505,19 @@ class FinancialStatementsService:
     ) -> None:
         published_new: list[str] = []
         for page in fetched.pages:
-            staged = self.writer.staging_root / (
-                f"{security.security_id}-{statement_type}-page{page.page_number}.json"
-            )
-            staged.parent.mkdir(parents=True, exist_ok=True)
-            staged.write_bytes(page.raw_bytes)
-            original = ThirdPartyDatasetOriginal(
-                entity=security.entity,
-                market=security.market,
-                security_id=security.security_id,
-                title=(
-                    f"Sina {page.statement_source} {fetched.paper_code} "
-                    f"page {page.page_number}"
-                ),
-                source_url=page.url,
-                document_kind="financial_statement_dataset",
-                publisher="新浪财经",
-                provider=SINA_PROVIDER_ID,
-                provider_document_id=(
-                    f"sina:{fetched.paper_code}:{page.statement_source}:"
-                    f"page{page.page_number}"
-                ),
-            )
-            result = self.writer.import_third_party_dataset_staged(
-                request_id=(
-                    f"{security.security_id}-{statement_type}-{page.page_number}"
-                ),
-                original=original,
-                staged_path=staged,
-                content_sha256=page.sha256,
-                byte_size=len(page.raw_bytes),
-                mime_type="application/json",
+            result, _ = self._commit_and_publish_page(
+                security=security,
+                statement_type=statement_type,
+                raw_bytes=page.raw_bytes,
+                sha256=page.sha256,
+                page_number=page.page_number,
+                url=page.url,
+                paper_code=fetched.paper_code,
+                source_key=page.statement_source,
                 retrieved_at=retrieved_at,
-                capture_receipt={
-                    "http_status": 200,
-                    "url": page.url,
-                    "statement_type": statement_type,
-                    "page_number": page.page_number,
-                },
             )
             if result.status is CanonicalImportStatus.IMPORTED_NEW:
                 published_new.append(result.source_id)
-            normalized = page.normalized(statement_type)
-            self.repository.publish_reports(
-                security=security,
-                source=StatementSource(
-                    source_id=result.source_id,
-                    document_id=result.source_ref.document_id,
-                    content_sha256=result.content_sha256,
-                    page_number=page.page_number,
-                    url=page.url,
-                ),
-                reports=normalized.reports,
-                retrieved_at=retrieved_at,
-            )
         periods = fetched.unique_periods_list
         self.repository.record_coverage_observation(
             security_id=security.security_id,
@@ -458,6 +533,73 @@ class FinancialStatementsService:
             observed_at=retrieved_at,
         )
 
+    def replay_source(
+        self, *, request: StatementsRequest, source_id: str
+    ) -> dict[str, Any]:
+        """W19-R8: re-normalize one committed provider page with zero network.
+
+        The statement type is detected from the provider's own ``item_source``
+        marker inside the committed bytes (lrb/fzb/llb); no caller guess.
+        """
+        from ..source_reader import SourceReadError, SourceVersionReader
+
+        prefix = SOURCE_ID_PREFIX
+        if not isinstance(source_id, str) or not source_id.startswith(prefix):
+            raise ValueError("source_id must be a canonical company-wiki source id")
+        sha256 = source_id[len(prefix):]
+        identity, _ = self._identify(request)
+        if identity is None:
+            return {"status": "not_found", "reason": "company_identity_not_resolved"}
+        document_row = self.catalog.store.fetchone(
+            "SELECT document_id FROM documents WHERE primary_source_id=? "
+            "AND source_status='active' ORDER BY document_id LIMIT 1",
+            (source_id,),
+        )
+        if document_row is None:
+            raise ValueError("source is not an active document primary source")
+        reader = SourceVersionReader(self.catalog)
+        try:
+            ref = reader.query_ref(document_row["document_id"], source_id, sha256)
+            content = reader.open_version(ref, purpose="source_export")
+        except SourceReadError:
+            raise ValueError("committed source bytes are unreadable") from None
+        source_key = _detect_statement_source(content.data)
+        if source_key is None:
+            raise ValueError("committed page carries no provider statement marker")
+        statement_type = _STATEMENT_BY_PROVIDER_SOURCE[source_key]
+        # Protocol guard before touching storage: a malformed committed page
+        # must refuse replay before any bytes are re-committed.
+        normalize.normalize_page(
+            content.data, statement_type=statement_type, page_number=0
+        )
+        security = StatementSecurity(
+            entity=identity["canonical_name"],
+            market=identity["market"],
+            security_id=identity["security_id"],
+            exchange=identity["exchange"],
+            code=identity["code"],
+        )
+        paper_code = f"{identity['exchange'].lower()}{identity['code']}"
+        result, publish = self._commit_and_publish_page(
+            security=security,
+            statement_type=statement_type,
+            raw_bytes=content.data,
+            sha256=sha256,
+            page_number=0,
+            url=None,
+            paper_code=paper_code,
+            source_key=source_key,
+            retrieved_at=_utc_now(),
+        )
+        return {
+            "status": "complete",
+            "statement_type": statement_type,
+            "source_id": source_id,
+            "new_version_ids": list(publish.new_version_ids),
+            "reused_version_ids": list(publish.reused_version_ids),
+            "usage": {"http_requests": 0, "response_bytes": 0, "cost_usd": "0.00"},
+        }
+
     @staticmethod
     def _point_in_time_quality(request: StatementsRequest) -> str:
         if request.knowledge_mode == "point_in_time":
@@ -465,15 +607,47 @@ class FinancialStatementsService:
         return "current_snapshot"
 
 
+def _apply_identity_gap(response: dict[str, Any], identity_result: Any) -> None:
+    """Name the identity gap honestly instead of collapsing every failure.
+
+    ``missing`` stays the generic not-resolved refusal; ``ambiguous`` carries
+    the verified candidates so callers can disambiguate by ticker/security_id
+    (e.g. BSE companies carrying both legacy 4xxxxx and 92xxxx codes).
+    """
+    status = getattr(identity_result, "status", None)
+    if status is IdentityStatus.AMBIGUOUS:
+        response["reason"] = "company_identity_ambiguous"
+        response["candidates"] = [
+            {
+                "canonical_name": candidate.canonical_name,
+                "market": candidate.market,
+                "exchange": candidate.exchange,
+                "ticker": candidate.ticker,
+                "security_id": candidate.security_id,
+                "match_basis": candidate.match_basis,
+            }
+            for candidate in getattr(identity_result, "candidates", ())[:10]
+        ]
+    elif status is IdentityStatus.CONFLICT:
+        response["reason"] = "company_identity_conflict"
+    else:
+        response["reason"] = "company_identity_not_resolved"
+
+
 def _report_payload(version: dict[str, Any], request: StatementsRequest) -> dict[str, Any]:
     """One public report — the single builder shared by service and reuse-only."""
+    # Compare by DATE only: a version captured on as_of_date itself (even a
+    # later clock time that same day) is point-in-time-valid.
     if (
         request.knowledge_mode == "point_in_time"
-        and version["captured_at"] > request.as_of_date
+        and version["captured_at"][:10] > request.as_of_date
     ):
         pit_verified = False
     else:
         pit_verified = True if request.knowledge_mode == "point_in_time" else None
+    period_semantics = (
+        "instant" if version["statement_type"] == "balance_sheet" else "duration"
+    )
     rows = [
         {
             "row_ordinal": row["row_ordinal"],
@@ -508,7 +682,8 @@ def _report_payload(version: dict[str, Any], request: StatementsRequest) -> dict
         "report_hash": version["report_hash"],
         "normalizer_version": version["normalizer_version"],
         "quality_flags": version["quality_flags"],
-        "captured_at": version["captured_at"],
+        "period_semantics": period_semantics,
+        "retrieved_at": version["captured_at"],
         "pit_verified": pit_verified,
         "source_ref": {
             "document_id": version["document_id"],
@@ -555,7 +730,7 @@ def handle_reuse_only_request(request: StatementsRequest, config) -> dict[str, A
         response["reason"] = "company_identity_not_resolved"
         return response
     if identity_result.status is not IdentityStatus.RESOLVED or not identity_result.resolved:
-        response["reason"] = "company_identity_not_resolved"
+        _apply_identity_gap(response, identity_result)
         return response
     resolved = identity_result.resolved
     response["company_identity"] = {
@@ -570,6 +745,7 @@ def handle_reuse_only_request(request: StatementsRequest, config) -> dict[str, A
             statement_type=statement_type,
             period_end_from=request.effective_period_from,
             period_end_to=request.period_end_to,
+            fields=request.fields,
         )
         if not view.get("available"):
             payload = {
@@ -590,6 +766,8 @@ def handle_reuse_only_request(request: StatementsRequest, config) -> dict[str, A
                 },
                 "usage": {"http_requests": 0, "response_bytes": 0, "cost_usd": "0.00"},
                 "reports": [],
+                "continuation": None,
+                "truncated": False,
                 "gap_reason": view.get("reason"),
             }
             outcomes.append(_StatementOutcome(status="not_found", payload=payload))
@@ -624,6 +802,8 @@ def handle_reuse_only_request(request: StatementsRequest, config) -> dict[str, A
             },
             "usage": {"http_requests": 0, "response_bytes": 0, "cost_usd": "0.00"},
             "reports": reports,
+            "continuation": None,
+            "truncated": any(version.get("truncated") for version in versions),
         }
         outcomes.append(
             _StatementOutcome(status=payload["status"], payload=payload)

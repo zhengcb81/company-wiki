@@ -288,6 +288,67 @@ class TestServiceOrchestration:
         assert response["status"] == "not_found"
         assert response["statements"][0]["status"] == "not_found"
 
+    def test_ambiguous_identity_lists_candidates(self, tmp_path):
+        from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+        from company_wiki.source_catalog.security_identity import (
+            SecurityMasterStore,
+            SecurityRecord,
+        )
+        from company_wiki.source_catalog.service import SourceCatalog
+
+        project = tmp_path / "amb"
+        companies = project / "companies"
+        companies.mkdir(parents=True)
+        config = CatalogConfig(
+            project_root=project, catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", companies, "company_raw", priority=10),),
+        )
+        SourceCatalog(config).scan()
+        SecurityMasterStore(config.catalog_dir / "security_master").write_market(
+            "CN",
+            (
+                SecurityRecord(
+                    canonical_name="诺思兰德", market="CN", exchange="BSE",
+                    ticker="430047", security_id="430047", aliases=("nsld",),
+                    active=True, source_name="cninfo",
+                    source_url="https://www.cninfo.com.cn/",
+                    source_record_id="1", identifiers={},
+                ),
+                SecurityRecord(
+                    canonical_name="诺思兰德", market="CN", exchange="BSE",
+                    ticker="920047", security_id="920047", aliases=("nsld",),
+                    active=True, source_name="cninfo",
+                    source_url="https://www.cninfo.com.cn/",
+                    source_record_id="2", identifiers={},
+                ),
+            ),
+            retrieved_at="2026-10-25T00:00:00Z",
+            sources=("cninfo",),
+        )
+        catalog = SourceCatalog(config)
+        service = FinancialStatementsService(
+            catalog=catalog, writer=CanonicalSourceWriter(catalog), provider=None,
+        )
+        response = service.handle_request(
+            contracts.StatementsRequest.from_payload(
+                _request_payload(
+                    company_query="诺思兰德", intent="reuse_only", acquisition_limits=None,
+                )
+            )
+        )
+        assert response["status"] == "not_found"
+        assert response["reason"] == "company_identity_ambiguous"
+        assert {c["security_id"] for c in response["candidates"]} == {"430047", "920047"}
+        # a ticker query resolves the same company exactly
+        resolved = service.handle_request(
+            contracts.StatementsRequest.from_payload(
+                _request_payload(
+                    company_query="430047", intent="reuse_only", acquisition_limits=None,
+                )
+            )
+        )
+        assert resolved["company_identity"]["security_id"] == "430047"
+
     def test_unknown_company_is_not_found_with_reason(self, catalog):
         service = FinancialStatementsService(
             catalog=catalog,
@@ -366,3 +427,121 @@ class TestServiceOrchestration:
         periods = [r["period_end"] for r in response["statements"][0]["reports"]]
         assert periods
         assert all("2025-01-01" <= p <= "2026-06-30" for p in periods)
+
+
+class TestReviewFixRegressions:
+    """Regressions for the independent review findings (W19-R1/R2/R4/R8)."""
+
+    def test_widened_range_after_narrow_fetch_actually_refetches(self, catalog):
+        # W19-R1: narrow first, then a wider range must fetch again instead of
+        # claiming complete over a partial span.
+        narrow = _request_payload(
+            period_end_from="2024-01-01", period_end_to="2026-06-30"
+        )
+        first = _service(catalog, _recorder(_zhongwei_lrb())).handle_request(
+            contracts.StatementsRequest.from_payload(narrow)
+        )
+        assert first["status"] == "complete"
+        first_periods = first["statements"][0]["coverage"]["observed_periods"]
+        assert first_periods == 10  # 2024Q1..2026H1 only
+        assert first["statements"][0]["usage"]["http_requests"] > 0
+
+        wide = _request_payload(
+            period_end_from="2016-01-01", period_end_to="2026-06-30"
+        )
+        second = _service(catalog, _recorder(_zhongwei_lrb())).handle_request(
+            contracts.StatementsRequest.from_payload(wide)
+        )
+        assert second["status"] == "complete"
+        assert second["statements"][0]["coverage"]["observed_periods"] == 36
+        assert second["statements"][0]["usage"]["http_requests"] == 5
+
+        # identical wide request again: full local hit, zero HTTP
+        third = FinancialStatementsService(
+            catalog=catalog, writer=CanonicalSourceWriter(catalog), provider=None,
+        ).handle_request(contracts.StatementsRequest.from_payload(wide))
+        assert third["status"] == "complete"
+        assert third["statements"][0]["coverage"]["observed_periods"] == 36
+        assert third["usage"]["http_requests"] == 0
+
+    def test_all_statements_unavailable_is_top_level_unavailable(self, catalog):
+        # W19-R4: every statement failing with a provider error aggregates to
+        # top-level unavailable, not partial.
+        def handler(request):
+            import httpx as _httpx
+
+            return _httpx.Response(403, text="forbidden")
+
+        response = _service(catalog, handler).handle_request(
+            contracts.StatementsRequest.from_payload(
+                _request_payload(
+                    statements=["income_statement", "balance_sheet", "cash_flow"]
+                )
+            )
+        )
+        assert response["status"] == "unavailable"
+        assert all(s["status"] == "unavailable" for s in response["statements"])
+
+    def test_fields_filter_and_continuation_surface_in_response(self, catalog):
+        # W19-R2: caller field filtering + row-limit continuation are visible.
+        _service(catalog, _recorder(_zhongwei_lrb())).handle_request(
+            contracts.StatementsRequest.from_payload(_request_payload())
+        )
+        filtered = FinancialStatementsService(
+            catalog=catalog, writer=CanonicalSourceWriter(catalog), provider=None,
+        ).handle_request(
+            contracts.StatementsRequest.from_payload(
+                _request_payload(fields=["BASICEPS"])
+            )
+        )
+        report = next(
+            r for r in filtered["statements"][0]["reports"]
+            if r["period_end"] == "2026-06-30"
+        )
+        assert [row["provider_field"] for row in report["rows"]] == ["BASICEPS"]
+        assert filtered["statements"][0]["continuation"] is None
+        assert filtered["statements"][0]["truncated"] is False
+
+    def test_replay_source_republishes_offline_and_idempotently(self, catalog):
+        # W19-R8: normalization recovery from a committed SourceRef, no network.
+        first = _service(catalog, _recorder(_zhongwei_lrb())).handle_request(
+            contracts.StatementsRequest.from_payload(_request_payload())
+        )
+        assert first["status"] == "complete"
+        report = next(
+            r for r in first["statements"][0]["reports"]
+            if r["period_end"] == "2026-06-30"
+        )
+        source_id = report["source_ref"]["source_id"]
+        service = FinancialStatementsService(
+            catalog=catalog, writer=CanonicalSourceWriter(catalog), provider=None,
+        )
+        replay = service.replay_source(
+            request=contracts.StatementsRequest.from_payload(_request_payload()),
+            source_id=source_id,
+        )
+        assert replay["status"] == "complete"
+        assert replay["statement_type"] == "income_statement"
+        assert replay["new_version_ids"] == []
+        assert len(replay["reused_version_ids"]) == 10  # one page holds 10 periods
+        assert replay["usage"]["http_requests"] == 0
+
+    def test_point_in_time_same_day_capture_is_valid(self, catalog):
+        # W19 observation: capture on the as_of date itself must not be
+        # conservatively rejected.
+        _service(catalog, _recorder(_zhongwei_lrb())).handle_request(
+            contracts.StatementsRequest.from_payload(_request_payload())
+        )
+        same_day = FinancialStatementsService(
+            catalog=catalog, writer=CanonicalSourceWriter(catalog), provider=None,
+        ).handle_request(
+            contracts.StatementsRequest.from_payload(
+                _request_payload(
+                    knowledge_mode="point_in_time",
+                    as_of_date="2026-10-25",
+                )
+            )
+        )
+        statement = same_day["statements"][0]
+        assert statement["point_in_time_quality"] == "pit_verified"
+        assert all(r["pit_verified"] is True for r in statement["reports"])
