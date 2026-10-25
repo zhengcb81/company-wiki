@@ -1678,6 +1678,14 @@
     },
     "date_and_capacity_separate": true,
     "inferred_dependency_added": false,
+    "source_trace_followup": {
+      "both_selected": true,
+      "date_locator": "loc:v1/page:12/paragraph:29/chars:1425-1450",
+      "capacity_locator": "loc:v1/page:12/paragraph:30/chars:1450-1478",
+      "same_page_physical_adjacency_recorded": true,
+      "semantic_dependency_added": false,
+      "next_action": "inspect local citation/member closure and content-review criterion; do not infer causality"
+    },
     "downloads": 0,
     "raw_copies": 0,
     "external_model_calls": 0,
