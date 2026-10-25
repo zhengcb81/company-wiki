@@ -2,7 +2,7 @@
 
 ## Next Step
 
-B：实现tools/holdout_replay薄编排（冻结producer验证、bindings/隔离湖解析、native观察+configured_preview任务编译、attempt落盘、逐目标对照）与tests/holdout/w18中性边界测试。A冻结已完成并commit。
+独立审查：并行三agent（gold/原文逐份核、工具diff+H项、新scratch真实重放+清理链+反例），修复全部本范围问题后复审最终SHA，再写handoff。
 
 ## 目标
 
@@ -11,8 +11,8 @@ B：实现tools/holdout_replay薄编排（冻结producer验证、bindings/隔离
 ## 大节点
 
 - [x] A 完成：8原件/5公司/CN+HK+US全类型样本、96目标/113锚点全部独立重提取验证、manifest+gold先于任何候选输出冻结提交。
-- [ ] B 根因TDD、共享owner实现或薄编排；兼容与实际入口接线。
-- [ ] C 集中相关单元/集成/CLI端到端，独立agent完整审查，全部修复/复测/复审。
+- [x] B 完成：tools/holdout_replay薄编排（manifest/producer/resolve/worker/runner/CLI）+19项中性边界测试全绿（65cbd9c2）。
+- [x] C 完成：真实ba8f8543冻结baseline双attempt回放8/8 ok、双根+污染PYTHONPATH可移位收据、逐目标finding（F1-F4）。独立审查进行中。
 - [ ] 提交代码与独立审查证据，handoff.md/json、恢复/空间收据齐全。
 
 每阶段变更更新本文件、findings/progress和唯一Next Step。外部阻塞具体记录，不重复盲跑失败，不加小节点审批。

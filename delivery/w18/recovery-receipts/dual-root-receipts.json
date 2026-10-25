@@ -1,0 +1,40 @@
+{
+ "schema_version": "w18-dualroot-recovery-receipts/1",
+ "created": "2026-10-25",
+ "roots": {
+  "rootA": {
+   "root": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\rootA",
+   "attempt_dir": "rootA\\attempts\\9eeb25702814\\20261025T154852Z-1",
+   "attempt_sha256": "24c69f9537221420a0a853e34cc6a77db98f62eb39f12d8f63df66357902a693",
+   "worker_cwd": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot",
+   "env_pythonpath_head": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\snapshot-producer\\src",
+   "sample_status": "ok",
+   "result_sha256": "a68dc00dfbd8fed0ddb31fc5c0e4426f2ae7a4feae63d7753108b761ad4bf770",
+   "import_under_producer": true,
+   "original_unchanged": true
+  },
+  "根 目录 B": {
+   "root": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\根 目录 B",
+   "attempt_dir": "根 目录 B\\attempts\\9eeb25702814\\20261025T154903Z-1",
+   "attempt_sha256": "5aafcbe1ea0da05bf33d2e12638b5c586e9edcab57a5777a4ae5e0efdc4e529f",
+   "worker_cwd": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\根 目录 B",
+   "env_pythonpath_head": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\snapshot-producer\\src",
+   "sample_status": "ok",
+   "result_sha256": "1b8d978b64aaca75f7b11aaf04e91c62c77c0311c89c2b0e630042bfd9fab762",
+   "import_under_producer": true,
+   "original_unchanged": true
+  },
+  "rootC-polluted": {
+   "root": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\rootC-polluted",
+   "attempt_dir": "rootC-polluted\\attempts\\9eeb25702814\\20261025T155100Z-1",
+   "attempt_sha256": "4637c2df31ed97b0d4ffa996f2ec855a1b90c8e5dad4f8995586962d94970234",
+   "worker_cwd": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot",
+   "env_pythonpath_head": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\dualroot\\decoy",
+   "sample_status": "failed",
+   "result_sha256": null,
+   "import_under_producer": null,
+   "original_unchanged": null
+  }
+ },
+ "note": "same neutral TXT chain from two absolute roots (one containing Chinese and spaces), each from an external cwd; third run prepends a decoy company_wiki to PYTHONPATH and must fail with the import-origin check."
+}

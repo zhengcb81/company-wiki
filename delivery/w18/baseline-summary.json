@@ -1,0 +1,1159 @@
+{
+ "schema_version": "w18-baseline-summary/1",
+ "card": "W18-CWP-HOLDOUT",
+ "created": "2026-10-25",
+ "producer": {
+  "commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
+  "root": "C:\\Users\\郑曾波\\Projects\\w18-producer-ba8f8543",
+  "deploy": "detached sparse worktree created by this card; production trees verified clean at the frozen commit"
+ },
+ "manifest_frozen_commit": "5e4488bb",
+ "manifest_sha256": "c25d241f11618d96dadafc5b0014b51f8818c0a862cb0fc7a053cd4e2b6a98d4",
+ "attempts": {
+  "observe_only": {
+   "dir": "baseline\\attempts\\ba8f8543c035\\20261025T113758Z-1",
+   "attempt_sha256": "51ee8da204898524a18dedcbbe717d4acd9fd5ccfe95cd21213a45a4cc42d0b9",
+   "overall": "ok"
+  },
+  "observe_plus_compile": {
+   "dir": "baseline\\attempts\\ba8f8543c035\\20261025T144804Z-1",
+   "attempt_sha256": "9ca60cdcb550791e6c9505836c850b546f726ec7592269e1a5e3e20896eadd47",
+   "target_summary_sha256": "cb1c973275da2d16dc208f105309375e431d48e0d5c24b9dcc3dc94e29e26efb",
+   "overall": "ok",
+   "llm_config_sha256": "b63d6bced845e0dc2ae60ee0f1bc87b9d57cf4065133ac8ed28f29df37280865",
+   "lake_bootstrap": "C:\\Users\\郑曾波\\Projects\\w18-holdout-scratch\\lake\\bootstrap.json"
+  }
+ },
+ "replay_command": "python -X utf8 -m tools.holdout_replay run --producer-repo <frozen worktree> --producer-commit ba8f8543c0351f6857e1ce24e943ad9da1b664ef --bindings <local bindings> --out-dir <out> [--lake-config lake/source_catalog.yaml --llm-config config.yaml --llm-provider minimax]",
+ "samples": [
+  {
+   "sample_id": "w18-cn-zijin-fy2025",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 112,
+    "candidate_count": 420,
+    "source_units": 7386,
+    "page_count": 352
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "compiled",
+    "task_count": 73,
+    "reason": null
+   },
+   "facts": [
+    {
+     "fact_id": "zj-2025-production",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-profit-triple-growth",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-balance-ratio-down",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-plan-disclaimer",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-lithium-2028-plan",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": true,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-manono-date-plan",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-julong-phase-conditional",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-kamoa-recovery",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-serbia-europe-second",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-zijin-gold-ipo",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-gold-price-context",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-icsg-copper-supply",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "zj-forbes-ranking",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-cn-beigene-h1-2024",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 112,
+    "candidate_count": 654,
+    "source_units": 7229,
+    "page_count": 232
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "compiled",
+    "task_count": 64,
+    "reason": null
+   },
+   "facts": [
+    {
+     "fact_id": "h1-revenue-65pct",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-loss-narrowed",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-rd-ratio-drop",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-zanubrutinib-70-markets",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-tislei-13-indications",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-nrdl-5of6",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-suzhou-capacity",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-hopewell-july-2024",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-guangzhou-65000l",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-clinical-decro",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-sonrotoclax-plan",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-bgb16673-300",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-frost-sullivan-currency",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "h1-alpine-hr",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-cn-beigene-ir-202206",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 2,
+    "candidate_count": 2,
+    "source_units": 102,
+    "page_count": 4
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "compiled",
+    "task_count": 2,
+    "reason": null
+   },
+   "facts": [
+    {
+     "fact_id": "ir-pdufa-extension",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-alpine-orr-superiority",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-snda-evidence-basis",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-roche-tigit-third-party",
+     "target_kind": "disposition_context",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-novartis-option-not-exercised",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-phase3-cost-share",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": true,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-global-trials-footprint",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-tislei-9-indications",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-upfront-payment-attribution",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-bgb11417-plan-vs-hope",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-ms-btk-forecast",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": true,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-fda-deadline-covid-conditional",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-covid-revenue-impact",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ir-hfcaa-expectation",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-cn-beigene-ipo",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 160,
+    "candidate_count": 2970,
+    "source_units": 25126,
+    "page_count": 675
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "failed",
+    "task_count": null,
+    "reason": "ValueError: HOLDOUT_PREFLIGHT_SELECT_PARSER_INCOMPLETE"
+   },
+   "facts": [
+    {
+     "fact_id": "ipo-unprofitable-identity",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-three-commercial-drugs",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-approval-pathway-dates",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-48-pipeline-count",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-no-controlling-shareholder",
+     "target_kind": "disposition_context",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-share-par-value",
+     "target_kind": "correctness_if_emitted",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-proceeds-greenshoe",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-use-of-proceeds",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-guangzhou-capacity-ladder",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-guangzhou-nmpa-8000l",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "ipo-depreciation-risk",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-hk-beigene-fy2022",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 112,
+    "candidate_count": 1362,
+    "source_units": 12972,
+    "page_count": 405
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "compiled",
+    "task_count": 77,
+    "reason": null
+   },
+   "facts": [
+    {
+     "fact_id": "hk-product-vs-collab-revenue",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-net-loss-widened",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-gross-margin-decline",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-cash-position-decline",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-us-gaap-basis",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-cayman-no-vie",
+     "target_kind": "disposition_context",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-research-team-and-payments",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-alpine-first-in-class",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-tislei-10-indications",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-zanubrutinib-65-markets",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-commercial-footprint",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-2023-expectation",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hk-option-fee-constrained",
+     "target_kind": "disposition_context",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-us-alphabet-fy2025",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 112,
+    "candidate_count": 187,
+    "source_units": 5081,
+    "page_count": 0
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "compiled",
+    "task_count": 75,
+    "reason": null
+   },
+   "facts": [
+    {
+     "fact_id": "goog-consolidated-revenue",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-operating-margin-flat",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-net-income-eps",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-oie-investment-gains",
+     "target_kind": "disposition_context",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-wiz-pending-acquisition",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-debt-issuance",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-other-bets-loss-composition",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-repurchases-class-split",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-capex-infrastructure",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-employees",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-segment-structure",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": true,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-tax-law-driver",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "goog-operating-cash-flow",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-cn-hikvision-call-2024h1",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 53,
+    "candidate_count": 53,
+    "source_units": 250,
+    "page_count": 0
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "failed",
+    "task_count": null,
+    "reason": "NarrativeLanguageError: SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED"
+   },
+   "facts": [
+    {
+     "fact_id": "hik-rev-up-profit-down",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-deducted-np-up",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-three-bg-decline",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-funding-differentiation",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-overseas-28pct-sanction",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-dev-vs-developed-73",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-equity-incentive-oneoff",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-fx-direction",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-guidance-wide-140",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-positive-growth-confirm",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "FAIL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-auto-electronics-merger",
+     "target_kind": "required_business",
+     "importance": "critical",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-headcount-plan-vs-actual",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PARTIAL",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-comparable-profit-estimate",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "hik-fiber-model-error-drop",
+     "target_kind": "required_business",
+     "importance": "normal",
+     "selected_support": true,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "PASS",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  },
+  {
+   "sample_id": "w18-cn-sugondata-charter",
+   "status": "ok",
+   "original_unchanged": true,
+   "native": {
+    "selected_spans": 21,
+    "candidate_count": 21,
+    "source_units": 1753,
+    "page_count": 68
+   },
+   "selector_status": "partial",
+   "model_view": {
+    "status": "compiled",
+    "task_count": 53,
+    "reason": null
+   },
+   "facts": [
+    {
+     "fact_id": "charter-registered-scope",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "charter-voting-procedure",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "charter-share-issuance-principles",
+     "target_kind": "disposition_context",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    },
+    {
+     "fact_id": "charter-document-identity",
+     "target_kind": "correctness_if_emitted",
+     "importance": "normal",
+     "selected_support": false,
+     "model_input_support": false,
+     "anchor_unread_or_opaque": false,
+     "dub_recall_status": "NOT_EVALUATED",
+     "summary_status": "not_reviewed"
+    }
+   ]
+  }
+ ],
+ "totals_mechanical": {
+  "facts": 96,
+  "selected_supported": 10,
+  "model_input_supported": 16,
+  "neither": 73,
+  "unread_or_opaque": 0,
+  "not_reviewed": 96
+ },
+ "dub_evaluation_counts": {
+  "FAIL": 41,
+  "PARTIAL": 22,
+  "PASS": 8,
+  "NOT_EVALUATED": 25
+ },
+ "network_calls": 0,
+ "model_posts": 0,
+ "downloads": 0
+}
