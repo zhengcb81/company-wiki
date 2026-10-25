@@ -8,7 +8,7 @@
  "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
  "start_head": "9051bbb7a69347f52d79e5cce37a6b8c40b7912f",
  "final_code_commit": "faa488a7",
- "final_head": "0415f935",
+ "final_head": "b7e739ebf19f31e99ec382c1760181a0adad5e3d",
  "changed_paths": [
   "tools/holdout_replay/**",
   "tests/holdout/w18/**",
@@ -161,5 +161,6 @@
   "observe path follows the production default selector while the compile path pins 0.9.0 (disclosed per artifact in selector_versions)",
   "compile stage needs a machine-local isolated lake + llm config; bindings.local.json is intentionally uncommitted",
   "two compile failures kept as raw product findings (F1/F2); not retried, not reinterpreted"
- ]
+ ],
+ "final_head_note": "final_head = handoff content commit; reviewed code remains faa488a7"
 }
