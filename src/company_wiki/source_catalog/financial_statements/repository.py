@@ -368,24 +368,36 @@ class FinancialStatementRepository:
         first_period_end: str | None,
         last_period_end: str | None,
         terminal_reason: str,
+        fetched_from: str | None,
+        fetched_to: str | None,
         http_requests: int,
         response_bytes: int,
         observed_at: str,
     ) -> None:
+        """Persist the fetch envelope with the observation.
+
+        ``fetched_from`` is NULL when the fetch exhausted the provider's older
+        history (end_of_data) — i.e. the older direction is covered for any
+        future range. ``fetched_to`` is the request's upper bound that this
+        exhausted envelope answered (W19-R10).
+        """
         with self.store.transaction() as connection:
             connection.execute(
                 """
                 INSERT INTO financial_statement_coverage (
                     security_id, provider, statement_type, advertised_report_count,
                     observed_periods, first_period_end, last_period_end,
-                    terminal_reason, last_http_requests, last_response_bytes, observed_at
-                ) VALUES (?,?,?,?,?,?,?,?,?,?,?)
+                    terminal_reason, fetched_from, fetched_to,
+                    last_http_requests, last_response_bytes, observed_at
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
                 ON CONFLICT(security_id, provider, statement_type) DO UPDATE SET
                     advertised_report_count=excluded.advertised_report_count,
                     observed_periods=excluded.observed_periods,
                     first_period_end=excluded.first_period_end,
                     last_period_end=excluded.last_period_end,
                     terminal_reason=excluded.terminal_reason,
+                    fetched_from=excluded.fetched_from,
+                    fetched_to=excluded.fetched_to,
                     last_http_requests=excluded.last_http_requests,
                     last_response_bytes=excluded.last_response_bytes,
                     observed_at=excluded.observed_at
@@ -399,11 +411,21 @@ class FinancialStatementRepository:
                     first_period_end,
                     last_period_end,
                     terminal_reason,
+                    fetched_from,
+                    fetched_to,
                     http_requests,
                     response_bytes,
                     observed_at,
                 ),
             )
+
+    def statement_type_of_version(self, statement_version_id: str) -> str | None:
+        row = self.store.fetchone(
+            "SELECT statement_type FROM financial_statement_versions "
+            "WHERE statement_version_id=?",
+            (statement_version_id,),
+        )
+        return row["statement_type"] if row is not None else None
 
 
 _VERSION_COLUMNS: dict[str, str] = {

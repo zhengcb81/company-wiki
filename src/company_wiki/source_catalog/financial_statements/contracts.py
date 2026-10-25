@@ -201,6 +201,10 @@ class StatementsRequest:
         continuation: str | None = None
         if continuation_payload is not None:
             continuation = _text(continuation_payload, "continuation")
+        if continuation is not None and intent == "reuse_only":
+            raise RequestValidationError(
+                "continuation is not supported with reuse_only"
+            )
         return cls(
             company_query=company_query,
             market=market,

@@ -90,6 +90,8 @@ CREATE TABLE IF NOT EXISTS financial_statement_coverage (
     first_period_end TEXT,
     last_period_end TEXT,
     terminal_reason TEXT,
+    fetched_from TEXT,
+    fetched_to TEXT,
     last_http_requests INTEGER,
     last_response_bytes INTEGER,
     observed_at TEXT NOT NULL,

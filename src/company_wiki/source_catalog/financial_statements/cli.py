@@ -171,6 +171,33 @@ def main(argv: Sequence[str] | None = None) -> int:
         sys.stdout.write("\n")
         return 2
 
+    if args.replay_source is not None:
+        # W19-R8: normalization recovery from a committed SourceRef, offline.
+        # Checked before the reuse-only branch so the flag is never silently
+        # ignored (W19-R13); replay may publish, so the writable store opens.
+        catalog = SourceCatalog(config)
+        service = FinancialStatementsService(
+            catalog=catalog,
+            writer=CanonicalSourceWriter(catalog),
+            provider=None,
+        )
+        try:
+            replayed = service.replay_source(
+                request=request, source_id=args.replay_source
+            )
+        except (ValueError, KeyError) as exc:
+            json.dump(
+                _error_envelope("request_error", f"replay refused: {exc}"),
+                sys.stdout,
+            )
+            sys.stdout.write("\n")
+            return 2
+        replayed["schema_version"] = STATEMENTS_RESPONSE_SCHEMA_VERSION
+        replayed["request"] = request.to_public_dict()
+        json.dump(replayed, sys.stdout, ensure_ascii=False, indent=1)
+        sys.stdout.write("\n")
+        return 0
+
     # Read-only requests never open the writable store: no database is
     # created or migrated on a reuse-only path.
     if request.intent == "reuse_only":
@@ -192,24 +219,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         writer=CanonicalSourceWriter(catalog),
         provider=provider,
     )
-    if args.replay_source is not None:
-        # W19-R8: normalization recovery from a committed SourceRef, offline.
-        try:
-            replayed = service.replay_source(
-                request=request, source_id=args.replay_source
-            )
-        except (ValueError, KeyError) as exc:
-            json.dump(
-                _error_envelope("request_error", f"replay refused: {exc}"),
-                sys.stdout,
-            )
-            sys.stdout.write("\n")
-            return 2
-        replayed["schema_version"] = STATEMENTS_RESPONSE_SCHEMA_VERSION
-        replayed["request"] = request.to_public_dict()
-        json.dump(replayed, sys.stdout, ensure_ascii=False, indent=1)
-        sys.stdout.write("\n")
-        return 0
     try:
         response = service.handle_request(request)
     except Exception as exc:  # noqa: BLE001 - surfaced as an honest envelope

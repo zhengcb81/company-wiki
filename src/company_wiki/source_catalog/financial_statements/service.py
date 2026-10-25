@@ -265,6 +265,7 @@ class FinancialStatementsService:
                     self._persist_statement(
                         security=security, statement_type=statement_type,
                         fetched=fetched, retrieved_at=retrieved_at,
+                        fetch_from=period_from, fetch_to=period_to,
                     )
                     local = self.repository.local_coverage(
                         security_id=security.security_id,
@@ -302,6 +303,14 @@ class FinancialStatementsService:
             coverage["terminal_reason"] = observation["terminal_reason"]
 
         point_in_time_quality = self._point_in_time_quality(request)
+        continuation = request.continuation
+        if continuation is not None:
+            # A continuation token names one version of one statement; other
+            # statements in the same request start from their first version
+            # instead of being silently skipped (W19-R12).
+            head = continuation.split(":", 1)[0]
+            if self.repository.statement_type_of_version(head) != statement_type:
+                continuation = None
         query = self.repository.query_statement_rows(
             security_id=security.security_id,
             statement_type=statement_type,
@@ -309,7 +318,7 @@ class FinancialStatementsService:
             period_end_to=period_to,
             fields=request.fields,
             max_rows=DEFAULT_MAX_ROWS,
-            continuation=request.continuation,
+            continuation=continuation,
         )
         reports = [
             _report_payload(version, request)
@@ -369,6 +378,15 @@ class FinancialStatementsService:
         observation: dict[str, Any] | None,
         local: dict[str, Any],
     ) -> bool:
+        """fetch_if_missing reuse decision, per pagination direction (W19-R10).
+
+        The stored observation records the exhausted fetch envelope:
+        ``fetched_from`` NULL means the provider's older history is exhausted
+        (terminating null page reached), covering any older or unbounded
+        request; ``fetched_to`` is the upper bound that this exhausted
+        envelope already answered. budget_stopped / max_pages / count_changed
+        / duplicate_page / no_progress always re-fetch.
+        """
         if request.intent == "reuse_only":
             return False
         if request.intent == "refresh":
@@ -379,22 +397,38 @@ class FinancialStatementsService:
         if observation.get("observed_periods") != stored_periods:
             return True
         terminal = observation.get("terminal_reason")
+        last_period_end = observation.get("last_period_end") or ""
+        fetched_from = observation.get("fetched_from")
+        fetched_to = observation.get("fetched_to")
+        want_from = request.effective_period_from
+        want_to = request.period_end_to
         if terminal == "end_of_data":
-            # The provider history is exhausted in both directions and the
-            # stored span covers everything it serves; a wider requested
-            # range cannot produce older/newer data (refresh handles updates).
-            return False
-        if terminal == "period_boundary":
-            # The previous fetch stopped at an explicit boundary; re-fetch
-            # only when the new request reaches older than the stored first
-            # period (W19-R1: a widened range must not claim completeness).
-            first_stored = observation.get("first_period_end")
-            period_from = request.effective_period_from
-            if period_from and first_stored and period_from < first_stored:
+            # Exhausted envelope: older direction covered only when the fetch
+            # itself was unbounded older (fetched_from NULL).
+            if want_from is not None and fetched_from is not None and want_from < fetched_from:
+                return True
+            if (
+                want_to is not None
+                and last_period_end
+                and want_to > last_period_end
+                and (fetched_to is None or want_to > fetched_to)
+            ):
+                # Beyond both the captured newest period and every exhausted
+                # envelope: the provider may have newer data since capture.
                 return True
             return False
-        # budget_stopped / max_pages / count_changed / duplicate_page /
-        # no_progress mean the span is incomplete — fetch again.
+        if terminal == "period_boundary":
+            # Reuse only strictly inside the previously fetched envelope.
+            if fetched_from is None:
+                return True
+            if want_from is None or want_from < fetched_from:
+                return True
+            if want_to is not None and want_to > last_period_end and (
+                fetched_to is None or want_to > fetched_to
+            ):
+                return True
+            return False
+        # Incomplete terminations: re-fetch.
         return True
 
     def _fetch_statement(
@@ -502,6 +536,8 @@ class FinancialStatementsService:
         statement_type: str,
         fetched: StatementFetchResult,
         retrieved_at: str,
+        fetch_from: str | None,
+        fetch_to: str | None,
     ) -> None:
         published_new: list[str] = []
         for page in fetched.pages:
@@ -519,6 +555,10 @@ class FinancialStatementsService:
             if result.status is CanonicalImportStatus.IMPORTED_NEW:
                 published_new.append(result.source_id)
         periods = fetched.unique_periods_list
+        # Exhausted older direction (terminating null page reached) covers
+        # ANY future older/unbounded request; a boundary stop records the
+        # boundary it actually stopped at (W19-R10).
+        fetched_from = None if fetched.terminal_reason == "end_of_data" else fetch_from
         self.repository.record_coverage_observation(
             security_id=security.security_id,
             provider=SINA_PROVIDER_ID,
@@ -528,10 +568,51 @@ class FinancialStatementsService:
             first_period_end=normalize.iso_period(periods[-1]) if periods else None,
             last_period_end=normalize.iso_period(periods[0]) if periods else None,
             terminal_reason=fetched.terminal_reason,
+            fetched_from=fetched_from,
+            fetched_to=fetch_to,
             http_requests=fetched.http_exchanges,
             response_bytes=fetched.response_bytes,
             observed_at=retrieved_at,
         )
+
+    def _source_owner_security(self, source_id: str) -> str | None:
+        """Who owns this committed page: published versions, else sidecar.
+
+        Returns None when ownership cannot be verified (never published and
+        no readable provenance sidecar) so callers can refuse fail-closed.
+        """
+        import json as _json
+
+        row = self.catalog.store.fetchone(
+            "SELECT DISTINCT security_id FROM financial_statement_versions "
+            "WHERE source_id=? LIMIT 1",
+            (source_id,),
+        )
+        if row is not None:
+            return row["security_id"]
+        location = self.catalog.store.fetchone(
+            "SELECT relative_path FROM locations WHERE source_id=? "
+            "AND role='original_primary' AND location_status='active' "
+            "ORDER BY location_id LIMIT 1",
+            (source_id,),
+        )
+        if location is None:
+            return None
+        from ..source_location import resolve_source_location
+
+        company_root = next(
+            (r for r in self.catalog.config.roots if r.kind == "company_raw"), None
+        )
+        if company_root is None:
+            return None
+        try:
+            original = resolve_source_location(company_root, location["relative_path"])
+            sidecar = original.with_name(original.name + ".source.json")
+            payload = _json.loads(sidecar.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return None
+        value = payload.get("security_id")
+        return value if isinstance(value, str) and value else None
 
     def replay_source(
         self, *, request: StatementsRequest, source_id: str
@@ -557,6 +638,15 @@ class FinancialStatementsService:
         )
         if document_row is None:
             raise ValueError("source is not an active document primary source")
+        owner = self._source_owner_security(source_id)
+        if owner is None:
+            # Fail closed: an unverifiable owner must never be re-published
+            # under the requesting company (W19-R11).
+            raise ValueError("cannot verify source ownership; refusing replay")
+        if owner != identity["security_id"]:
+            raise ValueError(
+                "committed source belongs to a different security; refusing replay"
+            )
         reader = SourceVersionReader(self.catalog)
         try:
             ref = reader.query_ref(document_row["document_id"], source_id, sha256)
@@ -593,11 +683,25 @@ class FinancialStatementsService:
         )
         return {
             "status": "complete",
-            "statement_type": statement_type,
-            "source_id": source_id,
-            "new_version_ids": list(publish.new_version_ids),
-            "reused_version_ids": list(publish.reused_version_ids),
+            "company_identity": {
+                key: identity[key]
+                for key in ("canonical_name", "market", "exchange", "security_id")
+            },
+            "statements": [
+                {
+                    "statement_type": statement_type,
+                    "status": "complete",
+                    "provider": SINA_PROVIDER_ID,
+                    "replayed_source_id": source_id,
+                    "new_version_ids": list(publish.new_version_ids),
+                    "reused_version_ids": list(publish.reused_version_ids),
+                    "usage": {
+                        "http_requests": 0, "response_bytes": 0, "cost_usd": "0.00",
+                    },
+                }
+            ],
             "usage": {"http_requests": 0, "response_bytes": 0, "cost_usd": "0.00"},
+            "retrieved_at": _utc_now(),
         }
 
     @staticmethod

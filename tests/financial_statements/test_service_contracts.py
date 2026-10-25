@@ -521,10 +521,11 @@ class TestReviewFixRegressions:
             source_id=source_id,
         )
         assert replay["status"] == "complete"
-        assert replay["statement_type"] == "income_statement"
-        assert replay["new_version_ids"] == []
-        assert len(replay["reused_version_ids"]) == 10  # one page holds 10 periods
-        assert replay["usage"]["http_requests"] == 0
+        statement = replay["statements"][0]
+        assert statement["statement_type"] == "income_statement"
+        assert statement["new_version_ids"] == []
+        assert len(statement["reused_version_ids"]) == 10  # one page: 10 periods
+        assert statement["usage"]["http_requests"] == 0
 
     def test_point_in_time_same_day_capture_is_valid(self, catalog):
         # W19 observation: capture on the as_of date itself must not be
@@ -545,3 +546,4 @@ class TestReviewFixRegressions:
         statement = same_day["statements"][0]
         assert statement["point_in_time_quality"] == "pit_verified"
         assert all(r["pit_verified"] is True for r in statement["reports"])
+

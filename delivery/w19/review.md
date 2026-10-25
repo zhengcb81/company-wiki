@@ -1,149 +1,127 @@
-# W19-SINA-STATEMENTS 独立终审报告
+# W19-SINA-STATEMENTS 独立终审报告（第 2 轮：修复复查）
 
-- 审查者：zcode 独立终审 agent（`mimo-v2.6-flash`，未参与实现；本报告全部结论来自本人实跑，不引用作者日志）
-- 审查日期：2026-10-25
-- 被审代码版本（binding）：
-  - company-wiki：branch `codex/w19-sina-statements-20261025`，基线 `243993d2`，被审 commit **`e583904d`**
-  - filing-fetch：同分支，基线 `e0d9642`，被审 commit **`a211d3a`**
-- 执行环境：Windows / Python 3.13.9 / httpx 0.28.1；两仓在 `%TEMP%\w19-indep-review` 用 `git archive <被审commit>` 导出的**只读副本**上实跑（`cwp/` = e583904d，`ff/` = a211d3a，`cwp_dirty/` = e583904d + 工作区未提交改动 overlay）。未修改任何源码、未写生产目录（`Projects/company-wiki` 全程只读）、未联网（全部 replay / 复用路径）、未提交任何 commit；临时根结束前保留在 `%TEMP%` 供复核，见 §6 清单。
-- 夹具：`docs/plans/w19-sina-statements-2026-10-25/inputs/research/capture/*.json.gz`，由本人脚本 `setup_roots.py` 独立组装 fixture 根（url→file manifest，**19/19 份解压 SHA 与 observations.json 逐一比对通过**；fzb/llb 缺 page5 终止页，按施工卡允许用 `sh999999-…` 的 44 字节真实观测等价构造）。
+- 审查者：zcode 独立终审 agent（`mimo-v2.6-flash`，未参与实现；全部结论来自本人实跑，不引用作者日志）
+- 审查日期：2026-10-25（第 2 轮，对作者 R1–R9 根修的独立复验）
+- **最终被审代码版本（binding）**：
+  - company-wiki：**`ae317ca9`**（基线链 243993d2→…→ae317ca9；第 1 轮被审 `e583904d`）
+  - filing-fetch：**`7d9bb85`**（基线 e0d9642→…→7d9bb85；第 1 轮被审 `a211d3a`）
+- 第 1 轮报告原文保留在 git 历史（`ae317ca9` 内 `delivery/w19/review.md`），本文件为其原地更新版。
+- 执行环境：Windows / Python 3.13.9；两仓以 `git archive <最终commit>` 导出到 `%TEMP%\w19-re-review` 只读副本实跑。未修改任何源码、未写生产目录、未联网（全部 replay/复用路径）、未提交 commit；临时根按纪律于报告落盘后删除。
 
 ## 1. 结论
 
-**PASS_WITH_FIXES**（存在 1 项 blocking 实质问题 W19-R1 与 1 项 blocking 流程问题 W19-R5；须根修/处置并补审后方可交接。其余为非阻断改进项。）
+**PASS_WITH_FIXES** —— 第 1 轮 9 项 finding 中 8 项已根修并经我独立复验通过；但：
 
-关键链路、负例、测试、空间与清理证据见 §2–§5；测试在被审 commit 上全绿，但实现层存在下述诚实性缺陷。
+1. **W19-R10（major, blocking）**：R1 根修**不完整**，两个变体实测仍谎报 `complete`（`all_history`/无 from 变体、`end_of_data`+范围上界放宽变体）；
+2. **W19-R11（major, blocking）**：本轮新增的 R8 重放入口存在**跨实体数据污染**（把 A 公司的报表以 B 公司 security_id 发布，exit 0）。
 
-## 2. 独立实跑命令与结果摘要
+另有 1 项 medium（continuation 契约一致性）与 2 项 low（replay 旗标/信封形状）。修复并补审前不可交接。
 
-### 2.1 完整链路（不经作者测试辅助函数，自建临时根）
+### 第 1 轮 finding 处置表
 
-| # | 命令（摘要） | 结果 |
+| ID | 第 1 轮 severity | 状态 | 独立复验证据 |
+|---|---|---|---|
+| W19-R1 范围放宽谎报 complete | major/blocking | **部分修复 → W19-R10（仍 blocking）** | from 加宽已修（§2.2 T1）；`all_history`/无 from、`end_of_data`+to 加宽两变体仍复现（§2.2 T2/T3） |
+| W19-R2 行界截断静默/fields 未暴露 | medium | **修复（fields 部分）+ 残留 → W19-R12** | fields 双路径 e2e 一致；continuation 见 W19-R12 |
+| W19-R3 FF 误标 upstream_error | minor | **修复** | §2.3：badrange → `request_error`、exit 2、无 retryable |
+| W19-R4 顶层 unavailable 不可达 | minor | **修复** | §2.2：三表全失败 → 顶层 `unavailable` |
+| W19-R5 未提交改动 | medium/blocking | **修复** | 两仓 diff 仅含声明文件，全部入 `ae317ca9`/`7d9bb85` |
+| W19-R6 retrieved_at 命名 | low | **修复** | 报告键含 `retrieved_at`、无 `captured_at`（§2.1） |
+| W19-R7 instant 语义 | low | **修复** | 报告键含 `period_semantics`（balance_sheet=instant） |
+| W19-R8 无 SourceRef 重放入口 | low | **修复（主体）+ 新缺陷 → W19-R11/W19-R13/W19-R14** | §2.4 |
+| W19-R9 回放字节不计量 | low | **修复** | §2.1：离线字节与夹具解压字节**逐表精确相等** |
+| （观察）PIT 同日 as_of | — | **修复** | §2.3：`as_of=2026-10-25` → `pit_verified` |
+
+## 2. 独立实跑与结果
+
+### 2.1 完整链路 + R9 字节账（复验）
+
+自建夹具根（19/19 解压 SHA 对 observations.json 通过 + 2 个 44B 等价终止页）与 wiki 根，真子进程跑 CWP CLI：
+
+- 首次三表请求：`complete`、36/33/36 期、15 HTTP、0 费用、无物理路径；**R9：逐表 `response_bytes` 与夹具解压字节精确相等**（income 705,179 / balance 1,104,886 / cash 647,868，合计 2,457,933 = 各页解压字节和）；报告键含 `retrieved_at`、`period_semantics`，无 `captured_at`。
+- 移走 manifest 二次请求：**0 HTTP**，versions/values/sources/documents/originals 零增长，version id 与 rows 逐行一致。
+
+### 2.2 R1 重抓语义矩阵（自拟断言；作者仅加了 from-加宽一条回归）
+
+| 探针 | 操作 | 结果 |
 |---|---|---|
-| 1 | `python setup_roots.py`（本人脚本：组装 fixture 根 + `write_market` 生成 CN security_master + `SourceCatalog.scan()` + 自写 `config/source_catalog.yaml`） | fixtures=21（19 真实 + 2 等价终止页），**SHA 校验 19/19 通过**；wiki 根 config/security_master 就绪 |
-| 2 | `python -m company_wiki.source_catalog.financial_statements.cli --wiki-root <root> --fixture-root <fixtures>` stdin=三表全量请求（2016-01-01..2026-06-30, fetch_if_missing, limits 8MB/120s/0.00） | exit 0；`status=complete`；income **36** 期 / balance **33** 期 / cash **36** 期；每表 4 页 + 1 终止页，`http=5/5/5`（共 15）、`cost=0.00`；`terminal=end_of_data`；**响应无任何物理路径**（grep w19-indep-review/AppData/catalog.sqlite 均无）；DB schema=1.3.0；versions=105、**value 行=9729**（36×77+33×141+36×64 逐表吻合）、originals=12+12 provenance、`document_kind=financial_statement_dataset`、`provider=sina_finance`、value_decimal 全部 TEXT/null（无 REAL） |
-| 3 | 同一请求二次运行，**先移走 fixture manifest**（任何 HTTP 尝试都会失败） | exit 0；三表 `http_requests=0`；versions/values/sources/documents/originals **零增长**；`statement_version_id` 与 rows 与首次**逐行完全一致**；`last_checked_at` 只更新观察（refresh 时另行验证） |
-| 4 | 9,729 行 `json_pointer` 全量回读：按 `source_ref.content_sha256` 定位已提交原件，逐行走指针比对 `raw_value` | **9729/9729 全部精确解析**（SourceRef/locator 可回读独立成立） |
-| 5 | 空间测量（catalog 目录 + lake） | 4,726,785B + 2,484,737B = **6.88 MiB ≤ 16 MiB** 目标 |
+| T1 from-加宽（作者案例 e2e） | wikiR1：窄 from=2025（1 HTTP/6 期/period_boundary）→ 宽 from=2016 | **重抓 5 HTTP → 36 期 complete**；同宽再请求 0 HTTP complete ✅ |
+| T4 其余不完整终止（作者无回归，我自拟） | 直接改 `financial_statement_coverage.terminal_reason` 为 `count_changed / budget_stopped / max_pages / duplicate_page / no_progress` 后各发 fetch_if_missing | **5 个终止全部重抓（5 HTTP）且恢复 end_of_data** ✅；对照 `end_of_data` → 0 HTTP ✅ |
+| T2b 无 from 变体 | 窄抓后请求**去掉 period_end_from** | ❌ **0 HTTP、complete、仅 10/36 期**（adv=36、term=period_boundary） |
+| T2c `all_history` 变体 | 窄抓后请求 `all_history=true`（卡面钦定的全历史旗标） | ❌ **0 HTTP、complete、仅 10/36 期**（2016–2023 全缺） |
+| T3 to-加宽 + 供应方新数据（突变） | 正常全量抓取（to=2026-06-30, end_of_data）→ 换夹具根使 lrb page1 额外含 2026-09-30（report_count 37）→ 请求 to=2026-12-31 | ❌ **0 HTTP、complete、缺 2026-09-30**（供应方此刻有该期）；对照 `intent=refresh` 会重抓并因 count 变化诚实报 partial（income 37 期/last=2026-09-30/term=count_changed）✅ 守卫生效 |
 
-### 2.2 作者未提供的负例 / 突变（本人自拟）
+→ 汇总为 **W19-R10**。
 
-**W19-R1 复现（range-widening → 虚假 complete）** —— 施工卡/作者测试均未覆盖：
+### 2.3 R3 / R4 / PIT / FF 复验
 
-```
-# 新建独立根 wikiB；step1 窄范围
-cli --wiki-root roots/wikiB --fixture-root roots/fixtures  < req_narrow.json   # from=2025-01-01, to=2026-06-30
-# step2 放宽范围（仅改 period_end_from=2016-01-01）
-cli --wiki-root roots/wikiB --fixture-root roots/fixtures  < req_wide.json
-```
+- FF 真子进程往返：exit 0、`financial-statements-response/1`、complete 36/33/36、0 HTTP、无路径泄漏。
+- **R3**：FF 输入 `from>to` → **exit 2、`status=request_error`、无 retryable、无 producer_exit_code 误标**（原为 `upstream_error`+`retryable=true`）✅。
+- **R4**：新根 + 空 manifest（三表 provider 失败）→ 三表 `unavailable`、**顶层 `unavailable`**（第 1 轮为 partial）✅。
+- FF 带 `fields=["BASICEPS"]` 往返 → 行正确过滤 ✅；FF 对 `fields/continuation` 校验放行 ✅。
+- PIT `as_of=2026-10-25`（=抓取日）reuse_only → `point_in_time_quality=pit_verified`、全部 `pit_verified=true`、0 HTTP ✅。
 
-- step1：`complete`，6 期，`terminal=period_boundary`，`advertised=36`（正确：2025 起的范围已覆盖）
-- step2：**`status=complete`，但只返回 10 期（2024-03-31..2026-06-30），`http=0`，请求范围 2016-01-01..2026-06-30 缺 26 期**，`advertised_report_count=36` 与 `observed_periods=10` 并存
-- 即：先前一次窄范围抓取留下的 `financial_statement_coverage`（terminal=period_boundary 已属 `_TERMINAL_EXHAUSTED`）使 `_needs_fetch` 判定“本地已命中”，`elif selected: status="complete"` 把“范围内有任意本地期间”当成了“范围已覆盖”——**违反“不把 partial 改成 complete”与 SKILL 自述的 “complete when every requested statement covers its range”**。
+### 2.4 R8 重放入口复验（含自拟负例）
 
-其余独立负例（作者单测有同名逻辑、但未走 CLI 真进程的，我补齐了端到端）：
+- 正向：对 income/balance/cash 三个已提交 source 分别 `--replay-source` → exit 0、`statement_type` 由字节内 `item_source` 正确判定（lrb/fzb/llb 均验证）、`http=0`、`new_version_ids=[]`、`reused=10`。
+- **dedup（复查项 2）**：重放前后 `documents=12 / sources=24 / versions=105 / values=9729 / originals=12 / provenance=12` 全部不变，staging 无 page0 残留，二次重放完全幂等 → **不会重复登记 document、不会产生第二个原件** ✅。
+- 非法 source_id → **exit 2 `request_error`**（命名理由）；格式合法但未登记 → exit 2 ✅。
+- ❌ **跨实体污染（W19-R11，自拟负例）**：同一根内加入第二家证券（美的集团/000333）后，用 `company_query=美的集团` + **中微公司**的 source_id 重放 → **exit 0、status=complete、在 `security_id='000333'`/`entity='美的集团'` 名下新建 10 个版本**（内容为中微的利润表页）。随后对“美的集团”的查询会把中微数据当本地 complete 返回。
+- ❌ `--replay-source` 与 `intent=reuse_only` 同用 → **旗标被静默忽略**（reuse_only 提前返回早于 replay 分支），回普通 reuse 响应 exit 0（W19-R13）。
+- ❌ replay 输出声明 `financial-statements-response/1` 但无 `statements/company_identity/coverage`（W19-R14）。
 
-| 负例 | 命令/操作 | 结果 |
-|---|---|---|
-| `period_end_from > period_end_to` | CLI + `req_badrange.json` | **exit 2**，envelope `status=request_error`，`error=period_end_from must not exceed period_end_to` |
-| `all_history` + `period_end_from` 并存 | CLI + `req_allhist.json` | **exit 2**，`request_error`，互斥报错正确 |
-| 一表失败不回滚其他表 | 新根 wikiC + 去掉全部 llb 夹具的 fixture 根跑三表请求 | 整体 `partial`；income `complete`(36)、balance `complete`(33) **已落库**（69 版本/8 原件），cash `unavailable(http_error)`；再次请求：前两表 **0 HTTP**，仅 cash 重试 1 次 |
-| 全表 provider 失败 | 新根 wikiD + 空 manifest（provider=None） | 三表均 `unavailable(provider_unavailable/http_error)`，**顶层 status=partial（见 W19-R4）** |
-| 严格过去 as-of 不冒充 PIT | reuse_only + `knowledge_mode=point_in_time, as_of=2020-01-01` | `point_in_time_quality=historical_asof_unverifiable`，全部 `pit_verified=false`，0 HTTP |
-| 同内容刷新不重复版本/原件 | CLI `intent=refresh`（真实重放 15 HTTP） | versions=105、values=9729、originals=12 **均不变**；`last_checked_at` 更新、`first_seen_at` 不变；`provider_update_time` 仅作观察 |
-| 查询路径不建库 | 新根 wikiE（仅 config+security_master，**无 DB**）跑 `intent=reuse_only` | exit 0；三表 `not_found + gap_reason=catalog_database_missing`；**结束时仍未创建 catalog.sqlite3**（catalog_dir 仅 security_master） |
-| FF 真子进程往返 | `python ff/scripts/fetch_statements.py --config <json>`（PYTHONPATH=CWP/src，真实 CWP 子进程，本地已填充根复用） | **exit 0**，`schema_version=financial-statements-response/1`，`status=complete`，36/33/36 报告，`http=0`，无路径泄漏 |
-| FF 非法请求 | 同上输入 badrange | **exit 2**，但 envelope `status=upstream_error`、`retryable=true`（见 W19-R3） |
+### 2.5 R2 fields/continuation 一致性（复查项 3）
 
-### 2.3 测试实跑（全部在被审 commit 导出副本上）
+- `fields`：**双路径一致** —— 采集路径与 reuse_only 路径对 `fields=["BASICEPS","DILUTEDEPS"]` 均只回所选行（e2e 逐值核对）✅。
+- `continuation`：**不一致** ——
+  1. reuse_only 接受该字段（契约校验通过）但**静默丢弃**（带 token 与不带 token 响应逐行相同，回显 `continuation=None`）；
+  2. 服务端 `max_rows=20000` 对 CN 数据不可达（单表最大 ~6k 行），**服务永远发不出 token**，分页路径实际是死代码（仅 repository 单测覆盖）；
+  3. 手工构造合法 token `fsv-…:5` 复测：**income 正确续传**（首报告 72 行、min ordinal=6），但同一请求里的 balance/cash 被 token 逻辑整段跳过 → **`status=complete` 且 `reports=0`**（谎报）。
+  → 汇总为 **W19-R12**（token 今日不可自发产生，故为契约级/潜伏，非数据损坏）。
 
-| 套件 | 命令 | 结果 |
-|---|---|---|
-| CWP 本卡 | `python -m pytest tests/financial_statements/ -q` | **91 passed**（49.9s），exit 0 |
-| CWP 窄接缝旧消费者① | `pytest tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_canonical_writer.py -q` | **20 passed**，exit 0 |
-| CWP 迁移旧消费者② | `pytest tests/contract/test_disaster_drill_fc405.py test_migration_drill.py test_migration_tool.py test_migration_engine_fc401.py -q` | **26 passed**（1.2.0 旧库→1.3.0 迁移链成立），exit 0 |
-| CWP 架构门 | `pytest tests/contract/test_architecture_gate.py -q` | **5 passed** |
-| FF 本卡 | `python -m pytest tests/financial_statements/ -q` | **13 passed**（3.6s），exit 0 |
-| FF 传输/契约旧消费者 | `pytest tests/test_p5_process_transport.py tests/test_ff_v2_contract.py -q` | **24 passed** |
-| （参考）工作区未提交改动 overlay | 同 CWP 本卡套件 | **92 passed**（见 W19-R5） |
+### 2.6 全套测试独立重跑（复查项 5，全部在最终 commit 导出副本）
 
-## 3. 逐条 finding
+| 套件 | 结果 |
+|---|---|
+| CWP `python -m pytest tests/financial_statements/ -q` | **97 passed**（37.9s），exit 0 |
+| FF `python -m pytest tests/financial_statements/ -q` | **16 passed**（3.7s），exit 0 |
+| CWP 窄接缝旧消费者 `tests/contract/test_source_catalog_schema_migration.py + test_source_catalog_canonical_writer.py` | **20 passed**，exit 0 |
+| FF 旧消费者 `tests/test_fetch_filing.py` | **111 passed, 1 skipped, 39 subtests passed**，exit 0 |
+| FF 传输/契约旧消费者 `test_p5_process_transport.py + test_ff_v2_contract.py` | **24 passed**，exit 0 |
 
-### W19-R1 — 范围放宽后 fetch_if_missing 谎报 `complete`（severity: major，**blocking=true**）
-- 证据：`cwp/src/company_wiki/source_catalog/financial_statements/service.py:334-352`（`_needs_fetch` 只比较 `observation.observed_periods == stored_periods` 与 terminal 是否 exhausted，**从不比较请求范围与既有覆盖边界**）、`service.py:268-269`（`elif selected: status="complete"`）、`repository.py:360-406`（`record_coverage_observation` 不落请求范围/最早抓取边界）；实跑复现见 §2.2 第一组（窄→宽两步，第二步 10/36 期却 `complete`）。
-- 根因：覆盖观察只记“抓到过多少期”，没有“已覆盖到哪个范围”的状态；`selected` 非空被等同于范围覆盖完整。
-- 影响：真实调用序列“先取近端再取全历史”会得到 `complete` 但缺 2016–2024 数据的响应，违反施工卡 §2.1/§3.1“诚实 partial、不把 partial 改成 complete”。
-- 建议：在 coverage 观察中持久化本次抓取的请求范围（或最早抓取边界 `fetched_from`）；`_needs_fetch` 对超出既有覆盖边界的请求重新抓取，或返回 `partial` + named gap（如 `range_not_covered`），并补一条窄→宽回归测试。
+## 3. 本轮 finding（按新编号）
 
-### W19-R2 — 行数上限截断静默发生，continuation/fields 未进公共接口（severity: medium，blocking=false）
-- 证据：`service.py:279-290` 调用 `query_statement_rows(max_rows=DEFAULT_MAX_ROWS)` 后**丢弃**返回的 `continuation`/`truncated`（`repository.py:321-331` 计算了但无人消费）；`contracts.py:150-157` 请求允许字段里**没有** `fields`/`continuation`/`max_rows`；`repository.py:456-561` 只读查询同样不回 continuation。
-- 根因：卡片 §3.2 的“行/字节界限 → continuation 或 partial”只实现了“界限”，没实现“续传/截断标记”，`fields` 过滤停留在 repository 内部 API。
-- 影响：当前 CN A 股单表最大 ~40 期×~150 行 ≈ 6k 行 ≪ 20000，**现实不可达**，但契约半实现：一旦触发截断，响应仍可能标 `complete` 且无法续取。
-- 建议：`_handle_statement` 透传 `truncated`/`continuation`（截断时强制 `partial`），或在请求契约中补 `fields`/`continuation`；至少写明上限与行为。
+### W19-R10 — R1 根修不完整：`all_history`/无 from 与 `end_of_data`+to 加宽仍谎报 complete（severity: major，**blocking=true**）
+- 证据：`cwp/src/company_wiki/source_catalog/financial_statements/service.py:366-389` `_needs_fetch`：`period_boundary` 分支仅在 `period_from and period_from < first_stored` 时重抓——`period_from is None`（无 from 或 `all_history=true`，`effective_period_from` 返回 None）恒不重抓；`end_of_data` 分支直接 `return False` 并注释“exhausted in both directions”，但该结论只对更旧方向成立，对更新方向（新期间会随时间发布）不成立。实跑：§2.2 T2b（0 HTTP、complete、10/36）、T2c（all_history 同样 0 HTTP、complete、10/36）、T3b（to=2026-12-31、0 HTTP、complete、缺供应方已有的 2026-09-30）。
+- 根因：覆盖判断没有把“请求范围是否被既有存储跨度完整包含”作为统一条件；两个分支各自用局部规则近似。
+- 影响：与第 1 轮 R1 同类的“partial→complete”谎报，触发面包括卡面钦定的 `all_history` 全历史请求与跨期自然请求（先抓后宽）。
+- 建议：`_needs_fetch` 改为范围包含判定——`period_boundary` 下 `period_from is None`（或 `all_history`）必须重抓；`end_of_data` 下若 `period_end_to > last_stored_period`（或 to 为空即无上界）也须重抓（一次页请求即可核验最新期），否则降级 `partial` + named gap（如 `range_not_covered`）；补 3 条回归（无 from、all_history、to 加宽+新数据突变）。
 
-### W19-R3 — FF 把 CWP 的 `request_error` 误报为 `upstream_error` 且 `retryable=true`（severity: minor，blocking=false）
-- 证据：`ff/scripts/ff_financial_statements.py:143-148`（任何非零子进程退出 → `code="upstream_error"`，丢弃子进程 stdout 里已有的 `request_error` envelope）；实跑：FF 输入 `from>to` → exit 2 正确，但 envelope `status=upstream_error`、`retryable=true`、`producer_exit_code=2`。
-- 根因：`run_bounded_json` 的 `ChildFailed` 分支未解析子进程错误 envelope。
-- 影响：调用方自己的错误被归因为上游故障并被标“可重试”，与 SKILL 状态表（`request_error`）不符；exit code 本身正确。
-- 建议：exit 2 时读取子进程 stdout envelope，透传 `status=request_error/config_error`（保留 `producer_exit_code`），`retryable=false`；或 FF 侧先做 `period_end_from>to` 等确定性校验。
+### W19-R11 — `replay_source` 跨实体污染：请求身份与 source 归属实体不校验（severity: major，**blocking=true**）
+- 证据：`service.py:536-603` `replay_source`：以请求 `company_query` 解析身份 → 仅按 `documents.primary_source_id=?` 查 document（`service.py:554`，**不比对 document/entity 与解析出的 security**）→ `_commit_and_publish_page(security=请求方)`。实跑（§2.4）：`company_query=美的集团` + 中微 source_id → 10 个 `fsv-*` 版本写入 `security_id='000333'`、`entity='美的集团'`，内容为中微利润表；exit 0、status=complete。随后 reuse 查询“美的集团”会把该数据当本地 complete 返回。
+- 根因：重放入口只做了 source_id 形态/登记校验，缺少“source 所属实体 == 请求身份”的一致性校验（卡面要求“公司名与 hint 冲突才报明确问题”）。
+- 影响：共享两长表被写入错误公司数据且状态诚实性被绕过（数据完整性缺陷，虽需显式错配调用，但静默成功不可接受）。
+- 建议：`replay_source` 校验 `documents.entity`（及 market/security 归属）与解析身份一致，冲突时报明确 `request_error`/`identity_error` 并 exit 2；补跨实体负例回归；顺带核对 `code/exchange`。
 
-### W19-R4 — 顶层 `unavailable` 状态不可达，全表失败报 `partial`（severity: minor，blocking=false）
-- 证据：`service.py:169-177` `_overall_status` 只会产出 complete/not_found/partial；实跑 wikiD 全表 `unavailable` → 顶层 `partial`（§2.2）。
-- 根因：`_overall_status` 缺少“全部 unavailable → unavailable”分支。
-- 影响：卡片 §3.2 的状态枚举中 `unavailable` 在响应顶层是死值；全站故障被 `partial` 掩盖（逐表仍诚实）。
-- 建议：`all(unavailable)` 时顶层返回 `unavailable`，并补测试。
+### W19-R12 — continuation 契约三重不一致（severity: medium，blocking=false）
+- 证据（§2.5）：reuse_only 接受并静默丢弃 `continuation`；服务端 20000 行界对 CN 数据不可达导致 token 永不发放（分页死代码）；手工 token 下多表请求对非目标表返回 `complete + reports=0`（income 侧续传本身正确，72 行/ordinal≥6）。`service.py` 复用路径只传 `fields` 不传 `continuation`；`_handle_statement` 对每张表都回传同一个 request-level token。
+- 建议：continuation 作用域改为“单表请求”或在 token 内绑定 statement_type 并在不匹配时明确报错；reuse_only 要么支持续传要么显式拒绝该字段；截断时状态降级 `partial`；若短期不打算启用分页，移除/标注该字段为 reserved，避免死契约。
 
-### W19-R5 — 被审 commit 之上存在未提交代码改动（severity: medium，**blocking=true**，流程/绑定）
-- 证据：CWP 工区 `git status`：`M src/company_wiki/source_catalog/financial_statements/service.py`、`M tests/financial_statements/test_service_contracts.py`（新增 `_apply_identity_gap`/ambiguous candidates 语义 + 1 条新测试）；overlay 实跑 **92 passed**。
-- 根因：作者在 `e583904d` 之后继续改代码但未提交，本次审查只能绑定 `e583904d`。
-- 影响：违反 COMMON §4“绑定 reviewed_code_commit，之后只有文档 commit 可动 HEAD；再改被审代码须补审”。
-- 建议：交接前将该改动作为新 commit 提交并**对差异补审**，或回退；handoff 中明确最终绑定 SHA。
+### W19-R13 — `--replay-source` 在 `intent=reuse_only` 下被静默忽略（severity: low，blocking=false）
+- 证据（§2.4）：`cli.py` reuse_only 提前返回位于 replay 分支之前 → 旗标请求得到普通 reuse 响应 exit 0，无任何提示。
+- 建议：reuse_only 分支前先处理 `--replay-source`，或对“旗标+reuse_only”组合报 `request_error`。
 
-### W19-R6 — 报告级字段名 `captured_at` 与卡片冻结清单的 `retrieved_at` 不一致（severity: low，blocking=false）
-- 证据：卡片 §3.2 每报告字段清单含 `retrieved_at`；实现 `service.py:468-511` 输出 `captured_at`（响应顶层 `retrieved_at` 存在，`service.py:111`）。
-- 建议：报告级增加 `retrieved_at` 别名或在 handoff/接口文档中记录该命名偏差（语义上 `captured_at` 更贴近卡片 §5“真实 capture 时点”，建议保留并补别名）。
+### W19-R14 — replay 输出声明 `financial-statements-response/1` 但缺该 schema 的必备载荷（severity: low，blocking=false）
+- 证据（§2.4）：输出键仅 `schema_version/request/status/statement_type/source_id/new|reused_version_ids/usage`，无 `statements/company_identity/coverage`。
+- 建议：为重放操作定义独立收据 schema（如 `financial-statements-replay-receipt/1`），或补齐 response/1 的必备字段。
 
-### W19-R7 — balance_sheet 的 instant 语义无机器可读标记（severity: low，blocking=false）
-- 证据：`schema.py:25-27` `period_kind CHECK IN ('annual','semi_annual','q1','q3')`，全包 grep 无 `instant`；`test_normalize.py::test_balance_sheet_period_kind_and_statement_semantics` 断言 balance sheet `period_kind=='semi_annual'`，注释称 instant 语义“live in the report contract（statement_type）”。
-- 影响：`period_start` 全表恒 null，消费者只能靠 `statement_type=balance_sheet` 推断瞬时性；与卡片 §4.3“balance_sheet 用 instant”的字面要求不完全一致（未伪造期间，方向正确）。
-- 建议：handoff 明确写出该编码约定，或增加 `value_basis= instant|duration` 字段（不动旧 CHECK 亦可）。
+## 4. 修复与复审要求
 
-### W19-R8 — 无“从已提交 SourceRef 重放规范化”的入口（severity: low，blocking=false）
-- 证据：`service.py:435` 先提交原件再 `page.normalized()`；规范化失败会抛到 `cli.py:171-176`（fatal exit 1），coverage 观察未记录 → 下次 `fetch_if_missing` 会**再次联网**（原件虽 dedup 不重复，但 HTTP 重来）；grep 全包仅 `--fixture-root` 回放（回放的是夹具根，不是 catalog 原件）。
-- 影响：违反卡片 §2.1“原始页保存后规范化失败可从该 SourceRef 重放，不再联网”的字面要求；属可用性/成本问题，不产生错误数据。
-- 建议：增加按 `source_id` 读已提交字节→normalize→publish 的重放入口（或至少在失败重试时优先从已提交原件读字节），并补一条“坏 payload 落原件后零网络重放”测试。
+1. **W19-R10、W19-R11 必须根修**并补回归（建议各含一条 CLI 级 e2e），随后由独立审查者对差异第三轮补审。
+2. W19-R12 建议本轮修复或在 handoff“当前不足”逐条声明；W19-R13/R14 建议随手修。
+3. 绑定关系更新为：reviewed commits = CWP `ae317ca9` / FF `7d9bb85`；再改被审代码须继续补审（COMMON §4）。
 
-### W19-R9 — fixture 回放模式 `response_bytes` 恒为 0（severity: low，blocking=false，测试基础设施）
-- 证据：实跑三次响应 `usage.response_bytes=0` 而 `http_requests=15`；复现：`BudgetedHTTPTransport(MockTransport(handler))` + `response.content` 读取 → `budget.response_bytes_used=0`（httpx 对 `content=` 构造的响应短路 `read()`，不经过被替换的计量流）。生产路径（真实 `HTTPTransport` 流式读取）会计量。
-- 影响：离线收据无法佐证字节计量与 `max_bytes` 预算执行；若交接文档把离线 `response_bytes=0` 当真实字节即为不实。
-- 建议：回放 transport 自行计量并写入 budget（或文档明确“离线模式字节不计量，字节账仅生产有效”），交接中不得引用离线 `response_bytes` 作为真实字节证据。
+## 5. 临时产物与清理
 
-### 观察项（非 finding）
-- PIT 同日 `as_of` 因 `captured_at`（datetime 字符串）与 `as_of_date`（date 字符串）字面比较被判为晚于 as_of → `pit_verified=false`；方向保守（只可能少认、不会多认），可接受，建议注释说明。
-- 中途 `count_changed`/`provider_error` 时已抓页面被整体丢弃（`service.py:231-243` 只 persist 非 provider_error 分支）：保守且状态诚实，代价是重复抓取；`count_changed` 页本身不入库（provider 在 append 前 return，`sina_provider.py:246-253`）。
-- coverage 响应只暴露 advertised+selected（`observed_periods` 字段实为范围内选中数），卡片“advertised/observed/selected 三个数”只落库两个语义，建议文档化。
-- capture 份数：卡面写 18 份 gzip，实际 `capture/` 有 19 份（175,846B vs 文档 175,785B，差一份 61B 终止页）；仅文档计数漂移，SHA 全部可验。
-
-## 4. 对照施工卡逐节核查（代码层）
-
-- **硬编码**：`grep 中微/688012/000333/2016-12-31/2026-06-30` 在 `src/company_wiki/source_catalog/financial_statements/**` 与 `ff/scripts/*.py` **零命中**（仅测试/夹具/SKILL 示例出现）；端点、交易所前缀映射、type 参数表均为数据驱动。
-- **三表/单位/期间/Decimal**：三表独立结果；`value_decimal` SQLite 全 TEXT/null（实测 `typeof` 分布 text=4049/null=5680，无 REAL）；`UNIT_EVIDENCE` 仅 EPS→`CNY/share, scale=1`，`provider_precision`(f2/ps4) 单列不冒充单位；`BIZTOTINCO` 与 `BIZINCO` 保留为独立行；非法数值保留 raw + `non_numeric` + `invalid_numeric_value`（单测 `test_invalid_numeric_keeps_raw_and_flags`）；null/empty/0/group 分类齐全（DDL CHECK 五值）。
-- **PIT 诚实性**：见 §2.2（过去 as-of 拒绝冒充；`point_in_time` 未验即 `historical_asof_unverifiable`，不升门禁）。
-- **迁移链唯一 owner**：`models.CATALOG_SCHEMA_VERSION=1.3.0` + `store._DDL += FINANCIAL_STATEMENTS_DDL`（DDL 文本唯一 owner 在 `financial_statements/schema.py`）；`_UPGRADEABLE={1.0.0,1.1.0,1.2.0}`，未知未来版本 fail-closed（单测 + 旧迁移消费者 26 passed）；WAL 并发双初始化补丁为窄接缝必要增量；查询路径 `mode=ro + PRAGMA query_only`，无库返回 named gap（实跑 §2.2 证实零建库）。
-- **canonical writer**：新增 `ThirdPartyDatasetOriginal` + `import_third_party_dataset_staged`，复用唯一 `_commit_staged`/dedup/SourceRef；拒绝 `provider=="official"`（单测）；`document_kind=financial_statement_dataset` 映射 `SourceType.OTHER` 不伪造财年；无第二套 writer；`git diff` 显示窄接缝改动仅 4 文件（store/models/canonical_writer/document_kinds）+ 1 个旧契约测试的版本号跟常量（未删断言）。
-- **幂等/预算/边界**：同内容刷新零新增版本/原件（实跑）；`provider_update_time` 不入 `business_identity`（`normalize.py:168-197`，单测）；单一 `AcquisitionBudget` 跨页跨表共享（单测 `test_one_budget_shared_across_all_pages` + 实跑 15 请求记账）；`max_pages=64` 上限、重复页/无进展/count 变化/403/429/500/预算停止均有命名终止；无隐藏重试（provider 无 retry 分支）。
-- **FF 薄客户端**：只 import `ff_configuration.load_connection_root` 与 `ff_process_transport.run_bounded_json`，**无第二套子进程/配置实现**；FF 与 CWP 各自校验请求（FF 校验形状，CWP 是唯一语义 owner）；SKILL.md 新增“原件 vs 三表数值”路由表 + 可直接执行的 `fetch_statements` 示例 + partial/PIT 说明（我按该示例形状实跑成功）。
-- **测试独立性**：本卡 91 条测试在被审 commit 导出副本独立运行全绿，测试不依赖作者日志；夹具 SHA 我另行独立核验。
-
-## 5. 修复与复审要求
-
-1. **W19-R1 必须根修**（覆盖范围状态 + 窄→宽回归测试），并复跑 `tests/financial_statements/` 与本报告 §2.1/§2.2 链路。
-2. **W19-R5 必须处置**（提交补审或回退），更新 handoff 绑定 SHA。
-3. W19-R2/R3/R4/R6/R7/R8/R9 建议在交接前修复或在 handoff“当前不足”中逐条声明。
-4. 修复后由独立审查者对差异补审（COMMON §4）。
-
-## 6. 临时产物与清理
-
-- 全部实跑在 `%TEMP%\w19-indep-review\`（`cwp/`、`cwp_dirty/`、`ff/`、`roots/wiki*`、`roots/fixtures*`、`out/*.json`、`setup_roots.py`、`setup_wiki.py`、`check.py`）；**按环境纪律，报告落盘后该临时根整体删除**（`rm -rf %TEMP%\w19-indep-review`），可按 §2.1 的 `setup_roots.py` 说明一键重建复现。
-- 未触碰生产目录 `Projects/company-wiki`，未在两个工区产生 commit（两仓 `git status` 仅剩作者原有 2 个未提交改动 + 本次新增 `delivery/w19/` 未跟踪目录）。
-- 本报告写入 `delivery/w19/review.md`、`review.json`（不 commit）。
+- 全部实跑在 `%TEMP%\w19-re-review\`（`cwp/`、`ff/`、`roots/`、`out/`、`setup_roots.py`、`setup_wiki.py`、`t3_driver.py`、`r8_r2_driver.py`）；报告落盘后整体删除，可按 §2.1 描述一键重建。
+- 未触碰生产目录 `Projects/company-wiki`；两仓无任何 commit；本文件与 `review.json` 原地更新（不自行 commit）。
