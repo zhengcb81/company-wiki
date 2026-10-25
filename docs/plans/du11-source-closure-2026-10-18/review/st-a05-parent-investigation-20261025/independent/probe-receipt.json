@@ -1,0 +1,98 @@
+{
+  "schema_version": "independent-st-a05-evidence-probe/1",
+  "head": "1171aa6f8aad59001554b026200cf0dc6f0a439d",
+  "result": "PASS_ENGINEERING_SUBNODE__A05_OVERALL_OPEN",
+  "old_10_pass": {
+    "count": 10,
+    "targets": [
+      {
+        "target_id": "ST-A03",
+        "result": "current p11 region-revenue fact and p16 parent-location basis note are in model payload; old ambiguous p16 table row is omitted",
+        "omitted_locator": "loc:v1/page:16/paragraph:19/chars:533-641"
+      },
+      {
+        "target_id": "ST-A04",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A06",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A07",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A08",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A09",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A10",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A11",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A12",
+        "result": "all prior spans selected and in model payload"
+      },
+      {
+        "target_id": "ST-A14",
+        "result": "all prior spans selected and in model payload"
+      }
+    ]
+  },
+  "a13": {
+    "span_count": 7,
+    "same_span_set_as_attempt01": true,
+    "all_spans_in_compiled_payload": true,
+    "page119_locators": [
+      "loc:v1/page:119/paragraph:9/chars:476-565",
+      "loc:v1/page:119/paragraph:11/chars:566-833"
+    ]
+  },
+  "a05": {
+    "local_facts_in_actual_tasks": [
+      "loc:v1/page:14/paragraph:3/chars:99-301",
+      "loc:v1/page:14/paragraph:12/chars:423-512"
+    ],
+    "chemistry_parent_selected_but_absent_from_descendant_tasks": "loc:v1/page:13/paragraph:21",
+    "coverage_complete": false,
+    "endpoint_pages_in_deferred_list": [],
+    "unrelated_deferred_page_count": 140
+  },
+  "limits": {
+    "selected_spans": 112,
+    "selected_chars": 9030,
+    "work_used": 12978295,
+    "work_limit": 16000000,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0
+  },
+  "focused_tests": {
+    "exit_code": 0,
+    "elapsed_seconds": 17.65,
+    "pytest_temp_root_restored": true
+  },
+  "sha256": {
+    "src/company_wiki/document_understanding/structure/__init__.py": "db3b2cc328a8253de22cea4902a97da1ba9352b1042e11be1fcfff2d080a29bc",
+    "src/company_wiki/document_understanding/structure/layout.py": "b365e55b6f0ad4b2a84f3fa3f7195c628b4fe401633bb487208b3edd77fa9072",
+    "src/company_wiki/document_understanding/structure/sections.py": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py": "5b7af5bd601b01c2ba014cf1f08fe8cdead5dc868deb6b6e2d4c07b590f0cdb6",
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py": "ec54418ca75cef6016bf86cc92f00f38f57d357514e2754706ae4ed1714aa675",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "ed3c44551a1bcf9ddc14b9de6453c05e0784f0c34deca77eead93f0ece6b5926",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a05-parent-investigation-20261025/attempt02/replay-receipt.json": "ebd32f74eb1257c59992ce20bbee1a45ed725559fcf2c3453c68896b52aa832d",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a05-parent-investigation-20261025/attempt02/selection.json": "68a4f361b45b534ce9ce0089b489050ad68a7e0174c62943e0e8853f9c976578",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a05-parent-investigation-20261025/attempt02/model-view.json": "c66b5e507b1d100611676b6b4ad4c3858012451dcb1f889b1d8da183e6c012de",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a05-parent-investigation-20261025/review-final/final-receipt.json": "61382d14fbddf4e473b5325a58e54142ced1b62b3fa26a05156e739abd2c2d11",
+    "docs/plans/du11-source-closure-2026-10-18/review/annual14-current-source-review-20261025/independent/report.json": "2ef77e8954cbdbe10a2ad8f0e6eb61b3cafc7e833796dbc4a9f2e5709dd1a6ae",
+    "docs/plans/du11-source-closure-2026-10-18/review/st-a05-parent-investigation-20261025/independent/verify_evidence.py": "496dfdd12268591a564e54fc91dc078d1070e948ceedcf5c4fe711459eed5b26"
+  }
+}

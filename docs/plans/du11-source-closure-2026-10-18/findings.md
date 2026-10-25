@@ -899,3 +899,9 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 
 - 09a758c8纯PWF已由classifier判无行为，却仍固定154项smoke、160.83秒。首修gate后独审定位更深共因：旧classifier将任何不以.py结尾且不在代码目录的文件当文档，包括根config.yaml/未知shell/JSON。现唯一classifier明确文档/归档，未知资源仍检查；不是按reason跳过或补单个config例外。最终独审PASS，129主跑+1原断言MSYS环境复跑通过；初版105绿不代签最终版本。
 - A01/A05真实变化分页计数未识别、三层native scope跳过内层opener是两个触发；新TDD13FAIL/13PASS后共享structure修复98PASS。新1例又证明内外层会对同物理边重复发现，先RED后在同调用内共用正/负proof；集中预算/cache/结构验收进行中。真实SourceRef回放与独审尚待，不能宣称来源内容验收。
+
+## 2026-10-25 A01/A05来源范围剩余共因已定位
+
+- 页码识别必须按同源/实际页序/每页全格式全边带唯一/相邻页局部位置稳定；整份249页全局bbox交集会被不同章节布局污染，单edge分组又会误认重复候选。TDD已统一修，非issuer补丁。
+- 多层native frames与逐target refs复用一份物理边proof，source预算/cache闭包206定向通过、独审工程PASS；真实输入旧10PASS保持。
+- 真实页边当前仍拒绝：_understand用整体coverage_complete作为native_scan，其混有金融table增强延期。实读249页、errors/opaque均空，定位到职责维度混合；不是下载/身份权限、不能靠新增人工许可解决。实际column仍未知，严禁默认0。下一实施见native_local_flow_followup；A01/A05整体继续OPEN。

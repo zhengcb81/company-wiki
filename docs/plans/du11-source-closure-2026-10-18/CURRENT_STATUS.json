@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "A01_A05_NATIVE_OUTLINE_IMPLEMENTING; DOCS_ONLY_PUSH_INDEPENDENT_PASS_PUBLISH_NEXT; REAL_SUMMARY_RF_OPEN",
+  "overall_status": "DOCS_ONLY_PUSH_PUBLISHED_CI_SUCCESS; NATIVE_OUTLINE_ENGINEERING_INDEPENDENT_PASS_PUBLISH_NEXT; A01_A05_REAL_OPEN; SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,17 +26,15 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "26e981e1f75d8e67274679749f6ef213d7490012",
+  "last_code_commit": "1171aa6f8aad59001554b026200cf0dc6f0a439d",
   "code_ci": {
-    "id": 40180784583,
-    "head_sha": "26e981e1f75d8e67274679749f6ef213d7490012",
+    "id": 40184030458,
+    "head_sha": "1171aa6f8aad59001554b026200cf0dc6f0a439d",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40180784583",
-    "created_at": "2026-10-25T09:28:29Z",
-    "updated_at": "2026-10-25T09:33:26Z",
-    "observed_at": "2026-10-25T09:36:28.476315+00:00",
-    "run_scope": "Normal configured GitHub CI; exact product commit, no skipped hooks"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40184030458",
+    "created_at": "2026-10-25T10:15:36Z",
+    "updated_at": "2026-10-25T10:19:16Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -1911,21 +1909,42 @@
   },
   "a01_a05_investigation": "review/st-a05-parent-investigation-20261025/README.md",
   "docs_only_push_20261025": {
-    "status": "INDEPENDENT_PASS_READY_TO_PUBLISH",
+    "status": "PUBLISHED_EXACT_CI_SUCCESS",
     "evidence": "review/docs-only-push-20261025/README.md",
     "independent_review": "review/docs-only-push-20261025/independent/final-review.json",
     "root_tests": "129 main PASS +1 same-assertion environment rerun PASS; not one130-green run",
     "unknown_config_still_checked": true,
     "ci_full_unchanged": true,
-    "api_calls": 0
+    "api_calls": 0,
+    "publication": "review/docs-only-push-20261025/publication.json"
   },
   "a01_a05_20261025": {
-    "status": "TDD_IMPLEMENTATION_NOT_YET_ACCEPTED",
+    "status": "ENGINEERING_INDEPENDENT_PASS_PUBLISH_NEXT_REAL_A05_OPEN",
     "evidence": "review/st-a05-parent-investigation-20261025/README.md",
     "initial_red": "13 FAIL/13 PASS",
     "initial_green": "98 PASS",
     "same_physical_edge_red": "1 FAIL; repaired; final checks pending",
     "formal_summary": "NOT_REVIEWED",
-    "new_api_calls": 0
-  }
+    "new_api_calls": 0,
+    "latest_test": "206 PASS /15.44s",
+    "real_replay": "attempt02",
+    "spans": 112,
+    "characters": 9030,
+    "tasks": 63,
+    "work_used": 12978295,
+    "work_limit": 16000000,
+    "source_pages": 249,
+    "physical_edge": "actually called once; rejected global coverage; real endpoint columns unknown",
+    "next_plan": "review/st-a05-parent-investigation-20261025/native_local_flow_followup.md",
+    "engineering_verification": "review/st-a05-parent-investigation-20261025/verification.json",
+    "independent_review": "review/st-a05-parent-investigation-20261025/independent/final-review.json",
+    "raw_scan_observed": {
+      "page_count": 249,
+      "pages_read": 249,
+      "errors": [],
+      "opaque_pages": [],
+      "overall_partial_due_to_table_enhancement": true
+    }
+  },
+  "last_source_product_commit": "26e981e1f75d8e67274679749f6ef213d7490012"
 }

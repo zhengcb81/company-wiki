@@ -1,0 +1,24 @@
+{
+  "phase": "final",
+  "targets": [
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py",
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-vlgdjey7",
+  "exit_code": 0,
+  "elapsed_seconds": 4.84,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-vlgdjey7\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

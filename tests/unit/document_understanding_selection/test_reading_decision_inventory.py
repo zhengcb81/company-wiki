@@ -350,6 +350,8 @@ def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complet
     "company_wiki.source_catalog.narrative_source_purpose",
     "company_wiki.source_catalog.narrative_business_disclosures",
     "company_wiki.source_catalog.narrative_reading",
+    "company_wiki.document_understanding.structure",
+    "company_wiki.document_understanding.structure.layout",
     "company_wiki.document_understanding.structure.sections",
 ])
 def test_w08_changed_source_implementation_invalidates_the_real_complete_decision(tmp_path, monkeypatch, module_name):

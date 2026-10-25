@@ -1,0 +1,144 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-6_i1f8xz\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 26 items
+
+tests\unit\document_understanding_structure\test_page_counter_furniture.py F [  3%]
+FFFFFFFFF.........                                                       [ 73%]
+tests\unit\document_understanding_selection\test_reading_multilevel_native_ancestry.py F [ 76%]
+FF....                                                                   [100%]
+
+================================== FAILURES ===================================
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-{p} / 249] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...:14:14 / 249'}
+E     
+E     Extra items in the right set:
+E     'source-a:13:13 / 249'
+E     'source-a:14:14 / 249'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-Page {p} of 249] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...ge 14 of 249'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:Page 14 of 249'
+E     'source-a:13:Page 13 of 249'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-\u7b2c{p}\u9875 / \u5171249\u9875] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...第14页 / 共249页'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:第14页 / 共249页'
+E     'source-a:13:第13页 / 共249页'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-{p}] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...urce-a:14:14'}
+E     
+E     Extra items in the right set:
+E     'source-a:13:13'
+E     'source-a:14:14'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-\u2014 {p} \u2014] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...-a:14:— 14 —'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:— 14 —'
+E     'source-a:13:— 13 —'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-{p} / 249] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...:14:14 / 249'}
+E     
+E     Extra items in the right set:
+E     'source-a:13:13 / 249'
+E     'source-a:14:14 / 249'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-Page {p} of 249] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...ge 14 of 249'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:Page 14 of 249'
+E     'source-a:13:Page 13 of 249'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-\u7b2c{p}\u9875 / \u5171249\u9875] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...第14页 / 共249页'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:第14页 / 共249页'
+E     'source-a:13:第13页 / 共249页'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-{p}] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...urce-a:14:14'}
+E     
+E     Extra items in the right set:
+E     'source-a:13:13'
+E     'source-a:14:14'
+E     Use -v to get more diff
+_ test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-\u2014 {p} \u2014] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:26: in test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence
+    assert ordering.running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:13...-a:14:— 14 —'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:— 14 —'
+E     'source-a:13:— 13 —'
+E     Use -v to get more diff
+_ test_multilevel_original_parent_chain_survives_citation_and_model_compilation[same_page] _
+tests\unit\document_understanding_selection\test_reading_multilevel_native_ancestry.py:69: in test_multilevel_original_parent_chain_survives_citation_and_model_compilation
+    assert {u.unit_id for u in own} <= ancestors
+E   AssertionError: assert {'urn:company...975a666c9308'} <= {'urn:company...975a666c9308'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:2cb1264b830f0a0426df77bc05812a6d48bceeb71cf3779d25d24dcf4dfcf726'
+_ test_multilevel_original_parent_chain_survives_citation_and_model_compilation[cross_page] _
+tests\unit\document_understanding_selection\test_reading_multilevel_native_ancestry.py:69: in test_multilevel_original_parent_chain_survives_citation_and_model_compilation
+    assert {u.unit_id for u in own} <= ancestors
+E   AssertionError: assert {'urn:company...975a666c9308'} <= {'urn:company...975a666c9308'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:2cb1264b830f0a0426df77bc05812a6d48bceeb71cf3779d25d24dcf4dfcf726'
+_ test_multilevel_original_parent_chain_survives_citation_and_model_compilation[page_counter] _
+tests\unit\document_understanding_selection\test_reading_multilevel_native_ancestry.py:69: in test_multilevel_original_parent_chain_survives_citation_and_model_compilation
+    assert {u.unit_id for u in own} <= ancestors
+E   AssertionError: assert {'urn:company...12c005f53fe6'} <= {'urn:company...811809d67f24'}
+E     
+E     Extra items in the left set:
+E     'urn:company-wiki:narrative-unit:sha256:e31c3070761499e2e25190fe774917bf9df3de5038fa64ccb7a812c005f53fe6'
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-{p} / 249]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-Page {p} of 249]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-\u7b2c{p}\u9875 / \u5171249\u9875]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-{p}]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[False-\u2014 {p} \u2014]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-{p} / 249]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-Page {p} of 249]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-\u7b2c{p}\u9875 / \u5171249\u9875]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-{p}]
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_varying_page_counter_is_furniture_only_with_same_source_edge_sequence[True-\u2014 {p} \u2014]
+FAILED tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py::test_multilevel_original_parent_chain_survives_citation_and_model_compilation[same_page]
+FAILED tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py::test_multilevel_original_parent_chain_survives_citation_and_model_compilation[cross_page]
+FAILED tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py::test_multilevel_original_parent_chain_survives_citation_and_model_compilation[page_counter]
+======================= 13 failed, 13 passed in 15.77s ========================

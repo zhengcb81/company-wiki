@@ -1,6 +1,14 @@
 # A01/A05 跨页业务父级：下一节点调查冻结
 
-## 已观察，未实施
+## 当前状态：工程组件206项通过，真实A01/A05仍OPEN
+
+共享structure已实现变化页码正证及多层native列表frames，未修改现有来源coverage/column物理约束。初始26项中13FAIL/13PASS；同边重复物理发现另1RED；独审误页码3RED、真实章节位置2RED、跨边带和跨格式重复各1RED后统一修在家具owner。最终相关结构/native/cache/预算206PASS（15.44秒），Ruff PASS，Conda mypy3源码PASS；所有独占测试资料恢复不存在。venv mypy先因NumPy stub语法与项目3.11 target不兼容未能检查，Conda第一次又发现本文件循环变量类型复用4错，修后两次3源码均0错；不伪称首跑全绿。
+
+最终attempt02原件249页、112span/9030字符、63实际任务，work12,978,295/16M未耗尽，0下载/模型/原件副本，配置/目录库和375源码在回放期间稳定。当前页码识别已通过真实观察；跨13→14页的物理proof实际调用一次，但因为全局coverage判partial而拒绝，Chemistry父项仍未进入该页D&M/TIDES任务。因此**不关闭A01/A05，不改年度评分，不称真实摘要/RF通过**。
+
+这次真实失败证明仍有后续共因：`_understand`把整体parsed.coverage_complete（包括别页deferred_table_pages）当作所有原文流native_scan；两真实端点column也为None，尚未进入第二项检查。下一唯一实施项及TDD、owner、真实验收细则见[native_local_flow_followup.md](native_local_flow_followup.md)。不能靠去掉coverage/column检查通过。最终[独立复审](independent/final-review.md)已确认工程子节点可发布、范围内零未解；实际重编payload保留旧10PASS与A13七span。整体A05仍OPEN，不代签源内容、摘要或RF。
+
+## 实施前调查（历史冻结）
 
 真实原件p13 `(1) Chemistry`父级left=89.88；p14 D&M/TIDES破折号left=110.88，罗马数字left=125.52；同级Testing `(2)`又回到89.88。当前源侧独审确认R任务能拿Chemistry父级，但跨页D&M/TIDES实际任务只有本地破折号父项，没有Chemistry父级。不能由分部金额做差、同名字符串或另一任务中的范围描述补业务所有权。
 

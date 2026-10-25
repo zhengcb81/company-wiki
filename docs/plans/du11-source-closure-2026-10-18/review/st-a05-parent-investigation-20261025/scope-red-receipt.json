@@ -1,0 +1,23 @@
+{
+  "phase": "scope-red",
+  "targets": [
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py::test_nested_lists_share_one_physical_observation_for_the_same_page_edge"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-9j98j37h",
+  "exit_code": 1,
+  "elapsed_seconds": 5.32,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-9j98j37h\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

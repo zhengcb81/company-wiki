@@ -15,6 +15,7 @@ from copy import copy
 import re
 from typing import Any, cast
 from ..narrative_continuity import NativeSourceContext
+from ..layout_hints.contract import WorkBudget
 from ..observation_adapter import _is_item_label, _is_item_heading, _part_heading_level
 
 from . import layout as layout_mod
@@ -181,7 +182,8 @@ _INTERNAL_SENTENCE_BOUNDARY = re.compile(r"[。！？;；!?]\s*\S|(?<![\dA-Z])\.
 
 
 def _native_list_scopes(ordering: layout_mod.Ordering,
-                        native_context: NativeSourceContext | None = None):
+                        native_context: NativeSourceContext | None = None,
+                        *, work_budget: WorkBudget | None = None):
     """Discover a source-marked parent and its nested list with physical proof.
 
     Numbered and bulleted introductions supply syntax, structure owns the
@@ -191,8 +193,14 @@ def _native_list_scopes(ordering: layout_mod.Ordering,
     scopes = {}
     ordered = ordering.ordered
     excluded = ordering.toc_ids | ordering.running_header_ids
+    account = native_context.work_budget if native_context is not None else work_budget
+    # All nested lists see this invocation's same ordering/furniture. Observe
+    # each physical edge once; both positive and negative results are reusable.
+    page_proofs: dict[tuple[str, str], dict[str, Any] | None] = {}
     index = 0
     while index + 1 < len(ordered):
+        if account is not None:
+            account.charge()
         opener = ordered[index]
         if (opener.unit_id in excluded or not _LIST_PARENT.match(opener.text)
                 or opener.source_id is None or opener.page is None or opener.bbox is None
@@ -256,8 +264,8 @@ def _native_list_scopes(ordering: layout_mod.Ordering,
         skipped_count = 0
         over_limit = False
         while cursor < len(ordered):
-            if native_context is not None:
-                native_context.work_budget.charge()
+            if account is not None:
+                account.charge()
             unit = ordered[cursor]
             # A positively identified header is skipped before semantic closure;
             # its source positions are still verified by the physical owner.
@@ -289,14 +297,17 @@ def _native_list_scopes(ordering: layout_mod.Ordering,
             if previous is not None and unit.page != previous.page:
                 if len(pages | {unit.page}) > MAX_CONTINUATION_PAGES:
                     break
-                proof = native_context.page_neighbour(previous.unit_id, unit.unit_id,
-                    furniture_unit_ids=frozenset(ordering.running_header_ids)) if native_context else None
+                edge = (previous.unit_id, unit.unit_id)
+                if edge not in page_proofs:
+                    page_proofs[edge] = native_context.page_neighbour(*edge,
+                        furniture_unit_ids=ordering.running_header_ids) if native_context else None
+                proof = page_proofs[edge]
                 if proof is None:
                     break
                 physical_proofs = (*physical_proofs, proof)
             if physical_proofs:
-                if native_context is not None:
-                    native_context.work_budget.charge(1 + len(heads) + sum(
+                if account is not None:
+                    account.charge(1 + len(heads) + sum(
                         2 + len(edge["furniture_unit_ids"]) for edge in physical_proofs))
                 context_by_unit[unit.unit_id] = tuple(head.unit_id for head in heads)
                 source_by_unit[unit.unit_id] = tuple(dict.fromkeys(uid
@@ -314,7 +325,9 @@ def _native_list_scopes(ordering: layout_mod.Ordering,
         if not over_limit and len(heads) < len(members) <= MAX_CONTINUATION_UNITS:
             scopes[opener.unit_id] = _NativeListScope(tuple(heads), tuple(members),
                                                      context_by_unit, source_by_unit, proofs_by_unit)
-        index = max(index + 1, cursor)
+        # Members can themselves introduce a deeper native list. Each opener
+        # scans at most MAX_CONTINUATION_UNITS, charged to the same work owner.
+        index += 1
     return scopes
 
 
@@ -324,6 +337,7 @@ def build_sections(
     *,
     limits: dict[str, int],
     native_context: NativeSourceContext | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> SectionBuild:
     """Build the logical section tree over the ordered units.
 
@@ -355,12 +369,12 @@ def build_sections(
     active_item = None
     previous_source: str | None = None
     source_seen = False
-    native_list_scopes = _native_list_scopes(ordering, native_context)
+    native_list_scopes = (_native_list_scopes(ordering, native_context) if native_context is not None
+                          else _native_list_scopes(ordering, work_budget=work_budget))
     required_context_by_unit: dict[str, tuple[str, ...]] = {}
     required_source_by_unit: dict[str, tuple[str, ...]] = {}
     source_proofs_by_unit: dict[str, tuple[dict[str, Any], ...]] = {}
-    native_scope_members: set[str] = set()
-    native_parent_stack: list[SectionDraft] = []
+    native_frames: list[tuple[set[str], list[SectionDraft]]] = []
     native_intro_ids: set[str] = set()
 
     def open_section(
@@ -422,6 +436,7 @@ def build_sections(
             # Attribution changes are real boundaries even on a pageless
             # projection. A prior parent's heading cannot classify this body.
             stack.clear()
+            native_frames.clear()
             active_part_depth = None
             active_item = None
             last_page = None
@@ -433,21 +448,33 @@ def build_sections(
         if (unit.unit_id in furniture or unit.unit_id in display_title_ids
                 or unit.unit_id in native_intro_ids):
             continue
-        if native_scope_members and unit.unit_id not in native_scope_members:
-            stack[:] = native_parent_stack
-            native_scope_members = set()
+        while native_frames and unit.unit_id not in native_frames[-1][0]:
+            _members, parent_stack = native_frames.pop()
+            stack[:] = parent_stack
         native_scope = native_list_scopes.get(unit.unit_id)
         if native_scope is not None:
-            native_parent_stack = list(stack)
+            parent_stack = list(stack)
             parent_depth = stack[-1].depth if stack else 0
             scope_heads, scope_members = native_scope.heads, native_scope.members
-            required_context_by_unit.update(native_scope.context_by_unit)
-            required_source_by_unit.update(native_scope.source_by_unit)
-            source_proofs_by_unit.update(native_scope.proofs_by_unit)
+            account = native_context.work_budget if native_context is not None else work_budget
+            for destination, mapping in ((required_context_by_unit, native_scope.context_by_unit),
+                                         (required_source_by_unit, native_scope.source_by_unit)):
+                for uid, refs in mapping.items():
+                    existing = destination.get(uid, ())
+                    if account is not None:
+                        account.charge(1 + len(existing) + len(refs))
+                    destination[uid] = tuple(dict.fromkeys((*existing, *refs)))
+            for uid, proofs in native_scope.proofs_by_unit.items():
+                existing_proofs = source_proofs_by_unit.get(uid, ())
+                if account is not None:
+                    account.charge(1 + len(existing_proofs) + len(proofs))
+                source_proofs_by_unit[uid] = (*existing_proofs, *proofs)
             current = open_section(unit, heading_units=list(scope_heads),
                 depth_override=(parent_depth or 0) + 1, contextual_outline=True)
             current.basis.append("native_numbered_list")
-            native_scope_members = {member.unit_id for member in scope_members}
+            if account is not None:
+                account.charge(len(scope_members) + len(parent_stack))
+            native_frames.append(({member.unit_id for member in scope_members}, parent_stack))
             native_intro_ids.update(head.unit_id for head in scope_heads[1:])
             for head in scope_heads:
                 unit_section[head.unit_id] = current.section_id

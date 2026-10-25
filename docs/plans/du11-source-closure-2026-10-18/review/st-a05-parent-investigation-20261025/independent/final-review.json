@@ -1,0 +1,93 @@
+{
+  "schema_version": "independent-st-a05-review/1",
+  "head": "1171aa6f8aad59001554b026200cf0dc6f0a439d",
+  "verdict": "PASS_ENGINEERING_SUBNODE__A05_OVERALL_OPEN",
+  "scope": {
+    "source_files": [
+      "src/company_wiki/document_understanding/structure/__init__.py",
+      "src/company_wiki/document_understanding/structure/layout.py",
+      "src/company_wiki/document_understanding/structure/sections.py"
+    ],
+    "test_files": [
+      "tests/unit/document_understanding_structure/test_page_counter_furniture.py",
+      "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py",
+      "tests/unit/document_understanding_selection/test_reading_decision_inventory.py"
+    ]
+  },
+  "engineering_subnode": {
+    "publishable_with_scope_limit": true,
+    "findings": [],
+    "reviewed": [
+      "nested native ancestry with bounded continuation and shared work accounting",
+      "conservative variable page-counter furniture recognition",
+      "positive and negative per-edge proof caching within one scope invocation",
+      "byte-level decision fingerprint includes structure, structure.layout and sections"
+    ],
+    "tests": {
+      "focused_pytest_exit_code": 0,
+      "focused_pytest_passed": 206,
+      "focused_pytest_seconds": 15.44,
+      "temp_root_restored_to_absent": true,
+      "ruff": "ROOT_REPORTED_PASS_NOT_RERUN_BY_REVIEWER",
+      "mypy3src": "ROOT_REPORTED_PASS_NOT_RERUN_BY_REVIEWER"
+    }
+  },
+  "full_a05": {
+    "status": "OPEN",
+    "closed_by_this_change": false,
+    "actual_parent_in_descendant_task": false,
+    "local_endpoint_pages_deferred": [],
+    "selection_coverage_complete": false,
+    "reason": [
+      "global source coverage partial is used as a deny for every page-neighbour edge",
+      "the actual p13/p14 column identity remains unknown, and unknown must not be treated as same-column"
+    ],
+    "required_next_node": "separate source-wide completeness from local page-edge coverage and provide explicit geometry-owned lane evidence; retain fail-closed behavior for local gaps and unknown lanes"
+  },
+  "old_checkpoint_review": {
+    "previous_pass_count": 10,
+    "preserved_in_actual_payload": true,
+    "details": "All prior evidence spans for nine PASS targets remain in the actual model payload. ST-A03 retains its p11 regional revenue fact and p16 customer-parent-location basis note in the actual payload; its omitted prior p16 table row was flagged table_structure_ambiguous and is not needed for those named facts."
+  },
+  "a13_review": {
+    "unchanged_span_count": 7,
+    "same_as_attempt01": true,
+    "all_present_in_actual_payload": true,
+    "page119_locators": [
+      "loc:v1/page:119/paragraph:9/chars:476-565",
+      "loc:v1/page:119/paragraph:11/chars:566-833"
+    ]
+  },
+  "real_replay": {
+    "source_stable": true,
+    "source_sha_verified": true,
+    "selected_spans": 112,
+    "selected_chars": 9030,
+    "work_used": 12978295,
+    "work_limit": 16000000,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "model_response_reviewed": false
+  },
+  "architecture_recommendations": [
+    "keep global scan partial for whole-document completeness but expose page-local coverage for an edge proof",
+    "require local endpoint completeness and proven source/page/ordinal adjacency",
+    "keep lane evidence separate and typed; unknown remains fail closed",
+    "let structure.sections inherit business ancestry only after physical proof; do not add a second state store or permission gate",
+    "retain the existing 16M work and 112-span limits"
+  ],
+  "evidence_files": {
+    "probe_script": "verify_evidence.py",
+    "probe_receipt": "probe-receipt.json"
+  },
+  "sha256": {
+    "src/company_wiki/document_understanding/structure/__init__.py": "db3b2cc328a8253de22cea4902a97da1ba9352b1042e11be1fcfff2d080a29bc",
+    "src/company_wiki/document_understanding/structure/layout.py": "b365e55b6f0ad4b2a84f3fa3f7195c628b4fe401633bb487208b3edd77fa9072",
+    "src/company_wiki/document_understanding/structure/sections.py": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py": "5b7af5bd601b01c2ba014cf1f08fe8cdead5dc868deb6b6e2d4c07b590f0cdb6",
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py": "ec54418ca75cef6016bf86cc92f00f38f57d357514e2754706ae4ed1714aa675",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "ed3c44551a1bcf9ddc14b9de6453c05e0784f0c34deca77eead93f0ece6b5926",
+    "src/company_wiki/document_understanding/decision_inventory.py": "d60bcdfd715615eea967b79f80fbc592d047f1ab85e66dfa57b66dc1eb05d46e"
+  }
+}

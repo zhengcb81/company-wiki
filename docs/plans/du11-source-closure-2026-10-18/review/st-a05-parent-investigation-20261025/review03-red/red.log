@@ -1,0 +1,24 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-wd4y0222\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 1 item
+
+tests\unit\document_understanding_structure\test_page_counter_furniture.py F [100%]
+
+================================== FAILURES ===================================
+_ test_page_edge_band_alone_does_not_prove_a_stable_page_counter[duplicate_across_edges] _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:64: in test_page_edge_band_alone_does_not_prove_a_stable_page_counter
+    assert not order_units(units).running_header_ids
+E   AssertionError: assert not frozenset({'source-a:13:13 / 249', 'source-a:13:13 / 249:body-ratio', 'source-a:14:14 / 249', 'source-a:14:14 / 249:body-ratio'})
+E    +  where frozenset({'source-a:13:13 / 249', 'source-a:13:13 / 249:body-ratio', 'source-a:14:14 / 249', 'source-a:14:14 / 249:body-ratio'}) = Ordering(ordered=(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029237F6D7B0... 'source-a:13:13 / 249:body-ratio'}), toc_ids=frozenset(), page_numbers=frozenset({13, 14}), evidence=('layout_bbox',)).running_header_ids
+E    +    where Ordering(ordered=(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029237F6D7B0... 'source-a:13:13 / 249:body-ratio'}), toc_ids=frozenset(), page_numbers=frozenset({13, 14}), evidence=('layout_bbox',)) = order_units([<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029237F6D5D0>, <company_wiki....00029237F6D7B0>, <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000029237F6D8A0>])
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_page_edge_band_alone_does_not_prove_a_stable_page_counter[duplicate_across_edges]
+============================== 1 failed in 2.06s ==============================

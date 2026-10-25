@@ -1,0 +1,35 @@
+{
+  "schema_version": "native-outline-engineering-verification/1",
+  "status": "INDEPENDENT_PASS_ENGINEERING_ONLY_A01_A05_REAL_OPEN",
+  "source_test_sha256": {
+    "src/company_wiki/document_understanding/structure/__init__.py": "db3b2cc328a8253de22cea4902a97da1ba9352b1042e11be1fcfff2d080a29bc",
+    "src/company_wiki/document_understanding/structure/layout.py": "b365e55b6f0ad4b2a84f3fa3f7195c628b4fe401633bb487208b3edd77fa9072",
+    "src/company_wiki/document_understanding/structure/sections.py": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py": "5b7af5bd601b01c2ba014cf1f08fe8cdead5dc868deb6b6e2d4c07b590f0cdb6",
+    "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py": "ec54418ca75cef6016bf86cc92f00f38f57d357514e2754706ae4ed1714aa675",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "ed3c44551a1bcf9ddc14b9de6453c05e0784f0c34deca77eead93f0ece6b5926"
+  },
+  "test_log": "review-final/final.log",
+  "test_log_sha256": "70aa5b80431a7aacb7d0731403f95712c3ed227a6f4b5334736fb8316f546bb0",
+  "pytest": "206 PASS /15.44s",
+  "ruff": "PASS",
+  "mypy": {
+    "final_interpreter": "C:/Miniconda/python.exe",
+    "command": "-m mypy --follow-imports=silent [three source files]",
+    "result": "0 errors;3 source files",
+    "initial_venv": "NumPy stub Type statement unsupported by project3.11 target; no useful check",
+    "initial_conda": "4 loop-variable type errors; repaired in layout.py"
+  },
+  "real_replay": "attempt02/replay-receipt.json",
+  "real_replay_sha256": "ebd32f74eb1257c59992ce20bbee1a45ed725559fcf2c3453c68896b52aa832d",
+  "next_plan": "native_local_flow_followup.md",
+  "a05_real_target": "OPEN; physical call refused global coverage; not regraded",
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "owned_test_roots_removed": true,
+  "independent_review": "independent/final-review.json",
+  "independent_review_sha256": "f62e97e78216f30f7c83cd643d3db8cc643d92e5f50fd5d453f5eb79e004d97b",
+  "old_10_pass_inputs_preserved": true,
+  "a13_actual_payload_spans_preserved": 7
+}

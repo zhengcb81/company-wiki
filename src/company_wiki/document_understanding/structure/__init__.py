@@ -152,7 +152,7 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None, 
         return _empty_result(envelope)
 
     if work is not None:
-        work.stage(passes=6, sorts=2)  # layout indexes, furniture/text, page ordering
+        work.stage(passes=12, sorts=2)  # layout indexes, bounded counter formats/edge groups, ordering
     ordering = layout_mod.order_units(units)
     if "ordinal_only" in ordering.evidence:
         diagnostics.append(
@@ -196,7 +196,8 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None, 
 
     if work is not None:
         work.stage(passes=4, sorts=1)  # section membership, roles and layout checks
-    section_build = build_sections(units, ordering, limits=resolved, native_context=native_context)
+    section_build = build_sections(units, ordering, limits=resolved, native_context=native_context,
+                                   work_budget=work_budget)
     if state is not None:
         state["sections"] = [
             _section_wire(section) for section in section_build.sections

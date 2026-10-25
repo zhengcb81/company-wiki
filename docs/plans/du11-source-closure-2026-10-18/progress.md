@@ -1100,3 +1100,10 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - W16/W17/W18用户已发出，ROOT未写三个作者工区/独占目录。
 - 纯计划推送冗余先TDD3FAIL；初版105PASS，独审发现TRUSTED_EMPTY_SCOPE，新增25例14FAIL/11PASS后修classifier。最终四文件129PASS/1个Git sh NtCreateDirectoryObject环境失败（160.84s）；同源码原断言只复跑该例1PASS3.36s。Ruff/diff-check通过。独立真实Git范围/分发8控制PASS、报告绑定最终四文件，范围内零未解；所有独占测试目录恢复不存在。准备正常提交推送，不改hook mode。
 - A01/A05新增页码及三层祖先26项，13FAIL/13PASS，原13个负例保持正确；初修和旧native/物理模块98PASS5.42s。同物理边重复发现另1真RED，现已由同调用proof缓存修复，集中结构/预算/cache测试和真实原文回放待验收。未新增模型/下载/原文副本，母账与10/4/0来源评分不变。
+
+## 2026-10-25 ROOT共享结构工程终审与后续共因
+
+- 纯文档push根修1171aa6f已正常推送master，pre-push154PASS48.16s；精确CI40184030458成功。第一次MSYS命名对象启动失败后仅正常主机重试，hooks全部保留，无旁路。
+- A01/A05结构组件最终206PASS15.44s/Ruff/Conda mypy3源码通过；独审各误页码/同页跨边带格式歧义均先RED再修。最终独立工程PASS，旧10PASS与A13七span在真实编译payload保持。attempt02:249页/112span/9030char/63task/work12,978,295÷16M，0收费/下载/原件副本。
+- 实际A05仍OPEN：页码识别后调用物理边一次，被global partial拒绝。进一步SourceRef parse证实249页全读、errors=[]/opaque=[]，整体partial来自deferred财表；两端column均None，未检查下一约束。没有去掉该来源保护或把未知填0。已按单owner分层/TDD/真实反例写native_local_flow_followup，工程绿不代签整体或RF。
+- 本节点证据约3.4MB，不复制PDF；所有独占tmp恢复不存在，历史未跟踪物与hook mode未清理。W16/W17/W18作者目录未写。

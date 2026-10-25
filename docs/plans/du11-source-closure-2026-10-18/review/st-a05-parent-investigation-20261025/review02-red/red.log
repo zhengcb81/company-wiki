@@ -1,0 +1,37 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-ptt_8d9w\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 2 items
+
+tests\unit\document_understanding_structure\test_page_counter_furniture.py F [ 50%]
+F                                                                        [100%]
+
+================================== FAILURES ===================================
+_ test_counter_position_is_local_to_observed_page_sequence_not_the_whole_document _
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:71: in test_counter_position_is_local_to_observed_page_sequence_not_the_whole_document
+    assert order_units(units).running_header_ids == {u.unit_id for u in units}
+E   AssertionError: assert frozenset() == {'source-a:10...:14:14 / 249'}
+E     
+E     Extra items in the right set:
+E     'source-a:14:14 / 249'
+E     'source-a:101:101 / 249'
+E     'source-a:13:13 / 249'
+E     'source-a:102:102 / 249'
+E     Use -v to get more diff
+_____ test_nonadjacent_position_matches_do_not_invent_a_counter_sequence ______
+tests\unit\document_understanding_structure\test_page_counter_furniture.py:76: in test_nonadjacent_position_matches_do_not_invent_a_counter_sequence
+    assert not order_units(units).running_header_ids
+E   AssertionError: assert not frozenset({'source-a:13:13 / 249', 'source-a:15:15 / 249'})
+E    +  where frozenset({'source-a:13:13 / 249', 'source-a:15:15 / 249'}) = Ordering(ordered=(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000021E7A3B2D40...:13 / 249', 'source-a:15:15 / 249'}), toc_ids=frozenset(), page_numbers=frozenset({13, 15}), evidence=('layout_bbox',)).running_header_ids
+E    +    where Ordering(ordered=(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000021E7A3B2D40...:13 / 249', 'source-a:15:15 / 249'}), toc_ids=frozenset(), page_numbers=frozenset({13, 15}), evidence=('layout_bbox',)) = order_units([<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000021E7A3B2D40>, <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x0000021E7A3B2E30>])
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_counter_position_is_local_to_observed_page_sequence_not_the_whole_document
+FAILED tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_nonadjacent_position_matches_do_not_invent_a_counter_sequence
+============================== 2 failed in 1.50s ==============================

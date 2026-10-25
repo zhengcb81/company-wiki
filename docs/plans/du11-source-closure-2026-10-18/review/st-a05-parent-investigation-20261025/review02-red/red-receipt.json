@@ -1,0 +1,24 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_counter_position_is_local_to_observed_page_sequence_not_the_whole_document",
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_nonadjacent_position_matches_do_not_invent_a_counter_sequence"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ptt_8d9w",
+  "exit_code": 1,
+  "elapsed_seconds": 3.8,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ptt_8d9w\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

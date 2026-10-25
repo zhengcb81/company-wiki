@@ -1,0 +1,23 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/document_understanding_structure/test_page_counter_furniture.py::test_page_edge_band_alone_does_not_prove_a_stable_page_counter[duplicate_across_edges]"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-wd4y0222",
+  "exit_code": 1,
+  "elapsed_seconds": 4.01,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-wd4y0222\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

@@ -20,6 +20,7 @@ from company_wiki.document_normalization.table_shapes import has_tabular_value_t
 
 from collections.abc import Sequence
 from dataclasses import dataclass
+from math import isfinite
 import re
 
 from .contract import ObservationUnit
@@ -32,6 +33,12 @@ _TOC_ENTRY = re.compile(
     r"^\s*(?:第[一二三四五六七八九十百]+[节章部分]|[一二三四五六七八九十]+[、.]|\d+(?:\.\d+)*[、.]?)\s*\S.*[.．·]{2,}\s*\d{1,4}\s*$"
 )
 _PAGE_NUMBER = re.compile(r"^\s*[-—–]?\s*\d{1,4}\s*[-—–]?\s*$")
+_PAGE_COUNTERS = (
+    re.compile(r"^\s*(\d{1,4})\s*/\s*(\d{1,4})\s*$"),
+    re.compile(r"^\s*Page\s+(\d{1,4})\s+of\s+(\d{1,4})\s*$", re.IGNORECASE),
+    re.compile(r"^\s*第\s*(\d{1,4})\s*页\s*[/／]?\s*共\s*(\d{1,4})\s*页\s*$"),
+    re.compile(r"^\s*[-—–]?\s*(\d{1,4})\s*[-—–]?\s*$"),
+)
 _HEADING_NUMBER = re.compile(
     r"^\s*(?:第[一二三四五六七八九十百零]+[节章编]|[一二三四五六七八九十]+[、．.]|"
     r"（[一二三四五六七八九十]+）|\([一二三四五六七八九十]+\)|"
@@ -119,7 +126,8 @@ def order_units(units: Sequence[ObservationUnit]) -> Ordering:
     page_numbers = frozenset(
         unit.page
         for unit in ordered
-        if unit.page is not None and _PAGE_NUMBER.match(unit.text)
+        if unit.page is not None and (_PAGE_NUMBER.match(unit.text)
+            or unit.unit_id in running and _page_counter(unit) is not None)
     )
     return Ordering(
         ordered=tuple(ordered),
@@ -130,6 +138,53 @@ def order_units(units: Sequence[ObservationUnit]) -> Ordering:
     )
 
 
+def _page_counter(unit: ObservationUnit) -> tuple[int, int | None] | None:
+    """A format match alone is not furniture; require physical page identity."""
+    if (unit.page is None or unit.page < 1 or unit.source_id is None
+            or unit.table_id or unit.is_table_furniture or unit.dom_path
+            or len(unit.text) > 120):
+        return None
+    for template, pattern in enumerate(_PAGE_COUNTERS):
+        match = pattern.fullmatch(unit.text)
+        if match is None:
+            continue
+        number = int(match.group(1))
+        total = int(match.group(2)) if match.lastindex == 2 else None
+        if number == unit.page and (total is None or number <= total):
+            return template, total
+    return None
+
+
+def _counter_edge(unit: ObservationUnit) -> str | None:
+    if (unit.bbox is None or unit.page_height is None or unit.page_width is None
+            or not all(isfinite(n) for n in (*unit.bbox, unit.page_height, unit.page_width))
+            or unit.page_height <= 0 or unit.page_width <= 0
+            or not 0 <= unit.bbox[0] < unit.bbox[2] <= unit.page_width
+            or not 0 <= unit.bbox[1] < unit.bbox[3] <= unit.page_height):
+        return None
+    if unit.bbox[3] <= unit.page_height * 0.12:
+        return "top"
+    if unit.bbox[1] >= unit.page_height * 0.88:
+        return "bottom"
+    return None
+
+
+def _stable_counter_group(group: list[tuple[ObservationUnit, int | None]]) -> bool:
+    """Ambiguous duplicates or drifting page-edge text are not safe to skip."""
+    if (len({unit.page for unit, _ in group}) != len(group)
+            or len(group) < MIN_RUNNING_HEADER_PAGES
+            or len({total for _, total in group}) != 1):
+        return False
+    boxes = []
+    for unit, _total in group:
+        box, width, height = unit.bbox, unit.page_width, unit.page_height
+        if box is None or width is None or height is None or width <= 0 or height <= 0:
+            return False
+        boxes.append((box[0] / width, box[1] / height, box[2] / width, box[3] / height))
+    return (max(box[0] for box in boxes) < min(box[2] for box in boxes)
+            and max(box[1] for box in boxes) < min(box[3] for box in boxes))
+
+
 def _running_furniture(units: Sequence[ObservationUnit]) -> set[str]:
     """Detect text that repeats on several pages in a page-edge band.
 
@@ -138,13 +193,39 @@ def _running_furniture(units: Sequence[ObservationUnit]) -> set[str]:
     it a header/footer or its box sits in the top/bottom band of its page.
     """
     by_text: dict[str, list[ObservationUnit]] = {}
+    counters: dict[tuple[str | None, int], list[tuple[ObservationUnit, int | None]]] = {}
+    per_page_candidates: dict[tuple[str | None, int | None], int] = {}
     for unit in units:
         text = " ".join(unit.text.split())
         if not text or len(text) > 120:
             continue
         by_text.setdefault(text, []).append(unit)
+        counter, edge = _page_counter(unit), _counter_edge(unit)
+        if counter is not None and edge is not None:
+            template, total = counter
+            counters.setdefault((unit.source_id, template), []).append((unit, total))
+            page_key = unit.source_id, unit.page
+            per_page_candidates[page_key] = per_page_candidates.get(page_key, 0) + 1
 
     furniture: set[str] = set()
+    for counter_group in counters.values():
+        if len({total for _, total in counter_group}) != 1:
+            continue
+        by_page: dict[int, list[tuple[ObservationUnit, int | None]]] = {}
+        for candidate, total in counter_group:
+            if candidate.page is not None:
+                by_page.setdefault(candidate.page, []).append((candidate, total))
+        # Position can change in another chapter/orientation. Certify only
+        # locally stable adjacent physical pages, never a document-wide bbox
+        # intersection or an inferred bridge across a missing/ambiguous page.
+        for page, candidates in by_page.items():
+            following = by_page.get(page + 1, [])
+            if (len(candidates) == len(following) == 1
+                    and per_page_candidates[candidates[0][0].source_id, page] == 1
+                    and per_page_candidates[following[0][0].source_id, page + 1] == 1):
+                pair = [*candidates, *following]
+                if _stable_counter_group(pair):
+                    furniture.update(candidate.unit_id for candidate, _ in pair)
     for text, group in by_text.items():
         pages = {unit.page for unit in group if unit.page is not None}
         if len(pages) < MIN_RUNNING_HEADER_PAGES and not any(

@@ -1,0 +1,24 @@
+{
+  "schema_version": "docs-only-push-publication/1",
+  "commit": "1171aa6f8aad59001554b026200cf0dc6f0a439d",
+  "branch": "master",
+  "pushed": true,
+  "pre_commit": "PASS; normal hook; unstaged source restored",
+  "pre_push": "154 PASS /48.16s; code/tooling scope; no bypass",
+  "ci": [
+    {
+      "id": 40184030458,
+      "head_sha": "1171aa6f8aad59001554b026200cf0dc6f0a439d",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40184030458",
+      "created_at": "2026-10-25T10:15:36Z",
+      "updated_at": "2026-10-25T10:19:16Z"
+    }
+  ],
+  "independent_review_sha256": "06eab4cdca16dac7f68be58bb4bd57c6e897caa2390c80087d25fadaf7e22ecb",
+  "windows_hook_launch": "One normal commit attempt failed before hook via MSYS NtCreateDirectoryObject; direct host retry succeeded with every hook enabled",
+  "pure_docs_e2e": "actual isolated Git push did not run pytest; earlier failing code + last docs commit still blocked",
+  "raw_writes": 0,
+  "api_calls": 0
+}

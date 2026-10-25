@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-9j98j37h\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 1 item
+
+tests\unit\document_understanding_selection\test_reading_multilevel_native_ancestry.py F [100%]
+
+================================== FAILURES ===================================
+___ test_nested_lists_share_one_physical_observation_for_the_same_page_edge ___
+tests\unit\document_understanding_selection\test_reading_multilevel_native_ancestry.py:127: in test_nested_lists_share_one_physical_observation_for_the_same_page_edge
+    assert max(observations.values()) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = max(dict_values([2, 2]))
+E    +    where dict_values([2, 2]) = <built-in method values of dict object at 0x00000245ADA32480>()
+E    +      where <built-in method values of dict object at 0x00000245ADA32480> = {(2498290734416, 'urn:company-wiki:narrative-unit:sha256:b5708f79201f49575f09b7c8fcd72c0b8bd242bd04e594a94959295b8cb96...b96c8b', 'urn:company-wiki:narrative-unit:sha256:a2e2bac647fd082a6760da1bbddc45cf29ae77f0b0ba078e43b1639f35c14c3b'): 2}.values
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py::test_nested_lists_share_one_physical_observation_for_the_same_page_edge
+============================== 1 failed in 2.94s ==============================
