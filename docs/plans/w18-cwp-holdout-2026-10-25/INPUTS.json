@@ -1,0 +1,14 @@
+{
+  "package_id": "W18-CWP-HOLDOUT",
+  "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
+  "repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "workdir": "C:/Users/郑曾波/Projects/company-wiki-w18-holdout",
+  "branch": "codex/w18-cwp-holdout-20261025",
+  "plan_id": "w18-cwp-holdout-2026-10-25",
+  "parent_pwf_read_only": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18",
+  "card_sha256": "3f27a5ae5cd4ad858cd05d35c8456b5930e113c363c5669324a34e86cd02379f",
+  "common_sha256": "de0126a8274c585621a574f9da3a602f3e808b76e307143b3bd16927d2f053af",
+  "implementation_started": false,
+  "new_model_calls": 0,
+  "new_downloads": 0
+}

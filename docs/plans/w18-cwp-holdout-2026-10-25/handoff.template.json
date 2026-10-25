@@ -1,0 +1,50 @@
+{
+  "schema_version": "r1-harness-handoff/1",
+  "package_id": "W16-RF-BASIS | W17-AUDIT-COVERAGE | W18-CWP-HOLDOUT",
+  "status": "IN_PROGRESS | COMPLETE | INCOMPLETE_EXTERNAL_BLOCKER",
+  "repo": "",
+  "workdir": "",
+  "branch": "",
+  "base_code_commit": "",
+  "start_head": "",
+  "final_code_commit": "",
+  "final_head": "",
+  "changed_paths": [],
+  "requirements": [],
+  "tests": [],
+  "independent_review": {
+    "reviewer_independent_of_implementation": true,
+    "reviewed_code_commit": "",
+    "reviewed_file_sha256": {},
+    "report_md": "",
+    "report_json": "",
+    "independently_executed_key_chain": "",
+    "new_counterexample": "",
+    "findings": [],
+    "unresolved_in_scope_count": null,
+    "final_verdict": "NOT_REVIEWED"
+  },
+  "cleanup": {
+    "owned_roots": [],
+    "before_inventory": "",
+    "after_inventory": "",
+    "original_sha_unchanged": null,
+    "production_writes": null,
+    "unrelated_wip_preserved": null
+  },
+  "usage": {
+    "model_calls": 0,
+    "provider_calls": 0,
+    "downloads": 0,
+    "external_network_calls": 0,
+    "persistent_added_bytes": null,
+    "fixture_bytes": null
+  },
+  "compatibility": [],
+  "interface_requests": [],
+  "root_acceptance_steps": [],
+  "remote": null,
+  "pushed_branch": null,
+  "ci": null,
+  "known_limits": []
+}
