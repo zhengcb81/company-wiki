@@ -1,0 +1,165 @@
+{
+ "schema_version": "r1-harness-handoff/1",
+ "package_id": "W18-CWP-HOLDOUT",
+ "status": "COMPLETE",
+ "repo": "C:/Users/郑曾波/Projects/company-wiki",
+ "workdir": "C:/Users/郑曾波/Projects/company-wiki-w18-holdout",
+ "branch": "codex/w18-cwp-holdout-20261025",
+ "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
+ "start_head": "9051bbb7a69347f52d79e5cce37a6b8c40b7912f",
+ "final_code_commit": "faa488a7",
+ "final_head": "0415f935",
+ "changed_paths": [
+  "tools/holdout_replay/**",
+  "tests/holdout/w18/**",
+  "delivery/w18/**",
+  "docs/plans/w18-cwp-holdout-2026-10-25/**"
+ ],
+ "requirements": [
+  {
+   "id": "H01",
+   "status": "PASS",
+   "evidence": "8 originals / 5 companies / CN+HK+US; annual x3, semi-annual, earnings-call DOCX, IR, prospectus, governance negative; PDF+DOCX+HTML carriers; distinct SHAs enforced by manifest loader"
+  },
+  {
+   "id": "H02",
+   "status": "PASS",
+   "evidence": "no excluded company; 8 SHAs zero-collision vs 28 DU gold + du5_manifest + 25-sample m1/inventory pool (pool independently re-derived by reviewer); prior_use: 7 fresh + 1 local-unseen with enumerated sightings incl FC-504 canary registry"
+  },
+  {
+   "id": "H03",
+   "status": "PASS",
+   "evidence": "manifest+gold frozen at 5e4488bb, 76 minutes before first replay attempt; 8-15 facts per business sample, 4 for the negative; reading_scope per sample; no candidate output consulted before freeze"
+  },
+  {
+   "id": "H04",
+   "status": "PASS",
+   "evidence": "required_business/disposition_context/correctness_if_emitted split; per-fact source sha, page/document anchors, minimal quotes, must_preserve/must_not_assert, modality/role/quantity_basis; ASR wording preserved verbatim; third-party/secondhand attribution required"
+  },
+  {
+   "id": "H05",
+   "status": "PASS",
+   "evidence": "versioned SourceRefs (sha-bound urns, byte size, mime); identity from provider receipts (cninfo/SEC) or scan sidecar + document-internal identity pages, never directory names; no physical path in manifest; isolated-lake bootstrap resolves SourceRefs without touching the production catalog"
+  },
+  {
+   "id": "H06",
+   "status": "NOT_APPLICABLE",
+   "evidence": "no missing market/language/type cell; nothing narrowed; nothing unexecuted claimed as PASS"
+  },
+  {
+   "id": "H07",
+   "status": "PASS",
+   "evidence": "single CLI entry (python -m tools.holdout_replay); explicit --producer-repo/--producer-commit/--manifest/--bindings|--source-root/--out-dir; producer HEAD==commit and clean production trees enforced; import roots recorded and asserted under the frozen deploy; no second selection algorithm (DU-BENCH reuse only)"
+  },
+  {
+   "id": "H08",
+   "status": "PASS",
+   "evidence": "zero POST (wire body serialization only; zero_network_by_construction); separate source-scan/candidate/layout/model-input visibility per target; all 96 targets not_reviewed; word match never equals business PASS (counterexample-verified by reviewer)"
+  },
+  {
+   "id": "H09",
+   "status": "PASS",
+   "evidence": "per-sample before/after original sha (unchanged 8/8); candidate/selected/deferred counts and selection limit; raw failure reasons preserved (PARSER_INCOMPLETE, SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED, WORKER_TIMEOUT, WORKER_RESULT_UNREADABLE); caps inherited, never raised"
+  },
+  {
+   "id": "H10",
+   "status": "PASS",
+   "evidence": "gold (git) and candidate outputs (attempt dirs) separated; three attempts preserved byte-identical; RESULT_EXISTS refuses overwrite; gold changes versioned (v1 frozen 5e4488bb -> v2 -> v3/v3.1 with itemized source-side reasons in gold_corrections.json); LF-stable pins"
+  },
+  {
+   "id": "H11",
+   "status": "PASS",
+   "evidence": "neutral PDF/TXT/HTML fixtures; two absolute roots (ASCII + Chinese/spaces) from external cwds; polluted PYTHONPATH decoy refused; success/failure/timeout/existing-result paths tested; sentinel and old evidence byte-preserved; cleanup_owned only removes owned dirs"
+  }
+ ],
+ "tests": [
+  {
+   "command": "python -X utf8 -m pytest -q tests/holdout/w18",
+   "exit_code": 0,
+   "passed": 20,
+   "failed": 0,
+   "duration_seconds": 42,
+   "note": "independently rerun 3x by reviewer (20/20 each)"
+  },
+  {
+   "command": "python -m ruff check tools/holdout_replay tests/holdout",
+   "exit_code": 0,
+   "note": "All checks passed"
+  },
+  {
+   "command": "python -X utf8 -m tools.holdout_replay --help",
+   "exit_code": 0
+  },
+  {
+   "command": "python -X utf8 -m tools.holdout_replay verify-freeze --producer-repo C:/Users/郑曾波/Projects/w18-producer-ba8f8543 --producer-commit ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
+   "exit_code": 0,
+   "note": "verified; gold rows 8/8"
+  }
+ ],
+ "independent_review": {
+  "reviewer_independent_of_implementation": true,
+  "reviewed_code_commit": "faa488a7",
+  "reviewed_file_sha256": {
+   "tools/holdout_replay/runner.py (at 351ba6ae)": "e2c7c6bd1098bcdc",
+   "tools/holdout_replay/worker.py (at 351ba6ae)": "9c8967e1324ff6a7",
+   "tools/holdout_replay/manifest.py (at 351ba6ae)": "23aedd140c869561",
+   "tests/holdout/w18/test_manifest_freeze.py": "4c97f76fb50c3889",
+   "tests/holdout/w18/test_runner_boundaries.py": "38a07914bde92ca3"
+  },
+  "report_md": "delivery/w18/review.md",
+  "report_json": [
+   "delivery/w18/review/agent-1-gold-reviews.json",
+   "delivery/w18/review/agent-2-tool-reviews.json",
+   "delivery/w18/review/agent-3-replay-verification.json"
+  ],
+  "independently_executed_key_chain": "agent 3: fresh-scratch real-sample replay (byte-identical to baseline modulo timing), 0.2s timeout chain, cleanup/no-overwrite chain with sha snapshots; agent 2: D3/D4/D5 self-built scenario verification + 3x pytest/ruff; agent 1: full re-extraction anchor verification over two rounds (113/113 then 116/116)",
+  "new_counterexample": "negation/conditional mismatch (FDA-approved misattribution vs PDUFA-extension anchor) and period/unit mismatch (9 indications @2022-06 extrapolated to 2024): both recorded as mechanical visibility + not_reviewed only, recall FAIL/PARTIAL - word match never signs off business truth",
+  "findings": "initial: 1 P2 + 17 P3 across two reviewers; all resolved across gold v2/v3/v3.1 and tool fix commits; both re-review rounds returned PASS; residual wording item applied verbatim from reviewer text in docs-only commit 28f06a9a; zero unresolved in-scope findings",
+  "unresolved_in_scope_count": 0,
+  "final_verdict": "PASS"
+ },
+ "cleanup": {
+  "owned_roots": [
+   "C:/Users/郑曾波/Projects/w18-holdout-scratch",
+   "C:/Users/郑曾波/Projects/w18-producer-ba8f8543",
+   "C:/Users/郑曾波/Projects/w18-review-scratch-gold (reviewer-owned)",
+   "C:/Users/郑曾波/Projects/w18-review-scratch-replay (reviewer-owned)"
+  ],
+  "before_inventory": "delivery/w18/recovery-receipts/cleanup-inventory.json",
+  "after_inventory": "same file; frozen producer worktree + baseline/lake evidence retained for ROOT acceptance; dualroot/compile-probe probes retained with receipts (redundant, deletable by ROOT)",
+  "original_sha_unchanged": true,
+  "production_writes": 0,
+  "unrelated_wip_preserved": true
+ },
+ "usage": {
+  "model_calls": 0,
+  "provider_calls": 0,
+  "downloads": 0,
+  "external_network_calls": 0,
+  "persistent_added_bytes": 335741,
+  "fixture_bytes": 0,
+  "note": "persistent = git-tracked bytes of tools/holdout_replay + tests/holdout + delivery/w18; local scratch evidence ~23MB outside git"
+ },
+ "compatibility": [
+  "production src/config untouched; DU-BENCH remains the sole gold/scoring/recovery/native/compile-preview framework",
+  "w18 gold files are du-gold/1 records consumable by tools.document_understanding_benchmark",
+  "manifest schema w18-holdout-manifest/1 additive (gold_version/gold_v1_freeze_commit/gold_v1_archive/corrections_file)",
+  "SHA pins bind committed LF-normalized bytes (CRLF/LF checkout invariant)"
+ ],
+ "interface_requests": [],
+ "root_acceptance_steps": [
+  "1. Rerun the frozen baseline or any candidate commit: python -X utf8 -m tools.holdout_replay run --producer-repo <worktree at candidate commit> --producer-commit <full sha> --bindings <local bindings copy> --out-dir <new out-dir> [--lake-config lake/source_catalog.yaml --llm-config config.yaml --llm-provider minimax]",
+  "2. Compare against the frozen baseline attempts: numbers in delivery/w18/baseline-summary.json; attempts preserved under C:/Users/郑曾波/Projects/w18-holdout-scratch/baseline/attempts/ba8f8543c035/",
+  "3. Product findings F1-F4 (delivery/w18/findings.md) remain open for production owners: prospectus PARSER_INCOMPLETE in the configured batch path; Hikvision DOCX SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED (catalog-kind vs manifest-kind routing); 73/96 selection coverage gap; disposition_context NOT_EVALUATED without a context layer",
+  "4. Real summary quality and RF adoption remain ROOT scope; this card's outputs are source-side observations only (96/96 not_reviewed)"
+ ],
+ "remote": "origin (zhengcb81/company-wiki)",
+ "pushed_branch": "codex/w18-cwp-holdout-20261025",
+ "ci": null,
+ "known_limits": [
+  "baseline measured at frozen ba8f8543: mechanical visibility 10/96 selected, 16/96 in model input, 73/96 neither, 0 unread; DUB evaluation 8 PASS/41 FAIL/22 PARTIAL/25 NOT_EVALUATED; all 96 not_reviewed",
+  "observe path follows the production default selector while the compile path pins 0.9.0 (disclosed per artifact in selector_versions)",
+  "compile stage needs a machine-local isolated lake + llm config; bindings.local.json is intentionally uncommitted",
+  "two compile failures kept as raw product findings (F1/F2); not retried, not reinterpreted"
+ ]
+}

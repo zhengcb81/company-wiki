@@ -30,3 +30,9 @@
 - 修复（351ba6ae）：gold v2（F1禁令方向反转/不再增设无锚句依据的禁令、F2引句补全、F3五处锚点扩展或同伴锚、F5恢复原文措辞、F6真值对照移出禁令串）；v1 oracle逐字节归档gold/archive-v1/；corrections逐项源侧理由gold_corrections.json；manifest v2（gold_sha256+gold_version+紫金prior_use补FC-504 sighting）；工具D1-D6全部修复+2项新测试（20/20全绿、ruff 0）。
 - attempt-3（gold v2，冻结ba8f8543全链）8/8 ok：机械可见性10/16/73/0与DUB 8/41/22/25与v1完全一致——修正为oracle正确性卫生，未改变任何判定。
 - 最终SHA 351ba6ae已回传gold审查与工程审查两agent复审。
+
+## 2026-10-25 终态：COMPLETE
+
+- 复审闭环：A1终审PASS（v3.1残留补清确认，台账超记消除）；A2终审PASS（N1-N4确认，8/8 LF pin==HEAD blob==归一工作树，D3/D4/D5自建场景实测）；措辞项按审查员原文修入28f06a9a。
+- 交付：handoff.md/json、review.md+三份原报告、findings.md、baseline-summary.json、双根与清理收据；推送 origin codex/w18-cwp-holdout-20261025。
+- 最终计数：96目标/116锚/20测试/ruff 0/模型0/下载0/主仓零写；三个baseline attempt完整保留。
