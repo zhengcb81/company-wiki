@@ -25,11 +25,11 @@ from .runner import ReplayError, run_replay
 
 LAKE_CONFIG_TEMPLATE = """\
 schema_version: "1.0"
-catalog_dir: "{lake_dir}/.source_catalog"
+catalog_dir: "{lake_dir_slash}/.source_catalog"
 roots:
   - root_id: w18_lake
     kind: company_raw
-    path: "{source_root}"
+    path: "{source_root_slash}"
     priority: 10
 """
 
@@ -73,7 +73,9 @@ def cmd_bootstrap_lake(args: argparse.Namespace) -> int:
     source_root = Path(args.source_root)
     config_path = lake_dir / "source_catalog.yaml"
     config_path.write_text(
-        LAKE_CONFIG_TEMPLATE.format(lake_dir=lake_dir.resolve(), source_root=source_root.resolve()),
+        LAKE_CONFIG_TEMPLATE.format(
+            lake_dir_slash=str(lake_dir.resolve()).replace("\\", "/"),
+            source_root_slash=str(source_root.resolve()).replace("\\", "/")),
         encoding="utf-8")
     from .producer import import_paths
     from .runner import ORCHESTRATOR_ROOT
