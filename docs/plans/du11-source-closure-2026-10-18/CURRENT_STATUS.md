@@ -4,7 +4,9 @@
 
 **选择与结构根因（零费用精确复现）：** 同一微软原件 SHA 重放得 5,215 个HTML单元、1,120个进入语义结构、4,087个未映射到语义分区（不能直接等同“未读”）。年报路由的 112-span硬上限选入112/484，产生308个`budget_full`诊断；358个合格业务包中314个延期（308个受选择预算影响、6个引用未闭合）。结构侧另有24个超长section、3个continuation limit、2个表格正文未读。HTML没有bbox，于是5,215个单元都记为缺几何、layout不完整，但DOM文字仍可读；这应与内容是否读全分开验证。摘要代码又将所有非问题型原文卡固定设为`uncertain/needs_review`，当前模型请求只做排序，不生成自然语言摘要。不会仅提高cap或把needs_review改成通过。
 
-**发布/CI状态：** 修复提交 `73ba5aa2352ac90bf57d1156a204b0445c83a473` 已推送；精确 CI `40143579006` 因测试仍要求MiniMax使用旧 `thinking=disabled` 失败，MiniMax现配置 `reasoning_effort=low` 是已验证的正确请求。未删测试，provider-specific测试契约已在本地修复提交 `275c8295f2924939695fdbfd2d19a6cc603f1111`，64项相关测试、Ruff、diff-check通过；该修复尚未推送，远端CI待重跑。失败与根因证据已写入`CURRENT_STATUS.json`。
+**发布/CI状态：** MiniMax测试契约修复 `275c8295f2924939695fdbfd2d19a6cc603f1111` 与本页状态提交 `ecdb2fd60acec040b37188659ac75be2572f639b` 已推送。pre-push定向快门30个目标、167项通过；精确远端 CI [40144505969](https://github.com/zhengcb81/company-wiki/actions/runs/40144505969) 绑定`ecdb2fd6`并已 completed/success，Ruff、全src mypy、Unit、focused contracts、CLI和secret scan均通过。其前一失败`40143579006`是测试仍要求MiniMax用旧`thinking=disabled`，而正确配置已改为`reasoning_effort=low`；未删测试，provider-specific契约已修复。失败与精确根因均保留在`CURRENT_STATUS.json`。
+
+**真正摘要的生产根因（结构审查）：** selector `0.9.0` 的默认生成协议是 `reading-model-input/5`（extractive），API响应只做任务排序；`compile_extractive_plan`把原文卡原样复制成claim，并把非问题型claim固定为`uncertain/needs_review`。因此即使provider成功，当前链路也不可能产出自然语言业务摘要或可被RF消费的claim。这不同于单纯的decoder失败。已有`reading-model-input/4`支持按任务生成短摘要、来源局部引用和显式modality；但切换默认前必须用TDD证明source scope/引用/质量约束、112选择上限与分批覆盖、恢复与缓存身份，不能直接开生产付费调用。详细代码边界与下一步写入当前行动计划和`findings.md`。
 
 **前一节点快照（formal-v4之前）：** 微软 FY2025 10-K formal-v3 只发出一次 HTTP POST，收到 HTTP 400（`MODEL_HTTP_CLIENT_ERROR`）后作为 terminal dead-letter 停止；没有保存响应正文、付费响应凭据或正式摘要，未重试。原件 SHA `99d693f6…01d0bbe`、gold SHA `4dd0875a…7e28a2a8`未变，未下载、未翻译，临时数据湖清理。93,648 tokens / $0.041379 的保守 hold 已计入母账，不等于供应商确认账单。
 

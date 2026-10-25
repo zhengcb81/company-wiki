@@ -4,7 +4,16 @@
 
 ## Next Step
 
-最新状态（2026-10-25）：MiniMax-M3.1-Flash 配置根因已修为`reasoning_effort=low`。formal-v4 已恰好一次 HTTP 200（17,666 tokens/$0.007102），付费响应/摘要持久化、激活恢复、cache恢复、FF零下载复用均通过；母账更新为1,783,378 tokens/$0.724836。捕获的ranking响应含精确schema echo，decoder根修已通过19项单测、24项运行/恢复回归与独立复核。**RF/内容仍未通过：**112/484候选入选、314 deferred、layout incomplete；43条claim被生成逻辑固定标成`uncertain/needs_review`，50-task执行还包括5 deferred与2 unsupported；RF not_consumed/needs_review。下一步分别复现排名重放、source-card完整性和claim质量映射，确认未分配单元是否真代表业务内容缺失；再设计可恢复的分批覆盖与有出处的摘要产物。不能只提高112条上限，也不能把`needs_review`门槛直接放宽来伪造消费。三张并行卡已ROOT接收交付，但未替作者跨仓合并/推送。详情以[CURRENT_STATUS](CURRENT_STATUS.md)和[本节点验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)为准。
+最新状态（2026-10-25）：MiniMax-M3.1-Flash配置根因已修为`reasoning_effort=low`。formal-v4恰好一次HTTP 200（17,666 tokens/$0.007102），生命周期与FF复用通过；母账累计1,783,378 tokens/$0.724836。decoder根修和provider-specific测试修复已推送，精确CI `40144505969`（HEAD `ecdb2fd6`）全绿；QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY均已ROOT接收，外仓不在本仓合并范围。**RF/内容仍未通过：**112/484候选入选、314 deferred、layout incomplete；43条claim被固定标为`uncertain/needs_review`，执行结果有5 deferred、2 unsupported，RF not-consumed。结构审查确认更深层根因：selector `0.9.0`默认绑定`reading-model-input/5`，请求是ranking-only；程序把原文卡原样当claim，provider只返回任务优先级，故链路无法生成真正的摘要。已有`reading-model-input/4`任务摘要协议可作为复用候选，但在证明完整覆盖、引用/来源身份、质量映射、批次/缓存恢复前不直接切换或新增付费调用。
+
+### 当前下一步（TDD顺序）
+
+1. 先冻结当前真实selection和50-task结果不变；围绕production generation binding写红测，明确正式摘要必须由task-scoped summary协议产生，而不是排名协议或原文卡伪装成摘要。
+2. 复用并测试`reading-model-input/4`：原语言短句、每条claim有同源support/context、modality仅取合同值；未知引用、跨task/跨source、翻译、错误modality、带质量flag证据必须被拒绝或保留待复核。不能凭角色/引用合法就宣称语义真实。
+3. 单独处理覆盖：以实际source gold核对112上限、308预算延期、24超长section、3 continuation、2未读表体；设计稳定、可恢复、预算不重复计算的value-ranked batches，分别报告总覆盖与单批覆盖，任何漏项均保持partial/deferred。不得把4,087个unassigned直接算作未读，也不得用全量选择上限规避预算。
+4. 集中相关unit/contract + 隔离真实源端到端 + 独立大节点复核。只有协议、覆盖、缓存/恢复和原始字节不变证据均通过，才进行一次配置内正式摘要；按已有母账/限额，不再新开预算。随后验RF实际采用、cache复用/恢复、不同市场文种复验与W12四审，再进入公司holdout循环。
+
+已验证：非loopback的85项针对性测试通过；两项worker测试在受限沙箱报`MODEL_HTTP_TRANSPORT`。同一production文件在可用loopback的本机环境7/7通过，证实该两项是沙箱socket限制；远端精确CI整体success。不得把沙箱失败记成代码缺陷或删除这些测试。
 2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13根修、W14离线链和W15可移位回放现已ROOT接收；W13精确CI 40120507146 completed/success，W14主线离线gate 595通过，W15无remote。三卡不代表正式摘要/cache/真实公司预测验收。M3/M4/M5及CN H1摘要/RF接口已完成；内容质量、下一个US样本、W12四审与公司循环仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
 
 五family阅读策略组件已TDD与独立61P验收，75相关P，正常推送c990e389已完成（8216P/24既有skip，另146契约P）；原source/request根修已发布3b4110a3且精确CI40087657562成功。25原件调查/4真实选材与26critical独审后，按[跨市场后续共因](review/market-family-upgrade-20261024/remaining_root_causes.md)冻结语义正确的源侧金标，修匿名DOCX电话会、指标定义/历史指引、局部上下文与稀疏降噪，合并原annual14六partial责任；不得为旧金标错项或财务全表扩大切片。formal-v4 证明运行链可走通，但暴露下游不消费的当前根因链：选择上限和未分配结构使选材/布局不完整，产出全部待审claim，RF因质量状态不消费。先修该共因并做离线大节点验收，再规划新正式摘要、cache复用、真实采用矩阵与W12四审、新公司循环。USIPO补样本地计量错误先精确诊断，不重试同失败/加审批。详细[实施细则](review/market-family-upgrade-20261024/strategy_upgrade_design.md)；唯一状态CURRENT_STATUS。

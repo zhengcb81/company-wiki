@@ -973,3 +973,11 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 验证：decoder单文件 19 passed；decoder + activation recovery 共24 passed / 28.36s；精确 `.tmp-phasec-focused` 清理后不存在。独立follow-up确认封闭字段白名单与测试覆盖，无阻塞。
 - ROOT 已接收 IR-REPORT-GENERATION、QA-RAG-SAFE-REBUILD、MC-OUTPUT-INTEGRITY 三卡的最终交付（reviewed code SHA、tip仅后续文档、独审、测试和清理证据逐项绑定）；接收不等于外部仓已合并/推送。见[验收记录](review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md)。
 - 下一节点先处理选择/分批和结构覆盖共因，禁止把 formal-v4 的 `PASS`泛化成内容PASS，也不对原次请求重放或追加收费。
+
+## 2026-10-25 CI修复完成与真实摘要链路根因复核
+
+- 远端CI `40143579006`失败的唯一测试仍把三供应商统一期待为`thinking=disabled`；MiniMax生产设置已正确迁至`reasoning_effort=low`。按各provider配置更新测试契约，没有删测/放宽断言。64项聚焦测试通过。
+- 测试修复`275c8295`与PWF状态提交`ecdb2fd6`已推送。pre-push 30个相关目标167 passed/27.32秒；精确CI `40144505969`绑定`ecdb2fd60acec040b37188659ac75be2572f639b`，全任务completed/success（Ruff、全src mypy、Unit、focused contract、CLI、secret scan）。
+- 检查既有scoped摘要协议时，受限沙箱内针对92例中的85个非loopback用例通过；两个production用例报`MODEL_HTTP_TRANSPORT`。在本机loopback可用环境完整重跑其7例文件，7/7通过，原因是受限运行环境屏蔽本地测试socket，不是删除或修低断言。精确基线temp由测试hook迁移并自动清理。
+- 结构审查进一步区分真正摘要与ranking：selector `0.9.0`在`narrative_generation._bind_reading_projection`默认到`reading-model-input/5`。该协议写明只返回decision排序；`compile_extractive_plan`把整段source-card原文当claim，并将非问题型claim标为`uncertain/needs_review`，`decode_extractive_result`只写排序结果。因此一次成功API不能生成自然语言摘要；这是RF not-consumed之外更上游的架构根因。
+- 已有`reading-model-input/4`是任务局部摘要协议，显式生成原语言短句、同源support/context引用和modality，decoder有claim数、引用、translation和quality检查。不能只切换版本：112/484选材与308预算延期等覆盖问题仍在；下一步按`task_plan.md`先写production绑定和数据边界红测，再设计可恢复批次。未作付费重试、未改原文/配置。

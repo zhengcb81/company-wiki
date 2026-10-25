@@ -10,16 +10,16 @@
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
   "last_code_commit": "275c8295f2924939695fdbfd2d19a6cc603f1111",
   "code_ci": {
-    "id": null,
-    "check_id": null,
-    "head_sha": "275c8295f2924939695fdbfd2d19a6cc603f1111",
-    "status": "push_pending",
-    "conclusion": null,
-    "html_url": null,
-    "failed_test_count": null,
+    "id": 40144505969,
+    "check_id": 108809797717,
+    "head_sha": "ecdb2fd60acec040b37188659ac75be2572f639b",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40144505969",
+    "failed_test_count": 0,
     "junit_report": null,
     "failure_summary": null,
-    "updated_at": "2026-10-24T23:49:59Z",
+    "updated_at": "2026-10-24T23:57:46Z",
     "previous_successful_ci": {
       "id": 40131924884,
       "head_sha": "808623377905520ec0c28c7330fe14243e4c6c04",
@@ -74,6 +74,19 @@
       "structure_work_limit": 2000000
     },
     "claim_quality_root": "compile_extractive_plan always marks non-question source-card claims uncertain and needs_review; the ranking-only model response is not a prose summary.",
+    "production_summary_pipeline_root": {
+      "selector_version": "0.9.0",
+      "default_projection": "reading-model-input/5",
+      "request_protocol": "narrative-model-request/6; decisions only; advisory ranking_only",
+      "draft_behavior": "copies complete raw source-card text into claims; non-question claims are forced uncertain and needs_review",
+      "result": "a successful provider call can rank source tasks but cannot emit a natural-language business summary or RF-consumable claims",
+      "existing_summary_protocol": "reading-model-input/4 provides task-scoped prose clauses, source-local citations and explicit modality, but its default binding, coverage, bounded-batch and recovery behavior must be validated before production selection",
+      "next_tests": [
+        "TDD the production projection choice against generated summary protocol, not ranking-only output",
+        "prove task citation, modality, scope, source-quality flags and claim budgets remain enforced",
+        "evaluate selection omissions and resumable batch coverage against frozen source gold before any paid call"
+      ]
+    },
     "interpretation": "The HTML parser completed the native scan. Unassigned means not mapped into semantic sections, not automatically unread. Missing bbox is a geometry limitation and layout_bridge explicitly says DOM/text remains readable. Candidate cap, oversized/continued sections and table omissions need separate source-grounded checks.",
     "next": "Inspect unassigned/oversized/continued/table units against source and gold; define resumable value-ranked batches with total coverage and cache semantics; test assertive-vs-uncertain source claim quality without lowering review safeguards; no new paid request until offline tests and independent review pass."
   },
@@ -361,13 +374,13 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40090199646,
-    "head_sha": "c990e3897a8a9f5241fd544cbc0fc1c0c6432f0c",
+    "id": 40144505969,
+    "head_sha": "ecdb2fd60acec040b37188659ac75be2572f639b",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40090199646",
-    "created_at": "2026-10-24T11:30:47Z",
-    "updated_at": "2026-10-24T11:34:03Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40144505969",
+    "created_at": "2026-10-24T23:52:51Z",
+    "updated_at": "2026-10-24T23:57:46Z"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
