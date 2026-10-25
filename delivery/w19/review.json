@@ -1,15 +1,25 @@
 {
   "schema_version": "w19-independent-review/1",
-  "review_round": 3,
+  "review_round": 4,
   "reviewer": "zcode-independent-final-reviewer:mimo-v2.6-flash (W19-SINA-STATEMENTS, not an implementer)",
   "review_date": "2026-10-25",
   "reviewed_code_commits": {
-    "company-wiki": "71e98ed0",
+    "company-wiki": "43995453",
     "filing-fetch": "d396fe7"
   },
   "previous_reviewed_code_commits": {
-    "round_1": {"company-wiki": "e583904d", "filing-fetch": "a211d3a"},
-    "round_2": {"company-wiki": "ae317ca9", "filing-fetch": "7d9bb85"}
+    "round_1": {
+      "company-wiki": "e583904d",
+      "filing-fetch": "a211d3a"
+    },
+    "round_2": {
+      "company-wiki": "ae317ca9",
+      "filing-fetch": "7d9bb85"
+    },
+    "round_3": {
+      "company-wiki": "71e98ed0",
+      "filing-fetch": "d396fe7"
+    }
   },
   "baselines": {
     "company-wiki": "243993d2",
@@ -18,10 +28,10 @@
   "note_on_commits": "author quoted FF hash 6a2db27 which does not exist; bound to git log HEAD d396fe7 (only scripts/ff_financial_statements.py +4 lines over 7d9bb85)",
   "verdict": "PASS",
   "recheck": {
-    "round": 3,
-    "scope": "git diff ae317ca9..71e98ed0 and 7d9bb85..d396fe7, plus re-verification of every round-2 blocking/medium finding by the reviewer's original methods",
+    "round": 4,
+    "scope": "git diff 71e98ed0..43995453 (service.py _needs_fetch unbounded-to rules + 1 regression); FF unchanged at d396fe7",
     "result": "PASS",
-    "residual_non_blocking": ["W19-R15"],
+    "residual_non_blocking": [],
     "blocking_findings": []
   },
   "findings": [
@@ -29,10 +39,10 @@
       "id": "W19-R15",
       "severity": "medium",
       "blocking": false,
-      "status": "open",
+      "status": "fixed_verified_round4",
       "title": "Omitting period_end_to still skips the newer-direction refetch",
-      "evidence": "service.py _needs_fetch end_of_data branch gates the newer check on `want_to is not None`; with want_to=None (upper bound omitted) no refetch happens even when fetched_to is bounded. Reviewer run (wikiR3, full end_of_data store + fixture root whose consistent lrb history adds 2026-09-30): request without period_end_to -> 0 HTTP, complete, 36 periods, last=2026-06-30 while the provider serves 2026-09-30; the explicit to=2026-12-31 control refetches to 37 periods and then repeats at 0 HTTP.",
-      "recommendation": "Treat want_to=None as unbounded: refetch when fetched_to is not None (open upper edge never verified), or return partial with a named gap; add a no-to regression."
+      "evidence": "service.py _needs_fetch: want_to None under end_of_data reuses only when fetched_to IS NULL (return fetched_to is not None) and always refetches under period_boundary. Reviewer CLI runs: bounded full fetch (to=2026-06-30, fetched_to=2026-06-30) then identical bounded request -> 0 HTTP (bounded reuse unaffected); request without period_end_to under the mutated provider-newer fixture (consistent report_count 37) -> refetch 5 HTTP -> 37 periods, last=2026-09-30, envelope becomes fetched_to=NULL; repeat of the same no-to request -> 0 HTTP, 37 periods. from=2025 + no-to -> refetch every time (period_boundary branch), honest complete, bytes dedup.",
+      "recommendation": "None (fixed as suggested)."
     },
     {
       "id": "W19-R10",
@@ -162,37 +172,44 @@
     }
   ],
   "observations": [
-    "FF full-suite failures in tests/test_fc803_minimal_download.py (lt01/lt02/lt05/lt07/lt09) predate W19: identical failures at baseline e0d9642 and at 7d9bb85 (reviewer-verified by exporting and running both). These e2e tests drive the real fetch_filing.py against the ambient editable company_wiki (ROOT's production tree, which has moved on) and have no import relationship to the W19 diff (ff_financial_statements.py only). The author's 'FF 127 passed/1 skipped' corresponds to their selected subset; handoff should note the pre-existing full-suite failures to avoid misattribution at ROOT acceptance.",
-    "fetched_from/fetched_to are defined only in CREATE TABLE (schema still 1.3.0). An ae317ca9-shaped 1.3.0 database (reviewer simulated via ALTER TABLE DROP COLUMN) fails closed at store open: ValueError 'source catalog schema structure drift' (exit 1, no envelope). Acceptable because 1.3.0 was never released (production catalogs <=1.2.0); branch-internal experiment DBs must be rebuilt - worth one line in handoff.",
-    "Replay receipt statement entries lack coverage/knowledge_mode fields (acceptable for a recovery receipt).",
-    "Service-side continuation tokens remain unissuable in practice (20000-row bound unreachable for CN data); cross-company token reuse could still blank a same-typed statement - kept at observation level given the dead-code status (round-2 judgment maintained)."
+    "Unbounded-envelope trust posture: a no-to request reuses 0 HTTP on an exhausted unbounded envelope (fetched_to NULL); provider periods published after that capture require refresh or a range change to re-verify. Inherent to offline reuse, coverage exposes last_period_end - accepted.",
+    "from-bounded + to-unbounded requests structurally never reach 0-HTTP reuse (envelope always period_boundary); honest status, bytes dedup, efficiency-only edge.",
+    "FF full-suite fc803 failures (lt01/02/05/07/09) predate W19 (identical at baseline e0d9642 and 7d9bb85; they drive fetch_filing against the ambient editable production company_wiki, unrelated to the W19 diff).",
+    "fetched_from/fetched_to are CREATE-TABLE-only; ae317ca9-shaped 1.3.0 DBs fail closed at open (schema structure drift). 1.3.0 unreleased - acceptable; branch-internal old experiment DBs must be rebuilt.",
+    "Service-side continuation tokens remain unissuable in practice; bind tokens to security_id if paging is ever activated."
   ],
   "independent_behaviors": [
-    "Exported 71e98ed0 and d396fe7 (plus 7d9bb85 and e0d9642 for baseline comparison) via git archive and rebuilt the fixture root (19/19 SHAs vs observations.json) and five fresh wiki roots myself",
-    "Chain sanity on the final code: first request complete 36/33/36 with 15 HTTP, second identical request 0 HTTP; coverage rows persist fetched_from=NULL / fetched_to=2026-06-30",
-    "Re-ran the round-2 probes by the same methods: T2b no-from and T2c all_history after a narrow fetch now refetch (5 HTTP -> 36 periods) and repeat at 0 HTTP; T3b with a consistently mutated provider-newer fixture (2026-09-30 added, report_count bumped on all lrb pages) refetches to 37 periods, last=2026-09-30, and repeats at 0 HTTP",
-    "New probe: request with period_end_to omitted under a bounded exhausted envelope stays 0 HTTP/complete with a stale newest period -> W19-R15 (medium, non-blocking)",
-    "R11 gate matrix on a two-security root: versions-path refusal (000333 stays at 0 versions), reviewer-constructed zero-version page exercising the sidecar fallback, wrong-company refusal, tampered-sidecar fail-closed refusal, restored-sidecar success, post-publish versions-path refusal",
-    "R12: crafted token on a three-statement request resumes income (72 rows, ordinal>=6) while balance/cash return full 33/36 periods; reuse_only+continuation rejected with exit 2 on both CWP CLI and FF",
-    "R13/R14: --replay-source under reuse_only executes (exit 0); replay output has company_identity/statements/retrieved_at",
-    "Suites on final commits: CWP tests/financial_statements 106 passed; FF tests/financial_statements 16 passed; CWP narrow-seam old consumers 20 passed; FF full suite run with baseline comparison showing fc803 failures predate W19",
-    "No network, no production-directory writes, no commits, no source edits; temp root deleted after the report was written"
+    "Exported 43995453 via git archive and rebuilt fixture roots (19/19 SHAs vs observations.json + byte-exact terminators + consistent newer-history variant) and two fresh wiki roots",
+    "Reviewed the 12-line _needs_fetch delta and the new TestR15UnboundedToDirection regression",
+    "R15 e2e matrix on the real CLI: bounded fetch -> bounded repeat 0 HTTP (reuse unaffected); no-to request under newer provider refetches 5 HTTP to 37 periods with envelope fetched_to=NULL; same no-to repeat 0 HTTP; from=2025 + no-to refetches (period_boundary branch, always)",
+    "Reran CWP tests/financial_statements/ at 43995453: 107 passed",
+    "No network, no production writes, no commits, no source edits; temp root deleted after the report was written"
   ],
   "commands_run": [
-    {"command": "git -C company-wiki-w19-sina-statements diff ae317ca9..71e98ed0 --stat (and per-file diffs); git -C filing-fetch-w19-sina-statements diff 7d9bb85..HEAD --stat", "result": "CWP: cli/contracts/repository/schema/service + new test_second_recheck_regressions.py + delivery docs; FF: ff_financial_statements.py +4 lines; HEAD = d396fe7"},
-    {"command": "git archive 71e98ed0 / d396fe7 / 7d9bb85 / e0d9642 | tar -x -C %TEMP%/w19-final-recheck/*", "result": "read-only exports of final commits and baseline comparison points"},
-    {"command": "python setup_roots.py", "result": "fixture root 21 entries (19 SHA-verified + 2 byte-exact terminators), consistent fixtures_newer variant, five fresh wiki roots"},
-    {"command": "python driver.py (reviewer-authored)", "result": "all final-recheck assertions passed: chain sanity 36/33/36 + 0-HTTP reuse; T2b/T2c/T3b refetch-and-repeat; T3d residual recorded; R11 gate matrix incl. sidecar fallback and fail-closed; R12 token scoping and dual-side reuse_only+continuation rejection; R13/R14 replay under reuse_only with full envelope shape"},
-    {"command": "python -m pytest tests/financial_statements/ -q (CWP @ 71e98ed0)", "result": "106 passed in 68.40s, exit 0"},
-    {"command": "python -m pytest tests/financial_statements/ -q (FF @ d396fe7)", "result": "16 passed in 3.47s, exit 0"},
-    {"command": "python -m pytest tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_canonical_writer.py -q", "result": "20 passed, exit 0"},
-    {"command": "python -m pytest tests/ -q -x (FF full @ d396fe7)", "result": "590 passed/17 skipped then fc803 lt01 failure"},
-    {"command": "python -m pytest tests/test_fc803_minimal_download.py -q (@ 7d9bb85 and @ e0d9642 baseline)", "result": "identical 5 failures (lt01/02/05/07/09) at both - pre-existing, independent of W19"},
-    {"command": "old-shape 1.3.0 DB probe (DROP fetched_from/fetched_to, run fetch)", "result": "fail-closed ValueError 'source catalog schema structure drift' at store open (exit 1); no silent corruption; acceptable pre-release"}
+    {
+      "command": "git -C company-wiki-w19-sina-statements diff 71e98ed0..43995453 -- src/ tests/",
+      "result": "service.py _needs_fetch unbounded-to rules (+12/-6) and TestR15UnboundedToDirection regression (+54); no other code"
+    },
+    {
+      "command": "git archive 43995453 ... | tar -x -C %TEMP%/w19-r15-recheck/cwp",
+      "result": "read-only export"
+    },
+    {
+      "command": "python setup_roots.py (reviewer-authored)",
+      "result": "21-entry fixture root (19 SHA-verified), consistent fixtures_newer (report_count 37 + 2026-09-30), wiki + wikiR2 roots"
+    },
+    {
+      "command": "python r15_driver.py (reviewer-authored)",
+      "result": "all assertions passed: A1 bounded fetch 36p/5HTTP; A2 bounded repeat 0 HTTP; A3 no-to + newer provider refetch 5 HTTP -> 37p/last=2026-09-30/fetched_to=NULL; A4 no-to repeat 0 HTTP/37p; B1 narrow 6p/1HTTP period_boundary; B2 from=2025+no-to refetch; B3 repeat refetches (honest, efficiency edge)"
+    },
+    {
+      "command": "python -m pytest tests/financial_statements/ -q (CWP @ 43995453)",
+      "result": "107 passed in 64.87s, exit 0"
+    }
   ],
   "artifacts": {
-    "report_md": "delivery/w19/review.md (round-3 final, updated in place; rounds 1-2 preserved in git history)",
-    "temp_workspace": "%TEMP%/w19-final-recheck (deleted after report write)",
+    "report_md": "delivery/w19/review.md (round-4 final, updated in place; rounds 1-3 preserved in git history)",
+    "temp_workspace": "%TEMP%/w19-r15-recheck (deleted after report write)",
     "network_calls": 0,
     "commits_created": 0,
     "production_dir_writes": 0

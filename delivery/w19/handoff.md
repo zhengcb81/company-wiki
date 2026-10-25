@@ -1,7 +1,6 @@
 # W19-SINA-STATEMENTS 交接（handoff）
 
-状态：**REVIEW_PENDING_RECHECK**（首轮独立审查 PASS_WITH_FIXES，全部9项finding已根修并提交；复审进行中，见 review.md/json）
-绑定版本：CWP code commit `ae317ca9`（基线 `243993d2`）；FF code commit `7d9bb85`（基线 `e0d9642`）；分支均为 `codex/w19-sina-statements-20261025`。
+状态：**COMPLETE**（四轮独立审查通过，最终 verdict PASS，绑定 CWP code commit `43995453`（基线 `243993d2`）/ FF code commit `d396fe7`（基线 `e0d9642`），分支均为 `codex/w19-sina-statements-20261025`）
 
 ## 1. 交付物总览
 
@@ -36,7 +35,7 @@
 - **真实有界 E2E**（独占根，~25 公开请求，0费/0LLM）：中微三表（15 请求）+完整复用 0 HTTP；招行 fzb（2请求6期）；美的 SZ（2请求5期）；BJ 名称歧义透出 candidates、ticker 解歧后 no_data 诚实 gap。
 - **官方原件逐值对照**（独立财务正确性）：ensure+StockInfoDL 真实下载中微2025年报 PDF（9,168,457B，0费）；四表锚点与官方 PDF 逐值一致（营业总收入/基本每股收益/货币资金/销售商品收现，含页码）。
 - **空间**：原件+sidecar 3,578,895B + catalog.sqlite3 6,680,576B = 10.26MB；重复请求文件/版本/值行零增长（离线E2E断言）。
-- **独立审查**：首轮 PASS_WITH_FIXES（9 findings，含2 blocking：R1 范围放宽谎报 complete、R5 未提交改动）；全部根修于 CWP `ae317ca9`/FF `7d9bb85`（逐项对照见 §6）；复审进行中，最终 verdict/绑定见 `review.md`/`review.json`。
+- **独立审查（四轮，同一独立 agent，全部真实实跑）**：R1 PASS_WITH_FIXES(9)→R2 PASS_WITH_FIXES(新增R10/R11 blocking+R12-R14)→R3 PASS(R10-R14复验，遗留R15 medium非阻断)→R4 PASS(R15差异补审fixed_verified)。**最终 verdict PASS，R1–R15 全部关闭，无未决 finding**；每轮报告原样保留于 `review.md`/`review.json`。
 - **测试命令与结果**：
   - CWP：`python -m pytest tests/financial_statements/ -q` → **97 passed**；`python -m pytest tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_canonical_writer.py -q` → **20 passed**；`python -m ruff check <变更文件>` 通过。
   - FF：`python -m pytest tests/financial_statements/ -q` → **16 passed**；`python -m pytest tests/test_fetch_filing.py tests/financial_statements/ -q` → 127 passed/1 skipped；ruff 通过。
@@ -64,6 +63,11 @@
 | 观察：count_changed 丢已抓页 | - | 维持原语义：drift 页不入库（其前各页照常入库），handoff 记录 | provider 实现 |
 | 观察：coverage 三数两语义 | - | advertised=provider report_count、observed=本地去重期数，SKILL 已述 | SKILL.md/响应 |
 | 观察：18/19 夹具文档漂移 | - | BJ 探针后 capture 共19份；progress.md 已记 | observations.json |
+| R10 T2b/T2c/T3b 范围边界残存变体 | major/blocking(第2轮) | coverage 表加 `fetched_from/fetched_to` 抓取包络；`_needs_fetch` 方向化（older 穷尽=NULL、newer 超包络即重抓） | test_t2b/t2c/t3b×2 |
+| R11 replay 跨实体污染 | major/blocking(第2轮) | `_source_owner_security` 归属闸门（versions→sidecar 回退，fail-closed） | test_r11 + 审查者自构造零版本行页面复验 |
+| R12 continuation 三缺陷 | medium(第2轮) | token 按 statement 作用域；reuse_only+continuation 双侧拒绝 | test_manual_continuation_does_not_blank_other_statements |
+| R13/R14 replay CLI 忽略/信封缺形 | low(第2轮) | replay 分支前置；输出完整 statements 信封 | test_r13 CLI 子进程；test_r14 |
+| R15 省略 to 不重抓 | medium(第3轮,非阻断) | want_to None 时仅无界已穷尽包络（fetched_to IS NULL）可 0 HTTP；boundary 一律重抓 | TestR15UnboundedToDirection（第4轮 fixed_verified） |
 
 ## 7. 当前不足（未声明实现的能力）
 
@@ -81,7 +85,16 @@
 - RF 数值/模型采用由其责任层接手（本卡未实现 RF 历史基数算法，不与 W16 重复）。
 - 真实 interface_requests：无（未发现需要改动对方仓既有公开契约的需求）。
 
-## 9. 环境恢复收据
+## 9. 环境恢复收据（已完成）
 
-- 两个真实测试根（`%TEMP%/w19-real-e2e-20261025`、`%TEMP%/w19-official-e2e-20261025`）在复审期间保留供查；handoff 提交前删除并在 `handoff.json.cleanup.receipt` 记录删除收据。
+- 两个真实测试根已删除并验证不存在：合计 66 文件 / 31,364,256 字节（`delivery/w19/cleanup_receipt.json`）。
+- 生产 `config/source_catalog.yaml` sha256 `3d159a4e…` 全程未动（CWP tests 的 production_config_integrity 会话守卫在所有测试会话通过）；生产 catalog 与既有原件指纹未动。
+
+## 10. 给 ROOT 的审查者观察（非 finding，详 review.md §5）
+
+1. 无界-newer 包络的信任姿态：重复无界（省略 to）请求重证一次穷尽后即 0 HTTP（满足卡面"重复相同请求 0 HTTP"的合理妥协）。
+2. from 有界 + to 无界的请求诚实但不可缓存（每次重抓 1 页）——效率边缘非正确性问题。
+3. FF 全量套件中 5 个 fc803 e2e 失败先于 W19 存在（审查者在基线 e0d9642 复现同样失败）；作者跑的是选定聚焦子集。
+4. `fetched_from/fetched_to` 仅在 CREATE TABLE 中：1.3.0 从未发布，但分支中期生成的旧试验库会 fail-closed（structure drift），需重建。
+5. continuation token 目前按 statement 的 version 作用域；若将来启用多表分页导出，建议把 token 再绑上 security_id。
 - 生产 `config/source_catalog.yaml`、生产 catalog、既有原件指纹全程未动（CWP tests/conftest 的 production_config_integrity 会话守卫在所有测试会话通过）。

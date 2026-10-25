@@ -1,14 +1,14 @@
 {
  "schema_version": "w19-sina-statements-handoff/1",
  "package_id": "W19-SINA-STATEMENTS",
- "status": "REVIEW_PENDING_RECHECK",
+ "status": "COMPLETE",
  "repos": [
   {
    "name": "company-wiki",
    "workdir": "C:/Users/郑曾波/Projects/company-wiki-w19-sina-statements",
    "branch": "codex/w19-sina-statements-20261025",
    "base_commit": "243993d2c9e12c2a9cb6e2b728e547928607abff",
-   "code_commit": "ae317ca9",
+   "code_commit": "43995453",
    "handoff_commit": null,
    "changed_paths": [
     "src/company_wiki/source_catalog/financial_statements/**",
@@ -35,7 +35,7 @@
    "workdir": "C:/Users/郑曾波/Projects/filing-fetch-w19-sina-statements",
    "branch": "codex/w19-sina-statements-20261025",
    "base_commit": "e0d96426445e4b93bc6cc7a6e6014996ad0a777d",
-   "code_commit": "7d9bb85",
+   "code_commit": "d396fe7",
    "handoff_commit": null,
    "changed_paths": [
     "scripts/fetch_statements.py",
@@ -50,25 +50,93 @@
   }
  ],
  "requirements": [
-  {"id": "provider", "title": "Sina fixed-endpoint bounded provider with named terminations", "status": "PASS"},
-  {"id": "normalize", "title": "Exact decimals, value kinds, pointers, business hash excluding update_time", "status": "PASS"},
-  {"id": "storage", "title": "Two long tables + coverage observation, atomic idempotent publish", "status": "PASS"},
-  {"id": "schema", "title": "1.2.0 -> 1.3.0 migration, fail-closed unknown, zero-write readonly query", "status": "PASS"},
-  {"id": "canonical", "title": "Third-party multi-period dataset entry reusing sole _commit_staged, never official", "status": "PASS"},
-  {"id": "service", "title": "Identify once, reuse-first, one shared budget, per-statement isolation", "status": "PASS"},
-  {"id": "pit", "title": "current_snapshot vs point_in_time honesty", "status": "PASS"},
-  {"id": "ff", "title": "Thin client + SKILL routing, no second implementation", "status": "PASS"},
-  {"id": "coverage-boundary", "title": "Widened range refetches (review R1 fix)", "status": "PASS"},
-  {"id": "replay", "title": "SourceRef offline replay entry (review R8 fix)", "status": "PASS"},
-  {"id": "bj-gap", "title": "BSE no_data is a named capability gap", "status": "PASS"}
+  {
+   "id": "provider",
+   "title": "Sina fixed-endpoint bounded provider with named terminations",
+   "status": "PASS"
+  },
+  {
+   "id": "normalize",
+   "title": "Exact decimals, value kinds, pointers, business hash excluding update_time",
+   "status": "PASS"
+  },
+  {
+   "id": "storage",
+   "title": "Two long tables + coverage observation, atomic idempotent publish",
+   "status": "PASS"
+  },
+  {
+   "id": "schema",
+   "title": "1.2.0 -> 1.3.0 migration, fail-closed unknown, zero-write readonly query",
+   "status": "PASS"
+  },
+  {
+   "id": "canonical",
+   "title": "Third-party multi-period dataset entry reusing sole _commit_staged, never official",
+   "status": "PASS"
+  },
+  {
+   "id": "service",
+   "title": "Identify once, reuse-first, one shared budget, per-statement isolation",
+   "status": "PASS"
+  },
+  {
+   "id": "pit",
+   "title": "current_snapshot vs point_in_time honesty",
+   "status": "PASS"
+  },
+  {
+   "id": "ff",
+   "title": "Thin client + SKILL routing, no second implementation",
+   "status": "PASS"
+  },
+  {
+   "id": "coverage-boundary",
+   "title": "Widened range refetches (review R1 fix)",
+   "status": "PASS"
+  },
+  {
+   "id": "replay",
+   "title": "SourceRef offline replay entry (review R8 fix)",
+   "status": "PASS"
+  },
+  {
+   "id": "bj-gap",
+   "title": "BSE no_data is a named capability gap",
+   "status": "PASS"
+  }
  ],
  "tests": [
-  {"command": "cd company-wiki-w19-sina-statements && python -m pytest tests/financial_statements/ -q", "result": "97 passed", "exit_code": 0},
-  {"command": "cd company-wiki-w19-sina-statements && python -m pytest tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_canonical_writer.py -q", "result": "20 passed", "exit_code": 0},
-  {"command": "cd company-wiki-w19-sina-statements && python -m ruff check src/company_wiki/source_catalog/financial_statements/ tests/financial_statements/", "result": "clean", "exit_code": 0},
-  {"command": "cd filing-fetch-w19-sina-statements && python -m pytest tests/financial_statements/ -q", "result": "16 passed", "exit_code": 0},
-  {"command": "cd filing-fetch-w19-sina-statements && python -m pytest tests/test_fetch_filing.py tests/financial_statements/ -q", "result": "127 passed, 1 skipped, 39 subtests", "exit_code": 0},
-  {"command": "cd filing-fetch-w19-sina-statements && python -m ruff check scripts/ tests/financial_statements/", "result": "clean", "exit_code": 0}
+  {
+   "command": "cd company-wiki-w19-sina-statements && python -m pytest tests/financial_statements/ -q",
+   "result": "97 passed",
+   "exit_code": 0
+  },
+  {
+   "command": "cd company-wiki-w19-sina-statements && python -m pytest tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_canonical_writer.py -q",
+   "result": "20 passed",
+   "exit_code": 0
+  },
+  {
+   "command": "cd company-wiki-w19-sina-statements && python -m ruff check src/company_wiki/source_catalog/financial_statements/ tests/financial_statements/",
+   "result": "clean",
+   "exit_code": 0
+  },
+  {
+   "command": "cd filing-fetch-w19-sina-statements && python -m pytest tests/financial_statements/ -q",
+   "result": "16 passed",
+   "exit_code": 0
+  },
+  {
+   "command": "cd filing-fetch-w19-sina-statements && python -m pytest tests/test_fetch_filing.py tests/financial_statements/ -q",
+   "result": "127 passed, 1 skipped, 39 subtests",
+   "exit_code": 0
+  },
+  {
+   "command": "cd filing-fetch-w19-sina-statements && python -m ruff check scripts/ tests/financial_statements/",
+   "result": "clean",
+   "exit_code": 0
+  }
  ],
  "real_e2e": {
   "companies": [
@@ -78,16 +146,50 @@
    "诺思兰德 (BSE 430047, capability gap)"
   ],
   "statement_coverage": [
-   {"company": "中微公司", "income_statement": 36, "balance_sheet": 33, "cash_flow": 36},
-   {"company": "招商银行", "balance_sheet": 6},
-   {"company": "美的集团", "income_statement": 5},
-   {"company": "诺思兰德", "income_statement": 0}
+   {
+    "company": "中微公司",
+    "income_statement": 36,
+    "balance_sheet": 33,
+    "cash_flow": 36
+   },
+   {
+    "company": "招商银行",
+    "balance_sheet": 6
+   },
+   {
+    "company": "美的集团",
+    "income_statement": 5
+   },
+   {
+    "company": "诺思兰德",
+    "income_statement": 0
+   }
   ],
   "official_value_checks": [
-   {"item": "营业总收入 (income 2025-12-31)", "official": "12,384,638,268.11 (annual report p142)", "sina": "12384638268.110000", "verdict": "match"},
-   {"item": "基本每股收益 (income 2025-12-31)", "official": "3.40 CNY/share (p25)", "sina": "3.400000", "verdict": "match"},
-   {"item": "货币资金 (balance 2025-12-31)", "official": "7,951,400,258.31 (p68)", "sina": "7951400258.310000", "verdict": "match"},
-   {"item": "销售商品、提供劳务收到的现金 (cash 2025-12-31)", "official": "14,122,161,977.48 (p146)", "sina": "14122161977.480000", "verdict": "match"}
+   {
+    "item": "营业总收入 (income 2025-12-31)",
+    "official": "12,384,638,268.11 (annual report p142)",
+    "sina": "12384638268.110000",
+    "verdict": "match"
+   },
+   {
+    "item": "基本每股收益 (income 2025-12-31)",
+    "official": "3.40 CNY/share (p25)",
+    "sina": "3.400000",
+    "verdict": "match"
+   },
+   {
+    "item": "货币资金 (balance 2025-12-31)",
+    "official": "7,951,400,258.31 (p68)",
+    "sina": "7951400258.310000",
+    "verdict": "match"
+   },
+   {
+    "item": "销售商品、提供劳务收到的现金 (cash 2025-12-31)",
+    "official": "14,122,161,977.48 (p146)",
+    "sina": "14122161977.480000",
+    "verdict": "match"
+   }
   ],
   "FF_to_CWP_actual_cli": true,
   "repeat_zero_http": true,
@@ -96,22 +198,25 @@
  },
  "independent_review": {
   "agent": "agent_2d649eaf-83bc-48fa-af1f-6683b9cc2452",
-  "verdict": "PASS_WITH_FIXES",
+  "verdict": "PASS",
   "report": "delivery/w19/review.md",
-  "reviewed_code_commits": {"company-wiki": "ae317ca9", "filing-fetch": "7d9bb85"},
+  "reviewed_code_commits": {
+   "company-wiki": "43995453",
+   "filing-fetch": "d396fe7"
+  },
   "reviewed_file_sha256": {
-   "company-wiki/src/company_wiki/source_catalog/financial_statements/contracts.py": "8ad1a50d32c6d353cbd152646392ea9495e405fdf3e75492de11784f5a18430a",
+   "company-wiki/src/company_wiki/source_catalog/financial_statements/contracts.py": "9e6619effde36016124939371de13a81466c981fe55fee5da7713c3c1586eb16",
    "company-wiki/src/company_wiki/source_catalog/financial_statements/normalize.py": "d399ef079b85bca8c32459943b4eb2afd3cce229055bab179024edd0a967abfe",
    "company-wiki/src/company_wiki/source_catalog/financial_statements/sina_provider.py": "9f1339afabf744cdea0a12ce59594d283ced02b623e17dc7426404861483e2d0",
-   "company-wiki/src/company_wiki/source_catalog/financial_statements/schema.py": "605c16319f3750e9f9f217d742bc108530030e0b900d31c400dc829741b5dfb5",
-   "company-wiki/src/company_wiki/source_catalog/financial_statements/repository.py": "5e4f0029f723e59d1efcea7d9c40f90509bfe190704c6e311990bee26244f792",
-   "company-wiki/src/company_wiki/source_catalog/financial_statements/service.py": "eca7f6d2bff3f0498eeec0f8c1b0590362890a9c3f860e06b8976d711808147e",
-   "company-wiki/src/company_wiki/source_catalog/financial_statements/cli.py": "815c361d2def6d5f59c8195128a21ce5cfa833d7d6aa6a279c0a8f4affd2985a",
+   "company-wiki/src/company_wiki/source_catalog/financial_statements/schema.py": "3bae8d7ba22eb1e713a28595c371f77ad9837750603992062908ed31968dd80f",
+   "company-wiki/src/company_wiki/source_catalog/financial_statements/repository.py": "d566ea42528d65aa2a57d7c0ce943c311de3218baac8b259ae0016234a120143",
+   "company-wiki/src/company_wiki/source_catalog/financial_statements/service.py": "41a0dbb03a48fd296ababcb20f585aeeb4436e60c9b8facf46c08d8003551c9b",
+   "company-wiki/src/company_wiki/source_catalog/financial_statements/cli.py": "431294e62a0dda25bd912a582a3770a90f5ed2bb1bbb3989330ab17664aa895c",
    "company-wiki/src/company_wiki/source_catalog/store.py": "39d68ab91773681e319ea5307d59c3118634a0795074e2dbc447da35f74ffda7",
    "company-wiki/src/company_wiki/source_catalog/models.py": "4dc7e04db3d00ab38a2bb25ab35aaea6819cd20e656edbd84dd535749aa1ad35",
    "company-wiki/src/company_wiki/source_catalog/canonical_writer.py": "ee82e9dd0d362d7b46415375a4c907eb88f7e45e4b527c524f7a58c0a71f9b73",
    "company-wiki/src/company_wiki/source_catalog/document_kinds.py": "176215acb670d124ebc75c42453e2c2fa77449caaed0f2f9ce9d0eb03f14c55b",
-   "filing-fetch/scripts/ff_financial_statements.py": "a7b7f135b9a04037c1230cbfedd0f18991b3c23e2f8c4a6c6bd026152492f4c9",
+   "filing-fetch/scripts/ff_financial_statements.py": "23e1236d8d35b2d7a2766d92e192144d315fffed3a7a16ccf8ad78035034f1fe",
    "filing-fetch/scripts/fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
    "filing-fetch/SKILL.md": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4"
   },
@@ -124,7 +229,45 @@
    "one-statement-failure isolation, PIT refusal, refresh idempotence, reuse-only named gap",
    "FF thin client real subprocess round trip"
   ],
-  "recheck": "PENDING"
+  "recheck": "PASS (round 4, 2026-10-25): differential recheck of 71e98ed0..43995453; R1-R15 all closed; see delivery/w19/review.md",
+  "rounds": [
+   {
+    "round": 1,
+    "binding": {
+     "company-wiki": "e583904d",
+     "filing-fetch": "a211d3a"
+    },
+    "verdict": "PASS_WITH_FIXES",
+    "findings": "W19-R1..R9"
+   },
+   {
+    "round": 2,
+    "binding": {
+     "company-wiki": "ae317ca9",
+     "filing-fetch": "7d9bb85"
+    },
+    "verdict": "PASS_WITH_FIXES",
+    "findings": "R1-R9 verified; new W19-R10/R11 (blocking), R12, R13, R14"
+   },
+   {
+    "round": 3,
+    "binding": {
+     "company-wiki": "71e98ed0",
+     "filing-fetch": "d396fe7"
+    },
+    "verdict": "PASS",
+    "findings": "R10-R14 verified; residual W19-R15 (medium, non-blocking)"
+   },
+   {
+    "round": 4,
+    "binding": {
+     "company-wiki": "43995453",
+     "filing-fetch": "d396fe7"
+    },
+    "verdict": "PASS",
+    "findings": "R15 fixed_verified_round4; no open findings"
+   }
+  ]
  },
  "usage": {
   "provider_http_requests": 27,
@@ -140,15 +283,18 @@
   "repeat_new_versions": 0,
   "repeat_new_values": 0,
   "fixture_bytes": 176439,
-  "delivery_bytes": "TBD at handoff commit"
+  "delivery_bytes": 385089
  },
  "cleanup": {
-  "owned_test_roots": ["%TEMP%/w19-real-e2e-20261025", "%TEMP%/w19-official-e2e-20261025"],
-  "restored": "PENDING (roots kept for independent re-review; deleted before handoff commit with receipt)",
+  "owned_test_roots": [
+   "%TEMP%/w19-real-e2e-20261025",
+   "%TEMP%/w19-official-e2e-20261025"
+  ],
+  "restored": true,
   "production_config_unchanged": true,
   "production_catalog_unchanged": true,
   "original_fingerprints_unchanged": true,
-  "receipt": null
+  "receipt": "delivery/w19/cleanup_receipt.json (66 files, 31,364,256 bytes deleted; roots verified absent; production source_catalog.yaml sha256 3d159a4e...)"
  },
  "point_in_time_limitations": [
   "publish_date may post-date the period (2023 annual published 2025-04-18) and is preserved verbatim",
@@ -171,5 +317,12 @@
   "3. targeted skill install sync",
   "4. one cross-repo real reuse (commands in handoff.md sections 3/4)"
  ],
- "interface_requests": []
+ "interface_requests": [],
+ "observations_for_root": [
+  "unbounded-newer envelope trust posture: a repeated unbounded (no period_end_to) request re-proves exhaustion once, then 0 HTTP until refresh",
+  "from-bounded + to-unbounded requests are honest but not cacheable (re-fetch each time); efficiency edge, not correctness",
+  "5 fc803 e2e failures in the FULL FF suite pre-exist W19 (verified identical at base e0d9642); author ran the selected focused suites",
+  "fetched_from/fetched_to columns only exist in CREATE TABLE: 1.3.0 was never published, but old trial DBs from mid-branch commits fail closed (structure drift) and must be rebuilt",
+  "continuation tokens are version-scoped per statement; if multi-statement paging is enabled later, bind the token to security_id as well"
+ ]
 }
