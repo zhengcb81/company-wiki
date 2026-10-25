@@ -13,6 +13,7 @@ from typing import Any, Iterator, Sequence
 import uuid
 
 from .admission import processing_priority_sql
+from .financial_statements.schema import FINANCIAL_STATEMENTS_DDL
 from .lock import operation_lock_status
 from .llm_failure_policy import effective_llm_summary_failure_scope
 from .models import CATALOG_SCHEMA_VERSION, FingerprintStatus, NORMALIZER_VERSION
@@ -23,7 +24,9 @@ _LLM_SUMMARIZER_NAME = "source_catalog_llm_summary"
 
 # Schema versions that may be upgraded in place to CATALOG_SCHEMA_VERSION.
 # Any other recorded value is rejected fail-closed (CW-2.28 §12.3 rule 12).
-_UPGRADEABLE_SCHEMA_VERSIONS = frozenset({"1.0.0", "1.1.0"})
+# W19: 1.2.0 became upgradeable when the financial statement long tables
+# (schema 1.3.0) joined the single DDL chain above.
+_UPGRADEABLE_SCHEMA_VERSIONS = frozenset({"1.0.0", "1.1.0", "1.2.0"})
 
 
 def _utc_iso(epoch: float | None = None) -> str:
@@ -389,6 +392,10 @@ BEGIN
     );
 END;
 """
+
+# W19: the financial statement long tables (schema 1.3.0) ride the same DDL
+# chain; their single definition owner is financial_statements.schema.
+_DDL += FINANCIAL_STATEMENTS_DDL
 
 
 def canonical_json(value: Any) -> str:
@@ -1181,7 +1188,7 @@ class CatalogStore:
                 connection.rollback()
                 return
             connection.rollback()
-            connection.execute("PRAGMA journal_mode=WAL")
+            self._enable_wal_with_contention_retry(connection)
             connection.execute("BEGIN IMMEDIATE")
             # Another initializer may have finished while we waited for the lock.
             if _catalog_schema_version(connection) == CATALOG_SCHEMA_VERSION:
@@ -1208,6 +1215,28 @@ class CatalogStore:
             raise
         finally:
             connection.close()
+
+    @staticmethod
+    def _enable_wal_with_contention_retry(
+        connection: sqlite3.Connection, *, attempts: int = 20, wait_seconds: float = 0.05
+    ) -> None:
+        """Set WAL mode, tolerating concurrent first-time initializers.
+
+        Switching journal_mode needs a brief exclusive window; a second
+        concurrent CatalogStore initializer gets SQLITE_BUSY without the busy
+        handler applying. Bounded retry with growing backoff keeps concurrent
+        double-initialization (W19) safe without weakening lock discipline.
+        """
+        for attempt in range(attempts):
+            try:
+                connection.execute("PRAGMA journal_mode=WAL")
+                return
+            except sqlite3.OperationalError as exc:
+                message = str(exc).lower()
+                if "locked" not in message and "busy" not in message:
+                    raise
+                time.sleep(wait_seconds * (attempt + 1))
+        connection.execute("PRAGMA journal_mode=WAL")
 
     @staticmethod
     def _apply_additive_migrations(connection: sqlite3.Connection) -> None:

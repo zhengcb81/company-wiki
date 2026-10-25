@@ -94,7 +94,7 @@ def fixture_root(tmp_path) -> Path:
     root = tmp_path / "fixtures"
     root.mkdir()
     entries = []
-    for page in range(1, 5):
+    for page in range(1, 6):  # pages 1-4 data + page 5 terminating null page
         name = f"sh688012-lrb-type0-page{page}-num10.json.gz"
         entries.append(
             {
@@ -141,7 +141,11 @@ def _run(wiki_root: Path, fixture_root: Path, request: dict) -> subprocess.Compl
 
 def _raw_file_count(wiki_root: Path) -> int:
     lake = wiki_root / "companies" / "中微公司" / "raw" / "financial_statements"
-    return len(list(lake.glob("*.json"))) if lake.is_dir() else 0
+    if not lake.is_dir():
+        return 0
+    return len(
+        [item for item in lake.glob("*.json") if not item.name.endswith(".source.json")]
+    )
 
 
 class TestCliSubprocess:

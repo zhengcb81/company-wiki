@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 
-CATALOG_SCHEMA_VERSION = "1.2.0"
+CATALOG_SCHEMA_VERSION = "1.3.0"
 SCANNER_VERSION = "1.0.2"
 NORMALIZER_VERSION = "1.0.0"
 SUMMARIZER_VERSION = "1.0.0"

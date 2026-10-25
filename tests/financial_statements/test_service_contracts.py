@@ -229,9 +229,11 @@ class TestServiceOrchestration:
         assert statement["usage"]["http_requests"] == 5
         assert statement["usage"]["cost_usd"] == "0.00"
         # canonical originals committed exactly once per unique page
-        originals = list(
-            (catalog.config.roots[0].path / "中微公司" / "raw" / "financial_statements").glob("*.json")
-        )
+        lake = catalog.config.roots[0].path / "中微公司" / "raw" / "financial_statements"
+        originals = [
+            item for item in lake.glob("*.json")
+            if not item.name.endswith(".source.json")
+        ]
         assert len(originals) == 4
         # reports carry verifiable source refs and locators
         report = next(
@@ -258,9 +260,10 @@ class TestServiceOrchestration:
         assert second["status"] == "complete"
         assert second["statements"][0]["usage"]["http_requests"] == 0
         assert second["statements"][0]["coverage"]["observed_periods"] == 36
-        originals_after = list(
-            (catalog.config.roots[0].path / "中微公司" / "raw" / "financial_statements").glob("*.json")
-        )
+        originals_after = [
+            item for item in lake.glob("*.json")
+            if not item.name.endswith(".source.json")
+        ]
         assert len(originals_after) == file_count_before
         # identical business versions are reused, not duplicated
         first_ids = {
@@ -293,7 +296,7 @@ class TestServiceOrchestration:
         )
         response = service.handle_request(
             contracts.StatementsRequest.from_payload(
-                company_query="完全不存在的公司xyzq"
+                _request_payload(company_query="完全不存在的公司xyzq")
             )
         )
         assert response["status"] == "not_found"
@@ -338,7 +341,9 @@ class TestServiceOrchestration:
         )
         strict = service.handle_request(
             contracts.StatementsRequest.from_payload(
-                knowledge_mode="point_in_time", as_of_date="2024-01-01"
+                _request_payload(
+                    knowledge_mode="point_in_time", as_of_date="2024-01-01"
+                )
             )
         )
         statement = strict["statements"][0]
@@ -353,7 +358,9 @@ class TestServiceOrchestration:
         service = _service(catalog, handler)
         response = service.handle_request(
             contracts.StatementsRequest.from_payload(
-                period_end_from="2025-01-01", period_end_to="2026-06-30"
+                _request_payload(
+                    period_end_from="2025-01-01", period_end_to="2026-06-30"
+                )
             )
         )
         periods = [r["period_end"] for r in response["statements"][0]["reports"]]

@@ -107,6 +107,9 @@ def _destination_subdirectory(document_kind: str) -> Path:
         "investor_relations": Path("investor_relations"),
         "investor_call_transcript": Path("investor_relations") / "transcripts",
         "news": Path("news"),
+        # W19: third-party statement datasets (multi-period JSON), one
+        # directory per company alongside the raw filings.
+        "financial_statement_dataset": Path("financial_statements"),
     }
     return mapping.get(document_kind, Path("other"))
 
@@ -163,6 +166,52 @@ class _OriginalStorageReceipt:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+@dataclass(frozen=True)
+class ThirdPartyDatasetOriginal:
+    """A third-party, multi-period dataset original owned by one company.
+
+    Deliberately not a DownloadCandidate and never ``official``: no single
+    fiscal year applies to a statement dataset, and the publisher is a third
+    party (W19: sina_finance). Storage reuses the single commit algorithm.
+    """
+
+    entity: str
+    market: str | None
+    security_id: str | None
+    title: str
+    source_url: str | None
+    document_kind: str
+    publisher: str
+    provider: str
+    provider_document_id: str
+    language: str | None = None
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {key: value for key, value in asdict(self).items() if key != "metadata"}
+
+
+@dataclass(frozen=True)
+class _ThirdPartyImportIntent:
+    """Minimal commit intent: an id plus the dataset's owner identity."""
+
+    request_id: str
+    document_kind: str
+    entity: str
+    market: str | None = None
+    security_id: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "request_id": self.request_id,
+            "storage_intent": "third_party_dataset",
+            "document_kind": self.document_kind,
+            "entity": self.entity,
+            "market": self.market,
+            "security_id": self.security_id,
+        }
 
 
 @dataclass(frozen=True)
@@ -389,6 +438,46 @@ class CanonicalSourceWriter:
         return self._commit_staged(request, candidate, receipt, staged,
                                   provenance_extensions={"official_capture": dict(capture_receipt)},
                                   reactivate_retired=False, cleanup_staged=cleanup_staged)
+
+    def import_third_party_dataset_staged(
+        self, *, request_id: str, original: ThirdPartyDatasetOriginal,
+        staged_path: Path, content_sha256: str, byte_size: int, mime_type: str,
+        retrieved_at: str, capture_receipt: Mapping[str, Any],
+        cleanup_staged: bool = True,
+    ) -> CanonicalImportResult:
+        """Commit verified third-party dataset bytes through the one storage path.
+
+        The caller (W19 financial statements service) owns provider/metadata
+        validation. This boundary refuses the ``official`` provider, checks
+        the staged byte identity, and reuses the single immutable commit
+        algorithm — no fabricated fiscal year, no second original writer.
+        """
+        if original.provider == "official":
+            raise CanonicalImportError(
+                "third-party dataset provider must not be official"
+            )
+        staged = staged_path.resolve(strict=True)
+        staged.relative_to(self.staging_root.resolve(strict=True))
+        if (not staged.is_file() or staged.is_symlink()
+                or staged.stat().st_size != byte_size
+                or _hash_file(staged) != content_sha256):
+            raise CanonicalImportError("staged dataset byte identity mismatch")
+        intent = _ThirdPartyImportIntent(
+            request_id=request_id,
+            document_kind=original.document_kind,
+            entity=original.entity,
+            market=original.market,
+            security_id=original.security_id,
+        )
+        receipt = _OriginalStorageReceipt(
+            str(staged), content_sha256, byte_size, mime_type, retrieved_at,
+            adapter_name="third-party-dataset-import",
+        )
+        return self._commit_staged(
+            intent, original, receipt, staged,
+            provenance_extensions={"third_party_capture": dict(capture_receipt)},
+            reactivate_retired=False, cleanup_staged=cleanup_staged,
+        )
 
     def import_shared_original_staged(
         self, *, request_id: str, document_kind: str, title: str,
@@ -702,6 +791,10 @@ class CanonicalSourceWriter:
                             "publisher": candidate.publisher,
                             "collector_name": "official-json-import",
                             "collector_version": "2.0.0"})
+        if isinstance(candidate, ThirdPartyDatasetOriginal):
+            payload.update({"publisher": candidate.publisher,
+                            "collector_name": "third-party-dataset-import",
+                            "collector_version": "1.0.0"})
         if provenance_extensions is not None:
             payload["provenance_extensions"] = dict(provenance_extensions)
         encoded = (canonical_json(payload) + "\n").encode("utf-8")
@@ -753,4 +846,5 @@ __all__ = [
     "CanonicalImportResult",
     "CanonicalImportStatus",
     "CanonicalSourceWriter",
+    "ThirdPartyDatasetOriginal",
 ]

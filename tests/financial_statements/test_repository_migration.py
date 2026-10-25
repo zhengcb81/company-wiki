@@ -227,7 +227,7 @@ class TestPublishAndQuery:
             reports=self._reports(1),
             retrieved_at="2026-10-25T13:00:00Z",
         )
-        assert second.new_version_ids == []
+        assert second.new_version_ids == ()
         assert second.reused_version_ids == first.new_version_ids
         with store.transaction() as conn:
             versions = conn.execute(
@@ -254,7 +254,8 @@ class TestPublishAndQuery:
         import dataclasses
 
         base = self._reports(1)[0]
-        shorter = dataclasses.replace(base, rows=base.rows[:10])
+        # replace() copies the old hash; clearing it recomputes from new rows.
+        shorter = dataclasses.replace(base, rows=base.rows[:10], report_hash="")
         second = repo.publish_reports(
             security=self._security(),
             source=source,

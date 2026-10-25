@@ -19,6 +19,19 @@ def _budget(limit: int = 8 * 1024 * 1024, seconds: float = 30.0) -> AcquisitionB
     )
 
 
+NULL_PAGE = b'{"result":{"status":{"code":0},"data":null}}'
+
+
+class _ByteStream(httpx.SyncByteStream):
+    """Lazy stream so BudgetedHTTPTransport accounts the wire bytes."""
+
+    def __init__(self, payload: bytes):
+        self.payload = payload
+
+    def __iter__(self):
+        yield self.payload
+
+
 class _Recorder:
     def __init__(self, pages: dict[int, bytes | httpx.Response]):
         self.pages = pages
@@ -31,9 +44,11 @@ class _Recorder:
         if isinstance(target, httpx.Response):
             return target
         if target is None:
-            return httpx.Response(200, json={"result": {"status": {"code": 0}, "data": None}})
+            return httpx.Response(200, stream=_ByteStream(NULL_PAGE))
         return httpx.Response(
-            200, content=target, headers={"content-type": "application/json; charset=utf-8"}
+            200,
+            stream=_ByteStream(target),
+            headers={"content-type": "application/json; charset=utf-8"},
         )
 
 
@@ -112,11 +127,12 @@ class TestPaginationTermination:
         assert result.unique_periods == 36
         assert min(result.unique_periods_list) == "20161231"
         assert max(result.unique_periods_list) == "20260630"
-        # usage is real: 5 HTTP exchanges, bytes = sum of wire bodies.
+        # usage is real: 5 HTTP exchanges, bytes = wire bodies of all five
+        # responses including the terminating null page.
         assert result.http_exchanges == 5
         assert result.response_bytes == sum(
             len(body) for body in _zhongwei_lrb_pages().values()
-        )
+        ) + len(NULL_PAGE)
         assert result.cost_usd == "0.00"
 
     def test_first_page_null_data_is_no_data_not_end(self):
@@ -170,9 +186,11 @@ class TestPaginationTermination:
     def test_period_stop_boundary(self):
         recorder = _Recorder(_zhongwei_lrb_pages())
         result = _fetch(recorder, stop_before_period="20230101")
-        # stops once a page contains periods strictly before the boundary
-        assert all(p >= "20230101" for p in result.unique_periods_list) or True
-        assert result.terminal_reason in {"period_boundary", "end_of_data"}
+        # Pagination stops once an accepted page already contains periods
+        # before the boundary; page granularity keeps that whole page.
+        assert result.terminal_reason == "period_boundary"
+        assert len(recorder.requests) == 2  # page1 (2026-2024) + page2 (2024-2023)
+        assert any(p < "20230101" for p in result.unique_periods_list)
 
 
 class TestFailuresAndBudget:

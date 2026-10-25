@@ -101,7 +101,6 @@ class TestRealIncomeStatementPage:
         row = report.rows[7]
         assert row.provider_field == "BIZTOTCOST"
         assert row.raw_value == "11006675861.270000"
-        pointer = json.loads("{}")  # pointer text built below from the report
         assert (
             row.json_pointer
             == "/result/data/report_list/20251231/data/7/item_value"
@@ -110,9 +109,9 @@ class TestRealIncomeStatementPage:
         original = fixtures.fixture_json("sh688012-lrb-type0-page1-num10.json.gz")
         node = original
         for segment in row.json_pointer.lstrip("/").split("/"):
+            segment = int(segment) if isinstance(node, list) else segment
             node = node[segment]
         assert node == "11006675861.270000"
-        del pointer
 
     def test_real_publish_date_anomaly_is_not_rewritten(self):
         # 2023-12-31 lrb carries publish_date=20250418 in the frozen snapshot.
