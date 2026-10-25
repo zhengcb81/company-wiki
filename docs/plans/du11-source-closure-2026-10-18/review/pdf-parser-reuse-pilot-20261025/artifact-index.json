@@ -1,0 +1,46 @@
+{
+  "schema_version": "pdf-pilot-compact-artifacts/1",
+  "artifacts": [
+    {
+      "path": "business-pages-source.json.gz",
+      "compression": "gzip; mtime0",
+      "stored_bytes": 11415,
+      "stored_sha256": "31a33eb7c2e6aec415e7d94e1e0b4516bc0e024776fbe71d1967decfaf2c9e7f",
+      "decoded_bytes": 60631,
+      "decoded_sha256": "db771c5467163fdd12500b1337f15490014d327441946ec933372df43749e8ca",
+      "immutable_receipt_content_preserved": true
+    },
+    {
+      "path": "business-comparison-v2-raw.json.gz",
+      "compression": "gzip; mtime0",
+      "stored_bytes": 29030,
+      "stored_sha256": "72705954b3e478be1d5d7946a8337ab817ee8da43376911da6c3f4b326331478",
+      "decoded_bytes": 164684,
+      "decoded_sha256": "7f43b6e0d5c5535565d4e632a7d0623218bbcb8f82ccacae81b642033d8e4639",
+      "immutable_receipt_content_preserved": true
+    },
+    {
+      "path": "current-reading-bounded-baseline.json.gz",
+      "compression": "gzip; mtime0",
+      "stored_bytes": 98304,
+      "stored_sha256": "82916175f1f67d182d7cd169cdf62977e5bcc05e9e5b28c84af64a5c74fe53e6",
+      "decoded_bytes": 561320,
+      "decoded_sha256": "ff325427b7060f38bb4cbdb1b7f5b4b5f566c0d1bdf4a8aafc5a0f19eab990db",
+      "immutable_receipt_content_preserved": true
+    },
+    {
+      "path": "paragraph-alignment-observation.json.gz",
+      "compression": "gzip; mtime0",
+      "stored_bytes": 13887,
+      "stored_sha256": "83c89417e07b0639b33f444f13b8cecf37916e6266623d236f4baefea1f51bdd",
+      "decoded_bytes": 64334,
+      "decoded_sha256": "5475b750403ff264ef53a5bed4bc7833b8af3e016209715e432cd90fe1957c86",
+      "immutable_receipt_content_preserved": true
+    }
+  ],
+  "uncompressed_bytes": 850969,
+  "stored_bytes": 152636,
+  "original_pdf_copies": 0,
+  "model_download_bytes": 0,
+  "full_document_md_or_images_kept": false
+}

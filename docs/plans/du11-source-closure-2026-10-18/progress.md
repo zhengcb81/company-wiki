@@ -1208,3 +1208,26 @@ CF3已正常发布1cddb0bd，pre-commit Ruff/mypy/host guard通过，pre-push154
 用户再次明确新浪API可供应A股历史三表，主线据此排除PDF三表批量恢复；W19仍负责新浪接口/FF调用/CWP专门数表，尚未实现。PDF保留业务/经营/招股募投/风险叙述及其中数字与限定。原始PDF不删，API缺口如实记录；币种/单位/合并口径/期间/修订和PIT由结构化责任层统一校验，不新增逐材料许可。
 
 已有缓存Docling离线p13首例，两次转换SUCCESS，行业云收入→增幅→原因合成一个列表项；CJK兼容部首及定位仍待验证，不声称精确引用或生产通过。冷import107.051秒、cold11.448秒、warm3.6483秒、进程树采样RSS峰值1,058,410,496B、总127.965秒；原件/config/catalog不变、0新付费/API/下载/原件副本、tmp恢复。有限页样本不代表整份扫描。试点证据及独立架构调查在review/pdf-parser-reuse-pilot-20261025；下一步冻结招股业务114–115页原文再对照，不盲升默认。唯一入口/机器状态/Next Step已同步；历史已关闭发布和W16/W17不重做。
+
+
+## PDF有限对照补记：来源版本与分层
+
+新年报样本首次打开旧RF来源7f1431d6，来源层明确retired/source_not_active；未绕过或改状态。旧收据仍是当时证据，不自动覆盖当前来源。改用目录当前active的北方华创2025年报af09ac49、MD&A第14页；已原文TOC确认。首次冻结未落盘，无模型调用，已恢复自有两张临时PNG，随后以新来源重新冻结。用户要求PDF方案全封装于单一逻辑阅读层；当前发现automation的函数identity分支才传共享预算/上下文，换后端即失配，纳入选型前的边界根修和独立架构检查。
+
+
+PDF比较v1真实超时：SDK import261.929秒、300.435秒父进程截止，RSS峰值1,010,028,544B；完成5页default及4页pdfium转换但最终结构只在整批末尾保存，故没有可用内容评分证据，不能从SUCCESS日志代签。自有tmp清理完成。下一试验有实质改动：逐页checkpoint、仅主要Docling与native对照、限制BLAS/OMP线程并采集导入堆栈、主机受界执行；沿用300秒，不重跑整份PDF或提高账户。
+
+
+## 2026-10-25 PDF研究比较与选型大节点完成
+
+真实三源五页冻结后完成当前共享阅读与Docling比较，独立agent重新验证原件SHA/五页全文、18个低层checkpoint组合及32/61严格对齐；增量核当前0.9组结果6/8叙述通过，两缺组的atoms均在整体selection，不能说原生准确率0。经营应用同组有文字支持，但当前selection没有typed rows；单独原生表发现有row/cells能力，分别记录，不偷换生产验收。两整段私用字形/标点差异拒绝强归一化。
+
+选定原生canonical/定位＋按需Docling结构增强方向，维持原生默认；统一阅读owner封装引擎/策略/摘要方法，AUTO/FF/RF不解释引擎私有选项。实现细则写入pilot/implementation.md（PDF-C1先RED后统一owner，再C2按需增强，再C3真实摘要/cache/RF/holdout），尚未改产品，不能把方向选定当生产接线完成。独审确认真实分层泄漏L1–L8：AUTO函数identity判分支导致后端替换掉预算/context、generation忽略PDF实际组件、replay/verify分裂等，须先修共因。
+
+v1导入261.929秒/300.435秒截止，不记内容成功；v2逐页checkpoint/受界主机/线程约束，导入84.049、五页推理约16秒、总105.175秒/RSS峰值1063116800B完成，环境不同不归因单一变量。0新LLM/收费API/下载/原件副本，config/catalog不变；两个自有tmp和三PNG恢复不存在。四份大证据gzip无损850969→152636B，独立SHA/长度核验4/4通过；不再保留明文重复。唯一状态/Next Step已同步。
+
+
+PDF选型细则终审发现并修正文档时序根因：原生读后才能决定按需Docling，但generation先冻结。现区分阅读recipe/capability与actual producer，冻结配方保守绑定可能参与依赖，实际调用另留现有选择依赖/收据，不倒写历史manifest、不双扫/不另造planner。禁用Docling的native不受其安装版本影响，启用但未用可额外cache miss，正确性优先；C1补相应RED要求。
+
+
+PDF研究/选型/单层实施细则最终独审PASS_0_OPEN_DOCUMENT_SCOPE_ONLY：decision.md与implementation.md绑定物理SHA分别13d1b268、57a04dae；recipe/actual时序、typedrow口径及归档等价已闭合。只关闭研究和方案节点，不代签生产接线/正式摘要/cache/RF。下一步仍PDF-C1中性RED。

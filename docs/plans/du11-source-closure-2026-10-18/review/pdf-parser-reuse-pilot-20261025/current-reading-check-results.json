@@ -1,0 +1,86 @@
+{
+  "schema_version": "pdf-current-reading-group-checks/1",
+  "scope": "Current0.9 reader on explicitly partial frozen-page native view, not whole-document prediction or model quality",
+  "checks": [
+    {
+      "check": "hk-industry-cloud-closure",
+      "case_id": "hk-interim-p13",
+      "same_group_ordered_matches": [],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "hk-rd-period-scope",
+      "case_id": "hk-interim-p11",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:fec7b454800dacdeda459e8cc6af3befbacea2a3f63364c6abb7b63ca2b363eb"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "hk-outlook-not-actual",
+      "case_id": "hk-interim-p11",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:1ff02634b04a2bdf3f97b3b041deada6d97ec335277dd84b3809d6357a7ec310"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "ipo-business-scope",
+      "case_id": "cn-ipo-p114",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:b5b257aa66a01d23df085a4e13c7c95a19b3f48fe6f830e51b40cb7aab18199f"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "ipo-operating-technology",
+      "case_id": "cn-ipo-p114",
+      "same_group_ordered_matches": [],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "ipo-operating-table-not-financial",
+      "case_id": "cn-ipo-p115",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:550a90c8762a9d699b22aa328e767916f789e4440285d5f25c07cd35241ed987"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": true,
+      "typed_row_cell_support_in_current_selection": false,
+      "business_relation_grade": "PARTIAL_RELATION_TEXT_ONLY",
+      "explanation": "Current group contains MOCVD heading plus application text, not a pdf_table_row. Separately forced native table discovery proves source-level row/cell capability; that does not certify current production typed-row selection."
+    },
+    {
+      "check": "annual-semiconductor-scope",
+      "case_id": "cn-annual-p14",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:30148158f60e1c1ed63b4493031caab07cf8825391df2b546490aab39df30bac"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "annual-industry-data-unit",
+      "case_id": "cn-annual-p14",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:1fa8c9ff56acc2cd747d9ecba00b5459e6968326487a018af4dbac565b2dc6f5"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    },
+    {
+      "check": "annual-equipment-scope",
+      "case_id": "cn-annual-p14",
+      "same_group_ordered_matches": [
+        "urn:company-wiki:reading-group:sha256:ad27a12ee923372a15c845ff3cdc81433b1504c628640eb8255e8e70cd52c3ea"
+      ],
+      "all_atoms_somewhere_in_selection": true,
+      "table_relationship_still_requires_explicit_row": false
+    }
+  ]
+}

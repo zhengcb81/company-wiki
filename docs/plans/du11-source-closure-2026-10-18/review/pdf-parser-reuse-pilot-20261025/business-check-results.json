@@ -1,0 +1,223 @@
+{
+  "schema_version": "pdf-business-check-results/1",
+  "normalization": "NFKC+whitespace removed for comparison only; not canonical or exact quotation proof",
+  "scores": [
+    {
+      "engine": "current-native-page-emitter",
+      "case_id": "hk-interim-p11",
+      "seconds": 0.1232,
+      "items": 28,
+      "checks": [
+        {
+          "check": "hk-rd-period-scope",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "hk-outlook-not-actual",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 21
+    },
+    {
+      "engine": "current-native-page-emitter",
+      "case_id": "hk-interim-p13",
+      "seconds": 0.0228,
+      "items": 39,
+      "checks": [
+        {
+          "check": "hk-industry-cloud-closure",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 41
+    },
+    {
+      "engine": "current-native-page-emitter",
+      "case_id": "cn-ipo-p114",
+      "seconds": 0.1145,
+      "items": 28,
+      "checks": [
+        {
+          "check": "ipo-business-scope",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "ipo-operating-technology",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 15
+    },
+    {
+      "engine": "current-native-page-emitter",
+      "case_id": "cn-ipo-p115",
+      "seconds": 0.3964,
+      "items": 31,
+      "checks": [
+        {
+          "check": "ipo-operating-table-not-financial",
+          "single_item_ordered_match": [
+            "urn:company-wiki:narrative-unit:sha256:6a552f7b1b3dd4c92fa9958234cc45ec20ada59bda01c644b4649e547c2c44fd"
+          ],
+          "requires_cell_relationship": true,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 5
+    },
+    {
+      "engine": "current-native-page-emitter",
+      "case_id": "cn-annual-p14",
+      "seconds": 0.0427,
+      "items": 49,
+      "checks": [
+        {
+          "check": "annual-semiconductor-scope",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "annual-industry-data-unit",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "annual-equipment-scope",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 62
+    },
+    {
+      "engine": "docling-default",
+      "case_id": "hk-interim-p11",
+      "seconds": 6.2909,
+      "items": 7,
+      "checks": [
+        {
+          "check": "hk-rd-period-scope",
+          "single_item_ordered_match": [
+            "#/texts/4"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "hk-outlook-not-actual",
+          "single_item_ordered_match": [
+            "#/texts/6"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 33
+    },
+    {
+      "engine": "docling-default",
+      "case_id": "hk-interim-p13",
+      "seconds": 2.3565,
+      "items": 7,
+      "checks": [
+        {
+          "check": "hk-industry-cloud-closure",
+          "single_item_ordered_match": [
+            "#/texts/4"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 73
+    },
+    {
+      "engine": "docling-default",
+      "case_id": "cn-ipo-p114",
+      "seconds": 2.5823,
+      "items": 18,
+      "checks": [
+        {
+          "check": "ipo-business-scope",
+          "single_item_ordered_match": [
+            "#/texts/5"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "ipo-operating-technology",
+          "single_item_ordered_match": [
+            "#/texts/6"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 13
+    },
+    {
+      "engine": "docling-default",
+      "case_id": "cn-ipo-p115",
+      "seconds": 2.4438,
+      "items": 43,
+      "checks": [
+        {
+          "check": "ipo-operating-table-not-financial",
+          "single_item_ordered_match": [],
+          "requires_cell_relationship": true,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 3
+    },
+    {
+      "engine": "docling-default",
+      "case_id": "cn-annual-p14",
+      "seconds": 2.3422,
+      "items": 12,
+      "checks": [
+        {
+          "check": "annual-semiconductor-scope",
+          "single_item_ordered_match": [
+            "#/texts/5"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "annual-industry-data-unit",
+          "single_item_ordered_match": [
+            "#/texts/10"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        },
+        {
+          "check": "annual-equipment-scope",
+          "single_item_ordered_match": [
+            "#/texts/13"
+          ],
+          "requires_cell_relationship": false,
+          "interpretation": "Literal paragraph test, not source quotation fidelity or issuer-fact truth"
+        }
+      ],
+      "compatibility_char_count": 62
+    }
+  ],
+  "not_claimed": "Full selection/summary/source fidelity. Table cell relationship requires separate audit; single-item match alone never certifies it."
+}

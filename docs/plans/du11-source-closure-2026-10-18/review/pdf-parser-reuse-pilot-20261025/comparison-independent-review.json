@@ -1,0 +1,250 @@
+{
+  "schema_version": "pdf-comparison-independent-review/1",
+  "date": "2026-10-25",
+  "status": "EMPIRICAL_EVIDENCE_CONSISTENT_DIRECTION_SUPPORTED_PRODUCTION_NOT_ACCEPTED",
+  "review_mode": "READ_ONLY_SOURCE_BYTES_AND_REPORT_RECOMPUTATION_NO_HEAVY_ENGINE_RERUN",
+  "evidence_files": [
+    "business-pages-source.json.gz",
+    "business-checkpoints.json",
+    "business-comparison-v2-raw.json.gz",
+    "business-comparison-v2-execution.json",
+    "business-check-results.json",
+    "paragraph-alignment-observation.json.gz",
+    "docling-hk13.json",
+    "docling-hk13-execution.json",
+    "current-reading-bounded-baseline.json.gz",
+    "current-reading-check-results.json"
+  ],
+  "independent_checks": {
+    "originals_opened_via_source_reader": 3,
+    "original_sha_and_page_counts_verified": true,
+    "full_native_page_text_matches_frozen_samples": 5,
+    "engine_checkpoint_pairs_recomputed_and_matched": 18,
+    "protected_config_and_catalog_unchanged": true,
+    "catalog_write_store_constructed": false,
+    "heavy_engine_rerun": false,
+    "network_paid_download_raw_copy_calls": 0,
+    "current_shared_group_results_recomputed_and_matched": 9
+  },
+  "checkpoints": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "RMB1340.4m versus RMB1245.4m prior corresponding period;7.6%;IT-demand/solution-replication cause;exclude public-cloud23%"
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "RMB420.5m period R&D;1094 people at2025-06-30;exclude Wuhan620 at2024yearend"
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "H2 future/intent modality remains;not actual realized revenue"
+    },
+    {
+      "id": "ipo-business-scope",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "Global IC/LED customer manufacturing equipment and process services;not adjacent product table"
+    },
+    {
+      "id": "ipo-operating-technology",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "Specific65/14/7/5nm applications;MOCVD mass production at leading customers;do not expand scope"
+    },
+    {
+      "id": "ipo-operating-table-not-financial",
+      "docling_row_relationship_supported": false,
+      "native_row_relationship_supported": true,
+      "scope": "MOCVD equipment->LED epitaxy/power-device production;exclude VOC/air cleaning;not financial three statements"
+    },
+    {
+      "id": "annual-semiconductor-scope",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "Semiconductor equipment products/end-markets;exclude vacuum-energy business"
+    },
+    {
+      "id": "annual-industry-data-unit",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "2025 global semiconductor market USD7930yi,21%;not company sales or RMB;issuer claim not externally fact-checked"
+    },
+    {
+      "id": "annual-equipment-scope",
+      "docling_paragraph_match": true,
+      "native_single_item_match": false,
+      "scope": "2025 global semiconductor manufacturing equipment USD1330yi,13.7%;not global chip marketUSD7930yi or company sales"
+    }
+  ],
+  "alignment": {
+    "groups": 61,
+    "comparison_equal": 32,
+    "comparison_not_equal": 29,
+    "all_eight_target_paragraphs_matched_members": true,
+    "target_member_counts": [
+      2,
+      4,
+      4,
+      5,
+      8,
+      4,
+      5,
+      6
+    ],
+    "ipo115_table_area_unmatched": 24,
+    "ipo114_table_headers_unmatched": 3,
+    "whole_non_table_mismatches": [
+      {
+        "case_id": "hk-interim-p11",
+        "ref": "#/texts/3",
+        "difference": "Two native 包 characters replaced with private-use U+E05B;NFKC does not repair"
+      },
+      {
+        "case_id": "cn-annual-p14",
+        "ref": "#/texts/11",
+        "difference": "Native curly double quotation marks around 超级周期 replaced by ASCII single quotes;not NFKC-equivalent"
+      }
+    ],
+    "canonical_exact_quote_or_native_charspan_certified": false,
+    "current_shared_engine_accuracy_measured": "FINITE_VIEW_SAME_GROUP_6_OF_8_NOT_FULL_DOCUMENT_ACCURACY"
+  },
+  "performance_receipt_review": {
+    "v2_wall_seconds": 105.175,
+    "v2_import_seconds": 84.049,
+    "v2_docling_convert_sum_seconds": 16.0157,
+    "v2_native_emit_sum_seconds": 0.6996,
+    "v2_sampled_peak_rss_bytes": 1063116800,
+    "strict_equal_functionality_benchmark": false,
+    "previous_hk13_cold_warm_item_sequences_equal": true,
+    "lifecycle_measurements_independently_rerun": false
+  },
+  "supported_direction": "Selected internal hybrid:default native text/locators/operating table capability;bounded demand-driven structural hints for actual local closure deficits,after exact member alignment;single reading-layer service owns implementation.",
+  "not_accepted": [
+    "Global external text replacement",
+    "Forced normalization of mismatches",
+    "Default per-document heavy cold launch",
+    "Claim native shared engine accuracy0",
+    "Claim all Docling backends compared",
+    "Full source or summary/RF/cache acceptance",
+    "Claim current actual selection contains typed operating table row because separate source emitter can produce one"
+  ],
+  "required_next_major_node": [
+    "Implement native-member closure,bounded demand-driven router,and service identity/replay/cache/budget;compare enhancement against completed current6/8 finite-view shared-engine baseline",
+    "Pre-frozen unseen-company cross-market holdout including USPDF and business-boundary negatives",
+    "Real summary/replay/cache recovery with actual producer dependency invalidation",
+    "Single-layer architecture and shared-budget/deadline/lifecycle checks"
+  ],
+  "open_blockers_to_research_direction": [],
+  "production_readiness": "SELECTED_INTERNAL_HYBRID_DIRECTION_NOT_IMPLEMENTED_OR_PRODUCTION_ACCEPTED",
+  "current_shared_engine_baseline": {
+    "native_scanned_complete_originals": true,
+    "selection_explicitly_partial_frozen_five_pages": true,
+    "same_budget_object_parse_and_select": true,
+    "all_runs_coverage_complete": false,
+    "all_runs_exhausted": false,
+    "narrative_same_group_pass": 6,
+    "narrative_same_group_total": 8,
+    "missing_closure_checks": [
+      "hk-industry-cloud-closure",
+      "ipo-operating-technology"
+    ],
+    "all_nine_checks_atoms_present_in_overall_selection": true,
+    "operating_table_same_group_pass": true,
+    "typed_operating_row_in_actual_selected_group": false,
+    "typed_operating_row_supported_by_separate_source_emitter_comparison": true,
+    "work_receipts": [
+      {
+        "source": "hk",
+        "parse_work": 307383,
+        "total_work": 405734,
+        "limit": 16000000
+      },
+      {
+        "source": "ipo",
+        "parse_work": 420052,
+        "total_work": 504184,
+        "limit": 16000000
+      },
+      {
+        "source": "annual",
+        "parse_work": 668404,
+        "total_work": 783053,
+        "limit": 16000000
+      }
+    ],
+    "selector_version": "0.9.0",
+    "native_parser_version": "0.1.1",
+    "derived_native_range_parser_version": "0.1.0"
+  },
+  "archive_verification": {
+    "status": "PASS_0_OPEN",
+    "artifacts": [
+      {
+        "path": "business-pages-source.json.gz",
+        "decoded_bytes": 60631,
+        "decoded_sha256": "db771c5467163fdd12500b1337f15490014d327441946ec933372df43749e8ca",
+        "independent_precompression_snapshot_equal": true,
+        "gzip_mtime_zero": true
+      },
+      {
+        "path": "business-comparison-v2-raw.json.gz",
+        "decoded_bytes": 164684,
+        "decoded_sha256": "7f43b6e0d5c5535565d4e632a7d0623218bbcb8f82ccacae81b642033d8e4639",
+        "independent_precompression_snapshot_equal": true,
+        "gzip_mtime_zero": true
+      },
+      {
+        "path": "current-reading-bounded-baseline.json.gz",
+        "decoded_bytes": 561320,
+        "decoded_sha256": "ff325427b7060f38bb4cbdb1b7f5b4b5f566c0d1bdf4a8aafc5a0f19eab990db",
+        "independent_precompression_snapshot_equal": true,
+        "gzip_mtime_zero": true
+      },
+      {
+        "path": "paragraph-alignment-observation.json.gz",
+        "decoded_bytes": 64334,
+        "decoded_sha256": "5475b750403ff264ef53a5bed4bc7833b8af3e016209715e432cd90fe1957c86",
+        "independent_precompression_snapshot_equal": true,
+        "gzip_mtime_zero": true
+      }
+    ],
+    "before_bytes": 850969,
+    "after_bytes": 152636,
+    "originals_or_sdk_rerun": false,
+    "table_annotation_correction_observed_and_consistent": true
+  },
+  "final_plan_review": {
+    "files": [
+      "decision.md",
+      "implementation.md"
+    ],
+    "local_observation_no_overclaim": true,
+    "typed_row_distinction": true,
+    "no_full_heavy_default": true,
+    "native15second_budget_not_cold_start_allowance": true,
+    "c1_red_before_c2": true,
+    "no_new_material_permission_or_state_store": true,
+    "open_clarification": [],
+    "status": "PASS_0_OPEN_DOCUMENT_SCOPE_ONLY",
+    "bindings": {
+      "decision.md": {
+        "bytes": 5019,
+        "sha256": "13d1b268fb3226917835eb0a8a48256be4edc94a892e42e6974c532637e35c44"
+      },
+      "implementation.md": {
+        "bytes": 10412,
+        "sha256": "57a04dae45e264a7eaea03adf78d8ef07cb69c58f72a53d827426a47f31a68dc"
+      }
+    },
+    "recipe_actual_timing_resolved": true,
+    "actual_must_match_frozen_recipe": true,
+    "no_second_prepare_scan_or_posthoc_manifest_change": true,
+    "canonical_replay_does_not_force_layout_model_rerun": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "pdf-reading-layer-review/1",
+  "date": "2026-10-25",
+  "source_commit": "7a63dfd6659ce43c4d1b5a9c877d56a74ed57a96",
+  "status": "READ_ONLY_ARCHITECTURE_REVIEW_COMPLETE_IMPLEMENTATION_NOT_RUN",
+  "runtime_tested": false,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "production_changes": false,
+  "backend_choice": "ROOT_EMPIRICAL_COMPARISON_PENDING",
+  "scope": {
+    "one_logical_document_reading_layer": true,
+    "one_large_class_required": false,
+    "pdf_common_structure": "DocumentStructure/NarrativeUnit",
+    "existing_three_stage_dag_preserved": true,
+    "sina_historical_three_statements": "W19_STRUCTURED_INTERFACE_EXCLUDED_FROM_PDF_TRIAL",
+    "new_task_store_or_server": false
+  },
+  "findings": [
+    {"id": "L1", "path": "src/company_wiki/automation/narrative_select.py", "line": 473, "issue": "Callable identity and selector version determine whether PDF receives shared budget and reading context; Protocol lacks those actual fields."},
+    {"id": "L2", "path": "src/company_wiki/automation/narrative_select.py", "line": 444, "issue": "AUTO handler decides PDF full-table fallback instead of encapsulated reading owner."},
+    {"id": "L3", "path": "src/company_wiki/automation/narrative_formats.py", "line": 16, "issue": "PDF identity falls back to fixed current constants rather than actual injected producer."},
+    {"id": "L4", "path": "src/company_wiki/automation/narrative_generation.py", "line": 106, "issue": "Actual parser_components are honored only for normalized carriers; PDF ignores the runtime fingerprint."},
+    {"id": "L5", "path": "src/company_wiki/source_catalog/narrative_evidence.py", "line": 2262, "issue": "Default replay calls native parse_pdf_bytes; parser/replayer injection can split the producer ownership."},
+    {"id": "L6", "path": "src/company_wiki/automation/narrative_verify.py", "line": 141, "issue": "Verification active-identity check independently relies on fixed PDF parser_component."},
+    {"id": "L7", "path": "src/company_wiki/automation/narrative_select.py", "line": 591, "issue": "Handler checks normalization parser family and chooses concrete material matcher."},
+    {"id": "L8", "path": "src/company_wiki/document_understanding/decision_inventory.py", "line": 153, "issue": "Current native PDF internal dependency inventory is not proof of external engine/model/options identity; keep inventory inside reading ownership."}
+  ],
+  "recommended_facade_responsibilities": ["describe", "select", "summary_request_and_validation", "replay", "close"],
+  "internal_backend_responsibilities": ["identity", "read", "replay", "close"],
+  "neutral_inputs": ["verified_source_bytes_and_logical_reference", "language", "title", "document_kind", "reading_intent", "one_based_source_page_scope", "shared_work_budget", "deadline_and_resource_limits"],
+  "forbidden_upper_decisions": ["engine_specific_options", "callable_identity_special_cases", "engine_specific_table_fallback", "independent_parser_replayer_choice", "engine_specific_summary_prompt", "physical_source_or_model_paths"],
+  "identity_requirements": ["adapter_and_algorithm_versions", "actual_distribution_and_backend", "canonical_options_digest", "used_model_revision_or_digest", "character_view_and_coordinate_contract", "no_absolute_paths", "no_unused_dependency_fingerprints"],
+  "tests_pending": ["LB-01_NEUTRAL_BACKEND_SUBSTITUTION", "LB-02_BOUND_PARSE_SELECT_SUMMARY_REPLAY", "LB-03_PRODUCER_CACHE_PORTABILITY_INVALIDATION", "LB-04_SHARED_BUDGET_TIMEOUT_CLEANUP", "LB-05_SOURCE_LOCATOR_AND_TEXT_VIEW", "LB-06_UPPER_API_BACKEND_INDEPENDENCE", "LB-07_NARROW_AST_IMPORT_BOUNDARY", "LB-08_REAL_CROSS_MARKET_DOCUMENT_CHECKPOINTS"],
+  "completion_gate": "One major independent review after focused contract/integration and real comparison; no per-function approval gate.",
+  "limitations": ["Source review only, no runtime results", "Suggested façade API not implemented", "No default parser choice asserted", "Actual parser pilot measurements belong to ROOT evidence"]
+}

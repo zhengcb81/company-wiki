@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "CF3_STAGE1_PUBLISHED; PDF_REUSE_B_SINGLE_PAGE_OBSERVED_NOT_PRODUCTION; SINA_THREE_STATEMENTS_W19_READY; SOURCE_SUMMARY_CACHE_RF_LOOP_OPEN",
+  "overall_status": "PDF_REUSE_B_RESEARCH_INDEPENDENT_REVIEWED_TARGET_SELECTED; PDF_C1_READING_OWNER_TDD_NEXT; PRODUCTION_ENHANCEMENT_SUMMARY_CACHE_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_ROOT_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
     "entry": "harness_lanes/20261025/README.md",
@@ -333,7 +333,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Freeze CN IPO business pages114-115 source expectations; bounded Docling multi-document comparison and source text/locator fidelity before choosing minimal adapter. A-share historical three financial statements use W19 Sina API/FF/dedicated CWP structured storage; no PDF statement reconstruction goal.",
+  "next_step_now": "PDF-C1 TDD: replaceable backend must retain shared WorkBudget/context/deadline; one reading owner for actual producer/read/material validation/replay and PDF generation-cache fingerprints. Research selected canonical native+on-demand Docling structure enhancement, not full replacement. No repeat of completed finite5page benchmark.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -805,7 +805,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Bounded14-target source/input regrade and other-market/document real checks; then configured formal summary/cache recovery/RF actual adoption; keep historical paid receipts immutable and content/RF status open until tested.",
+  "next_step_after_publication": "PDF-C1 TDD: replaceable backend must retain shared WorkBudget/context/deadline; one reading owner for actual producer/read/material validation/replay and PDF generation-cache fingerprints. Research selected canonical native+on-demand Docling structure enhancement, not full replacement. No repeat of completed finite5page benchmark.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -840,10 +840,10 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Freeze CN IPO business pages114-115 source expectations; bounded Docling multi-document comparison and source text/locator fidelity before choosing minimal adapter. A-share historical three financial statements use W19 Sina API/FF/dedicated CWP structured storage; no PDF statement reconstruction goal.",
-    "If bounded evidence supports reuse, TDD shared-owner integration/cache/replay/work/deadline and major-node independent review; CF1/CF2/CF3 tail remain open.",
-    "Verify other-market/document source content, then configured formal summaries, cache recovery with no duplicate spend, actual RF adoption and four-review/company holdout loop.",
-    "W16/W17 ROOT reception/merge/install complete; W18 awaiting author handoff; W19 prepared but not implemented. Preserve author ownership and original documents."
+    "PDF-C1 TDD: replaceable backend must retain shared WorkBudget/context/deadline; one reading owner for actual producer/read/material validation/replay and PDF generation-cache fingerprints. Research selected canonical native+on-demand Docling structure enhancement, not full replacement. No repeat of completed finite5page benchmark.",
+    "PDF-C2 demand routing, strict native-member alignment and finite warm runtime in same reading layer; existing limits and no new store/watch/auth chain.",
+    "PDF-C3 real five-page regression, new-company/USPDF holdout, configured actual summaries, exact replay/cache recovery with no duplicate spend, RF adoption and independent major-node review.",
+    "W16/W17 reception/merge/install complete; W18 author handoff pending; W19 Sina package ready, not implemented. Preserve originals/author ownership."
   ],
   "last_updated_utc": "2026-10-25T10:46:55Z",
   "latest_publish_validation": {
@@ -2098,7 +2098,7 @@
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
   },
   "pdf_parser_reuse_20261025": {
-    "status": "B_SINGLE_PAGE_OBSERVATION_ONLY",
+    "status": "A_B_FINITE_RESEARCH_REVIEWED_TARGET_SELECTED_PRODUCTION_NOT_CHANGED",
     "entry": "review/pdf-parser-reuse-pilot-20261025/README.md",
     "production_default_changed": false,
     "calls_paid": 0,
@@ -2108,6 +2108,17 @@
     "cold_import_seconds": 107.051,
     "cold_conversion_seconds": 11.448,
     "warm_conversion_seconds": 3.6483,
-    "sampled_peak_process_tree_rss_bytes": 1058410496
+    "sampled_peak_process_tree_rss_bytes": 1063116800,
+    "decision": "review/pdf-parser-reuse-pilot-20261025/decision.md",
+    "implementation": "review/pdf-parser-reuse-pilot-20261025/implementation.md",
+    "current_shared_narrative_groups": "6/8 in explicitly partial5page view",
+    "docling_narrative_paragraphs": "8/8 at paragraph observation level; not final model quality",
+    "operating_table": "Current group relation text supported; typed row/cells not selected. Separate forced native discovery has source row/cell capability.",
+    "v2_total_seconds": 105.175,
+    "v2_import_seconds": 84.049,
+    "compressed_evidence_bytes": 152636,
+    "original_evidence_bytes": 850969,
+    "new_paid_calls": 0,
+    "independent_review": "PASS_0_OPEN_DOCUMENT_SCOPE_ONLY; comparison-independent-review.md/json"
   }
 }

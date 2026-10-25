@@ -1,0 +1,134 @@
+{
+  "schema_version": "pdf-business-checkpoints/1",
+  "frozen_before_external_new_page_comparisons": true,
+  "development_not_holdout": true,
+  "checks": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "case_id": "hk-interim-p13",
+      "same_item": true,
+      "atoms": [
+        "來自行業雲服務的收入為人民幣1,340.4百萬元",
+        "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+        "主要是由於不斷增長的IT需求",
+        "向垂直行業客戶複製行業解決方案的能力"
+      ],
+      "exclude": [
+        "增加23.0%"
+      ]
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "case_id": "hk-interim-p11",
+      "same_item": true,
+      "atoms": [
+        "報告期內",
+        "研發費用為人民幣420.5百萬元",
+        "截至二零二五年六月三十日",
+        "研發人員達1,094人"
+      ],
+      "exclude": [
+        "620人"
+      ]
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "case_id": "hk-interim-p11",
+      "same_item": true,
+      "atoms": [
+        "展望下半年",
+        "將維持高質量發展和可持續發展戰略",
+        "全面提升AI能力",
+        "我們旨在持續"
+      ],
+      "exclude": [
+        "研發人員達"
+      ]
+    },
+    {
+      "id": "ipo-business-scope",
+      "case_id": "cn-ipo-p114",
+      "same_item": true,
+      "atoms": [
+        "主要从事半导体设备的研发、生产和销售",
+        "全球集成电路和LED芯片制造商",
+        "提高生产效率、降低生产成本"
+      ],
+      "exclude": [
+        "主要应用于"
+      ]
+    },
+    {
+      "id": "ipo-operating-technology",
+      "case_id": "cn-ipo-p114",
+      "same_item": true,
+      "atoms": [
+        "等离子体刻蚀设备",
+        "从65纳米到14纳米、7纳米和5纳米",
+        "具体应用",
+        "MOCVD设备",
+        "大规模投入量产"
+      ],
+      "exclude": [
+        "主要经营模式"
+      ]
+    },
+    {
+      "id": "ipo-operating-table-not-financial",
+      "case_id": "cn-ipo-p115",
+      "same_item": true,
+      "atoms": [
+        "MOCVD设备",
+        "LED外延片及功率器件生产"
+      ],
+      "exclude": [
+        "VOC设备",
+        "空气净化"
+      ],
+      "requires_cell_relationship": true
+    },
+    {
+      "id": "annual-semiconductor-scope",
+      "case_id": "cn-annual-p14",
+      "same_item": true,
+      "atoms": [
+        "在半导体装备业务板块",
+        "刻蚀、薄膜沉积、热处理、湿法清洗、离子注入、涂胶显影、键合",
+        "集成电路、功率半导体、三维集成和先进封装"
+      ],
+      "exclude": [
+        "真空新能源装备业务板块"
+      ]
+    },
+    {
+      "id": "annual-industry-data-unit",
+      "case_id": "cn-annual-p14",
+      "same_item": true,
+      "atoms": [
+        "2025年全球半导体市场",
+        "7930亿美元",
+        "同比增长21%",
+        "人工智能（AI）算力需求"
+      ],
+      "exclude": [
+        "1330亿美元"
+      ]
+    },
+    {
+      "id": "annual-equipment-scope",
+      "case_id": "cn-annual-p14",
+      "same_item": true,
+      "atoms": [
+        "2025年全球半导体制造设备市场",
+        "1330亿美元",
+        "同比增长13.7%",
+        "本土晶圆厂"
+      ],
+      "exclude": [
+        "7930亿美元"
+      ]
+    }
+  ],
+  "literal_normalization_for_comparison_only": "NFKC and remove whitespace; canonical originals remain unchanged. Compatibility changes reported separately.",
+  "not_graded": "Full company correctness, factual verification of issuer claims, full source coverage, final summaries/RF. Table check requires row/cell relation, not document word hits."
+}

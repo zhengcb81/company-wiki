@@ -1,12 +1,12 @@
 # 当前行动计划（2026-10-25更新）
 
-## 2026-10-25 当前优先行动：PDF复用对照，三表走结构化API
+## 2026-10-25 当前行动：PDF真实比较完成，进入单层阅读owner改造
 
-用户已批准成熟PDF解析器复用试点，并重申A股历史三张表由新浪API供应。**W19负责新浪API/FF调用/CWP专门数表，PDF主线只处理业务叙述和经营信息，不再以恢复三表为目标。** API缺口明确记录，不隐式退回全文三表抽取；原始PDF保留，叙述中的经营数字/单位/期间/原因仍需完整。港美股使用各自配置的数据源。
+三份原件五页、冻结检查点与独立源侧复核完成。[选型](review/pdf-parser-reuse-pilot-20261025/decision.md)：保留原生canonical文字/locator，按需借Docling段落结构，不全量替换。当前共享流程八项同组叙述6/8通过，Docling段落8/8；两个局部缺组内容均已存在整体selection。经营应用关系同组保留，但当前无typed rows；不混同原生按页表格发现能力。冷启/约1.06GB内存和字符差异均阻止直接启重模型默认。
 
-[试点计划和当前证据](review/pdf-parser-reuse-pilot-20261025/README.md)：港股中报p13已用本机缓存Docling做离线单页对照，完整业务段落比原分片改善，但存在字符/定位映射待核，冷import107秒、暖转换3.65秒、RSS峰值约1.06GB；尚未接生产。下一步先冻结招股业务页检查点、做有限多文种对照，再择优TDD接线及大节点独审；不直接上大型默认依赖。CF3第一节点已发布，其他CF/正式摘要/cache/RF与公司循环仍OPEN；W16/W17已收并线，W18等待作者，W19仅施工准备就绪。
+**下一步唯一动作：** 按[PDF-C1–C3实施细则](review/pdf-parser-reuse-pilot-20261025/implementation.md)，先写后端替换不丢统一预算/context、成套producer/replay及PDF generation/cache真实依赖的中性RED，修统一阅读owner，再做按需增强和真实摘要/cache/新公司验收。不同PDF/分解/摘要方法全部由单一逻辑阅读层封装；AUTO/存储/FF/RF不干预引擎策略。生产源码/默认尚未改变，无新LLM/收费/下载，原件不改。A股三表由W19新浪负责；W16/W17完成，W18待作者，W19准备就绪。
 
-以下较早“当前/下一步”为过程快照，由本段和CURRENT_STATUS.json的next_step_now统领；不重跑已关闭发布或重新接收W16/W17。
+以下较早“当前/下一步”为过程快照，由本段与CURRENT_STATUS.json统领；不重做已完成五页重模型比较、已关闭发布或W16/W17接收。
 
 > 2026-10-25最新：CF3第一效率节点已正常提交推送1cddb0bd，精确CI40213361663 success：共享关系负例剪枝、结构算法cache闭包和缺页诊断单次索引。真实中微429页/14025units，同16M/112上限从0span变112span，understand工作11473800→6334220；仍exhausted/partial、无IPO gold NOT_GRADED。0新付费/下载。CF1/CF2及CF3候选优化、正式摘要/cache/RF循环仍OPEN。 [本节点](review/cf-source-20261025/README.md)。旧状态按时间保留。
 
@@ -19,7 +19,7 @@
 
 ## Next Step
 
-按[PDF复用试点](review/pdf-parser-reuse-pilot-20261025/README.md)冻结招股业务页114–115原文检查点，做有限多文种对照并核来源字符/定位，再决定最小适配；之后回到CF1–CF4及正式摘要/cache/RF。A股历史三表单独由W19新浪API供给，不扩PDF三表恢复或摘要。
+按[PDF单层实施细则](review/pdf-parser-reuse-pilot-20261025/implementation.md)的PDF-C1先写backend替换/统一账户/context/成套identity-replay/generation-cache的中性RED，再改统一阅读owner；研究及五页对照已独审完成，不无变化重跑。A股三表由W19新浪供给，不恢复PDF三表任务。
 
 ### 本批并行安排（2026-10-25，用户已发出三卡）
 

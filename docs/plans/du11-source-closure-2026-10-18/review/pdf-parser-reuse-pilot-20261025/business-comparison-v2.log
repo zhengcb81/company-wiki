@@ -1,0 +1,89 @@
+STEP import
+STEP imported 84.049
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+STEP convert docling-default hk-interim-p11
+Timeout (0:01:30)!
+Thread 0x0000732c (most recent call first):
+  File "C:\Miniconda\Lib\threading.py", line 363 in wait
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 162 in get_batch
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 245 in _run
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x000053e8 (most recent call first):
+  File "C:\Miniconda\Lib\threading.py", line 363 in wait
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 162 in get_batch
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 245 in _run
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x00002bf8 (most recent call first):
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr_v2\modeling_rt_detr_v2.py", line 758 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr\modeling_rt_detr_resnet.py", line 66 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\container.py", line 253 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr\modeling_rt_detr_resnet.py", line 227 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr\modeling_rt_detr_resnet.py", line 267 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr\modeling_rt_detr_resnet.py", line 299 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr\modeling_rt_detr_resnet.py", line 403 in forward
+  File "C:\Miniconda\Lib\site-packages\transformers\backbone_utils.py", line 172 in wrapper
+  File "C:\Miniconda\Lib\site-packages\transformers\utils\generic.py", line 939 in wrapper
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr_v2\modeling_rt_detr_v2.py", line 807 in forward
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr_v2\modeling_rt_detr_v2.py", line 1513 in forward
+  File "C:\Miniconda\Lib\site-packages\transformers\utils\generic.py", line 939 in wrapper
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\transformers\models\rt_detr_v2\modeling_rt_detr_v2.py", line 1861 in forward
+  File "C:\Miniconda\Lib\site-packages\transformers\utils\generic.py", line 939 in wrapper
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1789 in _call_impl
+  File "C:\Miniconda\Lib\site-packages\torch\nn\modules\module.py", line 1778 in _wrapped_call_impl
+  File "C:\Miniconda\Lib\site-packages\docling_ibm_models\layoutmodel\layout_predictor.py", line 218 in predict_batch
+  File "C:\Miniconda\Lib\site-packages\torch\utils\_contextlib.py", line 124 in decorate_context
+  File "C:\Miniconda\Lib\site-packages\docling\models\stages\layout\layout_model.py", line 182 in predict_layout
+  File "C:\Miniconda\Lib\site-packages\docling\models\base_layout_model.py", line 35 in __call__
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 296 in _process_batch
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 248 in _run
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x000032b4 (most recent call first):
+  File "C:\Miniconda\Lib\threading.py", line 363 in wait
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 162 in get_batch
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\standard_pdf_pipeline.py", line 759 in _build_document
+  File "C:\Miniconda\Lib\site-packages\docling\pipeline\base_pipeline.py", line 78 in execute
+  File "C:\Miniconda\Lib\site-packages\docling\document_converter.py", line 641 in _execute_pipeline
+  File "C:\Miniconda\Lib\site-packages\docling\document_converter.py", line 618 in _process_document
+  File "C:\Miniconda\Lib\site-packages\docling\document_converter.py", line 571 in _convert
+  File "C:\Miniconda\Lib\site-packages\docling\document_converter.py", line 454 in convert_all
+  File "C:\Miniconda\Lib\site-packages\docling\document_converter.py", line 395 in convert
+  File "C:\Miniconda\Lib\site-packages\pydantic\_internal\_validate_call.py", line 137 in __call__
+  File "C:\Miniconda\Lib\site-packages\pydantic\_internal\_validate_call.py", line 40 in wrapper_function
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\pdf-parser-reuse-20261025\compare_business_pages_v2.py", line 62 in <module>
+STEP done 6.2909 ConversionStatus.SUCCESS 7
+STEP convert docling-default hk-interim-p13
+STEP done 2.3565 ConversionStatus.SUCCESS 7
+STEP convert docling-default cn-ipo-p114
+STEP done 2.5823 ConversionStatus.SUCCESS 18
+STEP convert docling-default cn-ipo-p115
+STEP done 2.4438 ConversionStatus.SUCCESS 43
+STEP convert docling-default cn-annual-p14
+STEP done 2.3422 ConversionStatus.SUCCESS 12
+RESULT C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\pdf-parser-reuse-pilot-20261025\business-comparison-v2-raw.json

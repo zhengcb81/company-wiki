@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\pdf-parser-reuse-20261025\\compare_business_pages_v2.py"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 105.175,
+  "sampled_peak_process_tree_rss_bytes": 1063116800,
+  "sampling_interval_seconds": 0.2,
+  "temporary_root_restored_absent": true,
+  "offline": true,
+  "new_model_downloads": 0
+}

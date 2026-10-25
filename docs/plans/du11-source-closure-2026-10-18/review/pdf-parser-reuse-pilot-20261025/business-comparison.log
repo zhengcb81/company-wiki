@@ -1,0 +1,22 @@
+STEP import
+STEP imported 261.929
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+STEP convert docling-default hk-interim-p11
+STEP done 8.6851 ConversionStatus.SUCCESS 7
+STEP convert docling-default hk-interim-p13
+STEP done 2.3221 ConversionStatus.SUCCESS 7
+STEP convert docling-default cn-ipo-p114
+STEP done 2.1428 ConversionStatus.SUCCESS 18
+STEP convert docling-default cn-ipo-p115
+STEP done 2.1766 ConversionStatus.SUCCESS 43
+STEP convert docling-default cn-annual-p14
+STEP done 2.9267 ConversionStatus.SUCCESS 12
+STEP convert docling-pdfium hk-interim-p11
+STEP done 7.1627 ConversionStatus.SUCCESS 7
+STEP convert docling-pdfium hk-interim-p13
+STEP done 4.6399 ConversionStatus.SUCCESS 7
+STEP convert docling-pdfium cn-ipo-p114
+STEP done 2.2921 ConversionStatus.SUCCESS 18
+STEP convert docling-pdfium cn-ipo-p115
+STEP done 3.4098 ConversionStatus.SUCCESS 34
+STEP convert docling-pdfium cn-annual-p14
